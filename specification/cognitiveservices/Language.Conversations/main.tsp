@@ -681,7 +681,7 @@ model Tasks {
   total: int32;
 
   @doc("List of results from tasks (if available).")
-  @lroResult
+  // @lroResult
   items?: Array<AnalyzeConversationJobResult>;
 };
 
@@ -1745,132 +1745,13 @@ op analyzeConversationCancelJob(@query `api-version`: Versions,  @pollingOperati
 
 
 
-// #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Allowed because this is a non-standard status polling operation."
-// @doc("Returns the status of the images operation")
-// @added(Versions.v2023_04_01)
-// @route("/language/analyze-conversations2/jobs/{jobId}")
-// op getImageOperationStatus is RpcOperation<
-//   {
-//     @doc(".") @path jobId: string;
-//   },
-//   AnalyzeConversationJobState
-// >;
-
-
-// Models ////////////////////
-
-@doc("The color of a widget.")
-enum WidgetColor {
-  @doc("Black")
-  Black,
-
-  @doc("White")
-  White,
-
-  @doc("Red")
-  Red,
-
-  @doc("Green")
-  Green,
-
-  @doc("Blue")
-  Blue,
-}
-
-@doc("A widget.")
-@resource("widgets")
-model Widget {
-  @key("widgetName")
-  @doc("The widget name.")
-  @visibility("read")
-  name: string;
-
-  @doc("The widget color.")
-  color: WidgetColor;
-
-  @doc("The ID of the widget's manufacturer.")
-  manufacturerId: string;
-
-  @doc("Parts on Widget")
-  widgetParts: WidgetParts;
-
-  ...EtagProperty;
-}
-model WidgetParts {
-  @doc("Parts on Widget")
-  parts: Array<WidgetPart>;
-}
-
-
-@doc("A widget's part.")
-@resource("parts")
-@parentResource(Widget)
-@discriminator("manufacturerId")
-model WidgetPart {
-  @key("widgetPartName")
-  @doc("The name of the part.")
-  @visibility("read")
-  name: string;
-
-  @doc("The ID to use for reordering the part.")
-  partId: string;
-
-  @doc("The ID of the part's manufacturer.")
-  manufacturerId: ManufacturerId;
-
-  ...EtagProperty;
-}
-
-@doc("Widget part Manufacturers")
-enum ManufacturerId {
-  @doc("ManufacturerA")
-  ManufacturerA,
-
-  @doc("ManufacturerB")
-  ManufacturerB,
-}
-
-@doc("WidgetPartA")
-model WidgetPartA extends WidgetPart {
-  @doc(".")
-  manufacturerId: ManufacturerId.ManufacturerA
-}
-
-@doc("WidgetPartB")
-model WidgetPartB extends WidgetPart {
-  @doc(".")
-  manufacturerId: ManufacturerId.ManufacturerB
-}
-
-
-// Operations ////////////////////
-
-// alias ServiceTraits = SupportsRepeatableRequests &
-//   SupportsConditionalRequests &
-//   SupportsClientRequestId;
-
-// alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
-
-interface Widgets {
-  // Operation Status
-  @doc("Gets status of a Widget operation.")
-  getWidgetOperationStatus is Operations.GetResourceOperationStatus<Widget>;
-
-  // Widget Operations
-  @doc("Creates or updates a Widget asynchronously")
-  @pollingOperation(Widgets.getWidgetOperationStatus)
-  createOrUpdateWidget is Operations.LongRunningResourceCreateOrUpdate<Widget>;
-
-  @doc("Get a Widget")
-  getWidget is Operations.ResourceRead<Widget>;
-
-  @doc("Delete a Widget asynchronously.")
-  @pollingOperation(Widgets.getWidgetOperationStatus)
-  deleteWidget is Operations.LongRunningResourceDelete<Widget>;
-
-  @doc("List Widget resources")
-  listWidgets is Operations.ResourceList<
-    Widget,
-    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
-  >;
-}
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Allowed because this is a non-standard status polling operation."
+@doc("Returns the status of the images operation")
+@added(Versions.v2023_04_01)
+@route("/language/analyze-conversations2/jobs/{jobId}")
+op getImageOperationStatus is RpcOperation<
+  {
+    @doc(".") @path jobId: string;
+  },
+  AnalyzeConversationJobState
+>;
