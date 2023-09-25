@@ -225,15 +225,6 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Request to create a developer portal revision was accepted.",
-            "headers": {
-              "location": {
-                "description": "Location header",
-                "type": "string"
-              }
-            }
-          },
           "201": {
             "description": "The developer portal revision was successfully created.",
             "schema": {
@@ -242,6 +233,14 @@
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              },
+              "location": {
+                "description": "Location header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked",
                 "type": "string"
               }
             }
@@ -302,7 +301,11 @@
             "description": "Request to update developer portal revision was accepted.",
             "headers": {
               "location": {
-                "description": "Location header",
+                "description": "Location header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked",
                 "type": "string"
               }
             }
