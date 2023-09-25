@@ -1836,30 +1836,20 @@
       "type": "object",
       "description": "Conversation PII result item",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty conversation identifier."
-        },
-        "warnings": {
+        "conversationItems": {
           "type": "array",
-          "description": "Warnings encountered in processing the document.",
+          "description": "List of conversationItems",
           "items": {
-            "$ref": "#/definitions/InputWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "statistics": {
-          "$ref": "#/definitions/ConversationStatistics",
-          "description": "If showStats=true was specified in the request this field will contain information about the conversation payload."
+            "$ref": "#/definitions/ConversationPiiItemResult"
+          }
         }
       },
       "required": [
-        "id",
-        "warnings"
+        "conversationItems"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConversationPiiResult"
+          "$ref": "#/definitions/ConversationResultBase"
         }
       ]
     },

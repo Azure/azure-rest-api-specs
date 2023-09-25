@@ -949,8 +949,8 @@ model ConversationPiiResults extends PreBuiltResult{
 
 @added(Versions.v2023_04_15_preview)
 @doc("Conversation PII result item")
-model ConversationalPiiResultWithResultBase extends ConversationPiiResult{
-  ...ConversationResultBase;
+model ConversationalPiiResultWithResultBase extends ConversationResultBase{
+  ...ConversationPiiResult;
 }
 
 @added(Versions.v2023_04_15_preview)
