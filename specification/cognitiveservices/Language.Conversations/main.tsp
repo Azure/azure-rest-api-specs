@@ -1,15 +1,15 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
-import "@typespec/openapi";
+// import "@typespec/openapi"; commented for SDK generation
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
-import "@azure-tools/typespec-autorest";
+// import "@azure-tools/typespec-autorest"; commented for SDK generation
 import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using OpenAPI;
+// using OpenAPI; commented for SDK generation
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
@@ -81,9 +81,8 @@ enum AnalyzeConversationTaskResultsKind {
 @resource("language")
 model AnalyzeConversationTask {
   @key
-  @visibility("read", "create")
   @doc("The base class of a conversation input task.")
-  kind: AnalyzeConversationTaskKind.Conversation;
+  kind: AnalyzeConversationTaskKind;
 }
 
 @doc("The base class of a conversation input task result.")
@@ -484,7 +483,7 @@ model DateTimeResolution extends BaseResolution {
   resolutionKind: resolutionKind.DateTimeResolution;
 
   @doc("An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
-  timex: string;
+  timex: utcDateTime;
 
   @doc("The DateTime SubKind")
   dateTimeSubKind: DateTimeSubKind;
@@ -529,13 +528,13 @@ model TemporalSpanResolution extends BaseResolution {
   resolutionKind: resolutionKind.TemporalSpanResolution;
 
   @doc("represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
-  begin?: string;
+  begin?: utcDateTime;
 
   @doc("represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
-  end?: string;
+  end?: utcDateTime;
 
   @doc("An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)")
-  duration?: string;
+  duration?: duration;
 
   @doc("An optional modifier of a date/time instance.")
   modifier?: TemporalModifier;
@@ -586,22 +585,19 @@ model AnalyzeConversationJobsInput {
   @doc("Display name for the analysis job.")
   displayName?: string;
 
-  @added(Versions.v2023_04_01)
-  @doc("Analysis Input")
   @key
-  @visibility("read", "create")
+  @doc("Analysis Input")
   analysisInput: MultiLanguageConversationAnalysisInput;
 
-  @added(Versions.v2023_04_01)
   @doc("Set of tasks to execute on the input conversation.")
-  tasks: Array<AnalyzeConversationLROTask>;
+  tasks: Array<AnalyzeConversationLroTask>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @doc("Base class for a long-running conversation input task.")
 @discriminator("kind")
 @added(Versions.v2023_04_01)
-model AnalyzeConversationLROTask extends TaskIdentifier {
+model AnalyzeConversationLroTask extends TaskIdentifier {
   @doc("Enumeration of supported analysis tasks on a collection of conversations.")
   kind: AnalyzeConversationLROTaskKind;
 }
@@ -609,6 +605,7 @@ model AnalyzeConversationLROTask extends TaskIdentifier {
 @doc("Enumeration of supported analysis tasks on a collection of conversations.")
 @added(Versions.v2023_04_01)
 enum AnalyzeConversationLROTaskKind {
+  @added(Versions.v2023_04_01)
   @doc("Conversational Summarization Task")
   ConversationalSummarizationTask,
 
@@ -622,12 +619,13 @@ enum AnalyzeConversationLROTaskKind {
   
   @added(Versions.v2023_04_15_preview)
   @doc("Conversational Sentiment Task")
-  ConversationalSentimentTask
+  ConversationalSentimentTask,
 }
 
 @doc("Enumeration of results for supported conversation analysis Results.")
 @added(Versions.v2023_04_01)
 enum AnalyzeConversationResultsKind {
+  @added(Versions.v2023_04_01)
   @doc("Conversational Summarization Results")
   ConversationalSummarizationResults,
   
@@ -646,10 +644,9 @@ enum AnalyzeConversationResultsKind {
 
 @doc("Contains the status of the submitted job for analyzing a conversation, along with related statistics.")
 @added(Versions.v2023_04_01)
-@resource("language/analyze-conversations/jobs")
-model AnalyzeConversationJobState {
+model AnalyzeConversationJobState{
   ...JobState;
-  ...ConversationTaskState;
+  ...ConversationTasksState;
   ...AnalyzeConversationJobStatistics;
 }
 
@@ -662,26 +659,30 @@ model AnalyzeConversationJobStatistics {
 
 @doc("Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.")
 @added(Versions.v2023_04_01)
-model ConversationTaskState {
-  @doc("tasks")
-  tasks: {
-    @doc("Count of tasks that finished successfully.")
-    completed: int32;
-
-    @doc("Count of tasks that failed.")
-    failed: int32;
-
-    @doc("Count of tasks that are currently in progress.")
-    inProgress: int32;
-
-    @doc("Total count of tasks submitted as part of the job.")
-    total: int32;
-
-    @doc("List of results from tasks (if available).")
-    @added(Versions.v2023_04_01)
-    items?: Array<AnalyzeConversationJobResult>;
-  };
+model ConversationTasksState {
+  @doc("Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.")
+  tasks: Tasks;
 }
+
+@doc("Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.")
+@added(Versions.v2023_04_01)
+model Tasks {
+  @doc("Count of tasks that finished successfully.")
+  completed: int32;
+
+  @doc("Count of tasks that failed.")
+  failed: int32;
+
+  @doc("Count of tasks that are currently in progress.")
+  inProgress: int32;
+
+  @doc("Total count of tasks submitted as part of the job.")
+  total: int32;
+
+  @doc("List of results from tasks (if available).")
+  items?: Array<AnalyzeConversationJobResult>;
+};
+
 
 @doc("Container for results of all tasks in the conversation job.")
 @discriminator("kind")
@@ -844,7 +845,7 @@ model ConversationItemLevelTiming extends AudioTiming {}
 
 @added(Versions.v2023_04_15_preview)
 @doc("Task definition for conversational sentiment.")
-model AnalyzeConversationalSentimentTask extends AnalyzeConversationLROTask {
+model AnalyzeConversationalSentimentTask extends AnalyzeConversationLroTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.ConversationalSentimentTask,
 
@@ -879,7 +880,7 @@ model ConversationSentimentResults extends PreBuiltResult{
 @added(Versions.v2023_04_15_preview)
 @doc("The result from sentiment analysis operation for each conversation.")
 model ConversationSentimentResultsConversation extends ConversationSentimentResult{
-  ...ConversationResultBase
+  ...ConversationResultBase;
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -1048,7 +1049,7 @@ enum TranscriptContentType {
 
 @doc("Task definition for custom conversational summarization.")
 @added(Versions.v2023_04_15_preview)
-model AnalyzeCustomConversationSummarizationTask extends AnalyzeConversationLROTask {
+model AnalyzeCustomConversationSummarizationTask extends AnalyzeConversationLroTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.CustomConversationalSummarizationTask;
 
@@ -1058,7 +1059,7 @@ model AnalyzeCustomConversationSummarizationTask extends AnalyzeConversationLROT
 
 @doc("Task definition for conversational summarization.")
 @added(Versions.v2023_04_01)
-model AnalyzeConversationSummarizationTask extends AnalyzeConversationLROTask {
+model AnalyzeConversationSummarizationTask extends AnalyzeConversationLroTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.ConversationalSummarizationTask;
 
@@ -1677,7 +1678,7 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 @doc("Analyzes the input conversation utterance.")
 @actionSeparator("/:")
 @action("analyze-conversations")
-@operationId("AnalyzeConversation")
+// @operationId("AnalyzeConversation")
 //removed examples due to bug
 // @Autorest.example(
 //   "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversations.json",
@@ -1691,38 +1692,38 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 //   "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json",
 //   "Orchestration direct target result"
 // )
-@convenientAPI(false)
 op analyzeConversation is Operations.ResourceCollectionAction<
     AnalyzeConversationTask,
     AnalyzeConversationTask,
     AnalyzeConversationTaskResult
   >;
 
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
 @added(Versions.v2023_04_01)
-@doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
-@summary("Get analysis status and results")
-@operationId("AnalyzeConversation_JobStatus")
-op jobStatus is Operations.ResourceRead<
-  AnalyzeConversationJobState, 
-  ShowStatsQueryParameter
->;
+@route("/language/analyze-conversations2/jobs/{jobId}")
+op analyzeConversationJobStatus(
+  @doc("(Optional) if set to true, response will contain request and document level statistics.")
+  @query showStats?: boolean, 
+  @query `api-version`: Versions, 
+  @path jobId: string): AnalyzeConversationJobState | Azure.Core.Foundations.ErrorResponse;
 
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
+
 @added(Versions.v2023_04_01)
-@doc("Analyzes the input conversation utterance.")
-@operationId("AnalyzeConversation_SubmitJob")
-@convenientAPI(false)
-@pollingOperation(jobStatus)
-op submitJob is Operations.LongRunningResourceCreateWithServiceProvidedName<AnalyzeConversationJobsInput>;
+model SubmitAccepted {
+  @statusCode _: 202;
 
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
+  @pollingLocation
+  @header("Operation-Location") 
+  operationLocation: ResourceLocation<ResourceOperationStatus<AnalyzeConversationJobState>>;
+};
+  
 @added(Versions.v2023_04_01)
-@doc("Cancel a long-running job for text analysis of conversations.")
-@summary("Cancel a long-running Text Analysis conversations job")
-@pollingOperation(jobStatus)
-@operationId("AnalyzeConversation_CancelJob")
-@actionSeparator(":")
-@action("cancel")
-op cancel is Operations.LongRunningResourceDelete<AnalyzeConversationJobState, TypeSpec.Http.AcceptedResponse>;
+@route("/language/analyze-conversations2/jobs")
+@post
+@pollingOperation(analyzeConversationJobStatus)
+op analyzeConversationSubmitJob(@query `api-version`: Versions, analyzeConversationJobsInput: AnalyzeConversationJobsInput): SubmitAccepted | Azure.Core.Foundations.ErrorResponse;
 
+@added(Versions.v2023_04_01)
+@route("/language/analyze-conversations2/jobs/{jobId}:cancel")
+@post
+@pollingOperation(analyzeConversationJobStatus)
+op analyzeConversationCancelJob(@query `api-version`: Versions,  @pollingOperationParameter(analyzeConversationJobStatus::parameters.jobId) @path jobId: string): SubmitAccepted | Azure.Core.Foundations.ErrorResponse;
