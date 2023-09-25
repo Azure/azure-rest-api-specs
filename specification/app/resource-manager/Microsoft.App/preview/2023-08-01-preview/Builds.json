@@ -248,57 +248,12 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/builds/{buildName}/getLogStreamEndpointToken": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/builds/{buildName}/getAuthToken": {
       "post": {
         "tags": [
           "Builds"
         ],
-        "operationId": "Builds_GetLogStreamEndpointToken",
-        "description": "Gets the token used to connect to the build log stream endpoint.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
-          },
-          {
-            "$ref": "#/parameters/BuildNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Token"
-            }
-          },
-          "default": {
-            "description": "Common error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Build Log Stream Endpoint Token": {
-            "$ref": "./examples/Builds_GetLogStreamEndpointToken.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/builds/{buildName}/getUploadEndpointToken": {
-      "post": {
-        "tags": [
-          "Builds"
-        ],
-        "operationId": "Builds_GetUploadEndpointToken",
+        "operationId": "Builds_GetAuthToken",
         "description": "Gets the token used to connect to the endpoint where source code can be uploaded for a build.",
         "parameters": [
           {
@@ -332,8 +287,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Build Upload Endpoint Token": {
-            "$ref": "./examples/Builds_GetUploadEndpointToken.json"
+          "Get Build Auth Token": {
+            "$ref": "./examples/Builds_GetAuthToken.json"
           }
         }
       }
@@ -398,13 +353,18 @@
           "description": "Configuration of the build."
         },
         "uploadEndpoint": {
-          "$ref": "#/definitions/EndpointWithTokenLink",
+          "type": "string",
           "description": "Endpoint to which the source code should be uploaded.",
           "readOnly": true
         },
         "logStreamEndpoint": {
-          "$ref": "#/definitions/EndpointWithTokenLink",
+          "type": "string",
           "description": "Endpoint from which the build logs can be streamed.",
+          "readOnly": true
+        },
+        "tokenEndpoint": {
+          "type": "string",
+          "description": "Endpoint to use to retrieve an authentication token for log streaming and uploading source code.",
           "readOnly": true
         }
       },
@@ -481,23 +441,6 @@
       "description": "Container registry that the final image will be uploaded to.",
       "required": [
         "server"
-      ]
-    },
-    "EndpointWithTokenLink": {
-      "type": "object",
-      "properties": {
-        "endpoint": {
-          "type": "string",
-          "description": "Endpoint url."
-        },
-        "tokenEndpoint": {
-          "type": "string",
-          "description": "Endpoint to use to retrieve an authentication token to be passed to the endpoint via headers."
-        }
-      },
-      "description": "Endpoint to interact with the build once it has been provisioned.",
-      "required": [
-        "endpoint"
       ]
     },
     "Token": {
