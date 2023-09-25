@@ -56,8 +56,7 @@
             "name": "body",
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationTask"
-            },
-            "required": true
+            }
           }
         ],
         "consumes": [
@@ -384,6 +383,7 @@
         }
       ],
       "type": "object",
+      "description": "It is a wrap up a Question Answering KB response.",
       "properties": {
         "result": {
           "$ref": "#/definitions/AnalyzeConversationResult"
@@ -533,6 +533,7 @@
     "LuisCallingOptions": {
       "description": "This customizes how the service calls LUIS Generally Available projects.",
       "type": "object",
+      "description": "Parameters to query a knowledge base.",
       "properties": {
         "verbose": {
           "description": "Enable verbose response.",
@@ -845,6 +846,7 @@
         "resolutions": {
           "description": "The collection of entity resolution objects.",
           "type": "array",
+          "description": "The collection of entity resolution objects.",
           "items": {
             "$ref": "#/definitions/BaseResolution"
           }
@@ -852,6 +854,7 @@
         "extraInformation": {
           "description": "The collection of entity extra information objects.",
           "type": "array",
+          "description": "The collection of entity extra information objects.",
           "items": {
             "$ref": "#/definitions/BaseExtraInformation"
           }
@@ -896,6 +899,7 @@
     "QuantityResolution": {
       "description": "Represents resolutions for quantities.",
       "type": "object",
+      "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
       "properties": {
         "value": {
           "type": "number",
@@ -1626,6 +1630,7 @@
     },
     "AnalyzeConversationJobsInput": {
       "type": "object",
+      "description": "Dialog associated with Answer.",
       "properties": {
         "displayName": {
           "description": "Optional display name for the analysis job.",
@@ -1637,6 +1642,8 @@
         "tasks": {
           "description": "The set of tasks to execute on the input conversation.",
           "type": "array",
+          "description": "List of prompts associated with the answer.",
+          "maxItems": 20,
           "items": {
             "$ref": "#/definitions/AnalyzeConversationLROTask"
           }
@@ -1663,7 +1670,8 @@
         {
           "$ref": "common.json#/definitions/TaskIdentifier"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "LengthResolution"
     },
     "AnalyzeConversationLROTaskKind": {
       "type": "string",
@@ -1739,6 +1747,7 @@
       "properties": {
         "conversations": {
           "type": "array",
+          "description": "List of metadata.",
           "items": {
             "$ref": "#/definitions/Conversation"
           }
@@ -1832,6 +1841,7 @@
         "conversationItems": {
           "description": "Ordered list of transcript conversation items in the conversation.",
           "type": "array",
+          "description": "Errors by document id.",
           "items": {
             "$ref": "#/definitions/TranscriptConversationItem"
           }
@@ -2075,7 +2085,8 @@
         {
           "$ref": "common.json#/definitions/PreBuiltTaskParameters"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "SpeedResolution"
     },
     "ConversationPIICategories": {
       "description": "Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with the language.",
@@ -2282,6 +2293,7 @@
       "properties": {
         "conversations": {
           "type": "array",
+          "description": "array of conversations",
           "items": {
             "$ref": "#/definitions/ConversationsSummaryResult"
           }
@@ -2331,6 +2343,7 @@
     },
     "SummaryResultItem": {
       "type": "object",
+      "description": "Summary Result Item",
       "properties": {
         "aspect": {
           "type": "string"
@@ -2425,7 +2438,8 @@
         {
           "$ref": "common.json#/definitions/PreBuiltResult"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "TemporalSpanResolution"
     },
     "ConversationSentimentResult": {
       "type": "object",
@@ -2437,6 +2451,7 @@
         "conversationItems": {
           "description": "Enumeration of Sentiment operation results for all the conversation items in a conversation.",
           "type": "array",
+          "description": "Ordered list of text conversation items in the conversation.",
           "items": {
             "$ref": "#/definitions/ConversationSentimentItemResult"
           }
