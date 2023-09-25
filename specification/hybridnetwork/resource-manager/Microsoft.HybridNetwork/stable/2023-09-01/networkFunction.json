@@ -586,7 +586,7 @@
           "description": "Indicates if software updates are allowed during deployment."
         },
         "configurationType": {
-          "$ref": "./common.json#/definitions/configurationType",
+          "$ref": "#/definitions/NetworkFunctionConfigurationType",
           "description": "The value which indicates if NF  values are secrets"
         },
         "roleOverrideValues": {
@@ -652,6 +652,19 @@
         }
       },
       "description": "Response for network function API service call."
+    },
+    "NetworkFunctionConfigurationType": {
+      "type": "string",
+      "description": "The secret type which indicates if secret or not.",
+      "enum": [
+        "Unknown",
+        "Secret",
+        "Open"
+      ],
+      "x-ms-enum": {
+        "name": "configurationType",
+        "modelAsString": true
+      }
     },
     "RoleOverrideValues": {
       "type": "string",

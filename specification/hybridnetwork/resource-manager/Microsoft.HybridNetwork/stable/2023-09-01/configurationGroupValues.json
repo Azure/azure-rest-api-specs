@@ -380,7 +380,7 @@
           "description": "The configuration group schema resource reference."
         },
         "configurationType": {
-          "$ref": "./common.json#/definitions/configurationType",
+          "$ref": "#/definitions/configurationGroupValueConfigurationType",
           "description": "The value which indicates if configuration values are secrets"
         }
       }
@@ -439,6 +439,19 @@
         }
       },
       "description": "Response for hybrid configurationGroups API service call."
+    },
+    "configurationGroupValueConfigurationType": {
+      "type": "string",
+      "description": "The secret type which indicates if secret or not.",
+      "enum": [
+        "Unknown",
+        "Secret",
+        "Open"
+      ],
+      "x-ms-enum": {
+        "name": "configurationType",
+        "modelAsString": true
+      }
     }
   }
 }
