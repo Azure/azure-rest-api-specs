@@ -20,8 +20,8 @@
       {
         "name": "Endpoint",
         "in": "path",
-        "required": true,
         "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
+        "required": true,
         "type": "string"
       }
     ]
@@ -40,8 +40,8 @@
   "securityDefinitions": {
     "ApiKeyAuth": {
       "type": "apiKey",
-      "in": "header",
-      "name": "Ocp-Apim-Subscription-Key"
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
     }
   },
   "tags": [],
@@ -57,10 +57,10 @@
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationTask"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -72,14 +72,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         }
@@ -89,22 +89,21 @@
   "definitions": {
     "AADToken": {
       "type": "object",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
       "properties": {
         "type": {
           "type": "string",
+          "description": "OAuth2 authentication",
           "enum": [
             "oauth2"
-          ],
-          "description": "OAuth2 authentication"
+          ]
         },
         "flows": {
           "type": "array",
-          "items": {},
-          "x-typespec-name": "[(anonymous model)]",
-          "description": "Supported OAuth2 flows"
+          "description": "Supported OAuth2 flows",
+          "items": {}
         }
       },
-      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
       "required": [
         "type",
         "flows"
@@ -112,6 +111,7 @@
     },
     "AgeResolution": {
       "type": "object",
+      "description": "Represents the Age entity resolution model.",
       "properties": {
         "value": {
           "type": "number",
@@ -123,7 +123,6 @@
           "description": "The Age Unit of measurement"
         }
       },
-      "description": "Represents the Age entity resolution model.",
       "required": [
         "value",
         "unit"
@@ -132,7 +131,8 @@
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AgeResolution"
     },
     "AgeUnit": {
       "type": "string",
@@ -151,6 +151,7 @@
     },
     "AnalysisParameters": {
       "type": "object",
+      "description": "This is the parameter set of either the Orchestration project itself or one of the target services.",
       "properties": {
         "targetProjectKind": {
           "$ref": "#/definitions/targetProjectKind",
@@ -161,7 +162,6 @@
           "description": "The API version to use when call a specific target service."
         }
       },
-      "description": "This is the parameter set of either the Orchestration project itself or one of the target services.",
       "discriminator": "targetProjectKind",
       "required": [
         "targetProjectKind"
@@ -169,6 +169,7 @@
     },
     "AnalyzeConversationResult": {
       "type": "object",
+      "description": "Represents a conversation analysis response.",
       "properties": {
         "query": {
           "type": "string",
@@ -183,7 +184,6 @@
           "description": "The prediction result of a conversation project."
         }
       },
-      "description": "Represents a conversation analysis response.",
       "required": [
         "query",
         "prediction"
@@ -191,12 +191,10 @@
     },
     "AnalyzeConversationTask": {
       "type": "object",
+      "description": "The base class of a conversation input task.",
       "properties": {
         "kind": {
-          "type": "string",
-          "enum": [
-            "Conversation"
-          ],
+          "$ref": "#/definitions/AnalyzeConversationTaskKind",
           "description": "The base class of a conversation input task.",
           "x-ms-mutability": [
             "read",
@@ -204,7 +202,6 @@
           ]
         }
       },
-      "description": "The base class of a conversation input task.",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -223,13 +220,13 @@
     },
     "AnalyzeConversationTaskResult": {
       "type": "object",
+      "description": "The base class of a conversation input task result.",
       "properties": {
         "kind": {
           "$ref": "#/definitions/AnalyzeConversationTaskResultsKind",
           "description": "The base class of a conversation input task result."
         }
       },
-      "description": "The base class of a conversation input task result.",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -248,6 +245,7 @@
     },
     "AnswerSpan": {
       "type": "object",
+      "description": "Answer span object of QnA.",
       "properties": {
         "text": {
           "type": "string",
@@ -270,11 +268,11 @@
           "format": "int32",
           "description": "The length of the answer span."
         }
-      },
-      "description": "Answer span object of QnA."
+      }
     },
     "AnswersOptions": {
       "type": "object",
+      "description": "Parameters to query a knowledge base.",
       "properties": {
         "qnaId": {
           "type": "integer",
@@ -325,25 +323,24 @@
           "type": "boolean",
           "description": "(Optional) Flag to enable Query over Unstructured Sources."
         }
-      },
-      "description": "Parameters to query a knowledge base."
+      }
     },
     "AnswersResult": {
       "type": "object",
+      "description": "Represents List of Question Answers.",
       "properties": {
         "answers": {
           "type": "array",
+          "description": "Represents Answer Result list.",
           "items": {
             "$ref": "#/definitions/KnowledgeBaseAnswer"
-          },
-          "description": "Represents Answer Result list.",
-          "x-typespec-name": "KnowledgeBaseAnswer[]"
+          }
         }
-      },
-      "description": "Represents List of Question Answers."
+      }
     },
     "AreaResolution": {
       "type": "object",
+      "description": "Represents the area entity resolution model.",
       "properties": {
         "value": {
           "type": "number",
@@ -355,7 +352,6 @@
           "description": "The area Unit of measurement"
         }
       },
-      "description": "Represents the area entity resolution model.",
       "required": [
         "value",
         "unit"
@@ -364,7 +360,8 @@
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AreaResolution"
     },
     "AreaUnit": {
       "type": "string",
@@ -391,6 +388,7 @@
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
+      "description": "The error object.",
       "properties": {
         "code": {
           "type": "string",
@@ -406,19 +404,17 @@
         },
         "details": {
           "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
-          "x-ms-identifiers": [],
-          "description": "An array of details about specific errors that led to this reported error.",
-          "x-typespec-name": "Azure.Core.Foundations.Error[]"
+          "x-ms-identifiers": []
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "An object containing more specific information than the current object about the error."
         }
       },
-      "description": "The error object.",
       "required": [
         "code",
         "message"
@@ -426,19 +422,20 @@
     },
     "Azure.Core.Foundations.ErrorResponse": {
       "type": "object",
+      "description": "A response containing error details.",
       "properties": {
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error object."
         }
       },
-      "description": "A response containing error details.",
       "required": [
         "error"
       ]
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
@@ -448,18 +445,17 @@
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "Inner error."
         }
-      },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
+      }
     },
     "BaseExtraInformation": {
       "type": "object",
+      "description": "The abstract base object for entity extra information.",
       "properties": {
         "extraInformationKind": {
           "$ref": "#/definitions/extraInformationKind",
           "description": "The extra information object kind."
         }
       },
-      "description": "The abstract base object for entity extra information.",
       "discriminator": "extraInformationKind",
       "required": [
         "extraInformationKind"
@@ -467,6 +463,7 @@
     },
     "BasePrediction": {
       "type": "object",
+      "description": "This is the base class of prediction",
       "properties": {
         "projectKind": {
           "$ref": "#/definitions/projectKind",
@@ -477,7 +474,6 @@
           "description": "The intent with the highest score."
         }
       },
-      "description": "This is the base class of prediction",
       "discriminator": "projectKind",
       "required": [
         "projectKind"
@@ -485,13 +481,13 @@
     },
     "BaseResolution": {
       "type": "object",
+      "description": "The abstract base class for entity resolutions.",
       "properties": {
         "resolutionKind": {
           "$ref": "#/definitions/resolutionKind",
           "description": "The entity resolution object kind."
         }
       },
-      "description": "The abstract base class for entity resolutions.",
       "discriminator": "resolutionKind",
       "required": [
         "resolutionKind"
@@ -499,13 +495,13 @@
     },
     "BooleanResolution": {
       "type": "object",
+      "description": "A resolution for boolean expressions",
       "properties": {
         "value": {
           "type": "boolean",
           "description": "A resolution for boolean expressions"
         }
       },
-      "description": "A resolution for boolean expressions",
       "required": [
         "value"
       ],
@@ -513,23 +509,25 @@
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "BooleanResolution"
     },
     "ConversationAnalysisOptions": {
       "type": "object",
+      "description": "The input ConversationItem and its optional parameters",
       "properties": {
         "conversationItem": {
           "$ref": "#/definitions/ConversationItemBase",
           "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript)."
         }
       },
-      "description": "The input ConversationItem and its optional parameters",
       "required": [
         "conversationItem"
       ]
     },
     "ConversationCallingOptions": {
       "type": "object",
+      "description": "The option to set to call a Conversation project.",
       "properties": {
         "language": {
           "type": "string",
@@ -543,11 +541,11 @@
           "type": "boolean",
           "description": "If true, the query will be saved for customers to further review in authoring, to improve the model quality."
         }
-      },
-      "description": "The option to set to call a Conversation project."
+      }
     },
     "ConversationEntity": {
       "type": "object",
+      "description": "The entity extraction result of a Conversation project.",
       "properties": {
         "category": {
           "type": "string",
@@ -575,24 +573,21 @@
         },
         "resolutions": {
           "type": "array",
+          "description": "The collection of entity resolution objects.",
           "items": {
             "$ref": "#/definitions/BaseResolution"
           },
-          "x-ms-identifiers": [],
-          "description": "The collection of entity resolution objects.",
-          "x-typespec-name": "BaseResolution[]"
+          "x-ms-identifiers": []
         },
         "extraInformation": {
           "type": "array",
+          "description": "The collection of entity extra information objects.",
           "items": {
             "$ref": "#/definitions/BaseExtraInformation"
           },
-          "x-ms-identifiers": [],
-          "description": "The collection of entity extra information objects.",
-          "x-typespec-name": "BaseExtraInformation[]"
+          "x-ms-identifiers": []
         }
       },
-      "description": "The entity extraction result of a Conversation project.",
       "required": [
         "category",
         "text",
@@ -603,6 +598,7 @@
     },
     "ConversationIntent": {
       "type": "object",
+      "description": "The intent classification result of a Conversation project.",
       "properties": {
         "category": {
           "type": "string",
@@ -617,7 +613,6 @@
           "x-ms-client-name": "confidence"
         }
       },
-      "description": "The intent classification result of a Conversation project.",
       "required": [
         "category",
         "confidenceScore"
@@ -625,6 +620,7 @@
     },
     "ConversationItemBase": {
       "type": "object",
+      "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
       "properties": {
         "id": {
           "type": "string",
@@ -643,7 +639,6 @@
           "description": "Enumeration of supported conversational modalities."
         }
       },
-      "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
       "required": [
         "id",
         "participantId"
@@ -651,50 +646,47 @@
       "allOf": [
         {
           "type": "object",
-          "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>"
+          "additionalProperties": {}
         }
-      ],
-      "additionalProperties": true
+      ]
     },
     "ConversationParameters": {
       "type": "object",
+      "description": "This is a set of request parameters for Customized Conversation projects.",
       "properties": {
         "callingOptions": {
           "$ref": "#/definitions/ConversationCallingOptions",
           "description": "The option to set to call a Conversation project."
         }
       },
-      "description": "This is a set of request parameters for Customized Conversation projects.",
       "allOf": [
         {
           "$ref": "#/definitions/AnalysisParameters"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Conversation"
     },
     "ConversationPrediction": {
       "type": "object",
+      "description": "Represents the prediction section of a Conversation project.",
       "properties": {
         "intents": {
           "type": "array",
+          "description": "The intent classification results.",
           "items": {
             "$ref": "#/definitions/ConversationIntent"
           },
-          "x-ms-identifiers": [],
-          "description": "The intent classification results.",
-          "x-typespec-name": "ConversationIntent[]"
+          "x-ms-identifiers": []
         },
         "entities": {
           "type": "array",
+          "description": "The entity extraction results.",
           "items": {
             "$ref": "#/definitions/ConversationEntity"
           },
-          "x-ms-identifiers": [],
-          "description": "The entity extraction results.",
-          "x-typespec-name": "ConversationEntity[]"
+          "x-ms-identifiers": []
         }
       },
-      "description": "Represents the prediction section of a Conversation project.",
       "required": [
         "intents",
         "entities"
@@ -703,10 +695,12 @@
         {
           "$ref": "#/definitions/BasePrediction"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Conversation"
     },
     "ConversationResult": {
       "type": "object",
+      "description": "The response returned by a Conversation project.",
       "properties": {
         "query": {
           "type": "string",
@@ -721,28 +715,29 @@
           "description": "The predicted result for the query."
         }
       },
-      "description": "The response returned by a Conversation project.",
       "required": [
         "query"
       ]
     },
     "ConversationTargetIntentResult": {
       "type": "object",
+      "description": "A wrap up of Conversation project response.",
       "properties": {
         "result": {
           "$ref": "#/definitions/ConversationResult",
           "description": "The actual response from a Conversation project."
         }
       },
-      "description": "A wrap up of Conversation project response.",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Conversation"
     },
     "ConversationTaskParameters": {
       "type": "object",
+      "description": "Input parameters necessary for a Conversation task.",
       "properties": {
         "projectName": {
           "type": "string",
@@ -770,14 +765,12 @@
         },
         "targetProjectParameters": {
           "type": "object",
+          "description": "A dictionary representing the parameters for each target project.",
           "additionalProperties": {
             "$ref": "#/definitions/AnalysisParameters"
-          },
-          "description": "A dictionary representing the parameters for each target project.",
-          "x-typespec-name": "Record<AnalysisParameters>"
+          }
         }
       },
-      "description": "Input parameters necessary for a Conversation task.",
       "required": [
         "projectName",
         "deploymentName"
@@ -785,6 +778,7 @@
     },
     "ConversationalTask": {
       "type": "object",
+      "description": "The input for a custom conversation task.",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/ConversationAnalysisOptions",
@@ -795,7 +789,6 @@
           "description": "Input parameters necessary for a Conversation task."
         }
       },
-      "description": "The input for a custom conversation task.",
       "required": [
         "analysisInput",
         "parameters"
@@ -804,17 +797,18 @@
         {
           "$ref": "#/definitions/AnalyzeConversationTask"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Conversation"
     },
     "ConversationalTaskResult": {
       "type": "object",
+      "description": "The results of a Conversation task.",
       "properties": {
         "result": {
           "$ref": "#/definitions/AnalyzeConversationResult",
           "description": "Represents a conversation analysis response."
         }
       },
-      "description": "The results of a Conversation task.",
       "required": [
         "result"
       ],
@@ -822,10 +816,12 @@
         {
           "$ref": "#/definitions/AnalyzeConversationTaskResult"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ConversationResult"
     },
     "CurrencyResolution": {
       "type": "object",
+      "description": "Represents the currency entity resolution model.",
       "properties": {
         "ISO4217": {
           "type": "string",
@@ -842,7 +838,6 @@
           "description": "The unit of the amount captured in the extracted entity"
         }
       },
-      "description": "Represents the currency entity resolution model.",
       "required": [
         "value",
         "unit"
@@ -851,18 +846,19 @@
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "CurrencyResolution"
     },
     "CustomResult": {
       "type": "object",
+      "description": "Custom Task Results",
       "properties": {
         "errors": {
           "type": "array",
+          "description": "Errors by document id.",
           "items": {
             "$ref": "#/definitions/DocumentErrorItem"
-          },
-          "description": "Errors by document id.",
-          "x-typespec-name": "DocumentError[]"
+          }
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
@@ -877,7 +873,6 @@
           "description": "This field indicates the deployment name for the model."
         }
       },
-      "description": "Custom Task Results",
       "required": [
         "errors",
         "projectName",
@@ -886,6 +881,7 @@
     },
     "CustomTaskParameters": {
       "type": "object",
+      "description": "Parameters object for a text analysis task using custom models.",
       "properties": {
         "loggingOptOut": {
           "type": "boolean",
@@ -901,7 +897,6 @@
           "description": "This field indicates the deployment name for the model."
         }
       },
-      "description": "Parameters object for a text analysis task using custom models.",
       "required": [
         "loggingOptOut",
         "projectName",
@@ -910,9 +905,11 @@
     },
     "DateTimeResolution": {
       "type": "object",
+      "description": "A resolution for datetime entity instances.",
       "properties": {
         "timex": {
           "type": "string",
+          "format": "date-time",
           "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "dateTimeSubKind": {
@@ -928,7 +925,6 @@
           "description": "An optional modifier of a date/time instance."
         }
       },
-      "description": "A resolution for datetime entity instances.",
       "required": [
         "timex",
         "dateTimeSubKind",
@@ -938,7 +934,8 @@
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "DateTimeResolution"
     },
     "DateTimeSubKind": {
       "type": "string",
@@ -957,6 +954,7 @@
     },
     "DocumentError": {
       "type": "object",
+      "description": "Contains details of errors encountered during a job execution.",
       "properties": {
         "id": {
           "type": "string",
@@ -967,7 +965,6 @@
           "description": "Error encountered."
         }
       },
-      "description": "Contains details of errors encountered during a job execution.",
       "required": [
         "id",
         "error"
@@ -975,6 +972,7 @@
     },
     "DocumentErrorItem": {
       "type": "object",
+      "description": "Contains details of errors encountered during a job execution.",
       "properties": {
         "id": {
           "type": "string",
@@ -985,7 +983,6 @@
           "description": "Error encountered."
         }
       },
-      "description": "Contains details of errors encountered during a job execution.",
       "required": [
         "id",
         "error"
@@ -993,18 +990,19 @@
     },
     "EntitySubtype": {
       "type": "object",
+      "description": "The concrete entity Subtype model of extra information.",
       "properties": {
         "value": {
           "type": "string",
           "description": "The Subtype of an extracted entity type."
         }
       },
-      "description": "The concrete entity Subtype model of extra information.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "EntitySubtype"
     },
     "ErrorCode": {
       "type": "string",
@@ -1036,19 +1034,20 @@
     },
     "ErrorResponse": {
       "type": "object",
+      "description": "Error response.",
       "properties": {
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error object."
         }
       },
-      "description": "Error response.",
       "required": [
         "error"
       ]
     },
     "ErrorResponseItem": {
       "type": "object",
+      "description": "Error response.",
       "properties": {
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
@@ -1059,13 +1058,13 @@
           "description": "String error code indicating what went wrong."
         }
       },
-      "description": "Error response.",
       "required": [
         "error"
       ]
     },
     "InformationResolution": {
       "type": "object",
+      "description": "Represents the information (data) entity resolution model.",
       "properties": {
         "value": {
           "type": "number",
@@ -1077,7 +1076,6 @@
           "description": "The information (data) Unit of measurement."
         }
       },
-      "description": "Represents the information (data) entity resolution model.",
       "required": [
         "value",
         "unit"
@@ -1086,7 +1084,8 @@
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "InformationResolution"
     },
     "InformationUnit": {
       "type": "string",
@@ -1137,6 +1136,7 @@
     },
     "InnerErrorModel": {
       "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "$ref": "#/definitions/InnerErrorCode",
@@ -1148,11 +1148,10 @@
         },
         "details": {
           "type": "object",
+          "description": "Error details.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Error details.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "target": {
           "type": "string",
@@ -1163,7 +1162,6 @@
           "description": "An object containing more specific information than the current object about the error."
         }
       },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "required": [
         "code",
         "message"
@@ -1171,14 +1169,13 @@
       "allOf": [
         {
           "type": "object",
-          "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>"
+          "additionalProperties": {}
         }
-      ],
-      "additionalProperties": true
+      ]
     },
     "InputWarning": {
       "type": "object",
+      "description": "Contains details of warnings encountered during a job execution.",
       "properties": {
         "code": {
           "type": "string",
@@ -1193,7 +1190,6 @@
           "description": "A JSON pointer reference indicating the target object."
         }
       },
-      "description": "Contains details of warnings encountered during a job execution.",
       "required": [
         "code",
         "message"
@@ -1201,32 +1197,31 @@
     },
     "JobErrors": {
       "type": "object",
+      "description": "job errors",
       "properties": {
         "errors": {
           "type": "array",
+          "description": "errors",
           "items": {
             "$ref": "#/definitions/ErrorResponseItem"
           },
-          "x-ms-identifiers": [],
-          "description": "errors",
-          "x-typespec-name": "ErrorResponse[]"
+          "x-ms-identifiers": []
         }
       },
-      "description": "job errors",
       "required": [
         "errors"
       ]
     },
     "KnowledgeBaseAnswer": {
       "type": "object",
+      "description": "Represents knowledge base answer.",
       "properties": {
         "questions": {
           "type": "array",
+          "description": "List of questions associated with the answer.",
           "items": {
             "type": "string"
-          },
-          "description": "List of questions associated with the answer.",
-          "x-typespec-name": "string[]"
+          }
         },
         "answer": {
           "type": "string",
@@ -1251,8 +1246,9 @@
           "description": "Source of QnA result."
         },
         "metadata": {
-          "$ref": "#/definitions/object",
-          "description": "Metadata associated with the answer, useful to categorize or filter question answers."
+          "type": "object",
+          "description": "Metadata associated with the answer, useful to categorize or filter question answers.",
+          "additionalProperties": {}
         },
         "dialog": {
           "$ref": "#/definitions/KnowledgeBaseAnswerDialog",
@@ -1263,11 +1259,11 @@
           "description": "Answer span object of QnA with respect to user's question.",
           "x-ms-client-name": "shortAnswer"
         }
-      },
-      "description": "Represents knowledge base answer."
+      }
     },
     "KnowledgeBaseAnswerContext": {
       "type": "object",
+      "description": "Context object with previous QnA's information.",
       "properties": {
         "previousQnaId": {
           "type": "integer",
@@ -1280,13 +1276,13 @@
           "x-ms-client-name": "previousQuestion"
         }
       },
-      "description": "Context object with previous QnA's information.",
       "required": [
         "previousQnaId"
       ]
     },
     "KnowledgeBaseAnswerDialog": {
       "type": "object",
+      "description": "Dialog associated with Answer.",
       "properties": {
         "isContextOnly": {
           "type": "boolean",
@@ -1294,19 +1290,18 @@
         },
         "prompts": {
           "type": "array",
+          "description": "List of prompts associated with the answer.",
+          "maxItems": 20,
           "items": {
             "$ref": "#/definitions/KnowledgeBaseAnswerPrompt"
           },
-          "x-ms-identifiers": [],
-          "description": "List of prompts associated with the answer.",
-          "x-typespec-name": "KnowledgeBaseAnswerPrompt[]",
-          "maxItems": 20
+          "x-ms-identifiers": []
         }
-      },
-      "description": "Dialog associated with Answer."
+      }
     },
     "KnowledgeBaseAnswerPrompt": {
       "type": "object",
+      "description": "Prompt for an answer.",
       "properties": {
         "displayOrder": {
           "type": "integer",
@@ -1324,7 +1319,6 @@
           "maxLength": 200
         }
       },
-      "description": "Prompt for an answer.",
       "required": [
         "displayOrder",
         "qnaId",
@@ -1333,6 +1327,7 @@
     },
     "LengthResolution": {
       "type": "object",
+      "description": "Represents the length entity resolution model.",
       "properties": {
         "value": {
           "type": "number",
@@ -1344,7 +1339,6 @@
           "description": "The length Unit of measurement"
         }
       },
-      "description": "Represents the length entity resolution model.",
       "required": [
         "value",
         "unit"
@@ -1353,7 +1347,8 @@
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "LengthResolution"
     },
     "LengthUnit": {
       "type": "string",
@@ -1384,18 +1379,19 @@
     },
     "ListKey": {
       "type": "object",
+      "description": "The list key extra data kind.",
       "properties": {
         "key": {
           "type": "string",
           "description": "The canonical form of the extracted entity."
         }
       },
-      "description": "The list key extra data kind.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ListKey"
     },
     "LogicalOperationKind": {
       "type": "string",
@@ -1411,6 +1407,7 @@
     },
     "LuisCallingOptions": {
       "type": "object",
+      "description": "This customizes how the service calls LUIS Generally Available projects.",
       "properties": {
         "verbose": {
           "type": "boolean",
@@ -1437,11 +1434,11 @@
           "type": "string",
           "description": "The subscription key to use when enabling Bing spell check"
         }
-      },
-      "description": "This customizes how the service calls LUIS Generally Available projects."
+      }
     },
     "LuisParameters": {
       "type": "object",
+      "description": "This is a set of request parameters for LUIS Generally Available projects.",
       "properties": {
         "targetProjectKind": {
           "$ref": "#/definitions/targetProjectKind",
@@ -1461,58 +1458,55 @@
           "description": "This customizes how the service calls LUIS Generally Available projects."
         }
       },
-      "description": "This is a set of request parameters for LUIS Generally Available projects.",
       "required": [
         "targetProjectKind"
       ],
       "allOf": [
         {
           "type": "object",
-          "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>"
+          "additionalProperties": {}
         }
-      ],
-      "additionalProperties": true
+      ]
     },
     "LuisTargetIntentResult": {
       "type": "object",
+      "description": "It is a wrap up of LUIS Generally Available response.",
       "properties": {
         "result": {
           "type": "object",
-          "additionalProperties": true,
           "description": "The actual response from a LUIS Generally Available application.",
-          "x-typespec-name": "Record<unknown>"
+          "additionalProperties": {}
         }
       },
-      "description": "It is a wrap up of LUIS Generally Available response.",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Luis"
     },
     "MetadataFilter": {
       "type": "object",
+      "description": "Find QnAs that are associated with the given list of metadata.",
       "properties": {
         "metadata": {
           "type": "array",
+          "description": "List of metadata.",
           "items": {
             "$ref": "#/definitions/MetadataRecord"
           },
-          "x-ms-identifiers": [],
-          "description": "List of metadata.",
-          "x-typespec-name": "MetadataRecord[]"
+          "x-ms-identifiers": []
         },
         "logicalOperation": {
           "$ref": "#/definitions/LogicalOperationKind",
           "description": "Operation used to join metadata filters.",
           "default": "AND"
         }
-      },
-      "description": "Find QnAs that are associated with the given list of metadata."
+      }
     },
     "MetadataRecord": {
       "type": "object",
+      "description": "Object to provide the key value pair for each metadata.",
       "properties": {
         "key": {
           "type": "string",
@@ -1523,7 +1517,6 @@
           "description": "Metadata Value from Metadata dictionary used in the QnA."
         }
       },
-      "description": "Object to provide the key value pair for each metadata.",
       "required": [
         "key",
         "value"
@@ -1543,18 +1536,19 @@
     },
     "NoneLinkedTargetIntentResult": {
       "type": "object",
+      "description": "A wrap up of non-linked intent response.",
       "properties": {
         "result": {
           "$ref": "#/definitions/ConversationResult",
           "description": "The actual response from a Conversation project."
         }
       },
-      "description": "A wrap up of non-linked intent response.",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "NonLinked"
     },
     "NumberKind": {
       "type": "string",
@@ -1574,6 +1568,7 @@
     },
     "NumberResolution": {
       "type": "object",
+      "description": "A resolution for numeric entity instances.",
       "properties": {
         "numberKind": {
           "$ref": "#/definitions/NumberKind",
@@ -1585,7 +1580,6 @@
           "description": "A numeric representation of what the extracted text denotes."
         }
       },
-      "description": "A resolution for numeric entity instances.",
       "required": [
         "numberKind",
         "value"
@@ -1594,10 +1588,12 @@
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "NumberResolution"
     },
     "NumericRangeResolution": {
       "type": "object",
+      "description": "represents the resolution of numeric intervals.",
       "properties": {
         "rangeKind": {
           "$ref": "#/definitions/RangeKind",
@@ -1614,7 +1610,6 @@
           "description": "The ending value of the interval."
         }
       },
-      "description": "represents the resolution of numeric intervals.",
       "required": [
         "rangeKind",
         "minimum",
@@ -1624,21 +1619,21 @@
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "NumericRangeResolution"
     },
     "OrchestrationPrediction": {
       "type": "object",
+      "description": "This represents the prediction result of an Orchestration project.",
       "properties": {
         "intents": {
           "type": "object",
+          "description": "A dictionary that contains all intents. A key is an intent name and a value is its confidence score and target type. The top intent's value also contains the actual response from the target project.",
           "additionalProperties": {
             "$ref": "#/definitions/TargetIntentResult"
-          },
-          "description": "A dictionary that contains all intents. A key is an intent name and a value is its confidence score and target type. The top intent's value also contains the actual response from the target project.",
-          "x-typespec-name": "Record<TargetIntentResult>"
+          }
         }
       },
-      "description": "This represents the prediction result of an Orchestration project.",
       "required": [
         "intents"
       ],
@@ -1646,10 +1641,12 @@
         {
           "$ref": "#/definitions/BasePrediction"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Orchestration"
     },
     "OrdinalResolution": {
       "type": "object",
+      "description": "A resolution for ordinal numbers entity instances.",
       "properties": {
         "offset": {
           "type": "string",
@@ -1664,7 +1661,6 @@
           "description": "A simple arithmetic expression that the ordinal denotes."
         }
       },
-      "description": "A resolution for ordinal numbers entity instances.",
       "required": [
         "offset",
         "relativeTo",
@@ -1674,18 +1670,19 @@
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "OrdinalResolution"
     },
     "PreBuiltResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
         "errors": {
           "type": "array",
+          "description": "Errors by document id.",
           "items": {
             "$ref": "#/definitions/DocumentErrorItem"
-          },
-          "description": "Errors by document id.",
-          "x-typespec-name": "DocumentError[]"
+          }
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
@@ -1696,7 +1693,6 @@
           "description": "This field indicates which model is used for scoring."
         }
       },
-      "description": "Pre built result",
       "required": [
         "errors",
         "modelVersion"
@@ -1704,6 +1700,7 @@
     },
     "QuantityResolution": {
       "type": "object",
+      "description": "Represents resolutions for quantities.",
       "properties": {
         "value": {
           "type": "number",
@@ -1711,13 +1708,13 @@
           "description": "The numeric value that the extracted text denotes."
         }
       },
-      "description": "Represents resolutions for quantities.",
       "required": [
         "value"
       ]
     },
     "QueryFilters": {
       "type": "object",
+      "description": "filters over knowledge base.",
       "properties": {
         "metadataFilter": {
           "$ref": "#/definitions/MetadataFilter",
@@ -1732,38 +1729,39 @@
           "description": "Logical operation used to join metadata filter with source filter.",
           "default": "AND"
         }
-      },
-      "description": "filters over knowledge base."
+      }
     },
     "QuestionAnsweringParameters": {
       "type": "object",
+      "description": "This is a set of request parameters for Question Answering knowledge bases.",
       "properties": {
         "callingOptions": {
           "$ref": "#/definitions/AnswersOptions",
           "description": "The options sent to a Question Answering KB."
         }
       },
-      "description": "This is a set of request parameters for Question Answering knowledge bases.",
       "allOf": [
         {
           "$ref": "#/definitions/AnalysisParameters"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "QuestionAnswering"
     },
     "QuestionAnsweringTargetIntentResult": {
       "type": "object",
+      "description": "It is a wrap up a Question Answering KB response.",
       "properties": {
         "result": {
           "$ref": "#/definitions/AnswersResult",
           "description": "The generated answer by a Question Answering KB."
         }
       },
-      "description": "It is a wrap up a Question Answering KB response.",
       "allOf": [
         {
           "$ref": "#/definitions/TargetIntentResult"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "QuestionAnswering"
     },
     "RangeKind": {
       "type": "string",
@@ -1830,7 +1828,65 @@
       ],
       "x-ms-enum": {
         "name": "RedactionCharacter",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "explationPoint",
+            "value": "!"
+          },
+          {
+            "name": "numberSign",
+            "value": "#"
+          },
+          {
+            "name": "dollar",
+            "value": "$"
+          },
+          {
+            "name": "perCent",
+            "value": "%"
+          },
+          {
+            "name": "ampersand",
+            "value": "&"
+          },
+          {
+            "name": "asterisk",
+            "value": "*"
+          },
+          {
+            "name": "plus",
+            "value": "+"
+          },
+          {
+            "name": "minus",
+            "value": "-"
+          },
+          {
+            "name": "equals",
+            "value": "="
+          },
+          {
+            "name": "questionMark",
+            "value": "?"
+          },
+          {
+            "name": "atSign",
+            "value": "@"
+          },
+          {
+            "name": "caret",
+            "value": "^"
+          },
+          {
+            "name": "underscore",
+            "value": "_"
+          },
+          {
+            "name": "tilde",
+            "value": "~"
+          }
+        ]
       }
     },
     "RelativeTo": {
@@ -1848,6 +1904,7 @@
     },
     "RequestStatistics": {
       "type": "object",
+      "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
       "properties": {
         "documentsCount": {
           "type": "integer",
@@ -1870,7 +1927,6 @@
           "description": "Number of transactions for the request."
         }
       },
-      "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
       "required": [
         "documentsCount",
         "validDocumentCount",
@@ -1880,6 +1936,7 @@
     },
     "ShortAnswerOptions": {
       "type": "object",
+      "description": "To configure Answer span prediction feature.",
       "properties": {
         "enable": {
           "type": "boolean",
@@ -1902,20 +1959,20 @@
           "x-ms-client-name": "top"
         }
       },
-      "description": "To configure Answer span prediction feature.",
       "required": [
         "enable"
       ]
     },
     "SourceFilter": {
       "type": "array",
+      "description": "Find QnAs that are associated with any of the given list of sources in knowledge base.",
       "items": {
         "type": "string"
-      },
-      "description": "Find QnAs that are associated with any of the given list of sources in knowledge base."
+      }
     },
     "SpeedResolution": {
       "type": "object",
+      "description": "Represents the speed entity resolution model.",
       "properties": {
         "value": {
           "type": "number",
@@ -1927,7 +1984,6 @@
           "description": "The speed Unit of measurement"
         }
       },
-      "description": "Represents the speed entity resolution model.",
       "required": [
         "value",
         "unit"
@@ -1936,7 +1992,8 @@
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "SpeedResolution"
     },
     "SpeedUnit": {
       "type": "string",
@@ -1994,6 +2051,7 @@
     },
     "TargetIntentResult": {
       "type": "object",
+      "description": "This is the base class of an intent prediction",
       "properties": {
         "targetProjectKind": {
           "$ref": "#/definitions/targetProjectKind",
@@ -2012,7 +2070,6 @@
           "x-ms-client-name": "confidence"
         }
       },
-      "description": "This is the base class of an intent prediction",
       "discriminator": "targetProjectKind",
       "required": [
         "targetProjectKind",
@@ -2021,6 +2078,7 @@
     },
     "TemperatureResolution": {
       "type": "object",
+      "description": "Represents the temperature entity resolution model.",
       "properties": {
         "value": {
           "type": "number",
@@ -2032,7 +2090,6 @@
           "description": "The temperature Unit of measurement."
         }
       },
-      "description": "Represents the temperature entity resolution model.",
       "required": [
         "value",
         "unit"
@@ -2041,7 +2098,8 @@
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "TemperatureResolution"
     },
     "TemperatureUnit": {
       "type": "string",
@@ -2088,17 +2146,21 @@
     },
     "TemporalSpanResolution": {
       "type": "object",
+      "description": "represents the resolution of a date and/or time span.",
       "properties": {
         "begin": {
           "type": "string",
+          "format": "date-time",
           "description": "represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "end": {
           "type": "string",
+          "format": "date-time",
           "description": "represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "duration": {
           "type": "string",
+          "format": "duration",
           "description": "An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
         },
         "modifier": {
@@ -2106,22 +2168,22 @@
           "description": "An optional modifier of a date/time instance."
         }
       },
-      "description": "represents the resolution of a date and/or time span.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "TemporalSpanResolution"
     },
     "TextConversationItem": {
       "type": "object",
+      "description": "The text modality of an input conversation.",
       "properties": {
         "text": {
           "type": "string",
           "description": "The text input"
         }
       },
-      "description": "The text modality of an input conversation.",
       "required": [
         "text"
       ],
@@ -2163,6 +2225,7 @@
     },
     "VolumeResolution": {
       "type": "object",
+      "description": "Represents the volume entity resolution model.",
       "properties": {
         "value": {
           "type": "number",
@@ -2174,7 +2237,6 @@
           "description": "The Volume Unit of measurement"
         }
       },
-      "description": "Represents the volume entity resolution model.",
       "required": [
         "value",
         "unit"
@@ -2183,7 +2245,8 @@
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "VolumeResolution"
     },
     "VolumeUnit": {
       "type": "string",
@@ -2225,6 +2288,7 @@
     },
     "WeightResolution": {
       "type": "object",
+      "description": "Represents the weight entity resolution model.",
       "properties": {
         "value": {
           "type": "number",
@@ -2236,7 +2300,6 @@
           "description": "The weight Unit of measurement."
         }
       },
-      "description": "Represents the weight entity resolution model.",
       "required": [
         "value",
         "unit"
@@ -2245,7 +2308,8 @@
         {
           "$ref": "#/definitions/BaseResolution"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "WeightResolution"
     },
     "WeightUnit": {
       "type": "string",
@@ -2285,11 +2349,6 @@
         "name": "extraInformationKind",
         "modelAsString": true
       }
-    },
-    "object": {
-      "type": "object",
-      "properties": {},
-      "description": "Represent a model"
     },
     "projectKind": {
       "type": "string",
@@ -2347,12 +2406,12 @@
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "required": true,
       "description": "The API version to use for this operation.",
-      "x-ms-client-name": "apiVersion",
+      "required": true,
       "type": "string",
       "minLength": 1,
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
   }
 }
