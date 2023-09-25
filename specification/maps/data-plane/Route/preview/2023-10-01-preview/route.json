@@ -782,6 +782,13 @@
               "items": {
                 "$ref": "#/definitions/Leg"
               }
+            },
+            "optimizedWaypoints": {
+              "description": "Optimized sequence of waypoints. It shows the index from the user provided waypoint sequence for the original and optimized list.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OptimizedWaypoint"
+              }
             }
           }
         }
@@ -1878,6 +1885,22 @@
             "description": "RouteTravelMode is returned as \"other\" for the truck travelMode when the truck route is not available for a particular section of a route."
           }
         ]
+      }
+    },
+    "OptimizedWaypoint": {
+      "description": "Optimized way point object.",
+      "type": "object",
+      "properties": {
+        "providedIndex": {
+          "description": "Way point index provided by the user.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "optimizedIndex": {
+          "description": "Optimized way point index from the system.",
+          "type": "integer",
+          "readOnly": true
+        }
       }
     },
     "DirectionsBatchRequestItem": {
