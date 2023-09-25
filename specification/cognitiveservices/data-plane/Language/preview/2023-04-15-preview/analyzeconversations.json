@@ -563,6 +563,22 @@
         }
       ]
     },
+    "AnalyzeConversationPiiTask": {
+      "type": "object",
+      "description": "Task definition for a PII redaction in conversations.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ConversationPiiTaskParameters",
+          "description": "parameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLroTask"
+        }
+      ],
+      "x-ms-discriminator-value": "ConversationalPIITask"
+    },
     "AnalyzeConversationResult": {
       "type": "object",
       "description": "Represents a conversation analysis response.",
@@ -733,7 +749,7 @@
       "type": "object",
       "description": "Task definition for conversational sentiment.",
       "properties": {
-        "properties": {
+        "parameters": {
           "$ref": "#/definitions/ConversationalSentimentTaskParameters",
           "description": "Supported parameters for a conversational sentiment task."
         }
