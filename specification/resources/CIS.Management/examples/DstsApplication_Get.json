@@ -1,0 +1,82 @@
+{
+  "title": "Get DstsApplication",
+  "operationId": "DstsApplication_Get",
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "prodUSEastAzcis",
+    "api-version": "2023-08-22-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCIS/dstsApplications/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCIS/dstsApplications",
+        "properties": {
+          "applicationAccount": {
+            "dstsInstance": "Instance 1",
+            "name": "Application 1",
+            "serviceTreeId": "ba1016c1-938a-4ca0-91c4-7d4e9a371f89",
+            "realms": [
+              "realm1",
+              "realm2"
+            ],
+            "servicePrincipalNames": [
+              "name1",
+              "name2"
+            ],
+            "replyToAddresses": [
+              "address1",
+              "address2"
+            ],
+            "groupId": "9aa8c2f2-ef5b-459f-9c10-613768430a44",
+            "groupName": "Group1",
+            "isMfaEnabled": true,
+            "sawDeviceEnforcement": "full SAW enforcement will apply to the application",
+            "isElevatedAccess": true,
+            "isProduction": true
+          },
+          "applicationGroup": {
+            "id": "4e33702f-ec54-49b8-b360-4c0f68b34bb7",
+            "serviceTreeId": "ba1016c1-938a-4ca0-91c4-7d4e9a371f89",
+            "name": "Group 1",
+            "applicationName": "Application 1",
+            "servicePrincipalNames": [
+              "service principal name 1",
+              "service principal name 2"
+            ],
+            "realms": [
+              "realm1",
+              "realm2"
+            ],
+            "replyToAddresses": [
+              "address1",
+              "address2"
+            ],
+            "isMfaEnabled": true,
+            "isGlobalService": true,
+            "sawDeviceEnforcement": "full SAW enforcement will apply to the application",
+            "clientTokenIpRangeRestrictions": [
+              {
+                "toIpAddress": "IP Address1"
+              },
+              {
+                "toIpAddress": "IP Address2"
+              }
+            ],
+            "cloudId": "PROD",
+            "clientSubscriptions": [
+              "supscription1",
+              "supscription2"
+            ],
+            "regions": [
+              "region 1",
+              "region 2"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
