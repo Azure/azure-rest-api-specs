@@ -1228,6 +1228,12 @@ interface MetricsIngestionEndpoints
 interface DataProductsCatalogs {
   @doc("Retrieve data type resource.")
   get is ArmResourceRead<DataProductsCatalog>;
+
+  @doc("List data catalog by resource group.")
+  listByResourceGroup is ArmResourceListByParent<DataProductsCatalog>;
+
+  @doc("List data catalog by subscription.")
+  listBySubscription is ArmListBySubscription<DataProductsCatalog>;
 }
 
 @doc("Operations on data type resource.")
