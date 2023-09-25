@@ -881,8 +881,8 @@ model ConversationSentimentResults extends PreBuiltResult{
 
 @added(Versions.v2023_04_15_preview)
 @doc("The result from sentiment analysis operation for each conversation.")
-model ConversationSentimentResultsConversation extends ConversationSentimentResult{
-  ...ConversationResultBase;
+model ConversationSentimentResultsConversation extends ConversationResultBase{
+  ...ConversationSentimentResult;
 }
 
 @added(Versions.v2023_04_15_preview)
