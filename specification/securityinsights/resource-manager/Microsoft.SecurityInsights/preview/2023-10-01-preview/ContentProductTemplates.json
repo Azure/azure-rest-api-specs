@@ -44,7 +44,7 @@
         "tags": [
           "ContentProductTemplates"
         ],
-        "description": "Gets all templates in the catalog.",
+        "description": "Gets all templates in the catalog.\nExpandable properties:\n- properties/packagedContent\n- properties/dependantTemplates",
         "operationId": "ProductTemplates_List",
         "parameters": [
           {
@@ -66,7 +66,19 @@
             "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
           },
           {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataExpand"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSearch"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataCount"
+          },
+          {
             "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkip"
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
@@ -101,7 +113,7 @@
         "tags": [
           "ContentProductTemplates"
         ],
-        "description": "Gets a template by its identifier.",
+        "description": "Gets a template by its identifier.\nExpandable properties:\n- properties/packagedContent\n- properties/dependantTemplates",
         "operationId": "ProductTemplate_Get",
         "parameters": [
           {
@@ -118,6 +130,9 @@
           },
           {
             "$ref": "#/parameters/templateIdParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataExpand"
           }
         ],
         "responses": {
@@ -200,6 +215,14 @@
         "packagedContent": {
           "type": "object",
           "description": "the json to deploy"
+        },
+        "dependantTemplates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/productTemplateProperties"
+          },
+          "description": "Template dependencies. Expandable.",
+          "readOnly": true
         }
       }
     }

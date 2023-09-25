@@ -44,7 +44,7 @@
         "tags": [
           "ContentTemplates"
         ],
-        "description": "Gets all installed templates.",
+        "description": "Gets all installed templates.\nExpandable properties:\n- properties/mainTemplate\n- properties/dependantTemplates",
         "operationId": "ContentTemplates_List",
         "parameters": [
           {
@@ -66,7 +66,19 @@
             "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
           },
           {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataExpand"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSearch"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataCount"
+          },
+          {
             "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkip"
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
@@ -153,7 +165,7 @@
         "tags": [
           "ContentTemplates"
         ],
-        "description": "Gets a template byt its identifier.",
+        "description": "Gets a template byt its identifier.\nExpandable properties:\n- properties/mainTemplate\n- properties/dependantTemplates",
         "operationId": "ContentTemplate_Get",
         "parameters": [
           {
@@ -170,6 +182,9 @@
           },
           {
             "$ref": "#/parameters/templateIdParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataExpand"
           }
         ],
         "responses": {
@@ -298,7 +313,15 @@
       "properties": {
         "mainTemplate": {
           "$ref": "#/definitions/mainTemplate",
-          "description": "The JSON of the ARM template to deploy active content"
+          "description": "The JSON of the ARM template to deploy active content. Expandable."
+        },
+        "dependantTemplates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/templateProperties"
+          },
+          "description": "Dependant templates. Expandable.",
+          "readOnly": true
         }
       }
     },
