@@ -681,7 +681,7 @@ model Tasks {
   total: int32;
 
   @doc("List of results from tasks (if available).")
-  items?: Array<AnalyzeConversationJobResult>;
+  result?: Array<AnalyzeConversationJobResult>;
 };
 
 
@@ -1706,6 +1706,17 @@ op analyzeConversationJobStatus(
   @query showStats?: boolean, 
   @query `api-version`: Versions, 
   @path jobId: string): AnalyzeConversationJobState | Azure.Core.Foundations.ErrorResponse;
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Allowed because this is a non-standard status polling operation."
+@doc("Returns the status of the images operation")
+@added(Versions.v2023_04_01)
+@route("/language/analyze-conversations2/jobs/{jobId}")
+op getImageOperationStatus is RpcOperation<
+  {
+    @doc(".") @path jobId: string;
+  },
+  AnalyzeConversationJobState
+>;
 
 
 @added(Versions.v2023_04_01)

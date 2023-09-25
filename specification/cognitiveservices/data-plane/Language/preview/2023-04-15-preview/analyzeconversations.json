@@ -309,6 +309,44 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/language/analyze-conversations2/jobs/{jobId}": {
+      "get": {
+        "operationId": "GetImageOperationStatus",
+        "description": "Returns the status of the images operation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": ".",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeConversationJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3679,7 +3717,7 @@
           "format": "int32",
           "description": "Total count of tasks submitted as part of the job."
         },
-        "items": {
+        "result": {
           "type": "array",
           "description": "List of results from tasks (if available).",
           "items": {
