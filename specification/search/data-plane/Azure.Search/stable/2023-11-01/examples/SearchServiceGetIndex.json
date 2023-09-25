@@ -52,6 +52,22 @@
             "synonymMaps": []
           },
           {
+            "name": "descriptionEmbedding",
+            "type": "Collection(Edm.Single)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "synonymMaps": [],
+            "dimensions": 1536,
+            "vectorSearchProfile": "myHnswProfile"
+          },
+          {
             "name": "description_fr",
             "type": "Edm.String",
             "searchable": true,
@@ -237,6 +253,52 @@
             "applicationId": "00000000-0000-0000-0000-000000000000",
             "applicationSecret": null
           }
+        },
+        "semantic": {
+          "configurations": [
+            {
+              "name": "semanticHotels",
+              "prioritizedFields": {
+                "titleField": {
+                  "fieldName": "hotelName"
+                },
+                "prioritizedContentFields": [
+                  {
+                    "fieldName": "description"
+                  },
+                  {
+                    "fieldName": "description_fr"
+                  }
+                ],
+                "prioritizedKeywordsFields": [
+                  {
+                    "fieldName": "tags"
+                  },
+                  {
+                    "fieldName": "category"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "vectorSearch": {
+          "profiles": [
+            {
+              "name": "myHnswProfile",
+              "algorithm": "myHnsw"
+            }
+          ],
+          "algorithms": [
+            {
+              "name": "myHnsw",
+              "kind": "hnsw",
+              "hnswParameters": {
+                "m": 4,
+                "metric": "cosine"
+              }
+            }
+          ]
         }
       }
     }
