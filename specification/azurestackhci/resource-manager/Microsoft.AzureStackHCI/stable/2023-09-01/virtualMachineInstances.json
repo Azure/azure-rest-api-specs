@@ -921,6 +921,10 @@
           },
           "description": "StorageProfile - contains information about the disks and storage information for the virtual machine instance"
         },
+        "httpProxyConfig": {
+          "description": "HTTP Proxy configuration for the VM.",
+          "$ref": "#/definitions/HttpProxyConfiguration"
+        },
         "provisioningState": {
           "type": "string",
           "description": "Provisioning state of the virtual machine instance.",
@@ -1497,10 +1501,6 @@
         "credentials": {
           "description": "Username / Password Credentials to provision guest agent.",
           "$ref": "#/definitions/GuestCredential"
-        },
-        "httpProxyConfig": {
-          "description": "HTTP Proxy configuration for the VM.",
-          "$ref": "#/definitions/HttpProxyConfiguration"
         },
         "provisioningAction": {
           "description": "The guest agent provisioning action.",
