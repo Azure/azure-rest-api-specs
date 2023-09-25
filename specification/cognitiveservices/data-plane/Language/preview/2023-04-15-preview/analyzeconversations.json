@@ -1678,6 +1678,22 @@
       "type": "object",
       "description": "The result from sentiment analysis operation for each conversation.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty conversation identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered in processing the document.",
+          "items": {
+            "$ref": "#/definitions/InputWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/ConversationStatistics",
+          "description": "If showStats=true was specified in the request this field will contain information about the conversation payload."
+        },
         "conversationItems": {
           "type": "array",
           "description": "Enumeration of Sentiment operation results for all the conversation items in a conversation.",
@@ -1687,12 +1703,9 @@
         }
       },
       "required": [
+        "id",
+        "warnings",
         "conversationItems"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationResultBase"
-        }
       ]
     },
     "ConversationStatistics": {
@@ -1836,6 +1849,22 @@
       "type": "object",
       "description": "Conversation PII result item",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty conversation identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered in processing the document.",
+          "items": {
+            "$ref": "#/definitions/InputWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/ConversationStatistics",
+          "description": "If showStats=true was specified in the request this field will contain information about the conversation payload."
+        },
         "conversationItems": {
           "type": "array",
           "description": "List of conversationItems",
@@ -1845,12 +1874,9 @@
         }
       },
       "required": [
+        "id",
+        "warnings",
         "conversationItems"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationResultBase"
-        }
       ]
     },
     "ConversationalSentimentTaskParameters": {
@@ -1915,6 +1941,22 @@
       "type": "object",
       "description": "Conversations Summary Result",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty conversation identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered in processing the document.",
+          "items": {
+            "$ref": "#/definitions/InputWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/ConversationStatistics",
+          "description": "If showStats=true was specified in the request this field will contain information about the conversation payload."
+        },
         "summaries": {
           "type": "array",
           "description": "array of summaries",
@@ -1925,12 +1967,9 @@
         }
       },
       "required": [
+        "id",
+        "warnings",
         "summaries"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationResultBase"
-        }
       ]
     },
     "CurrencyResolution": {

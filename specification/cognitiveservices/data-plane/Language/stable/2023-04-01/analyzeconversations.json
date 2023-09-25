@@ -1530,6 +1530,22 @@
       "type": "object",
       "description": "Conversations Summary Result",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty conversation identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered in processing the document.",
+          "items": {
+            "$ref": "#/definitions/InputWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/ConversationStatistics",
+          "description": "If showStats=true was specified in the request this field will contain information about the conversation payload."
+        },
         "summaries": {
           "type": "array",
           "description": "array of summaries",
@@ -1540,12 +1556,9 @@
         }
       },
       "required": [
+        "id",
+        "warnings",
         "summaries"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConversationResultBase"
-        }
       ]
     },
     "CurrencyResolution": {

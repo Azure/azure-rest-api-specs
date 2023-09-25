@@ -881,7 +881,8 @@ model ConversationSentimentResults extends PreBuiltResult{
 
 @added(Versions.v2023_04_15_preview)
 @doc("The result from sentiment analysis operation for each conversation.")
-model ConversationSentimentResultsConversation extends ConversationResultBase{
+model ConversationSentimentResultsConversation{
+  ...ConversationResultBase;
   ...ConversationSentimentResult;
 }
 
@@ -949,7 +950,8 @@ model ConversationPiiResults extends PreBuiltResult{
 
 @added(Versions.v2023_04_15_preview)
 @doc("Conversation PII result item")
-model ConversationalPiiResultWithResultBase extends ConversationResultBase{
+model ConversationalPiiResultWithResultBase{
+  ...ConversationResultBase;
   ...ConversationPiiResult;
 }
 
@@ -1146,7 +1148,8 @@ model CustomSummaryResult extends SummaryResultBase{
 
 @doc("Conversations Summary Result")
 @added(Versions.v2023_04_01)
-model ConversationsSummaryResult extends ConversationResultBase {
+model ConversationsSummaryResult{
+  ...ConversationResultBase;
   @doc("array of summaries")
   summaries: Array<SummaryResultItem>;
 }
