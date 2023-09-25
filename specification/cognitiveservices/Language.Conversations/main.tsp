@@ -681,6 +681,7 @@ model Tasks {
   total: int32;
 
   @doc("List of results from tasks (if available).")
+  @lroResult
   items?: Array<AnalyzeConversationJobResult>;
 };
 
@@ -868,7 +869,6 @@ model AnalyzeConversationSentimentResult extends AnalyzeConversationJobResult {
   kind: AnalyzeConversationResultsKind.ConversationalSentimentResults;
 
   @doc("The result from sentiment analysis operation for each conversation.")
-  @lroResult
   results: ConversationSentimentResults
 }
 
@@ -937,7 +937,6 @@ model AnalyzeConversationConversationPiiResult extends AnalyzeConversationJobRes
   kind: AnalyzeConversationResultsKind.ConversationalPIIResults;
 
   @doc("results")
-  @lroResult
   results: ConversationPiiResults;
 }
 
@@ -1113,7 +1112,6 @@ model AnalyzeConversationSummarizationResult extends AnalyzeConversationJobResul
   kind: AnalyzeConversationResultsKind.ConversationalSummarizationResults;
 
   @doc("results")
-  @lroResult
   results: SummaryResult;
 }
 
@@ -1124,7 +1122,6 @@ model AnalyzeCustomConversationSummarizationResult extends AnalyzeConversationJo
   kind: AnalyzeConversationResultsKind.CustomConversationalSummarizationResults;
 
   @doc("Custom Summary Result")
-  @lroResult
   results: CustomSummaryResult
 }
 
