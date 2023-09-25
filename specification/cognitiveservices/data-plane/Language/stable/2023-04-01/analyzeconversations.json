@@ -3056,6 +3056,13 @@
       "type": "object",
       "description": "Summary Results",
       "properties": {
+        "conversations": {
+          "type": "array",
+          "description": "array of conversations",
+          "items": {
+            "$ref": "#/definitions/ConversationsSummaryResult"
+          }
+        },
         "errors": {
           "type": "array",
           "description": "Errors by document id.",
@@ -3073,13 +3080,9 @@
         }
       },
       "required": [
+        "conversations",
         "errors",
         "modelVersion"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SummaryResultBase"
-        }
       ]
     },
     "SummaryResultBase": {

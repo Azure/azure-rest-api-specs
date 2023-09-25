@@ -1136,14 +1136,16 @@ model SummaryResultBase {
 
 @doc("Summary Results")
 @added(Versions.v2023_04_01)
-model SummaryResult extends SummaryResultBase{
+model SummaryResult{
+  ...SummaryResultBase;
   ...PreBuiltResult;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Custom Summary Results")
 model CustomSummaryResult extends SummaryResultBase{
- ...CustomResult;
+  ...SummaryResultBase;
+  ...CustomResult;
 }
 
 @doc("Conversations Summary Result")
