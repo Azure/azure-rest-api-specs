@@ -23,6 +23,22 @@
           "facetable": false
         },
         {
+          "name": "descriptionEmbedding",
+          "type": "Collection(Edm.Single)",
+          "searchable": true,
+          "filterable": false,
+          "retrievable": true,
+          "sortable": false,
+          "facetable": false,
+          "key": false,
+          "indexAnalyzer": null,
+          "searchAnalyzer": null,
+          "analyzer": null,
+          "synonymMaps": [],
+          "dimensions": 1536,
+          "vectorSearchProfile": "myHnswProfile"
+        },
+        {
           "name": "description_fr",
           "type": "Edm.String",
           "filterable": false,
@@ -150,6 +166,40 @@
                   "fieldName": "category"
                 }
               ]
+            }
+          }
+        ]
+      },
+      "vectorSearch": {
+        "profiles": [
+          {
+            "name": "myHnswProfile",
+            "algorithm": "myHnsw",
+            "vectorizer": "myOpenAi"
+          },
+          {
+            "name": "myAlgorithm",
+            "algorithm": "myHnsw"
+          }
+        ],
+        "algorithms": [
+          {
+            "name": "myHnsw",
+            "kind": "hnsw",
+            "hnswParameters": {
+              "m": 4,
+              "metric": "cosine"
+            }
+          }
+        ],
+        "vectorizers": [
+          {
+            "name": "myOpenAi",
+            "kind": "azureOpenAI",
+            "azureOpenAIParameters": {
+              "resourceUri": "resourceurl",
+              "deploymentId": "text-embedding-ada-002",
+              "apiKey": "topsecretkey"
             }
           }
         ]
