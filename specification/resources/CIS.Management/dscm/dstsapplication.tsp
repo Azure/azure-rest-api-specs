@@ -154,8 +154,8 @@ interface DstsApplication {
     "ListByResourceGroup DstsApplication"
   )
   listByResourceGroup is ArmResourceListByParent<DstsApplicationResource>;
-  @example("./examples/DstsApplication_Get.json", "Get DstsApplication")
-  get is ArmResourceRead<DstsApplicationResource>;
+  // @example("./examples/DstsApplication_Get.json", "Get DstsApplication")
+  // get is ArmResourceRead<DstsApplicationResource>;
   @example("./examples/DstsApplication_Delete.json", "Delete DstsApplication")
   delete is ArmResourceDeleteAsync<DstsApplicationResource>;
 }
