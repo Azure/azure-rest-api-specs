@@ -27,15 +27,28 @@ These are the global settings for the vmware.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-03
+tag: package-2023-10
 ```
 
 
+### Tag: package-2023-10
+
+These settings apply only when `--tag=package-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10'
+input-file:
+  - Microsoft.ConnectedVMwarevSphere/stable/2023-10-01/connectedvmware.json
+suppressions:    
+  - code:  TopLevelResourcesListBySubscription
+    reason: VirtualMachineInstance resource is an ARM extension resource and does not support List by subscription API.  
+    where:
+      - $.definitions.VirtualMachineInstance
+```
 ### Tag: package-preview-2023-03
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-03'
+``` yaml $(tag) == 'package-preview-2023-03'
 input-file:
   - Microsoft.ConnectedVMwarevSphere/preview/2023-03-01-preview/connectedvmware.json
 suppressions:    
