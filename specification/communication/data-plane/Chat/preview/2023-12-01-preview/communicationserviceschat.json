@@ -29,22 +29,15 @@
           },
           {
             "in": "header",
-            "name": "x-content-length",
+            "name": "stream-content-length",
             "description": "The content length of the image body.",
             "required": true,
             "type": "string"
           },
           {
             "in": "header",
-            "name": "x-post-filename",
+            "name": "image-filename",
             "description": "The file name of the image.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "header",
-            "name": "x-post-sharing-mode",
-            "description": "The share mode, options of teamsImage or teamsInlineImage",
             "required": false,
             "type": "string"
           },
@@ -1334,28 +1327,8 @@
           "example": "0-image-w4y58hfdu82374832"
         },
         "attachmentType": {
-          "description": "this field would be teamsImage",
+          "description": "This field would be teams inline Image",
           "example": "teamsInlineImage"
-        },
-        "contentType": {
-          "$ref": "#/definitions/contentType"
-        },
-        "name": {
-          "description": "The name of the image",
-          "type": "string",
-          "example": "sample.png"
-        },
-        "url": {
-          "description": "The URL where the image can be downloaded",
-          "type": "string",
-          "format": "uri",
-          "example": "https://{geoChatGW}/threads/{chatThreadId}/images/{imageId}/views/original"
-        },
-        "previewUrl": {
-          "description": "The URL where the preview of the image can be downloaded",
-          "type": "string",
-          "format": "uri",
-          "example": "https://{geoChatGW}/threads/{chatThreadId}/images/{imageId}/views/preview"
         }
       }
     },
@@ -1543,8 +1516,7 @@
       "description": "An attachment in a chat message.",
       "required": [
         "id",
-        "attachmentType",
-        "url"
+        "attachmentType"
       ],
       "type": "object",
       "properties": {
