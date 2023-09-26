@@ -50,18 +50,9 @@
     },
     {
       "name": "UpdateRuns"
-<<<<<<< HEAD
-<<<<<<< HEAD
     },
     {
       "name": "FleetUpdateStrategies"
-=======
->>>>>>> ac616c3619 (Adds base for updating Microsoft.ContainerService/fleet from version preview/2023-06-15-preview to version 2023-08-15-preview)
-=======
-    },
-    {
-      "name": "FleetUpdateStrategies"
->>>>>>> 69af7c5c07 ([Fleet][Dev] Strategy resource API (#25582))
     }
   ],
   "paths": {
@@ -1371,10 +1362,6 @@
         },
         "x-ms-long-running-operation": true
       }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 69af7c5c07 ([Fleet][Dev] Strategy resource API (#25582))
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateStrategies": {
       "get": {
@@ -1668,11 +1655,6 @@
         },
         "x-ms-long-running-operation": true
       }
-<<<<<<< HEAD
-=======
->>>>>>> ac616c3619 (Adds base for updating Microsoft.ContainerService/fleet from version preview/2023-06-15-preview to version 2023-08-15-preview)
-=======
->>>>>>> 69af7c5c07 ([Fleet][Dev] Strategy resource API (#25582))
     }
   },
   "definitions": {
@@ -1717,10 +1699,6 @@
             "read",
             "create"
           ]
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> d158b9b8b6 ([Fleet] Move VMSize into AgentProfile (#25805))
         },
         "vmSize": {
           "type": "string",
@@ -1729,11 +1707,6 @@
             "read",
             "create"
           ]
-<<<<<<< HEAD
-=======
->>>>>>> ac616c3619 (Adds base for updating Microsoft.ContainerService/fleet from version preview/2023-06-15-preview to version 2023-08-15-preview)
-=======
->>>>>>> d158b9b8b6 ([Fleet] Move VMSize into AgentProfile (#25805))
         }
       }
     },
@@ -1852,33 +1825,11 @@
           "type": "string",
           "description": "The Kubernetes version of the Fleet hub.",
           "readOnly": true
-<<<<<<< HEAD
-<<<<<<< HEAD
         },
         "portalFqdn": {
           "type": "string",
           "description": "The Azure Portal FQDN of the Fleet hub.",
           "readOnly": true
-=======
->>>>>>> ac616c3619 (Adds base for updating Microsoft.ContainerService/fleet from version preview/2023-06-15-preview to version 2023-08-15-preview)
-=======
-        },
-        "portalFqdn": {
-          "type": "string",
-          "description": "The Azure Portal FQDN of the Fleet hub.",
-          "readOnly": true
-<<<<<<< HEAD
-        },
-        "vmSize": {
-          "type": "string",
-          "description": "The virtual machine size of the Fleet hub.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
->>>>>>> 092b424f5c ([Fleet] Add VMSize to hub profile (#25709))
-=======
->>>>>>> d158b9b8b6 ([Fleet] Move VMSize into AgentProfile (#25805))
         }
       }
     },
@@ -2129,10 +2080,6 @@
         ]
       }
     },
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 69af7c5c07 ([Fleet][Dev] Strategy resource API (#25582))
     "FleetUpdateStrategy": {
       "type": "object",
       "description": "Defines a multi-stage process to perform update operations across members of a Fleet.",
@@ -2244,11 +2191,6 @@
         ]
       }
     },
-<<<<<<< HEAD
-=======
->>>>>>> ac616c3619 (Adds base for updating Microsoft.ContainerService/fleet from version preview/2023-06-15-preview to version 2023-08-15-preview)
-=======
->>>>>>> 69af7c5c07 ([Fleet][Dev] Strategy resource API (#25582))
     "KubernetesVersion": {
       "type": "string"
     },
@@ -2432,15 +2374,7 @@
       "properties": {
         "name": {
           "type": "string",
-<<<<<<< HEAD
-<<<<<<< HEAD
           "description": "Name of the group.\nIt must match a group name of an existing fleet member. ",
-=======
-          "description": "The name of the Fleet member group to update. \nIt should match the name of an existing FleetMember group.\nA group can only appear once across all UpdateStages in the UpdateRun.",
->>>>>>> ac616c3619 (Adds base for updating Microsoft.ContainerService/fleet from version preview/2023-06-15-preview to version 2023-08-15-preview)
-=======
-          "description": "Name of the group.\nIt must match a group name of an existing fleet member. ",
->>>>>>> 69af7c5c07 ([Fleet][Dev] Strategy resource API (#25582))
           "minLength": 1,
           "maxLength": 50,
           "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
@@ -2479,15 +2413,7 @@
     },
     "UpdateRun": {
       "type": "object",
-<<<<<<< HEAD
-<<<<<<< HEAD
       "description": "A multi-stage process to perform update operations across members of a Fleet.",
-=======
-      "description": "An UpdateRun is a multi-stage process to perform update operations across members of a Fleet.",
->>>>>>> ac616c3619 (Adds base for updating Microsoft.ContainerService/fleet from version preview/2023-06-15-preview to version 2023-08-15-preview)
-=======
-      "description": "A multi-stage process to perform update operations across members of a Fleet.",
->>>>>>> 69af7c5c07 ([Fleet][Dev] Strategy resource API (#25582))
       "properties": {
         "properties": {
           "$ref": "#/definitions/UpdateRunProperties",
@@ -2540,19 +2466,10 @@
           "description": "The provisioning state of the UpdateRun resource.",
           "readOnly": true
         },
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 69af7c5c07 ([Fleet][Dev] Strategy resource API (#25582))
         "updateStrategyId": {
           "$ref": "#/definitions/FleetUpdateStrategyResourceId",
           "description": "The resource id of the FleetUpdateStrategy resource to reference.\n\nWhen creating a new run, there are three ways to define a strategy for the run:\n1. Define a new strategy in place: Set the \"strategy\" field.\n2. Use an existing strategy: Set the \"updateStrategyId\" field. (since 2023-08-15-preview)\n3. Use the default strategy to update all the members one by one: Leave both \"updateStrategyId\" and \"strategy\" unset. (since 2023-08-15-preview)\n\nSetting both \"updateStrategyId\" and \"strategy\" is invalid.\n\nUpdateRuns created by \"updateStrategyId\" snapshot the referenced UpdateStrategy at the time of creation and store it in the \"strategy\" field. \nSubsequent changes to the referenced FleetUpdateStrategy resource do not propagate. \nUpdateRunStrategy changes can be made directly on the \"strategy\" field before launching the UpdateRun."
         },
-<<<<<<< HEAD
-=======
->>>>>>> ac616c3619 (Adds base for updating Microsoft.ContainerService/fleet from version preview/2023-06-15-preview to version 2023-08-15-preview)
-=======
->>>>>>> 69af7c5c07 ([Fleet][Dev] Strategy resource API (#25582))
         "strategy": {
           "$ref": "#/definitions/UpdateRunStrategy",
           "description": "The strategy defines the order in which the clusters will be updated. \nIf not set, all members will be updated sequentially. The UpdateRun status will show a single UpdateStage and a single UpdateGroup targeting all members.\nThe strategy of the UpdateRun can be modified until the run is started."
@@ -2630,27 +2547,11 @@
     },
     "UpdateRunStrategy": {
       "type": "object",
-<<<<<<< HEAD
-<<<<<<< HEAD
       "description": "Defines the update sequence of the clusters via stages and groups.\n\nStages within a run are executed sequentially one after another.\nGroups within a stage are executed in parallel.\nMember clusters within a group are updated sequentially one after another.\n\nA valid strategy contains no duplicate groups within or across stages.",
       "properties": {
         "stages": {
           "type": "array",
           "description": "The list of stages that compose this update run. Min size: 1.",
-=======
-      "description": "The UpdateRunStrategy configures the sequence of Stages and Groups in which the clusters will be updated.",
-      "properties": {
-        "stages": {
-          "type": "array",
-          "description": "The list of stages that compose this update run.",
->>>>>>> ac616c3619 (Adds base for updating Microsoft.ContainerService/fleet from version preview/2023-06-15-preview to version 2023-08-15-preview)
-=======
-      "description": "Defines the update sequence of the clusters via stages and groups.\n\nStages within a run are executed sequentially one after another.\nGroups within a stage are executed in parallel.\nMember clusters within a group are updated sequentially one after another.\n\nA valid strategy contains no duplicate groups within or across stages.",
-      "properties": {
-        "stages": {
-          "type": "array",
-          "description": "The list of stages that compose this update run. Min size: 1.",
->>>>>>> 69af7c5c07 ([Fleet][Dev] Strategy resource API (#25582))
           "items": {
             "$ref": "#/definitions/UpdateStage"
           },
@@ -2665,15 +2566,7 @@
     },
     "UpdateStage": {
       "type": "object",
-<<<<<<< HEAD
-<<<<<<< HEAD
       "description": "Defines a stage which contains the groups to update and the steps to take (e.g., wait for a time period) before starting the next stage.",
-=======
-      "description": "Contains the groups to be updated by an UpdateRun.\nUpdate order:\n- Sequential between stages: Stages run sequentially. The previous stage must complete before the next one starts.\n- Parallel within a stage: Groups within a stage run in parallel.\n- Sequential within a group: Clusters within a group are updated sequentially.",
->>>>>>> ac616c3619 (Adds base for updating Microsoft.ContainerService/fleet from version preview/2023-06-15-preview to version 2023-08-15-preview)
-=======
-      "description": "Defines a stage which contains the groups to update and the steps to take (e.g., wait for a time period) before starting the next stage.",
->>>>>>> 69af7c5c07 ([Fleet][Dev] Strategy resource API (#25582))
       "properties": {
         "name": {
           "type": "string",
@@ -2684,15 +2577,7 @@
         },
         "groups": {
           "type": "array",
-<<<<<<< HEAD
-<<<<<<< HEAD
           "description": "Defines the groups to be executed in parallel in this stage. Duplicate groups are not allowed. Min size: 1.",
-=======
-          "description": "A list of group names that compose the stage.\nThe groups will be updated in parallel. Each group name can only appear once in the UpdateRun.",
->>>>>>> ac616c3619 (Adds base for updating Microsoft.ContainerService/fleet from version preview/2023-06-15-preview to version 2023-08-15-preview)
-=======
-          "description": "Defines the groups to be executed in parallel in this stage. Duplicate groups are not allowed. Min size: 1.",
->>>>>>> 69af7c5c07 ([Fleet][Dev] Strategy resource API (#25582))
           "items": {
             "$ref": "#/definitions/UpdateGroup"
           },
