@@ -34,12 +34,48 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Edge/siteAwareResourceTypes": {
+      "get": {
+        "tags": [
+          "SiteAwareResourceTypes"
+        ],
+        "operationId": "SiteAwareResourceTypes_Get",
+        "description": "List Singleton SiteAwareResourceTypes Object.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List by Subscription": {
+            "$ref": "./examples/ListSiteAwareResourceTypes.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Edge/siteAwareResourceTypes/default": {
       "get": {
         "tags": [
           "SiteAwareResourceTypes"
         ],
-        "operationId": "SiteAwareResourceTypes_List",
+        "operationId": "SiteAwareResourceTypes_Get",
         "description": "Get Site Aware Resource Types",
         "parameters": [
           {
@@ -69,6 +105,27 @@
     }
   },
   "definitions": {
+    "SiteAwareResourceTypesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SiteAwareResourceTypes"
+          },
+          "description": "The list returning singleton instance of siteAwareResourceTypes object."
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response returning singleton instance of siteAwareResourceTypes object.",
+      "required": [
+        "value"
+      ]
+    },
     "SiteAwareResourceTypes": {
       "description": "Displays all the resource types which support Sites.",
       "type": "object",
