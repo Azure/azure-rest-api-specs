@@ -776,18 +776,21 @@
             "trafficCongestion": {
               "$ref": "#/definitions/TrafficCongestionEnum"
             },
+            "departureTime": {
+              "description": "The estimated departure time for the leg formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either departAt or arrivalAt. If not, then the UTC time will be used.",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "arrivalTime": {
+              "description": "The estimated arrival time for the leg formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either departAt or arrivalAt. If not, then the UTC time will be used.",
+              "format": "date-time",
+              "readOnly": true
+            },
             "legs": {
               "description": "An array of route Legs. Check route Leg object description for more information.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Leg"
-              }
-            },
-            "optimizedWaypoints": {
-              "description": "Optimized sequence of waypoints. It shows the index from the user provided waypoint sequence for the original and optimized list.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/OptimizedWaypoint"
               }
             }
           }
@@ -1885,24 +1888,6 @@
             "description": "RouteTravelMode is returned as \"other\" for the truck travelMode when the truck route is not available for a particular section of a route."
           }
         ]
-      }
-    },
-    "OptimizedWaypoint": {
-      "description": "Optimized way point object.",
-      "type": "object",
-      "properties": {
-        "providedIndex": {
-          "description": "Way point index provided by the user.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "optimizedIndex": {
-          "description": "Optimized way point index from the system.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        }
       }
     },
     "DirectionsBatchRequestItem": {
