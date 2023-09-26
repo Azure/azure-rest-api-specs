@@ -58,5 +58,5 @@ interface TestRunOperations {
     ListMetricNamespaces is LoadTestRun.listMetricNamespaces;
     ListMetrics is LoadTestRun.listMetrics;
     ListTestRuns is LoadTestRun.listTestRuns;
-    StopTestRun is LoadTestRun.stopTestRun;
+    StopTestRun is LoadTestRun.stop;
 };

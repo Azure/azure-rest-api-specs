@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "./models.tsp";
 import "@azure-tools/typespec-autorest";
 
@@ -10,6 +11,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Autorest;
+using OpenAPI;
 
 namespace Microsoft.LoadTestService;
 
@@ -38,7 +40,7 @@ numeric, underscore or hyphen characters.
       @body
       body: Test;
     },
-    ResourceCreatedOrOkResponse<Test>, {}, ErrorResponseBody
+    ResourceCreatedOrOkResponse<Test>
   >;
 
   @summary("Delete a test by its name.")
@@ -102,7 +104,7 @@ numeric, underscore or hyphen characters.
       @body
       body: bytes;
     },
-    ResourceCreatedResponse<TestFileInfo>, {}, ErrorResponseBody
+    ResourceCreatedResponse<TestFileInfo>
   >;
 
   @summary("Get test file by the file name.")
@@ -143,7 +145,7 @@ numeric, underscore or hyphen characters.
       @body
       body: TestAppComponents;
     },
-    ResourceCreatedOrOkResponse<TestAppComponents>, {}, ErrorResponseBody
+    ResourceCreatedOrOkResponse<TestAppComponents>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -161,7 +163,7 @@ numeric, underscore or hyphen characters.
       @path
       testId: string;
     },
-    TestAppComponents, {}, ErrorResponseBody
+    TestAppComponents
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -187,7 +189,7 @@ numeric, underscore or hyphen characters.
       @body
       body: TestServerMetricConfig;
     },
-    ResourceCreatedOrOkResponse<TestServerMetricConfig>, {}, ErrorResponseBody
+    ResourceCreatedOrOkResponse<TestServerMetricConfig>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -205,7 +207,7 @@ numeric, underscore or hyphen characters.
       @path
       testId: string;
     },
-    TestServerMetricConfig, {}, ErrorResponseBody
+    TestServerMetricConfig
   >;
 }
 
@@ -248,7 +250,7 @@ in the request body.
       @body
       body: TestRun;
     },
-    ResourceCreatedOrOkResponse<TestRun>, {}, ErrorResponseBody
+    ResourceCreatedOrOkResponse<TestRun>
   >;
 
   @summary("Delete a test run by its name.")
@@ -266,9 +268,11 @@ in the request body.
   @example("./examples/GetTestRunFile.json", "GetTestRunFile")
   getTestRunFile is StandardResourceOperations.ResourceRead<TestRunFileInfo>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id"
   @summary("Stop test run by name.")
   @doc("Stop test run by name.")
   @example("./examples/StopTestRun.json", "StopTestRun")
+  @operationId("StopTestRun")
   stop is StandardResourceOperations.ResourceAction<TestRun, {}, TestRun, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -286,7 +290,7 @@ numeric, underscore or hyphen characters.
       @path
       testRunId: string;
     },
-    MetricNamespaceCollection, {}, ErrorResponseBody
+    MetricNamespaceCollection
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -308,7 +312,7 @@ numeric, underscore or hyphen characters.
       @query
       metricNamespace: string;
     },
-    MetricDefinitionCollection, {}, ErrorResponseBody
+    MetricDefinitionCollection
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -353,13 +357,13 @@ The timespan of the query. It is a string with the following format 'startDateTi
       @body
       body?: MetricRequestPayload;
     },
-    Metrics, {}, ErrorResponseBody
+    Metrics
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("List the dimension values for the given metric dimension name.")
   @doc("List the dimension values for the given metric dimension name.")
-  @route("/test-runs/{testRunId}/metrics/dimensions/{name}/values")
+  @route("/test-runs/{testRunId}/metric-dimensions/{name}/values")
   @example("./examples/ListMetricDimensionValues.json", "ListMetricDimensionValues")
   listMetricDimensionValues is Azure.Core.Foundations.Operation<
   {
@@ -376,7 +380,7 @@ numeric, underscore or hyphen characters.
 
     ...MetricDimensions;
   },
-  DimensionValueList, {}, ErrorResponseBody
+  DimensionValueList
 >;
 
 
@@ -403,7 +407,7 @@ numeric, underscore or hyphen characters.
       @body
       body: TestRunAppComponents;
     },
-    ResourceCreatedOrOkResponse<TestRunAppComponents>, {}, ErrorResponseBody
+    ResourceCreatedOrOkResponse<TestRunAppComponents>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -427,7 +431,7 @@ numeric, underscore or hyphen characters.
       @path
       testRunId: string;
     },
-    TestRunAppComponents, {}, ErrorResponseBody
+    TestRunAppComponents
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -453,7 +457,7 @@ numeric, underscore or hyphen characters.
       @body
       body: TestRunServerMetricConfig;
     },
-    ResourceCreatedOrOkResponse<TestRunServerMetricConfig>, {}, ErrorResponseBody
+    ResourceCreatedOrOkResponse<TestRunServerMetricConfig>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -470,6 +474,6 @@ numeric, underscore or hyphen characters.
 """)
       @path
       testRunId: string;
-  }, TestRunServerMetricConfig, {}, ErrorResponseBody>;
+  }, TestRunServerMetricConfig>;
 
 };

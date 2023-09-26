@@ -60,7 +60,10 @@ enum FileType {
   @doc("If file is jmx script.") JMX_FILE,
   @doc("If file is user properties.") USER_PROPERTIES,
   @doc("If file is not any of other supported type.") ADDITIONAL_ARTIFACTS,
+  @added(APIVersions.v2023_04_01_preview)
   @doc("If the file is a compressed archive containing a collection of various artifacts or resources.") ZIPPED_ARTIFACTS,
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("If file is a json config for the Url tests") URL_TEST_CONFIG,
 }
 
 @doc("File status")
@@ -151,12 +154,10 @@ enum Interval {
 @added(APIVersions.v2023_04_01_preview)
 @doc("Test type")
 enum TestType{
-  @doc("Quick Test")
-  QuickTest,
   @doc("URL Test")
-  URLTest,
+  URL,
   @doc("JMX Test")
-  JMXTest
+  JMX
 }
 
 @doc("File info")
@@ -361,7 +362,7 @@ not required to upload.
   optionalLoadTestConfig?: OptionalLoadTestConfig;
 
   @added(APIVersions.v2023_04_01_preview)
-  @doc("Type of test. e.g. QuickTest, UrlTest or JMXTest")
+  @doc("Type of test. e.g. Url or JMX")
   testType?: TestType;
 }
 

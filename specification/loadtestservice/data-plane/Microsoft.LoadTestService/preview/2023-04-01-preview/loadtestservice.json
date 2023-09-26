@@ -228,11 +228,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
@@ -297,7 +297,7 @@
     },
     "/test-runs/{testRunId}:stop": {
       "post": {
-        "operationId": "LoadTestRun_Stop",
+        "operationId": "StopTestRun",
         "tags": [
           "TestRun"
         ],
@@ -374,11 +374,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
@@ -440,11 +440,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
@@ -556,11 +556,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
@@ -572,6 +572,75 @@
           },
           "List the metric definitions for a load test run.": {
             "$ref": "./examples/ListTestRunMetricsDefinitions.json"
+          }
+        }
+      }
+    },
+    "/test-runs/{testRunId}/metric-dimensions/{name}/values": {
+      "get": {
+        "operationId": "LoadTestRun_ListMetricDimensionValues",
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "List the dimension values for the given metric dimension name.",
+        "description": "List the dimension values for the given metric dimension name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Dimension name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/MetricDimensions.interval"
+          },
+          {
+            "$ref": "#/parameters/MetricDimensions.metricName"
+          },
+          {
+            "$ref": "#/parameters/MetricDimensions.metricNamespace"
+          },
+          {
+            "$ref": "#/parameters/MetricDimensions.timespan"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DimensionValueList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListMetricDimensionValues": {
+            "$ref": "./examples/ListMetricDimensionValues.json"
+          },
+          "List the dimension values for the given metric dimension name.": {
+            "$ref": "./examples/ListMetricDimensionValues.json"
           }
         }
       }
@@ -606,11 +675,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
@@ -739,11 +808,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
@@ -759,75 +828,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/test-runs/{testRunId}/metrics/dimensions/{name}/values": {
-      "get": {
-        "operationId": "LoadTestRun_ListMetricDimensionValues",
-        "tags": [
-          "TestRun"
-        ],
-        "summary": "List the dimension values for the given metric dimension name.",
-        "description": "List the dimension values for the given metric dimension name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "testRunId",
-            "in": "path",
-            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Dimension name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/MetricDimensions.interval"
-          },
-          {
-            "$ref": "#/parameters/MetricDimensions.metricName"
-          },
-          {
-            "$ref": "#/parameters/MetricDimensions.metricNamespace"
-          },
-          {
-            "$ref": "#/parameters/MetricDimensions.timespan"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DimensionValueList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListMetricDimensionValues": {
-            "$ref": "./examples/ListMetricDimensionValues.json"
-          },
-          "List the dimension values for the given metric dimension name.": {
-            "$ref": "./examples/ListMetricDimensionValues.json"
-          }
         }
       }
     },
@@ -861,11 +861,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
@@ -927,11 +927,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
@@ -1110,11 +1110,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
@@ -1207,11 +1207,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
@@ -1273,11 +1273,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
@@ -1463,7 +1463,8 @@
               "JMX_FILE",
               "USER_PROPERTIES",
               "ADDITIONAL_ARTIFACTS",
-              "ZIPPED_ARTIFACTS"
+              "ZIPPED_ARTIFACTS",
+              "URL_TEST_CONFIG"
             ],
             "x-ms-enum": {
               "name": "FileType",
@@ -1488,6 +1489,11 @@
                   "name": "ZIPPED_ARTIFACTS",
                   "value": "ZIPPED_ARTIFACTS",
                   "description": "If the file is a compressed archive containing a collection of various artifacts or resources."
+                },
+                {
+                  "name": "URL_TEST_CONFIG",
+                  "value": "URL_TEST_CONFIG",
+                  "description": "If file is a json config for the Url tests"
                 }
               ]
             }
@@ -1513,11 +1519,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
@@ -1617,11 +1623,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
@@ -1683,11 +1689,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
+                "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
             }
@@ -2116,7 +2122,8 @@
         "JMX_FILE",
         "USER_PROPERTIES",
         "ADDITIONAL_ARTIFACTS",
-        "ZIPPED_ARTIFACTS"
+        "ZIPPED_ARTIFACTS",
+        "URL_TEST_CONFIG"
       ],
       "x-ms-enum": {
         "name": "FileType",
@@ -2141,6 +2148,11 @@
             "name": "ZIPPED_ARTIFACTS",
             "value": "ZIPPED_ARTIFACTS",
             "description": "If the file is a compressed archive containing a collection of various artifacts or resources."
+          },
+          {
+            "name": "URL_TEST_CONFIG",
+            "value": "URL_TEST_CONFIG",
+            "description": "If file is a json config for the Url tests"
           }
         ]
       }
@@ -2210,7 +2222,7 @@
         },
         "testType": {
           "$ref": "#/definitions/TestType",
-          "description": "Type of test. e.g. QuickTest, UrlTest or JMXTest"
+          "description": "Type of test. e.g. Url or JMX"
         }
       }
     },
@@ -3694,27 +3706,21 @@
       "type": "string",
       "description": "Test type",
       "enum": [
-        "QuickTest",
-        "URLTest",
-        "JMXTest"
+        "URL",
+        "JMX"
       ],
       "x-ms-enum": {
         "name": "TestType",
         "modelAsString": true,
         "values": [
           {
-            "name": "QuickTest",
-            "value": "QuickTest",
-            "description": "Quick Test"
-          },
-          {
-            "name": "URLTest",
-            "value": "URLTest",
+            "name": "URL",
+            "value": "URL",
             "description": "URL Test"
           },
           {
-            "name": "JMXTest",
-            "value": "JMXTest",
+            "name": "JMX",
+            "value": "JMX",
             "description": "JMX Test"
           }
         ]
