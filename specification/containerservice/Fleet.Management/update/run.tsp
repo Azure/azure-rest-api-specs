@@ -4,7 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./helpers.tsp";
+import "./../helpers.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -19,7 +19,7 @@ namespace Microsoft.ContainerService;
 
 @resource("updateRuns")
 @parentResource(Fleet)
-@doc("An UpdateRun is a multi-stage process to perform update operations across members of a Fleet.")
+@doc("A multi-stage process to perform update operations across members of a Fleet.")
 model UpdateRun is ProxyResource<UpdateRunProperties> {
   @doc("The name of the UpdateRun resource.")
   @key("updateRunName")
@@ -39,11 +39,35 @@ enum UpdateRunProvisioningState {
   ...ResourceProvisioningState,
 }
 
+scalar FleetUpdateStrategyResourceId
+  extends Azure.ResourceManager.ResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/fleets/updateStrategies",
+    }
+  ]>;
+
 @doc("The properties of the UpdateRun.")
 model UpdateRunProperties {
   @visibility("read")
   @doc("The provisioning state of the UpdateRun resource.")
   provisioningState?: UpdateRunProvisioningState;
+
+  @doc("""
+    The resource id of the FleetUpdateStrategy resource to reference.
+
+    When creating a new run, there are three ways to define a strategy for the run:
+    1. Define a new strategy in place: Set the "strategy" field.
+    2. Use an existing strategy: Set the "updateStrategyId" field. (since 2023-08-15-preview)
+    3. Use the default strategy to update all the members one by one: Leave both "updateStrategyId" and "strategy" unset. (since 2023-08-15-preview)
+
+    Setting both "updateStrategyId" and "strategy" is invalid.
+
+    UpdateRuns created by "updateStrategyId" snapshot the referenced UpdateStrategy at the time of creation and store it in the "strategy" field. 
+    Subsequent changes to the referenced FleetUpdateStrategy resource do not propagate. 
+    UpdateRunStrategy changes can be made directly on the "strategy" field before launching the UpdateRun.
+    """)
+  @added(Versions.v2023_08_15_preview)
+  updateStrategyId?: FleetUpdateStrategyResourceId;
 
   @doc("""
 The strategy defines the order in which the clusters will be updated. 
@@ -58,51 +82,6 @@ The strategy of the UpdateRun can be modified until the run is started.
   @visibility("read")
   @doc("The status of the UpdateRun.")
   status?: UpdateRunStatus;
-}
-
-@doc("The UpdateRunStrategy configures the sequence of Stages and Groups in which the clusters will be updated.")
-model UpdateRunStrategy {
-  @extension("x-ms-identifiers", ["name"])
-  @doc("The list of stages that compose this update run.")
-  stages: UpdateStage[];
-}
-
-@doc("""
-Contains the groups to be updated by an UpdateRun.
-Update order:
-- Sequential between stages: Stages run sequentially. The previous stage must complete before the next one starts.
-- Parallel within a stage: Groups within a stage run in parallel.
-- Sequential within a group: Clusters within a group are updated sequentially.
-""")
-model UpdateStage {
-  @doc("The name of the stage. Must be unique within the UpdateRun.")
-  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
-  @minLength(1)
-  @maxLength(50)
-  name: string;
-
-  @extension("x-ms-identifiers", ["name"])
-  @doc("""
-A list of group names that compose the stage.
-The groups will be updated in parallel. Each group name can only appear once in the UpdateRun.
-""")
-  groups?: UpdateGroup[];
-
-  @doc("The time in seconds to wait at the end of this stage before starting the next one. Defaults to 0 seconds if unspecified.")
-  afterStageWaitInSeconds?: int32;
-}
-
-@doc("A group to be updated.")
-model UpdateGroup {
-  @doc("""
-The name of the Fleet member group to update. 
-It should match the name of an existing FleetMember group.
-A group can only appear once across all UpdateStages in the UpdateRun.
-""")
-  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
-  @minLength(1)
-  @maxLength(50)
-  name: string;
 }
 
 @doc("The update to be applied to the ManagedClusters.")
