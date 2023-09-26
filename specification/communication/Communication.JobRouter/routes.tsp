@@ -50,11 +50,7 @@ interface JobRouterAdministrationOperations {
   @route("/routing/classificationPolicies")
   @get
   listClassificationPolicies is Azure.Core.Foundations.Operation<
-    {
-      @doc("Maximum page size.")
-      @query
-      maxpagesize?: int32;
-    },
+    ListClassificationPoliciesQueryParams,
     ClassificationPolicyCollection
   >;
   
@@ -87,11 +83,7 @@ interface JobRouterAdministrationOperations {
   @route("/routing/distributionPolicies")
   @get
   listDistributionPolicies is Azure.Core.Foundations.Operation<
-    {
-      @doc("Maximum page size.")
-      @query
-      maxpagesize?: int32;
-    },
+    ListDistributionPoliciesQueryParams,
     DistributionPolicyCollection
   >;
   
@@ -124,11 +116,7 @@ interface JobRouterAdministrationOperations {
   @route("/routing/exceptionPolicies")
   @get
   listExceptionPolicies is Azure.Core.Foundations.Operation<
-    {
-      @doc("Number of objects to return per page.")
-      @query
-      maxpagesize?: int32;
-    },
+    ListExceptionPoliciesQueryParams,
     ExceptionPolicyCollection
   >;
   
@@ -161,11 +149,7 @@ interface JobRouterAdministrationOperations {
   @route("/routing/queues")
   @get
   listQueues is Azure.Core.Foundations.Operation<
-    {
-      @doc("Number of objects to return per page.")
-      @query
-      maxpagesize?: int32;
-    },
+    ListQueuesQueryParams,
     RouterQueueCollection
   >;
 }
@@ -284,41 +268,7 @@ cancellation reason.
   @route("/routing/jobs")
   @get
   listJobs is Azure.Core.Foundations.Operation<
-    {
-      @doc("If specified, filter jobs by status.")
-      @query
-      status?: RouterJobStatusSelector = RouterJobStatusSelector.all;
-
-      @doc("If specified, filter jobs by queue.")
-      @query
-      queueId?: string;
-
-      @doc("If specified, filter jobs by channel.")
-      @query
-      channelId?: string;
-
-      @doc("If specified, filter jobs by classificationPolicy.")
-      @query
-      classificationPolicyId?: string;
-
-      @doc("""
-If specified, filter on jobs that was scheduled before or at given timestamp.
-Range: (-Inf, scheduledBefore].
-""")
-      @query
-      scheduledBefore?: utcDateTime;
-
-      @doc("""
-If specified, filter on jobs that was scheduled at or after given value. Range:
-[scheduledAfter, +Inf).
-""")
-      @query
-      scheduledAfter?: utcDateTime;
-
-      @doc("Number of objects to return per page.")
-      @query
-      maxpagesize?: int32;
-    },
+    ListJobQueryParams,
     RouterJobCollection
   >;
   
@@ -456,32 +406,7 @@ accepted the job already.
   @route("/routing/workers")
   @get
   listWorkers is Azure.Core.Foundations.Operation<
-    {
-      @doc("If specified, select workers by worker state.")
-      @query
-      state?: RouterWorkerStateSelector = RouterWorkerStateSelector.all;
-
-      @doc("If specified, select workers who have a channel configuration with this channel.")
-      @query
-      channelId?: string;
-
-      @doc("If specified, select workers who are assigned to this queue.")
-      @query
-      queueId?: string;
-
-      @doc("""
-If set to true, select only workers who have capacity for the channel specified
-by `channelId` or for any channel if `channelId` not specified. If set to
-false, then will return all workers including workers without any capacity for
-jobs. Defaults to false.
-""")
-      @query
-      hasCapacity?: boolean;
-
-      @doc("Number of objects to return per page.")
-      @query
-      maxpagesize?: int32;
-    },
+    ListWorkerQueryParams,
     RouterWorkerCollection
   >;
 }
