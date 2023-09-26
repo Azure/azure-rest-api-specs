@@ -1913,7 +1913,7 @@
       "description": "Model representing customer for connected cache resource",
       "properties": {
         "peeringDbLastUpdateTime": {
-          "type": "date-time",
+          "type": "string",
           "description": "last update timestamp of peering db update"
         },
         "CustomerProperties_Overview_CacheEfficiency": {
@@ -2189,7 +2189,7 @@
         },
         "CustomerAsn": {
           "type": "string",
-          "description": "asn (atonomous system number) of the customer entered value"
+          "description": "asn (autonomous system number) of the customer entered value"
         },
         "TransitState": {
           "type": "string",
@@ -2382,10 +2382,10 @@
         },
         "additionalCacheNodeProperties": {
           "type": "object",
-          "title": "Additional customer properties",
+          "title": "Additional cache node properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AdditionalCacheNodeProperties",
-          "description": "Additional properties for Mcc Customer entity"
+          "description": "Additional properties for Mcc cache node entity"
         },
         "statusCode": {
           "type": "string",
@@ -2442,8 +2442,12 @@
         "additionalCustomerProperties": {
           "type": "object",
           "title": "Additional customer properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AdditionalCustomerProperties",
+          "x-ms-client-flatten": true,          
+          "allOf": [
+            {
+              "$ref": "#/definitions/AdditionalCustomerProperties"
+            }
+          ],
           "description": "Additional properties for Mcc Customer entity"
         },
         "statusCode": {
