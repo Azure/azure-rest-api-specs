@@ -1060,20 +1060,23 @@ directive:
   - suppress: R4009
     from: apimpolicyfragments.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version. 
-  - suppress: PropertiesTypeObjectNoDefinition
-    from: definitions.json
-    where: $.definitions.PolicyRestrictionCollection.properties.nextLink
-    reason: Invalid error, nextLink is a string, not an object
-  - suppress: PropertiesTypeObjectNoDefinition
+suppressions:
+  - code: PropertiesTypeObjectNoDefinition
     from: definitions.json
     where: $.definitions.AllPoliciesCollection.properties.nextLink
     reason: Invalid error
-  - suppress: PropertiesTypeObjectNoDefinition
+  - code: PropertiesTypeObjectNoDefinition
     from: definitions.json
     where: $.definitions.PolicyRestrictionContractProperties
     reason: Invalid error
-  - suppress: PropertiesTypeObjectNoDefinition
+  - code: PropertiesTypeObjectNoDefinition
     from: definitions.json  
     where: $.definitions.AllPoliciesContractProperties
     reason: Invalid error
+  - code: PropertiesTypeObjectNoDefinition
+    from: definitions.json
+    where: $.definitions.PolicyRestrictionCollection.properties.nextLink
+    reason: Invalid error, nextLink is a string, not an object
 ```
+
+
