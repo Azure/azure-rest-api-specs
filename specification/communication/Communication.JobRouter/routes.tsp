@@ -53,7 +53,7 @@ interface JobRouterAdministrationOperations {
     {
       @doc("Maximum page size.")
       @query
-      maxpagesize: int32;
+      maxpagesize?: int32;
     },
     ClassificationPolicyCollection
   >;
@@ -90,7 +90,7 @@ interface JobRouterAdministrationOperations {
     {
       @doc("Maximum page size.")
       @query
-      maxpagesize: int32;
+      maxpagesize?: int32;
     },
     DistributionPolicyCollection
   >;
@@ -127,7 +127,7 @@ interface JobRouterAdministrationOperations {
     {
       @doc("Number of objects to return per page.")
       @query
-      maxpagesize: int32;
+      maxpagesize?: int32;
     },
     ExceptionPolicyCollection
   >;
@@ -164,7 +164,7 @@ interface JobRouterAdministrationOperations {
     {
       @doc("Number of objects to return per page.")
       @query
-      maxpagesize: int32;
+      maxpagesize?: int32;
     },
     RouterQueueCollection
   >;
@@ -209,9 +209,9 @@ interface JobRouterOperations {
 
       @doc("Request object for reclassifying a job.")
       @body
-      reclassifyJobRequest: {};
+      reclassifyJobRequest: ReclassifyJobRequest;
     },
-    void
+    ReclassfiyJobOkReponse
   >;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -236,7 +236,7 @@ cancellation reason.
       @body
       cancelJobRequest: CancelJobRequest;
     },
-    void
+    CancelJobResultWithOkResponse
   >;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -255,7 +255,7 @@ cancellation reason.
       @body
       completeJobRequest: CompleteJobRequest;
     },
-    void
+    CompleteJobResultWithOkResponse
   >;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -274,7 +274,7 @@ cancellation reason.
       @body
       closeJobRequest: CloseJobRequest;
     },
-    void
+    CloseJobResultResponse
   >;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -287,37 +287,37 @@ cancellation reason.
     {
       @doc("If specified, filter jobs by status.")
       @query
-      status: RouterJobStatusSelector;
+      status?: RouterJobStatusSelector = RouterJobStatusSelector.all;
 
       @doc("If specified, filter jobs by queue.")
       @query
-      queueId: string;
+      queueId?: string;
 
       @doc("If specified, filter jobs by channel.")
       @query
-      channelId: string;
+      channelId?: string;
 
       @doc("If specified, filter jobs by classificationPolicy.")
       @query
-      classificationPolicyId: string;
+      classificationPolicyId?: string;
 
       @doc("""
 If specified, filter on jobs that was scheduled before or at given timestamp.
 Range: (-Inf, scheduledBefore].
 """)
       @query
-      scheduledBefore: utcDateTime;
+      scheduledBefore?: utcDateTime;
 
       @doc("""
 If specified, filter on jobs that was scheduled at or after given value. Range:
 [scheduledAfter, +Inf).
 """)
       @query
-      scheduledAfter: utcDateTime;
+      scheduledAfter?: utcDateTime;
 
       @doc("Number of objects to return per page.")
       @query
-      maxpagesize: int32;
+      maxpagesize?: int32;
     },
     RouterJobCollection
   >;
@@ -459,15 +459,15 @@ accepted the job already.
     {
       @doc("If specified, select workers by worker state.")
       @query
-      state: RouterWorkerStateSelector;
+      state?: RouterWorkerStateSelector = RouterWorkerStateSelector.all;
 
       @doc("If specified, select workers who have a channel configuration with this channel.")
       @query
-      channelId: string;
+      channelId?: string;
 
       @doc("If specified, select workers who are assigned to this queue.")
       @query
-      queueId: string;
+      queueId?: string;
 
       @doc("""
 If set to true, select only workers who have capacity for the channel specified
@@ -476,11 +476,11 @@ false, then will return all workers including workers without any capacity for
 jobs. Defaults to false.
 """)
       @query
-      hasCapacity: boolean;
+      hasCapacity?: boolean;
 
       @doc("Number of objects to return per page.")
       @query
-      maxpagesize: int32;
+      maxpagesize?: int32;
     },
     RouterWorkerCollection
   >;
