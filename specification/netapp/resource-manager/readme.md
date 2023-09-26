@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Azure NetApp Files.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Azure NetApp Files, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,22 +15,31 @@ To build the SDK for Azure NetApp Files, simply [Install AutoRest](https://aka.m
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Azure NetApp Files API.
 
 ``` yaml
 title: NetAppManagementClient
 description: Microsoft NetApp Files Azure Resource Provider specification
 openapi-type: arm
-tag: package-netapp-2022-11-01
+tag: package-netapp-2023-05-01
 ```
 
+
+### Tag: package-netapp-2023-05-01
+
+These settings apply only when `--tag=package-netapp-2023-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-netapp-2023-05-01'
+input-file:
+  - Microsoft.NetApp/stable/2023-05-01/netapp.json
+```
 ### Tag: package-netapp-2022-11-01
 
 These settings apply only when `--tag=package-netapp-2022-11-01` is specified on the command line.
@@ -284,10 +293,9 @@ input-file:
 - Microsoft.NetApp/preview/2017-08-15/netapp.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -305,7 +313,6 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
-
 
 ## C#
 
@@ -326,8 +333,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-
 
 ## Terraform
 

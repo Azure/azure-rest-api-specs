@@ -1,0 +1,2126 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure OpenAI API",
+    "version": "2023-09-01-preview",
+    "description": "Azure OpenAI APIs for completions and search",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/openai",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus.api.cognitive.microsoft.com).",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "api-key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/deployments/{deploymentId}/audio/transcriptions": {
+      "post": {
+        "operationId": "GetAudioTranscriptionAsResponseObject",
+        "description": "Gets transcribed text and associated metadata from provided spoken audio data. Audio will be transcribed in the\nwritten language corresponding to the language it was spoken in.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.file"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.responseFormat"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.language"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.prompt"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.model"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AudioTranscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets transcribed text and associated metadata from provided spoken audio data.": {
+            "$ref": "./examples/audio_transcription_object.json"
+          }
+        }
+      }
+    },
+    "/deployments/{deploymentId}/audio/translations": {
+      "post": {
+        "operationId": "GetAudioTranslationAsResponseObject",
+        "description": "Gets English language transcribed text and associated metadata from provided spoken audio data.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.file"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.responseFormat"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.prompt"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.temperature"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.model"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AudioTranslation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets English language transcribed text and associated metadata from provided spoken audio data.": {
+            "$ref": "./examples/audio_translation_object.json"
+          }
+        }
+      }
+    },
+    "/deployments/{deploymentId}/chat/completions": {
+      "post": {
+        "operationId": "GetChatCompletions",
+        "description": "Gets chat completions for the provided chat messages.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatCompletionsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatCompletions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a completion for the provided prompt, parameters and chosen model.": {
+            "$ref": "./examples/chat_completions.json"
+          }
+        }
+      }
+    },
+    "/deployments/{deploymentId}/completions": {
+      "post": {
+        "operationId": "GetCompletions",
+        "description": "Gets completions for the provided input prompts.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CompletionsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Completions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a completion for the provided prompt, parameters and chosen model.": {
+            "$ref": "./examples/completions.json"
+          }
+        }
+      }
+    },
+    "/deployments/{deploymentId}/embeddings": {
+      "post": {
+        "operationId": "GetEmbeddings",
+        "description": "Return the embeddings for a given prompt.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmbeddingsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Embeddings"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Return the embeddings for a given prompt.": {
+            "$ref": "./examples/embeddings.json"
+          }
+        }
+      }
+    },
+    "/deployments/{deploymentId}/extensions/chat/completions": {
+      "post": {
+        "operationId": "GetChatCompletionsWithAzureExtensions",
+        "description": "Gets chat completions for the provided chat messages.\nThis is an Azure-specific version of chat completions that supports integration with configured data sources and\nother augmentations to the base chat completions capabilities.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatCompletionsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatCompletions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a completion for the provided prompt, parameters and chosen model. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/extensions_chat_completions.json"
+          }
+        }
+      }
+    },
+    "/images/generations:submit": {
+      "post": {
+        "operationId": "BeginAzureBatchImageGeneration",
+        "description": "Starts the generation of a batch of images from a text caption",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageGenerationOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/BatchImageGenerationOperationResponse"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Starts the generation of a batch of images from a text caption": {
+            "$ref": "./examples/start_generate_image.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/operations/images/{operationId}": {
+      "get": {
+        "operationId": "GetAzureBatchImageGenerationOperationStatus",
+        "description": "Returns the status of the images operation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": ".",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BatchImageGenerationOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns the status of the images operation": {
+            "$ref": "./examples/get_image_operation_status.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AudioTaskLabel": {
+      "type": "string",
+      "description": "Defines the possible descriptors for available audio operation responses.",
+      "enum": [
+        "transcribe",
+        "translate"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTaskLabel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "transcribe",
+            "value": "transcribe",
+            "description": "Accompanying response data resulted from an audio transcription task."
+          },
+          {
+            "name": "translate",
+            "value": "translate",
+            "description": "Accompanying response data resulted from an audio translation task."
+          }
+        ]
+      }
+    },
+    "AudioTranscription": {
+      "type": "object",
+      "description": "Result information for an operation that transcribed spoken audio into written text.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The transcribed text for the provided audio data."
+        },
+        "task": {
+          "$ref": "#/definitions/AudioTaskLabel",
+          "description": "The label that describes which operation type generated the accompanying response data."
+        },
+        "language": {
+          "type": "string",
+          "description": "The spoken language that was detected in the transcribed audio data.\nThis is expressed as a two-letter ISO-639-1 language code like 'en' or 'fr'."
+        },
+        "duration": {
+          "type": "number",
+          "format": "float",
+          "description": "The total duration of the audio processed to produce accompanying transcription information."
+        },
+        "segments": {
+          "type": "array",
+          "description": "A collection of information about the timing, probabilities, and other detail of each processed audio segment.",
+          "items": {
+            "$ref": "#/definitions/AudioTranscriptionSegment"
+          }
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AudioTranscriptionFormat": {
+      "type": "string",
+      "description": "Defines available options for the underlying response format of output transcription information.",
+      "enum": [
+        "json",
+        "verbose_json",
+        "text",
+        "srt",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
+          },
+          {
+            "name": "verbose_json",
+            "value": "verbose_json",
+            "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Use a response body that is plain text containing the raw, unannotated transcription."
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+          }
+        ]
+      }
+    },
+    "AudioTranscriptionOptions": {
+      "type": "object",
+      "description": "The configuration information for an audio transcription request.",
+      "properties": {
+        "file": {
+          "type": "string",
+          "format": "byte",
+          "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\nflac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm."
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+          "x-ms-client-name": "responseFormat"
+        },
+        "language": {
+          "type": "string",
+          "description": "The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code\nsuch as 'en' or 'fr'.\nProviding this known input language is optional but may improve the accuracy and/or latency of transcription."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model to use for this transcription request."
+        }
+      },
+      "required": [
+        "file"
+      ]
+    },
+    "AudioTranscriptionSegment": {
+      "type": "object",
+      "description": "Extended information about a single segment of transcribed audio data.\nSegments generally represent roughly 5-10 seconds of speech. Segment boundaries typically occur between words but not\nnecessarily sentences.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The 0-based index of this segment within a transcription."
+        },
+        "start": {
+          "type": "number",
+          "format": "float",
+          "description": "The time at which this segment started relative to the beginning of the transcribed audio."
+        },
+        "end": {
+          "type": "number",
+          "format": "float",
+          "description": "The time at which this segment ended relative to the beginning of the transcribed audio."
+        },
+        "text": {
+          "type": "string",
+          "description": "The transcribed text that was part of this audio segment."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The temperature score associated with this audio segment."
+        },
+        "avg_logprob": {
+          "type": "number",
+          "format": "float",
+          "description": "The average log probability associated with this audio segment.",
+          "x-ms-client-name": "avgLogprob"
+        },
+        "compression_ratio": {
+          "type": "number",
+          "format": "float",
+          "description": "The compression ratio of this audio segment.",
+          "x-ms-client-name": "compressionRatio"
+        },
+        "no_speech_prob": {
+          "type": "number",
+          "format": "float",
+          "description": "The probability of no speech detection within this audio segment.",
+          "x-ms-client-name": "noSpeechProb"
+        },
+        "tokens": {
+          "type": "array",
+          "description": "The token IDs matching the transcribed text in this audio segment.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "seek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The seek position associated with the processing of this audio segment.\nSeek positions are expressed as hundredths of seconds.\nThe model may process several segments from a single seek position, so while the seek position will never represent\na later time than the segment's start, the segment's start may represent a significantly later time than the\nsegment's associated seek position."
+        }
+      },
+      "required": [
+        "id",
+        "start",
+        "end",
+        "text",
+        "temperature",
+        "avg_logprob",
+        "compression_ratio",
+        "no_speech_prob",
+        "tokens",
+        "seek"
+      ]
+    },
+    "AudioTranslation": {
+      "type": "object",
+      "description": "Result information for an operation that translated spoken audio into written text.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The translated text for the provided audio data."
+        },
+        "task": {
+          "$ref": "#/definitions/AudioTaskLabel",
+          "description": "The label that describes which operation type generated the accompanying response data."
+        },
+        "language": {
+          "type": "string",
+          "description": "The spoken language that was detected in the translated audio data.\nThis is expressed as a two-letter ISO-639-1 language code like 'en' or 'fr'."
+        },
+        "duration": {
+          "type": "number",
+          "format": "float",
+          "description": "The total duration of the audio processed to produce accompanying translation information."
+        },
+        "segments": {
+          "type": "array",
+          "description": "A collection of information about the timing, probabilities, and other detail of each processed audio segment.",
+          "items": {
+            "$ref": "#/definitions/AudioTranslationSegment"
+          }
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AudioTranslationFormat": {
+      "type": "string",
+      "description": "Defines available options for the underlying response format of output translation information.",
+      "enum": [
+        "json",
+        "verbose_json",
+        "text",
+        "srt",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranslationFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Use a response body that is a JSON object containing a single 'text' field for the translation."
+          },
+          {
+            "name": "verbose_json",
+            "value": "verbose_json",
+            "description": "Use a response body that is a JSON object containing translation text along with timing, segments, and other\nmetadata."
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Use a response body that is plain text containing the raw, unannotated translation."
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+          }
+        ]
+      }
+    },
+    "AudioTranslationOptions": {
+      "type": "object",
+      "description": "The configuration information for an audio translation request.",
+      "properties": {
+        "file": {
+          "type": "string",
+          "format": "byte",
+          "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\nflac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm."
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranslationFormat",
+          "description": "The requested format of the translation response data, which will influence the content and detail of the result.",
+          "x-ms-client-name": "responseFormat"
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model to use for this translation request."
+        }
+      },
+      "required": [
+        "file"
+      ]
+    },
+    "AudioTranslationSegment": {
+      "type": "object",
+      "description": "Extended information about a single segment of translated audio data.\nSegments generally represent roughly 5-10 seconds of speech. Segment boundaries typically occur between words but not\nnecessarily sentences.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The 0-based index of this segment within a translation."
+        },
+        "start": {
+          "type": "number",
+          "format": "float",
+          "description": "The time at which this segment started relative to the beginning of the translated audio."
+        },
+        "end": {
+          "type": "number",
+          "format": "float",
+          "description": "The time at which this segment ended relative to the beginning of the translated audio."
+        },
+        "text": {
+          "type": "string",
+          "description": "The translated text that was part of this audio segment."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The temperature score associated with this audio segment."
+        },
+        "avg_logprob": {
+          "type": "number",
+          "format": "float",
+          "description": "The average log probability associated with this audio segment.",
+          "x-ms-client-name": "avgLogprob"
+        },
+        "compression_ratio": {
+          "type": "number",
+          "format": "float",
+          "description": "The compression ratio of this audio segment.",
+          "x-ms-client-name": "compressionRatio"
+        },
+        "no_speech_prob": {
+          "type": "number",
+          "format": "float",
+          "description": "The probability of no speech detection within this audio segment.",
+          "x-ms-client-name": "noSpeechProb"
+        },
+        "tokens": {
+          "type": "array",
+          "description": "The token IDs matching the translated text in this audio segment.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "seek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The seek position associated with the processing of this audio segment.\nSeek positions are expressed as hundredths of seconds.\nThe model may process several segments from a single seek position, so while the seek position will never represent\na later time than the segment's start, the segment's start may represent a significantly later time than the\nsegment's associated seek position."
+        }
+      },
+      "required": [
+        "id",
+        "start",
+        "end",
+        "text",
+        "temperature",
+        "avg_logprob",
+        "compression_ratio",
+        "no_speech_prob",
+        "tokens",
+        "seek"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "AzureChatExtensionConfiguration": {
+      "type": "object",
+      "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AzureChatExtensionType",
+          "description": "  The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.\n  Azure chat extensions are only compatible with Azure OpenAI."
+        },
+        "parameters": {
+          "description": "  The configuration payload used for the Azure chat extension. The structure payload details are specific to the\n  extension being configured.\n  Azure chat extensions are only compatible with Azure OpenAI."
+        }
+      },
+      "required": [
+        "type",
+        "parameters"
+      ]
+    },
+    "AzureChatExtensionType": {
+      "type": "string",
+      "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
+      "enum": [
+        "AzureCognitiveSearch"
+      ],
+      "x-ms-enum": {
+        "name": "AzureChatExtensionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "azureCognitiveSearch",
+            "value": "AzureCognitiveSearch",
+            "description": "Represents the use of Azure Cognitive Search as an Azure OpenAI chat extension."
+          }
+        ]
+      }
+    },
+    "AzureChatExtensionsMessageContext": {
+      "type": "object",
+      "description": "  A representation of the additional context information available when Azure OpenAI chat extensions are involved\n  in the generation of a corresponding chat completions response. This context information is only populated when\n  using an Azure OpenAI request configured to use a matching extension.",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "  The contextual message payload associated with the Azure chat extensions used for a chat completions request.\n  These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the\n  course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat\n  extensions.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AzureOpenAIOperationState": {
+      "type": "string",
+      "description": "The state of a job or item.",
+      "enum": [
+        "notRunning",
+        "running",
+        "succeeded",
+        "canceled",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "AzureOpenAIOperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "notRunning",
+            "value": "notRunning",
+            "description": "The operation was created and is queued to be processed in the future."
+          },
+          {
+            "name": "running",
+            "value": "running",
+            "description": "The operation has started to be processed."
+          },
+          {
+            "name": "succeeded",
+            "value": "succeeded",
+            "description": "The operation has successfully be processed and is ready for consumption."
+          },
+          {
+            "name": "canceled",
+            "value": "canceled",
+            "description": "The operation has been canceled and is incomplete."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The operation has completed processing with a failure and cannot be further consumed."
+          }
+        ]
+      }
+    },
+    "BatchImageGenerationOperationResponse": {
+      "type": "object",
+      "description": "A polling status update or final response payload for an image operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the operation."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "A timestamp when this job or item was created (in unix epochs)."
+        },
+        "expires": {
+          "type": "integer",
+          "format": "int64",
+          "description": "A timestamp when this operation and its associated images expire and will be deleted (in unix epochs)."
+        },
+        "result": {
+          "$ref": "#/definitions/ImageGenerations",
+          "description": "The result of the operation if the operation succeeded."
+        },
+        "status": {
+          "$ref": "#/definitions/AzureOpenAIOperationState",
+          "description": "The status of the operation"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error if the operation failed."
+        }
+      },
+      "required": [
+        "id",
+        "created",
+        "status"
+      ]
+    },
+    "ChatChoice": {
+      "type": "object",
+      "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/ChatMessage",
+          "description": "The chat message for a given chat completions prompt."
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordered index associated with this chat completions choice."
+        },
+        "finish_reason": {
+          "$ref": "#/definitions/CompletionsFinishReason",
+          "description": "The reason that this chat completions choice completed its generated.",
+          "x-nullable": true,
+          "x-ms-client-name": "finishReason"
+        },
+        "delta": {
+          "$ref": "#/definitions/ChatMessage",
+          "description": "The delta message content for a streaming response."
+        },
+        "content_filter_results": {
+          "$ref": "#/definitions/ContentFilterResults",
+          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it \nhas been detected, as well as the severity level (very_low, low, medium, high-scale that \ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
+          "x-ms-client-name": "contentFilterResults"
+        }
+      },
+      "required": [
+        "index",
+        "finish_reason"
+      ]
+    },
+    "ChatCompletions": {
+      "type": "object",
+      "description": "Representation of the response data from a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier associated with this chat completions response."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
+        },
+        "choices": {
+          "type": "array",
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "items": {
+            "$ref": "#/definitions/ChatChoice"
+          },
+          "x-ms-identifiers": []
+        },
+        "prompt_filter_results": {
+          "type": "array",
+          "description": "Content filtering results for zero or more prompts in the request. In a streaming request, \nresults for different prompts may arrive at different times or in different orders.",
+          "items": {
+            "$ref": "#/definitions/PromptFilterResult"
+          },
+          "x-ms-client-name": "promptFilterResults",
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
+        }
+      },
+      "required": [
+        "id",
+        "created",
+        "choices",
+        "usage"
+      ]
+    },
+    "ChatCompletionsOptions": {
+      "type": "object",
+      "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "functions": {
+          "type": "array",
+          "description": "A list of functions the model may generate JSON inputs for.",
+          "items": {
+            "$ref": "#/definitions/FunctionDefinition"
+          },
+          "x-ms-identifiers": []
+        },
+        "function_call": {
+          "description": "Controls how the model responds to function calls. \"none\" means the model does not call a function,\nand responds to the end-user. \"auto\" means the model can pick between an end-user or calling a function.\n Specifying a particular function via `{\"name\": \"my_function\"}` forces the model to call that function.\n \"none\" is the default when no functions are present. \"auto\" is the default if functions are present.",
+          "x-ms-client-name": "functionCall"
+        },
+        "max_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of tokens to generate.",
+          "x-ms-client-name": "maxTokens"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict."
+        },
+        "top_p": {
+          "type": "number",
+          "format": "float",
+          "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.",
+          "x-ms-client-name": "topP"
+        },
+        "logit_bias": {
+          "type": "object",
+          "description": "A map between GPT token IDs and bias scores that influences the probability of specific tokens\nappearing in a completions response. Token IDs are computed via external tokenizer tools, while\nbias scores reside in the range of -100 to 100 with minimum and maximum values corresponding to\na full ban or exclusive selection of a token, respectively. The exact behavior of a given bias\nscore varies by model.",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "x-ms-client-name": "logitBias"
+        },
+        "user": {
+          "type": "string",
+          "description": "An identifier for the caller or end user of the operation. This may be used for tracking\nor rate-limiting purposes."
+        },
+        "n": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of chat completions choices that should be generated for a chat completions\nresponse.\nBecause this setting can generate many completions, it may quickly consume your token quota.\nUse carefully and ensure reasonable settings for max_tokens and stop."
+        },
+        "stop": {
+          "type": "array",
+          "description": "A collection of textual sequences that will end completions generation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "presence_penalty": {
+          "type": "number",
+          "format": "float",
+          "description": "A value that influences the probability of generated tokens appearing based on their existing\npresence in generated text.\nPositive values will make tokens less likely to appear when they already exist and increase the\nmodel's likelihood to output new topics.",
+          "x-ms-client-name": "presencePenalty"
+        },
+        "frequency_penalty": {
+          "type": "number",
+          "format": "float",
+          "description": "A value that influences the probability of generated tokens appearing based on their cumulative\nfrequency in generated text.\nPositive values will make tokens less likely to appear as their frequency increases and\ndecrease the likelihood of the model repeating the same statements verbatim.",
+          "x-ms-client-name": "frequencyPenalty"
+        },
+        "stream": {
+          "type": "boolean",
+          "description": "A value indicating whether chat completions should be streamed for this request."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this completions request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        },
+        "dataSources": {
+          "type": "array",
+          "description": "  The configuration entries for Azure OpenAI chat extensions that use them.\n  This additional specification is only compatible with Azure OpenAI.",
+          "items": {
+            "$ref": "#/definitions/AzureChatExtensionConfiguration"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "messages"
+      ]
+    },
+    "ChatMessage": {
+      "type": "object",
+      "description": "A single, role-attributed message within a chat completion interaction.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The role associated with this message payload."
+        },
+        "content": {
+          "type": "string",
+          "description": "The text associated with this message payload.",
+          "x-nullable": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the author of this message. `name` is required if role is `function`, and it should be the name of the\nfunction whose response is in the `content`. May contain a-z, A-Z, 0-9, and underscores, with a maximum length of\n64 characters."
+        },
+        "function_call": {
+          "$ref": "#/definitions/FunctionCall",
+          "description": "The name and arguments of a function that should be called, as generated by the model.",
+          "x-ms-client-name": "functionCall"
+        },
+        "context": {
+          "$ref": "#/definitions/AzureChatExtensionsMessageContext",
+          "description": "  Additional context data associated with a chat message when requesting chat completions using compatible Azure\n  OpenAI chat extensions. This includes information like the intermediate data source retrievals used to service a\n  request.\n  This context information is only populated when using Azure OpenAI with chat extensions capabilities configured."
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ]
+    },
+    "ChatRole": {
+      "type": "string",
+      "description": "A description of the intended purpose of a message within a chat completions interaction.",
+      "enum": [
+        "system",
+        "assistant",
+        "user",
+        "function",
+        "tool"
+      ],
+      "x-ms-enum": {
+        "name": "ChatRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "system",
+            "value": "system",
+            "description": "The role that instructs or sets the behavior of the assistant."
+          },
+          {
+            "name": "assistant",
+            "value": "assistant",
+            "description": "The role that provides responses to system-instructed, user-prompted input."
+          },
+          {
+            "name": "user",
+            "value": "user",
+            "description": "The role that provides input for chat completions."
+          },
+          {
+            "name": "function",
+            "value": "function",
+            "description": "The role that provides function results for chat completions."
+          },
+          {
+            "name": "tool",
+            "value": "tool",
+            "description": "The role that represents extension tool activity within a chat completions operation."
+          }
+        ]
+      }
+    },
+    "Choice": {
+      "type": "object",
+      "description": "The representation of a single prompt completion as part of an overall completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The generated text for a given completions prompt."
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordered index associated with this completions choice."
+        },
+        "content_filter_results": {
+          "$ref": "#/definitions/ContentFilterResults",
+          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it \nhas been detected, as well as the severity level (very_low, low, medium, high-scale that \ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
+          "x-ms-client-name": "contentFilterResults"
+        },
+        "logprobs": {
+          "type": "object",
+          "description": "The log probabilities model for tokens associated with this completions choice.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/CompletionsLogProbabilityModel"
+            }
+          ]
+        },
+        "finish_reason": {
+          "$ref": "#/definitions/CompletionsFinishReason",
+          "description": "Reason for finishing",
+          "x-nullable": true,
+          "x-ms-client-name": "finishReason"
+        }
+      },
+      "required": [
+        "text",
+        "index",
+        "logprobs",
+        "finish_reason"
+      ]
+    },
+    "Completions": {
+      "type": "object",
+      "description": "Representation of the response data from a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier associated with this completions response."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
+        },
+        "prompt_filter_results": {
+          "type": "array",
+          "description": "Content filtering results for zero or more prompts in the request. In a streaming request, \nresults for different prompts may arrive at different times or in different orders.",
+          "items": {
+            "$ref": "#/definitions/PromptFilterResult"
+          },
+          "x-ms-client-name": "promptFilterResults",
+          "x-ms-identifiers": []
+        },
+        "choices": {
+          "type": "array",
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "items": {
+            "$ref": "#/definitions/Choice"
+          },
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
+        }
+      },
+      "required": [
+        "id",
+        "created",
+        "choices",
+        "usage"
+      ]
+    },
+    "CompletionsFinishReason": {
+      "type": "string",
+      "description": "Representation of the manner in which a completions response concluded.",
+      "enum": [
+        "stop",
+        "length",
+        "content_filter",
+        "function_call"
+      ],
+      "x-ms-enum": {
+        "name": "CompletionsFinishReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "stopped",
+            "value": "stop",
+            "description": "Completions ended normally and reached its end of token generation."
+          },
+          {
+            "name": "tokenLimitReached",
+            "value": "length",
+            "description": "Completions exhausted available token limits before generation could complete."
+          },
+          {
+            "name": "contentFiltered",
+            "value": "content_filter",
+            "description": "Completions generated a response that was identified as potentially sensitive per content\nmoderation policies."
+          },
+          {
+            "name": "functionCall",
+            "value": "function_call",
+            "description": "Completion ended normally, with the model requesting a function to be called."
+          }
+        ]
+      }
+    },
+    "CompletionsLogProbabilityModel": {
+      "type": "object",
+      "description": "Representation of a log probabilities model for a completions generation.",
+      "properties": {
+        "tokens": {
+          "type": "array",
+          "description": "The textual forms of tokens evaluated in this probability model.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "token_logprobs": {
+          "type": "array",
+          "description": "A collection of log probability values for the tokens in this completions data.",
+          "items": {
+            "type": "number",
+            "format": "float",
+            "x-nullable": true
+          },
+          "x-ms-client-name": "tokenLogprobs"
+        },
+        "top_logprobs": {
+          "type": "array",
+          "description": "A mapping of tokens to maximum log probability values in this completions data.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "format": "float",
+              "type": "number",
+              "x-nullable": true
+            }
+          },
+          "x-ms-client-name": "topLogprobs",
+          "x-ms-identifiers": []
+        },
+        "text_offset": {
+          "type": "array",
+          "description": "The text offsets associated with tokens in this completions data.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "x-ms-client-name": "textOffset"
+        }
+      },
+      "required": [
+        "tokens",
+        "token_logprobs",
+        "top_logprobs",
+        "text_offset"
+      ]
+    },
+    "CompletionsOptions": {
+      "type": "object",
+      "description": "The configuration information for a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "prompt": {
+          "type": "array",
+          "description": "The prompts to generate completions from.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "max_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of tokens to generate.",
+          "x-ms-client-name": "maxTokens"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict."
+        },
+        "top_p": {
+          "type": "number",
+          "format": "float",
+          "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.",
+          "x-ms-client-name": "topP"
+        },
+        "logit_bias": {
+          "type": "object",
+          "description": "A map between GPT token IDs and bias scores that influences the probability of specific tokens\nappearing in a completions response. Token IDs are computed via external tokenizer tools, while\nbias scores reside in the range of -100 to 100 with minimum and maximum values corresponding to\na full ban or exclusive selection of a token, respectively. The exact behavior of a given bias\nscore varies by model.",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "x-ms-client-name": "logitBias"
+        },
+        "user": {
+          "type": "string",
+          "description": "An identifier for the caller or end user of the operation. This may be used for tracking\nor rate-limiting purposes."
+        },
+        "n": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of completions choices that should be generated per provided prompt as part of an\noverall completions response.\nBecause this setting can generate many completions, it may quickly consume your token quota.\nUse carefully and ensure reasonable settings for max_tokens and stop."
+        },
+        "logprobs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A value that controls the emission of log probabilities for the provided number of most likely\ntokens within a completions response."
+        },
+        "echo": {
+          "type": "boolean",
+          "description": "A value specifying whether completions responses should include input prompts as prefixes to\ntheir generated output."
+        },
+        "stop": {
+          "type": "array",
+          "description": "A collection of textual sequences that will end completions generation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "presence_penalty": {
+          "type": "number",
+          "format": "float",
+          "description": "A value that influences the probability of generated tokens appearing based on their existing\npresence in generated text.\nPositive values will make tokens less likely to appear when they already exist and increase the\nmodel's likelihood to output new topics.",
+          "x-ms-client-name": "presencePenalty"
+        },
+        "frequency_penalty": {
+          "type": "number",
+          "format": "float",
+          "description": "A value that influences the probability of generated tokens appearing based on their cumulative\nfrequency in generated text.\nPositive values will make tokens less likely to appear as their frequency increases and\ndecrease the likelihood of the model repeating the same statements verbatim.",
+          "x-ms-client-name": "frequencyPenalty"
+        },
+        "best_of": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A value that controls how many completions will be internally generated prior to response\nformulation.\nWhen used together with n, best_of controls the number of candidate completions and must be\ngreater than n.\nBecause this setting can generate many completions, it may quickly consume your token quota.\nUse carefully and ensure reasonable settings for max_tokens and stop.",
+          "x-ms-client-name": "bestOf"
+        },
+        "stream": {
+          "type": "boolean",
+          "description": "A value indicating whether chat completions should be streamed for this request."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this completions request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "CompletionsUsage": {
+      "type": "object",
+      "description": "Representation of the token counts processed for a completions request.\nCounts consider all tokens across prompts, choices, choice alternates, best_of generations, and\nother consumers.",
+      "properties": {
+        "completion_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens generated across all completions emissions.",
+          "x-ms-client-name": "completionTokens"
+        },
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens in the provided prompts for the completions request.",
+          "x-ms-client-name": "promptTokens"
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens processed for the completions request and response.",
+          "x-ms-client-name": "totalTokens"
+        }
+      },
+      "required": [
+        "completion_tokens",
+        "prompt_tokens",
+        "total_tokens"
+      ]
+    },
+    "ContentFilterResult": {
+      "type": "object",
+      "description": "Information about filtered content severity level and if it has been filtered or not.",
+      "properties": {
+        "severity": {
+          "$ref": "#/definitions/ContentFilterSeverity",
+          "description": "Ratings for the intensity and risk level of filtered content."
+        },
+        "filtered": {
+          "type": "boolean",
+          "description": "A value indicating whether or not the content has been filtered."
+        }
+      },
+      "required": [
+        "severity",
+        "filtered"
+      ]
+    },
+    "ContentFilterResults": {
+      "type": "object",
+      "description": "Information about the content filtering category, if it has been detected.",
+      "properties": {
+        "sexual": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including \n those portrayed as an assault or a forced sexual violent act against one’s will, \n prostitution, pornography, and abuse."
+        },
+        "violence": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to hurt, injure, damage, or \nkill someone or something; describes weapons, etc."
+        },
+        "hate": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language attacks or uses that include pejorative or discriminatory language \nwith reference to a person or identity group on the basis of certain differentiating \nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
+        },
+        "self_harm": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to purposely hurt, injure,\nor damage one’s body, or kill oneself.",
+          "x-ms-client-name": "selfHarm"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Describes an error returned if the content filtering system is\ndown or otherwise unable to complete the operation in time."
+        }
+      }
+    },
+    "ContentFilterSeverity": {
+      "type": "string",
+      "description": "Ratings for the intensity and risk level of harmful content.",
+      "enum": [
+        "safe",
+        "low",
+        "medium",
+        "high"
+      ],
+      "x-ms-enum": {
+        "name": "ContentFilterSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "safe",
+            "value": "safe",
+            "description": "Content may be related to violence, self-harm, sexual, or hate categories but the terms \nare used in general, journalistic, scientific, medical, and similar professional contexts, \nwhich are appropriate for most audiences."
+          },
+          {
+            "name": "low",
+            "value": "low",
+            "description": "Content that expresses prejudiced, judgmental, or opinionated views, includes offensive \nuse of language, stereotyping, use cases exploring a fictional world (for example, gaming,\nliterature) and depictions at low intensity."
+          },
+          {
+            "name": "medium",
+            "value": "medium",
+            "description": "Content that uses offensive, insulting, mocking, intimidating, or demeaning language \ntowards specific identity groups, includes depictions of seeking and executing harmful \ninstructions, fantasies, glorification, promotion of harm at medium intensity."
+          },
+          {
+            "name": "high",
+            "value": "high",
+            "description": "Content that displays explicit and severe harmful instructions, actions, \ndamage, or abuse; includes endorsement, glorification, or promotion of severe \nharmful acts, extreme or illegal forms of harm, radicalization, or non-consensual \npower exchange or abuse."
+          }
+        ]
+      }
+    },
+    "EmbeddingItem": {
+      "type": "object",
+      "description": "Representation of a single embeddings relatedness comparison.",
+      "properties": {
+        "embedding": {
+          "type": "array",
+          "description": "List of embeddings value for the input prompt. These represent a measurement of the\nvector-based relatedness of the provided input.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Index of the prompt to which the EmbeddingItem corresponds."
+        }
+      },
+      "required": [
+        "embedding",
+        "index"
+      ]
+    },
+    "Embeddings": {
+      "type": "object",
+      "description": "Representation of the response data from an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
+      "properties": {
+        "data": {
+          "type": "array",
+          "description": "Embedding values for the prompts submitted in the request.",
+          "items": {
+            "$ref": "#/definitions/EmbeddingItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/EmbeddingsUsage",
+          "description": "Usage counts for tokens input using the embeddings API."
+        }
+      },
+      "required": [
+        "data",
+        "usage"
+      ]
+    },
+    "EmbeddingsOptions": {
+      "type": "object",
+      "description": "The configuration information for an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
+      "properties": {
+        "user": {
+          "type": "string",
+          "description": "An identifier for the caller or end user of the operation. This may be used for tracking\nor rate-limiting purposes."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this embeddings request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        },
+        "input": {
+          "type": "array",
+          "description": "Input texts to get embeddings for, encoded as a an array of strings.\nEach input must not exceed 2048 tokens in length.\n\nUnless you are embedding code, we suggest replacing newlines (\\n) in your input with a single space,\nas we have observed inferior results when newlines are present.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "input"
+      ]
+    },
+    "EmbeddingsUsage": {
+      "type": "object",
+      "description": "Measurement of the amount of tokens used in this request and response.",
+      "properties": {
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tokens sent in the original request.",
+          "x-ms-client-name": "promptTokens"
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of tokens transacted in this request/response.",
+          "x-ms-client-name": "totalTokens"
+        }
+      },
+      "required": [
+        "prompt_tokens",
+        "total_tokens"
+      ]
+    },
+    "FunctionCall": {
+      "type": "object",
+      "description": "The name and arguments of a function that should be called, as generated by the model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function to call."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments to call the function with, as generated by the model in JSON format.\nNote that the model does not always generate valid JSON, and may hallucinate parameters\nnot defined by your function schema. Validate the arguments in your code before calling\nyour function."
+        }
+      },
+      "required": [
+        "name",
+        "arguments"
+      ]
+    },
+    "FunctionDefinition": {
+      "type": "object",
+      "description": "The definition of a caller-specified function that chat completions may invoke in response to matching user input.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function to be called."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of what the function does. The model will use this description when selecting the function and\ninterpreting its parameters."
+        },
+        "parameters": {
+          "description": "The parameters the functions accepts, described as a JSON Schema object."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ImageGenerationOptions": {
+      "type": "object",
+      "description": "Represents the request data used to generate images.",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "A description of the desired images."
+        },
+        "n": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of images to generate (defaults to 1).",
+          "default": 1
+        },
+        "size": {
+          "$ref": "#/definitions/ImageSize",
+          "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024 (defaults to 1024x1024).",
+          "default": "1024x1024"
+        },
+        "response_format": {
+          "$ref": "#/definitions/ImageGenerationResponseFormat",
+          "description": "  The format in which image generation response items should be presented.\n  Azure OpenAI only supports URL response items.",
+          "x-ms-client-name": "responseFormat"
+        },
+        "user": {
+          "type": "string",
+          "description": "A unique identifier representing your end-user, which can help to monitor and detect abuse."
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "ImageGenerationResponseFormat": {
+      "type": "string",
+      "description": "The format in which the generated images are returned.",
+      "enum": [
+        "url",
+        "b64_json"
+      ],
+      "x-ms-enum": {
+        "name": "ImageGenerationResponseFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Url",
+            "value": "url",
+            "description": "Image generation response items should provide a URL from which the image may be retrieved."
+          },
+          {
+            "name": "Base64",
+            "value": "b64_json",
+            "description": "Image generation response items should provide image data as a base64-encoded string."
+          }
+        ]
+      }
+    },
+    "ImageGenerations": {
+      "type": "object",
+      "description": "The result of the operation if the operation succeeded.",
+      "properties": {
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "A timestamp when this job or item was created (in unix epochs)."
+        },
+        "data": {
+          "description": "The images generated by the operator."
+        }
+      },
+      "required": [
+        "created",
+        "data"
+      ]
+    },
+    "ImageSize": {
+      "type": "string",
+      "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024.",
+      "enum": [
+        "256x256",
+        "512x512",
+        "1024x1024"
+      ],
+      "x-ms-enum": {
+        "name": "ImageSize",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Size256x256",
+            "value": "256x256",
+            "description": "Image size of 256x256."
+          },
+          {
+            "name": "Size512x512",
+            "value": "512x512",
+            "description": "Image size of 512x512."
+          },
+          {
+            "name": "Size1024x1024",
+            "value": "1024x1024",
+            "description": "Image size of 1024x1024."
+          }
+        ]
+      }
+    },
+    "PromptFilterResult": {
+      "type": "object",
+      "description": "Content filtering results for a single prompt in the request.",
+      "properties": {
+        "prompt_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of this prompt in the set of prompt results",
+          "x-ms-client-name": "promptIndex"
+        },
+        "content_filter_results": {
+          "$ref": "#/definitions/ContentFilterResults",
+          "description": "Content filtering results for this prompt",
+          "x-ms-client-name": "contentFilterResults"
+        }
+      },
+      "required": [
+        "prompt_index"
+      ]
+    }
+  },
+  "parameters": {
+    "AudioTranscriptionOptions.file": {
+      "name": "file",
+      "in": "formData",
+      "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\nflac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
+      "required": true,
+      "type": "string",
+      "format": "byte",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.language": {
+      "name": "language",
+      "in": "formData",
+      "description": "The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code\nsuch as 'en' or 'fr'.\nProviding this known input language is optional but may improve the accuracy and/or latency of transcription.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.model": {
+      "name": "model",
+      "in": "formData",
+      "description": "The model to use for this transcription request.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.prompt": {
+      "name": "prompt",
+      "in": "formData",
+      "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.responseFormat": {
+      "name": "response_format",
+      "in": "formData",
+      "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "json",
+        "verbose_json",
+        "text",
+        "srt",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
+          },
+          {
+            "name": "verbose_json",
+            "value": "verbose_json",
+            "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Use a response body that is plain text containing the raw, unannotated transcription."
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "responseFormat"
+    },
+    "AudioTranscriptionOptions.temperature": {
+      "name": "temperature",
+      "in": "formData",
+      "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+      "required": false,
+      "type": "number",
+      "format": "float",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranslationOptions.file": {
+      "name": "file",
+      "in": "formData",
+      "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\nflac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
+      "required": true,
+      "type": "string",
+      "format": "byte",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranslationOptions.model": {
+      "name": "model",
+      "in": "formData",
+      "description": "The model to use for this translation request.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranslationOptions.prompt": {
+      "name": "prompt",
+      "in": "formData",
+      "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranslationOptions.responseFormat": {
+      "name": "response_format",
+      "in": "formData",
+      "description": "The requested format of the translation response data, which will influence the content and detail of the result.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "json",
+        "verbose_json",
+        "text",
+        "srt",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranslationFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Use a response body that is a JSON object containing a single 'text' field for the translation."
+          },
+          {
+            "name": "verbose_json",
+            "value": "verbose_json",
+            "description": "Use a response body that is a JSON object containing translation text along with timing, segments, and other\nmetadata."
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Use a response body that is plain text containing the raw, unannotated translation."
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "responseFormat"
+    },
+    "AudioTranslationOptions.temperature": {
+      "name": "temperature",
+      "in": "formData",
+      "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+      "required": false,
+      "type": "number",
+      "format": "float",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
