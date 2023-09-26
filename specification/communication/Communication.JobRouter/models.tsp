@@ -300,7 +300,7 @@ model ClassificationPolicyItem {
   classificationPolicy: ClassificationPolicy;
 
   @doc("(Optional) The Concurrency Token.")
-  etag: eTag;
+  etag: string;
 }
 
 @resource("distributionPolicies")
@@ -355,7 +355,7 @@ model DistributionPolicyItem {
   distributionPolicy: DistributionPolicy;
 
   @doc("(Optional) The Concurrency Token.")
-  etag: eTag;
+  etag: string;
 }
 
 @resource("exceptionPolicies")
@@ -401,7 +401,7 @@ model ExceptionPolicyItem {
   exceptionPolicy: ExceptionPolicy;
 
   @doc("(Optional) The Concurrency Token.")
-  etag: eTag;
+  etag: string;
 }
 
 @resource("jobs")
@@ -663,7 +663,7 @@ model RouterJobItem {
   job: RouterJob;
 
   @doc("(Optional) The Concurrency Token.")
-  etag: eTag;
+  etag: string;
 }
 
 @doc("Position and estimated wait time for a job.")
@@ -771,7 +771,7 @@ model RouterQueueItem {
   queue: RouterQueue;
 
   @doc("(Optional) The Concurrency Token.")
-  etag: eTag;
+  etag: string;
 }
 
 @doc("Statistics for the queue")
@@ -901,7 +901,7 @@ model RouterWorkerItem {
   worker: RouterWorker;
 
   @doc("(Optional) The Concurrency Token.")
-  etag: eTag;
+  etag: string;
 }
 
 @doc("Jobs are distributed to the worker with the strongest abilities available.")
@@ -1410,7 +1410,7 @@ selected.
 }
 
 @doc("Request payload for reclassifying jobs")
-model ReclassifyJobRequest {}
+model ReclassifyJobRequest is Record<string>;
 
 @doc("Response payload from reclassifying a job")
 model ReclassifyJobResult {}
@@ -1418,7 +1418,7 @@ model ReclassifyJobResult {}
 alias ReclassfiyJobOkReponse = ResourceOkResponse<ReclassifyJobResult>;
 
 @doc("Response payload from closing a job")
-model CloseJobResult {}
+model CloseJobResult {};
 
 alias CloseJobResultWithOkResponse = ResourceOkResponse<CloseJobResult>;
 
@@ -1432,12 +1432,12 @@ model CancelJobResult {}
 alias CancelJobResultWithOkResponse = ResourceOkResponse<CancelJobResult>;
 
 @doc("Response payload from completing a job")
-model CompleteJobResult {}
+model CompleteJobResult {};
 
 alias CompleteJobResultWithOkResponse = ResourceOkResponse<CompleteJobResult>;
 
 @doc("Response payload from declining a job")
-model DeclineJobOfferResult {}
+model DeclineJobOfferResult {};
 
 alias DeclineJobOfferResultWithOkResponse = ResourceOkResponse<DeclineJobOfferResult>;
 
