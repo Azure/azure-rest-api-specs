@@ -4079,14 +4079,47 @@
         }
       }
     },
+    "TranscriptionStatus": {
+      "enum": [
+        "transcriptionStarted",
+        "transcriptionFailed",
+        "transcriptionResumed",
+        "transcriptionLocaleUpdated",
+        "transcriptionStopped",
+        "unspecifiedError"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionStatus",
+        "modelAsString": true
+      }
+    },
+    "TranscriptionStatusDetails": {
+      "enum": [
+        "subscriptionStarted",
+        "streamConnectionReestablished",
+        "streamConnectionUnsuccessful",
+        "streamUrlMissing",
+        "serviceShutdown",
+        "streamConnectionInterrupted",
+        "speechServicesConnectionError",
+        "subscriptionStopped",
+        "unspecifiedError"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionStatusDetails",
+        "modelAsString": true
+      }
+    },
     "TranscriptionUpdate": {
       "type": "object",
       "properties": {
         "transcriptionStatus": {
-          "type": "string"
+          "$ref": "#/definitions/TranscriptionStatus"
         },
         "transcriptionStatusDetails": {
-          "type": "string"
+          "$ref": "#/definitions/TranscriptionStatusDetails"
         }
       }
     },
