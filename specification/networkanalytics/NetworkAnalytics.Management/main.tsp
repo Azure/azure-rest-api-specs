@@ -575,8 +575,10 @@ interface DataTypes {
   update is ArmResourcePatchAsync<DataType, DataTypeProperties>;
 
   @doc("Delete data type resource.")
-  @segment("deleteData")
   delete is ArmResourceDeleteWithoutOkAsync<DataType>;
+
+  @doc("Delete data for data type.")
+  deleteData is ArmResourceActionNoContentAsync<DataType, {}>;
 
   @doc("Generate sas token for storage container.")
   generateStorageContainerSasToken is ArmResourceActionAsync<
