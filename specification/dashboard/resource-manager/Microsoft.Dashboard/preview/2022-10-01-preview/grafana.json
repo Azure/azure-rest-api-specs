@@ -702,7 +702,7 @@
           "GrafanaResource"
         ],
         "summary": "Retrieve enterprise add-on details information",
-        "operationId": "EnterpriseDetails_Post",
+        "operationId": "Grafana_CheckEnterpriseDetails",
         "consumes": [
           "application/json"
         ],
@@ -1752,15 +1752,19 @@
       "type": "object",
       "properties": {
         "planId": {
+          "description": "The plan Id of the SaaS subscription.",
           "type": "string"
         },
         "offerId": {
+          "description": "The offer Id of the SaaS subscription.",
           "type": "string"
         },
         "publisherId": {
+          "description": "The publisher Id of the SaaS subscription.",
           "type": "string"
         },
         "term": {
+          "description": "The billing term of the SaaS Subscription.",
           "$ref": "#/definitions/SubscriptionTerm"
         }
       }
@@ -1770,6 +1774,7 @@
       "type": "object",
       "properties": {
         "termUnit": {
+          "description": "The unit of the billing term.",
           "type": "string"
         },
         "startDate": {
@@ -1794,7 +1799,15 @@
         },
         "grafanaResourceId": {
           "description": "Resource Id of the Grafana resource which is doing the trial.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Dashboard/grafana"
+              }
+            ]
+          }
         },
         "trialStartAt": {
           "description": "The date and time in UTC of when the trial starts.",
