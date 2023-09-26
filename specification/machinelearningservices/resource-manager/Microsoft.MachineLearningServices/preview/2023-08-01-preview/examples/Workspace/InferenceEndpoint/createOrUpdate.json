@@ -17,11 +17,71 @@
       },
       "tags": {},
       "location": "string",
-      "kind": "string"
+      "kind": "string",
+      "identity": {
+        "type": "SystemAssigned",
+        "userAssignedIdentities": {
+          "string": {}
+        }
+      },
+      "sku": {
+        "name": "string",
+        "tier": "Standard",
+        "size": "string",
+        "family": "string",
+        "capacity": 1
+      }
     }
   },
   "responses": {
     "200": {
+      "headers": {},
+      "body": {
+        "id": "string",
+        "name": "string",
+        "type": "string",
+        "properties": {
+          "description": "string",
+          "properties": {
+            "string": "string"
+          },
+          "provisioningState": "Canceled",
+          "groupId": "string",
+          "authMode": "AAD",
+          "endpointUri": "https://www.contoso.com/example"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:19",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:19",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "ManagedIdentity"
+        },
+        "tags": {},
+        "location": "string",
+        "kind": "string",
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "principalId": "00000000-1111-2222-3333-444444444444",
+              "clientId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "sku": {
+          "name": "string",
+          "tier": "Standard",
+          "size": "string",
+          "family": "string",
+          "capacity": 1
+        }
+      }
+    },
+    "201": {
       "headers": {},
       "body": {
         "id": "string",
@@ -38,45 +98,34 @@
           "endpointUri": "https://www.contoso.com/example"
         },
         "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999+00:39",
+          "createdAt": "2020-01-01T12:34:56.999+00:19",
           "createdBy": "string",
-          "createdByType": "User",
-          "lastModifiedAt": "2020-01-01T12:34:56.999+00:39",
+          "createdByType": "Key",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:19",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "Application"
+          "lastModifiedByType": "Key"
         },
         "tags": {},
         "location": "string",
-        "kind": "string"
-      }
-    },
-    "201": {
-      "headers": {},
-      "body": {
-        "id": "string",
-        "name": "string",
-        "type": "string",
-        "properties": {
-          "description": "string",
-          "properties": {
-            "string": "string"
-          },
-          "provisioningState": "Updating",
-          "groupId": "string",
-          "authMode": "AAD",
-          "endpointUri": "https://www.contoso.com/example"
+        "kind": "string",
+        "identity": {
+          "type": "None",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "principalId": "00000000-1111-2222-3333-444444444444",
+              "clientId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
         },
-        "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999+00:39",
-          "createdBy": "string",
-          "createdByType": "ManagedIdentity",
-          "lastModifiedAt": "2020-01-01T12:34:56.999+00:39",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "Application"
-        },
-        "tags": {},
-        "location": "string",
-        "kind": "string"
+        "sku": {
+          "name": "string",
+          "tier": "Basic",
+          "size": "string",
+          "family": "string",
+          "capacity": 1
+        }
       }
     }
   }

@@ -8926,7 +8926,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResourceArmPaginatedResult"
+              "$ref": "#/definitions/InferenceEndpointTrackedResourceArmPaginatedResult"
             }
           },
           "default": {
@@ -9074,7 +9074,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
+              "$ref": "#/definitions/InferenceEndpointTrackedResource"
             }
           },
           "default": {
@@ -9145,7 +9145,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
+              "$ref": "#/definitions/InferenceEndpointTrackedResource"
             }
           },
           "202": {
@@ -9230,7 +9230,7 @@
             "description": "InferenceEndpoint entity to apply during operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
+              "$ref": "#/definitions/InferenceEndpointTrackedResource"
             }
           }
         ],
@@ -9238,13 +9238,13 @@
           "200": {
             "description": "Create or update request is successful.",
             "schema": {
-              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
+              "$ref": "#/definitions/InferenceEndpointTrackedResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
+              "$ref": "#/definitions/InferenceEndpointTrackedResource"
             },
             "headers": {
               "x-ms-async-operation-timeout": {
@@ -9350,7 +9350,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSkuArmPaginatedResult"
+              "$ref": "#/definitions/InferenceGroupTrackedResourceArmPaginatedResult"
             }
           },
           "default": {
@@ -9498,7 +9498,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
+              "$ref": "#/definitions/InferenceGroupTrackedResource"
             }
           },
           "default": {
@@ -9567,7 +9567,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
+              "$ref": "#/definitions/InferenceGroupTrackedResource"
             }
           },
           "202": {
@@ -9652,7 +9652,7 @@
             "description": "InferenceGroup entity to apply during operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
+              "$ref": "#/definitions/InferenceGroupTrackedResource"
             }
           }
         ],
@@ -9660,13 +9660,13 @@
           "200": {
             "description": "Create or update request is successful.",
             "schema": {
-              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
+              "$ref": "#/definitions/InferenceGroupTrackedResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
+              "$ref": "#/definitions/InferenceGroupTrackedResource"
             },
             "headers": {
               "x-ms-async-operation-timeout": {
@@ -17886,23 +17886,6 @@
       "x-ms-discriminator-value": "FeatureAttributionDrift",
       "additionalProperties": false
     },
-    "FeatureAttributionMetric": {
-      "enum": [
-        "NormalizedDiscountedCumulativeGain"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "FeatureAttributionMetric",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "NormalizedDiscountedCumulativeGain",
-            "description": "The Normalized Discounted Cumulative Gain metric."
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
     "FeatureAttributionMetricThreshold": {
       "required": [
         "metric"
@@ -19127,27 +19110,6 @@
       "x-ms-discriminator-value": "GenerationTokenStatistics",
       "additionalProperties": false
     },
-    "Goal": {
-      "description": "Defines supported metric goals for hyperparameter tuning",
-      "enum": [
-        "Minimize",
-        "Maximize"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "Goal",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Minimize"
-          },
-          {
-            "value": "Maximize"
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
     "GridSamplingAlgorithm": {
       "description": "Defines a Sampling Algorithm that exhaustively generates every value combination in the space",
       "type": "object",
@@ -20276,73 +20238,42 @@
           ]
         }
       },
+      "x-ms-client-name": "InferenceEndpointProperties",
       "additionalProperties": false
     },
-    "InferenceEndpointMinimalTrackedResource": {
+    "InferenceEndpointTrackedResource": {
       "required": [
         "location",
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+        "identity": {
+          "description": "Managed service identity (system assigned and/or user assigned identities)",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
           "type": "string"
         },
-        "location": {
-          "description": "[Required] ",
-          "minLength": 1,
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
         "properties": {
           "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/InferenceEndpoint"
         },
-        "systemData": {
-          "description": "System data associated with resource provider",
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          }
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+        "sku": {
+          "description": "Sku details required for ARM contract for Autoscaling.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"
         }
       },
+      "x-ms-client-name": "InferenceEndpoint",
       "additionalProperties": false
     },
-    "InferenceEndpointMinimalTrackedResourceArmPaginatedResult": {
+    "InferenceEndpointTrackedResourceArmPaginatedResult": {
       "description": "A paginated list of InferenceEndpoint entities.",
       "type": "object",
       "properties": {
@@ -20354,7 +20285,7 @@
           "description": "An array of objects of type InferenceEndpoint.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/InferenceEndpointMinimalTrackedResource"
+            "$ref": "#/definitions/InferenceEndpointTrackedResource"
           }
         }
       },
@@ -20395,40 +20326,28 @@
           ]
         }
       },
+      "x-ms-client-name": "InferenceGroupProperties",
       "additionalProperties": false
     },
-    "InferenceGroupMinimalTrackedResourceWithSku": {
+    "InferenceGroupTrackedResource": {
       "required": [
         "location",
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+        "identity": {
+          "description": "Managed service identity (system assigned and/or user assigned identities)",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "kind": {
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
           "type": "string"
-        },
-        "location": {
-          "description": "[Required] ",
-          "minLength": 1,
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
         },
         "properties": {
           "description": "[Required] Additional attributes of the entity.",
@@ -20437,35 +20356,12 @@
         "sku": {
           "description": "Sku details required for ARM contract for Autoscaling.",
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"
-        },
-        "systemData": {
-          "description": "System data associated with resource provider",
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          }
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
         }
       },
+      "x-ms-client-name": "InferenceGroup",
       "additionalProperties": false
     },
-    "InferenceGroupMinimalTrackedResourceWithSkuArmPaginatedResult": {
+    "InferenceGroupTrackedResourceArmPaginatedResult": {
       "description": "A paginated list of InferenceGroup entities.",
       "type": "object",
       "properties": {
@@ -20477,7 +20373,7 @@
           "description": "An array of objects of type InferenceGroup.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/InferenceGroupMinimalTrackedResourceWithSku"
+            "$ref": "#/definitions/InferenceGroupTrackedResource"
           }
         }
       },
@@ -23865,33 +23761,6 @@
       "x-ms-discriminator-value": "Numerical",
       "additionalProperties": false
     },
-    "NumericalDataQualityMetric": {
-      "enum": [
-        "NullValueRate",
-        "DataTypeErrorRate",
-        "OutOfBoundsRate"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "NumericalDataQualityMetric",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "NullValueRate",
-            "description": "Calculates the rate of null values."
-          },
-          {
-            "value": "DataTypeErrorRate",
-            "description": "Calculates the rate of data type errors."
-          },
-          {
-            "value": "OutOfBoundsRate",
-            "description": "Calculates the rate values are out of bounds."
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
     "NumericalDataQualityMetricThreshold": {
       "required": [
         "metric"
@@ -26642,31 +26511,6 @@
             "description": "Use the custom seasonality value."
           }
         ]
-      },
-      "additionalProperties": false
-    },
-    "SecretConfiguration": {
-      "description": "Secret Configuration definition.",
-      "type": "object",
-      "properties": {
-        "uri": {
-          "description": "Secret Uri.\r\nSample Uri : https://myvault.vault.azure.net/secrets/mysecretname/secretversion",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "workspaceSecretName": {
-          "description": "Name of secret in workspace key vault.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        }
       },
       "additionalProperties": false
     },
