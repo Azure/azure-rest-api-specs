@@ -7,7 +7,7 @@
   },
   "paths": {},
   "definitions": {
-    "HealthResourcesAvailabilityStatusChangedEventData": {
+    "ResourceNotificationsHealthResourcesAvailabilityStatusesEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.HealthResources.AvailabilityStatusChanged event.",
       "type": "object",
       "allOf": [
@@ -16,12 +16,15 @@
         }
       ],
       "x-ms-examples": {
-        "HealthResourcesAvailabilityStatusChangedEventGridSchema": {
+        "ResourceNotificationsHealthResourcesAvailabilityStatusesEventGridSchema": {
           "$ref": "./examples/event-grid-schema/HealthResources_AvailabilityStatusChanged.json"
+        },
+        "ResourceNotificationsHealthResourcesAvailabilityStatusesCloudEventsSchema": {
+          "$ref": "./examples/cloud-event-schema/HealthResources_ResourceAnnotated.json"
         }
       }
     },
-    "HealthResourcesResourceAnnotatedEventData": {
+    "ResourceNotificationsHealthResourcesAnnotationsEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.HealthResources.ResourceAnnotated event.",
       "type": "object",
       "allOf": [
@@ -30,8 +33,11 @@
         }
       ],
       "x-ms-examples": {
-        "HealthResourcesResourceAnnotatedEventGridSchema": {
+        "ResourceNotificationsHealthResourcesAnnotationsEventGridSchema": {
           "$ref": "./examples/event-grid-schema/HealthResources_ResourceAnnotated.json"
+        },
+        "ResourceNotificationsHealthResourcesAnnotationsCloudEventsSchema": {
+          "$ref": "./examples/cloud-event-schema/HealthResources_ResourceAnnotated.json"
         }
       }
     }

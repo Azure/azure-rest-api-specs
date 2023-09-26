@@ -7,7 +7,7 @@
   },
   "paths": {},
   "definitions": {
-    "ResourceManagementCreatedOrUpdatedEventData": {
+    "ResourceNotificationsRsourceCreatedOrUpdatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.Resources.CreatedOrUpdated event.",
       "type": "object",
       "allOf": [
@@ -16,12 +16,12 @@
         }
       ],
       "x-ms-examples": {
-        "ResourceManagementCreatedorUpdatedEventGridSchema": {
+        "ResourceNotificationsResourceCreatedOrUpdatedEventGridSchema": {
           "$ref": "./examples/event-grid-schema/Resources_CreatedOrUpdated.json"
         }
       }
     },
-    "ResourceManagementDeletedEventData": {
+    "ResourceNotificationsResourceDeletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.Resources.Deleted event.",
       "type": "object",
       "allOf": [
@@ -30,8 +30,11 @@
         }
       ],
       "x-ms-examples": {
-        "ResourceManagementDeletedEventGridSchema": {
+        "ResourceNotificationsResourceDeletedEventGridSchema": {
           "$ref": "./examples/event-grid-schema/Resources_Deleted.json"
+        },
+        "ResourceNotificationsResourceDeletedCloudEventsSchema": {
+          "$ref": "./examples/cloud-event-schema/Resources_Deleted.json"
         }
       }
     }
