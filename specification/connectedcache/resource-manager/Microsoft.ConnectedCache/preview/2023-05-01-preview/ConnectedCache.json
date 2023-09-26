@@ -930,7 +930,7 @@
         "tags": [
           "ispCacheNodes"
         ],
-        "summary": "Gets ispCacheNode resource information of an ispCustomer parent resource",
+        "summary": "Gets isp CacheNode resource information of an isp Customer parent resource",
         "description": "This api gets ispCacheNode resource information",
         "operationId": "ispCacheNodes_Get",
         "x-ms-examples": {
@@ -1911,7 +1911,7 @@
       "description": "Model representing customer for connected cache resource",
       "properties": {
         "peeringDbLastUpdateTime": {
-          "type": "string",
+          "type": "date-time",
           "description": "last update timestamp of peering db update"
         },
         "CustomerProperties_Overview_CacheEfficiency": {
@@ -1931,7 +1931,7 @@
           "description": "max egress in mbps"
         },
         "CustomerProperties_Overview_EgressMbpsMaxDateTime": {
-          "type": "string",
+          "type": "date-time",
           "description": "timestamp of max egress"
         },
         "CustomerProperties_Overview_MissMbpsMax": {
@@ -1939,7 +1939,7 @@
           "description": "max miss throughput"
         },
         "CustomerProperties_Overview_MissMbpsMaxDateTime": {
-          "type": "string",
+          "type": "date-time",
           "description": "timestamp of miss max throughput"
         },
         "CustomerProperties_Overview_CacheNodesHealthyCount": {
@@ -1954,7 +1954,7 @@
         },
         "signupStatus": {
           "type": "boolean",
-          "description": "status of signup"
+          "description": "status of signup represents as true or false"
         },
         "signupStatusCode": {
           "description": "status of signup",
@@ -2091,7 +2091,7 @@
         },
         "RegistrationKey": {
           "type": "string",
-          "description": "iot device registration temporary registration key"
+          "description": "iot device registration temporary registration key used one time"
         },
         "driveConfiguration": {
           "type": "array",
@@ -2150,11 +2150,6 @@
           "title": "ConnectedCache Additional properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CreateOrUpdateCustomerRequestEntity"
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource",
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         }
       }
     },
@@ -2192,7 +2187,7 @@
         },
         "CustomerAsn": {
           "type": "string",
-          "description": "asn of the customer"
+          "description": "asn (atonomus system number) of the customer entered value"
         },
         "TransitState": {
           "type": "string",
@@ -2233,11 +2228,6 @@
           "title": "ConnectedCache Additional properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CreateOrUpdateCacheNodeRequestEntity"
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource",
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         }
       }
     },
@@ -2283,7 +2273,7 @@
         },
         "IsEnabled": {
           "type": "boolean",
-          "description": "is the cache node enabled"
+          "description": "is the cache node enabled value is true or false"
         },
         "IsEnterpriseManaged": {
           "type": "boolean",
@@ -2313,11 +2303,6 @@
         "title": "Properties of mcc cache node resource.",
         "x-ms-client-flatten": true,
         "$ref": "#/definitions/CacheNode"
-      },
-      "systemData": {
-        "readOnly": true,
-        "description": "The system meta data relating to this resource",
-        "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
       }
     },
     "MccCustomerResource": {
@@ -2338,11 +2323,6 @@
           "title": "Properties of mcc customer resource.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/Customer"
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource",
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         }
       }
     },
@@ -2364,11 +2344,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource",
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         }
       }
     },
@@ -2617,7 +2592,7 @@
           "description": "number of delete attempts of the customer"
         },
         "DeletedFlagSetDateTime": {
-          "type": "string",
+          "type": "date-time",
           "description": "timestamp when delete flag was set for the customer"
         },
         "ProvisioningState": {
@@ -2626,7 +2601,7 @@
           "description": "provisioning state of the customer"
         },
         "LastAttemptedDeleteTime": {
-          "type": "string",
+          "type": "date-time",
           "description": "timestamp of last delete attempt"
         },
         "SynchWithArmAttemptsCount": {
@@ -2635,7 +2610,7 @@
           "description": "number of sync attempts with arm"
         },
         "LastSyncWithArmTimestamp": {
-          "type": "string",
+          "type": "date-time",
           "description": "timestamp of last sync with arm"
         },
         "IsEnterpriseManaged": {
@@ -2666,7 +2641,7 @@
         },
         "CustomerIndex": {
           "type": "string",
-          "description": "Customer index"
+          "description": "Customer index as string"
         },
         "CacheNodeId": {
           "type": "string",
@@ -2719,7 +2694,7 @@
           "description": "category of cache node"
         },
         "DeletedFlagSetDateTime": {
-          "type": "string",
+          "type": "date-time",
           "description": "timestamp when delete flag was set for the customer"
         },
         "ProvisioningState": {
@@ -2728,7 +2703,7 @@
           "description": "provisioning state of the customer"
         },
         "LastAttemptedDeleteTime": {
-          "type": "string",
+          "type": "date-time",
           "description": "timestamp of last delete attempt"
         },
         "ReleaseVersion": {
@@ -2754,7 +2729,7 @@
           "description": "comma separated values of cidr"
         },
         "CidrCsvLastUpdateTime": {
-          "type": "string",
+          "type": "date-time",
           "description": "timestamp of last update to cidr csv"
         },
         "BgpCidrCsv": {
@@ -2762,11 +2737,11 @@
           "description": "comma separated value of bgp cidrs"
         },
         "BgpCidrCsvLastUpdateTime": {
-          "type": "string",
+          "type": "date-time",
           "description": "timestamp of last update to bgp cidr csv"
         },
         "BgpLastReportedTime": {
-          "type": "string",
+          "type": "date-time",
           "description": "timestamp of last bgp report time"
         },
         "BgpReviewStateText": {
@@ -2885,7 +2860,7 @@
           "description": "number of worker connections that is needed for the deployment manifest for MCC Container"
         },
         "WorkerConnections_LastUpdatedDateTime": {
-          "type": "string",
+          "type": "date-time",
           "description": "indicates the most recent date time when the worker count on the physical MCC was successfully updated"
         },
         "ContainerResyncTrigger": {
@@ -2916,11 +2891,6 @@
           "title": "ConnectedCache Additional properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CacheNodeOldResponse"
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource",
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         }
       }
     },
@@ -2961,8 +2931,7 @@
         },
         "additionalCacheNodeProperties": {
           "type": "object",
-          "description": "additional Mcc Cache Node Json properties for BGP and Update and IOT central",
-          "additionalProperties": {}
+          "description": "additional Mcc Cache Node Json properties for BGP and Update and IOT central"
         },
         "statusCode": {
           "type": "string",
@@ -2993,8 +2962,7 @@
       "properties": {
         "tags": {
           "type": "object",
-          "description": "Additional tag configuration related properties",
-          "additionalProperties": {}
+          "description": "Additional tag configuration related properties"
         }
       }
     },
@@ -3033,8 +3001,7 @@
         },
         "additionalAggregatedProperties": {
           "description": "Tags for the ConnectedCache",
-          "type": "object",
-          "additionalProperties": {}
+          "type": "object"
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging)",
