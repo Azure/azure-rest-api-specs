@@ -405,7 +405,7 @@ accepted the job already.
       @body
       declineJobOfferRequest: DeclineJobOfferRequest;
     },
-    void
+    DeclineJobOfferResultWithOkResponse
   >;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
