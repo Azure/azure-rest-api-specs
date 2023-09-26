@@ -60,10 +60,14 @@ enum FileType {
   @doc("If file is jmx script.") JMX_FILE,
   @doc("If file is user properties.") USER_PROPERTIES,
   @doc("If file is not any of other supported type.") ADDITIONAL_ARTIFACTS,
+
   @added(APIVersions.v2023_04_01_preview)
-  @doc("If the file is a compressed archive containing a collection of various artifacts or resources.") ZIPPED_ARTIFACTS,
+  @doc("If the file is a compressed archive containing a collection of various artifacts or resources.")
+  ZIPPED_ARTIFACTS,
+
   @added(APIVersions.v2023_04_01_preview)
-  @doc("If file is a json config for the Url tests") URL_TEST_CONFIG,
+  @doc("If file is a json config for the Url tests")
+  URL_TEST_CONFIG,
 }
 
 @doc("File status")
@@ -129,11 +133,14 @@ enum MetricUnit {
 enum TimeGrain {
   @doc("5 seconds, available only if test run duration is less than 10 minutes")
   PT5S,
+
   @doc("10 seconds, available only if test run duration is less than 10 minutes")
   PT10S,
   @doc("1 minute") PT1M,
+
   @doc("5 minutes, available only if test run duration is greater than 1 minute")
   PT5M,
+
   @doc("1 hour, available only if test run duration is greater than 1 minute")
   PT1H,
 }
@@ -142,22 +149,26 @@ enum TimeGrain {
 enum Interval {
   @doc("5 seconds, available only if test run duration is less than 10 minutes")
   PT5S,
+
   @doc("10 seconds, available only if test run duration is less than 10 minutes")
   PT10S,
   @doc("1 minute") PT1M,
+
   @doc("5 minutes, available only if test run duration is greater than 1 minute")
   PT5M,
+
   @doc("1 hour, available only if test run duration is greater than 1 minute")
   PT1H,
 }
 
 @added(APIVersions.v2023_04_01_preview)
 @doc("Test type")
-enum TestType{
+enum TestType {
   @doc("URL Test")
   URL,
+
   @doc("JMX Test")
-  JMX
+  JMX,
 }
 
 @doc("File info")
@@ -226,7 +237,7 @@ SECRET_VALUE.
   @maxLength(100)
   @doc("The test description.")
   description?: string;
-  
+
   @maxLength(50)
   @minLength(2)
   @doc("Display name of a test.")
@@ -343,7 +354,7 @@ range of 1-45. Required for creating a new test.
 """)
   engineInstances?: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style"     //CSV is an abbervation and should be all caps
+  #suppress "@azure-tools/typespec-azure-core/casing-style" //CSV is an abbervation and should be all caps
   @doc("""
 If false, Azure Load Testing copies and processes your input files unmodified
 across all test engine instances. If true, Azure Load Testing splits the CSV
@@ -372,19 +383,19 @@ model OptionalLoadTestConfig {
   endpointUrl?: string;
 
   @doc("Throughput required (requests per second)")
-  rps?: int32;        
+  rps?: int32;
 
   @doc("Maximum response time of the API/endpoint")
   maxResponseTime?: int32;
-  
+
   @doc("No of concurrent virtual users")
   virtualUsers?: int32;
 
   @doc("Ramp up time")
-  rampUpTime?: int32;   
+  rampUpTime?: int32;
 
   @doc("Test run duration")
-  duration?: int32;     
+  duration?: int32;
 }
 
 @doc("The input artifacts for the test.")
@@ -394,7 +405,7 @@ model TestInputArtifacts {
 
   @doc("File info")
   testScriptFileInfo?: TestFileInfo;
- 
+
   @doc("File info")
   userPropFileInfo?: TestFileInfo;
 
@@ -754,12 +765,12 @@ model TestRunStatistics {
   @visibility("read")
   throughput?: float32;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style"     //KBytes is expected
+  #suppress "@azure-tools/typespec-azure-core/casing-style" //KBytes is expected
   @doc("Received network bytes.")
   @visibility("read")
   receivedKBytesPerSec?: float32;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style"     //KBytes is expected
+  #suppress "@azure-tools/typespec-azure-core/casing-style" //KBytes is expected
   @doc("Send network bytes.")
   @visibility("read")
   sentKBytesPerSec?: float32;
@@ -932,12 +943,12 @@ model DimensionValue {
 }
 
 @doc("Metrics dimension values.")
-model DimensionValueList{
+model DimensionValueList {
   @doc("The dimension value")
   value?: string[];
 
   @doc("Link for the next set of values in case of paginated results, if applicable")
-  nextLink?: ResourceLocation<DimensionValueList>
+  nextLink?: ResourceLocation<DimensionValueList>;
 }
 
 @doc("Metric Dimensions")
@@ -945,7 +956,7 @@ model MetricDimensions {
   @doc("Metric name")
   @query
   metricname: string;
-  
+
   @doc("The interval (i.e. timegrain) of the query.")
   @query
   interval?: Interval;
@@ -960,7 +971,7 @@ model MetricDimensions {
   @query
   @projectedName("python", "time_interval")
   timespan: string;
-};
+}
 
 @doc("Test run app component")
 model TestRunAppComponents {
@@ -1022,6 +1033,8 @@ for metric id).
   lastModifiedBy?: string;
 }
 
-alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> & T;
+alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
+  T;
 
-alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> = ResourceCreatedResponse<T> | TypeSpec.Http.Response<200> & T;
+alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> = ResourceCreatedResponse<T> | (TypeSpec.Http.Response<200> &
+  T);
