@@ -1366,6 +1366,83 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/validateForModifyBackup": {
+      "post": {
+        "tags": [
+          "BackupInstances"
+        ],
+        "description": "Validate whether update for backup instance will be successful or not",
+        "operationId": "BackupInstances_ValidateForModifyBackup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/BackupInstanceName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateForModifyBackupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+
+        "x-ms-examples": {
+          "Validate For Modify Backup": {
+            "$ref": "./examples/BackupInstanceOperations/ValidateForModifyBackup.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/operationResults/{operationId}": {
       "get": {
         "tags": [
