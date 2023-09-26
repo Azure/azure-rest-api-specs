@@ -3,18 +3,16 @@
     "endpoint": "https://myservice.search.windows.net",
     "indexName": "myindex",
     "api-version": "2023-11-01",
-    "searchRequest": {
-      "count": true,
-      "highlightPostTag": "</em>",
-      "highlightPreTag": "<em>",
-      "queryType": "semantic",
-      "search": "how do clouds form",
-      "semanticConfiguration": "my-semantic-config",
-      "answers": "extractive|count-3",
-      "captions": "extractive|highlight-true",
-      "semanticErrorHandling": "partial",
-      "semanticMaxWaitInMilliseconds": 780
-    }
+    "$count": true,
+    "highlightPostTag": "</em>",
+    "highlightPreTag": "<em>",
+    "queryType": "semantic",
+    "search": "how do clouds form",
+    "semanticConfiguration": "my-semantic-config",
+    "answers": "extractive|count-3",
+    "captions": "extractive|highlight-true",
+    "semanticErrorHandling": "partial",
+    "semanticMaxWaitInMilliseconds": 780
   },
   "responses": {
     "200": {
@@ -28,20 +26,6 @@
             "score": 0.94639826
           }
         ],
-        "@search.nextPageParameters": {
-          "count": true,
-          "highlightPostTag": "</em>",
-          "highlightPreTag": "<em>",
-          "queryType": "semantic",
-          "search": "how do clouds form",
-          "semanticConfiguration": "my-semantic-config",
-          "answers": "extractive|count-3",
-          "captions": "extractive|highlight-true",
-          "semanticErrorHandling": "partial",
-          "semanticMaxWaitInMilliseconds": 780,
-          "skip": 2,
-          "top": 8
-        },
         "value": [
           {
             "@search.score": 0.5479723,
@@ -61,8 +45,7 @@
                 "Vancouver"
             ]
           }
-        ],
-        "@odata.nextLink": "https://myservice.search.windows.net/indexes('myindex')/docs/search.post.search?api-version=2023-11-01"
+        ]
       }
     }
   }
