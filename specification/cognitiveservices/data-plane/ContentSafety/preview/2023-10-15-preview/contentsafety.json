@@ -222,7 +222,7 @@
       "patch": {
         "operationId": "Projects_CreateOrUpdateProject",
         "summary": "Create Or Update A Project.",
-        "description": "Update a project if project does exist, create a new project if not. Note that modality cannot be updated.",
+        "description": "Update a project if project does exist, create a new project if not. Note that modality cannot be updated. The limitation is 10.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -1271,11 +1271,11 @@
         },
         "textPolicy": {
           "$ref": "#/definitions/TextPolicy",
-          "description": "Deployed text policy."
+          "description": "Deployed text policy. This value must be null if the modality is not Text."
         },
         "imagePolicy": {
           "$ref": "#/definitions/ImagePolicy",
-          "description": "Deployed image policy."
+          "description": "Deployed image policy.This value must be null if the modality is not Image."
         }
       },
       "required": [
@@ -1300,11 +1300,11 @@
         },
         "textPolicy": {
           "$ref": "#/definitions/TextPolicyUpdate",
-          "description": "Deployed text policy."
+          "description": "Deployed text policy. This value must be null if the modality is not Text."
         },
         "imagePolicy": {
           "$ref": "#/definitions/ImagePolicyUpdate",
-          "description": "Deployed image policy."
+          "description": "Deployed image policy.This value must be null if the modality is not Image."
         }
       }
     },

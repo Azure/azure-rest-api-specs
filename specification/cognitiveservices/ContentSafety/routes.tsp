@@ -99,7 +99,7 @@ interface ProjectOps
 @added(ContentSafety.Versions.v2023_10_15_Preview)
 interface Projects {
   @summary("Create Or Update A Project.")
-  @doc("Update a project if project does exist, create a new project if not. Note that modality cannot be updated.")
+  @doc("Update a project if project does exist, create a new project if not. Note that modality cannot be updated. The limitation is 10.")
   createOrUpdateProject is ProjectOps.ResourceCreateOrUpdate<Project>;
 
   @summary("Get Project Detailed Information By Project Name.")

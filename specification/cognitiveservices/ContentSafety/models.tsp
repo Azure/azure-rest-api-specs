@@ -235,10 +235,10 @@ model Project {
   @visibility("read", "query")
   lastModifiedAt?: utcDateTime;
 
-  @doc("Deployed text policy.")
+  @doc("Deployed text policy. This value must be null if the modality is not Text.")
   textPolicy?: TextPolicy;
 
-  @doc("Deployed image policy.")
+  @doc("Deployed image policy.This value must be null if the modality is not Image.")
   imagePolicy?: ImagePolicy;
 }
 
@@ -305,13 +305,4 @@ model BlocklistPolicy {
   @doc("When set to true, further analyses of harmful content will not be performed in cases where blocklists are hit. When set to false, all analyses of harmful content will be performed, whether or not blocklists are hit.")
   haltOnBlocklistHit?: boolean;
 }
-
-// @added(ContentSafety.Versions.v2023_10_15_Preview)
-// @doc("Judgement kind.")
-// enum JudgmentKind {
-//   @doc("Treat all content as accepted no matter what the predicted value is.")
-//   AcceptAll,
-//   @doc("Accept only when the predicted severity is less than the severity threshold.")
-//   AcceptLessThan,
-// }
 
