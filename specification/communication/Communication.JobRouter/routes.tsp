@@ -209,7 +209,7 @@ interface JobRouterOperations {
 
       @doc("Request object for reclassifying a job.")
       @body
-      reclassifyJobRequest: ReclassifyJobRequest;
+      reclassifyJobRequest?: ReclassifyJobRequest;
     },
     ReclassfiyJobOkReponse
   >;
@@ -234,7 +234,7 @@ cancellation reason.
 
       @doc("Request model for cancelling job.")
       @body
-      cancelJobRequest: CancelJobRequest;
+      cancelJobRequest?: CancelJobRequest;
     },
     CancelJobResultWithOkResponse
   >;
@@ -355,7 +355,7 @@ If specified, filter on jobs that was scheduled at or after given value. Range:
 
       @doc("Request body for unassign route.")
       @body
-      unassignJobRequest: UnassignJobRequest;
+      unassignJobRequest?: UnassignJobRequest;
     },
     UnassignJobResult
   >;
@@ -403,7 +403,7 @@ accepted the job already.
 
       @doc("Request model for declining offer.")
       @body
-      declineJobOfferRequest: DeclineJobOfferRequest;
+      declineJobOfferRequest?: DeclineJobOfferRequest;
     },
     DeclineJobOfferResultWithOkResponse
   >;
