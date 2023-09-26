@@ -88,7 +88,7 @@ model DetectedObject {
   boundingBox: BoundingBox;
 
   @doc("Classification confidences of the detected object.")
-  tags: Array<Tag>;
+  tags: Array<DetectedTag>;
 }
 
 @doc("Represents a person detected in an image")
@@ -262,7 +262,7 @@ model SmartCropsResult {
 }
 
 @doc("An entity observation in the image, along with the confidence score.")
-model Tag {
+model DetectedTag {
   @doc("The level of confidence that the entity was observed.")
   confidence: float64;
 
@@ -273,7 +273,7 @@ model Tag {
 @doc("A list of tags with confidence level.")
 model TagsResult {
   @doc("A list of tags with confidence level.")
-  values: Array<Tag>;
+  values: Array<DetectedTag>;
 }
 
 @doc("The visual features requested: tags, objects, caption, denseCaptions, read, smartCrops, people. This parameter needs to be specified if the parameter \"model-name\" is not specified.")
