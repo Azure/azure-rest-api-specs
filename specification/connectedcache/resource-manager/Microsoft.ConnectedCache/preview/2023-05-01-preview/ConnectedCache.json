@@ -141,6 +141,7 @@
           {
             "name": "parameters",
             "in": "body",
+            "required": true,
             "description": "enterpriseCustomers create parameters",
             "schema": {
               "$ref": "#/definitions/ConnectedCache"
@@ -423,6 +424,7 @@
           {
             "name": "parameters",
             "in": "body",
+            "required": true,
             "description": "cacheNodes create parameters",
             "schema": {
               "$ref": "#/definitions/ConnectedCache"
@@ -2187,7 +2189,7 @@
         },
         "CustomerAsn": {
           "type": "string",
-          "description": "asn (atonomus system number) of the customer entered value"
+          "description": "asn (atonomous system number) of the customer entered value"
         },
         "TransitState": {
           "type": "string",
@@ -2298,11 +2300,13 @@
         }
       ],
       "properties": {
-        "type": "object",
-        "description": "Properties of mcc cache node resource.",
-        "title": "Properties of mcc cache node resource.",
-        "x-ms-client-flatten": true,
-        "$ref": "#/definitions/CacheNode"
+        "properties": {
+          "type": "object",
+          "description": "Properties of mcc cache node resource.",
+          "title": "Properties of mcc cache node resource.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CacheNode"
+        }
       }
     },
     "MccCustomerResource": {
