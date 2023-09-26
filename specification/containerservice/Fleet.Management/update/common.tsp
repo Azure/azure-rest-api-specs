@@ -1,5 +1,5 @@
 import "@typespec/openapi";
-using OpenAPI;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
 
