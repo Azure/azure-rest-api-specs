@@ -1408,6 +1408,33 @@ selected.
   workerSelectors: RouterWorkerSelector[];
 }
 
+@doc("Request payload for reclassifying jobs")
+model ReclassifyJobRequest {}
+
+@doc("Response payload from reclassifying a job")
+model ReclassifyJobResult {}
+
+alias ReclassfiyJobOkReponse = TypeSpec.Http.Response<200> & ReclassifyJobResult;
+
+@doc("Response payload from closing a job")
+model CloseJobResult {}
+
+alias CloseJobResultWithOkResponse = TypeSpec.Http.Response<200> & CloseJobResult;
+
+alias CloseJobResultWithAcceptedResponse = TypeSpec.Http.Response<202> & CloseJobResult;
+
+alias CloseJobResultResponse = CloseJobResultWithOkResponse | CloseJobResultWithAcceptedResponse;
+
+@doc("Response payload from cancelling a job")
+model CancelJobResult {}
+
+alias CancelJobResultWithOkResponse = TypeSpec.Http.Response<200> & CancelJobResult;
+
+@doc("Response payload from completing a job")
+model CompleteJobResult {}
+
+alias CompleteJobResultWithOkResponse = TypeSpec.Http.Response<200> & CompleteJobResult;
+
 @doc("JobRouter Versions")
 enum Versions {
     @doc("JobRouter 2023-11-01 api version")

@@ -46,7 +46,7 @@
             "name": "maxpagesize",
             "in": "query",
             "description": "Maximum page size.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32"
           }
@@ -276,7 +276,7 @@
             "name": "maxpagesize",
             "in": "query",
             "description": "Maximum page size.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32"
           }
@@ -506,7 +506,7 @@
             "name": "maxpagesize",
             "in": "query",
             "description": "Number of objects to return per page.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32"
           }
@@ -736,8 +736,9 @@
             "name": "status",
             "in": "query",
             "description": "If specified, filter jobs by status.",
-            "required": true,
+            "required": false,
             "type": "string",
+            "default": "all",
             "enum": [
               "all",
               "pendingClassification",
@@ -835,28 +836,28 @@
             "name": "queueId",
             "in": "query",
             "description": "If specified, filter jobs by queue.",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
             "name": "channelId",
             "in": "query",
             "description": "If specified, filter jobs by channel.",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
             "name": "classificationPolicyId",
             "in": "query",
             "description": "If specified, filter jobs by classificationPolicy.",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
             "name": "scheduledBefore",
             "in": "query",
             "description": "If specified, filter on jobs that was scheduled before or at given timestamp.\nRange: (-Inf, scheduledBefore].",
-            "required": true,
+            "required": false,
             "type": "string",
             "format": "date-time"
           },
@@ -864,7 +865,7 @@
             "name": "scheduledAfter",
             "in": "query",
             "description": "If specified, filter on jobs that was scheduled at or after given value. Range:\n[scheduledAfter, +Inf).",
-            "required": true,
+            "required": false,
             "type": "string",
             "format": "date-time"
           },
@@ -872,7 +873,7 @@
             "name": "maxpagesize",
             "in": "query",
             "description": "Number of objects to return per page.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32"
           }
@@ -1114,13 +1115,13 @@
             "description": "Request object for reclassifying a job.",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/ReclassifyJobRequest"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1169,8 +1170,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1219,8 +1220,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1269,8 +1270,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1409,7 +1413,7 @@
             "name": "maxpagesize",
             "in": "query",
             "description": "Number of objects to return per page.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32"
           }
@@ -1683,8 +1687,9 @@
             "name": "state",
             "in": "query",
             "description": "If specified, select workers by worker state.",
-            "required": true,
+            "required": false,
             "type": "string",
+            "default": "all",
             "enum": [
               "active",
               "draining",
@@ -1722,28 +1727,28 @@
             "name": "channelId",
             "in": "query",
             "description": "If specified, select workers who have a channel configuration with this channel.",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
             "name": "queueId",
             "in": "query",
             "description": "If specified, select workers who are assigned to this queue.",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
             "name": "hasCapacity",
             "in": "query",
             "description": "If set to true, select only workers who have capacity for the channel specified\nby `channelId` or for any channel if `channelId` not specified. If set to\nfalse, then will return all workers including workers without any capacity for\njobs. Defaults to false.",
-            "required": true,
+            "required": false,
             "type": "boolean"
           },
           {
             "name": "maxpagesize",
             "in": "query",
             "description": "Number of objects to return per page.",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32"
           }
@@ -3194,6 +3199,10 @@
         }
       ],
       "x-ms-discriminator-value": "reclassify"
+    },
+    "ReclassifyJobRequest": {
+      "type": "object",
+      "description": "Request payload for reclassifying jobs"
     },
     "RoundRobinMode": {
       "type": "object",
