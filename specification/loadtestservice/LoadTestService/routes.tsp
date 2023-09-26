@@ -340,7 +340,7 @@ numeric, underscore or hyphen characters.
 
       @doc("Metric name")
       @query
-      metricName: string;
+      metricname: string;
 
       @doc("Metric namespace to query metric definitions for.")
       @query

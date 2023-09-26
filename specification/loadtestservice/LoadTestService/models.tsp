@@ -948,7 +948,7 @@ model MetricDimensions {
 
   @doc("Metric name")
   @query
-  metricName: string;
+  metricname: string;
 
   @doc("Metric namespace to query metric definitions for.")
   @query
