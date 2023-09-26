@@ -45,7 +45,7 @@
           {
             "name": "maxpagesize",
             "in": "query",
-            "description": "Maximum page size.",
+            "description": "Number of objects to return per page.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -275,7 +275,7 @@
           {
             "name": "maxpagesize",
             "in": "query",
-            "description": "Maximum page size.",
+            "description": "Number of objects to return per page.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -733,149 +733,30 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "status",
-            "in": "query",
-            "description": "If specified, filter jobs by status.",
-            "required": false,
-            "type": "string",
-            "default": "all",
-            "enum": [
-              "all",
-              "pendingClassification",
-              "queued",
-              "assigned",
-              "completed",
-              "closed",
-              "cancelled",
-              "classificationFailed",
-              "created",
-              "pendingSchedule",
-              "scheduled",
-              "scheduleFailed",
-              "waitingForActivation",
-              "active"
-            ],
-            "x-ms-enum": {
-              "name": "RouterJobStatusSelector",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "all",
-                  "value": "all",
-                  "description": "Default"
-                },
-                {
-                  "name": "pendingClassification",
-                  "value": "pendingClassification",
-                  "description": "Job is waiting to be classified."
-                },
-                {
-                  "name": "queued",
-                  "value": "queued",
-                  "description": "Job has been queued."
-                },
-                {
-                  "name": "assigned",
-                  "value": "assigned",
-                  "description": "Job has been assigned to a worker."
-                },
-                {
-                  "name": "completed",
-                  "value": "completed",
-                  "description": "Job has been completed by a worker."
-                },
-                {
-                  "name": "closed",
-                  "value": "closed",
-                  "description": "Job has been closed by a worker."
-                },
-                {
-                  "name": "cancelled",
-                  "value": "cancelled",
-                  "description": "Job has been cancelled."
-                },
-                {
-                  "name": "classificationFailed",
-                  "value": "classificationFailed",
-                  "description": "Classification process failed for the job."
-                },
-                {
-                  "name": "created",
-                  "value": "created",
-                  "description": "Job has been created."
-                },
-                {
-                  "name": "pendingSchedule",
-                  "value": "pendingSchedule",
-                  "description": "Job has been created but not been scheduled yet."
-                },
-                {
-                  "name": "scheduled",
-                  "value": "scheduled",
-                  "description": "Job has been scheduled successfully."
-                },
-                {
-                  "name": "scheduleFailed",
-                  "value": "scheduleFailed",
-                  "description": "Job scheduling failed."
-                },
-                {
-                  "name": "waitingForActivation",
-                  "value": "waitingForActivation",
-                  "description": "Job is in a suspended state and waiting for an update."
-                },
-                {
-                  "name": "active",
-                  "value": "active",
-                  "description": "Job is in a state of PendingClassification or Queued or Assigned or ClassificationFailed or Completed or PendingSchedule or Scheduled or ScheduleFailed or WaitingForActivation."
-                }
-              ]
-            }
-          },
-          {
-            "name": "queueId",
-            "in": "query",
-            "description": "If specified, filter jobs by queue.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "channelId",
-            "in": "query",
-            "description": "If specified, filter jobs by channel.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "classificationPolicyId",
-            "in": "query",
-            "description": "If specified, filter jobs by classificationPolicy.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "scheduledBefore",
-            "in": "query",
-            "description": "If specified, filter on jobs that was scheduled before or at given timestamp.\nRange: (-Inf, scheduledBefore].",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "scheduledAfter",
-            "in": "query",
-            "description": "If specified, filter on jobs that was scheduled at or after given value. Range:\n[scheduledAfter, +Inf).",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
             "name": "maxpagesize",
             "in": "query",
             "description": "Number of objects to return per page.",
             "required": false,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "$ref": "#/parameters/ListJobQueryParams.status"
+          },
+          {
+            "$ref": "#/parameters/ListJobQueryParams.queueId"
+          },
+          {
+            "$ref": "#/parameters/ListJobQueryParams.channelId"
+          },
+          {
+            "$ref": "#/parameters/ListJobQueryParams.classificationPolicyId"
+          },
+          {
+            "$ref": "#/parameters/ListJobQueryParams.scheduledBefore"
+          },
+          {
+            "$ref": "#/parameters/ListJobQueryParams.scheduledAfter"
           }
         ],
         "responses": {
@@ -1684,73 +1565,24 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "state",
-            "in": "query",
-            "description": "If specified, select workers by worker state.",
-            "required": false,
-            "type": "string",
-            "default": "all",
-            "enum": [
-              "active",
-              "draining",
-              "inactive",
-              "all"
-            ],
-            "x-ms-enum": {
-              "name": "RouterWorkerStateSelector",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "active",
-                  "value": "active",
-                  "description": "Worker is active and available to take offers."
-                },
-                {
-                  "name": "draining",
-                  "value": "draining",
-                  "description": "Worker is not active, if there are existing offers they are being revoked. No new offers are sent."
-                },
-                {
-                  "name": "inactive",
-                  "value": "inactive",
-                  "description": "Worker is not active. No new offers are sent."
-                },
-                {
-                  "name": "all",
-                  "value": "all",
-                  "description": "Worker is active or draining or inactive."
-                }
-              ]
-            }
-          },
-          {
-            "name": "channelId",
-            "in": "query",
-            "description": "If specified, select workers who have a channel configuration with this channel.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "queueId",
-            "in": "query",
-            "description": "If specified, select workers who are assigned to this queue.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "hasCapacity",
-            "in": "query",
-            "description": "If set to true, select only workers who have capacity for the channel specified\nby `channelId` or for any channel if `channelId` not specified. If set to\nfalse, then will return all workers including workers without any capacity for\njobs. Defaults to false.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
             "name": "maxpagesize",
             "in": "query",
             "description": "Number of objects to return per page.",
             "required": false,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "$ref": "#/parameters/ListWorkerQueryParams.state"
+          },
+          {
+            "$ref": "#/parameters/ListWorkerQueryParams.channelId"
+          },
+          {
+            "$ref": "#/parameters/ListWorkerQueryParams.queueId"
+          },
+          {
+            "$ref": "#/parameters/ListWorkerQueryParams.hasCapacity"
           }
         ],
         "responses": {
@@ -4305,6 +4137,214 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "ListJobQueryParams.channelId": {
+      "name": "channelId",
+      "in": "query",
+      "description": "If specified, filter jobs by channel.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListJobQueryParams.classificationPolicyId": {
+      "name": "classificationPolicyId",
+      "in": "query",
+      "description": "If specified, filter jobs by classificationPolicy.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListJobQueryParams.queueId": {
+      "name": "queueId",
+      "in": "query",
+      "description": "If specified, filter jobs by queue.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListJobQueryParams.scheduledAfter": {
+      "name": "scheduledAfter",
+      "in": "query",
+      "description": "If specified, filter on jobs that was scheduled at or after given value. Range:\n[scheduledAfter, +Inf).",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListJobQueryParams.scheduledBefore": {
+      "name": "scheduledBefore",
+      "in": "query",
+      "description": "If specified, filter on jobs that was scheduled before or at given timestamp.\nRange: (-Inf, scheduledBefore].",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListJobQueryParams.status": {
+      "name": "status",
+      "in": "query",
+      "description": "If specified, filter jobs by status.",
+      "required": false,
+      "type": "string",
+      "default": "all",
+      "enum": [
+        "all",
+        "pendingClassification",
+        "queued",
+        "assigned",
+        "completed",
+        "closed",
+        "cancelled",
+        "classificationFailed",
+        "created",
+        "pendingSchedule",
+        "scheduled",
+        "scheduleFailed",
+        "waitingForActivation",
+        "active"
+      ],
+      "x-ms-enum": {
+        "name": "RouterJobStatusSelector",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "all",
+            "value": "all",
+            "description": "Default"
+          },
+          {
+            "name": "pendingClassification",
+            "value": "pendingClassification",
+            "description": "Job is waiting to be classified."
+          },
+          {
+            "name": "queued",
+            "value": "queued",
+            "description": "Job has been queued."
+          },
+          {
+            "name": "assigned",
+            "value": "assigned",
+            "description": "Job has been assigned to a worker."
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "Job has been completed by a worker."
+          },
+          {
+            "name": "closed",
+            "value": "closed",
+            "description": "Job has been closed by a worker."
+          },
+          {
+            "name": "cancelled",
+            "value": "cancelled",
+            "description": "Job has been cancelled."
+          },
+          {
+            "name": "classificationFailed",
+            "value": "classificationFailed",
+            "description": "Classification process failed for the job."
+          },
+          {
+            "name": "created",
+            "value": "created",
+            "description": "Job has been created."
+          },
+          {
+            "name": "pendingSchedule",
+            "value": "pendingSchedule",
+            "description": "Job has been created but not been scheduled yet."
+          },
+          {
+            "name": "scheduled",
+            "value": "scheduled",
+            "description": "Job has been scheduled successfully."
+          },
+          {
+            "name": "scheduleFailed",
+            "value": "scheduleFailed",
+            "description": "Job scheduling failed."
+          },
+          {
+            "name": "waitingForActivation",
+            "value": "waitingForActivation",
+            "description": "Job is in a suspended state and waiting for an update."
+          },
+          {
+            "name": "active",
+            "value": "active",
+            "description": "Job is in a state of PendingClassification or Queued or Assigned or ClassificationFailed or Completed or PendingSchedule or Scheduled or ScheduleFailed or WaitingForActivation."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ListWorkerQueryParams.channelId": {
+      "name": "channelId",
+      "in": "query",
+      "description": "If specified, select workers who have a channel configuration with this channel.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListWorkerQueryParams.hasCapacity": {
+      "name": "hasCapacity",
+      "in": "query",
+      "description": "If set to true, select only workers who have capacity for the channel specified\nby `channelId` or for any channel if `channelId` not specified. If set to\nfalse, then will return all workers including workers without any capacity for\njobs. Defaults to false.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "ListWorkerQueryParams.queueId": {
+      "name": "queueId",
+      "in": "query",
+      "description": "If specified, select workers who are assigned to this queue.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListWorkerQueryParams.state": {
+      "name": "state",
+      "in": "query",
+      "description": "If specified, select workers by worker state.",
+      "required": false,
+      "type": "string",
+      "default": "all",
+      "enum": [
+        "active",
+        "draining",
+        "inactive",
+        "all"
+      ],
+      "x-ms-enum": {
+        "name": "RouterWorkerStateSelector",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "active",
+            "value": "active",
+            "description": "Worker is active and available to take offers."
+          },
+          {
+            "name": "draining",
+            "value": "draining",
+            "description": "Worker is not active, if there are existing offers they are being revoked. No new offers are sent."
+          },
+          {
+            "name": "inactive",
+            "value": "inactive",
+            "description": "Worker is not active. No new offers are sent."
+          },
+          {
+            "name": "all",
+            "value": "all",
+            "description": "Worker is active or draining or inactive."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
     },
     "RouterConditionalRequestHeaders.ifMatch": {
       "name": "If-Match",
