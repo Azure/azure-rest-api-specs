@@ -1065,13 +1065,13 @@ directive:
     where: $.definitions.PolicyRestrictionCollection.properties.nextLink
     reason: Invalid error, nextLink is a string, not an object
   - suppress: PropertiesTypeObjectNoDefinition
-	from: definitions.json
-	where: $.definitions.AllPoliciesCollection.properties.nextLink
+    from: definitions.json
+    where: $.definitions.AllPoliciesCollection.properties.nextLink
     reason: Invalid error
   - suppress: PropertiesTypeObjectNoDefinition
     from: definitions.json
-	where: $.definitions.PolicyRestrictionContractProperties
-	reason: Invalid error
+    where: $.definitions.PolicyRestrictionContractProperties
+    reason: Invalid error
   - suppress: PropertiesTypeObjectNoDefinition
     from: definitions.json  
     where: $.definitions.AllPoliciesContractProperties
