@@ -9,6 +9,7 @@ using TypeSpec.Versioning;
 using TypeSpec.Reflection;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.Core.Foundations;
 
 @versioned(AzureCommunicationRoutingService.Versions)
 namespace AzureCommunicationRoutingService;
@@ -1414,26 +1415,31 @@ model ReclassifyJobRequest {}
 @doc("Response payload from reclassifying a job")
 model ReclassifyJobResult {}
 
-alias ReclassfiyJobOkReponse = TypeSpec.Http.Response<200> & ReclassifyJobResult;
+alias ReclassfiyJobOkReponse = ResourceOkResponse<ReclassifyJobResult>;
 
 @doc("Response payload from closing a job")
 model CloseJobResult {}
 
-alias CloseJobResultWithOkResponse = TypeSpec.Http.Response<200> & CloseJobResult;
+alias CloseJobResultWithOkResponse = ResourceOkResponse<CloseJobResult>;
 
-alias CloseJobResultWithAcceptedResponse = TypeSpec.Http.Response<202> & CloseJobResult;
+alias CloseJobResultWithAcceptedResponse = Azure.Core.Foundations.AcceptedResponse<CloseJobResult>;
 
 alias CloseJobResultResponse = CloseJobResultWithOkResponse | CloseJobResultWithAcceptedResponse;
 
 @doc("Response payload from cancelling a job")
 model CancelJobResult {}
 
-alias CancelJobResultWithOkResponse = TypeSpec.Http.Response<200> & CancelJobResult;
+alias CancelJobResultWithOkResponse = ResourceOkResponse<CancelJobResult>;
 
 @doc("Response payload from completing a job")
 model CompleteJobResult {}
 
-alias CompleteJobResultWithOkResponse = TypeSpec.Http.Response<200> & CompleteJobResult;
+alias CompleteJobResultWithOkResponse = ResourceOkResponse<CompleteJobResult>;
+
+@doc("Response payload from declining a job")
+model DeclineJobOfferResult {}
+
+alias DeclineJobOfferResultWithOkResponse = ResourceOkResponse<DeclineJobOfferResult>;
 
 @doc("JobRouter Versions")
 enum Versions {
