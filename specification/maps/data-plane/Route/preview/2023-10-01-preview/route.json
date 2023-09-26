@@ -294,7 +294,7 @@
           "default": false
         },
         "avoid": {
-          "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request.\n\nExample: \"avoid\": [\"highways\", \"tolls\"]",
+          "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.\n\nExample: \"avoid\": [\"limitedAccessHighway\", \"tolls\"]",
           "type": "array",
           "items": {
             "type": "string",
@@ -313,7 +313,7 @@
               "values": [
                 {
                   "value": "limitedAccessHighway",
-                  "description": "Avoids the use of limited access highway in the route. `Note`: Only supported for driving and truck travelMode."
+                  "description": "Avoids the use of limited access highway in the route."
                 },
                 {
                   "value": "tollRoads",
