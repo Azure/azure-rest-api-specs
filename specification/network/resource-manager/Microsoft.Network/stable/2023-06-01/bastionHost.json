@@ -434,6 +434,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/deleteShareableLinksByToken": {
+      "post": {
+        "tags": [
+          "BastionHosts",
+          "BastionShareableLink"
+        ],
+        "operationId": "DeleteBastionShareableLinkByToken",
+        "description": "Deletes the Bastion Shareable Links for all the tokens specified in the request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/BastionHostName"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/BastionShareableLinkTokenRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation deleted the BastionShareableLinks associated with the tokens, if they existed. No return body."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete Bastion Shareable Links for the request VMs": {
+            "$ref": "./examples/BastionShareableLinkDeleteByToken.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/getShareableLinks": {
       "post": {
         "tags": [
@@ -593,7 +643,8 @@
           "description": "The name of this Bastion Host.",
           "enum": [
             "Basic",
-            "Standard"
+            "Standard",
+            "Developer"
           ],
           "default": "Standard",
           "x-ms-enum": {
@@ -819,7 +870,19 @@
           "description": "List of VM references."
         }
       },
-      "description": "Post request for all the Bastion Shareable Link endpoints."
+      "description": "Post request for Create/Delete/Get Bastion Shareable Link endpoints."
+    },
+    "BastionShareableLinkTokenListRequest": {
+      "properties": {
+        "tokens": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of Bastion Shareable Link Token."
+        }
+      },
+      "description": "Post request for Delete Bastion Shareable Link By Token endpoint."
     },
     "BastionShareableLinkListResult": {
       "properties": {
@@ -994,7 +1057,17 @@
       "schema": {
         "$ref": "#/definitions/BastionShareableLinkListRequest"
       },
-      "description": "Post request for all the Bastion Shareable Link endpoints.",
+      "description": "Post request for Create/Delete/Get Bastion Shareable Link endpoints.",
+      "x-ms-parameter-location": "method"
+    },
+    "BastionShareableLinkTokenRequest": {
+      "name": "bslTokenRequest",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/BastionShareableLinkTokenListRequest"
+      },
+      "description": "Post request for Delete Bastion Shareable Link By Token endpoint.",
       "x-ms-parameter-location": "method"
     },
     "BastionHostName": {

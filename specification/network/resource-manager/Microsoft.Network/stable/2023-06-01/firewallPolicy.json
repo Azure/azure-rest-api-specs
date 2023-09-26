@@ -547,19 +547,19 @@
           }
         },
         "x-ms-examples": {
-          "Create FirewallPolicyRuleCollectionGroup": {
+          "Create Firewall Policy Rule Collection Group": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupPut.json"
           },
-          "Create FirewallPolicyRuleCollectionGroup With IpGroups": {
+          "Create Firewall Policy Rule Collection Group With IP Groups": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithIpGroupsPut.json"
           },
-          "Create FirewallPolicyNatRuleCollectionGroup": {
+          "Create Firewall Policy Nat Rule Collection Group": {
             "$ref": "./examples/FirewallPolicyNatRuleCollectionGroupPut.json"
           },
-          "Create FirewallPolicyRuleCollectionGroup With Web Categories": {
+          "Create Firewall Policy Rule Collection Group With Web Categories": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithWebCategoriesPut.json"
           },
-          "Create FirewallPolicyRuleCollectionGroup With http header to insert": {
+          "Create Firewall Policy Rule Collection Group With http header to insert": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithHttpHeadersToInsert.json"
           }
         },
@@ -631,7 +631,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsSignatures": {
       "post": {
         "operationId": "FirewallPolicyIdpsSignatures_List",
-        "description": "Retrieves the current status of IDPS signatures for the relevant policy",
+        "description": "Retrieves the current status of IDPS signatures for the relevant policy. Maximal amount of returned signatures is 1000.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1708,7 +1708,11 @@
       "properties": {
         "mode": {
           "$ref": "#/definitions/FirewallPolicyIntrusionDetectionStateOptions",
-          "description": "Intrusion detection general state."
+          "description": "Intrusion detection general state. When attached to a parent policy, the firewall's effective IDPS mode is the stricter mode of the two."
+        },
+        "profile": {
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetectionProfileOptions",
+          "description": "IDPS profile name. When attached to a parent policy, the firewall's effective profile is the profile name of the parent policy."
         },
         "configuration": {
           "$ref": "#/definitions/FirewallPolicyIntrusionDetectionConfiguration",
@@ -1726,6 +1730,20 @@
       ],
       "x-ms-enum": {
         "name": "FirewallPolicyIntrusionDetectionStateType",
+        "modelAsString": true
+      }
+    },
+    "FirewallPolicyIntrusionDetectionProfileOptions": {
+      "type": "string",
+      "description": "Possible Intrusion Detection profile values.",
+      "enum": [
+        "Basic",
+        "Standard",
+        "Advanced",
+        "Extended"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallPolicyIntrusionDetectionProfileType",
         "modelAsString": true
       }
     },
@@ -2039,7 +2057,7 @@
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "Describes the severity of signature: 1 - Low, 2 - Medium, 3 - High",
+          "description": "Describes the severity of signature: 1 - High, 2 - Medium, 3 - Low",
           "enum": [
             1,
             2,
@@ -2053,11 +2071,13 @@
         "direction": {
           "type": "integer",
           "format": "int32",
-          "description": "Describes in which direction signature is being enforced: 0 - Inbound, 1 - OutBound, 2 - Bidirectional",
+          "description": "Describes in which direction signature is being enforced: 0 - OutBound, 1 - InBound, 2 - Any, 3 - Internal, 4 - InternalOutbound",
           "enum": [
             0,
             1,
-            2
+            2,
+            3,
+            4
           ],
           "x-ms-enum": {
             "name": "FirewallPolicyIDPSSignatureDirection",
