@@ -1979,6 +1979,38 @@
         "circuitBreaker": {
           "$ref": "#/definitions/BackendCircuitBreaker",
           "description": "Backend Circuit Breaker Configuration"
+        },
+        "pool": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/BackendPool"
+            },
+            {
+              "description": "Backend Pool Properties"
+            }
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Single",
+            "Pool"
+          ],
+          "x-ms-enum": {
+            "name": "BackendType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Single",
+                "description": "supports single backend"
+              },
+              {
+                "value": "Pool",
+                "description": "supports pool backend"
+              }
+            ]
+          },
+          "description": "Type of the backend. A backend can be either Single or Pool."
         }
       },
       "description": "Backend entity base Parameter set."
@@ -2379,6 +2411,41 @@
           "maximum": 599
         }
       }
+    },
+    "BackendPool": {
+      "type": "object",
+      "description": "Backend pool information",
+      "properties": {
+        "services": {
+          "type": "array",
+          "description": "The list of backend entities belonging to a pool.",
+          "items": {
+            "$ref": "#/definitions/BackendPoolItem"
+          },
+          "minItems": 1,
+          "x-ms-identifiers": [],
+          "example": {
+            "services": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends"
+          }
+        }
+      }
+    },
+    "BackendPoolItem": {
+      "type": "object",
+      "description": "Backend pool service information",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The unique ARM id of the backend entity. The ARM id should refer to an already existing backend entity.",
+          "example": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "BearerTokenSendingMethodsContract": {
       "type": "string",
