@@ -7337,6 +7337,107 @@
       },
       "x-ms-discriminator-value": "KubernetesClusterRestoreCriteria"
     },
+    "KubernetesClusterVaultTierRestoreCriteria": {
+      "description": "kubernetes Cluster Backup target info for restore operation from vault",
+      "required": [
+        "includeClusterScopeResources"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemLevelRestoreCriteria"
+        }
+      ],
+      "properties": {
+        "includeClusterScopeResources": {
+          "description": "Gets or sets the include cluster resources property. This property if enabled will include cluster scope resources during restore from vault.",
+          "type": "boolean"
+        },
+        "includedNamespaces": {
+          "description": "Gets or sets the include namespaces property. This property sets the namespaces to be included during restore from vault.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "excludedNamespaces": {
+          "description": "Gets or sets the exclude namespaces property. This property sets the namespaces to be excluded during restore from vault.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "includedResourceTypes": {
+          "description": "Gets or sets the include resource types property. This property sets the resource types to be included during restore from vault.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "excludedResourceTypes": {
+          "description": "Gets or sets the exclude resource types property. This property sets the resource types to be excluded during restore from vault.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "labelSelectors": {
+          "description": "Gets or sets the LabelSelectors property. This property sets the resource with such label selectors to be included during restore from vault.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "persistentVolumeRestoreMode": {
+          "description": "Gets or sets the PV (Persistent Volume) Restore Mode property. This property sets whether volumes needs to be restored from vault.",
+          "enum": [
+            "RestoreWithVolumeData",
+            "RestoreWithoutVolumeData"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PersistentVolumeRestoreMode",
+            "modelAsString": true
+          }
+        },
+        "conflictPolicy": {
+          "description": "Gets or sets the Conflict Policy property. This property sets policy during conflict of resources during restore from vault.",
+          "enum": [
+            "Skip",
+            "Patch"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ExistingResourcePolicy",
+            "modelAsString": true
+          }
+        },
+        "namespaceMappings": {
+          "description": "Gets or sets the Namespace Mappings property. This property sets if namespace needs to be change during restore from vault.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "restoreHookReferences": {
+          "description": "Gets or sets the restore hook references. This property sets the hook reference to be executed during restore from vault.",
+          "items": {
+            "$ref": "#/definitions/NamespacedNameResource"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        },
+        "stagingResourceGroupId": {
+          "description": "Gets or sets the staging RG Id for creating staging disks and snapshots during restore from vault.",
+          "type": "string"
+        },
+        "stagingStorageAccountId": {
+          "description": "Gets or sets the staging Storage Account Id for creating backup extension object store data during restore from vault.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "KubernetesClusterVaultTierRestoreCriteria"
+    },
     "RecoveryPointDataStoreDetails": {
       "description": "RecoveryPoint datastore details",
       "properties": {
