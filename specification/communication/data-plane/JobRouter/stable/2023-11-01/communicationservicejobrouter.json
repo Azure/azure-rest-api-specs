@@ -2171,11 +2171,6 @@
         }
       }
     },
-    "Azure.Core.eTag": {
-      "type": "string",
-      "format": "eTag",
-      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
-    },
     "BestWorkerMode": {
       "type": "object",
       "description": "Jobs are distributed to the worker with the strongest abilities available.",
@@ -2350,7 +2345,7 @@
           "description": "A container for the rules that govern how jobs are classified."
         },
         "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
+          "type": "string",
           "description": "(Optional) The Concurrency Token."
         }
       },
@@ -2562,7 +2557,7 @@
           "description": "Policy governing how jobs are distributed to workers"
         },
         "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
+          "type": "string",
           "description": "(Optional) The Concurrency Token."
         }
       },
@@ -2636,7 +2631,7 @@
           "description": "A policy that defines actions to execute when exception are triggered."
         },
         "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
+          "type": "string",
           "description": "(Optional) The Concurrency Token."
         }
       },
@@ -3202,7 +3197,10 @@
     },
     "ReclassifyJobRequest": {
       "type": "object",
-      "description": "Request payload for reclassifying jobs"
+      "description": "Request payload for reclassifying jobs",
+      "additionalProperties": {
+        "type": "string"
+      }
     },
     "RoundRobinMode": {
       "type": "object",
@@ -3418,7 +3416,7 @@
           "description": "A unit of work to be routed"
         },
         "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
+          "type": "string",
           "description": "(Optional) The Concurrency Token."
         }
       },
@@ -3648,7 +3646,7 @@
           "description": "A queue that can contain jobs to be routed."
         },
         "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
+          "type": "string",
           "description": "(Optional) The Concurrency Token."
         }
       },
@@ -3878,7 +3876,7 @@
           "description": "An entity for jobs to be routed to"
         },
         "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
+          "type": "string",
           "description": "(Optional) The Concurrency Token."
         }
       },
