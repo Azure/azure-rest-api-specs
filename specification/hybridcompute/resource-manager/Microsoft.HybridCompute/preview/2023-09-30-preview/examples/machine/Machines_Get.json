@@ -1,37 +1,9 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
+    "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
     "machineName": "myMachine",
-    "api-version": "2023-09-30-preview",
-    "location": "eastus2euap",
-    "kind": null,
-    "parameters": {
-      "properties": {
-        "locationData": {
-          "name": "Redmond"
-        },
-        "osProfile": {
-          "windowsConfiguration": {
-            "patchSettings": {
-              "assessmentMode": "ImageDefault",
-              "patchMode": "Manual"
-            }
-          },
-          "linuxConfiguration": {
-            "patchSettings": {
-              "assessmentMode": "ImageDefault",
-              "patchMode": "Manual"
-            }
-          }
-        },
-        "parentClusterResourceId": "{AzureStackHCIResourceId}",
-        "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName"
-      },
-      "identity": {
-        "type": "SystemAssigned"
-      }
-    }
+    "api-version": "2023-09-30-preview"
   },
   "responses": {
     "200": {
@@ -66,18 +38,25 @@
             "computerName": null,
             "windowsConfiguration": {
               "patchSettings": {
-                "assessmentMode": "ImageDefault",
-                "patchMode": "Manual"
+                "assessmentMode": null,
+                "patchMode": null
               }
             },
             "linuxConfiguration": {
               "patchSettings": {
-                "assessmentMode": "ImageDefault",
-                "patchMode": "Manual"
+                "assessmentMode": null,
+                "patchMode": null
               }
             }
           },
           "licenseProfile": {
+            "licenseStatus": "UnKnown",
+            "licenseChannel": "PSG",
+            "osEdition": "Standard",
+            "machineType": "UnKnown",
+            "softwareAssurance": {
+              "softwareAssuranceStatus": "Enabled"
+            },
             "esuProfile": {
               "licenseAssignmentState": "Assigned",
               "esuEligibility": "Ineligible",
@@ -93,9 +72,6 @@
                   "licenseStatus": "licenseStatus2"
                 }
               ]
-            },
-            "softwareAssurance": {
-              "softwareAssuranceStatus": "Enabled"
             },
             "products": {
               "windowsServerProfile": {
@@ -115,13 +91,74 @@
           },
           "vmId": "b7a098cc-b0b8-46e8-a205-62f301a62a8f",
           "locationData": {
-            "name": "Redmond"
+            "name": "Redmond",
+            "city": "redmond",
+            "district": null,
+            "countryOrRegion": "usa"
           },
           "clientPublicKey": "string",
           "parentClusterResourceId": "{AzureStackHCIResourceId}",
-          "detectedProperties": null,
-          "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName"
-        }
+          "mssqlDiscovered": "false",
+          "detectedProperties": {
+            "cloudprovider": "N/A",
+            "manufacturer": "Microsoft Corporation",
+            "model": "Virtual Machine"
+          },
+          "agentConfiguration": {
+            "proxyUrl": "https://test.test",
+            "incomingConnectionsPorts": [
+              "22",
+              "23"
+            ],
+            "extensionsAllowList": null,
+            "extensionsBlockList": null,
+            "proxyBypass": [
+              "proxy1",
+              "proxy2"
+            ],
+            "extensionsEnabled": "true",
+            "guestConfigurationEnabled": "true",
+            "configMode": "full"
+          },
+          "serviceStatuses": {
+            "extensionService": {
+              "status": "Running",
+              "startupType": "Automatic"
+            },
+            "guestConfigurationService": {
+              "status": "Running",
+              "startupType": "Automatic"
+            }
+          },
+          "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName",
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "ipAddresses": [
+                  {
+                    "address": "192.168.12.345",
+                    "ipAddressVersion": "IPv4",
+                    "subnet": {
+                      "addressPrefix": "192.168.12.0/24"
+                    }
+                  }
+                ]
+              },
+              {
+                "ipAddresses": [
+                  {
+                    "address": "1001:0:34aa:5000:1234:aaaa:bbbb:cccc",
+                    "ipAddressVersion": "IPv6",
+                    "subnet": {
+                      "addressPrefix": "1001:0:34aa:5000::/64"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "resources": []
       }
     }
   }

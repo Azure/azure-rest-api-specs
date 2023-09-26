@@ -1,6 +1,7 @@
 {
   "parameters": {
     "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2023-09-30-preview"
   },
   "responses": {
@@ -14,8 +15,8 @@
             "tags": null,
             "identity": {
               "type": "SystemAssigned",
-              "principalId": "string",
-              "tenantId": "string"
+              "principalId": "f7a068cc-b0b8-46e8-a203-22f301a62a8f",
+              "tenantId": "c4098cc-91b8-46c2-a205-d82ab1a62a8f"
             },
             "type": "Microsoft.HybridCompute/machines",
             "kind": null,
@@ -50,6 +51,13 @@
                 }
               },
               "licenseProfile": {
+                "licenseStatus": "UnKnown",
+                "licenseChannel": "PSG",
+                "osEdition": "Standard",
+                "machineType": "UnKnown",
+                "softwareAssurance": {
+                  "softwareAssuranceStatus": "Enabled"
+                },
                 "esuProfile": {
                   "licenseAssignmentState": "Assigned",
                   "esuEligibility": "Ineligible",
@@ -65,9 +73,6 @@
                       "licenseStatus": "licenseStatus2"
                     }
                   ]
-                },
-                "softwareAssurance": {
-                  "softwareAssuranceStatus": "Enabled"
                 },
                 "products": {
                   "windowsServerProfile": {
@@ -117,7 +122,7 @@
             }
           },
           {
-            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup2/providers/Microsoft.HybridCompute/machines/myMachine2",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/machines/myMachine2",
             "name": "myMachine2",
             "location": "westus2",
             "tags": null,
@@ -154,6 +159,13 @@
                 }
               },
               "licenseProfile": {
+                "licenseStatus": "UnKnown",
+                "licenseChannel": "PSG",
+                "osEdition": "Standard",
+                "machineType": "UnKnown",
+                "softwareAssurance": {
+                  "softwareAssuranceStatus": "Enabled"
+                },
                 "esuProfile": {
                   "licenseAssignmentState": "Assigned",
                   "esuEligibility": "Ineligible",
@@ -169,9 +181,6 @@
                       "licenseStatus": "licenseStatus2"
                     }
                   ]
-                },
-                "softwareAssurance": {
-                  "softwareAssuranceStatus": "Enabled"
                 },
                 "products": {
                   "windowsServerProfile": {
@@ -216,11 +225,12 @@
                 "extensionsEnabled": "true",
                 "guestConfigurationEnabled": "true",
                 "configMode": "full"
-              }
+              },
+              "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName"
             }
           }
         ],
-        "nextLink": "string"
+        "nextLink": null
       }
     }
   }
