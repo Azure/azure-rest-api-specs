@@ -603,10 +603,10 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/MetricDimensions.interval"
+            "$ref": "#/parameters/MetricDimensions.metricname"
           },
           {
-            "$ref": "#/parameters/MetricDimensions.metricname"
+            "$ref": "#/parameters/MetricDimensions.interval"
           },
           {
             "$ref": "#/parameters/MetricDimensions.metricNamespace"
@@ -722,6 +722,13 @@
             "type": "string"
           },
           {
+            "name": "metricname",
+            "in": "query",
+            "description": "Metric name",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "interval",
             "in": "query",
             "description": "The interval (i.e. timegrain) of the query.",
@@ -766,13 +773,6 @@
                 }
               ]
             }
-          },
-          {
-            "name": "metricname",
-            "in": "query",
-            "description": "Metric name",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "metricNamespace",

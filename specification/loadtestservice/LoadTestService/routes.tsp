@@ -334,13 +334,13 @@ numeric, underscore or hyphen characters.
       @query
       aggregation?: string;
 
-      @doc("The interval (i.e. timegrain) of the query.")
-      @query
-      interval?: Interval = Interval.PT1M;
-
       @doc("Metric name")
       @query
       metricname: string;
+      
+      @doc("The interval (i.e. timegrain) of the query.")
+      @query
+      interval?: Interval = Interval.PT1M;
 
       @doc("Metric namespace to query metric definitions for.")
       @query

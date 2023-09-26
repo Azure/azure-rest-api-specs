@@ -942,13 +942,13 @@ model DimensionValueList{
 
 @doc("Metric Dimensions")
 model MetricDimensions {
-  @doc("The interval (i.e. timegrain) of the query.")
-  @query
-  interval?: Interval;
-
   @doc("Metric name")
   @query
   metricname: string;
+  
+  @doc("The interval (i.e. timegrain) of the query.")
+  @query
+  interval?: Interval;
 
   @doc("Metric namespace to query metric definitions for.")
   @query
