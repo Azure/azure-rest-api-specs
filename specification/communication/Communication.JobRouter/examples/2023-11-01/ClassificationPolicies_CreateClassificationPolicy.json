@@ -1,11 +1,11 @@
 {
-  "title": "Creates or updates a classification policy.",
-  "operationId": "upsertClassificationPolicy",
+  "title": "Creates a Classification Policy",
+  "operationId": "JobRouterAdministrationOperations_UpsertClassificationPolicy",
   "parameters": {
     "endpoint": "https://contoso.westus.communications.azure.com",
     "api-version": "2023-11-01",
     "id": "90eb00c4-234e-4df7-a231-ef7895518384",
-    "patch": {
+    "resource": {
       "name": "Main",
       "fallbackQueueId": "MainQueue",
       "queueSelectors": [
@@ -13,7 +13,7 @@
           "kind": "conditional",
           "condition": {
             "kind": "expression-rule",
-            "language": "PowerFx",
+            "language": "powerFx",
             "expression": "1 = 1"
           },
           "queueSelectors": [
@@ -42,7 +42,7 @@
             "kind": "conditional",
             "condition": {
               "kind": "expression-rule",
-              "language": "PowerFx",
+              "language": "powerFx",
               "expression": "1 = 1"
             },
             "queueSelectors": [
@@ -71,7 +71,7 @@
             "kind": "conditional",
             "condition": {
               "kind": "expression-rule",
-              "language": "PowerFx",
+              "language": "powerFx",
               "expression": "1 = 1"
             },
             "queueSelectors": [

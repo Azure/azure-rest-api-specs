@@ -1,6 +1,6 @@
 {
-  "title": "Retrieves existing classification policies.",
-  "operationId": "listClassificationPolicies",
+  "title": "Retrieves existing classification policies",
+  "operationId": "JobRouterAdministrationOperations_ListClassificationPolicies",
   "parameters": {
     "endpoint": "https://contoso.westus.communications.azure.com",
     "api-version": "2023-11-01",
@@ -20,7 +20,7 @@
                   "kind": "rule-engine",
                   "rule": {
                     "kind": "expression-rule",
-                    "language": "powerFx",
+                    "language": "PowerFx",
                     "expression": "If(job.Escalated = true, \"SecondaryQueue\", \"MainQueue\")"
                   }
                 }
@@ -43,7 +43,7 @@
                   "kind": "rule-engine",
                   "rule": {
                     "kind": "expression-rule",
-                    "language": "powerFx",
+                    "language": "PowerFx",
                     "expression": "If(job.VIP = true, \"VIPQueue\", \"MainQueue\")"
                   }
                 }
