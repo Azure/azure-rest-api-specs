@@ -1528,12 +1528,12 @@
         "operationId": "Entity_MoveEntitiesToCollection",
         "x-ms-examples": {
           "Collection_MoveEntitiesToCollection": {
-            "$ref": "./examples/Collection_MoveEntitiesToCollection.json"
+            "$ref": "./examples/Entity_MoveEntitiesToCollection.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/collectionId"
+            "$ref": "#/parameters/requiredCollectionId"
           },
           {
             "$ref": "#/parameters/purviewAPIVersion"
@@ -1561,166 +1561,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/entity/import": {
-      "post": {
-        "tags": [
-          "Entity"
-        ],
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "description": "Import Entity from local csv file",
-        "operationId": "Entity_ImportViaCsv",
-        "x-ms-examples": {
-          "Entity_ImportViaCsv": {
-            "$ref": "./examples/Entity_GetImportCSVOperationStatus.json"
-          },
-          "Entity_ImportViaCsvWithUploadFiles": {
-            "$ref": "./examples/Entity_GetImportWithUploadedFiles.json"
-          }
-        },
-        "parameters": [
-          {
-            "in": "formData",
-            "name": "file",
-            "description": "The csv file to import entities from csv.",
-            "required": false,
-            "type": "file"
-          },
-          {
-            "name": "fileId",
-            "in": "query",
-            "description": "An array of ids of the uploaded file for import.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "x-ms-client-name": "fileIds"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted. A job to import entities via csv has been accepted.",
-            "headers": {
-              "Operation-Location": {
-                "description": "Response header for long running operation",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      }
-    },
-    "/entity/operations/{operationGuid}": {
-      "get": {
-        "tags": [
-          "Entity"
-        ],
-        "description": "Get the status of entity import or export job",
-        "operationId": "Entity_GetOperationStatus",
-        "x-ms-examples": {
-          "Entity_GetOperationStatus": {
-            "$ref": "./examples/Entity_GetOperationStatusByOperationguid.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/operationGuid"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Return the status of import csv operation.",
-            "schema": {
-              "$ref": "#/definitions/EntityImportCSVOperation"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/entity/export": {
-      "post": {
-        "tags": [
-          "Entity"
-        ],
-        "description": "Export Entity as csv file",
-        "operationId": "Entity_ExportAsCsv",
-        "x-ms-examples": {
-          "Entity_ExportEntitiesWithGuid": {
-            "$ref": "./examples/Entity_ExportEntitiesWithGuid.json"
-          },
-          "Entity_ExportEntitiesWithFilter": {
-            "$ref": "./examples/Entity_ExportEntitiesWithFilter.json"
-          }
-        },
-        "parameters": [
-          {
-            "in": "body",
-            "name": "exportRequest",
-            "description": "Export request defining the entity guids and other values to be exported. If no fields are provided, all attributes/relationship attributes/business attributes including the contacts Expert/Owner/Steward will be exported.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EntityExportRequest"
-            }
-          },
-          {
-            "name": "supportRecursiveExport",
-            "in": "query",
-            "description": "Whether to support recursively exporting assets",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted. A job to export entities via csv has been accepted.",
-            "headers": {
-              "Operation-Location": {
-                "description": "Response header for long running operation",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2174,6 +2014,7 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+
             }
           }
         }
@@ -2474,47 +2315,6 @@
         "responses": {
           "204": {
             "description": "OK. If the term assignment was successful."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Glossary"
-        ],
-        "description": "Delete the term assignment for the given list of related objects. This API is not recommended since duplicated with 'DELETE /datamap/api/atlas/v2/glossary/terms/{termGuid}/assignedEntities'. Please use later one instead.",
-        "operationId": "Glossary_RemoveTermAssignmentFromEntities",
-        "x-ms-examples": {
-          "Glossary_RemoveTermAssignmentFromEntities": {
-            "$ref": "./examples/Glossary_RemoveTermAssignmentFromEntities.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/termGuid"
-          },
-          {
-            "in": "body",
-            "name": "relatedObjectIds",
-            "description": "An array of related object IDs from which the term has to be dissociated.",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "description": "An array of related object IDs from which the term has to be dissociated.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedObjectId"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "OK. If glossary term dissociation was successful."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3003,223 +2803,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/glossary/terms/import": {
-      "post": {
-        "tags": [
-          "Glossary"
-        ],
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "description": "Import Glossary Terms from local csv file. Note the csv file should be uploaded in formData with key='file'.",
-        "operationId": "Glossary_ImportGlossaryTermsViaCsv",
-        "x-ms-examples": {
-          "Glossary_ImportGlossaryTermsViaCsv": {
-            "$ref": "./examples/Glossary_GetImportCSVOperationStatus.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "glossaryGuid",
-            "in": "query",
-            "description": "The globally unique identifier for glossary.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 4096,
-            "x-ms-parameter-location": "method"
-          },
-          {
-            "in": "formData",
-            "name": "file",
-            "description": "The csv file to import glossary terms from.",
-            "required": true,
-            "type": "file"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted. A job to import glossary terms via csv has been accepted.",
-            "headers": {
-              "Operation-Location": {
-                "description": "Response header for long running operation",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      }
-    },
-    "/glossary/terms/export": {
-      "post": {
-        "tags": [
-          "Glossary"
-        ],
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "description": "Export Glossary Terms as a csv file.",
-        "operationId": "Glossary_ExportGlossaryTermsAsCsv",
-        "x-ms-examples": {
-          "Glossary_ExportGlossaryTermsAsCsv": {
-            "$ref": "./examples/Glossary_ExportGlossaryTermsAsCsv.json"
-          }
-        },
-        "parameters": [          
-          {
-            "name": "glossaryGuid",
-            "in": "query",
-            "description": "The globally unique identifier for glossary.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 4096,
-            "x-ms-parameter-location": "method"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          },
-          {
-            "in": "body",
-            "name": "termExportRequest",
-            "description": "Term export request defining the term guids and other values to be exported.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TermsExportRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted. A job to export glossary terms as csv has been accepted.",
-            "headers": {
-              "Operation-Location": {
-                "description": "Response header for long running operation",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      }
-    },
-    "/glossary/operations/{operationGuid}": {
-      "get": {
-        "tags": [
-          "Glossary"
-        ],
-        "description": "Get the status of glossary async operation",
-        "operationId": "Glossary_GetAsyncOperationStatus",
-        "x-ms-examples": {
-          "Glossary_GetImportCsvOperationStatus": {
-            "$ref": "./examples/Glossary_GetImportCSVOperationStatusByOperationguid.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/operationGuid"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Return the status of glossary async operation.",
-            "schema": {
-              "$ref": "#/definitions/AsyncOperation"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/glossary/terms/delete": {
-      "post": {
-        "tags": [
-          "Glossary"
-        ],
-        "description": "Delete Glossary Terms",
-        "operationId": "Glossary_BulkDeleteTermsByGuids",
-        "x-ms-examples": {
-          "Glossary_BulkDeleteTermsByGuids": {
-            "$ref": "./examples/Glossary_GetBulkDeleteOperationStatus.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/forceDeleteEntityAssignment"
-          },
-          {
-            "$ref": "#/parameters/forceDeleteChild"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          },
-          {
-            "in": "body",
-            "name": "termGuids",
-            "description": "An array of term guids to be deleted.",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "description": "An array of term guids to be deleted.",
-              "items": {
-                "$ref": "#/definitions/TermGuid"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted. A job to delete glossary terms has been accepted.",
-            "headers": {
-              "Operation-Location": {
-                "description": "Response header for long running operation",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -4716,18 +4299,6 @@
               "items": {
                 "$ref": "#/definitions/TimeBoundary"
               }
-            },
-            "source": {
-              "type": "string",
-              "description": "indicate the source who create the classification detail"
-            },
-            "sourceDetails": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "object",
-                "properties": {}
-              },
-              "description": "more detail on source information"
             }
           }
         }
@@ -4918,18 +4489,6 @@
             "version": {
               "type": "number",
               "description": "The version of the entity."
-            },
-            "source": {
-              "type": "string",
-              "description": "indicate the source who create the classification detail"
-            },
-            "sourceDetails": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "object",
-                "properties": {}
-              },
-              "description": "more detail on source information"
             },
             "contacts": {
               "type": "object",
@@ -5748,10 +5307,6 @@
           "type": "string",
           "description": "The GUID of the relationship."
         },
-        "source": {
-          "type": "string",
-          "description": "The source of the term."
-        },
         "status": {
           "$ref": "#/definitions/AtlasTermRelationshipStatus"
         },
@@ -5992,10 +5547,6 @@
         "relationGuid": {
           "type": "string",
           "description": "The GUID of the relationship."
-        },
-        "source": {
-          "type": "string",
-          "description": "The source of the term."
         },
         "status": {
           "$ref": "#/definitions/AtlasTermAssignmentStatus"
@@ -7991,9 +7542,9 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "destinationCollectionId": {
-      "name": "destinationCollectionId",
-      "description": "The destination collection ID.",
+    "requiredCollectionId": {
+      "name": "collectionId",
+      "description": "The collection where entities will be moved to.",
       "in": "query",
       "required": true,
       "type": "string",
@@ -8001,7 +7552,7 @@
     },
     "collectionId": {
       "name": "collectionId",
-      "description": "The collection ID.",
+      "description": "The collection where entities will be moved to. Only specify a value if you need to move an entity to another collection.",
       "in": "query",
       "required": false,
       "type": "string",
