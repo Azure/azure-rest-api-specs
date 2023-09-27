@@ -31,6 +31,12 @@ model SharedAnalyzeQuery {
     genderNeutralCaption?: boolean = false;
 }
 
+model SharedSegmentQuery {
+  @query("mode")
+  @doc("The type of segmentation to perform")
+  mode: segmentationMode;
+}
+
 @doc("A basic rectangle")
 model BoundingBox {
   @doc("X coordinate")
