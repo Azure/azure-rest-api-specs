@@ -236,6 +236,34 @@
               "keyVaultKeyVersion": "myKeyVersion",
               "keyVaultUri": "https://myKeyVault.vault.azure.net",
               "accessCredentials": null
+            },
+            "semantic": {
+              "configurations": [
+                {
+                  "name": "semanticHotels",
+                  "prioritizedFields": {
+                    "titleField": {
+                      "fieldName": "hotelName"
+                    },
+                    "prioritizedContentFields": [
+                      {
+                        "fieldName": "description"
+                      },
+                      {
+                        "fieldName": "description_fr"
+                      }
+                    ],
+                    "prioritizedKeywordsFields": [
+                      {
+                        "fieldName": "tags"
+                      },
+                      {
+                        "fieldName": "category"
+                      }
+                    ]
+                  }
+                }
+              ]
             }
           },
           {
