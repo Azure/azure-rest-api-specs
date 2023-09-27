@@ -1,5 +1,4 @@
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-autorest";
 import "@typespec/http";
 import "@typespec/rest";
 import "./models.tsp";
@@ -7,7 +6,6 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core.Traits;
-using Autorest;
 
 namespace AzureCommunicationRoutingService;
 
