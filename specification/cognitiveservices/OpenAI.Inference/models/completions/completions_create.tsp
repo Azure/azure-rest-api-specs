@@ -1,7 +1,8 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
-import "./completions.common.tsp";
+
+import "./common.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -163,7 +164,7 @@ model Completions {
   created: utcDateTime;
 
   @doc("""
-  Content filtering results for zero or more prompts in the request. In a streaming request, 
+  Content filtering results for zero or more prompts in the request. In a streaming request,
   results for different prompts may arrive at different times or in different orders.
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
@@ -200,8 +201,8 @@ model Choice {
   index: int32;
 
   @doc("""
-  Information about the content filtering category (hate, sexual, violence, self_harm), if it 
-  has been detected, as well as the severity level (very_low, low, medium, high-scale that 
+  Information about the content filtering category (hate, sexual, violence, self_harm), if it
+  has been detected, as well as the severity level (very_low, low, medium, high-scale that
   determines the intensity and risk level of harmful content) and if it has been filtered or not.
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)

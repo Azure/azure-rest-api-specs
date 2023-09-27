@@ -1,6 +1,7 @@
 import "@typespec/versioning";
-import "./chat.completions.tsp";
-import "./azure.cognitive.search.options.tsp";
+
+import "./chat_completions.tsp";
+import "./azure_cognitive_search_options.tsp";
 
 namespace Azure.OpenAI;
 

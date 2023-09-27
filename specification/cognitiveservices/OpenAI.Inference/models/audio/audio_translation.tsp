@@ -1,5 +1,5 @@
 import "@typespec/versioning";
-import "./audio.common.tsp";
+import "./common.tsp";
 
 namespace Azure.OpenAI;
 

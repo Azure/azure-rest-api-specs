@@ -1,5 +1,6 @@
 import "@typespec/versioning";
-import "./azure.chat.extensions.tsp";
+
+import "./azure_chat_extensions.tsp";
 
 namespace Azure.OpenAI;
 

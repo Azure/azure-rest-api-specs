@@ -1,7 +1,8 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "@typespec/versioning";
-import "./operations.common.tsp";
+
+import "./common.tsp";
 
 using Azure.Core;
 using TypeSpec.Http;
