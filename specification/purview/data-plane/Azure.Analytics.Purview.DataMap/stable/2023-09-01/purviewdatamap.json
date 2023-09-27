@@ -980,7 +980,12 @@
             "$ref": "#/parameters/guid"
           },
           {
-            "$ref":"#/parameters/businessMetadata"
+            "name": "businessMetadata",
+            "required": false,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BusinessMetadata"
+            }
           }
         ],
         "responses": {
@@ -1021,7 +1026,12 @@
             "required": false
           },
           {
-            "$ref":"#/parameters/businessMetadata"
+            "name": "businessMetadata",
+            "required": false,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BusinessMetadata"
+            }
           }
         ],
         "responses": {
@@ -1064,7 +1074,12 @@
             "$ref": "#/parameters/guid"
           },
           {
-            "$ref": "#/parameters/businessMetadataAttributes"
+            "name": "businessMetadataAttributes",
+            "required": false,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BusinessMetadataAttributes"
+            }
           }
         ],
         "responses": {
@@ -1105,7 +1120,12 @@
             "$ref": "#/parameters/guid"
           },
           {
-            "$ref": "#/parameters/businessMetadataAttributes"
+            "name": "businessMetadataAttributes",
+            "required": false,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BusinessMetadataAttributes"
+            }
           }
         ],
         "responses": {
@@ -2355,7 +2375,7 @@
           "200": {
             "description": "OK. An array of related glossary terms for the given glossary or an empty list.",
             "schema": {
-              "$ref":"#/definitions/RelatedTermHeaders"
+              "$ref": "#/definitions/RelatedTermHeaders"
             }
           },
           "default": {
@@ -3659,8 +3679,8 @@
         "description": "Get the type definition by its name (unique).",
         "operationId": "Type_GetByName",
         "x-ms-examples": {
-          "Type_GetByGuid": {
-            "$ref": "./examples/Type_GetByGuid.json"
+          "Type_GetByName": {
+            "$ref": "./examples/Type_GetByName.json"
           }
         },
         "parameters": [
@@ -6740,6 +6760,20 @@
           "$ref": "#/definitions/AtlasRelatedTermHeader"
         }
       }
+    },
+    "BusinessMetadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "BusinessMetadata"
+    },
+    "BusinessMetadataAttributes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "BusinessMetadataAttributes"
     }
   },
   "parameters": {
@@ -7228,26 +7262,6 @@
         "modelAsString": true
       },
       "x-ms-parameter-location": "method"
-    },
-    "businessMetadata": {
-      "name": "BusinessMetadata",
-      "required": false,
-      "in": "body",
-      "type": "object",
-      "additionalProperties": {
-        "type": "object"
-      },
-      "description": "BusinessMetadata"
-    },
-    "businessMetadataAttributes": {
-      "name": "businessMetadataAttributes",
-      "required": false,
-      "in": "body",
-      "type": "object",
-      "additionalProperties": {
-        "type": "object"
-      },
-      "description": "businessMetadataAttributes"
     }
   }
 }
