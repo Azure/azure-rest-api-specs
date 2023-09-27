@@ -12,27 +12,27 @@
       "body": {
         "value": [
           {
-            "name": "DataSource1",
-            "kind": "AzureStorage",
+            "kind": "AdlsGen2",
+            "creationType": "Manual",
+            "id": "datasources/AzureDataLakeStorage-cpm",
+            "name": "AzureDataLakeStorage-cpm",
             "properties": {
-              "endpoint": "https://azurestorage1.core.windows.net/",
+              "endpoint": "https://datascansharedstorage.dfs.core.windows.net/",
+              "resourceGroup": "DataScanTestRG",
+              "subscriptionId": "1bc7be44-c3d6-407e-938a-0d87d26b2b83",
+              "location": "westus2",
+              "resourceName": "datascansharedstorage",
+              "resourceId": "/subscriptions/1bc7be44-c3d6-407e-938a-0d87d26b2b83/resourceGroups/DataScanTestRG/providers/Microsoft.Storage/storageAccounts/datascansharedstorage",
+              "dataUseGovernance": "Disabled",
+              "createdAt": "2022-08-05T07:13:08.032795Z",
+              "lastModifiedAt": "2022-08-05T07:13:08.032795Z",
+              "parentCollection": null,
               "collection": {
-                "lastModifiedAt": "2021-09-15T21:20:08.2944382Z",
-                "referenceName": "Collection-aZX",
+                "lastModifiedAt": "2022-08-05T07:13:08.032795Z",
+                "referenceName": "sharedeuappurviewaccount",
                 "type": "CollectionReference"
-              }
-            }
-          },
-          {
-            "name": "DataSource2",
-            "kind": "AzureStorage",
-            "properties": {
-              "endpoint": "https://azurestorage2.core.windows.net/",
-              "collection": {
-                "lastModifiedAt": "2021-09-15T21:20:08.2944382Z",
-                "referenceName": "Collection-rZX",
-                "type": "CollectionReference"
-              }
+              },
+              "dataSourceCollectionMovingState": 0
             }
           }
         ]
