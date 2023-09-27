@@ -576,7 +576,7 @@
         }
       }
     },
-    "/routing/intents/{id}": {
+    "/skills/intents/{id}": {
       "patch": {
         "tags": [
           "Intents"
@@ -701,7 +701,7 @@
         }
       }
     },
-    "/routing/intents": {
+    "/skills/intents": {
       "get": {
         "tags": [
           "Intents"
@@ -1670,7 +1670,7 @@
         }
       }
     },
-    "/routing/skills/escalate": {
+    "/skills/escalate": {
       "post": {
         "tags": [
           "Skills"
@@ -1703,6 +1703,50 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/RouterJob"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/skills/registerWorker": {
+      "post": {
+        "tags": [
+          "Skills"
+        ],
+        "summary": "Register Worker with intent",
+        "operationId": "SkillsRegistry_RegisterWorker",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "withIntentRequest",
+            "description": "Request for registering worker with intent.",
+            "schema": {
+              "$ref": "#/definitions/RegisterWorkerWithIntentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RouterWorker"
             }
           },
           "default": {
@@ -2395,6 +2439,16 @@
           "description": "The channel Id of the job to be created",
           "type": "string"
         },
+        "priority": {
+          "format": "int32",
+          "description": "The priority of the job to be created",
+          "type": "integer"
+        },
+        "scheduledTime": {
+          "format": "date-time",
+          "description": "The time at which this job should be scheduled",
+          "type": "string"
+        },
         "parameters": {
           "description": "A set of parameter results from an intent",
           "type": "object",
@@ -2416,7 +2470,7 @@
           "type": "integer"
         },
         "prioritized": {
-          "description": "When Required is set to true, then for the required duration this will prioritized.",
+          "description": "When Required is set to true, then for the required duration this will be prioritized.",
           "type": "boolean"
         },
         "preferred": {
@@ -2668,6 +2722,10 @@
             "modelAsString": true
           }
         },
+        "name": {
+          "description": "Name of this parameter",
+          "type": "string"
+        },
         "description": {
           "description": "Description of this parameter",
           "type": "string"
@@ -2679,13 +2737,17 @@
             "type": "string"
           }
         },
-        "required": {
+        "isRequired": {
           "description": "If this parameter is required during the intent classification",
           "type": "boolean"
         },
         "defaultValue": {
           "description": "A default value, which is used if no value is returned during the classification",
           "type": "string"
+        },
+        "inferFromConversation": {
+          "description": "If set to true, automatically infer the value for this parameter from the conversation without asking for it",
+          "type": "boolean"
         },
         "escalationOptions": {
           "$ref": "#/definitions/EscalationOptions"
@@ -2981,6 +3043,40 @@
       "description": "Response payload from reclassifying a job",
       "type": "object"
     },
+    "RegisterWorkerWithIntentRequest": {
+      "description": "Request payload for creating a Job Router worker with an intent",
+      "type": "object",
+      "properties": {
+        "workerId": {
+          "description": "The Id of the worker to be created",
+          "type": "string"
+        },
+        "intentIds": {
+          "description": "The intents associated with the worker",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "totalCapacity": {
+          "format": "int32",
+          "description": "The total capacity for this worker",
+          "type": "integer"
+        },
+        "channelConfigurations": {
+          "description": "The channel(s) this worker can handle and their impact on the workers capacity.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ChannelConfiguration"
+          }
+        },
+        "parameters": {
+          "description": "A set of parameters for this worker",
+          "type": "object",
+          "additionalProperties": { }
+        }
+      }
+    },
     "RoundRobinMode": {
       "description": "Jobs are distributed in order to workers, starting with the worker that is after the last worker to receive a job.",
       "type": "object",
@@ -3006,10 +3102,15 @@
           "type": "string",
           "readOnly": true
         },
+        "name": {
+          "description": "The name of this intent",
+          "type": "string",
+          "readOnly": true
+        },
         "parameters": {
           "description": "A set of parameters that associated with this intent",
-          "type": "object",
-          "additionalProperties": {
+          "type": "array",
+          "items": {
             "$ref": "#/definitions/IntentParameter"
           }
         },
@@ -3020,18 +3121,6 @@
         "escalationQueueId": {
           "description": "The queue Id to escalate this conversation to.",
           "type": "string"
-        },
-        "analyzeSentiment": {
-          "description": "Whether or not to analyze the sentiment of the conversation.",
-          "type": "boolean"
-        },
-        "summarizeConversation": {
-          "description": "Provide a summary of the conversation",
-          "type": "boolean"
-        },
-        "detectEscalation": {
-          "description": "Detect whether a request to speak to a human occurred.",
-          "type": "boolean"
         }
       }
     },
