@@ -4,7 +4,10 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey"> | OAuth2Auth<[
+  {
+    type: AuthType.http,
+    scheme: "SharedAccessKey",
+  } | OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
