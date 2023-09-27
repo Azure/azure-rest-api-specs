@@ -243,6 +243,101 @@
         "modelAsString": true
       }
     },
+    "AnswerSpan": {
+      "type": "object",
+      "description": "Answer span object of QnA.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Predicted text of answer span."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Predicted score of answer span, value ranges from 0 to 1.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The answer span offset from the start of answer."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the answer span."
+        }
+      }
+    },
+    "AnswersOptions": {
+      "type": "object",
+      "description": "Parameters to query a knowledge base.",
+      "properties": {
+        "qnaId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Exact QnA ID to fetch from the knowledge base, this field takes priority over question."
+        },
+        "question": {
+          "type": "string",
+          "description": "User question to query against the knowledge base."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max number of answers to be returned for the question."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "confidenceScoreThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum threshold score for answers, value ranges from 0 to 1.",
+          "minimum": 0,
+          "maximum": 1,
+          "x-ms-client-name": "confidenceThreshold"
+        },
+        "context": {
+          "$ref": "#/definitions/KnowledgeBaseAnswerContext",
+          "description": "Context object with previous QnA's information.",
+          "x-ms-client-name": "answerContext"
+        },
+        "rankerType": {
+          "$ref": "#/definitions/RankerKind",
+          "description": "Type of ranker to be used.",
+          "x-ms-client-name": "rankerKind"
+        },
+        "filters": {
+          "$ref": "#/definitions/QueryFilters",
+          "description": "Filter QnAs based on given metadata list and knowledge base sources."
+        },
+        "answerSpanRequest": {
+          "$ref": "#/definitions/ShortAnswerOptions",
+          "description": "To configure Answer span prediction feature.",
+          "x-ms-client-name": "shortAnswerOptions"
+        },
+        "includeUnstructuredSources": {
+          "type": "boolean",
+          "description": "(Optional) Flag to enable Query over Unstructured Sources."
+        }
+      }
+    },
+    "AnswersResult": {
+      "type": "object",
+      "description": "Represents List of Question Answers.",
+      "properties": {
+        "answers": {
+          "type": "array",
+          "description": "Represents Answer Result list.",
+          "items": {
+            "$ref": "#/definitions/KnowledgeBaseAnswer"
+          }
+        }
+      }
+    },
     "AreaResolution": {
       "type": "object",
       "description": "Represents the area entity resolution model.",
@@ -661,7 +756,7 @@
           "description": "If true, the service will keep the query for further review."
         },
         "stringIndexType": {
-          "$ref": "#/definitions/Language.StringIndexType",
+          "$ref": "#/definitions/StringIndexType",
           "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets."
         },
         "directTarget": {
@@ -754,6 +849,60 @@
       ],
       "x-ms-discriminator-value": "CurrencyResolution"
     },
+    "CustomResult": {
+      "type": "object",
+      "description": "Custom Task Results",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentErrorItem"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      },
+      "required": [
+        "errors",
+        "projectName",
+        "deploymentName"
+      ]
+    },
+    "CustomTaskParameters": {
+      "type": "object",
+      "description": "Parameters object for a text analysis task using custom models.",
+      "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      },
+      "required": [
+        "loggingOptOut",
+        "projectName",
+        "deploymentName"
+      ]
+    },
     "DateTimeResolution": {
       "type": "object",
       "description": "A resolution for datetime entity instances.",
@@ -803,6 +952,42 @@
         "modelAsString": true
       }
     },
+    "DocumentError": {
+      "type": "object",
+      "description": "Contains details of errors encountered during a job execution.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the input document."
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorResponse",
+          "description": "Error encountered."
+        }
+      },
+      "required": [
+        "id",
+        "error"
+      ]
+    },
+    "DocumentErrorItem": {
+      "type": "object",
+      "description": "Contains details of errors encountered during a job execution.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the input document."
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorResponseItem",
+          "description": "Error encountered."
+        }
+      },
+      "required": [
+        "id",
+        "error"
+      ]
+    },
     "EntitySubtype": {
       "type": "object",
       "description": "The concrete entity Subtype model of extra information.",
@@ -818,6 +1003,64 @@
         }
       ],
       "x-ms-discriminator-value": "EntitySubtype"
+    },
+    "ErrorCode": {
+      "type": "string",
+      "description": "Human-readable error code.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidArgument",
+        "Unauthorized",
+        "Forbidden",
+        "NotFound",
+        "ProjectNotFound",
+        "OperationNotFound",
+        "AzureCognitiveSearchNotFound",
+        "AzureCognitiveSearchIndexNotFound",
+        "TooManyRequests",
+        "AzureCognitiveSearchThrottling",
+        "AzureCognitiveSearchIndexLimitReached",
+        "InternalServerError",
+        "ServiceUnavailable",
+        "Timeout",
+        "QuotaExceeded",
+        "Conflict",
+        "Warning"
+      ],
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "ErrorResponseItem": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "String error code indicating what went wrong."
+        }
+      },
+      "required": [
+        "error"
+      ]
     },
     "InformationResolution": {
       "type": "object",
@@ -867,102 +1110,109 @@
         "modelAsString": true
       }
     },
-    "Language.AnswerSpan": {
-      "type": "object",
-      "description": "Answer span object of QnA.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Predicted text of answer span."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "Predicted score of answer span, value ranges from 0 to 1.",
-          "minimum": 0,
-          "maximum": 1
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The answer span offset from the start of answer."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the answer span."
-        }
+    "InnerErrorCode": {
+      "type": "string",
+      "description": "Human-readable error code.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidParameterValue",
+        "KnowledgeBaseNotFound",
+        "AzureCognitiveSearchNotFound",
+        "AzureCognitiveSearchThrottling",
+        "ExtractionFailure",
+        "InvalidRequestBodyFormat",
+        "EmptyRequest",
+        "MissingInputDocuments",
+        "InvalidDocument",
+        "ModelVersionIncorrect",
+        "InvalidDocumentBatch",
+        "UnsupportedLanguageCode",
+        "InvalidCountryHint"
+      ],
+      "x-ms-enum": {
+        "name": "InnerErrorCode",
+        "modelAsString": true
       }
     },
-    "Language.AnswersOptions": {
+    "InnerErrorModel": {
       "type": "object",
-      "description": "Parameters to query a knowledge base.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
-        "qnaId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Exact QnA ID to fetch from the knowledge base, this field takes priority over question."
+        "code": {
+          "$ref": "#/definitions/InnerErrorCode",
+          "description": "One of a server-defined set of error codes."
         },
-        "question": {
+        "message": {
           "type": "string",
-          "description": "User question to query against the knowledge base."
+          "description": "Error message."
         },
-        "top": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max number of answers to be returned for the question."
-        },
-        "userId": {
-          "type": "string",
-          "description": "Unique identifier for the user."
-        },
-        "confidenceScoreThreshold": {
-          "type": "number",
-          "format": "double",
-          "description": "Minimum threshold score for answers, value ranges from 0 to 1.",
-          "minimum": 0,
-          "maximum": 1,
-          "x-ms-client-name": "confidenceThreshold"
-        },
-        "context": {
-          "$ref": "#/definitions/Language.KnowledgeBaseAnswerContext",
-          "description": "Context object with previous QnA's information.",
-          "x-ms-client-name": "answerContext"
-        },
-        "rankerType": {
-          "$ref": "#/definitions/Language.RankerKind",
-          "description": "Type of ranker to be used.",
-          "x-ms-client-name": "rankerKind"
-        },
-        "filters": {
-          "$ref": "#/definitions/Language.QueryFilters",
-          "description": "Filter QnAs based on given metadata list and knowledge base sources."
-        },
-        "answerSpanRequest": {
-          "$ref": "#/definitions/Language.ShortAnswerOptions",
-          "description": "To configure Answer span prediction feature.",
-          "x-ms-client-name": "shortAnswerOptions"
-        },
-        "includeUnstructuredSources": {
-          "type": "boolean",
-          "description": "(Optional) Flag to enable Query over Unstructured Sources."
-        }
-      }
-    },
-    "Language.AnswersResult": {
-      "type": "object",
-      "description": "Represents List of Question Answers.",
-      "properties": {
-        "answers": {
-          "type": "array",
-          "description": "Represents Answer Result list.",
-          "items": {
-            "$ref": "#/definitions/Language.KnowledgeBaseAnswer"
+        "details": {
+          "type": "object",
+          "description": "Error details.",
+          "additionalProperties": {
+            "type": "string"
           }
+        },
+        "target": {
+          "type": "string",
+          "description": "Error target."
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerErrorModel",
+          "description": "An object containing more specific information than the current object about the error."
         }
-      }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "allOf": [
+        {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      ]
     },
-    "Language.KnowledgeBaseAnswer": {
+    "InputWarning": {
+      "type": "object",
+      "description": "Contains details of warnings encountered during a job execution.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Warning code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Warning message."
+        },
+        "targetRef": {
+          "type": "string",
+          "description": "A JSON pointer reference indicating the target object."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "JobErrors": {
+      "type": "object",
+      "description": "job errors",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "errors",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "errors"
+      ]
+    },
+    "KnowledgeBaseAnswer": {
       "type": "object",
       "description": "Represents knowledge base answer.",
       "properties": {
@@ -1001,17 +1251,17 @@
           "additionalProperties": {}
         },
         "dialog": {
-          "$ref": "#/definitions/Language.KnowledgeBaseAnswerDialog",
+          "$ref": "#/definitions/KnowledgeBaseAnswerDialog",
           "description": "Dialog associated with Answer."
         },
         "answerSpan": {
-          "$ref": "#/definitions/Language.AnswerSpan",
+          "$ref": "#/definitions/AnswerSpan",
           "description": "Answer span object of QnA with respect to user's question.",
           "x-ms-client-name": "shortAnswer"
         }
       }
     },
-    "Language.KnowledgeBaseAnswerContext": {
+    "KnowledgeBaseAnswerContext": {
       "type": "object",
       "description": "Context object with previous QnA's information.",
       "properties": {
@@ -1030,7 +1280,7 @@
         "previousQnaId"
       ]
     },
-    "Language.KnowledgeBaseAnswerDialog": {
+    "KnowledgeBaseAnswerDialog": {
       "type": "object",
       "description": "Dialog associated with Answer.",
       "properties": {
@@ -1043,13 +1293,13 @@
           "description": "List of prompts associated with the answer.",
           "maxItems": 20,
           "items": {
-            "$ref": "#/definitions/Language.KnowledgeBaseAnswerPrompt"
+            "$ref": "#/definitions/KnowledgeBaseAnswerPrompt"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "Language.KnowledgeBaseAnswerPrompt": {
+    "KnowledgeBaseAnswerPrompt": {
       "type": "object",
       "description": "Prompt for an answer.",
       "properties": {
@@ -1074,164 +1324,6 @@
         "qnaId",
         "displayText"
       ]
-    },
-    "Language.LogicalOperationKind": {
-      "type": "string",
-      "description": "Set to 'OR' or 'AND' for using corresponding logical operation.",
-      "enum": [
-        "AND",
-        "OR"
-      ],
-      "x-ms-enum": {
-        "name": "LogicalOperationKind",
-        "modelAsString": true
-      }
-    },
-    "Language.MetadataFilter": {
-      "type": "object",
-      "description": "Find QnAs that are associated with the given list of metadata.",
-      "properties": {
-        "metadata": {
-          "type": "array",
-          "description": "List of metadata.",
-          "items": {
-            "$ref": "#/definitions/Language.MetadataRecord"
-          },
-          "x-ms-identifiers": []
-        },
-        "logicalOperation": {
-          "$ref": "#/definitions/Language.LogicalOperationKind",
-          "description": "Operation used to join metadata filters.",
-          "default": "AND"
-        }
-      }
-    },
-    "Language.MetadataRecord": {
-      "type": "object",
-      "description": "Object to provide the key value pair for each metadata.",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "Metadata Key from Metadata dictionary used in the QnA."
-        },
-        "value": {
-          "type": "string",
-          "description": "Metadata Value from Metadata dictionary used in the QnA."
-        }
-      },
-      "required": [
-        "key",
-        "value"
-      ]
-    },
-    "Language.QueryFilters": {
-      "type": "object",
-      "description": "filters over knowledge base.",
-      "properties": {
-        "metadataFilter": {
-          "$ref": "#/definitions/Language.MetadataFilter",
-          "description": "filters over knowledge base."
-        },
-        "sourceFilter": {
-          "$ref": "#/definitions/Language.SourceFilter",
-          "description": "filters over knowledge base."
-        },
-        "logicalOperation": {
-          "$ref": "#/definitions/Language.LogicalOperationKind",
-          "description": "Logical operation used to join metadata filter with source filter.",
-          "default": "AND"
-        }
-      }
-    },
-    "Language.RankerKind": {
-      "type": "string",
-      "description": "Type of ranker to be used",
-      "enum": [
-        "Default ranker",
-        "Question only ranker"
-      ],
-      "x-ms-enum": {
-        "name": "RankerKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Default",
-            "value": "Default ranker",
-            "description": "Default ranker."
-          },
-          {
-            "name": "Question",
-            "value": "Question only ranker",
-            "description": "Question only ranker."
-          }
-        ]
-      }
-    },
-    "Language.ShortAnswerOptions": {
-      "type": "object",
-      "description": "To configure Answer span prediction feature.",
-      "properties": {
-        "enable": {
-          "type": "boolean",
-          "description": "Enable or disable Answer Span prediction."
-        },
-        "confidenceScoreThreshold": {
-          "type": "number",
-          "format": "double",
-          "description": "Minimum threshold score required to include an answer span, value ranges from 0 to 1.",
-          "minimum": 0,
-          "maximum": 1,
-          "x-ms-client-name": "confidenceThreshold"
-        },
-        "topAnswersWithSpan": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of Top answers to be considered for span prediction from 1 to 10.",
-          "minimum": 1,
-          "maximum": 10,
-          "x-ms-client-name": "top"
-        }
-      },
-      "required": [
-        "enable"
-      ]
-    },
-    "Language.SourceFilter": {
-      "type": "array",
-      "description": "Find QnAs that are associated with any of the given list of sources in knowledge base.",
-      "items": {
-        "type": "string"
-      }
-    },
-    "Language.StringIndexType": {
-      "type": "string",
-      "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
-      "enum": [
-        "TextElements_v8",
-        "UnicodeCodePoint",
-        "Utf16CodeUnit"
-      ],
-      "x-ms-enum": {
-        "name": "StringIndexType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "TextElements_v8",
-            "value": "TextElements_v8",
-            "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
-          },
-          {
-            "name": "UnicodeCodePoint",
-            "value": "UnicodeCodePoint",
-            "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
-          },
-          {
-            "name": "Utf16CodeUnit",
-            "value": "Utf16CodeUnit",
-            "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
-          }
-        ]
-      }
     },
     "LengthResolution": {
       "type": "object",
@@ -1300,6 +1392,18 @@
         }
       ],
       "x-ms-discriminator-value": "ListKey"
+    },
+    "LogicalOperationKind": {
+      "type": "string",
+      "description": "Set to 'OR' or 'AND' for using corresponding logical operation.",
+      "enum": [
+        "AND",
+        "OR"
+      ],
+      "x-ms-enum": {
+        "name": "LogicalOperationKind",
+        "modelAsString": true
+      }
     },
     "LuisCallingOptions": {
       "type": "object",
@@ -1380,6 +1484,43 @@
         }
       ],
       "x-ms-discriminator-value": "Luis"
+    },
+    "MetadataFilter": {
+      "type": "object",
+      "description": "Find QnAs that are associated with the given list of metadata.",
+      "properties": {
+        "metadata": {
+          "type": "array",
+          "description": "List of metadata.",
+          "items": {
+            "$ref": "#/definitions/MetadataRecord"
+          },
+          "x-ms-identifiers": []
+        },
+        "logicalOperation": {
+          "$ref": "#/definitions/LogicalOperationKind",
+          "description": "Operation used to join metadata filters.",
+          "default": "AND"
+        }
+      }
+    },
+    "MetadataRecord": {
+      "type": "object",
+      "description": "Object to provide the key value pair for each metadata.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Metadata Key from Metadata dictionary used in the QnA."
+        },
+        "value": {
+          "type": "string",
+          "description": "Metadata Value from Metadata dictionary used in the QnA."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
     },
     "Modality": {
       "type": "string",
@@ -1532,6 +1673,31 @@
       ],
       "x-ms-discriminator-value": "OrdinalResolution"
     },
+    "PreBuiltResult": {
+      "type": "object",
+      "description": "Pre built result",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentErrorItem"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "statistics"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        }
+      },
+      "required": [
+        "errors",
+        "modelVersion"
+      ]
+    },
     "QuantityResolution": {
       "type": "object",
       "description": "Represents resolutions for quantities.",
@@ -1546,12 +1712,31 @@
         "value"
       ]
     },
+    "QueryFilters": {
+      "type": "object",
+      "description": "filters over knowledge base.",
+      "properties": {
+        "metadataFilter": {
+          "$ref": "#/definitions/MetadataFilter",
+          "description": "filters over knowledge base."
+        },
+        "sourceFilter": {
+          "$ref": "#/definitions/SourceFilter",
+          "description": "filters over knowledge base."
+        },
+        "logicalOperation": {
+          "$ref": "#/definitions/LogicalOperationKind",
+          "description": "Logical operation used to join metadata filter with source filter.",
+          "default": "AND"
+        }
+      }
+    },
     "QuestionAnsweringParameters": {
       "type": "object",
       "description": "This is a set of request parameters for Question Answering knowledge bases.",
       "properties": {
         "callingOptions": {
-          "$ref": "#/definitions/Language.AnswersOptions",
+          "$ref": "#/definitions/AnswersOptions",
           "description": "The options sent to a Question Answering KB."
         }
       },
@@ -1567,7 +1752,7 @@
       "description": "It is a wrap up a Question Answering KB response.",
       "properties": {
         "result": {
-          "$ref": "#/definitions/Language.AnswersResult",
+          "$ref": "#/definitions/AnswersResult",
           "description": "The generated answer by a Question Answering KB."
         }
       },
@@ -1598,6 +1783,112 @@
         "modelAsString": true
       }
     },
+    "RankerKind": {
+      "type": "string",
+      "description": "Type of ranker to be used",
+      "enum": [
+        "Default ranker",
+        "Question only ranker"
+      ],
+      "x-ms-enum": {
+        "name": "RankerKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default ranker",
+            "description": "Default ranker."
+          },
+          {
+            "name": "Question",
+            "value": "Question only ranker",
+            "description": "Question only ranker."
+          }
+        ]
+      }
+    },
+    "RedactionCharacter": {
+      "type": "string",
+      "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
+      "enum": [
+        "!",
+        "#",
+        "$",
+        "%",
+        "&",
+        "*",
+        "+",
+        "-",
+        "=",
+        "?",
+        "@",
+        "^",
+        "_",
+        "~"
+      ],
+      "x-ms-enum": {
+        "name": "RedactionCharacter",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "explationPoint",
+            "value": "!"
+          },
+          {
+            "name": "numberSign",
+            "value": "#"
+          },
+          {
+            "name": "dollar",
+            "value": "$"
+          },
+          {
+            "name": "perCent",
+            "value": "%"
+          },
+          {
+            "name": "ampersand",
+            "value": "&"
+          },
+          {
+            "name": "asterisk",
+            "value": "*"
+          },
+          {
+            "name": "plus",
+            "value": "+"
+          },
+          {
+            "name": "minus",
+            "value": "-"
+          },
+          {
+            "name": "equals",
+            "value": "="
+          },
+          {
+            "name": "questionMark",
+            "value": "?"
+          },
+          {
+            "name": "atSign",
+            "value": "@"
+          },
+          {
+            "name": "caret",
+            "value": "^"
+          },
+          {
+            "name": "underscore",
+            "value": "_"
+          },
+          {
+            "name": "tilde",
+            "value": "~"
+          }
+        ]
+      }
+    },
     "RelativeTo": {
       "type": "string",
       "description": "The reference point that the ordinal number denotes.",
@@ -1609,6 +1900,74 @@
       "x-ms-enum": {
         "name": "RelativeTo",
         "modelAsString": true
+      }
+    },
+    "RequestStatistics": {
+      "type": "object",
+      "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
+      "properties": {
+        "documentsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of documents submitted in the request."
+        },
+        "validDocumentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
+        },
+        "erroneousDocumentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
+        },
+        "transactionsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of transactions for the request."
+        }
+      },
+      "required": [
+        "documentsCount",
+        "validDocumentCount",
+        "erroneousDocumentCount",
+        "transactionsCount"
+      ]
+    },
+    "ShortAnswerOptions": {
+      "type": "object",
+      "description": "To configure Answer span prediction feature.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Enable or disable Answer Span prediction."
+        },
+        "confidenceScoreThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum threshold score required to include an answer span, value ranges from 0 to 1.",
+          "minimum": 0,
+          "maximum": 1,
+          "x-ms-client-name": "confidenceThreshold"
+        },
+        "topAnswersWithSpan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Top answers to be considered for span prediction from 1 to 10.",
+          "minimum": 1,
+          "maximum": 10,
+          "x-ms-client-name": "top"
+        }
+      },
+      "required": [
+        "enable"
+      ]
+    },
+    "SourceFilter": {
+      "type": "array",
+      "description": "Find QnAs that are associated with any of the given list of sources in knowledge base.",
+      "items": {
+        "type": "string"
       }
     },
     "SpeedResolution": {
@@ -1658,6 +2017,36 @@
       "x-ms-enum": {
         "name": "SpeedUnit",
         "modelAsString": true
+      }
+    },
+    "StringIndexType": {
+      "type": "string",
+      "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+      "enum": [
+        "TextElements_v8",
+        "UnicodeCodePoint",
+        "Utf16CodeUnit"
+      ],
+      "x-ms-enum": {
+        "name": "StringIndexType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TextElements_v8",
+            "value": "TextElements_v8",
+            "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+          },
+          {
+            "name": "UnicodeCodePoint",
+            "value": "UnicodeCodePoint",
+            "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+          },
+          {
+            "name": "Utf16CodeUnit",
+            "value": "Utf16CodeUnit",
+            "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+          }
+        ]
       }
     },
     "TargetIntentResult": {
@@ -1803,6 +2192,36 @@
           "$ref": "#/definitions/ConversationItemBase"
         }
       ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Analyze Conversations Service Versions",
+      "enum": [
+        "2022-05-01",
+        "2023-04-01",
+        "2023-04-15-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2022_05_01",
+            "value": "2022-05-01",
+            "description": "Version 2022-05-01"
+          },
+          {
+            "name": "v2023_04_01",
+            "value": "2023-04-01",
+            "description": "Version 2023-04-01"
+          },
+          {
+            "name": "v2023_04_15_preview",
+            "value": "2023-04-15-preview",
+            "description": "Version 2023-04-15-preview"
+          }
+        ]
+      }
     },
     "VolumeResolution": {
       "type": "object",
