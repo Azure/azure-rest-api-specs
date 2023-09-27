@@ -178,8 +178,11 @@
           }
         },
         "x-ms-examples": {
-          "Create network site": {
+          "Create site network service": {
             "$ref": "./examples/SiteNetworkServiceCreate.json"
+          },
+          "Create first party site network service": {
+            "$ref": "./examples/SiteNetworkServiceFirstPartyCreate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -324,7 +327,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/SiteNetworkServicePropertiesFormat",
           "description": "Site network service properties."
         },
@@ -347,15 +350,6 @@
     "SiteNetworkServicePropertiesFormat": {
       "type": "object",
       "description": "Site network service properties.",
-      "required": [
-        "siteReference",
-        "publisherName",
-        "publisherScope",
-        "networkServiceDesignGroupName",
-        "networkServiceDesignVersionName",
-        "networkServiceDesignVersionOfferingLocation",
-        "desiredStateConfigurationGroupValueReferences"
-      ],
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -370,25 +364,33 @@
           "description": "The site details"
         },
         "publisherName": {
+          "readOnly": true,
           "type": "string",
           "description": "The publisher name for the site network service."
         },
         "publisherScope": {
+          "readOnly": true,
           "$ref": "./common.json#/definitions/PublisherScope",
           "description": "The scope of the publisher."
         },
         "networkServiceDesignGroupName": {
+          "readOnly": true,
           "type": "string",
           "description": "The network service design group name for the site network service."
         },
         "networkServiceDesignVersionName": {
+          "readOnly": true,
           "type": "string",
-          "description": "The network service design version for the site network service.",
-          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          "description": "The network service design version for the site network service."
         },
         "networkServiceDesignVersionOfferingLocation": {
+          "readOnly": true,
           "type": "string",
           "description": "The location of the network service design offering."
+        },
+        "networkServiceDesignVersionResourceReference": {
+          "$ref": "./common.json#/definitions/DeploymentResourceIdReference",
+          "description": "The network service design version resource reference."
         },
         "desiredStateConfigurationGroupValueReferences": {
           "type": "object",
@@ -400,8 +402,7 @@
         "lastStateNetworkServiceDesignVersionName": {
           "readOnly": true,
           "type": "string",
-          "description": "The network service design version for the site network service.",
-          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          "description": "The network service design version for the site network service."
         },
         "lastStateConfigurationGroupValueReferences": {
           "type": "object",
