@@ -7,8 +7,8 @@
   },
   "paths": {},
   "definitions": {
-    "ResourceNotificationsEmittedEventData": {
-      "description": "Describes the schema of the common properties across all ARN system topic events",
+    "ResourceWithPayloadEventData": {
+      "description": "Describes the schema of the properties under resource info which are common across all ARN system topic events",
       "type": "object",
       "properties": {
         "resourceInfo": {
@@ -39,29 +39,15 @@
               "description": "properties in the payload of the resource for which the event is being emitted",
               "type": "object",
               "additionalProperties": {
-                "description": "properties in the payload of the resource for which the event is being emitted"
+                "description": "properties in the payload of the resource for which the event is being emitted",
+                "type": {}
               }
             }
           }
-        },
-        "operationalInfo": {
-          "description": "details of operational info",
-          "type": "object",
-          "properties": {
-            "resourceEventTime": {
-              "description": "Date and Time when resource was updated",
-              "type": "string",
-              "format": "date-time"
-            }
-          }
-        },
-        "apiVersion": {
-          "description": "api version of the resource properties bag",
-          "type": "string"
         }
       }
     },
-    "ResourceNotificationsDeletedEventData": {
+    "ResourceWithoutPayloadEventData": {
       "description": "Describes the schema of the common properties across all ARN system topic deleted events",
       "type": "object",
       "properties": {
@@ -82,23 +68,54 @@
               "type": "string"
             }
           }
-        },
-        "operationalInfo": {
-          "description": "details of operational info",
-          "type": "object",
-          "properties": {
-            "resourceEventTime": {
-              "description": "Date and Time when resource was updated",
-              "type": "string",
-              "format": "date-time"
-            }
+        }
+      }
+    },
+    "OperationalInfoEventData": {
+      "description": "details of operational info",
+      "type": "object",
+      "properties": {
+        "resourceEventTime": {
+          "description": "Date and Time when resource was updated",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ResourceNotificationsUpdateEventData": {
+      "description": "Describes the schema of the common properties across all ARN system topic events",
+      "type": "object",
+      "properties": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/ResourceWithPayloadEventData"
           }
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/OperationalInfoEventData"
+          }
+        ],
+        "apiVersion": {
+          "description": "api version of the resource properties bag",
+          "type": "string"
         }
-      },
-      "x-ms-examples": {
-        "ResourceManagementDeletedEventGridSchema": {
-          "$ref": "./examples/event-grid-schema/Resources_Deleted.json"
-        }
+      }
+    },
+    "ResourceNotificationsDeleteEventData": {
+      "description": "Describes the schema of the common properties across all ARN system topic deleted events",
+      "type": "object",
+      "properties": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/ResourceWithoutPayloadEventData"
+          }
+        ],
+        "allOf": [
+          {
+            "$ref": "#/definitions/OperationalInfoEventData"
+          }
+        ]
       }
     }
   }
