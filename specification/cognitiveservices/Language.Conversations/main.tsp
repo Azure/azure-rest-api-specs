@@ -1722,7 +1722,7 @@ op analyzeConversation is Operations.ResourceCollectionAction<
 @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
 @summary("Get analysis status and results")
 // @operationId("AnalyzeConversation_JobStatus")
-op jobStatus is Operations.GetResourceOperationStatus<
+op jobStatus is Operations.ResourceRead<
   AnalyzeConversationJobState, 
   ShowStatsQueryParameter
 >;

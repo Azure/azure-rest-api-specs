@@ -129,6 +129,52 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/language/analyze-conversations/jobs/{jobId}": {
+      "get": {
+        "operationId": "JobStatus",
+        "summary": "Get analysis status and results",
+        "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "job ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "showStats",
+            "in": "query",
+            "description": "(Optional) if set to true, response will contain request and document level statistics.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeConversationJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/language/analyze-conversations/jobs/{jobId}:cancel": {
       "post": {
         "operationId": "Cancel",
@@ -171,97 +217,6 @@
           }
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/language/analyze-conversations/jobs/{jobId}/operations/{operationId}": {
-      "get": {
-        "operationId": "JobStatus",
-        "summary": "Get analysis status and results",
-        "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "job ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The unique ID of the operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "type": "object",
-                  "description": "The result of the operation.",
-                  "properties": {
-                    "queryParams": {
-                      "type": "object",
-                      "properties": {
-                        "parameters": {
-                          "type": "object",
-                          "properties": {
-                            "showStats": {
-                              "type": "boolean",
-                              "description": "(Optional) if set to true, response will contain request and document level statistics."
-                            }
-                          }
-                        }
-                      },
-                      "required": [
-                        "parameters"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "queryParams"
-                  ]
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
       }
     }
   },
@@ -443,7 +398,7 @@
           "type": "array",
           "description": "errors",
           "items": {
-            "$ref": "#/definitions/ErrorResponseItem"
+            "$ref": "#/definitions/ErrorResponse"
           },
           "x-ms-identifiers": []
         },
@@ -1014,42 +969,6 @@
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "Inner error."
         }
-      }
-    },
-    "Azure.Core.Foundations.OperationState": {
-      "type": "string",
-      "description": "Enum describing allowed operation states.",
-      "enum": [
-        "InProgress",
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "OperationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "The operation is in progress."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation has completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation has failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The operation has been canceled by the user."
-          }
-        ]
       }
     },
     "BaseExtraInformation": {
@@ -2019,7 +1938,7 @@
           "type": "array",
           "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/DocumentErrorItem"
+            "$ref": "#/definitions/DocumentError"
           }
         },
         "statistics": {
@@ -2056,7 +1975,7 @@
           "type": "array",
           "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/DocumentErrorItem"
+            "$ref": "#/definitions/DocumentError"
           }
         },
         "statistics": {
@@ -2170,24 +2089,6 @@
         "error"
       ]
     },
-    "DocumentErrorItem": {
-      "type": "object",
-      "description": "Contains details of errors encountered during a job execution.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the input document."
-        },
-        "error": {
-          "$ref": "#/definitions/ErrorResponseItem",
-          "description": "Error encountered."
-        }
-      },
-      "required": [
-        "id",
-        "error"
-      ]
-    },
     "Entity": {
       "type": "object",
       "description": "Text that has been catorgerized into pre-defined classes or types such as: person, location, event, product, and organization.",
@@ -2273,19 +2174,6 @@
       }
     },
     "ErrorResponse": {
-      "type": "object",
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "ErrorResponseItem": {
       "type": "object",
       "description": "Error response.",
       "properties": {
@@ -2461,7 +2349,7 @@
           "type": "array",
           "description": "errors",
           "items": {
-            "$ref": "#/definitions/ErrorResponseItem"
+            "$ref": "#/definitions/ErrorResponse"
           },
           "x-ms-identifiers": []
         }
@@ -2506,7 +2394,7 @@
           "type": "array",
           "description": "errors",
           "items": {
-            "$ref": "#/definitions/ErrorResponseItem"
+            "$ref": "#/definitions/ErrorResponse"
           },
           "x-ms-identifiers": []
         },
@@ -3007,7 +2895,7 @@
           "type": "array",
           "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/DocumentErrorItem"
+            "$ref": "#/definitions/DocumentError"
           }
         },
         "statistics": {
@@ -3594,7 +3482,7 @@
           "type": "array",
           "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/DocumentErrorItem"
+            "$ref": "#/definitions/DocumentError"
           }
         },
         "statistics": {
