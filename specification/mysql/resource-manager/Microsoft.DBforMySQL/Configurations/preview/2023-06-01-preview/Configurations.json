@@ -1,0 +1,535 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MySQLManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules and configurations.",
+    "version": "2023-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/configurations/{configurationName}": {
+      "put": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_CreateOrUpdate",
+        "x-ms-examples": {
+          "ConfigurationCreateOrUpdate": {
+            "$ref": "./examples/ConfigurationCreateOrUpdate.json"
+          }
+        },
+        "description": "Updates a configuration of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            },
+            "description": "The required parameters for updating a server configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_Update",
+        "x-ms-examples": {
+          "Update a user configuration": {
+            "$ref": "./examples/ConfigurationUpdate.json"
+          }
+        },
+        "description": "Updates a configuration of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            },
+            "description": "The required parameters for updating a server configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_Get",
+        "x-ms-examples": {
+          "Get a configuration": {
+            "$ref": "./examples/ConfigurationGet.json"
+          }
+        },
+        "description": "Gets information about a configuration of server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/updateConfigurations": {
+      "post": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_BatchUpdate",
+        "x-ms-examples": {
+          "ConfigurationList": {
+            "$ref": "./examples/ConfigurationsBatchUpdate.json"
+          }
+        },
+        "description": "Update a list of configurations in a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListForBatchUpdate"
+            },
+            "description": "The parameters for updating a list of server configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/configurations": {
+      "get": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_ListByServer",
+        "x-ms-examples": {
+          "List all configurations for a server": {
+            "$ref": "./examples/ConfigurationsListByServer.json"
+          }
+        },
+        "description": "List all the configurations in a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationTagsParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationKeywordParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationPageParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationPageSizeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of the configuration."
+        },
+        "currentValue": {
+          "type": "string",
+          "description": "Current value of the configuration."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Description of the configuration."
+        },
+        "documentationLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The link used to get the document from community or Azure site."
+        },
+        "defaultValue": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Default value of the configuration."
+        },
+        "dataType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Data type of the configuration."
+        },
+        "allowedValues": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Allowed values of the configuration."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the configuration.",
+          "enum": [
+            "system-default",
+            "user-override"
+          ],
+          "x-ms-enum": {
+            "name": "ConfigurationSource",
+            "modelAsString": true
+          }
+        },
+        "isReadOnly": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If is the configuration read only.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "IsReadOnly",
+            "modelAsString": true
+          }
+        },
+        "isConfigPendingRestart": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If is the configuration pending restart or not.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "IsConfigPendingRestart",
+            "modelAsString": true
+          }
+        },
+        "isDynamicConfig": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If is the configuration dynamic.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "IsDynamicConfig",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The properties of a configuration."
+    },
+    "Configuration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a configuration."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Configuration."
+    },
+    "ConfigurationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Configuration"
+          },
+          "description": "The list of server configurations."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      },
+      "description": "A list of server configurations."
+    },
+    "ConfigurationForBatchUpdate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the configuration."
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "Value of the configuration."
+            },
+            "source": {
+              "type": "string",
+              "description": "Source of the configuration."
+            }
+          },
+          "x-ms-client-flatten": true,
+          "description": "The properties can be updated for a configuration."
+        }
+      },
+      "description": "Represents a Configuration."
+    },
+    "ConfigurationListForBatchUpdate": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationForBatchUpdate"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of server configurations."
+        },
+        "resetAllToDefault": {
+          "type": "string",
+          "description": "Whether to reset all server parameters to default.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "ResetAllToDefault",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "A list of server configurations to update."
+    }
+  },
+  "parameters": {
+    "ConfigurationNameParameter": {
+      "name": "configurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationTagsParameter": {
+      "name": "tags",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The tags of the server configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationKeywordParameter": {
+      "name": "keyword",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The keyword of the server configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationPageParameter": {
+      "name": "page",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "The page of the server configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationPageSizeParameter": {
+      "name": "pageSize",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "The pageSize of the server configuration.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

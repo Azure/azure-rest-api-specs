@@ -4,7 +4,20 @@ trigger:
     - main
     - typespec-next
 
-pr: none
+pr:
+  branches:
+    include:
+    - main
+    - typespec-next
+  paths:
+    include:
+    - .gitattributes
+    - .prettierrc.json
+    - package-lock.json
+    - package.json
+    - tsconfig.json
+    - eng
+    - specification/common-types
 
 jobs:
 - job: Validate_All_Specs
