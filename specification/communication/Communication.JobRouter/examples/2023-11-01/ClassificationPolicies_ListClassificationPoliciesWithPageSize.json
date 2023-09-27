@@ -1,6 +1,6 @@
 {
-  "title": "Retrieves existing classification policies.",
-  "operationId": "listClassificationPolicies",
+  "title": "Retrieves existing classification policies",
+  "operationId": "JobRouterAdministrationOperations_ListClassificationPolicies",
   "parameters": {
     "endpoint": "https://contoso.westus.communications.azure.com",
     "api-version": "2023-11-01",
@@ -17,7 +17,7 @@
               "fallbackQueueId": "MainQueue",
               "queueSelectors": [
                 {
-                  "kind": "rule",
+                  "kind": "rule-engine",
                   "rule": {
                     "kind": "expression-rule",
                     "language": "PowerFx",
@@ -40,7 +40,7 @@
               "fallbackQueueId": "MainQueue",
               "queueSelectors": [
                 {
-                  "kind": "rule",
+                  "kind": "rule-engine",
                   "rule": {
                     "kind": "expression-rule",
                     "language": "PowerFx",
@@ -56,8 +56,7 @@
             },
             "etag": "etag"
           }
-        ],
-        "nextLink": "null"
+        ]
       }
     }
   }
