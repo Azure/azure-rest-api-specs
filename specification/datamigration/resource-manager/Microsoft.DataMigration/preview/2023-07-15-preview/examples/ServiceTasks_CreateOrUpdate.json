@@ -7,10 +7,14 @@
     "api-version": "2023-07-15-preview",
     "parameters": {
       "properties": {
-        "taskType": "Service.Check.OCI",
         "input": {
-          "serverVersion": "NA"
-        }
+          "sourceConnectionInfo": {
+            "serverName": "localhost",
+            "port": 3306,
+            "type": "MySqlConnectionInfo"
+          }
+        },
+        "taskType": "ConnectToSource.MySql"
       }
     }
   },
@@ -19,9 +23,13 @@
       "body": {
         "properties": {
           "input": {
-            "serverVersion": "NA"
+            "sourceConnectionInfo": {
+              "serverName": "localhost",
+              "port": 3306,
+              "type": "MySqlConnectionInfo"
+            }
           },
-          "taskType": "Service.Check.OCI",
+          "taskType": "ConnectToSource.MySql",
           "state": "Queued"
         },
         "etag": "0vPYxzfnDaDH9yhOJAnqTyTRpa09Kb7pm+LEukDBbw8=",
@@ -34,9 +42,13 @@
       "body": {
         "properties": {
           "input": {
-            "serverVersion": "NA"
+            "sourceConnectionInfo": {
+              "serverName": "localhost",
+              "port": 3306,
+              "type": "MySqlConnectionInfo"
+            }
           },
-          "taskType": "Service.Check.OCI",
+          "taskType": "ConnectToSource.MySql",
           "state": "Queued"
         },
         "etag": "0vPYxzfnDaDH9yhOJAnqTyTRpa09Kb7pm+LEukDBbw8=",
