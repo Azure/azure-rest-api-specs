@@ -11,6 +11,8 @@ parameters:
     default: "communication"
   "service-dir":
     default: "sdk/communication"
+  "python-output-dir":
+    default: "azure/communication/jobrouter/_generated"
 emit: [
   "@azure-tools/typespec-autorest"
 ]
@@ -32,7 +34,7 @@ options:
   "@azure-tools/typespec-python":
     package-pprint-name: "\"Azure Communication Job Router Service\""
     package-mode: "dataplane"
-    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}/{python-output-dir}"
     package-dir: "azure-communication-jobrouter"
     package-name: "{package-dir}"
   "@azure-tools/typespec-java":
