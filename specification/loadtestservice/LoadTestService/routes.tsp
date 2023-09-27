@@ -22,7 +22,6 @@ interface LoadTestAdministration {
   @doc("Create a new test or update an existing test.")
   @route("/tests/{testId}")
   @patch
-  @example("./examples/CreateOrUpdateTest.json", "CreateOrUpdateTest")
   createOrUpdateTest is Azure.Core.Foundations.Operation<
     {
       @header
@@ -45,12 +44,10 @@ numeric, underscore or hyphen characters.
 
   @summary("Delete a test by its name.")
   @doc("Delete a test by its name.")
-  @example("./examples/DeleteTest.json", "DeleteTest")
   deleteTest is StandardResourceOperations.ResourceDelete<Test>;
 
   @summary("Get load test details by test name")
   @doc("Get load test details by test name")
-  @example("./examples/GetTest.json", "GetTest")
   getTest is StandardResourceOperations.ResourceRead<Test>;
 
   @summary("""
@@ -61,8 +58,10 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
 Get all load tests by the fully qualified resource Id e.g
 subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
 """)
-  @example("./examples/ListTests.json", "ListTests")
-  listTests is StandardResourceOperations.ResourceList<Test>;
+  listTests is StandardResourceOperations.ResourceList<
+    Test,
+    ListQueryParametersTrait<ListTestQueryParams>
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/byos" //It is limiting for users to have storage first before creating a load test also it will be breaking change for us.
@@ -77,7 +76,6 @@ Existing file with same name for the given test will be overwritten. File
 should be provided in the request body as application/octet-stream.
 """)
   @route("/tests/{testId}/files/{fileName}")
-  @example("./examples/UploadTestFile.json", "UploadTestFile")
   @put
   uploadTestFile is Azure.Core.Foundations.Operation<
     {
@@ -109,17 +107,14 @@ numeric, underscore or hyphen characters.
 
   @summary("Get test file by the file name.")
   @doc("Get test file by the file name.")
-  @example("./examples/GetTestFile.json", "GetTestFile")
   getTestFile is StandardResourceOperations.ResourceRead<TestFileInfo>;
 
   @summary("Delete file by the file name for a test")
   @doc("Delete file by the file name for a test")
-  @example("./examples/DeleteTestFile.json", "DeleteTestFile")
   deleteTestFile is StandardResourceOperations.ResourceDelete<TestFileInfo>;
 
   @summary("Get all test files.")
   @doc("Get all test files.")
-  @example("./examples/ListTestFiles.json", "ListTestFiles")
   listTestFiles is StandardResourceOperations.ResourceList<TestFileInfo>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -156,7 +151,6 @@ numeric, underscore or hyphen characters.
   @doc("Get associated app component (collection of azure resources) for the given test.")
   @route("/tests/{testId}/app-components")
   @get
-  @example("./examples/ListTestAppComponents.json", "ListTestAppComponents")
   getAppComponents is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -224,7 +218,6 @@ numeric, underscore or hyphen characters.
 interface LoadTestRun {
   @summary("Get test run details by name.")
   @doc("Get test run details by name.")
-  @example("./examples/GetTestRun.json", "GetTestRun")
   getTestRun is StandardResourceOperations.ResourceRead<TestRun>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -232,7 +225,6 @@ interface LoadTestRun {
   @doc("Create and start a new test run with the given name.")
   @route("/test-runs/{testRunId}")
   @patch
-  @example("./examples/CreateOrUpdateTestRun.json", "CreateOrUpdateTestRun")
   createOrUpdateTestRun is Azure.Core.Foundations.Operation<
     {
       @header
@@ -264,17 +256,17 @@ in the request body.
 
   @summary("Delete a test run by its name.")
   @doc("Delete a test run by its name.")
-  @example("./examples/DeleteTestRun.json", "DeleteTestRun")
   deleteTestRun is StandardResourceOperations.ResourceDelete<TestRun>;
 
-  @summary("Get test run file by file name.")
-  @doc("Get test run file by file name.")
-  @example("./examples/GetTestRunFile.json", "GetTestRunFile")
-  listTestRuns is StandardResourceOperations.ResourceList<TestRun>;
+  @summary("Get all test runs with given filters")
+  @doc("Get all test runs with given filters")
+  listTestRuns is StandardResourceOperations.ResourceList<
+    TestRun,
+    ListQueryParametersTrait<ListTestRunQueryParams>
+  >;
 
   @summary("Get test run file by file name.")
   @doc("Get test run file by file name.")
-  @example("./examples/GetTestRunFile.json", "GetTestRunFile")
   getTestRunFile is StandardResourceOperations.ResourceRead<TestRunFileInfo>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
@@ -289,10 +281,6 @@ in the request body.
   @doc("List the metric namespaces for a load test run.")
   @route("/test-runs/{testRunId}/metric-namespaces")
   @get
-  @example(
-    "./examples/ListTestRunMetricsNamespaces.json",
-    "ListTestRunMetricsNamespaces"
-  )
   listMetricNamespaces is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -335,7 +323,6 @@ numeric, underscore or hyphen characters.
   @doc("List the metric values for a load test run.")
   @route("/test-runs/{testRunId}/metrics")
   @post
-  @example("./examples/ListTestRunMetrics.json", "ListTestRunMetrics")
   listMetrics is Azure.Core.Foundations.Operation<
     {
       @doc("""

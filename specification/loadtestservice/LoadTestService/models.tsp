@@ -1033,6 +1033,80 @@ for metric id).
   lastModifiedBy?: string;
 }
 
+@doc("Parameters for list test run operation")
+model ListTestRunQueryParams {
+  @doc("""
+Sort on the supported fields in (field asc/desc) format. eg: executedDateTime
+asc. Supported fields - executedDateTime
+""")
+  @query
+  orderby?: string;
+
+  @doc("""
+Prefix based, case sensitive search on searchable fields - description,
+executedUser. For example, to search for a test run, with description 500 VUs,
+the search parameter can be 500.
+""")
+  @query
+  search?: string;
+
+  @doc("Unique name of an existing load test.")
+  @query
+  testId?: string;
+
+  @doc("Start DateTime(ISO 8601 literal format) of test-run execution time filter range.")
+  @query
+  executionFrom?: utcDateTime;
+
+  @doc("End DateTime(ISO 8601 literal format) of test-run execution time filter range.")
+  @query
+  executionTo?: utcDateTime;
+
+  @doc("Comma separated list of test run status.")
+  @query
+  status?: string;
+
+  @doc("Number of results in response.")
+  @query
+  maxpagesize?: int32;
+}
+
+@doc("Parameters for list test operation")
+model ListTestQueryParams {
+  @doc("""
+Sort on the supported fields in (field asc/desc) format. eg:
+lastModifiedDateTime asc. Supported fields - lastModifiedDateTime
+""")
+  @query
+  orderby?: string;
+
+  @doc("""
+Prefix based, case sensitive search on searchable fields - displayName,
+createdBy. For example, to search for a test, with display name is Login Test,
+the search parameter can be Login.
+""")
+  @query
+  search?: string;
+
+  @doc("""
+Start DateTime(ISO 8601 literal format) of the last updated time range to
+filter tests.
+""")
+  @query
+  lastModifiedStartTime?: utcDateTime;
+
+  @doc("""
+End DateTime(ISO 8601 literal format) of the last updated time range to filter
+tests.
+""")
+  @query
+  lastModifiedEndTime?: utcDateTime;
+
+  @doc("Number of results in response.")
+  @query
+  maxpagesize?: int32;
+}
+
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
   T;
 

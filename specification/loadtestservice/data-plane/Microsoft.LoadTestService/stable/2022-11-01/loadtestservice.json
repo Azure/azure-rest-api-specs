@@ -64,11 +64,32 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Get test run file by file name.",
-        "description": "Get test run file by file name.",
+        "summary": "Get all test runs with given filters",
+        "description": "Get all test runs with given filters",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTestRunQueryParams.orderby"
+          },
+          {
+            "$ref": "#/parameters/ListTestRunQueryParams.search"
+          },
+          {
+            "$ref": "#/parameters/ListTestRunQueryParams.testId"
+          },
+          {
+            "$ref": "#/parameters/ListTestRunQueryParams.executionFrom"
+          },
+          {
+            "$ref": "#/parameters/ListTestRunQueryParams.executionTo"
+          },
+          {
+            "$ref": "#/parameters/ListTestRunQueryParams.status"
+          },
+          {
+            "$ref": "#/parameters/ListTestRunQueryParams.maxpagesize"
           }
         ],
         "responses": {
@@ -111,9 +132,6 @@
           }
         },
         "x-ms-examples": {
-          "GetTestRunFile": {
-            "$ref": "./examples/GetTestRunFile.json"
-          },
           "List test runs.": {
             "$ref": "./examples/ListTestRuns.json"
           }
@@ -166,9 +184,6 @@
           }
         },
         "x-ms-examples": {
-          "GetTestRun": {
-            "$ref": "./examples/GetTestRun.json"
-          },
           "Get a load test run.": {
             "$ref": "./examples/GetTestRun.json"
           }
@@ -239,9 +254,6 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdateTestRun": {
-            "$ref": "./examples/CreateOrUpdateTestRun.json"
-          },
           "Create/update and start a load test run": {
             "$ref": "./examples/CreateOrUpdateTestRun.json"
           }
@@ -286,9 +298,6 @@
           }
         },
         "x-ms-examples": {
-          "DeleteTestRun": {
-            "$ref": "./examples/DeleteTestRun.json"
-          },
           "Delete a load test run": {
             "$ref": "./examples/DeleteTestRun.json"
           }
@@ -510,9 +519,6 @@
           }
         },
         "x-ms-examples": {
-          "GetTestRunFile": {
-            "$ref": "./examples/GetTestRunFile.json"
-          },
           "Get a file associated to a load test run.": {
             "$ref": "./examples/GetTestRunFile.json"
           }
@@ -686,9 +692,6 @@
           }
         },
         "x-ms-examples": {
-          "ListTestRunMetricsNamespaces": {
-            "$ref": "./examples/ListTestRunMetricsNamespaces.json"
-          },
           "List the metric namespaces for a load test run.": {
             "$ref": "./examples/ListTestRunMetricsNamespaces.json"
           }
@@ -819,9 +822,6 @@
           }
         },
         "x-ms-examples": {
-          "ListTestRunMetrics": {
-            "$ref": "./examples/ListTestRunMetrics.json"
-          },
           "List the metric values for a load test run.": {
             "$ref": "./examples/ListTestRunMetrics.json"
           }
@@ -958,6 +958,21 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTestQueryParams.orderby"
+          },
+          {
+            "$ref": "#/parameters/ListTestQueryParams.search"
+          },
+          {
+            "$ref": "#/parameters/ListTestQueryParams.lastModifiedStartTime"
+          },
+          {
+            "$ref": "#/parameters/ListTestQueryParams.lastModifiedEndTime"
+          },
+          {
+            "$ref": "#/parameters/ListTestQueryParams.maxpagesize"
           }
         ],
         "responses": {
@@ -1000,9 +1015,6 @@
           }
         },
         "x-ms-examples": {
-          "ListTests": {
-            "$ref": "./examples/ListTests.json"
-          },
           "Get all load tests.": {
             "$ref": "./examples/ListTests.json"
           }
@@ -1055,9 +1067,6 @@
           }
         },
         "x-ms-examples": {
-          "GetTest": {
-            "$ref": "./examples/GetTest.json"
-          },
           "Get a load test.": {
             "$ref": "./examples/GetTest.json"
           }
@@ -1121,9 +1130,6 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdateTest": {
-            "$ref": "./examples/CreateOrUpdateTest.json"
-          },
           "Create or update a load test": {
             "$ref": "./examples/CreateOrUpdateTest.json"
           }
@@ -1168,9 +1174,6 @@
           }
         },
         "x-ms-examples": {
-          "DeleteTest": {
-            "$ref": "./examples/DeleteTest.json"
-          },
           "Delete a load test": {
             "$ref": "./examples/DeleteTest.json"
           }
@@ -1218,9 +1221,6 @@
           }
         },
         "x-ms-examples": {
-          "ListTestAppComponents": {
-            "$ref": "./examples/ListTestAppComponents.json"
-          },
           "Get associated app component for the given test.": {
             "$ref": "./examples/ListTestAppComponents.json"
           }
@@ -1355,9 +1355,6 @@
           }
         },
         "x-ms-examples": {
-          "ListTestFiles": {
-            "$ref": "./examples/ListTestFiles.json"
-          },
           "Get all test files.": {
             "$ref": "./examples/ListTestFiles.json"
           }
@@ -1417,9 +1414,6 @@
           }
         },
         "x-ms-examples": {
-          "GetTestFile": {
-            "$ref": "./examples/GetTestFile.json"
-          },
           "Get a file from a load test": {
             "$ref": "./examples/GetTestFile.json"
           }
@@ -1518,9 +1512,6 @@
           }
         },
         "x-ms-examples": {
-          "UploadTestFile": {
-            "$ref": "./examples/UploadTestFile.json"
-          },
           "Upload input file for a given test name.": {
             "$ref": "./examples/UploadTestFile.json"
           }
@@ -1572,9 +1563,6 @@
           }
         },
         "x-ms-examples": {
-          "DeleteTestFile": {
-            "$ref": "./examples/DeleteTestFile.json"
-          },
           "Delete a file from a load test": {
             "$ref": "./examples/DeleteTestFile.json"
           }
@@ -3782,6 +3770,108 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "ListTestQueryParams.lastModifiedEndTime": {
+      "name": "lastModifiedEndTime",
+      "in": "query",
+      "description": "End DateTime(ISO 8601 literal format) of the last updated time range to filter\ntests.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestQueryParams.lastModifiedStartTime": {
+      "name": "lastModifiedStartTime",
+      "in": "query",
+      "description": "Start DateTime(ISO 8601 literal format) of the last updated time range to\nfilter tests.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestQueryParams.maxpagesize": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "Number of results in response.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestQueryParams.orderby": {
+      "name": "orderby",
+      "in": "query",
+      "description": "Sort on the supported fields in (field asc/desc) format. eg:\nlastModifiedDateTime asc. Supported fields - lastModifiedDateTime",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestQueryParams.search": {
+      "name": "search",
+      "in": "query",
+      "description": "Prefix based, case sensitive search on searchable fields - displayName,\ncreatedBy. For example, to search for a test, with display name is Login Test,\nthe search parameter can be Login.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestRunQueryParams.executionFrom": {
+      "name": "executionFrom",
+      "in": "query",
+      "description": "Start DateTime(ISO 8601 literal format) of test-run execution time filter range.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestRunQueryParams.executionTo": {
+      "name": "executionTo",
+      "in": "query",
+      "description": "End DateTime(ISO 8601 literal format) of test-run execution time filter range.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestRunQueryParams.maxpagesize": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "Number of results in response.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestRunQueryParams.orderby": {
+      "name": "orderby",
+      "in": "query",
+      "description": "Sort on the supported fields in (field asc/desc) format. eg: executedDateTime\nasc. Supported fields - executedDateTime",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestRunQueryParams.search": {
+      "name": "search",
+      "in": "query",
+      "description": "Prefix based, case sensitive search on searchable fields - description,\nexecutedUser. For example, to search for a test run, with description 500 VUs,\nthe search parameter can be 500.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestRunQueryParams.status": {
+      "name": "status",
+      "in": "query",
+      "description": "Comma separated list of test run status.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestRunQueryParams.testId": {
+      "name": "testId",
+      "in": "query",
+      "description": "Unique name of an existing load test.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "MetricDimensions.interval": {
       "name": "interval",
