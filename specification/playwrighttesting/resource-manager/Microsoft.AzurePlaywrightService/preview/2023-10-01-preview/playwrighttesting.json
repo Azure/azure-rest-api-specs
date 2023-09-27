@@ -593,10 +593,7 @@
           "description": "The status of the last operation.",
           "readOnly": true
         }
-      },
-      "required": [
-        "dashboardUri"
-      ]
+      }
     },
     "AccountUpdate": {
       "type": "object",
@@ -636,11 +633,6 @@
         }
       }
     },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
-    },
     "EnablementStatus": {
       "type": "string",
       "description": "The enablement status of a feature.",
@@ -670,7 +662,7 @@
       "description": "The free-trial properties",
       "properties": {
         "accountId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "type": "string",
           "description": "The playwright account id.",
           "readOnly": true
         },

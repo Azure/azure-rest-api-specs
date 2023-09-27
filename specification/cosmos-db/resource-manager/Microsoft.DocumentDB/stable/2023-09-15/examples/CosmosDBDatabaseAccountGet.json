@@ -1,0 +1,135 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2023-09-15",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1",
+        "name": "ddb1",
+        "location": "West US",
+        "type": "Microsoft.DocumentDB/databaseAccounts",
+        "kind": "GlobalDocumentDB",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "documentEndpoint": "https://ddb1.documents.azure.com:443/",
+          "ipRules": [],
+          "isVirtualNetworkFilterEnabled": false,
+          "virtualNetworkRules": [],
+          "databaseAccountOfferType": "Standard",
+          "disableKeyBasedMetadataWriteAccess": false,
+          "defaultIdentity": "FirstPartyIdentity",
+          "consistencyPolicy": {
+            "defaultConsistencyLevel": "Session",
+            "maxIntervalInSeconds": 5,
+            "maxStalenessPrefix": 100
+          },
+          "writeLocations": [
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
+              "provisioningState": "Succeeded",
+              "failoverPriority": 0
+            }
+          ],
+          "readLocations": [
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
+              "provisioningState": "Succeeded",
+              "failoverPriority": 0
+            }
+          ],
+          "locations": [
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
+              "provisioningState": "Succeeded",
+              "failoverPriority": 0
+            }
+          ],
+          "failoverPolicies": [
+            {
+              "id": "ddb1-eastus",
+              "locationName": "East US",
+              "failoverPriority": 0
+            }
+          ],
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.DocumentDB/databaseAccounts/account1/privateEndpointConnections/pe1",
+              "properties": {
+                "privateEndpoint": {
+                  "id": "/subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/pe1"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ],
+          "cors": [],
+          "enableFreeTier": false,
+          "apiProperties": {},
+          "enableAnalyticalStorage": true,
+          "enableBurstCapacity": true,
+          "analyticalStorageConfiguration": {
+            "schemaType": "WellDefined"
+          },
+          "instanceId": "d9b26648-2f53-4541-b3d8-3044f4f9810d",
+          "createMode": "Default",
+          "backupPolicy": {
+            "type": "Periodic",
+            "periodicModeProperties": {
+              "backupIntervalInMinutes": 240,
+              "backupRetentionIntervalInHours": 8,
+              "backupStorageRedundancy": "Geo"
+            },
+            "migrationState": {
+              "status": "InProgress",
+              "targetType": "Continuous",
+              "startTime": "2021-06-09T21:07:16Z"
+            }
+          },
+          "networkAclBypass": "None",
+          "networkAclBypassResourceIds": [],
+          "keysMetadata": {
+            "primaryMasterKey": {
+              "generationTime": "2022-02-25T20:30:11Z"
+            },
+            "secondaryMasterKey": {
+              "generationTime": "2022-02-25T20:30:11Z"
+            },
+            "primaryReadonlyMasterKey": {
+              "generationTime": "2022-02-25T20:30:11Z"
+            },
+            "secondaryReadonlyMasterKey": {
+              "generationTime": "2022-02-25T20:30:11Z"
+            }
+          },
+          "enablePartitionMerge": true,
+          "minimalTlsVersion": "Tls"
+        },
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "52f4fef3-3c3f-4ff3-b52e-b5c9eeb68656",
+          "tenantId": "33e01921-4d64-4f8c-a055-5bdaffd5e33d",
+          "userAssignedIdentities": {
+            "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": "fbe75b66-01c5-4f87-a220-233af3270436",
+              "principalId": "33e01921-4d64-4f8c-a055-5bdaffd5e33d"
+            }
+          }
+        }
+      }
+    }
+  }
+}

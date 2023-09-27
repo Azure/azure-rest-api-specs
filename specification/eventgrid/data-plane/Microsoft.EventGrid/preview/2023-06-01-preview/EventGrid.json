@@ -20,8 +20,8 @@
       {
         "name": "endpoint",
         "in": "path",
-        "required": true,
         "description": "The host name of the namespace, e.g. namespaceName1.westus-1.eventgrid.azure.net",
+        "required": true,
         "type": "string",
         "format": "uri",
         "x-ms-skip-url-encoding": true
@@ -37,6 +37,11 @@
   "security": [
     {
       "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://eventgrid.azure.net/.default"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -44,6 +49,14 @@
       "type": "apiKey",
       "name": "SharedAccessKey",
       "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://eventgrid.azure.net/.default": ""
+      }
     }
   },
   "tags": [],
@@ -93,8 +106,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -162,8 +175,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -221,8 +234,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -280,8 +293,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -339,8 +352,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -553,8 +566,7 @@
     },
     "PublishResult": {
       "type": "object",
-      "description": "The result of the Publish operation.",
-      "properties": {}
+      "description": "The result of the Publish operation."
     },
     "ReceiveDetails": {
       "type": "object",

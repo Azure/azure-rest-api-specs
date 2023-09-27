@@ -16,26 +16,51 @@ jobs:
       - name: Process comment
         shell: pwsh
         run: |
-          $payload = echo $env:PAYLOAD | ConvertFrom-Json -AsHashtable
+          $payload = Write-Output $env:PAYLOAD | ConvertFrom-Json -AsHashtable
           if (!$payload.comment -or !$payload.comment.body) {
-            Write-Host "Empty comment, returning..."
+            Write-Host "Skipping: empty comment."
             return
           }
           $body = $payload.comment.body.Trim().ToLowerInvariant()
           $expected = '/pr requestmerge'
           if ($body -ne $expected) {
-            Write-Host "Comment did not equal '$expected', skipping..."
+            Write-Host "Skipping: comment did not equal '$expected'."
             return
           }
           $label = 'MergeRequested'
-          Write-Host "gh pr edit $($payload.issue.number) --add-label `"$label`""
-          gh pr edit $payload.issue.html_url --add-label "$label"
-          if ($LASTEXITCODE) {
-            Write-Warning "Failed to add label"
-            exit $LASTEXITCODE
+          
+          $retryCount = 0
+          $maxRetries = 5
+          $retryDelay = 5 # Initial retry delay in seconds
+
+          while ($retryCount -lt $maxRetries) {
+            
+            Write-Host "Attempt $($retryCount+1) out of $($maxRetries): gh pr edit $($payload.issue.number) --add-label `"$label`""
+            gh pr edit $payload.issue.html_url --add-label "$label"
+            
+            if ($LASTEXITCODE -eq 0) {
+              Write-Host "Label added successfully on attempt $($retryCount+1) out of $($maxRetries)."
+              break
+            } else {
+              Write-Warning "Failed to add label on attempt $($retryCount+1) out of $($maxRetries)."
+              $retryCount++
+              if ($retryCount -lt $maxRetries) {
+                # $retryDelay = 5 exponential backoff in seconds:
+                # attempt 2:  5 =  1*5
+                # attempt 3: 10 =  2*5
+                # attempt 4: 20 =  4*5
+                # attempt 5: 40 =  8*5
+                Write-Host "Sleeping for $retryDelay seconds..."
+                Start-Sleep -Seconds $retryDelay
+                $retryDelay = $retryDelay * 2
+              }
+            }
+          }
+
+          if ($retryCount -ge $maxRetries) {
+            Write-Error "Max retry attempts of $maxRetries exhausted. Exiting with error ('exit 1')."
+            exit 1
           }
         env:
           PAYLOAD: ${{ toJson(github.event) }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
