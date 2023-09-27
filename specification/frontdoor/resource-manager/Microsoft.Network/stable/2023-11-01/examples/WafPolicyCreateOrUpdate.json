@@ -14,7 +14,17 @@
           "customBlockResponseStatusCode": 429,
           "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg==",
           "requestBodyCheck": "Disabled",
-          "logScrubbing": null
+          "logScrubbing": {
+            "state": "Enabled",
+            "scrubbingRules": [
+              {
+                "matchVariable": "RequestIPAddress",
+                "selectorMatchOperator": "EqualsAny",
+                "selector": null,
+                "state": "Enabled"
+              }
+            ]
+          }
         },
         "customRules": {
           "rules": [
@@ -111,7 +121,7 @@
         }
       },
       "sku": {
-        "name": "Classic_AzureFrontDoor"
+        "name": "Premium_AzureFrontDoor"
       }
     }
   },
@@ -136,7 +146,17 @@
             "customBlockResponseStatusCode": 429,
             "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg==",
             "requestBodyCheck": "Disabled",
-            "logScrubbing": null
+            "logScrubbing": {
+              "state": "Enabled",
+              "scrubbingRules": [
+                {
+                  "matchVariable": "RequestIPAddress",
+                  "selectorMatchOperator": "EqualsAny",
+                  "selector": null,
+                  "state": "Enabled"
+                }
+              ]
+            }
           },
           "customRules": {
             "rules": [
@@ -246,7 +266,7 @@
           "securityPolicyLinks": []
         },
         "sku": {
-          "name": "Classic_AzureFrontDoor"
+          "name": "Premium_AzureFrontDoor"
         }
       }
     },
@@ -268,7 +288,19 @@
             "mode": "Prevention",
             "redirectUrl": "http://www.bing.com",
             "customBlockResponseStatusCode": 429,
-            "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg=="
+            "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg==",
+            "requestBodyCheck": "Disabled",
+            "logScrubbing": {
+              "state": "Enabled",
+              "scrubbingRules": [
+                {
+                  "matchVariable": "RequestIPAddress",
+                  "selectorMatchOperator": "EqualsAny",
+                  "selector": null,
+                  "state": "Enabled"
+                }
+              ]
+            }
           },
           "customRules": {
             "rules": [
@@ -400,7 +432,18 @@
             "redirectUrl": "http://www.bing.com",
             "customBlockResponseStatusCode": 429,
             "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg==",
-            "requestBodyCheck": "Disabled"
+            "requestBodyCheck": "Disabled",
+            "logScrubbing": {
+              "state": "Enabled",
+              "scrubbingRules": [
+                {
+                  "matchVariable": "RequestIPAddress",
+                  "selectorMatchOperator": "EqualsAny",
+                  "selector": null,
+                  "state": "Enabled"
+                }
+              ]
+            }
           },
           "customRules": {
             "rules": [
@@ -510,7 +553,7 @@
           "securityPolicyLinks": []
         },
         "sku": {
-          "name": "Classic_AzureFrontDoor"
+          "name": "Premium_AzureFrontDoor"
         }
       }
     }
