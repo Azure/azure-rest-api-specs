@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
+    "api-version": "2023-08-15"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest4",
+            "name": "KustoClusterRPTest4",
+            "type": "Microsoft.Kusto/Clusters",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "enableDiskEncryption": false,
+              "enableStreamingIngest": true,
+              "keyVaultProperties": {
+                "keyVaultUri": "https://dummy.keyvault.com",
+                "keyName": "keyName",
+                "keyVersion": "keyVersion"
+              },
+              "engineType": "V2",
+              "publicNetworkAccess": "Enabled",
+              "restrictOutboundNetworkAccess": "Disabled",
+              "allowedIpRangeList": [],
+              "allowedFqdnList": [
+                "my-stroage.blob.core.windows.net"
+              ],
+              "migrationCluster": {
+                "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster2",
+                "uri": "https://kustocluster2.westus.kusto.windows.net",
+                "dataIngestionUri": "https://ingest-kustocluster2.westus.kusto.windows.net",
+                "role": "Destination"
+              }
+            },
+            "sku": {
+              "name": "Standard_L16as_v3",
+              "capacity": 2,
+              "tier": "Standard"
+            },
+            "etag": "abcd123"
+          },
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/KustoClusterRPTest3",
+            "name": "KustoClusterRPTest3",
+            "type": "Microsoft.Kusto/Clusters",
+            "location": "westus",
+            "properties": {
+              "enableDiskEncryption": true,
+              "enableStreamingIngest": true,
+              "engineType": "V3",
+              "publicNetworkAccess": "Enabled",
+              "allowedIpRangeList": [
+                "0.0.0.0/0"
+              ],
+              "provisioningState": "Succeeded",
+              "restrictOutboundNetworkAccess": "Disabled"
+            },
+            "sku": {
+              "name": "Standard_L16as_v3",
+              "capacity": 2,
+              "tier": "Standard"
+            },
+            "etag": "abcd123"
+          }
+        ]
+      }
+    }
+  }
+}
