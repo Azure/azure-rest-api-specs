@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-preview-2023-02` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-02'
 input-file:
-  - Azure.Analytics.Purview.Catalog/preview/2023-02-01-preview/purviewdatamap.json
+  - Azure.Analytics.Purview.Catalog/preview/2023-02-01-preview/purviewcatalog.json
 ```
 
 ### Tag: package-2022-11-01-preview
