@@ -1,8 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/cognitiveservices/imageAnalysis"
-  "dependencies":
-    default: ""
+    default: "sdk/cognitiveservices"
 emit:
  - "@azure-tools/typespec-autorest"
 options:
@@ -24,11 +22,7 @@ options:
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-vision-imageanalysis"
     namespace: "com.azure.ai.vision.imageanalysis"
-    partial-update: true
-    enable-sync-stack: true
-    generate-tests: false
-    custom-types-subpackage: "implementation.models"
-    custom-types: "FunctionCallModelBase,FunctionCallPreset,FunctionCallPresetFunctionCallModel,FunctionNameFunctionCallModel"
+    examples-directory: examples
   "@azure-tools/typespec-ts":
     package-dir: "imageAnalysis"
     generateMetadata: false
