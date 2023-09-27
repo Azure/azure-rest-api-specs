@@ -6,7 +6,7 @@
     "contact": {
       "name": "Microsoft.Billing",
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
-      "email": "cabbpt@microsoft.com"
+      "email": "pacebpexphot@microsoft.com"
     },
     "version": "2023-04-01"
   },
@@ -85,8 +85,8 @@
           },
           {
             "in": "query",
-            "name": "includeRevoked",
-            "description": "Can be used to get revoked associated tenants.",
+            "name": "includeDisabled",
+            "description": "Can be used to get disabled or revoked associated tenants.",
             "type": "boolean",
             "default": false
           },
@@ -206,8 +206,8 @@
           },
           {
             "in": "query",
-            "name": "includeRevoked",
-            "description": "Can be used to get revoked associated tenants.",
+            "name": "includeDisabled",
+            "description": "Can be used to get disabled or revoked associated tenants.",
             "type": "boolean",
             "default": false
           },
@@ -317,10 +317,9 @@
         "billingManagementState": {
           "description": "The state determines whether users from the associated tenant can be assigned roles for commerce activities like viewing and downloading invoices, managing payments, and making purchases.",
           "enum": [
-            "Unknown",
-            "NotAllowed",
+            "Other",
             "Active",
-            "Revoked"
+            "Disabled"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -329,15 +328,15 @@
           }
         },
         "provisioningState": {
-          "description": "The state determines whether subscriptions and licenses can be provisioned in the associated tenant. It can be set as 'Pending' from null, null from 'Pending', or null from 'Active'",
+          "description": "The state determines whether subscriptions and licenses can be provisioned in the associated tenant. It can be set as 'Pending' from 'Disabled', and 'Disabled' from 'Pending' or 'Active'. Other states are determined based on actions taken by the provisioning tenant's Global Administrator on the related billing request.",
           "enum": [
-            "Unknown",
-            "NotRequested",
+            "Other",
+            "Disabled",
             "Active",
             "Pending",
-            "PermissionRequestExpired",
+            "BillingRequestExpired",
             "BillingRequestDeclined",
-            "Revoked"
+            "BillingRequestRevoked"
           ],
           "type": "string",
           "x-ms-enum": {
