@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2023-07-01-preview"
+    "version": "2023-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -573,6 +573,38 @@
     }
   },
   "definitions": {
+    "AdditionalNetworkInterfaceConfiguration": {
+      "type": "object",
+      "required": [
+        "name",
+        "ipConfigurations"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the network interface."
+        },
+        "enableAcceleratedNetworking": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is accelerated networking-enabled."
+        },
+        "dscpConfiguration": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies the DSCP configuration to apply to the network interface."
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpConfiguration"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "Specifies the IP configurations of the network interface."
+        }
+      },
+      "description": "Specifies the settings for a network interface to attach to the node type."
+    },
     "DiskType": {
       "type": "string",
       "description": "Managed data disk type. IOPS and throughput are given by the disk size, to see more information go to https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types.\n",
@@ -632,10 +664,12 @@
         },
         "loadBalancerBackendAddressPoolId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The resource Id of the Load Balancer backend address pool that the VM instances of the node type are associated with. The format of the resource Id is '/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/loadBalancers/<loadBalancerName>/backendAddressPools/<backendAddressPoolName>'."
         },
         "loadBalancerInboundNatPoolId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The resource Id of the Load Balancer inbound NAT pool that the VM instances of the node type are associated with. The format of the resource Id is '/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/loadBalancers/<loadBalancerName>/inboundNatPools/<inboundNatPoolName>'."
         },
         "applicationGatewayBackendAddressPoolId": {
@@ -675,6 +709,125 @@
           }
         ]
       }
+    },
+    "IpConfiguration": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "description": "Specifies an IP configuration of the network interface.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the network interface."
+        },
+        "applicationGatewayBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to backend address pools of application gateways. A node type can reference backend address pools of multiple application gateways. Multiple node types cannot use the same application gateway."
+        },
+        "loadBalancerBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to backend address pools of load balancers. A node type can reference backend address pools of one public and one internal load balancer. Multiple node types cannot use the same basic sku load balancer.\t"
+        },
+        "loadBalancerInboundNatPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to inbound Nat pools of the load balancers. A node type can reference inbound nat pools of one public and one internal load balancer. Multiple node types cannot use the same basic sku load balancer."
+        },
+        "subnet": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies the subnet of the network interface."
+        },
+        "privateIPAddressVersion": {
+          "type": "string",
+          "description": "Specifies whether the IP configuration's private IP is IPv4 or IPv6. Default is IPv4.",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "default": "IPv4",
+          "x-ms-enum": {
+            "name": "privateIPAddressVersion",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "IPv4"
+              },
+              {
+                "value": "IPv6"
+              }
+            ]
+          }
+        },
+        "publicIPAddressConfiguration": {
+          "type": "object",
+          "required": [
+            "name"
+          ],
+          "description": "The public IP address configuration of the network interface.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the network interface."
+            },
+            "ipTags": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IpTag"
+              },
+              "x-ms-identifiers": [],
+              "description": "Specifies the list of IP tags associated with the public IP address."
+            },
+            "publicIPAddressVersion": {
+              "type": "string",
+              "description": "Specifies whether the IP configuration's public IP is IPv4 or IPv6. Default is IPv4.",
+              "enum": [
+                "IPv4",
+                "IPv6"
+              ],
+              "default": "IPv4",
+              "x-ms-enum": {
+                "name": "publicIPAddressVersion",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "IPv4"
+                  },
+                  {
+                    "value": "IPv6"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "IpTag": {
+      "type": "object",
+      "required": [
+        "ipTagType",
+        "tag"
+      ],
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "IP tag type. Example: FirstPartyUsage."
+        },
+        "tag": {
+          "type": "string",
+          "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
+        }
+      },
+      "description": "The IP tag associated with the public IP address."
     },
     "ManagedProxyResource": {
       "type": "object",
@@ -1022,7 +1175,11 @@
         },
         "enableNodePublicIP": {
           "type": "boolean",
-          "description": "Specifies whether each node is allocated its own public IP address. This is only supported on secondary node types with custom Load Balancers."
+          "description": "Specifies whether each node is allocated its own public IPv4 address. This is only supported on secondary node types with custom Load Balancers."
+        },
+        "enableNodePublicIPv6": {
+          "type": "boolean",
+          "description": "Specifies whether each node is allocated its own public IPv6 address. This is only supported on secondary node types with custom Load Balancers."
         },
         "vmSharedGalleryImageId": {
           "type": "string",
@@ -1078,6 +1235,16 @@
             ]
           },
           "description": "Specifies the resource id of the DSCP configuration to apply to the node type network interface."
+        },
+        "additionalNetworkInterfaceConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalNetworkInterfaceConfiguration"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "Specifies the settings for any additional secondary network interfaces to attach to the node type."
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -1464,9 +1631,34 @@
         "enableAutomaticUpgrade": {
           "type": "boolean",
           "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
+        },
+        "setupOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmssExtensionSetupOrder"
+          },
+          "x-ms-identifiers": [],
+          "description": "Indicates the setup order for the extension."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set Extension."
+    },
+    "VmssExtensionSetupOrder": {
+      "type": "string",
+      "description": "Vm extension setup order.\n",
+      "enum": [
+        "BeforeSFRuntime"
+      ],
+      "x-ms-enum": {
+        "name": "VmssExtensionSetupOrder",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "BeforeSFRuntime",
+            "description": "Indicates that the vm extension should run before the service fabric runtime starts."
+          }
+        ]
+      }
     },
     "AvailableOperationDisplay": {
       "type": "object",
@@ -1731,7 +1923,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-07-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-09-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
