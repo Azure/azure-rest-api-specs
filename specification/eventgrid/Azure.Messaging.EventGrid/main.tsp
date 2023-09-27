@@ -3,7 +3,15 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
-@useAuth(ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey">)
+@useAuth(
+  ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      scopes: ["https://eventgrid.azure.net/.default"],
+    }
+  ]>
+)
 @service({
   title: "Azure.Messaging.EventGridClient",
 })

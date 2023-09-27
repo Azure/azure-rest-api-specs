@@ -1,0 +1,2539 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Datadog",
+    "version": "2023-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Microsoft Entra ID OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/agreements": {
+      "get": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "List Datadog marketplace agreements in the subscription.",
+        "operationId": "MarketplaceAgreements_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogAgreementResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MarketplaceAgreements_List": {
+            "$ref": "./examples/MarketplaceAgreements_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/agreements/default": {
+      "put": {
+        "tags": [
+          "Agreements"
+        ],
+        "summary": "Create Datadog marketplace agreement in the subscription.",
+        "operationId": "MarketplaceAgreements_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DatadogAgreementResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogAgreementResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MarketplaceAgreements_CreateOrUpdate": {
+            "$ref": "./examples/MarketplaceAgreements_Create.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/subscriptionStatuses": {
+      "get": {
+        "tags": [
+          "CreateResource"
+        ],
+        "summary": "Informs if the current subscription is being already monitored for selected Datadog organization.",
+        "operationId": "CreationSupported_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DatadogOrganizationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CreateResourceSupportedResponseList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "CreationSupported_List": {
+            "$ref": "./examples/CreationSupported_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/subscriptionStatuses/default": {
+      "get": {
+        "tags": [
+          "CreateResource"
+        ],
+        "summary": "Informs if the current subscription is being already monitored for selected Datadog organization.",
+        "operationId": "CreationSupported_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DatadogOrganizationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CreateResourceSupportedResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreationSupported_Get": {
+            "$ref": "./examples/CreationSupported_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listApiKeys": {
+      "post": {
+        "tags": [
+          "ApiKey"
+        ],
+        "summary": "List the api keys for a given monitor resource.",
+        "operationId": "Monitors_ListApiKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogApiKeyListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_ListApiKeys": {
+            "$ref": "./examples/ApiKeys_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/getDefaultKey": {
+      "post": {
+        "tags": [
+          "ApiKey"
+        ],
+        "summary": "Get the default api key.",
+        "operationId": "Monitors_GetDefaultKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogApiKey"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_GetDefaultKey": {
+            "$ref": "./examples/ApiKeys_GetDefaultKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/setDefaultKey": {
+      "post": {
+        "tags": [
+          "ApiKey"
+        ],
+        "summary": "Set the default api key.",
+        "operationId": "Monitors_SetDefaultKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DatadogApiKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_SetDefaultKey": {
+            "$ref": "./examples/ApiKeys_SetDefaultKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listHosts": {
+      "post": {
+        "tags": [
+          "Hosts"
+        ],
+        "summary": "List the hosts for a given monitor resource.",
+        "operationId": "Monitors_ListHosts",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogHostListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_ListHosts": {
+            "$ref": "./examples/Hosts_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listLinkedResources": {
+      "post": {
+        "tags": [
+          "LinkedResources"
+        ],
+        "summary": "List all Azure resources associated to the same Datadog organization as the target resource.",
+        "operationId": "Monitors_ListLinkedResources",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LinkedResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_ListLinkedResources": {
+            "$ref": "./examples/LinkedResources_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listMonitoredResources": {
+      "post": {
+        "tags": [
+          "MonitoredResources"
+        ],
+        "summary": "List the resources currently being monitored by the Datadog monitor resource.",
+        "operationId": "Monitors_ListMonitoredResources",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_ListMonitoredResources": {
+            "$ref": "./examples/MonitoredResources_List.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Datadog/operations": {
+      "get": {
+        "tags": [
+          "MonitorsResource"
+        ],
+        "summary": "List all operations provided by Microsoft.Datadog for the 2023-01-01 api version.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/monitors": {
+      "get": {
+        "tags": [
+          "MonitorsResource"
+        ],
+        "summary": "List all monitors under the specified subscription.",
+        "operationId": "Monitors_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogMonitorResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_List": {
+            "$ref": "./examples/Monitors_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors": {
+      "get": {
+        "tags": [
+          "MonitorsResource"
+        ],
+        "summary": "List all monitors under the specified resource group.",
+        "operationId": "Monitors_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogMonitorResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_ListByResourceGroup": {
+            "$ref": "./examples/Monitors_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}": {
+      "get": {
+        "tags": [
+          "MonitorsResource"
+        ],
+        "summary": "Get the properties of a specific monitor resource.",
+        "operationId": "Monitors_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogMonitorResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_Get": {
+            "$ref": "./examples/Monitors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MonitorsResource"
+        ],
+        "summary": "Create a monitor resource.",
+        "operationId": "Monitors_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DatadogMonitorResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogMonitorResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogMonitorResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Monitors_Create": {
+            "$ref": "./examples/Monitors_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MonitorsResource"
+        ],
+        "summary": "Update a monitor resource.",
+        "operationId": "Monitors_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DatadogMonitorResourceUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogMonitorResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogMonitorResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitors_Update": {
+            "$ref": "./examples/Monitors_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MonitorsResource"
+        ],
+        "summary": "Delete a monitor resource.",
+        "operationId": "Monitors_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitors_Delete": {
+            "$ref": "./examples/Monitors_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/refreshSetPasswordLink": {
+      "post": {
+        "tags": [
+          "RefreshSetPasswordLink"
+        ],
+        "summary": "Refresh the set password link and return a latest one.",
+        "operationId": "Monitors_RefreshSetPasswordLink",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogSetPasswordLink"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_RefreshSetPasswordLink": {
+            "$ref": "./examples/RefreshSetPassword_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/tagRules": {
+      "get": {
+        "tags": [
+          "Rules"
+        ],
+        "summary": "List the tag rules for a given monitor resource.",
+        "operationId": "TagRules_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRulesListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TagRules_List": {
+            "$ref": "./examples/TagRules_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/tagRules/{ruleSetName}": {
+      "put": {
+        "tags": [
+          "Rules"
+        ],
+        "summary": "Create or update a tag rule set for a given monitor resource.",
+        "operationId": "TagRules_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "description": "Rule set name",
+            "in": "path",
+            "name": "ruleSetName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRules"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRules"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_CreateOrUpdate": {
+            "$ref": "./examples/TagRules_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Rules"
+        ],
+        "summary": "Get a tag rule set for a given monitor resource.",
+        "operationId": "TagRules_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "description": "Rule set name",
+            "in": "path",
+            "name": "ruleSetName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoringTagRules"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TagRules_Get": {
+            "$ref": "./examples/TagRules_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/singleSignOnConfigurations": {
+      "get": {
+        "tags": [
+          "SingleSignOn"
+        ],
+        "summary": "List the single sign-on configurations for a given monitor resource.",
+        "operationId": "SingleSignOnConfigurations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogSingleSignOnResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SingleSignOnConfigurations_List": {
+            "$ref": "./examples/SingleSignOnConfigurations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/singleSignOnConfigurations/{configurationName}": {
+      "put": {
+        "tags": [
+          "SingleSignOn"
+        ],
+        "summary": "Configures single-sign-on for this resource.",
+        "operationId": "SingleSignOnConfigurations_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "description": "Configuration name",
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DatadogSingleSignOnResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogSingleSignOnResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogSingleSignOnResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SingleSignOnConfigurations_CreateOrUpdate": {
+            "$ref": "./examples/SingleSignOnConfigurations_CreateOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SingleSignOn"
+        ],
+        "summary": "Gets the datadog single sign-on resource for the given Monitor.",
+        "operationId": "SingleSignOnConfigurations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "description": "Configuration name",
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatadogSingleSignOnResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SingleSignOnConfigurations_Get": {
+            "$ref": "./examples/SingleSignOnConfigurations_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/monitoredSubscriptions": {
+      "get": {
+        "tags": [
+          "monitoredSubscriptions"
+        ],
+        "summary": "List the subscriptions currently being monitored by the Datadog monitor resource.",
+        "operationId": "MonitoredSubscriptions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionPropertiesList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Monitors_GetMonitoredSubscriptions": {
+            "$ref": "./examples/MonitoredSubscriptions_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/monitoredSubscriptions/{configurationName}": {
+      "get": {
+        "tags": [
+          "monitoredSubscriptions"
+        ],
+        "summary": "List the subscriptions currently being monitored by the Datadog monitor resource.",
+        "operationId": "MonitoredSubscriptions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "description": "The configuration name. Only 'default' value is supported.",
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_GetMonitoredSubscriptions": {
+            "$ref": "./examples/MonitoredSubscriptions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "monitoredSubscriptions"
+        ],
+        "summary": "Add the subscriptions that should be monitored by the Datadog monitor resource.",
+        "operationId": "MonitoredSubscriptions_CreateorUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "description": "The configuration name. Only 'default' value is supported.",
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          },
+          "202": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitors_AddMonitoredSubscriptions": {
+            "$ref": "./examples/MonitoredSubscriptions_CreateorUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MonitoredSubscriptions"
+        ],
+        "summary": "Updates the subscriptions that are being monitored by the Datadog monitor resource",
+        "operationId": "MonitoredSubscriptions_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "description": "The configuration name. Only 'default' value is supported.",
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          },
+          "202": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitors_UpdateMonitoredSubscriptions": {
+            "$ref": "./examples/MonitoredSubscriptions_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MonitoredSubscriptions"
+        ],
+        "summary": "Updates the subscriptions that are being monitored by the Datadog monitor resource",
+        "operationId": "MonitoredSubscriptions_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "description": "Configuration name",
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitors_DeleteMonitoredSubscriptions": {
+            "$ref": "./examples/MonitoredSubscriptions_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DatadogAgreementProperties": {
+      "description": "Terms properties.",
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "description": "Publisher identifier string.",
+          "type": "string"
+        },
+        "product": {
+          "description": "Product identifier string.",
+          "type": "string"
+        },
+        "plan": {
+          "description": "Plan identifier string.",
+          "type": "string"
+        },
+        "licenseTextLink": {
+          "description": "Link to HTML with Microsoft and Publisher terms.",
+          "type": "string"
+        },
+        "privacyPolicyLink": {
+          "description": "Link to the privacy policy of the publisher.",
+          "type": "string"
+        },
+        "retrieveDatetime": {
+          "format": "date-time",
+          "description": "Date and time in UTC of when the terms were accepted. This is empty if Accepted is false.",
+          "type": "string"
+        },
+        "signature": {
+          "description": "Terms signature.",
+          "type": "string"
+        },
+        "accepted": {
+          "description": "If any version of the terms have been accepted, otherwise false.",
+          "type": "boolean"
+        }
+      }
+    },
+    "DatadogAgreementResource": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "ARM id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the agreement.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DatadogAgreementProperties",
+          "description": "Represents the properties of the resource."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "DatadogAgreementResourceListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatadogAgreementResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "CreateResourceSupportedProperties": {
+      "description": "Datadog resource can be created or not properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The ARM id of the subscription.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creationSupported": {
+          "description": "Indicates if selected subscription supports Datadog resource creation, if not it is already being monitored for the selected organization via multi subscription feature. ",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "CreateResourceSupportedResponse": {
+      "description": "Datadog resource can be created or not.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CreateResourceSupportedProperties",
+          "description": "Represents the properties of the resource."
+        }
+      }
+    },
+    "CreateResourceSupportedResponseList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateResourceSupportedResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DatadogApiKey": {
+      "required": [
+        "key"
+      ],
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "The user that created the API key.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the API key.",
+          "type": "string"
+        },
+        "key": {
+          "description": "The value of the API key.",
+          "type": "string"
+        },
+        "created": {
+          "description": "The time of creation of the API key.",
+          "type": "string"
+        }
+      }
+    },
+    "DatadogApiKeyListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatadogApiKey"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "DatadogInstallMethod": {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "description": "The tool.",
+          "type": "string"
+        },
+        "toolVersion": {
+          "description": "The tool version.",
+          "type": "string"
+        },
+        "installerVersion": {
+          "description": "The installer version.",
+          "type": "string"
+        }
+      }
+    },
+    "DatadogLogsAgent": {
+      "type": "object",
+      "properties": {
+        "transport": {
+          "description": "The transport.",
+          "type": "string"
+        }
+      }
+    },
+    "DatadogHostMetadata": {
+      "type": "object",
+      "properties": {
+        "agentVersion": {
+          "description": "The agent version.",
+          "type": "string"
+        },
+        "installMethod": {
+          "$ref": "#/definitions/DatadogInstallMethod"
+        },
+        "logsAgent": {
+          "$ref": "#/definitions/DatadogLogsAgent"
+        }
+      }
+    },
+    "DatadogHost": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the host.",
+          "type": "string"
+        },
+        "aliases": {
+          "description": "The aliases for the host installed via the Datadog agent.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "apps": {
+          "description": "The Datadog integrations reporting metrics for the host.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/DatadogHostMetadata"
+        }
+      }
+    },
+    "DatadogHostListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatadogHost"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "LinkedResource": {
+      "description": "The definition of a linked resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ARM id of the linked resource.",
+          "type": "string"
+        }
+      }
+    },
+    "LinkedResourceListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "MonitoredResource": {
+      "description": "The properties of a resource currently being monitored by the Datadog monitor resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ARM id of the resource.",
+          "type": "string"
+        },
+        "sendingMetrics": {
+          "description": "Flag indicating if resource is sending metrics to Datadog.",
+          "type": "boolean"
+        },
+        "reasonForMetricsStatus": {
+          "description": "Reason for why the resource is sending metrics (or why it is not sending).",
+          "type": "string"
+        },
+        "sendingLogs": {
+          "description": "Flag indicating if resource is sending logs to Datadog.",
+          "type": "boolean"
+        },
+        "reasonForLogsStatus": {
+          "description": "Reason for why the resource is sending logs (or why it is not sending).",
+          "type": "string"
+        }
+      }
+    },
+    "MonitoredResourceListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoredResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "MonitoredSubscription": {
+      "description": "The list of subscriptions and it's monitoring status by current Datadog monitor.",
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "description": "The subscriptionId to be monitored.",
+          "required": [
+            "subscriptionId"
+          ],
+          "type": "string"
+        },
+        "status": {
+          "description": "The state of monitoring.",
+          "enum": [
+            "InProgress",
+            "Active",
+            "Failed",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "Status"
+          },
+          "type": "string"
+        },
+        "error": {
+          "description": "The reason of not monitoring the subscription.",
+          "type": "string"
+        },
+        "tagRules": {
+          "$ref": "#/definitions/MonitoringTagRulesProperties"
+        }
+      }
+    },
+    "SubscriptionList": {
+      "description": "The request to update subscriptions needed to be monitored by the Datadog monitor resource.",
+      "type": "object",
+      "properties": {
+        "operation": {
+          "description": "The operation for the patch on the resource.",
+          "enum": [
+            "AddBegin",
+            "AddComplete",
+            "DeleteBegin",
+            "DeleteComplete",
+            "Active"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "Operation"
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "monitoredSubscriptionList": {
+          "description": "List of subscriptions and the state of the monitoring.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoredSubscription"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MonitoredSubscriptionProperties": {
+      "description": "The request to update subscriptions needed to be monitored by the Datadog monitor resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the monitored subscription resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The id of the monitored subscription resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the monitored subscription resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SubscriptionList"
+        }
+      }
+    },
+    "MonitoredSubscriptionPropertiesList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoredSubscriptionProperties"
+          }
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Service provider, i.e., Microsoft.Datadog.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Type on which the operation is performed, e.g., 'monitors'.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation type, e.g., read, write, delete, etc.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation, e.g., 'Write monitors'.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationResult": {
+      "description": "A Microsoft.Datadog REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name, i.e., {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of GET request to list the Microsoft.Datadog operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations supported by the Microsoft.Datadog provider.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceSku": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the SKU in {PlanId} format. For Terraform, the only allowed value is 'linking'.",
+          "type": "string"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ProvisioningState"
+      },
+      "readOnly": true
+    },
+    "MonitoringStatus": {
+      "description": "Flag specifying if the resource monitoring is enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "default": "Enabled",
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MonitoringStatus"
+      }
+    },
+    "MarketplaceSubscriptionStatus": {
+      "description": "Flag specifying the Marketplace Subscription Status of the resource. If payment is not made in time, the resource will go in Suspended state.",
+      "enum": [
+        "Provisioning",
+        "Active",
+        "Suspended",
+        "Unsubscribed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MarketplaceSubscriptionStatus"
+      },
+      "readOnly": true
+    },
+    "DatadogOrganizationProperties": {
+      "description": "Specify the Datadog organization name. In the case of linking to existing organizations, Id, ApiKey, and Applicationkey is required as well.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the Datadog organization.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "id": {
+          "description": "Id of the Datadog organization.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "linkingAuthCode": {
+          "description": "The auth code used to linking to an existing Datadog organization.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "linkingClientId": {
+          "description": "The client_id from an existing in exchange for an auth token to link organization.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "redirectUri": {
+          "description": "The redirect URI for linking.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "apiKey": {
+          "description": "Api key associated to the Datadog organization.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "applicationKey": {
+          "description": "Application key associated to the Datadog organization.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "enterpriseAppId": {
+          "description": "The Id of the Enterprise App used for Single sign on.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "cspm": {
+          "description": "The configuration which describes the state of cloud security posture management. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.",
+          "type": "boolean"
+        }
+      }
+    },
+    "UserInfo": {
+      "description": "Includes name, email and optionally, phone number. User Information can't be null.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the user",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "emailAddress": {
+          "description": "Email of the user used by Datadog for contacting them if needed",
+          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "Phone number of the user used by Datadog for contacting them if needed",
+          "maxLength": 40,
+          "type": "string"
+        }
+      },
+      "x-ms-secret": true
+    },
+    "LiftrResourceCategories": {
+      "enum": [
+        "Unknown",
+        "MonitorLogs"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "LiftrResourceCategories"
+      },
+      "readOnly": true
+    },
+    "MonitorProperties": {
+      "description": "Properties specific to the monitor resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "monitoringStatus": {
+          "$ref": "#/definitions/MonitoringStatus"
+        },
+        "marketplaceSubscriptionStatus": {
+          "$ref": "#/definitions/MarketplaceSubscriptionStatus"
+        },
+        "datadogOrganizationProperties": {
+          "$ref": "#/definitions/DatadogOrganizationProperties"
+        },
+        "userInfo": {
+          "$ref": "#/definitions/UserInfo"
+        },
+        "liftrResourceCategory": {
+          "$ref": "#/definitions/LiftrResourceCategories"
+        },
+        "liftrResourcePreference": {
+          "description": "The priority of the resource.",
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedIdentityTypes": {
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "type": "string",
+      "description": "Specifies the identity type of the Datadog Monitor. At this time the only allowed value is 'SystemAssigned'.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ManagedIdentityTypes"
+      }
+    },
+    "IdentityProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The identity ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The tenant ID of resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ManagedIdentityTypes"
+        }
+      }
+    },
+    "DatadogMonitorResource": {
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "ARM id of the monitor resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the monitor resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the monitor resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "properties": {
+          "$ref": "#/definitions/MonitorProperties"
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "DatadogMonitorResourceListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatadogMonitorResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "MonitorUpdateProperties": {
+      "description": "The set of properties that can be update in a PATCH request to a monitor resource.",
+      "type": "object",
+      "properties": {
+        "monitoringStatus": {
+          "$ref": "#/definitions/MonitoringStatus"
+        },
+        "cspm": {
+          "description": "The new cloud security posture management value of the monitor resource. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.",
+          "type": "boolean"
+        }
+      }
+    },
+    "DatadogMonitorResourceUpdateParameters": {
+      "description": "The parameters for a PATCH request to a monitor resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MonitorUpdateProperties"
+        },
+        "tags": {
+          "description": "The new tags of the monitor resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        }
+      }
+    },
+    "DatadogSetPasswordLink": {
+      "type": "object",
+      "properties": {
+        "setPasswordLink": {
+          "type": "string"
+        }
+      }
+    },
+    "TagAction": {
+      "description": "Valid actions for a filtering tag. Exclusion takes priority over inclusion.",
+      "enum": [
+        "Include",
+        "Exclude"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "TagAction"
+      }
+    },
+    "FilteringTag": {
+      "description": "The definition of a filtering tag. Filtering tags are used for capturing resources and include/exclude them from being monitored.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name (also known as the key) of the tag.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the tag.",
+          "type": "string"
+        },
+        "action": {
+          "$ref": "#/definitions/TagAction"
+        }
+      }
+    },
+    "LogRules": {
+      "description": "Set of rules for sending logs for the Monitor resource.",
+      "type": "object",
+      "properties": {
+        "sendAadLogs": {
+          "description": "Flag specifying if AAD logs should be sent for the Monitor resource.",
+          "type": "boolean"
+        },
+        "sendSubscriptionLogs": {
+          "description": "Flag specifying if Azure subscription logs should be sent for the Monitor resource.",
+          "type": "boolean"
+        },
+        "sendResourceLogs": {
+          "description": "Flag specifying if Azure resource logs should be sent for the Monitor resource.",
+          "type": "boolean"
+        },
+        "filteringTags": {
+          "description": "List of filtering tags to be used for capturing logs. This only takes effect if SendResourceLogs flag is enabled. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilteringTag"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MetricRules": {
+      "description": "Set of rules for sending metrics for the Monitor resource.",
+      "type": "object",
+      "properties": {
+        "filteringTags": {
+          "description": "List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilteringTag"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MonitoringTagRulesProperties": {
+      "description": "Definition of the properties for a TagRules resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "logRules": {
+          "$ref": "#/definitions/LogRules"
+        },
+        "metricRules": {
+          "$ref": "#/definitions/MetricRules"
+        },
+        "automuting": {
+          "description": "Configuration to enable/disable auto-muting flag",
+          "type": "boolean"
+        }
+      }
+    },
+    "MonitoringTagRules": {
+      "description": "Capture logs and metrics of Azure resources based on ARM tags.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "name": {
+          "description": "Name of the rule set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The id of the rule set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the rule set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/MonitoringTagRulesProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "MonitoringTagRulesListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoringTagRules"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "SingleSignOnStates": {
+      "description": "Various states of the SSO resource",
+      "enum": [
+        "Initial",
+        "Enable",
+        "Disable",
+        "Existing"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SingleSignOnStates"
+      }
+    },
+    "DatadogSingleSignOnProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "singleSignOnState": {
+          "$ref": "#/definitions/SingleSignOnStates"
+        },
+        "enterpriseAppId": {
+          "description": "The Id of the Enterprise App used for Single sign-on.",
+          "type": "string"
+        },
+        "singleSignOnUrl": {
+          "description": "The login URL specific to this Datadog Organization.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DatadogSingleSignOnResource": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "ARM id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the configuration.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DatadogSingleSignOnProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "DatadogSingleSignOnResourceListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatadogSingleSignOnResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "MonitorNameParameter": {
+      "in": "path",
+      "name": "monitorName",
+      "description": "Monitor resource name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatadogOrganizationId": {
+      "in": "query",
+      "name": "datadogOrganizationId",
+      "description": "Datadog Organization Id",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
