@@ -927,8 +927,13 @@
       "type": "object",
       "properties": {
         "provisioningState": {
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
           "type": "string",
-          "description": "Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning, Succeeded, Canceled and Failed.",
+          "description": "Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it.",
           "readOnly": true
         },
         "privateEndpointConnections": {
@@ -1083,6 +1088,11 @@
         },
         "provisioningState": {
           "description": "State of the Azure monitor resource.",
+          "enum": [
+            "Succeeded",
+            "Provisioning",
+            "Failed"
+          ],
           "type": "string",
           "readOnly": true
         }
