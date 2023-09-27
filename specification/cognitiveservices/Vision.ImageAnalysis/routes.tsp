@@ -42,6 +42,7 @@ op analyzeFromStream is Azure.Core.RpcOperation<
 @post
 @sharedRoute
 @action("analyze")
+@projectedName("csharp", "Analyze")
 op analyzeFromUrl is Azure.Core.RpcOperation<
   {
     ...SharedAnalyzeQuery,
@@ -64,6 +65,7 @@ op analyzeFromUrl is Azure.Core.RpcOperation<
 @post
 @sharedRoute
 @action("segment")
+@projectedName("csharp", "Segment")
 op segmentFromUrl is Azure.Core.RpcOperation<
 {
   @doc("The image to be analyzed")
