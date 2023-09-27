@@ -10,29 +10,29 @@ namespace Microsoft.LoadTestService;
 
 @doc("Metrics for pass/fail criteria.")
 enum PFMetrics {
-  @doc("Pass fail criteria for response time metric") response_time_ms,
-  @doc("Pass fail criteria for response time metric") latency,
-  @doc("Pass fail criteria for error metric") error,
-  @doc("Pass fail criteria for total requests") requests,
+  @doc("Pass fail criteria for response time metric.") response_time_ms,
+  @doc("Pass fail criteria for response time metric.") latency,
+  @doc("Pass fail criteria for error metric.") error,
+  @doc("Pass fail criteria for total requests.") requests,
   @doc("Pass fail criteria for request rate.") requests_per_sec,
 }
 
 @doc("Aggregation functions for pass/fail criteria.")
 enum PFAgFunc {
-  @doc("Criteria applies for count value") count,
-  @doc("Criteria applies for given percentage value") percentage,
-  @doc("Criteria applies for avg value") avg,
-  @doc("Criteria applies for 50th percentile value") p50,
-  @doc("Criteria applies for 90th percentile value") p90,
-  @doc("Criteria applies for 95th percentile value") p95,
-  @doc("Criteria applies for 99th percentile value") p99,
-  @doc("Criteria applies for minimum value") min,
-  @doc("Criteria applies for maximum value") max,
+  @doc("Criteria applies for count value.") count,
+  @doc("Criteria applies for given percentage value.") percentage,
+  @doc("Criteria applies for avg value.") avg,
+  @doc("Criteria applies for 50th percentile value.") p50,
+  @doc("Criteria applies for 90th percentile value.") p90,
+  @doc("Criteria applies for 95th percentile value.") p95,
+  @doc("Criteria applies for 99th percentile value.") p99,
+  @doc("Criteria applies for minimum value.") min,
+  @doc("Criteria applies for maximum value.") max,
 }
 
 @doc("Action to take on failure of pass/fail criteria.")
 enum PFAction {
-  @doc("Test will continue to run even if pass fail metric criteria metric gets failed")
+  @doc("Test will continue to run even if pass fail metric criteria metric gets failed.")
   continue,
   @doc("Test run will stop if pass fail criteria metric is not passed.") stop,
 }
@@ -46,13 +46,13 @@ enum PFResult {
 
 @doc("Types of secrets supported.")
 enum SecretType {
-  @doc("If the secret is stored in an Azure Key Vault") AKV_SECRET_URI,
-  @doc("If the Plain text secret value provided") SECRET_VALUE,
+  @doc("If the secret is stored in an Azure Key Vault.") AKV_SECRET_URI,
+  @doc("If the Plain text secret value provided.") SECRET_VALUE,
 }
 
 @doc("Types of certificates supported.")
 enum CertificateType {
-  @doc("If the certificate is stored in an Azure Key Vault") AKV_CERT_URI,
+  @doc("If the certificate is stored in an Azure Key Vault.") AKV_CERT_URI,
 }
 
 @doc("Types of file supported.")
@@ -66,11 +66,11 @@ enum FileType {
   ZIPPED_ARTIFACTS,
 
   @added(APIVersions.v2023_04_01_preview)
-  @doc("If file is a json config for the Url tests")
+  @doc("If file is a json config for the Url tests.")
   URL_TEST_CONFIG,
 }
 
-@doc("File status")
+@doc("File status.")
 enum FileStatus {
   @doc("File is not validated.") NOT_VALIDATED,
   @doc("File is validated.") VALIDATION_SUCCESS,
@@ -86,43 +86,43 @@ enum PFTestResult {
   @doc("Pass/fail criteria has failed.") FAILED,
 }
 
-@doc("Test run status")
+@doc("Test run status.")
 enum Status {
-  @doc("Test run request is accepted") ACCEPTED,
+  @doc("Test run request is accepted.") ACCEPTED,
   @doc("Test run is not yet started.") NOTSTARTED,
-  @doc("Test run is getting provision") PROVISIONING,
-  @doc("Test run is provisioned") PROVISIONED,
-  @doc("Test run is getting configure") CONFIGURING,
-  @doc("Test run configuration is done") CONFIGURED,
-  @doc("Test run has started executing") EXECUTING,
-  @doc("Test run has been executed") EXECUTED,
-  @doc("Test run is getting deprovision") DEPROVISIONING,
-  @doc("Test run request is deprovisioned") DEPROVISIONED,
-  @doc("Test run request is finished") DONE,
-  @doc("Test run request is getting cancelled") CANCELLING,
-  @doc("Test run request is cancelled") CANCELLED,
-  @doc("Test run request is failed") FAILED,
-  @doc("Test run JMX file is validated") VALIDATION_SUCCESS,
-  @doc("Test run JMX file validation is failed") VALIDATION_FAILURE,
+  @doc("Test run is getting provision.") PROVISIONING,
+  @doc("Test run is provisioned.") PROVISIONED,
+  @doc("Test run is getting configure.") CONFIGURING,
+  @doc("Test run configuration is done.") CONFIGURED,
+  @doc("Test run has started executing.") EXECUTING,
+  @doc("Test run has been executed.") EXECUTED,
+  @doc("Test run is getting deprovision.") DEPROVISIONING,
+  @doc("Test run request is deprovisioned.") DEPROVISIONED,
+  @doc("Test run request is finished.") DONE,
+  @doc("Test run request is getting cancelled.") CANCELLING,
+  @doc("Test run request is cancelled.") CANCELLED,
+  @doc("Test run request is failed.") FAILED,
+  @doc("Test run JMX file is validated.") VALIDATION_SUCCESS,
+  @doc("Test run JMX file validation is failed.") VALIDATION_FAILURE,
 }
 
-@doc("Aggregation type")
+@doc("Aggregation type.")
 enum AggregationType {
-  @doc("Average value") Average,
-  @doc("Total count") Count,
-  @doc("Aggregation will be average in this case") None,
-  @doc("Total sum") Total,
-  @doc("90th percentile") Percentile90,
-  @doc("95th percentile") Percentile95,
-  @doc("99th percentile") Percentile99,
+  @doc("Average value.") Average,
+  @doc("Total count.") Count,
+  @doc("Aggregation will be average in this case.") None,
+  @doc("Total sum.") Total,
+  @doc("90th percentile.") Percentile90,
+  @doc("95th percentile.") Percentile95,
+  @doc("99th percentile.") Percentile99,
 }
 
-@doc("Metric unit")
+@doc("Metric unit.")
 enum MetricUnit {
-  @doc("No unit specified") NotSpecified,
-  @doc("Percentage") Percent,
-  @doc("Value count") Count,
-  @doc("Seconds") Seconds,
+  @doc("No unit specified.") NotSpecified,
+  @doc("Percentage.") Percent,
+  @doc("Value count.") Count,
+  @doc("Seconds.") Seconds,
   @doc("Milliseconds") Milliseconds,
   @doc("Bytes") Bytes,
   @doc("Bytes per second") BytesPerSecond,
@@ -131,33 +131,33 @@ enum MetricUnit {
 
 @doc("Time Grain")
 enum TimeGrain {
-  @doc("5 seconds, available only if test run duration is less than 10 minutes")
+  @doc("5 seconds, available only if test run duration is less than 10 minutes.")
   PT5S,
 
-  @doc("10 seconds, available only if test run duration is less than 10 minutes")
+  @doc("10 seconds, available only if test run duration is less than 10 minutes.")
   PT10S,
   @doc("1 minute") PT1M,
 
-  @doc("5 minutes, available only if test run duration is greater than 1 minute")
+  @doc("5 minutes, available only if test run duration is greater than 1 minute.")
   PT5M,
 
-  @doc("1 hour, available only if test run duration is greater than 1 minute")
+  @doc("1 hour, available only if test run duration is greater than 1 minute.")
   PT1H,
 }
 
 @doc("Intervals")
 enum Interval {
-  @doc("5 seconds, available only if test run duration is less than 10 minutes")
+  @doc("5 seconds, available only if test run duration is less than 10 minutes.")
   PT5S,
 
-  @doc("10 seconds, available only if test run duration is less than 10 minutes")
+  @doc("10 seconds, available only if test run duration is less than 10 minutes.")
   PT10S,
   @doc("1 minute") PT1M,
 
-  @doc("5 minutes, available only if test run duration is greater than 1 minute")
+  @doc("5 minutes, available only if test run duration is greater than 1 minute.")
   PT5M,
 
-  @doc("1 hour, available only if test run duration is greater than 1 minute")
+  @doc("1 hour, available only if test run duration is greater than 1 minute.")
   PT1H,
 }
 
@@ -171,7 +171,7 @@ enum TestType {
   JMX,
 }
 
-@doc("File info")
+@doc("File info.")
 @resource("files")
 @parentResource(Test)
 model TestFileInfo extends FileInfo {
@@ -181,7 +181,7 @@ model TestFileInfo extends FileInfo {
   fileName: string;
 }
 
-@doc("File info")
+@doc("File info.")
 @resource("files")
 @parentResource(TestRun)
 model TestRunFileInfo extends FileInfo {
@@ -191,7 +191,7 @@ model TestRunFileInfo extends FileInfo {
   fileName: string;
 }
 
-@doc("Load test model")
+@doc("Load test model.")
 @resource("tests")
 model Test {
   @doc("Pass fail criteria for a test.")
@@ -210,7 +210,7 @@ SECRET_VALUE.
 """)
   secrets?: Record<Secret>;
 
-  @doc("Certificates metadata")
+  @doc("Certificates metadata.")
   certificate?: CertificateMetadata;
 
   @doc("Environment variables which are defined as a set of <name,value> pairs.")
@@ -220,7 +220,7 @@ SECRET_VALUE.
   loadTestConfiguration?: LoadTestConfiguration;
 
   @added(APIVersions.v2023_04_01_preview)
-  @doc("Id of the Test Run to be used as the baseline reference for results trends.")
+  @doc("Id of the test run to be used as the baseline reference for results trends.")
   baselineTestRunId?: string;
 
   @doc("The input artifacts for the test.")
@@ -597,7 +597,7 @@ model ResourceMetric {
 @doc("Load test run model")
 @resource("test-runs")
 model TestRun {
-  @doc("Unique test run name as identifier")
+  @doc("Unique test run identifier.")
   @visibility("read")
   @maxLength(50)
   @minLength(2)
