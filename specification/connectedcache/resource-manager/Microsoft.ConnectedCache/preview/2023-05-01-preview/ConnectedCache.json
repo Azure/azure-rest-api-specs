@@ -1238,6 +1238,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedCache/ispCustomers/{customerResourceName}/ispCacheNodes/{cacheNodeResourceName}/getCacheNodeInstalldetails": {
+      "post": {
+        "tags": [
+          "ispCacheNodes"
+        ],
+        "summary": "Gets required properties for ispCacheNode resource install key details",
+        "description": "This api gets secrets of the ispCacheNode resource install details",
+        "operationId": "ispCacheNodes_getCacheNodeInstalldetails",
+        "x-ms-examples": {
+          "ispCacheNodes install details Get": {
+            "$ref": "./examples/ispCacheNodesGetCacheNodeInstalldetails.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNodeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The get cachenode install details request was successful; response contains ispCacheNode Bgp Cidrs",
+            "schema": {
+              "$ref": "#/definitions/MccCacheNodeInstallDetails"
+            }
+          },
+          "default": {
+            "description": "The get request has failed; error response details : 4xx/5xx for ispCacheNode",
+            "schema": {
+              "$ref": "#/definitions/MCCErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedCache/enterpriseMccCustomers/{customerResourceName}": {
       "get": {
         "tags": [
@@ -1794,6 +1840,52 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedCache/enterpriseMccCustomers/{customerResourceName}/enterpriseMccCacheNodes/{cacheNodeResourceName}/getCacheNodeInstalldetails": {
+      "post": {
+        "tags": [
+          "enterpriseMccCacheNodes"
+        ],
+        "summary": "Gets required properties for enterprise Mcc CacheNode resource install key details",
+        "description": "This api gets secrets of the enterprise Mcc CacheNode resource install details",
+        "operationId": "enterpriseMccCacheNodes_getCacheNodeInstalldetails",
+        "x-ms-examples": {
+          "enterproseMccCacheNodes install details Get": {
+            "$ref": "./examples/enterprise/enterpriseMccCacheNodesGetCacheNodeInstalldetails.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNodeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The get cachenode install details request was successful; response contains ispCacheNode Bgp Cidrs",
+            "schema": {
+              "$ref": "#/definitions/MccCacheNodeInstallDetails"
+            }
+          },
+          "default": {
+            "description": "The get request has failed; error response details : 4xx/5xx for ispCacheNode",
+            "schema": {
+              "$ref": "#/definitions/MCCErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2094,10 +2186,6 @@
           "format": "int32",
           "description": "state of cache node state as part of additional cache node properties"
         },
-        "RegistrationKey": {
-          "type": "string",
-          "description": "iot device registration temporary registration key used one time"
-        },
         "driveConfiguration": {
           "type": "array",
           "items": {
@@ -2357,6 +2445,49 @@
         }
       }
     },
+    "MccCacheNodeInstallDetails": {
+      "type": "object",
+      "description": "Represents all cache node install details",
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "CustomerId": {
+            "type": "string",
+            "description": "mcc customer id"
+          },
+          "CacheNodeId": {
+            "type": "string",
+            "description": "identifier of the cache node"
+          },
+          "PrimaryAccountKey": {
+            "x-ms-secret": true,
+            "readOnly": true,
+            "type": "string",
+            "description": "primary account key. This is internal to mcc"
+          },
+          "SecondaryAccountKey": {
+            "x-ms-secret": true,
+            "readOnly": true,
+            "type": "string",
+            "description": "secondary account key. This is internal to mcc"
+          },
+          "RegistrationKey": {
+            "x-ms-secret": true,
+            "readOnly": true,
+            "type": "string",
+            "description": "iot device registration temporary registration key used one time"
+          }
+        }
+      }
+    },
     "CacheNode": {
       "type": "object",
       "description": "Model representing customer for connectedCache resource",
@@ -2538,14 +2669,6 @@
         "CustomerName": {
           "type": "string",
           "description": "name of the customer"
-        },
-        "PrimaryAccountKey": {
-          "type": "string",
-          "description": "primary account key. This is internal to mcc"
-        },
-        "SecondaryAccountKey": {
-          "type": "string",
-          "description": "secondary account key. This is internal to mcc"
         },
         "ContactEmail": {
           "type": "string",
