@@ -149,11 +149,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Request was successful."
-          },
-          "204": {
-            "description": "Request was successful."
+          "202": {
+            "description": "Asynchronous delete operation."
           },
           "default": {
             "description": "Error response returned if request was unsuccessful.",
@@ -162,9 +159,13 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Delete a Experiment in a resource group.": {
-            "$ref": "./examples/DeleteAExperiment.json"
+            "$ref": "./examples/DeleteExperiment.json"
           }
         }
       },
@@ -204,7 +205,7 @@
         },
         "x-ms-examples": {
           "Get a Experiment in a resource group.": {
-            "$ref": "./examples/GetAExperiment.json"
+            "$ref": "./examples/GetExperiment.json"
           }
         }
       },
@@ -238,8 +239,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Experiment resource returned if request was successful.",
+          "201": {
+            "description": "Long running create/update operation.",
             "schema": {
               "$ref": "./types/experiments.json#/definitions/experiment"
             }
@@ -251,9 +252,13 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Create/update a Experiment in a resource group.": {
-            "$ref": "./examples/CreateOrUpdateAExperiment.json"
+            "$ref": "./examples/CreateUpdateExperiment.json"
           }
         }
       },
@@ -287,8 +292,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Experiment resource returned if request was successful.",
+          "202": {
+            "description": "Long running update operation.",
             "schema": {
               "$ref": "./types/experiments.json#/definitions/experiment"
             }
@@ -300,9 +305,13 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
-          "Patch an Experiment in a resource group.": {
-            "$ref": "./examples/PatchExperiment.json"
+          "Update an Experiment in a resource group.": {
+            "$ref": "./examples/UpdateExperiment.json"
           }
         }
       }
@@ -330,10 +339,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Operation result returned if request was successful.",
-            "schema": {
-              "$ref": "./types/experiments.json#/definitions/experimentCancelOperationResult"
-            }
+            "description": "Long running cancel operation."
           },
           "default": {
             "description": "Error response returned if request was unsuccessful.",
@@ -342,9 +348,13 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Cancel a running Experiment.": {
-            "$ref": "./examples/CancelAExperiment.json"
+            "$ref": "./examples/CancelExperiment.json"
           }
         }
       }
@@ -372,10 +382,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Operation result returned if request was successful.",
-            "schema": {
-              "$ref": "./types/experiments.json#/definitions/experimentStartOperationResult"
-            }
+            "description": "Long running start experiment operation."
           },
           "default": {
             "description": "Error response returned if request was unsuccessful.",
@@ -384,9 +391,13 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Start a Experiment.": {
-            "$ref": "./examples/StartAExperiment.json"
+            "$ref": "./examples/StartExperiment.json"
           }
         }
       }
@@ -476,7 +487,7 @@
         },
         "x-ms-examples": {
           "Get the status of a Experiment.": {
-            "$ref": "./examples/GetAExperimentStatus.json"
+            "$ref": "./examples/GetExperimentStatus.json"
           }
         }
       }
@@ -566,7 +577,7 @@
         },
         "x-ms-examples": {
           "Get experiment execution details": {
-            "$ref": "./examples/GetAExperimentExecutionDetails.json"
+            "$ref": "./examples/GetExperimentExecutionDetails.json"
           }
         }
       }
