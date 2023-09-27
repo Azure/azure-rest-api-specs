@@ -962,69 +962,6 @@
         }
       }
     },
-    "Language.InnerErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "enum": [
-        "InvalidRequest",
-        "InvalidParameterValue",
-        "KnowledgeBaseNotFound",
-        "AzureCognitiveSearchNotFound",
-        "AzureCognitiveSearchThrottling",
-        "ExtractionFailure",
-        "InvalidRequestBodyFormat",
-        "EmptyRequest",
-        "MissingInputDocuments",
-        "InvalidDocument",
-        "ModelVersionIncorrect",
-        "InvalidDocumentBatch",
-        "UnsupportedLanguageCode",
-        "InvalidCountryHint"
-      ],
-      "x-ms-enum": {
-        "name": "InnerErrorCode",
-        "modelAsString": true
-      }
-    },
-    "Language.InnerErrorModel": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/Language.InnerErrorCode",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        },
-        "details": {
-          "type": "object",
-          "description": "Error details.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target."
-        },
-        "innererror": {
-          "$ref": "#/definitions/Language.InnerErrorModel",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ],
-      "allOf": [
-        {
-          "type": "object",
-          "additionalProperties": {}
-        }
-      ]
-    },
     "Language.KnowledgeBaseAnswer": {
       "type": "object",
       "description": "Represents knowledge base answer.",
