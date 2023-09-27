@@ -444,24 +444,34 @@
       ]
     },
     "BuildToken": {
+      "description": "Build Auth Token.",
       "type": "object",
-      "properties": {
-        "token": {
-          "type": "string",
-          "x-ms-secret": true,
-          "description": "Authentication token."
-        },
-        "expires": {
-          "format": "date-time",
-          "description": "Token expiration date.",
-          "type": "string",
-          "readOnly": true
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      },
-      "description": "Authentication token for connecting to a build resource.",
-      "required": [
-        "token"
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "description": "Build auth token resource specific properties",
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string",
+              "x-ms-secret": true,
+              "description": "Authentication token.",
+              "readOnly": true
+            },
+            "expires": {
+              "format": "date-time",
+              "description": "Token expiration date.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "EnvironmentVariable": {
       "type": "object",
