@@ -85,7 +85,7 @@
         }
       }
     },
-    "/language/analyze-conversations/jobs": {
+    "/language/analyze-text/jobs": {
       "post": {
         "operationId": "SubmitJob",
         "description": "Analyzes the input conversation utterance.",
@@ -127,6 +127,68 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/language/analyze-text/jobs/{jobId}": {
+      "get": {
+        "operationId": "JobStatus",
+        "summary": "Get analysis status and results",
+        "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "job ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "showStats",
+            "in": "query",
+            "description": "(Optional) if set to true, response will contain request and document level statistics.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "An offset into the collection of the first resource to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
       }
     },
     "/language/analyze-text/jobs/{jobId}:cancel": {
@@ -172,71 +234,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/language/analyze-text/jobs/{jobId}/operations/{operationId}": {
-      "get": {
-        "operationId": "JobStatus",
-        "summary": "Get analysis status and results",
-        "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "job ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The unique ID of the operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -260,6 +257,42 @@
       "required": [
         "type",
         "flows"
+      ]
+    },
+    "AbstractiveSummarizationTaskParametersBase": {
+      "type": "object",
+      "description": "Supported parameters for an Abstractive Summarization task.",
+      "properties": {
+        "sentenceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "It controls the approximate number of sentences in the output summaries."
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType",
+          "description": "String index type"
+        }
+      },
+      "required": [
+        "sentenceCount",
+        "stringIndexType"
+      ]
+    },
+    "AnalyzeTextDocumentError": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Document Id."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Document Error."
+        }
+      },
+      "required": [
+        "id",
+        "error"
       ]
     },
     "AnalyzeTextEntityLinkingInput": {
@@ -296,6 +329,21 @@
       ],
       "x-ms-discriminator-value": "EntityRecognition"
     },
+    "AnalyzeTextJobErrors": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "errors"
+      ]
+    },
     "AnalyzeTextJobState": {
       "type": "object",
       "properties": {
@@ -324,14 +372,14 @@
           "description": "last updated date and time"
         },
         "status": {
-          "$ref": "#/definitions/Language.State",
+          "$ref": "#/definitions/State",
           "description": "status"
         },
         "errors": {
           "type": "array",
           "description": "errors",
           "items": {
-            "$ref": "#/definitions/Language.ErrorResponse"
+            "$ref": "#/definitions/ErrorResponse"
           },
           "x-ms-identifiers": []
         },
@@ -453,7 +501,7 @@
       "properties": {
         "taskName": {
           "type": "string",
-          "description": "The task name."
+          "description": "task name"
         },
         "kind": {
           "$ref": "#/definitions/AnalyzeTextLroResultsKind"
@@ -540,6 +588,29 @@
       ],
       "x-ms-discriminator-value": "PiiEntityRecognition"
     },
+    "AnalyzeTextPreBuiltResult": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextDocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        }
+      },
+      "required": [
+        "errors",
+        "modelVersion"
+      ]
+    },
     "AnalyzeTextSentimentAnalysisInput": {
       "type": "object",
       "properties": {
@@ -617,6 +688,101 @@
         "modelAsString": true
       }
     },
+    "AnswerSpan": {
+      "type": "object",
+      "description": "Answer span object of QnA.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Predicted text of answer span."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Predicted score of answer span, value ranges from 0 to 1.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The answer span offset from the start of answer."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the answer span."
+        }
+      }
+    },
+    "AnswersOptions": {
+      "type": "object",
+      "description": "Parameters to query a knowledge base.",
+      "properties": {
+        "qnaId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Exact QnA ID to fetch from the knowledge base, this field takes priority over question."
+        },
+        "question": {
+          "type": "string",
+          "description": "User question to query against the knowledge base."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max number of answers to be returned for the question."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "confidenceScoreThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum threshold score for answers, value ranges from 0 to 1.",
+          "minimum": 0,
+          "maximum": 1,
+          "x-ms-client-name": "confidenceThreshold"
+        },
+        "context": {
+          "$ref": "#/definitions/KnowledgeBaseAnswerContext",
+          "description": "Context object with previous QnA's information.",
+          "x-ms-client-name": "answerContext"
+        },
+        "rankerType": {
+          "$ref": "#/definitions/RankerKind",
+          "description": "Type of ranker to be used.",
+          "x-ms-client-name": "rankerKind"
+        },
+        "filters": {
+          "$ref": "#/definitions/QueryFilters",
+          "description": "Filter QnAs based on given metadata list and knowledge base sources."
+        },
+        "answerSpanRequest": {
+          "$ref": "#/definitions/ShortAnswerOptions",
+          "description": "To configure Answer span prediction feature.",
+          "x-ms-client-name": "shortAnswerOptions"
+        },
+        "includeUnstructuredSources": {
+          "type": "boolean",
+          "description": "(Optional) Flag to enable Query over Unstructured Sources."
+        }
+      }
+    },
+    "AnswersResult": {
+      "type": "object",
+      "description": "Represents List of Question Answers.",
+      "properties": {
+        "answers": {
+          "type": "array",
+          "description": "Represents Answer Result list.",
+          "items": {
+            "$ref": "#/definitions/KnowledgeBaseAnswer"
+          }
+        }
+      }
+    },
     "Association": {
       "type": "string",
       "description": "Describes if the entity is the subject of the text or if it describes someone else.",
@@ -688,42 +854,6 @@
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "Inner error."
         }
-      }
-    },
-    "Azure.Core.Foundations.OperationState": {
-      "type": "string",
-      "description": "Enum describing allowed operation states.",
-      "enum": [
-        "InProgress",
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "OperationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "The operation is in progress."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation has completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation has failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The operation has been canceled by the user."
-          }
-        ]
       }
     },
     "Certainty": {
@@ -840,7 +970,7 @@
       "description": "Supported parameters for a Custom Entities task.",
       "properties": {
         "stringIndexType": {
-          "$ref": "#/definitions/Language.StringIndexType"
+          "$ref": "#/definitions/StringIndexType"
         }
       },
       "allOf": [
@@ -929,6 +1059,7 @@
     },
     "CustomResult": {
       "type": "object",
+      "description": "Custom Task Results",
       "properties": {
         "errors": {
           "type": "array",
@@ -938,7 +1069,8 @@
           }
         },
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "projectName": {
           "type": "string",
@@ -1000,6 +1132,11 @@
       "type": "object",
       "description": "Parameters object for a text analysis task using custom models.",
       "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
         "projectName": {
           "type": "string",
           "description": "This field indicates the project name for the model."
@@ -1010,13 +1147,9 @@
         }
       },
       "required": [
+        "loggingOptOut",
         "projectName",
         "deploymentName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        }
       ]
     },
     "DetectedLanguage": {
@@ -1044,14 +1177,15 @@
     },
     "DocumentError": {
       "type": "object",
+      "description": "Contains details of errors encountered during a job execution.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Document Id."
+          "description": "The ID of the input document."
         },
         "error": {
-          "$ref": "#/definitions/Language.Error",
-          "description": "Document Error."
+          "$ref": "#/definitions/ErrorResponse",
+          "description": "Error encountered."
         }
       },
       "required": [
@@ -1179,7 +1313,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "#/definitions/AnalyzeTextPreBuiltResult"
         }
       ]
     },
@@ -1188,7 +1322,7 @@
       "description": "Supported parameters for an Entity Recognition task.",
       "properties": {
         "stringIndexType": {
-          "$ref": "#/definitions/Language.StringIndexType"
+          "$ref": "#/definitions/StringIndexType"
         }
       },
       "required": [
@@ -1307,7 +1441,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "#/definitions/AnalyzeTextPreBuiltResult"
         }
       ]
     },
@@ -1316,7 +1450,7 @@
       "description": "Supported parameters for an Entity Linking task.",
       "properties": {
         "stringIndexType": {
-          "$ref": "#/definitions/Language.StringIndexType"
+          "$ref": "#/definitions/StringIndexType"
         }
       },
       "required": [
@@ -1365,6 +1499,85 @@
         }
       ],
       "x-ms-discriminator-value": "EntityRecognitionLroResults"
+    },
+    "Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ErrorCode",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerErrorModel",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorCode": {
+      "type": "string",
+      "description": "Human-readable error code.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidArgument",
+        "Unauthorized",
+        "Forbidden",
+        "NotFound",
+        "ProjectNotFound",
+        "OperationNotFound",
+        "AzureCognitiveSearchNotFound",
+        "AzureCognitiveSearchIndexNotFound",
+        "TooManyRequests",
+        "AzureCognitiveSearchThrottling",
+        "AzureCognitiveSearchIndexLimitReached",
+        "InternalServerError",
+        "ServiceUnavailable",
+        "Timeout",
+        "QuotaExceeded",
+        "Conflict",
+        "Warning"
+      ],
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "String error code indicating what went wrong."
+        }
+      },
+      "required": [
+        "error"
+      ]
     },
     "HealthRelationType": {
       "type": "string",
@@ -1627,7 +1840,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "#/definitions/AnalyzeTextPreBuiltResult"
         }
       ]
     },
@@ -1636,7 +1849,7 @@
       "description": "Supported parameters for a Healthcare task.",
       "properties": {
         "stringIndexType": {
-          "$ref": "#/definitions/Language.StringIndexType"
+          "$ref": "#/definitions/StringIndexType"
         }
       },
       "allOf": [
@@ -1645,19 +1858,158 @@
         }
       ]
     },
+    "InnerErrorCode": {
+      "type": "string",
+      "description": "Human-readable error code.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidParameterValue",
+        "KnowledgeBaseNotFound",
+        "AzureCognitiveSearchNotFound",
+        "AzureCognitiveSearchThrottling",
+        "ExtractionFailure",
+        "InvalidRequestBodyFormat",
+        "EmptyRequest",
+        "MissingInputDocuments",
+        "InvalidDocument",
+        "ModelVersionIncorrect",
+        "InvalidDocumentBatch",
+        "UnsupportedLanguageCode",
+        "InvalidCountryHint"
+      ],
+      "x-ms-enum": {
+        "name": "InnerErrorCode",
+        "modelAsString": true
+      }
+    },
+    "InnerErrorModel": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/InnerErrorCode",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "details": {
+          "type": "object",
+          "description": "Error details.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "Error target."
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerErrorModel",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "allOf": [
+        {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      ]
+    },
+    "InputWarning": {
+      "type": "object",
+      "description": "Contains details of warnings encountered during a job execution.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Warning code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Warning message."
+        },
+        "targetRef": {
+          "type": "string",
+          "description": "A JSON pointer reference indicating the target object."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
     "JobErrors": {
       "type": "object",
+      "description": "job errors",
       "properties": {
         "errors": {
           "type": "array",
+          "description": "errors",
           "items": {
-            "$ref": "#/definitions/Language.Error"
+            "$ref": "#/definitions/ErrorResponse"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
         "errors"
+      ]
+    },
+    "JobState": {
+      "type": "object",
+      "description": "job state",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "display name"
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time job created"
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time job expires"
+        },
+        "jobId": {
+          "type": "string",
+          "description": "job ID",
+          "readOnly": true
+        },
+        "lastUpdateDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last updated date and time"
+        },
+        "status": {
+          "$ref": "#/definitions/State",
+          "description": "status"
+        },
+        "errors": {
+          "type": "array",
+          "description": "errors",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextlink": {
+          "type": "string",
+          "description": "next link"
+        }
+      },
+      "required": [
+        "createdDateTime",
+        "jobId",
+        "lastUpdateDateTime",
+        "status"
       ]
     },
     "KeyPhraseExtractionLroResult": {
@@ -1708,7 +2060,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "#/definitions/AnalyzeTextPreBuiltResult"
         }
       ]
     },
@@ -1758,224 +2110,118 @@
         }
       ]
     },
-    "Language.Error": {
+    "KnowledgeBaseAnswer": {
       "type": "object",
-      "description": "The error object.",
+      "description": "Represents knowledge base answer.",
       "properties": {
-        "code": {
-          "$ref": "#/definitions/Language.ErrorCode",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
+        "questions": {
           "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
+          "description": "List of questions associated with the answer.",
           "items": {
-            "$ref": "#/definitions/Language.Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "innererror": {
-          "$ref": "#/definitions/Language.InnerErrorModel",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "Language.ErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "enum": [
-        "InvalidRequest",
-        "InvalidArgument",
-        "Unauthorized",
-        "Forbidden",
-        "NotFound",
-        "ProjectNotFound",
-        "OperationNotFound",
-        "AzureCognitiveSearchNotFound",
-        "AzureCognitiveSearchIndexNotFound",
-        "TooManyRequests",
-        "AzureCognitiveSearchThrottling",
-        "AzureCognitiveSearchIndexLimitReached",
-        "InternalServerError",
-        "ServiceUnavailable",
-        "Timeout",
-        "QuotaExceeded",
-        "Conflict",
-        "Warning"
-      ],
-      "x-ms-enum": {
-        "name": "ErrorCode",
-        "modelAsString": true
-      }
-    },
-    "Language.ErrorResponse": {
-      "type": "object",
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "String error code indicating what went wrong."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Language.InnerErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "enum": [
-        "InvalidRequest",
-        "InvalidParameterValue",
-        "KnowledgeBaseNotFound",
-        "AzureCognitiveSearchNotFound",
-        "AzureCognitiveSearchThrottling",
-        "ExtractionFailure",
-        "InvalidRequestBodyFormat",
-        "EmptyRequest",
-        "MissingInputDocuments",
-        "InvalidDocument",
-        "ModelVersionIncorrect",
-        "InvalidDocumentBatch",
-        "UnsupportedLanguageCode",
-        "InvalidCountryHint"
-      ],
-      "x-ms-enum": {
-        "name": "InnerErrorCode",
-        "modelAsString": true
-      }
-    },
-    "Language.InnerErrorModel": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/Language.InnerErrorCode",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        },
-        "details": {
-          "type": "object",
-          "description": "Error details.",
-          "additionalProperties": {
             "type": "string"
           }
         },
-        "target": {
+        "answer": {
           "type": "string",
-          "description": "Error target."
+          "description": "Answer text."
         },
-        "innererror": {
-          "$ref": "#/definitions/Language.InnerErrorModel",
-          "description": "An object containing more specific information than the current object about the error."
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Answer confidence score, value ranges from 0 to 1.",
+          "minimum": 0,
+          "maximum": 1,
+          "x-ms-client-name": "confidence"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID of the QnA result.",
+          "x-ms-client-name": "qnaId"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of QnA result."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Metadata associated with the answer, useful to categorize or filter question answers.",
+          "additionalProperties": {}
+        },
+        "dialog": {
+          "$ref": "#/definitions/KnowledgeBaseAnswerDialog",
+          "description": "Dialog associated with Answer."
+        },
+        "answerSpan": {
+          "$ref": "#/definitions/AnswerSpan",
+          "description": "Answer span object of QnA with respect to user's question.",
+          "x-ms-client-name": "shortAnswer"
+        }
+      }
+    },
+    "KnowledgeBaseAnswerContext": {
+      "type": "object",
+      "description": "Context object with previous QnA's information.",
+      "properties": {
+        "previousQnaId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Previous turn top answer result QnA ID."
+        },
+        "previousUserQuery": {
+          "type": "string",
+          "description": "Previous user query.",
+          "x-ms-client-name": "previousQuestion"
         }
       },
       "required": [
-        "code",
-        "message"
+        "previousQnaId"
       ]
     },
-    "Language.Sentiment": {
-      "type": "string",
-      "description": "Predicted sentiment",
-      "enum": [
-        "positive",
-        "neutral",
-        "negative",
-        "mixed"
-      ],
-      "x-ms-enum": {
-        "name": "Sentiment",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "positive",
-            "value": "positive",
-            "description": "Positive statement"
+    "KnowledgeBaseAnswerDialog": {
+      "type": "object",
+      "description": "Dialog associated with Answer.",
+      "properties": {
+        "isContextOnly": {
+          "type": "boolean",
+          "description": "To mark if a prompt is relevant only with a previous question or not. If true, do not include this QnA as search result for queries without context; otherwise, if false, ignores context and includes this QnA in search result."
+        },
+        "prompts": {
+          "type": "array",
+          "description": "List of prompts associated with the answer.",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/KnowledgeBaseAnswerPrompt"
           },
-          {
-            "name": "neutral",
-            "value": "neutral",
-            "description": "Neutral statement"
-          },
-          {
-            "name": "negative",
-            "value": "negative",
-            "description": "Negative statement"
-          },
-          {
-            "name": "mixed",
-            "value": "mixed",
-            "description": "Mixed statement"
-          }
-        ]
+          "x-ms-identifiers": []
+        }
       }
     },
-    "Language.State": {
-      "type": "string",
-      "description": "The status of the task at the mentioned last update time.",
-      "enum": [
-        "notStarted",
-        "running",
-        "succeeded",
-        "partiallyCompleted",
-        "failed",
-        "cancelled",
-        "cancelling"
-      ],
-      "x-ms-enum": {
-        "name": "State",
-        "modelAsString": true
-      }
-    },
-    "Language.StringIndexType": {
-      "type": "string",
-      "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
-      "enum": [
-        "TextElements_v8",
-        "UnicodeCodePoint",
-        "Utf16CodeUnit"
-      ],
-      "x-ms-enum": {
-        "name": "StringIndexType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "TextElements_v8",
-            "value": "TextElements_v8",
-            "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
-          },
-          {
-            "name": "UnicodeCodePoint",
-            "value": "UnicodeCodePoint",
-            "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
-          },
-          {
-            "name": "Utf16CodeUnit",
-            "value": "Utf16CodeUnit",
-            "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
-          }
-        ]
-      }
+    "KnowledgeBaseAnswerPrompt": {
+      "type": "object",
+      "description": "Prompt for an answer.",
+      "properties": {
+        "displayOrder": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Index of the prompt - used in ordering of the prompts."
+        },
+        "qnaId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "QnA ID corresponding to the prompt."
+        },
+        "displayText": {
+          "type": "string",
+          "description": "Text displayed to represent a follow up question prompt.",
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "displayOrder",
+        "qnaId",
+        "displayText"
+      ]
     },
     "LanguageDetectionAnalysisInput": {
       "type": "object",
@@ -2017,7 +2263,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "#/definitions/AnalyzeTextPreBuiltResult"
         }
       ]
     },
@@ -2134,6 +2380,18 @@
         "bingId"
       ]
     },
+    "LogicalOperationKind": {
+      "type": "string",
+      "description": "Set to 'OR' or 'AND' for using corresponding logical operation.",
+      "enum": [
+        "AND",
+        "OR"
+      ],
+      "x-ms-enum": {
+        "name": "LogicalOperationKind",
+        "modelAsString": true
+      }
+    },
     "Match": {
       "type": "object",
       "properties": {
@@ -2162,6 +2420,43 @@
         "text",
         "offset",
         "length"
+      ]
+    },
+    "MetadataFilter": {
+      "type": "object",
+      "description": "Find QnAs that are associated with the given list of metadata.",
+      "properties": {
+        "metadata": {
+          "type": "array",
+          "description": "List of metadata.",
+          "items": {
+            "$ref": "#/definitions/MetadataRecord"
+          },
+          "x-ms-identifiers": []
+        },
+        "logicalOperation": {
+          "$ref": "#/definitions/LogicalOperationKind",
+          "description": "Operation used to join metadata filters.",
+          "default": "AND"
+        }
+      }
+    },
+    "MetadataRecord": {
+      "type": "object",
+      "description": "Object to provide the key value pair for each metadata.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Metadata Key from Metadata dictionary used in the QnA."
+        },
+        "value": {
+          "type": "string",
+          "description": "Metadata Value from Metadata dictionary used in the QnA."
+        }
+      },
+      "required": [
+        "key",
+        "value"
       ]
     },
     "MultiLanguageAnalysisInput": {
@@ -2485,7 +2780,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "#/definitions/AnalyzeTextPreBuiltResult"
         }
       ]
     },
@@ -2504,7 +2799,7 @@
           }
         },
         "stringIndexType": {
-          "$ref": "#/definitions/Language.StringIndexType"
+          "$ref": "#/definitions/StringIndexType"
         }
       },
       "allOf": [
@@ -2532,6 +2827,7 @@
     },
     "PreBuiltResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
         "errors": {
           "type": "array",
@@ -2541,7 +2837,8 @@
           }
         },
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "statistics"
         },
         "modelVersion": {
           "type": "string",
@@ -2559,15 +2856,143 @@
       "properties": {
         "modelVersion": {
           "type": "string",
-          "description": "The task parameters.",
+          "description": "model version",
           "default": "latest"
         }
       },
+      "required": [
+        "modelVersion"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/TaskParameters"
         }
       ]
+    },
+    "QueryFilters": {
+      "type": "object",
+      "description": "filters over knowledge base.",
+      "properties": {
+        "metadataFilter": {
+          "$ref": "#/definitions/MetadataFilter",
+          "description": "filters over knowledge base."
+        },
+        "sourceFilter": {
+          "$ref": "#/definitions/SourceFilter",
+          "description": "filters over knowledge base."
+        },
+        "logicalOperation": {
+          "$ref": "#/definitions/LogicalOperationKind",
+          "description": "Logical operation used to join metadata filter with source filter.",
+          "default": "AND"
+        }
+      }
+    },
+    "RankerKind": {
+      "type": "string",
+      "description": "Type of ranker to be used",
+      "enum": [
+        "Default ranker",
+        "Question only ranker"
+      ],
+      "x-ms-enum": {
+        "name": "RankerKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default ranker",
+            "description": "Default ranker."
+          },
+          {
+            "name": "Question",
+            "value": "Question only ranker",
+            "description": "Question only ranker."
+          }
+        ]
+      }
+    },
+    "RedactionCharacter": {
+      "type": "string",
+      "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
+      "enum": [
+        "!",
+        "#",
+        "$",
+        "%",
+        "&",
+        "*",
+        "+",
+        "-",
+        "=",
+        "?",
+        "@",
+        "^",
+        "_",
+        "~"
+      ],
+      "x-ms-enum": {
+        "name": "RedactionCharacter",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "explationPoint",
+            "value": "!"
+          },
+          {
+            "name": "numberSign",
+            "value": "#"
+          },
+          {
+            "name": "dollar",
+            "value": "$"
+          },
+          {
+            "name": "perCent",
+            "value": "%"
+          },
+          {
+            "name": "ampersand",
+            "value": "&"
+          },
+          {
+            "name": "asterisk",
+            "value": "*"
+          },
+          {
+            "name": "plus",
+            "value": "+"
+          },
+          {
+            "name": "minus",
+            "value": "-"
+          },
+          {
+            "name": "equals",
+            "value": "="
+          },
+          {
+            "name": "questionMark",
+            "value": "?"
+          },
+          {
+            "name": "atSign",
+            "value": "@"
+          },
+          {
+            "name": "caret",
+            "value": "^"
+          },
+          {
+            "name": "underscore",
+            "value": "_"
+          },
+          {
+            "name": "tilde",
+            "value": "~"
+          }
+        ]
+      }
     },
     "RequestStatistics": {
       "type": "object",
@@ -2578,26 +3003,26 @@
           "format": "int32",
           "description": "Number of documents submitted in the request."
         },
-        "validDocumentsCount": {
+        "validDocumentCount": {
           "type": "integer",
           "format": "int32",
           "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
         },
-        "erroneousDocumentsCount": {
+        "erroneousDocumentCount": {
           "type": "integer",
           "format": "int32",
           "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
         },
         "transactionsCount": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Number of transactions for the request."
         }
       },
       "required": [
         "documentsCount",
-        "validDocumentsCount",
-        "erroneousDocumentsCount",
+        "validDocumentCount",
+        "erroneousDocumentCount",
         "transactionsCount"
       ]
     },
@@ -2605,7 +3030,10 @@
       "type": "object",
       "properties": {
         "sentiment": {
-          "$ref": "#/definitions/Sentiment"
+          "$ref": "#/definitions/SentimentValue"
+        },
+        "confidenceScores": {
+          "$ref": "#/definitions/SentimentConfidenceScores"
         },
         "offset": {
           "type": "integer",
@@ -2628,6 +3056,7 @@
       },
       "required": [
         "sentiment",
+        "confidenceScores",
         "offset",
         "length",
         "text",
@@ -2642,20 +3071,28 @@
           "description": "The sentence text."
         },
         "sentiment": {
-          "$ref": "#/definitions/Sentiment",
+          "$ref": "#/definitions/SentimentValue",
           "description": "The predicted Sentiment for the sentence."
+        },
+        "confidenceScores": {
+          "$ref": "#/definitions/SentimentConfidenceScores",
+          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes."
         }
       },
       "required": [
         "text",
-        "sentiment"
+        "sentiment",
+        "confidenceScores"
       ]
     },
     "SentenceTarget": {
       "type": "object",
       "properties": {
         "sentiment": {
-          "$ref": "#/definitions/Sentiment"
+          "$ref": "#/definitions/SentimentValue"
+        },
+        "confidenceScores": {
+          "$ref": "#/definitions/SentimentConfidenceScores"
         },
         "offset": {
           "type": "integer",
@@ -2682,6 +3119,7 @@
       },
       "required": [
         "sentiment",
+        "confidenceScores",
         "offset",
         "length",
         "text",
@@ -2690,15 +3128,38 @@
     },
     "Sentiment": {
       "type": "string",
-      "description": "The predicted Sentiment for the sentence.",
+      "description": "Predicted sentiment",
       "enum": [
         "positive",
         "neutral",
-        "negative"
+        "negative",
+        "mixed"
       ],
       "x-ms-enum": {
         "name": "Sentiment",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "positive",
+            "value": "positive",
+            "description": "Positive statement"
+          },
+          {
+            "name": "neutral",
+            "value": "neutral",
+            "description": "Neutral statement"
+          },
+          {
+            "name": "negative",
+            "value": "negative",
+            "description": "Negative statement"
+          },
+          {
+            "name": "mixed",
+            "value": "mixed",
+            "description": "Mixed statement"
+          }
+        ]
       }
     },
     "SentimentAnalysisLroTask": {
@@ -2725,7 +3186,7 @@
           "default": false
         },
         "stringIndexType": {
-          "$ref": "#/definitions/Language.StringIndexType"
+          "$ref": "#/definitions/StringIndexType"
         }
       },
       "allOf": [
@@ -2734,12 +3195,41 @@
         }
       ]
     },
+    "SentimentConfidenceScores": {
+      "type": "object",
+      "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative.",
+      "properties": {
+        "positive": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for positive sentiment"
+        },
+        "neutral": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for neutral sentiment"
+        },
+        "negative": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for negative sentiment"
+        }
+      },
+      "required": [
+        "positive",
+        "neutral",
+        "negative"
+      ]
+    },
     "SentimentDocumentResult": {
       "type": "object",
       "properties": {
         "sentiment": {
-          "$ref": "#/definitions/Language.Sentiment",
+          "$ref": "#/definitions/Sentiment",
           "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
+        },
+        "confidenceScores": {
+          "$ref": "#/definitions/SentimentConfidenceScores"
         },
         "sentences": {
           "type": "array",
@@ -2751,6 +3241,7 @@
       },
       "required": [
         "sentiment",
+        "confidenceScores",
         "sentences"
       ],
       "allOf": [
@@ -2804,7 +3295,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "#/definitions/AnalyzeTextPreBuiltResult"
         }
       ]
     },
@@ -2825,6 +3316,72 @@
       ],
       "x-ms-discriminator-value": "SentimentAnalysisResults"
     },
+    "SentimentValue": {
+      "type": "string",
+      "description": "The predicted Sentiment for the sentence.",
+      "enum": [
+        "positive",
+        "neutral",
+        "negative"
+      ],
+      "x-ms-enum": {
+        "name": "SentimentValue",
+        "modelAsString": true
+      }
+    },
+    "ShortAnswerOptions": {
+      "type": "object",
+      "description": "To configure Answer span prediction feature.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Enable or disable Answer Span prediction."
+        },
+        "confidenceScoreThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum threshold score required to include an answer span, value ranges from 0 to 1.",
+          "minimum": 0,
+          "maximum": 1,
+          "x-ms-client-name": "confidenceThreshold"
+        },
+        "topAnswersWithSpan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Top answers to be considered for span prediction from 1 to 10.",
+          "minimum": 1,
+          "maximum": 10,
+          "x-ms-client-name": "top"
+        }
+      },
+      "required": [
+        "enable"
+      ]
+    },
+    "SourceFilter": {
+      "type": "array",
+      "description": "Find QnAs that are associated with any of the given list of sources in knowledge base.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "State": {
+      "type": "string",
+      "description": "The status of the task at the mentioned last update time.",
+      "enum": [
+        "notStarted",
+        "running",
+        "succeeded",
+        "partiallyCompleted",
+        "failed",
+        "cancelled",
+        "cancelling"
+      ],
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true
+      }
+    },
     "Status": {
       "type": "string",
       "enum": [
@@ -2839,6 +3396,56 @@
         "name": "Status",
         "modelAsString": true
       }
+    },
+    "StringIndexType": {
+      "type": "string",
+      "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+      "enum": [
+        "TextElements_v8",
+        "UnicodeCodePoint",
+        "Utf16CodeUnit"
+      ],
+      "x-ms-enum": {
+        "name": "StringIndexType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TextElements_v8",
+            "value": "TextElements_v8",
+            "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+          },
+          {
+            "name": "UnicodeCodePoint",
+            "value": "UnicodeCodePoint",
+            "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+          },
+          {
+            "name": "Utf16CodeUnit",
+            "value": "Utf16CodeUnit",
+            "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+          }
+        ]
+      }
+    },
+    "SummaryContext": {
+      "type": "object",
+      "description": "The context of the summary.",
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the context. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the context. Use of different 'stringIndexType' values can affect the length returned."
+        }
+      },
+      "required": [
+        "offset",
+        "length"
+      ]
     },
     "TargetConfidenceScoreLabel": {
       "type": "object",
@@ -2879,10 +3486,11 @@
     },
     "TaskIdentifier": {
       "type": "object",
+      "description": "Base task object.",
       "properties": {
         "taskName": {
           "type": "string",
-          "description": "The task name."
+          "description": "task name"
         }
       }
     },
@@ -2892,20 +3500,26 @@
       "properties": {
         "loggingOptOut": {
           "type": "boolean",
-          "description": "The task parameters.",
+          "description": "logging opt out",
           "default": false
         }
-      }
+      },
+      "required": [
+        "loggingOptOut"
+      ]
     },
     "TaskState": {
       "type": "object",
+      "description": "Returns the current state of the task.",
       "properties": {
         "lastUpdateDateTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "The last updated time in UTC for the task."
         },
         "status": {
-          "$ref": "#/definitions/Status"
+          "$ref": "#/definitions/State",
+          "description": "The status of the task at the mentioned last update time."
         }
       },
       "required": [
@@ -2946,6 +3560,36 @@
         "inProgress",
         "total"
       ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Analyze Conversations Service Versions",
+      "enum": [
+        "2022-05-01",
+        "2023-04-01",
+        "2023-04-15-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2022_05_01",
+            "value": "2022-05-01",
+            "description": "Version 2022-05-01"
+          },
+          {
+            "name": "v2023_04_01",
+            "value": "2023-04-01",
+            "description": "Version 2023-04-01"
+          },
+          {
+            "name": "v2023_04_15_preview",
+            "value": "2023-04-15-preview",
+            "description": "Version 2023-04-15-preview"
+          }
+        ]
+      }
     }
   },
   "parameters": {

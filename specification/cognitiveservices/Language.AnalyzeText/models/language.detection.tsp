@@ -1,8 +1,8 @@
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../main.tsp";
-import "../../Language/common.models.tsp";
+import "../common.tsp";
+import "./common.models.tsp";
 
 namespace Language.AnalyzeText;
 
@@ -37,7 +37,7 @@ model LanguageDetectionTaskResult extends AnalyzeTextTaskResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model LanguageDetectionResult extends PreBuiltResult{
+model LanguageDetectionResult extends AnalyzeTextPreBuiltResult{
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   documents?: Array<LanguageDetectionDocumentResult>;
 }

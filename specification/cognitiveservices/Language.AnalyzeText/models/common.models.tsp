@@ -1,6 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
-import "../../Language/common.models.tsp";
+import "../common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -165,27 +165,9 @@ model AnalyzeTextJobsInput {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model TaskIdentifier {
-  @doc("The task name.")
-  taskName?: string;
-}
-
-@doc("Base parameters object for a text analysis task.")
-model TaskParameters {
-  @doc("The task parameters.")
-  loggingOptOut?: boolean = false;
-}
-
-@doc("Parameters object for a text analysis task using pre-built models.")
-model PreBuiltTaskParameters extends TaskParameters {
-  @doc("The task parameters.")
-  modelVersion?: string = "latest";
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-model PreBuiltResult {
+model AnalyzeTextPreBuiltResult {
   @doc("Errors by document id.")
-  errors: Array<DocumentError>;
+  errors: Array<AnalyzeTextDocumentError>;
   
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   statistics?: RequestStatistics;
@@ -209,7 +191,7 @@ model Pagination {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model JobErrors {
+model AnalyzeTextJobErrors {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   errors: Array<Error>;
 }
@@ -235,15 +217,6 @@ model TasksState {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   items?: Array<AnalyzeTextLroResult>;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-model TaskState {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  lastUpdateDateTime: utcDateTime;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  status: Status;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -291,8 +264,10 @@ model DocumentResult {
   statistics?: DocumentStatistics
 }
 
+
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model DocumentError {
+model AnalyzeTextDocumentError {
   @doc("Document Id.")
   id: string;
 
@@ -331,20 +306,6 @@ model DocumentStatistics {
   transactionsCount: int32;
 }
 
-@doc("if showStats=true was specified in the request this field will contain information about the request payload.")
-model RequestStatistics {
-  @doc("Number of documents submitted in the request.")
-  documentsCount: int32;
-
-  @doc("Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.")
-  validDocumentsCount: int32;
-
-  @doc("Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.")
-  erroneousDocumentsCount: int32;
-
-  @doc("Number of transactions for the request.")
-  transactionsCount: int32;
-}
 
 @doc("Contains an input document to be analyzed by the service.")
 model MultiLanguageInput {

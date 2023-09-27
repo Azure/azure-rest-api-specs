@@ -1,8 +1,8 @@
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../main.tsp";
-import "../../Language/common.models.tsp";
+import "../common.tsp";
+import "./common.models.tsp";
 
 namespace Language.AnalyzeText;
 
@@ -41,7 +41,7 @@ model EntityLinkingTaskResult extends AnalyzeTextTaskResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntityLinkingResult extends PreBuiltResult {
+model EntityLinkingResult extends AnalyzeTextPreBuiltResult {
   @doc("Response by document")
   documents: Array<LinkedEntitiesDocumentResult>;
 }

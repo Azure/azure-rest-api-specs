@@ -1,8 +1,8 @@
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../main.tsp";
-import "../../Language/common.models.tsp";
+import "../common.tsp";
+import "./common.models.tsp";
 
 namespace Language.AnalyzeText;
 
@@ -40,7 +40,7 @@ model KeyPhraseTaskResult extends AnalyzeTextTaskResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model KeyPhraseResult extends PreBuiltResult{
+model KeyPhraseResult extends AnalyzeTextPreBuiltResult{
   @doc("Response by document")
   documents: Array<KeyPhrasesDocumentResult>
 }
