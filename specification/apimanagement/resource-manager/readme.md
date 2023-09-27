@@ -1063,20 +1063,7 @@ directive:
 suppressions:
   - code: PropertiesTypeObjectNoDefinition
     from: definitions.json
-    where: $.definitions.AllPoliciesCollection.properties.nextLink
     reason: Invalid error
-  - code: PropertiesTypeObjectNoDefinition
-    from: definitions.json
-    where: $.definitions.PolicyRestrictionContractProperties
-    reason: Invalid error
-  - code: PropertiesTypeObjectNoDefinition
-    from: definitions.json  
-    where: $.definitions.AllPoliciesContractProperties
-    reason: Invalid error
-  - code: PropertiesTypeObjectNoDefinition
-    from: definitions.json
-    where: $.definitions.PolicyRestrictionCollection.properties.nextLink
-    reason: Invalid error, nextLink is a string, not an object
 ```
 
 
