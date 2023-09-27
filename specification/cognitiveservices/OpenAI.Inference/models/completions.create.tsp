@@ -158,15 +158,16 @@ model Completions {
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
     """)
   @projectedName("json", "created")
-  @projectedName("csharp", "InternalCreatedSecondsAfterUnixEpoch")
-  created: int32;
+  @projectedName("java", "createdAt")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  created: utcDateTime;
 
   @doc("""
   Content filtering results for zero or more prompts in the request. In a streaming request, 
   results for different prompts may arrive at different times or in different orders.
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
-  @projectedName("json", "prompt_annotations")
+  @projectedName("json", "prompt_filter_results")
   promptFilterResults?: PromptFilterResult[];
 
   @doc("""

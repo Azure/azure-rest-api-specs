@@ -27,7 +27,7 @@ These are the global settings for the ServiceFabricManagedClustersManagementClie
 title: ServiceFabricManagedClustersManagementClient
 description: Service Fabric Managed Clusters Management Client
 openapi-type: arm
-tag: package-2023-03-preview
+tag: package-2023-09-preview
 
 directive:
   - suppress: ListInOperationName
@@ -67,6 +67,29 @@ directive:
     reason:
       - Currently systemData is not allowed.
 
+```
+
+### Tag: package-2023-09-preview
+
+These settings apply only when `--tag=package-2023-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09-preview'
+input-file:
+- Microsoft.ServiceFabric/preview/2023-09-01-preview/managedapplication.json
+- Microsoft.ServiceFabric/preview/2023-09-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2023-09-01-preview/nodetype.json
+```
+
+
+### Tag: package-2023-07-preview
+
+These settings apply only when `--tag=package-2023-07-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-07-preview'
+input-file:
+- Microsoft.ServiceFabric/preview/2023-07-01-preview/managedapplication.json
+- Microsoft.ServiceFabric/preview/2023-07-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2023-07-01-preview/nodetype.json
 ```
 
 ### Tag: package-2023-03-preview
@@ -199,6 +222,17 @@ input-file:
 - Microsoft.ServiceFabric/preview/2021-01-01-preview/managedapplication.json
 - Microsoft.ServiceFabric/preview/2021-01-01-preview/managedcluster.json
 - Microsoft.ServiceFabric/preview/2021-01-01-preview/nodetype.json
+```
+
+### AutoRest v3 Suppressions
+``` yaml
+suppressions:
+    
+  - code: ResourceNameRestriction
+    reason: the service does not have a pattern restriction. ARM's default rule should get applied.
+
+  - code: PutResponseSchemaDescription
+    reason: service created with the 202 pattern before this rule was introduced.
 ```
 
 ---
