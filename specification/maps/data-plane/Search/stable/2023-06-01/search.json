@@ -331,9 +331,9 @@
             "type": "string"
           },
           {
-            "name": "countryRegionSet",
+            "name": "countryRegion",
             "in": "query",
-            "description": "Comma separated string of country or region codes(ISO 3166-1 Alpha-2), e.g. FR,ES. This will limit the search to the specified countries. Only the first country code will be used for the Geocoder.\n\n**If query is given, should not use this parameter.**",
+            "description": "Comma separated string of country or region codes, e.g. FR,ES. This will limit the search to the specified countries. Only the first country code will be used for the Geocoder.\n\n**If query is given, should not use this parameter.**",
             "required": false,
             "type": "array",
             "items": {
@@ -385,35 +385,6 @@
             "description": "The postal code portion of an address.\n\n**If query is given, should not use this parameter.**",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "strictMatch",
-            "in": "query",
-            "description": "Restrict the geocoding result to the country or region that is specified in the countryRegionSet field and the state, province or territory specified in the adminDistrict field.\n\n**If query is given, should not use this parameter.**",
-            "required": false,
-            "type": "string",
-            "default": "notstrict",
-            "enum": [
-              "notstrict",
-              "strict"
-            ],
-            "x-ms-enum": {
-              "name": "StrictMatchEnum",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "NotStrict",
-                  "value": "notstrict",
-                  "description": "Do not restrict results to the specified countryRegionSet and adminDistrict."
-                },
-                {
-                  "name": "Strict",
-                  "value": "strict",
-                  "description": "Restrict results to the specified countryRegionSet and adminDistrict."
-                }
-              ]
-            },
-            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/parameters/ClientId"
@@ -747,7 +718,7 @@
           "description": "The official street line of an address relative to the area, as specified by the locality, or postalCode, properties. Typical use of this element would be to provide a street address or any official address.\n\n**If query is given, should not use this parameter.**",
           "type": "string"
         },
-        "countryRegionSet": {
+        "countryRegion": {
           "description": "Comma separated string of country or region codes, e.g. FR,ES. This will limit the search to the specified countries. Only the first country code will be used for the Geocoder.\n\n**If query is given, should not use this parameter.**",
           "type": "array",
           "items": {
@@ -797,29 +768,6 @@
         "postalCode": {
           "description": "The postal code portion of an address.\n\n**If query is given, should not use this parameter.**",
           "type": "string"
-        },
-        "strictMatch": {
-          "description": "Restrict the geocoding result to the country or region that is specified in the countryRegion field and the state, province or territory specified in the adminDistrict field.\n\n**If query is given, should not use this parameter.**",
-          "type": "string",
-          "default": "notstrict",
-          "enum": [
-            "notstrict",
-            "strict"
-          ],
-          "x-ms-enum": {
-            "name": "StrictMatchEnum",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "notstrict",
-                "description": "Do not restrict results to the specified countryRegion and adminDistrict."
-              },
-              {
-                "value": "strict",
-                "description": "Restrict results to the specified countryRegion and adminDistrict."
-              }
-            ]
-          }
         }
       }
     },
