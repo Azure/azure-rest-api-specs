@@ -78,7 +78,7 @@
             "$ref": "#/parameters/collectionId"
           },
           {
-            "$ref": "#/parameters/purviewAPIVersion"
+            "$ref": "#/parameters/atlasAPIVersion"
           }
         ],
         "responses": {
@@ -129,7 +129,7 @@
             "$ref": "#/parameters/ignoreRelationships"
           },
           {
-            "$ref": "#/parameters/purviewAPIVersion"
+            "$ref": "#/parameters/atlasAPIVersion"
           }
         ],
         "responses": {
@@ -1590,7 +1590,7 @@
             "$ref": "#/parameters/ignoreTermsAndCategories"
           },
           {
-            "$ref": "#/parameters/purviewAPIVersion"
+            "$ref": "#/parameters/atlasAPIVersion"
           }
         ],
         "responses": {
@@ -2014,7 +2014,6 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-
             }
           }
         }
@@ -2037,13 +2036,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/purviewAPIVersion"
+            "$ref": "#/parameters/atlasAPIVersion"
           },
           {
             "$ref": "#/parameters/termGuid"
-          },
-          {
-            "$ref": "#/parameters/includeTermHierarchy"
           }
         ],
         "responses": {
@@ -2074,7 +2070,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/purviewAPIVersion"
+            "$ref": "#/parameters/atlasAPIVersion"
           },
           {
             "$ref": "#/parameters/termGuid"
@@ -2150,7 +2146,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/purviewAPIVersion"
+            "$ref": "#/parameters/atlasAPIVersion"
           },
           {
             "$ref": "#/parameters/termGuid"
@@ -2199,7 +2195,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/purviewAPIVersion"
+            "$ref": "#/parameters/atlasAPIVersion"
           },
           {
             "in": "body",
@@ -2380,7 +2376,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/purviewAPIVersion"
+            "$ref": "#/parameters/atlasAPIVersion"
           },
           {
             "$ref": "#/parameters/termGuid"
@@ -2393,9 +2389,6 @@
           },
           {
             "$ref": "#/parameters/sort"
-          },
-          {
-            "$ref": "#/parameters/includeTermHierarchy"
           }
         ],
         "responses": {
@@ -2466,7 +2459,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/purviewAPIVersion"
+            "$ref": "#/parameters/atlasAPIVersion"
           },
           {
             "$ref": "#/parameters/glossaryGuid"
@@ -2634,13 +2627,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/purviewAPIVersion"
+            "$ref": "#/parameters/atlasAPIVersion"
           },
           {
             "$ref": "#/parameters/glossaryGuid"
-          },
-          {
-            "$ref": "#/parameters/includeTermHierarchy"
           }
         ],
         "responses": {
@@ -2673,7 +2663,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/purviewAPIVersion"
+            "$ref": "#/parameters/atlasAPIVersion"
           },
           {
             "$ref": "#/parameters/glossaryGuid"
@@ -2722,13 +2712,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/purviewAPIVersion"
+            "$ref": "#/parameters/atlasAPIVersion"
           },
           {
             "$ref": "#/parameters/glossaryGuid"
-          },
-          {
-            "$ref": "#/parameters/includeTermHierarchy"
           },
           {
             "$ref": "#/parameters/limit"
@@ -4354,8 +4341,9 @@
               "description": "The home ID of the entity."
             },
             "collectionId": {
+              "readOnly": true,
               "type": "string",
-              "description": "The collection ID of the entity."
+              "description": "The collection ID of the entity.This is a readonly property."
             },
             "isIncomplete": {
               "readOnly": false,
@@ -5694,105 +5682,6 @@
       "title": "AtlasTypeDef",
       "description": "The definitions of type."
     },
-    "ImportInfo": {
-      "type": "object",
-      "title": "ImportInfo",
-      "properties": {
-        "childObjectName": {
-          "readOnly": false,
-          "description": "childObjectName",
-          "type": "string"
-        },
-        "importStatus": {
-          "readOnly": false,
-          "$ref": "#/definitions/ImportStatus",
-          "description": "importStatus"
-        },
-        "parentObjectName": {
-          "readOnly": false,
-          "description": "parentObjectName",
-          "type": "string"
-        },
-        "remarks": {
-          "readOnly": false,
-          "description": "remarks",
-          "type": "string"
-        }
-      },
-      "example": {
-        "childObjectName": "...",
-        "importStatus": "SUCCESS",
-        "parentObjectName": "...",
-        "remarks": "..."
-      },
-      "description": "ImportInfo"
-    },
-    "ImportStatus": {
-      "type": "string",
-      "title": "ImportStatus",
-      "enum": [
-        "SUCCESS",
-        "FAILED"
-      ],
-      "description": "ImportStatus",
-      "x-ms-enum": {
-        "name": "importStatus",
-        "modelAsString": true
-      }
-    },
-    "BulkImportResponse": {
-      "type": "object",
-      "title": "BulkImportResponse",
-      "properties": {
-        "failedImportInfoList": {
-          "readOnly": false,
-          "description": "failed importInfoList",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImportInfo"
-          }
-        },
-        "successImportInfoList": {
-          "readOnly": false,
-          "description": "successful importInfoList",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImportInfo"
-          }
-        }
-      },
-      "example": {
-        "failedImportInfoList": [
-          {
-            "childObjectName": "...",
-            "importStatus": "SUCCESS",
-            "parentObjectName": "...",
-            "remarks": "..."
-          },
-          {
-            "childObjectName": "...",
-            "importStatus": "SUCCESS",
-            "parentObjectName": "...",
-            "remarks": "..."
-          }
-        ],
-        "successImportInfoList": [
-          {
-            "childObjectName": "...",
-            "importStatus": "FAILED",
-            "parentObjectName": "...",
-            "remarks": "..."
-          },
-          {
-            "childObjectName": "...",
-            "importStatus": "FAILED",
-            "parentObjectName": "...",
-            "remarks": "..."
-          }
-        ]
-      },
-      "description": "example"
-    },
     "Cardinality": {
       "type": "string",
       "title": "Cardinality",
@@ -6349,11 +6238,11 @@
           "format": "int32",
           "description": "The total number of search results (not the number of documents in a single page)."
         },
-        "@search.count.approximate":{
+        "@search.count.approximate": {
           "type": "boolean",
-          "description":"'True' if the '@search.count' is an approximate value and vise versa."
+          "description": "'True' if the '@search.count' is an approximate value and vise versa."
         },
-        "continuousToken":{
+        "continuousToken": {
           "type": "string",
           "description": "The token used to get next batch of data. Absent if there's no more data."
         },
@@ -6726,7 +6615,7 @@
           "format": "int32",
           "description": "The limit of the number of the search result. default value is 50; maximum value is 1000."
         },
-        "continuousToken":{
+        "continuousToken": {
           "type": "string",
           "description": "The token used to get next batch of data. Default 'Null' to get the first batch, and will return new token in each response unless there's no more data."
         },
@@ -6785,85 +6674,6 @@
       "title": "SuggestRequest",
       "description": "The query of suggest request."
     },
-    "AsyncOperation": {
-      "type": "object",
-      "title": "Status of glossary async operation",
-      "description": "The status of import csv operation",
-      "required": [
-        "id",
-        "status"
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/AsyncOperationStatus"
-        },
-        "createTime": {
-          "type": "string",
-          "description": "The created time of the record."
-        },
-        "lastUpdateTime": {
-          "type": "string",
-          "description": "The last updated time of the record."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Detailed properties for different scenarioes. Glossary import operation properties: importedTerms, totalTermsDetected; Glossary bulk delete operation properties: deletedTerms, totalTermsDetected.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "error": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AsyncOperationError"
-        }
-      }
-    },
-    "AsyncOperationStatus": {
-      "type": "string",
-      "enum": [
-        "NotStarted",
-        "Succeeded",
-        "Failed",
-        "Running"
-      ],
-      "x-ms-enum": {
-        "name": "AsyncOperationStatus",
-        "modelAsString": true
-      },
-      "title": "AsyncOperationStatus",
-      "description": "Enum of the status of async operation."
-    },
-    "AsyncOperationError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Code from async job if fail"
-        },
-        "message": {
-          "type": "string",
-          "description": "Message from async job if fail"
-        }
-      }
-    },
-    "BulkDeleteOperationStatus": {
-      "type": "string",
-      "enum": [
-        "NotStarted",
-        "Succeeded",
-        "Failed",
-        "Running"
-      ],
-      "x-ms-enum": {
-        "name": "BulkDeleteOperationStatus",
-        "modelAsString": true
-      },
-      "title": "BulkDeleteOperationStatus",
-      "description": "Enum of the status of bulk delete operation."
-    },
     "LastModifiedTS": {
       "type": "string",
       "title": "lastModifiedTS",
@@ -6884,124 +6694,6 @@
         "errorMessage": {
           "type": "string",
           "description": "The error message."
-        }
-      }
-    },
-    "FileUploadResponse": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique id of the file."
-        }
-      },
-      "title": "FileUploadResponse",
-      "description": "The response of file upload."
-    },
-    "EntityImportCSVOperation": {
-      "type": "object",
-      "title": "Status of import csv operation",
-      "description": "The status of import csv operation",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "guid string"
-        },
-        "status": {
-          "$ref": "#/definitions/EntityImportCSVOperationStatus"
-        },
-        "createTime": {
-          "type": "string",
-          "description": "The created time of the record."
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "The creator for this import job."
-        },
-        "lastUpdateTime": {
-          "type": "string",
-          "description": "The last updated time of the record."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EntityImportCSVOperationProperties"
-        },
-        "error": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AsyncOperationError"
-        }
-      }
-    },
-    "EntityImportCSVOperationStatus": {
-      "type": "string",
-      "enum": [
-        "NotStarted",
-        "Succeeded",
-        "Failed",
-        "Running",
-        "PartialSucceeded"
-      ],
-      "x-ms-enum": {
-        "name": "EntityImportCSVOperationStatus",
-        "modelAsString": true
-      },
-      "title": "EntityImportCSVOperationStatus",
-      "description": "Enum of the status of import entity csv operation."
-    },
-    "EntityImportCSVOperationProperties": {
-      "type": "object",
-      "properties": {
-        "processing": {
-          "type": "string",
-          "description": "Entity numbers being imported"
-        },
-        "failed": {
-          "type": "string",
-          "description": "Entity numbers failed"
-        },
-        "succeeded": {
-          "type": "string",
-          "description": "Entity numbers that already imported successfully"
-        }
-      }
-    },
-    "TermsExportRequest": {
-      "description": "Export request payload for terms",
-      "type": "object",
-      "properties": {
-        "guids": {
-          "description": "guids for exported terms",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "EntityExportRequest": {
-      "description": "Export request payload for entities",
-      "type": "object",
-      "properties": {
-        "guids": {
-          "description": "guids for exported entities",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "fields": {
-          "description": "fields for exported entities, e.g. attribute name, relationship attribute name, etc",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "filters": {
-          "description": "filters for exported entities",
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
         }
       }
     }
@@ -7390,24 +7082,6 @@
     "extInfo": {
       "name": "extInfo",
       "description": "Whether include extended information like contact display name and attribute values",
-      "in": "query",
-      "required": false,
-      "type": "boolean",
-      "default": false,
-      "x-ms-parameter-location": "method"
-    },
-    "includeMultiTemplates": {
-      "name": "includeMultiTemplates",
-      "description": "Whether include multi term templates for term import/export",
-      "in": "query",
-      "required": false,
-      "type": "boolean",
-      "default": false,
-      "x-ms-parameter-location": "method"
-    },
-    "includeRichTextFlag": {
-      "name": "includeRichTextFlag",
-      "description": "Whether include rich text for term export",
       "in": "query",
       "required": false,
       "type": "boolean",
