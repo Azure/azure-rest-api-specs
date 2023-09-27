@@ -1108,7 +1108,7 @@ statement with calculated values.
 @doc("A rule providing a binding to an HTTP Triggered Azure Function.")
 model FunctionRouterRule extends RouterRule {
   @doc("URL for Azure Function")
-  functionUri: url;
+  functionUri: string;
 
   @doc("Credentials used to access Azure function rule")
   credential?: FunctionRouterRuleCredential;
@@ -1352,7 +1352,7 @@ model WaitTimeExceptionTrigger extends ExceptionTrigger {
 @doc("A rule providing a binding to an external web server.")
 model WebhookRouterRule extends RouterRule {
   @doc("Uri for Authorization Server.")
-  authorizationServerUri?: url;
+  authorizationServerUri?: string;
 
   @doc("""
 OAuth2.0 Credentials used to Contoso's Authorization server.
@@ -1362,7 +1362,7 @@ https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/
   clientCredential?: Oauth2ClientCredential;
 
   @doc("Uri for Contoso's Web Server.")
-  webhookUri?: url;
+  webhookUri?: string;
 
   @doc("The type discriminator describing a sub-type of Rule")
   kind: "webhook-rule";
