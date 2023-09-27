@@ -524,7 +524,7 @@
         },
         "logScrubbing": {
           "description": "Defines rules to scrub sensitive fields in Web Application Firewall logs",
-          "type":"object",
+          "type": "object",
           "properties": {
             "state": {
               "type": "string",
@@ -543,63 +543,9 @@
               "items": {
                 "$ref": "#/definitions/WebApplicationFirewallScrubbingRules"
               },
+              "x-ms-identifiers": [],
               "description": "List of log scrub rules applied to Web Application Firewall logs."
             }
-          }
-        }
-      }
-    },
-    "WebApplicationFirewallScrubbingRules": {
-      "description": "Defines contents of a log scrub rules.",
-      "type":"object",
-      "required": [
-        "matchVariable",
-        "selectorMatchOperator"
-      ],
-      "properties": {
-        "matchVariable": {
-          "type": "string",
-          "enum": [
-            "RequestHeaderNames",
-            "RequestCookieNames",
-            "QueryStringArgNames",
-            "RequestBodyPostArgNames",
-            "RequestBodyJsonArgNames",
-            "RequestIPAddress",
-            "RequestUri"
-          ],
-          "description": "The variable to be scrubbed from the logs.",
-          "x-ms-enum": {
-            "name": "scrubbingRuleEntryMatchVariable",
-            "modelAsString": true
-          }
-        },
-        "selectorMatchOperator": {
-          "type": "string",
-          "enum": [
-            "Equals",
-            "EqualsAny"
-          ],
-          "description": "Comparison type to use for matching with the variable value in log.",
-          "x-ms-enum": {
-            "name": " scrubbingRuleEntryMatchOperator",
-            "modelAsString": true
-          }
-        },
-        "selector": {
-          "type": "string",
-          "description": "Match against a specific key from the QueryString, PostArgs, RequestHeader or Cookies variables in the log. Default value is null."
-        },
-        "state": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "description": "Defines the state of log scrubbing rule. Default value is Enabled.",
-          "x-ms-enum": {
-            "name": " scrubbingRuleEntryState",
-            "modelAsString": true
           }
         }
       }
@@ -1043,6 +989,61 @@
       "x-ms-enum": {
         "name": "ActionType",
         "modelAsString": true
+      }
+    },
+    "WebApplicationFirewallScrubbingRules": {
+      "description": "Defines contents of a log scrub rules.",
+      "type": "object",
+      "required": [
+        "matchVariable",
+        "selectorMatchOperator"
+      ],
+      "properties": {
+        "matchVariable": {
+          "type": "string",
+          "enum": [
+            "RequestHeaderNames",
+            "RequestCookieNames",
+            "QueryStringArgNames",
+            "RequestBodyPostArgNames",
+            "RequestBodyJsonArgNames",
+            "RequestIPAddress",
+            "RequestUri"
+          ],
+          "description": "The variable to be scrubbed from the logs.",
+          "x-ms-enum": {
+            "name": "scrubbingRuleEntryMatchVariable",
+            "modelAsString": true
+          }
+        },
+        "selectorMatchOperator": {
+          "type": "string",
+          "enum": [
+            "Equals",
+            "EqualsAny"
+          ],
+          "description": "Comparison type to use for matching with the variable value in log.",
+          "x-ms-enum": {
+            "name": " scrubbingRuleEntryMatchOperator",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "type": "string",
+          "description": "Match against a specific key from the QueryString, PostArgs, RequestHeader or Cookies variables in the log. Default value is null."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Defines the state of log scrubbing rule. Default value is Enabled.",
+          "x-ms-enum": {
+            "name": " scrubbingRuleEntryState",
+            "modelAsString": true
+          }
+        }
       }
     },
     "ManagedRuleSetActionType": {
