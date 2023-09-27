@@ -292,7 +292,7 @@ model RouterRule {}
 
 @doc("A paged collection of classification policies.")
 model ClassificationPolicyCollection
-  is Azure.Core.Page<ClassificationPolicyItem>;
+  is RouterPagedCollection<ClassificationPolicyItem>;
 
 @doc("Paged instance of ClassificationPolicy")
 model ClassificationPolicyItem {
@@ -347,7 +347,7 @@ By default, set to false.
 }
 
 @doc("A paged collection of distribution policies.")
-model DistributionPolicyCollection is Azure.Core.Page<DistributionPolicyItem>;
+model DistributionPolicyCollection is RouterPagedCollection<DistributionPolicyItem>;
 
 @doc("Paged instance of DistributionPolicy")
 model DistributionPolicyItem {
@@ -393,7 +393,7 @@ Key is the Id of each exception action.
 model ExceptionTrigger {}
 
 @doc("A paged collection of exception policies.")
-model ExceptionPolicyCollection is Azure.Core.Page<ExceptionPolicyItem>;
+model ExceptionPolicyCollection is RouterPagedCollection<ExceptionPolicyItem>;
 
 @doc("Paged instance of ExceptionPolicy")
 model ExceptionPolicyItem {
@@ -655,7 +655,7 @@ current timestamp.
 }
 
 @doc("A paged collection of jobs.")
-model RouterJobCollection is Azure.Core.Page<RouterJobItem>;
+model RouterJobCollection is RouterPagedCollection<RouterJobItem>;
 
 @doc("Paged instance of RouterJob")
 model RouterJobItem {
@@ -763,7 +763,7 @@ escalation rules.
 }
 
 @doc("A paged collection of queues.")
-model RouterQueueCollection is Azure.Core.Page<RouterQueueItem>;
+model RouterQueueCollection is RouterPagedCollection<RouterQueueItem>;
 
 @doc("Paged instance of RouterQueue")
 model RouterQueueItem {
@@ -893,7 +893,7 @@ model RouterWorkerAssignment {
 }
 
 @doc("A paged collection of workers.")
-model RouterWorkerCollection is Azure.Core.Page<RouterWorkerItem>;
+model RouterWorkerCollection is RouterPagedCollection<RouterWorkerItem>;
 
 @doc("Paged instance of RouterWorker")
 model RouterWorkerItem {
@@ -1520,6 +1520,19 @@ jobs. Defaults to false.
 """)
   @query
   hasCapacity?: boolean;
+}
+
+@pagedResult
+@friendlyName("Paged{name}", TResource)
+@doc("Paged collection of {name} items", TResource)
+model RouterPagedCollection<TResource extends TypeSpec.Reflection.Model> {
+  @doc("The {name} items on this page", TResource)
+  @items
+  value: TResource[];
+
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: string;
 }
 
 @doc("JobRouter Versions")

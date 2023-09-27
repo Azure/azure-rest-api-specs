@@ -48,7 +48,7 @@ interface JobRouterAdministrationOperations {
   @doc("Retrieves existing classification policies.")
   @example("./examples/ClassificationPolicies_ListClassificationPoliciesWithPageSize.json", "Get Classification policies with pagination (max page size)")
   @route("/routing/classificationPolicies")
-  @get
+  @list
   listClassificationPolicies is Azure.Core.Foundations.Operation<
     ListClassificationPoliciesQueryParams,
     ClassificationPolicyCollection
@@ -81,7 +81,7 @@ interface JobRouterAdministrationOperations {
   @doc("Retrieves existing distribution policies.")
   @example("./examples/DistributionPolicies_ListDistributionPoliciesWithPageSize.json", "Get Distribution policies with pagination (max page size)")
   @route("/routing/distributionPolicies")
-  @get
+  @list
   listDistributionPolicies is Azure.Core.Foundations.Operation<
     ListDistributionPoliciesQueryParams,
     DistributionPolicyCollection
@@ -114,7 +114,7 @@ interface JobRouterAdministrationOperations {
   @doc("Retrieves existing exception policies.")
   @example("./examples/ExceptionPolicies_ListExceptionPoliciesWithPageSize.json", "Get Exception policies with pagination (max page size)")
   @route("/routing/exceptionPolicies")
-  @get
+  @list
   listExceptionPolicies is Azure.Core.Foundations.Operation<
     ListExceptionPoliciesQueryParams,
     ExceptionPolicyCollection
@@ -147,7 +147,7 @@ interface JobRouterAdministrationOperations {
   @doc("Retrieves existing queues.")
   @example("./examples/Queues_ListQueuesWithPageSize.json", "Get Queues with pagination (max page size)")
   @route("/routing/queues")
-  @get
+  @list
   listQueues is Azure.Core.Foundations.Operation<
     ListQueuesQueryParams,
     RouterQueueCollection
@@ -266,7 +266,7 @@ cancellation reason.
   @doc("Retrieves list of jobs based on filter parameters.")
   @example("./examples/Jobs_GetJobsWithPageSize.json", "Gets a list of jobs with pagination (max page size)")
   @route("/routing/jobs")
-  @get
+  @list
   listJobs is Azure.Core.Foundations.Operation<
     ListJobQueryParams,
     RouterJobCollection
@@ -404,7 +404,7 @@ accepted the job already.
   @example("./examples/Workers_GetWorkersWithPageSize.json", "List workers with pagination (max page size)")
   @example("./examples/Workers_GetAvailableWorkersByChannel.json", "List available Workers by channel")
   @route("/routing/workers")
-  @get
+  @list
   listWorkers is Azure.Core.Foundations.Operation<
     ListWorkerQueryParams,
     RouterWorkerCollection
