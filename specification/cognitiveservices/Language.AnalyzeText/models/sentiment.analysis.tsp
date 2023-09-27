@@ -1,8 +1,8 @@
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../main.tsp";
-import "../../Language/common.models.tsp";
+import "../common.tsp";
+import "./common.models.tsp";
 
 namespace Language.AnalyzeText;
 
@@ -46,17 +46,19 @@ model SentimentTaskResult extends AnalyzeTextTaskResult{
 }
 
 @doc("The predicted Sentiment for the sentence.")
-enum Sentiment {
+enum SentimentValue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   positive,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   neutral,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   negative
 }
 
 @doc("Sentiment analysis per document.")
-model SentimentResponse extends PreBuiltResult{
+model SentimentResponse extends AnalyzeTextPreBuiltResult{
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   documents: Array<SentimentDocumentResult>;
 }
@@ -64,7 +66,7 @@ model SentimentResponse extends PreBuiltResult{
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model SentimentDocumentResult extends DocumentResult {
   @doc("Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).")
-  sentiment: Language.Sentiment;
+  sentiment: Sentiment;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   confidenceScores: SentimentConfidenceScores;
@@ -79,7 +81,7 @@ model SentimentDocumentResult extends DocumentResult {
   text: string;
 
   @doc("The predicted Sentiment for the sentence.")
-  sentiment: Sentiment;
+  sentiment: SentimentValue;
 
   @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.",)
   confidenceScores: SentimentConfidenceScores
@@ -88,7 +90,7 @@ model SentimentDocumentResult extends DocumentResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model SentenceTarget {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  sentiment: Sentiment;
+  sentiment: SentimentValue;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   confidenceScores: SentimentConfidenceScores;
@@ -109,7 +111,7 @@ model SentenceTarget {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model SentenceAssessment {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  sentiment: Sentiment;
+  sentiment: SentimentValue;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   confidenceScores: SentimentConfidenceScores;

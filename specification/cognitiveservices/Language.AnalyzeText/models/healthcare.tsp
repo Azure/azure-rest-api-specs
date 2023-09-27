@@ -1,8 +1,8 @@
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../main.tsp";
-import "../../Language/common.models.tsp";
+import "../common.tsp";
+import "./common.models.tsp";
 
 namespace Language.AnalyzeText;
 
@@ -22,7 +22,7 @@ model HealthcareLroTask extends AnalyzeTextLroTask{
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model HealthcareResult extends PreBuiltResult {
+model HealthcareResult extends AnalyzeTextPreBuiltResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   documents: Array<HealthcareEntitiesDocumentResult>;
 }

@@ -1,36 +1,11 @@
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../main.tsp";
-import "../../Language/common.models.tsp";
+import "../common.tsp";
+import "./common.models.tsp";
 import "./entity.recognition.tsp";
 
 namespace Language.AnalyzeText;
-
-@doc("Parameters object for a text analysis task using custom models.")
-model CustomTaskParameters extends TaskParameters{
-
-  @doc("This field indicates the project name for the model.")
-  projectName: string;
-
-  @doc("This field indicates the deployment name for the model.")
-  deploymentName: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-model CustomResult {
-  @doc("Errors by document id.")
-  errors: Array<DocumentError>;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  statistics?: RequestStatistics;
-
-  @doc("This field indicates the project name for the model.")
-  projectName: string;
-
-  @doc("This field indicates the deployment name for the model.")
-  deploymentName: string;
-}
 
 @doc("Supported parameters for a Custom Entities task.")
 model CustomEntitiesTaskParameters extends CustomTaskParameters{

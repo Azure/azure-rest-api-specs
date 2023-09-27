@@ -1376,6 +1376,7 @@
     },
     "SentimentResponse": {
       "type": "object",
+      "description": "Custom Task Results",
       "properties": {
         "documents": {
           "type": "array",
@@ -4089,6 +4090,7 @@
     },
     "LanguageDetectionResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
         "documents": {
           "type": "array",
@@ -4115,6 +4117,9 @@
           "$ref": "#/definitions/DetectedLanguage"
         }
       },
+      "required": [
+        "modelVersion"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DocumentResult"

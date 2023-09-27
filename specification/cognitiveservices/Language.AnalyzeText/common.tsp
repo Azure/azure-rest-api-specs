@@ -9,29 +9,14 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-@versioned(Versions)
-namespace Language;
-
-@doc("Language Service Versions")
-enum Versions {
-  @doc("Version 2022-05-01")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2022_05_01: "2022-05-01",
-
-  @doc("Version 2023-04-01")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_04_01: "2023-04-01",
-
-  @doc("Version 2023-04-15-preview")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_04_15_preview: "2023-04-15-preview",
-}
+namespace Language.AnalyzeText;
 
 @doc("Error response.")
 model ErrorResponse is Azure.Core.Foundations.ErrorResponse;
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "InnerErrorModel should not use 'extends Record<unknown>'. Use 'extends Record<string>' instead."
 @doc("An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.")
-model InnerErrorModel {
+model InnerErrorModel extends Record<unknown> {
     @doc("One of a server-defined set of error codes.")
     code: InnerErrorCode;
 
@@ -61,7 +46,6 @@ enum StringIndexType {
 }
 
 @doc("Returns the current state of the task.")
-@added(Versions.v2023_04_01)
 model TaskState {
     @doc("The last updated time in UTC for the task.")
     lastUpdateDateTime: utcDateTime;
@@ -99,21 +83,18 @@ enum State {
 }
 
 @doc("Base task object.")
-@added(Versions.v2023_04_01)
 model TaskIdentifier {
     @doc("task name")
     taskName?: string;
 }
 
 @doc("Base parameters object for a text analysis task.")
-@added(Versions.v2023_04_01)
 model TaskParameters {
     @doc("logging opt out")
     loggingOptOut: boolean = false;
 }
 
 @doc("Parameters object for a text analysis task using pre-built models.")
-@added(Versions.v2023_04_01)
 model PreBuiltTaskParameters extends TaskParameters {
     @doc("model version")
     modelVersion: string = "latest";
@@ -136,7 +117,6 @@ alias AnalyzeTextQueryParameters = QueryParametersTrait<{
 }>;
 
 @doc("job state")
-@added(Versions.v2023_04_01)
 model JobState {
     @doc("display name")
     displayName?: string;
@@ -506,7 +486,6 @@ enum Sentiment {
 }
 
 @doc("Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative.")
-@added(Versions.v2023_04_01)
 model SentimentConfidenceScores {
     @doc("Confidence score for positive sentiment")
     positive: float64;
@@ -519,7 +498,6 @@ model SentimentConfidenceScores {
 }
 
 @doc("Supported parameters for an Abstractive Summarization task.")
-@added(Versions.v2023_04_01)
 model AbstractiveSummarizationTaskParametersBase {
     @doc("It controls the approximate number of sentences in the output summaries.")
     sentenceCount: int32;
@@ -529,7 +507,6 @@ model AbstractiveSummarizationTaskParametersBase {
 }
 
 @doc("The context of the summary.")
-@added(Versions.v2023_04_01)
 model SummaryContext {
     @doc("Start position for the context. Use of different 'stringIndexType' values can affect the offset returned.")
     offset: int32;
@@ -653,6 +630,7 @@ op LanguageLongRunningOperation<
   Traits,
   TErrorResponse
 >;
+
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"
 @Foundations.Private.needsRoute

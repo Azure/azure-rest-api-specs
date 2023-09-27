@@ -1,9 +1,9 @@
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../main.tsp";
-import "../../Language/common.models.tsp";
+import "../common.tsp";
 import "./entity.recognition.tsp";
+import "./common.models.tsp";
 
 namespace Language.AnalyzeText;
 
@@ -51,7 +51,7 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model PiiResult extends PreBuiltResult {
+model PiiResult extends AnalyzeTextPreBuiltResult {
   @doc("Response by document")
   documents: Array<PiiEntitiesDocumentResult>;
 }
