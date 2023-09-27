@@ -114,8 +114,8 @@
           "BillingAccountWithRegistrationNumberWithType": {
             "$ref": "./examples/billingAccountWithRegistrationNumberWithType.json"
           },
-          "BillingAccountEA": {
-            "$ref": "./examples/billingAccountEA.json"
+          "BillingAccountsGetEA": {
+            "$ref": "./examples/billingAccountsGetEA.json"
           },
           "BillingAccountWithExpandForPONumber": {
             "$ref": "./examples/billingAccountWithExpandForPONumber.json"
@@ -205,14 +205,14 @@
         "parameters": [
           {
             "in": "query",
-            "name": "includeAllBillingAccounts",
+            "name": "includeAll",
             "description": "When true, results will include Billing Accounts that the user does not have a direct role assignment on if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
             "type": "boolean",
             "default": false
           },
           {
             "in": "query",
-            "name": "includeAccountsWithoutBillingProfiles",
+            "name": "includeAllWithoutBillingProfiles",
             "description": "When true, results will include Billing Accounts that are not fully created if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
             "type": "boolean",
             "default": false
@@ -403,8 +403,8 @@
             "Other",
             "None",
             "Individual",
-            "Standard",
-            "Premier"
+            "Professional",
+            "Enterprise"
           ],
           "type": "string",
           "readOnly": true,

@@ -431,24 +431,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "InvoiceSectionStatus",
-            "modelAsString": true
-          }
-        },
-        "status": {
-          "description": "Identifies the status of an invoice section.",
-          "enum": [
-            "Other",
-            "Active",
-            "Deleted",
-            "Disabled",
-            "UnderReview",
-            "Warned",
-            "Restricted"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "InvoiceSectionStatus",
+            "name": "InvoiceSectionState",
             "modelAsString": true
           }
         },
@@ -457,20 +440,23 @@
           "enum": [
             "Other",
             "PastDue",
-            "UnusualActivity"
+            "UnusualActivity",
+            "SpendingLimitReached",
+            "SpendingLimitExpired"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "InvoiceSectionStatusReasonCode",
+            "name": "InvoiceSectionStateReasonCode",
             "modelAsString": true
           }
         },
         "systemId": {
           "description": "The system generated unique identifier for an invoice section.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "tags": {
-          "description": "Dictionary of metadata associated with the invoice section.",
+          "description": "Dictionary of metadata associated with the resource. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \\ ? /",
           "type": "object",
           "additionalProperties": {
             "type": "string"
