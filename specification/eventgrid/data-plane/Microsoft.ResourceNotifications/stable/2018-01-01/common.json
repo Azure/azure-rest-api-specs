@@ -7,46 +7,40 @@
   },
   "paths": {},
   "definitions": {
-    "ResourceWithPayloadEventData": {
+    "ResourceNotificationsResourceWithPayloadDetails": {
       "description": "Describes the schema of the properties under resource info which are common across all ARN system topic events",
       "type": "object",
       "properties": {
-        "resourceInfo": {
-          "description": "details of resourceInfo",
+        "id": {
+          "description": "id of the resource for which the event is being emitted",
+          "type": "string"
+        },
+        "name": {
+          "description": "name of the resource for which the event is being emitted",
+          "type": "string"
+        },
+        "type": {
+          "description": "the type of the resource for which the event is being emitted",
+          "type": "string"
+        },
+        "location": {
+          "description": "the location of the resource for which the event is being emitted",
+          "type": "string"
+        },
+        "tags": {
+          "description": "the tags on the resource for which the event is being emitted",
+          "type": "string"
+        },
+        "properties": {
+          "description": "properties in the payload of the resource for which the event is being emitted",
           "type": "object",
-          "properties": {
-            "id": {
-              "description": "id of the resource for which the event is being emitted",
-              "type": "string"
-            },
-            "name": {
-              "description": "name of the resource for which the event is being emitted",
-              "type": "string"
-            },
-            "type": {
-              "description": "the type of the resource for which the event is being emitted",
-              "type": "string"
-            },
-            "location": {
-              "description": "the location of the resource for which the event is being emitted",
-              "type": "string"
-            },
-            "tags": {
-              "description": "the tags on the resource for which the event is being emitted",
-              "type": "string"
-            },
-            "properties": {
-              "description": "properties in the payload of the resource for which the event is being emitted",
-              "type": "object",
-              "additionalProperties": {
-                "description": "properties in the payload of the resource for which the event is being emitted"
-              }
-            }
+          "additionalProperties": {
+            "description": "properties in the payload of the resource for which the event is being emitted"
           }
         }
       }
     },
-    "ResourceWithoutPayloadEventData": {
+    "ResourceNotificationsResourceWithoutPayloadDetails": {
       "description": "Describes the schema of the common properties across all ARN system topic deleted events",
       "type": "object",
       "properties": {
@@ -70,7 +64,7 @@
         }
       }
     },
-    "OperationalInfoEventData": {
+    "ResourceNotificationsOperationalDetails": {
       "description": "details of operational info",
       "type": "object",
       "properties": {
@@ -81,40 +75,36 @@
         }
       }
     },
-    "ResourceNotificationsUpdateEventData": {
+    "ResourceNotificationsResourceUpdatedDetails": {
       "description": "Describes the schema of the common properties across all ARN system topic events",
       "type": "object",
       "properties": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/ResourceWithPayloadEventData"
-          }
-        ],
-        "allOf": [
-          {
-            "$ref": "#/definitions/OperationalInfoEventData"
-          }
-        ],
+        "resourceInfo": {
+          "description": "resourceInfo details for update event",
+          "$ref": "#/definitions/ResourceNotificationsResourceWithPayloadDetails"
+        },
+        "operationalInfo": {
+          "description": "details about operational info",
+          "$ref": "#/definitions/ResourceNotificationsOperationalDetails"
+        },
         "apiVersion": {
           "description": "api version of the resource properties bag",
           "type": "string"
         }
       }
     },
-    "ResourceNotificationsDeleteEventData": {
+    "ResourceNotificationsResourceDeletedDetails": {
       "description": "Describes the schema of the common properties across all ARN system topic deleted events",
       "type": "object",
       "properties": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/ResourceWithoutPayloadEventData"
-          }
-        ],
-        "allOf": [
-          {
-            "$ref": "#/definitions/OperationalInfoEventData"
-          }
-        ]
+        "resourceInfo": {
+          "description": "resourceInfo details for update event",
+          "$ref": "#/definitions/ResourceNotificationsResourceWithoutPayloadDetails"
+        },
+        "operationalInfo": {
+          "description": "details about operational info",
+          "$ref": "#/definitions/ResourceNotificationsOperationalDetails"
+        }
       }
     }
   }
