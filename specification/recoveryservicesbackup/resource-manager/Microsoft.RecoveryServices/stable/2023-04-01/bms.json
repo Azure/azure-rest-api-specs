@@ -3139,6 +3139,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "RegisterAzure Storage ProtectionContainers": {
             "$ref": "./examples/AzureStorage/ProtectionContainers_Register.json"
@@ -7448,6 +7449,10 @@
         "isPrivateAccessEnabledOnAnyDisk": {
           "description": "This flag denotes if any of the disks in the VM are using Private access network setting",
           "type": "boolean"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Extended location of the VM recovery point,\r\nshould be null if VM is in public cloud"
         }
       },
       "x-ms-discriminator-value": "IaasVMRecoveryPoint"
