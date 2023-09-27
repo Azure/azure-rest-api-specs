@@ -42,7 +42,8 @@
               "supportedElasticPoolEditions",
               "supportedManagedInstanceVersions",
               "supportedInstancePoolEditions",
-              "supportedManagedInstanceEditions"
+              "supportedManagedInstanceEditions",
+              "supportedJobAgentVersions"
             ],
             "x-ms-enum": {
               "name": "CapabilityGroup",
@@ -399,6 +400,25 @@
           },
           "readOnly": true
         },
+        "supportedMinCapacities": {
+          "description": "List of supported min capacities",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MinCapacityCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "supportedAutoPauseDelay": {
+          "$ref": "#/definitions/AutoPauseDelayTimeRange",
+          "description": "Supported time range for auto pause delay",
+          "readOnly": true
+        },
+        "supportedPerDatabaseAutoPauseDelay": {
+          "$ref": "#/definitions/PerDatabaseAutoPauseDelayTimeRange",
+          "description": "Supported time range for per database auto pause delay",
+          "readOnly": true
+        },
         "status": {
           "description": "The status of the capability.",
           "enum": [
@@ -579,6 +599,119 @@
         }
       }
     },
+    "JobAgentEditionCapability": {
+      "description": "The job agent edition capability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The job agent edition name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedServiceLevelObjectives": {
+          "description": "The list of supported service level objectives for the edition.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobAgentServiceLevelObjectiveCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "JobAgentServiceLevelObjectiveCapability": {
+      "description": "The job agent service level objective capability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The service objective name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "description": "The sku.",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "JobAgentVersionCapability": {
+      "description": "The job agent version capability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The job agent version name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedEditions": {
+          "description": "The list of supported editions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobAgentEditionCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
     "LicenseTypeCapability": {
       "description": "The license type capability",
       "type": "object",
@@ -633,6 +766,15 @@
             "$ref": "#/definitions/ManagedInstanceVersionCapability"
           },
           "readOnly": true
+        },
+        "supportedJobAgentVersions": {
+          "description": "The list of supported job agent versions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobAgentVersionCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "status": {
           "description": "The status of the capability.",
@@ -1157,6 +1299,54 @@
         "reason": {
           "description": "The reason for the capability not being available.",
           "type": "string"
+        }
+      }
+    },
+    "PerDatabaseAutoPauseDelayTimeRange": {
+      "description": "Supported auto pause delay time range",
+      "type": "object",
+      "properties": {
+        "minValue": {
+          "format": "int32",
+          "description": "Minimum value",
+          "type": "integer",
+          "readOnly": true
+        },
+        "maxValue": {
+          "format": "int32",
+          "description": "Maximum value",
+          "type": "integer",
+          "readOnly": true
+        },
+        "stepSize": {
+          "format": "int32",
+          "description": "Step value for discrete values between the minimum value and the maximum value.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "default": {
+          "format": "int32",
+          "description": "Default value if no value is provided",
+          "type": "integer",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Unit of time that delay is expressed in",
+          "enum": [
+            "Minutes"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PauseDelayTimeUnit",
+            "modelAsString": true
+          }
+        },
+        "doNotPauseValue": {
+          "format": "int32",
+          "description": "Value that is used to not pause (infinite delay before pause)",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
