@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-10'
 input-file:
-  - Microsoft.DeviceUpdate/preview/2023-10-01/deviceupdate.json
+  - Microsoft.DeviceUpdate/preview/2023-10-01-preview/deviceupdate.json
 ```
 ### Tag: package-2020-09-01
 
@@ -137,6 +137,6 @@ If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```

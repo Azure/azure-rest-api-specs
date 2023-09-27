@@ -3,7 +3,7 @@
   "info": {
     "title": "DeviceUpdateClient",
     "description": "Device Update for IoT Hub is an Azure service that enables customers to publish updates for their IoT devices to the cloud, and then deploy that update to their devices (approve updates to groups of devices managed and provisioned in IoT Hub). It leverages the proven security and reliability of the Windows Update platform, optimized for IoT devices. It works globally and knows when and how to update devices, enabling customers to focus on their business goals and let Device Update for IoT Hub handle the updates.",
-    "version": "2023-10-01"
+    "version": "2023-10-01-preview"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
@@ -629,42 +629,6 @@
         }
       }
     },
-    "/deviceUpdate/{instanceId}/management/deviceClassesCount": {
-      "get": {
-        "tags": [
-          "Device and deployment management"
-        ],
-        "description": "Gets a count of all device classes (sets of devices compatible with the same updates based on the model Id and compat properties reported in the Device Update PnP interface in IoT Hub) for all devices connected to Device Update for IoT Hub.",
-        "operationId": "DeviceManagement_GetDeviceClassesCount",
-        "x-ms-examples": {
-          "DeviceManagement_GetDeviceClassesCount": {
-            "$ref": "./examples/DeviceManagement_GetDeviceClassesCount.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/InstanceIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Count of all device classes.",
-            "schema": {
-              "$ref": "#/definitions/CountResponse"
-            }
-          },
-          "default": {
-            "description": "Default response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/deviceUpdate/{instanceId}/management/deviceClasses/{deviceClassId}": {
       "get": {
         "tags": [
@@ -876,42 +840,6 @@
         }
       }
     },
-    "/deviceUpdate/{instanceId}/management/devicesCount": {
-      "get": {
-        "tags": [
-          "Device and deployment management"
-        ],
-        "description": "Gets a count of all devices.",
-        "operationId": "DeviceManagement_GetDevicesCount",
-        "x-ms-examples": {
-          "DeviceManagement_GetDevicesCount": {
-            "$ref": "./examples/DeviceManagement_GetDevicesCount.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/InstanceIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The count of all devices.",
-            "schema": {
-              "$ref": "#/definitions/CountResponse"
-            }
-          },
-          "default": {
-            "description": "Default response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/deviceUpdate/{instanceId}/management/devices:import": {
       "post": {
         "tags": [
@@ -1078,78 +1006,6 @@
         }
       }
     },
-    "/deviceUpdate/{instanceId}/management/deploymentsCount": {
-      "get": {
-        "tags": [
-          "Device and deployment management"
-        ],
-        "description": "Gets a count of all deployments for all device groups.",
-        "operationId": "DeviceManagement_GetDeploymentsCount",
-        "x-ms-examples": {
-          "DeviceManagement_GetDeploymentsCount": {
-            "$ref": "./examples/DeviceManagement_GetDeploymentsCount.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/InstanceIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Count of all deployments for all device groups.",
-            "schema": {
-              "$ref": "#/definitions/CountResponse"
-            }
-          },
-          "default": {
-            "description": "Default response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/deviceUpdate/{instanceId}/management/activeDeploymentsCount": {
-      "get": {
-        "tags": [
-          "Device and deployment management"
-        ],
-        "description": "Gets a count of all active deployments for all device groups.",
-        "operationId": "DeviceManagement_GetActiveDeploymentsCount",
-        "x-ms-examples": {
-          "DeviceManagement_GetActiveDeploymentsCount": {
-            "$ref": "./examples/DeviceManagement_GetActiveDeploymentsCount.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/InstanceIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Count of all active deployments for all device groups.",
-            "schema": {
-              "$ref": "#/definitions/CountResponse"
-            }
-          },
-          "default": {
-            "description": "Default response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/deviceUpdate/{instanceId}/limits": {
       "get": {
         "tags": [
@@ -1231,42 +1087,6 @@
         "x-ms-odata": "#/definitions/GroupOrderBy",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/deviceUpdate/{instanceId}/management/groupsCount": {
-      "get": {
-        "tags": [
-          "Device and deployment management"
-        ],
-        "description": "Gets a count of all device groups.",
-        "operationId": "DeviceManagement_GetGroupsCount",
-        "x-ms-examples": {
-          "DeviceManagement_GetGroupsCount": {
-            "$ref": "./examples/DeviceManagement_GetGroupsCount.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/InstanceIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The count of all device groups.",
-            "schema": {
-              "$ref": "#/definitions/CountResponse"
-            }
-          },
-          "default": {
-            "description": "Default response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
         }
       }
     },
@@ -3142,20 +2962,6 @@
         "error"
       ]
     },
-    "CountResponse": {
-      "description": "Count response.",
-      "type": "object",
-      "properties": {
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The count."
-        }
-      },
-      "required": [
-        "count"
-      ]
-    },
     "Error": {
       "type": "object",
       "properties": {
@@ -3221,29 +3027,51 @@
     },
     "LimitsResponse": {
       "type": "object",
-      "description": "The list of instance limits on how many of each resource are permitted",
+      "description": "The list of limits of how many of each resource are currently in use and how many are allowed.",
       "properties": {
-        "limits": {
-          "type": "array",
-          "description": "The instance limits on how many of each resource are permitted",
-          "items": {
-            "$ref": "#/definitions/Limit"
-          }
+        "counters": {
+          "$ref": "#/definitions/Counters",
+          "description": "The list of current counts of each limited resource and the maximum quota that are allowed."
         }
       }
     },
-    "Limit": {
+    "Counters": {
       "type": "object",
-      "description": "An instance limit with a name and value",
+      "description": "The list of counts of each limited resource with both current usage and overall quota.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The instance limit name"
+        "deviceCount": {
+          "$ref": "#/definitions/UsageQuotaCounter",
+          "description": "The current usage and quota of devices."
         },
-        "value": {
+        "deviceClassCount": {
+          "$ref": "#/definitions/UsageQuotaCounter",
+          "description": "The current usage and quota of device classes."
+        },
+        "deviceGroupCount": {
+          "$ref": "#/definitions/UsageQuotaCounter",
+          "description": "The current usage and quota of device groups."
+        },
+        "activeDeploymentCount": {
+          "$ref": "#/definitions/UsageQuotaCounter",
+          "description": "The current usage and quota of active deployments."
+        },
+        "deploymentCount": {
+          "$ref": "#/definitions/UsageQuotaCounter",
+          "description": "The current usage and quota of deployments."
+        }
+      }
+    },
+    "UsageQuotaCounter": {
+      "type": "object",
+      "description": "A counter with both usage and quota information.",
+      "properties": {
+        "usage": {
           "type": "integer",
-          "format": "int32",
-          "description": "The instance limit value"
+          "description": "The current number of the resource that exist"
+        },
+        "quota": {
+          "type": "integer",
+          "description": "The maximum number of the resource that can be created"
         }
       }
     },
@@ -4565,6 +4393,7 @@
       "name": "endpoint",
       "in": "path",
       "required": true,
+      "format": "url",
       "type": "string",
       "x-ms-skip-url-encoding": true,
       "description": "The Device Update for IoT Hub account endpoint (hostname only, no protocol).",
