@@ -97,14 +97,14 @@ interface ServerlessRuntimes
     InformaticaServerlessRuntimeProperties
   >;
 
-  @doc("Gets all dependencies for a serverless runtime resource")
+  @doc("Checks all dependencies for a serverless runtime resource")
   @armResourceAction(InformaticaServerlessRuntimeResource)
   @post
   checkDependencies(
     ...ResourceInstanceParameters<InformaticaServerlessRuntimeResource>,
   ): ArmResponse<CheckDependenciesResponse> | ErrorResponse;
 
-  @doc("Gets all dependencies for a serverless runtime resource")
+  @doc("Starts a failed runtime resource")
   @armResourceAction(InformaticaServerlessRuntimeResource)
   @post
   startFailedServerlessRuntime(
