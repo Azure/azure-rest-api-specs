@@ -17886,6 +17886,23 @@
       "x-ms-discriminator-value": "FeatureAttributionDrift",
       "additionalProperties": false
     },
+    "FeatureAttributionMetric": {
+      "enum": [
+        "NormalizedDiscountedCumulativeGain"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FeatureAttributionMetric",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NormalizedDiscountedCumulativeGain",
+            "description": "The Normalized Discounted Cumulative Gain metric."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "FeatureAttributionMetricThreshold": {
       "required": [
         "metric"
@@ -19108,6 +19125,27 @@
         }
       },
       "x-ms-discriminator-value": "GenerationTokenStatistics",
+      "additionalProperties": false
+    },
+    "Goal": {
+      "description": "Defines supported metric goals for hyperparameter tuning",
+      "enum": [
+        "Minimize",
+        "Maximize"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Goal",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Minimize"
+          },
+          {
+            "value": "Maximize"
+          }
+        ]
+      },
       "additionalProperties": false
     },
     "GridSamplingAlgorithm": {
@@ -23761,6 +23799,33 @@
       "x-ms-discriminator-value": "Numerical",
       "additionalProperties": false
     },
+    "NumericalDataQualityMetric": {
+      "enum": [
+        "NullValueRate",
+        "DataTypeErrorRate",
+        "OutOfBoundsRate"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "NumericalDataQualityMetric",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NullValueRate",
+            "description": "Calculates the rate of null values."
+          },
+          {
+            "value": "DataTypeErrorRate",
+            "description": "Calculates the rate of data type errors."
+          },
+          {
+            "value": "OutOfBoundsRate",
+            "description": "Calculates the rate values are out of bounds."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "NumericalDataQualityMetricThreshold": {
       "required": [
         "metric"
@@ -26511,6 +26576,31 @@
             "description": "Use the custom seasonality value."
           }
         ]
+      },
+      "additionalProperties": false
+    },
+    "SecretConfiguration": {
+      "description": "Secret Configuration definition.",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "Secret Uri.\r\nSample Uri : https://myvault.vault.azure.net/secrets/mysecretname/secretversion",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "workspaceSecretName": {
+          "description": "Name of secret in workspace key vault.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
       },
       "additionalProperties": false
     },
