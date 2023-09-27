@@ -9,48 +9,64 @@
             "objectType": "Files"
           },
           {
-            "not": {
-              "or": [
-                {
-                  "attributeName": "size",
-                  "operator": "eq",
-                  "attributeValue": 0
-                },
-                {
-                  "attributeName": "fileSize",
-                  "operator": "eq",
-                  "attributeValue": 0
-                }
-              ]
-            }
-          },
-          {
-            "not": {
-              "classification": "MICROSOFT.SYSTEM.TEMP_FILE"
-            }
+            "entityType": "azure_blob_path"
           }
         ]
       },
-      "limit": 10,
-      "taxonomySetting": {
-        "assetTypes": [
-          "Azure Blob Storage"
-        ],
-        "facet": {
+      "limit": 2,
+      "continuationToken":"ZXlKelpYTnphVzl1U1dRaU9pSTVaV1JpWW1Fek5DMHdZbU0wTFRReE5HRXRPVFkyTkMwMU9HTTJaVEJrTXpJM09EWWlMQ0p2Wm1aelpYUWlPakkxTENKeVpYRjFaWE4wU0dGemFDSTZJalppTW1Gak1UbG1NR0V4WmpsbU1qWTJOemMwWkRkaFpEY3pOVEUzT1dKbUluMD0=",
+      "orderby": [
+        {
+          "name": "ASC"
+        },
+        {
+          "updateTime": "DESC"
+        }
+      ],
+      "facets": [
+        {
+          "facet": "assetType",
+          "count": 0,
+          "sort": {
+            "count": "desc"
+          }
+        },
+        {
+          "facet": "classification",
+          "count": 10,
+          "sort": {
+            "count": "desc"
+          }
+        },
+        {
+          "facet": "contactId",
+          "count": 10,
+          "sort": {
+            "count": "desc"
+          }
+        },
+        {
+          "facet": "label",
+          "count": 10,
+          "sort": {
+            "count": "desc"
+          }
+        },
+        {
+          "facet": "term",
           "count": 10,
           "sort": {
             "count": "desc"
           }
         }
-      }
+      ]
     },
     "api-version": "2023-09-01"
   },
   "responses": {
     "200": {
       "body": {
-        "continuationToken": "eyJzZXNzaW9uSWQiOiI5ZWRiYmEzNC0wYmM0LTQxNGEtOTY2NC01OGM2ZTBkMzI3ODYiLCJvZmZzZXQiOjI1LCJyZXF1ZXN0SGFzaCI6IjZiMmFjMTlmMGExZjlmMjY2Nzc0ZDdhZDczNTE3OWJmIn0=",
-        "@search.count": 339,
+        "@search.count": 6,
         "@search.count.approximate": false,
         "value": [
           {
