@@ -30,9 +30,8 @@ enum Versions {
 @doc("Error response.")
 model ErrorResponse is Azure.Core.Foundations.ErrorResponse;
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "InnerErrorModel should not use 'extends Record<unknown>'. Use 'extends Record<string>' instead."
 @doc("An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.")
-model InnerErrorModel extends Record<unknown> {
+model InnerErrorModel {
     @doc("One of a server-defined set of error codes.")
     code: InnerErrorCode;
 
@@ -73,7 +72,6 @@ model TaskState {
 
 @doc("The status of the task at the mentioned last update time.")
 @lroStatus
-@added(Versions.v2023_04_01)
 enum State {
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'notStarted' should have a documentation or description, please use decorator @doc to add it."
     notStarted,
@@ -124,6 +122,17 @@ model PreBuiltTaskParameters extends TaskParameters {
 alias ShowStatsQueryParameter = QueryParametersTrait<{
     @doc("(Optional) if set to true, response will contain request and document level statistics.")
     @query showStats?: boolean
+}>;
+
+alias AnalyzeTextQueryParameters = QueryParametersTrait<{
+    @doc("(Optional) if set to true, response will contain request and document level statistics.")
+    @query showStats?: boolean;
+
+    @doc("An offset into the collection of the first resource to be returned.")
+    @query skip?: int32;
+
+    @doc("The maximum number of resources to return from the collection.")
+    @query top?: int32;
 }>;
 
 @doc("job state")
@@ -598,5 +607,22 @@ enum RedactionCharacter{
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
     tilde: "~",
+}
 
+@doc("The error object.")
+model Error {
+  @doc("One of a server-defined set of error codes.",)
+  code: ErrorCode;
+
+  @doc("A human-readable representation of the error.")
+  message: string;
+
+  @doc("The target of the error.")
+  target?: string;
+
+  @doc("An array of details about specific errors that led to this reported error.")
+  details?: Array<Error>;
+
+  @doc("An object containing more specific information than the current object about the error.")
+  innererror?: InnerErrorModel;
 }
