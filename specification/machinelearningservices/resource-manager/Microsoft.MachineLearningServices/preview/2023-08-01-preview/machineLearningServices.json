@@ -2992,6 +2992,10 @@
             "source",
             "target"
           ]
+        },
+        "kernel": {
+          "description": "Describes the jupyter kernel settings for the image if its a custom environment",
+          "$ref": "#/definitions/JupyterKernelConfig"
         }
       },
       "additionalProperties": true
@@ -3007,7 +3011,7 @@
           ],
           "type": "string",
           "title": "Type of the image",
-          "description": "Type of the image. Possible values are: docker - For docker images. azureml - For AzureML images",
+          "description": "Type of the image. Possible values are: docker - For docker images. azureml - For AzureML Environment images (custom and curated)",
           "x-ms-enum": {
             "name": "ImageType",
             "modelAsString": true
@@ -3015,7 +3019,11 @@
         },
         "reference": {
           "type": "string",
-          "description": "Image reference URL"
+          "description": "Image reference URL if type is docker. Environment name if type is azureml"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of image being used. If latest then skip this field"
         }
       },
       "additionalProperties": true
@@ -3185,6 +3193,28 @@
           "format": "int32",
           "type": "integer",
           "description": "Mention the Tmpfs size"
+        }
+      }
+    },
+    "JupyterKernelConfig": {
+      "type": "object",
+      "description": "Jupyter kernel configuration.",
+      "properties": {
+        "argv": {
+          "type": "array",
+          "description": "Argument to the the runtime",
+          "items": {
+            "type": "string",
+            "description": "argument values"
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the kernel"
+        },
+        "language": {
+          "type": "string",
+          "description": "Language of the kernel [Example value: python]"
         }
       }
     },
