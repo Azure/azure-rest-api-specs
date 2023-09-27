@@ -66,8 +66,12 @@
         "dispositionCode": {
           "description": "Router Job Disposition Code",
           "type": "string",
+          "enum": [
+            "Cancelled",
+            "Closed"
+          ],
           "x-ms-enum": {
-            "name": "dispositionCodeType",
+            "name": "acsRouterDispositionCode",
             "modelAsString": true
           }
         }
@@ -142,8 +146,12 @@
         "dispositionCode": {
           "description": "Router Job Closed Disposition Code",
           "type": "string",
+          "enum": [
+            "Cancelled",
+            "Closed"
+          ],
           "x-ms-enum": {
-            "name": "dispositionCodeType",
+            "name": "acsRouterDispositionCode",
             "modelAsString": true
           }
         }
@@ -1619,7 +1627,7 @@
           "description": "Router Job Worker Selector Label Operator",
           "type": "string",
           "x-ms-enum": {
-            "name": "labelOperatorType",
+            "name": "acsRouterLabelOperator",
             "modelAsString": true
           }
         },
