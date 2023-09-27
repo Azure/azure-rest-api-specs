@@ -980,17 +980,7 @@
             "$ref": "#/parameters/guid"
           },
           {
-            "name": "body",
-            "required": false,
-            "in": "body",
-            "schema": {
-              "description": "BusinessMetadata",
-              "type": "object",
-              "additionalProperties": {
-                "type": "object"
-              }
-            },
-            "description": "BusinessMetadata"
+            "$ref":"#/parameters/businessMetadata"
           }
         ],
         "responses": {
@@ -1031,14 +1021,7 @@
             "required": false
           },
           {
-            "in": "body",
-            "name": "body",
-            "description": "Business Metadata",
-            "required": false,
-            "schema": {
-              "type": "object",
-              "additionalProperties": {}
-            }
+            "$ref":"#/parameters/businessMetadata"
           }
         ],
         "responses": {
@@ -1081,15 +1064,7 @@
             "$ref": "#/parameters/guid"
           },
           {
-            "name": "body",
-            "required": false,
-            "in": "body",
-            "schema": {
-              "description": "BusinessMetadataAttributes",
-              "type": "object",
-              "additionalProperties": {}
-            },
-            "description": "BusinessMetadataAttributes"
+            "$ref": "#/parameters/businessMetadataAttributes"
           }
         ],
         "responses": {
@@ -1130,15 +1105,7 @@
             "$ref": "#/parameters/guid"
           },
           {
-            "name": "body",
-            "required": false,
-            "in": "body",
-            "schema": {
-              "description": "BusinessMetadataAttributes",
-              "type": "object",
-              "additionalProperties": {}
-            },
-            "description": "BusinessMetadataAttributes"
+            "$ref": "#/parameters/businessMetadataAttributes"
           }
         ],
         "responses": {
@@ -1242,7 +1209,7 @@
         ],
         "x-ms-examples": {
           "Entity_RemoveLabels": {
-            "$ref": "./examples/Entity_RemoveLabels.json"
+            "$ref": "./examples/Entity_Label.json"
           }
         },
         "parameters": [
@@ -1286,7 +1253,7 @@
         ],
         "x-ms-examples": {
           "Entity_SetLabel": {
-            "$ref": "./examples/Entity_Label.json"
+            "$ref": "./examples/Entity_SetLabel.json"
           }
         },
         "parameters": [
@@ -1909,14 +1876,7 @@
           "200": {
             "description": "OK. Gets an array of related categories.",
             "schema": {
-              "type": "object",
-              "description": "An array of related categories.",
-              "additionalProperties": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/AtlasRelatedCategoryHeader"
-                }
-              }
+              "$ref": "#/definitions/RelatedCategoryHeaders"
             }
           },
           "default": {
@@ -2395,14 +2355,7 @@
           "200": {
             "description": "OK. An array of related glossary terms for the given glossary or an empty list.",
             "schema": {
-              "type": "object",
-              "description": "An array of related glossary terms for the given glossary or an empty list.",
-              "additionalProperties": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/AtlasRelatedTermHeader"
-                }
-              }
+              "$ref":"#/definitions/RelatedTermHeaders"
             }
           },
           "default": {
@@ -4181,8 +4134,7 @@
       "allOf": [
         {
           "$ref": "#/definitions/AtlasStructDef"
-        },
-        {}
+        }
       ],
       "description": "class that captures details of a struct-type."
     },
@@ -4565,24 +4517,22 @@
     "AtlasEnumDef": {
       "type": "object",
       "title": "AtlasEnumDef",
+      "properties": {
+        "defaultValue": {
+          "type": "string",
+          "description": "The default value."
+        },
+        "elementDefs": {
+          "type": "array",
+          "description": "An array of enum element definitions.",
+          "items": {
+            "$ref": "#/definitions/AtlasEnumElementDef"
+          }
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AtlasBaseTypeDef"
-        },
-        {
-          "properties": {
-            "defaultValue": {
-              "type": "string",
-              "description": "The default value."
-            },
-            "elementDefs": {
-              "type": "array",
-              "description": "An array of enum element definitions.",
-              "items": {
-                "$ref": "#/definitions/AtlasEnumElementDef"
-              }
-            }
-          }
         }
       ],
       "description": "class that captures details of an enum-type."
@@ -4609,35 +4559,33 @@
     "AtlasGlossary": {
       "type": "object",
       "title": "AtlasGlossary",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "description": "An array of categories.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedCategoryHeader"
+          }
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the glossary."
+        },
+        "terms": {
+          "type": "array",
+          "description": "An array of related term headers.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedTermHeader"
+          }
+        },
+        "usage": {
+          "type": "string",
+          "description": "The usage of the glossary."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AtlasGlossaryBaseObject"
-        },
-        {
-          "properties": {
-            "categories": {
-              "type": "array",
-              "description": "An array of categories.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedCategoryHeader"
-              }
-            },
-            "language": {
-              "type": "string",
-              "description": "The language of the glossary."
-            },
-            "terms": {
-              "type": "array",
-              "description": "An array of related term headers.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedTermHeader"
-              }
-            },
-            "usage": {
-              "type": "string",
-              "description": "The usage of the glossary."
-            }
-          }
         }
       ],
       "description": "The glossary object."
@@ -4645,57 +4593,55 @@
     "AtlasGlossaryBaseObject": {
       "type": "object",
       "title": "AtlasGlossaryBaseObject",
+      "properties": {
+        "classifications": {
+          "type": "array",
+          "description": "An array of classifications.",
+          "items": {
+            "$ref": "#/definitions/AtlasClassification"
+          }
+        },
+        "longDescription": {
+          "type": "string",
+          "description": "The long version description."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the glossary object."
+        },
+        "qualifiedName": {
+          "type": "string",
+          "description": "The qualified name of the glossary object."
+        },
+        "shortDescription": {
+          "type": "string",
+          "description": "The short version of description."
+        },
+        "lastModifiedTS": {
+          "$ref": "#/definitions/LastModifiedTS"
+        },
+        "createTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The created time of the record."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The user who created the record."
+        },
+        "updateTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The update time of the record."
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "The user who updated the record."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AtlasBaseModelObject"
-        },
-        {
-          "properties": {
-            "classifications": {
-              "type": "array",
-              "description": "An array of classifications.",
-              "items": {
-                "$ref": "#/definitions/AtlasClassification"
-              }
-            },
-            "longDescription": {
-              "type": "string",
-              "description": "The long version description."
-            },
-            "name": {
-              "type": "string",
-              "description": "The name of the glossary object."
-            },
-            "qualifiedName": {
-              "type": "string",
-              "description": "The qualified name of the glossary object."
-            },
-            "shortDescription": {
-              "type": "string",
-              "description": "The short version of description."
-            },
-            "lastModifiedTS": {
-              "$ref": "#/definitions/LastModifiedTS"
-            },
-            "createTime": {
-              "type": "integer",
-              "format": "int64",
-              "description": "The created time of the record."
-            },
-            "createdBy": {
-              "type": "string",
-              "description": "The user who created the record."
-            },
-            "updateTime": {
-              "type": "integer",
-              "format": "int64",
-              "description": "The update time of the record."
-            },
-            "updatedBy": {
-              "type": "string",
-              "description": "The user who updated the record."
-            }
-          }
         }
       ],
       "description": "The glossary base object."
@@ -4703,33 +4649,31 @@
     "AtlasGlossaryCategory": {
       "type": "object",
       "title": "AtlasGlossaryCategory",
+      "properties": {
+        "anchor": {
+          "$ref": "#/definitions/AtlasGlossaryHeader"
+        },
+        "childrenCategories": {
+          "type": "array",
+          "description": "An array of children categories.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedCategoryHeader"
+          }
+        },
+        "parentCategory": {
+          "$ref": "#/definitions/AtlasRelatedCategoryHeader"
+        },
+        "terms": {
+          "type": "array",
+          "description": "An array of related term headers.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedTermHeader"
+          }
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AtlasGlossaryBaseObject"
-        },
-        {
-          "properties": {
-            "anchor": {
-              "$ref": "#/definitions/AtlasGlossaryHeader"
-            },
-            "childrenCategories": {
-              "type": "array",
-              "description": "An array of children categories.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedCategoryHeader"
-              }
-            },
-            "parentCategory": {
-              "$ref": "#/definitions/AtlasRelatedCategoryHeader"
-            },
-            "terms": {
-              "type": "array",
-              "description": "An array of related term headers.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedTermHeader"
-              }
-            }
-          }
         }
       ],
       "description": "The glossary category."
@@ -4737,27 +4681,25 @@
     "AtlasGlossaryExtInfo": {
       "type": "object",
       "title": "AtlasGlossaryExtInfo",
+      "properties": {
+        "categoryInfo": {
+          "type": "object",
+          "description": "The glossary category information.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AtlasGlossaryCategory"
+          }
+        },
+        "termInfo": {
+          "type": "object",
+          "description": "The glossary term information.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AtlasGlossaryTerm"
+          }
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AtlasGlossary"
-        },
-        {
-          "properties": {
-            "categoryInfo": {
-              "type": "object",
-              "description": "The glossary category information.",
-              "additionalProperties": {
-                "$ref": "#/definitions/AtlasGlossaryCategory"
-              }
-            },
-            "termInfo": {
-              "type": "object",
-              "description": "The glossary term information.",
-              "additionalProperties": {
-                "$ref": "#/definitions/AtlasGlossaryTerm"
-              }
-            }
-          }
         }
       ],
       "description": "The extended information of glossary."
@@ -4784,176 +4726,174 @@
     "AtlasGlossaryTerm": {
       "type": "object",
       "title": "AtlasGlossaryTerm",
+      "properties": {
+        "abbreviation": {
+          "type": "string",
+          "description": "The abbreviation of the term."
+        },
+        "templateName": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "anchor": {
+          "$ref": "#/definitions/AtlasGlossaryHeader"
+        },
+        "antonyms": {
+          "type": "array",
+          "description": "An array of related term headers as antonyms.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedTermHeader"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/TermStatus"
+        },
+        "nickName": {
+          "type": "string",
+          "description": "The nick name of the term."
+        },
+        "hierarchyInfo": {
+          "type": "array",
+          "description": "The hierarchy information of the term.",
+          "items": {
+            "$ref": "#/definitions/PurviewObjectId"
+          }
+        },
+        "resources": {
+          "type": "array",
+          "description": "An array of resource link for term",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "contacts": {
+          "type": "object",
+          "description": "The dictionary of contacts for terms. Key could be Expert or Steward.",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ContactBasic"
+            }
+          }
+        },
+        "attributes": {
+          "$ref": "#/definitions/TermCustomAttributes"
+        },
+        "assignedEntities": {
+          "type": "array",
+          "description": "An array of related object IDs.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedObjectId"
+          }
+        },
+        "categories": {
+          "type": "array",
+          "description": "An array of term categorization headers.",
+          "items": {
+            "$ref": "#/definitions/AtlasTermCategorizationHeader"
+          }
+        },
+        "classifies": {
+          "type": "array",
+          "description": "An array of related term headers.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedTermHeader"
+          }
+        },
+        "examples": {
+          "type": "array",
+          "description": "An array of examples.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isA": {
+          "type": "array",
+          "description": "An array of related term headers indicating the is-a relationship.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedTermHeader"
+          }
+        },
+        "preferredTerms": {
+          "type": "array",
+          "description": "An array of preferred related term headers.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedTermHeader"
+          }
+        },
+        "preferredToTerms": {
+          "type": "array",
+          "description": "An array of related term headers that are preferred to.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedTermHeader"
+          }
+        },
+        "replacedBy": {
+          "type": "array",
+          "description": "An array of related term headers that are replaced by.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedTermHeader"
+          }
+        },
+        "replacementTerms": {
+          "type": "array",
+          "description": "An array of related term headers for replacement.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedTermHeader"
+          }
+        },
+        "seeAlso": {
+          "type": "array",
+          "description": "An array of related term headers for see also.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedTermHeader"
+          }
+        },
+        "synonyms": {
+          "type": "array",
+          "description": "An array of related term headers as synonyms.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedTermHeader"
+          }
+        },
+        "translatedTerms": {
+          "type": "array",
+          "description": "An array of translated related term headers.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedTermHeader"
+          }
+        },
+        "translationTerms": {
+          "type": "array",
+          "description": "An array of related term headers for translation.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedTermHeader"
+          }
+        },
+        "usage": {
+          "type": "string",
+          "description": "The usage of the term."
+        },
+        "validValues": {
+          "type": "array",
+          "description": "An array of related term headers as valid values.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedTermHeader"
+          }
+        },
+        "validValuesFor": {
+          "type": "array",
+          "description": "An array of related term headers as valid values for other records.",
+          "items": {
+            "$ref": "#/definitions/AtlasRelatedTermHeader"
+          }
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AtlasGlossaryBaseObject"
-        },
-        {
-          "properties": {
-            "abbreviation": {
-              "type": "string",
-              "description": "The abbreviation of the term."
-            },
-            "templateName": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            },
-            "anchor": {
-              "$ref": "#/definitions/AtlasGlossaryHeader"
-            },
-            "antonyms": {
-              "type": "array",
-              "description": "An array of related term headers as antonyms.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedTermHeader"
-              }
-            },
-            "status": {
-              "$ref": "#/definitions/TermStatus"
-            },
-            "nickName": {
-              "type": "string",
-              "description": "The nick name of the term."
-            },
-            "hierarchyInfo": {
-              "type": "array",
-              "description": "The hierarchy information of the term.",
-              "items": {
-                "$ref": "#/definitions/PurviewObjectId"
-              }
-            },
-            "resources": {
-              "type": "array",
-              "description": "An array of resource link for term",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "contacts": {
-              "type": "object",
-              "description": "The dictionary of contacts for terms. Key could be Expert or Steward.",
-              "additionalProperties": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/ContactBasic"
-                }
-              }
-            },
-            "attributes": {
-              "$ref": "#/definitions/TermCustomAttributes"
-            },
-            "assignedEntities": {
-              "type": "array",
-              "description": "An array of related object IDs.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedObjectId"
-              }
-            },
-            "categories": {
-              "type": "array",
-              "description": "An array of term categorization headers.",
-              "items": {
-                "$ref": "#/definitions/AtlasTermCategorizationHeader"
-              }
-            },
-            "classifies": {
-              "type": "array",
-              "description": "An array of related term headers.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedTermHeader"
-              }
-            },
-            "examples": {
-              "type": "array",
-              "description": "An array of examples.",
-              "items": {
-                "type": "string"
-              }
-            },
-            "isA": {
-              "type": "array",
-              "description": "An array of related term headers indicating the is-a relationship.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedTermHeader"
-              }
-            },
-            "preferredTerms": {
-              "type": "array",
-              "description": "An array of preferred related term headers.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedTermHeader"
-              }
-            },
-            "preferredToTerms": {
-              "type": "array",
-              "description": "An array of related term headers that are preferred to.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedTermHeader"
-              }
-            },
-            "replacedBy": {
-              "type": "array",
-              "description": "An array of related term headers that are replaced by.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedTermHeader"
-              }
-            },
-            "replacementTerms": {
-              "type": "array",
-              "description": "An array of related term headers for replacement.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedTermHeader"
-              }
-            },
-            "seeAlso": {
-              "type": "array",
-              "description": "An array of related term headers for see also.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedTermHeader"
-              }
-            },
-            "synonyms": {
-              "type": "array",
-              "description": "An array of related term headers as synonyms.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedTermHeader"
-              }
-            },
-            "translatedTerms": {
-              "type": "array",
-              "description": "An array of translated related term headers.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedTermHeader"
-              }
-            },
-            "translationTerms": {
-              "type": "array",
-              "description": "An array of related term headers for translation.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedTermHeader"
-              }
-            },
-            "usage": {
-              "type": "string",
-              "description": "The usage of the term."
-            },
-            "validValues": {
-              "type": "array",
-              "description": "An array of related term headers as valid values.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedTermHeader"
-              }
-            },
-            "validValuesFor": {
-              "type": "array",
-              "description": "An array of related term headers as valid values for other records.",
-              "items": {
-                "$ref": "#/definitions/AtlasRelatedTermHeader"
-              }
-            }
-          }
         }
       ],
       "description": "The glossary term."
@@ -5157,33 +5097,31 @@
     "AtlasRelatedObjectId": {
       "type": "object",
       "title": "AtlasRelatedObjectId",
+      "properties": {
+        "displayText": {
+          "type": "string",
+          "description": "The display text."
+        },
+        "entityStatus": {
+          "$ref": "#/definitions/Status"
+        },
+        "relationshipType": {
+          "type": "string"
+        },
+        "relationshipAttributes": {
+          "$ref": "#/definitions/AtlasStruct"
+        },
+        "relationshipGuid": {
+          "type": "string",
+          "description": "The GUID of the relationship."
+        },
+        "relationshipStatus": {
+          "$ref": "#/definitions/Status_AtlasRelationship"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AtlasObjectId"
-        },
-        {
-          "properties": {
-            "displayText": {
-              "type": "string",
-              "description": "The display text."
-            },
-            "entityStatus": {
-              "$ref": "#/definitions/Status"
-            },
-            "relationshipType": {
-              "type": "string"
-            },
-            "relationshipAttributes": {
-              "$ref": "#/definitions/AtlasStruct"
-            },
-            "relationshipGuid": {
-              "type": "string",
-              "description": "The GUID of the relationship."
-            },
-            "relationshipStatus": {
-              "$ref": "#/definitions/Status_AtlasRelationship"
-            }
-          }
         }
       ],
       "description": "Reference to an object-instance of AtlasEntity type used in relationship attribute values"
@@ -5225,61 +5163,59 @@
     "AtlasRelationship": {
       "type": "object",
       "title": "AtlasRelationship",
+      "properties": {
+        "createTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The created time of the record."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The user who created the record."
+        },
+        "end1": {
+          "$ref": "#/definitions/AtlasObjectId"
+        },
+        "end2": {
+          "$ref": "#/definitions/AtlasObjectId"
+        },
+        "guid": {
+          "type": "string",
+          "description": "The GUID of the relationship."
+        },
+        "homeId": {
+          "type": "string",
+          "description": "The home ID of the relationship."
+        },
+        "label": {
+          "type": "string",
+          "description": "The label of the relationship."
+        },
+        "provenanceType": {
+          "readOnly": false,
+          "description": "Used to record the provenance of an instance of an entity or relationship",
+          "type": "number"
+        },
+        "status": {
+          "$ref": "#/definitions/Status_AtlasRelationship"
+        },
+        "updateTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The update time of the record."
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "The user who updated the record."
+        },
+        "version": {
+          "type": "number",
+          "description": "The version of the relationship."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AtlasStruct"
-        },
-        {
-          "properties": {
-            "createTime": {
-              "type": "integer",
-              "format": "int64",
-              "description": "The created time of the record."
-            },
-            "createdBy": {
-              "type": "string",
-              "description": "The user who created the record."
-            },
-            "end1": {
-              "$ref": "#/definitions/AtlasObjectId"
-            },
-            "end2": {
-              "$ref": "#/definitions/AtlasObjectId"
-            },
-            "guid": {
-              "type": "string",
-              "description": "The GUID of the relationship."
-            },
-            "homeId": {
-              "type": "string",
-              "description": "The home ID of the relationship."
-            },
-            "label": {
-              "type": "string",
-              "description": "The label of the relationship."
-            },
-            "provenanceType": {
-              "readOnly": false,
-              "description": "Used to record the provenance of an instance of an entity or relationship",
-              "type": "number"
-            },
-            "status": {
-              "$ref": "#/definitions/Status_AtlasRelationship"
-            },
-            "updateTime": {
-              "type": "integer",
-              "format": "int64",
-              "description": "The update time of the record."
-            },
-            "updatedBy": {
-              "type": "string",
-              "description": "The user who updated the record."
-            },
-            "version": {
-              "type": "number",
-              "description": "The version of the relationship."
-            }
-          }
         }
       ],
       "description": "Atlas relationship instance."
@@ -5287,26 +5223,24 @@
     "AtlasRelationshipDef": {
       "type": "object",
       "title": "AtlasRelationshipDef",
+      "properties": {
+        "endDef1": {
+          "$ref": "#/definitions/AtlasRelationshipEndDef"
+        },
+        "endDef2": {
+          "$ref": "#/definitions/AtlasRelationshipEndDef"
+        },
+        "relationshipCategory": {
+          "$ref": "#/definitions/RelationshipCategory"
+        },
+        "relationshipLabel": {
+          "type": "string",
+          "description": "The label of the relationship."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AtlasStructDef"
-        },
-        {
-          "properties": {
-            "endDef1": {
-              "$ref": "#/definitions/AtlasRelationshipEndDef"
-            },
-            "endDef2": {
-              "$ref": "#/definitions/AtlasRelationshipEndDef"
-            },
-            "relationshipCategory": {
-              "$ref": "#/definitions/RelationshipCategory"
-            },
-            "relationshipLabel": {
-              "type": "string",
-              "description": "The label of the relationship."
-            }
-          }
         }
       ],
       "description": "AtlasRelationshipDef is a TypeDef that defines a relationship.\n<p>\nAs with other typeDefs the AtlasRelationshipDef has a name. Once created the RelationshipDef has a guid.\nThe name and the guid are the 2 ways that the RelationshipDef is identified.\n<p>\nRelationshipDefs have 2 ends, each of which specify cardinality, an EntityDef type name and name and optionally\nwhether the end is a container.\n<p>\nRelationshipDefs can have AttributeDefs - though only primitive types are allowed. <br>\nRelationshipDefs have a relationshipCategory specifying the UML type of relationship required <br>\nThe way EntityDefs and RelationshipDefs are intended to be used is that EntityDefs will define AttributeDefs these AttributeDefs\nwill not specify an EntityDef type name as their types.\n<p>\nRelationshipDefs introduce new attributes to the entity instances. For example\n<p>\nEntityDef A might have attributes attr1,attr2,attr3 <br>\nEntityDef B might have attributes attr4,attr5,attr6 <br>\nRelationshipDef AtoB might define 2 ends <br>\n\n<pre>\n   end1:  type A, name attr7\n   end2:  type B, name attr8  </pre>\n\n<p>\nWhen an instance of EntityDef A is created, it will have attributes attr1,attr2,attr3,attr7 <br>\nWhen an instance of EntityDef B is created, it will have attributes attr4,attr5,attr6,attr8\n<p>\nIn this way relationshipDefs can be authored separately from entityDefs and can inject relationship attributes into\nthe entity instances"
@@ -5343,21 +5277,19 @@
     },
     "AtlasRelationshipAttributeDef": {
       "type": "object",
+      "properties": {
+        "isLegacyAttribute": {
+          "type": "boolean",
+          "description": "Determines if it is a legacy attribute."
+        },
+        "relationshipTypeName": {
+          "type": "string",
+          "description": "The name of the relationship type."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AtlasAttributeDef"
-        },
-        {
-          "properties": {
-            "isLegacyAttribute": {
-              "type": "boolean",
-              "description": "Determines if it is a legacy attribute."
-            },
-            "relationshipTypeName": {
-              "type": "string",
-              "description": "The name of the relationship type."
-            }
-          }
         }
       ],
       "title": "AtlasRelationshipEndDef",
@@ -5402,20 +5334,18 @@
     "AtlasStructDef": {
       "type": "object",
       "title": "AtlasStructDef",
+      "properties": {
+        "attributeDefs": {
+          "type": "array",
+          "description": "An array of attribute definitions.",
+          "items": {
+            "$ref": "#/definitions/AtlasAttributeDef"
+          }
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/AtlasBaseTypeDef"
-        },
-        {
-          "properties": {
-            "attributeDefs": {
-              "type": "array",
-              "description": "An array of attribute definitions.",
-              "items": {
-                "$ref": "#/definitions/AtlasAttributeDef"
-              }
-            }
-          }
         }
       ],
       "description": "class that captures details of a struct-type."
@@ -6790,6 +6720,26 @@
           "description": "The error message."
         }
       }
+    },
+    "RelatedCategoryHeaders": {
+      "type": "object",
+      "description": "An array of related categories.",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/AtlasRelatedCategoryHeader"
+        }
+      }
+    },
+    "RelatedTermHeaders": {
+      "type": "object",
+      "description": "An array of related glossary terms for the given glossary or an empty list.",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/AtlasRelatedTermHeader"
+        }
+      }
     }
   },
   "parameters": {
@@ -7278,6 +7228,26 @@
         "modelAsString": true
       },
       "x-ms-parameter-location": "method"
+    },
+    "businessMetadata": {
+      "name": "BusinessMetadata",
+      "required": false,
+      "in": "body",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "BusinessMetadata"
+    },
+    "businessMetadataAttributes": {
+      "name": "businessMetadataAttributes",
+      "required": false,
+      "in": "body",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "businessMetadataAttributes"
     }
   }
 }
