@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2023-08-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-08-01'
 input-file:
-  - Microsoft.Community/preview/2023-08-01/communitytraining.json
+  - Microsoft.Community/preview/2023-08-01-preview/CommunityTrainings.json
 ```
 
 ---
