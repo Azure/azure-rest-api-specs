@@ -142,5 +142,4 @@ interface DstsApplication {
   listBySubscription is ArmListBySubscription<DstsApplicationResource>;
   listByResourceGroup is ArmResourceListByParent<DstsApplicationResource>;
   get is ArmResourceRead<DstsApplicationResource>;
-  delete is ArmResourceDeleteAsync<DstsApplicationResource>;
 }
