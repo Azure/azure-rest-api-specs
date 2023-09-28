@@ -248,12 +248,12 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/builds/{buildName}/getAuthToken": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/builds/{buildName}/listAuthToken": {
       "post": {
         "tags": [
           "Builds"
         ],
-        "operationId": "Builds_GetAuthToken",
+        "operationId": "Builds_ListAuthToken",
         "description": "Gets the token used to connect to the endpoint where source code can be uploaded for a build.",
         "parameters": [
           {
@@ -288,7 +288,7 @@
         },
         "x-ms-examples": {
           "Get Build Auth Token": {
-            "$ref": "./examples/Builds_GetAuthToken.json"
+            "$ref": "./examples/Builds_ListAuthToken.json"
           }
         }
       }
@@ -446,30 +446,18 @@
     "BuildToken": {
       "description": "Build Auth Token.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "Build auth token resource specific properties",
-          "type": "object",
-          "properties": {
-            "token": {
-              "type": "string",
-              "x-ms-secret": true,
-              "description": "Authentication token.",
-              "readOnly": true
-            },
-            "expires": {
-              "format": "date-time",
-              "description": "Token expiration date.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
+        "token": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "Authentication token.",
+          "readOnly": true
+        },
+        "expires": {
+          "format": "date-time",
+          "description": "Token expiration date.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
