@@ -1,11 +1,19 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "../service.tsp";
 
+using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace DevCenter;
+
+op DevCenterBaseResponse<
+  TParams extends TypeSpec.Reflection.Model,
+  TResponse,
+  Traits extends TypeSpec.Reflection.Model = {}
+> is Azure.Core.Foundations.Operation<TParams, TResponse, Traits, CloudError>;
 
 @doc("An error response from the service.")
 model CloudErrorBody {
@@ -37,6 +45,10 @@ error.
 model CloudError {
   @doc("Error body")
   error: CloudErrorBody;
+
+  @header("x-ms-error-code")
+  @doc("String error code indicating what went wrong.")
+  errorCode?: string;
 }
 
 @doc("Operation Error message")
@@ -79,4 +91,22 @@ model OperationStatus {
 
   @doc("Operation Error message")
   error?: OperationStatusError;
+}
+
+@doc("Project details.")
+@resource("projects")
+model Project {
+  @key("projectName")
+  @visibility("read")
+  @doc("Name of the project")
+  name: string;
+
+  @doc("Description of the project.")
+  description?: string;
+
+  @doc("""
+When specified, indicates the maximum number of Dev Boxes a single user can
+create across all pools in the project.
+""")
+  maxDevBoxesPerUser?: int32;
 }

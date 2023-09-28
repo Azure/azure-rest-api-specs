@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 
+using Azure.Core;
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -12,7 +13,7 @@ interface EnvironmentsOperations {
   @doc("Lists the environments for a project.")
   @route("/projects/{projectName}/environments")
   @get
-  ListEnvironments is Azure.Core.Foundations.Operation<
+  ListEnvironments is DevCenterBaseResponse<
     {
       @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
       @query
@@ -28,7 +29,7 @@ interface EnvironmentsOperations {
   @doc("Lists the environments for a project and user.")
   @route("/projects/{projectName}/users/{userId}/environments")
   @get
-  ListEnvironmentsByUser is Azure.Core.Foundations.Operation<
+  ListEnvironmentsByUser is DevCenterBaseResponse<
     {
       @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
       @query
@@ -51,7 +52,7 @@ authentication context.
   @doc("Gets an environment")
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @get
-  GetEnvironmentByUser is Azure.Core.Foundations.Operation<
+  GetEnvironmentByUser is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -74,7 +75,7 @@ authentication context.
   @doc("Creates or updates an environment.")
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @put
-  CreateOrReplaceEnvironment is Azure.Core.Foundations.Operation<
+  CreateOrReplaceEnvironment is Foundations.LongRunningOperation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -95,36 +96,53 @@ authentication context.
       @body
       body: Environment;
     },
-    Environment
+    {
+      @statusCode
+      statusCode: 201;
+      @body body: Environment;
+    },
+    {},
+    CloudError
   >;
 
+// FIXME
   @doc("Deletes an environment and all its associated resources")
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @delete
-  DeleteEnvironment is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
+  DeleteEnvironment(
+    ...Foundations.ApiVersionParameter;
 
-      @doc("""
+    @doc("The DevCenter Project upon which to execute operations.")
+    @path
+    projectName: string;
+
+    @doc("""
 The AAD object id of the user. If value is 'me', the identity is taken from the
 authentication context.
 """)
-      @path
-      userId: string;
+    @path
+    userId: string;
 
-      @doc("The name of the environment.")
-      @path
-      environmentName: string;
-    },
-    OperationStatus | void
-  >;
+    @doc("The name of the environment.")
+    @path
+    environmentName: string;
+  ):
+    {
+      @statusCode
+      statusCode: 202;
+      @body body: OperationStatus;
+    } & { 
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string} | {
+      @statusCode
+      statusCode: 204;
+    } | CloudError;
 
   @doc("Lists all of the catalogs available for a project.")
   @route("/projects/{projectName}/catalogs")
   @get
-  ListCatalogsByProject is Azure.Core.Foundations.Operation<
+  ListCatalogsByProject is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -140,7 +158,7 @@ authentication context.
   @doc("Gets the specified catalog within the project")
   @route("/projects/{projectName}/catalogs/{catalogName}")
   @get
-  GetCatalog is Azure.Core.Foundations.Operation<
+  GetCatalog is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -156,7 +174,7 @@ authentication context.
   @doc("Lists all environment definitions available for a project.")
   @route("/projects/{projectName}/environmentDefinitions")
   @get
-  ListEnvironmentDefinitionsByProject is Azure.Core.Foundations.Operation<
+  ListEnvironmentDefinitionsByProject is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -172,7 +190,7 @@ authentication context.
   @doc("Lists all environment definitions available within a catalog.")
   @route("/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions")
   @get
-  ListEnvironmentDefinitionsByCatalog is Azure.Core.Foundations.Operation<
+  ListEnvironmentDefinitionsByCatalog is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -192,7 +210,7 @@ authentication context.
   @doc("Get an environment definition from a catalog.")
   @route("/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{definitionName}")
   @get
-  GetEnvironmentDefinition is Azure.Core.Foundations.Operation<
+  GetEnvironmentDefinition is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -212,7 +230,7 @@ authentication context.
   @doc("Lists all environment types configured for a project.")
   @route("/projects/{projectName}/environmentTypes")
   @get
-  ListEnvironmentTypes is Azure.Core.Foundations.Operation<
+  ListEnvironmentTypes is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -230,7 +248,7 @@ authentication context.
   @doc("Lists operations on the environment which have occurred within the past 90 days")
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/operations")
   @get
-  ListOperations is Azure.Core.Foundations.Operation<
+  ListOperations is DevCenterBaseResponse<
     {
       @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
       @query
@@ -262,7 +280,7 @@ authentication context.
   @doc("Gets an environment action result.")
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationId}")
   @get
-  GetOperation is Azure.Core.Foundations.Operation<
+  GetOperation is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -290,7 +308,7 @@ authentication context.
   @doc("Gets the logs for an operation on an environment.")
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationId}/logs")
   @get
-  GetLogsByOperation is Azure.Core.Foundations.Operation<
+  GetLogsByOperation is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -310,11 +328,7 @@ authentication context.
       @doc("The id of the operation on an environment.")
       @path
       operationId: string;
-
-      @doc("Accept header")
-      @header
-      Accept: "text/plain";
     },
-    void
+    string
   >;
 }
