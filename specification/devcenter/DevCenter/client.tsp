@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 using DevCenter;
 using Azure.ClientGenerator.Core;
 
-@useDependency(APIVersions.v2023_04_01)
+@useDependency(APIVersions.v2023_09_01_preview)
 namespace SDKCustomizations;
 
 @client({
@@ -28,6 +28,9 @@ interface EnvironmentClientOperations {//extends DevCenter.EnvironmentsOperation
     ListEnvironmentDefinitionsByCatalog is DevCenter.EnvironmentsOperations.ListEnvironmentDefinitionsByCatalog;
     GetEnvironmentDefinition is DevCenter.EnvironmentsOperations.GetEnvironmentDefinition;
     ListEnvironmentTypes is DevCenter.EnvironmentsOperations.ListEnvironmentTypes;
+    ListOperations is DevCenter.EnvironmentsOperations.ListOperations;
+    GetOperation is DevCenter.EnvironmentsOperations.GetOperation;
+    GetLogsByOperation is DevCenter.EnvironmentsOperations.GetLogsByOperation;
 }
 
 @client({
