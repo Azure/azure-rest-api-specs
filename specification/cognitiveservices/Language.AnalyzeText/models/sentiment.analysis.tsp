@@ -1,8 +1,6 @@
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../common.tsp";
-import "./common.models.tsp";
 
 namespace Language.AnalyzeText;
 
@@ -159,7 +157,7 @@ model TargetConfidenceScoreLabel {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model SentimentLroResult extends AnalyzeTextLroResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  kind: AnalyzeTextLroResultsKind.SentimentAnalysisLroResults;
+  kind: AnalyzeTextLroResultsKind.SentimentAnalysisLROResults;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: SentimentResponse;

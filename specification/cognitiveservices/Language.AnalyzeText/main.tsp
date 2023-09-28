@@ -15,6 +15,7 @@ import "./models/key.phrase.extraction.tsp";
 import "./models/language.detection.tsp";
 import "./models/pii.entity.recognition.tsp";
 import "./models/sentiment.analysis.tsp";
+import "./models/summarization.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

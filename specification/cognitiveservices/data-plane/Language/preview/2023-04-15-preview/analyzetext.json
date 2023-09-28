@@ -259,6 +259,103 @@
         "flows"
       ]
     },
+    "AbstractiveSummarizationLroResult": {
+      "type": "object",
+      "description": "An object representing the results for an Abstractive Summarization task.",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/AbstractiveSummarizationResult"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLroResult"
+        }
+      ],
+      "x-ms-discriminator-value": "AbstractiveSummarizationLROResults"
+    },
+    "AbstractiveSummarizationLroTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Abstractive Summarization task.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AbstractiveSummarizationTaskParameters"
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLroTask"
+        }
+      ],
+      "x-ms-discriminator-value": "AbstractiveSummarization"
+    },
+    "AbstractiveSummarizationResult": {
+      "type": "object",
+      "description": "An object representing the pre-build summarization results of each document.",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "documents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "AbstractiveSummarizationResultBase": {
+      "type": "object",
+      "description": "An object representing the summarization results of each document.",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "documents"
+      ]
+    },
+    "AbstractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for the pre-build Abstractive Summarization task.",
+      "properties": {
+        "sentenceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "It controls the approximate number of sentences in the output summaries."
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType",
+          "description": "String index type"
+        }
+      },
+      "required": [
+        "sentenceCount",
+        "stringIndexType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
     "AbstractiveSummarizationTaskParametersBase": {
       "type": "object",
       "description": "Supported parameters for an Abstractive Summarization task.",
@@ -276,6 +373,45 @@
       "required": [
         "sentenceCount",
         "stringIndexType"
+      ]
+    },
+    "AbstractiveSummary": {
+      "type": "object",
+      "description": "An object representing a single summary with context for given document.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of the summary."
+        },
+        "contexts": {
+          "type": "array",
+          "description": "The context list of the summary.",
+          "items": {
+            "$ref": "#/definitions/SummaryContext"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AbstractiveSummaryDocumentResult": {
+      "type": "object",
+      "description": "An object representing the pre-build summarization results of each document.",
+      "properties": {
+        "summaries": {
+          "$ref": "#/definitions/AbstractiveSummary",
+          "description": "A list of abstractive summaries."
+        }
+      },
+      "required": [
+        "summaries"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
       ]
     },
     "AnalyzeTextDocumentError": {
@@ -520,15 +656,17 @@
     "AnalyzeTextLroResultsKind": {
       "type": "string",
       "enum": [
-        "SentimentAnalysisLroResults",
-        "EntityRecognitionLroResults",
-        "PiiEntityRecognitionLroResults",
-        "KeyPhraseExtractionLroResults",
-        "EntityLinkingLroResults",
-        "HealthcareLroResults",
-        "CustomEntityRecognitionLroResults",
-        "CustomSingleLabelClassificationLroResults",
-        "CustomMultiLabelClassificationLroResults"
+        "SentimentAnalysisLROResults",
+        "EntityRecognitionLROResults",
+        "PiiEntityRecognitionLROResults",
+        "KeyPhraseExtractionLROResults",
+        "EntityLinkingLROResults",
+        "HealthcareLROResults",
+        "CustomEntityRecognitionLROResults",
+        "CustomSingleLabelClassificationLROResults",
+        "CustomMultiLabelClassificationLROResults",
+        "ExtractiveSummarizationLROResults",
+        "AbstractiveSummarizationLROResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLroResultsKind",
@@ -564,7 +702,9 @@
         "Healthcare",
         "CustomEntityRecognition",
         "CustomSingleLabelClassification",
-        "CustomMultiLabelClassification"
+        "CustomMultiLabelClassification",
+        "ExtractiveSummarization",
+        "AbstractiveSummarization"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLroTaskKind",
@@ -994,7 +1134,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "CustomEntityRecognitionLroResults"
+      "x-ms-discriminator-value": "CustomEntityRecognitionLROResults"
     },
     "CustomLabelClassificationResult": {
       "type": "object",
@@ -1031,7 +1171,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "CustomMultiLabelClassificationLroResults"
+      "x-ms-discriminator-value": "CustomMultiLabelClassificationLROResults"
     },
     "CustomMultiLabelClassificationLroTask": {
       "type": "object",
@@ -1102,7 +1242,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "CustomSingleLabelClassificationLroResults"
+      "x-ms-discriminator-value": "CustomSingleLabelClassificationLROResults"
     },
     "CustomSingleLabelClassificationLroTask": {
       "type": "object",
@@ -1409,7 +1549,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "EntityLinkingLroResults"
+      "x-ms-discriminator-value": "EntityLinkingLROResults"
     },
     "EntityLinkingLroTask": {
       "type": "object",
@@ -1498,7 +1638,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "EntityRecognitionLroResults"
+      "x-ms-discriminator-value": "EntityRecognitionLROResults"
     },
     "Error": {
       "type": "object",
@@ -1579,6 +1719,156 @@
         "error"
       ]
     },
+    "ExtractedSummaryDocumentResult": {
+      "type": "object",
+      "description": "A ranked list of sentences representing the extracted summary.",
+      "properties": {
+        "sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtractedSummarySentence"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "sentences"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ]
+    },
+    "ExtractedSummarySentence": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The extracted sentence text."
+        },
+        "rankScore": {
+          "type": "number",
+          "format": "double",
+          "description": "A double value representing the relevance of the sentence within the summary. Higher values indicate higher importance."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sentence offset from the start of the document, based on the value of the parameter StringIndexType."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the sentence."
+        }
+      },
+      "required": [
+        "text",
+        "rankScore",
+        "offset",
+        "length"
+      ]
+    },
+    "ExtractiveSummarizationLroResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/ExtractiveSummarizationResult"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLroResult"
+        }
+      ],
+      "x-ms-discriminator-value": "ExtractiveSummarizationLROResults"
+    },
+    "ExtractiveSummarizationLroTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Extractive Summarization task.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ExtractiveSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLroTask"
+        }
+      ],
+      "x-ms-discriminator-value": "ExtractiveSummarization"
+    },
+    "ExtractiveSummarizationResult": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/ExtractedSummaryDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "documents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "ExtractiveSummarizationSortingCriteria": {
+      "type": "string",
+      "description": "The sorting criteria to use for the results of Extractive Summarization.",
+      "enum": [
+        "Offset",
+        "Rank"
+      ],
+      "x-ms-enum": {
+        "name": "ExtractiveSummarizationSortingCriteria",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Offset",
+            "value": "Offset",
+            "description": "Indicates that results should be sorted in order of appearance in the text."
+          },
+          {
+            "name": "Rank",
+            "value": "Rank",
+            "description": "Indicates that results should be sorted in order of importance (i.e. rank score) according to the model."
+          }
+        ]
+      }
+    },
+    "ExtractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an Extractive Summarization task.",
+      "properties": {
+        "sentenceCount": {
+          "type": "integer",
+          "format": "int32",
+          "default": 3
+        },
+        "sortBy": {
+          "$ref": "#/definitions/ExtractiveSummarizationSortingCriteria",
+          "default": "Offset"
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
     "HealthRelationType": {
       "type": "string",
       "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
@@ -1603,7 +1893,21 @@
         "UnitOfCondition",
         "UnitOfExamination",
         "ValueOfCondition",
-        "ValueOfExamination"
+        "ValueOfExamination",
+        "BodySiteOfCondition",
+        "BodySiteOfTreatment",
+        "CourseOfCondition",
+        "CourseOfExamination",
+        "CourseOfMedication",
+        "CourseOfTreatment",
+        "ExaminationFindsCondition",
+        "ExpressionOfGene",
+        "ExpressionOfVariant",
+        "FrequencyOfCondition",
+        "MutationTypeOfGene",
+        "MutationTypeOfVariant",
+        "ScaleOfCondition",
+        "VariantOfGene"
       ],
       "x-ms-enum": {
         "name": "HealthRelationType",
@@ -1731,7 +2035,17 @@
         "MedicationForm",
         "MedicationRoute",
         "FamilyRelation",
-        "TreatmentName"
+        "TreatmentName",
+        "Ethnicity",
+        "Course",
+        "Expression",
+        "MutationType",
+        "ConditionScale",
+        "Allergen",
+        "Employment",
+        "LivingStatus",
+        "SubstanceUse",
+        "SubstanceUseAmount"
       ],
       "x-ms-enum": {
         "name": "HealthcareEntityCategory",
@@ -1770,7 +2084,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "HealthcareLroResults"
+      "x-ms-discriminator-value": "HealthcareLROResults"
     },
     "HealthcareLroTask": {
       "type": "object",
@@ -1801,6 +2115,11 @@
             "$ref": "#/definitions/HealthcareRelationEntity"
           },
           "x-ms-identifiers": []
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted relation."
         }
       },
       "required": [
@@ -2027,7 +2346,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "KeyPhraseExtractionLroResults"
+      "x-ms-discriminator-value": "KeyPhraseExtractionLROResults"
     },
     "KeyPhraseLroTask": {
       "type": "object",
@@ -2747,7 +3066,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "PiiEntityRecognitionLroResults"
+      "x-ms-discriminator-value": "PiiEntityRecognitionLROResults"
     },
     "PiiLroTask": {
       "type": "object",
@@ -3265,7 +3584,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "SentimentAnalysisLroResults"
+      "x-ms-discriminator-value": "SentimentAnalysisLROResults"
     },
     "SentimentRelationType": {
       "type": "string",

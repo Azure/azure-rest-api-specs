@@ -1,8 +1,7 @@
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../common.tsp";
-import "./common.models.tsp";
+
 
 namespace Language.AnalyzeText;
 

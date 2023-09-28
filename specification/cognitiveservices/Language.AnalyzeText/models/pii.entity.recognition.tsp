@@ -1,9 +1,6 @@
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../common.tsp";
-import "./entity.recognition.tsp";
-import "./common.models.tsp";
 
 namespace Language.AnalyzeText;
 
@@ -599,7 +596,7 @@ enum PiiCategories {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model PiiEntityRecognitionLroResult extends AnalyzeTextLroResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  kind: AnalyzeTextLroResultsKind.PiiEntityRecognitionLroResults;
+  kind: AnalyzeTextLroResultsKind.PiiEntityRecognitionLROResults;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: PiiResult;

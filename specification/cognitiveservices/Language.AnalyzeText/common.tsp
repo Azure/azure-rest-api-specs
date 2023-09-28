@@ -497,6 +497,7 @@ model SentimentConfidenceScores {
     negative: float64;
 }
 
+@added(Versions.v2023_04_01)
 @doc("Supported parameters for an Abstractive Summarization task.")
 model AbstractiveSummarizationTaskParametersBase {
     @doc("It controls the approximate number of sentences in the output summaries.")
