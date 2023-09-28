@@ -588,9 +588,9 @@ At the specified time, matching worker to a job will not start
 automatically.
 """)
 model ScheduleAndSuspendMode {
-  @doc("Scheduled time.")
   
-  scheduleAt?: utcDateTime;
+  @doc("Scheduled time.")
+  scheduleAt: utcDateTime;
 }
 
 @doc("Describes a matching mode where matching worker to a job is automatically started after job is queued successfully.")
