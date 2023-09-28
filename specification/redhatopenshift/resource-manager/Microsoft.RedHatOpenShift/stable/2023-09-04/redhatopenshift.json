@@ -2097,8 +2097,8 @@
           },
           "x-ms-identifiers": []
         },
-        "activeWorkerProfiles": {
-          "description": "The cluster active worker profiles.",
+        "workerProfilesStatus": {
+          "description": "The cluster worker profiles status.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WorkerProfile"
@@ -2253,7 +2253,6 @@
       "description": "ProvisioningState represents a provisioning state.",
       "enum": [
         "AdminUpdating",
-        "Cancelled",
         "Creating",
         "Deleting",
         "Failed",
@@ -2511,18 +2510,18 @@
           "description": "The size of the worker VMs."
         },
         "diskSizeGB": {
-          "format": "int32",
           "description": "The disk size of the worker VMs.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "subnetId": {
           "description": "The Azure resource ID of the worker subnet.",
           "type": "string"
         },
         "count": {
-          "format": "int32",
           "description": "The number of worker VMs.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "encryptionAtHost": {
           "$ref": "#/definitions/EncryptionAtHost",
