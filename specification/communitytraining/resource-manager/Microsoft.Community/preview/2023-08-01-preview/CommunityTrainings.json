@@ -9,13 +9,21 @@
       }
     ]
   },
-  "schemes": [ "https" ],
+  "schemes": [
+    "https"
+  ],
   "host": "management.azure.com",
-  "produces": [ "application/json" ],
-  "consumes": [ "application/json" ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": [ "user_impersonation" ]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -41,7 +49,9 @@
     "/providers/Microsoft.Community/operations": {
       "get": {
         "operationId": "Operations_List",
-        "tags": [ "Operations" ],
+        "tags": [
+          "Operations"
+        ],
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -75,7 +85,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Community/communityTrainings": {
       "get": {
         "operationId": "CommunityTrainings_ListBySubscription",
-        "tags": [ "CommunityTrainings" ],
+        "tags": [
+          "CommunityTrainings"
+        ],
         "description": "List CommunityTraining resources by subscription ID",
         "parameters": [
           {
@@ -112,7 +124,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Community/communityTrainings": {
       "get": {
         "operationId": "CommunityTrainings_ListByResourceGroup",
-        "tags": [ "CommunityTrainings" ],
+        "tags": [
+          "CommunityTrainings"
+        ],
         "description": "List CommunityTraining resources by resource group",
         "parameters": [
           {
@@ -152,7 +166,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Community/communityTrainings/{communityTrainingName}": {
       "get": {
         "operationId": "CommunityTrainings_Get",
-        "tags": [ "CommunityTrainings" ],
+        "tags": [
+          "CommunityTrainings"
+        ],
         "description": "Get a CommunityTraining",
         "parameters": [
           {
@@ -195,7 +211,9 @@
       },
       "put": {
         "operationId": "CommunityTrainings_Create",
-        "tags": [ "CommunityTrainings" ],
+        "tags": [
+          "CommunityTrainings"
+        ],
         "description": "Create a CommunityTraining",
         "parameters": [
           {
@@ -264,7 +282,9 @@
       },
       "patch": {
         "operationId": "CommunityTrainings_Update",
-        "tags": [ "CommunityTrainings" ],
+        "tags": [
+          "CommunityTrainings"
+        ],
         "description": "Update a CommunityTraining",
         "parameters": [
           {
@@ -334,7 +354,9 @@
       },
       "delete": {
         "operationId": "CommunityTrainings_Delete",
-        "tags": [ "CommunityTrainings" ],
+        "tags": [
+          "CommunityTrainings"
+        ],
         "description": "Delete a CommunityTraining",
         "parameters": [
           {
@@ -404,7 +426,10 @@
           "$ref": "#/definitions/CommunityTrainingProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
@@ -434,7 +459,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": [ "value" ]
+      "required": [
+        "value"
+      ]
     },
     "CommunityTrainingProperties": {
       "type": "object",
@@ -443,32 +470,51 @@
         "portalName": {
           "type": "string",
           "description": "The portal name (website name) of the Community Training instance",
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "portalAdminEmailAddress": {
           "type": "string",
           "description": "The email address of the portal admin",
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "portalOwnerEmailAddress": {
           "type": "string",
           "description": "The email address of the portal owner. Will be used as the primary contact",
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "identityConfiguration": {
           "$ref": "#/definitions/IdentityConfigurationProperties",
           "description": "The identity configuration of the Community Training resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "zoneRedundancyEnabled": {
           "type": "boolean",
           "description": "To indicate whether the Community Training instance has Zone Redundancy enabled",
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "disasterRecoveryEnabled": {
           "type": "boolean",
           "description": "To indicate whether the Community Training instance has Disaster Recovery enabled",
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -513,7 +559,11 @@
         "identityConfiguration": {
           "$ref": "#/definitions/IdentityConfigurationPropertiesUpdate",
           "description": "The identity configuration of the Community Training resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
@@ -524,50 +574,86 @@
         "identityType": {
           "type": "string",
           "description": "The identity type of the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "teamsEnabled": {
           "type": "boolean",
           "description": "To indicate whether the Community Training Resource has Teams enabled",
           "default": false,
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "tenantId": {
           "type": "string",
           "description": "The tenantId of the selected identity provider for the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "domainName": {
           "type": "string",
           "description": "The domain name of the selected identity provider for the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "clientId": {
           "type": "string",
           "description": "The clientId of the application registered in the selected identity provider for the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "clientSecret": {
           "type": "string",
           "format": "password",
           "description": "The client secret of the application registered in the selected identity provider for the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "b2cAuthenticationPolicy": {
           "type": "string",
           "description": "The name of the authentication policy registered in ADB2C for the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "b2cPasswordResetPolicy": {
           "type": "string",
           "description": "The name of the password reset policy registered in ADB2C for the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "customLoginParameters": {
           "type": "string",
           "description": "The custom login parameters for the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -585,50 +671,86 @@
         "identityType": {
           "type": "string",
           "description": "The identity type of the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "teamsEnabled": {
           "type": "boolean",
           "description": "To indicate whether the Community Training Resource has Teams enabled",
           "default": false,
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "tenantId": {
           "type": "string",
           "description": "The tenantId of the selected identity provider for the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "domainName": {
           "type": "string",
           "description": "The domain name of the selected identity provider for the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "clientId": {
           "type": "string",
           "description": "The clientId of the application registered in the selected identity provider for the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "clientSecret": {
           "type": "string",
           "format": "password",
           "description": "The client secret of the application registered in the selected identity provider for the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "b2cAuthenticationPolicy": {
           "type": "string",
           "description": "The name of the authentication policy registered in ADB2C for the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "b2cPasswordResetPolicy": {
           "type": "string",
           "description": "The name of the password reset policy registered in ADB2C for the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "customLoginParameters": {
           "type": "string",
           "description": "The custom login parameters for the Community Training Resource",
-          "x-ms-mutability": [ "read", "update", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
