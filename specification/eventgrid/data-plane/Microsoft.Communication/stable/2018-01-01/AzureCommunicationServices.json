@@ -65,11 +65,7 @@
         },
         "dispositionCode": {
           "description": "Router Job Disposition Code",
-          "type": "string",
-          "x-ms-enum": {
-            "name": "acsRouterDispositionCode",
-            "modelAsString": true
-          }
+          "type": "string"
         }
       }
     },
@@ -141,11 +137,7 @@
         },
         "dispositionCode": {
           "description": "Router Job Closed Disposition Code",
-          "type": "string",
-          "x-ms-enum": {
-            "name": "acsRouterDispositionCode",
-            "modelAsString": true
-          }
+          "type": "string"
         }
       }
     },
@@ -307,7 +299,7 @@
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           }
         },
-        "scheduledTimeUtc": {
+        "scheduledOn": {
           "description": "Router Job Scheduling Failed Scheduled Time in UTC",
           "type": "string",
           "format": "date-time"
@@ -363,7 +355,7 @@
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           }
         },
-        "scheduledTimeUtc": {
+        "scheduledOn": {
           "description": "Router Job Waiting For Activation Scheduled Time in UTC",
           "type": "string",
           "format": "date-time"
@@ -535,7 +527,7 @@
             "type": "string"
           }
         },
-        "offerTimeUtc": {
+        "offeredOn": {
           "description": "Router Worker Offer Issued Time in UTC",
           "type": "string",
           "format": "date-time"
@@ -1639,6 +1631,32 @@
         "labelOperator": {
           "description": "Router Job Worker Selector Label Operator",
           "type": "string",
+          "enum": [
+            {
+              "name": "=",
+              "operation": "Equal"
+            },
+            {
+              "name": "!=",
+              "operation": "NotEqual"
+            },
+            {
+              "name": ">",
+              "operation": "Greater"
+            },
+            {
+              "name": "<",
+              "operation": "Less"
+            },
+            {
+              "name": ">=",
+              "operation": "GreaterThanOrEqual"
+            },
+            {
+              "name": "<=",
+              "operation": "LessThanOrEqual"
+            }
+          ],
           "x-ms-enum": {
             "name": "acsRouterLabelOperator",
             "modelAsString": true
