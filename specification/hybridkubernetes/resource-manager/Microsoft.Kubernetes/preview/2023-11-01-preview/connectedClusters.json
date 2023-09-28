@@ -43,6 +43,9 @@
           "CreateClusterExample": {
             "$ref": "./examples/CreateClusterExample.json"
           },
+          "CreateCluster_KindExample": {
+            "$ref": "./examples/CreateCluster_KindExample.json"
+          },
           "CreateClusterPrivateLinkExample": {
             "$ref": "./examples/CreateClusterPrivateLinkExample.json"
           }
@@ -501,6 +504,9 @@
           "$ref": "#/definitions/ConnectedClusterIdentity",
           "description": "The identity of the connected cluster."
         },
+        "kind": {
+          "$ref": "#/definitions/ConnectedClusterKind"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ConnectedClusterProperties",
@@ -551,11 +557,19 @@
       },
       "description": "Identity for the connected cluster."
     },
+    "ConnectedClusterKind": {
+      "type": "string",
+      "description": "Indicates the kind of Arc connected cluster based on host infrastructure.",
+      "enum": [
+        "ProvisionedCluster"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectedClusterKind",
+        "modelAsString": true
+      }
+    },
     "ConnectedClusterProperties": {
       "type": "object",
-      "required": [
-        "agentPublicKeyCertificate"
-      ],
       "properties": {
         "agentPublicKeyCertificate": {
           "type": "string",
@@ -660,6 +674,18 @@
             "name": "AzureHybridBenefit",
             "modelAsString": true
           }
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "description": "The security profile for the connected cluster."
+        },
+        "oidcIssuerProfile": {
+          "$ref": "#/definitions/OIDCIssuerProfile",
+          "description": "The OIDC issuer profile of the connected cluster."
+        },
+        "arcAgentProfile": {
+          "description": "Arc agentry configuration for the provisioned cluster.",
+          "$ref": "#/definitions/ArcAgentProfile"
         },
         "miscellaneousProperties": {
           "description": "More properties related to the Connected Cluster",
@@ -797,6 +823,66 @@
           "readOnly": true
         }
       }
+    },
+    "SecurityProfile": {
+      "type": "object",
+      "properties": {
+        "workloadIdentity": {
+          "$ref": "#/definitions/SecurityProfileWorkloadIdentity",
+          "description": "Workload identity settings for the security profile. Workload identity enables Kubernetes applications to access Azure cloud resources securely with Azure AD."
+        }
+      },
+      "description": "The security profile for the Connected cluster."
+    },
+    "ArcAgentProfile": {
+      "description": "Defines the Arc Agent properties for the clusters.",
+      "type": "object",
+      "properties": {
+        "desiredAgentVersion": {
+          "type": "string",
+          "description": "Version of the Arc agents to be installed on the cluster resource"
+        },
+        "agentAutoUpgrade": {
+          "type": "string",
+          "description": "Indicates whether the Arc agents on the be upgraded automatically to the latest version. Defaults to Enabled.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AutoUpgradeOptions",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "OIDCIssuerProfile": {
+      "type": "object",
+      "properties": {
+        "issuerURL": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The OIDC issuer url of the Connected cluster."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the OIDC issuer is enabled.",
+          "default": false
+        }
+      },
+      "description": "The OIDC issuer profile of the Connected cluster."
+    },
+    "SecurityProfileWorkloadIdentity": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the workload identity is enabled.",
+          "default": false
+        }
+      },
+      "description": "The workload identity profile of the Connected cluster."
     },
     "SystemData": {
       "description": "Metadata pertaining to creation and last modification of the resource.",
