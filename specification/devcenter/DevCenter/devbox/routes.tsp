@@ -222,7 +222,7 @@ authentication context.
   @doc("Starts a Dev Box")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:start")
   @post
-  StartDevBox is DevCenterBaseResponse<
+  StartDevBox is Foundations.LongRunningOperation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -239,13 +239,20 @@ authentication context.
       @path
       devBoxName: string;
     },
-    OperationStatus
+    {
+      @statusCode
+      statusCode: 202;
+      @body
+      body: OperationStatus
+    },
+    {},
+    CloudError
   >;
 
   @doc("Stops a Dev Box")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:stop")
   @post
-  StopDevBox is DevCenterBaseResponse<
+  StopDevBox is Foundations.LongRunningOperation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -266,13 +273,20 @@ authentication context.
       @query
       hibernate: boolean;
     },
-    OperationStatus
+    {
+      @statusCode
+      statusCode: 202;
+      @body
+      body: OperationStatus
+    },
+    {},
+    CloudError
   >;
 
   @doc("Restarts a Dev Box")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:restart")
   @post
-  RestartDevBox is DevCenterBaseResponse<
+  RestartDevBox is Foundations.LongRunningOperation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -289,7 +303,14 @@ authentication context.
       @path
       devBoxName: string;
     },
-    OperationStatus
+    {
+      @statusCode
+      statusCode: 202;
+      @body
+      body: OperationStatus
+    },
+    {},
+    CloudError
   >;
 
   @doc("Gets RDP Connection info")
@@ -339,32 +360,31 @@ authentication context.
   >;
 
   @doc("Gets an action.")
-//   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}")
-//   @get
-//   GetAction is DevCenterBaseResponse<
-//     {
-//       @doc("The DevCenter Project upon which to execute operations.")
-//       @path
-//       projectName: string;
+  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}")
+  @get
+  GetAction is DevCenterBaseResponse<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @path
+      projectName: string;
 
-//       @doc("""
-// The AAD object id of the user. If value is 'me', the identity is taken from the
-// authentication context.
-// """)
-//       @path
-//       userId: string;
+      @doc("""
+The AAD object id of the user. If value is 'me', the identity is taken from the
+authentication context.
+""")
+      @path
+      userId: string;
 
-//       @doc("The name of a Dev Box.")
-//       @path
-//       devBoxName: string;
+      @doc("The name of a Dev Box.")
+      @path
+      devBoxName: string;
 
-//       @doc("The name of an action that will take place on a Dev Box.")
-//       @path
-//       actionName: string;
-//     },
-//     DevBoxAction
-//   >;
-  GetAction is StandardResourceOperations.ResourceRead<DevBoxAction>;
+      @doc("The name of an action that will take place on a Dev Box.")
+      @path
+      actionName: string;
+    },
+    DevBoxAction
+  >;
 
   @doc("Skips an occurrence of an action.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:skip")
