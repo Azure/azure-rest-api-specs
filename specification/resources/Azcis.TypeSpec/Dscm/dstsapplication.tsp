@@ -137,7 +137,7 @@ enum dstsApplicationProvisioningState {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @armResourceOperations
-interface DstsApplication {
+interface DstsApplications {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DstsApplicationResource>;
   listBySubscription is ArmListBySubscription<DstsApplicationResource>;
   listByResourceGroup is ArmResourceListByParent<DstsApplicationResource>;
