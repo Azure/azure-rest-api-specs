@@ -2436,7 +2436,7 @@
         "properties": {
           "type": "object",
           "description": "Properties of Bgp cidrs of mcc cache node resource",
-          "title": "Properties of bgp cidrs of mcc cahce node resource",
+          "title": "Properties of bgp cidrs of mcc cache node resource",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BgpCidrsConfiguration"
         }
@@ -2469,32 +2469,42 @@
       "properties": {
         "properties": {
           "type": "object",
-          "CustomerId": {
-            "type": "string",
-            "description": "mcc customer id"
-          },
-          "CacheNodeId": {
-            "type": "string",
-            "description": "identifier of the cache node"
-          },
-          "PrimaryAccountKey": {
-            "x-ms-secret": true,
-            "readOnly": true,
-            "type": "string",
-            "description": "primary account key. This is internal to mcc"
-          },
-          "SecondaryAccountKey": {
-            "x-ms-secret": true,
-            "readOnly": true,
-            "type": "string",
-            "description": "secondary account key. This is internal to mcc"
-          },
-          "RegistrationKey": {
-            "x-ms-secret": true,
-            "readOnly": true,
-            "type": "string",
-            "description": "iot device registration temporary registration key used one time"
-          }
+          "description": "Properties of  mcc cache node resource install script",
+          "title": "Properties of mcc cache node resource install script",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CacheNodeInstallProperties"
+        }
+      }
+    },
+    "CacheNodeInstallProperties": {
+      "type": "object",
+      "description": "install script properties",
+      "properties": {
+        "CustomerId": {
+          "type": "string",
+          "description": "mcc customer id"
+        },
+        "CacheNodeId": {
+          "type": "string",
+          "description": "identifier of the cache node"
+        },
+        "PrimaryAccountKey": {
+          "x-ms-secret": true,
+          "readOnly": true,
+          "type": "string",
+          "description": "primary account key. This is internal to mcc"
+        },
+        "SecondaryAccountKey": {
+          "x-ms-secret": true,
+          "readOnly": true,
+          "type": "string",
+          "description": "secondary account key. This is internal to mcc"
+        },
+        "RegistrationKey": {
+          "x-ms-secret": true,
+          "readOnly": true,
+          "type": "string",
+          "description": "iot device registration temporary registration key used one time"
         }
       }
     },
