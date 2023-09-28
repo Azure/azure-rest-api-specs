@@ -40,24 +40,6 @@
         }
       }
     },
-    "ResourceNotificationsResourceWithoutPayloadDetails": {
-      "description": "Describes the schema of the common properties across all ARN system topic deleted events",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "id of the resource which is being deleted",
-          "type": "string"
-        },
-        "name": {
-          "description": "name of the resource being deleted",
-          "type": "string"
-        },
-        "type": {
-          "description": "the type of the resource being deleted",
-          "type": "string"
-        }
-      }
-    },
     "ResourceNotificationsOperationalDetails": {
       "description": "details of operational info",
       "type": "object",
@@ -84,20 +66,6 @@
         "apiVersion": {
           "description": "api version of the resource properties bag",
           "type": "string"
-        }
-      }
-    },
-    "ResourceNotificationsResourceDeletedDetails": {
-      "description": "Describes the schema of the common properties across all ARN system topic deleted events",
-      "type": "object",
-      "properties": {
-        "resourceInfo": {
-          "description": "resourceInfo details for update event",
-          "$ref": "#/definitions/ResourceNotificationsResourceWithoutPayloadDetails"
-        },
-        "operationalInfo": {
-          "description": "details about operational info",
-          "$ref": "#/definitions/ResourceNotificationsOperationalDetails"
         }
       }
     }
