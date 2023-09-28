@@ -5,6 +5,7 @@ import "./models.tsp";
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace DevCenter;
 
@@ -490,5 +491,68 @@ authentication context.
       userId: string;
     },
     DevBoxListResult
+  >;
+
+  @added(APIVersions.v2023_09_01_preview)
+  @doc("Lists operations on the environment which have occurred within the past 90 days")
+  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/operations")
+  @get
+  ListOperations is DevCenterBaseResponse<
+    {
+      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
+      @query
+      top: int32;
+
+      @doc("An OData filter clause to apply to the operation.")
+      @query
+      filter: string;
+
+      @doc("The DevCenter Project upon which to execute operations.")
+      @path
+      projectName: string;
+
+      @doc("""
+The AAD object id of the user. If value is 'me', the identity is taken from the
+authentication context.
+""")
+      @path
+      userId: string;
+
+      @doc("The name of a Dev Box.")
+      @path
+      devBoxName: string;
+    },
+    DevBoxOperationListResult
+  >;
+
+  @added(APIVersions.v2023_09_01_preview)
+  @doc("Starts a Dev Box")
+  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:repair")
+  @post
+  RepairDevBox is Foundations.LongRunningOperation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @path
+      projectName: string;
+
+      @doc("""
+The AAD object id of the user. If value is 'me', the identity is taken from the
+authentication context.
+""")
+      @path
+      userId: string;
+
+      @doc("The name of a Dev Box.")
+      @path
+      devBoxName: string;
+    },
+    {
+      @statusCode
+      statusCode: 202;
+      @body
+      body: OperationStatus
+    },
+    {},
+    CloudError
   >;
 }

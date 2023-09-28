@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "../shared/models.tsp";
 
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
@@ -52,6 +53,23 @@ enum PowerState {
   @doc("The Dev Box is deallocated.") Deallocated,
   @doc("The Dev Box is powered off.") PoweredOff,
   @doc("The Dev Box is hibernated.") Hibernated,
+}
+
+@added(APIVersions.v2023_09_01_preview)
+enum DevBoxOperationKind {
+  @doc("The operation represents a Dev Box start.") Start,
+  @doc("The operation represents a Dev Box stop.") Stop,
+  @doc("The operation represents a Dev Box restart.") Restart,
+  @doc("The operation represents a Dev Box repair.") Repair,
+}
+
+@added(APIVersions.v2023_09_01_preview)
+enum DevBoxOperationStatus {
+  @doc("The operation has not started.") NotStarted,
+  @doc("The operation is running.") Running,
+  @doc("The operation succeeded.") Succeeded,
+  @doc("The operation was canceled.") Canceled,
+  @doc("The operation failed.") Failed,
 }
 
 enum DevBoxActionType {
@@ -354,5 +372,40 @@ model DevBoxActionDelayResult {
   action?: DevBoxAction;
 
   @doc("Information about the error that occurred. Only populated on error.")
+  error?: CloudErrorBody;
+}
+
+@added(APIVersions.v2023_09_01_preview)
+@doc("The action results list result.")
+model DevBoxOperationListResult is Azure.Core.Page<DevBoxOperation>;
+
+@added(APIVersions.v2023_09_01_preview)
+@doc("Information about an operation on a Dev Box.")
+@discriminator("kind")
+model DevBoxOperation {
+  @doc("The kind of operation that occurred.")
+  kind: DevBoxOperationKind;
+
+  @doc("The unique URI for the environment operation.")
+  uri: string;
+
+  @doc("Unique identifier for the environment operation.")
+  operationId: string;
+
+  @doc("The operation status.")
+  status: DevBoxOperationStatus;
+
+  @doc("The object ID of the actor which initiated the operation.")
+  createdByObjectId?: string;
+
+  @doc("The time the operation started.")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime?: utcDateTime;
+
+  @doc("The time the operation finished.")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTime?: utcDateTime;
+
+  @doc("Provisioning or operation error details. Populated only for error states.")
   error?: CloudErrorBody;
 }
