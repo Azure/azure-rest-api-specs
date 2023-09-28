@@ -973,7 +973,7 @@
           "200": {
             "description": "Request is successful. The operations returns the list of helm chart versions.",
             "schema": {
-              "$ref": "#/definitions/ArtifactOverviewList"
+              "$ref": "./pureProxyArtifact.json#/definitions/ProxyArtifactOverviewPropertiesValue"
             }
           },
           "202": {
@@ -1037,7 +1037,7 @@
           "200": {
             "description": "Request is successful. The operations returns the list of images.",
             "schema": {
-              "$ref": "#/definitions/ArtifactOverviewList"
+              "$ref": "./pureProxyArtifact.json#/definitions/ProxyArtifactOverviewPropertiesValue"
             }
           },
           "202": {
@@ -2036,40 +2036,6 @@
           ]
         }
       }
-    },
-    "ArtifactOverviewList": {
-      "description": "Proxy Artifact list.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ArtifactOverviewPropertiesValue"
-          },
-          "description": "The artifact list properties."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The URL to get the next set of results."
-        }
-      }
-    },
-    "ArtifactOverviewPropertiesValue": {
-      "allOf": [
-        {
-          "$ref": "./pureProxyArtifact.json#/definitions/ProxyArtifactOverviewPropertiesValue"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "artifactName": {
-              "type": "string",
-              "description": "The artifact name."
-            }
-          }
-        }
-      ]
     },
     "ListArtifactsBodyParameters": {
       "type": "object",
