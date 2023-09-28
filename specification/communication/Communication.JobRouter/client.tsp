@@ -1,9 +1,8 @@
 // client.tsp
-import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/versioning";
 
-import "./models.tsp";
+import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
