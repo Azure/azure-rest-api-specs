@@ -245,7 +245,7 @@
             "required": true,
             "description": "cacheNodes patch parameters",
             "schema": {
-              "$ref": "#/definitions/ConnectedCachePatchResource"
+              "$ref": "#/definitions/ConnectedCache"
             }
           }
         ],
@@ -528,7 +528,7 @@
             "required": true,
             "description": "cacheNodes patch parameters",
             "schema": {
-              "$ref": "#/definitions/ConnectedCachePatchResource"
+              "$ref": "#/definitions/ConnectedCache"
             }
           }
         ],
@@ -818,7 +818,7 @@
             "required": true,
             "description": "ispCustomers patch parameters",
             "schema": {
-              "$ref": "#/definitions/ConnectedCachePatchResource"
+              "$ref": "#/definitions/CreateOrUpdateCustomerRequest"
             }
           }
         ],
@@ -1120,7 +1120,7 @@
             "required": true,
             "description": "cacheNodes patch parameters",
             "schema": {
-              "$ref": "#/definitions/ConnectedCachePatchResource"
+              "$ref": "#/definitions/CreateOrUpdateCacheNodeRequest"
             }
           }
         ],
@@ -1465,13 +1465,19 @@
             "required": true,
             "description": "enterpriseMccCustomers patch parameters",
             "schema": {
-              "$ref": "#/definitions/ConnectedCachePatchResource"
+              "$ref": "#/definitions/CreateOrUpdateCustomerRequest"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "The update request was successful; response contains the updated enterpriseMccCustomer",
+            "schema": {
+              "$ref": "#/definitions/MccCustomerResource"
+            }
+          },
+          "201": {
+            "description": "The put request was successful; response contains the updated enterpriseMccCustomer",
             "schema": {
               "$ref": "#/definitions/MccCustomerResource"
             }
@@ -1768,7 +1774,7 @@
             "required": true,
             "description": "enterpriseMccCacheNode patch parameters",
             "schema": {
-              "$ref": "#/definitions/ConnectedCachePatchResource"
+              "$ref": "#/definitions/CreateOrUpdateCacheNodeRequest"
             }
           }
         ],
@@ -1776,7 +1782,13 @@
           "200": {
             "description": "The update request was successful; the response contains the updated enterpriseMccCacheNode",
             "schema": {
-              "$ref": "#/definitions/ConnectedCache"
+              "$ref": "#/definitions/MccCacheNodeResource"
+            }
+          },
+          "201": {
+            "description": "The put request was successful; response contains the updated enterpriseMccCacheNode",
+            "schema": {
+              "$ref": "#/definitions/MccCacheNodeResource"
             }
           },
           "202": {
@@ -3088,8 +3100,7 @@
         },
         "additionalCustomerProperties": {
           "type": "object",
-          "description": "additional Mcc Customer Json properties",
-          "additionalProperties": {}
+          "description": "additional Mcc Customer Json properties"
         },
         "cacheNode": {
           "type": "object",
@@ -3119,16 +3130,6 @@
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
           "description": "The error details"
-        }
-      }
-    },
-    "ConnectedCachePatchResource": {
-      "type": "object",
-      "description": "cacheNodes patch properties",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Additional tag configuration related properties"
         }
       }
     },
