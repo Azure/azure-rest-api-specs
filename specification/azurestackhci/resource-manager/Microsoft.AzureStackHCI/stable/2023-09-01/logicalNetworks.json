@@ -494,22 +494,25 @@
     "RouteTable": {
       "type": "object",
       "properties": {
-        "id": {
+        "etag": {
+          "readOnly": true,
           "type": "string",
-          "description": "Etag - Gets a unique read-only string that changes whenever the resource is updated."
+          "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "name": {
+          "readOnly": true,
           "type": "string",
-          "description": "Name - READ-ONLY; Resource name."
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RouteTablePropertiesFormat",
           "description": "Properties of the route table."
-        },
-        "type": {
-          "type": "string",
-          "description": "Type - READ-ONLY; Resource type."
         }
       },
       "description": "Route table resource."
