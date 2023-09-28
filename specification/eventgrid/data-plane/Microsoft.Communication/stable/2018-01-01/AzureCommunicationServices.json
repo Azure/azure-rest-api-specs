@@ -99,7 +99,7 @@
       "properties": {
         "queueInfo": {
           "description": "Router Job Queue Info",
-          "$ref": "#/definitions/AcsRouterQueueInfo"
+          "$ref": "#/definitions/AcsRouterQueueDetails"
         },
         "classificationPolicyId": {
           "description": "Router Job Classification Policy Id",
@@ -589,7 +589,7 @@
           "description": "Router Worker Registered Queue Info",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AcsRouterQueueInfo"
+            "$ref": "#/definitions/AcsRouterQueueDetails"
           }
         },
         "channelConfigurations": {
@@ -1570,7 +1570,7 @@
         }
       }
     },
-    "AcsRouterQueueInfo": {
+    "AcsRouterQueueDetails": {
       "description": "Router Queue Details",
       "type": "object",
       "properties": {
@@ -1589,8 +1589,7 @@
             "type": "string"
           }
         }
-      },
-      "x-ms-client-name": "AcsRouterQueueDetails"
+      }
     },
     "AcsRouterCommunicationError": {
       "description": "Router Communication Error",
