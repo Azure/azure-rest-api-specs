@@ -29,19 +29,12 @@
       "description": "Network Security Perimeter configuration",
       "type": "object",
       "readOnly": true,
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Fully qualified identifier of the resource",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the resource",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of the resource",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
           "description": "Properties of the Network Security Perimeter configuration"
@@ -54,7 +47,20 @@
       "readOnly": true,
       "properties": {
         "provisioningState": {
-          "type": "string"
+          "enum": [
+            "Creating",
+            "Updating",
+            "Accepted",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          },
+          "default": "Succeeded"
         },
         "provisioningIssues": {
           "description": "List of Provisioning Issues if any",
@@ -112,7 +118,10 @@
             "suggestedResourceIds": {
               "type": "array",
               "items": {
-                "type": "string"
+                "readOnly": true,
+                "type": "string",
+                "format": "arm-id",
+                "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
               },
               "readOnly": true,
               "description": "ARM IDs of resources that can be associated to the same perimeter to remediate the issue."
@@ -135,8 +144,10 @@
       "readOnly": true,
       "properties": {
         "id": {
-          "description": "Fully qualified identifier of the Network Security Perimeter",
-          "type": "string"
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
         },
         "perimeterGuid": {
           "description": "Guid of the Network Security Perimeter",
