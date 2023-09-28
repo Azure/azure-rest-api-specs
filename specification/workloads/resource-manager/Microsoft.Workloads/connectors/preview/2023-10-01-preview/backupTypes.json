@@ -298,6 +298,18 @@
         }
       }
     },
+    "UserAssignedIdentityProperties": {
+      "description": "User assigned managed identity properties.",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "principalId": {
+          "type": "string"
+        }
+      }
+    },
     "UserAssignedManagedIdentityDetails": {
       "description": "User assigned managed identity details.",
       "type": "object",
@@ -309,7 +321,7 @@
           "type": "string"
         },
         "userAssignedIdentityProperties": {
-          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentity"
+          "$ref": "#/definitions/UserAssignedIdentityProperties"
         }
       }
     },
