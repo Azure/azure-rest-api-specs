@@ -118,14 +118,14 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-09'
 input-file:
-  - Microsoft.AzureStackHCI/stable/2023-09-01-preview/common.json
-  - Microsoft.AzureStackHCI/stable/2023-09-01-preview/galleryImages.json
-  - Microsoft.AzureStackHCI/stable/2023-09-01-preview/logicalNetworks.json
-  - Microsoft.AzureStackHCI/stable/2023-09-01-preview/marketplaceGalleryImages.json
-  - Microsoft.AzureStackHCI/stable/2023-09-01-preview/networkInterfaces.json
-  - Microsoft.AzureStackHCI/stable/2023-09-01-preview/storageContainers.json
-  - Microsoft.AzureStackHCI/stable/2023-09-01-preview/virtualHardDisks.json
-  - Microsoft.AzureStackHCI/stable/2023-09-01-preview/virtualMachineInstances.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/common.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/logicalNetworks.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualMachineInstances.json
 ```
 
 
