@@ -2665,22 +2665,12 @@
     "Snapshot": {
       "description": "The snapshot resource.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the snapshot.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/SnapshotProperties",
           "description": "All snapshot properties.",
@@ -2749,12 +2739,6 @@
             "name": "CompositionType",
             "modelAsString": true
           }
-        },
-        "created": {
-          "description": "The time that the snapshot was created.",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
         },
         "expires": {
           "description": "The time that the snapshot will expire.",

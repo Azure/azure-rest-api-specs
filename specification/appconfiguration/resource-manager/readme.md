@@ -221,12 +221,6 @@ directive:
     from: appconfiguration.json
     where: $.definitions.Snapshot
     reason: This is a proxy for a data plane snapshot which doesn't support delete.
-  - suppress: RequiredReadOnlySystemData
-    from: appconfiguration.json
-    where: 
-      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/snapshots/{snapshotName}"].get'
-      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/snapshots/{snapshotName}"].put'
-    reason: This is a proxy for a data plane snapshot which doesn't have the info.
   - suppress: TrackedResourcePatchOperation
     from: appconfiguration.json
     where: $.definitions.Replica
