@@ -25,7 +25,7 @@ These are the global settings for the StorageDataLake API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2021-08
+tag: package-2021-06
 use-internal-constructors: true
 add-credentials: true
 ```
@@ -73,15 +73,6 @@ These settings apply only when `--tag=package-2021-06` is specified on the comma
 ``` yaml $(tag) == 'package-2021-06'
 input-file:
 - preview/2021-06-08/DataLakeStorage.json
-```
-
-### Tag: package-2021-08
-
-These settings apply only when `--tag=package-2021-08` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-08'
-input-file:
-- preview/2021-08-06/DataLakeStorage.json
 ```
 
 ### Suppression
