@@ -126,57 +126,6 @@ model DataProductNetworkAcls {
   defaultAction: DefaultAction;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "Suppressing updateable property warning for metrics ingestion endpoint for now."
-@doc("An ingestion endpoint for metrics relating to the parent resource")
-@singleton
-model MetricsIngestionEndpointResources
-  is ExtensionResource<MetricsIngestionEndpointProperties> {
-  @doc("Metrics Ingestion Endpoint Name")
-  @key("metricsIngestionEndpointName")
-  @segment("metricsIngestionEndpoints")
-  @path
-  name: string;
-}
-
-@doc("The resource-specific properties of a Metrics Ingestion Endpoint")
-model MetricsIngestionEndpointProperties {
-  @doc("Name of the External Metrics Ingress Gateway region where the compute should be deployed")
-  @visibility("create", "read")
-  ingressRegionName: string;
-
-  @visibility("read")
-  @doc("Event Hub URL to which the metrics should be sent for this resource")
-  eventHubUrl?: string;
-
-  @visibility("read")
-  @doc("Event Hub name to which the metrics should be sent for this resource")
-  eventHubName?: string;
-
-  @visibility("read")
-  @doc("Key Vault URL where the connection string exists for authentication")
-  keyVaultUrl?: string;
-
-  @visibility("read")
-  @doc("Resource id of KeyVault")
-  keyVaultResourceId?: string;
-
-  @visibility("read")
-  @doc("Resource id of user assigned managed identity")
-  userManagedIdentityResourceId?: string;
-
-  @visibility("read")
-  @doc("Principal id of user assigned managed identity created under managed resource group")
-  userManagedIdentityPrincipalId?: string;
-
-  @doc("The status of the last operation")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
-
-  @doc("Managed Resource Group Configuration")
-  @visibility("create", "read")
-  managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
-}
-
 @doc("The data product resource.")
 @added(Versions.v2023_11_15)
 model DataProduct is TrackedResource<DataProductProperties> {
@@ -358,6 +307,7 @@ model AccountSas {
 @added(Versions.v2023_11_15)
 model AccountSasToken {
   @doc("Field to specify storage account sas token.")
+  @secret
   storageAccountSasToken: string;
 }
 
@@ -365,6 +315,7 @@ model AccountSasToken {
 @added(Versions.v2023_11_15)
 model ContainerSasToken {
   @doc("Field to specify storage container sas token.")
+  @secret
   storageContainerSasToken: string;
 }
 
@@ -540,13 +491,6 @@ model DataProductVersion {
   version: string;
 }
 
-@armResourceOperations(MetricsIngestionEndpointProperties)
-interface MetricsIngestionEndpoints
-  extends ExtensionResourceOperations<
-      MetricsIngestionEndpointResources,
-      MetricsIngestionEndpointProperties
-    > {}
-
 @doc("Operations on data catalog resource.")
 @added(Versions.v2023_11_15)
 @armResourceOperations
@@ -581,7 +525,7 @@ interface DataTypes {
   deleteData is ArmResourceActionNoContentAsync<DataType, {}>;
 
   @doc("Generate sas token for storage container.")
-  generateStorageContainerSasToken is ArmResourceActionAsync<
+  generateStorageContainerSasToken is ArmResourceActionSync<
     DataType,
     ContainerSaS,
     ContainerSasToken
@@ -608,30 +552,30 @@ interface DataProducts {
   delete is ArmResourceDeleteWithoutOkAsync<DataProduct>;
 
   @doc("Generate sas token for storage account.")
-  generateStorageAccountSasToken is ArmResourceActionAsync<
+  generateStorageAccountSasToken is ArmResourceActionSync<
     DataProduct,
     AccountSas,
     AccountSasToken
   >;
 
   @doc("Initiate key rotation on Data Product.")
-  rotateKey is ArmResourceActionNoContentAsync<DataProduct, KeyVaultInfo>;
+  rotateKey is ArmResourceActionNoContentSync<DataProduct, KeyVaultInfo>;
 
   @doc("Assign role to the data product.")
-  addUserRole is ArmResourceActionAsync<
+  addUserRole is ArmResourceActionSync<
     DataProduct,
     RoleAssignmentCommonProperties,
     RoleAssignmentDetail
   >;
 
   @doc("Remove role from the data product.")
-  removeUserRole is ArmResourceActionNoContentAsync<
+  removeUserRole is ArmResourceActionNoContentSync<
     DataProduct,
     RoleAssignmentDetail
   >;
 
   @doc("List user roles associated with the data product.")
-  listRolesAssignments is ArmResourceActionAsync<
+  listRolesAssignments is ArmResourceActionSync<
     DataProduct,
     {},
     ListRoleAssignments

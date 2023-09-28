@@ -42,9 +42,6 @@
       "name": "Operations"
     },
     {
-      "name": "MetricsIngestionEndpoints"
-    },
-    {
       "name": "DataProductsCatalogs"
     },
     {
@@ -55,251 +52,6 @@
     }
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.NetworkAnalytics/metricsIngestionEndpoints": {
-      "get": {
-        "operationId": "MetricsIngestionEndpoints_List",
-        "tags": [
-          "MetricsIngestionEndpoints"
-        ],
-        "description": "List MetricsIngestionEndpointResources resources by parent",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResourcesListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetricsIngestionEndpoints_List_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_List_MaximumSet_Gen.json"
-          },
-          "MetricsIngestionEndpoints_List_MinimumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_List_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/{resourceUri}/providers/Microsoft.NetworkAnalytics/metricsIngestionEndpoints/default": {
-      "get": {
-        "operationId": "MetricsIngestionEndpoints_Get",
-        "tags": [
-          "MetricsIngestionEndpoints"
-        ],
-        "description": "Get a MetricsIngestionEndpointResources",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResources"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetricsIngestionEndpoints_Get_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Get_MaximumSet_Gen.json"
-          },
-          "MetricsIngestionEndpoints_Get_MinimumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Get_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "MetricsIngestionEndpoints_CreateOrUpdate",
-        "tags": [
-          "MetricsIngestionEndpoints"
-        ],
-        "description": "Create a MetricsIngestionEndpointResources",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResources"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'MetricsIngestionEndpointResources' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResources"
-            }
-          },
-          "201": {
-            "description": "Resource 'MetricsIngestionEndpointResources' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResources"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetricsIngestionEndpoints_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "MetricsIngestionEndpoints_Update",
-        "tags": [
-          "MetricsIngestionEndpoints"
-        ],
-        "description": "Update a MetricsIngestionEndpointResources",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResourcesUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResources"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetricsIngestionEndpoints_Update_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Update_MaximumSet_Gen.json"
-          },
-          "MetricsIngestionEndpoints_Update_MinimumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Update_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "MetricsIngestionEndpoints_Delete",
-        "tags": [
-          "MetricsIngestionEndpoints"
-        ],
-        "description": "Delete a MetricsIngestionEndpointResources",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource deleted successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetricsIngestionEndpoints_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Delete_MaximumSet_Gen.json"
-          },
-          "MetricsIngestionEndpoints_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Delete_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/providers/Microsoft.NetworkAnalytics/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -782,20 +534,6 @@
               "$ref": "#/definitions/RoleAssignmentDetail"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -810,11 +548,7 @@
           "DataProducts_AddUserRole_MaximumSet_Gen - generated by [MinimumSet] rule_MinimumSet_Gen": {
             "$ref": "./examples/DataProducts_AddUserRole_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/dataTypes": {
@@ -1322,20 +1056,6 @@
               "$ref": "#/definitions/ContainerSasToken"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1350,11 +1070,7 @@
           "DataTypes_GenerateStorageContainerSasToken_MaximumSet_Gen - generated by [MinimumSet] rule_MinimumSet_Gen": {
             "$ref": "./examples/DataTypes_GenerateStorageContainerSasToken_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/generateStorageAccountSasToken": {
@@ -1401,20 +1117,6 @@
               "$ref": "#/definitions/AccountSasToken"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1429,11 +1131,7 @@
           "DataProducts_GenerateStorageAccountSasToken_MaximumSet_Gen - generated by [MinimumSet] rule_MinimumSet_Gen": {
             "$ref": "./examples/DataProducts_GenerateStorageAccountSasToken_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/listRolesAssignments": {
@@ -1480,20 +1178,6 @@
               "$ref": "#/definitions/ListRoleAssignments"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1508,11 +1192,7 @@
           "DataProducts_ListRolesAssignments_MaximumSet_Gen - generated by [MinimumSet] rule_MinimumSet_Gen": {
             "$ref": "./examples/DataProducts_ListRolesAssignments_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/removeUserRole": {
@@ -1553,20 +1233,6 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
           "204": {
             "description": "Action completed successfully."
           },
@@ -1584,11 +1250,7 @@
           "DataProducts_RemoveUserRole_MaximumSet_Gen - generated by [MinimumSet] rule_MinimumSet_Gen": {
             "$ref": "./examples/DataProducts_RemoveUserRole_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProducts/{dataProductName}/rotateKey": {
@@ -1629,20 +1291,6 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
           "204": {
             "description": "Action completed successfully."
           },
@@ -1660,11 +1308,7 @@
           "DataProducts_RotateKey_MaximumSet_Gen - generated by [MinimumSet] rule_MinimumSet_Gen": {
             "$ref": "./examples/DataProducts_RotateKey_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataProductsCatalogs": {
@@ -1787,7 +1431,9 @@
       "properties": {
         "storageAccountSasToken": {
           "type": "string",
-          "description": "Field to specify storage account sas token."
+          "format": "password",
+          "description": "Field to specify storage account sas token.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -1921,7 +1567,9 @@
       "properties": {
         "storageContainerSasToken": {
           "type": "string",
-          "description": "Field to specify storage container sas token."
+          "format": "password",
+          "description": "Field to specify storage container sas token.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -2698,111 +2346,6 @@
         "location"
       ]
     },
-    "MetricsIngestionEndpointProperties": {
-      "type": "object",
-      "description": "The resource-specific properties of a Metrics Ingestion Endpoint",
-      "properties": {
-        "ingressRegionName": {
-          "type": "string",
-          "description": "Name of the External Metrics Ingress Gateway region where the compute should be deployed",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "eventHubUrl": {
-          "type": "string",
-          "description": "Event Hub URL to which the metrics should be sent for this resource",
-          "readOnly": true
-        },
-        "eventHubName": {
-          "type": "string",
-          "description": "Event Hub name to which the metrics should be sent for this resource",
-          "readOnly": true
-        },
-        "keyVaultUrl": {
-          "type": "string",
-          "description": "Key Vault URL where the connection string exists for authentication",
-          "readOnly": true
-        },
-        "keyVaultResourceId": {
-          "type": "string",
-          "description": "Resource id of KeyVault",
-          "readOnly": true
-        },
-        "userManagedIdentityResourceId": {
-          "type": "string",
-          "description": "Resource id of user assigned managed identity",
-          "readOnly": true
-        },
-        "userManagedIdentityPrincipalId": {
-          "type": "string",
-          "description": "Principal id of user assigned managed identity created under managed resource group",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation",
-          "readOnly": true
-        },
-        "managedResourceGroupConfiguration": {
-          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed Resource Group Configuration",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "ingressRegionName"
-      ]
-    },
-    "MetricsIngestionEndpointResources": {
-      "type": "object",
-      "description": "An ingestion endpoint for metrics relating to the parent resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MetricsIngestionEndpointProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "MetricsIngestionEndpointResourcesListResult": {
-      "type": "object",
-      "description": "The response of a MetricsIngestionEndpointResources list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The MetricsIngestionEndpointResources items on this page",
-          "items": {
-            "$ref": "#/definitions/MetricsIngestionEndpointResources"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "MetricsIngestionEndpointResourcesUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the MetricsIngestionEndpointResources."
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "The status of the current operation.",
@@ -3024,15 +2567,5 @@
       ]
     }
   },
-  "parameters": {
-    "Azure.ResourceManager.ResourceUriParameter": {
-      "name": "resourceUri",
-      "in": "path",
-      "description": "The fully qualified Azure Resource manager identifier of the resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    }
-  }
+  "parameters": {}
 }
