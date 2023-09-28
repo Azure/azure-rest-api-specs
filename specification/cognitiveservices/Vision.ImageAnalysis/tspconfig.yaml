@@ -4,16 +4,16 @@ parameters:
 emit:
  - "@azure-tools/typespec-autorest"
 options:
-  "@azure-tools/typespec-python":
-    package-mode: "dataplane"
-    package-dir: "azure-ai-vision-imageanalysis"
-    package-name: "{package-dir}"
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/../"
     output-file: "{azure-resource-provider-folder}/AzureAIVision/ImageAnalysis/{version-status}/{version}/generated.json"
     azure-resource-provider-folder: "data-plane"
     examples-directory: examples
     omit-unreachable-types: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-ai-vision-imageanalysis"
+    package-mode: "dataplane"
+    package-name: "{package-dir}"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.Vision.ImageAnalysis"
     namespace: "Azure.AI.Vision.ImageAnalysis"

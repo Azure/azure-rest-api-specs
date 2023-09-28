@@ -23,8 +23,6 @@ namespace ImageAnalysis;
 @action("analyze")
 op analyzeFromStream is Azure.Core.RpcOperation<
   {
-    ...SharedAnalyzeQuery,
-
     @doc("The format of the HTTP payload.")
     @header()
     contentType: "application/octet-stream";
@@ -32,6 +30,8 @@ op analyzeFromStream is Azure.Core.RpcOperation<
     @doc("The image to be analyzed")
     @body
     imageContent: bytes;
+
+    ...SharedAnalyzeQuery,
   },
   ImageAnalysisResult
 >;
@@ -44,8 +44,6 @@ op analyzeFromStream is Azure.Core.RpcOperation<
 @action("analyze")
 op analyzeFromUrl is Azure.Core.RpcOperation<
   {
-    ...SharedAnalyzeQuery,
-
     @doc("The format of the HTTP payload.")
     @header("Content-Type")
     contentType: "application/json";
@@ -53,6 +51,8 @@ op analyzeFromUrl is Azure.Core.RpcOperation<
     @doc("The image to be analyzed")
     @body
     imageContent: ImageUrl;
+
+    ...SharedAnalyzeQuery,
   },
   ImageAnalysisResult
 >;
@@ -66,8 +66,6 @@ op analyzeFromUrl is Azure.Core.RpcOperation<
 @action("segment")
 op segmentFromUrl is Azure.Core.RpcOperation<
 {
-  ...SharedSegmentQuery,
-
   @doc("The image to be analyzed")
   @body
   imageContent: ImageUrl;
@@ -75,6 +73,8 @@ op segmentFromUrl is Azure.Core.RpcOperation<
   @doc("The format of the HTTP payload.")
   @header()
   contentType: "application/json";
+
+  ...SharedSegmentQuery,
 },
 {
   @header 
@@ -92,8 +92,6 @@ op segmentFromUrl is Azure.Core.RpcOperation<
 @action("segment")
 op segmentFromStream is Azure.Core.RpcOperation<
 {
-  ...SharedSegmentQuery,
-
   @doc("The image to be analyzed")
   @body
   imageContent: bytes;
@@ -101,6 +99,8 @@ op segmentFromStream is Azure.Core.RpcOperation<
   @doc("The format of the HTTP payload.")
   @header()
   contentType: "application/octet-stream";
+
+  ...SharedSegmentQuery,
 },
 {
   @header 

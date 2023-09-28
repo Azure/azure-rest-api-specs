@@ -11,24 +11,24 @@ model SharedAnalyzeQuery {
     @doc("A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. If VisualFeatures is not specified, then Categories, Tags, and Description are included in the response by default.")
     visualFeatures?: Array<visualFeatures>;
 
-    @query("model-name")
-    @doc("The name of the custom trained model. This parameter needs to be specified if the parameter \"features\" is not specified.")
-    modelName?: string;
-
     @query("language")
     @doc("The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.")
     language?: string = "en";
+
+    @query("gender-neutral-caption")
+    @doc("Boolean flag for enabling gender-neutral captioning for caption and denseCaptions features. If this parameter is not specified, the default value is \"false\".")
+    genderNeutralCaption?: boolean = false;
 
     @query({
       name: "smartcrops-aspect-ratios",
       format: "csv"
     })
     @doc("A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).")
-    smartCropsAspectRatios?: Array<float64>;
+    smartCropsAspectRatios?: Array<float32>;
 
-    @query("gender-neutral-caption")
-    @doc("Boolean flag for enabling gender-neutral captioning for caption and denseCaptions features. If this parameter is not specified, the default value is \"false\".")
-    genderNeutralCaption?: boolean = false;
+    @query("model-name")
+    @doc("The name of the custom trained model. This parameter needs to be specified if the parameter \"features\" is not specified.")
+    modelName?: string;
 }
 
 model SharedSegmentQuery {
@@ -40,22 +40,22 @@ model SharedSegmentQuery {
 @doc("A basic rectangle")
 model BoundingBox {
   @doc("X coordinate")
-  x: int64;
+  x: int32;
 
   @doc("Y coordinate")
-  y: int64;
+  y: int32;
 
   @doc("Width of the box")
-  w: int64;
+  w: int32;
 
   @doc("Height of the box")
-  h: int64;
+  h: int32;
 }
 
 @doc("A brief description of what the image depicts.")
 model CaptionResult {
   @doc("The level of confidence the service has in the caption.")
-  confidence: float64;
+  confidence: float32;
 
   @doc("The text of the caption.")
   text: string;
@@ -64,7 +64,7 @@ model CaptionResult {
 @doc("A region identified for smart cropping. There will be one region returned for each requested aspect ratio.")
 model CropRegion {
   @doc("The aspect ratio of the crop region.")
-  aspectRatio: float64;
+  aspectRatio: float32;
 
   @doc("The bounding box of the crop region.")
   boundingBox: BoundingBox;
@@ -73,7 +73,7 @@ model CropRegion {
 @doc("A brief description of what the image depicts.")
 model DenseCaption {
   @doc("The level of confidence the service has in the caption.")
-  confidence: float64;
+  confidence: float32;
 
   @doc("The text of the caption.")
   text: string;
@@ -105,13 +105,13 @@ model DetectedPerson {
 
   @doc("Gets the confidence value of the detected person.")
   @visibility("read")
-  confidence: float64;
+  confidence: float32;
 }
 
 @doc("A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.")
 model DocumentLine {
   @doc("The bounding box of the line.")
-  boundingBox: Array<float64>;
+  boundingBox: Array<float32>;
 
   @doc("Concatenated content of the contained elements in reading order.")
   content: string;
@@ -123,22 +123,22 @@ model DocumentLine {
 @doc("The content and layout elements extracted from a page from the input.")
 model DocumentPage {
   @doc("The general orientation of the content in clockwise direction, measured in degrees between (-180, 180].")
-  angle: float64;
+  angle: float32;
 
   @doc("The height of the image/PDF in pixels/inches, respectively.")
-  height: float64;
+  height: float32;
 
   @doc("Extracted lines from the page, potentially containing both textual and visual elements.")
   lines: Array<DocumentLine>;
 
   @doc("1-based page number in the input document.")
-  pageNumber: int64;
+  pageNumber: int32;
 
   @doc("Location of the page in the reading order concatenated content.")
   spans: Array<DocumentSpan>;
 
   @doc("The width of the image/PDF in pixels/inches, respectively.")
-  width: float64;
+  width: float32;
 
   @doc("Extracted words from the page.")
   words: Array<DocumentWord>;
@@ -147,16 +147,16 @@ model DocumentPage {
 @doc("Contiguous region of the concatenated content property, specified as an offset and length.")
 model DocumentSpan {
   @doc("Number of characters in the content represented by the span.")
-  length: int64;
+  length: int32;
 
   @doc("Zero-based index of the content represented by the span.")
-  offset: int64;
+  offset: int32;
 }
 
 @doc("An object representing observed text styles.")
 model DocumentStyle {
   @doc("Confidence of correctly identifying the style.")
-  confidence: float64;
+  confidence: float32;
 
   @doc("Is content handwritten or not.")
   isHandwritten: boolean;
@@ -168,10 +168,10 @@ model DocumentStyle {
 @doc("A word object consisting of a contiguous sequence of characters. For non-space delimited languages,\r\nsuch as Chinese, Japanese, and Korean, each character is represented as its own word.")
 model DocumentWord {
   @doc("Bounding box of the word.")
-  boundingBox: Array<float64>;
+  boundingBox: Array<float32>;
 
   @doc("Confidence of correctly extracting the word.")
-  confidence: float64;
+  confidence: float32;
 
   @doc("Text content of the word.")
   content: string;
@@ -186,7 +186,7 @@ model ImageAnalysisResult {
   captionResult?: CaptionResult;
 
   @doc("A list of categories for the image.")
-  customModelResult?: ImagePredictionResult;
+  customModelResult?: CustomModelResult;
 
   @doc("A denseCaptionsResult for the image.")
   denseCaptionsResult?: DenseCaptionsResult;
@@ -216,14 +216,14 @@ model ImageAnalysisResult {
 @doc("The image metadata information such as height and width.")
 model ImageMetadata {
   @doc("The height of the image in pixels.")
-  height: int64;
+  height: int32;
 
   @doc("The width of the image in pixels.")
-  width: int64;
+  width: int32;
 }
 
-@doc("Describes the prediction result of an image.")
-model ImagePredictionResult {
+@doc("Describes the result of image analysis using a custom model.")
+model CustomModelResult {
   @doc("The list of predicted objects.")
   objectsResult: ObjectsResult;
 
@@ -270,7 +270,7 @@ model SmartCropsResult {
 @doc("An entity observation in the image, along with the confidence score.")
 model DetectedTag {
   @doc("The level of confidence that the entity was observed.")
-  confidence: float64;
+  confidence: float32;
 
   @doc("Name of the entity.")
   name: string;
