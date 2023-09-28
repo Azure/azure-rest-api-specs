@@ -1,9 +1,6 @@
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../common.tsp";
-import "./common.models.tsp";
-import "./entity.recognition.tsp";
 
 namespace Language.AnalyzeText;
 
@@ -77,7 +74,7 @@ model ClassificationDocumentResult extends DocumentResult{
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model CustomEntityRecognitionLroResult extends AnalyzeTextLroResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  kind: AnalyzeTextLroResultsKind.CustomEntityRecognitionLroResults;
+  kind: AnalyzeTextLroResultsKind.CustomEntityRecognitionLROResults;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: CustomEntitiesResult;
@@ -86,7 +83,7 @@ model CustomEntityRecognitionLroResult extends AnalyzeTextLroResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model CustomSingleLabelClassificationLroResult extends AnalyzeTextLroResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  kind: AnalyzeTextLroResultsKind.CustomSingleLabelClassificationLroResults;
+  kind: AnalyzeTextLroResultsKind.CustomSingleLabelClassificationLROResults;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: CustomLabelClassificationResult;
@@ -95,7 +92,7 @@ model CustomSingleLabelClassificationLroResult extends AnalyzeTextLroResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model CustomMultiLabelClassificationLroResult extends AnalyzeTextLroResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  kind: AnalyzeTextLroResultsKind.CustomMultiLabelClassificationLroResults;
+  kind: AnalyzeTextLroResultsKind.CustomMultiLabelClassificationLROResults;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: CustomLabelClassificationResult;

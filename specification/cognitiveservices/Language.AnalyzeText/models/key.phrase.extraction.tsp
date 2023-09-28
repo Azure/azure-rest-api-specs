@@ -1,8 +1,6 @@
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../common.tsp";
-import "./common.models.tsp";
 
 namespace Language.AnalyzeText;
 
@@ -54,7 +52,7 @@ model KeyPhrasesDocumentResult extends DocumentResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model KeyPhraseExtractionLroResult extends AnalyzeTextLroResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  kind: AnalyzeTextLroResultsKind.KeyPhraseExtractionLroResults;
+  kind: AnalyzeTextLroResultsKind.KeyPhraseExtractionLROResults;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: KeyPhraseResult;

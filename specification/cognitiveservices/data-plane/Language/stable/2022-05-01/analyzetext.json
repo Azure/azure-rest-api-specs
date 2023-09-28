@@ -259,25 +259,6 @@
         "flows"
       ]
     },
-    "AbstractiveSummarizationTaskParametersBase": {
-      "type": "object",
-      "description": "Supported parameters for an Abstractive Summarization task.",
-      "properties": {
-        "sentenceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "It controls the approximate number of sentences in the output summaries."
-        },
-        "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType",
-          "description": "String index type"
-        }
-      },
-      "required": [
-        "sentenceCount",
-        "stringIndexType"
-      ]
-    },
     "AnalyzeTextDocumentError": {
       "type": "object",
       "properties": {
@@ -520,15 +501,15 @@
     "AnalyzeTextLroResultsKind": {
       "type": "string",
       "enum": [
-        "SentimentAnalysisLroResults",
-        "EntityRecognitionLroResults",
-        "PiiEntityRecognitionLroResults",
-        "KeyPhraseExtractionLroResults",
-        "EntityLinkingLroResults",
-        "HealthcareLroResults",
-        "CustomEntityRecognitionLroResults",
-        "CustomSingleLabelClassificationLroResults",
-        "CustomMultiLabelClassificationLroResults"
+        "SentimentAnalysisLROResults",
+        "EntityRecognitionLROResults",
+        "PiiEntityRecognitionLROResults",
+        "KeyPhraseExtractionLROResults",
+        "EntityLinkingLROResults",
+        "HealthcareLROResults",
+        "CustomEntityRecognitionLROResults",
+        "CustomSingleLabelClassificationLROResults",
+        "CustomMultiLabelClassificationLROResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLroResultsKind",
@@ -994,7 +975,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "CustomEntityRecognitionLroResults"
+      "x-ms-discriminator-value": "CustomEntityRecognitionLROResults"
     },
     "CustomLabelClassificationResult": {
       "type": "object",
@@ -1031,7 +1012,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "CustomMultiLabelClassificationLroResults"
+      "x-ms-discriminator-value": "CustomMultiLabelClassificationLROResults"
     },
     "CustomMultiLabelClassificationLroTask": {
       "type": "object",
@@ -1102,7 +1083,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "CustomSingleLabelClassificationLroResults"
+      "x-ms-discriminator-value": "CustomSingleLabelClassificationLROResults"
     },
     "CustomSingleLabelClassificationLroTask": {
       "type": "object",
@@ -1409,7 +1390,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "EntityLinkingLroResults"
+      "x-ms-discriminator-value": "EntityLinkingLROResults"
     },
     "EntityLinkingLroTask": {
       "type": "object",
@@ -1498,7 +1479,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "EntityRecognitionLroResults"
+      "x-ms-discriminator-value": "EntityRecognitionLROResults"
     },
     "Error": {
       "type": "object",
@@ -1770,7 +1751,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "HealthcareLroResults"
+      "x-ms-discriminator-value": "HealthcareLROResults"
     },
     "HealthcareLroTask": {
       "type": "object",
@@ -2027,7 +2008,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "KeyPhraseExtractionLroResults"
+      "x-ms-discriminator-value": "KeyPhraseExtractionLROResults"
     },
     "KeyPhraseLroTask": {
       "type": "object",
@@ -2747,7 +2728,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "PiiEntityRecognitionLroResults"
+      "x-ms-discriminator-value": "PiiEntityRecognitionLROResults"
     },
     "PiiLroTask": {
       "type": "object",
@@ -3265,7 +3246,7 @@
           "$ref": "#/definitions/AnalyzeTextLroResult"
         }
       ],
-      "x-ms-discriminator-value": "SentimentAnalysisLroResults"
+      "x-ms-discriminator-value": "SentimentAnalysisLROResults"
     },
     "SentimentRelationType": {
       "type": "string",

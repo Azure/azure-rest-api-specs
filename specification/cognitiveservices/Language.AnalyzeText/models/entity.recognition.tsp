@@ -1,8 +1,6 @@
 
 import "@typespec/rest";
 import "@typespec/http";
-import "../common.tsp";
-import "./common.models.tsp";
 
 namespace Language.AnalyzeText;
 
@@ -78,7 +76,7 @@ model Entity {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model EntityRecognitionLroResult extends AnalyzeTextLroResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  kind: AnalyzeTextLroResultsKind.EntityRecognitionLroResults;
+  kind: AnalyzeTextLroResultsKind.EntityRecognitionLROResults;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: EntitiesResult;

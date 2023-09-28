@@ -1,8 +1,6 @@
+import "@typespec/versioning";
 
-import "@typespec/rest";
-import "@typespec/http";
-import "../common.tsp";
-import "./common.models.tsp";
+using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
 
@@ -144,7 +142,47 @@ enum HealthcareEntityCategory {
   FamilyRelation,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  TreatmentName
+  TreatmentName,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  Ethnicity,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  Course,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  Expression,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  MutationType,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  ConditionScale,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  Allergen,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  Employment,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  LivingStatus,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  SubstanceUse,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  SubstanceUseAmount,
 }
 
 @doc("Every relation is an entity graph of a certain relationType, where all entities are connected and have specific roles within the relation context.")
@@ -154,6 +192,10 @@ model HealthcareRelation {
 
   @doc("The entities in the relation.")
   entities: Array<HealthcareRelationEntity>;
+
+  @added(Versions.v2023_04_01)
+  @doc("Confidence score between 0 and 1 of the extracted relation.")
+  confidenceScore?: float64;
 }
 
 @doc("Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.")
@@ -219,7 +261,63 @@ enum HealthRelationType {
   ValueOfCondition,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ValueOfExamination
+  ValueOfExamination,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  BodySiteOfCondition,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  BodySiteOfTreatment,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  CourseOfCondition,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  CourseOfExamination,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  CourseOfMedication,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  CourseOfTreatment,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  ExaminationFindsCondition,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  ExpressionOfGene,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  ExpressionOfVariant,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  FrequencyOfCondition,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  MutationTypeOfGene,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  MutationTypeOfVariant,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  ScaleOfCondition,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  VariantOfGene, //14
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -290,7 +388,7 @@ model HealthcareEntityLink {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model HealthcareLroResult extends AnalyzeTextLroResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  kind: AnalyzeTextLroResultsKind.HealthcareLroResults;
+  kind: AnalyzeTextLroResultsKind.HealthcareLROResults;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: HealthcareResult;

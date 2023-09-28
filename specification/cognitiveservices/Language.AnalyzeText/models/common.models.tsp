@@ -1,9 +1,10 @@
 import "@typespec/http";
 import "@typespec/rest";
-import "../common.tsp";
+import "@typespec/versioning";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
 
@@ -67,6 +68,14 @@ enum AnalyzeTextLroTaskKind {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   CustomMultiLabelClassification,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  ExtractiveSummarization,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  AbstractiveSummarization
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -93,33 +102,41 @@ enum AnalyzeTextTaskResultsKind {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 enum AnalyzeTextLroResultsKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  SentimentAnalysisLroResults,
+  SentimentAnalysisLROResults,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  EntityRecognitionLroResults,
+  EntityRecognitionLROResults,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  PiiEntityRecognitionLroResults,
+  PiiEntityRecognitionLROResults,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  KeyPhraseExtractionLroResults,
+  KeyPhraseExtractionLROResults,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  EntityLinkingLroResults,
+  EntityLinkingLROResults,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  HealthcareLroResults,
+  HealthcareLROResults,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CustomEntityRecognitionLroResults,
+  CustomEntityRecognitionLROResults,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CustomSingleLabelClassificationLroResults,
+  CustomSingleLabelClassificationLROResults,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CustomMultiLabelClassificationLroResults
+  CustomMultiLabelClassificationLROResults,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  ExtractiveSummarizationLROResults,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_01)
+  AbstractiveSummarizationLROResults
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
