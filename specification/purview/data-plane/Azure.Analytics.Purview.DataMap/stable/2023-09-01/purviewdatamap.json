@@ -48,7 +48,7 @@
         "tags": [
           "Entity"
         ],
-        "description": "Create or update an entity in Atlas.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.\nFor each contact type, the maximum number of contacts is 20.",
+        "description": "Create or update an entity.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.\nFor each contact type, the maximum number of contacts is 20.",
         "operationId": "Entity_CreateOrUpdate",
         "x-ms-examples": {
           "Entity_Create": {
@@ -151,7 +151,7 @@
         "tags": [
           "Entity"
         ],
-        "description": "Create or update entities in Atlas in bulk.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.\nFor each contact type, the maximum number of contacts is 20.",
+        "description": "Create or update entities in bulk.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.\nFor each contact type, the maximum number of contacts is 20.",
         "operationId": "Entity_BulkCreateOrUpdate",
         "x-ms-examples": {
           "Entity_BulkCreateOrUpdate": {
@@ -1556,7 +1556,7 @@
         "tags": [
           "Glossary"
         ],
-        "description": "Get all glossaries registered with Atlas. Recommend using limit/offset to get pagination result. Recommended using 'ignoreTermsAndCategories=true' and fetch terms/categories separately using 'GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms' and 'GET '/datamap/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
+        "description": "Get all glossaries. Recommend using limit/offset to get pagination result. Recommended using 'ignoreTermsAndCategories=true' and fetch terms/categories separately using 'GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms' and 'GET '/datamap/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
         "operationId": "Glossary_List",
         "x-ms-examples": {
           "Glossary_List": {
@@ -2958,10 +2958,10 @@
           "Lineage"
         ],
         "description": "Get lineage info of the entity specified by GUID.",
-        "operationId": "Lineage_GetGraph",
+        "operationId": "Lineage_Get",
         "x-ms-examples": {
-          "Lineage_GetGraph": {
-            "$ref": "./examples/Lineage_GetGraph.json"
+          "Lineage_Get": {
+            "$ref": "./examples/Lineage_Get.json"
           }
         },
         "parameters": [
@@ -3737,7 +3737,7 @@
         "tags": [
           "Type"
         ],
-        "description": "List all type definitions in Atlas in bulk.",
+        "description": "List all type definitions in bulk.",
         "operationId": "Type_List",
         "x-ms-examples": {
           "Type_List": {
@@ -4146,7 +4146,7 @@
         }
       },
       "title": "AtlasBaseTypeDef",
-      "description": "Base class that captures common-attributes for all Atlas types."
+      "description": "Base class that captures common-attributes for all types."
     },
     "AtlasBusinessMetadataDef": {
       "type": "object",
@@ -5058,7 +5058,7 @@
         }
       },
       "title": "AtlasObjectId",
-      "description": "Reference to an object-instance of an Atlas type - like entity."
+      "description": "Reference to an object-instance of a type - like entity."
     },
     "PurviewObjectId": {
       "type": "object",
@@ -6047,7 +6047,7 @@
     "Status": {
       "type": "string",
       "title": "Status",
-      "description": "Status of the entity - can be active or deleted. Deleted entities are not removed from Atlas store.",
+      "description": "Status of the entity - can be active or deleted. Deleted entities are not removed.",
       "enum": [
         "ACTIVE",
         "DELETED"
@@ -6210,7 +6210,7 @@
         },
         "owner": {
           "type": "string",
-          "description": "The owner of the record. This is an Atlas native attribute."
+          "description": "The owner of the record."
         },
         "classification": {
           "type": "array",
@@ -6460,7 +6460,7 @@
         },
         "owner": {
           "type": "string",
-          "description": "The owner of the record. This is an Atlas native attribute."
+          "description": "The owner of the record."
         },
         "classification": {
           "type": "array",
@@ -7178,7 +7178,7 @@
     },
     "purviewAPIVersion": {
       "name": "api-version",
-      "description": "Version of Purview APIs",
+      "description": "The version of the API.",
       "in": "query",
       "required": true,
       "type": "string",
@@ -7186,7 +7186,7 @@
     },
     "atlasAPIVersion": {
       "name": "api-version",
-      "description": "Version of Atlas APIs",
+      "description": "The version of the API.",
       "in": "query",
       "required": false,
       "type": "string",
