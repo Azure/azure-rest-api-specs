@@ -35,8 +35,4 @@ using TypeSpec.Http;
     @doc("The 2023-04-01 service API version")
     @useDependency(Versions.v1_0_Preview_2)
     v2023_04_01: "2023-04-01",
-  
-    @doc("The 2023-09-01-preview service API version")
-    @useDependency(Versions.v1_0_Preview_2)
-    v2023_09_01_preview: "2023-09-01-preview",
   }
