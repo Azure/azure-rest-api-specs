@@ -30,11 +30,11 @@ tag: package-2023-09
 ```
 
 
-### Tag: package-2023-09-04
+### Tag: package-2023-09
 
-These settings apply only when `--tag=package-2023-09-04` is specified on the command line.
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-09-04'
+```yaml $(tag) == 'package-2023-09'
 input-file:
   - Microsoft.RedHatOpenShift/stable/2023-09-04/redhatopenshift.json
 ```
