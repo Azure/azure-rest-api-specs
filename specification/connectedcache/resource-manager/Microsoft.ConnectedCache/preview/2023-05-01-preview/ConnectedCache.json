@@ -2200,9 +2200,9 @@
           "$ref": "#/definitions/BgpConfiguration",
           "description": "bgp configuration of the cache node"
         },
-        "proxyIP": {
+        "proxyUrl": {
           "type": "string",
-          "description": "proxy ip property in the MCC Object"
+          "description": "proxy url property in the MCC Object"
         },
         "optionalProperty1": {
           "type": "string",
@@ -2434,13 +2434,23 @@
       ],
       "properties": {
         "properties": {
-          "type": "object",
-          "bgpCidrs": {
-            "type": "array",
-            "description": "Bgp cidr details of mcc cache node resource.",
-            "items": {
-              "type": "string"
-            }
+          "type": "object","description": "Properties of Bgp cidrs of mcc cache node resource",
+          "title": "Properties of bgp cidrs of mcc cahce node resource",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BgpCidrsConfiguration"          
+          }
+        }
+      }
+    },
+    "BgpCidrsConfiguration": {
+      "type": "object",
+      "description": "Bgp cidr details of mcc cache node resource",
+      "properties": {
+        "bgpCidrs": {
+          "type": "array",
+          "description": "Bgp cidr details of mcc cache node resource",
+          "items": {
+            "type": "string"
           }
         }
       }
