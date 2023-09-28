@@ -28,10 +28,23 @@ These are the global settings for the chaos.
 title: ChaosManagementClient
 description: Chaos Management Client
 openapi-type: arm
-tag: package-preview-2023-10
+tag: package-2023-11
 ```
 
+### Tag: package-2023-11
 
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.Chaos/stable/2023-11-01/capabilities.json
+  - Microsoft.Chaos/stable/2023-11-01/capabilityTypes.json
+  - Microsoft.Chaos/stable/2023-11-01/experiments.json
+  - Microsoft.Chaos/stable/2023-11-01/operationStatuses.json
+  - Microsoft.Chaos/stable/2023-11-01/operations.json
+  - Microsoft.Chaos/stable/2023-11-01/targetTypes.json
+  - Microsoft.Chaos/stable/2023-11-01/targets.json
+```
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
