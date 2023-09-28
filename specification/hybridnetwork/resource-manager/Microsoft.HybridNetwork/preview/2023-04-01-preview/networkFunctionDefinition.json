@@ -2056,46 +2056,20 @@
       }
     },
     "ArtifactOverviewPropertiesValue": {
-      "type": "object",
-      "properties": {
-        "artifactName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource"
+      "allOf": [
+        {
+          "$ref": "./pureProxyArtifact.json#/definitions/ProxyArtifactOverviewPropertiesValue"
         },
-        "artifactType": {
-          "type": "string",
-          "description": "The artifact type.",
-          "enum": [
-            "Unknown",
-            "OCIArtifact"
-          ],
-          "x-ms-enum": {
-            "name": "artifactType",
-            "modelAsString": true
+        {
+          "type": "object",
+          "properties": {
+            "artifactName": {
+              "type": "string",
+              "description": "The artifact name."
+            }
           }
-        },
-        "artifactVersion": {
-          "type": "string",
-          "description": "The artifact version."
-        },
-        "artifactState": {
-          "$ref": "./pureProxyArtifact.json#/definitions/ArtifactState",
-          "description": "The artifact state"
-        },
-        "shaHash": {
-          "type": "string",
-          "description": "The artifact sha hash."
-        },
-        "artifactSize": {
-          "type": "string",
-          "description": "The artifact size."
-        },
-        "mediaType": {
-          "type": "string",
-          "description": "The media type for artifact."
         }
-      }
+      ]
     },
     "ListArtifactsBodyParameters": {
       "type": "object",
