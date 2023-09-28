@@ -1508,7 +1508,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/networkSecurityPerimeterConfigurations/{associationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
       "get": {
         "tags": [
           "NetworkSecurityPerimeterConfigurations"
@@ -1531,7 +1531,7 @@
             "$ref": "#/parameters/resourceNameParameter"
           },
           {
-            "$ref": "./networksecurityperimeter.json#/parameters/AssociationNameParameter"
+            "$ref": "./networksecurityperimeter.json#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1600,7 +1600,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/networkSecurityPerimeterConfigurations/{associationName}/reconcile": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile": {
       "post": {
         "tags": [
           "NetworkSecurityPerimeterConfigurations"
@@ -1623,13 +1623,16 @@
             "$ref": "#/parameters/resourceNameParameter"
           },
           {
-            "$ref": "./networksecurityperimeter.json#/parameters/AssociationNameParameter"
+            "$ref": "./networksecurityperimeter.json#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
+          "200": {
+            "description": "Request to reconcile the configuration succeeded."
+          },
           "202": {
             "description": "Request to reconcile the configuration accepted."
           },
