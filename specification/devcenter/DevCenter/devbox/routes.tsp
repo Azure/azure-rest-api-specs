@@ -69,26 +69,6 @@ interface DevBoxesOperations {
     ScheduleListResult
   >;
 
-  @doc("Lists available schedules for a pool.")
-  @route("/projects/{projectName}/schedules")
-  @get
-  ListSchedulesByProject is DevCenterBaseResponse<
-    {
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query
-      top: int32;
-
-      @doc("An OData filter clause to apply to the operation.")
-      @query
-      filter: string;
-
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
-    },
-    ScheduleListResult
-  >;
-
   @doc("Gets a schedule.")
   @route("/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}")
   @get
