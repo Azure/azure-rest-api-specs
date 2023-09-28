@@ -26,7 +26,7 @@ These are the global settings for the Azure Red Hat OpenShift API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-09
+tag: package-2023-09-04
 ```
 
 
@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2023-09-04` is specified on the co
 input-file:
   - Microsoft.RedHatOpenShift/stable/2023-09-04/redhatopenshift.json
 ```
+
 ### Tag: package-preview-2023-07
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
