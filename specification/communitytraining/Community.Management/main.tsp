@@ -26,7 +26,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 model CommunityTraining is TrackedResource<CommunityTrainingProperties> {
   @doc("The name of the Community Training Resource")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @key("CommunityTrainingName")
+  @key("communityTrainingName")
   @segment("communityTrainings")
   @path
   name: string;

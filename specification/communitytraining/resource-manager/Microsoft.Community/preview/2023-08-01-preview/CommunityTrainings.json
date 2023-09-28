@@ -62,13 +62,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "ListOperations": {
             "$ref": "./examples/Operations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -99,13 +99,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "ListBySubscriptionCommunityTrainings": {
             "$ref": "./examples/CommunityTrainings_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -139,17 +139,17 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "ListByResourceGroupCommunityTrainings": {
             "$ref": "./examples/CommunityTrainings_ListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Community/communityTrainings/{CommunityTrainingName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Community/communityTrainings/{communityTrainingName}": {
       "get": {
         "operationId": "CommunityTrainings_Get",
         "tags": [ "CommunityTrainings" ],
@@ -165,7 +165,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "CommunityTrainingName",
+            "name": "communityTrainingName",
             "in": "path",
             "description": "The name of the Community Training Resource",
             "required": true,
@@ -208,7 +208,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "CommunityTrainingName",
+            "name": "communityTrainingName",
             "in": "path",
             "description": "The name of the Community Training Resource",
             "required": true,
@@ -252,13 +252,13 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "x-ms-examples": {
           "CreateCommunityTrainings": {
             "$ref": "./examples/CommunityTrainings_Create.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -277,7 +277,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "CommunityTrainingName",
+            "name": "communityTrainingName",
             "in": "path",
             "description": "The name of the Community Training Resource",
             "required": true,
@@ -322,13 +322,13 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "UpdateCommunityTrainings": {
             "$ref": "./examples/CommunityTrainings_Update.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -347,7 +347,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "CommunityTrainingName",
+            "name": "communityTrainingName",
             "in": "path",
             "description": "The name of the Community Training Resource",
             "required": true,
@@ -383,13 +383,13 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "DeleteCommunityTrainings": {
             "$ref": "./examples/CommunityTrainings_Delete.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
