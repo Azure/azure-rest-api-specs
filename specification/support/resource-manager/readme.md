@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-preview-2022-09
 ```
 
+### Suppression
+
+``` yaml
+directive:
+- suppress: TopLevelResourcesListBySubscription
+    from: Microsoft.Support/preview/2022-09-01-preview/support.json
+    where: $.definitions.FileWorkspaceDetails
+    reason: "Rule: The top-level resource 'FileWorkspaceDetails' does not have list by subscription operation, please add it. Justification: We cannot support get list for this resource type"
+```
 
 ### Tag: package-preview-2022-09
 
