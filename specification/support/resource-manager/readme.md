@@ -43,7 +43,7 @@ suppressions:
   - code: RPC-Put-V1-11
     from: Microsoft.Support/preview/2022-09-01-preview/support.json
     reason: "Rule: Any Put MUST contain 200 and 201 return codes. Justification: We have similar implementation for previous versions, this would be a breaking change, hence suppressing it"
-  - code: RPC-Get-V1-05
+  - code: TopLevelResourcesListBySubscription
     from: Microsoft.Support/preview/2022-09-01-preview/support.json
     where: $.definitions.FileWorkspaceDetails
     reason: "Rule: The top-level resource 'FileWorkspaceDetails' does not have list by subscription operation, please add it. Justification: We cannot support get list for this resource type"
