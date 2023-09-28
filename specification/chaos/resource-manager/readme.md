@@ -30,27 +30,6 @@ description: Chaos Management Client
 openapi-type: arm
 tag: package-preview-2023-10
 ```
-### Tag: package-2023-10-27-preview
-
-These settings apply only when `--tag=package-2023-10-27-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-10-27-preview'
-input-file:
-  - Microsoft.Chaos/preview/2023-10-27-preview/examples/CreateOrUpdateAPrivateAccess.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/examples/DeleteAPrivateAccess.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/examples/GetAPrivateAccess.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/examples/GetAPrivateAccess_WithPrivateEndpoint.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/examples/ListPrivateAccessInAResourceGroup.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/examples/ListPrivateAccessInASubscription.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/examples/PrivateAccessPatchUpdate.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/examples/PrivateAccessPrivateEndpointConnection_Approve.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/examples/PrivateAccessPrivateEndpointConnection_Delete.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/examples/PrivateAccessPrivateEndpointConnection_Get.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/examples/PrivateAccessPrivateEndpointConnection_ListByPrivateAccess.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/examples/PrivateAccessPrivateLinkResources_Get.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/privateAccesses.json
-  - Microsoft.Chaos/preview/2023-10-27-preview/types/privateAccesses.json
-```
 
 ### Tag: package-preview-2023-10
 
@@ -62,6 +41,7 @@ input-file:
   - Microsoft.Chaos/preview/2023-10-27-preview/capabilityTypes.json
   - Microsoft.Chaos/preview/2023-10-27-preview/experiments.json
   - Microsoft.Chaos/preview/2023-10-27-preview/operations.json
+  - Microsoft.Chaos/preview/2023-10-27-preview/privateAccesses.json
   - Microsoft.Chaos/preview/2023-10-27-preview/targetTypes.json
   - Microsoft.Chaos/preview/2023-10-27-preview/targets.json
 ```
