@@ -1,0 +1,994 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/hunts": {
+      "get": {
+        "x-ms-examples": {
+          "Get all hunts.": {
+            "$ref": "./examples/hunts/GetHunts.json"
+          }
+        },
+        "tags": [
+          "Hunts"
+        ],
+        "description": "Gets all hunts, without relations and comments.",
+        "operationId": "Hunts_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HuntList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/hunts/{huntId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a hunt.": {
+            "$ref": "./examples/hunts/GetHuntById.json"
+          }
+        },
+        "tags": [
+          "Hunts"
+        ],
+        "description": "Gets a hunt, without relations and comments.",
+        "operationId": "Hunts_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/HuntId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Hunt"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a hunt.": {
+            "$ref": "./examples/hunts/DeleteHunt.json"
+          }
+        },
+        "tags": [
+          "Hunts"
+        ],
+        "description": "Delete a hunt.",
+        "operationId": "Hunts_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/HuntId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a hunt.": {
+            "$ref": "./examples/hunts/CreateHunt.json"
+          }
+        },
+        "tags": [
+          "Hunts"
+        ],
+        "description": "Create or update a hunt",
+        "operationId": "Hunts_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/HuntId"
+          },
+          {
+            "$ref": "#/parameters/Hunt"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update the Hunt",
+            "schema": {
+              "$ref": "#/definitions/Hunt"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Hunt"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/hunts/{huntId}/relations": {
+      "get": {
+        "x-ms-examples": {
+          "Get all hunt relations.": {
+            "$ref": "./examples/hunts/GetHuntRelations.json"
+          }
+        },
+        "tags": [
+          "HuntRelations"
+        ],
+        "description": "Gets all hunt relations",
+        "operationId": "HuntRelations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/HuntId"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HuntRelationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/hunts/{huntId}/relations/{huntRelationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a hunt relation.": {
+            "$ref": "./examples/hunts/GetHuntRelationById.json"
+          }
+        },
+        "tags": [
+          "HuntRelations"
+        ],
+        "description": "Gets a hunt relation",
+        "operationId": "HuntRelations_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/HuntId"
+          },
+          {
+            "$ref": "#/parameters/HuntRelationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HuntRelation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a hunt relation.": {
+            "$ref": "./examples/hunts/DeleteHuntRelation.json"
+          }
+        },
+        "tags": [
+          "HuntRelations"
+        ],
+        "description": "Delete a hunt relation.",
+        "operationId": "HuntRelations_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/HuntId"
+          },
+          {
+            "$ref": "#/parameters/HuntRelationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a hunt relation.": {
+            "$ref": "./examples/hunts/CreateHuntRelation.json"
+          }
+        },
+        "tags": [
+          "HuntRelations"
+        ],
+        "description": "Creates or updates a hunt relation.",
+        "operationId": "HuntRelations_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/HuntId"
+          },
+          {
+            "$ref": "#/parameters/HuntRelationId"
+          },
+          {
+            "$ref": "#/parameters/HuntRelation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update the hunt relation",
+            "schema": {
+              "$ref": "#/definitions/HuntRelation"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/HuntRelation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/hunts/{huntId}/comments": {
+      "get": {
+        "x-ms-examples": {
+          "Get all hunt comments.": {
+            "$ref": "./examples/hunts/GetHuntComments.json"
+          }
+        },
+        "tags": [
+          "HuntComments"
+        ],
+        "description": "Gets all hunt comments",
+        "operationId": "HuntComments_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/HuntId"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HuntCommentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/hunts/{huntId}/comments/{huntCommentId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a hunt comment.": {
+            "$ref": "./examples/hunts/GetHuntCommentById.json"
+          }
+        },
+        "tags": [
+          "HuntComments"
+        ],
+        "description": "Gets a hunt comment",
+        "operationId": "HuntComments_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/HuntId"
+          },
+          {
+            "$ref": "#/parameters/HuntCommentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HuntComment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a hunt comment.": {
+            "$ref": "./examples/hunts/DeleteHuntComment.json"
+          }
+        },
+        "tags": [
+          "HuntComments"
+        ],
+        "description": "Delete a hunt comment.",
+        "operationId": "HuntComments_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/HuntId"
+          },
+          {
+            "$ref": "#/parameters/HuntCommentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a hunt comment.": {
+            "$ref": "./examples/hunts/CreateHuntComment.json"
+          }
+        },
+        "tags": [
+          "HuntComments"
+        ],
+        "description": "Creates or updates a hunt relation.",
+        "operationId": "HuntComments_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/HuntId"
+          },
+          {
+            "$ref": "#/parameters/HuntCommentId"
+          },
+          {
+            "$ref": "#/parameters/HuntComment"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update the hunt comment",
+            "schema": {
+              "$ref": "#/definitions/HuntComment"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/HuntComment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "HuntList": {
+      "description": "List all the hunts.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of hunts.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of hunts.",
+          "items": {
+            "$ref": "#/definitions/Hunt"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Hunt": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Hunt in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HuntProperties",
+          "description": "Hunt properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "HuntProperties": {
+      "description": "Describes hunt properties",
+      "properties": {
+        "displayName": {
+          "description": "The display name of the hunt",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the hunt",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the hunt.",
+          "enum": [
+            "New",
+            "Active",
+            "Closed",
+            "Backlog",
+            "Approved"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "status"
+          },
+          "default": "New"
+        },
+        "hypothesisStatus": {
+          "description": "The hypothesis status of the hunt.",
+          "enum": [
+            "Unknown",
+            "Invalidated",
+            "Validated"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "hypothesisStatus"
+          },
+          "default": "Unknown"
+        },
+        "attackTactics": {
+          "description": "A list of mitre attack tactics the hunt is associated with",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
+          },
+          "type": "array"
+        },
+        "attackTechniques": {
+          "description": "A list of a mitre attack techniques the hunt is associated with",
+          "items": {
+            "description": "Attack Technique",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "labels": {
+          "description": "List of labels relevant to this hunt ",
+          "items": {
+            "$ref": "../../../common/2.0/types.json#/definitions/Label"
+          },
+          "type": "array"
+        },
+        "owner": {
+          "$ref": "#/definitions/HuntOwner"
+        }
+      },
+      "required": [
+        "displayName",
+        "description"
+      ],
+      "type": "object"
+    },
+    "HuntRelationList": {
+      "description": "List of all the hunt relations",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of hunt relations.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of hunt relations",
+          "items": {
+            "$ref": "#/definitions/HuntRelation"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "HuntRelation": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Hunt Relation in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HuntRelationProperties",
+          "description": "Hunt Relation properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "HuntRelationProperties": {
+      "description": "Describes hunt relation properties",
+      "properties": {
+        "relatedResourceId": {
+          "description": "The id of the related resource",
+          "type": "string"
+        },
+        "relatedResourceName": {
+          "description": "The name of the related resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "relationType": {
+          "description": "The type of the hunt relation",
+          "type": "string",
+          "readOnly": true
+        },
+        "relatedResourceKind": {
+          "description": "The resource that the relation is related to",
+          "type": "string",
+          "readOnly": true
+        },
+        "labels": {
+          "description": "List of labels relevant to this hunt",
+          "items": {
+            "$ref": "../../../common/2.0/types.json#/definitions/Label"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "relatedResourceId"
+      ],
+      "type": "object"
+    },
+    "HuntCommentList": {
+      "description": "List of all hunt comments",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of hunt comments.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of hunt comments",
+          "items": {
+            "$ref": "#/definitions/HuntComment"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "HuntComment": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Hunt Comment in Azure Security Insights",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HuntCommentProperties",
+          "description": "Hunt Comment properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "HuntCommentProperties": {
+      "description": "Describes a hunt comment properties",
+      "properties": {
+        "message": {
+          "description": "The message for the comment",
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "HuntOwner": {
+      "description": "Describes a user that the hunt is assigned to",
+      "type": "object",
+      "properties": {
+        "email": {
+          "description": "The email of the user the hunt is assigned to.",
+          "type": "string"
+        },
+        "assignedTo": {
+          "description": "The name of the user the hunt is assigned to.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the user the hunt is assigned to.",
+          "format": "uuid",
+          "type": "string",
+          "x-nullable": true
+        },
+        "userPrincipalName": {
+          "description": "The user principal name of the user the hunt is assigned to.",
+          "type": "string"
+        },
+        "ownerType": {
+          "description": "The type of the owner the hunt is assigned to.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "User",
+            "Group"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "OwnerType",
+            "values": [
+              {
+                "description": "The hunt owner type is unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "The hunt owner type is an AAD user",
+                "value": "User"
+              },
+              {
+                "description": "The hunt owner type is an AAD group",
+                "value": "Group"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Hunt": {
+      "description": "The hunt",
+      "name": "hunt",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Hunt"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "HuntId": {
+      "description": "The hunt id (GUID)",
+      "in": "path",
+      "name": "huntId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "HuntRelation": {
+      "description": "The hunt relation",
+      "in": "body",
+      "name": "huntRelation",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/HuntRelation"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "HuntRelationId": {
+      "description": "The hunt relation id (GUID)",
+      "in": "path",
+      "name": "huntRelationId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "HuntComment": {
+      "description": "The hunt  comment",
+      "in": "body",
+      "name": "huntComment",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/HuntComment"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "HuntCommentId": {
+      "description": "The hunt comment id (GUID)",
+      "in": "path",
+      "name": "huntCommentId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

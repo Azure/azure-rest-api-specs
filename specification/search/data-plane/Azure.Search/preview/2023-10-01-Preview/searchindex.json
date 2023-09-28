@@ -1,0 +1,2815 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SearchIndexClient",
+    "description": "Client that can be used to query an index and upload, merge, or delete documents.",
+    "version": "2023-10-01-Preview",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true,
+      "syncMethods": "None"
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/indexes('{indexName}')",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/EndpointParameter"
+      },
+      {
+        "$ref": "#/parameters/IndexNameParameter"
+      }
+    ]
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/docs/$count": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "operationId": "Documents_Count",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Count-Documents"
+        },
+        "x-ms-examples": {
+          "SearchIndexCountDocuments": {
+            "$ref": "./examples/SearchIndexCountDocuments.json"
+          }
+        },
+        "description": "Queries the number of documents in the index.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
+    "/docs": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "operationId": "Documents_SearchGet",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Search-Documents"
+        },
+        "x-ms-examples": {
+          "SearchIndexSearchDocumentsGet": {
+            "$ref": "./examples/SearchIndexSearchDocumentsGet.json"
+          }
+        },
+        "description": "Searches for documents in the index.",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "type": "string",
+            "description": "A full-text search query expression; Use \"*\" or omit this parameter to match all documents.",
+            "x-ms-client-name": "SearchText"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "type": "boolean",
+            "description": "A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation.",
+            "x-nullable": false,
+            "x-ms-client-name": "IncludeTotalResultCount",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "facet",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "description": "The list of facet expressions to apply to the search query. Each facet expression contains a field name, optionally followed by a comma-separated list of name:value pairs.",
+            "x-ms-client-name": "Facets",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "The OData $filter expression to apply to the search query.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "highlight",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting.",
+            "x-ms-client-name": "HighlightFields",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "highlightPostTag",
+            "in": "query",
+            "type": "string",
+            "description": "A string tag that is appended to hit highlights. Must be set with highlightPreTag. Default is &lt;/em&gt;.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "highlightPreTag",
+            "in": "query",
+            "type": "string",
+            "description": "A string tag that is prepended to hit highlights. Must be set with highlightPostTag. Default is &lt;em&gt;.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "minimumCoverage",
+            "in": "query",
+            "type": "number",
+            "format": "double",
+            "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by a search query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 100.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.",
+            "x-ms-client-name": "OrderBy",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "queryType",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "simple",
+              "full",
+              "semantic"
+            ],
+            "x-ms-enum": {
+              "name": "QueryType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "simple",
+                  "name": "Simple",
+                  "description": "Uses the simple query syntax for searches. Search text is interpreted using a simple query language that allows for symbols such as +, * and \"\". Queries are evaluated across all searchable fields by default, unless the searchFields parameter is specified."
+                },
+                {
+                  "value": "full",
+                  "name": "Full",
+                  "description": "Uses the full Lucene query syntax for searches. Search text is interpreted using the Lucene query language which allows field-specific and weighted searches, as well as other advanced features."
+                },
+                {
+                  "value": "semantic",
+                  "name": "Semantic",
+                  "description": "Best suited for queries expressed in natural language as opposed to keywords. Improves precision of search results by re-ranking the top search results using a ranking model trained on the Web corpus."
+                }
+              ]
+            },
+            "x-nullable": false,
+            "description": "A value that specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "scoringParameter",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "x-ms-client-name": "ScoringParameters",
+            "description": "The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called 'mylocation' the parameter string would be \"mylocation--122.2,44.8\" (without the quotes).",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "scoringProfile",
+            "in": "query",
+            "type": "string",
+            "description": "The name of a scoring profile to evaluate match scores for matching documents in order to sort the results.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "semanticQuery",
+            "in": "query",
+            "type": "string",
+            "description": "Allows setting a separate search query that will be solely used for semantic reranking, semantic captions and semantic answers. Is useful for scenarios where there is a need to use different queries between the base retrieval and ranking phase, and the L2 semantic phase.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "semanticConfiguration",
+            "in": "query",
+            "type": "string",
+            "description": "The name of the semantic configuration that lists which fields should be used for semantic ranking, captions, highlights, and answers",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "semanticErrorHandling",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "partial",
+              "fail"
+            ],
+            "x-ms-enum": {
+              "name": "SemanticErrorHandling",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "partial",
+                  "name": "Partial",
+                  "description": "If the semantic processing fails, partial results still return. The definition of partial results depends on what semantic step failed and what was the reason for failure."
+                },
+                {
+                  "value": "fail",
+                  "name": "Fail",
+                  "description": "If there is an exception during the semantic processing step, the query will fail and return the appropriate HTTP code depending on the error."
+                }
+              ]
+            },
+            "description": "Allows the user to choose whether a semantic call should fail completely, or to return partial results (default).",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "semanticMaxWaitInMilliseconds",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 700,
+            "description": "Allows the user to set an upper bound on the amount of time it takes for semantic enrichment to finish processing before the request fails.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "debug",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "disabled",
+              "semantic"
+            ],
+            "x-ms-enum": {
+              "name": "QueryDebugMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "disabled",
+                  "name": "Disabled",
+                  "description": "No query debugging information will be returned."
+                },
+                {
+                  "value": "semantic",
+                  "name": "Semantic",
+                  "description": "Allows the user to further explore their Semantic search results."
+                }
+              ]
+            },
+            "description": "Enables a debugging tool that can be used to further explore your search results.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "searchFields",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "queryLanguage",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "none",
+              "en-us"
+            ],
+            "x-ms-enum": {
+              "name": "QueryLanguage",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "none",
+                  "name": "None",
+                  "description": "Query language not specified."
+                },
+                {
+                  "value": "en-us",
+                  "name": "EnUs",
+                  "description": "English (US)"
+                }
+              ]
+            },
+            "description": "The language of the query.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "speller",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "none",
+              "lexicon"
+            ],
+            "x-ms-enum": {
+              "name": "Speller",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "none",
+                  "name": "None",
+                  "description": "Speller not enabled."
+                },
+                {
+                  "value": "lexicon",
+                  "name": "Lexicon",
+                  "description": "Speller corrects individual query terms using a static lexicon for the language specified by the queryLanguage parameter."
+                }
+              ]
+            },
+            "description": "Improve search recall by spell-correcting individual search query terms.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "answers",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "none",
+              "extractive"
+            ],
+            "x-ms-enum": {
+              "name": "Answers",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "none",
+                  "name": "None",
+                  "description": "Do not return answers for the query."
+                },
+                {
+                  "value": "extractive",
+                  "name": "Extractive",
+                  "description": "Extracts answer candidates from the contents of the documents returned in response to a query expressed as a question in natural language."
+                }
+              ]
+            },
+            "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character '|' followed by the 'count-<number of answers>' option after the answers parameter value, such as 'extractive|count-3'. Default count is 1. The confidence threshold can be configured by appending the pipe character '|' followed by the 'threshold-<confidence threshold>' option after the answers parameter value, such as 'extractive|threshold-0.9'. Default threshold is 0.7.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "searchMode",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "any",
+              "all"
+            ],
+            "x-ms-enum": {
+              "name": "SearchMode",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "any",
+                  "name": "Any",
+                  "description": "Any of the search terms must be matched in order to count the document as a match."
+                },
+                {
+                  "value": "all",
+                  "name": "All",
+                  "description": "All of the search terms must be matched in order to count the document as a match."
+                }
+              ]
+            },
+            "x-nullable": false,
+            "description": "A value that specifies whether any or all of the search terms must be matched in order to count the document as a match.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "scoringStatistics",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "local",
+              "global"
+            ],
+            "x-ms-enum": {
+              "name": "ScoringStatistics",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "local",
+                  "name": "Local",
+                  "description": "The scoring statistics will be calculated locally for lower latency."
+                },
+                {
+                  "value": "global",
+                  "name": "Global",
+                  "description": "The scoring statistics will be calculated globally for more consistent scoring."
+                }
+              ]
+            },
+            "x-nullable": false,
+            "description": "A value that specifies whether we want to calculate scoring statistics (such as document frequency) globally for more consistent scoring, or locally, for lower latency.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "type": "string",
+            "description": "A value to be used to create a sticky session, which can help to get more consistent results. As long as the same sessionId is used, a best-effort attempt will be made to target the same replica set. Be wary that reusing the same sessionID values repeatedly can interfere with the load balancing of the requests across replicas and adversely affect the performance of the search service. The value used as sessionId cannot start with a '_' character.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use $skip due to this limitation, consider using $orderby on a totally-ordered key and $filter with a range query instead.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "captions",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "none",
+              "extractive"
+            ],
+            "x-ms-enum": {
+              "name": "Captions",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "none",
+                  "name": "None",
+                  "description": "Do not return captions for the query."
+                },
+                {
+                  "value": "extractive",
+                  "name": "Extractive",
+                  "description": "Extracts captions from the matching documents that contain passages relevant to the search query."
+                }
+              ]
+            },
+            "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to 'extractive', highlighting is enabled by default, and can be configured by appending the pipe character '|' followed by the 'highlight-<true/false>' option, such as 'extractive|highlight-true'. Defaults to 'None'.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "semanticFields",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of field names used for semantic search.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "Response containing documents that match the search criteria.",
+            "schema": {
+              "$ref": "#/definitions/SearchDocumentsResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
+    "/docs/search.post.search": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "operationId": "Documents_SearchPost",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/Search-Documents"
+        },
+        "x-ms-examples": {
+          "SearchIndexSearchDocumentsPost": {
+            "$ref": "./examples/SearchIndexSearchDocumentsPost.json"
+          }
+        },
+        "description": "Searches for documents in the index.",
+        "parameters": [
+          {
+            "name": "searchRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchRequest",
+              "description": "The Search request."
+            },
+            "description": "The definition of the Search request."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "Response containing documents that match the search criteria.",
+            "schema": {
+              "$ref": "#/definitions/SearchDocumentsResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
+    "/docs('{key}')": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "operationId": "Documents_Get",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/lookup-document"
+        },
+        "x-ms-examples": {
+          "SearchIndexGetDocument": {
+            "$ref": "./examples/SearchIndexGetDocument.json"
+          }
+        },
+        "description": "Retrieves a document from the index.",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "description": "The key of the document to retrieve.",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document.",
+            "x-ms-client-name": "SelectedFields"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response containing the requested document.",
+            "schema": {
+              "$ref": "#/definitions/LookupDocument"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
+    "/docs/search.suggest": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "operationId": "Documents_SuggestGet",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/suggestions"
+        },
+        "x-ms-examples": {
+          "SearchIndexSuggestDocumentsGet": {
+            "$ref": "./examples/SearchIndexSuggestDocumentsGet.json"
+          }
+        },
+        "description": "Suggests documents in the index that match the given partial query text.",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters.",
+            "x-ms-client-name": "SearchText"
+          },
+          {
+            "name": "suggesterName",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The name of the suggester as specified in the suggesters collection that's part of the index definition."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "An OData expression that filters the documents considered for suggestions.",
+            "x-ms-parameter-grouping": {
+              "name": "SuggestOptions"
+            }
+          },
+          {
+            "name": "fuzzy",
+            "in": "query",
+            "type": "boolean",
+            "description": "A value indicating whether to use fuzzy matching for the suggestions query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestions queries are slower and consume more resources.",
+            "x-ms-client-name": "UseFuzzyMatching",
+            "x-nullable": false,
+            "x-ms-parameter-grouping": {
+              "name": "SuggestOptions"
+            }
+          },
+          {
+            "name": "highlightPostTag",
+            "in": "query",
+            "type": "string",
+            "description": "A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting of suggestions is disabled.",
+            "x-ms-parameter-grouping": {
+              "name": "SuggestOptions"
+            }
+          },
+          {
+            "name": "highlightPreTag",
+            "in": "query",
+            "type": "string",
+            "description": "A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting of suggestions is disabled.",
+            "x-ms-parameter-grouping": {
+              "name": "SuggestOptions"
+            }
+          },
+          {
+            "name": "minimumCoverage",
+            "in": "query",
+            "type": "number",
+            "format": "double",
+            "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by a suggestions query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.",
+            "x-ms-parameter-grouping": {
+              "name": "SuggestOptions"
+            }
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "x-ms-client-name": "OrderBy",
+            "description": "The list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.",
+            "x-ms-parameter-grouping": {
+              "name": "SuggestOptions"
+            }
+          },
+          {
+            "name": "searchFields",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of field names to search for the specified search text. Target fields must be included in the specified suggester.",
+            "x-ms-parameter-grouping": {
+              "name": "SuggestOptions"
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of fields to retrieve. If unspecified, only the key field will be included in the results.",
+            "x-ms-parameter-grouping": {
+              "name": "SuggestOptions"
+            }
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5.",
+            "x-ms-parameter-grouping": {
+              "name": "SuggestOptions"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "Response containing suggested documents that match the partial input.",
+            "schema": {
+              "$ref": "#/definitions/SuggestDocumentsResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
+    "/docs/search.post.suggest": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "operationId": "Documents_SuggestPost",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/suggestions"
+        },
+        "x-ms-examples": {
+          "SearchIndexSuggestDocumentsPost": {
+            "$ref": "./examples/SearchIndexSuggestDocumentsPost.json"
+          }
+        },
+        "description": "Suggests documents in the index that match the given partial query text.",
+        "parameters": [
+          {
+            "name": "suggestRequest",
+            "in": "body",
+            "required": true,
+            "description": "The Suggest request.",
+            "schema": {
+              "$ref": "#/definitions/SuggestRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "Response containing suggested documents that match the partial input.",
+            "schema": {
+              "$ref": "#/definitions/SuggestDocumentsResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
+    "/docs/search.index": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "operationId": "Documents_Index",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents"
+        },
+        "x-ms-examples": {
+          "SearchIndexIndexDocuments": {
+            "$ref": "./examples/SearchIndexIndexDocuments.json"
+          }
+        },
+        "description": "Sends a batch of document write actions to the index.",
+        "parameters": [
+          {
+            "name": "batch",
+            "in": "body",
+            "description": "The batch of index actions.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IndexBatch"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "Response containing the status of operations for all actions in the batch.",
+            "schema": {
+              "$ref": "#/definitions/IndexDocumentsResult"
+            }
+          },
+          "207": {
+            "description": "Response containing the status of operations for all actions in the batch.",
+            "schema": {
+              "$ref": "#/definitions/IndexDocumentsResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
+    "/docs/search.autocomplete": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "operationId": "Documents_AutocompleteGet",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/autocomplete"
+        },
+        "x-ms-examples": {
+          "SearchIndexAutocompleteDocumentsGet": {
+            "$ref": "./examples/SearchIndexAutocompleteDocumentsGet.json"
+          }
+        },
+        "description": "Autocompletes incomplete query terms based on input text and matching terms in the index.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "The incomplete term which should be auto-completed.",
+            "x-ms-client-name": "SearchText"
+          },
+          {
+            "name": "suggesterName",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "The name of the suggester as specified in the suggesters collection that's part of the index definition."
+          },
+          {
+            "name": "autocompleteMode",
+            "in": "query",
+            "type": "string",
+            "x-nullable": false,
+            "enum": [
+              "oneTerm",
+              "twoTerms",
+              "oneTermWithContext"
+            ],
+            "x-ms-enum": {
+              "name": "AutocompleteMode",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "oneTerm",
+                  "name": "OneTerm",
+                  "description": "Only one term is suggested. If the query has two terms, only the last term is completed. For example, if the input is 'washington medic', the suggested terms could include 'medicaid', 'medicare', and 'medicine'."
+                },
+                {
+                  "value": "twoTerms",
+                  "name": "TwoTerms",
+                  "description": "Matching two-term phrases in the index will be suggested. For example, if the input is 'medic', the suggested terms could include 'medicare coverage' and 'medical assistant'."
+                },
+                {
+                  "value": "oneTermWithContext",
+                  "name": "OneTermWithContext",
+                  "description": "Completes the last term in a query with two or more terms, where the last two terms are a phrase that exists in the index. For example, if the input is 'washington medic', the suggested terms could include 'washington medicaid' and 'washington medical'."
+                }
+              ]
+            },
+            "description": "Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms.",
+            "x-ms-parameter-grouping": {
+              "name": "AutocompleteOptions"
+            }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "An OData expression that filters the documents used to produce completed terms for the Autocomplete result.",
+            "x-ms-parameter-grouping": {
+              "name": "AutocompleteOptions"
+            }
+          },
+          {
+            "name": "fuzzy",
+            "in": "query",
+            "type": "boolean",
+            "description": "A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources.",
+            "x-ms-client-name": "UseFuzzyMatching",
+            "x-ms-parameter-grouping": {
+              "name": "AutocompleteOptions"
+            }
+          },
+          {
+            "name": "highlightPostTag",
+            "in": "query",
+            "type": "string",
+            "description": "A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting is disabled.",
+            "x-ms-parameter-grouping": {
+              "name": "AutocompleteOptions"
+            }
+          },
+          {
+            "name": "highlightPreTag",
+            "in": "query",
+            "type": "string",
+            "description": "A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting is disabled.",
+            "x-ms-parameter-grouping": {
+              "name": "AutocompleteOptions"
+            }
+          },
+          {
+            "name": "minimumCoverage",
+            "in": "query",
+            "type": "number",
+            "format": "double",
+            "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.",
+            "x-ms-parameter-grouping": {
+              "name": "AutocompleteOptions"
+            }
+          },
+          {
+            "name": "searchFields",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester.",
+            "x-ms-parameter-grouping": {
+              "name": "AutocompleteOptions"
+            }
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5.",
+            "x-ms-parameter-grouping": {
+              "name": "AutocompleteOptions"
+            }
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "Response containing suggested query terms that complete the partial input.",
+            "schema": {
+              "$ref": "#/definitions/AutocompleteResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    },
+    "/docs/search.post.autocomplete": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "operationId": "Documents_AutocompletePost",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/searchservice/autocomplete"
+        },
+        "x-ms-examples": {
+          "SearchIndexAutocompleteDocumentsPost": {
+            "$ref": "./examples/SearchIndexAutocompleteDocumentsPost.json"
+          }
+        },
+        "description": "Autocompletes incomplete query terms based on input text and matching terms in the index.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "autocompleteRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutocompleteRequest"
+            },
+            "description": "The definition of the Autocomplete request."
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "Response containing suggested query terms that complete the partial input.",
+            "schema": {
+              "$ref": "#/definitions/AutocompleteResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SuggestDocumentsResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SuggestResult"
+          },
+          "readOnly": true,
+          "x-ms-client-name": "Results",
+          "description": "The sequence of results returned by the query."
+        },
+        "@search.coverage": {
+          "type": "number",
+          "readOnly": true,
+          "format": "double",
+          "x-ms-client-name": "Coverage",
+          "description": "A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not set in the request."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Response containing suggestion query results from an index."
+    },
+    "SuggestResult": {
+      "properties": {
+        "@search.text": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The text of the suggestion result.",
+          "x-ms-client-name": "Text"
+        }
+      },
+      "required": [
+        "@search.text"
+      ],
+      "additionalProperties": true,
+      "description": "A result containing a document found by a suggestion query, plus associated metadata."
+    },
+    "FacetResult": {
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The approximate count of documents falling within the bucket described by this facet."
+        }
+      },
+      "additionalProperties": true,
+      "description": "A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval."
+    },
+    "AnswerResult": {
+      "properties": {
+        "score": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The score value represents how relevant the answer is to the query relative to other answers returned for the query."
+        },
+        "key": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The key of the document the answer was extracted from."
+        },
+        "text": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The text passage extracted from the document contents as the answer."
+        },
+        "highlights": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true,
+          "description": "Same text passage as in the Text property with highlighted text phrases most relevant to the query."
+        }
+      },
+      "additionalProperties": true,
+      "description": "An answer is a text passage extracted from the contents of the most relevant documents that matched the query. Answers are extracted from the top search results. Answer candidates are scored and the top answers are selected."
+    },
+    "CaptionResult": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A representative text passage extracted from the document most relevant to the search query."
+        },
+        "highlights": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true,
+          "description": "Same text passage as in the Text property with highlighted phrases most relevant to the query."
+        }
+      },
+      "additionalProperties": true,
+      "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'.."
+    },
+    "SemanticPartialResponseReason": {
+      "type": "string",
+      "enum": [
+        "maxWaitExceeded",
+        "capacityOverloaded",
+        "transient"
+      ],
+      "x-ms-enum": {
+        "name": "SemanticPartialResponseReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "maxWaitExceeded",
+            "name": "MaxWaitExceeded",
+            "description": "If 'semanticMaxWaitInMilliseconds' was set and the semantic processing duration exceeded that value. Only the base results were returned."
+          },
+          {
+            "value": "capacityOverloaded",
+            "name": "CapacityOverloaded",
+            "description": "The request was throttled. Only the base results were returned."
+          },
+          {
+            "value": "transient",
+            "name": "Transient",
+            "description": "At least one step of the semantic process failed."
+          }
+        ]
+      },
+      "description": "Reason that a partial response was returned for a semantic search request."
+    },
+    "SemanticPartialResponseType": {
+      "type": "string",
+      "enum": [
+        "baseResults",
+        "rerankedResults"
+      ],
+      "x-ms-enum": {
+        "name": "SemanticPartialResponseType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "baseResults",
+            "name": "BaseResults",
+            "description": "Results without any semantic enrichment or reranking."
+          },
+          {
+            "value": "rerankedResults",
+            "name": "RerankedResults",
+            "description": "Results have been reranked with the reranker model and will include semantic captions. They will not include any answers, answers highlights or caption highlights."
+          }
+        ]
+      },
+      "description": "Type of partial response that was returned for a semantic search request."
+    },
+    "DocumentDebugInfo": {
+      "type": "object",
+      "properties": {
+        "semantic": {
+          "$ref": "#/definitions/SemanticDebugInfo",
+          "readOnly": true,
+          "description": "Contains debugging information specific to semantic search queries."
+        }
+      },
+      "description": "Contains debugging information that can be used to further explore your search results."
+    },
+    "SemanticDebugInfo": {
+      "type": "object",
+      "properties": {
+        "titleField": {
+          "$ref": "#/definitions/QueryResultDocumentSemanticField",
+          "readOnly": true,
+          "description": "The title field that was sent to the semantic enrichment process, as well as how it was used"
+        },
+        "contentFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryResultDocumentSemanticField"
+          },
+          "readOnly": true,
+          "description": "The content fields that were sent to the semantic enrichment process, as well as how they were used"
+        },
+        "keywordFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryResultDocumentSemanticField"
+          },
+          "readOnly": true,
+          "description": "The keyword fields that were sent to the semantic enrichment process, as well as how they were used"
+        },
+        "rerankerInput": {
+          "$ref": "#/definitions/QueryResultDocumentRerankerInput",
+          "readOnly": true,
+          "description": "The raw concatenated strings that were sent to the semantic enrichment process."
+        }
+      }
+    },
+    "QueryResultDocumentSemanticField": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the field that was sent to the semantic enrichment process"
+        },
+        "state": {
+          "$ref": "#/definitions/QueryResultDocumentSemanticFieldState",
+          "readOnly": true,
+          "description": "The way the field was used for the semantic enrichment process (fully used, partially used, or unused)"
+        }
+      },
+      "description": "Description of fields that were sent to the semantic enrichment process, as well as how they were used"
+    },
+    "QueryResultDocumentSemanticFieldState": {
+      "type": "string",
+      "enum": [
+        "used",
+        "unused",
+        "partial"
+      ],
+      "x-ms-enum": {
+        "name": "QueryResultDocumentSemanticFieldState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "used",
+            "name": "Used",
+            "description": "The field was fully used for semantic enrichment."
+          },
+          {
+            "value": "unused",
+            "name": "Unused",
+            "description": "The field was not used for semantic enrichment."
+          },
+          {
+            "value": "partial",
+            "name": "Partial",
+            "description": "The field was partially used for semantic enrichment."
+          }
+        ]
+      },
+      "description": "The way the field was used for the semantic enrichment process."
+    },
+    "QueryResultDocumentRerankerInput": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The raw string for the title field that was used for semantic enrichment."
+        },
+        "content": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The raw concatenated strings for the content fields that were used for semantic enrichment."
+        },
+        "keywords": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The raw concatenated strings for the keyword fields that were used for semantic enrichment."
+        }
+      },
+      "description": "The raw concatenated strings that were sent to the semantic enrichment process."
+    },
+    "SearchDocumentsResult": {
+      "properties": {
+        "@odata.count": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "x-ms-client-name": "Count",
+          "description": "The total count of results found by the search operation, or null if the count was not requested. If present, the count may be greater than the number of results in this response. This can happen if you use the $top or $skip parameters, or if Azure Cognitive Search can't return all the requested documents in a single Search response."
+        },
+        "@search.coverage": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "x-ms-client-name": "Coverage",
+          "description": "A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not specified in the request."
+        },
+        "@search.facets": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/FacetResult"
+            }
+          },
+          "readOnly": true,
+          "x-ms-client-name": "Facets",
+          "description": "The facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not include any facet expressions."
+        },
+        "@search.answers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnswerResult"
+          },
+          "readOnly": true,
+          "x-ms-client-name": "Answers",
+          "x-nullable": true,
+          "description": "The answers query results for the search operation; null if the answers query parameter was not specified or set to 'none'."
+        },
+        "@search.nextPageParameters": {
+          "$ref": "#/definitions/SearchRequest",
+          "readOnly": true,
+          "x-ms-client-name": "NextPageParameters",
+          "description": "Continuation JSON payload returned when Azure Cognitive Search can't return all the requested results in a single Search response. You can use this JSON along with @odata.nextLink to formulate another POST Search request to get the next part of the search response."
+        },
+        "@search.semanticPartialResponseReason": {
+          "$ref": "#/definitions/SemanticPartialResponseReason",
+          "readOnly": true,
+          "x-ms-client-name": "SemanticPartialResponseReason",
+          "description": "Reason that a partial response was returned for a semantic search request."
+        },
+        "@search.semanticPartialResponseType": {
+          "$ref": "#/definitions/SemanticPartialResponseType",
+          "readOnly": true,
+          "x-ms-client-name": "SemanticPartialResponseType",
+          "description": "Type of partial response that was returned for a semantic search request."
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchResult"
+          },
+          "readOnly": true,
+          "x-ms-client-name": "Results",
+          "description": "The sequence of results returned by the query."
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-client-name": "NextLink",
+          "description": "Continuation URL returned when Azure Cognitive Search can't return all the requested results in a single Search response. You can use this URL to formulate another GET or POST Search request to get the next part of the search response. Make sure to use the same verb (GET or POST) as the request that produced this response."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Response containing search results from an index."
+    },
+    "SearchResult": {
+      "properties": {
+        "@search.score": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "x-ms-client-name": "Score",
+          "x-nullable": false,
+          "description": "The relevance score of the document compared to other documents returned by the query."
+        },
+        "@search.rerankerScore": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "x-ms-client-name": "RerankerScore",
+          "x-nullable": true,
+          "description": "The relevance score computed by the semantic ranker for the top search results. Search results are sorted by the RerankerScore first and then by the Score. RerankerScore is only returned for queries of type 'semantic'."
+        },
+        "@search.highlights": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "readOnly": true,
+          "x-ms-client-name": "Highlights",
+          "description": "Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query."
+        },
+        "@search.captions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaptionResult"
+          },
+          "readOnly": true,
+          "x-ms-client-name": "Captions",
+          "x-nullable": true,
+          "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'."
+        },
+        "@search.documentDebugInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentDebugInfo"
+          },
+          "readOnly": true,
+          "x-ms-client-name": "DocumentDebugInfo",
+          "x-nullable": true,
+          "description": "Contains debugging information that can be used to further explore your search results."
+        }
+      },
+      "required": [
+        "@search.score"
+      ],
+      "additionalProperties": true,
+      "description": "Contains a document found by a search query, plus associated metadata."
+    },
+    "LookupDocument": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "A document retrieved via a document lookup operation."
+    },
+    "IndexBatch": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IndexAction"
+          },
+          "description": "The actions in the batch.",
+          "x-ms-client-name": "Actions"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Contains a batch of document write actions to send to the index."
+    },
+    "IndexAction": {
+      "properties": {
+        "@search.action": {
+          "type": "string",
+          "enum": [
+            "upload",
+            "merge",
+            "mergeOrUpload",
+            "delete"
+          ],
+          "x-ms-enum": {
+            "name": "IndexActionType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "upload",
+                "name": "Upload",
+                "description": "Inserts the document into the index if it is new and updates it if it exists. All fields are replaced in the update case."
+              },
+              {
+                "value": "merge",
+                "name": "Merge",
+                "description": "Merges the specified field values with an existing document. If the document does not exist, the merge will fail. Any field you specify in a merge will replace the existing field in the document. This also applies to collections of primitive and complex types."
+              },
+              {
+                "value": "mergeOrUpload",
+                "name": "MergeOrUpload",
+                "description": "Behaves like merge if a document with the given key already exists in the index. If the document does not exist, it behaves like upload with a new document."
+              },
+              {
+                "value": "delete",
+                "name": "Delete",
+                "description": "Removes the specified document from the index. Any field you specify in a delete operation other than the key field will be ignored. If you want to remove an individual field from a document, use merge instead and set the field explicitly to null."
+              }
+            ]
+          },
+          "x-ms-client-name": "ActionType",
+          "x-nullable": false,
+          "description": "The operation to perform on a document in an indexing batch."
+        }
+      },
+      "additionalProperties": true,
+      "description": "Represents an index action that operates on a document."
+    },
+    "IndexingResult": {
+      "properties": {
+        "key": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The key of a document that was in the indexing request."
+        },
+        "errorMessage": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error message explaining why the indexing operation failed for the document identified by the key; null if indexing succeeded."
+        },
+        "status": {
+          "x-ms-client-name": "Succeeded",
+          "type": "boolean",
+          "x-nullable": false,
+          "readOnly": true,
+          "description": "A value indicating whether the indexing operation succeeded for the document identified by the key."
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": false,
+          "readOnly": true,
+          "description": "The status code of the indexing operation. Possible values include: 200 for a successful update or delete, 201 for successful document creation, 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy."
+        }
+      },
+      "required": [
+        "key",
+        "status",
+        "statusCode"
+      ],
+      "description": "Status of an indexing operation for a single document."
+    },
+    "IndexDocumentsResult": {
+      "properties": {
+        "value": {
+          "x-ms-client-name": "Results",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/IndexingResult"
+          },
+          "description": "The list of status information for each document in the indexing request."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Response containing the status of operations for all documents in the indexing request."
+    },
+    "SemanticErrorHandling": {
+      "type": "string",
+      "enum": [
+        "partial",
+        "fail"
+      ],
+      "x-ms-enum": {
+        "name": "SemanticErrorHandling",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "partial",
+            "name": "Partial",
+            "description": "If the semantic processing fails, partial results still return. The definition of partial results depends on what semantic step failed and what was the reason for failure."
+          },
+          {
+            "value": "fail",
+            "name": "Fail",
+            "description": "If there is an exception during the semantic processing step, the query will fail and return the appropriate HTTP code depending on the error."
+          }
+        ]
+      },
+      "description": "Allows the user to choose whether a semantic call should fail completely, or to return partial results."
+    },
+    "QueryDebugMode": {
+      "type": "string",
+      "enum": [
+        "disabled",
+        "semantic"
+      ],
+      "x-ms-enum": {
+        "name": "QueryDebugMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "disabled",
+            "name": "Disabled",
+            "description": "No query debugging information will be returned."
+          },
+          {
+            "value": "semantic",
+            "name": "Semantic",
+            "description": "Allows the user to further explore their Semantic search results."
+          }
+        ]
+      },
+      "description": "Enables a debugging tool that can be used to further explore your search results."
+    },
+    "SearchMode": {
+      "type": "string",
+      "enum": [
+        "any",
+        "all"
+      ],
+      "x-ms-enum": {
+        "name": "SearchMode",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "any",
+            "name": "Any",
+            "description": "Any of the search terms must be matched in order to count the document as a match."
+          },
+          {
+            "value": "all",
+            "name": "All",
+            "description": "All of the search terms must be matched in order to count the document as a match."
+          }
+        ]
+      },
+      "description": "Specifies whether any or all of the search terms must be matched in order to count the document as a match."
+    },
+    "QueryType": {
+      "type": "string",
+      "enum": [
+        "simple",
+        "full",
+        "semantic"
+      ],
+      "x-ms-enum": {
+        "name": "QueryType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "simple",
+            "name": "Simple",
+            "description": "Uses the simple query syntax for searches. Search text is interpreted using a simple query language that allows for symbols such as +, * and \"\". Queries are evaluated across all searchable fields by default, unless the searchFields parameter is specified."
+          },
+          {
+            "value": "full",
+            "name": "Full",
+            "description": "Uses the full Lucene query syntax for searches. Search text is interpreted using the Lucene query language which allows field-specific and weighted searches, as well as other advanced features."
+          },
+          {
+            "value": "semantic",
+            "name": "Semantic",
+            "description": "Best suited for queries expressed in natural language as opposed to keywords. Improves precision of search results by re-ranking the top search results using a ranking model trained on the Web corpus."
+          }
+        ]
+      },
+      "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax and 'semantic' if query syntax is not needed."
+    },
+    "Speller": {
+      "type": "string",
+      "enum": [
+        "none",
+        "lexicon"
+      ],
+      "x-ms-enum": {
+        "name": "QuerySpellerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Speller not enabled."
+          },
+          {
+            "value": "lexicon",
+            "name": "Lexicon",
+            "description": "Speller corrects individual query terms using a static lexicon for the language specified by the queryLanguage parameter."
+          }
+        ]
+      },
+      "description": "Improve search recall by spell-correcting individual search query terms."
+    },
+    "Answers": {
+      "type": "string",
+      "enum": [
+        "none",
+        "extractive"
+      ],
+      "x-ms-enum": {
+        "name": "QueryAnswerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Do not return answers for the query."
+          },
+          {
+            "value": "extractive",
+            "name": "Extractive",
+            "description": "Extracts answer candidates from the contents of the documents returned in response to a query expressed as a question in natural language."
+          }
+        ]
+      },
+      "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character '|' followed by the 'count-<number of answers>' option after the answers parameter value, such as 'extractive|count-3'. Default count is 1. The confidence threshold can be configured by appending the pipe character '|' followed by the 'threshold-<confidence threshold>' option after the answers parameter value, such as 'extractive|threshold-0.9'. Default threshold is 0.7."
+    },
+    "Captions": {
+      "type": "string",
+      "enum": [
+        "none",
+        "extractive"
+      ],
+      "x-ms-enum": {
+        "name": "QueryCaptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Do not return captions for the query."
+          },
+          {
+            "value": "extractive",
+            "name": "Extractive",
+            "description": "Extracts captions from the matching documents that contain passages relevant to the search query."
+          }
+        ]
+      },
+      "description": "This parameter is only valid if the query type is 'semantic'. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to 'extractive', highlighting is enabled by default, and can be configured by appending the pipe character '|' followed by the 'highlight-<true/false>' option, such as 'extractive|highlight-true'. Defaults to 'None'."
+    },
+    "Vector": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The name of the kind of vector query being performed.",
+          "x-nullable": false
+        },
+        "k": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nearest neighbors to return as top hits."
+        },
+        "fields": {
+          "type": "string",
+          "description": "Vector Fields of type Collection(Edm.Single) to be included in the vector searched."
+        },
+        "exhaustive": {
+          "type": "boolean",
+          "description": "When true, triggers an exhaustive k-nearest neighbor search across all vectors within the vector index. Useful for scenarios where exact matches are critical, such as determining ground truth values."
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "description": "The query parameters for vector and hybrid search queries."
+    },
+    "RawVector": {
+      "type": "object",
+      "x-ms-discriminator-value": "vector",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Vector"
+        }
+      ],
+      "properties": {
+        "vector": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "description": "The vector representation of a search query."
+        }
+      },
+      "description": "The query parameters to use for vector search when a raw vector value is provided."
+    },
+    "VectorizableTextQuery": {
+      "type": "object",
+      "x-ms-discriminator-value": "text",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Vector"
+        }
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text to be vectorized to perform a vector search query."
+        }
+      },
+      "description": "The query parameters to use for vector search when a text value that needs to be vectorized is provided."
+    },
+    "VectorFilterMode": {
+      "type": "string",
+      "enum": [
+        "postFilter",
+        "preFilter"
+      ],
+      "x-ms-enum": {
+        "name": "VectorFilterMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "postFilter",
+            "name": "PostFilter",
+            "description": "The filter will be applied after the candidate set of vector results is returned. Depending on the filter selectivity, this can result in fewer results than requested by the parameter 'k'."
+          },
+          {
+            "value": "preFilter",
+            "name": "PreFilter",
+            "description": "The filter will be applied before the search query."
+          }
+        ]
+      },
+      "description": "Determines whether or not filters are applied before or after the vector search is performed."
+    },
+    "QueryLanguage": {
+      "type": "string",
+      "enum": [
+        "none",
+        "en-us",
+        "en-gb",
+        "en-in",
+        "en-ca",
+        "en-au",
+        "fr-fr",
+        "fr-ca",
+        "de-de",
+        "es-es",
+        "es-mx",
+        "zh-cn",
+        "zh-tw",
+        "pt-br",
+        "pt-pt",
+        "it-it",
+        "ja-jp",
+        "ko-kr",
+        "ru-ru",
+        "cs-cz",
+        "nl-be",
+        "nl-nl",
+        "hu-hu",
+        "pl-pl",
+        "sv-se",
+        "tr-tr",
+        "hi-in",
+        "ar-sa",
+        "ar-eg",
+        "ar-ma",
+        "ar-kw",
+        "ar-jo",
+        "da-dk",
+        "no-no",
+        "bg-bg",
+        "hr-hr",
+        "hr-ba",
+        "ms-my",
+        "ms-bn",
+        "sl-sl",
+        "ta-in",
+        "vi-vn",
+        "el-gr",
+        "ro-ro",
+        "is-is",
+        "id-id",
+        "th-th",
+        "lt-lt",
+        "uk-ua",
+        "lv-lv",
+        "et-ee",
+        "ca-es",
+        "fi-fi",
+        "sr-ba",
+        "sr-me",
+        "sr-rs",
+        "sk-sk",
+        "nb-no",
+        "hy-am",
+        "bn-in",
+        "eu-es",
+        "gl-es",
+        "gu-in",
+        "he-il",
+        "ga-ie",
+        "kn-in",
+        "ml-in",
+        "mr-in",
+        "fa-ae",
+        "pa-in",
+        "te-in",
+        "ur-pk"
+      ],
+      "x-ms-enum": {
+        "name": "QueryLanguage",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Query language not specified."
+          },
+          {
+            "value": "en-us",
+            "name": "EnUs",
+            "description": "Query language value for English (United States)."
+          },
+          {
+            "value": "en-gb",
+            "name": "EnGb",
+            "description": "Query language value for English (Great Britain)."
+          },
+          {
+            "value": "en-in",
+            "name": "EnIn",
+            "description": "Query language value for English (India)."
+          },
+          {
+            "value": "en-ca",
+            "name": "EnCa",
+            "description": "Query language value for English (Canada)."
+          },
+          {
+            "value": "en-au",
+            "name": "EnAu",
+            "description": "Query language value for English (Australia)."
+          },
+          {
+            "value": "fr-fr",
+            "name": "FrFr",
+            "description": "Query language value for French (France)."
+          },
+          {
+            "value": "fr-ca",
+            "name": "FrCa",
+            "description": "Query language value for French (Canada)."
+          },
+          {
+            "value": "de-de",
+            "name": "DeDe",
+            "description": "Query language value for German (Germany)."
+          },
+          {
+            "value": "es-es",
+            "name": "EsEs",
+            "description": "Query language value for Spanish (Spain)."
+          },
+          {
+            "value": "es-mx",
+            "name": "EsMx",
+            "description": "Query language value for Spanish (Mexico)."
+          },
+          {
+            "value": "zh-cn",
+            "name": "ZhCn",
+            "description": "Query language value for Chinese (China)."
+          },
+          {
+            "value": "zh-tw",
+            "name": "ZhTw",
+            "description": "Query language value for Chinese (Taiwan)."
+          },
+          {
+            "value": "pt-br",
+            "name": "PtBr",
+            "description": "Query language value for Portuguese (Brazil)."
+          },
+          {
+            "value": "pt-pt",
+            "name": "PtPt",
+            "description": "Query language value for Portuguese (Portugal)."
+          },
+          {
+            "value": "it-it",
+            "name": "ItIt",
+            "description": "Query language value for Italian (Italy)."
+          },
+          {
+            "value": "ja-jp",
+            "name": "JaJp",
+            "description": "Query language value for Japanese (Japan)."
+          },
+          {
+            "value": "ko-kr",
+            "name": "KoKr",
+            "description": "Query language value for Korean (Korea)."
+          },
+          {
+            "value": "ru-ru",
+            "name": "RuRu",
+            "description": "Query language value for Russian (Russia)."
+          },
+          {
+            "value": "cs-cz",
+            "name": "CsCz",
+            "description": "Query language value for Czech (Czech Republic)."
+          },
+          {
+            "value": "nl-be",
+            "name": "NlBe",
+            "description": "Query language value for Dutch (Belgium)."
+          },
+          {
+            "value": "nl-nl",
+            "name": "NlNl",
+            "description": "Query language value for Dutch (Netherlands)."
+          },
+          {
+            "value": "hu-hu",
+            "name": "HuHu",
+            "description": "Query language value for Hungarian (Hungary)."
+          },
+          {
+            "value": "pl-pl",
+            "name": "PlPl",
+            "description": "Query language value for Polish (Poland)."
+          },
+          {
+            "value": "sv-se",
+            "name": "SvSe",
+            "description": "Query language value for Swedish (Sweden)."
+          },
+          {
+            "value": "tr-tr",
+            "name": "TrTr",
+            "description": "Query language value for Turkish (Turkey)."
+          },
+          {
+            "value": "hi-in",
+            "name": "HiIn",
+            "description": "Query language value for Hindi (India)."
+          },
+          {
+            "value": "ar-sa",
+            "name": "ArSa",
+            "description": "Query language value for Arabic (Saudi Arabia)."
+          },
+          {
+            "value": "ar-eg",
+            "name": "ArEg",
+            "description": "Query language value for Arabic (Egypt)."
+          },
+          {
+            "value": "ar-ma",
+            "name": "ArMa",
+            "description": "Query language value for Arabic (Morocco)."
+          },
+          {
+            "value": "ar-kw",
+            "name": "ArKw",
+            "description": "Query language value for Arabic (Kuwait)."
+          },
+          {
+            "value": "ar-jo",
+            "name": "ArJo",
+            "description": "Query language value for Arabic (Jordan)."
+          },
+          {
+            "value": "da-dk",
+            "name": "DaDk",
+            "description": "Query language value for Danish (Denmark)."
+          },
+          {
+            "value": "no-no",
+            "name": "NoNo",
+            "description": "Query language value for Norwegian (Norway)."
+          },
+          {
+            "value": "bg-bg",
+            "name": "BgBg",
+            "description": "Query language value for Bulgarian (Bulgaria)."
+          },
+          {
+            "value": "hr-hr",
+            "name": "HrHr",
+            "description": "Query language value for Croatian (Croatia)."
+          },
+          {
+            "value": "hr-ba",
+            "name": "HrBa",
+            "description": "Query language value for Croatian (Bosnia and Herzegovina)."
+          },
+          {
+            "value": "ms-my",
+            "name": "MsMy",
+            "description": "Query language value for Malay (Malaysia)."
+          },
+          {
+            "value": "ms-bn",
+            "name": "MsBn",
+            "description": "Query language value for Malay (Brunei Darussalam)."
+          },
+          {
+            "value": "sl-sl",
+            "name": "SlSl",
+            "description": "Query language value for Slovenian (Slovenia)."
+          },
+          {
+            "value": "ta-in",
+            "name": "TaIn",
+            "description": "Query language value for Tamil (India)."
+          },
+          {
+            "value": "vi-vn",
+            "name": "ViVn",
+            "description": "Query language value for Vietnamese (Viet Nam)."
+          },
+          {
+            "value": "el-gr",
+            "name": "ElGr",
+            "description": "Query language value for Greek (Greece)."
+          },
+          {
+            "value": "ro-ro",
+            "name": "RoRo",
+            "description": "Query language value for Romanian (Romania)."
+          },
+          {
+            "value": "is-is",
+            "name": "IsIs",
+            "description": "Query language value for Icelandic (Iceland)."
+          },
+          {
+            "value": "id-id",
+            "name": "IdId",
+            "description": "Query language value for Indonesian (Indonesia)."
+          },
+          {
+            "value": "th-th",
+            "name": "ThTh",
+            "description": "Query language value for Thai (Thailand)."
+          },
+          {
+            "value": "lt-lt",
+            "name": "LtLt",
+            "description": "Query language value for Lithuanian (Lithuania)."
+          },
+          {
+            "value": "uk-ua",
+            "name": "UkUa",
+            "description": "Query language value for Ukrainian (Ukraine)."
+          },
+          {
+            "value": "lv-lv",
+            "name": "LvLv",
+            "description": "Query language value for Latvian (Latvia)."
+          },
+          {
+            "value": "et-ee",
+            "name": "EtEe",
+            "description": "Query language value for Estonian (Estonia)."
+          },
+          {
+            "value": "ca-es",
+            "name": "CaEs",
+            "description": "Query language value for Catalan (Spain)."
+          },
+          {
+            "value": "fi-fi",
+            "name": "FiFi",
+            "description": "Query language value for Finnish (Finland)."
+          },
+          {
+            "value": "sr-ba",
+            "name": "SrBa",
+            "description": "Query language value for Serbian (Bosnia and Herzegovina)."
+          },
+          {
+            "value": "sr-me",
+            "name": "SrMe",
+            "description": "Query language value for Serbian (Montenegro)."
+          },
+          {
+            "value": "sr-rs",
+            "name": "SrRs",
+            "description": "Query language value for Serbian (Serbia)."
+          },
+          {
+            "value": "sk-sk",
+            "name": "SkSk",
+            "description": "Query language value for Slovak (Slovakia)."
+          },
+          {
+            "value": "nb-no",
+            "name": "NbNo",
+            "description": "Query language value for Norwegian (Norway)."
+          },
+          {
+            "value": "hy-am",
+            "name": "HyAm",
+            "description": "Query language value for Armenian (Armenia)."
+          },
+          {
+            "value": "bn-in",
+            "name": "BnIn",
+            "description": "Query language value for Bengali (India)."
+          },
+          {
+            "value": "eu-es",
+            "name": "EuEs",
+            "description": "Query language value for Basque (Spain)."
+          },
+          {
+            "value": "gl-es",
+            "name": "GlEs",
+            "description": "Query language value for Galician (Spain)."
+          },
+          {
+            "value": "gu-in",
+            "name": "GuIn",
+            "description": "Query language value for Gujarati (India)."
+          },
+          {
+            "value": "he-il",
+            "name": "HeIl",
+            "description": "Query language value for Hebrew (Israel)."
+          },
+          {
+            "value": "ga-ie",
+            "name": "GaIe",
+            "description": "Query language value for Irish (Ireland)."
+          },
+          {
+            "value": "kn-in",
+            "name": "KnIn",
+            "description": "Query language value for Kannada (India)."
+          },
+          {
+            "value": "ml-in",
+            "name": "MlIn",
+            "description": "Query language value for Malayalam (India)."
+          },
+          {
+            "value": "mr-in",
+            "name": "MrIn",
+            "description": "Query language value for Marathi (India)."
+          },
+          {
+            "value": "fa-ae",
+            "name": "FaAe",
+            "description": "Query language value for Persian (U.A.E.)."
+          },
+          {
+            "value": "pa-in",
+            "name": "PaIn",
+            "description": "Query language value for Punjabi (India)."
+          },
+          {
+            "value": "te-in",
+            "name": "TeIn",
+            "description": "Query language value for Telugu (India)."
+          },
+          {
+            "value": "ur-pk",
+            "name": "UrPk",
+            "description": "Query language value for Urdu (Pakistan)."
+          }
+        ]
+      },
+      "description": "The language of the query."
+    },
+    "ScoringStatistics": {
+      "type": "string",
+      "enum": [
+        "local",
+        "global"
+      ],
+      "x-ms-enum": {
+        "name": "ScoringStatistics",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "local",
+            "name": "Local",
+            "description": "The scoring statistics will be calculated locally for lower latency."
+          },
+          {
+            "value": "global",
+            "name": "Global",
+            "description": "The scoring statistics will be calculated globally for more consistent scoring."
+          }
+        ]
+      },
+      "description": "A value that specifies whether we want to calculate scoring statistics (such as document frequency) globally for more consistent scoring, or locally, for lower latency. The default is 'local'. Use 'global' to aggregate scoring statistics globally before scoring. Using global scoring statistics can increase latency of search queries."
+    },
+    "AutocompleteMode": {
+      "type": "string",
+      "enum": [
+        "oneTerm",
+        "twoTerms",
+        "oneTermWithContext"
+      ],
+      "x-ms-enum": {
+        "name": "AutocompleteMode",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "oneTerm",
+            "name": "OneTerm",
+            "description": "Only one term is suggested. If the query has two terms, only the last term is completed. For example, if the input is 'washington medic', the suggested terms could include 'medicaid', 'medicare', and 'medicine'."
+          },
+          {
+            "value": "twoTerms",
+            "name": "TwoTerms",
+            "description": "Matching two-term phrases in the index will be suggested. For example, if the input is 'medic', the suggested terms could include 'medicare coverage' and 'medical assistant'."
+          },
+          {
+            "value": "oneTermWithContext",
+            "name": "OneTermWithContext",
+            "description": "Completes the last term in a query with two or more terms, where the last two terms are a phrase that exists in the index. For example, if the input is 'washington medic', the suggested terms could include 'washington medicaid' and 'washington medical'."
+          }
+        ]
+      },
+      "description": "Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context in producing autocomplete terms."
+    },
+    "SearchRequest": {
+      "properties": {
+        "count": {
+          "type": "boolean",
+          "description": "A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation.",
+          "x-ms-client-name": "IncludeTotalResultCount"
+        },
+        "facets": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/Search-Documents"
+          },
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of facet expressions to apply to the search query. Each facet expression contains a field name, optionally followed by a comma-separated list of name:value pairs."
+        },
+        "filter": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/OData-Expression-Syntax-for-Azure-Search"
+          },
+          "type": "string",
+          "description": "The OData $filter expression to apply to the search query."
+        },
+        "highlight": {
+          "type": "string",
+          "description": "The comma-separated list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting.",
+          "x-ms-client-name": "HighlightFields"
+        },
+        "highlightPostTag": {
+          "type": "string",
+          "description": "A string tag that is appended to hit highlights. Must be set with highlightPreTag. Default is &lt;/em&gt;."
+        },
+        "highlightPreTag": {
+          "type": "string",
+          "description": "A string tag that is prepended to hit highlights. Must be set with highlightPostTag. Default is &lt;em&gt;."
+        },
+        "minimumCoverage": {
+          "type": "number",
+          "format": "double",
+          "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by a search query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 100."
+        },
+        "orderby": {
+          "x-ms-client-name": "OrderBy",
+          "type": "string",
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses."
+        },
+        "queryType": {
+          "$ref": "#/definitions/QueryType",
+          "description": "A value that specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
+        },
+        "scoringStatistics": {
+          "$ref": "#/definitions/ScoringStatistics",
+          "description": "A value that specifies whether we want to calculate scoring statistics (such as document frequency) globally for more consistent scoring, or locally, for lower latency. The default is 'local'. Use 'global' to aggregate scoring statistics globally before scoring. Using global scoring statistics can increase latency of search queries."
+        },
+        "sessionId": {
+          "type": "string",
+          "description": "A value to be used to create a sticky session, which can help getting more consistent results. As long as the same sessionId is used, a best-effort attempt will be made to target the same replica set. Be wary that reusing the same sessionID values repeatedly can interfere with the load balancing of the requests across replicas and adversely affect the performance of the search service. The value used as sessionId cannot start with a '_' character."
+        },
+        "scoringParameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called 'mylocation' the parameter string would be \"mylocation--122.2,44.8\" (without the quotes)."
+        },
+        "scoringProfile": {
+          "type": "string",
+          "description": "The name of a scoring profile to evaluate match scores for matching documents in order to sort the results."
+        },
+        "semanticQuery": {
+          "type": "string",
+          "description": "Allows setting a separate search query that will be solely used for semantic reranking, semantic captions and semantic answers. Is useful for scenarios where there is a need to use different queries between the base retrieval and ranking phase, and the L2 semantic phase."
+        },
+        "semanticConfiguration": {
+          "type": "string",
+          "description": "The name of a semantic configuration that will be used when processing documents for queries of type semantic."
+        },
+        "semanticErrorHandling": {
+          "$ref": "#/definitions/SemanticErrorHandling",
+          "description": "Allows the user to choose whether a semantic call should fail completely, or to return partial results (default)."
+        },
+        "semanticMaxWaitInMilliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "minimum": 700,
+          "description": "Allows the user to set an upper bound on the amount of time it takes for semantic enrichment to finish processing before the request fails."
+        },
+        "debug": {
+          "$ref": "#/definitions/QueryDebugMode",
+          "description": "Enables a debugging tool that can be used to further explore your Semantic search results."
+        },
+        "search": {
+          "type": "string",
+          "description": "A full-text search query expression; Use \"*\" or omit this parameter to match all documents.",
+          "x-ms-client-name": "SearchText"
+        },
+        "searchFields": {
+          "type": "string",
+          "description": "The comma-separated list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter."
+        },
+        "searchMode": {
+          "$ref": "#/definitions/SearchMode",
+          "description": "A value that specifies whether any or all of the search terms must be matched in order to count the document as a match."
+        },
+        "queryLanguage": {
+          "$ref": "#/definitions/QueryLanguage",
+          "description": "A value that specifies the language of the search query."
+        },
+        "speller": {
+          "$ref": "#/definitions/Speller",
+          "description": "A value that specified the type of the speller to use to spell-correct individual search query terms."
+        },
+        "answers": {
+          "$ref": "#/definitions/Answers",
+          "description": "A value that specifies whether answers should be returned as part of the search response."
+        },
+        "select": {
+          "type": "string",
+          "description": "The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included."
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use skip due to this limitation, consider using orderby on a totally-ordered key and filter with a range query instead."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results."
+        },
+        "captions": {
+          "$ref": "#/definitions/Captions",
+          "description": "A value that specifies whether captions should be returned as part of the search response."
+        },
+        "semanticFields": {
+          "type": "string",
+          "description": "The comma-separated list of field names used for semantic search."
+        },
+        "vectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Vector"
+          },
+          "description": "The query parameters for vector and hybrid search queries."
+        },
+        "vectorFilterMode": {
+          "$ref": "#/definitions/VectorFilterMode",
+          "description": "Determines whether or not filters are applied before or after the vector search is performed. Default is 'preFilter'."
+        }
+      },
+      "description": "Parameters for filtering, sorting, faceting, paging, and other search query behaviors."
+    },
+    "SuggestRequest": {
+      "properties": {
+        "filter": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/OData-Expression-Syntax-for-Azure-Search"
+          },
+          "type": "string",
+          "description": "An OData expression that filters the documents considered for suggestions."
+        },
+        "fuzzy": {
+          "type": "boolean",
+          "description": "A value indicating whether to use fuzzy matching for the suggestion query. Default is false. When set to true, the query will find suggestions even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestion searches are slower and consume more resources.",
+          "x-ms-client-name": "UseFuzzyMatching"
+        },
+        "highlightPostTag": {
+          "type": "string",
+          "description": "A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting of suggestions is disabled."
+        },
+        "highlightPreTag": {
+          "type": "string",
+          "description": "A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting of suggestions is disabled."
+        },
+        "minimumCoverage": {
+          "type": "number",
+          "format": "double",
+          "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by a suggestion query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80."
+        },
+        "orderby": {
+          "x-ms-client-name": "OrderBy",
+          "type": "string",
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses."
+        },
+        "search": {
+          "type": "string",
+          "description": "The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters.",
+          "x-ms-client-name": "SearchText"
+        },
+        "searchFields": {
+          "type": "string",
+          "description": "The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester."
+        },
+        "select": {
+          "type": "string",
+          "description": "The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results."
+        },
+        "suggesterName": {
+          "type": "string",
+          "description": "The name of the suggester as specified in the suggesters collection that's part of the index definition."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of suggestions to retrieve. This must be a value between 1 and 100. The default is 5."
+        }
+      },
+      "required": [
+        "search",
+        "suggesterName"
+      ],
+      "description": "Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors."
+    },
+    "AutocompleteRequest": {
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search text on which to base autocomplete results.",
+          "x-ms-client-name": "SearchText"
+        },
+        "autocompleteMode": {
+          "$ref": "#/definitions/AutocompleteMode",
+          "description": "Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms."
+        },
+        "filter": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/OData-Expression-Syntax-for-Azure-Search"
+          },
+          "type": "string",
+          "description": "An OData expression that filters the documents used to produce completed terms for the Autocomplete result."
+        },
+        "fuzzy": {
+          "type": "boolean",
+          "description": "A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will autocomplete terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources.",
+          "x-ms-client-name": "UseFuzzyMatching"
+        },
+        "highlightPostTag": {
+          "type": "string",
+          "description": "A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting is disabled."
+        },
+        "highlightPreTag": {
+          "type": "string",
+          "description": "A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting is disabled."
+        },
+        "minimumCoverage": {
+          "type": "number",
+          "format": "double",
+          "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80."
+        },
+        "searchFields": {
+          "type": "string",
+          "description": "The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester."
+        },
+        "suggesterName": {
+          "type": "string",
+          "description": "The name of the suggester as specified in the suggesters collection that's part of the index definition."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5."
+        }
+      },
+      "required": [
+        "search",
+        "suggesterName"
+      ],
+      "description": "Parameters for fuzzy matching, and other autocomplete query behaviors."
+    },
+    "AutocompleteResult": {
+      "properties": {
+        "@search.coverage": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "x-ms-client-name": "Coverage",
+          "description": "A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request."
+        },
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AutocompleteItem"
+          },
+          "description": "The list of returned Autocompleted items.",
+          "x-ms-client-name": "Results"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The result of Autocomplete query."
+    },
+    "AutocompleteItem": {
+      "properties": {
+        "text": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The completed term."
+        },
+        "queryPlusText": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The query along with the completed term."
+        }
+      },
+      "required": [
+        "text",
+        "queryPlusText"
+      ],
+      "description": "The result of Autocomplete requests."
+    },
+    "SearchError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A human-readable representation of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchError"
+          },
+          "readOnly": true,
+          "description": "An array of details about specific errors that led to this reported error."
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "description": "Describes an error condition for the Azure Cognitive Search API."
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ClientRequestIdParameter": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "description": "The tracking ID sent with the request to help with debugging.",
+      "x-ms-client-request-id": true,
+      "x-ms-parameter-grouping": {
+        "name": "request-options"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "EndpointParameter": {
+      "name": "endpoint",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "description": "The endpoint URL of the search service.",
+      "x-ms-parameter-location": "client"
+    },
+    "IndexNameParameter": {
+      "name": "indexName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": false,
+      "description": "The name of the index.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

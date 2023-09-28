@@ -1,0 +1,20 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+#  - "@azure-tools/typespec-providerhub-controller"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-resource-manager/all"
+parameters:
+  "service-directory-name":
+    default: "playwrighttesting"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "resource-manager"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/playwrighttesting.json"
+    omit-unreachable-types: true
+#  "@azure-tools/typespec-providerhub-controller":
+#    azure-resource-provider-folder: "resource-manager"
+#    emitter-output-dir: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/generated"
+#    code-kind: model

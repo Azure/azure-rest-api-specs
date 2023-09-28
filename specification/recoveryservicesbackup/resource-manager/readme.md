@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2023-02
+tag: package-2023-04
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -41,7 +41,7 @@ tag: package-passivestamp-2023-01-15
 ```
 
 ``` yaml $(package-activestamp)
-tag: package-2023-02
+tag: package-2023-04
 ```
 
 ### Validations
@@ -56,6 +56,14 @@ message-format: json
 ```
 
 
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-04-01/bms.json
+```
 ### Tag: package-2023-02
 
 These settings apply only when `--tag=package-2023-02` is specified on the command line.
@@ -432,4 +440,8 @@ directive:
   - suppress: ImplementPrivateEndpointAPIs
     from: Microsoft.RecoveryServices/stable/2021-06-01/bms.json
     reason: Addition of new API version is specific to MSI support for our service, to ensure sign off we commit we will take a fix for Private endpoint in Ni.
+  - suppress: TrackedResourceBeyondsThirdLevel
+    from: bms.json
+    where: $.definitions.RecoveryPointResource
+    reason: This is an existing resource in our service and is present across API version. Suppressing for API versions 2021-11-15, 2023-01-15 for fixing completeness for CRR Get recoverypoints API.
 ```

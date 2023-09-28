@@ -1,16 +1,11 @@
 parameters:
-  python-sdk-folder:
-    default: "{cwd}/azure-sdk-for-python/"
-  # java-sdk-folder:
-  #   default: "{cwd}/azure-sdk-for-java/"
-  # js-sdk-folder:
-  #   default: "{cwd}/azure-sdk-for-js/"
-  csharp-sdk-folder:
-    default: "{cwd}/azure-sdk-for-csharp/"
-  service-directory-name:
-    default: "contentsafety"
+  service-dir:
+    default: "sdk/contentsafety"
 emit:
   - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/../"
@@ -18,22 +13,21 @@ options:
     azure-resource-provider-folder: "data-plane"
     examples-directory: examples
   "@azure-tools/typespec-python":
-    package-name: "azure-ai-contentsafety"
-    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    package-dir: "azure-ai-contentsafety"
+    package-name: "{package-dir}"
     package-mode: dataplane
   "@azure-tools/typespec-csharp":
-    namespace: "Azure.AI.ContentSafety"
+    package-dir: "Azure.AI.ContentSafety"
+    namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
-    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
-  # "@azure-tools/cadl-typescript":
-  #   emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/contentsafety-rest"
-  #   generateMetadata: true
-  #   generateTest: true
-  #   azureSdkForJs: true
-  #   packageDetails:
-  #     name: "@azure-rest/contentsafety-rest"
-  #     description: "ContentSafety Service"
-  # "@azure-tools/cadl-java":
-  #   emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/contentsafety"
-  #   namespace: com.contentsafety
+  "@azure-tools/typespec-ts":
+      package-dir: "azure-ai-content-safety-rest"
+      packageDetails:
+        name: "@azure-rest/ai-content-safety"
+        version: "1.0.0-beta.1"
+        description: "ContentSafety Service"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-contentsafety"
+    namespace: com.azure.ai.contentsafety
+    examples-directory: examples
