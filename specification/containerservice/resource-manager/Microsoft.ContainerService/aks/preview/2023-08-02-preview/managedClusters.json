@@ -3556,9 +3556,91 @@
         "clientId"
       ]
     },
+    "FlexProfile": {
+      "type": "object",
+      "properties": {
+        "scaleProfile": {
+          "$ref": "#/definitions/ScaleProfile",
+          "description": "Specifications on how to scale the AgentPool."
+        }
+      },
+      "description": "Specifications on flex Agentpool."
+    },
+    "ScaleProfile": {
+      "type": "object",
+      "properties": {
+        "manual": {
+          "$ref": "#/definitions/ManualScaleProfile",
+          "description": "Specifications on how to scale the flex agent pool to a fixed size."
+        }
+      },
+      "description": "Specifications on how to scale the AgentPool."
+    },
+    "ManualScaleProfile": {
+      "type": "object",
+      "properties": {
+        "machines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManualScaleMachineSpec"
+          },
+          "description": "Specifications on how to scale the AgentPool."
+        }
+      }
+    },
+    "ManualScaleMachineSpec": {
+      "type": "object",
+      "properties": {
+        "sizes": {
+          "items": {
+            "type": "string"
+          },
+          "description": "The comma-separated list allowed vm sizes. AKS will use the first available one upon scale."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nodes (VMs). Allowed values must be in the range of 0 to 1000 (inclusive)."
+        }
+      },
+      "description": "Specifications on how to scale the AgentPool."
+    },
+    "CurrentFlexNodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/flexNodes"
+      },
+      "x-ms-identifiers": [],
+      "description": "The manual scale specifications of flexVirtualMachines AgentPool."
+    },
+    "FlexNodes": {
+      "type": "object",
+      "properties": {
+        "sizes": {
+          "type": "string",
+          "description": "The VM size of the agents used to host this group of nodes."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nodes."
+        },
+        "nodeOSImage": {
+          "type": "string",
+          "description": "The current assigned os image of this group of nodes. Note that each node may not be on this image yet, and please refer to node/machine API to check single node status."
+        }
+      },
+      "description": "Current status on a group of nodes of the same vm size."
+    },
     "ManagedClusterAgentPoolProfileProperties": {
       "type": "object",
       "properties": {
+        "flexProfile": {
+          "$ref": "#/definitions/FlexProfile"
+        },
+        "currentFlexNodes": {
+          "$ref": "#/definitions/CurrentFlexNodes"
+        },
         "count": {
           "type": "integer",
           "format": "int32",
@@ -3930,7 +4012,8 @@
       "type": "string",
       "enum": [
         "VirtualMachineScaleSets",
-        "AvailabilitySet"
+        "AvailabilitySet",
+        "Flex"
       ],
       "x-ms-enum": {
         "name": "AgentPoolType",
@@ -3943,6 +4026,10 @@
           {
             "value": "AvailabilitySet",
             "description": "Use of this is strongly discouraged."
+          },
+          {
+            "value": "Flex",
+            "description": "Create an Agent Pool that allows mixed-ize vms, and would also scale in a non blocking mode."
           }
         ]
       },
