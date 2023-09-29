@@ -35,6 +35,7 @@ model Environment {
   name?: string;
 
   @doc("Environment type.")
+  @visibility("read", "create")
   environmentType: string;
 
   @doc("The AAD object id of the owner of this Environment.")
@@ -50,9 +51,11 @@ model Environment {
   resourceGroupId?: string;
 
   @doc("Name of the catalog.")
+  @visibility("read", "create")
   catalogName: string;
 
   @doc("Name of the environment definition.")
+  @visibility("read", "create")
   environmentDefinitionName: string;
 
   @doc("Provisioning error details. Populated only for error states.")
@@ -135,6 +138,8 @@ value.
   required: boolean;
 
   @doc("An array of allowed values")
+  @minItems(1)
+  // @uniqueItems // TODO import TypeSpec.JsonSchema
   allowed?: string[];
 }
 

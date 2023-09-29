@@ -228,6 +228,10 @@ model DevBox {
   projectName?: string;
 
   @doc("The name of the Dev Box pool this machine belongs to.")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+  @visibility("read", "create")
   poolName: string;
 
   @doc("Indicates whether hibernate is enabled/disabled or unknown.")

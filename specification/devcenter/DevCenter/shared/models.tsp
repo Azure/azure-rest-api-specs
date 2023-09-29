@@ -83,7 +83,10 @@ model OperationStatus {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
+  // FIXME: check if this is a float or int
   @doc("Percent of the operation that is complete")
+  @minValue(0.0)
+  @maxValue(100.0)
   percentComplete?: float32;
 
   @doc("Custom operation properties, populated only for a successful operation.")
@@ -108,5 +111,6 @@ model Project {
 When specified, indicates the maximum number of Dev Boxes a single user can
 create across all pools in the project.
 """)
+  @minValue(0)
   maxDevBoxesPerUser?: int32;
 }
