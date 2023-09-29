@@ -657,6 +657,9 @@
         "legPointIndex": {
           "$ref": "#/definitions/LegPointIndex"
         },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
         "compassDirection": {
           "description": "The direction of travel associated with a maneuver on a route, such as south or southwest.",
           "type": "string",
@@ -731,6 +734,9 @@
             },
             "legPointIndex": {
               "$ref": "#/definitions/LegPointIndex"
+            },
+            "order": {
+              "$ref": "#/definitions/Order"
             }
           }
         }
@@ -1888,6 +1894,20 @@
             "description": "RouteTravelMode is returned as \"other\" for the truck travelMode when the truck route is not available for a particular section of a route."
           }
         ]
+      }
+    },
+    "Order": {
+      "description": "Sequence for visiting waypoints and viaWaypoints.",
+      "type": "object",
+      "properties": {
+        "inputIndex": {
+          "description": "User-provided index for waypoint and viaWaypoint inputs.",
+          "type": "integer"
+        },
+        "optimizedIndex": {
+          "description": "System-optimized waypoint and viaWaypoint index.",
+          "type": "integer"
+        }
       }
     },
     "DirectionsBatchRequestItem": {
