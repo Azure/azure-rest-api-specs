@@ -1,83 +1,52 @@
 import "./../LiftrBase/main.tsp";
 
+import "@typespec/http";
+import "@typespec/rest";
 import "@typespec/versioning";
 
-using TypeSpec.Versioning;
+using Azure.ResourceManager;
 using LiftrBase;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 @versioned(LiftrBase.Storage.Versions)
+@armLibraryNamespace
 namespace LiftrBase.Storage;
 
-@doc("Namespace version enum.")
+@doc("Supported versions for LiftrBase.Storage resource model")
 enum Versions {
-  @doc("Version 1 preview.")
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1 and LiftrBase.Versions.v1_preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
-  v1_preview: "2023-06-01-preview"
+  v1_preview: "2023-06-01-preview",
 }
 
-@doc("Base storage resource properties that can be extended for storage arm resources.")
-model BaseStorageResourceProperties is BaseResourceProperties {
+@doc("Reservation resource type.")
+model Reservation is TrackedResource<ReservationProperties> {
+  @doc("The name of the reservation.")
+  @segment("reservations")
+  @key("reservationName")
+  @visibility("read")
+  @path
+  name: string;
+}
 
-  @doc("Subnet Id for Vnet injection.")
-  @visibility("read", "create")
+@armResourceOperations
+interface Reservations {
+  get is ArmResourceRead<Reservation>;
+  create is ArmResourceCreateOrUpdateAsync<Reservation>;
+  update is ArmResourcePatchAsync<Reservation, ReservationProperties>;
+  delete is ArmResourceDeleteAsync<Reservation>;
+  listByResourceGroup is ArmResourceListByParent<Reservation>;
+  listBySubscription is ArmListBySubscription<Reservation>;
+}
+
+@doc("Properties of a Reservation resource.")
+model ReservationProperties is BaseResourceProperties;
+
+@doc("Describes parameters for Virtual Network to deploy to (VNet injection).")
+model VnetInjection {
+  @doc("Full Azure Resource ID of the Virtual Network subnet to make the Pool visible in.")
   subnetId: string;
-
-  @doc("Azure Availability Zone to create the Pool in.")
-  @visibility("read", "create")
-  availabilityZone?: string;
-
-  @doc("Bandwidth provisioned by customer in bytes/second.")
-  @visibility("read", "create", "update")
-  provisionedBandwidth?: int64;
-
-  @doc("iSCSI standard.")
-  @visibility("read")
-  iscsi?: Iscsi;
-
-  @doc("Azure VmWare Service Properties.")
-  @visibility("read", "create", "update")
-  avs?: AzureVmwareService;
-}
-
-@doc("iSCSI is a storage networking standard.")
-model Iscsi {
-
-  @doc("iSCSI IP/port pairs used for establishing connections and exchanging data.")
-  @visibility("read")
-  ips?: Ip[]
-}
-
-@doc("Azure VmWare Service properties. VASA is vSphere Storage APIs for Storage Awareness.")
-model AzureVmwareService {
-
-  @doc("VASA Provider user name.")
-  @visibility("read")
-  vasaProviderUsername?: string;
-
-  @doc("VASA Provider URL.")
-  @visibility("read")
-  vasaProviderUrls?: string[];
-
-  @doc("Array of iSCSI endpoint and IQN.")
-  @visibility("read")
-  vasaIscsiEndpoints?: VasaIscsiEndpoint[];
-
-  @doc("Password for VASA service login.")
-  @visibility("create", "update")
-  @secret
-  vasaProviderPassword: string;
-}
-
-@doc("Describes iSCSI endpoint and IQN.")
-model VasaIscsiEndpoint {
-
-  @doc("iSCSI IP address.")
-  address: string;
-
-  @doc("iSCSI TCP port.")
-  port: int32;
-
-  @doc("iSCSI Qualified Name.")
-  iqn: string;
 }

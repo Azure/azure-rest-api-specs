@@ -1,0 +1,121 @@
+{
+  "parameters": {
+    "subscriptionId": "8e17e36c-42e9-4cd5-a078-7b44883414e0",
+    "resourceGroupName": "test-rg",
+    "oracleVirtualInstanceName": "OracleInstance1",
+    "api-version": "2023-10-01-preview",
+    "body": {
+      "tags": {
+        "key1": "ovi1"
+      },
+      "identity": {
+        "type": "None"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Workloads/oracleVirtualInstances/OracleInstance1",
+        "name": "OracleInstance1",
+        "type": "Microsoft.Workloads/oracleVirtualInstances",
+        "tags": {
+          "key1": "ovi1"
+        },
+        "location": "eastus2",
+        "systemData": {
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z"
+        },
+        "identity": {
+          "type": "None"
+        },
+        "properties": {
+          "environment": "Prod",
+          "oracleVersion": "21C",
+          "configuration": {
+            "configurationType": "Deployment",
+            "appLocation": "eastus2",
+            "infrastructureConfiguration": {
+              "deploymentType": "SingleServer",
+              "appResourceGroup": "OracleInstance1-RG",
+              "subnetId": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-vnet/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/appsubnet",
+              "networkConfiguration": {
+                "isSecondaryIpEnabled": true
+              },
+              "virtualMachineConfiguration": {
+                "vmSize": "Standard_DS2_v2",
+                "imageReference": {
+                  "publisher": "Oracle",
+                  "offer": "oracle-database-19-3",
+                  "sku": "oracle-database-19-0904",
+                  "version": "latest"
+                },
+                "osProfile": {
+                  "adminUsername": "{your-username}",
+                  "osConfiguration": {
+                    "osType": "Linux",
+                    "disablePasswordAuthentication": true,
+                    "ssh": {
+                      "publicKeys": [
+                        {
+                          "keyData": "ssh-rsa public key"
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "diskConfiguration": {
+                "diskVolumeConfigurations": {
+                  "data": [
+                    {
+                      "count": 3,
+                      "sizeGB": 100,
+                      "sku": {
+                        "name": "Premium_LRS"
+                      }
+                    }
+                  ],
+                  "log": [
+                    {
+                      "count": 2,
+                      "sizeGB": 50,
+                      "sku": {
+                        "name": "Premium_LRS"
+                      }
+                    }
+                  ],
+                  "temp": [
+                    {
+                      "count": 1,
+                      "sizeGB": 20,
+                      "sku": {
+                        "name": "Premium_LRS"
+                      }
+                    },
+                    {
+                      "count": 1,
+                      "sizeGB": 20,
+                      "sku": {
+                        "name": "Premium_LRS"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "status": "Unknown",
+          "health": "Unknown",
+          "state": "SoftwareInstallationPending",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

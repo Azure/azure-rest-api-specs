@@ -340,6 +340,15 @@
           },
           "Create Infrastructure (with OS configuration) with custom resource names for HA system with Availability Zone": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_CustomFullResourceNames_HA_AvZone.json"
+          },
+          "Create Infrastructure (with OS configuration) with Azure Compute Gallery Image": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Custom_Image.json"
+          },
+          "Create Infrastructure (with OS configuration) with trusted access enabled": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_WithOSConfig_WithTrustedAccess.json"
+          },
+          "Register with trusted access enabled": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Discover_TrustedAccessEnable.json"
           }
         },
         "description": "Creates a Virtual Instance for SAP solutions (VIS) resource",
@@ -394,6 +403,9 @@
         "x-ms-examples": {
           "SAPVirtualInstances_Get": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Get.json"
+          },
+          "SAPVirtualInstances Get With ACSS Installation Blocked": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Get_ACSSInstallationBlocked.json"
           }
         },
         "description": "Gets a Virtual Instance for SAP solutions resource",
@@ -434,6 +446,9 @@
         "x-ms-examples": {
           "SAPVirtualInstances_Update": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Update.json"
+          },
+          "SAPVirtualInstances_TrustedAccessEnable_Update": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_TrustedAccessEnable_Update.json"
           }
         },
         "description": "Updates a Virtual Instance for SAP solutions resource",
@@ -460,6 +475,12 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Describes the Virtual Instance for SAP solutions resource which is successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/SAPVirtualInstance"
+            }
+          },
           "200": {
             "description": "Describes the Virtual Instance for SAP solutions resource which is successfully updated.",
             "schema": {
@@ -1429,6 +1450,9 @@
         "x-ms-examples": {
           "SAPVirtualInstances_Start": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Start.json"
+          },
+          "SAPVirtualInstances_Start_WithInfraOperations": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Start_WithInfraOperations.json"
           }
         },
         "description": "Starts the SAP application, that is the Central Services instance and Application server instances.",
@@ -1444,6 +1468,14 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Virtual Instance for SAP solutions resource start request body.",
+            "schema": {
+              "$ref": "#/definitions/StartRequest"
+            }
           }
         ],
         "responses": {
@@ -1487,6 +1519,9 @@
         "x-ms-examples": {
           "SAPVirtualInstances_Stop": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Stop.json"
+          },
+          "Stop the virtual machine(s) and the SAP system on it.": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Stop_WithInfraOperations.json"
           }
         },
         "description": "Stops the SAP Application, that is the Application server instances and Central Services instance.",
@@ -1553,6 +1588,9 @@
         "x-ms-examples": {
           "Start the SAP Central Services Instance": {
             "$ref": "./examples/sapcentralinstances/SAPCentralInstances_StartInstance.json"
+          },
+          "Start the virtual machine(s) and the SAP central services instance on it.": {
+            "$ref": "./examples/sapcentralinstances/SAPCentralInstances_StartInstance_WithInfraOperations.json"
           }
         },
         "description": "Starts the SAP Central Services Instance.",
@@ -1571,6 +1609,14 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "SAP Central Services instance start request body.",
+            "schema": {
+              "$ref": "#/definitions/StartRequest"
+            }
           }
         ],
         "responses": {
@@ -1614,6 +1660,9 @@
         "x-ms-examples": {
           "Stop the SAP Central Services Instance.": {
             "$ref": "./examples/sapcentralinstances/SAPCentralInstances_StopInstance.json"
+          },
+          "Stop the SAP Central Services Instance and its underlying Virtual Machine(s)": {
+            "$ref": "./examples/sapcentralinstances/SAPCentralInstances_StopInstance_WithInfraOperations.json"
           }
         },
         "description": "Stops the SAP Central Services Instance.",
@@ -1683,6 +1732,9 @@
         "x-ms-examples": {
           "Start the SAP Application Server Instance.": {
             "$ref": "./examples/sapapplicationinstances/SAPApplicationServerInstances_StartInstance.json"
+          },
+          "Start Virtual Machine and the SAP Application Server Instance on it.": {
+            "$ref": "./examples/sapapplicationinstances/SAPApplicationServerInstances_StartInstance_WithInfraOperations.json"
           }
         },
         "description": "Starts the SAP Application Server Instance.",
@@ -1701,6 +1753,14 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "SAP Application server instance start request body.",
+            "schema": {
+              "$ref": "#/definitions/StartRequest"
+            }
           }
         ],
         "responses": {
@@ -1744,6 +1804,9 @@
         "x-ms-examples": {
           "Stop the SAP Application Server Instance": {
             "$ref": "./examples/sapapplicationinstances/SAPApplicationServerInstances_StopInstance.json"
+          },
+          "Stop the SAP Application Server Instance and it's infrastructure.": {
+            "$ref": "./examples/sapapplicationinstances/SAPApplicationServerInstances_StopInstance_WithInfraOperations.json"
           }
         },
         "description": "Stops the SAP Application Server Instance.",
@@ -1813,6 +1876,9 @@
         "x-ms-examples": {
           "Start the database instance of the SAP system.": {
             "$ref": "./examples/sapdatabaseinstances/SAPDatabaseInstances_StartInstance.json"
+          },
+          "Start Virtual Machine and the database instance of the SAP system on it.": {
+            "$ref": "./examples/sapdatabaseinstances/SAPDatabaseInstances_StartInstance_WithInfraOperations.json"
           }
         },
         "description": "Starts the database instance of the SAP system.",
@@ -1831,6 +1897,14 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "SAP Database server instance start request body.",
+            "schema": {
+              "$ref": "#/definitions/StartRequest"
+            }
           }
         ],
         "responses": {
@@ -1874,6 +1948,9 @@
         "x-ms-examples": {
           "Stop the database instance of the SAP system.": {
             "$ref": "./examples/sapdatabaseinstances/SAPDatabaseInstances_StopInstance.json"
+          },
+          "Stop the database instance of the SAP system and the underlying Virtual Machine(s).": {
+            "$ref": "./examples/sapdatabaseinstances/SAPDatabaseInstances_StopInstance_WithInfraOperations.json"
           }
         },
         "description": "Stops the database instance of the SAP system.",
@@ -2070,7 +2147,8 @@
         "DiscoveryPending",
         "DiscoveryInProgress",
         "DiscoveryFailed",
-        "RegistrationComplete"
+        "RegistrationComplete",
+        "ACSSInstallationBlocked"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2215,6 +2293,18 @@
         "modelAsString": true
       }
     },
+    "ManagedResourcesNetworkAccessType": {
+      "description": "Defines the network access type for managed resources.",
+      "enum": [
+        "Public",
+        "Private"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedResourcesNetworkAccessType",
+        "modelAsString": true
+      }
+    },
     "SAPVirtualInstanceError": {
       "type": "object",
       "properties": {
@@ -2239,6 +2329,11 @@
         },
         "identity": {
           "$ref": "../../../common-types/v1/commonTypes.json#/definitions/UserAssignedServiceIdentity"
+        },
+        "managedResourcesNetworkAccessType": {
+          "$ref": "#/definitions/ManagedResourcesNetworkAccessType",
+          "description": "Specifies the network access configuration for the resources that will be deployed in the Managed Resource Group. The options to choose from are Public and Private. If 'Private' is chosen, the Storage Account service tag should be enabled on the subnets in which the SAP VMs exist. This is required for establishing connectivity between VM extensions and the managed resource group storage account. This setting is currently applicable only to Storage Account. Learn more here https://go.microsoft.com/fwlink/?linkid=2247228",
+          "default": "Public"
         }
       }
     },
@@ -2299,6 +2394,11 @@
         "version": {
           "type": "string",
           "description": "Specifies the version of the platform image or marketplace image used to create the virtual machine. The allowed formats are Major.Minor.Build or 'latest'. Major, Minor, and Build are decimal numbers. Specify 'latest' to use the latest version of an image available at deploy time. Even if you use 'latest', the VM image will not automatically update after deploy time even if a new version becomes available."
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Specifies the ARM resource ID of the Azure Compute Gallery image version used for creating ACSS VMs. You will need to provide this input when you choose to deploy virtual machines in ACSS with OS image from the Azure Compute gallery."
         }
       },
       "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set."
@@ -3469,6 +3569,22 @@
           "format": "int64",
           "default": 0,
           "description": "This parameter defines how long (in seconds) the soft shutdown waits until the RFC/HTTP clients no longer consider the server for calls with load balancing. Value 0 means that the kernel does not wait, but goes directly into the next shutdown state, i.e. hard stop."
+        },
+        "deallocateVm": {
+          "type": "boolean",
+          "default": false,
+          "description": "The boolean value indicates whether to Stop and deallocate the virtual machines along with the SAP instances."
+        }
+      }
+    },
+    "StartRequest": {
+      "description": "Start SAP instance(s) request body.",
+      "type": "object",
+      "properties": {
+        "startVm": {
+          "type": "boolean",
+          "default": false,
+          "description": "The boolean value indicates whether to start the virtual machines before starting the SAP instances."
         }
       }
     },
@@ -3729,6 +3845,11 @@
             "read"
           ]
         },
+        "managedResourcesNetworkAccessType": {
+          "$ref": "#/definitions/ManagedResourcesNetworkAccessType",
+          "description": "Specifies the network access configuration for the resources that will be deployed in the Managed Resource Group. The options to choose from are Public and Private. If 'Private' is chosen, the Storage Account service tag should be enabled on the subnets in which the SAP VMs exist. This is required for establishing connectivity between VM extensions and the managed resource group storage account. This setting is currently applicable only to Storage Account. Learn more here https://go.microsoft.com/fwlink/?linkid=2247228",
+          "default": "Public"
+        },
         "configuration": {
           "description": "Defines if the SAP system is being created using Azure Center for SAP solutions (ACSS) or if an existing SAP system is being registered with ACSS",
           "$ref": "#/definitions/SAPConfiguration"
@@ -3907,6 +4028,11 @@
           "description": "Application server instance ICM HTTPS Port.",
           "readOnly": true,
           "x-nullable": true
+        },
+        "dispatcherStatus": {
+          "type": "string",
+          "description": "Application server instance dispatcher status.",
+          "readOnly": true
         },
         "loadBalancerDetails": {
           "description": "The Load Balancer details such as LoadBalancer ID attached to Application Server Virtual Machines",

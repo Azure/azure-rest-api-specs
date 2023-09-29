@@ -174,14 +174,11 @@ model GenerateLandingZoneRequest {
     }
   ]>;
 
-  @doc("Billing scope account id")
-  billingScopeAccountId?: string;
-
-  @doc("Enrollment id")
-  enrollmentAccountId?: string;
+  @doc("The full resource ID of billing scope associated to the EA, MCA or MPA account you wish to create the subscription in.")
+  subscriptionBillingScope?: string;
 
   @doc("Optional parent for management group hierarchy, used as intermediate root management group parent, if specified. If empty, default will deploy beneath tenant toot management group.")
-  existingTopLevelManagementGroupParentId?: ResourceIdentifier<[
+  existingTopLevelMgParentId?: ResourceIdentifier<[
     {
       type: "Microsoft.Management/managementGroups";
     }
@@ -201,7 +198,7 @@ model GenerateLandingZoneRequest {
   @doc("The top level management group display name.")
   @minLength(1)
   @maxLength(90)
-  topLevelManagementGroupDisplayName: string;
+  topLevelMgDisplayName: string;
 
   @doc("Location to run deployment(s) from the list of azure regions.")
   @pattern("^([a-zA-Z0-9]+)$")
@@ -214,7 +211,7 @@ model GenerateLandingZoneRequest {
 @doc("The response for the request to generate landing zone code.")
 model GenerateLandingZoneResponse {
   @doc("The top level Management Group display name.")
-  topLevelManagementGroupDisplayName: string;
+  topLevelMgDisplayName: string;
 
   @doc("The name of the Landing Zone configuration resource.")
   landingZoneConfigurationName: string;

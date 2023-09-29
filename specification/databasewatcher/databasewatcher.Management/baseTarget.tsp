@@ -11,6 +11,19 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
 
+@armResourceOperations
+interface Targets extends ProxyResourceOperations<Target> {}
+
+@parentResource(Watcher)
+model Target is ProxyResource<TargetProperties> {
+  @doc("The target resource name.")
+  @key("targetName")
+  @pattern("^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{3,60}$")
+  @segment("targets")
+  @path
+  name: string;
+}
+
 @doc("The generic properties of a target.")
 @discriminator("targetType")
 model TargetProperties {
@@ -65,6 +78,3 @@ enum TargetAuthenticationType {
   @doc("The SQL password authentication.")
   Sql,
 }
-
-@armResourceOperations
-interface Targets extends ProxyResourceOperations<Target> {}

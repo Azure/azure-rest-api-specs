@@ -754,7 +754,7 @@
       "enum": [
         "upgrade",
         "downgrade",
-        "NoChange"
+        "nochange"
       ],
       "x-ms-enum": {
         "name": "ConversionTypeEnum",
@@ -833,9 +833,9 @@
         "modelAsString": false
       }
     },
-    "CreateRecurrenceRequest": {
+    "CreateRecurrenceRequestProperties": {
       "type": "object",
-      "description": "New Purchase Request object.",
+      "description": "The create recurrence request properties",
       "required": [
         "autoRenew",
         "beneficiary",
@@ -866,6 +866,17 @@
         "secondaryPartnerId": {
           "type": "string",
           "description": "Gets or sets the secondary partner Id for the subscription"
+        }
+      }
+    },
+    "CreateRecurrenceRequest": {
+      "type": "object",
+      "description": "New Purchase Request object.",
+      "properties": {
+        "properties": {
+          "description": "The create recurrence request",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateRecurrenceRequestProperties"
         }
       }
     },
@@ -925,9 +936,9 @@
         }
       }
     },
-    "RenewRecurrenceRequest": {
+    "RenewRecurrenceRequestProperties": {
       "type": "object",
-      "description": "Renew Subscription Request object.",
+      "description": "The renew recurrence request properties.",
       "required": [
         "autoRenew",
         "beneficiary",
@@ -936,7 +947,7 @@
       ],
       "properties": {
         "autoRenew": {
-          "description": "Gets or sets the auto renew status of the subscription.",
+          "description": "Gets or sets a value indicating whether the auto renew is on for the subscription.",
           "$ref": "#/definitions/AutoRenewState"
         },
         "beneficiary": {
@@ -953,13 +964,38 @@
         }
       }
     },
-    "ToggleAutoRenewRecurrenceRequest": {
+    "RenewRecurrenceRequest": {
       "type": "object",
-      "description": "Toggle Auto Renew Subscription Request object.",
+      "description": "Renew Subscription Request object.",
+      "properties": {
+        "properties": {
+          "description": "The renew recurrence request",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RenewRecurrenceRequestProperties"
+        }
+      }
+    },
+    "ToggleAutoRenewRecurrenceRequestProperties": {
+      "type": "object",
+      "description": "The toggle auto renew recurrence request properties.",
+      "required": [
+        "autoRenew"
+      ],
       "properties": {
         "autoRenew": {
           "description": "Gets or sets a value indicating whether the auto renew is on for the subscription.",
           "$ref": "#/definitions/AutoRenewState"
+        }
+      }
+    },
+    "ToggleAutoRenewRecurrenceRequest": {
+      "type": "object",
+      "description": "Toggle Auto Renew Subscription Request object.",
+      "properties": {
+        "properties": {
+          "description": "Gets or sets a value indicating whether the auto renew is on for the subscription.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ToggleAutoRenewRecurrenceRequestProperties"
         }
       }
     },
@@ -1006,7 +1042,7 @@
         "modelAsString": false
       }
     },
-    "CheckEligibilityRequest": {
+    "CheckEligibilityRequestProperties": {
       "type": "object",
       "description": "Check Eligibility Request object.",
       "required": [
@@ -1026,6 +1062,17 @@
         "partnerIdentifier": {
           "type": "string",
           "description": "Gets or sets the partner identifier for the subscription."
+        }
+      }
+    },
+    "CheckEligibilityRequest": {
+      "type": "object",
+      "description": "Check Eligibility Request object.",
+      "properties": {
+        "properties": {
+          "description": "The check eligibility request",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CheckEligibilityRequestProperties"
         }
       }
     },

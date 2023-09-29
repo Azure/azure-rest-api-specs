@@ -27,15 +27,38 @@ These are the global settings for the mobilenetwork.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-07
+tag: package-2023-09
 ```
 
 
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09'
+input-file:
+  - Microsoft.MobileNetwork/stable/2023-09-01/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/common.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/dataNetwork.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/diagnosticsPackage.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/mobileNetwork.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/operation.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/packetCapture.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/service.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/sim.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/simGroup.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/simPolicy.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/site.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/slice.json
+  - Microsoft.MobileNetwork/stable/2023-09-01/ts29571.json
+```
 ### Tag: package-preview-2023-07
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-07'
+``` yaml $(tag) == 'package-preview-2023-07'
 input-file:
   - Microsoft.MobileNetwork/preview/2023-07-01-preview/attachedDataNetwork.json
   - Microsoft.MobileNetwork/preview/2023-07-01-preview/attachedWifiSsid.json
@@ -60,6 +83,7 @@ input-file:
   - Microsoft.MobileNetwork/preview/2023-07-01-preview/ueInfo.json
   - Microsoft.MobileNetwork/preview/2023-07-01-preview/wifiSsid.json
 ```
+
 ### Tag: package-2023-06
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.

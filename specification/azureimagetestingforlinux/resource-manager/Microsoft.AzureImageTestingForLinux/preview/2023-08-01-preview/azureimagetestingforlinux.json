@@ -966,6 +966,7 @@
         "templateTags": {
           "type": "array",
           "description": "Tags used to organized templates.",
+          "default": [],
           "items": {
             "type": "string"
           }
@@ -973,6 +974,7 @@
         "region": {
           "type": "array",
           "description": "Azure region to run test in.",
+          "default": [],
           "items": {
             "type": "string"
           }
@@ -980,59 +982,7 @@
         "vmSize": {
           "type": "array",
           "description": "VM sizes to run test on.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "selections": {
-          "type": "array",
-          "description": "Test Selections. Default is to run the smoke_test case",
-          "items": {
-            "$ref": "#/definitions/Selections"
-          },
-          "x-ms-identifiers": []
-        },
-        "customParameters": {
-          "type": "object",
-          "description": "Custom parameters for different test cases",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "concurrency": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of concurrent environments. Default is 4.",
-          "default": 4
-        }
-      },
-      "required": [
-        "templateTags",
-        "region",
-        "vmSize"
-      ]
-    },
-    "JobTemplateResourcePropertiesUpdate": {
-      "type": "object",
-      "description": "The job template properties",
-      "properties": {
-        "templateTags": {
-          "type": "array",
-          "description": "Tags used to organized templates.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "region": {
-          "type": "array",
-          "description": "Azure region to run test in.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "vmSize": {
-          "type": "array",
-          "description": "VM sizes to run test on.",
+          "default": [],
           "items": {
             "type": "string"
           }
@@ -1084,6 +1034,7 @@
         "templateTags": {
           "type": "array",
           "description": "Tags used to organized templates.",
+          "default": [],
           "items": {
             "type": "string"
           }
@@ -1091,6 +1042,7 @@
         "region": {
           "type": "array",
           "description": "Azure region to run test in.",
+          "default": [],
           "items": {
             "type": "string"
           }
@@ -1098,6 +1050,7 @@
         "vmSize": {
           "type": "array",
           "description": "VM sizes to run test on.",
+          "default": [],
           "items": {
             "type": "string"
           }
@@ -1151,7 +1104,7 @@
           "description": "Job template name. The name or the instance should be provided."
         },
         "jobTemplateInstance": {
-          "$ref": "#/definitions/JobTemplateResourcePropertiesUpdate",
+          "$ref": "#/definitions/JobTemplateResourceProperties",
           "description": "Job Template to execute"
         },
         "resourceGroupNamePrefix": {

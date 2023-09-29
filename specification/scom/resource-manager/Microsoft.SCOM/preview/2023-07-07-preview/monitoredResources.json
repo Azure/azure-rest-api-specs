@@ -116,6 +116,15 @@
           },
           {
             "$ref": "#/parameters/monitoredResourceName"
+          },
+          {
+            "name": "MonitoredResource",
+            "description": "SCOM Monitored Resource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MonitoredResource"
+            }
           }
         ],
         "responses": {
@@ -270,6 +279,18 @@
           "description": "The domain name associated with the monitored resource.",
           "type": "string"
         },
+        "extensionStatus": {
+          "description": "The status of the agent extension that is being installed.",
+          "type": "string",
+          "enum": [
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "extensionStatus",
+            "modelAsString": true
+          }
+        },
         "managementServerEndpoint": {
           "description": "The management server endpoint to which the monitored resource is directed.",
           "type": "string",
@@ -293,6 +314,43 @@
         "installType": {
           "description": "Install type of monitored resource.",
           "type": "string",
+          "readOnly": true
+        },
+        "autoUpgrade": {
+          "description": "Update type of monitored resource.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "autoUpgrade",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "totalAlerts": {
+          "description": "total alerts on monitored resource.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "operatingSystem": {
+          "description": "operatingSystem of monitored resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "machineType": {
+          "description": "machineType of monitored resource.",
+          "type": "string",
+          "enum": [
+            "Azure",
+            "Azure Arc",
+            "On-Prem"
+          ],
+          "x-ms-enum": {
+            "name": "machineType",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "provisioningState": {

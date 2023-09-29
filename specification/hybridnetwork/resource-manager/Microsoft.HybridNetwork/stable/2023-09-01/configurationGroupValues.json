@@ -37,9 +37,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/configurationGroupValues/{configurationGroupValueName}": {
       "delete": {
         "tags": [
-          "configurationGroupValues"
+          "ConfigurationGroupValues"
         ],
-        "operationId": "configurationGroupValues_Delete",
+        "operationId": "ConfigurationGroupValues_Delete",
         "description": "Deletes the specified hybrid configuration group value.",
         "parameters": [
           {
@@ -90,9 +90,9 @@
       },
       "get": {
         "tags": [
-          "configurationGroupValues"
+          "ConfigurationGroupValues"
         ],
-        "operationId": "configurationGroupValues_Get",
+        "operationId": "ConfigurationGroupValues_Get",
         "description": "Gets information about the specified hybrid configuration group values.",
         "parameters": [
           {
@@ -130,9 +130,9 @@
       },
       "put": {
         "tags": [
-          "configurationGroupValues"
+          "ConfigurationGroupValues"
         ],
-        "operationId": "configurationGroupValues_CreateOrUpdate",
+        "operationId": "ConfigurationGroupValues_CreateOrUpdate",
         "description": "Creates or updates a hybrid configuration group value.",
         "parameters": [
           {
@@ -178,8 +178,14 @@
           }
         },
         "x-ms-examples": {
-          "Create or update hybrid configuration group value": {
+          "Create or update configuration group value": {
             "$ref": "./examples/ConfigurationGroupValueCreate.json"
+          },
+          "Create or update configuration group value with secrets": {
+            "$ref": "./examples/ConfigurationGroupValueCreateSecret.json"
+          },
+          "Create or update first party configuration group value": {
+            "$ref": "./examples/ConfigurationGroupValueFirstPartyCreate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -189,9 +195,9 @@
       },
       "patch": {
         "tags": [
-          "configurationGroupValues"
+          "ConfigurationGroupValues"
         ],
-        "operationId": "configurationGroupValues_UpdateTags",
+        "operationId": "ConfigurationGroupValues_UpdateTags",
         "description": "Updates a hybrid configuration group tags.",
         "parameters": [
           {
@@ -240,9 +246,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/configurationGroupValues": {
       "get": {
         "tags": [
-          "configurationGroupValues"
+          "ConfigurationGroupValues"
         ],
-        "operationId": "configurationGroupValues_ListBySubscription",
+        "operationId": "ConfigurationGroupValues_ListBySubscription",
         "description": "Lists all sites in the configuration group value in a subscription.",
         "parameters": [
           {
@@ -279,9 +285,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/configurationGroupValues": {
       "get": {
         "tags": [
-          "configurationGroupValues"
+          "ConfigurationGroupValues"
         ],
-        "operationId": "configurationGroupValues_ListByResourceGroup",
+        "operationId": "ConfigurationGroupValues_ListByResourceGroup",
         "description": "Lists all the hybrid network configurationGroupValues in a resource group.",
         "parameters": [
           {
@@ -324,7 +330,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/configurationGroupValuePropertiesFormat",
           "description": "Hybrid configuration group value properties."
         }
@@ -340,12 +346,9 @@
       "type": "object",
       "description": "Hybrid configuration group value properties.",
       "required": [
-        "publisherName",
-        "publisherScope",
-        "configurationGroupSchemaName",
-        "configurationGroupSchemaOfferingLocation",
-        "configurationValue"
+        "configurationType"
       ],
+      "discriminator": "configurationType",
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -353,26 +356,71 @@
           "description": "The provisioning state of the site resource."
         },
         "publisherName": {
+          "readOnly": true,
           "type": "string",
           "description": "The publisher name for the configuration group schema."
         },
         "publisherScope": {
+          "readOnly": true,
           "$ref": "./common.json#/definitions/PublisherScope",
           "description": "The scope of the publisher."
         },
         "configurationGroupSchemaName": {
+          "readOnly": true,
           "type": "string",
           "description": "The configuration group schema name."
         },
         "configurationGroupSchemaOfferingLocation": {
+          "readOnly": true,
           "type": "string",
           "description": "The location of the configuration group schema offering."
         },
+        "configurationGroupSchemaResourceReference": {
+          "$ref": "./common.json#/definitions/DeploymentResourceIdReference",
+          "description": "The configuration group schema resource reference."
+        },
+        "configurationType": {
+          "$ref": "#/definitions/configurationGroupValueConfigurationType",
+          "description": "The value which indicates if configuration values are secrets"
+        }
+      }
+    },
+    "ConfigurationValueWithSecrets": {
+      "description": "The ConfigurationValue with secrets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/configurationGroupValuePropertiesFormat"
+        }
+      ],
+      "properties": {
+        "secretConfigurationValue": {
+          "type": "string",
+          "description": "Name and value pairs that define the configuration value secrets. It can be a well formed escaped JSON string.",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Secret"
+    },
+    "ConfigurationValueWithoutSecrets": {
+      "description": "The ConfigurationValue with no secrets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/configurationGroupValuePropertiesFormat"
+        }
+      ],
+      "properties": {
         "configurationValue": {
           "type": "string",
           "description": "Name and value pairs that define the configuration value. It can be a well formed escaped JSON string."
         }
-      }
+      },
+      "x-ms-discriminator-value": "Open"
     },
     "configurationGroupValueListResult": {
       "type": "object",
@@ -391,6 +439,19 @@
         }
       },
       "description": "Response for hybrid configurationGroups API service call."
+    },
+    "configurationGroupValueConfigurationType": {
+      "type": "string",
+      "description": "The secret type which indicates if secret or not.",
+      "enum": [
+        "Unknown",
+        "Secret",
+        "Open"
+      ],
+      "x-ms-enum": {
+        "name": "ConfigurationGroupValueConfigurationType",
+        "modelAsString": true
+      }
     }
   }
 }

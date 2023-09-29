@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso-rg1",
+    "testBaseAccountName": "contoso-testBaseAccount1",
+    "customImageName": "image-2cfb2edc-13bc-4d54-8d6e-38b2a233b003",
+    "api-version": "2023-08-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "image-2cfb2edc-13bc-4d54-8d6e-38b2a233b003",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/customImages/image-2cfb2edc-13bc-4d54-8d6e-38b2a233b003",
+        "type": "Microsoft.TestBase/testBaseAccounts/customImages",
+        "properties": {
+          "vhdId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/VHDs/vhd-00ac3ccd-1503-4ee5-aa26-26569cfafe88",
+          "definitionName": "contoso-image-def",
+          "versionName": "1.0.0",
+          "source": "VHD",
+          "product": "Windows 10 22H2",
+          "release": "2022.10 B",
+          "status": "Ready",
+          "validationResults": {
+            "results": [
+              {
+                "verificationName": "bootable",
+                "result": "Passed"
+              },
+              {
+                "verificationName": "supportedProduct",
+                "result": "Failed",
+                "message": "Windows 10 1909 is unavailable in Test Base supported OS list."
+              },
+              {
+                "verificationName": "autoLogonEnabled",
+                "result": "Passed"
+              },
+              {
+                "verificationName": "vmAgentInstalled",
+                "result": "Passed"
+              }
+            ]
+          },
+          "osDiskImageSizeInGB": 127,
+          "releaseVersionDate": "2023-12-24T06:52:16.820Z",
+          "creationTime": "2023-05-09T17:30:00Z"
+        }
+      }
+    }
+  }
+}

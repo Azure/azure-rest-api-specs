@@ -646,6 +646,23 @@
           },
           "readOnly": true
         },
+        "connectivityStatus": {
+          "description": "Overall connectivity status for the cluster resource.",
+          "type": "string",
+          "enum": [
+            "NotYetRegistered",
+            "Connected",
+            "NotConnectedRecently",
+            "PartiallyConnected",
+            "Disconnected",
+            "NotSpecified"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectivityStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
         "cloudId": {
           "description": "Unique, immutable resource id.",
           "type": "string",
@@ -682,6 +699,11 @@
         "reportedProperties": {
           "description": "Properties reported by cluster agent.",
           "$ref": "#/definitions/ClusterReportedProperties",
+          "readOnly": true
+        },
+        "isolatedVmAttestationConfiguration": {
+          "description": "Attestation configurations for isolated VM (e.g. TVM, CVM) of the cluster.",
+          "$ref": "#/definitions/IsolatedVmAttestationConfiguration",
           "readOnly": true
         },
         "trialDaysRemaining": {
@@ -778,6 +800,27 @@
           "description": "TimeStamp denoting the latest SA benefit applicability is validated.",
           "type": "string",
           "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "IsolatedVmAttestationConfiguration": {
+      "description": "Attestation configurations for isolated VM (e.g. TVM, CVM) of the cluster.",
+      "type": "object",
+      "properties": {
+        "attestationResourceId": {
+          "description": "Fully qualified Azure resource id of the Microsoft Azure attestation resource associated with this cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "relyingPartyServiceEndpoint": {
+          "description": "Region specific endpoint for relying party service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "attestationServiceEndpoint": {
+          "description": "Region specific endpoint for Microsoft Azure Attestation service for the cluster",
+          "type": "string",
           "readOnly": true
         }
       }

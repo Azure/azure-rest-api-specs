@@ -24,13 +24,13 @@ model JobTemplate is TrackedResource<JobTemplateResourceProperties> {
 @doc("The job template properties")
 model JobTemplateResourceProperties is ResourceProperties {
   @doc("Tags used to organized templates.")
-  templateTags: string[];
+  templateTags?: string[] = [];
 
   @doc("Azure region to run test in.")
-  region: string[];
+  region?: string[] = [];
 
   @doc("VM sizes to run test on.")
-  vmSize: string[];
+  vmSize?: string[] = [];
 
   @doc("Test Selections. Default is to run the smoke_test case")
   selections?: Selections[];

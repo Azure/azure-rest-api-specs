@@ -202,7 +202,7 @@
         "tags": [
           "NetworkFunctionDefinitionGroups"
         ],
-        "operationId": "networkFunctionDefinitionGroups_Get",
+        "operationId": "NetworkFunctionDefinitionGroups_Get",
         "description": "Gets information about the specified networkFunctionDefinition group.",
         "parameters": [
           {
@@ -663,7 +663,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/NetworkFunctionDefinitionGroupPropertiesFormat",
           "description": "Network function definition group properties."
         }
@@ -739,7 +739,7 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/NetworkFunctionDefinitionVersionPropertiesFormat",
           "description": "Network function definition version properties."
         }
@@ -762,7 +762,6 @@
           "description": "The provisioning state of the network function definition version resource."
         },
         "versionState": {
-          "type": "string",
           "readOnly": true,
           "description": "The network function definition version state.",
           "$ref": "#/definitions/VersionState"
@@ -863,37 +862,6 @@
             "read",
             "create"
           ]
-        }
-      }
-    },
-    "PreviewSubscription": {
-      "x-ms-azure-resource": true,
-      "description": "Customer subscription which can use a preview network function definition version.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PreviewSubscriptionPropertiesFormat",
-          "description": "PreviewSubscription properties."
-        }
-      }
-    },
-    "PreviewSubscriptionPropertiesFormat": {
-      "description": "PreviewSubscription properties.",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the preview subscription resource."
         }
       }
     },
@@ -1051,6 +1019,56 @@
             "read",
             "create"
           ]
+        },
+        "options": {
+          "type": "object",
+          "description": "The helm deployment options",
+          "properties": {
+            "installOptions": {
+              "$ref": "#/definitions/HelmInstallOptions",
+              "description": "The helm deployment install options"
+            },
+            "upgradeOptions": {
+              "$ref": "#/definitions/HelmUpgradeOptions",
+              "description": "The helm deployment upgrade options"
+            }
+          }
+        }
+      }
+    },
+    "HelmInstallOptions": {
+      "type": "object",
+      "description": "The helm deployment install options",
+      "properties": {
+        "atomic": {
+          "type": "string",
+          "description": "The helm deployment atomic options"
+        },
+        "wait": {
+          "type": "string",
+          "description": "The helm deployment wait options"
+        },
+        "timeout": {
+          "type": "string",
+          "description": "The helm deployment timeout options"
+        }
+      }
+    },
+    "HelmUpgradeOptions": {
+      "type": "object",
+      "description": "The helm deployment install options",
+      "properties": {
+        "atomic": {
+          "type": "string",
+          "description": "The helm deployment atomic options"
+        },
+        "wait": {
+          "type": "string",
+          "description": "The helm deployment wait options"
+        },
+        "timeout": {
+          "type": "string",
+          "description": "The helm deployment timeout options"
         }
       }
     },
