@@ -51,6 +51,563 @@
         }
       }
     },
+    "AcsRouterJobCancelledEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCancelled event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ],
+      "properties": {
+        "note": {
+          "description": "Router Job Note",
+          "type": "string"
+        },
+        "dispositionCode": {
+          "description": "Router Job Disposition Code",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "dispositionCodeType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AcsRouterJobClassificationFailedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassificationFailed event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ],
+      "properties": {
+        "classificationPolicyId": {
+          "description": "Router Job Classification Policy Id",
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterCommunicationError"
+          }
+        }
+      }
+    },
+    "AcsRouterJobClassifiedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassified event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ],
+      "properties": {
+        "queueInfo": {
+          "description": "Router Job Queue Info",
+          "$ref": "#/definitions/AcsRouterQueueInfo"
+        },
+        "classificationPolicyId": {
+          "description": "Router Job Classification Policy Id",
+          "type": "string"
+        },
+        "priority": {
+          "description": "Router Job Priority",
+          "type": "integer",
+          "format": "int32"
+        },
+        "attachedWorkerSelectors": {
+          "description": "Router Job Attached Worker Selector",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
+        }
+      }
+    },
+    "AcsRouterJobClosedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClosed event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ],
+      "properties": {
+        "assignmentId": {
+          "description": "Router Job Closed Assignment Id",
+          "type": "string"
+        },
+        "workerId": {
+          "description": "Router Job Closed Worker Id",
+          "type": "string"
+        },
+        "dispositionCode": {
+          "description": "Router Job Closed Disposition Code",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "dispositionCodeType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AcsRouterJobCompletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCompleted event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ],
+      "properties": {
+        "assignmentId": {
+          "description": "Router Job Completed Assignment Id",
+          "type": "string"
+        },
+        "workerId": {
+          "description": "Router Job Completed Worker Id",
+          "type": "string"
+        }
+      }
+    },
+    "AcsRouterJobDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobDeleted event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ]
+    },
+    "AcsRouterJobExceptionTriggeredEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobExceptionTriggered event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ],
+      "properties": {
+        "ruleKey": {
+          "description": "Router Job Exception Triggered Rule Key",
+          "type": "string"
+        },
+        "exceptionRuleId": {
+          "description": "Router Job Exception Triggered Rule Id",
+          "type": "string"
+        }
+      }
+    },
+    "AcsRouterJobQueuedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobQueued event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ],
+      "properties": {
+        "priority": {
+          "description": "Router Job Priority",
+          "type": "integer",
+          "format": "int32"
+        },
+        "attachedWorkerSelectors": {
+          "description": "Router Job Queued Attached Worker Selector",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
+        },
+        "requestedWorkerSelectors": {
+          "description": "Router Job Queued Requested Worker Selector",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
+        }
+      }
+    },
+    "AcsRouterJobReceivedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobReceived event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ],
+      "properties": {
+        "jobStatus": {
+          "description": "Router Job Received Job Status",
+          "type": "string"
+        },
+        "classificationPolicyId": {
+          "description": "Router Job Classification Policy Id",
+          "type": "string"
+        },
+        "priority": {
+          "description": "Router Job Priority",
+          "type": "integer",
+          "format": "int32"
+        },
+        "requestedWorkerSelectors": {
+          "description": "Router Job Received Requested Worker Selectors",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
+        },
+        "scheduledTimeUtc": {
+          "description": "Router Job Received Scheduled Time in UTC",
+          "type": "string",
+          "format": "date-time"
+        },
+        "unavailableForMatching": {
+          "description": "Unavailable For Matching for Router Job Received",
+          "type": "boolean"
+        }
+      }
+    },
+    "AcsRouterJobSchedulingFailedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobSchedulingFailed event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ],
+      "properties": {
+        "priority": {
+          "description": "Router Job Priority",
+          "type": "integer",
+          "format": "int32"
+        },
+        "expiredAttachedWorkerSelectors": {
+          "description": "Router Job Scheduling Failed Attached Worker Selector Expired",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
+        },
+        "expiredRequestedWorkerSelectors": {
+          "description": "Router Job Scheduling Failed Requested Worker Selector Expired",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
+        },
+        "scheduledTimeUtc": {
+          "description": "Router Job Scheduling Failed Scheduled Time in UTC",
+          "type": "string",
+          "format": "date-time"
+        },
+        "failureReason": {
+          "description": "Router Job Schecduling Failed Reason",
+          "type": "string"
+        }
+      }
+    },
+    "AcsRouterJobUnassignedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobUnassigned event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ],
+      "properties": {
+        "assignmentId": {
+          "description": "Router Job Unassigned Assignment Id",
+          "type": "string"
+        },
+        "workerId": {
+          "description": "Router Job Unassigned Worker Id",
+          "type": "string"
+        }
+      }
+    },
+    "AcsRouterJobWaitingForActivationEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobWaitingForActivation event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ],
+      "properties": {
+        "priority": {
+          "description": "Router Job Waiting For Activation Priority",
+          "type": "integer",
+          "format": "int32"
+        },
+        "expiredAttachedWorkerSelectors": {
+          "description": "Router Job Waiting For Activation Worker Selector Expired",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
+        },
+        "expiredRequestedWorkerSelectors": {
+          "description": "Router Job Waiting For Activation Requested Worker Selector Expired",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
+        },
+        "scheduledTimeUtc": {
+          "description": "Router Job Waiting For Activation Scheduled Time in UTC",
+          "type": "string",
+          "format": "date-time"
+        },
+        "unavailableForMatching": {
+          "description": "Router Job Waiting For Activation Unavailable For Matching",
+          "type": "boolean"
+        }
+      }
+    },
+    "AcsRouterJobWorkerSelectorsExpiredEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobWorkerSelectorsExpired event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterJobEventData"
+        }
+      ],
+      "properties": {
+        "expiredRequestedWorkerSelectors": {
+          "description": "Router Job Worker Selectors Expired Requested Worker Selectors",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
+        },
+        "expiredAttachedWorkerSelectors": {
+          "description": "Router Job Worker Selectors Expired Attached Worker Selectors",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
+        }
+      }
+    },
+    "AcsRouterWorkerDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeleted event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterWorkerEventData"
+        }
+      ]
+    },
+    "AcsRouterWorkerDeregisteredEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeregistered event",
+      "properties": {
+        "workerId": {
+          "description": "Router Worker Deregistered Worker Id",
+          "type": "string"
+        }
+      }
+    },
+    "AcsRouterWorkerOfferAcceptedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferAccepted event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterWorkerEventData"
+        }
+      ],
+      "properties": {
+        "queueId": {
+          "description": "Router Worker Offer Accepted Queue Id",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "Router Worker Offer Accepted Offer Id",
+          "type": "string"
+        },
+        "assignmentId": {
+          "description": "Router Worker Offer Accepted Assignment Id",
+          "type": "string"
+        },
+        "jobPriority": {
+          "description": "Router Worker Offer Accepted Job Priority",
+          "type": "integer",
+          "format": "int32"
+        },
+        "workerLabels": {
+          "type": "object",
+          "description": "Router Worker Offer Accepted Worker Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "workerTags": {
+          "type": "object",
+          "description": "Router Worker Offer Accepted Worker Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "jobLabels": {
+          "type": "object",
+          "description": "Router Worker Offer Accepted Job Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "jobTags": {
+          "type": "object",
+          "description": "Router Worker Offer Accepted Job Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AcsRouterWorkerOfferDeclinedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferDeclined event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterWorkerEventData"
+        }
+      ],
+      "properties": {
+        "queueId": {
+          "description": "Router Worker Offer Declined Queue Id",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "Router Worker Offer Declined Offer Id",
+          "type": "string"
+        }
+      }
+    },
+    "AcsRouterWorkerOfferExpiredEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferExpired event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterWorkerEventData"
+        }
+      ],
+      "properties": {
+        "queueId": {
+          "description": "Router Worker Offer Expired Queue Id",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "Router Worker Offer Expired Offer Id",
+          "type": "string"
+        }
+      }
+    },
+    "AcsRouterWorkerOfferIssuedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferIssued event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterWorkerEventData"
+        }
+      ],
+      "properties": {
+        "queueId": {
+          "description": "Router Worker Offer Issued Queue Id",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "Router Worker Offer Issued Offer Id",
+          "type": "string"
+        },
+        "jobPriority": {
+          "description": "Router Worker Offer Issued Job Priority",
+          "type": "integer",
+          "format": "int32"
+        },
+        "workerLabels": {
+          "type": "object",
+          "description": "Router Worker Offer Issued Worker Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "offerTimeUtc": {
+          "description": "Router Worker Offer Issued Time in UTC",
+          "type": "string",
+          "format": "date-time"
+        },
+        "expiryTimeUtc": {
+          "description": "Router Worker Offer Issued Expiry Time in UTC",
+          "type": "string",
+          "format": "date-time"
+        },
+        "workerTags": {
+          "type": "object",
+          "description": "Router Worker Offer Issued Worker Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "jobLabels": {
+          "type": "object",
+          "description": "Router Worker Offer Issued Job Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "jobTags": {
+          "type": "object",
+          "description": "Router Worker Offer Issued Job Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AcsRouterWorkerOfferRevokedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferRevoked event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterWorkerEventData"
+        }
+      ],
+      "properties": {
+        "queueId": {
+          "description": "Router Worker Offer Revoked Queue Id",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "Router Worker Offer Revoked Offer Id",
+          "type": "string"
+        }
+      }
+    },
+    "AcsRouterWorkerRegisteredEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerRegistered event",
+      "properties": {
+        "workerId": {
+          "description": "Router Worker Registered Worker Id",
+          "type": "string"
+        },
+        "queueAssignments": {
+          "description": "Router Worker Registered Queue Info",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterQueueInfo"
+          }
+        },
+        "channelConfigurations": {
+          "description": "Router Worker Registered Channel Configuration",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterChannelConfiguration"
+          }
+        },
+        "totalCapacity": {
+          "description": "Router Worker Register Total Capacity",
+          "type": "integer",
+          "format": "int32"
+        },
+        "labels": {
+          "type": "object",
+          "description": "Router Worker Registered Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Router Worker Registered Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "AcsChatMessageReceivedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
       "allOf": [
@@ -778,6 +1335,66 @@
         }
       }
     },
+    "AcsRouterJobEventData": {
+      "description": "Schema of common properties of all Router Job events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterEventData"
+        }
+      ],
+      "properties": {
+        "queueId": {
+          "description": "Router Job events Queue Id",
+          "type": "string"
+        },
+        "labels": {
+          "description": "Router Job events Labels",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "description": "Router Jobs events Tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AcsRouterWorkerEventData": {
+      "description": "Schema of common properties of all Router Worker events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsRouterEventData"
+        }
+      ],
+      "properties": {
+        "workerId": {
+          "description": "Router Worker events Worker Id",
+          "type": "string"
+        }
+      }
+    },
+    "AcsRouterEventData": {
+      "description": "Schema of common properties of all Router events",
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "Router Event Job ID",
+          "type": "string"
+        },
+        "channelReference": {
+          "description": "Router Event Channel Reference",
+          "type": "string"
+        },
+        "channelId": {
+          "description": "Router Event Channel ID",
+          "type": "string"
+        }
+      }
+    },
     "AcsChatEventBaseProperties": {
       "description": "Schema of common properties of all chat events",
       "type": "object",
@@ -918,6 +1535,129 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "AcsRouterChannelConfiguration": {
+      "description": "Router Channel Configuration",
+      "type": "object",
+      "properties": {
+        "channelId": {
+          "description": "Channel ID for Router Job",
+          "type": "string"
+        },
+        "capacityCostPerJob": {
+          "description": "Capacity Cost Per Job for Router Job",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxNumberOfJobs": {
+          "description": "Max Number of Jobs for Router Job",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "AcsRouterQueueInfo": {
+      "description": "Router Queue Info",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Router Queue Id",
+          "type": "string"
+        },
+        "name": {
+          "description": "Router Queue Name",
+          "type": "string"
+        },
+        "labels": {
+          "description": "Router Queue Labels",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AcsRouterCommunicationError": {
+      "description": "Router Communication Error",
+      "properties": {
+        "code": {
+          "description": "Router Communication Error Code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Router Communication Error Message",
+          "type": "string"
+        },
+        "target": {
+          "description": "Router Communication Error Target",
+          "type": "string"
+        },
+        "innerError": {
+          "description": "Router Communication Inner Error",
+          "$ref": "#/definitions/AcsRouterCommunicationError"
+        },
+        "details": {
+          "description": "List of Router Communication Errors",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterCommunicationError"
+          }
+        }
+      }
+    },
+    "AcsRouterWorkerSelector": {
+      "description": "Router Job Worker Selector",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Router Job Worker Selector Key",
+          "type": "string"
+        },
+        "labelOperator": {
+          "description": "Router Job Worker Selector Label Operator",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "labelOperatorType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "Router Job Worker Selector Value",
+          "type": "object"
+        },
+        "ttlSeconds": {
+          "description": "Router Job Worker Selector TTLSeconds",
+          "type": "number",
+          "format": "double"
+        },
+        "state": {
+          "description": "Router Job Worker Selector State",
+          "type": "string",
+          "enum": [
+            "active",
+            "expired"
+          ],
+          "x-ms-enum": {
+            "name": "AcsRouterWorkerSelectorState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "active",
+                "description": "Router Job Worker Selector is Active"
+              },
+              {
+                "value": "expired",
+                "description": "Router Job Worker Selector has Expire"
+              }
+            ]
+          }
+        },
+        "expireTime": {
+          "description": "Router Job Worker Selector Expiration Time",
+          "type": "string",
+          "format": "date-time"
         }
       }
     }
