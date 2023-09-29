@@ -7,7 +7,7 @@
   },
   "paths": {},
   "definitions": {
-    "ResourceNotificationsResourceWithPayloadDetails": {
+    "ResourceNotificationsResourceUpdatedDetails": {
       "description": "Describes the schema of the properties under resource info which are common across all ARN system topic events",
       "type": "object",
       "properties": {
@@ -51,17 +51,19 @@
         }
       }
     },
-    "ResourceNotificationsResourceUpdatedDetails": {
+    "ResourceNotificationsResourceUpdatedEventData": {
       "description": "Describes the schema of the common properties across all ARN system topic events",
       "type": "object",
       "properties": {
         "resourceInfo": {
           "description": "resourceInfo details for update event",
-          "$ref": "#/definitions/ResourceNotificationsResourceWithPayloadDetails"
+          "$ref": "#/definitions/ResourceNotificationsResourceUpdatedDetails",
+          "x-ms-client-name": "resourceDetails"
         },
         "operationalInfo": {
           "description": "details about operational info",
-          "$ref": "#/definitions/ResourceNotificationsOperationalDetails"
+          "$ref": "#/definitions/ResourceNotificationsOperationalDetails",
+          "x-ms-client-name": "operationalDetails"
         },
         "apiVersion": {
           "description": "api version of the resource properties bag",
