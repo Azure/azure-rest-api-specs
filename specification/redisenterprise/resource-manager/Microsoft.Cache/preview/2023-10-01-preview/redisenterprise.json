@@ -1821,6 +1821,14 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Cache/redisEnterprise/databases"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -1994,10 +2002,13 @@
     "SkuName": {
       "type": "string",
       "enum": [
+        "Enterprise_E5",
         "Enterprise_E10",
         "Enterprise_E20",
         "Enterprise_E50",
         "Enterprise_E100",
+        "Enterprise_E200",
+        "Enterprise_E400",
         "EnterpriseFlash_F300",
         "EnterpriseFlash_F700",
         "EnterpriseFlash_F1500"
@@ -2070,7 +2081,15 @@
         "ids": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Cache/redisEnterprise/databases"
+                }
+              ]
+            }
           },
           "description": "The resource IDs of the database resources to be unlinked."
         }
