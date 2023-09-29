@@ -30,6 +30,7 @@ model CommunityTraining is TrackedResource<CommunityTrainingProperties> {
   @segment("communityTrainings")
   @path
   name: string;
+
   ...ResourceSku;
 }
 
