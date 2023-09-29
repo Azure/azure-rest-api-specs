@@ -85,7 +85,7 @@ interface Organizations
 
 @armResourceOperations
 interface ServerlessRuntimes
-  extends Azure.ResourceManager.TrackedResourceOperations<
+  extends ProxyResourceOperations<
       InformaticaServerlessRuntimeResource,
       InformaticaServerlessRuntimeProperties
     > {
@@ -110,6 +110,13 @@ interface ServerlessRuntimes
   startFailedServerlessRuntime(
     ...ResourceInstanceParameters<InformaticaServerlessRuntimeResource>,
   ): ArmNoContentResponse | ErrorResponse;
+
+  @doc("Returns a serverless runtime resource by ID")
+  @armResourceAction(InformaticaServerlessRuntimeResource)
+  @post
+  serverlessResourceByID(
+    ...ResourceInstanceParameters<InformaticaServerlessRuntimeResource>,
+  ): ArmResponse<InformaticaServerlessRuntimeResource> | ErrorResponse;
 }
 
 @doc("Model for the check dependencies API for an informatica serverless runtime resource")
@@ -525,7 +532,7 @@ model ApplicationConfigs {
   platform: string;
 
   @doc("Customized value of the application config.")
-  customized: boolean;
+  customized: string;
 
   @doc("Default value of the application config.")
   defaultValue: string;
