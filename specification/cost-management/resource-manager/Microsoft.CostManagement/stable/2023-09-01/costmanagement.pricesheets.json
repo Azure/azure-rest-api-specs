@@ -111,7 +111,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "description": "Gets a URL to download the current month's pricesheet for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.Due to Azure product growth, the Azure price sheet download experience in this preview version will be updated from a single csv file to a Zip file containing multiple csv files, each with max 200k records.",
+        "description": "Gets a URL to download the current month's pricesheet for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.Due to Azure product growth, the Azure price sheet download experience in this preview version will be updated from a single csv file to a Zip file containing multiple csv files, each with max size of 75MB.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -137,6 +137,62 @@
               },
               "OData-EntityId": {
                 "description": "The operation entity Id GUID.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/DownloadURL"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.CostManagement/pricesheets/default/download": {
+      "post": {
+        "tags": [
+          "PriceSheets"
+        ],
+        "x-ms-examples": {
+          "EAPriceSheetForBillingPeriod": {
+            "$ref": "./examples/EAPriceSheetForBillingPeriod.json"
+          }
+        },
+        "operationId": "PriceSheet_DownloadByBillingAccountPeriod",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Gets a URL to download the pricesheet for an enrollment and billing perdiod. Due to Azure product growth, the Azure price sheet download experience in this version will be updated from a single csv file to a Zip file containing multiple csv files, each with max size of 75MB.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
                 "type": "string"
               }
             }
@@ -184,6 +240,23 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "pattern": "[A-Za-z0-9]+"
+    },
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingPeriodNameParameter": {
+      "name": "billingPeriodName",
+      "in": "path",
+      "description": "Billing Period Name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9]*$",
+      "x-ms-parameter-location": "method"
     }
   }
 }
