@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2023-02-22-preview",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Hardware/orders/order1",
+            "name": "order1",
+            "location": "eus2",
+            "properties": {
+              "provisioningState": "Pending",
+              "purchaseOrder": {
+                "id": "Customer_ORDER_Number",
+                "createdDateTime": "2022-06-06"
+              },
+              "status": "Pending",
+              "orderLines": [
+                {
+                  "id": "1",
+                  "createdDateTime": "2022-06-06T17:18:21.373+00:00",
+                  "status": "Pending",
+                  "quantity": {
+                    "ordered": 10,
+                    "confirmed": 0,
+                    "shipped": 0,
+                    "returned": 0
+                  },
+                  "product": {
+                    "type": "UPN",
+                    "id": "1234567890"
+                  },
+                  "price": {
+                    "unitAmount": 636.99,
+                    "tax": 63.699,
+                    "fees": [
+                      {
+                        "type": "Recycling",
+                        "feeAmount": 6
+                      }
+                    ]
+                  },
+                  "shipTo": {
+                    "type": "BusinessLocation",
+                    "id": "054321456"
+                  },
+                  "shippingMethod": "shipment",
+                  "requestedDeliveryDate": "2022-06-27",
+                  "estimatedDeliverDateTime": "2022-06-27",
+                  "estimatedShippedDateTime": "2022-06-27"
+                }
+              ],
+              "currency": "USD"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
