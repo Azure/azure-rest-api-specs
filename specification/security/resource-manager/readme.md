@@ -86,6 +86,15 @@ tag: package-composite-v3
 The following packages may be composed from multiple api-versions.
 
 
+### Tag: package-2023-11-15
+
+These settings apply only when `--tag=package-2023-11-15` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11-15'
+input-file:
+  - Microsoft.Security/stable/2023-11-15/apiCollections.json
+```
+
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
@@ -152,6 +161,7 @@ input-file:
   - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
   - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
   - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+  - Microsoft.Security/preview/2023-02-01-preview/healthReports.json
 ```
 
 ### Tag: package-preview-2023-02
@@ -416,7 +426,7 @@ input-file:
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
 - Microsoft.Security/preview/2022-07-01-preview/applications.json
-- Microsoft.Security/preview/2022-11-20-preview/apiCollections.json
+- Microsoft.Security/stable/2023-11-15/apiCollections.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
