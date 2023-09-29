@@ -518,17 +518,15 @@
           "description": "The the name of the suppression list. This value must match one of the valid sender usernames of the sending domain.",
           "type": "string"
         },
-        "dataLocation": {
-          "description": "The location where the SuppressionList resource data is stored at rest.",
-          "type": "string"
-        },
         "lastUpdatedTimeStamp": {
           "description": "The date the resource was last updated.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "createdTimeStamp": {
           "description": "The date the resource was created.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -595,7 +593,8 @@
         "lastModified": {
           "description": "The date the address was last updated in a suppression list.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         }
       }
     },
