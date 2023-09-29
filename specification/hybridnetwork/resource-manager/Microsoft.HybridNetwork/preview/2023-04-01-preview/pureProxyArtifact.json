@@ -276,9 +276,23 @@
       "type": "object",
       "properties": {
         "artifactState": {
-          "$ref": "./common.json#/definitions/ArtifactState",
+          "$ref": "#/definitions/ArtifactState",
           "description": "The artifact state"
         }
+      }
+    },
+    "ArtifactState": {
+      "type": "string",
+      "description": "The artifact state.",
+      "enum": [
+        "Unknown",
+        "Preview",
+        "Active",
+        "Deprecated"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactState",
+        "modelAsString": true
       }
     }
   }
