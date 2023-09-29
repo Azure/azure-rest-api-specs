@@ -6192,10 +6192,18 @@
           "default": false,
           "type": "boolean"
         },
-        "metadataSearchEnabled": {
-          "description": "Determines whether registry artifacts are indexed for metadata search",
-          "default": false,
-          "type": "boolean"
+        "metadataSearch": {
+          "description": "Determines whether registry artifacts are indexed for metadata search.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetadataSearch",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -6614,10 +6622,18 @@
           "description": "Enables registry-wide pull from unauthenticated clients.",
           "type": "boolean"
         },
-        "metadataSearchEnabled": {
-          "description": "Determines whether registry artifacts are indexed for metadata search",
-          "type": "boolean"
-        }
+        "metadataSearch": {
+          "description": "Determines whether registry artifacts are indexed for metadata search.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MetadataSearch",
+            "modelAsString": true
+          }
       }
     },
     "RegistryUsageListResult": {
