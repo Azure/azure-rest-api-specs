@@ -85,10 +85,7 @@ interface Organizations
 
 @armResourceOperations
 interface ServerlessRuntimes
-  extends ProxyResourceOperations<
-      InformaticaServerlessRuntimeResource,
-      InformaticaServerlessRuntimeProperties
-    > {
+  extends ProxyResourceOperations<InformaticaServerlessRuntimeResource> {
   get is ArmResourceRead<InformaticaServerlessRuntimeResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaServerlessRuntimeResource>;
   delete is ArmResourceDeleteAsync<InformaticaServerlessRuntimeResource>;
@@ -248,7 +245,7 @@ model InfaServerlessFetchConfigProperties {
 @doc("A Serverless Runtime environment  resource by Informatica.")
 @parentResource(InformaticaOrganizationResource)
 model InformaticaServerlessRuntimeResource
-  is TrackedResource<InformaticaServerlessRuntimeProperties> {
+  is ProxyResource<InformaticaServerlessRuntimeProperties> {
   @key("serverlessRuntimeName")
   @segment("serverlessRuntimes")
   @doc("Name of the Serverless Runtime resource")
