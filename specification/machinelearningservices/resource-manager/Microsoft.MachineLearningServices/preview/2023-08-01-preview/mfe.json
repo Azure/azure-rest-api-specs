@@ -14,6 +14,7 @@
         "tags": [
           "CapacityReservationGroup"
         ],
+        "summary": "List all Capacity Reservation Groups in the subscription.",
         "operationId": "CapacityReservationGroups_ListBySubscription",
         "produces": [
           "application/json"
@@ -58,6 +59,7 @@
         "tags": [
           "CapacityReservationGroup"
         ],
+        "summary": "List all Capacity Reservation Groups in the resource group.",
         "operationId": "CapacityReservationGroups_List",
         "produces": [
           "application/json"
@@ -105,6 +107,7 @@
         "tags": [
           "CapacityReservationGroup"
         ],
+        "summary": "Delete a Capacity Reservation Group.",
         "operationId": "CapacityReservationGroups_Delete",
         "produces": [
           "application/json"
@@ -119,6 +122,7 @@
           {
             "in": "path",
             "name": "groupId",
+            "description": "The ID of the Capacity Reservation Group.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
@@ -151,6 +155,7 @@
         "tags": [
           "CapacityReservationGroup"
         ],
+        "summary": "Get a Capacity Reservation Group.",
         "operationId": "CapacityReservationGroups_Get",
         "produces": [
           "application/json"
@@ -165,6 +170,7 @@
           {
             "in": "path",
             "name": "groupId",
+            "description": "The ID of the Capacity Reservation Group.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
@@ -197,6 +203,7 @@
         "tags": [
           "CapacityReservationGroup"
         ],
+        "summary": "Update a Capacity Reservation Group.",
         "operationId": "CapacityReservationGroups_Update",
         "consumes": [
           "application/json"
@@ -214,6 +221,7 @@
           {
             "in": "path",
             "name": "groupId",
+            "description": "The ID of the Capacity Reservation Group.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
@@ -224,6 +232,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "The partial Capacity Reservation Group to Update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PartialMinimalTrackedResourceWithSkuAndIdentity"
@@ -254,6 +263,7 @@
         "tags": [
           "CapacityReservationGroup"
         ],
+        "summary": "Create or Update a Capacity Reservation Group.",
         "operationId": "CapacityReservationGroups_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -271,6 +281,7 @@
           {
             "in": "path",
             "name": "groupId",
+            "description": "The ID of the Capacity Reservation Group.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
@@ -281,6 +292,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "The Capacity Reservation Group to Create or Update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CapacityReservationGroupTrackedResource"
