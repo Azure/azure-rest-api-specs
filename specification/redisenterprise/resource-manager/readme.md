@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-10'
 input-file:
-  - Microsoft.Cache/preview/2023-10-01/redisenterprise.json
+  - Microsoft.Cache/preview/2023-10-01-preview/redisenterprise.json
 ```
 ### Tag: package-preview-2023-08
 
