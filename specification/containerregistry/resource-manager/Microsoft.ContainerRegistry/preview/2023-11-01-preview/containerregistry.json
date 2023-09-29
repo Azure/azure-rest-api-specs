@@ -6634,1356 +6634,1357 @@
             "name": "MetadataSearch",
             "modelAsString": true
           }
-      }
-    },
-    "RegistryUsageListResult": {
-      "description": "The result of a request to get container registry quota usages.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of container registry quota usages.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RegistryUsage"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
         }
-      }
-    },
-    "RegistryUsage": {
-      "description": "The quota usage for a container registry.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the usage.",
-          "type": "string"
-        },
-        "limit": {
-          "format": "int64",
-          "description": "The limit of the usage.",
-          "type": "integer"
-        },
-        "currentValue": {
-          "format": "int64",
-          "description": "The current value of the usage.",
-          "type": "integer"
-        },
-        "unit": {
-          "description": "The unit of measurement.",
-          "enum": [
-            "Count",
-            "Bytes"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RegistryUsageUnit",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "PrivateLinkResourceListResult": {
-      "description": "The result of a request to list private link resources for a container registry.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of private link resources. Since this list may be incomplete, the nextLink field should be used to request the next list of private link resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next list of private link resources.",
-          "type": "string"
-        }
-      }
-    },
-    "PrivateLinkResource": {
-      "description": "A resource that supports private link capabilities.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The resource type is private link resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "The resource ID.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string"
-        },
+      },
+      "RegistryUsageListResult": {
+        "description": "The result of a request to get container registry quota usages.",
+        "type": "object",
         "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "A resource that supports private link capabilities.",
-          "x-ms-client-flatten": true
+          "value": {
+            "description": "The list of container registry quota usages.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/RegistryUsage"
+            },
+            "x-ms-identifiers": [
+              "name"
+            ]
+          }
         }
-      }
-    },
-    "PrivateLinkResourceProperties": {
-      "description": "The properties of a private link resource.",
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "description": "The private link resource group id.",
-          "type": "string"
-        },
-        "requiredMembers": {
-          "description": "The private link resource required member names.",
-          "type": "array",
-          "items": {
+      },
+      "RegistryUsage": {
+        "description": "The quota usage for a container registry.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the usage.",
             "type": "string"
-          }
-        },
-        "requiredZoneNames": {
-          "description": "The private link resource Private link DNS zone name.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "RegistryListCredentialsResult": {
-      "description": "The response from the ListCredentials operation.",
-      "type": "object",
-      "properties": {
-        "username": {
-          "description": "The username for a container registry.",
-          "type": "string"
-        },
-        "passwords": {
-          "description": "The list of passwords for a container registry.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RegistryPassword"
           },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "RegistryPassword": {
-      "description": "The login password for the container registry.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The password name.",
-          "enum": [
-            "password",
-            "password2"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PasswordName",
-            "modelAsString": false
-          }
-        },
-        "value": {
-          "description": "The password value.",
-          "type": "string"
-        }
-      }
-    },
-    "RegenerateCredentialParameters": {
-      "description": "The parameters used to regenerate the login credential.",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Specifies name of the password which should be regenerated -- password or password2.",
-          "enum": [
-            "password",
-            "password2"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PasswordName",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "ReplicationListResult": {
-      "description": "The result of a request to list replications for a container registry.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of replications. Since this list may be incomplete, the nextLink field should be used to request the next list of replications.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Replication"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next list of replications.",
-          "type": "string"
-        }
-      }
-    },
-    "Replication": {
-      "description": "An object that represents a replication for a container registry.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ReplicationProperties",
-          "description": "The properties of the replication.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ReplicationProperties": {
-      "description": "The properties of a replication.",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "description": "The provisioning state of the replication at the time the operation was called.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "status": {
-          "$ref": "#/definitions/Status",
-          "description": "The status of the replication at the time the operation was called.",
-          "readOnly": true
-        },
-        "regionEndpointEnabled": {
-          "description": "Specifies whether the replication's regional endpoint is enabled. Requests will not be routed to a replication whose regional endpoint is disabled, however its data will continue to be synced with other replications.",
-          "default": true,
-          "type": "boolean"
-        },
-        "zoneRedundancy": {
-          "description": "Whether or not zone redundancy is enabled for this container registry replication",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ZoneRedundancy",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "ReplicationUpdateParameters": {
-      "description": "The parameters for updating a replication.",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "The tags for the replication.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/ReplicationUpdateParametersProperties",
-          "description": "The parameters for updating a replication's properties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ReplicationUpdateParametersProperties": {
-      "type": "object",
-      "properties": {
-        "regionEndpointEnabled": {
-          "description": "Specifies whether the replication's regional endpoint is enabled. Requests will not be routed to a replication whose regional endpoint is disabled, however its data will continue to be synced with other replications.",
-          "type": "boolean"
-        }
-      }
-    },
-    "ScopeMapListResult": {
-      "description": "The result of a request to list scope maps for a container registry.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of scope maps. Since this list may be incomplete, the nextLink field should be used to request the next list of scope maps.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScopeMap"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next list of scope maps.",
-          "type": "string"
-        }
-      }
-    },
-    "ScopeMap": {
-      "description": "An object that represents a scope map for a container registry.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ScopeMapProperties",
-          "description": "The properties of the scope map.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ScopeMapProperties": {
-      "description": "The properties of a scope map.",
-      "required": [
-        "actions"
-      ],
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "The user friendly description of the scope map.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type of the scope map. E.g. BuildIn scope map.",
-          "type": "string",
-          "readOnly": true
-        },
-        "creationDate": {
-          "format": "date-time",
-          "description": "The creation date of scope map.",
-          "type": "string",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "description": "Provisioning state of the resource.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "actions": {
-          "description": "The list of scoped permissions for registry artifacts.\r\nE.g. repositories/repository-name/content/read,\r\nrepositories/repository-name/metadata/write",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ScopeMapUpdateParameters": {
-      "description": "The properties for updating the scope map.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ScopeMapPropertiesUpdateParameters",
-          "description": "The update parameters for scope map properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ScopeMapPropertiesUpdateParameters": {
-      "description": "The update parameters for scope map properties.",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "The user friendly description of the scope map.",
-          "type": "string"
-        },
-        "actions": {
-          "description": "The list of scope permissions for registry artifacts.\r\nE.g. repositories/repository-name/pull, \r\nrepositories/repository-name/delete",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "TokenListResult": {
-      "description": "The result of a request to list tokens for a container registry.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of tokens. Since this list may be incomplete, the nextLink field should be used to request the next list of tokens.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Token"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next list of tokens.",
-          "type": "string"
-        }
-      }
-    },
-    "Token": {
-      "description": "An object that represents a token for a container registry.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TokenProperties",
-          "description": "The properties of the token.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "TokenProperties": {
-      "description": "The properties of a token.",
-      "type": "object",
-      "properties": {
-        "creationDate": {
-          "format": "date-time",
-          "description": "The creation date of scope map.",
-          "type": "string",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "description": "Provisioning state of the resource.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "scopeMapId": {
-          "description": "The resource ID of the scope map to which the token will be associated with.",
-          "type": "string"
-        },
-        "credentials": {
-          "$ref": "#/definitions/TokenCredentialsProperties",
-          "description": "The credentials that can be used for authenticating the token."
-        },
-        "status": {
-          "description": "The status of the token example enabled or disabled.",
-          "enum": [
-            "enabled",
-            "disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TokenStatus",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "TokenCredentialsProperties": {
-      "description": "The properties of the credentials that can be used for authenticating the token.",
-      "type": "object",
-      "properties": {
-        "certificates": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TokenCertificate"
+          "limit": {
+            "format": "int64",
+            "description": "The limit of the usage.",
+            "type": "integer"
           },
-          "x-ms-identifiers": [
-            "thumbprint"
-          ]
-        },
-        "passwords": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TokenPassword"
+          "currentValue": {
+            "format": "int64",
+            "description": "The current value of the usage.",
+            "type": "integer"
           },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "ActiveDirectoryObject": {
-      "description": "The Active Directory Object that will be used for authenticating the token of a container registry.",
-      "type": "object",
-      "properties": {
-        "objectId": {
-          "description": "The user/group/application object ID for Active Directory Object that will be used for authenticating the token of a container registry.",
-          "type": "string"
-        },
-        "tenantId": {
-          "description": "The tenant ID of user/group/application object Active Directory Object that will be used for authenticating the token of a container registry.",
-          "type": "string"
-        }
-      }
-    },
-    "TokenCertificate": {
-      "description": "The properties of a certificate used for authenticating a token.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "enum": [
-            "certificate1",
-            "certificate2"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TokenCertificateName",
-            "modelAsString": true
-          }
-        },
-        "expiry": {
-          "format": "date-time",
-          "description": "The expiry datetime of the certificate.",
-          "type": "string"
-        },
-        "thumbprint": {
-          "description": "The thumbprint of the certificate.",
-          "type": "string"
-        },
-        "encodedPemCertificate": {
-          "description": "Base 64 encoded string of the public certificate1 in PEM format that will be used for authenticating the token.",
-          "type": "string"
-        }
-      }
-    },
-    "TokenPassword": {
-      "description": "The password that will be used for authenticating the token of a container registry.",
-      "type": "object",
-      "properties": {
-        "creationTime": {
-          "format": "date-time",
-          "description": "The creation datetime of the password.",
-          "type": "string"
-        },
-        "expiry": {
-          "format": "date-time",
-          "description": "The expiry datetime of the password.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The password name \"password1\" or \"password2\"",
-          "enum": [
-            "password1",
-            "password2"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TokenPasswordName",
-            "modelAsString": true
-          }
-        },
-        "value": {
-          "description": "The password value.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "TokenUpdateParameters": {
-      "description": "The parameters for updating a token.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TokenUpdateProperties",
-          "description": "The properties of the token update parameters.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "TokenUpdateProperties": {
-      "description": "The parameters for updating token properties.",
-      "type": "object",
-      "properties": {
-        "scopeMapId": {
-          "description": "The resource ID of the scope map to which the token will be associated with.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The status of the token example enabled or disabled.",
-          "enum": [
-            "enabled",
-            "disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TokenStatus",
-            "modelAsString": true
-          }
-        },
-        "credentials": {
-          "$ref": "#/definitions/TokenCredentialsProperties",
-          "description": "The credentials that can be used for authenticating the token."
-        }
-      }
-    },
-    "GenerateCredentialsParameters": {
-      "description": "The parameters used to generate credentials for a specified token or user of a container registry.",
-      "type": "object",
-      "properties": {
-        "tokenId": {
-          "description": "The resource ID of the token for which credentials have to be generated.",
-          "type": "string"
-        },
-        "expiry": {
-          "format": "date-time",
-          "description": "The expiry date of the generated credentials after which the credentials become invalid.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Specifies name of the password which should be regenerated if any -- password1 or password2.",
-          "enum": [
-            "password1",
-            "password2"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TokenPasswordName",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "GenerateCredentialsResult": {
-      "description": "The response from the GenerateCredentials operation.",
-      "type": "object",
-      "properties": {
-        "username": {
-          "description": "The username for a container registry.",
-          "type": "string"
-        },
-        "passwords": {
-          "description": "The list of passwords for a container registry.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TokenPassword"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "WebhookListResult": {
-      "description": "The result of a request to list webhooks for a container registry.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of webhooks. Since this list may be incomplete, the nextLink field should be used to request the next list of webhooks.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Webhook"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next list of webhooks.",
-          "type": "string"
-        }
-      }
-    },
-    "Webhook": {
-      "description": "An object that represents a webhook for a container registry.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/WebhookProperties",
-          "description": "The properties of the webhook.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "WebhookProperties": {
-      "description": "The properties of a webhook.",
-      "required": [
-        "actions"
-      ],
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "The status of the webhook at the time the operation was called.",
-          "enum": [
-            "enabled",
-            "disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "WebhookStatus",
-            "modelAsString": true
-          }
-        },
-        "scope": {
-          "description": "The scope of repositories where the event can be triggered. For example, 'foo:*' means events for all tags under repository 'foo'. 'foo:bar' means events for 'foo:bar' only. 'foo' is equivalent to 'foo:latest'. Empty means all events.",
-          "type": "string"
-        },
-        "actions": {
-          "description": "The list of actions that trigger the webhook to post notifications.",
-          "type": "array",
-          "items": {
+          "unit": {
+            "description": "The unit of measurement.",
             "enum": [
-              "push",
-              "delete",
-              "quarantine",
-              "chart_push",
-              "chart_delete"
+              "Count",
+              "Bytes"
             ],
             "type": "string",
             "x-ms-enum": {
-              "name": "WebhookAction",
-              "modelAsString": true
-            }
-          }
-        },
-        "provisioningState": {
-          "description": "The provisioning state of the webhook at the time the operation was called.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "WebhookCreateParameters": {
-      "description": "The parameters for creating a webhook.",
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "The tags for the webhook.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "description": "The location of the webhook. This cannot be changed after the resource is created.",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/WebhookPropertiesCreateParameters",
-          "description": "The properties that the webhook will be created with.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "WebhookPropertiesCreateParameters": {
-      "description": "The parameters for creating the properties of a webhook.",
-      "required": [
-        "serviceUri",
-        "actions"
-      ],
-      "type": "object",
-      "properties": {
-        "serviceUri": {
-          "description": "The service URI for the webhook to post notifications.",
-          "type": "string",
-          "x-ms-secret": true
-        },
-        "customHeaders": {
-          "description": "Custom headers that will be added to the webhook notifications.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-secret": true
-        },
-        "status": {
-          "description": "The status of the webhook at the time the operation was called.",
-          "enum": [
-            "enabled",
-            "disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "WebhookStatus",
-            "modelAsString": true
-          }
-        },
-        "scope": {
-          "description": "The scope of repositories where the event can be triggered. For example, 'foo:*' means events for all tags under repository 'foo'. 'foo:bar' means events for 'foo:bar' only. 'foo' is equivalent to 'foo:latest'. Empty means all events.",
-          "type": "string"
-        },
-        "actions": {
-          "description": "The list of actions that trigger the webhook to post notifications.",
-          "type": "array",
-          "items": {
-            "enum": [
-              "push",
-              "delete",
-              "quarantine",
-              "chart_push",
-              "chart_delete"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "WebhookAction",
+              "name": "RegistryUsageUnit",
               "modelAsString": true
             }
           }
         }
-      }
-    },
-    "WebhookUpdateParameters": {
-      "description": "The parameters for updating a webhook.",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "The tags for the webhook.",
-          "type": "object",
-          "additionalProperties": {
+      },
+      "PrivateLinkResourceListResult": {
+        "description": "The result of a request to list private link resources for a container registry.",
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "The list of private link resources. Since this list may be incomplete, the nextLink field should be used to request the next list of private link resources.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "nextLink": {
+            "description": "The URI that can be used to request the next list of private link resources.",
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/WebhookPropertiesUpdateParameters",
-          "description": "The properties that the webhook will be updated with.",
-          "x-ms-client-flatten": true
         }
-      }
-    },
-    "WebhookPropertiesUpdateParameters": {
-      "description": "The parameters for updating the properties of a webhook.",
-      "type": "object",
-      "properties": {
-        "serviceUri": {
-          "description": "The service URI for the webhook to post notifications.",
-          "type": "string",
-          "x-ms-secret": true
-        },
-        "customHeaders": {
-          "description": "Custom headers that will be added to the webhook notifications.",
-          "type": "object",
-          "additionalProperties": {
+      },
+      "PrivateLinkResource": {
+        "description": "A resource that supports private link capabilities.",
+        "type": "object",
+        "properties": {
+          "type": {
+            "description": "The resource type is private link resource.",
+            "type": "string",
+            "readOnly": true
+          },
+          "id": {
+            "description": "The resource ID.",
             "type": "string"
           },
-          "x-ms-secret": true
-        },
-        "status": {
-          "description": "The status of the webhook at the time the operation was called.",
-          "enum": [
-            "enabled",
-            "disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "WebhookStatus",
-            "modelAsString": true
+          "name": {
+            "description": "The name of the resource.",
+            "type": "string"
+          },
+          "properties": {
+            "$ref": "#/definitions/PrivateLinkResourceProperties",
+            "description": "A resource that supports private link capabilities.",
+            "x-ms-client-flatten": true
           }
-        },
-        "scope": {
-          "description": "The scope of repositories where the event can be triggered. For example, 'foo:*' means events for all tags under repository 'foo'. 'foo:bar' means events for 'foo:bar' only. 'foo' is equivalent to 'foo:latest'. Empty means all events.",
-          "type": "string"
-        },
-        "actions": {
-          "description": "The list of actions that trigger the webhook to post notifications.",
-          "type": "array",
-          "items": {
+        }
+      },
+      "PrivateLinkResourceProperties": {
+        "description": "The properties of a private link resource.",
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "description": "The private link resource group id.",
+            "type": "string"
+          },
+          "requiredMembers": {
+            "description": "The private link resource required member names.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "requiredZoneNames": {
+            "description": "The private link resource Private link DNS zone name.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "RegistryListCredentialsResult": {
+        "description": "The response from the ListCredentials operation.",
+        "type": "object",
+        "properties": {
+          "username": {
+            "description": "The username for a container registry.",
+            "type": "string"
+          },
+          "passwords": {
+            "description": "The list of passwords for a container registry.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/RegistryPassword"
+            },
+            "x-ms-identifiers": []
+          }
+        }
+      },
+      "RegistryPassword": {
+        "description": "The login password for the container registry.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The password name.",
             "enum": [
-              "push",
-              "delete",
-              "quarantine",
-              "chart_push",
-              "chart_delete"
+              "password",
+              "password2"
             ],
             "type": "string",
             "x-ms-enum": {
-              "name": "WebhookAction",
+              "name": "PasswordName",
+              "modelAsString": false
+            }
+          },
+          "value": {
+            "description": "The password value.",
+            "type": "string"
+          }
+        }
+      },
+      "RegenerateCredentialParameters": {
+        "description": "The parameters used to regenerate the login credential.",
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Specifies name of the password which should be regenerated -- password or password2.",
+            "enum": [
+              "password",
+              "password2"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "PasswordName",
+              "modelAsString": false
+            }
+          }
+        }
+      },
+      "ReplicationListResult": {
+        "description": "The result of a request to list replications for a container registry.",
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "The list of replications. Since this list may be incomplete, the nextLink field should be used to request the next list of replications.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Replication"
+            }
+          },
+          "nextLink": {
+            "description": "The URI that can be used to request the next list of replications.",
+            "type": "string"
+          }
+        }
+      },
+      "Replication": {
+        "description": "An object that represents a replication for a container registry.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/Resource"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/ReplicationProperties",
+            "description": "The properties of the replication.",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "ReplicationProperties": {
+        "description": "The properties of a replication.",
+        "type": "object",
+        "properties": {
+          "provisioningState": {
+            "description": "The provisioning state of the replication at the time the operation was called.",
+            "enum": [
+              "Creating",
+              "Updating",
+              "Deleting",
+              "Succeeded",
+              "Failed",
+              "Canceled"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "ProvisioningState",
               "modelAsString": true
+            }
+          },
+          "status": {
+            "$ref": "#/definitions/Status",
+            "description": "The status of the replication at the time the operation was called.",
+            "readOnly": true
+          },
+          "regionEndpointEnabled": {
+            "description": "Specifies whether the replication's regional endpoint is enabled. Requests will not be routed to a replication whose regional endpoint is disabled, however its data will continue to be synced with other replications.",
+            "default": true,
+            "type": "boolean"
+          },
+          "zoneRedundancy": {
+            "description": "Whether or not zone redundancy is enabled for this container registry replication",
+            "default": "Disabled",
+            "enum": [
+              "Enabled",
+              "Disabled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ZoneRedundancy",
+              "modelAsString": true
+            }
+          }
+        }
+      },
+      "ReplicationUpdateParameters": {
+        "description": "The parameters for updating a replication.",
+        "type": "object",
+        "properties": {
+          "tags": {
+            "description": "The tags for the replication.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "properties": {
+            "$ref": "#/definitions/ReplicationUpdateParametersProperties",
+            "description": "The parameters for updating a replication's properties",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "ReplicationUpdateParametersProperties": {
+        "type": "object",
+        "properties": {
+          "regionEndpointEnabled": {
+            "description": "Specifies whether the replication's regional endpoint is enabled. Requests will not be routed to a replication whose regional endpoint is disabled, however its data will continue to be synced with other replications.",
+            "type": "boolean"
+          }
+        }
+      },
+      "ScopeMapListResult": {
+        "description": "The result of a request to list scope maps for a container registry.",
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "The list of scope maps. Since this list may be incomplete, the nextLink field should be used to request the next list of scope maps.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ScopeMap"
+            }
+          },
+          "nextLink": {
+            "description": "The URI that can be used to request the next list of scope maps.",
+            "type": "string"
+          }
+        }
+      },
+      "ScopeMap": {
+        "description": "An object that represents a scope map for a container registry.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/ProxyResource"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/ScopeMapProperties",
+            "description": "The properties of the scope map.",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "ScopeMapProperties": {
+        "description": "The properties of a scope map.",
+        "required": [
+          "actions"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "description": "The user friendly description of the scope map.",
+            "type": "string"
+          },
+          "type": {
+            "description": "The type of the scope map. E.g. BuildIn scope map.",
+            "type": "string",
+            "readOnly": true
+          },
+          "creationDate": {
+            "format": "date-time",
+            "description": "The creation date of scope map.",
+            "type": "string",
+            "readOnly": true
+          },
+          "provisioningState": {
+            "description": "Provisioning state of the resource.",
+            "enum": [
+              "Creating",
+              "Updating",
+              "Deleting",
+              "Succeeded",
+              "Failed",
+              "Canceled"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "ProvisioningState",
+              "modelAsString": true
+            }
+          },
+          "actions": {
+            "description": "The list of scoped permissions for registry artifacts.\r\nE.g. repositories/repository-name/content/read,\r\nrepositories/repository-name/metadata/write",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ScopeMapUpdateParameters": {
+        "description": "The properties for updating the scope map.",
+        "type": "object",
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/ScopeMapPropertiesUpdateParameters",
+            "description": "The update parameters for scope map properties.",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "ScopeMapPropertiesUpdateParameters": {
+        "description": "The update parameters for scope map properties.",
+        "type": "object",
+        "properties": {
+          "description": {
+            "description": "The user friendly description of the scope map.",
+            "type": "string"
+          },
+          "actions": {
+            "description": "The list of scope permissions for registry artifacts.\r\nE.g. repositories/repository-name/pull, \r\nrepositories/repository-name/delete",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "TokenListResult": {
+        "description": "The result of a request to list tokens for a container registry.",
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "The list of tokens. Since this list may be incomplete, the nextLink field should be used to request the next list of tokens.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          "nextLink": {
+            "description": "The URI that can be used to request the next list of tokens.",
+            "type": "string"
+          }
+        }
+      },
+      "Token": {
+        "description": "An object that represents a token for a container registry.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/ProxyResource"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/TokenProperties",
+            "description": "The properties of the token.",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "TokenProperties": {
+        "description": "The properties of a token.",
+        "type": "object",
+        "properties": {
+          "creationDate": {
+            "format": "date-time",
+            "description": "The creation date of scope map.",
+            "type": "string",
+            "readOnly": true
+          },
+          "provisioningState": {
+            "description": "Provisioning state of the resource.",
+            "enum": [
+              "Creating",
+              "Updating",
+              "Deleting",
+              "Succeeded",
+              "Failed",
+              "Canceled"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "ProvisioningState",
+              "modelAsString": true
+            }
+          },
+          "scopeMapId": {
+            "description": "The resource ID of the scope map to which the token will be associated with.",
+            "type": "string"
+          },
+          "credentials": {
+            "$ref": "#/definitions/TokenCredentialsProperties",
+            "description": "The credentials that can be used for authenticating the token."
+          },
+          "status": {
+            "description": "The status of the token example enabled or disabled.",
+            "enum": [
+              "enabled",
+              "disabled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "TokenStatus",
+              "modelAsString": true
+            }
+          }
+        }
+      },
+      "TokenCredentialsProperties": {
+        "description": "The properties of the credentials that can be used for authenticating the token.",
+        "type": "object",
+        "properties": {
+          "certificates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TokenCertificate"
+            },
+            "x-ms-identifiers": [
+              "thumbprint"
+            ]
+          },
+          "passwords": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TokenPassword"
+            },
+            "x-ms-identifiers": []
+          }
+        }
+      },
+      "ActiveDirectoryObject": {
+        "description": "The Active Directory Object that will be used for authenticating the token of a container registry.",
+        "type": "object",
+        "properties": {
+          "objectId": {
+            "description": "The user/group/application object ID for Active Directory Object that will be used for authenticating the token of a container registry.",
+            "type": "string"
+          },
+          "tenantId": {
+            "description": "The tenant ID of user/group/application object Active Directory Object that will be used for authenticating the token of a container registry.",
+            "type": "string"
+          }
+        }
+      },
+      "TokenCertificate": {
+        "description": "The properties of a certificate used for authenticating a token.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "enum": [
+              "certificate1",
+              "certificate2"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "TokenCertificateName",
+              "modelAsString": true
+            }
+          },
+          "expiry": {
+            "format": "date-time",
+            "description": "The expiry datetime of the certificate.",
+            "type": "string"
+          },
+          "thumbprint": {
+            "description": "The thumbprint of the certificate.",
+            "type": "string"
+          },
+          "encodedPemCertificate": {
+            "description": "Base 64 encoded string of the public certificate1 in PEM format that will be used for authenticating the token.",
+            "type": "string"
+          }
+        }
+      },
+      "TokenPassword": {
+        "description": "The password that will be used for authenticating the token of a container registry.",
+        "type": "object",
+        "properties": {
+          "creationTime": {
+            "format": "date-time",
+            "description": "The creation datetime of the password.",
+            "type": "string"
+          },
+          "expiry": {
+            "format": "date-time",
+            "description": "The expiry datetime of the password.",
+            "type": "string"
+          },
+          "name": {
+            "description": "The password name \"password1\" or \"password2\"",
+            "enum": [
+              "password1",
+              "password2"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "TokenPasswordName",
+              "modelAsString": true
+            }
+          },
+          "value": {
+            "description": "The password value.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "TokenUpdateParameters": {
+        "description": "The parameters for updating a token.",
+        "type": "object",
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/TokenUpdateProperties",
+            "description": "The properties of the token update parameters.",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "TokenUpdateProperties": {
+        "description": "The parameters for updating token properties.",
+        "type": "object",
+        "properties": {
+          "scopeMapId": {
+            "description": "The resource ID of the scope map to which the token will be associated with.",
+            "type": "string"
+          },
+          "status": {
+            "description": "The status of the token example enabled or disabled.",
+            "enum": [
+              "enabled",
+              "disabled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "TokenStatus",
+              "modelAsString": true
+            }
+          },
+          "credentials": {
+            "$ref": "#/definitions/TokenCredentialsProperties",
+            "description": "The credentials that can be used for authenticating the token."
+          }
+        }
+      },
+      "GenerateCredentialsParameters": {
+        "description": "The parameters used to generate credentials for a specified token or user of a container registry.",
+        "type": "object",
+        "properties": {
+          "tokenId": {
+            "description": "The resource ID of the token for which credentials have to be generated.",
+            "type": "string"
+          },
+          "expiry": {
+            "format": "date-time",
+            "description": "The expiry date of the generated credentials after which the credentials become invalid.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Specifies name of the password which should be regenerated if any -- password1 or password2.",
+            "enum": [
+              "password1",
+              "password2"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "TokenPasswordName",
+              "modelAsString": true
+            }
+          }
+        }
+      },
+      "GenerateCredentialsResult": {
+        "description": "The response from the GenerateCredentials operation.",
+        "type": "object",
+        "properties": {
+          "username": {
+            "description": "The username for a container registry.",
+            "type": "string"
+          },
+          "passwords": {
+            "description": "The list of passwords for a container registry.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TokenPassword"
+            },
+            "x-ms-identifiers": []
+          }
+        }
+      },
+      "WebhookListResult": {
+        "description": "The result of a request to list webhooks for a container registry.",
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "The list of webhooks. Since this list may be incomplete, the nextLink field should be used to request the next list of webhooks.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Webhook"
+            }
+          },
+          "nextLink": {
+            "description": "The URI that can be used to request the next list of webhooks.",
+            "type": "string"
+          }
+        }
+      },
+      "Webhook": {
+        "description": "An object that represents a webhook for a container registry.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/Resource"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/WebhookProperties",
+            "description": "The properties of the webhook.",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "WebhookProperties": {
+        "description": "The properties of a webhook.",
+        "required": [
+          "actions"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "description": "The status of the webhook at the time the operation was called.",
+            "enum": [
+              "enabled",
+              "disabled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "WebhookStatus",
+              "modelAsString": true
+            }
+          },
+          "scope": {
+            "description": "The scope of repositories where the event can be triggered. For example, 'foo:*' means events for all tags under repository 'foo'. 'foo:bar' means events for 'foo:bar' only. 'foo' is equivalent to 'foo:latest'. Empty means all events.",
+            "type": "string"
+          },
+          "actions": {
+            "description": "The list of actions that trigger the webhook to post notifications.",
+            "type": "array",
+            "items": {
+              "enum": [
+                "push",
+                "delete",
+                "quarantine",
+                "chart_push",
+                "chart_delete"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "WebhookAction",
+                "modelAsString": true
+              }
+            }
+          },
+          "provisioningState": {
+            "description": "The provisioning state of the webhook at the time the operation was called.",
+            "enum": [
+              "Creating",
+              "Updating",
+              "Deleting",
+              "Succeeded",
+              "Failed",
+              "Canceled"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "ProvisioningState",
+              "modelAsString": true
+            }
+          }
+        }
+      },
+      "WebhookCreateParameters": {
+        "description": "The parameters for creating a webhook.",
+        "required": [
+          "location"
+        ],
+        "type": "object",
+        "properties": {
+          "tags": {
+            "description": "The tags for the webhook.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "location": {
+            "description": "The location of the webhook. This cannot be changed after the resource is created.",
+            "type": "string"
+          },
+          "properties": {
+            "$ref": "#/definitions/WebhookPropertiesCreateParameters",
+            "description": "The properties that the webhook will be created with.",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "WebhookPropertiesCreateParameters": {
+        "description": "The parameters for creating the properties of a webhook.",
+        "required": [
+          "serviceUri",
+          "actions"
+        ],
+        "type": "object",
+        "properties": {
+          "serviceUri": {
+            "description": "The service URI for the webhook to post notifications.",
+            "type": "string",
+            "x-ms-secret": true
+          },
+          "customHeaders": {
+            "description": "Custom headers that will be added to the webhook notifications.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "x-ms-secret": true
+          },
+          "status": {
+            "description": "The status of the webhook at the time the operation was called.",
+            "enum": [
+              "enabled",
+              "disabled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "WebhookStatus",
+              "modelAsString": true
+            }
+          },
+          "scope": {
+            "description": "The scope of repositories where the event can be triggered. For example, 'foo:*' means events for all tags under repository 'foo'. 'foo:bar' means events for 'foo:bar' only. 'foo' is equivalent to 'foo:latest'. Empty means all events.",
+            "type": "string"
+          },
+          "actions": {
+            "description": "The list of actions that trigger the webhook to post notifications.",
+            "type": "array",
+            "items": {
+              "enum": [
+                "push",
+                "delete",
+                "quarantine",
+                "chart_push",
+                "chart_delete"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "WebhookAction",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      },
+      "WebhookUpdateParameters": {
+        "description": "The parameters for updating a webhook.",
+        "type": "object",
+        "properties": {
+          "tags": {
+            "description": "The tags for the webhook.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "properties": {
+            "$ref": "#/definitions/WebhookPropertiesUpdateParameters",
+            "description": "The properties that the webhook will be updated with.",
+            "x-ms-client-flatten": true
+          }
+        }
+      },
+      "WebhookPropertiesUpdateParameters": {
+        "description": "The parameters for updating the properties of a webhook.",
+        "type": "object",
+        "properties": {
+          "serviceUri": {
+            "description": "The service URI for the webhook to post notifications.",
+            "type": "string",
+            "x-ms-secret": true
+          },
+          "customHeaders": {
+            "description": "Custom headers that will be added to the webhook notifications.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "x-ms-secret": true
+          },
+          "status": {
+            "description": "The status of the webhook at the time the operation was called.",
+            "enum": [
+              "enabled",
+              "disabled"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "WebhookStatus",
+              "modelAsString": true
+            }
+          },
+          "scope": {
+            "description": "The scope of repositories where the event can be triggered. For example, 'foo:*' means events for all tags under repository 'foo'. 'foo:bar' means events for 'foo:bar' only. 'foo' is equivalent to 'foo:latest'. Empty means all events.",
+            "type": "string"
+          },
+          "actions": {
+            "description": "The list of actions that trigger the webhook to post notifications.",
+            "type": "array",
+            "items": {
+              "enum": [
+                "push",
+                "delete",
+                "quarantine",
+                "chart_push",
+                "chart_delete"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "WebhookAction",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      },
+      "EventInfo": {
+        "description": "The basic information of an event.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The event ID.",
+            "type": "string"
+          }
+        }
+      },
+      "EventListResult": {
+        "description": "The result of a request to list events for a webhook.",
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "The list of events. Since this list may be incomplete, the nextLink field should be used to request the next list of events.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Event"
+            }
+          },
+          "nextLink": {
+            "description": "The URI that can be used to request the next list of events.",
+            "type": "string"
+          }
+        }
+      },
+      "Event": {
+        "description": "The event for a webhook.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/EventInfo"
+          }
+        ],
+        "properties": {
+          "eventRequestMessage": {
+            "$ref": "#/definitions/EventRequestMessage",
+            "description": "The event request message sent to the service URI."
+          },
+          "eventResponseMessage": {
+            "$ref": "#/definitions/EventResponseMessage",
+            "description": "The event response message received from the service URI."
+          }
+        }
+      },
+      "EventRequestMessage": {
+        "description": "The event request message sent to the service URI.",
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/definitions/EventContent",
+            "description": "The content of the event request message."
+          },
+          "headers": {
+            "description": "The headers of the event request message.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "method": {
+            "description": "The HTTP method used to send the event request message.",
+            "type": "string"
+          },
+          "requestUri": {
+            "description": "The URI used to send the event request message.",
+            "type": "string"
+          },
+          "version": {
+            "description": "The HTTP message version.",
+            "type": "string"
+          }
+        }
+      },
+      "EventResponseMessage": {
+        "description": "The event response message received from the service URI.",
+        "type": "object",
+        "properties": {
+          "content": {
+            "description": "The content of the event response message.",
+            "type": "string"
+          },
+          "headers": {
+            "description": "The headers of the event response message.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "reasonPhrase": {
+            "description": "The reason phrase of the event response message.",
+            "type": "string"
+          },
+          "statusCode": {
+            "description": "The status code of the event response message.",
+            "type": "string"
+          },
+          "version": {
+            "description": "The HTTP message version.",
+            "type": "string"
+          }
+        }
+      },
+      "EventContent": {
+        "description": "The content of the event request message.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The event ID.",
+            "type": "string"
+          },
+          "timestamp": {
+            "format": "date-time",
+            "description": "The time at which the event occurred.",
+            "type": "string"
+          },
+          "action": {
+            "description": "The action that encompasses the provided event.",
+            "type": "string"
+          },
+          "target": {
+            "$ref": "#/definitions/Target",
+            "description": "The target of the event."
+          },
+          "request": {
+            "$ref": "#/definitions/Request",
+            "description": "The request that generated the event."
+          },
+          "actor": {
+            "$ref": "#/definitions/Actor",
+            "description": "The agent that initiated the event. For most situations, this could be from the authorization context of the request."
+          },
+          "source": {
+            "$ref": "#/definitions/Source",
+            "description": "The registry node that generated the event. Put differently, while the actor initiates the event, the source generates it."
+          }
+        }
+      },
+      "Target": {
+        "description": "The target of the event.",
+        "type": "object",
+        "properties": {
+          "mediaType": {
+            "description": "The MIME type of the referenced object.",
+            "type": "string"
+          },
+          "size": {
+            "format": "int64",
+            "description": "The number of bytes of the content. Same as Length field.",
+            "type": "integer"
+          },
+          "digest": {
+            "description": "The digest of the content, as defined by the Registry V2 HTTP API Specification.",
+            "type": "string"
+          },
+          "length": {
+            "format": "int64",
+            "description": "The number of bytes of the content. Same as Size field.",
+            "type": "integer"
+          },
+          "repository": {
+            "description": "The repository name.",
+            "type": "string"
+          },
+          "url": {
+            "description": "The direct URL to the content.",
+            "type": "string"
+          },
+          "tag": {
+            "description": "The tag name.",
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the artifact.",
+            "type": "string"
+          },
+          "version": {
+            "description": "The version of the artifact.",
+            "type": "string"
+          }
+        }
+      },
+      "Request": {
+        "description": "The request that generated the event.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The ID of the request that initiated the event.",
+            "type": "string"
+          },
+          "addr": {
+            "description": "The IP or hostname and possibly port of the client connection that initiated the event. This is the RemoteAddr from the standard http request.",
+            "type": "string"
+          },
+          "host": {
+            "description": "The externally accessible hostname of the registry instance, as specified by the http host header on incoming requests.",
+            "type": "string"
+          },
+          "method": {
+            "description": "The request method that generated the event.",
+            "type": "string"
+          },
+          "useragent": {
+            "description": "The user agent header of the request.",
+            "type": "string"
+          }
+        }
+      },
+      "Actor": {
+        "description": "The agent that initiated the event. For most situations, this could be from the authorization context of the request.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The subject or username associated with the request context that generated the event.",
+            "type": "string"
+          }
+        }
+      },
+      "Source": {
+        "description": "The registry node that generated the event. Put differently, while the actor initiates the event, the source generates it.",
+        "type": "object",
+        "properties": {
+          "addr": {
+            "description": "The IP or hostname and the port of the registry node that generated the event. Generally, this will be resolved by os.Hostname() along with the running port.",
+            "type": "string"
+          },
+          "instanceID": {
+            "description": "The running instance of an application. Changes after each restart.",
+            "type": "string"
+          }
+        }
+      },
+      "CallbackConfig": {
+        "description": "The configuration of service URI and custom headers for the webhook.",
+        "required": [
+          "serviceUri"
+        ],
+        "type": "object",
+        "properties": {
+          "serviceUri": {
+            "description": "The service URI for the webhook to post notifications.",
+            "type": "string"
+          },
+          "customHeaders": {
+            "description": "Custom headers that will be added to the webhook notifications.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
             }
           }
         }
       }
     },
-    "EventInfo": {
-      "description": "The basic information of an event.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The event ID.",
-          "type": "string"
+    "parameters": {
+      "RegistryNameParameter": {
+        "name": "registryName",
+        "in": "path",
+        "description": "The name of the container registry.",
+        "required": true,
+        "type": "string",
+        "maxLength": 50,
+        "minLength": 5,
+        "pattern": "^[a-zA-Z0-9]*$",
+        "x-ms-parameter-location": "method"
+      },
+      "WebhookNameParameter": {
+        "name": "webhookName",
+        "in": "path",
+        "description": "The name of the webhook.",
+        "required": true,
+        "type": "string",
+        "maxLength": 50,
+        "minLength": 5,
+        "pattern": "^[a-zA-Z0-9]*$",
+        "x-ms-parameter-location": "method"
+      },
+      "ReplicationNameParameter": {
+        "name": "replicationName",
+        "in": "path",
+        "description": "The name of the replication.",
+        "required": true,
+        "type": "string",
+        "maxLength": 50,
+        "minLength": 5,
+        "pattern": "^[a-zA-Z0-9]*$",
+        "x-ms-parameter-location": "method"
+      },
+      "ScopeMapNameParameter": {
+        "name": "scopeMapName",
+        "in": "path",
+        "description": "The name of the scope map.",
+        "required": true,
+        "type": "string",
+        "maxLength": 50,
+        "minLength": 5,
+        "pattern": "^[a-zA-Z0-9-_]*$",
+        "x-ms-parameter-location": "method"
+      },
+      "TokenNameParameter": {
+        "name": "tokenName",
+        "in": "path",
+        "description": "The name of the token.",
+        "required": true,
+        "type": "string",
+        "maxLength": 50,
+        "minLength": 5,
+        "pattern": "^[a-zA-Z0-9-]*$",
+        "x-ms-parameter-location": "method"
+      },
+      "PrivateEndpointConnectionNameParameter": {
+        "name": "privateEndpointConnectionName",
+        "in": "path",
+        "description": "The name of the private endpoint connection.",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "GroupNameParameter": {
+        "name": "groupName",
+        "in": "path",
+        "description": "The name of the private link resource.",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "ExportPipelineNameParameter": {
+        "name": "exportPipelineName",
+        "in": "path",
+        "description": "The name of the export pipeline.",
+        "required": true,
+        "type": "string",
+        "maxLength": 50,
+        "minLength": 5,
+        "pattern": "^[a-zA-Z0-9]*$",
+        "x-ms-parameter-location": "method"
+      },
+      "ImportPipelineNameParameter": {
+        "name": "importPipelineName",
+        "in": "path",
+        "description": "The name of the import pipeline.",
+        "required": true,
+        "type": "string",
+        "maxLength": 50,
+        "minLength": 5,
+        "pattern": "^[a-zA-Z0-9]*$",
+        "x-ms-parameter-location": "method"
+      },
+      "PipelineRunNameParameter": {
+        "name": "pipelineRunName",
+        "in": "path",
+        "description": "The name of the pipeline run.",
+        "required": true,
+        "type": "string",
+        "maxLength": 50,
+        "minLength": 5,
+        "pattern": "^[a-zA-Z0-9]*$",
+        "x-ms-parameter-location": "method"
+      },
+      "ConnectedRegistryNameParameter": {
+        "name": "connectedRegistryName",
+        "in": "path",
+        "description": "The name of the connected registry.",
+        "required": true,
+        "type": "string",
+        "maxLength": 50,
+        "minLength": 5,
+        "pattern": "^[a-zA-Z0-9]*$",
+        "x-ms-parameter-location": "method"
+      },
+      "ConnectedRegistryFilterParameter": {
+        "name": "$filter",
+        "in": "query",
+        "description": "An OData filter expression that describes a subset of connectedRegistries to return. The parameters that can be filtered are parent.id (the resource id of the connectedRegistry parent), mode, and connectionState. The supported operator is eq.",
+        "required": false,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "PackageTypeParameter": {
+        "name": "packageType",
+        "in": "path",
+        "description": "The type of the package resource.",
+        "required": true,
+        "type": "string",
+        "maxLength": 50,
+        "minLength": 3,
+        "pattern": "^[a-zA-Z]*$",
+        "x-ms-parameter-location": "method"
+      },
+      "ArchiveNameParameter": {
+        "name": "archiveName",
+        "in": "path",
+        "description": "The name of the archive resource.",
+        "required": true,
+        "type": "string",
+        "maxLength": 200,
+        "minLength": 5,
+        "pattern": "^[a-zA-Z0-9-]*$",
+        "x-ms-parameter-location": "method"
+      },
+      "ArchiveVersionNameParameter": {
+        "name": "archiveVersionName",
+        "in": "path",
+        "description": "The name of the archive version resource.",
+        "required": true,
+        "type": "string",
+        "maxLength": 200,
+        "minLength": 5,
+        "pattern": "^[a-zA-Z0-9-]*$",
+        "x-ms-parameter-location": "method"
+      },
+      "CredentialSetNameParameter": {
+        "name": "credentialSetName",
+        "in": "path",
+        "description": "The name of the credential set.",
+        "required": true,
+        "type": "string",
+        "maxLength": 50,
+        "minLength": 5,
+        "pattern": "^[a-zA-Z0-9-]*$",
+        "x-ms-parameter-location": "method"
+      },
+      "CacheRuleNameParameter": {
+        "name": "cacheRuleName",
+        "in": "path",
+        "description": "The name of the cache rule.",
+        "required": true,
+        "type": "string",
+        "maxLength": 50,
+        "minLength": 5,
+        "pattern": "^[a-zA-Z0-9-]*$",
+        "x-ms-parameter-location": "method"
+      }
+    },
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "flow": "implicit",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
         }
       }
     },
-    "EventListResult": {
-      "description": "The result of a request to list events for a webhook.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of events. Since this list may be incomplete, the nextLink field should be used to request the next list of events.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Event"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next list of events.",
-          "type": "string"
-        }
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
       }
-    },
-    "Event": {
-      "description": "The event for a webhook.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EventInfo"
-        }
-      ],
-      "properties": {
-        "eventRequestMessage": {
-          "$ref": "#/definitions/EventRequestMessage",
-          "description": "The event request message sent to the service URI."
-        },
-        "eventResponseMessage": {
-          "$ref": "#/definitions/EventResponseMessage",
-          "description": "The event response message received from the service URI."
-        }
-      }
-    },
-    "EventRequestMessage": {
-      "description": "The event request message sent to the service URI.",
-      "type": "object",
-      "properties": {
-        "content": {
-          "$ref": "#/definitions/EventContent",
-          "description": "The content of the event request message."
-        },
-        "headers": {
-          "description": "The headers of the event request message.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "method": {
-          "description": "The HTTP method used to send the event request message.",
-          "type": "string"
-        },
-        "requestUri": {
-          "description": "The URI used to send the event request message.",
-          "type": "string"
-        },
-        "version": {
-          "description": "The HTTP message version.",
-          "type": "string"
-        }
-      }
-    },
-    "EventResponseMessage": {
-      "description": "The event response message received from the service URI.",
-      "type": "object",
-      "properties": {
-        "content": {
-          "description": "The content of the event response message.",
-          "type": "string"
-        },
-        "headers": {
-          "description": "The headers of the event response message.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "reasonPhrase": {
-          "description": "The reason phrase of the event response message.",
-          "type": "string"
-        },
-        "statusCode": {
-          "description": "The status code of the event response message.",
-          "type": "string"
-        },
-        "version": {
-          "description": "The HTTP message version.",
-          "type": "string"
-        }
-      }
-    },
-    "EventContent": {
-      "description": "The content of the event request message.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The event ID.",
-          "type": "string"
-        },
-        "timestamp": {
-          "format": "date-time",
-          "description": "The time at which the event occurred.",
-          "type": "string"
-        },
-        "action": {
-          "description": "The action that encompasses the provided event.",
-          "type": "string"
-        },
-        "target": {
-          "$ref": "#/definitions/Target",
-          "description": "The target of the event."
-        },
-        "request": {
-          "$ref": "#/definitions/Request",
-          "description": "The request that generated the event."
-        },
-        "actor": {
-          "$ref": "#/definitions/Actor",
-          "description": "The agent that initiated the event. For most situations, this could be from the authorization context of the request."
-        },
-        "source": {
-          "$ref": "#/definitions/Source",
-          "description": "The registry node that generated the event. Put differently, while the actor initiates the event, the source generates it."
-        }
-      }
-    },
-    "Target": {
-      "description": "The target of the event.",
-      "type": "object",
-      "properties": {
-        "mediaType": {
-          "description": "The MIME type of the referenced object.",
-          "type": "string"
-        },
-        "size": {
-          "format": "int64",
-          "description": "The number of bytes of the content. Same as Length field.",
-          "type": "integer"
-        },
-        "digest": {
-          "description": "The digest of the content, as defined by the Registry V2 HTTP API Specification.",
-          "type": "string"
-        },
-        "length": {
-          "format": "int64",
-          "description": "The number of bytes of the content. Same as Size field.",
-          "type": "integer"
-        },
-        "repository": {
-          "description": "The repository name.",
-          "type": "string"
-        },
-        "url": {
-          "description": "The direct URL to the content.",
-          "type": "string"
-        },
-        "tag": {
-          "description": "The tag name.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the artifact.",
-          "type": "string"
-        },
-        "version": {
-          "description": "The version of the artifact.",
-          "type": "string"
-        }
-      }
-    },
-    "Request": {
-      "description": "The request that generated the event.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The ID of the request that initiated the event.",
-          "type": "string"
-        },
-        "addr": {
-          "description": "The IP or hostname and possibly port of the client connection that initiated the event. This is the RemoteAddr from the standard http request.",
-          "type": "string"
-        },
-        "host": {
-          "description": "The externally accessible hostname of the registry instance, as specified by the http host header on incoming requests.",
-          "type": "string"
-        },
-        "method": {
-          "description": "The request method that generated the event.",
-          "type": "string"
-        },
-        "useragent": {
-          "description": "The user agent header of the request.",
-          "type": "string"
-        }
-      }
-    },
-    "Actor": {
-      "description": "The agent that initiated the event. For most situations, this could be from the authorization context of the request.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The subject or username associated with the request context that generated the event.",
-          "type": "string"
-        }
-      }
-    },
-    "Source": {
-      "description": "The registry node that generated the event. Put differently, while the actor initiates the event, the source generates it.",
-      "type": "object",
-      "properties": {
-        "addr": {
-          "description": "The IP or hostname and the port of the registry node that generated the event. Generally, this will be resolved by os.Hostname() along with the running port.",
-          "type": "string"
-        },
-        "instanceID": {
-          "description": "The running instance of an application. Changes after each restart.",
-          "type": "string"
-        }
-      }
-    },
-    "CallbackConfig": {
-      "description": "The configuration of service URI and custom headers for the webhook.",
-      "required": [
-        "serviceUri"
-      ],
-      "type": "object",
-      "properties": {
-        "serviceUri": {
-          "description": "The service URI for the webhook to post notifications.",
-          "type": "string"
-        },
-        "customHeaders": {
-          "description": "Custom headers that will be added to the webhook notifications.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    }
-  },
-  "parameters": {
-    "RegistryNameParameter": {
-      "name": "registryName",
-      "in": "path",
-      "description": "The name of the container registry.",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 5,
-      "pattern": "^[a-zA-Z0-9]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "WebhookNameParameter": {
-      "name": "webhookName",
-      "in": "path",
-      "description": "The name of the webhook.",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 5,
-      "pattern": "^[a-zA-Z0-9]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "ReplicationNameParameter": {
-      "name": "replicationName",
-      "in": "path",
-      "description": "The name of the replication.",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 5,
-      "pattern": "^[a-zA-Z0-9]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "ScopeMapNameParameter": {
-      "name": "scopeMapName",
-      "in": "path",
-      "description": "The name of the scope map.",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 5,
-      "pattern": "^[a-zA-Z0-9-_]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "TokenNameParameter": {
-      "name": "tokenName",
-      "in": "path",
-      "description": "The name of the token.",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 5,
-      "pattern": "^[a-zA-Z0-9-]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "PrivateEndpointConnectionNameParameter": {
-      "name": "privateEndpointConnectionName",
-      "in": "path",
-      "description": "The name of the private endpoint connection.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "GroupNameParameter": {
-      "name": "groupName",
-      "in": "path",
-      "description": "The name of the private link resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ExportPipelineNameParameter": {
-      "name": "exportPipelineName",
-      "in": "path",
-      "description": "The name of the export pipeline.",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 5,
-      "pattern": "^[a-zA-Z0-9]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "ImportPipelineNameParameter": {
-      "name": "importPipelineName",
-      "in": "path",
-      "description": "The name of the import pipeline.",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 5,
-      "pattern": "^[a-zA-Z0-9]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "PipelineRunNameParameter": {
-      "name": "pipelineRunName",
-      "in": "path",
-      "description": "The name of the pipeline run.",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 5,
-      "pattern": "^[a-zA-Z0-9]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "ConnectedRegistryNameParameter": {
-      "name": "connectedRegistryName",
-      "in": "path",
-      "description": "The name of the connected registry.",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 5,
-      "pattern": "^[a-zA-Z0-9]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "ConnectedRegistryFilterParameter": {
-      "name": "$filter",
-      "in": "query",
-      "description": "An OData filter expression that describes a subset of connectedRegistries to return. The parameters that can be filtered are parent.id (the resource id of the connectedRegistry parent), mode, and connectionState. The supported operator is eq.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "PackageTypeParameter": {
-      "name": "packageType",
-      "in": "path",
-      "description": "The type of the package resource.",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 3,
-      "pattern": "^[a-zA-Z]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "ArchiveNameParameter": {
-      "name": "archiveName",
-      "in": "path",
-      "description": "The name of the archive resource.",
-      "required": true,
-      "type": "string",
-      "maxLength": 200,
-      "minLength": 5,
-      "pattern": "^[a-zA-Z0-9-]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "ArchiveVersionNameParameter": {
-      "name": "archiveVersionName",
-      "in": "path",
-      "description": "The name of the archive version resource.",
-      "required": true,
-      "type": "string",
-      "maxLength": 200,
-      "minLength": 5,
-      "pattern": "^[a-zA-Z0-9-]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "CredentialSetNameParameter": {
-      "name": "credentialSetName",
-      "in": "path",
-      "description": "The name of the credential set.",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 5,
-      "pattern": "^[a-zA-Z0-9-]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "CacheRuleNameParameter": {
-      "name": "cacheRuleName",
-      "in": "path",
-      "description": "The name of the cache rule.",
-      "required": true,
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 5,
-      "pattern": "^[a-zA-Z0-9-]*$",
-      "x-ms-parameter-location": "method"
-    }
-  },
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ]
+    ]
+  }
 }
