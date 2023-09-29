@@ -30,7 +30,6 @@ model CommunityTraining is TrackedResource<CommunityTrainingProperties> {
   @segment("communityTrainings")
   @path
   name: string;
-
   ...ResourceSku;
 }
 
@@ -54,7 +53,6 @@ enum ProvisioningState {
 
 @doc("Details of the Community CommunityTraining Identity Configuration")
 model IdentityConfigurationProperties {
-
   @visibility("read", "create", "update")
   @doc("The identity type of the Community Training Resource")
   identityType: string;
@@ -95,7 +93,7 @@ model IdentityConfigurationProperties {
 
 @doc("Details of the Community CommunityTraining.")
 model CommunityTrainingProperties {
-  @visibility("read","create")
+  @visibility("read", "create")
   @doc("The portal name (website name) of the Community Training instance")
   portalName: string;
 
@@ -128,9 +126,11 @@ model CommunityTrainingProperties {
 interface CommunityTrainings {
   get is ArmResourceRead<CommunityTraining>;
   create is ArmResourceCreateOrUpdateAsync<CommunityTraining>;
-  update is ArmResourcePatchAsync<CommunityTraining, CommunityTrainingProperties>;
+  update is ArmResourcePatchAsync<
+    CommunityTraining,
+    CommunityTrainingProperties
+  >;
   delete is ArmResourceDeleteAsync<CommunityTraining>;
   listByResourceGroup is ArmResourceListByParent<CommunityTraining>;
   listBySubscription is ArmListBySubscription<CommunityTraining>;
 }
-
