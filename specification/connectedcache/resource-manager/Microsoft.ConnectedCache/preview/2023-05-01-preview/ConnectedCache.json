@@ -164,7 +164,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (enterpriseCustomers could not be created/updated)",
             "schema": {
-              "$ref": "#/definitions/MCCErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -251,12 +251,6 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; response contains the updated Cache node",
-            "schema": {
-              "$ref": "#/definitions/ConnectedCache"
-            }
-          },
-          "201": {
             "description": "The request was successful; response contains the updated Cache node",
             "schema": {
               "$ref": "#/definitions/ConnectedCache"
@@ -534,12 +528,6 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; response contains the updated Cache node",
-            "schema": {
-              "$ref": "#/definitions/ConnectedCache"
-            }
-          },
-          "201": {
             "description": "The request was successful; response contains the updated Cache node",
             "schema": {
               "$ref": "#/definitions/ConnectedCache"
@@ -825,12 +813,6 @@
         "responses": {
           "200": {
             "description": "The update request was successful; response contains the updated ispCustomer",
-            "schema": {
-              "$ref": "#/definitions/MccCustomerResource"
-            }
-          },
-          "201": {
-            "description": "The update request was successful; the ispCustomer does not exists",
             "schema": {
               "$ref": "#/definitions/MccCustomerResource"
             }
@@ -1127,12 +1109,6 @@
         "responses": {
           "200": {
             "description": "The update request was successful; the response contains the updated ispCacheNode",
-            "schema": {
-              "$ref": "#/definitions/MccCacheNodeResource"
-            }
-          },
-          "201": {
-            "description": "The update request was successful; the ispCacheNode does not exists",
             "schema": {
               "$ref": "#/definitions/MccCacheNodeResource"
             }
@@ -1476,12 +1452,6 @@
               "$ref": "#/definitions/MccCustomerResource"
             }
           },
-          "201": {
-            "description": "The put request was successful; response contains the updated enterpriseMccCustomer",
-            "schema": {
-              "$ref": "#/definitions/MccCustomerResource"
-            }
-          },
           "default": {
             "description": "The update request has failed; error response details : 4xx/5xx for enterpriseMccCustomer",
             "schema": {
@@ -1778,12 +1748,6 @@
         "responses": {
           "200": {
             "description": "The update request was successful; the response contains the updated enterpriseMccCacheNode",
-            "schema": {
-              "$ref": "#/definitions/MccCacheNodeResource"
-            }
-          },
-          "201": {
-            "description": "The put request was successful; response contains the updated enterpriseMccCacheNode",
             "schema": {
               "$ref": "#/definitions/MccCacheNodeResource"
             }
@@ -3161,6 +3125,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
       "description": "Name of the ConnectedCache resource",
       "maxLength": 90,
       "minLength": 1,
@@ -3171,6 +3136,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
       "description": "Name of the Customer resource",
       "maxLength": 90,
       "minLength": 1,
