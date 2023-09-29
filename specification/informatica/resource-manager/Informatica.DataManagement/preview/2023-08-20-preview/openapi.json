@@ -1454,9 +1454,9 @@
         }
       }
     },
-    "InfaRuntimeResource": {
+    "InfaRuntimeResourceFetchMetaData": {
       "type": "object",
-      "description": "Informatica runtime resource as received via the informatica fetch all runtime environments API",
+      "description": "Informatica runtime resource metadata as received via the informatica fetch all runtime environments API",
       "properties": {
         "name": {
           "type": "string",
@@ -1499,7 +1499,7 @@
           "description": "status message"
         },
         "serverlessConfigProperties": {
-          "$ref": "#/definitions/InfaServerlessConfigProperties",
+          "$ref": "#/definitions/InfaServerlessFetchConfigProperties",
           "description": "Serverless Config Properties"
         },
         "description": {
@@ -1521,9 +1521,9 @@
         "serverlessConfigProperties"
       ]
     },
-    "InfaServerlessConfigProperties": {
+    "InfaServerlessFetchConfigProperties": {
       "type": "object",
-      "description": "InfaServerlessConfigProperties for the fetch all serverless API as received from informatica API response",
+      "description": "InfaServerlessFetchConfigProperties for the fetch all serverless API as received from informatica API response",
       "properties": {
         "subnet": {
           "type": "string",
@@ -1778,7 +1778,7 @@
           "type": "array",
           "description": "List of runtime resources for the fetch all API",
           "items": {
-            "$ref": "#/definitions/InfaRuntimeResource"
+            "$ref": "#/definitions/InfaRuntimeResourceFetchMetaData"
           }
         }
       },
