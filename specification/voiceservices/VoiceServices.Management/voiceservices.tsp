@@ -19,6 +19,10 @@ namespace Microsoft.VoiceServices;
 
 @doc("API Versions")
 enum Versions {
+  @doc("2023-01-31")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2023_01_31: "2023-01-31",
+
   @doc("2023-04-03")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_04_03: "2023-04-03",
@@ -26,6 +30,10 @@ enum Versions {
   @doc("2023-07-13-preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_07_13_preview: "2023-07-13-preview",
+
+  @doc("2023-09-01")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2023_09_01: "2023-09-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
