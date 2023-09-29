@@ -140,7 +140,8 @@ input-file:
 - Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
 - Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
 - Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
-
+- Microsoft.ResourceNotifications/stable/2018-01-01/common.json
+- Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
 ```
 
 ### Tag: package-2023-06-01-preview
@@ -172,7 +173,8 @@ input-file:
 - Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
 - Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
 - Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
-
+- Microsoft.ResourceNotifications/stable/2018-01-01/common.json
+- Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
 ```
 
 ### Suppression
@@ -264,6 +266,8 @@ input-file:
   - $(this-folder)/Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
   - $(this-folder)/Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
+  - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/common.json
+  - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
