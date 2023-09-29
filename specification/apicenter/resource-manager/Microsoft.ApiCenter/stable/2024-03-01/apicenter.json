@@ -393,20 +393,13 @@
         "description": "Exports the effective metadata schema.",
         "parameters": [
           {
-            "name": "assignedTo",
-            "type": "string",
-            "enum": [
-              "api",
-              "environment",
-              "deployment"
-            ],
-            "x-ms-enum": {
-              "name": "MetadataAssignmentEntity",
-              "modelAsString": true
-            },
-            "in": "query",
+            "name": "payload",
+            "in": "body",
             "required": true,
-            "description": "An entity the metadata schema is requested for."
+            "schema": {
+              "$ref": "#/definitions/MetadataSchemaExportRequest"
+            },
+            "description": "The metadata schema request details."
           }
         ],
         "responses": {
@@ -1549,7 +1542,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApiSpecImportSource"
+              "$ref": "#/definitions/ApiSpecImportRequest"
             },
             "description": "The API specification source entity."
           }
@@ -2679,7 +2672,7 @@
         }
       }
     },
-    "ApiSpecImportSource": {
+    "ApiSpecImportRequest": {
       "type": "object",
       "description": "The API specification source entity properties.",
       "properties": {
@@ -2750,6 +2743,24 @@
         "value": {
           "type": "string",
           "description": "The result of the export operation."
+        }
+      }
+    },
+    "MetadataSchemaExportRequest": {
+      "description": "The metadata schema export request.",
+      "properties": {
+        "assignedTo": {
+          "type": "string",
+          "description": "An entity the metadata schema is requested for.",
+          "enum": [
+            "api",
+            "environment",
+            "deployment"
+          ],
+          "x-ms-enum": {
+            "name": "MetadataAssignmentEntity",
+            "modelAsString": true
+          }
         }
       }
     },
