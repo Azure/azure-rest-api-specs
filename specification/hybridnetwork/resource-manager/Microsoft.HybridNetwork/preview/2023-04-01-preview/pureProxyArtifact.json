@@ -113,7 +113,7 @@
           "200": {
             "description": "Request is successful. The operation returns a proxy artifact overview.",
             "schema": {
-              "$ref": "./common.json#/definitions/ProxyArtifactVersionsOverviewListResult"
+              "$ref": "#/definitions/ProxyArtifactVersionsOverviewListResult"
             }
           },
           "default": {
@@ -176,7 +176,7 @@
           "200": {
             "description": "Request is successful. Artifact State updated successfully",
             "schema": {
-              "$ref": "./common.json#/definitions/ProxyArtifactVersionsListOverview"
+              "$ref": "#/definitions/ProxyArtifactVersionsListOverview"
             }
           },
           "202": {
@@ -220,6 +220,42 @@
       },
       "description": "The proxy artifact list result."
     },
+    "ProxyArtifactVersionsOverviewListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProxyArtifactVersionsListOverview"
+          },
+          "description": "A list of available proxy artifacts."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The proxy artifact list result."
+    },
+    "ProxyArtifactVersionsListOverview": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "$ref": "#/definitions/ProxyArtifactOverviewPropertiesValue",
+          "description": "Proxy Artifact overview properties."
+        }
+      },
+      "readOnly": true,
+      "description": "The proxy artifact overview."
+    },
     "ProxyArtifactListOverview": {
       "type": "object",
       "allOf": [
@@ -255,9 +291,38 @@
         "artifactVersions": {
           "type": "array",
           "items": {
-            "$ref": "./common.json#/definitions/ProxyArtifactOverviewPropertiesValue"
+            "$ref": "#/definitions/ProxyArtifactOverviewPropertiesValue"
           },
           "description": "The proxy artifact overview properties."
+        }
+      }
+    },
+    "ProxyArtifactOverviewPropertiesValue": {
+      "type": "object",
+      "properties": {
+        "artifactType": {
+          "$ref": "./publisher.json#/definitions/ArtifactType",
+          "description": "The artifact type."
+        },
+        "artifactVersion": {
+          "type": "string",
+          "description": "The artifact version."
+        },
+        "artifactState": {
+          "$ref": "#/definitions/ArtifactState",
+          "description": "The artifact state"
+        },
+        "artifactDigest": {
+          "type": "string",
+          "description": "The artifact digest."
+        },
+        "artifactSize": {
+          "type": "string",
+          "description": "The artifact size."
+        },
+        "mediaType": {
+          "type": "string",
+          "description": "The media type for artifact."
         }
       }
     },
