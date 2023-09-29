@@ -1,18 +1,12 @@
 [CmdletBinding()]
 param (
-  [Parameter(Position = 0, Mandatory = $true)]
-  [string] $SpecsRepoRootDirectory,
-  [Parameter(Position = 1, Mandatory = $false)]
-  [string]$TargetBranch,
-  [Parameter(Position = 2, Mandatory = $false)]
-  [string]$SourceBranch,
-  [Parameter(Mandatory = $false)]
-  [switch]$GitClean
+  [switch]$CheckAll = $false,
+  [switch]$GitClean = $false
 )
 
 $exitCode = 0
 
-$typespecFolders = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" "$SpecsRepoRootDirectory" "$TargetBranch" "$SourceBranch"
+$typespecFolders = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" -CheckAll:$CheckAll
 
 Write-Host "typespecFolders:"
 foreach ($typespecFolder in $typespecFolders) {
