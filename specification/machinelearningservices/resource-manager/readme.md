@@ -43,7 +43,9 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2023-08-01-preview/workspaceRP.json
 suppressions:
   - code: LroPostReturn
-    reason: LRO does not return 200.
+    reason: LRO does not return 200 by design.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/resize"].post
   - code: TrackedResourcePatchOperation
     reason: server side don't support Patch yet track with https://msdata.visualstudio.com/Vienna/_workitems/edit/2702298.
     where:
