@@ -2362,6 +2362,11 @@
         "type": {
           "type": "string",
           "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
         }
       }
     },
@@ -2834,15 +2839,10 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/DatabaseMigrationBaseProperties",
           "x-ms-client-flatten": false
@@ -2855,15 +2855,10 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/DatabaseMigrationProperties",
           "x-ms-client-flatten": false
@@ -2876,7 +2871,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2896,11 +2891,6 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/DatabaseMigrationPropertiesSqlMi",
           "x-ms-client-flatten": false
@@ -2917,11 +2907,6 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/DatabaseMigrationPropertiesSqlVm",
           "x-ms-client-flatten": false
@@ -2938,11 +2923,6 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/DatabaseMigrationPropertiesSqlDb",
           "x-ms-client-flatten": false
@@ -3165,14 +3145,10 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/MigrationServiceProperties",
           "x-ms-client-flatten": true
@@ -3269,10 +3245,6 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/SqlMigrationServiceProperties",
           "x-ms-client-flatten": true
