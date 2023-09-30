@@ -2,38 +2,58 @@ import "./common.tsp";
 
 namespace Azure.AI.Chat;
 
-model MessageDelta {
+@doc("placeholder")
+model ChatMessageDelta {
+  @doc("placeholder")
   content?: string;
-  role?: Role;
 
+  @doc("placeholder")
+  role?: ChatRole;
+
+  @doc("placeholder")
   @projectedName("json", "session_state")
   sessionState?: unknown;
 }
 
+@doc("placeholder")
 model ChoiceDelta {
+  @doc("placeholder")
   index: safeint;
-  delta: MessageDelta;
 
+  @doc("placeholder")
+  delta: ChatMessageDelta;
+
+  @doc("placeholder")
   @projectedName("json", "extra_args")
   extraArguments?: Record<unknown>;
 
+  @doc("placeholder")
   @projectedName("json", "session_state")
   sessionState?: unknown;
 
+  @doc("placeholder")
   finishReason?: FinishReason;
 }
 
+@doc("placeholder")
 model ChatCompletionChunk {
+  @doc("placeholder")
   choices: ChoiceDelta[];
 }
 
+@doc("placeholder")
 model StreamingChatCompletionOptions {
-  messages: Message[];
+  @doc("placeholder")
+  messages: ChatMessage[];
+
+  @doc("placeholder")
   stream: false;
 
+  @doc("placeholder")
   @projectedName("json", "session_state")
   sessionState: unknown;
 
+  @doc("placeholder")
   @projectedName("json", "extra_args")
   extraArguments: Record<unknown>;
 }

@@ -7,6 +7,7 @@ import "./operations.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
+@doc("placeholder")
 @service({
   title: "Azure ML Chat",
 })

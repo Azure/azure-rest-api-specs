@@ -9,9 +9,11 @@ using TypeSpec.Http;
 
 @route("/chat")
 interface Chat {
+  @doc("placeholder")
   @sharedRoute
   create(...ChatCompletionOptions): ChatCompletion;
 
+  @doc("placeholder")
   @sharedRoute
   createStreaming(...StreamingChatCompletionOptions): ChatCompletionChunk;
 }
