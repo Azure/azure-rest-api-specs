@@ -31,16 +31,22 @@ enum Versions {
 enum ProvisioningState {
   /** Represents a succeeded operation. */
   Succeeded,
+
   /** Represents a failed operation. */
   Failed,
+
   /** Represents a canceled operation. */
   Canceled,
+
   /** Represents a pending operation. */
   Provisioning,
+
   /** Represents a pending operation. */
   Updating,
+
   /** Represents an operation under deletion. */
   Deleting,
+
   /** Represents an accepted operation. */
   Accepted,
 }
