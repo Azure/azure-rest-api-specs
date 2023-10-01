@@ -2914,7 +2914,7 @@
           "format": "int64",
           "description": "number of bytes truncated from source BGP output file on the CacheNode"
         },
-        "bidrSelectionType": {
+        "cidrSelectionType": {
           "type": "integer",
           "format": "int32",
           "description": "current selection type for CIDR range precedence"
@@ -3074,12 +3074,20 @@
     },
     "ConnectedCachePatchResource": {
       "type": "object",
-      "description": "cache Nodes patch properties",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+      "description": "cacheNodes patch properties",
+      "properties": {        
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ],
+          "description": "Resource tags."
         }
-      ]
+      }
     },
     "ResourceProviderOperationDisplay": {
       "description": "Describes the properties of the Operation",
