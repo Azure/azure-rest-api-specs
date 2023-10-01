@@ -242,7 +242,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "required": true,
             "description": "cacheNodes patch parameters",
             "schema": {
               "$ref": "#/definitions/ConnectedCachePatchResource"
@@ -519,7 +518,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "required": true,
             "description": "cacheNodes patch parameters",
             "schema": {
               "$ref": "#/definitions/ConnectedCachePatchResource"
@@ -754,9 +752,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The delete request was successful; the ispCustomer was deleted"
-          },
           "202": {
             "description": "The delete request was accepted; the ispCustomer is being deleted",
             "headers": {
@@ -1052,9 +1047,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The delete request was successful; the ispCacheNode was deleted"
-          },
           "202": {
             "description": "The delete request was accepted; the ispCacheNode is being deleted",
             "headers": {
@@ -1399,9 +1391,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The delete request was successful; the enterpriseMccCustomer was deleted"
-          },
           "202": {
             "description": "The delete request was accepted; the enterpriseMccCustomer is being deleted",
             "headers": {
@@ -1701,9 +1690,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The delete request was successful; the enterpriseMccCacheNode was deleted"
-          },
           "202": {
             "description": "The delete request was accepted; the enterpriseMccCacheNode is being deleted",
             "headers": {
@@ -3100,7 +3086,7 @@
       "description": "cache Nodes patch properties",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
