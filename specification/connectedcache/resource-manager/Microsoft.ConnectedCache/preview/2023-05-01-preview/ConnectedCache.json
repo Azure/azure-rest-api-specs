@@ -1977,42 +1977,42 @@
           "format": "date-time",
           "description": "last update timestamp of peering db update"
         },
-        "customerProperties_overview_cacheEfficiency": {
+        "customerPropertiesOverviewCacheEfficiency": {
           "type": "number",
           "description": "cache efficiency"
         },
-        "customerProperties_overview_averageEgressMbps": {
+        "customerPropertiesOverviewAverageEgressMbps": {
           "type": "number",
           "description": "average egress in mbps"
         },
-        "customerProperties_overview_averageMissMbps": {
+        "customerPropertiesOverviewAverageMissMbps": {
           "type": "number",
           "description": "average miss throughput in mbps"
         },
-        "customerProperties_overview_egressMbpsMax": {
+        "customerPropertiesOverviewEgressMbpsMax": {
           "type": "number",
           "description": "max egress in mbps"
         },
-        "customerProperties_Overview_EgressMbpsMaxDateTime": {
+        "customerPropertiesOverviewEgressMbpsMaxDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "timestamp of max egress"
         },
-        "customerProperties_Overview_MissMbpsMax": {
+        "customerPropertiesOverviewMissMbpsMax": {
           "type": "number",
           "description": "max miss throughput"
         },
-        "customerProperties_Overview_MissMbpsMaxDateTime": {
+        "customerPropertiesOverviewMissMbpsMaxDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "timestamp of miss max throughput"
         },
-        "customerProperties_Overview_CacheNodesHealthyCount": {
+        "customerPropertiesOverviewCacheNodesHealthyCount": {
           "description": "count of healthy cache nodes",
           "type": "integer",
           "format": "int32"
         },
-        "customerProperties_Overview_CacheNodesUnhealthyCount": {
+        "customerPropertiesOverviewCacheNodesUnhealthyCount": {
           "description": "count of unhealthy cache nodes",
           "type": "integer",
           "format": "int32"
@@ -2063,7 +2063,7 @@
           "type": "string",
           "description": "asn of the customer"
         },
-        "customerAsn_EstimatedEgressPeekGbps": {
+        "customerAsnEstimatedEgressPeekGbps": {
           "description": "the estimated customer asn peering Peek in Gigabits per second",
           "type": "number"
         },
@@ -2197,14 +2197,6 @@
     "CreateOrUpdateCustomerRequest": {
       "type": "object",
       "description": "Represents the high level Nodes needed to provision customer resources",
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ],
       "properties": {
         "properties": {
           "description": "Additional ConnectedCache properties",
@@ -2212,61 +2204,69 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CreateOrUpdateCustomerRequestEntity"
         }
-      }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "CreateOrUpdateCustomerRequestEntity": {
       "type": "object",
       "description": "Model representing customer for ConnectedCache resource",
       "properties": {
-        "CustomerName": {
+        "customerName": {
           "type": "string",
           "description": "name of the customer"
         },
-        "CustomerId": {
+        "customerId": {
           "type": "string",
           "description": "customer id of the customer"
         },
-        "ContactEmail": {
+        "contactEmail": {
           "type": "string",
           "description": "email of the customer contact"
         },
-        "ContactPhone": {
+        "contactPhone": {
           "type": "string",
           "description": "phone number of the customer contact"
         },
-        "ContactName": {
+        "contactName": {
           "type": "string",
           "description": "contact name of the customer"
         },
-        "IsEntitled": {
+        "isEntitled": {
           "type": "boolean",
           "description": "is the customer entitled"
         },
-        "ShouldMigrate": {
+        "shouldMigrate": {
           "type": "boolean",
           "description": "should the customer be migrated"
         },
-        "CustomerAsn": {
+        "customerAsn": {
           "type": "string",
           "description": "asn (autonomous system number) of the customer entered value"
         },
-        "TransitState": {
+        "transitState": {
           "type": "string",
           "description": "transit state of the customer"
         },
-        "TransitAsn": {
+        "transitAsn": {
           "type": "string",
           "description": "transit asn for customer who provides transit"
         },
-        "ResendSignupCode": {
+        "resendSignupCode": {
           "type": "boolean",
           "description": "should the signup code be resent"
         },
-        "VerifySignupCode": {
+        "verifySignupCode": {
           "type": "boolean",
           "description": "should the code for signup be verified"
         },
-        "VerifySignupPhrase": {
+        "verifySignupPhrase": {
           "type": "string",
           "description": "phrase for verify signup"
         }
@@ -2991,7 +2991,7 @@
           "format": "int32",
           "description": "number of worker connections that is needed for the deployment manifest for MCC Container"
         },
-        "workerConnections_LastUpdatedDateTime": {
+        "workerConnectionsLastUpdatedDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "indicates the most recent date time when the worker count on the physical MCC was successfully updated"
