@@ -223,7 +223,7 @@
         "operationId": "enterpriseCustomers_Update",
         "x-ms-examples": {
           "enterpriseCustomers Update": {
-            "$ref": "./examples/enterpriseCustomersCreateOrUpdate.json"
+            "$ref": "./examples/enterpriseCustomersUpdate.json"
           }
         },
         "parameters": [
@@ -245,12 +245,18 @@
             "required": true,
             "description": "cacheNodes patch parameters",
             "schema": {
-              "$ref": "#/definitions/ConnectedCache"
+              "$ref": "#/definitions/ConnectedCachePatchResource"
             }
           }
         ],
         "responses": {
           "200": {
+            "description": "The request was successful; response contains the updated Cache node",
+            "schema": {
+              "$ref": "#/definitions/ConnectedCache"
+            }
+          },
+          "201": {
             "description": "The request was successful; response contains the updated Cache node",
             "schema": {
               "$ref": "#/definitions/ConnectedCache"
@@ -500,7 +506,7 @@
         "operationId": "cacheNodes_Update",
         "x-ms-examples": {
           "CacheNodesUpdate": {
-            "$ref": "./examples/CacheNodesCreateOrUpdate.json"
+            "$ref": "./examples/CacheNodesUpdate.json"
           }
         },
         "parameters": [
@@ -522,12 +528,18 @@
             "required": true,
             "description": "cacheNodes patch parameters",
             "schema": {
-              "$ref": "#/definitions/ConnectedCache"
+              "$ref": "#/definitions/ConnectedCachePatchResource"
             }
           }
         ],
         "responses": {
           "200": {
+            "description": "The request was successful; response contains the updated Cache node",
+            "schema": {
+              "$ref": "#/definitions/ConnectedCache"
+            }
+          },
+          "201": {
             "description": "The request was successful; response contains the updated Cache node",
             "schema": {
               "$ref": "#/definitions/ConnectedCache"
@@ -784,7 +796,7 @@
         "operationId": "ispCustomers_Update",
         "x-ms-examples": {
           "ispCustomers Update": {
-            "$ref": "./examples/ispCustomersCreateOrUpdate.json"
+            "$ref": "./examples/ispCustomersUpdate.json"
           }
         },
         "parameters": [
@@ -806,13 +818,19 @@
             "required": true,
             "description": "ispCustomers patch parameters",
             "schema": {
-              "$ref": "#/definitions/CreateOrUpdateCustomerRequest"
+              "$ref": "#/definitions/ConnectedCachePatchResource"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "The update request was successful; response contains the updated ispCustomer",
+            "schema": {
+              "$ref": "#/definitions/MccCustomerResource"
+            }
+          },
+          "201": {
+            "description": "The update request was successful; the ispCustomer does not exists",
             "schema": {
               "$ref": "#/definitions/MccCustomerResource"
             }
@@ -1077,7 +1095,7 @@
         "operationId": "ispCacheNodes_Update",
         "x-ms-examples": {
           "ispCacheNodes Update": {
-            "$ref": "./examples/ispCacheNodesCreateOrUpdate.json"
+            "$ref": "./examples/ispCacheNodesUpdate.json"
           }
         },
         "parameters": [
@@ -1102,13 +1120,19 @@
             "required": true,
             "description": "cacheNodes patch parameters",
             "schema": {
-              "$ref": "#/definitions/CreateOrUpdateCacheNodeRequest"
+              "$ref": "#/definitions/ConnectedCachePatchResource"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "The update request was successful; the response contains the updated ispCacheNode",
+            "schema": {
+              "$ref": "#/definitions/MccCacheNodeResource"
+            }
+          },
+          "201": {
+            "description": "The update request was successful; the ispCacheNode does not exists",
             "schema": {
               "$ref": "#/definitions/MccCacheNodeResource"
             }
@@ -1419,7 +1443,7 @@
         "operationId": "enterpriseMccCustomers_Update",
         "x-ms-examples": {
           "enterpriseMccCustomers Update": {
-            "$ref": "./examples/enterprise/enterpriseMccCustomersCreateOrUpdate.json"
+            "$ref": "./examples/enterprise/enterpriseMccCustomersUpdate.json"
           }
         },
         "parameters": [
@@ -1441,12 +1465,18 @@
             "required": true,
             "description": "enterpriseMccCustomers patch parameters",
             "schema": {
-              "$ref": "#/definitions/CreateOrUpdateCustomerRequest"
+              "$ref": "#/definitions/ConnectedCachePatchResource"
             }
           }
         ],
         "responses": {
           "200": {
+            "description": "The update request was successful; response contains the updated enterpriseMccCustomer",
+            "schema": {
+              "$ref": "#/definitions/MccCustomerResource"
+            }
+          },
+          "201": {
             "description": "The update request was successful; response contains the updated enterpriseMccCustomer",
             "schema": {
               "$ref": "#/definitions/MccCustomerResource"
@@ -1716,7 +1746,7 @@
         "operationId": "enterpriseMccCacheNodes_Update",
         "x-ms-examples": {
           "enterpriseMccCacheNodes Update": {
-            "$ref": "./examples/enterprise/enterpriseMccCacheNodesCreateOrUpdate.json"
+            "$ref": "./examples/enterprise/enterpriseMccCacheNodesUpdate.json"
           }
         },
         "parameters": [
@@ -1741,12 +1771,18 @@
             "required": true,
             "description": "enterpriseMccCacheNode patch parameters",
             "schema": {
-              "$ref": "#/definitions/CreateOrUpdateCacheNodeRequest"
+              "$ref": "#/definitions/ConnectedCachePatchResource"
             }
           }
         ],
         "responses": {
           "200": {
+            "description": "The update request was successful; the response contains the updated enterpriseMccCacheNode",
+            "schema": {
+              "$ref": "#/definitions/MccCacheNodeResource"
+            }
+          },
+          "201": {
             "description": "The update request was successful; the response contains the updated enterpriseMccCacheNode",
             "schema": {
               "$ref": "#/definitions/MccCacheNodeResource"
@@ -3052,28 +3088,6 @@
             "modelAsString": true
           }
         },
-        "customer": {
-          "type": "object",
-          "description": " Mcc Customer Json response"
-        },
-        "additionalCustomerProperties": {
-          "type": "object",
-          "description": "additional Mcc Customer Json properties",
-          "additionalProperties": {
-            "type": "object"
-          }
-        },
-        "cacheNode": {
-          "type": "object",
-          "description": " Mcc Cache Node Json response"
-        },
-        "additionalCacheNodeProperties": {
-          "type": "object",
-          "description": "additional Mcc cachenode Json properties for BGP and Update and IOT central",
-          "additionalProperties": {
-            "type": "object"
-          }
-        },
         "statusCode": {
           "type": "string",
           "description": "statusCode used to get code details of MCC response object"
@@ -3096,6 +3110,15 @@
           "description": "The error details"
         }
       }
+    },
+    "ConnectedCachePatchResource": {
+      "type": "object",
+      "description": "cache Nodes patch properties",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "ResourceProviderOperationDisplay": {
       "description": "Describes the properties of the Operation",
@@ -3120,19 +3143,15 @@
       }
     },
     "ConnectedCacheList": {
-      "description": "Object that includes an array of ConnectedCache and a possible link for next set",
+      "description": "Object that includes an array of Connected Cache and a possible link for next set",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of ConnectedCache resources",
+          "description": "List of Connected Cache resources",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConnectedCache"
           }
-        },
-        "additionalAggregatedProperties": {
-          "description": "Tags for the ConnectedCache",
-          "type": "object"
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging)",
