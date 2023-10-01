@@ -1876,7 +1876,7 @@
       "type": "object",
       "description": "Bgp configuration of cache node",
       "properties": {
-        "AsnToIpAddressMapping": {
+        "asnToIpAddressMapping": {
           "description": "Asn to ip address mapping",
           "type": "string"
         }
@@ -1977,19 +1977,19 @@
           "format": "date-time",
           "description": "last update timestamp of peering db update"
         },
-        "customerProperties_Overview_CacheEfficiency": {
+        "customerProperties_overview_cacheEfficiency": {
           "type": "number",
           "description": "cache efficiency"
         },
-        "customerProperties_Overview_AverageEgressMbps": {
+        "customerProperties_overview_averageEgressMbps": {
           "type": "number",
           "description": "average egress in mbps"
         },
-        "customerProperties_Overview_AverageMissMbps": {
+        "customerProperties_overview_averageMissMbps": {
           "type": "number",
           "description": "average miss throughput in mbps"
         },
-        "customerProperties_Overview_EgressMbpsMax": {
+        "customerProperties_overview_egressMbpsMax": {
           "type": "number",
           "description": "max egress in mbps"
         },
@@ -2067,19 +2067,19 @@
           "description": "the estimated customer asn peering Peek in Gigabits per second",
           "type": "number"
         },
-        "customerEntitlement_SkuId": {
+        "customerEntitlementSkuId": {
           "type": "string",
           "description": "customer entitlement sku id"
         },
-        "customerEntitlement_SkuGuid": {
+        "customerEntitlementSkuGuid": {
           "type": "string",
           "description": "customer entitlement sku guid"
         },
-        "customerEntitlement_SkuName": {
+        "customerEntitlementSkuName": {
           "type": "string",
           "description": "customer entitlement sku name"
         },
-        "customerEntitlement_Expiration": {
+        "customerEntitlementExpiration": {
           "type": "string",
           "description": "customer entitlement expiration"
         },
@@ -2436,7 +2436,6 @@
       ],
       "properties": {
         "properties": {
-          "type": "object",
           "description": "Properties of  mcc cache node resource install script",
           "title": "Properties of mcc cache node resource install script",
           "x-ms-client-flatten": true,
@@ -2448,27 +2447,27 @@
       "type": "object",
       "description": "install script properties",
       "properties": {
-        "CustomerId": {
+        "customerId": {
           "type": "string",
           "description": "mcc customer id"
         },
-        "CacheNodeId": {
+        "cacheNodeId": {
           "type": "string",
           "description": "identifier of the cache node"
         },
-        "PrimaryAccountKey": {
+        "primaryAccountKey": {
           "x-ms-secret": true,
           "readOnly": true,
           "type": "string",
           "description": "primary account key. This is internal to mcc"
         },
-        "SecondaryAccountKey": {
+        "secondaryAccountKey": {
           "x-ms-secret": true,
           "readOnly": true,
           "type": "string",
           "description": "secondary account key. This is internal to mcc"
         },
-        "RegistrationKey": {
+        "registrationKey": {
           "x-ms-secret": true,
           "readOnly": true,
           "type": "string",
@@ -2646,102 +2645,102 @@
       "type": "object",
       "description": "Model representing Cache Node for ConnectedCache resource",
       "properties": {
-        "FullyQualifiedResourceId": {
+        "fullyQualifiedResourceId": {
           "type": "string",
           "description": "fully qualified resource id of the customer in azure resource manager"
         },
-        "CustomerId": {
+        "customerId": {
           "type": "string",
           "description": "mcc customer id"
         },
-        "CustomerName": {
+        "customerName": {
           "type": "string",
           "description": "name of the customer"
         },
-        "ContactEmail": {
+        "contactEmail": {
           "type": "string",
           "description": "contact email of the customer"
         },
-        "ContactPhone": {
+        "contactPhone": {
           "type": "string",
           "description": "contact phone of the customer"
         },
-        "ContactName": {
+        "contactName": {
           "type": "string",
           "description": "name of the customer contact"
         },
-        "IsEntitled": {
+        "isEntitled": {
           "type": "boolean",
           "description": "flag to indicate if the customer is entitled"
         },
-        "Location": {
+        "location": {
           "type": "string",
           "description": "azure region where the customer is created"
         },
-        "ResourceType": {
+        "resourceType": {
           "type": "string",
           "description": "type of resource"
         },
-        "ReleaseVersion": {
+        "releaseVersion": {
           "type": "integer",
           "format": "int32",
           "description": "release version of the customer"
         },
-        "CreateCorrelationId": {
+        "createCorrelationId": {
           "type": "string",
           "description": "correlation id of the create customer operation"
         },
-        "UpdateCorrelationId": {
+        "updateCorrelationId": {
           "type": "string",
           "description": "correlation id of the update customer operation"
         },
-        "ShouldDelete": {
+        "shouldDelete": {
           "type": "boolean",
           "description": "indicates if the customer is marked for deletion"
         },
-        "DeleteRectifierCorrelationId": {
+        "deleteRectifierCorrelationId": {
           "type": "string",
           "description": "correlation id of the delete operation"
         },
-        "DeleteAsyncOperationId": {
+        "deleteAsyncOperationId": {
           "type": "string",
           "description": "async operation id of the delete operation"
         },
-        "ClientTenantId": {
+        "clientTenantId": {
           "type": "string",
           "description": "client tenantId of the customer subscription"
         },
-        "AttemptedDeletes": {
+        "attemptedDeletes": {
           "type": "integer",
           "format": "int32",
           "description": "number of delete attempts of the customer"
         },
-        "DeletedFlagSetDateTime": {
+        "deletedFlagSetDateTime": {
           "type": "string",
           "format": "date-time",
           "description": "timestamp when delete flag was set for the customer"
         },
-        "ProvisioningState": {
+        "provisioningState": {
           "type": "integer",
           "format": "int32",
           "description": "provisioning state of the customer"
         },
-        "LastAttemptedDeleteTime": {
+        "lastAttemptedDeleteTime": {
           "type": "string",
           "format": "date-time",
           "description": "timestamp of last delete attempt"
         },
-        "SynchWithArmAttemptsCount": {
+        "synchWithArmAttemptsCount": {
           "type": "integer",
           "format": "int32",
           "description": "number of sync attempts with arm"
         },
-        "LastSyncWithArmTimestamp": {
+        "lastSyncWithArmTimestamp": {
           "type": "string",
           "format": "date-time",
           "description": "timestamp of last sync with arm"
         },
-        "IsEnterpriseManaged": {
+        "isEnterpriseManaged": {
           "type": "boolean",
           "description": "flag indicating if customer enterprise managed"
         }
@@ -3078,7 +3077,7 @@
       "description": "cache Nodes patch properties",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
