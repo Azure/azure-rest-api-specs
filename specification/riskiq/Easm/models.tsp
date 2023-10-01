@@ -99,6 +99,7 @@ alias SavedFiltersListTrait = {
   }>;
 };
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("java", "AlexaDetails")
 model AlexaInfo {
   alexaRank?: int64;
   category?: string;
