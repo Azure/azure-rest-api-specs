@@ -18,8 +18,8 @@ namespace Microsoft.LoadTestService;
 @tag("Test")
 interface LoadTestAdministration {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @summary("Create a new test or update an existing test.")
-  @doc("Create a new test or update an existing test.")
+  @summary("Create a new test or update an existing test by providing the test Id.")
+  @doc("Create a new test or update an existing test by providing the test Id.")
   @route("/tests/{testId}")
   @patch
   createOrUpdateTest is Azure.Core.Foundations.Operation<
@@ -29,7 +29,7 @@ interface LoadTestAdministration {
       contentType: "application/merge-patch+json";
 
       @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
+Unique Id for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
@@ -42,12 +42,12 @@ numeric, underscore or hyphen characters.
     ResourceCreatedOrOkResponse<Test>
   >;
 
-  @summary("Delete a test by its name.")
-  @doc("Delete a test by its name.")
+  @summary("Delete a test by its test Id.")
+  @doc("Delete a test by its test Id.")
   deleteTest is StandardResourceOperations.ResourceDelete<Test>;
 
-  @summary("Get load test details by test name")
-  @doc("Get load test details by test name")
+  @summary("Get load test details by test Id")
+  @doc("Get load test details by test Id")
   getTest is StandardResourceOperations.ResourceRead<Test>;
 
   @summary("""
@@ -66,12 +66,12 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/byos" //It is limiting for users to have storage first before creating a load test also it will be breaking change for us.
   @summary("""
-Upload input file for a given test name. File size can't be more than 50 MB.
+Upload input file for a given test Id. File size can't be more than 50 MB.
 Existing file with same name for the given test will be overwritten. File
 should be provided in the request body as application/octet-stream.
 """)
   @doc("""
-Upload input file for a given test name. File size can't be more than 50 MB.
+Upload input file for a given test Id. File size can't be more than 50 MB.
 Existing file with same name for the given test will be overwritten. File
 should be provided in the request body as application/octet-stream.
 """)
@@ -105,8 +105,8 @@ numeric, underscore or hyphen characters.
     ResourceCreatedResponse<TestFileInfo>
   >;
 
-  @summary("Get test file by the file name.")
-  @doc("Get test file by the file name.")
+  @summary("Get all the files that are associated with a test.")
+  @doc("Get all the files that are associated with a test.")
   getTestFile is StandardResourceOperations.ResourceRead<TestFileInfo>;
 
   @summary("Delete file by the file name for a test")
@@ -118,14 +118,10 @@ numeric, underscore or hyphen characters.
   listTestFiles is StandardResourceOperations.ResourceList<TestFileInfo>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @summary("Associate an app component (collection of azure resources) to a test")
-  @doc("Associate an app component (collection of azure resources) to a test")
+  @summary("Add an app component to a test.")
+  @doc("Add an app component to a test by providing the resource Id, name and type.")
   @route("/tests/{testId}/app-components")
   @patch
-  @example(
-    "./examples/CreateOrUpdateTestAppComponents.json",
-    "CreateOrUpdateTestAppComponents"
-  )
   createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
     {
       @header
@@ -168,10 +164,6 @@ numeric, underscore or hyphen characters.
   @doc("Configure server metrics for a test")
   @route("/tests/{testId}/server-metrics-config")
   @patch
-  @example(
-    "./examples/CreateOrUpdateTestServerMetricsConfig.json",
-    "CreateOrUpdateTestServerMetricsConfig"
-  )
   createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @header
@@ -197,10 +189,6 @@ numeric, underscore or hyphen characters.
   @doc("List server metrics configuration for the given test.")
   @route("/tests/{testId}/server-metrics-config")
   @get
-  @example(
-    "./examples/ListTestServerMetricsConfig.json",
-    "ListTestServerMetricsConfig"
-  )
   getServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -216,13 +204,13 @@ numeric, underscore or hyphen characters.
 
 @tag("TestRun")
 interface LoadTestRun {
-  @summary("Get test run details by name.")
-  @doc("Get test run details by name.")
+  @summary("Get test run details by test run Id.")
+  @doc("Get test run details by test run Id.")
   getTestRun is StandardResourceOperations.ResourceRead<TestRun>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @summary("Create and start a new test run with the given name.")
-  @doc("Create and start a new test run with the given name.")
+  @summary("Create and start a new test run with the given test run Id.")
+  @doc("Create and start a new test run with the given test run Id.")
   @route("/test-runs/{testRunId}")
   @patch
   createOrUpdateTestRun is Azure.Core.Foundations.Operation<
@@ -232,7 +220,7 @@ interface LoadTestRun {
       contentType: "application/merge-patch+json";
 
       @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
+Unique Id for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
@@ -254,12 +242,12 @@ in the request body.
     ResourceCreatedOrOkResponse<TestRun>
   >;
 
-  @summary("Delete a test run by its name.")
-  @doc("Delete a test run by its name.")
+  @summary("Delete an existing load test run.")
+  @doc("Delete an existing load test run by providing the testId.")
   deleteTestRun is StandardResourceOperations.ResourceDelete<TestRun>;
 
-  @summary("Get all test runs with given filters")
-  @doc("Get all test runs with given filters")
+  @summary("Get all test runs for the given filters.")
+  @doc("Get all test runs for the given filters.")
   listTestRuns is StandardResourceOperations.ResourceList<
     TestRun,
     ListQueryParametersTrait<ListTestRunQueryParams>
@@ -270,9 +258,9 @@ in the request body.
   getTestRunFile is StandardResourceOperations.ResourceRead<TestRunFileInfo>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
-  @summary("Stop test run by name.")
-  @doc("Stop test run by name.")
-  @example("./examples/StopTestRun.json", "StopTestRun")
+  @summary("Stop test run by test run Id.")
+  @doc("Stop test run by test run Id.")
+  @example("./examples/StopTestRun.json", "Stop test run by name.")
   @operationId("StopTestRun")
   stop is StandardResourceOperations.ResourceAction<TestRun, {}, TestRun, {}>;
 
@@ -298,10 +286,6 @@ numeric, underscore or hyphen characters.
   @doc("List the metric definitions for a load test run.")
   @route("/test-runs/{testRunId}/metric-definitions")
   @get
-  @example(
-    "./examples/ListTestRunMetricsDefinitions.json",
-    "ListTestRunMetricsDefinitions"
-  )
   listMetricDefinitions is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -342,7 +326,7 @@ numeric, underscore or hyphen characters.
 
       @doc("The interval (i.e. timegrain) of the query.")
       @query
-      interval?: Interval = Interval.PT1M;
+      interval?: TimeGrain = TimeGrain.PT1M;
 
       @doc("Metric namespace to query metric definitions for.")
       @query
@@ -366,10 +350,6 @@ The timespan of the query. It is a string with the following format 'startDateTi
   @summary("List the dimension values for the given metric dimension name.")
   @doc("List the dimension values for the given metric dimension name.")
   @route("/test-runs/{testRunId}/metric-dimensions/{name}/values")
-  @example(
-    "./examples/ListMetricDimensionValues.json",
-    "ListMetricDimensionValues"
-  )
   listMetricDimensionValues is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -383,20 +363,16 @@ numeric, underscore or hyphen characters.
       @path
       name: string;
 
-      ...MetricDimensions;
+      ...MetricDimensionsRequest;
     },
     DimensionValueList
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @summary("Associate an app component (collection of azure resources) to a test run")
-  @doc("Associate an app component (collection of azure resources) to a test run")
+  @summary("Add an app component to a test run.")
+  @doc("Add an app component to a test run by providing the resource Id, name and type.")
   @route("/test-runs/{testRunId}/app-components")
   @patch
-  @example(
-    "./examples/CreateOrUpdateTestRunAppComponents.json",
-    "CreateOrUpdateTestRunAppComponents"
-  )
   createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
     {
       @header
@@ -404,7 +380,7 @@ numeric, underscore or hyphen characters.
       contentType: "application/merge-patch+json";
 
       @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
+Unique Id for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
@@ -428,10 +404,6 @@ run.
 """)
   @route("/test-runs/{testRunId}/app-components")
   @get
-  @example(
-    "./examples/ListTestRunAppComponents.json",
-    "ListTestRunAppComponents"
-  )
   getAppComponents is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -449,10 +421,6 @@ numeric, underscore or hyphen characters.
   @doc("Configure server metrics for a test run")
   @route("/test-runs/{testRunId}/server-metrics-config")
   @patch
-  @example(
-    "./examples/CreateOrUpdateTestRunServerMetricsConfig.json",
-    "CreateOrUpdateTestRunServerMetricsConfig"
-  )
   createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @header
@@ -460,7 +428,7 @@ numeric, underscore or hyphen characters.
       contentType: "application/merge-patch+json";
 
       @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
+Unique Id for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
@@ -474,14 +442,10 @@ numeric, underscore or hyphen characters.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @summary("List server metrics configuration for the given test run.")
-  @doc("List server metrics configuration for the given test run.")
+  @summary("Get associated server metrics configuration for the given test run.")
+  @doc("Get associated server metrics configuration for the given test run.")
   @route("/test-runs/{testRunId}/server-metrics-config")
   @get
-  @example(
-    "./examples/ListTestRunServerMetricsConfig.json",
-    "ListTestRunServerMetricsConfig"
-  )
   getServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @doc("""

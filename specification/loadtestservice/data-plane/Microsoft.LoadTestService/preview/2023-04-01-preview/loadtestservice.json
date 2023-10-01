@@ -64,8 +64,8 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Get all test runs with given filters",
-        "description": "Get all test runs with given filters",
+        "summary": "Get all test runs for the given filters.",
+        "description": "Get all test runs for the given filters.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -96,26 +96,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of TestRun items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The TestRun items on this page",
-                  "items": {
-                    "$ref": "#/definitions/TestRun"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedTestRun"
             }
           },
           "default": {
@@ -125,8 +106,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -147,8 +128,8 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Get test run details by name.",
-        "description": "Get test run details by name.",
+        "summary": "Get test run details by test run Id.",
+        "description": "Get test run details by test run Id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -177,8 +158,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -194,8 +175,8 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Create and start a new test run with the given name.",
-        "description": "Create and start a new test run with the given name.",
+        "summary": "Create and start a new test run with the given test run Id.",
+        "description": "Create and start a new test run with the given test run Id.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -206,7 +187,7 @@
           {
             "name": "testRunId",
             "in": "path",
-            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "description": "Unique Id for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
             "required": true,
             "type": "string"
           },
@@ -247,8 +228,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -264,8 +245,8 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Delete a test run by its name.",
-        "description": "Delete a test run by its name.",
+        "summary": "Delete an existing load test run.",
+        "description": "Delete an existing load test run by providing the testId.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -291,8 +272,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -310,8 +291,8 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Stop test run by name.",
-        "description": "Stop test run by name.",
+        "summary": "Stop test run by test run Id.",
+        "description": "Stop test run by test run Id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -340,14 +321,14 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
         },
         "x-ms-examples": {
-          "StopTestRun": {
+          "Stop test run by name.": {
             "$ref": "./examples/StopTestRun.json"
           }
         }
@@ -387,16 +368,13 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
         },
         "x-ms-examples": {
-          "ListTestRunAppComponents": {
-            "$ref": "./examples/ListTestRunAppComponents.json"
-          },
           "Get associated app component for the given test run.": {
             "$ref": "./examples/ListTestRunAppComponents.json"
           }
@@ -407,8 +385,8 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "Associate an app component (collection of azure resources) to a test run",
-        "description": "Associate an app component (collection of azure resources) to a test run",
+        "summary": "Add an app component to a test run.",
+        "description": "Add an app component to a test run by providing the resource Id, name and type.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -419,7 +397,7 @@
           {
             "name": "testRunId",
             "in": "path",
-            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "description": "Unique Id for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
             "required": true,
             "type": "string"
           },
@@ -453,16 +431,13 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdateTestRunAppComponents": {
-            "$ref": "./examples/CreateOrUpdateTestRunAppComponents.json"
-          },
           "Add or update app components to a load test run": {
             "$ref": "./examples/CreateOrUpdateTestRunAppComponents.json"
           }
@@ -512,8 +487,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -566,16 +541,13 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
         },
         "x-ms-examples": {
-          "ListTestRunMetricsDefinitions": {
-            "$ref": "./examples/ListTestRunMetricsDefinitions.json"
-          },
           "List the metric definitions for a load test run.": {
             "$ref": "./examples/ListTestRunMetricsDefinitions.json"
           }
@@ -609,16 +581,16 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/MetricDimensions.metricname"
+            "$ref": "#/parameters/MetricDimensionsRequest.metricname"
           },
           {
-            "$ref": "#/parameters/MetricDimensions.interval"
+            "$ref": "#/parameters/MetricDimensionsRequest.interval"
           },
           {
-            "$ref": "#/parameters/MetricDimensions.metricNamespace"
+            "$ref": "#/parameters/MetricDimensionsRequest.metricNamespace"
           },
           {
-            "$ref": "#/parameters/MetricDimensions.timespan"
+            "$ref": "#/parameters/MetricDimensionsRequest.timespan"
           }
         ],
         "responses": {
@@ -635,16 +607,13 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
         },
         "x-ms-examples": {
-          "ListMetricDimensionValues": {
-            "$ref": "./examples/ListMetricDimensionValues.json"
-          },
           "List the dimension values for the given metric dimension name.": {
             "$ref": "./examples/ListMetricDimensionValues.json"
           }
@@ -685,8 +654,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -746,7 +715,7 @@
               "PT1H"
             ],
             "x-ms-enum": {
-              "name": "Interval",
+              "name": "TimeGrain",
               "modelAsString": true,
               "values": [
                 {
@@ -815,8 +784,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -837,8 +806,8 @@
         "tags": [
           "TestRun"
         ],
-        "summary": "List server metrics configuration for the given test run.",
-        "description": "List server metrics configuration for the given test run.",
+        "summary": "Get associated server metrics configuration for the given test run.",
+        "description": "Get associated server metrics configuration for the given test run.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -865,16 +834,13 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
         },
         "x-ms-examples": {
-          "ListTestRunServerMetricsConfig": {
-            "$ref": "./examples/ListTestRunServerMetricsConfig.json"
-          },
           "List server metrics configuration for the given test run.": {
             "$ref": "./examples/ListTestRunServerMetricsConfig.json"
           }
@@ -897,7 +863,7 @@
           {
             "name": "testRunId",
             "in": "path",
-            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "description": "Unique Id for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
             "required": true,
             "type": "string"
           },
@@ -931,16 +897,13 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdateTestRunServerMetricsConfig": {
-            "$ref": "./examples/CreateOrUpdateTestRunServerMetricsConfig.json"
-          },
           "Add or update server metrics configuration for a load test run": {
             "$ref": "./examples/CreateOrUpdateTestRunServerMetricsConfig.json"
           }
@@ -979,26 +942,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of Test items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The Test items on this page",
-                  "items": {
-                    "$ref": "#/definitions/Test"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedTest"
             }
           },
           "default": {
@@ -1008,8 +952,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -1030,8 +974,8 @@
         "tags": [
           "Test"
         ],
-        "summary": "Get load test details by test name",
-        "description": "Get load test details by test name",
+        "summary": "Get load test details by test Id",
+        "description": "Get load test details by test Id",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1060,8 +1004,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -1077,8 +1021,8 @@
         "tags": [
           "Test"
         ],
-        "summary": "Create a new test or update an existing test.",
-        "description": "Create a new test or update an existing test.",
+        "summary": "Create a new test or update an existing test by providing the test Id.",
+        "description": "Create a new test or update an existing test by providing the test Id.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -1089,7 +1033,7 @@
           {
             "name": "testId",
             "in": "path",
-            "description": "Unique name for the load test, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "description": "Unique Id for the load test, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
             "required": true,
             "type": "string"
           },
@@ -1123,8 +1067,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -1140,8 +1084,8 @@
         "tags": [
           "Test"
         ],
-        "summary": "Delete a test by its name.",
-        "description": "Delete a test by its name.",
+        "summary": "Delete a test by its test Id.",
+        "description": "Delete a test by its test Id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1167,8 +1111,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -1214,8 +1158,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -1231,8 +1175,8 @@
         "tags": [
           "Test"
         ],
-        "summary": "Associate an app component (collection of azure resources) to a test",
-        "description": "Associate an app component (collection of azure resources) to a test",
+        "summary": "Add an app component to a test.",
+        "description": "Add an app component to a test by providing the resource Id, name and type.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -1277,16 +1221,13 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdateTestAppComponents": {
-            "$ref": "./examples/CreateOrUpdateTestAppComponents.json"
-          },
           "Add or update app components to a load test": {
             "$ref": "./examples/CreateOrUpdateTestAppComponents.json"
           }
@@ -1319,26 +1260,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of TestFileInfo items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The TestFileInfo items on this page",
-                  "items": {
-                    "$ref": "#/definitions/TestFileInfo"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedTestFileInfo"
             }
           },
           "default": {
@@ -1348,8 +1270,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -1370,8 +1292,8 @@
         "tags": [
           "Test"
         ],
-        "summary": "Get test file by the file name.",
-        "description": "Get test file by the file name.",
+        "summary": "Get all the files that are associated with a test.",
+        "description": "Get all the files that are associated with a test.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1407,8 +1329,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -1424,8 +1346,8 @@
         "tags": [
           "Test"
         ],
-        "summary": "Upload input file for a given test name. File size can't be more than 50 MB.\nExisting file with same name for the given test will be overwritten. File\nshould be provided in the request body as application/octet-stream.",
-        "description": "Upload input file for a given test name. File size can't be more than 50 MB.\nExisting file with same name for the given test will be overwritten. File\nshould be provided in the request body as application/octet-stream.",
+        "summary": "Upload input file for a given test Id. File size can't be more than 50 MB.\nExisting file with same name for the given test will be overwritten. File\nshould be provided in the request body as application/octet-stream.",
+        "description": "Upload input file for a given test Id. File size can't be more than 50 MB.\nExisting file with same name for the given test will be overwritten. File\nshould be provided in the request body as application/octet-stream.",
         "consumes": [
           "application/octet-stream"
         ],
@@ -1467,17 +1389,17 @@
                 {
                   "name": "JMX_FILE",
                   "value": "JMX_FILE",
-                  "description": "If file is jmx script."
+                  "description": "If the file is a JMX script."
                 },
                 {
                   "name": "USER_PROPERTIES",
                   "value": "USER_PROPERTIES",
-                  "description": "If file is user properties."
+                  "description": "If the file is a user properties file."
                 },
                 {
                   "name": "ADDITIONAL_ARTIFACTS",
                   "value": "ADDITIONAL_ARTIFACTS",
-                  "description": "If file is not any of other supported type."
+                  "description": "If the file is not among any of the other supported file types."
                 },
                 {
                   "name": "ZIPPED_ARTIFACTS",
@@ -1487,7 +1409,7 @@
                 {
                   "name": "URL_TEST_CONFIG",
                   "value": "URL_TEST_CONFIG",
-                  "description": "If file is a json config for the Url tests."
+                  "description": "If the file is a JSON config file to define the requests for a URL test."
                 }
               ]
             }
@@ -1517,8 +1439,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -1568,8 +1490,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -1615,16 +1537,13 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
         },
         "x-ms-examples": {
-          "ListTestServerMetricsConfig": {
-            "$ref": "./examples/ListTestServerMetricsConfig.json"
-          },
           "List server metrics configuration for the given test.": {
             "$ref": "./examples/ListTestServerMetricsConfig.json"
           }
@@ -1681,16 +1600,13 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdateTestServerMetricsConfig": {
-            "$ref": "./examples/CreateOrUpdateTestServerMetricsConfig.json"
-          },
           "Add or update server metrics configuration for a load test.": {
             "$ref": "./examples/CreateOrUpdateTestServerMetricsConfig.json"
           }
@@ -1816,11 +1732,11 @@
     },
     "AutoStopCriteria": {
       "type": "object",
-      "description": "Auto stop criteria for a test.",
+      "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window.",
       "properties": {
         "autoStopEnabled": {
           "type": "boolean",
-          "description": "Auto stop is enabled or not"
+          "description": "Whether auto-stop should be enabled."
         },
         "errorRate": {
           "type": "number",
@@ -1830,7 +1746,7 @@
         "errorRateTimeWindow": {
           "type": "integer",
           "format": "int64",
-          "description": "Time window in seconds for auto stop metric"
+          "description": "Time window during which the error percentage should be evaluated."
         }
       }
     },
@@ -2120,17 +2036,17 @@
           {
             "name": "JMX_FILE",
             "value": "JMX_FILE",
-            "description": "If file is jmx script."
+            "description": "If the file is a JMX script."
           },
           {
             "name": "USER_PROPERTIES",
             "value": "USER_PROPERTIES",
-            "description": "If file is user properties."
+            "description": "If the file is a user properties file."
           },
           {
             "name": "ADDITIONAL_ARTIFACTS",
             "value": "ADDITIONAL_ARTIFACTS",
-            "description": "If file is not any of other supported type."
+            "description": "If the file is not among any of the other supported file types."
           },
           {
             "name": "ZIPPED_ARTIFACTS",
@@ -2140,49 +2056,7 @@
           {
             "name": "URL_TEST_CONFIG",
             "value": "URL_TEST_CONFIG",
-            "description": "If file is a json config for the Url tests."
-          }
-        ]
-      }
-    },
-    "Interval": {
-      "type": "string",
-      "description": "Intervals",
-      "enum": [
-        "PT5S",
-        "PT10S",
-        "PT1M",
-        "PT5M",
-        "PT1H"
-      ],
-      "x-ms-enum": {
-        "name": "Interval",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "PT5S",
-            "value": "PT5S",
-            "description": "5 seconds, available only if test run duration is less than 10 minutes."
-          },
-          {
-            "name": "PT10S",
-            "value": "PT10S",
-            "description": "10 seconds, available only if test run duration is less than 10 minutes."
-          },
-          {
-            "name": "PT1M",
-            "value": "PT1M",
-            "description": "1 minute"
-          },
-          {
-            "name": "PT5M",
-            "value": "PT5M",
-            "description": "5 minutes, available only if test run duration is greater than 1 minute."
-          },
-          {
-            "name": "PT1H",
-            "value": "PT1H",
-            "description": "1 hour, available only if test run duration is greater than 1 minute."
+            "description": "If the file is a JSON config file to define the requests for a URL test."
           }
         ]
       }
@@ -2401,6 +2275,7 @@
       "properties": {
         "timestamp": {
           "type": "string",
+          "format": "date-time",
           "description": "The timestamp for the metric value in ISO 8601 format."
         },
         "value": {
@@ -2474,32 +2349,32 @@
       "properties": {
         "endpointUrl": {
           "type": "string",
-          "description": "Test URL. Provide the complete HTTP URL. For example, http://contoso-app.azurewebsites.net/login"
+          "description": "Test URL. Provide the complete HTTP URL. For example, https://contoso-app.azurewebsites.net/login"
         },
         "rps": {
           "type": "integer",
           "format": "int32",
-          "description": "Throughput required (requests per second)"
+          "description": "Throughput required (requests per second)."
         },
         "maxResponseTime": {
           "type": "integer",
           "format": "int32",
-          "description": "Maximum response time of the API/endpoint"
+          "description": "Maximum response time in milliseconds of the API/endpoint."
         },
         "virtualUsers": {
           "type": "integer",
           "format": "int32",
-          "description": "No of concurrent virtual users"
+          "description": "No of concurrent virtual users."
         },
         "rampUpTime": {
           "type": "integer",
           "format": "int32",
-          "description": "Ramp up time"
+          "description": "Ramp up time in seconds."
         },
         "duration": {
           "type": "integer",
           "format": "int32",
-          "description": "Test run duration"
+          "description": "Test run duration in seconds."
         }
       }
     },
@@ -2615,7 +2490,7 @@
           {
             "name": "latency",
             "value": "latency",
-            "description": "Pass fail criteria for response time metric."
+            "description": "Pass fail criteria for latency metric."
           },
           {
             "name": "error",
@@ -2630,7 +2505,7 @@
           {
             "name": "requests_per_sec",
             "value": "requests_per_sec",
-            "description": "Pass fail criteria for request rate."
+            "description": "Pass fail criteria for request per second."
           }
         ]
       }
@@ -2694,6 +2569,72 @@
           }
         ]
       }
+    },
+    "PagedTest": {
+      "type": "object",
+      "description": "Paged collection of Test items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Test items on this page",
+          "items": {
+            "$ref": "#/definitions/Test"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTestFileInfo": {
+      "type": "object",
+      "description": "Paged collection of TestFileInfo items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TestFileInfo items on this page",
+          "items": {
+            "$ref": "#/definitions/TestFileInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTestRun": {
+      "type": "object",
+      "description": "Paged collection of TestRun items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TestRun items on this page",
+          "items": {
+            "$ref": "#/definitions/TestRun"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PassFailCriteria": {
       "type": "object",
@@ -2829,7 +2770,7 @@
           {
             "name": "SECRET_VALUE",
             "value": "SECRET_VALUE",
-            "description": "If the Plain text secret value provided."
+            "description": "If the secret value provided as plain text."
           }
         ]
       }
@@ -2872,7 +2813,7 @@
           {
             "name": "PROVISIONING",
             "value": "PROVISIONING",
-            "description": "Test run is getting provision."
+            "description": "Test run is provisioning."
           },
           {
             "name": "PROVISIONED",
@@ -2882,7 +2823,7 @@
           {
             "name": "CONFIGURING",
             "value": "CONFIGURING",
-            "description": "Test run is getting configure."
+            "description": "Test run is getting configured."
           },
           {
             "name": "CONFIGURED",
@@ -2897,27 +2838,27 @@
           {
             "name": "EXECUTED",
             "value": "EXECUTED",
-            "description": "Test run has been executed."
+            "description": "Test run execution is completed."
           },
           {
             "name": "DEPROVISIONING",
             "value": "DEPROVISIONING",
-            "description": "Test run is getting deprovision."
+            "description": "Test run is getting deprovisioned."
           },
           {
             "name": "DEPROVISIONED",
             "value": "DEPROVISIONED",
-            "description": "Test run request is deprovisioned."
+            "description": "Test run is deprovisioned."
           },
           {
             "name": "DONE",
             "value": "DONE",
-            "description": "Test run request is finished."
+            "description": "Test run is completed."
           },
           {
             "name": "CANCELLING",
             "value": "CANCELLING",
-            "description": "Test run request is getting cancelled."
+            "description": "Test run is being cancelled."
           },
           {
             "name": "CANCELLED",
@@ -2942,6 +2883,34 @@
         ]
       }
     },
+    "SystemMetaData": {
+      "type": "object",
+      "description": "System metadata.",
+      "properties": {
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation datetime(ISO 8601 literal format).",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The user that created.",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last Modified datetime(ISO 8601 literal format).",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The user that last modified.",
+          "readOnly": true
+        }
+      }
+    },
     "Test": {
       "type": "object",
       "description": "Load test model.",
@@ -2952,7 +2921,7 @@
         },
         "autoStopCriteria": {
           "$ref": "#/definitions/AutoStopCriteria",
-          "description": "Auto stop criteria for a test."
+          "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window."
         },
         "secrets": {
           "type": "object",
@@ -3044,7 +3013,7 @@
     },
     "TestAppComponents": {
       "type": "object",
-      "description": "Test app component",
+      "description": "Test app components",
       "properties": {
         "components": {
           "type": "object",
@@ -3087,7 +3056,7 @@
     },
     "TestAppComponentsUpdate": {
       "type": "object",
-      "description": "Test app component",
+      "description": "Test app components",
       "properties": {
         "components": {
           "type": "object",
@@ -3100,7 +3069,7 @@
     },
     "TestFileInfo": {
       "type": "object",
-      "description": "File info.",
+      "description": "Test file info.",
       "properties": {
         "fileName": {
           "type": "string",
@@ -3168,7 +3137,7 @@
         },
         "autoStopCriteria": {
           "$ref": "#/definitions/AutoStopCriteria",
-          "description": "Auto stop criteria for a test."
+          "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window."
         },
         "secrets": {
           "type": "object",
@@ -3381,7 +3350,7 @@
     },
     "TestRunFileInfo": {
       "type": "object",
-      "description": "File info.",
+      "description": "Test run file info.",
       "properties": {
         "fileName": {
           "type": "string",
@@ -3585,7 +3554,7 @@
         },
         "autoStopCriteria": {
           "$ref": "#/definitions/AutoStopCriteria",
-          "description": "Auto stop criteria for a test."
+          "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window."
         },
         "secrets": {
           "type": "object",
@@ -3724,7 +3693,7 @@
         },
         "autoStopCriteria": {
           "$ref": "#/definitions/AutoStopCriteria",
-          "description": "Auto stop criteria for a test."
+          "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window."
         },
         "secrets": {
           "type": "object",
@@ -3977,7 +3946,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "MetricDimensions.interval": {
+    "MetricDimensionsRequest.interval": {
       "name": "interval",
       "in": "query",
       "description": "The interval (i.e. timegrain) of the query.",
@@ -3991,7 +3960,7 @@
         "PT1H"
       ],
       "x-ms-enum": {
-        "name": "Interval",
+        "name": "TimeGrain",
         "modelAsString": true,
         "values": [
           {
@@ -4023,7 +3992,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "MetricDimensions.metricNamespace": {
+    "MetricDimensionsRequest.metricNamespace": {
       "name": "metricNamespace",
       "in": "query",
       "description": "Metric namespace to query metric definitions for.",
@@ -4031,7 +4000,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "MetricDimensions.metricname": {
+    "MetricDimensionsRequest.metricname": {
       "name": "metricname",
       "in": "query",
       "description": "Metric name",
@@ -4039,7 +4008,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "MetricDimensions.timespan": {
+    "MetricDimensionsRequest.timespan": {
       "name": "timespan",
       "in": "query",
       "description": "The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.",

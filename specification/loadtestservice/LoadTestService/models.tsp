@@ -11,10 +11,10 @@ namespace Microsoft.LoadTestService;
 @doc("Metrics for pass/fail criteria.")
 enum PFMetrics {
   @doc("Pass fail criteria for response time metric.") response_time_ms,
-  @doc("Pass fail criteria for response time metric.") latency,
+  @doc("Pass fail criteria for latency metric.") latency,
   @doc("Pass fail criteria for error metric.") error,
   @doc("Pass fail criteria for total requests.") requests,
-  @doc("Pass fail criteria for request rate.") requests_per_sec,
+  @doc("Pass fail criteria for request per second.") requests_per_sec,
 }
 
 @doc("Aggregation functions for pass/fail criteria.")
@@ -47,7 +47,7 @@ enum PFResult {
 @doc("Types of secrets supported.")
 enum SecretType {
   @doc("If the secret is stored in an Azure Key Vault.") AKV_SECRET_URI,
-  @doc("If the Plain text secret value provided.") SECRET_VALUE,
+  @doc("If the secret value provided as plain text.") SECRET_VALUE,
 }
 
 @doc("Types of certificates supported.")
@@ -57,16 +57,21 @@ enum CertificateType {
 
 @doc("Types of file supported.")
 enum FileType {
-  @doc("If file is jmx script.") JMX_FILE,
-  @doc("If file is user properties.") USER_PROPERTIES,
-  @doc("If file is not any of other supported type.") ADDITIONAL_ARTIFACTS,
+  @doc("If the file is a JMX script.")
+  JMX_FILE,
+
+  @doc("If the file is a user properties file.")
+  USER_PROPERTIES,
+
+  @doc("If the file is not among any of the other supported file types.")
+  ADDITIONAL_ARTIFACTS,
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("If the file is a compressed archive containing a collection of various artifacts or resources.")
   ZIPPED_ARTIFACTS,
 
   @added(APIVersions.v2023_04_01_preview)
-  @doc("If file is a json config for the Url tests.")
+  @doc("If the file is a JSON config file to define the requests for a URL test.")
   URL_TEST_CONFIG,
 }
 
@@ -90,16 +95,16 @@ enum PFTestResult {
 enum Status {
   @doc("Test run request is accepted.") ACCEPTED,
   @doc("Test run is not yet started.") NOTSTARTED,
-  @doc("Test run is getting provision.") PROVISIONING,
+  @doc("Test run is provisioning.") PROVISIONING,
   @doc("Test run is provisioned.") PROVISIONED,
-  @doc("Test run is getting configure.") CONFIGURING,
+  @doc("Test run is getting configured.") CONFIGURING,
   @doc("Test run configuration is done.") CONFIGURED,
   @doc("Test run has started executing.") EXECUTING,
-  @doc("Test run has been executed.") EXECUTED,
-  @doc("Test run is getting deprovision.") DEPROVISIONING,
-  @doc("Test run request is deprovisioned.") DEPROVISIONED,
-  @doc("Test run request is finished.") DONE,
-  @doc("Test run request is getting cancelled.") CANCELLING,
+  @doc("Test run execution is completed.") EXECUTED,
+  @doc("Test run is getting deprovisioned.") DEPROVISIONING,
+  @doc("Test run is deprovisioned.") DEPROVISIONED,
+  @doc("Test run is completed.") DONE,
+  @doc("Test run is being cancelled.") CANCELLING,
   @doc("Test run request is cancelled.") CANCELLED,
   @doc("Test run request is failed.") FAILED,
   @doc("Test run JMX file is validated.") VALIDATION_SUCCESS,
@@ -136,23 +141,9 @@ enum TimeGrain {
 
   @doc("10 seconds, available only if test run duration is less than 10 minutes.")
   PT10S,
-  @doc("1 minute") PT1M,
 
-  @doc("5 minutes, available only if test run duration is greater than 1 minute.")
-  PT5M,
-
-  @doc("1 hour, available only if test run duration is greater than 1 minute.")
-  PT1H,
-}
-
-@doc("Intervals")
-enum Interval {
-  @doc("5 seconds, available only if test run duration is less than 10 minutes.")
-  PT5S,
-
-  @doc("10 seconds, available only if test run duration is less than 10 minutes.")
-  PT10S,
-  @doc("1 minute") PT1M,
+  @doc("1 minute")
+  PT1M,
 
   @doc("5 minutes, available only if test run duration is greater than 1 minute.")
   PT5M,
@@ -171,7 +162,7 @@ enum TestType {
   JMX,
 }
 
-@doc("File info.")
+@doc("Test file info.")
 @resource("files")
 @parentResource(Test)
 model TestFileInfo extends FileInfo {
@@ -181,7 +172,7 @@ model TestFileInfo extends FileInfo {
   fileName: string;
 }
 
-@doc("File info.")
+@doc("Test run file info.")
 @resource("files")
 @parentResource(TestRun)
 model TestRunFileInfo extends FileInfo {
@@ -198,7 +189,7 @@ model Test {
   passFailCriteria?: PassFailCriteria;
 
   @added(APIVersions.v2023_04_01_preview)
-  @doc("Auto stop criteria for a test.")
+  @doc("Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window.")
   autoStopCriteria?: AutoStopCriteria;
 
   @doc("""
@@ -252,21 +243,7 @@ SECRET_VALUE.
   @doc("Resource Id of the managed identity referencing the Key vault.")
   keyvaultReferenceIdentityId?: string;
 
-  @doc("The creation datetime(ISO 8601 literal format).")
-  @visibility("read")
-  createdDateTime?: utcDateTime;
-
-  @doc("The user that created.")
-  @visibility("read")
-  createdBy?: string;
-
-  @doc("The last Modified datetime(ISO 8601 literal format).")
-  @visibility("read")
-  lastModifiedDateTime?: utcDateTime;
-
-  @doc("The user that last modified.")
-  @visibility("read")
-  lastModifiedBy?: string;
+  ...SystemMetaData;
 }
 
 @doc("Pass fail criteria for a test.")
@@ -334,15 +311,15 @@ model CertificateMetadata {
 }
 
 @added(APIVersions.v2023_04_01_preview)
-@doc("Auto stop criteria for a test.")
+@doc("Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window.")
 model AutoStopCriteria {
-  @doc("Auto stop is enabled or not")
+  @doc("Whether auto-stop should be enabled.")
   autoStopEnabled?: boolean;
 
   @doc("Value of auto stop criteria metric")
   errorRate?: float32;
 
-  @doc("Time window in seconds for auto stop metric")
+  @doc("Time window during which the error percentage should be evaluated.")
   errorRateTimeWindow?: int64;
 }
 
@@ -379,22 +356,22 @@ not required to upload.
 
 @doc("Configuration for quick load test")
 model OptionalLoadTestConfig {
-  @doc("Test URL. Provide the complete HTTP URL. For example, http://contoso-app.azurewebsites.net/login")
+  @doc("Test URL. Provide the complete HTTP URL. For example, https://contoso-app.azurewebsites.net/login")
   endpointUrl?: string;
 
-  @doc("Throughput required (requests per second)")
+  @doc("Throughput required (requests per second).")
   rps?: int32;
 
-  @doc("Maximum response time of the API/endpoint")
+  @doc("Maximum response time in milliseconds of the API/endpoint.")
   maxResponseTime?: int32;
 
-  @doc("No of concurrent virtual users")
+  @doc("No of concurrent virtual users.")
   virtualUsers?: int32;
 
-  @doc("Ramp up time")
+  @doc("Ramp up time in seconds.")
   rampUpTime?: int32;
 
-  @doc("Test run duration")
+  @doc("Test run duration in seconds.")
   duration?: int32;
 }
 
@@ -469,7 +446,7 @@ model Error {
 @friendlyName("TestsList")
 model TestsList is Azure.Core.Page<Test>;
 
-@doc("Test app component")
+@doc("Test app components")
 model TestAppComponents {
   @doc("""
 Azure resource collection { resource id (fully qualified resource Id e.g
@@ -482,21 +459,7 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
   @visibility("read")
   testId?: string;
 
-  @doc("The creation datetime(ISO 8601 literal format).")
-  @visibility("read")
-  createdDateTime?: utcDateTime;
-
-  @doc("The user that created.")
-  @visibility("read")
-  createdBy?: string;
-
-  @doc("The last Modified datetime(ISO 8601 literal format).")
-  @visibility("read")
-  lastModifiedDateTime?: utcDateTime;
-
-  @doc("The user that last modified.")
-  @visibility("read")
-  lastModifiedBy?: string;
+  ...SystemMetaData;
 }
 
 @doc("""
@@ -545,21 +508,7 @@ for metric id).
 """)
   metrics?: Record<ResourceMetric>;
 
-  @doc("The creation datetime(ISO 8601 literal format).")
-  @visibility("read")
-  createdDateTime?: utcDateTime;
-
-  @doc("The user that created.")
-  @visibility("read")
-  createdBy?: string;
-
-  @doc("The last Modified datetime(ISO 8601 literal format).")
-  @visibility("read")
-  lastModifiedDateTime?: utcDateTime;
-
-  @doc("The user that last modified.")
-  @visibility("read")
-  lastModifiedBy?: string;
+  ...SystemMetaData;
 }
 
 @doc("""
@@ -607,7 +556,7 @@ model TestRun {
   @doc("Pass fail criteria for a test.")
   passFailCriteria?: PassFailCriteria;
 
-  @doc("Auto stop criteria for a test.")
+  @doc("Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window.")
   @added(APIVersions.v2023_04_01_preview)
   autoStopCriteria?: AutoStopCriteria;
 
@@ -691,21 +640,7 @@ SECRET_VALUE.
   @visibility("read")
   subnetId?: string;
 
-  @doc("The creation datetime(ISO 8601 literal format).")
-  @visibility("read")
-  createdDateTime?: utcDateTime;
-
-  @doc("The user that created.")
-  @visibility("read")
-  createdBy?: string;
-
-  @doc("The last Modified datetime(ISO 8601 literal format).")
-  @visibility("read")
-  lastModifiedDateTime?: utcDateTime;
-
-  @doc("The user that last modified.")
-  @visibility("read")
-  lastModifiedBy?: string;
+  ...SystemMetaData;
 }
 
 @doc("Error details if there is any failure in load test run")
@@ -927,7 +862,7 @@ model TimeSeriesElement {
 @doc("Represents a metric value.")
 model MetricValue {
   @doc("The timestamp for the metric value in ISO 8601 format.")
-  timestamp?: string;
+  timestamp?: utcDateTime;
 
   @doc("The metric value.")
   value?: float64;
@@ -952,14 +887,14 @@ model DimensionValueList {
 }
 
 @doc("Metric Dimensions")
-model MetricDimensions {
+model MetricDimensionsRequest {
   @doc("Metric name")
   @query
   metricname: string;
 
   @doc("The interval (i.e. timegrain) of the query.")
   @query
-  interval?: Interval;
+  interval?: TimeGrain;
 
   @doc("Metric namespace to query metric definitions for.")
   @query
@@ -986,21 +921,7 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
   @visibility("read")
   testRunId?: string;
 
-  @doc("The creation datetime(ISO 8601 literal format).")
-  @visibility("read")
-  createdDateTime?: utcDateTime;
-
-  @doc("The user that created.")
-  @visibility("read")
-  createdBy?: string;
-
-  @doc("The last Modified datetime(ISO 8601 literal format).")
-  @visibility("read")
-  lastModifiedDateTime?: utcDateTime;
-
-  @doc("The user that last modified.")
-  @visibility("read")
-  lastModifiedBy?: string;
+  ...SystemMetaData;
 }
 
 @doc("Test run server metrics configuration")
@@ -1016,21 +937,7 @@ for metric id).
 """)
   metrics?: Record<ResourceMetric>;
 
-  @doc("The creation datetime(ISO 8601 literal format).")
-  @visibility("read")
-  createdDateTime?: utcDateTime;
-
-  @doc("The user that created.")
-  @visibility("read")
-  createdBy?: string;
-
-  @doc("The last Modified datetime(ISO 8601 literal format).")
-  @visibility("read")
-  lastModifiedDateTime?: utcDateTime;
-
-  @doc("The user that last modified.")
-  @visibility("read")
-  lastModifiedBy?: string;
+  ...SystemMetaData;
 }
 
 @doc("Parameters for list test run operation")
@@ -1105,6 +1012,25 @@ tests.
   @doc("Number of results in response.")
   @query
   maxpagesize?: int32;
+}
+
+@doc("System metadata.")
+model SystemMetaData {
+  @doc("The creation datetime(ISO 8601 literal format).")
+  @visibility("read")
+  createdDateTime?: utcDateTime;
+
+  @doc("The user that created.")
+  @visibility("read")
+  createdBy?: string;
+
+  @doc("The last Modified datetime(ISO 8601 literal format).")
+  @visibility("read")
+  lastModifiedDateTime?: utcDateTime;
+
+  @doc("The user that last modified.")
+  @visibility("read")
+  lastModifiedBy?: string;
 }
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
