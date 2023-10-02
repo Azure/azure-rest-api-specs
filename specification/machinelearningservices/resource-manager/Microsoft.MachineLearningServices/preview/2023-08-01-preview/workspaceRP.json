@@ -1766,6 +1766,159 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/standbypools/{standbyPoolName}": {
+      "put": {
+        "tags": [
+          "WorkspaceStandbyPools"
+        ],
+        "summary": "Create or update a standby pool associated with the workspace.",
+        "operationId": "StandbyPool_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StandbyPoolNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The parameters for creating or updating the standby pool.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StandbyPoolProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful and the standby pool was created or updated."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WorkspaceStandbyPools"
+        ],
+        "summary": "Delete a standby pool associated with the workspace.",
+        "operationId": "StandbyPool_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StandbyPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful and the standby pool was created or updated."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "WorkspaceStandbyPools"
+        ],
+        "summary": "Get a specific standby pool associated with the workspace.",
+        "operationId": "StandbyPool_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StandbyPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful and the standby pool was created or updated.",
+            "schema": {
+              "$ref": "#/definitions/GetStandbyPoolResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/standbypools": {
+      "get": {
+        "tags": [
+          "WorkspaceStandbyPools"
+        ],
+        "summary": "List all standby pools associated with the workspace.",
+        "operationId": "StandbyPool_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful and the standby pool was created or updated."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3651,6 +3804,74 @@
           }
         }
       }
+    },
+    "StandbyPoolProperties": {
+      "description": "The properties of a standby pool.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the standby pool.",
+          "type": "string"
+        },
+        "count": {
+          "description": "Number of virtual machines (VMs) in the standby pool.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "vmSize": {
+          "description": "The virtual machine (VM) size of the VMs in the standby pool.",
+          "type": "string"
+        },
+        "standbyAvailableInstances": {
+          "description": "The current status of all virtual machine (VM) instances in the standby pool.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StandbyPoolResourceStatus"
+          }
+        }
+      }
+    },
+    "StandbyPoolResourceStatus": {
+      "description": "The status of a resource within a standby pool.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Human-readable status of the resource.",
+          "type": "string"
+        },
+        "error": {
+          "description": "An error object containing additional error information.",
+          "$ref": "../../common-types/v1/types.json#/definitions/CloudError"
+        }
+      }
+    },
+    "GetStandbyPoolResponse": {
+      "description": "The response object from a successful call requesting a particular standby pool.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Standby pool name",
+          "type": "string"
+        },
+        "id": {
+          "description": "ARM resource ID of the standby pool.",
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Location of the standby pool.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the ARM resource. In this case, a Standby Pool.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/StandbyPoolProperties"
+        }
+      }
     }
   },
   "parameters": {
@@ -3731,6 +3952,15 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "StandbyPoolNameParameter": {
+      "in": "path",
+      "name": "standbyPoolName",
+      "description": "Name of Standby Pool",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,64}$"
     }
   },
   "securityDefinitions": {

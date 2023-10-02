@@ -1,0 +1,56 @@
+{
+  "swagger": "2.0",
+  "info": {
+      "version": "6.0",
+      "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "additionalInfo": {
+          "type": "array",
+          "items": {
+            "description": "Additional error info.",
+            "$ref": "#/definitions/AdditionalErrorInfo"
+          }
+        },
+        "code": {
+          "type": "string",
+          "description": "The error code parsed from the body of the http error response."
+        },
+        "details": {
+          "type": "array",
+          "description": "The list of invalid fields send in request, in case of validation error.",
+          "items": {
+            "$ref": "#/definitions/CloudError"
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message parsed from the body of the http error response."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        }
+      }
+  },
+  "AdditionalErrorInfo": {
+    "x-ms-external": true,
+    "type": "object",
+    "properties": {
+      "info": {
+        "type": "string",
+        "description": "JSON-serialized string containing additional information of the type of error that occured."
+      },
+      "type": {
+        "type": "string",
+        "description": "Type of error that occured (e.g., PolicyViolation, SecurityViolation)."
+      }
+    }
+  }
+}
+}
