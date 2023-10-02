@@ -743,6 +743,10 @@
                   ]
                 }
               }
+            },
+            "rootSquashSettings": {
+              "$ref": "#/definitions/AmlFilesystemRootSquashSettings",
+              "description": "Specifies root squash settings of the AML file system."
             }
           },
           "type": "object",
@@ -801,6 +805,10 @@
                   "description": "The time of day (in UTC) to start the maintenance window."
                 }
               }
+            },
+            "rootSquashSettings": {
+              "$ref": "#/definitions/AmlFilesystemRootSquashSettings",
+              "description": "Specifies root squash settings of the AML file system."
             }
           }
         }
@@ -897,6 +905,44 @@
         "container",
         "loggingContainer"
       ]
+    },
+    "AmlFilesystemRootSquashSettings": {
+      "description": "AML file system squash settings.",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Squash mode of the AML file system.",
+          "enum": [
+            "None",
+            "RootOnly",
+            "All"
+          ],
+          "x-ms-enum": {
+            "name": "AmlFilesystemSquashMode",
+            "modelAsString": true
+          }
+        },
+        "noSquashNidLists": {
+          "description": "Semicolon separated NID IP Address list(s) to be added to the TrustedSystems.",
+          "type": "string"
+        },
+        "squashUID": {
+          "type": "integer",
+          "description": "User ID to squash to.",
+          "format": "int64"
+        },
+        "squashGID": {
+          "type": "integer",
+          "description": "Group ID to squash to.",
+          "format": "int64"
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "AML file system squash status."
+        }
+      },
+      "type": "object"
     },
     "AmlFilesystemArchiveInfo": {
       "type": "object",

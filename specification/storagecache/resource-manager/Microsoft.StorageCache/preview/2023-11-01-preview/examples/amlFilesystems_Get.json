@@ -13,9 +13,7 @@
         },
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1",
         "location": "eastus",
-        "zones": [
-          "1"
-        ],
+        "zones": ["1"],
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
@@ -64,6 +62,13 @@
                 }
               }
             ]
+          },
+          "rootSquashSettings": {
+            "state": "all",
+            "noSquashNidLists": "10.0.0.[5-6]@tcp;10.0.1.2@tcp",
+            "squashUID": 99,
+            "squashGID": 99,
+            "status": "nodemap.active=1"
           }
         },
         "sku": {
