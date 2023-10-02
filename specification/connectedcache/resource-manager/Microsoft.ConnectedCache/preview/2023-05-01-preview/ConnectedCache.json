@@ -2219,27 +2219,14 @@
     "MccCustomerResource": {
       "type": "object",
       "description": "Represents the high level Nodes needed to provision customer resources",
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ],
       "properties": {
         "properties": {
-          "type": "object",
           "description": "Properties of mcc customer resource.",
           "title": "Properties of mcc customer resource.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/Customer"
         }
-      }
-    },
-    "MccCacheNodeBgpCidrDetails": {
-      "type": "object",
-      "description": "Represents all cidr details of the BGP request for a specific cache node resource",
+      },
       "required": [
         "location"
       ],
@@ -2247,22 +2234,33 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
-      ],
+      ]
+    },
+    "MccCacheNodeBgpCidrDetails": {
+      "type": "object",
+      "description": "Represents all cidr details of the BGP request for a specific cache node resource",
       "properties": {
         "properties": {
-          "type": "object",
           "description": "Properties of Bgp cidrs of mcc cache node resource",
           "title": "Properties of bgp cidrs of mcc cache node resource",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BgpCidrsConfiguration"
         }
-      }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "BgpCidrsConfiguration": {
       "type": "object",
       "description": "Bgp cidr details of mcc cache node resource",
-      "properties": {
-        "bgpCidrs": {
+     "additionalProperties": {
+        "bgpCidrs": {          
           "type": "array",
           "description": "Bgp cidr details of mcc cache node resource",
           "items": {
@@ -2346,14 +2344,12 @@
           }
         },
         "cacheNode": {
-          "type": "object",
           "title": "properties of customer entity",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CacheNodeEntity",
           "description": "Mcc Customer entity"
         },
         "additionalCacheNodeProperties": {
-          "type": "object",
           "title": "Additional cache node properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AdditionalCacheNodeProperties",
@@ -2405,16 +2401,22 @@
           }
         },
         "customer": {
+          "type": "object",
           "title": "properties of customer entity",
+          "description": "Mcc Customer entity",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CustomerEntity",
-          "description": "Mcc Customer entity"
+          "additionalProperties": {
+            "$ref": "#/definitions/CustomerEntity"
+          }
         },
         "additionalCustomerProperties": {
+          "type": "object",
           "title": "Additional customer properties",
+          "description": "Additional properties for Mcc Customer entity",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AdditionalCustomerProperties",
-          "description": "Additional properties for Mcc Customer entity"
+          "additionalProperties": {
+          "$ref": "#/definitions/AdditionalCustomerProperties"
+          }
         },
         "statusCode": {
           "type": "string",
