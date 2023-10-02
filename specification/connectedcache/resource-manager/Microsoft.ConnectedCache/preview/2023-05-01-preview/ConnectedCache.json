@@ -2259,13 +2259,11 @@
     "BgpCidrsConfiguration": {
       "type": "object",
       "description": "Bgp cidr details of mcc cache node resource",
-     "additionalProperties": {
-        "bgpCidrs": {          
-          "type": "array",
-          "description": "Bgp cidr details of mcc cache node resource",
-          "items": {
-            "type": "string"
-          }
+      "bgpCidrs": {
+        "type": "array",
+        "description": "Bgp cidr details of mcc cache node resource",
+        "items": {
+          "type": "string"
         }
       }
     },
@@ -2404,7 +2402,6 @@
           "type": "object",
           "title": "properties of customer entity",
           "description": "Mcc Customer entity",
-          "x-ms-client-flatten": true,
           "additionalProperties": {
             "$ref": "#/definitions/CustomerEntity"
           }
@@ -2414,9 +2411,7 @@
           "title": "Additional customer properties",
           "description": "Additional properties for Mcc Customer entity",
           "x-ms-client-flatten": true,
-          "additionalProperties": {
           "$ref": "#/definitions/AdditionalCustomerProperties"
-          }
         },
         "statusCode": {
           "type": "string",
