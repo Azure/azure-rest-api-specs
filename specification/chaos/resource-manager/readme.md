@@ -45,6 +45,43 @@ input-file:
   - Microsoft.Chaos/preview/2023-10-27-preview/operations.json
   - Microsoft.Chaos/preview/2023-10-27-preview/targetTypes.json
   - Microsoft.Chaos/preview/2023-10-27-preview/targets.json
+directive:
+  - from: swagger-document
+    where: "$.definitions.action"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentAction";
+  - from: swagger-document
+    where: "$.definitions.branch"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentBranch";
+  - from: swagger-document
+    where: "$.definitions.step"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentStep";
+  - from: swagger-document
+    where: "$.definitions.filter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilterParameters"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilterParameters";
+  - from: swagger-document
+    where: "$.definitions.selector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSelector";
+  - from: swagger-document
+    where: "$.definitions.listSelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetListSelector";
+  - from: swagger-document
+    where: "$.definitions.querySelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetQuerySelector";
 ```
 ### Tag: package-preview-2023-09
 
