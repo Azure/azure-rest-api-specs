@@ -1943,7 +1943,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MccCacheNodeResource"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "The URL the client should use to fetch the next page (per server side paging)",
@@ -2109,7 +2110,7 @@
       "type": "object",
       "description": "Model representing cache node for connected cache resource",
       "properties": {
-        "cacheNodeProperties_Details_IssuesList": {
+        "cacheNodePropertiesDetailsIssuesList": {
           "type": "array",
           "items": {
             "type": "string"
@@ -2335,7 +2336,7 @@
             "Accepted",
             "Succeeded",
             "Failed",
-            "Cancelled",
+            "Canceled",
             "Upgrading",
             "Deleting"
           ],
@@ -2394,7 +2395,7 @@
             "Accepted",
             "Succeeded",
             "Failed",
-            "Cancelled",
+            "Canceled",
             "Upgrading",
             "Deleting"
           ],
@@ -2520,10 +2521,6 @@
           "type": "boolean",
           "description": "flag to indicate if the customer is entitled"
         },
-        "location": {
-          "type": "string",
-          "description": "azure region where the customer is created"
-        },
         "resourceType": {
           "type": "string",
           "description": "type of resource"
@@ -2567,11 +2564,6 @@
           "format": "date-time",
           "description": "timestamp when delete flag was set for the customer"
         },
-        "provisioningState": {
-          "type": "integer",
-          "format": "int32",
-          "description": "provisioning state of the customer"
-        },
         "lastAttemptedDeleteTime": {
           "type": "string",
           "format": "date-time",
@@ -2590,6 +2582,34 @@
         "isEnterpriseManaged": {
           "type": "boolean",
           "description": "flag indicating if customer enterprise managed"
+        },
+        "shouldMigrate": {
+          "type": "boolean",
+          "description": "should the customer be migrated"
+        },
+        "customerAsn": {
+          "type": "string",
+          "description": "asn (autonomous system number) of the customer entered value"
+        },
+        "transitState": {
+          "type": "string",
+          "description": "transit state of the customer"
+        },
+        "transitAsn": {
+          "type": "string",
+          "description": "transit asn for customer who provides transit"
+        },
+        "resendSignupCode": {
+          "type": "boolean",
+          "description": "should the signup code be resent"
+        },
+        "verifySignupCode": {
+          "type": "boolean",
+          "description": "should the code for signup be verified"
+        },
+        "verifySignupPhrase": {
+          "type": "string",
+          "description": "phrase for verify signup"
         }
       }
     },
@@ -2625,7 +2645,7 @@
           "type": "string",
           "description": "name of the cache node"
         },
-        "asn": {
+        "customerAsn": {
           "type": "integer",
           "format": "int32",
           "description": "Asn of the customer"
@@ -2886,7 +2906,7 @@
             "Accepted",
             "Succeeded",
             "Failed",
-            "Cancelled",
+            "Canceled",
             "Upgrading",
             "Deleting"
           ],
@@ -2921,7 +2941,7 @@
     "ConnectedCachePatchResource": {
       "type": "object",
       "description": "cacheNodes patch properties",
-      "properties": {        
+      "properties": {
         "tags": {
           "type": "object",
           "additionalProperties": {
