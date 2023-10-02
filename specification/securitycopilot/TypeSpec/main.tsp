@@ -14,14 +14,14 @@ using TypeSpec.Versioning;
 })
 @useAuth(BearerAuth)
 @server(
-    "https://api.medeina-dev.defender.microsoft.com",
+    "{endpoint}",
     "The Skillset Authoring API exposes endpoints allowing a skill to interact with the current session to perform actions such as accessing previous prompts/responses within the current session, reading the inputs of the skill, invoking other skills, reporting progress of execution, returning results/errors, acquiring tokens to access other resources, and retrieving skill specific settings.",
     {
         @doc("""
 Supported Security Copilot API endpoints (protocol and host name, such as
 https://api.medeina-dev.defender.microsoft.com).
 """)
-        Endpoint: string,
+        endpoint: string,
     }
 )
 @doc("""
