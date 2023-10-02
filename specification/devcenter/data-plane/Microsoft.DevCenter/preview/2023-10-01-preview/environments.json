@@ -681,7 +681,7 @@
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/environmnets/{environmentName}/actions/{actionName}:skip": {
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}:skip": {
       "post": {
         "tags": [
           "Environment Actions"
@@ -1194,8 +1194,39 @@
             "array",
             "bool",
             "int",
+            "number",
             "object"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "EnvironmentOutputType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "array",
+                "description": "The parameter accepts an array of values."
+              },
+              {
+                "value": "boolean",
+                "description": "The parameter accepts a boolean value."
+              },
+              {
+                "value": "integer",
+                "description": "The parameter accepts an integer value."
+              },
+              {
+                "value": "number",
+                "description": "The parameter accepts a number value."
+              },
+              {
+                "value": "object",
+                "description": "The parameter accepts an object value."
+              },
+              {
+                "value": "string",
+                "description": "The parameter accepts a string value."
+              }
+            ]
+          }
         },
         "value": {
           "description": "The output value",
@@ -1215,7 +1246,13 @@
       ],
       "x-ms-enum": {
         "name": "EnvironmentActionType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Delete",
+            "description": "The action will delete the environment and associated resources."
+          }
+        ]
       }
     },
     "EnvironmentNextAction": {
