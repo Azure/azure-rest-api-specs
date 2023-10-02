@@ -2194,159 +2194,6 @@
         }
       }
     },
-    "CreateOrUpdateCustomerRequest": {
-      "type": "object",
-      "description": "Represents the high level Nodes needed to provision customer resources",
-      "properties": {
-        "properties": {
-          "description": "Additional ConnectedCache properties",
-          "title": "ConnectedCache Additional properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CreateOrUpdateCustomerRequestEntity"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "CreateOrUpdateCustomerRequestEntity": {
-      "type": "object",
-      "description": "Model representing customer for ConnectedCache resource",
-      "properties": {
-        "customerName": {
-          "type": "string",
-          "description": "name of the customer"
-        },
-        "customerId": {
-          "type": "string",
-          "description": "customer id of the customer"
-        },
-        "contactEmail": {
-          "type": "string",
-          "description": "email of the customer contact"
-        },
-        "contactPhone": {
-          "type": "string",
-          "description": "phone number of the customer contact"
-        },
-        "contactName": {
-          "type": "string",
-          "description": "contact name of the customer"
-        },
-        "isEntitled": {
-          "type": "boolean",
-          "description": "is the customer entitled"
-        },
-        "shouldMigrate": {
-          "type": "boolean",
-          "description": "should the customer be migrated"
-        },
-        "customerAsn": {
-          "type": "string",
-          "description": "asn (autonomous system number) of the customer entered value"
-        },
-        "transitState": {
-          "type": "string",
-          "description": "transit state of the customer"
-        },
-        "transitAsn": {
-          "type": "string",
-          "description": "transit asn for customer who provides transit"
-        },
-        "resendSignupCode": {
-          "type": "boolean",
-          "description": "should the signup code be resent"
-        },
-        "verifySignupCode": {
-          "type": "boolean",
-          "description": "should the code for signup be verified"
-        },
-        "verifySignupPhrase": {
-          "type": "string",
-          "description": "phrase for verify signup"
-        }
-      }
-    },
-    "CreateOrUpdateCacheNodeRequest": {
-      "type": "object",
-      "description": "Represents the high level Nodes needed to provision cache node resources",
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Additional ConnectedCache properties",
-          "title": "ConnectedCache Additional properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CreateOrUpdateCacheNodeRequestEntity"
-        }
-      }
-    },
-    "CreateOrUpdateCacheNodeRequestEntity": {
-      "type": "object",
-      "description": "Model representing customer for ConnectedCache resource",
-      "properties": {
-        "additionalCacheNodeProperties": {
-          "type": "object",
-          "title": "Additional cache node properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AdditionalCacheNodeProperties",
-          "description": "Additional properties for cache node creation."
-        },
-        "CacheNodeId": {
-          "type": "string",
-          "description": "cache node Id of the cache node to be updated. It is acceptable to be empty for a new cache node"
-        },
-        "CustomerId": {
-          "type": "string",
-          "description": "customer id of the parent customer"
-        },
-        "CacheNodeName": {
-          "type": "string",
-          "description": "name of the cache node"
-        },
-        "CidrCsv": {
-          "type": "string",
-          "description": "comma separated values of cidr"
-        },
-        "IpAddress": {
-          "type": "string",
-          "description": "ip address"
-        },
-        "MaxAllowableEgressInMbps": {
-          "type": "integer",
-          "format": "int32",
-          "description": "maximum allowable egress of the cache node in mbps"
-        },
-        "ShouldMigrate": {
-          "type": "boolean",
-          "description": "should the customer be migrated"
-        },
-        "IsEnabled": {
-          "type": "boolean",
-          "description": "is the cache node enabled value is true or false"
-        },
-        "IsEnterpriseManaged": {
-          "type": "boolean",
-          "description": "is the cache node an enterprise cache node"
-        },
-        "CidrSelectionType": {
-          "type": "integer",
-          "format": "int32",
-          "description": "cidr selection type"
-        }
-      }
-    },
     "MccCacheNodeResource": {
       "type": "object",
       "description": "Represents the high level Nodes needed to provision cache node resources",
@@ -2426,14 +2273,6 @@
     "MccCacheNodeInstallDetails": {
       "type": "object",
       "description": "Represents all cache node install details",
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ],
       "properties": {
         "properties": {
           "description": "Properties of  mcc cache node resource install script",
@@ -2441,7 +2280,15 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CacheNodeInstallProperties"
         }
-      }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "CacheNodeInstallProperties": {
       "type": "object",
@@ -2750,7 +2597,7 @@
       "type": "object",
       "description": "Model representing Cache Node for ConnectedCache resource",
       "properties": {
-        "FullyQualifiedResourceId": {
+        "fullyQualifiedResourceId": {
           "type": "string",
           "description": "fully qualified resource id of the customer in azure resource manager"
         },
@@ -2778,7 +2625,7 @@
           "type": "string",
           "description": "name of the cache node"
         },
-        "Asn": {
+        "asn": {
           "type": "integer",
           "format": "int32",
           "description": "Asn of the customer"
@@ -2824,11 +2671,6 @@
           "type": "string",
           "format": "date-time",
           "description": "timestamp when delete flag was set for the customer"
-        },
-        "ProvisioningState": {
-          "type": "integer",
-          "format": "int32",
-          "description": "provisioning state of the customer"
         },
         "lastAttemptedDeleteTime": {
           "type": "string",
@@ -2908,6 +2750,10 @@
           "type": "integer",
           "format": "int64",
           "description": "total addressable space as defined by the BGP CIDR blocks"
+        },
+        "shouldMigrate": {
+          "type": "boolean",
+          "description": "should the customer be migrated"
         },
         "bgpFileBytesTruncated": {
           "type": "integer",
