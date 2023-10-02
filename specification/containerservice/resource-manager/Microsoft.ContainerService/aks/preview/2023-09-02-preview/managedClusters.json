@@ -4004,6 +4004,14 @@
           "minimum": 1,
           "title": "The drain timeout for a node",
           "description": "The amount of time (in minutes) to wait on eviction of pods and graceful termination per node. This eviction wait time honors waiting on pod disruption budgets. If this time is exceeded, the upgrade fails. If not specified, the default is 30 minutes."
+        },
+        "nodeSoakDurationInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 30,
+          "minimum": 0,
+          "title": "The soak duration for a node",
+          "description": "The amount of time (in minutes) to wait after draining a node and before reimaging it and moving on to next node. If not specified, the default is 0 minutes."
         }
       },
       "description": "Settings for upgrading an agentpool"
