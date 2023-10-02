@@ -56,13 +56,13 @@
           "200": {
             "description": "The request was successful; response contains the list of operations under Microsoft.ConnectedCache resource provider",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderOperationList"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Connected Cache does not exist.)",
             "schema": {
-              "$ref": "#/definitions/MCCErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2434,50 +2434,6 @@
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
           "description": "The error details"
-        }
-      }
-    },
-    "ResourceProviderOperationList": {
-      "type": "object",
-      "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results",
-      "description": "List containing this Resource Provider's available operations",
-      "properties": {
-        "value": {
-          "description": "Resource provider operations list",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderOperationDefinition"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next page for list of Azure operations",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ResourceProviderOperationDefinition": {
-      "title": "A REST API operation",
-      "type": "object",
-      "description": "Describes the Resource Provider Operation",
-      "properties": {
-        "name": {
-          "title": "The operations name",
-          "description": "Resource provider operation name",
-          "type": "string"
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "string"
-        },
-        "display": {
-          "description": "Resource provider display properties",
-          "$ref": "#/definitions/ResourceProviderOperationDisplay"
-        },
-        "origin": {
-          "description": "Origin of the operation",
-          "type": "string"
         }
       }
     },
