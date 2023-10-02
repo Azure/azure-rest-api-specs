@@ -253,6 +253,61 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "Environments"
+        ],
+        "description": "Partially updates an environment",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updatable environment properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnvironmentPatchProperties"
+            }
+          }
+        ],
+        "operationId": "Environments_PatchEnvironment",
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_PatchEnvironment": {
+            "$ref": "./examples/Environments_Patch.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Environments"
@@ -306,6 +361,54 @@
         "x-ms-examples": {
           "Environments_DeleteEnvironment": {
             "$ref": "./examples/Environments_Delete.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/outputs": {
+      "get": {
+        "tags": [
+          "Environments"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          }
+        ],
+        "description": "Gets Outputs from the environment",
+        "operationId": "Environments_GetOutputs",
+        "responses": {
+          "200": {
+            "description": "The request completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentOutputs"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_GetOutputs": {
+            "$ref": "./examples/Environments_GetOutputs.json"
           }
         }
       }
@@ -475,6 +578,211 @@
         }
       }
     },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actions": {
+      "get": {
+        "tags": [
+          "Environment Actions"
+        ],
+        "description": "Get all scheduled actions for a user within an  environment.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          }
+        ],
+        "operationId": "Environments_ListActions",
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentActionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_ListActions": {
+            "$ref": "./examples/EnvironmentActions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/EnvironmentAction"
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}": {
+      "get": {
+        "tags": [
+          "Environment Actions"
+        ],
+        "description": "Retrieve a specific environment action.",
+        "operationId": "Environments_GetAction",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentActionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentAction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_GetAction": {
+            "$ref": "./examples/EnvironmentActions_Get.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environmnets/{environmentName}/actions/{actionName}:skip": {
+      "post": {
+        "tags": [
+          "Environment Actions"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentActionNameParameter"
+          }
+        ],
+        "description": "Skips an occurrence of an action.",
+        "operationId": "Environments_SkipAction",
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_SkipAction": {
+            "$ref": "./examples/EnvironmentActions_Skip.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}:delay": {
+      "post": {
+        "tags": [
+          "Environment Actions"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentActionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentActionDelayUntilParameter"
+          }
+        ],
+        "description": "Delays the occurrence of an action.",
+        "operationId": "Environments_DelayAction",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentAction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_DelayAction": {
+            "$ref": "./examples/EnvironmentActions_Delay.json"
+          }
+        }
+      }
+    },
     "/projects/{projectName}/catalogs": {
       "get": {
         "tags": [
@@ -537,7 +845,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "#/parameters/CatalogNameParameter"
+            "$ref": "devcenter.json#/parameters/CatalogNameParameter"
           }
         ],
         "operationId": "Environments_GetCatalog",
@@ -633,7 +941,7 @@
             "$ref": "devcenter.json#/parameters/TopParameter"
           },
           {
-            "$ref": "#/parameters/CatalogNameParameter"
+            "$ref": "devcenter.json#/parameters/CatalogNameParameter"
           }
         ],
         "operationId": "Environments_ListEnvironmentDefinitionsByCatalog",
@@ -681,7 +989,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "#/parameters/CatalogNameParameter"
+            "$ref": "devcenter.json#/parameters/CatalogNameParameter"
           },
           {
             "$ref": "#/parameters/EnvironmentDefinitionNameParameter"
@@ -768,10 +1076,26 @@
     "EnvironmentUpdateProperties": {
       "description": "Properties of an environment. These properties can be updated after the resource has been created.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentPatchProperties"
+        }
+      ],
       "properties": {
         "parameters": {
           "type": "object",
           "description": "Parameters object for the environment."
+        }
+      }
+    },
+    "EnvironmentPatchProperties": {
+      "description": "Properties of an environment. These properties can be updated via PATCH after the resource has been created.",
+      "type": "object",
+      "properties": {
+        "expirationDate": {
+          "description": "The time the expiration date will be triggered (UTC), after which the environment and associated resources will be deleted.",
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -843,6 +1167,132 @@
         "environmentType",
         "catalogName",
         "environmentDefinitionName"
+      ]
+    },
+    "EnvironmentOutputs": {
+      "description": "Outputs from environment deployment.",
+      "type": "object",
+      "properties": {
+        "outputs": {
+          "type": "object",
+          "description": "The outputs Names and Values",
+          "additionalProperties": {
+            "$ref": "#/definitions/EnvironmentOutput"
+          }
+        }
+      }
+    },
+    "EnvironmentOutput": {
+      "description": "Output from environment deployment.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of the output value",
+          "type": "string",
+          "enum": [
+            "string",
+            "array",
+            "bool",
+            "int",
+            "object"
+          ]
+        },
+        "value": {
+          "description": "The output value",
+          "type": "object"
+        },
+        "sensitive": {
+          "description": "Indicates if the value is sensitive.",
+          "type": "boolean"
+        }
+      }
+    },
+    "EnvironmentActionType": {
+      "description": "The scheduled action types.",
+      "type": "string",
+      "enum": [
+        "Delete"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentActionType",
+        "modelAsString": true
+      }
+    },
+    "EnvironmentNextAction": {
+      "description": "Details about the next run of an action.",
+      "type": "object",
+      "properties": {
+        "scheduledTime": {
+          "description": "The time the action will be triggered (UTC).",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "scheduledTime"
+      ]
+    },
+    "EnvironmentActionsListResult": {
+      "type": "object",
+      "description": "The actions list result",
+      "properties": {
+        "value": {
+          "description": "Current page of results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentAction"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EnvironmentAction": {
+      "type": "object",
+      "description": "An upcoming Environment Action.",
+      "properties": {
+        "name": {
+          "description": "Uniquely identifies the action.",
+          "type": "string",
+          "readOnly": true
+        },
+        "uri": {
+          "description": "Uri of the action resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "actionType": {
+          "description": "The action that will be taken.",
+          "$ref": "#/definitions/EnvironmentActionType",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "next": {
+          "description": "Details about the next run of this action.",
+          "$ref": "#/definitions/EnvironmentNextAction"
+        },
+        "lastModifiedBy": {
+          "description": "Object Id of the user who last modified the action.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "description": "time the object was last modified.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "actionType",
+        "next"
       ]
     },
     "EnvironmentListResult": {
@@ -1297,17 +1747,6 @@
       "description": "The name of the environment.",
       "x-ms-parameter-location": "method"
     },
-    "CatalogNameParameter": {
-      "name": "catalogName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
-      "minLength": 3,
-      "maxLength": 63,
-      "description": "The name of the catalog",
-      "x-ms-parameter-location": "method"
-    },
     "EnvironmentDefinitionNameParameter": {
       "name": "definitionName",
       "in": "path",
@@ -1328,6 +1767,26 @@
       "minLength": 3,
       "maxLength": 63,
       "description": "The id of the operation on an environment.",
+      "x-ms-parameter-location": "method"
+    },
+    "EnvironmentActionNameParameter": {
+      "name": "actionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of an action that will take place on an Environment.",
+      "x-ms-parameter-location": "method"
+    },
+    "EnvironmentActionDelayUntilParameter": {
+      "name": "until",
+      "description": "The time to delay the Environment action until.",
+      "required": true,
+      "type": "string",
+      "format": "date-time",
+      "in": "query",
       "x-ms-parameter-location": "method"
     }
   }

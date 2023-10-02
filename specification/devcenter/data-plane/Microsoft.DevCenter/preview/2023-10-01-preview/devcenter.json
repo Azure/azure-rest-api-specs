@@ -345,6 +345,17 @@
       "in": "path",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
+    },
+    "CatalogNameParameter": {
+      "name": "catalogName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of the catalog",
+      "x-ms-parameter-location": "method"
     }
   }
 }

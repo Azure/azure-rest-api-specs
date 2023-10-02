@@ -294,6 +294,164 @@
         }
       }
     },
+    "/projects/{projectName}/customizationtasks": {
+      "get": {
+        "tags": [
+          "Customization Tasks"
+        ],
+        "description": "Lists all customization tasks available to the project.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          }
+        ],
+        "operationId": "Projects_ListCustomizationTaskDefinitions",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomizationTaskDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_ListCustomizationTaskDefinitions": {
+            "$ref": "./examples/Projects_ListCustomizationTaskDefinitions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/CustomizationTaskDefinition"
+      }
+    },
+    "/projects/{projectName}/catalogs/{catalogName}/customizationtasks/{taskName}": {
+      "get": {
+        "tags": [
+          "Customization Tasks"
+        ],
+        "description": "Gets a customization task.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "devbox.json#/parameters/TaskNameParameter"
+          }
+        ],
+        "operationId": "Projects_GetCustomizationTaskDefinition",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomizationTaskDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_GetCustomizationTaskDefinition": {
+            "$ref": "./examples/Projects_GetCustomizationTaskDefinition.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/customizationtasks:validate": {
+      "post": {
+        "tags": [
+          "Customization Tasks"
+        ],
+        "description": "Validates a list of customization tasks.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Customization tasks to validate.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomizationTaskList"
+            }
+          }
+        ],
+        "operationId": "Projects_ValidateCustomizationTasks",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomizationTaskListValidationResult"
+            }
+          },
+          "202": {
+            "description": "The request was accepted.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_ValidateCustomizationTasksSuccess": {
+            "$ref": "./examples/Projects_ValidateCustomizationTasksSuccess.json"
+          },
+          "Projects_ValidateCustomizationTasksFailure": {
+            "$ref": "./examples/Projects_ValidateCustomizationTasksFailure.json"
+          }
+        }
+      }
+    },
     "/devboxes": {
       "get": {
         "tags": [
@@ -853,6 +1011,230 @@
         "x-ms-examples": {
           "DevBoxes_RepairDevBox": {
             "$ref": "./examples/DevBoxes_Repair.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationgroups": {
+      "get": {
+        "tags": [
+          "Dev Boxes"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ListCustomizationGroupsIncludeParameter"
+          }
+        ],
+        "description": "Lists customization groups on the Dev Box.",
+        "operationId": "DevBoxes_ListCustomizationGroups",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomizationGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevBoxes_ListCustomizationGroupsWithTasks": {
+            "$ref": "./examples/DevBoxes_ListCustomizationGroupsWithTasks.json"
+          },
+          "DevBoxes_ListCustomizationGroupsWithoutTasks": {
+            "$ref": "./examples/DevBoxes_ListCustomizationGroupsWithoutTasks.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/CustomizationGroup"
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationgroups/{customizationGroupName}": {
+      "get": {
+        "tags": [
+          "Dev Boxes"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomizationGroupNameParameter"
+          }
+        ],
+        "description": "Gets a customization group.",
+        "operationId": "DevBoxes_GetCustomizationGroup",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomizationGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevBoxes_GetCustomizationGroup": {
+            "$ref": "./examples/DevBoxes_GetCustomizationGroup.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Dev Boxes"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomizationGroupNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents a customization group.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomizationGroup"
+            }
+          }
+        ],
+        "description": "Applies customizations to the Dev Box.",
+        "operationId": "DevBoxes_CreateCustomizationGroup",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomizationGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevBoxes_CreateCustomizationGroup": {
+            "$ref": "./examples/DevBoxes_CreateCustomizationGroup.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationgroups/{customizationGroupName}/logs/{customizationTaskId}": {
+      "get": {
+        "tags": [
+          "Dev Boxes"
+        ],
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomizationGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomizationTaskIdParameter"
+          }
+        ],
+        "description": "Gets the log for a customization task.",
+        "operationId": "DevBoxes_GetCustomizationTaskLog",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevBoxes_GetCustomizationTaskLog": {
+            "$ref": "./examples/DevBoxes_GetCustomizationTaskLog.json"
           }
         }
       }
@@ -1569,6 +1951,101 @@
         ]
       }
     },
+    "CustomizationTaskDefinitionListResult": {
+      "description": "Result of listing customization tasks.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationTaskDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CustomizationTaskDefinition": {
+      "description": "Represents a task to be used in customizing a Dev Box.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Full name of the task: {catalogName}/{taskName}.",
+          "type": "string"
+        },
+        "catalogName": {
+          "description": "Name of the catalog that the task belongs to.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "The unique URI of the customization task.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description of the task.",
+          "type": "string"
+        },
+        "inputs": {
+          "description": "Inputs to the task.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CustomizationTaskDefinitionInput"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "catalogName"
+      ]
+    },
+    "CustomizationTaskDefinitionInput": {
+      "description": "Input for a customization task.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the input.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the input.",
+          "type": "string",
+          "enum": [
+            "string",
+            "number",
+            "boolean"
+          ],
+          "x-ms-enum": {
+            "name": "CustomizationTaskDefinitionInputType",
+            "modelAsString": true
+          }
+        },
+        "required": {
+          "description": "Whether or not the input is required.",
+          "type": "boolean"
+        },
+        "defaultValue": {
+          "description": "Default value for the input.",
+          "type": "string"
+        },
+        "allowedValues": {
+          "description": "Allowed values for the input.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "DevBoxListResult": {
       "type": "object",
       "description": "The Dev Box list result",
@@ -1786,6 +2263,285 @@
           "format": "date-time"
         }
       }
+    },
+    "CustomizationGroupListResult": {
+      "type": "object",
+      "description": "List of customization groups applied to a Dev Box.",
+      "properties": {
+        "value": {
+          "description": "The list of customization groups.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CustomizationGroup": {
+      "type": "object",
+      "description": "Represents a list of tasks to apply to a Dev Box",
+      "properties": {
+        "tasks": {
+          "description": "Tasks to apply. Note by default tasks are excluded from the response when listing customization groups. To include them, use the `include=tasks` query parameter.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationTask"
+          }
+        },
+        "uri": {
+          "description": "The unique URI of the customization group.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the customization group.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the customization group.",
+          "$ref": "#/definitions/CustomizationGroupStatus",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Start time of the customization group.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "End time of the customization group.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "CustomizationGroupStatus": {
+      "description": "Status of a customization group.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CustomizationGroupStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotStarted",
+            "description": "The customization group has not yet started."
+          },
+          {
+            "value": "Running",
+            "description": "The customization group is currently executing."
+          },
+          {
+            "value": "Succeeded",
+            "description": "All tasks in the customization group successfully executed."
+          },
+          {
+            "value": "Failed",
+            "description": "At least one task in the customization group failed."
+          }
+        ]
+      }
+    },
+    "CustomizationTask": {
+      "type": "object",
+      "description": "A customization task to run on a Dev Box.",
+      "properties": {
+        "name": {
+          "description": "Name of the task.",
+          "type": "string"
+        },
+        "inputs": {
+          "description": "Inputs for the task.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "displayName": {
+          "description": "Display name to help differentiate multiple instances of the same task.",
+          "type": "string"
+        },
+        "id": {
+          "description": "ID of the task instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the task.",
+          "$ref": "#/definitions/CustomizationTaskStatus",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Start time of the task.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "End time of the task.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "CustomizationTaskStatus": {
+      "description": "Status of a customization task.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "FailedValidation",
+        "Skipped",
+        "TimedOut",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CustomizationTaskStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotStarted",
+            "description": "The task has not yet started."
+          },
+          {
+            "value": "Running",
+            "description": "The task is currently executing."
+          },
+          {
+            "value": "Succeeded",
+            "description": "The task successfully executed."
+          },
+          {
+            "value": "Failed Validation",
+            "description": "The task reference is not valid."
+          },
+          {
+            "value": "Skipped",
+            "description": "The task was skipped."
+          },
+          {
+            "value": "TimedOut",
+            "description": "The task timed out."
+          },
+          {
+            "value": "Failed",
+            "description": "The task failed to execute."
+          }
+        ]
+      }
+    },
+    "CustomizationTaskList": {
+      "type": "object",
+      "description": "Represents a list of tasks to apply to a Dev Box",
+      "properties": {
+        "tasks": {
+          "description": "Tasks to apply.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationTask"
+          }
+        }
+      }
+    },
+    "CustomizationTaskListValidationResult": {
+      "description": "The result of validating a list of customization tasks.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Outcome of validation.",
+          "$ref": "#/definitions/CustomizationTaskListValidationStatus"
+        },
+        "errors": {
+          "description": "List of validation errors. Absent if no errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationTaskListValidationError"
+          }
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "CustomizationTaskListValidationStatus": {
+      "description": "Status of validating a list of customization tasks.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CustomizationTaskListValidationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Succeeded",
+            "description": "Validation succeeded."
+          },
+          {
+            "value": "Failed",
+            "description": "Validation failed."
+          }
+        ]
+      }
+    },
+    "CustomizationTaskListValidationError": {
+      "type": "object",
+      "description": "All of the validation errors for a customization task.",
+      "properties": {
+        "target": {
+          "$ref": "#/definitions/CustomizationTask",
+          "description": "The customization task that the error is about."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationTaskListValidationErrorDetails"
+          },
+          "description": "List of validation errors for the task."
+        }
+      },
+      "required": [
+        "target",
+        "details"
+      ]
+    },
+    "CustomizationTaskListValidationErrorDetails": {
+      "type": "object",
+      "description": "A single error from validating a task.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "RemoteConnection": {
       "description": "Provides remote connection information for a Dev Box.",
@@ -2364,6 +3120,57 @@
       "minLength": 3,
       "maxLength": 63,
       "description": "The id of the operation on a Dev Box.",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomizationGroupNameParameter": {
+      "name": "customizationGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "A customization group name.",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomizationTaskIdParameter": {
+      "name": "customizationTaskId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
+      "minLength": 36,
+      "maxLength": 36,
+      "description": "A customization task ID.",
+      "x-ms-parameter-location": "method"
+    },
+    "TaskNameParameter": {
+      "name": "taskName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "A customization task name.",
+      "x-ms-parameter-location": "method"
+    },
+    "ListCustomizationGroupsIncludeParameter": {
+      "name": "include",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "tasks"
+        ],
+        "x-ms-enum": {
+          "name": "ListCustomizationGroupsIncludeProperty",
+          "modelAsString": true
+        }
+      },
+      "description": "Optional query parameter to specify what properties should be included in the response.",
       "x-ms-parameter-location": "method"
     }
   }
