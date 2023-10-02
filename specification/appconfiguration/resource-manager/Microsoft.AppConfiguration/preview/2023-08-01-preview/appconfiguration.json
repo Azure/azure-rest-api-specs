@@ -2665,12 +2665,22 @@
     "Snapshot": {
       "description": "The snapshot resource.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
-        }
-      ],
       "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the snapshot.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/SnapshotProperties",
           "description": "All snapshot properties.",
