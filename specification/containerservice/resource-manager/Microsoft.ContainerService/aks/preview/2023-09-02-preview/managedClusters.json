@@ -70,6 +70,46 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/usages": {
+      "get": {
+        "tags": [
+          "Usages"
+        ],
+        "operationId": "Usages_List",
+        "summary": "List containerservice usages for a specific locations",
+        "description": "We offer managed cluster count for now, new usages may add later.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListUsagesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Kubernetes Versions": {
+            "$ref": "./examples/Usages_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/osOptions/default": {
       "get": {
         "tags": [
@@ -8643,6 +8683,75 @@
           "description": "Array of AKS supported Kubernetes versions."
         }
       }
+    },
+    "UsageName": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "The localized name of the resource."
+        }
+      },
+      "description": "The Usage Names."
+    },
+    "Usage": {
+      "properties": {
+        "unit": {
+          "type": "string",
+          "description": "An enum describing the unit of usage measurement.",
+          "enum": [
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "UsageUnit",
+            "modelAsString": false
+          }
+        },
+        "currentValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current usage of the resource."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum permitted usage of the resource."
+        },
+        "name": {
+          "$ref": "#/definitions/UsageName",
+          "description": "The name of the type of usage."
+        }
+      },
+      "required": [
+        "unit",
+        "currentValue",
+        "limit",
+        "name"
+      ],
+      "description": "Describes Compute Resource Usage."
+    },
+    "ListUsagesResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of compute resource usages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Usages operation response."
     },
     "ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics": {
       "type": "object",
