@@ -14,7 +14,7 @@ import "@azure-tools/typespec-azure-core";
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}:publish?api-version={apiVersion}
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive?api-Version={apiVersion}&maxWaitTime=60&maxEvents={maxEvents}
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge?api-Version={apiVersion}
-// POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
+// POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}&delayInSeconds={delay}
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject?api-version={apiVersion}
 @server(
   "{endpoint}",
@@ -39,7 +39,7 @@ namespace EventGrid {
     v2023_06_01_preview: "2023-06-01-preview",
 
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    v2023_09_01_preview: "2023-10-01-preview",
+    v2023_10_01_preview: "2023-10-01-preview",
   }
 
   alias StandardOperations = Azure.Core.StandardResourceOperations;
@@ -116,21 +116,21 @@ namespace EventGrid {
   }
 
   @doc("Supported delays for release operation.")
-  enum ReleaseDelay {
+  enum Delay {
     @doc("Release the event after 0 seconds.")
-    ReleaseEventIn0Seconds: 0,
+    By0Seconds: 0,
 
     @doc("Release the event after 10 seconds.")
-    ReleaseEventIn10Seconds: 10,
+    By10Seconds: 10,
 
     @doc("Release the event after 60 seconds.")
-    ReleaseEventIn60Seconds: 60,
+    By60Seconds: 60,
 
     @doc("Release the event after 600 seconds.")
-    ReleaseEventIn600Seconds: 600,
+    By600Seconds: 600,
 
     @doc("Release the event after 3600 seconds.")
-    ReleaseEventIn3600Seconds: 3600,
+    By3600Seconds: 3600,
   }
 
   @doc("The result of the Publish operation.")
@@ -287,36 +287,29 @@ namespace EventGrid {
   op acknowledgeCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
     {
-      @doc("content type")
-      @header("content-type")
-      contentType: "application/json";
-
       @doc("AcknowledgeOptions.")
       @body
-      lockTokens: AcknowledgeOptions;
+      acknowledgeOptions: AcknowledgeOptions;
     },
     AcknowledgeResult
   >;
 
   // Release Operation:
-  // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
+  // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}&releaseDelayInSeconds={delay}
 
-  @doc("Release batch of Cloud Events with an optional delay in seconds. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.")
+  @doc("Release batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.")
   @action("release")
   op releaseCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
     {
-      @doc("content type")
-      @header("content-type")
-      contentType: "application/json";
-
       @doc("ReleaseOptions")
       @body
-      lockTokens: ReleaseOptions;
+      releaseOptions: ReleaseOptions;
 
       @doc("Release cloud events with the specified delay in seconds.")
+      @added(ServiceApiVersions.v2023_10_01_preview)
       @query
-      delayInSeconds?: ReleaseDelay;
+      releaseDelayInSeconds?: Delay;
     },
     ReleaseResult
   >;
@@ -329,32 +322,25 @@ namespace EventGrid {
   op rejectCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
     {
-      @doc("content type")
-      @header("content-type")
-      contentType: "application/json";
-
       @doc("RejectOptions")
       @body
-      lockTokens: RejectOptions;
+      rejectOptions: RejectOptions;
     },
     RejectResult
   >;
 
   // RenewLock Operation:
-  // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewlock?api-version={apiVersion}
+  // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewLock?api-version={apiVersion}
 
   @doc("Renew lock for batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully renewed lockTokens, along with other failed lockTokens with their corresponding error information.")
-  @action("renewlock")
+  @added(ServiceApiVersions.v2023_10_01_preview)
+  @action("renewLock")
   op renewCloudEventLocks is StandardOperations.ResourceAction<
     EventSubscription,
     {
-      @doc("content type")
-      @header("content-type")
-      contentType: "application/json";
-
       @doc("RenewLockOptions")
       @body
-      lockTokens: RenewLockOptions;
+      renewLockOtpions: RenewLockOptions;
     },
     RenewCloudEventLocksResult
   >;

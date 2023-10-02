@@ -198,7 +198,7 @@
             "type": "string"
           },
           {
-            "name": "lockTokens",
+            "name": "acknowledgeOptions",
             "in": "body",
             "description": "AcknowledgeOptions.",
             "required": true,
@@ -237,7 +237,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release": {
       "post": {
         "operationId": "ReleaseCloudEvents",
-        "description": "Release batch of Cloud Events with an optional delay in seconds. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.",
+        "description": "Release batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -257,7 +257,7 @@
             "type": "string"
           },
           {
-            "name": "delayInSeconds",
+            "name": "releaseDelayInSeconds",
             "in": "query",
             "description": "Release cloud events with the specified delay in seconds.",
             "required": false,
@@ -270,31 +270,31 @@
               3600
             ],
             "x-ms-enum": {
-              "name": "ReleaseDelay",
+              "name": "Delay",
               "modelAsString": true,
               "values": [
                 {
-                  "name": "ReleaseEventIn0Seconds",
+                  "name": "By0Seconds",
                   "value": 0,
                   "description": "Release the event after 0 seconds."
                 },
                 {
-                  "name": "ReleaseEventIn10Seconds",
+                  "name": "By10Seconds",
                   "value": 10,
                   "description": "Release the event after 10 seconds."
                 },
                 {
-                  "name": "ReleaseEventIn60Seconds",
+                  "name": "By60Seconds",
                   "value": 60,
                   "description": "Release the event after 60 seconds."
                 },
                 {
-                  "name": "ReleaseEventIn600Seconds",
+                  "name": "By600Seconds",
                   "value": 600,
                   "description": "Release the event after 600 seconds."
                 },
                 {
-                  "name": "ReleaseEventIn3600Seconds",
+                  "name": "By3600Seconds",
                   "value": 3600,
                   "description": "Release the event after 3600 seconds."
                 }
@@ -302,7 +302,7 @@
             }
           },
           {
-            "name": "lockTokens",
+            "name": "releaseOptions",
             "in": "body",
             "description": "ReleaseOptions",
             "required": true,
@@ -361,7 +361,7 @@
             "type": "string"
           },
           {
-            "name": "lockTokens",
+            "name": "rejectOptions",
             "in": "body",
             "description": "RejectOptions",
             "required": true,
@@ -397,7 +397,7 @@
         }
       }
     },
-    "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewlock": {
+    "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewLock": {
       "post": {
         "operationId": "RenewCloudEventLocks",
         "description": "Renew lock for batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully renewed lockTokens, along with other failed lockTokens with their corresponding error information.",
@@ -420,7 +420,7 @@
             "type": "string"
           },
           {
-            "name": "lockTokens",
+            "name": "renewLockOtpions",
             "in": "body",
             "description": "RenewLockOptions",
             "required": true,
