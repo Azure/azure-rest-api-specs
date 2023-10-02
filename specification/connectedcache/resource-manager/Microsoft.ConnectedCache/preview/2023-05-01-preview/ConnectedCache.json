@@ -2405,7 +2405,6 @@
           }
         },
         "customer": {
-          "type": "object",
           "title": "properties of customer entity",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CustomerEntity",
@@ -2414,11 +2413,7 @@
         "additionalCustomerProperties": {
           "title": "Additional customer properties",
           "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/AdditionalCustomerProperties"
-            }
-          ],
+          "$ref": "#/definitions/AdditionalCustomerProperties",
           "description": "Additional properties for Mcc Customer entity"
         },
         "statusCode": {
