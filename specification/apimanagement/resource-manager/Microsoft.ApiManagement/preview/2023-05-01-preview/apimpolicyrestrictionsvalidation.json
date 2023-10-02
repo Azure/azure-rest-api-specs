@@ -46,6 +46,7 @@
             "$ref": "./examples/ApiManagementValidatePolicies.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -63,6 +64,12 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "200": {
+            "description": "Policy Restrictions are successfully validated.",
+            "schema": {
+              "$ref": "#/definitions/OperationResultContract"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
