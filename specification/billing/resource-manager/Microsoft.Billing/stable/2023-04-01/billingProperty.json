@@ -6,7 +6,7 @@
     "contact": {
       "name": "Microsoft.Billing",
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
-      "email": "cabbpt@microsoft.com"
+      "email": "pacebpexphot@microsoft.com"
     },
     "version": "2023-04-01"
   },
@@ -157,7 +157,7 @@
         "billingAccountAgreementType": {
           "description": "The type of agreement.",
           "enum": [
-            "Unknown",
+            "Other",
             "MicrosoftCustomerAgreement",
             "EnterpriseAgreement",
             "MicrosoftOnlineServicesProgram",
@@ -193,7 +193,7 @@
         "billingAccountStatus": {
           "description": "The current status of the billing account.",
           "enum": [
-            "Unknown",
+            "Other",
             "Active",
             "UnderReview",
             "Disabled",
@@ -212,6 +212,7 @@
         "billingAccountStatusReasonCode": {
           "description": "Reason for the specified billing account status.",
           "enum": [
+            "Other",
             "UnusualActivity",
             "ManuallyTerminated",
             "Expired",
@@ -228,7 +229,7 @@
         "billingAccountType": {
           "description": "The type of customer.",
           "enum": [
-            "Unknown",
+            "Other",
             "Enterprise",
             "Individual",
             "Partner",
@@ -248,7 +249,7 @@
         "billingAccountSubType": {
           "description": "The tier of the account.",
           "enum": [
-            "Unknown",
+            "Other",
             "None",
             "Individual",
             "Standard",
@@ -267,7 +268,7 @@
           "readOnly": true
         },
         "billingProfileDisplayName": {
-          "description": "The name of the billing profile for the invoice section or customer.",
+          "description": "The name of the billing profile.",
           "type": "string",
           "readOnly": true
         },
@@ -290,7 +291,7 @@
           }
         },
         "billingProfileSpendingLimitDetails": {
-          "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
+          "description": "The details of billing profile spending limit.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SpendingLimitDetails"
@@ -301,7 +302,7 @@
         "billingProfileStatus": {
           "description": "The status of the billing profile.",
           "enum": [
-            "Unknown",
+            "Other",
             "Active",
             "Disabled",
             "Warned",
@@ -318,6 +319,7 @@
         "billingProfileStatusReasonCode": {
           "description": "Reason for the specified billing profile status.",
           "enum": [
+            "Other",
             "PastDue",
             "UnusualActivity",
             "SpendingLimitReached",
@@ -333,7 +335,7 @@
         "billingProfilePaymentMethodType": {
           "description": "The payment method type of the primary payment method for the billing profile.",
           "enum": [
-            "Unknown",
+            "Other",
             "Credits",
             "CreditCard",
             "WireTransfer"
@@ -377,7 +379,7 @@
         "invoiceSectionStatus": {
           "description": "Identifies the status of an invoice section.",
           "enum": [
-            "Unknown",
+            "Other",
             "Active",
             "Deleted",
             "Disabled",
@@ -388,20 +390,23 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "InvoiceSectionStatus",
+            "name": "InvoiceSectionState",
             "modelAsString": true
           }
         },
         "invoiceSectionStatusReasonCode": {
           "description": "Reason for the specified invoice section status.",
           "enum": [
+            "Other",
             "PastDue",
-            "UnusualActivity"
+            "UnusualActivity",
+            "SpendingLimitReached",
+            "SpendingLimitExpired"
           ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "InvoiceSectionStatusReasonCode",
+            "name": "InvoiceSectionStateReasonCode",
             "modelAsString": true
           }
         },
@@ -423,6 +428,7 @@
         "subscriptionBillingStatus": {
           "description": "The subscription status.",
           "enum": [
+            "Other",
             "Unknown",
             "Active",
             "Disabled",
@@ -432,7 +438,8 @@
             "Expired",
             "AutoRenew",
             "Cancelled",
-            "Suspended"
+            "Suspended",
+            "Failed"
           ],
           "type": "string",
           "readOnly": true,
@@ -467,7 +474,7 @@
           }
         },
         "subscriptionServiceUsageAddress": {
-          "description": "Address details.",
+          "description": "The address of the individual or organization where service subscription is being used. Available for agreement type Microsoft Online Services Program.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/AddressDetails"
@@ -556,7 +563,7 @@
         "type": {
           "description": "The type of spending limit.",
           "enum": [
-            "Unknown",
+            "Other",
             "None",
             "FreeAccount",
             "Sandbox",
@@ -581,7 +588,7 @@
         "status": {
           "description": "The status of current spending limit.",
           "enum": [
-            "Unknown",
+            "Other",
             "None",
             "Active",
             "Expired",

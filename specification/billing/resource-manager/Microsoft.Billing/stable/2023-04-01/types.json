@@ -6,11 +6,11 @@
     "contact": {
       "name": "Microsoft.Billing",
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
-      "email": "cabbpt@microsoft.com"
+      "email": "pacebpexphot@microsoft.com"
     },
     "version": "2023-04-01"
   },
-  "paths": { },
+  "paths": {},
   "definitions": {
     "ArmError": {
       "description": "The error detail.",
@@ -38,7 +38,7 @@
             "$ref": "#/definitions/ArmError"
           },
           "readOnly": true,
-          "x-ms-identifiers": [ ]
+          "x-ms-identifiers": []
         },
         "additionalInfo": {
           "description": "The resource management error additional info.",
@@ -47,7 +47,7 @@
             "$ref": "#/definitions/ArmErrorAdditionalInfo"
           },
           "readOnly": true,
-          "x-ms-identifiers": [ ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -71,7 +71,7 @@
       "type": "object",
       "properties": {
         "error": {
-          "description": "The error detail.",
+          "description": "The error object.",
           "allOf": [
             {
               "$ref": "#/definitions/ArmError"
@@ -195,6 +195,24 @@
     "ArmPatchResource": {
       "description": "Common fields that are in the patch method request body of all Azure Resource Manager patch resources.",
       "type": "object"
+    },
+    "IndirectRelationshipInfo": {
+      "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
+      "type": "object",
+      "properties": {
+        "billingAccountName": {
+          "description": "The billing account name of the partner or the customer for an indirect motion.",
+          "type": "string"
+        },
+        "billingProfileName": {
+          "description": "The billing profile name of the partner or the customer for an indirect motion. This field is not populated for Enterprise Agreement billing accounts.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the partner or customer for an indirect motion.",
+          "type": "string"
+        }
+      }
     },
     "AzurePlan": {
       "description": "Details of the Azure plan.",
@@ -327,6 +345,15 @@
       "pattern": "^[a-zA-Z\\d-_]{1,128}$",
       "x-ms-parameter-location": "method"
     },
+    "departmentName": {
+      "in": "path",
+      "name": "departmentName",
+      "description": "The name of the department.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+      "x-ms-parameter-location": "method"
+    },
     "subscriptionId": {
       "in": "path",
       "name": "subscriptionId",
@@ -345,6 +372,15 @@
       "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
       "x-ms-parameter-location": "method"
     },
+    "enrollmentAccountName": {
+      "in": "path",
+      "name": "enrollmentAccountName",
+      "description": "The name of the enrollment account.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+      "x-ms-parameter-location": "method"
+    },
     "billingSubscriptionName": {
       "in": "path",
       "name": "billingSubscriptionName",
@@ -352,24 +388,6 @@
       "required": true,
       "type": "string",
       "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
-      "x-ms-parameter-location": "method"
-    },
-    "enrollmentAccountName": {
-      "in": "path",
-      "name": "enrollmentAccountName",
-      "description": "The ID that uniquely identifies an enrollment account.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[1-9][0-9]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "departmentName": {
-      "in": "path",
-      "name": "departmentName",
-      "description": "The ID that uniquely identifies the department.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[1-9][0-9]*$",
       "x-ms-parameter-location": "method"
     },
     "invoiceName": {

@@ -6,11 +6,89 @@
     "contact": {
       "name": "Microsoft.Billing",
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
-      "email": "cabbpt@microsoft.com"
+      "email": "pacebpexphot@microsoft.com"
     },
     "version": "2023-04-01"
   },
   "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingSubscriptions/{billingSubscriptionName}": {
+      "get": {
+        "tags": [
+          "BillingSubscription"
+        ],
+        "description": "Gets a subscription by its billing profile and ID. The operation is supported for billing accounts with agreement type Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingSubscriptions_GetByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "billingProfileName",
+            "description": "The fully qualified ID that uniquely identifies a billing profile.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z\\d-_]{1,128}$"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingSubscriptionName"
+          },
+          {
+            "in": "query",
+            "name": "includeDeleted",
+            "description": "Can be used to get deleted billing subscriptions.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A billing subscription.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscription"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingSubscriptionGetByBillingProfile": {
+            "$ref": "./examples/billingSubscriptionGetByBillingProfile.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingSubscriptions": {
       "get": {
         "tags": [
@@ -75,8 +153,11 @@
           }
         },
         "x-ms-examples": {
-          "BillingSubscriptionsListByBillingProfile": {
-            "$ref": "./examples/billingSubscriptionsListByBillingProfile.json"
+          "BillingSubscriptionsListByBillingProfileMCA": {
+            "$ref": "./examples/billingSubscriptionsListByBillingProfileMCA.json"
+          },
+          "BillingSubscriptionsListByBillingProfileEA": {
+            "$ref": "./examples/billingSubscriptionsListByBillingProfileEA.json"
           }
         },
         "x-ms-pageable": {
@@ -412,7 +493,7 @@
         "tags": [
           "BillingSubscription"
         ],
-        "description": "Gets a subscription by its ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement and Microsoft Partner Agreement.",
+        "description": "Gets a subscription by its ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement,  Microsoft Partner Agreement, and Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -431,6 +512,13 @@
             "in": "query",
             "name": "includeDeleted",
             "description": "Can be used to get deleted billing subscriptions.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "name": "includeFailed",
+            "description": "Can be used to get failed billing subscriptions.",
             "type": "boolean",
             "default": false
           },
@@ -845,14 +933,13 @@
             "On"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "AutoRenew",
             "modelAsString": true
           }
         },
         "beneficiary": {
-          "description": "Details of the beneficiary.",
+          "description": "The billing subcription's beneficiary.",
           "allOf": [
             {
               "$ref": "#/definitions/Beneficiary"
@@ -868,7 +955,7 @@
           "type": "string"
         },
         "billingProfileDisplayName": {
-          "description": "The name of the billing profile for the invoice section or customer.",
+          "description": "The name of the billing profile.",
           "type": "string",
           "readOnly": true
         },
@@ -910,7 +997,7 @@
           "readOnly": true
         },
         "enrollmentAccountSubscriptionDetails": {
-          "description": "The billing properties that can be modified. Available only for the Enterprise Agreement Type.",
+          "description": "Enrollment Account Subscription details. This field is available only for the Enterprise Agreement Type billing accounts.",
           "allOf": [
             {
               "$ref": "#/definitions/EnrollmentAccountSubscriptionDetails"
@@ -933,7 +1020,7 @@
           "readOnly": true
         },
         "nextBillingCycleDetails": {
-          "description": "Billing cycle details of the product.",
+          "description": "Next billing cycle details of the subscription.",
           "allOf": [
             {
               "$ref": "#/definitions/NextBillingCycleDetails"
@@ -987,7 +1074,7 @@
           "type": "integer"
         },
         "reseller": {
-          "description": "Details of the reseller.",
+          "description": "Reseller for this subscription. The fields is not available for Microsoft Partner Agreement billing accounts.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Reseller"
@@ -1041,6 +1128,7 @@
         "status": {
           "description": "The status of the subscription. This field is not available for Enterprise Agreement billing accounts",
           "enum": [
+            "Other",
             "Unknown",
             "Active",
             "Disabled",
@@ -1050,7 +1138,8 @@
             "Expired",
             "AutoRenew",
             "Cancelled",
-            "Suspended"
+            "Suspended",
+            "Failed"
           ],
           "type": "string",
           "readOnly": true,
@@ -1140,7 +1229,7 @@
         "cancellationReason": {
           "description": "Cancellation reason.",
           "enum": [
-            "Unknown",
+            "Other",
             "Compromise",
             "Dispute"
           ],
@@ -1168,13 +1257,13 @@
         "subscriptionEnrollmentAccountStatus": {
           "description": "The current enrollment account status of the subscription. This field is available only for the Enterprise Agreement Type.",
           "enum": [
-            "TransferredOut",
-            "Transferring",
-            "Inactive",
             "Active",
             "Cancelled",
             "Expired",
-            "Deleted"
+            "Deleted",
+            "TransferredOut",
+            "Transferring",
+            "Inactive"
           ],
           "type": "string",
           "readOnly": true,
@@ -1192,6 +1281,7 @@
         "code": {
           "description": "Error code of the transfer validation response.",
           "enum": [
+            "Other",
             "BillingAccountInactive",
             "DestinationBillingProfileInactive",
             "DestinationBillingProfileNotFound",
@@ -1222,7 +1312,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "BillingSubscriptionErrorCodes",
+            "name": "BillingSubscriptionErrorCode",
             "modelAsString": true
           }
         },
