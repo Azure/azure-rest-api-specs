@@ -3,6 +3,7 @@ import { join } from "path";
 import { parse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
+import { checkFileExists } from "../utils.js";
 
 export class LinterRulesetRule implements Rule {
   readonly name = "LinterRuleset";
@@ -19,18 +20,25 @@ export class LinterRulesetRule implements Rule {
     const configText = await readFile(configFile, "utf8");
     const config = parse(configText);
 
-    const specType =
+    const rpFolder =
       config.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
-    stdOutput += `azure-resource-provider-folder: ${specType}\n`;
+    stdOutput += `azure-resource-provider-folder: ${rpFolder}\n`;
+
+    const mainTspExists = await checkFileExists(join(folder, "main.tsp"));
+    const clientTspExists = await checkFileExists(join(folder, "client.tsp"));
 
     const linterExtends = config.linter?.extends;
     stdOutput += `linter.extends: ${linterExtends}`;
 
     let requiredRuleset = "";
-    if (specType == "data-plane") {
-      requiredRuleset = "@azure-tools/typespec-azure-core/all";
-    } else if (specType == "resource-manager") {
+    if (rpFolder == "resource-manager") {
       requiredRuleset = "@azure-tools/typespec-azure-resource-manager/all";
+    } else if (rpFolder == "data-plane") {
+      requiredRuleset = "@azure-tools/typespec-azure-core/all";
+    } else if (clientTspExists && !mainTspExists) {
+      // Assume folders with no autorest setting, containing only "client.tsp" but no "main.tsp",
+      // are data-plane (e.g. HealthInsights.TrialMatcher)
+      requiredRuleset = "@azure-tools/typespec-azure-core/all";
     } else {
       success = false;
       errorOutput +=
