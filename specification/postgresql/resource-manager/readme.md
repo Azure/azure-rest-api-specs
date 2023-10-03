@@ -28,23 +28,23 @@ These are the global settings for the PostgreSQL API.
 title: PostgreSQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.
 openapi-type: arm
-tag: package-flexibleserver-2023-03-01-preview
+tag: package-flexibleserver-2023-06-01-preview
 ```
 
 ``` yaml $(package-flexibleservers)
-tag: package-flexibleserver-2023-03-01-preview
+tag: package-flexibleserver-2023-06-01-preview
 ```
 
 ``` yaml $(package-singleservers)
-tag: package-preview-2023-06
+tag: package-2020-01-01
 ```
 
 
 ### Tag: package-preview-2023-06
 
-These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2023-06-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-06'
+```yaml $(tag) == 'package-flexibleserver-2023-06-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/Administrators.json
   - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/Backups.json
