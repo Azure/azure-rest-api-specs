@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "requestBody": {
+      "properties": {
+        "monitoringStatus": "Enabled"
+      },
+      "tags": {
+        "Environment": "Dev"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "name": "myMonitor",
+        "type": "Microsoft.Datadog/monitors",
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "monitoringStatus": "Enabled",
+          "datadogOrganizationProperties": {
+            "name": "myOrg",
+            "id": "myOrg123",
+            "linkingAuthCode": null,
+            "linkingClientId": null,
+            "enterpriseAppId": null
+          },
+          "liftrResourceCategory": "MonitorLogs",
+          "liftrResourcePreference": 1
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "name": "myMonitor",
+        "type": "Microsoft.Datadog/monitors",
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "properties": {
+          "provisioningState": "Accepted",
+          "monitoringStatus": "Enabled",
+          "datadogOrganizationProperties": {
+            "name": "myOrg",
+            "id": "myOrg123"
+          },
+          "liftrResourceCategory": "MonitorLogs",
+          "liftrResourcePreference": 1
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US"
+      }
+    }
+  }
+}

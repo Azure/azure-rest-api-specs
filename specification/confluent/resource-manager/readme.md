@@ -43,10 +43,11 @@ input-file:
 
 These settings apply only when `--tag=package-2021-12-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-12-01'
+``` yaml $(tag) == 'package-2021-12-01'
 input-file:
   - Microsoft.Confluent/stable/2021-12-01/confluent.json
 ```
+
 ### Tag: package-preview-2021-09
 
 These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
