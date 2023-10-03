@@ -3785,9 +3785,9 @@
     "RegisteredServerUpdateParametersProperties": {
       "description": "RegisteredServer Update Properties object.",
       "properties": {
-        "applicationId": {
-          "type": "string",
-          "description": "Server ServicePrincipal Id"
+        "identity": {
+          "type": "boolean",
+          "description": "Apply server with newly discovered ApplicationId if available."
         }
       }
     },
@@ -4566,6 +4566,10 @@
         "applicationId": {
           "type": "string",
           "description": "Server Application Id"
+        },
+        "latestApplicationId": {
+          "type": "string",
+          "description": "Latest Server Application Id discovered from the server. It is not yet applied yet."
         },
         "activeAuthType": {
           "$ref": "#/definitions/ServerAuthType",
