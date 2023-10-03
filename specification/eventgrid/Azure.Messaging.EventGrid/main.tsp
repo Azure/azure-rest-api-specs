@@ -351,7 +351,7 @@ namespace EventGrid {
     {
       @doc("RenewLockOptions")
       @body
-      renewLockOtpions: RenewLockOptions;
+      renewLockOptions: RenewLockOptions;
     },
     RenewCloudEventLocksResult
   >;
