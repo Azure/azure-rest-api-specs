@@ -39,9 +39,9 @@ export class LinterRulesetRule implements Rule {
     stdOutput += `linter.extends: ${JSON.stringify(linterExtends)}`;
 
     let requiredRuleset = "";
-    if (rpFolder == "resource-manager") {
+    if (rpFolder?.trim()?.endsWith("resource-manager")) {
       requiredRuleset = "@azure-tools/typespec-azure-resource-manager/all";
-    } else if (rpFolder == "data-plane") {
+    } else if (rpFolder?.trim()?.endsWith("data-plane")) {
       requiredRuleset = "@azure-tools/typespec-azure-core/all";
     } else if (clientTspExists && !mainTspExists) {
       // Assume folders with no autorest setting, containing only "client.tsp" but no "main.tsp",
