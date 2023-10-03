@@ -41,16 +41,6 @@ input-file:
   - Microsoft.DevCenter/preview/2023-10-01-preview/devcenter.json
   - Microsoft.DevCenter/preview/2023-10-01-preview/vdi.json
 ```
-### Tag: package-preview-2023-09
-
-These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2023-09'
-input-file:
-  - Microsoft.DevCenter/preview/2023-09-01-preview/commonDefinitions.json
-  - Microsoft.DevCenter/preview/2023-09-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2023-09-01-preview/vdi.json
-```
 
 ### Tag: package-preview-2023-08
 
@@ -61,17 +51,6 @@ input-file:
   - Microsoft.DevCenter/preview/2023-08-01-preview/commonDefinitions.json
   - Microsoft.DevCenter/preview/2023-08-01-preview/devcenter.json
   - Microsoft.DevCenter/preview/2023-08-01-preview/vdi.json
-```
-
-### Tag: package-preview-2023-06
-
-These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2023-06'
-input-file:
-  - Microsoft.DevCenter/preview/2023-06-01-preview/commonDefinitions.json
-  - Microsoft.DevCenter/preview/2023-06-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2023-06-01-preview/vdi.json
 ```
 
 ### Tag: package-2023-04
