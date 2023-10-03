@@ -48,6 +48,8 @@ export class LinterRulesetRule implements Rule {
       // are data-plane (e.g. HealthInsights.TrialMatcher)
       requiredRuleset = "@azure-tools/typespec-azure-core/all";
     } else {
+      // Cannot determine if spec is data-plane or resource-manager, so cannot know
+      // which linter ruleset is required.
       success = false;
       errorOutput +=
         "tspconfig.yaml must define the following property:\n" +
