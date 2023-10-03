@@ -1,15 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
-// import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
-// import "@azure-tools/typespec-autorest";
 import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-// using OpenAPI;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
@@ -592,14 +589,14 @@ model AnalyzeConversationJobsInput {
   analysisInput: MultiLanguageConversationAnalysisInput;
 
   @doc("Set of tasks to execute on the input conversation.")
-  tasks: Array<AnalyzeConversationLroTask>;
+  tasks: Array<AnalyzeConversationLROTask>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @doc("Base class for a long-running conversation input task.")
 @discriminator("kind")
 @added(Versions.v2023_04_01)
-model AnalyzeConversationLroTask extends TaskIdentifier {
+model AnalyzeConversationLROTask extends TaskIdentifier {
   @doc("Enumeration of supported analysis tasks on a collection of conversations.")
   kind: AnalyzeConversationLROTaskKind;
 }
@@ -647,7 +644,7 @@ enum AnalyzeConversationResultsKind {
 @doc("Contains the status of the submitted job for analyzing a conversation, along with related statistics.")
 @added(Versions.v2023_04_01)
 @resource("language/analyze-conversations/jobs")
-model AnalyzeConversationJobState{
+model AnalyzeConversationJobState {
   ...JobState;
   ...ConversationTasksState;
   ...AnalyzeConversationJobStatistics;
@@ -849,7 +846,7 @@ model ConversationItemLevelTiming extends AudioTiming {}
 
 @added(Versions.v2023_04_15_preview)
 @doc("Task definition for conversational sentiment.")
-model AnalyzeConversationalSentimentTask extends AnalyzeConversationLroTask {
+model AnalyzeConversationalSentimentTask extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.ConversationalSentimentTask,
 
@@ -859,7 +856,7 @@ model AnalyzeConversationalSentimentTask extends AnalyzeConversationLroTask {
 
 @added(Versions.v2023_04_15_preview)
 @doc("Supported parameters for a conversational sentiment task.")
-model ConversationalSentimentTaskParameters extends PreBuiltTaskParameters{
+model ConversationalSentimentTaskParameters extends PreBuiltTaskParameters {
   @doc("For transcript conversations, this parameter provides information regarding which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here.")
   predictionSource?: TranscriptContentType;
 }
@@ -876,14 +873,14 @@ model AnalyzeConversationSentimentResult extends AnalyzeConversationJobResult {
 
 @added(Versions.v2023_04_15_preview)
 @doc("The result from sentiment analysis operation for each conversation.")
-model ConversationSentimentResults extends PreBuiltResult{
+model ConversationSentimentResults extends PreBuiltResult {
   @doc("Array of ConversationSentimentResults")
   conversations: Array<ConversationSentimentResultsConversation>
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("The result from sentiment analysis operation for each conversation.")
-model ConversationSentimentResultsConversation{
+model ConversationSentimentResultsConversation {
   ...ConversationResultBase;
   ...ConversationSentimentResult;
 }
@@ -945,14 +942,14 @@ model AnalyzeConversationConversationPiiResult extends AnalyzeConversationJobRes
 
 @added(Versions.v2023_04_15_preview)
 @doc("The result from PII detection and redaction operation for each conversation.")
-model ConversationPiiResults extends PreBuiltResult{
+model ConversationPiiResults extends PreBuiltResult {
   @doc("array of conversations")
   conversations: Array<ConversationalPiiResultWithResultBase>;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Conversation PII result item")
-model ConversationalPiiResultWithResultBase{
+model ConversationalPiiResultWithResultBase {
   ...ConversationResultBase;
   ...ConversationPiiResult;
 }
@@ -979,7 +976,7 @@ model ConversationPiiItemResult {
 
 @added(Versions.v2023_04_15_preview)
 @doc("Task definition for a PII redaction in conversations.")
-model AnalyzeConversationPiiTask extends AnalyzeConversationLroTask{
+model AnalyzeConversationPiiTask extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.ConversationalPIITask;
 
@@ -989,7 +986,7 @@ model AnalyzeConversationPiiTask extends AnalyzeConversationLroTask{
 
 @added(Versions.v2023_04_15_preview)
 @doc("Supported parameters for a conversational pii task.")
-model ConversationPiiTaskParameters extends PreBuiltTaskParameters{
+model ConversationPiiTaskParameters extends PreBuiltTaskParameters {
   @doc("Array of ConversationPIICategories")
   piiCategories?: Array<ConversationPIICategories>;
 
@@ -1065,7 +1062,7 @@ enum TranscriptContentType {
 
 @doc("Task definition for custom conversational summarization.")
 @added(Versions.v2023_04_15_preview)
-model AnalyzeCustomConversationSummarizationTask extends AnalyzeConversationLroTask {
+model AnalyzeCustomConversationSummarizationTask extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.CustomConversationalSummarizationTask;
 
@@ -1075,7 +1072,7 @@ model AnalyzeCustomConversationSummarizationTask extends AnalyzeConversationLroT
 
 @doc("Task definition for conversational summarization.")
 @added(Versions.v2023_04_01)
-model AnalyzeConversationSummarizationTask extends AnalyzeConversationLroTask {
+model AnalyzeConversationSummarizationTask extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.ConversationalSummarizationTask;
 
@@ -1085,7 +1082,7 @@ model AnalyzeConversationSummarizationTask extends AnalyzeConversationLroTask {
 
 @doc("Supported parameters for a conversational summarization task.")
 @added(Versions.v2023_04_01)
-model ConversationSummarizationTaskParametersBase  extends AbstractiveSummarizationTaskParametersBase{
+model ConversationSummarizationTaskParametersBase  extends AbstractiveSummarizationTaskParametersBase {
 
   @doc("Array of Summary Aspects")
   summaryAspects: Array<SummaryAspect>;
@@ -1099,7 +1096,7 @@ model ConversationSummarizationTaskParameters extends PreBuiltTaskParameters {
 
 @doc("Supported parameters for a custom conversation summarization task.")
 @added(Versions.v2023_04_15_preview)
-model CustomConversationSummarizationTaskParameters extends CustomTaskParameters{
+model CustomConversationSummarizationTaskParameters extends CustomTaskParameters {
   ...ConversationSummarizationTaskParametersBase;
 }
 
@@ -1148,21 +1145,21 @@ model SummaryResultBase {
 
 @doc("Summary Results")
 @added(Versions.v2023_04_01)
-model SummaryResult{
+model SummaryResult {
   ...SummaryResultBase;
   ...PreBuiltResult;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Custom Summary Results")
-model CustomSummaryResult{
+model CustomSummaryResult {
   ...SummaryResultBase;
   ...CustomResult;
 }
 
 @doc("Conversations Summary Result")
 @added(Versions.v2023_04_01)
-model ConversationsSummaryResult{
+model ConversationsSummaryResult {
   ...ConversationResultBase;
   @doc("array of summaries")
   summaries: Array<SummaryResultItem>;
@@ -1693,7 +1690,6 @@ alias ServiceTraits = NoRepeatableRequests & NoConditionalRequests & NoClientReq
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
 @doc("Analyzes the input conversation utterance.")
 @actionSeparator("/:")
 @action("analyze-conversations")
@@ -1717,30 +1713,27 @@ op analyzeConversation is Operations.ResourceCollectionAction<
     AnalyzeConversationTaskResult
   >;
 
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
 @added(Versions.v2023_04_01)
 @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
 @summary("Get analysis status and results")
-// @operationId("AnalyzeConversation_JobStatus")
 op jobStatus is Operations.ResourceRead<
   AnalyzeConversationJobState, 
   ShowStatsQueryParameter
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.v2023_04_01)
 @doc("Analyzes the input conversation utterance.")
-// @operationId("AnalyzeConversation_SubmitJob")
 @route("/language/analyze-conversations/jobs")
 @pollingOperation(jobStatus)
 op submitJob is LanguageLongRunningOperation<AnalyzeConversationJobsInput, AnalyzeConversationJobState>;
 
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation ID is automatically generated by the OpenAPI emitters and should not normally be specified."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.v2023_04_01)
 @doc("Cancel a long-running job for text analysis of conversations.")
 @summary("Cancel a long-running Text Analysis conversations job")
 @pollingOperation(jobStatus)
-// @operationId("AnalyzeConversation_CancelJob")
 @actionSeparator(":")
 @action("cancel")
 op cancel is LanguageLongRunningResourceCancel<AnalyzeConversationJobState>;

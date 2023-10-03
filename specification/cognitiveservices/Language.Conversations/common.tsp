@@ -543,7 +543,7 @@ model CustomResult {
 @doc("Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.")
 enum RedactionCharacter{
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    explationPoint: "!",
+    exclamationPoint: "!",
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
     numberSign: "#",
@@ -552,7 +552,7 @@ enum RedactionCharacter{
     dollar: "$",
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
-    perCent: "%",
+    percent: "%",
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required"
     ampersand: "&",
