@@ -70,7 +70,7 @@
           "default": {
             "description": "Error response returned if request was unsuccessful.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -115,7 +115,7 @@
           "default": {
             "description": "Error response returned if request was unsuccessful.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -160,7 +160,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -170,55 +170,6 @@
           },
           "Get a private access resource with private endpoint": {
             "$ref": "./examples/GetAPrivateAccess_WithPrivateEndpoint.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "PrivateAccesses"
-        ],
-        "operationId": "PrivateAccesses_Update",
-        "description": "Updates an private access instance.",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./types/privateAccesses.json#/definitions/PrivateAccessUpdate"
-            },
-            "description": "The update to the private access instance."
-          },
-          {
-            "$ref": "./types/common.json#/parameters/apiVersion"
-          },
-          {
-            "$ref": "./types/common.json#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "./types/common.json#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/PrivateAccessName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated a private access instance",
-            "schema": {
-              "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update a chaos private access instance": {
-            "$ref": "./examples/PrivateAccessPatchUpdate.json"
           }
         }
       },
@@ -267,7 +218,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -307,7 +258,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -343,13 +294,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./types/privateAccesses.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -388,7 +339,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "description": "private endpoint connection object supplied in the body of the Put private endpoint connection operation."
           }
@@ -397,19 +348,19 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -447,13 +398,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -499,7 +450,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -536,13 +487,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
