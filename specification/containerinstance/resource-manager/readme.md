@@ -36,9 +36,9 @@ These settings apply only when `--tag=package-preview-2023-05-15` is specified o
 ```yaml $(tag) == 'package-preview-2023-05-15'
 input-file:
   - Microsoft.ContainerInstance/common-types/v1/common.json
-  - Microsoft.ContainerInstance/preview/2023-05-15/containerInstance.json
-  - Microsoft.ContainerInstance/preview/2023-05-15/containerGroupProfile.json
-  - Microsoft.ContainerInstance/preview/2023-05-15/containerScaleSet.json
+  - Microsoft.ContainerInstance/preview/2023-05-15-preview/containerInstance.json
+  - Microsoft.ContainerInstance/preview/2023-05-15-preview/containerGroupProfile.json
+  - Microsoft.ContainerInstance/preview/2023-05-15-preview/containerScaleSet.json
 ```
 
 ### Tag: package-2023-05
