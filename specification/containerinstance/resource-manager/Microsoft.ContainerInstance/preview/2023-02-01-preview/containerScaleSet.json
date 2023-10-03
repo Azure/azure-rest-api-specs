@@ -1,0 +1,457 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-02-01-preview",
+    "title": "ContainerInstanceManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}": {
+      "put": {
+        "tags": [
+          "ContainerScaleSets"
+        ],
+        "operationId": "ContainerScaleSets_CreateOrUpdate",
+        "description": "Create or update a Container Scale Set.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerScaleSetNameParameter"
+          },
+          {
+            "name": "containerScaleSet",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerScaleSet"
+            },
+            "description": "The scale set object."
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerScaleSet"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ContainerScaleSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {}
+      },
+      "patch": {
+        "tags": [
+          "ContainerScaleSets"
+        ],
+        "operationId": "ContainerScaleSets_Update",
+        "description": "Update a Container Scale Set.",
+        "x-ms-examples": {},
+        "parameters": [
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerScaleSetNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerScaleSet"
+            },
+            "description": "The scale set object."
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerScaleSet"
+            }
+          },
+          "202": {
+            "description": "Scale set update started"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ContainerScaleSets"
+        ],
+        "operationId": "ContainerScaleSets_Delete",
+        "description": "Deletes a Container Scale Set.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerScaleSetNameParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {}
+      },
+      "get": {
+        "tags": [
+          "ContainerScaleSets"
+        ],
+        "operationId": "ContainerScaleSets_Get",
+        "description": "Display information about a Container Scale Set.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerScaleSetNameParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerScaleSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {}
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets": {
+      "get": {
+        "tags": [
+          "ContainerScaleSets"
+        ],
+        "operationId": "ContainerScaleSets_ListByResourceGroup",
+        "description": "Gets a list of all Container Scale Sets under a resource group.",
+        "x-ms-examples": {},
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerScaleSetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerScaleSets": {
+      "get": {
+        "tags": [
+          "ContainerScaleSets"
+        ],
+        "operationId": "ContainerScaleSets_List",
+        "description": "Gets a list of all Container Scale Sets under a subscription.",
+        "x-ms-examples": {},
+        "parameters": [
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerScaleSetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ContainerScaleSetListResult": {
+      "description": "The Container Scale Set list response that contains the Container Scale Set properties.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerScaleSet"
+          },
+          "description": "The list of Container Scale Sets."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of Container Scale Sets."
+        }
+      }
+    },
+    "ContainerScaleSet": {
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContainerScaleSetProperties"
+        },
+        "identity": {
+          "$ref": "#/definitions/ContainerScaleSetIdentity",
+          "description": "The identity of the Container Scale Set, if configured."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Container Scale Set zones. NOTE: Availability zones can only be set when you create the scale set"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common-types/v1/common.json#/definitions/Resource"
+        }
+      ],
+      "description": "Describes a Container Scale Set."
+    },
+    "ContainerScaleSetIdentity": {
+      "type": "object",
+      "description": "Identity for the container scale set.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of the container scale set identity. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id associated with the container scale set. This property will only be provided for a system assigned identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the container scale set. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the container scale set.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the container scale set. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/UserAssignedIdentityAdditionalProperties"
+          }
+        }
+      }
+    },
+    "UserAssignedIdentityAdditionalProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of user assigned identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client id of user assigned identity."
+        }
+      }
+    },
+    "ContainerScaleSetProperties": {
+      "type": "object",
+      "properties": {
+        "elasticProfile": {
+          "$ref": "#/definitions/ElasticProfile",
+          "description": "The elastic profile."
+        },
+        "containerGroupProfiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerGroupProfileStub"
+          },
+          "x-ms-identifiers": [],
+          "description": "The Container Group Profiles that could be used in a Container Scale Set."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        }
+      },
+      "description": "Describes the properties of a Container Scale Set."
+    },
+    "ElasticProfile": {
+      "type": "object",
+      "properties": {
+        "desiredCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "Describes the elastic profile of the Container Scale Set"
+    },
+    "ContainerGroupProfileStub": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "$ref": "#/definitions/ApiEntityReference"
+        }
+      },
+      "description": "The object that contains a reference to a Container Group Profile"
+    },
+    "ApiEntityReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
+        }
+      },
+      "description": "The API entity reference."
+    }
+  },
+  "parameters": {
+    "ContainerScaleSetNameParameter": {
+      "name": "containerScaleSetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Container Scale Set.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
