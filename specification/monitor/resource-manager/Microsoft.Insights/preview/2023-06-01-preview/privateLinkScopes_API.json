@@ -932,6 +932,10 @@
             "Failed",
             "Deleting"
           ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
           "type": "string",
           "description": "Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it.",
           "readOnly": true
@@ -1087,14 +1091,18 @@
           "type": "string"
         },
         "provisioningState": {
+          "type": "string",
           "description": "State of the Azure monitor resource.",
+          "readOnly": true,
           "enum": [
             "Succeeded",
             "Provisioning",
             "Failed"
           ],
-          "type": "string",
-          "readOnly": true
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     }
