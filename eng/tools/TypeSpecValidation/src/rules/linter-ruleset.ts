@@ -30,7 +30,7 @@ export class LinterRulesetRule implements Rule {
     if (specType == "data-plane") {
       requiredRuleset = "@azure-tools/typespec-azure-core/all";
     } else if (specType == "resource-manager") {
-      requiredRuleset = "@azure-tools/typespec-azure-core/all";
+      requiredRuleset = "@azure-tools/typespec-azure-resource-manager/all";
     } else {
       success = false;
       errorOutput +=
@@ -46,9 +46,9 @@ export class LinterRulesetRule implements Rule {
       errorOutput +=
         "tspconfig.yaml must define the following property:\n" +
         "\n" +
-        "options:\n" +
-        '  "@azure-tools/typespec-autorest":\n' +
-        '    azure-resource-provider-folder: "data-plane" | "resource-manager"';
+        "linter:\n" +
+        "  extends:\n" +
+        `    - "${requiredRuleset}"`;
     }
 
     return {
