@@ -1,6 +1,6 @@
 import { readFile } from "fs/promises";
 import { join } from "path";
-import { parse } from "yaml";
+import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { checkFileExists } from "../utils.js";
@@ -18,7 +18,7 @@ export class LinterRulesetRule implements Rule {
 
     const configFile = join(folder, "tspconfig.yaml");
     const configText = await readFile(configFile, "utf8");
-    const config = parse(configText);
+    const config = yamlParse(configText);
 
     const rpFolder =
       config.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
