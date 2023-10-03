@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "workspace-1234",
+    "workspaceName": "testworkspace",
+    "api-version": "2023-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/standbypools/teststandbypool",
+            "name": "teststandbypool",
+            "type": "Microsoft.MachineLearningServices/standbypools",
+            "location": "eastus2euap",
+            "properties": {
+              "name": "teststandbypool",
+              "count": 1,
+              "vmSize": "Standard_DS2_v2",
+              "standbyAvailableInstances": [
+                {
+                  "status": "Available",
+                  "error": null
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/standbypools/testpoolv2",
+            "name": "teststandbypool",
+            "type": "Microsoft.MachineLearningServices/standbypools",
+            "location": "eastus2euap",
+            "properties": {
+              "name": "testpoolv2",
+              "count": 2,
+              "vmSize": "Standard_DS2_v2",
+              "standbyAvailableInstances": [
+                {
+                  "status": "Failed",
+                  "error": {
+                    "code": "InternalServerError",
+                    "message": "<Sample error message>"
+                  }
+                },
+                {
+                  "status": "Updating",
+                  "error": null
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
