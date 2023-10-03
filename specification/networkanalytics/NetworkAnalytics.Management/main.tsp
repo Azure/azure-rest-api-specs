@@ -292,12 +292,10 @@ model ConsumptionEndpointsProperties {
 @added(Versions.v2023_11_15)
 model AccountSas {
   @doc("Sas token start timestamp.")
-  @format("date-time")
-  startTimeStamp: string;
+  startTimeStamp: utcDateTime;
 
   @doc("Sas token expiry timestamp.")
-  @format("date-time")
-  expiryTimeStamp: string;
+  expiryTimeStamp: utcDateTime;
 
   @doc("Ip Address")
   ipAddress: string;
