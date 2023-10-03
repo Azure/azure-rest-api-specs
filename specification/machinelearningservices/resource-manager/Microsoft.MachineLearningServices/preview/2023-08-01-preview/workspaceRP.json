@@ -1799,16 +1799,25 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The parameters for creating or updating the standby pool.",
+            "description": "The parameters for creating the standby pool.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StandbyPoolProperties"
+              "$ref": "#/definitions/StandbyPool"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The request was successful and the standby pool was created or updated."
+            "description": "The request was successful and the standby pool was created.",
+            "schema": {
+              "$ref": "#/definitions/StandbyPool"
+            }
+          },
+          "201": {
+            "description": "The standby pool was created during the handling of the request operation.",
+            "schema": {
+              "$ref": "#/definitions/StandbyPool"
+            }
           },
           "default": {
             "description": "Error",
@@ -1828,7 +1837,7 @@
           "WorkspaceStandbyPools"
         ],
         "summary": "Create or update a standby pool associated with the workspace.",
-        "operationId": "StandbyPool_CreateOrUpdate",
+        "operationId": "StandbyPool_Update",
         "produces": [
           "application/json"
         ],
@@ -1871,13 +1880,16 @@
             "description": "The parameters for creating or updating the standby pool.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StandbyPoolProperties"
+              "$ref": "#/definitions/StandbyPoolUpdateParameters"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The request was successful and the standby pool was created or updated."
+            "description": "The request was successful and the standby pool was created or updated.",
+            "schema": {
+              "$ref": "#/definitions/StandbyPool"
+            }
           },
           "default": {
             "description": "Error",
@@ -1888,56 +1900,7 @@
         },
         "x-ms-examples": {
           "Create or Update a new Workspace": {
-            "$ref": "./examples/Workspace/StandbyPools/createOrUpdate.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "WorkspaceStandbyPools"
-        ],
-        "summary": "Delete a standby pool associated with the workspace.",
-        "operationId": "StandbyPool_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/StandbyPoolNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful and the standby pool was created or updated.",
-            "schema": {
-              "$ref": "#/definitions/StandbyPool"
-            }
-          },
-          "204": {
-            "description": "The standby pool has already been deleted or was not found."
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a Standby Pool": {
-            "$ref": "./examples/Workspace/StandbyPools/delete.json"
+            "$ref": "./examples/Workspace/StandbyPools/update.json"
           }
         }
       },
@@ -1987,6 +1950,52 @@
         "x-ms-examples": {
           "Get a Standby Pool": {
             "$ref": "./examples/Workspace/StandbyPools/get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WorkspaceStandbyPools"
+        ],
+        "summary": "Delete a standby pool associated with the workspace.",
+        "operationId": "StandbyPool_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StandbyPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful and the standby pool was created or updated."
+          },
+          "204": {
+            "description": "The standby pool has already been deleted or was not found."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Standby Pool": {
+            "$ref": "./examples/Workspace/StandbyPools/delete.json"
           }
         }
       }
@@ -3983,6 +3992,29 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "StandbyPoolUpdateParameters": {
+      "title": "Standby Pool Update Call Request Body",
+      "description": "The updatable fields for a standby pool",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Number of nodes in the pool. Must be greater than or equal to 1."
+          },
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The resource tags for the standby pool.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {
