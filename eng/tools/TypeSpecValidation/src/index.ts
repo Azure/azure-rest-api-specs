@@ -1,5 +1,6 @@
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { CompileRule } from "./rules/compile.js";
+import { FolderStructureRule } from "./rules/folder-structure.js";
 import { FormatRule } from "./rules/format.js";
 import { GitDiffRule } from "./rules/git-diff.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
@@ -16,7 +17,13 @@ export async function main() {
   const folder = parsedArgs.positionals[0];
   console.log("Running TypeSpecValidation on folder:", folder);
 
-  let rules = [new NpmPrefixRule(), new CompileRule(), new FormatRule(), new GitDiffRule()];
+  let rules = [
+    new FolderStructureRule(),
+    new NpmPrefixRule(),
+    new CompileRule(),
+    new FormatRule(),
+    new GitDiffRule(),
+  ];
   let success = true;
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i];
@@ -27,11 +34,14 @@ export async function main() {
       success = false;
       console.log("Rule " + rule.name + " failed");
       if (result.errorOutput) console.log(result.errorOutput);
+
+      // Stop executing more rules, since the results are more likely to be confusing than helpful
+      // Can add property like "RuleResult.ContinueOnError" if some rules want to continue
+      break;
     }
   }
 
   if (!success) {
-    return process.exit(1);
+    process.exitCode = 1;
   }
-  return;
 }
