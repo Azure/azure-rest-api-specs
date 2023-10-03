@@ -67,25 +67,6 @@ input-file:
   - preview/2023-03-01-preview/wayfind.json
 ```
 
-### Tag: package-preview-2022-09
-
-These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2022-09'
-input-file:
-  - preview/2022-09-01-preview/tileset.json
-  - preview/2022-09-01-preview/style.json
-  - preview/2022-09-01-preview/mapconfiguration.json
-  - preview/2022-09-01-preview/dataset.json
-  - preview/2022-09-01-preview/routeset.json
-  - preview/2022-09-01-preview/wayfind.json
-  - preview/2.0/alias.json
-  - preview/2.0/data.json
-  - preview/2.0/dwgconversion.json
-  - preview/2.0/featurestate.json
-  - preview/2.0/wfs.json
-```
-
 ### Tag: 2.0-preview
 
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
