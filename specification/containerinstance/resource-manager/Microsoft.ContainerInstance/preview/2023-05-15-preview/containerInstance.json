@@ -119,6 +119,9 @@
           },
           "ContainerGroupsGet_Failed": {
             "$ref": "./examples/ContainerGroupsGet_Failed.json"
+          },
+          "ContainerGroupsGetWithPriority": {
+            "$ref": "./examples/ContainerGroupsGetPriority.json"
           }
         },
         "summary": "Get the properties of the specified container group.",
@@ -163,6 +166,12 @@
           },
           "ContainerGroupWithEncryptionProperties": {
             "$ref": "./examples/ContainerGroupEncryptionProperties.json"
+          },
+          "ConfidentialContainerGroup": {
+            "$ref": "./examples/ContainerGroupCreateConfidential.json"
+          },
+          "ContainerGroupsCreateWithPriority": {
+            "$ref": "./examples/ContainerGroupsCreatePriority.json"
           }
         },
         "summary": "Create or update container groups.",
@@ -1414,24 +1423,6 @@
                 "username"
               ]
             },
-            "provisioningTimeoutInSeconds": {
-              "type": "integer",
-              "description": "Time in seconds in which a container group deployment would timeout and fail. The allowed maximum value is 1800 seconds. If value is not provided, property is given maximum value by default.",
-              "format": "int32"
-            },
-            "isCustomProvisioningTimeout": {
-              "type": "string",
-              "readOnly": true,
-              "description": "Flag indicating whether a custom value was provided for the provisioningTimeoutInSeconds property",
-              "enum": [
-                "True",
-                "False"
-              ],
-              "x-ms-enum": {
-                "name": "IsCustomProvisioningTimeout",
-                "modelAsString": true
-              }
-            },
             "restartPolicy": {
               "type": "string",
               "description": "Restart policy for all containers within the container group. \n- `Always` Always restart\n- `OnFailure` Restart on failure\n- `Never` Never restart\n",
@@ -1537,6 +1528,22 @@
               "x-ms-identifiers": [
                 "name"
               ]
+            },
+            "confidentialComputeProperties": {
+              "description": "The properties for confidential container group",
+              "$ref": "#/definitions/ConfidentialComputeProperties"
+            },
+            "priority": {
+              "type": "string",
+              "description": "The priority of the container group.",
+              "enum": [
+                "Regular",
+                "Spot"
+              ],
+              "x-ms-enum": {
+                "name": "ContainerGroupPriority",
+                "modelAsString": true
+              }
             }
           },
           "required": [
@@ -2287,7 +2294,8 @@
       "type": "string",
       "enum": [
         "Standard",
-        "Dedicated"
+        "Dedicated",
+        "Confidential"
       ],
       "x-ms-enum": {
         "name": "ContainerGroupSku",
@@ -2409,6 +2417,10 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "securityContext": {
+          "description": "The container security properties.",
+          "$ref": "#/definitions/SecurityContextDefinition"
         }
       }
     },
@@ -2455,6 +2467,16 @@
       "type": "array",
       "items": {
         "type": "string"
+      }
+    },
+    "ConfidentialComputeProperties": {
+      "description": "The properties for confidential container group",
+      "type": "object",
+      "properties": {
+        "ccePolicy": {
+          "type": "string",
+          "description": "The base64 encoded confidential compute enforcement policy"
+        }
       }
     }
   },
