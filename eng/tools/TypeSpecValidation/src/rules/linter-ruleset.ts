@@ -22,13 +22,21 @@ export class LinterRulesetRule implements Rule {
 
     const rpFolder =
       config.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
-    stdOutput += `azure-resource-provider-folder: ${rpFolder}\n`;
+    stdOutput += `azure-resource-provider-folder: ${JSON.stringify(rpFolder)}\n`;
 
     const mainTspExists = await checkFileExists(join(folder, "main.tsp"));
     const clientTspExists = await checkFileExists(join(folder, "client.tsp"));
+    let files = [];
+    if (mainTspExists) {
+      files.push("main.tsp");
+    }
+    if (clientTspExists) {
+      files.push("client.tsp");
+    }
+    stdOutput += `files: ${JSON.stringify(files)}"\n`;
 
     const linterExtends = config.linter?.extends;
-    stdOutput += `linter.extends: ${linterExtends}`;
+    stdOutput += `linter.extends: ${JSON.stringify(linterExtends)}`;
 
     let requiredRuleset = "";
     if (rpFolder == "resource-manager") {
