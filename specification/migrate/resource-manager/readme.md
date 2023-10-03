@@ -15,7 +15,6 @@ batch:
   - tag: package-migrate-2017-11
   - tag: package-migrate-2020-01
   - tag: package-migrate-2020-07
-  - tag: package-migrate-2023-03
   - tag: package-hubmigrate-2020-05
   - tag: package-migrateengine-2022-05
 ```
