@@ -680,7 +680,6 @@ model Tasks {
   total: int32;
 
   @doc("List of results from tasks (if available).")
-  // @lroResult
   items?: Array<AnalyzeConversationJobResult>;
 };
 
