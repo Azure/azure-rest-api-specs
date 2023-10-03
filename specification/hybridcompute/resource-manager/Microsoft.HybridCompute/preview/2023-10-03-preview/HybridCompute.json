@@ -1923,6 +1923,316 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}": {
+      "put": {
+        "tags": [
+          "MachineRunCommands"
+        ],
+        "operationId": "MachineRunCommands_CreateOrUpdate",
+        "description": "The operation to create or update a run command.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/machineNameParameter"
+          },
+          {
+            "$ref": "#/parameters/runCommandNameParameter"
+          },
+          {
+            "name": "runCommandProperties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommand"
+            },
+            "description": "Parameters supplied to the Create Run Command."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Resource",
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommand"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommand"
+            },
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a Run Command": {
+            "$ref": "./examples/runCommand/RunCommands_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "MachineRunCommands"
+        ],
+        "operationId": "MachineRunCommands_Update",
+        "description": "The operation to update the run command.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/machineNameParameter"
+          },
+          {
+            "$ref": "#/parameters/runCommandNameParameter"
+          },
+          {
+            "name": "runCommandProperties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommandUpdate"
+            },
+            "description": "Parameters supplied to the Create Run Command."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommand"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a Run Command": {
+            "$ref": "./examples/runCommand/MachineRunCommands_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "MachineRunCommands"
+        ],
+        "operationId": "MachineRunCommands_Delete",
+        "description": "The operation to delete a run command.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/machineNameParameter"
+          },
+          {
+            "$ref": "#/parameters/runCommandNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete a Machine Run Command": {
+            "$ref": "./examples/runCommand/RunCommands_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "MachineRunCommands"
+        ],
+        "operationId": "MachineRunCommands_Get",
+        "description": "The operation to get a run command.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/machineNameParameter"
+          },
+          {
+            "$ref": "#/parameters/runCommandNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommand"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Run Command": {
+            "$ref": "./examples/runCommand/RunCommands_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/runCommands": {
+      "get": {
+        "tags": [
+          "MachineRunCommands"
+        ],
+        "operationId": "MachineRunCommands_List",
+        "description": "The operation to get all the run commands of a non-Azure machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/machineNameParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommandsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GET all Machine Run Commands": {
+            "$ref": "./examples/runCommand/RunCommands_List.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3826,6 +4136,271 @@
         }
       },
       "description": "The result summary of an installation operation."
+    },
+    "MachineRunCommand": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MachineRunCommandProperties",
+          "description": "Describes Run Command Properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Describes a Run Command"
+    },
+    "MachineRunCommandProperties": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/MachineRunCommandScriptSource",
+          "description": "The source of the run command script."
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RunCommandInputParameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The parameters used by the script."
+        },
+        "protectedParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RunCommandInputParameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The parameters used by the script."
+        },
+        "asyncExecution": {
+          "type": "boolean",
+          "default": false,
+          "description": "Optional. If set to true, provisioning will complete as soon as script starts and will not wait for script to complete."
+        },
+        "runAsUser": {
+          "type": "string",
+          "description": "Specifies the user account on the machine when executing the run command."
+        },
+        "runAsPassword": {
+          "type": "string",
+          "description": "Specifies the user account password on the machine when executing the run command.",
+          "x-ms-secret": true
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The timeout in seconds to execute the run command."
+        },
+        "outputBlobUri": {
+          "type": "string",
+          "description": "Specifies the Azure storage blob where script output stream will be uploaded. Use a SAS URI with read, append, create, write access OR use managed identity to provide the VM access to the blob. Refer outputBlobManagedIdentity parameter. "
+        },
+        "errorBlobUri": {
+          "type": "string",
+          "description": "Specifies the Azure storage blob where script error stream will be uploaded. Use a SAS URI with read, append, create, write access OR use managed identity to provide the VM access to the blob. Refer errorBlobManagedIdentity parameter."
+        },
+        "outputBlobManagedIdentity": {
+          "$ref": "#/definitions/RunCommandManagedIdentity",
+          "description": "User-assigned managed identity that has access to outputBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged "
+        },
+        "errorBlobManagedIdentity": {
+          "$ref": "#/definitions/RunCommandManagedIdentity",
+          "description": "User-assigned managed identity that has access to errorBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged "
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        },
+        "instanceView": {
+          "readOnly": true,
+          "$ref": "#/definitions/MachineRunCommandInstanceView",
+          "description": "The machine run command instance view."
+        }
+      },
+      "description": "Describes the properties of a run command."
+    },
+    "MachineRunCommandScriptSource": {
+      "type": "object",
+      "properties": {
+        "script": {
+          "type": "string",
+          "description": "Specifies the script content to be executed on the machine."
+        },
+        "scriptUri": {
+          "type": "string",
+          "description": "Specifies the script download location. It can be either SAS URI of an Azure storage blob with read access or public URI."
+        },
+        "commandId": {
+          "type": "string",
+          "description": "Specifies the commandId of predefined built-in script."
+        },
+        "scriptUriManagedIdentity": {
+          "$ref": "#/definitions/RunCommandManagedIdentity",
+          "description": "User-assigned managed identity that has access to scriptUri in case of Azure storage blob. Use an empty object in case of system-assigned identity. Make sure the Azure storage blob exists, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged."
+        }
+      },
+      "description": "Describes the script sources for run command. Use only one of script, scriptUri, commandId."
+    },
+    "MachineRunCommandInstanceView": {
+      "type": "object",
+      "properties": {
+        "executionState": {
+          "type": "string",
+          "description": "Script execution status.",
+          "enum": [
+            "Unknown",
+            "Pending",
+            "Running",
+            "Failed",
+            "Succeeded",
+            "TimedOut",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ExecutionState",
+            "modelAsString": true
+          }
+        },
+        "executionMessage": {
+          "type": "string",
+          "description": "Communicate script configuration errors or execution messages."
+        },
+        "exitCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Exit code returned from script execution."
+        },
+        "output": {
+          "type": "string",
+          "description": "Script output stream."
+        },
+        "error": {
+          "type": "string",
+          "description": "Script error stream."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Script start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Script end time."
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtensionsResourceStatus"
+          },
+          "x-ms-identifiers": [],
+          "description": "The  status information."
+        }
+      },
+      "description": "The instance view of a machine run command."
+    },
+    "MachineRunCommandsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MachineRunCommand"
+          },
+          "description": "The list of run commands"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of run commands. Call ListNext() with this to fetch the next page of run commands."
+        }
+      },
+      "description": "Describes the Run Commands List Result."
+    },
+    "MachineRunCommandUpdate": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ],
+      "description": "Describes a Machine Extension Update."
+    },
+    "RunCommandInputParameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The run command parameter name."
+        },
+        "value": {
+          "type": "string",
+          "description": "The run command parameter value."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "description": "Describes the properties of a run command parameter."
+    },
+    "RunCommandManagedIdentity": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Client Id (GUID value) of the user-assigned managed identity. ObjectId should not be used if this is provided."
+        },
+        "objectId": {
+          "type": "string",
+          "description": "Object Id (GUID value) of the user-assigned managed identity. ClientId should not be used if this is provided."
+        }
+      },
+      "description": " Contains clientId or objectId (use only one, not both) of a user-assigned managed identity that has access to storage blob used in Run Command. Use an empty RunCommandManagedIdentity object in case of system-assigned identity. Make sure the Azure storage blob exists in case of scriptUri, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment with scriptUri blob and 'Storage Blob Data Contributor' for Append blobs(outputBlobUri, errorBlobUri). In case of user assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged."
+    },
+    "ExtensionsResourceStatus": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The status code."
+        },
+        "level": {
+          "type": "string",
+          "description": "The level code.",
+          "enum": [
+            "Info",
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "ExtensionsStatusLevelTypes",
+            "modelAsString": false
+          }
+        },
+        "displayStatus": {
+          "type": "string",
+          "description": "The short localizable label for the status."
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed status message, including for alerts and error messages."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the status."
+        }
+      },
+      "type": "object",
+      "description": "Instance view status."
     }
   },
   "parameters": {
@@ -3861,6 +4436,15 @@
       "type": "string",
       "pattern": "[a-zA-Z0-9-_\\.]+",
       "description": "The name of the license.",
+      "x-ms-parameter-location": "method"
+    },
+    "runCommandNameParameter": {
+      "name": "runCommandName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "[a-zA-Z0-9-_\\.]+",
+      "description": "The name of the run command.",
       "x-ms-parameter-location": "method"
     }
   }
