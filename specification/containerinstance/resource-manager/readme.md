@@ -29,6 +29,18 @@ openapi-type: arm
 tag: package-2023-05
 ```
 
+### Tag: package-preview-2023-05-15
+
+These settings apply only when `--tag=package-preview-2023-05-15` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-05-15'
+input-file:
+  - Microsoft.ContainerInstance/common-types/v1/common.json
+  - Microsoft.ContainerInstance/preview/2023-05-15/containerInstance.json
+  - Microsoft.ContainerInstance/preview/2023-05-15/containerGroupProfile.json
+  - Microsoft.ContainerInstance/preview/2023-05-15/containerScaleSet.json
+```
+
 ### Tag: package-2023-05
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
@@ -44,10 +56,7 @@ These settings apply only when `--tag=package-preview-2023-02` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-02'
 input-file:
-  - Microsoft.ContainerInstance/common-types/v1/common.json
   - Microsoft.ContainerInstance/preview/2023-02-01-preview/containerInstance.json
-  - Microsoft.ContainerInstance/preview/2023-02-01-preview/containerGroupProfile.json
-  - Microsoft.ContainerInstance/preview/2023-02-01-preview/containerScaleSet.json
 ```
 
 ### Tag: package-preview-2022-10
