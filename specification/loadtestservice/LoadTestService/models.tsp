@@ -10,8 +10,9 @@ namespace Microsoft.LoadTestService;
 
 @doc("Metrics for pass/fail criteria.")
 enum PFMetrics {
-  @doc("Pass fail criteria for response time metric.") response_time_ms,
-  @doc("Pass fail criteria for latency metric.") latency,
+  @doc("Pass fail criteria for response time metric in milliseconds.")
+  response_time_ms,
+  @doc("Pass fail criteria for latency metric in milliseconds.") latency,
   @doc("Pass fail criteria for error metric.") error,
   @doc("Pass fail criteria for total requests.") requests,
   @doc("Pass fail criteria for request per second.") requests_per_sec,
@@ -211,7 +212,7 @@ SECRET_VALUE.
   loadTestConfiguration?: LoadTestConfiguration;
 
   @added(APIVersions.v2023_04_01_preview)
-  @doc("Id of the test run to be used as the baseline reference for results trends.")
+  @doc("Id of the test run to be marked as baseline to view trends of client-side metrics from recent test runs")
   baselineTestRunId?: string;
 
   @doc("The input artifacts for the test.")
@@ -316,7 +317,7 @@ model AutoStopCriteria {
   @doc("Whether auto-stop should be enabled.")
   autoStopEnabled?: boolean;
 
-  @doc("Value of auto stop criteria metric")
+  @doc("Threshold percentage of errors on which test run should be automatically stopped.")
   errorRate?: float32;
 
   @doc("Time window during which the error percentage should be evaluated.")
@@ -326,8 +327,7 @@ model AutoStopCriteria {
 @doc("Configurations for the load test.")
 model LoadTestConfiguration {
   @doc("""
-The number of engine instances to execute load test. Supported values are in
-range of 1-45. Required for creating a new test.
+The number of engine instances to execute load test. Supported values are in range of 1-400. Required for creating a new test.
 """)
   engineInstances?: int32;
 
@@ -401,18 +401,23 @@ model TestInputArtifacts {
 @doc("File info")
 model FileInfo {
   @doc("File URL.")
-  url?: string;
+  @visibility("read")
+  url: string;
 
   @doc("File type")
-  fileType?: FileType;
+  @visibility("read")
+  fileType: FileType;
 
   @doc("Expiry time of the file (ISO 8601 literal format)")
-  expireDateTime?: utcDateTime;
+  @visibility("read")
+  expireDateTime: utcDateTime;
 
   @doc("Validation status of the file")
-  validationStatus?: FileStatus;
+  @visibility("read")
+  validationStatus: FileStatus;
 
   @doc("Validation failure error details")
+  @visibility("read")
   validationFailureDetails?: string;
 }
 
@@ -472,24 +477,24 @@ fully qualified resource Id e.g
 subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
 """)
   @visibility("read")
-  resourceId?: string;
+  resourceId: string;
 
   @doc("Azure resource name, required while creating the app component.")
-  resourceName?: string;
+  resourceName: string;
 
   @doc("Azure resource type, required while creating the app component.")
-  resourceType?: string;
+  resourceType: string;
 
   @doc("Azure resource display name")
-  displayName?: string;
+  displayName: string;
 
   @doc("Resource group name of the Azure resource")
   @visibility("read")
-  resourceGroup?: string;
+  resourceGroup: string;
 
   @doc("Subscription Id of the Azure resource")
   @visibility("read")
-  subscriptionId?: string;
+  subscriptionId: string;
 
   @doc("Kind of Azure resource type")
   kind?: string;
@@ -506,7 +511,7 @@ Azure resource metrics collection {metric id : metrics object} (Refer :
 https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
 for metric id).
 """)
-  metrics?: Record<ResourceMetric>;
+  metrics: Record<ResourceMetric>;
 
   ...SystemMetaData;
 }
@@ -519,7 +524,7 @@ https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metric
 model ResourceMetric {
   @doc("Unique name for metric.")
   @visibility("read")
-  id?: string;
+  id: string;
 
   @doc("Azure resource id.")
   resourceId: string;
@@ -879,6 +884,10 @@ model DimensionValue {
 
 @doc("Metrics dimension values.")
 model DimensionValueList {
+  @doc("The dimension name")
+  @visibility("read")
+  name: string;
+
   @doc("The dimension value")
   value?: string[];
 

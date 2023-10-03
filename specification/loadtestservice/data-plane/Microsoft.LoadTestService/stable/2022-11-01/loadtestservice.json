@@ -694,71 +694,16 @@
             "type": "string"
           },
           {
-            "name": "metricname",
-            "in": "query",
-            "description": "Metric name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MetricDimensionsRequest.metricname"
           },
           {
-            "name": "interval",
-            "in": "query",
-            "description": "The interval (i.e. timegrain) of the query.",
-            "required": false,
-            "type": "string",
-            "default": "PT1M",
-            "enum": [
-              "PT5S",
-              "PT10S",
-              "PT1M",
-              "PT5M",
-              "PT1H"
-            ],
-            "x-ms-enum": {
-              "name": "TimeGrain",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "PT5S",
-                  "value": "PT5S",
-                  "description": "5 seconds, available only if test run duration is less than 10 minutes."
-                },
-                {
-                  "name": "PT10S",
-                  "value": "PT10S",
-                  "description": "10 seconds, available only if test run duration is less than 10 minutes."
-                },
-                {
-                  "name": "PT1M",
-                  "value": "PT1M",
-                  "description": "1 minute"
-                },
-                {
-                  "name": "PT5M",
-                  "value": "PT5M",
-                  "description": "5 minutes, available only if test run duration is greater than 1 minute."
-                },
-                {
-                  "name": "PT1H",
-                  "value": "PT1H",
-                  "description": "1 hour, available only if test run duration is greater than 1 minute."
-                }
-              ]
-            }
+            "$ref": "#/parameters/MetricDimensionsRequest.interval"
           },
           {
-            "name": "metricNamespace",
-            "in": "query",
-            "description": "Metric namespace to query metric definitions for.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MetricDimensionsRequest.metricNamespace"
           },
           {
-            "name": "timespan",
-            "in": "query",
-            "description": "The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/MetricDimensionsRequest.timespan"
           },
           {
             "name": "body",
@@ -1564,7 +1509,7 @@
             "description": "Server metric configuration model.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TestServerMetricConfig"
+              "$ref": "#/definitions/TestServerMetricConfigUpdate"
             }
           }
         ],
@@ -1716,6 +1661,36 @@
           "type": "string",
           "description": "Kind of Azure resource type"
         }
+      },
+      "required": [
+        "resourceId",
+        "resourceName",
+        "resourceType",
+        "displayName",
+        "resourceGroup",
+        "subscriptionId"
+      ]
+    },
+    "AppComponentUpdate": {
+      "type": "object",
+      "description": "An Azure resource object (Refer azure generic resource model :\nhttps://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
+      "properties": {
+        "resourceName": {
+          "type": "string",
+          "description": "Azure resource name, required while creating the app component."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Azure resource type, required while creating the app component."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Azure resource display name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of Azure resource type"
+        }
       }
     },
     "Azure.Core.Foundations.Error": {
@@ -1850,6 +1825,11 @@
       "type": "object",
       "description": "Metrics dimension values.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The dimension name",
+          "readOnly": true
+        },
         "value": {
           "type": "array",
           "description": "The dimension value",
@@ -1862,7 +1842,10 @@
           "format": "uri",
           "description": "Link for the next set of values in case of paginated results, if applicable"
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "Error": {
       "type": "object",
@@ -1924,26 +1907,37 @@
       "properties": {
         "url": {
           "type": "string",
-          "description": "File URL."
+          "description": "File URL.",
+          "readOnly": true
         },
         "fileType": {
           "$ref": "#/definitions/FileType",
-          "description": "File type"
+          "description": "File type",
+          "readOnly": true
         },
         "expireDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Expiry time of the file (ISO 8601 literal format)"
+          "description": "Expiry time of the file (ISO 8601 literal format)",
+          "readOnly": true
         },
         "validationStatus": {
           "$ref": "#/definitions/FileStatus",
-          "description": "Validation status of the file"
+          "description": "Validation status of the file",
+          "readOnly": true
         },
         "validationFailureDetails": {
           "type": "string",
-          "description": "Validation failure error details"
+          "description": "Validation failure error details",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "url",
+        "fileType",
+        "expireDateTime",
+        "validationStatus"
+      ]
     },
     "FileStatus": {
       "type": "string",
@@ -2024,7 +2018,7 @@
         "engineInstances": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of engine instances to execute load test. Supported values are in\nrange of 1-45. Required for creating a new test."
+          "description": "The number of engine instances to execute load test. Supported values are in range of 1-400. Required for creating a new test."
         },
         "splitAllCSVs": {
           "type": "boolean",
@@ -2437,12 +2431,12 @@
           {
             "name": "response_time_ms",
             "value": "response_time_ms",
-            "description": "Pass fail criteria for response time metric."
+            "description": "Pass fail criteria for response time metric in milliseconds."
           },
           {
             "name": "latency",
             "value": "latency",
-            "description": "Pass fail criteria for latency metric."
+            "description": "Pass fail criteria for latency metric in milliseconds."
           },
           {
             "name": "error",
@@ -2682,12 +2676,47 @@
         }
       },
       "required": [
+        "id",
         "resourceId",
         "metricNamespace",
         "name",
         "aggregation",
         "resourceType"
       ]
+    },
+    "ResourceMetricUpdate": {
+      "type": "object",
+      "description": "Associated metric definition for particular metrics of the azure resource (\nRefer :\nhttps://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Azure resource id."
+        },
+        "metricNamespace": {
+          "type": "string",
+          "description": "Metric name space."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Metric description."
+        },
+        "name": {
+          "type": "string",
+          "description": "The invariant value of metric name"
+        },
+        "aggregation": {
+          "type": "string",
+          "description": "Metric aggregation."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Metric unit."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Azure resource type."
+        }
+      }
     },
     "Secret": {
       "type": "object",
@@ -3006,7 +3035,7 @@
           "type": "object",
           "description": "Azure resource collection { resource id (fully qualified resource Id e.g\nsubscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})\n: resource object } ",
           "additionalProperties": {
-            "$ref": "#/definitions/AppComponent"
+            "$ref": "#/definitions/AppComponentUpdate"
           }
         }
       }
@@ -3264,7 +3293,7 @@
           "type": "object",
           "description": "Azure resource collection { resource id (fully qualified resource Id e.g\nsubscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})\n: resource object } ",
           "additionalProperties": {
-            "$ref": "#/definitions/AppComponent"
+            "$ref": "#/definitions/AppComponentUpdate"
           }
         }
       }
@@ -3584,6 +3613,22 @@
           "type": "string",
           "description": "The user that last modified.",
           "readOnly": true
+        }
+      },
+      "required": [
+        "metrics"
+      ]
+    },
+    "TestServerMetricConfigUpdate": {
+      "type": "object",
+      "description": "Test server metrics configuration",
+      "properties": {
+        "metrics": {
+          "type": "object",
+          "description": "Azure resource metrics collection {metric id : metrics object} (Refer :\nhttps://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition\nfor metric id).",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceMetricUpdate"
+          }
         }
       }
     },

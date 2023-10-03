@@ -320,24 +320,7 @@ numeric, underscore or hyphen characters.
       @query
       aggregation?: string;
 
-      @doc("Metric name")
-      @query
-      metricname: string;
-
-      @doc("The interval (i.e. timegrain) of the query.")
-      @query
-      interval?: TimeGrain = TimeGrain.PT1M;
-
-      @doc("Metric namespace to query metric definitions for.")
-      @query
-      metricNamespace: string;
-
-      @doc("""
-The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
-""")
-      @query
-      @projectedName("python", "time_interval")
-      timespan: string;
+      ...MetricDimensionsRequest;
 
       @doc("Metric dimension filter ")
       @body
