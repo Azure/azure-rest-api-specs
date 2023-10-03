@@ -33,7 +33,7 @@ export class LinterRulesetRule implements Rule {
     if (clientTspExists) {
       files.push("client.tsp");
     }
-    stdOutput += `files: ${JSON.stringify(files)}"\n`;
+    stdOutput += `files: ${JSON.stringify(files)}\n`;
 
     const linterExtends = config.linter?.extends;
     stdOutput += `linter.extends: ${JSON.stringify(linterExtends)}`;
