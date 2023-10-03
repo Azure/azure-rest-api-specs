@@ -20,8 +20,8 @@ export async function main() {
 
   let rules = [
     new FolderStructureRule(),
-    new LinterRulesetRule(),
     new NpmPrefixRule(),
+    new LinterRulesetRule(),
     new CompileRule(),
     new FormatRule(),
     new GitDiffRule(),
