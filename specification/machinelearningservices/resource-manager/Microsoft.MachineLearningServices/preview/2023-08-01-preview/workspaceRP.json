@@ -1937,9 +1937,6 @@
               "$ref": "#/definitions/StandbyPool"
             }
           },
-          "404": {
-            "description": "The standby pool was not found."
-          },
           "default": {
             "description": "Error",
             "schema": {
@@ -2026,7 +2023,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful and the standby pool was created or updated."
+            "description": "The request was successful and the standby pool was created or updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StandbyPool"
+              }
+            }
           },
           "default": {
             "description": "Error",
@@ -3955,8 +3958,8 @@
           "x-ms-mutability": [
             "read"
           ],
+          "x-ms-identifiers": [],
           "items": {
-            "x-ms-identifiers": [],
             "$ref": "#/definitions/StandbyPoolResourceStatus"
           }
         }
@@ -3980,18 +3983,18 @@
       "title": "Standby Pool Resource",
       "description": "The resource model definition for a Standby Pool resource",
       "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Properties of the standby pool",
-          "$ref": "#/definitions/StandbyPoolProperties"
-        }
-      },
+      "x-ms-azure-resource": true,
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties of the standby pool.",
+          "$ref": "#/definitions/StandbyPoolProperties"
+        }
+      }
     },
     "StandbyPoolUpdateParameters": {
       "title": "Standby Pool Update Call Request Body",
@@ -4004,15 +4007,14 @@
             "format": "int32",
             "minimum": 1,
             "description": "Number of nodes in the pool. Must be greater than or equal to 1."
-          },
-          "x-ms-client-flatten": true
+          }
         },
         "tags": {
-          "description": "The resource tags for the standby pool.",
-          "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "description": "Updated tags for the Standby pool",
+          "type": "object"
         }
       }
     }
