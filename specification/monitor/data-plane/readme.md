@@ -36,7 +36,7 @@ tag: package-2023-10
 
 These settings apply only when `--tag=package-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-10'
+``` yaml $(tag) == 'package-2023-10'
 input-file:
   - Microsoft.Insights/stable/2023-10-01/metricBatch.json
 ```
@@ -78,7 +78,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
 ```
 
 ## C#
