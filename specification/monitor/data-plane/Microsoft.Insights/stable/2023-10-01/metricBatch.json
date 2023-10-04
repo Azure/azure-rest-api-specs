@@ -53,7 +53,7 @@
         "description": "Lists the metric values for multiple resources.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/StartTimeParameter"
@@ -62,28 +62,28 @@
             "$ref": "#/parameters/EndTimeParameter"
           },
           {
-            "$ref": "#/parameters/IntervalParameter"
+            "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/IntervalParameter"
           },
           {
-            "$ref": "#/parameters/MetricNamespaceParameter"
+            "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/MetricNamespaceParameter"
           },
           {
-            "$ref": "#/parameters/MetricNamesParameter"
+            "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/MetricNamesParameter"
           },
           {
-            "$ref": "#/parameters/AggregationsParameter"
+            "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/AggregationsParameter"
           },
           {
-            "$ref": "#/parameters/TopParameter"
+            "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/TopParameter"
           },
           {
-            "$ref": "#/parameters/OrderByParameter"
+            "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/OrderByParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ResourceIdList"
@@ -105,7 +105,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/AdditionalInfoErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -127,14 +127,6 @@
       },
       "description": "The comma separated list of resource IDs to query metrics for."
     },
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription identifier for the resources in this batch.",
-      "x-ms-parameter-location": "method"
-    },
     "StartTimeParameter": {
       "name": "starttime",
       "in": "query",
@@ -151,61 +143,6 @@
       "description": "The end time of the query. It is a string in the format 'yyyy-MM-ddTHH:mm:ss.fffZ'.",
       "x-ms-parameter-location": "method"
     },
-    "IntervalParameter": {
-      "name": "interval",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "format": "duration",
-      "default": "PT1M",
-      "description": "The interval (i.e. timegrain) of the query.\n*Examples: PT15M, PT1H, P1D*",
-      "x-ms-parameter-location": "method"
-    },
-    "MetricNamespaceParameter": {
-      "name": "metricnamespace",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Metric namespace that contains the requested metric names.",
-      "x-ms-parameter-location": "method"
-    },
-    "MetricNamesParameter": {
-      "name": "metricnames",
-      "in": "query",
-      "required": true,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "csv",
-      "description": "The names of the metrics (comma separated) to retrieve.",
-      "x-ms-parameter-location": "method"
-    },
-    "AggregationsParameter": {
-      "name": "aggregation",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The list of aggregation types (comma separated) to retrieve.\n*Examples: average, minimum, maximum*",
-      "x-ms-parameter-location": "method"
-    },
-    "TopParameter": {
-      "name": "top",
-      "in": "query",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "description": "The maximum number of records to retrieve per resource ID in the request.\nValid only if filter is specified.\nDefaults to 10.",
-      "x-ms-parameter-location": "method"
-    },
-    "OrderByParameter": {
-      "name": "orderby",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The aggregation to use for sorting results and the direction of the sort.\nOnly one order can be specified.\n*Examples: sum asc*",
-      "x-ms-parameter-location": "method"
-    },
     "FilterParameter": {
       "name": "filter",
       "in": "query",
@@ -213,14 +150,6 @@
       "type": "string",
       "description": "The filter is used to reduce the set of metric data returned.<br>Example:<br>Metric contains metadata A, B and C.<br>- Return all time series of C where A = a1 and B = b1 or b2<br>**filter=A eq ‘a1’ and B eq ‘b1’ or B eq ‘b2’ and C eq ‘*’**<br>- Invalid variant:<br>**filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘*’ or B = ‘b2’**<br>This is invalid because the logical or operator cannot separate two different metadata names.<br>- Return all time series where A = a1, B = b1 and C = c1:<br>**filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘c1’**<br>- Return all time series where A = a1<br>**filter=A eq ‘a1’ and B eq ‘*’ and C eq ‘*’**.",
       "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version.",
-      "x-ms-parameter-location": "client"
     }
   },
   "definitions": {
@@ -243,50 +172,6 @@
           "/subscriptions/123456728-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage2"
         ]
       }
-    },
-    "AdditionalInfoErrorResponse": {
-      "description": "The response to a metrics query that results in a bad request, with optional additional information.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "Top level error object that contains all relevant information.",
-          "type": "object",
-          "properties": {
-            "additionalInfo": {
-              "description": "Additional information about the error",
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "description": "The type of the info property (e.g. string).",
-                    "type": "string"
-                  },
-                  "info": {
-                    "description": "Additional information related to the error.",
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "code": {
-              "description": "Error code",
-              "type": "string"
-            },
-            "message": {
-              "description": "Error message indicating why the operation failed.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "code",
-            "message"
-          ]
-        }
-      },
-      "required": [
-        "error"
-      ]
     },
     "MetricResultsResponse": {
       "description": "The metrics result for a resource.",
@@ -340,153 +225,6 @@
         }
       }
     },
-    "LocalizableString": {
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The invariant value."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "The display name."
-        }
-      },
-      "description": "The localizable string class."
-    },
-    "MetricUnit": {
-      "type": "string",
-      "description": "The unit of the metric.",
-      "enum": [
-        "Count",
-        "Bytes",
-        "Seconds",
-        "CountPerSecond",
-        "BytesPerSecond",
-        "Percent",
-        "MilliSeconds",
-        "ByteSeconds",
-        "Unspecified",
-        "Cores",
-        "MilliCores",
-        "NanoCores",
-        "BitsPerSecond"
-      ],
-      "x-ms-enum": {
-        "name": "MetricUnit",
-        "modelAsString": false,
-        "values": [
-          {
-            "value": "Count",
-            "description": "Unit of raw quantity."
-          },
-          {
-            "value": "Bytes",
-            "description": "Unit of memory in bytes."
-          },
-          {
-            "value": "Seconds",
-            "description": "Unit of time in seconds."
-          },
-          {
-            "value": "CountPerSecond",
-            "description": "Rate unit of raw quantity per second."
-          },
-          {
-            "value": "BytesPerSecond",
-            "description": "Rate unit of memory in bytes per second."
-          },
-          {
-            "value": "Percent",
-            "description": "Percentage unit."
-          },
-          {
-            "value": "MilliSeconds",
-            "description": "Unit of time in 1/1000th of a second."
-          },
-          {
-            "value": "ByteSeconds",
-            "description": "Unit of data transfer or storage. It is the size of the data in bytes multiplied by the time it takes to transfer or store the data in seconds."
-          },
-          {
-            "value": "Unspecified",
-            "description": "No specified unit."
-          },
-          {
-            "value": "Cores",
-            "description": "Unit of processing power."
-          },
-          {
-            "value": "MilliCores",
-            "description": "Unit of processing power in 1/1000th of a CPU core."
-          },
-          {
-            "value": "NanoCores",
-            "description": "Unit of processing power in one billionth of a CPU core."
-          },
-          {
-            "value": "BitsPerSecond",
-            "description": "Rate unit of binary digits per second."
-          }
-        ]
-      }
-    },
-    "MetricValue": {
-      "type": "object",
-      "required": [
-        "timeStamp"
-      ],
-      "properties": {
-        "timeStamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp for the metric value in ISO 8601 format."
-        },
-        "average": {
-          "type": "number",
-          "format": "double",
-          "description": "The average value in the time range."
-        },
-        "minimum": {
-          "type": "number",
-          "format": "double",
-          "description": "The least value in the time range."
-        },
-        "maximum": {
-          "type": "number",
-          "format": "double",
-          "description": "The greatest value in the time range."
-        },
-        "total": {
-          "type": "number",
-          "format": "double",
-          "description": "The sum of all of the values in the time range."
-        },
-        "count": {
-          "type": "number",
-          "format": "double",
-          "description": "The number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
-        }
-      },
-      "description": "Represents a metric value."
-    },
-    "MetadataValue": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/LocalizableString",
-          "description": "The name of the metadata."
-        },
-        "value": {
-          "type": "string",
-          "description": "The value of the metadata."
-        }
-      },
-      "description": "Represents a metric metadata value."
-    },
     "Metric": {
       "type": "object",
       "properties": {
@@ -495,7 +233,7 @@
           "description": "The metric Id."
         },
         "name": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/definitions/LocalizableString",
           "description": "The name and the display name of the metric, i.e. it is localizable string."
         },
         "displayDescription": {
@@ -507,13 +245,13 @@
           "description": "The resource type of the metric resource."
         },
         "unit": {
-          "$ref": "#/definitions/MetricUnit",
+          "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/definitions/MetricUnit",
           "description": "The unit of the metric."
         },
         "timeseries": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TimeSeriesElement"
+            "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/definitions/TimeSeriesElement"
           },
           "description": "The time series returned when a data query is performed."
         },
@@ -535,26 +273,6 @@
         "timeseries"
       ],
       "description": "The result data of a query."
-    },
-    "TimeSeriesElement": {
-      "type": "object",
-      "properties": {
-        "metadatavalues": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetadataValue"
-          },
-          "description": "The metadata values returned if filter was specified in the call."
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricValue"
-          },
-          "description": "An array of data points representing the metric values.  This is only returned if a result type of data is specified."
-        }
-      },
-      "description": "A time series result type. The discriminator value is always TimeSeries in this case."
     }
   }
 }
