@@ -20,6 +20,7 @@
                 "ownerId": "Database1",
                 "ownerResourceId": "3fu-hg==",
                 "operationType": "Create",
+                "canUndelete": "invalid",
                 "database": {
                   "id": "Database1",
                   "_rid": "3fu-hg==",
@@ -50,7 +51,9 @@
                   "_users": "users/",
                   "_ts": 1599075903
                 },
-                "operationType": "Delete"
+                "operationType": "Delete",
+                "canUndelete": "notRestorable",
+                "canUndeleteReason": "Database already exists. Only deleted resources can be restored within same account."
               }
             }
           },
@@ -72,7 +75,8 @@
                   "_colls": "colls/",
                   "_users": "users/"
                 },
-                "operationType": "Create"
+                "operationType": "Create",
+                "canUndelete": "invalid"
               }
             }
           }
