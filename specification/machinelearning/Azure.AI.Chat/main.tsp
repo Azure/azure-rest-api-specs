@@ -11,6 +11,7 @@ using TypeSpec.Versioning;
 @service({
   title: "Azure ML Chat",
 })
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "api-key">)
 @server(
   "{endpoint}",
   "Azure ML Chat APIs",

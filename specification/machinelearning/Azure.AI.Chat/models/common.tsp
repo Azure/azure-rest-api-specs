@@ -37,5 +37,5 @@ model ChatMessage {
 
   @doc("placeholder")
   @projectedName("json", "session_state")
-  sessionState: unknown;
+  sessionState?: unknown;
 }

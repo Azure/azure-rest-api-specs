@@ -47,7 +47,7 @@ model StreamingChatCompletionOptions {
   messages: ChatMessage[];
 
   @doc("placeholder")
-  stream: false;
+  stream: true;
 
   @doc("placeholder")
   @projectedName("json", "session_state")
