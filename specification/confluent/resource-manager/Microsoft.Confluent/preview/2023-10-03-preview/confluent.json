@@ -1071,6 +1071,9 @@
               "$ref": "#/definitions/Access_RoleBinding_SuccessResponse"
             }
           },
+          "204": {
+            "description": "The specified role binding doesn't exist."
+          },
           "default": {
             "description": "Default error response.",
             "schema": {
@@ -2198,7 +2201,7 @@
       }
     },
     "RoleBindingNameList": {
-      "description": "Data of the rolebinding name list",
+      "description": "Data of the role binding name list",
       "type": "array",
       "items": {
         "type": "string"
@@ -2223,8 +2226,8 @@
       }
     },
     "Access_RoleBinding_SuccessResponse": {
-      "description": "Create rolebinding success response",
-      "type":"object",
+      "description": "Create role binding success response",
+      "type": "object",
       "$ref": "#/definitions/RoleBindingRecord"
     },
     "Access_RoleBindingNameList_SuccessResponse": {
@@ -2240,7 +2243,7 @@
           "$ref": "#/definitions/ConfluentListMetadata"
         },
         "data": {
-          "description": "Data of the rolebinding names",
+          "description": "Data of the role binding names",
           "$ref": "#/definitions/RoleBindingNameList"
         }
       }
