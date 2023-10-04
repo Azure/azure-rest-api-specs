@@ -225,6 +225,9 @@
         ],
         "operationId": "Insights_Delete",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "summary": "Deletes a Workload Insights instance.",
         "description": "Deletes a Workloads Insights instance for the specified subscription, resource group and instance name.",
         "x-ms-examples": {
@@ -247,12 +250,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Deleted Workload Insights Instance.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
-            }
-          },
           "202": {
             "description": "Deleting Workload Insights Instance."
           },
@@ -880,6 +877,9 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
       "description": "Workload Insights instance name.",
       "x-ms-parameter-location": "method"
     },
