@@ -303,59 +303,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}/privateEndpointConnections/{privateEndpointConnectionName}": {
-      "put": {
-        "tags": [
-          "PrivateAccesses"
-        ],
-        "operationId": "PrivateAccesses_UpdateAPrivateEndpointConnection",
-        "description": "Approve or reject a private endpoint connection under private access resource, this can't be used to create a new private endpoint connection.",
-        "parameters": [
-          {
-            "$ref": "./types/common.json#/parameters/apiVersion"
-          },
-          {
-            "$ref": "./types/common.json#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "./types/common.json#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/PrivateAccessName"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointConnectionName"
-          },
-          {
-            "name": "privateEndpointConnection",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnection"
-            },
-            "description": "private endpoint connection object supplied in the body of the Put private endpoint connection operation."
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Long running update operation.",
-            "schema": {
-              "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Approve a Private Endpoint Connection under a private access resource.": {
-            "$ref": "./examples/PrivateAccessPrivateEndpointConnection_Approve.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
       "get": {
         "tags": [
           "PrivateAccesses"
@@ -424,7 +371,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Asynchronous delete operation."
+            "description": "Asynchronous delete operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
