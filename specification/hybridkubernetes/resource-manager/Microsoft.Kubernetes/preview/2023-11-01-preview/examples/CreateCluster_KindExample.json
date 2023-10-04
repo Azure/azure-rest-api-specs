@@ -10,22 +10,21 @@
       "identity": {
         "type": "SystemAssigned"
       },
-      "kind":"ProvisionedCluster",
+      "kind": "ProvisionedCluster",
       "properties": {
         "azureHybridBenefit": "NotApplicable",
         "distribution": "AKS",
         "distributionVersion": "1.0",
-        "securityProfile": {
-         "workloadIdentity": {
-            "enabled": true
-          }
-        },
-        "oidcIssuerProfile": {
-          "enabled": true
+        "aadProfile": {
+          "enableAzureRBAC": true,
+          "adminGroupObjectIDs": [
+            "56f988bf-86f1-41af-91ab-2d7cd011db47"
+          ],
+          "tenantID": "82f988bf-86f1-41af-91ab-2d7cd011db47"
         },
         "arcAgentProfile": {
-          "desiredAgentVersion":"0.1.0",
-          "agentAutoUpgrade":"Enabled"
+          "desiredAgentVersion": "0.1.0",
+          "agentAutoUpgrade": "Enabled"
         }
       }
     }
@@ -49,7 +48,7 @@
         "identity": {
           "type": "SystemAssigned"
         },
-        "kind":"ProvisionedCluster",
+        "kind": "ProvisionedCluster",
         "properties": {
           "kubernetesVersion": "1.17.0",
           "totalNodeCount": 2,
@@ -58,18 +57,16 @@
           "distribution": "AKS",
           "distributionVersion": "1.0",
           "azureHybridBenefit": "NotApplicable",
-          "securityProfile": {
-           "workloadIdentity": {
-              "enabled": true
-            }
-          },
-          "oidcIssuerProfile": {
-            "issuerURL":"https://eastus.oic.prod-aks.azure.com/00000000-0000-0000-0000-000000000000/00000000-0000-0000-0000-000000000000/",
-            "enabled": true
+          "aadProfile": {
+            "enableAzureRBAC": true,
+            "adminGroupObjectIDs": [
+              "56f988bf-86f1-41af-91ab-2d7cd011db47"
+            ],
+            "tenantID": "82f988bf-86f1-41af-91ab-2d7cd011db47"
           },
           "arcAgentProfile": {
-            "desiredAgentVersion":"0.1.0",
-            "agentAutoUpgrade":"Enabled"
+            "desiredAgentVersion": "0.1.0",
+            "agentAutoUpgrade": "Enabled"
           }
         }
       }
@@ -100,7 +97,18 @@
           "provisioningState": "Accepted",
           "distribution": "AKS",
           "distributionVersion": "1.0",
-          "azureHybridBenefit": "NotApplicable"
+          "azureHybridBenefit": "NotApplicable",
+          "aadProfile": {
+            "enableAzureRBAC": true,
+            "adminGroupObjectIDs": [
+              "56f988bf-86f1-41af-91ab-2d7cd011db47"
+            ],
+            "tenantID": "82f988bf-86f1-41af-91ab-2d7cd011db47"
+          },
+          "arcAgentProfile": {
+            "desiredAgentVersion": "0.1.0",
+            "agentAutoUpgrade": "Enabled"
+          }
         }
       }
     }

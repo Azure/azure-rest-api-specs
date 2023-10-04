@@ -675,13 +675,9 @@
             "modelAsString": true
           }
         },
-        "securityProfile": {
-          "$ref": "#/definitions/SecurityProfile",
-          "description": "The security profile for the connected cluster."
-        },
-        "oidcIssuerProfile": {
-          "$ref": "#/definitions/OIDCIssuerProfile",
-          "description": "The OIDC issuer profile of the connected cluster."
+        "aadProfile": {
+          "description": "AAD profile for the connected cluster.",
+          "$ref": "#/definitions/AadProfile"
         },
         "arcAgentProfile": {
           "description": "Arc agentry configuration for the provisioned cluster.",
@@ -824,15 +820,26 @@
         }
       }
     },
-    "SecurityProfile": {
+    "AadProfile": {
       "type": "object",
+      "description": "AAD Profile specifies attributes for Azure Active Directory integration.",
       "properties": {
-        "workloadIdentity": {
-          "$ref": "#/definitions/SecurityProfileWorkloadIdentity",
-          "description": "Workload identity settings for the security profile. Workload identity enables Kubernetes applications to access Azure cloud resources securely with Azure AD."
+        "enableAzureRBAC": {
+          "type": "boolean",
+          "description": "Whether to enable Azure RBAC for Kubernetes authorization."
+        },
+        "adminGroupObjectIDs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of AAD group object IDs that will have admin role of the cluster."
+        },
+        "tenantID": {
+          "type": "string",
+          "description": "The AAD tenant ID to use for authentication. If not specified, will use the tenant of the deployment subscription."
         }
-      },
-      "description": "The security profile for the Connected cluster."
+      }
     },
     "ArcAgentProfile": {
       "description": "Defines the Arc Agent properties for the clusters.",
@@ -856,33 +863,6 @@
           }
         }
       }
-    },
-    "OIDCIssuerProfile": {
-      "type": "object",
-      "properties": {
-        "issuerURL": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The OIDC issuer url of the Connected cluster."
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether the OIDC issuer is enabled.",
-          "default": false
-        }
-      },
-      "description": "The OIDC issuer profile of the Connected cluster."
-    },
-    "SecurityProfileWorkloadIdentity": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether the workload identity is enabled.",
-          "default": false
-        }
-      },
-      "description": "The workload identity profile of the Connected cluster."
     },
     "SystemData": {
       "description": "Metadata pertaining to creation and last modification of the resource.",
