@@ -2408,6 +2408,15 @@
           "type": "string",
           "description": "Specifies the Operating System product SKU."
         },
+        "osEdition": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The edition of the Operating System."
+        },
+        "machineType": {
+          "$ref": "#/definitions/MachineType",
+          "description": "The machine type."
+        },
         "domainName": {
           "readOnly": true,
           "type": "string",
@@ -2815,7 +2824,7 @@
                 },
                 "iotEnterpriseProfile": {
                   "x-ms-client-flatten": true,
-                  "$ref": "#/definitions/LicenseProfileArmIotProperties",
+                  "$ref": "#/definitions/LicenseProfileArmIoTEnterpriseProperties",
                   "description": "Hybrid Compute Windows IoT Enterprise Profile properties"
                 }
               }
@@ -2868,7 +2877,7 @@
                 },
                 "iotEnterpriseProfile": {
                   "x-ms-client-flatten": true,
-                  "$ref": "#/definitions/IotProfileUpdateProperties",
+                  "$ref": "#/definitions/IotEnterpriseProfileUpdateProperties",
                   "description": "Hybrid Compute Windows IoT Enterprise Profile Update properties"
                 }
               }
@@ -3026,17 +3035,17 @@
       },
       "description": "Describes the Update properties of a ESU License Profile."
     },
-    "SubscriptionStatusUpdate": {
+    "LicenseProfileSubscriptionStatusUpdate": {
       "type": "string",
       "enum": [
         "Enable",
         "Disable"
       ],
       "x-ms-enum": {
-        "name": "SubscriptionStatusUpdate",
+        "name": "LicenseProfileSubscriptionStatusUpdate",
         "modelAsString": true
       },
-      "description": "Indicates the new subscription status of the Windows Server, IoTEnterprise or Product Features."
+      "description": "Indicates the new subscription status of the Windows Server, IoT Enterprise or Product Features."
     },
     "ProductFeatureUpdate": {
       "type": "object",
@@ -3046,7 +3055,7 @@
           "description": "Product feature name."
         },
         "subscriptionStatus": {
-          "$ref": "#/definitions/SubscriptionStatusUpdate",
+          "$ref": "#/definitions/LicenseProfileSubscriptionStatusUpdate",
           "description": "Indicates the new status of the product feature."
         }
       },
@@ -3056,7 +3065,7 @@
       "type": "object",
       "properties": {
         "subscriptionStatus": {
-          "$ref": "#/definitions/SubscriptionStatusUpdate",
+          "$ref": "#/definitions/LicenseProfileSubscriptionStatusUpdate",
           "description": "Indicates the subscription status of the Windows Server."
         },
         "productFeatures": {
@@ -3069,11 +3078,11 @@
       },
       "description": "Describes the Update properties of a Windows Server License Profile."
     },
-    "IotProfileUpdateProperties": {
+    "IotEnterpriseProfileUpdateProperties": {
       "type": "object",
       "properties": {
         "subscriptionStatus": {
-          "$ref": "#/definitions/SubscriptionStatusUpdate",
+          "$ref": "#/definitions/LicenseProfileSubscriptionStatusUpdate",
           "description": "Indicates the subscription status of the Windows IoT Enterprise."
         },
         "productFeatures": {
@@ -3094,16 +3103,9 @@
           "description": "Indicates the license status of the OS."
         },
         "licenseChannel": {
+          "readOnly": true,
           "type": "string",
           "description": "Indicates the license channel."
-        },
-        "osEdition": {
-          "type": "string",
-          "description": "The edition of the OS."
-        },
-        "machineType": {
-          "$ref": "#/definitions/MachineType",
-          "description": "The machine type."
         },
         "softwareAssurance": {
           "x-ms-client-flatten": true,
@@ -3130,7 +3132,7 @@
             },
             "iotEnterpriseProfile": {
               "x-ms-client-flatten": true,
-              "$ref": "#/definitions/LicenseProfileArmIotProperties",
+              "$ref": "#/definitions/LicenseProfileArmIoTEnterpriseProperties",
               "description": "Hybrid Compute Windows IoT Enterprise Profile properties"
             }
           }
@@ -3166,9 +3168,10 @@
       "description": "Properties for the Machine ESU profile."
     },
     "LicenseStatus": {
+      "readOnly": true,
       "type": "string",
       "enum": [
-        "UnKnown",
+        "Unknown",
         "Unlicensed",
         "Licensed",
         "OOBGrace",
@@ -3184,9 +3187,10 @@
       "description": "The license status."
     },
     "MachineType": {
+      "readOnly": true,
       "type": "string",
       "enum": [
-        "UnKnown",
+        "Unknown",
         "VM",
         "Native"
       ],
@@ -3196,7 +3200,7 @@
       },
       "description": "The machine type."
     },
-    "SubscriptionStatus": {
+    "LicenseProfileSubscriptionStatus": {
       "type": "string",
       "enum": [
         "Unknown",
@@ -3205,7 +3209,7 @@
         "Disabled"
       ],
       "x-ms-enum": {
-        "name": "SubscriptionStatus",
+        "name": "LicenseProfileSubscriptionStatus",
         "modelAsString": true
       },
       "description": "Subscription status of the Windows Server or Windows IoT Enterprise or Product feature."
@@ -3217,7 +3221,7 @@
         "Disabled"
       ],
       "x-ms-enum": {
-        "name": "SubscriptionStatus",
+        "name": "SoftwareAssuranceStatus",
         "modelAsString": true
       },
       "description": "Enrollment status of the Software Assurance program."
@@ -3230,20 +3234,20 @@
           "description": "Product feature name."
         },
         "subscriptionStatus": {
-          "$ref": "#/definitions/SubscriptionStatus",
+          "$ref": "#/definitions/LicenseProfileSubscriptionStatus",
           "description": "Indicates the current status of the product features."
         },
         "billingStartDate": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
-          "description": "The timestamp when the billing starts."
+          "description": "The timestamp in UTC when the billing starts."
         },
         "disenrollmentDate": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
-          "description": "The timestamp when the user disabled the feature."
+          "description": "The timestamp in UTC when the user disenrolled the feature."
         }
       },
       "description": "Product Feature"
@@ -3252,20 +3256,20 @@
       "type": "object",
       "properties": {
         "subscriptionStatus": {
-          "$ref": "#/definitions/SubscriptionStatus",
+          "$ref": "#/definitions/LicenseProfileSubscriptionStatus",
           "description": "Indicates the subscription status of the Windows Server."
         },
         "billingStartDate": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
-          "description": "The timestamp when the billing starts."
+          "description": "The timestamp in UTC when the billing starts."
         },
         "disenrollmentDate": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
-          "description": "The timestamp when the user disabled the feature."
+          "description": "The timestamp in UTC when the user disenrolled the feature."
         },
         "productFeatures": {
           "type": "array",
@@ -3277,24 +3281,24 @@
       },
       "description": "Describes the properties of a Windows Server License Profile ARM model."
     },
-    "LicenseProfileArmIotProperties": {
+    "LicenseProfileArmIoTEnterpriseProperties": {
       "type": "object",
       "properties": {
         "subscriptionStatus": {
-          "$ref": "#/definitions/SubscriptionStatus",
+          "$ref": "#/definitions/LicenseProfileSubscriptionStatus",
           "description": "Indicates the subscription status of the Windows IoT Enterprise."
         },
         "billingStartDate": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
-          "description": "The timestamp when the billing starts."
+          "description": "The timestamp in UTC when the billing starts."
         },
         "disenrollmentDate": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
-          "description": "The timestamp when the user disabled the feature."
+          "description": "The timestamp in UTC when the user disenrolled the feature."
         },
         "productFeatures": {
           "type": "array",
