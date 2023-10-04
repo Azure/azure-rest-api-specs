@@ -62,11 +62,6 @@
           "description": "The identity of the experiment resource.",
           "$ref": "./common.json#/definitions/resourceIdentity"
         },
-        "provisioningState": {
-          "$ref": "./common.json#/definitions/provisioningState",
-          "description": "Most recent provisioning state for the given experiment resource.",
-          "readOnly": true
-        },
         "properties": {
           "description": "The properties of the experiment resource.",
           "x-ms-client-flatten": true,
@@ -91,6 +86,11 @@
       "description": "Model that represents the Experiment properties model.",
       "type": "object",
       "properties": {
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/provisioningState",
+          "description": "Most recent provisioning state for the given experiment resource.",
+          "readOnly": true
+        },
         "steps": {
           "type": "array",
           "items": {
