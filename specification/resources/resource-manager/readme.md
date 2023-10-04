@@ -1021,6 +1021,12 @@ directive:
   - suppress: IntegerTypeMustHaveFormat
     from: deploymentScripts.json
     reason: Tooling issue, default is int32, explictly mentioning the format as per doc, it still flags breaking change.
+  - suppress: ResourceNameRestriction
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PropertiesTypeObjectNoDefinition
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - from: deploymentScripts.json
     suppress: R3006
     where:
