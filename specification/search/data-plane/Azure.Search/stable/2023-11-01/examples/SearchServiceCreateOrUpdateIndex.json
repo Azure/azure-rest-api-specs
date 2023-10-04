@@ -3,7 +3,7 @@
     "endpoint": "https://myservice.search.windows.net",
     "indexName": "hotels",
     "allowIndexDowntime": false,
-    "api-version": "2023-07-01-Preview",
+    "api-version": "2023-11-01",
     "Prefer": "return=representation",
     "index": {
       "name": "hotels",
@@ -28,18 +28,10 @@
         {
           "name": "descriptionEmbedding",
           "type": "Collection(Edm.Single)",
-          "searchable": true,
-          "filterable": false,
-          "retrievable": true,
-          "sortable": false,
-          "facetable": false,
-          "key": false,
-          "indexAnalyzer": null,
-          "searchAnalyzer": null,
-          "analyzer": null,
-          "synonymMaps": [],
           "dimensions": 1536,
-          "vectorSearchConfiguration": "myHnswProfile"
+          "vectorSearchProfile": "myHnswProfile",
+          "searchable": true,
+          "retrievable": true
         },
         {
           "name": "description_fr",
@@ -169,12 +161,29 @@
         ]
       },
       "vectorSearch": {
-        "algorithmConfigurations": [
+        "profiles": [
+          {
+            "name": "myHnswProfile",
+            "algorithm": "myHnsw"
+          },
+          {
+            "name": "myAlgorithm",
+            "algorithm": "myExhaustive"
+          }
+        ],
+        "algorithms": [
           {
             "name": "myHnsw",
             "kind": "hnsw",
             "hnswParameters": {
               "m": 4,
+              "metric": "cosine"
+            }
+          },
+          {
+            "name": "myExhaustive",
+            "kind": "exhaustiveKnn",
+            "exhaustiveKnnParameters": {
               "metric": "cosine"
             }
           }
@@ -199,6 +208,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -213,6 +224,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -227,6 +240,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -241,9 +256,9 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
-            "synonymMaps": [],
             "dimensions": 1536,
-            "vectorSearchConfiguration": "myHnswProfile"
+            "vectorSearchProfile": "myHnswProfile",
+            "synonymMaps": []
           },
           {
             "name": "description_fr",
@@ -257,6 +272,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": "fr.lucene",
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -271,6 +288,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -285,6 +304,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -299,6 +320,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": "tagsAnalyzer",
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -313,6 +336,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -327,6 +352,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -341,6 +368,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -355,6 +384,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -369,26 +400,29 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           }
         ],
         "scoringProfiles": [
           {
             "name": "geo",
+            "functionAggregation": "sum",
             "text": {
               "weights": {
-                "hotelName": 5
+                "hotelName": 5.0
               }
             },
             "functions": [
               {
                 "type": "distance",
-                "boost": 5,
+                "boost": 5.0,
                 "fieldName": "location",
                 "interpolation": "logarithmic",
                 "distance": {
                   "referencePointParameter": "currentLocation",
-                  "boostingDistance": 10
+                  "boostingDistance": 10.0
                 }
               }
             ]
@@ -431,6 +465,65 @@
         },
         "similarity": {
           "@odata.type": "#Microsoft.Azure.Search.ClassicSimilarity"
+        },
+        "semantic": {
+          "configurations": [
+            {
+              "name": "semanticHotels",
+              "prioritizedFields": {
+                "titleField": {
+                  "fieldName": "hotelName"
+                },
+                "prioritizedContentFields": [
+                  {
+                    "fieldName": "description"
+                  },
+                  {
+                    "fieldName": "description_fr"
+                  }
+                ],
+                "prioritizedKeywordsFields": [
+                  {
+                    "fieldName": "tags"
+                  },
+                  {
+                    "fieldName": "category"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "vectorSearch": {
+          "algorithms": [
+            {
+              "name": "myHnsw",
+              "kind": "hnsw",
+              "hnswParameters": {
+                "metric": "cosine",
+                "m": 4,
+                "efConstruction": 400,
+                "efSearch": 500
+              }
+            },
+            {
+              "name": "myExhaustive",
+              "kind": "exhaustiveKnn",
+              "exhaustiveKnnParameters": {
+                "metric": "cosine"
+              }
+            }
+          ],
+          "profiles": [
+            {
+              "name": "myHnswProfile",
+              "algorithm": "myHnsw"
+            },
+            {
+              "name": "myAlgorithm",
+              "algorithm": "myExhaustive"
+            }
+          ]
         }
       }
     },
@@ -450,6 +543,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -464,6 +559,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -478,6 +575,24 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
+            "synonymMaps": []
+          },
+          {
+            "name": "descriptionEmbedding",
+            "type": "Collection(Edm.Single)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "dimensions": 1536,
+            "vectorSearchProfile": "myHnswProfile",
             "synonymMaps": []
           },
           {
@@ -492,6 +607,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": "fr.lucene",
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -506,6 +623,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -520,6 +639,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -534,6 +655,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": "tagsAnalyzer",
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -548,6 +671,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -562,6 +687,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -576,6 +703,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -590,6 +719,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -604,12 +735,15 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           }
         ],
         "scoringProfiles": [
           {
             "name": "geo",
+            "functionAggregation": "sum",
             "text": {
               "weights": {
                 "hotelName": 5
@@ -693,14 +827,33 @@
           ]
         },
         "vectorSearch": {
-          "algorithmConfigurations": [
+          "algorithms": [
             {
               "name": "myHnsw",
               "kind": "hnsw",
               "hnswParameters": {
+                "metric": "cosine",
                 "m": 4,
+                "efConstruction": 400,
+                "efSearch": 500
+              }
+            },
+            {
+              "name": "myExhaustive",
+              "kind": "exhaustiveKnn",
+              "exhaustiveKnnParameters": {
                 "metric": "cosine"
               }
+            }
+          ],
+          "profiles": [
+            {
+              "name": "myHnswProfile",
+              "algorithm": "myHnsw"
+            },
+            {
+              "name": "myAlgorithm",
+              "algorithm": "myExhaustive"
             }
           ]
         }
