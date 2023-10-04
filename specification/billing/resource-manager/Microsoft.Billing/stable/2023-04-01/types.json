@@ -6,11 +6,11 @@
     "contact": {
       "name": "Microsoft.Billing",
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
-      "email": "cabbpt@microsoft.com"
+      "email": "pacebpexphot@microsoft.com"
     },
     "version": "2023-04-01"
   },
-  "paths": {},
+  "paths": { },
   "definitions": {
     "ArmError": {
       "description": "The error detail.",
@@ -38,7 +38,7 @@
             "$ref": "#/definitions/ArmError"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "additionalInfo": {
           "description": "The resource management error additional info.",
@@ -47,7 +47,7 @@
             "$ref": "#/definitions/ArmErrorAdditionalInfo"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         }
       }
     },
@@ -95,7 +95,7 @@
           "readOnly": true
         },
         "type": {
-          "description": "Resource type.",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\".",
           "type": "string",
           "readOnly": true
         },
@@ -196,6 +196,24 @@
       "description": "Common fields that are in the patch method request body of all Azure Resource Manager patch resources.",
       "type": "object"
     },
+    "IndirectRelationshipInfo": {
+      "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
+      "type": "object",
+      "properties": {
+        "billingAccountName": {
+          "description": "The billing account name of the partner or the customer for an indirect motion.",
+          "type": "string"
+        },
+        "billingProfileName": {
+          "description": "The billing profile name of the partner or the customer for an indirect motion. This field is not populated for Enterprise Agreement billing accounts.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the partner or customer for an indirect motion.",
+          "type": "string"
+        }
+      }
+    },
     "AzurePlan": {
       "description": "Details of the Azure plan.",
       "type": "object",
@@ -247,6 +265,15 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "associatedTenantName": {
+      "in": "path",
+      "name": "associatedTenantName",
+      "description": "The ID that uniquely identifies a tenant.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "x-ms-parameter-location": "method"
+    },
     "filter": {
       "in": "query",
       "name": "filter",
@@ -291,32 +318,14 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "associatedTenantName": {
-      "in": "path",
-      "name": "associatedTenantName",
-      "description": "The ID that uniquely identifies a tenant.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
-      "x-ms-parameter-location": "method"
-    },
     "billingProfileName": {
       "in": "path",
       "name": "billingProfileName",
       "description": "The ID that uniquely identifies a billing profile.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method",
-      "pattern": "^[a-z0-9]*$"
-    },
-    "invoiceSectionName": {
-      "in": "path",
-      "name": "invoiceSectionName",
-      "description": "The ID that uniquely identifies an invoice section.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "pattern": "^[a-z0-9]*$"
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+      "x-ms-parameter-location": "method"
     },
     "customerName": {
       "in": "path",
@@ -324,8 +333,35 @@
       "description": "The ID that uniquely identifies a customer.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method",
-      "pattern": "^[a-z0-9]*$"
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+      "x-ms-parameter-location": "method"
+    },
+    "invoiceSectionName": {
+      "in": "path",
+      "name": "invoiceSectionName",
+      "description": "The ID that uniquely identifies an invoice section.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+      "x-ms-parameter-location": "method"
+    },
+    "departmentName": {
+      "in": "path",
+      "name": "departmentName",
+      "description": "The name of the department.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+      "x-ms-parameter-location": "method"
+    },
+    "enrollmentAccountName": {
+      "in": "path",
+      "name": "enrollmentAccountName",
+      "description": "The name of the enrollment account.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+      "x-ms-parameter-location": "method"
     },
     "subscriptionId": {
       "in": "path",
@@ -342,8 +378,26 @@
       "description": "The ID that uniquely identifies a billing request.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method",
-      "pattern": "^[a-z0-9]*$"
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "x-ms-parameter-location": "method"
+    },
+    "billingRoleAssignmentName": {
+      "in": "path",
+      "name": "billingRoleAssignmentName",
+      "description": "The ID that uniquely identifies a role assignment.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$",
+      "x-ms-parameter-location": "method"
+    },
+    "roleDefinitionName": {
+      "in": "path",
+      "name": "roleDefinitionName",
+      "description": "The ID that uniquely identifies a role definition.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "x-ms-parameter-location": "method"
     },
     "billingSubscriptionName": {
       "in": "path",
@@ -352,24 +406,6 @@
       "required": true,
       "type": "string",
       "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
-      "x-ms-parameter-location": "method"
-    },
-    "enrollmentAccountName": {
-      "in": "path",
-      "name": "enrollmentAccountName",
-      "description": "The ID that uniquely identifies an enrollment account.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[1-9][0-9]*$",
-      "x-ms-parameter-location": "method"
-    },
-    "departmentName": {
-      "in": "path",
-      "name": "departmentName",
-      "description": "The ID that uniquely identifies the department.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[1-9][0-9]*$",
       "x-ms-parameter-location": "method"
     },
     "invoiceName": {

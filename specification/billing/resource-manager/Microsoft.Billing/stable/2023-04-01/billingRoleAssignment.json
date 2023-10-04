@@ -6,7 +6,7 @@
     "contact": {
       "name": "Microsoft.Billing",
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
-      "email": "cabbpt@microsoft.com"
+      "email": "pacebpexphot@microsoft.com"
     },
     "version": "2023-04-01"
   },
@@ -32,12 +32,7 @@
             "$ref": "./types.json#/parameters/billingProfileName"
           },
           {
-            "in": "path",
-            "name": "billingRoleAssignmentName",
-            "description": "The ID that uniquely identifies a role assignment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+            "$ref": "./types.json#/parameters/billingRoleAssignmentName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -83,12 +78,7 @@
             "$ref": "./types.json#/parameters/billingProfileName"
           },
           {
-            "in": "path",
-            "name": "billingRoleAssignmentName",
-            "description": "The ID that uniquely identifies a role assignment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+            "$ref": "./types.json#/parameters/billingRoleAssignmentName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -120,7 +110,7 @@
         "tags": [
           "BillingRoleAssignment"
         ],
-        "description": "Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "description": "Lists the role assignments for the caller on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -140,12 +130,6 @@
           },
           {
             "$ref": "./types.json#/parameters/filter"
-          },
-          {
-            "in": "query",
-            "name": "expand",
-            "description": "May be used to expand the participants.",
-            "type": "string"
           },
           {
             "$ref": "./types.json#/parameters/top"
@@ -183,7 +167,7 @@
         "tags": [
           "BillingRoleAssignment"
         ],
-        "description": "Adds a role assignment on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "description": "Adds a role assignment on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -226,10 +210,7 @@
             }
           },
           "202": {
-            "description": "The properties of the role assignment.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
+            "description": "The properties of the role assignment."
           },
           "default": {
             "description": "Default response",
@@ -239,6 +220,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "BillingRoleAssignmentCreateByBillingProfile": {
             "$ref": "./examples/billingRoleAssignmentCreateByBillingProfile.json"
@@ -270,12 +254,7 @@
             "$ref": "./types.json#/parameters/customerName"
           },
           {
-            "in": "path",
-            "name": "billingRoleAssignmentName",
-            "description": "The ID that uniquely identifies a role assignment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+            "$ref": "./types.json#/parameters/billingRoleAssignmentName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -324,12 +303,7 @@
             "$ref": "./types.json#/parameters/customerName"
           },
           {
-            "in": "path",
-            "name": "billingRoleAssignmentName",
-            "description": "The ID that uniquely identifies a role assignment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^([0-9]+|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$"
+            "$ref": "./types.json#/parameters/billingRoleAssignmentName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -390,12 +364,6 @@
           },
           {
             "$ref": "./types.json#/parameters/filter"
-          },
-          {
-            "in": "query",
-            "name": "expand",
-            "description": "May be used to expand the participants.",
-            "type": "string"
           },
           {
             "$ref": "./types.json#/parameters/top"
@@ -478,10 +446,7 @@
             }
           },
           "202": {
-            "description": "The properties of the role assignment.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
+            "description": "The properties of the role assignment."
           },
           "default": {
             "description": "Default response",
@@ -491,6 +456,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "BillingRoleAssignmentCreateByCustomer": {
             "$ref": "./examples/billingRoleAssignmentCreateByCustomer.json"
@@ -519,11 +487,7 @@
             "$ref": "./types.json#/parameters/billingProfileName"
           },
           {
-            "in": "path",
-            "name": "customerName",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "./types.json#/parameters/customerName"
           },
           {
             "in": "query",
@@ -550,9 +514,6 @@
           },
           "202": {
             "description": "The list of role assignments.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignmentListResult"
-            },
             "headers": {
               "Location": {
                 "type": "string"
@@ -567,6 +528,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "ResolveBillingRoleAssignmentByCustomer": {
             "$ref": "./examples/resolveBillingRoleAssignmentByCustomer.json"
@@ -598,12 +562,7 @@
             "$ref": "./types.json#/parameters/invoiceSectionName"
           },
           {
-            "in": "path",
-            "name": "billingRoleAssignmentName",
-            "description": "The ID that uniquely identifies a role assignment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+            "$ref": "./types.json#/parameters/billingRoleAssignmentName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -652,12 +611,7 @@
             "$ref": "./types.json#/parameters/invoiceSectionName"
           },
           {
-            "in": "path",
-            "name": "billingRoleAssignmentName",
-            "description": "The ID that uniquely identifies a role assignment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+            "$ref": "./types.json#/parameters/billingRoleAssignmentName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -718,12 +672,6 @@
           },
           {
             "$ref": "./types.json#/parameters/filter"
-          },
-          {
-            "in": "query",
-            "name": "expand",
-            "description": "May be used to expand the participants.",
-            "type": "string"
           },
           {
             "$ref": "./types.json#/parameters/top"
@@ -807,10 +755,7 @@
             }
           },
           "202": {
-            "description": "The properties of the role assignment.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
+            "description": "The properties of the role assignment."
           },
           "default": {
             "description": "Default response",
@@ -820,6 +765,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "BillingRoleAssignmentCreateByInvoiceSection": {
             "$ref": "./examples/billingRoleAssignmentCreateByInvoiceSection.json"
@@ -832,7 +780,7 @@
         "tags": [
           "BillingRoleAssignment"
         ],
-        "description": "Lists the role assignments for the caller on an invoice section while fetching user info for each role assignment. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
+        "description": "Lists the role assignments for the caller on an invoice section while fetching user info for each role assignment. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -875,9 +823,6 @@
           },
           "202": {
             "description": "The list of role assignments.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignmentListResult"
-            },
             "headers": {
               "Location": {
                 "type": "string"
@@ -892,6 +837,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "ResolveBillingRoleAssignmentByInvoiceSection": {
             "$ref": "./examples/resolveBillingRoleAssignmentByInvoiceSection.json"
@@ -904,7 +852,7 @@
         "tags": [
           "BillingRoleAssignment"
         ],
-        "description": "Lists the role assignments for the caller on an billing profile while fetching user info for each role assignment. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
+        "description": "Lists the role assignments for the caller on an billing profile while fetching user info for each role assignment. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -944,9 +892,6 @@
           },
           "202": {
             "description": "The list of role assignments.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignmentListResult"
-            },
             "headers": {
               "Location": {
                 "type": "string"
@@ -961,6 +906,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "ResolveBillingRoleAssignmentByBillingProfile": {
             "$ref": "./examples/resolveBillingRoleAssignmentByBillingProfile.json"
@@ -986,12 +934,7 @@
             "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "in": "path",
-            "name": "billingRoleAssignmentName",
-            "description": "The ID that uniquely identifies a role assignment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+            "$ref": "./types.json#/parameters/billingRoleAssignmentName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -1034,12 +977,7 @@
             "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "in": "path",
-            "name": "billingRoleAssignmentName",
-            "description": "The ID that uniquely identifies a role assignment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^([0-9]+|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$"
+            "$ref": "./types.json#/parameters/billingRoleAssignmentName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -1069,7 +1007,7 @@
         "tags": [
           "BillingRoleAssignment"
         ],
-        "description": "Create or update a billing role assignment.",
+        "description": "Create or update a billing role assignment. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -1085,12 +1023,7 @@
             "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "in": "path",
-            "name": "billingRoleAssignmentName",
-            "description": "The ID that uniquely identifies a role assignment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+            "$ref": "./types.json#/parameters/billingRoleAssignmentName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -1149,12 +1082,6 @@
             "$ref": "./types.json#/parameters/filter"
           },
           {
-            "in": "query",
-            "name": "expand",
-            "description": "May be used to expand the participants.",
-            "type": "string"
-          },
-          {
             "$ref": "./types.json#/parameters/top"
           },
           {
@@ -1190,7 +1117,7 @@
         "tags": [
           "BillingRoleAssignment"
         ],
-        "description": "Adds a role assignment on a billing account. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "description": "Adds a role assignment on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -1230,10 +1157,7 @@
             }
           },
           "202": {
-            "description": "The properties of the role assignment.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignment"
-            }
+            "description": "The properties of the role assignment."
           },
           "default": {
             "description": "Default response",
@@ -1243,6 +1167,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "BillingRoleAssignmentCreateByBillingAccount": {
             "$ref": "./examples/billingRoleAssignmentCreateByBillingAccount.json"
@@ -1265,24 +1192,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "billingAccountName",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "in": "path",
-            "name": "departmentName",
-            "description": "",
-            "required": true,
-            "type": "string"
+            "$ref": "./types.json#/parameters/departmentName"
           },
           {
-            "in": "path",
-            "name": "billingRoleAssignmentName",
-            "required": true,
-            "type": "string"
+            "$ref": "./types.json#/parameters/billingRoleAssignmentName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -1328,12 +1244,7 @@
             "$ref": "./types.json#/parameters/departmentName"
           },
           {
-            "in": "path",
-            "name": "billingRoleAssignmentName",
-            "description": "The ID that uniquely identifies a role assignment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+            "$ref": "./types.json#/parameters/billingRoleAssignmentName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -1363,7 +1274,7 @@
         "tags": [
           "BillingRoleAssignment"
         ],
-        "description": "Create or update a billing role assignment.",
+        "description": "Create or update a billing role assignment. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -1382,12 +1293,7 @@
             "$ref": "./types.json#/parameters/departmentName"
           },
           {
-            "in": "path",
-            "name": "billingRoleAssignmentName",
-            "description": "The ID that uniquely identifies a role assignment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+            "$ref": "./types.json#/parameters/billingRoleAssignmentName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -1497,12 +1403,7 @@
             "$ref": "./types.json#/parameters/enrollmentAccountName"
           },
           {
-            "in": "path",
-            "name": "billingRoleAssignmentName",
-            "description": "The ID that uniquely identifies a role assignment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+            "$ref": "./types.json#/parameters/billingRoleAssignmentName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -1548,12 +1449,7 @@
             "$ref": "./types.json#/parameters/enrollmentAccountName"
           },
           {
-            "in": "path",
-            "name": "billingRoleAssignmentName",
-            "description": "The ID that uniquely identifies a role assignment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+            "$ref": "./types.json#/parameters/billingRoleAssignmentName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -1583,7 +1479,7 @@
         "tags": [
           "BillingRoleAssignment"
         ],
-        "description": "Create or update a billing role assignment.",
+        "description": "Create or update a billing role assignment. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -1602,12 +1498,7 @@
             "$ref": "./types.json#/parameters/enrollmentAccountName"
           },
           {
-            "in": "path",
-            "name": "billingRoleAssignmentName",
-            "description": "The ID that uniquely identifies a role assignment.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$"
+            "$ref": "./types.json#/parameters/billingRoleAssignmentName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -1738,9 +1629,6 @@
           },
           "202": {
             "description": "The list of role assignments.",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignmentListResult"
-            },
             "headers": {
               "Location": {
                 "type": "string"
@@ -1755,6 +1643,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "ResolveBillingRoleAssignmentByBillingAccount": {
             "$ref": "./examples/resolveBillingRoleAssignmentByBillingAccount.json"
@@ -1815,19 +1706,24 @@
       "properties": {
         "createdOn": {
           "format": "date-time",
-          "type": "string"
+          "description": "The date the role assignment was created.",
+          "type": "string",
+          "readOnly": true
         },
         "createdByPrincipalTenantId": {
-          "type": "string"
+          "description": "The tenant Id of the user who created the role assignment.",
+          "type": "string",
+          "readOnly": true
         },
         "createdByPrincipalId": {
-          "type": "string"
-        },
-        "createdByPrincipalPuid": {
-          "type": "string"
+          "description": "The principal ID of the user who created the role assignment.",
+          "type": "string",
+          "readOnly": true
         },
         "createdByUserEmailAddress": {
-          "type": "string"
+          "description": "The email address of the user who created the role assignment. This is supported only for billing accounts with agreement type Enterprise Agreement.",
+          "type": "string",
+          "readOnly": true
         },
         "modifiedOn": {
           "format": "date-time",
@@ -1846,9 +1742,11 @@
           "type": "string"
         },
         "notificationContact": {
+          "description": "The Notification Contact person email address",
           "type": "string"
         },
         "notificationFrequency": {
+          "description": "Frequency of notification.",
           "enum": [
             "None",
             "Daily",
@@ -1856,43 +1754,49 @@
             "Weekly"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "NotificationFrequency",
             "modelAsString": true
           }
         },
-        "principalPuid": {
-          "type": "string"
-        },
         "principalId": {
+          "description": "The principal id of the user to whom the role was assigned.",
           "type": "string"
         },
         "principalTenantId": {
           "type": "string"
         },
         "roleDefinitionId": {
+          "description": "The ID of the role definition.",
           "minLength": 1,
           "type": "string"
         },
         "scope": {
-          "type": "string"
+          "description": "The scope at which the role was assigned.",
+          "type": "string",
+          "readOnly": true
         },
         "userAuthenticationType": {
+          "description": "The authentication type of the user, whether Organization or MSA, of the user to whom the role was assigned. This is supported only for billing accounts with agreement type Enterprise Agreement.",
           "type": "string"
         },
         "userEmailAddress": {
-          "type": "string"
-        },
-        "waeP_UserRoleId": {
+          "description": "The email address of the user to whom the role was assigned. This is supported only for billing accounts with agreement type Enterprise Agreement.",
           "type": "string"
         },
         "principalTenantName": {
-          "type": "string"
+          "description": "The friendly name of the tenant of the user to whom the role was assigned. This will be 'Primary Tenant' for the primary tenant of the billing account.",
+          "type": "string",
+          "readOnly": true
         },
         "principalDisplayName": {
-          "type": "string"
+          "description": "The display name of the principal to whom the role was assigned.",
+          "type": "string",
+          "readOnly": true
         },
         "principalType": {
+          "description": "The type of a role Assignment.",
           "enum": [
             "Unknown",
             "None",
@@ -1903,6 +1807,7 @@
             "Everyone"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "PrincipalType",
             "modelAsString": true

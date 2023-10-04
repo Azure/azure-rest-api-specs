@@ -6,7 +6,7 @@
     "contact": {
       "name": "Microsoft.Billing",
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
-      "email": "cabbpt@microsoft.com"
+      "email": "pacebpexphot@microsoft.com"
     },
     "version": "2023-04-01"
   },
@@ -37,12 +37,7 @@
             "pattern": "^[a-zA-Z\\d-_]{1,128}$"
           },
           {
-            "in": "path",
-            "name": "roleDefinitionName",
-            "description": "The ID that uniquely identifies a role definition.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+            "$ref": "./types.json#/parameters/roleDefinitionName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -141,12 +136,7 @@
             "$ref": "./types.json#/parameters/customerName"
           },
           {
-            "in": "path",
-            "name": "roleDefinitionName",
-            "description": "The ID that uniquely identifies a role definition.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+            "$ref": "./types.json#/parameters/roleDefinitionName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -248,12 +238,7 @@
             "$ref": "./types.json#/parameters/invoiceSectionName"
           },
           {
-            "in": "path",
-            "name": "roleDefinitionName",
-            "description": "The ID that uniquely identifies a role definition.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+            "$ref": "./types.json#/parameters/roleDefinitionName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -336,7 +321,7 @@
         "tags": [
           "BillingRoleDefinition"
         ],
-        "description": "Gets the definition for a role on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement",
+        "description": "Gets the definition for a role on a billing account. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -349,12 +334,7 @@
             "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "in": "path",
-            "name": "roleDefinitionName",
-            "description": "The ID that uniquely identifies a role definition.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+            "$ref": "./types.json#/parameters/roleDefinitionName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -447,12 +427,7 @@
             "$ref": "./types.json#/parameters/departmentName"
           },
           {
-            "in": "path",
-            "name": "roleDefinitionName",
-            "description": "The ID that uniquely identifies a role definition.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+            "$ref": "./types.json#/parameters/roleDefinitionName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -484,7 +459,7 @@
         "tags": [
           "BillingRoleDefinition"
         ],
-        "description": "Gets the definition for a department. The operation is supported for billing accounts with agreement type Enterprise Agreement.",
+        "description": "List the definition for a department. The operation is supported for billing accounts with agreement type Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -548,12 +523,7 @@
             "$ref": "./types.json#/parameters/enrollmentAccountName"
           },
           {
-            "in": "path",
-            "name": "roleDefinitionName",
-            "description": "The ID that uniquely identifies a role definition.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+            "$ref": "./types.json#/parameters/roleDefinitionName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -602,7 +572,7 @@
             "name": "accountName",
             "description": "The name of the enrollment account.",
             "type": "string",
-            "pattern": "^[1-9][0-9]*$"
+            "pattern": "^[a-zA-Z\\d-_]{1,128}$"
           },
           {
             "in": "path",
@@ -652,7 +622,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "notActions": {
           "description": "The set of actions that the caller is not allowed to perform.",
@@ -661,7 +631,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         }
       }
     },
@@ -727,7 +697,7 @@
             "$ref": "#/definitions/BillingPermission"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "roleName": {
           "description": "The name of the role.",
