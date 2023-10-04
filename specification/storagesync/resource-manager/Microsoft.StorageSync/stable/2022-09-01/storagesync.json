@@ -2723,6 +2723,98 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverId",
+            "in": "path",
+            "description": "GUID identifying the on-premises server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Body of Registered Server object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisteredServerUpdateParameters"
+            }
+          }
+        ],
+        "tags": [
+          "RegisteredServer Resource"
+        ],
+        "operationId": "RegisteredServers_Update",
+        "description": "Update registered server.",
+        "x-ms-examples": {
+          "RegisteredServers_Update": {
+            "$ref": "./examples/RegisteredServers_Update.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Registered Server resources in Sync Group",
+            "schema": {
+              "$ref": "#/definitions/RegisteredServer"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "parameters": [
           {
@@ -3346,6 +3438,10 @@
         }
       ],
       "properties": {
+        "identity": {
+          "description": "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code.",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageSyncServiceProperties",
@@ -3439,6 +3535,10 @@
           },
           "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
         },
+        "identity": {
+          "description": "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code.",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageSyncServiceCreateParametersProperties",
@@ -3493,6 +3593,10 @@
         "incomingTrafficPolicy": {
           "$ref": "#/definitions/IncomingTrafficPolicy",
           "description": "Incoming Traffic Policy"
+        },
+        "UseIdentity": {
+          "type": "boolean",
+          "description": "Use Identity authorization when customer have finished setup RBAC permissions."
         }
       }
     },
@@ -3617,6 +3721,22 @@
       },
       "description": "The parameters used when creating a registered server."
     },
+    "RegisteredServerUpdateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RegisteredServerUpdateParametersProperties",
+          "description": "The parameters used to update the registered server."
+        }
+      },
+      "description": "The parameters used when updating a registered server."
+    },
     "RegisteredServerCreateParametersProperties": {
       "description": "RegisteredServer Create Properties object.",
       "properties": {
@@ -3655,6 +3775,19 @@
         "friendlyName": {
           "type": "string",
           "description": "Friendly Name"
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "Server ServicePrincipal Id"
+        }
+      }
+    },
+    "RegisteredServerUpdateParametersProperties": {
+      "description": "RegisteredServer Update Properties object.",
+      "properties": {
+        "identity": {
+          "type": "boolean",
+          "description": "Apply server with newly discovered ApplicationId if available."
         }
       }
     },
@@ -3879,6 +4012,10 @@
         "fillGapWithZero": {
           "type": "boolean",
           "description": "Fill gaps in the metric with zero."
+        },
+        "lockAggregationType": {
+          "type": "string",
+          "description": "Lock Aggregation type for the metric."
         },
         "dimensions": {
           "type": "array",
@@ -4193,6 +4330,10 @@
           },
           "description": "The user-specified tags associated with the storage sync service."
         },
+        "identity": {
+          "description": "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code.",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageSyncServiceUpdateProperties",
@@ -4208,6 +4349,10 @@
         "incomingTrafficPolicy": {
           "$ref": "#/definitions/IncomingTrafficPolicy",
           "description": "Incoming Traffic Policy"
+        },
+        "UseIdentity": {
+          "type": "boolean",
+          "description": "Use Identity authorization when customer have finished setup RBAC permissions."
         }
       }
     },
@@ -4233,6 +4378,11 @@
           "readOnly": true,
           "type": "string",
           "description": "StorageSyncService Provisioning State"
+        },
+        "UseIdentity": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Use Identity authorization when customer have finished setup RBAC permissions."
         },
         "lastWorkflowId": {
           "readOnly": true,
@@ -4411,6 +4561,19 @@
         "serverName": {
           "type": "string",
           "description": "Server name",
+          "readOnly": true
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "Server Application Id"
+        },
+        "latestApplicationId": {
+          "type": "string",
+          "description": "Latest Server Application Id discovered from the server. It is not yet applied."
+        },
+        "activeAuthType": {
+          "$ref": "#/definitions/ServerAuthType",
+          "description": "Server auth type.",
           "readOnly": true
         }
       }
@@ -4597,6 +4760,10 @@
           "type": "string",
           "description": "Server name",
           "readOnly": true
+        },
+        "serverEndpointProvisioningStatus": {
+          "$ref": "#/definitions/ServerEndpointProvisioningStatus",
+          "description": "Server Endpoint provisioning status"
         }
       }
     },
@@ -4884,6 +5051,18 @@
       ],
       "x-ms-enum": {
         "name": "FeatureStatus",
+        "modelAsString": true
+      }
+    },
+    "ServerAuthType": {
+      "type": "string",
+      "description": "Type of the Server Auth type",
+      "enum": [
+        "certificate",
+        "managedidentity"
+      ],
+      "x-ms-enum": {
+        "name": "ServerAuthType",
         "modelAsString": true
       }
     },
@@ -5428,6 +5607,96 @@
       "x-ms-enum": {
         "name": "RegisteredServerAgentVersionStatus",
         "modelAsString": true
+      }
+    },
+    "ServerEndpointProvisioningStatus": {
+      "type": "object",
+      "description": "Server endpoint provisioning status information",
+      "properties": {
+        "provisioningStatus": {
+          "$ref": "#/definitions/ServerProvisioningStatus",
+          "description": "Server Endpoint provisioning status",
+          "readOnly": true
+        },
+        "provisioningType": {
+          "type": "string",
+          "description": "Server Endpoint provisioning type",
+          "readOnly": true
+        },
+        "provisioningStepStatuses": {
+          "type": "array",
+          "description": "Provisioning Step status information for each step in the provisioning process",
+          "items": {
+            "$ref": "#/definitions/ServerEndpointProvisioningStepStatus"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ServerProvisioningStatus": {
+      "type": "string",
+      "description": "Server provisioning status",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Ready_SyncNotFunctional",
+        "Ready_SyncFunctional",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "ServerProvisioningStatus",
+        "modelAsString": true
+      }
+    },
+    "ServerEndpointProvisioningStepStatus": {
+      "type": "object",
+      "description": "Server endpoint provisioning step status object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the provisioning step",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the provisioning step",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the provisioning step",
+          "readOnly": true
+        },
+        "minutesLeft": {
+          "type": "integer",
+          "description": "Estimated completion time of the provisioning step in minutes",
+          "readOnly": true
+        },
+        "progressPercentage": {
+          "type": "integer",
+          "description": "Estimated progress percentage",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the provisioning step",
+          "readOnly": true
+        },
+        "errorCode": {
+          "type": "integer",
+          "description": "Error code (HResult) for the provisioning step",
+          "readOnly": true
+        },
+        "additionalInformation": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Additional information for the provisioning step",
+          "readOnly": true
+        }
       }
     },
     "CloudEndpointChangeEnumerationStatus": {
