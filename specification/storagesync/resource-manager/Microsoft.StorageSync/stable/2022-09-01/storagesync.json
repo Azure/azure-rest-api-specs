@@ -3431,23 +3431,23 @@
     },
     "StorageSyncService": {
       "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageSyncServiceProperties",
+          "description": "Storage Sync Service properties."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "managed identities for the Storage Sync service to interact with other Azure services without maintaining any secrets or credentials in code."
+        }
+      },
       "description": "Storage Sync Service object.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
-      ],
-      "properties": {
-        "identity": {
-          "description": "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code.",
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/StorageSyncServiceProperties",
-          "description": "Storage Sync Service properties."
-        }
-      }
+      ]
     },
     "SyncGroup": {
       "type": "object",
@@ -3536,7 +3536,7 @@
           "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
         },
         "identity": {
-          "description": "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code.",
+          "description": "managed identities for the Storage Sync to interact with other Azure services without maintaining any secrets or credentials in code.",
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
@@ -3548,7 +3548,12 @@
       "required": [
         "location"
       ],
-      "description": "The parameters used when creating a storage sync service."
+      "description": "The parameters used when creating a storage sync service.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "SyncGroupCreateParameters": {
       "type": "object",
