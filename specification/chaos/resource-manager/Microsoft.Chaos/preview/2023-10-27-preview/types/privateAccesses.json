@@ -182,6 +182,21 @@
       },
       "description": "A collection of information about the state of the connection between service consumer and provider."
     },
+    "PrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
+      }
+    },
     "PrivateEndpointConnectionProperties": {
       "properties": {
         "privateEndpoint": {
@@ -192,6 +207,10 @@
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState",
           "description": "A collection of information about the state of the connection between PrivateAccess and Virtual Network."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "The provisioning state of the private endpoint connection resource."
         }
       },
       "required": [

@@ -353,6 +353,11 @@
           },
           "202": {
             "description": "Accepted",
+             "headers": {
+               "Location": {
+                 "type": "string"
+              }
+            },
             "schema": {
               "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnection"
             }
@@ -439,7 +444,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "If the private endpoint connection is already deleted, this is an expected error code."
