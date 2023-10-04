@@ -1001,7 +1001,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -1073,7 +1073,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     }
@@ -2058,7 +2058,8 @@
       "properties": {
         "networkFunctionApplicationName": {
           "type": "string",
-          "description": "Network function application name."
+          "description": "Network function application name.",
+          "required": true
         },
         "deploymentValues": {
           "type": "string",
@@ -2066,7 +2067,8 @@
         },
         "helmPackageVersion": {
           "type": "string",
-          "description": "The version of the helm package."
+          "description": "The version of the helm package.",
+          "required": true
         }
       }
     },
@@ -2075,7 +2077,8 @@
       "properties": {
         "networkFunctionApplicationName": {
           "type": "string",
-          "description": "Network function application name."
+          "description": "Network function application name.",
+          "required": true
         }
       }
     }
