@@ -19,7 +19,7 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Microsoft.AlicespringsDataplane management service",
-  version: "2023-10-4-preview",
+  version: "2023-10-04-preview",
 })
 @doc("Microsoft.AlicespringsDataplane Resource Provider management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
