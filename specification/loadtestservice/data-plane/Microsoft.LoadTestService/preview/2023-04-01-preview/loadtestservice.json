@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Load Testing",
     "version": "2023-04-01-preview",
-    "description": "These APIs allow end users to create, view and run load tests using Azure Load\nTest Service.",
+    "description": "These APIs allow end users to create, view and run load tests using Azure Load Test Service.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -1822,6 +1822,21 @@
         ]
       }
     },
+    "ContainerInfo": {
+      "type": "object",
+      "description": "Container info.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Container URL."
+        },
+        "expireDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry time of the container (ISO 8601 literal format)"
+        }
+      }
+    },
     "DimensionFilter": {
       "type": "object",
       "description": "Dimension name and values to filter",
@@ -1874,40 +1889,7 @@
           "format": "uri",
           "description": "Link for the next set of values in case of paginated results, if applicable"
         }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "Error": {
-      "type": "object",
-      "description": "Error from a REST request.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        },
-        "target": {
-          "type": "string",
-          "description": "The error target."
-        },
-        "details": {
-          "type": "array",
-          "description": "Additional details and inner errors.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
+      }
     },
     "ErrorDetails": {
       "type": "object",
@@ -1919,19 +1901,6 @@
           "readOnly": true
         }
       }
-    },
-    "ErrorResponseBody": {
-      "type": "object",
-      "description": "The definition of an error object.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "Error from a REST request."
-        }
-      },
-      "required": [
-        "error"
-      ]
     },
     "FileInfo": {
       "type": "object",
@@ -2724,7 +2693,6 @@
         }
       },
       "required": [
-        "id",
         "resourceId",
         "metricNamespace",
         "name",
@@ -3441,6 +3409,10 @@
         "logsFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
           "description": "File info"
+        },
+        "artifactsContainerInfo": {
+          "$ref": "#/definitions/ContainerInfo",
+          "description": "The container for test run artifacts."
         }
       }
     },

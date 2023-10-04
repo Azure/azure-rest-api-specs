@@ -21,10 +21,9 @@ using Azure.Core;
   }
 )
 @doc("""
-These APIs allow end users to create, view and run load tests using Azure Load
-Test Service.
+These APIs allow end users to create, view and run load tests using Azure Load Test Service.
 """)
-namespace Microsoft.LoadTestService; // currently it is Microsoft.LoadTestService
+namespace Microsoft.LoadTestService;
 
 @doc("Azure Load Testing API versions.")
 enum APIVersions {

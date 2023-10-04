@@ -421,32 +421,6 @@ model FileInfo {
   validationFailureDetails?: string;
 }
 
-@doc("The definition of an error object.")
-@error
-model ErrorResponseBody {
-  @doc("Error from a REST request.")
-  error: Error;
-
-  @header("x-ms-error-code")
-  @doc("The error code for specific error that occurred.")
-  errorCode?: string;
-}
-
-@doc("Error from a REST request.")
-model Error {
-  @doc("The error code.")
-  code: string;
-
-  @doc("The error message.")
-  message: string;
-
-  @doc("The error target.")
-  target?: string;
-
-  @doc("Additional details and inner errors.")
-  details?: Error[];
-}
-
 @doc("Collection of tests")
 @friendlyName("TestsList")
 model TestsList is Azure.Core.Page<Test>;
@@ -524,7 +498,7 @@ https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metric
 model ResourceMetric {
   @doc("Unique name for metric.")
   @visibility("read")
-  id: string;
+  id?: string;
 
   @doc("Azure resource id.")
   resourceId: string;
@@ -756,6 +730,20 @@ model TestRunOutputArtifacts {
 
   @doc("File info")
   logsFileInfo?: TestRunFileInfo;
+
+  @doc("The container for test run artifacts.")
+  @added(APIVersions.v2023_04_01_preview)
+  artifactsContainerInfo?: ContainerInfo;
+}
+
+@doc("Container info.")
+@added(APIVersions.v2023_04_01_preview)
+model ContainerInfo {
+  @doc("Container URL.")
+  url?: string;
+
+  @doc("Expiry time of the container (ISO 8601 literal format)")
+  expireDateTime?: utcDateTime;
 }
 
 @doc("Collection of test runs")
@@ -886,7 +874,7 @@ model DimensionValue {
 model DimensionValueList {
   @doc("The dimension name")
   @visibility("read")
-  name: string;
+  name?: string;
 
   @doc("The dimension value")
   value?: string[];
