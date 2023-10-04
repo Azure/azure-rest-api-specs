@@ -5,7 +5,15 @@
     "resourceGroupName": "resourceGroup1",
     "instanceName": "InsightInstance1",
     "insightInstanceUpdateRequestParameter": {
-      "tags": {}
+      "tags": {
+        "key": "value"
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/InsightsUserAssignedIdentity1": {}
+        }
+      }
     }
   },
   "responses": {
@@ -15,7 +23,9 @@
         "name": "InsightInstance1",
         "type": "Microsoft.Workloads/insights",
         "location": "westus",
-        "tags": {},
+        "tags": {
+          "key": "value"
+        },
         "systemData": {
           "createdBy": "user@xyz.com",
           "createdByType": "User",
@@ -23,6 +33,15 @@
           "lastModifiedBy": "user@xyz.com",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2021-08-19T15:10:46.196Z"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/InsightsUserAssignedIdentity1": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
         },
         "properties": {
           "provisioningState": "Succeeded",
@@ -166,7 +185,9 @@
         "name": "InsightInstance1",
         "type": "Microsoft.Workloads/insights",
         "location": "westus",
-        "tags": {},
+        "tags": {
+          "key": "value"
+        },
         "systemData": {
           "createdBy": "user@xyz.com",
           "createdByType": "User",
@@ -174,6 +195,15 @@
           "lastModifiedBy": "user@xyz.com",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2021-08-19T15:10:46.196Z"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/InsightsUserAssignedIdentity1": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
         },
         "properties": {
           "provisioningState": "Succeeded",

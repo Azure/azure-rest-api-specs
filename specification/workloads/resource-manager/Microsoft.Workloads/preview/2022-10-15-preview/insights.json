@@ -272,6 +272,10 @@
           "Insights"
         ],
         "operationId": "Insights_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "summary": "Patches tags field and managed identity field of Workload Insights instance.",
         "description": "Patches the tags field and managed identity field of Workload Insights instance for the specified subscription, resource group, and instance name.",
         "x-ms-examples": {
@@ -280,6 +284,9 @@
           },
           "Delete Tags field of a Workload Insights instance": {
             "$ref": "./examples/insights/insights_PatchTags_Delete.json"
+          },
+          "Update Managed Identity field of a Workload Insights instance": {
+            "$ref": "./examples/insights/insights_PatchMSI.json"
           }
         },
         "parameters": [
@@ -302,6 +309,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InsightInstance"
+            }
+          },
+          "202": {
+            "description": "Workload Insights Instance will be updated asynchronously.",
             "schema": {
               "$ref": "#/definitions/InsightInstance"
             }
