@@ -171,7 +171,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The create or update request was completed successfully",
+            "description": "The resource was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuppressionListResource"
+            }
+          },
+          "201": {
+            "description": "The resource was created successfully.",
             "schema": {
               "$ref": "#/definitions/SuppressionListResource"
             }
@@ -339,13 +345,6 @@
               "$ref": "#/definitions/SuppressionListAddressResource"
             }
           },
-          "404": {
-            "description": "The address was not found in the suppression list.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -403,7 +402,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The suppression list address object that was updated.",
+            "description": "The resource was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuppressionListAddressResource"
+            }
+          },
+          "201": {
+            "description": "The resource was created successfully.",
             "schema": {
               "$ref": "#/definitions/SuppressionListAddressResource"
             }
@@ -527,27 +532,11 @@
           "description": "The date the resource was created.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "SuppressionListRemoveRequest": {
-      "description": "Object that describes what address will be removed from the suppression list.",
-      "type": "object",
-      "required": [
-        "addresses"
-      ],
-      "properties": {
-        "suppressionListName": {
-          "description": "Optional parameter to operate on suppression list associated with a valid sender user name. When this parameter is not present, by default the domain level suppression list will be operated on.",
-          "type": "string"
         },
-        "addresses": {
-          "description": "List of email addresses to remove.",
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "string"
-          }
+        "dataLocation": {
+          "description": "The location where the SuppressionListAddress data is stored at rest. This value is inherited from the parent Domains resource.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -595,6 +584,11 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true
+        },
+        "dataLocation": {
+          "description": "The location where the SuppressionListAddress data is stored at rest. This value is inherited from the parent Domains resource.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -625,7 +619,8 @@
       "maxLength": 253,
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9-]+$"
     },
     "SuppressionListName": {
       "name": "suppressionListName",
@@ -635,7 +630,8 @@
       "maxLength": 253,
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9-]+$"
     }
   }
 }
