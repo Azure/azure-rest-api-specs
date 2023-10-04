@@ -2,7 +2,7 @@
   "parameters": {
     "endpoint": "https://myservice.search.windows.net",
     "indexName": "hotels",
-    "api-version": "2023-07-01-Preview"
+    "api-version": "2023-11-01"
   },
   "responses": {
     "200": {
@@ -21,6 +21,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -35,6 +37,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -49,6 +53,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -63,9 +69,9 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
-            "synonymMaps": [],
             "dimensions": 1536,
-            "vectorSearchConfiguration": "myHnswProfile"
+            "vectorSearchProfile": "myHnswProfile",
+            "synonymMaps": []
           },
           {
             "name": "description_fr",
@@ -79,6 +85,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": "fr.lucene",
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -93,6 +101,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -107,6 +117,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -121,6 +133,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": "tagsAnalyzer",
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -135,6 +149,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -149,6 +165,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -163,6 +181,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -177,6 +197,8 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           },
           {
@@ -191,26 +213,29 @@
             "indexAnalyzer": null,
             "searchAnalyzer": null,
             "analyzer": null,
+            "dimensions": null,
+            "vectorSearchProfile": null,
             "synonymMaps": []
           }
         ],
         "scoringProfiles": [
           {
             "name": "geo",
+            "functionAggregation": "sum",
             "text": {
               "weights": {
-                "hotelName": 5
+                "hotelName": 5.0
               }
             },
             "functions": [
               {
                 "type": "distance",
-                "boost": 5,
+                "boost": 5.0,
                 "fieldName": "location",
                 "interpolation": "logarithmic",
                 "distance": {
                   "referencePointParameter": "currentLocation",
-                  "boostingDistance": 10
+                  "boostingDistance": 10.0
                 }
               }
             ]
@@ -254,15 +279,62 @@
             "applicationSecret": null
           }
         },
+        "semantic": {
+          "configurations": [
+            {
+              "name": "semanticHotels",
+              "prioritizedFields": {
+                "titleField": {
+                  "fieldName": "hotelName"
+                },
+                "prioritizedContentFields": [
+                  {
+                    "fieldName": "description"
+                  },
+                  {
+                    "fieldName": "description_fr"
+                  }
+                ],
+                "prioritizedKeywordsFields": [
+                  {
+                    "fieldName": "tags"
+                  },
+                  {
+                    "fieldName": "category"
+                  }
+                ]
+              }
+            }
+          ]
+        },
         "vectorSearch": {
-          "algorithmConfigurations": [
+          "algorithms": [
             {
               "name": "myHnsw",
               "kind": "hnsw",
               "hnswParameters": {
+                "metric": "cosine",
                 "m": 4,
+                "efConstruction": 400,
+                "efSearch": 500
+              }
+            },
+            {
+              "name": "myExhaustive",
+              "kind": "exhaustiveKnn",
+              "exhaustiveKnnParameters": {
                 "metric": "cosine"
               }
+            }
+          ],
+          "profiles": [
+            {
+              "name": "myHnswProfile",
+              "algorithm": "myHnsw"
+            },
+            {
+              "name": "myAlgorithm",
+              "algorithm": "myExhaustive"
             }
           ]
         }
