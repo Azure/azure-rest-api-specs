@@ -294,7 +294,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -339,7 +339,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnection"
             },
             "description": "private endpoint connection object supplied in the body of the Put private endpoint connection operation."
           }
@@ -348,13 +348,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnection"
             }
           },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -398,7 +398,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -521,6 +521,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[^<>%&:?#/\\\\]+$",
       "description": "The name of the private endpoint connection.",
       "x-ms-parameter-location": "method"
     }
