@@ -261,7 +261,7 @@ in the request body.
   @summary("Stop test run by test run Id.")
   @doc("Stop test run by test run Id.")
   @example("./examples/StopTestRun.json", "Stop test run by name.")
-  @operationId("StopTestRun")
+  @operationId("LoadTestRun_StopTestRun")
   stop is StandardResourceOperations.ResourceAction<TestRun, {}, TestRun, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
