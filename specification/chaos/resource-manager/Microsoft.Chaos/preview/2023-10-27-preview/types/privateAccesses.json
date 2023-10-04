@@ -79,6 +79,22 @@
           "readOnly": true
         }
       }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of snapshots. Call ListNext() with this to fetch the next page of snapshots."
+        }
+      },
+      "description": "A list of private link resources"
     }
   }
 }
