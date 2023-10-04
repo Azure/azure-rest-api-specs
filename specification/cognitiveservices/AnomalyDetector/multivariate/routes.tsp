@@ -32,10 +32,9 @@ For asynchronous inference, get a multivariate anomaly detection result based on
 resultId value that the BatchDetectAnomaly API returns.
 """)
 op getMultivariateBatchDetectionResult(
-  @format("uuid")
   @doc("ID of a batch detection result.")
   @path
-  resultId: string,
+  resultId: uuid,
 ): MultivariateDetectionResult | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"

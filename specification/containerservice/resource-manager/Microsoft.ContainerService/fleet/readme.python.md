@@ -17,9 +17,10 @@ no-namespace-folders: true
 Generate all API versions currently shipped for this package
 
 ```yaml $(python)
-default-api-version: "2023-06-15-preview"
+default-api-version: "2023-08-15-preview"
 multiapi: true
 batch:
+  - tag: package-2023-08-preview
   - tag: package-2023-06-preview
   - tag: package-2023-03-preview
   - tag: package-2022-09-preview
@@ -32,6 +33,16 @@ batch:
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservicefleet/azure/mgmt/containerservicefleet/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-2023-08-preview and python
+
+These settings apply only when `--tag=package-2023-08-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-08-preview' && $(python)
+namespace: azure.mgmt.containerservicefleet.v2023_08_15_preview
+output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservicefleet/azure/mgmt/containerservicefleet/v2023_08_15_preview
 ```
 
 ### Tag: package-2023-06-preview and python
