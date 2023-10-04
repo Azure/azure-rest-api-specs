@@ -203,12 +203,6 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Private access resource created successfully.",
-            "schema": {
-              "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
-            }
-          },
           "200": {
             "description": "Private Access resource updated successfully.",
             "schema": {
@@ -343,7 +337,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "Long running update operation.",
             "schema": {
               "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnection"
             }
@@ -430,15 +424,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "If the private endpoint connection is already deleted, this is an expected error code."
+            "description": "Asynchronous delete operation."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
