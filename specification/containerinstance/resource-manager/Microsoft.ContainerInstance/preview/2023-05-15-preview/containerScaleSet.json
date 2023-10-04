@@ -124,7 +124,12 @@
             }
           },
           "202": {
-            "description": "Scale set update started"
+            "description": "Scale set update started",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -160,7 +165,12 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -370,8 +380,14 @@
           "type": "object",
           "description": "The list of user identities associated with the container scale set. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "additionalProperties": {
-            "x-nullable": true,
+            "type": "object",
             "$ref": "#/definitions/UserAssignedIdentityAdditionalProperties"
+          },
+          "properties": {
+            "name": {
+              "type": "null",
+              "description": "This property is not valid, Please DON'T use it."
+            }
           }
         }
       }
