@@ -2607,79 +2607,19 @@
         }
       }
     },
-    "JobMatchModeType": {
-      "type": "string",
-      "description": "Discriminator values for supported matching mode types.",
-      "enum": [
-        "queueAndMatchMode",
-        "scheduleAndSuspendMode",
-        "suspendMode"
-      ],
-      "x-ms-enum": {
-        "name": "JobMatchModeType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "queueAndMatchMode",
-            "value": "queueAndMatchMode",
-            "description": "Discriminator used when matching worker to a job is required to be done right after job is queued."
-          },
-          {
-            "name": "scheduleAndSuspendMode",
-            "value": "scheduleAndSuspendMode",
-            "description": "Discriminator used for scheduling jobs to be queued at a future time."
-          },
-          {
-            "name": "suspendMode",
-            "value": "suspendMode",
-            "description": "Discriminator used when matching workers to a job needs to be suspended."
-          }
-        ]
-      }
-    },
     "JobMatchingMode": {
       "type": "object",
       "description": "The matching mode to be applied to this job.\n            \nSupported types:\n    \n       \nQueueAndMatchMode: Used when matching worker to a job is required to be\ndone right after job is queued.\nScheduleAndSuspendMode: Used for scheduling\njobs to be queued at a future time. At specified time, matching of a worker to\nthe job will not start automatically.\nSuspendMode: Used when matching workers\nto a job needs to be suspended.",
       "properties": {
-        "modeType": {
-          "$ref": "#/definitions/JobMatchModeType",
-          "description": "Discriminator value used to differentiate between supported matching mode types."
-        },
-        "queueAndMatchMode": {
-          "$ref": "#/definitions/QueueAndMatchMode",
-          "description": "Describes a matching mode where matching worker to a job is automatically\nstarted after job is queued successfully."
-        },
-        "scheduleAndSuspendMode": {
-          "$ref": "#/definitions/ScheduleAndSuspendMode",
-          "description": "Describes a matching mode used for scheduling jobs to be queued at a future\ntime.\nAt the specified time, matching worker to a job will not start\nautomatically."
-        },
-        "suspendMode": {
-          "$ref": "#/definitions/SuspendMode",
-          "description": "Describes a matching mode where matching worker to a job is suspended."
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for JobMatchingMode."
         }
-      }
-    },
-    "JobMatchingModeCreateOrUpdate": {
-      "type": "object",
-      "description": "The matching mode to be applied to this job.\n            \nSupported types:\n    \n       \nQueueAndMatchMode: Used when matching worker to a job is required to be\ndone right after job is queued.\nScheduleAndSuspendMode: Used for scheduling\njobs to be queued at a future time. At specified time, matching of a worker to\nthe job will not start automatically.\nSuspendMode: Used when matching workers\nto a job needs to be suspended.",
-      "properties": {
-        "modeType": {
-          "$ref": "#/definitions/JobMatchModeType",
-          "description": "Discriminator value used to differentiate between supported matching mode types."
-        },
-        "queueAndMatchMode": {
-          "$ref": "#/definitions/QueueAndMatchMode",
-          "description": "Describes a matching mode where matching worker to a job is automatically\nstarted after job is queued successfully."
-        },
-        "scheduleAndSuspendMode": {
-          "$ref": "#/definitions/ScheduleAndSuspendModeCreateOrUpdate",
-          "description": "Describes a matching mode used for scheduling jobs to be queued at a future\ntime.\nAt the specified time, matching worker to a job will not start\nautomatically."
-        },
-        "suspendMode": {
-          "$ref": "#/definitions/SuspendMode",
-          "description": "Describes a matching mode where matching worker to a job is suspended."
-        }
-      }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "LabelOperator": {
       "type": "string",
@@ -2963,7 +2903,13 @@
     },
     "QueueAndMatchMode": {
       "type": "object",
-      "description": "Describes a matching mode where matching worker to a job is automatically started after job is queued successfully."
+      "description": "Describes a matching mode where matching worker to a job is automatically started after job is queued successfully.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobMatchingMode"
+        }
+      ],
+      "x-ms-discriminator-value": "queue-and-match"
     },
     "QueueLengthExceptionTrigger": {
       "type": "object",
@@ -3250,7 +3196,7 @@
           }
         },
         "matchingMode": {
-          "$ref": "#/definitions/JobMatchingModeCreateOrUpdate",
+          "$ref": "#/definitions/JobMatchingMode",
           "description": "The matching mode to be applied to this job.\n            \nSupported types:\n    \n       \nQueueAndMatchMode: Used when matching worker to a job is required to be\ndone right after job is queued.\nScheduleAndSuspendMode: Used for scheduling\njobs to be queued at a future time. At specified time, matching of a worker to\nthe job will not start automatically.\nSuspendMode: Used when matching workers\nto a job needs to be suspended."
         }
       }
@@ -3878,18 +3824,13 @@
       },
       "required": [
         "scheduleAt"
-      ]
-    },
-    "ScheduleAndSuspendModeCreateOrUpdate": {
-      "type": "object",
-      "description": "Describes a matching mode used for scheduling jobs to be queued at a future\ntime.\nAt the specified time, matching worker to a job will not start\nautomatically.",
-      "properties": {
-        "scheduleAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Scheduled time."
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobMatchingMode"
         }
-      }
+      ],
+      "x-ms-discriminator-value": "schedule-and-suspend"
     },
     "ScoringRuleOptions": {
       "type": "object",
@@ -3996,7 +3937,13 @@
     },
     "SuspendMode": {
       "type": "object",
-      "description": "Describes a matching mode where matching worker to a job is suspended."
+      "description": "Describes a matching mode where matching worker to a job is suspended.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobMatchingMode"
+        }
+      ],
+      "x-ms-discriminator-value": "suspend"
     },
     "UnassignJobRequest": {
       "type": "object",
