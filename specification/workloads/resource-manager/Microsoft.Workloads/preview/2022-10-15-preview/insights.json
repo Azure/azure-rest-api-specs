@@ -251,7 +251,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Deleting Workload Insights Instance."
+            "description": "Deleting Workload Insights Instance.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Workload Insights Instance does not exist."
@@ -312,6 +317,11 @@
           },
           "202": {
             "description": "Workload Insights Instance will be updated asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/InsightInstance"
             }
