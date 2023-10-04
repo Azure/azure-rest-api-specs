@@ -135,18 +135,6 @@ enum RouterWorkerSelectorStatus {
   expired,
 }
 
-@doc("Discriminator values for supported matching mode types.")
-enum JobMatchModeType {
-  @doc("Discriminator used when matching worker to a job is required to be done right after job is queued.")
-  queueAndMatchMode,
-  
-  @doc("Discriminator used for scheduling jobs to be queued at a future time.")
-  scheduleAndSuspendMode,
-  
-  @doc("Discriminator used when matching workers to a job needs to be suspended.")
-  suspendMode,
-}
-
 @doc("Enums used to filters jobs by state")
 enum RouterJobStatusSelector {
   @doc("Default")
@@ -559,27 +547,8 @@ the job will not start automatically.
 SuspendMode: Used when matching workers
 to a job needs to be suspended.
 """)
-model JobMatchingMode {
-  @doc("Discriminator value used to differentiate between supported matching mode types.")
-  modeType?: JobMatchModeType;
-
-  @doc("""
-Describes a matching mode where matching worker to a job is automatically
-started after job is queued successfully.
-""")
-  queueAndMatchMode?: QueueAndMatchMode;
-
-  @doc("""
-Describes a matching mode used for scheduling jobs to be queued at a future
-time.
-At the specified time, matching worker to a job will not start
-automatically.
-""")
-  scheduleAndSuspendMode?: ScheduleAndSuspendMode;
-
-  @doc("Describes a matching mode where matching worker to a job is suspended.")
-  suspendMode?: SuspendMode;
-}
+@discriminator("kind")
+model JobMatchingMode { }
 
 @doc("""
 Describes a matching mode used for scheduling jobs to be queued at a future
@@ -587,17 +556,28 @@ time.
 At the specified time, matching worker to a job will not start
 automatically.
 """)
-model ScheduleAndSuspendMode {
+model ScheduleAndSuspendMode extends JobMatchingMode {
   
   @doc("Scheduled time.")
   scheduleAt: utcDateTime;
+
+  @doc("The type discriminator describing ScheduleAndSuspendMode")
+  kind: "schedule-and-suspend";
 }
 
 @doc("Describes a matching mode where matching worker to a job is automatically started after job is queued successfully.")
-model QueueAndMatchMode {}
+model QueueAndMatchMode extends JobMatchingMode {
+
+  @doc("The type discriminator describing QueueAndMatchMode")
+  kind: "queue-and-match";
+}
 
 @doc("Describes a matching mode where matching worker to a job is suspended.")
-model SuspendMode {}
+model SuspendMode extends JobMatchingMode {
+  
+  @doc("The type discriminator describing SuspendMode")
+  kind: "suspend";
+}
 
 @doc("Request payload for deleting a job")
 model CancelJobRequest {
