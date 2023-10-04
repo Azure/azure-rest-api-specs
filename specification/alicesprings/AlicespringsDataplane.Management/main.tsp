@@ -33,7 +33,7 @@ interface E4k {
   get is ArmResourceRead<E4kResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<E4kResource>;
   update is ArmResourcePatchSync<E4kResource, E4kProperties>;
-  delete is ArmResourceDeleteAsync<E4kResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<E4kResource>;
   listByResourceGroup is ArmResourceListByParent<E4kResource>;
   listBySubscription is ArmListBySubscription<E4kResource>;
 }
@@ -44,7 +44,7 @@ interface Broker {
   get is ArmResourceRead<BrokerResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerResource>;
   update is ArmResourcePatchSync<BrokerResource, BrokerProperties>;
-  delete is ArmResourceDeleteAsync<BrokerResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<BrokerResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerResource>;
 }
 
@@ -57,7 +57,7 @@ interface BrokerListener {
     BrokerListenerResource,
     BrokerListenerProperties
   >;
-  delete is ArmResourceDeleteAsync<BrokerListenerResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<BrokerListenerResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerListenerResource>;
 }
 
@@ -70,7 +70,7 @@ interface BrokerAuthentication {
     BrokerAuthenticationResource,
     BrokerAuthenticationProperties
   >;
-  delete is ArmResourceDeleteAsync<BrokerAuthenticationResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthenticationResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerAuthenticationResource>;
 }
 
@@ -83,7 +83,7 @@ interface BrokerAuthorization {
     BrokerAuthorizationResource,
     BrokerAuthorizationProperties
   >;
-  delete is ArmResourceDeleteAsync<BrokerAuthorizationResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthorizationResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerAuthorizationResource>;
 }
 
@@ -96,7 +96,7 @@ interface MqttBridgeConnector {
     MqttBridgeConnectorResource,
     MqttBridgeConnectorProperties
   >;
-  delete is ArmResourceDeleteAsync<MqttBridgeConnectorResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<MqttBridgeConnectorResource>;
   listByResourceGroup is ArmResourceListByParent<MqttBridgeConnectorResource>;
 }
 
@@ -109,7 +109,7 @@ interface MqttBridgeTopicMap {
     MqttBridgeTopicMapResource,
     MqttBridgeTopicMapProperties
   >;
-  delete is ArmResourceDeleteAsync<MqttBridgeTopicMapResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<MqttBridgeTopicMapResource>;
   listByResourceGroup is ArmResourceListByParent<MqttBridgeTopicMapResource>;
 }
 
@@ -122,7 +122,7 @@ interface DiagnosticService {
     DiagnosticServiceResource,
     DiagnosticServiceProperties
   >;
-  delete is ArmResourceDeleteAsync<DiagnosticServiceResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DiagnosticServiceResource>;
   listByResourceGroup is ArmResourceListByParent<DiagnosticServiceResource>;
 }
 
@@ -135,7 +135,7 @@ interface DatalakeConnector {
     DatalakeConnectorResource,
     DatalakeConnectorProperties
   >;
-  delete is ArmResourceDeleteAsync<DatalakeConnectorResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DatalakeConnectorResource>;
   listByResourceGroup is ArmResourceListByParent<DatalakeConnectorResource>;
 }
 
@@ -148,6 +148,6 @@ interface DatalakeConnectorTopicMap {
     DatalakeConnectorTopicMapResource,
     DatalakeConnectorTopicMapProperties
   >;
-  delete is ArmResourceDeleteAsync<DatalakeConnectorTopicMapResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DatalakeConnectorTopicMapResource>;
   listByResourceGroup is ArmResourceListByParent<DatalakeConnectorTopicMapResource>;
 }
