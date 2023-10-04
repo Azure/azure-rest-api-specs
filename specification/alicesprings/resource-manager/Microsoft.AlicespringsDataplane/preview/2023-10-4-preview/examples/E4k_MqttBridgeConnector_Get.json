@@ -1,0 +1,68 @@
+{
+  "title": "MqttBridgeConnector_Get",
+  "operationId": "MqttBridgeConnector_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "e4kName": "test",
+    "mqttBridgeConnectorName": "test",
+    "api-version": "2023-07-17-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ExtendedLocation/customLocations/test",
+          "type": "CustomLocation"
+        },
+        "location": "test",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.AlicespringsDataplane/e4k/test/mqttBridgeConnector/test",
+        "type": "Microsoft.AlicespringsDataplane/e4k/mqttBridgeConnector",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2023-06-20T22:54:18.5423954Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-20T23:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "protocol": "v5",
+          "image": {
+            "repository": "sample.azurecr.io/mqttbridge",
+            "tag": "0.4.0",
+            "pullPolicy": "IfNotPresent"
+          },
+          "bridgeInstances": 1,
+          "clientIdPrefix": "factory-gateway-",
+          "logLevel": "debug",
+          "remoteBrokerConnection": {
+            "endpoint": "remoteeventgridnamespace.centraluseuap-1.ts.eventgrid.azure.net:8883",
+            "tls": {
+              "tlsEnabled": true,
+              "trustedCaCertificateName": "ca-cert-configmap"
+            },
+            "authentication": {
+              "x509": {
+                "clientK8sSecret": "bridge-connector-cert"
+              }
+            }
+          },
+          "localBrokerConnection": {
+            "endpoint": "azedge-dmqtt-frontend:1883",
+            "tls": {
+              "tlsEnabled": false
+            },
+            "authentication": {
+              "kubernetes": {
+                "serviceAccountTokenName": "sat",
+                "secretPath": "/var/run/serviceaccount/localbroker"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
