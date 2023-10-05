@@ -240,7 +240,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Long running create/update operation.",
+            "description": "Long running create experiment operation.",
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experiment"
+            }
+          },
+          "200": {
+            "description": "Long running update experiment operation.",
             "schema": {
               "$ref": "./types/experiments.json#/definitions/experiment"
             }
@@ -254,7 +260,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Create/update a Experiment in a resource group.": {
