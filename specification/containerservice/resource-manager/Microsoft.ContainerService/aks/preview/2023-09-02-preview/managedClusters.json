@@ -76,8 +76,8 @@
           "Usages"
         ],
         "operationId": "Usages_List",
-        "summary": "List containerservice usages for a specific locations",
-        "description": "We offer managed cluster count for now, new usages may add later.",
+        "summary": "List containerservice usages for a specific location",
+        "description": "Usages contains only cluster count usages now but may return additional usages in the future",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -8731,7 +8731,7 @@
         "limit",
         "name"
       ],
-      "description": "Describes Compute Resource Usage."
+      "description": "Describes container service resource usage."
     },
     "ListUsagesResult": {
       "properties": {
@@ -8741,11 +8741,11 @@
             "$ref": "#/definitions/Usage"
           },
           "x-ms-identifiers": [],
-          "description": "The list of compute resource usages."
+          "description": "The list of container service resource usages."
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
+          "description": "The URI to fetch the next page of container service resource usage information."
         }
       },
       "required": [
