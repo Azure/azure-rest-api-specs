@@ -449,7 +449,7 @@
         "x-ms-examples": {}
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/updates/manual/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/updates/{manual}/start": {
       "post": {
         "tags": [
           "ContainerScaleSets"
@@ -469,6 +469,13 @@
           },
           {
             "$ref": "#/parameters/ContainerScaleSetNameParameter"
+          },
+          {
+            "name": "manual",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "This value must be set to 'manual'."
           },
           {
             "name": "UpdateContainerGroupsRequest",
@@ -538,7 +545,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/updates/rolling/cancel": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/updates/{rolling}/cancel": {
       "post": {
         "tags": [
           "ContainerScaleSets"
@@ -557,6 +564,13 @@
           },
           {
             "$ref": "#/parameters/ContainerScaleSetNameParameter"
+          },
+          {
+            "name": "rolling",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "This value must be set to 'rolling'."
           }
         ],
         "responses": {
@@ -567,9 +581,6 @@
                 "type": "string"
               }
             }
-          },
-          "204": {
-            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
