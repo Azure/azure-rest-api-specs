@@ -591,7 +591,7 @@
                 ],
                 "responses": {
                     "202": {
-                        "description": "The service has accepted the cancel request and will begin processing it. RecognizeCanceled and/or PlayCanceled at your specified callback URI to update you on the status of the request, based on which media operation has been canceled by it."
+                        "description": "The service has accepted the cancel request and will begin processing it. You will receive the RecognizeCanceled and/or PlayCanceled event at your specified callback URI to update you on the status of the request, based on which media operation has been canceled by it."
                     },
                     "default": {
                         "description": "Error",
@@ -684,7 +684,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "The service has accepted the start continuous recognize request and will begin processing it. You will receive events at your specified callback URI to update you on the status of the request."
+                        "description": "The service has started continuous dtmf recognition. You will receive either the ContinuousDtmfRecognitionToneReceived, ContinuousDtmfRecognitionToneFailed or ContinuousDtmfRecognitionStopped event at your specified callback URI. Continuous dtmf recognition can run in parallel with other media operations. For example if the Recognize operation is also active and a dtmf is detected, both ContinuousDtmfRecognitionToneReceived and RecognizeCompleted events will be received."
                     },
                     "default": {
                         "description": "Error",
@@ -730,7 +730,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "The service has accepted the stop continuous recognize request and will begin processing it. You will receive events at your specified callback URI to update you on the status of the request."
+                        "description": "The service has stopped continuous dtmf recognition. If continuous dtmf recognition was previously started, you will receive the ContinuousDtmfRecognitionStopped event at your specified callback URI."
                     },
                     "default": {
                         "description": "Error",
@@ -777,7 +777,7 @@
                 ],
                 "responses": {
                     "202": {
-                        "description": "Returns the send dtmf response"
+                        "description": "The service has accepted the send dtmf request and will begin processing it. You will receive either the SendDtmfTonesCompleted or the SendDtmfTonesFailed event at your specified callback URI to update you on the status of the request."
                     },
                     "default": {
                         "description": "Error",
@@ -836,6 +836,100 @@
                 "x-ms-examples": {
                     "CallMedia_UpdateTranscriptionData": {
                         "$ref": "./examples/CallMedia_UpdateTranscriptionData.json"
+                    }
+                }
+            }
+        },
+        "/calling/callConnections/{callConnectionId}:startHoldMusic": {
+            "post": {
+                "tags": [
+                    "MidConnections"
+                ],
+                "summary": "Hold participant from the call using identifier.",
+                "description": "Hold participant from the call using identifier.",
+                "operationId": "CallMedia_StartHoldMusic",
+                "parameters": [
+                    {
+                        "name": "callConnectionId",
+                        "in": "path",
+                        "description": "The call connection id.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "startHoldMusicRequest",
+                        "in": "body",
+                        "description": "The participants to be hold from the call.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/StartHoldMusicRequest"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns the hold participant response"
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/CommunicationErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "CallMedia_StartHoldMusic": {
+                        "$ref": "./examples/CallMedia_StartHoldMusic.json"
+                    }
+                }
+            }
+        },
+        "/calling/callConnections/{callConnectionId}:stopHoldMusic": {
+            "post": {
+                "tags": [
+                    "MidConnections"
+                ],
+                "summary": "Unhold participants from the call using identifier.",
+                "description": "Unhold participants from the call using identifier.",
+                "operationId": "CallMedia_StopHoldMusic",
+                "parameters": [
+                    {
+                        "name": "callConnectionId",
+                        "in": "path",
+                        "description": "The call connection id.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "stopHoldMusicRequest",
+                        "in": "body",
+                        "description": "The participants to be hold from the call.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/StopHoldMusicRequest"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns the unhold participant response"
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/CommunicationErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "CallMedia_StopHoldMusic": {
+                        "$ref": "./examples/CallMedia_StopHoldMusic.json"
                     }
                 }
             }
@@ -1156,7 +1250,7 @@
                     }
                 ],
                 "responses": {
-                    "202": {
+                    "200": {
                         "description": "Returns the mute participants response",
                         "schema": {
                             "$ref": "#/definitions/MuteParticipantsResponse"
@@ -2343,6 +2437,49 @@
             "properties": {
                 "locale": {
                     "description": "Defines new locale for transcription.",
+                    "type": "string"
+                }
+            }
+        },
+        "StartHoldMusicRequest": {
+            "description": "The request payload for holding participant from the call.",
+            "required": [
+                "targetParticipant",
+                "playSourceInfo"
+            ],
+            "type": "object",
+            "properties": {
+                "targetParticipant": {
+                    "$ref": "#/definitions/CommunicationIdentifierModel",
+                    "description": "Participant to be held from the call."
+                },
+                "playSourceInfo": {
+                    "$ref": "#/definitions/PlaySource",
+                    "description": "Prompt to play while in hold."
+                },
+                "loop": {
+                    "description": "If the prompt will be looped or not.",
+                    "type": "boolean"
+                },
+                "operationContext": {
+                    "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+                    "type": "string"
+                }
+            }
+        },
+        "StopHoldMusicRequest": {
+            "description": "The request payload for holding participant from the call.",
+            "required": [
+                "targetParticipant"
+            ],
+            "type": "object",
+            "properties": {
+                "targetParticipant": {
+                    "$ref": "#/definitions/CommunicationIdentifierModel",
+                    "description": "Participants to be hold from the call.\r\nOnly ACS Users are supported."
+                },
+                "operationContext": {
+                    "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
                     "type": "string"
                 }
             }
