@@ -3,15 +3,15 @@
     "resourceGroupName": "rgcompute",
     "vmScaleSetName": "aaaaaaaaaaaaaa",
     "instanceId": "aaaaaaaaaaaa",
-    "api-version": "2023-07-01",
+    "api-version": "2023-09-01",
     "subscriptionId": "{subscription-id}",
     "parameters": {
-      "attachDataDisks": [
+      "dataDisksToAttach": [
         {
           "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d"
         }
       ],
-      "detachDataDisks": [
+      "dataDisksToDetach": [
         {
           "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_1_disk1_1a4e784bdafa49baa780eb2d128ff65x"
         }
@@ -20,16 +20,11 @@
   },
   "responses": {
     "200": {
+      "body": {
+        "location": "adfdf"
+      },
       "headers": {
         "location": "https://foo.com/operationstatus"
-      },
-      "body": {
-        "attachedDataDisks": [
-          {
-            "lun": 1,
-            "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d"
-          }
-        ]
       }
     },
     "202": {

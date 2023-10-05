@@ -3540,10 +3540,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The response will consists of the state of the VM which will be applied post the operation."
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVM"
+            }
           },
           "202": {
-            "description": "The response will consists when state is not provided."
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
