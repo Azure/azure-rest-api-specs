@@ -67,7 +67,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "SendMessageRequest",
             "description": "",
             "required": true,
             "schema": {
@@ -225,6 +225,11 @@
     },
     "SendResponseItem": {
       "description": "Sms Response containing metadata for a single recipient.",
+      "required": [
+        "httpStatusCode",
+        "to",
+        "successful"
+      ],
       "type": "object",
       "properties": {
         "to": {
@@ -234,7 +239,6 @@
           "type": "string"
         },
         "httpStatusCode": {
-          "format": "int32",
           "type": "integer"
         },
         "errorMessage": {
@@ -271,6 +275,9 @@
     },
     "SmsSendOptions": {
       "description": "Used for sending more options in send sms request",
+      "required": [
+        "enableDeliveryReport"
+      ],
       "type": "object",
       "properties": {
         "enableDeliveryReport": {
@@ -287,6 +294,9 @@
     },
     "SmsSendResponse": {
       "description": "Defines the Sms response send to the customer",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
