@@ -1916,26 +1916,26 @@
     },
     "AttachDetachDataDisksRequest": {
       "properties": {
-        "attachDataDisks": {
+        "dataDisksToAttach": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/AttachDataDisk"
+            "$ref": "#/definitions/DataDisksToAttach"
           },
           "description": "The list of managed data disks to be attached."
         },
-        "detachDataDisks": {
+        "dataDisksToDetach": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/DetachDataDisk"
+            "$ref": "#/definitions/DataDisksToDetach"
           },
           "description": "The list of managed data disks to be detached."
         }
       },
       "description": "Specifies the input for attaching and detaching a list of managed data disks."
     },
-    "AttachDataDisk": {
+    "DataDisksToAttach": {
       "properties": {
         "diskId": {
           "type": "string",
@@ -1951,7 +1951,7 @@
       ],
       "description": "Describes the data disk to be attached."
     },
-    "DetachDataDisk": {
+    "DataDisksToDetach": {
       "properties": {
         "diskId": {
           "type": "string",
