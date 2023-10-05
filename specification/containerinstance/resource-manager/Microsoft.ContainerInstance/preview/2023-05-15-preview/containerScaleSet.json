@@ -298,6 +298,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/restart": {
       "post": {
+        "tags": [
+          "ContainerScaleSets"
+        ],
         "operationId": "ContainerGroups_Restart",
         "summary": "Restart given Container Groups in a Container Scale Set.",
         "description": "Restart given Container Groups in a Container Scale Set",
@@ -340,6 +343,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/stop": {
       "post": {
+        "tags": [
+          "ContainerScaleSets"
+        ],
         "operationId": "ContainerGroups_Stop",
         "summary": "Stop given Container Groups in a Container Scale Set.",
         "description": "Stop given Container Groups in a Container Scale Set",
@@ -383,6 +389,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/start": {
       "post": {
         "operationId": "ContainerGroups_Restart",
+        "tags": [
+          "ContainerScaleSets"
+        ],
         "summary": "Start given Container Groups in a Container Scale Set.",
         "description": "Start given Container Groups in a Container Scale Set",
         "parameters": [
@@ -406,6 +415,127 @@
             "schema": {
               "$ref": "#/definitions/ContainerGroupsActionRequest"
             }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/updates/manual/start": {
+      "post": {
+        "tags": [
+          "ContainerScaleSets"
+        ],
+        "operationId": "ContainerGroups_Restart",
+        "summary": "Update given Container Groups in a Container Scale Set.",
+        "description": "Update given Container Groups in a Container Scale Set",
+        "parameters": [
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerScaleSetNameParameter"
+          },
+          {
+            "name": "UpdateContainerGroupsRequest",
+            "in": "body",
+            "description": "The request for updating the Container Groups.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupsActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/updates/rolling/latest": {
+      "get": {
+        "tags": [
+          "ContainerScaleSets"
+        ],
+        "operationId": "ContainerScaleSets_RollingLatest",
+        "description": "Gets current rolling update status.",
+        "x-ms-examples": {},
+        "parameters": [
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerScaleSetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RollingUpdate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/updates/rolling/cancel": {
+      "post": {
+        "tags": [
+          "ContainerScaleSets"
+        ],
+        "operationId": "ContainerScaleSets_RollingCancel",
+        "description": "Cancel current rolling update.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerScaleSetNameParameter"
           }
         ],
         "responses": {
@@ -910,6 +1040,92 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "RollingUpdate": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "type": "object",
+          "$ref": "#/definitions/RollingUpdateProfile"
+        },
+        "progress": {
+          "type": "object",
+          "$ref": "#/definitions/RollingUpdateProgress"
+        },
+        "lastAction": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Start",
+            "Pause",
+            "Resume",
+            "Cancel"
+          ],
+          "x-ms-enum": {
+            "name": "Scheme",
+            "modelAsString": true
+          }
+        },
+        "lastActionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        }
+      }
+    },
+    "RollingUpdateProgress": {
+      "type": "object",
+      "properties": {
+        "containerGroupsUpdateSummary": {
+          "type": "object",
+          "$ref": "#/definitions/ContainerGroupsUpdateSummary"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Start",
+            "Pause",
+            "Resume",
+            "Cancel"
+          ],
+          "x-ms-enum": {
+            "name": "Scheme",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "finishTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "error": {
+          "type": "object",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "ContainerGroupsUpdateSummary": {
+      "type": "object",
+      "properties": {
+        "succeededCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "failedCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pendingCount": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     }
