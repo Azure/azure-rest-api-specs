@@ -2373,6 +2373,9 @@
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The identity of the resource."
         },
+        "kind": {
+          "type": "string"
+        },
         "location": {
           "description": "Specifies the location of the resource.",
           "type": "string"
@@ -2547,6 +2550,10 @@
         },
         "managedNetwork": {
           "$ref": "#/definitions/ManagedNetworkSettings"
+        },
+        "featureStoreSettings": {
+          "description": "Settings for feature store type workspace.",
+          "$ref": "#/definitions/FeatureStoreSettings"
         }
       }
     },
@@ -2623,6 +2630,10 @@
         "containerRegistry": {
           "description": "ARM id of the container registry associated with this workspace.",
           "type": "string"
+        },
+        "featureStoreSettings": {
+          "description": "Settings for feature store type workspace.",
+          "$ref": "#/definitions/FeatureStoreSettings"
         }
       }
     },
@@ -6797,6 +6808,28 @@
           "x-ms-identifiers": [
             "/properties/category"
           ]
+        }
+      }
+    },
+    "FeatureStoreSettings": {
+      "type": "object",
+      "properties": {
+        "computeRuntime": {
+          "$ref": "#/definitions/ComputeRuntimeDto"
+        },
+        "offlineStoreConnectionName": {
+          "type": "string"
+        },
+        "onlineStoreConnectionName": {
+          "type": "string"
+        }
+      }
+    },
+    "ComputeRuntimeDto": {
+      "type": "object",
+      "properties": {
+        "sparkRuntimeVersion": {
+          "type": "string"
         }
       }
     }
