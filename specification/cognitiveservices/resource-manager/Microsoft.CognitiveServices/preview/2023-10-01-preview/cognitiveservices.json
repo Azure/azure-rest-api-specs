@@ -1364,7 +1364,7 @@
           "Deployments"
         ],
         "operationId": "Deployments_Update",
-        "description": "Update the sku of specified deployments associated with the Cognitive Services account.",
+        "description": "Update specified deployments associated with the Cognitive Services account.",
         "x-ms-examples": {
           "UpdateDeployment": {
             "$ref": "./examples/UpdateDeployment.json"
@@ -1391,14 +1391,14 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Sku"
+              "$ref": "#/definitions/PatchResourceTagsAndSku"
             },
             "description": "The deployment properties."
           }
         ],
         "responses": {
           "200": {
-            "description": "Update the deployment sku successfully.",
+            "description": "Updated the deployment successfully.",
             "schema": {
               "$ref": "#/definitions/Deployment"
             }
@@ -1480,7 +1480,7 @@
         "description": "Lists the specified deployments skus associated with the Cognitive Services account.",
         "x-ms-examples": {
           "GetDeployment": {
-            "$ref": "./examples/Deployments_ListSkus.json"
+            "$ref": "./examples/ListDeploymentSku.json"
           }
         },
         "parameters": [
@@ -3385,7 +3385,8 @@
         "allowedValues": {
           "type": "array",
           "items": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           "description": "The array of allowed values for capacity."
         }
@@ -4411,7 +4412,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeploymentSku"
+            "$ref": "#/definitions/SkuResource"
           },
           "x-ms-identifiers": [
             "resourceType"
@@ -4421,12 +4422,12 @@
       },
       "description": "The list of cognitive services accounts operation response."
     },
-    "DeploymentSku": {
+    "SkuResource": {
       "type": "object",
       "properties": {
         "resourceType": {
           "type": "string",
-          "description": "Deployment resource type."
+          "description": "The resource type name."
         },
         "sku": {
           "$ref": "#/definitions/Sku"
@@ -4435,7 +4436,7 @@
           "$ref": "#/definitions/CapacityConfig"
         }
       },
-      "description": "Properties of Cognitive Services account deployment sku."
+      "description": "Properties of Cognitive Services account resource sku resource properties."
     },
     "CommitmentTierListResult": {
       "type": "object",
@@ -5285,6 +5286,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The name of the deployment associated with the Cognitive Services Account",
       "x-ms-parameter-location": "method"
     },
