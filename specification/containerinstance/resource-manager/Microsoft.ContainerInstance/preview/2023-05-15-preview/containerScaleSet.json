@@ -511,9 +511,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -815,7 +812,7 @@
       }
     },
     "Container": {
-      "type":"object",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string"
@@ -833,7 +830,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VolumeMount"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -941,7 +941,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FileShare"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
