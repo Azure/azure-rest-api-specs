@@ -103,7 +103,6 @@
       "properties": {
         "from": {
           "description": "The from identifier that is owned by the authenticated account. Typically in E.164 phone number format or shortcode.",
-          "minLength": 1,
           "type": "string"
         },
         "recipients": {
@@ -199,14 +198,12 @@
       "properties": {
         "from": {
           "description": "The from phone number in E.164 format that is owned by the authenticated account.",
-          "maxLength": 255,
-          "minLength": 1,
           "type": "string"
         },
         "smsRecipients": {
           "description": "The to phone numbers in E.164 format.",
-          "maxItems": 100,
-          "minItems": 1,
+          "maxLength": 100,
+          "minLength": 1,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SmsRecipient"
@@ -268,7 +265,6 @@
         },
         "to": {
           "description": "The recipient's phone number in E.164 format.",
-          "minLength": 1,
           "type": "string"
         }
       }
@@ -286,8 +282,6 @@
         },
         "tag": {
           "description": "Get or Set the Customer Content\r\nShould not be logged.",
-          "maxLength": 255,
-          "minLength": 0,
           "type": "string"
         }
       }
