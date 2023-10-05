@@ -36,7 +36,7 @@
   ],
   "security": [
     {
-      "ApiKeyAuth": []
+      "http": []
     },
     {
       "OAuth2Auth": [
@@ -45,11 +45,6 @@
     }
   ],
   "securityDefinitions": {
-    "ApiKeyAuth": {
-      "type": "apiKey",
-      "name": "SharedAccessKey",
-      "in": "header"
-    },
     "OAuth2Auth": {
       "type": "oauth2",
       "flow": "implicit",
@@ -57,6 +52,9 @@
       "scopes": {
         "https://eventgrid.azure.net/.default": ""
       }
+    },
+    "http": {
+      "type": "basic"
     }
   },
   "tags": [],

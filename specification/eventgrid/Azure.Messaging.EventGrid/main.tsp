@@ -4,7 +4,10 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey"> | OAuth2Auth<[
+  {
+    type: AuthType.http,
+    scheme: "SharedAccessKey",
+  } | OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
@@ -34,7 +37,7 @@ import "@azure-tools/typespec-azure-core";
 )
 @doc("Azure Messaging EventGrid Client")
 @versioned(ServiceApiVersions)
-namespace EventGrid {
+namespace Microsoft.EventGrid {
   using TypeSpec.Http;
   using TypeSpec.Rest;
   using TypeSpec.Versioning;
