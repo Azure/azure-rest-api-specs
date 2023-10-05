@@ -305,6 +305,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "format": "arm-id",
       "description": "The identifier of the resource.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
@@ -314,7 +315,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The region where the metrics you want reside.",
+      "description": "The region where the metrics you want reside. For example: eastus, westeurope, etc",
       "x-ms-parameter-location": "method"
     },
     "MetricNamespaceParameter": {
@@ -330,9 +331,8 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "format": "duration",
       "default": "PT1M",
-      "description": "The interval (i.e. timegrain) of the query.\n*Examples: PT15M, PT1H, P1D*",
+      "description": "The interval (i.e. timegrain) of the query in ISO 8601 duration format. Special case for 'FULL' value that returns single datapoint for entire time span requested.\n*Examples: PT15M, PT1H, P1D*, FULL",
       "x-ms-parameter-location": "method"
     },
     "MetricNamesParameter": {
