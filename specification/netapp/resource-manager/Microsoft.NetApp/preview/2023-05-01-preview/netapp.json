@@ -879,11 +879,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK - terminal state"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1576,11 +1578,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK - terminal state"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed."
@@ -3173,7 +3177,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -3216,7 +3223,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -3250,17 +3260,22 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously"
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent -- Resource does not exist."
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -4976,9 +4991,6 @@
               }
             }
           },
-          "204": {
-            "description": "Accepted"
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -5042,9 +5054,6 @@
                 "type": "string"
               }
             }
-          },
-          "204": {
-            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
