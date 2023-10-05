@@ -3582,13 +3582,13 @@
         "machines": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ManualScaleMachineSpec"
+            "$ref": "#/definitions/ManualScaleMachines"
           },
           "description": "Specifications on how to scale the AgentPool."
         }
       }
     },
-    "ManualScaleMachineSpec": {
+    "ManualScaleMachines": {
       "type": "object",
       "properties": {
         "sizes": {
@@ -3600,7 +3600,9 @@
         "count": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of nodes (VMs). Allowed values must be in the range of 0 to 1000 (inclusive)."
+          "minimum": 1,
+          "maximum": 1000,
+          "description": "Number of nodes."
         }
       },
       "description": "Specifications on how to scale the AgentPool."
