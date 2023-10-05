@@ -1089,6 +1089,32 @@
       },
       "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine. Minimum api-version: 2020-12-01."
     },
+    "ProxyAgentSettings": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "This property allows user to enable or disable ProxyAgent feature for the virtual machine or virtual machine scale set."
+        },
+        "mode": {
+          "type": "string",
+          "description": "Specifies the mode that ProxyAgent will execute on if the feature is enabled. ProxyAgent will start to audit or monitor but not enforce access control over requests to host endpoints in Audit mode, while in Enforce mode it will enforce access control. The default value is Enforce mode.",
+          "enum": [
+            "Audit",
+            "Enforce"
+          ],
+          "x-ms-enum": {
+            "name": "Mode",
+            "modelAsString": true
+          }
+        },
+        "keyIncarnationId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Increase the value of this property allows user to reset the key used for securing communication channel between guest and host."
+        }
+      },
+      "description": "Specifies ProxyAgent settings while creating the virtual machine. Minimum api-version: 2023-09-01."
+    },
     "SecurityProfile": {
       "properties": {
         "uefiSettings": {
@@ -1110,6 +1136,10 @@
             "name": "SecurityTypes",
             "modelAsString": true
           }
+        },
+        "proxyAgentSettings": {
+          "$ref": "#/definitions/ProxyAgentSettings",
+          "description": "Specifies ProxyAgent settings while creating the virtual machine. Minimum api-version: 2023-09-01."
         }
       },
       "description": "Specifies the Security profile settings for the virtual machine or virtual machine scale set."
