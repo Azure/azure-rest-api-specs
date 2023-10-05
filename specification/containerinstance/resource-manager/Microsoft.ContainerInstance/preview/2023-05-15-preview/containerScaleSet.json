@@ -295,6 +295,132 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/restart": {
+      "post": {
+        "operationId": "ContainerGroups_Restart",
+        "summary": "Restart given Container Groups in a Container Scale Set.",
+        "description": "Restart given Container Groups in a Container Scale Set",
+        "parameters": [
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerScaleSetNameParameter"
+          },
+          {
+            "name": "RestartContainerGroupsRequest",
+            "in": "body",
+            "description": "The request for restarting the Container Groups.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupsActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/stop": {
+      "post": {
+        "operationId": "ContainerGroups_Stop",
+        "summary": "Stop given Container Groups in a Container Scale Set.",
+        "description": "Stop given Container Groups in a Container Scale Set",
+        "parameters": [
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerScaleSetNameParameter"
+          },
+          {
+            "name": "StopContainerGroupsRequest",
+            "in": "body",
+            "description": "The request for stopping the Container Groups.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupsActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/start": {
+      "post": {
+        "operationId": "ContainerGroups_Restart",
+        "summary": "Start given Container Groups in a Container Scale Set.",
+        "description": "Start given Container Groups in a Container Scale Set",
+        "parameters": [
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerScaleSetNameParameter"
+          },
+          {
+            "name": "StartContainerGroupsRequest",
+            "in": "body",
+            "description": "The request for starting the Container Groups.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupsActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -414,7 +540,7 @@
         "containerGroupProfiles": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ContainerGroupProfileStub"
+            "$ref": "#/definitions/ContainerGroupProfile"
           },
           "x-ms-identifiers": [],
           "description": "The Container Group Profiles that could be used in a Container Scale Set."
@@ -423,6 +549,10 @@
           "readOnly": true,
           "type": "string",
           "description": "The provisioning state, which only appears in the response."
+        },
+        "updateProfile": {
+          "type": "object",
+          "$ref": "#/definitions/UpdateProfile"
         }
       },
       "description": "Describes the properties of a Container Scale Set."
@@ -433,15 +563,41 @@
         "desiredCount": {
           "type": "integer",
           "format": "int32"
+        },
+        "maintainDesiredCount": {
+          "type": "boolean",
+          "description": "Flag that indicates whether desiredCount should be maintained when customer deletes SPECIFIC container groups (CGs).",
+          "x-nullable": true
+        },
+        "containerGroupNamingPolicy": {
+          "type": "object",
+          "$ref": "#/definitions/ContainerGroupNamingPolicy"
         }
       },
       "description": "Describes the elastic profile of the Container Scale Set"
     },
-    "ContainerGroupProfileStub": {
+    "ContainerGroupProfile": {
       "type": "object",
       "properties": {
         "resource": {
           "$ref": "#/definitions/ApiEntityReference"
+        },
+        "revision": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "containerGroupProperties": {
+          "type": "object",
+          "$ref": "#/definitions/ContainerGroupProperties"
+        },
+        "networkProfile": {
+          "type": "object",
+          "$ref": "#/definitions/NetworkProfile"
+        },
+        "storageProfile": {
+          "type": "object",
+          "$ref": "#/definitions/StorageProfile"
         }
       },
       "description": "The object that contains a reference to a Container Group Profile"
@@ -455,6 +611,307 @@
         }
       },
       "description": "The API entity reference."
+    },
+    "ContainerGroupProperties": {
+      "type": "object",
+      "properties": {
+        "subnetIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subnet"
+          }
+        },
+        "volumes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          }
+        },
+        "containers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Container"
+          }
+        },
+        "ipAddress": {
+          "type": "object",
+          "$ref": "#/definitions/IPAddress"
+        }
+      }
+    },
+    "Subnet": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "description": "The friendly name of the Subnet"
+        }
+      }
+    },
+    "Volume": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "azureFile": {
+          "type": "object",
+          "$ref": "#/definitions/AzureFileVolume"
+        }
+      }
+    },
+    "AzureFileVolume": {
+      "type": "object",
+      "properties": {
+        "shareName": {
+          "type": "string"
+        },
+        "storageAccountName": {
+          "type": "string"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "x-nullable": true
+        }
+      }
+    },
+    "Container": {
+      "type":"object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/ContainerProperties"
+        }
+      }
+    },
+    "ContainerProperties": {
+      "type": "object",
+      "properties": {
+        "volumeMounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VolumeMount"
+          }
+        }
+      }
+    },
+    "VolumeMount": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "mountPath": {
+          "type": "string"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "x-nullable": true
+        }
+      }
+    },
+    "IPAddress": {
+      "type": "object",
+      "properties": {
+        "dnsNameLabelPrefix": {
+          "type": "string"
+        }
+      }
+    },
+    "ContainerGroupNamingPolicy": {
+      "type": "object",
+      "properties": {
+        "guidNamingPolicy": {
+          "type": "object",
+          "$ref": "#/definitions/GuidNamingPolicy"
+        }
+      }
+    },
+    "GuidNamingPolicy": {
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "type": "string"
+        }
+      }
+    },
+    "NetworkProfile": {
+      "type": "object",
+      "properties": {
+        "loadBalancer": {
+          "type": "object",
+          "$ref": "#/definitions/LoadBalancer"
+        },
+        "applicationGateway": {
+          "type": "object",
+          "$ref": "#/definitions/ApplicationGateway"
+        }
+      }
+    },
+    "LoadBalancer": {
+      "type": "object",
+      "properties": {
+        "backendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerBackendAddressPool"
+          }
+        }
+      }
+    },
+    "LoadBalancerBackendAddressPool": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "type": "object",
+          "$ref": "#/definitions/ApiEntityReference"
+        }
+      }
+    },
+    "ApplicationGateway": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "type": "object",
+          "$ref": "#/definitions/ApiEntityReference"
+        },
+        "backendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendAddressPool"
+          }
+        }
+      }
+    },
+    "ApplicationGatewayBackendAddressPool": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "type": "object",
+          "$ref": "#/definitions/ApiEntityReference"
+        }
+      }
+    },
+    "StorageProfile": {
+      "type": "object",
+      "properties": {
+        "fileShares": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileShare"
+          }
+        }
+      }
+    },
+    "FileShare": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "type": "string"
+        },
+        "storageAccountName": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/FileShareProperties"
+        }
+      }
+    },
+    "FileShareProperties": {
+      "type": "object",
+      "properties": {
+        "shareAccessType": {
+          "type": "string",
+          "enum": [
+            "Shared",
+            "Exclusive"
+          ],
+          "x-ms-enum": {
+            "name": "Scheme",
+            "modelAsString": true
+          },
+          "x-nullable": true
+        },
+        "shareAccessTier": {
+          "type": "string",
+          "enum": [
+            "Cool",
+            "Hot",
+            "Premium",
+            "TransactionOptimized"
+          ],
+          "x-ms-enum": {
+            "name": "Scheme",
+            "modelAsString": true
+          },
+          "x-nullable": true
+        }
+      }
+    },
+    "UpdateProfile": {
+      "type": "object",
+      "properties": {
+        "updateMode": {
+          "type": "string",
+          "enum": [
+            "Manual",
+            "Rolling"
+          ],
+          "x-ms-enum": {
+            "name": "Scheme",
+            "modelAsString": true
+          },
+          "x-nullable": true
+        },
+        "rollingUpdateProfile": {
+          "type": "object",
+          "$ref": "#/definitions/RollingUpdateProfile"
+        }
+      }
+    },
+    "RollingUpdateProfile": {
+      "type": "object",
+      "properties": {
+        "maxBatchPercent": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "maxUnhealthyPercent": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "maxUnhealthyUpdatedPercent": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "pauseTimeBetweenBatches": {
+          "type": "string"
+        }
+      }
+    },
+    "ContainerGroupsActionRequest": {
+      "type": "object",
+      "properties": {
+        "containerGroupNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {
