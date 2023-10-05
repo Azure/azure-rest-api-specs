@@ -507,7 +507,7 @@
         "x-ms-examples": {}
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/updates/rolling/latest": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/updates/{rolling}/latest": {
       "get": {
         "tags": [
           "ContainerScaleSets"
@@ -527,6 +527,13 @@
           },
           {
             "$ref": "#/parameters/ContainerScaleSetNameParameter"
+          },
+          {
+            "name": "rolling",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "This value must be set to 'rolling'."
           }
         ],
         "responses": {
