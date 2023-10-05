@@ -808,6 +808,37 @@
           "format": "int32",
           "description": "It controls the approximate number of sentences in the output summaries."
         },
+        "summaryLength": {
+          "type": "string",
+          "enum": [
+            "none",
+            "short",
+            "medium",
+            "long"
+          ],
+          "x-ms-enum": {
+            "name": "SummaryLengthBucket",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "none",
+                "description": "No length preference."
+              },
+              {
+                "value": "short",
+                "description": "Instructs model to generate shorter length summaries."
+              },
+              {
+                "value": "medium",
+                "description": "Instructs model to generate medium length summaries."
+              },
+              {
+                "value": "long",
+                "description": "Instructs model to generate longer length summaries."
+              }
+            ]
+          }
+        },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
         }
