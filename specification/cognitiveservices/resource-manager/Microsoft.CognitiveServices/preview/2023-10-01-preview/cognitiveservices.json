@@ -1359,6 +1359,70 @@
           "final-state-via": "azure-async-operation"
         }
       },
+      "patch": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_Update",
+        "description": "Update the sku of specified deployments associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "UpdateDeployment": {
+            "$ref": "./examples/UpdateDeployment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameParameter"
+          },
+          {
+            "name": "deployment",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            },
+            "description": "The deployment properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update the deployment sku successfully.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "202": {
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "description": "If resource is updated successfully, the service should return 201 (OK)."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
       "delete": {
         "tags": [
           "Deployments"
@@ -1405,6 +1469,51 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/deployments/{deploymentName}/skus": {
+      "get": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_ListSkus",
+        "description": "Lists the specified deployments skus associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "GetDeployment": {
+            "$ref": "./examples/Deployments_ListSkus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- List the deployments skus successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentSkuListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/commitmentPlans": {
@@ -3272,6 +3381,13 @@
           "type": "integer",
           "format": "int32",
           "description": "The default capacity."
+        },
+        "allowedValues": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "The array of allowed values for capacity."
         }
       },
       "description": "The capacity configuration."
@@ -4283,6 +4399,43 @@
         }
       },
       "description": "Properties of Cognitive Services account deployment model."
+    },
+    "DeploymentSkuListResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of deployment skus.",
+          "type": "string"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentSku"
+          },
+          "x-ms-identifiers": [
+            "resourceType"
+          ],
+          "description": "Gets the list of Cognitive Services accounts deployment skus."
+        }
+      },
+      "description": "The list of cognitive services accounts operation response."
+    },
+    "DeploymentSku": {
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Deployment resource type."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
+        "capacity": {
+          "$ref": "#/definitions/CapacityConfig"
+        }
+      },
+      "description": "Properties of Cognitive Services account deployment sku."
     },
     "CommitmentTierListResult": {
       "type": "object",
