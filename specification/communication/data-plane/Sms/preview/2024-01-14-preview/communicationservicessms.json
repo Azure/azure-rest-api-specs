@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "communicationservicessms",
+    "title": "Azure Communication SMS Service",
     "description": "Azure Communication SMS/MMS Service",
     "version": "2024-01-14-preview"
   },
@@ -102,7 +102,7 @@
       "type": "object",
       "properties": {
         "from": {
-          "description": "The from identifier that is owned by the authenticated account. Typically in E.164 phone number format or shortcode.",
+          "description": "The from identifier that is owned by the authenticated account",
           "type": "string"
         },
         "recipients": {
@@ -128,6 +128,26 @@
           "items": {
             "$ref": "#/definitions/MmsSendRequestAttachment"
           }
+        },
+        "sendOptions": {
+          "$ref": "#/definitions/MmsSendOptions"
+        }
+      }
+    },
+    "MmsSendOptions": {
+      "description": "Used for sending more options in the request",
+      "required": [
+        "enableDeliveryReport"
+      ],
+      "type": "object",
+      "properties": {
+        "enableDeliveryReport": {
+          "description": "Get or Set the notify delivery report",
+          "type": "boolean"
+        },
+        "tag": {
+          "description": "Get or Set the Customer Content\r\nShould not be logged.",
+          "type": "string"
         }
       }
     },
@@ -138,16 +158,16 @@
       ],
       "type": "object",
       "properties": {
+        "to": {
+          "description": "The recipient's phone number in E.164 format.",
+          "minLength": 1,
+          "type": "string"
+        },
         "repeatabilityRequestId": {
           "description": "Optional repeatability-request-id to support idempotency.",
           "type": "string"
         },
         "repeatabilityFirstSent": {
-          "type": "string"
-        },
-        "to": {
-          "description": "The recipient's phone number in E.164 format.",
-          "minLength": 1,
           "type": "string"
         }
       }
@@ -161,7 +181,7 @@
       "type": "object",
       "properties": {
         "mimeType": {
-          "description": "MIME type of attachment. See https://en.wikipedia.org/wiki/Media_type\r\n            \r\nThe following MIME types are supported\r\n- audio/wav\r\n- audio/x-wav\r\n- audio/ac3\r\n- audio/amr\r\n- image/png\r\n- image/jpeg\r\n- image/gif\r\n- image/bmp\r\n- video/mp4\r\n- video/x-msvideo\r\n- text/plain(Unlike other media types, the maximum .txt file size supported is 64KB per attachment.)",
+          "description": "MIME type of attachment",
           "minLength": 1,
           "type": "string",
           "example": "image/png"
@@ -256,15 +276,16 @@
       ],
       "type": "object",
       "properties": {
+        "to": {
+          "description": "The recipient's phone number in E.164 format.",
+          "minLength": 1,
+          "type": "string"
+        },
         "repeatabilityRequestId": {
           "description": "Optional repeatability-request-id to support idempotency.",
           "type": "string"
         },
         "repeatabilityFirstSent": {
-          "type": "string"
-        },
-        "to": {
-          "description": "The recipient's phone number in E.164 format.",
           "type": "string"
         }
       }
