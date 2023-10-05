@@ -51,9 +51,9 @@ model StreamingChatCompletionOptions {
 
   @doc("placeholder")
   @projectedName("json", "session_state")
-  sessionState: unknown;
+  sessionState?: unknown;
 
   @doc("placeholder")
   @projectedName("json", "extra_args")
-  extraArguments: Record<unknown>;
+  extraArguments?: Record<unknown>;
 }
