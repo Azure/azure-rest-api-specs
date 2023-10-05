@@ -134,10 +134,15 @@ This validator will help ensure your TypeSpec project follows [standard conventi
 
 ### Run tsv locally
 ```
-npm install
-npx --no tsv <path to project folder>
-# example:
-npx --no tsv specification/contosowidgetmanager/Contoso.WidgetManager
+cd <repo>
+git checkout <your-branch>
+git merge <target-branch>
+npm ci
+npx tsv <path-to-your-spec>
+git commit; git push (if any changes)
+
+# example 
+npx tsv specification/contosowidgetmanager/Contoso.WidgetManager
 ```
 Then check any errors that might be outputted and address any issues as needed. If there are changed files after the run it generally means that the generated swagger files were not in-sync with the TypeSpec project and you should include those changes in your pull request as well. 
 
@@ -155,4 +160,3 @@ Following tools have been removed from the validation toolchain as of August 202
 
 [automated validation tooling]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-tooling
 [Azure REST API specs PR]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-specs-pr
-[sample tspconfig.yaml]: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml#L11

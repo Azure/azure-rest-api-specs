@@ -18,8 +18,8 @@ if ($typespecFolders) {
     if ($LASTEXITCODE) {
       $typespecFoldersWithFailures += $typespecFolder
       $errorString = "TypeSpec Validation failed for project $typespecFolder run the following command locally to validate."
-      $errorString += "`n > npm install"
-      $errorString += "`n > npx --no tsv $typespecFolder "
+      $errorString += "`n > npm ci"
+      $errorString += "`n > npx tsv $typespecFolder"
       $errorString += "`nFor more detailed docs see https://aka.ms/azsdk/specs/typespec-validation"
       LogError $errorString
     }
@@ -33,9 +33,9 @@ if ($typespecFolders) {
 
 if ($typespecFoldersWithFailures.Count -gt 0) {
   LogInfo "TypeSpec Validation failed for some folder to fix run and address any errors:"
-  LogInfo " > npm install"
+  LogInfo " > npm ci"
   foreach ($typespecFolderWithFailure in $typespecFoldersWithFailures) {
-    LogInfo " > npx --no tsv $typespecFolderWithFailure"
+    LogInfo " > npx tsv $typespecFolderWithFailure"
   }
   LogInfo "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation"
   LogJobFailure
