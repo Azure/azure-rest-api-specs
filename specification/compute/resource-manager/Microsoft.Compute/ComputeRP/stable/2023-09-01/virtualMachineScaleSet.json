@@ -3540,11 +3540,11 @@
         ],
         "responses": {
           "200": {
-            "headers": {
-              "location": "https://foo.com/operationstatus"
-            }
+            "description": "The response will consists of the state of the VM which will be applied post the operation."
           },
-          "202": {},
+          "202": {
+            "description": "The response will consists when state is not provided."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {

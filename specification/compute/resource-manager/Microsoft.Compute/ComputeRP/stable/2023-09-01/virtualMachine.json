@@ -1935,11 +1935,14 @@
         ],
         "responses": {
           "200": {
-            "headers": {
-              "location": "https://foo.com/operationstatus"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
             }
           },
-          "202": {},
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
