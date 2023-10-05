@@ -26,6 +26,30 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
+tag: package-preview-2023-08
+```
+
+
+### Tag: package-preview-2023-08
+
+These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-08'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2023-08-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2023-08-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2023-08-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2023-08-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2023-08-01-preview/workspaceRP.json
+suppressions:
+  - code: LroPostReturn
+    reason: LRO does not return 200 by design.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/resize"].post
+  - code: TrackedResourcePatchOperation
+    reason: server side don't support Patch yet track with https://msdata.visualstudio.com/Vienna/_workitems/edit/2702298.
+    where:
+      - $.definitions.PrivateEndpointConnection
 tag: package-2023-10
 ```
 
