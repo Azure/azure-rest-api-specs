@@ -227,6 +227,12 @@ directive:
       - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/snapshots/{snapshotName}"].get'
       - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/snapshots/{snapshotName}"].put'
     reason: This is a proxy for a data plane snapshot which doesn't have the info.
+- suppress: ParameterNotUsingCommonTypes
+    from: appconfiguration.json
+    where: 
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/snapshots/{snapshotName}"].get'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/snapshots/{snapshotName}"].put'
+    reason: The parameters are using common types so suppressing the false positive.
   - suppress: TrackedResourcePatchOperation
     from: appconfiguration.json
     where: $.definitions.Replica
