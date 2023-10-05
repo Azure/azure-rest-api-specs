@@ -1630,35 +1630,36 @@
         "labelOperator": {
           "description": "Router Job Worker Selector Label Operator",
           "type": "string",
-          "enum": [
-            {
-              "operation": "=",
-              "name": "Equal"
-            },
-            {
-              "operation": "!=",
-              "name": "NotEqual"
-            },
-            {
-              "operation": ">",
-              "name": "Greater"
-            },
-            {
-              "operation": "<",
-              "name": "Less"
-            },
-            {
-              "operation": ">=",
-              "name": "GreaterThanOrEqual"
-            },
-            {
-              "operation": "<=",
-              "name": "LessThanOrEqual"
-            }
-          ],
+          "enum": ["=","!=",">","<",">=", "<=" ],
           "x-ms-enum": {
             "name": "acsRouterLabelOperator",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "=",
+                "description": "Equal"
+              },
+              {
+                "value": "!=",
+                "description": "NotEqual"
+              },
+              {
+                "value": ">",
+                "description": "Greater"
+              },
+              {
+                "value": "<",
+                "description": "Less"
+              },
+              {
+                "value": ">=",
+                "description": "GreaterThanOrEqual"
+              },
+              {
+                "value": "<=",
+                "description": "LessThanOrEqual"
+              }
+            ]
           }
         },
         "labelValue": {
