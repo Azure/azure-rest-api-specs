@@ -338,7 +338,8 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {}
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/stop": {
@@ -383,7 +384,8 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {}
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/start": {
@@ -428,7 +430,8 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {}
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/updates/manual/start": {
@@ -473,7 +476,8 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {}
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerScaleSets/{containerScaleSetName}/updates/rolling/latest": {
@@ -546,7 +550,8 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {}
       }
     }
   },
@@ -897,7 +902,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LoadBalancerBackendAddressPool"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1139,6 +1145,7 @@
       }
     },
     "ApiErrorBase": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -1156,6 +1163,7 @@
       "description": "Api error base."
     },
     "InnerError": {
+      "type": "object",
       "properties": {
         "exceptiontype": {
           "type": "string",
@@ -1169,12 +1177,14 @@
       "description": "Inner error details."
     },
     "ApiError": {
+      "type": "object",
       "properties": {
         "details": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApiErrorBase"
           },
+          "x-ms-identifiers": [],
           "description": "The Api error details"
         },
         "innererror": {
