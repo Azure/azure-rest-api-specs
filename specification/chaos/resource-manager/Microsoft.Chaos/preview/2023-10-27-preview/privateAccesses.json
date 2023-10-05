@@ -203,6 +203,12 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Private access resource created successfully.",
+            "schema": {
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
+            }
+          },
           "200": {
             "description": "Private Access resource updated successfully.",
             "schema": {
@@ -330,7 +336,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {

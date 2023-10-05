@@ -33,7 +33,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "description": "A readonly collection of private endpoint connection. Currently only one endpoint connection is supported."
         }
@@ -64,7 +64,7 @@
           "type": "array",
           "description": "Array of private link resources",
           "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
+            "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResource"
           }
         },
         "nextLink": {
@@ -75,74 +75,13 @@
       },
       "description": "A list of private link resources"
     },
-    "PrivateLinkResource": {
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResourceProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "private link resource Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "private link resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "private link resource type"
-        }
-      },
-      "description": "A private link resource"
-    },
-    "PrivateEndpoint": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ARM identifier for Private Endpoint"
-        }
-      },
-      "description": "The Private Endpoint resource."
-    },
-    "PrivateEndpointConnection": {
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
-          "x-ms-client-flatten": true,
-          "description": "Resource properties."
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "private endpoint connection Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "private endpoint connection name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "private endpoint connection type"
-        }
-      },
-      "description": "The Private Endpoint Connection resource.",
-      "x-ms-azure-resource": true
-    },
     "PrivateEndpointConnectionListResult": {
       "properties": {
         "value": {
           "type": "array",
           "description": "Array of private endpoint connections",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
           }
         },
         "nextLink": {
