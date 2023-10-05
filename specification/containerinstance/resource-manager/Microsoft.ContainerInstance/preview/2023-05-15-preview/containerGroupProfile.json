@@ -290,6 +290,84 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}/revisions/{revisionNumber}": {
+      "get": {
+        "operationId": "ContainerGroupProfileRevision_Get",
+        "x-ms-examples": {},
+        "summary": "Get the properties of the specified container group profile revision.",
+        "description": "Gets the properties of the specified container group profile revision in the specified subscription and resource group. The operation returns the properties of container group profile revision including containers, image registry credentials, restart policy, IP address type, OS type, state, and volumes.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/revisionNumberParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}/revisions": {
+      "get": {
+        "operationId": "ContainerGroupProfileRevisions_Get",
+        "x-ms-examples": {},
+        "summary": "Get a list of container group profile revisions in the specified subscription, resource group and container group profile.",
+        "description": "Get a list of container group profile revisions in a specified subscription, resource group and container group profile. This operation returns properties of each container group including containers, image registry credentials, restart policy, IP address type, OS type, state, and volumes.",
+        "parameters": [
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common-types/v1/common.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerGroupProfileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -452,6 +530,15 @@
       "description": "The name of the container group profile.",
       "x-ms-parameter-location": "method",
       "pattern": "^(?!-)[a-z0-9-]{1,61}[a-z0-9](?!-)$"
+    },
+    "revisionNumberParameter": {
+      "name": "revisionNumber",
+      "in": "path",
+      "required": true,
+      "type": "integer",
+      "format": "int32",
+      "description": "Container Group Profile revision number.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
