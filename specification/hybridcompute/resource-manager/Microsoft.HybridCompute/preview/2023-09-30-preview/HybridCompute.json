@@ -2802,9 +2802,9 @@
               "x-ms-client-flatten": true,
               "type": "object",
               "properties": {
-                "softwareAssuranceStatus": {
-                  "$ref": "#/definitions/SoftwareAssuranceStatus",
-                  "description": "Indicates the enrollment status of the Software Assurance program."
+                "isSoftwareAssuranceCustomer": {
+                  "type": "boolean",
+                  "description": "Specifies if the user is a Software Assurance customer."
                 }
               }
             },
@@ -2855,9 +2855,9 @@
               "x-ms-client-flatten": true,
               "type": "object",
               "properties": {
-                "softwareAssuranceStatus": {
-                  "$ref": "#/definitions/SoftwareAssuranceStatus",
-                  "description": "Indicates the enrollment status of the Software Assurance program."
+                "isSoftwareAssuranceCustomer": {
+                  "type": "boolean",
+                  "description": "Specifies if the user is a Software Assurance customer."
                 }
               }
             },
@@ -3073,7 +3073,8 @@
           "items": {
             "$ref": "#/definitions/ProductFeatureUpdate"
           },
-          "description": "The list of product feature updates."
+          "description": "The list of product feature updates.",
+          "x-ms-identifiers": []
         }
       },
       "description": "Describes the Update properties of a Windows Server License Profile."
@@ -3090,7 +3091,8 @@
           "items": {
             "$ref": "#/definitions/ProductFeatureUpdate"
           },
-          "description": "The list of product feature updates."
+          "description": "The list of product feature updates.",
+          "x-ms-identifiers": []
         }
       },
       "description": "Describes the Update properties of a Windows IoT Enterprise License Profile."
@@ -3110,10 +3112,11 @@
         "softwareAssurance": {
           "x-ms-client-flatten": true,
           "type": "object",
+          "readOnly": true,
           "properties": {
-            "softwareAssuranceStatus": {
-              "$ref": "#/definitions/SoftwareAssuranceStatus",
-              "description": "Indicates the enrollment status of the Software Assurance program."
+            "isSoftwareAssuranceCustomer": {
+              "type": "boolean",
+              "description": "Specifies if the user is a Software Assurance customer."
             }
           }
         },
@@ -3214,18 +3217,6 @@
       },
       "description": "Subscription status of the Windows Server or Windows IoT Enterprise or Product feature."
     },
-    "SoftwareAssuranceStatus": {
-      "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SoftwareAssuranceStatus",
-        "modelAsString": true
-      },
-      "description": "Enrollment status of the Software Assurance program."
-    },    
     "ProductFeature": {
       "type": "object",
       "properties": {
@@ -3276,7 +3267,8 @@
           "items": {
             "$ref": "#/definitions/ProductFeature"
           },
-          "description": "The list of product features."
+          "description": "The list of product features.",
+          "x-ms-identifiers": []
         }
       },
       "description": "Describes the properties of a Windows Server License Profile ARM model."
@@ -3305,7 +3297,8 @@
           "items": {
             "$ref": "#/definitions/ProductFeature"
           },
-          "description": "The list of product features."
+          "description": "The list of product features.",
+          "x-ms-identifiers": []
         }
       },
       "description": "Describes the properties of a Windows IoT Enterprise License Profile ARM model."
