@@ -56,19 +56,19 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/StartTimeParameter"
+            "$ref": "#/parameters/BatchStartTimeParameter"
           },
           {
-            "$ref": "#/parameters/EndTimeParameter"
+            "$ref": "#/parameters/BatchEndTimeParameter"
           },
           {
             "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/IntervalParameter"
           },
           {
-            "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/MetricNamespaceParameter"
+            "$ref": "#/parameters/MetricBatchNamespaceParameter"
           },
           {
-            "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/MetricNamesParameter"
+            "$ref": "#/parameters/MetricBatchNamesParameter"
           },
           {
             "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/AggregationsParameter"
@@ -80,20 +80,23 @@
             "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/OrderByParameter"
           },
           {
-            "$ref": "#/parameters/FilterParameter"
+            "$ref": "#/parameters/BatchFilterParameter"
+          },
+          {
+            "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/AutoAdjustTimegrain"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceIdList"
+            "$ref": "#/parameters/ResourceIdListParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The response to a metrics query.",
             "schema": {
-              "$ref": "#/definitions/MetricResultsResponse"
+              "$ref": "#/definitions/BatchMetricResultsResponse"
             }
           },
           "default": {
@@ -118,7 +121,7 @@
     }
   },
   "parameters": {
-    "ResourceIdList": {
+    "ResourceIdListParameter": {
       "name": "resourceIds",
       "in": "body",
       "required": true,
@@ -127,7 +130,7 @@
       },
       "description": "The comma separated list of resource IDs to query metrics for."
     },
-    "StartTimeParameter": {
+    "BatchStartTimeParameter": {
       "name": "starttime",
       "in": "query",
       "required": false,
@@ -135,7 +138,7 @@
       "description": "The start time of the query. It is a string in the format 'yyyy-MM-ddTHH:mm:ss.fffZ'. If you have specified the endtime parameter, then this parameter is required.\nIf only starttime is specified, then endtime defaults to the current time.\nIf no time interval is specified, the default is 1 hour.",
       "x-ms-parameter-location": "method"
     },
-    "EndTimeParameter": {
+    "BatchEndTimeParameter": {
       "name": "endtime",
       "in": "query",
       "required": false,
@@ -143,7 +146,27 @@
       "description": "The end time of the query. It is a string in the format 'yyyy-MM-ddTHH:mm:ss.fffZ'.",
       "x-ms-parameter-location": "method"
     },
-    "FilterParameter": {
+    "MetricBatchNamespaceParameter": {
+      "name": "metricnamespace",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Metric namespace that contains the requested metric names.",
+      "x-ms-parameter-location": "method"
+    },
+    "MetricBatchNamesParameter": {
+      "name": "metricnames",
+      "in": "query",
+      "required": true,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "description": "The names of the metrics (comma separated) to retrieve.",
+      "x-ms-parameter-location": "method"
+    },
+    "BatchFilterParameter": {
       "name": "filter",
       "in": "query",
       "required": false,
@@ -173,7 +196,7 @@
         ]
       }
     },
-    "MetricResultsResponse": {
+    "BatchMetricResultsResponse": {
       "description": "The metrics result for a resource.",
       "type": "object",
       "properties": {
@@ -211,7 +234,7 @@
               "value": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/definitions/Metric"
+                  "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/definitions/SubscriptionScopeMetric"
                 },
                 "description": "The value of the collection."
               }
@@ -224,55 +247,6 @@
           }
         }
       }
-    },
-    "Metric": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The metric Id."
-        },
-        "name": {
-          "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/definitions/LocalizableString",
-          "description": "The name and the display name of the metric, i.e. it is localizable string."
-        },
-        "displayDescription": {
-          "type": "string",
-          "description": "Description of this metric"
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type of the metric resource."
-        },
-        "unit": {
-          "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/definitions/MetricUnit",
-          "description": "The unit of the metric."
-        },
-        "timeseries": {
-          "type": "array",
-          "items": {
-            "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/definitions/TimeSeriesElement"
-          },
-          "description": "The time series returned when a data query is performed."
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "'Success' or the error details on query failures for this metric."
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message encountered querying this specific metric."
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "displayDescription",
-        "type",
-        "unit",
-        "timeseries"
-      ],
-      "description": "The result data of a query."
     }
   }
 }

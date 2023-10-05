@@ -115,7 +115,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.Insights/metricDefinitions": {
+    "/{armResourceUri}/providers/Microsoft.Insights/metricDefinitions": {
       "get": {
         "tags": [
           "MetricDefinitions"
@@ -124,7 +124,7 @@
         "description": "Lists the metric definitions for the resource.",
         "parameters": [
           {
-            "$ref": "./commonMonitoringTypes.json#/parameters/ResourceUriParameter"
+            "$ref": "./commonMonitoringTypes.json#/parameters/ArmResourceParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -324,7 +324,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.Insights/metrics": {
+    "/{armResourceUri}/providers/Microsoft.Insights/metrics": {
       "get": {
         "tags": [
           "Metrics"
@@ -333,7 +333,7 @@
         "description": "**Lists the metric values for a resource**.",
         "parameters": [
           {
-            "$ref": "./commonMonitoringTypes.json#/parameters/ResourceUriParameter"
+            "$ref": "./commonMonitoringTypes.json#/parameters/ArmResourceParameter"
           },
           {
             "$ref": "#/parameters/TimespanParameter"
@@ -382,7 +382,7 @@
           "200": {
             "description": "Successful request to get the list of metric values.",
             "schema": {
-              "$ref": "#/definitions/Response"
+              "$ref": "#/definitions/ResourceScopeMetricResponse"
             }
           }
         },
@@ -696,7 +696,7 @@
         }
       }
     },
-    "Response": {
+    "ResourceScopeMetricResponse": {
       "type": "object",
       "description": "The response to a metrics query.",
       "properties": {
@@ -726,7 +726,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Metric"
+            "$ref": "#/definitions/ResourceScopeMetric"
           },
           "description": "the value of the collection."
         }
@@ -736,7 +736,7 @@
         "value"
       ]
     },
-    "Metric": {
+    "ResourceScopeMetric": {
       "type": "object",
       "description": "The result data of a query.",
       "properties": {
@@ -765,7 +765,7 @@
           "description": "Error message encountered querying this specific metric."
         },
         "unit": {
-          "$ref": "./commonMonitoringTypes.json#/definitions/MetricUnit",
+          "$ref": "./commonMonitoringTypes.json#/definitions/Unit",
           "description": "The unit of the metric."
         },
         "timeseries": {
@@ -814,7 +814,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubscriptionScopeMetric"
+            "$ref": "./commonMonitoringTypes.json#/definitions/SubscriptionScopeMetric"
           },
           "description": "the value of the collection."
         }
@@ -822,54 +822,6 @@
       "required": [
         "timespan",
         "value"
-      ]
-    },
-    "SubscriptionScopeMetric": {
-      "type": "object",
-      "description": "The result data of a query.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "the metric Id."
-        },
-        "type": {
-          "type": "string",
-          "description": "the resource type of the metric resource."
-        },
-        "name": {
-          "$ref": "./commonMonitoringTypes.json#/definitions/LocalizableString",
-          "description": "the name and the display name of the metric, i.e. it is localizable string."
-        },
-        "displayDescription": {
-          "type": "string",
-          "description": "Detailed description of this metric."
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "'Success' or the error details on query failures for this metric."
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message encountered querying this specific metric."
-        },
-        "unit": {
-          "$ref": "./commonMonitoringTypes.json#/definitions/MetricUnit",
-          "description": "The unit of the metric."
-        },
-        "timeseries": {
-          "type": "array",
-          "items": {
-            "$ref": "./commonMonitoringTypes.json#/definitions/TimeSeriesElement"
-          },
-          "description": "the time series returned when a data query is performed."
-        }
-      },
-      "required": [
-        "id",
-        "type",
-        "name",
-        "unit",
-        "timeseries"
       ]
     }
   },
