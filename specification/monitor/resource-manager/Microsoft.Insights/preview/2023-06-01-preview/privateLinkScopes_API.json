@@ -842,7 +842,8 @@
             "in": "query",
             "required": false,
             "description": "The kind of the private link resource. Not specifying a kind will return scoped resources of all kinds.",
-            "type": "string"
+            "type": "string",
+            "readOnly": true
           }
         ],
         "responses": {
@@ -1106,7 +1107,16 @@
       "properties": {
         "kind": {
           "description": "The kind of scoped Azure monitor resource.",
-          "type": "string"
+          "type": "string",
+          "readonly": "true",
+          "enum": [
+            "Resource",
+            "Metrics"
+          ],
+          "x-ms-enum": {
+            "name": "ScopedResourceProvisioningState",
+            "modelAsString": true
+          }
         },
         "linkedResourceId": {
           "description": "The resource id of the scoped Azure monitor resource.",
