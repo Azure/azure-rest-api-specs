@@ -243,7 +243,7 @@ in the request body.
   >;
 
   @summary("Delete an existing load test run.")
-  @doc("Delete an existing load test run by providing the testId.")
+  @doc("Delete an existing load test run by providing the testRunId.")
   deleteTestRun is StandardResourceOperations.ResourceDelete<TestRun>;
 
   @summary("Get all test runs for the given filters.")

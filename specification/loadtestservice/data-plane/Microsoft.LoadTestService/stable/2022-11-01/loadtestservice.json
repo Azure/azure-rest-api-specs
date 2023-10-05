@@ -137,11 +137,12 @@
           {
             "name": "testRunId",
             "in": "path",
-            "description": "Unique test run identifier.",
+            "description": "Unique test run identifier for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "minLength": 2,
-            "maxLength": 50
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -246,7 +247,7 @@
           "TestRun"
         ],
         "summary": "Delete an existing load test run.",
-        "description": "Delete an existing load test run by providing the testId.",
+        "description": "Delete an existing load test run by providing the testRunId.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -254,11 +255,12 @@
           {
             "name": "testRunId",
             "in": "path",
-            "description": "Unique test run identifier.",
+            "description": "Unique test run identifier for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "minLength": 2,
-            "maxLength": 50
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -300,11 +302,12 @@
           {
             "name": "testRunId",
             "in": "path",
-            "description": "Unique test run identifier.",
+            "description": "Unique test run identifier for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "minLength": 2,
-            "maxLength": 50
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -459,11 +462,12 @@
           {
             "name": "testRunId",
             "in": "path",
-            "description": "Unique test run identifier.",
+            "description": "Unique test run identifier for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "minLength": 2,
-            "maxLength": 50
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           },
           {
             "name": "fileName",
@@ -928,11 +932,12 @@
           {
             "name": "testId",
             "in": "path",
-            "description": "Unique test name as identifier.",
+            "description": "Unique name for the load test, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "minLength": 2,
-            "maxLength": 50
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -1038,11 +1043,12 @@
           {
             "name": "testId",
             "in": "path",
-            "description": "Unique test name as identifier.",
+            "description": "Unique name for the load test, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "minLength": 2,
-            "maxLength": 50
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -1194,11 +1200,12 @@
           {
             "name": "testId",
             "in": "path",
-            "description": "Unique test name as identifier.",
+            "description": "Unique name for the load test, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "minLength": 2,
-            "maxLength": 50
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -1246,11 +1253,12 @@
           {
             "name": "testId",
             "in": "path",
-            "description": "Unique test name as identifier.",
+            "description": "Unique name for the load test, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "minLength": 2,
-            "maxLength": 50
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           },
           {
             "name": "fileName",
@@ -1398,11 +1406,12 @@
           {
             "name": "testId",
             "in": "path",
-            "description": "Unique test name as identifier.",
+            "description": "Unique name for the load test, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "minLength": 2,
-            "maxLength": 50
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           },
           {
             "name": "fileName",
@@ -1976,11 +1985,13 @@
         },
         "splitAllCSVs": {
           "type": "boolean",
-          "description": "If false, Azure Load Testing copies and processes your input files unmodified\nacross all test engine instances. If true, Azure Load Testing splits the CSV\ninput data evenly across all engine instances. If you provide multiple CSV\nfiles, each file will be split evenly."
+          "description": "If false, Azure Load Testing copies and processes your input files unmodified\nacross all test engine instances. If true, Azure Load Testing splits the CSV\ninput data evenly across all engine instances. If you provide multiple CSV\nfiles, each file will be split evenly.",
+          "default": false
         },
         "quickStartTest": {
           "type": "boolean",
-          "description": "If true, optionalLoadTestConfig is required and JMX script for the load test is\nnot required to upload."
+          "description": "If true, optionalLoadTestConfig is required and JMX script for the load test is\nnot required to upload.",
+          "default": false
         },
         "optionalLoadTestConfig": {
           "$ref": "#/definitions/OptionalLoadTestConfig",
@@ -2250,16 +2261,6 @@
         "endpointUrl": {
           "type": "string",
           "description": "Test URL. Provide the complete HTTP URL. For example, https://contoso-app.azurewebsites.net/login"
-        },
-        "rps": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Throughput required (requests per second)."
-        },
-        "maxResponseTime": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum response time in milliseconds of the API/endpoint."
         },
         "virtualUsers": {
           "type": "integer",
@@ -2571,16 +2572,17 @@
         },
         "value": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "The value to compare with the client metric. Allowed values - ‘error : [0.0 ,\n100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms."
         },
         "action": {
           "$ref": "#/definitions/PFAction",
-          "description": "Action taken after the threshold is met. Default is ‘continue’."
+          "description": "Action taken after the threshold is met. Default is ‘continue’.",
+          "default": "continue"
         },
         "actualValue": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "The actual value of the client metric for the test run.",
           "readOnly": true
         },
@@ -2882,9 +2884,10 @@
         },
         "testId": {
           "type": "string",
-          "description": "Unique test name as identifier.",
+          "description": "Unique name for the load test, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
           "minLength": 2,
           "maxLength": 50,
+          "pattern": "^[a-z0-9_-]*$",
           "readOnly": true
         },
         "description": {
@@ -3011,6 +3014,23 @@
         }
       ]
     },
+    "TestIdPathParameter": {
+      "type": "object",
+      "description": "Test Id path parameter.",
+      "properties": {
+        "testId": {
+          "type": "string",
+          "description": "Unique name for the load test, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+          "minLength": 2,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9_-]*$",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "testId"
+      ]
+    },
     "TestInputArtifacts": {
       "type": "object",
       "description": "The input artifacts for the test.",
@@ -3048,9 +3068,10 @@
       "properties": {
         "testRunId": {
           "type": "string",
-          "description": "Unique test run identifier.",
+          "description": "Unique test run identifier for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
           "minLength": 2,
           "maxLength": 50,
+          "pattern": "^[a-z0-9_-]*$",
           "readOnly": true
         },
         "passFailCriteria": {
@@ -3284,6 +3305,23 @@
         }
       ]
     },
+    "TestRunIdPathParameter": {
+      "type": "object",
+      "description": "Test run Id path parameter.",
+      "properties": {
+        "testRunId": {
+          "type": "string",
+          "description": "Unique test run identifier for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+          "minLength": 2,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9_-]*$",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "testRunId"
+      ]
+    },
     "TestRunInputArtifacts": {
       "type": "object",
       "description": "The input artifacts for the test run.",
@@ -3380,79 +3418,79 @@
         },
         "sampleCount": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Sampler count.",
           "readOnly": true
         },
         "errorCount": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Error count.",
           "readOnly": true
         },
         "errorPct": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Error percentage.",
           "readOnly": true
         },
         "meanResTime": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Mean response time.",
           "readOnly": true
         },
         "medianResTime": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Median response time.",
           "readOnly": true
         },
         "maxResTime": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Max response time.",
           "readOnly": true
         },
         "minResTime": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Minimum response time.",
           "readOnly": true
         },
         "pct1ResTime": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "90 percentile response time.",
           "readOnly": true
         },
         "pct2ResTime": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "95 percentile response time.",
           "readOnly": true
         },
         "pct3ResTime": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "99 percentile response time.",
           "readOnly": true
         },
         "throughput": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Throughput.",
           "readOnly": true
         },
         "receivedKBytesPerSec": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Received network bytes.",
           "readOnly": true
         },
         "sentKBytesPerSec": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Send network bytes.",
           "readOnly": true
         }
@@ -3763,6 +3801,7 @@
       "required": false,
       "type": "integer",
       "format": "int32",
+      "default": 50,
       "x-ms-parameter-location": "method"
     },
     "ListTestQueryParams.orderby": {
@@ -3806,6 +3845,7 @@
       "required": false,
       "type": "integer",
       "format": "int32",
+      "default": 50,
       "x-ms-parameter-location": "method"
     },
     "ListTestRunQueryParams.orderby": {
@@ -3846,6 +3886,7 @@
       "description": "The interval (i.e. timegrain) of the query.",
       "required": false,
       "type": "string",
+      "default": "PT1M",
       "enum": [
         "PT5S",
         "PT10S",

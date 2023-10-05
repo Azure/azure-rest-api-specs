@@ -219,12 +219,7 @@ SECRET_VALUE.
   @visibility("read")
   inputArtifacts?: TestInputArtifacts;
 
-  @doc("Unique test name as identifier.")
-  @maxLength(50)
-  @minLength(2)
-  @key
-  @visibility("read")
-  testId: string;
+  ...TestIdPathParameter;
 
   @maxLength(100)
   @doc("The test description.")
@@ -276,14 +271,14 @@ The aggregation function to be applied on the client metric. Allowed functions
 The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
 100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms.
 """)
-  value?: float32;
+  value?: float64;
 
   @doc("Action taken after the threshold is met. Default is ‘continue’.")
-  action?: PFAction;
+  action?: PFAction = PFAction.continue;
 
   @doc("The actual value of the client metric for the test run.")
   @visibility("read")
-  actualValue?: float32;
+  actualValue?: float64;
 
   @doc("Outcome of the test run.")
   @visibility("read")
@@ -318,7 +313,7 @@ model AutoStopCriteria {
   autoStopEnabled?: boolean;
 
   @doc("Threshold percentage of errors on which test run should be automatically stopped.")
-  errorRate?: float32;
+  errorRate?: float64;
 
   @doc("Time window during which the error percentage should be evaluated.")
   errorRateTimeWindow?: int64;
@@ -338,13 +333,13 @@ across all test engine instances. If true, Azure Load Testing splits the CSV
 input data evenly across all engine instances. If you provide multiple CSV
 files, each file will be split evenly.
 """)
-  splitAllCSVs?: boolean;
+  splitAllCSVs?: boolean = false;
 
   @doc("""
 If true, optionalLoadTestConfig is required and JMX script for the load test is
 not required to upload.
 """)
-  quickStartTest?: boolean;
+  quickStartTest?: boolean = false;
 
   @doc("Configuration for quick load test")
   optionalLoadTestConfig?: OptionalLoadTestConfig;
@@ -360,9 +355,11 @@ model OptionalLoadTestConfig {
   endpointUrl?: string;
 
   @doc("Throughput required (requests per second).")
+  @added(APIVersions.v2023_04_01_preview)
   rps?: int32;
 
   @doc("Maximum response time in milliseconds of the API/endpoint.")
+  @added(APIVersions.v2023_04_01_preview)
   maxResponseTime?: int32;
 
   @doc("No of concurrent virtual users.")
@@ -525,12 +522,7 @@ model ResourceMetric {
 @doc("Load test run model")
 @resource("test-runs")
 model TestRun {
-  @doc("Unique test run identifier.")
-  @visibility("read")
-  @maxLength(50)
-  @minLength(2)
-  @key
-  testRunId: string;
+  ...TestRunIdPathParameter;
 
   @doc("Pass fail criteria for a test.")
   passFailCriteria?: PassFailCriteria;
@@ -637,57 +629,57 @@ model TestRunStatistics {
 
   @doc("Sampler count.")
   @visibility("read")
-  sampleCount?: float32;
+  sampleCount?: float64;
 
   @doc("Error count.")
   @visibility("read")
-  errorCount?: float32;
+  errorCount?: float64;
 
   @doc("Error percentage.")
   @visibility("read")
-  errorPct?: float32;
+  errorPct?: float64;
 
   @doc("Mean response time.")
   @visibility("read")
-  meanResTime?: float32;
+  meanResTime?: float64;
 
   @doc("Median response time.")
   @visibility("read")
-  medianResTime?: float32;
+  medianResTime?: float64;
 
   @doc("Max response time.")
   @visibility("read")
-  maxResTime?: float32;
+  maxResTime?: float64;
 
   @doc("Minimum response time.")
   @visibility("read")
-  minResTime?: float32;
+  minResTime?: float64;
 
   @doc("90 percentile response time.")
   @visibility("read")
-  pct1ResTime?: float32;
+  pct1ResTime?: float64;
 
   @doc("95 percentile response time.")
   @visibility("read")
-  pct2ResTime?: float32;
+  pct2ResTime?: float64;
 
   @doc("99 percentile response time.")
   @visibility("read")
-  pct3ResTime?: float32;
+  pct3ResTime?: float64;
 
   @doc("Throughput.")
   @visibility("read")
-  throughput?: float32;
+  throughput?: float64;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" //KBytes is expected
   @doc("Received network bytes.")
   @visibility("read")
-  receivedKBytesPerSec?: float32;
+  receivedKBytesPerSec?: float64;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" //KBytes is expected
   @doc("Send network bytes.")
   @visibility("read")
-  sentKBytesPerSec?: float32;
+  sentKBytesPerSec?: float64;
 }
 
 @doc("Collection of test run artifacts")
@@ -891,7 +883,7 @@ model MetricDimensionsRequest {
 
   @doc("The interval (i.e. timegrain) of the query.")
   @query
-  interval?: TimeGrain;
+  interval?: TimeGrain = TimeGrain.PT1M;
 
   @doc("Metric namespace to query metric definitions for.")
   @query
@@ -972,7 +964,7 @@ the search parameter can be 500.
 
   @doc("Number of results in response.")
   @query
-  maxpagesize?: int32;
+  maxpagesize?: int32 = 50;
 }
 
 @doc("Parameters for list test operation")
@@ -1008,7 +1000,7 @@ tests.
 
   @doc("Number of results in response.")
   @query
-  maxpagesize?: int32;
+  maxpagesize?: int32 = 50;
 }
 
 @doc("System metadata.")
@@ -1028,6 +1020,28 @@ model SystemMetaData {
   @doc("The user that last modified.")
   @visibility("read")
   lastModifiedBy?: string;
+}
+
+@doc("Test Id path parameter.")
+model TestIdPathParameter {
+  @doc("Unique name for the load test, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.")
+  @maxLength(50)
+  @minLength(2)
+  @key
+  @visibility("read")
+  @pattern("^[a-z0-9_-]*$")
+  testId: string;
+}
+
+@doc("Test run Id path parameter.")
+model TestRunIdPathParameter {
+  @doc("Unique test run identifier for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.")
+  @visibility("read")
+  @maxLength(50)
+  @minLength(2)
+  @key
+  @pattern("^[a-z0-9_-]*$")
+  testRunId: string;
 }
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
