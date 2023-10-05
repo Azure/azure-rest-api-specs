@@ -29,6 +29,10 @@ using TypeSpec.Versioning;
 enum AzureChatExtensionType {
   @doc("Represents the use of Azure Cognitive Search as an Azure OpenAI chat extension.")
   azureCognitiveSearch: "AzureCognitiveSearch",
+  
+  @added(ServiceApiVersions.v2023_11_01_Preview)
+  @doc("TBD John.")
+  azureMachineLearningIndex: "AzureMachineLearningIndex",
 }
 
 @added(ServiceApiVersions.v2023_08_01_Preview)
