@@ -3720,7 +3720,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RegisteredServerCreateParametersProperties",
+          "$ref": "#/definitions/RegisteredServerCreateProperties",
           "description": "The parameters used to create the registered server."
         }
       },
@@ -3742,7 +3742,7 @@
       },
       "description": "The parameters used when updating a registered server."
     },
-    "RegisteredServerCreateParametersProperties": {
+    "RegisteredServerCreateProperties": {
       "description": "RegisteredServer Create Properties object.",
       "properties": {
         "serverCertificate": {
@@ -3784,6 +3784,10 @@
         "applicationId": {
           "type": "string",
           "description": "Server ServicePrincipal Id"
+        },
+		"identity": {
+          "type": "boolean",
+          "description": "Apply server with newly discovered ApplicationId if available."
         }
       }
     },
@@ -5640,7 +5644,7 @@
           "items": {
             "$ref": "#/definitions/ServerEndpointProvisioningStepStatus"
           },
-          "x-ms-identifiers": [],
+          "x-ms-identifiers": ["/properties/name"],
           "readOnly": true
         }
       }
