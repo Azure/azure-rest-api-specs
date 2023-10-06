@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "../shared/routes.tsp";
 
 using Azure.Core;
 using TypeSpec.Versioning;
@@ -107,6 +108,7 @@ authentication context.
 
 // FIXME
   @doc("Deletes an environment and all its associated resources")
+  @pollingOperation(SharedOperations.GetProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @delete
   DeleteEnvironment(
@@ -130,11 +132,16 @@ authentication context.
     {
       @statusCode
       statusCode: 202;
+
       @body body: OperationStatus;
-    } & { 
+
+      @header("Location")
+      location: string;
+
       @pollingLocation
       @header("Operation-Location")
-      operationLocation: string} | {
+      operationLocation: string;
+    } | {
       @statusCode
       statusCode: 204;
     } | CloudError;

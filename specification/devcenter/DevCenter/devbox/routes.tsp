@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "../shared/routes.tsp";
 
 using Azure.Core;
 using TypeSpec.Rest;
@@ -140,6 +141,7 @@ authentication context.
   >;
 
   @doc("Creates or replaces a Dev Box.")
+  @pollingOperation(SharedOperations.GetProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @put
   CreateDevBox is DevCenterBaseResponse<
@@ -166,11 +168,19 @@ authentication context.
     DevBox | {
       @statusCode statusCode: 201;
 
+      @header("Location")
+      location: string;
+
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string;
+
       @body body: DevBox;
     }
   >;
 
   @doc("Deletes a Dev Box.")
+  @pollingOperation(SharedOperations.GetProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @delete
   DeleteDevBox is DevCenterBaseResponse<
@@ -193,10 +203,15 @@ authentication context.
     { 
       @statusCode statusCode: 202;
 
-      @body body: OperationStatus;
+      @header("Location")
+      location: string;
 
-      @header("Operation-Location") operationLocation: string;
-    } | void
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string;
+
+      @body body: OperationStatus;
+    } | { @statusCode statusCode: 204 }
   >;
 
   @doc("Starts a Dev Box")

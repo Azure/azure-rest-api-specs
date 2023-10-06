@@ -60,6 +60,14 @@ model OperationStatusError {
   message?: string;
 }
 
+@lroStatus
+enum OperationStatusValue {
+  Running,
+  @lroSucceeded
+  Completed,
+  Canceled,
+  Failed,
+}
 
 @doc("The current status of an async operation")
 model OperationStatus {
@@ -70,7 +78,7 @@ model OperationStatus {
   name?: string;
 
   @doc("Provisioning state of the resource.")
-  status: string;
+  status: OperationStatusValue;
 
   @doc("The id of the resource.")
   resourceId?: string;
