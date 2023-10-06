@@ -3482,6 +3482,7 @@
       }
     },
     "TriggerChangeDetectionParameters": {
+      "type": "object",
       "properties": {
         "directoryPath": {
           "type": "string",
@@ -3511,6 +3512,7 @@
       "description": "The parameters used when calling trigger change detection action on cloud endpoint."
     },
     "RecallActionParameters": {
+      "type": "object",
       "properties": {
         "pattern": {
           "type": "string",
@@ -3524,6 +3526,7 @@
       "description": "The parameters used when calling recall action on server endpoint."
     },
     "StorageSyncServiceCreateParameters": {
+      "type": "object",
       "properties": {
         "identity": {
           "description": "managed identities for the Storage Sync to interact with other Azure services without maintaining any secrets or credentials in code.",
@@ -3583,6 +3586,7 @@
       "description": "The parameters used when creating a cloud endpoint."
     },
     "StorageSyncServiceCreateParametersProperties": {
+      "type": "object",
       "description": "StorageSyncService Properties object.",
       "properties": {
         "incomingTrafficPolicy": {
@@ -3596,6 +3600,7 @@
       }
     },
     "CloudEndpointCreateParametersProperties": {
+      "type": "object",
       "description": "CloudEndpoint Properties object.",
       "properties": {
         "storageAccountResourceId": {
@@ -3633,6 +3638,7 @@
       "description": "The parameters used when creating a server endpoint."
     },
     "ServerEndpointCreateParametersProperties": {
+      "type": "object",
       "description": "ServerEndpoint Properties object.",
       "properties": {
         "serverLocalPath": {
@@ -3792,6 +3798,7 @@
       }
     },
     "ServerEndpointUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -4050,6 +4057,7 @@
       }
     },
     "CheckNameAvailabilityParameters": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -4074,6 +4082,7 @@
       "description": "Parameters for a check name availability request."
     },
     "CheckNameAvailabilityResult": {
+      "type": "object",
       "properties": {
         "nameAvailable": {
           "readOnly": true,
@@ -4342,6 +4351,7 @@
       }
     },
     "StorageSyncServiceUpdateParameters": {
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -4386,6 +4396,7 @@
         },
         "storageSyncServiceStatus": {
           "type": "integer",
+          "format": "int32",
           "description": "Storage Sync service status.",
           "readOnly": true
         },
@@ -4515,6 +4526,7 @@
         },
         "serverManagementErrorCode": {
           "type": "integer",
+          "format": "int32",
           "description": "Registered Server Management Error Code"
         },
         "lastHeartBeat": {
@@ -4665,12 +4677,14 @@
         },
         "volumeFreeSpacePercent": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 100,
           "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 2147483647,
           "description": "Tier files older than days."
@@ -4703,12 +4717,14 @@
         },
         "volumeFreeSpacePercent": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 100,
           "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 2147483647,
           "description": "Tier files older than days."
