@@ -1359,29 +1359,21 @@
       "allOf": [
           {
               "$ref": "#/definitions/BaseDialog"
-          },
-          {
-              "required": [
-                  "kind",
-                  "context"
-              ],
-              "type": "object",
-              "properties": {
-                  "kind": {
-                      "$ref": "#/definitions/DialogInputType"
-                  },
-                  "context": {
-                      "description": "Dialog context.",
-                      "type": "object",
-                      "additionalProperties": {
-                          "type": "object"
-                      }
-                  }
-              }
           }
       ],
-      "properties": {}
-    },    
+      "properties": {
+          "kind": {
+              "$ref": "#/definitions/DialogInputType"
+          },
+          "context": {
+              "description": "Dialog context.",
+              "type": "object",
+              "additionalProperties": {
+                  "type": "object"
+              }
+          }
+      }
+    },  
     "CommunicationIdentifierModel": {
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
     },
@@ -1405,37 +1397,28 @@
       "allOf": [
           {
               "$ref": "#/definitions/BaseDialog"
-          },
-          {
-              "required": [
-                  "botAppId",
-                  "kind",
-                  "context"
-              ],
-              "type": "object",
-              "properties": {
-                  "botAppId": {
-                      "description": "Bot identifier.",
-                      "type": "string"
-                  },
-                  "language": {
-                      "description": "Language.",
-                      "type": "string"
-                  },
-                  "kind": {
-                      "$ref": "#/definitions/DialogInputType"
-                  },
-                  "context": {
-                      "description": "Dialog context.",
-                      "type": "object",
-                      "additionalProperties": {
-                          "type": "object"
-                      }
-                  }
-              }
           }
       ],
-      "properties": {}
+      "properties": {
+          "botAppId": {
+              "description": "Bot identifier.",
+              "type": "string"
+          },
+          "language": {
+              "description": "Language.",
+              "type": "string"
+          },
+          "kind": {
+              "$ref": "#/definitions/DialogInputType"
+          },
+          "context": {
+              "description": "Dialog context.",
+              "type": "object",
+              "additionalProperties": {
+                  "type": "object"
+              }
+          }
+      }
     },    
     "CallConnectionStateModel": {
       "description": "The state of the call connection.",
