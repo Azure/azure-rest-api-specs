@@ -6387,6 +6387,7 @@
       "properties": {
         "resourceUri": {
           "type": "string",
+          "format": "uri",
           "description": "The resource uri for your Azure Open AI resource."
         },
         "deploymentId": {
@@ -6427,7 +6428,8 @@
       "properties": {
         "uri": {
           "type": "string",
-          "description": "The url for the Web API."
+          "format": "uri",
+          "description": "The uri for the Web API."
         },
         "httpHeaders": {
           "$ref": "#/definitions/WebApiHttpHeaders",
@@ -8246,7 +8248,8 @@
       },
       "required": [
         "documentCount",
-        "storageSize"
+        "storageSize",
+        "vectorIndexSize"
       ],
       "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date."
     },
@@ -9408,6 +9411,7 @@
         "uri": {
           "x-ms-client-name": "ScoringUri",
           "type": "string",
+          "format": "uri",
           "x-nullable": true,
           "description": "(Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed."
         },
@@ -9457,6 +9461,7 @@
       "properties": {
         "resourceUri": {
           "type": "string",
+          "format": "uri",
           "description": "The resource uri for your Azure Open AI resource."
         },
         "deploymentId": {

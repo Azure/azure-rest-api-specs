@@ -52,6 +52,22 @@
             "synonymMaps": []
           },
           {
+            "name": "descriptionEmbedding",
+            "type": "Collection(Edm.Single)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "synonymMaps": [],
+            "dimensions": 1536,
+            "vectorSearchConfiguration": "myHnswProfile"
+          },
+          {
             "name": "description_fr",
             "type": "Edm.String",
             "searchable": true,
@@ -237,6 +253,18 @@
             "applicationId": "00000000-0000-0000-0000-000000000000",
             "applicationSecret": null
           }
+        },
+        "vectorSearch": {
+          "algorithmConfigurations": [
+            {
+              "name": "myHnsw",
+              "kind": "hnsw",
+              "hnswParameters": {
+                "m": 4,
+                "metric": "cosine"
+              }
+            }
+          ]
         }
       }
     }
