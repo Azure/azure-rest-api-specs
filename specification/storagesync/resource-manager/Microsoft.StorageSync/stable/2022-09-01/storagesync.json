@@ -3,10 +3,7 @@
   "info": {
     "title": "Microsoft Storage Sync",
     "description": "Microsoft Storage Sync Service API. This belongs to Microsoft.StorageSync Resource Provider",
-    "version": "2022-09-01",
-    "x-ms-code-generation-settings": {
-      "name": "StorageSyncManagementClient"
-    }
+    "version": "2022-09-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -3218,7 +3215,7 @@
         "operationId": "OperationStatus_Get",
         "description": "Get Operation status",
         "x-ms-examples": {
-          "Workflows_Get": {
+          "OperationStatus_Get": {
             "$ref": "./examples/OperationStatus_Get.json"
           }
         },
@@ -3275,10 +3272,10 @@
         "tags": [
           "Operation Status"
         ],
-        "operationId": "LocationOperationStatus",
+        "operationId": "LocationOperationStatus_Get",
         "description": "Get Operation status",
         "x-ms-examples": {
-          "Workflows_Get": {
+          "LocationOperationStatus": {
             "$ref": "./examples/LocationOperationStatus_Get.json"
           }
         },
@@ -3663,6 +3660,7 @@
         },
         "volumeFreeSpacePercent": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 100,
           "description": "Level of free space to be maintained by Cloud Tiering if it is enabled.",
@@ -3670,6 +3668,7 @@
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "maximum": 2147483647,
           "description": "Tier files older than days.",
@@ -3751,6 +3750,7 @@
       "description": "The parameters used when updating a registered server."
     },
     "RegisteredServerCreateParametersProperties": {
+      "type": "object",
       "description": "RegisteredServer Create Properties object.",
       "properties": {
         "serverCertificate": {
@@ -4212,6 +4212,7 @@
         },
         "pauseWaitForSyncDrainTimePeriodInSeconds": {
           "type": "integer",
+          "format": "int32",
           "description": "Pre Restore pause wait for sync drain time period in seconds."
         }
       }
