@@ -16,7 +16,7 @@
         "tags": [
           "BillingRoleDefinition"
         ],
-        "description": "Gets the definition for a role on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "description": "Gets the definition for a role on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -29,12 +29,7 @@
             "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "in": "path",
-            "name": "billingProfileName",
-            "description": "The ID that uniquely identifies a billing account.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z\\d-_]{1,128}$"
+            "$ref": "./types.json#/parameters/billingProfileName"
           },
           {
             "$ref": "./types.json#/parameters/roleDefinitionName"
@@ -69,7 +64,7 @@
         "tags": [
           "BillingRoleDefinition"
         ],
-        "description": "Lists the role definitions for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "description": "Lists the role definitions for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
