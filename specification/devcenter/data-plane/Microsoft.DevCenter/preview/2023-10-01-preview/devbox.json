@@ -294,7 +294,7 @@
         }
       }
     },
-    "/projects/{projectName}/customizationtasks": {
+    "/projects/{projectName}/customizationTasks": {
       "get": {
         "tags": [
           "Customization Tasks"
@@ -303,9 +303,6 @@
         "parameters": [
           {
             "$ref": "devcenter.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "devcenter.json#/parameters/TopParameter"
           },
           {
             "$ref": "devcenter.json#/parameters/FilterParameter"
@@ -340,7 +337,7 @@
         "x-ms-odata": "#/definitions/CustomizationTaskDefinition"
       }
     },
-    "/projects/{projectName}/catalogs/{catalogName}/customizationtasks/{taskName}": {
+    "/projects/{projectName}/catalogs/{catalogName}/customizationTasks/{taskName}": {
       "get": {
         "tags": [
           "Customization Tasks"
@@ -388,7 +385,7 @@
         }
       }
     },
-    "/projects/{projectName}/customizationtasks:validate": {
+    "/projects/{projectName}/customizationTasks:validateGroup": {
       "post": {
         "tags": [
           "Customization Tasks"
@@ -397,12 +394,6 @@
         "parameters": [
           {
             "$ref": "devcenter.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "devcenter.json#/parameters/TopParameter"
-          },
-          {
-            "$ref": "devcenter.json#/parameters/FilterParameter"
           },
           {
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
@@ -423,16 +414,10 @@
           "final-state-via": "operation-location"
         },
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CustomizationTaskListValidationResult"
-            }
-          },
           "202": {
             "description": "The request was accepted.",
             "schema": {
-              "$ref": "devcenter.json#/definitions/OperationStatus"
+              "$ref": "#/definitions/CustomizationTaskListValidationOperationResult"
             }
           },
           "default": {
@@ -1015,7 +1000,7 @@
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationgroups": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationGroups": {
       "get": {
         "tags": [
           "Dev Boxes"
@@ -1073,7 +1058,7 @@
         "x-ms-odata": "#/definitions/CustomizationGroup"
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationgroups/{customizationGroupName}": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationGroups/{customizationGroupName}": {
       "get": {
         "tags": [
           "Dev Boxes"
@@ -1182,7 +1167,7 @@
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationgroups/{customizationGroupName}/logs/{customizationTaskId}": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationGroups/{customizationGroupName}/logs/{customizationTaskId}": {
       "get": {
         "tags": [
           "Dev Boxes"
@@ -1992,8 +1977,8 @@
           "description": "Description of the task.",
           "type": "string"
         },
-        "inputs": {
-          "description": "Inputs to the task.",
+        "parameters": {
+          "description": "Parameters for the task.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/CustomizationTaskDefinitionInput"
@@ -2030,11 +2015,11 @@
           "description": "Whether or not the input is required.",
           "type": "boolean"
         },
-        "defaultValue": {
+        "default": {
           "description": "Default value for the input.",
           "type": "string"
         },
-        "allowedValues": {
+        "allowed": {
           "description": "Allowed values for the input.",
           "type": "array",
           "items": {
@@ -2369,8 +2354,8 @@
           "description": "Name of the task.",
           "type": "string"
         },
-        "inputs": {
-          "description": "Inputs for the task.",
+        "parameters": {
+          "description": "Parameters for the task.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -2382,6 +2367,11 @@
         },
         "id": {
           "description": "ID of the task instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "logUri": {
+          "description": "The unique URI for retrieving the task logs.",
           "type": "string",
           "readOnly": true
         },
@@ -2467,11 +2457,26 @@
         }
       }
     },
+    "CustomizationTaskListValidationOperationResult": {
+      "description": "The operation result of validating a list of customization tasks.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "devcenter.json#/definitions/OperationStatus"
+        }
+      ],
+      "properties": {
+        "result": {
+          "description": "Outcome of validation.",
+          "$ref": "#/definitions/CustomizationTaskListValidationResult"
+        }
+      }
+    },
     "CustomizationTaskListValidationResult": {
       "description": "The result of validating a list of customization tasks.",
       "type": "object",
       "properties": {
-        "status": {
+        "validationResult": {
           "description": "Outcome of validation.",
           "$ref": "#/definitions/CustomizationTaskListValidationStatus"
         },
@@ -2484,7 +2489,7 @@
         }
       },
       "required": [
-        "status"
+        "validationResult"
       ]
     },
     "CustomizationTaskListValidationStatus": {
