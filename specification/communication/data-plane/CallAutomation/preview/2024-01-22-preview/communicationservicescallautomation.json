@@ -1351,30 +1351,16 @@
     },
     "AzureOpenAIDialog": {
       "description": "Azure Open AI Dialog",
-      "required": [
-          "kind",
-          "context"
-      ],
+      "required": [],
       "type": "object",
       "allOf": [
           {
               "$ref": "#/definitions/BaseDialog"
           }
       ],
-      "properties": {
-          "kind": {
-              "$ref": "#/definitions/DialogInputType"
-          },
-          "context": {
-              "description": "Dialog context.",
-              "type": "object",
-              "additionalProperties": {
-                  "type": "object"
-              }
-          }
-      },
+      "properties": {},
       "x-ms-discriminator-value": "AzureOpenAI"
-    },  
+    },
     "CommunicationIdentifierModel": {
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
     },
@@ -1390,9 +1376,7 @@
     "PowerVirtualAgentsDialog": {
       "description": "Power Virtual Agents Dialog",
       "required": [
-          "botAppId",
-          "kind",
-          "context"
+          "botAppId"
       ],
       "type": "object",
       "allOf": [
@@ -1408,20 +1392,10 @@
           "language": {
               "description": "Language.",
               "type": "string"
-          },
-          "kind": {
-              "$ref": "#/definitions/DialogInputType"
-          },
-          "context": {
-              "description": "Dialog context.",
-              "type": "object",
-              "additionalProperties": {
-                  "type": "object"
-              }
           }
       },
       "x-ms-discriminator-value": "PowerVirtualAgents"
-    },    
+    },
     "CallConnectionStateModel": {
       "description": "The state of the call connection.",
       "enum": [
