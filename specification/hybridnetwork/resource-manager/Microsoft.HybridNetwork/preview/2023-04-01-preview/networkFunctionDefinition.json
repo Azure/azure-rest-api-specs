@@ -932,6 +932,150 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}/networkFunctionDefinitionVersions/{networkFunctionDefinitionVersionName}/listApplicationVersions": {
+      "post": {
+        "tags": [
+          "NetworkFunctionDefinitionVersions"
+        ],
+        "operationId": "NetworkFunctionDefinitionVersions_ListApplicationVersions",
+        "description": "Get information about helm package versions in network function definition version overview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "artifactParameters",
+            "description": "Post body parameters for list application versions API.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListApplicationVersionsBodyParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operations returns the list of application versions.",
+            "schema": {
+              "$ref": "./pureProxyArtifact.json#/definitions/ProxyArtifactVersionsOverviewListResult"
+            }
+          },
+          "202": {
+            "description": "Request of getting list of helm chart versions is accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get network function application versions overview": {
+            "$ref": "./examples/NetworkFunctionDefinitionVersionListApplicationVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}/networkFunctionDefinitionVersions/{networkFunctionDefinitionVersionName}/listArtifacts": {
+      "post": {
+        "tags": [
+          "NetworkFunctionDefinitionVersions"
+        ],
+        "operationId": "NetworkFunctionDefinitionVersions_ListArtifact",
+        "description": "Get information about artifacts in a helm package in network function definition version overview.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "artifactParameters",
+            "description": "Post body parameters for list artifacts API.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListArtifactsBodyParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operations returns the list of artifacts.",
+            "schema": {
+              "$ref": "./pureProxyArtifact.json#/definitions/ProxyArtifactVersionsOverviewListResult"
+            }
+          },
+          "202": {
+            "description": "Request of getting list of images is accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get artifacts overview in network function definition version": {
+            "$ref": "./examples/NetworkFunctionDefinitionVersionListArtifacts.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
     }
   },
   "definitions": {
@@ -1906,6 +2050,32 @@
             "read",
             "create"
           ]
+        }
+      }
+    },
+    "ListArtifactsBodyParameters": {
+      "type": "object",
+      "properties": {
+        "networkFunctionApplicationName": {
+          "type": "string",
+          "description": "Network function application name."
+        },
+        "deploymentValues": {
+          "type": "string",
+          "description": "Deployment values for the network function definition version."
+        },
+        "helmPackageVersion": {
+          "type": "string",
+          "description": "The version of the helm package."
+        }
+      }
+    },
+    "ListApplicationVersionsBodyParameters": {
+      "type": "object",
+      "properties": {
+        "networkFunctionApplicationName": {
+          "type": "string",
+          "description": "Network function application name."
         }
       }
     }
