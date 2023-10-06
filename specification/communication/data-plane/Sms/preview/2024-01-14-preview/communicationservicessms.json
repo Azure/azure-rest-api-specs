@@ -63,9 +63,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "in": "body",
             "name": "SendMessageRequest",
             "description": "",
@@ -73,6 +70,9 @@
             "schema": {
               "$ref": "#/definitions/SendMessageRequest"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -278,7 +278,6 @@
       "properties": {
         "to": {
           "description": "The recipient's phone number in E.164 format.",
-          "minLength": 1,
           "type": "string"
         },
         "repeatabilityRequestId": {
