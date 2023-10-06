@@ -970,6 +970,88 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "operationId": "OperationResults_Get",
+        "description": "Returns the async operation results.",
+        "x-ms-examples": {
+          "Get details of the operation result": {
+            "$ref": "./examples/getOperationResults.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted. The operation is ongoing."
+          },
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/operationsStatuses/{operationId}": {
+      "get": {
+        "tags": [
+          "OperationsStatuses"
+        ],
+        "operationId": "OperationsStatuses_Get",
+        "description": "Returns the async operation results.",
+        "x-ms-examples": {
+          "Get details of the operation status": {
+            "$ref": "./examples/getOperationsStatuses.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
