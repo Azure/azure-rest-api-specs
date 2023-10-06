@@ -3063,9 +3063,9 @@
           ],
           "description": "The storage accounts for this resource."
         },
-        "amlWorkspaceId": {
-          "type": "string",
-          "description": "The AML workspace Id."
+        "amlWorkspace": {
+          "$ref": "#/definitions/UserOwnedAmlWorkspace",
+          "description": "The user owned AML workspace properties."
         },
         "privateEndpointConnections": {
           "type": "array",
@@ -4113,6 +4113,20 @@
       },
       "description": "The user owned storage for Cognitive Services account."
     },
+    "UserOwnedAmlWorkspace": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Full resource id of a AML workspace resource."
+        },
+        "identityClientId": {
+          "type": "string",
+          "description": "Identity Client id of a AML workspace resource."
+        }
+      },
+      "description": "The user owned AML workspace for Cognitive Services account."
+    },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
       "properties": {
@@ -4369,6 +4383,7 @@
         },
         "currentCapacity": {
           "type": "integer",
+          "format": "int32",
           "description": "The current capacity."
         }
       },
