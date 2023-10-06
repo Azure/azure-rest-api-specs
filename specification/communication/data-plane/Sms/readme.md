@@ -26,7 +26,7 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-sms-2021-03-07
+tag: package-2023-10-09-privatepreview
 ```
 
 ### Tag: package-2020-07-20-preview1
