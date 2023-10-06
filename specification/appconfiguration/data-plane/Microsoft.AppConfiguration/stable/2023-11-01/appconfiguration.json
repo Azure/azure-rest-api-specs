@@ -1425,13 +1425,13 @@
           {
             "name": "key",
             "in": "query",
-            "description": "A filter used to match keys.",
+            "description": "A filter used to match keys. Syntax reference: https://aka.ms/azconfig/docs/restapirevisions",
             "type": "string"
           },
           {
             "name": "label",
             "in": "query",
-            "description": "A filter used to match labels",
+            "description": "A filter used to match labels. Syntax reference: https://aka.ms/azconfig/docs/restapirevisions",
             "type": "string"
           },
           {
@@ -1454,6 +1454,17 @@
           },
           {
             "$ref": "#/parameters/KeyValueFields"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "A filter used to query by tags. Syntax reference: https://aka.ms/azconfig/docs/restapirevisions",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "uniqueItems": true
           }
         ],
         "responses": {
@@ -1502,13 +1513,13 @@
           {
             "name": "key",
             "in": "query",
-            "description": "A filter used to match keys.",
+            "description": "A filter used to match keys. Syntax reference: https://aka.ms/azconfig/docs/restapirevisions",
             "type": "string"
           },
           {
             "name": "label",
             "in": "query",
-            "description": "A filter used to match labels",
+            "description": "A filter used to match labels. Syntax reference: https://aka.ms/azconfig/docs/restapirevisions",
             "type": "string"
           },
           {
@@ -1531,6 +1542,17 @@
           },
           {
             "$ref": "#/parameters/KeyValueFields"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "A filter used to query by tags. Syntax reference: https://aka.ms/azconfig/docs/restapirevisions",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "uniqueItems": true
           }
         ],
         "responses": {
@@ -1748,7 +1770,7 @@
       }
     },
     "KeyValueFilter": {
-      "description": "Enables filtering of key-values.",
+      "description": "Enables filtering of key-values. Syntax reference: https://aka.ms/azconfig/docs/restapisnapshots",
       "type": "object",
       "required": [
         "key"
@@ -1761,6 +1783,14 @@
         "label": {
           "description": "Filters key-values by their label field.",
           "type": "string"
+        },
+        "tags": {
+          "description": "Filters key-values by their tags field.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
         }
       }
     },
