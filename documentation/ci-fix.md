@@ -130,20 +130,21 @@ Then refer to [this TSG](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/in
 
 ## TypeSpec Validation
 
-This validator is to ensure the TypeSpec & swagger files in PR are consistent and passing validation.
+This validator will help ensure your TypeSpec project follows [standard conventions](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md) as well ensures that the [generated swagger](https://azure.github.io/typespec-azure/docs/emitters/typespec-autorest) files are in-sync with your project.
 
-### How to fix
+### Run tsv locally
+```
+cd <repo>
+git checkout <your-branch>
+git merge <target-branch>
+npm ci
+npx tsv <path-to-your-spec>
+git commit; git push (if any changes)
 
-| Error Code                   | Severity | Solution                                                                                                                                                                                                                                                                                     |
-|------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| MissingTypeSpecFile          | Error    | Adding the related TypeSpec project into {RP-Name} folder, like [Qumulo.Management](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/liftrqumulo/Qumulo.Management)                                                                                                     |
-| MissingExamplesDirectory     | Error    | The example files should be kept in the 'examples' folder under the TypeSpec project,the typespec-autorest emitter will copy them into the output folder and create corresponding 'x-ms-examples' in the swagger automatically when geneates the swagger, you should also check in it in PR. |
-| InConsistentSwagger          | Error    | The generated swagger is inconsistent with the swagger in PR, so you need to re-generate swagger from TypeSpec project and check in it.                                                                                                                                                      |
-| SwaggerNotExistInPR          | Error    | It occurs when there is a TypeSpec file in the PR but the generated swagger is not present in the PR, so you need to add the swagger to the PR.                                                                                                                                              |
-| GeneratedSwaggerNotFound     | Error    | It occurs when there is a TypeSpec file in the PR but there is no swagger produced by the typespec-autorest emitter, so you need to check the tspconfig.yaml to see if it has the wrong configuration, like 'output-dir' or 'azure-resource-provider-folder'.                                |
-| MissingTypeSpecProjectConfig | Warning  | The configuration of '@azure-tools/typespec-autorest' including 'output-file','azure-resource-provider-folder' are used to customize the generated swagger file name and folder structure, it's recommended to use them in the 'tspconfig.yaml', here is a [sample tspconfig.yaml].          |
-
-See [typespec-autorest](https://azure.github.io/typespec-azure/docs/emitters/typespec-autorest) for more information about how the swagger is generated from the TypeSpec project.
+# example 
+npx tsv specification/contosowidgetmanager/Contoso.WidgetManager
+```
+Then check any errors that might be outputted and address any issues as needed. If there are changed files after the run it generally means that the generated swagger files were not in-sync with the TypeSpec project and you should include those changes in your pull request as well. 
 
 ## Suppression Process
 
@@ -159,4 +160,3 @@ Following tools have been removed from the validation toolchain as of August 202
 
 [automated validation tooling]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-tooling
 [Azure REST API specs PR]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-specs-pr
-[sample tspconfig.yaml]: https://github.com/Azure/azure-rest-api-specs/blob/main/specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml#L11
