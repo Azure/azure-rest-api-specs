@@ -168,14 +168,15 @@ authentication context.
     DevBox | {
       @statusCode statusCode: 201;
 
+      @finalLocation
       @header("Location")
-      location: string;
+      location: ResourceLocation<DevBox>;
 
       @pollingLocation
       @header("Operation-Location")
       operationLocation: string;
 
-      @body body: DevBox;
+      @body body?: DevBox;
     }
   >;
 
