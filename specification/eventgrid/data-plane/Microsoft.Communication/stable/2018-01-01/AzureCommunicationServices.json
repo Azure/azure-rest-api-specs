@@ -9,6 +9,7 @@
   "definitions": {
     "AcsIncomingCallEventData": {
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event",
+      "type": "object",
       "properties": {
         "to": {
           "description": "The communication identifier of the target user.",
@@ -44,6 +45,7 @@
     },
     "AcsUserDisconnectedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event.",
+      "type": "object",
       "properties": {
         "userCommunicationIdentifier": {
           "description": "The communication identifier of the user who was disconnected",
@@ -279,10 +281,10 @@
       },
       "x-ms-examples": {
         "snapshotCreatedCloudEventsSchema": {
-          "$ref": "./examples/cloud-events-schema/router_job_queue.json"
+          "$ref": "./examples/cloud-events-schema/router_job_queued.json"
         },
         "snapshotCreatedEventGridSchema": {
-          "$ref": "./examples/event-grid-schema/router_job_queue.json"
+          "$ref": "./examples/event-grid-schema/router_job_queued.json"
         }
       }
     },
@@ -811,6 +813,7 @@
           "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "messageBody": {
           "description": "The body of the chat message",
@@ -832,6 +835,7 @@
           "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "messageBody": {
           "description": "The body of the chat message",
@@ -853,6 +857,7 @@
           "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "messageBody": {
           "description": "The body of the chat message",
@@ -879,6 +884,7 @@
           "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "messageBody": {
           "description": "The body of the chat message",
@@ -905,6 +911,7 @@
           "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "deleteTime": {
           "description": "The time at which the message was deleted",
@@ -920,6 +927,7 @@
           "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "deleteTime": {
           "description": "The time at which the message was deleted",
@@ -935,6 +943,7 @@
           "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "createdByCommunicationIdentifier": {
           "description": "The communication identifier of the user who created the thread",
@@ -963,6 +972,7 @@
           "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "createdByCommunicationIdentifier": {
           "description": "The communication identifier of the user who created the thread",
@@ -991,6 +1001,7 @@
           "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "deletedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who deleted the thread",
@@ -1010,6 +1021,7 @@
           "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "deletedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who deleted the thread",
@@ -1029,6 +1041,7 @@
           "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "editedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who updated the thread properties",
@@ -1055,6 +1068,7 @@
           "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "editedByCommunicationIdentifier": {
           "description": "The communication identifier of the user who updated the thread properties",
@@ -1081,6 +1095,7 @@
           "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "time": {
           "description": "The time at which the user was added to the thread",
@@ -1104,6 +1119,7 @@
           "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "time": {
           "description": "The time at which the user was removed to the thread",
@@ -1127,6 +1143,7 @@
           "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "time": {
           "description": "The time at which the user was added to the thread",
@@ -1155,6 +1172,7 @@
           "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "time": {
           "description": "The time at which the user was removed to the thread",
@@ -1183,6 +1201,7 @@
           "$ref": "#/definitions/AcsSmsEventBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "deliveryStatus": {
           "description": "Status of Delivery",
@@ -1217,6 +1236,7 @@
           "$ref": "#/definitions/AcsSmsEventBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "message": {
           "description": "The SMS content",
@@ -1231,6 +1251,7 @@
     },
     "AcsRecordingFileStatusUpdatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event.",
+      "type": "object",
       "properties": {
         "recordingStorageInfo": {
           "description": "The details of recording storage information",
@@ -1412,6 +1433,7 @@
           "$ref": "#/definitions/AcsChatEventBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "createTime": {
           "description": "The original creation time of the thread",
@@ -1432,6 +1454,7 @@
           "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "createTime": {
           "description": "The original creation time of the thread",
@@ -1452,6 +1475,7 @@
           "$ref": "#/definitions/AcsChatEventBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "messageId": {
           "description": "The chat message id",
@@ -1488,6 +1512,7 @@
           "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
         }
       ],
+      "type": "object",
       "properties": {
         "messageId": {
           "description": "The chat message id",
@@ -1654,11 +1679,13 @@
         },
         "segmentsSucceeded": {
           "description": "Number of segments that were successfully delivered",
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "segmentsFailed": {
           "description": "Number of segments whose delivery failed",
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
