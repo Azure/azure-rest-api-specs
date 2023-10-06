@@ -1,8 +1,9 @@
 emit: [
   # "@azure-tools/typespec-apiview",
   # "@azure-tools/typespec-autorest",
-  # "@azure-tools/typespec-csharp"
-  "@azure-tools/typespec-ts",
+  "@azure-tools/typespec-csharp",
+  # "@azure-tools/typespec-ts",
+  # "@azure-tools/typespec-python",
 ]
 # linter:
 #   extends:
@@ -13,6 +14,10 @@ options:
     clear-output-folder : true
     # new-project : false
     # model-namespace : false
+  "@azure-tools/typespec-python":
+    package-dir: "azure-developer-devcenter"
+    package-name: "{package-dir}"
+    models-mode: none
   "@azure-tools/typespec-ts":
     title: "Azure Developer DevCenter"
     generateMetadata: true
