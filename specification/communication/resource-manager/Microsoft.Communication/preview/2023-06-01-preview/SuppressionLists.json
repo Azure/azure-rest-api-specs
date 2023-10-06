@@ -49,7 +49,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           }
         ],
         "responses": {
@@ -101,7 +101,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           },
           {
             "$ref": "#/parameters/SuppressionListName"
@@ -151,7 +151,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           },
           {
             "$ref": "#/parameters/SuppressionListName"
@@ -219,7 +219,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           },
           {
             "$ref": "#/parameters/SuppressionListName"
@@ -274,7 +274,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           },
           {
             "$ref": "#/parameters/SuppressionListName"
@@ -329,7 +329,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           },
           {
             "$ref": "#/parameters/SuppressionListName"
@@ -382,7 +382,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           },
           {
             "$ref": "#/parameters/SuppressionListName"
@@ -450,7 +450,7 @@
             "$ref": "EmailServices.json#/parameters/EmailServiceName"
           },
           {
-            "$ref": "Domains.json#/parameters/DomainName"
+            "$ref": "#/parameters/DomainName"
           },
           {
             "$ref": "#/parameters/SuppressionListName"
@@ -632,6 +632,17 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "pattern": "^[a-zA-Z0-9-]+$"
+    },
+    "DomainName": {
+      "name": "domainName",
+      "in": "path",
+      "description": "The name of the Domains resource.",
+      "minLength": 1,
+      "maxLength": 253,
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": ".*"
     }
   }
 }
