@@ -1513,6 +1513,9 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1764,7 +1767,7 @@
         "operationId": "RaiBlocklists_List",
         "description": "Gets the custom blocklists associated with the Azure OpenAI account.",
         "x-ms-examples": {
-          "ListRaiPolicies": {
+          "ListBlocklists": {
             "$ref": "./examples/ListBlocklists.json"
           }
         },
@@ -1809,7 +1812,7 @@
         "operationId": "RaiBlocklistItems_List",
         "description": "Gets the blocklist items associated with the custom blocklist.",
         "x-ms-examples": {
-          "ListRaiPolicies": {
+          "ListBlocklistItems": {
             "$ref": "./examples/ListBlocklistItems.json"
           }
         },
@@ -2009,10 +2012,10 @@
         "tags": [
           "RaiBlocklists"
         ],
-        "operationId": "RaiBlocklist_Get",
+        "operationId": "RaiBlocklists_Get",
         "description": "Gets the specified custom blocklist associated with the Azure OpenAI account.",
         "x-ms-examples": {
-          "GetRaiPolicy": {
+          "GetRaiBlocklist": {
             "$ref": "./examples/GetRaiBlocklist.json"
           }
         },
@@ -2167,7 +2170,7 @@
         "operationId": "RaiBlocklistItem_Get",
         "description": "Gets the specified custom blocklist Item associated with the custom blocklist.",
         "x-ms-examples": {
-          "GetRaiPolicy": {
+          "GetRaiBlocklistItem": {
             "$ref": "./examples/GetRaiBlocklistItem.json"
           }
         },
@@ -5286,7 +5289,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The name of the deployment associated with the Cognitive Services Account",
       "x-ms-parameter-location": "method"
     },
