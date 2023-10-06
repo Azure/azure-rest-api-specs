@@ -50,6 +50,20 @@ suppressions:
     reason: server side don't support Patch yet track with https://msdata.visualstudio.com/Vienna/_workitems/edit/2702298.
     where:
       - $.definitions.PrivateEndpointConnection
+tag: package-2023-10
+```
+
+
+### Tag: package-2023-10
+
+These settings apply only when `--tag=package-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2023-10-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2023-10-01/mfe.json
+  - Microsoft.MachineLearningServices/stable/2023-10-01/registries.json
+  - Microsoft.MachineLearningServices/stable/2023-10-01/workspaceFeatures.json
 ```
 ### Tag: package-preview-2023-06
 
