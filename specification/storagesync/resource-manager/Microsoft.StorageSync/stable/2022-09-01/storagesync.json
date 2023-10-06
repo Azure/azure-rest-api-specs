@@ -3504,6 +3504,7 @@
           "items": {
             "type": "string"
           },
+          "x-ms-identifiers": [],
           "description": "Array of relative paths on the Azure File share to be included in the change detection. Can be files and directories."
         }
       },
@@ -3845,7 +3846,8 @@
           "description": "Collection of Resources.",
           "items": {
             "$ref": "#/definitions/ResourceId"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4006,7 +4008,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "fillGapWithZero": {
           "type": "boolean",
@@ -4236,7 +4239,10 @@
           "description": "Collection of StorageSyncServices.",
           "items": {
             "$ref": "#/definitions/StorageSyncService"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -4249,7 +4255,10 @@
           "description": "Collection of SyncGroup.",
           "items": {
             "$ref": "#/definitions/SyncGroup"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -4262,7 +4271,10 @@
           "description": "Collection of CloudEndpoint.",
           "items": {
             "$ref": "#/definitions/CloudEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -4275,7 +4287,10 @@
           "description": "Collection of ServerEndpoint.",
           "items": {
             "$ref": "#/definitions/ServerEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -4288,7 +4303,10 @@
           "description": "Collection of Registered Server.",
           "items": {
             "$ref": "#/definitions/RegisteredServer"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -4301,7 +4319,10 @@
           "description": "Collection of workflow items.",
           "items": {
             "$ref": "#/definitions/Workflow"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -4399,6 +4420,9 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
+          "x-ms-identifiers": [
+            "properties/privateEndpoint/id"
+          ],
           "description": "List of private endpoint connection associated with the specified storage sync service"
         }
       }
@@ -5634,7 +5658,7 @@
             "$ref": "#/definitions/ServerEndpointProvisioningStepStatus"
           },
           "x-ms-identifiers": [
-            "/properties/name"
+            "name"
           ],
           "readOnly": true
         }
