@@ -280,6 +280,33 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/quotausage": {
+      "get": {
+        "operationId": "DatabaseAccounts_QuotaUsage",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountList": {
+            "$ref": "./examples/CosmosDBDatabaseAccountQuotaUsage.json"
+          }
+        },
+        "description": "Lists all the Azure Cosmos DB database accounts using free tier.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaUsageResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts": {
       "get": {
         "operationId": "DatabaseAccounts_ListByResourceGroup",
@@ -7534,6 +7561,14 @@
       ],
       "description": "Cosmos DB region to online or offline."
     },
+    "QuotaUsageResult": {
+      "properties": {
+        "GlobalDatabaseAccountName": {
+          "type": "string",
+          "description": "Cosmos DB database account."
+        }
+      },
+      "description": "Free Tier Global Database Account For Subscription."
     "Location": {
       "description": "A region in which the Azure Cosmos DB database account is deployed.",
       "type": "object",
