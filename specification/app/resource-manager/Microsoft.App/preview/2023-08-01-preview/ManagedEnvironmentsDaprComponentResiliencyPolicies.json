@@ -34,14 +34,16 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "componentName",
             "in": "path",
             "description": "Name of the Dapr Component.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -90,14 +92,16 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "componentName",
             "in": "path",
             "description": "Name of the Dapr Component.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "name",
@@ -149,14 +153,16 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "componentName",
             "in": "path",
             "description": "Name of the Dapr Component.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "name",
@@ -224,14 +230,16 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "componentName",
             "in": "path",
             "description": "Name of the Dapr Component.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "name",
@@ -245,8 +253,11 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": "Delete operation completed"
+          },
+          "204": {
+            "description": "Dapr component does not exist"
           },
           "default": {
             "description": "Common error response.",
