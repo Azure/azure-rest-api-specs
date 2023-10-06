@@ -65,6 +65,10 @@ suppressions:
     from: virtualMachineInstances.json
   - code: TopLevelResourcesListBySubscription
     reason: There is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances
+
+  - code: PropertiesTypeObjectNoDefinition
+    reason: These are existing properties already supported as part of PUT extensions call. Same properties are being supported for extensions Patch now.  
+    from: extensions.json
 ```
 
 
