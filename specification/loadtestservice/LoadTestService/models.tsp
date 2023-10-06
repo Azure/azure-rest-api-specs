@@ -811,7 +811,7 @@ a duration 'PT1M', 'PT1H', etc.
   timeGrain?: TimeGrain;
 }
 
-@doc("Filters to fetch the set of metric")
+@doc("Filters to fetch the set of metric.")
 model MetricRequestPayload {
   @doc("""
 Get metrics for specific dimension values. Example: Metric contains dimension
@@ -871,7 +871,7 @@ model DimensionValueList {
   @doc("The dimension value")
   value?: string[];
 
-  @doc("Link for the next set of values in case of paginated results, if applicable")
+  @doc("Link for the next set of values in case of paginated results, if applicable.")
   nextLink?: ResourceLocation<DimensionValueList>;
 }
 
@@ -985,15 +985,13 @@ the search parameter can be Login.
   search?: string;
 
   @doc("""
-Start DateTime(ISO 8601 literal format) of the last updated time range to
-filter tests.
+Start DateTime(ISO 8601 literal format) of the last updated time range to filter tests.
 """)
   @query
   lastModifiedStartTime?: utcDateTime;
 
   @doc("""
-End DateTime(ISO 8601 literal format) of the last updated time range to filter
-tests.
+End DateTime(ISO 8601 literal format) of the last updated time range to filter tests.
 """)
   @query
   lastModifiedEndTime?: utcDateTime;
@@ -1024,7 +1022,7 @@ model SystemMetaData {
 
 @doc("Test Id path parameter.")
 model TestIdPathParameter {
-  @doc("Unique name for the load test, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.")
+  @doc("Unique test identifier for the load test, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.")
   @maxLength(50)
   @minLength(2)
   @key
