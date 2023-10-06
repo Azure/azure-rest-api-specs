@@ -399,19 +399,19 @@ model TestInputArtifacts {
 model FileInfo {
   @doc("File URL.")
   @visibility("read")
-  url: string;
+  url?: string;
 
   @doc("File type")
   @visibility("read")
-  fileType: FileType;
+  fileType?: FileType;
 
   @doc("Expiry time of the file (ISO 8601 literal format)")
   @visibility("read")
-  expireDateTime: utcDateTime;
+  expireDateTime?: utcDateTime;
 
   @doc("Validation status of the file")
   @visibility("read")
-  validationStatus: FileStatus;
+  validationStatus?: FileStatus;
 
   @doc("Validation failure error details")
   @visibility("read")
@@ -461,11 +461,11 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
 
   @doc("Resource group name of the Azure resource")
   @visibility("read")
-  resourceGroup: string;
+  resourceGroup?: string;
 
   @doc("Subscription Id of the Azure resource")
   @visibility("read")
-  subscriptionId: string;
+  subscriptionId?: string;
 
   @doc("Kind of Azure resource type")
   kind?: string;

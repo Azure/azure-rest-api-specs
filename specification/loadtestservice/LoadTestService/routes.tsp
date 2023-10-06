@@ -33,6 +33,9 @@ Unique Id for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       testId: string;
 
       @doc("Load test model")
@@ -88,6 +91,9 @@ Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       testId: string;
 
       @doc("Unique name for test file with file extension like : App.jmx")
@@ -133,6 +139,9 @@ Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       testId: string;
 
       @doc("App Component model.")
@@ -154,6 +163,9 @@ Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       testId: string;
     },
     TestAppComponents
@@ -175,6 +187,9 @@ Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       testId: string;
 
       @doc("Server metric configuration model.")
@@ -196,6 +211,9 @@ Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       testId: string;
     },
     TestServerMetricConfig
@@ -224,6 +242,9 @@ Unique Id for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       testRunId: string;
 
       @doc("""
@@ -276,6 +297,9 @@ Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       testRunId: string;
     },
     MetricNamespaceCollection
@@ -293,6 +317,9 @@ Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       testRunId: string;
 
       @doc("Metric namespace to query metric definitions for.")
@@ -314,6 +341,9 @@ Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       testRunId: string;
 
       @doc("The aggregation")
@@ -340,6 +370,9 @@ Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       testRunId: string;
 
       @doc("Dimension name")
@@ -367,6 +400,9 @@ Unique Id for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       testRunId: string;
 
       @doc("App Component model.")
@@ -394,6 +430,9 @@ Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       testRunId: string;
     },
     TestRunAppComponents
@@ -415,8 +454,11 @@ Unique Id for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       testRunId: string;
-
+      
       @doc("Server metric configuration model.")
       @body
       body: TestRunServerMetricConfig;
@@ -436,6 +478,9 @@ Unique name for the load test run, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
 """)
       @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
       testRunId: string;
     },
     TestRunServerMetricConfig
