@@ -53,6 +53,7 @@
     },
     "AcsRouterJobCancelledEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCancelled event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -67,10 +68,19 @@
           "description": "Router Job Disposition Code",
           "type": "string"
         }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_job_cancelled.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_job_cancelled.json"
+        }
       }
     },
     "AcsRouterJobClassificationFailedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassificationFailed event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -82,15 +92,25 @@
           "type": "string"
         },
         "errors": {
+          "description": "Router Job Classification Failed Errors",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AcsRouterCommunicationError"
           }
         }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_job_classification_failed.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_job_classification_failed.json"
+        }
       }
     },
     "AcsRouterJobClassifiedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassified event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -117,10 +137,19 @@
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           }
         }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_job_classified.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_job_classified.json"
+        }
       }
     },
     "AcsRouterJobClosedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClosed event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -139,10 +168,19 @@
           "description": "Router Job Closed Disposition Code",
           "type": "string"
         }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_job_closed.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_job_closed.json"
+        }
       }
     },
     "AcsRouterJobCompletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCompleted event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -157,6 +195,14 @@
           "description": "Router Job Completed Worker Id",
           "type": "string"
         }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_job_completed.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_job_completed.json"
+        }
       }
     },
     "AcsRouterJobDeletedEventData": {
@@ -165,10 +211,19 @@
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
         }
-      ]
+      ],
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_job_deleted.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_job_deleted.json"
+        }
+      }
     },
     "AcsRouterJobExceptionTriggeredEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobExceptionTriggered event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -183,10 +238,19 @@
           "description": "Router Job Exception Triggered Rule Id",
           "type": "string"
         }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_job_exception_triggered.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_job_exception_triggered.json"
+        }
       }
     },
     "AcsRouterJobQueuedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobQueued event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -212,10 +276,19 @@
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           }
         }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_job_queue.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_job_queue.json"
+        }
       }
     },
     "AcsRouterJobReceivedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobReceived event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -270,10 +343,21 @@
           "type": "boolean"
         }
       },
-      "required": [ "unavailableForMatching" ]
+      "required": [
+        "unavailableForMatching"
+      ],
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_job_received.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_job_received.jso"
+        }
+      }
     },
     "AcsRouterJobSchedulingFailedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobSchedulingFailed event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -308,10 +392,19 @@
           "description": "Router Job Scheduling Failed Reason",
           "type": "string"
         }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_job_scheduling_failed.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_job_scheduling_failed.json"
+        }
       }
     },
     "AcsRouterJobUnassignedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobUnassigned event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -326,10 +419,19 @@
           "description": "Router Job Unassigned Worker Id",
           "type": "string"
         }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_job_unassigned.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_job_unassigned.json"
+        }
       }
     },
     "AcsRouterJobWaitingForActivationEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobWaitingForActivation event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -365,10 +467,21 @@
           "type": "boolean"
         }
       },
-      "required": [ "unavailableForMatching" ]
+      "required": [
+        "unavailableForMatching"
+      ],
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_job_waiting_for_activation.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_job_waiting_for_activation.json"
+        }
+      }
     },
     "AcsRouterJobWorkerSelectorsExpiredEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobWorkerSelectorsExpired event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -389,6 +502,14 @@
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           }
         }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_job_worker_selectors_expired.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_job_worker_selectors_expired.json"
+        }
       }
     },
     "AcsRouterWorkerDeletedEventData": {
@@ -397,19 +518,37 @@
         {
           "$ref": "#/definitions/AcsRouterWorkerEventData"
         }
-      ]
+      ],
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_worker_deleted.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_worker_deleted.json"
+        }
+      }
     },
     "AcsRouterWorkerDeregisteredEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeregistered event",
+      "type": "object",
       "properties": {
         "workerId": {
           "description": "Router Worker Deregistered Worker Id",
           "type": "string"
         }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_worker_deregistered.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_worker_deregistered.json"
+        }
       }
     },
     "AcsRouterWorkerOfferAcceptedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferAccepted event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterWorkerEventData"
@@ -461,10 +600,19 @@
             "type": "string"
           }
         }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_worker_offer_accepted.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_worker_offer_accepted.json"
+        }
       }
     },
     "AcsRouterWorkerOfferDeclinedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferDeclined event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterWorkerEventData"
@@ -479,10 +627,19 @@
           "description": "Router Worker Offer Declined Offer Id",
           "type": "string"
         }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_worker_offer_declined.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_worker_offer_declined.json"
+        }
       }
     },
     "AcsRouterWorkerOfferExpiredEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferExpired event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterWorkerEventData"
@@ -497,10 +654,19 @@
           "description": "Router Worker Offer Expired Offer Id",
           "type": "string"
         }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_worker_offer_expired.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_worker_offer_expired.json"
+        }
       }
     },
     "AcsRouterWorkerOfferIssuedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferIssued event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterWorkerEventData"
@@ -562,6 +728,7 @@
     },
     "AcsRouterWorkerOfferRevokedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferRevoked event",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterWorkerEventData"
@@ -576,10 +743,19 @@
           "description": "Router Worker Offer Revoked Offer Id",
           "type": "string"
         }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_worker_offer_revoked.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_worker_offer_revoked.json"
+        }
       }
     },
     "AcsRouterWorkerRegisteredEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerRegistered event",
+      "type": "object",
       "properties": {
         "workerId": {
           "description": "Router Worker Registered Worker Id",
@@ -617,6 +793,14 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/router_worker_registered.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/router_worker_registered.json"
         }
       }
     },
@@ -1349,6 +1533,7 @@
     },
     "AcsRouterJobEventData": {
       "description": "Schema of common properties of all Router Job events",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterEventData"
@@ -1377,6 +1562,7 @@
     },
     "AcsRouterWorkerEventData": {
       "description": "Schema of common properties of all Router Worker events",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterEventData"
@@ -1593,6 +1779,7 @@
     },
     "AcsRouterCommunicationError": {
       "description": "Router Communication Error",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Router Communication Error Code",
