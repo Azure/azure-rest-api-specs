@@ -1479,8 +1479,8 @@
         "operationId": "Deployments_ListSkus",
         "description": "Lists the specified deployments skus associated with the Cognitive Services account.",
         "x-ms-examples": {
-          "GetDeployment": {
-            "$ref": "./examples/ListDeploymentSku.json"
+          "ListDeploymentSkus": {
+            "$ref": "./examples/ListDeploymentSkus.json"
           }
         },
         "parameters": [
@@ -2055,10 +2055,10 @@
         "tags": [
           "RaiBlocklists"
         ],
-        "operationId": "RaiBlocklist_CreateOrUpdate",
+        "operationId": "RaiBlocklists_CreateOrUpdate",
         "description": "Update the state of specified blocklist associated with the Azure OpenAI account.",
         "x-ms-examples": {
-          "PutRaiPolicy": {
+          "PutRaiBlocklist": {
             "$ref": "./examples/PutRaiBlocklist.json"
           }
         },
@@ -2116,7 +2116,7 @@
         "operationId": "RaiBlocklists_Delete",
         "description": "Deletes the specified custom blocklist associated with the Azure OpenAI account.",
         "x-ms-examples": {
-          "DeleteRaiPolicy": {
+          "DeleteRaiBlocklist": {
             "$ref": "./examples/DeleteRaiBlocklist.json"
           }
         },
@@ -2167,7 +2167,7 @@
         "tags": [
           "RaiBlocklists"
         ],
-        "operationId": "RaiBlocklistItem_Get",
+        "operationId": "RaiBlocklistItems_Get",
         "description": "Gets the specified custom blocklist Item associated with the custom blocklist.",
         "x-ms-examples": {
           "GetRaiBlocklistItem": {
@@ -2213,10 +2213,10 @@
         "tags": [
           "RaiBlocklists"
         ],
-        "operationId": "RaiBlocklistItem_CreateOrUpdate",
+        "operationId": "RaiBlocklistItems_CreateOrUpdate",
         "description": "Update the state of specified blocklist item associated with the Azure OpenAI account.",
         "x-ms-examples": {
-          "PutRaiPolicy": {
+          "PutRaiBlocklistItem": {
             "$ref": "./examples/PutRaiBlocklistItem.json"
           }
         },
@@ -2274,10 +2274,10 @@
         "tags": [
           "RaiBlocklists"
         ],
-        "operationId": "RaiBlocklistItem_Delete",
+        "operationId": "RaiBlocklistItems_Delete",
         "description": "Deletes the specified blocklist Item associated with the custom blocklist.",
         "x-ms-examples": {
-          "DeleteRaiPolicy": {
+          "DeleteRaiBlocklistItem": {
             "$ref": "./examples/DeleteRaiBlocklistItem.json"
           }
         },
@@ -2334,7 +2334,7 @@
         "operationId": "RaiContentFilters_List",
         "description": "List Content Filters types.",
         "x-ms-examples": {
-          "GetRaiPolicy": {
+          "ListRaiContentFilters": {
             "$ref": "./examples/ListRaiContentFilters.json"
           }
         },
@@ -3062,6 +3062,10 @@
             "resourceId"
           ],
           "description": "The storage accounts for this resource."
+        },
+        "amlWorkspaceId": {
+          "type": "string",
+          "description": "The AML workspace Id."
         },
         "privateEndpointConnections": {
           "type": "array",
@@ -4266,6 +4270,18 @@
           "readOnly": true,
           "description": "Resource Etag."
         },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
         "properties": {
           "$ref": "#/definitions/DeploymentProperties",
           "description": "Properties of Cognitive Services account deployment."
@@ -4345,6 +4361,15 @@
             "name": "DeploymentModelVersionUpgradeOption",
             "modelAsString": true
           }
+        },
+        "dynamicThrottlingEnabled": {
+          "type": "boolean",
+          "description": "If the dynamic throttling is enabled.",
+          "readOnly": true
+        },
+        "currentCapacity": {
+          "type": "integer",
+          "description": "The current capacity."
         }
       },
       "description": "Properties of Cognitive Services account deployment."
