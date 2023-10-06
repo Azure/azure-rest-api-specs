@@ -56,6 +56,27 @@
           }
         }
       }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprComponents/mydaprcomponent/resiliencyPolicies/myresiliencypolicy",
+        "name": "myresiliencypolicy",
+        "type": "Microsoft.App/managedEnvironments/daprComponents/resiliencyPolicies",
+        "properties": {
+          "outboundPolicy": {
+            "httpRetryPolicy": {
+              "maxRetries": 5,
+              "retryBackOff": {
+                "initialDelayInMilliseconds": 100,
+                "maxIntervalInMilliseconds": 30000
+              }
+            },
+            "timeoutPolicy": {
+              "responseTimeoutInSeconds": 12
+            }
+          }
+        }
+      }
     }
   }
 }
