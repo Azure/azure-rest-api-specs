@@ -8,12 +8,14 @@ namespace Azure.AI.Chat;
 using TypeSpec.Http;
 
 @route("/chat")
-interface Chat {
+interface Chat<StateModel, ArgumentsModel> {
   @doc("placeholder")
   @sharedRoute
-  create(...ChatCompletionOptions): ChatCompletion;
+  create(...ChatCompletionOptions<StateModel, ArgumentsModel>): ChatCompletion<StateModel, ArgumentsModel>;
 
   @doc("placeholder")
   @sharedRoute
-  createStreaming(...StreamingChatCompletionOptions): ChatCompletionChunk;
+  createStreaming(...StreamingChatCompletionOptions<StateModel, ArgumentsModel>): ChatCompletionChunk<StateModel, ArgumentsModel>;
 }
+
+interface GenericChatClient extends Chat<unknown, unknown> {}

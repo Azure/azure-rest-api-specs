@@ -16,44 +16,35 @@ model ChatMessageDelta {
 }
 
 @doc("placeholder")
-model ChoiceDelta {
+model ChoiceDelta<StateModel, ArgumentsModel> {
   @doc("placeholder")
   index: safeint;
 
   @doc("placeholder")
   delta: ChatMessageDelta;
 
-  @doc("placeholder")
-  @projectedName("json", "extra_args")
-  extraArguments?: Record<unknown>;
+  ...StateProperty<StateModel>;
+  ...ExtraArgumentsProperty<ArgumentsModel>;
 
   @doc("placeholder")
-  @projectedName("json", "session_state")
-  sessionState?: unknown;
-
-  @doc("placeholder")
+  @projectedName("json", "finish_reason")
   finishReason?: FinishReason;
 }
 
 @doc("placeholder")
-model ChatCompletionChunk {
+model ChatCompletionChunk<StateModel, ArgumentsModel> {
   @doc("placeholder")
-  choices: ChoiceDelta[];
+  choices: ChoiceDelta<StateModel, ArgumentsModel>[];
 }
 
 @doc("placeholder")
-model StreamingChatCompletionOptions {
+model StreamingChatCompletionOptions<StateModel, ArgumentsModel> {
   @doc("placeholder")
-  messages: ChatMessage[];
+  messages: ChatMessage<StateModel>[];
 
   @doc("placeholder")
   stream: true;
 
-  @doc("placeholder")
-  @projectedName("json", "session_state")
-  sessionState?: unknown;
-
-  @doc("placeholder")
-  @projectedName("json", "extra_args")
-  extraArguments?: Record<unknown>;
+  ...StateProperty<StateModel>;
+  ...ExtraArgumentsProperty<ArgumentsModel>;
 }
