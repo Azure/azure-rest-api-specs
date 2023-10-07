@@ -18,4 +18,5 @@ interface Chat<StateModel, ArgumentsModel> {
   createStreaming(...StreamingChatCompletionOptions<StateModel, ArgumentsModel>): ChatCompletionChunk<StateModel, ArgumentsModel>;
 }
 
+@route("/chat")
 interface GenericChatClient extends Chat<unknown, unknown> {}
