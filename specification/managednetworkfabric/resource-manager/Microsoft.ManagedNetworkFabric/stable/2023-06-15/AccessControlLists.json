@@ -645,6 +645,12 @@
           "format": "uri",
           "minLength": 1
         },
+        "defaultAction": {
+          "type": "string",
+          "description": "Default action that needs to be applied when no condition is matched. Example: Permit | Deny.",
+          "default": "Permit",
+          "$ref": "./common.json#/definitions/CommunityActionTypes"
+        },
         "matchConfigurations": {
           "type": "array",
           "description": "List of match configurations.",
@@ -717,7 +723,7 @@
           "description": "List of actions that need to be performed for the matched conditions.",
           "minItems": 1,
           "items": {
-            "description": "Action that need to performed.",
+            "description": "Action that need to be performed.",
             "$ref": "#/definitions/AccessControlListAction"
           }
         }
@@ -730,7 +736,7 @@
         "etherTypes": {
           "type": "array",
           "minItems": 1,
-          "description": "List of ether type values that needs to be matched.",
+          "description": "List of ether type values that need to be matched.",
           "items": {
             "type": "string",
             "minLength": 1,
@@ -740,7 +746,7 @@
         "fragments": {
           "type": "array",
           "minItems": 1,
-          "description": "List of IP fragment packets that needs to be matched.",
+          "description": "List of IP fragment packets that need to be matched.",
           "items": {
             "type": "string",
             "minLength": 1,
@@ -750,7 +756,7 @@
         "ipLengths": {
           "type": "array",
           "minItems": 1,
-          "description": "List of IP Lengths that needs to be matched.",
+          "description": "List of IP Lengths that need to be matched.",
           "items": {
             "type": "string",
             "minLength": 1,
@@ -760,7 +766,7 @@
         "ttlValues": {
           "type": "array",
           "minItems": 1,
-          "description": "List of TTL [Time To Live] values that needs to be matched.",
+          "description": "List of TTL [Time To Live] values that need to be matched.",
           "items": {
             "type": "string",
             "minLength": 1,
@@ -770,7 +776,7 @@
         "dscpMarkings": {
           "type": "array",
           "minItems": 1,
-          "description": "List of DSCP Markings that needs to be matched.",
+          "description": "List of DSCP Markings that need to be matched.",
           "items": {
             "type": "string",
             "minLength": 1,
@@ -794,7 +800,7 @@
       "properties": {
         "flags": {
           "type": "array",
-          "description": "List of protocol flags that needs to be matched.",
+          "description": "List of protocol flags that need to be matched. Example: established | initial | <List-of-TCP-flags>. List of eligible TCP Flags are ack, fin, not-ack, not-fin, not-psh, not-rst, not-syn, not-urg, psh, rst, syn, urg",
           "items": {
             "type": "string",
             "description": "Flag of the port."

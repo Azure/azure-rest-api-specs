@@ -47,6 +47,7 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/storage/azure-mgmt-storage/azure/mgmt/storage/
+clear-output-folder: false
 perform-load: false
 ```
 ### Tag: package-2023-01 and python

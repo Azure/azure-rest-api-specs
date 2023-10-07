@@ -1,67 +1,6 @@
 ---
 - rule:
     type: label
-    label: BreakingChangeReviewRequired
-    booleanFilterExpression: "!(Approved-OkToMerge)"
-    onLabeledComments: >-
-      Hi @${PRAuthor}! The automation detected breaking changes in this pull request.
-      As a result, it added the `BreakingChangeReviewRequired` label.
-      <br/><br/>
-      You cannot proceed with merging this PR until you complete one of the following action items:
-      <br/><br/>
-      **ACTION ITEM ALTERNATIVE A**: Fix the breaking change. <br/>
-      Please consult the documentation provided in the relevant validation failures.
-      <br/><br/>
-      **ACTION ITEM ALTERNATIVE B**: Request approval. <br/>
-      Alternatively, if you cannot fix the breaking changes, then you can request an approval for them.
-      Please follow the process described in the
-      [High-level Breaking Change Process doc](https://aka.ms/breakingchangesprocess#high-level-breaking-change-process).
-      <br/><br/>
-      **ACTION ITEM ALTERNATIVE C**: Report false positive. <br/>
-      If you think there are no breaking changes, 
-      i.e. the validation should pass yet it fails, 
-      then proceed as explained in **ACTION ITEM ALTERNATIVE B**.<br/>
-      This applies even if the breaking change tool fails with internal runtime error. 
-      In such case a manual breaking change review is necessary.
-
-- rule:
-    type: label
-    label: NewApiVersionRequired
-    booleanFilterExpression: "!(Approved-OkToMerge)"
-    onLabeledComments: >-
-      Hi @${PRAuthor}! The automation detected this pull request introduces changes
-      to at least one existing API version that violate Azure's versioning policy. 
-      To comply with the policy, these changes must be made in a new API version.
-      As a result, the automation added the `NewApiVersionRequired` label.
-      <br/><br/> 
-      You cannot proceed with merging this PR until you complete one of the following action items:
-      <br/><br/>
-      **ACTION ITEM ALTERNATIVE A**: Introduce a new API version. <br/> 
-      Submit a new PR instead of this one, or modify this PR, 
-      so that it adds a new API version instead of introducing changes to existing API versions.
-      <br/><br/>
-      **ACTION ITEM ALTERNATIVE B**: Request approval. <br/>
-      Alternatively, if you cannot avoid modifying existing API versions, 
-      then you can request an approval for them.
-      Please follow the process described in the
-      [High-level Breaking Change Process doc](https://aka.ms/breakingchangesprocess#high-level-breaking-change-process).
-      <br/><br/>
-      **ACTION ITEM ALTERNATIVE C**: Report false positive. <br/>
-      If you think there are no changes in existing API version, 
-      i.e. there should be no `NewApiVersionRequired` label,
-      then proceed as explained in **ACTION ITEM ALTERNATIVE B**.<br/>
-      This applies even if the breaking change tool fails with internal runtime error. 
-      In such case a manual breaking change review is necessary.
-      <br/><br/>   
-      For additional guidance, please see https://aka.ms/NewApiVersionRequired
-
-- rule:
-    type: label
-    label: SuppressionReviewRequired
-    onLabeledComments: "Hi @${PRAuthor}, one or multiple validation error/warning suppression(s) is detected in your PR. Please follow the [Swagger-Suppression-Process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) to get approval."
-
-- rule:
-    type: label
     label: "CI-MissingBaseCommit"
     onLabeledComments: >-
       Hi @${PRAuthor}! For review efficiency consideration, 
@@ -107,33 +46,8 @@
 
 - rule:
     type: label
-    label: CI-FixRequiredOnFailure
-    onLabeledComments: >- 
-      Hi @${PRAuthor}! Your PR has some issues. Please fix the CI issues, **if present**, in following order: `Avocado, SemanticValidation, ModelValidation, Breaking Change, LintDiff`.
-      <br/>
-      <table><tr><th>Task</th><th>How to fix</th><th>Priority</th></tr>
-      <tr><td>Avocado</td><td>[Fix-Avocado](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md#avocado)</td><td>High</td></tr>
-      <tr><td>Semantic Validation</td><td>[Fix-SemanticValidation-Error](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md#semantic-validation)</td><td>High</td></tr>
-      <tr><td>Model Validation</td><td>[Fix-ModelValidation-Error](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md#model-validation)</td><td>High</td></tr>
-      <tr><td>LintDiff</td><td>[Fix-LintDiff](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md#lintdiff-validation)</td><td>High</td></tr></table>
-      <br/>
-      If you need further help, please reach out on the Teams channel [aka.ms/azsdk/support/specreview-channel](https://aka.ms/azsdk/support/specreview-channel).
-
-- rule:
-    type: label
     label: new-rp-namespace
     onLabeledComments: "Hi, @${PRAuthor}, our workflow has detected that there is no management SDK ever released for your RP, to further process SDK onboard for your RP, you should have the SDK client library name of your RP reviewed and approved. </br> <b>Action Required</b>: <li> Follow this guidance [Naming for new initial management or client libraries (new SDKs) - Overview (azure.com)](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/821/Naming-for-new-initial-management-or-client-libraries-(new-SDKs)) to create an issue for management client library name arch board review. </li> <li>Paste the issue link that you created in step 1 in this PR</li> </br> <b> Impact</b>: SDK release owner will take the approved management client library name to release SDK. No client library name approval will leads to SDK release delayed."
-
-- rule:
-    type: PROpen
-    variables:
-      openapiHub: https://aka.ms/openapihub
-    onOpenedComments: >- 
-      Hi, @${PRAuthor}! Thank you for your pull request. To help get your PR merged: </br>
-      <li> Ensure you reviewed the checklists in the PR description. </li>
-      <li> Know that PR assignee is the person auto-assigned and responsible for your current PR review and approval. </li>
-      <li> For convenient view of the API changes made by this PR, refer to the URLs provided in the table in
-      the `Generated ApiView` comment added to this PR. You can use ApiView to show API versions diff. </li>
 
 - rule:
     type: checkbox
