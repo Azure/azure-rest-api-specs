@@ -141,6 +141,7 @@ authentication context.
   >;
 
   @doc("Creates or replaces a Dev Box.")
+  @finalOperation(DevBoxesOperations.GetDevBoxByUser)
   @pollingOperation(SharedOperations.GetProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @put
