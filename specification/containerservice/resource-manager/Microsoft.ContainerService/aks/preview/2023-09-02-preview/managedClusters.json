@@ -3809,6 +3809,11 @@
       },
       "description": "Properties for the container service agent pool profile."
     },
+      "artifactStreamingProfile": {
+        "$ref": "#/definitions/ArtifactStreamingProfile",
+        "description": "Configuration for using artifact streaming on AKS."
+      }
+    },
     "AgentPoolNetworkProfile": {
       "type": "object",
       "properties": {
@@ -6834,6 +6839,16 @@
         }
       },
       "description": "The security settings of an agent pool."
+    },
+    "AgentPoolArtifactStreamingProfile": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "Whether to enable artifact streaming on an agent pool. Note that corresponding container images need have artifact streaming enabled through ACR for faster pod starts.",
+          "description": "Artifact streaming speeds up the cold-start of containers on a node through on-demand image loading. This field configures whether to enable artifact streaming on nodes. To use this feature, container images must also enable artifact streaming on ACR. If not specified, the default is false."
+        }
+      }
     },
     "AgentPoolSSHAccess": {
       "type": "string",
