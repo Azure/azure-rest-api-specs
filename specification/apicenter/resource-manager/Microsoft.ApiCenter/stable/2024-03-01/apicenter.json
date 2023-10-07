@@ -2192,14 +2192,10 @@
           "description": "Page items.",
           "readOnly": true
         },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any.",
+          "format": "uri",
+          "description": "The link to the next page of items",
           "readOnly": true
         }
       }
@@ -2226,8 +2222,10 @@
       "properties": {
         "title": {
           "type": "string",
-          "description": "Workspace display name.",
-          "example": "Contoso API contributors"
+          "description": "Workspace title.",
+          "example": "Contoso API contributors",
+          "minLength": 1,
+          "maxLength": 50
         },
         "description": {
           "type": "string",
@@ -2250,14 +2248,10 @@
           "description": "Page items.",
           "readOnly": true
         },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any.",
+          "format": "uri",
+          "description": "The link to the next page of items",
           "readOnly": true
         }
       },
@@ -2288,8 +2282,9 @@
         "title": {
           "type": "string",
           "description": "API title.",
-          "maxLength": 50,
-          "example": "Echo API"
+          "example": "Echo API",
+          "minLength": 1,
+          "maxLength": 50
         },
         "type": {
           "type": "string",
@@ -2365,14 +2360,10 @@
           "description": "Page items.",
           "readOnly": true
         },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any.",
+          "format": "uri",
+          "description": "The link to the next page of items",
           "readOnly": true
         }
       },
@@ -2402,15 +2393,18 @@
       "properties": {
         "title": {
           "type": "string",
-          "description": "API version.",
-          "example": "1.0.1"
+          "description": "API version title.",
+          "example": "1.0.1",
+          "minLength": 1,
+          "maxLength": 50
         },
         "lifecycleStage": {
           "$ref": "#/definitions/LifecycleStage"
         }
       },
       "required": [
-        "title"
+        "title",
+        "lifecycleStage"
       ]
     },
     "ApiVersionCollection": {
@@ -2426,14 +2420,10 @@
           "description": "Page items.",
           "readOnly": true
         },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any.",
+          "format": "uri",
+          "description": "The link to the next page of items",
           "readOnly": true
         }
       }
@@ -2456,18 +2446,19 @@
     },
     "ApiDefinitionProperties": {
       "type": "object",
-      "title": "API version properties",
-      "description": "API version properties entity.",
+      "title": "API definition properties",
+      "description": "API definition properties entity.",
       "properties": {
         "title": {
           "type": "string",
-          "description": "API version.",
-          "example": "1.0.1"
+          "description": "API definition title.",
+          "example": "OpenAPI",
+          "minLength": 1,
+          "maxLength": 50
         },
         "description": {
           "type": "string",
-          "description": "API definition description.",
-          "example": "1.0.1"
+          "description": "API definition description."
         },
         "specification": {
           "type": "object",
@@ -2499,14 +2490,10 @@
           "description": "Page items.",
           "readOnly": true
         },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any.",
+          "format": "uri",
+          "description": "The link to the next page of items",
           "readOnly": true
         }
       }
@@ -2534,8 +2521,10 @@
       "properties": {
         "title": {
           "type": "string",
-          "title": "Title",
-          "example": "Contoso Europe Azure API Management"
+          "description": "Environment title.",
+          "example": "Contoso Europe Azure API Management",
+          "minLength": 1,
+          "maxLength": 50
         },
         "description": {
           "type": "string",
@@ -2581,14 +2570,10 @@
           "description": "Page items.",
           "readOnly": true
         },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any.",
+          "format": "uri",
+          "description": "The link to the next page of items",
           "readOnly": true
         }
       }
@@ -2616,8 +2601,10 @@
       "properties": {
         "title": {
           "type": "string",
-          "title": "Title",
-          "example": "Production deployment"
+          "description": "API deployment title",
+          "example": "Production deployment",
+          "minLength": 1,
+          "maxLength": 50
         },
         "description": {
           "type": "string",
@@ -2660,14 +2647,10 @@
           "description": "Page items.",
           "readOnly": true
         },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        },
         "nextLink": {
           "type": "string",
-          "description": "Next page link if any.",
+          "format": "uri",
+          "description": "The link to the next page of items",
           "readOnly": true
         }
       }
@@ -2844,8 +2827,8 @@
       "properties": {
         "title": {
           "type": "string",
-          "title": "Title",
           "description": "Title of the documentation.",
+          "example": "API developer guide",
           "maxLength": 50
         },
         "description": {
@@ -3044,6 +3027,7 @@
       "in": "path",
       "required": true,
       "description": "The name of the API.",
+      "pattern": "^[a-zA-Z0-9\\-]{1,64}$",
       "minLength": 1
     },
     "ApiVersionNameParameter": {
@@ -3052,6 +3036,7 @@
       "in": "path",
       "required": true,
       "description": "The name of the API version.",
+      "pattern": "^[a-zA-Z0-9\\-]{1,64}$",
       "minLength": 1
     },
     "ApiDefinitionNameParameter": {
@@ -3060,6 +3045,7 @@
       "in": "path",
       "required": true,
       "description": "The name of the API definition.",
+      "pattern": "^[a-zA-Z0-9\\-]{1,64}$",
       "minLength": 1
     },
     "ApiDeploymentNameParameter": {
@@ -3068,6 +3054,7 @@
       "in": "path",
       "required": true,
       "description": "The name of the API deployment.",
+      "pattern": "^[a-zA-Z0-9\\-]{1,64}$",
       "minLength": 1
     },
     "EnvironmentNameParameter": {
@@ -3076,6 +3063,7 @@
       "in": "path",
       "required": true,
       "description": "The name of the environment.",
+      "pattern": "^[a-zA-Z0-9\\-]{1,64}$",
       "minLength": 1
     },
     "MetadataSchemaNameParameter": {
@@ -3084,6 +3072,7 @@
       "in": "path",
       "required": true,
       "description": "The name of the metadata schema.",
+      "pattern": "^[a-zA-Z0-9\\-]{1,64}$",
       "minLength": 1
     },
     "WorkspaceNameParameter": {
@@ -3092,6 +3081,7 @@
       "in": "path",
       "required": true,
       "description": "The name of the workspace.",
+      "pattern": "^[a-zA-Z0-9\\-]{1,64}$",
       "minLength": 1
     },
     "ODataFilterParameter": {
