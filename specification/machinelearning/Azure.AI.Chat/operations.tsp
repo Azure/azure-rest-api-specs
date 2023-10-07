@@ -19,4 +19,4 @@ interface Chat<StateModel, ArgumentsModel> {
 }
 
 @route("/chat")
-interface GenericChatClient extends Chat<unknown, unknown> {}
+interface GenericChatClient extends Chat<unknown, Record<unknown>> {}
