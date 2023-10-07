@@ -3663,7 +3663,7 @@
         },
         "volumeFreeSpacePercent": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "minimum": 0,
           "maximum": 100,
           "description": "Level of free space to be maintained by Cloud Tiering if it is enabled.",
@@ -3671,7 +3671,7 @@
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "minimum": 0,
           "maximum": 2147483647,
           "description": "Tier files older than days.",
@@ -4215,7 +4215,7 @@
         },
         "pauseWaitForSyncDrainTimePeriodInSeconds": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Pre Restore pause wait for sync drain time period in seconds."
         }
       }
@@ -4412,7 +4412,7 @@
         },
         "storageSyncServiceStatus": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Storage Sync service status.",
           "readOnly": true
         },
@@ -4542,7 +4542,7 @@
         },
         "serverManagementErrorCode": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Registered Server Management Error Code"
         },
         "lastHeartBeat": {
@@ -4550,6 +4550,7 @@
           "description": "Registered Server last heart beat"
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "Registered Server Provisioning State"
         },
@@ -4664,6 +4665,7 @@
           "readOnly": true
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "CloudEndpoint Provisioning State"
         },
@@ -4693,14 +4695,14 @@
         },
         "volumeFreeSpacePercent": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "minimum": 0,
           "maximum": 100,
           "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "minimum": 0,
           "maximum": 2147483647,
           "description": "Tier files older than days."
@@ -4733,14 +4735,14 @@
         },
         "volumeFreeSpacePercent": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "minimum": 0,
           "maximum": 100,
           "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "minimum": 0,
           "maximum": 2147483647,
           "description": "Tier files older than days."
@@ -4754,6 +4756,7 @@
           "description": "Server Resource Id."
         },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "ServerEndpoint Provisioning State",
           "readOnly": true
