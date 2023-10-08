@@ -2133,7 +2133,7 @@
         "summary": "Implements List virtual machine instances.",
         "description": "Lists all of the virtual machine instances within the specified parent resource.",
         "x-ms-examples": {
-          "GetVirtualMachine": {
+          "ListVirtualMachines": {
             "$ref": "./examples/ListVirtualMachineInstances.json"
           }
         },
@@ -2161,6 +2161,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2745,12 +2748,12 @@
         },
         "connectionStatus": {
           "type": "string",
-          "description": "Gets or sets the connection status to the vmmServer.",
+          "description": "Gets the connection status to the vmmServer.",
           "readOnly": true
         },
         "errorMessage": {
           "type": "string",
-          "description": "Gets or sets any error message if connection to vmmServer is having any issue.",
+          "description": "Gets any error message if connection to vmmServer is having any issue.",
           "readOnly": true
         },
         "uuid": {
@@ -2764,7 +2767,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
+          "description": "Gets the provisioning state.",
           "type": "string",
           "readOnly": true
         }
@@ -2913,7 +2916,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets the provisioning state.",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -3014,7 +3017,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets the provisioning state.",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -3106,7 +3109,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets the provisioning state.",
+          "description": "Gets the provisioning state.",
           "readOnly": true
         }
       }
@@ -3291,7 +3294,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
+          "description": "Gets the provisioning state.",
           "type": "string",
           "readOnly": true
         }
@@ -3329,12 +3332,12 @@
           "type": "string"
         },
         "osType": {
-          "description": "Gets or sets the type of the os.",
+          "description": "Gets the type of the os.",
           "$ref": "#/definitions/OsType",
           "readOnly": true
         },
         "osSku": {
-          "description": "Gets or sets os sku.",
+          "description": "Gets os sku.",
           "type": "string",
           "readOnly": true
         },
@@ -3531,7 +3534,7 @@
           "readOnly": true
         },
         "ipv4Addresses": {
-          "description": "Gets or sets the nic ipv4 addresses.",
+          "description": "Gets the nic ipv4 addresses.",
           "type": "array",
           "items": {
             "type": "string"
@@ -3539,7 +3542,7 @@
           "readOnly": true
         },
         "ipv6Addresses": {
-          "description": "Gets or sets the nic ipv6 addresses.",
+          "description": "Gets the nic ipv6 addresses.",
           "type": "array",
           "items": {
             "type": "string"
@@ -3555,7 +3558,7 @@
           "type": "string"
         },
         "networkName": {
-          "description": "Gets or sets the name of the virtual network in vmmServer that the nic is connected to.",
+          "description": "Gets the name of the virtual network in vmmServer that the nic is connected to.",
           "type": "string",
           "readOnly": true
         },
@@ -3671,7 +3674,7 @@
         },
         "maxDiskSizeGB": {
           "format": "int32",
-          "description": "Gets or sets the max disk size.",
+          "description": "Gets the max disk size.",
           "type": "integer",
           "readOnly": true
         },
@@ -3694,7 +3697,7 @@
           "type": "string"
         },
         "volumeType": {
-          "description": "Gets or sets the disk volume type.",
+          "description": "Gets the disk volume type.",
           "type": "string",
           "readOnly": true
         },
@@ -3881,6 +3884,10 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineInstance"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
         }
       }
     },
@@ -3945,17 +3952,17 @@
           "description": "ARM Id of the vmmServer resource in which this resource resides."
         },
         "osType": {
-          "description": "Gets or sets the type of the os.",
+          "description": "Gets the type of the os.",
           "$ref": "#/definitions/OsType",
           "readOnly": true
         },
         "osName": {
-          "description": "Gets or sets os name.",
+          "description": "Gets os name.",
           "type": "string",
           "readOnly": true
         },
         "computerName": {
-          "description": "Gets or sets computer name.",
+          "description": "Gets computer name.",
           "type": "string",
           "readOnly": true
         },
@@ -3967,13 +3974,13 @@
         },
         "cpuCount": {
           "type": "integer",
-          "description": "Gets or sets the desired number of vCPUs for the vm.",
+          "description": "Gets the desired number of vCPUs for the vm.",
           "format": "int32",
           "readOnly": true
         },
         "limitCpuForMigration": {
           "type": "string",
-          "description": "Gets or sets a value indicating whether to enable processor compatibility mode for live migration of VMs.",
+          "description": "Gets a value indicating whether to enable processor compatibility mode for live migration of VMs.",
           "enum": [
             "false",
             "true"
@@ -3986,7 +3993,7 @@
         },
         "dynamicMemoryEnabled": {
           "type": "string",
-          "description": "Gets or sets a value indicating whether to enable dynamic memory or not.",
+          "description": "Gets a value indicating whether to enable dynamic memory or not.",
           "enum": [
             "false",
             "true"
@@ -3999,7 +4006,7 @@
         },
         "isCustomizable": {
           "type": "string",
-          "description": "Gets or sets a value indicating whether the vm template is customizable or not.",
+          "description": "Gets a value indicating whether the vm template is customizable or not.",
           "enum": [
             "false",
             "true"
@@ -4013,13 +4020,13 @@
         "dynamicMemoryMaxMB": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the max dynamic memory for the vm.",
+          "description": "Gets the max dynamic memory for the vm.",
           "readOnly": true
         },
         "dynamicMemoryMinMB": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the min dynamic memory for the vm.",
+          "description": "Gets the min dynamic memory for the vm.",
           "readOnly": true
         },
         "isHighlyAvailable": {
@@ -4030,11 +4037,11 @@
         "generation": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the generation for the vm.",
+          "description": "Gets the generation for the vm.",
           "readOnly": true
         },
         "networkInterfaces": {
-          "description": "Gets or sets the network interfaces of the template.",
+          "description": "Gets the network interfaces of the template.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkInterfaces"
@@ -4046,7 +4053,7 @@
           "readOnly": true
         },
         "disks": {
-          "description": "Gets or sets the disks of the template.",
+          "description": "Gets the disks of the template.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualDisk"
@@ -4058,7 +4065,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
+          "description": "Gets the provisioning state.",
           "type": "string",
           "readOnly": true
         }
@@ -4274,7 +4281,7 @@
       "properties": {
         "cpuCount": {
           "type": "integer",
-          "description": "Gets or sets the desired number of vCPUs for the vm.",
+          "description": "Gets the desired number of vCPUs for the vm.",
           "format": "int32",
           "readOnly": true
         },
@@ -4285,12 +4292,12 @@
           "readOnly": true
         },
         "osType": {
-          "description": "Gets or sets the type of the os.",
+          "description": "Gets the type of the os.",
           "$ref": "#/definitions/OsType",
           "readOnly": true
         },
         "osName": {
-          "description": "Gets or sets os name.",
+          "description": "Gets os name.",
           "type": "string",
           "readOnly": true
         }
@@ -4307,12 +4314,12 @@
       ],
       "properties": {
         "osType": {
-          "description": "Gets or sets the type of the os.",
+          "description": "Gets the type of the os.",
           "$ref": "#/definitions/OsType",
           "readOnly": true
         },
         "osName": {
-          "description": "Gets or sets os name.",
+          "description": "Gets os name.",
           "type": "string",
           "readOnly": true
         },
@@ -4338,7 +4345,7 @@
           "$ref": "#/definitions/InventoryItemDetails"
         },
         "biosGuid": {
-          "description": "Gets or sets the bios guid.",
+          "description": "Gets the bios guid.",
           "type": "string",
           "format": "uuid",
           "readOnly": true
@@ -4407,7 +4414,7 @@
           "type": "string"
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
+          "description": "Gets the provisioning state.",
           "type": "string",
           "readOnly": true
         }
@@ -4536,7 +4543,7 @@
       "type": "object",
       "properties": {
         "uuid": {
-          "description": "Gets or sets a unique identifier for this resource.",
+          "description": "Gets a unique identifier for this resource.",
           "type": "string",
           "readOnly": true
         },
@@ -4554,7 +4561,7 @@
           "type": "string"
         },
         "status": {
-          "description": "Gets or sets the guest agent status.",
+          "description": "Gets the guest agent status.",
           "type": "string",
           "readOnly": true
         },
@@ -4564,7 +4571,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
+          "description": "Gets the provisioning state.",
           "type": "string",
           "readOnly": true
         }
