@@ -1630,17 +1630,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Request to reconcile the configuration succeeded."
-          },
           "202": {
-            "description": "Request to reconcile the configuration accepted."
+            "description": "Request to reconcile the configuration accepted.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "x-ms-error-response": true,
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
