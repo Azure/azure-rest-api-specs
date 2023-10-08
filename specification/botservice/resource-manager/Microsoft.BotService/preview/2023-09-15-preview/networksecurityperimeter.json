@@ -29,12 +29,19 @@
       "description": "Network Security Perimeter configuration",
       "type": "object",
       "readOnly": true,
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
+        "id": {
+          "description": "Fully qualified identifier of the resource",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the resource",
+          "type": "string"
+        },
         "properties": {
           "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
           "description": "Properties of the Network Security Perimeter configuration"
