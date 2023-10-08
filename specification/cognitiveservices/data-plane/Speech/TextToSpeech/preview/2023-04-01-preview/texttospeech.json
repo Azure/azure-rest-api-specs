@@ -226,7 +226,7 @@
         }
       }
     },
-    "/projects/{projectId}/consents": {
+    "/projects/{id}/consents": {
       "get": {
         "tags": [
           "Projects controller:"
@@ -240,7 +240,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "projectId",
+            "name": "id",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -299,7 +299,7 @@
         }
       }
     },
-    "/projects/{projectId}/endpoints": {
+    "/projects/{id}/endpoints": {
       "get": {
         "tags": [
           "Projects controller:"
@@ -313,7 +313,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "projectId",
+            "name": "id",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -372,7 +372,7 @@
         }
       }
     },
-    "/projects/{projectId}/models": {
+    "/projects/{id}/models": {
       "get": {
         "tags": [
           "Projects controller:"
@@ -386,7 +386,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "projectId",
+            "name": "id",
             "description": "The identifier of the project.",
             "required": true,
             "type": "string",
@@ -450,7 +450,7 @@
         }
       }
     },
-    "/projects/{projectId}/trainingsets": {
+    "/projects/{id}/trainingsets": {
       "get": {
         "tags": [
           "Projects controller:"
@@ -464,7 +464,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "projectId",
+            "name": "id",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -523,7 +523,7 @@
         }
       }
     },
-    "/projects/{projectId}/zeroshots": {
+    "/projects/{id}/zeroshots": {
       "get": {
         "tags": [
           "Projects controller:"
@@ -537,7 +537,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "projectId",
+            "name": "id",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -3285,20 +3285,6 @@
       ],
       "type": "object",
       "properties": {
-        "project": {
-          "$ref": "#/definitions/ResourceReference"
-        },
-        "consent": {
-          "$ref": "#/definitions/ResourceReference"
-        },
-        "properties": {
-          "$ref": "#/definitions/ZeroShotProperties"
-        },
-        "speakerProfileId": {
-          "format": "uuid",
-          "type": "string",
-          "readOnly": true
-        },
         "status": {
           "$ref": "#/definitions/Status"
         },
@@ -3322,6 +3308,20 @@
         },
         "createdDateTime": {
           "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "project": {
+          "$ref": "#/definitions/ResourceReference"
+        },
+        "consent": {
+          "$ref": "#/definitions/ResourceReference"
+        },
+        "properties": {
+          "$ref": "#/definitions/ZeroShotProperties"
+        },
+        "speakerProfileId": {
+          "format": "uuid",
           "type": "string",
           "readOnly": true
         }
