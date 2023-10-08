@@ -1273,7 +1273,7 @@
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
-          "202": {
+          "200": {
             "description": "Returns the mute participants response",
             "schema": {
               "$ref": "#/definitions/MuteParticipantsResult"
@@ -1337,7 +1337,7 @@
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
-          "202": {
+          "200": {
             "description": "Returns the unmute participants response",
             "schema": {
               "$ref": "#/definitions/UnmuteParticipantsResponse"
@@ -1723,6 +1723,39 @@
         }
       }
     },
+    "AzureOpenAIDialog": {
+      "description": "Azure Open AI Dialog",
+      "required": [
+        "kind",
+        "context"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseDialog"
+        },
+        {
+          "required": [
+            "kind",
+            "context"
+          ],
+          "type": "object",
+          "properties": {
+            "kind": {
+              "$ref": "#/definitions/DialogInputType"
+            },
+            "context": {
+              "description": "Dialog context.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      ],
+      "properties": {}
+    },
     "CommunicationIdentifierModel": {
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
     },
@@ -1848,6 +1881,45 @@
     },
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+    },
+    "PowerVirtualAgentsDialog": {
+      "description": "Power Virtual Agents Dialog",
+      "required": [
+        "botAppId",
+        "kind",
+        "context"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseDialog"
+        },
+        {
+          "required": [
+            "botAppId",
+            "kind",
+            "context"
+          ],
+          "type": "object",
+          "properties": {
+            "botAppId": {
+              "description": "Bot identifier.",
+              "type": "string"
+            },
+            "kind": {
+              "$ref": "#/definitions/DialogInputType"
+            },
+            "context": {
+              "description": "Dialog context.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      ],
+      "properties": {}
     },
     "CallConnectionStateModel": {
       "description": "The state of the call connection.",
@@ -2513,6 +2585,22 @@
         }
       }
     },
+    "StartDialogRequest": {
+      "required": [
+        "dialog"
+      ],
+      "type": "object",
+      "properties": {
+        "dialog": {
+          "$ref": "#/definitions/BaseDialog",
+          "description": "Defines the dialog."
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
+      }
+    },
     "DialogInputType": {
       "description": "Determines the type of the dialog.",
       "enum": [
@@ -2525,44 +2613,24 @@
         "modelAsString": true
       }
     },
-    "StartDialogRequest": {
+    "BaseDialog": {
       "required": [
-        "dialogOptions",
-        "dialogInputType"
+        "kind"
       ],
       "type": "object",
       "properties": {
-        "dialogOptions": {
-          "$ref": "#/definitions/DialogOptions",
-          "description": "Defines options for dialog."
-        },
-        "dialogInputType": {
+        "kind": {
           "$ref": "#/definitions/DialogInputType"
         },
-        "operationContext": {
-          "description": "The value to identify context of the operation.",
-          "type": "string"
-        }
-      }
-    },
-    "DialogOptions": {
-      "required": [
-        "dialogContext"
-      ],
-      "type": "object",
-      "properties": {
-        "botAppId": {
-          "description": "Bot identifier.",
-          "type": "string"
-        },
-        "dialogContext": {
+        "context": {
           "description": "Dialog context.",
           "type": "object",
           "additionalProperties": {
             "type": "object"
           }
         }
-      }
+      },
+      "discriminator": "kind"
     },
     "DialogStateResponse": {
       "type": "object",
@@ -2571,12 +2639,9 @@
           "description": "The dialog ID.",
           "type": "string"
         },
-        "dialogOptions": {
-          "$ref": "#/definitions/DialogOptions",
-          "description": "Defines options for dialog."
-        },
-        "dialogInputType": {
-          "$ref": "#/definitions/DialogInputType"
+        "dialog": {
+          "$ref": "#/definitions/BaseDialog",
+          "description": "Defines dialog."
         },
         "operationContext": {
           "description": "The value to identify context of the operation.",
@@ -2880,6 +2945,10 @@
         "externalStorage": {
           "$ref": "#/definitions/ExternalStorage",
           "description": "Optional property to specify location where recording will be stored"
+        },
+        "pauseOnStart": {
+          "description": "When set to true will start recording in Pause mode, which could be resumed.",
+          "type": "boolean"
         }
       }
     },
