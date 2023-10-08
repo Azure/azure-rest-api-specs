@@ -1,0 +1,668 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SplitIO.Experimentation",
+    "description": "SplitIO experimentation provider",
+    "version": "2024-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/SplitIO.Experimentation/experimentationWorkspaces": {
+      "get": {
+        "tags": [
+          "ExperimentationWorkspaces"
+        ],
+        "description": "Lists the experimentation workspaces for a given subscription.",
+        "operationId": "ExperimentationWorkspaces_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ExperimentationWorkspaces_ListBySubscription": {
+            "$ref": "./examples/ExperimentationWorkspacesListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces": {
+      "get": {
+        "tags": [
+          "ExperimentationWorkspaces"
+        ],
+        "description": "Lists the experimentation workspaces for a given resource group.",
+        "operationId": "ExperimentationWorkspaces_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ExperimentationWorkspaces_ListByResourceGroup": {
+            "$ref": "./examples/ExperimentationWorkspacesListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}": {
+      "get": {
+        "tags": [
+          "ExperimentationWorkspaces"
+        ],
+        "description": "Gets the properties of the specified experimentation workspace.",
+        "operationId": "ExperimentationWorkspaces_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ExperimentationWorkspaces_Get": {
+            "$ref": "./examples/ExperimentationWorkspacesGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ExperimentationWorkspaces"
+        ],
+        "description": "Creates a experimentation workspace with the specified parameters.",
+        "operationId": "ExperimentationWorkspaces_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "workspaceCreationParameters",
+            "in": "body",
+            "description": "The parameters for creating a experimentation workspace.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspace"
+            }
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspace"
+            }
+          },
+          "201": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ExperimentationWorkspaces_Create": {
+            "$ref": "./examples/ExperimentationWorkspacesCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ExperimentationWorkspaces"
+        ],
+        "description": "Deletes a experimentation workspace.",
+        "operationId": "ExperimentationWorkspaces_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content - the specified resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExperimentationWorkspaces_Delete": {
+            "$ref": "./examples/ExperimentationWorkspacesDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "ExperimentationWorkspaces"
+        ],
+        "description": "Updates a experimentation workspace with the specified parameters.",
+        "operationId": "ExperimentationWorkspaces_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "workspaceUpdateParameters",
+            "description": "The parameters for updating a experimentation workspace.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspaceUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspace"
+            }
+          },
+          "201": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExperimentationWorkspaces_Update": {
+            "$ref": "./examples/ExperimentationWorkspacesUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/SplitIO.Experimentation/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Checks whether the experimentation workspace name is available for use.",
+        "operationId": "Operations_CheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "checkNameAvailabilityParameters",
+            "in": "body",
+            "description": "The object containing information for the availability request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExperimentationWorkspaces_CheckNameAvailable": {
+            "$ref": "./examples/CheckNameAvailable.json"
+          },
+          "ExperimentationWorkspaces_CheckNameNotAvailable": {
+            "$ref": "./examples/CheckNameNotAvailable.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExperimentationWorkspaceListResult": {
+      "description": "The result of a request to list experimentation workspaces.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExperimentationWorkspace"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
+        }
+      }
+    },
+    "ExperimentationWorkspace": {
+      "description": "The experimentation workspace along with all resource properties.",
+      "required": [
+        "location",
+        "sku"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "The managed identity information, if configured."
+        },
+        "properties": {
+          "$ref": "#/definitions/ExperimentationWorkspaceProperties",
+          "description": "The properties of a experimentation workspace.",
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the experimentation workspace."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Resource system metadata."
+        }
+      }
+    },
+    "ExperimentationWorkspaceProperties": {
+      "description": "The properties of a experimentation workspace.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the experimentation workspace.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of experimentation workspace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of experimentation workspace owner."
+        }
+      }
+    },
+    "ExperimentationWorkspaceUpdateParameters": {
+      "description": "The parameters for updating a experimentation workspace.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExperimentationWorkspacePropertiesUpdateParameters",
+          "description": "The properties for updating a experimentation workspace.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "The managed identity information for the experimentation workspace."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the experimentation workspace."
+        },
+        "tags": {
+          "description": "The ARM resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": "The SKU name of the experimentation workspace.",
+          "type": "string"
+        }
+      },
+      "description": "Describes a experimentation workspace SKU."
+    },
+    "ResourceIdentity": {
+      "type": "object",
+      "description": "An identity that can be associated with a resource.",
+      "properties": {
+        "type": {
+          "description": "The type of managed identity used.",
+          "enum": [
+            "None",
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "description": "The principal id of the identity. This property will only be provided for a system-assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The tenant id associated with the resource's identity. This property will only be provided for a system-assigned identity.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ExperimentationWorkspacePropertiesUpdateParameters": {
+      "description": "The properties for updating a experimentation workspace.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "The email address of experimentation workspace owner."
+        }
+      }
+    },
+    "CheckNameAvailabilityParameters": {
+      "description": "Parameters used for checking whether a resource name is available.",
+      "required": [
+        "name",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name to check for availability.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource type to check for name availability.",
+          "enum": [
+            "SplitIO.Experimentation/experimentationWorkspaces"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ExperimentationWorkspaceResourceType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "NameAvailabilityStatus": {
+      "description": "The result of a request to check the availability of a resource name.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "The value indicating whether the resource name is available.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "message": {
+          "description": "If any, the error message that provides more detail for the reason that the name is not available.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "If any, the reason that the name is not available.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "type": "object",
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "x-ms-identifiers": [],
+          "description": "The error additional info."
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of experimentation workspace resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
