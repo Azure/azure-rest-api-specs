@@ -9,24 +9,40 @@
         "category,count:10,sort:count"
       ],
       "filter": "rating gt 4.0",
-      "highlight": "title",
+      "highlight": "description",
       "highlightPostTag": "</em>",
       "highlightPreTag": "<em>",
       "minimumCoverage": null,
-      "orderby": "search.score() desc,rating desc",
+      "orderby": "rating desc",
       "queryType": "simple",
       "scoringParameters": [
         "currentLocation--122.123,44.77233"
       ],
       "scoringProfile": "sp",
       "search": "nice hotels",
-      "searchFields": "title,description",
+      "searchFields": "category,description",
       "searchMode": "any",
       "sessionId": "mysessionid",
       "scoringStatistics": "global",
-      "select": "docId,title,description",
+      "select": "hotelId,description",
       "skip": 0,
-      "top": 10
+      "top": 10,
+      "vectorQueries": [
+        {
+          "kind": "vector",
+          "vector": [
+            0.103,
+            0.0712,
+            0.0852,
+            0.1547,
+            0.1183
+          ],
+          "fields": "descriptionEmbedding",
+          "k": 5,
+          "exhaustive": true
+        }
+      ],
+      "vectorFilterMode": "preFilter"
     }
   },
   "responses": {
