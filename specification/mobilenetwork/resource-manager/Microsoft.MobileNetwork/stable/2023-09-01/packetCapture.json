@@ -364,7 +364,7 @@
         "totalBytesPerSession": {
           "type": "integer",
           "format": "int64",
-          "minimum": 0,
+          "minimum": 1000,
           "maximum": 4294967295,
           "default": 67108864,
           "description": "Maximum size of the capture output."
@@ -372,10 +372,18 @@
         "timeLimitInSeconds": {
           "type": "integer",
           "format": "int32",
-          "minimum": 0,
+          "minimum": 5,
           "maximum": 18000,
           "default": 18000,
           "description": "Maximum duration of the capture session in seconds."
+        },
+        "outputFiles": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of output files of a packet capture session."
         }
       }
     },
