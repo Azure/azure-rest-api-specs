@@ -481,9 +481,14 @@
         "responses": {
           "202": {
             "description": "Describes the Virtual Instance for SAP solutions resource which is successfully updated.",
-            "schema": {
-              "$ref": "#/definitions/SAPVirtualInstance"
-            }
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to poll for status updates."
+              },
+              "schema": {
+                "$ref": "#/definitions/SAPVirtualInstance"
+              }
           },
           "200": {
             "description": "Describes the Virtual Instance for SAP solutions resource which is successfully updated.",
