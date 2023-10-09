@@ -38,10 +38,14 @@ enum AnalyzeTextTaskKind {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   EntityLinking,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_15_preview)
+  DynamicClassification,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-enum AnalyzeTextLroTaskKind {
+enum AnalyzeTextLROTaskKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   SentimentAnalysis,
 
@@ -75,7 +79,19 @@ enum AnalyzeTextLroTaskKind {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @added(Versions.v2023_04_01)
-  AbstractiveSummarization
+  AbstractiveSummarization,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_15_preview)
+  CustomHealthcare,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_15_preview)
+  CustomSentimentAnalysis,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_15_preview)
+  CustomAbstractiveSummarization,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -96,11 +112,15 @@ enum AnalyzeTextTaskResultsKind {
   LanguageDetectionResults,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  EntityLinkingResults
+  EntityLinkingResults,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_15_preview)
+  DynamicClassificationResults,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-enum AnalyzeTextLroResultsKind {
+enum AnalyzeTextLROResultsKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   SentimentAnalysisLROResults,
 
@@ -136,7 +156,19 @@ enum AnalyzeTextLroResultsKind {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @added(Versions.v2023_04_01)
-  AbstractiveSummarizationLROResults
+  AbstractiveSummarizationLROResults,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_15_preview)
+  CustomHealthcareLROResults,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_15_preview)
+  CustomSentimentAnalysisLROResults,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @added(Versions.v2023_04_15_preview)
+  CustomAbstractiveSummarizationLROResults,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -156,10 +188,11 @@ model AnalyzeTextTask {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @discriminator("kind")
-model AnalyzeTextLroTask extends TaskIdentifier{
+model AnalyzeTextLROTask extends TaskIdentifier {
   @doc("The kind of task to perform.")
-  kind: AnalyzeTextLroTaskKind;
+  kind: AnalyzeTextLROTaskKind;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -178,7 +211,10 @@ model AnalyzeTextJobsInput {
   analysisInput: MultiLanguageAnalysisInput;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  tasks: Array<AnalyzeTextLroTask>;
+  tasks: Array<AnalyzeTextLROTask>;
+
+  @doc("Default language to use for records requesting automatic language detection.")
+  defaultLanguage?: string
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -233,7 +269,7 @@ model TasksState {
   total: int32;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  items?: Array<AnalyzeTextLroResult>;
+  items?: Array<AnalyzeTextLROResult>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -258,12 +294,13 @@ enum Status {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @discriminator("kind")
-model AnalyzeTextLroResult extends TaskState {
+model AnalyzeTextLROResult extends TaskState {
   ...TaskIdentifier;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  kind: AnalyzeTextLroResultsKind;
+  kind: AnalyzeTextLROResultsKind;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -332,6 +369,26 @@ model MultiLanguageInput {
   @doc("The input text to process.")
   text: string;
 
-  @doc("(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default.")
+  @doc("(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default. (Following only applies to 2023-04-15-preview and above) For Auto Language Detection, use \"auto\". If not set, use \"en\" for English as default.")
   language?: string;
+}
+
+@added(Versions.v2023_04_15_preview)
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model DocumentDetectedLanguage {
+  @doc("If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document.")
+  detectedLanguage: string;
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("if showStats=true was specified in the request this field will contain information about the document request payload.")
+model DocumentRequestStatistics extends RequestStatistics {
+  @doc("Number of documents submitted in the request.")
+  documentsCount: int32;
+
+  @doc("Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.")
+  validDocumentsCount: int32;
+
+  @doc("Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.")
+  erroneousDocumentsCount: int32;
 }

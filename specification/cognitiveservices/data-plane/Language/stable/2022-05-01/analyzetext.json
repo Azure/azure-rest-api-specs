@@ -387,7 +387,7 @@
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AnalyzeTextLroResult"
+            "$ref": "#/definitions/AnalyzeTextLROResult"
           },
           "x-ms-identifiers": []
         },
@@ -430,9 +430,13 @@
         "tasks": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AnalyzeTextLroTask"
+            "$ref": "#/definitions/AnalyzeTextLROTask"
           },
           "x-ms-identifiers": []
+        },
+        "defaultLanguage": {
+          "type": "string",
+          "description": "Default language to use for records requesting automatic language detection."
         }
       },
       "required": [
@@ -457,6 +461,81 @@
       ],
       "x-ms-discriminator-value": "KeyPhraseExtraction"
     },
+    "AnalyzeTextLROResult": {
+      "type": "object",
+      "properties": {
+        "taskName": {
+          "type": "string",
+          "description": "task name"
+        },
+        "kind": {
+          "$ref": "#/definitions/AnalyzeTextLROResultsKind"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskState"
+        }
+      ]
+    },
+    "AnalyzeTextLROResultsKind": {
+      "type": "string",
+      "enum": [
+        "SentimentAnalysisLROResults",
+        "EntityRecognitionLROResults",
+        "PiiEntityRecognitionLROResults",
+        "KeyPhraseExtractionLROResults",
+        "EntityLinkingLROResults",
+        "HealthcareLROResults",
+        "CustomEntityRecognitionLROResults",
+        "CustomSingleLabelClassificationLROResults",
+        "CustomMultiLabelClassificationLROResults"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeTextLROResultsKind",
+        "modelAsString": true
+      }
+    },
+    "AnalyzeTextLROTask": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeTextLROTaskKind",
+          "description": "The kind of task to perform."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskIdentifier"
+        }
+      ]
+    },
+    "AnalyzeTextLROTaskKind": {
+      "type": "string",
+      "enum": [
+        "SentimentAnalysis",
+        "EntityRecognition",
+        "PiiEntityRecognition",
+        "KeyPhraseExtraction",
+        "EntityLinking",
+        "Healthcare",
+        "CustomEntityRecognition",
+        "CustomSingleLabelClassification",
+        "CustomMultiLabelClassification"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeTextLROTaskKind",
+        "modelAsString": true
+      }
+    },
     "AnalyzeTextLanguageDetectionInput": {
       "type": "object",
       "properties": {
@@ -477,89 +556,14 @@
         "kind"
       ]
     },
-    "AnalyzeTextLroResult": {
-      "type": "object",
-      "properties": {
-        "taskName": {
-          "type": "string",
-          "description": "task name"
-        },
-        "kind": {
-          "$ref": "#/definitions/AnalyzeTextLroResultsKind"
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskState"
-        }
-      ]
-    },
-    "AnalyzeTextLroResultsKind": {
-      "type": "string",
-      "enum": [
-        "SentimentAnalysisLROResults",
-        "EntityRecognitionLROResults",
-        "PiiEntityRecognitionLROResults",
-        "KeyPhraseExtractionLROResults",
-        "EntityLinkingLROResults",
-        "HealthcareLROResults",
-        "CustomEntityRecognitionLROResults",
-        "CustomSingleLabelClassificationLROResults",
-        "CustomMultiLabelClassificationLROResults"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeTextLroResultsKind",
-        "modelAsString": true
-      }
-    },
-    "AnalyzeTextLroTask": {
-      "type": "object",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AnalyzeTextLroTaskKind",
-          "description": "The kind of task to perform."
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskIdentifier"
-        }
-      ]
-    },
-    "AnalyzeTextLroTaskKind": {
-      "type": "string",
-      "enum": [
-        "SentimentAnalysis",
-        "EntityRecognition",
-        "PiiEntityRecognition",
-        "KeyPhraseExtraction",
-        "EntityLinking",
-        "Healthcare",
-        "CustomEntityRecognition",
-        "CustomSingleLabelClassification",
-        "CustomMultiLabelClassification"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeTextLroTaskKind",
-        "modelAsString": true
-      }
-    },
-    "AnalyzeTextPiiEntitiesRecognitionInput": {
+    "AnalyzeTextPIIEntitiesRecognitionInput": {
       "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
         },
         "parameters": {
-          "$ref": "#/definitions/PiiTaskParameters"
+          "$ref": "#/definitions/PIITaskParameters"
         }
       },
       "allOf": [
@@ -913,7 +917,7 @@
         "modelAsString": true
       }
     },
-    "CustomEntitiesLroTask": {
+    "CustomEntitiesLROTask": {
       "type": "object",
       "properties": {
         "parameters": {
@@ -922,7 +926,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "CustomEntityRecognition"
@@ -960,7 +964,7 @@
         }
       ]
     },
-    "CustomEntityRecognitionLroResult": {
+    "CustomEntityRecognitionLROResult": {
       "type": "object",
       "properties": {
         "results": {
@@ -972,7 +976,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroResult"
+          "$ref": "#/definitions/AnalyzeTextLROResult"
         }
       ],
       "x-ms-discriminator-value": "CustomEntityRecognitionLROResults"
@@ -997,7 +1001,7 @@
         }
       ]
     },
-    "CustomMultiLabelClassificationLroResult": {
+    "CustomMultiLabelClassificationLROResult": {
       "type": "object",
       "properties": {
         "results": {
@@ -1009,12 +1013,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroResult"
+          "$ref": "#/definitions/AnalyzeTextLROResult"
         }
       ],
       "x-ms-discriminator-value": "CustomMultiLabelClassificationLROResults"
     },
-    "CustomMultiLabelClassificationLroTask": {
+    "CustomMultiLabelClassificationLROTask": {
       "type": "object",
       "description": "Use custom models to classify text into multi label taxonomy",
       "properties": {
@@ -1024,7 +1028,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "CustomMultiLabelClassification"
@@ -1068,7 +1072,7 @@
         "deploymentName"
       ]
     },
-    "CustomSingleLabelClassificationLroResult": {
+    "CustomSingleLabelClassificationLROResult": {
       "type": "object",
       "properties": {
         "results": {
@@ -1080,12 +1084,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroResult"
+          "$ref": "#/definitions/AnalyzeTextLROResult"
         }
       ],
       "x-ms-discriminator-value": "CustomSingleLabelClassificationLROResults"
     },
-    "CustomSingleLabelClassificationLroTask": {
+    "CustomSingleLabelClassificationLROTask": {
       "type": "object",
       "description": "Use custom models to classify text into single label taxonomy",
       "properties": {
@@ -1095,7 +1099,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "CustomSingleLabelClassification"
@@ -1249,9 +1253,8 @@
           "type": "array",
           "description": "Recognized entities in the document.",
           "items": {
-            "$ref": "#/definitions/Entity"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/EntitiesDocumentResult"
+          }
         }
       },
       "required": [
@@ -1263,7 +1266,7 @@
         }
       ]
     },
-    "EntitiesLroTask": {
+    "EntitiesLROTask": {
       "type": "object",
       "description": "An object representing the task definition for an Entities Recognition task.",
       "properties": {
@@ -1273,7 +1276,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "EntityRecognition"
@@ -1375,7 +1378,7 @@
         "confidenceScore"
       ]
     },
-    "EntityLinkingLroResult": {
+    "EntityLinkingLROResult": {
       "type": "object",
       "properties": {
         "results": {
@@ -1387,12 +1390,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroResult"
+          "$ref": "#/definitions/AnalyzeTextLROResult"
         }
       ],
       "x-ms-discriminator-value": "EntityLinkingLROResults"
     },
-    "EntityLinkingLroTask": {
+    "EntityLinkingLROTask": {
       "type": "object",
       "properties": {
         "parameters": {
@@ -1401,7 +1404,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "EntityLinking"
@@ -1410,11 +1413,8 @@
       "type": "object",
       "properties": {
         "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "$ref": "#/definitions/LinkedEntitiesDocumentResult"
-          }
+          "$ref": "#/definitions/LinkedEntitiesDocumentResult",
+          "description": "Response by document"
         }
       },
       "required": [
@@ -1464,7 +1464,7 @@
       ],
       "x-ms-discriminator-value": "EntityLinkingResults"
     },
-    "EntityRecognitionLroResult": {
+    "EntityRecognitionLROResult": {
       "type": "object",
       "properties": {
         "results": {
@@ -1476,7 +1476,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroResult"
+          "$ref": "#/definitions/AnalyzeTextLROResult"
         }
       ],
       "x-ms-discriminator-value": "EntityRecognitionLROResults"
@@ -1603,7 +1603,8 @@
           "description": "Describes the entities certainty and polarity."
         },
         "association": {
-          "$ref": "#/definitions/Association"
+          "$ref": "#/definitions/Association",
+          "description": "Describes if the entity is the subject of the text or if it describes someone else."
         }
       }
     },
@@ -1736,7 +1737,7 @@
         "id"
       ]
     },
-    "HealthcareLroResult": {
+    "HealthcareLROResult": {
       "type": "object",
       "properties": {
         "results": {
@@ -1748,12 +1749,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroResult"
+          "$ref": "#/definitions/AnalyzeTextLROResult"
         }
       ],
       "x-ms-discriminator-value": "HealthcareLROResults"
     },
-    "HealthcareLroTask": {
+    "HealthcareLROTask": {
       "type": "object",
       "properties": {
         "parameters": {
@@ -1762,7 +1763,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "Healthcare"
@@ -1993,7 +1994,7 @@
         "status"
       ]
     },
-    "KeyPhraseExtractionLroResult": {
+    "KeyPhraseExtractionLROResult": {
       "type": "object",
       "properties": {
         "results": {
@@ -2005,12 +2006,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroResult"
+          "$ref": "#/definitions/AnalyzeTextLROResult"
         }
       ],
       "x-ms-discriminator-value": "KeyPhraseExtractionLROResults"
     },
-    "KeyPhraseLroTask": {
+    "KeyPhraseLROTask": {
       "type": "object",
       "description": "An object representing the task definition for a Key Phrase Extraction task.",
       "properties": {
@@ -2020,7 +2021,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "KeyPhraseExtraction"
@@ -2029,11 +2030,8 @@
       "type": "object",
       "properties": {
         "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "$ref": "#/definitions/KeyPhrasesDocumentResult"
-          }
+          "$ref": "#/definitions/KeyPhrasesDocumentResult",
+          "description": "Response by document"
         }
       },
       "required": [
@@ -2466,13 +2464,159 @@
         },
         "language": {
           "type": "string",
-          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default. (Following only applies to 2023-04-15-preview and above) For Auto Language Detection, use \"auto\". If not set, use \"en\" for English as default."
         }
       },
       "required": [
         "id",
         "text"
       ]
+    },
+    "NumericRangeKind": {
+      "type": "string",
+      "enum": [
+        "Number",
+        "Speed",
+        "Weight",
+        "Length",
+        "Volume",
+        "Area",
+        "Age",
+        "Information",
+        "Temperature",
+        "Currency"
+      ],
+      "x-ms-enum": {
+        "name": "NumericRangeKind",
+        "modelAsString": true
+      }
+    },
+    "PIIEntitiesDocumentResult": {
+      "type": "object",
+      "properties": {
+        "redactedText": {
+          "type": "string",
+          "description": "Returns redacted text."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "redactedText",
+        "entities"
+      ]
+    },
+    "PIIEntityRecognitionLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/PIIResult"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "x-ms-discriminator-value": "PiiEntityRecognitionLROResults"
+    },
+    "PIILROTask": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/PIITaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "PiiEntityRecognition"
+    },
+    "PIIResult": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "$ref": "#/definitions/PIIEntitiesDocumentResult",
+          "description": "Response by document"
+        }
+      },
+      "required": [
+        "documents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextPreBuiltResult"
+        }
+      ]
+    },
+    "PIIResultWithDetectedLanguage": {
+      "type": "object",
+      "properties": {
+        "detectedLanguage": {
+          "type": "string",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        }
+      },
+      "required": [
+        "detectedLanguage"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PIIEntitiesDocumentResult"
+        }
+      ]
+    },
+    "PIITaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a PII Entities Recognition task.",
+      "properties": {
+        "domain": {
+          "$ref": "#/definitions/PiiDomain",
+          "default": "none"
+        },
+        "piiCategories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PiiCategories"
+          }
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "PIITaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/PIIResult"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "PiiEntityRecognitionResults"
     },
     "Pagination": {
       "type": "object",
@@ -2691,120 +2835,6 @@
           }
         ]
       }
-    },
-    "PiiEntitiesDocumentResult": {
-      "type": "object",
-      "properties": {
-        "redactedText": {
-          "type": "string",
-          "description": "Returns redacted text."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/Entity"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "redactedText",
-        "entities"
-      ]
-    },
-    "PiiEntityRecognitionLroResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/PiiResult"
-        }
-      },
-      "required": [
-        "results"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLroResult"
-        }
-      ],
-      "x-ms-discriminator-value": "PiiEntityRecognitionLROResults"
-    },
-    "PiiLroTask": {
-      "type": "object",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/PiiTaskParameters"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLroTask"
-        }
-      ],
-      "x-ms-discriminator-value": "PiiEntityRecognition"
-    },
-    "PiiResult": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "$ref": "#/definitions/PiiEntitiesDocumentResult"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextPreBuiltResult"
-        }
-      ]
-    },
-    "PiiTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for a PII Entities Recognition task.",
-      "properties": {
-        "domain": {
-          "$ref": "#/definitions/PiiDomain",
-          "default": "none"
-        },
-        "piiCategories": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PiiCategories"
-          }
-        },
-        "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
-    },
-    "PiiTaskResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/PiiResult"
-        }
-      },
-      "required": [
-        "results"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
-        }
-      ],
-      "x-ms-discriminator-value": "PiiEntityRecognitionResults"
     },
     "PreBuiltResult": {
       "type": "object",
@@ -3143,7 +3173,7 @@
         ]
       }
     },
-    "SentimentAnalysisLroTask": {
+    "SentimentAnalysisLROTask": {
       "type": "object",
       "description": "An object representing the task definition for a Sentiment Analysis task.",
       "properties": {
@@ -3153,7 +3183,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroTask"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
       "x-ms-discriminator-value": "SentimentAnalysis"
@@ -3231,7 +3261,7 @@
         }
       ]
     },
-    "SentimentLroResult": {
+    "SentimentLROResult": {
       "type": "object",
       "properties": {
         "results": {
@@ -3243,7 +3273,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLroResult"
+          "$ref": "#/definitions/AnalyzeTextLROResult"
         }
       ],
       "x-ms-discriminator-value": "SentimentAnalysisLROResults"
@@ -3272,6 +3302,31 @@
         }
       },
       "required": [
+        "documents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextPreBuiltResult"
+        }
+      ]
+    },
+    "SentimentResponseWithDocumentDetectedLanguage": {
+      "type": "object",
+      "description": "Sentiment analysis per document.",
+      "properties": {
+        "detectedLanguage": {
+          "type": "string",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SentimentDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "detectedLanguage",
         "documents"
       ],
       "allOf": [
@@ -3530,7 +3585,7 @@
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AnalyzeTextLroResult"
+            "$ref": "#/definitions/AnalyzeTextLROResult"
           },
           "x-ms-identifiers": []
         }

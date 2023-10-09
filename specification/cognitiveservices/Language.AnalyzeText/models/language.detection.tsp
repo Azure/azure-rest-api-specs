@@ -1,7 +1,6 @@
+import "@typespec/versioning";
 
-import "@typespec/rest";
-import "@typespec/http";
-
+using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
 
@@ -36,7 +35,7 @@ model LanguageDetectionTaskResult extends AnalyzeTextTaskResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model LanguageDetectionResult extends AnalyzeTextPreBuiltResult{
+model LanguageDetectionResult extends AnalyzeTextPreBuiltResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   documents?: Array<LanguageDetectionDocumentResult>;
 }
@@ -57,6 +56,17 @@ model DetectedLanguage {
 
   @doc("A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true.")
   confidenceScore: float64;
+
+  @added(Versions.v2023_04_15_preview)
+  @doc("Identifies the script of the input document.")
+  script?: ScriptKind;
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("Enum that identifies the script of the input document.")
+enum ScriptKind {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Latin,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"

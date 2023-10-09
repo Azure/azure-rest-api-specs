@@ -1,11 +1,11 @@
+import "@typespec/versioning";
 
-import "@typespec/rest";
-import "@typespec/http";
+using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model AnalyzeTextKeyPhraseExtractionInput extends AnalyzeTextTask{
+model AnalyzeTextKeyPhraseExtractionInput extends AnalyzeTextTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextTaskKind.KeyPhraseExtraction;
 
@@ -20,9 +20,10 @@ model AnalyzeTextKeyPhraseExtractionInput extends AnalyzeTextTask{
 model KeyPhraseTaskParameters extends PreBuiltTaskParameters {}
 
 @doc("An object representing the task definition for a Key Phrase Extraction task.")
-model KeyPhraseLroTask extends AnalyzeTextLroTask {
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+model KeyPhraseLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  kind: AnalyzeTextLroTaskKind.KeyPhraseExtraction;
+  kind: AnalyzeTextLROTaskKind.KeyPhraseExtraction;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: KeyPhraseTaskParameters;
@@ -38,9 +39,10 @@ model KeyPhraseTaskResult extends AnalyzeTextTaskResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model KeyPhraseResult extends AnalyzeTextPreBuiltResult{
+model KeyPhraseResult extends AnalyzeTextPreBuiltResult {
   @doc("Response by document")
-  documents: Array<KeyPhrasesDocumentResult>
+  @typeChangedFrom(Versions.v2023_04_15_preview, KeyPhrasesDocumentResult)
+  documents: Array<KeyPhrasesDocumentResultWithDetectedLanguage>
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -49,10 +51,17 @@ model KeyPhrasesDocumentResult extends DocumentResult {
   keyPhrases: Array<string>;
 }
 
+@added(Versions.v2023_04_01)
+@doc("A ranked list of sentences representing the extracted summary.")
+model KeyPhrasesDocumentResultWithDetectedLanguage extends KeyPhrasesDocumentResult {
+  ...DocumentDetectedLanguage;
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model KeyPhraseExtractionLroResult extends AnalyzeTextLroResult {
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+model KeyPhraseExtractionLROResult extends AnalyzeTextLROResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  kind: AnalyzeTextLroResultsKind.KeyPhraseExtractionLROResults;
+  kind: AnalyzeTextLROResultsKind.KeyPhraseExtractionLROResults;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: KeyPhraseResult;

@@ -16,6 +16,7 @@ import "./models/language.detection.tsp";
 import "./models/pii.entity.recognition.tsp";
 import "./models/sentiment.analysis.tsp";
 import "./models/summarization.tsp";
+import "./models/custom.healthcare.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
