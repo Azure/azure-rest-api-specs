@@ -3556,25 +3556,25 @@
         "clientId"
       ]
     },
-    "FlexProfile": {
+    "VirtualMachinesProfile": {
       "type": "object",
       "properties": {
         "scale": {
           "$ref": "#/definitions/ScaleProfile",
-          "description": "Specifications on how to scale a Flex agent pool."
+          "description": "Specifications on how to scale a VirtualMachines agent pool."
         }
       },
-      "description": "Specifications on Flex agent pool."
+      "description": "Specifications on VirtualMachines agent pool."
     },
     "ScaleProfile": {
       "type": "object",
       "properties": {
         "manual": {
           "$ref": "#/definitions/ManualScaleProfile",
-          "description": "Specifications on how to scale the Flex agent pool to a fixed size."
+          "description": "Specifications on how to scale the VirtualMachines agent pool to a fixed size."
         }
       },
-      "description": "Specifications on how to scale a Flex agent pool."
+      "description": "Specifications on how to scale a VirtualMachines agent pool."
     },
     "ManualScaleProfile": {
       "type": "object",
@@ -3584,7 +3584,7 @@
           "items": {
             "$ref": "#/definitions/ManualScaleMachines"
           },
-          "description": "Specifications on how to scale a Flex agent pool. Currently only 1 list of machine sizes is allowed."
+          "description": "Specifications on how to scale a VirtualMachines agent pool. Currently only 1 list of machine sizes is allowed."
         }
       }
     },
@@ -3608,15 +3608,15 @@
       },
       "description": "Specifications on number of machines."
     },
-    "FlexNodesStatus": {
+    "VirtualMachineNodesStatus": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/FlexNodes"
+        "$ref": "#/definitions/VirtualMachineNodes"
       },
       "x-ms-identifiers": [],
-      "description": "The status of nodes in a Flex agent pool."
+      "description": "The status of nodes in a VirtualMachines agent pool."
     },
-    "FlexNodes": {
+    "VirtualMachineNodes": {
       "type": "object",
       "properties": {
         "sizes": {
@@ -3634,11 +3634,11 @@
     "ManagedClusterAgentPoolProfileProperties": {
       "type": "object",
       "properties": {
-        "flexProfile": {
-          "$ref": "#/definitions/FlexProfile"
+        "virtualMachinesProfile": {
+          "$ref": "#/definitions/VirtualMachinesProfile"
         },
-        "flexNodesStatus": {
-          "$ref": "#/definitions/FlexNodesStatus"
+        "virtualMachineNodesStatus": {
+          "$ref": "#/definitions/VirtualMachineNodesStatus"
         },
         "count": {
           "type": "integer",
@@ -4012,7 +4012,7 @@
       "enum": [
         "VirtualMachineScaleSets",
         "AvailabilitySet",
-        "Flex"
+        "VirtualMachines"
       ],
       "x-ms-enum": {
         "name": "AgentPoolType",
@@ -4027,8 +4027,8 @@
             "description": "Use of this is strongly discouraged."
           },
           {
-            "value": "Flex",
-            "description": "Create an Agent Pool that allows mixed-size vms."
+            "value": "VirtualMachines",
+            "description": "Create an Agent Pool backed by a Single Instance VM orchestration mode."
           }
         ]
       },
