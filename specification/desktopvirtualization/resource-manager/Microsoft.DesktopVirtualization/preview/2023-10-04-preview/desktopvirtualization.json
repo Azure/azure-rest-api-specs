@@ -3252,6 +3252,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/importAppAttachPackageInfo": {
+      "post": {
+        "tags": [
+          "AppAttachPackageInfo"
+        ],
+        "operationId": "AppAttachPackageInfo_Import",
+        "description": "Gets information from a package given the path to the package.",
+        "x-ms-examples": {
+          "AppAttachPackageInfo_Import": {
+            "$ref": "./examples/AppAttachPackageInfo_Import_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "importPackageInfoRequest",
+            "description": "Object containing URI to package image and other optional properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportPackageInfoRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved packages in specified Image Path.",
+            "schema": {
+              "$ref": "#/definitions/AppAttachPackageList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/expandMsixImage": {
       "post": {
         "tags": [
@@ -3298,6 +3352,294 @@
             "description": "Automation error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/appAttachPackages/{appAttachPackageName}": {
+      "get": {
+        "tags": [
+          "AppAttachPackage"
+        ],
+        "operationId": "AppAttachPackage_Get",
+        "description": "Get an app attach package.",
+        "x-ms-examples": {
+          "AppAttachPackage_Get": {
+            "$ref": "./examples/AppAttachPackage_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppAttachPackageNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved App Attach Package.",
+            "schema": {
+              "$ref": "#/definitions/AppAttachPackage"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppAttachPackage"
+        ],
+        "operationId": "AppAttachPackage_CreateOrUpdate",
+        "description": "Create or update an App Attach package.",
+        "x-ms-examples": {
+          "AppAttachPackage_Create": {
+            "$ref": "./examples/AppAttachPackage_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppAttachPackageNameParameter"
+          },
+          {
+            "name": "appAttachPackage",
+            "description": "Object containing App Attach Package definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppAttachPackage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated App Attach Package.",
+            "schema": {
+              "$ref": "#/definitions/AppAttachPackage"
+            }
+          },
+          "201": {
+            "description": "Successfully created App Attach Package.",
+            "schema": {
+              "$ref": "#/definitions/AppAttachPackage"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppAttachPackage"
+        ],
+        "operationId": "AppAttachPackage_Delete",
+        "description": "Remove an App Attach Package.",
+        "x-ms-examples": {
+          "AppAttachPackage_Delete": {
+            "$ref": "./examples/AppAttachPackage_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppAttachPackageNameParameter"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Force flag to delete App Attach package."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted App Attach Package."
+          },
+          "204": {
+            "description": "App Attach Package does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AppAttachPackage"
+        ],
+        "operationId": "AppAttachPackage_Update",
+        "description": "Update an App Attach Package",
+        "x-ms-examples": {
+          "AppAttachPackage_Update": {
+            "$ref": "./examples/AppAttachPackage_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppAttachPackageNameParameter"
+          },
+          {
+            "name": "appAttachPackagePatch",
+            "description": "Object containing App Attach Package definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppAttachPackage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated App Attach Package.",
+            "schema": {
+              "$ref": "#/definitions/AppAttachPackage"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/appAttachPackages": {
+      "get": {
+        "tags": [
+          "AppAttachPackage"
+        ],
+        "operationId": "AppAttachPackage_ListByResourceGroup",
+        "description": "List App Attach packages in resource group.",
+        "x-ms-examples": {
+          "AppAttachPackage_List_ResourceGroup": {
+            "$ref": "./examples/AppAttachPackage_List_ResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter expression. Valid properties for filtering are package name and host pool."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved App Attach Packages in resource group.",
+            "schema": {
+              "$ref": "#/definitions/AppAttachPackageList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/appAttachPackages": {
+      "get": {
+        "tags": [
+          "AppAttachPackage"
+        ],
+        "operationId": "AppAttachPackage_ListBySubscription",
+        "description": "List App Attach packages in subscription.",
+        "x-ms-examples": {
+          "AppAttachPackage_List_Subscription": {
+            "$ref": "./examples/AppAttachPackage_List_Subscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter expression. Valid properties for filtering are package name, host pool, and resource group."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved App Attach Packages in subscription.",
+            "schema": {
+              "$ref": "#/definitions/AppAttachPackageList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4398,6 +4740,14 @@
             "type": "string"
           }
         },
+        "appAttachPackageReferences": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of App Attach Package links.",
+          "items": {
+            "type": "string"
+          }
+        },
         "ssoadfsAuthority": {
           "type": "string",
           "description": "URL to customer ADFS server for signing WVD SSO certificates."
@@ -4717,8 +5067,7 @@
           "description": "List of maintenance windows. Maintenance windows are 2 hours long.",
           "items": {
             "$ref": "#/definitions/MaintenanceWindowProperties"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -4789,8 +5138,7 @@
           "description": "List of maintenance windows. Maintenance windows are 2 hours long.",
           "items": {
             "$ref": "#/definitions/MaintenanceWindowPatchProperties"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -5059,6 +5407,225 @@
           "readOnly": true,
           "description": "Link to the next page of results."
         }
+      }
+    },
+    "AppAttachPackage": {
+      "description": "Schema for App Attach Package properties.",
+      "type": "object",
+      "x-ms-client-flatten": false,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        },
+        "properties": {
+            "description": "Detailed properties for App Attach Package",
+            "$ref": "#/definitions/AppAttachPackageProperties",
+            "x-nullable": false
+        }
+      }
+    },
+    "AppAttachPackageList": {
+      "type": "object",
+      "title": "AppAttachPackageList",
+      "description": "List of App Attach Package definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of App Attach Package definitions.",
+          "items": {
+            "$ref": "#/definitions/AppAttachPackage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "AppAttachPackageProperties":{
+      "description": "Schema for App Attach Package properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the App Attach Package."
+        },
+        "image": {
+          "description": "Detailed properties for App Attach Package",
+          "$ref": "#/definitions/AppAttachPackageInfoProperties",
+          "x-nullable": false
+        },
+        "hostPoolReferences": {
+          "type": "array",
+          "description": "List of Hostpool resource Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "keyVaultURL": {
+          "type": "string",
+          "description": "URL of keyvault location to store certificate"
+        },
+        "failHealthCheckOnStagingFailure": {
+          "enum": [
+            "Unhealthy",
+            "NeedsAssistance",
+            "DoNotFail"
+          ],
+          "x-ms-enum": {
+            "name": "failHealthCheckOnStagingFailure",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Parameter indicating how the health check should behave if this package fails staging"
+        }
+      }
+    },
+    "AppAttachPackageInfoProperties": {
+      "description": "Schema for Import Package Information properties.",
+      "type": "object",
+      "properties": {
+        "packageAlias": {
+          "type": "string",
+          "description": "Alias of App Attach Package. Assigned at import time"
+        },
+        "imagePath": {
+          "type": "string",
+          "description": "VHD/CIM image path on Network Share.",
+          "x-nullable": false
+        },
+        "packageName": {
+          "type": "string",
+          "description": "Package Name from appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "packageFamilyName": {
+          "type": "string",
+          "description": "Package Family Name from appxmanifest.xml. Contains Package Name and Publisher name. ",
+          "x-nullable": false
+        },
+        "packageFullName": {
+          "type": "string",
+          "description": "Package Full Name from appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User friendly Name to be displayed in the portal. ",
+          "x-nullable": true
+        },
+        "packageRelativePath": {
+          "type": "string",
+          "description": "Relative Path to the package inside the image. ",
+          "x-nullable": false
+        },
+        "isRegularRegistration": {
+          "type": "boolean",
+          "description": "Specifies how to register Package in feed.",
+          "x-nullable": false
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Make this version of the package the active one across the hostpool. ",
+          "x-nullable": false
+        },
+        "packageDependencies": {
+          "type": "array",
+          "description": "List of package dependencies. ",
+          "items": {
+            "$ref": "#/definitions/MsixPackageDependencies"
+          },
+          "x-nullable": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Package Version found in the appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "lastUpdated": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Date Package was last updated, found in the appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "packageApplications": {
+          "type": "array",
+          "description": "List of package applications. ",
+          "items": {
+            "$ref": "#/definitions/MsixPackageApplications"
+          },
+          "x-nullable": false
+        },
+        "certificateName": {
+          "type": "string",
+          "description": "Certificate name found in the appxmanifest.xml. ",
+          "x-nullable": true
+        },
+        "certificateExpiry": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Date certificate expires, found in the appxmanifest.xml. ",
+          "x-nullable": true
+        },
+        "IsPackageTimestamped": {
+          "type": "boolean",
+          "description": "Is package timestamped so it can ignore the certificate expiry date",
+          "x-nullable": true
+        }
+      }
+    },
+    "ImportPackageInfoRequest": {
+      "description": "Information to import app attach package",
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "URI to Image"
+        },
+        "packageArchitecture": {
+          "enum": [
+            "ARM",
+            "ARM64",
+            "x86",
+            "x64",
+            "Neutral",
+            "x86a64",
+            "ALL"
+          ],
+          "x-ms-enum": {
+            "name": "AppAttachPackageArchitectures",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Possible device architectures that an app attach package can be configured for",
+          "x-nullable": true
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Provisioning",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
       }
     },
     "Application": {
@@ -7020,6 +7587,16 @@
       "required": true,
       "type": "string",
       "description": "The version specific package full name of the MSIX package within specified hostpool",
+      "maxLength": 100,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "AppAttachPackageNameParameter": {
+      "name": "appAttachPackageName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the App Attach package arm object",
       "maxLength": 100,
       "minLength": 3,
       "x-ms-parameter-location": "method"
