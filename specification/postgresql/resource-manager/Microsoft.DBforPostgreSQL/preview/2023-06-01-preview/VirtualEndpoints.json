@@ -41,7 +41,7 @@
         ],
         "operationId": "VirtualEndpoints_Create",
         "x-ms-examples": {
-          "Create a new virtual enpoint for a flexible server": {
+          "Create a new virtual endpoint for a flexible server": {
             "$ref": "./examples/VirtualEndpointCreate.json"
           }
         },
@@ -137,7 +137,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualEndpointResource"
+              "$ref": "#/definitions/VirtualEndpointResourceForPatch"
             },
             "description": "The required parameters for updating a server."
           }
@@ -176,7 +176,7 @@
         "operationId": "VirtualEndpoints_Delete",
         "x-ms-examples": {
           "Delete a virtual endpoint": {
-            "$ref": "./examples/VirtualEndpointsDelete.json"
+            "$ref": "./examples/VirtualEndpointDelete.json"
           }
         },
         "description": "Deletes a virtual endpoint.",
@@ -198,9 +198,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -292,7 +289,7 @@
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          },
+          }
         ],
         "responses": {
           "200": {
@@ -307,9 +304,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -361,6 +355,17 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
+      "description": "Represents a virtual endpoint for a server."
+    },
+    "VirtualEndpointResourceForPatch": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualEndpointResourceProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the virtual endpoint resource."
+        }
+      },
       "description": "Represents a virtual endpoint for a server."
     },
     "VirtualEndpointsListResult": {
