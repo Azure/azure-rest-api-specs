@@ -1,7 +1,11 @@
 emit:
- - "@typespec/openapi3"
-
+#  - "@typespec/openapi3"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
 options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.Chat"
     namespace: "Azure.AI.Chat"
