@@ -55,251 +55,6 @@
     }
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.NetworkAnalytics/metricsIngestionEndpoints": {
-      "get": {
-        "operationId": "MetricsIngestionEndpoints_List",
-        "tags": [
-          "MetricsIngestionEndpoints"
-        ],
-        "description": "List MetricsIngestionEndpointResources resources by parent",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResourcesListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetricsIngestionEndpoints_List_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_List_MaximumSet_Gen.json"
-          },
-          "MetricsIngestionEndpoints_List_MinimumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_List_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/{resourceUri}/providers/Microsoft.NetworkAnalytics/metricsIngestionEndpoints/default": {
-      "get": {
-        "operationId": "MetricsIngestionEndpoints_Get",
-        "tags": [
-          "MetricsIngestionEndpoints"
-        ],
-        "description": "Get a MetricsIngestionEndpointResources",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResources"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetricsIngestionEndpoints_Get_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Get_MaximumSet_Gen.json"
-          },
-          "MetricsIngestionEndpoints_Get_MinimumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Get_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "MetricsIngestionEndpoints_CreateOrUpdate",
-        "tags": [
-          "MetricsIngestionEndpoints"
-        ],
-        "description": "Create a MetricsIngestionEndpointResources",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResources"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'MetricsIngestionEndpointResources' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResources"
-            }
-          },
-          "201": {
-            "description": "Resource 'MetricsIngestionEndpointResources' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResources"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetricsIngestionEndpoints_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "MetricsIngestionEndpoints_Update",
-        "tags": [
-          "MetricsIngestionEndpoints"
-        ],
-        "description": "Update a MetricsIngestionEndpointResources",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResourcesUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetricsIngestionEndpointResources"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetricsIngestionEndpoints_Update_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Update_MaximumSet_Gen.json"
-          },
-          "MetricsIngestionEndpoints_Update_MinimumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Update_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "MetricsIngestionEndpoints_Delete",
-        "tags": [
-          "MetricsIngestionEndpoints"
-        ],
-        "description": "Delete a MetricsIngestionEndpointResources",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource deleted successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MetricsIngestionEndpoints_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Delete_MaximumSet_Gen.json"
-          },
-          "MetricsIngestionEndpoints_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/MetricsIngestionEndpoints_Delete_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/providers/Microsoft.NetworkAnalytics/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -327,10 +82,10 @@
           }
         },
         "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
+          "Operations_List_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
           },
-          "Operations_List_MinimumSet_Gen": {
+          "Operations_List_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         },
@@ -369,10 +124,10 @@
           }
         },
         "x-ms-examples": {
-          "DataConnector_ListBySubscription_MaximumSet_Gen": {
+          "DataConnector_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/DataConnector_ListBySubscription_MaximumSet_Gen.json"
           },
-          "DataConnector_ListBySubscription_MinimumSet_Gen": {
+          "DataConnector_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/DataConnector_ListBySubscription_MinimumSet_Gen.json"
           }
         },
@@ -411,11 +166,53 @@
           }
         },
         "x-ms-examples": {
-          "Storage_ListBySubscription_MaximumSet_Gen": {
+          "Storage_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/Storage_ListBySubscription_MaximumSet_Gen.json"
           },
-          "Storage_ListBySubscription_MinimumSet_Gen": {
+          "Storage_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/Storage_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/metricsIngestionEndpoints": {
+      "get": {
+        "operationId": "MetricsIngestionEndpoints_ListBySubscription",
+        "tags": [
+          "MetricsIngestionEndpoints"
+        ],
+        "description": "List Metrics Ingestion Endpoint by subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetricsIngestionEndpoints_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_ListBySubscription_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -453,10 +250,10 @@
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_ListBySubscription_MaximumSet_Gen": {
+          "NetworkAnalyticsProduct_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_ListBySubscription_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_ListBySubscription_MinimumSet_Gen": {
+          "NetworkAnalyticsProduct_ListBySubscription_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_ListBySubscription_MinimumSet_Gen.json"
           }
         },
@@ -498,10 +295,10 @@
           }
         },
         "x-ms-examples": {
-          "DataConnector_ListByResourceGroup_MaximumSet_Gen": {
+          "DataConnector_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/DataConnector_ListByResourceGroup_MaximumSet_Gen.json"
           },
-          "DataConnector_ListByResourceGroup_MinimumSet_Gen": {
+          "DataConnector_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/DataConnector_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
@@ -550,10 +347,10 @@
           }
         },
         "x-ms-examples": {
-          "DataConnector_Get_MaximumSet_Gen": {
+          "DataConnector_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/DataConnector_Get_MaximumSet_Gen.json"
           },
-          "DataConnector_Get_MinimumSet_Gen": {
+          "DataConnector_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/DataConnector_Get_MinimumSet_Gen.json"
           }
         }
@@ -619,10 +416,10 @@
           }
         },
         "x-ms-examples": {
-          "DataConnector_CreateOrUpdate_MaximumSet_Gen": {
+          "DataConnector_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/DataConnector_CreateOrUpdate_MaximumSet_Gen.json"
           },
-          "DataConnector_CreateOrUpdate_MinimumSet_Gen": {
+          "DataConnector_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/DataConnector_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
@@ -679,10 +476,10 @@
           }
         },
         "x-ms-examples": {
-          "DataConnector_Update_MaximumSet_Gen": {
+          "DataConnector_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/DataConnector_Update_MaximumSet_Gen.json"
           },
-          "DataConnector_Update_MinimumSet_Gen": {
+          "DataConnector_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/DataConnector_Update_MinimumSet_Gen.json"
           }
         }
@@ -740,10 +537,10 @@
           }
         },
         "x-ms-examples": {
-          "DataConnector_Delete_MaximumSet_Gen": {
+          "DataConnector_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/DataConnector_Delete_MaximumSet_Gen.json"
           },
-          "DataConnector_Delete_MinimumSet_Gen": {
+          "DataConnector_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/DataConnector_Delete_MinimumSet_Gen.json"
           }
         },
@@ -786,10 +583,10 @@
           }
         },
         "x-ms-examples": {
-          "Storage_ListByResourceGroup_MaximumSet_Gen": {
+          "Storage_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/Storage_ListByResourceGroup_MaximumSet_Gen.json"
           },
-          "Storage_ListByResourceGroup_MinimumSet_Gen": {
+          "Storage_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/Storage_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
@@ -838,10 +635,10 @@
           }
         },
         "x-ms-examples": {
-          "Storage_Get_MaximumSet_Gen": {
+          "Storage_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/Storage_Get_MaximumSet_Gen.json"
           },
-          "Storage_Get_MinimumSet_Gen": {
+          "Storage_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/Storage_Get_MinimumSet_Gen.json"
           }
         }
@@ -907,10 +704,10 @@
           }
         },
         "x-ms-examples": {
-          "Storage_CreateOrUpdate_MaximumSet_Gen": {
+          "Storage_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/Storage_CreateOrUpdate_MaximumSet_Gen.json"
           },
-          "Storage_CreateOrUpdate_MinimumSet_Gen": {
+          "Storage_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/Storage_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
@@ -967,10 +764,10 @@
           }
         },
         "x-ms-examples": {
-          "Storage_Update_MaximumSet_Gen": {
+          "Storage_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/Storage_Update_MaximumSet_Gen.json"
           },
-          "Storage_Update_MinimumSet_Gen": {
+          "Storage_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/Storage_Update_MinimumSet_Gen.json"
           }
         }
@@ -1028,11 +825,326 @@
           }
         },
         "x-ms-examples": {
-          "Storage_Delete_MaximumSet_Gen": {
+          "Storage_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/Storage_Delete_MaximumSet_Gen.json"
           },
-          "Storage_Delete_MinimumSet_Gen": {
+          "Storage_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/Storage_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/metricsIngestionEndpoints": {
+      "get": {
+        "operationId": "MetricsIngestionEndpoints_ListByResourceGroup",
+        "tags": [
+          "MetricsIngestionEndpoints"
+        ],
+        "description": "List Metrics Ingestion Endpoint by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetricsIngestionEndpoints_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/metricsIngestionEndpoints/{metricsIngestionEndpointName}": {
+      "get": {
+        "operationId": "MetricsIngestionEndpoints_Get",
+        "tags": [
+          "MetricsIngestionEndpoints"
+        ],
+        "description": "Retrieve Metrics Ingestion Endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "metricsIngestionEndpointName",
+            "in": "path",
+            "description": "Metrics Ingestion Endpoint Name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResources"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetricsIngestionEndpoints_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_Get_MaximumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MetricsIngestionEndpoints_CreateOrUpdate",
+        "tags": [
+          "MetricsIngestionEndpoints"
+        ],
+        "description": "Create Metrics Ingestion Endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "metricsIngestionEndpointName",
+            "in": "path",
+            "description": "Metrics Ingestion Endpoint Name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResources"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MetricsIngestionEndpointResources' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResources"
+            }
+          },
+          "201": {
+            "description": "Resource 'MetricsIngestionEndpointResources' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResources"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "MetricsIngestionEndpoints_Update",
+        "tags": [
+          "MetricsIngestionEndpoints"
+        ],
+        "description": "Update Metrics Ingestion Endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "metricsIngestionEndpointName",
+            "in": "path",
+            "description": "Metrics Ingestion Endpoint Name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResourcesUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricsIngestionEndpointResources"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetricsIngestionEndpoints_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_Update_MaximumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "MetricsIngestionEndpoints_Delete",
+        "tags": [
+          "MetricsIngestionEndpoints"
+        ],
+        "description": "Delete Metrics Ingestion Endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "metricsIngestionEndpointName",
+            "in": "path",
+            "description": "Metrics Ingestion Endpoint Name",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetricsIngestionEndpoints_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_Delete_MaximumSet_Gen.json"
+          },
+          "MetricsIngestionEndpoints_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
+            "$ref": "./examples/MetricsIngestionEndpoints_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1074,10 +1186,10 @@
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_ListByResourceGroup_MaximumSet_Gen": {
+          "NetworkAnalyticsProduct_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_ListByResourceGroup_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_ListByResourceGroup_MinimumSet_Gen": {
+          "NetworkAnalyticsProduct_ListByResourceGroup_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
@@ -1119,10 +1231,10 @@
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_Get_MaximumSet_Gen": {
+          "NetworkAnalyticsProduct_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_Get_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_Get_MinimumSet_Gen": {
+          "NetworkAnalyticsProduct_Get_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_Get_MinimumSet_Gen.json"
           }
         }
@@ -1181,10 +1293,10 @@
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_CreateOrUpdate_MaximumSet_Gen": {
+          "NetworkAnalyticsProduct_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_CreateOrUpdate_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_CreateOrUpdate_MinimumSet_Gen": {
+          "NetworkAnalyticsProduct_CreateOrUpdate_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
@@ -1234,10 +1346,10 @@
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_Update_MaximumSet_Gen": {
+          "NetworkAnalyticsProduct_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_Update_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_Update_MinimumSet_Gen": {
+          "NetworkAnalyticsProduct_Update_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_Update_MinimumSet_Gen.json"
           }
         }
@@ -1288,10 +1400,10 @@
           }
         },
         "x-ms-examples": {
-          "NetworkAnalyticsProduct_Delete_MaximumSet_Gen": {
+          "NetworkAnalyticsProduct_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_Delete_MaximumSet_Gen.json"
           },
-          "NetworkAnalyticsProduct_Delete_MinimumSet_Gen": {
+          "NetworkAnalyticsProduct_Delete_MinimumSet_Gen - generated by [MaximumSet] rule - generated by [MinimumSet] rule": {
             "$ref": "./examples/NetworkAnalyticsProduct_Delete_MinimumSet_Gen.json"
           }
         },
@@ -2290,6 +2402,25 @@
             "create"
           ]
         },
+        "targetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Parent resource identifier for which this metrics ingestion endpoint is being created",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.MobileNetwork/radioAccessNetworks"
+              },
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
         "eventHubUrl": {
           "type": "string",
           "description": "Event Hub URL to which the metrics should be sent for this resource",
@@ -2335,7 +2466,8 @@
         }
       },
       "required": [
-        "ingressRegionName"
+        "ingressRegionName",
+        "targetResourceId"
       ]
     },
     "MetricsIngestionEndpointResources": {
@@ -2354,7 +2486,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -2382,7 +2514,15 @@
     "MetricsIngestionEndpointResourcesUpdate": {
       "type": "object",
       "description": "The type used for update operations of the MetricsIngestionEndpointResources.",
-      "properties": {}
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "NetworkAcls": {
       "type": "object",
@@ -2556,8 +2696,7 @@
     },
     "NetworkAnalyticsProductsUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the NetworkAnalyticsProducts.",
-      "properties": {}
+      "description": "The type used for update operations of the NetworkAnalyticsProducts."
     },
     "PrincipalType": {
       "type": "string",
@@ -2964,15 +3103,5 @@
       }
     }
   },
-  "parameters": {
-    "Azure.ResourceManager.ResourceUriParameter": {
-      "name": "resourceUri",
-      "in": "path",
-      "description": "The fully qualified Azure Resource manager identifier of the resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    }
-  }
+  "parameters": {}
 }
