@@ -1,0 +1,32 @@
+parameters:
+  "service-dir":
+    default: "sdk/cognitiveservices"
+emit:
+ - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}/../"
+    output-file: "{azure-resource-provider-folder}/AzureAIVision/ImageAnalysis/{version-status}/{version}/generated.json"
+    azure-resource-provider-folder: "data-plane"
+    examples-directory: examples
+    omit-unreachable-types: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-ai-vision-imageanalysis"
+    package-mode: "dataplane"
+    package-name: "{package-dir}"
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.AI.Vision.ImageAnalysis"
+    namespace: "Azure.AI.Vision.ImageAnalysis"
+    clear-output-folder: true
+    model-namespace: false
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-vision-imageanalysis"
+    namespace: "com.azure.ai.vision.imageanalysis"
+    examples-directory: examples
+  "@azure-tools/typespec-ts":
+    package-dir: "imageAnalysis"
+    generateMetadata: false
+    generateTest: false
+    isModularLibrary: true
+    packageDetails:
+      name: "@azure/imageAnalysis"
