@@ -246,7 +246,7 @@
           "description": "The link (url) to download the pricesheet.",
           "type": "string",
           "readOnly": true,
-          "$ref": "#/definitions/PricesheetProperties"
+          "$ref": "#/definitions/PriceSheetProperties"
         },
         "validTill": {
           "description": "Download link validity.",
@@ -258,6 +258,7 @@
     },
     "PriceSheetProperties": {
       "description": "The properties of the price sheet.",
+      "type": "object",
       "properties": {
         "billingAccountID": {
           "description": "Unique identifier for the billing account.",
@@ -378,10 +379,9 @@
           "description": "Price type for a product. For example, an Azure resource with a pay-as-you-go rate with priceType as Consumption. Other price types include Reservation, Entitlement and Savings Plan.",
           "type": "string",
           "readOnly": true
-        
+        }
       }
     }
-  }
   },
   "parameters": {
     "billingAccountNameParameter": {
