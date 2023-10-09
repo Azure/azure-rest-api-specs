@@ -3360,7 +3360,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/appAttachPackages/{appAttachPackageName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/appAttachPackages/{appAttachPackageName}": {
       "get": {
         "tags": [
           "AppAttachPackage"
@@ -3553,7 +3553,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/appAttachPackages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/appAttachPackages": {
       "get": {
         "tags": [
           "AppAttachPackage"
@@ -5067,7 +5067,8 @@
           "description": "List of maintenance windows. Maintenance windows are 2 hours long.",
           "items": {
             "$ref": "#/definitions/MaintenanceWindowProperties"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5138,7 +5139,8 @@
           "description": "List of maintenance windows. Maintenance windows are 2 hours long.",
           "items": {
             "$ref": "#/definitions/MaintenanceWindowPatchProperties"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5578,7 +5580,7 @@
           "description": "Date certificate expires, found in the appxmanifest.xml. ",
           "x-nullable": true
         },
-        "IsPackageTimestamped": {
+        "IsPackageTimeStamped": {
           "type": "boolean",
           "description": "Is package timestamped so it can ignore the certificate expiry date",
           "x-nullable": true
@@ -6078,7 +6080,8 @@
           "items": {
             "$ref": "#/definitions/MsixPackageDependencies"
           },
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-identifiers": []
         },
         "version": {
           "type": "string",
@@ -6097,7 +6100,8 @@
           "items": {
             "$ref": "#/definitions/MsixPackageApplications"
           },
-          "x-nullable": false
+          "x-nullable": false,
+          "x-ms-identifiers": []
         }
       }
     },
