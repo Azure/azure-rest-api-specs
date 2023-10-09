@@ -3533,7 +3533,7 @@
             "in": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/AppAttachPackage"
+              "$ref": "#/definitions/AppAttachPackagePatch"
             }
           }
         ],
@@ -5435,6 +5435,27 @@
         }
       }
     },
+    "AppAttachPackagePatch": {
+      "description": "Schema for patchable App Attach Package properties.",
+      "type": "object",
+      "x-ms-client-flatten": false,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        },
+        "properties": {
+          "description": "Detailed properties for App Attach Package",
+          "$ref": "#/definitions/AppAttachPackageProperties",
+          "x-nullable": false
+        }
+      }
+    },
     "AppAttachPackageList": {
       "type": "object",
       "title": "AppAttachPackageList",
@@ -5582,7 +5603,7 @@
           "description": "Date certificate expires, found in the appxmanifest.xml. ",
           "x-nullable": true
         },
-        "IsPackageTimeStamped": {
+        "isPackageTimestamped": {
           "type": "boolean",
           "description": "Is package timestamped so it can ignore the certificate expiry date",
           "x-nullable": true
