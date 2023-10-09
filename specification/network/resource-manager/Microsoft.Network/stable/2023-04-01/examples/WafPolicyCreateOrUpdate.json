@@ -47,6 +47,22 @@
                   ]
                 }
               ]
+            },
+            {
+              "ruleSetType": "Microsoft_BotManagerRuleSet",
+              "ruleSetVersion": "1.0",
+              "ruleGroupOverrides": [
+                {
+                  "ruleGroupName": "UnknownBots",
+                  "rules": [
+                    {
+                      "ruleId": "300700",
+                      "state": "Enabled",
+                      "action": "JSChallenge"
+                    }
+                  ]
+                }
+              ]
             }
           ],
           "exclusions": [
@@ -184,6 +200,38 @@
               }
             ],
             "action": "Block"
+          },
+          {
+            "name": "Rule4",
+            "priority": 4,
+            "ruleType": "MatchRule",
+            "matchConditions": [
+              {
+                "matchVariables": [
+                  {
+                    "variableName": "RemoteAddr",
+                    "selector": null
+                  }
+                ],
+                "operator": "IPMatch",
+                "matchValues": [
+                  "192.168.1.0/24"
+                ]
+              },
+              {
+                "matchVariables": [
+                  {
+                    "variableName": "RequestHeaders",
+                    "selector": "UserAgent"
+                  }
+                ],
+                "operator": "Contains",
+                "matchValues": [
+                  "Bot"
+                ]
+              }
+            ],
+            "action": "JSChallenge"
           }
         ]
       }
