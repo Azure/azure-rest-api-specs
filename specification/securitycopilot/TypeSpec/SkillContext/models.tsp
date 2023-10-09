@@ -26,40 +26,40 @@ model SkillContextResponse {
   properties: Record<string>;
 
   @doc("TODO")
-  StartTime: utcDateTime;
+  startTime: utcDateTime;
 
   @doc("Tenant id of tenant in which skill invocation occured")
   TenantId: string;
 
   @doc("User id of user that invoked the skill")
-  UserId: string;
+  userId: string;
 }
 
 @doc("Skill Variable")
 model SkillVariable {
   @doc("Skill variable type")
-  type: string;
+  type?: string;
 
   @doc("Skill variable value")
-  value: string;
+  value?: string;
 }
 
 @doc("Invoke skill request including necessary inputs for invoking a skill")
 model InvokeSkillRequest {
   @doc("Name of skillset in which desired skill to invoke resides")
-  SkillsetName?: string;
+  skillsetName?: string;
 
   @doc("Name of skill to be invoked")
-  SkillName: string;
+  skillName: string;
 
   @doc("Skill inputs")
-  inputs?: Record<SkillVariable>;
+  inputs: Record<SkillVariable> | null;
 }
 
 @doc("Skill variable parent entity adding additional attribute 'skillsource' to provide visibility to users as to what data/information was used in generating the output of a skill")
 model OutputSkillVariable extends SkillVariable {
   @doc("Array of cited sources that were fetched by a skill and that impacted the output of the skill evaluation")
-  Sources: Array<SkillSource>;
+  sources: Array<SkillSource> | null;
 }
 
 @doc("Source that is fetched during the evaluation of a skill. Provides visibility to users as to what data/information was used in generating the output of a skill")
@@ -67,11 +67,11 @@ model SkillSource {
   @doc("User friendly name for the information source")
   displayName: string;
 
-  @doc("The source type (i.e. URI)")
-  sourceType: SkillSourceType;
-
   @doc("Information source content (i.e. URL to article)")
   sourceContent: string;
+
+  @doc("The source type (i.e. URI)")
+  sourceType: SkillSourceType;
 }
 
 @doc("The prompt history of the current session")

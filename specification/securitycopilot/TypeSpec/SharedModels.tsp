@@ -25,7 +25,7 @@ model SkillsetDescriptor {
     hidden: boolean;
 
     @doc("The prerequisites of a skillset TODO what does this mean")
-    prerequisites: string[];
+    prerequisites: string[] | null;
 
     @doc("The settings of a skillset")
     settings: SkillsetSetting[];
@@ -268,7 +268,7 @@ model SkillInputDescriptor is SkillVariableDescriptor {
     required: boolean;
 
     @doc("The default value of the skill input")
-    defaultValue: string;
+    defaultValue?: string;
 
     @doc("The placeholder value of the skill input TODO how is this different than the default")
     placeholderValue: string;
@@ -277,13 +277,13 @@ model SkillInputDescriptor is SkillVariableDescriptor {
 @doc("The descriptor of a skill variable")
 model SkillVariableDescriptor {
     @doc("The name of the skill input")
-    name: string;
+    name?: string;
 
     @doc("The type of the skill input")
     type: SkillTypeDescriptor;
 
     @doc("The description of the skill")
-    description: string;
+    description?: string;
 }
 
 @doc("The descriptor of a skill output")
