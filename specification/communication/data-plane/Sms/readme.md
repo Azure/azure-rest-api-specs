@@ -29,6 +29,14 @@ openapi-type: data-plane
 tag: package-2024-01-14-preview
 ```
 
+### Supression
+``` yaml
+suppressions:
+ - code: LroExtension
+   from: communicationservicessms.json
+   reason: Avoid Lro changes on this api which returns 202. Otherwise breaking changes are signaled.
+```
+
 ### Tag: package-2020-07-20-preview1
 
 These settings apply only when `--tag=package-2020-07-20-preview1` is specified on the command line.
