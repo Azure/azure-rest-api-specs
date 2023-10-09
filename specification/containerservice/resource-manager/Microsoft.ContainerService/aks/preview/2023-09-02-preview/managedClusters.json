@@ -6247,7 +6247,8 @@
         "Mariner",
         "AzureLinux",
         "Windows2019",
-        "Windows2022"
+        "Windows2022",
+        "WindowsAnnual"
       ],
       "x-ms-enum": {
         "name": "OSSKU",
@@ -6276,6 +6277,10 @@
           {
             "value": "Windows2022",
             "description": "Use Windows2022 as the OS for node images. Unsupported for system node pools. Windows2022 only supports Windows2022 containers; it cannot run Windows2019 containers and vice versa."
+          },
+          {
+            "value": "WindowsAnnual",
+            "description": "Use Windows Annual Channel version as the OS for node images. Unsupported for system node pools. Details about supported container images and kubernetes versions under different AKS Annual Channel versions could be seen in https://aka.ms/aks/windows-annual-channel-details."
           }
         ]
       },
