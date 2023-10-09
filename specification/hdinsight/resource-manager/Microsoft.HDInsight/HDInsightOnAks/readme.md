@@ -1,4 +1,4 @@
-# HDInsight On Aks
+# HDInsight On AKS
 
 > see https://aka.ms/autorest
 
