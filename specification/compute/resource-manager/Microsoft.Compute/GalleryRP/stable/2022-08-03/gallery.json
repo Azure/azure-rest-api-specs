@@ -742,7 +742,8 @@
             "type": "string",
             "description": "The expand expression to apply on the operation.",
             "enum": [
-              "ReplicationStatus"
+              "ReplicationStatus",
+              "ValidationProfile"
             ],
             "x-ms-enum": {
               "name": "ReplicationStatusTypes",
@@ -773,6 +774,12 @@
           },
           "Get a gallery image version with replication status.": {
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithReplicationStatus.json"
+          },
+          "Get a gallery image version with validation profile.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithValidationProfile.json"
+          },
+          "Get a gallery image version with validation profile and replication status.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithValidationProfileAndReplicationStatus.json"
           },
           "Get a gallery image version with snapshots as a source.": {
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithSnapshotsAsSource.json"
@@ -2427,6 +2434,10 @@
         "replicationStatus": {
           "readOnly": true,
           "$ref": "#/definitions/ReplicationStatus"
+        },
+        "validationsProfile": {
+          "readOnly": true,
+          "$ref": "#/definitions/ValidationsProfile"
         }
       },
       "required": [
@@ -2736,6 +2747,33 @@
       },
       "description": "This is the storage profile of a Gallery Image Version."
     },
+    "ValidationsProfile": {
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "validationEtag": {
+          "type": "string",
+          "description": "The published time of the image version"
+        },
+        "executedValidations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExecutedValidation"
+          },
+          "x-ms-identifiers": [],
+          "description": "This specifies the list of executedValidations of the image version metadata"
+        },
+        "platformAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlatformAttribute"
+          },
+          "x-ms-identifiers": [],
+          "description": "This specifies the list of platformAttributes of the image version metadata"
+        }
+      },
+      "description": "This is the validations profile of a Gallery Image Version."
+    },
     "GalleryArtifactVersionFullSource": {
       "type": "object",
       "properties": {
@@ -2759,6 +2797,43 @@
         }
       },
       "description": "The gallery artifact version source."
+    },
+    "ExecutedValidation": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "This property specifies the type of image version validation. This field cannot be empty if providing version."
+        },
+        "status": {
+          "type": "string",
+          "description": "This property specifies the status of the validationProfile of the image version that is succeeded or failed."
+        },
+        "version": {
+          "type": "string",
+          "description": "This property specifies the valid version of the validation type. It defined the current version of the type."
+        },
+        "executionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This property specifies the timestamp of the validation when the image version was created."
+        }
+      },
+      "description": "This specifies the executedValidation property of ValidationsProfile."
+    },
+    "PlatformAttribute": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "This property specifies the type of defined set of source. Supported names are source_image_publisher, source_image_offer or source_image_sku or source_image_version"
+        },
+        "value": {
+          "type": "string",
+          "description": "This property specifies the value of the corresponding source_image_publisher, source_image_offer or source_image_sku or source_image_version"
+        }
+      },
+      "description": "This specifies the executedValidation property of ValidationsProfile."
     },
     "GalleryOSDiskImage": {
       "allOf": [

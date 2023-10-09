@@ -18,18 +18,18 @@ csharp:
 
 # remove DUMMY member of enum
 directive:
-    # dynamically add a DummyOrchestrationServiceName value to the enum 
+    # dynamically add a DummyOrchestrationServiceName value to the enum
   - from: virtualMachineScaleSet.json
     where: $..enum
     transform: >-
-      if( $.length === 1 && $[0] === "AutomaticRepairs") { 
+      if( $.length === 1 && $[0] === "AutomaticRepairs") {
         $.push('DummyOrchestrationServiceName');
       }
       return $;
-    
+
     # remove it from the C# generated code
   - from: source-file-csharp
-    where: $ 
+    where: $
     transform: >-
       return $.
         replace(/.*public const string DummyOrchestrationServiceName.*/g,'').
@@ -37,6 +37,9 @@ directive:
   - from: gallery.json
     where: $.definitions.GalleryTargetExtendedLocation.properties.storageAccountType["x-ms-enum"].name
     transform: return "EdgeZoneStorageAccountType"
+  - from: gallery.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}/versions/{galleryApplicationVersionName}"].get.parameters[5]["x-ms-enum"].name
+    transform: return "ApplicationVersionsReplicationStatusTypes"
 ```
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
