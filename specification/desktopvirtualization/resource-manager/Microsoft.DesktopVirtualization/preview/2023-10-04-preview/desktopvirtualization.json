@@ -3531,7 +3531,7 @@
             "name": "appAttachPackagePatch",
             "description": "Object containing App Attach Package definition.",
             "in": "body",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/AppAttachPackage"
             }
@@ -5548,7 +5548,8 @@
           "items": {
             "$ref": "#/definitions/MsixPackageDependencies"
           },
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-identifiers": []
         },
         "version": {
           "type": "string",
@@ -5567,7 +5568,8 @@
           "items": {
             "$ref": "#/definitions/MsixPackageApplications"
           },
-          "x-nullable": false
+          "x-nullable": false,
+          "x-ms-identifiers": []
         },
         "certificateName": {
           "type": "string",
@@ -7603,6 +7605,7 @@
       "description": "The name of the App Attach package arm object",
       "maxLength": 100,
       "minLength": 3,
+      "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$",
       "x-ms-parameter-location": "method"
     },
     "ApplicationGroupNameParameter": {
