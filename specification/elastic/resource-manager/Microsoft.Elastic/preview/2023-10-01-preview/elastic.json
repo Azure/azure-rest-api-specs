@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Elastic",
-    "version": "2023-07-01-preview"
+    "version": "2023-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -2167,6 +2167,9 @@
         "value": {
           "description": "Results of a list operation.",
           "type": "array",
+          "x-ms-identifiers": [
+            "properties/version"
+          ],
           "items": {
             "$ref": "#/definitions/ElasticVersionListFormat"
           }
@@ -2373,6 +2376,9 @@
         "value": {
           "description": "Results of a list operation.",
           "type": "array",
+          "x-ms-identifiers": [
+            "properties/azureResourceId"
+          ],
           "items": {
             "$ref": "#/definitions/ConnectedPartnerResourcesListFormat"
           }
@@ -2416,6 +2422,11 @@
         },
         "diskCapacity": {
           "description": "Disk capacity of the elasticsearch in Elastic cloud deployment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "elasticsearchEndPoint": {
+          "description": "Elasticsearch endpoint in Elastic cloud deployment. This is either the aliased_endpoint if available, or the service_url otherwise.",
           "type": "string",
           "readOnly": true
         },
