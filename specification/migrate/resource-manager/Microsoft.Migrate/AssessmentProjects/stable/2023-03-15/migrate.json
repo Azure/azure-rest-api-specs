@@ -5508,12 +5508,7 @@
           "description": "Gets a value indicating whether machine is suitable for the cloud platform\nselected.",
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceProperties"
-        }
-      ]
+      }
     },
     "AssessedMachineType": {
       "type": "string",
@@ -5761,12 +5756,7 @@
           "description": "When was assessed SQL database last updated.",
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceProperties"
-        }
-      ]
+      }
     },
     "AssessedSqlInstanceDatabaseSummary": {
       "type": "object",
@@ -6107,12 +6097,7 @@
           "description": "When was assessed SQL instance last updated.",
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceProperties"
-        }
-      ]
+      }
     },
     "AssessedSqlMachine": {
       "type": "object",
@@ -6376,12 +6361,7 @@
           "description": "Assessment sizing criterion.",
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceProperties"
-        }
-      ]
+      }
     },
     "AssessedSqlRecommendedEntity": {
       "type": "object",
@@ -6514,12 +6494,7 @@
           "description": "Assessment sizing criterion.",
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceProperties"
-        }
-      ]
+      }
     },
     "Assessment": {
       "type": "object",
@@ -6681,12 +6656,7 @@
           },
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceProperties"
-        }
-      ]
+      }
     },
     "AssessmentProject": {
       "type": "object",
@@ -6819,12 +6789,7 @@
           "description": "Gets the last assessment timestamp.",
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceProperties"
-        }
-      ]
+      }
     },
     "AssessmentProjectUpdate": {
       "type": "object",
@@ -7231,12 +7196,7 @@
           "description": "Gets a value indicating whether machine is suitable for the cloud platform\nselected.",
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceProperties"
-        }
-      ]
+      }
     },
     "AvsAssessedNetworkAdapter": {
       "type": "object",
@@ -7403,12 +7363,7 @@
             "$ref": "#/definitions/AzureOfferCode"
           }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceProperties"
-        }
-      ]
+      }
     },
     "AvsAssessmentProperties": {
       "type": "object",
@@ -12596,12 +12551,7 @@
           "description": "When was machine last updated.",
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceProperties"
-        }
-      ]
+      }
     },
     "MigrationGuidelineContext": {
       "type": "object",
@@ -12696,7 +12646,7 @@
       "description": "Private endpoint connection resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "$ref": "../../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -12732,32 +12682,12 @@
         "value"
       ]
     },
-    "PrivateEndpointConnectionProperties": {
-      "type": "object",
-      "description": "Private endpoint connection properties.",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/ResourceId",
-          "description": "ARM id for the private endpoint resource corresponding to the connection.",
-          "readOnly": true
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "State of the private endpoint connection."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceProperties"
-        }
-      ]
-    },
     "PrivateLinkResource": {
       "type": "object",
       "description": "Private link resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "$ref": "../../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResourceProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -12792,89 +12722,6 @@
       "required": [
         "value"
       ]
-    },
-    "PrivateLinkResourceProperties": {
-      "type": "object",
-      "description": "Properties of a private link resource.",
-      "properties": {
-        "requiredMembers": {
-          "type": "array",
-          "description": "The private link resource required member names.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "description": "Required DNS zone names of the the private link resource.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "groupId": {
-          "type": "string",
-          "description": "The private link resource group id."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceProperties"
-        }
-      ]
-    },
-    "PrivateLinkServiceConnectionState": {
-      "type": "object",
-      "description": "State of a private endpoint connection.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStateStatus",
-          "description": "Connection status of the private endpoint connection."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the private endpoint connection."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "Actions required on the private endpoint connection."
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionStateStatus": {
-      "type": "string",
-      "description": "PrivateLink Service Connection State Status.",
-      "enum": [
-        "Approved",
-        "Pending",
-        "Rejected",
-        "Disconnected"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateLinkServiceConnectionStateStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Approved",
-            "value": "Approved",
-            "description": "Connection is Approved."
-          },
-          {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "Connection is Pending."
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected",
-            "description": "Connection is Rejected."
-          },
-          {
-            "name": "Disconnected",
-            "value": "Disconnected",
-            "description": "Connected is Disconnected."
-          }
-        ]
-      }
     },
     "ProcessorInfo": {
       "type": "object",
@@ -13486,12 +13333,7 @@
           },
           "x-ms-identifiers": []
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceProperties"
-        }
-      ]
+      }
     },
     "SqlAssessmentV2": {
       "type": "object",
@@ -14080,12 +13922,7 @@
           "description": "Number of sql availability groups part of the assessment.",
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceProperties"
-        }
-      ]
+      }
     },
     "SqlAvailabilityGroupDataOverview": {
       "type": "object",
