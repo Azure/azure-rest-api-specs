@@ -592,14 +592,14 @@ model AnalyzeConversationJobsInput {
   analysisInput: MultiLanguageConversationAnalysisInput;
 
   @doc("Set of tasks to execute on the input conversation.")
-  tasks: Array<AnalyzeConversationLroTask>;
+  tasks: Array<AnalyzeConversationLROTask>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @doc("Base class for a long-running conversation input task.")
 @discriminator("kind")
 @added(Versions.v2023_04_01)
-model AnalyzeConversationLroTask extends TaskIdentifier {
+model AnalyzeConversationLROTask extends TaskIdentifier {
   @doc("Enumeration of supported analysis tasks on a collection of conversations.")
   kind: AnalyzeConversationLROTaskKind;
 }
@@ -647,7 +647,7 @@ enum AnalyzeConversationResultsKind {
 @doc("Contains the status of the submitted job for analyzing a conversation, along with related statistics.")
 @added(Versions.v2023_04_01)
 @resource("language/analyze-conversations/jobs")
-model AnalyzeConversationJobState{
+model AnalyzeConversationJobState {
   ...JobState;
   ...ConversationTasksState;
   ...AnalyzeConversationJobStatistics;
@@ -849,7 +849,7 @@ model ConversationItemLevelTiming extends AudioTiming {}
 
 @added(Versions.v2023_04_15_preview)
 @doc("Task definition for conversational sentiment.")
-model AnalyzeConversationalSentimentTask extends AnalyzeConversationLroTask {
+model AnalyzeConversationalSentimentTask extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.ConversationalSentimentTask,
 
@@ -859,7 +859,7 @@ model AnalyzeConversationalSentimentTask extends AnalyzeConversationLroTask {
 
 @added(Versions.v2023_04_15_preview)
 @doc("Supported parameters for a conversational sentiment task.")
-model ConversationalSentimentTaskParameters extends PreBuiltTaskParameters{
+model ConversationalSentimentTaskParameters extends PreBuiltTaskParameters {
   @doc("For transcript conversations, this parameter provides information regarding which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here.")
   predictionSource?: TranscriptContentType;
 }
@@ -876,14 +876,14 @@ model AnalyzeConversationSentimentResult extends AnalyzeConversationJobResult {
 
 @added(Versions.v2023_04_15_preview)
 @doc("The result from sentiment analysis operation for each conversation.")
-model ConversationSentimentResults extends PreBuiltResult{
+model ConversationSentimentResults extends PreBuiltResult {
   @doc("Array of ConversationSentimentResults")
   conversations: Array<ConversationSentimentResultsConversation>
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("The result from sentiment analysis operation for each conversation.")
-model ConversationSentimentResultsConversation{
+model ConversationSentimentResultsConversation {
   ...ConversationResultBase;
   ...ConversationSentimentResult;
 }
@@ -945,14 +945,14 @@ model AnalyzeConversationConversationPiiResult extends AnalyzeConversationJobRes
 
 @added(Versions.v2023_04_15_preview)
 @doc("The result from PII detection and redaction operation for each conversation.")
-model ConversationPiiResults extends PreBuiltResult{
+model ConversationPiiResults extends PreBuiltResult {
   @doc("array of conversations")
   conversations: Array<ConversationalPiiResultWithResultBase>;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Conversation PII result item")
-model ConversationalPiiResultWithResultBase{
+model ConversationalPiiResultWithResultBase {
   ...ConversationResultBase;
   ...ConversationPiiResult;
 }
@@ -979,7 +979,7 @@ model ConversationPiiItemResult {
 
 @added(Versions.v2023_04_15_preview)
 @doc("Task definition for a PII redaction in conversations.")
-model AnalyzeConversationPiiTask extends AnalyzeConversationLroTask{
+model AnalyzeConversationPiiTask extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.ConversationalPIITask;
 
@@ -989,7 +989,7 @@ model AnalyzeConversationPiiTask extends AnalyzeConversationLroTask{
 
 @added(Versions.v2023_04_15_preview)
 @doc("Supported parameters for a conversational pii task.")
-model ConversationPiiTaskParameters extends PreBuiltTaskParameters{
+model ConversationPiiTaskParameters extends PreBuiltTaskParameters {
   @doc("Array of ConversationPIICategories")
   piiCategories?: Array<ConversationPIICategories>;
 
@@ -1065,7 +1065,7 @@ enum TranscriptContentType {
 
 @doc("Task definition for custom conversational summarization.")
 @added(Versions.v2023_04_15_preview)
-model AnalyzeCustomConversationSummarizationTask extends AnalyzeConversationLroTask {
+model AnalyzeCustomConversationSummarizationTask extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.CustomConversationalSummarizationTask;
 
@@ -1075,7 +1075,7 @@ model AnalyzeCustomConversationSummarizationTask extends AnalyzeConversationLroT
 
 @doc("Task definition for conversational summarization.")
 @added(Versions.v2023_04_01)
-model AnalyzeConversationSummarizationTask extends AnalyzeConversationLroTask {
+model AnalyzeConversationSummarizationTask extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
   kind: AnalyzeConversationLROTaskKind.ConversationalSummarizationTask;
 
@@ -1085,7 +1085,7 @@ model AnalyzeConversationSummarizationTask extends AnalyzeConversationLroTask {
 
 @doc("Supported parameters for a conversational summarization task.")
 @added(Versions.v2023_04_01)
-model ConversationSummarizationTaskParametersBase  extends AbstractiveSummarizationTaskParametersBase{
+model ConversationSummarizationTaskParametersBase  extends AbstractiveSummarizationTaskParametersBase {
 
   @doc("Array of Summary Aspects")
   summaryAspects: Array<SummaryAspect>;
@@ -1099,7 +1099,7 @@ model ConversationSummarizationTaskParameters extends PreBuiltTaskParameters {
 
 @doc("Supported parameters for a custom conversation summarization task.")
 @added(Versions.v2023_04_15_preview)
-model CustomConversationSummarizationTaskParameters extends CustomTaskParameters{
+model CustomConversationSummarizationTaskParameters extends CustomTaskParameters {
   ...ConversationSummarizationTaskParametersBase;
 }
 
@@ -1148,21 +1148,21 @@ model SummaryResultBase {
 
 @doc("Summary Results")
 @added(Versions.v2023_04_01)
-model SummaryResult{
+model SummaryResult {
   ...SummaryResultBase;
   ...PreBuiltResult;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Custom Summary Results")
-model CustomSummaryResult{
+model CustomSummaryResult {
   ...SummaryResultBase;
   ...CustomResult;
 }
 
 @doc("Conversations Summary Result")
 @added(Versions.v2023_04_01)
-model ConversationsSummaryResult{
+model ConversationsSummaryResult {
   ...ConversationResultBase;
   @doc("array of summaries")
   summaries: Array<SummaryResultItem>;

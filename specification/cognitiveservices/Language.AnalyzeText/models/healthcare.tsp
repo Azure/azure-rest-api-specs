@@ -5,15 +5,54 @@ using TypeSpec.Versioning;
 namespace Language.AnalyzeText;
 
 @doc("Supported parameters for a Healthcare task.")
-model HealthcareTaskParameters extends PreBuiltTaskParameters{
+model HealthcareTaskParameters extends PreBuiltTaskParameters { 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType;
+
+  @added(Versions.v2023_04_15_preview)
+  @doc("The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html.")
+  fhirVersion: fhirVersion;
+
+  @added(Versions.v2023_04_15_preview)
+  @doc("Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter.")
+  documentType: healthcareDocumentType
+}
+
+@added(Versions.v2023_04_15_preview)
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+enum fhirVersion {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  "4.0.1"
+}
+
+@added(Versions.v2023_04_15_preview)
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+enum healthcareDocumentType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  None,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ClinicalTrial,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  DischargeSummary,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ProgressNote,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  HistoryAndPhysical,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Consult,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Imaging,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  Pathology,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  ProcedureNote,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model HealthcareLroTask extends AnalyzeTextLroTask{
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+model HealthcareLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  kind: AnalyzeTextLroTaskKind.Healthcare;
+  kind: AnalyzeTextLROTaskKind.Healthcare;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: HealthcareTaskParameters;
@@ -21,8 +60,10 @@ model HealthcareLroTask extends AnalyzeTextLroTask{
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model HealthcareResult extends AnalyzeTextPreBuiltResult {
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  documents: Array<HealthcareEntitiesDocumentResult>;
+  @typeChangedFrom(Versions.v2023_04_15_preview, Array<HealthcareEntitiesDocumentResult>)
+  documents: Array<HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -32,6 +73,10 @@ model HealthcareEntitiesDocumentResult extends DocumentResult {
 
   @doc("Healthcare entity relations.")
   relations: HealthcareRelation;
+
+  @added(Versions.v2023_04_15_preview)
+  @doc("JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.")
+  fhirBundle?: Record<unknown>
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -328,8 +373,23 @@ model HealthcareAssertion {
   @doc("Describes the entities certainty and polarity.")
   certainty?: Certainty;
   
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Describes if the entity is the subject of the text or if it describes someone else.")
   association?: Association;
+
+  @added(Versions.v2023_04_15_preview)
+  @doc("Describes temporal information regarding the entity.")
+  temporality: Temporality;
+}
+
+@added(Versions.v2023_04_15_preview)
+@doc("Describes temporal information regarding the entity.")
+enum Temporality {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  current,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  past,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  future
 }
 
 @doc( "Describes any conditionality on the entity.")
@@ -386,10 +446,17 @@ model HealthcareEntityLink {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model HealthcareLroResult extends AnalyzeTextLroResult {
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+model HealthcareLROResult extends AnalyzeTextLROResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  kind: AnalyzeTextLroResultsKind.HealthcareLROResults;
+  kind: AnalyzeTextLROResultsKind.HealthcareLROResults;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: HealthcareResult;
+}
+
+@added(Versions.v2023_04_15_preview)
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage extends HealthcareEntitiesDocumentResult {
+  ...DocumentDetectedLanguage;
 }
