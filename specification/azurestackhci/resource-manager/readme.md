@@ -62,8 +62,10 @@ suppressions:
     reason: We had already gone to production with "HCI" in our namespace, so changing it to "Hci" now would be disruptive.
   - code: TopLevelResourcesListBySubscription
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
+  - code: PropertiesTypeObjectNoDefinition
+    reason: These are existing properties already supported as part of PUT extensions call. Same properties are being supported for extensions Patch now.  
+    from: extensions.json
 ```
-
 
 ### Tag: package-preview-2023-09
 
@@ -79,6 +81,23 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/storageContainers.json
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualHardDisks.json
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualMachineInstances.json
+```
+### Tag: package-2023-08
+
+These settings apply only when `--tag=package-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2023-08-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/offers.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/operations.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/publishers.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/skus.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/updateRuns.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/updateSummaries.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/updates.json```
 ```
 ### Tag: package-preview-2023-07
 
@@ -99,7 +118,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06'
+``` yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.AzureStackHCI/stable/2023-06-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2023-06-01/clusters.json
@@ -112,6 +131,7 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2023-06-01/updateSummaries.json
   - Microsoft.AzureStackHCI/stable/2023-06-01/updates.json
 ```
+
 ### Tag: package-2023-03
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.

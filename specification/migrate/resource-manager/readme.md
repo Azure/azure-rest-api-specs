@@ -16,6 +16,7 @@ batch:
   - tag: package-migrate-2020-01
   - tag: package-migrate-2020-07
   - tag: package-hubmigrate-2020-05
+  - tag: package-hubmigrate-2023-01
   - tag: package-migrateengine-2022-05
 ```
 
@@ -102,6 +103,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.azuremigrate.v2020_05_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2020_05_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-hubmigrate-2023-01 and java
+
+These settings apply only when `--tag=package-hubmigrate-2023-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-hubmigrate-2023-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azuremigrate.v2023_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2023_01_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -196,6 +210,15 @@ input-file:
 - Microsoft.Migrate/MigrateProjects/stable/2020-05-01/hubmigrate.json
 ```
 
+### Tag: package-hubmigrate-2023-01
+
+These settings apply only when `--tag=package-hubmigrate-2023-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-hubmigrate-2023-01'
+input-file:
+- Microsoft.Migrate/MigrateProjects/stable/2023-01-01/hubmigrate.json
+```
+
 ### Tag: package-migrateengine-2022-05
 
 These settings apply only when `--tag=package-migrateengine-2022-05` is specified on the command line.
@@ -230,7 +253,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
