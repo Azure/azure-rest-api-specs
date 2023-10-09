@@ -3,16 +3,14 @@ import "./common.tsp";
 namespace Azure.AI.Chat;
 
 @doc("placeholder")
-model ChatMessageDelta {
+model ChatMessageDelta<StateModel> {
   @doc("placeholder")
   content?: string;
 
   @doc("placeholder")
   role?: ChatRole;
 
-  @doc("placeholder")
-  @projectedName("json", "session_state")
-  sessionState?: unknown;
+  ...StateProperty<StateModel>;
 }
 
 @doc("placeholder")
@@ -21,7 +19,7 @@ model ChoiceDelta<StateModel, ArgumentsModel> {
   index: safeint;
 
   @doc("placeholder")
-  delta: ChatMessageDelta;
+  delta: ChatMessageDelta<StateModel>;
 
   ...StateProperty<StateModel>;
   ...ExtraArgumentsProperty<ArgumentsModel>;

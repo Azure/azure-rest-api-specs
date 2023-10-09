@@ -1,4 +1,8 @@
+import "@typespec/http";
+
 namespace Azure.AI.Chat;
+
+using TypeSpec.Http;
 
 @doc("placeholder")
 enum FinishReason {
@@ -29,6 +33,7 @@ enum ChatRole {
 
 @doc("placeholder")
 model ExtraArgumentsProperty<ArgumentsModel> {
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Protocol defines the type as Record<any>"
   @doc("placeholder")
   @projectedName("json", "extra_args")
   extraArguments?: ArgumentsModel;
@@ -36,6 +41,7 @@ model ExtraArgumentsProperty<ArgumentsModel> {
 
 @doc("placeholder")
 model StateProperty<StateModel> {
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The protocol defines these as any (object/scalar) for now"
   @doc("placeholder")
   @projectedName("json", "session_state")
   sessionState?: StateModel;
