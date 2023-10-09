@@ -648,6 +648,9 @@
           },
           "Create Managed Cluster with VirtualMachines pool type": {
             "$ref": "./examples/ManagedClustersCreate_VirtualMachines.json"
+          },
+          "Create Managed Cluster with Node Autp Provisioning": {
+            "$ref": "./examples/ManagedClustersCreate_NodeAutoProvisioning.json"
           }
         }
       },
@@ -5462,6 +5465,10 @@
         "metricsProfile": {
           "$ref": "#/definitions/ManagedClusterMetricsProfile",
           "description": "Optional cluster metrics configuration."
+        },
+        "nodeProvisioningProfile": {
+          "$ref": "#/definitions/ManagedClusterNodeProvisioningProfile",
+          "description": "Node provisioning settings that apply to the whole cluster."
         }
       },
       "description": "Properties of the managed cluster."
@@ -8768,6 +8775,34 @@
           "type": "boolean",
           "title": "Whether to enable cost analysis",
           "description": "The Managed Cluster sku.tier must be set to 'Standard' to enable this feature. Enabling this will add Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal. If not specified, the default is false. For more information see aka.ms/aks/docs/cost-analysis."
+        }
+      }
+    },
+    "ManagedClusterNodeProvisioningProfile": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Manual",
+            "Auto"
+          ],
+          "x-ms-enum": {
+            "name": "NodeProvisioningMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Manual",
+                "description": "Nodes are provisioned manually by the user"
+              },
+              {
+                "value": "Auto",
+                "description": "Nodes are provisioned automatically by AKS using Karpenter. Fixed size Node Pools can still be created, but autoscaling Node Pools cannot be. (See aka.ms/aks/nap for more details)."
+              }
+            ]
+          },
+          "title": "The node provisioning mode. If not specified, the default is Manual.",
+          "description": "Once the mode it set to Auto, it cannot be changed back to Manual."
         }
       }
     }
