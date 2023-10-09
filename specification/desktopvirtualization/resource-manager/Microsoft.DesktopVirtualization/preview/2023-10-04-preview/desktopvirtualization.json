@@ -5439,20 +5439,40 @@
       "description": "Schema for patchable App Attach Package properties.",
       "type": "object",
       "x-ms-client-flatten": false,
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ],
       "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource."
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the App Attach Package."
         },
-        "properties": {
+        "image": {
           "description": "Detailed properties for App Attach Package",
-          "$ref": "#/definitions/AppAttachPackageProperties",
+          "$ref": "#/definitions/AppAttachPackageInfoProperties",
           "x-nullable": false
+        },
+        "hostPoolReferences": {
+          "type": "array",
+          "description": "List of Hostpool resource Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "keyVaultURL": {
+          "type": "string",
+          "description": "URL of keyvault location to store certificate"
+        },
+        "failHealthCheckOnStagingFailure": {
+          "enum": [
+            "Unhealthy",
+            "NeedsAssistance",
+            "DoNotFail"
+          ],
+          "x-ms-enum": {
+            "name": "failHealthCheckOnStagingFailure",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Parameter indicating how the health check should behave if this package fails staging"
         }
       }
     },
