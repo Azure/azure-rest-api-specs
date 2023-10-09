@@ -3815,6 +3815,10 @@
         "gpuProfile": {
           "$ref": "#/definitions/AgentPoolGPUProfile",
           "description": "The GPU settings of an agent pool."
+        },
+        "artifactStreamingProfile": {
+          "$ref": "#/definitions/ArtifactStreamingProfile",
+          "description": "Configuration for using artifact streaming on AKS."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -6870,6 +6874,16 @@
           "type": "boolean",
           "title": "Whether to auto install GPU drivers or not.",
           "description": "The default value is true when the vmSize of the agent pool contains a GPU, false otherwise. GPU Driver Installation can only be set true when VM has an associated GPU resource. Setting this field to false prevents automatic GPU driver installation. In that case, in order for the GPU to be usable, the user must perform GPU driver installation themselves."
+        }
+      }
+    },
+    "AgentPoolArtifactStreamingProfile": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "Whether to enable artifact streaming on an agent pool. Note that corresponding container images need have artifact streaming enabled through ACR for faster pod starts.",
+          "description": "Artifact streaming speeds up the cold-start of containers on a node through on-demand image loading. This field configures whether to enable artifact streaming on nodes. To use this feature, container images must also enable artifact streaming on ACR. If not specified, the default is false."
         }
       }
     },
