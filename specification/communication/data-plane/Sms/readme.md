@@ -34,7 +34,10 @@ tag: package-2024-01-14-preview
 suppressions:
  - code: LroExtension
    from: communicationservicessms.json
-   reason: Avoid Lro changes on this api which returns 202. Otherwise breaking changes are signaled.
+   reason: Lro attribute was not part of any previous version. Trying to add it signals breaking changes and requires adding operation-location, etc.
+ - code: IntegerTypeMustHaveFormat
+   from: communicationservicessms.json
+   reason: Integer type for HttpStatusCode was not part of any previous version. Trying to add it signals breaking changes.
 ```
 
 ### Tag: package-2020-07-20-preview1
