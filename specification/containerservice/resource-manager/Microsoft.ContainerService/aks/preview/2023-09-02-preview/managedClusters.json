@@ -645,6 +645,9 @@
           },
           "Create Managed Cluster with CustomCATrustCertificates populated and CustomCATrust enabled": {
             "$ref": "./examples/ManagedClustersCreate_EnableCustomCATrust.json"
+          },
+          "Create Managed Cluster with VirtualMachines pool type": {
+            "$ref": "./examples/ManagedClustersCreate_VirtualMachines.json"
           }
         }
       },
@@ -1231,6 +1234,9 @@
           },
           "Create Agent Pool with CustomCATrust enabled": {
             "$ref": "./examples/AgentPoolsCreate_EnableCustomCATrust.json"
+          },
+          "Create Agent Pool with VirtualMachines pool type": {
+            "$ref": "./examples/AgentPoolsCreate_VirtualMachines.json"
           }
         }
       },
@@ -3930,7 +3936,8 @@
       "type": "string",
       "enum": [
         "VirtualMachineScaleSets",
-        "AvailabilitySet"
+        "AvailabilitySet",
+        "VirtualMachines"
       ],
       "x-ms-enum": {
         "name": "AgentPoolType",
@@ -3943,6 +3950,10 @@
           {
             "value": "AvailabilitySet",
             "description": "Use of this is strongly discouraged."
+          },
+          {
+            "value": "VirtualMachines",
+            "description": "Create an Agent Pool backed by a Single Instance VM orchestration mode."
           }
         ]
       },
