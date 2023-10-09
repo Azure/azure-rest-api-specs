@@ -161,6 +161,9 @@
         "x-ms-examples": {
           "GetClusterExample": {
             "$ref": "./examples/GetClusterExample.json"
+          },
+          "GetProvisionedClusterExample": {
+            "$ref": "./examples/GetProvisionedClusterExample.json"
           }
         },
         "parameters": [
@@ -505,7 +508,8 @@
           "description": "The identity of the connected cluster."
         },
         "kind": {
-          "$ref": "#/definitions/ConnectedClusterKind"
+          "$ref": "#/definitions/ConnectedClusterKind",
+          "description": "The kind of connected cluster."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -827,7 +831,7 @@
       "type": "object",
       "description": "AAD Profile specifies attributes for Azure Active Directory integration.",
       "properties": {
-        "enableAzureRBAC": {
+        "enableAzureRbac": {
           "type": "boolean",
           "description": "Whether to enable Azure RBAC for Kubernetes authorization."
         },
