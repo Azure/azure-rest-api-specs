@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2023-09` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-09'
 input-file:
-  - Azure.Analytics.Purview.Scanning/stable/2023-09-01/scanningService.json
+  - Azure.Analytics.Purview.DataMap/stable/2023-09-01/purviewdatamap.json
 ```
 ### Tag: package-preview-2023-02
 
