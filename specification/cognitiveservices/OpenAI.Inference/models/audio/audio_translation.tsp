@@ -1,5 +1,5 @@
 import "@typespec/versioning";
-import "./audio.common.tsp";
+import "./common.tsp";
 
 namespace Azure.OpenAI;
 
@@ -36,7 +36,7 @@ The configuration information for an audio translation request.
 model AudioTranslationOptions {
   @doc("""
   The audio data to translate. This must be the binary content of a file in one of the supported media formats:
-  flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.
+   flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.
   """)
   @projectedName("csharp", "AudioData")
   file: bytes;
