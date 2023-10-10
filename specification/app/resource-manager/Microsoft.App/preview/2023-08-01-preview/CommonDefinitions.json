@@ -900,6 +900,113 @@
         }
       }
     },
+    "DaprComponentResiliencyPoliciesCollection": {
+      "description": "Dapr Component Resiliency Policies ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaprComponentResiliencyPolicy"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DaprComponentResiliencyPolicy": {
+      "description": "Dapr Component Resiliency Policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Dapr Component Resiliency Policy resource specific properties",
+          "type": "object",
+          "properties": {
+            "inboundPolicy": {
+              "description": "The optional inbound component resiliency policy configuration",
+              "$ref": "#/definitions/DaprComponentResiliencyPolicyConfiguration"
+            },
+            "outboundPolicy": {
+              "description": "The optional outbound component resiliency policy configuration",
+              "$ref": "#/definitions/DaprComponentResiliencyPolicyConfiguration"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DaprComponentResiliencyPolicyConfiguration": {
+      "description": "Dapr Component Resiliency Policy Configuration.",
+      "type": "object",
+      "properties": {
+        "httpRetryPolicy": {
+          "description": "The optional HTTP retry policy configuration",
+          "$ref": "#/definitions/DaprComponentResiliencyPolicyHttpRetryPolicyConfiguration"
+        },
+        "timeoutPolicy": {
+          "description": "The optional timeout policy configuration",
+          "$ref": "#/definitions/DaprComponentResiliencyPolicyTimeoutPolicyConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DaprComponentResiliencyPolicyHttpRetryPolicyConfiguration": {
+      "description": "Dapr Component Resiliency Policy HTTP Retry Policy Configuration.",
+      "type": "object",
+      "properties": {
+        "maxRetries": {
+          "description": "The optional maximum number of retries",
+          "type": "integer",
+          "format": "int32"
+        },
+        "retryBackOff": {
+          "description": "The optional retry backoff configuration",
+          "$ref": "#/definitions/DaprComponentResiliencyPolicyHttpRetryBackOffConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DaprComponentResiliencyPolicyHttpRetryBackOffConfiguration": {
+      "description": "Dapr Component Resiliency Policy HTTP Retry Backoff Configuration.",
+      "type": "object",
+      "properties": {
+        "initialDelayInMilliseconds": {
+          "description": "The optional initial delay in milliseconds before an operation is retried",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxIntervalInMilliseconds": {
+          "description": "The optional maximum time interval in milliseconds between retry attempts",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DaprComponentResiliencyPolicyTimeoutPolicyConfiguration": {
+      "description": "Dapr Component Resiliency Policy Timeout Policy Configuration.",
+      "type": "object",
+      "properties": {
+        "responseTimeoutInSeconds": {
+          "description": "The optional response timeout in seconds",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
     "DaprSubscriptionsCollection": {
       "description": "Dapr Subscriptions ARM resource.",
       "required": [
