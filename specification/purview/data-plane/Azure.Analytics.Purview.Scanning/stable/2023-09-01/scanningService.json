@@ -2591,6 +2591,7 @@
         "kind": {
           "enum": [
             "None",
+            "Fabric",
             "AzureSubscription",
             "AzureResourceGroup",
             "AzureSynapseWorkspace",
@@ -2604,18 +2605,29 @@
             "AzureDataExplorer",
             "AzureFileService",
             "AzureSqlDatabase",
+            "ArcEnabledSqlServer",
             "AmazonPostgreSql",
             "AzurePostgreSql",
+            "Databricks",
             "SqlServerDatabase",
             "AzureSqlDatabaseManagedInstance",
             "AzureSqlDataWarehouse",
             "AzureMySql",
+            "Hdfs",
+            "TableauServer",
             "AzureStorage",
             "Teradata",
             "Oracle",
+            "PostgreSql",
+            "AmazonRedShift",
+            "DatabricksHms",
             "SapS4Hana",
             "SapEcc",
-            "PowerBI"
+            "Snowflake",
+            "PowerBI",
+            "Trident",
+            "Dataverse",
+            "DatabricksUnityCatalog"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2629,6 +2641,18 @@
             "$ref": "#/definitions/Scan"
           },
           "readOnly": true
+        },
+        "creationType": {
+          "enum": [
+            "Manual",
+            "AutoNative",
+            "AutoManaged"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CreationType",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "kind"
