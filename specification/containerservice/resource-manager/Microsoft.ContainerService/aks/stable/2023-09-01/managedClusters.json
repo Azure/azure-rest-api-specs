@@ -970,14 +970,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]{0,11}$",
-            "minLength": 1,
-            "maxLength": 12,
-            "description": "The name of the agent pool."
+            "$ref": "#/parameters/AgentPoolNameParameter"
           }
         ],
         "responses": {
@@ -1081,14 +1074,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]{0,11}$",
-            "minLength": 1,
-            "maxLength": 12,
-            "description": "The name of the agent pool."
+            "$ref": "#/parameters/AgentPoolNameParameter"
           }
         ],
         "responses": {
@@ -1131,11 +1117,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the agent pool."
+            "$ref": "#/parameters/AgentPoolNameParameter"
           },
           {
             "name": "parameters",
@@ -1242,11 +1224,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the agent pool."
+            "$ref": "#/parameters/AgentPoolNameParameter"
           }
         ],
         "responses": {
@@ -1298,14 +1276,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]{0,11}$",
-            "minLength": 1,
-            "maxLength": 12,
-            "description": "The name of the agent pool."
+            "$ref": "#/parameters/AgentPoolNameParameter"
           }
         ],
         "responses": {
@@ -1989,14 +1960,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]{0,11}$",
-            "minLength": 1,
-            "maxLength": 12,
-            "description": "The name of the agent pool."
+            "$ref": "#/parameters/AgentPoolNameParameter"
           }
         ],
         "responses": {
@@ -6916,6 +6880,17 @@
       "maxLength": 63,
       "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
       "description": "The name of the managed cluster resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "AgentPoolNameParameter": {
+      "name": "agentPoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]{0,11}$",
+      "minLength": 1,
+      "maxLength": 12,
+      "description": "The name of the agent pool.",
       "x-ms-parameter-location": "method"
     },
     "ResourceTypeParameter": {
