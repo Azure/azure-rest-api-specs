@@ -8,10 +8,7 @@ import {expect} from 'chai';
 describe('Compile', function () {
   describe('#Compile', function () {
     it('Should fail if project cannot compile.', async function () {
-        process.chdir("test")
-        console.log(process.cwd())
-        process.argv = ["npx", "tsv", "specification/compile/Compile"]
-        // await main()
+        // TODO: Compile rule unit test
     });
   });
   describe('#GitDiff', function () {
