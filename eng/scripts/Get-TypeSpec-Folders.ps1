@@ -1,61 +1,50 @@
 [CmdletBinding()]
 param (
-  [Parameter(Position = 0, Mandatory = $true)]
-  [string] $SpecsRepoRootDirectory,
-  [Parameter(Position = 1, Mandatory = $false)]
-  [string]$TargetBranch,
-  [Parameter(Position = 2, Mandatory = $false)]
-  [string]$SourceBranch
+  [switch]$CheckAll = $false
 )
+Set-StrictMode -Version 3
 
-$changedFiles = @()
-$allChangedFiles = (Get-ChildItem -path ./specification tspconfig.* -Recurse).Directory.FullName | ForEach-Object {[IO.Path]::GetRelativePath($($pwd.path), $_)}
-$allChangedFiles = $allChangedFiles -replace '\\', '/'
+. $PSScriptRoot/ChangedFiles-Functions.ps1
 
-if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
-  if ($TargetBranch -or $SourceBranch) {
-    throw "Please provide both target branch and source branch."
-  }
-  $changedFiles = $allChangedFiles
+$repoPath = Resolve-Path "$PSScriptRoot/../.."
+$checkAllPath = "specification"
+
+if ($CheckAll) {
+  $changedFiles = $checkAllPath
 }
 else {
-  Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" --"
-  $changedFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" --
-  $changedFiles = $changedFiles -replace '\\', '/' | Sort-Object
+  $changedFiles = @(Get-ChangedFiles -diffFilter "")
+  $coreChangedFiles = Get-ChangedCoreFiles $changedFiles
 
-  Write-Host "changedFiles:"
-  foreach ($changedFile in $changedFiles) {
-    Write-Host "  $changedFile"
-  }
-  Write-Host
-
-  $engFiles = $changedFiles | Where-Object {if ($_) { $_.StartsWith('eng') }}
-
-  $rootFilesImpactingTypeSpec = @(
-    ".gitattributes",
-    ".prettierrc.json",
-    "package-lock.json",
-    "package.json",
-    "tsconfig.json"
-  )
-  $repoRootFiles = $changedFiles | Where-Object {$_ -in $rootFilesImpactingTypeSpec}
-
-  if (($Env:BUILD_REPOSITORY_NAME -eq 'azure/azure-rest-api-specs') -and ($engFiles -or $repoRootFiles)) {
-    $changedFiles = $allChangedFiles
+  if ($Env:BUILD_REPOSITORY_NAME -eq 'azure/azure-rest-api-specs' -and $coreChangedFiles) {
+    Write-Verbose "Found changes to core eng or root files so checking all specs."
+    $changedFiles = $checkAllPath
   }
   else {
-    $changedFiles = $changedFiles | Where-Object {if ($_) { $_.StartsWith('specification') }}
+    $changedFiles = Get-ChangedFilesUnderSpecification $changedFiles
   }
 }
 
 $typespecFolders = @()
+$skippedTypespecFolders = @()
 foreach ($file in $changedFiles) {
-  if ($file -match 'specification\/[^\/]*\/') {
-    $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.* -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
-    $typespecFolders += $typespecFolder -replace '\\', '/'
+  if ($file -match 'specification(\/[^\/]*\/)*') {
+    $path = "$repoPath/$($matches[0])"
+    if (Test-Path $path) {   
+      Write-Verbose "Checking for tspconfig files under $path"
+      $typespecFolder = Get-ChildItem -path $path tspconfig.* -Recurse
+      if ($typespecFolder) {
+        $typespecFolders += $typespecFolder.Directory.FullName
+      }
+    } else {
+      $skippedTypespecFolders += $path
+    } 
   }
 }
+foreach ($skippedTypespecFolder in $skippedTypespecFolders | Select-Object -Unique) {
+  Write-Host "Cannot find directory $skippedTypespecFolder"
+}
 
-$typespecFolders = $typespecFolders | Select-Object -Unique | Sort-Object
+$typespecFolders = $typespecFolders | ForEach-Object { [IO.Path]::GetRelativePath($repoPath, $_) -replace '\\', '/' } | Sort-Object -Unique
 
 return $typespecFolders

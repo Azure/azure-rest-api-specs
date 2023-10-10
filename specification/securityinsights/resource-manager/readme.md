@@ -26,17 +26,56 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-08
+tag: package-preview-2023-09
 ```
 
 ---
 
 
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/BillingStatistics.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/ContentTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Enrichment.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Hunts.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Recommendations.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/TriggeredAnalyticsRuleRuns.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/WorkspaceManagerAssignments.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/WorkspaceManagerConfigurations.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/WorkspaceManagerGroups.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/WorkspaceManagerMembers.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2023-09-01-preview/operations.json
+```
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-08'
+``` yaml $(tag) == 'package-preview-2023-08'
 input-file:
   - Microsoft.SecurityInsights/preview/2023-08-01-preview/AlertRules.json
   - Microsoft.SecurityInsights/preview/2023-08-01-preview/AutomationRules.json
@@ -71,6 +110,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2023-08-01-preview/dataConnectors.json
   - Microsoft.SecurityInsights/preview/2023-08-01-preview/operations.json
 ```
+
 ### Tag: package-preview-2023-07
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
@@ -766,7 +806,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
