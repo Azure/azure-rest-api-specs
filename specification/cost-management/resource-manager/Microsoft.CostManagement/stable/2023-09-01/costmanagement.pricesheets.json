@@ -43,7 +43,7 @@
             "$ref": "./examples/PricesheetDownload.json"
           }
         },
-        "operationId": "PriceSheet_DownloadByInvoicePeriod",
+        "operationId": "PriceSheet_DownloadByInvoiceMCAandMPA",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -106,12 +106,12 @@
             "$ref": "./examples/PricesheetDownloadByBillingProfile.json"
           }
         },
-        "operationId": "PriceSheet_DownloadByBillingProfile",
+        "operationId": "PriceSheet_DownloadByBillingProfileMCAandMPA",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "description": "Gets a URL to download the current month's pricesheet for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.You can use the new 2023-09-01 API version for billing periods December 2022 onwards. Azure Reserved Instance (RI) pricing is only available through the new version of the API. Due to Azure product growth, the Azure price sheet download experience in this preview version will be updated from a single csv file to a Zip file containing multiple csv files, each with max size of 75MB.",
+        "description": "Gets a URL to download the current month's pricesheet for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement. You can use the new 2023-09-01 API version for billing periods December 2022 onwards. Azure Reserved Instance (RI) pricing is only available through the new version of the API. Due to Azure product growth, the Azure price sheet download experience in this preview version will be updated from a single csv/json file to a Zip file containing multiple csv/json files, each with max size of 75MB.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -144,7 +144,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/MCAPricesheetDownloadProperties"
+              "$ref": "#/definitions/PricesheetDownloadProperties"
             }
           },
           "default": {
@@ -166,12 +166,12 @@
             "$ref": "./examples/EAPriceSheetForBillingPeriod.json"
           }
         },
-        "operationId": "PriceSheet_DownloadByBillingAccount",
+        "operationId": "PriceSheet_DownloadByBillingAccountEA",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "description": "Gets a URL to download the pricesheet for an enrollment and billing period. Due to Azure product growth, the Azure price sheet download experience in this version will be updated from a single csv file to a Zip file containing multiple csv files, each with max size of 75MB.",
+        "description": "Generates the pricesheet for the provided billing period asynchronously based on the Enrollment ID. This is for Enterprise Agreement customers. You can use the new 2023-09-01 API version at '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.CostManagement/pricesheets/default/download' for billing periods December 2022 onwards. With a new schema detailed below, the new price sheet provides more information and includes prices for Azure Reserved Instances (RI) for the current billing period. Due to Azure product growth, the Azure price sheet download experience in this preview version will be updated from a single .csv file to a zip file containing multiple csv files, each with max size of 75MB. We recommend downloading an Azure Price Sheet for when entering a new billing period if you would maintain a record of past Azure Reserved Instance (RI) pricing.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -252,10 +252,15 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true
+        },
+        "downloadFileProperties": {
+          "description": "The properties in downloaded file",
+          "type": "object",
+          "$ref": "#/definitions/EAPriceSheetProperties"
         }
       }
     },
-    "MCAPricesheetDownloadProperties": {
+    "PricesheetDownloadProperties": {
       "description": "The URL to download the generated report.",
       "type": "object",
       "properties": {
@@ -268,6 +273,11 @@
         "downloadUrl": {
           "description": "The URL to download the generated report.",
           "type": "string"
+        },
+        "downloadFileProperties": {
+          "description": "The properties in downloaded file",
+          "type": "object",
+          "$ref": "#/definitions/MCAPriceSheetProperties"
         }
       }
     },
@@ -392,6 +402,122 @@
         },
         "priceType": {
           "description": "Price type for a product. For example, an Azure resource with a pay-as-you-go rate with priceType as Consumption. Other price types include Reservation, Entitlement and Savings Plan.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EAPriceSheetProperties": {
+      "description": "The properties of the EA price sheet.",
+      "type": "object",
+      "properties": {
+        "enrollmentNumber": {
+          "description": "Unique identifier for the EA billing account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceFamily": {
+          "description": "Type of Azure service. For example, Compute, Analytics, and Security.",
+          "type": "number",
+          "readOnly": true
+        },
+        "product": {
+          "description": "Name of the product accruing the charges.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productId": {
+          "description": "Unique identifier for the product whose meter is consumed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuId": {
+          "description": "Unique identifier of the SKU",
+          "type": "string",
+          "readOnly": true
+        },
+        "unitOfMeasure": {
+          "description": "How usage is measured for the service",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterId": {
+          "description": "Unique identifier of the meter ",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterName": {
+          "description": "Name of the meter. The meter represents the deployable resource of an Azure service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterType": {
+          "description": "Name of the meter type",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterCategory": {
+          "description": "Name of the classification category for the meter. For example, Cloud services, Networking, etc. ",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterSubCategory": {
+          "description": "Name of the meter subclassification category.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterRegion": {
+          "description": "Name of the Azure region where the meter for the service is available.",
+          "type": "string",
+          "readOnly": true
+        },
+        "effectiveStartDate": {
+          "description": "Effective start date of the Price Sheet billing period",
+          "type": "string",
+          "readOnly": true
+        },
+        "effectiveEndDate": {
+          "description": "Effective end date of the Price Sheet billing period",
+          "type": "string",
+          "readOnly": true
+        },
+        "unitPrice": {
+          "description": "Price per unit at the time of billing (not the effective blended price) as specific to a meter and product order name.  \n \n Note: The unit price isn't the same as the effective price in usage details downloads when services have differential prices across tiers. If services have multi-tiered pricing, the effective price is a blended rate across the tiers and doesn't show a tier-specific unit price. The blended price or effective price is the net price for the consumed quantity spanning across the multiple tiers (where each tier has a specific unit price)",
+          "type": "string",
+          "readOnly": true
+        },
+        "basePrice": {
+          "description": "The market price at the time the customer signs on or the market price at the time the service meter launches if it is after sign-on.",
+          "type": "string",
+          "readOnly": true
+        },
+        "marketPrice": {
+          "description": "EA list price of this service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "includedQuantity": {
+          "description": "Quantities of a specific service to which an EA customer is entitled to consume without incremental charges.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currencyCode": {
+          "description": "Currency in which the Enterprise Agreement was signed",
+          "type": "string",
+          "readOnly": true
+        },
+        "term": {
+          "description": "Term length for Azure Savings Plan or Reservation term – one year or three years (P1Y or P3Y)",
+          "type": "string",
+          "readOnly": true
+        },
+        "priceType": {
+          "description": "Price type for a product. For example, an Azure resource with a pay-as-you-go rate with priceType as Consumption. Other price types include Reservation, Entitlement and Savings Plan.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partNumber": {
+          "description": "Part number associated with the meter",
           "type": "string",
           "readOnly": true
         }
