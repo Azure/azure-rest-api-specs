@@ -651,6 +651,9 @@
           },
           "Create Managed Cluster with AI Toolchain Operator enabled": {
             "$ref": "./examples/ManagedClustersCreate_EnableAIToolchainOperator.json"
+          },
+          "Create Managed Cluster with Node Autp Provisioning": {
+            "$ref": "./examples/ManagedClustersCreate_NodeAutoProvisioning.json"
           }
         }
       },
@@ -5469,6 +5472,10 @@
         "aiToolchainOperatorProfile": {
           "$ref": "#/definitions/ManagedClusterAIToolchainOperatorProfile",
           "description": "AI toolchain operator settings that apply to the whole cluster."
+        },
+        "nodeProvisioningProfile": {
+          "$ref": "#/definitions/ManagedClusterNodeProvisioningProfile",
+          "description": "Node provisioning settings that apply to the whole cluster."
         }
       },
       "description": "Properties of the managed cluster."
@@ -8786,6 +8793,34 @@
           "type": "boolean",
           "title": "Whether to enable AI toolchain operator to the cluster",
           "description": "Indicates if AI toolchain operator  enabled or not."
+        }
+      }
+    },
+    "ManagedClusterNodeProvisioningProfile": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Manual",
+            "Auto"
+          ],
+          "x-ms-enum": {
+            "name": "NodeProvisioningMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Manual",
+                "description": "Nodes are provisioned manually by the user"
+              },
+              {
+                "value": "Auto",
+                "description": "Nodes are provisioned automatically by AKS using Karpenter. Fixed size Node Pools can still be created, but autoscaling Node Pools cannot be. (See aka.ms/aks/nap for more details)."
+              }
+            ]
+          },
+          "title": "The node provisioning mode. If not specified, the default is Manual.",
+          "description": "Once the mode it set to Auto, it cannot be changed back to Manual."
         }
       }
     }
