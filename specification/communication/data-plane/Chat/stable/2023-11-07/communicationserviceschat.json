@@ -1130,8 +1130,7 @@
         "summary": "Posts a typing event to a thread, on behalf of a user.",
         "operationId": "ChatThread_SendTypingNotification",
         "consumes": [
-          "application/json",
-          "application/merge-patch+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -1310,13 +1309,6 @@
         },
         "type": {
           "$ref": "#/definitions/ChatMessageType"
-        },
-        "metadata": {
-          "description": "Message metadata.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -1385,8 +1377,8 @@
         "attachmentType": {
           "$ref": "#/definitions/AttachmentType"
         },
-        "contentType": {
-          "description": "The type of content of the attachment, if available",
+        "extension": {
+          "description": "The file extension of the attachment, if available",
           "type": "string",
           "example": "png"
         },
@@ -1497,13 +1489,6 @@
           "description": "The last timestamp (if applicable) when the message was edited. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
-        },
-        "metadata": {
-          "description": "Message metadata.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -1536,13 +1521,6 @@
           "description": "Chat message content.",
           "type": "string",
           "example": "Let's go for lunch together."
-        },
-        "metadata": {
-          "description": "Message metadata.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
