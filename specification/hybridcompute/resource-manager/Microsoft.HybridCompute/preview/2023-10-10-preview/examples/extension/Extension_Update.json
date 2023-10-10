@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
+    "extensionName": "CustomScriptExtension",
+    "api-version": "2023-06-20-preview",
+    "extensionParameters": {
+      "properties": {
+        "publisher": "Microsoft.Compute",
+        "typeHandlerVersion": "1.10",
+        "enableAutomaticUpgrade": true,
+        "type": "CustomScriptExtension",
+        "settings": {
+          "commandToExecute": "powershell.exe -c \"Get-Process | Where-Object { $_.CPU -lt 100 }\""
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/Extensions/CustomScriptExtension",
+        "name": "CustomScriptExtension",
+        "type": "Microsoft.HybridCompute/machines/extensions",
+        "location": "eastus2euap",
+        "properties": {
+          "publisher": "Microsoft.Compute",
+          "type": "string",
+          "typeHandlerVersion": "1.10.3",
+          "enableAutomaticUpgrade": true,
+          "autoUpgradeMinorVersion": false,
+          "settings": {
+            "commandToExecute": "powershell.exe -c \"Get-Process | Where-Object { $_.CPU -gt 10000 }\""
+          },
+          "protectedSettings": {},
+          "provisioningState": "Succeeded",
+          "instanceView": {
+            "name": "CustomScriptExtension",
+            "type": "CustomScriptExtension",
+            "typeHandlerVersion": "1.10.3",
+            "status": {
+              "code": "success",
+              "level": "Information",
+              "message": "Finished executing command, StdOut: , StdErr:",
+              "time": "2020-01-08T20:42:10.999Z"
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "{callbackUrl}",
+        "Retry-After": 200,
+        "Azure-AsyncOperation": "{callbackUri}"
+      }
+    }
+  }
+}
