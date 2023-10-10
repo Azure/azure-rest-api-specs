@@ -11,6 +11,210 @@
     "version": "2023-04-01"
   },
   "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingRequests": {
+      "get": {
+        "tags": [
+          "BillingRequest"
+        ],
+        "description": "The list of billing requests submitted for the billing profile.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRequests_ListByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing requests.",
+            "schema": {
+              "$ref": "#/definitions/BillingRequestListResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRequestsListByBillingProfile": {
+            "$ref": "./examples/billingRequestsListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/billingRequests": {
+      "get": {
+        "tags": [
+          "BillingRequest"
+        ],
+        "description": "The list of billing requests submitted for the customer.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRequests_ListByCustomer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing requests.",
+            "schema": {
+              "$ref": "#/definitions/BillingRequestListResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRequestsListByCustomer": {
+            "$ref": "./examples/billingRequestsListByCustomer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingRequests": {
+      "get": {
+        "tags": [
+          "BillingRequest"
+        ],
+        "description": "The list of billing requests submitted for the invoice section.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingRequests_ListByInvoiceSection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing requests.",
+            "schema": {
+              "$ref": "#/definitions/BillingRequestListResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingRequestsListByInvoiceSection": {
+            "$ref": "./examples/billingRequestsListByInvoiceSection.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingRequests": {
       "get": {
         "tags": [
@@ -67,12 +271,6 @@
         "x-ms-examples": {
           "BillingRequestsListByBillingAccount": {
             "$ref": "./examples/billingRequestsListByBillingAccount.json"
-          },
-          "BillingRequestsListByBillingProfile": {
-            "$ref": "./examples/billingRequestsListByBillingProfile.json"
-          },
-          "BillingRequestsListByInvoiceSection": {
-            "$ref": "./examples/billingRequestsListByInvoiceSection.json"
           }
         },
         "x-ms-pageable": {
@@ -311,9 +509,12 @@
           }
         },
         "reviewedBy": {
-          "description": "UPN of request reviewer. Will only be set if request is approved.",
-          "type": "string",
-          "readOnly": true
+          "description": "The principal of the request reviewer. Will only be set if request is approved.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Principal"
+            }
+          ]
         },
         "reviewalDate": {
           "description": "The date and time when the request was reviewed.",
@@ -356,9 +557,12 @@
           "readOnly": true
         },
         "createdBy": {
-          "description": "UPN of user who created the request.",
-          "type": "string",
-          "readOnly": true
+          "description": "The principal of the entity who created the request.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Principal"
+            }
+          ]
         },
         "creationDate": {
           "description": "The date and time when the request was created.",
@@ -427,13 +631,18 @@
           "description": "The recipients of the billing request.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Principal"
           },
           "x-ms-identifiers": []
         },
-        "scope": {
+        "requestScope": {
           "description": "The billing scope for which the request was submitted (ex. '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}').",
           "type": "string"
+        },
+        "billingScope": {
+          "description": "The billing scope for which the request will be applied. This is a read only property derived by the service.",
+          "type": "string",
+          "readOnly": true
         },
         "status": {
           "description": "Status of billing request.",
@@ -468,14 +677,35 @@
           }
         },
         "lastUpdatedBy": {
-          "description": "UPN of the user who last updated the request.",
-          "type": "string",
-          "readOnly": true
+          "description": "The principal of the entity who last updated the request.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Principal"
+            }
+          ]
         },
         "lastUpdatedDate": {
           "description": "Date and time of last update.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "Principal": {
+      "description": "A principal who has interacted with a billing entity.",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id of the principal who has interacted with a billing entity.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the principal who has interacted with a billing entity.",
+          "type": "string"
+        },
+        "upn": {
+          "description": "The user principal name of the principal who has interacted with a billing entity.",
+          "type": "string"
         }
       }
     }
