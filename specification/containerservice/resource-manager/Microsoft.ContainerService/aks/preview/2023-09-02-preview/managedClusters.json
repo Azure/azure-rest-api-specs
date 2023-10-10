@@ -649,6 +649,9 @@
           "Create Managed Cluster with VirtualMachines pool type": {
             "$ref": "./examples/ManagedClustersCreate_VirtualMachines.json"
           },
+          "Create Managed Cluster with AI Toolchain Operator enabled": {
+            "$ref": "./examples/ManagedClustersCreate_EnableAIToolchainOperator.json"
+          },
           "Create Managed Cluster with Node Autp Provisioning": {
             "$ref": "./examples/ManagedClustersCreate_NodeAutoProvisioning.json"
           }
@@ -5466,6 +5469,10 @@
           "$ref": "#/definitions/ManagedClusterMetricsProfile",
           "description": "Optional cluster metrics configuration."
         },
+        "aiToolchainOperatorProfile": {
+          "$ref": "#/definitions/ManagedClusterAIToolchainOperatorProfile",
+          "description": "AI toolchain operator settings that apply to the whole cluster."
+        },
         "nodeProvisioningProfile": {
           "$ref": "#/definitions/ManagedClusterNodeProvisioningProfile",
           "description": "Node provisioning settings that apply to the whole cluster."
@@ -8775,6 +8782,17 @@
           "type": "boolean",
           "title": "Whether to enable cost analysis",
           "description": "The Managed Cluster sku.tier must be set to 'Standard' to enable this feature. Enabling this will add Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal. If not specified, the default is false. For more information see aka.ms/aks/docs/cost-analysis."
+        }
+      }
+    },
+    "ManagedClusterAIToolchainOperatorProfile": {
+      "type": "object",
+      "description": "When enabling the operator, a set of AKS managed CRDs and controllers will be installed in the cluster. The operator automates the deployment of OSS models for inference and/or training purposes. It provides a set of preset models and enables distributed inference against them.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "Whether to enable AI toolchain operator to the cluster",
+          "description": "Indicates if AI toolchain operator  enabled or not."
         }
       }
     },
