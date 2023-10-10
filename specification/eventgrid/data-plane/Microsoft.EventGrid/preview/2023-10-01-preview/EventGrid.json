@@ -469,6 +469,24 @@
     }
   },
   "definitions": {
+    "AcknowledgeError": {
+      "type": "object",
+      "description": "AcknowledgeError contains error details of the acknowledge operation for a lock token.",
+      "properties": {
+        "lockToken": {
+          "type": "string",
+          "description": "The lock token of an entry in the request."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error information of the acknowledge result for the lock token in the request."
+        }
+      },
+      "required": [
+        "lockToken",
+        "error"
+      ]
+    },
     "AcknowledgeOptions": {
       "type": "object",
       "description": "Array of lock tokens for the corresponding received Cloud Events to be acknowledged.",
@@ -489,11 +507,11 @@
       "type": "object",
       "description": "The result of the Acknowledge operation.",
       "properties": {
-        "failedLockTokens": {
+        "errors": {
           "type": "array",
-          "description": "Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).",
+          "description": "Array of AcknowledgeError for failed cloud events. Each AcknowledgeError includes the lock token along with the related error information (namely, the error code and description).",
           "items": {
-            "$ref": "#/definitions/FailedLockToken"
+            "$ref": "#/definitions/AcknowledgeError"
           },
           "x-ms-identifiers": []
         },
@@ -506,7 +524,7 @@
         }
       },
       "required": [
-        "failedLockTokens",
+        "errors",
         "succeededLockTokens"
       ]
     },
@@ -643,29 +661,6 @@
         "specversion"
       ]
     },
-    "FailedLockToken": {
-      "type": "object",
-      "description": "Failed lock token information.",
-      "properties": {
-        "lockToken": {
-          "type": "string",
-          "description": "The lock token of an entry in the request."
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "Error code related to the lock token. Example of such error codes are TokenLost: which indicates that token is not found, and InternalServerError: For any internal server errors."
-        },
-        "errorDescription": {
-          "type": "string",
-          "description": "Description of the lock token error."
-        }
-      },
-      "required": [
-        "lockToken",
-        "errorCode",
-        "errorDescription"
-      ]
-    },
     "PublishResult": {
       "type": "object",
       "description": "The result of the Publish operation."
@@ -705,6 +700,24 @@
         "value"
       ]
     },
+    "RejectError": {
+      "type": "object",
+      "description": "RejectError contains error details of the reject operation for a lock token.",
+      "properties": {
+        "lockToken": {
+          "type": "string",
+          "description": "The lock token of an entry in the request."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error information of the reject result for the lock token in the request."
+        }
+      },
+      "required": [
+        "lockToken",
+        "error"
+      ]
+    },
     "RejectOptions": {
       "type": "object",
       "description": "Array of lock tokens for the corresponding received Cloud Events to be rejected.",
@@ -725,11 +738,11 @@
       "type": "object",
       "description": "The result of the Reject operation.",
       "properties": {
-        "failedLockTokens": {
+        "errors": {
           "type": "array",
-          "description": "Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).",
+          "description": "Array of RejectError for failed cloud events. Each RejectError includes the lock token along with the related error information (namely, the error code and description).",
           "items": {
-            "$ref": "#/definitions/FailedLockToken"
+            "$ref": "#/definitions/RejectError"
           },
           "x-ms-identifiers": []
         },
@@ -742,8 +755,26 @@
         }
       },
       "required": [
-        "failedLockTokens",
+        "errors",
         "succeededLockTokens"
+      ]
+    },
+    "ReleaseError": {
+      "type": "object",
+      "description": "ReleaseError contains error details of the release operation for a lock token.",
+      "properties": {
+        "lockToken": {
+          "type": "string",
+          "description": "The lock token of an entry in the request."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error information of the release result for the lock token in the request."
+        }
+      },
+      "required": [
+        "lockToken",
+        "error"
       ]
     },
     "ReleaseOptions": {
@@ -766,11 +797,11 @@
       "type": "object",
       "description": "The result of the Release operation.",
       "properties": {
-        "failedLockTokens": {
+        "errors": {
           "type": "array",
-          "description": "Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).",
+          "description": "Array of ReleaseError for failed cloud events. Each ReleaseError includes the lock token along with the related error information (namely, the error code and description).",
           "items": {
-            "$ref": "#/definitions/FailedLockToken"
+            "$ref": "#/definitions/ReleaseError"
           },
           "x-ms-identifiers": []
         },
@@ -783,7 +814,7 @@
         }
       },
       "required": [
-        "failedLockTokens",
+        "errors",
         "succeededLockTokens"
       ]
     },
@@ -791,11 +822,11 @@
       "type": "object",
       "description": "The result of the RenewLock operation.",
       "properties": {
-        "failedLockTokens": {
+        "errors": {
           "type": "array",
-          "description": "Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).",
+          "description": "Array of RenewLockError for failed cloud events. Each RenewLockError includes the lock token along with the related error information (namely, the error code and description).",
           "items": {
-            "$ref": "#/definitions/FailedLockToken"
+            "$ref": "#/definitions/RenewLockError"
           },
           "x-ms-identifiers": []
         },
@@ -808,8 +839,26 @@
         }
       },
       "required": [
-        "failedLockTokens",
+        "errors",
         "succeededLockTokens"
+      ]
+    },
+    "RenewLockError": {
+      "type": "object",
+      "description": "RenewLockError contains error details of the renewLock operation for a lock token.",
+      "properties": {
+        "lockToken": {
+          "type": "string",
+          "description": "The lock token of an entry in the request."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error information of the renewLock result for the lock token in the request."
+        }
+      },
+      "required": [
+        "lockToken",
+        "error"
       ]
     },
     "RenewLockOptions": {
