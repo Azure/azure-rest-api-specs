@@ -36,14 +36,25 @@
   ],
   "security": [
     {
-      "ApiKeyAuth": []
+      "http": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://eventgrid.azure.net/.default"
+      ]
     }
   ],
   "securityDefinitions": {
-    "ApiKeyAuth": {
-      "type": "apiKey",
-      "name": "SharedAccessKey",
-      "in": "header"
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://eventgrid.azure.net/.default": ""
+      }
+    },
+    "http": {
+      "type": "basic"
     }
   },
   "tags": [],
