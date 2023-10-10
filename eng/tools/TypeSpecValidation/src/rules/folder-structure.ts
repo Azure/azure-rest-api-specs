@@ -10,7 +10,6 @@ export class FolderStructureRule implements Rule {
   async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let errorOutput = "";
-
     let stdOutput = "Verify tspconfig file extension";
     const tspConfig = await globby([`${folder}/**tspconfig.*`]);
     tspConfig.forEach((file: string) => {
