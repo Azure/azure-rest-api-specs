@@ -832,7 +832,37 @@
         "sentenceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "It controls the approximate number of sentences in the output summaries."
+          "description": "(NOTE: Recommended to use summaryLength instead) Controls the approximate number of sentences in the output summaries."
+        },
+        "summaryLength": {
+          "type": "string",
+          "enum": [
+            "short",
+            "medium",
+            "long"
+          ],
+          "x-ms-enum": {
+            "name": "SummaryLengthBucket",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "none",
+                "description": "No length preference."
+              },
+              {
+                "value": "short",
+                "description": "Instructs model to generate shorter length summaries."
+              },
+              {
+                "value": "medium",
+                "description": "Instructs model to generate medium length summaries."
+              },
+              {
+                "value": "long",
+                "description": "Instructs model to generate longer length summaries."
+              }
+            ]
+          }
         },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
