@@ -10075,6 +10075,13 @@
         "materializedViewDefinition": {
           "$ref": "#/definitions/MaterializedViewDefinition",
           "description": "The configuration for defining Materialized Views. This must be specified only for creating a Materialized View container."
+        },
+        "computedProperties": {
+          "description": "List of computed properties",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComputedProperty"
+          }
         }
       },
       "required": [
@@ -10256,6 +10263,20 @@
       "x-ms-enum": {
         "name": "SpatialType",
         "modelAsString": true
+      }
+    },
+    "ComputedProperty": {
+      "type": "object",
+      "description": "The definition of a computed property",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of a computed property, for example - \"cp_lowerName\""
+        },
+        "query": {
+          "type": "string",
+          "description": "The query that evaluates the value for computed property, for example - \"SELECT VALUE LOWER(c.name) FROM c\""
+        }
       }
     },
     "ContainerPartitionKey": {
