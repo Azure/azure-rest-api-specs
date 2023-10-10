@@ -772,7 +772,61 @@
             "$ref": "./examples/WorkspaceConnection/testConnection.json"
           }
         },
-        "x-ms-long-running-operation": true
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/deployments": {
+            "get": {
+                "tags": [
+                    "Endpoint"
+                ],
+                "summary": "Get all the deployments under the workspace scope",
+                "operationId": "Endpoint_GetDeploymentsInWorkspace",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/EndpointTypeParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/PaginationParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request was successful; the request was well-formed and received properly.",
+                        "schema": {
+                            "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResourcePaginatedResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Get Endpoint Deployments In Workspace": {
+                        "$ref": "./examples/Endpoint/Deployment/getInWorkspace.json"
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/diagnose": {
@@ -848,6 +902,459 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}": {
+            "get": {
+                "tags": [
+                    "Endpoint"
+                ],
+                "summary": "Gets endpoint resource",
+                "operationId": "Endpoint_Get",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/EndpointNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request was successful; the request was well-formed and received properly.",
+                        "schema": {
+                            "$ref": "#/definitions/EndpointResourcePropertiesBasicResource"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Get Endpoint": {
+                        "$ref": "./examples/Endpoint/get.json"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Endpoint"
+                ],
+                "summary": "Create or update endpoint resource with the specified parameters",
+                "operationId": "Endpoint_CreateOrUpdate",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/EndpointNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Endpoint resource object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/EndpointResourcePropertiesBasicResource"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request was successful; the request was well-formed and received properly.",
+                        "schema": {
+                            "$ref": "#/definitions/EndpointResourcePropertiesBasicResource"
+                        }
+                    },
+                    "202": {
+                        "description": "Accepted",
+                        "headers": {
+                            "Location": {
+                                "description": "URI to poll for asynchronous operation result.",
+                                "type": "string"
+                            },
+                            "Retry-After": {
+                                "description": "Duration the client should wait between requests, in seconds.",
+                                "type": "integer",
+                                "format": "int32"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Create Endpoint": {
+                        "$ref": "./examples/Endpoint/create.json"
+                    }
+                },
+                "x-ms-long-running-operation": true,
+                "x-ms-long-running-operation-options": {
+                    "final-state-via": "location"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments": {
+            "get": {
+                "tags": [
+                    "Endpoint"
+                ],
+                "summary": "Get all the deployments under the endpoint resource scope",
+                "operationId": "Endpoint_GetDeployments",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/EndpointNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request was successful; the request was well-formed and received properly.",
+                        "schema": {
+                            "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResourcePaginatedResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Get Endpoint Deployments": {
+                        "$ref": "./examples/Endpoint/Deployment/getDeployments.json"
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}": {
+            "delete": {
+                "tags": [
+                    "Endpoint"
+                ],
+                "summary": "Delete  endpoint deployment resource by name",
+                "operationId": "Endpoint_Delete",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/EndpointNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/DeploymentNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Delete Endpoint Deployment": {
+                        "$ref": "./examples/Endpoint/Deployment/delete.json"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Endpoint"
+                ],
+                "summary": "Get deployments under endpoint resource by name",
+                "operationId": "Endpoint_GetDeployment",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/EndpointNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/DeploymentNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request was successful; the request was well-formed and received properly.",
+                        "schema": {
+                            "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResource"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Get Endpoint Deployment": {
+                        "$ref": "./examples/Endpoint/Deployment/get.json"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Endpoint"
+                ],
+                "summary": "Create or update endpoint deployment resource with the specified parameters",
+                "operationId": "Endpoint_CreateOrUpdate",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/EndpointNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/DeploymentNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "deployment object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResource"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request was successful; the request was well-formed and received properly.",
+                        "schema": {
+                            "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResource"
+                        }
+                    },
+                    "202": {
+                        "description": "Accepted",
+                        "headers": {
+                            "Location": {
+                                "description": "URI to poll for asynchronous operation result.",
+                                "type": "string"
+                            },
+                            "Retry-After": {
+                                "description": "Duration the client should wait between requests, in seconds.",
+                                "type": "integer",
+                                "format": "int32"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Create Endpoint Deployment": {
+                        "$ref": "./examples/Endpoint/Deployment/create.json"
+                    }
+                },
+                "x-ms-long-running-operation": true,
+                "x-ms-long-running-operation-options": {
+                    "final-state-via": "location"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/listKeys": {
+            "post": {
+                "tags": [
+                    "Endpoint"
+                ],
+                "summary": "List keys for the endpoint resource.",
+                "operationId": "Endpoint_ListKeys",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/EndpointNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request was successful; the request was well-formed and received properly.",
+                        "schema": {
+                            "$ref": "#/definitions/EndpointKeys"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "List Endpoint Keys": {
+                        "$ref": "./examples/Endpoint/listKeys.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/models": {
+            "get": {
+                "tags": [
+                    "Endpoint"
+                ],
+                "summary": "Get available models under the endpoint resource.",
+                "operationId": "Endpoint_GetModels",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/EndpointNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request was successful; the request was well-formed and received properly.",
+                        "schema": {
+                            "$ref": "#/definitions/EndpointModels"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Get Endpoint Models": {
+                        "$ref": "./examples/Endpoint/getModels.json"
+                    }
         }
       }
     },
@@ -1798,6 +2305,22 @@
       },
       "x-ms-discriminator-value": "ApiKey"
     },
+        "CognitiveServiceEndpointDeploymentResourceProperties": {
+            "required": [
+                "model"
+            ],
+            "type": "object",
+            "properties": {
+                "model": {
+                    "description": "Model used for the endpoint deployment.",
+                    "$ref": "#/definitions/EndpointDeploymentModel"
+                },
+                "scaleSettings": {
+                    "description": "Scale settings for the endpoint deployment.",
+                    "$ref": "#/definitions/ScaleSettings"
+                }
+            }
+        },
     "ComputeRuntimeDto": {
       "type": "object",
       "properties": {
@@ -1888,6 +2411,21 @@
       },
       "x-ms-discriminator-value": "CustomKeys"
     },
+        "DefaultResourceProvisioningState": {
+            "enum": [
+                "NotStarted",
+                "Failed",
+                "Creating",
+                "Updating",
+                "Succeeded",
+                "Deleting"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+                "name": "DefaultResourceProvisioningState",
+                "modelAsString": true
+            }
+        },
     "DiagnoseRequestProperties": {
       "type": "object",
       "properties": {
@@ -2154,6 +2692,172 @@
         }
       }
     },
+        "EndpointDeploymentModel": {
+            "type": "object",
+            "properties": {
+                "format": {
+                    "description": "Model format",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Model name.",
+                    "type": "string"
+                },
+                "version": {
+                    "description": "Model version.",
+                    "type": "string"
+                }
+            }
+        },
+        "EndpointDeploymentResourceProperties": {
+            "required": [
+                "type"
+            ],
+            "type": "object",
+            "properties": {
+                "failureReason": {
+                    "description": "The failure reason if the creation failed.",
+                    "type": "string"
+                },
+                "provisioningState": {
+                    "description": "Read-only provision state status property.",
+                    "$ref": "#/definitions/DefaultResourceProvisioningState"
+                },
+                "type": {
+                    "description": "Kind of the deployment.",
+                    "minLength": 1,
+                    "pattern": "[a-zA-Z0-9_]",
+                    "type": "string"
+                }
+            },
+            "discriminator": "type"
+        },
+        "EndpointDeploymentResourcePropertiesBasicResource": {
+            "required": [
+                "properties"
+            ],
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/EndpointDeploymentResourceProperties"
+                }
+            }
+        },
+        "EndpointDeploymentResourcePropertiesBasicResourcePaginatedResult": {
+            "type": "object",
+            "properties": {
+                "continuationToken": {
+                    "type": "string"
+                },
+                "nextLink": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResource"
+                    }
+                }
+            }
+        },
+        "EndpointKeys": {
+            "type": "object",
+            "properties": {
+                "keys": {
+                    "description": "Dictionary of Keys for the endpoint.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "x-ms-secret": true
+                }
+            }
+        },
+        "EndpointModel": {
+            "type": "object",
+            "properties": {
+                "baseModel": {
+                    "description": "Base model of this current model.",
+                    "$ref": "#/definitions/EndpointDeploymentModel"
+                },
+                "format": {
+                    "description": "Model format.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Model name.",
+                    "type": "string"
+                }
+            }
+        },
+        "EndpointModels": {
+            "type": "object",
+            "properties": {
+                "models": {
+                    "description": "List of models.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EndpointModel"
+                    }
+                }
+            }
+        },
+        "EndpointResourceProperties": {
+            "required": [
+                "endpointType"
+            ],
+            "type": "object",
+            "properties": {
+                "associatedResourceId": {
+                    "description": "Byo resource id for creating the built-in model service endpoints.",
+                    "type": "string"
+                },
+                "endpointType": {
+                    "description": "Type of the endpoint.",
+                    "minLength": 1,
+                    "pattern": "[a-zA-Z0-9_]",
+                    "type": "string"
+                },
+                "endpointUri": {
+                    "description": "Uri of the endpoint.",
+                    "type": "string"
+                },
+                "failureReason": {
+                    "description": "The failure reason if the creation failed.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the endpoint.",
+                    "type": "string"
+                },
+                "provisioningState": {
+                    "description": "Read-only provision state status property.",
+                    "$ref": "#/definitions/DefaultResourceProvisioningState"
+                }
+            },
+            "discriminator": "endpointType"
+        },
+        "EndpointResourcePropertiesBasicResource": {
+            "required": [
+                "properties"
+            ],
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/EndpointResourceProperties"
+                }
+            }
+        },
     "ExternalFQDNResponse": {
       "type": "object",
       "properties": {
@@ -2452,6 +3156,24 @@
         "name": "ManagedNetworkStatus",
         "modelAsString": true
       }
+        },
+        "ManagedOnlineEndpointDeploymentResourceProperties": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EndpointDeploymentResourceProperties"
+                }
+            ],
+            "x-ms-discriminator-value": "managedOnlineEndpoint"
+        },
+        "ManagedOnlineEndpointResourceProperties": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EndpointResourceProperties"
+                }
+            ],
+            "x-ms-discriminator-value": "managedOnlineEndpoint"
     },
     "NoneAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
@@ -2557,6 +3279,27 @@
         }
       }
     },
+        "OpenAIEndpointDeploymentResourceProperties": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/CognitiveServiceEndpointDeploymentResourceProperties"
+                },
+                {
+                    "$ref": "#/definitions/EndpointDeploymentResourceProperties"
+                }
+            ],
+            "x-ms-discriminator-value": "Microsoft.OpenAI"
+        },
+        "OpenAIEndpointResourceProperties": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EndpointResourceProperties"
+                }
+            ],
+            "x-ms-discriminator-value": "Microsoft.OpenAI"
+        },
     "OutboundRule": {
       "description": "Outbound rule for the managed network of a machine learning workspace.",
       "required": [
@@ -2984,6 +3727,20 @@
       },
       "x-ms-discriminator-value": "SAS"
     },
+        "ScaleSettings": {
+            "type": "object",
+            "properties": {
+                "capacity": {
+                    "format": "int32",
+                    "description": "Capacity of the scale settings.",
+                    "type": "integer"
+                },
+                "scaleType": {
+                    "description": "Type fo the scale settings.",
+                    "type": "string"
+                }
+            }
+        },
     "ServerlessComputeSettings": {
       "type": "object",
       "properties": {
@@ -3098,6 +3855,27 @@
         }
       }
     },
+        "SpeechEndpointDeploymentResourceProperties": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/CognitiveServiceEndpointDeploymentResourceProperties"
+                },
+                {
+                    "$ref": "#/definitions/EndpointDeploymentResourceProperties"
+                }
+            ],
+            "x-ms-discriminator-value": "Microsoft.Speech"
+        },
+        "SpeechEndpointResourceProperties": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EndpointResourceProperties"
+                }
+            ],
+            "x-ms-discriminator-value": "Microsoft.Speech"
+        },
     "UsernamePasswordAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
       "allOf": [
@@ -3719,6 +4497,31 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+        "EndpointTypeParameter": {
+            "in": "query",
+            "name": "endpoint-type",
+            "description": "Endpoint type filter",
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "EndpointNameParameter": {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Name of the endpoint resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+        },
+        "DeploymentNameParameter": {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "Name of the deployment resource",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+        },
     "RuleName": {
       "in": "path",
       "name": "ruleName",
