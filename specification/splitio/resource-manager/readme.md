@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-03-01-preview'
 input-file:
-  - SplitIO/preview/2024-03-01-preview/splitio.json
+  - SplitIO.Experimentation/preview/2024-03-01-preview/splitio.json
 ```
 # Code Generation
 
