@@ -7,8 +7,22 @@
     "api-version": "2023-10-03-preview",
     "parameters": {
       "properties": {
+        "softwareAssurance": {
+          "softwareAssuranceCustomer": true
+        },
         "esuProfile": {
           "assignedLicense": "{LicenseResourceId}"
+        },
+        "products": {
+          "windowsServerProfile": {
+            "subscriptionStatus": "Enable",
+            "productFeatures": [
+              {
+                "name": "HotPatching",
+                "subscriptionStatus": "Enable"
+              }
+            ]
+          }
         }
       }
     }
@@ -21,6 +35,9 @@
         "type": "Microsoft.HybridCompute/machines/licenseProfiles",
         "location": "eastus2euap",
         "properties": {
+          "softwareAssurance": {
+            "softwareAssuranceCustomer": true
+          },
           "esuProfile": {
             "assignedLicense": "{LicenseResourceId}",
             "esuEligibility": "Eligible",
@@ -36,6 +53,21 @@
                 "licenseStatus": "licenseStatus2"
               }
             ]
+          },
+          "products": {
+            "windowsServerProfile": {
+              "subscriptionStatus": "Enabling",
+              "billingStartDate": "2023-10-05T20:36:49.745Z",
+              "disenrollmentDate": "2023-11-05T20:36:49.745Z",
+              "productFeatures": [
+                {
+                  "name": "HotPatching",
+                  "subscriptionStatus": "Enabling",
+                  "billingStartDate": "2023-10-05T20:36:49.745Z",
+                  "disenrollmentDate": "2023-11-05T20:36:49.745Z"
+                }
+              ]
+            }
           }
         }
       }

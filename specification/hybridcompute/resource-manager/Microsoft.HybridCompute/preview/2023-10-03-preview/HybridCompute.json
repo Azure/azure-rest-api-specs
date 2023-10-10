@@ -606,7 +606,7 @@
             "schema": {
               "$ref": "#/definitions/LicenseProfile"
             },
-            "description": "Parameters supplied to the Create license profile operation."
+            "description": "Parameters supplied to the Create or Update license profile operation."
           }
         ],
         "responses": {
@@ -2620,7 +2620,7 @@
         },
         "licenseProfile": {
           "$ref": "#/definitions/LicenseProfileMachineInstanceView",
-          "description": "Specifies the ESU related properties for a machine."
+          "description": "Specifies the License related properties for a machine."
         },
         "provisioningState": {
           "readOnly": true,
@@ -2714,6 +2714,15 @@
           "readOnly": true,
           "type": "string",
           "description": "Specifies the Operating System product SKU."
+        },
+        "osEdition": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The edition of the Operating System."
+        },
+        "machineType": {
+          "$ref": "#/definitions/MachineType",
+          "description": "The machine type."
         },
         "domainName": {
           "readOnly": true,
@@ -3096,10 +3105,36 @@
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
+            "softwareAssurance": {
+              "x-ms-client-flatten": true,
+              "type": "object",
+              "properties": {
+                "softwareAssuranceCustomer": {
+                  "type": "boolean",
+                  "description": "Specifies if this machine is licensed as part of a Software Assurance agreement."
+                }
+              }
+            },
             "esuProfile": {
               "x-ms-client-flatten": true,
               "$ref": "#/definitions/LicenseProfileArmEsuProperties",
               "description": "Hybrid Compute ESU Profile properties"
+            },
+            "products": {
+              "x-ms-client-flatten": true,
+              "type": "object",
+              "properties": {
+                "windowsServerProfile": {
+                  "x-ms-client-flatten": true,
+                  "$ref": "#/definitions/LicenseProfileArmWindowsServerProperties",
+                  "description": "Hybrid Compute Windows Server Profile properties"
+                },
+                "iotEnterpriseProfile": {
+                  "x-ms-client-flatten": true,
+                  "$ref": "#/definitions/LicenseProfileArmIoTEnterpriseProperties",
+                  "description": "Hybrid Compute Windows IoT Enterprise Profile properties"
+                }
+              }
             },
             "provisioningState": {
               "$ref": "#/definitions/ProvisioningState",
@@ -3123,10 +3158,36 @@
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
+            "softwareAssurance": {
+              "x-ms-client-flatten": true,
+              "type": "object",
+              "properties": {
+                "softwareAssuranceCustomer": {
+                  "type": "boolean",
+                  "description": "Specifies if this machine is licensed as part of a Software Assurance agreement."
+                }
+              }
+            },
             "esuProfile": {
               "x-ms-client-flatten": true,
               "$ref": "#/definitions/EsuProfileUpdateProperties",
               "description": "Hybrid Compute ESU Profile Update properties"
+            },
+            "products": {
+              "x-ms-client-flatten": true,
+              "type": "object",
+              "properties": {
+                "windowsServerProfile": {
+                  "x-ms-client-flatten": true,
+                  "$ref": "#/definitions/WindowsServerProfileUpdateProperties",
+                  "description": "Hybrid Compute Windows Server Profile Update properties"
+                },
+                "iotEnterpriseProfile": {
+                  "x-ms-client-flatten": true,
+                  "$ref": "#/definitions/IotEnterpriseProfileUpdateProperties",
+                  "description": "Hybrid Compute Windows IoT Enterprise Profile Update properties"
+                }
+              }
             }
           },
           "description": "Describe the Update properties of a license profile."
@@ -3279,13 +3340,112 @@
           "description": "The resource id of the license."
         }
       },
-      "description": "Describes the Update properties of a License Profile."
+      "description": "Describes the Update properties of a ESU License Profile."
+    },
+    "LicenseProfileSubscriptionStatusUpdate": {
+      "type": "string",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "LicenseProfileSubscriptionStatusUpdate",
+        "modelAsString": true
+      },
+      "description": "Indicates the new subscription status of the Windows Server, IoT Enterprise or Product Features."
+    },
+    "ProductFeatureUpdate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Product feature name."
+        },
+        "subscriptionStatus": {
+          "$ref": "#/definitions/LicenseProfileSubscriptionStatusUpdate",
+          "description": "Indicates the new status of the product feature."
+        }
+      },
+      "description": "Product Feature"
+    },
+    "WindowsServerProfileUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "subscriptionStatus": {
+          "$ref": "#/definitions/LicenseProfileSubscriptionStatusUpdate",
+          "description": "Indicates the subscription status of the Windows Server."
+        },
+        "productFeatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductFeatureUpdate"
+          },
+          "description": "The list of product feature updates.",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "Describes the Update properties of a Windows Server License Profile."
+    },
+    "IotEnterpriseProfileUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "subscriptionStatus": {
+          "$ref": "#/definitions/LicenseProfileSubscriptionStatusUpdate",
+          "description": "Indicates the subscription status of the Windows IoT Enterprise."
+        },
+        "productFeatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductFeatureUpdate"
+          },
+          "description": "The list of product feature updates.",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "Describes the Update properties of a Windows IoT Enterprise License Profile."
     },
     "LicenseProfileMachineInstanceView": {
       "type": "object",
       "properties": {
+        "licenseStatus": {
+          "$ref": "#/definitions/LicenseStatus",
+          "description": "Indicates the license status of the OS."
+        },
+        "licenseChannel": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Indicates the license channel."
+        },
+        "softwareAssurance": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "softwareAssuranceCustomer": {
+              "type": "boolean",
+              "description": "Specifies if this machine is licensed as part of a Software Assurance agreement."
+            }
+          }
+        },
         "esuProfile": {
           "$ref": "#/definitions/LicenseProfileMachineInstanceViewEsuProperties"
+        },
+        "products": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "windowsServerProfile": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/LicenseProfileArmWindowsServerProperties",
+              "description": "Hybrid Compute Windows Server Profile properties"
+            },
+            "iotEnterpriseProfile": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/LicenseProfileArmIoTEnterpriseProperties",
+              "description": "Hybrid Compute Windows IoT Enterprise Profile properties"
+            }
+          }
         }
       },
       "description": "License Profile Instance View in Machine Properties."
@@ -3316,6 +3476,139 @@
         }
       ],
       "description": "Properties for the Machine ESU profile."
+    },
+    "LicenseStatus": {
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Unlicensed",
+        "Licensed",
+        "OOBGrace",
+        "OOTGrace",
+        "NonGenuineGrace",
+        "Notification",
+        "ExtendedGrace"
+      ],
+      "x-ms-enum": {
+        "name": "LicenseStatus",
+        "modelAsString": true
+      },
+      "description": "The license status."
+    },
+    "MachineType": {
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "VM",
+        "Native"
+      ],
+      "x-ms-enum": {
+        "name": "MachineType",
+        "modelAsString": true
+      },
+      "description": "The machine type."
+    },
+    "LicenseProfileSubscriptionStatus": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Enabling",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "LicenseProfileSubscriptionStatus",
+        "modelAsString": true
+      },
+      "description": "Subscription status of the Windows Server or Windows IoT Enterprise or Product feature."
+    },
+    "ProductFeature": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Product feature name."
+        },
+        "subscriptionStatus": {
+          "$ref": "#/definitions/LicenseProfileSubscriptionStatus",
+          "description": "Indicates the current status of the product features."
+        },
+        "billingStartDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the billing starts."
+        },
+        "disenrollmentDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the user disenrolled the feature."
+        }
+      },
+      "description": "Product Feature"
+    },
+    "LicenseProfileArmWindowsServerProperties": {
+      "type": "object",
+      "properties": {
+        "subscriptionStatus": {
+          "$ref": "#/definitions/LicenseProfileSubscriptionStatus",
+          "description": "Indicates the subscription status of the Windows Server."
+        },
+        "billingStartDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the billing starts."
+        },
+        "disenrollmentDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the user disenrolled the feature."
+        },
+        "productFeatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductFeature"
+          },
+          "description": "The list of product features.",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "Describes the properties of a Windows Server License Profile ARM model."
+    },
+    "LicenseProfileArmIoTEnterpriseProperties": {
+      "type": "object",
+      "properties": {
+        "subscriptionStatus": {
+          "$ref": "#/definitions/LicenseProfileSubscriptionStatus",
+          "description": "Indicates the subscription status of the Windows IoT Enterprise."
+        },
+        "billingStartDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the billing starts."
+        },
+        "disenrollmentDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the user disenrolled the feature."
+        },
+        "productFeatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductFeature"
+          },
+          "description": "The list of product features.",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "Describes the properties of a Windows IoT Enterprise License Profile ARM model."
     },
     "ResourceUpdate": {
       "type": "object",
