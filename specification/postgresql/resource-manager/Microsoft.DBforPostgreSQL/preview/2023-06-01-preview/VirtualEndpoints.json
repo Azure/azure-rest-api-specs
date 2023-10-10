@@ -67,7 +67,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualEndpoint"
+              "$ref": "#/definitions/VirtualEndpointResource"
             },
             "description": "The required parameters for creating or updating virtual endpoints."
           }
@@ -76,13 +76,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VirtualEndpoint"
+              "$ref": "#/definitions/VirtualEndpointResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/VirtualEndpoint"
+              "$ref": "#/definitions/VirtualEndpointResource"
             }
           },
           "202": {
@@ -137,7 +137,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualEndpointForPatch"
+              "$ref": "#/definitions/VirtualEndpointResourceForPatch"
             },
             "description": "The required parameters for updating a server."
           }
@@ -146,7 +146,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VirtualEndpoint"
+              "$ref": "#/definitions/VirtualEndpointResource"
             }
           },
           "202": {
@@ -253,7 +253,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VirtualEndpoint"
+              "$ref": "#/definitions/VirtualEndpointResource"
             }
           },
           "default": {
@@ -312,7 +312,7 @@
     }
   },
   "definitions": {
-    "VirtualEndpointProperties": {
+    "VirtualEndpointResourceProperties": {
       "type": "object",
       "properties": {
         "endpointType": {
@@ -339,34 +339,23 @@
       },
       "description": "The properties of a virtual endpoint."
     },
-    "VirtualEndpoint": {
+    "VirtualEndpointResource": {
       "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource"
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.DBforPostgreSQL/flexibleServers/virtualEndpoints\""
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/VirtualEndpointForPatch"
+          "$ref": "#/definitions/VirtualEndpointResourceForPatch"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ],
       "description": "Represents a virtual endpoint for a server."
     },
-    "VirtualEndpointForPatch": {
+    "VirtualEndpointResourceForPatch": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VirtualEndpointProperties",
+          "$ref": "#/definitions/VirtualEndpointResourceProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of the virtual endpoint resource."
         }
@@ -379,7 +368,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualEndpoint"
+            "$ref": "#/definitions/VirtualEndpointResource"
           },
           "description": "The list of virtual endpoints"
         },
