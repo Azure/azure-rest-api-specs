@@ -151,12 +151,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/AzureKeyVault"
-            }
-          },
           "204": {
             "description": "Success"
           },
@@ -318,12 +312,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ClassificationRule"
-            }
-          },
           "204": {
             "description": "Success"
           },
@@ -631,12 +619,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Credential"
-            }
-          },
           "204": {
             "description": "Success"
           },
@@ -798,12 +780,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DataSource"
-            }
-          },
           "204": {
             "description": "Success"
           },
@@ -1088,12 +1064,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Scan"
-            }
-          },
           "204": {
             "description": "Success"
           },
@@ -1427,12 +1397,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ScanRuleset"
-            }
-          },
           "204": {
             "description": "Success"
           },
@@ -1939,12 +1903,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Trigger"
-            }
-          },
           "204": {
             "description": "Success"
           },
@@ -1958,6 +1916,102 @@
         "x-ms-examples": {
           "Triggers_Delete": {
             "$ref": "./examples/Triggers_Delete.json"
+          }
+        }
+      }
+    },
+    "/datasources/{dataSourceName}/scans/{scanName}/triggers/default:enable": {
+      "post": {
+        "tags": [
+          "Triggers"
+        ],
+        "description": "Enables a trigger",
+        "operationId": "Triggers_Enable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Triggers_Enable": {
+            "$ref": "./examples/Triggers_Enable.json"
+          }
+        }
+      }
+    },
+    "/datasources/{dataSourceName}/scans/{scanName}/triggers/default:disable": {
+      "post": {
+        "tags": [
+          "Triggers"
+        ],
+        "description": "Disables a trigger",
+        "operationId": "Triggers_Disable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Triggers_Disable": {
+            "$ref": "./examples/Triggers_Disable.json"
           }
         }
       }
