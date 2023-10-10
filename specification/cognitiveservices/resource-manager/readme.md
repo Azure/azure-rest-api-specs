@@ -41,7 +41,13 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 ```yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.CognitiveServices/preview/2023-10-01-preview/cognitiveservices.json
+suppressions:    
+  - code:  ResourceNameRestriction
+    reason: The resource name parameter 'deploymentName' is not a new added parameter will cause breaking change if add a 'pattern' restriction. 
+    where:
+      - Microsoft.CognitiveServices/preview/2023-10-01-preview/cognitiveservices.json
 ```
+
 ### Tag: package-2023-05
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
