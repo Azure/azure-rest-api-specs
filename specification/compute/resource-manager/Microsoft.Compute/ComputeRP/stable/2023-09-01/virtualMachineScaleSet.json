@@ -3643,36 +3643,26 @@
     },
 	"ScheduledEventsPolicy": {
       "properties": {
-        "userRedeploy": {
-		"enable": {
+        "autoApproveUserRedeploy": {
           "type": "boolean",
           "description": "Specifies Redeply Scheduled Event related configurations."
-          }
 		},
-		"userReboot": {
-		"enable": {
+		"autoApproveUserReboot": {
           "type": "boolean",
           "description": "Specifies Reboot Scheduled Event related configurations."
-          }
 		},
-        "scheduledEventsPublishingTarget": {
-          "$ref": "#/definitions/ScheduledEventsPublishingTarget",
+        "scheduledEventsAdditionalPublishingTargets": {
+          "$ref": "#/definitions/ScheduledEventsAdditionalPublishingTargets",
           "description": "The configuration parameters used while publishing scheduled Event targets."
         }
       }
     },
-	"ScheduledEventsPublishingTarget": {
+	"ScheduledEventsAdditionalPublishingTargets": {
       "properties": {
-        "eventGrid": {
+        "eventGridAndResourceGraph": {
 		"enable": {
           "type": "boolean",
-          "description": "Specifies if event grid is enabled for scheduled event related configurations."
-          }
-		},
-        "resourceGraph": {
-		"enable": {
-          "type": "boolean",
-          "description": "Specifies if resource graph is enabled for scheduled event related configurations."
+          "description": "Specifies if event grid and resource graph is enabled for scheduled event related configurations."
           }
 		}
       }
