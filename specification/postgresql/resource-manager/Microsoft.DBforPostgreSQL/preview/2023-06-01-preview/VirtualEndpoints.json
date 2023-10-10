@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/virtualendpoints/{endpointName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/virtualendpoints/{virtualEndpointName}": {
       "put": {
         "tags": [
           "VirtualEndpoints"
@@ -339,22 +339,25 @@
     "VirtualEndpointResource": {
       "type": "object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/VirtualEndpointResourceProperties",
-          "x-ms-client-flatten": true,
-          "description": "Properties of the virtual endpoint resource."
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "readOnly": true,
-          "description": "The system metadata relating to this resource."
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.DBforPostgreSQL/flexibleServers/virtualEndpoints\""
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/VirtualEndpointResourceForPatch"
         }
       ],
+      "x-ms-azure-resource": true,
       "description": "Represents a virtual endpoint for a server."
     },
     "VirtualEndpointResourceForPatch": {
