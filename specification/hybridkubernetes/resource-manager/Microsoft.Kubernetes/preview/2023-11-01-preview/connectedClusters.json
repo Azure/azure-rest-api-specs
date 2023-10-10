@@ -357,7 +357,7 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "GetClustersExample": {
+          "GetClustersBySubscriptionExample": {
             "$ref": "./examples/GetClustersBySubscriptionExample.json"
           }
         },
@@ -427,6 +427,7 @@
   },
   "definitions": {
     "OperationList": {
+      "type": "object",
       "description": "The paginated list of connected cluster API operations.",
       "properties": {
         "value": {
@@ -456,6 +457,7 @@
           "description": "Operation name: {Microsoft.Kubernetes}/{resource}/{operation}"
         },
         "display": {
+          "type": "object",
           "readOnly": true,
           "description": "The object that represents the operation.",
           "properties": {
@@ -590,6 +592,7 @@
         "totalNodeCount": {
           "readOnly": true,
           "type": "integer",
+          "format": "int32",
           "description": "Number of nodes present in the connected cluster resource"
         },
         "totalCoreCount": {
@@ -702,6 +705,7 @@
       "description": "Properties of the connected cluster."
     },
     "CredentialResults": {
+      "type": "object",
       "properties": {
         "hybridConnectionConfig": {
           "$ref": "#/definitions/HybridConnectionConfig",
@@ -802,6 +806,7 @@
       "description": "Properties which can be patched on the connected cluster resource."
     },
     "HybridConnectionConfig": {
+      "type": "object",
       "description": "Contains the REP (rendezvous endpoint) and “Sender” access token.",
       "properties": {
         "expirationTime": {
