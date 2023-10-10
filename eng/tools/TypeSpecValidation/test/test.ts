@@ -1,6 +1,3 @@
-// import { strictEqual  } from "assert"
-// import path from "path";
-// import { main } from "../src/index.js";
 import { GitDiffRule } from "../src/rules/git-diff.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import {expect} from 'chai';
