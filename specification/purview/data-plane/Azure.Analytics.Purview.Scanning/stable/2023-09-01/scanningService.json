@@ -6178,6 +6178,9 @@
         "scanRulesetName": {
           "type": "string"
         },
+        "businessRuleSetName": {
+          "type": "string"
+        },
         "scanRulesetType": {
           "enum": [
             "Custom",
@@ -6195,6 +6198,9 @@
               "$ref": "#/definitions/CollectionReference"
             }
           ]
+        },
+        "domain": {
+          "type": "string"
         },
         "workers": {
           "format": "int32",
@@ -6216,6 +6222,19 @@
               "$ref": "#/definitions/ConnectedVia"
             }
           ]
+        },
+        "isPresetScan": {
+          "type": "boolean"
+        },
+        "isLiveViewEnabled": {
+          "type": "boolean"
+        },
+        "parallelScanCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "logLevel": {
+          "type": "string"
         }
       }
     },
