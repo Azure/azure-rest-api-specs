@@ -317,7 +317,14 @@
       "properties": {
         "endpointType": {
           "type": "string",
-          "description": "The endpoint type for the virtual endpoint. This can be ReadWrite, Custom, CustomType"
+          "description": "The endpoint type for the virtual endpoint.",
+          "enum": [
+            "ReadWrite"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualEndpointType",
+            "modelAsString": true
+          }
         },
         "members": {
           "type": "array",
