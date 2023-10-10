@@ -503,6 +503,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "ClassificationRules_TagClassificationVersion": {
             "$ref": "./examples/ClassificationRules_TagClassificationVersion.json"
@@ -1291,6 +1292,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "ScanResult_RunScan": {
             "$ref": "./examples/ScanResult_RunScan.json"
@@ -1345,6 +1347,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "ScanResult_CancelScan": {
             "$ref": "./examples/ScanResult_CancelScan.json"
@@ -1931,7 +1934,7 @@
           "Triggers"
         ],
         "description": "Gets trigger information",
-        "operationId": "Triggers_GetTrigger",
+        "operationId": "Triggers_Get",
         "produces": [
           "application/json"
         ],
@@ -1967,8 +1970,8 @@
           }
         },
         "x-ms-examples": {
-          "Triggers_GetTrigger": {
-            "$ref": "./examples/Triggers_GetTrigger.json"
+          "Triggers_Get": {
+            "$ref": "./examples/Triggers_Get.json"
           }
         }
       },
@@ -1977,7 +1980,7 @@
           "Triggers"
         ],
         "description": "Creates an instance of a trigger",
-        "operationId": "Triggers_CreateTrigger",
+        "operationId": "Triggers_Create",
         "consumes": [
           "application/json"
         ],
@@ -2030,8 +2033,8 @@
           }
         },
         "x-ms-examples": {
-          "Triggers_CreateTrigger": {
-            "$ref": "./examples/Triggers_CreateTrigger.json"
+          "Triggers_Create": {
+            "$ref": "./examples/Triggers_Create.json"
           }
         }
       },
@@ -2040,7 +2043,7 @@
           "Triggers"
         ],
         "description": "Deletes the trigger associated with the scan",
-        "operationId": "Triggers_DeleteTrigger",
+        "operationId": "Triggers_Delete",
         "produces": [
           "application/json"
         ],
@@ -2079,8 +2082,8 @@
           }
         },
         "x-ms-examples": {
-          "Triggers_DeleteTrigger": {
-            "$ref": "./examples/Triggers_DeleteTrigger.json"
+          "Triggers_Delete": {
+            "$ref": "./examples/Triggers_Delete.json"
           }
         }
       }
@@ -8351,14 +8354,6 @@
     }
   },
   "parameters": {
-    "api-version": {
-      "in": "query",
-      "name": "api-version",
-      "description": "The api version to use.",
-      "required": true,
-      "type": "string",
-      "x-ms-client-name": "ApiVersion"
-    },
     "endpoint": {
       "in": "path",
       "name": "endpoint",
