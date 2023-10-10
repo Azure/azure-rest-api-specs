@@ -304,6 +304,9 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -357,7 +360,6 @@
           "$ref": "#/definitions/VirtualEndpointForPatch"
         }
       ],
-      "x-ms-azure-resource": true,
       "description": "Represents a virtual endpoint for a server."
     },
     "VirtualEndpointForPatch": {
@@ -380,6 +382,10 @@
             "$ref": "#/definitions/VirtualEndpoint"
           },
           "description": "The list of virtual endpoints"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
         }
       },
       "description": "A list of virtual endpoints."
