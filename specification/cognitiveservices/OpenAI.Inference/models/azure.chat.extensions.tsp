@@ -29,6 +29,18 @@ using TypeSpec.Versioning;
 enum AzureChatExtensionType {
   @doc("Represents the use of Azure Cognitive Search as an Azure OpenAI chat extension.")
   azureCognitiveSearch: "AzureCognitiveSearch",
+  
+  @added(ServiceApiVersions.v2023_11_01_Preview)
+  @doc("Represents the use of Azure Machine Learning index as an Azure OpenAI chat extension.")
+  azureMachineLearningIndex: "AzureMLIndex",
+  
+  @added(ServiceApiVersions.v2023_11_01_Preview)
+  @doc("Represents the use of Azure Cosmos DB as an Azure OpenAI chat extension.")
+  azureCosmosDB: "AzureCosmosDB",
+
+  @added(ServiceApiVersions.v2023_11_01_Preview)
+  @doc("Represents the use of Elasticsearch as an Azure OpenAI chat extension. (Elasticsearch is a brand name, so we cannot call it ElasticSearch)")
+  Elasticsearch: "Elasticsearch",
 }
 
 @added(ServiceApiVersions.v2023_08_01_Preview)

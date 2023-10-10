@@ -20,17 +20,21 @@ model AzureCognitiveSearchIndexFieldMappingOptions {
   @projectedName("csharp", "FilepathFieldName")
   filepathField?: string;
 
-  @doc("The names of index fields that should be treated as content.")
+  @doc("The names of index fields that should be treated as content. YT: it was a typo in the original typespec, should be 'contentFields'")
   @projectedName("csharp", "ContentFieldNames")
-  contentFieldNames?: string[];
+  contentFields?: string[];
 
-  @doc("The separator pattern that content fields should use.")
-  @projectedName("csharp", "ContentFieldSeparator")
-  contentFieldSeparator?: string;
+  @doc("The separator pattern that content fields should use. YT: it was a typo in the original typespec, should be 'contentFieldsSeparator'")
+  @projectedName("csharp", "ContentFieldsSeparator")
+  contentFieldsSeparator?: string;
 
   @doc("The names of fields that represent vector data.")
   @projectedName("csharp", "VectorFieldNames")
   vectorFields?: string[];
+
+  @doc("TBD Yasu.")
+  @projectedName("csharp", "ImageVectorFieldNames")
+  imageVectorFields?: string[];
 }
 
 @doc("""
@@ -70,9 +74,13 @@ model AzureCognitiveSearchChatExtensionConfiguration {
   @projectedName("csharp", "SearchEndpoint")
   endpoint: url;
 
-  @doc("The API admin key to use with the specified Azure Cognitive Search endpoint.")
+  @doc("The API admin key to use with the specified Azure Cognitive Search endpoint. If not specified, the service will try to use managed identity. If specified, the clientId cannot be set in the request.")
   @projectedName("csharp", "SearchKey")
-  key: string;
+  key?: string;
+
+  @doc("The client id of the user assigned managed identity, which is to be used to access Azure Cognitive Service. Cannot be used together with key. If key is not specified, and clientId is also not specified, the service will try to use system assigned managed identity.")
+  @projectedName("csharp", "ClientId")
+  clientId?: string;
 
   @doc("The name of the index to use as available in the referenced Azure Cognitive Search resource.")
   indexName: string;
@@ -101,4 +109,7 @@ model AzureCognitiveSearchChatExtensionConfiguration {
 
   @doc("When using embeddings, specifies the API key to use with the provided embeddings endpoint.")
   embeddingKey?: string;
+
+  @doc("The embedding model deployment name in the same Azure OpenAI resource. Used for vector search. Should be used exclusively with embeddingEndpoint and embeddingKey. When embeddingDeploymentName parameter is provided, the service will evaluate embedding model directly internally, and no additional authentication information is needed. If embeddingDeploymentName is not provided, the service will use the provided embeddingEndpoint and embeddingKey to retrieve embeddings from the specified endpoint, and the embeddingKey will be used as the authentication information, and the AAD is not supported to access the external embeddingEndpoint, and if the external Azure OpenAI service has network restriction, the external API call will fail.")
+  embeddingDeploymentName?: string;
 }
