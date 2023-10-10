@@ -3695,18 +3695,15 @@
         },
         "initialDownloadPolicy": {
           "$ref": "#/definitions/InitialDownloadPolicy",
-          "description": "Policy for how namespace and files are recalled during FastDr.",
-          "default": "NamespaceThenModifiedFiles"
+          "description": "Policy for how namespace and files are recalled during FastDr."
         },
         "localCacheMode": {
           "$ref": "#/definitions/LocalCacheMode",
-          "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access.",
-          "default": "UpdateLocallyCachedFiles"
+          "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access."
         },
         "initialUploadPolicy": {
           "$ref": "#/definitions/InitialUploadPolicy",
-          "description": "Policy for how the initial upload sync session is performed.",
-          "default": "Merge"
+          "description": "Policy for how the initial upload sync session is performed."
         }
       }
     },
@@ -4676,7 +4673,6 @@
           "description": "Resource Last Operation Name"
         },
         "changeEnumerationStatus": {
-          "type": "object",
           "$ref": "#/definitions/CloudEndpointChangeEnumerationStatus",
           "description": "Cloud endpoint change enumeration status",
           "readOnly": true
@@ -4769,7 +4765,6 @@
           "readOnly": true
         },
         "syncStatus": {
-          "type": "object",
           "$ref": "#/definitions/ServerEndpointSyncStatus",
           "description": "Server Endpoint sync status",
           "readOnly": true
@@ -4793,13 +4788,11 @@
           "description": "Offline data transfer share name"
         },
         "cloudTieringStatus": {
-          "type": "object",
           "$ref": "#/definitions/ServerEndpointCloudTieringStatus",
           "description": "Cloud tiering status. Only populated if cloud tiering is enabled.",
           "readOnly": true
         },
         "recallStatus": {
-          "type": "object",
           "$ref": "#/definitions/ServerEndpointRecallStatus",
           "description": "Recall status. Only populated if cloud tiering is enabled.",
           "readOnly": true
@@ -5145,6 +5138,7 @@
         "DownloadNewAndModifiedFiles",
         "UpdateLocallyCachedFiles"
       ],
+      "default": "UpdateLocallyCachedFiles",
       "x-ms-enum": {
         "name": "LocalCacheMode",
         "modelAsString": true
@@ -5158,6 +5152,7 @@
         "NamespaceThenModifiedFiles",
         "AvoidTieredFiles"
       ],
+      "default": "NamespaceThenModifiedFiles",
       "x-ms-enum": {
         "name": "InitialDownloadPolicy",
         "modelAsString": true
@@ -5170,6 +5165,7 @@
         "ServerAuthoritative",
         "Merge"
       ],
+      "default": "Merge",
       "x-ms-enum": {
         "name": "InitialUploadPolicy",
         "modelAsString": true
