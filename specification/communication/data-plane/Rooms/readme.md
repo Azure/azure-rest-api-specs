@@ -26,20 +26,9 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-rooms-2023-10-30-preview
+tag: package-rooms-2023-06-14
 input-file:
-  - preview/2023-10-30-preview/communicationservicesrooms.json
-```
-
-### Tag: package-rooms-2023-10-30-preview
-
-These settings apply only when `--tag=package-rooms-2023-10-30-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-rooms-2023-10-30-preview'
-input-file:
-  - preview/2023-10-30-preview/communicationservicesrooms.json
-title:
-  Azure Communication Services
+  - stable/2023-06-14/communicationservicesrooms.json
 ```
 
 ### Tag: package-rooms-2023-06-14

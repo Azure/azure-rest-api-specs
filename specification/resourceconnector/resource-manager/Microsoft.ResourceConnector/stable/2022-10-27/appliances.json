@@ -453,12 +453,6 @@
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "name": "artifactType",
-            "in": "query",
-            "type": "string",
-            "description": "This sets the type of artifact being returned, when empty no artifact endpoint is returned."
           }
         ],
         "responses": {
@@ -1013,7 +1007,9 @@
               "enum": [
                 "VMWare",
                 "HCI",
-                "SCVMM"
+                "SCVMM",
+                "KubeVirt",
+                "OpenStack"
               ],
               "x-ms-enum": {
                 "name": "provider",
@@ -1042,12 +1038,7 @@
             "Connected",
             "Running",
             "PreparingForUpgrade",
-            "ETCDSnapshotFailed",
             "UpgradePrerequisitesCompleted",
-            "ValidatingSFSConnectivity",
-            "ValidatingImageDownload",
-            "ValidatingImageUpload",
-            "ValidatingETCDHealth",
             "PreUpgrade",
             "UpgradingKVAIO",
             "WaitingForKVAIO",

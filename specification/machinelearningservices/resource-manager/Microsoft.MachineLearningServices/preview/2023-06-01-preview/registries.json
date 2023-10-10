@@ -88,7 +88,10 @@
         },
         "x-ms-examples": {
           "List registries with system created accounts.": {
-            "$ref": "./examples/Registries/list.json"
+            "$ref": "./examples/Registries/list-SystemCreated.json"
+          },
+          "List registries with user created accounts.": {
+            "$ref": "./examples/Registries/list-UserCreated.json"
           }
         },
         "x-ms-pageable": {
@@ -204,7 +207,10 @@
         },
         "x-ms-examples": {
           "Get Registry with system created accounts.": {
-            "$ref": "./examples/Registries/get.json"
+            "$ref": "./examples/Registries/get-SystemCreated.json"
+          },
+          "Get Registry with user created accounts.": {
+            "$ref": "./examples/Registries/get-UserCreated.json"
           }
         }
       },
@@ -259,7 +265,10 @@
         },
         "x-ms-examples": {
           "Update Registry with system created accounts.": {
-            "$ref": "./examples/Registries/update.json"
+            "$ref": "./examples/Registries/update-SystemCreated.json"
+          },
+          "Update Registry with user created accounts.": {
+            "$ref": "./examples/Registries/update-UserCreated.json"
           }
         }
       },
@@ -320,7 +329,10 @@
         },
         "x-ms-examples": {
           "CreateOrUpdate Registry with system created accounts.": {
-            "$ref": "./examples/Registries/createOrUpdate.json"
+            "$ref": "./examples/Registries/createOrUpdate-SystemCreated.json"
+          },
+          "CreateOrUpdate Registry with user created accounts.": {
+            "$ref": "./examples/Registries/createOrUpdate-UserCreated.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -423,7 +435,7 @@
           "x-nullable": true
         },
         "userCreatedAcrAccount": {
-          "description": "Details of user created ACR account to be used for the Registry. Not supported in most cases and will throw 400 error if provided.",
+          "description": "Details of user created ACR account to be used for the Registry",
           "$ref": "#/definitions/UserCreatedAcrAccount",
           "x-nullable": true
         }
@@ -528,7 +540,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "This is the private endpoint connection name created on SRP\r\nFull resource id: /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.MachineLearningServices/{resourceType}/{resourceName}/privateEndpointConnections/{peConnectionName}",
+          "description": "This is the private endpoint connection name created on SRP\r\nFull resource id: /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.MachineLearningServices/{resourceType}/{resourceName}/registryPrivateEndpointConnections/{peConnectionName}",
           "type": "string",
           "x-nullable": true
         },
@@ -567,7 +579,7 @@
           "$ref": "#/definitions/PrivateEndpointResource",
           "x-nullable": true
         },
-        "privateLinkServiceConnectionState": {
+        "registryPrivateLinkServiceConnectionState": {
           "description": "The connection state.",
           "$ref": "#/definitions/RegistryPrivateLinkServiceConnectionState",
           "x-nullable": true
@@ -642,7 +654,7 @@
           "type": "string",
           "x-nullable": true
         },
-        "privateEndpointConnections": {
+        "registryPrivateEndpointConnections": {
           "description": "Private endpoint connections info used for pending connections in private link portal",
           "type": "array",
           "items": {
@@ -759,7 +771,7 @@
           "x-nullable": true
         },
         "userCreatedStorageAccount": {
-          "description": "Details of user created storage account to be used for the registry.  Not supported in most cases and will throw 400 error if provided.",
+          "description": "Details of user created storage account to be used for the registry",
           "$ref": "#/definitions/UserCreatedStorageAccount",
           "x-nullable": true
         }

@@ -26,19 +26,9 @@ These are the global settings for the Quota API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-06-01-preview
+tag: package-2023-02-01
 ```
 
-
-### Tag: package-2023-06-01-preview
-
-These settings apply only when `--tag=package-2023-06-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-06-01-preview'
-input-file:
-  - Microsoft.Quota/preview/2023-06-01-preview/groupquota.json
-  - Microsoft.Quota/stable/2023-02-01/quota.json
-```
 
 ### Tag: package-2023-02-01
 
@@ -66,16 +56,6 @@ directive:
     - R3007 # The 'PutGetPatchResponseSchema' Both get and put/Patch is using same data model - CurrentQuotaLimitBase.
     - R4009 # The 'RequiredReadOnlySystemData' It will be added later, if needed.
     - R4018 # The 'OperationsApiResponseSchema' It will be added later, if needed. The current API provides in this format.
-```
-
-``` yaml
-suppressions:
-  - code: PathForPutOperation
-    reason: This API is a Management Group level API.
-  - code: PathForNestedResource
-    reason: This API is a Management Group level API.
-  - code: TopLevelResourcesListBySubscription
-    reason: This API is a Management Group level API.
 ```
 
 ---

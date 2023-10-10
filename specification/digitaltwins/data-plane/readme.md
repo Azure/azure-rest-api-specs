@@ -26,16 +26,7 @@ These are the global settings for Azure Digital Twins.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2023-10-31
-```
-
-### Tag: package-2023-10-31
-
-These settings apply only when `--tag=package-2023-10-31` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-10-31'
-input-file:
-  - Microsoft.DigitalTwins/stable/2023-10-31/digitaltwins.json
+tag: package-2023-06-30
 ```
 
 ### Tag: package-2023-06-30

@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-sphere"
-  output-folder: "$(typescript-sdks-folder)/sdk/sphere/arm-sphere"
+  package-name: "@azure/arm-azuresphere"
+  output-folder: "$(typescript-sdks-folder)/sdk/azuresphere/arm-azuresphere"
   clear-output-folder: true
   generate-metadata: true
 ```

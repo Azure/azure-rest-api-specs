@@ -15,7 +15,6 @@ module-name: sdk/resourcemanager/resourcehealth/armresourcehealth
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
-v3: true
 directive:
   - from: ResourceHealth.json
     where: $.definitions.availabilityStatus.properties.properties.properties.occuredTime

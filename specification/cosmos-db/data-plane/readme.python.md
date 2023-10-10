@@ -14,9 +14,7 @@ python:
   enable-xml: true
   vanilla: true
   output-folder: "$(python-sdks-folder)/sdk/tables/azure-data-tables/azure/data/tables/_generated"
-  package-version: "1.0.0b1"
-  models-mode: msrest
-  azure-validator: false
+  package-version: "2019-02-02"
 ```
 
 ### Use strings for dates when python doesn't have enough precision

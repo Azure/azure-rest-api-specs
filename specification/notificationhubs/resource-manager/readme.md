@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for NotificationHubs.
 
+
+
 ---
-
 ## Getting Started
-
 To build the SDK for NotificationHubs, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,62 +15,34 @@ To build the SDK for NotificationHubs, simply [Install AutoRest](https://aka.ms/
 To see additional help and options, run:
 
 > `autorest --help`
-
 ---
 
 ## Configuration
 
-### Basic Information
 
+
+### Basic Information
 These are the global settings for the NotificationHubs API.
 
 directive:
-
-* where:
-
-  * $.definitions.NamespaceCreateOrUpdateParameters
-suppress:
-
-  * TrackedResourcePatchOperation
-
-* where:
-
-  * $.definitions.NamespaceCreateOrUpdateParameters
-suppress:
-
-  * TrackedResourceGetOperation
+  - where:
+      - $.definitions.NamespaceCreateOrUpdateParameters
+    suppress:
+      - TrackedResourcePatchOperation
+  - where:
+      - $.definitions.NamespaceCreateOrUpdateParameters
+    suppress:
+      - TrackedResourceGetOperation
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-09
+tag: package-2017-04
 directive:
   - where:
       - $.definitions.NamespaceCreateOrUpdateParameters
     suppress:
       - TrackedResourcePatchOperation
       - TrackedResourceGetOperation
-```
-
-
-### Tag: package-2023-09
-
-These settings apply only when `--tag=package-2023-09` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-09'
-input-file:
-  - Microsoft.NotificationHubs/stable/2023-09-01/notificationhubs.json
-```
-### Tag: package-preview-2023-01
-
-These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2023-01'
-input-file:
-  - Microsoft.NotificationHubs/preview/2023-01-01-preview/notificationhubs.json
-
-suppressions:
- - code: RepeatedPathInfo
-   reason: We cannot remove the subscriptionId parameter without introducing a breaking change.
 ```
 
 ### Tag: package-2017-04
@@ -100,9 +72,10 @@ input-file:
 - Microsoft.NotificationHubs/stable/2014-09-01/notificationhubs.json
 ```
 
----
 
+---
 # Code Generation
+
 
 ## Swagger to SDK
 
@@ -124,6 +97,7 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
+
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
@@ -137,6 +111,7 @@ csharp:
   output-folder: $(csharp-sdks-folder)/notificationhubs/Microsoft.Azure.Management.NotificationHubs/src/Generated
   clear-output-folder: true
 ```
+
 
 ## Python
 
@@ -207,3 +182,8 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
+
+
+
+
