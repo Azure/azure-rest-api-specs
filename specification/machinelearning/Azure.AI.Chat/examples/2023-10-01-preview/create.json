@@ -1,0 +1,36 @@
+{
+  "operationId": "Create",
+  "title": "Creates a chat completion for the provided prompt using streaming.",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2023-10-01-preview",
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "message": "Tell me a joke"
+        }
+      ],
+      "stream": false
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "content": "Why did the tomato turn red?\nBecause it saw the salad dressing!",
+              "role": "assistant",
+              "session_state": null
+            },
+            "extra_args": null,
+            "session_state": null,
+            "finish_reason": "stop"
+          }
+        ]
+      }
+    }
+  }
+}
