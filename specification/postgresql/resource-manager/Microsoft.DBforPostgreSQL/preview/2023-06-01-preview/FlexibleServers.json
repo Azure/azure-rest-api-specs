@@ -140,6 +140,18 @@
           },
           "ServerUpdateWithMajorVersionUpgrade": {
             "$ref": "./examples/ServerUpdateWithMajorVersionUpgrade.json"
+          },
+          "Promote a replica server as a Standalone server as planned, i.e. it will wait for replication to complete.": {
+            "$ref": "./examples/PromoteReplicaAsPlannedStandaloneServer.json"
+          },
+          "Promote a replica server as a Standalone server as forced, i.e. it will promote a replica server immediately without waiting for primary and replica to be in sync.": {
+            "$ref": "./examples/PromoteReplicaAsForcedStandaloneServer.json"
+          },
+          "Siteswap a replica server as planned, i.e. it will wait for replication to complete before promoting replica as Primary and original primary as replica.": {
+            "$ref": "./examples/PromoteReplicaAsPlannedSiteswap.json"
+          },
+          "Siteswap a replica server as forced, i.e. it will replica as Primary and original primary as replica immediately without waiting for primary and replica to be in sync.": {
+            "$ref": "./examples/PromoteReplicaAsForcedSiteswap.json"
           }
         },
         "description": "Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.",
@@ -387,6 +399,70 @@
         "modelAsString": true
       }
     },
+    "Replica": {
+      "type": "object",
+      "description": "Replica properties of a server",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ReplicationRole",
+          "description": "Used to indicate role of the server in replication set."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Replicas allowed for a server.",
+          "readOnly": true
+        },
+        "linkState": {
+          "type": "string",
+          "description": "Gets the link state of a replica server. This property is returned only for replicas api call.",
+          "default": null,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Provisioning",
+            "Broken",
+            "Updating",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationLinkState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "promoteMode": {
+          "type": "string",
+          "description": "Sets the promote mode for a replica server. This is a write only property.",
+          "enum": [
+            "standalone",
+            "siteswap"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationPromoteMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "promoteOption": {
+          "type": "string",
+          "description": "Sets the promote options for a replica server. This is a write only property.",
+          "enum": [
+            "planned",
+            "forced"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationPromoteOption",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
     "ServerProperties": {
       "type": "object",
       "properties": {
@@ -521,6 +597,14 @@
           "description": "Replicas allowed for a server.",
           "readOnly": true
         },
+        "replica": {
+          "$ref": "#/definitions/Replica",
+          "description": "Replica properties of a server. These Replica properties are required to be passed only in case you want to Promote a server.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
         "createMode": {
           "type": "string",
           "description": "The mode to create a new PostgreSQL server.",
@@ -642,6 +726,14 @@
         "replicationRole": {
           "$ref": "#/definitions/ReplicationRole",
           "description": "Replication role of the server"
+        },
+        "replica": {
+          "$ref": "#/definitions/Replica",
+          "description": "Replica properties of a server. These Replica properties are required to be passed only in case you want to Promote a server.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "network": {
           "$ref": "#/definitions/Network",
