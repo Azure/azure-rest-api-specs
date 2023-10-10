@@ -26,18 +26,36 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-03
+tag: package-2023-08
 azure-validator: false
 ```
 
 ---
 
 
+### Tag: package-2023-08
+
+These settings apply only when `--tag=package-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08'
+input-file:
+  - Microsoft.CostManagement/stable/2023-08-01/common-types.json
+  - Microsoft.CostManagement/stable/2023-08-01/costmanagement.benefits.json
+  - Microsoft.CostManagement/stable/2023-08-01/costmanagement.budgets.json
+  - Microsoft.CostManagement/stable/2023-08-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2023-08-01/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/stable/2023-08-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2023-08-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2023-08-01/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/stable/2023-08-01/scheduledActions.json
+  - Microsoft.CostManagement/stable/2023-08-01/costallocation.json
+  - Microsoft.CostManagement/stable/2023-08-01/settings.json
+```
 ### Tag: package-2023-03
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03'
+``` yaml $(tag) == 'package-2023-03'
 input-file:
   - Microsoft.CostManagement/stable/2023-03-01/common-types.json
   - Microsoft.CostManagement/stable/2023-03-01/costmanagement.benefits.json
@@ -48,6 +66,7 @@ input-file:
   - Microsoft.CostManagement/stable/2023-03-01/costmanagement.pricesheets.json
   - Microsoft.CostManagement/stable/2023-03-01/scheduledActions.json
 ```
+
 ### Tag: package-preview-2023-04
 
 These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
@@ -89,6 +108,7 @@ These settings apply only when `--tag=package-preview-2022-10-05` is specified o
 input-file:
   - Microsoft.CostManagement/preview/2022-10-05-preview/costmanagement.json
   - Microsoft.CostManagement/preview/2022-10-05-preview/settings.json
+  - Microsoft.CostManagement/preview/2022-10-05-preview/markup.json
 ```
 
 ### Tag: package-preview-2022-10
@@ -388,6 +408,42 @@ directive:
   - suppress: GetCollectionResponseSchema
     from: common-types.json
     reason: 'Operations does not contain a path for individual GET'
+  - suppress: TopLevelResourcesListBySubscription
+    from: costallocation.json
+    reason: 'List by subscription is not supported in cost allocation by desgin'
+  - suppress: PathForResourceAction
+    from: costallocation.json
+    reason: 'This is not a valid scenario for the checkNameAvailability API as the name itself represents an action.'
+  - suppress: PathForPutOperation
+    from: costallocation.json
+    reason: 'Subscripiton and ResourceGroup scope is not supported in cost allocation by desgin'
+  - suppress: RequiredReadOnlySystemData
+    from: costallocation.json
+    reason: 'cost allocation does not return system data and will consider adding it in the future or upcoming api version'
+  - suppress: EnumInsteadOfBoolean
+    from: costallocation.json
+    reason: 'Keeping it as boolean property as per the design'
+  - suppress: NoDuplicatePathsForScopeParameter
+    from: settings.json
+    reason: 'Settings does not use scope for List API'
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: settings.json
+    reason: 'Settings List designed to deliver very limited records'
+  - suppress: PageableOperation
+    from: settings.json
+    reason: 'Settings List designed to deliver very limited records'
+  - suppress: TopLevelResourcesListBySubscription
+    from: settings.json
+    reason: 'List by subscription is not supported in settings by desgin'
+  - suppress: EnumInsteadOfBoolean
+    from: settings.json
+    reason: 'Keeping it as boolean property as per the design'
+  - suppress: ParameterNotUsingCommonTypes
+    from: settings.json
+    reason: 'Settings does not support all the scopes to use it from common types, hence we have defined exclusively with custom description.'
+  - suppress: RequiredReadOnlySystemData
+    from: settings.json
+    reason: 'Settings does not return system data and will consider adding it in the future or upcoming api version'
         
 ```
 
