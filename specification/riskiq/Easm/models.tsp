@@ -98,6 +98,7 @@ alias SavedFiltersListTrait = {
     ...MaxPageSizeQueryParameter;
   }>;
 };
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @projectedName("java", "AlexaDetails")
 model AlexaInfo {
@@ -139,6 +140,7 @@ model AsAsset extends InventoryAsset {
 }
 
 @doc("The page of assets that match the provided metric.")
+@pagedResult
 model AssetPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -147,9 +149,11 @@ model AssetPageResult {
   mark?: string;
 
   @doc("The link to access the next page of results.  Not set if at the end of the result set.")
+  @nextLink
   nextLink?: string;
 
   @doc("The items in the current page of results.")
+  @items
   value?: AssetResource[];
 }
 
@@ -369,18 +373,6 @@ model Cve {
   cvss3Summary?: Cvss3Summary;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model DataConnectionPageResult {
-  @doc("The total number of items available in the full result set.")
-  totalElements?: int64;
-
-  @doc("The link to access the next page of results.  Not set if at the end of the result set.")
-  nextLink?: string;
-
-  @doc("The items in the current page of results.")
-  value?: DataConnection[];
-}
-
 @doc("The properties required to establish connection to a particular service")
 model DataConnectionProperties {}
 
@@ -472,18 +464,6 @@ model DependentResource {
   lastObservedExpectedSriHash?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model DiscoGroupPageResult {
-  @doc("The total number of items available in the full result set.")
-  totalElements?: int64;
-
-  @doc("The link to access the next page of results.  Not set if at the end of the result set.")
-  nextLink?: string;
-
-  @doc("The items in the current page of results.")
-  value?: DiscoGroup[];
-}
-
 @doc("A request body used to create a discovery group.")
 model DiscoGroupData {
   @doc("The name for a disco group.")
@@ -554,14 +534,17 @@ model DiscoGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@pagedResult
 model DiscoRunPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
 
   @doc("The link to access the next page of results.  Not set if at the end of the result set.")
+  @nextLink
   nextLink?: string;
 
   @doc("The items in the current page of results.")
+  @items
   value?: DiscoRunResult[];
 }
 
@@ -602,18 +585,6 @@ model DiscoSource {
 
   @doc("The name for the disco source.")
   name?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model DiscoTemplatePageResult {
-  @doc("The total number of items available in the full result set.")
-  totalElements?: int64;
-
-  @doc("The link to access the next page of results.  Not set if at the end of the result set.")
-  nextLink?: string;
-
-  @doc("The items in the current page of results.")
-  value?: DiscoTemplate[];
 }
 
 @doc("The items in the current page of results.")
@@ -1163,18 +1134,6 @@ model ResourceUrl {
   recent?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model SavedFilterPageResult {
-  @doc("The total number of items available in the full result set.")
-  totalElements?: int64;
-
-  @doc("The link to access the next page of results.  Not set if at the end of the result set.")
-  nextLink?: string;
-
-  @doc("The items in the current page of results.")
-  value?: SavedFilter[];
-}
-
 @doc("A request body used to create a saved filter.")
 model SavedFilterData {
   @doc("An expression on the resource type that selects the resources to be returned.")
@@ -1308,18 +1267,6 @@ model SubResourceIntegrityCheck {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model TaskPageResult {
-  @doc("The total number of items available in the full result set.")
-  totalElements?: int64;
-
-  @doc("The link to access the next page of results.  Not set if at the end of the result set.")
-  nextLink?: string;
-
-  @doc("The items in the current page of results.")
-  value?: Task[];
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("tasks")
 model Task {
   @doc("The unique identifier of the task.")
@@ -1371,13 +1318,6 @@ model WebComponent {
   ports?: Port[];
   sources?: Source[];
   service?: string;
-}
-
-@doc("Result with no content")
-model NoContentResult {
-  @doc("204 status code")
-  @statusCode
-  statusCode: 204;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1504,12 +1444,7 @@ enum AssetUpdateState {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 enum AssetState {
-  candidate,
-  confirmed,
-  dismissed,
-  candidateInvestigate,
-  associatedPartner,
-  associatedThirdparty,
+  ...AssetUpdateState,
   archived,
 }
 

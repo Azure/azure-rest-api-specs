@@ -719,6 +719,9 @@
           "DiscoveryGroups_ListRuns": {
             "$ref": "./examples/DiscoveryGroups_ListRuns_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2382,27 +2385,6 @@
         "modelAsString": true
       }
     },
-    "DataConnectionPageResult": {
-      "type": "object",
-      "properties": {
-        "totalElements": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The total number of items available in the full result set."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to access the next page of results.  Not set if at the end of the result set."
-        },
-        "value": {
-          "type": "array",
-          "description": "The items in the current page of results.",
-          "items": {
-            "$ref": "#/definitions/DataConnection"
-          }
-        }
-      }
-    },
     "DataConnectionProperties": {
       "type": "object",
       "description": "The properties required to establish connection to a particular service"
@@ -2619,27 +2601,6 @@
         }
       }
     },
-    "DiscoGroupPageResult": {
-      "type": "object",
-      "properties": {
-        "totalElements": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The total number of items available in the full result set."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to access the next page of results.  Not set if at the end of the result set."
-        },
-        "value": {
-          "type": "array",
-          "description": "The items in the current page of results.",
-          "items": {
-            "$ref": "#/definitions/DiscoGroup"
-          }
-        }
-      }
-    },
     "DiscoRunPageResult": {
       "type": "object",
       "properties": {
@@ -2819,27 +2780,6 @@
       "required": [
         "id"
       ]
-    },
-    "DiscoTemplatePageResult": {
-      "type": "object",
-      "properties": {
-        "totalElements": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The total number of items available in the full result set."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to access the next page of results.  Not set if at the end of the result set."
-        },
-        "value": {
-          "type": "array",
-          "description": "The items in the current page of results.",
-          "items": {
-            "$ref": "#/definitions/DiscoTemplate"
-          }
-        }
-      }
     },
     "DomainAsset": {
       "type": "object",
@@ -4045,10 +3985,6 @@
         }
       ]
     },
-    "NoContentResult": {
-      "type": "object",
-      "description": "Result with no content"
-    },
     "ObservedBoolean": {
       "type": "object",
       "properties": {
@@ -5162,27 +5098,6 @@
         "description"
       ]
     },
-    "SavedFilterPageResult": {
-      "type": "object",
-      "properties": {
-        "totalElements": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The total number of items available in the full result set."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to access the next page of results.  Not set if at the end of the result set."
-        },
-        "value": {
-          "type": "array",
-          "description": "The items in the current page of results.",
-          "items": {
-            "$ref": "#/definitions/SavedFilter"
-          }
-        }
-      }
-    },
     "ScanMetadata": {
       "type": "object",
       "properties": {
@@ -5631,27 +5546,6 @@
       "required": [
         "id"
       ]
-    },
-    "TaskPageResult": {
-      "type": "object",
-      "properties": {
-        "totalElements": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The total number of items available in the full result set."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to access the next page of results.  Not set if at the end of the result set."
-        },
-        "value": {
-          "type": "array",
-          "description": "The items in the current page of results.",
-          "items": {
-            "$ref": "#/definitions/Task"
-          }
-        }
-      }
     },
     "TaskPhase": {
       "type": "string",

@@ -25,10 +25,7 @@ interface Assets {
   @route("/assets")
   @post
   updateAssets is Foundations.Operation<
-    {
-      ...AssetsUpdateParameter;
-      ...AssetUpdateData;
-    },
+    AssetsUpdateParameter & AssetUpdateData,
     Task
   >;
   @doc("Retrieve an asset by assetId.")
@@ -88,7 +85,7 @@ interface DiscoveryGroups {
   >;
   @doc("Run a discovery group with a given groupName.")
   @action("run")
-  runDiscoGroup is Operations.ResourceAction<DiscoGroup, {}, NoContentResult>;
+  runDiscoGroup is Operations.ResourceAction<DiscoGroup, {}, NoContentResponse>;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Retrieve a collection of discovery run results for a discovery group with a given groupName.")
   @route("/discoGroups/{groupName}/runs")
