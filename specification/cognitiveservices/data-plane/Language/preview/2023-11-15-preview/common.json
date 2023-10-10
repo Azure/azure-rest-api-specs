@@ -912,6 +912,7 @@
     },
     "DocumentError": {
       "type": "object",
+      "description": "Contains details of errors encountered during a job execution.",
       "required": [
         "id",
         "error"
@@ -919,11 +920,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Document Id."
+          "description": "The id of the input document."
         },
         "error": {
           "type": "object",
-          "description": "Document Error.",
+          "description": "Error encountered.",
           "$ref": "#/definitions/Error"
         }
       }
