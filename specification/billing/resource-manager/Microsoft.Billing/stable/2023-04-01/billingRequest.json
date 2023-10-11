@@ -301,7 +301,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A billing request",
+            "description": "A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests.",
             "schema": {
               "$ref": "#/definitions/BillingRequest"
             }
@@ -344,7 +344,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "A billing request",
+            "description": "A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests.",
             "schema": {
               "$ref": "#/definitions/BillingRequest"
             }
@@ -352,13 +352,13 @@
         ],
         "responses": {
           "200": {
-            "description": "A billing request",
+            "description": "A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests.",
             "schema": {
               "$ref": "#/definitions/BillingRequest"
             }
           },
           "201": {
-            "description": "A billing request",
+            "description": "A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests.",
             "schema": {
               "$ref": "#/definitions/BillingRequest"
             },
@@ -367,9 +367,6 @@
                 "type": "string"
               }
             }
-          },
-          "202": {
-            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation."
           },
           "default": {
             "description": "Default response",
@@ -455,7 +452,7 @@
   },
   "definitions": {
     "BillingRequest": {
-      "description": "A billing request",
+      "description": "A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests.",
       "type": "object",
       "allOf": [
         {
@@ -498,7 +495,7 @@
       }
     },
     "BillingRequestProperties": {
-      "description": "A billing request",
+      "description": "A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests.",
       "type": "object",
       "properties": {
         "additionalInformation": {

@@ -84,13 +84,6 @@
             "$ref": "./types.json#/parameters/associatedTenantName"
           },
           {
-            "in": "query",
-            "name": "includeDisabled",
-            "description": "Can be used to get disabled or revoked associated tenants.",
-            "type": "boolean",
-            "default": false
-          },
-          {
             "$ref": "./types.json#/parameters/apiVersionParameter"
           }
         ],
@@ -166,9 +159,6 @@
               }
             }
           },
-          "202": {
-            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation."
-          },
           "default": {
             "description": "Default response",
             "schema": {
@@ -206,8 +196,8 @@
           },
           {
             "in": "query",
-            "name": "includeDisabled",
-            "description": "Can be used to get disabled or revoked associated tenants.",
+            "name": "includeRevoked",
+            "description": "Can be used to get revoked associated tenants.",
             "type": "boolean",
             "default": false
           },
@@ -318,8 +308,9 @@
           "description": "The state determines whether users from the associated tenant can be assigned roles for commerce activities like viewing and downloading invoices, managing payments, and making purchases.",
           "enum": [
             "Other",
+            "NotAllowed",
             "Active",
-            "Disabled"
+            "Revoked"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -327,16 +318,16 @@
             "modelAsString": true
           }
         },
-        "provisioningState": {
-          "description": "The state determines whether subscriptions and licenses can be provisioned in the associated tenant. It can be set as 'Pending' from 'Disabled', and 'Disabled' from 'Pending' or 'Active'. Other states are determined based on actions taken by the provisioning tenant's Global Administrator on the related billing request.",
+        "provisioningAccessState": {
+          "description": "The state determines whether subscriptions and licenses can be provisioned in the associated tenant. It can be set to 'Pending' to intiate a billing request.",
           "enum": [
             "Other",
-            "Disabled",
+            "NotRequested",
             "Active",
             "Pending",
             "BillingRequestExpired",
             "BillingRequestDeclined",
-            "BillingRequestRevoked"
+            "Revoked"
           ],
           "type": "string",
           "x-ms-enum": {
