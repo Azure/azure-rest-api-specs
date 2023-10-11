@@ -65,6 +65,9 @@ suppressions:
   - code: PropertiesTypeObjectNoDefinition
     reason: These are existing properties already supported as part of PUT extensions call. Same properties are being supported for extensions Patch now.  
     from: extensions.json
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: There is a false positive reporting the two letter acronym ID should be lower camel case. The property is correctly capitalized according to guidance. 
+    from: logicalNetworks.json
 ```
 
 ### Tag: package-preview-2023-09
