@@ -82,11 +82,9 @@ enum ContentFilterSeverity {
 @doc("Information about filtered content severity level and if it has been filtered or not.")
 model ContentFilterResult {
   @doc("Ratings for the intensity and risk level of filtered content.")
-  @projectedName("json", "severity")
   severity: ContentFilterSeverity;
 
   @doc("A value indicating whether or not the content has been filtered.")
-  @projectedName("json", "filtered")
   filtered: boolean;
 }
 

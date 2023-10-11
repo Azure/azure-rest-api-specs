@@ -26,10 +26,10 @@ Gets English language transcribed text and associated metadata from provided spo
 @action("audio/translations")
 @sharedRoute
 op getAudioTranslationAsPlainText is Azure.Core.Foundations.ResourceOperation<
-    Deployment,
-    AudioTranslationOptions,  // response_format must be one of: text, srt, vtt
-    string,
-    MultipartFormDataRequestHeadersTraits
+  Deployment,
+  AudioTranslationOptions,  // response_format must be one of: text, srt, vtt
+  string,
+  MultipartFormDataRequestHeadersTraits
 >;
 
 #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
@@ -41,8 +41,8 @@ Gets English language transcribed text and associated metadata from provided spo
 @action("audio/translations")
 @sharedRoute
 op getAudioTranslationAsResponseObject is Azure.Core.ResourceAction<
-    Deployment,
-    AudioTranslationOptions,  // response_format must be unspecified (json) or one of: json, verbose_json
-    AudioTranslation,
-    MultipartFormDataRequestHeadersTraits
+  Deployment,
+  AudioTranslationOptions,  // response_format must be unspecified (json) or one of: json, verbose_json
+  AudioTranslation,
+  MultipartFormDataRequestHeadersTraits
 >;

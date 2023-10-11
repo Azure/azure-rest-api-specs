@@ -5,16 +5,20 @@ parameters:
     default: ""
 emit:
  - "@azure-tools/typespec-autorest"
+ - "@typespec/openapi3"
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/../"
-    output-file: "{azure-resource-provider-folder}/AzureOpenAI/inference/{version-status}/{version}/generated.json"
+    output-file: "{azure-resource-provider-folder}/AzureOpenAI/inference/{version}/generated.json"
     azure-resource-provider-folder: "data-plane"
     examples-directory: "{project-root}/examples"
     omit-unreachable-types: true
+  "@typespec/openapi3":
+    emitter-output-dir: "{project-root}/../"
+    output-file: "data-plane/AzureOpenAI/inference/{version}/generated.yaml"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.OpenAI"
     namespace: "Azure.AI.OpenAI"

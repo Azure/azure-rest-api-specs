@@ -35,12 +35,10 @@ enum ChatRole {
 @doc("A single, role-attributed message within a chat completion interaction.")
 model ChatMessage {
   @doc("The role associated with this message payload.")
-  @projectedName("json", "role")
   role: ChatRole;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "we explicitly want a nullable string"
   @doc("The text associated with this message payload.")
-  @projectedName("json", "content")
   content: string | null;
 
   @doc("""
@@ -63,7 +61,6 @@ model ChatMessage {
     This context information is only populated when using Azure OpenAI with chat extensions capabilities configured.
   """)
   @added(ServiceApiVersions.v2023_08_01_Preview)
-  @projectedName("csharp", "AzureExtensionsContext")
   context?: AzureChatExtensionsMessageContext;
 }
 
@@ -79,7 +76,6 @@ model ChatCompletionsOptions {
     the behavior of the assistant, followed by alternating messages between the User and
     Assistant roles.
     """)
-  @projectedName("json", "messages")
   messages: ChatMessage[];
 
   @doc("A list of functions the model may generate JSON inputs for.")
@@ -107,7 +103,6 @@ model ChatCompletionsOptions {
     It is not recommended to modify temperature and top_p for the same completions request as the
     interaction of these two settings is difficult to predict.
     """)
-  @projectedName("json", "temperature")
   temperature?: float32;
 
   @doc("""
@@ -119,7 +114,6 @@ model ChatCompletionsOptions {
     interaction of these two settings is difficult to predict.
     """)
   @projectedName("json", "top_p")
-  @projectedName("csharp", "NucleusSamplingFactor")
   topP?: float32;
 
   @doc("""
@@ -130,14 +124,12 @@ model ChatCompletionsOptions {
     score varies by model.
     """)
   @projectedName("json", "logit_bias")
-  @projectedName("csharp", "InternalStringKeyedTokenSelectionBiases")
   logitBias?: Record<int32>;
 
   @doc("""
     An identifier for the caller or end user of the operation. This may be used for tracking
     or rate-limiting purposes.
     """)
-  @projectedName("json", "user")
   user?: string;
 
   @doc("""
@@ -146,15 +138,11 @@ model ChatCompletionsOptions {
     Because this setting can generate many completions, it may quickly consume your token quota.
     Use carefully and ensure reasonable settings for max_tokens and stop.
     """)
-  @projectedName("json", "n")
-  @projectedName("csharp", "ChoiceCount")
   n?: int32;
 
   @doc("""
     A collection of textual sequences that will end completions generation.
     """)
-  @projectedName("json", "stop")
-  @projectedName("csharp", "StopSequences")
   stop?: string[];
 
   @doc("""
@@ -178,8 +166,6 @@ model ChatCompletionsOptions {
   @doc("""
     A value indicating whether chat completions should be streamed for this request.
     """)
-  @projectedName("json", "stream")
-  @projectedName("csharp", "InternalShouldStreamResponse")
   stream?: boolean;
 
   @doc("""
@@ -187,8 +173,6 @@ model ChatCompletionsOptions {
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
     resource URI that's connected to.
     """)
-  @projectedName("json", "model")
-  @projectedName("csharp", "InternalNonAzureModelName")
   `model`?: string;
 
   @doc("""
@@ -201,8 +185,6 @@ model ChatCompletionsOptions {
   //        "extensions" instead of "data sources" for representing the additional configuration information. A future
   //        service API version will absorb these proposed changes and allow us to retire the extra complexity.
   @added(ServiceApiVersions.v2023_08_01_Preview)
-  @projectedName("json", "dataSources")
-  @projectedName("csharp", "InternalAzureExtensionsDataSources")
   dataSources?: AzureChatExtensionConfiguration[];
 }
 
@@ -213,11 +195,9 @@ Token limits and other settings may limit the number of choices generated.
 """)
 model ChatChoice {
   @doc("The chat message for a given chat completions prompt.")
-  @projectedName("json", "message")
   message?: ChatMessage;
 
   @doc("The ordered index associated with this chat completions choice.")
-  @projectedName("json", "index")
   index: int32;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
@@ -227,8 +207,6 @@ model ChatChoice {
   finishReason: CompletionsFinishReason | null;
 
   @doc("The delta message content for a streaming response.")
-  @projectedName("json", "delta")
-  @projectedName("csharp", "InternalStreamingDeltaMessage")
   delta?: ChatMessage;
 
   @doc("""
@@ -248,15 +226,12 @@ provided prompt data.
 """)
 model ChatCompletions {
   @doc("A unique identifier associated with this chat completions response.")
-  @projectedName("json", "id")
   id: string;
 
   @doc("""
     The first timestamp associated with generation activity for this completions response,
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
     """)
-  @projectedName("json", "created")
-  @projectedName("java", "createdAt")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
 
@@ -265,7 +240,6 @@ model ChatCompletions {
     Generally, `n` choices are generated per provided prompt with a default value of 1.
     Token limits and other settings may limit the number of choices generated.
     """)
-  @projectedName("json", "choices")
   choices: ChatChoice[];
 
   @doc("""
@@ -279,6 +253,5 @@ model ChatCompletions {
   @doc("""
     Usage information for tokens processed and generated as part of this completions operation.
     """)
-  @projectedName("json", "usage")
   usage: CompletionsUsage;
 }

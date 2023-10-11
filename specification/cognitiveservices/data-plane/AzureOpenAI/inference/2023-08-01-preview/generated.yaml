@@ -1,0 +1,1499 @@
+openapi: 3.0.0
+info:
+  title: Azure OpenAI API
+  version: 2023-08-01-preview
+  description: Azure OpenAI APIs for completions and search
+tags: []
+paths:
+  /deployments/{deploymentId}/chat/completions:
+    post:
+      operationId: getChatCompletions
+      description: >-
+        Gets chat completions for the provided chat messages.
+
+        Completions support a wide variety of tasks and generate text that continues from or "completes"
+
+        provided prompt data.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: deploymentId
+          in: path
+          required: true
+          description: Specifies either the model deployment name (when using Azure
+            OpenAI) or model name (when using non-Azure OpenAI) to use for this
+            request.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatCompletions'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatCompletionsOptions'
+  /deployments/{deploymentId}/completions:
+    post:
+      operationId: getCompletions
+      description: >-
+        Gets completions for the provided input prompts.
+
+        Completions support a wide variety of tasks and generate text that continues from or "completes"
+
+        provided prompt data.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: deploymentId
+          in: path
+          required: true
+          description: Specifies either the model deployment name (when using Azure
+            OpenAI) or model name (when using non-Azure OpenAI) to use for this
+            request.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Completions'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompletionsOptions'
+  /deployments/{deploymentId}/embeddings:
+    post:
+      operationId: getEmbeddings
+      description: Return the embeddings for a given prompt.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: deploymentId
+          in: path
+          required: true
+          description: Specifies either the model deployment name (when using Azure
+            OpenAI) or model name (when using non-Azure OpenAI) to use for this
+            request.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Embeddings'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmbeddingsOptions'
+  /deployments/{deploymentId}/extensions/chat/completions:
+    post:
+      operationId: getChatCompletionsWithAzureExtensions
+      description: >-
+        Gets chat completions for the provided chat messages.
+
+        This is an Azure-specific version of chat completions that supports integration with configured data sources and
+
+        other augmentations to the base chat completions capabilities.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: deploymentId
+          in: path
+          required: true
+          description: Specifies either the model deployment name (when using Azure
+            OpenAI) or model name (when using non-Azure OpenAI) to use for this
+            request.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatCompletions'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatCompletionsOptions'
+  /images/generations:submit:
+    post:
+      operationId: beginAzureBatchImageGeneration
+      description: Starts the generation of a batch of images from a text caption
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+      responses:
+        '202':
+          description: The request has been accepted for processing, but processing has
+            not yet completed.
+          headers:
+            Operation-Location:
+              required: true
+              description: The location for monitoring the operation state.
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchImageGenerationOperationResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageGenerationOptions'
+  /operations/images/{operationId}:
+    get:
+      operationId: getAzureBatchImageGenerationOperationStatus
+      description: Returns the status of the images operation
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: operationId
+          in: path
+          required: true
+          description: .
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchImageGenerationOperationResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+security:
+  - ApiKeyAuth: []
+  - OAuth2Auth:
+      - https://cognitiveservices.azure.com/.default
+components:
+  parameters:
+    Azure.Core.Foundations.ApiVersionParameter:
+      name: api-version
+      in: query
+      required: true
+      description: The API version to use for this operation.
+      schema:
+        type: string
+        minLength: 1
+  schemas:
+    Azure.Core.Foundations.Error:
+      type: object
+      description: The error object.
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: One of a server-defined set of error codes.
+        message:
+          type: string
+          description: A human-readable representation of the error.
+        target:
+          type: string
+          description: The target of the error.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Azure.Core.Foundations.Error'
+          description: An array of details about specific errors that led to this reported
+            error.
+        innererror:
+          allOf:
+            - $ref: '#/components/schemas/Azure.Core.Foundations.InnerError'
+          description: An object containing more specific information than the current
+            object about the error.
+    Azure.Core.Foundations.ErrorResponse:
+      type: object
+      description: A response containing error details.
+      required:
+        - error
+      properties:
+        error:
+          allOf:
+            - $ref: '#/components/schemas/Azure.Core.Foundations.Error'
+          description: The error object.
+    Azure.Core.Foundations.InnerError:
+      type: object
+      description: An object containing more specific information about the error. As
+        per Microsoft One API guidelines -
+        https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
+      properties:
+        code:
+          type: string
+          description: One of a server-defined set of error codes.
+        innererror:
+          allOf:
+            - $ref: '#/components/schemas/Azure.Core.Foundations.InnerError'
+          description: Inner error.
+    AzureChatExtensionConfiguration:
+      type: object
+      description: >2-
+          A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat
+          completions request that should use Azure OpenAI chat extensions to augment the response behavior.
+          The use of this configuration is compatible only with Azure OpenAI.
+      required:
+        - type
+        - parameters
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/AzureChatExtensionType'
+          description: >2-
+              The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.
+              Azure chat extensions are only compatible with Azure OpenAI.
+        parameters:
+          description: >2-
+              The configuration payload used for the Azure chat extension. The structure payload details are specific to the
+              extension being configured.
+              Azure chat extensions are only compatible with Azure OpenAI.
+    AzureChatExtensionType:
+      type: string
+      description: >2-
+          A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat
+          completions request that should use Azure OpenAI chat extensions to augment the response behavior.
+          The use of this configuration is compatible only with Azure OpenAI.
+      enum:
+        - AzureCognitiveSearch
+    AzureChatExtensionsMessageContext:
+      type: object
+      description: >2-
+          A representation of the additional context information available when Azure OpenAI chat extensions are involved
+          in the generation of a corresponding chat completions response. This context information is only populated when
+          using an Azure OpenAI request configured to use a matching extension.
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+          description: >2-
+              The contextual message payload associated with the Azure chat extensions used for a chat completions request.
+              These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the
+              course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat
+              extensions.
+    AzureCognitiveSearchChatExtensionConfiguration:
+      type: object
+      description: >-
+        A specific representation of configurable options for Azure Cognitive
+        Search when using it as an Azure OpenAI chat
+
+        extension.
+      required:
+        - type
+        - endpoint
+        - key
+        - indexName
+      properties:
+        type:
+          type: string
+          enum:
+            - AzureCognitiveSearch
+          description: >-
+            The type label to use when configuring Azure OpenAI chat extensions.
+            This should typically not be changed from its
+
+            default value for Azure Cognitive Search.
+        endpoint:
+          type: string
+          format: uri
+          description: The absolute endpoint path for the Azure Cognitive Search resource
+            to use.
+        key:
+          type: string
+          description: The API admin key to use with the specified Azure Cognitive Search
+            endpoint.
+        indexName:
+          type: string
+          description: The name of the index to use as available in the referenced Azure
+            Cognitive Search resource.
+        fieldsMapping:
+          allOf:
+            - $ref: '#/components/schemas/AzureCognitiveSearchIndexFieldMappingOptions'
+          description: Customized field mapping behavior to use when interacting with the
+            search index.
+        topNDocuments:
+          type: integer
+          format: int32
+          description: The configured top number of documents to feature for the
+            configured query.
+        queryType:
+          allOf:
+            - $ref: '#/components/schemas/AzureCognitiveSearchQueryType'
+          description: The query type to use with Azure Cognitive Search.
+        inScope:
+          type: boolean
+          description: Whether queries should be restricted to use of indexed data.
+        semanticConfiguration:
+          type: string
+          description: The additional semantic configuration for the query.
+        embeddingEndpoint:
+          type: string
+          format: uri
+          description: When using embeddings for search, specifies the resource URL from
+            which embeddings should be retrieved.
+        embeddingKey:
+          type: string
+          description: When using embeddings, specifies the API key to use with the
+            provided embeddings endpoint.
+    AzureCognitiveSearchIndexFieldMappingOptions:
+      type: object
+      description: Optional settings to control how fields are processed when using a
+        configured Azure Cognitive Search resource.
+      properties:
+        titleField:
+          type: string
+          description: The name of the index field to use as a title.
+        urlField:
+          type: string
+          description: The name of the index field to use as a URL.
+        filepathField:
+          type: string
+          description: The name of the index field to use as a filepath.
+        contentFieldNames:
+          type: array
+          items:
+            type: string
+          description: The names of index fields that should be treated as content.
+        contentFieldSeparator:
+          type: string
+          description: The separator pattern that content fields should use.
+        vectorFields:
+          type: array
+          items:
+            type: string
+          description: The names of fields that represent vector data.
+    AzureCognitiveSearchQueryType:
+      type: string
+      description: The type of Azure Cognitive Search retrieval query that should be
+        executed when using it as an Azure OpenAI chat extension.
+      enum:
+        - simple
+        - semantic
+        - vector
+        - vectorSimpleHybrid
+        - vectorSemanticHybrid
+    AzureOpenAIOperationState:
+      type: string
+      description: The state of a job or item.
+      enum:
+        - notRunning
+        - running
+        - succeeded
+        - canceled
+        - failed
+    BatchImageGenerationOperationResponse:
+      type: object
+      description: A polling status update or final response payload for an image operation.
+      required:
+        - id
+        - created
+        - status
+      properties:
+        id:
+          type: string
+          description: The ID of the operation.
+        created:
+          type: integer
+          format: unixtime
+          description: A timestamp when this job or item was created (in unix epochs).
+        expires:
+          type: integer
+          format: int64
+          description: A timestamp when this operation and its associated images expire
+            and will be deleted (in unix epochs).
+        result:
+          allOf:
+            - $ref: '#/components/schemas/ImageGenerations'
+          description: The result of the operation if the operation succeeded.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/AzureOpenAIOperationState'
+          description: The status of the operation
+        error:
+          allOf:
+            - $ref: '#/components/schemas/Azure.Core.Foundations.Error'
+          description: The error if the operation failed.
+    ChatChoice:
+      type: object
+      description: >-
+        The representation of a single prompt completion as part of an overall
+        chat completions request.
+
+        Generally, `n` choices are generated per provided prompt with a default value of 1.
+
+        Token limits and other settings may limit the number of choices generated.
+      required:
+        - index
+        - finish_reason
+      properties:
+        message:
+          allOf:
+            - $ref: '#/components/schemas/ChatMessage'
+          description: The chat message for a given chat completions prompt.
+        index:
+          type: integer
+          format: int32
+          description: The ordered index associated with this chat completions choice.
+        finish_reason:
+          oneOf:
+            - $ref: '#/components/schemas/CompletionsFinishReason'
+          nullable: true
+          description: The reason that this chat completions choice completed its generated.
+        delta:
+          allOf:
+            - $ref: '#/components/schemas/ChatMessage'
+          description: The delta message content for a streaming response.
+        content_filter_results:
+          allOf:
+            - $ref: '#/components/schemas/ContentFilterResults'
+          description: >-
+            Information about the content filtering category (hate, sexual,
+            violence, self_harm), if it
+
+            has been detected, as well as the severity level (very_low, low, medium, high-scale that
+
+            determines the intensity and risk level of harmful content) and if it has been filtered or not.
+    ChatCompletions:
+      type: object
+      description: >-
+        Representation of the response data from a chat completions request.
+
+        Completions support a wide variety of tasks and generate text that continues from or "completes"
+
+        provided prompt data.
+      required:
+        - id
+        - created
+        - choices
+        - usage
+      properties:
+        id:
+          type: string
+          description: A unique identifier associated with this chat completions response.
+        created:
+          type: integer
+          format: unixtime
+          description: >-
+            The first timestamp associated with generation activity for this
+            completions response,
+
+            represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatChoice'
+          description: >-
+            The collection of completions choices associated with this
+            completions response.
+
+            Generally, `n` choices are generated per provided prompt with a default value of 1.
+
+            Token limits and other settings may limit the number of choices generated.
+        prompt_filter_results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromptFilterResult'
+          description: >-
+            Content filtering results for zero or more prompts in the request.
+            In a streaming request,
+
+            results for different prompts may arrive at different times or in different orders.
+        usage:
+          allOf:
+            - $ref: '#/components/schemas/CompletionsUsage'
+          description: Usage information for tokens processed and generated as part of
+            this completions operation.
+    ChatCompletionsOptions:
+      type: object
+      description: >-
+        The configuration information for a chat completions request.
+
+        Completions support a wide variety of tasks and generate text that continues from or "completes"
+
+        provided prompt data.
+      required:
+        - messages
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+          description: >-
+            The collection of context messages associated with this chat
+            completions request.
+
+            Typical usage begins with a chat message for the System role that provides instructions for
+
+            the behavior of the assistant, followed by alternating messages between the User and
+
+            Assistant roles.
+        functions:
+          type: array
+          items:
+            $ref: '#/components/schemas/FunctionDefinition'
+          description: A list of functions the model may generate JSON inputs for.
+        function_call:
+          anyOf:
+            - $ref: '#/components/schemas/FunctionCallPreset'
+            - $ref: '#/components/schemas/FunctionName'
+          description: >-
+            Controls how the model responds to function calls. "none" means the
+            model does not call a function,
+
+            and responds to the end-user. "auto" means the model can pick between an end-user or calling a function.
+             Specifying a particular function via `{"name": "my_function"}` forces the model to call that function.
+             "none" is the default when no functions are present. "auto" is the default if functions are present.
+        max_tokens:
+          type: integer
+          format: int32
+          description: The maximum number of tokens to generate.
+        temperature:
+          type: number
+          format: float
+          description: >-
+            The sampling temperature to use that controls the apparent
+            creativity of generated completions.
+
+            Higher values will make output more random while lower values will make results more focused
+
+            and deterministic.
+
+            It is not recommended to modify temperature and top_p for the same completions request as the
+
+            interaction of these two settings is difficult to predict.
+        top_p:
+          type: number
+          format: float
+          description: >-
+            An alternative to sampling with temperature called nucleus sampling.
+            This value causes the
+
+            model to consider the results of tokens with the provided probability mass. As an example, a
+
+            value of 0.15 will cause only the tokens comprising the top 15% of probability mass to be
+
+            considered.
+
+            It is not recommended to modify temperature and top_p for the same completions request as the
+
+            interaction of these two settings is difficult to predict.
+        logit_bias:
+          type: object
+          description: >-
+            A map between GPT token IDs and bias scores that influences the
+            probability of specific tokens
+
+            appearing in a completions response. Token IDs are computed via external tokenizer tools, while
+
+            bias scores reside in the range of -100 to 100 with minimum and maximum values corresponding to
+
+            a full ban or exclusive selection of a token, respectively. The exact behavior of a given bias
+
+            score varies by model.
+          additionalProperties:
+            type: integer
+            format: int32
+        user:
+          type: string
+          description: >-
+            An identifier for the caller or end user of the operation. This may
+            be used for tracking
+
+            or rate-limiting purposes.
+        n:
+          type: integer
+          format: int32
+          description: >-
+            The number of chat completions choices that should be generated for
+            a chat completions
+
+            response.
+
+            Because this setting can generate many completions, it may quickly consume your token quota.
+
+            Use carefully and ensure reasonable settings for max_tokens and stop.
+        stop:
+          type: array
+          items:
+            type: string
+          description: A collection of textual sequences that will end completions
+            generation.
+        presence_penalty:
+          type: number
+          format: float
+          description: >-
+            A value that influences the probability of generated tokens
+            appearing based on their existing
+
+            presence in generated text.
+
+            Positive values will make tokens less likely to appear when they already exist and increase the
+
+            model's likelihood to output new topics.
+        frequency_penalty:
+          type: number
+          format: float
+          description: >-
+            A value that influences the probability of generated tokens
+            appearing based on their cumulative
+
+            frequency in generated text.
+
+            Positive values will make tokens less likely to appear as their frequency increases and
+
+            decrease the likelihood of the model repeating the same statements verbatim.
+        stream:
+          type: boolean
+          description: A value indicating whether chat completions should be streamed for
+            this request.
+        model:
+          type: string
+          description: >-
+            The model name to provide as part of this completions request.
+
+            Not applicable to Azure OpenAI, where deployment information should be included in the Azure
+
+            resource URI that's connected to.
+        dataSources:
+          type: array
+          items:
+            $ref: '#/components/schemas/AzureChatExtensionConfiguration'
+          description: >2-
+              The configuration entries for Azure OpenAI chat extensions that use them.
+              This additional specification is only compatible with Azure OpenAI.
+    ChatMessage:
+      type: object
+      description: A single, role-attributed message within a chat completion interaction.
+      required:
+        - role
+        - content
+      properties:
+        role:
+          allOf:
+            - $ref: '#/components/schemas/ChatRole'
+          description: The role associated with this message payload.
+        content:
+          type: string
+          nullable: true
+          description: The text associated with this message payload.
+        name:
+          type: string
+          description: >-
+            The name of the author of this message. `name` is required if role
+            is `function`, and it should be the name of the
+
+            function whose response is in the `content`. May contain a-z, A-Z, 0-9, and underscores, with a maximum length of
+
+            64 characters.
+        function_call:
+          allOf:
+            - $ref: '#/components/schemas/FunctionCall'
+          description: The name and arguments of a function that should be called, as
+            generated by the model.
+        context:
+          allOf:
+            - $ref: '#/components/schemas/AzureChatExtensionsMessageContext'
+          description: >2-
+              Additional context data associated with a chat message when requesting chat completions using compatible Azure
+              OpenAI chat extensions. This includes information like the intermediate data source retrievals used to service a
+              request.
+              This context information is only populated when using Azure OpenAI with chat extensions capabilities configured.
+    ChatRole:
+      type: string
+      description: A description of the intended purpose of a message within a chat
+        completions interaction.
+      enum:
+        - system
+        - assistant
+        - user
+        - function
+        - tool
+    Choice:
+      type: object
+      description: >-
+        The representation of a single prompt completion as part of an overall
+        completions request.
+
+        Generally, `n` choices are generated per provided prompt with a default value of 1.
+
+        Token limits and other settings may limit the number of choices generated.
+      required:
+        - text
+        - index
+        - logprobs
+        - finish_reason
+      properties:
+        text:
+          type: string
+          description: The generated text for a given completions prompt.
+        index:
+          type: integer
+          format: int32
+          description: The ordered index associated with this completions choice.
+        content_filter_results:
+          allOf:
+            - $ref: '#/components/schemas/ContentFilterResults'
+          description: >-
+            Information about the content filtering category (hate, sexual,
+            violence, self_harm), if it
+
+            has been detected, as well as the severity level (very_low, low, medium, high-scale that
+
+            determines the intensity and risk level of harmful content) and if it has been filtered or not.
+        logprobs:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/CompletionsLogProbabilityModel'
+          nullable: true
+          description: The log probabilities model for tokens associated with this
+            completions choice.
+        finish_reason:
+          oneOf:
+            - $ref: '#/components/schemas/CompletionsFinishReason'
+          nullable: true
+          description: Reason for finishing
+    Completions:
+      type: object
+      description: >-
+        Representation of the response data from a completions request.
+
+        Completions support a wide variety of tasks and generate text that continues from or "completes"
+
+        provided prompt data.
+      required:
+        - id
+        - created
+        - choices
+        - usage
+      properties:
+        id:
+          type: string
+          description: A unique identifier associated with this completions response.
+        created:
+          type: integer
+          format: unixtime
+          description: >-
+            The first timestamp associated with generation activity for this
+            completions response,
+
+            represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
+        prompt_filter_results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromptFilterResult'
+          description: >-
+            Content filtering results for zero or more prompts in the request.
+            In a streaming request,
+
+            results for different prompts may arrive at different times or in different orders.
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Choice'
+          description: >-
+            The collection of completions choices associated with this
+            completions response.
+
+            Generally, `n` choices are generated per provided prompt with a default value of 1.
+
+            Token limits and other settings may limit the number of choices generated.
+        usage:
+          allOf:
+            - $ref: '#/components/schemas/CompletionsUsage'
+          description: Usage information for tokens processed and generated as part of
+            this completions operation.
+    CompletionsFinishReason:
+      type: string
+      description: Representation of the manner in which a completions response concluded.
+      enum:
+        - stop
+        - length
+        - content_filter
+        - function_call
+    CompletionsLogProbabilityModel:
+      type: object
+      description: Representation of a log probabilities model for a completions generation.
+      required:
+        - tokens
+        - token_logprobs
+        - top_logprobs
+        - text_offset
+      properties:
+        tokens:
+          type: array
+          items:
+            type: string
+          description: The textual forms of tokens evaluated in this probability model.
+        token_logprobs:
+          type: array
+          items:
+            type: number
+            format: float
+            nullable: true
+          description: A collection of log probability values for the tokens in this
+            completions data.
+        top_logprobs:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: number
+              format: float
+              nullable: true
+          description: A mapping of tokens to maximum log probability values in this
+            completions data.
+        text_offset:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: The text offsets associated with tokens in this completions data.
+    CompletionsOptions:
+      type: object
+      description: >-
+        The configuration information for a completions request.
+
+        Completions support a wide variety of tasks and generate text that continues from or "completes"
+
+        provided prompt data.
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: array
+          items:
+            type: string
+          description: The prompts to generate completions from.
+        max_tokens:
+          type: integer
+          format: int32
+          description: The maximum number of tokens to generate.
+        temperature:
+          type: number
+          format: float
+          description: >-
+            The sampling temperature to use that controls the apparent
+            creativity of generated completions.
+
+            Higher values will make output more random while lower values will make results more focused
+
+            and deterministic.
+
+            It is not recommended to modify temperature and top_p for the same completions request as the
+
+            interaction of these two settings is difficult to predict.
+        top_p:
+          type: number
+          format: float
+          description: >-
+            An alternative to sampling with temperature called nucleus sampling.
+            This value causes the
+
+            model to consider the results of tokens with the provided probability mass. As an example, a
+
+            value of 0.15 will cause only the tokens comprising the top 15% of probability mass to be
+
+            considered.
+
+            It is not recommended to modify temperature and top_p for the same completions request as the
+
+            interaction of these two settings is difficult to predict.
+        logit_bias:
+          type: object
+          description: >-
+            A map between GPT token IDs and bias scores that influences the
+            probability of specific tokens
+
+            appearing in a completions response. Token IDs are computed via external tokenizer tools, while
+
+            bias scores reside in the range of -100 to 100 with minimum and maximum values corresponding to
+
+            a full ban or exclusive selection of a token, respectively. The exact behavior of a given bias
+
+            score varies by model.
+          additionalProperties:
+            type: integer
+            format: int32
+        user:
+          type: string
+          description: >-
+            An identifier for the caller or end user of the operation. This may
+            be used for tracking
+
+            or rate-limiting purposes.
+        n:
+          type: integer
+          format: int32
+          description: >-
+            The number of completions choices that should be generated per
+            provided prompt as part of an
+
+            overall completions response.
+
+            Because this setting can generate many completions, it may quickly consume your token quota.
+
+            Use carefully and ensure reasonable settings for max_tokens and stop.
+        logprobs:
+          type: integer
+          format: int32
+          description: >-
+            A value that controls the emission of log probabilities for the
+            provided number of most likely
+
+            tokens within a completions response.
+        echo:
+          type: boolean
+          description: >-
+            A value specifying whether completions responses should include
+            input prompts as prefixes to
+
+            their generated output.
+        stop:
+          type: array
+          items:
+            type: string
+          description: A collection of textual sequences that will end completions
+            generation.
+        presence_penalty:
+          type: number
+          format: float
+          description: >-
+            A value that influences the probability of generated tokens
+            appearing based on their existing
+
+            presence in generated text.
+
+            Positive values will make tokens less likely to appear when they already exist and increase the
+
+            model's likelihood to output new topics.
+        frequency_penalty:
+          type: number
+          format: float
+          description: >-
+            A value that influences the probability of generated tokens
+            appearing based on their cumulative
+
+            frequency in generated text.
+
+            Positive values will make tokens less likely to appear as their frequency increases and
+
+            decrease the likelihood of the model repeating the same statements verbatim.
+        best_of:
+          type: integer
+          format: int32
+          description: >-
+            A value that controls how many completions will be internally
+            generated prior to response
+
+            formulation.
+
+            When used together with n, best_of controls the number of candidate completions and must be
+
+            greater than n.
+
+            Because this setting can generate many completions, it may quickly consume your token quota.
+
+            Use carefully and ensure reasonable settings for max_tokens and stop.
+        stream:
+          type: boolean
+          description: A value indicating whether chat completions should be streamed for
+            this request.
+        model:
+          type: string
+          description: >-
+            The model name to provide as part of this completions request.
+
+            Not applicable to Azure OpenAI, where deployment information should be included in the Azure
+
+            resource URI that's connected to.
+    CompletionsUsage:
+      type: object
+      description: >-
+        Representation of the token counts processed for a completions request.
+
+        Counts consider all tokens across prompts, choices, choice alternates, best_of generations, and
+
+        other consumers.
+      required:
+        - completion_tokens
+        - prompt_tokens
+        - total_tokens
+      properties:
+        completion_tokens:
+          type: integer
+          format: int32
+          description: The number of tokens generated across all completions emissions.
+        prompt_tokens:
+          type: integer
+          format: int32
+          description: The number of tokens in the provided prompts for the completions
+            request.
+        total_tokens:
+          type: integer
+          format: int32
+          description: The total number of tokens processed for the completions request
+            and response.
+    ContentFilterResult:
+      type: object
+      description: Information about filtered content severity level and if it has
+        been filtered or not.
+      required:
+        - severity
+        - filtered
+      properties:
+        severity:
+          allOf:
+            - $ref: '#/components/schemas/ContentFilterSeverity'
+          description: Ratings for the intensity and risk level of filtered content.
+        filtered:
+          type: boolean
+          description: A value indicating whether or not the content has been filtered.
+    ContentFilterResults:
+      type: object
+      description: Information about the content filtering category, if it has been
+        detected.
+      properties:
+        sexual:
+          allOf:
+            - $ref: '#/components/schemas/ContentFilterResult'
+          description: >-
+            Describes language related to anatomical organs and genitals,
+            romantic relationships,
+             acts portrayed in erotic or affectionate terms, physical sexual acts, including 
+             those portrayed as an assault or a forced sexual violent act against one’s will, 
+             prostitution, pornography, and abuse.
+        violence:
+          allOf:
+            - $ref: '#/components/schemas/ContentFilterResult'
+          description: >-
+            Describes language related to physical actions intended to hurt,
+            injure, damage, or 
+
+            kill someone or something; describes weapons, etc.
+        hate:
+          allOf:
+            - $ref: '#/components/schemas/ContentFilterResult'
+          description: >-
+            Describes language attacks or uses that include pejorative or
+            discriminatory language 
+
+            with reference to a person or identity group on the basis of certain differentiating 
+
+            attributes of these groups including but not limited to race, ethnicity, nationality,
+
+            gender identity and expression, sexual orientation, religion, immigration status, ability
+
+            status, personal appearance, and body size.
+        self_harm:
+          allOf:
+            - $ref: '#/components/schemas/ContentFilterResult'
+          description: >-
+            Describes language related to physical actions intended to purposely
+            hurt, injure,
+
+            or damage one’s body, or kill oneself.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/Azure.Core.Foundations.Error'
+          description: |-
+            Describes an error returned if the content filtering system is
+            down or otherwise unable to complete the operation in time.
+    ContentFilterSeverity:
+      type: string
+      description: Ratings for the intensity and risk level of harmful content.
+      enum:
+        - safe
+        - low
+        - medium
+        - high
+    Deployment:
+      type: object
+      description: A specific deployment
+      required:
+        - deploymentId
+      properties:
+        deploymentId:
+          type: string
+          description: Specifies either the model deployment name (when using Azure
+            OpenAI) or model name (when using non-Azure OpenAI) to use for this
+            request.
+          readOnly: true
+    EmbeddingItem:
+      type: object
+      description: Representation of a single embeddings relatedness comparison.
+      required:
+        - embedding
+        - index
+      properties:
+        embedding:
+          type: array
+          items:
+            type: number
+            format: float
+          description: >-
+            List of embeddings value for the input prompt. These represent a
+            measurement of the
+
+            vector-based relatedness of the provided input.
+        index:
+          type: integer
+          format: int32
+          description: Index of the prompt to which the EmbeddingItem corresponds.
+    Embeddings:
+      type: object
+      description: >-
+        Representation of the response data from an embeddings request.
+
+        Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
+
+        recommendations, and other similar scenarios.
+      required:
+        - data
+        - usage
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmbeddingItem'
+          description: Embedding values for the prompts submitted in the request.
+        usage:
+          allOf:
+            - $ref: '#/components/schemas/EmbeddingsUsage'
+          description: Usage counts for tokens input using the embeddings API.
+    EmbeddingsOptions:
+      type: object
+      description: >-
+        The configuration information for an embeddings request.
+
+        Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
+
+        recommendations, and other similar scenarios.
+      required:
+        - input
+      properties:
+        user:
+          type: string
+          description: >-
+            An identifier for the caller or end user of the operation. This may
+            be used for tracking
+
+            or rate-limiting purposes.
+        model:
+          type: string
+          description: >-
+            The model name to provide as part of this embeddings request.
+
+            Not applicable to Azure OpenAI, where deployment information should be included in the Azure
+
+            resource URI that's connected to.
+        input:
+          type: array
+          items:
+            type: string
+          description: >-
+            Input texts to get embeddings for, encoded as a an array of strings.
+
+            Each input must not exceed 2048 tokens in length.
+
+
+            Unless you are embedding code, we suggest replacing newlines (\n) in your input with a single space,
+
+            as we have observed inferior results when newlines are present.
+    EmbeddingsUsage:
+      type: object
+      description: Measurement of the amount of tokens used in this request and response.
+      required:
+        - prompt_tokens
+        - total_tokens
+      properties:
+        prompt_tokens:
+          type: integer
+          format: int32
+          description: Number of tokens sent in the original request.
+        total_tokens:
+          type: integer
+          format: int32
+          description: Total number of tokens transacted in this request/response.
+    FunctionCall:
+      type: object
+      description: The name and arguments of a function that should be called, as
+        generated by the model.
+      required:
+        - name
+        - arguments
+      properties:
+        name:
+          type: string
+          description: The name of the function to call.
+        arguments:
+          type: string
+          description: >-
+            The arguments to call the function with, as generated by the model
+            in JSON format.
+
+            Note that the model does not always generate valid JSON, and may hallucinate parameters
+
+            not defined by your function schema. Validate the arguments in your code before calling
+
+            your function.
+    FunctionCallPreset:
+      type: string
+      description: >-
+        The collection of predefined behaviors for handling request-provided
+        function information in a chat completions
+
+        operation.
+      enum:
+        - auto
+        - none
+    FunctionDefinition:
+      type: object
+      description: The definition of a caller-specified function that chat completions
+        may invoke in response to matching user input.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the function to be called.
+        description:
+          type: string
+          description: >-
+            A description of what the function does. The model will use this
+            description when selecting the function and
+
+            interpreting its parameters.
+        parameters:
+          description: The parameters the functions accepts, described as a JSON Schema
+            object.
+    FunctionName:
+      type: object
+      description: >-
+        A structure that specifies the exact name of a specific,
+        request-provided function to use when processing a chat
+
+        completions operation.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the function to call.
+    ImageGenerationOptions:
+      type: object
+      description: Represents the request data used to generate images.
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: A description of the desired images.
+        n:
+          type: integer
+          format: int32
+          description: The number of images to generate (defaults to 1).
+          default: 1
+        size:
+          allOf:
+            - $ref: '#/components/schemas/ImageSize'
+          description: The desired size of the generated images. Must be one of 256x256,
+            512x512, or 1024x1024 (defaults to 1024x1024).
+          default: 1024x1024
+        response_format:
+          allOf:
+            - $ref: '#/components/schemas/ImageGenerationResponseFormat'
+          description: >2-
+              The format in which image generation response items should be presented.
+              Azure OpenAI only supports URL response items.
+        user:
+          type: string
+          description: A unique identifier representing your end-user, which can help to
+            monitor and detect abuse.
+    ImageGenerationResponseFormat:
+      type: string
+      description: The format in which the generated images are returned.
+      enum:
+        - url
+        - b64_json
+    ImageGenerations:
+      type: object
+      description: The result of the operation if the operation succeeded.
+      required:
+        - created
+        - data
+      properties:
+        created:
+          type: integer
+          format: unixtime
+          description: A timestamp when this job or item was created (in unix epochs).
+        data:
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/ImageLocation'
+            - type: array
+              items:
+                $ref: '#/components/schemas/ImagePayload'
+          description: The images generated by the operator.
+    ImageLocation:
+      type: object
+      description: An image response item that provides a URL from which an image may
+        be accessed.
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The URL that provides temporary access to download the generated
+            image.
+    ImagePayload:
+      type: object
+      description: An image response item that directly represents the image data as a
+        base64-encoded string.
+      required:
+        - b64_json
+      properties:
+        b64_json:
+          type: string
+          description: The complete data for an image represented as a base64-encoded
+            string.
+    ImageSize:
+      type: string
+      description: The desired size of the generated images. Must be one of 256x256,
+        512x512, or 1024x1024.
+      enum:
+        - 256x256
+        - 512x512
+        - 1024x1024
+    PromptFilterResult:
+      type: object
+      description: Content filtering results for a single prompt in the request.
+      required:
+        - prompt_index
+      properties:
+        prompt_index:
+          type: integer
+          format: int32
+          description: The index of this prompt in the set of prompt results
+        content_filter_results:
+          allOf:
+            - $ref: '#/components/schemas/ContentFilterResults'
+          description: Content filtering results for this prompt
+    ServiceApiVersions:
+      type: string
+      enum:
+        - 2022-12-01
+        - 2023-05-15
+        - 2023-06-01-preview
+        - 2023-07-01-preview
+        - 2023-08-01-preview
+        - 2023-09-01-preview
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: api-key
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          scopes:
+            https://cognitiveservices.azure.com/.default: ''
+servers:
+  - url: '{endpoint}/openai'
+    description: Azure OpenAI APIs for completions and search
+    variables:
+      endpoint:
+        default: ''
+        description: >-
+          Supported Cognitive Services endpoints (protocol and hostname, for
+          example:
+
+          https://westus.api.cognitive.microsoft.com).

@@ -38,7 +38,6 @@ model AudioTranslationOptions {
   The audio data to translate. This must be the binary content of a file in one of the supported media formats:
    flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.
   """)
-  @projectedName("csharp", "AudioData")
   file: bytes;
 
   @doc("""
@@ -66,7 +65,6 @@ model AudioTranslationOptions {
   // Implementation note: developer-facing specification of deployment or model by clients should be controlled either
   // via an operation parameter or by this request body field -- but only one of those. This field should be hidden by
   // clients if operation parameters are used and populated into the request body on an as-needed basis.
-  @projectedName("csharp", "InternalNonAzureModelName")
   `model`?: string;
 }
 
@@ -96,7 +94,6 @@ model AudioTranslationSegment {
 
   @doc("The average log probability associated with this audio segment.")
   @projectedName("json", "avg_logprob")
-  @projectedName("csharp", "AverageLogProbability")
   avgLogprob: float32;
 
   @doc("The compression ratio of this audio segment.")
@@ -105,7 +102,6 @@ model AudioTranslationSegment {
 
   @doc("The probability of no speech detection within this audio segment.")
   @projectedName("json", "no_speech_prob")
-  @projectedName("csharp", "NoSpeechProbability")
   noSpeechProb: float32;
 
   @doc("The token IDs matching the translated text in this audio segment.")
@@ -128,7 +124,6 @@ model AudioTranslation {
   text: string;
 
   @doc("The label that describes which operation type generated the accompanying response data.")
-  @projectedName("csharp", "InternalAudioTaskLabel")
   task?: AudioTaskLabel;
 
   @doc("""

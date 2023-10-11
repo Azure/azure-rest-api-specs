@@ -16,7 +16,6 @@ model EmbeddingsOptions {
     An identifier for the caller or end user of the operation. This may be used for tracking
     or rate-limiting purposes.
     """)
-  @projectedName("json", "user")
   user?: string;
 
   @doc("""
@@ -24,8 +23,6 @@ model EmbeddingsOptions {
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
     resource URI that's connected to.
     """)
-  @projectedName("json", "model")
-  @projectedName("csharp", "InternalNonAzureModelName")
   `model`?: string;
 
   @doc("""
@@ -60,7 +57,6 @@ model EmbeddingItem {
   embedding: float32[];
 
   @doc("Index of the prompt to which the EmbeddingItem corresponds.")
-  @projectedName("java", "promptIndex")
   index: int32;
 }
 

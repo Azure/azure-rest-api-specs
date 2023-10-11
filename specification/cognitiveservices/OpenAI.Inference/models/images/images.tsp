@@ -40,7 +40,6 @@ model ImageGenerationOptions {
   prompt: string;
 
   @doc("The number of images to generate (defaults to 1).")
-  @projectedName("csharp", "ImageCount")
   n?: int32 = 1;
 
   @doc("The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024 (defaults to 1024x1024).")
@@ -76,8 +75,6 @@ model ImagePayload {
 @added(ServiceApiVersions.v2023_06_01_Preview)
 model ImageGenerations {
   @doc("A timestamp when this job or item was created (in unix epochs).")
-  @projectedName("json", "created")
-  @projectedName("java", "createdAt")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
 
@@ -97,8 +94,6 @@ model BatchImageGenerationOperationResponse {
   id: string;
 
   @doc("A timestamp when this job or item was created (in unix epochs).")
-  @projectedName("json", "created")
-  @projectedName("java", "createdAt")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
 
