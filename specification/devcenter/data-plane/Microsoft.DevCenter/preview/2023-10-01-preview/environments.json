@@ -277,7 +277,7 @@
             "description": "Updatable environment properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnvironmentPatchProperties"
+              "$ref": "#/definitions/Environment"
             }
           }
         ],
@@ -1084,7 +1084,7 @@
       "properties": {
         "parameters": {
           "type": "object",
-          "description": "Parameters object for the environment."
+          "description": "Parameters object for the environment. Can only be updated via create or replace."
         }
       }
     },
@@ -1120,7 +1120,7 @@
         },
         "environmentType": {
           "type": "string",
-          "description": "Environment type.",
+          "description": "The name of the environment type. Cannot be updated after creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1143,7 +1143,7 @@
         },
         "catalogName": {
           "type": "string",
-          "description": "Name of the catalog.",
+          "description": "The name of the catalog. Cannot be updated after creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1151,7 +1151,7 @@
         },
         "environmentDefinitionName": {
           "type": "string",
-          "description": "Name of the environment definition.",
+          "description": "The name of the environment definition. Cannot be updated after creation.",
           "x-ms-mutability": [
             "read",
             "create"
