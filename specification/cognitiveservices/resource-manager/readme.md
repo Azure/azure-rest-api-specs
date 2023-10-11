@@ -43,9 +43,8 @@ input-file:
   - Microsoft.CognitiveServices/preview/2023-10-01-preview/cognitiveservices.json
 suppressions:    
   - code:  ResourceNameRestriction
-    reason: The resource name parameter 'deploymentName' is not a new added parameter will cause breaking change if add a 'pattern' restriction. 
-    where:
-      - Microsoft.CognitiveServices/preview/2023-10-01-preview/cognitiveservices.json
+    reason: The resource name parameter 'deploymentName' is not a new added parameter and was already implemented in previous versions of API, we cannot add pattern now.
+    from: cognitiveservices.json
 ```
 
 ### Tag: package-2023-05
