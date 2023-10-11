@@ -354,12 +354,6 @@
             "$ref": "./types.json#/parameters/customerName"
           },
           {
-            "in": "query",
-            "name": "enablePagination",
-            "type": "boolean",
-            "default": false
-          },
-          {
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
@@ -660,12 +654,6 @@
           },
           {
             "$ref": "./types.json#/parameters/invoiceSectionName"
-          },
-          {
-            "in": "query",
-            "name": "enablePagination",
-            "type": "boolean",
-            "default": false
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -1720,6 +1708,9 @@
           "type": "string",
           "readOnly": true
         },
+        "createdByPrincipalPuid": {
+          "type": "string"
+        },
         "createdByUserEmailAddress": {
           "description": "The email address of the user who created the role assignment. This is supported only for billing accounts with agreement type Enterprise Agreement.",
           "type": "string",
@@ -1760,6 +1751,9 @@
             "modelAsString": true
           }
         },
+        "principalPuid": {
+          "type": "string"
+        },
         "principalId": {
           "description": "The principal id of the user to whom the role was assigned.",
           "type": "string"
@@ -1774,8 +1768,7 @@
         },
         "scope": {
           "description": "The scope at which the role was assigned.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "userAuthenticationType": {
           "description": "The authentication type of the user, whether Organization or MSA, of the user to whom the role was assigned. This is supported only for billing accounts with agreement type Enterprise Agreement.",
