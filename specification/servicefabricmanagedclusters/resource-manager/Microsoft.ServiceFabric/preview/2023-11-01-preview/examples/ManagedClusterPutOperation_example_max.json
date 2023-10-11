@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
-    "api-version": "2023-09-01-preview",
+    "api-version": "2023-11-01-preview",
     "parameters": {
       "location": "eastus",
       "tags": {},
@@ -100,6 +100,7 @@
         "zonalUpdateMode": "Fast",
         "enableIpv6": true,
         "publicIPPrefixId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.Network/publicIPPrefixes/myPublicIPPrefix",
+        "publicIPv6PrefixId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.Network/publicIPPrefixes/myPublicIPv6Prefix",
         "ipTags": [
           {
             "ipTagType": "FirstPartyUsage",
@@ -125,15 +126,34 @@
           }
         ],
         "useCustomVnet": true,
-        "ddosProtectionPlanId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/ddosProtectionPlans/myDDoSProtectionPlan"
+        "ddosProtectionPlanId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/ddosProtectionPlans/myDDoSProtectionPlan",
+        "upgradeDescription": {
+          "forceRestart": false,
+          "monitoringPolicy": {
+            "healthCheckWaitDuration": "00:05:00",
+            "healthCheckStableDuration": "00:45:00",
+            "healthCheckRetryTimeout": "00:55:00",
+            "upgradeTimeout": "12:00:00",
+            "upgradeDomainTimeout": "03:00:00"
+          },
+          "healthPolicy": {
+            "maxPercentUnhealthyNodes": 10,
+            "maxPercentUnhealthyApplications": 30
+          },
+          "deltaHealthPolicy": {
+            "maxPercentDeltaUnhealthyNodes": 20,
+            "maxPercentUpgradeDomainDeltaUnhealthyNodes": 40,
+            "maxPercentDeltaUnhealthyApplications": 40
+          }
+        }
       }
     }
   },
   "responses": {
     "202": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-09-01-preview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-09-01-preview"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-11-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-11-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters",
@@ -242,6 +262,7 @@
           "enableIpv6": true,
           "enableServicePublicIP": true,
           "publicIPPrefixId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.Network/publicIPPrefixes/myPublicIPPrefix",
+          "publicIPv6PrefixId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.Network/publicIPPrefixes/myPublicIPv6Prefix",
           "ipTags": [
             {
               "ipTagType": "FirstPartyUsage",
@@ -267,14 +288,33 @@
             }
           ],
           "useCustomVnet": true,
-          "ddosProtectionPlanId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/ddosProtectionPlans/myDDoSProtectionPlan"
+          "ddosProtectionPlanId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/ddosProtectionPlans/myDDoSProtectionPlan",
+          "upgradeDescription": {
+            "forceRestart": false,
+            "monitoringPolicy": {
+              "healthCheckWaitDuration": "00:05:00",
+              "healthCheckStableDuration": "00:45:00",
+              "healthCheckRetryTimeout": "00:55:00",
+              "upgradeTimeout": "12:00:00",
+              "upgradeDomainTimeout": "03:00:00"
+            },
+            "healthPolicy": {
+              "maxPercentUnhealthyNodes": 10,
+              "maxPercentUnhealthyApplications": 30
+            },
+            "deltaHealthPolicy": {
+              "maxPercentDeltaUnhealthyNodes": 20,
+              "maxPercentUpgradeDomainDeltaUnhealthyNodes": 40,
+              "maxPercentDeltaUnhealthyApplications": 40
+            }
+          }
         }
       }
     },
     "200": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-09-01-preview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-09-01-preview"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-11-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-11-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters",
@@ -384,6 +424,7 @@
           "enableServicePublicIP": true,
           "ipv6Address": "0000:0000:0000:0000:0000:0000:0000:0000",
           "publicIPPrefixId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.Network/publicIPPrefixes/myPublicIPPrefix",
+          "publicIPv6PrefixId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.Network/publicIPPrefixes/myPublicIPv6Prefix",
           "ipTags": [
             {
               "ipTagType": "FirstPartyUsage",
@@ -409,7 +450,27 @@
             }
           ],
           "useCustomVnet": true,
-          "ddosProtectionPlanId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/ddosProtectionPlans/myDDoSProtectionPlan"
+          "ddosProtectionPlanId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/ddosProtectionPlans/myDDoSProtectionPlan",
+          "upgradeDescription": {
+            "forceRestart": false,
+            "monitoringPolicy": {
+              "healthCheckWaitDuration": "00:05:00",
+              "healthCheckStableDuration": "00:45:00",
+              "healthCheckRetryTimeout": "00:55:00",
+              "upgradeTimeout": "12:00:00",
+              "upgradeDomainTimeout": "03:00:00"
+            },
+            "upgradeReplicaSetCheckTimeout": "49710.06:28:16",
+            "healthPolicy": {
+              "maxPercentUnhealthyNodes": 10,
+              "maxPercentUnhealthyApplications": 30
+            },
+            "deltaHealthPolicy": {
+              "maxPercentDeltaUnhealthyNodes": 20,
+              "maxPercentUpgradeDomainDeltaUnhealthyNodes": 40,
+              "maxPercentDeltaUnhealthyApplications": 40
+            }
+          }
         }
       }
     }

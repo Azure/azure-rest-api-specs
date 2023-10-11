@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2023-09-01-preview"
+    "version": "2023-11-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -953,6 +953,65 @@
       },
       "description": "Client certificate definition."
     },
+    "ClusterHealthPolicy": {
+      "type": "object",
+      "required": [
+        "maxPercentUnhealthyNodes",
+        "maxPercentUnhealthyApplications"
+      ],
+      "description": "Defines a health policy used to evaluate the health of the cluster or of a cluster node.\n",
+      "properties": {
+        "maxPercentUnhealthyNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of unhealthy nodes before reporting an error. For example, to allow 10% of nodes to be unhealthy, this value would be 10.\n\nThe percentage represents the maximum tolerated percentage of nodes that can be unhealthy before the cluster is considered in error.\nIf the percentage is respected but there is at least one unhealthy node, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy nodes over the total number of nodes in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n\nIn large clusters, some nodes will always be down or out for repairs, so this percentage should be configured to tolerate that.\n",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxPercentUnhealthyApplications": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of unhealthy applications before reporting an error. For example, to allow 10% of applications to be unhealthy, this value would be 10.\n\nThe percentage represents the maximum tolerated percentage of applications that can be unhealthy before the cluster is considered in error.\nIf the percentage is respected but there is at least one unhealthy application, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy applications over the total number of application instances in the cluster, excluding applications of application types that are included in the ApplicationTypeHealthPolicyMap.\nThe computation rounds up to tolerate one failure on small numbers of applications. Default percentage is zero.\n",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "ClusterMonitoringPolicy": {
+      "type": "object",
+      "description": "Describes the monitoring policies for the cluster upgrade.",
+      "required": [
+        "healthCheckWaitDuration",
+        "healthCheckStableDuration",
+        "healthCheckRetryTimeout",
+        "upgradeTimeout",
+        "upgradeDomainTimeout"
+      ],
+      "properties": {
+        "healthCheckWaitDuration": {
+          "type": "string",
+          "description": "The length of time to wait after completing an upgrade domain before performing health checks. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
+        },
+        "healthCheckStableDuration": {
+          "type": "string",
+          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
+        },
+        "healthCheckRetryTimeout": {
+          "type": "string",
+          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
+        },
+        "upgradeTimeout": {
+          "type": "string",
+          "description": "The amount of time the overall upgrade has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
+        },
+        "upgradeDomainTimeout": {
+          "type": "string",
+          "description": "The amount of time each upgrade domain has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
+        }
+      }
+    },
     "ClusterState": {
       "type": "string",
       "description": "The current state of the cluster.\n",
@@ -1022,6 +1081,36 @@
       },
       "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0."
     },
+    "ClusterUpgradeDeltaHealthPolicy": {
+      "type": "object",
+      "description": "Describes the delta health policies for the cluster upgrade.",
+      "required": [
+        "maxPercentDeltaUnhealthyNodes"
+      ],
+      "properties": {
+        "maxPercentDeltaUnhealthyNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the nodes at the beginning of upgrade and the state of the nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.\n",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxPercentUpgradeDomainDeltaUnhealthyNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of upgrade domain nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the upgrade domain nodes at the beginning of upgrade and the state of the upgrade domain nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion for all completed upgrade domains to make sure the state of the upgrade domains is within tolerated limits.\n",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxPercentDeltaUnhealthyApplications": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of applications health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the applications at the beginning of upgrade and the state of the applications at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits. System services are not included in this.\nNOTE: This value will overwrite the value specified in properties.UpgradeDescription.HealthPolicy.MaxPercentUnhealthyApplications\n",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
     "ClusterUpgradeMode": {
       "type": "string",
       "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.\n",
@@ -1044,6 +1133,32 @@
           }
         ]
       }
+    },
+    "ClusterUpgradePolicy": {
+      "type": "object",
+      "properties": {
+        "forceRestart": {
+          "type": "boolean",
+          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data)."
+        },
+        "healthPolicy": {
+          "$ref": "#/definitions/ClusterHealthPolicy",
+          "description": "The cluster health policy defines a health policy used to evaluate the health of the cluster during a cluster upgrade."
+        },
+        "deltaHealthPolicy": {
+          "$ref": "#/definitions/ClusterUpgradeDeltaHealthPolicy",
+          "description": "The cluster delta health policy defines a health policy used to evaluate the health of the cluster during a cluster upgrade."
+        },
+        "monitoringPolicy": {
+          "$ref": "#/definitions/ClusterMonitoringPolicy",
+          "description": "The cluster monitoring policy describes the parameters for monitoring an upgrade in Monitored mode."
+        },
+        "upgradeReplicaSetCheckTimeout": {
+          "type": "string",
+          "description": "The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues.\nWhen this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues.\nThe timeout is reset at the start of each upgrade domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.\nThis value must be between 00:00:00 and 49710.06:28:15 (unsigned 32 bit integer for seconds)\n"
+        }
+      },
+      "description": "Describes the policy used when upgrading the cluster."
     },
     "IPTag": {
       "type": "object",
@@ -1429,7 +1544,19 @@
               }
             ]
           },
-          "description": "Specify the resource id of a public IP prefix that the load balancer will allocate a public IP address from. Only supports IPv4."
+          "description": "Specify the resource id of a public IPv4 prefix that the load balancer will allocate a public IPv4 address from. This setting cannot be changed once the cluster is created."
+        },
+        "publicIPv6PrefixId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/publicIPPrefixes"
+              }
+            ]
+          },
+          "description": "Specify the resource id of a public IPv6 prefix that the load balancer will allocate a public IPv6 address from. This setting cannot be changed once the cluster is created."
         },
         "ddosProtectionPlanId": {
           "type": "string",
@@ -1442,6 +1569,10 @@
             ]
           },
           "description": "Specify the resource id of a DDoS network protection plan that will be associated with the virtual network of the cluster."
+        },
+        "upgradeDescription": {
+          "$ref": "#/definitions/ClusterUpgradePolicy",
+          "description": "The policy to use when upgrading the cluster."
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -2106,7 +2237,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-09-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-11-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"

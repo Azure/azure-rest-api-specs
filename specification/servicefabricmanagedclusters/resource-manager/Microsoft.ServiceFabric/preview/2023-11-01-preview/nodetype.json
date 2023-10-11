@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2023-09-01-preview"
+    "version": "2023-11-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -126,7 +126,17 @@
         },
         "responses": {
           "202": {
-            "description": "The request was accepted and the operation will complete asynchronously."
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "The operation completed successfully."
@@ -189,7 +199,17 @@
         },
         "responses": {
           "202": {
-            "description": "The request was accepted and the operation will complete asynchronously."
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "The operation completed successfully."
@@ -249,7 +269,17 @@
         },
         "responses": {
           "202": {
-            "description": "The request was accepted and the operation will complete asynchronously."
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "The operation completed successfully."
@@ -1923,7 +1953,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-09-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-11-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
