@@ -14,7 +14,7 @@ model ChatMessageDelta<StateModel> {
 }
 
 @doc("placeholder")
-model ChoiceDelta<StateModel, ArgumentsModel> {
+model ChoiceDelta<StateModel, ContextModel> {
   @doc("placeholder")
   index: safeint;
 
@@ -22,7 +22,7 @@ model ChoiceDelta<StateModel, ArgumentsModel> {
   delta: ChatMessageDelta<StateModel>;
 
   ...StateProperty<StateModel>;
-  ...ExtraArgumentsProperty<ArgumentsModel>;
+  ...ContextProperty<ContextModel>;
 
   @doc("placeholder")
   @projectedName("json", "finish_reason")
@@ -30,13 +30,13 @@ model ChoiceDelta<StateModel, ArgumentsModel> {
 }
 
 @doc("placeholder")
-model ChatCompletionChunk<StateModel, ArgumentsModel> {
+model ChatCompletionChunk<StateModel, ContextModel> {
   @doc("placeholder")
-  choices: ChoiceDelta<StateModel, ArgumentsModel>[];
+  choices: ChoiceDelta<StateModel, ContextModel>[];
 }
 
 @doc("placeholder")
-model StreamingChatCompletionOptions<StateModel, ArgumentsModel> {
+model StreamingChatCompletionOptions<StateModel, ContextModel> {
   @doc("placeholder")
   messages: ChatMessage<StateModel>[];
 
@@ -44,5 +44,5 @@ model StreamingChatCompletionOptions<StateModel, ArgumentsModel> {
   stream: true;
 
   ...StateProperty<StateModel>;
-  ...ExtraArgumentsProperty<ArgumentsModel>;
+  ...ContextProperty<ContextModel>;
 }

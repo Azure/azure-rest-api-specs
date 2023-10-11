@@ -3,7 +3,7 @@ import "./common.tsp";
 namespace Azure.AI.Chat;
 
 @doc("placeholder")
-model ChatChoice<StateModel, ArgumentsModel> {
+model ChatChoice<StateModel, ContextModel> {
   @doc("placeholder")
   index: safeint;
 
@@ -11,19 +11,19 @@ model ChatChoice<StateModel, ArgumentsModel> {
   message: ChatMessage<StateModel>;
 
   ...StateProperty<StateModel>;
-  ...ExtraArgumentsProperty<ArgumentsModel>;
+  ...ContextProperty<ContextModel>;
 
   @doc("placeholder")
   @projectedName("json", "finish_reason")
   finishReason: FinishReason;
 }
 @doc("placeholder")
-model ChatCompletion<StateModel, ArgumentsModel> {
+model ChatCompletion<StateModel, ContextModel> {
   @doc("placeholder")
-  choices: ChatChoice<StateModel, ArgumentsModel>[];
+  choices: ChatChoice<StateModel, ContextModel>[];
 }
 
-model ChatCompletionOptions<StateModel, ArgumentsModel> {
+model ChatCompletionOptions<StateModel, ContextModel> {
   @doc("placeholder")
   messages: ChatMessage<StateModel>[];
 
@@ -31,5 +31,5 @@ model ChatCompletionOptions<StateModel, ArgumentsModel> {
   stream: false;
 
   ...StateProperty<StateModel>;
-  ...ExtraArgumentsProperty<ArgumentsModel>;
+  ...ContextProperty<ContextModel>;
 }

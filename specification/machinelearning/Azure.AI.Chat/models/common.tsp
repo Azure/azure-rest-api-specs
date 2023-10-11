@@ -32,11 +32,10 @@ enum ChatRole {
 }
 
 @doc("placeholder")
-model ExtraArgumentsProperty<ArgumentsModel> {
+model ContextProperty<ContextModel> {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Protocol defines the type as Record<any>"
   @doc("placeholder")
-  @projectedName("json", "extra_args")
-  extraArguments?: ArgumentsModel;
+  context?: ContextModel;
 }
 
 @doc("placeholder")

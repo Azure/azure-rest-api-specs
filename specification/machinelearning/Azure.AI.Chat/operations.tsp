@@ -11,14 +11,14 @@ using TypeSpec.Http;
 using Azure.Core.Foundations;
 
 @route("/chat")
-interface Chat<StateModel, ArgumentsModel> {
+interface Chat<StateModel, ContextModel> {
   /* Using the Foundations.Operation template so the API version parameter is added */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Defining the operation in an Azure independent fashion"
   @doc("placeholder")
   @sharedRoute
   create is Operation<
-    ChatCompletionOptions<StateModel, ArgumentsModel>,
-    ChatCompletion<StateModel, ArgumentsModel>
+    ChatCompletionOptions<StateModel, ContextModel>,
+    ChatCompletion<StateModel, ContextModel>
   >;
 
   /* Using the Foundations.Operation template so the API version parameter is added */
@@ -26,8 +26,8 @@ interface Chat<StateModel, ArgumentsModel> {
   @doc("placeholder")
   @sharedRoute
   createStreaming is Operation<
-    StreamingChatCompletionOptions<StateModel, ArgumentsModel>,
-    ChatCompletionChunk<StateModel, ArgumentsModel>
+    StreamingChatCompletionOptions<StateModel, ContextModel>,
+    ChatCompletionChunk<StateModel, ContextModel>
   >;
 }
 
