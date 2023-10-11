@@ -46,8 +46,7 @@
     }
   },
   "tags": [],
-  "paths": {},
-  "x-ms-paths": {
+  "paths": {
     "/imageanalysis:analyze?api-version={apiVersion}": {
       "post": {
         "operationId": "AnalyzeFromUrl",
@@ -105,11 +104,11 @@
           }
         },
         "x-ms-examples": {
-          "ImageAnalysis_Analyze_MaximumSet_Gen": {
-            "$ref": "./examples/ImageAnalysis_Analyze_MaximumSet_Gen.json"
+          "AnalyzeFromUrl_MaximumSet_Gen": {
+            "$ref": "./examples/AnalyzeFromUrl_MaximumSet_Gen.json"
           },
-          "ImageAnalysis_Analyze_MinimumSet_Gen": {
-            "$ref": "./examples/ImageAnalysis_Analyze_MinimumSet_Gen.json"
+          "AnalyzeFromUrl_MinimumSet_Gen": {
+            "$ref": "./examples/AnalyzeFromUrl_MinimumSet_Gen.json"
           }
         }
       }
@@ -138,7 +137,7 @@
             "description": "The image to be analyzed",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "object",
               "format": "binary"
             }
           }
@@ -164,11 +163,11 @@
           }
         },
         "x-ms-examples": {
-          "ImageAnalysis_Segment_MaximumSet_Gen": {
-            "$ref": "./examples/ImageAnalysis_Segment_MaximumSet_Gen.json"
+          "SegmentFromStream_MaximumSet_Gen": {
+            "$ref": "./examples/SegmentFromStream_MaximumSet_Gen.json"
           },
-          "ImageAnalysis_Segment_MinimumSet_Gen": {
-            "$ref": "./examples/ImageAnalysis_Segment_MinimumSet_Gen.json"
+          "SegmentFromStream_MinimumSet_Gen": {
+            "$ref": "./examples/SegmentFromStream_MinimumSet_Gen.json"
           }
         }
       }
