@@ -306,8 +306,8 @@
       "description": "The ID that uniquely identifies a billing profile.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$"
     },
     "invoiceSectionName": {
       "in": "path",
@@ -315,8 +315,8 @@
       "description": "The ID that uniquely identifies an invoice section.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-z0-9]*$"
     },
     "customerName": {
       "in": "path",
@@ -324,8 +324,8 @@
       "description": "The ID that uniquely identifies a customer.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-z0-9]*$"
     },
     "subscriptionId": {
       "in": "path",
@@ -342,8 +342,8 @@
       "description": "The ID that uniquely identifies a billing request.",
       "required": true,
       "type": "string",
-      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-z0-9]*$"
     },
     "billingSubscriptionName": {
       "in": "path",
@@ -357,10 +357,19 @@
     "enrollmentAccountName": {
       "in": "path",
       "name": "enrollmentAccountName",
-      "description": "The ID that uniquely identifies an enrollment account",
+      "description": "The ID that uniquely identifies an enrollment account.",
       "required": true,
       "type": "string",
-      "pattern": "^[1-9][0-9]*$",
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+      "x-ms-parameter-location": "method"
+    },
+    "departmentName": {
+      "in": "path",
+      "name": "departmentName",
+      "description": "The ID that uniquely identifies the department.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
       "x-ms-parameter-location": "method"
     },
     "invoiceName": {
