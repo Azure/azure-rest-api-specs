@@ -1,0 +1,944 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ImageAnalysis Service",
+    "version": "2023-04-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/computervision",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://<resource-name>.cognitiveservices.azure.com).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "tags": [],
+  "paths": {},
+  "x-ms-paths": {
+    "/imageanalysis:analyze?api-version={apiVersion}": {
+      "post": {
+        "operationId": "AnalyzeFromUrl",
+        "description": "Performs a single Image Analysis operation",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SharedAnalyzeQuery.visualFeatures"
+          },
+          {
+            "$ref": "#/parameters/SharedAnalyzeQuery.language"
+          },
+          {
+            "$ref": "#/parameters/SharedAnalyzeQuery.genderNeutralCaption"
+          },
+          {
+            "$ref": "#/parameters/SharedAnalyzeQuery.smartCropsAspectRatios"
+          },
+          {
+            "$ref": "#/parameters/SharedAnalyzeQuery.modelName"
+          },
+          {
+            "name": "imageContent",
+            "in": "body",
+            "description": "The image to be analyzed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageUrl"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageAnalysisResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageAnalysis_Analyze_MaximumSet_Gen": {
+            "$ref": "./examples/ImageAnalysis_Analyze_MaximumSet_Gen.json"
+          },
+          "ImageAnalysis_Analyze_MinimumSet_Gen": {
+            "$ref": "./examples/ImageAnalysis_Analyze_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/imageanalysis:segment?api-version={apiVersion}": {
+      "post": {
+        "operationId": "SegmentFromStream",
+        "description": "Segment the input image. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.",
+        "produces": [
+          "image/png",
+          "application/json"
+        ],
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SharedSegmentQuery"
+          },
+          {
+            "name": "imageContent",
+            "in": "body",
+            "description": "The image to be analyzed",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageAnalysis_Segment_MaximumSet_Gen": {
+            "$ref": "./examples/ImageAnalysis_Segment_MaximumSet_Gen.json"
+          },
+          "ImageAnalysis_Segment_MinimumSet_Gen": {
+            "$ref": "./examples/ImageAnalysis_Segment_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "BoundingBox": {
+      "type": "object",
+      "description": "A basic rectangle",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "X coordinate"
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Y coordinate"
+        },
+        "w": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Width of the box"
+        },
+        "h": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Height of the box"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "w",
+        "h"
+      ]
+    },
+    "CaptionResult": {
+      "type": "object",
+      "description": "A brief description of what the image depicts.",
+      "properties": {
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "The level of confidence the service has in the caption."
+        },
+        "text": {
+          "type": "string",
+          "description": "The text of the caption."
+        }
+      },
+      "required": [
+        "confidence",
+        "text"
+      ]
+    },
+    "CropRegion": {
+      "type": "object",
+      "description": "A region identified for smart cropping. There will be one region returned for each requested aspect ratio.",
+      "properties": {
+        "aspectRatio": {
+          "type": "number",
+          "format": "float",
+          "description": "The aspect ratio of the crop region."
+        },
+        "boundingBox": {
+          "$ref": "#/definitions/BoundingBox",
+          "description": "The bounding box of the crop region."
+        }
+      },
+      "required": [
+        "aspectRatio",
+        "boundingBox"
+      ]
+    },
+    "CustomModelResult": {
+      "type": "object",
+      "description": "Describes the result of image analysis using a custom model.",
+      "properties": {
+        "objectsResult": {
+          "$ref": "#/definitions/ObjectsResult",
+          "description": "The list of predicted objects."
+        },
+        "tagsResult": {
+          "$ref": "#/definitions/TagsResult",
+          "description": "The list of predicted tags."
+        }
+      },
+      "required": [
+        "objectsResult",
+        "tagsResult"
+      ]
+    },
+    "DenseCaption": {
+      "type": "object",
+      "description": "A brief description of what the image depicts.",
+      "properties": {
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "The level of confidence the service has in the caption."
+        },
+        "text": {
+          "type": "string",
+          "description": "The text of the caption."
+        },
+        "boundingBox": {
+          "$ref": "#/definitions/BoundingBox",
+          "description": "The bounding box of the caption."
+        }
+      },
+      "required": [
+        "confidence",
+        "text",
+        "boundingBox"
+      ]
+    },
+    "DenseCaptionsResult": {
+      "type": "object",
+      "description": "A list of captions.",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "The list of captions.",
+          "items": {
+            "$ref": "#/definitions/DenseCaption"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "values"
+      ]
+    },
+    "DetectedObject": {
+      "type": "object",
+      "description": "Describes a detected object in an image.",
+      "properties": {
+        "boundingBox": {
+          "$ref": "#/definitions/BoundingBox",
+          "description": "Gets a rectangular boundary within which the object was detected."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Classification confidences of the detected object.",
+          "items": {
+            "$ref": "#/definitions/DetectedTag"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "boundingBox",
+        "tags"
+      ]
+    },
+    "DetectedPerson": {
+      "type": "object",
+      "description": "Represents a person detected in an image",
+      "properties": {
+        "boundingBox": {
+          "$ref": "#/definitions/BoundingBox",
+          "description": "Gets a rectangular boundary within which the person was detected.",
+          "readOnly": true
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets the confidence value of the detected person.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "boundingBox",
+        "confidence"
+      ]
+    },
+    "DetectedTag": {
+      "type": "object",
+      "description": "An entity observation in the image, along with the confidence score.",
+      "properties": {
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "The level of confidence that the entity was observed."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the entity."
+        }
+      },
+      "required": [
+        "confidence",
+        "name"
+      ]
+    },
+    "DocumentLine": {
+      "type": "object",
+      "description": "A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.",
+      "properties": {
+        "boundingBox": {
+          "type": "array",
+          "description": "The bounding box of the line.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "content": {
+          "type": "string",
+          "description": "Concatenated content of the contained elements in reading order."
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the line in the reading order concatenated content.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "boundingBox",
+        "content",
+        "spans"
+      ]
+    },
+    "DocumentPage": {
+      "type": "object",
+      "description": "The content and layout elements extracted from a page from the input.",
+      "properties": {
+        "angle": {
+          "type": "number",
+          "format": "float",
+          "description": "The general orientation of the content in clockwise direction, measured in degrees between (-180, 180]."
+        },
+        "height": {
+          "type": "number",
+          "format": "float",
+          "description": "The height of the image/PDF in pixels/inches, respectively."
+        },
+        "lines": {
+          "type": "array",
+          "description": "Extracted lines from the page, potentially containing both textual and visual elements.",
+          "items": {
+            "$ref": "#/definitions/DocumentLine"
+          },
+          "x-ms-identifiers": []
+        },
+        "pageNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "1-based page number in the input document."
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the page in the reading order concatenated content.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        },
+        "width": {
+          "type": "number",
+          "format": "float",
+          "description": "The width of the image/PDF in pixels/inches, respectively."
+        },
+        "words": {
+          "type": "array",
+          "description": "Extracted words from the page.",
+          "items": {
+            "$ref": "#/definitions/DocumentWord"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "angle",
+        "height",
+        "lines",
+        "pageNumber",
+        "spans",
+        "width",
+        "words"
+      ]
+    },
+    "DocumentSpan": {
+      "type": "object",
+      "description": "Contiguous region of the concatenated content property, specified as an offset and length.",
+      "properties": {
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of characters in the content represented by the span."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Zero-based index of the content represented by the span."
+        }
+      },
+      "required": [
+        "length",
+        "offset"
+      ]
+    },
+    "DocumentStyle": {
+      "type": "object",
+      "description": "An object representing observed text styles.",
+      "properties": {
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of correctly identifying the style."
+        },
+        "isHandwritten": {
+          "type": "boolean",
+          "description": "Is content handwritten or not."
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the text elements in the concatenated content the style applies to.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "confidence",
+        "isHandwritten",
+        "spans"
+      ]
+    },
+    "DocumentWord": {
+      "type": "object",
+      "description": "A word object consisting of a contiguous sequence of characters. For non-space delimited languages,\r\nsuch as Chinese, Japanese, and Korean, each character is represented as its own word.",
+      "properties": {
+        "boundingBox": {
+          "type": "array",
+          "description": "Bounding box of the word.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of correctly extracting the word."
+        },
+        "content": {
+          "type": "string",
+          "description": "Text content of the word."
+        },
+        "span": {
+          "$ref": "#/definitions/DocumentSpan",
+          "description": "Location of the word in the reading order concatenated content."
+        }
+      },
+      "required": [
+        "boundingBox",
+        "confidence",
+        "content",
+        "span"
+      ]
+    },
+    "ImageAnalysisResult": {
+      "type": "object",
+      "description": "Describe the combined results of different types of image analysis.",
+      "properties": {
+        "captionResult": {
+          "$ref": "#/definitions/CaptionResult",
+          "description": "A CaptionResult for the image."
+        },
+        "customModelResult": {
+          "$ref": "#/definitions/CustomModelResult",
+          "description": "A list of categories for the image."
+        },
+        "denseCaptionsResult": {
+          "$ref": "#/definitions/DenseCaptionsResult",
+          "description": "A denseCaptionsResult for the image."
+        },
+        "metadata": {
+          "$ref": "#/definitions/ImageMetadata",
+          "description": "The model used for the analysis"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "The model used for the analysis"
+        },
+        "objectsResult": {
+          "$ref": "#/definitions/ObjectsResult",
+          "description": "A list of objects for the image."
+        },
+        "peopleResult": {
+          "$ref": "#/definitions/PeopleResult",
+          "description": "A list of people for the image."
+        },
+        "readResult": {
+          "$ref": "#/definitions/ReadResult",
+          "description": "A readResult for the image."
+        },
+        "smartCropsResult": {
+          "$ref": "#/definitions/SmartCropsResult",
+          "description": "A list of regions for the image."
+        },
+        "tagsResult": {
+          "$ref": "#/definitions/TagsResult",
+          "description": "A list of tags for the image."
+        }
+      },
+      "required": [
+        "metadata",
+        "modelVersion"
+      ]
+    },
+    "ImageMetadata": {
+      "type": "object",
+      "description": "The image metadata information such as height and width.",
+      "properties": {
+        "height": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The height of the image in pixels."
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The width of the image in pixels."
+        }
+      },
+      "required": [
+        "height",
+        "width"
+      ]
+    },
+    "ImageUrl": {
+      "type": "object",
+      "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Publicly reachable URL of an image."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "ObjectsResult": {
+      "type": "object",
+      "description": "Describes detected objects in an image.",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "An array of detected objects.",
+          "items": {
+            "$ref": "#/definitions/DetectedObject"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "values"
+      ]
+    },
+    "PeopleResult": {
+      "type": "object",
+      "description": "An object describing whether the image contains people.",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "An array of detected people.",
+          "items": {
+            "$ref": "#/definitions/DetectedPerson"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "values"
+      ]
+    },
+    "ReadResult": {
+      "type": "object",
+      "description": "The results of an Read operation.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Concatenate string representation of all textual and visual elements in reading order."
+        },
+        "pages": {
+          "type": "array",
+          "description": "A list of analyzed pages.",
+          "items": {
+            "$ref": "#/definitions/DocumentPage"
+          },
+          "x-ms-identifiers": []
+        },
+        "stringIndexType": {
+          "type": "string",
+          "description": "The method used to compute string offset and length, possible values include: 'textElements', 'unicodeCodePoint', 'utf16CodeUnit' etc."
+        },
+        "styles": {
+          "type": "array",
+          "description": "Extracted font styles.",
+          "items": {
+            "$ref": "#/definitions/DocumentStyle"
+          },
+          "x-ms-identifiers": []
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "The model used to generate the Read result."
+        }
+      },
+      "required": [
+        "content",
+        "pages",
+        "stringIndexType",
+        "styles",
+        "modelVersion"
+      ]
+    },
+    "SmartCropsResult": {
+      "type": "object",
+      "description": "Smart cropping result.",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "Recommended regions for cropping the image.",
+          "items": {
+            "$ref": "#/definitions/CropRegion"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "values"
+      ]
+    },
+    "TagsResult": {
+      "type": "object",
+      "description": "A list of tags with confidence level.",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "A list of tags with confidence level.",
+          "items": {
+            "$ref": "#/definitions/DetectedTag"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "values"
+      ]
+    },
+    "visualFeatures": {
+      "type": "string",
+      "description": "The visual features requested: tags, objects, caption, denseCaptions, read, smartCrops, people. This parameter needs to be specified if the parameter \"model-name\" is not specified.",
+      "enum": [
+        "tags",
+        "caption",
+        "denseCaptions",
+        "objects",
+        "read",
+        "smartCrops",
+        "people"
+      ],
+      "x-ms-enum": {
+        "name": "visualFeatures",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "tags",
+            "value": "tags",
+            "description": "Tags"
+          },
+          {
+            "name": "caption",
+            "value": "caption",
+            "description": "Caption"
+          },
+          {
+            "name": "denseCaptions",
+            "value": "denseCaptions",
+            "description": "DenseCaptions"
+          },
+          {
+            "name": "objects",
+            "value": "objects",
+            "description": "Objects"
+          },
+          {
+            "name": "read",
+            "value": "read",
+            "description": "Read"
+          },
+          {
+            "name": "smartCrops",
+            "value": "smartCrops",
+            "description": "SmartCrops"
+          },
+          {
+            "name": "people",
+            "value": "people",
+            "description": "People"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "SharedAnalyzeQuery.genderNeutralCaption": {
+      "name": "gender-neutral-caption",
+      "in": "query",
+      "description": "Boolean flag for enabling gender-neutral captioning for caption and denseCaptions features. If this parameter is not specified, the default value is \"false\".",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "genderNeutralCaption"
+    },
+    "SharedAnalyzeQuery.language": {
+      "name": "language",
+      "in": "query",
+      "description": "The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.",
+      "required": false,
+      "type": "string",
+      "default": "en",
+      "x-ms-parameter-location": "method"
+    },
+    "SharedAnalyzeQuery.modelName": {
+      "name": "model-name",
+      "in": "query",
+      "description": "The name of the custom trained model. This parameter needs to be specified if the parameter \"features\" is not specified.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "modelName"
+    },
+    "SharedAnalyzeQuery.smartCropsAspectRatios": {
+      "name": "smartcrops-aspect-ratios",
+      "in": "query",
+      "description": "A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "float"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "smartCropsAspectRatios"
+    },
+    "SharedAnalyzeQuery.visualFeatures": {
+      "name": "features",
+      "in": "query",
+      "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. If VisualFeatures is not specified, then Categories, Tags, and Description are included in the response by default.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/visualFeatures"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "visualFeatures"
+    },
+    "SharedSegmentQuery": {
+      "name": "mode",
+      "in": "query",
+      "description": "The type of segmentation to perform",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "backgroundRemoval",
+        "foregroundMatting"
+      ],
+      "x-ms-enum": {
+        "name": "segmentationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "backgroundRemoval",
+            "value": "backgroundRemoval",
+            "description": "Remove the background"
+          },
+          {
+            "name": "foregroundMatting",
+            "value": "foregroundMatting",
+            "description": "Matt the foreground"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
