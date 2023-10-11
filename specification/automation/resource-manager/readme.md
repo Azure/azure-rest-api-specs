@@ -420,6 +420,7 @@ input-file:
 - Microsoft.Automation/stable/2023-11-01/jobSchedule.json
 - Microsoft.Automation/stable/2023-11-01/linkedWorkspace.json
 - Microsoft.Automation/stable/2023-11-01/module.json
+- Microsoft.Automation/stable/2023-11-01/powershell72Module.json
 - Microsoft.Automation/stable/2023-11-01/operations.json
 - Microsoft.Automation/stable/2023-11-01/python2package.json
 - Microsoft.Automation/stable/2023-11-01/python3package.json
