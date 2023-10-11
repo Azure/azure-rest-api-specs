@@ -62,7 +62,7 @@ interface Devices extends ProxyResourceOperationsDevice<Device> {
 
     @doc("Generate capability image request body.")
     @body
-    generateDeviceCapabilityRequest: GenerateCapabilityImageRequest
+    generateDeviceCapabilityRequest: GenerateCapabilityImageRequest,
   ): ArmResponse<SignedCapabilityImageResponse> | ArmAcceptedResponse | ErrorResponse;
 }
 

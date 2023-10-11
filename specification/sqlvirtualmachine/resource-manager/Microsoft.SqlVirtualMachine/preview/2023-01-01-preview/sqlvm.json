@@ -1947,6 +1947,19 @@
           "format": "int32",
           "description": "Duration of patching.",
           "type": "integer"
+        },
+        "additionalVmPatch": {
+          "description": "Additional Patch to be enable or enabled on the SQL Virtual Machine.",
+          "default": "NotSet",
+          "enum": [
+            "NotSet",
+            "MicrosoftUpdate"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AdditionalVmPatch",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2541,7 +2554,7 @@
       "properties": {
         "identity": {
           "$ref": "#/definitions/ResourceIdentity",
-          "description": "Azure Active Directory identity of the server.",
+          "description": "DO NOT USE. This value will be deprecated. Azure Active Directory identity of the server.",
           "x-ms-mutability": [
             "read",
             "create"

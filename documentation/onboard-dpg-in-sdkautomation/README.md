@@ -18,7 +18,7 @@ __Description:__
 2. If you have added a comment, which contains autorest configuration, and run `/azp run` in the spec PR, the autorest configuration in the comment will be used to generate SDK.
 Otherwise, pipeline will try to find autorest configuration file in sdk repository. If found, use the autorest configuration file to generate SDK. If not found, pipeline will stop.
    - Please refer to [Add autorest configuration in spec comment](./add-autorest-configuration-for-dataplane-sdk.md) on how to add autorest configuration in spec comment.
-3. SDK and ApiView will be generated in spec CI pipeline, and you can find them in spec PR comment. Please refer to the [Guide of Reviewing the Api Design/Definition](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/591/Guide-to-design-and-creation-of-Data-Plane-REST-API-and-Client-Libraries?anchor=ii.-review-the-api-design/definition) to review the API definition.
+3. SDK and ApiView will be generated in spec CI pipeline, and you can find them in spec PR comment. Refer to the [Get your PR merged](https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-specs-pr?tabs=dataplane) for next steps.
 4. If any change needed, please update the autorest configuration in spec PR comment and regenerate the SDK by adding a comment `/azp run` to swagger PR.
 
 ## FAQ
