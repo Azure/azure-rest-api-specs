@@ -138,9 +138,9 @@ See configuration in [readme.java.md](./readme.java.md)
 ## Suppression
 
 ``` yaml
-directive: 
-  - suppress: DefinitionsPropertiesNamesCamelCase
+suppressions:
+  - code: DefinitionsPropertiesNamesCamelCase
     from: connectedClusters.json
     where: $.definitions.AadProfile.properties.enableAzureRBAC
-    reason: enableAzureRBAC is already used in Managed Clusters. so to ensure consistency between Managed Clusters and Connected Clusters usage of aadProfile.
+    reason: enableAzureRBAC is already used in Managed Clusters. so to ensure consistency between Managed Clusters and Connected Clusters usage of aadProfile.    
 ```
