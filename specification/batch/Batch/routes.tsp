@@ -79,7 +79,6 @@ administrator information about Applications and versions that are not yet
 available to Compute Nodes, use the Azure portal or the Azure Resource Manager
 API.
 """)
-  
   @route("/applications")
   @get
   getApplication is RpcOperation<
@@ -111,7 +110,6 @@ including a startTime or endTime these filters default to the start and end
 times of the last aggregation interval currently available; that is, only the
 last aggregation interval is returned.
 """)
-  
   @route("/poolusagemetrics")
   @get
   listPoolUsageMetrics is RpcOperation<
@@ -150,7 +148,6 @@ When naming Pools, avoid including sensitive information such as user names or
 secret project names. This information may appear in telemetry logs accessible
 to Microsoft Support engineers.
 """)
-
   @route("/pools")
   createPool is RpcOperation<
     BatchClientRequestHeaders & {
@@ -179,33 +176,27 @@ to Microsoft Support engineers.
   @doc("Lists all of the Pools in the specified Account.")
   @route("/pools")
   @get
-  op listPools(
-    ...BatchApplicationListHeaders,
-
-    @doc("""
+  listPools is RpcOperation<
+    BatchApplicationListHeaders & {
+      @doc("""
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.
 """)
-    @query
-    $filter?: string,
+      @query
+      $filter?: string;
 
-    @doc("An OData $select clause.")
-    @query({
-      format: "csv",
-    })
-    $select?: string[],
+      @doc("An OData $select clause.")
+      @query({ format: "csv" })
+      $select?: string[];
 
-    @doc("An OData $expand clause.")
-    @query({
-      format: "csv",
-    })
-    $expand?: string[]
-  ): BatchPoolListResult | BatchError;
-
-
-
-  
-
+      @doc("An OData $expand clause.")
+      @query({ format: "csv" })
+      $expand?: string[];
+    },
+    BatchResponseHeaders & BatchPoolListResult,
+    {},
+    BatchError
+  >;
 
   @summary("Deletes a Pool from the specified Account.")
   @doc("""
@@ -222,7 +213,6 @@ zero size before deleting the Pool. If you call an Update, Patch or Delete API
 on a Pool in the deleting state, it will fail with HTTP status code 409 with
 error code PoolBeingDeleted.
 """)
-  
   @route("/pools/{poolId}")
   @delete
   deletePool is RpcOperation<
@@ -233,7 +223,6 @@ error code PoolBeingDeleted.
   >;
 
   @doc("Gets basic properties of a Pool.")
-  
   @route("/pools/{poolId}")
   @head
   poolExists is RpcOperationWithAdditionalResponse<
@@ -245,8 +234,6 @@ error code PoolBeingDeleted.
   >;
 
   @doc("Gets information about the specified Pool.")
-  
-
   @route("/pools/{poolId}")
   @get
   getPool is RpcOperation<
@@ -275,7 +262,6 @@ This only replaces the Pool properties specified in the request. For example,
 if the Pool has a StartTask associated with it, and a request does not specify
 a StartTask element, then the Pool keeps the existing StartTask.
 """)
-  
   @route("/pools/{poolId}")
   @patch
   updatePool is RpcOperation<
@@ -304,7 +290,6 @@ a StartTask element, then the Pool keeps the existing StartTask.
 
   @summary("Disables automatic scaling for a Pool.")
   @doc("Disables automatic scaling for a Pool.")
-  
   @route("/pools/{poolId}/disableautoscale")
   @post
   disablePoolAutoScale is RpcOperation<
@@ -335,7 +320,6 @@ scaling of the Pool is already enabled, you may specify a new autoscale formula
 and/or a new evaluation interval. You cannot call this API for the same Pool
 more than once every 30 seconds.
 """)
-  
   @route("/pools/{poolId}/enableautoscale")
   @post
   enablePoolAutoScale is RpcOperation<
@@ -368,7 +352,6 @@ This API is primarily for validating an autoscale formula, as it simply returns
 the result without applying the formula to the Pool. The Pool must have auto
 scaling enabled in order to evaluate a formula.
 """)
-  
   @route("/pools/{poolId}/evaluateautoscale")
   @post
   evaluatePoolAutoScale is RpcOperation<
@@ -409,7 +392,6 @@ the Batch service returns an error 409. If you resize a Pool downwards, the
 Batch service chooses which Compute Nodes to remove. To remove specific Compute
 Nodes, use the Pool remove Compute Nodes API instead.
 """)
-  
   @route("/pools/{poolId}/resize")
   @post
   resizePool is RpcOperation<
@@ -446,7 +428,6 @@ the Pool allocation state changes first to stopping and then to steady. A
 resize operation need not be an explicit resize Pool request; this API can also
 be used to halt the initial sizing of the Pool when it is created.
 """)
-  
   @route("/pools/{poolId}/stopresize")
   @post
   stopPoolResize is RpcOperation<
@@ -462,7 +443,6 @@ This fully replaces all the updatable properties of the Pool. For example, if
 the Pool has a StartTask associated with it and if StartTask is not specified
 with this request, then the Batch service will remove the existing StartTask.
 """)
-  
   @route("/pools/{poolId}/updateproperties")
   @post
   replacePoolProperties is RpcOperation<
@@ -490,7 +470,6 @@ This operation can only run when the allocation state of the Pool is steady.
 When this operation runs, the allocation state changes from steady to resizing.
 Each request may remove up to 100 nodes.
 """)
-  
   @route("/pools/{poolId}/removenodes")
   @post
   removeNodes is RpcOperation<
@@ -516,7 +495,6 @@ Each request may remove up to 100 nodes.
 interface Accounts {
   @summary("Lists all Virtual Machine Images supported by the Azure Batch service.")
   @doc("Lists all Virtual Machine Images supported by the Azure Batch service.")
-
   @route("/supportedimages")
   @get
   listSupportedImages(
@@ -535,19 +513,21 @@ Gets the number of Compute Nodes in each state, grouped by Pool. Note that the
 numbers returned may not always be up to date. If you need exact node counts,
 use a list query.
 """)
-  
   @route("/nodecounts")
   @get
-  listPoolNodeCounts(
-    ...BatchApplicationListHeaders,
-
-    @doc("""
+  listPoolNodeCounts is RpcOperation<
+    BatchApplicationListHeaders & {
+      @doc("""
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-support-images.
 """)
-    @query
-    $filter?: string
-  ): (BatchResponseHeaders & PoolNodeCountsListResult) | BatchError;
+      @query
+      $filter?: string;
+    },
+    BatchClientResponseHeaders & PoolNodeCountsListResult,
+    {},
+    BatchError
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
@@ -565,7 +545,6 @@ deleting state. All update operations on a Job that is in deleting state will
 fail with status code 409 (Conflict), with additional information indicating
 that the Job is being deleted.
 """)
-  
   @route("/jobs/{jobId}")
   @delete
   deleteJob is RpcOperation<
@@ -582,7 +561,6 @@ that the Job is being deleted.
 
   @summary("Gets information about the specified Job.")
   @doc("Gets information about the specified Job.")
-  
   @route("/jobs/{jobId}")
   @get
   getJob is RpcOperation<
@@ -615,7 +593,6 @@ This replaces only the Job properties specified in the request. For example, if
 the Job has constraints, and a request does not specify the constraints
 element, then the Job keeps the existing constraints.
 """)
-  
   @route("/jobs/{jobId}")
   @patch
   updateJob is RpcOperation<
@@ -652,7 +629,6 @@ This fully replaces all the updatable properties of the Job. For example, if
 the Job has constraints associated with it and if constraints is not specified
 with this request, then the Batch service will remove the existing constraints.
 """)
-  
   @route("/jobs/{jobId}")
   @put
   replaceJob is RpcOperation<
@@ -694,7 +670,6 @@ are started under the Job until it moves back to active state. If you try to
 disable a Job that is in any state other than active, disabling, or disabled,
 the request fails with status code 409.
 """)
-  
   @route("/jobs/{jobId}/disable")
   @post
   disableJob is RpcOperation<
@@ -734,7 +709,6 @@ does not allow a Task to remain in the active state for more than 180 days.
 Therefore, if you enable a Job containing active Tasks which were added more
 than 180 days ago, those Tasks will not run.
 """)
-  
   @route("/jobs/{jobId}/enable")
   @post
   enableJob is RpcOperation<
@@ -766,7 +740,6 @@ moves into the completed state. If there are any Tasks in the Job in the active
 state, they will remain in the active state. Once a Job is terminated, new
 Tasks cannot be added and any remaining active Tasks will not be scheduled.
 """)
-  
   @route("/jobs/{jobId}/terminate")
   @post
   terminateJob is RpcOperation<
@@ -809,8 +782,6 @@ including sensitive information such as user names or secret project names.
 This information may appear in telemetry logs accessible to Microsoft Support
 engineers.
 """)
-  
-  
   @route("/jobs")
   @post
   createJob is RpcOperation<
@@ -838,63 +809,59 @@ engineers.
 
   @summary("Lists all of the Jobs in the specified Account.")
   @doc("Lists all of the Jobs in the specified Account.")
-  
   @route("/jobs")
   @get
-  listJobs(
-    ...BatchApplicationListHeaders,
-
-    @doc("""
+  listJobs is RpcOperation<
+    BatchApplicationListHeaders & {
+      @doc("""
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-jobs.
 """)
-    @query
-    $filter?: string,
+      @query
+      $filter?: string;
 
-    @doc("An OData $select clause.")
-    @query({
-      format: "csv",
-    })
-    $select?: string[],
+      @doc("An OData $select clause.")
+      @query({ format: "csv" })
+      $select?: string[];
 
-    @doc("An OData $expand clause.")
-    @query({
-      format: "csv",
-    })
-    $expand?: string[]
-  ): (BatchResponseHeaders & BatchJobListResult) | BatchError;
+      @doc("An OData $expand clause.")
+      @query({ format: "csv" })
+      $expand?: string[];
+    },
+    BatchResponseHeaders & BatchJobListResult,
+    {},
+    BatchError
+  >;
 
   @summary("Lists the Jobs that have been created under the specified Job Schedule.")
   @doc("Lists the Jobs that have been created under the specified Job Schedule.")
-
   @route("/jobschedules/{jobScheduleId}/jobs")
   @get
-  listJobsFromSchedule(
-    ...BatchApplicationListHeaders,
+  listJobsFromSchedule is RpcOperation<
+    BatchApplicationListHeaders & {
+      @doc("The ID of the Job Schedule from which you want to get a list of Jobs.")
+      @path
+      jobScheduleId: string;
 
-    @doc("The ID of the Job Schedule from which you want to get a list of Jobs.")
-    @path
-    jobScheduleId: string,
-
-    @doc("""
+      @doc("""
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
 """)
-    @query
-    $filter?: string,
+      @query
+      $filter?: string;
 
-    @doc("An OData $select clause.")
-    @query({
-      format: "csv",
-    })
-    $select?: string[],
+      @doc("An OData $select clause.")
+      @query({ format: "csv" })
+      $select?: string[];
 
-    @doc("An OData $expand clause.")
-    @query({
-      format: "csv",
-    })
-    $expand?: string[]
-  ): (BatchResponseHeaders & BatchJobListResult) | BatchError;
+      @doc("An OData $expand clause.")
+      @query({ format: "csv" })
+      $expand?: string[];
+    },
+    BatchResponseHeaders & BatchJobListResult,
+    {},
+    BatchError
+  >;
 
   @summary("""
 Lists the execution status of the Job Preparation and Job Release Task for the
@@ -908,7 +875,6 @@ invoked on a Job which has no Job Preparation or Job Release Task, the Batch
 service returns HTTP status code 409 (Conflict) with an error code of
 JobPreparationTaskNotSpecified.
 """)
-
   @route("/jobs/{jobId}/jobpreparationandreleasetaskstatus")
   @get
   listJobPreparationAndReleaseTaskStatus(
@@ -940,7 +906,6 @@ state, and a count of Tasks which succeeded or failed. Tasks in the preparing
 state are counted as running. Note that the numbers returned may not always be
 up to date. If you need exact task counts, use a list query.
 """)
-  
   @route("/jobs/{jobId}/taskcounts")
   @get
   getJobTaskCounts is RpcOperation<
@@ -962,7 +927,6 @@ interface Certificates {
   #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
   @summary("Creates a Certificate to the specified Account.")
   @doc("Creates a Certificate to the specified Account.")
-  
   @route("/certificates")
   @post
   createCertificate is RpcOperation<
@@ -991,25 +955,25 @@ interface Certificates {
   #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
   @summary("Lists all of the Certificates that have been added to the specified Account.")
   @doc("Lists all of the Certificates that have been added to the specified Account.")
-  
   @route("/certificates")
   @get
-  listCertificates(
-    ...BatchApplicationListHeaders,
-
-    @doc("""
+  listCertificates is RpcOperation<
+    BatchApplicationListHeaders & {
+      @doc("""
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-certificates.
 """)
-    @query
-    $filter?: string,
+      @query
+      $filter?: string;
 
-    @doc("An OData $select clause.")
-    @query({
-      format: "csv",
-    })
-    $select?: string[]
-  ): (BatchResponseHeaders & CertificateListResult) | BatchError;
+      @doc("An OData $select clause.")
+      @query({ format: "csv" })
+      $select?: string[];
+    },
+    BatchResponseHeaders & CertificateListResult,
+    {},
+    BatchError
+  >;
 
   #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
   @summary("Cancels a failed deletion of a Certificate from the specified Account.")
@@ -1022,7 +986,6 @@ Certificate, you do not need to run this operation after the deletion failed.
 You must make sure that the Certificate is not being used by any resources, and
 then you can try again to delete the Certificate.
 """)
-
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete")
   @post
   cancelCertificateDeletion is RpcOperation<
@@ -1061,7 +1024,6 @@ that is in use, the deletion fails. The Certificate status changes to
 deleteFailed. You can use Cancel Delete Certificate to set the status back to
 active if you decide that you want to continue using the Certificate.
 """)
-  
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
   @delete
   deleteCertificate is RpcOperation<
@@ -1085,7 +1047,6 @@ active if you decide that you want to continue using the Certificate.
 
   #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
   @doc("Gets information about the specified Certificate.")
-  
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
   @get
   getCertificate is RpcOperation<
@@ -1117,7 +1078,6 @@ active if you decide that you want to continue using the Certificate.
 interface JobSchedules {
   @summary("Checks the specified Job Schedule exists.")
   @doc("Checks the specified Job Schedule exists.")
-  
   @route("/jobschedules/{jobScheduleId}")
   @head
   jobScheduleExists is RpcOperationWithAdditionalResponse<
@@ -1149,7 +1109,6 @@ the Compute Nodes are also deleted (the retention period is ignored). The Job
 Schedule statistics are no longer accessible once the Job Schedule is deleted,
 though they are still counted towards Account lifetime statistics.
 """)
-  
   @route("/jobschedules/{jobScheduleId}")
   @delete
   deleteJobSchedule is RpcOperation<
@@ -1165,7 +1124,6 @@ though they are still counted towards Account lifetime statistics.
   >;
 
   @doc("Gets information about the specified Job Schedule.")
-  
   @route("/jobschedules/{jobScheduleId}")
   @get
   getJobSchedule is RpcOperation<
@@ -1200,7 +1158,6 @@ Batch service will keep the existing schedule. Changes to a Job Schedule only
 impact Jobs created by the schedule after the update has taken place; currently
 running Jobs are unaffected.
 """)
-  
   @route("/jobschedules/{jobScheduleId}")
   @patch
   updateJobSchedule is RpcOperation<
@@ -1239,7 +1196,6 @@ Batch service will remove the existing schedule. Changes to a Job Schedule only
 impact Jobs created by the schedule after the update has taken place; currently
 running Jobs are unaffected.
 """)
-  
   @route("/jobschedules/{jobScheduleId}")
   @put
   replaceJobSchedule is RpcOperation<
@@ -1272,7 +1228,6 @@ running Jobs are unaffected.
 
   @summary("Disables a Job Schedule.")
   @doc("No new Jobs will be created until the Job Schedule is enabled again.")
-  
   @route("/jobschedules/{jobScheduleId}/disable")
   @post
   disableJobSchedule is RpcOperation<
@@ -1297,7 +1252,6 @@ running Jobs are unaffected.
 
   @summary("Enables a Job Schedule.")
   @doc("Enables a Job Schedule.")
-  
   @route("/jobschedules/{jobScheduleId}/enable")
   @post
   enableJobSchedule is RpcOperation<
@@ -1322,7 +1276,6 @@ running Jobs are unaffected.
 
   @summary("Terminates a Job Schedule.")
   @doc("Terminates a Job Schedule.")
-  
   @route("/jobschedules/{jobScheduleId}/terminate")
   @post
   terminateJobSchedule is RpcOperation<
@@ -1347,7 +1300,6 @@ running Jobs are unaffected.
 
   @summary("Creates a Job Schedule to the specified Account.")
   @doc("Creates a Job Schedule to the specified Account.")
-
   @route("/jobschedules")
   @post
   createJobSchedule is RpcOperation<
@@ -1375,31 +1327,29 @@ running Jobs are unaffected.
 
   @summary("Lists all of the Job Schedules in the specified Account.")
   @doc("Lists all of the Job Schedules in the specified Account.")
-  
   @route("/jobschedules")
   @get
-  listJobSchedules(
-    ...BatchApplicationListHeaders,
-
-    @doc("""
+  listJobSchedules is RpcOperation<
+    BatchApplicationListHeaders & {
+      @doc("""
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.
 """)
-    @query
-    $filter?: string,
+      @query
+      $filter?: string;
 
-    @doc("An OData $select clause.")
-    @query({
-      format: "csv",
-    })
-    $select?: string[],
+      @doc("An OData $select clause.")
+      @query({ format: "csv" })
+      $select?: string[];
 
-    @doc("An OData $expand clause.")
-    @query({
-      format: "csv",
-    })
-    $expand?: string[]
-  ): (BatchResponseHeaders & BatchJobScheduleListResult) | BatchError;
+      @doc("An OData $expand clause.")
+      @query({ format: "csv" })
+      $expand?: string[];
+    },
+    BatchResponseHeaders & BatchJobScheduleListResult,
+    {},
+    BatchError
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
@@ -1412,7 +1362,6 @@ The maximum lifetime of a Task from addition to completion is 180 days. If a
 Task has not completed within 180 days of being added it will be terminated by
 the Batch service and left in whatever state it was in at that time.
 """)
-
   @route("/jobs/{jobId}/tasks")
   @post
   createTask is RpcOperation<
@@ -1448,35 +1397,33 @@ For multi-instance Tasks, information such as affinityId, executionInfo and
 nodeInfo refer to the primary Task. Use the list subtasks API to retrieve
 information about subtasks.
 """)
-  
   @route("/jobs/{jobId}/tasks")
   @get
-  listTasks(
-    ...BatchApplicationListHeaders,
+  listTasks is RpcOperation<
+    BatchApplicationListHeaders & {
+      @doc("The ID of the Job.")
+      @path
+      jobId: string;
 
-    @doc("The ID of the Job.")
-    @path
-    jobId: string,
-
-    @doc("""
+      @doc("""
 An OData $filter clause. For more information on constructing this filter, see
-https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.
+https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-tasks.
 """)
-    @query
-    $filter?: string,
+      @query
+      $filter?: string;
 
-    @doc("An OData $select clause.")
-    @query({
-      format: "csv",
-    })
-    $select?: string[],
+      @doc("An OData $select clause.")
+      @query({ format: "csv" })
+      $select?: string[];
 
-    @doc("An OData $expand clause.")
-    @query({
-      format: "csv",
-    })
-    $expand?: string[]
-  ): (BatchResponseHeaders & BatchTaskListResult) | BatchError;
+      @doc("An OData $expand clause.")
+      @query({ format: "csv" })
+      $expand?: string[];
+    },
+    BatchResponseHeaders & BatchTaskListResult,
+    {},
+    BatchError
+  >;
 
   @summary("Adds a collection of Tasks to the specified Job.")
   @doc("""
@@ -1495,7 +1442,6 @@ lifetime of a Task from addition to completion is 180 days. If a Task has not
 completed within 180 days of being added it will be terminated by the Batch
 service and left in whatever state it was in at that time.
 """)
-
   @route("/jobs/{jobId}/addtaskcollection")
   @post
   createTaskCollection is RpcOperation<
@@ -1525,7 +1471,6 @@ multi-instance Tasks, the delete Task operation applies synchronously to the
 primary task; subtasks and their files are then deleted asynchronously in the
 background.
 """)
-  
   @route("/jobs/{jobId}/tasks/{taskId}")
   @delete
   deleteTask is RpcOperation<
@@ -1554,7 +1499,6 @@ For multi-instance Tasks, information such as affinityId, executionInfo and
 nodeInfo refer to the primary Task. Use the list subtasks API to retrieve
 information about subtasks.
 """)
-  
   @route("/jobs/{jobId}/tasks/{taskId}")
   @get
   getTask is RpcOperation<
@@ -1591,7 +1535,6 @@ information about subtasks.
   >;
 
   @doc("Updates the properties of the specified Task.")
-  
   @route("/jobs/{jobId}/tasks/{taskId}")
   @put
   replaceTask is RpcOperation<
@@ -1632,7 +1575,6 @@ Lists all of the subtasks that are associated with the specified multi-instance
 Task.
 """)
   @doc("If the Task is not a multi-instance Task then this returns an empty collection.")
-  
   @route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
   @get
   listSubTasks is RpcOperation<
@@ -1662,7 +1604,6 @@ When the Task has been terminated, it moves to the completed state. For
 multi-instance Tasks, the terminate Task operation applies synchronously to the
 primary task; subtasks are then terminated asynchronously in the background.
 """)
-  
   @route("/jobs/{jobId}/tasks/{taskId}/terminate")
   @post
   terminateTask is RpcOperation<
@@ -1698,7 +1639,6 @@ is reset to 0. Reactivation will fail for Tasks that are not completed or that
 previously completed successfully (with an exit code of 0). Additionally, it
 will fail if the Job has completed (or is terminating or deleting).
 """)
-  
   @route("/jobs/{jobId}/tasks/{taskId}/reactivate")
   @post
   reactivateTask is RpcOperation<
@@ -1723,7 +1663,6 @@ will fail if the Job has completed (or is terminating or deleting).
 
   @summary("Deletes the specified Task file from the Compute Node where the Task ran.")
   @doc("Deletes the specified Task file from the Compute Node where the Task ran.")
-  
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @delete
   deleteTaskFile is RpcOperation<
@@ -1747,7 +1686,6 @@ then the directory must be empty or deletion will fail.
   >;
 
   @doc("Returns the content of the specified Task file.")
-  
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @get
   getTaskFile is RpcOperation<
@@ -1775,7 +1713,6 @@ format is bytes=startRange-endRange.
   >;
 
   @doc("Gets the properties of the specified Task file.")
-
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @head
   getTaskFileProperties is RpcOperation<
@@ -1787,34 +1724,36 @@ format is bytes=startRange-endRange.
 
   @summary("Lists the files in a Task's directory on its Compute Node.")
   @doc("Lists the files in a Task's directory on its Compute Node.")
-  
   @route("/jobs/{jobId}/tasks/{taskId}/files")
   @get
-  listTaskFiles(
-    ...BatchApplicationListHeaders,
+  listTaskFiles is RpcOperation<
+    BatchApplicationListHeaders & {
+      @doc("The ID of the Job that contains the Task.")
+      @path
+      jobId: string;
 
-    @doc("The ID of the Job that contains the Task.")
-    @path
-    jobId: string,
+      @doc("The ID of the Task whose files you want to list.")
+      @path
+      taskId: string;
 
-    @doc("The ID of the Task whose files you want to list.")
-    @path
-    taskId: string,
-
-    @doc("""
+      @doc("""
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-task-files.
 """)
-    @query
-    $filter?: string,
+      @query
+      $filter?: string;
 
-    @doc("""
+      @doc("""
 Whether to list children of the Task directory. This parameter can be used in
 combination with the filter parameter to list specific type of files.
 """)
-    @query
-    recursive?: boolean
-  ): (BatchResponseHeaders & NodeFileListResult) | BatchError;
+      @query
+      recursive?: boolean;
+    },
+    BatchResponseHeaders & NodeFileListResult,
+    {},
+    BatchError
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
@@ -1826,7 +1765,6 @@ interface Nodes {
 You can add a user Account to a Compute Node only when it is in the idle or
 running state.
 """)
-  
   @route("/pools/{poolId}/nodes/{nodeId}/users")
   @post
   createNodeUser is RpcOperation<
@@ -1865,7 +1803,6 @@ running state.
 You can delete a user Account to a Compute Node only when it is in the idle or
 running state.
 """)
-  
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
   @delete
   deleteNodeUser is RpcOperation<
@@ -1900,7 +1837,6 @@ example, if the expiryTime element is not specified, the current value is
 replaced with the default value, not left unmodified. You can update a user
 Account on a Compute Node only when it is in the idle or running state.
 """)
-  
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
   @put
   replaceNodeUser is RpcOperation<
@@ -1940,7 +1876,6 @@ Account on a Compute Node only when it is in the idle or running state.
 
   @summary("Gets information about the specified Compute Node.")
   @doc("Gets information about the specified Compute Node.")
-  
   @route("/pools/{poolId}/nodes/{nodeId}")
   @get
   getNode is RpcOperation<
@@ -1966,7 +1901,6 @@ Account on a Compute Node only when it is in the idle or running state.
 
   @summary("Restarts the specified Compute Node.")
   @doc("You can restart a Compute Node only if it is in an idle or running state.")
-  
   @route("/pools/{poolId}/nodes/{nodeId}/reboot")
   @post
   rebootNode is RpcOperation<
@@ -2006,7 +1940,6 @@ You can reinstall the operating system on a Compute Node only if it is in an
 idle or running state. This API can be invoked only on Pools created with the
 cloud service configuration property.
 """)
-  
   @route("/pools/{poolId}/nodes/{nodeId}/reimage")
   @post
   reimageNode is RpcOperation<
@@ -2045,7 +1978,6 @@ cloud service configuration property.
 You can disable Task scheduling on a Compute Node only if its current
 scheduling state is enabled.
 """)
-  
   @route("/pools/{poolId}/nodes/{nodeId}/disablescheduling")
   @post
   disableNodeScheduling is RpcOperation<
@@ -2084,7 +2016,6 @@ scheduling state is enabled.
 You can enable Task scheduling on a Compute Node only if its current scheduling
 state is disabled
 """)
-  
   @route("/pools/{poolId}/nodes/{nodeId}/enablescheduling")
   @post
   enableNodeScheduling is RpcOperation<
@@ -2118,7 +2049,6 @@ invoked only on Pools created with the virtual machine configuration property.
 For Pools created with a cloud service configuration, see the GetRemoteDesktop
 API.
 """)
-
   @route("/pools/{poolId}/nodes/{nodeId}/remoteloginsettings")
   @get
   getNodeRemoteLoginSettings is RpcOperation<
@@ -2143,7 +2073,6 @@ user Account on the Compute Node. This API can only be invoked on Pools created
 with a cloud service configuration. For Pools created with a virtual machine
 configuration, see the GetRemoteLoginSettings API.
 """)
-
   @route("/pools/{poolId}/nodes/{nodeId}/rdp")
   @get
   getNodeRemoteDesktopFile is RpcOperation<
@@ -2178,7 +2107,6 @@ from Compute Nodes if you are experiencing an error and wish to escalate to
 Azure support. The Azure Batch service log files should be shared with Azure
 support to aid in debugging issues with the Batch service.
 """)
-
   @route("/pools/{poolId}/nodes/{nodeId}/uploadbatchservicelogs")
   @post
   uploadNodeLogs is RpcOperation<
@@ -2209,33 +2137,32 @@ Protocol file.
 
   @summary("Lists the Compute Nodes in the specified Pool.")
   @doc("Lists the Compute Nodes in the specified Pool.")
-  
   @route("/pools/{poolId}/nodes")
   @get
-  listNodes(
-    ...BatchApplicationListHeaders,
+  listNodes is RpcOperation<
+    BatchApplicationListHeaders & {
+      @doc("The ID of the Pool from which you want to list Compute Nodes.")
+      @path
+      poolId: string;
 
-    @doc("The ID of the Pool from which you want to list Compute Nodes.")
-    @path
-    poolId: string,
-
-    @doc("""
+      @doc("""
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.
 """)
-    @query
-    $filter?: string,
+      @query
+      $filter?: string;
 
-    @doc("An OData $select clause.")
-    @query({
-      format: "csv",
-    })
-    $select?: string[]
-  ): BatchNodeListResult | BatchError;
+      @doc("An OData $select clause.")
+      @query({ format: "csv" })
+      $select?: string[];
+    },
+    BatchResponseHeaders & BatchNodeListResult,
+    {},
+    BatchError
+  >;
 
   @summary("Gets information about the specified Compute Node Extension.")
   @doc("Gets information about the specified Compute Node Extension.")
-
   @route("/pools/{poolId}/nodes/{nodeId}/extensions/{extensionName}")
   @get
   getNodeExtension is RpcOperation<
@@ -2268,7 +2195,6 @@ about.
 
   @summary("Lists the Compute Nodes Extensions in the specified Pool.")
   @doc("Lists the Compute Nodes Extensions in the specified Pool.")
-
   @route("/pools/{poolId}/nodes/{nodeId}/extensions")
   @get
   listNodeExtensions(
@@ -2291,7 +2217,6 @@ about.
 
   @summary("Deletes the specified file from the Compute Node.")
   @doc("Deletes the specified file from the Compute Node.")
-  
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @delete
   deleteNodeFile is RpcOperation<
@@ -2315,7 +2240,6 @@ then the directory must be empty or deletion will fail.
   >;
 
   @doc("Returns the content of the specified Compute Node file.")
-  
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @get
   getNodeFile is RpcOperation<
@@ -2339,7 +2263,6 @@ format is bytes=startRange-endRange.
   >;
 
   @doc("Gets the properties of the specified Compute Node file.")
-
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @head
   getNodeFileProperties is RpcOperation<
@@ -2351,31 +2274,33 @@ format is bytes=startRange-endRange.
 
   @summary("Lists all of the files in Task directories on the specified Compute Node.")
   @doc("Lists all of the files in Task directories on the specified Compute Node.")
-  
   @route("/pools/{poolId}/nodes/{nodeId}/files")
   @get
-  listNodeFiles(
-    ...BatchApplicationListHeaders,
+  listNodeFiles is RpcOperation<
+    BatchApplicationListHeaders & {
+      @doc("The ID of the Pool that contains the Compute Node.")
+      @path
+      poolId: string;
 
-    @doc("The ID of the Pool that contains the Compute Node.")
-    @path
-    poolId: string,
+      @doc("The ID of the Compute Node whose files you want to list.")
+      @path
+      nodeId: string;
 
-    @doc("The ID of the Compute Node whose files you want to list.")
-    @path
-    nodeId: string,
-
-    @doc("""
+      @doc("""
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-compute-node-files.
 """)
-    @query
-    $filter?: string,
+      @query
+      $filter?: string;
 
-    @doc("Whether to list children of a directory.")
-    @query
-    recursive?: boolean
-  ): (BatchResponseHeaders & NodeFileListResult) | BatchError;
+      @doc("Whether to list children of a directory.")
+      @query
+      recursive?: boolean;
+    },
+    BatchResponseHeaders & NodeFileListResult,
+    {},
+    BatchError
+  >;
 }
 
 // headers ////////////////////
