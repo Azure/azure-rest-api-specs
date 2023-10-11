@@ -38,13 +38,4 @@ input-file:
   - preview/2023-04-01-preview/ImageAnalysis.json
 ```
 
-### Tag: package-2023-04-01-preview (generated)
-
-These settings apply only when `--tag=release_2023_04_01-preview_autogen` is specified on the command line.
-
-``` yaml $(tag) == 'release_2023_04_01-preview_autogen'
-input-file: 
-  - preview/2023-04-01-preview/generated.json
-```
-
 ---
