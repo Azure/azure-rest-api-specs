@@ -45,6 +45,9 @@
               "$ref": "#/definitions/BillingRoleAssignment"
             }
           },
+          "204": {
+            "description": "The request has succeeded with no response body."
+          },
           "default": {
             "description": "Default response",
             "schema": {
@@ -266,6 +269,9 @@
             "schema": {
               "$ref": "#/definitions/BillingRoleAssignment"
             }
+          },
+          "204": {
+            "description": "The request has succeeded with no response body."
           },
           "default": {
             "description": "Default response",
@@ -568,6 +574,9 @@
             "schema": {
               "$ref": "#/definitions/BillingRoleAssignment"
             }
+          },
+          "204": {
+            "description": "The request has succeeded with no response body."
           },
           "default": {
             "description": "Default response",
@@ -935,6 +944,9 @@
               "$ref": "#/definitions/BillingRoleAssignment"
             }
           },
+          "204": {
+            "description": "The request has succeeded with no response body."
+          },
           "default": {
             "description": "Default response",
             "schema": {
@@ -1199,6 +1211,9 @@
               "$ref": "#/definitions/BillingRoleAssignment"
             }
           },
+          "204": {
+            "description": "The request has succeeded with no response body."
+          },
           "default": {
             "description": "Default response",
             "schema": {
@@ -1403,6 +1418,9 @@
             "schema": {
               "$ref": "#/definitions/BillingRoleAssignment"
             }
+          },
+          "204": {
+            "description": "The request has succeeded with no response body."
           },
           "default": {
             "description": "Default response",
@@ -1709,7 +1727,9 @@
           "readOnly": true
         },
         "createdByPrincipalPuid": {
-          "type": "string"
+          "description": "The principal PUID of the user who created the role assignment.",
+          "type": "string",
+          "readOnly": true
         },
         "createdByUserEmailAddress": {
           "description": "The email address of the user who created the role assignment. This is supported only for billing accounts with agreement type Enterprise Agreement.",
@@ -1718,19 +1738,29 @@
         },
         "modifiedOn": {
           "format": "date-time",
-          "type": "string"
+          "description": "The date the role assignment was modified.",
+          "type": "string",
+          "readOnly": true
         },
         "modifiedByPrincipalPuid": {
-          "type": "string"
+          "description": "The principal PUID of the user who modified the role assignment.",
+          "type": "string",
+          "readOnly": true
         },
         "modifiedByUserEmailAddress": {
-          "type": "string"
+          "description": "The email address of the user who modified the role assignment. This is supported only for billing accounts with agreement type Enterprise Agreement.",
+          "type": "string",
+          "readOnly": true
         },
         "modifiedByPrincipalId": {
-          "type": "string"
+          "description": "The principal PUID of the user who modified the role assignment.",
+          "type": "string",
+          "readOnly": true
         },
         "modifiedByPrincipalTenantId": {
-          "type": "string"
+          "description": "The tenant Id of the user who modified the role assignment.",
+          "type": "string",
+          "readOnly": true
         },
         "notificationContact": {
           "description": "The Notification Contact person email address",
@@ -1752,6 +1782,7 @@
           }
         },
         "principalPuid": {
+          "description": "The principal PUID of the user to whom the role was assigned.",
           "type": "string"
         },
         "principalId": {
@@ -1759,6 +1790,7 @@
           "type": "string"
         },
         "principalTenantId": {
+          "description": "The principal tenant id of the user to whom the role was assigned.",
           "type": "string"
         },
         "roleDefinitionId": {
@@ -1807,31 +1839,49 @@
           }
         },
         "permissionRequestId": {
-          "type": "string"
+          "description": "The PermissionRequest ID for the role assignment.",
+          "type": "string",
+          "readOnly": true
         },
         "billingAccountId": {
-          "type": "string"
+          "description": "The fully qualified ID that uniquely identifies a billing account.",
+          "type": "string",
+          "readOnly": true
         },
         "billingAccountDisplayName": {
-          "type": "string"
+          "description": "The name of the billing account.",
+          "type": "string",
+          "readOnly": true
         },
         "billingProfileId": {
-          "type": "string"
+          "description": "The fully qualified ID that uniquely identifies a billing profile.",
+          "type": "string",
+          "readOnly": true
         },
         "billingProfileDisplayName": {
-          "type": "string"
+          "description": "The name of the billing profile.",
+          "type": "string",
+          "readOnly": true
         },
         "invoiceSectionId": {
-          "type": "string"
+          "description": "The fully qualified ID that uniquely identifies an invoice section.",
+          "type": "string",
+          "readOnly": true
         },
         "invoiceSectionDisplayName": {
-          "type": "string"
+          "description": "The name of the invoice section.",
+          "type": "string",
+          "readOnly": true
         },
         "customerId": {
-          "type": "string"
+          "description": "The fully qualified ID that uniquely identifies a customer.",
+          "type": "string",
+          "readOnly": true
         },
         "customerDisplayName": {
-          "type": "string"
+          "description": "The name of the customer.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
