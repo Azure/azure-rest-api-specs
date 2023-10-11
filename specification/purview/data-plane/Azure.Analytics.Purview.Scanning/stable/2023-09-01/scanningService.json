@@ -2539,14 +2539,20 @@
             "AzureFileServiceCredential",
             "AzureSqlDatabaseCredential",
             "AzureSqlDatabaseMsi",
+            "AzureSqlDatabaseNativeAuth",
+            "ArcEnabledSqlServerCredential",
+            "ArcEnabledSqlServerNativeAuth",
             "AmazonPostgreSqlCredential",
             "AzurePostgreSqlCredential",
+            "DatabricksCredential",
             "SqlServerDatabaseCredential",
             "AzureSqlDatabaseManagedInstanceCredential",
             "AzureSqlDatabaseManagedInstanceMsi",
+            "AzureSqlDatabaseManagedInstanceNativeAuth",
             "AzureSqlDataWarehouseCredential",
             "AzureSqlDataWarehouseMsi",
             "AzureMySqlCredential",
+            "HdfsCredential",
             "AzureStorageCredential",
             "AzureStorageMsi",
             "TeradataTeradataCredential",
@@ -2554,12 +2560,25 @@
             "TeradataUserPass",
             "OracleOracleCredential",
             "OracleOracleUserPass",
+            "DatabricksHmsCredential",
             "SapS4HanaSapS4HanaCredential",
             "SapS4HanaSapS4HanaUserPass",
             "SapEccSapEccCredential",
             "SapEccSapEccUserPass",
+            "SnowflakeCredential",
+            "PowerBICredential",
             "PowerBIDelegated",
-            "PowerBIMsi"
+            "PowerBIFpa",
+            "PowerBIMsi",
+            "FabricCredential",
+            "FabricDelegated",
+            "FabricFpa",
+            "FabricMsi",
+            "TridentCredential",
+            "TridentDelegated",
+            "TridentMsi",
+            "DataverseCredential",
+            "DataverseMsi"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2573,6 +2592,38 @@
             "$ref": "#/definitions/ScanResult"
           },
           "readOnly": true
+        },
+        "scanResultsWithIngestion": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScanResultWithIngestion"
+          },
+          "readOnly": true
+        },
+        "scanId": {
+          "type": "string"
+        },
+        "dataSourceIdentifier": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataSourceIdentifier"
+            }
+          ]
+        },
+        "dataSourceName": {
+          "type": "string"
+        },
+        "creationType": {
+          "enum": [
+            "Manual",
+            "AutoNative",
+            "AutoManaged"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CreationType",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "kind"
