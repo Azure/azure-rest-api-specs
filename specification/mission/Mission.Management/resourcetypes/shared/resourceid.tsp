@@ -58,3 +58,37 @@ scalar EndpointResourceId
       type: "Microsoft.Mission/virtualEnclaves/endpoints",
     }
   ]>;
+
+scalar EnclaveConnectionSourceResourceId
+  extends ResourceIdentifier<[
+    {
+      type: "Microsoft.Mission/virtualEnclaves",
+    },
+    {
+      type: "Microsoft.Mission/transitHubs",
+    }
+  ]>;
+
+scalar DestinationEndpointResourceId
+  extends ResourceIdentifier<[
+    {
+      type: "Microsoft.Mission/virtualEnclaves/enclaveEndpoints",
+    },
+    {
+      type: "Microsoft.Mission/communities/communityEndpoints",
+    }
+  ]>;
+
+scalar TransitHubResourceId
+  extends ResourceIdentifier<[
+    {
+      type: "Microsoft.Mission/transitHubs",
+    }
+  ]>;
+
+scalar IPGroupResourceId
+  extends ResourceIdentifier<[
+    {
+      type: "Microsoft.Network/IpGroups",
+    }
+  ]>;

@@ -15,6 +15,10 @@ import "./resourcetypes/endpoint/endpoint.tsp";
 import "./resourcetypes/internalConnection/internalConnection.tsp";
 import "./resourcetypes/externalConnection/externalConnection.tsp";
 import "./resourcetypes/postActions/checkaddressspaceavailability.tsp";
+import "./resourcetypes/transitHub/transitHub.tsp";
+import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
+import "./resourcetypes/communityEndpoint/communityEndpoint.tsp";
+import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -147,6 +151,55 @@ model ExternalConnection is TrackedResource<ExternalConnectionProperties> {
   name: string;
 }
 
+@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@doc("TransitHub Model Resource")
+@parentResource(CommunityResource)
+model TransitHubResource is TrackedResource<TransitHubProperties> {
+  @key("transitHubName")
+  @segment("transitHubs")
+  @path
+  @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @doc("The name of the TransitHub Resource")
+  name: string;
+}
+
+@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@doc("EnclaveConnection Model Resource")
+model EnclaveConnectionResource
+  is TrackedResource<EnclaveConnectionProperties> {
+  @key("enclaveConnectionName")
+  @segment("enclaveConnections")
+  @path
+  @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @doc("The name of the Enclave Connection Resource")
+  name: string;
+}
+
+@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@doc("EnclaveEndpoint Model Resource")
+@parentResource(EnclaveResource)
+model EnclaveEndpointResource is TrackedResource<EnclaveEndpointProperties> {
+  @key("enclaveEndpointName")
+  @segment("enclaveEndpoints")
+  @path
+  @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @doc("The name of the Enclave Endpoint Resource")
+  name: string;
+}
+
+@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@doc("CommunityEndpoint Model Resource")
+@parentResource(CommunityResource)
+model CommunityEndpointResource
+  is TrackedResource<CommunityEndpointProperties> {
+  @key("communityEndpointName")
+  @segment("communityEndpoints")
+  @path
+  @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @doc("The name of the Community Endpoint Resource")
+  name: string;
+}
+
 @doc("Workload Interface")
 @armResourceOperations
 interface Workload {
@@ -227,6 +280,63 @@ interface InternalConnections {
   delete is ArmResourceDeleteAsync<InternalConnection>;
   listByParent is ArmResourceListByParent<InternalConnection>;
   listBySubscription is ArmListBySubscription<InternalConnection>;
+}
+
+@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@doc("TransitHub Interface")
+@armResourceOperations
+interface TransitHub {
+  get is ArmResourceRead<TransitHubResource>;
+  createOrUpdate is ArmResourceCreateOrUpdate2Async<TransitHubResource>;
+  update is ArmResourcePatchAsync<TransitHubResource, TransitHubProperties>;
+  delete is ArmResourceDeleteAsync<TransitHubResource>;
+  listByParent is ArmResourceListByParent<TransitHubResource>;
+  listBySubscription is ArmListBySubscription<TransitHubResource>;
+}
+
+@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@doc("Enclave Connection Interface")
+@armResourceOperations
+interface EnclaveConnection {
+  get is ArmResourceRead<EnclaveConnectionResource>;
+  createOrUpdate is ArmResourceCreateOrUpdate2Async<EnclaveConnectionResource>;
+  update is ArmResourcePatchAsync<
+    EnclaveConnectionResource,
+    EnclaveConnectionProperties
+  >;
+  delete is ArmResourceDeleteAsync<EnclaveConnectionResource>;
+  listByParent is ArmResourceListByParent<EnclaveConnectionResource>;
+  listBySubscription is ArmListBySubscription<EnclaveConnectionResource>;
+}
+
+@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@doc("Enclave Endpoint Interface")
+@armResourceOperations
+interface EnclaveEndpoints {
+  get is ArmResourceRead<EnclaveEndpointResource>;
+  createOrUpdate is ArmResourceCreateOrUpdate2Async<EnclaveEndpointResource>;
+  update is ArmResourcePatchAsync<
+    EnclaveEndpointResource,
+    EnclaveEndpointProperties
+  >;
+  delete is ArmResourceDeleteAsync<EnclaveEndpointResource>;
+  listByParent is ArmResourceListByParent<EnclaveEndpointResource>;
+  listBySubscription is ArmListBySubscription<EnclaveEndpointResource>;
+}
+
+@added(Microsoft.Mission.Versions.v2023_08_01_preview)
+@doc("Community Endpoint Interface")
+@armResourceOperations
+interface CommunityEndpoints {
+  get is ArmResourceRead<CommunityEndpointResource>;
+  createOrUpdate is ArmResourceCreateOrUpdate2Async<CommunityEndpointResource>;
+  update is ArmResourcePatchAsync<
+    CommunityEndpointResource,
+    CommunityEndpointProperties
+  >;
+  delete is ArmResourceDeleteAsync<CommunityEndpointResource>;
+  listByParent is ArmResourceListByParent<CommunityEndpointResource>;
+  listBySubscription is ArmListBySubscription<CommunityEndpointResource>;
 }
 
 @doc("External Connections")
