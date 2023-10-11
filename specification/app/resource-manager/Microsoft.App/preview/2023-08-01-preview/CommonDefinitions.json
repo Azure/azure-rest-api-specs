@@ -1472,6 +1472,240 @@
           }
         }
       }
+    },
+    "AppResiliencyCollection": {
+      "description": "Collection of AppResiliency policies",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppResiliency"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AppResiliency": {
+      "description": "Configuration to setup App Resiliency",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "App Resiliency resource specific properties",
+          "properties": {
+            "timeoutPolicy": {
+              "description": "Policy to set request timeouts",
+              "$ref": "#/definitions/TimeoutPolicy"
+            },
+            "httpRetryPolicy": {
+              "description": "Policy that defines http request retry conditions",
+              "$ref": "#/definitions/HttpRetryPolicy"
+            },
+            "tcpRetryPolicy": {
+              "description": "Policy that defines tcp request retry conditions",
+              "$ref": "#/definitions/TcpRetryPolicy"
+            },
+            "circuitBreakerPolicy": {
+              "description": "Policy that defines circuit breaker conditions",
+              "$ref": "#/definitions/CircuitBreakerPolicy"
+            },
+            "httpConnectionPool": {
+              "description": "Defines parameters for http connection pooling",
+              "$ref": "#/definitions/HttpConnectionPool"
+            },
+            "tcpConnectionPool": {
+              "description": "Defines parameters for tcp connection pooling",
+              "$ref": "#/definitions/TcpConnectionPool"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TimeoutPolicy": {
+      "description": "Policy to set request timeouts",
+      "type": "object",
+      "properties": {
+        "responseTimeoutInSeconds": {
+          "description": "Timeout, in seconds, for a request to respond",
+          "format": "int32",
+          "type": "integer"
+        },
+        "connectionTimeoutInSeconds": {
+          "description": "Timeout, in seconds, for a request to initiate a connection",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "HttpRetryPolicy": {
+      "description": "Policy that defines http request retry conditions",
+      "type": "object",
+      "properties": {
+        "maxRetries": {
+          "description": "Maximum number of times a request will retry",
+          "format": "int32",
+          "type": "integer"
+        },
+        "retryBackOff": {
+          "description": "Settings for retry backoff characteristics",
+          "type": "object",
+          "properties": {
+            "initialDelayInMilliseconds": {
+              "description": "Initial delay, in milliseconds, before retrying a request",
+              "format": "int64",
+              "type": "integer"
+            },
+            "maxIntervalInMilliseconds": {
+              "description": "Maximum interval, in milliseconds, between retries",
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          "x-ms-client-flatten": true
+        },
+        "matches": {
+          "description": "Conditions that must be met for a request to be retried",
+          "type": "object",
+          "properties": {
+            "headers": {
+              "description": "Headers that must be present for a request to be retried",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HeaderMatch"
+              },
+              "x-ms-identifiers": [
+                "header"
+              ]
+            },
+            "httpStatusCodes": {
+              "description": "Additional http status codes that can trigger a retry",
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "x-ms-identifiers": []
+            },
+            "errors": {
+              "description": "Errors that can trigger a retry",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "x-ms-identifiers": []
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-client-flatten": true
+    },
+    "TcpRetryPolicy": {
+      "description": "Policy that defines tcp request retry conditions",
+      "type": "object",
+      "properties": {
+        "maxConnectAttempts": {
+          "description": "Maximum number of attempts to connect to the tcp service",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "CircuitBreakerPolicy": {
+      "description": "Policy that defines circuit breaker conditions",
+      "type": "object",
+      "properties": {
+        "consecutiveErrors": {
+          "description": "Number of consecutive errors before the circuit breaker opens",
+          "format": "int32",
+          "type": "integer"
+        },
+        "intervalInSeconds": {
+          "description": "The time interval, in seconds, between endpoint checks. This can result in opening the circuit breaker if the check fails as well as closing the circuit breaker if the check succeeds. Defaults to 10s.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxEjectionPercent": {
+          "description": "Maximum percentage of hosts that will be ejected after failure threshold has been met",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "HttpConnectionPool": {
+      "description": "Defines parameters for http connection pooling",
+      "type": "object",
+      "properties": {
+        "http1MaxPendingRequests": {
+          "description": "Maximum number of pending http1 requests allowed",
+          "format": "int32",
+          "type": "integer"
+        },
+        "http2MaxRequests": {
+          "description": "Maximum number of http2 requests allowed",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "TcpConnectionPool": {
+      "description": "Defines parameters for tcp connection pooling",
+      "type": "object",
+      "properties": {
+        "maxConnections": {
+          "description": "Maximum number of tcp connections allowed",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "HeaderMatch": {
+      "description": "Conditions required to match a header",
+      "type": "object",
+      "properties": {
+        "header": {
+          "description": "Name of the header",
+          "type": "string"
+        },
+        "match": {
+          "description": "Type of match to perform",
+          "type": "object",
+          "properties": {
+            "exactMatch": {
+              "description": "Exact value of the header",
+              "type": "string"
+            },
+            "prefixMatch": {
+              "description": "Prefix value of the header",
+              "type": "string"
+            },
+            "suffixMatch": {
+              "description": "Suffix value of the header",
+              "type": "string"
+            },
+            "regexMatch": {
+              "description": "Regex value of the header",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
     }
   },
   "securityDefinitions": {
