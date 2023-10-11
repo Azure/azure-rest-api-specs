@@ -1387,7 +1387,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/VaultName"
+            "$ref": "#/parameters/RestrictedVaultName"
           },
           {
             "$ref": "#/parameters/BackupInstanceName"
@@ -2750,7 +2750,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/VaultName"
+            "$ref": "#/parameters/RestrictedVaultName"
           },
           {
             "name": "jobId",
@@ -2814,7 +2814,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/VaultName"
+            "$ref": "#/parameters/RestrictedVaultName"
           },
           {
             "name": "jobId",
@@ -8452,6 +8452,17 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
+    },
+    "RestrictedVaultName": {
+      "name": "vaultName",
+      "in": "path",
+      "description": "The name of the backup vault.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z][-A-Za-z0-9]*[A-Za-z0-9]$",
+      "minLength": 2,
+      "maxLength": 50
     }
   },
   "securityDefinitions": {
