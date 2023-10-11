@@ -1081,48 +1081,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}/reconcile": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/LinkNameParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "post": {
-        "tags": [
-          "NspLinkReconcile"
-        ],
-        "operationId": "NspLinkReconcile_Post",
-        "description": "Reconcile NSP link resource.",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NspLinkReconcile": {
-            "$ref": "./examples/NspLinkReconcile.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}": {
       "parameters": [
         {
@@ -1254,48 +1212,6 @@
         "x-ms-examples": {
           "NspLinkReferenceList": {
             "$ref": "./examples/NspLinkReferenceList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}/reconcile": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/LinkReferenceNameParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "post": {
-        "tags": [
-          "NspLinkReferenceReconcile"
-        ],
-        "operationId": "NspLinkReferenceReconcile_Post",
-        "description": "Reconcile NSP linkReference resource.",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NspLinkReferenceReconcile": {
-            "$ref": "./examples/NspLinkReferenceReconcile.json"
           }
         }
       }
@@ -1522,12 +1438,13 @@
           "description": "List of subscription ids"
         },
         "networkSecurityPerimeters": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "x-ms-client-flatten": true,
             "$ref": "#/definitions/PerimeterBasedAccessRule"
           },
-          "description": "Inbound rule specified by the perimeter id."
+          "description": "Rule specified by the perimeter id."
         },
         "emailAddresses": {
           "type": "array",
@@ -1559,6 +1476,7 @@
       "type": "object",
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "NSP id in the ARM id format."
         },
