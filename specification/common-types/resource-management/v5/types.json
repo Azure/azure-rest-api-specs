@@ -14,6 +14,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
+          "format": "arm-id",
           "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
         },
         "name": {
@@ -427,11 +428,13 @@
       "properties": {
         "id": {
           "description": "Fully qualified ID for the async operation.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "resourceId": {
           "description": "Fully qualified ID of the resource against which the original async operation was started.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "name": {
