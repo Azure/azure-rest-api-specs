@@ -1,13 +1,14 @@
 emit: [
   # "@azure-tools/typespec-apiview",
-  # "@azure-tools/typespec-autorest",
+  "@azure-tools/typespec-autorest",
   "@azure-tools/typespec-csharp",
-  # "@azure-tools/typespec-ts",
-  # "@azure-tools/typespec-python",
+  "@azure-tools/typespec-java",
+  "@azure-tools/typespec-python",
+  "@azure-tools/typespec-ts",
 ]
-# linter:
-#   extends:
-#     - "@azure-tools/typespec-azure-core/all"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
 options:
   "@azure-tools/typespec-csharp":
     namespace : "Azure.Developer.DevCenter"
@@ -26,4 +27,4 @@ options:
     packageDetails:
       name: "@azure-rest/developer-devcenter"
       description: "Azure Developer DevCenter Client"
-      version: "1.0.0-beta.1"
+      version: "1.0.0"
