@@ -261,15 +261,6 @@ directive:
   from: keysManagedHsm.json
   reason: This is to keep compatibility with existing data plane property. The 'release_policy' property for KeyCreateParameters does not support camelCase.
 
-- suppress: EnumUniqueValue
-  from: keys.json
-  where: $.definitions.Action.properties.type
-  reason: SDK, docs workaround for current service behavior.
-- suppress: EnumUniqueValue
-  from: keysManagedHsm.json
-  where: $.definitions.ManagedHsmAction.properties.type
-  reason: SDK, docs workaround for current service behavior.
-
 - suppress: INVALID_REQUEST_PARAMETER
   from: keyvault.json
   reason: The Vaults_List API endpoint only supports version 2015-11-01.
