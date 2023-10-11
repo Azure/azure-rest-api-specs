@@ -115,40 +115,16 @@ namespace Microsoft.EventGrid {
     value: ReceiveDetails[];
   }
 
-  @doc("AcknowledgeError contains error details of the acknowledge operation for a lock token.")
-  model AcknowledgeError {
-    @doc("The lock token of an entry in the request.")
+  @doc("Failed LockToken information.")
+  model FailedLockToken {
+    @doc("LockToken value")
     lockToken: string;
 
-    @doc("Error information of the acknowledge result for the lock token in the request.")
-    error: Azure.Core.Foundations.Error;
-  }
+    @doc("Error code related to the token. Example of such error codes are BadToken: which indicates the Token is not formatted correctly, TokenLost: which indicates that token is not found, and InternalServerError: For any internal server errors.")
+    errorCode: string;
 
-  @doc("ReleaseError contains error details of the release operation for a lock token.")
-  model ReleaseError {
-    @doc("The lock token of an entry in the request.")
-    lockToken: string;
-
-    @doc("Error information of the release result for the lock token in the request.")
-    error: Azure.Core.Foundations.Error;
-  }
-
-  @doc("RejectError contains error details of the reject operation for a lock token.")
-  model RejectError {
-    @doc("The lock token of an entry in the request.")
-    lockToken: string;
-
-    @doc("Error information of the reject result for the lock token in the request.")
-    error: Azure.Core.Foundations.Error;
-  }
-
-  @doc("RenewLockError contains error details of the renewLock operation for a lock token.")
-  model RenewLockError {
-    @doc("The lock token of an entry in the request.")
-    lockToken: string;
-
-    @doc("Error information of the renewLock result for the lock token in the request.")
-    error: Azure.Core.Foundations.Error;
+    @doc("Description of the token error.")
+    errorDescription: string;
   }
 
   @doc("Supported delays for release operation.")
@@ -174,8 +150,8 @@ namespace Microsoft.EventGrid {
 
   @doc("The result of the Acknowledge operation.")
   model AcknowledgeResult {
-    @doc("Array of AcknowledgeError for failed cloud events. Each AcknowledgeError includes the lock token along with the related error information (namely, the error code and description).")
-    errors: AcknowledgeError[];
+    @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
+    failedLockTokens: FailedLockToken[];
 
     @doc("Array of lock tokens for the successfully acknowledged cloud events.")
     succeededLockTokens: string[];
@@ -183,8 +159,8 @@ namespace Microsoft.EventGrid {
 
   @doc("The result of the Release operation.")
   model ReleaseResult {
-    @doc("Array of ReleaseError for failed cloud events. Each ReleaseError includes the lock token along with the related error information (namely, the error code and description).")
-    errors: ReleaseError[];
+    @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
+    failedLockTokens: FailedLockToken[];
 
     @doc("Array of lock tokens for the successfully released cloud events.")
     succeededLockTokens: string[];
@@ -192,8 +168,8 @@ namespace Microsoft.EventGrid {
 
   @doc("The result of the Reject operation.")
   model RejectResult {
-    @doc("Array of RejectError for failed cloud events. Each RejectError includes the lock token along with the related error information (namely, the error code and description).")
-    errors: RejectError[];
+    @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
+    failedLockTokens: FailedLockToken[];
 
     @doc("Array of lock tokens for the successfully rejected cloud events.")
     succeededLockTokens: string[];
@@ -201,8 +177,8 @@ namespace Microsoft.EventGrid {
 
   @doc("The result of the RenewLock operation.")
   model RenewCloudEventLocksResult {
-    @doc("Array of RenewLockError for failed cloud events. Each RenewLockError includes the lock token along with the related error information (namely, the error code and description).")
-    errors: RenewLockError[];
+    @doc("Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).")
+    failedLockTokens: FailedLockToken[];
 
     @doc("Array of lock tokens for the successfully renewed locks.")
     succeededLockTokens: string[];
