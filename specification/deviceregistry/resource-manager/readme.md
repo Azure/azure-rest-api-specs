@@ -33,7 +33,7 @@ tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+```yaml $(tag) == 'package-preview-2023-11'
 input-file:
   - Microsoft.DeviceRegistry/preview/2023-11-01-preview/asset.json
   - Microsoft.DeviceRegistry/preview/2023-11-01-preview/assetendpointprofile.json
