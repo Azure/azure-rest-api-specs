@@ -192,10 +192,10 @@
           "type": "boolean"
         },
         "customDnsSuffixConfiguration": {
-          "$ref": "#/definitions/CustomDnsSuffixConfigurationResource"
+          "$ref": "#/definitions/CustomDnsSuffixConfiguration"
         },
         "networkingConfiguration": {
-          "$ref": "#/definitions/AseV3NetworkingConfigurationResource"
+          "$ref": "#/definitions/AseV3NetworkingConfiguration"
         },
         "upgradeAvailability": {
           "description": "Whether an upgrade is available for this App Service Environment.",
@@ -430,51 +430,74 @@
       "description": "Full view of networking configuration for an ASEv3.",
       "type": "object",
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource id for the networking configuration of an ASEv3."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name for the networking configuration of an ASEv3"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type for the networking configuration of an ASEv3."
+        },
         "properties": {
-          "windowsOutboundIpAddresses": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "readOnly": true
-          },
-          "linuxOutboundIpAddresses": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "readOnly": true
-          },
-          "externalInboundIpAddresses": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "readOnly": true
-          },
-          "internalInboundIpAddresses": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "readOnly": true
-          },
-          "allowNewPrivateEndpointConnections": {
-            "description": "Property to enable and disable new private endpoint connection creation on ASE",
-            "type": "boolean"
-          },
-          "ftpEnabled": {
-            "description": "Property to enable and disable FTP on ASEV3",
-            "type": "boolean"
-          },
-          "remoteDebugEnabled": {
-            "description": "Property to enable and disable Remote Debug on ASEV3",
-            "type": "boolean"
-          },
-          "inboundIpAddressOverride": {
-            "description": "Customer provided Inbound IP Address. Only able to be set on Ase create.",
+          "$ref": "#/definitions/AseV3NetworkingConfigurationProperties",
+          "description": "Properties of an ASEv3 networking configuration."
+        }
+      }
+    },
+    "AseV3NetworkingConfigurationProperties": {
+      "description": "Properties of an ASEv3 networking configuration.",
+      "type": "object",
+      "properties": {
+        "windowsOutboundIpAddresses": {
+          "type": "array",
+          "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
+        },
+        "linuxOutboundIpAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "externalInboundIpAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "internalInboundIpAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "allowNewPrivateEndpointConnections": {
+          "description": "Property to enable and disable new private endpoint connection creation on ASE",
+          "type": "boolean"
+        },
+        "ftpEnabled": {
+          "description": "Property to enable and disable FTP on ASEV3",
+          "type": "boolean"
+        },
+        "remoteDebugEnabled": {
+          "description": "Property to enable and disable Remote Debug on ASEV3",
+          "type": "boolean"
+        },
+        "inboundIpAddressOverride": {
+          "description": "Customer provided Inbound IP Address. Only able to be set on Ase create.",
+          "type": "string"
         }
       }
     },
@@ -487,21 +510,6 @@
         }
       ],
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{hostingEnvironmentName}/configurations/networking"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "networking"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Microsoft.Web/hostingEnvironments/configurations/networking"
-        },
         "properties": {
           "$ref": "#/definitions/AseV3NetworkingConfiguration",
           "description": "Core resource properties",
@@ -981,17 +989,17 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{hostingEnvironmentName}/configurations/customdnssuffix"
+          "description": "Resource id for the custom DNS suffix configuration for an ASEv3."
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "customDnsSuffix"
+          "description": "Resource name for the custom DNS suffix configuration for an ASEv3"
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Microsoft.Web/hostingEnvironments/configurations/customdnssuffix"
+          "description": "Resource type for the custom DNS suffix configuration for an ASEv3."
         },
         "properties": {
           "provisioningState": {
