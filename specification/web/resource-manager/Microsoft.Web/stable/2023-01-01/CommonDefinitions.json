@@ -963,6 +963,21 @@
       "description": "Full view of the custom domain suffix configuration for ASEv3.",
       "type": "object",
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{hostingEnvironmentName}/configurations/customdnssuffix"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ASE Custom DNS Suffix Configuration ARM resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Microsoft.Web/hostingEnvironments"
+        },
         "properties": {
           "provisioningState": {
             "enum": [
@@ -1007,7 +1022,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CustomDnsSuffixConfigurationResource",
+          "$ref": "#/definitions/CustomDnsSuffixConfiguration",
           "description": "Core resource properties",
           "type": "object",
           "x-ms-client-flatten": true
