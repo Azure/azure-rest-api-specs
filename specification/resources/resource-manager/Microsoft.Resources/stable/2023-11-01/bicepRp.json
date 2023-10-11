@@ -42,7 +42,7 @@
         "operationId": "Decompile_Bicep",
         "description": "Decompiles an ARM json template into a Bicep template",
         "x-ms-examples": {
-          "TemplateSpecsCreateUpdate": {
+          "Decompile an ARM json template into a Bicep file": {
             "$ref": "./examples/DecompileBicep.json"
           }
         },
@@ -86,7 +86,7 @@
         "template"
       ],
       "type": "object",
-      "description": "DecompileOperationRequest object",
+      "description": "The body of the request for the decompileBicep operation",
       "properties": {
         "template": {
           "type": "string",
@@ -100,7 +100,7 @@
         "entryPoint"
       ],
       "type": "object",
-      "description": "DecompileOperationSuccessResponse object",
+      "description": "The response of the decompileBicep operation",
       "properties": {
         "files": {
           "type": "object",
@@ -119,10 +119,10 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
         }
       },
-      "description": "Decompile Bicep error response."
+      "description": "decompileBicep error response."
     }
   },
   "parameters": {
