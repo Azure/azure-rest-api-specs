@@ -25,6 +25,18 @@ directive:
   - rename-operation:
       from: Operations_List
       to: Operation_List
+  - from: swagger-document
+    where: "$.definitions.ProtectedItem.properties.softDeleteRetentionPeriodInDays"
+    transform: >
+    $["x-ms-client-name"] = "softDeleteRetentionPeriod";
+  - from: swagger-document
+    where: "$.definitions.PrivateLinkServiceConnectionState.properties.actionsRequired"
+    transform: >
+    $["x-ms-client-name"] = "actionRequired";
+  - from: swagger-document
+    where: "$.definitions.AzureVmWorkloadSAPHanaHSRProtectableItem"
+    transform: >
+    $["x-ms-client-name"] = "AzureVmWorkloadSAPHanaHSR";
 ```
 ### Tag: package-2021-01 and java
 
