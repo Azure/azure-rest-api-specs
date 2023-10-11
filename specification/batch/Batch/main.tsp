@@ -6,19 +6,26 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 @service({
-  title: "BatchServiceClient",
+  title: "Azure Batch",
 })
-
-
-
-@doc("A client for issuing REST requests to the Azure Batch service.")
+@versioned(Azure.Batch.Versions)
+@doc("Azure Batch provides Cloud-scale job scheduling and compute management.")
+@server(
+  "{endpoint}",
+  "Azure Batch provides Cloud-scale job scheduling and compute management.",
+  {
+    @doc("Batch account endpoint (for example: https://batchaccount.eastus2.batch.azure.com).")
+    endpoint: url,
+  }
+)
 @useAuth(AADToken)
-@versioned(BatchService.Versions)
-namespace BatchService;
+namespace Azure.Batch;
 
+@doc("The Azure Batch service version.")
 enum Versions {
+   @doc("API Version 2023-05-01.17.0")
    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2022-10-01.16.0`,
+  `2023-05-01.17.0`,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"

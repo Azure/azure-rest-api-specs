@@ -7,8 +7,9 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-namespace BatchService;
+namespace Azure.Batch;
 
+@doc("OSType enums")
 enum OSType {
   @doc("The Linux operating system.")
   Linux: "linux",
@@ -17,6 +18,7 @@ enum OSType {
   Windows: "windows",
 }
 
+@doc("VerificationType enums")
 enum VerificationType {
   @doc("The Image is guaranteed to be compatible with the associated Compute Node agent SKU and all Batch features have been confirmed to work as expected.")
   Verified: "verified",
@@ -25,6 +27,7 @@ enum VerificationType {
   Unverified: "unverified",
 }
 
+@doc("CertificateState enums")
 enum CertificateState {
   @doc("The Certificate is available for use in Pools.")
   Active: "active",
@@ -36,6 +39,7 @@ enum CertificateState {
   DeleteFailed: "deletefailed",
 }
 
+@doc("CertificateFormat enums")
 enum CertificateFormat {
   @doc("The Certificate is a PFX (PKCS#12) formatted Certificate or Certificate chain.")
   Pfx: "pfx",
@@ -44,6 +48,7 @@ enum CertificateFormat {
   Cer: "cer",
 }
 
+@doc("JobScheduleState enums")
 enum JobScheduleState {
   @doc("The Job Schedule is active and will create Jobs as per its schedule.")
   Active: "active",
@@ -61,14 +66,16 @@ enum JobScheduleState {
   Deleting: "deleting",
 }
 
+@doc("The action the Batch service should take when all Tasks in the Job are in the completed state.")
 enum OnAllTasksComplete {
   @doc("Do nothing. The Job remains active unless terminated or disabled by some other means.")
   NoAction: "noaction",
 
-  @doc("")
+  @doc("Terminate the Job. The Job's terminateReason is set to 'AllTasksComplete'.")
   TerminateJob: "terminatejob",
 }
 
+@doc("OnTaskFailure enums")
 enum OnTaskFailure {
   @doc("Do nothing. The Job remains active unless terminated or disabled by some other means.")
   NoAction: "noaction",
@@ -77,6 +84,7 @@ enum OnTaskFailure {
   PerformExitOptionsJobAction: "performexitoptionsjobaction",
 }
 
+@doc("ContainerWorkingDirectory enums")
 enum ContainerWorkingDirectory {
   @doc("Use the standard Batch service Task working directory, which will contain the Task Resource Files populated by Batch.")
   TaskWorkingDirectory: "taskWorkingDirectory",
@@ -85,6 +93,7 @@ enum ContainerWorkingDirectory {
   ContainerImageDefault: "containerImageDefault",
 }
 
+@doc("OutputFileUploadCondition enums")
 enum OutputFileUploadCondition {
   @doc("Upload the file(s) only after the Task process exits with an exit code of 0.")
   TaskSuccess: "tasksuccess",
@@ -96,6 +105,7 @@ enum OutputFileUploadCondition {
   TaskCompletion: "taskcompletion",
 }
 
+@doc("AutoUserScope enums")
 enum AutoUserScope {
   @doc("Specifies that the service should create a new user for the Task.")
   Task: "task",
@@ -104,6 +114,7 @@ enum AutoUserScope {
   Pool: "pool",
 }
 
+@doc("ElevationLevel enums")
 enum ElevationLevel {
   @doc("The user is a standard user without elevated access.")
   NonAdmin: "nonadmin",
@@ -112,6 +123,7 @@ enum ElevationLevel {
   Admin: "admin",
 }
 
+@doc("PoolLifetimeOption enums")
 enum PoolLifetimeOption {
   @doc("The Pool exists for the lifetime of the Job Schedule. The Batch Service creates the Pool when it creates the first Job on the schedule. You may apply this option only to Job Schedules, not to Jobs.")
   JobSchedule: "jobschedule",
@@ -120,6 +132,7 @@ enum PoolLifetimeOption {
   Job: "job",
 }
 
+@doc("CachingType enums")
 enum CachingType {
   @doc("The caching mode for the disk is not enabled.")
   None: "none",
@@ -131,6 +144,7 @@ enum CachingType {
   ReadWrite: "readwrite",
 }
 
+@doc("StorageAccountType enums")
 enum StorageAccountType {
   @doc("The data disk should use standard locally redundant storage.")
   StandardLRS: "standard_lrs",
@@ -139,6 +153,7 @@ enum StorageAccountType {
   PremiumLRS: "premium_lrs",
 }
 
+@doc("DiskEncryptionTarget enums")
 enum DiskEncryptionTarget {
   @doc("The OS Disk on the compute node is encrypted.")
   OsDisk: "osdisk",
@@ -147,6 +162,7 @@ enum DiskEncryptionTarget {
   TemporaryDisk: "temporarydisk",
 }
 
+@doc("NodePlacementPolicyType enums")
 enum NodePlacementPolicyType {
   @doc("All nodes in the pool will be allocated in the same region.")
   Regional: "regional",
@@ -155,7 +171,8 @@ enum NodePlacementPolicyType {
   Zonal: "zonal",
 }
 
-enum ComputeNodeFillType {
+@doc("BatchNodeFillType enums")
+enum BatchNodeFillType {
   @doc("Tasks should be assigned evenly across all Compute Nodes in the Pool.")
   Spread: "spread",
 
@@ -163,6 +180,7 @@ enum ComputeNodeFillType {
   Pack: "pack",
 }
 
+@doc("DynamicVNetAssignmentScope enums")
 enum DynamicVNetAssignmentScope {
   @doc("No dynamic VNet assignment is enabled.")
   None: "none",
@@ -171,6 +189,7 @@ enum DynamicVNetAssignmentScope {
   Job: "job",
 }
 
+@doc("InboundEndpointProtocol enums")
 enum InboundEndpointProtocol {
   @doc("Use TCP for the endpoint.")
   Tcp: "tcp",
@@ -179,6 +198,7 @@ enum InboundEndpointProtocol {
   Udp: "udp",
 }
 
+@doc("NetworkSecurityGroupRuleAccess enums")
 enum NetworkSecurityGroupRuleAccess {
   @doc("Allow access.")
   Allow: "allow",
@@ -187,6 +207,8 @@ enum NetworkSecurityGroupRuleAccess {
   Deny: "deny",
 }
 
+@doc("IPAddressProvisioningType enums")
+@projectedName("client", "IpAddressProvisioningType")
 enum IPAddressProvisioningType {
   @doc("A public IP will be created and managed by Batch. There may be multiple public IPs depending on the size of the Pool.")
   BatchManaged: "batchmanaged",
@@ -195,24 +217,32 @@ enum IPAddressProvisioningType {
   UserManaged: "usermanaged",
 
   @doc("No public IP Address will be created.")
-  @projectedName("python", "no_public_ip_addresses")
+  @projectedName("client", "NoPublicIpAddresses")
   NoPublicIPAddresses: "nopublicipaddresses",
 }
 
+@doc("AccessDiffDiskPlacementScope enums")
 enum DiffDiskPlacement {
   @doc("The Ephemeral OS Disk is stored on the VM cache.")
   CacheDisk: "cachedisk",
 }
 
+@doc("ContainerType enums")
 enum ContainerType {
   @doc("A Docker compatible container technology will be used to launch the containers.")
   DockerCompatible: "dockerCompatible",
+
+  @doc("A CRI based technology will be used to launch the containers.")
+  CriCompatible: "criCompatible",
 }
+
+@doc("AccessScope enums")
 enum AccessScope {
   @doc("Grants access to perform all operations on the Job containing the Task.")
   Job: "job",
 }
 
+@doc("CertificateStoreLocation enums")
 enum CertificateStoreLocation {
   @doc("Certificates should be installed to the CurrentUser Certificate store.")
   CurrentUser: "currentuser",
@@ -221,6 +251,7 @@ enum CertificateStoreLocation {
   LocalMachine: "localmachine",
 }
 
+@doc("CertificateVisibility enums")
 enum CertificateVisibility {
   @doc("The Certificate should be visible to the user account under which the StartTask is run. Note that if AutoUser Scope is Pool for both the StartTask and a Task, this certificate will be visible to the Task as well.")
   StartTask: "starttask",
@@ -232,6 +263,7 @@ enum CertificateVisibility {
   RemoteUser: "remoteuser",
 }
 
+@doc("LoginMode enums")
 enum LoginMode {
   @doc("The LOGON32_LOGON_BATCH Win32 login mode. The batch login mode is recommended for long running parallel processes.")
   Batch: "batch",
@@ -240,6 +272,7 @@ enum LoginMode {
   Interactive: "interactive",
 }
 
+@doc("NodeCommunicationMode enums")
 enum NodeCommunicationMode {
   @doc("The node communication mode is automatically set by the Batch service.")
   Default: "default",
@@ -251,6 +284,7 @@ enum NodeCommunicationMode {
   Simplified: "simplified",
 }
 
+@doc("JobState enums")
 enum JobState {
   @doc("The Job is available to have Tasks scheduled.")
   Active: "active",
@@ -274,6 +308,7 @@ enum JobState {
   Deleting: "deleting",
 }
 
+@doc("ErrorCategory enums")
 enum ErrorCategory {
   @doc("The error is due to a user issue, such as misconfiguration.")
   UserError: "usererror",
@@ -282,6 +317,7 @@ enum ErrorCategory {
   ServerError: "servererror",
 }
 
+@doc("DisableJobOption enums")
 enum DisableJobOption {
   @doc("Terminate running Tasks and requeue them. The Tasks will run again when the Job is enabled.")
   Requeue: "requeue",
@@ -293,6 +329,7 @@ enum DisableJobOption {
   Wait: "wait",
 }
 
+@doc("JobPreparationTaskState enums")
 enum JobPreparationTaskState {
   @doc("The Task is currently running (including retrying).")
   Running: "running",
@@ -301,6 +338,7 @@ enum JobPreparationTaskState {
   Completed: "completed",
 }
 
+@doc("TaskExecutionResult enums")
 enum TaskExecutionResult {
   @doc("The Task ran successfully.")
   Success: "success",
@@ -309,6 +347,7 @@ enum TaskExecutionResult {
   Failure: "failure",
 }
 
+@doc("JobReleaseTaskState enums")
 enum JobReleaseTaskState {
   @doc("The Task is currently running (including retrying).")
   Running: "running",
@@ -317,6 +356,7 @@ enum JobReleaseTaskState {
   Completed: "completed",
 }
 
+@doc("PoolState enums")
 enum PoolState {
   @doc("The Pool is available to run Tasks subject to the availability of Compute Nodes.")
   Active: "active",
@@ -325,6 +365,7 @@ enum PoolState {
   Deleting: "deleting",
 }
 
+@doc("AllocationState enums")
 enum AllocationState {
   @doc("The Pool is not resizing. There are no changes to the number of Compute Nodes in the Pool in progress. A Pool enters this state when it is created and when no operations are being performed on the Pool to change the number of Compute Nodes.")
   Steady: "steady",
@@ -336,6 +377,7 @@ enum AllocationState {
   Stopping: "stopping",
 }
 
+@doc("PoolIdentityType enums")
 enum PoolIdentityType {
   @doc("Batch pool has user assigned identities with it.")
   UserAssigned,
@@ -344,7 +386,8 @@ enum PoolIdentityType {
   None,
 }
 
-enum ComputeNodeDeallocationOption {
+@doc("BatchNodeDeallocationOption enums")
+enum BatchNodeDeallocationOption {
   @doc("Terminate running Task processes and requeue the Tasks. The Tasks will run again when a Compute Node is available. Remove Compute Nodes as soon as Tasks have been terminated.")
   Requeue: "requeue",
 
@@ -358,6 +401,7 @@ enum ComputeNodeDeallocationOption {
   RetainedData: "retaineddata",
 }
 
+@doc("JobAction enums")
 enum JobAction {
   @doc("Take no action.")
   None: "none",
@@ -369,6 +413,7 @@ enum JobAction {
   Terminate: "terminate",
 }
 
+@doc("DependencyAction enums")
 enum DependencyAction {
   @doc("Satisfy tasks waiting on this task; once all dependencies are satisfied, the task will be scheduled to run.")
   Satisfy: "satisfy",
@@ -377,6 +422,7 @@ enum DependencyAction {
   Block: "block",
 }
 
+@doc("TaskState enums")
 enum TaskState {
   @doc("The Task is queued and able to run, but is not currently assigned to a Compute Node. A Task enters this state when it is created, when it is enabled after being disabled, or when it is awaiting a retry after a failed run.")
   Active: "active",
@@ -391,9 +437,10 @@ enum TaskState {
   Completed: "completed",
 }
 
+@doc("TaskAddStatus enums")
 enum TaskAddStatus {
   @doc("The Task was added successfully.")
-  Success: "success",
+  Success: "Success",
 
   @doc("The Task failed to add due to a client error and should not be retried without modifying the request as appropriate.")
   ClientError: "clienterror",
@@ -402,6 +449,7 @@ enum TaskAddStatus {
   ServerError: "servererror",
 }
 
+@doc("SubtaskState enums")
 enum SubtaskState {
   @doc("The Task has been assigned to a Compute Node, but is waiting for a required Job Preparation Task to complete on the Compute Node. If the Job Preparation Task succeeds, the Task will move to running. If the Job Preparation Task fails, the Task will return to active and will be eligible to be assigned to a different Compute Node.")
   Preparing: "preparing",
@@ -413,7 +461,8 @@ enum SubtaskState {
   Completed: "completed",
 }
 
-enum ComputeNodeState {
+@doc("BatchNodeState enums")
+enum BatchNodeState {
   @doc("The Compute Node is not currently running a Task.")
   Idle: "idle",
 
@@ -454,6 +503,7 @@ enum ComputeNodeState {
   Preempted: "preempted",
 }
 
+@doc("SchedulingState enums")
 enum SchedulingState {
   @doc("Tasks can be scheduled on the Compute Node.")
   Enabled: "enabled",
@@ -462,6 +512,7 @@ enum SchedulingState {
   Disabled: "disabled",
 }
 
+@doc("StartTaskState enums")
 enum StartTaskState {
   @doc("The StartTask is currently running.")
   Running: "running",
@@ -470,7 +521,8 @@ enum StartTaskState {
   Completed: "completed",
 }
 
-enum ComputeNodeRebootOption {
+@doc("BatchNodeRebootOption enums")
+enum BatchNodeRebootOption {
   @doc("Terminate running Task processes and requeue the Tasks. The Tasks will run again when a Compute Node is available. Restart the Compute Node as soon as Tasks have been terminated.")
   Requeue: "requeue",
 
@@ -484,7 +536,8 @@ enum ComputeNodeRebootOption {
   RetainedData: "retaineddata",
 }
 
-enum ComputeNodeReimageOption {
+@doc("BatchNodeReimageOption enums")
+enum BatchNodeReimageOption {
   @doc("Terminate running Task processes and requeue the Tasks. The Tasks will run again when a Compute Node is available. Reimage the Compute Node as soon as Tasks have been terminated.")
   Requeue: "requeue",
 
@@ -498,7 +551,8 @@ enum ComputeNodeReimageOption {
   RetainedData: "retaineddata",
 }
 
-enum DisableComputeNodeSchedulingOption {
+@doc("DisableBatchNodeSchedulingOption enums")
+enum DisableBatchNodeSchedulingOption {
   @doc("Terminate running Task processes and requeue the Tasks. The Tasks may run again on other Compute Nodes, or when Task scheduling is re-enabled on this Compute Node. Enter offline state as soon as Tasks have been terminated.")
   Requeue: "requeue",
 
@@ -509,14 +563,15 @@ enum DisableComputeNodeSchedulingOption {
   TaskCompletion: "taskcompletion",
 }
 
+@doc("Level code.")
 enum StatusLevelTypes {
-  @doc("")
+  @doc("Error")
   Error,
 
-  @doc("")
+  @doc("Info")
   Info,
 
-  @doc("")
+  @doc("Warning")
   Warning,
 }
 
@@ -525,7 +580,7 @@ enum StatusLevelTypes {
 model ApplicationListResult {
   @doc("The list of applications available in the Account.")
   @items
-  value?: Application[];
+  value?: BatchApplication[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
@@ -534,7 +589,7 @@ model ApplicationListResult {
 }
 
 @doc("Contains information about an application in an Azure Batch Account.")
-model Application {
+model BatchApplication {
   @doc("A string that uniquely identifies the application within the Account.")
   id: string;
 
@@ -548,13 +603,10 @@ model Application {
 @doc("An error response received from the Azure Batch service.")
 @error
 model BatchError {
-  @doc("""
-An identifier for the error. Codes are invariant and are intended to be
-consumed programmatically.
-""")
+  @doc("An identifier for the error. Codes are invariant and are intended to be consumed programmatically.")
   code: string;
 
-  @doc("An error message received in an Azure Batch error response.")
+  @doc("A message describing the error, intended to be suitable for display in a user interface.")
   message?: ErrorMessage;
 
   @doc("A collection of key-value pairs containing additional details about the error.")
@@ -563,7 +615,7 @@ consumed programmatically.
 
 @doc("An error message received in an Azure Batch error response.")
 model ErrorMessage {
-  @doc("The language code of the error message")
+  @doc("The language code of the error message.")
   lang?: string;
 
   @doc("The text of the message.")
@@ -603,11 +655,7 @@ model PoolUsageMetrics {
   @doc("The end time of the aggregation interval covered by this entry.")
   endTime: utcDateTime;
 
-  @doc("""
-For information about available sizes of virtual machines in Pools, see Choose
-a VM size for Compute Nodes in an Azure Batch Pool
-(https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).
-""")
+  @doc("The size of virtual machines in the Pool. All VMs in a Pool are the same size. For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).")
   vmSize: string;
 
   @doc("The total core hours used in the Pool during this aggregation interval.")
@@ -634,36 +682,22 @@ information about the Image.
 model ImageInformation {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The ID of the Compute Node agent SKU which the Image supports.")
-  @projectedName("python", "node_agent_sku_id")
+  @projectedName("client", "nodeAgentSkuId")
   nodeAgentSKUId: string;
 
-  @doc("""
-A reference to an Azure Virtual Machines Marketplace Image or a Shared Image
-Gallery Image. To get the list of all Azure Marketplace Image references
-verified by Azure Batch, see the 'List Supported Images' operation.
-""")
+  @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
   imageReference: ImageReference;
 
   @doc("The type of operating system (e.g. Windows or Linux) of the Image.")
   osType: OSType;
 
-  @doc("""
-Not every capability of the Image is listed. Capabilities in this list are
-considered of special interest and are generally related to integration with
-other features in the Azure Batch service.
-""")
+  @doc("The capabilities or features which the Image supports. Not every capability of the Image is listed. Capabilities in this list are considered of special interest and are generally related to integration with other features in the Azure Batch service.")
   capabilities?: string[];
 
-  @doc("""
-The time when the Azure Batch service will stop accepting create Pool requests
-for the Image.
-""")
+  @doc("The time when the Azure Batch service will stop accepting create Pool requests for the Image.")
   batchSupportEndOfLife?: utcDateTime;
 
-  @doc("""
-Whether the Azure Batch service actively verifies that the Image is compatible
-with the associated Compute Node agent SKU.
-""")
+  @doc("Whether the Azure Batch service actively verifies that the Image is compatible with the associated Compute Node agent SKU.")
   verificationType: VerificationType;
 }
 
@@ -673,37 +707,22 @@ Gallery Image. To get the list of all Azure Marketplace Image references
 verified by Azure Batch, see the 'List Supported Images' operation.
 """)
 model ImageReference {
-  @doc("For example, Canonical or MicrosoftWindowsServer.")
+  @doc("The publisher of the Azure Virtual Machines Marketplace Image. For example, Canonical or MicrosoftWindowsServer.")
   publisher?: string;
 
-  @doc("For example, UbuntuServer or WindowsServer.")
+  @doc("The offer type of the Azure Virtual Machines Marketplace Image. For example, UbuntuServer or WindowsServer.")
   offer?: string;
 
-  @doc("For example, 18.04-LTS or 2019-Datacenter.")
+  @doc("The SKU of the Azure Virtual Machines Marketplace Image. For example, 18.04-LTS or 2019-Datacenter.")
   sku?: string;
 
-  @doc("""
-A value of 'latest' can be specified to select the latest version of an Image.
-If omitted, the default is 'latest'.
-""")
+  @doc("The version of the Azure Virtual Machines Marketplace Image. A value of 'latest' can be specified to select the latest version of an Image. If omitted, the default is 'latest'.")
   version?: string;
 
-  @doc("""
-This property is mutually exclusive with other ImageReference properties. The
-Shared Image Gallery Image must have replicas in the same region and must be in
-the same subscription as the Azure Batch account. If the image version is not
-specified in the imageId, the latest version will be used. For information
-about the firewall settings for the Batch Compute Node agent to communicate
-with the Batch service see
-https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.
-""")
+  @doc("The ARM resource identifier of the Shared Image Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{VersionId} or /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName} for always defaulting to the latest image version. This property is mutually exclusive with other ImageReference properties. The Shared Image Gallery Image must have replicas in the same region and must be in the same subscription as the Azure Batch account. If the image version is not specified in the imageId, the latest version will be used. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.")
   virtualMachineImageId?: string;
 
-  @doc("""
-The specific version of the platform image or marketplace image used to create
-the node. This read-only field differs from 'version' only if the value
-specified for 'version' when the pool was created was 'latest'.
-""")
+  @doc("The specific version of the platform image or marketplace image used to create the node. This read-only field differs from 'version' only if the value specified for 'version' when the pool was created was 'latest'.")
   @visibility("read")
   exactVersion?: string;
 }
@@ -726,10 +745,10 @@ model PoolNodeCounts {
   @doc("The ID of the Pool.")
   poolId: string;
 
-  @doc("The number of Compute Nodes in each Compute Node state.")
+  @doc("The number of dedicated Compute Nodes in each state.")
   dedicated?: NodeCounts;
 
-  @doc("The number of Compute Nodes in each Compute Node state.")
+  @doc("The number of Spot/Low-priority Compute Nodes in each state.")
   lowPriority?: NodeCounts;
 }
 
@@ -786,16 +805,13 @@ model PoolStatistics {
   @doc("The start time of the time range covered by the statistics.")
   startTime: utcDateTime;
 
-  @doc("""
-The time at which the statistics were last updated. All statistics are limited
-to the range between startTime and lastUpdateTime.
-""")
+  @doc("The time at which the statistics were last updated. All statistics are limited to the range between startTime and lastUpdateTime.")
   lastUpdateTime: utcDateTime;
 
-  @doc("Statistics related to Pool usage information.")
+  @doc("Statistics related to Pool usage, such as the amount of core-time used.")
   usageStats?: UsageStatistics;
 
-  @doc("Statistics related to resource consumption by Compute Nodes in a Pool.")
+  @doc("Statistics related to resource consumption by Compute Nodes in the Pool.")
   resourceStats?: ResourceStatistics;
 }
 
@@ -804,16 +820,10 @@ model UsageStatistics {
   @doc("The start time of the time range covered by the statistics.")
   startTime: utcDateTime;
 
-  @doc("""
-The time at which the statistics were last updated. All statistics are limited
-to the range between startTime and lastUpdateTime.
-""")
+  @doc("The time at which the statistics were last updated. All statistics are limited to the range between startTime and lastUpdateTime.")
   lastUpdateTime: utcDateTime;
 
-  @doc("""
-The aggregated wall-clock time of the dedicated Compute Node cores being part
-of the Pool.
-""")
+  @doc("The aggregated wall-clock time of the dedicated Compute Node cores being part of the Pool.")
   dedicatedCoreTime: duration;
 }
 
@@ -823,17 +833,11 @@ model ResourceStatistics {
   @doc("The start time of the time range covered by the statistics.")
   startTime: utcDateTime;
 
-  @doc("""
-The time at which the statistics were last updated. All statistics are limited
-to the range between startTime and lastUpdateTime.
-""")
+  @doc("The time at which the statistics were last updated. All statistics are limited to the range between startTime and lastUpdateTime.")
   lastUpdateTime: utcDateTime;
 
-  @doc("""
-The average CPU usage across all Compute Nodes in the Pool (percentage per
-node).
-""")
-  @projectedName("python", "avg_cpu_percentage")
+  @doc("The average CPU usage across all Compute Nodes in the Pool (percentage per node).")
+  @projectedName("client", "avgCpuPercentage")
   avgCPUPercentage: float32;
 
   @doc("The average memory usage in GiB across all Compute Nodes in the Pool.")
@@ -854,28 +858,16 @@ node).
   @doc("The total number of disk write operations across all Compute Nodes in the Pool.")
   diskWriteIOps: int32;
 
-  @doc("""
-The total amount of data in GiB of disk reads across all Compute Nodes in the
-Pool.
-""")
+  @doc("The total amount of data in GiB of disk reads across all Compute Nodes in the Pool.")
   diskReadGiB: float32;
 
-  @doc("""
-The total amount of data in GiB of disk writes across all Compute Nodes in the
-Pool.
-""")
+  @doc("The total amount of data in GiB of disk writes across all Compute Nodes in the Pool.")
   diskWriteGiB: float32;
 
-  @doc("""
-The total amount of data in GiB of network reads across all Compute Nodes in
-the Pool.
-""")
+  @doc("The total amount of data in GiB of network reads across all Compute Nodes in the Pool.")
   networkReadGiB: float32;
 
-  @doc("""
-The total amount of data in GiB of network writes across all Compute Nodes in
-the Pool.
-""")
+  @doc("The total amount of data in GiB of network writes across all Compute Nodes in the Pool.")
   networkWriteGiB: float32;
 }
 
@@ -888,30 +880,16 @@ model JobStatistics {
   @doc("The start time of the time range covered by the statistics.")
   startTime: utcDateTime;
 
-  @doc("""
-The time at which the statistics were last updated. All statistics are limited
-to the range between startTime and lastUpdateTime.
-""")
+  @doc("The time at which the statistics were last updated. All statistics are limited to the range between startTime and lastUpdateTime.")
   lastUpdateTime: utcDateTime;
 
-  @doc("""
-The total user mode CPU time (summed across all cores and all Compute Nodes)
-consumed by all Tasks in the Job.
-""")
+  @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.")
   userCPUTime: duration;
 
-  @doc("""
-The total kernel mode CPU time (summed across all cores and all Compute Nodes)
-consumed by all Tasks in the Job.
-""")
+  @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.")
   kernelCPUTime: duration;
 
-  @doc("""
- The wall clock time is the elapsed time from when the Task started running on
-a Compute Node to when it finished (or to the last time the statistics were
-updated, if the Task had not finished by then). If a Task was retried, this
-includes the wall clock time of all the Task retries.
-""")
+  @doc("The total wall clock time of all Tasks in the Job.  The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries.")
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by all Tasks in the Job.")
@@ -926,28 +904,16 @@ includes the wall clock time of all the Task retries.
   @doc("The total amount of data in GiB written to disk by all Tasks in the Job.")
   writeIOGiB: float32;
 
-  @doc("A Task completes successfully if it returns exit code 0.")
+  @doc("The total number of Tasks successfully completed in the Job during the given time range. A Task completes successfully if it returns exit code 0.")
   numSucceededTasks: int32;
 
-  @doc("""
-A Task fails if it exhausts its maximum retry count without returning exit code
-0.
-""")
+  @doc("The total number of Tasks in the Job that failed during the given time range. A Task fails if it exhausts its maximum retry count without returning exit code 0.")
   numFailedTasks: int32;
 
-  @doc("""
-The total number of retries on all the Tasks in the Job during the given time
-range.
-""")
+  @doc("The total number of retries on all the Tasks in the Job during the given time range.")
   numTaskRetries: int32;
 
-  @doc("""
-The wait time for a Task is defined as the elapsed time between the creation of
-the Task and the start of Task execution. (If the Task is retried due to
-failures, the wait time is the time to the most recent Task execution.) This
-value is only reported in the Account lifetime statistics; it is not included
-in the Job statistics.
-""")
+  @doc("The total wait time of all Tasks in the Job. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.) This value is only reported in the Account lifetime statistics; it is not included in the Job statistics.")
   waitTime: duration;
 }
 
@@ -955,15 +921,12 @@ in the Job statistics.
 A Certificate that can be installed on Compute Nodes and can be used to
 authenticate operations on the machine.
 """)
-model Certificate {
-  @doc("""
-The X.509 thumbprint of the Certificate. This is a sequence of up to 40 hex
-digits.
-""")
-  thumbprint?: string;
+model BatchCertificate {
+  @doc("The X.509 thumbprint of the Certificate. This is a sequence of up to 40 hex digits (it may include spaces but these are removed).")
+  thumbprint: string;
 
-  @doc("The algorithm used to derive the thumbprint.")
-  thumbprintAlgorithm?: string;
+  @doc("The algorithm used to derive the thumbprint. This must be sha1.")
+  thumbprintAlgorithm: string;
 
   @doc("The URL of the Certificate.")
   @visibility("read")
@@ -977,11 +940,11 @@ digits.
   @visibility("read")
   stateTransitionTime?: utcDateTime;
 
-  @doc("This property is not set if the Certificate is in its initial active state.")
+  @doc("The previous state of the Certificate. This property is not set if the Certificate is in its initial active state.")
   @visibility("read")
   previousState?: CertificateState;
 
-  @doc("This property is not set if the Certificate is in its initial Active state.")
+  @doc("The time at which the Certificate entered its previous state. This property is not set if the Certificate is in its initial Active state.")
   @visibility("read")
   previousStateTransitionTime?: utcDateTime;
 
@@ -989,7 +952,7 @@ digits.
   @visibility("read")
   publicData?: string;
 
-  @doc("This property is set only if the Certificate is in the DeleteFailed state.")
+  @doc("The error that occurred on the last attempt to delete this Certificate. This property is set only if the Certificate is in the DeleteFailed state.")
   @visibility("read")
   deleteCertificateError?: DeleteCertificateError;
 
@@ -1001,30 +964,20 @@ digits.
   @visibility("create")
   certificateFormat?: CertificateFormat;
 
-  @doc("This must be omitted if the Certificate format is cer.")
+  @doc("The password to access the Certificate's private key. This must be omitted if the Certificate format is cer.")
   @visibility("create")
   password?: string;
 }
 
 @doc("An error encountered by the Batch service when deleting a Certificate.")
 model DeleteCertificateError {
-  @doc("""
-An identifier for the Certificate deletion error. Codes are invariant and are
-intended to be consumed programmatically.
-""")
+  @doc("An identifier for the Certificate deletion error. Codes are invariant and are intended to be consumed programmatically.")
   code?: string;
 
-  @doc("""
-A message describing the Certificate deletion error, intended to be suitable
-for display in a user interface.
-""")
+  @doc("A message describing the Certificate deletion error, intended to be suitable for display in a user interface.")
   message?: string;
 
-  @doc("""
-This list includes details such as the active Pools and Compute Nodes
-referencing this Certificate. However, if a large number of resources reference
-the Certificate, the list contains only about the first hundred.
-""")
+  @doc("A list of additional error details related to the Certificate deletion error. This list includes details such as the active Pools and Compute Nodes referencing this Certificate. However, if a large number of resources reference the Certificate, the list contains only about the first hundred.")
   values?: NameValuePair[];
 }
 
@@ -1042,7 +995,7 @@ model NameValuePair {
 model CertificateListResult {
   @doc("The list of Certificates.")
   @items
-  value?: Certificate[];
+  value?: BatchCertificate[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
@@ -1077,13 +1030,13 @@ model NodeFile {
   @doc("Whether the object represents a directory.")
   isDirectory?: boolean;
 
-  @doc("The properties of a file on a Compute Node.")
+  @doc("The file properties.")
   properties?: FileProperties;
 }
 
 @doc("The properties of a file on a Compute Node.")
 model FileProperties {
-  @doc("The creation time is not returned for files on Linux Compute Nodes.")
+  @doc("The file creation time. The creation time is not returned for files on Linux Compute Nodes.")
   creationTime?: utcDateTime;
 
   @doc("The time at which the file was last modified.")
@@ -1095,7 +1048,7 @@ model FileProperties {
   @doc("The content type of the file.")
   contentType?: string;
 
-  @doc("The file mode is returned only for files on Linux Compute Nodes.")
+  @doc("The file mode attribute in octal format. The file mode is returned only for files on Linux Compute Nodes.")
   fileMode?: string;
 }
 
@@ -1105,31 +1058,22 @@ specification used to create each Job.
 """)
 model BatchJobSchedule {
   @doc("A string that uniquely identifies the schedule within the Account.")
-  @visibility("read", "create")
+  @visibility("read")
   id?: string;
 
   @doc("The display name for the schedule.")
-  @visibility("read", "create")
+  @visibility("read")
   displayName?: string;
 
   @doc("The URL of the Job Schedule.")
   @visibility("read")
   url?: string;
 
-  @doc("""
-This is an opaque string. You can use it to detect whether the Job Schedule has
-changed between requests. In particular, you can be pass the ETag with an
-Update Job Schedule request to specify that your changes should take effect
-only if nobody else has modified the schedule in the meantime.
-""")
+  @doc("The ETag of the Job Schedule. This is an opaque string. You can use it to detect whether the Job Schedule has changed between requests. In particular, you can be pass the ETag with an Update Job Schedule request to specify that your changes should take effect only if nobody else has modified the schedule in the meantime.")
   @visibility("read")
   eTag?: string;
 
-  @doc("""
-This is the last time at which the schedule level data, such as the Job
-specification or recurrence information, changed. It does not factor in
-job-level changes such as new Jobs being created or Jobs changing state.
-""")
+  @doc("The last modified time of the Job Schedule. This is the last time at which the schedule level data, such as the Job specification or recurrence information, changed. It does not factor in job-level changes such as new Jobs being created or Jobs changing state.")
   @visibility("read")
   lastModified?: utcDateTime;
 
@@ -1137,7 +1081,7 @@ job-level changes such as new Jobs being created or Jobs changing state.
   @visibility("read")
   creationTime?: utcDateTime;
 
-  @doc("The state of the Job Schedule.")
+  @doc("The current state of the Job Schedule.")
   @visibility("read")
   state?: JobScheduleState;
 
@@ -1145,39 +1089,64 @@ job-level changes such as new Jobs being created or Jobs changing state.
   @visibility("read")
   stateTransitionTime?: utcDateTime;
 
-  @doc("This property is not present if the Job Schedule is in its initial active state.")
+  @doc("The previous state of the Job Schedule. This property is not present if the Job Schedule is in its initial active state.")
   @visibility("read")
   previousState?: JobScheduleState;
 
-  @doc("This property is not present if the Job Schedule is in its initial active state.")
+  @doc("The time at which the Job Schedule entered its previous state. This property is not present if the Job Schedule is in its initial active state.")
   @visibility("read")
   previousStateTransitionTime?: utcDateTime;
 
-  @doc("""
-All times are fixed respective to UTC and are not impacted by daylight saving
-time.
-""")
-  schedule?: Schedule;
+  @doc("The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time.")
+  schedule: Schedule;
 
-  @doc("Specifies details of the Jobs to be created on a schedule.")
-  jobSpecification?: JobSpecification;
+  @doc("The details of the Jobs to be created on this schedule.")
+  jobSpecification: JobSpecification;
 
-  @doc("""
-Contains information about Jobs that have been and will be run under a Job
-Schedule.
-""")
+  @doc("Information about Jobs that have been and will be run under this schedule.")
   @visibility("read")
   executionInfo?: JobScheduleExecutionInformation;
 
-  @doc("""
-The Batch service does not assign any meaning to metadata; it is solely for the
-use of user code.
-""")
+  @doc("A list of name-value pairs associated with the schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
   metadata?: MetadataItem[];
 
-  @doc("Resource usage statistics for a Job Schedule.")
+  @doc("The lifetime resource usage statistics for the Job Schedule. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes.")
   @visibility("read")
   stats?: JobScheduleStatistics;
+}
+
+@doc("""
+Options for updating an Azure Batch Job Schedule.
+""")
+model BatchJobScheduleUpdateOptions {
+  @doc("The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time. If you do not specify this element, the existing schedule is left unchanged.")
+  schedule?: Schedule;
+
+  @doc("The details of the Jobs to be created on this schedule. Updates affect only Jobs that are started after the update has taken place. Any currently active Job continues with the older specification.")
+  jobSpecification?: JobSpecification;
+
+  @doc("A list of name-value pairs associated with the Job Schedule as metadata. If you do not specify this element, existing metadata is left unchanged.")
+  metadata?: MetadataItem[];
+}
+
+@doc("""
+Options for creating an Azure Batch Job Schedule
+""")
+model BatchJobScheduleCreateOptions {
+  @doc("A string that uniquely identifies the schedule within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
+  id: string;
+
+  @doc("The display name for the schedule. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
+  displayName?: string;
+
+  @doc("The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time.")
+  schedule: Schedule;
+
+  @doc("The details of the Jobs to be created on this schedule.")
+  jobSpecification: JobSpecification;
+
+  @doc("A list of name-value pairs associated with the schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
+  metadata?: MetadataItem[];
 }
 
 @doc("""
@@ -1185,185 +1154,84 @@ The schedule according to which Jobs will be created. All times are fixed
 respective to UTC and are not impacted by daylight saving time.
 """)
 model Schedule {
-  @doc("""
-If you do not specify a doNotRunUntil time, the schedule becomes ready to
-create Jobs immediately.
-""")
+  @doc("The earliest time at which any Job may be created under this Job Schedule. If you do not specify a doNotRunUntil time, the schedule becomes ready to create Jobs immediately.")
   doNotRunUntil?: utcDateTime;
 
-  @doc("""
-If you do not specify a doNotRunAfter time, and you are creating a recurring
-Job Schedule, the Job Schedule will remain active until you explicitly
-terminate it.
-""")
+  @doc("A time after which no Job will be created under this Job Schedule. The schedule will move to the completed state as soon as this deadline is past and there is no active Job under this Job Schedule. If you do not specify a doNotRunAfter time, and you are creating a recurring Job Schedule, the Job Schedule will remain active until you explicitly terminate it.")
   doNotRunAfter?: utcDateTime;
 
-  @doc("""
-If a Job is not created within the startWindow interval, then the 'opportunity'
-is lost; no Job will be created until the next recurrence of the schedule. If
-the schedule is recurring, and the startWindow is longer than the recurrence
-interval, then this is equivalent to an infinite startWindow, because the Job
-that is 'due' in one recurrenceInterval is not carried forward into the next
-recurrence interval. The default is infinite. The minimum value is 1 minute. If
-you specify a lower value, the Batch service rejects the schedule with an
-error; if you are calling the REST API directly, the HTTP status code is 400
-(Bad Request).
-""")
+  @doc("The time interval, starting from the time at which the schedule indicates a Job should be created, within which a Job must be created. If a Job is not created within the startWindow interval, then the 'opportunity' is lost; no Job will be created until the next recurrence of the schedule. If the schedule is recurring, and the startWindow is longer than the recurrence interval, then this is equivalent to an infinite startWindow, because the Job that is 'due' in one recurrenceInterval is not carried forward into the next recurrence interval. The default is infinite. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   startWindow?: duration;
 
-  @doc("""
-Because a Job Schedule can have at most one active Job under it at any given
-time, if it is time to create a new Job under a Job Schedule, but the previous
-Job is still running, the Batch service will not create the new Job until the
-previous Job finishes. If the previous Job does not finish within the
-startWindow period of the new recurrenceInterval, then no new Job will be
-scheduled for that interval. For recurring Jobs, you should normally specify a
-jobManagerTask in the jobSpecification. If you do not use jobManagerTask, you
-will need an external process to monitor when Jobs are created, add Tasks to
-the Jobs and terminate the Jobs ready for the next recurrence. The default is
-that the schedule does not recur: one Job is created, within the startWindow
-after the doNotRunUntil time, and the schedule is complete as soon as that Job
-finishes. The minimum value is 1 minute. If you specify a lower value, the
-Batch service rejects the schedule with an error; if you are calling the REST
-API directly, the HTTP status code is 400 (Bad Request).
-""")
+  @doc("The time interval between the start times of two successive Jobs under the Job Schedule. A Job Schedule can have at most one active Job under it at any given time. Because a Job Schedule can have at most one active Job under it at any given time, if it is time to create a new Job under a Job Schedule, but the previous Job is still running, the Batch service will not create the new Job until the previous Job finishes. If the previous Job does not finish within the startWindow period of the new recurrenceInterval, then no new Job will be scheduled for that interval. For recurring Jobs, you should normally specify a jobManagerTask in the jobSpecification. If you do not use jobManagerTask, you will need an external process to monitor when Jobs are created, add Tasks to the Jobs and terminate the Jobs ready for the next recurrence. The default is that the schedule does not recur: one Job is created, within the startWindow after the doNotRunUntil time, and the schedule is complete as soon as that Job finishes. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   recurrenceInterval?: duration;
 }
 
 @doc("Specifies details of the Jobs to be created on a schedule.")
 model JobSpecification {
-  @doc("""
-Priority values can range from -1000 to 1000, with -1000 being the lowest
-priority and 1000 being the highest priority. The default value is 0. This
-priority is used as the default for all Jobs under the Job Schedule. You can
-update a Job's priority after it has been created using by using the update Job
-API.
-""")
+  @doc("The priority of Jobs created under this schedule. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0. This priority is used as the default for all Jobs under the Job Schedule. You can update a Job's priority after it has been created using by using the update Job API.")
   priority?: int32;
 
-  @doc("""
-If the value is set to True, other high priority jobs submitted to the system
-will take precedence and will be able requeue tasks from this job. You can
-update a job's allowTaskPreemption after it has been created using the update
-job API.
-""")
+  @doc("Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
-  @doc("""
-The value of maxParallelTasks must be -1 or greater than 0 if specified. If not
-specified, the default value is -1, which means there's no limit to the number
-of tasks that can be run at once. You can update a job's maxParallelTasks after
-it has been created using the update job API.
-""")
+  @doc("The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32;
 
-  @doc("""
-The name need not be unique and can contain any Unicode characters up to a
-maximum length of 1024.
-""")
+  @doc("The display name for Jobs created under this schedule. The name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
   displayName?: string;
 
-  @doc("""
-Whether Tasks in the Job can define dependencies on each other. The default is
-false.
-""")
+  @doc("Whether Tasks in the Job can define dependencies on each other. The default is false.")
   usesTaskDependencies?: boolean;
 
-  @doc("""
-Note that if a Job contains no Tasks, then all Tasks are considered complete.
-This option is therefore most commonly used with a Job Manager task; if you
-want to use automatic Job termination without a Job Manager, you should
-initially set onAllTasksComplete to noaction and update the Job properties to
-set onAllTasksComplete to terminatejob once you have finished adding Tasks. The
-default is noaction.
-""")
+  @doc("The action the Batch service should take when all Tasks in a Job created under this schedule are in the completed state. Note that if a Job contains no Tasks, then all Tasks are considered complete. This option is therefore most commonly used with a Job Manager task; if you want to use automatic Job termination without a Job Manager, you should initially set onAllTasksComplete to noaction and update the Job properties to set onAllTasksComplete to terminatejob once you have finished adding Tasks. The default is noaction.")
   onAllTasksComplete?: OnAllTasksComplete;
 
-  @doc("The default is noaction.")
+  @doc("The action the Batch service should take when any Task fails in a Job created under this schedule. A Task is considered to have failed if it have failed if has a failureInfo. A failureInfo is set if the Task completes with a non-zero exit code after exhausting its retry count, or if there was an error starting the Task, for example due to a resource file download error. The default is noaction.")
   onTaskFailure?: OnTaskFailure;
 
   @doc("The network configuration for the Job.")
   networkConfiguration?: JobNetworkConfiguration;
 
-  @doc("The execution constraints for a Job.")
+  @doc("The execution constraints for Jobs created under this schedule.")
   constraints?: JobConstraints;
 
-  @doc("""
-If the Job does not specify a Job Manager Task, the user must explicitly add
-Tasks to the Job using the Task API. If the Job does specify a Job Manager
-Task, the Batch service creates the Job Manager Task when the Job is created,
-and will try to schedule the Job Manager Task before scheduling other Tasks in
-the Job.
-""")
+  @doc("The details of a Job Manager Task to be launched when a Job is started under this schedule. If the Job does not specify a Job Manager Task, the user must explicitly add Tasks to the Job using the Task API. If the Job does specify a Job Manager Task, the Batch service creates the Job Manager Task when the Job is created, and will try to schedule the Job Manager Task before scheduling other Tasks in the Job.")
   jobManagerTask?: JobManagerTask;
 
-  @doc("""
-If a Job has a Job Preparation Task, the Batch service will run the Job
-Preparation Task on a Node before starting any Tasks of that Job on that
-Compute Node.
-""")
+  @doc("The Job Preparation Task for Jobs created under this schedule. If a Job has a Job Preparation Task, the Batch service will run the Job Preparation Task on a Node before starting any Tasks of that Job on that Compute Node.")
   jobPreparationTask?: JobPreparationTask;
 
-  @doc("""
-The primary purpose of the Job Release Task is to undo changes to Nodes made by
-the Job Preparation Task. Example activities include deleting local files, or
-shutting down services that were started as part of Job preparation. A Job
-Release Task cannot be specified without also specifying a Job Preparation Task
-for the Job. The Batch service runs the Job Release Task on the Compute Nodes
-that have run the Job Preparation Task.
-""")
+  @doc("The Job Release Task for Jobs created under this schedule. The primary purpose of the Job Release Task is to undo changes to Nodes made by the Job Preparation Task. Example activities include deleting local files, or shutting down services that were started as part of Job preparation. A Job Release Task cannot be specified without also specifying a Job Preparation Task for the Job. The Batch service runs the Job Release Task on the Compute Nodes that have run the Job Preparation Task.")
   jobReleaseTask?: JobReleaseTask;
 
-  @doc("""
-Individual Tasks can override an environment setting specified here by
-specifying the same setting name with a different value.
-""")
+  @doc("A list of common environment variable settings. These environment variables are set for all Tasks in Jobs created under this schedule (including the Job Manager, Job Preparation and Job Release Tasks). Individual Tasks can override an environment setting specified here by specifying the same setting name with a different value.")
   commonEnvironmentSettings?: EnvironmentSetting[];
 
-  @doc("Specifies how a Job should be assigned to a Pool.")
+  @doc("The Pool on which the Batch service runs the Tasks of Jobs created under this schedule.")
   poolInfo: PoolInformation;
 
-  @doc("""
-The Batch service does not assign any meaning to metadata; it is solely for the
-use of user code.
-""")
+  @doc("A list of name-value pairs associated with each Job created under this schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
   metadata?: MetadataItem[];
 }
 
 @doc("The network configuration for the Job.")
 model JobNetworkConfiguration {
-  @doc("""
-The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes which will run Tasks from the Job. This can be up to the number of Compute Nodes in the Pool. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor'
-Role-Based Access Control (RBAC) role for the specified VNet so that Azure Batch service can schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. This is
-of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. If the specified VNet has any associated Network Security Groups (NSG), then a
-few reserved system ports must be enabled for inbound communication from the Azure Batch service. For Pools created with a Virtual Machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. Port 443 is also required to be open for outbound connections for communications to Azure Storage. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration
-""")
+  @doc("The ARM resource identifier of the virtual network subnet which Compute Nodes running Tasks from the Job will join for the duration of the Task. This will only work with a VirtualMachineConfiguration Pool. The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes which will run Tasks from the Job. This can be up to the number of Compute Nodes in the Pool. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet so that Azure Batch service can schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication from the Azure Batch service. For Pools created with a Virtual Machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. Port 443 is also required to be open for outbound connections for communications to Azure Storage. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.")
   subnetId: string;
 }
 
 @doc("The execution constraints for a Job.")
 model JobConstraints {
-  @doc("""
-If the Job does not complete within the time limit, the Batch service
-terminates it and any Tasks that are still running. In this case, the
-termination reason will be MaxWallClockTimeExpiry. If this property is not
-specified, there is no time limit on how long the Job may run.
-""")
+  @doc("The maximum elapsed time that the Job may run, measured from the time the Job is created. If the Job does not complete within the time limit, the Batch service terminates it and any Tasks that are still running. In this case, the termination reason will be MaxWallClockTimeExpiry. If this property is not specified, there is no time limit on how long the Job may run.")
   maxWallClockTime?: duration;
 
-  @doc("""
-Note that this value specifically controls the number of retries. The Batch
-service will try each Task once, and may then retry up to this limit. For
-example, if the maximum retry count is 3, Batch tries a Task up to 4 times (one
-initial try and 3 retries). If the maximum retry count is 0, the Batch service
-does not retry Tasks. If the maximum retry count is -1, the Batch service
-retries the Task without limit, however this is not recommended for a start
-task or any task. The default value is 0 (no retries)
-""")
+  @doc("The maximum number of times each Task may be retried. The Batch service retries a Task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try each Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries a Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry Tasks. If the maximum retry count is -1, the Batch service retries Tasks without limit. The default value is 0 (no retries).")
   maxTaskRetryCount?: int32;
 }
 
 @doc("""
+Specifies details of a Job Manager Task.
 The Job Manager Task is automatically started when the Job is created. The
 Batch service tries to schedule the Job Manager Task before any other Tasks in
 the Job. When shrinking a Pool, the Batch service tries to preserve Nodes where
@@ -1388,142 +1256,73 @@ duplicate data. The best practice for long running Tasks is to use some form of
 checkpointing.
 """)
 model JobManagerTask {
-  @doc("""
-The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters.
-""")
+  @doc("A string that uniquely identifies the Job Manager Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters.")
   id: string;
 
-  @doc("""
-It need not be unique and can contain any Unicode characters up to a maximum
-length of 1024.
-""")
+  @doc("The display name of the Job Manager Task. It need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
   displayName?: string;
 
-  @doc("""
-The command line does not run under a shell, and therefore cannot take
-advantage of shell features such as environment variable expansion. If you want
-to take advantage of such features, you should invoke the shell in the command
-line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c
-MyCommand\" in Linux. If the command line refers to file paths, it should use a
-relative path (relative to the Task working directory), or use the Batch
-provided environment variable
-(https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).
-""")
+  @doc("The command line of the Job Manager Task. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).")
   commandLine: string;
 
-  @doc("""
-If the Pool that will run this Task has containerConfiguration set, this must
-be set as well. If the Pool that will run this Task doesn't have
-containerConfiguration set, this must not be set. When this is specified, all
-directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure
-Batch directories on the node) are mapped into the container, all Task
-environment variables are mapped into the container, and the Task command line
-is executed in the container. Files produced in the container outside of
-AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that
-Batch file APIs will not be able to access those files.
-""")
+  @doc("The settings for the container under which the Job Manager Task runs. If the Pool that will run this Task has containerConfiguration set, this must be set as well. If the Pool that will run this Task doesn't have containerConfiguration set, this must not be set. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all Task environment variables are mapped into the container, and the Task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files.")
   containerSettings?: TaskContainerSettings;
 
-  @doc("""
-Files listed under this element are located in the Task's working directory.
-There is a maximum size for the list of resource files.  When the max size is
-exceeded, the request will fail and the response error code will be
-RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be
-reduced in size. This can be achieved using .zip files, Application Packages,
-or Docker Containers.
-""")
+  @doc("A list of files that the Batch service will download to the Compute Node before running the command line. Files listed under this element are located in the Task's working directory. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.")
   resourceFiles?: ResourceFile[];
 
-  @doc("""
-For multi-instance Tasks, the files will only be uploaded from the Compute Node
-on which the primary Task is executed.
-""")
+  @doc("A list of files that the Batch service will upload from the Compute Node after running the command line. For multi-instance Tasks, the files will only be uploaded from the Compute Node on which the primary Task is executed.")
   outputFiles?: OutputFile[];
 
   @doc("A list of environment variable settings for the Job Manager Task.")
   environmentSettings?: EnvironmentSetting[];
 
-  @doc("Execution constraints to apply to a Task.")
+  @doc("Constraints that apply to the Job Manager Task.")
   constraints?: TaskConstraints;
 
-  @doc("""
-The default is 1. A Task can only be scheduled to run on a compute node if the
-node has enough free scheduling slots available. For multi-instance Tasks, this
-property is not supported and must not be specified.
-""")
+  @doc("The number of scheduling slots that the Task requires to run. The default is 1. A Task can only be scheduled to run on a compute node if the node has enough free scheduling slots available. For multi-instance Tasks, this property is not supported and must not be specified.")
   requiredSlots?: int32;
 
-  @doc("""
-If true, when the Job Manager Task completes, the Batch service marks the Job
-as complete. If any Tasks are still running at this time (other than Job
-Release), those Tasks are terminated. If false, the completion of the Job
-Manager Task does not affect the Job status. In this case, you should either
-use the onAllTasksComplete attribute to terminate the Job, or have a client or
-user terminate the Job explicitly. An example of this is if the Job Manager
-creates a set of Tasks but then takes no further role in their execution. The
-default value is true. If you are using the onAllTasksComplete and
-onTaskFailure attributes to control Job lifetime, and using the Job Manager
-Task only to create the Tasks for the Job (not to monitor progress), then it is
-important to set killJobOnCompletion to false.
-""")
+  @doc("Whether completion of the Job Manager Task signifies completion of the entire Job. If true, when the Job Manager Task completes, the Batch service marks the Job as complete. If any Tasks are still running at this time (other than Job Release), those Tasks are terminated. If false, the completion of the Job Manager Task does not affect the Job status. In this case, you should either use the onAllTasksComplete attribute to terminate the Job, or have a client or user terminate the Job explicitly. An example of this is if the Job Manager creates a set of Tasks but then takes no further role in their execution. The default value is true. If you are using the onAllTasksComplete and onTaskFailure attributes to control Job lifetime, and using the Job Manager Task only to create the Tasks for the Job (not to monitor progress), then it is important to set killJobOnCompletion to false.")
   killJobOnCompletion?: boolean;
 
-  @doc("If omitted, the Task runs as a non-administrative user unique to the Task.")
+  @doc("The user identity under which the Job Manager Task runs. If omitted, the Task runs as a non-administrative user unique to the Task.")
   userIdentity?: UserIdentity;
 
-  @doc("""
-If true, no other Tasks will run on the same Node for as long as the Job
-Manager is running. If false, other Tasks can run simultaneously with the Job
-Manager on a Compute Node. The Job Manager Task counts normally against the
-Compute Node's concurrent Task limit, so this is only relevant if the Compute
-Node allows multiple concurrent Tasks. The default value is true.
-""")
+  @doc("Whether the Job Manager Task requires exclusive use of the Compute Node where it runs. If true, no other Tasks will run on the same Node for as long as the Job Manager is running. If false, other Tasks can run simultaneously with the Job Manager on a Compute Node. The Job Manager Task counts normally against the Compute Node's concurrent Task limit, so this is only relevant if the Compute Node allows multiple concurrent Tasks. The default value is true.")
   runExclusive?: boolean;
 
   @doc("""
-Application Packages are downloaded and deployed to a shared directory, not the
-Task working directory. Therefore, if a referenced Application Package is
-already on the Compute Node, and is up to date, then it is not re-downloaded;
+A list of Application Packages that the Batch service will deploy to the 
+Compute Node before running the command line.Application Packages are 
+downloaded and deployed to a shared directory, not the Task working 
+directory. Therefore, if a referenced Application Package is already 
+on the Compute Node, and is up to date, then it is not re-downloaded;
 the existing copy on the Compute Node is used. If a referenced Application
 Package cannot be installed, for example because the package has been deleted
 or because download failed, the Task fails.
 """)
   applicationPackageReferences?: ApplicationPackageReference[];
 
-  @doc("""
-If this property is set, the Batch service provides the Task with an
-authentication token which can be used to authenticate Batch service operations
-without requiring an Account access key. The token is provided via the
-AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the
-Task can carry out using the token depend on the settings. For example, a Task
-can request Job permissions in order to add other Tasks to the Job, or check
-the status of the Job or of other Tasks under the Job.
-""")
+  @doc("The settings for an authentication token that the Task can use to perform Batch service operations. If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.")
   authenticationTokenSettings?: AuthenticationTokenSettings;
 
-  @doc("The default value is true.")
+  @doc("Whether the Job Manager Task may run on a Spot/Low-priority Compute Node. The default value is true.")
   allowLowPriorityNode?: boolean;
 }
 
 @doc("The container settings for a Task.")
 model TaskContainerSettings {
-  @doc("""
-These additional options are supplied as arguments to the \"docker create\"
-command, in addition to those controlled by the Batch Service.
-""")
+  @doc("Additional options to the container create command. These additional options are supplied as arguments to the \"docker create\" command, in addition to those controlled by the Batch Service.")
   containerRunOptions?: string;
 
-  @doc("""
-This is the full Image reference, as would be specified to \"docker pull\". If
-no tag is provided as part of the Image name, the tag \":latest\" is used as a
-default.
-""")
+  @doc("The Image to use to create the container in which the Task will run. This is the full Image reference, as would be specified to \"docker pull\". If no tag is provided as part of the Image name, the tag \":latest\" is used as a default.")
   imageName: string;
 
-  @doc("This setting can be omitted if was already provided at Pool creation.")
+  @doc("The private registry which contains the container Image. This setting can be omitted if was already provided at Pool creation.")
   registry?: ContainerRegistry;
 
-  @doc("The default is 'taskWorkingDirectory'.")
+  @doc("The location of the container Task working directory. The default is 'taskWorkingDirectory'.")
   workingDirectory?: ContainerWorkingDirectory;
 }
 
@@ -1535,172 +1334,96 @@ model ContainerRegistry {
   @doc("The password to log into the registry server.")
   password?: string;
 
-  @doc("If omitted, the default is \"docker.io\".")
+  @doc("The registry URL. If omitted, the default is \"docker.io\".")
   registryServer?: string;
 
-  @doc("""
-The reference to a user assigned identity associated with the Batch pool which
-a compute node will use.
-""")
-  identityReference?: ComputeNodeIdentityReference;
+  @doc("The reference to the user assigned identity to use to access an Azure Container Registry instead of username and password.")
+  identityReference?: BatchNodeIdentityReference;
 }
 
 @doc("""
 The reference to a user assigned identity associated with the Batch pool which
 a compute node will use.
 """)
-model ComputeNodeIdentityReference {
+model BatchNodeIdentityReference {
   @doc("The ARM resource id of the user assigned identity.")
   resourceId?: string;
 }
 
 @doc("A single file or multiple files to be downloaded to a Compute Node.")
 model ResourceFile {
-  @doc("""
-The autoStorageContainerName, storageContainerUrl and httpUrl properties are
-mutually exclusive and one of them must be specified.
-""")
+  @doc("The storage container name in the auto storage Account. The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified.")
   autoStorageContainerName?: string;
 
-  @doc("""
-The autoStorageContainerName, storageContainerUrl and httpUrl properties are
-mutually exclusive and one of them must be specified. This URL must be readable
-and listable from compute nodes. There are three ways to get such a URL for a
-container in Azure storage: include a Shared Access Signature (SAS) granting
-read and list permissions on the container, use a managed identity with read
-and list permissions, or set the ACL for the container to allow public access.
-""")
+  @doc("The URL of the blob container within Azure Blob Storage. The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable from compute nodes. There are three ways to get such a URL for a container in Azure storage: include a Shared Access Signature (SAS) granting read and list permissions on the container, use a managed identity with read and list permissions, or set the ACL for the container to allow public access.")
   storageContainerUrl?: string;
 
-  @doc("""
-The autoStorageContainerName, storageContainerUrl and httpUrl properties are
-mutually exclusive and one of them must be specified. If the URL points to
-Azure Blob Storage, it must be readable from compute nodes. There are three
-ways to get such a URL for a blob in Azure storage: include a Shared Access
-Signature (SAS) granting read permissions on the blob, use a managed identity
-with read permission, or set the ACL for the blob or its container to allow
-public access.
-""")
+  @doc("The URL of the file to download. The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from compute nodes. There are three ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, use a managed identity with read permission, or set the ACL for the blob or its container to allow public access.")
   httpUrl?: string;
 
-  @doc("""
-The property is valid only when autoStorageContainerName or storageContainerUrl
-is used. This prefix can be a partial filename or a subdirectory. If a prefix
-is not specified, all the files in the container will be downloaded.
-""")
+  @doc("The blob prefix to use when downloading blobs from an Azure Storage container. Only the blobs whose names begin with the specified prefix will be downloaded. The property is valid only when autoStorageContainerName or storageContainerUrl is used. This prefix can be a partial filename or a subdirectory. If a prefix is not specified, all the files in the container will be downloaded.")
   blobPrefix?: string;
 
-  @doc("""
-If the httpUrl property is specified, the filePath is required and describes
-the path which the file will be downloaded to, including the filename.
-Otherwise, if the autoStorageContainerName or storageContainerUrl property is
-specified, filePath is optional and is the directory to download the files to.
-In the case where filePath is used as a directory, any directory structure
-already associated with the input data will be retained in full and appended to
-the specified filePath directory. The specified relative path cannot break out
-of the Task's working directory (for example by using '..').
-""")
+  @doc("The location on the Compute Node to which to download the file(s), relative to the Task's working directory. If the httpUrl property is specified, the filePath is required and describes the path which the file will be downloaded to, including the filename. Otherwise, if the autoStorageContainerName or storageContainerUrl property is specified, filePath is optional and is the directory to download the files to. In the case where filePath is used as a directory, any directory structure already associated with the input data will be retained in full and appended to the specified filePath directory. The specified relative path cannot break out of the Task's working directory (for example by using '..').")
   filePath?: string;
 
-  @doc("""
-This property applies only to files being downloaded to Linux Compute Nodes. It
-will be ignored if it is specified for a resourceFile which will be downloaded
-to a Windows Compute Node. If this property is not specified for a Linux
-Compute Node, then a default value of 0770 is applied to the file.
-""")
+  @doc("The file permission mode attribute in octal format. This property applies only to files being downloaded to Linux Compute Nodes. It will be ignored if it is specified for a resourceFile which will be downloaded to a Windows Compute Node. If this property is not specified for a Linux Compute Node, then a default value of 0770 is applied to the file.")
   fileMode?: string;
 
-  @doc("""
-The reference to a user assigned identity associated with the Batch pool which
-a compute node will use.
-""")
-  identityReference?: ComputeNodeIdentityReference;
+  @doc("The reference to the user assigned identity to use to access Azure Blob Storage specified by storageContainerUrl or httpUrl.")
+  identityReference?: BatchNodeIdentityReference;
 }
 
 @doc("""
 On every file uploads, Batch service writes two log files to the compute node, 'fileuploadout.txt' and 'fileuploaderr.txt'. These log files are used to learn more about a specific failure.
 """)
 model OutputFile {
-  @doc("""
-Both relative and absolute paths are supported. Relative paths are relative to
-the Task working directory. The following wildcards are supported: * matches 0
-or more characters (for example pattern abc* would match abc or abcdef), **
-matches any directory, ? matches any single character, [abc] matches one
-character in the brackets, and [a-c] matches one character in the range.
-Brackets can include a negation to match any character not specified (for
-example [!abc] matches any character but a, b, or c). If a file name starts
-with \".\" it is ignored by default but may be matched by specifying it
-explicitly (for example *.gif will not match .a.gif, but .*.gif will). A simple
-example: **\\*.txt matches any file that does not start in '.' and ends with
-.txt in the Task working directory or any subdirectory. If the filename
-contains a wildcard character it can be escaped using brackets (for example
-abc[*] would match a file named abc*). Note that both \\ and / are treated as
-directory separators on Windows, but only / is on Linux. Environment variables
-(%var% on Windows or $var on Linux) are expanded prior to the pattern being
-applied.
-""")
+  @doc("A pattern indicating which file(s) to upload. Both relative and absolute paths are supported. Relative paths are relative to the Task working directory. The following wildcards are supported: * matches 0 or more characters (for example pattern abc* would match abc or abcdef), ** matches any directory, ? matches any single character, [abc] matches one character in the brackets, and [a-c] matches one character in the range. ")
   filePattern: string;
 
-  @doc("The destination to which a file should be uploaded.")
+  @doc("The destination for the output file(s).")
   destination: OutputFileDestination;
 
-  @doc("""
-Details about an output file upload operation, including under what conditions
-to perform the upload.
-""")
+  @doc("Additional options for the upload operation, including under what conditions to perform the upload.")
   uploadOptions: OutputFileUploadOptions;
 }
 
 @doc("The destination to which a file should be uploaded.")
 model OutputFileDestination {
-  @doc("Specifies a file upload destination within an Azure blob storage container.")
+  @doc("A location in Azure blob storage to which files are uploaded.")
   container?: OutputFileBlobContainerDestination;
 }
 
 @doc("Specifies a file upload destination within an Azure blob storage container.")
 model OutputFileBlobContainerDestination {
-  @doc("""
-If filePattern refers to a specific file (i.e. contains no wildcards), then
-path is the name of the blob to which to upload that file. If filePattern
-contains one or more wildcards (and therefore may match multiple files), then
-path is the name of the blob virtual directory (which is prepended to each blob
-name) to which to upload the file(s). If omitted, file(s) are uploaded to the
-root of the container with a blob name matching their file name.
-""")
+  @doc("The destination blob or virtual directory within the Azure Storage container. If filePattern refers to a specific file (i.e. contains no wildcards), then path is the name of the blob to which to upload that file. If filePattern contains one or more wildcards (and therefore may match multiple files), then path is the name of the blob virtual directory (which is prepended to each blob name) to which to upload the file(s). If omitted, file(s) are uploaded to the root of the container with a blob name matching their file name.")
   path?: string;
 
-  @doc("""
-If not using a managed identity, the URL must include a Shared Access Signature
-(SAS) granting write permissions to the container.
-""")
+  @doc("The URL of the container within Azure Blob Storage to which to upload the file(s). If not using a managed identity, the URL must include a Shared Access Signature (SAS) granting write permissions to the container.")
   containerUrl: string;
 
-  @doc("The identity must have write access to the Azure Blob Storage container")
-  identityReference?: ComputeNodeIdentityReference;
+  @doc("The reference to the user assigned identity to use to access Azure Blob Storage specified by containerUrl. The identity must have write access to the Azure Blob Storage container.")
+  identityReference?: BatchNodeIdentityReference;
 
-  @doc("""
-These headers will be specified when uploading files to Azure Storage. Official
-document on allowed headers when uploading blobs:
-https://docs.microsoft.com/en-us/rest/api/storageservices/put-blob#request-headers-all-blob-types
-""")
+  @doc("A list of name-value pairs for headers to be used in uploading output files. These headers will be specified when uploading files to Azure Storage. Official document on allowed headers when uploading blobs: https://docs.microsoft.com/en-us/rest/api/storageservices/put-blob#request-headers-all-blob-types.")
   uploadHeaders?: HttpHeader[];
 }
 
 @doc("An HTTP header name-value pair")
 model HttpHeader {
-  @doc("The case-insensitive name of the header to be used while uploading output files")
+  @doc("The case-insensitive name of the header to be used while uploading output files.")
   name: string;
 
-  @doc("The value of the header to be used while uploading output files")
+  @doc("The value of the header to be used while uploading output files.")
   value?: string;
 }
 
 @doc("""
-Details about an output file upload operation, including under what conditions
+Options for an output file upload operation, including under what conditions
 to perform the upload.
 """)
 model OutputFileUploadOptions {
-  @doc("The default is taskcompletion.")
+  @doc("The conditions under which the Task output file or set of files should be uploaded. The default is taskcompletion.")
   uploadCondition: OutputFileUploadCondition;
 }
 
@@ -1715,76 +1438,42 @@ model EnvironmentSetting {
 
 @doc("Execution constraints to apply to a Task.")
 model TaskConstraints {
-  @doc("If this is not specified, there is no time limit on how long the Task may run.")
+  @doc("The maximum elapsed time that the Task may run, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. If this is not specified, there is no time limit on how long the Task may run.")
   maxWallClockTime?: duration;
 
-  @doc("""
-The default is 7 days, i.e. the Task directory will be retained for 7 days
-unless the Compute Node is removed or the Job is deleted.
-""")
+  @doc("The minimum time to retain the Task directory on the Compute Node where it ran, from the time it completes execution. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted.")
   retentionTime?: duration;
 
-  @doc("""
-Note that this value specifically controls the number of retries for the Task
-executable due to a nonzero exit code. The Batch service will try the Task
-once, and may then retry up to this limit. For example, if the maximum retry
-count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries).
-If the maximum retry count is 0, the Batch service does not retry the Task
-after the first attempt. If the maximum retry count is -1, the Batch service
-retries the Task without limit, however this is not recommended for a start
-task or any task. The default value is 0 (no retries)
-""")
+  @doc("The maximum number of times the Task may be retried. The Batch service retries a Task if its exit code is nonzero. Note that this value specifically controls the number of retries for the Task executable due to a nonzero exit code. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task after the first attempt. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries).")
   maxTaskRetryCount?: int32;
 }
 
-@doc("Specify either the userName or autoUser property, but not both.")
+@doc("The definition of the user identity under which the Task is run. Specify either the userName or autoUser property, but not both.")
 model UserIdentity {
-  @doc("""
-The userName and autoUser properties are mutually exclusive; you must specify
-one but not both.
-""")
+  @doc("The name of the user identity under which the Task is run. The userName and autoUser properties are mutually exclusive; you must specify one but not both.")
   username?: string;
 
-  @doc("""
-The userName and autoUser properties are mutually exclusive; you must specify
-one but not both.
-""")
+  @doc("The auto user under which the Task is run. The userName and autoUser properties are mutually exclusive; you must specify one but not both.")
   autoUser?: AutoUserSpecification;
 }
 
 @doc("""
-Specifies the parameters for the auto user that runs a Task on the Batch
-service.
+Specifies the options for the auto user that runs an Azure Batch Task.
 """)
 model AutoUserSpecification {
-  @doc("""
-The default value is pool. If the pool is running Windows a value of Task
-should be specified if stricter isolation between tasks is required. For
-example, if the task mutates the registry in a way which could impact other
-tasks, or if certificates have been specified on the pool which should not be
-accessible by normal tasks but should be accessible by StartTasks.
-""")
+  @doc("The scope for the auto user. The default value is pool. If the pool is running Windows a value of Task should be specified if stricter isolation between tasks is required. For example, if the task mutates the registry in a way which could impact other tasks, or if certificates have been specified on the pool which should not be accessible by normal tasks but should be accessible by StartTasks.")
   scope?: AutoUserScope;
 
-  @doc("The default value is nonAdmin.")
+  @doc("The elevation level of the auto user. The default value is nonAdmin.")
   elevationLevel?: ElevationLevel;
 }
 
 @doc("A reference to an Package to be deployed to Compute Nodes.")
 model ApplicationPackageReference {
-  @doc("""
-When creating a pool, the package's application ID must be fully qualified
-(/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}).
-""")
+  @doc("The ID of the application to deploy. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}).")
   applicationId: string;
 
-  @doc("""
-If this is omitted on a Pool, and no default version is specified for this
-application, the request fails with the error code
-InvalidApplicationPackageReferences and HTTP status code 409. If this is
-omitted on a Task, and no default version is specified for this application,
-the Task fails with a pre-processing error.
-""")
+  @doc("The version of the application to deploy. If omitted, the default version is deployed. If this is omitted on a Pool, and no default version is specified for this application, the request fails with the error code InvalidApplicationPackageReferences and HTTP status code 409. If this is omitted on a Task, and no default version is specified for this application, the Task fails with a pre-processing error.")
   version?: string;
 }
 
@@ -1793,13 +1482,12 @@ The settings for an authentication token that the Task can use to perform Batch
 service operations.
 """)
 model AuthenticationTokenSettings {
-  @doc("""
-The authentication token grants access to a limited set of Batch service operations. Currently the only supported value for the access property is 'job', which grants access to all operations related to the Job which contains the Task.
-""")
+  @doc("The Batch resources to which the token grants access. The authentication token grants access to a limited set of Batch service operations. Currently the only supported value for the access property is 'job', which grants access to all operations related to the Job which contains the Task.")
   access?: AccessScope[];
 }
 
 @doc("""
+A Job Preparation Task to run before any Tasks of the Job on any given Compute Node.
 You can use Job Preparation to prepare a Node to run Tasks for the Job.
 Activities commonly performed in Job Preparation include: Downloading common
 resource files used by all the Tasks in the Job. The Job Preparation Task can
@@ -1827,82 +1515,36 @@ without causing any corruption or duplicate data. The best practice for long
 running Tasks is to use some form of checkpointing.
 """)
 model JobPreparationTask {
-  @doc("""
-The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobpreparation'. No other Task in the Job can have the same ID as the Job Preparation Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobPreparationTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict).
-""")
+  @doc("A string that uniquely identifies the Job Preparation Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobpreparation'. No other Task in the Job can have the same ID as the Job Preparation Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobPreparationTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict).")
   id?: string;
 
-  @doc("""
-The command line does not run under a shell, and therefore cannot take
-advantage of shell features such as environment variable expansion. If you want
-to take advantage of such features, you should invoke the shell in the command
-line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c
-MyCommand\" in Linux. If the command line refers to file paths, it should use a
-relative path (relative to the Task working directory), or use the Batch
-provided environment variable
-(https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).
-""")
+  @doc("The command line of the Job Preparation Task. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).")
   commandLine: string;
 
-  @doc("""
-When this is specified, all directories recursively below the
-AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are
-mapped into the container, all Task environment variables are mapped into the
-container, and the Task command line is executed in the container. Files
-produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be
-reflected to the host disk, meaning that Batch file APIs will not be able to
-access those files.
-""")
+  @doc("The settings for the container under which the Job Preparation Task runs. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all Task environment variables are mapped into the container, and the Task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files.")
   containerSettings?: TaskContainerSettings;
 
-  @doc("""
-Files listed under this element are located in the Task's working directory. 
-There is a maximum size for the list of resource files.  When the max size is
-exceeded, the request will fail and the response error code will be
-RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be
-reduced in size. This can be achieved using .zip files, Application Packages,
-or Docker Containers.
-""")
+  @doc("A list of files that the Batch service will download to the Compute Node before running the command line. Files listed under this element are located in the Task's working directory.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.")
   resourceFiles?: ResourceFile[];
 
   @doc("A list of environment variable settings for the Job Preparation Task.")
   environmentSettings?: EnvironmentSetting[];
 
-  @doc("Execution constraints to apply to a Task.")
+  @doc("Constraints that apply to the Job Preparation Task.")
   constraints?: TaskConstraints;
 
-  @doc("""
-If true and the Job Preparation Task fails on a Node, the Batch service retries
-the Job Preparation Task up to its maximum retry count (as specified in the
-constraints element). If the Task has still not completed successfully after
-all retries, then the Batch service will not schedule Tasks of the Job to the
-Node. The Node remains active and eligible to run Tasks of other Jobs. If
-false, the Batch service will not wait for the Job Preparation Task to
-complete. In this case, other Tasks of the Job can start executing on the
-Compute Node while the Job Preparation Task is still running; and even if the
-Job Preparation Task fails, new Tasks will continue to be scheduled on the
-Compute Node. The default value is true.
-""")
+  @doc("Whether the Batch service should wait for the Job Preparation Task to complete successfully before scheduling any other Tasks of the Job on the Compute Node. A Job Preparation Task has completed successfully if it exits with exit code 0. If true and the Job Preparation Task fails on a Node, the Batch service retries the Job Preparation Task up to its maximum retry count (as specified in the constraints element). If the Task has still not completed successfully after all retries, then the Batch service will not schedule Tasks of the Job to the Node. The Node remains active and eligible to run Tasks of other Jobs. If false, the Batch service will not wait for the Job Preparation Task to complete. In this case, other Tasks of the Job can start executing on the Compute Node while the Job Preparation Task is still running; and even if the Job Preparation Task fails, new Tasks will continue to be scheduled on the Compute Node. The default value is true.")
   waitForSuccess?: boolean;
 
-  @doc("""
-If omitted, the Task runs as a non-administrative user unique to the Task on
-Windows Compute Nodes, or a non-administrative user unique to the Pool on Linux
-Compute Nodes.
-""")
+  @doc("The user identity under which the Job Preparation Task runs. If omitted, the Task runs as a non-administrative user unique to the Task on Windows Compute Nodes, or a non-administrative user unique to the Pool on Linux Compute Nodes.")
   userIdentity?: UserIdentity;
 
-  @doc("""
-The Job Preparation Task is always rerun if a Compute Node is reimaged, or if
-the Job Preparation Task did not complete (e.g. because the reboot occurred
-while the Task was running). Therefore, you should always write a Job
-Preparation Task to be idempotent and to behave correctly if run multiple
-times. The default value is true.
-""")
+  @doc("Whether the Batch service should rerun the Job Preparation Task after a Compute Node reboots. The Job Preparation Task is always rerun if a Compute Node is reimaged, or if the Job Preparation Task did not complete (e.g. because the reboot occurred while the Task was running). Therefore, you should always write a Job Preparation Task to be idempotent and to behave correctly if run multiple times. The default value is true.")
   rerunOnNodeRebootAfterSuccess?: boolean;
 }
 
 @doc("""
+A Job Release Task to run on Job completion on any Compute Node where the Job has run.
 The Job Release Task runs when the Job ends, because of one of the following:
 The user calls the Terminate Job API, or the Delete Job API while the Job is
 still active, the Job's maximum wall clock time constraint is reached, and the
@@ -1920,81 +1562,37 @@ scheduling slot; that is, it does not count towards the taskSlotsPerNode limit
 specified on the Pool.
 """)
 model JobReleaseTask {
-  @doc("""
-The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobrelease'. No other Task in the Job can have the same ID as the Job Release Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobReleaseTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict).
-""")
+  @doc("A string that uniquely identifies the Job Release Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobrelease'. No other Task in the Job can have the same ID as the Job Release Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobReleaseTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict).")
   id?: string;
 
-  @doc("""
-The command line does not run under a shell, and therefore cannot take
-advantage of shell features such as environment variable expansion. If you want
-to take advantage of such features, you should invoke the shell in the command
-line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c
-MyCommand\" in Linux. If the command line refers to file paths, it should use a
-relative path (relative to the Task working directory), or use the Batch
-provided environment variable
-(https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).
-""")
+  @doc("The command line of the Job Release Task. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).")
   commandLine: string;
 
-  @doc("""
-When this is specified, all directories recursively below the
-AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are
-mapped into the container, all Task environment variables are mapped into the
-container, and the Task command line is executed in the container. Files
-produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be
-reflected to the host disk, meaning that Batch file APIs will not be able to
-access those files.
-""")
+  @doc("The settings for the container under which the Job Release Task runs. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all Task environment variables are mapped into the container, and the Task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files.")
   containerSettings?: TaskContainerSettings;
 
-  @doc("Files listed under this element are located in the Task's working directory.")
+  @doc("A list of files that the Batch service will download to the Compute Node before running the command line.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers. Files listed under this element are located in the Task's working directory.")
   resourceFiles?: ResourceFile[];
 
   @doc("A list of environment variable settings for the Job Release Task.")
   environmentSettings?: EnvironmentSetting[];
 
-  @doc("""
-The maximum elapsed time that the Job Release Task may run on a given Compute
-Node, measured from the time the Task starts. If the Task does not complete
-within the time limit, the Batch service terminates it. The default value is 15
-minutes. You may not specify a timeout longer than 15 minutes. If you do, the
-Batch service rejects it with an error; if you are calling the REST API
-directly, the HTTP status code is 400 (Bad Request).
-""")
+  @doc("The maximum elapsed time that the Job Release Task may run on a given Compute Node, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. The default value is 15 minutes. You may not specify a timeout longer than 15 minutes. If you do, the Batch service rejects it with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   maxWallClockTime?: duration;
 
-  @doc("""
-The default is 7 days, i.e. the Task directory will be retained for 7 days
-unless the Compute Node is removed or the Job is deleted.
-""")
+  @doc("The minimum time to retain the Task directory for the Job Release Task on the Compute Node. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted.")
   retentionTime?: duration;
 
-  @doc("If omitted, the Task runs as a non-administrative user unique to the Task.")
+  @doc("The user identity under which the Job Release Task runs. If omitted, the Task runs as a non-administrative user unique to the Task.")
   userIdentity?: UserIdentity;
 }
 
 @doc("Specifies how a Job should be assigned to a Pool.")
 model PoolInformation {
-  @doc("""
-You must ensure that the Pool referenced by this property exists. If the Pool
-does not exist at the time the Batch service tries to schedule a Job, no Tasks
-for the Job will run until you create a Pool with that id. Note that the Batch
-service will not reject the Job request; it will simply not run Tasks until the
-Pool exists. You must specify either the Pool ID or the auto Pool
-specification, but not both.
-""")
+  @doc("The ID of an existing Pool. All the Tasks of the Job will run on the specified Pool. You must ensure that the Pool referenced by this property exists. If the Pool does not exist at the time the Batch service tries to schedule a Job, no Tasks for the Job will run until you create a Pool with that id. Note that the Batch service will not reject the Job request; it will simply not run Tasks until the Pool exists. You must specify either the Pool ID or the auto Pool specification, but not both.")
   poolId?: string;
 
-  @doc("""
-If auto Pool creation fails, the Batch service moves the Job to a completed
-state, and the Pool creation error is set in the Job's scheduling error
-property. The Batch service manages the lifetime (both creation and, unless
-keepAlive is specified, deletion) of the auto Pool. Any user actions that
-affect the lifetime of the auto Pool while the Job is active will result in
-unexpected behavior. You must specify either the Pool ID or the auto Pool
-specification, but not both.
-""")
+  @doc("Characteristics for a temporary 'auto pool'. The Batch service will create this auto Pool when the Job is submitted. If auto Pool creation fails, the Batch service moves the Job to a completed state, and the Pool creation error is set in the Job's scheduling error property. The Batch service manages the lifetime (both creation and, unless keepAlive is specified, deletion) of the auto Pool. Any user actions that affect the lifetime of the auto Pool while the Job is active will result in unexpected behavior. You must specify either the Pool ID or the auto Pool specification, but not both.")
   autoPoolSpecification?: AutoPoolSpecification;
 }
 
@@ -2003,183 +1601,89 @@ Specifies characteristics for a temporary 'auto pool'. The Batch service will
 create this auto Pool when the Job is submitted.
 """)
 model AutoPoolSpecification {
-  @doc("""
-The Batch service assigns each auto Pool a unique identifier on creation. To
-distinguish between Pools created for different purposes, you can specify this
-element to add a prefix to the ID that is assigned. The prefix can be up to 20
-characters long.
-""")
+  @doc("A prefix to be added to the unique identifier when a Pool is automatically created. The Batch service assigns each auto Pool a unique identifier on creation. To distinguish between Pools created for different purposes, you can specify this element to add a prefix to the ID that is assigned. The prefix can be up to 20 characters long.")
   autoPoolIdPrefix?: string;
 
-  @doc("""
-The minimum lifetime of created auto Pools, and how multiple Jobs on a schedule
-are assigned to Pools.
-""")
+  @doc("The minimum lifetime of created auto Pools, and how multiple Jobs on a schedule are assigned to Pools.")
   poolLifetimeOption: PoolLifetimeOption;
 
-  @doc("""
-If false, the Batch service deletes the Pool once its lifetime (as determined
-by the poolLifetimeOption setting) expires; that is, when the Job or Job
-Schedule completes. If true, the Batch service does not delete the Pool
-automatically. It is up to the user to delete auto Pools created with this
-option.
-""")
+  @doc("Whether to keep an auto Pool alive after its lifetime expires. If false, the Batch service deletes the Pool once its lifetime (as determined by the poolLifetimeOption setting) expires; that is, when the Job or Job Schedule completes. If true, the Batch service does not delete the Pool automatically. It is up to the user to delete auto Pools created with this option.")
   keepAlive?: boolean;
 
-  @doc("Specification for creating a new Pool.")
+  @doc("The Pool specification for the auto Pool.")
   pool?: PoolSpecification;
 }
 
 @doc("Specification for creating a new Pool.")
 model PoolSpecification {
-  @doc("""
-The display name need not be unique and can contain any Unicode characters up
-to a maximum length of 1024.
-""")
+  @doc("The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
   displayName?: string;
 
-  @doc("""
-For information about available sizes of virtual machines in Pools, see Choose
-a VM size for Compute Nodes in an Azure Batch Pool
-(https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).
-""")
+  @doc("The size of the virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).")
   vmSize: string;
 
-  @doc("""
-This property must be specified if the Pool needs to be created with Azure PaaS VMs. This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. If neither is specified then the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). This property cannot be specified if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'.
-""")
+  @doc("The cloud service configuration for the Pool. This property must be specified if the Pool needs to be created with Azure PaaS VMs. This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. If neither is specified then the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). This property cannot be specified if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'.")
   cloudServiceConfiguration?: CloudServiceConfiguration;
 
-  @doc("""
-This property must be specified if the Pool needs to be created with Azure IaaS
-VMs. This property and cloudServiceConfiguration are mutually exclusive and one
-of the properties must be specified. If neither is specified then the Batch
-service returns an error; if you are calling the REST API directly, the HTTP
-status code is 400 (Bad Request).
-""")
+  @doc("The virtual machine configuration for the Pool. This property must be specified if the Pool needs to be created with Azure IaaS VMs. This property and cloudServiceConfiguration are mutually exclusive and one of the properties must be specified. If neither is specified then the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
-  @doc("""
-The default value is 1. The maximum value is the smaller of 4 times the number
-of cores of the vmSize of the pool or 256.
-""")
+  @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.")
   taskSlotsPerNode?: int32;
 
-  @doc("If not specified, the default is spread.")
+  @doc("How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread.")
   taskSchedulingPolicy?: TaskSchedulingPolicy;
 
-  @doc("""
-This timeout applies only to manual scaling; it has no effect when
-enableAutoScale is set to true. The default value is 15 minutes. The minimum
-value is 5 minutes. If you specify a value less than 5 minutes, the Batch
-service rejects the request with an error; if you are calling the REST API
-directly, the HTTP status code is 400 (Bad Request).
-""")
+  @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   resizeTimeout?: duration;
 
-  @doc("""
-This property must not be specified if enableAutoScale is set to true. If
-enableAutoScale is set to false, then you must set either targetDedicatedNodes,
-targetLowPriorityNodes, or both.
-""")
+  @doc("The desired number of dedicated Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
   targetDedicatedNodes?: int32;
 
-  @doc("""
-This property must not be specified if enableAutoScale is set to true. If
-enableAutoScale is set to false, then you must set either targetDedicatedNodes,
-targetLowPriorityNodes, or both.
-""")
+  @doc("The desired number of Spot/Low-priority Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
   targetLowPriorityNodes?: int32;
 
-  @doc("""
-If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must
-be specified. If true, the autoScaleFormula element is required. The Pool
-automatically resizes according to the formula. The default value is false.
-""")
+  @doc("Whether the Pool size should automatically adjust over time. If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula element is required. The Pool automatically resizes according to the formula. The default value is false.")
   enableAutoScale?: boolean;
 
-  @doc("""
-This property must not be specified if enableAutoScale is set to false. It is
-required if enableAutoScale is set to true. The formula is checked for validity
-before the Pool is created. If the formula is not valid, the Batch service
-rejects the request with detailed error information.
-""")
+  @doc("The formula for the desired number of Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the Pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information.")
   autoScaleFormula?: string;
 
-  @doc("""
-The default value is 15 minutes. The minimum and maximum value are 5 minutes
-and 168 hours respectively. If you specify a value less than 5 minutes or
-greater than 168 hours, the Batch service rejects the request with an invalid
-property value error; if you are calling the REST API directly, the HTTP status
-code is 400 (Bad Request).
-""")
+  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   autoScaleEvaluationInterval?: duration;
 
-  @doc("""
-Enabling inter-node communication limits the maximum size of the Pool due to
-deployment restrictions on the Compute Nodes of the Pool. This may result in
-the Pool not reaching its desired size. The default value is false.
-""")
+  @doc("Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.")
   enableInterNodeCommunication?: boolean;
 
-  @doc("The network configuration for a Pool.")
+  @doc("The network configuration for the Pool.")
   networkConfiguration?: NetworkConfiguration;
 
-  @doc("""
-Batch will retry Tasks when a recovery operation is triggered on a Node.
-Examples of recovery operations include (but are not limited to) when an
-unhealthy Node is rebooted or a Compute Node disappeared due to host failure.
-Retries due to recovery operations are independent of and are not counted
-against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal
-retry due to a recovery operation may occur. Because of this, all Tasks should
-be idempotent. This means Tasks need to tolerate being interrupted and
-restarted without causing any corruption or duplicate data. The best practice
-for long running Tasks is to use some form of checkpointing. In some cases the
-StartTask may be re-run even though the Compute Node was not rebooted. Special
-care should be taken to avoid StartTasks which create breakaway process or
-install/launch services from the StartTask working directory, as this will
-block Batch from being able to re-run the StartTask.
-""")
+  @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted.")
   startTask?: StartTask;
 
   @doc("""
-For Windows Nodes, the Batch service installs the Certificates to the specified
-Certificate store and location. For Linux Compute Nodes, the Certificates are
-stored in a directory inside the Task working directory and an environment
-variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this
-location. For Certificates with visibility of 'remoteUser', a 'certs' directory
-is created in the user's home directory (e.g., /home/{user-name}/certs) and
-Certificates are placed in that directory.
+For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory. 
+Warning: This property is deprecated and will be removed after February, 2024. 
+Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
 """)
   certificateReferences?: CertificateReference[];
 
-  @doc("""
-When creating a pool, the package's application ID must be fully qualified
-(/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}).
-Changes to Package references affect all new Nodes joining the Pool, but do not
-affect Compute Nodes that are already in the Pool until they are rebooted or
-reimaged. There is a maximum of 10 Package references on any given Pool.
-""")
+  @doc("The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.")
   applicationPackageReferences?: ApplicationPackageReference[];
 
-  @doc("""
-The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail. The permitted licenses available on the Pool are 'maya', 'vray', '3dsmax', 'arnold'. An additional charge applies for each application license added to the Pool.
-""")
+  @doc("The list of application licenses the Batch service will make available on each Compute Node in the Pool. The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail. The permitted licenses available on the Pool are 'maya', 'vray', '3dsmax', 'arnold'. An additional charge applies for each application license added to the Pool.")
   applicationLicenses?: string[];
 
   @doc("The list of user Accounts to be created on each Compute Node in the Pool.")
   userAccounts?: UserAccount[];
 
-  @doc("""
-The Batch service does not assign any meaning to metadata; it is solely for the
-use of user code.
-""")
+  @doc("A list of name-value pairs associated with the Pool as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
   metadata?: MetadataItem[];
 
-  @doc("This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.")
+  @doc("A list of file systems to mount on each node in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.")
   mountConfiguration?: MountConfiguration[];
 
-  @doc("If omitted, the default value is Default.")
+  @doc("The desired node communication mode for the pool. If omitted, the default value is Default.")
   targetNodeCommunicationMode?: NodeCommunicationMode;
 }
 
@@ -2203,10 +1707,7 @@ information, see Azure Guest OS Releases
 """)
   osFamily: string;
 
-  @doc("""
-The default value is * which specifies the latest operating system version for
-the specified OS family.
-""")
+  @doc("The Azure Guest OS version to be installed on the virtual machines in the Pool. The default value is * which specifies the latest operating system version for the specified OS family.")
   osVersion?: string;
 }
 
@@ -2216,43 +1717,17 @@ The configuration for Compute Nodes in a Pool based on the Azure Virtual
 Machines infrastructure.
 """)
 model VirtualMachineConfiguration {
-  @doc("""
-A reference to an Azure Virtual Machines Marketplace Image or a Shared Image
-Gallery Image. To get the list of all Azure Marketplace Image references
-verified by Azure Batch, see the 'List Supported Images' operation.
-""")
+  @doc("A reference to the Azure Virtual Machines Marketplace Image or the custom Virtual Machine Image to use.")
   imageReference: ImageReference;
 
-  @doc("""
-The Batch Compute Node agent is a program that runs on each Compute Node in the
-Pool, and provides the command-and-control interface between the Compute Node
-and the Batch service. There are different implementations of the Compute Node
-agent, known as SKUs, for different operating systems. You must specify a
-Compute Node agent SKU which matches the selected Image reference. To get the
-list of supported Compute Node agent SKUs along with their list of verified
-Image references, see the 'List supported Compute Node agent SKUs' operation.
-""")
-  @projectedName("python", "node_agent_sku_id")
+  @doc("The SKU of the Batch Compute Node agent to be provisioned on Compute Nodes in the Pool. The Batch Compute Node agent is a program that runs on each Compute Node in the Pool, and provides the command-and-control interface between the Compute Node and the Batch service. There are different implementations of the Compute Node agent, known as SKUs, for different operating systems. You must specify a Compute Node agent SKU which matches the selected Image reference. To get the list of supported Compute Node agent SKUs along with their list of verified Image references, see the 'List supported Compute Node agent SKUs' operation.")
+  @projectedName("client", "nodeAgentSkuId")
   nodeAgentSKUId: string;
 
-  @doc("""
-This property must not be specified if the imageReference property specifies a
-Linux OS Image.
-""")
+  @doc("Windows operating system settings on the virtual machine. This property must not be specified if the imageReference property specifies a Linux OS Image.")
   windowsConfiguration?: WindowsConfiguration;
 
-  @doc("""
-This property must be specified if the Compute Nodes in the Pool need to have
-empty data disks attached to them. This cannot be updated. Each Compute Node
-gets its own disk (the disk is not a file share). Existing disks cannot be
-attached, each attached disk is empty. When the Compute Node is removed from
-the Pool, the disk and all data associated with it is also deleted. The disk is
-not formatted after being attached, it must be formatted before use - for more
-information see
-https://docs.microsoft.com/en-us/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux
-and
-https://docs.microsoft.com/en-us/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine.
-""")
+  @doc("The configuration for data disks attached to the Compute Nodes in the Pool. This property must be specified if the Compute Nodes in the Pool need to have empty data disks attached to them. This cannot be updated. Each Compute Node gets its own disk (the disk is not a file share). Existing disks cannot be attached, each attached disk is empty. When the Compute Node is removed from the Pool, the disk and all data associated with it is also deleted. The disk is not formatted after being attached, it must be formatted before use - for more information see https://docs.microsoft.com/en-us/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux and https://docs.microsoft.com/en-us/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine.")
   dataDisks?: DataDisk[];
 
   @doc("""
@@ -2268,39 +1743,25 @@ Server.
 """)
   licenseType?: string;
 
-  @doc("""
-If specified, setup is performed on each Compute Node in the Pool to allow
-Tasks to run in containers. All regular Tasks and Job manager Tasks run on this
-Pool must specify the containerSettings property, and all other Tasks may
-specify it.
-""")
+  @doc("The container configuration for the Pool. If specified, setup is performed on each Compute Node in the Pool to allow Tasks to run in containers. All regular Tasks and Job manager Tasks run on this Pool must specify the containerSettings property, and all other Tasks may specify it.")
   containerConfiguration?: ContainerConfiguration;
 
-  @doc("""
-If specified, encryption is performed on each node in the pool during node
-provisioning.
-""")
+  @doc("The disk encryption configuration for the pool. If specified, encryption is performed on each node in the pool during node provisioning.")
   diskEncryptionConfiguration?: DiskEncryptionConfiguration;
 
-  @doc("""
-This configuration will specify rules on how nodes in the pool will be
-physically allocated.
-""")
+  @doc("The node placement configuration for the pool. This configuration will specify rules on how nodes in the pool will be physically allocated.")
   nodePlacementConfiguration?: NodePlacementConfiguration;
 
-  @doc("""
-If specified, the extensions mentioned in this configuration will be installed
-on each node.
-""")
+  @doc("The virtual machine extension for the pool. If specified, the extensions mentioned in this configuration will be installed on each node.")
   extensions?: VMExtension[];
 
-  @doc("Settings for the operating system disk of the compute node (VM).")
+  @doc("Settings for the operating system disk of the Virtual Machine.")
   osDisk?: OSDisk;
 }
 
 @doc("Windows operating system settings to apply to the virtual machine.")
 model WindowsConfiguration {
-  @doc("If omitted, the default value is true.")
+  @doc("Whether automatic updates are enabled on the virtual machine. If omitted, the default value is true.")
   enableAutomaticUpdates?: boolean;
 }
 
@@ -2311,25 +1772,17 @@ the Pool. When using attached data disks, you need to mount and format the
 disks from within a VM to use them.
 """)
 model DataDisk {
-  @doc("""
-The lun is used to uniquely identify each data disk. If attaching multiple
-disks, each should have a distinct lun. The value must be between 0 and 63,
-inclusive.
-""")
+  @doc("The logical unit number. The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun. The value must be between 0 and 63, inclusive.")
   lun: int32;
 
-  @doc("""
-The default value for caching is readwrite. For information about the caching
-options see:
-https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.
-""")
+  @doc("The type of caching to be enabled for the data disks. The default value for caching is readwrite. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.")
   caching?: CachingType;
 
   @doc("The initial disk size in gigabytes.")
-  @projectedName("python", "disk_size_gb")
+  @projectedName("client", "diskSizeGb")
   diskSizeGB: int32;
 
-  @doc("If omitted, the default is \"standard_lrs\".")
+  @doc("The storage Account type to be used for the data disk. If omitted, the default is \"standard_lrs\".")
   storageAccountType?: StorageAccountType;
 }
 
@@ -2338,17 +1791,10 @@ model ContainerConfiguration {
   @doc("The container technology to be used.")
   type: ContainerType;
 
-  @doc("""
-This is the full Image reference, as would be specified to \"docker pull\". An
-Image will be sourced from the default Docker registry unless the Image is
-fully qualified with an alternative registry.
-""")
+  @doc("The collection of container Image names. This is the full Image reference, as would be specified to \"docker pull\". An Image will be sourced from the default Docker registry unless the Image is fully qualified with an alternative registry.")
   containerImageNames?: string[];
 
-  @doc("""
-If any Images must be downloaded from a private registry which requires
-credentials, then those credentials must be provided here.
-""")
+  @doc("Additional private registries from which containers can be pulled. If any Images must be downloaded from a private registry which requires credentials, then those credentials must be provided here.")
   containerRegistries?: ContainerRegistry[];
 }
 
@@ -2358,11 +1804,7 @@ encryption configuration is not supported on Linux pool created with Shared
 Image Gallery Image.
 """)
 model DiskEncryptionConfiguration {
-  @doc("""
-If omitted, no disks on the compute nodes in the pool will be encrypted. On
-Linux pool, only \"TemporaryDisk\" is supported; on Windows pool, \"OsDisk\"
-and \"TemporaryDisk\" must be specified.
-""")
+  @doc("The list of disk targets Batch Service will encrypt on the compute node. If omitted, no disks on the compute nodes in the pool will be encrypted. On Linux pool, only \"TemporaryDisk\" is supported; on Windows pool, \"OsDisk\" and \"TemporaryDisk\" must be specified.")
   targets?: DiskEncryptionTarget[];
 }
 
@@ -2372,10 +1814,7 @@ For zonal placement, nodes in the pool will be spread across different zones
 with best effort balancing.
 """)
 model NodePlacementConfiguration {
-  @doc("""
-Allocation policy used by Batch Service to provision the nodes. If not
-specified, Batch will use the regional policy.
-""")
+  @doc("Node placement Policy type on Batch Pools. Allocation policy used by Batch Service to provision the nodes. If not specified, Batch will use the regional policy.")
   policy?: NodePlacementPolicyType;
 }
 
@@ -2394,36 +1833,26 @@ model VMExtension {
   @doc("The version of script handler.")
   typeHandlerVersion?: string;
 
-  @doc("""
-Indicates whether the extension should use a newer minor version if one is
-available at deployment time. Once deployed, however, the extension will not
-upgrade minor versions unless redeployed, even with this property set to true.
-""")
+  @doc("Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.")
   autoUpgradeMinorVersion?: boolean;
 
+  @doc("Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.")
+  enableAutomaticUpgrade?: boolean;
+
   @doc("JSON formatted public settings for the extension.")
-  settings?: object;
+  settings?: Record<string>;
 
-  @doc("""
-The extension can contain either protectedSettings or
-protectedSettingsFromKeyVault or no protected settings at all. 
-""")
-  protectedSettings?: object;
+  @doc("The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.")
+  protectedSettings?: Record<string>;
 
-  @doc("""
-Collection of extension names after which this extension needs to be
-provisioned.
-""")
+  @doc("The collection of extension names. Collection of extension names after which this extension needs to be provisioned.")
   provisionAfterExtensions?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Settings for the operating system disk of the compute node (VM).")
 model OSDisk {
-  @doc("""
-Specifies the ephemeral Disk Settings for the operating system disk used by the
-compute node (VM).
-""")
+  @doc("Specifies the ephemeral Disk Settings for the operating system disk used by the compute node (VM).")
   ephemeralOSDiskSettings?: DiffDiskSettings;
 }
 
@@ -2432,65 +1861,41 @@ Specifies the ephemeral Disk Settings for the operating system disk used by the
 compute node (VM).
 """)
 model DiffDiskSettings {
-  @doc("""
-  This property can be used by user in the request to choose the location e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at
-https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements. 
-""")
+  @doc("Specifies the ephemeral disk placement for operating system disk for all VMs in the pool. This property can be used by user in the request to choose the location e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements.")
   placement?: DiffDiskPlacement;
 }
 
 @doc("Specifies how Tasks should be distributed across Compute Nodes.")
 model TaskSchedulingPolicy {
-  @doc("If not specified, the default is spread.")
-  nodeFillType: ComputeNodeFillType;
+  @doc("How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread.")
+  nodeFillType: BatchNodeFillType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The network configuration for a Pool.")
 model NetworkConfiguration {
-  @doc("""
-The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to
-accommodate the number of Compute Nodes in the Pool. If the subnet doesn't have enough free IP addresses, the Pool will partially allocate Nodes and a resize
-error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for
-the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule Tasks on the Nodes. This can be
-verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied
-by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. For Pools created with virtualMachineConfiguration only ARM virtual
-networks ('Microsoft.Network/virtualNetworks') are supported, but for Pools created with cloudServiceConfiguration both ARM and classic virtual networks
-are supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound
-communication. For Pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows.
-For Pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port
-443. For more details see:
-https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration
-""")
+  @doc("The ARM resource identifier of the virtual network subnet which the Compute Nodes of the Pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes in the Pool. If the subnet doesn't have enough free IP addresses, the Pool will partially allocate Nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. For Pools created with virtualMachineConfiguration only ARM virtual networks ('Microsoft.Network/virtualNetworks') are supported, but for Pools created with cloudServiceConfiguration both ARM and classic virtual networks are supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication. For Pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. For Pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port 443. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.")
   subnetId?: string;
 
   @doc("The scope of dynamic vnet assignment.")
   dynamicVNetAssignmentScope?: DynamicVNetAssignmentScope;
 
-  @doc("""
-Pool endpoint configuration is only supported on Pools with the
-virtualMachineConfiguration property.
-""")
+  @doc("The configuration for endpoints on Compute Nodes in the Batch Pool. Pool endpoint configuration is only supported on Pools with the virtualMachineConfiguration property.")
   endpointConfiguration?: PoolEndpointConfiguration;
 
-  @doc("""
-Public IP configuration property is only supported on Pools with the
-virtualMachineConfiguration property.
-""")
-  @projectedName("python", "public_ip_address_configuration")
+  @doc("The Public IPAddress configuration for Compute Nodes in the Batch Pool. Public IP configuration property is only supported on Pools with the virtualMachineConfiguration property.")
+  @projectedName("client", "publicIpAddressConfiguration")
   publicIPAddressConfiguration?: PublicIPAddressConfiguration;
+
+  @doc("Whether this pool should enable accelerated networking. Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview.")
+  enableAcceleratedNetworking?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The endpoint configuration for a Pool.")
 model PoolEndpointConfiguration {
-  @doc("""
-The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum
-number of inbound NAT Pools is exceeded the request fails with HTTP status code
-400. This cannot be specified if the IPAddressProvisioningType is
-NoPublicIPAddresses.
-""")
-  @projectedName("python", "inbound_nat_pools")
+  @doc("A list of inbound NAT Pools that can be used to address specific ports on an individual Compute Node externally. The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum number of inbound NAT Pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.")
+  @projectedName("client", "inboundNatPools")
   inboundNATPools: InboundNATPool[];
 }
 
@@ -2500,98 +1905,49 @@ A inbound NAT Pool that can be used to address specific ports on Compute Nodes
 in a Batch Pool externally.
 """)
 model InboundNATPool {
-  @doc("""
-The name must be unique within a Batch Pool, can contain letters, numbers,
-underscores, periods, and hyphens. Names must start with a letter or number,
-must end with a letter, number, or underscore, and cannot exceed 77 characters.
- If any invalid values are provided the request fails with HTTP status code
-400.
-""")
+  @doc("The name of the endpoint. The name must be unique within a Batch Pool, can contain letters, numbers, underscores, periods, and hyphens. Names must start with a letter or number, must end with a letter, number, or underscore, and cannot exceed 77 characters.  If any invalid values are provided the request fails with HTTP status code 400.")
   name: string;
 
   @doc("The protocol of the endpoint.")
   protocol: InboundEndpointProtocol;
 
-  @doc("""
-This must be unique within a Batch Pool. Acceptable values are between 1 and
-65535 except for 22, 3389, 29876 and 29877 as these are reserved. If any
-reserved values are provided the request fails with HTTP status code 400.
-""")
+  @doc("The port number on the Compute Node. This must be unique within a Batch Pool. Acceptable values are between 1 and 65535 except for 22, 3389, 29876 and 29877 as these are reserved. If any reserved values are provided the request fails with HTTP status code 400.")
   backendPort: int32;
 
-  @doc("""
-Acceptable values range between 1 and 65534 except ports from 50000 to 55000
-which are reserved. All ranges within a Pool must be distinct and cannot
-overlap. Each range must contain at least 40 ports. If any reserved or
-overlapping values are provided the request fails with HTTP status code 400.
-""")
+  @doc("The first port number in the range of external ports that will be used to provide inbound access to the backendPort on individual Compute Nodes. Acceptable values range between 1 and 65534 except ports from 50000 to 55000 which are reserved. All ranges within a Pool must be distinct and cannot overlap. Each range must contain at least 40 ports. If any reserved or overlapping values are provided the request fails with HTTP status code 400.")
   frontendPortRangeStart: int32;
 
-  @doc("""
-Acceptable values range between 1 and 65534 except ports from 50000 to 55000
-which are reserved by the Batch service. All ranges within a Pool must be
-distinct and cannot overlap. Each range must contain at least 40 ports. If any
-reserved or overlapping values are provided the request fails with HTTP status
-code 400.
-""")
+  @doc("The last port number in the range of external ports that will be used to provide inbound access to the backendPort on individual Compute Nodes. Acceptable values range between 1 and 65534 except ports from 50000 to 55000 which are reserved by the Batch service. All ranges within a Pool must be distinct and cannot overlap. Each range must contain at least 40 ports. If any reserved or overlapping values are provided the request fails with HTTP status code 400.")
   frontendPortRangeEnd: int32;
 
-  @doc("""
-The maximum number of rules that can be specified across all the endpoints on a
-Batch Pool is 25. If no network security group rules are specified, a default
-rule will be created to allow inbound access to the specified backendPort. If
-the maximum number of network security group rules is exceeded the request
-fails with HTTP status code 400.
-""")
+  @doc("A list of network security group rules that will be applied to the endpoint. The maximum number of rules that can be specified across all the endpoints on a Batch Pool is 25. If no network security group rules are specified, a default rule will be created to allow inbound access to the specified backendPort. If the maximum number of network security group rules is exceeded the request fails with HTTP status code 400.")
   networkSecurityGroupRules?: NetworkSecurityGroupRule[];
 }
 
 @doc("A network security group rule to apply to an inbound endpoint.")
 model NetworkSecurityGroupRule {
-  @doc("""
-Priorities within a Pool must be unique and are evaluated in order of priority.
-The lower the number the higher the priority. For example, rules could be
-specified with order numbers of 150, 250, and 350. The rule with the order
-number of 150 takes precedence over the rule that has an order of 250. Allowed
-priorities are 150 to 4096. If any reserved or duplicate values are provided
-the request fails with HTTP status code 400.
-""")
+  @doc("The priority for this rule. Priorities within a Pool must be unique and are evaluated in order of priority. The lower the number the higher the priority. For example, rules could be specified with order numbers of 150, 250, and 350. The rule with the order number of 150 takes precedence over the rule that has an order of 250. Allowed priorities are 150 to 4096. If any reserved or duplicate values are provided the request fails with HTTP status code 400.")
   priority: int32;
 
   @doc("The action that should be taken for a specified IP address, subnet range or tag.")
   access: NetworkSecurityGroupRuleAccess;
 
-  @doc("""
-Valid values are a single IP address (i.e. 10.10.10.10), IP subnet (i.e.
-192.168.1.0/24), default tag, or * (for all addresses).  If any other values
-are provided the request fails with HTTP status code 400.
-""")
+  @doc("The source address prefix or tag to match for the rule. Valid values are a single IP address (i.e. 10.10.10.10), IP subnet (i.e. 192.168.1.0/24), default tag, or * (for all addresses).  If any other values are provided the request fails with HTTP status code 400.")
   sourceAddressPrefix: string;
 
-  @doc("""
-Valid values are '*' (for all ports 0 - 65535), a specific port (i.e. 22), or a
-port range (i.e. 100-200). The ports must be in the range of 0 to 65535. Each
-entry in this collection must not overlap any other entry (either a range or an
-individual port). If any other values are provided the request fails with HTTP
-status code 400. The default value is '*'.
-""")
+  @doc("The source port ranges to match for the rule. Valid values are '*' (for all ports 0 - 65535), a specific port (i.e. 22), or a port range (i.e. 100-200). The ports must be in the range of 0 to 65535. Each entry in this collection must not overlap any other entry (either a range or an individual port). If any other values are provided the request fails with HTTP status code 400. The default value is '*'.")
   sourcePortRanges?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The public IP Address configuration of the networking configuration of a Pool.")
+@projectedName("client", "PublicIpAddressConfiguration")
 model PublicIPAddressConfiguration {
-  @doc("The default value is BatchManaged.")
-  @projectedName("python", "ip_address_provisioning_type")
+  @doc("The provisioning type for Public IP Addresses for the Pool. The default value is BatchManaged.")
+  @projectedName("client", "IpAddressProvisioningType")
   provision?: IPAddressProvisioningType;
 
-  @doc("""
-The number of IPs specified here limits the maximum size of the Pool - 100
-dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public
-IP. For example, a pool needing 250 dedicated VMs would need at least 3 public
-IPs specified. Each element of this collection is of the form:
-/subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.
-""")
+  @doc("The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.")
   ipAddressIds?: string[];
 }
 
@@ -2611,65 +1967,29 @@ install/launch services from the StartTask working directory, as this will
 block Batch from being able to re-run the StartTask.
 """)
 model StartTask {
-  @doc("""
-The command line does not run under a shell, and therefore cannot take
-advantage of shell features such as environment variable expansion. If you want
-to take advantage of such features, you should invoke the shell in the command
-line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c
-MyCommand\" in Linux. If the command line refers to file paths, it should use a
-relative path (relative to the Task working directory), or use the Batch
-provided environment variable
-(https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).
-""")
+  @doc("The command line of the StartTask. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).")
   commandLine: string;
 
-  @doc("""
-When this is specified, all directories recursively below the
-AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are
-mapped into the container, all Task environment variables are mapped into the
-container, and the Task command line is executed in the container. Files
-produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be
-reflected to the host disk, meaning that Batch file APIs will not be able to
-access those files.
-""")
+  @doc("The settings for the container under which the StartTask runs. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all Task environment variables are mapped into the container, and the Task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files.")
   containerSettings?: TaskContainerSettings;
 
-  @doc("Files listed under this element are located in the Task's working directory.")
+  @doc("A list of files that the Batch service will download to the Compute Node before running the command line.  There is a maximum size for the list of resource files. When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers. Files listed under this element are located in the Task's working directory.")
   resourceFiles?: ResourceFile[];
 
   @doc("A list of environment variable settings for the StartTask.")
   environmentSettings?: EnvironmentSetting[];
 
-  @doc("If omitted, the Task runs as a non-administrative user unique to the Task.")
+  @doc("The user identity under which the StartTask runs. If omitted, the Task runs as a non-administrative user unique to the Task.")
   userIdentity?: UserIdentity;
 
-  @doc("""
-The Batch service retries a Task if its exit code is nonzero. Note that this
-value specifically controls the number of retries. The Batch service will try
-the Task once, and may then retry up to this limit. For example, if the maximum
-retry count is 3, Batch tries the Task up to 4 times (one initial try and 3
-retries). If the maximum retry count is 0, the Batch service does not retry the
-Task. If the maximum retry count is -1, the Batch service retries the Task
-without limit, however this is not recommended for a start task or any task.
-The default value is 0 (no retries)
-""")
+  @doc("The maximum number of times the Task may be retried. The Batch service retries a Task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries).")
   maxTaskRetryCount?: int32;
 
-  @doc("""
-If true and the StartTask fails on a Node, the Batch service retries the
-StartTask up to its maximum retry count (maxTaskRetryCount). If the Task has
-still not completed successfully after all retries, then the Batch service
-marks the Node unusable, and will not schedule Tasks to it. This condition can
-be detected via the Compute Node state and failure info details. If false, the
-Batch service will not wait for the StartTask to complete. In this case, other
-Tasks can start executing on the Compute Node while the StartTask is still
-running; and even if the StartTask fails, new Tasks will continue to be
-scheduled on the Compute Node. The default is true.
-""")
+  @doc("Whether the Batch service should wait for the StartTask to complete successfully (that is, to exit with exit code 0) before scheduling any Tasks on the Compute Node. If true and the StartTask fails on a Node, the Batch service retries the StartTask up to its maximum retry count (maxTaskRetryCount). If the Task has still not completed successfully after all retries, then the Batch service marks the Node unusable, and will not schedule Tasks to it. This condition can be detected via the Compute Node state and failure info details. If false, the Batch service will not wait for the StartTask to complete. In this case, other Tasks can start executing on the Compute Node while the StartTask is still running; and even if the StartTask fails, new Tasks will continue to be scheduled on the Compute Node. The default is true.")
   waitForSuccess?: boolean;
 }
 
-@doc("A reference to a Certificate to be installed on Compute Nodes in a Pool.")
+@doc("A reference to a Certificate to be installed on Compute Nodes in a Pool. Warning: This object is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.")
 model CertificateReference {
   @doc("The thumbprint of the Certificate.")
   thumbprint: string;
@@ -2677,33 +1997,13 @@ model CertificateReference {
   @doc("The algorithm with which the thumbprint is associated. This must be sha1.")
   thumbprintAlgorithm: string;
 
-  @doc("""
-The default value is currentuser. This property is applicable only for Pools
-configured with Windows Compute Nodes (that is, created with
-cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows
-Image reference). For Linux Compute Nodes, the Certificates are stored in a
-directory inside the Task working directory and an environment variable
-AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.
-For Certificates with visibility of 'remoteUser', a 'certs' directory is
-created in the user's home directory (e.g., /home/{user-name}/certs) and
-Certificates are placed in that directory.
-""")
+  @doc("The location of the Certificate store on the Compute Node into which to install the Certificate. The default value is currentuser. This property is applicable only for Pools configured with Windows Compute Nodes (that is, created with cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows Image reference). For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.")
   storeLocation?: CertificateStoreLocation;
 
-  @doc("""
-This property is applicable only for Pools configured with Windows Compute
-Nodes (that is, created with cloudServiceConfiguration, or with
-virtualMachineConfiguration using a Windows Image reference). Common store
-names include: My, Root, CA, Trust, Disallowed, TrustedPeople,
-TrustedPublisher, AuthRoot, AddressBook, but any custom store name can also be
-used. The default value is My.
-""")
+  @doc("The name of the Certificate store on the Compute Node into which to install the Certificate. This property is applicable only for Pools configured with Windows Compute Nodes (that is, created with cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows Image reference). Common store names include: My, Root, CA, Trust, Disallowed, TrustedPeople, TrustedPublisher, AuthRoot, AddressBook, but any custom store name can also be used. The default value is My.")
   storeName?: string;
 
-  @doc("""
-You can specify more than one visibility in this collection. The default is all
-Accounts.
-""")
+  @doc("Which user Accounts on the Compute Node should have access to the private data of the Certificate. You can specify more than one visibility in this collection. The default is all Accounts.")
   visibility?: CertificateVisibility[];
 }
 
@@ -2712,63 +2012,37 @@ Properties used to create a user used to execute Tasks on an Azure Batch
 Compute Node.
 """)
 model UserAccount {
-  @doc("""
-The name of the user Account. Names can contain any Unicode characters up to a
-maximum length of 20.
-""")
+  @doc("The name of the user Account. Names can contain any Unicode characters up to a maximum length of 20.")
   name: string;
 
   @doc("The password for the user Account.")
   password: string;
 
-  @doc("The default value is nonAdmin.")
+  @doc("The elevation level of the user Account. The default value is nonAdmin.")
   elevationLevel?: ElevationLevel;
 
-  @doc("""
-This property is ignored if specified on a Windows Pool. If not specified, the
-user is created with the default options.
-""")
+  @doc("The Linux-specific user configuration for the user Account. This property is ignored if specified on a Windows Pool. If not specified, the user is created with the default options.")
   linuxUserConfiguration?: LinuxUserConfiguration;
 
-  @doc("""
-This property can only be specified if the user is on a Windows Pool. If not
-specified and on a Windows Pool, the user is created with the default options.
-""")
+  @doc("The Windows-specific user configuration for the user Account. This property can only be specified if the user is on a Windows Pool. If not specified and on a Windows Pool, the user is created with the default options.")
   windowsUserConfiguration?: WindowsUserConfiguration;
 }
 
 @doc("Properties used to create a user Account on a Linux Compute Node.")
 model LinuxUserConfiguration {
-  @doc("""
-The uid and gid properties must be specified together or not at all. If not
-specified the underlying operating system picks the uid.
-""")
+  @doc("The user ID of the user Account. The uid and gid properties must be specified together or not at all. If not specified the underlying operating system picks the uid.")
   uid?: int32;
 
-  @doc("""
-The uid and gid properties must be specified together or not at all. If not
-specified the underlying operating system picks the gid.
-""")
+  @doc("The group ID for the user Account. The uid and gid properties must be specified together or not at all. If not specified the underlying operating system picks the gid.")
   gid?: int32;
 
-  @doc("""
-The private key must not be password protected. The private key is used to
-automatically configure asymmetric-key based authentication for SSH between
-Compute Nodes in a Linux Pool when the Pool's enableInterNodeCommunication
-property is true (it is ignored if enableInterNodeCommunication is false). It
-does this by placing the key pair into the user's .ssh directory. If not
-specified, password-less SSH is not configured between Compute Nodes (no
-modification of the user's .ssh directory is done).
-""")
+  @doc("The SSH private key for the user Account. The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between Compute Nodes in a Linux Pool when the Pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between Compute Nodes (no modification of the user's .ssh directory is done).")
   sshPrivateKey?: string;
 }
 
 @doc("Properties used to create a user Account on a Windows Compute Node.")
 model WindowsUserConfiguration {
-  @doc("""
-The default value for VirtualMachineConfiguration Pools is 'batch' and for
-CloudServiceConfiguration Pools is 'interactive'.
-""")
+  @doc("The login mode for the user. The default value for VirtualMachineConfiguration Pools is 'batch' and for CloudServiceConfiguration Pools is 'interactive'.")
   loginMode?: LoginMode;
 }
 
@@ -2786,16 +2060,16 @@ model MetadataItem {
 
 @doc("The file system to mount on each node.")
 model MountConfiguration {
-  @doc("This property is mutually exclusive with all other properties.")
+  @doc("The Azure Storage Container to mount using blob FUSE on each node. This property is mutually exclusive with all other properties.")
   azureBlobFileSystemConfiguration?: AzureBlobFileSystemConfiguration;
 
-  @doc("This property is mutually exclusive with all other properties.")
+  @doc("The NFS file system to mount on each node. This property is mutually exclusive with all other properties.")
   nfsMountConfiguration?: NFSMountConfiguration;
 
-  @doc("This property is mutually exclusive with all other properties.")
+  @doc("The CIFS/SMB file system to mount on each node. This property is mutually exclusive with all other properties.")
   cifsMountConfiguration?: CifsMountConfiguration;
 
-  @doc("This property is mutually exclusive with all other properties.")
+  @doc("The Azure File Share to mount on each node. This property is mutually exclusive with all other properties.")
   azureFileShareConfiguration?: AzureFileShareConfiguration;
 }
 
@@ -2807,47 +2081,33 @@ model AzureBlobFileSystemConfiguration {
   @doc("The Azure Blob Storage Container name.")
   containerName: string;
 
-  @doc("""
-This property is mutually exclusive with both sasKey and identity; exactly one
-must be specified.
-""")
+  @doc("The Azure Storage Account key. This property is mutually exclusive with both sasKey and identity; exactly one must be specified.")
   accountKey?: string;
 
-  @doc("""
-This property is mutually exclusive with both accountKey and identity; exactly
-one must be specified.
-""")
+  @doc("The Azure Storage SAS token. This property is mutually exclusive with both accountKey and identity; exactly one must be specified.")
   sasKey?: string;
 
-  @doc("These are 'net use' options in Windows and 'mount' options in Linux.")
+  @doc("Additional command line options to pass to the mount command. These are 'net use' options in Windows and 'mount' options in Linux.")
   blobfuseOptions?: string;
 
-  @doc("""
-All file systems are mounted relative to the Batch mounts directory, accessible
-via the AZ_BATCH_NODE_MOUNTS_DIR environment variable.
-""")
+  @doc("The relative path on the compute node where the file system will be mounted. All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable.")
   relativeMountPath: string;
 
-  @doc("""
-This property is mutually exclusive with both accountKey and sasKey; exactly
-one must be specified.
-""")
-  identityReference?: ComputeNodeIdentityReference;
+  @doc("The reference to the user assigned identity to use to access containerName. This property is mutually exclusive with both accountKey and sasKey; exactly one must be specified.")
+  identityReference?: BatchNodeIdentityReference;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Information used to connect to an NFS file system.")
+@projectedName("client", "NfsMountConfiguration")
 model NFSMountConfiguration {
   @doc("The URI of the file system to mount.")
   source: string;
 
-  @doc("""
-All file systems are mounted relative to the Batch mounts directory, accessible
-via the AZ_BATCH_NODE_MOUNTS_DIR environment variable.
-""")
+  @doc("The relative path on the compute node where the file system will be mounted. All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable.")
   relativeMountPath: string;
 
-  @doc("These are 'net use' options in Windows and 'mount' options in Linux.")
+  @doc("Additional command line options to pass to the mount command. These are 'net use' options in Windows and 'mount' options in Linux.")
   mountOptions?: string;
 }
 
@@ -2859,13 +2119,10 @@ model CifsMountConfiguration {
   @doc("The URI of the file system to mount.")
   source: string;
 
-  @doc("""
-All file systems are mounted relative to the Batch mounts directory, accessible
-via the AZ_BATCH_NODE_MOUNTS_DIR environment variable.
-""")
+  @doc("The relative path on the compute node where the file system will be mounted. All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable.")
   relativeMountPath: string;
 
-  @doc("These are 'net use' options in Windows and 'mount' options in Linux.")
+  @doc("Additional command line options to pass to the mount command. These are 'net use' options in Windows and 'mount' options in Linux.")
   mountOptions?: string;
 
   @doc("The password to use for authentication against the CIFS file system.")
@@ -2877,19 +2134,16 @@ model AzureFileShareConfiguration {
   @doc("The Azure Storage account name.")
   accountName: string;
 
-  @doc("This is of the form 'https://{account}.file.core.windows.net/'.")
+  @doc("The Azure Files URL. This is of the form 'https://{account}.file.core.windows.net/'.")
   azureFileUrl: string;
 
   @doc("The Azure Storage account key.")
   accountKey: string;
 
-  @doc("""
-All file systems are mounted relative to the Batch mounts directory, accessible
-via the AZ_BATCH_NODE_MOUNTS_DIR environment variable.
-""")
+  @doc("The relative path on the compute node where the file system will be mounted. All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable.")
   relativeMountPath: string;
 
-  @doc("These are 'net use' options in Windows and 'mount' options in Linux.")
+  @doc("Additional command line options to pass to the mount command. These are 'net use' options in Windows and 'mount' options in Linux.")
   mountOptions?: string;
 }
 
@@ -2898,20 +2152,13 @@ Contains information about Jobs that have been and will be run under a Job
 Schedule.
 """)
 model JobScheduleExecutionInformation {
-  @doc("""
-This property is meaningful only if the schedule is in the active state when
-the time comes around. For example, if the schedule is disabled, no Job will be
-created at nextRunTime unless the Job is enabled before then.
-""")
+  @doc("The next time at which a Job will be created under this schedule. This property is meaningful only if the schedule is in the active state when the time comes around. For example, if the schedule is disabled, no Job will be created at nextRunTime unless the Job is enabled before then.")
   nextRunTime?: utcDateTime;
 
-  @doc("""
-This property is present only if the at least one Job has run under the
-schedule.
-""")
+  @doc("Information about the most recent Job under the Job Schedule. This property is present only if the at least one Job has run under the schedule.")
   recentJob?: RecentJob;
 
-  @doc("This property is set only if the Job Schedule is in the completed state.")
+  @doc("The time at which the schedule ended. This property is set only if the Job Schedule is in the completed state.")
   endTime?: utcDateTime;
 }
 
@@ -2933,80 +2180,40 @@ model JobScheduleStatistics {
   @doc("The start time of the time range covered by the statistics.")
   startTime: utcDateTime;
 
-  @doc("""
-The time at which the statistics were last updated. All statistics are limited
-to the range between startTime and lastUpdateTime.
-""")
+  @doc("The time at which the statistics were last updated. All statistics are limited to the range between startTime and lastUpdateTime.")
   lastUpdateTime: utcDateTime;
 
-  @doc("""
-The total user mode CPU time (summed across all cores and all Compute Nodes)
-consumed by all Tasks in all Jobs created under the schedule.
-""")
+  @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.")
   userCPUTime: duration;
 
-  @doc("""
-The total kernel mode CPU time (summed across all cores and all Compute Nodes)
-consumed by all Tasks in all Jobs created under the schedule.
-""")
+  @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.")
   kernelCPUTime: duration;
 
-  @doc("""
-The wall clock time is the elapsed time from when the Task started running on a
-Compute Node to when it finished (or to the last time the statistics were
-updated, if the Task had not finished by then). If a Task was retried, this
-includes the wall clock time of all the Task retries.
-""")
+  @doc("The total wall clock time of all the Tasks in all the Jobs created under the schedule. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries.")
   wallClockTime: duration;
 
-  @doc("""
-The total number of disk read operations made by all Tasks in all Jobs created
-under the schedule.
-""")
+  @doc("The total number of disk read operations made by all Tasks in all Jobs created under the schedule.")
   readIOps: int32;
 
-  @doc("""
-The total number of disk write operations made by all Tasks in all Jobs created
-under the schedule.
-""")
+  @doc("The total number of disk write operations made by all Tasks in all Jobs created under the schedule.")
   writeIOps: int32;
 
-  @doc("""
-The total gibibytes read from disk by all Tasks in all Jobs created under the
-schedule.
-""")
+  @doc("The total gibibytes read from disk by all Tasks in all Jobs created under the schedule.")
   readIOGiB: float32;
 
-  @doc("""
-The total gibibytes written to disk by all Tasks in all Jobs created under the
-schedule.
-""")
+  @doc("The total gibibytes written to disk by all Tasks in all Jobs created under the schedule.")
   writeIOGiB: float32;
 
-  @doc("""
-The total number of Tasks successfully completed during the given time range in
-Jobs created under the schedule. A Task completes successfully if it returns
-exit code 0.
-""")
+  @doc("The total number of Tasks successfully completed during the given time range in Jobs created under the schedule. A Task completes successfully if it returns exit code 0.")
   numSucceededTasks: int32;
 
-  @doc("""
-The total number of Tasks that failed during the given time range in Jobs
-created under the schedule. A Task fails if it exhausts its maximum retry count
-without returning exit code 0.
-""")
+  @doc("The total number of Tasks that failed during the given time range in Jobs created under the schedule. A Task fails if it exhausts its maximum retry count without returning exit code 0.")
   numFailedTasks: int32;
 
-  @doc("""
-The total number of retries during the given time range on all Tasks in all
-Jobs created under the schedule.
-""")
+  @doc("The total number of retries during the given time range on all Tasks in all Jobs created under the schedule.")
   numTaskRetries: int32;
 
-  @doc("""
-This value is only reported in the Account lifetime statistics; it is not
-included in the Job statistics.
-""")
+  @doc("The total wait time of all Tasks in all Jobs created under the schedule. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.). This value is only reported in the Account lifetime statistics; it is not included in the Job statistics.")
   waitTime: duration;
 }
 
@@ -3025,42 +2232,27 @@ model BatchJobScheduleListResult {
 
 @doc("An Azure Batch Job.")
 model BatchJob {
-  @doc("""
-The ID is case-preserving and case-insensitive (that is, you may not have two
-IDs within an Account that differ only by case).
-""")
-@visibility("read", "create")
+  @doc("A string that uniquely identifies the Job within the Account. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
+  @visibility("read")
   id?: string;
 
   @doc("The display name for the Job.")
-  @visibility("read", "create")
+  @visibility("read")
   displayName?: string;
 
-  @doc("""
-Whether Tasks in the Job can define dependencies on each other. The default is
-false.
-""")
-@visibility("read", "create")
+  @doc("Whether Tasks in the Job can define dependencies on each other. The default is false.")
+  @visibility("read")
   usesTaskDependencies?: boolean;
 
   @doc("The URL of the Job.")
   @visibility("read")
   url?: string;
 
-  @doc("""
-This is an opaque string. You can use it to detect whether the Job has changed
-between requests. In particular, you can be pass the ETag when updating a Job
-to specify that your changes should take effect only if nobody else has
-modified the Job in the meantime.
-""")
+  @doc("The ETag of the Job. This is an opaque string. You can use it to detect whether the Job has changed between requests. In particular, you can be pass the ETag when updating a Job to specify that your changes should take effect only if nobody else has modified the Job in the meantime.")
   @visibility("read")
   eTag?: string;
 
-  @doc("""
-This is the last time at which the Job level data, such as the Job state or
-priority, changed. It does not factor in task-level changes such as adding new
-Tasks or Tasks changing state.
-""")
+  @doc("The last modified time of the Job. This is the last time at which the Job level data, such as the Job state or priority, changed. It does not factor in task-level changes such as adding new Tasks or Tasks changing state.")
   @visibility("read")
   lastModified?: utcDateTime;
 
@@ -3068,7 +2260,7 @@ Tasks or Tasks changing state.
   @visibility("read")
   creationTime?: utcDateTime;
 
-  @doc("The state of the Job.")
+  @doc("The current state of the Job.")
   @visibility("read")
   state?: JobState;
 
@@ -3076,195 +2268,185 @@ Tasks or Tasks changing state.
   @visibility("read")
   stateTransitionTime?: utcDateTime;
 
-  @doc("This property is not set if the Job is in its initial Active state.")
+  @doc("The previous state of the Job. This property is not set if the Job is in its initial Active state.")
   @visibility("read")
   previousState?: JobState;
 
-  @doc("This property is not set if the Job is in its initial Active state.")
+  @doc("The time at which the Job entered its previous state. This property is not set if the Job is in its initial Active state.")
   @visibility("read")
   previousStateTransitionTime?: utcDateTime;
 
-  @doc("""
-Priority values can range from -1000 to 1000, with -1000 being the lowest
-priority and 1000 being the highest priority. The default value is 0.
-""")
+  @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0.")
   priority?: int32;
 
-  @doc("""
-If the value is set to True, other high priority jobs submitted to the system
-will take precedence and will be able requeue tasks from this job. You can
-update a job's allowTaskPreemption after it has been created using the update
-job API.
-""")
+  @doc("Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
-  @doc("""
-The value of maxParallelTasks must be -1 or greater than 0 if specified. If not
-specified, the default value is -1, which means there's no limit to the number
-of tasks that can be run at once. You can update a job's maxParallelTasks after
-it has been created using the update job API.
-""")
+  @doc("The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32 = -1;
 
-  @doc("The execution constraints for a Job.")
+  @doc("The execution constraints for the Job.")
   constraints?: JobConstraints;
 
-  @doc("""
-The Job Manager Task is automatically started when the Job is created. The
-Batch service tries to schedule the Job Manager Task before any other Tasks in
-the Job. When shrinking a Pool, the Batch service tries to preserve Nodes where
-Job Manager Tasks are running for as long as possible (that is, Compute Nodes
-running 'normal' Tasks are removed before Compute Nodes running Job Manager
-Tasks). When a Job Manager Task fails and needs to be restarted, the system
-tries to schedule it at the highest priority. If there are no idle Compute
-Nodes available, the system may terminate one of the running Tasks in the Pool
-and return it to the queue in order to make room for the Job Manager Task to
-restart. Note that a Job Manager Task in one Job does not have priority over
-Tasks in other Jobs. Across Jobs, only Job level priorities are observed. For
-example, if a Job Manager in a priority 0 Job needs to be restarted, it will
-not displace Tasks of a priority 1 Job. Batch will retry Tasks when a recovery
-operation is triggered on a Node. Examples of recovery operations include (but
-are not limited to) when an unhealthy Node is rebooted or a Compute Node
-disappeared due to host failure. Retries due to recovery operations are
-independent of and are not counted against the maxTaskRetryCount. Even if the
-maxTaskRetryCount is 0, an internal retry due to a recovery operation may
-occur. Because of this, all Tasks should be idempotent. This means Tasks need
-to tolerate being interrupted and restarted without causing any corruption or
-duplicate data. The best practice for long running Tasks is to use some form of
-checkpointing.
-""")
-  @visibility("read", "create")
+  @doc("Details of a Job Manager Task to be launched when the Job is started.")
+  @visibility("read")
   jobManagerTask?: JobManagerTask;
 
-  @doc("""
-The Job Preparation Task is a special Task run on each Compute Node before any
-other Task of the Job.
-""")
-  @visibility("read", "create")
+  @doc("The Job Preparation Task. The Job Preparation Task is a special Task run on each Compute Node before any other Task of the Job.")
+  @visibility("read")
   jobPreparationTask?: JobPreparationTask;
 
-  @doc("""
-The Job Release Task is a special Task run at the end of the Job on each
-Compute Node that has run any other Task of the Job.
-""")
-  @visibility("read", "create")
+  @doc("The Job Release Task. The Job Release Task is a special Task run at the end of the Job on each Compute Node that has run any other Task of the Job.")
+  @visibility("read")
   jobReleaseTask?: JobReleaseTask;
 
-  @doc("""
-Individual Tasks can override an environment setting specified here by
-specifying the same setting name with a different value.
-""")
-  @visibility("read", "create")
+  @doc("The list of common environment variable settings. These environment variables are set for all Tasks in the Job (including the Job Manager, Job Preparation and Job Release Tasks). Individual Tasks can override an environment setting specified here by specifying the same setting name with a different value.")
+  @visibility("read")
   commonEnvironmentSettings?: EnvironmentSetting[];
 
-  @doc("Specifies how a Job should be assigned to a Pool.")
-  poolInfo?: PoolInformation;
+  @doc("The Pool settings associated with the Job.")
+  poolInfo: PoolInformation;
 
-  @doc("The default is noaction.")
+  @doc("The action the Batch service should take when all Tasks in the Job are in the completed state. The default is noaction.")
   onAllTasksComplete?: OnAllTasksComplete;
 
-  @doc("""
-A Task is considered to have failed if has a failureInfo. A failureInfo is set
-if the Task completes with a non-zero exit code after exhausting its retry
-count, or if there was an error starting the Task, for example due to a
-resource file download error. The default is noaction.
-""")
-  @visibility("read", "create")
+  @doc("The action the Batch service should take when any Task in the Job fails. A Task is considered to have failed if has a failureInfo. A failureInfo is set if the Task completes with a non-zero exit code after exhausting its retry count, or if there was an error starting the Task, for example due to a resource file download error. The default is noaction.")
+  @visibility("read")
   onTaskFailure?: OnTaskFailure;
 
   @doc("The network configuration for the Job.")
-  @visibility("read", "create")
+  @visibility("read")
   networkConfiguration?: JobNetworkConfiguration;
 
-  @doc("""
-The Batch service does not assign any meaning to metadata; it is solely for the
-use of user code.
-""")
+  @doc("A list of name-value pairs associated with the Job as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
   metadata?: MetadataItem[];
 
-  @doc("Contains information about the execution of a Job in the Azure Batch service.")
+  @doc("The execution information for the Job.")
   @visibility("read")
   executionInfo?: JobExecutionInformation;
 
-  @doc("""
-This property is populated only if the CloudJob was retrieved with an expand
-clause including the 'stats' attribute; otherwise it is null. The statistics
-may not be immediately available. The Batch service performs periodic roll-up
-of statistics. The typical delay is about 30 minutes.
-""")
+  @doc("Resource usage statistics for the entire lifetime of the Job. This property is populated only if the CloudJob was retrieved with an expand clause including the 'stats' attribute; otherwise it is null. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes.")
   @visibility("read")
   stats?: JobStatistics;
 }
 
+@doc("Options for creating an Azure Batch Job.")
+model BatchJobCreateOptions {
+  @doc("A string that uniquely identifies the Job within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
+  id: string;
+
+  @doc("The display name for the Job. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
+  displayName?: string;
+
+  @doc("Whether Tasks in the Job can define dependencies on each other. The default is false.")
+  usesTaskDependencies?: boolean;
+
+  @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0.")
+  priority?: int32;
+
+  @doc("Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
+  allowTaskPreemption?: boolean;
+
+  @doc("The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
+  maxParallelTasks?: int32 = -1;
+
+  @doc("The execution constraints for the Job.")
+  constraints?: JobConstraints;
+
+  @doc("Details of a Job Manager Task to be launched when the Job is started. If the Job does not specify a Job Manager Task, the user must explicitly add Tasks to the Job. If the Job does specify a Job Manager Task, the Batch service creates the Job Manager Task when the Job is created, and will try to schedule the Job Manager Task before scheduling other Tasks in the Job. The Job Manager Task's typical purpose is to control and/or monitor Job execution, for example by deciding what additional Tasks to run, determining when the work is complete, etc. (However, a Job Manager Task is not restricted to these activities - it is a fully-fledged Task in the system and perform whatever actions are required for the Job.) For example, a Job Manager Task might download a file specified as a parameter, analyze the contents of that file and submit additional Tasks based on those contents.")
+  jobManagerTask?: JobManagerTask;
+
+  @doc("The Job Preparation Task. If a Job has a Job Preparation Task, the Batch service will run the Job Preparation Task on a Node before starting any Tasks of that Job on that Compute Node.")
+  jobPreparationTask?: JobPreparationTask;
+
+  @doc("The Job Release Task. A Job Release Task cannot be specified without also specifying a Job Preparation Task for the Job. The Batch service runs the Job Release Task on the Nodes that have run the Job Preparation Task. The primary purpose of the Job Release Task is to undo changes to Compute Nodes made by the Job Preparation Task. Example activities include deleting local files, or shutting down services that were started as part of Job preparation.")
+  jobReleaseTask?: JobReleaseTask;
+
+  @doc("The list of common environment variable settings. These environment variables are set for all Tasks in the Job (including the Job Manager, Job Preparation and Job Release Tasks). Individual Tasks can override an environment setting specified here by specifying the same setting name with a different value.")
+  commonEnvironmentSettings?: EnvironmentSetting[];
+
+  @doc("The Pool on which the Batch service runs the Job's Tasks.")
+  poolInfo: PoolInformation;
+
+  @doc("The action the Batch service should take when all Tasks in the Job are in the completed state. Note that if a Job contains no Tasks, then all Tasks are considered complete. This option is therefore most commonly used with a Job Manager task; if you want to use automatic Job termination without a Job Manager, you should initially set onAllTasksComplete to noaction and update the Job properties to set onAllTasksComplete to terminatejob once you have finished adding Tasks. The default is noaction.")
+  onAllTasksComplete?: OnAllTasksComplete;
+
+  @doc("The action the Batch service should take when any Task in the Job fails. A Task is considered to have failed if has a failureInfo. A failureInfo is set if the Task completes with a non-zero exit code after exhausting its retry count, or if there was an error starting the Task, for example due to a resource file download error. The default is noaction.")
+  onTaskFailure?: OnTaskFailure;
+
+  @doc("The network configuration for the Job.")
+  networkConfiguration?: JobNetworkConfiguration;
+
+  @doc("A list of name-value pairs associated with the Job as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
+  metadata?: MetadataItem[];
+}
+
+@doc("Options for updating an Azure Batch Job.")
+model BatchJobUpdateOptions {
+  @doc("The priority of the Job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. If omitted, the priority of the Job is left unchanged.")
+  priority?: int32;
+
+  @doc("Whether Tasks in this job can be preempted by other high priority jobs. If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
+  allowTaskPreemption?: boolean;
+
+  @doc("The maximum number of tasks that can be executed in parallel for the job. The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
+  maxParallelTasks?: int32;
+
+  @doc("The execution constraints for the Job. If omitted, the existing execution constraints are left unchanged.")
+  constraints?: JobConstraints;
+
+  @doc("The Pool on which the Batch service runs the Job's Tasks. You may change the Pool for a Job only when the Job is disabled. The Patch Job call will fail if you include the poolInfo element and the Job is not disabled. If you specify an autoPoolSpecification in the poolInfo, only the keepAlive property of the autoPoolSpecification can be updated, and then only if the autoPoolSpecification has a poolLifetimeOption of Job (other job properties can be updated as normal). If omitted, the Job continues to run on its current Pool.")
+  poolInfo?: PoolInformation;
+
+  @doc("The action the Batch service should take when all Tasks in the Job are in the completed state. If omitted, the completion behavior is left unchanged. You may not change the value from terminatejob to noaction - that is, once you have engaged automatic Job termination, you cannot turn it off again. If you try to do this, the request fails with an 'invalid property value' error response; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  onAllTasksComplete?: OnAllTasksComplete;
+
+  @doc("A list of name-value pairs associated with the Job as metadata. If omitted, the existing Job metadata is left unchanged.")
+  metadata?: MetadataItem[];
+}
+
 @doc("Contains information about the execution of a Job in the Azure Batch service.")
 model JobExecutionInformation {
-  @doc("This is the time at which the Job was created.")
+  @doc("The start time of the Job. This is the time at which the Job was created.")
   startTime: utcDateTime;
 
-  @doc("This property is set only if the Job is in the completed state.")
+  @doc("The completion time of the Job. This property is set only if the Job is in the completed state.")
   endTime?: utcDateTime;
 
-  @doc("""
-This element contains the actual Pool where the Job is assigned. When you get
-Job details from the service, they also contain a poolInfo element, which
-contains the Pool configuration data from when the Job was added or updated.
-That poolInfo element may also contain a poolId element. If it does, the two
-IDs are the same. If it does not, it means the Job ran on an auto Pool, and
-this property contains the ID of that auto Pool.
-""")
+  @doc("The ID of the Pool to which this Job is assigned. This element contains the actual Pool where the Job is assigned. When you get Job details from the service, they also contain a poolInfo element, which contains the Pool configuration data from when the Job was added or updated. That poolInfo element may also contain a poolId element. If it does, the two IDs are the same. If it does not, it means the Job ran on an auto Pool, and this property contains the ID of that auto Pool.")
   poolId?: string;
 
-  @doc("This property is not set if there was no error starting the Job.")
+  @doc("Details of any error encountered by the service in starting the Job. This property is not set if there was no error starting the Job.")
   schedulingError?: JobSchedulingError;
 
-  @doc("""
-This property is set only if the Job is in the completed state. If the Batch
-service terminates the Job, it sets the reason as follows: JMComplete - the Job
-Manager Task completed, and killJobOnCompletion was set to true.
-MaxWallClockTimeExpiry - the Job reached its maxWallClockTime constraint.
-TerminateJobSchedule - the Job ran as part of a schedule, and the schedule
-terminated. AllTasksComplete - the Job's onAllTasksComplete attribute is set to
-terminatejob, and all Tasks in the Job are complete. TaskFailed - the Job's
-onTaskFailure attribute is set to performExitOptionsJobAction, and a Task in
-the Job failed with an exit condition that specified a jobAction of
-terminatejob. Any other string is a user-defined reason specified in a call to
-the 'Terminate a Job' operation.
-""")
+  @doc("A string describing the reason the Job ended. This property is set only if the Job is in the completed state. If the Batch service terminates the Job, it sets the reason as follows: JMComplete - the Job Manager Task completed, and killJobOnCompletion was set to true. MaxWallClockTimeExpiry - the Job reached its maxWallClockTime constraint. TerminateJobSchedule - the Job ran as part of a schedule, and the schedule terminated. AllTasksComplete - the Job's onAllTasksComplete attribute is set to terminatejob, and all Tasks in the Job are complete. TaskFailed - the Job's onTaskFailure attribute is set to performExitOptionsJobAction, and a Task in the Job failed with an exit condition that specified a jobAction of terminatejob. Any other string is a user-defined reason specified in a call to the 'Terminate a Job' operation.")
   terminateReason?: string;
 }
 
 @doc("An error encountered by the Batch service when scheduling a Job.")
 model JobSchedulingError {
-  @doc("The category of the error.")
+  @doc("The category of the Job scheduling error.")
   category: ErrorCategory;
 
-  @doc("""
-An identifier for the Job scheduling error. Codes are invariant and are
-intended to be consumed programmatically.
-""")
+  @doc("An identifier for the Job scheduling error. Codes are invariant and are intended to be consumed programmatically.")
   code?: string;
 
-  @doc("""
-A message describing the Job scheduling error, intended to be suitable for
-display in a user interface.
-""")
+  @doc("A message describing the Job scheduling error, intended to be suitable for display in a user interface.")
   message?: string;
 
   @doc("A list of additional error details related to the scheduling error.")
   details?: NameValuePair[];
 }
 
-@doc("Options when disabling a Job.")
-model BatchJobDisableParameters {
+@doc("Options for disabling an Azure Batch Job.")
+model BatchJobDisableOptions {
   @doc("What to do with active Tasks associated with the Job.")
   disableTasks: DisableJobOption;
 }
 
-@doc("Options when terminating a Job.")
-model BatchJobTerminateParameters {
-  @doc("""
-The text you want to appear as the Job's TerminateReason. The default is 'UserTerminate'.
-""")
+@doc("Options for terminating an Azure Batch Job.")
+model BatchJobTerminateOptions {
+  @doc("The text you want to appear as the Job's TerminateReason. The default is 'UserTerminate'.")
   terminateReason?: string;
 }
 
@@ -3308,13 +2490,10 @@ model JobPreparationAndReleaseTaskExecutionInformation {
   @doc("The URL of the Compute Node to which this entry refers.")
   nodeUrl?: string;
 
-  @doc("""
-Contains information about the execution of a Job Preparation Task on a Compute
-Node.
-""")
+  @doc("Information about the execution status of the Job Preparation Task on this Compute Node.")
   jobPreparationTaskExecutionInfo?: JobPreparationTaskExecutionInformation;
 
-  @doc("This property is set only if the Job Release Task has run on the Compute Node.")
+  @doc("Information about the execution status of the Job Release Task on this Compute Node. This property is set only if the Job Release Task has run on the Compute Node.")
   jobReleaseTaskExecutionInfo?: JobReleaseTaskExecutionInformation;
 }
 
@@ -3323,66 +2502,37 @@ Contains information about the execution of a Job Preparation Task on a Compute
 Node.
 """)
 model JobPreparationTaskExecutionInformation {
-  @doc("""
-If the Task has been restarted or retried, this is the most recent time at
-which the Task started running.
-""")
+  @doc("The time at which the Task started running. If the Task has been restarted or retried, this is the most recent time at which the Task started running.")
   startTime: utcDateTime;
 
-  @doc("This property is set only if the Task is in the Completed state.")
+  @doc("The time at which the Job Preparation Task completed. This property is set only if the Task is in the Completed state.")
   endTime?: utcDateTime;
 
   @doc("The current state of the Job Preparation Task on the Compute Node.")
   state: JobPreparationTaskState;
 
-  @doc("""
-The root directory of the Job Preparation Task on the Compute Node. You can use
-this path to retrieve files created by the Task, such as log files.
-""")
+  @doc("The root directory of the Job Preparation Task on the Compute Node. You can use this path to retrieve files created by the Task, such as log files.")
   taskRootDirectory?: string;
 
   @doc("The URL to the root directory of the Job Preparation Task on the Compute Node.")
   taskRootDirectoryUrl?: string;
 
-  @doc("""
-This parameter is returned only if the Task is in the completed state. The exit
-code for a process reflects the specific convention implemented by the
-application developer for that process. If you use the exit code value to make
-decisions in your code, be sure that you know the exit code convention used by
-the application process. Note that the exit code may also be generated by the
-Compute Node operating system, such as when a process is forcibly terminated.
-""")
+  @doc("The exit code of the program specified on the Task command line. This parameter is returned only if the Task is in the completed state. The exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. Note that the exit code may also be generated by the Compute Node operating system, such as when a process is forcibly terminated.")
   exitCode?: int32;
 
-  @doc("This property is set only if the Task runs in a container context.")
+  @doc("Information about the container under which the Task is executing. This property is set only if the Task runs in a container context.")
   containerInfo?: TaskContainerExecutionInformation;
 
-  @doc("""
-This property is set only if the Task is in the completed state and encountered
-a failure.
-""")
+  @doc("Information describing the Task failure, if any. This property is set only if the Task is in the completed state and encountered a failure.")
   failureInfo?: TaskFailureInformation;
 
-  @doc("""
-Task application failures (non-zero exit code) are retried, pre-processing
-errors (the Task could not be run) and file upload errors are not retried. The
-Batch service will retry the Task up to the limit specified by the constraints.
-""")
+  @doc("The number of times the Task has been retried by the Batch service. Task application failures (non-zero exit code) are retried, pre-processing errors (the Task could not be run) and file upload errors are not retried. The Batch service will retry the Task up to the limit specified by the constraints. Task application failures (non-zero exit code) are retried, pre-processing errors (the Task could not be run) and file upload errors are not retried. The Batch service will retry the Task up to the limit specified by the constraints.")
   retryCount: int32;
 
-  @doc("""
-This property is set only if the Task was retried (i.e. retryCount is nonzero).
-If present, this is typically the same as startTime, but may be different if
-the Task has been restarted for reasons other than retry; for example, if the
-Compute Node was rebooted during a retry, then the startTime is updated but the
-lastRetryTime is not.
-""")
+  @doc("The most recent time at which a retry of the Job Preparation Task started running. This property is set only if the Task was retried (i.e. retryCount is nonzero). If present, this is typically the same as startTime, but may be different if the Task has been restarted for reasons other than retry; for example, if the Compute Node was rebooted during a retry, then the startTime is updated but the lastRetryTime is not.")
   lastRetryTime?: utcDateTime;
 
-  @doc("""
-If the value is 'failed', then the details of the failure can be found in the
-failureInfo property.
-""")
+  @doc("The result of the Task execution. If the value is 'failed', then the details of the failure can be found in the failureInfo property.")
   result?: TaskExecutionResult;
 }
 
@@ -3391,34 +2541,22 @@ model TaskContainerExecutionInformation {
   @doc("The ID of the container.")
   containerId?: string;
 
-  @doc("""
-This is the state of the container according to the Docker service. It is
-equivalent to the status field returned by \"docker inspect\".
-""")
+  @doc("The state of the container. This is the state of the container according to the Docker service. It is equivalent to the status field returned by \"docker inspect\".")
   state?: string;
 
-  @doc("""
-This is the detailed error string from the Docker service, if available. It is
-equivalent to the error field returned by \"docker inspect\".
-""")
+  @doc("Detailed error information about the container. This is the detailed error string from the Docker service, if available. It is equivalent to the error field returned by \"docker inspect\".")
   error?: string;
 }
 
 @doc("Information about a Task failure.")
 model TaskFailureInformation {
-  @doc("The category of the error.")
+  @doc("The category of the Task error.")
   category: ErrorCategory;
 
-  @doc("""
-An identifier for the Task error. Codes are invariant and are intended to be
-consumed programmatically.
-""")
+  @doc("An identifier for the Task error. Codes are invariant and are intended to be consumed programmatically.")
   code?: string;
 
-  @doc("""
-A message describing the Task error, intended to be suitable for display in a
-user interface.
-""")
+  @doc("A message describing the Task error, intended to be suitable for display in a user interface.")
   message?: string;
 
   @doc("A list of additional details related to the error.")
@@ -3430,59 +2568,40 @@ Contains information about the execution of a Job Release Task on a Compute
 Node.
 """)
 model JobReleaseTaskExecutionInformation {
-  @doc("""
-If the Task has been restarted or retried, this is the most recent time at
-which the Task started running.
-""")
+  @doc("The time at which the Task started running. If the Task has been restarted or retried, this is the most recent time at which the Task started running.")
   startTime: utcDateTime;
 
-  @doc("This property is set only if the Task is in the Completed state.")
+  @doc("The time at which the Job Release Task completed. This property is set only if the Task is in the Completed state.")
   endTime?: utcDateTime;
 
   @doc("The current state of the Job Release Task on the Compute Node.")
   state: JobReleaseTaskState;
 
-  @doc("""
-The root directory of the Job Release Task on the Compute Node. You can use
-this path to retrieve files created by the Task, such as log files.
-""")
+  @doc("The root directory of the Job Release Task on the Compute Node. You can use this path to retrieve files created by the Task, such as log files.")
   taskRootDirectory?: string;
 
   @doc("The URL to the root directory of the Job Release Task on the Compute Node.")
   taskRootDirectoryUrl?: string;
 
-  @doc("""
-This parameter is returned only if the Task is in the completed state. The exit
-code for a process reflects the specific convention implemented by the
-application developer for that process. If you use the exit code value to make
-decisions in your code, be sure that you know the exit code convention used by
-the application process. Note that the exit code may also be generated by the
-Compute Node operating system, such as when a process is forcibly terminated.
-""")
+  @doc("The exit code of the program specified on the Task command line. This parameter is returned only if the Task is in the completed state. The exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. Note that the exit code may also be generated by the Compute Node operating system, such as when a process is forcibly terminated.")
   exitCode?: int32;
 
-  @doc("This property is set only if the Task runs in a container context.")
+  @doc("Information about the container under which the Task is executing. This property is set only if the Task runs in a container context.")
   containerInfo?: TaskContainerExecutionInformation;
 
-  @doc("""
-This property is set only if the Task is in the completed state and encountered
-a failure.
-""")
+  @doc("Information describing the Task failure, if any. This property is set only if the Task is in the completed state and encountered a failure.")
   failureInfo?: TaskFailureInformation;
 
-  @doc("""
-If the value is 'failed', then the details of the failure can be found in the
-failureInfo property.
-""")
+  @doc("The result of the Task execution. If the value is 'failed', then the details of the failure can be found in the failureInfo property.")
   result?: TaskExecutionResult;
 }
 
 @doc("The Task and TaskSlot counts for a Job.")
 model TaskCountsResult {
-  @doc("The Task counts for a Job.")
+  @doc("The number of Tasks per state.")
   taskCounts: TaskCounts;
 
-  @doc("The TaskSlot counts for a Job.")
+  @doc("The number of TaskSlots required by Tasks per state.")
   taskSlotCounts: TaskSlotCounts;
 }
 
@@ -3497,16 +2616,10 @@ model TaskCounts {
   @doc("The number of Tasks in the completed state.")
   completed: int32;
 
-  @doc("""
-The number of Tasks which succeeded. A Task succeeds if its result (found in
-the executionInfo property) is 'success'.
-""")
+  @doc("The number of Tasks which succeeded. A Task succeeds if its result (found in the executionInfo property) is 'success'.")
   succeeded: int32;
 
-  @doc("""
-The number of Tasks which failed. A Task fails if its result (found in the
-executionInfo property) is 'failure'.
-""")
+  @doc("The number of Tasks which failed. A Task fails if its result (found in the executionInfo property) is 'failure'.")
   failed: int32;
 }
 
@@ -3530,37 +2643,23 @@ model TaskSlotCounts {
 
 @doc("A Pool in the Azure Batch service.")
 model BatchPool {
-  @doc("""
-The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).
-""")
-  @visibility("read", "create")
+  @doc("A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
+  @visibility("read")
   id?: string;
 
-  @doc("""
-The display name need not be unique and can contain any Unicode characters up
-to a maximum length of 1024.
-""")
-  @visibility("read", "create")
+  @doc("The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
+  @visibility("read")
   displayName?: string;
 
   @doc("The URL of the Pool.")
   @visibility("read")
   url?: string;
 
-  @doc("""
-This is an opaque string. You can use it to detect whether the Pool has changed
-between requests. In particular, you can be pass the ETag when updating a Pool
-to specify that your changes should take effect only if nobody else has
-modified the Pool in the meantime.
-""")
+  @doc("The ETag of the Pool. This is an opaque string. You can use it to detect whether the Pool has changed between requests. In particular, you can be pass the ETag when updating a Pool to specify that your changes should take effect only if nobody else has modified the Pool in the meantime.")
   @visibility("read")
   eTag?: string;
 
-  @doc("""
-This is the last time at which the Pool level data, such as the
-targetDedicatedNodes or enableAutoscale settings, changed. It does not factor
-in node-level changes such as a Compute Node changing state.
-""")
+  @doc("The last modified time of the Pool. This is the last time at which the Pool level data, such as the targetDedicatedNodes or enableAutoscale settings, changed. It does not factor in node-level changes such as a Compute Node changing state.")
   @visibility("read")
   lastModified?: utcDateTime;
 
@@ -3584,38 +2683,23 @@ in node-level changes such as a Compute Node changing state.
   @visibility("read")
   allocationStateTransitionTime?: utcDateTime;
 
-  @doc("""
-For information about available sizes of virtual machines in Pools, see Choose
-a VM size for Compute Nodes in an Azure Batch Pool
-(https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).
-""")
-  @visibility("read", "create")
+  @doc("The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).")
+  @visibility("read")
   vmSize?: string;
 
-  @doc("""
-This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. This property cannot be specified if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'.
-""")
-  @visibility("read", "create")
+  @doc("The cloud service configuration for the Pool. This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. This property cannot be specified if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'.")
+  @visibility("read")
   cloudServiceConfiguration?: CloudServiceConfiguration;
 
-  @doc("""
-This property and cloudServiceConfiguration are mutually exclusive and one of
-the properties must be specified.
-""")
-  @visibility("read", "create")
+  @doc("The virtual machine configuration for the Pool. This property and cloudServiceConfiguration are mutually exclusive and one of the properties must be specified.")
+  @visibility("read")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
-  @doc("""
-This is the timeout for the most recent resize operation. (The initial sizing
-when the Pool is created counts as a resize.) The default value is 15 minutes.
-""")
-  @visibility("read", "create")
+  @doc("The timeout for allocation of Compute Nodes to the Pool. This is the timeout for the most recent resize operation. (The initial sizing when the Pool is created counts as a resize.) The default value is 15 minutes.")
+  @visibility("read")
   resizeTimeout?: duration;
 
-  @doc("""
-This property is set only if one or more errors occurred during the last Pool
-resize, and only when the Pool allocationState is Steady.
-""")
+  @doc("A list of errors encountered while performing the last resize on the Pool. This property is set only if one or more errors occurred during the last Pool resize, and only when the Pool allocationState is Steady.")
   @visibility("read")
   resizeErrors?: ResizeError[];
 
@@ -3623,143 +2707,91 @@ resize, and only when the Pool allocationState is Steady.
   @visibility("read")
   currentDedicatedNodes?: int32;
 
-  @doc("""
-Spot/Low-priority Compute Nodes which have been preempted are included in this
-count.
-""")
+  @doc("The number of Spot/Low-priority Compute Nodes currently in the Pool. Spot/Low-priority Compute Nodes which have been preempted are included in this count.")
   @visibility("read")
   currentLowPriorityNodes?: int32;
 
   @doc("The desired number of dedicated Compute Nodes in the Pool.")
-  @visibility("read", "create")
+  @visibility("read")
   targetDedicatedNodes?: int32;
 
   @doc("The desired number of Spot/Low-priority Compute Nodes in the Pool.")
-  @visibility("read", "create")
+  @visibility("read")
   targetLowPriorityNodes?: int32;
 
-  @doc("""
-If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must
-be specified. If true, the autoScaleFormula property is required and the Pool
-automatically resizes according to the formula. The default value is false.
-""")
-  @visibility("read", "create")
+  @doc("Whether the Pool size should automatically adjust over time. If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula property is required and the Pool automatically resizes according to the formula. The default value is false.")
+  @visibility("read")
   enableAutoScale?: boolean;
 
-  @doc("""
-This property is set only if the Pool automatically scales, i.e.
-enableAutoScale is true.
-""")
-  @visibility("read", "create")
+  @doc("A formula for the desired number of Compute Nodes in the Pool. This property is set only if the Pool automatically scales, i.e. enableAutoScale is true.")
+  @visibility("read")
   autoScaleFormula?: string;
 
-  @doc("""
-This property is set only if the Pool automatically scales, i.e.
-enableAutoScale is true.
-""")
-  @visibility("read", "create")
+  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. This property is set only if the Pool automatically scales, i.e. enableAutoScale is true.")
+  @visibility("read")
   autoScaleEvaluationInterval?: duration;
 
-  @doc("""
-This property is set only if the Pool automatically scales, i.e.
-enableAutoScale is true.
-""")
+  @doc("The results and errors from the last execution of the autoscale formula. This property is set only if the Pool automatically scales, i.e. enableAutoScale is true.")
   @visibility("read")
   autoScaleRun?: AutoScaleRun;
 
-  @doc("""
-This imposes restrictions on which Compute Nodes can be assigned to the Pool.
-Specifying this value can reduce the chance of the requested number of Compute
-Nodes to be allocated in the Pool.
-""")
-  @visibility("read", "create")
+  @doc("Whether the Pool permits direct communication between Compute Nodes. This imposes restrictions on which Compute Nodes can be assigned to the Pool. Specifying this value can reduce the chance of the requested number of Compute Nodes to be allocated in the Pool.")
+  @visibility("read")
   enableInterNodeCommunication?: boolean;
 
-  @doc("The network configuration for a Pool.")
-  @visibility("read", "create")
+  @doc("The network configuration for the Pool.")
+  @visibility("read")
   networkConfiguration?: NetworkConfiguration;
 
-  @doc("""
-Batch will retry Tasks when a recovery operation is triggered on a Node.
-Examples of recovery operations include (but are not limited to) when an
-unhealthy Node is rebooted or a Compute Node disappeared due to host failure.
-Retries due to recovery operations are independent of and are not counted
-against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal
-retry due to a recovery operation may occur. Because of this, all Tasks should
-be idempotent. This means Tasks need to tolerate being interrupted and
-restarted without causing any corruption or duplicate data. The best practice
-for long running Tasks is to use some form of checkpointing. In some cases the
-StartTask may be re-run even though the Compute Node was not rebooted. Special
-care should be taken to avoid StartTasks which create breakaway process or
-install/launch services from the StartTask working directory, as this will
-block Batch from being able to re-run the StartTask.
-""")
+  @doc("A Task specified to run on each Compute Node as it joins the Pool.")
   startTask?: StartTask;
 
   @doc("""
-For Windows Nodes, the Batch service installs the Certificates to the specified
-Certificate store and location. For Linux Compute Nodes, the Certificates are
-stored in a directory inside the Task working directory and an environment
-variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this
-location. For Certificates with visibility of 'remoteUser', a 'certs' directory
-is created in the user's home directory (e.g., /home/{user-name}/certs) and
-Certificates are placed in that directory.
+For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. 
+For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. 
+For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
+Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
 """)
+  @visibility("read")
   certificateReferences?: CertificateReference[];
 
-  @doc("""
-Changes to Package references affect all new Nodes joining the Pool, but do not
-affect Compute Nodes that are already in the Pool until they are rebooted or
-reimaged. There is a maximum of 10 Package references on any given Pool.
-""")
+  @doc("The list of Packages to be installed on each Compute Node in the Pool. Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.")
+  @visibility("read")
   applicationPackageReferences?: ApplicationPackageReference[];
 
-  @doc("""
-The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail.
-""")
-  @visibility("read", "create")
+  @doc("The list of application licenses the Batch service will make available on each Compute Node in the Pool. The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail.")
+  @visibility("read")
   applicationLicenses?: string[];
 
-  @doc("""
-The default value is 1. The maximum value is the smaller of 4 times the number
-of cores of the vmSize of the pool or 256.
-""")
-  @visibility("read", "create")
+  @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.")
+  @visibility("read")
   taskSlotsPerNode?: int32;
 
-  @doc("If not specified, the default is spread.")
-  @visibility("read", "create")
+  @doc("How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread.")
+  @visibility("read")
   taskSchedulingPolicy?: TaskSchedulingPolicy;
 
   @doc("The list of user Accounts to be created on each Compute Node in the Pool.")
-  @visibility("read", "create")
+  @visibility("read")
   userAccounts?: UserAccount[];
 
   @doc("A list of name-value pairs associated with the Pool as metadata.")
+  @visibility("read")
   metadata?: MetadataItem[];
 
-  @doc("""
-This property is populated only if the CloudPool was retrieved with an expand
-clause including the 'stats' attribute; otherwise it is null. The statistics
-may not be immediately available. The Batch service performs periodic roll-up
-of statistics. The typical delay is about 30 minutes.
-""")
+  @doc("Utilization and resource usage statistics for the entire lifetime of the Pool. This property is populated only if the CloudPool was retrieved with an expand clause including the 'stats' attribute; otherwise it is null. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes.")
   @visibility("read")
   stats?: PoolStatistics;
 
-  @doc("This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.")
-  @visibility("read", "create")
+  @doc("A list of file systems to mount on each node in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.")
+  @visibility("read")
   mountConfiguration?: MountConfiguration[];
 
-  @doc("""
-The list of user identities associated with the Batch pool. The user identity
-dictionary key references will be ARM resource ids in the form:
-'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-""")
+  @doc("The identity of the Batch pool, if configured. The list of user identities associated with the Batch pool. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.")
   @visibility("read")
   identity?: BatchPoolIdentity;
 
-  @doc("If omitted, the default value is Default.")
+  @doc("The desired node communication mode for the pool. If omitted, the default value is Default.")
   targetNodeCommunicationMode?: NodeCommunicationMode;
 
   @doc("The current state of the pool communication mode.")
@@ -3767,18 +2799,141 @@ dictionary key references will be ARM resource ids in the form:
   currentNodeCommunicationMode?: NodeCommunicationMode;
 }
 
-@doc("An error that occurred when resizing a Pool.")
-model ResizeError {
-  @doc("""
-An identifier for the Pool resize error. Codes are invariant and are intended
-to be consumed programmatically.
-""")
-  code?: string;
+@doc("Options for creating an Azure Batch Pool.")
+model BatchPoolCreateOptions {
+  @doc("A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two Pool IDs within an Account that differ only by case).")
+  id: string;
+
+  @doc("The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
+  displayName?: string;
+
+  @doc("The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available sizes of virtual machines for Cloud Services Pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for Pools using Images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series).")
+  vmSize: string;
+
+  @doc("The cloud service configuration for the Pool. This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. This property cannot be specified if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'.")
+  cloudServiceConfiguration?: CloudServiceConfiguration;
+
+  @doc("The virtual machine configuration for the Pool. This property and cloudServiceConfiguration are mutually exclusive and one of the properties must be specified.")
+  virtualMachineConfiguration?: VirtualMachineConfiguration;
+
+  @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  resizeTimeout?: duration;
+
+  @doc("The desired number of dedicated Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
+  targetDedicatedNodes?: int32;
+
+  @doc("The desired number of Spot/Low-priority Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
+  targetLowPriorityNodes?: int32;
+
+  @doc("Whether the Pool size should automatically adjust over time. If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula property is required and the Pool automatically resizes according to the formula. The default value is false.")
+  enableAutoScale?: boolean;
+
+  @doc("A formula for the desired number of Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the Pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see 'Automatically scale Compute Nodes in an Azure Batch Pool' (https://azure.microsoft.com/documentation/articles/batch-automatic-scaling/).")
+  autoScaleFormula?: string;
+
+  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  autoScaleEvaluationInterval?: duration;
+
+  @doc("Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.")
+  enableInterNodeCommunication?: boolean;
+
+  @doc("The network configuration for the Pool.")
+  networkConfiguration?: NetworkConfiguration;
+
+  @doc("A Task specified to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted.")
+  startTask?: StartTask;
 
   @doc("""
-A message describing the Pool resize error, intended to be suitable for display
-in a user interface.
+For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. 
+For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. 
+For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
+Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
 """)
+  certificateReferences?: CertificateReference[];
+
+  @doc("The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.")
+  applicationPackageReferences?: ApplicationPackageReference[];
+
+  @doc("The list of application licenses the Batch service will make available on each Compute Node in the Pool. The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail.")
+  applicationLicenses?: string[];
+
+  @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.")
+  taskSlotsPerNode?: int32;
+
+  @doc("How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread.")
+  taskSchedulingPolicy?: TaskSchedulingPolicy;
+
+  @doc("The list of user Accounts to be created on each Compute Node in the Pool.")
+  userAccounts?: UserAccount[];
+
+  @doc("A list of name-value pairs associated with the Pool as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
+  metadata?: MetadataItem[];
+
+  @doc("Mount storage using specified file system for the entire lifetime of the pool. Mount the storage using Azure fileshare, NFS, CIFS or Blobfuse based file system.")
+  mountConfiguration?: MountConfiguration[];
+
+  @doc("The desired node communication mode for the pool. If omitted, the default value is Default.")
+  targetNodeCommunicationMode?: NodeCommunicationMode;
+}
+
+
+@doc("Options for replacing properties on an Azure Batch Pool.")
+model BatchPoolReplaceOptions {
+  @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is removed from the Pool.")
+  startTask?: StartTask;
+
+  @doc("""
+This list replaces any existing Certificate references configured on the Pool. 
+If you specify an empty collection, any existing Certificate references are removed from the Pool. 
+For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. 
+For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. 
+For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
+Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
+""")
+  certificateReferences: CertificateReference[];
+
+  @doc("The list of Application Packages to be installed on each Compute Node in the Pool. The list replaces any existing Application Package references on the Pool. Changes to Application Package references affect all new Compute Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Application Package references on any given Pool. If omitted, or if you specify an empty collection, any existing Application Packages references are removed from the Pool. A maximum of 10 references may be specified on a given Pool.")
+  applicationPackageReferences: ApplicationPackageReference[];
+
+  @doc("A list of name-value pairs associated with the Pool as metadata. This list replaces any existing metadata configured on the Pool. If omitted, or if you specify an empty collection, any existing metadata is removed from the Pool.")
+  metadata: MetadataItem[];
+
+  @doc("The desired node communication mode for the pool. This setting replaces any existing targetNodeCommunication setting on the Pool. If omitted, the existing setting is default.")
+  targetNodeCommunicationMode?: NodeCommunicationMode;
+}
+
+
+@doc("Options for updating an Azure Batch Pool.")
+model BatchPoolUpdateOptions {
+  @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is left unchanged.")
+  startTask?: StartTask;
+
+  @doc("""
+If this element is present, it replaces any existing Certificate references configured on the Pool. 
+If omitted, any existing Certificate references are left unchanged. 
+For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. 
+For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. 
+For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
+Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
+""")
+  certificateReferences?: CertificateReference[];
+
+  @doc("A list of Packages to be installed on each Compute Node in the Pool. Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. If this element is present, it replaces any existing Package references. If you specify an empty collection, then all Package references are removed from the Pool. If omitted, any existing Package references are left unchanged.")
+  applicationPackageReferences?: ApplicationPackageReference[];
+
+  @doc("A list of name-value pairs associated with the Pool as metadata. If this element is present, it replaces any existing metadata configured on the Pool. If you specify an empty collection, any metadata is removed from the Pool. If omitted, any existing metadata is left unchanged.")
+  metadata?: MetadataItem[];
+
+  @doc("The desired node communication mode for the pool. If this element is present, it replaces the existing targetNodeCommunicationMode configured on the Pool. If omitted, any existing metadata is left unchanged.")
+  targetNodeCommunicationMode?: NodeCommunicationMode;
+}
+
+@doc("An error that occurred when resizing a Pool.")
+model ResizeError {
+  @doc("An identifier for the Pool resize error. Codes are invariant and are intended to be consumed programmatically.")
+  code?: string;
+
+  @doc("A message describing the Pool resize error, intended to be suitable for display in a user interface.")
   message?: string;
 
   @doc("A list of additional error details related to the Pool resize error.")
@@ -3790,28 +2945,19 @@ model AutoScaleRun {
   @doc("The time at which the autoscale formula was last evaluated.")
   timestamp: utcDateTime;
 
-  @doc("""
-Each variable value is returned in the form $variable=value, and variables are
-separated by semicolons.
-""")
+  @doc("The final values of all variables used in the evaluation of the autoscale formula. Each variable value is returned in the form $variable=value, and variables are separated by semicolons.")
   results?: string;
 
-  @doc("An error that occurred when executing or evaluating a Pool autoscale formula.")
+  @doc("Details of the error encountered evaluating the autoscale formula on the Pool, if the evaluation was unsuccessful.")
   error?: AutoScaleRunError;
 }
 
 @doc("An error that occurred when executing or evaluating a Pool autoscale formula.")
 model AutoScaleRunError {
-  @doc("""
-An identifier for the autoscale error. Codes are invariant and are intended to
-be consumed programmatically.
-""")
+  @doc("An identifier for the autoscale error. Codes are invariant and are intended to be consumed programmatically.")
   code?: string;
 
-  @doc("""
-A message describing the autoscale error, intended to be suitable for display
-in a user interface.
-""")
+  @doc("A message describing the autoscale error, intended to be suitable for display in a user interface.")
   message?: string;
 
   @doc("A list of additional error details related to the autoscale error.")
@@ -3820,24 +2966,16 @@ in a user interface.
 
 @doc("The identity of the Batch pool, if configured.")
 model BatchPoolIdentity {
-  @doc("""
-The list of user identities associated with the Batch pool. The user identity
-dictionary key references will be ARM resource ids in the form:
-'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-""")
+  @doc("The identity of the Batch pool, if configured. The list of user identities associated with the Batch pool. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.")
   type: PoolIdentityType;
 
-  @doc("""
-The user identity dictionary key references will be ARM resource ids in the
-form:
-'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-""")
+  @doc("The list of user identities associated with the Batch account. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.")
   userAssignedIdentities?: UserAssignedIdentity[];
 }
 
 @doc("The user assigned Identity")
 model UserAssignedIdentity {
-  @doc("The ARM resource id of the user assigned identity")
+  @doc("The ARM resource id of the user assigned identity.")
   resourceId: string;
 
   @doc("The client id of the user assigned identity.")
@@ -3862,75 +3000,46 @@ model BatchPoolListResult {
   `odata.nextLink`?: string;
 }
 
-@doc("Options for enabling automatic scaling on a Pool.")
-model BatchPoolEnableAutoScaleParameters {
-  @doc("""
-The formula is checked for validity before it is applied to the Pool. If the
-formula is not valid, the Batch service rejects the request with detailed error
-information. For more information about specifying this formula, see
-Automatically scale Compute Nodes in an Azure Batch Pool
-(https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling).
-""")
+@doc("Options for enabling automatic scaling on an Azure Batch Pool.")
+model BatchPoolEnableAutoScaleOptions {
+  @doc("The formula for the desired number of Compute Nodes in the Pool. The formula is checked for validity before it is applied to the Pool. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling).")
   autoScaleFormula?: string;
 
-  @doc("""
-The default value is 15 minutes. The minimum and maximum value are 5 minutes
-and 168 hours respectively. If you specify a value less than 5 minutes or
-greater than 168 hours, the Batch service rejects the request with an invalid
-property value error; if you are calling the REST API directly, the HTTP status
-code is 400 (Bad Request). If you specify a new interval, then the existing
-autoscale evaluation schedule will be stopped and a new autoscale evaluation
-schedule will be started, with its starting time being the time when this
-request was issued.
-""")
+  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). If you specify a new interval, then the existing autoscale evaluation schedule will be stopped and a new autoscale evaluation schedule will be started, with its starting time being the time when this request was issued.")
   autoScaleEvaluationInterval?: duration;
 }
 
-@doc("Options for evaluating an automatic scaling formula on a Pool.")
-model BatchPoolEvaluateAutoScaleParameters {
-  @doc("""
-The formula is validated and its results calculated, but it is not applied to
-the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a
-Pool'. For more information about specifying this formula, see Automatically
-scale Compute Nodes in an Azure Batch Pool
-(https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling).
-""")
-  autoScaleFormula?: string;
+@doc("Options for evaluating an automatic scaling formula on an Azure Batch Pool.")
+model BatchPoolEvaluateAutoScaleOptions {
+  @doc("The formula for the desired number of Compute Nodes in the Pool. The formula is validated and its results calculated, but it is not applied to the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a Pool'. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling).")
+  autoScaleFormula: string;
 }
 
-@doc("Options for changing the size of a Pool.")
-model BatchPoolResizeParameters {
+@doc("Options for changing the size of an Azure Batch Pool.")
+model BatchPoolResizeOptions {
   @doc("The desired number of dedicated Compute Nodes in the Pool.")
   targetDedicatedNodes?: int32;
 
   @doc("The desired number of Spot/Low-priority Compute Nodes in the Pool.")
   targetLowPriorityNodes?: int32;
 
-  @doc("""
-The default value is 15 minutes. The minimum value is 5 minutes. If you specify
-a value less than 5 minutes, the Batch service returns an error; if you are
-calling the REST API directly, the HTTP status code is 400 (Bad Request).
-""")
+  @doc("The timeout for allocation of Nodes to the Pool or removal of Compute Nodes from the Pool. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   resizeTimeout?: duration;
 
-  @doc("The default value is requeue.")
-  nodeDeallocationOption?: ComputeNodeDeallocationOption;
+  @doc("Determines what to do with a Compute Node and its running task(s) if the Pool size is decreasing. The default value is requeue.")
+  nodeDeallocationOption?: BatchNodeDeallocationOption;
 }
 
-@doc("Options for removing Compute Nodes from a Pool.")
-model NodeRemoveParameters {
-  @doc("A maximum of 100 nodes may be removed per request.")
+@doc("Options for removing nodes from an Azure Batch Pool.")
+model NodeRemoveOptions {
+  @doc("A list containing the IDs of the Compute Nodes to be removed from the specified Pool. A maximum of 100 nodes may be removed per request.")
   nodeList: string[];
 
-  @doc("""
-The default value is 15 minutes. The minimum value is 5 minutes. If you specify
-a value less than 5 minutes, the Batch service returns an error; if you are
-calling the REST API directly, the HTTP status code is 400 (Bad Request).
-""")
+  @doc("The timeout for removal of Compute Nodes to the Pool. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   resizeTimeout?: duration;
 
-  @doc("The default value is requeue.")
-  nodeDeallocationOption?: ComputeNodeDeallocationOption;
+  @doc("Determines what to do with a Compute Node and its running task(s) after it has been selected for deallocation. The default value is requeue.")
+  nodeDeallocationOption?: BatchNodeDeallocationOption;
 }
 
 @doc("""
@@ -3945,29 +3054,19 @@ restarted without causing any corruption or duplicate data. The best practice
 for long running Tasks is to use some form of checkpointing.
 """)
 model BatchTask {
-  @doc("""
-The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters.
-""")
-  @visibility("read","create")
+  @doc("A string that uniquely identifies the Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters.")
+  @visibility("read")
   id?: string;
 
-  @doc("""
-The display name need not be unique and can contain any Unicode characters up
-to a maximum length of 1024.
-""")
-  @visibility("read","create")
+  @doc("A display name for the Task. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
+  @visibility("read")
   displayName?: string;
 
   @doc("The URL of the Task.")
   @visibility("read")
   url?: string;
 
-  @doc("""
-This is an opaque string. You can use it to detect whether the Task has changed
-between requests. In particular, you can be pass the ETag when updating a Task
-to specify that your changes should take effect only if nobody else has
-modified the Task in the meantime.
-""")
+  @doc("The ETag of the Task. This is an opaque string. You can use it to detect whether the Task has changed between requests. In particular, you can be pass the ETag when updating a Task to specify that your changes should take effect only if nobody else has modified the Task in the meantime.")
   @visibility("read")
   eTag?: string;
 
@@ -3980,9 +3079,10 @@ modified the Task in the meantime.
   creationTime?: utcDateTime;
 
   @doc("How the Batch service should respond when the Task completes.")
+  @visibility("read")
   exitConditions?: ExitConditions;
 
-  @doc("The state of the Task.")
+  @doc("The current state of the Task.")
   @visibility("read")
   state?: TaskState;
 
@@ -3990,161 +3090,146 @@ modified the Task in the meantime.
   @visibility("read")
   stateTransitionTime?: utcDateTime;
 
-  @doc("This property is not set if the Task is in its initial Active state.")
+  @doc("The previous state of the Task. This property is not set if the Task is in its initial Active state.")
   @visibility("read")
   previousState?: TaskState;
 
-  @doc("This property is not set if the Task is in its initial Active state.")
+  @doc("The time at which the Task entered its previous state. This property is not set if the Task is in its initial Active state.")
   @visibility("read")
   previousStateTransitionTime?: utcDateTime;
 
-  @doc("""
-For multi-instance Tasks, the command line is executed as the primary Task,
-after the primary Task and all subtasks have finished executing the
-coordination command line. The command line does not run under a shell, and
-therefore cannot take advantage of shell features such as environment variable
-expansion. If you want to take advantage of such features, you should invoke
-the shell in the command line, for example using \"cmd /c MyCommand\" in
-Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to
-file paths, it should use a relative path (relative to the Task working
-directory), or use the Batch provided environment variable
-(https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).
-""")
-  @visibility("read","create")
+  @doc("The command line of the Task. For multi-instance Tasks, the command line is executed as the primary Task, after the primary Task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).")
+  @visibility("read")
   commandLine?: string;
 
-  @doc("""
-If the Pool that will run this Task has containerConfiguration set, this must
-be set as well. If the Pool that will run this Task doesn't have
-containerConfiguration set, this must not be set. When this is specified, all
-directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure
-Batch directories on the node) are mapped into the container, all Task
-environment variables are mapped into the container, and the Task command line
-is executed in the container. Files produced in the container outside of
-AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that
-Batch file APIs will not be able to access those files.
-""")
+  @doc("The settings for the container under which the Task runs. If the Pool that will run this Task has containerConfiguration set, this must be set as well. If the Pool that will run this Task doesn't have containerConfiguration set, this must not be set. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all Task environment variables are mapped into the container, and the Task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files.")
+  @visibility("read")
   containerSettings?: TaskContainerSettings;
 
-  @doc("""
-For multi-instance Tasks, the resource files will only be downloaded to the
-Compute Node on which the primary Task is executed. There is a maximum size for
-the list of resource files.  When the max size is exceeded, the request will
-fail and the response error code will be RequestEntityTooLarge. If this occurs,
-the collection of ResourceFiles must be reduced in size. This can be achieved
-using .zip files, Application Packages, or Docker Containers.
-""")
+  @doc("A list of files that the Batch service will download to the Compute Node before running the command line. For multi-instance Tasks, the resource files will only be downloaded to the Compute Node on which the primary Task is executed. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.")
+  @visibility("read")
   resourceFiles?: ResourceFile[];
 
-  @doc("""
-For multi-instance Tasks, the files will only be uploaded from the Compute Node
-on which the primary Task is executed.
+  @doc("A list of files that the Batch service will upload from the Compute Node after running the command line. For multi-instance Tasks, the files will only be uploaded from the Compute Node on which the primary Task is executed.")
+  @visibility("read")
+  outputFiles?: OutputFile[];
+
+  @doc("A list of environment variable settings for the Task.")
+  @visibility("read")
+  environmentSettings?: EnvironmentSetting[];
+
+  @doc("A locality hint that can be used by the Batch service to select a Compute Node on which to start the new Task.")
+  @visibility("read")
+  affinityInfo?: AffinityInformation;
+
+  @doc("The execution constraints that apply to this Task.")
+  constraints?: TaskConstraints;
+
+  @doc("The number of scheduling slots that the Task requires to run. The default is 1. A Task can only be scheduled to run on a compute node if the node has enough free scheduling slots available. For multi-instance Tasks, this must be 1.")
+  @visibility("read")
+  requiredSlots?: int32;
+
+  @doc("The user identity under which the Task runs. If omitted, the Task runs as a non-administrative user unique to the Task.")
+  @visibility("read")
+  userIdentity?: UserIdentity;
+
+  @doc("Information about the execution of the Task.")
+  @visibility("read")
+  executionInfo?: TaskExecutionInformation;
+
+  @doc("Information about the Compute Node on which the Task ran.")
+  @visibility("read")
+  nodeInfo?: BatchNodeInformation;
+
+  @doc("An object that indicates that the Task is a multi-instance Task, and contains information about how to run the multi-instance Task.")
+  @visibility("read")
+  multiInstanceSettings?: MultiInstanceSettings;
+
+  @doc("Resource usage statistics for the Task.")
+  @visibility("read")
+  stats?: TaskStatistics;
+
+  @doc("The Tasks that this Task depends on. This Task will not be scheduled until all Tasks that it depends on have completed successfully. If any of those Tasks fail and exhaust their retry counts, this Task will never be scheduled.")
+  @visibility("read")
+  dependsOn?: TaskDependencies;
+
+  @doc("A list of Packages that the Batch service will deploy to the Compute Node before running the command line. Application packages are downloaded and deployed to a shared directory, not the Task working directory. Therefore, if a referenced package is already on the Node, and is up to date, then it is not re-downloaded; the existing copy on the Compute Node is used. If a referenced Package cannot be installed, for example because the package has been deleted or because download failed, the Task fails.")
+  @visibility("read")
+  applicationPackageReferences?: ApplicationPackageReference[];
+
+  @doc("The settings for an authentication token that the Task can use to perform Batch service operations. If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.")
+  @visibility("read")
+  authenticationTokenSettings?: AuthenticationTokenSettings;
+}
+
+@doc("""
+Options for creating an Azure Batch Task.
 """)
+model BatchTaskCreateOptions {
+  @doc("A string that uniquely identifies the Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within a Job that differ only by case).")
+  id: string;
+
+  @doc("A display name for the Task. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
+  displayName?: string;
+
+  @doc("How the Batch service should respond when the Task completes.")
+  exitConditions?: ExitConditions;
+
+  @doc("The command line of the Task. For multi-instance Tasks, the command line is executed as the primary Task, after the primary Task and all subtasks have finished executing the coordination command line. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).")
+  commandLine: string;
+
+  @doc("The settings for the container under which the Task runs. If the Pool that will run this Task has containerConfiguration set, this must be set as well. If the Pool that will run this Task doesn't have containerConfiguration set, this must not be set. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all Task environment variables are mapped into the container, and the Task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files.")
+  containerSettings?: TaskContainerSettings;
+
+  @doc("A list of files that the Batch service will download to the Compute Node before running the command line. For multi-instance Tasks, the resource files will only be downloaded to the Compute Node on which the primary Task is executed. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.")
+  resourceFiles?: ResourceFile[];
+
+  @doc("A list of files that the Batch service will upload from the Compute Node after running the command line. For multi-instance Tasks, the files will only be uploaded from the Compute Node on which the primary Task is executed.")
   outputFiles?: OutputFile[];
 
   @doc("A list of environment variable settings for the Task.")
   environmentSettings?: EnvironmentSetting[];
 
-  @doc("""
-A locality hint that can be used by the Batch service to select a Compute Node
-on which to start a Task.
-""")
+  @doc("A locality hint that can be used by the Batch service to select a Compute Node on which to start the new Task.")
   affinityInfo?: AffinityInformation;
 
-  @doc("Execution constraints to apply to a Task.")
+  @doc("The execution constraints that apply to this Task. If you do not specify constraints, the maxTaskRetryCount is the maxTaskRetryCount specified for the Job, the maxWallClockTime is infinite, and the retentionTime is 7 days.")
   constraints?: TaskConstraints;
 
-  @doc("""
-The default is 1. A Task can only be scheduled to run on a compute node if the
-node has enough free scheduling slots available. For multi-instance Tasks, this
-must be 1.
-""")
+  @doc("The number of scheduling slots that the Task required to run. The default is 1. A Task can only be scheduled to run on a compute node if the node has enough free scheduling slots available. For multi-instance Tasks, this must be 1.")
   requiredSlots?: int32;
 
-  @doc("If omitted, the Task runs as a non-administrative user unique to the Task.")
+  @doc("The user identity under which the Task runs. If omitted, the Task runs as a non-administrative user unique to the Task.")
   userIdentity?: UserIdentity;
 
-  @doc("Information about the execution of a Task.")
-  @visibility("read")
-  executionInfo?: TaskExecutionInformation;
-
-  @doc("Information about the Compute Node on which a Task ran.")
-  @visibility("read")
-  nodeInfo?: ComputeNodeInformation;
-
-  @doc("""
-Multi-instance Tasks are commonly used to support MPI Tasks. In the MPI case,
-if any of the subtasks fail (for example due to exiting with a non-zero exit
-code) the entire multi-instance Task fails. The multi-instance Task is then
-terminated and retried, up to its retry limit.
-""")
+  @doc("An object that indicates that the Task is a multi-instance Task, and contains information about how to run the multi-instance Task.")
   multiInstanceSettings?: MultiInstanceSettings;
 
-  @doc("Resource usage statistics for a Task.")
-  @visibility("read")
-  stats?: TaskStatistics;
-
-  @doc("""
-This Task will not be scheduled until all Tasks that it depends on have
-completed successfully. If any of those Tasks fail and exhaust their retry
-counts, this Task will never be scheduled.
-""")
+  @doc("The Tasks that this Task depends on. This Task will not be scheduled until all Tasks that it depends on have completed successfully. If any of those Tasks fail and exhaust their retry counts, this Task will never be scheduled. If the Job does not have usesTaskDependencies set to true, and this element is present, the request fails with error code TaskDependenciesNotSpecifiedOnJob.")
   dependsOn?: TaskDependencies;
 
-  @doc("""
-Application packages are downloaded and deployed to a shared directory, not the
-Task working directory. Therefore, if a referenced package is already on the
-Node, and is up to date, then it is not re-downloaded; the existing copy on the
-Compute Node is used. If a referenced Package cannot be installed, for example
-because the package has been deleted or because download failed, the Task
-fails.
-""")
+  @doc("A list of Packages that the Batch service will deploy to the Compute Node before running the command line. Application packages are downloaded and deployed to a shared directory, not the Task working directory. Therefore, if a referenced package is already on the Node, and is up to date, then it is not re-downloaded; the existing copy on the Compute Node is used. If a referenced Package cannot be installed, for example because the package has been deleted or because download failed, the Task fails.")
   applicationPackageReferences?: ApplicationPackageReference[];
 
-  @doc("""
-If this property is set, the Batch service provides the Task with an
-authentication token which can be used to authenticate Batch service operations
-without requiring an Account access key. The token is provided via the
-AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the
-Task can carry out using the token depend on the settings. For example, a Task
-can request Job permissions in order to add other Tasks to the Job, or check
-the status of the Job or of other Tasks under the Job.
-""")
+  @doc("The settings for an authentication token that the Task can use to perform Batch service operations. If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.")
   authenticationTokenSettings?: AuthenticationTokenSettings;
 }
 
 @doc("Specifies how the Batch service should respond when the Task completes.")
 model ExitConditions {
-  @doc("""
-A list of individual Task exit codes and how the Batch service should respond
-to them.
-""")
+  @doc("A list of individual Task exit codes and how the Batch service should respond to them.")
   exitCodes?: ExitCodeMapping[];
 
-  @doc("""
-A list of Task exit code ranges and how the Batch service should respond to
-them.
-""")
+  @doc("A list of Task exit code ranges and how the Batch service should respond to them.")
   exitCodeRanges?: ExitCodeRangeMapping[];
 
-  @doc("Specifies how the Batch service responds to a particular exit condition.")
+  @doc("How the Batch service should respond if the Task fails to start due to an error.")
   preProcessingError?: ExitOptions;
 
-  @doc("""
-If the Task exited with an exit code that was specified via exitCodes or
-exitCodeRanges, and then encountered a file upload error, then the action
-specified by the exit code takes precedence.
-""")
+  @doc("How the Batch service should respond if a file upload error occurs. If the Task exited with an exit code that was specified via exitCodes or exitCodeRanges, and then encountered a file upload error, then the action specified by the exit code takes precedence.")
   fileUploadError?: ExitOptions;
 
-  @doc("""
-This value is used if the Task exits with any nonzero exit code not listed in
-the exitCodes or exitCodeRanges collection, with a pre-processing error if the
-preProcessingError property is not present, or with a file upload error if the
-fileUploadError property is not present. If you want non-default behavior on
-exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges
-collection.
-""")
+  @doc("How the Batch service should respond if the Task fails with an exit condition not covered by any of the other properties. This value is used if the Task exits with any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, with a pre-processing error if the preProcessingError property is not present, or with a file upload error if the fileUploadError property is not present. If you want non-default behavior on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection.")
   default?: ExitOptions;
 }
 
@@ -4156,24 +3241,16 @@ model ExitCodeMapping {
   @doc("A process exit code.")
   code: int32;
 
-  @doc("Specifies how the Batch service responds to a particular exit condition.")
+  @doc("How the Batch service should respond if the Task exits with this exit code.")
   exitOptions: ExitOptions;
 }
 
 @doc("Specifies how the Batch service responds to a particular exit condition.")
 model ExitOptions {
-  @doc("""
-The default is none for exit code 0 and terminate for all other exit
-conditions. If the Job's onTaskFailed property is noaction, then specifying
-this property returns an error and the add Task request fails with an invalid
-property value error; if you are calling the REST API directly, the HTTP status
-code is 400 (Bad Request).
-""")
+  @doc("An action to take on the Job containing the Task, if the Task completes with the given exit condition and the Job's onTaskFailed property is 'performExitOptionsJobAction'. The default is none for exit code 0 and terminate for all other exit conditions. If the Job's onTaskFailed property is noaction, then specifying this property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   jobAction?: JobAction;
 
-  @doc("""
-Possible values are 'satisfy' (allowing dependent tasks to progress) and 'block' (dependent tasks continue to wait). Batch does not yet support cancellation of dependent tasks.
-""")
+  @doc("An action that the Batch service performs on Tasks that depend on this Task. Possible values are 'satisfy' (allowing dependent tasks to progress) and 'block' (dependent tasks continue to wait). Batch does not yet support cancellation of dependent tasks.")
   dependencyAction?: DependencyAction;
 }
 
@@ -4188,7 +3265,7 @@ model ExitCodeRangeMapping {
   @doc("The last exit code in the range.")
   end: int32;
 
-  @doc("Specifies how the Batch service responds to a particular exit condition.")
+  @doc("How the Batch service should respond if the Task exits with an exit code in the range start to end (inclusive).")
   exitOptions: ExitOptions;
 }
 
@@ -4197,92 +3274,49 @@ A locality hint that can be used by the Batch service to select a Compute Node
 on which to start a Task.
 """)
 model AffinityInformation {
-  @doc("""
-You can pass the affinityId of a Node to indicate that this Task needs to run
-on that Compute Node. Note that this is just a soft affinity. If the target
-Compute Node is busy or unavailable at the time the Task is scheduled, then the
-Task will be scheduled elsewhere.
-""")
+  @doc("An opaque string representing the location of a Compute Node or a Task that has run previously. You can pass the affinityId of a Node to indicate that this Task needs to run on that Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere.")
   affinityId: string;
 }
 
 @doc("Information about the execution of a Task.")
 model TaskExecutionInformation {
-  @doc("""
-'Running' corresponds to the running state, so if the Task specifies resource
-files or Packages, then the start time reflects the time at which the Task
-started downloading or deploying these. If the Task has been restarted or
-retried, this is the most recent time at which the Task started running. This
-property is present only for Tasks that are in the running or completed state.
-""")
+  @doc("The time at which the Task started running. 'Running' corresponds to the running state, so if the Task specifies resource files or Packages, then the start time reflects the time at which the Task started downloading or deploying these. If the Task has been restarted or retried, this is the most recent time at which the Task started running. This property is present only for Tasks that are in the running or completed state.")
   startTime?: utcDateTime;
 
-  @doc("This property is set only if the Task is in the Completed state.")
+  @doc("The time at which the Task completed. This property is set only if the Task is in the Completed state.")
   endTime?: utcDateTime;
 
-  @doc("""
-This property is set only if the Task is in the completed state. In general,
-the exit code for a process reflects the specific convention implemented by the
-application developer for that process. If you use the exit code value to make
-decisions in your code, be sure that you know the exit code convention used by
-the application process. However, if the Batch service terminates the Task (due
-to timeout, or user termination via the API) you may see an operating
-system-defined exit code.
-""")
+  @doc("The exit code of the program specified on the Task command line. This property is set only if the Task is in the completed state. In general, the exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. However, if the Batch service terminates the Task (due to timeout, or user termination via the API) you may see an operating system-defined exit code.")
   exitCode?: int32;
 
-  @doc("This property is set only if the Task runs in a container context.")
+  @doc("Information about the container under which the Task is executing. This property is set only if the Task runs in a container context.")
   containerInfo?: TaskContainerExecutionInformation;
 
-  @doc("""
-This property is set only if the Task is in the completed state and encountered
-a failure.
-""")
+  @doc("Information describing the Task failure, if any. This property is set only if the Task is in the completed state and encountered a failure.")
   failureInfo?: TaskFailureInformation;
 
-  @doc("""
-Task application failures (non-zero exit code) are retried, pre-processing
-errors (the Task could not be run) and file upload errors are not retried. The
-Batch service will retry the Task up to the limit specified by the constraints.
-""")
+  @doc("The number of times the Task has been retried by the Batch service. Task application failures (non-zero exit code) are retried, pre-processing errors (the Task could not be run) and file upload errors are not retried. The Batch service will retry the Task up to the limit specified by the constraints.")
   retryCount: int32;
 
-  @doc("""
-This element is present only if the Task was retried (i.e. retryCount is
-nonzero). If present, this is typically the same as startTime, but may be
-different if the Task has been restarted for reasons other than retry; for
-example, if the Compute Node was rebooted during a retry, then the startTime is
-updated but the lastRetryTime is not.
-""")
+  @doc("The most recent time at which a retry of the Task started running. This element is present only if the Task was retried (i.e. retryCount is nonzero). If present, this is typically the same as startTime, but may be different if the Task has been restarted for reasons other than retry; for example, if the Compute Node was rebooted during a retry, then the startTime is updated but the lastRetryTime is not.")
   lastRetryTime?: utcDateTime;
 
-  @doc("""
-When the user removes Compute Nodes from a Pool (by resizing/shrinking the
-pool) or when the Job is being disabled, the user can specify that running
-Tasks on the Compute Nodes be requeued for execution. This count tracks how
-many times the Task has been requeued for these reasons.
-""")
+  @doc("The number of times the Task has been requeued by the Batch service as the result of a user request. When the user removes Compute Nodes from a Pool (by resizing/shrinking the pool) or when the Job is being disabled, the user can specify that running Tasks on the Compute Nodes be requeued for execution. This count tracks how many times the Task has been requeued for these reasons.")
   requeueCount: int32;
 
-  @doc("This property is set only if the requeueCount is nonzero.")
+  @doc("The most recent time at which the Task has been requeued by the Batch service as the result of a user request. This property is set only if the requeueCount is nonzero.")
   lastRequeueTime?: utcDateTime;
 
-  @doc("""
-If the value is 'failed', then the details of the failure can be found in the
-failureInfo property.
-""")
+  @doc("The result of the Task execution. If the value is 'failed', then the details of the failure can be found in the failureInfo property.")
   result?: TaskExecutionResult;
 }
 
 @doc("Information about the Compute Node on which a Task ran.")
-model ComputeNodeInformation {
-  @doc("""
-An identifier for the Node on which the Task ran, which can be passed when
-adding a Task to request that the Task be scheduled on this Compute Node.
-""")
+model BatchNodeInformation {
+  @doc("An identifier for the Node on which the Task ran, which can be passed when adding a Task to request that the Task be scheduled on this Compute Node.")
   affinityId?: string;
 
-  @doc("The URL of the Compute Node on which the Task ran. ")
+  @doc("The URL of the Compute Node on which the Task ran.")
   nodeUrl?: string;
 
   @doc("The ID of the Pool on which the Task ran.")
@@ -4305,27 +3339,13 @@ code) the entire multi-instance Task fails. The multi-instance Task is then
 terminated and retried, up to its retry limit.
 """)
 model MultiInstanceSettings {
-  @doc("If omitted, the default is 1.")
+  @doc("The number of Compute Nodes required by the Task. If omitted, the default is 1.")
   numberOfInstances?: int32;
 
-  @doc("""
-A typical coordination command line launches a background service and verifies
-that the service is ready to process inter-node messages.
-""")
+  @doc("The command line to run on all the Compute Nodes to enable them to coordinate when the primary runs the main Task command. A typical coordination command line launches a background service and verifies that the service is ready to process inter-node messages.")
   coordinationCommandLine: string;
 
-  @doc("""
-The difference between common resource files and Task resource files is that
-common resource files are downloaded for all subtasks including the primary,
-whereas Task resource files are downloaded only for the primary. Also note that
-these resource files are not downloaded to the Task working directory, but
-instead are downloaded to the Task root directory (one directory above the
-working directory).  There is a maximum size for the list of resource files. 
-When the max size is exceeded, the request will fail and the response error
-code will be RequestEntityTooLarge. If this occurs, the collection of
-ResourceFiles must be reduced in size. This can be achieved using .zip files,
-Application Packages, or Docker Containers.
-""")
+  @doc("A list of files that the Batch service will download before running the coordination command line. The difference between common resource files and Task resource files is that common resource files are downloaded for all subtasks including the primary, whereas Task resource files are downloaded only for the primary. Also note that these resource files are not downloaded to the Task working directory, but instead are downloaded to the Task root directory (one directory above the working directory).  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.")
   commonResourceFiles?: ResourceFile[];
 }
 
@@ -4338,30 +3358,16 @@ model TaskStatistics {
   @doc("The start time of the time range covered by the statistics.")
   startTime: utcDateTime;
 
-  @doc("""
-The time at which the statistics were last updated. All statistics are limited
-to the range between startTime and lastUpdateTime.
-""")
+  @doc("The time at which the statistics were last updated. All statistics are limited to the range between startTime and lastUpdateTime.")
   lastUpdateTime: utcDateTime;
 
-  @doc("""
-The total user mode CPU time (summed across all cores and all Compute Nodes)
-consumed by the Task.
-""")
+  @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.")
   userCPUTime: duration;
 
-  @doc("""
-The total kernel mode CPU time (summed across all cores and all Compute Nodes)
-consumed by the Task.
-""")
+  @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.")
   kernelCPUTime: duration;
 
-  @doc("""
-The wall clock time is the elapsed time from when the Task started running on a
-Compute Node to when it finished (or to the last time the statistics were
-updated, if the Task had not finished by then). If the Task was retried, this
-includes the wall clock time of all the Task retries.
-""")
+  @doc("The total wall clock time of the Task. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If the Task was retried, this includes the wall clock time of all the Task retries.")
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by the Task.")
@@ -4376,12 +3382,7 @@ includes the wall clock time of all the Task retries.
   @doc("The total gibibytes written to disk by the Task.")
   writeIOGiB: float32;
 
-  @doc("""
-The total wait time of the Task. The wait time for a Task is defined as the
-elapsed time between the creation of the Task and the start of Task execution.
-(If the Task is retried due to failures, the wait time is the time to the most
-recent Task execution.)
-""")
+  @doc("The total wait time of the Task. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.).")
   waitTime: duration;
 }
 
@@ -4391,18 +3392,10 @@ within a dependency range must complete before the dependant Task will be
 scheduled.
 """)
 model TaskDependencies {
-  @doc("""
-The taskIds collection is limited to 64000 characters total (i.e. the combined
-length of all Task IDs). If the taskIds collection exceeds the maximum length,
-the Add Task request fails with error code TaskDependencyListTooLong. In this
-case consider using Task ID ranges instead.
-""")
+  @doc("The list of Task IDs that this Task depends on. All Tasks in this list must complete successfully before the dependent Task can be scheduled. The taskIds collection is limited to 64000 characters total (i.e. the combined length of all Task IDs). If the taskIds collection exceeds the maximum length, the Add Task request fails with error code TaskDependencyListTooLong. In this case consider using Task ID ranges instead.")
   taskIds?: string[];
 
-  @doc("""
-The list of Task ID ranges that this Task depends on. All Tasks in all ranges
-must complete successfully before the dependent Task can be scheduled.
-""")
+  @doc("The list of Task ID ranges that this Task depends on. All Tasks in all ranges must complete successfully before the dependent Task can be scheduled.")
   taskIdRanges?: TaskIdRange[];
 }
 
@@ -4433,13 +3426,8 @@ model BatchTaskListResult {
 
 @doc("A collection of Azure Batch Tasks to add.")
 model BatchTaskCollection {
-  @doc("""
-The total serialized size of this collection must be less than 1MB. If it is
-greater than 1MB (for example if each Task has 100's of resource files or
-environment variables), the request will fail with code 'RequestBodyTooLarge'
-and should be retried again with fewer Tasks.
-""")
-  value: BatchTask[];
+  @doc("The collection of Tasks to add. The maximum count of Tasks is 100. The total serialized size of this collection must be less than 1MB. If it is greater than 1MB (for example if each Task has 100's of resource files or environment variables), the request will fail with code 'RequestBodyTooLarge' and should be retried again with fewer Tasks.")
+  value: BatchTaskCreateOptions[];
 }
 
 @doc("The result of adding a collection of Tasks to a Job.")
@@ -4456,12 +3444,7 @@ model TaskAddResult {
   @doc("The ID of the Task for which this is the result.")
   taskId: string;
 
-  @doc("""
-You can use this to detect whether the Task has changed between requests. In
-particular, you can be pass the ETag with an Update Task request to specify
-that your changes should take effect only if nobody else has modified the Job
-in the meantime.
-""")
+  @doc("The ETag of the Task, if the Task was successfully added. You can use this to detect whether the Task has changed between requests. In particular, you can be pass the ETag with an Update Task request to specify that your changes should take effect only if nobody else has modified the Job in the meantime.")
   eTag?: string;
 
   @doc("The last modified time of the Task.")
@@ -4470,7 +3453,7 @@ in the meantime.
   @doc("The URL of the Task, if the Task was successfully added.")
   location?: string;
 
-  @doc("An error response received from the Azure Batch service.")
+  @doc("The error encountered while attempting to add the Task.")
   error?: BatchError;
 }
 
@@ -4485,128 +3468,80 @@ model SubtaskInformation {
   @doc("The ID of the subtask.")
   id?: int32;
 
-  @doc("Information about the Compute Node on which a Task ran.")
-  nodeInfo?: ComputeNodeInformation;
+  @doc("Information about the Compute Node on which the subtask ran.")
+  nodeInfo?: BatchNodeInformation;
 
-  @doc("""
-The time at which the subtask started running. If the subtask has been
-restarted or retried, this is the most recent time at which the subtask started
-running.
-""")
+  @doc("The time at which the subtask started running. If the subtask has been restarted or retried, this is the most recent time at which the subtask started running.")
   startTime?: utcDateTime;
 
-  @doc("This property is set only if the subtask is in the Completed state.")
+  @doc("The time at which the subtask completed. This property is set only if the subtask is in the Completed state.")
   endTime?: utcDateTime;
 
-  @doc("""
-This property is set only if the subtask is in the completed state. In general,
-the exit code for a process reflects the specific convention implemented by the
-application developer for that process. If you use the exit code value to make
-decisions in your code, be sure that you know the exit code convention used by
-the application process. However, if the Batch service terminates the subtask
-(due to timeout, or user termination via the API) you may see an operating
-system-defined exit code.
-""")
+  @doc("The exit code of the program specified on the subtask command line. This property is set only if the subtask is in the completed state. In general, the exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. However, if the Batch service terminates the subtask (due to timeout, or user termination via the API) you may see an operating system-defined exit code.")
   exitCode?: int32;
 
-  @doc("This property is set only if the Task runs in a container context.")
+  @doc("Information about the container under which the Task is executing. This property is set only if the Task runs in a container context.")
   containerInfo?: TaskContainerExecutionInformation;
 
-  @doc("""
-This property is set only if the Task is in the completed state and encountered
-a failure.
-""")
+  @doc("Information describing the Task failure, if any. This property is set only if the Task is in the completed state and encountered a failure.")
   failureInfo?: TaskFailureInformation;
 
-  @doc("The state of the subtask.")
+  @doc("The current state of the subtask.")
   state?: SubtaskState;
 
   @doc("The time at which the subtask entered its current state.")
   stateTransitionTime?: utcDateTime;
 
-  @doc("This property is not set if the subtask is in its initial running state.")
+  @doc("The previous state of the subtask. This property is not set if the subtask is in its initial running state.")
   previousState?: SubtaskState;
 
-  @doc("This property is not set if the subtask is in its initial running state.")
+  @doc("The time at which the subtask entered its previous state. This property is not set if the subtask is in its initial running state.")
   previousStateTransitionTime?: utcDateTime;
 
-  @doc("""
-If the value is 'failed', then the details of the failure can be found in the
-failureInfo property.
-""")
+  @doc("The result of the Task execution. If the value is 'failed', then the details of the failure can be found in the failureInfo property.")
   result?: TaskExecutionResult;
 }
 
-@doc("A user Account for RDP or SSH access on a Compute Node.")
-model ComputeNodeUser {
+@doc("Options for creating a user account for RDP or SSH access on an Azure Batch Compute Node.")
+model BatchNodeUserCreateOptions {
   @doc("The user name of the Account.")
   name: string;
 
-  @doc("The default value is false.")
+  @doc("Whether the Account should be an administrator on the Compute Node. The default value is false.")
   isAdmin?: boolean;
 
-  @doc("""
-If omitted, the default is 1 day from the current time. For Linux Compute
-Nodes, the expiryTime has a precision up to a day.
-""")
+  @doc("The time at which the Account should expire. If omitted, the default is 1 day from the current time. For Linux Compute Nodes, the expiryTime has a precision up to a day.")
   expiryTime?: utcDateTime;
 
-  @doc("""
-The password is required for Windows Compute Nodes (those created with 'cloudServiceConfiguration', or created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property.
-""")
+  @doc("The password of the Account. The password is required for Windows Compute Nodes (those created with 'cloudServiceConfiguration', or created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property.")
   password?: string;
 
-  @doc("""
-The public key should be compatible with OpenSSH encoding and should be base 64
-encoded. This property can be specified only for Linux Compute Nodes. If this
-is specified for a Windows Compute Node, then the Batch service rejects the
-request; if you are calling the REST API directly, the HTTP status code is 400
-(Bad Request).
-""")
+  @doc("The SSH public key that can be used for remote login to the Compute Node. The public key should be compatible with OpenSSH encoding and should be base 64 encoded. This property can be specified only for Linux Compute Nodes. If this is specified for a Windows Compute Node, then the Batch service rejects the request; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   sshPublicKey?: string;
 }
 
-@doc("The set of changes to be made to a user Account on a Compute Node.")
-model NodeUpdateUserParameters {
-  @doc("""
-The password is required for Windows Compute Nodes (those created with 'cloudServiceConfiguration', or created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property. If omitted, any existing password is removed.
-""")
+@doc("Options for updating a user account for RDP or SSH access on an Azure Batch Compute Node.")
+model BatchNodeUserUpdateOptions {
+  @doc("The password of the Account. The password is required for Windows Compute Nodes (those created with 'cloudServiceConfiguration', or created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property. If omitted, any existing password is removed.")
   password?: string;
 
-  @doc("""
-If omitted, the default is 1 day from the current time. For Linux Compute
-Nodes, the expiryTime has a precision up to a day.
-""")
+  @doc("The time at which the Account should expire. If omitted, the default is 1 day from the current time. For Linux Compute Nodes, the expiryTime has a precision up to a day.")
   expiryTime?: utcDateTime;
 
-  @doc("""
-The public key should be compatible with OpenSSH encoding and should be base 64
-encoded. This property can be specified only for Linux Compute Nodes. If this
-is specified for a Windows Compute Node, then the Batch service rejects the
-request; if you are calling the REST API directly, the HTTP status code is 400
-(Bad Request). If omitted, any existing SSH public key is removed.
-""")
+  @doc("The SSH public key that can be used for remote login to the Compute Node. The public key should be compatible with OpenSSH encoding and should be base 64 encoded. This property can be specified only for Linux Compute Nodes. If this is specified for a Windows Compute Node, then the Batch service rejects the request; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). If omitted, any existing SSH public key is removed.")
   sshPublicKey?: string;
 }
 
 @doc("A Compute Node in the Batch service.")
-model ComputeNode {
-  @doc("""
-Every Compute Node that is added to a Pool is assigned a unique ID. Whenever a
-Compute Node is removed from a Pool, all of its local files are deleted, and
-the ID is reclaimed and could be reused for new Compute Nodes.
-""")
+model BatchNode {
+  @doc("The ID of the Compute Node. Every Compute Node that is added to a Pool is assigned a unique ID. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the ID is reclaimed and could be reused for new Compute Nodes.")
   id?: string;
 
   @doc("The URL of the Compute Node.")
   url?: string;
 
-  @doc("""
-The Spot/Low-priority Compute Node has been preempted. Tasks which were running
-on the Compute Node when it was preempted will be rescheduled when another
-Compute Node becomes available.
-""")
-  state?: ComputeNodeState;
+  @doc("The current state of the Compute Node. The Spot/Low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available.")
+  state?: BatchNodeState;
 
   @doc("Whether the Compute Node is available for Task scheduling.")
   schedulingState?: SchedulingState;
@@ -4614,119 +3549,60 @@ Compute Node becomes available.
   @doc("The time at which the Compute Node entered its current state.")
   stateTransitionTime?: utcDateTime;
 
-  @doc("This property may not be present if the Compute Node state is unusable.")
+  @doc("The last time at which the Compute Node was started. This property may not be present if the Compute Node state is unusable.")
   lastBootTime?: utcDateTime;
 
-  @doc("""
-This is the time when the Compute Node was initially allocated and doesn't
-change once set. It is not updated when the Compute Node is service healed or
-preempted.
-""")
+  @doc("The time at which this Compute Node was allocated to the Pool. This is the time when the Compute Node was initially allocated and doesn't change once set. It is not updated when the Compute Node is service healed or preempted.")
   allocationTime?: utcDateTime;
 
-  @doc("""
-Every Compute Node that is added to a Pool is assigned a unique IP address.
-Whenever a Compute Node is removed from a Pool, all of its local files are
-deleted, and the IP address is reclaimed and could be reused for new Compute
-Nodes.
-""")
+  @doc("The IP address that other Nodes can use to communicate with this Compute Node. Every Compute Node that is added to a Pool is assigned a unique IP address. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the IP address is reclaimed and could be reused for new Compute Nodes.")
   ipAddress?: string;
 
-  @doc("""
-Note that this is just a soft affinity. If the target Compute Node is busy or
-unavailable at the time the Task is scheduled, then the Task will be scheduled
-elsewhere.
-""")
+  @doc("An identifier which can be passed when adding a Task to request that the Task be scheduled on this Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere.")
   affinityId?: string;
 
-  @doc("""
-For information about available sizes of virtual machines in Pools, see Choose
-a VM size for Compute Nodes in an Azure Batch Pool
-(https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).
-""")
+  @doc("The size of the virtual machine hosting the Compute Node. For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).")
   vmSize?: string;
 
-  @doc("""
-The total number of Job Tasks completed on the Compute Node. This includes Job
-Manager Tasks and normal Tasks, but not Job Preparation, Job Release or Start
-Tasks.
-""")
+  @doc("The total number of Job Tasks completed on the Compute Node. This includes Job Manager Tasks and normal Tasks, but not Job Preparation, Job Release or Start Tasks.")
   totalTasksRun?: int32;
 
-  @doc("""
-The total number of currently running Job Tasks on the Compute Node. This
-includes Job Manager Tasks and normal Tasks, but not Job Preparation, Job
-Release or Start Tasks.
-""")
+  @doc("The total number of currently running Job Tasks on the Compute Node. This includes Job Manager Tasks and normal Tasks, but not Job Preparation, Job Release or Start Tasks.")
   runningTasksCount?: int32;
 
-  @doc("""
-The total number of scheduling slots used by currently running Job Tasks on the
-Compute Node. This includes Job Manager Tasks and normal Tasks, but not Job
-Preparation, Job Release or Start Tasks.
-""")
+  @doc("The total number of scheduling slots used by currently running Job Tasks on the Compute Node. This includes Job Manager Tasks and normal Tasks, but not Job Preparation, Job Release or Start Tasks.")
   runningTaskSlotsCount?: int32;
 
-  @doc("""
-The total number of Job Tasks which completed successfully (with exitCode 0) on
-the Compute Node. This includes Job Manager Tasks and normal Tasks, but not Job
-Preparation, Job Release or Start Tasks.
-""")
+  @doc("The total number of Job Tasks which completed successfully (with exitCode 0) on the Compute Node. This includes Job Manager Tasks and normal Tasks, but not Job Preparation, Job Release or Start Tasks.")
   totalTasksSucceeded?: int32;
 
-  @doc("""
-This property is present only if at least one Task has run on this Compute Node
-since it was assigned to the Pool.
-""")
+  @doc("A list of Tasks whose state has recently changed. This property is present only if at least one Task has run on this Compute Node since it was assigned to the Pool.")
   recentTasks?: TaskInformation[];
 
-  @doc("""
-Batch will retry Tasks when a recovery operation is triggered on a Node.
-Examples of recovery operations include (but are not limited to) when an
-unhealthy Node is rebooted or a Compute Node disappeared due to host failure.
-Retries due to recovery operations are independent of and are not counted
-against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal
-retry due to a recovery operation may occur. Because of this, all Tasks should
-be idempotent. This means Tasks need to tolerate being interrupted and
-restarted without causing any corruption or duplicate data. The best practice
-for long running Tasks is to use some form of checkpointing. In some cases the
-StartTask may be re-run even though the Compute Node was not rebooted. Special
-care should be taken to avoid StartTasks which create breakaway process or
-install/launch services from the StartTask working directory, as this will
-block Batch from being able to re-run the StartTask.
-""")
+  @doc("The Task specified to run on the Compute Node as it joins the Pool.")
   startTask?: StartTask;
 
-  @doc("Information about a StartTask running on a Compute Node.")
+  @doc("Runtime information about the execution of the StartTask on the Compute Node.")
   startTaskInfo?: StartTaskInformation;
 
   @doc("""
-For Windows Nodes, the Batch service installs the Certificates to the specified
-Certificate store and location. For Linux Compute Nodes, the Certificates are
-stored in a directory inside the Task working directory and an environment
-variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this
-location. For Certificates with visibility of 'remoteUser', a 'certs' directory
-is created in the user's home directory (e.g., /home/{user-name}/certs) and
-Certificates are placed in that directory.
+For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. 
+For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. 
+For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.
+Warning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
 """)
   certificateReferences?: CertificateReference[];
 
   @doc("The list of errors that are currently being encountered by the Compute Node.")
-  errors?: ComputeNodeError[];
+  errors?: BatchNodeError[];
 
-  @doc("""
-Whether this Compute Node is a dedicated Compute Node. If false, the Compute
-Node is a Spot/Low-priority Compute Node.
-""")
+  @doc("Whether this Compute Node is a dedicated Compute Node. If false, the Compute Node is a Spot/Low-priority Compute Node.")
   isDedicated?: boolean;
 
   @doc("The endpoint configuration for the Compute Node.")
-  endpointConfiguration?: ComputeNodeEndpointConfiguration;
+  endpointConfiguration?: BatchNodeEndpointConfiguration;
 
-  @doc("""
-The Batch Compute Node agent is a program that runs on each Compute Node in the
-Pool and provides Batch capability on the Compute Node.
-""")
+  @doc("Information about the Compute Node agent version and the time the Compute Node upgraded to a new version.")
   nodeAgentInfo?: NodeAgentInformation;
 
   @doc("Info about the current state of the virtual machine.")
@@ -4747,10 +3623,10 @@ model TaskInformation {
   @doc("The ID of the subtask if the Task is a multi-instance Task.")
   subtaskId?: int32;
 
-  @doc("The state of the Task.")
+  @doc("The current state of the Task.")
   taskState: TaskState;
 
-  @doc("Information about the execution of a Task.")
+  @doc("Information about the execution of the Task.")
   executionInfo?: TaskExecutionInformation;
 }
 
@@ -4759,74 +3635,37 @@ model StartTaskInformation {
   @doc("The state of the StartTask on the Compute Node.")
   state: StartTaskState;
 
-  @doc("""
-This value is reset every time the Task is restarted or retried (that is, this
-is the most recent time at which the StartTask started running).
-""")
+  @doc("The time at which the StartTask started running. This value is reset every time the Task is restarted or retried (that is, this is the most recent time at which the StartTask started running).")
   startTime: utcDateTime;
 
-  @doc("""
-This is the end time of the most recent run of the StartTask, if that run has
-completed (even if that run failed and a retry is pending). This element is not
-present if the StartTask is currently running.
-""")
+  @doc("The time at which the StartTask stopped running. This is the end time of the most recent run of the StartTask, if that run has completed (even if that run failed and a retry is pending). This element is not present if the StartTask is currently running.")
   endTime?: utcDateTime;
 
-  @doc("""
-This property is set only if the StartTask is in the completed state. In
-general, the exit code for a process reflects the specific convention
-implemented by the application developer for that process. If you use the exit
-code value to make decisions in your code, be sure that you know the exit code
-convention used by the application process. However, if the Batch service
-terminates the StartTask (due to timeout, or user termination via the API) you
-may see an operating system-defined exit code.
-""")
+  @doc("The exit code of the program specified on the StartTask command line. This property is set only if the StartTask is in the completed state. In general, the exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. However, if the Batch service terminates the StartTask (due to timeout, or user termination via the API) you may see an operating system-defined exit code.")
   exitCode?: int32;
 
-  @doc("This property is set only if the Task runs in a container context.")
+  @doc("Information about the container under which the Task is executing. This property is set only if the Task runs in a container context.")
   containerInfo?: TaskContainerExecutionInformation;
 
-  @doc("""
-This property is set only if the Task is in the completed state and encountered
-a failure.
-""")
+  @doc("Information describing the Task failure, if any. This property is set only if the Task is in the completed state and encountered a failure.")
   failureInfo?: TaskFailureInformation;
 
-  @doc("""
-Task application failures (non-zero exit code) are retried, pre-processing
-errors (the Task could not be run) and file upload errors are not retried. The
-Batch service will retry the Task up to the limit specified by the constraints.
-""")
+  @doc("The number of times the Task has been retried by the Batch service. Task application failures (non-zero exit code) are retried, pre-processing errors (the Task could not be run) and file upload errors are not retried. The Batch service will retry the Task up to the limit specified by the constraints.")
   retryCount: int32;
 
-  @doc("""
-This element is present only if the Task was retried (i.e. retryCount is
-nonzero). If present, this is typically the same as startTime, but may be
-different if the Task has been restarted for reasons other than retry; for
-example, if the Compute Node was rebooted during a retry, then the startTime is
-updated but the lastRetryTime is not.
-""")
+  @doc("The most recent time at which a retry of the Task started running. This element is present only if the Task was retried (i.e. retryCount is nonzero). If present, this is typically the same as startTime, but may be different if the Task has been restarted for reasons other than retry; for example, if the Compute Node was rebooted during a retry, then the startTime is updated but the lastRetryTime is not.")
   lastRetryTime?: utcDateTime;
 
-  @doc("""
-If the value is 'failed', then the details of the failure can be found in the
-failureInfo property.
-""")
+  @doc("The result of the Task execution. If the value is 'failed', then the details of the failure can be found in the failureInfo property.")
   result?: TaskExecutionResult;
 }
 
 @doc("An error encountered by a Compute Node.")
-model ComputeNodeError {
-  @doc("""
-An identifier for the Compute Node error. Codes are invariant and are intended
-to be consumed programmatically.
-""")
+model BatchNodeError {
+  @doc("An identifier for the Compute Node error. Codes are invariant and are intended to be consumed programmatically.")
   code?: string;
 
-  @doc("""
-A message describing the Compute Node error, intended to be suitable for
-display in a user interface.
-""")
+  @doc("A message describing the Compute Node error, intended to be suitable for display in a user interface.")
   message?: string;
 
   @doc("The list of additional error details related to the Compute Node error.")
@@ -4834,7 +3673,7 @@ display in a user interface.
 }
 
 @doc("The endpoint configuration for the Compute Node.")
-model ComputeNodeEndpointConfiguration {
+model BatchNodeEndpointConfiguration {
   @doc("The list of inbound endpoints that are accessible on the Compute Node.")
   inboundEndpoints: InboundEndpoint[];
 }
@@ -4849,11 +3688,11 @@ model InboundEndpoint {
   protocol: InboundEndpointProtocol;
 
   @doc("The public IP address of the Compute Node.")
-  @projectedName("python", "public_ip_address")
-  publicIPAddress: string;
+  @projectedName("client", "publicIpAddress")
+  publicIPAddress?: string;
 
   @doc("The public fully qualified domain name for the Compute Node.")
-  publicFQDN: string;
+  publicFQDN?: string;
 
   @doc("The public port number of the endpoint.")
   frontendPort: int32;
@@ -4867,96 +3706,66 @@ The Batch Compute Node agent is a program that runs on each Compute Node in the
 Pool and provides Batch capability on the Compute Node.
 """)
 model NodeAgentInformation {
-  @doc("""
-This version number can be checked against the Compute Node agent release notes
-located at
-https://github.com/Azure/Batch/blob/master/changelogs/nodeagent/CHANGELOG.md.
-""")
+  @doc("The version of the Batch Compute Node agent running on the Compute Node. This version number can be checked against the Compute Node agent release notes located at https://github.com/Azure/Batch/blob/master/changelogs/nodeagent/CHANGELOG.md.")
   version: string;
 
-  @doc("""
-This is the most recent time that the Compute Node agent was updated to a new
-version.
-""")
+  @doc("The time when the Compute Node agent was updated on the Compute Node. This is the most recent time that the Compute Node agent was updated to a new version.")
   lastUpdateTime: utcDateTime;
 }
 
 @doc("Info about the current state of the virtual machine.")
 model VirtualMachineInfo {
-  @doc("""
-A reference to an Azure Virtual Machines Marketplace Image or a Shared Image
-Gallery Image. To get the list of all Azure Marketplace Image references
-verified by Azure Batch, see the 'List Supported Images' operation.
-""")
+  @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
   imageReference?: ImageReference;
 }
 
-@doc("Options for rebooting a Compute Node.")
-model NodeRebootParameters {
-  @doc("The default value is requeue.")
-  nodeRebootOption?: ComputeNodeRebootOption;
+@doc("Options for rebooting an Azure Batch Compute Node.")
+model NodeRebootOptions {
+  @doc("When to reboot the Compute Node and what to do with currently running Tasks. The default value is requeue.")
+  nodeRebootOption?: BatchNodeRebootOption;
 }
 
-@doc("Options for reimaging a Compute Node.")
-model NodeReimageParameters {
-  @doc("The default value is requeue.")
-  nodeReimageOption?: ComputeNodeReimageOption;
+@doc("Options for reimaging an Azure Batch Compute Node.")
+model NodeReimageOptions {
+  @doc("When to reimage the Compute Node and what to do with currently running Tasks. The default value is requeue.")
+  nodeReimageOption?: BatchNodeReimageOption;
 }
 
-@doc("Options for disabling scheduling on a Compute Node.")
-model NodeDisableSchedulingParameters {
-  @doc("The default value is requeue.")
-  nodeDisableSchedulingOption?: DisableComputeNodeSchedulingOption;
+@doc("Options for disabling scheduling on an Azure Batch Compute Node.")
+model NodeDisableSchedulingOptions {
+  @doc("What to do with currently running Tasks when disabling Task scheduling on the Compute Node. The default value is requeue.")
+  nodeDisableSchedulingOption?: DisableBatchNodeSchedulingOption;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The remote login settings for a Compute Node.")
-model ComputeNodeGetRemoteLoginSettingsResult {
+model BatchNodeRemoteLoginSettingsResult {
   @doc("The IP address used for remote login to the Compute Node.")
-  @projectedName("python", "remote_login_ip_address")
+  @projectedName("client", "remoteLoginIpAddress")
   remoteLoginIPAddress: string;
 
   @doc("The port used for remote login to the Compute Node.")
   remoteLoginPort: int32;
 }
 
-@doc("The Azure Batch service log files upload configuration for a Compute Node.")
-model UploadBatchServiceLogsConfiguration {
-  @doc("""
-If a user assigned managed identity is not being used, the URL must include a
-Shared Access Signature (SAS) granting write permissions to the container. The
-SAS duration must allow enough time for the upload to finish. The start time
-for SAS is optional and recommended to not be specified.
-""")
+@doc("The Azure Batch service log files upload options for a Compute Node.")
+model UploadBatchServiceLogsOptions {
+  @doc("The URL of the container within Azure Blob Storage to which to upload the Batch Service log file(s). If a user assigned managed identity is not being used, the URL must include a Shared Access Signature (SAS) granting write permissions to the container. The SAS duration must allow enough time for the upload to finish. The start time for SAS is optional and recommended to not be specified.")
   containerUrl: string;
 
-  @doc("""
-Any log file containing a log message in the time range will be uploaded. This
-means that the operation might retrieve more logs than have been requested
-since the entire log file is always uploaded, but the operation should not
-retrieve fewer logs than have been requested.
-""")
+  @doc("The start of the time range from which to upload Batch Service log file(s). Any log file containing a log message in the time range will be uploaded. This means that the operation might retrieve more logs than have been requested since the entire log file is always uploaded, but the operation should not retrieve fewer logs than have been requested.")
   startTime: utcDateTime;
 
-  @doc("""
-Any log file containing a log message in the time range will be uploaded. This
-means that the operation might retrieve more logs than have been requested
-since the entire log file is always uploaded, but the operation should not
-retrieve fewer logs than have been requested. If omitted, the default is to
-upload all logs available after the startTime.
-""")
+  @doc("The end of the time range from which to upload Batch Service log file(s). Any log file containing a log message in the time range will be uploaded. This means that the operation might retrieve more logs than have been requested since the entire log file is always uploaded, but the operation should not retrieve fewer logs than have been requested. If omitted, the default is to upload all logs available after the startTime.")
   endTime?: utcDateTime;
 
-  @doc("The identity must have write access to the Azure Blob Storage container.")
-  identityReference?: ComputeNodeIdentityReference;
+  @doc("The reference to the user assigned identity to use to access Azure Blob Storage specified by containerUrl. The identity must have write access to the Azure Blob Storage container.")
+  identityReference?: BatchNodeIdentityReference;
 }
 
 @doc("The result of uploading Batch service log files from a specific Compute Node.")
 model UploadBatchServiceLogsResult {
-  @doc("""
-The virtual directory name is part of the blob name for each log file uploaded,
-and it is built based poolId, nodeId and a unique identifier.
-""")
+  @doc("The virtual directory within Azure Blob Storage container to which the Batch Service log file(s) will be uploaded. The virtual directory name is part of the blob name for each log file uploaded, and it is built based poolId, nodeId and a unique identifier.")
   virtualDirectoryName: string;
 
   @doc("The number of log files which will be uploaded.")
@@ -4965,10 +3774,10 @@ and it is built based poolId, nodeId and a unique identifier.
 
 @doc("The result of listing the Compute Nodes in a Pool.")
 @pagedResult
-model ComputeNodeListResult {
+model BatchNodeListResult {
   @doc("The list of Compute Nodes.")
   @items
-  value?: ComputeNode[];
+  value?: BatchNode[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
@@ -4982,7 +3791,7 @@ model NodeVMExtension {
   @doc("The provisioning state of the virtual machine extension.")
   provisioningState?: string;
 
-  @doc("The configuration for virtual machine extensions.")
+  @doc("The virtual machine extension.")
   vmExtension?: VMExtension;
 
   @doc("The vm extension instance view.")
