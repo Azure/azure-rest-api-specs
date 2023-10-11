@@ -789,60 +789,6 @@
       "required": [
         "values"
       ]
-    },
-    "visualFeatures": {
-      "type": "string",
-      "description": "The visual features requested: tags, objects, caption, denseCaptions, read, smartCrops, people. This parameter needs to be specified if the parameter \"model-name\" is not specified.",
-      "enum": [
-        "tags",
-        "caption",
-        "denseCaptions",
-        "objects",
-        "read",
-        "smartCrops",
-        "people"
-      ],
-      "x-ms-enum": {
-        "name": "visualFeatures",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "tags",
-            "value": "tags",
-            "description": "Tags"
-          },
-          {
-            "name": "caption",
-            "value": "caption",
-            "description": "Caption"
-          },
-          {
-            "name": "denseCaptions",
-            "value": "denseCaptions",
-            "description": "DenseCaptions"
-          },
-          {
-            "name": "objects",
-            "value": "objects",
-            "description": "Objects"
-          },
-          {
-            "name": "read",
-            "value": "read",
-            "description": "Read"
-          },
-          {
-            "name": "smartCrops",
-            "value": "smartCrops",
-            "description": "SmartCrops"
-          },
-          {
-            "name": "people",
-            "value": "people",
-            "description": "People"
-          }
-        ]
-      }
     }
   },
   "parameters": {
@@ -905,7 +851,58 @@
       "required": false,
       "type": "array",
       "items": {
-        "$ref": "#/definitions/visualFeatures"
+        "type": "string",
+        "description": "The visual features requested: tags, objects, caption, denseCaptions, read, smartCrops, people. This parameter needs to be specified if the parameter \"model-name\" is not specified.",
+        "enum": [
+          "tags",
+          "caption",
+          "denseCaptions",
+          "objects",
+          "read",
+          "smartCrops",
+          "people"
+        ],
+        "x-ms-enum": {
+          "name": "visualFeatures",
+          "modelAsString": true,
+          "values": [
+            {
+              "name": "tags",
+              "value": "tags",
+              "description": "Tags"
+            },
+            {
+              "name": "caption",
+              "value": "caption",
+              "description": "Caption"
+            },
+            {
+              "name": "denseCaptions",
+              "value": "denseCaptions",
+              "description": "DenseCaptions"
+            },
+            {
+              "name": "objects",
+              "value": "objects",
+              "description": "Objects"
+            },
+            {
+              "name": "read",
+              "value": "read",
+              "description": "Read"
+            },
+            {
+              "name": "smartCrops",
+              "value": "smartCrops",
+              "description": "SmartCrops"
+            },
+            {
+              "name": "people",
+              "value": "people",
+              "description": "People"
+            }
+          ]
+        }
       },
       "collectionFormat": "csv",
       "x-ms-parameter-location": "method",
