@@ -35,8 +35,7 @@ go-sdk-folder: ./Generated/Golang
 license-header: MICROSOFT_MIT
 suppressions:
     - code: ResourceNameRestriction
-      where: $.parameters.BackupInstanceName
-      reason: Resource is created by DPP Service, so regex wont add much value here.
+      reason: BackupInstance Resource is created by DPP Service, so regex wont add much value here.
     
 ```
 
