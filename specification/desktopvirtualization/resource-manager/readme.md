@@ -27,9 +27,6 @@ These are the global settings for the DesktopVirtualizationClient API.
 ``` yaml
 openapi-type: arm
 tag: package-preview-2023-10
-suppressions:
-  - code: ResourceNameRestriction
-    reason: HostPoolName, ApplicationGroupName, WorkspaceName, ScalingPlanName were already implemented in previous versions of the API and we cannot change naming pattern now.
 ```
 
 
@@ -40,6 +37,9 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 ```yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2023-10-04-preview/desktopvirtualization.json
+suppressions:
+  - code: ResourceNameRestriction
+    reason: HostPoolName, ApplicationGroupName, WorkspaceName, ScalingPlanName were already implemented in previous versions of the API and we cannot change naming pattern now.
 ```
 ### Tag: package-2023-09
 
