@@ -74,9 +74,9 @@ interface DevBoxesClientOperations {
 })
 interface EnvironmentClientOperations {
     @convenientAPI(false)
-    ListEnvironments is DevCenter.EnvironmentsOperations.ListEnvironments;
+    ListAllEnvironments is DevCenter.EnvironmentsOperations.ListAllEnvironments;
     @convenientAPI(false)
-    ListEnvironmentsByUser is DevCenter.EnvironmentsOperations.ListEnvironmentsByUser;
+    ListEnvironments is DevCenter.EnvironmentsOperations.ListEnvironments;
     @convenientAPI(false)
     GetEnvironment is DevCenter.EnvironmentsOperations.GetEnvironment;
     @convenientAPI(false)

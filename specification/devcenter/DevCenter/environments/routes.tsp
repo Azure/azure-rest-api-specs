@@ -14,7 +14,7 @@ interface EnvironmentsOperations {
   @doc("Lists the environments for a project.")
   @route("/projects/{projectName}/environments")
   @get
-  ListEnvironments is DevCenterBaseResponse<
+  ListAllEnvironments is DevCenterBaseResponse<
     {
       @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
       @query
@@ -30,7 +30,7 @@ interface EnvironmentsOperations {
   @doc("Lists the environments for a project and user.")
   @route("/projects/{projectName}/users/{userId}/environments")
   @get
-  ListEnvironmentsByUser is DevCenterBaseResponse<
+  ListEnvironments is DevCenterBaseResponse<
     {
       @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
       @query
