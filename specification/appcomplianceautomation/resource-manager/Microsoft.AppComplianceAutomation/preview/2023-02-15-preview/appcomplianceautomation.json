@@ -1357,6 +1357,92 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/fix": {
+      "post": {
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Fix the AppComplianceAutomation report error. e.g: App Compliance Automation Tool service unregistered, automation removed.",
+        "operationId": "Reports_Fix",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ReportNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the report is already fixed.",
+            "schema": {
+              "$ref": "#/definitions/ReportFixResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the report fix operation is performed in the background."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Report_Fix": {
+            "$ref": "./examples/Report_Fix.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/verify": {
+      "post": {
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Verify the AppComplianceAutomation report health status.",
+        "operationId": "Report_Verify",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ReportNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the report is verified successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReportVerificationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the report verify operation is performed in the background."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Report_Verify": {
+            "$ref": "./examples/Report_Verify.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1548,6 +1634,15 @@
             "modelAsString": true
           }
         },
+        "errors": {
+          "description": "List of report error codes.",
+          "type": "array",
+          "items": {
+            "description": "Report error code.",
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "tenantId": {
           "type": "string",
           "description": "Report's tenant id.",
@@ -1628,6 +1723,54 @@
           "readOnly": true,
           "description": "Azure lifecycle management",
           "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "ReportFixResult": {
+      "type": "object",
+      "description": "Report fix result.",
+      "properties": {
+        "result": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "readOnly": true,
+          "description": "Indicates whether the fix action is Succeeded or Failed.",
+          "x-ms-enum": {
+            "name": "result",
+            "modelAsString": true
+          }
+        },
+        "reason": {
+          "description": "If the report fix action failed, to indicate the detailed failed reason.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReportVerificationResult": {
+      "type": "object",
+      "description": "Report health status verification result.",
+      "properties": {
+        "result": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "readOnly": true,
+          "description": "Indicates whether the report verification action is Succeeded or Failed.",
+          "x-ms-enum": {
+            "name": "result",
+            "modelAsString": true
+          }
+        },
+        "reason": {
+          "description": "If the report verification action failed, to indicate the detailed failed reason.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2852,6 +2995,7 @@
         "Canceled",
         "Creating",
         "Deleting",
+        "Fixing",
         "Updating"
       ],
       "readOnly": true,
