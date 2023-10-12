@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
 
@@ -115,6 +115,7 @@ model SignedCapabilityImageResponse {
 enum CapabilityType {
   /** Application development capability */
   ApplicationDevelopment,
+
   /** Field servicing capability */
   FieldServicing,
 }
