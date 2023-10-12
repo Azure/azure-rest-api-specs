@@ -331,16 +331,38 @@
     "CommunicationIdentityTokenScope": {
       "description": "List of scopes for an access token.",
       "enum": [
-        "chat",
-        "voip",
-        "chat.join",
-        "chat.join.limited",
-        "voip.join"
+          "chat",
+          "voip",
+          "chat.join",
+          "chat.join.limited",
+          "voip.join"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "CommunicationIdentityTokenScope",
-        "modelAsString": true
+          "name": "CommunicationIdentityTokenScope",
+          "modelAsString": true,
+          "values": [
+              {
+                  "value": "chat",
+                  "description": "Use this for full access to Chat APIs."
+              },
+              {
+                  "value": "voip",
+                  "description": "Use this for full access to Calling APIs."
+              },
+              {
+                  "value": "chat.join",
+                  "description": "Access to Chat APIs but without the authorization to create, delete or update chat threads."
+              },
+              {
+                  "value": "chat.join.limited",
+                  "description": "A more limited version of chat.join that doesn't allow to add or remove participants. Use this scope when the token bearer is not fully trusted, for example in guest scenarios."
+              },
+              {
+                  "value": "voip.join",
+                  "description": "Access to Calling APIs but without the authorization to start new calls."
+              }
+          ]
       }
     },
     "TeamsUserExchangeTokenRequest": {
