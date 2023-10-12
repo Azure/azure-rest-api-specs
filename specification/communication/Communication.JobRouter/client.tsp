@@ -12,7 +12,7 @@ namespace ClientForAcsJobRouter;
 
 // Your customizations here
 @client({
-    name: "JobRouterAdministrationRestClient",
+    name: "JobRouterAdministrationClient",
     service: AzureCommunicationRoutingService
 })
 interface JobRouterAdministrationRestClient {
@@ -66,7 +66,7 @@ interface JobRouterAdministrationRestClient {
 }
 
 @client({
-    name: "JobRouterRestClient",
+    name: "JobRouterClient",
     service: AzureCommunicationRoutingService
 })
 interface JobRouterRestClient {
