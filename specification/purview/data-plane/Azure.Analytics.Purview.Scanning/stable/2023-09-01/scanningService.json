@@ -2367,6 +2367,30 @@
     "ScanResult": {
       "type": "object",
       "properties": {
+        "assetsDiscovered": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "assetsClassified": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "queuedTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "pipelineStartTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "isErrorLogAvailable": {
+          "type": "boolean",
+          "readOnly": true
+        },
         "parentId": {
           "type": "string",
           "readOnly": true
@@ -2383,16 +2407,6 @@
           "type": "string",
           "readOnly": true
         },
-        "assetsDiscovered": {
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "assetsClassified": {
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
         "diagnostics": {
           "allOf": [
             {
@@ -2402,16 +2416,6 @@
           "readOnly": true
         },
         "startTime": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "queuedTime": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "pipelineStartTime": {
           "format": "date-time",
           "type": "string",
           "readOnly": true
@@ -2469,6 +2473,7 @@
         "dataSourceType": {
           "enum": [
             "None",
+            "Fabric",
             "AzureSubscription",
             "AzureResourceGroup",
             "AzureSynapseWorkspace",
@@ -2482,18 +2487,29 @@
             "AzureDataExplorer",
             "AzureFileService",
             "AzureSqlDatabase",
+            "ArcEnabledSqlServer",
             "AmazonPostgreSql",
             "AzurePostgreSql",
+            "Databricks",
             "SqlServerDatabase",
             "AzureSqlDatabaseManagedInstance",
             "AzureSqlDataWarehouse",
             "AzureMySql",
+            "Hdfs",
+            "TableauServer",
             "AzureStorage",
             "Teradata",
             "Oracle",
+            "PostgreSql",
+            "AmazonRedShift",
+            "DatabricksHms",
             "SapS4Hana",
             "SapEcc",
-            "PowerBI"
+            "Snowflake",
+            "PowerBI",
+            "Trident",
+            "Dataverse",
+            "DatabricksUnityCatalog"
           ],
           "type": "string",
           "readOnly": true,
@@ -2501,6 +2517,322 @@
             "name": "DataSourceType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "DiscoveryExecutionDetails": {
+      "type": "object",
+      "properties": {
+        "discoveryStartTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "discoveryEndTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "Queued",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Delayed",
+            "Throttled",
+            "CompletedWithExceptions",
+            "CompleteWithWarning"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScanStatus",
+            "modelAsString": true
+          }
+        },
+        "statistics": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        },
+        "isErrorLogAvailable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "IngestionExecutionDetails": {
+      "type": "object",
+      "properties": {
+        "ingestionStartTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ingestionEndTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "None",
+            "Succeeded",
+            "Queued",
+            "InProgress",
+            "SourceUnknown",
+            "PartialSucceeded",
+            "Failed",
+            "Canceled",
+            "Canceling"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IngestionPhaseStatus",
+            "modelAsString": true
+          }
+        },
+        "statistics": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        },
+        "estimatedTimeRemainingInSeconds": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "isErrorLogAvailable": {
+          "type": "boolean"
+        },
+        "lastUpdatedAt": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "ScanResultWithIngestion": {
+      "type": "object",
+      "properties": {
+        "discoveryExecutionDetails": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DiscoveryExecutionDetails"
+            }
+          ],
+          "readOnly": true
+        },
+        "ingestionExecutionDetails": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/IngestionExecutionDetails"
+            }
+          ],
+          "readOnly": true
+        },
+        "parentId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true
+        },
+        "diagnostics": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ScanDiagnostics"
+            }
+          ],
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "scanRulesetVersion": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "scanRulesetType": {
+          "enum": [
+            "Custom",
+            "System"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ScanRulesetType",
+            "modelAsString": true
+          }
+        },
+        "scanLevelType": {
+          "enum": [
+            "Full",
+            "Incremental"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ScanLevelType",
+            "modelAsString": true
+          }
+        },
+        "errorMessage": {
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          ],
+          "readOnly": true
+        },
+        "runType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "dataSourceType": {
+          "enum": [
+            "None",
+            "Fabric",
+            "AzureSubscription",
+            "AzureResourceGroup",
+            "AzureSynapseWorkspace",
+            "AzureSynapse",
+            "AdlsGen1",
+            "AdlsGen2",
+            "AmazonAccount",
+            "AmazonS3",
+            "AmazonSql",
+            "AzureCosmosDb",
+            "AzureDataExplorer",
+            "AzureFileService",
+            "AzureSqlDatabase",
+            "ArcEnabledSqlServer",
+            "AmazonPostgreSql",
+            "AzurePostgreSql",
+            "Databricks",
+            "SqlServerDatabase",
+            "AzureSqlDatabaseManagedInstance",
+            "AzureSqlDataWarehouse",
+            "AzureMySql",
+            "Hdfs",
+            "TableauServer",
+            "AzureStorage",
+            "Teradata",
+            "Oracle",
+            "PostgreSql",
+            "AmazonRedShift",
+            "DatabricksHms",
+            "SapS4Hana",
+            "SapEcc",
+            "Snowflake",
+            "PowerBI",
+            "Trident",
+            "Dataverse",
+            "DatabricksUnityCatalog"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DataSourceType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ExtendedProperties": {
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "type": "string"
+        },
+        "resourceGroup": {
+          "type": "string"
+        }
+      }
+    },
+    "ItemPath": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "extendedProperties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ExtendedProperties"
+            }
+          ]
+        }
+      }
+    },
+    "QualifiedName": {
+      "type": "object",
+      "properties": {
+        "typeName": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "extendedProperties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ExtendedProperties"
+            }
+          ]
+        }
+      }
+    },
+    "DataSourceIdentifier": {
+      "type": "object",
+      "properties": {
+        "itemPath": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ItemPath"
+            }
+          ]
+        },
+        "qualifiedName": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/QualifiedName"
+            }
+          ]
+        },
+        "dataSourceName": {
+          "type": "string"
+        },
+        "guid": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
         }
       }
     },
@@ -2539,14 +2871,20 @@
             "AzureFileServiceCredential",
             "AzureSqlDatabaseCredential",
             "AzureSqlDatabaseMsi",
+            "AzureSqlDatabaseNativeAuth",
+            "ArcEnabledSqlServerCredential",
+            "ArcEnabledSqlServerNativeAuth",
             "AmazonPostgreSqlCredential",
             "AzurePostgreSqlCredential",
+            "DatabricksCredential",
             "SqlServerDatabaseCredential",
             "AzureSqlDatabaseManagedInstanceCredential",
             "AzureSqlDatabaseManagedInstanceMsi",
+            "AzureSqlDatabaseManagedInstanceNativeAuth",
             "AzureSqlDataWarehouseCredential",
             "AzureSqlDataWarehouseMsi",
             "AzureMySqlCredential",
+            "HdfsCredential",
             "AzureStorageCredential",
             "AzureStorageMsi",
             "TeradataTeradataCredential",
@@ -2554,12 +2892,25 @@
             "TeradataUserPass",
             "OracleOracleCredential",
             "OracleOracleUserPass",
+            "DatabricksHmsCredential",
             "SapS4HanaSapS4HanaCredential",
             "SapS4HanaSapS4HanaUserPass",
             "SapEccSapEccCredential",
             "SapEccSapEccUserPass",
+            "SnowflakeCredential",
+            "PowerBICredential",
             "PowerBIDelegated",
-            "PowerBIMsi"
+            "PowerBIFpa",
+            "PowerBIMsi",
+            "FabricCredential",
+            "FabricDelegated",
+            "FabricFpa",
+            "FabricMsi",
+            "TridentCredential",
+            "TridentDelegated",
+            "TridentMsi",
+            "DataverseCredential",
+            "DataverseMsi"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2573,6 +2924,38 @@
             "$ref": "#/definitions/ScanResult"
           },
           "readOnly": true
+        },
+        "scanResultsWithIngestion": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScanResultWithIngestion"
+          },
+          "readOnly": true
+        },
+        "scanId": {
+          "type": "string"
+        },
+        "dataSourceIdentifier": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataSourceIdentifier"
+            }
+          ]
+        },
+        "dataSourceName": {
+          "type": "string"
+        },
+        "creationType": {
+          "enum": [
+            "Manual",
+            "AutoNative",
+            "AutoManaged"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CreationType",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "kind"
