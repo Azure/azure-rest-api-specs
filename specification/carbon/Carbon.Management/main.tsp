@@ -391,6 +391,7 @@ interface CarbonService {
   @route("/providers/Microsoft.Carbon/carbonEmissionReports")
   listCarbonEmissionReports(
     ...ApiVersionParameter,
+
     @body
     @doc("Query parameters")
     queryParameters: QueryFilter,
