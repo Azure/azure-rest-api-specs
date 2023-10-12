@@ -102,6 +102,17 @@
               "$ref": "#/definitions/CustomerPolicy"
             }
           },
+          "201": {
+            "description": "A policy at customer scope.",
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Default response",
             "schema": {
@@ -109,6 +120,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "PoliciesPutByCustomer": {
             "$ref": "./examples/policiesPutByCustomer.json"
@@ -201,6 +213,17 @@
               "$ref": "#/definitions/BillingProfilePolicy"
             }
           },
+          "201": {
+            "description": "A policy at billing profile scope.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfilePolicy"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Default response",
             "schema": {
@@ -208,6 +231,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "PoliciesPutByBillingProfile": {
             "$ref": "./examples/policiesPutByBillingProfile.json"
@@ -294,6 +318,17 @@
               "$ref": "#/definitions/BillingAccountPolicy"
             }
           },
+          "201": {
+            "description": "A policy at billing account scope.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccountPolicy"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Default response",
             "schema": {
@@ -301,6 +336,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "PoliciesPutByBillingAccount": {
             "$ref": "./examples/policiesPutByBillingAccount.json"
