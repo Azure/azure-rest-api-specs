@@ -79,7 +79,8 @@
           "application/geo+json"
         ],
         "produces": [
-          "application/geo+json"
+          "application/geo+json",
+          "application/json"
         ],
         "x-ms-client-name": "Route_PostRouteDirections",
         "x-ms-examples": {
@@ -1735,6 +1736,8 @@
           "description": "Length of the vehicle in meters. A value of 0 means that length restrictions are not considered.",
           "type": "number",
           "format": "double",
+          "maximum": 2147483647,
+          "minimum": 0,
           "default": 0
         },
         "width": {
@@ -1742,6 +1745,8 @@
           "description": "Width of the vehicle in meters. A value of 0 means that width restrictions are not considered.",
           "type": "number",
           "format": "double",
+          "maximum": 2147483647,
+          "minimum": 0,
           "default": 0
         },
         "height": {
@@ -1749,6 +1754,8 @@
           "description": "Height of the vehicle in meters. A value of 0 means that height restrictions are not considered.",
           "type": "number",
           "format": "double",
+          "maximum": 2147483647,
+          "minimum": 0,
           "default": 0
         },
         "weight": {
@@ -1756,6 +1763,8 @@
           "description": "Weight of the vehicle in kilograms. A value of 0 means that weight restrictions are not considered.",
           "format": "int64",
           "type": "integer",
+          "maximum": 2147483647,
+          "minimum": 0,
           "default": 0
         },
         "maxSpeed": {
@@ -1763,6 +1772,8 @@
           "description": "Maximum speed of the vehicle in km/hour. The max speed in the vehicle profile is used to check whether a vehicle is allowed on motorways.\n\nA value of 0 means that an appropriate value for the vehicle will be determined and applied during route planning.\n\nA non-zero value may be overridden during route planning. For example, the current traffic flow is 60 km/hour. If the vehicle maximum speed is set to 50 km/hour, the routing engine will consider 60 km/hour as this is the current situation. If the maximum speed of the vehicle is provided as 80 km/hour but the current traffic flow is 60 km/hour, then routing engine will again use 60 km/hour.",
           "format": "int64",
           "type": "integer",
+          "maximum": 250,
+          "minimum": 0,
           "default": 0
         },
         "axleWeight": {
@@ -1770,6 +1781,8 @@
           "description": "Weight per axle of the vehicle in kg. A value of 0 means that weight restrictions per axle are not considered.",
           "format": "int64",
           "type": "integer",
+          "maximum": 2147483647,
+          "minimum": 0,
           "default": 0
         },
         "loadType": {
