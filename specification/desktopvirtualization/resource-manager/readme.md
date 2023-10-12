@@ -27,6 +27,9 @@ These are the global settings for the DesktopVirtualizationClient API.
 ``` yaml
 openapi-type: arm
 tag: package-preview-2023-10
+suppressions:
+  - code: ResourceNameRestriction
+    reason: HostPoolName, ApplicationGroupName, WorkspaceName, ScalingPlanName were already implemented in previous versions of the API and we cannot change naming pattern now.
 ```
 
 
