@@ -50,7 +50,7 @@ interface EnvironmentsOperations {
   @doc("Gets an environment")
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @get
-  GetEnvironmentByUser is DevCenterBaseResponse<
+  GetEnvironment is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path

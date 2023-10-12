@@ -78,7 +78,7 @@ interface EnvironmentClientOperations {
     @convenientAPI(false)
     ListEnvironmentsByUser is DevCenter.EnvironmentsOperations.ListEnvironmentsByUser;
     @convenientAPI(false)
-    GetEnvironmentByUser is DevCenter.EnvironmentsOperations.GetEnvironmentByUser;
+    GetEnvironment is DevCenter.EnvironmentsOperations.GetEnvironment;
     @convenientAPI(false)
     CreateOrReplaceEnvironment is DevCenter.EnvironmentsOperations.CreateOrReplaceEnvironment;
     @convenientAPI(false)
