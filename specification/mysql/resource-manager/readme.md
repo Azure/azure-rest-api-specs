@@ -207,6 +207,27 @@ suppressions:
     reason: This will be fixed in new versions.
 ```
 
+### Tag: package-flexibleserver-2023-06-30
+
+These settings apply only when `--tag=package-flexibleserver-2023-06-30` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2023-06-30'
+input-file:
+- Microsoft.DBforMySQL/AAD/preview/2023-06-30/AzureADAdministrator.json
+- Microsoft.DBforMySQL/Backups/preview/2023-06-30/Backups.json
+- Microsoft.DBforMySQL/Backups/preview/2023-06-30/BackupAndExport.json
+- Microsoft.DBforMySQL/Configurations/preview/2023-06-30/Configurations.json
+- Microsoft.DBforMySQL/Databases/preview/2023-06-30/Databases.json
+- Microsoft.DBforMySQL/Firewall/preview/2023-06-30/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/preview/2023-06-30/FlexibleServers.json
+- Microsoft.DBforMySQL/LogFiles/preview/2023-06-30/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/preview/2023-06-30/ServiceOperations.json
+suppressions:
+  - code: PostOperationAsyncResponseValidation
+    from: FlexibleServers.json
+    reason: This check is optional.
+```
+
 ### Tag: package-flexibleserver-2023-06-01-preview-new
 
 These settings apply only when `--tag=package-flexibleserver-2023-06-01-preview-new` is specified on the command line.
