@@ -78,6 +78,8 @@ input-file:
   - Microsoft.DataMigration/preview/2023-07-15-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
   - Microsoft.DataMigration/preview/2023-07-15-preview/definitions/ValidateMigrationInputSqlServerSqlMiSyncTask.json
   - Microsoft.DataMigration/preview/2023-07-15-preview/definitions/ValidateSyncMigrationInputSqlServerTask.json
+modelerfour:
+  lenient-model-deduplication: true # !!temporary!! to solve the duplicate schema issue of ProxyResource, TrackedResource and Resource in common-types v2 and v3 introduced in this PR
 directive:
   - suppress: R4009
   - suppress: R4013
