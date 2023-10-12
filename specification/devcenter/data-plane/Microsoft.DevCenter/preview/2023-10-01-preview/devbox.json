@@ -1977,11 +1977,11 @@
           "description": "Description of the task.",
           "type": "string"
         },
-        "inputs": {
-          "description": "Inputs to the task.",
+        "parameters": {
+          "description": "Parameters for the task.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/CustomizationTaskDefinitionInput"
+            "$ref": "#/definitions/CustomizationTaskDefinitionParameter"
           }
         }
       },
@@ -1990,16 +1990,16 @@
         "catalogName"
       ]
     },
-    "CustomizationTaskDefinitionInput": {
-      "description": "Input for a customization task.",
+    "CustomizationTaskDefinitionParameter": {
+      "description": "Parameters for a customization task.",
       "type": "object",
       "properties": {
         "description": {
-          "description": "Description of the input.",
+          "description": "Description of the parameter.",
           "type": "string"
         },
         "type": {
-          "description": "Type of the input.",
+          "description": "Type of the parameter.",
           "type": "string",
           "enum": [
             "string",
@@ -2007,24 +2007,26 @@
             "boolean"
           ],
           "x-ms-enum": {
-            "name": "CustomizationTaskDefinitionInputType",
+            "name": "CustomizationTaskDefinitionParameterType",
             "modelAsString": true
           }
         },
         "required": {
-          "description": "Whether or not the input is required.",
+          "description": "Whether or not the parameter is required.",
           "type": "boolean"
         },
         "default": {
-          "description": "Default value for the input.",
+          "description": "Default value for the parameter.",
           "type": "string"
         },
         "allowed": {
-          "description": "Allowed values for the input.",
+          "description": "Allowed values for the parameter.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "minItems": 1,
+          "uniqueItems": true
         }
       },
       "required": [
@@ -2354,8 +2356,8 @@
           "description": "Name of the task.",
           "type": "string"
         },
-        "inputs": {
-          "description": "Inputs to the task.",
+        "parameters": {
+          "description": "Parameters for the task.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
