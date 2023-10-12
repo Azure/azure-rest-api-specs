@@ -80,7 +80,7 @@ interface EnvironmentClientOperations {
     @convenientAPI(false)
     GetEnvironment is DevCenter.EnvironmentsOperations.GetEnvironment;
     @convenientAPI(false)
-    CreateOrReplaceEnvironment is DevCenter.EnvironmentsOperations.CreateOrReplaceEnvironment;
+    CreateOrUpdateEnvironment is DevCenter.EnvironmentsOperations.CreateOrUpdateEnvironment;
     @convenientAPI(false)
     DeleteEnvironment is DevCenter.EnvironmentsOperations.DeleteEnvironment;
     @convenientAPI(false)

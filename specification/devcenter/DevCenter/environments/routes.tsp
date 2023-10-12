@@ -70,7 +70,7 @@ interface EnvironmentsOperations {
   @doc("Creates or updates an environment.")
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @put
-  CreateOrReplaceEnvironment is Foundations.LongRunningOperation<
+  CreateOrUpdateEnvironment is Foundations.LongRunningOperation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
