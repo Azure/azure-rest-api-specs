@@ -2286,9 +2286,9 @@
           "minLength": 1,
           "maxLength": 50
         },
-        "type": {
+        "kind": {
           "type": "string",
-          "title": "API type",
+          "title": "API kind",
           "description": "Kind of API. For example, REST or GraphQL.",
           "enum": [
             "rest",
@@ -2462,13 +2462,18 @@
         },
         "specification": {
           "type": "object",
+          "description": "API specification details.",
           "readOnly": true,
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "Specification name.",
+              "example": "openapi"
             },
             "version": {
-              "type": "string"
+              "type": "string",
+              "description": "Specification version.",
+              "example": "3.0.1"
             }
           }
         }
@@ -2531,9 +2536,9 @@
           "title": "Description.",
           "example": "The primary Azure API Management service for the European division of Contoso."
         },
-        "type": {
+        "kind": {
           "type": "string",
-          "description": "Environment type.",
+          "description": "Environment kind.",
           "enum": [
             "development",
             "testing",
@@ -2541,7 +2546,7 @@
             "production"
           ],
           "x-ms-enum": {
-            "name": "EnvironmentType",
+            "name": "EnvironmentKind",
             "modelAsString": true
           },
           "example": "production"
@@ -2687,12 +2692,17 @@
         },
         "specification": {
           "type": "object",
+          "description": "API specification details.",
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "Specification name.",
+              "example": "openapi"
             },
-            "value": {
-              "type": "string"
+            "version": {
+              "type": "string",
+              "description": "Specification version.",
+              "example": "3.0.1"
             }
           }
         }
