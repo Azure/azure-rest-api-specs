@@ -287,9 +287,96 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.Billing/validateAddress": {
+      "post": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Validates an address. Use the operation to validate an address before using it as soldTo or a billTo address.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Address_Validate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "./types.json#/definitions/AddressDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of the address validation.",
+            "schema": {
+              "$ref": "#/definitions/AddressValidationResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AddressValidateValid": {
+            "$ref": "./examples/addressValidateValid.json"
+          },
+          "AddressValidateInvalid": {
+            "$ref": "./examples/addressValidateInvalid.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "AddressValidationResult": {
+      "description": "Result of the address validation.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of the address validation.",
+          "enum": [
+            "Other",
+            "Valid",
+            "Invalid"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AddressValidationStatus",
+            "modelAsString": true
+          }
+        },
+        "suggestedAddresses": {
+          "description": "The list of suggested addresses.",
+          "type": "array",
+          "items": {
+            "$ref": "./types.json#/definitions/AddressDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "validationMessage": {
+          "description": "Validation error message.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "readOnly": true
+    },
     "BillingAccount": {
       "description": "A billing account.",
       "type": "object",
@@ -463,7 +550,7 @@
           "type": "boolean"
         },
         "hasNoBillingProfiles": {
-          "description": "TODO",
+          "description": "Indicates whether or not the billing account has any billing profiles.",
           "type": "boolean"
         },
         "notificationEmailAddress": {
@@ -638,7 +725,7 @@
           "readOnly": true
         },
         "anniversaryDay": {
-          "format": "date-time",
+          "format": "int32",
           "description": "The anniversary day of the pre-transitioned account of type Microsoft Online Services Program.",
           "type": "integer",
           "readOnly": true
