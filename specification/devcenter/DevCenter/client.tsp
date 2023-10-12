@@ -84,11 +84,11 @@ interface EnvironmentClientOperations {
     @convenientAPI(false)
     DeleteEnvironment is DevCenter.EnvironmentsOperations.DeleteEnvironment;
     @convenientAPI(false)
-    ListCatalogsByProject is DevCenter.EnvironmentsOperations.ListCatalogsByProject;
+    ListCatalogs is DevCenter.EnvironmentsOperations.ListCatalogs;
     @convenientAPI(false)
     GetCatalog is DevCenter.EnvironmentsOperations.GetCatalog;
     @convenientAPI(false)
-    ListEnvironmentDefinitionsByProject is DevCenter.EnvironmentsOperations.ListEnvironmentDefinitionsByProject;
+    ListEnvironmentDefinitions is DevCenter.EnvironmentsOperations.ListEnvironmentDefinitions;
     @convenientAPI(false)
     ListEnvironmentDefinitionsByCatalog is DevCenter.EnvironmentsOperations.ListEnvironmentDefinitionsByCatalog;
     @convenientAPI(false)

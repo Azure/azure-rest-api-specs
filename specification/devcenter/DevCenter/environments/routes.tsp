@@ -137,7 +137,7 @@ interface EnvironmentsOperations {
   @doc("Lists all of the catalogs available for a project.")
   @route("/projects/{projectName}/catalogs")
   @get
-  ListCatalogsByProject is DevCenterBaseResponse<
+  ListCatalogs is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -169,7 +169,7 @@ interface EnvironmentsOperations {
   @doc("Lists all environment definitions available for a project.")
   @route("/projects/{projectName}/environmentDefinitions")
   @get
-  ListEnvironmentDefinitionsByProject is DevCenterBaseResponse<
+  ListEnvironmentDefinitions is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
