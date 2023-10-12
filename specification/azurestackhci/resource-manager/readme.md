@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-08
+tag: package-preview-2023-09
 ```
 
 ## Suppression
@@ -60,18 +60,31 @@ directive:
 suppressions:
   - code: PathResourceProviderNamePascalCase
     reason: We had already gone to production with "HCI" in our namespace, so changing it to "Hci" now would be disruptive.
-  - code: GetCollectionOnlyHasValueAndNextLink
-    reason: The linter is mistakenly thinking that paths for a singular resource that is always named default, like "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default," is for a collection of resources.
-    from: virtualMachineInstances.json
   - code: TopLevelResourcesListBySubscription
-    reason: There is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances
-
+    reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
   - code: PropertiesTypeObjectNoDefinition
     reason: These are existing properties already supported as part of PUT extensions call. Same properties are being supported for extensions Patch now.  
     from: extensions.json
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: There is a false positive reporting the two letter acronym ID should be lower camel case. The property is correctly capitalized according to guidance. 
+    from: logicalNetworks.json
 ```
 
+### Tag: package-preview-2023-09
 
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/common.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/logicalNetworks.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualMachineInstances.json
+```
 ### Tag: package-2023-08
 
 These settings apply only when `--tag=package-2023-08` is specified on the command line.
@@ -87,7 +100,7 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2023-08-01/skus.json
   - Microsoft.AzureStackHCI/stable/2023-08-01/updateRuns.json
   - Microsoft.AzureStackHCI/stable/2023-08-01/updateSummaries.json
-  - Microsoft.AzureStackHCI/stable/2023-08-01/updates.json
+  - Microsoft.AzureStackHCI/stable/2023-08-01/updates.json```
 ```
 ### Tag: package-preview-2023-07
 
