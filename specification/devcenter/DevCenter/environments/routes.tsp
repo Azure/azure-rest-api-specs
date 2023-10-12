@@ -68,6 +68,7 @@ interface EnvironmentsOperations {
   >;
 
   @doc("Creates or updates an environment.")
+  @pollingOperation(SharedOperations.GetProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @put
   CreateOrUpdateEnvironment is Foundations.LongRunningOperation<
