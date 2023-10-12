@@ -13,35 +13,6 @@ using Azure.ClientGenerator.Core;
 namespace SDKCustomizations;
 
 @client({
-    name: "DeploymentEnvironmentsClient",
-    service: DevCenter,
-})
-interface EnvironmentClientOperations {
-    @convenientAPI(false)
-    ListEnvironments is DevCenter.EnvironmentsOperations.ListEnvironments;
-    @convenientAPI(false)
-    ListEnvironmentsByUser is DevCenter.EnvironmentsOperations.ListEnvironmentsByUser;
-    @convenientAPI(false)
-    GetEnvironmentByUser is DevCenter.EnvironmentsOperations.GetEnvironmentByUser;
-    @convenientAPI(false)
-    CreateOrReplaceEnvironment is DevCenter.EnvironmentsOperations.CreateOrReplaceEnvironment;
-    @convenientAPI(false)
-    DeleteEnvironment is DevCenter.EnvironmentsOperations.DeleteEnvironment;
-    @convenientAPI(false)
-    ListCatalogsByProject is DevCenter.EnvironmentsOperations.ListCatalogsByProject;
-    @convenientAPI(false)
-    GetCatalog is DevCenter.EnvironmentsOperations.GetCatalog;
-    @convenientAPI(false)
-    ListEnvironmentDefinitionsByProject is DevCenter.EnvironmentsOperations.ListEnvironmentDefinitionsByProject;
-    @convenientAPI(false)
-    ListEnvironmentDefinitionsByCatalog is DevCenter.EnvironmentsOperations.ListEnvironmentDefinitionsByCatalog;
-    @convenientAPI(false)
-    GetEnvironmentDefinition is DevCenter.EnvironmentsOperations.GetEnvironmentDefinition;
-    @convenientAPI(false)
-    ListEnvironmentTypes is DevCenter.EnvironmentsOperations.ListEnvironmentTypes;
-}
-
-@client({
     name: "DevCenterClient",
     service: DevCenter,
 })
@@ -95,4 +66,33 @@ interface DevBoxesClientOperations {
     DelayAction is DevCenter.DevBoxesOperations.DelayAction;
     @convenientAPI(false)
     DelayActions is DevCenter.DevBoxesOperations.DelayActions;
+}
+
+@client({
+    name: "DeploymentEnvironmentsClient",
+    service: DevCenter,
+})
+interface EnvironmentClientOperations {
+    @convenientAPI(false)
+    ListEnvironments is DevCenter.EnvironmentsOperations.ListEnvironments;
+    @convenientAPI(false)
+    ListEnvironmentsByUser is DevCenter.EnvironmentsOperations.ListEnvironmentsByUser;
+    @convenientAPI(false)
+    GetEnvironmentByUser is DevCenter.EnvironmentsOperations.GetEnvironmentByUser;
+    @convenientAPI(false)
+    CreateOrReplaceEnvironment is DevCenter.EnvironmentsOperations.CreateOrReplaceEnvironment;
+    @convenientAPI(false)
+    DeleteEnvironment is DevCenter.EnvironmentsOperations.DeleteEnvironment;
+    @convenientAPI(false)
+    ListCatalogsByProject is DevCenter.EnvironmentsOperations.ListCatalogsByProject;
+    @convenientAPI(false)
+    GetCatalog is DevCenter.EnvironmentsOperations.GetCatalog;
+    @convenientAPI(false)
+    ListEnvironmentDefinitionsByProject is DevCenter.EnvironmentsOperations.ListEnvironmentDefinitionsByProject;
+    @convenientAPI(false)
+    ListEnvironmentDefinitionsByCatalog is DevCenter.EnvironmentsOperations.ListEnvironmentDefinitionsByCatalog;
+    @convenientAPI(false)
+    GetEnvironmentDefinition is DevCenter.EnvironmentsOperations.GetEnvironmentDefinition;
+    @convenientAPI(false)
+    ListEnvironmentTypes is DevCenter.EnvironmentsOperations.ListEnvironmentTypes;
 }
