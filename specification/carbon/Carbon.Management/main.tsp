@@ -144,6 +144,9 @@ model ItemDetailsQueryFilter extends QueryFilter {
 
   @doc("Number of items to return")
   pageSize: int32;
+
+  @doc("Number of items to skip, it's optional, by default value is 0")
+  offset?: int32;
 }
 
 @discriminator("dataType")
@@ -390,7 +393,6 @@ interface CarbonService {
   @route("/providers/Microsoft.Carbon/carbonEmissionReports")
   listCarbonEmissionReports(
     ...ApiVersionParameter,
-
     @body
     @doc("Query parameters")
     queryParameters: QueryFilter,
