@@ -370,18 +370,15 @@ model CarbonEmissionDataListResult {
 
   @doc("The link to the next page of items")
   @Azure.Core.nextLink
-  @format("uri")
   nextLink?: string;
 }
 
 @doc("Response for available date range of carbon emission data")
 model CarbonEmissionDataAvailableDateRange {
   @doc("Start date parameter, format is yyyy-MM-dd")
-  @format("date")
   startDate: string;
 
   @doc("End date parameter, format is yyyy-MM-dd")
-  @format("date")
   endDate: string;
 }
 
@@ -390,6 +387,7 @@ model CarbonEmissionDataAvailableDateRange {
 interface CarbonService {
   @doc("API for Carbon Emissions Reports")
   @post
+  @armResourceCollectionAction
   @route("/providers/Microsoft.Carbon/carbonEmissionReports")
   listCarbonEmissionReports(
     ...ApiVersionParameter,
@@ -400,6 +398,7 @@ interface CarbonService {
 
   @doc("API for query carbon emission data available date range")
   @post
+  @armResourceAction(CarbonEmissionDataAvailableDateRange)
   @route("/providers/Microsoft.Carbon/queryCarbonEmissionDataAvailableDateRange")
   queryCarbonEmissionDataAvailableDateRange(
     ...ApiVersionParameter,
