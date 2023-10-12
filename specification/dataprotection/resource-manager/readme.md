@@ -34,9 +34,9 @@ python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
 license-header: MICROSOFT_MIT
 suppressions:
-    -code: ResourceNameRestriction
-    where: $.definitions.BackupInstanceName
-    reason: Resource is created by DPP Service, so regex wont add much value here.
+    - code: ResourceNameRestriction
+      where: $.definitions.BackupInstanceName
+      reason: Resource is created by DPP Service, so regex wont add much value here.
     
 ```
 
