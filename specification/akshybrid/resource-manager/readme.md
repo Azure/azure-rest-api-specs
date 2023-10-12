@@ -53,6 +53,12 @@ suppressions:
   - code: TrackedResourcePatchOperation
     where: $.definitions.AgentPool
     reason: To be highly consistent with AKS. AKS does not implement the Patch operation for this resource. Changing it may cause confusion to customers. Link to AKS Swagger (https://github.com/Azure/azure-rest-api-specs-pr/blob/main/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/stable/2023-07-01/managedClusters.json#L3018)
+  - code: ParametersInPointGet
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/managedClusters/{clusterName}/providers/Microsoft.AksHybrid/locations/{location}/osOptions/default"].get.parameters
+    reason: To be highly consistent with AKS. Parameter resource-type is a query parameter of this operation in AKS. Link to AKS Swagger (https://github.com/Azure/azure-rest-api-specs-pr/blob/main/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/stable/2023-08-01/managedClusters.json#L80)
+  - code: NestedResourcesMustHaveListOperation
+    where: $.definitions.OSOptionProfile
+    reason: To be highly consistent with AKS. AKS does not implement the List operation for this resource. Changing it may cause confusion to customers. Link to AKS Swagger (https://github.com/Azure/azure-rest-api-specs-pr/blob/main/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/stable/2023-08-01/managedClusters.json#L6039)
 ```
 
 ---
