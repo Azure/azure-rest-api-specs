@@ -13,7 +13,7 @@ using Azure.ClientGenerator.Core;
 namespace SDKCustomizations;
 
 @client({
-    name: "EnvironmentsClient",
+    name: "DeploymentEnvironmentsClient",
     service: DevCenter,
 })
 interface EnvironmentClientOperations {
