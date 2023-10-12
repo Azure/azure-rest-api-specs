@@ -1,8 +1,8 @@
-# Azure.Developer.Signing
+# Azure.CodeSigning
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Azure.Developer.Signing.
+This is the AutoRest configuration file for Azure.CodeSigning.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the Azure.Developer.Signing.
+These are the global settings for the Azure.CodeSigning.
 
 ```yaml
 openapi-type: data-plane
@@ -35,7 +35,7 @@ These settings apply only when `--tag=2023-06-15-preview` is specified on the co
 
 ```yaml $(tag) == '2023-06-15-preview'
 input-file:
-  - Azure.Developer.Signing/preview/2023-06-15-preview/azure.developer.signing.json
+  - Azure.CodeSigning/preview/2023-06-15-preview/azure.codesigning.json
 ```
 
 ---
