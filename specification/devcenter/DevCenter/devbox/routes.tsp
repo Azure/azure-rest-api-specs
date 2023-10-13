@@ -90,19 +90,48 @@ interface DevBoxesOperations {
     Schedule
   >;
 
-  @doc("Lists Dev Boxes in the project for a particular user.")
-  @route("/projects/{projectName}/users/{userId}/devboxes")
+  @doc("Lists Dev Boxes that the caller has access to in the DevCenter.")
+  @route("/devboxes")
   @get
-  ListAllDevBoxesByUser is DevCenterBaseResponse<
+  ListAllDevBoxes is DevCenterBaseResponse<
     {
       @doc("An OData filter clause to apply to the operation.")
       @query
-      filter: string;
+      filter?: string;
 
       @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
       @query
-      top: int32;
+      top?: int32;
+    },
+    DevBoxListResult
+  >;
 
+
+  @doc("Lists Dev Boxes in the Dev Center for a particular user.")
+  @route("/users/{userId}/devboxes")
+  @get
+  ListAllDevBoxesByUser is DevCenterBaseResponse<
+    {
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
+      @path
+      userId: string;
+
+      @doc("An OData filter clause to apply to the operation.")
+      @query
+      filter?: string;
+
+      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
+      @query
+      top?: int32;
+    },
+    DevBoxListResult
+  >;
+
+  @doc("Lists Dev Boxes in the project for a particular user.")
+  @route("/projects/{projectName}/users/{userId}/devboxes")
+  @get
+  ListDevBoxes is DevCenterBaseResponse<
+    {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
       projectName: string;
@@ -110,6 +139,14 @@ interface DevBoxesOperations {
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
       @path
       userId: string;
+
+      @doc("An OData filter clause to apply to the operation.")
+      @query
+      filter?: string;
+
+      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
+      @query
+      top?: int32;
     },
     DevBoxListResult
   >;

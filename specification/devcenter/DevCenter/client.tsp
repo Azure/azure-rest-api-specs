@@ -41,7 +41,11 @@ interface DevBoxesClientOperations {
     @convenientAPI(false)
     GetSchedule is DevCenter.DevBoxesOperations.GetSchedule;
     @convenientAPI(false)
+    ListAllDevBoxes is DevCenter.DevBoxesOperations.ListAllDevBoxes;
+    @convenientAPI(false)
     ListAllDevBoxesByUser is DevCenter.DevBoxesOperations.ListAllDevBoxesByUser;
+    @convenientAPI(false)
+    ListDevBoxes is DevCenter.DevBoxesOperations.ListDevBoxes;
     @convenientAPI(false)
     GetDevBox is DevCenter.DevBoxesOperations.GetDevBox;
     @convenientAPI(false)
