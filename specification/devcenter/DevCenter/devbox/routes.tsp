@@ -51,14 +51,6 @@ interface DevBoxesOperations {
   @get
   ListSchedules is DevCenterBaseResponse<
     {
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query
-      top: int32;
-
-      @doc("An OData filter clause to apply to the operation.")
-      @query
-      filter: string;
-
       @doc("The DevCenter Project upon which to execute operations.")
       @path
       projectName: string;
@@ -66,6 +58,14 @@ interface DevBoxesOperations {
       @doc("The name of a pool of Dev Boxes.")
       @path
       poolName: string;
+
+      @doc("An OData filter clause to apply to the operation.")
+      @query
+      filter?: string;
+
+      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
+      @query
+      top?: int32;
     },
     ScheduleListResult
   >;
