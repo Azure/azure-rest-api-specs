@@ -28,14 +28,27 @@ These are the global settings for the Azure Communication Services API.
 title: CommunicationServiceManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-04
+tag: package-preview-2023-06
 ```
 
+
+### Tag: package-preview-2023-06
+
+These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-06'
+input-file:
+  - Microsoft.Communication/preview/2023-06-01-preview/CommunicationServices.json
+  - Microsoft.Communication/preview/2023-06-01-preview/Domains.json
+  - Microsoft.Communication/preview/2023-06-01-preview/EmailServices.json
+  - Microsoft.Communication/preview/2023-06-01-preview/SenderUsernames.json
+  - Microsoft.Communication/preview/2023-06-01-preview/SuppressionLists.json
+```
 ### Tag: package-preview-2023-04
 
 These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-04'
+``` yaml $(tag) == 'package-preview-2023-04'
 input-file:
   - Microsoft.Communication/preview/2023-04-01-preview/CommunicationServices.json
   - Microsoft.Communication/preview/2023-04-01-preview/Domains.json
@@ -47,13 +60,14 @@ input-file:
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03'
+``` yaml $(tag) == 'package-2023-03'
 input-file:
   - Microsoft.Communication/stable/2023-03-31/CommunicationServices.json
   - Microsoft.Communication/stable/2023-03-31/Domains.json
   - Microsoft.Communication/stable/2023-03-31/EmailServices.json
   - Microsoft.Communication/stable/2023-03-31/SenderUsernames.json
 ```
+
 ### Tag: package-preview-2023-03
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
@@ -120,7 +134,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-java
   - repo: azure-cli-extensions
