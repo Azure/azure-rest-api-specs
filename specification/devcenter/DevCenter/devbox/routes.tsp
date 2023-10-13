@@ -49,7 +49,7 @@ interface DevBoxesOperations {
   @doc("Lists available schedules for a pool.")
   @route("/projects/{projectName}/pools/{poolName}/schedules")
   @get
-  ListSchedulesByPool is DevCenterBaseResponse<
+  ListSchedules is DevCenterBaseResponse<
     {
       @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
       @query
@@ -73,7 +73,7 @@ interface DevBoxesOperations {
   @doc("Gets a schedule.")
   @route("/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}")
   @get
-  GetScheduleByPool is DevCenterBaseResponse<
+  GetSchedule is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -93,7 +93,7 @@ interface DevBoxesOperations {
   @doc("Lists Dev Boxes in the project for a particular user.")
   @route("/projects/{projectName}/users/{userId}/devboxes")
   @get
-  ListDevBoxesByUser is DevCenterBaseResponse<
+  ListAllDevBoxesByUser is DevCenterBaseResponse<
     {
       @doc("An OData filter clause to apply to the operation.")
       @query
@@ -117,7 +117,7 @@ interface DevBoxesOperations {
   @doc("Gets a Dev Box")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @get
-  GetDevBoxByUser is DevCenterBaseResponse<
+  GetDevBox is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -135,7 +135,7 @@ interface DevBoxesOperations {
   >;
 
   @doc("Creates or replaces a Dev Box.")
-  @finalOperation(DevBoxesOperations.GetDevBoxByUser)
+  @finalOperation(DevBoxesOperations.GetDevBox)
   @pollingOperation(SharedOperations.GetProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @put
@@ -408,7 +408,7 @@ interface DevBoxesOperations {
   @doc("Delays all actions.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions:delay")
   @post
-  DelayActions is DevCenterBaseResponse<
+  DelayAllActions is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path

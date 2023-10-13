@@ -37,13 +37,13 @@ interface DevBoxesClientOperations {
     @convenientAPI(false)
     GetPool is DevCenter.DevBoxesOperations.GetPool;
     @convenientAPI(false)
-    ListSchedulesByPool is DevCenter.DevBoxesOperations.ListSchedulesByPool;
+    ListSchedules is DevCenter.DevBoxesOperations.ListSchedules;
     @convenientAPI(false)
-    GetScheduleByPool is DevCenter.DevBoxesOperations.GetScheduleByPool;
+    GetSchedule is DevCenter.DevBoxesOperations.GetSchedule;
     @convenientAPI(false)
-    ListDevBoxesByUser is DevCenter.DevBoxesOperations.ListDevBoxesByUser;
+    ListAllDevBoxesByUser is DevCenter.DevBoxesOperations.ListAllDevBoxesByUser;
     @convenientAPI(false)
-    GetDevBoxByUser is DevCenter.DevBoxesOperations.GetDevBoxByUser;
+    GetDevBox is DevCenter.DevBoxesOperations.GetDevBox;
     @convenientAPI(false)
     CreateDevBox is DevCenter.DevBoxesOperations.CreateDevBox;
     @convenientAPI(false)
@@ -65,7 +65,7 @@ interface DevBoxesClientOperations {
     @convenientAPI(false)
     DelayAction is DevCenter.DevBoxesOperations.DelayAction;
     @convenientAPI(false)
-    DelayActions is DevCenter.DevBoxesOperations.DelayActions;
+    DelayAllActions is DevCenter.DevBoxesOperations.DelayAllActions;
 }
 
 @client({
