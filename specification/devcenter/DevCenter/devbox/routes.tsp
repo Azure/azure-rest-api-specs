@@ -15,17 +15,17 @@ interface DevBoxesOperations {
   @get
   ListPools is DevCenterBaseResponse<
     {
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query
-      top: int32;
+      @doc("The DevCenter Project upon which to execute operations.")
+      @path
+      projectName: string;
 
       @doc("An OData filter clause to apply to the operation.")
       @query
       filter: string;
 
-      @doc("The DevCenter Project upon which to execute operations.")
-      @path
-      projectName: string;
+      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
+      @query
+      top: int32;
     },
     PoolListResult
   >;
