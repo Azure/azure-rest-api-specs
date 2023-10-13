@@ -171,7 +171,7 @@
         "operationId": "DataTransferJobs_Resume",
         "description": "Resumes a Data Transfer Job.",
         "x-ms-examples": {
-          "CosmosDBDataTransferJobCreate": {
+          "CosmosDBDataTransferJobResume": {
             "$ref": "./examples/data-transfer-service/CosmosDBDataTransferJobResume.json"
           }
         },
@@ -213,7 +213,7 @@
         "operationId": "DataTransferJobs_Cancel",
         "description": "Cancels a Data Transfer Job.",
         "x-ms-examples": {
-          "CosmosDBDataTransferJobCreate": {
+          "CosmosDBDataTransferJobCancel": {
             "$ref": "./examples/data-transfer-service/CosmosDBDataTransferJobCancel.json"
           }
         },
@@ -469,6 +469,18 @@
           "readOnly": true,
           "$ref": "./cosmos-db.json#/definitions/ErrorResponse",
           "description": "Error response for Faulted job"
+        },
+        "mode": {
+          "description": "Mode of job execution",
+          "type": "string",
+          "enum": [
+            "Offline",
+            "Online"
+          ],
+          "x-ms-enum": {
+            "name": "DataTransferJobMode",
+            "modelAsString": false
+          }
         }
       },
       "required": [
