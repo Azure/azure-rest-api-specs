@@ -33,6 +33,7 @@ batch:
   - multiapiscript-locks: true
   - tag: package-managedapplications-2019-07
   - multiapiscript-managedapplications: true
+  - tag: package-policy-2023-04
   - tag: package-policy-2022-08-preview-only
   - tag: package-policy-2022-07-preview-only
   - tag: package-policy-2022-06-only
@@ -73,6 +74,7 @@ batch:
   - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
   - multiapiscript-subscriptions: true
+  - tag: package-deploymentscripts-2023-08
   - tag: package-deploymentscripts-2020-10
   - tag: package-deploymentscripts-2019-10-preview
   - multiapiscript-deploymentscripts: true
@@ -256,6 +258,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 default-api-version: "2019-07-01"
 namespace: azure.mgmt.resource.managedapplications.v2019_07_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications/v2019_07_01
+```
+
+### Tag: package-policy-2023-04 and python
+
+These settings apply only when `--tag=package-policy-2023-04 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-policy-2023-04'
+namespace: azure.mgmt.resource.policy.v2023_04_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2023_04_01
 ```
 
 ### Tag: package-policy-2022-08-preview-only and python
@@ -650,6 +662,17 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 default-api-version: "2020-10-01"
 namespace: azure.mgmt.resource.deploymentscripts.v2020_10_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentscripts/v2020_10_01
+```
+
+### Tag: package-deploymentscripts-2023-08 and python
+
+These settings apply only when `--tag=package-deploymentscripts-2023-08` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-deploymentscripts-2023-08'
+default-api-version: "2023-08-01"
+namespace: azure.mgmt.resource.deploymentscripts.v2023_08_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentscripts/v2023_08_01
 ```
 
 ### Tag: package-templatespecs-2019-06-preview and python
