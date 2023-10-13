@@ -1,6 +1,6 @@
 import "@typespec/http";
 
-namespace Azure.AI.Chat;
+namespace Azure.AI.ChatProtocol;
 
 using TypeSpec.Http;
 

@@ -21,7 +21,7 @@ using TypeSpec.Versioning;
   }
 )
 @versioned(APIVersion)
-namespace Azure.AI.Chat;
+namespace Azure.AI.ChatProtocol;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum APIVersion {

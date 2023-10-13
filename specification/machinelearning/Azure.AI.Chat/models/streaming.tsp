@@ -1,6 +1,6 @@
 import "./common.tsp";
 
-namespace Azure.AI.Chat;
+namespace Azure.AI.ChatProtocol;
 
 @doc("placeholder")
 model ChatMessageDelta<StateModel> {

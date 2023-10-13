@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "./models/blocking.tsp";
 import "./models/streaming.tsp";
 
-namespace Azure.AI.Chat;
+namespace Azure.AI.ChatProtocol;
 
 using TypeSpec.Http;
 using Azure.Core.Foundations;
