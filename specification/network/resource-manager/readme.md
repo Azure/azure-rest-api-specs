@@ -238,6 +238,16 @@ input-file:
   - Microsoft.Network/stable/2023-02-01/webapplicationfirewall.json
 ```
 
+### Tag: package-2023-09-preview
+
+These settings apply only when `--tag=package-2023-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09-preview'
+input-file:
+  - Microsoft.Network/preview/2023-09-01-preview/network.json
+  - Microsoft.Network/preview/2023-09-01-preview/networkSecurityPerimeter.json
+```
+
 ### Tag: package-2022-06-preview
 
 These settings apply only when `--tag=package-2022-06-preview` is specified on the command line.
