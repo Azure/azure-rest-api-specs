@@ -205,6 +205,7 @@ interface DevBoxesOperations {
   >;
 
   @doc("Starts a Dev Box")
+  @pollingOperation(SharedOperations.GetProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:start")
   @post
   StartDevBox is Foundations.LongRunningOperation<
@@ -232,6 +233,7 @@ interface DevBoxesOperations {
   >;
 
   @doc("Stops a Dev Box")
+  @pollingOperation(SharedOperations.GetProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:stop")
   @post
   StopDevBox is Foundations.LongRunningOperation<
@@ -263,6 +265,7 @@ interface DevBoxesOperations {
   >;
 
   @doc("Restarts a Dev Box")
+  @pollingOperation(SharedOperations.GetProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:restart")
   @post
   RestartDevBox is Foundations.LongRunningOperation<
