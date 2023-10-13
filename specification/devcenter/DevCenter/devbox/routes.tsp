@@ -252,7 +252,7 @@ interface DevBoxesOperations {
 
       @doc("Optional parameter to hibernate the dev box.")
       @query
-      hibernate: boolean;
+      hibernate?: boolean;
     },
     {
       @statusCode
