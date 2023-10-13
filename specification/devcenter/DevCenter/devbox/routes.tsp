@@ -90,43 +90,6 @@ interface DevBoxesOperations {
     Schedule
   >;
 
-  @doc("Lists Dev Boxes that the caller has access to in the DevCenter.")
-  @route("/devboxes")
-  @get
-  ListAllDevBoxes is DevCenterBaseResponse<
-    {
-      @doc("An OData filter clause to apply to the operation.")
-      @query
-      filter?: string;
-
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query
-      top?: int32;
-    },
-    DevBoxListResult
-  >;
-
-
-  @doc("Lists Dev Boxes in the Dev Center for a particular user.")
-  @route("/users/{userId}/devboxes")
-  @get
-  ListAllDevBoxesByUser is DevCenterBaseResponse<
-    {
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
-      @path
-      userId: string;
-
-      @doc("An OData filter clause to apply to the operation.")
-      @query
-      filter?: string;
-
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query
-      top?: int32;
-    },
-    DevBoxListResult
-  >;
-
   @doc("Lists Dev Boxes in the project for a particular user.")
   @route("/projects/{projectName}/users/{userId}/devboxes")
   @get

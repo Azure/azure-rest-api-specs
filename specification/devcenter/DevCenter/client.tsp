@@ -21,10 +21,6 @@ interface DevCenterClientOperations {
     ListProjects is DevCenter.DevCenterOperations.ListProjects;
     @convenientAPI(false)
     GetProject is DevCenter.DevCenterOperations.GetProject;
-    @convenientAPI(false)
-    ListAllDevBoxes is DevCenter.DevBoxesDevCenterOperations.ListAllDevBoxes;
-    @convenientAPI(false)
-    ListAllDevBoxesByUser is DevCenter.DevBoxesDevCenterOperations.ListAllDevBoxesByUser;
 }
 
 @client({
@@ -41,9 +37,9 @@ interface DevBoxesClientOperations {
     @convenientAPI(false)
     GetSchedule is DevCenter.DevBoxesOperations.GetSchedule;
     @convenientAPI(false)
-    ListAllDevBoxes is DevCenter.DevBoxesOperations.ListAllDevBoxes;
+    ListAllDevBoxes is DevCenter.DevBoxesDevCenterOperations.ListAllDevBoxes;
     @convenientAPI(false)
-    ListAllDevBoxesByUser is DevCenter.DevBoxesOperations.ListAllDevBoxesByUser;
+    ListAllDevBoxesByUser is DevCenter.DevBoxesDevCenterOperations.ListAllDevBoxesByUser;
     @convenientAPI(false)
     ListDevBoxes is DevCenter.DevBoxesOperations.ListDevBoxes;
     @convenientAPI(false)
