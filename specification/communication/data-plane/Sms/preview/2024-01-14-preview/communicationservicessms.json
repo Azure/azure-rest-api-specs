@@ -26,7 +26,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "",
+            "description": "Represents the body of the send MMS message request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MmsSendMessageRequest"
@@ -53,7 +53,7 @@
         "tags": [
           "Sms"
         ],
-        "summary": "Sends a SMS from a phone number that is acquired by the authenticated account.",
+        "summary": "Sends a SMS message from a phone number that belongs to the authenticated account.",
         "operationId": "Sms_Send",
         "consumes": [
           "application/json"
@@ -65,7 +65,7 @@
           {
             "in": "body",
             "name": "SendMessageRequest",
-            "description": "",
+            "description": "Represents the body of the send message request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SendMessageRequest"
@@ -93,7 +93,7 @@
   },
   "definitions": {
     "MmsSendMessageRequest": {
-      "description": "Represents the properties of a send message request.",
+      "description": "Represents the properties of a send MMS message request.",
       "required": [
         "attachments",
         "from",
@@ -102,16 +102,16 @@
       "type": "object",
       "properties": {
         "from": {
-          "description": "The from identifier that is owned by the authenticated account",
+          "description": "The sender's identifier(typically phone number in E.164 format) that is owned by the authenticated account.",
           "type": "string"
         },
         "recipients": {
-          "description": "The to phone numbers in E.164 format.",
+          "description": "The recipient phone numbers in E.164 format.",
           "maxItems": 100,
           "minItems": 1,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MmsSendRecipient"
+            "$ref": "#/definitions/MmsRecipient"
           }
         },
         "message": {
@@ -134,25 +134,8 @@
         }
       }
     },
-    "MmsSendOptions": {
-      "description": "Used for sending more options in the request",
-      "required": [
-        "enableDeliveryReport"
-      ],
-      "type": "object",
-      "properties": {
-        "enableDeliveryReport": {
-          "description": "Get or Set the notify delivery report",
-          "type": "boolean"
-        },
-        "tag": {
-          "description": "Get or Set the Customer Content\r\nShould not be logged.",
-          "type": "string"
-        }
-      }
-    },
-    "MmsSendRecipient": {
-      "description": "Represents properties for a single recipient",
+    "MmsRecipient": {
+      "description": "Represents properties for a single recipient.",
       "required": [
         "to"
       ],
@@ -164,10 +147,28 @@
           "type": "string"
         },
         "repeatabilityRequestId": {
-          "description": "Optional repeatability-request-id to support idempotency.",
+          "description": "If specified, the client directs that the request is repeatable; that is, the client can make the request multiple times with the same Repeatability-Request-ID and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-ID is an opaque string representing a client-generated, 36-character hexadecimal case-insensitive encoding of a UUID (GUID), identifier for the request.",
           "type": "string"
         },
         "repeatabilityFirstSent": {
+          "description": "MUST be sent by clients to specify that a request is repeatable. Repeatability-First-Sent is used to specify the date and time at which the request was first created.eg- Tue, 26 Mar 2019 16:06:51 GMT.",
+          "type": "string"
+        }
+      }
+    },
+    "MmsSendOptions": {
+      "description": "Optional configuration for sending MMS messages.",
+      "required": [
+        "enableDeliveryReport"
+      ],
+      "type": "object",
+      "properties": {
+        "enableDeliveryReport": {
+          "description": "Enable this flag to receive a delivery report for this message on the Azure Resource EventGrid.",
+          "type": "boolean"
+        },
+        "tag": {
+          "description": "Use this field to provide metadata that will then be sent back in the corresponding Delivery Report.",
           "type": "string"
         }
       }
@@ -195,20 +196,59 @@
       }
     },
     "MmsSendResponse": {
-      "description": "Response for a successful or multi status send request.",
+      "description": "Response for a successful or multi status MMS send request.",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets the outgoing recipient phone number, message id,\r\nresponse status code and human-readable message",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SendResponseItem"
+            "$ref": "#/definitions/MmsSendResponseItem"
           }
         }
       }
     },
+    "MmsSendResponseItem": {
+      "description": "MMS Response for a single recipient.",
+      "required": [
+        "httpStatusCode",
+        "successful",
+        "to"
+      ],
+      "type": "object",
+      "properties": {
+        "to": {
+          "description": "The recipient's phone number in E.164 format.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "messageId": {
+          "description": "The identifier of the outgoing message. Only present if message processed.",
+          "type": "string"
+        },
+        "httpStatusCode": {
+          "format": "int32",
+          "description": "HTTP Status code.",
+          "type": "integer"
+        },
+        "errorMessage": {
+          "description": "Optional error message in case of 4xx/5xx/repeatable errors.",
+          "type": "string"
+        },
+        "repeatabilityResult": {
+          "description": "The result of a repeatable request with one of the case-insensitive values accepted or rejected.",
+          "type": "string"
+        },
+        "successful": {
+          "description": "Indicates if the message is processed successfully or not.",
+          "type": "boolean"
+        }
+      }
+    },
     "SendMessageRequest": {
-      "description": "Represents the properties of a send message request.",
+      "description": "Represents the properties of a send SMS message request.",
       "required": [
         "from",
         "message",
@@ -217,11 +257,11 @@
       "type": "object",
       "properties": {
         "from": {
-          "description": "The from phone number in E.164 format that is owned by the authenticated account.",
+          "description": "The sender's identifier(typically phone number in E.164 format) that is owned by the authenticated account.",
           "type": "string"
         },
         "smsRecipients": {
-          "description": "The to phone numbers in E.164 format.",
+          "description": "The recipient's phone number in E.164 format. In this version, a minimum of 1 and upto 100 recipients in the list are supported.",
           "maxLength": 100,
           "minLength": 1,
           "type": "array",
@@ -240,37 +280,8 @@
         }
       }
     },
-    "SendResponseItem": {
-      "description": "Sms Response containing metadata for a single recipient.",
-      "required": [
-        "httpStatusCode",
-        "to",
-        "successful"
-      ],
-      "type": "object",
-      "properties": {
-        "to": {
-          "type": "string"
-        },
-        "messageId": {
-          "type": "string"
-        },
-        "httpStatusCode": {
-          "type": "integer"
-        },
-        "errorMessage": {
-          "type": "string"
-        },
-        "repeatabilityResult": {
-          "type": "string"
-        },
-        "successful": {
-          "type": "boolean"
-        }
-      }
-    },
     "SmsRecipient": {
-      "description": "Represents properties for a single recipient",
+      "description": "Represents properties for a single recipient.",
       "required": [
         "to"
       ],
@@ -281,44 +292,83 @@
           "type": "string"
         },
         "repeatabilityRequestId": {
-          "description": "Optional repeatability-request-id to support idempotency.",
+          "description": "If specified, the client directs that the request is repeatable; that is, the client can make the request multiple times with the same Repeatability-Request-ID and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-ID is an opaque string representing a client-generated, 36-character hexadecimal case-insensitive encoding of a UUID (GUID), identifier for the request.",
           "type": "string"
         },
         "repeatabilityFirstSent": {
+          "description": "MUST be sent by clients to specify that a request is repeatable. Repeatability-First-Sent is used to specify the date and time at which the request was first created.eg- Tue, 26 Mar 2019 16:06:51 GMT.",
           "type": "string"
         }
       }
     },
     "SmsSendOptions": {
-      "description": "Used for sending more options in send sms request",
+      "description": "Optional configuration for sending SMS messages.",
       "required": [
         "enableDeliveryReport"
       ],
       "type": "object",
       "properties": {
         "enableDeliveryReport": {
-          "description": "Get or Set the notify delivery report",
+          "description": "Enable this flag to receive a delivery report for this message on the Azure Resource EventGrid.",
           "type": "boolean"
         },
         "tag": {
-          "description": "Get or Set the Customer Content\r\nShould not be logged.",
+          "description": "Use this field to provide metadata that will then be sent back in the corresponding Delivery Report.",
           "type": "string"
         }
       }
     },
     "SmsSendResponse": {
-      "description": "Defines the Sms response send to the customer",
+      "description": "Response for a successful or multi status SMS send request.",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets the outgoing recipient phone number, message id,\r\nresponse status code and human-readable message",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SendResponseItem"
+            "$ref": "#/definitions/SmsSendResponseItem"
           }
+        }
+      }
+    },
+    "SmsSendResponseItem": {
+      "description": "SMS Response for a single recipient.",
+      "required": [
+        "httpStatusCode",
+        "to",
+        "successful"
+      ],
+      "type": "object",
+      "properties": {
+        "to": {
+          "description": "The recipient's phone number in E.164 format.",
+          "type": "string"
+        },
+        "messageId": {
+          "description": "The identifier of the outgoing message. Only present if message processed.",
+          "type": "string"
+        },
+        "httpStatusCode": {
+          "description": "HTTP Status code.",
+          "type": "integer"
+        },
+        "errorMessage": {
+          "description": "Optional error message in case of 4xx/5xx/repeatable errors.",
+          "type": "string"
+        },
+        "repeatabilityResult": {
+          "description": "The result of a repeatable request with one of the case-insensitive values accepted or rejected.",
+          "type": "string",
+          "enum": [
+            "accepted",
+            "rejected"
+          ]
+        },
+        "successful": {
+          "description": "Indicates if the message is processed successfully or not.",
+          "type": "boolean"
         }
       }
     }
@@ -338,9 +388,20 @@
       "description": "The communication resource, for example https://resourcename.communication.azure.com",
       "required": true,
       "type": "string",
-      "format": "url",
       "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "client",
+      "format": "url"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
     }
   },
   "x-ms-parameterized-host": {
