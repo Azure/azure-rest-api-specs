@@ -100,7 +100,7 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2023-08-01/skus.json
   - Microsoft.AzureStackHCI/stable/2023-08-01/updateRuns.json
   - Microsoft.AzureStackHCI/stable/2023-08-01/updateSummaries.json
-  - Microsoft.AzureStackHCI/stable/2023-08-01/updates.json```
+  - Microsoft.AzureStackHCI/stable/2023-08-01/updates.json
 ```
 ### Tag: package-preview-2023-07
 
