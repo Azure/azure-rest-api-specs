@@ -2147,7 +2147,8 @@
         "2022-02-02-preview",
         "2023-03-03",
         "2023-03-15",
-        "2023-04-01-preview"
+        "2023-04-01-preview",
+        "2023-07-07-preview"
       ],
       "x-ms-enum": {
         "name": "ApiVersions",
@@ -2187,6 +2188,11 @@
             "name": "v2023_04_01_preview",
             "value": "2023-04-01-preview",
             "description": "2023-04-01-preview API Version."
+          },
+          {
+            "name": "v2023_07_07_preview",
+            "value": "2023-07-07-preview",
+            "description": "2023-07-07-preview API Version."
           }
         ]
       }
@@ -2200,8 +2206,15 @@
           "readOnly": true
         },
         "cost": {
-          "type": "string",
+          "type": "number",
+          "format": "float",
           "description": "The cost details.",
+          "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of service plans recommended.",
           "readOnly": true
         }
       },
@@ -2857,7 +2870,8 @@
           "default": "RI3Year"
         }
       },
-      "description": "Azure settings for a business case."
+      "description": "Azure settings for a business case.",
+      "required": ["targetLocation", "currency"]
     },
     "AzureSqlSummary": {
       "type": "object",
@@ -3032,7 +3046,7 @@
       "properties": {
         "azurePaasCostDetails": {
           "$ref": "#/definitions/CostDetails",
-          "description": "The azyre PaaS cost.",
+          "description": "The azure PaaS cost.",
           "readOnly": true
         },
         "azureIaasCostDetails": {
@@ -3055,6 +3069,11 @@
           "description": "The on premises IaaS cost.",
           "readOnly": true
         },
+        "onPremisesAvsCostDetails": {
+          "$ref": "#/definitions/CostDetails",
+          "description": "The on premises AVS cost.",
+          "readOnly": true
+        },
         "onPremisesPaasDecommissionedCostDetails": {
           "$ref": "#/definitions/CostDetails",
           "description": "The on premises PaaS decommissioned cost.",
@@ -3063,6 +3082,11 @@
         "onPremisesIaasDecommissionedCostDetails": {
           "$ref": "#/definitions/CostDetails",
           "description": "The on premises IaaS decommissioned cost.",
+          "readOnly": true
+        },
+        "onPremisesAvsDecommissionedCostDetails": {
+          "$ref": "#/definitions/CostDetails",
+          "description": "The on premises AVS decommissioned cost.",
           "readOnly": true
         }
       },
@@ -3097,10 +3121,6 @@
         "virtualizationSoftwareSettings": {
           "$ref": "#/definitions/VirtualizationSoftwareSettings",
           "description": "Virtualisation software settings."
-        },
-        "hypervVirtualizationSoftwareSettings": {
-          "$ref": "#/definitions/HypervVirtualizationSoftwareSettings",
-          "description": "Virtualisation software settings."
         }
       },
       "description": "Compute settings.",
@@ -3109,8 +3129,7 @@
         "price",
         "sqlServerLicensing",
         "windowsServerLicensing",
-        "virtualizationSoftwareSettings",
-        "hypervVirtualizationSoftwareSettings"
+        "virtualizationSoftwareSettings"
       ]
     },
     "CostByStorageType": {
@@ -3167,6 +3186,11 @@
           "type": "number",
           "format": "float",
           "description": "Security Cost.",
+          "readOnly": true
+        },
+        "managementCostDetails": {
+          "$ref": "#/definitions/ManagementCostDetails",
+          "description": "Management Cost Details.",
           "readOnly": true
         },
         "esuSavings": {
@@ -3872,36 +3896,22 @@
           "format": "float",
           "description": "Cost of a licence."
         },
-        "basicSupportCost": {
-          "type": "number",
-          "format": "float",
-          "description": "Basic support cost."
-        },
-        "productionSupportCost": {
-          "type": "number",
-          "format": "float",
-          "description": "Production support cost."
-        },
         "licenseType": {
           "$ref": "#/definitions/HyperVLicenseType",
           "description": "HyperV licence type."
         }
       },
       "description": "Representation of a licence.",
-      "required": [
-        "licenseCost",
-        "basicSupportCost",
-        "productionSupportCost",
-        "licenseType"
-      ]
+      "required": ["licenseCost", "licenseType"]
     },
-    "HypervVirtualizationSoftwareSettings": {
+    "HypervVirtualizationManagementSettings": {
       "type": "object",
       "properties": {
         "numberOfPhysicalCoresPerLicense": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of physical cores per licence."
+          "description": "Number of physical cores per licence.",
+          "minimum": 1
         },
         "softwareAssuranceCost": {
           "type": "number",
@@ -3918,7 +3928,7 @@
           "x-typespec-name": "HypervLicense[]"
         }
       },
-      "description": "Virtualisation software settings.",
+      "description": "HyperV Virtualisation Management Settings.",
       "required": [
         "numberOfPhysicalCoresPerLicense",
         "softwareAssuranceCost",
@@ -4062,12 +4072,7 @@
     "LicenseType": {
       "type": "string",
       "description": "Business case supported VmWare License types.",
-      "enum": [
-        "Unknown",
-        "VSphereStandard",
-        "VSphereEnterprisePlus",
-        "VSphereServerStandard"
-      ],
+      "enum": ["Unknown", "VSphereStandard", "VSphereEnterprisePlus"],
       "x-ms-enum": {
         "name": "LicenseType",
         "modelAsString": true,
@@ -4086,11 +4091,6 @@
             "name": "VSphereEnterprisePlus",
             "value": "VSphereEnterprisePlus",
             "description": "VSphereEnterprisePlus License."
-          },
-          {
-            "name": "VSphereServerStandard",
-            "value": "VSphereServerStandard",
-            "description": "VSphereServerStandard License."
           }
         ]
       }
@@ -4365,6 +4365,144 @@
         ]
       }
     },
+    "ManagementCostComponent": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/ManagementCostComponentName",
+          "description": "Name of Management Cost Component."
+        },
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "Cost of Management Component."
+        }
+      },
+      "description": "Management Cost Component.",
+      "required": ["name"]
+    },
+    "ManagementCostComponentName": {
+      "type": "string",
+      "description": "Management Cost Component Names.",
+      "enum": [
+        "Unknown",
+        "SystemCenterLicenseCost",
+        "VSphereManagementCost",
+        "ThirdPartyManagementCost",
+        "OtherMonitoringCost",
+        "OtherDataProtectionCost",
+        "OtherPatchingCost",
+        "AzureMonitoringCost",
+        "AzurePatchingCost",
+        "AzureDataProtectionCost"
+      ],
+      "x-ms-enum": {
+        "name": "ManagementCostComponentName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown."
+          },
+          {
+            "name": "SystemCenterLicenseCost",
+            "value": "SystemCenterLicenseCost",
+            "description": "SystemCenterLicenseCost."
+          },
+          {
+            "name": "VSphereManagementCost",
+            "value": "VSphereManagementCost",
+            "description": "VSphereManagementCost."
+          },
+          {
+            "name": "ThirdPartyManagementCost",
+            "value": "ThirdPartyManagementCost",
+            "description": "ThirdPartyManagementCost."
+          },
+          {
+            "name": "OtherMonitoringCost",
+            "value": "OtherMonitoringCost",
+            "description": "OtherMonitoringCost."
+          },
+          {
+            "name": "OtherDataProtectionCost",
+            "value": "OtherDataProtectionCost",
+            "description": "OtherDataProtectionCost."
+          },
+          {
+            "name": "OtherPatchingCost",
+            "value": "OtherPatchingCost",
+            "description": "OtherPatchingCost."
+          },
+          {
+            "name": "AzureMonitoringCost",
+            "value": "AzureMonitoringCost",
+            "description": "AzureMonitoringCost."
+          },
+          {
+            "name": "AzurePatchingCost",
+            "value": "AzurePatchingCost",
+            "description": "AzurePatchingCost."
+          },
+          {
+            "name": "AzureDataProtectionCost",
+            "value": "AzureDataProtectionCost",
+            "description": "AzureDataProtectionCost."
+          }
+        ]
+      }
+    },
+    "ManagementCostDetails": {
+      "type": "object",
+      "properties": {
+        "managementCost": {
+          "type": "number",
+          "format": "float",
+          "description": "Management Cost.",
+          "readOnly": true
+        },
+        "managementCostComponents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagementCostComponent"
+          },
+          "x-ms-identifiers": [],
+          "description": "Management Cost Components.",
+          "x-typespec-name": "ManagementCostComponent[]",
+          "readOnly": true
+        }
+      },
+      "description": "Management Cost Details."
+    },
+    "ManagementSettings": {
+      "type": "object",
+      "properties": {
+        "hypervVirtualizationManagementSettings": {
+          "$ref": "#/definitions/HypervVirtualizationManagementSettings",
+          "description": "HyperV Virtualisaion Management Settings."
+        },
+        "vsphereManagementSettings": {
+          "$ref": "#/definitions/VsphereManagementSettings",
+          "description": "vSphere Management Settings."
+        },
+        "thirdPartyManagementSettings": {
+          "$ref": "#/definitions/ThirdPartyManagementSettings",
+          "description": "Third Party Management Settings."
+        },
+        "otherManagementCostsSettings": {
+          "$ref": "#/definitions/OtherManagementCostsSettings",
+          "description": "Other Management Costs Settings."
+        }
+      },
+      "description": "Management settings.",
+      "required": [
+        "hypervVirtualizationManagementSettings",
+        "vsphereManagementSettings",
+        "thirdPartyManagementSettings",
+        "otherManagementCostsSettings"
+      ]
+    },
     "MigrationStrategy": {
       "type": "string",
       "description": "Business case supported migration strategy types.",
@@ -4445,7 +4583,11 @@
         },
         "securitySettings": {
           "$ref": "#/definitions/SecuritySettings",
-          "description": "Labour settings."
+          "description": "Security settings."
+        },
+        "managementSettings": {
+          "$ref": "#/definitions/ManagementSettings",
+          "description": "Management settings."
         }
       },
       "description": "On-premise settings.",
@@ -4744,9 +4886,45 @@
           "format": "int32",
           "description": "The number of web applications.",
           "readOnly": true
+        },
+        "numberOfWebAppsPerType": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The number of web applications per web application type.",
+          "x-typespec-name": "Record<int32>",
+          "readOnly": true
         }
       },
       "description": "The on premises web application summary."
+    },
+    "OtherManagementCostsSettings": {
+      "type": "object",
+      "properties": {
+        "monitoringCostPerServerPerYear": {
+          "type": "number",
+          "format": "float",
+          "description": "Monitoring Cost Per Server Per Year."
+        },
+        "patchingCostPerServerPerYear": {
+          "type": "number",
+          "format": "float",
+          "description": "Patching Cost Per Server Per Year."
+        },
+        "dataProtectionCostPerServerPerYear": {
+          "type": "number",
+          "format": "float",
+          "description": "Data Protection Cost Per Server Per Year."
+        }
+      },
+      "description": "Other Management Costs Settings.",
+      "required": [
+        "monitoringCostPerServerPerYear",
+        "patchingCostPerServerPerYear",
+        "dataProtectionCostPerServerPerYear"
+      ]
     },
     "OverviewSummary": {
       "type": "object",
@@ -5255,11 +5433,13 @@
       "properties": {
         "reportType": {
           "$ref": "#/definitions/ReportType",
-          "description": "Report type."
+          "description": "Report type.",
+          "readOnly": true
         },
         "reportStatus": {
           "$ref": "#/definitions/ReportStatus",
-          "description": "Report status."
+          "description": "Report status.",
+          "readOnly": true
         }
       },
       "description": "Business case report details."
@@ -5389,7 +5569,7 @@
           "description": "Virtual machines per administrator."
         }
       },
-      "description": "Labour settings.",
+      "description": "Security settings.",
       "required": [
         "serverSecurityCostPerServerPerYear",
         "sqlServerSecurityCostPerServerPerYear"
@@ -5461,11 +5641,12 @@
           "description": "On-premise settings."
         }
       },
-      "description": "Business case settings."
+      "description": "Business case settings.",
+      "required": ["azureSettings"]
     },
     "SqlServerLicenseType": {
       "type": "string",
-      "description": "Business case supported HyperV License types.",
+      "description": "Business case supported SQL Server License types.",
       "enum": ["Unknown", "Enterprise", "Standard"],
       "x-ms-enum": {
         "name": "SqlServerLicenseType",
@@ -5627,6 +5808,23 @@
         ]
       }
     },
+    "ThirdPartyManagementSettings": {
+      "type": "object",
+      "properties": {
+        "licenseCost": {
+          "type": "number",
+          "format": "float",
+          "description": "License Cost."
+        },
+        "supportCost": {
+          "type": "number",
+          "format": "float",
+          "description": "Support Cost."
+        }
+      },
+      "description": "Third Party Management settings.",
+      "required": ["licenseCost", "supportCost"]
+    },
     "UtilizationData": {
       "type": "object",
       "properties": {
@@ -5663,7 +5861,8 @@
         "numberOfPhysicalCoresPerLicense": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of physical cores per licence."
+          "description": "Number of physical cores per licence.",
+          "minimum": 1
         },
         "softwareAssuranceCost": {
           "type": "number",
@@ -5690,6 +5889,22 @@
     "VsphereLicense": {
       "type": "object",
       "properties": {
+        "licenseType": {
+          "$ref": "#/definitions/LicenseType",
+          "description": "VSphere licence type."
+        }
+      },
+      "description": "Representation of a vsphere licence.",
+      "required": ["licenseType"],
+      "allOf": [
+        {
+          "$ref": "#/definitions/VsphereLicenseBase"
+        }
+      ]
+    },
+    "VsphereLicenseBase": {
+      "type": "object",
+      "properties": {
         "licenseCost": {
           "type": "number",
           "format": "float",
@@ -5704,19 +5919,63 @@
           "type": "number",
           "format": "float",
           "description": "Production support cost."
-        },
+        }
+      },
+      "description": "Representation of a vsphere licence base.",
+      "required": ["licenseCost", "basicSupportCost", "productionSupportCost"]
+    },
+    "VsphereManagementLicense": {
+      "type": "object",
+      "properties": {
         "licenseType": {
-          "$ref": "#/definitions/LicenseType",
+          "$ref": "#/definitions/VsphereManagementLicenseType",
           "description": "VSphere licence type."
         }
       },
-      "description": "Representation of a licence.",
-      "required": [
-        "licenseCost",
-        "basicSupportCost",
-        "productionSupportCost",
-        "licenseType"
+      "description": "Representation of a vsphere management licence.",
+      "required": ["licenseType"],
+      "allOf": [
+        {
+          "$ref": "#/definitions/VsphereLicenseBase"
+        }
       ]
+    },
+    "VsphereManagementLicenseType": {
+      "type": "string",
+      "description": "Business case supported Vsphere Management License types.",
+      "enum": ["Unknown", "VSphereServerStandard"],
+      "x-ms-enum": {
+        "name": "VsphereManagementLicenseType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown License."
+          },
+          {
+            "name": "VSphereServerStandard",
+            "value": "VSphereServerStandard",
+            "description": "VSphereServerStandard License."
+          }
+        ]
+      }
+    },
+    "VsphereManagementSettings": {
+      "type": "object",
+      "properties": {
+        "licenseAndSupportList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VsphereManagementLicense"
+          },
+          "x-ms-identifiers": [],
+          "description": "Licence and support list.",
+          "x-typespec-name": "VsphereManagementLicense[]"
+        }
+      },
+      "description": "Vsphere management settings.",
+      "required": ["licenseAndSupportList"]
     },
     "WebAppDistribution": {
       "type": "object",
@@ -5744,8 +6003,15 @@
           "readOnly": true
         },
         "cost": {
-          "type": "string",
+          "type": "number",
+          "format": "float",
           "description": "The cost details.",
+          "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of service plans or node pools recommended.",
           "readOnly": true
         }
       },
