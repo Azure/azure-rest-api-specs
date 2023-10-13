@@ -956,7 +956,11 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/MonitorNameParameter"
+            "name": "monitorName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the Monitors resource",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1417,7 +1421,7 @@
         },
         "region": {
           "type": "string",
-          "description": "region"
+          "description": "NewRelic account region"
         }
       },
       "description": "List of all the New relic accounts for the given user"
