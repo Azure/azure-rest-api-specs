@@ -2767,8 +2767,8 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
           "readOnly": true
         }
       }
@@ -2790,45 +2790,17 @@
     "VMMServer": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource",
+          "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'"
+        }
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Resource properties.",
           "$ref": "#/definitions/VMMServerProperties"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
-        },
-        "location": {
-          "description": "Gets or sets the location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system data."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -2836,7 +2808,6 @@
         }
       },
       "required": [
-        "location",
         "properties",
         "extendedLocation"
       ],
@@ -2855,7 +2826,9 @@
         },
         "nextLink": {
           "description": "Url to follow for getting next page of resources.",
-          "type": "string"
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
         }
       }
     },
@@ -2874,7 +2847,14 @@
         },
         "vmmServerId": {
           "type": "string",
-          "description": "ARM Id of the vmmServer resource in which this resource resides."
+          "description": "ARM Id of the vmmServer resource in which this resource resides.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/vmmServers"
+              }
+            ]
+          }
         },
         "cloudName": {
           "type": "string",
@@ -2895,8 +2875,8 @@
           "readOnly": true
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Gets the provisioning state.",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
           "readOnly": true
         }
       }
@@ -2904,45 +2884,17 @@
     "Cloud": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource",
+          "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'"
+        }
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Resource properties.",
           "$ref": "#/definitions/CloudProperties"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
-        },
-        "location": {
-          "description": "Gets or sets the location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system data."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -2950,7 +2902,6 @@
         }
       },
       "required": [
-        "location",
         "properties",
         "extendedLocation"
       ],
@@ -2969,7 +2920,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Url to follow for getting next page of resources."
+          "description": "Url to follow for getting next page of resources.",
+          "format": "uri",
+          "readOnly": true
         }
       }
     },
@@ -2988,7 +2941,14 @@
         },
         "vmmServerId": {
           "type": "string",
-          "description": "ARM Id of the vmmServer resource in which this resource resides."
+          "description": "ARM Id of the vmmServer resource in which this resource resides.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/vmmServers"
+              }
+            ]
+          }
         },
         "networkName": {
           "type": "string",
@@ -2996,8 +2956,8 @@
           "readOnly": true
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Gets the provisioning state.",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
           "readOnly": true
         }
       }
@@ -3005,45 +2965,17 @@
     "VirtualNetwork": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource",
+          "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'"
+        }
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Resource properties.",
           "$ref": "#/definitions/VirtualNetworkProperties"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
-        },
-        "location": {
-          "description": "Gets or sets the location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system data."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3051,7 +2983,6 @@
         }
       },
       "required": [
-        "location",
         "properties",
         "extendedLocation"
       ],
@@ -3070,7 +3001,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Url to follow for getting next page of resources."
+          "description": "Url to follow for getting next page of resources.",
+          "format": "uri",
+          "readOnly": true
         }
       }
     },
@@ -3085,11 +3018,18 @@
         },
         "vmmServerId": {
           "type": "string",
-          "description": "ARM Id of the vmmServer resource in which this resource resides."
+          "description": "ARM Id of the vmmServer resource in which this resource resides.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/vmmServers"
+              }
+            ]
+          }
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Gets the provisioning state.",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
           "readOnly": true
         }
       }
@@ -3097,51 +3037,27 @@
     "AvailabilitySet": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource",
+          "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'"
+        }
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Resource properties.",
           "$ref": "#/definitions/AvailabilitySetProperties"
         },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
-        },
-        "location": {
-          "description": "Gets or sets the location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system data."
-        },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extended location."
         }
       },
+      "required": [
+        "properties",
+        "extendedLocation"
+      ],
       "description": "The AvailabilitySets resource definition."
     },
     "AvailabilitySetListResult": {
@@ -3157,7 +3073,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Url to follow for getting next page of resources."
+          "description": "Url to follow for getting next page of resources.",
+          "format": "uri",
+          "readOnly": true
         }
       }
     },
@@ -3170,7 +3088,14 @@
         "properties": {
           "id": {
             "description": "Gets the ARM Id of the microsoft.scvmm/availabilitySets resource.",
-            "type": "string"
+            "type": "string",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ScVmm/availabilitySets"
+                }
+              ]
+            }
           },
           "name": {
             "description": "Gets or sets the name of the availability set.",
@@ -3188,15 +3113,36 @@
         },
         "vmmServerId": {
           "type": "string",
-          "description": "ARM Id of the vmmServer resource in which this resource resides."
+          "description": "ARM Id of the vmmServer resource in which this resource resides.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/vmmServers"
+              }
+            ]
+          }
         },
         "cloudId": {
           "type": "string",
-          "description": "ARM Id of the cloud resource to use for deploying the vm."
+          "description": "ARM Id of the cloud resource to use for deploying the vm.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/clouds"
+              }
+            ]
+          }
         },
         "templateId": {
           "type": "string",
-          "description": "ARM Id of the template resource to use for deploying the vm."
+          "description": "ARM Id of the template resource to use for deploying the vm.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/virtualMachineTemplates"
+              }
+            ]
+          }
         },
         "vmName": {
           "type": "string",
@@ -3274,8 +3220,8 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
           "readOnly": true
         }
       }
@@ -3378,57 +3324,16 @@
         },
         "isHighlyAvailable": {
           "description": "Gets highly available property.",
-          "type": "string"
-        }
-      }
-    },
-    "HardwareProfileUpdate": {
-      "description": "Defines the resource properties.",
-      "type": "object",
-      "properties": {
-        "memoryMB": {
-          "type": "integer",
-          "format": "int32",
-          "description": "MemoryMB is the size of a virtual machine's memory, in MB."
-        },
-        "cpuCount": {
-          "type": "integer",
-          "description": "Gets or sets the number of vCPUs for the vm.",
-          "format": "int32"
-        },
-        "limitCpuForMigration": {
           "type": "string",
-          "description": "Gets or sets a value indicating whether to enable processor compatibility mode for live migration of VMs.",
+          "readOnly": true,
           "enum": [
             "false",
             "true"
           ],
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "LimitCpuForMigration"
+            "name": "IsHighlyAvailable"
           }
-        },
-        "dynamicMemoryEnabled": {
-          "type": "string",
-          "description": "Gets or sets a value indicating whether to enable dynamic memory or not.",
-          "enum": [
-            "false",
-            "true"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "DynamicMemoryEnabled"
-          }
-        },
-        "dynamicMemoryMaxMB": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the max dynamic memory for the vm."
-        },
-        "dynamicMemoryMinMB": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the min dynamic memory for the vm."
         }
       }
     },
@@ -3454,23 +3359,6 @@
         }
       }
     },
-    "NetworkProfileUpdate": {
-      "description": "Defines the resource properties.",
-      "type": "object",
-      "properties": {
-        "networkInterfaces": {
-          "description": "Gets or sets the list of network interfaces associated with the virtual machine.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkInterfacesUpdate"
-          },
-          "x-ms-identifiers": [
-            "name",
-            "nicId"
-          ]
-        }
-      }
-    },
     "NetworkProfile": {
       "description": "Defines the resource properties.",
       "type": "object",
@@ -3479,7 +3367,7 @@
           "description": "Gets or sets the list of network interfaces associated with the virtual machine.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NetworkInterfaces"
+            "$ref": "#/definitions/NetworkInterface"
           },
           "x-ms-identifiers": [
             "name",
@@ -3500,7 +3388,7 @@
       },
       "type": "string"
     },
-    "NetworkInterfaces": {
+    "NetworkInterface": {
       "description": "Network Interface model",
       "type": "object",
       "properties": {
@@ -3535,46 +3423,19 @@
         },
         "virtualNetworkId": {
           "description": "Gets or sets the ARM Id of the Microsoft.ScVmm/virtualNetwork resource to connect the nic.",
-          "type": "string"
+          "type": "string",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/virtualNetwork"
+              }
+            ]
+          }
         },
         "networkName": {
           "description": "Gets the name of the virtual network in vmmServer that the nic is connected to.",
           "type": "string",
           "readOnly": true
-        },
-        "ipv4AddressType": {
-          "description": "Gets or sets the ipv4 address type.",
-          "$ref": "#/definitions/AllocationMethod"
-        },
-        "ipv6AddressType": {
-          "description": "Gets or sets the ipv6 address type.",
-          "$ref": "#/definitions/AllocationMethod"
-        },
-        "macAddressType": {
-          "description": "Gets or sets the mac address type.",
-          "$ref": "#/definitions/AllocationMethod"
-        },
-        "nicId": {
-          "description": "Gets or sets the nic id.",
-          "type": "string"
-        }
-      }
-    },
-    "NetworkInterfacesUpdate": {
-      "description": "Network Interface model",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Gets or sets the name of the network interface.",
-          "type": "string"
-        },
-        "macAddress": {
-          "description": "Gets or sets the nic MAC address.",
-          "type": "string"
-        },
-        "virtualNetworkId": {
-          "description": "Gets or sets the ARM Id of the Microsoft.ScVmm/virtualNetwork resource to connect the nic.",
-          "type": "string"
         },
         "ipv4AddressType": {
           "description": "Gets or sets the ipv4 address type.",
@@ -3867,7 +3728,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Url to follow for getting next page of resources."
+          "description": "Url to follow for getting next page of resources.",
+          "format": "uri",
+          "readOnly": true
         }
       }
     },
@@ -3886,13 +3749,13 @@
       "type": "object",
       "properties": {
         "hardwareProfile": {
-          "$ref": "#/definitions/HardwareProfileUpdate"
+          "$ref": "#/definitions/HardwareProfile"
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfileUpdate"
         },
         "networkProfile": {
-          "$ref": "#/definitions/NetworkProfileUpdate"
+          "$ref": "#/definitions/NetworkProfile"
         },
         "availabilitySets": {
           "$ref": "#/definitions/AvailabilitySetList"
@@ -3929,7 +3792,14 @@
         },
         "vmmServerId": {
           "type": "string",
-          "description": "ARM Id of the vmmServer resource in which this resource resides."
+          "description": "ARM Id of the vmmServer resource in which this resource resides.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/vmmServers"
+              }
+            ]
+          }
         },
         "osType": {
           "description": "Gets the type of the os.",
@@ -4012,7 +3882,15 @@
         "isHighlyAvailable": {
           "description": "Gets highly available property.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "false",
+            "true"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IsHighlyAvailable"
+          }
         },
         "generation": {
           "type": "integer",
@@ -4024,7 +3902,7 @@
           "description": "Gets the network interfaces of the template.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NetworkInterfaces"
+            "$ref": "#/definitions/NetworkInterface"
           },
           "x-ms-identifiers": [
             "name",
@@ -4045,8 +3923,8 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
           "readOnly": true
         }
       }
@@ -4054,45 +3932,17 @@
     "VirtualMachineTemplate": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource",
+          "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'"
+        }
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Resource properties.",
           "$ref": "#/definitions/VirtualMachineTemplateProperties"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
-        },
-        "location": {
-          "description": "Gets or sets the location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system data."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4100,7 +3950,6 @@
         }
       },
       "required": [
-        "location",
         "properties",
         "extendedLocation"
       ],
@@ -4119,7 +3968,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Url to follow for getting next page of resources."
+          "description": "Url to follow for getting next page of resources.",
+          "format": "uri",
+          "readOnly": true
         }
       }
     },
@@ -4129,7 +3980,9 @@
       "properties": {
         "nextLink": {
           "description": "Url to follow for getting next page of InventoryItems.",
-          "type": "string"
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
         },
         "value": {
           "description": "Array of InventoryItems",
@@ -4196,8 +4049,8 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
           "readOnly": true
         }
       }
@@ -4345,7 +4198,9 @@
       "properties": {
         "nextLink": {
           "description": "Url to follow for getting next page of HybridIdentityMetadata.",
-          "type": "string"
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
         },
         "value": {
           "description": "Array of HybridIdentityMetadata",
@@ -4394,8 +4249,8 @@
           "type": "string"
         },
         "provisioningState": {
-          "description": "Gets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
           "readOnly": true
         }
       }
@@ -4483,7 +4338,9 @@
       "properties": {
         "nextLink": {
           "description": "Url to follow for getting next page of GuestAgent.",
-          "type": "string"
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
         },
         "value": {
           "description": "Array of GuestAgent",
@@ -4551,8 +4408,8 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets the provisioning state.",
-          "type": "string",
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
           "readOnly": true
         }
       }
@@ -4602,6 +4459,24 @@
         }
       },
       "description": "Object containing tags updates for patch operations."
+    },
+    "ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted",
+        "Created"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
