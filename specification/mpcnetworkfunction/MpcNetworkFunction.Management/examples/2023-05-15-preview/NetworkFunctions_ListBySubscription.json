@@ -1,20 +1,27 @@
 {
-  "operationId": "NetworkFunctions_ListByResourceGroup",
-  "title": "NetworkFunctions_ListByResourceGroup",
+  "operationId": "NetworkFunctions_ListBySubscription",
+  "title": "NetworkFunctions_ListBySubscription",
   "parameters": {
     "api-version": "2023-05-15-preview",
-    "subscriptionId": "sub1",
-    "resourceGroupName": "rg1"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/sub1/resourceGroups/rg1/providers/Microsoft.MobilePacketCore/networkFunctions/nf1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobilePacketCore/networkFunctions/nf1",
             "name": "nf1",
             "type": "Microsoft.MobilePacketCore/networkFunctions",
             "location": "global",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2023-06-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-06-02T17:18:19.1234567Z"
+            },
             "properties": {
               "sku": "NexusProduction",
               "networkFunctionType": "SMF",

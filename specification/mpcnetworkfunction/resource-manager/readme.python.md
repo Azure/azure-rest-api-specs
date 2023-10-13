@@ -10,6 +10,17 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.MobilePacketCore
   package-name: mobileCore
+  package-version: 2023-10-15
+  clear-output-folder: true
+```
+
+```yaml $(python)
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: Microsoft.MobilePacketCore
+  package-name: mobileCore
   package-version: 2023-05-15-preview
   clear-output-folder: true
 ```
