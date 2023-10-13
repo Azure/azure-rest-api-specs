@@ -2720,10 +2720,6 @@
           "type": "string",
           "description": "The edition of the Operating System."
         },
-        "machineType": {
-          "$ref": "#/definitions/MachineType",
-          "description": "The machine type."
-        },
         "domainName": {
           "readOnly": true,
           "type": "string",
@@ -3481,7 +3477,6 @@
       "readOnly": true,
       "type": "string",
       "enum": [
-        "Unknown",
         "Unlicensed",
         "Licensed",
         "OOBGrace",
@@ -3495,20 +3490,6 @@
         "modelAsString": true
       },
       "description": "The license status."
-    },
-    "MachineType": {
-      "readOnly": true,
-      "type": "string",
-      "enum": [
-        "Unknown",
-        "VM",
-        "Native"
-      ],
-      "x-ms-enum": {
-        "name": "MachineType",
-        "modelAsString": true
-      },
-      "description": "The machine type."
     },
     "LicenseProfileSubscriptionStatus": {
       "type": "string",
