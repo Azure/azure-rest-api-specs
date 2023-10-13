@@ -911,6 +911,7 @@
             "in": "path",
             "required": true,
             "description": "Name of the Monitors resource",
+            "pattern":"^.*$",
             "type": "string"
           }
         ],
@@ -960,6 +961,7 @@
             "in": "path",
             "required": true,
             "description": "Name of the Monitors resource",
+            "pattern":"^.*$",
             "type": "string"
           }
         ],
@@ -1543,7 +1545,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConnectedPartnerResourcesListFormat"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
