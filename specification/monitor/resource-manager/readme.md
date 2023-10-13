@@ -1259,14 +1259,10 @@ directive:
     from: privateLinkScopes_API.json
     where: $.definitions.PrivateEndpointConnectionProperties.properties.ingestOnlyToPrivateLinkResources
     reason: 'This property indicates whether data coming through this private endpoint should restrict itself only to resources in the scope - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
-  - suppress: OperationsAPIImplementation
-    from: privateLinkScopes_API.json
-    where: $.paths
-    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
   - suppress: ResourceNameRestriction
     from: privateLinkScopes_API.json
     where: $.paths
-    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+    reason: 'Adding a resource name restriction would result in a breaking change'
   - suppress: R3016
     reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
   - suppress: OperationsAPIImplementation
@@ -1345,6 +1341,10 @@ directive:
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
   - suppress: OperationsAPIImplementation
     from: actionGroups_API.json
+    where: $.paths
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: OperationsAPIImplementation
+    from: privateLinkScopes_API.json
     where: $.paths
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
 ```
