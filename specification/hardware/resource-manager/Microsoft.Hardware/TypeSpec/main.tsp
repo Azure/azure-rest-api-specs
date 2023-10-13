@@ -325,7 +325,7 @@ alias DefaultProviderNamespace = {
 interface OrderPreviewInterface {
 @armResourceCollectionAction
   @armProviderNameValue
-  @doc("Implements orderPreview operations")
+  @doc("Enables preview of hardware order for passed orderlines by populating fees, taxes, shipping estimates.")
   @Autorest.example("./examples/Orders_Preview.json","OrderPreview")
   @TypeSpec.Rest.action("orderPreview")
   @post
