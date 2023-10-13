@@ -3,6 +3,7 @@ import "@typespec/http";
 namespace ImageAnalysis;
 using TypeSpec.Http;
 
+@doc("Query parameters used for the analyze operator")
 model SharedAnalyzeQuery {
     @query({
       name: "features",
@@ -31,6 +32,7 @@ model SharedAnalyzeQuery {
     modelName?: string;
 }
 
+@doc("Query parameters used for the segment operator")
 model SharedSegmentQuery {
   @query("mode")
   @doc("The type of segmentation to perform")
