@@ -1,0 +1,745 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ProgrammableConnectivity",
+    "version": "2023-11-01-preview",
+    "description": "Azure Programmable Connectivity Provider management API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "OpenApiGateways"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/openApiGateways": {
+      "get": {
+        "operationId": "OpenApiGateways_ListBySubscription",
+        "tags": [
+          "OpenApiGateways"
+        ],
+        "description": "List OpenApiGateway resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenApiGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OpenApiGateways_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/OpenApiGateways_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/openApiGateways": {
+      "get": {
+        "operationId": "OpenApiGateways_ListByResourceGroup",
+        "tags": [
+          "OpenApiGateways"
+        ],
+        "description": "List OpenApiGateway resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenApiGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OpenApiGateways_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/OpenApiGateways_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/openApiGateways/{name}": {
+      "get": {
+        "operationId": "OpenApiGateways_Get",
+        "tags": [
+          "OpenApiGateways"
+        ],
+        "description": "Get a OpenApiGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "APC OpenAPI Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenApiGateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenApiGateways_Get_MaximumSet_Gen": {
+            "$ref": "./examples/OpenApiGateways_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "OpenApiGateways_CreateOrUpdate",
+        "tags": [
+          "OpenApiGateways"
+        ],
+        "description": "Create a OpenApiGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "APC OpenAPI Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OpenApiGateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OpenApiGateway' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OpenApiGateway"
+            }
+          },
+          "201": {
+            "description": "Resource 'OpenApiGateway' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OpenApiGateway"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "OpenApiGateways_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/OpenApiGateways_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "OpenApiGateways_Update",
+        "tags": [
+          "OpenApiGateways"
+        ],
+        "description": "Update a OpenApiGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "APC OpenAPI Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OpenApiGatewayUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenApiGateway"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "OpenApiGateways_Update_MaximumSet_Gen": {
+            "$ref": "./examples/OpenApiGateways_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "OpenApiGateways_Delete",
+        "tags": [
+          "OpenApiGateways"
+        ],
+        "description": "Delete a OpenApiGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "APC OpenAPI Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "OpenApiGateways_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/OpenApiGateways_Delete_MaximumSet_Gen.json"
+          },
+          "OpenApiGateways_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/OpenApiGateways_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/openApiGateways/{name}/resetConnection": {
+      "post": {
+        "operationId": "OpenApiGateways_ResetConnection",
+        "tags": [
+          "OpenApiGateways"
+        ],
+        "description": "A long-running resource action that returns no content. DEPRECATED: Use 'ArmResourceActionNoResponseContentAsync' instead",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "APC OpenAPI Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OpenApiGateway"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "OpenApiGateways_ResetConnection_MaximumSet_Gen": {
+            "$ref": "./examples/OpenApiGateways_ResetConnection_MaximumSet_Gen.json"
+          },
+          "OpenApiGateways_ResetConnection_MinimumSet_Gen": {
+            "$ref": "./examples/OpenApiGateways_ResetConnection_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/openApiGateways/{name}/updateCredentials": {
+      "post": {
+        "operationId": "OpenApiGateways_UpdateCredentials",
+        "tags": [
+          "OpenApiGateways"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "APC OpenAPI Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppCredentials"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "OpenApiGateways_UpdateCredentials_MaximumSet_Gen": {
+            "$ref": "./examples/OpenApiGateways_UpdateCredentials_MaximumSet_Gen.json"
+          },
+          "OpenApiGateways_UpdateCredentials_MinimumSet_Gen": {
+            "$ref": "./examples/OpenApiGateways_UpdateCredentials_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccountType": {
+      "type": "string",
+      "description": "The Account Type of the Open API Gateways",
+      "enum": [
+        "AzureManaged",
+        "UserManaged"
+      ],
+      "x-ms-enum": {
+        "name": "AccountType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureManaged",
+            "value": "AzureManaged",
+            "description": "Managed by Azure on-behalf-of the user"
+          },
+          {
+            "name": "UserManaged",
+            "value": "UserManaged",
+            "description": "Managed by the User themselves on the Operator end"
+          }
+        ]
+      }
+    },
+    "AppCredentials": {
+      "type": "object",
+      "description": "Application credentials used to call the operator's Network APIs",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "Application ID"
+        },
+        "appSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "Application Secret",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "appId",
+        "appSecret"
+      ]
+    },
+    "OpenApiGateway": {
+      "type": "object",
+      "description": "A Programmable Connectivity Open API Gateway resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OpenApiGatewayProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "OpenApiGatewayListResult": {
+      "type": "object",
+      "description": "The response of a OpenApiGateway list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OpenApiGateway items on this page",
+          "items": {
+            "$ref": "#/definitions/OpenApiGateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OpenApiGatewayProperties": {
+      "type": "object",
+      "description": "APC Gateway properties",
+      "properties": {
+        "gatewayId": {
+          "type": "string",
+          "description": "APC Gateway resource ID linked to this Open API Gateway."
+        },
+        "openApiGatewayOfferingId": {
+          "type": "string",
+          "description": "Reference to the Open API Gateway Offering Resource ID"
+        },
+        "features": {
+          "type": "array",
+          "description": "List of features the user has selected for the current operator in the country provided in the Offering.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "accountType": {
+          "$ref": "#/definitions/AccountType",
+          "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "gatewayId",
+        "openApiGatewayOfferingId",
+        "features",
+        "accountType"
+      ]
+    },
+    "OpenApiGatewayUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the OpenApiGateway.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/OpenApiGatewayUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OpenApiGatewayUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the OpenApiGateway.",
+      "properties": {
+        "gatewayId": {
+          "type": "string",
+          "description": "APC Gateway resource ID linked to this Open API Gateway."
+        },
+        "openApiGatewayOfferingId": {
+          "type": "string",
+          "description": "Reference to the Open API Gateway Offering Resource ID"
+        },
+        "features": {
+          "type": "array",
+          "description": "List of features the user has selected for the current operator in the country provided in the Offering.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "accountType": {
+          "$ref": "#/definitions/AccountType",
+          "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

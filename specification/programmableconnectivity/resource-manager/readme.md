@@ -1,8 +1,8 @@
-# programmableconnectivity
+# ProgrammableConnectivity
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for programmableconnectivity.
+This is the AutoRest configuration file for Azure Programmable Connectivity.
 
 ## Getting Started
 
@@ -22,10 +22,11 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the programmableconnectivity.
+These are the global settings for the Azure Programmable Connectivity.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2023-11-01-preview
 ```
 
@@ -35,7 +36,10 @@ These settings apply only when `--tag=package-2023-11-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-11-01-preview'
 input-file:
-  - Microsoft.ProgrammableConnecivity/preview/2023-11-01-preview/programmableconnectivity.json
+  - Microsoft.ProgrammableConnectivity/preview/2023-11-01-preview/Gateways.json
+  - Microsoft.ProgrammableConnectivity/preview/2023-11-01-preview/OpenApiGateways.json
+  - Microsoft.ProgrammableConnectivity/preview/2023-11-01-preview/OpenApiGatewayOfferings.json
+  - Microsoft.ProgrammableConnectivity/preview/2023-11-01-preview/Operations.json
 ```
 
 ---
