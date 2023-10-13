@@ -441,11 +441,11 @@ interface DevBoxesDevCenterOperations {
     {
       @doc("An OData filter clause to apply to the operation.")
       @query
-      filter: string;
+      filter?: string;
 
       @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
       @query
-      top: int32;
+      top?: int32;
     },
     DevBoxListResult
   >;
@@ -457,11 +457,11 @@ interface DevBoxesDevCenterOperations {
     {
       @doc("An OData filter clause to apply to the operation.")
       @query
-      filter: string;
+      filter?: string;
 
       @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
       @query
-      top: int32;
+      top?: int32;
 
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
       @path
