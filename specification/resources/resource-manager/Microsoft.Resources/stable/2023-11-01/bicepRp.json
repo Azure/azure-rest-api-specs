@@ -48,10 +48,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "decompileOperationRequest",
@@ -90,7 +90,7 @@
       "properties": {
         "template": {
           "type": "string",
-          "description": "ARM json template to be decompiled into a Bicep file"
+          "description": "The ARM json template to be decompiled into a Bicep file"
         }
       }
     },
@@ -104,14 +104,14 @@
       "properties": {
         "files": {
           "type": "object",
-          "description": "ARM json template",
+          "description": "A dictionary containing the entryPoint string as the key for the Bicep file decompiled from the ARM json template",
           "additionalProperties": {
             "type": "string"
           }
         },
         "entryPoint": {
           "type": "string",
-          "description": "ARM json template"
+          "description": "The entry point into the files dictionary."
         }
       }
     },
@@ -123,24 +123,6 @@
         }
       },
       "description": "decompileBicep error response."
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client",
-      "description": "Subscription Id which forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client",
-      "description": "Client Api version."
     }
   }
 }
