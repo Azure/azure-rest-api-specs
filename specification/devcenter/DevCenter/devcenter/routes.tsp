@@ -16,11 +16,11 @@ interface DevCenterOperations {
     {
       @doc("An OData filter clause to apply to the operation.")
       @query
-      filter: string;
+      filter?: string;
 
       @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
       @query
-      top: int32;
+      top?: int32;
     },
     ProjectListResult
   >;
