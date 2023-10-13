@@ -101,10 +101,10 @@ interface JobRouterRestClient {
     unassignJob is  AzureCommunicationRoutingService.JobRouterOperations.unassignJobAction;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    acceptJob is  AzureCommunicationRoutingService.JobRouterOperations.acceptJobAction;
+    acceptJobOffer is  AzureCommunicationRoutingService.JobRouterOperations.acceptJobAction;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    declineJob is  AzureCommunicationRoutingService.JobRouterOperations.declineJobAction;
+    declineJobOffer is  AzureCommunicationRoutingService.JobRouterOperations.declineJobAction;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     getQueueStatistics is  AzureCommunicationRoutingService.JobRouterOperations.getQueueStatistics;
