@@ -325,7 +325,12 @@
         "remoteAccountName": {
           "type": "string"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataTransferDataSourceSink"
+        }
+      ]
     },
     "CosmosCassandraDataTransferDataSourceSink": {
       "type": "object",
@@ -339,9 +344,6 @@
         }
       },
       "allOf": [
-        {
-          "$ref": "#/definitions/DataTransferDataSourceSink"
-        },
         {
           "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
         }
@@ -365,9 +367,6 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/DataTransferDataSourceSink"
-        },
-        {
           "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
         }
       ],
@@ -389,9 +388,6 @@
         }
       },
       "allOf": [
-        {
-          "$ref": "#/definitions/DataTransferDataSourceSink"
-        },
         {
           "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
         }
