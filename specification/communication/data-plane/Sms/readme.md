@@ -38,6 +38,9 @@ suppressions:
  - code: IntegerTypeMustHaveFormat
    from: communicationservicessms.json
    reason: Integer type for HttpStatusCode was not part of any previous version. Trying to add it signals breaking changes.
+ - code: XmsEnumValidation
+   from: communicationservicessms.json
+   reason: In the stable version repeatabilityResult has enum with accepted/rejected. Also SDK generation of SmsSendResponseItemRepeatabilityResult will fail without it.
 ```
 
 ### Tag: package-2020-07-20-preview1
