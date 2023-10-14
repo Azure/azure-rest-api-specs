@@ -1,0 +1,28 @@
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+import "../virtualEnclave/virtualenclave.tsp";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+
+@doc("Request to the action call to check address space availability.")
+model CheckAddressSpaceAvailabilityRequest {
+  @doc("Resource Id of the Community")
+  communityResourceId: string;
+
+  @doc("Information about the enclave virtual network")
+  enclaveVirtualNetwork: EnclaveVirtualNetwork;
+}
+
+@doc("Response of availability of the requested address space.")
+model CheckAddressSpaceAvailabilityResponse {
+  @doc("Boolean representing whether the address space is available.")
+  value: boolean;
+}
