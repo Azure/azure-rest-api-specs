@@ -9017,6 +9017,235 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}": {
+      "get": {
+        "tags": [
+          "PerimeterAssociationProxies"
+        ],
+        "summary": "Get a specific network security perimeter configuration.",
+        "description": "Get a specific network security perimeter configuration with a topic or domain.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource. This can be either \\'topics\\', or \\'domains\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains",
+              "partnerNamespaces"
+            ]
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource (namely, either, the topic name or domain name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "perimeterGuid",
+            "in": "path",
+            "description": "Unique identifier for perimeter",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "associationName",
+            "in": "path",
+            "description": "Association name to association network security perimeter resource to profile",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfigurations_Get": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurations_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile": {
+      "post": {
+        "tags": [
+          "PerimeterAssociationProxies"
+        ],
+        "summary": "Reconcile a specific network security perimeter configuration for a given network security perimeter association.",
+        "description": "Reconcile a specific network security perimeter configuration for a given network security perimeter association with a topic or domain.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource. This can be either \\'topics\\' or \\'domains\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains",
+              "partnerNamespaces"
+            ]
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource (namely, either, the topic name or domain name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "perimeterGuid",
+            "in": "path",
+            "description": "Unique identifier for perimeter",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "associationName",
+            "in": "path",
+            "description": "Association name to association network security perimeter resource to profile",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfigurations_Reconcile": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurations_Reconcile.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "PerimeterAssociationProxies"
+        ],
+        "summary": "Get all network security perimeter configurations for resource.",
+        "description": "Get all network security perimeter configurations associated with a topic or domain.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource. This can be either \\'topics\\' or \\'domains\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains",
+              "partnerNamespaces"
+            ]
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource (namely, either, the topic name or domain name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationList"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfigurations_List": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/permissionBindings/{permissionBindingName}": {
       "get": {
         "tags": [
@@ -11792,10 +12021,6 @@
           "description": "The name presented by the client for authentication. The default value is the name of the resource.",
           "type": "string"
         },
-        "authentication": {
-          "$ref": "#/definitions/ClientAuthentication",
-          "description": "Authentication information for the client."
-        },
         "clientCertificateAuthentication": {
           "$ref": "#/definitions/ClientCertificateAuthentication",
           "description": "The client certificate authentication information."
@@ -11838,20 +12063,6 @@
         }
       }
     },
-    "ClientAuthentication": {
-      "description": "The Authentication properties for the client.",
-      "type": "object",
-      "properties": {
-        "certificateThumbprint": {
-          "$ref": "#/definitions/ClientCertificateThumbprint",
-          "description": "The self signed certificate's thumbprints data used for authentication."
-        },
-        "certificateSubject": {
-          "$ref": "#/definitions/ClientCertificateSubjectDistinguishedName",
-          "description": "The CA certificate subject name used for authentication."
-        }
-      }
-    },
     "ClientCertificateAuthentication": {
       "description": "The certificate authentication properties for the client.",
       "type": "object",
@@ -11878,50 +12089,6 @@
           "items": {
             "type": "string"
           }
-        }
-      }
-    },
-    "ClientCertificateThumbprint": {
-      "description": "Thumbprints are used by the service to validate the device permission when authentication is done using self signed certificate.",
-      "type": "object",
-      "properties": {
-        "primary": {
-          "description": "The primary thumbprint used for validation.",
-          "type": "string"
-        },
-        "secondary": {
-          "description": "The secondary thumbprint used for validation.",
-          "type": "string"
-        }
-      }
-    },
-    "ClientCertificateSubjectDistinguishedName": {
-      "description": "CA certificate subject distinguished name information used by service to authenticate clients.\r\nFor more information, see https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.x509certificates.x500distinguishedname?view=net-6.0#remarks",
-      "type": "object",
-      "properties": {
-        "commonName": {
-          "description": "The common name field in the subject name. The allowed limit is 64 characters and it should be specified.",
-          "maxLength": 64,
-          "minLength": 0,
-          "type": "string"
-        },
-        "organization": {
-          "description": "The organization field in the subject name. If present, the allowed limit is 64 characters.",
-          "maxLength": 64,
-          "minLength": 0,
-          "type": "string"
-        },
-        "organizationUnit": {
-          "description": "The organization unit field in the subject name. If present, the allowed limit is 32 characters.",
-          "maxLength": 32,
-          "minLength": 0,
-          "type": "string"
-        },
-        "countryCode": {
-          "description": "The country code field in the subject name. If present, the country code should be represented by two-letter code defined in ISO 2166-1 (alpha-2). For example: 'US'.",
-          "maxLength": 2,
-          "minLength": 2,
-          "type": "string"
         }
       }
     },
@@ -12041,7 +12208,8 @@
           "description": "This determines if traffic is allowed over public network. By default it is enabled.\r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.DomainProperties.InboundIpRules\" />",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -12472,7 +12640,8 @@
           "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.DomainUpdateParameterProperties.InboundIpRules\" />",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -12793,7 +12962,8 @@
         "deliveryMode": {
           "description": "Delivery mode of the event subscription.",
           "enum": [
-            "Queue"
+            "Queue",
+            "Push"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -12804,6 +12974,10 @@
         "queue": {
           "$ref": "#/definitions/QueueInfo",
           "description": "This property should be populated when deliveryMode is queue and represents information about the queue subscription."
+        },
+        "push": {
+          "$ref": "#/definitions/PushInfo",
+          "description": "This property should be populated when deliveryMode is push and represents information about the push subscription."
         }
       }
     },
@@ -13615,6 +13789,29 @@
         }
       }
     },
+    "PushInfo": {
+      "description": "Properties of the destination info for event subscription supporting push.",
+      "type": "object",
+      "properties": {
+        "maxDeliveryCount": {
+          "format": "int32",
+          "description": "The maximum delivery count of the events.",
+          "type": "integer"
+        },
+        "eventTimeToLive": {
+          "description": "Time span duration in ISO 8601 format that determines how long messages are available to the subscription from the time the message was published.\r\nThis duration value is expressed using the following format: \\'P(n)Y(n)M(n)DT(n)H(n)M(n)S\\', where:\r\n    - (n) is replaced by the value of each time element that follows the (n).\r\n    - P is the duration (or Period) designator and is always placed at the beginning of the duration.\r\n    - Y is the year designator, and it follows the value for the number of years.\r\n    - M is the month designator, and it follows the value for the number of months.\r\n    - W is the week designator, and it follows the value for the number of weeks.\r\n    - D is the day designator, and it follows the value for the number of days.\r\n    - T is the time designator, and it precedes the time components.\r\n    - H is the hour designator, and it follows the value for the number of hours.\r\n    - M is the minute designator, and it follows the value for the number of minutes.\r\n    - S is the second designator, and it follows the value for the number of seconds.\r\nThis duration value cannot be set greater than the topic’s EventRetentionInDays. It is is an optional field where its minimum value is 1 minute, and its maximum is determined\r\nby topic’s EventRetentionInDays value. The followings are examples of valid values:\r\n    - \\'P0DT23H12M\\' or \\'PT23H12M\\': for duration of 23 hours and 12 minutes.\r\n    - \\'P1D\\' or \\'P1DT0H0M0S\\': for duration of 1 day.",
+          "type": "string"
+        },
+        "deadLetterDestinationWithResourceIdentity": {
+          "$ref": "#/definitions/DeadLetterWithResourceIdentity",
+          "description": "The dead letter destination of the event subscription. Any event that cannot be delivered to its' destination is sent to the dead letter destination.\r\nUses the managed identity setup on the parent resource (namely, namespace) to acquire the authentication tokens being used during delivery / dead-lettering."
+        },
+        "deliveryWithResourceIdentity": {
+          "$ref": "#/definitions/DeliveryWithResourceIdentity",
+          "description": "Information about the destination where events have to be delivered for the event subscription.\r\nUses the managed identity setup on the parent resource (namely, topic or domain) to acquire the authentication tokens being used during delivery / dead-lettering."
+        }
+      }
+    },
     "NumberInAdvancedFilter": {
       "description": "NumberIn Advanced Filter.",
       "type": "object",
@@ -14296,6 +14493,98 @@
       },
       "x-ms-discriminator-value": "PartnerDestination"
     },
+    "MonitorAlertEventSubscriptionDestinationProperties": {
+      "description": "The properties that represent the Monitor Alert destination of an event subscription.",
+      "type": "object",
+      "properties": {
+        "severity": {
+          "description": "The severity that will be attached to every Alert fired through this event subscription.\r\nThis field must be provided.",
+          "enum": [
+            "Sev0",
+            "Sev1",
+            "Sev2",
+            "Sev3",
+            "Sev4"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MonitorAlertSeverity",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "The description that will be attached to every Alert fired through this event subscription.",
+          "type": "string"
+        },
+        "actionGroups": {
+          "format": "arm-id",
+          "description": "The list of ARM Ids of Action Groups that will be triggered on every Alert fired through this event subscription.\r\nEach resource ARM Id should follow this pattern: /subscriptions/{AzureSubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Insights/actionGroups/{ActionGroupName}.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Insights/actiongroups"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "MonitorAlertEventSubscriptionDestination": {
+      "description": "Information about the Monitor Alert destination for an event subscription.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventSubscriptionDestination"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MonitorAlertEventSubscriptionDestinationProperties",
+          "description": "Monitor Alert properties of the event subscription destination.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "MonitorAlert"
+    },
+    "NamespaceTopicEventSubscriptionDestinationProperties": {
+      "description": "The properties that represent the Event Grid Namespace Topic destination of an event subscription.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "format": "arm-id",
+          "description": "The Azure resource Id that represents the endpoint of the Event Grid Namespace Topic destination of an event subscription.\r\nThis field is required and the Namespace Topic resource listed must already exist.\r\nThe resource ARM Id should follow this pattern: /subscriptions/{AzureSubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.EventGrid/namespaces/{NamespaceName}/topics/{TopicName}.",
+          "type": "string",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.EventGrid/namespaces/topics"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "NamespaceTopicEventSubscriptionDestination": {
+      "description": "Information about the Namespace Topic destination for an event subscription.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventSubscriptionDestination"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NamespaceTopicEventSubscriptionDestinationProperties",
+          "description": "Namespace Topic properties of the event subscription destination.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "NamespaceTopic"
+    },
     "EventSubscriptionDestination": {
       "description": "Information about the destination for an event subscription.",
       "required": [
@@ -14313,7 +14602,9 @@
             "ServiceBusQueue",
             "ServiceBusTopic",
             "AzureFunction",
-            "PartnerDestination"
+            "PartnerDestination",
+            "MonitorAlert",
+            "NamespaceTopic"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -14468,14 +14759,15 @@
           "description": "Topic spaces configuration information for the namespace resource"
         },
         "isZoneRedundant": {
-          "description": "Allows the user to specify if the service is zone-redundant. This is a required property and user needs to specify this value explicitly.\r\nOnce specified, this property cannot be updated.",
+          "description": "This is an optional property and it allows the user to specify if the namespace resource supports zone-redundancy capability or not. If this\r\nproperty is not specified explicitely by the user, its default value depends on the following conditions:\r\n    a. For Availability Zones enabled regions - The default property value would be true.\r\n    b. For non-Availability Zones enabled regions - The default property value would be false.\r\nOnce specified, this property cannot be updated.",
           "type": "boolean"
         },
         "publicNetworkAccess": {
           "description": "This determines if traffic is allowed over public network. By default it is enabled.\r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.PubSub.NamespaceProperties.InboundIpRules\" />",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -14754,7 +15046,8 @@
           "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.PubSub.NamespaceUpdateParameterProperties.InboundIpRules\" />",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -15348,7 +15641,8 @@
           "description": "This determines if traffic is allowed over public network. By default it is enabled.\r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.PartnerNamespaceProperties.InboundIpRules\" />",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -15433,7 +15727,8 @@
           "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.PartnerNamespaceUpdateParameterProperties.InboundIpRules\" />",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -15537,7 +15832,8 @@
         "partnerRegistrationImmutableId": {
           "format": "uuid",
           "description": "The immutableId of the corresponding partner registration.\r\nNote: This property is marked for deprecation and is not supported in any future GA API version",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -15713,6 +16009,299 @@
         "nextLink": {
           "description": "A link for the next page of partner topics.",
           "type": "string"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "description": "Network security perimeter configuration information to reflect latest association and nsp profile configuration.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state to reflect configuration state and indicate status of nsp profile configuration retrieval.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "Deleted",
+            "Accepted"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkSecurityPerimeterConfigProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "provisioningIssues": {
+          "description": "Provisioning issues to reflect status when attempting to retrieve nsp profile configuration.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationIssues"
+          }
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterInfo",
+          "description": "Perimeter info for nsp association."
+        },
+        "resourceAssociation": {
+          "$ref": "#/definitions/ResourceAssociation",
+          "description": "Nsp association name and access mode of association."
+        },
+        "profile": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProfile",
+          "description": "Nsp profile configuration, access rules and diagnostic settings."
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationIssues": {
+      "description": "Network security perimeter configuration issues.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Provisioning issue name.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationIssuesProperties",
+          "description": "Provisioning issue properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterInfo": {
+      "description": "Network security perimeter info.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Arm id for network security perimeter.",
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "description": "Network security perimeter guid.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Network security perimeter location.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceAssociation": {
+      "description": "Nsp resource association",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Association name",
+          "type": "string"
+        },
+        "accessMode": {
+          "description": "Network security perimeter access mode.",
+          "enum": [
+            "Learning",
+            "Enforced",
+            "Audit"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkSecurityPerimeterAssociationAccessMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationProfile": {
+      "description": "Nsp configuration with profile information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Nsp configuration profile name.",
+          "type": "string"
+        },
+        "accessRulesVersion": {
+          "description": "Access rules version number for nsp profile.",
+          "type": "string"
+        },
+        "accessRules": {
+          "description": "List of inbound or outbound access rule setup on the nsp profile.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterProfileAccessRule"
+          }
+        },
+        "diagnosticSettingsVersion": {
+          "description": "Diagnostic settings version number for nsp profile.",
+          "type": "string"
+        },
+        "enabledLogCategories": {
+          "description": "Enabled log categories for nsp profile.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationIssuesProperties": {
+      "description": "Network security perimeter configuration issues properties.",
+      "type": "object",
+      "properties": {
+        "issueType": {
+          "description": "Provisioning issue type.",
+          "enum": [
+            "MissingPerimeterConfiguration",
+            "MissingIdentityConfiguration",
+            "ConfigurationPropagationFailure",
+            "Other"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkSecurityPerimeterConfigurationIssueType",
+            "modelAsString": true
+          }
+        },
+        "severity": {
+          "description": "Provisioning issue severity.",
+          "enum": [
+            "Warning",
+            "Error"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkSecurityPerimeterConfigurationIssueSeverity",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Provisioning issue description.",
+          "type": "string"
+        },
+        "suggestedResourceIds": {
+          "description": "ARM IDs of resources that can be associated to the same perimeter to remediate the issue.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suggestedAccessRules": {
+          "description": "Access rules that can be added to the same profile to remediate the issue.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NetworkSecurityPerimeterProfileAccessRule": {
+      "description": "Network security perimeter profile access rule.",
+      "type": "object",
+      "properties": {
+        "fullyQualifiedArmId": {
+          "description": "Fully Qualified Arm id for network security perimeter profile access rule.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name for nsp access rule.",
+          "type": "string"
+        },
+        "type": {
+          "description": "nsp access rule type.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterProfileAccessRuleProperties",
+          "description": "NSP access rule properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterProfileAccessRuleProperties": {
+      "description": "Network security perimeter profile access rule properties",
+      "type": "object",
+      "properties": {
+        "direction": {
+          "description": "NSP access rule direction",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkSecurityPerimeterProfileAccessRuleDirection",
+            "modelAsString": true
+          }
+        },
+        "addressPrefixes": {
+          "description": "Address prefixes",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subscriptions": {
+          "description": "Subscriptions",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "networkSecurityPerimeters": {
+          "description": "Network security perimeters",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterInfo"
+          }
+        },
+        "fullyQualifiedDomainNames": {
+          "description": "Fully qualified domain names",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAddresses": {
+          "description": "email addresses",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phoneNumbers": {
+          "description": "phone numbers",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfiguration": {
+      "description": "Network security perimeter configuration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Properties of the network security perimeter configuration.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationList": {
+      "description": "Network security perimeter configuration List.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of all network security parameter configurations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          }
         }
       }
     },
@@ -16056,7 +16645,8 @@
           "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.TopicProperties.InboundIpRules\" />",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -16187,7 +16777,8 @@
           "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.TopicUpdateParameterProperties.InboundIpRules\" />",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -16486,7 +17077,7 @@
           }
         },
         "provisioningState": {
-          "description": "Provisioning state of the topic type",
+          "description": "Provisioning state of the topic type.",
           "enum": [
             "Creating",
             "Updating",
@@ -16530,7 +17121,25 @@
           }
         },
         "areRegionalAndGlobalSourcesSupported": {
-          "description": "Flag to indicate that a topic type can support both regional or global system topics",
+          "description": "Flag to indicate that a topic type can support both regional or global system topics.",
+          "type": "boolean"
+        },
+        "additionalEnforcedPermissions": {
+          "description": "Permissions which are enforced for creating and updating system topics of this this topic type.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TopicTypeAdditionalEnforcedPermision"
+          }
+        }
+      }
+    },
+    "TopicTypeAdditionalEnforcedPermision": {
+      "type": "object",
+      "properties": {
+        "PermissionName": {
+          "type": "string"
+        },
+        "IsDataAction": {
           "type": "boolean"
         }
       }
