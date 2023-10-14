@@ -6,7 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using TypeSpec.Versioning;
-using DevCenter;
+using DevCenterService;
 using Azure.ClientGenerator.Core;
 
 @useDependency(APIVersions.v2023_04_01)
@@ -14,85 +14,85 @@ namespace SDKCustomizations;
 
 @client({
     name: "DevCenterClient",
-    service: DevCenter,
+    service: DevCenterService,
 })
 interface DevCenterClientOperations {
     @convenientAPI(false)
-    ListProjects is DevCenter.DevCenterOperations.ListProjects;
+    ListProjects is DevCenterService.DevCenterOperations.ListProjects;
     @convenientAPI(false)
-    GetProject is DevCenter.DevCenterOperations.GetProject;
+    GetProject is DevCenterService.DevCenterOperations.GetProject;
 }
 
 @client({
     name: "DevBoxesClient",
-    service: DevCenter,
+    service: DevCenterService,
 })
 interface DevBoxesClientOperations {
     @convenientAPI(false)
-    ListPools is DevCenter.DevBoxesOperations.ListPools;
+    ListPools is DevCenterService.DevBoxesOperations.ListPools;
     @convenientAPI(false)
-    GetPool is DevCenter.DevBoxesOperations.GetPool;
+    GetPool is DevCenterService.DevBoxesOperations.GetPool;
     @convenientAPI(false)
-    ListSchedules is DevCenter.DevBoxesOperations.ListSchedules;
+    ListSchedules is DevCenterService.DevBoxesOperations.ListSchedules;
     @convenientAPI(false)
-    GetSchedule is DevCenter.DevBoxesOperations.GetSchedule;
+    GetSchedule is DevCenterService.DevBoxesOperations.GetSchedule;
     @convenientAPI(false)
-    ListAllDevBoxes is DevCenter.DevBoxesDevCenterOperations.ListAllDevBoxes;
+    ListAllDevBoxes is DevCenterService.DevBoxesDevCenterOperations.ListAllDevBoxes;
     @convenientAPI(false)
-    ListAllDevBoxesByUser is DevCenter.DevBoxesDevCenterOperations.ListAllDevBoxesByUser;
+    ListAllDevBoxesByUser is DevCenterService.DevBoxesDevCenterOperations.ListAllDevBoxesByUser;
     @convenientAPI(false)
-    ListDevBoxes is DevCenter.DevBoxesOperations.ListDevBoxes;
+    ListDevBoxes is DevCenterService.DevBoxesOperations.ListDevBoxes;
     @convenientAPI(false)
-    GetDevBox is DevCenter.DevBoxesOperations.GetDevBox;
+    GetDevBox is DevCenterService.DevBoxesOperations.GetDevBox;
     @convenientAPI(false)
-    CreateDevBox is DevCenter.DevBoxesOperations.CreateDevBox;
+    CreateDevBox is DevCenterService.DevBoxesOperations.CreateDevBox;
     @convenientAPI(false)
-    DeleteDevBox is DevCenter.DevBoxesOperations.DeleteDevBox;
+    DeleteDevBox is DevCenterService.DevBoxesOperations.DeleteDevBox;
     @convenientAPI(false)
-    StartDevBox is DevCenter.DevBoxesOperations.StartDevBox;
+    StartDevBox is DevCenterService.DevBoxesOperations.StartDevBox;
     @convenientAPI(false)
-    StopDevBox is DevCenter.DevBoxesOperations.StopDevBox;
+    StopDevBox is DevCenterService.DevBoxesOperations.StopDevBox;
     @convenientAPI(false)
-    RestartDevBox is DevCenter.DevBoxesOperations.RestartDevBox;
+    RestartDevBox is DevCenterService.DevBoxesOperations.RestartDevBox;
     @convenientAPI(false)
-    GetRemoteConnection is DevCenter.DevBoxesOperations.GetRemoteConnection;
+    GetRemoteConnection is DevCenterService.DevBoxesOperations.GetRemoteConnection;
     @convenientAPI(false)
-    ListActions is DevCenter.DevBoxesOperations.ListActions;
+    ListActions is DevCenterService.DevBoxesOperations.ListActions;
     @convenientAPI(false)
-    GetAction is DevCenter.DevBoxesOperations.GetAction;
+    GetAction is DevCenterService.DevBoxesOperations.GetAction;
     @convenientAPI(false)
-    SkipAction is DevCenter.DevBoxesOperations.SkipAction;
+    SkipAction is DevCenterService.DevBoxesOperations.SkipAction;
     @convenientAPI(false)
-    DelayAction is DevCenter.DevBoxesOperations.DelayAction;
+    DelayAction is DevCenterService.DevBoxesOperations.DelayAction;
     @convenientAPI(false)
-    DelayAllActions is DevCenter.DevBoxesOperations.DelayAllActions;
+    DelayAllActions is DevCenterService.DevBoxesOperations.DelayAllActions;
 }
 
 @client({
     name: "DeploymentEnvironmentsClient",
-    service: DevCenter,
+    service: DevCenterService,
 })
 interface EnvironmentClientOperations {
     @convenientAPI(false)
-    ListAllEnvironments is DevCenter.EnvironmentsOperations.ListAllEnvironments;
+    ListAllEnvironments is DevCenterService.EnvironmentsOperations.ListAllEnvironments;
     @convenientAPI(false)
-    ListEnvironments is DevCenter.EnvironmentsOperations.ListEnvironments;
+    ListEnvironments is DevCenterService.EnvironmentsOperations.ListEnvironments;
     @convenientAPI(false)
-    GetEnvironment is DevCenter.EnvironmentsOperations.GetEnvironment;
+    GetEnvironment is DevCenterService.EnvironmentsOperations.GetEnvironment;
     @convenientAPI(false)
-    CreateOrUpdateEnvironment is DevCenter.EnvironmentsOperations.CreateOrUpdateEnvironment;
+    CreateOrUpdateEnvironment is DevCenterService.EnvironmentsOperations.CreateOrUpdateEnvironment;
     @convenientAPI(false)
-    DeleteEnvironment is DevCenter.EnvironmentsOperations.DeleteEnvironment;
+    DeleteEnvironment is DevCenterService.EnvironmentsOperations.DeleteEnvironment;
     @convenientAPI(false)
-    ListCatalogs is DevCenter.EnvironmentsOperations.ListCatalogs;
+    ListCatalogs is DevCenterService.EnvironmentsOperations.ListCatalogs;
     @convenientAPI(false)
-    GetCatalog is DevCenter.EnvironmentsOperations.GetCatalog;
+    GetCatalog is DevCenterService.EnvironmentsOperations.GetCatalog;
     @convenientAPI(false)
-    ListEnvironmentDefinitions is DevCenter.EnvironmentsOperations.ListEnvironmentDefinitions;
+    ListEnvironmentDefinitions is DevCenterService.EnvironmentsOperations.ListEnvironmentDefinitions;
     @convenientAPI(false)
-    ListEnvironmentDefinitionsByCatalog is DevCenter.EnvironmentsOperations.ListEnvironmentDefinitionsByCatalog;
+    ListEnvironmentDefinitionsByCatalog is DevCenterService.EnvironmentsOperations.ListEnvironmentDefinitionsByCatalog;
     @convenientAPI(false)
-    GetEnvironmentDefinition is DevCenter.EnvironmentsOperations.GetEnvironmentDefinition;
+    GetEnvironmentDefinition is DevCenterService.EnvironmentsOperations.GetEnvironmentDefinition;
     @convenientAPI(false)
-    ListEnvironmentTypes is DevCenter.EnvironmentsOperations.ListEnvironmentTypes;
+    ListEnvironmentTypes is DevCenterService.EnvironmentsOperations.ListEnvironmentTypes;
 }

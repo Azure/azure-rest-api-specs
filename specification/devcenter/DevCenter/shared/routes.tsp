@@ -4,7 +4,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace DevCenter;
+namespace DevCenterService;
 
 interface SharedOperations {
     @doc("Get the status of an operation.")

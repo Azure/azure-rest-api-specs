@@ -7,7 +7,7 @@ using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace DevCenter;
+namespace DevCenterService;
 
 op DevCenterBaseResponse<
   TParams extends TypeSpec.Reflection.Model,

@@ -7,7 +7,7 @@ using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace DevCenter;
+namespace DevCenterService;
 
 interface DevBoxesOperations {
   @doc("Lists available pools")

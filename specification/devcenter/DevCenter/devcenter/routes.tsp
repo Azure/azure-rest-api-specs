@@ -6,7 +6,7 @@ using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace DevCenter;
+namespace DevCenterService;
 
 interface DevCenterOperations {
   @doc("Lists all projects.")

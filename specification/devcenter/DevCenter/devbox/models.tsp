@@ -6,7 +6,7 @@ import "../shared/models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace DevCenter;
+namespace DevCenterService;
 
 enum OsType {
   @doc("The Windows operating system.") Windows,

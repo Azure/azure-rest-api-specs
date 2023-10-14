@@ -8,7 +8,7 @@ using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace DevCenter;
+namespace DevCenterService;
 
 interface EnvironmentsOperations {
   @doc("Lists the environments for a project.")
