@@ -80,6 +80,7 @@ interface JobRouterRestClient {
     deleteJob is AzureCommunicationRoutingService.JobRouterOperations.deleteJob;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+    @internal("csharp")
     reclassifyJob is AzureCommunicationRoutingService.JobRouterOperations.reclassifyJobAction;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
