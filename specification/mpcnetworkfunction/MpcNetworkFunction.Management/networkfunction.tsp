@@ -19,7 +19,7 @@ namespace Microsoft.MobilePacketCore;
 model NetworkFunctionResource
   is TrackedResource<NetworkFunctionResourceProperties> {
   @doc("The name of the network function")
-  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
+  @pattern("^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$")
   @minLength(1)
   @maxLength(63)
   @key("networkFunctionName")
