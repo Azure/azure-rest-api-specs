@@ -1211,6 +1211,19 @@
           "format": "int32",
           "description": "Soft delete retention period in days",
           "type": "integer"
+        },
+        "enhancedSecurityState": {
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled",
+            "AlwaysON"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnhancedSecurityState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1799,6 +1812,13 @@
           "x-ms-enum": {
             "name": "SecureScoreLevel",
             "modelAsString": true
+          }
+        },
+        "resourceGuardOperationRequests": {
+          "description": "ResourceGuardOperationRequests on which LAC check will be performed",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
