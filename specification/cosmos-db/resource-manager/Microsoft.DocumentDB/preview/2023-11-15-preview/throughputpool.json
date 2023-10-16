@@ -1,0 +1,586 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Cosmos DB",
+      "description": "Azure Cosmos DB Throughput Pool REST API",
+      "version": "2023-08-15-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
+      }
+    ],
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "scopes": {
+          "user_impersonation": "Impersonate your user account"
+        }
+      }
+    },
+    "paths": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/throughputPools": {
+            "get": {
+                "operationId": "ThroughputPools_List",
+                "x-ms-examples": {
+                "CosmosDBDatabaseAccountList": {
+                    "$ref": "./examples/CosmosDBThroughputPoolList.json"
+                }
+                },
+                "description": "Lists all the Azure Cosmos DB Throughput Pools available under the subscription.",
+                "parameters": [
+                {
+                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+                },
+                {
+                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+                }
+                ],
+                "responses": {
+                "200": {
+                    "description": "The operation completed successfully.",
+                    "schema": {
+                    "$ref": "#/definitions/ThroughputPoolsListResult"
+                    }
+                }
+                },
+                "x-ms-pageable": {
+                "nextLinkName": null
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputPools/{poolName}": {
+        "get": {
+            "operationId": "ThroughputPool_Get",
+            "x-ms-examples": {
+            "CosmosDBDatabaseAccountGet": {
+                "$ref": "./examples/CosmosDBThroughputPoolGet.json"
+            }
+            },
+            "description": "Retrieves the properties of an existing Azure Cosmos DB Throughput Pool",
+            "parameters": [
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "#/parameters/ThroughputPoolNameParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            }
+            ],
+            "responses": {
+            "200": {
+                "description": "The Throughput Pool properties were retrieved successfully.",
+                "schema": {
+                "$ref": "#/definitions/ThroughputPoolGetResults"
+                }
+            }
+            }
+        },
+        "patch": {
+            "operationId": "ThroughputPool_Update",
+            "x-ms-examples": {
+            "CosmosDBDatabaseAccountPatch": {
+                "$ref": "./examples/CosmosDBThroughputPoolPatch.json"
+            }
+            },
+            "description": "Updates the properties of an existing Azure Cosmos DB Throughput Pool.",
+            "x-ms-long-running-operation": true,
+            "parameters": [
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "#/parameters/ThroughputPoolNameParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+                "name": "updateParameters",
+                "in": "body",
+                "required": true,
+                "schema": {
+                "$ref": "#/definitions/ThroughputPoolCreateUpdateParameters"
+                },
+                "description": "The parameters to provide for the current Throughput Pool."
+            }
+            ],
+            "responses": {
+            "200": {
+                "description": "The ThroughputPool update operation will complete asynchronously.",
+                "schema": {
+                "$ref": "#/definitions/ThroughputPoolGetResults"
+                }
+            }
+            }
+        },
+        "put": {
+            "operationId": "ThroughputPool_CreateOrUpdate",
+            "description": "Creates or updates an Azure Cosmos DB ThroughputPool account. The \"Update\" method is preferred when performing updates on an account.",
+            "x-ms-long-running-operation": true,
+            "parameters": [
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "#/parameters/ThroughputPoolNameParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+                "name": "createUpdateParameters",
+                "in": "body",
+                "required": true,
+                "schema": {
+                "$ref": "#/definitions/ThroughputPoolCreateUpdateParameters"
+                },
+                "description": "The parameters to provide for the current ThroughputPool."
+            }
+            ],
+            "responses": {
+            "200": {
+                "description": "The ThroughputPool create or update operation will complete asynchronously.",
+                "schema": {
+                "$ref": "#/definitions/ThroughputPoolGetResults"
+                }
+            }
+            }
+        },
+        "delete": {
+            "operationId": "ThroughputPool_Delete",
+            "x-ms-examples": {
+            "CosmosDBDatabaseAccountDelete": {
+                "$ref": "./examples/CosmosDBThroughputPoolDelete.json"
+            }
+            },
+            "description": "Deletes an existing Azure Cosmos DB Throughput Pool.",
+            "x-ms-long-running-operation": true,
+            "parameters": [
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "#/parameters/ThroughputPoolNameParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            }
+            ],
+            "responses": {
+            "202": {
+                "description": "The Throughput Pool delete operation will complete asynchronously.",
+                "headers": {
+                "azure-AsyncOperation": {
+                    "type": "string",
+                    "description": "URI to poll for completion status."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "URI to poll for completion status."
+                }
+                }
+            },
+            "204": {
+                "description": "The specified Throughput Pool does not exist in the subscription."
+            }
+            }
+        }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputPools/{poolName}/throughputPoolAccounts": {
+            "get": {
+                "operationId": "ThroughputPoolAccounts_List",
+                "x-ms-examples": {
+                "CosmosDBDatabaseAccountList": {
+                    "$ref": "./examples/CosmosDBThroughputPoolAccountsList.json"
+                }
+                },
+                "description": "Lists all the Azure Cosmos DB accounts available under the subscription.",
+                "parameters": [
+                {
+                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+                },
+                {
+                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+                },
+                {
+                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+                },
+                {
+                    "$ref": "#/parameters/ThroughputPoolNameParameter"
+                }
+                ],
+                "responses": {
+                "200": {
+                    "description": "The operation completed successfully.",
+                    "schema": {
+                    "$ref": "#/definitions/ThroughputPoolAccountsListResult"
+                    }
+                }
+                },
+                "x-ms-pageable": {
+                "nextLinkName": null
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputPools/{poolName}/throughputPoolAccounts/{poolAccountName}": {
+          "put": {
+            "operationId": "ThroughputPoolAccount_CreateOrUpdate",
+            "description": "Creates or updates an Azure Cosmos DB ThroughputPool account. The \"Update\" method is preferred when performing updates on an account.",
+            "x-ms-long-running-operation": true,
+            "parameters": [
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/ThroughputPoolAccountNameParameter"
+            },
+            {
+                "$ref": "#/parameters/ThroughputPoolNameParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            }
+            ],
+            "responses": {
+            "200": {
+                "description": "The ThroughputPoolAccount create or update operation will complete asynchronously.",
+                "schema": {
+                "$ref": "#/definitions/ThroughputPoolAccountGetResult"
+                }
+            }
+            }
+          },
+          "get": {
+            "operationId": "ThroughputPoolAccount_Get",
+            "x-ms-examples": {
+            "CosmosDBDatabaseAccountGet": {
+                "$ref": "./examples/CosmosDBThroughputPoolAccountGet.json"
+            }
+            },
+            "description": "Retrieves the properties of an existing Azure Cosmos DB Throughput Pool",
+            "parameters": [
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "#/parameters/ThroughputPoolNameParameter"
+            },
+            {
+                "$ref": "#/parameters/ThroughputPoolAccountNameParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            }
+            ],
+            "responses": {
+            "200": {
+                "description": "The Throughput Pool properties were retrieved successfully.",
+                "schema": {
+                "$ref": "#/definitions/ThroughputPoolAccountGetResult"
+                }
+            }
+            }
+          },
+          "delete": {
+            "operationId": "ThroughputPoolAccount_Delete",
+            "x-ms-examples": {
+            "CosmosDBDatabaseAccountDelete": {
+                "$ref": "./examples/CosmosDBThroughputPoolAccountDelete.json"
+            }
+            },
+            "description": "Removes an existing Azure Cosmos DB database account from a throughput pool.",
+            "x-ms-long-running-operation": true,
+            "parameters": [
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "#/parameters/ThroughputPoolNameParameter"
+            },
+            {
+                "$ref": "#/parameters/ThroughputPoolAccountNameParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            }
+            ],
+            "responses": {
+            "202": {
+                "description": "The Throughput Pool delete operation will complete asynchronously.",
+                "headers": {
+                "azure-AsyncOperation": {
+                    "type": "string",
+                    "description": "URI to poll for completion status."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "URI to poll for completion status."
+                }
+                }
+            },
+            "204": {
+                "description": "The specified Throughput Pool does not exist in the subscription."
+            }
+            }
+          }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputPools/{poolName}/locations": {
+          "get": {
+              "operationId": "ThroughputPoolLocations_List",
+              "x-ms-examples": {
+              "CosmosDBDatabaseAccountList": {
+                  "$ref": "./examples/CosmosDBThroughputPoolLocationsList.json"
+              }
+              },
+              "description": "Lists all the locations for throughput pool.",
+              "parameters": [
+              {
+                  "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+              },
+              {
+                  "$ref": "#/parameters/ThroughputPoolNameParameter"
+              },
+              {
+                  "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+              }
+              ],
+              "responses": {
+              "200": {
+                  "description": "The operation completed successfully.",
+                  "schema": {
+                    "$ref": "../cosmos-db.json#/definitions/LocationListResult"
+                  }
+              }
+              },
+              "x-ms-pageable": {
+              "nextLinkName": null
+              }
+          }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputPools/{poolName}/locations/{locationName}/throughputPoolAccounts": {
+          "get": {
+            "operationId": "ThroughputPoolLocationAccounts_List",
+            "x-ms-examples": {
+            "CosmosDBDatabaseAccountList": {
+                "$ref": "./examples/CosmosDBThroughputPoolLocationAccountsList.json"
+            }
+            },
+            "description": "Lists all the Azure Cosmos DB database accounts available under the subscription.",
+            "parameters": [
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "#/parameters/ThroughputPoolNameParameter"
+            },
+            {
+              "$ref": "../cosmos-db.json#/parameters/locationParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            }
+            ],
+            "responses": {
+            "200": {
+                "description": "The operation completed successfully.",
+                "schema": {
+                "$ref": "#/definitions/ThroughputPoolLocationAccountsListResult"
+                }
+            }
+            },
+            "x-ms-pageable": {
+            "nextLinkName": null
+            }
+        }
+        }
+    },
+    "definitions": {
+      "ThroughputPoolsListResult": {
+        "properties": {
+          "value": {
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ThroughputPoolGetResults"
+            },
+            "description": "List of database account and their properties."
+          }
+        },
+        "description": "The List operation response, that contains the database accounts and their properties."
+      },
+      "ThroughputPoolGetResults": {
+        "description": "An Azure Cosmos DB database Throughputpool.",
+        "type": "object",
+        "properties": {
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/ThroughputPoolGetProperties"
+          },
+          "systemData": {
+            "readOnly": true,
+            "description": "The system meta data relating to this resource.",
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/ARMResourceProperties"
+          }
+        ]
+      },
+      "ThroughputPoolGetProperties": {
+        "description": "Properties for the database account.",
+        "type": "object",
+        "properties": {
+          "status": {
+            "description": "Flag to indicate enabling/disabling of sharing throughput among the accounts in the pool",
+            "type": "boolean"
+          },
+          "instanceId": {
+            "description": "A unique identifier assigned to the Throughput Pool Resource",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "ThroughputPoolCreateUpdateParameters": {
+        "description": "Parameters for patching Azure Cosmos DB throughput pool properties.",
+        "type": "object",
+        "properties": {
+          "tags": {
+            "$ref": "#/definitions/Tags"
+          },
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/DatabaseAccountUpdateProperties"
+          }
+        }
+      },
+      "ThroughputPoolUpdateProperties": {
+        "description": "Properties to update Azure Cosmos DB database accounts.",
+        "type": "object",
+        "properties": {
+          "status": {
+            "description": "Flag to indicate enabling/disabling of sharing throughput among the accounts in the pool",
+            "type": "boolean"
+          }
+        }
+      },
+      "ThroughputPoolAccountsListResult": {
+        "properties": {
+          "value": {
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ThroughputPoolAccountGetResult"
+            },
+            "description": "List of database accounts in a throughput pool and their properties."
+          }
+        },
+        "description": "The List operation response, that contains the database accounts and their properties."
+      },
+      "ThroughputPoolAccountGetResult": {
+        "description": "An Azure Cosmos DB database Throughputpool.",
+        "type": "object",
+        "properties": {
+          "systemData": {
+            "readOnly": true,
+            "description": "The system meta data relating to this resource.",
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          },
+          "name": {
+            "readOnly": true,
+            "description": "The URI of database account",
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/ARMResourceProperties"
+          }
+        ]
+      },
+      "ThroughputPoolLocationAccountsListResult": {
+        "properties": {
+          "value": {
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ThroughputPoolAccountGetResult"
+            },
+            "description": "List of database accounts in a throughput pool location and their properties."
+          }
+        },
+        "description": "The List operation response, that contains the database accounts and their properties."
+      }
+    },
+    "parameters": {
+      "ThroughputPoolNameParameter": {
+        "name": "ThroughputPoolNameParameter",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method",
+        "description": "Cosmos DB Throughput Pool name.",
+        "minLength": 3,
+        "maxLength": 50,
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+      },
+      "ThroughputPoolAccountNameParameter": {
+        "name": "ThroughputPoolAccountNameParameter",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method",
+        "description": "Cosmos DB database account in a Throughput Pool",
+        "minLength": 3,
+        "maxLength": 50,
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+      }
+    }
+  }
