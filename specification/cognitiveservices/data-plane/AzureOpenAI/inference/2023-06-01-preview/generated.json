@@ -212,58 +212,6 @@
         }
       }
     },
-    "/images/generations:submit": {
-      "post": {
-        "operationId": "BeginAzureBatchImageGeneration",
-        "description": "Starts the generation of a batch of images from a text caption",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ImageGenerationOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/BatchImageGenerationOperationResponse"
-            },
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Starts the generation of a batch of images from a text caption": {
-            "$ref": "./examples/start_generate_image.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/operations/images/{operationId}": {
       "get": {
         "operationId": "GetAzureBatchImageGenerationOperationStatus",
@@ -1113,63 +1061,6 @@
         "total_tokens"
       ]
     },
-    "ImageGenerationOptions": {
-      "type": "object",
-      "description": "Represents the request data used to generate images.",
-      "properties": {
-        "prompt": {
-          "type": "string",
-          "description": "A description of the desired images."
-        },
-        "n": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of images to generate (defaults to 1).",
-          "default": 1
-        },
-        "size": {
-          "$ref": "#/definitions/ImageSize",
-          "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024 (defaults to 1024x1024).",
-          "default": "1024x1024"
-        },
-        "response_format": {
-          "$ref": "#/definitions/ImageGenerationResponseFormat",
-          "description": "  The format in which image generation response items should be presented.\n  Azure OpenAI only supports URL response items.",
-          "x-ms-client-name": "responseFormat"
-        },
-        "user": {
-          "type": "string",
-          "description": "A unique identifier representing your end-user, which can help to monitor and detect abuse."
-        }
-      },
-      "required": [
-        "prompt"
-      ]
-    },
-    "ImageGenerationResponseFormat": {
-      "type": "string",
-      "description": "The format in which the generated images are returned.",
-      "enum": [
-        "url",
-        "b64_json"
-      ],
-      "x-ms-enum": {
-        "name": "ImageGenerationResponseFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Url",
-            "value": "url",
-            "description": "Image generation response items should provide a URL from which the image may be retrieved."
-          },
-          {
-            "name": "Base64",
-            "value": "b64_json",
-            "description": "Image generation response items should provide image data as a base64-encoded string."
-          }
-        ]
-      }
-    },
     "ImageGenerations": {
       "type": "object",
       "description": "The result of the operation if the operation succeeded.",
@@ -1187,36 +1078,6 @@
         "created",
         "data"
       ]
-    },
-    "ImageSize": {
-      "type": "string",
-      "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024.",
-      "enum": [
-        "256x256",
-        "512x512",
-        "1024x1024"
-      ],
-      "x-ms-enum": {
-        "name": "ImageSize",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Size256x256",
-            "value": "256x256",
-            "description": "Image size of 256x256."
-          },
-          {
-            "name": "Size512x512",
-            "value": "512x512",
-            "description": "Image size of 512x512."
-          },
-          {
-            "name": "Size1024x1024",
-            "value": "1024x1024",
-            "description": "Image size of 1024x1024."
-          }
-        ]
-      }
     },
     "PromptFilterResult": {
       "type": "object",
