@@ -1,0 +1,54 @@
+{
+  "title": "Create Environment",
+  "operationId": "Environment_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "prodUSEastAzcis",
+    "api-version": "2021-08-10-privatepreview",
+    "environment": {
+      "location": "eastus",
+      "properties": {
+        "modelEnvironment": "PFRP-Prod-CH1P.CH1P",
+        "environmentName": "PFPR-Prod-BN4Q",
+        "clusterName": "BN4Q",
+        "mode": "All",
+        "enlistmentType": "PFGold"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCIS/autopilotEnvironments/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCIS/autopilotEnvironments",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "modelEnvironment": "PFRP-Prod-CH1P.CH1P",
+          "environmentName": "PFPR-Prod-BN4Q",
+          "clusterName": "BN4Q",
+          "mode": "All",
+          "enlistmentType": "PFGold"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCIS/autopilotEnvironments/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCIS/autopilotEnvironments",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "modelEnvironment": "PFRP-Prod-CH1P.CH1P",
+          "environmentName": "PFPR-Prod-BN4Q",
+          "clusterName": "BN4Q",
+          "mode": "All",
+          "enlistmentType": "PFGold"
+        }
+      }
+    }
+  }
+}
