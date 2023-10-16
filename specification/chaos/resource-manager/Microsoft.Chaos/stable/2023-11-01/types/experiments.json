@@ -100,7 +100,8 @@
             "name"
           ],
           "description": "List of steps.",
-          "minItems": 1
+          "minItems": 1,
+          "maxItems": 4
         },
         "selectors": {
           "type": "array",
@@ -155,7 +156,8 @@
           "x-ms-identifiers": [
             "name"
           ],
-          "minItems": 1
+          "minItems": 1,
+          "maxItems": 9
         }
       },
       "required": [
@@ -166,7 +168,7 @@
     },
     "branch": {
       "type": "object",
-      "description": "Model that represents a branch in the step.",
+      "description": "Model that represents a branch in the step. 9 total per experiment.",
       "properties": {
         "name": {
           "type": "string",
@@ -182,7 +184,8 @@
           "x-ms-identifiers": [
             "name"
           ],
-          "minItems": 1
+          "minItems": 1,
+          "maxItems": 9
         }
       },
       "required": [
@@ -193,7 +196,7 @@
     },
     "action": {
       "type": "object",
-      "description": "Model that represents the base action model.",
+      "description": "Model that represents the base action model. 9 total per experiment.",
       "discriminator": "type",
       "properties": {
         "type": {
@@ -369,6 +372,7 @@
           "type": "array",
           "description": "List of Target references.",
           "minItems": 1,
+          "maxItems": 50,
           "items": {
             "$ref": "#/definitions/targetReference"
           }
