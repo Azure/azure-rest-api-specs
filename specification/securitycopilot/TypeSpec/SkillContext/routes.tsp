@@ -48,9 +48,9 @@ namespace SkillContext {
   @get
   @route("skillsetSettings")
   @doc("Sets the skillset settings")
-  op skillsetSettings(
+  op getSkillsetSettings(
     @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
-  ): SkillsetConfiguration | UnauthorizedResponse;
+  ): Record<string> | UnauthorizedResponse;
 
   @post
   @route("setSkillInvocationStarted")

@@ -42,6 +42,9 @@ model SkillVariable {
 
   @doc("Skill variable value")
   value?: string;
+
+  @doc("Skill variable value is stored as json document")
+  valueStoredAsJson: boolean;
 }
 
 @doc("Invoke skill request including necessary inputs for invoking a skill")
