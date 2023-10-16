@@ -457,75 +457,6 @@
           "final-state-via": "location"
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/addNodes": {
-      "post": {
-        "tags": [
-          "Cluster"
-        ],
-        "operationId": "Clusters_AddNodes",
-        "description": "Add nodes to a cluster",
-        "x-ms-examples": {
-          "Add Cluster Nodes": {
-            "$ref": "./examples/AddNodes.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "addNodesRequest",
-            "in": "body",
-            "description": "Add Nodes Request Payload",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AddNodesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
-          },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
     }
   },
   "definitions": {
@@ -1106,29 +1037,6 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SoftwareAssuranceChangeRequestProperties"
-        }
-      },
-      "additionalProperties": false
-    },
-    "AddNodesRequest": {
-      "description": "The content of the action request",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AddNodesProperties"
-        }
-      },
-      "additionalProperties": false
-    },
-    "AddNodesProperties": {
-      "description": "The properties of the action request",
-      "type": "object",
-      "properties": {
-        "arcNodeResourceIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       },
       "additionalProperties": false
