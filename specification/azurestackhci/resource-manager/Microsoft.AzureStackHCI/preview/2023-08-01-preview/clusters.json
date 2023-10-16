@@ -713,7 +713,8 @@
           "x-ms-enum": {
             "name": "SoftwareAssuranceStatus",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         },
         "softwareAssuranceIntent": {
           "description": "Customer Intent for Software Assurance Benefit.",
@@ -742,6 +743,17 @@
         "attestationResourceId": {
           "description": "Fully qualified Azure resource id of the Microsoft Azure attestation resource associated with this cluster.",
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Attestation/attestationProviders",
+                "scopes": [
+                  "Tenant"
+                ]
+              }
+            ]
+          },
           "readOnly": true
         },
         "relyingPartyServiceEndpoint": {
@@ -851,8 +863,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "type": "string",
-            "readOnly": true
+            "type": "string"
           }
         },
         "clusterType": {
