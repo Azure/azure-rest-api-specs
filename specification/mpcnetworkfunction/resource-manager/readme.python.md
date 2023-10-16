@@ -8,8 +8,8 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.MobilePacketCore
-  package-name: mobileCore
+  namespace: azure.mgmt.mpcnetworkfunction
+  package-name: azure-mgmt-mpcnetworkfunction
   package-version: 2023-10-15
   clear-output-folder: true
 ```
@@ -19,8 +19,8 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.MobilePacketCore
-  package-name: mobileCore
+  namespace: azure.mgmt.mpcnetworkfunction
+  package-name: azure-mgmt-mpcnetworkfunction
   package-version: 2023-05-15-preview
   clear-output-folder: true
 ```
@@ -28,5 +28,5 @@ python:
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt/mobileCore
+  output-folder: $(python-sdks-folder)/mpcnetworkfunction/azure-mgmt-mpcnetworkfunction/azure/mgmt/mpcnetworkfunction
 ```
