@@ -32,7 +32,8 @@
         "description": "The regional endpoint to use, for example https://eastus.metrics.monitor.azure.com. The region should match the region of the requested resources. For global resources, the region should be 'global'.",
         "required": true,
         "type": "string",
-        "x-ms-skip-url-encoding": true
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
       }
     ]
   },
@@ -52,7 +53,7 @@
         "description": "Lists the metric values for multiple resources.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/MetricBatchStartTimeParameter"
@@ -120,6 +121,14 @@
     }
   },
   "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription identifier for the resources in this batch.",
+      "x-ms-parameter-location": "method"
+    },
     "MetricBatchResourceIdListParameter": {
       "name": "resourceIds",
       "in": "body",
