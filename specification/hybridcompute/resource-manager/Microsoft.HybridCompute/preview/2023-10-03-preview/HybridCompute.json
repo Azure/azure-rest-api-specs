@@ -3116,10 +3116,10 @@
               "$ref": "#/definitions/LicenseProfileArmEsuProperties",
               "description": "Hybrid Compute ESU Profile properties"
             },
-            "osProfile": {
+            "productProfile": {
               "x-ms-client-flatten": true,
-              "$ref": "#/definitions/LicenseProfileArmOsProfileProperties",
-              "description": "Hybrid Compute OS Profile properties"
+              "$ref": "#/definitions/LicenseProfileArmProductProfileProperties",
+              "description": "Hybrid Compute Product Profile properties"
             },
             "provisioningState": {
               "$ref": "#/definitions/ProvisioningState",
@@ -3158,10 +3158,10 @@
               "$ref": "#/definitions/EsuProfileUpdateProperties",
               "description": "Hybrid Compute ESU Profile Update properties"
             },
-            "osProfile": {
+            "productProfile": {
               "x-ms-client-flatten": true,
-              "$ref": "#/definitions/OsProfileUpdateProperties",
-              "description": "Hybrid Compute OS Profile Update properties"
+              "$ref": "#/definitions/ProductProfileUpdateProperties",
+              "description": "Hybrid Compute Product Profile Update properties"
             }
           },
           "description": "Describe the Update properties of a license profile."
@@ -3342,16 +3342,16 @@
       },
       "description": "Product Feature"
     },
-    "OsProfileUpdateProperties": {
+    "ProductProfileUpdateProperties": {
       "type": "object",
       "properties": {
         "subscriptionStatus": {
           "$ref": "#/definitions/LicenseProfileSubscriptionStatusUpdate",
-          "description": "Indicates the subscription status of the OS."
+          "description": "Indicates the subscription status of the product."
         },
-        "osType": {
-          "$ref": "#/definitions/LicenseProfileOsType",
-          "description": "Indicates the operating system type of the machine."
+        "productType": {
+          "$ref": "#/definitions/LicenseProfileProductType",
+          "description": "Indicates the product type of the license."
         },
         "productFeatures": {
           "type": "array",
@@ -3362,7 +3362,7 @@
           "x-ms-identifiers": []
         }
       },
-      "description": "Describes the Update properties of an OS Profile."
+      "description": "Describes the Update properties of a Product Profile."
     },
     "LicenseProfileMachineInstanceView": {
       "type": "object",
@@ -3390,11 +3390,11 @@
         "esuProfile": {
           "$ref": "#/definitions/LicenseProfileMachineInstanceViewEsuProperties"
         },
-        "osProfile": {
+        "productProfile": {
           "x-ms-client-flatten": true,
           "readOnly": true,
-          "$ref": "#/definitions/LicenseProfileArmOsProfileProperties",
-          "description": "Hybrid Compute OS Profile properties"
+          "$ref": "#/definitions/LicenseProfileArmProductProfileProperties",
+          "description": "Hybrid Compute Product Profile properties"
         }
       },
       "description": "License Profile Instance View in Machine Properties."
@@ -3458,17 +3458,17 @@
       },
       "description": "Subscription status of the OS or Product feature."
     },
-    "LicenseProfileOsType": {
+    "LicenseProfileProductType": {
       "type": "string",
       "enum": [
         "WindowsServer",
         "WindowsIoTEnterprise"
       ],
       "x-ms-enum": {
-        "name": "LicenseProfileOsType",
+        "name": "LicenseProfileProductType",
         "modelAsString": true
       },
-      "description": "The operating system type of the machine."
+      "description": "The product type of the license."
     },
     "ProductFeature": {
       "type": "object",
@@ -3502,16 +3502,16 @@
       },
       "description": "Product Feature"
     },
-    "LicenseProfileArmOsProfileProperties": {
+    "LicenseProfileArmProductProfileProperties": {
       "type": "object",
       "properties": {
         "subscriptionStatus": {
           "$ref": "#/definitions/LicenseProfileSubscriptionStatus",
-          "description": "Indicates the subscription status of the OS."
+          "description": "Indicates the subscription status of the product."
         },
-        "osType": {
-          "$ref": "#/definitions/LicenseProfileOsType",
-          "description": "Indicates the operating system type of the machine."
+        "productType": {
+          "$ref": "#/definitions/LicenseProfileProductType",
+          "description": "Indicates the product type of the license."
         },
         "billingStartDate": {
           "type": "string",
@@ -3540,7 +3540,7 @@
           "x-ms-identifiers": []
         }
       },
-      "description": "Describes the properties of an OS License Profile ARM model."
+      "description": "Describes the properties of a Product License Profile ARM model."
     },
     "ResourceUpdate": {
       "type": "object",
