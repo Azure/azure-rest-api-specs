@@ -29,12 +29,18 @@ enum ImageCategory {
 enum AnalyzeTextOutputType {
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
   FourSeverityLevels,
+
+  @doc("Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7.")
+  EightSeverityLevels,
 }
 
 @doc("The type of image analysis output.")
 enum AnalyzeImageOutputType {
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
   FourSeverityLevels,
+
+  @doc("Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7.")
+  EightSeverityLevels,
 }
 
 @doc("The text analysis request.")
@@ -85,7 +91,7 @@ model TextCategoriesAnalysis {
   @doc("The text analysis category.")
   category: TextCategory;
 
-  @doc("The value of this field is determined by the outputType specified in the request. If 'FourSeverityLevels' is chosen, this field will be included in the output. The value can be 0, 2, 4, or 6, and it increases with the severity of the input content.")
+  @doc("The value of this field is determined by the outputType specified in the request. If 'FourSeverityLevels' or 'EightSeverityLevels' is chosen, this field will be included in the output. The value increases with the severity of the input content.")
   severity?: int32;
 }
 
@@ -122,7 +128,7 @@ model ImageCategoriesAnalysis {
   @doc("The image analysis category.")
   category: ImageCategory;
 
-  @doc("The value of this field is determined by the outputType specified in the request. If 'FourSeverityLevels' is chosen, this field will be included in the output. The value can be 0, 2, 4, or 6, and it increases with the severity of the input content.")
+  @doc("The value of this field is determined by the outputType specified in the request. If 'FourSeverityLevels'  or 'EightSeverityLevels' is chosen, this field will be included in the output. The value increases with the severity of the input content.")
   severity?: int32;
 }
 
