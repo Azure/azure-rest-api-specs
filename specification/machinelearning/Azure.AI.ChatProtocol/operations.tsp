@@ -14,7 +14,7 @@ using Azure.Core.Foundations;
 interface Chat<StateModel, ContextModel> {
   /* Using the Foundations.Operation template so the API version parameter is added */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Defining the operation in an Azure independent fashion"
-  @doc("Create a new chat completion.")
+  @doc("Creates a new chat completion.")
   @sharedRoute
   create is Operation<
     ChatCompletionOptions<StateModel, ContextModel>,
@@ -23,7 +23,7 @@ interface Chat<StateModel, ContextModel> {
 
   /* Using the Foundations.Operation template so the API version parameter is added */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Defining the operation in an Azure independent fashion"
-  @doc("Create a new streaming chat completion.")
+  @doc("Creates a new streaming chat completion.")
   @sharedRoute
   createStreaming is Operation<
     StreamingChatCompletionOptions<StateModel, ContextModel>,
