@@ -1186,6 +1186,58 @@
             "$ref": "./examples/ScanResult_RunScan.json"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "ScanResult"
+        ],
+        "description": "Get the status of the scan run with ingestion details",
+        "operationId": "ScanResult_GetScanStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "scanName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "runId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ScanResultWithIngestion"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScanResult_GetScanStatus": {
+            "$ref": "./examples/ScanResult_GetScanStatus.json"
+          }
+        }
       }
     },
     "/datasources/{dataSourceName}/scans/{scanName}/runs/{runId}/:cancel": {
