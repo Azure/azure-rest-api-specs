@@ -31,6 +31,8 @@ else {
 
   $engFiles = $changedFiles | Where-Object {if ($_) { $_.StartsWith('eng') }}
 
+  $commonTypesFiles = $changedFiles | Where-Object {if ($_) { $_.StartsWith('specification/common-types') }}
+
   $rootFilesImpactingTypeSpec = @(
     ".gitattributes",
     ".prettierrc.json",
@@ -40,7 +42,7 @@ else {
   )
   $repoRootFiles = $changedFiles | Where-Object {$_ -in $rootFilesImpactingTypeSpec}
 
-  if (($Env:BUILD_REPOSITORY_NAME -eq 'azure/azure-rest-api-specs') -and ($engFiles -or $repoRootFiles)) {
+  if (($Env:BUILD_REPOSITORY_NAME -eq 'azure/azure-rest-api-specs') -and ($engFiles -or $commonTypesFiles -or $repoRootFiles)) {
     $changedFiles = $allChangedFiles
   }
   else {
@@ -49,11 +51,20 @@ else {
 }
 
 $typespecFolders = @()
+$skippedTypespecFolders = @()
 foreach ($file in $changedFiles) {
   if ($file -match 'specification\/[^\/]*\/') {
-    $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.* -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
-    $typespecFolders += $typespecFolder -replace '\\', '/'
+    if (Test-Path $matches[0]) {
+      $typespecFolder = (Get-ChildItem -path $matches[0] tspconfig.* -Recurse).Directory.FullName | ForEach-Object {if ($_) { [IO.Path]::GetRelativePath($($pwd.path), $_) }}
+      $typespecFolders += $typespecFolder -replace '\\', '/'
+    } else {
+      $skippedTypespecFolders += $matches[0]
+    }
   }
+}
+
+foreach ($skippedTypespecFolder in $skippedTypespecFolders | Select-Object -Unique) {
+  Write-Host "Cannot find directory $skippedTypespecFolder"
 }
 
 $typespecFolders = $typespecFolders | Select-Object -Unique | Sort-Object
