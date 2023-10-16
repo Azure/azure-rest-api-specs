@@ -104,9 +104,11 @@ title: PurviewScanningClient
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-09'
+```yaml $(tag) == 'package-2023-09-01'
 input-file:
   - Azure.Analytics.Purview.Scanning/stable/2023-09-01/scanningService.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 
