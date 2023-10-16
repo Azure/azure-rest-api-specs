@@ -33,8 +33,8 @@
       "x-ms-parameter-location": "method",
       "x-nullable": false
     },
-    "executionDetailsId": {
-      "name": "executionDetailsId",
+    "executionId": {
+      "name": "executionId",
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method",
@@ -527,78 +527,6 @@
       },
       "additionalProperties": false
     },
-    "experimentStatus": {
-      "type": "object",
-      "description": "Model that represents the status of a Experiment.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "String of the resource type.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "description": "String of the fully qualified resource ID.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "String of the resource name.",
-          "readOnly": true
-        },
-        "properties": {
-          "description": "The properties of experiment execution status.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/experimentStatusProperties"
-        }
-      },
-      "additionalProperties": false
-    },
-    "experimentStatusProperties": {
-      "description": "Model that represents the Experiment status properties model.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "String that represents the status of a Experiment.",
-          "readOnly": true
-        },
-        "createdDateUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "String that represents the created date time of a Experiment.",
-          "readOnly": true
-        },
-        "endDateUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "String that represents the end date time of a Experiment.",
-          "readOnly": true,
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "experimentStatusListResult": {
-      "type": "object",
-      "description": "Model that represents a list of Experiment statuses and a link for pagination.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/experimentStatus"
-          },
-          "description": "List of Experiment statuses.",
-          "readOnly": true
-        },
-        "nextLink": {
-          "$ref": "./common.json#/definitions/urlNullable",
-          "description": "URL to retrieve the next page of Experiment statuses.",
-          "readOnly": true
-        }
-      },
-      "additionalProperties": false
-    },
     "experimentExecutionActionTargetDetailsProperties": {
       "description": "Model that represents the Experiment action target details properties model.",
       "type": "object",
@@ -652,28 +580,9 @@
         }
       }
     },
-    "experimentExecutionDetailsListResult": {
-      "description": "Model that represents a list of Experiment execution details and a link for pagination.",
+    "experimentExecution": {
       "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/experimentExecutionDetails"
-          },
-          "description": "List of Experiment execution details.",
-          "readOnly": true
-        },
-        "nextLink": {
-          "$ref": "./common.json#/definitions/urlNullable",
-          "description": "URL to retrieve the next page of Experiment execution details.",
-          "readOnly": true
-        }
-      }
-    },
-    "experimentExecutionDetails": {
-      "description": "Model that represents the execution details of a Experiment.",
-      "type": "object",
+      "description": "Model that represents the execution of a Experiment.",
       "properties": {
         "type": {
           "type": "string",
@@ -691,15 +600,15 @@
           "readOnly": true
         },
         "properties": {
-          "description": "The properties of the experiment execution details.",
-          "$ref": "#/definitions/experimentExecutionDetailsProperties",
+          "description": "The properties of experiment execution status.",
           "x-ms-client-flatten": true,
-          "readOnly": true
+          "$ref": "#/definitions/experimentExecutionProperties"
         }
-      }
+      },
+      "additionalProperties": false
     },
-    "experimentExecutionDetailsProperties": {
-      "description": "Model that represents the Experiment execution details properties model.",
+    "experimentExecutionProperties": {
+      "description": "Model that represents the execution properties of an Experiment.",
       "type": "object",
       "properties": {
         "experimentId": {
@@ -708,58 +617,44 @@
           "readOnly": true
         },
         "status": {
-          "description": "The value of the status of the experiment execution.",
+          "description": "The status of the execution.",
           "type": "string",
           "readOnly": true
         },
-        "failureReason": {
-          "description": "The reason why the execution failed.",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "String that represents the created date time.",
-          "readOnly": true
-        },
-        "lastActionDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "String that represents the last action date time.",
-          "readOnly": true
-        },
-        "startDateTime": {
+        "startedAt": {
           "type": "string",
           "format": "date-time",
           "description": "String that represents the start date time.",
           "readOnly": true
         },
-        "stopDateTime": {
+        "stoppedAt": {
           "type": "string",
           "format": "date-time",
           "description": "String that represents the stop date time.",
           "readOnly": true
-        },
-        "runInformation": {
-          "description": "The information of the experiment run.",
-          "type": "object",
-          "properties": {
-            "steps": {
-              "description": "The steps of the experiment run.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/stepStatus"
-              },
-              "x-ms-identifiers": [
-                "stepName"
-              ],
-              "readOnly": true
-            }
+        }
+      },
+      "additionalProperties": false
+    },
+    "experimentExecutionListResult": {
+      "description": "Model that represents a list of Experiment executions and a link for pagination.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/experimentExecution"
           },
+          "description": "List of Experiment executions.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "URL to retrieve the next page of Experiment executions.",
           "readOnly": true
         }
-      }
+      },
+      "additionalProperties": false
     },
     "stepStatus": {
       "description": "Model that represents the a list of branches and branch statuses.",
