@@ -13,7 +13,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.Core.Traits;
-using OpenAPI;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
 
