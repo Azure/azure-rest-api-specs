@@ -3116,21 +3116,10 @@
               "$ref": "#/definitions/LicenseProfileArmEsuProperties",
               "description": "Hybrid Compute ESU Profile properties"
             },
-            "products": {
+            "osProfile": {
               "x-ms-client-flatten": true,
-              "type": "object",
-              "properties": {
-                "windowsServerProfile": {
-                  "x-ms-client-flatten": true,
-                  "$ref": "#/definitions/LicenseProfileArmWindowsServerProperties",
-                  "description": "Hybrid Compute Windows Server Profile properties"
-                },
-                "iotEnterpriseProfile": {
-                  "x-ms-client-flatten": true,
-                  "$ref": "#/definitions/LicenseProfileArmIoTEnterpriseProperties",
-                  "description": "Hybrid Compute Windows IoT Enterprise Profile properties"
-                }
-              }
+              "$ref": "#/definitions/LicenseProfileArmOsProfileProperties",
+              "description": "Hybrid Compute OS Profile properties"
             },
             "provisioningState": {
               "$ref": "#/definitions/ProvisioningState",
@@ -3169,21 +3158,10 @@
               "$ref": "#/definitions/EsuProfileUpdateProperties",
               "description": "Hybrid Compute ESU Profile Update properties"
             },
-            "products": {
+            "osProfile": {
               "x-ms-client-flatten": true,
-              "type": "object",
-              "properties": {
-                "windowsServerProfile": {
-                  "x-ms-client-flatten": true,
-                  "$ref": "#/definitions/WindowsServerProfileUpdateProperties",
-                  "description": "Hybrid Compute Windows Server Profile Update properties"
-                },
-                "iotEnterpriseProfile": {
-                  "x-ms-client-flatten": true,
-                  "$ref": "#/definitions/IotEnterpriseProfileUpdateProperties",
-                  "description": "Hybrid Compute Windows IoT Enterprise Profile Update properties"
-                }
-              }
+              "$ref": "#/definitions/OsProfileUpdateProperties",
+              "description": "Hybrid Compute OS Profile Update properties"
             }
           },
           "description": "Describe the Update properties of a license profile."
@@ -3348,7 +3326,7 @@
         "name": "LicenseProfileSubscriptionStatusUpdate",
         "modelAsString": true
       },
-      "description": "Indicates the new subscription status of the Windows Server, IoT Enterprise or Product Features."
+      "description": "Indicates the new subscription status of the OS or Product Features."
     },
     "ProductFeatureUpdate": {
       "type": "object",
@@ -3364,12 +3342,16 @@
       },
       "description": "Product Feature"
     },
-    "WindowsServerProfileUpdateProperties": {
+    "OsProfileUpdateProperties": {
       "type": "object",
       "properties": {
         "subscriptionStatus": {
           "$ref": "#/definitions/LicenseProfileSubscriptionStatusUpdate",
-          "description": "Indicates the subscription status of the Windows Server."
+          "description": "Indicates the subscription status of the OS."
+        },
+        "osType": {
+          "$ref": "#/definitions/LicenseProfileOsType",
+          "description": "Indicates the operating system type of the machine."
         },
         "productFeatures": {
           "type": "array",
@@ -3380,25 +3362,7 @@
           "x-ms-identifiers": []
         }
       },
-      "description": "Describes the Update properties of a Windows Server License Profile."
-    },
-    "IotEnterpriseProfileUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "subscriptionStatus": {
-          "$ref": "#/definitions/LicenseProfileSubscriptionStatusUpdate",
-          "description": "Indicates the subscription status of the Windows IoT Enterprise."
-        },
-        "productFeatures": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProductFeatureUpdate"
-          },
-          "description": "The list of product feature updates.",
-          "x-ms-identifiers": []
-        }
-      },
-      "description": "Describes the Update properties of a Windows IoT Enterprise License Profile."
+      "description": "Describes the Update properties of an OS Profile."
     },
     "LicenseProfileMachineInstanceView": {
       "type": "object",
@@ -3426,22 +3390,11 @@
         "esuProfile": {
           "$ref": "#/definitions/LicenseProfileMachineInstanceViewEsuProperties"
         },
-        "products": {
+        "osProfile": {
           "x-ms-client-flatten": true,
-          "type": "object",
           "readOnly": true,
-          "properties": {
-            "windowsServerProfile": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/LicenseProfileArmWindowsServerProperties",
-              "description": "Hybrid Compute Windows Server Profile properties"
-            },
-            "iotEnterpriseProfile": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/LicenseProfileArmIoTEnterpriseProperties",
-              "description": "Hybrid Compute Windows IoT Enterprise Profile properties"
-            }
-          }
+          "$ref": "#/definitions/LicenseProfileArmOsProfileProperties",
+          "description": "Hybrid Compute OS Profile properties"
         }
       },
       "description": "License Profile Instance View in Machine Properties."
@@ -3503,7 +3456,19 @@
         "name": "LicenseProfileSubscriptionStatus",
         "modelAsString": true
       },
-      "description": "Subscription status of the Windows Server or Windows IoT Enterprise or Product feature."
+      "description": "Subscription status of the OS or Product feature."
+    },
+    "LicenseProfileOsType": {
+      "type": "string",
+      "enum": [
+        "WindowsServer",
+        "WindowsIoTEnterprise"
+      ],
+      "x-ms-enum": {
+        "name": "LicenseProfileOsType",
+        "modelAsString": true
+      },
+      "description": "The operating system type of the machine."
     },
     "ProductFeature": {
       "type": "object",
@@ -3522,6 +3487,12 @@
           "format": "date-time",
           "description": "The timestamp in UTC when the billing starts."
         },
+        "enrollmentDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the user enrolls the feature."
+        },
         "disenrollmentDate": {
           "type": "string",
           "readOnly": true,
@@ -3531,18 +3502,28 @@
       },
       "description": "Product Feature"
     },
-    "LicenseProfileArmWindowsServerProperties": {
+    "LicenseProfileArmOsProfileProperties": {
       "type": "object",
       "properties": {
         "subscriptionStatus": {
           "$ref": "#/definitions/LicenseProfileSubscriptionStatus",
-          "description": "Indicates the subscription status of the Windows Server."
+          "description": "Indicates the subscription status of the OS."
+        },
+        "osType": {
+          "$ref": "#/definitions/LicenseProfileOsType",
+          "description": "Indicates the operating system type of the machine."
         },
         "billingStartDate": {
           "type": "string",
           "readOnly": true,
           "format": "date-time",
           "description": "The timestamp in UTC when the billing starts."
+        },
+        "enrollmentDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp in UTC when the user enrolls the feature."
         },
         "disenrollmentDate": {
           "type": "string",
@@ -3559,37 +3540,7 @@
           "x-ms-identifiers": []
         }
       },
-      "description": "Describes the properties of a Windows Server License Profile ARM model."
-    },
-    "LicenseProfileArmIoTEnterpriseProperties": {
-      "type": "object",
-      "properties": {
-        "subscriptionStatus": {
-          "$ref": "#/definitions/LicenseProfileSubscriptionStatus",
-          "description": "Indicates the subscription status of the Windows IoT Enterprise."
-        },
-        "billingStartDate": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "The timestamp in UTC when the billing starts."
-        },
-        "disenrollmentDate": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "The timestamp in UTC when the user disenrolled the feature."
-        },
-        "productFeatures": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProductFeature"
-          },
-          "description": "The list of product features.",
-          "x-ms-identifiers": []
-        }
-      },
-      "description": "Describes the properties of a Windows IoT Enterprise License Profile ARM model."
+      "description": "Describes the properties of an OS License Profile ARM model."
     },
     "ResourceUpdate": {
       "type": "object",
