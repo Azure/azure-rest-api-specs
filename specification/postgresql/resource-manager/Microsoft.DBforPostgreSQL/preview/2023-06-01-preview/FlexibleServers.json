@@ -415,7 +415,7 @@
         },
         "linkState": {
           "type": "string",
-          "description": "Gets the link state of a replica server. This property is returned only for replicas api call. Supported values are Succeeded, Failed, Provisioning, Broken, Updating, Deleted",
+          "description": "Gets the link state of a replica server. This property is returned only for replicas api call. Supported values are Succeeded, Catchup, Provisioning, Updating, Broken, Reconfiguring",
           "default": null,
           "readOnly": true
         },
@@ -423,8 +423,8 @@
           "type": "string",
           "description": "Sets the promote mode for a replica server. This is a write only property.",
           "enum": [
-            "standalone",
-            "siteswap"
+            "Standalone",
+            "Siteswap"
           ],
           "x-ms-enum": {
             "name": "ReplicationPromoteMode",
@@ -438,8 +438,8 @@
           "type": "string",
           "description": "Sets the promote options for a replica server. This is a write only property.",
           "enum": [
-            "planned",
-            "forced"
+            "Planned",
+            "Forced"
           ],
           "x-ms-enum": {
             "name": "ReplicationPromoteOption",
