@@ -120,11 +120,8 @@ namespace Microsoft.EventGrid {
     @doc("LockToken value")
     lockToken: string;
 
-    @doc("Error code related to the token. Example of such error codes are BadToken: which indicates the Token is not formatted correctly, TokenLost: which indicates that token is not found, and InternalServerError: For any internal server errors.")
-    errorCode: string;
-
-    @doc("Description of the token error.")
-    errorDescription: string;
+    @doc("Error information of the failed operation result for the lock token in the request.")
+    error: Azure.Core.Foundations.Error;
   }
 
   @doc("Supported delays for release operation.")

@@ -646,19 +646,14 @@
           "type": "string",
           "description": "LockToken value"
         },
-        "errorCode": {
-          "type": "string",
-          "description": "Error code related to the token. Example of such error codes are BadToken: which indicates the Token is not formatted correctly, TokenLost: which indicates that token is not found, and InternalServerError: For any internal server errors."
-        },
-        "errorDescription": {
-          "type": "string",
-          "description": "Description of the token error."
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error information of the failed operation result for the lock token in the request."
         }
       },
       "required": [
         "lockToken",
-        "errorCode",
-        "errorDescription"
+        "error"
       ]
     },
     "PublishResult": {
