@@ -9,11 +9,21 @@ export class FolderStructureRule implements Rule {
   readonly description = "Verify spec directory's folder structure and naming conventions.";
   async execute(folder: string): Promise<RuleResult> {
     let success = true;
+    let stdOutput = "";
     let errorOutput = "";
 
-    let stdOutput = "Verify tspconfig file extension";
-    const tspConfig = await globby([`${folder}/**tspconfig.*`]);
-    tspConfig.forEach((file: string) => {
+    stdOutput += `folder: ${folder}\n`;
+    if (!(await checkFileExists(folder))) {
+      return {
+        success: false,
+        stdOutput: stdOutput,
+        errorOutput: `Folder '${folder}' does not exist.\n`,
+      };
+    }
+
+    const tspConfigs = await globby([`${folder}/**tspconfig.*`]);
+    stdOutput += `config files: ${JSON.stringify(tspConfigs)}\n`;
+    tspConfigs.forEach((file: string) => {
       if (!file.endsWith("tspconfig.yaml")) {
         success = false;
         errorOutput += `Invalid config file '${file}'.  Must be named 'tspconfig.yaml'.\n`;

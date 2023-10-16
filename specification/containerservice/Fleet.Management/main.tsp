@@ -9,7 +9,7 @@ import "./update/strategy.tsp";
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using OpenAPI;
+using TypeSpec.OpenAPI;
 
 @armProviderNamespace
 @service({
