@@ -23,6 +23,7 @@ interface Assets {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Update labels on assets matching the provided filter.")
   @route("/assets")
+  @updatesResource(AssetResource)
   @post
   updateAssets is Foundations.Operation<
     AssetsUpdateParameter & AssetUpdateData,
@@ -51,6 +52,7 @@ interface DataConnections {
   getDataConnection is Operations.ResourceRead<DataConnection>;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create or replace a data connection with a given dataConnectionName.")
+  @createsOrReplacesResource(DataConnection)
   @put
   createOrReplaceDataConnection is Foundations.ResourceOperation<
     DataConnection,
@@ -77,6 +79,7 @@ interface DiscoveryGroups {
   getDiscoGroup is Operations.ResourceRead<DiscoGroup>;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create a discovery group with a given groupName.")
+  @createsOrReplacesResource(DiscoGroup)
   @put
   createOrReplaceDiscoGroup is Foundations.ResourceOperation<
     DiscoGroup,
@@ -146,6 +149,7 @@ interface SavedFilters {
   getSavedFilter is Operations.ResourceRead<SavedFilter>;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create or replace a saved filter with a given filterName.")
+  @createsOrReplacesResource(SavedFilter)
   @put
   createOrReplaceSavedFilter is Foundations.ResourceOperation<
     SavedFilter,
