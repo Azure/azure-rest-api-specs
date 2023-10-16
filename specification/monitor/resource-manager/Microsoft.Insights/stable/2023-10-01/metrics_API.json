@@ -34,99 +34,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/metricDefinitions": {
-      "get": {
-        "tags": [
-          "MetricDefinitions"
-        ],
-        "operationId": "MetricDefinitions_ListAtSubscriptionScope",
-        "description": "Lists the metric definitions for the subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./commonMonitoringTypes.json#/parameters/RegionParameter"
-          },
-          {
-            "$ref": "./commonMonitoringTypes.json#/parameters/MetricNamespaceParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./commonMonitoringTypes.json#/definitions/MetricsErrorContract"
-            }
-          },
-          "200": {
-            "description": "Successful request to get the list of metric definitions",
-            "schema": {
-              "$ref": "#/definitions/SubscriptionScopeMetricDefinitionCollection"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "Get Subscription level Metric Definitions without filter": {
-            "$ref": "./examples/GetMultiResourceMetricDefinitions.json"
-          }
-        }
-      }
-    },
-    "/{resourceUri}/providers/Microsoft.Insights/metricDefinitions": {
-      "get": {
-        "tags": [
-          "MetricDefinitions"
-        ],
-        "operationId": "MetricDefinitions_List",
-        "description": "Lists the metric definitions for the resource.",
-        "parameters": [
-          {
-            "$ref": "./commonMonitoringTypes.json#/parameters/ResourceUriParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./commonMonitoringTypes.json#/parameters/MetricNamespaceParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
-            }
-          },
-          "200": {
-            "description": "Successful request to get the list of metric definitions",
-            "schema": {
-              "$ref": "#/definitions/MetricDefinitionCollection"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "Get Metric Definitions without filter": {
-            "$ref": "./examples/GetMetricDefinitions.json"
-          },
-          "Get Application Insights Metric Definitions without filter": {
-            "$ref": "./examples/GetMetricDefinitionsApplicationInsights.json"
-          },
-          "Get StorageCache Metric Definitions with metric class": {
-            "$ref": "./examples/GetMetricDefinitionsMetricClass.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/metrics": {
       "get": {
         "tags": [
@@ -182,7 +89,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./commonMonitoringTypes.json#/definitions/MetricsErrorContract"
+              "$ref": "./commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -264,7 +171,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./commonMonitoringTypes.json#/definitions/MetricsErrorContract"
+              "$ref": "./commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -346,7 +253,7 @@
           "200": {
             "description": "Successful request to get the list of metric values.",
             "schema": {
-              "$ref": "#/definitions/ResourceScopeMetricResponse"
+              "$ref": "#/definitions/Response"
             }
           }
         },
@@ -366,252 +273,14 @@
     }
   },
   "definitions": {
-    "MetricAvailability": {
-      "type": "object",
-      "properties": {
-        "timeGrain": {
-          "type": "string",
-          "format": "duration",
-          "description": "the time grain specifies the aggregation interval for the metric. Expressed as a duration 'PT1M', 'P1D', etc."
-        },
-        "retention": {
-          "type": "string",
-          "format": "duration",
-          "description": "the retention period for the metric at the specified timegrain.  Expressed as a duration 'PT1M', 'P1D', etc."
-        }
-      },
-      "description": "Metric availability specifies the time grain (aggregation interval or frequency) and the retention period for that time grain."
-    },
-    "AggregationType": {
-      "type": "string",
-      "description": "the aggregation type of the metric.",
-      "enum": [
-        "None",
-        "Average",
-        "Count",
-        "Minimum",
-        "Maximum",
-        "Total"
-      ],
-      "x-ms-enum": {
-        "name": "AggregationType",
-        "modelAsString": false
-      }
-    },
-    "MetricAggregationType": {
-      "type": "string",
-      "description": "the aggregation type of the metric.",
-      "enum": [
-        "None",
-        "Average",
-        "Count",
-        "Minimum",
-        "Maximum",
-        "Total"
-      ],
-      "x-ms-enum": {
-        "name": "MetricAggregationType",
-        "modelAsString": true
-      }
-    },
-    "MetricClass": {
-      "type": "string",
-      "description": "The class of the metric.",
-      "enum": [
-        "Availability",
-        "Transactions",
-        "Errors",
-        "Latency",
-        "Saturation"
-      ],
-      "x-ms-enum": {
-        "name": "MetricClass",
-        "modelAsString": true
-      }
-    },
-    "MetricDefinition": {
-      "type": "object",
-      "properties": {
-        "isDimensionRequired": {
-          "type": "boolean",
-          "description": "Flag to indicate whether the dimension is required."
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "the resource identifier of the resource that emitted the metric."
-        },
-        "namespace": {
-          "type": "string",
-          "description": "the namespace the metric belongs to."
-        },
-        "name": {
-          "$ref": "./commonMonitoringTypes.json#/definitions/LocalizableString",
-          "description": "the name and the display name of the metric, i.e. it is a localizable string."
-        },
-        "displayDescription": {
-          "type": "string",
-          "description": "Detailed description of this metric."
-        },
-        "category": {
-          "type": "string",
-          "description": "Custom category name for this metric."
-        },
-        "metricClass": {
-          "$ref": "#/definitions/MetricClass",
-          "description": "The class of the metric."
-        },
-        "unit": {
-          "$ref": "./commonMonitoringTypes.json#/definitions/MetricUnit",
-          "description": "the unit of the metric."
-        },
-        "primaryAggregationType": {
-          "$ref": "#/definitions/AggregationType",
-          "description": "the primary aggregation type value defining how to use the values for display."
-        },
-        "supportedAggregationTypes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AggregationType"
-          },
-          "description": "the collection of what aggregation types are supported."
-        },
-        "metricAvailabilities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricAvailability"
-          },
-          "description": "the collection of what aggregation intervals are available to be queried."
-        },
-        "id": {
-          "type": "string",
-          "description": "the resource identifier of the metric definition."
-        },
-        "dimensions": {
-          "type": "array",
-          "items": {
-            "$ref": "./commonMonitoringTypes.json#/definitions/LocalizableString"
-          },
-          "description": "the name and the display name of the dimension, i.e. it is a localizable string."
-        }
-      },
-      "description": "Metric definition class specifies the metadata for a metric."
-    },
-    "MetricDefinitionCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricDefinition"
-          },
-          "description": "the values for the metric definitions."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of metric definitions (if there are any).",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "Represents collection of metric definitions."
-    },
-    "SubscriptionScopeMetricDefinition": {
-      "type": "object",
-      "description": "Metric definition class specifies the metadata for a metric.",
-      "properties": {
-        "isDimensionRequired": {
-          "type": "boolean",
-          "description": "Flag to indicate whether the dimension is required."
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "the resource identifier of the resource that emitted the metric."
-        },
-        "namespace": {
-          "type": "string",
-          "description": "the namespace the metric belongs to."
-        },
-        "name": {
-          "$ref": "./commonMonitoringTypes.json#/definitions/LocalizableString",
-          "description": "the name and the display name of the metric, i.e. it is a localizable string."
-        },
-        "displayDescription": {
-          "type": "string",
-          "description": "Detailed description of this metric."
-        },
-        "category": {
-          "type": "string",
-          "description": "Custom category name for this metric."
-        },
-        "metricClass": {
-          "$ref": "#/definitions/MetricClass",
-          "description": "The class of the metric."
-        },
-        "unit": {
-          "$ref": "./commonMonitoringTypes.json#/definitions/MetricUnit",
-          "description": "the unit of the metric."
-        },
-        "primaryAggregationType": {
-          "$ref": "#/definitions/MetricAggregationType",
-          "description": "the primary aggregation type value defining how to use the values for display."
-        },
-        "supportedAggregationTypes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricAggregationType"
-          },
-          "description": "the collection of what aggregation types are supported."
-        },
-        "metricAvailabilities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricAvailability"
-          },
-          "description": "the collection of what aggregation intervals are available to be queried."
-        },
-        "id": {
-          "type": "string",
-          "description": "the resource identifier of the metric definition."
-        },
-        "dimensions": {
-          "type": "array",
-          "items": {
-            "$ref": "./commonMonitoringTypes.json#/definitions/LocalizableString"
-          },
-          "description": "the name and the display name of the dimension, i.e. it is a localizable string."
-        }
-      }
-    },
-    "SubscriptionScopeMetricDefinitionCollection": {
-      "type": "object",
-      "description": "Represents collection of metric definitions.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubscriptionScopeMetricDefinition"
-          },
-          "description": "The values for the metric definitions."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of metric definitions (if there are any).",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "SubscriptionScopeMetricsRequestBodyParameters": {
       "description": "Query parameters can also be specified in the body, specifying the same parameter in both the body and query parameters will result in an error.",
       "type": "object",
       "properties": {
         "timespan": {
           "description": "The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.",
-          "type": "string"
+          "type": "string",
+          "format": "time"
         },
         "interval": {
           "description": "The interval (i.e. timegrain) of the query.",
@@ -669,7 +338,84 @@
         }
       }
     },
-    "ResourceScopeMetricResponse": {
+    "Unit": {
+      "type": "string",
+      "description": "The unit of the metric.",
+      "enum": [
+        "Count",
+        "Bytes",
+        "Seconds",
+        "CountPerSecond",
+        "BytesPerSecond",
+        "Percent",
+        "MilliSeconds",
+        "ByteSeconds",
+        "Unspecified",
+        "Cores",
+        "MilliCores",
+        "NanoCores",
+        "BitsPerSecond"
+      ],
+      "x-ms-enum": {
+        "name": "Unit",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Count",
+            "description": "Unit of raw quantity."
+          },
+          {
+            "value": "Bytes",
+            "description": "Unit of memory in bytes."
+          },
+          {
+            "value": "Seconds",
+            "description": "Unit of time in seconds."
+          },
+          {
+            "value": "CountPerSecond",
+            "description": "Rate unit of raw quantity per second."
+          },
+          {
+            "value": "BytesPerSecond",
+            "description": "Rate unit of memory in bytes per second."
+          },
+          {
+            "value": "Percent",
+            "description": "Percentage unit."
+          },
+          {
+            "value": "MilliSeconds",
+            "description": "Unit of time in 1/1000th of a second."
+          },
+          {
+            "value": "ByteSeconds",
+            "description": "Unit of data transfer or storage. It is the size of the data in bytes multiplied by the time it takes to transfer or store the data in seconds."
+          },
+          {
+            "value": "Unspecified",
+            "description": "No specified unit."
+          },
+          {
+            "value": "Cores",
+            "description": "Unit of processing power."
+          },
+          {
+            "value": "MilliCores",
+            "description": "Unit of processing power in 1/1000th of a CPU core."
+          },
+          {
+            "value": "NanoCores",
+            "description": "Unit of processing power in one billionth of a CPU core."
+          },
+          {
+            "value": "BitsPerSecond",
+            "description": "Rate unit of binary digits per second."
+          }
+        ]
+      }
+    },
+    "Response": {
       "type": "object",
       "description": "The response to a metrics query.",
       "properties": {
@@ -699,7 +445,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceScopeMetric"
+            "$ref": "#/definitions/Metric"
           },
           "description": "the value of the collection."
         }
@@ -709,7 +455,7 @@
         "value"
       ]
     },
-    "ResourceScopeMetric": {
+    "Metric": {
       "type": "object",
       "description": "The result data of a query.",
       "properties": {
@@ -738,7 +484,7 @@
           "description": "Error message encountered querying this specific metric."
         },
         "unit": {
-          "$ref": "./commonMonitoringTypes.json#/definitions/Unit",
+          "$ref": "#/definitions/Unit",
           "description": "The unit of the metric."
         },
         "timeseries": {

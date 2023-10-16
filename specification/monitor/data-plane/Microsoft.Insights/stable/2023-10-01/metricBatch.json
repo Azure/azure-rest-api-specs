@@ -23,16 +23,15 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{baseUrl}",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "positionInOperation": "first",
     "parameters": [
       {
-        "name": "baseUrl",
+        "name": "endpoint",
         "description": "The regional endpoint to use, for example https://eastus.metrics.monitor.azure.com. The region should match the region of the requested resources. For global resources, the region should be 'global'.",
         "required": true,
         "type": "string",
-        "in": "path",
         "x-ms-skip-url-encoding": true
       }
     ]
@@ -56,10 +55,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/BatchStartTimeParameter"
+            "$ref": "#/parameters/MetricBatchStartTimeParameter"
           },
           {
-            "$ref": "#/parameters/BatchEndTimeParameter"
+            "$ref": "#/parameters/MetricBatchEndTimeParameter"
           },
           {
             "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/IntervalParameter"
@@ -80,7 +79,7 @@
             "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/OrderByParameter"
           },
           {
-            "$ref": "#/parameters/BatchFilterParameter"
+            "$ref": "#/parameters/MetricBatchFilterParameter"
           },
           {
             "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/AutoAdjustTimegrain"
@@ -89,7 +88,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceIdListParameter"
+            "$ref": "#/parameters/MetricBatchResourceIdListParameter"
           }
         ],
         "responses": {
@@ -108,7 +107,7 @@
               }
             },
             "schema": {
-              "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/definitions/MetricsErrorContract"
+              "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
         },
@@ -121,16 +120,16 @@
     }
   },
   "parameters": {
-    "ResourceIdListParameter": {
+    "MetricBatchResourceIdListParameter": {
       "name": "resourceIds",
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ResourceIdList"
+        "$ref": "#/definitions/MetricBatchResourceIdList"
       },
       "description": "The comma separated list of resource IDs to query metrics for."
     },
-    "BatchStartTimeParameter": {
+    "MetricBatchStartTimeParameter": {
       "name": "starttime",
       "in": "query",
       "required": false,
@@ -138,7 +137,7 @@
       "description": "The start time of the query. It is a string in the format 'yyyy-MM-ddTHH:mm:ss.fffZ'. If you have specified the endtime parameter, then this parameter is required.\nIf only starttime is specified, then endtime defaults to the current time.\nIf no time interval is specified, the default is 1 hour.",
       "x-ms-parameter-location": "method"
     },
-    "BatchEndTimeParameter": {
+    "MetricBatchEndTimeParameter": {
       "name": "endtime",
       "in": "query",
       "required": false,
@@ -166,7 +165,7 @@
       "description": "The names of the metrics (comma separated) to retrieve.",
       "x-ms-parameter-location": "method"
     },
-    "BatchFilterParameter": {
+    "MetricBatchFilterParameter": {
       "name": "filter",
       "in": "query",
       "required": false,
@@ -176,7 +175,7 @@
     }
   },
   "definitions": {
-    "ResourceIdList": {
+    "MetricBatchResourceIdList": {
       "description": "The comma separated list of resource IDs to query metrics for.",
       "type": "object",
       "properties": {

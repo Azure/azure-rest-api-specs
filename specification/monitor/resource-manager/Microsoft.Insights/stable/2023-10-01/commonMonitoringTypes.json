@@ -100,83 +100,6 @@
         ]
       }
     },
-    "Unit": {
-      "type": "string",
-      "description": "The unit of the metric.",
-      "enum": [
-        "Count",
-        "Bytes",
-        "Seconds",
-        "CountPerSecond",
-        "BytesPerSecond",
-        "Percent",
-        "MilliSeconds",
-        "ByteSeconds",
-        "Unspecified",
-        "Cores",
-        "MilliCores",
-        "NanoCores",
-        "BitsPerSecond"
-      ],
-      "x-ms-enum": {
-        "name": "MetricUnit",
-        "modelAsString": false,
-        "values": [
-          {
-            "value": "Count",
-            "description": "Unit of raw quantity."
-          },
-          {
-            "value": "Bytes",
-            "description": "Unit of memory in bytes."
-          },
-          {
-            "value": "Seconds",
-            "description": "Unit of time in seconds."
-          },
-          {
-            "value": "CountPerSecond",
-            "description": "Rate unit of raw quantity per second."
-          },
-          {
-            "value": "BytesPerSecond",
-            "description": "Rate unit of memory in bytes per second."
-          },
-          {
-            "value": "Percent",
-            "description": "Percentage unit."
-          },
-          {
-            "value": "MilliSeconds",
-            "description": "Unit of time in 1/1000th of a second."
-          },
-          {
-            "value": "ByteSeconds",
-            "description": "Unit of data transfer or storage. It is the size of the data in bytes multiplied by the time it takes to transfer or store the data in seconds."
-          },
-          {
-            "value": "Unspecified",
-            "description": "No specified unit."
-          },
-          {
-            "value": "Cores",
-            "description": "Unit of processing power."
-          },
-          {
-            "value": "MilliCores",
-            "description": "Unit of processing power in 1/1000th of a CPU core."
-          },
-          {
-            "value": "NanoCores",
-            "description": "Unit of processing power in one billionth of a CPU core."
-          },
-          {
-            "value": "BitsPerSecond",
-            "description": "Rate unit of binary digits per second."
-          }
-        ]
-      }
-    },
     "MetricValue": {
       "type": "object",
       "description": "Represents a metric value.",
@@ -298,7 +221,7 @@
         "timeseries"
       ]
     },
-    "MetricsErrorContract": {
+    "ErrorContract": {
       "title": "Error response",
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "type": "object",
