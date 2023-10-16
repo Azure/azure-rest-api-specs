@@ -198,6 +198,12 @@ interface Fleets {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Use operationId to keep same name as deprecated sync operation"
   @added(Versions.v2023_06_15_preview)
   @operationId("Fleets_Update")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "original-uri",
+    }
+  )
   @sharedRoute
   updateAsync is ArmCustomPatchAsync<
     Fleet,
