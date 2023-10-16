@@ -1107,25 +1107,25 @@
         "kind": {
           "description": "The kind of scoped Azure monitor resource.",
           "type": "string",
-          "readonly": "true",
+          "readonly": true,
           "enum": [
             "Resource",
             "Metrics"
           ],
           "x-ms-enum": {
-            "name": "ScopedResourceProvisioningState",
+            "name": "ScopedResourceKind",
             "modelAsString": true
           }
         },
         "linkedResourceId": {
           "description": "The resource id of the scoped Azure monitor resource.",
           "type": "string",
-          "readonly": "true"
+          "readonly": true
         },
         "subscriptionLocation": {
           "description": "The location of a scoped subscription. Only needs to be specified for metric dataplane subscriptions.",
           "type": "string",
-          "readonly": "true"
+          "readonly": true
         },
         "provisioningState": {
           "type": "string",
