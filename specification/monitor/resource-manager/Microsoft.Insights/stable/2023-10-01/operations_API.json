@@ -128,8 +128,34 @@
             }
           }
         },
+        "origin": {
+          "description": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "user",
+            "system",
+            "user,system"
+          ],
+          "x-ms-enum": {
+            "name": "Origin",
+            "modelAsString": true
+          }
+        },
+        "actionType": {
+          "description": "Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": true
+          }
+        },
         "properties": {
-          "description": "Properties of operation, include metric specifications.",
+          "description": "Properties of operation, include log and metric specifications.",
           "x-ms-client-flatten": true,
           "x-ms-client-name": "OperationProperties",
           "$ref": "#/definitions/OperationProperties"
