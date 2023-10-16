@@ -44,7 +44,8 @@ These settings apply only when `--tag=package-2023-10` is specified on the comma
 ```yaml $(tag) == 'package-2023-10'
 input-file:
   - Microsoft.Insights/stable/2023-10-01/operations_API.json
-  - Microsoft.Insights/stable/2023-10-01/unified_metrics_API.json
+  - Microsoft.Insights/stable/2023-10-01/metrics_API.json
+  - Microsoft.Insights/stable/2023-10-01/metricDefinitions_API.json
   - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
   - Microsoft.Monitor/stable/2023-04-03/operations_API.json
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
