@@ -8,14 +8,14 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Using the AI acronym similar to what was done for OpenAI"
-@doc("placeholder")
+@doc("Azure APIs for the Azure Chat protocol.")
 @service({
   title: "Azure ML Chat",
 })
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "api-key">)
 @server(
   "{endpoint}",
-  "Azure ML Chat APIs",
+  "Azure Chat Protocol APIs",
   {
     endpoint: string,
   }
