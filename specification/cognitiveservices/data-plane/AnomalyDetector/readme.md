@@ -121,3 +121,12 @@ uncomment the  `exclude-file` section below and add the file paths.
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
+### Tag: package-preview-v1.2-preview
+
+These settings apply only when `--tag=package-preview-v1.2-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-v1.2-preview'
+input-file:
+  - preview/v1.2-preview/openapi.json
+```
+
