@@ -57,7 +57,6 @@ input-file:
   - Microsoft.App/preview/2023-08-01-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
   - Microsoft.App/preview/2023-08-01-preview/ManagedEnvironmentsDaprSubscriptions.json
   - Microsoft.App/preview/2023-08-01-preview/ManagedEnvironmentsStorages.json
-  - Microsoft.App/preview/2023-08-01-preview/Patches.json
   - Microsoft.App/preview/2023-08-01-preview/SourceControls.json
   - Microsoft.App/preview/2023-08-01-preview/Subscriptions.json
   - Microsoft.App/preview/2023-08-01-preview/Usages.json
