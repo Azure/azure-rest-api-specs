@@ -60,6 +60,21 @@ directive:
 suppressions:
   - code: PathResourceProviderNamePascalCase
     reason: We had already gone to production with "HCI" in our namespace, so changing it to "Hci" now would be disruptive.
+  - code: ResourceNameRestriction
+    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+    from: deploymentSettings.json
+    where: 
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}/deploy"]
+
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility 
+    from: deploymentSettings.json
+    where: 
+    - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
+    - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
+    - $.definitions.QosPolicyOverrides.properties.bandwidthPercentage_SMB
   - code: TopLevelResourcesListBySubscription
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
   - code: PropertiesTypeObjectNoDefinition
@@ -102,6 +117,26 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2023-08-01/updateSummaries.json
   - Microsoft.AzureStackHCI/stable/2023-08-01/updates.json
 ```
+### Tag: package-preview-2023-08-01
+
+These settings apply only when `--tag=package-preview-2023-08-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-08-01'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/offers.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/publishers.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/skus.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/updateRuns.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/updateSummaries.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/updates.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/deploymentSettings.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/edgeDevices.json
+```
+
 ### Tag: package-preview-2023-07
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
