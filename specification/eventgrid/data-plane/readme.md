@@ -122,6 +122,7 @@ input-file:
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+- Microsoft.EventGrid/stable/2018-01-01/SystemEvents.json
 - Microsoft.DataBox/stable/2018-01-01/DataBox.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
@@ -139,7 +140,8 @@ input-file:
 - Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
 - Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
 - Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
-
+- Microsoft.ResourceNotifications/stable/2018-01-01/common.json
+- Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
 ```
 
 ### Tag: package-2023-06-01-preview
@@ -152,6 +154,7 @@ input-file:
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+- Microsoft.EventGrid/stable/2018-01-01/SystemEvents.json
 - Microsoft.EventGrid/preview/2023-06-01-preview/EventGrid.json
 - Microsoft.DataBox/stable/2018-01-01/DataBox.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
@@ -170,7 +173,8 @@ input-file:
 - Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
 - Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
 - Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
-
+- Microsoft.ResourceNotifications/stable/2018-01-01/common.json
+- Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
 ```
 
 ### Suppression
@@ -262,6 +266,8 @@ input-file:
   - $(this-folder)/Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
   - $(this-folder)/Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
   - $(this-folder)/Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
+  - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/common.json
+  - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 

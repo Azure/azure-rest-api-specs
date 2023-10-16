@@ -56,6 +56,7 @@ These settings apply only when `--tag=package-artifacts-composite-v7` is specifi
 ``` yaml $(tag) == 'package-artifacts-composite-v7'
 input-file:
   - Microsoft.Synapse/preview/2023-04-18-preview/linkConnections.json
+  - Microsoft.Synapse/preview/2022-03-01-preview/runNotebook.json
   - Microsoft.Synapse/preview/2021-11-01-preview/kqlScripts.json
   - Microsoft.Synapse/preview/2021-07-01-preview/symsSync.json
   - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfigurations.json
@@ -83,6 +84,17 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+```
+
+### Tag: package-artifacts-2021-04-01
+
+These settings apply only when `--tag=package-artifacts-2021-04-01` is specified on the command line.
+
+**ATTENTION**: Please DO NOT generate SDK based on this tag. Syms API set is not ready to be included in SDK.
+
+``` yaml $(tag) == 'package-artifacts-2021-04-01'
+input-file:
+  - Microsoft.Synapse/stable/2021-04-01/symsAPI.json
 ```
 
 ### Tag: package-artifacts-composite-v6
@@ -119,6 +131,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v5
@@ -155,6 +168,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v4
@@ -191,6 +205,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v3
@@ -226,6 +241,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v2
@@ -260,6 +276,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v1
@@ -294,6 +311,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-2021-06-01-preview
@@ -380,6 +398,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-monitoring-2020-12-01
@@ -502,7 +521,7 @@ directive:
       - $.definitions.SparkStatementOutput.properties.execution_count
 
   - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: These properties need to keep the same with jupyter Notebook. Rp can't change these proeprties.
+    reason: These properties need to keep the same with jupyter Notebook. Rp can't change these properties.
     from: Notebook.json
     where:
       - $.definitions.NotebookCellOutputItem.properties.execution_count
