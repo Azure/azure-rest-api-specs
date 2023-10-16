@@ -3610,6 +3610,10 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "operationName": "LocalRulestacks_listAppIds"
+        },
         "x-ms-examples": {
           "LocalRulestacks_listAppIds_MaximumSet_Gen": {
             "$ref": "./examples/LocalRulestacks_listAppIds_MaximumSet_Gen.json"
@@ -3617,10 +3621,6 @@
           "LocalRulestacks_listAppIds_MinimumSet_Gen": {
             "$ref": "./examples/LocalRulestacks_listAppIds_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "operationName": "LocalRulestacks_listAppIds"
         }
       }
     },
@@ -3672,6 +3672,10 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "operationName": "LocalRulestacks_listCountries"
+        },
         "x-ms-examples": {
           "LocalRulestacks_listCountries_MaximumSet_Gen": {
             "$ref": "./examples/LocalRulestacks_listCountries_MaximumSet_Gen.json"
@@ -3679,10 +3683,6 @@
           "LocalRulestacks_listCountries_MinimumSet_Gen": {
             "$ref": "./examples/LocalRulestacks_listCountries_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "operationName": "LocalRulestacks_listCountries"
         }
       }
     },
@@ -3779,6 +3779,10 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "operationName": "LocalRulestacks_listPredefinedUrlCategories"
+        },
         "x-ms-examples": {
           "LocalRulestacks_listPredefinedUrlCategories_MaximumSet_Gen": {
             "$ref": "./examples/LocalRulestacks_listPredefinedUrlCategories_MaximumSet_Gen.json"
@@ -3786,10 +3790,6 @@
           "LocalRulestacks_listPredefinedUrlCategories_MinimumSet_Gen": {
             "$ref": "./examples/LocalRulestacks_listPredefinedUrlCategories_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "operationName": "LocalRulestacks_listPredefinedUrlCategories"
         }
       }
     },
@@ -6108,6 +6108,10 @@
           },
           "x-cadl-name": "string[]",
           "description": "Non-RFC 1918 address"
+        },
+        "privateSourceNat": {
+          "$ref": "#/definitions/PrivateSourceNat",
+          "description": "Private Source Nat configuration"
         }
       },
       "description": "Network settings for Firewall",
@@ -6488,6 +6492,23 @@
       "description": "prefix entry",
       "required": [
         "prefixList"
+      ]
+    },
+    "PrivateSourceNat": {
+      "type": "object",
+      "properties": {
+        "rulesDestination": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Array of ipv4 destination address for which source NAT to be performed. Duplicates are not allowed."
+        }
+      },
+      "description": "Private Source Nat configuration",
+      "required": [
+        "rulesDestination"
       ]
     },
     "ProtocolType": {
