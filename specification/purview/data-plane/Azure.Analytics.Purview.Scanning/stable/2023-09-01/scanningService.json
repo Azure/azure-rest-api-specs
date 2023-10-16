@@ -1268,7 +1268,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ScanResultWithIngestion"
+              "$ref": "#/definitions/ScanHistoryListWithIngestion"
             }
           },
           "default": {
@@ -3368,6 +3368,27 @@
       }
     },
     "ScanHistoryList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScanResultWithIngestion"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "ScanHistoryListWithIngestion": {
       "required": [
         "value"
       ],
