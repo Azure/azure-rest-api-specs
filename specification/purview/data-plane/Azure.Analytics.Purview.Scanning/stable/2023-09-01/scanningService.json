@@ -936,6 +936,705 @@
         }
       }
     },
+    "/integrationruntimes/{integrationRuntimeName}": {
+      "get": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Gets an integrationRuntime",
+        "operationId": "IntegrationRuntimes_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntime"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_Get": {
+            "$ref": "./examples/IntegrationRuntimes_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Deletes an integrationRuntime",
+        "operationId": "IntegrationRuntimes_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IActionResult"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_Delete": {
+            "$ref": "./examples/IntegrationRuntimes_Delete.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Create or update an instance of a integrationRuntime",
+        "operationId": "IntegrationRuntimes_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntime"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntime"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntime"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_CreateOrUpdate": {
+            "$ref": "./examples/IntegrationRuntimes_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/integrationruntimes/{integrationRuntimeName}/status": {
+      "get": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Gets an IntegrationRuntimeStatus object. This is significantly different from IntegrationRuntime",
+        "operationId": "IntegrationRuntimes_Status",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeStatus"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_Status": {
+            "$ref": "./examples/IntegrationRuntimes_Status.json"
+          }
+        }
+      }
+    },
+    "/integrationruntimes/{integrationRuntimeName}/:listAuthKeys": {
+      "post": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Gets integrationRuntimeAuthKeys",
+        "operationId": "IntegrationRuntimes_ListAuthKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeAuthKeys"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_ListAuthKeys": {
+            "$ref": "./examples/IntegrationRuntimes_ListAuthKeys.json"
+          }
+        }
+      }
+    },
+    "/integrationruntimes/{integrationRuntimeName}/:regenerateAuthKey": {
+      "post": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Regenerates integrationRuntimeAuthKey",
+        "operationId": "IntegrationRuntimes_RegenerateAuthKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeRegenerateKeyParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeAuthKeys"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_RegenerateAuthKey": {
+            "$ref": "./examples/IntegrationRuntimes_RegenerateAuthKey.json"
+          }
+        }
+      }
+    },
+    "/integrationruntimes": {
+      "get": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Lists integrationruntimes in an account",
+        "operationId": "IntegrationRuntimes_ListByAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_ListByAccount": {
+            "$ref": "./examples/IntegrationRuntimes_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/integrationruntimes/{integrationRuntimeName}:disableInteractiveQuery": {
+      "post": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Disables interactive querying",
+        "operationId": "IntegrationRuntimes_DisableInteractiveQuery",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IActionResult"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_DisableInteractiveQuery": {
+            "$ref": "./examples/IntegrationRuntimes_DisableInteractiveQuery.json"
+          }
+        }
+      }
+    },
+    "/integrationruntimes/{integrationRuntimeName}:enableInteractiveQuery": {
+      "post": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Enables interactive querying",
+        "operationId": "IntegrationRuntimes_EnableInteractiveQuery",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnableInteractiveQueryForIntegrationRuntimeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IActionResult"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_EnableInteractiveQuery": {
+            "$ref": "./examples/IntegrationRuntimes_EnableInteractiveQuery.json"
+          }
+        }
+      }
+    },
+    "/managedvirtualnetworks/{managedVirtualNetworkName}": {
+      "get": {
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
+        "description": "Gets a ManagedVirtualNetwork",
+        "operationId": "ManagedVirtualNetworks_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_Get": {
+            "$ref": "./examples/ManagedVirtualNetworks_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
+        "description": "Create or update a ManagedVirtualNetwork",
+        "operationId": "ManagedVirtualNetworks_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetwork"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_CreateOrUpdate": {
+            "$ref": "./examples/ManagedVirtualNetworks_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/managedvirtualnetworks/{managedVirtualNetworkName}/managedprivateendpoints/{managedPrivateEndpointName}": {
+      "get": {
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
+        "description": "Gets a ManagedPrivateEndpoint",
+        "operationId": "ManagedVirtualNetworks_GetPrivateEndpoint",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/managedPrivateEndpointName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_GetPrivateEndpoint": {
+            "$ref": "./examples/ManagedVirtualNetworks_GetPrivateEndpoint.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
+        "description": "Deletes a ManagedPrivateEndpoint",
+        "operationId": "ManagedVirtualNetworks_DeletePrivateEndpoint",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/managedPrivateEndpointName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IActionResult"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_DeletePrivateEndpoint": {
+            "$ref": "./examples/ManagedVirtualNetworks_DeletePrivateEndpoint.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
+        "description": "Create or update a ManagedPrivateEndpoint",
+        "operationId": "ManagedVirtualNetworks_CreateOrUpdatePrivateEndpoint",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/managedPrivateEndpointName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_CreateOrUpdatePrivateEndpoint": {
+            "$ref": "./examples/ManagedVirtualNetworks_CreateOrUpdatePrivateEndpoint.json"
+          }
+        }
+      }
+    },
+    "/managedvirtualnetworks": {
+      "get": {
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
+        "description": "Gets a list of ManagedVirtualNetworks",
+        "operationId": "ManagedVirtualNetworks_ListByAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetworkList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_ListByAccount": {
+            "$ref": "./examples/ManagedVirtualNetworks_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/managedvirtualnetworks/{managedVirtualNetworkName}/managedprivateendpoints": {
+      "get": {
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
+        "description": "Gets a list of ManagedPrivateEndpoints for a given account",
+        "operationId": "ManagedVirtualNetworks_ListPrivateEndpointsByAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_ListPrivateEndpointsByAccount": {
+            "$ref": "./examples/ManagedVirtualNetworks_ListPrivateEndpointsByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/datasources/{dataSourceName}/scans/{scanName}": {
       "put": {
         "tags": [
