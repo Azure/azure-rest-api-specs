@@ -70,7 +70,7 @@
   },
   "definitions": {
     "OperationListResult": {
-      "description": "Result of the request to list Microsoft.Insights operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "A list of REST API operations supported by the Microsoft.Insights Azure Resource Provider. It contains an URL link to get the next set of results.",
       "type": "object",
       "properties": {
         "value": {
@@ -78,28 +78,32 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of operations supported by the Microsoft.Insights provider."
         },
         "nextLink": {
           "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
+          "description": "URL to get the next set of operation list results (if there are any)."
         }
       }
     },
     "Operation": {
-      "description": "Microsoft Insights API operation definition.",
+      "title": "REST API Operation",
+      "description": "Details of a REST API operation, returned from the Microsoft.Insights Operations API",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
+          "description": "The name of the operation, as per Resource-Based Access Control (RBAC). Examples: \"Microsoft.Insights/components/write\", \"Microsoft.Insights/metrics/read\"",
           "type": "string"
         },
         "isDataAction": {
-          "type": "boolean",
-          "description": "Property to specify whether the action is a data action."
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean"
         },
         "display": {
-          "description": "Display metadata associated with the operation.",
+          "description": "Localized display information for this particular operation.",
           "type": "object",
           "properties": {
             "publisher": {
@@ -107,19 +111,19 @@
               "type": "string"
             },
             "provider": {
-              "description": "Service provider: Microsoft.Insights",
+              "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Azure Monitor\".",
               "type": "string"
             },
             "resource": {
-              "description": "Resource on which the operation is performed: AlertRules, Autoscale, etc.",
+              "description": "The localized friendly name of the resource type related to this operation. E.g. \"Application insights components\" or \"Log Definitions\".",
               "type": "string"
             },
             "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
+              "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Reading an application insights component configuration\", \"Application Insights component metrics read\".",
               "type": "string"
             },
             "description": {
-              "description": "The description of the operation.",
+              "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
               "type": "string"
             }
           }
@@ -151,14 +155,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metricSpecifications": {
           "description": "Metric specifications of operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "legacyMetricSpecifications": {
           "description": "Legacy Metric specifications for operation. Deprecated, do not use.",
@@ -242,7 +252,10 @@
           "description": "The dimensions of metric.",
           "items": {
             "$ref": "#/definitions/DimensionProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "fillGapWithZero": {
           "type": "boolean",
