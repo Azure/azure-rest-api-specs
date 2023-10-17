@@ -60,7 +60,7 @@ model Environment {
 
   @doc("Provisioning error details. Populated only for error states.")
   @visibility("read")
-  error?: CloudErrorBody;
+  error?: Azure.Core.Foundations.Error;
 }
 
 @doc("""

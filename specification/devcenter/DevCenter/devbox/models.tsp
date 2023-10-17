@@ -262,7 +262,7 @@ A unique identifier for the Dev Box. This is a GUID-formatted string (e.g.
 
   @doc("Provisioning or action error details. Populated only for error states.")
   @visibility("read")
-  error?: CloudErrorBody;
+  error?: Azure.Core.Foundations.Error;
 
   @doc("""
 Azure region where this Dev Box is located. This will be the same region as the
@@ -358,5 +358,5 @@ model DevBoxActionDelayResult {
   action?: DevBoxAction;
 
   @doc("Information about the error that occurred. Only populated on error.")
-  error?: CloudErrorBody;
+  error?: Azure.Core.Foundations.Error;
 }

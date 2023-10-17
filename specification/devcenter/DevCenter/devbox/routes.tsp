@@ -226,9 +226,7 @@ interface DevBoxesOperations {
       statusCode: 202;
       @body
       body: OperationStatus
-    },
-    {},
-    CloudError
+    }
   >;
 
   @doc("Stops a Dev Box")
@@ -258,9 +256,7 @@ interface DevBoxesOperations {
       statusCode: 202;
       @body
       body: OperationStatus
-    },
-    {},
-    CloudError
+    }
   >;
 
   @doc("Restarts a Dev Box")
@@ -286,9 +282,7 @@ interface DevBoxesOperations {
       statusCode: 202;
       @body
       body: OperationStatus
-    },
-    {},
-    CloudError
+    }
   >;
 
   @doc("Gets RDP Connection info")

@@ -137,7 +137,7 @@ interface EnvironmentsOperations {
     } | {
       @statusCode
       statusCode: 204;
-    } | CloudError;
+    } | Azure.Core.Foundations.ErrorResponse;
 
   @doc("Lists all of the catalogs available for a project.")
   @route("/projects/{projectName}/catalogs")
