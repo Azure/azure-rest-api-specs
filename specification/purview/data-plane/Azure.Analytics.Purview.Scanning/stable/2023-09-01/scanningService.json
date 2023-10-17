@@ -1032,16 +1032,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success.",
-            "schema": {
-              "$ref": "#/definitions/IActionResult"
-            }
+            "description": "Success."
           },
           "204": {
-            "description": "Success.",
-            "schema": {
-              "$ref": "#/definitions/IActionResult"
-            }
+            "description": "Success."
           },
           "default": {
             "description": "An error response received from the Scanning Service.",
@@ -1259,10 +1253,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success.",
-            "schema": {
-              "$ref": "#/definitions/IActionResult"
-            }
+            "description": "Success."
           },
           "default": {
             "description": "An error response received from the Scanning Service.",
@@ -1310,10 +1301,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success.",
-            "schema": {
-              "$ref": "#/definitions/IActionResult"
-            }
+            "description": "Success."
           },
           "default": {
             "description": "An error response received from the Scanning Service.",
@@ -1568,16 +1556,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success.",
-            "schema": {
-              "$ref": "#/definitions/IActionResult"
-            }
+            "description": "Success."
           },
           "204": {
-            "description": "Success.",
-            "schema": {
-              "$ref": "#/definitions/IActionResult"
-            }
+            "description": "Success."
           },
           "default": {
             "description": "An error response received from the Scanning Service.",
@@ -3883,10 +3865,6 @@
         }
       }
     },
-    "IActionResult": {
-      "description": "Response result.",
-      "type": "object"
-    },
     "IntegrationRuntimeList": {
       "description": "A list of integration runtime resources.",
       "required": [
@@ -3895,15 +3873,18 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "List of integration runtimes.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntegrationRuntime"
           }
         },
         "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
           "type": "string"
         },
         "count": {
+          "description": "The count of integration runtimes.",
           "format": "int64",
           "type": "integer"
         }
