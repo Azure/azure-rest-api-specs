@@ -563,7 +563,13 @@
             "NotConnectedRecently",
             "Disconnected",
             "Error",
-            "NotSpecified"
+            "NotSpecified",
+            "ValidationInProgress",
+            "ValidationSuccess",
+            "ValidationFailed",
+            "DeploymentInProgress",
+            "DeploymentFailed",
+            "DeploymentSuccess"
           ],
           "x-ms-enum": {
             "name": "Status",
@@ -735,7 +741,7 @@
       "type": "object",
       "properties": {
         "attestationResourceId": {
-          "description": "Fully qualified Arm Resource Id of the Microsoft Azure Attestation resource associated with this cluster.",
+          "description": "Fully qualified Azure resource id of the Microsoft Azure attestation resource associated with this cluster.",
           "type": "string",
           "format": "arm-id",
           "x-ms-arm-id-details": {
