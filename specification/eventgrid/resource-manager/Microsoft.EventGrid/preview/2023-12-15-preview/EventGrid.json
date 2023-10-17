@@ -9179,8 +9179,10 @@
           },
           "202": {
             "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -16334,6 +16336,10 @@
           "items": {
             "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
           }
+        },
+        "nextLink": {
+          "description": "A link for the next page of Network Security Perimeter Configuration.",
+          "type": "string"
         }
       }
     },
