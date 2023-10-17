@@ -261,7 +261,6 @@
           {
             "name": "HybridRunbookWorkerCreationParameters",
             "in": "body",
-            "required": true,
             "schema": {
               "$ref": "#/definitions/HybridRunbookWorkerCreateParameters"
             },
@@ -277,12 +276,6 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HybridRunbookWorker"
-            }
-          },
-          "201": {
-            "description": "Created",
             "schema": {
               "$ref": "#/definitions/HybridRunbookWorker"
             }
@@ -534,12 +527,10 @@
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets or sets the name of the resource."
         }
       },
-      "required": [
-        "properties"
-      ],
       "description": "The parameters supplied to the create hybrid runbook worker operation."
     }
   },

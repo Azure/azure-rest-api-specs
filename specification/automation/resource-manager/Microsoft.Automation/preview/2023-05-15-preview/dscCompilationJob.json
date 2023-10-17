@@ -584,33 +584,12 @@
           "x-nullable": true,
           "description": "Gets or sets the summary."
         },
-        "value":  {
-          "$ref": "#/definitions/JobStreamValue",
-          "x-ms-client-flatten": true,
-          "description": "Job Stream Value"
-        }
-      },
-      "x-ms-client-flatten": true,
-      "description": "Definition of the job stream."
-    },
-    "JobStreamValue":{
-      "type": "object",
-      "properties": {
         "value": {
-          "type": "string",
-          "description": "Gets or sets the id of the job stream."
-        },
-        "PSComputerName": {
-          "type": "string",
-          "description": "Gets or sets the stream text."
-        },
-        "PSShowComputerName": {
-          "type": "boolean",
-          "description": "If a new build version of NodeConfiguration is required."
-        },
-        "PSSourceJobInstanceId":  {
-          "type": "string",
-          "description": "Gets or sets the stream text."
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "Gets or sets the values of the job stream.",
+          "type": "object"
         }
       },
       "x-ms-client-flatten": true,
