@@ -13,7 +13,7 @@ interface DevBoxesOperations {
   @doc("Lists available pools")
   @route("/projects/{projectName}/pools")
   @get
-  ListPools is DevCenterBaseResponse<
+  ListPools is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -33,7 +33,7 @@ interface DevBoxesOperations {
   @doc("Gets a pool")
   @route("/projects/{projectName}/pools/{poolName}")
   @get
-  GetPool is DevCenterBaseResponse<
+  GetPool is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -49,7 +49,7 @@ interface DevBoxesOperations {
   @doc("Lists available schedules for a pool.")
   @route("/projects/{projectName}/pools/{poolName}/schedules")
   @get
-  ListSchedules is DevCenterBaseResponse<
+  ListSchedules is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -73,7 +73,7 @@ interface DevBoxesOperations {
   @doc("Gets a schedule.")
   @route("/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}")
   @get
-  GetSchedule is DevCenterBaseResponse<
+  GetSchedule is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -93,7 +93,7 @@ interface DevBoxesOperations {
   @doc("Lists Dev Boxes in the project for a particular user.")
   @route("/projects/{projectName}/users/{userId}/devboxes")
   @get
-  ListDevBoxes is DevCenterBaseResponse<
+  ListDevBoxes is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -117,7 +117,7 @@ interface DevBoxesOperations {
   @doc("Gets a Dev Box")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @get
-  GetDevBox is DevCenterBaseResponse<
+  GetDevBox is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -139,7 +139,7 @@ interface DevBoxesOperations {
   @pollingOperation(SharedOperations.GetProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @put
-  CreateDevBox is DevCenterBaseResponse<
+  CreateDevBox is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -175,7 +175,7 @@ interface DevBoxesOperations {
   @pollingOperation(SharedOperations.GetProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @delete
-  DeleteDevBox is DevCenterBaseResponse<
+  DeleteDevBox is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -294,7 +294,7 @@ interface DevBoxesOperations {
   @doc("Gets RDP Connection info")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/remoteConnection")
   @get
-  GetRemoteConnection is DevCenterBaseResponse<
+  GetRemoteConnection is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -314,7 +314,7 @@ interface DevBoxesOperations {
   @doc("Lists actions on a Dev Box.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions")
   @get
-  ListActions is DevCenterBaseResponse<
+  ListActions is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -334,7 +334,7 @@ interface DevBoxesOperations {
   @doc("Gets an action.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}")
   @get
-  GetAction is DevCenterBaseResponse<
+  GetAction is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -358,7 +358,7 @@ interface DevBoxesOperations {
   @doc("Skips an occurrence of an action.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:skip")
   @post
-  SkipAction is DevCenterBaseResponse<
+  SkipAction is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -382,7 +382,7 @@ interface DevBoxesOperations {
   @doc("Delays the occurrence of an action.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:delay")
   @post
-  DelayAction is DevCenterBaseResponse<
+  DelayAction is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -410,7 +410,7 @@ interface DevBoxesOperations {
   @doc("Delays all actions.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions:delay")
   @post
-  DelayAllActions is DevCenterBaseResponse<
+  DelayAllActions is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -436,7 +436,7 @@ interface DevBoxesDevCenterOperations {
   @doc("Lists Dev Boxes that the caller has access to in the DevCenter.")
   @route("/devboxes")
   @get
-  ListAllDevBoxes is DevCenterBaseResponse<
+  ListAllDevBoxes is Azure.Core.Foundations.Operation<
     {
       @doc("An OData filter clause to apply to the operation.")
       @query
@@ -452,7 +452,7 @@ interface DevBoxesDevCenterOperations {
   @doc("Lists Dev Boxes in the Dev Center for a particular user.")
   @route("/users/{userId}/devboxes")
   @get
-  ListAllDevBoxesByUser is DevCenterBaseResponse<
+  ListAllDevBoxesByUser is Azure.Core.Foundations.Operation<
     {
       @doc("An OData filter clause to apply to the operation.")
       @query

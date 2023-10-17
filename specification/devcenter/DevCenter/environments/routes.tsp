@@ -14,7 +14,7 @@ interface EnvironmentsOperations {
   @doc("Lists the environments for a project.")
   @route("/projects/{projectName}/environments")
   @get
-  ListAllEnvironments is DevCenterBaseResponse<
+  ListAllEnvironments is Azure.Core.Foundations.Operation<
     {
       @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
       @query
@@ -30,7 +30,7 @@ interface EnvironmentsOperations {
   @doc("Lists the environments for a project and user.")
   @route("/projects/{projectName}/users/{userId}/environments")
   @get
-  ListEnvironments is DevCenterBaseResponse<
+  ListEnvironments is Azure.Core.Foundations.Operation<
     {
       @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
       @query
@@ -50,7 +50,7 @@ interface EnvironmentsOperations {
   @doc("Gets an environment")
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @get
-  GetEnvironment is DevCenterBaseResponse<
+  GetEnvironment is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -72,7 +72,7 @@ interface EnvironmentsOperations {
   @pollingOperation(SharedOperations.GetProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @put
-  CreateOrUpdateEnvironment is DevCenterBaseResponse<
+  CreateOrUpdateEnvironment is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -142,7 +142,7 @@ interface EnvironmentsOperations {
   @doc("Lists all of the catalogs available for a project.")
   @route("/projects/{projectName}/catalogs")
   @get
-  ListCatalogs is DevCenterBaseResponse<
+  ListCatalogs is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -158,7 +158,7 @@ interface EnvironmentsOperations {
   @doc("Gets the specified catalog within the project")
   @route("/projects/{projectName}/catalogs/{catalogName}")
   @get
-  GetCatalog is DevCenterBaseResponse<
+  GetCatalog is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -174,7 +174,7 @@ interface EnvironmentsOperations {
   @doc("Lists all environment definitions available for a project.")
   @route("/projects/{projectName}/environmentDefinitions")
   @get
-  ListEnvironmentDefinitions is DevCenterBaseResponse<
+  ListEnvironmentDefinitions is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -190,7 +190,7 @@ interface EnvironmentsOperations {
   @doc("Lists all environment definitions available within a catalog.")
   @route("/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions")
   @get
-  ListEnvironmentDefinitionsByCatalog is DevCenterBaseResponse<
+  ListEnvironmentDefinitionsByCatalog is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -210,7 +210,7 @@ interface EnvironmentsOperations {
   @doc("Get an environment definition from a catalog.")
   @route("/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{definitionName}")
   @get
-  GetEnvironmentDefinition is DevCenterBaseResponse<
+  GetEnvironmentDefinition is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -230,7 +230,7 @@ interface EnvironmentsOperations {
   @doc("Lists all environment types configured for a project.")
   @route("/projects/{projectName}/environmentTypes")
   @get
-  ListEnvironmentTypes is DevCenterBaseResponse<
+  ListEnvironmentTypes is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path

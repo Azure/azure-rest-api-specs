@@ -9,12 +9,6 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
-op DevCenterBaseResponse<
-  TParams extends TypeSpec.Reflection.Model,
-  TResponse,
-  Traits extends TypeSpec.Reflection.Model = {}
-> is Azure.Core.Foundations.Operation<TParams, TResponse, Traits, CloudError>;
-
 @doc("An error response from the service.")
 model CloudErrorBody {
   @doc("""

@@ -10,7 +10,7 @@ interface SharedOperations {
     @doc("Get the status of an operation.")
     @route("/projects/{projectName}/operationstatuses/{operationId}")
     @get
-    GetProjectOperationStatus is DevCenterBaseResponse<
+    GetProjectOperationStatus is Azure.Core.Foundations.Operation<
       {
         @doc("The DevCenter Project upon which to execute operations.")
         @path
