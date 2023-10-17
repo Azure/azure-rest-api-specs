@@ -6231,7 +6231,39 @@
         }
       }
     },
-    "WorkloadServiceTempalteResource": {
+    "WorkloadServiceTemplateProperties": {
+      "type": "object",
+      "description": "Workload Service Template Resource properties",
+      "properties": {
+        "enclaveResourceId": {
+          "$ref": "#/definitions/VirtualEnclaveResourceId",
+          "description": "Virtual Enclave Resource Id."
+        },
+        "serviceName": {
+          "type": "string",
+          "description": "Workload Service Template Name"
+        },
+        "version": {
+          "type": "string",
+          "description": "Workload Service Template Version"
+        },
+        "url": {
+          "type": "string",
+          "description": "Workload Service Template URL"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "serviceName",
+        "version",
+        "url"
+      ]
+    },
+    "WorkloadServiceTemplateResource": {
       "type": "object",
       "description": "Workload Service Template Model Resource",
       "properties": {
@@ -6249,32 +6281,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
-      ]
-    },
-    "WorkloadServiceTemplateProperties": {
-      "type": "object",
-      "description": "Workload Service Template Resource properties",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Workload Service Template Description."
-        },
-        "enclaveResourceId": {
-          "$ref": "#/definitions/VirtualEnclaveResourceId",
-          "description": "Virtual Enclave Resource Id."
-        },
-        "serviceName": {
-          "type": "string",
-          "description": "Workload Service Template Name"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "serviceName"
       ]
     }
   },

@@ -108,7 +108,7 @@ model WorkloadResource is TrackedResource<WorkloadProperties> {
 
 @doc("Workload Service Template Model Resource")
 @parentResource(EnclaveResource)
-model WorkloadServiceTempalteResource
+model WorkloadServiceTemplateResource
   is TrackedResource<WorkloadServiceTemplateProperties> {
   @key("workloadServiceTemplateName")
   @segment("workloads")

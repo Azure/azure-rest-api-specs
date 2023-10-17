@@ -14,7 +14,6 @@ using Azure.ResourceManager;
 
 @doc("Workload Service Template Resource properties")
 model WorkloadServiceTemplateProperties {
-
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
   @doc("Virtual Enclave Resource Id.")
   enclaveResourceId?: VirtualEnclaveResourceId;
