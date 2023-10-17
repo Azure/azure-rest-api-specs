@@ -614,7 +614,7 @@
           "MetadataSchema"
         ],
         "operationId": "MetadataSchemas_Head",
-        "summary": "Check metadata schema exists",
+        "summary": "Check if metadata schema exists",
         "description": "Checks if specified metadata schema exists.",
         "responses": {
           "200": {
@@ -822,7 +822,7 @@
           "Workspace"
         ],
         "operationId": "Workspaces_Head",
-        "summary": "Check workspace exists",
+        "summary": "Check if workspace exists",
         "description": "Checks if specified workspace exists.",
         "responses": {
           "200": {
@@ -1255,7 +1255,7 @@
         "tags": [
           "ApiVersion"
         ],
-        "summary": "Check API version exists",
+        "summary": "Check if API version exists",
         "operationId": "ApiVersions_Head",
         "description": "Checks if specified API version exists.",
         "responses": {
@@ -1481,7 +1481,7 @@
         "tags": [
           "ApiDefinition"
         ],
-        "summary": "Check API definition exists",
+        "summary": "Check if API definition exists",
         "operationId": "ApiDefinitions_Head",
         "description": "Checks if specified API definition exists.",
         "responses": {
@@ -3027,12 +3027,13 @@
   },
   "parameters": {
     "ServiceNameParameter": {
+      "type": "string",
       "name": "serviceName",
       "in": "path",
       "required": true,
       "description": "Service name",
-      "pattern": "^[a-zA-Z0-9\\-]{1,64}$",
-      "type": "string",
+      "minLength": 1,
+      "maxLength": 90,
       "x-ms-parameter-location": "method"
     },
     "ApiNameParameter": {
@@ -3041,7 +3042,8 @@
       "in": "path",
       "required": true,
       "description": "The name of the API.",
-      "pattern": "^[a-zA-Z0-9\\-]{1,64}$"
+      "minLength": 1,
+      "maxLength": 90
     },
     "ApiVersionNameParameter": {
       "type": "string",
@@ -3049,7 +3051,8 @@
       "in": "path",
       "required": true,
       "description": "The name of the API version.",
-      "pattern": "^[a-zA-Z0-9\\-]{1,64}$"
+      "minLength": 1,
+      "maxLength": 90
     },
     "ApiDefinitionNameParameter": {
       "type": "string",
@@ -3057,7 +3060,8 @@
       "in": "path",
       "required": true,
       "description": "The name of the API definition.",
-      "pattern": "^[a-zA-Z0-9\\-]{1,64}$"
+      "minLength": 1,
+      "maxLength": 90
     },
     "ApiDeploymentNameParameter": {
       "type": "string",
@@ -3065,7 +3069,8 @@
       "in": "path",
       "required": true,
       "description": "The name of the API deployment.",
-      "pattern": "^[a-zA-Z0-9\\-]{1,64}$"
+      "minLength": 1,
+      "maxLength": 90
     },
     "EnvironmentNameParameter": {
       "type": "string",
@@ -3073,7 +3078,8 @@
       "in": "path",
       "required": true,
       "description": "The name of the environment.",
-      "pattern": "^[a-zA-Z0-9\\-]{1,64}$"
+      "minLength": 1,
+      "maxLength": 90
     },
     "MetadataSchemaNameParameter": {
       "type": "string",
@@ -3081,7 +3087,8 @@
       "in": "path",
       "required": true,
       "description": "The name of the metadata schema.",
-      "pattern": "^[a-zA-Z0-9\\-]{1,64}$"
+      "minLength": 1,
+      "maxLength": 90
     },
     "WorkspaceNameParameter": {
       "type": "string",
@@ -3089,7 +3096,8 @@
       "in": "path",
       "required": true,
       "description": "The name of the workspace.",
-      "pattern": "^[a-zA-Z0-9\\-]{1,64}$"
+      "minLength": 1,
+      "maxLength": 90
     },
     "ODataFilterParameter": {
       "type": "string",
