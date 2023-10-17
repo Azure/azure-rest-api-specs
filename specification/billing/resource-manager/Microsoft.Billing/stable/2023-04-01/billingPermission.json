@@ -40,7 +40,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -88,7 +88,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -143,11 +143,15 @@
           "200": {
             "description": "The list of check access response objects for a billing profile.",
             "schema": {
-              "$ref": "#/definitions/BillingCheckAccessResponseListResult"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BillingCheckAccessResponse"
+              },
+              "x-ms-identifiers": []
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -195,7 +199,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -253,11 +257,15 @@
           "200": {
             "description": "The list of check access response objects for a customer.",
             "schema": {
-              "$ref": "#/definitions/BillingCheckAccessResponseListResult"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BillingCheckAccessResponse"
+              },
+              "x-ms-identifiers": []
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -305,7 +313,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -363,11 +371,15 @@
           "200": {
             "description": "The list of check access response objects for an invoice section.",
             "schema": {
-              "$ref": "#/definitions/BillingCheckAccessResponseListResult"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BillingCheckAccessResponse"
+              },
+              "x-ms-identifiers": []
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -416,11 +428,15 @@
           "200": {
             "description": "The list of check access response objects for a billing account.",
             "schema": {
-              "$ref": "#/definitions/BillingCheckAccessResponseListResult"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BillingCheckAccessResponse"
+              },
+              "x-ms-identifiers": []
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -465,7 +481,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -520,11 +536,15 @@
           "200": {
             "description": "The list of check access response objects for a department.",
             "schema": {
-              "$ref": "#/definitions/BillingCheckAccessResponseListResult"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BillingCheckAccessResponse"
+              },
+              "x-ms-identifiers": []
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -569,7 +589,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -624,11 +644,15 @@
           "200": {
             "description": "The list of check access response objects for an enrollment account.",
             "schema": {
-              "$ref": "#/definitions/BillingCheckAccessResponseListResult"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BillingCheckAccessResponse"
+              },
+              "x-ms-identifiers": []
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -651,7 +675,7 @@
           "items": {
             "type": "string"
           },
-          "x-ms-identifiers": [ ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -674,30 +698,6 @@
         }
       }
     },
-    "BillingCheckAccessResponseListResult": {
-      "description": "A container for a list of resources",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        },
-        "value": {
-          "description": "The list of resources.",
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/BillingCheckAccessResponse"
-            },
-            "x-ms-identifiers": [ ]
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [ ]
-        }
-      }
-    },
     "BillingPermission": {
       "description": "The set of allowed action and not allowed actions a caller has on a resource.",
       "type": "object",
@@ -709,7 +709,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "x-ms-identifiers": [ ]
+          "x-ms-identifiers": []
         },
         "notActions": {
           "description": "The set of actions that the caller is not allowed to perform.",
@@ -718,7 +718,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "x-ms-identifiers": [ ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -738,7 +738,7 @@
             "$ref": "#/definitions/BillingPermission"
           },
           "readOnly": true,
-          "x-ms-identifiers": [ ]
+          "x-ms-identifiers": []
         }
       }
     }

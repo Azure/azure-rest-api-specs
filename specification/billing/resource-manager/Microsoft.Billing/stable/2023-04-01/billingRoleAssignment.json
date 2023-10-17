@@ -49,7 +49,7 @@
             "description": "The request has succeeded with no response body."
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -95,7 +95,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -149,7 +149,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -205,18 +205,18 @@
             "description": "The properties of the role assignment.",
             "schema": {
               "$ref": "#/definitions/BillingRoleAssignment"
-            },
+            }
+          },
+          "202": {
+            "description": "The properties of the role assignment.",
             "headers": {
               "Location": {
                 "type": "string"
               }
             }
           },
-          "202": {
-            "description": "The properties of the role assignment."
-          },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -274,7 +274,7 @@
             "description": "The request has succeeded with no response body."
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -323,7 +323,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -380,7 +380,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -428,6 +428,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "The properties of the role assignment.",
             "schema": {
               "$ref": "#/definitions/BillingRoleAssignmentProperties"
             }
@@ -438,18 +439,18 @@
             "description": "The properties of the role assignment.",
             "schema": {
               "$ref": "#/definitions/BillingRoleAssignment"
-            },
+            }
+          },
+          "202": {
+            "description": "The properties of the role assignment.",
             "headers": {
               "Location": {
                 "type": "string"
               }
             }
           },
-          "202": {
-            "description": "The properties of the role assignment."
-          },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -499,10 +500,7 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "in": "query",
-            "name": "filter",
-            "description": "May be used to filter the list of role assignments.",
-            "type": "string"
+            "$ref": "./types.json#/parameters/filter"
           }
         ],
         "responses": {
@@ -521,7 +519,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -579,7 +577,7 @@
             "description": "The request has succeeded with no response body."
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -628,7 +626,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -685,7 +683,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -744,18 +742,18 @@
             "description": "The properties of the role assignment.",
             "schema": {
               "$ref": "#/definitions/BillingRoleAssignment"
-            },
+            }
+          },
+          "202": {
+            "description": "The properties of the role assignment.",
             "headers": {
               "Location": {
                 "type": "string"
               }
             }
           },
-          "202": {
-            "description": "The properties of the role assignment."
-          },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -805,10 +803,7 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "in": "query",
-            "name": "filter",
-            "description": "May be used to filter the list of role assignments.",
-            "type": "string"
+            "$ref": "./types.json#/parameters/filter"
           }
         ],
         "responses": {
@@ -827,7 +822,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -874,10 +869,7 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "in": "query",
-            "name": "filter",
-            "description": "May be used to filter the list of role assignments.",
-            "type": "string"
+            "$ref": "./types.json#/parameters/filter"
           }
         ],
         "responses": {
@@ -896,7 +888,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -948,7 +940,7 @@
             "description": "The request has succeeded with no response body."
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -991,7 +983,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -1045,7 +1037,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -1096,7 +1088,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -1149,18 +1141,18 @@
             "description": "The properties of the role assignment.",
             "schema": {
               "$ref": "#/definitions/BillingRoleAssignment"
-            },
+            }
+          },
+          "202": {
+            "description": "The properties of the role assignment.",
             "headers": {
               "Location": {
                 "type": "string"
               }
             }
           },
-          "202": {
-            "description": "The properties of the role assignment."
-          },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -1215,7 +1207,7 @@
             "description": "The request has succeeded with no response body."
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -1261,7 +1253,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -1311,25 +1303,19 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "The properties of the role assignment.",
             "schema": {
               "$ref": "#/definitions/BillingRoleAssignment"
-            },
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "BillingRoleAssignmentCreateOrUpdateByDepartment": {
             "$ref": "./examples/billingRoleAssignmentCreateOrUpdateByDepartment.json"
@@ -1369,7 +1355,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -1423,7 +1409,7 @@
             "description": "The request has succeeded with no response body."
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -1469,7 +1455,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -1519,25 +1505,19 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "The properties of the role assignment.",
             "schema": {
               "$ref": "#/definitions/BillingRoleAssignment"
-            },
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "BillingRoleAssignmentCreateOrUpdateByEnrollmentAccount": {
             "$ref": "./examples/billingRoleAssignmentCreateOrUpdateByEnrollmentAccount.json"
@@ -1577,7 +1557,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -1620,10 +1600,7 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "in": "query",
-            "name": "filter",
-            "description": "May be used to filter the list of role assignments.",
-            "type": "string"
+            "$ref": "./types.json#/parameters/filter"
           }
         ],
         "responses": {
@@ -1642,7 +1619,7 @@
             }
           },
           "default": {
-            "description": "Default response",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./types.json#/definitions/ArmErrorResponse"
             }
@@ -1838,8 +1815,8 @@
             "modelAsString": true
           }
         },
-        "permissionRequestId": {
-          "description": "The PermissionRequest ID for the role assignment.",
+        "billingRequestId": {
+          "description": "The billing request ID for the role assignment.",
           "type": "string",
           "readOnly": true
         },
