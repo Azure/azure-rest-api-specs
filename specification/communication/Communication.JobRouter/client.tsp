@@ -17,7 +17,7 @@ namespace ClientForAcsJobRouter;
 })
 interface JobRouterAdministrationRestClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    @internal("csharp")
+    @internal
     upsertDistributionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertDistributionPolicy;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -30,7 +30,7 @@ interface JobRouterAdministrationRestClient {
     deleteDistributionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteDistributionPolicy;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    @internal("csharp")
+    @internal
     upsertClassificationPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertClassificationPolicy;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -43,7 +43,7 @@ interface JobRouterAdministrationRestClient {
     deleteClassificationPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteClassificationPolicy;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    @internal("csharp")
+    @internal
     upsertExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertExceptionPolicy;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -56,7 +56,7 @@ interface JobRouterAdministrationRestClient {
     deleteExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteExceptionPolicy;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    @internal("csharp")
+    @internal
     upsertQueue is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertQueue;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -75,7 +75,7 @@ interface JobRouterAdministrationRestClient {
 })
 interface JobRouterRestClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    @internal("csharp")
+    @internal
     upsertJob is AzureCommunicationRoutingService.JobRouterOperations.upsertJob;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -85,7 +85,7 @@ interface JobRouterRestClient {
     deleteJob is AzureCommunicationRoutingService.JobRouterOperations.deleteJob;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    @internal("csharp")
+    @internal
     reclassifyJob is AzureCommunicationRoutingService.JobRouterOperations.reclassifyJobAction;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -116,7 +116,7 @@ interface JobRouterRestClient {
     getQueueStatistics is  AzureCommunicationRoutingService.JobRouterOperations.getQueueStatistics;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    @internal("csharp")
+    @internal
     upsertWorker is AzureCommunicationRoutingService.JobRouterOperations.upsertWorker;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
