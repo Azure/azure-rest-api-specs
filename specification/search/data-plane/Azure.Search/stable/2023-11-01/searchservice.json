@@ -212,7 +212,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
+            "description": "Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or `*` for all properties. The default is all properties."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -561,7 +561,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
+            "description": "Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or `*` for all properties. The default is all properties."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -869,7 +869,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Selects which top-level properties of the skillsets to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
+            "description": "Selects which top-level properties of the skillsets to retrieve. Specified as a comma-separated list of JSON property names, or `*` for all properties. The default is all properties."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -1130,7 +1130,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Selects which top-level properties of the synonym maps to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
+            "description": "Selects which top-level properties of the synonym maps to retrieve. Specified as a comma-separated list of JSON property names, or `*` for all properties. The default is all properties."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -1271,7 +1271,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
+            "description": "Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or `*` for all properties. The default is all properties."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -5738,7 +5738,7 @@
             "url": "https://learn.microsoft.com/rest/api/searchservice/Create-Data-Source"
           },
           "type": "string",
-          "description": "The connection string for the datasource. Set to '<unchanged>' if you do not want the connection string updated."
+          "description": "The connection string for the datasource. Set to `<unchanged>` (with brackets) if you don't want the connection string updated. Set to `<redacted>` if you want to remove the connection string value from the datasource."
         }
       },
       "description": "Represents credentials that can be used to connect to a datasource."
@@ -7088,7 +7088,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended)."
+          "description": "The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single `*` to allow all origins (not recommended)."
         },
         "maxAgeInSeconds": {
           "type": "integer",
@@ -7546,7 +7546,7 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character '#'."
+          "description": "The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character `#`."
         },
         "description": {
           "type": "string",
@@ -8071,7 +8071,7 @@
           "type": "string",
           "x-nullable": true,
           "maxLength": 1,
-          "description": "The character used to mask the text if the maskingMode parameter is set to replace. Default is '*'."
+          "description": "The character used to mask the text if the maskingMode parameter is set to replace. Default is `*`."
         },
         "modelVersion": {
           "type": "string",
@@ -10452,7 +10452,7 @@
         "keyVaultUri": {
           "x-ms-client-name": "vaultUri",
           "type": "string",
-          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be https://my-keyvault-name.vault.azure.net."
+          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be `https://my-keyvault-name.vault.azure.net`."
         },
         "accessCredentials": {
           "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
