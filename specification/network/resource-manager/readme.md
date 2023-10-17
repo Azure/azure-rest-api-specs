@@ -3098,30 +3098,6 @@ directive:
   - suppress: XmsIdentifierValidation
     from: networkManagerGroupMembership.json
     reason: By design, no id is needed for groupmembership resources.
-  - suppress: MISSING_RESOURCE_ID
-    from: virtualWan.json
-    reason: Follow-up Item https://msazure.visualstudio.com/One/_workitems/edit/25472863
-  - suppress: INVALID_REQUEST_PARAMETER
-    from: virtualWan.json
-    reason: Follow-up Item https://msazure.visualstudio.com/One/_workitems/edit/25472863
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    from: virtualWan.json
-    reason: Follow-up Item https://msazure.visualstudio.com/One/_workitems/edit/25472863
-  - suppress: LRO_RESPONSE_HEADER
-    from: virtualWan.json
-    reason: Follow-up Item https://msazure.visualstudio.com/One/_workitems/edit/25472863
-  - suppress: MISSING_RESOURCE_ID
-    from: networkVirtualAppliance.json
-    reason: Follow-up Item https://msazure.visualstudio.com/One/_workitems/edit/25472863
-  - suppress: INVALID_REQUEST_PARAMETER
-    from: networkVirtualAppliance.json
-    reason: Follow-up Item https://msazure.visualstudio.com/One/_workitems/edit/25472863
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    from: networkVirtualAppliance.json
-    reason: Follow-up Item https://msazure.visualstudio.com/One/_workitems/edit/25472863
-  - suppress: LRO_RESPONSE_HEADER
-    from: networkVirtualAppliance.json
-    reason: Follow-up Item https://msazure.visualstudio.com/One/_workitems/edit/25472863
 ```
 
 ---
