@@ -20,8 +20,8 @@
       {
         "name": "endpoint",
         "in": "path",
-        "required": true,
         "description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://<resource-name>.cognitiveservices.azure.com).",
+        "required": true,
         "type": "string"
       }
     ]
@@ -92,8 +92,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -128,26 +128,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of Project items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The Project items on this page",
-                  "items": {
-                    "$ref": "#/definitions/Project"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedProject"
             }
           },
           "default": {
@@ -157,8 +138,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -207,8 +188,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -246,7 +227,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProjectUpdate"
+              "$ref": "#/definitions/ProjectCreateOrUpdate"
             }
           }
         ],
@@ -270,8 +251,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -312,8 +293,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -339,26 +320,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of TextBlocklist items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The TextBlocklist items on this page",
-                  "items": {
-                    "$ref": "#/definitions/TextBlocklist"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedTextBlocklist"
             }
           },
           "default": {
@@ -368,8 +330,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -417,8 +379,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -455,7 +417,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextBlocklistUpdate"
+              "$ref": "#/definitions/TextBlocklistCreateOrUpdate"
             }
           }
         ],
@@ -479,8 +441,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -520,8 +482,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -574,8 +536,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -625,8 +587,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -670,26 +632,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Paged collection of TextBlocklistItem items",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The TextBlocklistItem items on this page",
-                  "items": {
-                    "$ref": "#/definitions/TextBlocklistItem"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/PagedTextBlocklistItem"
             }
           },
           "default": {
@@ -699,8 +642,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -756,8 +699,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -802,8 +745,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -811,6 +754,47 @@
         "x-ms-examples": {
           "Analyze Text": {
             "$ref": "./examples/AnalyzeText.json"
+          }
+        }
+      }
+    },
+    "/text:snippy": {
+      "post": {
+        "operationId": "TextOperations_AnalyzeTextSnippy",
+        "summary": "Analyze Snippy",
+        "description": "A synchronous API for the analysis of text snippy. Currently, it supports four categories: NLSnippy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The text analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextSnippyOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextSnippyResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       }
@@ -846,7 +830,10 @@
           },
           "x-ms-identifiers": []
         }
-      }
+      },
+      "required": [
+        "blocklistItems"
+      ]
     },
     "AnalyzeImageOptions": {
       "type": "object",
@@ -881,7 +868,8 @@
       "type": "string",
       "description": "The type of image analysis output.",
       "enum": [
-        "FourSeverityLevels"
+        "FourSeverityLevels",
+        "EightSeverityLevels"
       ],
       "x-ms-enum": {
         "name": "AnalyzeImageOutputType",
@@ -891,6 +879,11 @@
             "name": "FourSeverityLevels",
             "value": "FourSeverityLevels",
             "description": "Output severities in four levels, the value could be 0, 2, 4, 6."
+          },
+          {
+            "name": "EightSeverityLevels",
+            "value": "EightSeverityLevels",
+            "description": "Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7."
           }
         ]
       }
@@ -961,7 +954,8 @@
       "type": "string",
       "description": "The type of text analysis output.",
       "enum": [
-        "FourSeverityLevels"
+        "FourSeverityLevels",
+        "EightSeverityLevels"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextOutputType",
@@ -971,6 +965,11 @@
             "name": "FourSeverityLevels",
             "value": "FourSeverityLevels",
             "description": "Output severities in four levels, the value could be 0, 2, 4, 6."
+          },
+          {
+            "name": "EightSeverityLevels",
+            "value": "EightSeverityLevels",
+            "description": "Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7."
           }
         ]
       }
@@ -1002,6 +1001,40 @@
       },
       "required": [
         "categoriesAnalysis"
+      ]
+    },
+    "AnalyzeTextSnippyOptions": {
+      "type": "object",
+      "description": "The text analysis request.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.",
+          "maxLength": 1000
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.",
+          "items": {
+            "$ref": "#/definitions/SnippyCategory"
+          }
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AnalyzeTextSnippyResult": {
+      "type": "object",
+      "description": "The text analysis response.",
+      "properties": {
+        "nlSnippy": {
+          "$ref": "#/definitions/NlSnippyResult",
+          "description": "Analysis result for NLSnippy categories."
+        }
+      },
+      "required": [
+        "nlSnippy"
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -1117,7 +1150,7 @@
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "The value of this field is determined by the outputType specified in the request. If 'FourSeverityLevels' is chosen, this field will be included in the output. The value can be 0, 2, 4, or 6, and it increases with the severity of the input content."
+          "description": "The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’ or ‘EightSeverity Levels’, and the output value can be 0, 2, 4, 6 or 0, 1, 2, 3, 4, 5, 6, or 7."
         },
         "accepted": {
           "type": "boolean",
@@ -1199,7 +1232,7 @@
         "categoryPolicies"
       ]
     },
-    "ImagePolicyUpdate": {
+    "ImagePolicyCreateOrUpdate": {
       "type": "object",
       "description": "Policy for the image.",
       "properties": {
@@ -1218,6 +1251,85 @@
           "default": "FourSeverityLevels"
         }
       }
+    },
+    "NlSnippyResult": {
+      "type": "object",
+      "description": "The text nl snippy analysis request.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Analysis result for categories."
+        }
+      },
+      "required": [
+        "detected"
+      ]
+    },
+    "PagedProject": {
+      "type": "object",
+      "description": "Paged collection of Project items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Project items on this page",
+          "items": {
+            "$ref": "#/definitions/Project"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextBlocklist": {
+      "type": "object",
+      "description": "Paged collection of TextBlocklist items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextBlocklist items on this page",
+          "items": {
+            "$ref": "#/definitions/TextBlocklist"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextBlocklistItem": {
+      "type": "object",
+      "description": "Paged collection of TextBlocklistItem items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextBlocklistItem items on this page",
+          "items": {
+            "$ref": "#/definitions/TextBlocklistItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Project": {
       "type": "object",
@@ -1282,7 +1394,7 @@
         "modality"
       ]
     },
-    "ProjectUpdate": {
+    "ProjectCreateOrUpdate": {
       "type": "object",
       "description": "Project is an entity to manage deployment with specified policy.",
       "properties": {
@@ -1291,6 +1403,14 @@
           "description": "Project description.",
           "maxLength": 255
         },
+        "modality": {
+          "$ref": "#/definitions/ContentModality",
+          "description": "Project modality.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "displayName": {
           "type": "string",
           "description": "Project display name.",
@@ -1298,11 +1418,11 @@
           "maxLength": 128
         },
         "textPolicy": {
-          "$ref": "#/definitions/TextPolicyUpdate",
+          "$ref": "#/definitions/TextPolicyCreateOrUpdate",
           "description": "Deployed text policy. This value must be null if the modality is not Text."
         },
         "imagePolicy": {
-          "$ref": "#/definitions/ImagePolicyUpdate",
+          "$ref": "#/definitions/ImagePolicyCreateOrUpdate",
           "description": "Deployed image policy.This value must be null if the modality is not Image."
         }
       }
@@ -1322,6 +1442,17 @@
       "required": [
         "blocklistItemIds"
       ]
+    },
+    "SnippyCategory": {
+      "type": "string",
+      "description": "Snippy analyze category.",
+      "enum": [
+        "NLSnippy"
+      ],
+      "x-ms-enum": {
+        "name": "SnippyCategory",
+        "modelAsString": true
+      }
     },
     "TextBlocklist": {
       "type": "object",
@@ -1346,6 +1477,27 @@
       "required": [
         "blocklistName"
       ]
+    },
+    "TextBlocklistCreateOrUpdate": {
+      "type": "object",
+      "description": "Text Blocklist.",
+      "properties": {
+        "blocklistName": {
+          "type": "string",
+          "description": "Text blocklist name.",
+          "maxLength": 64,
+          "pattern": "^[0-9A-Za-z._~-]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Text blocklist description.",
+          "maxLength": 1024
+        }
+      }
     },
     "TextBlocklistItem": {
       "type": "object",
@@ -1399,17 +1551,6 @@
         "blocklistItemText"
       ]
     },
-    "TextBlocklistUpdate": {
-      "type": "object",
-      "description": "Text Blocklist.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Text blocklist description.",
-          "maxLength": 1024
-        }
-      }
-    },
     "TextCategoriesAnalysis": {
       "type": "object",
       "description": "Text analysis result.",
@@ -1421,7 +1562,7 @@
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "The value of this field is determined by the outputType specified in the request. If 'FourSeverityLevels' is chosen, this field will be included in the output. The value can be 0, 2, 4, or 6, and it increases with the severity of the input content."
+          "description": "The value increases with the severity of the input content. The value of this field is determined by the outputType specified in the request. If 'FourSeverityLevels' or 'EightSeverityLevels' is chosen, this field will be included in the output."
         },
         "accepted": {
           "type": "boolean",
@@ -1491,7 +1632,7 @@
         "categoryPolicies"
       ]
     },
-    "TextPolicyUpdate": {
+    "TextPolicyCreateOrUpdate": {
       "type": "object",
       "description": "Policy for the text.",
       "properties": {

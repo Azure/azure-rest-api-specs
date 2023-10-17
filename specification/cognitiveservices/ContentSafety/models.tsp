@@ -312,3 +312,34 @@ model BlocklistPolicy {
   haltOnBlocklistHit?: boolean;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("Snippy analyze category.")
+enum SnippyCategory {
+  NLSnippy
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text analysis request.")
+model AnalyzeTextSnippyOptions {
+  @doc("The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
+  @maxLength(1000)
+  text: string;
+
+  @doc("The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.")
+  categories?: SnippyCategory[];
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text nl snippy analysis request.")
+model NlSnippyResult {
+  @doc("Analysis result for categories.")
+  detected: boolean;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text analysis response.")
+model AnalyzeTextSnippyResult {
+  @doc("Analysis result for NLSnippy categories.")
+  nlSnippy: NlSnippyResult;
+}
