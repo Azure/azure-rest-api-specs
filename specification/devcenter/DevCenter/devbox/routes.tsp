@@ -160,7 +160,6 @@ interface DevBoxesOperations {
     DevBox | {
       @statusCode statusCode: 201;
 
-      @finalLocation
       @header("Location")
       location: ResourceLocation<DevBox>;
 

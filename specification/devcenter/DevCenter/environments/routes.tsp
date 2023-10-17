@@ -68,10 +68,11 @@ interface EnvironmentsOperations {
   >;
 
   @doc("Creates or updates an environment.")
+  @finalOperation(EnvironmentsOperations.GetEnvironment)
   @pollingOperation(SharedOperations.GetProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @put
-  CreateOrUpdateEnvironment is Foundations.LongRunningOperation<
+  CreateOrUpdateEnvironment is DevCenterBaseResponse<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -92,10 +93,13 @@ interface EnvironmentsOperations {
     {
       @statusCode
       statusCode: 201;
+
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string;
+
       @body body: Environment;
-    },
-    {},
-    CloudError
+    }
   >;
 
 // FIXME
