@@ -2853,6 +2853,227 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/groups/{groupName}/assemblies": {
+      "get": {
+        "tags": [
+          "IntegrationAccountGroupAssemblies"
+        ],
+        "operationId": "IntegrationAccountGroupAssemblies_List",
+        "description": "List the group assemblies for an integration account.",
+        "x-ms-examples": {
+          "List integration account group assemblies": {
+            "$ref": "./examples/IntegrationAccountGroupAssemblies_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/integrationAccountName"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AssemblyCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/groups/{groupName}/assemblies/{assemblyArtifactName}": {
+      "get": {
+        "tags": [
+          "IntegrationAccountGroupAssemblies"
+        ],
+        "operationId": "IntegrationAccountGroupAssemblies_Get",
+        "description": "Get a group assembly for an integration account.",
+        "x-ms-examples": {
+          "Get an integration account group assembly": {
+            "$ref": "./examples/IntegrationAccountGroupAssemblies_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/integrationAccountName"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/assemblyArtifactName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AssemblyDefinition"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IntegrationAccountGroupAssemblies"
+        ],
+        "operationId": "IntegrationAccountGroupAssemblies_CreateOrUpdate",
+        "description": "Create or update a group assembly for an integration account.",
+        "x-ms-examples": {
+          "Create or update an account assembly": {
+            "$ref": "./examples/IntegrationAccountGroupAssemblies_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/integrationAccountName"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/assemblyArtifactName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "assemblyArtifact",
+            "description": "The assembly artifact.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssemblyDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AssemblyDefinition"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AssemblyDefinition"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IntegrationAccountGroupAssemblies"
+        ],
+        "operationId": "IntegrationAccountGroupAssemblies_Delete",
+        "description": "Delete a group assembly for an integration account.",
+        "x-ms-examples": {
+          "Delete an integration account group assembly": {
+            "$ref": "./examples/IntegrationAccountGroupAssemblies_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/integrationAccountName"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/assemblyArtifactName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/groups/{groupName}/assemblies/{assemblyArtifactName}/listContentCallbackUrl": {
+      "post": {
+        "tags": [
+          "IntegrationAccountGroupAssemblies"
+        ],
+        "operationId": "IntegrationAccountGroupAssemblies_ListContentCallbackUrl",
+        "description": "Get the content callback URL for an integration account group assembly.",
+        "x-ms-examples": {
+          "Get the callback URL for an integration account group assembly": {
+            "$ref": "./examples/IntegrationAccountGroupAssemblies_ListContentCallbackUrl.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/integrationAccountName"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/assemblyArtifactName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowTriggerCallbackUrl"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationAccounts/{integrationAccountName}/assemblies": {
       "get": {
         "tags": [
@@ -5524,6 +5745,43 @@
       },
       "description": "The list of workflow triggers."
     },
+    "WorkflowCallbackUrl": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL."
+        },
+        "method": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL HTTP method."
+        },
+        "basePath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL base path."
+        },
+        "relativePath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the workflow trigger callback URL relative path."
+        },
+        "relativePathParameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets the workflow trigger callback URL relative path parameters."
+        },
+        "queries": {
+          "$ref": "#/definitions/WorkflowTriggerListCallbackUrlQueries",
+          "description": "Gets the workflow trigger callback URL query parameters."
+        }
+      },
+      "description": "The workflow trigger callback URL."
+    },
     "WorkflowTriggerCallbackUrl": {
       "type": "object",
       "properties": {
@@ -6458,7 +6716,8 @@
         "NotSpecified",
         "Free",
         "Basic",
-        "Standard"
+        "Standard",
+        "Premium"
       ],
       "x-ms-enum": {
         "name": "IntegrationAccountSkuName",
@@ -10090,6 +10349,34 @@
       "name": "api-version",
       "description": "The API version.",
       "in": "query",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "description": "The resource group name.",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "integrationAccountName": {
+      "name": "integrationAccountName",
+      "description": "The integration account name.",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "groupName": {
+      "name": "groupName",
+      "description": "The integration account group name.",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "assemblyArtifactName": {
+      "name": "assemblyArtifactName",
+      "description": "The assembly artifact name.",
+      "in": "path",
       "required": true,
       "type": "string"
     }
