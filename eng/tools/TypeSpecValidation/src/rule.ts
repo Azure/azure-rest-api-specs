@@ -4,5 +4,5 @@ import { TsvHost } from "./tsv-host.js";
 export interface Rule {
   readonly name: string;
   readonly description: string;
-  execute(folder?: string, host?: TsvHost): Promise<RuleResult>;
+  execute(host?: TsvHost, folder?: string): Promise<RuleResult>;
 }

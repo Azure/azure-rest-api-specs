@@ -29,7 +29,7 @@ export async function main() {
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i];
     console.log("\nExecuting rule: " + rule.name);
-    const result = await rule.execute(folder, TsvRunnerHost);
+    const result = await rule.execute(TsvRunnerHost, folder);
     if (result.stdOutput) console.log(result.stdOutput);
     if (!result.success) {
       success = false;

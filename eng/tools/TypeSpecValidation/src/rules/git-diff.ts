@@ -6,7 +6,7 @@ export class GitDiffRule implements Rule {
   readonly name = "GitDiff";
   readonly description = "Checks if previous rules resulted in a git diff";
 
-  async execute(folder: string, host: TsvHost): Promise<RuleResult> {
+  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
     const git = host.gitOperation(folder);
     let gitStatusIsClean = (await git.status(["--porcelain"])).isClean();
 
