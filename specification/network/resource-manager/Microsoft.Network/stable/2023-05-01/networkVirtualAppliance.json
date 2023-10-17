@@ -865,6 +865,15 @@
           },
           "x-ms-identifiers": []
         },
+        "internetIngressPublicIps": {
+          "type": "array",
+          "readOnly": false,
+          "description": "List of Resource Uri of Public IPs for Internet Ingress Scenario.",
+          "items": {
+            "$ref": "#/definitions/InternetIngressPublicIpsProperties"
+          },
+          "x-ms-identifiers": []
+        },
         "virtualApplianceSites": {
           "type": "array",
           "readOnly": true,
@@ -969,6 +978,26 @@
           "type": "boolean",
           "readOnly": false,
           "description": "Flag (true or false) for Intent for Public Ip on additional nic"
+        }
+      }
+    },
+    "InternetIngressPublicIpsProperties": {
+      "type": "object",
+      "title": "Internet Ingress Public Ip Properties",
+      "description": "Resource Uri of Public Ip for Standard Load Balancer Frontend End.",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Resource Uri of Public Ip",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/publicIPAddresses"
+              }
+            ]
+          }
         }
       }
     },
