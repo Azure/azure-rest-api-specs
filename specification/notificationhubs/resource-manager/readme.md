@@ -42,7 +42,7 @@ suppress:
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-01
+tag: package-2023-09
 directive:
   - where:
       - $.definitions.NamespaceCreateOrUpdateParameters
@@ -52,11 +52,19 @@ directive:
 ```
 
 
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09'
+input-file:
+  - Microsoft.NotificationHubs/stable/2023-09-01/notificationhubs.json
+```
 ### Tag: package-preview-2023-01
 
 These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-01'
+``` yaml $(tag) == 'package-preview-2023-01'
 input-file:
   - Microsoft.NotificationHubs/preview/2023-01-01-preview/notificationhubs.json
 
@@ -64,6 +72,7 @@ suppressions:
  - code: RepeatedPathInfo
    reason: We cannot remove the subscriptionId parameter without introducing a breaking change.
 ```
+
 ### Tag: package-2017-04
 
 These settings apply only when `--tag=package-2017-04` is specified on the command line.
