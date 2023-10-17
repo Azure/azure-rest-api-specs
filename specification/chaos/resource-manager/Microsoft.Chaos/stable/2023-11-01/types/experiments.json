@@ -656,6 +656,96 @@
       },
       "additionalProperties": false
     },
+    "experimentExecutionDetails": {
+      "description": "Model that represents the execution details of a Experiment.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "String of the resource type.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "String of the fully qualified resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "String of the resource name.",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "The properties of the experiment execution details.",
+          "$ref": "#/definitions/experimentExecutionDetailsProperties",
+          "x-ms-client-flatten": true,
+          "readOnly": true
+        }
+      }
+    },
+    "experimentExecutionDetailsProperties": {
+      "description": "Model that represents the Experiment execution details properties model.",
+      "type": "object",
+      "properties": {
+        "experimentId": {
+          "description": "The id of the experiment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The value of the status of the experiment execution.",
+          "type": "string",
+          "readOnly": true
+        },
+        "failureReason": {
+          "description": "The reason why the execution failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the created date time.",
+          "readOnly": true
+        },
+        "lastActionAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the last action date time.",
+          "readOnly": true
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the start date time.",
+          "readOnly": true
+        },
+        "stoppedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the stop date time.",
+          "readOnly": true
+        },
+        "runInformation": {
+          "description": "The information of the experiment run.",
+          "type": "object",
+          "properties": {
+            "steps": {
+              "description": "The steps of the experiment run.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/stepStatus"
+              },
+              "x-ms-identifiers": [
+                "stepName"
+              ],
+              "readOnly": true
+            }
+          },
+          "readOnly": true
+        }
+      }
+    },
     "stepStatus": {
       "description": "Model that represents the a list of branches and branch statuses.",
       "type": "object",
