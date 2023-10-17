@@ -23,6 +23,7 @@ using TypeSpec.Http;
   "{endpoint}",
   "DevCenter service",
   {
+    @doc("The DevCenter-specific URI to operate on.")
     endpoint: string,
   }
 )
