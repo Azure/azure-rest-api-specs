@@ -1321,6 +1321,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "IntegrationRuntimes_EnableInteractiveQuery": {
             "$ref": "./examples/IntegrationRuntimes_EnableInteractiveQuery.json"
@@ -3877,6 +3878,9 @@
         }
       }
     },
+    "IActionResult": {
+      "type": "object"
+    },
     "IntegrationRuntime": {
       "required": [
         "kind"
@@ -3889,21 +3893,23 @@
       ],
       "properties": {
         "kind": {
-          "enum": [
-            "SelfHosted",
-            "Managed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IntegrationRuntimeType",
-            "modelAsString": true
-          }
+          "description": "Type of integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeType"
         }
       },
       "discriminator": "kind"
     },
-    "IActionResult": {
-      "type": "object"
+    "IntegrationRuntimeType": {
+      "description": "The type of integration runtime.",
+      "type": "string",
+      "enum": [
+        "Managed",
+        "SelfHosted"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationRuntimeType",
+        "modelAsString": true
+      }
     },
     "IntegrationRuntimeStatus": {
       "description": "the runtime status of IR",
@@ -3918,15 +3924,8 @@
       ],
       "properties": {
         "kind": {
-          "enum": [
-            "SelfHosted",
-            "Managed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IntegrationRuntimeType",
-            "modelAsString": true
-          }
+          "description": "Type of integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeType"
         }
       },
       "discriminator": "kind"
@@ -9173,11 +9172,13 @@
   },
   "parameters": {
     "api-version": {
-      "name": "api-version",
-      "description": "The API version.",
       "in": "query",
+      "name": "api-version",
+      "description": "The api version to use.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-client-name": "ApiVersion",
+      "x-ms-parameter-location": "client"
     },
     "endpoint": {
       "in": "path",
