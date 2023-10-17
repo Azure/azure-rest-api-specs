@@ -3529,7 +3529,6 @@
         }
       ],
       "properties": {
-        "description": "the properties of scan ruleset, vary by datasource type",
         "kind": {
           "enum": [
             "None",
@@ -3560,6 +3559,7 @@
             "PowerBI"
           ],
           "type": "string",
+          "description": "the properties of scan ruleset, vary by datasource type",
           "x-ms-enum": {
             "name": "DataSourceType",
             "modelAsString": true
@@ -3569,11 +3569,11 @@
       "discriminator": "kind"
     },
     "ScanRulesetList": {
-      "description": "the list of scan ruleset",
       "required": [
         "value"
       ],
       "type": "object",
+      "description": "the list of scan ruleset",
       "properties": {
         "value": {
           "type": "array",
@@ -3591,11 +3591,11 @@
       }
     },
     "SystemScanRuleset": {
-      "description": "the system scan ruleset",
       "required": [
         "kind"
       ],
       "type": "object",
+      "description": "the system scan ruleset",
       "allOf": [
         {
           "$ref": "#/definitions/VersionedScanRuleset"
@@ -3641,11 +3641,11 @@
       "discriminator": "kind"
     },
     "SystemScanRulesetList": {
-      "description": "the list of system scan ruleset",
       "required": [
         "value"
       ],
       "type": "object",
+      "description": "the list of system scan ruleset",
       "properties": {
         "value": {
           "type": "array",
@@ -3663,8 +3663,8 @@
       }
     },
     "RecurrenceScheduleOccurrence": {
-      "description": "the occurrence of recurrence schedule",
       "type": "object",
+      "description": "the occurrence of recurrence schedule",
       "properties": {
         "additionalProperties": {
           "type": "object"
