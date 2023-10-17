@@ -32,8 +32,8 @@
           "Disabled"
         ],
         "machineType": [
-          "Azure",
-          "Azure Arc"
+          "Azure Virtual Machine",
+          "Azure Arc Machine"
         ]
       }
     }
@@ -52,13 +52,17 @@
               "resourceLocation": "eastus2",
               "computerName": "abcd",
               "domainName": "SCOMMI.com",
+              "onboardingStatus": {
+                "status": "Failed",
+                "message": "Extension Failed"
+              },
               "managementServerEndpoint": "Lbdns.com",
               "healthStatus": "Healthy",
               "connectionStatus": "Connected",
               "installType": "Extension",
               "autoUpgrade": "Enabled",
               "operatingSystem": "Windows (Windows Server 2022 Datacenter Azure Edition)",
-              "machineType": "Azure",
+              "machineType": "Azure Virtual Machine",
               "resourceAdditionalProperties": {
                 "version": "1.2.3.4"
               }
@@ -87,7 +91,7 @@
               "installType": "Extension",
               "autoUpgrade": "Enabled",
               "operatingSystem": "Windows (Windows Server 2022 Datacenter Azure Edition)",
-              "machineType": "Azure",
+              "machineType": "Azure Virtual Machine",
               "resourceAdditionalProperties": {}
             },
             "systemData": {
@@ -114,7 +118,7 @@
               "installType": "Extension",
               "autoUpgrade": "Enabled",
               "operatingSystem": "Windows (Windows Server 2022 Datacenter Azure Edition)",
-              "machineType": "Azure",
+              "machineType": "Azure Virtual Machine",
               "resourceAdditionalProperties": {
                 "version": "1.2.3.4"
               }
@@ -128,7 +132,8 @@
               "lastModifiedAt": "2018-04-24T16:30:55+00:00"
             }
           }
-        ]
+        ],
+        "totalRecords": 3
       }
     }
   }

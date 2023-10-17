@@ -1,0 +1,65 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure API for managing SCOM managed instances and monitored resources.",
+    "description": "Azure Monitor Operations Manager Managed Instance (SCOM MI) management APIs",
+    "version": "2023-07-07-preview",
+    "x-ms-code-generation-settings": {
+      "name": "scomClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "OnboardingStatusProperties": {
+      "description": "The status and status message of the resource onboarding process that is being installed.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the onboarding process.",
+          "type": "string",
+          "enum": [
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "OnboardingStatusValues",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "The onboarding message for the resource.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
