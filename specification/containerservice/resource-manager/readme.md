@@ -43,7 +43,7 @@ These settings apply only when `--tag=package-2023-08` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-08'
 input-file:
-  - stable/2023-08-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2023-08-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2023-08
@@ -52,7 +52,7 @@ These settings apply only when `--tag=package-preview-2023-08` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-08'
 input-file:
-  - preview/2023-08-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2023-08-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2023-07
@@ -61,7 +61,7 @@ These settings apply only when `--tag=package-2023-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-07'
 input-file:
-  - stable/2023-07-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2023-07-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2023-07
@@ -70,7 +70,7 @@ These settings apply only when `--tag=package-preview-2023-07` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-07'
 input-file:
-  - preview/2023-07-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2023-07-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2023-06
@@ -79,7 +79,7 @@ These settings apply only when `--tag=package-2023-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-06'
 input-file:
-  - stable/2023-06-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2023-06-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2023-06
@@ -88,7 +88,7 @@ These settings apply only when `--tag=package-preview-2023-06` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-06'
 input-file:
-  - preview/2023-06-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2023-06-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2023-05
@@ -97,7 +97,7 @@ These settings apply only when `--tag=package-2023-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-05'
 input-file:
-  - stable/2023-05-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2023-05-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2023-05
@@ -106,7 +106,7 @@ These settings apply only when `--tag=package-preview-2023-05` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-05'
 input-file:
-  - preview/2023-05-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2023-05-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2023-04
@@ -115,7 +115,7 @@ These settings apply only when `--tag=package-2023-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-04'
 input-file:
-  - stable/2023-04-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2023-04-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2023-04
@@ -124,7 +124,7 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-04'
 input-file:
-  - preview/2023-04-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2023-04-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2023-03
@@ -133,7 +133,7 @@ These settings apply only when `--tag=package-2023-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-03'
 input-file:
-  - stable/2023-03-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2023-03-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2023-03
@@ -142,7 +142,7 @@ These settings apply only when `--tag=package-preview-2023-03` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-03'
 input-file:
-  - preview/2023-03-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2023-03-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2023-02
@@ -151,7 +151,7 @@ These settings apply only when `--tag=package-2023-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-02'
 input-file:
-  - stable/2023-02-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2023-02-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2023-02
@@ -160,7 +160,7 @@ These settings apply only when `--tag=package-preview-2023-02` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-02'
 input-file:
-  - preview/2023-02-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2023-02-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2023-01
@@ -169,7 +169,7 @@ These settings apply only when `--tag=package-2023-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-01'
 input-file:
-  - stable/2023-01-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2023-01-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2023-01-only
@@ -178,7 +178,7 @@ These settings apply only when `--tag=package-preview-2023-01-only` is specified
 
 ``` yaml $(tag) == 'package-preview-2023-01-only'
 input-file:
-  - preview/2023-01-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2023-01-02-preview/managedClusters.json
 ```
 
 ### Tag: package-preview-2023-01
@@ -187,8 +187,8 @@ These settings apply only when `--tag=package-preview-2023-01` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-01'
 input-file:
-  - preview/2023-01-02-preview/managedClusters.json
-  - preview/2022-09-02-preview/fleets.json
+  - Microsoft.ContainerService/aks/preview/2023-01-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-09-02-preview/fleets.json
 ```
 
 ### Tag: package-2022-11
@@ -197,7 +197,7 @@ These settings apply only when `--tag=package-2022-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-11'
 input-file:
-  - stable/2022-11-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2022-11-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2022-11-only
@@ -206,7 +206,7 @@ These settings apply only when `--tag=package-preview-2022-11-only` is specified
 
 ``` yaml $(tag) == 'package-preview-2022-11-only'
 input-file:
-  - preview/2022-11-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-11-02-preview/managedClusters.json
 ```
 
 ### Tag: package-preview-2022-11
@@ -215,8 +215,8 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-11'
 input-file:
-  - preview/2022-11-02-preview/managedClusters.json
-  - preview/2022-09-02-preview/fleets.json
+  - Microsoft.ContainerService/aks/preview/2022-11-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-09-02-preview/fleets.json
 ```
 
 ### Tag: package-preview-2022-10-only
@@ -225,7 +225,7 @@ These settings apply only when `--tag=package-preview-2022-10-only` is specified
 
 ``` yaml $(tag) == 'package-preview-2022-10-only'
 input-file:
-  - preview/2022-10-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-10-02-preview/managedClusters.json
 ```
 
 ### Tag: package-preview-2022-10
@@ -234,8 +234,8 @@ These settings apply only when `--tag=package-preview-2022-10` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-10'
 input-file:
-  - preview/2022-10-02-preview/managedClusters.json
-  - preview/2022-09-02-preview/fleets.json
+  - Microsoft.ContainerService/aks/preview/2022-10-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-09-02-preview/fleets.json
 ```
 
 ### Tag: package-2022-09
@@ -244,7 +244,7 @@ These settings apply only when `--tag=package-2022-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-09'
 input-file:
-  - stable/2022-09-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2022-09-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2022-09
@@ -253,8 +253,8 @@ These settings apply only when `--tag=package-preview-2022-09` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-09'
 input-file:
-  - preview/2022-09-02-preview/managedClusters.json
-  - preview/2022-09-02-preview/fleets.json
+  - Microsoft.ContainerService/aks/preview/2022-09-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-09-02-preview/fleets.json
 ```
 
 ### Tag: package-preview-2022-08-03-only
@@ -263,7 +263,7 @@ These settings apply only when `--tag=package-preview-2022-08-03-only` is specif
 
 ``` yaml $(tag) == 'package-preview-2022-08-03-only'
 input-file:
-  - preview/2022-08-03-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-08-03-preview/managedClusters.json
 ```
 
 ### Tag: package-preview-2022-08-03
@@ -272,8 +272,8 @@ These settings apply only when `--tag=package-preview-2022-08-03` is specified o
 
 ``` yaml $(tag) == 'package-preview-2022-08-03'
 input-file:
-  - preview/2022-08-03-preview/managedClusters.json
-  - preview/2022-07-02-preview/fleets.json
+  - Microsoft.ContainerService/aks/preview/2022-08-03-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-07-02-preview/fleets.json
 ```
 
 ### Tag: package-preview-2022-08-only
@@ -282,7 +282,7 @@ These settings apply only when `--tag=package-preview-2022-08-only` is specified
 
 ``` yaml $(tag) == 'package-preview-2022-08-only'
 input-file:
-  - preview/2022-08-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-08-02-preview/managedClusters.json
 ```
 
 ### Tag: package-preview-2022-08
@@ -291,8 +291,8 @@ These settings apply only when `--tag=package-preview-2022-08` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-08'
 input-file:
-  - preview/2022-08-02-preview/managedClusters.json
-  - preview/2022-07-02-preview/fleets.json
+  - Microsoft.ContainerService/aks/preview/2022-08-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-07-02-preview/fleets.json
 ```
 
 ### Tag: package-2022-07
@@ -301,7 +301,7 @@ These settings apply only when `--tag=package-2022-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-07'
 input-file:
-  - stable/2022-07-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2022-07-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2022-07
@@ -310,8 +310,8 @@ These settings apply only when `--tag=package-preview-2022-07` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-07'
 input-file:
-  - preview/2022-07-02-preview/managedClusters.json
-  - preview/2022-07-02-preview/fleets.json
+  - Microsoft.ContainerService/aks/preview/2022-07-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-07-02-preview/fleets.json
 ```
 
 ### Tag: package-2022-06
@@ -320,7 +320,7 @@ These settings apply only when `--tag=package-2022-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-06'
 input-file:
-  - stable/2022-06-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2022-06-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2022-06
@@ -329,8 +329,8 @@ These settings apply only when `--tag=package-preview-2022-06` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-06'
 input-file:
-  - preview/2022-06-02-preview/managedClusters.json
-  - preview/2022-06-02-preview/fleets.json
+  - Microsoft.ContainerService/aks/preview/2022-06-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-06-02-preview/fleets.json
 ```
 
 ### Tag: package-preview-2022-05
@@ -339,7 +339,7 @@ These settings apply only when `--tag=package-preview-2022-05` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-05'
 input-file:
-  - preview/2022-05-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-05-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2022-04
@@ -348,7 +348,7 @@ These settings apply only when `--tag=package-2022-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-04'
 input-file:
-  - stable/2022-04-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2022-04-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2022-04
@@ -357,7 +357,7 @@ These settings apply only when `--tag=package-preview-2022-04` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-04'
 input-file:
-  - preview/2022-04-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-04-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2022-03
@@ -366,7 +366,7 @@ These settings apply only when `--tag=package-2022-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-03'
 input-file:
-  - stable/2022-03-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2022-03-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2022-03
@@ -375,7 +375,7 @@ These settings apply only when `--tag=package-preview-2022-03` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-03'
 input-file:
-  - preview/2022-03-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-03-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2022-02
@@ -384,7 +384,7 @@ These settings apply only when `--tag=package-2022-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-02'
 input-file:
-  - stable/2022-02-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2022-02-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2022-02
@@ -393,7 +393,7 @@ These settings apply only when `--tag=package-preview-2022-02` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-02'
 input-file:
-  - preview/2022-02-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-02-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2022-01
@@ -402,7 +402,7 @@ These settings apply only when `--tag=package-2022-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-01'
 input-file:
-  - stable/2022-01-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2022-01-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2022-01
@@ -411,7 +411,7 @@ These settings apply only when `--tag=package-preview-2022-01` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-01'
 input-file:
-  - preview/2022-01-02-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2022-01-02-preview/managedClusters.json
 ```
 
 ### Tag: package-preview-2021-11
@@ -420,7 +420,7 @@ These settings apply only when `--tag=package-preview-2021-11` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-11'
 input-file:
-  - preview/2021-11-01-preview/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2021-11-01-preview/managedClusters.json
 ```
 
 ### Tag: package-2021-10
@@ -429,7 +429,7 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-10'
 input-file:
-  - stable/2021-10-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2021-10-01/managedClusters.json
 ```
 
 ### Tag: package-2021-09
@@ -438,7 +438,7 @@ These settings apply only when `--tag=package-2021-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-09'
 input-file:
-  - stable/2021-09-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2021-09-01/managedClusters.json
 ```
 
 ### Tag: package-2021-08
@@ -447,7 +447,7 @@ These settings apply only when `--tag=package-2021-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-08'
 input-file:
-  - stable/2021-08-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2021-08-01/managedClusters.json
 ```
 
 ### Tag: package-2021-07
@@ -456,7 +456,7 @@ These settings apply only when `--tag=package-2021-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-07'
 input-file:
-  - stable/2021-07-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2021-07-01/managedClusters.json
 ```
 
 ### Tag: package-2021-05
@@ -465,7 +465,7 @@ These settings apply only when `--tag=package-2021-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-05'
 input-file:
-  - stable/2021-05-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2021-05-01/managedClusters.json
 ```
 
 ### Tag: package-2021-03
@@ -474,7 +474,7 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-03'
 input-file:
-  - stable/2021-03-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2021-03-01/managedClusters.json
 ```
 
 ### Tag: package-2021-02
@@ -483,7 +483,7 @@ These settings apply only when `--tag=package-2021-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-02'
 input-file:
-  - stable/2021-02-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2021-02-01/managedClusters.json
 ```
 
 ### Tag: package-2020-12
@@ -492,7 +492,7 @@ These settings apply only when `--tag=package-2020-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-12'
 input-file:
-  - stable/2020-12-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2020-12-01/managedClusters.json
 ```
 
 ### Tag: package-2020-11
@@ -501,7 +501,7 @@ These settings apply only when `--tag=package-2020-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-11'
 input-file:
-  - stable/2020-11-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2020-11-01/managedClusters.json
 ```
 
 ### Tag: package-2020-09
@@ -510,10 +510,10 @@ These settings apply only when `--tag=package-2020-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-09'
 input-file:
-  - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
-  - stable/2019-08-01/location.json
-  - stable/2020-09-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/aks/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/aks/stable/2020-09-01/managedClusters.json
 ```
 
 ### Tag: package-2020-07
@@ -522,10 +522,10 @@ These settings apply only when `--tag=package-2020-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-07'
 input-file:
-  - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
-  - stable/2019-08-01/location.json
-  - stable/2020-07-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/aks/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/aks/stable/2020-07-01/managedClusters.json
 ```
 
 ### Tag: package-2020-06
@@ -534,10 +534,10 @@ These settings apply only when `--tag=package-2020-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-06'
 input-file:
-  - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
-  - stable/2019-08-01/location.json
-  - stable/2020-06-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/aks/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/aks/stable/2020-06-01/managedClusters.json
 ```
 
 ### Tag: package-2020-04
@@ -546,10 +546,10 @@ These settings apply only when `--tag=package-2020-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-04'
 input-file:
-  - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
-  - stable/2019-08-01/location.json
-  - stable/2020-04-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/aks/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/aks/stable/2020-04-01/managedClusters.json
 ```
 
 ### Tag: package-2020-03
@@ -558,10 +558,10 @@ These settings apply only when `--tag=package-2020-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-03'
 input-file:
-  - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
-  - stable/2019-08-01/location.json
-  - stable/2020-03-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/aks/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/aks/stable/2020-03-01/managedClusters.json
 ```
 
 ### Tag: package-2020-02
@@ -570,10 +570,10 @@ These settings apply only when `--tag=package-2020-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-02'
 input-file:
-  - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
-  - stable/2019-08-01/location.json
-  - stable/2020-02-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/aks/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/aks/stable/2020-02-01/managedClusters.json
 ```
 
 ### Tag: package-2020-01
@@ -582,10 +582,10 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-01'
 input-file:
-  - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
-  - stable/2019-08-01/location.json
-  - stable/2020-01-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/aks/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/aks/stable/2020-01-01/managedClusters.json
 ```
 
 ### Tag: package-2019-11
@@ -594,10 +594,10 @@ These settings apply only when `--tag=package-2019-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-11'
 input-file:
-  - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
-  - stable/2019-08-01/location.json
-  - stable/2019-11-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/aks/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/aks/stable/2019-11-01/managedClusters.json
 ```
 
 ### Tag: package-2019-10-27-preview
@@ -606,10 +606,10 @@ These settings apply only when `--tag=package-2019-10-27-preview` is specified o
 
 ``` yaml $(tag) == 'package-2019-10-27-preview'
 input-file:
-  - preview/2019-10-27-preview/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
-  - stable/2019-08-01/location.json
-  - stable/2020-01-01/managedClusters.json
+  - Microsoft.ContainerService/aks/preview/2019-10-27-preview/openShiftManagedClusters.json
+  - Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/aks/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/aks/stable/2020-01-01/managedClusters.json
 ```
 
 ### Tag: package-2019-09-30-preview
@@ -618,10 +618,10 @@ These settings apply only when `--tag=package-2019-09-30-preview` is specified o
 
 ``` yaml $(tag) == 'package-2019-09-30-preview'
 input-file:
-  - preview/2019-09-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
-  - stable/2019-08-01/managedClusters.json
-  - stable/2019-08-01/location.json
+  - Microsoft.ContainerService/aks/preview/2019-09-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/aks/stable/2019-08-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2019-08-01/location.json
 ```
 
 ### Tag: package-2019-10
@@ -630,10 +630,10 @@ These settings apply only when `--tag=package-2019-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-10'
 input-file:
-  - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
-  - stable/2019-08-01/location.json
-  - stable/2019-10-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/aks/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/aks/stable/2019-10-01/managedClusters.json
 ```
 
 ### Tag: package-2019-08
@@ -642,10 +642,10 @@ These settings apply only when `--tag=package-2019-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-08'
 input-file:
-  - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
-  - stable/2019-08-01/location.json
-  - stable/2019-08-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/aks/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/aks/stable/2019-08-01/managedClusters.json
 ```
 
 ### Tag: package-2019-06
@@ -654,10 +654,10 @@ These settings apply only when `--tag=package-2019-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-06'
 input-file:
-  - stable/2019-04-30/openShiftManagedClusters.json
-  - stable/2017-07-01/containerService.json
-  - stable/2019-06-01/location.json
-  - stable/2019-06-01/managedClusters.json
+  - Microsoft.ContainerService/aks/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/aks/stable/2019-06-01/location.json
+  - Microsoft.ContainerService/aks/stable/2019-06-01/managedClusters.json
 ```
 
 ### Tag: package-2019-04
@@ -666,10 +666,10 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-04'
 input-file:
-- stable/2019-04-30/openShiftManagedClusters.json
-- stable/2017-07-01/containerService.json
-- stable/2019-04-01/managedClusters.json
-- stable/2019-04-01/location.json
+- Microsoft.ContainerService/aks/stable/2019-04-30/openShiftManagedClusters.json
+- Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/aks/stable/2019-04-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2019-04-01/location.json
 ```
 
 ### Tag: package-2019-02
@@ -678,10 +678,10 @@ These settings apply only when `--tag=package-2019-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-02'
 input-file:
-- preview/2018-09-30-preview/openShiftManagedClusters.json
-- stable/2017-07-01/containerService.json
-- stable/2019-02-01/managedClusters.json
-- stable/2017-09-30/location.json
+- Microsoft.ContainerService/aks/preview/2018-09-30-preview/openShiftManagedClusters.json
+- Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/aks/stable/2019-02-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2017-09-30/location.json
 ```
 
 ### Tag: package-2018-08-preview
@@ -690,10 +690,10 @@ These settings apply only when `--tag=package-2018-08-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-08-preview'
 input-file:
-- preview/2018-09-30-preview/openShiftManagedClusters.json
-- stable/2017-07-01/containerService.json
-- preview/2018-08-01-preview/managedClusters.json
-- stable/2017-09-30/location.json
+- Microsoft.ContainerService/aks/preview/2018-09-30-preview/openShiftManagedClusters.json
+- Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/aks/preview/2018-08-01-preview/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2017-09-30/location.json
 ```
 
 ### Tag: package-2018-09-30-preview
@@ -702,10 +702,10 @@ These settings apply only when `--tag=package-2018-09-30-preview` is specified o
 
 ``` yaml $(tag) == 'package-2018-09-30-preview'
 input-file:
-- preview/2018-09-30-preview/openShiftManagedClusters.json
-- stable/2017-07-01/containerService.json
-- stable/2018-03-31/managedClusters.json
-- stable/2017-09-30/location.json
+- Microsoft.ContainerService/aks/preview/2018-09-30-preview/openShiftManagedClusters.json
+- Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/aks/stable/2018-03-31/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2017-09-30/location.json
 ```
 
 ### Tag: package-2018-03
@@ -714,9 +714,9 @@ These settings apply only when `--tag=package-2018-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-03'
 input-file:
-- stable/2017-07-01/containerService.json
-- stable/2018-03-31/managedClusters.json
-- stable/2017-09-30/location.json
+- Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/aks/stable/2018-03-31/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2017-09-30/location.json
 ```
 
 ### Tag: package-2017-09
@@ -725,9 +725,9 @@ These settings apply only when `--tag=package-2017-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-09'
 input-file:
-- stable/2017-07-01/containerService.json
-- stable/2017-08-31/managedClusters.json
-- stable/2017-09-30/location.json
+- Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/aks/stable/2017-08-31/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2017-09-30/location.json
 ```
 
 ### Tag: package-2017-08
@@ -736,8 +736,8 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-08'
 input-file:
-- stable/2017-07-01/containerService.json
-- stable/2017-08-31/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/aks/stable/2017-08-31/managedClusters.json
 ```
 
 ### Tag: package-2017-07
@@ -746,7 +746,7 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
-- stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
 
 ```
 
@@ -759,7 +759,7 @@ v2019_09_30_preview namespace of python SDK, DO NOT MODIFY THIS TAG.
 
 ``` yaml $(tag) == 'package-2019-09-preview-only'
 input-file:
-- preview/2019-09-30/openShiftManagedClusters.json
+- Microsoft.ContainerService/aks/preview/2019-09-30/openShiftManagedClusters.json
 ```
 
 ### Tag: package-2017-07-only-extended
@@ -771,8 +771,8 @@ v2017_07_01 namespace of python SDK, DO NOT MODIFY THIS TAG.
 
 ``` yaml $(tag) == 'package-2017-07-only-extended'
 input-file:
-- stable/2017-07-01/containerService.json
-- stable/2019-04-01/location.json
+- Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/aks/stable/2019-04-01/location.json
 ```
 
 ### Tag: package-2020-09-01-only
@@ -781,7 +781,7 @@ These settings apply only when `--tag=package-2020-09-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2020-09-01-only'
 input-file:
-- stable/2020-09-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2020-09-01/managedClusters.json
 ```
 
 ### Tag: package-2020-07-01-only
@@ -790,7 +790,7 @@ These settings apply only when `--tag=package-2020-07-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2020-07-01-only'
 input-file:
-- stable/2020-07-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2020-07-01/managedClusters.json
 ```
 
 ### Tag: package-2020-06-01-only
@@ -799,7 +799,7 @@ These settings apply only when `--tag=package-2020-06-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2020-06-01-only'
 input-file:
-- stable/2020-06-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2020-06-01/managedClusters.json
 ```
 
 ### Tag: package-2020-04-01-only
@@ -808,7 +808,7 @@ These settings apply only when `--tag=package-2020-04-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2020-04-01-only'
 input-file:
-- stable/2020-04-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2020-04-01/managedClusters.json
 ```
 
 ### Tag: package-2020-03-01-only
@@ -817,7 +817,7 @@ These settings apply only when `--tag=package-2020-03-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2020-03-01-only'
 input-file:
-- stable/2020-03-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2020-03-01/managedClusters.json
 ```
 
 ### Tag: package-2020-02-01-only
@@ -826,7 +826,7 @@ These settings apply only when `--tag=package-2020-02-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2020-02-01-only'
 input-file:
-- stable/2020-02-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2020-02-01/managedClusters.json
 ```
 
 ### Tag: package-2020-01-01-only
@@ -835,7 +835,7 @@ These settings apply only when `--tag=package-2020-01-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2020-01-01-only'
 input-file:
-- stable/2020-01-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2020-01-01/managedClusters.json
 ```
 
 ### Tag: package-2019-11-01-only
@@ -844,7 +844,7 @@ These settings apply only when `--tag=package-2019-11-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2019-11-01-only'
 input-file:
-- stable/2019-11-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2019-11-01/managedClusters.json
 ```
 
 ### Tag: package-2019-10-27-preview-only
@@ -853,7 +853,7 @@ These settings apply only when `--tag=package-2019-10-27-preview-only` is specif
 
 ``` yaml $(tag) == 'package-2019-10-27-preview-only'
 input-file:
-- preview/2019-10-27-preview/openShiftManagedClusters.json
+- Microsoft.ContainerService/aks/preview/2019-10-27-preview/openShiftManagedClusters.json
 ```
 
 ### Tag: package-2019-10-01-only
@@ -862,7 +862,7 @@ These settings apply only when `--tag=package-2019-10-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2019-10-01-only'
 input-file:
-- stable/2019-10-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2019-10-01/managedClusters.json
 ```
 
 ### Tag: package-2019-08-01-only
@@ -871,7 +871,7 @@ These settings apply only when `--tag=package-2019-08-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2019-08-01-only'
 input-file:
-- stable/2019-08-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2019-08-01/managedClusters.json
 ```
 
 ### Tag: package-2019-06-01-only
@@ -880,7 +880,7 @@ These settings apply only when `--tag=package-2019-06-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2019-06-01-only'
 input-file:
-- stable/2019-06-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2019-06-01/managedClusters.json
 ```
 
 ### Tag: package-2019-04-30-only
@@ -889,7 +889,7 @@ These settings apply only when `--tag=package-2019-04-30-only` is specified on t
 
 ``` yaml $(tag) == 'package-2019-04-30-only'
 input-file:
-- stable/2019-04-30/openShiftManagedClusters.json
+- Microsoft.ContainerService/aks/stable/2019-04-30/openShiftManagedClusters.json
 ```
 
 ### Tag: package-2019-04-01-only
@@ -898,8 +898,8 @@ These settings apply only when `--tag=package-2019-04-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2019-04-01-only'
 input-file:
-- stable/2019-04-01/managedClusters.json
-- stable/2019-04-01/location.json
+- Microsoft.ContainerService/aks/stable/2019-04-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2019-04-01/location.json
 ```
 
 ### Tag: package-2019-02-only
@@ -908,7 +908,7 @@ These settings apply only when `--tag=package-2019-02-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2019-02-only'
 input-file:
-- stable/2019-02-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2019-02-01/managedClusters.json
 ```
 
 ### Tag: package-2018-09-preview-only
@@ -917,7 +917,7 @@ These settings apply only when `--tag=package-2018-09-preview-only` is specified
 
 ``` yaml $(tag) == 'package-2018-09-preview-only'
 input-file:
-- preview/2018-09-30-preview/openShiftManagedClusters.json
+- Microsoft.ContainerService/aks/preview/2018-09-30-preview/openShiftManagedClusters.json
 ```
 
 ### Tag: package-2018-08-preview-only
@@ -926,7 +926,7 @@ These settings apply only when `--tag=package-2018-08-preview-only` is specified
 
 ``` yaml $(tag) == 'package-2018-08-preview-only'
 input-file:
-- preview/2018-08-01-preview/managedClusters.json
+- Microsoft.ContainerService/aks/preview/2018-08-01-preview/managedClusters.json
 ```
 
 ### Tag: package-2018-03-only
@@ -935,7 +935,7 @@ These settings apply only when `--tag=package-2018-03-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2018-03-only'
 input-file:
-- stable/2018-03-31/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2018-03-31/managedClusters.json
 ```
 
 ### Tag: package-2017-09-only
@@ -944,7 +944,7 @@ These settings apply only when `--tag=package-2017-09-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2017-09-only'
 input-file:
-- stable/2017-09-30/location.json
+- Microsoft.ContainerService/aks/stable/2017-09-30/location.json
 ```
 
 ### Tag: package-2017-08-only
@@ -953,7 +953,7 @@ These settings apply only when `--tag=package-2017-08-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2017-08-only'
 input-file:
-- stable/2017-08-31/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2017-08-31/managedClusters.json
 ```
 
 ### Tag: package-2017-01-only
@@ -962,7 +962,7 @@ These settings apply only when `--tag=package-2017-01-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2017-01-only'
 input-file:
-- stable/2017-01-31/containerService.json
+- Microsoft.ContainerService/aks/stable/2017-01-31/containerService.json
 ```
 
 ### Tag: package-2016-09-only
@@ -971,7 +971,7 @@ These settings apply only when `--tag=package-2016-09-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2016-09-only'
 input-file:
-- stable/2016-09-30/containerService.json
+- Microsoft.ContainerService/aks/stable/2016-09-30/containerService.json
 ```
 
 ### Tag: package-2016-03-only
@@ -980,7 +980,7 @@ These settings apply only when `--tag=package-2016-03-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2016-03-only'
 input-file:
-- stable/2016-03-30/containerService.json
+- Microsoft.ContainerService/aks/stable/2016-03-30/containerService.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
@@ -990,9 +990,9 @@ Creating this tag to pick proper resources from the hybrid profile.
 
 ``` yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
-- stable/2020-11-01/managedClusters.json
-- stable/2019-04-01/location.json
-- stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/aks/stable/2020-11-01/managedClusters.json
+- Microsoft.ContainerService/aks/stable/2019-04-01/location.json
+- Microsoft.ContainerService/aks/stable/2017-07-01/containerService.json
 ```
 
 ---
