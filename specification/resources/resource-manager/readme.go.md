@@ -118,6 +118,7 @@ batch:
   - tag: package-locks-2016-09
   - tag: package-locks-2015-01
   - tag: package-policy-2023-04
+  - tag: package-policy-2022-06
   - tag: package-policy-2021-06
   - tag: package-policy-2020-09
   - tag: package-policy-2020-03
