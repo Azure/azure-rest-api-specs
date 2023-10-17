@@ -484,9 +484,10 @@
               }
             ]
           },
-          "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'Replica'.",
+          "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'Replica'. This property is returned only for Replica server",
           "x-ms-mutability": [
-            "create"
+            "create",
+            "read"
           ]
         },
         "pointInTimeUTC": {
@@ -513,7 +514,8 @@
         "replicaCapacity": {
           "type": "integer",
           "format": "int32",
-          "description": "Replicas allowed for a server."
+          "description": "Replicas allowed for a server.",
+          "readOnly": true
         },
         "createMode": {
           "type": "string",
@@ -816,7 +818,7 @@
         },
         "type": {
           "type": "string",
-          "description": "the types of identities associated with this resource; currently restricted to 'SystemAssigned and UserAssigned'",
+          "description": "the types of identities associated with this resource; currently restricted to 'None and UserAssigned'",
           "enum": [
             "None",
             "UserAssigned"
@@ -825,6 +827,11 @@
             "name": "IdentityType",
             "modelAsString": true
           }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant id of the server.",
+          "readOnly": true
         }
       },
       "required": [
