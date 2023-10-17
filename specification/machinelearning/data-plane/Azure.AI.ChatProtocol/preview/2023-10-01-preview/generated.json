@@ -1,0 +1,325 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure ML Chat",
+    "version": "2023-10-01-preview",
+    "description": "Azure APIs for the Azure Chat protocol.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "api-key",
+      "in": "header"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/chat": {
+      "post": {
+        "operationId": "GenericChatClient_CreateStreaming",
+        "description": "Creates a new streaming chat completion.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "description": "The configuration for a streaming chat completion request.",
+              "properties": {
+                "messages": {
+                  "type": "array",
+                  "description": "The collection of context messages associated with this completion request.",
+                  "items": {
+                    "type": "object",
+                    "description": "A single, role-attributed message within a chat completion interaction.",
+                    "properties": {
+                      "content": {
+                        "type": "string",
+                        "description": "The text associated with the message."
+                      },
+                      "role": {
+                        "$ref": "#/definitions/ChatRole",
+                        "description": "The role associated with the message."
+                      },
+                      "session_state": {
+                        "description": "Backend-specific information for the tracking of a session.",
+                        "x-ms-client-name": "sessionState"
+                      }
+                    },
+                    "required": [
+                      "content",
+                      "role"
+                    ]
+                  },
+                  "x-ms-identifiers": []
+                },
+                "stream": {
+                  "type": "boolean",
+                  "description": "Indicates whether the completion is a streaming or non-streaming completion.",
+                  "enum": [
+                    true
+                  ]
+                },
+                "session_state": {
+                  "description": "Backend-specific information for the tracking of a session.",
+                  "x-ms-client-name": "sessionState"
+                },
+                "context": {
+                  "type": "object",
+                  "description": "Backend-specific context or arguments.",
+                  "additionalProperties": {}
+                }
+              },
+              "required": [
+                "messages",
+                "stream"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "A single response to a streaming completion request.",
+              "properties": {
+                "choices": {
+                  "type": "array",
+                  "description": "The collection of choice deltas received in this chunk.",
+                  "items": {
+                    "type": "object",
+                    "description": "The representation of an incremental choice received in a streaming completion.",
+                    "properties": {
+                      "index": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "The index of the of the chat choice, relative to the other choices in the same completion."
+                      },
+                      "delta": {
+                        "type": "object",
+                        "description": "The partial message received for this choice.",
+                        "properties": {
+                          "content": {
+                            "type": "string",
+                            "description": "An incremental part of the text associated with the message."
+                          },
+                          "role": {
+                            "$ref": "#/definitions/ChatRole",
+                            "description": "The role associated with the message."
+                          },
+                          "session_state": {
+                            "description": "Backend-specific information for the tracking of a session.",
+                            "x-ms-client-name": "sessionState"
+                          }
+                        }
+                      },
+                      "session_state": {
+                        "description": "Backend-specific information for the tracking of a session.",
+                        "x-ms-client-name": "sessionState"
+                      },
+                      "context": {
+                        "type": "object",
+                        "description": "Backend-specific context or arguments.",
+                        "additionalProperties": {}
+                      },
+                      "finish_reason": {
+                        "$ref": "#/definitions/FinishReason",
+                        "description": "The reason this chat completion completed its generation.",
+                        "x-ms-client-name": "finishReason"
+                      }
+                    },
+                    "required": [
+                      "index",
+                      "delta"
+                    ]
+                  },
+                  "x-ms-identifiers": []
+                }
+              },
+              "required": [
+                "choices"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "ChatRole": {
+      "type": "string",
+      "description": "A representation of the intended purpose of a message.",
+      "enum": [
+        "user",
+        "system",
+        "assistant"
+      ],
+      "x-ms-enum": {
+        "name": "ChatRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "user",
+            "value": "user",
+            "description": "The role that provides input to the completion."
+          },
+          {
+            "name": "system",
+            "value": "system",
+            "description": "The role that instructs or configures the behavior of the assistant."
+          },
+          {
+            "name": "assistant",
+            "value": "assistant",
+            "description": "The role that provides responses to the system-instructed, user-prompted input."
+          }
+        ]
+      }
+    },
+    "FinishReason": {
+      "type": "string",
+      "description": "Representation of the reason why a chat session has finished processing.",
+      "enum": [
+        "stop",
+        "length"
+      ],
+      "x-ms-enum": {
+        "name": "FinishReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "stopped",
+            "value": "stop",
+            "description": "Completion ended normally."
+          },
+          {
+            "name": "tokenLimitReached",
+            "value": "length",
+            "description": "The completion exhausted available tokens before generation could complete."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
