@@ -46,5 +46,9 @@ for file_name in file_names:
 include_statement = "@@usage("
 model_names_with_include = [include_statement + model_name + ", Usage.input | Usage.output);" for model_name in model_names]    
 
-for model in model_names_with_include:
-    print(model)
+access_statement = "@@access("
+model_names_with_access = [access_statement + model_name + ", Access.public);" for model_name in model_names]    
+
+for i in range(len(model_names_with_access)):
+    print(model_names_with_include[i])
+    print(model_names_with_access[i])
