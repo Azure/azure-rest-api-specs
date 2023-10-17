@@ -68,7 +68,7 @@ model DestinationRule {
   protocol?: CommunityEndpointProtocol[];
 
   @doc("Transit Hub Resource Id.")
-  transitHubResourceId: TransitHubResourceId;
+  transitHubResourceId?: TransitHubResourceId;
 }
 
 @doc("Community Endpoint Resource properties")
