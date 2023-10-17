@@ -99,7 +99,7 @@ interface DevBoxesOperations {
       @path
       projectName: string;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
 
@@ -123,7 +123,7 @@ interface DevBoxesOperations {
       @path
       projectName: string;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
 
@@ -145,7 +145,7 @@ interface DevBoxesOperations {
       @path
       projectName: string;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
 
@@ -181,7 +181,7 @@ interface DevBoxesOperations {
       @path
       projectName: string;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
 
@@ -213,7 +213,7 @@ interface DevBoxesOperations {
       @path
       projectName: string;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
 
@@ -239,7 +239,7 @@ interface DevBoxesOperations {
       @path
       projectName: string;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
 
@@ -269,7 +269,7 @@ interface DevBoxesOperations {
       @path
       projectName: string;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
 
@@ -294,7 +294,7 @@ interface DevBoxesOperations {
       @path
       projectName: string;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
 
@@ -314,7 +314,7 @@ interface DevBoxesOperations {
       @path
       projectName: string;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
 
@@ -334,7 +334,7 @@ interface DevBoxesOperations {
       @path
       projectName: string;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
 
@@ -358,7 +358,7 @@ interface DevBoxesOperations {
       @path
       projectName: string;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
 
@@ -382,7 +382,7 @@ interface DevBoxesOperations {
       @path
       projectName: string;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
 
@@ -410,7 +410,7 @@ interface DevBoxesOperations {
       @path
       projectName: string;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
 
@@ -456,7 +456,7 @@ interface DevBoxesDevCenterOperations {
       @query
       top?: int32;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context. The default value is \"me\".")
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
       @path
       userId: string;
     },
