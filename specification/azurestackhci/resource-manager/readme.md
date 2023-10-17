@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-09
+tag: package-preview-2023-08
 ```
 
 ## Suppression
@@ -70,11 +70,29 @@ suppressions:
     from: logicalNetworks.json
 ```
 
+
+### Tag: package-preview-2023-08
+
+These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-08'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/offers.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/publishers.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/skus.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/updateRuns.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/updateSummaries.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/updates.json
+```
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-09'
+``` yaml $(tag) == 'package-preview-2023-09'
 input-file:
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/common.json
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/galleryImages.json
@@ -85,11 +103,12 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualHardDisks.json
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualMachineInstances.json
 ```
+
 ### Tag: package-2023-08
 
 These settings apply only when `--tag=package-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08'
+``` yaml $(tag) == 'package-2023-08'
 input-file:
   - Microsoft.AzureStackHCI/stable/2023-08-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2023-08-01/clusters.json
@@ -102,6 +121,7 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2023-08-01/updateSummaries.json
   - Microsoft.AzureStackHCI/stable/2023-08-01/updates.json
 ```
+
 ### Tag: package-preview-2023-07
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
