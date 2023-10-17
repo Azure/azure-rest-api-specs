@@ -62,7 +62,7 @@
             "$ref": "#/parameters/MetricBatchEndTimeParameter"
           },
           {
-            "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2023-10-01/commonMonitoringTypes.json#/parameters/IntervalParameter"
+            "$ref": "#/parameters/MetricBatchIntervalParameter"
           },
           {
             "$ref": "#/parameters/MetricBatchNamespaceParameter"
@@ -152,6 +152,15 @@
       "required": false,
       "type": "string",
       "description": "The end time of the query. It is a string in the format 'yyyy-MM-ddTHH:mm:ss.fffZ'.",
+      "x-ms-parameter-location": "method"
+    },
+    "MetricBatchIntervalParameter": {
+      "name": "interval",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "default": "PT1M",
+      "description": "The interval (i.e. timegrain) of the query in ISO 8601 duration format. Defaults to PT1M. Special case for 'FULL' value that returns single datapoint for entire time span requested.\n*Examples: PT15M, PT1H, P1D*, FULL",
       "x-ms-parameter-location": "method"
     },
     "MetricBatchNamespaceParameter": {

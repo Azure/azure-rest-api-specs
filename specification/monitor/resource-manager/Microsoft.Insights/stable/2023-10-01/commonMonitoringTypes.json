@@ -264,19 +264,14 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "default": "PT1M",
-      "description": "The interval (i.e. timegrain) of the query in ISO 8601 duration format. Special case for 'FULL' value that returns single datapoint for entire time span requested.\n*Examples: PT15M, PT1H, P1D*, FULL",
+      "description": "The interval (i.e. timegrain) of the query in ISO 8601 duration format. Defaults to PT1M. Special case for 'FULL' value that returns single datapoint for entire time span requested.\n*Examples: PT15M, PT1H, P1D*, FULL",
       "x-ms-parameter-location": "method"
     },
     "MetricNamesParameter": {
       "name": "metricnames",
       "in": "query",
       "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "csv",
+      "type": "string",
       "description": "The names of the metrics (comma separated) to retrieve.",
       "x-ms-parameter-location": "method"
     },
