@@ -6387,6 +6387,7 @@
       "properties": {
         "resourceUri": {
           "type": "string",
+          "format": "uri",
           "description": "The resource uri for your Azure Open AI resource."
         },
         "deploymentId": {
@@ -6427,7 +6428,8 @@
       "properties": {
         "uri": {
           "type": "string",
-          "description": "The url for the Web API."
+          "format": "uri",
+          "description": "The uri for the Web API."
         },
         "httpHeaders": {
           "$ref": "#/definitions/WebApiHttpHeaders",
@@ -6486,7 +6488,7 @@
             "url": "https://docs.microsoft.com/rest/api/searchservice/Create-Data-Source"
           },
           "type": "string",
-          "description": "The connection string for the datasource. Set to '<unchanged>' if you do not want the connection string updated."
+          "description": "The connection string for the datasource. Set to `<unchanged>` (with brackets) if you don't want the connection string updated. Set to `<redacted>` if you want to remove the connection string value from the datasource."
         }
       },
       "description": "Represents credentials that can be used to connect to a datasource."
@@ -8246,7 +8248,8 @@
       },
       "required": [
         "documentCount",
-        "storageSize"
+        "storageSize",
+        "vectorIndexSize"
       ],
       "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date."
     },
@@ -9408,6 +9411,7 @@
         "uri": {
           "x-ms-client-name": "ScoringUri",
           "type": "string",
+          "format": "uri",
           "x-nullable": true,
           "description": "(Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed."
         },
@@ -9457,6 +9461,7 @@
       "properties": {
         "resourceUri": {
           "type": "string",
+          "format": "uri",
           "description": "The resource uri for your Azure Open AI resource."
         },
         "deploymentId": {
@@ -11723,7 +11728,7 @@
         "keyVaultUri": {
           "x-ms-client-name": "vaultUri",
           "type": "string",
-          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be https://my-keyvault-name.vault.azure.net."
+          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be `https://my-keyvault-name.vault.azure.net`."
         },
         "accessCredentials": {
           "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
