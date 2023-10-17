@@ -1,8 +1,11 @@
 {
   "parameters": {
     "endpoint": "{endpoint}",
-    "credentialName": "myCredential",
-    "api-version": "2023-09-01"
+    "integrationRuntimeName": "myIntegrationRuntime",
+    "api-version": "2023-09-01",
+    "body": {
+      "keyName": "test-key"
+    }
   },
   "responses": {
     "200": {
@@ -10,11 +13,8 @@
         "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
       },
       "body": {
-        "name": "myCredential",
-        "kind": "BasicAuth",
-        "properties": {
-          "description": "test description"
-        }
+        "authKey1": "authKey1",
+        "authKey2": null
       }
     }
   }

@@ -1,7 +1,6 @@
 {
   "parameters": {
     "endpoint": "{endpoint}",
-    "credentialName": "myCredential",
     "api-version": "2023-09-01"
   },
   "responses": {
@@ -10,11 +9,15 @@
         "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
       },
       "body": {
-        "name": "myCredential",
-        "kind": "BasicAuth",
-        "properties": {
-          "description": "test description"
-        }
+        "value": [
+          {
+            "name": "myManagedVNet",
+            "properties": {
+              "vNetId": "myVNetId",
+              "alias": "myVNetAlias"
+            }
+          }
+        ]
       }
     }
   }

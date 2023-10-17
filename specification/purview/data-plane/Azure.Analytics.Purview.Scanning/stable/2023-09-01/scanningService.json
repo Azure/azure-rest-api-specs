@@ -936,6 +936,703 @@
         }
       }
     },
+    "/integrationruntimes": {
+      "get": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Lists integration runtimes in an account.",
+        "operationId": "IntegrationRuntimes_ListByAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_ListByAccount": {
+            "$ref": "./examples/IntegrationRuntimes_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/integrationruntimes/{integrationRuntimeName}": {
+      "get": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Gets an integration runtime.",
+        "operationId": "IntegrationRuntimes_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntime"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_Get": {
+            "$ref": "./examples/IntegrationRuntimes_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Deletes an integration runtime.",
+        "operationId": "IntegrationRuntimes_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "204": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_Delete": {
+            "$ref": "./examples/IntegrationRuntimes_Delete.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Create or update an instance of a integration runtime.",
+        "operationId": "IntegrationRuntimes_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntime"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntime"
+            }
+          },
+          "201": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntime"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_CreateOrUpdate": {
+            "$ref": "./examples/IntegrationRuntimes_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/integrationruntimes/{integrationRuntimeName}/status": {
+      "get": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Gets detailed status information for an integration runtime.",
+        "operationId": "IntegrationRuntimes_Status",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeStatus"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_Status": {
+            "$ref": "./examples/IntegrationRuntimes_Status.json"
+          }
+        }
+      }
+    },
+    "/integrationruntimes/{integrationRuntimeName}/:listAuthKeys": {
+      "post": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Retrieves the authentication keys for an integration runtime.",
+        "operationId": "IntegrationRuntimes_ListAuthKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeAuthKeys"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_ListAuthKeys": {
+            "$ref": "./examples/IntegrationRuntimes_ListAuthKeys.json"
+          }
+        }
+      }
+    },
+    "/integrationruntimes/{integrationRuntimeName}/:regenerateAuthKey": {
+      "post": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Regenerates the authentication key for an integration runtime.",
+        "operationId": "IntegrationRuntimes_RegenerateAuthKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeRegenerateKeyParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeAuthKeys"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_RegenerateAuthKey": {
+            "$ref": "./examples/IntegrationRuntimes_RegenerateAuthKey.json"
+          }
+        }
+      }
+    },
+    "/integrationruntimes/{integrationRuntimeName}/disableInteractiveQuery": {
+      "post": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Disables interactive querying.",
+        "operationId": "IntegrationRuntimes_DisableInteractiveQuery",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimes_DisableInteractiveQuery": {
+            "$ref": "./examples/IntegrationRuntimes_DisableInteractiveQuery.json"
+          }
+        }
+      }
+    },
+    "/integrationruntimes/{integrationRuntimeName}/enableInteractiveQuery": {
+      "post": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "description": "Enables interactive querying.",
+        "operationId": "IntegrationRuntimes_EnableInteractiveQuery",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "description": "The request of enabling interactive query for integration runtime.",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnableInteractiveQueryForIntegrationRuntimeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "IntegrationRuntimes_EnableInteractiveQuery": {
+            "$ref": "./examples/IntegrationRuntimes_EnableInteractiveQuery.json"
+          }
+        }
+      }
+    },
+    "/managedvirtualnetworks": {
+      "get": {
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
+        "description": "Lists managed virtual networks in an account",
+        "operationId": "ManagedVirtualNetworks_ListByAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetworkList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_ListByAccount": {
+            "$ref": "./examples/ManagedVirtualNetworks_ListByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/managedvirtualnetworks/{managedVirtualNetworkName}": {
+      "get": {
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
+        "description": "Gets a managed virtual network",
+        "operationId": "ManagedVirtualNetworks_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_Get": {
+            "$ref": "./examples/ManagedVirtualNetworks_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedVirtualNetworks"
+        ],
+        "description": "Create or update a managed virtual network",
+        "operationId": "ManagedVirtualNetworks_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "description": "Managed virtual network resource definition.",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetwork"
+            }
+          },
+          "201": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/ManagedVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedVirtualNetworks_CreateOrUpdate": {
+            "$ref": "./examples/ManagedVirtualNetworks_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/managedvirtualnetworks/{managedVirtualNetworkName}/managedprivateendpoints": {
+      "get": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "description": "Lists managed private endpoints for an account",
+        "operationId": "ManagedPrivateEndpoints_ListPrivateEndpointsByAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_ListPrivateEndpointsByAccount": {
+            "$ref": "./examples/ManagedPrivateEndpoints_ListPrivateEndpointsByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/managedvirtualnetworks/{managedVirtualNetworkName}/managedprivateendpoints/{managedPrivateEndpointName}": {
+      "get": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "description": "Gets a managed private endpoint",
+        "operationId": "ManagedPrivateEndpoints_GetPrivateEndpoint",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/managedPrivateEndpointName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_GetPrivateEndpoint": {
+            "$ref": "./examples/ManagedPrivateEndpoints_GetPrivateEndpoint.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "description": "Deletes a managed private endpoint",
+        "operationId": "ManagedPrivateEndpoints_DeletePrivateEndpoint",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/managedPrivateEndpointName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "204": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_DeletePrivateEndpoint": {
+            "$ref": "./examples/ManagedPrivateEndpoints_DeletePrivateEndpoint.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedPrivateEndpoints"
+        ],
+        "description": "Create or update a managed private endpoint",
+        "operationId": "ManagedPrivateEndpoints_CreateOrUpdatePrivateEndpoint",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/managedVirtualNetworkName"
+          },
+          {
+            "$ref": "#/parameters/managedPrivateEndpointName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "description": "Managed private endpoint resource definition.",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          },
+          "201": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpoint"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_CreateOrUpdatePrivateEndpoint": {
+            "$ref": "./examples/ManagedPrivateEndpoints_CreateOrUpdatePrivateEndpoint.json"
+          }
+        }
+      }
+    },
     "/datasources/{dataSourceName}/scans/{scanName}": {
       "put": {
         "tags": [
@@ -2076,10 +2773,12 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "The resource identifier.",
           "type": "string",
           "readOnly": true
         },
         "name": {
+          "description": "The resource name.",
           "type": "string",
           "readOnly": true
         }
@@ -3166,104 +3865,540 @@
         }
       }
     },
-    "IntegrationRuntime": {
-      "required": [
-        "kind"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "kind": {
-          "enum": [
-            "SelfHosted",
-            "Managed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IntegrationRuntimeType",
-            "modelAsString": true
-          }
-        }
-      },
-      "discriminator": "kind"
-    },
-    "IActionResult": {
-      "type": "object"
-    },
-    "IntegrationRuntimeStatus": {
-      "description": "the runtime status of IR",
-      "required": [
-        "kind"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "kind": {
-          "enum": [
-            "SelfHosted",
-            "Managed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IntegrationRuntimeType",
-            "modelAsString": true
-          }
-        }
-      },
-      "discriminator": "kind"
-    },
-    "IntegrationRuntimeAuthKeys": {
-      "type": "object",
-      "properties": {
-        "authKey1": {
-          "type": "string"
-        },
-        "authKey2": {
-          "type": "string"
-        }
-      }
-    },
-    "IntegrationRuntimeRegenerateKeyParameters": {
-      "description": "the regenerate key parameters of IR",
-      "type": "object",
-      "properties": {
-        "keyName": {
-          "type": "string"
-        }
-      }
-    },
     "IntegrationRuntimeList": {
-      "description": "the list of IR",
+      "description": "A list of integration runtime resources.",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "List of integration runtimes.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntegrationRuntime"
           }
         },
         "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
           "type": "string"
         },
         "count": {
+          "description": "The count of integration runtimes.",
           "format": "int64",
           "type": "integer"
         }
       }
     },
+    "IntegrationRuntime": {
+      "description": "Purview nested object which serves as a compute resource for activities.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Type of integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeType"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "IntegrationRuntimeType": {
+      "description": "The type of integration runtime.",
+      "type": "string",
+      "enum": [
+        "Managed",
+        "SelfHosted"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationRuntimeType",
+        "modelAsString": true
+      }
+    },
+    "ManagedIntegrationRuntimeComputeProperties": {
+      "description": "The compute resource properties for managed integration runtime.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "The location for managed integration runtime.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedIntegrationRuntimeTypeProperties": {
+      "description": "Managed integration runtime type properties.",
+      "type": "object",
+      "properties": {
+        "computeProperties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManagedIntegrationRuntimeComputeProperties"
+            }
+          ]
+        }
+      }
+    },
+    "ManagedVirtualNetworkReference": {
+      "description": "The managed virtual network reference.",
+      "type": "object",
+      "properties": {
+        "referenceName": {
+          "description": "Reference ManagedVirtualNetwork name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Managed virtual network reference type.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedIntegrationRuntimeProperties": {
+      "description": "The managed integration runtime properties.",
+      "type": "object",
+      "properties": {
+        "typeProperties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManagedIntegrationRuntimeTypeProperties"
+            }
+          ]
+        },
+        "managedVirtualNetworkReference": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManagedVirtualNetworkReference"
+            }
+          ]
+        },
+        "description": {
+          "description": "The managed integration runtime description.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedIntegrationRuntime": {
+      "description": "The managed integration runtime.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntegrationRuntime"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManagedIntegrationRuntimeProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Managed"
+    },
+    "SelfHostedIntegrationRuntimeProperties": {
+      "description": "The self-hosted integration runtime properties.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The self-hosted integration runtime description.",
+          "type": "string"
+        }
+      }
+    },
+    "SelfHostedIntegrationRuntime": {
+      "description": "Self-hosted integration runtime.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntegrationRuntime"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SelfHostedIntegrationRuntimeProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SelfHosted"
+    },
+    "SelfHostedIntegrationRuntimeNode": {
+      "description": "Properties of Self-hosted integration runtime node.",
+      "type": "object",
+      "properties": {
+        "nodeName": {
+          "description": "Name of the integration runtime node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "machineName": {
+          "description": "Machine name of the integration runtime node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hostServiceUri": {
+          "description": "URI for the host machine of the integration runtime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the integration runtime node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "capabilities": {
+          "description": "The integration runtime capabilities dictionary",
+          "type": "object",
+          "additionalProperties": {
+            "description": "The capability details of self-hosted integration runtime node.",
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "versionStatus": {
+          "description": "Status of the integration runtime node version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the integration runtime node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "registerTime": {
+          "description": "The time at which the integration runtime node was registered in ISO8601 format.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastConnectTime": {
+          "description": "The most recent time at which the integration runtime was connected in ISO8601 format.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "expiryTime": {
+          "description": "The time at which the integration runtime will expire in ISO8601 format.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastStartTime": {
+          "description": "The time the node last started up.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastStopTime": {
+          "description": "The integration runtime node last stop time.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastUpdateResult": {
+          "description": "The result of the last integration runtime node update.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastStartUpdateTime": {
+          "description": "The last time for the integration runtime node update start.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastEndUpdateTime": {
+          "description": "The last time for the integration runtime node update end.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "isActiveDispatcher": {
+          "description": "Indicates whether this node is the active dispatcher for integration runtime requests.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "concurrentJobsLimit": {
+          "description": "The concurrent jobs limit of self-hosted integration runtime node.",
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "maxConcurrentJobs": {
+          "description": "The max concurrent jobs of self-hosted integration runtime node.",
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "SelfHostedIntegrationRuntimeStatusTypeProperties": {
+      "description": "Self-hosted integration runtime status type properties.",
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "description": "The time at which the integration runtime was created, in ISO8601 format.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "taskQueueId": {
+          "description": "The task queue id of the integration runtime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "internalChannelEncryption": {
+          "description": "It is used to set the encryption mode for node-node communication channel (when more than 2 self-hosted integration runtime nodes exist).",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the integration runtime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "nodes": {
+          "description": "The list of nodes for this integration runtime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
+          }
+        },
+        "scheduledUpdateDate": {
+          "description": "The date at which the integration runtime will be scheduled to update, in ISO8601 format.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "updateDelayOffset": {
+          "description": "The time in the date scheduled by service to update the integration runtime, e.g., PT03H is 3 hours",
+          "type": "string",
+          "readOnly": true
+        },
+        "localTimeZoneOffset": {
+          "description": "The local time zone offset in hours.",
+          "type": "string",
+          "readOnly": true
+        },
+        "capabilities": {
+          "description": "Object with additional information about integration runtime capabilities.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "serviceUrls": {
+          "description": "The URLs for the services used in integration runtime backend service.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "autoUpdate": {
+          "description": "Whether Self-hosted integration runtime auto update has been turned on.",
+          "enum": [
+            "On",
+            "Off"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeAutoUpdate",
+            "modelAsString": true
+          }
+        },
+        "versionStatus": {
+          "description": "Status of the integration runtime version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pushedVersion": {
+          "description": "The version that the integration runtime is going to update to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "latestVersion": {
+          "description": "The latest version on download center.",
+          "type": "string",
+          "readOnly": true
+        },
+        "autoUpdateETA": {
+          "description": "The estimated time when the self-hosted integration runtime will be updated.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SelfHostedIntegrationRuntimeStatusProperties": {
+      "description": "Self-hosted integration runtime status properties.",
+      "type": "object",
+      "properties": {
+        "typeProperties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SelfHostedIntegrationRuntimeStatusTypeProperties"
+            }
+          ]
+        },
+        "state": {
+          "description": "Self-hosted integration runtime state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SelfHostedIntegrationRuntimeStatus": {
+      "description": "Self-hosted integration runtime status.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntegrationRuntimeStatus"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SelfHostedIntegrationRuntimeStatusProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SelfHosted"
+    },
+    "InteractiveQuery": {
+      "description": "Interactive query properties of managed integration runtime.",
+      "type": "object",
+      "properties": {
+        "autoTerminationMinutes": {
+          "description": "Auto termination minutes of interactive query.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "status": {
+          "description": "Status of interactive query.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedIntegrationRuntimeStatusTypeProperties": {
+      "description": "Managed integration runtime status type properties.",
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "description": "The time at which the integration runtime was created, in ISO8601 format.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "interactiveQuery": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/InteractiveQuery"
+            }
+          ]
+        }
+      }
+    },
+    "ManagedIntegrationRuntimeStatusProperties": {
+      "description": "Managed integration runtime status properties.",
+      "type": "object",
+      "properties": {
+        "typeProperties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManagedIntegrationRuntimeStatusTypeProperties"
+            }
+          ]
+        },
+        "state": {
+          "description": "Managed integration runtime state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedIntegrationRuntimeStatus": {
+      "description": "Managed integration runtime status.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntegrationRuntimeStatus"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManagedIntegrationRuntimeStatusProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Managed"
+    },
+    "IntegrationRuntimeStatus": {
+      "description": "Integration runtime status.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Type of integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeType"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "IntegrationRuntimeAuthKeys": {
+      "description": "The integration runtime authentication keys.",
+      "type": "object",
+      "properties": {
+        "authKey1": {
+          "type": "string",
+          "description": "The primary integration runtime authentication key."
+        },
+        "authKey2": {
+          "type": "string",
+          "description": "The secondary integration runtime authentication key."
+        }
+      }
+    },
+    "IntegrationRuntimeRegenerateKeyParameters": {
+      "description": "Parameters to regenerate the authentication key.",
+      "type": "object",
+      "properties": {
+        "keyName": {
+          "description": "The name of the authentication key to regenerate.",
+          "type": "string",
+          "enum": [
+            "authKey1",
+            "authKey2"
+          ],
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeAuthKeyName",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "EnableInteractiveQueryForIntegrationRuntimeRequest": {
-      "description": "the request of enable interactive query for IR",
+      "description": "The request of enabling interactive query for integration runtime.",
       "type": "object",
       "properties": {
         "autoTerminationMinutes": {
@@ -3272,22 +4407,33 @@
         }
       }
     },
-    "ManagedVirtualNetworkProperties": {
-      "description": "the properties of managed virtual network",
+    "ManagedVirtualNetworkList": {
+      "description": "A list of managed virtual network resources.",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
-        "vNetId": {
-          "type": "string",
-          "readOnly": true
+        "value": {
+          "description": "List of managed virtual networks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedVirtualNetwork"
+          }
         },
-        "alias": {
-          "type": "string",
-          "readOnly": true
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        },
+        "count": {
+          "description": "The count of managed virtual networks.",
+          "format": "int64",
+          "type": "integer"
         }
       }
     },
     "ManagedVirtualNetwork": {
-      "description": "Net work setting of managed vnet",
+      "description": "The managed virtual network.",
       "type": "object",
       "allOf": [
         {
@@ -3304,54 +4450,48 @@
         }
       }
     },
-    "ConnectionStateProperties": {
-      "description": "the properties of connection state",
+    "ManagedVirtualNetworkProperties": {
+      "description": "The properties of managed virtual network.",
       "type": "object",
       "properties": {
-        "actionsRequired": {
+        "vNetId": {
+          "description": "The ID of the VNet that this integration runtime will join.",
           "type": "string",
           "readOnly": true
         },
-        "description": {
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
+        "alias": {
+          "description": "The alias of managed virtual network.",
           "type": "string",
           "readOnly": true
         }
       }
     },
-    "ManagedPrivateEndpointProperties": {
-      "description": "the properties of managed private endpoint",
+    "ManagedPrivateEndpointList": {
+      "description": "A list of managed private endpoint resources.",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
-        "connectionState": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ConnectionStateProperties"
-            }
-          ]
-        },
-        "fqdns": {
+        "value": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ManagedPrivateEndpoint"
           }
         },
-        "groupId": {
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
           "type": "string"
         },
-        "privateLinkResourceId": {
-          "type": "string"
-        },
-        "provisioningState": {
-          "type": "string"
+        "count": {
+          "description": "The count of managed private endpoints.",
+          "format": "int64",
+          "type": "integer"
         }
       }
     },
     "ManagedPrivateEndpoint": {
-      "description": "the managed private endpoint",
+      "description": "The managed private endpoint.",
       "type": "object",
       "allOf": [
         {
@@ -3368,47 +4508,57 @@
         }
       }
     },
-    "ManagedVirtualNetworkList": {
-      "description": "the list of managed virtual network",
-      "required": [
-        "value"
-      ],
+    "ManagedPrivateEndpointProperties": {
+      "description": "The properties of managed private endpoint.",
       "type": "object",
       "properties": {
-        "value": {
+        "connectionState": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ConnectionStateProperties"
+            }
+          ]
+        },
+        "fqdns": {
+          "description": "The fqdns of managed private endpoint.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ManagedVirtualNetwork"
+            "description": "The fqdn items of managed private endpoint.",
+            "type": "string"
           }
         },
-        "nextLink": {
+        "groupId": {
+          "description": "The group identifier of managed private endpoint.",
           "type": "string"
         },
-        "count": {
-          "format": "int64",
-          "type": "integer"
+        "privateLinkResourceId": {
+          "description": "The private link resource identifier of managed private endpoint.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state of managed private endpoint.",
+          "type": "string"
         }
       }
     },
-    "ManagedPrivateEndpointList": {
-      "description": "the list of managed private endpoint",
-      "required": [
-        "value"
-      ],
+    "ConnectionStateProperties": {
+      "description": "The properties of connection state.",
       "type": "object",
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagedPrivateEndpoint"
-          }
+        "actionsRequired": {
+          "description": "ActionsRequired for a private link connection",
+          "type": "string",
+          "readOnly": true
         },
-        "nextLink": {
-          "type": "string"
+        "description": {
+          "description": "Description of a private link connection",
+          "type": "string",
+          "readOnly": true
         },
-        "count": {
-          "format": "int64",
-          "type": "integer"
+        "status": {
+          "description": "Status of a private link connection",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -5395,381 +6545,6 @@
         }
       },
       "x-ms-discriminator-value": "PowerBI"
-    },
-    "ManagedIntegrationRuntimeComputeProperties": {
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string"
-        }
-      }
-    },
-    "ManagedIntegrationRuntimeTypeProperties": {
-      "type": "object",
-      "properties": {
-        "computeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedIntegrationRuntimeComputeProperties"
-            }
-          ]
-        }
-      }
-    },
-    "ManagedVirtualNetworkReference": {
-      "type": "object",
-      "properties": {
-        "referenceName": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        }
-      }
-    },
-    "ManagedIntegrationRuntimeProperties": {
-      "type": "object",
-      "properties": {
-        "typeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedIntegrationRuntimeTypeProperties"
-            }
-          ]
-        },
-        "managedVirtualNetworkReference": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedVirtualNetworkReference"
-            }
-          ]
-        },
-        "description": {
-          "type": "string"
-        }
-      }
-    },
-    "ManagedIntegrationRuntime": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IntegrationRuntime"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedIntegrationRuntimeProperties"
-            }
-          ]
-        }
-      },
-      "x-ms-discriminator-value": "Managed"
-    },
-    "SelfHostedIntegrationRuntimeProperties": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        }
-      }
-    },
-    "SelfHostedIntegrationRuntime": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IntegrationRuntime"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SelfHostedIntegrationRuntimeProperties"
-            }
-          ]
-        }
-      },
-      "x-ms-discriminator-value": "SelfHosted"
-    },
-    "SelfHostedIntegrationRuntimeNode": {
-      "type": "object",
-      "properties": {
-        "nodeName": {
-          "type": "string",
-          "readOnly": true
-        },
-        "machineName": {
-          "type": "string",
-          "readOnly": true
-        },
-        "hostServiceUri": {
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "readOnly": true
-        },
-        "capabilities": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "versionStatus": {
-          "type": "string",
-          "readOnly": true
-        },
-        "version": {
-          "type": "string",
-          "readOnly": true
-        },
-        "registerTime": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastConnectTime": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "expiryTime": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastStartTime": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastStopTime": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastUpdateResult": {
-          "type": "string",
-          "readOnly": true
-        },
-        "lastStartUpdateTime": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastEndUpdateTime": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "isActiveDispatcher": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "concurrentJobsLimit": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        },
-        "maxConcurrentJobs": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
-    "SelfHostedIntegrationRuntimeStatusTypeProperties": {
-      "type": "object",
-      "properties": {
-        "createTime": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "taskQueueId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "internalChannelEncryption": {
-          "type": "string",
-          "readOnly": true
-        },
-        "version": {
-          "type": "string",
-          "readOnly": true
-        },
-        "nodes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
-          }
-        },
-        "scheduledUpdateDate": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "updateDelayOffset": {
-          "type": "string",
-          "readOnly": true
-        },
-        "localTimeZoneOffset": {
-          "type": "string",
-          "readOnly": true
-        },
-        "capabilities": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "serviceUrls": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "autoUpdate": {
-          "enum": [
-            "On",
-            "Off"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "IntegrationRuntimeAutoUpdate",
-            "modelAsString": true
-          }
-        },
-        "versionStatus": {
-          "type": "string",
-          "readOnly": true
-        },
-        "pushedVersion": {
-          "type": "string",
-          "readOnly": true
-        },
-        "latestVersion": {
-          "type": "string",
-          "readOnly": true
-        },
-        "autoUpdateETA": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "SelfHostedIntegrationRuntimeStatusProperties": {
-      "type": "object",
-      "properties": {
-        "typeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SelfHostedIntegrationRuntimeStatusTypeProperties"
-            }
-          ]
-        },
-        "state": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "SelfHostedIntegrationRuntimeStatus": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IntegrationRuntimeStatus"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SelfHostedIntegrationRuntimeStatusProperties"
-            }
-          ]
-        }
-      },
-      "x-ms-discriminator-value": "SelfHosted"
-    },
-    "InteractiveQuery": {
-      "type": "object",
-      "properties": {
-        "autoTerminationMinutes": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "status": {
-          "type": "string"
-        }
-      }
-    },
-    "ManagedIntegrationRuntimeStatusTypeProperties": {
-      "type": "object",
-      "properties": {
-        "createTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "dataMovementState": {
-          "type": "string"
-        },
-        "dataFlowState": {
-          "type": "string"
-        },
-        "dualStandbyPairRole": {
-          "type": "string"
-        },
-        "interactiveQuery": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/InteractiveQuery"
-            }
-          ]
-        }
-      }
-    },
-    "ManagedIntegrationRuntimeStatusProperties": {
-      "type": "object",
-      "properties": {
-        "typeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedIntegrationRuntimeStatusTypeProperties"
-            }
-          ]
-        },
-        "state": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ManagedIntegrationRuntimeStatus": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IntegrationRuntimeStatus"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedIntegrationRuntimeStatusProperties"
-            }
-          ]
-        }
-      },
-      "x-ms-discriminator-value": "Managed"
     },
     "ScanRulesetProperties": {
       "type": "object",
@@ -8824,6 +9599,15 @@
     }
   },
   "parameters": {
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The API version.",
+      "required": true,
+      "type": "string",
+      "x-ms-client-name": "ApiVersion",
+      "x-ms-parameter-location": "client"
+    },
     "endpoint": {
       "in": "path",
       "name": "endpoint",
@@ -8837,7 +9621,7 @@
     "integrationRuntimeName": {
       "in": "path",
       "name": "integrationRuntimeName",
-      "description": "IntegrationRuntime name.",
+      "description": "The integration runtime name.",
       "required": true,
       "type": "string",
       "minLength": 3,
@@ -8848,7 +9632,7 @@
     "managedVirtualNetworkName": {
       "in": "path",
       "name": "managedVirtualNetworkName",
-      "description": "The Managed VirtualNetwork name. It is restricted to the value 'default' for now.",
+      "description": "The managed virtual network name.",
       "required": true,
       "type": "string",
       "enum": [
@@ -8863,7 +9647,7 @@
     "managedPrivateEndpointName": {
       "in": "path",
       "name": "managedPrivateEndpointName",
-      "description": "The Managed PrivateEndpoint name.",
+      "description": "The managed private endpoint name.",
       "required": true,
       "type": "string",
       "minLength": 1,
