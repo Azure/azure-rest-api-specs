@@ -28,14 +28,22 @@ enum ChatRole {
 @doc("A property that represents backend-specific context or arguments.")
 model ContextProperty<ContextModel> {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Protocol defines the type as Record<any>"
-  @doc("Backend-specific context or arguments.")
+  @doc("""
+  Context allows the chat app to receive extra parameters from the client, such as temperature, functions, or
+  customer_info. These parameters are specific to the chat app and not understood by the generic clients.
+  """)
   context?: ContextModel;
 }
 
 @doc("A property that represents backend-specific information for the tracking of a session.")
 model StateProperty<StateModel> {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "The protocol defines these as any (object/scalar) for now"
-  @doc("Backend-specific information for the tracking of a session.")
+  @doc("""
+  Field that allows the chat app to store and retrieve data, the structure of such data is dependant on the backend
+  being used. The client must send back the data in this field unchanged in subsequent requests, until the chat app
+  sends a new one. The data in this field can be used to implement stateful services, such as remembering previous
+  conversations or user preferences.
+  """)
   @projectedName("json", "session_state")
   sessionState?: StateModel;
 }
