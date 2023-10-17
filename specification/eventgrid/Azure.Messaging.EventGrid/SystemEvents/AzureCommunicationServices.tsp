@@ -717,7 +717,8 @@ model AcsRouterWorkerSelector {
   labelValue?: unknown;
 
   @doc("Router Job Worker Selector Time to Live in Seconds")
-  ttlSeconds?: float32;
+  @encode("ISO8601") // TODO verify this is timespan in C#
+  ttlSeconds?: duration;
 
   @doc("Router Job Worker Selector State")
   state?: AcsRouterWorkerSelectorState;

@@ -190,7 +190,7 @@ using Azure.ClientGenerator.Core;
 @@usage(EventGrid.AcsRouterQueueDetails, Usage.input | Usage.output);
 @@access(EventGrid.AcsRouterQueueDetails, Access.public);
 @@usage(EventGrid.AcsRouterCommunicationError, Usage.input | Usage.output);
-@@access(EventGrid.AcsRouterCommunicationError, Access.public);
+@@access(EventGrid.AcsRouterCommunicationError, Access.internal);
 @@usage(EventGrid.AcsRouterWorkerSelector, Usage.input | Usage.output);
 @@access(EventGrid.AcsRouterWorkerSelector, Access.public);
 @@usage(EventGrid.AcsEmailDeliveryReportStatusDetails, Usage.input | Usage.output);
