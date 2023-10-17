@@ -47,8 +47,8 @@
   "paths": {
     "/chat": {
       "post": {
-        "operationId": "GenericChatClient_CreateStreaming",
-        "description": "Creates a new streaming chat completion.",
+        "operationId": "GenericChatClient_Create",
+        "description": "Creates a new chat completion.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -59,7 +59,7 @@
             "required": true,
             "schema": {
               "type": "object",
-              "description": "The configuration for a streaming chat completion request.",
+              "description": "The configuration for a chat completion request.",
               "properties": {
                 "messages": {
                   "type": "array",
@@ -92,7 +92,7 @@
                   "type": "boolean",
                   "description": "Indicates whether the completion is a streaming or non-streaming completion.",
                   "enum": [
-                    true
+                    false
                   ]
                 },
                 "session_state": {
@@ -117,27 +117,27 @@
             "description": "The request has succeeded.",
             "schema": {
               "type": "object",
-              "description": "A single response to a streaming completion request.",
+              "description": "Representation of the response to a chat completion request.",
               "properties": {
                 "choices": {
                   "type": "array",
-                  "description": "The collection of choice deltas received in this chunk.",
+                  "description": "The collection of generated completions.",
                   "items": {
                     "type": "object",
-                    "description": "The representation of an incremental choice received in a streaming completion.",
+                    "description": "The representation of a single generated completion.",
                     "properties": {
                       "index": {
                         "type": "integer",
                         "format": "int64",
                         "description": "The index of the of the chat choice, relative to the other choices in the same completion."
                       },
-                      "delta": {
+                      "message": {
                         "type": "object",
-                        "description": "The partial message received for this choice.",
+                        "description": "The chat message for a given chat completion.",
                         "properties": {
                           "content": {
                             "type": "string",
-                            "description": "An incremental part of the text associated with the message."
+                            "description": "The text associated with the message."
                           },
                           "role": {
                             "$ref": "#/definitions/ChatRole",
@@ -147,7 +147,11 @@
                             "description": "Backend-specific information for the tracking of a session.",
                             "x-ms-client-name": "sessionState"
                           }
-                        }
+                        },
+                        "required": [
+                          "content",
+                          "role"
+                        ]
                       },
                       "session_state": {
                         "description": "Backend-specific information for the tracking of a session.",
@@ -166,7 +170,8 @@
                     },
                     "required": [
                       "index",
-                      "delta"
+                      "message",
+                      "finish_reason"
                     ]
                   },
                   "x-ms-identifiers": []
@@ -192,7 +197,7 @@
         },
         "x-ms-examples": {
           "Creates a chat completion for the provided prompt using streaming.": {
-            "$ref": "./examples/create_streaming.json"
+            "$ref": "./examples/create.json"
           }
         }
       }
