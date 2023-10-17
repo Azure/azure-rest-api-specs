@@ -2895,6 +2895,7 @@
         }
       ],
       "properties": {
+        "description":"the properties of scan, vary by datasource type",
         "kind": {
           "enum": [
             "AzureSubscriptionCredential",
@@ -2967,6 +2968,7 @@
           }
         },
         "scanResults": {
+          "description":"scan results of this scan",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScanResult"
@@ -3019,6 +3021,7 @@
         }
       ],
       "properties": {
+        "description":"the properties of datasource, vary by datasource type",
         "kind": {
           "enum": [
             "None",
@@ -3192,6 +3195,7 @@
       "type": "object"
     },
     "IntegrationRuntimeStatus": {
+      "description":"the runtime status of IR",
       "required": [
         "kind"
       ],
@@ -3228,6 +3232,7 @@
       }
     },
     "IntegrationRuntimeRegenerateKeyParameters": {
+      "description":"the regenerate key parameters of IR",
       "type": "object",
       "properties": {
         "keyName": {
@@ -3236,6 +3241,7 @@
       }
     },
     "IntegrationRuntimeList": {
+      "description":"the list of IR",
       "required": [
         "value"
       ],
@@ -3257,6 +3263,7 @@
       }
     },
     "EnableInteractiveQueryForIntegrationRuntimeRequest": {
+      "description":"the request of enable interactive query for IR",
       "type": "object",
       "properties": {
         "autoTerminationMinutes": {
@@ -3266,6 +3273,7 @@
       }
     },
     "ManagedVirtualNetworkProperties": {
+      "description":"the properties of managed virtual network",
       "type": "object",
       "properties": {
         "vNetId": {
@@ -3279,6 +3287,7 @@
       }
     },
     "ManagedVirtualNetwork": {
+      "description":"Net work setting of managed vnet",
       "type": "object",
       "allOf": [
         {
@@ -3296,6 +3305,7 @@
       }
     },
     "ConnectionStateProperties": {
+      "description":"the properties of connection state",
       "type": "object",
       "properties": {
         "actionsRequired": {
@@ -3313,6 +3323,7 @@
       }
     },
     "ManagedPrivateEndpointProperties": {
+      "description":"the properties of managed private endpoint",
       "type": "object",
       "properties": {
         "connectionState": {
@@ -3340,6 +3351,7 @@
       }
     },
     "ManagedPrivateEndpoint": {
+      "description":"the managed private endpoint",
       "type": "object",
       "allOf": [
         {
@@ -3357,6 +3369,7 @@
       }
     },
     "ManagedVirtualNetworkList": {
+      "description":"the list of managed virtual network",
       "required": [
         "value"
       ],
@@ -3378,6 +3391,7 @@
       }
     },
     "ManagedPrivateEndpointList": {
+      "description":"the list of managed private endpoint",
       "required": [
         "value"
       ],
@@ -3399,6 +3413,7 @@
       }
     },
     "ScanList": {
+      "description":"the list of scan",
       "required": [
         "value"
       ],
@@ -3420,6 +3435,7 @@
       }
     },
     "ScanHistoryList": {
+      "description":"the list of scan history",
       "required": [
         "value"
       ],
@@ -3441,6 +3457,7 @@
       }
     },
     "ScanHistoryListWithIngestion": {
+      "description":"the list of scan history with ingestion",
       "required": [
         "value"
       ],
@@ -3462,6 +3479,7 @@
       }
     },
     "VersionedScanRuleset": {
+      "description":"the versioned scan ruleset",
       "type": "object",
       "allOf": [
         {
@@ -3500,6 +3518,7 @@
       }
     },
     "ScanRuleset": {
+      "description":"the scan ruleset",
       "required": [
         "kind"
       ],
@@ -3510,6 +3529,7 @@
         }
       ],
       "properties": {
+        "description":"the properties of scan ruleset, vary by datasource type",
         "kind": {
           "enum": [
             "None",
@@ -3549,6 +3569,7 @@
       "discriminator": "kind"
     },
     "ScanRulesetList": {
+      "description":"the list of scan ruleset",
       "required": [
         "value"
       ],
@@ -3570,6 +3591,7 @@
       }
     },
     "SystemScanRuleset": {
+      "description":"the system scan ruleset",
       "required": [
         "kind"
       ],
@@ -3619,6 +3641,7 @@
       "discriminator": "kind"
     },
     "SystemScanRulesetList": {
+      "description":"the list of system scan ruleset",
       "required": [
         "value"
       ],
@@ -3640,6 +3663,7 @@
       }
     },
     "RecurrenceScheduleOccurrence": {
+      "description":"the occurrence of recurrence schedule",
       "type": "object",
       "properties": {
         "additionalProperties": {
@@ -3668,6 +3692,7 @@
       }
     },
     "RecurrenceSchedule": {
+      "description":"Schedule of recurrence",
       "type": "object",
       "properties": {
         "additionalProperties": {
@@ -3722,6 +3747,7 @@
       }
     },
     "TriggerRecurrence": {
+      "description":"the recurrence of trigger",
       "type": "object",
       "properties": {
         "frequency": {
@@ -3762,6 +3788,7 @@
       }
     },
     "TriggerProperties": {
+      "description":"properties detail of trigger",
       "type": "object",
       "properties": {
         "recurrence": {
@@ -3819,6 +3846,7 @@
       }
     },
     "Trigger": {
+      "description":"the trigger object",
       "type": "object",
       "allOf": [
         {
@@ -3839,6 +3867,7 @@
       }
     },
     "CollectionReference": {
+      "description":"the reference to collection",
       "type": "object",
       "properties": {
         "lastModifiedAt": {
@@ -3855,6 +3884,7 @@
       }
     },
     "SystemClassificationRuleProperties": {
+      "description":"the properties of system classification rule",
       "type": "object",
       "properties": {
         "description": {
@@ -3892,6 +3922,7 @@
       }
     },
     "SystemClassificationRule": {
+      "description":"the rule of system classification",
       "type": "object",
       "allOf": [
         {
@@ -3910,6 +3941,7 @@
       "x-ms-discriminator-value": "System"
     },
     "ClassificationRulePattern": {
+      "description":"pattern of classification rule",
       "required": [
         "kind"
       ],
@@ -3929,6 +3961,7 @@
       "discriminator": "kind"
     },
     "CustomClassificationRuleProperties": {
+      "description":"the properties of custom classification rule",
       "type": "object",
       "properties": {
         "minimumPercentageMatch": {
@@ -3936,6 +3969,7 @@
           "type": "number"
         },
         "classificationAction": {
+          "description":"the action of classification rule",
           "enum": [
             "Keep",
             "Delete"
@@ -3994,6 +4028,7 @@
       }
     },
     "CustomClassificationRule": {
+      "description":"rule of custom classification",
       "type": "object",
       "allOf": [
         {
@@ -4012,6 +4047,7 @@
       "x-ms-discriminator-value": "Custom"
     },
     "RegexClassificationRulePattern": {
+      "description":"pattern of regex classification rule",
       "type": "object",
       "allOf": [
         {
@@ -4037,6 +4073,7 @@
       }
     },
     "KeyVaultSecret": {
+      "description":"the key vault secret",
       "type": "object",
       "properties": {
         "type": {
@@ -4058,6 +4095,7 @@
       }
     },
     "KeyVaultSecretAccountKeyCredentialTypeProperties": {
+      "description":"properties of key vault secret account key credential type",
       "type": "object",
       "properties": {
         "accountKey": {
@@ -4070,6 +4108,7 @@
       }
     },
     "AccountKeyCredentialProperties": {
+      "description":"properties of account key credential",
       "type": "object",
       "properties": {
         "typeProperties": {
@@ -4085,6 +4124,7 @@
       }
     },
     "AccountKeyAuthAzureKeyVaultCredential": {
+      "description":"credential of account key auth azure key vault",
       "type": "object",
       "description": "Credential type that uses Account Key for authentication.",
       "allOf": [
@@ -4104,6 +4144,7 @@
       "x-ms-discriminator-value": "AccountKey"
     },
     "KeyVaultSecretUserPassCredentialTypeProperties": {
+      "description":"properties of key vault secret user pass credential type",
       "type": "object",
       "properties": {
         "user": {
@@ -4119,6 +4160,7 @@
       }
     },
     "UserPassCredentialProperties": {
+      "description":"properties of user pass credential",
       "type": "object",
       "properties": {
         "typeProperties": {
@@ -4425,6 +4467,7 @@
       "x-ms-discriminator-value": "ManagedIdentity"
     },
     "DataSourceProperties": {
+      "description":"properties of data source",
       "type": "object",
       "properties": {
         "createdAt": {
@@ -4459,6 +4502,7 @@
       }
     },
     "AzureSubscriptionProperties": {
+      "description":"properties of azure subscription",
       "type": "object",
       "allOf": [
         {
@@ -4488,6 +4532,7 @@
       }
     },
     "AzureSubscriptionDataSource": {
+      "description":"azure subscription data source",
       "type": "object",
       "allOf": [
         {
