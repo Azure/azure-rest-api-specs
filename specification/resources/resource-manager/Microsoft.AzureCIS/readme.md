@@ -8,6 +8,11 @@ openapi-type: arm
 openapi-subtype: rpaas
 ```
 
+```yaml $(tag) == '2023-08-22-preview'
+input-file: 
+  - preview/2023-08-22-preview/environment.json
+```
+
 ```yaml $(tag) == '2021-08-10-privatepreview'
 input-file: 
   - preview/2021-08-10-privatepreview/environment.json
