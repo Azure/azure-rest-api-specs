@@ -12,13 +12,13 @@ linter:
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/../"
-    output-file: "{azure-resource-provider-folder}/AzureOpenAI/inference/{version}/generated.json"
+    output-file: "{azure-resource-provider-folder}/AzureOpenAI/inference/{version-status}/{version}/generated.json"
     azure-resource-provider-folder: "data-plane"
     examples-directory: "{project-root}/examples"
     omit-unreachable-types: true
   "@typespec/openapi3":
     emitter-output-dir: "{project-root}/../"
-    output-file: "data-plane/AzureOpenAI/inference/{version}/generated.yaml"
+    output-file: "data-plane/AzureOpenAI/inference/OpenApiV3/{version}/generated.yaml"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.OpenAI"
     namespace: "Azure.AI.OpenAI"
