@@ -1,0 +1,36 @@
+parameters:  
+  "service-dir":
+    default: "sdk/data-api-2"
+  "dependencies":
+    "additionalDirectories": []
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-python":    
+    package-dir: "microsoft-apicenter"
+    package-name: "{package-dir}"  
+    package-mode: dataplane
+  "@azure-tools/typespec-csharp":
+    package-dir: "Microsoft.ApiCenter"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    package-dir: "microsoft-apicenter-rest"
+    generateMetadata: true
+    generateTest: true
+    packageDetails:
+      name: "@azure-rest/microsoft-apicenter-rest"
+      description: "Microsoft.ApiCenter Service"
+  "@azure-tools/typespec-java":
+    package-dir: "microsoft-apicenter"
+    namespace: com.microsoft.apicenter
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
