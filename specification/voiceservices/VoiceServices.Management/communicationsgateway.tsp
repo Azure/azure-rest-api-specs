@@ -162,6 +162,10 @@ enum CommunicationsPlatform {
   @doc("Teams Direct Routing")
   @added(Versions.v2023_09_01)
   TeamsDirectRouting,
+
+  @doc("Zoom Platform")
+  @added(Versions.v2023_09_21)
+  Zoom,
 }
 
 @doc("API Bridge activation state.")
@@ -174,6 +178,49 @@ enum ApiBridgeActivationState {
   @doc("API Bridge is disabled")
   @added(Versions.v2023_09_01)
   disabled,
+}
+
+@doc("Zoom regions.")
+@added(Versions.v2023_09_21)
+enum ZoomRegion {
+  @doc("North America Region")
+  NorthAmerica,
+
+  @doc("EMEA Region")
+  EMEA,
+
+  @doc("APAC Region")
+  APAC,
+
+  @doc("Japan Region")
+  Japan,
+
+  @doc("Australia and New Zealand Region")
+  AustraliaNewZealand,
+
+  @doc("Latin America Region")
+  LatinAmerica,
+}
+
+@doc("Zoom test line.")
+@added(Versions.v2023_09_21)
+model ZoomTestLine {
+  @doc("Phone number for the test line.")
+  @visibility("read", "update", "create")
+  phoneNumber: string;
+}
+
+@doc("Configuration for the Zoom platform.")
+@added(Versions.v2023_09_21)
+model ZoomConfig {
+  @doc("Zoom platform test lines.")
+  @OpenAPI.extension("x-ms-identifiers", ["phoneNumber"])
+  @visibility("read", "update", "create")
+  testLines: ZoomTestLine[];
+
+  @doc("The Zoom region to which this Communications Gateway is connected.")
+  @visibility("read", "update", "create")
+  region: ZoomRegion;
 }
 
 @doc("Configuration of the API Bridge.")
@@ -330,6 +377,13 @@ model CommunicationsGatewayProperties is ResourceProperties {
   @visibility("read")
   @added(Versions.v2023_09_01)
   allocatedMediaAddressPrefixes?: string[];
+
+  // Added 2023-09-21
+
+  @doc("Configuration for Zoom platform")
+  @visibility("read", "update", "create")
+  @added(Versions.v2023_09_21)
+  zoomConfig?: ZoomConfig;
 }
 
 @armResourceOperations
