@@ -6109,9 +6109,13 @@
           "x-cadl-name": "string[]",
           "description": "Non-RFC 1918 address"
         },
-        "privateSourceNat": {
-          "$ref": "#/definitions/PrivateSourceNat",
-          "description": "Private Source Nat configuration"
+        "privateSourceNatRulesDestination": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Array of ipv4 destination address for which source NAT is to be performed"
         }
       },
       "description": "Network settings for Firewall",
@@ -6492,23 +6496,6 @@
       "description": "prefix entry",
       "required": [
         "prefixList"
-      ]
-    },
-    "PrivateSourceNat": {
-      "type": "object",
-      "properties": {
-        "rulesDestination": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]",
-          "description": "Array of ipv4 destination address for which source NAT to be performed. Duplicates are not allowed."
-        }
-      },
-      "description": "Private Source Nat configuration",
-      "required": [
-        "rulesDestination"
       ]
     },
     "ProtocolType": {
