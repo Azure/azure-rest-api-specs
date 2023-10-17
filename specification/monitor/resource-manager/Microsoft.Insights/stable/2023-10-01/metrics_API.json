@@ -3,10 +3,7 @@
   "info": {
     "title": "Azure Monitor Metrics Data API",
     "description": "Provides APIs for getting the metric data for Azure resources.",
-    "version": "2023-10-01",
-    "x-ms-code-generation-settings": {
-      "name": "MonitorManagementClient"
-    }
+    "version": "2023-10-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -74,6 +71,9 @@
           },
           {
             "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/RollUpByParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionScopeResultTypeParameter"
@@ -231,6 +231,9 @@
             "$ref": "#/parameters/FilterParameter"
           },
           {
+            "$ref": "#/parameters/RollUpByParameter"
+          },
+          {
             "$ref": "#/parameters/ResultTypeParameter"
           },
           {
@@ -361,7 +364,61 @@
       ],
       "x-ms-enum": {
         "name": "Unit",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Count",
+            "description": "Unit of raw quantity."
+          },
+          {
+            "value": "Bytes",
+            "description": "Unit of memory in bytes."
+          },
+          {
+            "value": "Seconds",
+            "description": "Unit of time in seconds."
+          },
+          {
+            "value": "CountPerSecond",
+            "description": "Rate unit of raw quantity per second."
+          },
+          {
+            "value": "BytesPerSecond",
+            "description": "Rate unit of memory in bytes per second."
+          },
+          {
+            "value": "Percent",
+            "description": "Percentage unit."
+          },
+          {
+            "value": "MilliSeconds",
+            "description": "Unit of time in 1/1000th of a second."
+          },
+          {
+            "value": "ByteSeconds",
+            "description": "Unit of data transfer or storage. It is the size of the data in bytes multiplied by the time it takes to transfer or store the data in seconds."
+          },
+          {
+            "value": "Unspecified",
+            "description": "No specified unit."
+          },
+          {
+            "value": "Cores",
+            "description": "Unit of processing power."
+          },
+          {
+            "value": "MilliCores",
+            "description": "Unit of processing power in 1/1000th of a CPU core."
+          },
+          {
+            "value": "NanoCores",
+            "description": "Unit of processing power in one billionth of a CPU core."
+          },
+          {
+            "value": "BitsPerSecond",
+            "description": "Rate unit of binary digits per second."
+          }
+        ]
       }
     },
     "MetricValue": {
@@ -374,32 +431,32 @@
         "timeStamp": {
           "type": "string",
           "format": "date-time",
-          "description": "the timestamp for the metric value in ISO 8601 format."
+          "description": "The timestamp for the metric value in ISO 8601 format."
         },
         "average": {
           "type": "number",
           "format": "double",
-          "description": "the average value in the time range."
+          "description": "The average value in the time range."
         },
         "minimum": {
           "type": "number",
           "format": "double",
-          "description": "the least value in the time range."
+          "description": "The least value in the time range."
         },
         "maximum": {
           "type": "number",
           "format": "double",
-          "description": "the greatest value in the time range."
+          "description": "The greatest value in the time range."
         },
         "total": {
           "type": "number",
           "format": "double",
-          "description": "the sum of all of the values in the time range."
+          "description": "The sum of all of the values in the time range."
         },
         "count": {
           "type": "number",
           "format": "double",
-          "description": "the number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
+          "description": "The number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
         }
       }
     },
@@ -409,11 +466,11 @@
       "properties": {
         "name": {
           "$ref": "./commonMonitoringTypes.json#/definitions/LocalizableString",
-          "description": "the name of the metadata."
+          "description": "The name of the metadata."
         },
         "value": {
           "type": "string",
-          "description": "the value of the metadata."
+          "description": "The value of the metadata."
         }
       }
     },
@@ -449,7 +506,7 @@
           "items": {
             "$ref": "#/definitions/Metric"
           },
-          "description": "the value of the collection."
+          "description": "The value of the collection."
         }
       },
       "required": [
@@ -463,15 +520,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "the metric Id."
+          "description": "The metric Id."
         },
         "type": {
           "type": "string",
-          "description": "the resource type of the metric resource."
+          "description": "The resource type of the metric resource."
         },
         "name": {
           "$ref": "./commonMonitoringTypes.json#/definitions/LocalizableString",
-          "description": "the name and the display name of the metric, i.e. it is localizable string."
+          "description": "The name and the display name of the metric, i.e. it is localizable string."
         },
         "displayDescription": {
           "type": "string",
@@ -494,7 +551,7 @@
           "items": {
             "$ref": "#/definitions/TimeSeriesElement"
           },
-          "description": "the time series returned when a data query is performed."
+          "description": "The time series returned when a data query is performed."
         }
       },
       "required": [
@@ -537,7 +594,7 @@
           "items": {
             "$ref": "#/definitions/SubscriptionScopeMetric"
           },
-          "description": "the value of the collection."
+          "description": "The value of the collection."
         }
       },
       "required": [
@@ -551,15 +608,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "the metric Id."
+          "description": "The metric Id."
         },
         "type": {
           "type": "string",
-          "description": "the resource type of the metric resource."
+          "description": "The resource type of the metric resource."
         },
         "name": {
           "$ref": "./commonMonitoringTypes.json#/definitions/LocalizableString",
-          "description": "the name and the display name of the metric, i.e. it is localizable string."
+          "description": "The name and the display name of the metric, i.e. it is localizable string."
         },
         "displayDescription": {
           "type": "string",
@@ -582,7 +639,7 @@
           "items": {
             "$ref": "#/definitions/TimeSeriesElement"
           },
-          "description": "the time series returned when a data query is performed."
+          "description": "The time series returned when a data query is performed."
         }
       },
       "required": [
@@ -602,7 +659,7 @@
           "items": {
             "$ref": "#/definitions/MetadataValue"
           },
-          "description": "the metadata values returned if $filter was specified in the call."
+          "description": "The metadata values returned if $filter was specified in the call."
         },
         "data": {
           "type": "array",
@@ -645,7 +702,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The list of aggregation types (comma separated) to retrieve.",
+      "description": "The list of aggregation types (comma separated) to retrieve.\n*Examples: average, minimum, maximum*",
       "x-ms-parameter-location": "method"
     },
     "FilterParameter": {
@@ -662,7 +719,7 @@
       "required": false,
       "type": "integer",
       "format": "int32",
-      "description": "The maximum number of records to retrieve.\nValid only if $filter is specified.\nDefaults to 10.",
+      "description": "The maximum number of records to retrieve.\nValid only if a filter is specified.\nDefaults to 10.",
       "x-ms-parameter-location": "method"
     },
     "OrderByParameter": {
@@ -670,7 +727,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The aggregation to use for sorting results and the direction of the sort.\nOnly one order can be specified.\nExamples: sum asc.",
+      "description": "The aggregation to use for sorting results and the direction of the sort.\nOnly one order can be specified.\n*Examples: sum asc*",
       "x-ms-parameter-location": "method"
     },
     "RollUpByParameter": {
