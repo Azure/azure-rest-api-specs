@@ -3921,6 +3921,431 @@
         "modelAsString": true
       }
     },
+    "ManagedIntegrationRuntimeComputeProperties": {
+      "description": "The compute resource properties for managed integration runtime.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "The location for managed integration runtime.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedIntegrationRuntimeTypeProperties": {
+      "description": "Managed integration runtime type properties.",
+      "type": "object",
+      "properties": {
+        "computeProperties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManagedIntegrationRuntimeComputeProperties"
+            }
+          ]
+        }
+      }
+    },
+    "ManagedVirtualNetworkReference": {
+      "description": "The managed virtual network reference.",
+      "type": "object",
+      "properties": {
+        "referenceName": {
+          "description": "Reference ManagedVirtualNetwork name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Managed virtual network reference type.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedIntegrationRuntimeProperties": {
+      "description": "The managed integration runtime properties.",
+      "type": "object",
+      "properties": {
+        "typeProperties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManagedIntegrationRuntimeTypeProperties"
+            }
+          ]
+        },
+        "managedVirtualNetworkReference": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManagedVirtualNetworkReference"
+            }
+          ]
+        },
+        "description": {
+          "description": "The managed integration runtime description.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedIntegrationRuntime": {
+      "description": "The managed integration runtime.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntegrationRuntime"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManagedIntegrationRuntimeProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Managed"
+    },
+    "SelfHostedIntegrationRuntimeProperties": {
+      "description": "The self-hosted integration runtime properties.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The self-hosted integration runtime description.",
+          "type": "string"
+        }
+      }
+    },
+    "SelfHostedIntegrationRuntime": {
+      "description": "Self-hosted integration runtime.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntegrationRuntime"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SelfHostedIntegrationRuntimeProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SelfHosted"
+    },
+    "SelfHostedIntegrationRuntimeNode": {
+      "description": "Properties of Self-hosted integration runtime node.",
+      "type": "object",
+      "properties": {
+        "nodeName": {
+          "description": "Name of the integration runtime node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "machineName": {
+          "description": "Machine name of the integration runtime node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hostServiceUri": {
+          "description": "URI for the host machine of the integration runtime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the integration runtime node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "capabilities": {
+          "description": "The integration runtime capabilities dictionary",
+          "type": "object",
+          "additionalProperties": {
+            "description": "The capability details of self-hosted integration runtime node.",
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "versionStatus": {
+          "description": "Status of the integration runtime node version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the integration runtime node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "registerTime": {
+          "description": "The time at which the integration runtime node was registered in ISO8601 format.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastConnectTime": {
+          "description": "The most recent time at which the integration runtime was connected in ISO8601 format.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "expiryTime": {
+          "description": "The time at which the integration runtime will expire in ISO8601 format.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastStartTime": {
+          "description": "The time the node last started up.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastStopTime": {
+          "description": "The integration runtime node last stop time.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastUpdateResult": {
+          "description": "The result of the last integration runtime node update.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastStartUpdateTime": {
+          "description": "The last time for the integration runtime node update start.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastEndUpdateTime": {
+          "description": "The last time for the integration runtime node update end.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "isActiveDispatcher": {
+          "description": "Indicates whether this node is the active dispatcher for integration runtime requests.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "concurrentJobsLimit": {
+          "description": "The concurrent jobs limit of self-hosted integration runtime node.",
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "maxConcurrentJobs": {
+          "description": "The max concurrent jobs of self-hosted integration runtime node.",
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "SelfHostedIntegrationRuntimeStatusTypeProperties": {
+      "description": "Self-hosted integration runtime status type properties.",
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "description": "The time at which the integration runtime was created, in ISO8601 format.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "taskQueueId": {
+          "description": "The task queue id of the integration runtime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "internalChannelEncryption": {
+          "description": "It is used to set the encryption mode for node-node communication channel (when more than 2 self-hosted integration runtime nodes exist).",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the integration runtime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "nodes": {
+          "description": "The list of nodes for this integration runtime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
+          }
+        },
+        "scheduledUpdateDate": {
+          "description": "The date at which the integration runtime will be scheduled to update, in ISO8601 format.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "updateDelayOffset": {
+          "description": "The time in the date scheduled by service to update the integration runtime, e.g., PT03H is 3 hours",
+          "type": "string",
+          "readOnly": true
+        },
+        "localTimeZoneOffset": {
+          "description": "The local time zone offset in hours.",
+          "type": "string",
+          "readOnly": true
+        },
+        "capabilities": {
+          "description": "Object with additional information about integration runtime capabilities.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "serviceUrls": {
+          "description": "The URLs for the services used in integration runtime backend service.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "autoUpdate": {
+          "description": "Whether Self-hosted integration runtime auto update has been turned on.",
+          "enum": [
+            "On",
+            "Off"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeAutoUpdate",
+            "modelAsString": true
+          }
+        },
+        "versionStatus": {
+          "description": "Status of the integration runtime version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pushedVersion": {
+          "description": "The version that the integration runtime is going to update to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "latestVersion": {
+          "description": "The latest version on download center.",
+          "type": "string",
+          "readOnly": true
+        },
+        "autoUpdateETA": {
+          "description": "The estimated time when the self-hosted integration runtime will be updated.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SelfHostedIntegrationRuntimeStatusProperties": {
+      "description": "Self-hosted integration runtime status properties.",
+      "type": "object",
+      "properties": {
+        "typeProperties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SelfHostedIntegrationRuntimeStatusTypeProperties"
+            }
+          ]
+        },
+        "state": {
+          "description": "Self-hosted integration runtime state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SelfHostedIntegrationRuntimeStatus": {
+      "description": "Self-hosted integration runtime status.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntegrationRuntimeStatus"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SelfHostedIntegrationRuntimeStatusProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SelfHosted"
+    },
+    "InteractiveQuery": {
+      "description": "Interactive query properties of managed integration runtime.",
+      "type": "object",
+      "properties": {
+        "autoTerminationMinutes": {
+          "description": "Auto termination minutes of interactive query.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "status": {
+          "description": "Status of interactive query.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedIntegrationRuntimeStatusTypeProperties": {
+      "description": "Managed integration runtime status type properties.",
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "description": "The time at which the integration runtime was created, in ISO8601 format.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "interactiveQuery": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/InteractiveQuery"
+            }
+          ]
+        }
+      }
+    },
+    "ManagedIntegrationRuntimeStatusProperties": {
+      "description": "Managed integration runtime status properties.",
+      "type": "object",
+      "properties": {
+        "typeProperties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManagedIntegrationRuntimeStatusTypeProperties"
+            }
+          ]
+        },
+        "state": {
+          "description": "Managed integration runtime state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedIntegrationRuntimeStatus": {
+      "description": "Managed integration runtime status.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntegrationRuntimeStatus"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManagedIntegrationRuntimeStatusProperties"
+            }
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Managed"
+    },
     "IntegrationRuntimeStatus": {
       "description": "Integration runtime status.",
       "required": [
@@ -6120,18 +6545,6 @@
         }
       },
       "x-ms-discriminator-value": "PowerBI"
-    },
-    "InteractiveQuery": {
-      "type": "object",
-      "properties": {
-        "autoTerminationMinutes": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "status": {
-          "type": "string"
-        }
-      }
     },
     "ScanRulesetProperties": {
       "type": "object",
