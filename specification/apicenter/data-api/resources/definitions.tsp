@@ -6,10 +6,9 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using DataApi.Models;
-using DataApi.Resources.ApiVersions;
-
-namespace DataApi.Resources.Definitions;
+using ApiCenter.DataApi.Models;
+@versioned(ApiCenter.DataApi.Versions)
+namespace ApiCenter.DataApi;
 
 // Models /////////////////////////////////////////////////////////////////////
 
@@ -22,12 +21,6 @@ model ApiDefinitionResource extends ApiDefinition {
   @visibility("query")
   apiDefinitionId: string;
 }
-
-alias ServiceTraits = SupportsRepeatableRequests &
-SupportsConditionalRequests &
-SupportsClientRequestId;
-
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface ApiDefinitions {
   @doc("List a collection of API definitions.")

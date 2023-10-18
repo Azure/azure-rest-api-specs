@@ -865,6 +865,42 @@
     }
   },
   "definitions": {
+    "ApiDefinitionResource": {
+      "type": "object",
+      "description": "API Definition resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Models.ApiDefinition"
+        }
+      ]
+    },
+    "ApiDeploymentResource": {
+      "type": "object",
+      "description": "API Deployment resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Models.ApiDeployment"
+        }
+      ]
+    },
+    "ApiResource": {
+      "type": "object",
+      "description": "API resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Models.Api"
+        }
+      ]
+    },
+    "ApiVersionResource": {
+      "type": "object",
+      "description": "API Version resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Models.ApiVersion"
+        }
+      ]
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -925,6 +961,15 @@
           "description": "Inner error."
         }
       }
+    },
+    "EnvironmentResource": {
+      "type": "object",
+      "description": "Environment resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Models.Environment"
+        }
+      ]
     },
     "Models.Api": {
       "type": "object",
@@ -1277,7 +1322,7 @@
           "type": "array",
           "description": "The ApiDefinitionResource items on this page",
           "items": {
-            "$ref": "#/definitions/Resources.Definitions.ApiDefinitionResource"
+            "$ref": "#/definitions/ApiDefinitionResource"
           },
           "x-ms-identifiers": []
         },
@@ -1299,7 +1344,7 @@
           "type": "array",
           "description": "The ApiDeploymentResource items on this page",
           "items": {
-            "$ref": "#/definitions/Resources.Deployments.ApiDeploymentResource"
+            "$ref": "#/definitions/ApiDeploymentResource"
           },
           "x-ms-identifiers": []
         },
@@ -1321,7 +1366,7 @@
           "type": "array",
           "description": "The ApiResource items on this page",
           "items": {
-            "$ref": "#/definitions/Resources.Apis.ApiResource"
+            "$ref": "#/definitions/ApiResource"
           },
           "x-ms-identifiers": []
         },
@@ -1343,7 +1388,7 @@
           "type": "array",
           "description": "The ApiVersionResource items on this page",
           "items": {
-            "$ref": "#/definitions/Resources.ApiVersions.ApiVersionResource"
+            "$ref": "#/definitions/ApiVersionResource"
           },
           "x-ms-identifiers": []
         },
@@ -1365,7 +1410,7 @@
           "type": "array",
           "description": "The EnvironmentResource items on this page",
           "items": {
-            "$ref": "#/definitions/Resources.Versions.EnvironmentResource"
+            "$ref": "#/definitions/EnvironmentResource"
           },
           "x-ms-identifiers": []
         },
@@ -1379,50 +1424,23 @@
         "value"
       ]
     },
-    "Resources.ApiVersions.ApiVersionResource": {
-      "type": "object",
-      "description": "API Version resource model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Models.ApiVersion"
-        }
-      ]
-    },
-    "Resources.Apis.ApiResource": {
-      "type": "object",
-      "description": "API resource model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Models.Api"
-        }
-      ]
-    },
-    "Resources.Definitions.ApiDefinitionResource": {
-      "type": "object",
-      "description": "API Definition resource model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Models.ApiDefinition"
-        }
-      ]
-    },
-    "Resources.Deployments.ApiDeploymentResource": {
-      "type": "object",
-      "description": "API Deployment resource model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Models.ApiDeployment"
-        }
-      ]
-    },
-    "Resources.Versions.EnvironmentResource": {
-      "type": "object",
-      "description": "Environment resource model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Models.Environment"
-        }
-      ]
+    "Versions": {
+      "type": "string",
+      "description": "API versions",
+      "enum": [
+        "2024-03-01"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_03_01",
+            "value": "2024-03-01",
+            "description": "GA release version 2024-03-01"
+          }
+        ]
+      }
     }
   },
   "parameters": {

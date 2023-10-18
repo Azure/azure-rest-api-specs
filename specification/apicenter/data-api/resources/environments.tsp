@@ -6,9 +6,10 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using DataApi.Models;
+using ApiCenter.DataApi.Models;
 
-namespace DataApi.Resources.Versions;
+@versioned(ApiCenter.DataApi.Versions)
+namespace ApiCenter.DataApi;
 
 // Models /////////////////////////////////////////////////////////////////////
 

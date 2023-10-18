@@ -1,4 +1,4 @@
-namespace DataApi.Models;
+namespace ApiCenter.DataApi.Models;
 
 @doc("API definition")
 model ApiDefinition {

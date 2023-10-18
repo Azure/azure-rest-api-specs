@@ -15,8 +15,7 @@ using Azure.Core;
 
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Authorization">)
 @service({
-  title: "Data API",
-  version: "2024-03-01",
+  title: "Data API"
 })
 @server(
   "https://{serviceName}.data.azure-apicenter.net",
@@ -26,6 +25,13 @@ using Azure.Core;
     serviceName: string,
   }
 )
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
+@versioned(ApiCenter.DataApi.Versions)
 @doc("Data API introduces endpoints to manage your API Center resources.")
-namespace DataApi;
+namespace ApiCenter.DataApi;
+
+@doc("API versions")
+enum Versions {
+  @doc("GA release version 2024-03-01")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_03_01: "2024-03-01",
+}

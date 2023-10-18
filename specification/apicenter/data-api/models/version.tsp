@@ -1,6 +1,6 @@
 import "./api.tsp";
 
-namespace DataApi.Models;
+namespace ApiCenter.DataApi.Models;
 
 @doc("API version")
 model ApiVersion {
