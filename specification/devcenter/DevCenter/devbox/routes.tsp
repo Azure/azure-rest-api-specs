@@ -308,7 +308,7 @@ interface DevBoxesOperations {
   @doc("Lists actions on a Dev Box.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions")
   @get
-  ListActions is Azure.Core.Foundations.Operation<
+  ListDevBoxActions is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -328,7 +328,7 @@ interface DevBoxesOperations {
   @doc("Gets an action.")
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}")
   @get
-  GetAction is Azure.Core.Foundations.Operation<
+  GetDevBoxAction is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -396,7 +396,7 @@ interface DevBoxesOperations {
 
       @doc("The time to delay the Dev Box action or actions until.")
       @query
-      until: utcDateTime;
+      delayUntil: utcDateTime;
     },
     DevBoxAction
   >;
@@ -420,7 +420,7 @@ interface DevBoxesOperations {
 
       @doc("The time to delay the Dev Box action or actions until.")
       @query
-      until: utcDateTime;
+      delayUntil: utcDateTime;
     },
     DevBoxActionsDelayMultipleResult
   >;
