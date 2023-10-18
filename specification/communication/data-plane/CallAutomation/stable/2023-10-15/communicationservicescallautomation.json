@@ -504,7 +504,7 @@
             }
           },
           "202": {
-            "description": "The service has accepted the cancel request and will begin processing it. RecognizeCanceled and/or PlayCanceled at your specified callback URI to update you on the status of the request, based on which media operation has been canceled by it."
+            "description": "The service has accepted the cancel request and will begin processing it. You will receive the RecognizeCanceled and/or PlayCanceled event at your specified callback URI to update you on the status of the request, based on which media operation has been canceled by it."
           }
         },
         "x-ms-examples": {
@@ -597,7 +597,7 @@
             }
           },
           "200": {
-            "description": "The service has accepted the start continuous recognize request and will begin processing it. You will receive events at your specified callback URI to update you on the status of the request."
+            "description": "The service has started continuous dtmf recognition. You will receive either the ContinuousDtmfRecognitionToneReceived, ContinuousDtmfRecognitionToneFailed or ContinuousDtmfRecognitionStopped event at your specified callback URI. Continuous dtmf recognition can run in parallel with other media operations. For example if the Recognize operation is also active and a dtmf is detected, both ContinuousDtmfRecognitionToneReceived and RecognizeCompleted events will be received."
           }
         },
         "x-ms-examples": {
@@ -643,7 +643,7 @@
             }
           },
           "200": {
-            "description": "The service has accepted the stop continuous recognize request and will begin processing it. You will receive events at your specified callback URI to update you on the status of the request."
+            "description": "The service has stopped continuous dtmf recognition. If continuous dtmf recognition was previously started, you will receive the ContinuousDtmfRecognitionStopped event at your specified callback URI."
           }
         },
         "x-ms-examples": {
@@ -704,7 +704,7 @@
             }
           },
           "202": {
-            "description": "Returns the send dtmf tones response",
+            "description": "The service has accepted the send dtmf tones request and will begin processing it. You will receive either the SendDtmfTonesCompleted or the SendDtmfTonesFailed event at your specified callback URI to update you on the status of the request.",
             "schema": {
               "$ref": "#/definitions/SendDtmfTonesResult"
             }
@@ -939,7 +939,7 @@
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
-          "202": {
+          "200": {
             "description": "Returns the mute participants response",
             "schema": {
               "$ref": "#/definitions/MuteParticipantsResult"
@@ -1484,11 +1484,35 @@
         },
         "transferee": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "Transferee is the participant who is transferring the call."
+          "description": "Transferee is the participant who is transferred away."
         },
-        "overrideCallbackUri": {
-          "description": "The callback URI to override the main callback URI.",
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
+        },
+        "customContext": {
+          "$ref": "#/definitions/CustomContext",
+          "description": "Used by customer to send custom context to targets"
+        }
+      }
+    },
+    "CustomContext": {
+      "description": "The custom context which will be sent to the target",
+      "type": "object",
+      "properties": {
+        "voipHeaders": {
+          "description": "Custom context VoiP headers",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sipHeaders": {
+          "description": "Custom context SIP headers",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1530,8 +1554,8 @@
           "description": "The value to identify context of the operation.",
           "type": "string"
         },
-        "overrideCallbackUri": {
-          "description": "The callback URI to override the main callback URI.",
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
         }
       }
@@ -1695,8 +1719,8 @@
           "description": "The value to identify context of the operation.",
           "type": "string"
         },
-        "overrideCallbackUri": {
-          "description": "The callback URI to override the main callback URI.",
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
         }
       }
@@ -1845,8 +1869,8 @@
           "description": "The value to identify context of the operation.",
           "type": "string"
         },
-        "overrideCallbackUri": {
-          "description": "The callback URI to override the main callback URI.",
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
         }
       }
@@ -1873,8 +1897,8 @@
           "description": "The value to identify context of the operation.",
           "type": "string"
         },
-        "overrideCallbackUri": {
-          "description": "The callback URI to override the main callback URI.",
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
         }
       }
@@ -1952,9 +1976,13 @@
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         },
-        "overrideCallbackUri": {
-          "description": "The callback URI to override the main callback URI.",
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
+        },
+        "customContext": {
+          "$ref": "#/definitions/CustomContext",
+          "description": "Used by customer to send custom context to targets"
         }
       }
     },
@@ -1991,8 +2019,8 @@
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         },
-        "overrideCallbackUri": {
-          "description": "The callback URI to override the main callback URI.",
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
         }
       }
@@ -2052,8 +2080,8 @@
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         },
-        "overrideCallbackUri": {
-          "description": "The callback URI to override the main callback URI.",
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
         }
       }
@@ -2512,10 +2540,6 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
-        },
-        "participant": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "Participant that has been cancelled."
         },
         "invitationId": {
           "description": "Invitation ID used to cancel the request.",
