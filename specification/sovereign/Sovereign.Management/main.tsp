@@ -18,7 +18,7 @@ using Autorest;
 using Azure.ResourceManager.Foundations;
 
 @service({
-	title: "Cloud for Sovereignty Resource Provider.",
+  title: "Cloud for Sovereignty Resource Provider.",
 })
 @versioned(Versions)
 @armProviderNamespace
@@ -31,50 +31,50 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @added(Versions.Preview20230928)
 @doc("The Landing Zone configuration resource type.")
 model LandingZoneConfiguration
-	is ProxyResource<LandingZoneConfigurationProperties> {
-	@doc("The name of the landing zone configuration resource.")
-	@pattern("^[a-zA-Z0-9-]{3,24}$")
-	@key("name")
-	@segment("landingZoneConfigurations")
-	@path
-	name: string;
+  is ProxyResource<LandingZoneConfigurationProperties> {
+  @doc("The name of the landing zone configuration resource.")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @key("name")
+  @segment("landingZoneConfigurations")
+  @path
+  name: string;
 }
 
 @armResourceOperations(LandingZoneConfiguration)
 interface LandingZonesConfigurations
-	extends TenantResourceOperations<
-			LandingZoneConfiguration,
-			LandingZoneConfigurationProperties
-		> {
-	@action("generateLandingZone")
-	@doc("Generate the landing zone.")
-	@added(Versions.Preview20230928)
-	@armResourceAction(LandingZoneConfiguration)
-	generateLandingZone is ArmResourceActionAsync<
-		LandingZoneConfiguration,
-		GenerateLandingZoneRequest,
-		GenerateLandingZoneResponse
-	>;
+  extends TenantResourceOperations<
+      LandingZoneConfiguration,
+      LandingZoneConfigurationProperties
+    > {
+  @action("generateLandingZone")
+  @doc("Generate the landing zone.")
+  @added(Versions.Preview20230928)
+  @armResourceAction(LandingZoneConfiguration)
+  generateLandingZone is ArmResourceActionAsync<
+    LandingZoneConfiguration,
+    GenerateLandingZoneRequest,
+    GenerateLandingZoneResponse
+  >;
 
-	@action("updateAuthoringStatus")
-	@doc("Provides a mechanism to update the authoring status.")
-	@added(Versions.Preview20230928)
-	@armResourceAction(LandingZoneConfiguration)
-	updateAuthoringStatus is ArmResourceActionSync<
-		LandingZoneConfiguration,
-		UpdateAuthoringStatusRequest,
-		UpdateAuthoringStatusResponse
-	>;
+  @action("updateAuthoringStatus")
+  @doc("Provides a mechanism to update the authoring status.")
+  @added(Versions.Preview20230928)
+  @armResourceAction(LandingZoneConfiguration)
+  updateAuthoringStatus is ArmResourceActionSync<
+    LandingZoneConfiguration,
+    UpdateAuthoringStatusRequest,
+    UpdateAuthoringStatusResponse
+  >;
 
-	@action("createCopy")
-	@doc("Provides a mechanism to create a copy of the landing zone configuration.")
-	@added(Versions.Preview20230928)
-	@armResourceAction(LandingZoneConfiguration)
-	createCopy is ArmResourceActionSync<
-		LandingZoneConfiguration,
-		CreateCopyRequest,
-		CreateCopyResponse
-	>;
+  @action("createCopy")
+  @doc("Provides a mechanism to create a copy of the landing zone configuration.")
+  @added(Versions.Preview20230928)
+  @armResourceAction(LandingZoneConfiguration)
+  createCopy is ArmResourceActionSync<
+    LandingZoneConfiguration,
+    CreateCopyRequest,
+    CreateCopyResponse
+  >;
 }
 
 // Landing zone registration Resource Type
@@ -82,18 +82,18 @@ interface LandingZonesConfigurations
 @added(Versions.Preview20230928)
 @doc("The Landing Zone registration resource type.")
 model LandingZoneRegistration
-	is ProxyResource<LandingZoneRegistrationProperties> {
-	@doc("The name of the Landing Zone registration resource.")
-	@pattern("^[a-zA-Z0-9-]{3,24}$")
-	@key("name")
-	@segment("landingZoneRegistrations")
-	@path
-	name: string;
+  is ProxyResource<LandingZoneRegistrationProperties> {
+  @doc("The name of the Landing Zone registration resource.")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @key("name")
+  @segment("landingZoneRegistrations")
+  @path
+  name: string;
 }
 
 @armResourceOperations(LandingZoneRegistration)
 interface LandingZoneRegistrations
-	extends TenantResourceOperations<
-			LandingZoneRegistration,
-			LandingZoneRegistrationProperties
-		> {}
+  extends TenantResourceOperations<
+      LandingZoneRegistration,
+      LandingZoneRegistrationProperties
+    > {}
