@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.MobilePacketCore Network Function resource",
-    "version": "2023-05-15-preview",
+    "version": "2023-10-15",
     "description": "Mobile Packet Core Network Function Management API",
     "x-typespec-generated": [
       {
@@ -189,7 +189,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
           }
         ],
         "responses": {
@@ -236,7 +236,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
           },
           {
             "name": "resource",
@@ -309,7 +309,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
           },
           {
             "name": "properties",
@@ -365,7 +365,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
           }
         ],
         "responses": {
@@ -579,11 +579,6 @@
         "NRF",
         "NSSF",
         "MME",
-        "SaegwControlPlane",
-        "SaegwUserPlane",
-        "Saegw",
-        "ePDG",
-        "N3IWF",
         "RemotePaaS",
         "EMS",
         "OperationsPolicyManager"
@@ -621,31 +616,6 @@
             "name": "MME",
             "value": "MME",
             "description": "Mobility Management Entity"
-          },
-          {
-            "name": "SaegwControlPlane",
-            "value": "SaegwControlPlane",
-            "description": "System Architecture Evolution Gateway Control Plane, control and user plane separation (CUPS) architecture"
-          },
-          {
-            "name": "SaegwUserPlane",
-            "value": "SaegwUserPlane",
-            "description": "System Architecture Evolution Gateway User Plane, control and user plane separation (CUPS) architecture"
-          },
-          {
-            "name": "Saegw",
-            "value": "Saegw",
-            "description": "System Architecture Evolution Gateway.  This combines the Serving Gateway (SGW) and the Packet Data Network Gateway (PGW) functionality"
-          },
-          {
-            "name": "ePDG",
-            "value": "ePDG",
-            "description": "Evolved Packet Data Gateway"
-          },
-          {
-            "name": "N3IWF",
-            "value": "N3IWF",
-            "description": "Non-3GPP Interworking Function"
           },
           {
             "name": "RemotePaaS",
@@ -759,7 +729,8 @@
       "type": "string",
       "description": "API Versions",
       "enum": [
-        "2023-05-15-preview"
+        "2023-05-15-preview",
+        "2023-10-15"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -769,6 +740,11 @@
             "name": "v2023_05_15_preview",
             "value": "2023-05-15-preview",
             "description": "May 15, 2023 Preview API Version"
+          },
+          {
+            "name": "v2023_10_15",
+            "value": "2023-10-15",
+            "description": "Oct 15, 2023 Stable API Version"
           }
         ]
       }

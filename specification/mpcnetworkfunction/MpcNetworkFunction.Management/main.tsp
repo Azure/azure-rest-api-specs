@@ -25,4 +25,8 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @doc("May 15, 2023 Preview API Version")
   v2023_05_15_preview: "2023-05-15-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("Oct 15, 2023 Stable API Version")
+  v2023_10_15: "2023-10-15",
 }

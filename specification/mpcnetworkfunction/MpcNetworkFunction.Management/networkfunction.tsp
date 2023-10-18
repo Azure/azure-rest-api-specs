@@ -19,7 +19,7 @@ namespace Microsoft.MobilePacketCore;
 model NetworkFunctionResource
   is TrackedResource<NetworkFunctionResourceProperties> {
   @doc("The name of the network function")
-  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
+  @pattern("^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$")
   @minLength(1)
   @maxLength(63)
   @key("networkFunctionName")
@@ -142,21 +142,6 @@ enum NetworkFunctionType {
 
   @doc("Mobility Management Entity")
   MME,
-
-  @doc("System Architecture Evolution Gateway Control Plane, control and user plane separation (CUPS) architecture")
-  SaegwControlPlane,
-
-  @doc("System Architecture Evolution Gateway User Plane, control and user plane separation (CUPS) architecture")
-  SaegwUserPlane,
-
-  @doc("System Architecture Evolution Gateway.  This combines the Serving Gateway (SGW) and the Packet Data Network Gateway (PGW) functionality")
-  Saegw,
-
-  @doc("Evolved Packet Data Gateway")
-  ePDG,
-
-  @doc("Non-3GPP Interworking Function")
-  N3IWF,
 
   @doc("Remote Platform As A Service Components")
   RemotePaaS,
