@@ -97,11 +97,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Analyze Image": {
-            "$ref": "./examples/AnalyzeImage.json"
-          }
         }
       }
     },
@@ -142,11 +137,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "List Projects.": {
-            "$ref": "./examples/Projects_ListProjects.json"
           }
         },
         "x-ms-pageable": {
@@ -192,11 +182,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get Project Detailed Information By Project Name.": {
-            "$ref": "./examples/Projects_GetProject.json"
           }
         }
       },
@@ -256,11 +241,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Create Or Update A Project.": {
-            "$ref": "./examples/Projects_CreateOrUpdateProject.json"
-          }
         }
       },
       "delete": {
@@ -298,11 +278,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Delete An Project By Project Name.": {
-            "$ref": "./examples/Projects_DeleteProject.json"
-          }
         }
       }
     },
@@ -334,11 +309,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get All Text Blocklists": {
-            "$ref": "./examples/ListTextBlocklists.json"
           }
         },
         "x-ms-pageable": {
@@ -383,11 +353,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get Text Blocklist By blocklistName": {
-            "$ref": "./examples/GetTextBlocklist.json"
           }
         }
       },
@@ -446,11 +411,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Create Or Update Text Blocklist": {
-            "$ref": "./examples/CreateOrUpdateTextBlocklist.json"
-          }
         }
       },
       "delete": {
@@ -486,11 +446,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Text Blocklist By blocklistName": {
-            "$ref": "./examples/DeleteTextBlocklist.json"
           }
         }
       }
@@ -541,11 +496,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Add or Update BlocklistItems To Text Blocklist": {
-            "$ref": "./examples/AddOrUpdateBlocklistItems.json"
-          }
         }
       }
     },
@@ -591,11 +541,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Remove BlockItems From Text Blocklist": {
-            "$ref": "./examples/RemoveBlocklistItems.json"
           }
         }
       }
@@ -646,11 +591,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get All BlockItems By blocklistName": {
-            "$ref": "./examples/ListTextBlocklistItems.json"
           }
         },
         "x-ms-pageable": {
@@ -704,11 +644,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get BlockItem By blocklistName And blocklistItemId": {
-            "$ref": "./examples/GetTextBlocklistItem.json"
-          }
         }
       }
     },
@@ -750,10 +685,46 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Analyze Text": {
-            "$ref": "./examples/AnalyzeText.json"
+        }
+      }
+    },
+    "/text:jailbreakAnalyze": {
+      "post": {
+        "operationId": "TextOperations_AnalyzeTextJailbreak",
+        "summary": "Analyze Jailbreak",
+        "description": "A synchronous API for the analysis of text jailbreak.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The text analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextJailbreakOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextJailbreakResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       }
@@ -901,6 +872,33 @@
       },
       "required": [
         "categoriesAnalysis"
+      ]
+    },
+    "AnalyzeTextJailbreakOptions": {
+      "type": "object",
+      "description": "The text jailbreak analysis request.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.",
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AnalyzeTextJailbreakResult": {
+      "type": "object",
+      "description": "The text jailbreak analysis request.",
+      "properties": {
+        "jailbreakAnalysis": {
+          "$ref": "#/definitions/JailbreakAnalysisResult",
+          "description": "Analysis result for jailbreak."
+        }
+      },
+      "required": [
+        "jailbreakAnalysis"
       ]
     },
     "AnalyzeTextOptions": {
@@ -1245,6 +1243,19 @@
           "default": "FourSeverityLevels"
         }
       }
+    },
+    "JailbreakAnalysisResult": {
+      "type": "object",
+      "description": "The text analysis response.",
+      "properties": {
+        "violated": {
+          "type": "boolean",
+          "description": "Analysis result for jailbreak."
+        }
+      },
+      "required": [
+        "violated"
+      ]
     },
     "NlSnippyResult": {
       "type": "object",
