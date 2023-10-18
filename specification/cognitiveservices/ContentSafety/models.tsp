@@ -340,3 +340,25 @@ model AnalyzeTextSnippyResult {
   @doc("Analysis result for NLSnippy categories.")
   nlSnippy: NlSnippyResult;
 }
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text jailbreak analysis request.")
+model AnalyzeTextJailbreakOptions {
+  @doc("The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
+  @maxLength(1000)
+  text: string;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text jailbreak analysis request.")
+model AnalyzeTextJailbreakResult {
+  @doc("Analysis result for jailbreak.")
+  jailbreakAnalysis: JailbreakAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text analysis response.")
+model JailbreakAnalysisResult {
+  @doc("Analysis result for jailbreak.")
+  violated: boolean;
+}
