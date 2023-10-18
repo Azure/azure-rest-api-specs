@@ -611,11 +611,6 @@
       "description": "Model that represents the execution properties of an Experiment.",
       "type": "object",
       "properties": {
-        "experimentId": {
-          "description": "The id of the experiment.",
-          "type": "string",
-          "readOnly": true
-        },
         "status": {
           "description": "The status of the execution.",
           "type": "string",
@@ -655,6 +650,73 @@
         }
       },
       "additionalProperties": false
+    },
+    "experimentExecutionDetails": {
+      "description": "Model that represents the execution details of an Experiment.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "String of the resource type.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "String of the fully qualified resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "String of the resource name.",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "The properties of the experiment execution details.",
+          "$ref": "#/definitions/experimentExecutionDetailsProperties",
+          "x-ms-client-flatten": true,
+          "readOnly": true
+        }
+      }
+    },
+    "experimentExecutionDetailsProperties": {
+      "description": "Model that represents the extended properties of an experiment execution.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/experimentExecutionProperties"
+        }
+      ],
+      "properties": {
+        "failureReason": {
+          "description": "The reason why the execution failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastActionAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the last action date time.",
+          "readOnly": true
+        },
+        "runInformation": {
+          "description": "The information of the experiment run.",
+          "type": "object",
+          "properties": {
+            "steps": {
+              "description": "The steps of the experiment run.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/stepStatus"
+              },
+              "x-ms-identifiers": [
+                "stepName"
+              ],
+              "readOnly": true
+            }
+          },
+          "readOnly": true
+        }
+      }
     },
     "stepStatus": {
       "description": "Model that represents the a list of branches and branch statuses.",
