@@ -14,11 +14,11 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "the invariant value."
+          "description": "The invariant value."
         },
         "localizedValue": {
           "type": "string",
-          "description": "the locale specific value."
+          "description": "The display name."
         }
       },
       "description": "The localizable string class."
@@ -43,7 +43,61 @@
       ],
       "x-ms-enum": {
         "name": "MetricUnit",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Count",
+            "description": "Unit of raw quantity."
+          },
+          {
+            "value": "Bytes",
+            "description": "Unit of memory in bytes."
+          },
+          {
+            "value": "Seconds",
+            "description": "Unit of time in seconds."
+          },
+          {
+            "value": "CountPerSecond",
+            "description": "Rate unit of raw quantity per second."
+          },
+          {
+            "value": "BytesPerSecond",
+            "description": "Rate unit of memory in bytes per second."
+          },
+          {
+            "value": "Percent",
+            "description": "Percentage unit."
+          },
+          {
+            "value": "MilliSeconds",
+            "description": "Unit of time in 1/1000th of a second."
+          },
+          {
+            "value": "ByteSeconds",
+            "description": "Unit of data transfer or storage. It is the size of the data in bytes multiplied by the time it takes to transfer or store the data in seconds."
+          },
+          {
+            "value": "Unspecified",
+            "description": "No specified unit."
+          },
+          {
+            "value": "Cores",
+            "description": "Unit of processing power."
+          },
+          {
+            "value": "MilliCores",
+            "description": "Unit of processing power in 1/1000th of a CPU core."
+          },
+          {
+            "value": "NanoCores",
+            "description": "Unit of processing power in one billionth of a CPU core."
+          },
+          {
+            "value": "BitsPerSecond",
+            "description": "Rate unit of binary digits per second."
+          }
+        ]
       }
     },
     "ErrorContract": {
@@ -68,6 +122,27 @@
         "message": {
           "description": "Error message indicating why the operation failed.",
           "type": "string"
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target."
+        },
+        "additionalInfo": {
+          "description": "Additional information about the error",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "description": "The type of the info property (e.g. string).",
+                "type": "string"
+              },
+              "info": {
+                "description": "Additional information related to the error.",
+                "type": "object"
+              }
+            }
+          }
         }
       }
     }
@@ -87,7 +162,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The region where the metrics you want reside.",
+      "description": "The region where the metrics you want reside. For example: eastus, westeurope, etc",
       "x-ms-parameter-location": "method"
     },
     "MetricNamespaceParameter": {
