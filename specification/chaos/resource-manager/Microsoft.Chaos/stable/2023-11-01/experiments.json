@@ -475,9 +475,6 @@
           },
           {
             "$ref": "./types/experiments.json#/parameters/executionId"
-          },
-          {
-            "$ref": "./types/common.json#/parameters/$expand"
           }
         ],
         "responses": {
@@ -497,6 +494,51 @@
         "x-ms-examples": {
           "Get the execution of a Experiment.": {
             "$ref": "./examples/GetExperimentExecution.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}/details": {
+      "post": {
+        "description": "Execution details of an experiment resource.",
+        "tags": [
+          "Experiments"
+        ],
+        "operationId": "Experiments_ExecutionDetails",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/experimentName"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/executionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get experiment execution details.",
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experimentExecutionDetails"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get experiment execution details.": {
+            "$ref": "./examples/DetailsExperiment.json"
           }
         }
       }
