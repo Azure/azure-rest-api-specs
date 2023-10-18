@@ -611,11 +611,6 @@
       "description": "Model that represents the execution properties of an Experiment.",
       "type": "object",
       "properties": {
-        "experimentId": {
-          "description": "The id of the experiment.",
-          "type": "string",
-          "readOnly": true
-        },
         "status": {
           "description": "The status of the execution.",
           "type": "string",
@@ -657,7 +652,7 @@
       "additionalProperties": false
     },
     "experimentExecutionDetails": {
-      "description": "Model that represents the execution details of a Experiment.",
+      "description": "Model that represents the execution details of an Experiment.",
       "type": "object",
       "properties": {
         "type": {
@@ -684,46 +679,23 @@
       }
     },
     "experimentExecutionDetailsProperties": {
-      "description": "Model that represents the Experiment execution details properties model.",
+      "description": "Model that represents the extended properties of an experiment execution.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/experimentExecutionProperties"
+        }
+      ],
       "properties": {
-        "experimentId": {
-          "description": "The id of the experiment.",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "description": "The value of the status of the experiment execution.",
-          "type": "string",
-          "readOnly": true
-        },
         "failureReason": {
           "description": "The reason why the execution failed.",
           "type": "string",
-          "readOnly": true
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "String that represents the created date time.",
           "readOnly": true
         },
         "lastActionAt": {
           "type": "string",
           "format": "date-time",
           "description": "String that represents the last action date time.",
-          "readOnly": true
-        },
-        "startedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "String that represents the start date time.",
-          "readOnly": true
-        },
-        "stoppedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "String that represents the stop date time.",
           "readOnly": true
         },
         "runInformation": {

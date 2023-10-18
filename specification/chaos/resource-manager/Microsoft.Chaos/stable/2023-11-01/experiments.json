@@ -523,8 +523,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Long running get experiment execution details operation.",
+          "200": {
+            "description": "Get experiment execution details.",
             "schema": {
               "$ref": "./types/experiments.json#/definitions/experimentExecutionDetails"
             }
@@ -536,13 +536,9 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
-          "Start a Experiment.": {
-            "$ref": "./examples/StartExperiment.json"
+          "Get experiment execution details.": {
+            "$ref": "./examples/DetailsExperiment.json"
           }
         }
       }
