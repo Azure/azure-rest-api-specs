@@ -47,7 +47,7 @@ input-file:
   - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
   - Microsoft.Monitor/stable/2023-04-03/operations_API.json
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
-  - Microsoft.Insights/stable/2015-04-01/operations_API.json
+  - Microsoft.Insights/stable/2023-10-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
@@ -1370,6 +1370,10 @@ directive:
     from: actionGroups_API.json
     where: $.paths
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: INVALID_FORMAT
+    from: metrics_API.json
+    where: $parameters.interval
+    reason: 'For the most part the interval parameter conforms with ISO 8601 duration format like PT1M, PT6H, etc. Unfortunately for many many years it has also accepted FULL as a special duration string that indicates that regardless of the timespan specified, only one datapoint should be returned summarizing the data for that timespan. The reason this wasn't caught before is because in the past model validation wasn't actually verifying example parameters until recently. FULL is the 4 most used string passed into the query parameter, we currently get 47 million requests per day specifying full as a value to interval'
 ```
 
 This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1.
