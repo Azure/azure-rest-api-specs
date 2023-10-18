@@ -3,7 +3,7 @@
     "info": {
       "title": "Cosmos DB",
       "description": "Azure Cosmos DB Throughput Pool REST API",
-      "version": "2023-08-15-preview"
+      "version": "2023-11-15-preview"
     },
     "host": "management.azure.com",
     "schemes": [
@@ -481,9 +481,9 @@
             "description": "Flag to indicate enabling/disabling of sharing throughput among the accounts in the pool",
             "type": "boolean"
           },
-          "instanceId": {
-            "description": "A unique identifier assigned to the Throughput Pool Resource",
-            "type": "string",
+          "maxThroughput": {
+            "type": "integer",
+            "description": "Value for throughput to be shared among CosmosDB resources in the pool.",
             "readOnly": true
           }
         }
@@ -497,7 +497,7 @@
           },
           "properties": {
             "x-ms-client-flatten": true,
-            "$ref": "#/definitions/DatabaseAccountUpdateProperties"
+            "$ref": "#/definitions/ThroughputPoolUpdateProperties"
           }
         }
       },
@@ -508,6 +508,11 @@
           "status": {
             "description": "Flag to indicate enabling/disabling of sharing throughput among the accounts in the pool",
             "type": "boolean"
+          },
+          "maxThroughput": {
+            "type": "integer",
+            "description": "Value for throughput to be shared among CosmosDB resources in the pool.",
+            "readOnly": true
           }
         }
       },
