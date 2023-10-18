@@ -3868,6 +3868,71 @@
       "title": "A time range.",
       "description": "For example, between 2021-05-25T13:00:00Z and 2021-05-25T14:00:00Z."
     },
+    "ScheduledEvent": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of a scheduled event."
+        },
+        "eventid": {
+          "type": "string",
+          "description": "The event id of a scheduled event."
+        },
+        "eventsource": {
+          "type": "string",
+          "description": "The source of a scheduled event."
+        },
+        "eventstatus": {
+          "type": "string",
+          "enum": [
+            "Scheduled",
+            "Started",
+            "Completed",
+            "Cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "eventstatus",
+            "modelAsString": true
+          },
+          "description": "The status of a scheduled event."
+        },
+        "scheduledtime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of a scheduled event."
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ContainerService/managedClusters"
+                },
+                {
+                  "type": "Microsoft.ContainerService/managedClusters/agentPools"
+                }
+              ]
+            }
+          },
+          "description": "The list of resources of a scheduled event."
+        },
+        "resourcetype": {
+          "type": "string",
+          "enum": [
+            "ManagedCluster",
+            "AgentPool"
+          ],
+          "x-ms-enum": {
+            "name": "resourcetype",
+            "modelAsString": true
+          },
+          "description": "The resource type of a scheduled event."
+        }
+      },
     "RunCommandRequest": {
       "type": "object",
       "properties": {
