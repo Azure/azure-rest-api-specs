@@ -757,6 +757,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}/redeploy": {
+      "post": {
+        "tags": [
+          "DedicatedHost"
+        ],
+        "operationId": "DedicatedHosts_Redeploy",
+        "description": "Redeploy the dedicated host.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hostGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host group."
+          },
+          {
+            "name": "hostName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Redeploy Dedicated Host.": {
+            "$ref": "./examples/dedicatedHostExamples/DedicatedHost_Redeploy.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}/hostSizes": {
       "get": {
         "tags": [
