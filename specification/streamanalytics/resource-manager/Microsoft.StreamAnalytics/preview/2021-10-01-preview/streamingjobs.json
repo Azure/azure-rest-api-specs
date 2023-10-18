@@ -82,6 +82,9 @@
           },
           "Create a complete streaming job (a streaming job with a transformation, at least 1 input and at least 1 output)": {
             "$ref": "./examples/StreamingJob_Create_CompleteJob.json"
+          },
+          "Create a streaming job shell (a streaming job with no inputs, outputs, transformation, or functions) with user assigned identity": {
+            "$ref": "./examples/StreamingJob_Create_UserAssignedIdentity.json"
           }
         },
         "parameters": [
@@ -1008,7 +1011,10 @@
         },
         "userAssignedIdentities": {
           "type": "object",
-          "description": "The user assigned identities associated with the streaming job resource."
+          "description": "The user assigned identities associated with the streaming job resource.",
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
