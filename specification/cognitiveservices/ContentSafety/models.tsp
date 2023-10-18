@@ -344,7 +344,7 @@ model AnalyzeTextSnippyResult {
 @added(ContentSafety.Versions.v2023_10_15_Preview)
 @doc("The text jailbreak analysis request.")
 model AnalyzeTextJailbreakOptions {
-  @doc("The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
+  @doc("The text needs to be analyzed if it jailbreak. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
   @maxLength(1000)
   text: string;
 }
@@ -357,7 +357,7 @@ model AnalyzeTextJailbreakResult {
 }
 
 @added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("The text analysis response.")
+@doc("The text jailbreak analysis response.")
 model JailbreakAnalysisResult {
   @doc("Analysis result for jailbreak.")
   violated: boolean;
