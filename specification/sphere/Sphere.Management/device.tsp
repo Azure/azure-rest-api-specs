@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
 
@@ -62,7 +62,7 @@ interface Devices extends ProxyResourceOperationsDevice<Device> {
 
     @doc("Generate capability image request body.")
     @body
-    generateDeviceCapabilityRequest: GenerateCapabilityImageRequest
+    generateDeviceCapabilityRequest: GenerateCapabilityImageRequest,
   ): ArmResponse<SignedCapabilityImageResponse> | ArmAcceptedResponse | ErrorResponse;
 }
 
@@ -115,6 +115,7 @@ model SignedCapabilityImageResponse {
 enum CapabilityType {
   /** Application development capability */
   ApplicationDevelopment,
+
   /** Field servicing capability */
   FieldServicing,
 }

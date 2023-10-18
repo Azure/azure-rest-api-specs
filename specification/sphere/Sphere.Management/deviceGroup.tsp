@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
 
@@ -55,7 +55,7 @@ interface DeviceGroups
   @armResourceAction(DeviceGroup)
   @post
   countDevices(
-    ...ResourceInstanceParameters<DeviceGroup>
+    ...ResourceInstanceParameters<DeviceGroup>,
   ): ArmResponse<CountDeviceResponse> | ErrorResponse;
 
   @autoRoute
@@ -74,7 +74,7 @@ interface DeviceGroups
 
     @doc("Bulk claim devices request body.")
     @body
-    claimDevicesRequest: ClaimDevicesRequest
+    claimDevicesRequest: ClaimDevicesRequest,
   ): ArmAcceptedResponse | ErrorResponse;
 }
 
@@ -108,6 +108,7 @@ model DeviceGroupProperties {
 enum OSFeedType {
   /** Retail OS feed type. */
   Retail,
+
   /** Retail evaluation OS feed type. */
   RetailEval,
 }
@@ -116,6 +117,7 @@ enum OSFeedType {
 enum UpdatePolicy {
   /** Update all policy. */
   UpdateAll,
+
   /** No update for 3rd party app policy. */
   No3rdPartyAppUpdates,
 }

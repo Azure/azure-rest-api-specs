@@ -32,59 +32,37 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedProposal"
+            },
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
-            },
-            "schema": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/Proposals.Proposal"
-                  },
-                  "x-ms-identifiers": [],
-                  "description": "The Proposal items on this page",
-                  "x-typespec-name": "Proposals.Proposal[]"
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items",
-                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
-                }
-              },
-              "description": "Paged collection of Proposal items",
-              "required": [
-                "value"
-              ],
-              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Proposals.Proposal, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Proposals_List": {
             "$ref": "./examples/Proposals_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -92,6 +70,9 @@
       "post": {
         "operationId": "Proposals_Withdraw",
         "description": "Withdraw an existing proposal. Only the original proposer is permitted to withdraw.",
+        "consumes": [
+          "application/cose"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -99,8 +80,8 @@
           {
             "name": "proposalId",
             "in": "path",
-            "required": true,
             "description": "Unique ID assigned to this proposal at its submission, by the service.",
+            "required": true,
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           },
@@ -111,33 +92,30 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Proposals.Proposal"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
-        "consumes": [
-          "application/cose"
-        ],
         "x-ms-examples": {
           "Proposals_Withdraw": {
             "$ref": "./examples/Proposals_Withdraw.json"
@@ -156,8 +134,8 @@
           {
             "name": "proposalId",
             "in": "path",
-            "required": true,
             "description": "Unique ID assigned to this proposal at its submission, by the service.",
+            "required": true,
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           }
@@ -165,27 +143,27 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Proposals.Proposal"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -207,8 +185,8 @@
           {
             "name": "proposalId",
             "in": "path",
-            "required": true,
             "description": "Unique ID assigned to this proposal at its submission, by the service.",
+            "required": true,
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           }
@@ -216,27 +194,27 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Proposals.ProposalActions"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -251,6 +229,9 @@
       "post": {
         "operationId": "Ballots_Submit",
         "description": "Submit an executable ballot for a specific proposal. This may be as simple as `return true` to vote in favour, or contain reads from the KV and conditions on the proposal contents.",
+        "consumes": [
+          "application/cose"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -258,16 +239,16 @@
           {
             "name": "proposalId",
             "in": "path",
-            "required": true,
             "description": "Unique ID assigned to this proposal at its submission, by the service.",
+            "required": true,
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           },
           {
             "name": "memberId",
             "in": "path",
-            "required": true,
             "description": "ID of CCF member who signed and submitted this ballot.",
+            "required": true,
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           },
@@ -278,33 +259,30 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Proposals.Proposal"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
-        "consumes": [
-          "application/cose"
-        ],
         "x-ms-examples": {
           "Ballots_Submit": {
             "$ref": "./examples/Ballots_Submit.json"
@@ -316,6 +294,10 @@
       "get": {
         "operationId": "Ballots_Get",
         "description": "Returns a member's submitted ballot.",
+        "produces": [
+          "text/javascript",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -323,16 +305,16 @@
           {
             "name": "proposalId",
             "in": "path",
-            "required": true,
             "description": "Unique ID assigned to this proposal at its submission, by the service.",
+            "required": true,
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           },
           {
             "name": "memberId",
             "in": "path",
-            "required": true,
             "description": "ID of CCF member who signed and submitted this ballot.",
+            "required": true,
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           }
@@ -340,34 +322,30 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Proposals.Ballot"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
-        "produces": [
-          "text/javascript",
-          "application/json"
-        ],
         "x-ms-examples": {
           "Ballots_Get": {
             "$ref": "./examples/Ballots_Get.json"
@@ -379,6 +357,9 @@
       "post": {
         "operationId": "Proposals_Create",
         "description": "Submit a proposed change to the service. This will be assigned an ID by the service. Submitting the same signature (including signed COSE headers such as created_at) multiple times will be treated as a single idempotent operation, returning a single created proposal (or an error if it is no longer available). Any change to the request body will be treated as a new, separate proposal.",
+        "consumes": [
+          "application/cose"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -390,33 +371,30 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Proposals.Proposal"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
-        "consumes": [
-          "application/cose"
-        ],
         "x-ms-examples": {
           "Proposals_Create": {
             "$ref": "./examples/Proposals_Create.json"
@@ -428,6 +406,9 @@
       "post": {
         "operationId": "StateDigests_Update",
         "description": "Request that this member's stateDigest is updated to a fresher value. Only this member may update their own stateDigest. Returns the refreshed value.",
+        "consumes": [
+          "application/cose"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -435,8 +416,8 @@
           {
             "name": "memberId",
             "in": "path",
-            "required": true,
             "description": "Identifier for member this stateDigest applies to.",
+            "required": true,
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           },
@@ -447,33 +428,30 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Acks.StateDigest"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
-        "consumes": [
-          "application/cose"
-        ],
         "x-ms-examples": {
           "StateDigests_Update": {
             "$ref": "./examples/StateDigests_Update.json"
@@ -485,6 +463,9 @@
       "post": {
         "operationId": "StateDigests_Acknowledge",
         "description": "Submit a signed acknowledgement of a recent digest of the service status, to transition the member to Active.",
+        "consumes": [
+          "application/cose"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -492,8 +473,8 @@
           {
             "name": "memberId",
             "in": "path",
-            "required": true,
             "description": "Identifier for member this stateDigest applies to.",
+            "required": true,
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           },
@@ -506,28 +487,25 @@
             "description": "There is no content to send for this request, but the headers may be useful. ",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.",
                 "type": "string",
+                "description": "Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
-        "consumes": [
-          "application/cose"
-        ],
         "x-ms-examples": {
           "StateDigests_Acknowledge": {
             "$ref": "./examples/StateDigests_Acknowledge.json"
@@ -546,8 +524,8 @@
           {
             "name": "memberId",
             "in": "path",
-            "required": true,
             "description": "Identifier for member this stateDigest applies to.",
+            "required": true,
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           }
@@ -555,27 +533,27 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Acks.StateDigest"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -597,8 +575,8 @@
           {
             "name": "memberId",
             "in": "path",
-            "required": true,
             "description": "ID of CCF member who this recovery share belongs to.",
+            "required": true,
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           }
@@ -612,14 +590,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -634,6 +612,9 @@
       "post": {
         "operationId": "Shares_Submit",
         "description": "Provide a recovery share for the purpose of completing a service recovery.",
+        "consumes": [
+          "application/cose"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -641,8 +622,8 @@
           {
             "name": "memberId",
             "in": "path",
-            "required": true,
             "description": "Identifier for member this recovery state applies to.",
+            "required": true,
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           },
@@ -653,33 +634,30 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Recovery.RecoveryResponse"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
-        "consumes": [
-          "application/cose"
-        ],
         "x-ms-examples": {
           "Shares_Submit": {
             "$ref": "./examples/Shares_Submit.json"
@@ -691,6 +669,10 @@
       "get": {
         "operationId": "ServiceState_GetConstitution",
         "description": "Retrieve the constitution which controls governance changes on this service.",
+        "produces": [
+          "text/javascript",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -699,34 +681,30 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/ServiceState.ConstitutionResponse"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
-        "produces": [
-          "text/javascript",
-          "application/json"
-        ],
         "x-ms-examples": {
           "ServiceState_GetConstitution": {
             "$ref": "./examples/ServiceState_GetConstitution.json"
@@ -746,27 +724,27 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/ServiceState.ServiceInfo"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -789,27 +767,27 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/ServiceState.JsApp"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -832,27 +810,27 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/ServiceState.JoinPolicies"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -875,27 +853,27 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/ServiceState.JwkInfo"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -918,59 +896,37 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedMember"
+            },
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
-            },
-            "schema": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/ServiceState.Member"
-                  },
-                  "x-ms-identifiers": [],
-                  "description": "The Member items on this page",
-                  "x-typespec-name": "ServiceState.Member[]"
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items",
-                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
-                }
-              },
-              "description": "Paged collection of Member items",
-              "required": [
-                "value"
-              ],
-              "x-typespec-name": "Azure.Core.Foundations.CustomPage<ServiceState.Member, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "ServiceState_ListMembers": {
             "$ref": "./examples/ServiceState_ListMembers.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -985,8 +941,8 @@
           {
             "name": "memberId",
             "in": "path",
-            "required": true,
             "description": "ID of CCF member who this object refers to.",
+            "required": true,
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           }
@@ -994,27 +950,27 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/ServiceState.Member"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1037,59 +993,37 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedNode"
+            },
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
-            },
-            "schema": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/ServiceState.Node"
-                  },
-                  "x-ms-identifiers": [],
-                  "description": "The Node items on this page",
-                  "x-typespec-name": "ServiceState.Node[]"
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items",
-                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
-                }
-              },
-              "description": "Paged collection of Node items",
-              "required": [
-                "value"
-              ],
-              "x-typespec-name": "Azure.Core.Foundations.CustomPage<ServiceState.Node, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "ServiceState_ListNodes": {
             "$ref": "./examples/ServiceState_ListNodes.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1104,8 +1038,8 @@
           {
             "name": "nodeId",
             "in": "path",
-            "required": true,
             "description": "ID of CCF node who this object refers to.",
+            "required": true,
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           }
@@ -1113,27 +1047,27 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/ServiceState.Node"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1155,8 +1089,8 @@
           {
             "name": "transactionId",
             "in": "path",
-            "required": true,
             "description": "Identifier of the requested transaction.",
+            "required": true,
             "type": "string",
             "pattern": "^[0-9]+\\.[0-9]+$"
           }
@@ -1170,14 +1104,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1206,14 +1140,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1228,6 +1162,7 @@
   "definitions": {
     "Acks.StateDigest": {
       "type": "object",
+      "description": "A compact summary of the service's state up to a certain point in time, updated and signed by members to indicate their participation in and approval of the service.",
       "properties": {
         "digest": {
           "type": "string",
@@ -1235,13 +1170,13 @@
           "pattern": "^[a-f0-9]{64}$"
         }
       },
-      "description": "A compact summary of the service's state up to a certain point in time, updated and signed by members to indicate their participation in and approval of the service.",
       "required": [
         "digest"
       ]
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
+      "description": "The error object.",
       "properties": {
         "code": {
           "type": "string",
@@ -1257,19 +1192,17 @@
         },
         "details": {
           "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
-          "x-ms-identifiers": [],
-          "description": "An array of details about specific errors that led to this reported error.",
-          "x-typespec-name": "Azure.Core.Foundations.Error[]"
+          "x-ms-identifiers": []
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "An object containing more specific information than the current object about the error."
         }
       },
-      "description": "The error object.",
       "required": [
         "code",
         "message"
@@ -1277,19 +1210,20 @@
     },
     "Azure.Core.Foundations.ErrorResponse": {
       "type": "object",
+      "description": "A response containing error details.",
       "properties": {
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error object."
         }
       },
-      "description": "A response containing error details.",
       "required": [
         "error"
       ]
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
@@ -1299,11 +1233,77 @@
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "Inner error."
         }
+      }
+    },
+    "PagedMember": {
+      "type": "object",
+      "description": "Paged collection of Member items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Member items on this page",
+          "items": {
+            "$ref": "#/definitions/ServiceState.Member"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
       },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
+      "required": [
+        "value"
+      ]
+    },
+    "PagedNode": {
+      "type": "object",
+      "description": "Paged collection of Node items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Node items on this page",
+          "items": {
+            "$ref": "#/definitions/ServiceState.Node"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedProposal": {
+      "type": "object",
+      "description": "Paged collection of Proposal items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Proposal items on this page",
+          "items": {
+            "$ref": "#/definitions/Proposals.Proposal"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Proposals.Action": {
       "type": "object",
+      "description": "A single step in a proposed change to the service.",
       "properties": {
         "name": {
           "type": "string",
@@ -1313,26 +1313,26 @@
           "description": "Arguments to modify the behavior of this action. The schema is determined by the action implementation, and should be validated by a `validate` call in the constitution."
         }
       },
-      "description": "A single step in a proposed change to the service.",
       "required": [
         "name"
       ]
     },
     "Proposals.Ballot": {
       "type": "object",
+      "description": "The source script of an executable vote from a member, regarding a proposed change to the service.",
       "properties": {
         "script": {
           "type": "string",
           "description": "The script to execute, returning the voter's support of this proposal."
         }
       },
-      "description": "The source script of an executable vote from a member, regarding a proposed change to the service.",
       "required": [
         "script"
       ]
     },
     "Proposals.FailureInfo": {
       "type": "object",
+      "description": "Description of why governance execution failed.",
       "properties": {
         "reason": {
           "type": "string",
@@ -1343,20 +1343,20 @@
           "description": "Call stack showing where failure occurred, if available."
         }
       },
-      "description": "Description of why governance execution failed.",
       "required": [
         "reason"
       ]
     },
     "Proposals.MemberVotes": {
       "type": "object",
+      "description": "Each key is a memberId, and the corresponding value is the result of their ballot.",
       "additionalProperties": {
         "type": "boolean"
-      },
-      "description": "Each key is a memberId, and the corresponding value is the result of their ballot."
+      }
     },
     "Proposals.Proposal": {
       "type": "object",
+      "description": "Description of a proposed change to the service.",
       "properties": {
         "proposalId": {
           "$ref": "#/definitions/proposalId",
@@ -1387,7 +1387,6 @@
           "description": "If proposalState is Failure, then this will describe why the proposal failed."
         }
       },
-      "description": "Description of a proposed change to the service.",
       "required": [
         "proposalId",
         "proposerId",
@@ -1397,18 +1396,17 @@
     },
     "Proposals.ProposalActions": {
       "type": "object",
+      "description": "The actions contained in a proposal, describing the proposal's changes.",
       "properties": {
         "actions": {
           "type": "array",
+          "description": "A list of actions to apply. Each action is considered, in order, for both proposal and execution of the proposal. All actions are validated and, if the proposal is accepted, applied atomically.",
           "items": {
             "$ref": "#/definitions/Proposals.Action"
           },
-          "x-ms-identifiers": [],
-          "description": "A list of actions to apply. Each action is considered, in order, for both proposal and execution of the proposal. All actions are validated and, if the proposal is accepted, applied atomically.",
-          "x-typespec-name": "Proposals.Action[]"
+          "x-ms-identifiers": []
         }
       },
-      "description": "The actions contained in a proposal, describing the proposal's changes.",
       "required": [
         "actions"
       ]
@@ -1463,13 +1461,14 @@
     },
     "Proposals.VoteFailures": {
       "type": "object",
+      "description": "Each key is a memberId, and the corresponding value explains why execution of their ballot failed.",
       "additionalProperties": {
         "$ref": "#/definitions/Proposals.FailureInfo"
-      },
-      "description": "Each key is a memberId, and the corresponding value explains why execution of their ballot failed."
+      }
     },
     "Recovery.EncryptedRecoveryShare": {
       "type": "object",
+      "description": "A share of a recovery key, granted for a specific recovery member, and encrypted with that member's share-encryption key. This is safe to share in the ledger or amongst untrusted callers, as only the intended member will be able to decrypt and access the secret content.",
       "properties": {
         "encryptedShare": {
           "type": "string",
@@ -1477,18 +1476,17 @@
           "description": "Base-64 encoding of a member's encrypted share."
         }
       },
-      "description": "A share of a recovery key, granted for a specific recovery member, and encrypted with that member's share-encryption key. This is safe to share in the ledger or amongst untrusted callers, as only the intended member will be able to decrypt and access the secret content.",
       "required": [
         "encryptedShare"
       ]
     },
     "Recovery.Member": {
       "type": "object",
-      "properties": {},
       "description": "Recovery-specific details for a given member."
     },
     "Recovery.RecoveryResponse": {
       "type": "object",
+      "description": "Response to a submitted recovery share.",
       "properties": {
         "message": {
           "type": "string",
@@ -1503,7 +1501,6 @@
           "description": "Count of how many member shares are required to initiate the end-of-recovery procedure."
         }
       },
-      "description": "Response to a submitted recovery share.",
       "required": [
         "message",
         "submittedCount",
@@ -1512,6 +1509,7 @@
     },
     "Recovery.RecoveryShare": {
       "type": "object",
+      "description": "Container for a member's raw recovery share. This should be carefully guarded, and only submitted to a trusted service over a secure channel, for the purposes of recovery.",
       "properties": {
         "share": {
           "type": "string",
@@ -1519,20 +1517,19 @@
           "description": "Base-64 encoding of a member's raw recovery share (unencrypted)."
         }
       },
-      "description": "Container for a member's raw recovery share. This should be carefully guarded, and only submitted to a trusted service over a secure channel, for the purposes of recovery.",
       "required": [
         "share"
       ]
     },
     "ServiceState.ConstitutionResponse": {
       "type": "object",
+      "description": "Constitution used to make governance decisions on the service. All governance changes are presented as proposals which must be validated, approved, and applied by the code in this constitution.",
       "properties": {
         "constitution": {
           "type": "string",
           "description": "Javascript source code of constitution."
         }
       },
-      "description": "Constitution used to make governance decisions on the service. All governance changes are presented as proposals which must be validated, approved, and applied by the code in this constitution.",
       "required": [
         "constitution"
       ]
@@ -1569,6 +1566,7 @@
     },
     "ServiceState.JoinPolicies": {
       "type": "object",
+      "description": "Collection of all policies which determine currently acceptable nodes, across multiple platforms.",
       "properties": {
         "sgx": {
           "$ref": "#/definitions/ServiceState.JoinPolicy",
@@ -1579,7 +1577,6 @@
           "description": "Policy applied to nodes running in AMD SEV-SNP containers."
         }
       },
-      "description": "Collection of all policies which determine currently acceptable nodes, across multiple platforms.",
       "required": [
         "sgx",
         "snp"
@@ -1587,41 +1584,40 @@
     },
     "ServiceState.JoinPolicy": {
       "type": "object",
+      "description": "Describes what a joining node must present, in order to join the service.",
       "properties": {
         "measurements": {
           "type": "array",
+          "description": "Code measurements of acceptable enclaves.",
           "items": {
             "type": "string",
             "format": "byte"
-          },
-          "description": "Code measurements of acceptable enclaves.",
-          "x-typespec-name": "bytes[]"
+          }
         }
       },
-      "description": "Describes what a joining node must present, in order to join the service.",
       "required": [
         "measurements"
       ]
     },
     "ServiceState.JsApp": {
       "type": "object",
+      "description": "Describes the currently installed JavaScript application.",
       "properties": {
         "endpoints": {
           "type": "object",
+          "description": "The collection of endpoints exposed by the application. Keyed by path.",
           "additionalProperties": {
             "$ref": "#/definitions/ServiceState.JsOperations"
-          },
-          "description": "The collection of endpoints exposed by the application. Keyed by path.",
-          "x-typespec-name": "Record<ServiceState.JsOperations>"
+          }
         }
       },
-      "description": "Describes the currently installed JavaScript application.",
       "required": [
         "endpoints"
       ]
     },
     "ServiceState.JsEndpointInfo": {
       "type": "object",
+      "description": "Describes an endpoint implemented by a Javascript handler.",
       "properties": {
         "jsModule": {
           "type": "string",
@@ -1637,11 +1633,10 @@
         },
         "authnPolicies": {
           "type": "array",
+          "description": "The authentication policies which restrict access to this endpoint",
           "items": {
             "type": "string"
-          },
-          "description": "The authentication policies which restrict access to this endpoint",
-          "x-typespec-name": "string[]"
+          }
         },
         "mode": {
           "$ref": "#/definitions/ServiceState.JsExecMode",
@@ -1649,12 +1644,10 @@
         },
         "openApi": {
           "type": "object",
-          "additionalProperties": true,
           "description": "An OpenAPI Operation object (https://swagger.io/specification/#operation-object) describing this operation. This is merged into the auto-generated OpenAPI to describe the current application's API.",
-          "x-typespec-name": "Record<unknown>"
+          "additionalProperties": {}
         }
       },
-      "description": "Describes an endpoint implemented by a Javascript handler.",
       "required": [
         "jsModule",
         "jsFunction",
@@ -1696,32 +1689,30 @@
     },
     "ServiceState.JsOperations": {
       "type": "object",
+      "description": "The collection of operations available on each path. Keyed by HTTP method.",
       "additionalProperties": {
         "$ref": "#/definitions/ServiceState.JsEndpointInfo"
-      },
-      "description": "The collection of operations available on each path. Keyed by HTTP method."
+      }
     },
     "ServiceState.JwkInfo": {
       "type": "object",
+      "description": "Describes what Javascript Web Tokens (JWTs) are accepted by the service, and how they will be validated.",
       "properties": {
         "issuers": {
           "type": "object",
+          "description": "Collection of JWT issuers. Keyed by issuer ID.",
           "additionalProperties": {
             "$ref": "#/definitions/ServiceState.JwtIssuer"
-          },
-          "description": "Collection of JWT issuers. Keyed by issuer ID.",
-          "x-typespec-name": "Record<ServiceState.JwtIssuer>"
+          }
         },
         "caCertBundles": {
           "type": "object",
+          "description": "Collection of CAs used to authenticate connections with issuers. Keyed by governance-controlled bundle names.",
           "additionalProperties": {
             "$ref": "#/definitions/ServiceState.caCertBundle"
-          },
-          "description": "Collection of CAs used to authenticate connections with issuers. Keyed by governance-controlled bundle names.",
-          "x-typespec-name": "Record<ServiceState.caCertBundle>"
+          }
         }
       },
-      "description": "Describes what Javascript Web Tokens (JWTs) are accepted by the service, and how they will be validated.",
       "required": [
         "issuers",
         "caCertBundles"
@@ -1729,6 +1720,7 @@
     },
     "ServiceState.JwtIssuer": {
       "type": "object",
+      "description": "Description of a JWT issuer or identity provider that the current service will trust tokens from.",
       "properties": {
         "keyFilter": {
           "$ref": "#/definitions/ServiceState.JwtIssuerKeyFilter",
@@ -1736,11 +1728,10 @@
         },
         "keyPolicy": {
           "type": "object",
+          "description": "Collection of claims which must be present in SGX attestation to permit updates from this issuer.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Collection of claims which must be present in SGX attestation to permit updates from this issuer.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "autoRefresh": {
           "type": "boolean",
@@ -1751,7 +1742,6 @@
           "description": "Name of bundle used to authenticate issuer when auto-refreshing."
         }
       },
-      "description": "Description of a JWT issuer or identity provider that the current service will trust tokens from.",
       "required": [
         "keyFilter",
         "autoRefresh"
@@ -1783,6 +1773,7 @@
     },
     "ServiceState.Member": {
       "type": "object",
+      "description": "Information on individual members within a consortium.",
       "properties": {
         "memberId": {
           "$ref": "#/definitions/memberId",
@@ -1800,7 +1791,6 @@
           "description": "x509 certificate used as this member's identity."
         }
       },
-      "description": "Information on individual members within a consortium.",
       "required": [
         "memberId",
         "status",
@@ -1833,6 +1823,7 @@
     },
     "ServiceState.NetworkInterface": {
       "type": "object",
+      "description": "Details of how to contact a CCF node. Each node may listen on multiple interfaces, for different kinds of traffic.",
       "properties": {
         "publishedAddress": {
           "type": "string",
@@ -1843,7 +1834,6 @@
           "description": "The application layer protocol which the node expects on this interface. Currently supports \"http1\" and \"http2\", more protocols may be added in future."
         }
       },
-      "description": "Details of how to contact a CCF node. Each node may listen on multiple interfaces, for different kinds of traffic.",
       "required": [
         "publishedAddress",
         "protocol"
@@ -1851,6 +1841,7 @@
     },
     "ServiceState.Node": {
       "type": "object",
+      "description": "Information on individual nodes within a service.",
       "properties": {
         "nodeId": {
           "$ref": "#/definitions/nodeId",
@@ -1877,14 +1868,12 @@
         },
         "rpcInterfaces": {
           "type": "object",
+          "description": "A collection of interfaces by which this node may be contacted. Some may be limited to private networks, and others may be DNS names or internet-public network addresses. The keys are arbitrary strings determined by the node operator.",
           "additionalProperties": {
             "$ref": "#/definitions/ServiceState.NetworkInterface"
-          },
-          "description": "A collection of interfaces by which this node may be contacted. Some may be limited to private networks, and others may be DNS names or internet-public network addresses. The keys are arbitrary strings determined by the node operator.",
-          "x-typespec-name": "Record<ServiceState.NetworkInterface>"
+          }
         }
       },
-      "description": "Information on individual nodes within a service.",
       "required": [
         "nodeId",
         "status",
@@ -1926,13 +1915,13 @@
     },
     "ServiceState.QuoteInfo": {
       "type": "object",
+      "description": "Common type for attestation information, describing the cryptographically-endorsed claim of what code is executing, and what platform it is executing on. Derived types contain platform-specific details.",
       "properties": {
         "format": {
           "type": "string",
           "description": "Discriminator property for QuoteInfo."
         }
       },
-      "description": "Common type for attestation information, describing the cryptographically-endorsed claim of what code is executing, and what platform it is executing on. Derived types contain platform-specific details.",
       "discriminator": "format",
       "required": [
         "format"
@@ -1940,6 +1929,7 @@
     },
     "ServiceState.ServiceInfo": {
       "type": "object",
+      "description": "General information about the current service.",
       "properties": {
         "status": {
           "$ref": "#/definitions/ServiceState.ServiceStatus",
@@ -1966,6 +1956,7 @@
         },
         "configuration": {
           "type": "object",
+          "description": "Lists governance-controlled configuration parameters of this service, which will be used by core framework code.",
           "properties": {
             "maximumNodeCertificateValidityDays": {
               "$ref": "#/definitions/safeuint"
@@ -1974,15 +1965,12 @@
               "$ref": "#/definitions/safeuint"
             }
           },
-          "description": "Lists governance-controlled configuration parameters of this service, which will be used by core framework code.",
           "required": [
             "maximumNodeCertificateValidityDays",
             "recentCoseProposalsWindowSize"
-          ],
-          "x-typespec-name": "ServiceState.(anonymous model)"
+          ]
         }
       },
-      "description": "General information about the current service.",
       "required": [
         "status",
         "certificate",
@@ -2029,6 +2017,7 @@
     },
     "ServiceState.SgxQuoteInfo": {
       "type": "object",
+      "description": "Attestation information for Intel SGX enclaves.",
       "properties": {
         "quote": {
           "type": "string",
@@ -2041,7 +2030,6 @@
           "description": "Base-64 encoded SGX endorsements."
         }
       },
-      "description": "Attestation information for Intel SGX enclaves.",
       "required": [
         "quote",
         "endorsements"
@@ -2055,36 +2043,33 @@
     },
     "ServiceState.SnpJoinPolicy": {
       "type": "object",
+      "description": "Join policy fields specific to nodes running on AMD SEV-SNP hardware.",
       "properties": {
         "measurements": {
           "type": "array",
+          "description": "Code measurements of acceptable enclaves.",
           "items": {
             "type": "string",
             "format": "byte"
-          },
-          "description": "Code measurements of acceptable enclaves.",
-          "x-typespec-name": "bytes[]"
+          }
         },
         "hostData": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "format": "byte"
-          },
           "description": "Collection of acceptable host data values.",
-          "x-typespec-name": "Record<bytes>"
+          "additionalProperties": {
+            "format": "byte",
+            "type": "string"
+          }
         },
         "uvmEndorsements": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "format": "byte"
-          },
           "description": "Collection of acceptable UVM endorsements.",
-          "x-typespec-name": "Record<bytes>"
+          "additionalProperties": {
+            "format": "byte",
+            "type": "string"
+          }
         }
       },
-      "description": "Join policy fields specific to nodes running on AMD SEV-SNP hardware.",
       "required": [
         "measurements",
         "hostData",
@@ -2093,6 +2078,7 @@
     },
     "ServiceState.SnpQuoteInfo": {
       "type": "object",
+      "description": "Attestation information for AMD SEV-SNP containers.",
       "properties": {
         "uvmEndorsements": {
           "type": "string",
@@ -2105,7 +2091,6 @@
           "description": "Base-64 encoded SNP TCB endorsements."
         }
       },
-      "description": "Attestation information for AMD SEV-SNP containers.",
       "required": [
         "uvmEndorsements",
         "endorsedTcb"
@@ -2127,6 +2112,7 @@
     },
     "Transactions.CommittedTransaction": {
       "type": "object",
+      "description": "Description of latest committed transaction.",
       "properties": {
         "transactionId": {
           "$ref": "#/definitions/transactionId",
@@ -2137,7 +2123,6 @@
           "description": "Status of this transaction."
         }
       },
-      "description": "Description of latest committed transaction.",
       "required": [
         "transactionId",
         "status"
@@ -2145,26 +2130,26 @@
     },
     "Transactions.NamedTransaction": {
       "type": "object",
+      "description": "Description of a named transaction's current state.",
       "properties": {
         "status": {
           "$ref": "#/definitions/Transactions.TransactionStatus",
           "description": "Status of this transaction."
         }
       },
-      "description": "Description of a named transaction's current state.",
       "required": [
         "status"
       ]
     },
     "Transactions.Transaction": {
       "type": "object",
+      "description": "Common transaction information.",
       "properties": {
         "status": {
           "$ref": "#/definitions/Transactions.TransactionStatus",
           "description": "Status of this transaction."
         }
       },
-      "description": "Common transaction information.",
       "required": [
         "status"
       ]
@@ -2251,18 +2236,18 @@
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "required": true,
       "description": "The API version to use for this operation.",
-      "x-ms-client-name": "apiVersion",
+      "required": true,
       "type": "string",
       "minLength": 1,
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     },
     "CoseSignature.body": {
       "name": "body",
       "in": "body",
-      "required": true,
       "description": "A raw CoseSign1 signature. See CCF docs for required headers and body schema: https://microsoft.github.io/CCF/main/use_apps/issue_commands.html#cose-schemas",
+      "required": true,
       "schema": {
         "type": "string",
         "format": "binary"
