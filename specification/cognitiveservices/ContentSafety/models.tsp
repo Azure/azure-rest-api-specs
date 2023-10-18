@@ -244,17 +244,17 @@ model TextCustomizedCategory {
   exampleBlobUrl?: url;
 }
 
-@doc("The text annotation response.")
-@added(Versions.v2023_10_30_Preview)
-@resource("text/customizedCategories/operations")
-model TextCustomizedCategoryOperation {
-  @doc("The operation id.")
-  @key("operationId")
-  operationId: int32;
+// @doc("The text annotation response.")
+// @added(Versions.v2023_10_30_Preview)
+// @resource("text/customizedCategories/operations")
+// model TextCustomizedCategoryOperation {
+//   @doc("The operation id.")
+//   @key("operationId")
+//   operationId: int32;
 
-  @doc("The status.")
-  status: string;
+//   @doc("The status.")
+//   status: string;
 
-  @doc("The reason of failure.")
-  error?: string;
-}
+//   @doc("The reason of failure.")
+//   error?: string;
+// }

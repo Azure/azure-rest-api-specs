@@ -594,27 +594,6 @@
         }
       }
     },
-    "/text/customizedCategories/operations/{operationId}": {
-      "get": {
-        "operationId": "TextCategoryCustomization_GetTextCustomizedCategoryOperation",
-        "parameters": [
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TextCustomizedCategoryOperation"
-            }
-          }
-        }
-      }
-    },
     "/text:adaptiveAnnotate": {
       "post": {
         "operationId": "PromptTextOperations_AnnotateText",
@@ -1308,29 +1287,6 @@
       "required": [
         "categoryName",
         "labels"
-      ]
-    },
-    "TextCustomizedCategoryOperation": {
-      "type": "object",
-      "description": "The text annotation response.",
-      "properties": {
-        "operationId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The operation id."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status."
-        },
-        "error": {
-          "type": "string",
-          "description": "The reason of failure."
-        }
-      },
-      "required": [
-        "operationId",
-        "status"
       ]
     },
     "Versions": {

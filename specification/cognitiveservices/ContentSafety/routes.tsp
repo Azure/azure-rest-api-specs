@@ -114,9 +114,9 @@ interface TextCategoryCustomization {
 
   deleteTextCustomizedCategory is ResourceDelete<TextCustomizedCategory>;
 
-  @route("/text/customizedCategories/operations/{operationId}")
-  @get
-  getTextCustomizedCategoryOperation(
-    @path operationId: string,
-  ): TextCustomizedCategoryOperation;
+  // @route("/text/customizedCategories/operations/{operationId}")
+  // @get
+  // getTextCustomizedCategoryOperation(
+  //   @path operationId: string,
+  // ): TextCustomizedCategoryOperation;
 }
