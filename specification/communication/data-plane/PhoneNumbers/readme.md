@@ -24,16 +24,25 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the communicationservices.
 
-```yaml
+``` yaml
 openapi-type: data-plane
-tag: package-phonenumber-2022-12-01
+tag: package-preview-2024-01
 ```
 
+
+### Tag: package-preview-2024-01
+
+These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-01'
+input-file:
+  - preview/2024-01-31-preview/phonenumbers.json
+```
 ### Tag: package-phonenumber-2022-12-01
 
 These settings apply only when `--tag=package-phonenumber-2022-12-01` is specified on the command line.
 
-```yaml $(tag) == 'package-phonenumber-2022-12-01'
+``` yaml $(tag) == 'package-phonenumber-2022-12-01'
 input-file:
   - stable/2022-12-01/phonenumbers.json
 title:
@@ -44,7 +53,7 @@ title:
 
 These settings apply only when `--tag=package-phonenumber-2021-03-07` is specified on the command line.
 
-```yaml $(tag) == 'package-phonenumber-2021-03-07'
+``` yaml $(tag) == 'package-phonenumber-2021-03-07'
 input-file:
   - stable/2021-03-07/phonenumbers.json
 title:
@@ -55,7 +64,7 @@ title:
 
 These settings apply only when `--tag=package-phonenumber-2022-01-11-preview2` is specified on the command line.
 
-```yaml $(tag) == 'package-phonenumber-2022-01-11-preview2'
+``` yaml $(tag) == 'package-phonenumber-2022-01-11-preview2'
 input-file:
   - preview/2022-01-11-preview2/phonenumbers.json
 title:
@@ -66,7 +75,7 @@ title:
 
 These settings apply only when `--tag=package-phonenumber-2022-06-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-phonenumber-2022-06-01-preview'
+``` yaml $(tag) == 'package-phonenumber-2022-06-01-preview'
 input-file:
   - preview/2022-06-01-preview/phonenumbers.json
 title:
@@ -77,7 +86,7 @@ title:
 
 These settings apply only when `--tag=package-phonenumber-2023-05-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-phonenumber-2023-05-01-preview'
+``` yaml $(tag) == 'package-phonenumber-2023-05-01-preview'
 input-file:
   - preview/2023-05-01-preview/phonenumbers.json
 title:
@@ -85,6 +94,7 @@ title:
 ```
 
 ## Supression
+
 ``` yaml
 suppressions:
  - code: OperationIdNounVerb
