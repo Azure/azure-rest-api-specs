@@ -1,0 +1,48 @@
+{
+  "title": "Create DsmsRootFolder",
+  "operationId": "DsmsRootFolder_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "prodUSEastAzcis",
+    "api-version": "2021-08-10-privatepreview",
+    "DsmsRootFolder": {
+      "location": "eastus",
+      "properties": {
+        "serviceTreeId": "ef06429b-d53b-4362-92b9-b5fff2d27320",
+        "name": "$my-folder$root-folder",
+        "cloudId": "Public"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCIS/dsmsRootFolders/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCIS/dsmsRootFolders",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Accepted",
+          "serviceTreeId": "ef06429b-d53b-4362-92b9-b5fff2d27320",
+          "name": "$my-folder$root-folder",
+          "cloudId": "Public"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCIS/dsmsRootFolders/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCIS/dsmsRootFolders",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Accepted",
+          "serviceTreeId": "ef06429b-d53b-4362-92b9-b5fff2d27320",
+          "name": "$my-folder$root-folder",
+          "cloudId": "Public"
+        }
+      }
+    }
+  }
+}
