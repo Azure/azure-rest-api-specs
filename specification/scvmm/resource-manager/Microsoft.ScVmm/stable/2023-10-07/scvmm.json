@@ -59,7 +59,10 @@
             "name": "vmmServerName",
             "required": true,
             "type": "string",
-            "description": "Name of the VMMServer."
+            "description": "Name of the VMMServer.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -104,7 +107,10 @@
             "name": "vmmServerName",
             "required": true,
             "type": "string",
-            "description": "Name of the VMMServer."
+            "description": "Name of the VMMServer.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -149,7 +155,7 @@
           "VmmServers"
         ],
         "operationId": "VmmServers_Delete",
-        "description": "Deboards the SCVMM fabric from Azure.",
+        "description": "Removes the SCVMM fabric from Azure.",
         "summary": "Implements VmmServers DELETE method.",
         "x-ms-examples": {
           "DeleteVMMServer": {
@@ -168,7 +174,10 @@
             "name": "vmmServerName",
             "required": true,
             "type": "string",
-            "description": "Name of the VMMServer."
+            "description": "Name of the VMMServer.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -178,15 +187,25 @@
             "name": "force",
             "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
             "required": false,
-            "type": "boolean"
+            "type": "string",
+            "enum": [
+              "false",
+              "true"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "Force"
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Deletes the VmmServers resource."
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -230,7 +249,10 @@
             "name": "vmmServerName",
             "required": true,
             "type": "string",
-            "description": "Name of the VMMServer."
+            "description": "Name of the VMMServer.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "name": "body",
@@ -249,14 +271,13 @@
               "$ref": "#/definitions/VMMServer"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/VMMServer"
-            }
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -415,7 +436,10 @@
             "name": "cloudName",
             "required": true,
             "type": "string",
-            "description": "Name of the Cloud."
+            "description": "Name of the Cloud.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -460,7 +484,10 @@
             "name": "cloudName",
             "required": true,
             "type": "string",
-            "description": "Name of the Cloud."
+            "description": "Name of the Cloud.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -524,7 +551,10 @@
             "name": "cloudName",
             "required": true,
             "type": "string",
-            "description": "Name of the Cloud."
+            "description": "Name of the Cloud.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -534,15 +564,25 @@
             "name": "force",
             "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
             "required": false,
-            "type": "boolean"
+            "type": "string",
+            "enum": [
+              "false",
+              "true"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "Force"
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Deletes the Clouds resource."
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -586,7 +626,10 @@
             "name": "cloudName",
             "required": true,
             "type": "string",
-            "description": "Name of the Cloud."
+            "description": "Name of the Cloud.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "name": "body",
@@ -605,14 +648,13 @@
               "$ref": "#/definitions/Cloud"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/Cloud"
-            }
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -735,7 +777,10 @@
             "name": "virtualNetworkName",
             "required": true,
             "type": "string",
-            "description": "Name of the VirtualNetwork."
+            "description": "Name of the VirtualNetwork.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -780,7 +825,10 @@
             "name": "virtualNetworkName",
             "required": true,
             "type": "string",
-            "description": "Name of the VirtualNetwork."
+            "description": "Name of the VirtualNetwork.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -844,7 +892,10 @@
             "name": "virtualNetworkName",
             "required": true,
             "type": "string",
-            "description": "Name of the VirtualNetwork."
+            "description": "Name of the VirtualNetwork.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -854,15 +905,25 @@
             "name": "force",
             "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
             "required": false,
-            "type": "boolean"
+            "type": "string",
+            "enum": [
+              "false",
+              "true"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "Force"
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Deletes the VirtualNetworks resource."
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -906,7 +967,10 @@
             "name": "virtualNetworkName",
             "required": true,
             "type": "string",
-            "description": "Name of the VirtualNetwork."
+            "description": "Name of the VirtualNetwork.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "name": "body",
@@ -925,14 +989,13 @@
               "$ref": "#/definitions/VirtualNetwork"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetwork"
-            }
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1055,7 +1118,10 @@
             "name": "virtualMachineTemplateName",
             "required": true,
             "type": "string",
-            "description": "Name of the VirtualMachineTemplate."
+            "description": "Name of the VirtualMachineTemplate.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1100,7 +1166,10 @@
             "name": "virtualMachineTemplateName",
             "required": true,
             "type": "string",
-            "description": "Name of the VirtualMachineTemplate."
+            "description": "Name of the VirtualMachineTemplate.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1164,7 +1233,10 @@
             "name": "virtualMachineTemplateName",
             "required": true,
             "type": "string",
-            "description": "Name of the VirtualMachineTemplate."
+            "description": "Name of the VirtualMachineTemplate.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1174,15 +1246,25 @@
             "name": "force",
             "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
             "required": false,
-            "type": "boolean"
+            "type": "string",
+            "enum": [
+              "false",
+              "true"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "Force"
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Deletes the VirtualMachineTemplates resource."
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1226,7 +1308,10 @@
             "name": "virtualMachineTemplateName",
             "required": true,
             "type": "string",
-            "description": "Name of the VirtualMachineTemplate."
+            "description": "Name of the VirtualMachineTemplate.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "name": "body",
@@ -1245,14 +1330,13 @@
               "$ref": "#/definitions/VirtualMachineTemplate"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/VirtualMachineTemplate"
-            }
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1375,7 +1459,10 @@
             "name": "availabilitySetName",
             "required": true,
             "type": "string",
-            "description": "Name of the AvailabilitySet."
+            "description": "Name of the AvailabilitySet.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1420,7 +1507,10 @@
             "name": "availabilitySetName",
             "required": true,
             "type": "string",
-            "description": "Name of the AvailabilitySet."
+            "description": "Name of the AvailabilitySet.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1490,7 +1580,10 @@
             "name": "availabilitySetName",
             "required": true,
             "type": "string",
-            "description": "Name of the AvailabilitySet."
+            "description": "Name of the AvailabilitySet.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1500,18 +1593,26 @@
             "name": "force",
             "description": "Forces the resource to be deleted from azure. The corresponding CR would be attempted to be deleted too.",
             "required": false,
-            "type": "boolean"
+            "type": "string",
+            "enum": [
+              "false",
+              "true"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "Force"
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Deletes the AvailabilitySets resource."
-          },
           "202": {
             "description": "Accepted",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Tracking URL for long running operation.",
+                "type": "string"
+              },
+              "Location": {
                 "type": "string"
               }
             }
@@ -1555,7 +1656,10 @@
             "name": "availabilitySetName",
             "required": true,
             "type": "string",
-            "description": "Name of the AvailabilitySet."
+            "description": "Name of the AvailabilitySet.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "name": "body",
@@ -1574,14 +1678,13 @@
               "$ref": "#/definitions/AvailabilitySet"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/AvailabilitySet"
-            }
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1710,14 +1813,18 @@
             "name": "vmmServerName",
             "required": true,
             "type": "string",
-            "description": "Name of the VMMServer."
+            "description": "Name of the VMMServer.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "in": "path",
             "name": "inventoryItemName",
             "required": true,
             "type": "string",
-            "description": "Name of the inventoryItem."
+            "description": "Name of the inventoryItem.",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1734,6 +1841,12 @@
         "responses": {
           "200": {
             "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InventoryItem"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/InventoryItem"
             }
@@ -1773,14 +1886,18 @@
             "name": "vmmServerName",
             "required": true,
             "type": "string",
-            "description": "Name of the VMMServer."
+            "description": "Name of the VMMServer.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "in": "path",
             "name": "inventoryItemName",
             "required": true,
             "type": "string",
-            "description": "Name of the inventoryItem."
+            "description": "Name of the inventoryItem.",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1828,14 +1945,18 @@
             "name": "vmmServerName",
             "required": true,
             "type": "string",
-            "description": "Name of the VMMServer."
+            "description": "Name of the VMMServer.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "in": "path",
             "name": "inventoryItemName",
             "required": true,
             "type": "string",
-            "description": "Name of the inventoryItem."
+            "description": "Name of the inventoryItem.",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1885,7 +2006,10 @@
             "name": "vmmServerName",
             "required": true,
             "type": "string",
-            "description": "Name of the VMMServer."
+            "description": "Name of the VMMServer.",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2050,7 +2174,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2091,22 +2220,40 @@
             "name": "force",
             "description": "Whether force delete was specified.",
             "required": false,
-            "type": "boolean"
+            "type": "string",
+            "enum": [
+              "false",
+              "true"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "Force"
+            }
           },
           {
             "in": "query",
             "name": "deleteFromHost",
             "description": "Whether to disable the VM from azure and also delete it from VMM.",
             "required": false,
-            "type": "boolean"
+            "type": "string",
+            "enum": [
+              "false",
+              "true"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "DeleteFromHost"
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -2200,11 +2347,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2238,11 +2387,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2276,11 +2427,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2408,11 +2561,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2457,11 +2612,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2506,11 +2663,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2647,9 +2806,6 @@
           "200": {
             "description": "Success"
           },
-          "202": {
-            "description": "Accepted"
-          },
           "204": {
             "description": "No Content"
           },
@@ -2659,8 +2815,7 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/{resourceUri}/providers/Microsoft.ScVmm/virtualMachineInstances/default/guestAgents": {
@@ -2716,23 +2871,8 @@
       "type": "object",
       "properties": {
         "credentials": {
-          "type": "object",
           "description": "Credentials to connect to VMMServer.",
-          "properties": {
-            "username": {
-              "type": "string",
-              "description": "Username to use to connect to VMMServer."
-            },
-            "password": {
-              "type": "string",
-              "description": "Credentials to use to connect to VMMServer.",
-              "x-ms-mutability": [
-                "create",
-                "update"
-              ],
-              "x-ms-secret": true
-            }
-          }
+          "$ref": "#/definitions/VMMCredential"
         },
         "fqdn": {
           "type": "string",
@@ -3188,7 +3328,6 @@
         },
         "biosGuid": {
           "type": "string",
-          "format": "uuid",
           "description": "Gets or sets the bios guid for the vm."
         }
       },
@@ -3766,8 +3905,16 @@
       "properties": {
         "skipShutdown": {
           "description": "Gets or sets a value indicating whether to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Defaults to false.",
-          "type": "boolean",
-          "default": false
+          "type": "string",
+          "enum": [
+            "false",
+            "true"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SkipShutdown"
+          },
+          "default": "false"
         }
       }
     },
@@ -4297,7 +4444,6 @@
         "biosGuid": {
           "description": "Gets the bios guid.",
           "type": "string",
-          "format": "uuid",
           "readOnly": true
         },
         "managedMachineResourceId": {
@@ -4358,7 +4504,6 @@
       "properties": {
         "resourceUid": {
           "description": "The unique identifier for the resource.",
-          "format": "uuid",
           "type": "string"
         },
         "publicKey": {
@@ -4593,6 +4738,25 @@
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true
+      }
+    },
+    "VMMCredential": {
+      "description": "Credentials to connect to VMMServer.",
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "Username to use to connect to VMMServer.",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password to use to connect to VMMServer.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
       }
     }
   },
