@@ -981,6 +981,10 @@
             "name": "PhoneNumberCapabilityType",
             "modelAsString": true
           }
+        },
+        "tenDLCCampaignBriefId": {
+          "description": "Campaign Brief Id to attach to a number. For adding SMS to local numbers",
+          "type": "string"
         }
       }
     },
@@ -1375,7 +1379,7 @@
           }
         },
         "capabilities": {
-          "$ref": "#/definitions/PhoneNumberCapabilities"
+          "$ref": "#/definitions/PurchasedPhoneNumberCapabilities"
         },
         "assignmentType": {
           "description": "The assignment type of the phone number. A phone number can be assigned to a person, or to an application.",
@@ -1396,6 +1400,48 @@
         },
         "cost": {
           "$ref": "#/definitions/PhoneNumberCost"
+        }
+      }
+    },
+    "PurchasedPhoneNumberCapabilities": {
+      "description": "Capabilities of a phone number.",
+      "required": [
+        "calling",
+        "sms"
+      ],
+      "type": "object",
+      "properties": {
+        "calling": {
+          "description": "Capability value for calling.",
+          "enum": [
+            "none",
+            "inbound",
+            "outbound",
+            "inbound+outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberCapabilityType",
+            "modelAsString": true
+          }
+        },
+        "sms": {
+          "description": "Capability value for SMS.",
+          "enum": [
+            "none",
+            "inbound",
+            "outbound",
+            "inbound+outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberCapabilityType",
+            "modelAsString": true
+          }
+        },
+        "tenDLCCampaignBriefId": {
+          "description": "Ten DLC campaign brief id attached to the number",
+          "type": "string"
         }
       }
     },
