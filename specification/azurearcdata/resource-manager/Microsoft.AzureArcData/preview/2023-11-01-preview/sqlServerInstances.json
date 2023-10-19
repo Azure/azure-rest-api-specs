@@ -606,9 +606,12 @@
           },
           "default": "Average"
         },
-        "databaseName": {
-          "type": "string",
-          "description": "The name of the database to fetch telemetry for. If not specified, telemetry for all the databases will be fetched."
+        "databaseNames": {
+          "type": "array",
+          "description": "The list of database names to return telemetry for. If not specified, telemetry for all databases will be aggregated and returned.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
