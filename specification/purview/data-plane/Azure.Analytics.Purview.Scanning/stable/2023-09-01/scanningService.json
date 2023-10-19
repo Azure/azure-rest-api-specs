@@ -57,6 +57,9 @@
             "name": "azureKeyVaultName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -105,6 +108,9 @@
             "schema": {
               "$ref": "#/definitions/AzureKeyVault"
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -148,6 +154,9 @@
             "name": "azureKeyVaultName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -178,7 +187,11 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -219,6 +232,9 @@
             "name": "classificationRuleName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -266,6 +282,9 @@
             "schema": {
               "$ref": "#/definitions/ClassificationRule"
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -309,6 +328,9 @@
             "name": "classificationRuleName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -339,7 +361,11 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -380,6 +406,9 @@
             "name": "classificationRuleName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -443,6 +472,9 @@
               "name": "ClassificationAction",
               "modelAsString": true
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -483,6 +515,9 @@
             "name": "collectionName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -525,6 +560,9 @@
             "name": "credentialName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -573,6 +611,9 @@
             "schema": {
               "$ref": "#/definitions/Credential"
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -616,6 +657,9 @@
             "name": "credentialName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -646,7 +690,11 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -697,6 +745,9 @@
             "schema": {
               "$ref": "#/definitions/DataSource"
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -740,6 +791,9 @@
             "name": "dataSourceName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -777,6 +831,9 @@
             "name": "dataSourceName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -807,7 +864,11 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -854,6 +915,9 @@
             "name": "scanName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -907,6 +971,9 @@
             "schema": {
               "$ref": "#/definitions/Filter"
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1067,15 +1134,15 @@
             "$ref": "#/parameters/integrationRuntimeName"
           },
           {
-            "$ref": "#/parameters/api-version"
-          },
-          {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/IntegrationRuntime"
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1201,15 +1268,15 @@
             "$ref": "#/parameters/integrationRuntimeName"
           },
           {
-            "$ref": "#/parameters/api-version"
-          },
-          {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/IntegrationRuntimeRegenerateKeyParameters"
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1287,9 +1354,6 @@
             "$ref": "#/parameters/integrationRuntimeName"
           },
           {
-            "$ref": "#/parameters/api-version"
-          },
-          {
             "description": "The request of enabling interactive query for integration runtime.",
             "in": "body",
             "name": "body",
@@ -1297,6 +1361,9 @@
             "schema": {
               "$ref": "#/definitions/EnableInteractiveQueryForIntegrationRuntimeRequest"
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1412,9 +1479,6 @@
             "$ref": "#/parameters/managedVirtualNetworkName"
           },
           {
-            "$ref": "#/parameters/api-version"
-          },
-          {
             "description": "Managed virtual network resource definition.",
             "name": "body",
             "in": "body",
@@ -1422,6 +1486,9 @@
             "schema": {
               "$ref": "#/definitions/ManagedVirtualNetwork"
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1594,9 +1661,6 @@
             "$ref": "#/parameters/managedPrivateEndpointName"
           },
           {
-            "$ref": "#/parameters/api-version"
-          },
-          {
             "description": "Managed private endpoint resource definition.",
             "in": "body",
             "name": "body",
@@ -1604,6 +1668,9 @@
             "schema": {
               "$ref": "#/definitions/ManagedPrivateEndpoint"
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1666,6 +1733,9 @@
             "schema": {
               "$ref": "#/definitions/Scan"
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1715,6 +1785,9 @@
             "name": "scanName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1758,6 +1831,9 @@
             "name": "scanName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1794,6 +1870,9 @@
             "name": "dataSourceName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1861,6 +1940,9 @@
               "name": "ScanLevelType",
               "modelAsString": true
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1911,6 +1993,9 @@
             "name": "runId",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1962,6 +2047,9 @@
             "name": "runId",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2008,6 +2096,9 @@
             "name": "scanName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2050,6 +2141,9 @@
             "name": "scanRulesetName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2097,6 +2191,9 @@
             "schema": {
               "$ref": "#/definitions/ScanRuleset"
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2140,6 +2237,9 @@
             "name": "scanRulesetName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2170,7 +2270,11 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -2205,7 +2309,11 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -2278,6 +2386,9 @@
               "name": "DataSourceType",
               "modelAsString": true
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2355,6 +2466,9 @@
             "required": true,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2425,6 +2539,9 @@
               "name": "DataSourceType",
               "modelAsString": true
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2495,6 +2612,9 @@
               "name": "DataSourceType",
               "modelAsString": true
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2543,6 +2663,9 @@
             "name": "scanName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2597,6 +2720,9 @@
             "schema": {
               "$ref": "#/definitions/Trigger"
             }
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2646,6 +2772,9 @@
             "name": "scanName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2688,6 +2817,9 @@
             "name": "scanName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -2733,6 +2865,9 @@
             "name": "scanName",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
