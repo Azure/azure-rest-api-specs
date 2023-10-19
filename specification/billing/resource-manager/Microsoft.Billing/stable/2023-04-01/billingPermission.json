@@ -133,9 +133,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The check access Request object.",
+            "description": "The request object against which access of the caller will be checked.",
             "schema": {
-              "$ref": "#/definitions/BillingCheckAccessRequest"
+              "$ref": "#/definitions/CheckAccessRequest"
             }
           }
         ],
@@ -145,7 +145,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/BillingCheckAccessResponse"
+                "$ref": "#/definitions/CheckAccessResponse"
               },
               "x-ms-identifiers": []
             }
@@ -247,9 +247,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The check access Request object.",
+            "description": "The request object against which access of the caller will be checked.",
             "schema": {
-              "$ref": "#/definitions/BillingCheckAccessRequest"
+              "$ref": "#/definitions/CheckAccessRequest"
             }
           }
         ],
@@ -259,7 +259,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/BillingCheckAccessResponse"
+                "$ref": "#/definitions/CheckAccessResponse"
               },
               "x-ms-identifiers": []
             }
@@ -361,9 +361,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The check access Request object.",
+            "description": "The request object against which access of the caller will be checked.",
             "schema": {
-              "$ref": "#/definitions/BillingCheckAccessRequest"
+              "$ref": "#/definitions/CheckAccessRequest"
             }
           }
         ],
@@ -373,7 +373,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/BillingCheckAccessResponse"
+                "$ref": "#/definitions/CheckAccessResponse"
               },
               "x-ms-identifiers": []
             }
@@ -418,9 +418,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The check access Request object.",
+            "description": "The request object against which access of the caller will be checked.",
             "schema": {
-              "$ref": "#/definitions/BillingCheckAccessRequest"
+              "$ref": "#/definitions/CheckAccessRequest"
             }
           }
         ],
@@ -430,7 +430,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/BillingCheckAccessResponse"
+                "$ref": "#/definitions/CheckAccessResponse"
               },
               "x-ms-identifiers": []
             }
@@ -526,9 +526,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The check access Request object.",
+            "description": "The request object against which access of the caller will be checked.",
             "schema": {
-              "$ref": "#/definitions/BillingCheckAccessRequest"
+              "$ref": "#/definitions/CheckAccessRequest"
             }
           }
         ],
@@ -538,7 +538,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/BillingCheckAccessResponse"
+                "$ref": "#/definitions/CheckAccessResponse"
               },
               "x-ms-identifiers": []
             }
@@ -634,9 +634,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The check access Request object.",
+            "description": "The request object against which access of the caller will be checked.",
             "schema": {
-              "$ref": "#/definitions/BillingCheckAccessRequest"
+              "$ref": "#/definitions/CheckAccessRequest"
             }
           }
         ],
@@ -646,7 +646,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/BillingCheckAccessResponse"
+                "$ref": "#/definitions/CheckAccessResponse"
               },
               "x-ms-identifiers": []
             }
@@ -667,37 +667,6 @@
     }
   },
   "definitions": {
-    "BillingCheckAccessRequest": {
-      "type": "object",
-      "properties": {
-        "actions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "BillingCheckAccessResponse": {
-      "type": "object",
-      "properties": {
-        "accessDecision": {
-          "enum": [
-            "NotAllowed",
-            "Allowed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AccessDecision",
-            "modelAsString": true
-          }
-        },
-        "action": {
-          "type": "string"
-        }
-      }
-    },
     "BillingPermission": {
       "description": "The set of allowed action and not allowed actions a caller has on a resource.",
       "type": "object",
@@ -720,7 +689,8 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
-      }
+      },
+      "readOnly": true
     },
     "BillingPermissionListResult": {
       "description": "A container for a list of resources",
@@ -739,6 +709,45 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "CheckAccessRequest": {
+      "description": "Request to check access.",
+      "type": "object",
+      "properties": {
+        "actions": {
+          "description": "List of actions passed in the request body against which the permissions will be checked.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CheckAccessResponse": {
+      "description": "The properties of a check access response.",
+      "type": "object",
+      "properties": {
+        "accessDecision": {
+          "description": "Access Decision, specifies access is allowed or not.",
+          "enum": [
+            "Other",
+            "Allowed",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AccessDecision",
+            "modelAsString": true
+          }
+        },
+        "action": {
+          "description": "Gets or sets an action.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
