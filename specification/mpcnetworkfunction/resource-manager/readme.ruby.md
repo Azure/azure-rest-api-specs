@@ -8,6 +8,14 @@ package-version: 2023-10-15
 azure-arm: true
 ```
 
+### Ruby multi-api
+
+``` yaml $(ruby) && $(multiapi)
+batch:
+  - tag: package-2023-10-15
+  - tag: package-2023-05-15-preview
+```
+
 ### Tag: package-2023-10-15 and ruby
 
 These settings apply only when `--tag=package-2023-10-15 --ruby` is specified on the command line.

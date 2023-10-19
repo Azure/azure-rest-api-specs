@@ -9,5 +9,6 @@ typescript:
   package-name: "@azure/arm-mpcnetworkfunction"
   output-folder: "$(typescript-sdks-folder)/sdk/mpcnetworkfunction/arm-mpcnetworkfunction"
   payload-flattening-threshold: 1
+  clear-output-folder: true
   generate-metadata: true
 ```
