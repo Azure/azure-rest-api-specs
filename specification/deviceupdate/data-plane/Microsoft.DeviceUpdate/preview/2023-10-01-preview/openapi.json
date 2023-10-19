@@ -1526,7 +1526,7 @@
           {
             "name": "groupId",
             "in": "path",
-            "description": "Group identifier.",
+            "description": "Group identity. This is created from the value of the ADUGroup tag in the Iot\nHub's device/module twin or $default for devices with no tag.",
             "required": true,
             "type": "string"
           },
@@ -1536,6 +1536,9 @@
             "description": "Restricts the set of device class subgroups returned. You can filter on compat\nproperties by name and value. (i.e. filter=compatProperties/propertyName1 eq\n'value1' and compatProperties/propertyName2 eq 'value2')",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -1543,6 +1546,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedDeviceClassSubgroup"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -1581,16 +1591,31 @@
           {
             "name": "groupId",
             "in": "path",
-            "description": "Group identifier.",
+            "description": "Group identity. This is created from the value of the ADUGroup tag in the Iot\nHub's device/module twin or $default for devices with no tag.",
             "required": true,
             "type": "string"
           },
           {
             "name": "deviceClassId",
             "in": "path",
-            "description": "Device class identifier.",
+            "description": "Device class subgroup identity. This is generated from the model Id and the\ncompat properties reported by the device update agent in the Device Update PnP\ninterface in IoT Hub. It is a hex-encoded SHA1 hash.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -1598,6 +1623,17 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DeviceClassSubgroup"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -1631,21 +1667,57 @@
           {
             "name": "groupId",
             "in": "path",
-            "description": "Group identifier.",
+            "description": "Group identity. This is created from the value of the ADUGroup tag in the Iot\nHub's device/module twin or $default for devices with no tag.",
             "required": true,
             "type": "string"
           },
           {
             "name": "deviceClassId",
             "in": "path",
-            "description": "Device class identifier.",
+            "description": "Device class subgroup identity. This is generated from the model Id and the\ncompat properties reported by the device update agent in the Device Update PnP\ninterface in IoT Hub. It is a hex-encoded SHA1 hash.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ]
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3291,7 +3363,8 @@
       "properties": {
         "deviceClassId": {
           "type": "string",
-          "description": "Device class subgroup identity. This is generated from the model Id and the\ncompat properties reported by the device update agent in the Device Update PnP\ninterface in IoT Hub. It is a hex-encoded SHA1 hash."
+          "description": "Device class subgroup identity. This is generated from the model Id and the\ncompat properties reported by the device update agent in the Device Update PnP\ninterface in IoT Hub. It is a hex-encoded SHA1 hash.",
+          "readOnly": true
         },
         "groupId": {
           "type": "string",
@@ -4335,7 +4408,7 @@
     },
     "PagedDeviceClassSubgroup": {
       "type": "object",
-      "description": "The list of device class subgroups within a group.",
+      "description": "Paged collection of DeviceClassSubgroup items",
       "properties": {
         "value": {
           "type": "array",

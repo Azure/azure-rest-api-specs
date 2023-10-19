@@ -826,19 +826,21 @@ state is not Failed.
   devicesCanceledCount?: int32;
 }
 
-/** The list of device class subgroups within a group. */
-model DeviceClassSubgroupsList is Azure.Core.Page<DeviceClassSubgroup>;
-
-@doc("""
-Device class subgroup details. A device class subgroup is a subset of devices
-in a group that share the same device class id.
-""")
+/**
+ * Device class subgroup details. A device class subgroup is a subset of devices
+ * in a group that share the same device class id.
+ */
+@resource("deviceClassSubgroups")
+@parentResource(Group)
 model DeviceClassSubgroup {
-  @doc("""
-Device class subgroup identity. This is generated from the model Id and the
-compat properties reported by the device update agent in the Device Update PnP
-interface in IoT Hub. It is a hex-encoded SHA1 hash.
-""")
+  /**
+   * Device class subgroup identity. This is generated from the model Id and the
+   * compat properties reported by the device update agent in the Device Update PnP
+   * interface in IoT Hub. It is a hex-encoded SHA1 hash.
+   */
+  @key
+  @path
+  @visibility("read")
   deviceClassId: string;
 
   /** Group identity. */

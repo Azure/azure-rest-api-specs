@@ -461,7 +461,7 @@ updates available, or are in progress receiving new updates.
 
   /** Gets the device group properties. */
   getGroup is ServiceOperations.ResourceRead<Group>;
-  
+
   /**
    * Deletes a device group. This group is automatically created when a Device
    * Update-enabled device is connected to the hub and reports its properties.
@@ -472,7 +472,6 @@ updates available, or are in progress receiving new updates.
    * deleted it will be automatically re-created but there will be no history.
    */
   deleteGroup is ServiceOperations.ResourceDelete<Group>;
-
 
   @doc("""
 Get device group update compliance information such as how many devices are on
@@ -603,7 +602,7 @@ the deployment are in progress, completed, or failed.
 """)
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}/status")
   @get
-  GetDeploymentStatus is Azure.Core.Foundations.Operation<
+  getDeploymentStatus is Azure.Core.Foundations.Operation<
     {
       /** The Device Update for IoT Hub account instance identifier. */
       @path
@@ -620,86 +619,42 @@ the deployment are in progress, completed, or failed.
     DeploymentStatus
   >;
 
-  @doc("""
-Get the device class subgroups for the group. A device class subgroup is the
-set of devices within the group that share the same device class. All devices
-within the same device class are compatible with the same updates.
-""")
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups")
-  @get
-  ListDeviceClassSubgroupsForGroup is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
-
-      @doc("""
-Restricts the set of device class subgroups returned. You can filter on compat
-properties by name and value. (i.e. filter=compatProperties/propertyName1 eq
-'value1' and compatProperties/propertyName2 eq 'value2')
-""")
+  /**
+   * Get the device class subgroups for the group. A device class subgroup is the
+   * set of devices within the group that share the same device class. All devices
+   * within the same device class are compatible with the same updates.
+   */
+  listDeviceClassSubgroupsForGroup is ServiceOperations.ResourceList<
+    DeviceClassSubgroup,
+    ListQueryParametersTrait<{
+      /**
+       * Restricts the set of device class subgroups returned. You can filter on compat
+       * properties by name and value. (i.e. filter=compatProperties/propertyName1 eq
+       * 'value1' and compatProperties/propertyName2 eq 'value2')
+       */
       @query
       filter: string;
-    },
-    DeviceClassSubgroupsList
+    }>
   >;
 
-  @doc("""
-Gets device class subgroup details. A device class subgroup is the set of
-devices within the group that share the same device class. All devices within
-the same device class are compatible with the same updates.
-""")
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}")
-  @get
-  GetDeviceClassSubgroup is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
-
-      /** Device class identifier. */
-      @path
-      deviceClassId: string;
-    },
-    DeviceClassSubgroup
-  >;
-
-  @doc("""
-Deletes a device class subgroup. This subgroup is automatically created when a
-Device Update-enabled device is connected to the hub and reports its
-properties. Groups, subgroups, and deployments are not automatically cleaned up
-but are retained for history purposes. Users can call this method to delete a
-subgroup if they do not need to retain any of the history of the subgroup and
-no longer need it. If a device is ever connected again for this subgroup after
-the subgroup was deleted it will be automatically re-created but there will be
-no history.
-""")
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}")
-  @delete
-  DeleteDeviceClassSubgroup is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
-
-      /** Device class identifier. */
-      @path
-      deviceClassId: string;
-    },
-    void
-  >;
+  /**
+   * Gets device class subgroup details. A device class subgroup is the set of
+   * devices within the group that share the same device class. All devices within
+   * the same device class are compatible with the same updates.
+   */
+  getDeviceClassSubgroup is ServiceOperations.ResourceRead<DeviceClassSubgroup>;
+  
+  /**
+   * Deletes a device class subgroup. This subgroup is automatically created when a
+   * Device Update-enabled device is connected to the hub and reports its
+   * properties. Groups, subgroups, and deployments are not automatically cleaned up
+   * but are retained for history purposes. Users can call this method to delete a
+   * subgroup if they do not need to retain any of the history of the subgroup and
+   * no longer need it. If a device is ever connected again for this subgroup after
+   * the subgroup was deleted it will be automatically re-created but there will be
+   * no history.
+   */
+  deleteDeviceClassSubgroup is ServiceOperations.ResourceDelete<DeviceClassSubgroup>;
 
   @doc("""
 Get device class subgroup update compliance information such as how many
