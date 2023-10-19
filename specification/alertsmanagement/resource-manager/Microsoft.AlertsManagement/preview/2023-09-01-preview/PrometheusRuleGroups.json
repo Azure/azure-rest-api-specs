@@ -57,7 +57,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List Subscription Resource PrometheusRuleGroups": {
@@ -99,7 +99,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List Resource group PrometheusRuleGroups": {
@@ -384,7 +384,21 @@
         "scopes": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Monitor/accounts"
+                },
+                {
+                  "type": "Microsoft.ContainerService/managedClusters"
+                },
+                {
+                  "type": "microsoft.kubernetes/connectedClusters"
+                }
+              ]
+            }
           },
           "description": "Target Azure Monitor workspaces resource ids. This api-version is currently limited to creating with one scope. This may change in future."
         },
@@ -498,7 +512,15 @@
       "properties": {
         "actionGroupId": {
           "type": "string",
-          "description": "The resource id of the action group to use."
+          "description": "The resource id of the action group to use.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Insights/actionGroups"
+              }
+            ]
+          }
         },
         "actionProperties": {
           "type": "object",
