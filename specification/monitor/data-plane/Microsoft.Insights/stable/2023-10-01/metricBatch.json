@@ -83,7 +83,7 @@
             "$ref": "#/parameters/MetricBatchFilterParameter"
           },
           {
-            "$ref": "../../../../resource-manager/Microsoft.Insights/stable/2021-05-01/metrics_API.json#/parameters/AutoAdjustTimegrain"
+            "$ref": "#/parameters/MetricBatchAutoAdjustTimegrain"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -144,7 +144,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "format": "datetime",
+      "format": "time",
       "description": "The start time of the query. It is a string in the format 'yyyy-MM-ddTHH:mm:ss.fffZ'. If you have specified the endtime parameter, then this parameter is required.\nIf only starttime is specified, then endtime defaults to the current time.\nIf no time interval is specified, the default is 1 hour.",
       "x-ms-parameter-location": "method"
     },
@@ -153,7 +153,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "format": "datetime",
+      "format": "time",
       "description": "The end time of the query. It is a string in the format 'yyyy-MM-ddTHH:mm:ss.fffZ'.",
       "x-ms-parameter-location": "method"
     },
@@ -192,6 +192,14 @@
       "required": false,
       "type": "string",
       "description": "The filter is used to reduce the set of metric data returned.<br>Example:<br>Metric contains metadata A, B and C.<br>- Return all time series of C where A = a1 and B = b1 or b2<br>**filter=A eq ‘a1’ and B eq ‘b1’ or B eq ‘b2’ and C eq ‘*’**<br>- Invalid variant:<br>**filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘*’ or B = ‘b2’**<br>This is invalid because the logical or operator cannot separate two different metadata names.<br>- Return all time series where A = a1, B = b1 and C = c1:<br>**filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘c1’**<br>- Return all time series where A = a1<br>**filter=A eq ‘a1’ and B eq ‘*’ and C eq ‘*’**.",
+      "x-ms-parameter-location": "method"
+    },
+    "MetricBatchAutoAdjustTimegrain": {
+      "name": "autoAdjustTimegrain",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "When set to true, if the timespan passed in is not supported by this metric, the API will return the result using the closest supported timespan. When set to false, an error is returned for invalid timespan parameters. Defaults to false.",
       "x-ms-parameter-location": "method"
     }
   },
