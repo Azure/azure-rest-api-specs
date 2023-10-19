@@ -29,13 +29,25 @@ title: EdgeMarketPlaceClient
 description: Edge marketplace extensions
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-08
+tag: package-2023-08-01
 ```
-### Tag: package-2023-08
 
-These settings apply only when `--tag=package-2023-08` is specified on the command line.
+### Tag: package-2023-08-01-preview
 
-```yaml $(tag) == 'package-2023-08'
+These settings apply only when `--tag=package-2023-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08-01-preview'
+input-file:
+  - Microsoft.EdgeMarketPlace/preview/2023-08-01-preview/publishers.json
+  - Microsoft.EdgeMarketPlace/preview/2023-08-01-preview/operations.json
+  - Microsoft.EdgeMarketPlace/preview/2023-08-01-preview/offers.json
+```
+
+### Tag: package-2023-08-01
+
+These settings apply only when `--tag=package-2023-08-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08-01'
 input-file:
   - Microsoft.EdgeMarketPlace/stable/2023-08-01/publishers.json
   - Microsoft.EdgeMarketPlace/stable/2023-08-01/operations.json
