@@ -480,6 +480,9 @@
             "description": "Restricts the set of devices for which device health is returned. You can\nfilter on status, device id and module id.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -487,6 +490,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedDeviceHealth"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -521,6 +531,9 @@
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -528,6 +541,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedLogCollection"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -566,9 +586,24 @@
           {
             "name": "operationId",
             "in": "path",
-            "description": "Log collection identifier.",
+            "description": "The log collection id.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -576,6 +611,17 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/LogCollection"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -609,17 +655,38 @@
           {
             "name": "operationId",
             "in": "path",
-            "description": "Log collection identifier.",
+            "description": "The log collection id.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "logCollection",
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
             "in": "body",
-            "description": "The log collection properties.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LogCollection"
+              "$ref": "#/definitions/LogCollectionCreateOrUpdate"
             }
           }
         ],
@@ -628,6 +695,50 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/LogCollection"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ]
+              },
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/LogCollection"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ]
+              },
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -2581,16 +2692,21 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
             "name": "updateToImport",
             "in": "body",
-            "description": "The update to be imported (see schema\nhttps://json.schemastore.org/azure-deviceupdate-import-manifest-5.0.json for\ndetails).",
+            "description": "The update to be imported (see schema https://json.schemastore.org/azure-deviceupdate-import-manifest-5.0.json for details).",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ImportUpdateInputItem"
-              },
-              "x-ms-identifiers": []
+              "$ref": "#/definitions/ImportUpdateInput"
             }
           }
         ],
@@ -2599,10 +2715,22 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Update"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ]
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3278,7 +3406,8 @@
       "properties": {
         "deviceId": {
           "type": "string",
-          "description": "Device id"
+          "description": "Device id",
+          "readOnly": true
         },
         "moduleId": {
           "type": "string",
@@ -3673,6 +3802,16 @@
         ]
       }
     },
+    "ImportUpdateInput": {
+      "type": "array",
+      "description": "Import update input metadata.",
+      "minItems": 1,
+      "maxItems": 11,
+      "items": {
+        "$ref": "#/definitions/ImportUpdateInputItem"
+      },
+      "x-ms-identifiers": []
+    },
     "ImportUpdateInputItem": {
       "type": "object",
       "description": "Import update input item metadata.",
@@ -3802,7 +3941,7 @@
         "operationId": {
           "type": "string",
           "description": "The log collection id.",
-          "x-ms-client-name": "logCollectionId"
+          "readOnly": true
         },
         "deviceList": {
           "type": "array",
@@ -3830,6 +3969,28 @@
           "$ref": "#/definitions/OperationStatus",
           "description": "Operation status.",
           "readOnly": true
+        }
+      },
+      "required": [
+        "operationId",
+        "deviceList"
+      ]
+    },
+    "LogCollectionCreateOrUpdate": {
+      "type": "object",
+      "description": "Diagnostics request body",
+      "properties": {
+        "deviceList": {
+          "type": "array",
+          "description": "Array of Device Update agent ids",
+          "items": {
+            "$ref": "#/definitions/DeviceUpdateAgentId"
+          },
+          "x-ms-identifiers": []
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the diagnostics operation."
         }
       },
       "required": [
@@ -4116,7 +4277,7 @@
     },
     "PagedDeviceHealth": {
       "type": "object",
-      "description": "Array of Device Health, with server paging support.",
+      "description": "Paged collection of DeviceHealth items",
       "properties": {
         "value": {
           "type": "array",
@@ -4182,7 +4343,7 @@
     },
     "PagedLogCollection": {
       "type": "object",
-      "description": "The list of log collections with server paging support.",
+      "description": "Paged collection of LogCollection items",
       "properties": {
         "value": {
           "type": "array",
@@ -4780,6 +4941,44 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "clientRequestId"
     },
+    "Azure.Core.ConditionalRequestHeaders.ifMatch": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "The request should only proceed if an entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifModifiedSince": {
+      "name": "If-Modified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifModifiedSince"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifNoneMatch": {
+      "name": "If-None-Match",
+      "in": "header",
+      "description": "The request should only proceed if no entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifNoneMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince": {
+      "name": "If-Unmodified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was not modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifUnmodifiedSince"
+    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -4789,6 +4988,25 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent": {
+      "name": "Repeatability-First-Sent",
+      "in": "header",
+      "description": "Specifies the date and time at which the request was first created.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityFirstSent"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId": {
+      "name": "Repeatability-Request-ID",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityRequestId"
     },
     "InstanceIdParameter": {
       "name": "instanceId",

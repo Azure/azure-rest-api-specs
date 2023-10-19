@@ -31,27 +31,21 @@ interface DeviceUpdateOperations {
     }>
   >;
 
-  @doc("""
-Import new update version. This is a long-running-operation; use
-Operation-Location response header value to check for operation status.
-""")
-  @route("/deviceUpdate/{instanceId}/updates:import")
+  /**
+   * Import new update version. This is a long-running-operation; use
+   * Operation-Location response header value to check for operation status.
+   */
   @post
-  importUpdate is Azure.Core.Foundations.Operation<
+  @action("import")
+  importUpdate is ServiceOperations.ResourceCollectionAction<
+    Update,
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      @doc("""
-The update to be imported (see schema
-https://json.schemastore.org/azure-deviceupdate-import-manifest-5.0.json for
-details).
-""")
-      @body
-      updateToImport: ImportUpdateInputItem[];
+      /**
+       * The update to be imported (see schema https://json.schemastore.org/azure-deviceupdate-import-manifest-5.0.json for details).
+       */
+      @body updateToImport: ImportUpdateInput;
     },
-    Update | void
+    Update
   >;
 
   /** Get a specific update version. */
@@ -1022,58 +1016,18 @@ not greater than the specified value n.
     DeviceOperationsList
   >;
 
-  /** Start the device diagnostics log collection on specified devices. */
-  @route("/deviceUpdate/{instanceId}/management/deviceDiagnostics/logCollections/{operationId}")
-  @put
-  StartLogCollection is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Log collection identifier. */
-      @path
-      operationId: string;
-
-      /** The log collection properties. */
-      @body
-      logCollection: LogCollection;
-    },
-    LogCollection
-  >;
+  /** Get all device diagnostics log collections */
+  listLogCollections is ServiceOperations.ResourceList<LogCollection>;
 
   /** Get the device diagnostics log collection */
-  @route("/deviceUpdate/{instanceId}/management/deviceDiagnostics/logCollections/{operationId}")
-  @get
-  GetLogCollection is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
+  getLogCollection is ServiceOperations.ResourceRead<LogCollection>;
 
-      /** Log collection identifier. */
-      @path
-      operationId: string;
-    },
-    LogCollection
-  >;
-
-  /** Get all device diagnostics log collections */
-  @route("/deviceUpdate/{instanceId}/management/deviceDiagnostics/logCollections")
-  @get
-  ListLogCollections is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-    },
-    LogCollectionList
-  >;
+  /** Start the device diagnostics log collection on specified devices. */
+  startLogCollection is ServiceOperations.ResourceCreateOrReplace<LogCollection>;
 
   /** Get log collection with detailed status */
   @route("/deviceUpdate/{instanceId}/management/deviceDiagnostics/logCollections/{operationId}/detailedStatus")
-  @get
-  GetLogCollectionDetailedStatus is Azure.Core.Foundations.Operation<
+  getLogCollectionDetailedStatus is Azure.Core.Foundations.Operation<
     {
       /** The Device Update for IoT Hub account instance identifier. */
       @path
@@ -1087,22 +1041,16 @@ not greater than the specified value n.
   >;
 
   /** Get list of device health */
-  @route("/deviceUpdate/{instanceId}/management/deviceDiagnostics/deviceHealth")
-  @get
-  ListHealthOfDevices is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      @doc("""
-Restricts the set of devices for which device health is returned. You can
-filter on status, device id and module id.
-""")
+  listHealthOfDevices is ServiceOperations.ResourceList<
+    DeviceHealth,
+    ListQueryParametersTrait<{
+      /**
+       * Restricts the set of devices for which device health is returned. You can
+       * filter on status, device id and module id.
+       */
       @query
       filter: string;
-    },
-    DeviceHealthList
+    }>
   >;
 }
 
@@ -1113,7 +1061,7 @@ groups.
 """)
   @route("/deviceUpdate/{instanceId}/limits")
   @get
-  GetLimits is Azure.Core.Foundations.Operation<
+  getLimits is Azure.Core.Foundations.Operation<
     {
       /** The Device Update for IoT Hub account instance identifier. */
       @path

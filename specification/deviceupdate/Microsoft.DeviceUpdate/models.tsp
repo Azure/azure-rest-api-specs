@@ -300,6 +300,11 @@ model ImportUpdateInputItem {
   files?: FileImportMetadata[];
 }
 
+/** Import update input metadata. */
+@minItems(1)
+@maxItems(11)
+model ImportUpdateInput is ImportUpdateInputItem[];
+
 @doc("""
 Metadata describing the import manifest, a document which describes the files
 and other metadata about an update version.
@@ -609,10 +614,10 @@ model UpdateCompliance {
   updatesInProgressDeviceCount: int32;
 }
 
-@doc("""
-The list of limits of how many of each resource are currently in use and how
-many are allowed.
-""")
+/**
+ * The list of limits of how many of each resource are currently in use and how
+ * many are allowed.
+ */
 model LimitsResponse {
   @doc("""
 The list of current counts of each limited resource and the maximum quota that
@@ -904,10 +909,14 @@ troubleshooting.
 model DeviceOperationsList is Azure.Core.Page<DeviceOperation>;
 
 /** Diagnostics request body */
+@resource("management/deviceDiagnostics/logCollections")
+@parentResource(Instance)
 model LogCollection {
   /** The log collection id. */
-  @projectedName("json", "operationId")
-  logCollectionId?: string;
+  @key
+  @path
+  @visibility("read")
+  operationId: string;
 
   /** Array of Device Update agent ids */
   deviceList: DeviceUpdateAgentId[];
@@ -936,9 +945,6 @@ model DeviceUpdateAgentId {
   /** Module Id */
   moduleId?: string;
 }
-
-/** The list of log collections with server paging support. */
-model LogCollectionList is Azure.Core.Page<LogCollection>;
 
 /** Device diagnostics operation detailed status */
 model LogCollectionOperationDetailedStatus {
@@ -983,12 +989,14 @@ model LogCollectionOperationDeviceStatus {
   logLocation?: string;
 }
 
-/** Array of Device Health, with server paging support. */
-model DeviceHealthList is Azure.Core.Page<DeviceHealth>;
-
 /** Device Health */
+@resource("management/deviceDiagnostics/deviceHealth")
+@parentResource(Instance)
 model DeviceHealth {
   /** Device id */
+  @key
+  @path
+  @visibility("read")
   deviceId: string;
 
   /** Module id */
