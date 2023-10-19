@@ -836,7 +836,7 @@
       }
     }
   },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}": {
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterName}": {
     "get": {
       "tags": [
         "NetworkSecurityPerimeterConfiguration"
@@ -857,10 +857,7 @@
           "$ref": "#/parameters/PrivateLinkScopeName"
         },
         {
-          "$ref": "#/parameters/PerimeterGuid"
-        },
-        {
-          "$ref": "#/parameters/AssociationName"
+          "$ref": "#/parameters/PerimeterName"
         }
       ],
       "responses": {
@@ -929,7 +926,7 @@
       }
     }
   },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile": {
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterName}/reconcile": {
     "post": {
       "tags": [
         "NetworkSecurityPerimeterConfiguration"
@@ -950,10 +947,7 @@
           "$ref": "#/parameters/PrivateLinkScopeName"
         },
         {
-          "$ref": "#/parameters/PerimeterGuid"
-        },
-        {
-          "$ref": "#/parameters/AssociationName"
+          "$ref": "#/parameters/PerimeterName"
         }
       ],
       "responses": {
@@ -1882,19 +1876,12 @@
       "description": "The id (Guid) of the Azure Arc Network Configuration Scope resource.",
       "x-ms-parameter-location": "method"
     },
-    "PerimeterGuid": {
-      "name": "perimeterGuid",
+    "PerimeterName":{
+      "name": "perimeterName",
       "in":"path",
       "required":true,
       "type":"string",
-      "description": "The id (Guid) of the Network Security Perimeter resource."
-    },
-    "AssociationName":{
-      "name": "associationName",
-      "in":"path",
-      "required":true,
-      "type":"string",
-      "description":"The name of the resource association resource which represents an association between a private link scope and Network Security Perimeter Profile"
+      "description": "The name, in the format {perimeterGuid}.{associationName}, of the Network Security Perimeter resource."
     }
   }
 }
