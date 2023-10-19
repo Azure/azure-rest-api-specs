@@ -73,6 +73,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Operations Environment": {
+            "$ref": "./examples/Environment_Operations.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -105,6 +110,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Environment": {
+            "$ref": "./examples/Environment_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -144,12 +154,62 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get Environment": {
+            "$ref": "./examples/Environment_ListByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/autopilotEnvironments/{resourceName}": {
+      "get": {
+        "operationId": "Environment_Get",
+        "tags": [
+          "Environment"
+        ],
+        "description": "Get a EnvironmentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Environment": {
+            "$ref": "./examples/Environment_Get.json"
+          }
+        }
+      },
       "put": {
         "operationId": "Environment_CreateOrUpdate",
         "tags": [

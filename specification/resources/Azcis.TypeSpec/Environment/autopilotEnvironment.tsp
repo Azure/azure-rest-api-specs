@@ -51,6 +51,7 @@ interface Environment {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<EnvironmentResource>;
   listBySubscription is ArmListBySubscription<EnvironmentResource>;
   listByResourceGroup is ArmResourceListByParent<EnvironmentResource>;
+  get is ArmResourceRead<EnvironmentResource>;
 }
 
 @doc("Provisioning status of the resource.")
