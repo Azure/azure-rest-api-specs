@@ -25,7 +25,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the edgemarketplace.
 
 ``` yaml
-title: EdgeMarketPlaceClient
+title: EdgeMarketplaceClient
 description: Edge marketplace extensions
 openapi-type: arm
 openapi-subtype: rpaas
@@ -37,9 +37,9 @@ These settings apply only when `--tag=package-2023-08-preview` is specified on t
 
 ```yaml $(tag) == 'package-2023-08-preview'
 input-file:
-  - Microsoft.EdgeMarketPlace/preview/2023-08-01-preview/publishers.json
-  - Microsoft.EdgeMarketPlace/preview/2023-08-01-preview/operations.json
-  - Microsoft.EdgeMarketPlace/preview/2023-08-01-preview/offers.json
+  - Microsoft.EdgeMarketplace/preview/2023-08-01-preview/publishers.json
+  - Microsoft.EdgeMarketplace/preview/2023-08-01-preview/operations.json
+  - Microsoft.EdgeMarketplace/preview/2023-08-01-preview/offers.json
 ```
 
 ---
