@@ -28,7 +28,7 @@ else {
 $typespecFolders = @()
 $skippedTypespecFolders = @()
 foreach ($file in $changedFiles) {
-  if ($file -match 'specification(\/[^\/]*\/)*') {
+  if ($file -match 'specification(\/[^\/]*\/)+') {
     $path = "$repoPath/$($matches[0])"
     if (Test-Path $path) {   
       Write-Verbose "Checking for tspconfig files under $path"
