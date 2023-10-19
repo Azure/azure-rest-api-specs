@@ -379,9 +379,9 @@ model CarbonEmissionDataAvailableDateRange {
   endDate: string;
 }
 
+@@query(SkipQueryParameter.skip, "$skipToken");
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Each resource interface must have an @armResourceOperations decorator."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-missing-decorator" "Resource POST operation must be decorated with @armResourceAction or @armResourceCollectionAction."
-@@query(SkipQueryParameter.skip, "$skipToken");
 interface CarbonService {
   @doc("API for Carbon Emissions Reports")
   @post
