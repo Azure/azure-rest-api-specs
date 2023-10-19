@@ -37,9 +37,9 @@ These settings apply only when `--tag=package-2023-08-preview` is specified on t
 
 ```yaml $(tag) == 'package-2023-08-preview'
 input-file:
-  - Microsoft.EdgeMarketPlace/stable/2023-08-01-preview/publishers.json
-  - Microsoft.EdgeMarketPlace/stable/2023-08-01-preview/operations.json
-  - Microsoft.EdgeMarketPlace/stable/2023-08-01-preview/offers.json
+  - Microsoft.EdgeMarketPlace/preview/2023-08-01-preview/publishers.json
+  - Microsoft.EdgeMarketPlace/preview/2023-08-01-preview/operations.json
+  - Microsoft.EdgeMarketPlace/preview/2023-08-01-preview/offers.json
 ```
 
 ---
