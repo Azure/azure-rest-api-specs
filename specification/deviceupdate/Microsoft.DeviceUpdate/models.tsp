@@ -7,6 +7,7 @@ using TypeSpec.Http;
 
 namespace Microsoft.DeviceUpdate;
 
+/** Step type */
 enum StepType {
   /** Step type that performs code execution. */
   Inline,
@@ -15,6 +16,7 @@ enum StepType {
   Reference,
 }
 
+/** Operation status */
 enum OperationStatus {
   /** Background operation created but not started yet. */
   NotStarted,
@@ -29,6 +31,7 @@ enum OperationStatus {
   Failed,
 }
 
+/** Device deployement state */
 enum DeviceDeploymentState {
   /** Deployment has completed with success. */
   Succeeded,
@@ -43,6 +46,7 @@ enum DeviceDeploymentState {
   Failed,
 }
 
+/** Import type */
 enum ImportType {
   /** Import only devices but not modules. */
   Devices,
@@ -54,6 +58,7 @@ enum ImportType {
   All,
 }
 
+/** Group type */
 enum GroupType {
   /** IoT Hub tag based group, all devices in the group share an ADUGroup tag value. */
   IoTHubTag,
@@ -62,26 +67,24 @@ enum GroupType {
   DefaultNoTag,
 }
 
+/** Deployment state */
 enum DeploymentState {
   /** The deployment can be sent to devices targeted in the deployment. */
   Active,
 
-  @doc("""
-The deployment can be sent to some devices targeted in the deployment but at
-least 1 subgroup is in a failed state.
-""")
+  /**
+   * The deployment can be sent to some devices targeted in the deployment but at least 1 subgroup is in a failed state.
+   */
   ActiveWithSubgroupFailures,
 
-  @doc("""
-The deployment will not be sent to any devices.  Consult error for more details
-about what failed.
-""")
+  /**
+   * The deployment will not be sent to any devices.  Consult error for more details about what failed.
+   */
   Failed,
 
-  @doc("""
-A newer deployment for this group has been created and no devices in the group
-will receive this deployment.
-""")
+  /**
+   * A newer deployment for this group has been created and no devices in the group will receive this deployment.
+   */
   Inactive,
 
   /** The deployment has been canceled and no devices will receive it. */
@@ -95,16 +98,16 @@ enum DeviceClassSubgroupDeploymentState {
   /** The subgroup deployment failed and will not be sent to any devices. */
   Failed,
 
-  @doc("""
-A newer deployment for this subgroup has been created and no devices in the
-subgroup will receive this deployment.
-""")
+  /**
+   * A newer deployment for this subgroup has been created and no devices in the subgroup will receive this deployment.
+   */
   Inactive,
 
   /** The subgroup deployment has been canceled and no devices will receive it. */
   Canceled,
 }
 
+/** Device health state */
 enum DeviceHealthState {
   /** Agent is healthy */
   healthy,
@@ -113,6 +116,7 @@ enum DeviceHealthState {
   unhealthy,
 }
 
+/** Health check result */
 enum HealthCheckResult {
   /** Health check succeeded */
   success,
@@ -121,8 +125,14 @@ enum HealthCheckResult {
   userError,
 }
 
+/**
+ * Operation filter status
+ */
 enum OperationFilterStatus {
+  /** Running */
   Running,
+
+  /** Not started */
   NotStarted,
 }
 
@@ -136,13 +146,12 @@ model Instance {
   instanceId: string;
 }
 
+/** The list of updates. */
+model UpdateList is Azure.Core.Page<Update>;
+
 /** Update metadata. */
-@resource("updates")
-@parentResource(Instance)
 model Update {
   /** Update identity. */
-  @key
-  @visibility("read")
   updateId: UpdateId;
 
   /** Update description specified by creator. */

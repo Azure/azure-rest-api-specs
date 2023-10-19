@@ -18,9 +18,13 @@ alias ServiceOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 interface DeviceUpdateOperations {
   /** Get a list of all updates that have been imported to Device Update for IoT Hub. */
   @get
-  listUpdates is ServiceOperations.ResourceList<
-    Update,
-    ListQueryParametersTrait<{
+  @route("/deviceUpdate/{instanceId}/updates")
+  listUpdates is Azure.Core.Foundations.Operation<
+    {
+      /** The Device Update for IoT Hub account instance identifier. */
+      @path
+      instanceId: string;
+
       /** Request updates matching a free-text search expression. */
       @query
       search: string;
@@ -28,7 +32,8 @@ interface DeviceUpdateOperations {
       /** Optional to filter updates by isDeployable property. */
       @query
       filter: string;
-    }>
+    },
+    UpdateList
   >;
 
   /**
@@ -36,16 +41,19 @@ interface DeviceUpdateOperations {
    * Operation-Location response header value to check for operation status.
    */
   @post
-  @action("import")
-  importUpdate is ServiceOperations.ResourceCollectionAction<
-    Update,
+  @route("/deviceUpdate/{instanceId}/updates:import")
+  importUpdate is Azure.Core.Foundations.Operation<
     {
+      /** The Device Update for IoT Hub account instance identifier. */
+      @path
+      instanceId: string;
+
       /**
        * The update to be imported (see schema https://json.schemastore.org/azure-deviceupdate-import-manifest-5.0.json for details).
        */
       @body updateToImport: ImportUpdateInput;
     },
-    Update
+    Update | void
   >;
 
   /** Get a specific update version. */
@@ -107,9 +115,11 @@ Operation-Location response header value to check for operation status.
   >;
 
   /** Get a list of all update providers that have been imported to Device Update for IoT Hub. */
+  @route("/deviceUpdate/{instanceId}/updates/providers")
   listProviders is Azure.Core.Foundations.Operation<
     {
-      ...InstanceIdParameter;
+      /** The Device Update for IoT Hub account instance identifier. */
+      @path instanceId: string;
     },
     StringsList,
     {},
@@ -117,10 +127,14 @@ Operation-Location response header value to check for operation status.
   >;
 
   /** Get a list of all update names that match the specified provider. */
+  @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names")
   listNames is Azure.Core.Foundations.Operation<
     {
-      ...InstanceIdParameter;
-      ...UpdateProviderParameter;
+      /** The Device Update for IoT Hub account instance identifier. */
+      @path instanceId: string;
+
+      /** Update provider. */
+      @path provider: string;
     },
     StringsList,
     {},
@@ -128,11 +142,17 @@ Operation-Location response header value to check for operation status.
   >;
 
   /** Get a list of all update versions that match the specified provider and name. */
+  @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions")
   listVersions is Azure.Core.Foundations.Operation<
     {
-      ...InstanceIdParameter;
-      ...UpdateProviderParameter;
-      ...UpdateNameParameter;
+      /** The Device Update for IoT Hub account instance identifier. */
+      @path instanceId: string;
+
+      /** Update provider. */
+      @path provider: string;
+
+      /** Update name. */
+      @path name: string;
 
       /** Optional to filter updates by isDeployable property. */
       @query filter: string;
@@ -143,12 +163,20 @@ Operation-Location response header value to check for operation status.
   >;
 
   /** Get a list of all update file identifiers for the specified version. */
+  @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files")
   listFiles is Azure.Core.Foundations.Operation<
     {
-      ...InstanceIdParameter;
-      ...UpdateProviderParameter;
-      ...UpdateNameParameter;
-      ...UpdateVersionParameter;
+      /** The Device Update for IoT Hub account instance identifier. */
+      @path instanceId: string;
+
+      /** Update provider. */
+      @path provider: string;
+
+      /** Update name. */
+      @path name: string;
+
+      /** Update version. */
+      @path version: string;
 
       /** Optional to filter updates by isDeployable property. */
       @query filter: string;
@@ -527,7 +555,7 @@ devices need each update.
   /** Creates or updates a deployment. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}")
   @put
-  CreateOrUpdateDeployment is Azure.Core.Foundations.Operation<
+  createOrUpdateDeployment is Azure.Core.Foundations.Operation<
     {
       ...Azure.Core.Foundations.ItemKeysOf<Group>;
 
@@ -545,7 +573,7 @@ devices need each update.
   /** Deletes a deployment. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}")
   @delete
-  DeleteDeployment is Azure.Core.Foundations.Operation<
+  deleteDeployment is Azure.Core.Foundations.Operation<
     {
       ...Azure.Core.Foundations.ItemKeysOf<Group>;
 
@@ -822,24 +850,4 @@ groups.
     },
     LimitsResponse
   >;
-}
-
-model InstanceIdParameter {
-  /** The Device Update for IoT Hub account instance identifier. */
-  @path instanceId: string;
-}
-
-model UpdateProviderParameter {
-  /** Update provider. */
-  @path provider: string;
-}
-
-model UpdateNameParameter {
-  /** Update name. */
-  @path name: string;
-}
-
-model UpdateVersionParameter {
-  /** Update version. */
-  @path version: string;
 }
