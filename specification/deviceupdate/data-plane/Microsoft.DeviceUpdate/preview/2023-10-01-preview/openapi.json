@@ -1,0 +1,4826 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DeviceUpdateClient",
+    "version": "2023-10-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "https://{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {
+    "/{instanceId}": {
+      "get": {
+        "operationId": "DeviceUpdateOperations_ListProviders",
+        "description": "Get a list of all update providers that have been imported to Device Update for IoT Hub.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{instanceId}/{provider}": {
+      "get": {
+        "operationId": "DeviceUpdateOperations_ListNames",
+        "description": "Get a list of all update names that match the specified provider.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateProviderParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{instanceId}/{provider}/{name}": {
+      "get": {
+        "operationId": "DeviceUpdateOperations_ListVersions",
+        "description": "Get a list of all update versions that match the specified provider and name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateNameParameter"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional to filter updates by isDeployable property.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{instanceId}/{provider}/{name}/{version}": {
+      "get": {
+        "operationId": "DeviceUpdateOperations_ListFiles",
+        "description": "Get a list of all update file identifiers for the specified version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateVersionParameter"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional to filter updates by isDeployable property.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/limits": {
+      "get": {
+        "operationId": "InstanceManagementOperations_GetLimits",
+        "description": "Gets the instance limits for active deployments, devices, device classes, and\ngroups.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LimitsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/deviceClasses": {
+      "get": {
+        "operationId": "DeviceManagementOperations_ListDeviceClasses",
+        "description": "Gets a list of all device classes (sets of devices compatible with the same\nupdates based on the model Id and compat properties reported in the Device\nUpdate PnP interface in IoT Hub) for all devices connected to Device Update for\nIoT Hub.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Restricts the set of device classes returned. You can filter on friendly name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeviceClass"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/deviceClasses/{deviceClassId}": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetDeviceClass",
+        "description": "Gets the properties of a device class.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassId",
+            "in": "path",
+            "description": "Device class identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceClass"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeviceManagementOperations_UpdateDeviceClass",
+        "description": "Update device class details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassId",
+            "in": "path",
+            "description": "Device class identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassPatch",
+            "in": "body",
+            "description": "The device class json merge patch body. Currently only supports patching\nfriendlyName.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceClass"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceManagementOperations_DeleteDeviceClass",
+        "description": "Deletes a device class. Device classes are created automatically when Device\nUpdate-enabled devices are connected to the hub but are not automatically\ncleaned up since they are referenced by DeviceClassSubgroups. If the user has\ndeleted all DeviceClassSubgroups for a device class they can also delete the\ndevice class to remove the records from the system and to stop checking the\ncompatibility of this device class with new updates. If a device is ever\nreconnected for this device class it will be re-created.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassId",
+            "in": "path",
+            "description": "Device class identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/deviceClasses/{deviceClassId}/installableUpdates": {
+      "get": {
+        "operationId": "DeviceManagementOperations_ListInstallableUpdatesForDeviceClass",
+        "description": "Gets a list of installable updates for a device class.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassId",
+            "in": "path",
+            "description": "Device class identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedUpdateInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/deviceDiagnostics/deviceHealth": {
+      "get": {
+        "operationId": "DeviceManagementOperations_ListHealthOfDevices",
+        "description": "Get list of device health",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Restricts the set of devices for which device health is returned. You can\nfilter on status, device id and module id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeviceHealth"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/deviceDiagnostics/logCollections": {
+      "get": {
+        "operationId": "DeviceManagementOperations_ListLogCollections",
+        "description": "Get all device diagnostics log collections",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedLogCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/deviceDiagnostics/logCollections/{operationId}": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetLogCollection",
+        "description": "Get the device diagnostics log collection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Log collection identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LogCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceManagementOperations_StartLogCollection",
+        "description": "Start the device diagnostics log collection on specified devices.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Log collection identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "logCollection",
+            "in": "body",
+            "description": "The log collection properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogCollection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LogCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/deviceDiagnostics/logCollections/{operationId}/detailedStatus": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetLogCollectionDetailedStatus",
+        "description": "Get log collection with detailed status",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Log collection identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LogCollectionOperationDetailedStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/devices": {
+      "get": {
+        "operationId": "DeviceManagementOperations_ListDevices",
+        "description": "Gets a list of devices connected to Device Update for IoT Hub.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Restricts the set of devices returned. You can filter on GroupId,\nDeviceClassId, or GroupId and DeploymentStatus. Use DeploymentStatus eq null to\nquery for devices with no deployment status (that have never been deployed to).",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDevice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/devices/{deviceId}": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetDevice",
+        "description": "Gets the device properties and latest deployment status for a device connected\nto Device Update for IoT Hub.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "description": "Device identifier in Azure IoT Hub.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/devices/{deviceId}/modules/{moduleId}": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetDeviceModule",
+        "description": "Gets the device module properties and latest deployment status for a device\nmodule connected to Device Update for IoT Hub.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "description": "Device identifier in Azure IoT Hub.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "moduleId",
+            "in": "path",
+            "description": "Device module identifier in Azure IoT Hub.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/devices:import": {
+      "post": {
+        "operationId": "DeviceManagementOperations_ImportDevices",
+        "description": "Import existing devices from IoT Hub. This is a long-running-operation; use\nOperation-Location response header value to check for operation status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "importType",
+            "in": "body",
+            "description": "The types of devices to import.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportType"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups": {
+      "get": {
+        "operationId": "DeviceManagementOperations_ListGroups",
+        "description": "Gets a list of all device groups.  The $default group will always be returned\nfirst.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "description": "Orders the set of groups returned. You can order by groupId, deviceCount,\ncreatedDate, subgroupsWithNewUpdatesAvailableCount,\nsubgroupsWithUpdatesInProgressCount, or subgroupsOnLatestUpdateCount.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetGroup",
+        "description": "Gets the device group properties.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Group"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceManagementOperations_DeleteGroup",
+        "description": "Deletes a device group. This group is automatically created when a Device\nUpdate-enabled device is connected to the hub and reports its properties.\nGroups, subgroups, and deployments are not automatically cleaned up but are\nretained for history purposes. Users can call this method to delete a group if\nthey do not need to retain any of the history of the group and no longer need\nit. If a device is ever connected again for this group after the group was\ndeleted it will be automatically re-created but there will be no history.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}/bestUpdates": {
+      "get": {
+        "operationId": "DeviceManagementOperations_ListBestUpdatesForGroup",
+        "description": "Get the best available updates for a device group and a count of how many\ndevices need each update.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeviceClassSubgroupUpdatableDevices"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments": {
+      "get": {
+        "operationId": "DeviceManagementOperations_ListDeploymentsForGroup",
+        "description": "Gets a list of deployments for a device group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "description": "Orders the set of deployments returned. You can order by start date.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetDeployment",
+        "description": "Gets the deployment properties.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Deployment identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceManagementOperations_CreateOrUpdateDeployment",
+        "description": "Creates or updates a deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Deployment identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deployment",
+            "in": "body",
+            "description": "The deployment properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceManagementOperations_DeleteDeployment",
+        "description": "Deletes a deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Deployment identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}/status": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetDeploymentStatus",
+        "description": "Gets the status of a deployment including a breakdown of how many devices in\nthe deployment are in progress, completed, or failed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Deployment identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups": {
+      "get": {
+        "operationId": "DeviceManagementOperations_ListDeviceClassSubgroupsForGroup",
+        "description": "Get the device class subgroups for the group. A device class subgroup is the\nset of devices within the group that share the same device class. All devices\nwithin the same device class are compatible with the same updates.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Restricts the set of device class subgroups returned. You can filter on compat\nproperties by name and value. (i.e. filter=compatProperties/propertyName1 eq\n'value1' and compatProperties/propertyName2 eq 'value2')",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeviceClassSubgroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetDeviceClassSubgroup",
+        "description": "Gets device class subgroup details. A device class subgroup is the set of\ndevices within the group that share the same device class. All devices within\nthe same device class are compatible with the same updates.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassId",
+            "in": "path",
+            "description": "Device class identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceClassSubgroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceManagementOperations_DeleteDeviceClassSubgroup",
+        "description": "Deletes a device class subgroup. This subgroup is automatically created when a\nDevice Update-enabled device is connected to the hub and reports its\nproperties. Groups, subgroups, and deployments are not automatically cleaned up\nbut are retained for history purposes. Users can call this method to delete a\nsubgroup if they do not need to retain any of the history of the subgroup and\nno longer need it. If a device is ever connected again for this subgroup after\nthe subgroup was deleted it will be automatically re-created but there will be\nno history.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassId",
+            "in": "path",
+            "description": "Device class identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/bestUpdates": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetBestUpdatesForDeviceClassSubgroup",
+        "description": "Get the best available update for a device class subgroup and a count of how\nmany devices need this update.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassId",
+            "in": "path",
+            "description": "Device class identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceClassSubgroupUpdatableDevices"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments": {
+      "get": {
+        "operationId": "DeviceManagementOperations_ListDeploymentsForDeviceClassSubgroup",
+        "description": "Gets a list of deployments for a device class subgroup.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassId",
+            "in": "path",
+            "description": "Device class identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "description": "Orders the set of deployments returned. You can order by start date.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetDeploymentForDeviceClassSubgroup",
+        "description": "Gets the deployment properties.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassId",
+            "in": "path",
+            "description": "Device class identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Deployment identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceManagementOperations_DeleteDeploymentForDeviceClassSubgroup",
+        "description": "Deletes a device class subgroup deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassId",
+            "in": "path",
+            "description": "Device class identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Deployment identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}:cancel": {
+      "post": {
+        "operationId": "DeviceManagementOperations_StopDeployment",
+        "description": "Stops a deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassId",
+            "in": "path",
+            "description": "Device class identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Deployment identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}:retry": {
+      "post": {
+        "operationId": "DeviceManagementOperations_RetryDeployment",
+        "description": "Retries a deployment with failed devices.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassId",
+            "in": "path",
+            "description": "Device class identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Deployment identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}/devicestates": {
+      "get": {
+        "operationId": "DeviceManagementOperations_ListDeviceStatesForDeviceClassSubgroupDeployment",
+        "description": "Gets a list of devices in a deployment along with their state. Useful for\ngetting a list of failed devices.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassId",
+            "in": "path",
+            "description": "Device class identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Deployment identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Restricts the set of deployment device states returned. You can filter on\ndeviceId and moduleId and/or deviceState.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeploymentDeviceState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}/status": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetDeviceClassSubgroupDeploymentStatus",
+        "description": "Gets the status of a deployment including a breakdown of how many devices in\nthe deployment are in progress, completed, or failed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassId",
+            "in": "path",
+            "description": "Device class identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Deployment identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceClassSubgroupDeploymentStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/updateCompliance": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetDeviceClassSubgroupUpdateCompliance",
+        "description": "Get device class subgroup update compliance information such as how many\ndevices are on their latest update, how many need new updates, and how many are\nin progress on receiving a new update.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceClassId",
+            "in": "path",
+            "description": "Device class identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UpdateCompliance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/groups/{groupId}/updateCompliance": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetUpdateComplianceForGroup",
+        "description": "Get device group update compliance information such as how many devices are on\ntheir latest update, how many need new updates, and how many are in progress on\nreceiving a new update.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Group identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UpdateCompliance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/operations": {
+      "get": {
+        "operationId": "DeviceManagementOperations_ListOperationStatuses",
+        "description": "Get a list of all device import operations. Completed operations are kept for 7\ndays before auto-deleted.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Restricts the set of operations returned. Only one specific filter is\nsupported: \"status eq 'NotStarted' or status eq 'Running'\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Specifies a non-negative integer n that limits the number of items returned\nfrom a collection. The service returns the number of available items up to but\nnot greater than the specified value n.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeviceOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/operations/{operationId}": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetOperationStatus",
+        "description": "Retrieve operation status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "description": "Defines the If-None-Match condition. The operation will be performed only if\nthe ETag on the server does not match this value.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "If-None-Match"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/management/updateCompliance": {
+      "get": {
+        "operationId": "DeviceManagementOperations_GetUpdateCompliance",
+        "description": "Gets the breakdown of how many devices are on their latest update, have new\nupdates available, or are in progress receiving new updates.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UpdateCompliance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/updates": {
+      "get": {
+        "operationId": "DeviceUpdateOperations_ListUpdates",
+        "description": "Get a list of all updates that have been imported to Device Update for IoT Hub.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Request updates matching a free-text search expression.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional to filter updates by isDeployable property.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedUpdate"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/updates/operations": {
+      "get": {
+        "operationId": "DeviceUpdateOperations_ListOperationStatuses",
+        "description": "Get a list of all import update operations. Completed operations are kept for 7\ndays before auto-deleted. Delete operations are not returned by this API\nversion.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional to filter operations by status property. Only one specific filter is\nsupported: \"status eq 'NotStarted' or status eq 'Running'\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Specifies a non-negative integer n that limits the number of items returned\nfrom a collection. The service returns the number of available items up to but\nnot greater than the specified value n.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedUpdateOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/updates/operations/{operationId}": {
+      "get": {
+        "operationId": "DeviceUpdateOperations_GetOperationStatus",
+        "description": "Retrieve operation status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "description": "Defines the If-None-Match condition. The operation will be performed only if\nthe ETag on the server does not match this value.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "If-None-Match"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UpdateOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}": {
+      "get": {
+        "operationId": "DeviceUpdateOperations_GetUpdate",
+        "description": "Get a specific update version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "provider",
+            "in": "path",
+            "description": "Update provider.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Update name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Update version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "description": "Defines the If-None-Match condition. The operation will be performed only if\nthe ETag on the server does not match this value.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "If-None-Match"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceUpdateOperations_DeleteUpdate",
+        "description": "Delete a specific update version. This is a long-running-operation; use\nOperation-Location response header value to check for operation status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "provider",
+            "in": "path",
+            "description": "Update provider.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Update name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Update version.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files/{fileId}": {
+      "get": {
+        "operationId": "DeviceUpdateOperations_GetFile",
+        "description": "Get a specific update file from the version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "provider",
+            "in": "path",
+            "description": "Update provider.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Update name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Update version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "File identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "description": "Defines the If-None-Match condition. The operation will be performed only if\nthe ETag on the server does not match this value.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "If-None-Match"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UpdateFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deviceUpdate/{instanceId}/updates:import": {
+      "post": {
+        "operationId": "DeviceUpdateOperations_ImportUpdate",
+        "description": "Import new update version. This is a long-running-operation; use\nOperation-Location response header value to check for operation status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The Device Update for IoT Hub account instance identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateToImport",
+            "in": "body",
+            "description": "The update to be imported (see schema\nhttps://json.schemastore.org/azure-deviceupdate-import-manifest-5.0.json for\ndetails).",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ImportUpdateInputItem"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "CloudInitiatedRollbackPolicy": {
+      "type": "object",
+      "description": "Rollback policy for deployment",
+      "properties": {
+        "update": {
+          "$ref": "#/definitions/UpdateInfo",
+          "description": "Update to rollback to."
+        },
+        "failure": {
+          "$ref": "#/definitions/CloudInitiatedRollbackPolicyFailure",
+          "description": "Failure conditions to initiate rollback policy."
+        }
+      },
+      "required": [
+        "update",
+        "failure"
+      ]
+    },
+    "CloudInitiatedRollbackPolicyFailure": {
+      "type": "object",
+      "description": "Failure conditions to initiate rollback policy",
+      "properties": {
+        "devicesFailedPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Percentage of devices that failed."
+        },
+        "devicesFailedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of devices that failed."
+        }
+      },
+      "required": [
+        "devicesFailedPercentage",
+        "devicesFailedCount"
+      ]
+    },
+    "ContractModel": {
+      "type": "object",
+      "description": "The Device Update agent contract model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Device Update agent contract model Id of the device class. This is also\nused to calculate the device class Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The Device Update agent contract model name of the device class. Intended to be\na more readable form of the contract model Id."
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "Counters": {
+      "type": "object",
+      "description": "The list of counts of each limited resource with both current usage and overall\nquota.",
+      "properties": {
+        "deviceCount": {
+          "$ref": "#/definitions/UsageQuotaCounter",
+          "description": "The current usage and quota of devices."
+        },
+        "deviceClassCount": {
+          "$ref": "#/definitions/UsageQuotaCounter",
+          "description": "The current usage and quota of device classes."
+        },
+        "deviceGroupCount": {
+          "$ref": "#/definitions/UsageQuotaCounter",
+          "description": "The current usage and quota of device groups."
+        },
+        "activeDeploymentCount": {
+          "$ref": "#/definitions/UsageQuotaCounter",
+          "description": "The current usage and quota of active deployments."
+        },
+        "deploymentCount": {
+          "$ref": "#/definitions/UsageQuotaCounter",
+          "description": "The current usage and quota of deployments."
+        }
+      }
+    },
+    "Deployment": {
+      "type": "object",
+      "description": "Deployment metadata.",
+      "properties": {
+        "deploymentId": {
+          "type": "string",
+          "description": "The caller-provided deployment identifier. This cannot be longer than 73\ncharacters, must be all lower-case, and cannot contain '&', '^', '[', ']', '{',\n'}', '|', '<', '>', forward slash, backslash, or double quote. The Updates view\nin the Azure Portal IoT Hub resource generates a GUID for deploymentId when you\ncreate a deployment."
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deployment start datetime."
+        },
+        "update": {
+          "$ref": "#/definitions/UpdateInfo",
+          "description": "Update information for the update in the deployment."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The group identity for the devices the deployment is intended to update."
+        },
+        "deviceClassSubgroups": {
+          "type": "array",
+          "description": "The device class subgroups the deployment is compatible with and subgroup\ndeployments have been created for. This is not provided by the caller during\nCreateOrUpdateDeployment but is automatically determined by Device Update",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isCanceled": {
+          "type": "boolean",
+          "description": "Boolean flag indicating whether the deployment was canceled."
+        },
+        "isRetried": {
+          "type": "boolean",
+          "description": "Boolean flag indicating whether the deployment has been retried."
+        },
+        "rollbackPolicy": {
+          "$ref": "#/definitions/CloudInitiatedRollbackPolicy",
+          "description": "The rollback policy for the deployment."
+        },
+        "isCloudInitiatedRollback": {
+          "type": "boolean",
+          "description": "Boolean flag indicating whether the deployment is a rollback deployment."
+        }
+      },
+      "required": [
+        "deploymentId",
+        "startDateTime",
+        "update",
+        "groupId"
+      ]
+    },
+    "DeploymentDeviceState": {
+      "type": "object",
+      "description": "Deployment device status.",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Device identity."
+        },
+        "moduleId": {
+          "type": "string",
+          "description": "Device module identity."
+        },
+        "retryCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of times this deployment has been retried on this device."
+        },
+        "movedOnToNewDeployment": {
+          "type": "boolean",
+          "description": "Boolean flag indicating whether this device is in a newer deployment and can no\nlonger retry this deployment."
+        },
+        "deviceState": {
+          "$ref": "#/definitions/DeviceDeploymentState",
+          "description": "Deployment device state."
+        }
+      },
+      "required": [
+        "deviceId",
+        "retryCount",
+        "movedOnToNewDeployment",
+        "deviceState"
+      ]
+    },
+    "DeploymentDeviceStatesFilter": {
+      "type": "object",
+      "description": "Deployment device state filter.",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Device Identifier."
+        },
+        "moduleId": {
+          "type": "string",
+          "description": "Device module Identifier."
+        },
+        "deviceState": {
+          "$ref": "#/definitions/DeviceDeploymentState",
+          "description": "The deployment device state."
+        }
+      }
+    },
+    "DeploymentOrderBy": {
+      "type": "object",
+      "description": "Deployment order by.",
+      "properties": {
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deployment start datetime."
+        }
+      }
+    },
+    "DeploymentState": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "ActiveWithSubgroupFailures",
+        "Failed",
+        "Inactive",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The deployment can be sent to devices targeted in the deployment."
+          },
+          {
+            "name": "ActiveWithSubgroupFailures",
+            "value": "ActiveWithSubgroupFailures",
+            "description": "The deployment can be sent to some devices targeted in the deployment but at\nleast 1 subgroup is in a failed state."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The deployment will not be sent to any devices.  Consult error for more details\nabout what failed."
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "A newer deployment for this group has been created and no devices in the group\nwill receive this deployment."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The deployment has been canceled and no devices will receive it."
+          }
+        ]
+      }
+    },
+    "DeploymentStatus": {
+      "type": "object",
+      "description": "Deployment status metadata.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The group identity"
+        },
+        "deploymentState": {
+          "$ref": "#/definitions/DeploymentState",
+          "description": "The state of the deployment."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The error details of the Failed state.  This is not present if the deployment\nstate is not Failed."
+        },
+        "subgroupStatus": {
+          "type": "array",
+          "description": "The collection of device class subgroup status objects",
+          "items": {
+            "$ref": "#/definitions/DeviceClassSubgroupDeploymentStatus"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "groupId",
+        "deploymentState",
+        "subgroupStatus"
+      ]
+    },
+    "Device": {
+      "type": "object",
+      "description": "Device metadata.",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Device identity."
+        },
+        "moduleId": {
+          "type": "string",
+          "description": "Device module identity."
+        },
+        "deviceClassId": {
+          "type": "string",
+          "description": "Device class identity."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "Device group identity."
+        },
+        "lastAttemptedUpdate": {
+          "$ref": "#/definitions/UpdateInfo",
+          "description": "The update that device last attempted to install."
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/DeviceDeploymentState",
+          "description": "State of the device in its last deployment."
+        },
+        "installedUpdate": {
+          "$ref": "#/definitions/UpdateInfo",
+          "description": "Currently installed update on device."
+        },
+        "onLatestUpdate": {
+          "type": "boolean",
+          "description": "Boolean flag indicating whether the latest update (the best compatible update\nfor the device's device class and group) is installed on the device"
+        },
+        "lastDeploymentId": {
+          "type": "string",
+          "description": "The deployment identifier for the last deployment to the device"
+        },
+        "lastInstallResult": {
+          "$ref": "#/definitions/InstallResult",
+          "description": "Last install result."
+        }
+      },
+      "required": [
+        "deviceId",
+        "deviceClassId",
+        "onLatestUpdate"
+      ]
+    },
+    "DeviceClass": {
+      "type": "object",
+      "description": "Device class metadata.",
+      "properties": {
+        "deviceClassId": {
+          "type": "string",
+          "description": "The device class identifier. This is generated from the model Id and the compat\nproperties reported by the device update agent in the Device Update PnP\ninterface in IoT Hub. It is a hex-encoded SHA1 hash."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "The device class friendly name. This can be updated by callers after the device\nclass has been automatically created."
+        },
+        "deviceClassProperties": {
+          "$ref": "#/definitions/DeviceClassProperties",
+          "description": "The device class properties that are used to calculate the device class Id"
+        },
+        "bestCompatibleUpdate": {
+          "$ref": "#/definitions/UpdateInfo",
+          "description": "Update that is the highest version compatible with this device class."
+        }
+      },
+      "required": [
+        "deviceClassId",
+        "deviceClassProperties"
+      ]
+    },
+    "DeviceClassFilter": {
+      "type": "object",
+      "description": "Device class filter. Filters device classes based on device class friendly name",
+      "properties": {
+        "friendlyName": {
+          "type": "string",
+          "description": "The friendly name of the device class to use in the filter"
+        }
+      }
+    },
+    "DeviceClassProperties": {
+      "type": "object",
+      "description": "The device class properties that are used to calculate the device class Id",
+      "properties": {
+        "contractModel": {
+          "$ref": "#/definitions/ContractModel",
+          "description": "The Device Update agent contract model."
+        },
+        "compatProperties": {
+          "type": "object",
+          "description": "The compat properties of the device class. This object can be thought of as a\nset of key-value pairs where the key is the name of the compatibility property\nand the value is the value of the compatibility property. There will always be\nat least 1 compat property",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "compatProperties"
+      ]
+    },
+    "DeviceClassSubgroup": {
+      "type": "object",
+      "description": "Device class subgroup details. A device class subgroup is a subset of devices\nin a group that share the same device class id.",
+      "properties": {
+        "deviceClassId": {
+          "type": "string",
+          "description": "Device class subgroup identity. This is generated from the model Id and the\ncompat properties reported by the device update agent in the Device Update PnP\ninterface in IoT Hub. It is a hex-encoded SHA1 hash."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "Group identity."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "description": "Date and time when the device class subgroup was created."
+        },
+        "deviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of devices in the device class subgroup."
+        },
+        "deploymentId": {
+          "type": "string",
+          "description": "The active deployment Id for the device class subgroup."
+        }
+      },
+      "required": [
+        "deviceClassId",
+        "groupId",
+        "createdDateTime"
+      ]
+    },
+    "DeviceClassSubgroupDeploymentState": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Failed",
+        "Inactive",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceClassSubgroupDeploymentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The subgroup deployment can be sent to devices targeted in the deployment."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The subgroup deployment failed and will not be sent to any devices."
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "A newer deployment for this subgroup has been created and no devices in the\nsubgroup will receive this deployment."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The subgroup deployment has been canceled and no devices will receive it."
+          }
+        ]
+      }
+    },
+    "DeviceClassSubgroupDeploymentStatus": {
+      "type": "object",
+      "description": "Device class subgroup deployment status metadata.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The group identity"
+        },
+        "deviceClassId": {
+          "type": "string",
+          "description": "The device class subgroup identity"
+        },
+        "deploymentState": {
+          "$ref": "#/definitions/DeviceClassSubgroupDeploymentState",
+          "description": "The state of the subgroup deployment."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The error details of the Failed state.  This is not present if the deployment\nstate is not Failed."
+        },
+        "totalDevices": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of devices in the deployment."
+        },
+        "devicesInProgressCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of devices that are currently in deployment."
+        },
+        "devicesCompletedFailedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of devices that have completed deployment with a failure."
+        },
+        "devicesCompletedSucceededCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of devices which have successfully completed deployment."
+        },
+        "devicesCanceledCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of devices which have had their deployment canceled."
+        }
+      },
+      "required": [
+        "groupId",
+        "deviceClassId",
+        "deploymentState"
+      ]
+    },
+    "DeviceClassSubgroupFilter": {
+      "type": "object",
+      "description": "Device class subgroups filter. Filters device class subgroups based on device\nclass compat property names and values",
+      "properties": {
+        "compatPropertyName": {
+          "type": "string",
+          "description": "The name of the compat property to use in the filter. E.g.\ncompatProperties/manufacturer"
+        },
+        "compatPropertyValue": {
+          "type": "string",
+          "description": "The value the compat property to use in the filter. E.g. Contoso"
+        }
+      }
+    },
+    "DeviceClassSubgroupUpdatableDevices": {
+      "type": "object",
+      "description": "Device class subgroup, update information, and the number of devices for which\nthe update is applicable.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The group Id"
+        },
+        "deviceClassId": {
+          "type": "string",
+          "description": "The device class subgroup's device class Id"
+        },
+        "update": {
+          "$ref": "#/definitions/UpdateInfo",
+          "description": "Update information."
+        },
+        "deviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of devices for which the update is applicable."
+        }
+      },
+      "required": [
+        "groupId",
+        "deviceClassId",
+        "update",
+        "deviceCount"
+      ]
+    },
+    "DeviceDeploymentState": {
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "InProgress",
+        "Canceled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceDeploymentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Deployment has completed with success."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Deployment is in progress."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Deployment was canceled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Deployment has completed with failure."
+          }
+        ]
+      }
+    },
+    "DeviceFilter": {
+      "type": "object",
+      "description": "Device filter.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "Device group identity."
+        },
+        "deviceClassId": {
+          "type": "string",
+          "description": "Device class identity."
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/DeviceDeploymentState",
+          "description": "State of the device in its last deployment."
+        }
+      }
+    },
+    "DeviceHealth": {
+      "type": "object",
+      "description": "Device Health",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Device id"
+        },
+        "moduleId": {
+          "type": "string",
+          "description": "Module id"
+        },
+        "state": {
+          "$ref": "#/definitions/DeviceHealthState",
+          "description": "Aggregate device health state"
+        },
+        "digitalTwinModelId": {
+          "type": "string",
+          "description": "Digital twin model Id"
+        },
+        "healthChecks": {
+          "type": "array",
+          "description": "Array of health checks and their results",
+          "items": {
+            "$ref": "#/definitions/HealthCheck"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "deviceId",
+        "state",
+        "healthChecks"
+      ]
+    },
+    "DeviceHealthFilter": {
+      "type": "object",
+      "description": "Device health filter.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/DeviceHealthState",
+          "description": "Device health state"
+        },
+        "deviceId": {
+          "type": "string",
+          "description": "Device Id"
+        },
+        "moduleId": {
+          "type": "string",
+          "description": "Module Id"
+        }
+      }
+    },
+    "DeviceHealthState": {
+      "type": "string",
+      "enum": [
+        "healthy",
+        "unhealthy"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceHealthState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "healthy",
+            "value": "healthy",
+            "description": "Agent is healthy"
+          },
+          {
+            "name": "unhealthy",
+            "value": "unhealthy",
+            "description": "Agent is in an unhealthy state"
+          }
+        ]
+      }
+    },
+    "DeviceOperation": {
+      "type": "object",
+      "description": "Operation metadata.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "Operation Id."
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Operation status."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Operation error encountered, if any."
+        },
+        "traceId": {
+          "type": "string",
+          "description": "Operation correlation identity that can used by Microsoft Support for\ntroubleshooting."
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC when the operation status was last updated."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC when the operation was created."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Operation ETag."
+        }
+      },
+      "required": [
+        "operationId",
+        "status",
+        "lastActionDateTime",
+        "createdDateTime"
+      ]
+    },
+    "DeviceUpdateAgentId": {
+      "type": "object",
+      "description": "Device Update agent id",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Device Id"
+        },
+        "moduleId": {
+          "type": "string",
+          "description": "Module Id"
+        }
+      },
+      "required": [
+        "deviceId"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Server defined error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of errors that led to the reported error.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError",
+          "description": "An object containing more specific information than the current object about\nthe error."
+        },
+        "occurredDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC when the error occurred."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Common error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The error details."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "FileImportMetadata": {
+      "type": "object",
+      "description": "Metadata describing an update file.",
+      "properties": {
+        "filename": {
+          "type": "string",
+          "description": "Update file name as specified inside import manifest."
+        },
+        "url": {
+          "type": "string",
+          "description": "Azure Blob location from which the update file can be downloaded by Device\nUpdate for IoT Hub. This is typically a read-only SAS-protected blob URL with\nan expiration set to at least 4 hours."
+        }
+      },
+      "required": [
+        "filename",
+        "url"
+      ]
+    },
+    "Group": {
+      "type": "object",
+      "description": "Group details.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "Group identity. This is created from the value of the ADUGroup tag in the Iot\nHub's device/module twin or $default for devices with no tag."
+        },
+        "groupType": {
+          "$ref": "#/definitions/GroupType",
+          "description": "Group type."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "description": "Date and time when the update was created."
+        },
+        "deviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of devices in the group."
+        },
+        "subgroupsWithNewUpdatesAvailableCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of subgroups with new updates available."
+        },
+        "subgroupsWithUpdatesInProgressCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of subgroups with updates in progress."
+        },
+        "subgroupsWithOnLatestUpdateCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of subgroups with devices on the latest update."
+        },
+        "deployments": {
+          "type": "array",
+          "description": "The active deployment Ids for the group",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "groupId",
+        "groupType",
+        "createdDateTime"
+      ]
+    },
+    "GroupOrderBy": {
+      "type": "object",
+      "description": "Groups order by.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The group Id."
+        },
+        "deviceCount": {
+          "type": "string",
+          "description": "The group device count."
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "The group created date."
+        },
+        "subgroupsWithNewUpdatesAvailableCount": {
+          "type": "string",
+          "description": "The number of subgroups with new updates available"
+        },
+        "subgroupsWithUpdatesInProgressCount": {
+          "type": "string",
+          "description": "The number of subgroups with updates in progress"
+        },
+        "subgroupsOnLatestUpdateCount": {
+          "type": "string",
+          "description": "The number of subgroups with devices on the latest update"
+        }
+      }
+    },
+    "GroupType": {
+      "type": "string",
+      "enum": [
+        "IoTHubTag",
+        "DefaultNoTag"
+      ],
+      "x-ms-enum": {
+        "name": "GroupType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IoTHubTag",
+            "value": "IoTHubTag",
+            "description": "IoT Hub tag based group, all devices in the group share an ADUGroup tag value."
+          },
+          {
+            "name": "DefaultNoTag",
+            "value": "DefaultNoTag",
+            "description": "Default group for untagged devices."
+          }
+        ]
+      }
+    },
+    "HealthCheck": {
+      "type": "object",
+      "description": "Health check",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Health check name"
+        },
+        "result": {
+          "$ref": "#/definitions/HealthCheckResult",
+          "description": "Health check result"
+        }
+      }
+    },
+    "HealthCheckResult": {
+      "type": "string",
+      "enum": [
+        "success",
+        "userError"
+      ],
+      "x-ms-enum": {
+        "name": "HealthCheckResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "success",
+            "value": "success",
+            "description": "Health check succeeded"
+          },
+          {
+            "name": "userError",
+            "value": "userError",
+            "description": "Health check failed due to user error"
+          }
+        ]
+      }
+    },
+    "ImportManifestMetadata": {
+      "type": "object",
+      "description": "Metadata describing the import manifest, a document which describes the files\nand other metadata about an update version.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Azure Blob location from which the import manifest can be downloaded by Device\nUpdate for IoT Hub. This is typically a read-only SAS-protected blob URL with\nan expiration set to at least 4 hours."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "File size in number of bytes."
+        },
+        "hashes": {
+          "type": "object",
+          "description": "A JSON object containing the hash(es) of the file. At least SHA256 hash is\nrequired. This object can be thought of as a set of key-value pairs where the\nkey is the hash algorithm, and the value is the hash of the file calculated\nusing that algorithm.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "url",
+        "sizeInBytes",
+        "hashes"
+      ]
+    },
+    "ImportType": {
+      "type": "string",
+      "enum": [
+        "Devices",
+        "Modules",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "ImportType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Devices",
+            "value": "Devices",
+            "description": "Import only devices but not modules."
+          },
+          {
+            "name": "Modules",
+            "value": "Modules",
+            "description": "Import only modules but not devices."
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "Import both devices and modules."
+          }
+        ]
+      }
+    },
+    "ImportUpdateInputItem": {
+      "type": "object",
+      "description": "Import update input item metadata.",
+      "properties": {
+        "importManifest": {
+          "$ref": "#/definitions/ImportManifestMetadata",
+          "description": "Import manifest metadata like source URL, file size/hashes, etc."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly update name."
+        },
+        "files": {
+          "type": "array",
+          "description": "One or more update file properties like filename and source URL.",
+          "items": {
+            "$ref": "#/definitions/FileImportMetadata"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "importManifest"
+      ]
+    },
+    "InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information than the current object about\nthe error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A more specific error code than what was provided by the containing error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "errorDetail": {
+          "type": "string",
+          "description": "The internal error or exception message."
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerError",
+          "description": "An object containing more specific information than the current object about\nthe error."
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "InstallResult": {
+      "type": "object",
+      "description": "The install result of an update and any step results under it.",
+      "properties": {
+        "resultCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Install result code."
+        },
+        "extendedResultCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Install extended result code"
+        },
+        "resultDetails": {
+          "type": "string",
+          "description": "A string containing further details about the install result"
+        },
+        "stepResults": {
+          "type": "array",
+          "description": "Array of step results",
+          "items": {
+            "$ref": "#/definitions/StepResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "resultCode",
+        "extendedResultCode"
+      ]
+    },
+    "Instance": {
+      "type": "object",
+      "description": "The Device Update for IoT Hub account instance.",
+      "properties": {
+        "instanceId": {
+          "type": "string",
+          "description": "The Device Update for IoT Hub account instance identifier.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "instanceId"
+      ]
+    },
+    "Instructions": {
+      "type": "object",
+      "properties": {
+        "steps": {
+          "type": "array",
+          "description": "Collection of installation steps.",
+          "items": {
+            "$ref": "#/definitions/Step"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "steps"
+      ]
+    },
+    "LimitsResponse": {
+      "type": "object",
+      "description": "The list of limits of how many of each resource are currently in use and how\nmany are allowed.",
+      "properties": {
+        "counters": {
+          "$ref": "#/definitions/Counters",
+          "description": "The list of current counts of each limited resource and the maximum quota that\nare allowed."
+        }
+      }
+    },
+    "LogCollection": {
+      "type": "object",
+      "description": "Diagnostics request body",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The log collection id.",
+          "x-ms-client-name": "logCollectionId"
+        },
+        "deviceList": {
+          "type": "array",
+          "description": "Array of Device Update agent ids",
+          "items": {
+            "$ref": "#/definitions/DeviceUpdateAgentId"
+          },
+          "x-ms-identifiers": []
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the diagnostics operation."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "description": "The timestamp when the operation was created.",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "description": "A timestamp for when the current state was entered.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Operation status.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "deviceList"
+      ]
+    },
+    "LogCollectionDetailedStatusList": {
+      "type": "object",
+      "description": "The list of log collections with detailed status, with server paging support.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection of pageable items.",
+          "items": {
+            "$ref": "#/definitions/LogCollectionOperationDetailedStatus"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LogCollectionOperationDetailedStatus": {
+      "type": "object",
+      "description": "Device diagnostics operation detailed status",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The device diagnostics operation id.",
+          "x-ms-client-name": "logCollectionId"
+        },
+        "createdDateTime": {
+          "type": "string",
+          "description": "The timestamp when the operation was created."
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "description": "A timestamp for when the current state was entered."
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Operation status."
+        },
+        "deviceStatus": {
+          "type": "array",
+          "description": "Status of the devices in the operation",
+          "items": {
+            "$ref": "#/definitions/LogCollectionOperationDeviceStatus"
+          },
+          "x-ms-identifiers": []
+        },
+        "description": {
+          "type": "string",
+          "description": "Device diagnostics operation description."
+        }
+      }
+    },
+    "LogCollectionOperationDeviceStatus": {
+      "type": "object",
+      "description": "Diagnostics operation device status",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Device id"
+        },
+        "moduleId": {
+          "type": "string",
+          "description": "Module id."
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Log upload status"
+        },
+        "resultCode": {
+          "type": "string",
+          "description": "Log upload result code"
+        },
+        "extendedResultCode": {
+          "type": "string",
+          "description": "Log upload extended result code"
+        },
+        "logLocation": {
+          "type": "string",
+          "description": "Log upload location"
+        }
+      },
+      "required": [
+        "deviceId",
+        "status"
+      ]
+    },
+    "OperationFilter": {
+      "type": "object",
+      "description": "Operation status filter.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OperationFilterStatus",
+          "description": "Operation status filter."
+        }
+      }
+    },
+    "OperationFilterStatus": {
+      "type": "string",
+      "enum": [
+        "Running",
+        "NotStarted"
+      ],
+      "x-ms-enum": {
+        "name": "OperationFilterStatus",
+        "modelAsString": true
+      }
+    },
+    "OperationStatus": {
+      "type": "string",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Background operation created but not started yet."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Background operation is currently running."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Background operation finished with success."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Background operation finished with failure."
+          }
+        ]
+      }
+    },
+    "PagedDeployment": {
+      "type": "object",
+      "description": "The list of deployments.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Deployment items on this page",
+          "items": {
+            "$ref": "#/definitions/Deployment"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDeploymentDeviceState": {
+      "type": "object",
+      "description": "The list of deployment device states.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeploymentDeviceState items on this page",
+          "items": {
+            "$ref": "#/definitions/DeploymentDeviceState"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDevice": {
+      "type": "object",
+      "description": "The list of devices.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Device items on this page",
+          "items": {
+            "$ref": "#/definitions/Device"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDeviceClass": {
+      "type": "object",
+      "description": "The list of device classes.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceClass items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceClass"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDeviceClassSubgroup": {
+      "type": "object",
+      "description": "The list of device class subgroups within a group.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceClassSubgroup items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceClassSubgroup"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDeviceClassSubgroupUpdatableDevices": {
+      "type": "object",
+      "description": "The list of updatable devices for a device class subgroup.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceClassSubgroupUpdatableDevices items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceClassSubgroupUpdatableDevices"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDeviceHealth": {
+      "type": "object",
+      "description": "Array of Device Health, with server paging support.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceHealth items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceHealth"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDeviceOperation": {
+      "type": "object",
+      "description": "The list of device operations with server paging support.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceOperation items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceOperation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedGroup": {
+      "type": "object",
+      "description": "The list of groups.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Group items on this page",
+          "items": {
+            "$ref": "#/definitions/Group"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedLogCollection": {
+      "type": "object",
+      "description": "The list of log collections with server paging support.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LogCollection items on this page",
+          "items": {
+            "$ref": "#/definitions/LogCollection"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedUpdate": {
+      "type": "object",
+      "description": "Paged collection of Update items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Update items on this page",
+          "items": {
+            "$ref": "#/definitions/Update"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedUpdateInfo": {
+      "type": "object",
+      "description": "List of update information.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UpdateInfo items on this page",
+          "items": {
+            "$ref": "#/definitions/UpdateInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedUpdateOperation": {
+      "type": "object",
+      "description": "The list of operations with server paging support.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UpdateOperation items on this page",
+          "items": {
+            "$ref": "#/definitions/UpdateOperation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PatchBody": {
+      "type": "object",
+      "description": "Device Class JSON Merge Patch request body",
+      "properties": {
+        "friendlyName": {
+          "type": "string",
+          "description": "The device class friendly name. Friendly name can be 1-100 characters,\nalphanumeric, dot, and dash."
+        }
+      }
+    },
+    "Step": {
+      "type": "object",
+      "description": "Update install instruction step.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/StepType",
+          "description": "Step type."
+        },
+        "description": {
+          "type": "string",
+          "description": "Step description."
+        },
+        "handler": {
+          "type": "string",
+          "description": "Identity of handler that will execute this step. Required if step type is\ninline."
+        },
+        "handlerProperties": {
+          "type": "object",
+          "description": "Parameters to be passed to handler during execution.",
+          "additionalProperties": {}
+        },
+        "files": {
+          "type": "array",
+          "description": "Collection of file names to be passed to handler during execution. Required if\nstep type is inline.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "updateId": {
+          "$ref": "#/definitions/UpdateId",
+          "description": "Referenced child update identity.  Required if step type is reference."
+        }
+      }
+    },
+    "StepResult": {
+      "type": "object",
+      "description": "The step result under an update.",
+      "properties": {
+        "update": {
+          "$ref": "#/definitions/UpdateInfo",
+          "description": "The update that this step installs if it is of reference type."
+        },
+        "description": {
+          "type": "string",
+          "description": "Step description."
+        },
+        "resultCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Install result code."
+        },
+        "extendedResultCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Install extended result code"
+        },
+        "resultDetails": {
+          "type": "string",
+          "description": "A string containing further details about the install result"
+        }
+      },
+      "required": [
+        "resultCode",
+        "extendedResultCode"
+      ]
+    },
+    "StepType": {
+      "type": "string",
+      "enum": [
+        "Inline",
+        "Reference"
+      ],
+      "x-ms-enum": {
+        "name": "StepType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inline",
+            "value": "Inline",
+            "description": "Step type that performs code execution."
+          },
+          {
+            "name": "Reference",
+            "value": "Reference",
+            "description": "Step type that installs another update."
+          }
+        ]
+      }
+    },
+    "StringsList": {
+      "type": "object",
+      "description": "The list of strings with server paging support.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection of pageable items.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Update": {
+      "type": "object",
+      "description": "Update metadata.",
+      "properties": {
+        "updateId": {
+          "$ref": "#/definitions/UpdateId",
+          "description": "Update identity.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Update description specified by creator."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly update name specified by importer."
+        },
+        "isDeployable": {
+          "type": "boolean",
+          "description": "Whether the update can be deployed to a device on its own."
+        },
+        "updateType": {
+          "type": "string",
+          "description": "Update type. Deprecated in latest import manifest schema."
+        },
+        "installedCriteria": {
+          "type": "string",
+          "description": "String interpreted by Device Update client to determine if the update is\ninstalled on the device. Deprecated in latest import manifest schema."
+        },
+        "compatibility": {
+          "type": "array",
+          "description": "List of update compatibility information.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "instructions": {
+          "$ref": "#/definitions/Instructions",
+          "description": "Update install instructions."
+        },
+        "referencedBy": {
+          "type": "array",
+          "description": "List of update identities that reference this update.",
+          "items": {
+            "$ref": "#/definitions/UpdateId"
+          },
+          "x-ms-identifiers": []
+        },
+        "scanResult": {
+          "type": "string",
+          "description": "Update aggregate scan result (calculated from payload file scan results)."
+        },
+        "manifestVersion": {
+          "type": "string",
+          "description": "Schema version of manifest used to import the update."
+        },
+        "importedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC when the update was imported."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC when the update was created."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Update ETag."
+        }
+      },
+      "required": [
+        "updateId",
+        "compatibility",
+        "manifestVersion",
+        "importedDateTime",
+        "createdDateTime"
+      ]
+    },
+    "UpdateCompliance": {
+      "type": "object",
+      "description": "Update compliance information.",
+      "properties": {
+        "totalDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of devices."
+        },
+        "onLatestUpdateDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of devices on the latest update."
+        },
+        "newUpdatesAvailableDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of devices with a newer update available."
+        },
+        "updatesInProgressDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of devices with update in-progress."
+        }
+      },
+      "required": [
+        "totalDeviceCount",
+        "onLatestUpdateDeviceCount",
+        "newUpdatesAvailableDeviceCount",
+        "updatesInProgressDeviceCount"
+      ]
+    },
+    "UpdateFile": {
+      "type": "object",
+      "description": "Update file metadata.",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "File name."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "File size in number of bytes."
+        },
+        "hashes": {
+          "type": "object",
+          "description": "Mapping of hashing algorithm to base64 encoded hash values.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "File MIME type."
+        },
+        "scanResult": {
+          "type": "string",
+          "description": "Anti-malware scan result."
+        },
+        "scanDetails": {
+          "type": "string",
+          "description": "Anti-malware scan details."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Optional file properties (not consumed by service but pass-through to device).",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "fileId": {
+          "type": "string",
+          "description": "File identity, generated by server at import time."
+        },
+        "relatedFiles": {
+          "type": "array",
+          "description": "Optional related files metadata used together DownloadHandler metadata to\ndownload payload file.",
+          "items": {
+            "$ref": "#/definitions/UpdateFileBase"
+          },
+          "x-ms-identifiers": []
+        },
+        "downloadHandler": {
+          "$ref": "#/definitions/UpdateFileDownloadHandler",
+          "description": "Optional download handler for utilizing related files to download payload file."
+        },
+        "etag": {
+          "type": "string",
+          "description": "File ETag."
+        }
+      },
+      "required": [
+        "fileName",
+        "sizeInBytes",
+        "hashes",
+        "fileId"
+      ]
+    },
+    "UpdateFileBase": {
+      "type": "object",
+      "description": "Update file basic metadata.",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "File name."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "File size in number of bytes."
+        },
+        "hashes": {
+          "type": "object",
+          "description": "Mapping of hashing algorithm to base64 encoded hash values.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "File MIME type."
+        },
+        "scanResult": {
+          "type": "string",
+          "description": "Anti-malware scan result."
+        },
+        "scanDetails": {
+          "type": "string",
+          "description": "Anti-malware scan details."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Optional file properties (not consumed by service but pass-through to device).",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "fileName",
+        "sizeInBytes",
+        "hashes"
+      ]
+    },
+    "UpdateFileDownloadHandler": {
+      "type": "object",
+      "description": "Download handler for utilizing related files to download payload file.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Download handler identifier."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "UpdateFilter": {
+      "type": "object",
+      "description": "Update filter.",
+      "properties": {
+        "isDeployable": {
+          "type": "boolean",
+          "description": "Update isDeployable property."
+        }
+      }
+    },
+    "UpdateId": {
+      "type": "object",
+      "description": "Update identifier.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Update provider."
+        },
+        "name": {
+          "type": "string",
+          "description": "Update name."
+        },
+        "version": {
+          "type": "string",
+          "description": "Update version."
+        }
+      },
+      "required": [
+        "provider",
+        "name",
+        "version"
+      ]
+    },
+    "UpdateInfo": {
+      "type": "object",
+      "description": "Update information.",
+      "properties": {
+        "updateId": {
+          "$ref": "#/definitions/UpdateId",
+          "description": "Update identifier."
+        },
+        "description": {
+          "type": "string",
+          "description": "Update description.",
+          "readOnly": true
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly update name.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "updateId"
+      ]
+    },
+    "UpdateOperation": {
+      "type": "object",
+      "description": "Operation metadata.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "Operation Id."
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Operation status."
+        },
+        "update": {
+          "$ref": "#/definitions/UpdateInfo",
+          "description": "The update being imported or deleted. For import, this property will only be\npopulated after import manifest is processed successfully."
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "Location of the imported update when operation is successful."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Operation error encountered, if any."
+        },
+        "traceId": {
+          "type": "string",
+          "description": "Operation correlation identity that can used by Microsoft Support for\ntroubleshooting."
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC when the operation status was last updated."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC when the operation was created."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Operation ETag."
+        }
+      },
+      "required": [
+        "operationId",
+        "status",
+        "lastActionDateTime",
+        "createdDateTime"
+      ]
+    },
+    "UsageQuotaCounter": {
+      "type": "object",
+      "description": "A counter with both usage and quota information.",
+      "properties": {
+        "usage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current number of the resource that exist"
+        },
+        "quota": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of the resource that can be created"
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Device update service versions",
+      "enum": [
+        "2023-10-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2023-10-01-preview",
+            "value": "2023-10-01-preview",
+            "description": "The 2023-10-01-preview version of the Microsoft.DeviceUpdate service."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "InstanceIdParameter": {
+      "name": "instanceId",
+      "in": "path",
+      "description": "The Device Update for IoT Hub account instance identifier.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "UpdateNameParameter": {
+      "name": "name",
+      "in": "path",
+      "description": "Update name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "UpdateProviderParameter": {
+      "name": "provider",
+      "in": "path",
+      "description": "Update provider.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "UpdateVersionParameter": {
+      "name": "version",
+      "in": "path",
+      "description": "Update version.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

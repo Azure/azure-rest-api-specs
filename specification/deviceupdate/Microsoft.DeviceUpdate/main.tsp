@@ -17,7 +17,6 @@ using TypeSpec.Versioning;
  */
 @service({
   title: "DeviceUpdateClient",
-  version: "2023-10-01-preview",
 })
 @server(
   "https://{endpoint}",
@@ -29,6 +28,7 @@ using TypeSpec.Versioning;
 @versioned(Microsoft.DeviceUpdate.Versions)
 namespace Microsoft.DeviceUpdate;
 
+/** Device update service versions */
 enum Versions {
   /** The 2023-10-01-preview version of the Microsoft.DeviceUpdate service. */
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)

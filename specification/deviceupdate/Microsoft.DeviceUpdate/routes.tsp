@@ -4,28 +4,31 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
+using Azure.Core.Traits;
 
-namespace DeviceUpdateClient;
+namespace Microsoft.DeviceUpdate;
+
+// TODO Verify trait supported
+alias ServiceTraits = SupportsRepeatableRequests &
+  SupportsConditionalRequests &
+  SupportsClientRequestId;
+alias ServiceOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface DeviceUpdateOperations {
-  @doc("Get a list of all updates that have been imported to Device Update for IoT Hub.")
-  @route("/deviceUpdate/{instanceId}/updates")
+  /** Get a list of all updates that have been imported to Device Update for IoT Hub. */
   @get
-  ListUpdates is Azure.Core.Foundations.Operation<
-    {
-      @doc("The Device Update for IoT Hub account instance identifier.")
-      @path
-      instanceId: string;
-
-      @doc("Request updates matching a free-text search expression.")
+  listUpdates is ServiceOperations.ResourceList<
+    Update,
+    ListQueryParametersTrait<{
+      /** Request updates matching a free-text search expression. */
       @query
       search: string;
 
-      @doc("Optional to filter updates by isDeployable property.")
+      /** Optional to filter updates by isDeployable property. */
       @query
       filter: string;
-    },
-    UpdateList
+    }>
   >;
 
   @doc("""
@@ -34,9 +37,9 @@ Operation-Location response header value to check for operation status.
 """)
   @route("/deviceUpdate/{instanceId}/updates:import")
   @post
-  ImportUpdate is Azure.Core.Foundations.Operation<
+  importUpdate is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
@@ -51,24 +54,24 @@ details).
     Update | void
   >;
 
-  @doc("Get a specific update version.")
+  /** Get a specific update version. */
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}")
   @get
-  GetUpdate is Azure.Core.Foundations.Operation<
+  getUpdate is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Update provider.")
+      /** Update provider. */
       @path
       provider: string;
 
-      @doc("Update name.")
+      /** Update name. */
       @path
       name: string;
 
-      @doc("Update version.")
+      /** Update version. */
       @path
       version: string;
 
@@ -90,71 +93,99 @@ Operation-Location response header value to check for operation status.
   @delete
   DeleteUpdate is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Update provider.")
+      /** Update provider. */
       @path
       provider: string;
 
-      @doc("Update name.")
+      /** Update name. */
       @path
       name: string;
 
-      @doc("Update version.")
+      /** Update version. */
       @path
       version: string;
     },
     void
   >;
 
-  @doc("""
-Get a list of all update providers that have been imported to Device Update for
-IoT Hub.
-""")
-  ListProviders is Azure.Core.ResourceList<string>;
-
-  @doc("Get a list of all update names that match the specified provider.")
-  ListNames is Azure.Core.ResourceList<string>;
-
-  @doc("Get a list of all update versions that match the specified provider and name.")
-  ListVersions is Azure.Core.ResourceList<
-    string,
+  /** Get a list of all update providers that have been imported to Device Update for IoT Hub. */
+  listProviders is Azure.Core.Foundations.Operation<
     {
-      parameters: {
-        @doc("Optional to filter updates by isDeployable property.")
-        @query
-        filter: string;
-      };
-    }
+      ...InstanceIdParameter;
+    },
+    StringsList,
+    {},
+    ErrorResponse
   >;
 
-  @doc("Get a list of all update file identifiers for the specified version.")
-  ListFiles is Azure.Core.ResourceList<string>;
+  /** Get a list of all update names that match the specified provider. */
+  listNames is Azure.Core.Foundations.Operation<
+    {
+      ...InstanceIdParameter;
+      ...UpdateProviderParameter;
+    },
+    StringsList,
+    {},
+    ErrorResponse
+  >;
 
-  @doc("Get a specific update file from the version.")
+  /** Get a list of all update versions that match the specified provider and name. */
+  listVersions is Azure.Core.Foundations.Operation<
+    {
+      ...InstanceIdParameter;
+      ...UpdateProviderParameter;
+      ...UpdateNameParameter;
+
+      /** Optional to filter updates by isDeployable property. */
+      @query filter: string;
+    },
+    StringsList,
+    {},
+    ErrorResponse
+  >;
+
+  /** Get a list of all update file identifiers for the specified version. */
+  listFiles is Azure.Core.Foundations.Operation<
+    {
+      ...InstanceIdParameter;
+      ...UpdateProviderParameter;
+      ...UpdateNameParameter;
+      ...UpdateVersionParameter;
+
+      /** Optional to filter updates by isDeployable property. */
+      @query filter: string;
+    },
+    StringsList,
+    {},
+    ErrorResponse
+  >;
+
+  /** Get a specific update file from the version. */
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files/{fileId}")
   @get
-  GetFile is Azure.Core.Foundations.Operation<
+  getFile is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Update provider.")
+      /** Update provider. */
       @path
       provider: string;
 
-      @doc("Update name.")
+      /** Update name. */
       @path
       name: string;
 
-      @doc("Update version.")
+      /** Update version. */
       @path
       version: string;
 
-      @doc("File identifier.")
+      /** File identifier. */
       @path
       fileId: string;
 
@@ -175,9 +206,9 @@ version.
 """)
   @route("/deviceUpdate/{instanceId}/updates/operations")
   @get
-  ListOperationStatuses is Azure.Core.Foundations.Operation<
+  listOperationStatuses is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
@@ -199,16 +230,16 @@ not greater than the specified value n.
     UpdateOperationsList
   >;
 
-  @doc("Retrieve operation status.")
+  /** Retrieve operation status. */
   @route("/deviceUpdate/{instanceId}/updates/operations/{operationId}")
   @get
   GetOperationStatus is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Operation identifier.")
+      /** Operation identifier. */
       @path
       operationId: string;
 
@@ -234,43 +265,43 @@ IoT Hub.
   @get
   ListDeviceClasses is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Restricts the set of device classes returned. You can filter on friendly name.")
+      /** Restricts the set of device classes returned. You can filter on friendly name. */
       @query
       filter: string;
     },
     DeviceClassesList
   >;
 
-  @doc("Gets the properties of a device class.")
+  /** Gets the properties of a device class. */
   @route("/deviceUpdate/{instanceId}/management/deviceClasses/{deviceClassId}")
   @get
   GetDeviceClass is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Device class identifier.")
+      /** Device class identifier. */
       @path
       deviceClassId: string;
     },
     DeviceClass
   >;
 
-  @doc("Update device class details.")
+  /** Update device class details. */
   @route("/deviceUpdate/{instanceId}/management/deviceClasses/{deviceClassId}")
   @patch
   UpdateDeviceClass is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Device class identifier.")
+      /** Device class identifier. */
       @path
       deviceClassId: string;
 
@@ -297,39 +328,39 @@ reconnected for this device class it will be re-created.
   @delete
   DeleteDeviceClass is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Device class identifier.")
+      /** Device class identifier. */
       @path
       deviceClassId: string;
     },
     void
   >;
 
-  @doc("Gets a list of installable updates for a device class.")
+  /** Gets a list of installable updates for a device class. */
   @route("/deviceUpdate/{instanceId}/management/deviceClasses/{deviceClassId}/installableUpdates")
   @get
   ListInstallableUpdatesForDeviceClass is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Device class identifier.")
+      /** Device class identifier. */
       @path
       deviceClassId: string;
     },
     UpdateInfoList
   >;
 
-  @doc("Gets a list of devices connected to Device Update for IoT Hub.")
+  /** Gets a list of devices connected to Device Update for IoT Hub. */
   @route("/deviceUpdate/{instanceId}/management/devices")
   @get
-  ListDevices is Azure.Core.Foundations.Operation<
+  listDevices is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
@@ -350,13 +381,13 @@ Operation-Location response header value to check for operation status.
 """)
   @route("/deviceUpdate/{instanceId}/management/devices:import")
   @post
-  ImportDevices is Azure.Core.Foundations.Operation<
+  importDevices is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("The types of devices to import.")
+      /** The types of devices to import. */
       @body
       importType: ImportType;
     },
@@ -369,13 +400,13 @@ to Device Update for IoT Hub.
 """)
   @route("/deviceUpdate/{instanceId}/management/devices/{deviceId}")
   @get
-  GetDevice is Azure.Core.Foundations.Operation<
+  getDevice is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Device identifier in Azure IoT Hub.")
+      /** Device identifier in Azure IoT Hub. */
       @path
       deviceId: string;
     },
@@ -388,17 +419,17 @@ module connected to Device Update for IoT Hub.
 """)
   @route("/deviceUpdate/{instanceId}/management/devices/{deviceId}/modules/{moduleId}")
   @get
-  GetDeviceModule is Azure.Core.Foundations.Operation<
+  getDeviceModule is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Device identifier in Azure IoT Hub.")
+      /** Device identifier in Azure IoT Hub. */
       @path
       deviceId: string;
 
-      @doc("Device module identifier in Azure IoT Hub.")
+      /** Device module identifier in Azure IoT Hub. */
       @path
       moduleId: string;
     },
@@ -413,7 +444,7 @@ updates available, or are in progress receiving new updates.
   @get
   GetUpdateCompliance is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
     },
@@ -428,7 +459,7 @@ first.
   @get
   ListGroups is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
@@ -443,16 +474,16 @@ subgroupsWithUpdatesInProgressCount, or subgroupsOnLatestUpdateCount.
     GroupsList
   >;
 
-  @doc("Gets the device group properties.")
+  /** Gets the device group properties. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}")
   @get
-  GetGroup is Azure.Core.Foundations.Operation<
+  getGroup is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
     },
@@ -470,13 +501,13 @@ deleted it will be automatically re-created but there will be no history.
 """)
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}")
   @delete
-  DeleteGroup is Azure.Core.Foundations.Operation<
+  deleteGroup is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
     },
@@ -490,13 +521,13 @@ receiving a new update.
 """)
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/updateCompliance")
   @get
-  GetUpdateComplianceForGroup is Azure.Core.Foundations.Operation<
+  getUpdateComplianceForGroup is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
     },
@@ -509,97 +540,97 @@ devices need each update.
 """)
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/bestUpdates")
   @get
-  ListBestUpdatesForGroup is Azure.Core.Foundations.Operation<
+  listBestUpdatesForGroup is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
     },
     DeviceClassSubgroupUpdatableDevicesList
   >;
 
-  @doc("Gets a list of deployments for a device group.")
+  /** Gets a list of deployments for a device group. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments")
   @get
-  ListDeploymentsForGroup is Azure.Core.Foundations.Operation<
+  listDeploymentsForGroup is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Orders the set of deployments returned. You can order by start date.")
+      /** Orders the set of deployments returned. You can order by start date. */
       @query
       orderby: string;
     },
     DeploymentsList
   >;
 
-  @doc("Gets the deployment properties.")
+  /** Gets the deployment properties. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}")
   @get
-  GetDeployment is Azure.Core.Foundations.Operation<
+  getDeployment is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Deployment identifier.")
+      /** Deployment identifier. */
       @path
       deploymentId: string;
     },
     Deployment
   >;
 
-  @doc("Creates or updates a deployment.")
+  /** Creates or updates a deployment. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}")
   @put
   CreateOrUpdateDeployment is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Deployment identifier.")
+      /** Deployment identifier. */
       @path
       deploymentId: string;
 
-      @doc("The deployment properties.")
+      /** The deployment properties. */
       @body
       deployment: Deployment;
     },
     Deployment
   >;
 
-  @doc("Deletes a deployment.")
+  /** Deletes a deployment. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}")
   @delete
   DeleteDeployment is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Deployment identifier.")
+      /** Deployment identifier. */
       @path
       deploymentId: string;
     },
@@ -614,15 +645,15 @@ the deployment are in progress, completed, or failed.
   @get
   GetDeploymentStatus is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Deployment identifier.")
+      /** Deployment identifier. */
       @path
       deploymentId: string;
     },
@@ -638,11 +669,11 @@ within the same device class are compatible with the same updates.
   @get
   ListDeviceClassSubgroupsForGroup is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
@@ -666,15 +697,15 @@ the same device class are compatible with the same updates.
   @get
   GetDeviceClassSubgroup is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Device class identifier.")
+      /** Device class identifier. */
       @path
       deviceClassId: string;
     },
@@ -695,15 +726,15 @@ no history.
   @delete
   DeleteDeviceClassSubgroup is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Device class identifier.")
+      /** Device class identifier. */
       @path
       deviceClassId: string;
     },
@@ -719,15 +750,15 @@ in progress on receiving a new update.
   @get
   GetDeviceClassSubgroupUpdateCompliance is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Device class identifier.")
+      /** Device class identifier. */
       @path
       deviceClassId: string;
     },
@@ -742,135 +773,135 @@ many devices need this update.
   @get
   GetBestUpdatesForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Device class identifier.")
+      /** Device class identifier. */
       @path
       deviceClassId: string;
     },
     DeviceClassSubgroupUpdatableDevices
   >;
 
-  @doc("Gets a list of deployments for a device class subgroup.")
+  /** Gets a list of deployments for a device class subgroup. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments")
   @get
   ListDeploymentsForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Device class identifier.")
+      /** Device class identifier. */
       @path
       deviceClassId: string;
 
-      @doc("Orders the set of deployments returned. You can order by start date.")
+      /** Orders the set of deployments returned. You can order by start date. */
       @query
       orderby: string;
     },
     DeploymentsList
   >;
 
-  @doc("Gets the deployment properties.")
+  /** Gets the deployment properties. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}")
   @get
   GetDeploymentForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Device class identifier.")
+      /** Device class identifier. */
       @path
       deviceClassId: string;
 
-      @doc("Deployment identifier.")
+      /** Deployment identifier. */
       @path
       deploymentId: string;
     },
     Deployment
   >;
 
-  @doc("Deletes a device class subgroup deployment.")
+  /** Deletes a device class subgroup deployment. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}")
   @delete
   DeleteDeploymentForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Device class identifier.")
+      /** Device class identifier. */
       @path
       deviceClassId: string;
 
-      @doc("Deployment identifier.")
+      /** Deployment identifier. */
       @path
       deploymentId: string;
     },
     void
   >;
 
-  @doc("Stops a deployment.")
+  /** Stops a deployment. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}:cancel")
   @post
   StopDeployment is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Device class identifier.")
+      /** Device class identifier. */
       @path
       deviceClassId: string;
 
-      @doc("Deployment identifier.")
+      /** Deployment identifier. */
       @path
       deploymentId: string;
     },
     Deployment
   >;
 
-  @doc("Retries a deployment with failed devices.")
+  /** Retries a deployment with failed devices. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}:retry")
   @post
   RetryDeployment is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Device class identifier.")
+      /** Device class identifier. */
       @path
       deviceClassId: string;
 
-      @doc("Deployment identifier.")
+      /** Deployment identifier. */
       @path
       deploymentId: string;
     },
@@ -885,19 +916,19 @@ the deployment are in progress, completed, or failed.
   @get
   GetDeviceClassSubgroupDeploymentStatus is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Device class identifier.")
+      /** Device class identifier. */
       @path
       deviceClassId: string;
 
-      @doc("Deployment identifier.")
+      /** Deployment identifier. */
       @path
       deploymentId: string;
     },
@@ -912,19 +943,19 @@ getting a list of failed devices.
   @get
   ListDeviceStatesForDeviceClassSubgroupDeployment is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Group identifier.")
+      /** Group identifier. */
       @path
       groupId: string;
 
-      @doc("Device class identifier.")
+      /** Device class identifier. */
       @path
       deviceClassId: string;
 
-      @doc("Deployment identifier.")
+      /** Deployment identifier. */
       @path
       deploymentId: string;
 
@@ -938,16 +969,16 @@ deviceId and moduleId and/or deviceState.
     DeploymentDeviceStatesList
   >;
 
-  @doc("Retrieve operation status.")
+  /** Retrieve operation status. */
   @route("/deviceUpdate/{instanceId}/management/operations/{operationId}")
   @get
   GetOperationStatus is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Operation identifier.")
+      /** Operation identifier. */
       @path
       operationId: string;
 
@@ -969,7 +1000,7 @@ days before auto-deleted.
   @get
   ListOperationStatuses is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
@@ -991,76 +1022,76 @@ not greater than the specified value n.
     DeviceOperationsList
   >;
 
-  @doc("Start the device diagnostics log collection on specified devices.")
+  /** Start the device diagnostics log collection on specified devices. */
   @route("/deviceUpdate/{instanceId}/management/deviceDiagnostics/logCollections/{operationId}")
   @put
   StartLogCollection is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Log collection identifier.")
+      /** Log collection identifier. */
       @path
       operationId: string;
 
-      @doc("The log collection properties.")
+      /** The log collection properties. */
       @body
       logCollection: LogCollection;
     },
     LogCollection
   >;
 
-  @doc("Get the device diagnostics log collection")
+  /** Get the device diagnostics log collection */
   @route("/deviceUpdate/{instanceId}/management/deviceDiagnostics/logCollections/{operationId}")
   @get
   GetLogCollection is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Log collection identifier.")
+      /** Log collection identifier. */
       @path
       operationId: string;
     },
     LogCollection
   >;
 
-  @doc("Get all device diagnostics log collections")
+  /** Get all device diagnostics log collections */
   @route("/deviceUpdate/{instanceId}/management/deviceDiagnostics/logCollections")
   @get
   ListLogCollections is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
     },
     LogCollectionList
   >;
 
-  @doc("Get log collection with detailed status")
+  /** Get log collection with detailed status */
   @route("/deviceUpdate/{instanceId}/management/deviceDiagnostics/logCollections/{operationId}/detailedStatus")
   @get
   GetLogCollectionDetailedStatus is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
-      @doc("Log collection identifier.")
+      /** Log collection identifier. */
       @path
       operationId: string;
     },
     LogCollectionOperationDetailedStatus
   >;
 
-  @doc("Get list of device health")
+  /** Get list of device health */
   @route("/deviceUpdate/{instanceId}/management/deviceDiagnostics/deviceHealth")
   @get
   ListHealthOfDevices is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
 
@@ -1084,10 +1115,30 @@ groups.
   @get
   GetLimits is Azure.Core.Foundations.Operation<
     {
-      @doc("The Device Update for IoT Hub account instance identifier.")
+      /** The Device Update for IoT Hub account instance identifier. */
       @path
       instanceId: string;
     },
     LimitsResponse
   >;
+}
+
+model InstanceIdParameter {
+  /** The Device Update for IoT Hub account instance identifier. */
+  @path instanceId: string;
+}
+
+model UpdateProviderParameter {
+  /** Update provider. */
+  @path provider: string;
+}
+
+model UpdateNameParameter {
+  /** Update name. */
+  @path name: string;
+}
+
+model UpdateVersionParameter {
+  /** Update version. */
+  @path version: string;
 }
