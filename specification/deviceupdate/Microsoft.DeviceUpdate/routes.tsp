@@ -445,68 +445,34 @@ updates available, or are in progress receiving new updates.
     UpdateCompliance
   >;
 
-  @doc("""
-Gets a list of all device groups.  The $default group will always be returned
-first.
-""")
-  @route("/deviceUpdate/{instanceId}/management/groups")
-  @get
-  ListGroups is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      @doc("""
-Orders the set of groups returned. You can order by groupId, deviceCount,
-createdDate, subgroupsWithNewUpdatesAvailableCount,
-subgroupsWithUpdatesInProgressCount, or subgroupsOnLatestUpdateCount.
-""")
+  /** Gets a list of all device groups.  The $default group will always be returned first. */
+  listGroups is ServiceOperations.ResourceList<
+    Group,
+    ListQueryParametersTrait<{
+      /**
+       * Orders the set of groups returned. You can order by groupId, deviceCount,
+       * createdDate, subgroupsWithNewUpdatesAvailableCount,
+       * subgroupsWithUpdatesInProgressCount, or subgroupsOnLatestUpdateCount.
+       */
       @query
       orderby: string;
-    },
-    GroupsList
+    }>
   >;
 
   /** Gets the device group properties. */
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}")
-  @get
-  getGroup is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
+  getGroup is ServiceOperations.ResourceRead<Group>;
+  
+  /**
+   * Deletes a device group. This group is automatically created when a Device
+   * Update-enabled device is connected to the hub and reports its properties.
+   * Groups, subgroups, and deployments are not automatically cleaned up but are
+   * retained for history purposes. Users can call this method to delete a group if
+   * they do not need to retain any of the history of the group and no longer need
+   * it. If a device is ever connected again for this group after the group was
+   * deleted it will be automatically re-created but there will be no history.
+   */
+  deleteGroup is ServiceOperations.ResourceDelete<Group>;
 
-      /** Group identifier. */
-      @path
-      groupId: string;
-    },
-    Group
-  >;
-
-  @doc("""
-Deletes a device group. This group is automatically created when a Device
-Update-enabled device is connected to the hub and reports its properties.
-Groups, subgroups, and deployments are not automatically cleaned up but are
-retained for history purposes. Users can call this method to delete a group if
-they do not need to retain any of the history of the group and no longer need
-it. If a device is ever connected again for this group after the group was
-deleted it will be automatically re-created but there will be no history.
-""")
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}")
-  @delete
-  deleteGroup is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
-    },
-    void
-  >;
 
   @doc("""
 Get device group update compliance information such as how many devices are on

@@ -993,7 +993,7 @@
     "/deviceUpdate/{instanceId}/management/groups": {
       "get": {
         "operationId": "DeviceManagementOperations_ListGroups",
-        "description": "Gets a list of all device groups.  The $default group will always be returned\nfirst.",
+        "description": "Gets a list of all device groups.  The $default group will always be returned first.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1011,6 +1011,9 @@
             "description": "Orders the set of groups returned. You can order by groupId, deviceCount,\ncreatedDate, subgroupsWithNewUpdatesAvailableCount,\nsubgroupsWithUpdatesInProgressCount, or subgroupsOnLatestUpdateCount.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -1018,6 +1021,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedGroup"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -1056,9 +1066,24 @@
           {
             "name": "groupId",
             "in": "path",
-            "description": "Group identifier.",
+            "description": "Group identity. This is created from the value of the ADUGroup tag in the Iot\nHub's device/module twin or $default for devices with no tag.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -1066,6 +1091,17 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Group"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -1099,14 +1135,50 @@
           {
             "name": "groupId",
             "in": "path",
-            "description": "Group identifier.",
+            "description": "Group identity. This is created from the value of the ADUGroup tag in the Iot\nHub's device/module twin or $default for devices with no tag.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ]
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3641,7 +3713,8 @@
       "properties": {
         "groupId": {
           "type": "string",
-          "description": "Group identity. This is created from the value of the ADUGroup tag in the Iot\nHub's device/module twin or $default for devices with no tag."
+          "description": "Group identity. This is created from the value of the ADUGroup tag in the Iot\nHub's device/module twin or $default for devices with no tag.",
+          "readOnly": true
         },
         "groupType": {
           "$ref": "#/definitions/GroupType",
@@ -4350,7 +4423,7 @@
     },
     "PagedGroup": {
       "type": "object",
-      "description": "The list of groups.",
+      "description": "Paged collection of Group items",
       "properties": {
         "value": {
           "type": "array",

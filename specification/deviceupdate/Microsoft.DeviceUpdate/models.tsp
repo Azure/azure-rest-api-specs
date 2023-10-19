@@ -656,15 +656,17 @@ model UsageQuotaCounter {
   quota?: int32;
 }
 
-/** The list of groups. */
-model GroupsList is Azure.Core.Page<Group>;
-
 /** Group details. */
+@resource("management/groups")
+@parentResource(Instance)
 model Group {
-  @doc("""
-Group identity. This is created from the value of the ADUGroup tag in the Iot
-Hub's device/module twin or $default for devices with no tag.
-""")
+  /**
+   * Group identity. This is created from the value of the ADUGroup tag in the Iot
+   * Hub's device/module twin or $default for devices with no tag.
+   */
+  @key
+  @path
+  @visibility("read")
   groupId: string;
 
   /** Group type. */
