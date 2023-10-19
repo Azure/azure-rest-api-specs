@@ -59,12 +59,7 @@
             "$ref": "../../common/v5/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "name": "moduleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$",
-            "description": "The module name."
+            "$ref": "../../common/v5/definitions.json#/parameters/ModuleNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -110,12 +105,7 @@
             "$ref": "../../common/v5/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "name": "moduleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$",
-            "description": "The module name."
+            "$ref": "../../common/v5/definitions.json#/parameters/ModuleNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -161,12 +151,7 @@
             "$ref": "../../common/v5/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "name": "moduleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$",
-            "description": "The name of module."
+            "$ref": "../../common/v5/definitions.json#/parameters/ModuleNameParameter"
           },
           {
             "name": "parameters",
@@ -227,12 +212,7 @@
             "$ref": "../../common/v5/definitions.json#/parameters/AutomationAccountNameParameter"
           },
           {
-            "name": "moduleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z-_0-9]*$",
-            "description": "The name of module."
+            "$ref": "../../common/v5/definitions.json#/parameters/ModuleNameParameter"
           },
           {
             "name": "parameters",
@@ -606,25 +586,25 @@
       "properties": {
         "isGlobal": {
           "type": "boolean",
-          "description": "Gets or sets the isGlobal flag of the module."
+          "description": "Gets the isGlobal flag of the module."
         },
         "version": {
           "type": "string",
-          "description": "Gets or sets the version of the module."
+          "description": "Gets the version of the module."
         },
         "sizeInBytes": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the size in bytes of the module."
+          "description": "Gets the size in bytes of the module."
         },
         "activityCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the activity count of the module."
+          "description": "Gets the activity count of the module."
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets the provisioning state of the module.",
+          "description": "Gets the provisioning state of the module.",
           "enum": [
             "Created",
             "Creating",
@@ -654,18 +634,18 @@
         },
         "error": {
           "$ref": "#/definitions/ModuleErrorInfo",
-          "description": "Gets or sets the error info of the module."
+          "description": "Gets the error info of the module."
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time.",
+          "description": "Gets the creation time.",
           "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time.",
+          "description": "Gets the last modified time.",
           "x-nullable": false
         },
         "description": {
@@ -674,7 +654,7 @@
         },
         "isComposite": {
           "type": "boolean",
-          "description": "Gets or sets type of module, if its composite or not."
+          "description": "Gets type of module, if its composite or not."
         }
       },
       "description": "Definition of the module property type."
