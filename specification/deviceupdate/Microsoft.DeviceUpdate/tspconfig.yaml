@@ -1,0 +1,36 @@
+parameters:  
+  "service-dir":
+    default: "sdk/microsoft.deviceupdate"
+  "dependencies":
+    "additionalDirectories": []
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-python":    
+    package-dir: "microsoft-deviceupdate"
+    package-name: "{package-dir}"  
+    package-mode: dataplane
+  "@azure-tools/typespec-csharp":
+    package-dir: "Microsoft.DeviceUpdate"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    package-dir: "microsoft-deviceupdate-rest"
+    generateMetadata: true
+    generateTest: true
+    packageDetails:
+      name: "@azure-rest/microsoft-deviceupdate-rest"
+      description: "Microsoft.DeviceUpdate Service"
+  "@azure-tools/typespec-java":
+    package-dir: "microsoft-deviceupdate"
+    namespace: com.microsoft.deviceupdate
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
