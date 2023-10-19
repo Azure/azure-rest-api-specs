@@ -2163,7 +2163,7 @@
     "/deviceUpdate/{instanceId}/management/operations": {
       "get": {
         "operationId": "DeviceManagementOperations_ListOperationStatuses",
-        "description": "Get a list of all device import operations. Completed operations are kept for 7\ndays before auto-deleted.",
+        "description": "Get a list of all device import operations. Completed operations are kept for 7 days before auto-deleted.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2178,7 +2178,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Restricts the set of operations returned. Only one specific filter is\nsupported: \"status eq 'NotStarted' or status eq 'Running'\"",
+            "description": "Restricts the set of operations returned. Only one specific filter is supported: \\\"status eq 'NotStarted' or status eq 'Running'\\\"",
             "required": true,
             "type": "string"
           },
@@ -2189,6 +2189,9 @@
             "required": true,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -2196,6 +2199,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedDeviceOperation"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -2234,17 +2244,24 @@
           {
             "name": "operationId",
             "in": "path",
-            "description": "Operation identifier.",
+            "description": "Operation Id.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "if-none-match",
-            "in": "header",
-            "description": "Defines the If-None-Match condition. The operation will be performed only if\nthe ETag on the server does not match this value.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "If-None-Match"
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -2252,6 +2269,17 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DeviceOperation"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -3483,7 +3511,8 @@
       "properties": {
         "operationId": {
           "type": "string",
-          "description": "Operation Id."
+          "description": "Operation Id.",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/OperationStatus",
@@ -3495,7 +3524,7 @@
         },
         "traceId": {
           "type": "string",
-          "description": "Operation correlation identity that can used by Microsoft Support for\ntroubleshooting."
+          "description": "Operation correlation identity that can used by Microsoft Support for troubleshooting."
         },
         "lastActionDateTime": {
           "type": "string",
@@ -4299,7 +4328,7 @@
     },
     "PagedDeviceOperation": {
       "type": "object",
-      "description": "The list of device operations with server paging support.",
+      "description": "Paged collection of DeviceOperation items",
       "properties": {
         "value": {
           "type": "array",

@@ -964,56 +964,28 @@ deviceId and moduleId and/or deviceState.
   >;
 
   /** Retrieve operation status. */
-  @route("/deviceUpdate/{instanceId}/management/operations/{operationId}")
-  @get
-  GetOperationStatus is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
+  getOperationStatus is ServiceOperations.ResourceRead<DeviceOperation>;
 
-      /** Operation identifier. */
-      @path
-      operationId: string;
-
-      @doc("""
-Defines the If-None-Match condition. The operation will be performed only if
-the ETag on the server does not match this value.
-""")
-      @header
-      `If-None-Match`: string;
-    },
-    DeviceOperation
-  >;
-
-  @doc("""
-Get a list of all device import operations. Completed operations are kept for 7
-days before auto-deleted.
-""")
-  @route("/deviceUpdate/{instanceId}/management/operations")
-  @get
-  ListOperationStatuses is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      @doc("""
-Restricts the set of operations returned. Only one specific filter is
-supported: \"status eq 'NotStarted' or status eq 'Running'\"
-""")
+  /**
+   * Get a list of all device import operations. Completed operations are kept for 7 days before auto-deleted.
+   */
+  listOperationStatuses is ServiceOperations.ResourceList<
+    DeviceOperation,
+    ListQueryParametersTrait<{
+      /**
+       * Restricts the set of operations returned. Only one specific filter is supported: \"status eq 'NotStarted' or status eq 'Running'\"
+       */
       @query
       filter: string;
 
-      @doc("""
-Specifies a non-negative integer n that limits the number of items returned
-from a collection. The service returns the number of available items up to but
-not greater than the specified value n.
-""")
+      /**
+       * Specifies a non-negative integer n that limits the number of items returned
+       * from a collection. The service returns the number of available items up to but
+       * not greater than the specified value n.
+       */
       @query
       top: int32;
-    },
-    DeviceOperationsList
+    }>
   >;
 
   /** Get all device diagnostics log collections */

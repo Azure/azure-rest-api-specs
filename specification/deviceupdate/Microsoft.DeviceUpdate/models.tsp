@@ -877,8 +877,13 @@ longer retry this deployment.
 }
 
 /** Operation metadata. */
+@resource("management/operations")
+@parentResource(Instance)
 model DeviceOperation {
   /** Operation Id. */
+  @key
+  @path
+  @visibility("read")
   operationId: string;
 
   /** Operation status. */
@@ -887,10 +892,9 @@ model DeviceOperation {
   /** Operation error encountered, if any. */
   error?: Error;
 
-  @doc("""
-Operation correlation identity that can used by Microsoft Support for
-troubleshooting.
-""")
+  /**
+   *  Operation correlation identity that can used by Microsoft Support for troubleshooting.
+   */
   traceId?: string;
 
   /** Date and time in UTC when the operation status was last updated. */
@@ -904,9 +908,6 @@ troubleshooting.
   /** Operation ETag. */
   etag?: string;
 }
-
-/** The list of device operations with server paging support. */
-model DeviceOperationsList is Azure.Core.Page<DeviceOperation>;
 
 /** Diagnostics request body */
 @resource("management/deviceDiagnostics/logCollections")
@@ -1033,15 +1034,15 @@ model DeviceFilter {
   deploymentStatus?: DeviceDeploymentState;
 }
 
-@doc("""
-Device class subgroups filter. Filters device class subgroups based on device
-class compat property names and values
-""")
+/**
+ * Device class subgroups filter. Filters device class subgroups based on device
+ * class compat property names and values
+ */
 model DeviceClassSubgroupFilter {
-  @doc("""
-The name of the compat property to use in the filter. E.g.
-compatProperties/manufacturer
-""")
+  /**
+   * The name of the compat property to use in the filter. E.g.
+   * compatProperties/manufacturer
+   */
   compatPropertyName?: string;
 
   /** The value the compat property to use in the filter. E.g. Contoso */
