@@ -1397,6 +1397,18 @@
       },
       "description": "Provisioning state of the resource"
     },
+    "onBuildError": {
+      "type": "string",
+      "enum": [
+        "cleanup",
+        "abort"
+      ],
+      "x-ms-enum": {
+        "name": "onBuildError",
+        "modelAsString": true
+      },
+      "description": "Error handling behavior upon build failure"
+    },
     "ProvisioningError": {
       "type": "object",
       "description": "Describes the error happened when create or update an image template",
@@ -1556,6 +1568,22 @@
           "x-ms-identifiers": [],
           "description": "The distribution targets where the image output needs to go to."
         },
+        "errorHandling": {
+          "type": "object",
+          "description": "Error handling options upon a build failure",
+          "properties": {
+            "onCustomizerError": {
+              "$ref": "#/definitions/onBuildError",
+              "default": "cleanup",
+              "description": "If there is a customizer error and this field is set to 'cleanup', the build VM and associated network resources will be cleaned up. This is the default behavior. If there is a customizer error and this field is set to 'abort', the build VM will be preserved."
+            },
+            "onValidationError": {
+              "$ref": "#/definitions/onBuildError",
+              "default": "cleanup",
+              "description": "If there is a validation error and this field is set to 'cleanup', the build VM and associated network resources will be cleaned up. This is the default behavior. If there is a validation error and this field is set to 'abort', the build VM will be preserved."
+            }
+          }
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource",
@@ -1698,6 +1726,14 @@
             "type": "string"
           },
           "description": "The user-specified tags associated with the image template."
+        },
+        "distribute": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageTemplateDistributor"
+          },
+          "x-ms-identifiers": [],
+          "description": "The distribution targets where the image output needs to go to."
         }
       },
       "description": "Parameters for updating an image template."
