@@ -53,6 +53,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
             "name": "queryParameters",
             "in": "body",
             "description": "Query parameters",
@@ -475,11 +478,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of items to return"
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of items to skip, it's optional, by default value is 0"
         }
       },
       "required": [
@@ -841,5 +839,17 @@
       "x-ms-discriminator-value": "TopItemsSummaryReport"
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.Core.SkipQueryParameter": {
+      "name": "$skipToken",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "skip"
+    }
+  }
 }
