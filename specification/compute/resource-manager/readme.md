@@ -270,12 +270,18 @@ input-file:
   - Microsoft.Compute/ComputeRP/stable/2023-09-01/capacityReservation.json
   - Microsoft.Compute/ComputeRP/stable/2023-09-01/logAnalytic.json
   - Microsoft.Compute/ComputeRP/stable/2023-09-01/runCommand.json 
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/snapshot.json
+  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskRPCommon.json
+  - Microsoft.Compute/DiskRP/stable/2023-04-02/disk.json
+  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskAccess.json
+  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskEncryptionSet.json
+  - Microsoft.Compute/DiskRP/stable/2023-04-02/diskRestorePoint.json
+  - Microsoft.Compute/DiskRP/stable/2023-04-02/snapshot.json
+  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
+  - Microsoft.Compute/GalleryRP/stable/2022-03-03/galleryRPCommon.json
+  - Microsoft.Compute/GalleryRP/stable/2022-03-03/gallery.json
+  - Microsoft.Compute/GalleryRP/stable/2022-03-03/sharedGallery.json
+  - Microsoft.Compute/GalleryRP/stable/2022-03-03/communityGallery.json
+  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2023-09-01-only
