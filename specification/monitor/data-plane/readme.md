@@ -36,10 +36,11 @@ tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-09'
+``` yaml $(tag) == 'package-preview-2023-09'
 input-file:
   - Microsoft.Insights/preview/2023-09-01-preview/metricBatch.json
 ```
+
 ### Tag: package-preview-2023-05
 
 These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
@@ -78,7 +79,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
 ```
 
 ## C#
