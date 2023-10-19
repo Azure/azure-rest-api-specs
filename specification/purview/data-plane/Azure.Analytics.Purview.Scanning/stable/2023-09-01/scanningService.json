@@ -2905,6 +2905,7 @@
       }
     },
     "ProxyResource": {
+      "description": "The proxy resource.",
       "type": "object",
       "properties": {
         "id": {
@@ -2937,18 +2938,23 @@
       }
     },
     "ErrorModel": {
+      "description": "The error model.",
       "type": "object",
       "properties": {
         "code": {
+          "description": "A unique error code that identifies the specific error.",
           "type": "string"
         },
         "message": {
+          "description": "A human-readable error message that provides more details about the error.",
           "type": "string"
         },
         "target": {
+          "description": "The specific component that the error is associated with.",
           "type": "string"
         },
         "details": {
+          "description": "An array of nested ErrorModel objects that provides additional error details.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorModel"
@@ -2957,6 +2963,7 @@
       }
     },
     "ErrorResponseModel": {
+      "description": "The error response model.",
       "type": "object",
       "properties": {
         "error": {
@@ -2975,15 +2982,18 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "List of Azure Key Vault connections.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureKeyVault"
           }
         },
         "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
           "type": "string"
         },
         "count": {
+          "description": "The number of Azure Key Vault connections.",
           "format": "int64",
           "type": "integer"
         }
@@ -3021,15 +3031,18 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "List of classification rules.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClassificationRule"
           }
         },
         "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
           "type": "string"
         },
         "count": {
+          "description": "The number of classification rules.",
           "format": "int64",
           "type": "integer"
         }
@@ -3150,15 +3163,18 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "List of scans in a collection.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScanByCollection"
           }
         },
         "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
           "type": "string"
         },
         "count": {
+          "description": "The number of scans in a collection.",
           "format": "int64",
           "type": "integer"
         }
@@ -3202,15 +3218,18 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "List of credentials.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Credential"
           }
         },
         "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
           "type": "string"
         },
         "count": {
+          "description": "The number of credentials.",
           "format": "int64",
           "type": "integer"
         }
@@ -3795,14 +3814,14 @@
             "DataverseMsi"
           ],
           "type": "string",
-          "description": "the properties of scan, vary by datasource type.",
+          "description": "The properties of scan, vary by datasource type.",
           "x-ms-enum": {
             "name": "ScanAuthorizationType",
             "modelAsString": true
           }
         },
         "scanResults": {
-          "description": "scan results of this scan.",
+          "description": "Scan results of this scan.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScanResult"
@@ -3897,7 +3916,7 @@
             "DatabricksUnityCatalog"
           ],
           "type": "string",
-          "description": "the properties of datasource, vary by datasource type.",
+          "description": "The properties of datasource, vary by datasource type.",
           "x-ms-enum": {
             "name": "DataSourceType",
             "modelAsString": true
@@ -3932,15 +3951,18 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "List of data sources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataSource"
           }
         },
         "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
           "type": "string"
         },
         "count": {
+          "description": "The number of data sources.",
           "format": "int64",
           "type": "integer"
         }
@@ -4019,7 +4041,7 @@
           "type": "string"
         },
         "count": {
-          "description": "The count of integration runtimes.",
+          "description": "The number of integration runtimes.",
           "format": "int64",
           "type": "integer"
         }
@@ -4537,6 +4559,7 @@
       "type": "object",
       "properties": {
         "autoTerminationMinutes": {
+          "description": "The interactive querying auto termination time in minutes.",
           "format": "int32",
           "type": "integer"
         }
@@ -4561,7 +4584,7 @@
           "type": "string"
         },
         "count": {
-          "description": "The count of managed virtual networks.",
+          "description": "The number of managed virtual networks.",
           "format": "int64",
           "type": "integer"
         }
@@ -4609,6 +4632,7 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "List of managed private endpoints.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedPrivateEndpoint"
@@ -4619,7 +4643,7 @@
           "type": "string"
         },
         "count": {
-          "description": "The count of managed private endpoints.",
+          "description": "The number of managed private endpoints.",
           "format": "int64",
           "type": "integer"
         }
@@ -4698,73 +4722,82 @@
       }
     },
     "ScanList": {
-      "description": "the list of scan.",
+      "description": "The list of scan.",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "List of scans.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Scan"
           }
         },
         "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
           "type": "string"
         },
         "count": {
+          "description": "The number of scans.",
           "format": "int64",
           "type": "integer"
         }
       }
     },
     "ScanHistoryList": {
-      "description": "the list of scan history.",
+      "description": "The list of scan history.",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "List of scan history.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScanResultWithIngestion"
           }
         },
         "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
           "type": "string"
         },
         "count": {
+          "description": "The number of scan history.",
           "format": "int64",
           "type": "integer"
         }
       }
     },
     "ScanHistoryListWithIngestion": {
-      "description": "the list of scan history with ingestion.",
+      "description": "The list of scan history with ingestion.",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
+          "description": "List of scan history with ingestion.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScanResultWithIngestion"
           }
         },
         "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
           "type": "string"
         },
         "count": {
+          "description": "The number of scan history with ingestion.",
           "format": "int64",
           "type": "integer"
         }
       }
     },
     "VersionedScanRuleset": {
-      "description": "the versioned scan ruleset.",
+      "description": "The versioned scan ruleset.",
       "type": "object",
       "allOf": [
         {
@@ -4803,7 +4836,7 @@
       }
     },
     "ScanRuleset": {
-      "description": "the scan ruleset.",
+      "description": "The scan ruleset.",
       "required": [
         "kind"
       ],
@@ -4844,7 +4877,7 @@
             "PowerBI"
           ],
           "type": "string",
-          "description": "the properties of scan ruleset, vary by datasource type.",
+          "description": "The properties of scan ruleset, vary by datasource type.",
           "x-ms-enum": {
             "name": "DataSourceType",
             "modelAsString": true
@@ -4858,18 +4891,21 @@
         "value"
       ],
       "type": "object",
-      "description": "the list of scan ruleset.",
+      "description": "The list of scan rulesets.",
       "properties": {
         "value": {
+          "description": "List of scan rulesets.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ScanRuleset"
           }
         },
         "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
           "type": "string"
         },
         "count": {
+          "description": "The number of scan rulesets.",
           "format": "int64",
           "type": "integer"
         }
@@ -4880,7 +4916,7 @@
         "kind"
       ],
       "type": "object",
-      "description": "the system scan ruleset.",
+      "description": "The system scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/VersionedScanRuleset"
@@ -4930,18 +4966,21 @@
         "value"
       ],
       "type": "object",
-      "description": "the list of system scan ruleset.",
+      "description": "The list of system scan rulesets.",
       "properties": {
         "value": {
+          "description": "List of system scan rulesets.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SystemScanRuleset"
           }
         },
         "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
           "type": "string"
         },
         "count": {
+          "description": "The number of system scan rulesets.",
           "format": "int64",
           "type": "integer"
         }
@@ -4949,7 +4988,7 @@
     },
     "RecurrenceScheduleOccurrence": {
       "type": "object",
-      "description": "the occurrence of recurrence schedule.",
+      "description": "The occurrence of recurrence schedule.",
       "properties": {
         "additionalProperties": {
           "type": "object"
@@ -5032,7 +5071,7 @@
       }
     },
     "TriggerRecurrence": {
-      "description": "the recurrence of trigger.",
+      "description": "The recurrence of trigger.",
       "type": "object",
       "properties": {
         "frequency": {
@@ -5073,7 +5112,7 @@
       }
     },
     "TriggerProperties": {
-      "description": "properties detail of trigger.",
+      "description": "Properties detail of trigger.",
       "type": "object",
       "properties": {
         "recurrence": {
@@ -5131,7 +5170,7 @@
       }
     },
     "Trigger": {
-      "description": "the trigger object.",
+      "description": "The trigger object.",
       "type": "object",
       "allOf": [
         {
@@ -5152,7 +5191,7 @@
       }
     },
     "CollectionReference": {
-      "description": "the reference to collection.",
+      "description": "The reference to collection.",
       "type": "object",
       "properties": {
         "lastModifiedAt": {
@@ -5169,7 +5208,7 @@
       }
     },
     "SystemClassificationRuleProperties": {
-      "description": "the properties of system classification rule.",
+      "description": "The properties of system classification rule.",
       "type": "object",
       "properties": {
         "description": {
@@ -5207,7 +5246,7 @@
       }
     },
     "SystemClassificationRule": {
-      "description": "the rule of system classification.",
+      "description": "The rule of system classification.",
       "type": "object",
       "allOf": [
         {
@@ -5226,7 +5265,7 @@
       "x-ms-discriminator-value": "System"
     },
     "ClassificationRulePattern": {
-      "description": "pattern of classification rule.",
+      "description": "Pattern of classification rule.",
       "required": [
         "kind"
       ],
@@ -5246,7 +5285,7 @@
       "discriminator": "kind"
     },
     "CustomClassificationRuleProperties": {
-      "description": "the properties of custom classification rule.",
+      "description": "The properties of custom classification rule.",
       "type": "object",
       "properties": {
         "minimumPercentageMatch": {
@@ -5254,7 +5293,7 @@
           "type": "number"
         },
         "classificationAction": {
-          "description": "the action of classification rule.",
+          "description": "The action of classification rule.",
           "enum": [
             "Keep",
             "Delete"
@@ -5313,7 +5352,7 @@
       }
     },
     "CustomClassificationRule": {
-      "description": "rule of custom classification.",
+      "description": "Rule of custom classification.",
       "type": "object",
       "allOf": [
         {
@@ -5332,7 +5371,7 @@
       "x-ms-discriminator-value": "Custom"
     },
     "RegexClassificationRulePattern": {
-      "description": "pattern of regex classification rule.",
+      "description": "Pattern of regex classification rule.",
       "type": "object",
       "allOf": [
         {
@@ -5358,7 +5397,7 @@
       }
     },
     "KeyVaultSecret": {
-      "description": "the key vault secret.",
+      "description": "The key vault secret.",
       "type": "object",
       "properties": {
         "type": {
@@ -5380,7 +5419,7 @@
       }
     },
     "KeyVaultSecretAccountKeyCredentialTypeProperties": {
-      "description": "properties of key vault secret account key credential type.",
+      "description": "Properties of key vault secret account key credential type.",
       "type": "object",
       "properties": {
         "accountKey": {
@@ -5393,7 +5432,7 @@
       }
     },
     "AccountKeyCredentialProperties": {
-      "description": "properties of account key credential.",
+      "description": "Properties of account key credential.",
       "type": "object",
       "properties": {
         "typeProperties": {
@@ -5428,7 +5467,7 @@
       "x-ms-discriminator-value": "AccountKey"
     },
     "KeyVaultSecretUserPassCredentialTypeProperties": {
-      "description": "properties of key vault secret user pass credential type.",
+      "description": "Properties of key vault secret user pass credential type.",
       "type": "object",
       "properties": {
         "user": {
@@ -5444,7 +5483,7 @@
       }
     },
     "UserPassCredentialProperties": {
-      "description": "properties of user pass credential.",
+      "description": "Properties of user pass credential.",
       "type": "object",
       "properties": {
         "typeProperties": {
@@ -5751,7 +5790,7 @@
       "x-ms-discriminator-value": "ManagedIdentity"
     },
     "DataSourceProperties": {
-      "description": "properties of data source.",
+      "description": "Properties of data source.",
       "type": "object",
       "properties": {
         "createdAt": {
@@ -5786,7 +5825,7 @@
       }
     },
     "AzureSubscriptionProperties": {
-      "description": "properties of azure subscription.",
+      "description": "Properties of azure subscription.",
       "type": "object",
       "allOf": [
         {
@@ -5816,7 +5855,7 @@
       }
     },
     "AzureSubscriptionDataSource": {
-      "description": "azure subscription data source.",
+      "description": "Azure subscription data source.",
       "type": "object",
       "allOf": [
         {
