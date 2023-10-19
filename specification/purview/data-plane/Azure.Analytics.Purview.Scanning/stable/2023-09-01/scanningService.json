@@ -9762,7 +9762,7 @@
       "minLength": 3,
       "maxLength": 63,
       "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "managedVirtualNetworkName": {
       "in": "path",
@@ -9770,14 +9770,10 @@
       "description": "The managed virtual network name.",
       "required": true,
       "type": "string",
-      "enum": [
-        "default"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedVirtualNetworkName",
-        "modelAsString": true
-      },
-      "x-ms-parameter-location": "client"
+      "minLength": 1,
+      "maxLength": 127,
+      "pattern": "^([_A-Za-z0-9]|([_A-Za-z0-9][-_A-Za-z0-9]{0,125}[_A-Za-z0-9]))$",
+      "x-ms-parameter-location": "method"
     },
     "managedPrivateEndpointName": {
       "in": "path",
@@ -9788,7 +9784,7 @@
       "minLength": 1,
       "maxLength": 127,
       "pattern": "^([_A-Za-z0-9]|([_A-Za-z0-9][-_A-Za-z0-9]{0,125}[_A-Za-z0-9]))$",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     }
   }
 }
