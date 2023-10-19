@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "NewRelic.Observability",
-    "version": "2022-07-01-preview",
+    "version": "2023-10-01-preview",
     "x-cadl-generated": [
       {
         "emitter": "@azure-tools/cadl-autorest"
@@ -886,6 +886,109 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/getBillingInfo": {
+      "post": {
+        "tags": [
+          "ConnectedResources"
+        ],
+        "summary": "Get marketplace info mapped to the given monitor.",
+        "operationId": "BillingInfo_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the Monitors resource",
+            "pattern": "^.*$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BillingInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingInfo_Get": {
+            "$ref": "./examples/BillingInfo_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/listConnectedPartnerResources": {
+      "post": {
+        "tags": [
+          "ConnectedResources"
+        ],
+        "summary": "List of all active deployments that are associated with the marketplace subscription linked to the given monitor.",
+        "operationId": "ConnectedPartnerResources_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the Monitors resource",
+            "pattern": "^.*$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConnectedPartnerResourcesListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ConnectedPartnerResources_List": {
+            "$ref": "./examples/ConnectedPartnerResources_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/tagRules": {
       "get": {
         "tags": [
@@ -1347,6 +1450,109 @@
       "required": [
         "value"
       ]
+    },
+    "BillingInfoResponse": {
+      "description": "Marketplace Subscription and Organization details to which resource gets billed into.",
+      "type": "object",
+      "properties": {
+        "marketplaceSaasInfo": {
+          "description": "Marketplace Subscription details",
+          "$ref": "#/definitions/MarketplaceSaaSInfo"
+        },
+        "partnerBillingEntity": {
+          "description": "Partner Billing Entity details: Organization Info",
+          "$ref": "#/definitions/PartnerBillingEntity"
+        }
+      }
+    },
+    "MarketplaceSaaSInfo": {
+      "description": "Marketplace SAAS Info of the resource.",
+      "type": "object",
+      "properties": {
+        "marketplaceSubscriptionId": {
+          "description": "Marketplace Subscription Id. This is a GUID-formatted string.",
+          "type": "string"
+        },
+        "marketplaceSubscriptionName": {
+          "description": "Marketplace Subscription Details: SAAS Name",
+          "type": "string"
+        },
+        "marketplaceResourceId": {
+          "description": "Marketplace Subscription Details: Resource URI",
+          "type": "string"
+        },
+        "marketplaceStatus": {
+          "description": "Marketplace Subscription Details: SaaS Subscription Status",
+          "type": "string"
+        },
+        "billedAzureSubscriptionId": {
+          "description": "The Azure Subscription ID to which the Marketplace Subscription belongs and gets billed into.",
+          "type": "string"
+        }
+      }
+    },
+    "PartnerBillingEntity": {
+      "description": "Partner Billing details associated with the resource.",
+      "type": "object",
+      "properties": {
+        "organizationId": {
+          "description": "The New Relic Organization Id.",
+          "type": "string"
+        },
+        "organizationName": {
+          "description": "The New Relic Organization Name.",
+          "type": "string"
+        }
+      }
+    },
+    "ConnectedPartnerResourceProperties": {
+      "description": "Connected Partner Resource Properties",
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "description": "NewRelic account name",
+          "type": "string"
+        },
+        "accountId": {
+          "description": "NewRelic Account Id",
+          "type": "string"
+        },
+        "azureResourceId": {
+          "description": "The azure resource Id of the deployment.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the deployment.",
+          "type": "string"
+        }
+      }
+    },
+    "ConnectedPartnerResourcesListFormat": {
+      "description": "Connected Partner Resources List Format",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectedPartnerResourceProperties"
+        }
+      }
+    },
+    "ConnectedPartnerResourcesListResponse": {
+      "description": " List of all active newrelic deployments.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectedPartnerResourcesListFormat"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
     },
     "AccountResource": {
       "type": "object",
