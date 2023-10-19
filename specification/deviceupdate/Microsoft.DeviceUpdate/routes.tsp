@@ -85,7 +85,7 @@ Operation-Location response header value to check for operation status.
 """)
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}")
   @delete
-  DeleteUpdate is Azure.Core.Foundations.Operation<
+  deleteUpdate is Azure.Core.Foundations.Operation<
     {
       /** The Device Update for IoT Hub account instance identifier. */
       @path
@@ -481,15 +481,7 @@ receiving a new update.
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/updateCompliance")
   @get
   getUpdateComplianceForGroup is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
-    },
+    Azure.Core.Foundations.ItemKeysOf<Group>,
     UpdateCompliance
   >;
 
@@ -500,15 +492,7 @@ devices need each update.
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/bestUpdates")
   @get
   listBestUpdatesForGroup is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
-    },
+    Azure.Core.Foundations.ItemKeysOf<Group>,
     DeviceClassSubgroupUpdatableDevicesList
   >;
 
@@ -517,13 +501,7 @@ devices need each update.
   @get
   listDeploymentsForGroup is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
+      ...Azure.Core.Foundations.ItemKeysOf<Group>;
 
       /** Orders the set of deployments returned. You can order by start date. */
       @query
@@ -537,13 +515,7 @@ devices need each update.
   @get
   getDeployment is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
+      ...Azure.Core.Foundations.ItemKeysOf<Group>;
 
       /** Deployment identifier. */
       @path
@@ -557,13 +529,7 @@ devices need each update.
   @put
   CreateOrUpdateDeployment is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
+      ...Azure.Core.Foundations.ItemKeysOf<Group>;
 
       /** Deployment identifier. */
       @path
@@ -581,13 +547,7 @@ devices need each update.
   @delete
   DeleteDeployment is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
+      ...Azure.Core.Foundations.ItemKeysOf<Group>;
 
       /** Deployment identifier. */
       @path
@@ -604,13 +564,7 @@ the deployment are in progress, completed, or failed.
   @get
   getDeploymentStatus is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
+      ...Azure.Core.Foundations.ItemKeysOf<Group>;
 
       /** Deployment identifier. */
       @path
@@ -643,7 +597,7 @@ the deployment are in progress, completed, or failed.
    * the same device class are compatible with the same updates.
    */
   getDeviceClassSubgroup is ServiceOperations.ResourceRead<DeviceClassSubgroup>;
-  
+
   /**
    * Deletes a device class subgroup. This subgroup is automatically created when a
    * Device Update-enabled device is connected to the hub and reports its
@@ -663,20 +617,8 @@ in progress on receiving a new update.
 """)
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/updateCompliance")
   @get
-  GetDeviceClassSubgroupUpdateCompliance is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
-
-      /** Device class identifier. */
-      @path
-      deviceClassId: string;
-    },
+  getDeviceClassSubgroupUpdateCompliance is Azure.Core.Foundations.Operation<
+    Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>,
     UpdateCompliance
   >;
 
@@ -686,39 +628,17 @@ many devices need this update.
 """)
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/bestUpdates")
   @get
-  GetBestUpdatesForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
-
-      /** Device class identifier. */
-      @path
-      deviceClassId: string;
-    },
+  getBestUpdatesForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
+    Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>,
     DeviceClassSubgroupUpdatableDevices
   >;
 
   /** Gets a list of deployments for a device class subgroup. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments")
   @get
-  ListDeploymentsForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
+  listDeploymentsForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
-
-      /** Device class identifier. */
-      @path
-      deviceClassId: string;
+      ...Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>;
 
       /** Orders the set of deployments returned. You can order by start date. */
       @query
@@ -730,19 +650,9 @@ many devices need this update.
   /** Gets the deployment properties. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}")
   @get
-  GetDeploymentForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
+  getDeploymentForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
-
-      /** Device class identifier. */
-      @path
-      deviceClassId: string;
+      ...Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>;
 
       /** Deployment identifier. */
       @path
@@ -754,19 +664,9 @@ many devices need this update.
   /** Deletes a device class subgroup deployment. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}")
   @delete
-  DeleteDeploymentForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
+  deleteDeploymentForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
-
-      /** Device class identifier. */
-      @path
-      deviceClassId: string;
+      ...Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>;
 
       /** Deployment identifier. */
       @path
@@ -778,19 +678,9 @@ many devices need this update.
   /** Stops a deployment. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}:cancel")
   @post
-  StopDeployment is Azure.Core.Foundations.Operation<
+  stopDeployment is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
-
-      /** Device class identifier. */
-      @path
-      deviceClassId: string;
+      ...Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>;
 
       /** Deployment identifier. */
       @path
@@ -802,19 +692,9 @@ many devices need this update.
   /** Retries a deployment with failed devices. */
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}:retry")
   @post
-  RetryDeployment is Azure.Core.Foundations.Operation<
+  retryDeployment is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
-
-      /** Device class identifier. */
-      @path
-      deviceClassId: string;
+      ...Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>;
 
       /** Deployment identifier. */
       @path
@@ -829,19 +709,9 @@ the deployment are in progress, completed, or failed.
 """)
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}/status")
   @get
-  GetDeviceClassSubgroupDeploymentStatus is Azure.Core.Foundations.Operation<
+  getDeviceClassSubgroupDeploymentStatus is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
-
-      /** Device class identifier. */
-      @path
-      deviceClassId: string;
+      ...Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>;
 
       /** Deployment identifier. */
       @path
@@ -856,19 +726,9 @@ getting a list of failed devices.
 """)
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}/devicestates")
   @get
-  ListDeviceStatesForDeviceClassSubgroupDeployment is Azure.Core.Foundations.Operation<
+  listDeviceStatesForDeviceClassSubgroupDeployment is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Group identifier. */
-      @path
-      groupId: string;
-
-      /** Device class identifier. */
-      @path
-      deviceClassId: string;
+      ...Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>;
 
       /** Deployment identifier. */
       @path
