@@ -964,6 +964,10 @@
             "type": "object"
           }
         },
+        "metadata": {
+          "description": "The thread metadata",
+          "type": "object"
+        },
         "participants": {
           "description": "The list of properties of participants who are part of the thread",
           "type": "array",
@@ -998,6 +1002,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
+          },
+          "metadata": {
+            "description": "The thread metadata",
+            "type": "object"
           }
         }
       }
@@ -1060,6 +1068,10 @@
           "format": "date-time",
           "type": "string"
         },
+        "metadata": {
+          "description": "The thread metadata",
+          "type": "object"
+        },
         "properties": {
           "description": "The updated thread properties",
           "type": "object",
@@ -1093,6 +1105,10 @@
           "additionalProperties": {
             "type": "object"
           }
+        },
+        "metadata": {
+          "description": "The thread metadata",
+          "type": "object"
         }
       }
     },
@@ -1655,6 +1671,10 @@
         "participantCommunicationIdentifier": {
           "description": "The communication identifier of the user",
           "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "metadata": {
+          "description": "The metadata of the user",
+          "type": "object"
         }
       }
     },
