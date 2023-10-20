@@ -266,6 +266,10 @@
             "$ref": "./examples/savingsPlanUpdateByBillingAccount.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "./types.json#/parameters/billingAccountName"
@@ -293,8 +297,18 @@
           "202": {
             "description": "The request is accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "URL for determining when an operation has completed. Only use this value only when Azure-AsyncOperation isn't returned."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
               }
             }
           },
