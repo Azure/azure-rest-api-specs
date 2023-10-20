@@ -1350,6 +1350,42 @@
         "policyAgentAutoProvisioningFlag": {
           "type": "boolean",
           "description": "Is Policy Kubernetes agent auto provisioning enabled"
+        },
+        "mdcContainersImageAssessment": {
+          "type": "object",
+          "description": "The Microsoft Defender Container image assessment configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender container image assessment enabled"
+            },
+            "workloadIdentityProviderId": {
+              "type": "string",
+              "description": "The workload identity provider id in GCP for this feature"
+            },
+            "serviceAccountEmailAddress": {
+              "type": "string",
+              "description": "The service account email address in GCP for this feature"
+            }
+          }
+        },
+        "mdcContainersAgentlessDiscoveryK8s": {
+          "type": "object",
+          "description": "The Microsoft Defender Container agentless discovery configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender container agentless discovery enabled"
+            },
+            "workloadIdentityProviderId": {
+              "type": "string",
+              "description": "The workload identity provider id in GCP for this feature"
+            },
+            "serviceAccountEmailAddress": {
+              "type": "string",
+              "description": "The service account email address in GCP for this feature"
+            }
+          }
         }
       }
     },
@@ -1580,6 +1616,42 @@
             "enabled": {
               "type": "boolean",
               "description": "Is Microsoft Defender Data Sensitivity discovery enabled"
+            },
+            "workloadIdentityProviderId": {
+              "type": "string",
+              "description": "The workload identity provider id in GCP for this feature"
+            },
+            "serviceAccountEmailAddress": {
+              "type": "string",
+              "description": "The service account email address in GCP for this feature"
+            }
+          }
+        },
+        "mdcContainersImageAssessment": {
+          "type": "object",
+          "description": "The Microsoft Defender Container image assessment configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender container image assessment enabled"
+            },
+            "workloadIdentityProviderId": {
+              "type": "string",
+              "description": "The workload identity provider id in GCP for this feature"
+            },
+            "serviceAccountEmailAddress": {
+              "type": "string",
+              "description": "The service account email address in GCP for this feature"
+            }
+          }
+        },
+        "mdcContainersAgentlessDiscoveryK8s": {
+          "type": "object",
+          "description": "The Microsoft Defender Container agentless discovery configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender container agentless discovery enabled"
             },
             "workloadIdentityProviderId": {
               "type": "string",
