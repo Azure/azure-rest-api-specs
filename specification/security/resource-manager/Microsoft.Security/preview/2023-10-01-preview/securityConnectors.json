@@ -810,6 +810,34 @@
         "scubaExternalId": {
           "type": "string",
           "description": "The externalId used by the data reader to prevent the confused deputy attack"
+        },
+        "mdcContainersImageAssessment": {
+          "type": "object",
+          "description": "The Microsoft Defender container image assessment configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender container image assessment enabled"
+            },
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
+        },
+        "mdcContainersAgentlessDiscoveryK8s": {
+          "type": "object",
+          "description": "The Microsoft Defender container agentless discovery K8s configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender container agentless discovery K8s enabled"
+            },
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
         }
       }
     },
