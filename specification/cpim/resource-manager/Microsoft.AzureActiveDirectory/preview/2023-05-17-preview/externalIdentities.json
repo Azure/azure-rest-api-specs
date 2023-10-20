@@ -1695,6 +1695,36 @@
           "$ref": "#/definitions/CIAMTenantResourceProperties",
           "x-ms-client-flatten": true,
           "description": "The Azure AD for customers tenant resource properties"
+        },
+        "location": {
+          "type": "string",
+          "description": "The location in which the resource is hosted and data resides. Can be one of 'United States', 'Europe', 'Asia Pacific', or 'Australia'. Refer to [this documentation](https://aka.ms/ciam-data-location) for more information.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-ms-enum": {
+            "name": "ciamLocationValue",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "United States",
+                "description": "The location in which the resource is hosted and data resides."
+              },
+              {
+                "value": "Europe",
+                "description": "The location in which the resource is hosted and data resides."
+              },
+              {
+                "value": "Asia Pacific",
+                "description": "The location in which the resource is hosted and data resides."
+              },
+              {
+                "value": "Australia",
+                "description": "The location in which the resource is hosted and data resides."
+              }
+            ]
+          }
         }
       }
     }
