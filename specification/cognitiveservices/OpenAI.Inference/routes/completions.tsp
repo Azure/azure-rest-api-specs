@@ -22,9 +22,9 @@ provided prompt data.
 @actionSeparator("/")
 @action("completions") //@convenientAPI(true)
 op getCompletions is Azure.Core.ResourceAction<
-    Deployment,
-    CompletionsOptions,
-    Completions
+  Deployment,
+  CompletionsOptions,
+  Completions
 >;
 
 @doc("""
@@ -36,9 +36,9 @@ provided prompt data.
 @actionSeparator("/")
 @action("chat/completions") //@convenientAPI(true)
 op getChatCompletions is ResourceAction<
-    Deployment,
-    ChatCompletionsOptions,
-    ChatCompletions
+  Deployment,
+  ChatCompletionsOptions,
+  ChatCompletions
 >;
 
 @doc("""
@@ -54,7 +54,7 @@ other augmentations to the base chat completions capabilities.
 @actionSeparator("/")
 @action("extensions/chat/completions")
 op getChatCompletionsWithAzureExtensions is ResourceAction<
-    Deployment,
-    ChatCompletionsOptions,
-    ChatCompletions
+  Deployment,
+  ChatCompletionsOptions,
+  ChatCompletions
 >;

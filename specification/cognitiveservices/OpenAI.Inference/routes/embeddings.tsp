@@ -17,7 +17,7 @@ namespace Azure.OpenAI;
 @actionSeparator("/")
 @action("embeddings") //@convenientAPI(true)
 op getEmbeddings is Azure.Core.ResourceAction<
-    Deployment,
-    EmbeddingsOptions,
-    Embeddings
+  Deployment,
+  EmbeddingsOptions,
+  Embeddings
 >;
