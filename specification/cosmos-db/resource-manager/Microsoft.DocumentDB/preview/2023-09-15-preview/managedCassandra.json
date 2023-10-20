@@ -341,6 +341,101 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/invokeCommandAsync": {
+      "post": {
+        "operationId": "CassandraClusters_InvokeCommandAsync",
+        "description": "Invoke a command like nodetool for cassandra maintenance asynchronously",
+        "x-ms-examples": {
+          "CosmosDBManagedCassandraCommandAsync": {
+            "$ref": "./examples/CosmosDBManagedCassandraCommandAsync.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommandPostBody"
+            },
+            "description": "Specification which command to run where"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. The command operation will begin as soon as possible.",
+            "schema": {
+              "$ref": "#/definitions/CommandPostBody"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/commands/{commandId}": {
+      "post": {
+        "operationId": "CassandraClusters_GetCommandAsync",
+        "description": "Get list of details about commands that were run asynchronously. Use \"all\" as commandId to list all commands in three days assosiated with the cluster.",
+        "x-ms-examples": {
+          "CosmosDBManagedCassandraCommandResult": {
+            "$ref": "./examples/CosmosDBManagedCassandraCommandResult.json"
+          },
+          "CosmosDBManagedCassandraCommandResultList": {
+            "$ref": "./examples/CosmosDBManagedCassandraCommandResultList.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/commandId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success. Return a list of command resource.",
+            "schema": {
+              "$ref": "#/definitions/ListCommands"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/backups": {
       "get": {
         "operationId": "CassandraClusters_ListBackups",
@@ -790,6 +885,16 @@
       "minLength": 1,
       "maxLength": 100,
       "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
+    },
+    "commandId": {
+      "name": "commandId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Managed Cassandra cluster command id.",
+      "minLength": 1,
+      "maxLength": 100
     },
     "forceDeallocate": {
       "name": "x-ms-force-deallocate",
@@ -1342,6 +1447,61 @@
         "readwrite": {
           "type": "boolean",
           "description": "If true, allows the command to *write* to the cassandra directory, otherwise read-only."
+        }
+      }
+    },
+    "CommandPublicResource": {
+      "description": "resource representing a command",
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "The command which should be run"
+        },
+        "commandid": {
+          "type": "string",
+          "description": "The unique id of command"
+        },
+        "arguments": {
+          "type": "object",
+          "description": "The arguments for the command to be run",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "host": {
+          "type": "string",
+          "description": "IP address of the cassandra host to run the command on"
+        },
+        "cassandra-stop-start": {
+          "type": "boolean",
+          "description": "If true, stops cassandra before executing the command and then start it again"
+        },
+        "readwrite": {
+          "type": "boolean",
+          "description": "If true, allows the command to *write* to the cassandra directory, otherwise read-only."
+        },
+        "result": {
+          "type": "string",
+          "description": "Result output of the command."
+        },
+        "status": {
+          "type": "string",
+          "description": "status of the command."
+        }
+      }
+    },
+    "ListCommands": {
+      "description": "List of commands for cluster.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Container for array of commands.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CommandPublicResource"
+          }
         }
       }
     },
