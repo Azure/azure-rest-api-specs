@@ -431,6 +431,11 @@
           "type": "string",
           "description": "The AWS account name",
           "readOnly": true
+        },
+        "scanInterval":{
+          "type": "integer",
+          "format": "int64",
+          "description": "Scan interval in hours (value should be between 1-hour to 24-hours)"
         }
       }
     },
@@ -515,6 +520,11 @@
           "type": "object",
           "description": "The Gcp project's details",
           "$ref": "#/definitions/GcpProjectDetails"
+        },
+        "scanInterval":{
+          "type": "integer",
+          "format": "int64",
+          "description": "Scan interval in hours (value should be between 1-hour to 24-hours)"
         }
       }
     },
@@ -1440,6 +1450,34 @@
                   "description": "the azure active directory app name used of authenticating against AWS"
                 }
               }
+            }
+          }
+        },
+        "mdcContainersImageAssessment": {
+          "type": "object",
+          "description": "The Microsoft Defender container image assessment configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender container image assessment enabled"
+            },
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
+        },
+        "mdcContainersAgentlessDiscoveryK8s": {
+          "type": "object",
+          "description": "The Microsoft Defender container agentless discovery K8s configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender container agentless discovery K8s enabled"
+            },
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
             }
           }
         }
