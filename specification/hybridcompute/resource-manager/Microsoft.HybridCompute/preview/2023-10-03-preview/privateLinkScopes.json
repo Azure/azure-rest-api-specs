@@ -799,8 +799,8 @@
         "application/json"
       ],
       "x-ms-examples": {
-        "NetworkConfigurationsUpdate": {
-          "$ref": "./examples/networkConfiguration/NetworkConfigurationsUpdate.json"
+        "NetworkConfigurationsPatch": {
+          "$ref": "./examples/networkConfiguration/NetworkConfigurationsPatch.json"
         }
       },
       "parameters": [
@@ -1021,9 +1021,7 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ],
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object"
+      ]
     },
     "NetworkConfigurationProperties": {
       "type": "object",
@@ -1239,7 +1237,8 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/AccessRule"
-          }
+          },
+          "x-ms-identifiers":[]
         }
       }
     },
