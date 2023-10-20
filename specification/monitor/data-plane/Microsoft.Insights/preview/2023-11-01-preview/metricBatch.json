@@ -342,100 +342,6 @@
         }
       }
     },
-    "QueryBatchLocalizableString": {
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The invariant value."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "The display name."
-        }
-      },
-      "description": "The localizable string class."
-    },
-    "QueryBatchMetricUnit": {
-      "type": "string",
-      "description": "The unit of the metric.",
-      "enum": [
-        "Count",
-        "Bytes",
-        "Seconds",
-        "CountPerSecond",
-        "BytesPerSecond",
-        "Percent",
-        "MilliSeconds",
-        "ByteSeconds",
-        "Unspecified",
-        "Cores",
-        "MilliCores",
-        "NanoCores",
-        "BitsPerSecond"
-      ],
-      "x-ms-enum": {
-        "name": "QueryBatchMetricUnit",
-        "modelAsString": false,
-        "values": [
-          {
-            "value": "Count",
-            "description": "Unit of raw quantity."
-          },
-          {
-            "value": "Bytes",
-            "description": "Unit of memory in bytes."
-          },
-          {
-            "value": "Seconds",
-            "description": "Unit of time in seconds."
-          },
-          {
-            "value": "CountPerSecond",
-            "description": "Rate unit of raw quantity per second."
-          },
-          {
-            "value": "BytesPerSecond",
-            "description": "Rate unit of memory in bytes per second."
-          },
-          {
-            "value": "Percent",
-            "description": "Percentage unit."
-          },
-          {
-            "value": "MilliSeconds",
-            "description": "Unit of time in 1/1000th of a second."
-          },
-          {
-            "value": "ByteSeconds",
-            "description": "Unit of data transfer or storage. It is the size of the data in bytes multiplied by the time it takes to transfer or store the data in seconds."
-          },
-          {
-            "value": "Unspecified",
-            "description": "No specified unit."
-          },
-          {
-            "value": "Cores",
-            "description": "Unit of processing power."
-          },
-          {
-            "value": "MilliCores",
-            "description": "Unit of processing power in 1/1000th of a CPU core."
-          },
-          {
-            "value": "NanoCores",
-            "description": "Unit of processing power in one billionth of a CPU core."
-          },
-          {
-            "value": "BitsPerSecond",
-            "description": "Rate unit of binary digits per second."
-          }
-        ]
-      }
-    },
     "QueryBatchMetricValue": {
       "type": "object",
       "required": [
@@ -475,20 +381,6 @@
       },
       "description": "Represents a metric value."
     },
-    "QueryBatchMetadataValue": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/QueryBatchLocalizableString",
-          "description": "The name of the metadata."
-        },
-        "value": {
-          "type": "string",
-          "description": "The value of the metadata."
-        }
-      },
-      "description": "Represents a metric metadata value."
-    },
     "QueryBatchMetric": {
       "type": "object",
       "properties": {
@@ -497,7 +389,7 @@
           "description": "The metric Id."
         },
         "name": {
-          "$ref": "#/definitions/QueryBatchLocalizableString",
+          "$ref": "./commonDefinitions.json#/definitions/LocalizableString",
           "description": "The name and the display name of the metric, i.e. it is localizable string."
         },
         "displayDescription": {
@@ -544,14 +436,14 @@
         "metadatavalues": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/QueryBatchMetadataValue"
+            "$ref": "./commonDefinitions.json#/definitions/MetadataValue"
           },
           "description": "The metadata values returned if filter was specified in the call."
         },
         "data": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/QueryBatchMetricValue"
+            "$ref": "./commonDefinitions.json#/definitions/MetricValue"
           },
           "description": "An array of data points representing the metric values.  This is only returned if a result type of data is specified."
         }
