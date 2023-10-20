@@ -16,7 +16,7 @@ export class EmitAutorestRule implements Rule {
     let errorOutput = "";
 
     const mainTspExists = await checkFileExists(join(folder, "main.tsp"));
-    stdOutput += `mainTspExists: ${mainTspExists}`;
+    stdOutput += `mainTspExists: ${mainTspExists}\n`;
 
     if (mainTspExists) {
       const configFile = join(folder, "tspconfig.yaml");
