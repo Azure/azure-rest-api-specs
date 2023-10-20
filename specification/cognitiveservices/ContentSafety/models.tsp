@@ -57,6 +57,14 @@ model AnalyzeTextOptions {
 
   @doc("This refers to the type of text analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".")
   outputType?: AnalyzeTextOutputType = AnalyzeTextOutputType.FourSeverityLevels;
+
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
+  @doc("The accept decision made by service.")
+  incidentNames?: string[];
+
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
+  @doc("When set to true, further analyses of harmful content will not be performed in cases where incidents are hit. When set to false, all analyses of harmful content will be performed, whether or not incidents are hit.")
+  haltOnIncidentHit?: boolean;
 }
 
 @doc("The text analysis response.")
@@ -66,6 +74,10 @@ model AnalyzeTextResult {
 
   @doc("Analysis result for categories.")
   categoriesAnalysis: TextCategoriesAnalysis[];
+
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
+  @doc("The incident match details.")
+  incidentMatches?: IncidentMatch[];
 }
 
 @doc("The result of blocklist match.")
@@ -92,6 +104,14 @@ model TextCategoriesAnalysis {
   severity?: int32;
 }
 
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The result of text incident match.")
+model IncidentMatch {
+  @doc("The name of the matched incident.")
+  @maxLength(64)
+  incidentName: string;
+}
+
 @doc("The image analysis request.")
 model AnalyzeImageOptions {
   @doc("The image needs to be analyzed.")
@@ -102,6 +122,14 @@ model AnalyzeImageOptions {
 
   @doc("This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".")
   outputType?: AnalyzeImageOutputType = AnalyzeImageOutputType.FourSeverityLevels;
+
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
+  @doc("The accept decision made by service.")
+  incidentNames?: string[];
+
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
+  @doc("When set to true, further analyses of harmful content will not be performed in cases where incidents are hit. When set to false, all analyses of harmful content will be performed, whether or not incidents are hit.")
+  haltOnIncidentHit?: boolean;
 }
 
 @doc("The image can be either base64 encoded bytes or a blob URL. You can choose only one of these options. If both are provided, the request will be refused. The maximum image size is 2048 x 2048 pixels and should not exceed 4 MB, while the minimum image size is 50 x 50 pixels.")
@@ -118,6 +146,10 @@ model ImageData {
 model AnalyzeImageResult {
   @doc("Analysis result for categories.")
   categoriesAnalysis: ImageCategoriesAnalysis[];
+
+  @added(ContentSafety.Versions.v2023_10_30_Preview)
+  @doc("The incident match details.")
+  incidentMatches?: IncidentMatch[];
 }
 
 @doc("Image analysis result.")
@@ -179,6 +211,146 @@ model AddOrUpdateTextBlocklistItemsResult {
 model RemoveTextBlocklistItemsOptions {
   @doc("Array of blocklistItemIds to remove.")
   blocklistItemIds: string[];
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("Text Incident.")
+@resource("text/incident")
+model TextIncident {
+  @doc("incident name.")
+  @pattern("^[0-9A-Za-z._~-]+$")
+  @key("incidentName")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  incidentName: string;
+
+  @doc("Incident description.")
+  @maxLength(1024)
+  description?: string;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("Sample in a Text Incident.")
+@resource("incidentSamples")
+@parentResource(TextIncident)
+model TextIncidentSample {
+  @doc("incident name.")
+  @key("incidentSampleId")
+  @visibility("read")
+  @maxLength(64)
+  incidentSampleId: string;
+
+  @doc("IncidentSample text content.")
+  @maxLength(1024)
+  text?: string;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The request to add incidentSamples to a incident.")
+model AddTextIncidentSamplesOptions {
+  @doc("Array of incidentSamples to add.")
+  incidentSamples: TextIncidentSample[];
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The response of adding incidentSamples to the incident.")
+model AddTextIncidentSamplesResult {
+  @doc("Array of incidentSamples have been added.")
+  incidentSamples: TextIncidentSample[];
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The request to remove incidentSamples from a incident.")
+model RemoveTextIncidentSamplesOptions {
+  @doc("Array of incidentSamples to remove.")
+  incidentSampleIds: string[];
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("Image Incident.")
+@resource("image/incident")
+model ImageIncident {
+  @doc("incident name.")
+  @pattern("^[0-9A-Za-z._~-]+$")
+  @key("incidentName")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  incidentName: string;
+
+  @doc("Incident description.")
+  @maxLength(1024)
+  description?: string;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("Sample in an Image Incident.")
+@resource("incidentSamples")
+@parentResource(ImageIncident)
+model ImageIncidentSample {
+  @doc("incident name.")
+  @key("incidentSampleId")
+  @visibility("read")
+  @maxLength(64)
+  incidentSampleId: string;
+
+  @doc("IncidentSample image content.")
+  image?: ImageData;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The image result is base64 encoded bytes")
+@projectedName("csharp", "ContentSafetyImageDataResult")
+model ImageDataResult {
+  @doc("The Base64 encoding of the image.")
+  content?: bytes;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("Sample Result in an Image Incident.")
+@resource("incidentSamples")
+@parentResource(ImageIncident)
+model ImageIncidentSampleResult {
+  @doc("incident name.")
+  @key("incidentSampleId")
+  @visibility("read")
+  @maxLength(64)
+  incidentSampleId: string;
+
+  @doc("IncidentSample image content.")
+  image?: ImageDataResult;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The request to add incidentSamples to a incident.")
+model AddImageIncidentSamplesOptions {
+  @doc("Array of incidentSamples to add.")
+  incidentSamples: ImageIncidentSample[];
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The request to remove incidentSamples from a incident.")
+model RemoveImageIncidentSamplesOptions {
+  @doc("Array of incidentSamples to remove.")
+  incidentSampleIds: string[];
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("Sample in a Image Incident.")
+@resource("incidentSamples")
+@parentResource(ImageIncident)
+model ListImageIncidentSampleResult {
+  @doc("incident name.")
+  @key("incidentSampleId")
+  @visibility("read")
+  @maxLength(64)
+  incidentSampleId: string;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The response of adding incidentSamples to the incident.")
+model AddImageIncidentSamplesResult {
+  @doc("Array of incidentSamples have been added.")
+  incidentSamples: ListImageIncidentSampleResult[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"

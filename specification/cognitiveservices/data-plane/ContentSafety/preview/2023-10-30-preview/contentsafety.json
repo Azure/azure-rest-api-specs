@@ -59,6 +59,372 @@
   },
   "tags": [],
   "paths": {
+    "/image/incident": {
+      "get": {
+        "operationId": "ImageIncidents_ListIncidents",
+        "summary": "Get All Image Incidents",
+        "description": "Get all incidents details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedImageIncident"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/image/incident/{incidentName}": {
+      "get": {
+        "operationId": "ImageIncidents_GetIncidents",
+        "summary": "Get Image Incident By incidentName",
+        "description": "Returns image incident details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageIncident"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ImageIncidents_CreateOrUpdateIncident",
+        "summary": "Create Or Update Image Incident",
+        "description": "Updates a image incident. If the image incident does not exist, a new image incident will be created.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageIncidentCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageIncident"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ImageIncident"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ImageIncidents_DeleteIncident",
+        "summary": "Delete Image Incident By incidentName",
+        "description": "Deletes a image incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image/incident/{incidentName}:addIncidentSamples": {
+      "post": {
+        "operationId": "ImageIncidents_AddIncidentSamples",
+        "summary": "Add ImageIncidentSamples To Incident",
+        "description": "Add imageIncidentSamples to an incident. You can add at most 100 imageIncidentSamples in one request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddImageIncidentSamplesOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AddImageIncidentSamplesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image/incident/{incidentName}:removeIncidentSamples": {
+      "post": {
+        "operationId": "ImageIncidents_RemoveIncidentSamples",
+        "summary": "Remove ImageIncidentSamples From Incident",
+        "description": "Remove imageIncidentSamples from an incident. You can remove at most 100 Image Incident in one request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoveImageIncidentSamplesOptions"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image/incident/{incidentName}/incidentSamples": {
+      "get": {
+        "operationId": "ImageIncidents_ListIncidentSamples",
+        "summary": "Get All ImageIncidentSamples By imageIncidentName",
+        "description": "Get all ImageIncidentSamples in a image incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedListImageIncidentSampleResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/image/incident/{incidentName}/incidentSamples/{incidentSampleId}": {
+      "get": {
+        "operationId": "ImageIncidents_GetIncidentSample",
+        "summary": "Get ImageIncidentSample By imageIncidentName And imageIncidentSampleId",
+        "description": "Get imageIncidentSample by imageIncidentName and imageIncidentSampleId from a image incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "incidentSampleId",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageIncidentSampleResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/image:analyze": {
       "post": {
         "operationId": "ImageOperations_AnalyzeImage",
@@ -594,6 +960,372 @@
         }
       }
     },
+    "/text/incident": {
+      "get": {
+        "operationId": "TextIncidents_ListIncidents",
+        "summary": "Get All Text Incidents",
+        "description": "Get all incidents details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTextIncident"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/text/incident/{incidentName}": {
+      "get": {
+        "operationId": "TextIncidents_GetIncidents",
+        "summary": "Get Text Incident By incidentName",
+        "description": "Returns text incident details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextIncident"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "TextIncidents_CreateOrUpdateIncident",
+        "summary": "Create Or Update Text Incident",
+        "description": "Updates a text incident. If the text incident does not exist, a new text incident will be created.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextIncidentCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextIncident"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TextIncident"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TextIncidents_DeleteIncident",
+        "summary": "Delete Text Incident By incidentName",
+        "description": "Deletes a text incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/incident/{incidentName}:addIncidentSamples": {
+      "post": {
+        "operationId": "TextIncidents_AddIncidentSamples",
+        "summary": "Add TextIncidentSamples To Incident",
+        "description": "Add textIncidentSamples to an incident. You can add at most 100 textIncidentSamples in one request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddTextIncidentSamplesOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AddTextIncidentSamplesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/incident/{incidentName}:removeIncidentSamples": {
+      "post": {
+        "operationId": "TextIncidents_RemoveIncidentSamples",
+        "summary": "Remove TextIncidentSamples From Incident",
+        "description": "Remove textIncidentSamples from an incident. You can remove at most 100 Text Incident in one request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoveTextIncidentSamplesOptions"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/incident/{incidentName}/incidentSamples": {
+      "get": {
+        "operationId": "TextIncidents_ListIncidentSamples",
+        "summary": "Get All TextIncidentSamples By textIncidentName",
+        "description": "Get all TextIncidentSamples in a text incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTextIncidentSample"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/text/incident/{incidentName}/incidentSamples/{incidentSampleId}": {
+      "get": {
+        "operationId": "TextIncidents_GetIncidentSample",
+        "summary": "Get TextIncidentSample By textIncidentName And textIncidentSampleId",
+        "description": "Get textIncidentSample by textIncidentName and textIncidentSampleId from a text incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "incidentSampleId",
+            "in": "path",
+            "description": "incident name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextIncidentSample"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/text:adaptiveAnnotate": {
       "post": {
         "operationId": "PromptTextOperations_AnnotateText",
@@ -678,6 +1410,40 @@
     }
   },
   "definitions": {
+    "AddImageIncidentSamplesOptions": {
+      "type": "object",
+      "description": "The request to add incidentSamples to a incident.",
+      "properties": {
+        "incidentSamples": {
+          "type": "array",
+          "description": "Array of incidentSamples to add.",
+          "items": {
+            "$ref": "#/definitions/ImageIncidentSample"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "incidentSamples"
+      ]
+    },
+    "AddImageIncidentSamplesResult": {
+      "type": "object",
+      "description": "The response of adding incidentSamples to the incident.",
+      "properties": {
+        "incidentSamples": {
+          "type": "array",
+          "description": "Array of incidentSamples have been added.",
+          "items": {
+            "$ref": "#/definitions/ListImageIncidentSampleResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "incidentSamples"
+      ]
+    },
     "AddOrUpdateTextBlocklistItemsOptions": {
       "type": "object",
       "description": "The request to add blocklistItems to a text blocklist.",
@@ -712,6 +1478,40 @@
         "blocklistItems"
       ]
     },
+    "AddTextIncidentSamplesOptions": {
+      "type": "object",
+      "description": "The request to add incidentSamples to a incident.",
+      "properties": {
+        "incidentSamples": {
+          "type": "array",
+          "description": "Array of incidentSamples to add.",
+          "items": {
+            "$ref": "#/definitions/TextIncidentSample"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "incidentSamples"
+      ]
+    },
+    "AddTextIncidentSamplesResult": {
+      "type": "object",
+      "description": "The response of adding incidentSamples to the incident.",
+      "properties": {
+        "incidentSamples": {
+          "type": "array",
+          "description": "Array of incidentSamples have been added.",
+          "items": {
+            "$ref": "#/definitions/TextIncidentSample"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "incidentSamples"
+      ]
+    },
     "AnalyzeImageOptions": {
       "type": "object",
       "description": "The image analysis request.",
@@ -731,6 +1531,17 @@
           "$ref": "#/definitions/AnalyzeImageOutputType",
           "description": "This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
           "default": "FourSeverityLevels"
+        },
+        "incidentNames": {
+          "type": "array",
+          "description": "The accept decision made by service.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "haltOnIncidentHit": {
+          "type": "boolean",
+          "description": "When set to true, further analyses of harmful content will not be performed in cases where incidents are hit. When set to false, all analyses of harmful content will be performed, whether or not incidents are hit."
         }
       },
       "required": [
@@ -764,6 +1575,14 @@
           "description": "Analysis result for categories.",
           "items": {
             "$ref": "#/definitions/ImageCategoriesAnalysis"
+          },
+          "x-ms-identifiers": []
+        },
+        "incidentMatches": {
+          "type": "array",
+          "description": "The incident match details.",
+          "items": {
+            "$ref": "#/definitions/IncidentMatch"
           },
           "x-ms-identifiers": []
         }
@@ -803,6 +1622,17 @@
           "$ref": "#/definitions/AnalyzeTextOutputType",
           "description": "This refers to the type of text analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
           "default": "FourSeverityLevels"
+        },
+        "incidentNames": {
+          "type": "array",
+          "description": "The accept decision made by service.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "haltOnIncidentHit": {
+          "type": "boolean",
+          "description": "When set to true, further analyses of harmful content will not be performed in cases where incidents are hit. When set to false, all analyses of harmful content will be performed, whether or not incidents are hit."
         }
       },
       "required": [
@@ -850,6 +1680,14 @@
           "description": "Analysis result for categories.",
           "items": {
             "$ref": "#/definitions/TextCategoriesAnalysis"
+          },
+          "x-ms-identifiers": []
+        },
+        "incidentMatches": {
+          "type": "array",
+          "description": "The incident match details.",
+          "items": {
+            "$ref": "#/definitions/IncidentMatch"
           },
           "x-ms-identifiers": []
         }
@@ -1017,6 +1855,114 @@
         }
       }
     },
+    "ImageDataResult": {
+      "type": "object",
+      "description": "The image result is base64 encoded bytes",
+      "properties": {
+        "content": {
+          "type": "string",
+          "format": "byte",
+          "description": "The Base64 encoding of the image."
+        }
+      }
+    },
+    "ImageIncident": {
+      "type": "object",
+      "description": "Image Incident.",
+      "properties": {
+        "incidentName": {
+          "type": "string",
+          "description": "incident name.",
+          "maxLength": 64,
+          "pattern": "^[0-9A-Za-z._~-]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Incident description.",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "incidentName"
+      ]
+    },
+    "ImageIncidentCreateOrUpdate": {
+      "type": "object",
+      "description": "Image Incident.",
+      "properties": {
+        "incidentName": {
+          "type": "string",
+          "description": "incident name.",
+          "maxLength": 64,
+          "pattern": "^[0-9A-Za-z._~-]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Incident description.",
+          "maxLength": 1024
+        }
+      }
+    },
+    "ImageIncidentSample": {
+      "type": "object",
+      "description": "Sample in an Image Incident.",
+      "properties": {
+        "incidentSampleId": {
+          "type": "string",
+          "description": "incident name.",
+          "maxLength": 64,
+          "readOnly": true
+        },
+        "image": {
+          "$ref": "#/definitions/ImageData",
+          "description": "IncidentSample image content."
+        }
+      },
+      "required": [
+        "incidentSampleId"
+      ]
+    },
+    "ImageIncidentSampleResult": {
+      "type": "object",
+      "description": "Sample Result in an Image Incident.",
+      "properties": {
+        "incidentSampleId": {
+          "type": "string",
+          "description": "incident name.",
+          "maxLength": 64,
+          "readOnly": true
+        },
+        "image": {
+          "$ref": "#/definitions/ImageDataResult",
+          "description": "IncidentSample image content."
+        }
+      },
+      "required": [
+        "incidentSampleId"
+      ]
+    },
+    "IncidentMatch": {
+      "type": "object",
+      "description": "The result of text incident match.",
+      "properties": {
+        "incidentName": {
+          "type": "string",
+          "description": "The name of the matched incident.",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "incidentName"
+      ]
+    },
     "Label": {
       "type": "object",
       "description": "Label definition.",
@@ -1038,6 +1984,65 @@
       "required": [
         "label",
         "scenarios"
+      ]
+    },
+    "ListImageIncidentSampleResult": {
+      "type": "object",
+      "description": "Sample in a Image Incident.",
+      "properties": {
+        "incidentSampleId": {
+          "type": "string",
+          "description": "incident name.",
+          "maxLength": 64,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "incidentSampleId"
+      ]
+    },
+    "PagedImageIncident": {
+      "type": "object",
+      "description": "Paged collection of ImageIncident items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ImageIncident items on this page",
+          "items": {
+            "$ref": "#/definitions/ImageIncident"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedListImageIncidentSampleResult": {
+      "type": "object",
+      "description": "Paged collection of ListImageIncidentSampleResult items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ListImageIncidentSampleResult items on this page",
+          "items": {
+            "$ref": "#/definitions/ListImageIncidentSampleResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "PagedTextBlocklist": {
@@ -1084,6 +2089,50 @@
         "value"
       ]
     },
+    "PagedTextIncident": {
+      "type": "object",
+      "description": "Paged collection of TextIncident items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextIncident items on this page",
+          "items": {
+            "$ref": "#/definitions/TextIncident"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextIncidentSample": {
+      "type": "object",
+      "description": "Paged collection of TextIncidentSample items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextIncidentSample items on this page",
+          "items": {
+            "$ref": "#/definitions/TextIncidentSample"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PreDefinedConcept": {
       "type": "object",
       "description": "Pre-defined concept.",
@@ -1100,6 +2149,22 @@
         "description"
       ]
     },
+    "RemoveImageIncidentSamplesOptions": {
+      "type": "object",
+      "description": "The request to remove incidentSamples from a incident.",
+      "properties": {
+        "incidentSampleIds": {
+          "type": "array",
+          "description": "Array of incidentSamples to remove.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "incidentSampleIds"
+      ]
+    },
     "RemoveTextBlocklistItemsOptions": {
       "type": "object",
       "description": "The request to remove blocklistItems from a text blocklist.",
@@ -1114,6 +2179,22 @@
       },
       "required": [
         "blocklistItemIds"
+      ]
+    },
+    "RemoveTextIncidentSamplesOptions": {
+      "type": "object",
+      "description": "The request to remove incidentSamples from a incident.",
+      "properties": {
+        "incidentSampleIds": {
+          "type": "array",
+          "description": "Array of incidentSamples to remove.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "incidentSampleIds"
       ]
     },
     "TextBlocklist": {
@@ -1287,6 +2368,71 @@
       "required": [
         "categoryName",
         "labels"
+      ]
+    },
+    "TextIncident": {
+      "type": "object",
+      "description": "Text Incident.",
+      "properties": {
+        "incidentName": {
+          "type": "string",
+          "description": "incident name.",
+          "maxLength": 64,
+          "pattern": "^[0-9A-Za-z._~-]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Incident description.",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "incidentName"
+      ]
+    },
+    "TextIncidentCreateOrUpdate": {
+      "type": "object",
+      "description": "Text Incident.",
+      "properties": {
+        "incidentName": {
+          "type": "string",
+          "description": "incident name.",
+          "maxLength": 64,
+          "pattern": "^[0-9A-Za-z._~-]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Incident description.",
+          "maxLength": 1024
+        }
+      }
+    },
+    "TextIncidentSample": {
+      "type": "object",
+      "description": "Sample in a Text Incident.",
+      "properties": {
+        "incidentSampleId": {
+          "type": "string",
+          "description": "incident name.",
+          "maxLength": 64,
+          "readOnly": true
+        },
+        "text": {
+          "type": "string",
+          "description": "IncidentSample text content.",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "incidentSampleId"
       ]
     },
     "Versions": {
