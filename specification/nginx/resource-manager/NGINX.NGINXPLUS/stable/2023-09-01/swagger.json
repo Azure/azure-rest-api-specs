@@ -476,6 +476,70 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/configurations/{configurationName}/analysis": {
+      "post": {
+        "tags": [
+          "NginxConfigurationAnalysis"
+        ],
+        "summary": "Analyze an NGINX configuration without applying it to the NGINXaaS deployment",
+        "operationId": "Configurations_Analysis",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of configuration, only 'default' is supported value due to the singleton of NGINX conf",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The NGINX configuration to analyze",
+            "schema": {
+              "$ref": "#/definitions/AnalysisCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analysis complete",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResult"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configurations_Analysis": {
+            "$ref": "./examples/Configurations_Analysis.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}": {
       "get": {
         "tags": [
@@ -1397,6 +1461,100 @@
           "type": "string"
         }
       }
+    },
+    "AnalysisCreate": {
+      "type": "object",
+      "description": "The request body for creating an analysis for an NGINX configuration.",
+      "properties": {
+        "config": {
+          "type": "object",
+          "properties": {
+            "rootFile": {
+              "type": "string",
+              "description": "The root file of the NGINX config file(s). It must match one of the files' filepath."
+            },
+            "files": {
+              "$ref": "#/definitions/NginxConfigurationFile"
+            },
+            "protectedFiles": {
+              "$ref": "#/definitions/NginxConfigurationFile"
+            },
+            "package": {
+              "$ref": "#/definitions/NginxConfigurationPackage"
+            }
+          }
+        }
+      },
+      "required": [
+        "config"
+      ]
+    },
+    "AnalysisResult": {
+      "type": "object",
+      "description": "The response body for an analysis request. Contains the status of the analysis and any errors.",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the analysis."
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "errors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AnalysisError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "AnalysisError": {
+      "type": "object",
+      "description": "An error object found during the analysis of an NGINX configuration.",
+      "required": [
+        "directive",
+        "description",
+        "file",
+        "line",
+        "message",
+        "rule"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the error"
+        },
+        "directive": {
+          "type": "string",
+          "example": "worker_processes"
+        },
+        "description": {
+          "type": "string",
+          "example": "Directives outside the http context are not allowed"
+        },
+        "file": {
+          "type": "string",
+          "description": "the filepath of the most relevant config file",
+          "example": "nginx.conf"
+        },
+        "line": {
+          "type": "number",
+          "example": 2
+        },
+        "message": {
+          "type": "string",
+          "example": "You are not allowed to set the worker_processes directive"
+        },
+        "rule": {
+          "type": "string",
+          "example": "nginx-azure-load-balancer-allowed-directives"
+        }
+      }
     }
   },
   "parameters": {
@@ -1404,6 +1562,7 @@
       "in": "path",
       "name": "deploymentName",
       "description": "The name of targeted NGINX deployment",
+      "pattern": "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
