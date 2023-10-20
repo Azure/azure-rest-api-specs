@@ -7,7 +7,7 @@ import { RuleResult } from "../rule-result.js";
 export class EmitAutorestRule implements Rule {
   readonly name = "EmitAutorest";
 
-  readonly description = "Ensures each spec emits @azure-tools/typespec-autorest by default";
+  readonly description = "Ensures spec emits @azure-tools/typespec-autorest by default";
 
   async execute(folder: string): Promise<RuleResult> {
     let success = true;
