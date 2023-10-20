@@ -118,7 +118,7 @@ namespace Microsoft.EventGrid {
 
   @doc("Failed LockToken information.")
   model FailedLockToken {
-    @doc("LockToken value")
+    @doc("The lock token of an entry in the request.")
     lockToken: string;
 
     @doc("Error information of the failed operation result for the lock token in the request.")
@@ -126,7 +126,7 @@ namespace Microsoft.EventGrid {
   }
 
   @doc("Supported delays for release operation.")
-  enum Delay {
+  enum ReleaseDelay {
     @doc("Release the event after 0 seconds.")
     By0Seconds: 0,
 
@@ -318,7 +318,7 @@ namespace Microsoft.EventGrid {
 
       @doc("Release cloud events with the specified delay in seconds.")
       @query
-      releaseDelayInSeconds?: Delay;
+      releaseDelayInSeconds?: ReleaseDelay;
     },
     ReleaseResult
   >;
