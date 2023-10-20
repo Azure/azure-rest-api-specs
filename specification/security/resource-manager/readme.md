@@ -102,24 +102,6 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 input-file:
   - Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
 ```
-
-### Tag: package-2023-11-15
-
-These settings apply only when `--tag=package-2023-11-15` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-11-15'
-input-file:
-  - Microsoft.Security/stable/2023-11-15/apiCollections.json
-```
-
-### Tag: package-preview-2023-10
-
-These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-10'
-input-file:
-  - Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
-```
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
