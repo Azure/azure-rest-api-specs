@@ -3,6 +3,7 @@ import { join } from "path";
 import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
+import { checkFileExists } from "../utils.js";
 
 export class EmitAutorestRule implements Rule {
   readonly name = "EmitAutorest";
@@ -14,20 +15,25 @@ export class EmitAutorestRule implements Rule {
     let stdOutput = "";
     let errorOutput = "";
 
-    const configFile = join(folder, "tspconfig.yaml");
-    const configText = await readFile(configFile, "utf8");
-    const config = yamlParse(configText);
+    const mainTspExists = await checkFileExists(join(folder, "main.tsp"));
+    stdOutput += `mainTspExists: ${mainTspExists}`;
 
-    const emit = config.emit;
-    stdOutput += `emit: ${JSON.stringify(emit)}\n`;
+    if (mainTspExists) {
+      const configFile = join(folder, "tspconfig.yaml");
+      const configText = await readFile(configFile, "utf8");
+      const config = yamlParse(configText);
 
-    if (!emit?.includes("@azure-tools/typespec-autorest")) {
-      success = false;
-      errorOutput +=
-        "tspconfig.yaml must include the following emitter by default:\n" +
-        "\n" +
-        "emit:\n" +
-        '  - "@azure-tools/typespec-autorest"\n';
+      const emit = config.emit;
+      stdOutput += `emit: ${JSON.stringify(emit)}\n`;
+
+      if (!emit?.includes("@azure-tools/typespec-autorest")) {
+        success = false;
+        errorOutput +=
+          "tspconfig.yaml must include the following emitter by default:\n" +
+          "\n" +
+          "emit:\n" +
+          '  - "@azure-tools/typespec-autorest"\n';
+      }
     }
 
     return {
