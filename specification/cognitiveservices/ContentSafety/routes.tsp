@@ -25,6 +25,21 @@ interface TextOperations {
     AnalyzeTextResult
   >;
 
+  
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @summary("Analyze Text Jailbreak")
+  @doc("A synchronous API for the analysis of text jailbreak.")
+  @route("/text:analyzeJailbreak")
+  @post
+  analyzeTextJailbreak is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text jailbreak analysis request.")
+      body: AnalyzeTextJailbreakOptions;
+    },
+    AnalyzeTextJailbreakResult
+  >;
+
   @added(ContentSafety.Versions.v2023_10_15_Preview)
   @summary("Analyze NL Snippy")
   @doc("A synchronous API for the analysis of text snippy.")

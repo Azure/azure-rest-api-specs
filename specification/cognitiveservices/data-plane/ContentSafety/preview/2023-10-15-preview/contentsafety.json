@@ -758,11 +758,52 @@
         }
       }
     },
-    "/text:analyzeNLSnippy": {
+    "/text:analyzeJailbreak": {
       "post": {
-        "operationId": "TextOperations_AnalyzeTextNlSnippy",
-        "summary": "Analyze NL Snippy",
-        "description": "A synchronous API for the analysis of text snippy.",
+        "operationId": "TextOperations_AnalyzeTextJailbreak",
+        "summary": "Analyze Text Jailbreak",
+        "description": "A synchronous API for the analysis of text jailbreak.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The text jailbreak analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextJailbreakOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextJailbreakResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text:snippyAnalyze": {
+      "post": {
+        "operationId": "TextOperations_AnalyzeTextSnippy",
+        "summary": "Analyze Snippy",
+        "description": "A synchronous API for the analysis of text snippy. Currently, it supports four categories: NLSnippy.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -773,7 +814,7 @@
             "description": "The text analysis request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AnalyzeTextNlSnippyOptions"
+              "$ref": "#/definitions/AnalyzeTextSnippyOptions"
             }
           }
         ],
@@ -781,7 +822,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AnalyzeTextNlSnippyResult"
+              "$ref": "#/definitions/AnalyzeTextSnippyResult"
             }
           },
           "default": {
@@ -903,13 +944,13 @@
         "categoriesAnalysis"
       ]
     },
-    "AnalyzeTextNlSnippyOptions": {
+    "AnalyzeTextJailbreakOptions": {
       "type": "object",
-      "description": "The text analysis request.",
+      "description": "The text jailbreak analysis request.",
       "properties": {
         "text": {
           "type": "string",
-          "description": "The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.",
+          "description": "The text needs to be analyzed if it attempt to jailbreak. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.",
           "maxLength": 1000
         }
       },
@@ -917,17 +958,17 @@
         "text"
       ]
     },
-    "AnalyzeTextNlSnippyResult": {
+    "AnalyzeTextJailbreakResult": {
       "type": "object",
-      "description": "The text analysis response.",
+      "description": "The text jailbreak analysis request.",
       "properties": {
-        "detected": {
-          "type": "boolean",
-          "description": "Analysis result for NLSnippy."
+        "jailbreakAnalysis": {
+          "$ref": "#/definitions/JailbreakAnalysisResult",
+          "description": "Analysis result for jailbreak."
         }
       },
       "required": [
-        "detected"
+        "jailbreakAnalysis"
       ]
     },
     "AnalyzeTextOptions": {
@@ -1022,6 +1063,40 @@
       },
       "required": [
         "categoriesAnalysis"
+      ]
+    },
+    "AnalyzeTextSnippyOptions": {
+      "type": "object",
+      "description": "The text analysis request.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.",
+          "maxLength": 1000
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.",
+          "items": {
+            "$ref": "#/definitions/SnippyCategory"
+          }
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AnalyzeTextSnippyResult": {
+      "type": "object",
+      "description": "The text analysis response.",
+      "properties": {
+        "nlSnippy": {
+          "$ref": "#/definitions/NlSnippyResult",
+          "description": "Analysis result for NLSnippy categories."
+        }
+      },
+      "required": [
+        "nlSnippy"
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -1239,6 +1314,32 @@
         }
       }
     },
+    "JailbreakAnalysisResult": {
+      "type": "object",
+      "description": "The text jailbreak analysis response.",
+      "properties": {
+        "violated": {
+          "type": "boolean",
+          "description": "Analysis result for jailbreak."
+        }
+      },
+      "required": [
+        "violated"
+      ]
+    },
+    "NlSnippyResult": {
+      "type": "object",
+      "description": "The text nl snippy analysis request.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Analysis result for categories."
+        }
+      },
+      "required": [
+        "detected"
+      ]
+    },
     "PagedProject": {
       "type": "object",
       "description": "Paged collection of Project items",
@@ -1416,6 +1517,17 @@
       "required": [
         "blocklistItemIds"
       ]
+    },
+    "SnippyCategory": {
+      "type": "string",
+      "description": "Snippy analyze category.",
+      "enum": [
+        "NLSnippy"
+      ],
+      "x-ms-enum": {
+        "name": "SnippyCategory",
+        "modelAsString": true
+      }
     },
     "TextBlocklist": {
       "type": "object",
