@@ -6143,7 +6143,7 @@
           "items": {
             "$ref": "#/definitions/VectorSearchAlgorithmConfiguration"
           },
-          "description": "Contains configuration options specific to the algorithm used during indexing and/or querying."
+          "description": "Contains configuration options specific to the algorithm used during indexing or querying."
         },
         "vectorizers": {
           "type": "array",
@@ -6205,7 +6205,7 @@
         "name",
         "kind"
       ],
-      "description": "Contains configuration options specific to the algorithm used during indexing and/or querying."
+      "description": "Contains configuration options specific to the algorithm used during indexing or querying."
     },
     "HnswVectorSearchAlgorithmConfiguration": {
       "type": "object",
@@ -6219,10 +6219,10 @@
         "hnswParameters": {
           "x-ms-client-name": "Parameters",
           "$ref": "#/definitions/HnswParameters",
-          "description": "Contains the parameters specific to hnsw algorithm."
+          "description": "Contains the parameters specific to HNSW algorithm."
         }
       },
-      "description": "Contains configuration options specific to the hnsw approximate nearest neighbors algorithm used during indexing and querying. The hnsw algorithm offers a tunable trade-off between search speed and accuracy."
+      "description": "Contains configuration options specific to the HNSW approximate nearest neighbors algorithm used during indexing and querying. The HNSW algorithm offers a tunable trade-off between search speed and accuracy."
     },
     "HnswParameters": {
       "type": "object",
@@ -6260,7 +6260,7 @@
           "description": "The similarity metric to use for vector comparisons."
         }
       },
-      "description": "Contains the parameters specific to hnsw algorithm."
+      "description": "Contains the parameters specific to the HNSW algorithm."
     },
     "ExhaustiveKnnVectorSearchAlgorithmConfiguration": {
       "type": "object",
@@ -6330,7 +6330,7 @@
           {
             "value": "hnsw",
             "name": "Hnsw",
-            "description": "Hnsw (Hierarchical Navigable Small World), a type of approximate nearest neighbors algorithm."
+            "description": "HNSW (Hierarchical Navigable Small World), a type of approximate nearest neighbors algorithm."
           },
           {
             "value": "exhaustiveKnn",
@@ -6363,7 +6363,7 @@
         "name",
         "kind"
       ],
-      "description": "Contains specific details for a vectorization method to be used during query time."
+      "description": "Specifies the vectorization method to be used during query time."
     },
     "AzureOpenAIVectorizer": {
       "type": "object",
@@ -6380,7 +6380,7 @@
           "description": "Contains the parameters specific to Azure Open AI embedding vectorization."
         }
       },
-      "description": "Contains the parameters specific to using an Azure Open AI service for vectorization at query time."
+      "description": "Specifies parameters for the Azure Open AI vectorizor at query time."
     },
     "AzureOpenAIParameters": {
       "type": "object",
@@ -6388,7 +6388,7 @@
         "resourceUri": {
           "type": "string",
           "format": "uri",
-          "description": "The resource uri for your Azure Open AI resource."
+          "description": "The resource URI for your Azure Open AI resource."
         },
         "deploymentId": {
           "type": "string",
@@ -6404,7 +6404,7 @@
           "description": "The user-assigned managed identity used for outbound connections."
         }
       },
-      "description": "Contains the parameters specific to using an Azure Open AI service for vectorization at query time."
+      "description": "Specifies the parameters for connecting to the Azure OpenAI resource."
     },
     "CustomVectorizer": {
       "type": "object",
@@ -8604,7 +8604,7 @@
       ]
     },
     "CognitiveServicesAccountKey": {
-      "description": "An Azure AI service resource provisioned with a key that is attached to a skillset.",
+      "description": "The multi-region account key of an Azure AI service resource that's attached to a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CognitiveServicesByKey",
       "allOf": [
         {
