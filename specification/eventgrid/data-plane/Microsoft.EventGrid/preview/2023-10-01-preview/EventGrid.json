@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure.Messaging.EventGridClient",
-    "version": "2023-06-01-preview",
+    "version": "2023-10-01-preview",
     "description": "Azure Messaging EventGrid Client",
     "x-typespec-generated": [
       {
@@ -337,7 +337,7 @@
           }
         },
         "x-ms-examples": {
-          "Release Cloud Event": {
+          "Release Cloud Event with an optional delay.": {
             "$ref": "./examples/release.json"
           }
         }
@@ -452,6 +452,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Renew lock for batch of Cloud Events": {
+            "$ref": "./examples/renewlock.json"
           }
         }
       }
