@@ -694,292 +694,292 @@
           }
         }
       }
-  },
-  "/{resourceUri}/providers/Microsoft.HybridCompute/networkConfigurations/current": {
-    "get": {
-      "tags": [
-        "NetworkConfigurations"
-      ],
-      "description": "Returns a NetworkConfiguration for the target resource.",
-      "operationId": "NetworkConfigurations_Get",
-      "produces": [
-        "application/json"
-      ],
-      "x-ms-examples": {
-        "NetworkConfigurationsGet": {
-          "$ref": "./examples/networkConfiguration/NetworkConfigurationsGet.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceUriParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Network Configuration information for the target resource.",
-          "schema": {
-            "$ref": "#/definitions/NetworkConfiguration"
-          }
-        },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "deprecated": false
     },
-    "put": {
-      "tags": [
-        "NetworkConfigurations"
-      ],
-      "description": "Create or update the NetworkConfiguration of the target resource.",
-      "operationId": "NetworkConfigurations_CreateOrUpdate",
-      "produces": [
-        "application/json"
-      ],
-      "x-ms-examples": {
-        "NetworkConfigurationsCreate": {
-          "$ref": "./examples/networkConfiguration/NetworkConfigurationsCreate.json"
-        },
-        "NetworkConfigurationsUpdate": {
-          "$ref": "./examples/networkConfiguration/NetworkConfigurationsUpdate.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceUriParameter"
-        },
-        {
-          "name": "parameters",
-          "description": "Network Configuration details",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/NetworkConfiguration"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Successful request when creating or updating a NetworkConfiguration. The updated NetworkConfiguration is returned.",
-          "schema": {
-            "$ref": "#/definitions/NetworkConfiguration"
+    "/{resourceUri}/providers/Microsoft.HybridCompute/networkConfigurations/current": {
+      "get": {
+        "tags": [
+          "NetworkConfigurations"
+        ],
+        "description": "Returns a NetworkConfiguration for the target resource.",
+        "operationId": "NetworkConfigurations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkConfigurationsGet": {
+            "$ref": "./examples/networkConfiguration/NetworkConfigurationsGet.json"
           }
         },
-        "201": {
-          "description": "Successful request when creating or updating a NetworkConfiguration. The updated NetworkConfiguration was created and is returned.",
-          "schema": {
-            "$ref": "#/definitions/NetworkConfiguration"
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
           }
-        },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    },
-    "patch": {
-      "tags": [
-        "NetworkConfigurations"
-      ],
-      "description": "Update the endpoint to the target resource.",
-      "operationId": "NetworkConfigurations_Update",
-      "produces": [
-        "application/json"
-      ],
-      "x-ms-examples": {
-        "NetworkConfigurationsPatch": {
-          "$ref": "./examples/networkConfiguration/NetworkConfigurationsPatch.json"
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceUriParameter"
-        },
-        {
-          "name": "parameters",
-          "description": "Network Configuration details",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/NetworkConfiguration"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Network Configuration information for the target resource.",
-          "schema": {
-            "$ref": "#/definitions/NetworkConfiguration"
-          }
-        },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterName}": {
-    "get": {
-      "tags": [
-        "NetworkSecurityPerimeterConfiguration"
-      ],
-      "description": "Gets the network security perimeter configuration for a private link scope.",
-      "operationId": "NetworkSecurityPerimeterConfigurations_GetByPrivateLinkScope",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/PrivateLinkScopeName"
-        },
-        {
-          "$ref": "#/parameters/PerimeterName"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Successfully retrieved network security perimeter configuration details.",
-          "schema": {
-            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
-          }
-        },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-examples": {
-        "Gets the network security perimeter configuration of the private link scope.": {
-          "$ref": "./examples/networkSecurityPerimeterConfiguration/NetworkSecurityPerimeterConfigurationGet.json"
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations": {
-    "get": {
-      "tags": [
-        "NetworkSecurityPerimeterConfiguration"
-      ],
-      "description": "Lists the network security perimeter configurations for a private link scope.",
-      "operationId": "NetworkSecurityPerimeterConfigurations_ListByPrivateLinkScope",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/PrivateLinkScopeName"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Successfully retrieved network security perimeter configuration details.",
-          "schema": {
-            "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
-          }
-        },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
-      },
-      "x-ms-examples": {
-        "Gets the list of network security perimeter configurations of the private link scope.": {
-          "$ref": "./examples/networkSecurityPerimeterConfiguration/NetworkSecurityPerimeterConfigurationList.json"
-        }
-      }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterName}/reconcile": {
-    "post": {
-      "tags": [
-        "NetworkSecurityPerimeterConfiguration"
-      ],
-      "description": "Forces the network security perimeter configuration to refresh for a private link scope.",
-      "operationId": "NetworkSecurityPerimeterConfigurations_ReconcileForPrivateLinkScope",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/PrivateLinkScopeName"
-        },
-        {
-          "$ref": "#/parameters/PerimeterName"
-        }
-      ],
-      "responses": {
-        "202": {
-          "description": "Accepted.",
-          "headers": {
-            "Location": {
-              "description": "The URL of the resource used to check the status of the asynchronous operation.",
-              "type": "string"
-            },
-            "Retry-After": {
-              "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-              "type": "integer",
-              "format": "int32"
-            },
-            "Azure-AsyncOperation": {
-              "description": "The URI to poll for completion status.",
-              "type": "string"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network Configuration information for the target resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "NetworkConfigurations"
+        ],
+        "description": "Create or update the NetworkConfiguration of the target resource.",
+        "operationId": "NetworkConfigurations_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkConfigurationsCreate": {
+            "$ref": "./examples/networkConfiguration/NetworkConfigurationsCreate.json"
+          },
+          "NetworkConfigurationsUpdate": {
+            "$ref": "./examples/networkConfiguration/NetworkConfigurationsUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "Network Configuration details",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request when creating or updating a NetworkConfiguration. The updated NetworkConfiguration is returned.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          },
+          "201": {
+            "description": "Successful request when creating or updating a NetworkConfiguration. The updated NetworkConfiguration was created and is returned.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
+      "patch": {
+        "tags": [
+          "NetworkConfigurations"
+        ],
+        "description": "Update the endpoint to the target resource.",
+        "operationId": "NetworkConfigurations_Update",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkConfigurationsPatch": {
+            "$ref": "./examples/networkConfiguration/NetworkConfigurationsPatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "Network Configuration details",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Network Configuration information for the target resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterName}": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfiguration"
+        ],
+        "description": "Gets the network security perimeter configuration for a private link scope.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_GetByPrivateLinkScope",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          },
+          {
+            "$ref": "#/parameters/PerimeterName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved network security perimeter configuration details.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the network security perimeter configuration of the private link scope.": {
+            "$ref": "./examples/networkSecurityPerimeterConfiguration/NetworkSecurityPerimeterConfigurationGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfiguration"
+        ],
+        "description": "Lists the network security perimeter configurations for a private link scope.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_ListByPrivateLinkScope",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved network security perimeter configuration details.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets the list of network security perimeter configurations of the private link scope.": {
+            "$ref": "./examples/networkSecurityPerimeterConfiguration/NetworkSecurityPerimeterConfigurationList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterName}/reconcile": {
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeterConfiguration"
+        ],
+        "description": "Forces the network security perimeter configuration to refresh for a private link scope.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_ReconcileForPrivateLinkScope",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkScopeName"
+          },
+          {
+            "$ref": "#/parameters/PerimeterName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-        "Reconciles the network security perimeter configuration of the private link scope.": {
-          "$ref": "./examples/networkSecurityPerimeterConfiguration/NetworkSecurityPerimeterConfigurationReconcile.json"
+          "Reconciles the network security perimeter configuration of the private link scope.": {
+            "$ref": "./examples/networkSecurityPerimeterConfiguration/NetworkSecurityPerimeterConfigurationReconcile.json"
           }
         }
       }
@@ -1132,7 +1132,7 @@
           "items": {
             "$ref": "#/definitions/ProvisioningIssue"
           },
-          "x-ms-identifiers":[]
+          "x-ms-identifiers": []
         },
         "networkSecurityPerimeter": {
           "description": "The Network Security Perimeter associated with this configuration.",
@@ -1169,7 +1169,7 @@
           "items": {
             "$ref": "#/definitions/AccessRule"
           },
-          "x-ms-identifiers":[]
+          "x-ms-identifiers": []
         },
         "diagnosticSettingsVersion": {
           "type": "string",
@@ -1229,7 +1229,7 @@
           "items": {
             "type": "string"
           },
-          "x-ms-identifiers":[]
+          "x-ms-identifiers": []
         },
         "suggestedAccessRules": {
           "type": "array",
@@ -1238,7 +1238,7 @@
           "items": {
             "$ref": "#/definitions/AccessRule"
           },
-          "x-ms-identifiers":[]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1884,11 +1884,11 @@
       "description": "The id (Guid) of the Azure Arc Network Configuration Scope resource.",
       "x-ms-parameter-location": "method"
     },
-    "PerimeterName":{
+    "PerimeterName": {
       "name": "perimeterName",
-      "in":"path",
-      "required":true,
-      "type":"string",
+      "in": "path",
+      "required": true,
+      "type": "string",
       "description": "The name, in the format {perimeterGuid}.{associationName}, of the Network Security Perimeter resource.",
       "x-ms-parameter-location": "method",
       "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[.]{1}.+$"
