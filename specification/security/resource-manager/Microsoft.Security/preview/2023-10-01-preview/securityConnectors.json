@@ -1510,6 +1510,40 @@
               "description": "the azure active directory app name used of authenticating against GCP workload identity federation"
             }
           }
+        },
+        "vmScanners": {
+          "type": "object",
+          "description": "The Microsoft Defender for Server VM scanning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender for Server VM scanning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "configuration for Microsoft Defender for Server VM scanning",
+              "properties": {
+                "scanningMode": {
+                  "type": "string",
+                  "description": "The scanning mode for the VM scan.",
+                  "enum": [
+                    "Default"
+                  ],
+                  "x-ms-enum": {
+                    "name": "scanningMode",
+                    "modelAsString": true
+                  }
+                },
+                "exclusionTags": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "VM tags that indicates that VM should not be scanned"
+                }
+              }
+            }
+          }
         }
       }
     },
