@@ -26,17 +26,17 @@ interface TextOperations {
   >;
 
   @added(ContentSafety.Versions.v2023_10_15_Preview)
-  @summary("Analyze Snippy")
-  @doc("A synchronous API for the analysis of text snippy. Currently, it supports four categories: NLSnippy.")
-  @route("/text:snippyAnalyze")
+  @summary("Analyze NL Snippy")
+  @doc("A synchronous API for the analysis of text snippy.")
+  @route("/text:analyzeNLSnippy")
   @post
-  analyzeTextSnippy is Azure.Core.RpcOperation<
+  analyzeTextNlSnippy is Azure.Core.RpcOperation<
     {
       @body
       @doc("The text analysis request.")
-      body: AnalyzeTextSnippyOptions;
+      body: AnalyzeTextNlSnippyOptions;
     },
-    AnalyzeTextSnippyResult
+    AnalyzeTextNlSnippyResult
   >;
 }
 
