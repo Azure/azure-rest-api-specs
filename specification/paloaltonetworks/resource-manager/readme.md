@@ -66,8 +66,16 @@ input-file:
   - PaloAltoNetworks.Cloudngfw/preview/2023-09-01-preview/PaloAltoNetworks.Cloudngfw.json
 ```
 
----
+### Tag: package-2023-09-01
 
+These settings apply only when `--tag=package-2023-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09-01'
+input-file:
+  - PaloAltoNetworks.Cloudngfw/stable/2023-09-01/PaloAltoNetworks.Cloudngfw.json
+```
+
+---
 # Code Generation
 
 ## Swagger to SDK
