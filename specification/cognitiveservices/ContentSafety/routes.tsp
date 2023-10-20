@@ -29,7 +29,7 @@ interface TextOperations {
   @added(ContentSafety.Versions.v2023_10_15_Preview)
   @summary("Analyze Text Jailbreak")
   @doc("A synchronous API for the analysis of text jailbreak.")
-  @route("/text:jailbreakAnalyze")
+  @route("/text:analyzeJailbreak")
   @post
   analyzeTextJailbreak is Azure.Core.RpcOperation<
     {
