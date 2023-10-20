@@ -28,15 +28,15 @@ These are the global settings for the Dashboard API.
 title: DashboardManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-09
+tag: package-2023-09-01
 ```
 
 
-### Tag: package-2023-09
+### Tag: package-2023-09-01
 
-These settings apply only when `--tag=package-2023-09` is specified on the command line.
+These settings apply only when `--tag=package-2023-09-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-09'
+```yaml $(tag) == 'package-2023-09-01'
 input-file:
   - Microsoft.Dashboard/stable/2023-09-01/grafana.json
 ```
