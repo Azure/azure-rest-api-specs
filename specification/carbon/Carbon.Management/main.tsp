@@ -144,6 +144,9 @@ model ItemDetailsQueryFilter extends QueryFilter {
 
   @doc("Number of items to return")
   pageSize: int32;
+
+  @doc("The number of result items to skip")
+  skipToken?: string;
 }
 
 @discriminator("dataType")
@@ -365,6 +368,9 @@ model CarbonEmissionDataListResult {
   @items
   value: CarbonEmissionData[];
 
+  @doc("The number of result items to skip for next page")
+  skipToken?: string;
+
   @doc("The link to the next page of items")
   @Azure.Core.nextLink
   nextLink?: string;
@@ -379,7 +385,6 @@ model CarbonEmissionDataAvailableDateRange {
   endDate: string;
 }
 
-@@query(SkipQueryParameter.skip, "$skipToken");
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Each resource interface must have an @armResourceOperations decorator."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-missing-decorator" "Resource POST operation must be decorated with @armResourceAction or @armResourceCollectionAction."
 interface CarbonService {
@@ -389,7 +394,6 @@ interface CarbonService {
   @route("/providers/Microsoft.Carbon/carbonEmissionReports")
   listCarbonEmissionReports(
     ...ApiVersionParameter,
-    ...SkipQueryParameter,
 
     @body
     @doc("Query parameters")
