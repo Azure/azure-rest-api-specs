@@ -193,6 +193,9 @@
           },
           "Create or Update Container Apps Job With Event Driven Trigger": {
             "$ref": "./examples/Job_CreateorUpdate_EventTrigger.json"
+          },
+          "Create or Update Container Apps Job On A Connected Environment": {
+            "$ref": "./examples/Job_CreateorUpdate_ConnectedEnvironment.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -754,6 +757,9 @@
         }
       ],
       "properties": {
+        "extendedLocation": {
+          "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
+        },
         "identity": {
           "description": "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code.",
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
@@ -820,6 +826,9 @@
       "type": "object",
       "description": "Container Apps Job resource specific properties.",
       "properties": {
+        "extendedLocation": {
+          "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
+        },
         "identity": {
           "description": "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code.",
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
