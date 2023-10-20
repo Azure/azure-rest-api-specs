@@ -4661,6 +4661,24 @@
         ]
       }
     },
+    "EnclaveAddressSpaces": {
+      "type": "object",
+      "description": "Enclave Address Spaces",
+      "properties": {
+        "enclaveAddressSpace": {
+          "type": "string",
+          "description": "Enclave Address Space"
+        },
+        "managedAddressSpace": {
+          "type": "string",
+          "description": "Managed Address Space"
+        }
+      },
+      "required": [
+        "enclaveAddressSpace",
+        "managedAddressSpace"
+      ]
+    },
     "EnclaveConnectionProperties": {
       "type": "object",
       "description": "Enclave Connection Resource properties",
@@ -6152,6 +6170,11 @@
         "enclaveVirtualNetwork": {
           "$ref": "#/definitions/EnclaveVirtualNetwork",
           "description": "Virtual Network."
+        },
+        "enclaveAddressSpaces": {
+          "$ref": "#/definitions/EnclaveAddressSpaces",
+          "description": "Enclave Address Spaces",
+          "readOnly": true
         },
         "communityResourceId": {
           "$ref": "#/definitions/CommunityResourceId",

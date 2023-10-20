@@ -36,6 +36,15 @@ model EnclaveDefaultSettings {
   storageAccountResourceId?: StorageAccountResourceId;
 }
 
+@doc("Enclave Address Spaces")
+model EnclaveAddressSpaces {
+  @doc("Enclave Address Space")
+  enclaveAddressSpace: string;
+
+  @doc("Managed Address Space")
+  managedAddressSpace: string;
+}
+
 @doc("Virtual Enclave Resource properties")
 model VirtualEnclaveProperties {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
@@ -49,6 +58,11 @@ model VirtualEnclaveProperties {
 
   @doc("Virtual Network.")
   enclaveVirtualNetwork: EnclaveVirtualNetwork;
+
+  @added(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @visibility("read")
+  @doc("Enclave Address Spaces")
+  enclaveAddressSpaces?: EnclaveAddressSpaces;
 
   @doc("Community Resource Id.")
   communityResourceId: CommunityResourceId;
