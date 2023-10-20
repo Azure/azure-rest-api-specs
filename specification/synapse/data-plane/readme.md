@@ -76,6 +76,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
   - Microsoft.Synapse/stable/2020-12-01/triggers.json
   - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
@@ -84,6 +85,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-2021-04-01
@@ -123,6 +125,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
   - Microsoft.Synapse/stable/2020-12-01/triggers.json
   - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
@@ -160,6 +163,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
   - Microsoft.Synapse/stable/2020-12-01/triggers.json
   - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
@@ -197,6 +201,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
   - Microsoft.Synapse/stable/2020-12-01/triggers.json
   - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
@@ -233,6 +238,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
   - Microsoft.Synapse/stable/2020-12-01/triggers.json
   - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
@@ -268,6 +274,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
   - Microsoft.Synapse/stable/2020-12-01/triggers.json
   - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
@@ -303,6 +310,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
   - Microsoft.Synapse/stable/2020-12-01/triggers.json
   - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
@@ -390,6 +398,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
   - Microsoft.Synapse/stable/2020-12-01/triggers.json
   - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/credential.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
