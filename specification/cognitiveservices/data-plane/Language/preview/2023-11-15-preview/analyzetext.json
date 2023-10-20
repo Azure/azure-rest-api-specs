@@ -100,6 +100,9 @@
           "Successful Entity Recognition Overlap Policy Request": {
             "$ref": "./examples/text/SuccessfulEntityRecognitionOverlapPolicy.json"
           },
+          "Successful Entity Recognition InferenceOptions Request": {
+            "$ref": "./examples/text/SuccessfulEntityRecognitionInferenceOptionsRequest.json"
+          },
           "Successful Key Phrase Extraction Request": {
             "$ref": "./examples/text/SuccessfulKeyPhraseExtractionRequest.json"
           },
@@ -2107,6 +2110,17 @@
         "policyKind"
       ]
     },
+    "EntityInferenceOptions": {
+      "description": "The class that house the inference options allowed for named entity recognition.",
+      "type": "object",
+      "properties": {
+        "excludeNormalizedValues": {
+          "description": "Option to include/exclude the detected entity values to be normalized and included in the metadata. The numeric and temporal entity types support value normalization.",
+          "type": "boolean",
+          "default": "false"
+        }
+      }
+    },
     "MatchLongestEntityPolicyType": {
       "description": "Represents the Match longest overlap policy. No overlapping entities as far as it is possible. 1. If there are overlapping entities, the longest one will be returned. 2. If the set of characters predicted for 2 or more entities are exactly the same, select the entity that has the higher confidence score.3. If the entity scores are identical, return all entities that are still present after applying the previous rules. 3. If there is partial overlap (as in Hello Text Analytics) follow the above steps starting from 1.  ",
       "allOf": [
@@ -2145,6 +2159,10 @@
         "overlapPolicy": {
           "description": "(Optional) describes the type of overlap policy to apply to the ner output.",
           "$ref": "#/definitions/BaseEntityOverlapPolicy"
+        },
+        "inferenceOptions": {
+          "description": "(Optional) request parameter that allows the user to provide settings for running the inference.",
+          "$ref": "#/definitions/EntityInferenceOptions"
         }
       },
       "allOf": [
