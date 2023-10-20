@@ -515,7 +515,39 @@
         "provisioningState": {
           "type": "string",
           "description": "Provisioning state of the resource.",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "Resource has been created."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "Resource creation failed."
+              },
+              {
+                "name": "Canceled",
+                "value": "Canceled",
+                "description": "Resource creation was canceled."
+              },
+              {
+                "name": "Accepted",
+                "value": "Accepted",
+                "description": "The resource is was accepted by the server."
+              }
+            ]
+          }
         }
       }
     }
