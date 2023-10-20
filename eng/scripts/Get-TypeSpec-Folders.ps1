@@ -7,7 +7,7 @@ Set-StrictMode -Version 3
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
-$checkAllPath = ((Get-ChildItem "specification").Name -replace '^', 'specification/') -replace '$', '/'
+$checkAllPath = ((Get-ChildItem "specification" -Directory).Name -replace '^', 'specification/') -replace '$', '/'
 
 if ($CheckAll) {
   $changedFiles = $checkAllPath
@@ -25,7 +25,6 @@ else {
   }
 }
 
-write-host $changedFiles
 $typespecFolders = @()
 $skippedTypespecFolders = @()
 foreach ($file in $changedFiles) {
