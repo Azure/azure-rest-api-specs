@@ -980,21 +980,6 @@
     "NetworkConfiguration": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Azure resource name",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NetworkConfigurationProperties"
@@ -1010,6 +995,14 @@
       "type": "object",
       "description": "Network configuration properties",
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "tenantId": {
           "type": "string",
           "readOnly": true,
