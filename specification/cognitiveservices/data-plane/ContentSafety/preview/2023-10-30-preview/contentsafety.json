@@ -832,6 +832,134 @@
         }
       }
     },
+    "/text/customizedCategories/{categoryName}": {
+      "get": {
+        "operationId": "TextCategoryCustomization_GetTextCustomizedCategory",
+        "description": "DEPRECATED: Use `ResourceRead` from a `ResourceOperations` interface instance.\nThis can be done by instantiating your own version with the traits you want `alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;`.\nSee https://azure.github.io/typespec-azure/docs/getstarted/azure-core/step05#defining-the-operation-interface for details on how to use.\n\nOperation signature to retrieve a resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "Text customizedCategories name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^Customized_[0-9A-Za-z._~-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextCustomizedCategory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "TextCategoryCustomization_CreateOrReplaceTextCustomizedCategory",
+        "description": "DEPRECATED: Use `ResourceCreateOrReplace` from a `ResourceOperations` interface instance.\nThis can be done by instantiating your own version with the traits you want `alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;`.\nSee https://azure.github.io/typespec-azure/docs/getstarted/azure-core/step05#defining-the-operation-interface for details on how to use.\n\nOperation signature to create or replace a resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "Text customizedCategories name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^Customized_[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextCustomizedCategory"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextCustomizedCategory"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TextCustomizedCategory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TextCategoryCustomization_DeleteTextCustomizedCategory",
+        "description": "DEPRECATED: Use `ResourceDelete` from a `ResourceOperations` interface instance.\nThis can be done by instantiating your own version with the traits you want `alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;`.\nSee https://azure.github.io/typespec-azure/docs/getstarted/azure-core/step05#defining-the-operation-interface for details on how to use.\n\nOperation signature to delete a resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "Text customizedCategories name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^Customized_[0-9A-Za-z._~-]+$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/text/incident": {
       "get": {
         "operationId": "TextIncidents_ListIncidents",
@@ -1198,6 +1326,47 @@
         }
       }
     },
+    "/text:adaptiveAnnotate": {
+      "post": {
+        "operationId": "PromptTextOperations_AnnotateText",
+        "summary": "Annotate Text by Prompt",
+        "description": "A remote procedure call (RPC) operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The text analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnnotateTextOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnnotateTextResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/text:analyze": {
       "post": {
         "operationId": "TextOperations_AnalyzeText",
@@ -1527,6 +1696,56 @@
         "categoriesAnalysis"
       ]
     },
+    "AnnotateTextBuiltinCategory": {
+      "type": "string",
+      "description": "Text analyze category.",
+      "enum": [
+        "Hate",
+        "SelfHarm",
+        "Sexual",
+        "Violence"
+      ],
+      "x-ms-enum": {
+        "name": "AnnotateTextBuiltinCategory",
+        "modelAsString": true
+      }
+    },
+    "AnnotateTextOptions": {
+      "type": "object",
+      "description": "Annotate text options",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text needs to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.",
+          "maxLength": 10000
+        },
+        "category": {
+          "$ref": "#/definitions/AnnotateTextBuiltinCategory",
+          "description": "The category will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned."
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AnnotateTextResult": {
+      "type": "object",
+      "description": "The text annotation response.",
+      "properties": {
+        "label": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The label."
+        },
+        "reasoning": {
+          "type": "string",
+          "description": "The reasoning."
+        }
+      },
+      "required": [
+        "label"
+      ]
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -1744,6 +1963,29 @@
         "incidentName"
       ]
     },
+    "Label": {
+      "type": "object",
+      "description": "Label definition.",
+      "properties": {
+        "label": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "labelName": {
+          "type": "string"
+        },
+        "scenarios": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "label",
+        "scenarios"
+      ]
+    },
     "ListImageIncidentSampleResult": {
       "type": "object",
       "description": "Sample in a Image Incident.",
@@ -1889,6 +2131,22 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "PreDefinedConcept": {
+      "type": "object",
+      "description": "Pre-defined concept.",
+      "properties": {
+        "concept": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "concept",
+        "description"
       ]
     },
     "RemoveImageIncidentSamplesOptions": {
@@ -2067,6 +2325,50 @@
         "name": "TextCategory",
         "modelAsString": true
       }
+    },
+    "TextCustomizedCategory": {
+      "type": "object",
+      "description": "Text Customized categories.",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "Text customizedCategories name.",
+          "maxLength": 64,
+          "pattern": "^Customized_[0-9A-Za-z._~-]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "preDefinedConcepts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PreDefinedConcept"
+          },
+          "x-ms-identifiers": []
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "x-ms-identifiers": []
+        },
+        "emphasis": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exampleBlobUrl": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "categoryName",
+        "labels"
+      ]
     },
     "TextIncident": {
       "type": "object",

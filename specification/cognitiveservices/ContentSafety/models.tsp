@@ -353,3 +353,80 @@ model AddImageIncidentSamplesResult {
   incidentSamples: ListImageIncidentSampleResult[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+@doc("Text analyze category.")
+@added(Versions.v2023_10_30_Preview)
+enum AnnotateTextBuiltinCategory {
+  Hate,
+  SelfHarm,
+  Sexual,
+  Violence,
+}
+
+@doc("Annotate text options")
+@added(Versions.v2023_10_30_Preview)
+model AnnotateTextOptions {
+  @doc("The text needs to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.")
+  @maxLength(10000)
+  text: string;
+
+  @doc("The category will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.")
+  category?: AnnotateTextBuiltinCategory;
+}
+
+@doc("The text annotation response.")
+@added(Versions.v2023_10_30_Preview)
+model AnnotateTextResult {
+  @doc("The label.")
+  label: int32;
+
+  @doc("The reasoning.")
+  reasoning?: string;
+}
+
+@added(Versions.v2023_10_30_Preview)
+@doc("Pre-defined concept.")
+model PreDefinedConcept {
+  concept: string;
+  description: string;
+}
+
+@added(Versions.v2023_10_30_Preview)
+@doc("Label definition.")
+model Label {
+  label: integer;
+  labelName?: string;
+  scenarios: string[];
+}
+
+@added(Versions.v2023_10_30_Preview)
+@doc("Text Customized categories.")
+@resource("text/customizedCategories")
+model TextCustomizedCategory {
+  @doc("Text customizedCategories name.")
+  @pattern("^Customized_[0-9A-Za-z._~-]+$")
+  @key("categoryName")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  categoryName: string;
+
+  preDefinedConcepts?: PreDefinedConcept[];
+  labels: Label[];
+  emphasis?: string[];
+  exampleBlobUrl?: url;
+}
+
+// @doc("The text annotation response.")
+// @added(Versions.v2023_10_30_Preview)
+// @resource("text/customizedCategories/operations")
+// model TextCustomizedCategoryOperation {
+//   @doc("The operation id.")
+//   @key("operationId")
+//   operationId: int32;
+
+//   @doc("The status.")
+//   status: string;
+
+//   @doc("The reason of failure.")
+//   error?: string;
+// }

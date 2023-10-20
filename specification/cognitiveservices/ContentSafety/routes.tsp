@@ -91,12 +91,10 @@ interface TextBlocklists {
   >;
 }
 
-
 interface TextIncidentOps
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &
       NoConditionalRequests &
       NoClientRequestId> {}
-
 
 @added(ContentSafety.Versions.v2023_10_30_Preview)
 interface TextIncidents {
@@ -149,7 +147,6 @@ interface ImageIncidentOps
       NoConditionalRequests &
       NoClientRequestId> {}
 
-
 @added(ContentSafety.Versions.v2023_10_30_Preview)
 interface ImageIncidents {
   @summary("Get Image Incident By incidentName")
@@ -196,3 +193,32 @@ interface ImageIncidents {
   >;
 }
 
+@added(Versions.v2023_10_30_Preview)
+interface PromptTextOperations {
+  @summary("Annotate Text by Prompt")
+  @route("/text:adaptiveAnnotate")
+  @post
+  annotateText is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text analysis request.")
+      body: AnnotateTextOptions;
+    },
+    AnnotateTextResult
+  >;
+}
+
+@added(Versions.v2023_10_30_Preview)
+interface TextCategoryCustomization {
+  createOrReplaceTextCustomizedCategory is ResourceCreateOrReplace<TextCustomizedCategory>;
+
+  getTextCustomizedCategory is ResourceRead<TextCustomizedCategory>;
+
+  deleteTextCustomizedCategory is ResourceDelete<TextCustomizedCategory>;
+
+  // @route("/text/customizedCategories/operations/{operationId}")
+  // @get
+  // getTextCustomizedCategoryOperation(
+  //   @path operationId: string,
+  // ): TextCustomizedCategoryOperation;
+}
