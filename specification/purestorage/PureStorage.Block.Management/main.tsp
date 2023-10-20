@@ -38,6 +38,7 @@ model StoragePool is TrackedResource<StoragePoolProperties> {
   @path
   @minLength(4)
   @maxLength(20)
+  @pattern("^[a-zA-Z0-9_]*$")
   name: string;
 }
 
@@ -45,13 +46,15 @@ model StoragePool is TrackedResource<StoragePoolProperties> {
 model StoragePoolProperties {
   @doc("ID of StoragePool in Pure Storage systems.")
   @visibility("read")
-  storagePoolId?: string;
+  storagePooInternallId?: string;
 
   @doc("Azure Availability Zone the Pool is located in.")
+  @visibility("read", "create")
   availabilityZone: string;
 
-  @doc("Describes parameters for Virtual Network to deploy to (VNet injection).")
-  vnetInjection: VnetInjection;
+  @doc("Full Azure Resource ID of the Virtual Network subnet to make the Pool visible in.")
+  @visibility("read", "create")
+  delegatedSubnetId: string;
 
   @doc("How long a deleted object is kept before eradication (time in seconds).")
   @visibility("read")
@@ -62,6 +65,10 @@ model StoragePoolProperties {
 
   @doc("Total bandwidth provisioned for the pool (in MB/s).")
   provisionedBandwidthMbPerSec: int64;
+
+  @doc("Total IOPS provisioned for the pool (in MB/s).")
+  @visibility("read")
+  provisionedIOPS?: int64;
 
   @doc("Presented if avsEnabled is true.")
   avs?: AzureVmwareService;

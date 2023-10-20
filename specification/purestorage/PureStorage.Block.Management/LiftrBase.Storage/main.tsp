@@ -29,6 +29,7 @@ model Reservation is TrackedResource<ReservationProperties> {
   @key("reservationName")
   @visibility("read")
   @path
+  @pattern("^[a-zA-Z0-9_]*$")
   name: string;
 }
 
@@ -43,10 +44,9 @@ interface Reservations {
 }
 
 @doc("Properties of a Reservation resource.")
-model ReservationProperties is BaseResourceProperties;
-
-@doc("Describes parameters for Virtual Network to deploy to (VNet injection).")
-model VnetInjection {
-  @doc("Full Azure Resource ID of the Virtual Network subnet to make the Pool visible in.")
-  subnetId: string;
+model ReservationProperties is BaseResourceProperties {
+  
+  @doc("Internal ID of Reservation.")
+  @visibility("read")
+  reservationInternalId?: string;
 }

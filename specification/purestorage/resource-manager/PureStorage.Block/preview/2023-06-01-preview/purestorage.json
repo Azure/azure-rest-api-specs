@@ -550,7 +550,8 @@
             "required": true,
             "type": "string",
             "minLength": 4,
-            "maxLength": 20
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9_]*$"
           }
         ],
         "responses": {
@@ -599,7 +600,8 @@
             "required": true,
             "type": "string",
             "minLength": 4,
-            "maxLength": 20
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9_]*$"
           },
           {
             "name": "resource",
@@ -671,7 +673,8 @@
             "required": true,
             "type": "string",
             "minLength": 4,
-            "maxLength": 20
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9_]*$"
           },
           {
             "name": "properties",
@@ -747,7 +750,8 @@
             "required": true,
             "type": "string",
             "minLength": 4,
-            "maxLength": 20
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9_]*$"
           }
         ],
         "responses": {
@@ -816,7 +820,8 @@
             "required": true,
             "type": "string",
             "minLength": 4,
-            "maxLength": 20
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9_]*$"
           }
         ],
         "responses": {
@@ -870,7 +875,8 @@
             "required": true,
             "type": "string",
             "minLength": 4,
-            "maxLength": 20
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9_]*$"
           },
           {
             "name": "storageContainerName",
@@ -927,7 +933,8 @@
             "required": true,
             "type": "string",
             "minLength": 4,
-            "maxLength": 20
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9_]*$"
           },
           {
             "name": "storageContainerName",
@@ -993,7 +1000,8 @@
             "required": true,
             "type": "string",
             "minLength": 4,
-            "maxLength": 20
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9_]*$"
           },
           {
             "name": "storageContainerName",
@@ -1314,35 +1322,17 @@
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
+        },
+        "reservationInternalId": {
+          "type": "string",
+          "description": "Internal ID of Reservation.",
+          "readOnly": true
         }
       },
       "required": [
         "marketplace",
         "user"
       ]
-    },
-    "LiftrBase.Storage.VnetInjection": {
-      "type": "object",
-      "description": "Describes parameters for Virtual Network to deploy to (VNet injection).",
-      "properties": {
-        "subnetId": {
-          "type": "string",
-          "description": "Full Azure Resource ID of the Virtual Network subnet to make the Pool visible in."
-        }
-      },
-      "required": [
-        "subnetId"
-      ]
-    },
-    "LiftrBase.Storage.VnetInjectionUpdate": {
-      "type": "object",
-      "description": "Describes parameters for Virtual Network to deploy to (VNet injection).",
-      "properties": {
-        "subnetId": {
-          "type": "string",
-          "description": "Full Azure Resource ID of the Virtual Network subnet to make the Pool visible in."
-        }
-      }
     },
     "LiftrBase.UserDetails": {
       "type": "object",
@@ -1499,18 +1489,26 @@
       "type": "object",
       "description": "Properties of a Storage Pool resource.",
       "properties": {
-        "storagePoolId": {
+        "storagePooInternallId": {
           "type": "string",
           "description": "ID of StoragePool in Pure Storage systems.",
           "readOnly": true
         },
         "availabilityZone": {
           "type": "string",
-          "description": "Azure Availability Zone the Pool is located in."
+          "description": "Azure Availability Zone the Pool is located in.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
-        "vnetInjection": {
-          "$ref": "#/definitions/LiftrBase.Storage.VnetInjection",
-          "description": "Describes parameters for Virtual Network to deploy to (VNet injection)."
+        "delegatedSubnetId": {
+          "type": "string",
+          "description": "Full Azure Resource ID of the Virtual Network subnet to make the Pool visible in.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "dataRetentionPeriod": {
           "type": "integer",
@@ -1526,6 +1524,12 @@
           "type": "integer",
           "format": "int64",
           "description": "Total bandwidth provisioned for the pool (in MB/s)."
+        },
+        "provisionedIOPS": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total IOPS provisioned for the pool (in MB/s).",
+          "readOnly": true
         },
         "avs": {
           "$ref": "#/definitions/AzureVmwareService",
@@ -1543,7 +1547,7 @@
       },
       "required": [
         "availabilityZone",
-        "vnetInjection",
+        "delegatedSubnetId",
         "avsEnabled",
         "provisionedBandwidthMbPerSec",
         "reservationResourceId"
@@ -1570,14 +1574,6 @@
       "type": "object",
       "description": "The updatable properties of the StoragePool.",
       "properties": {
-        "availabilityZone": {
-          "type": "string",
-          "description": "Azure Availability Zone the Pool is located in."
-        },
-        "vnetInjection": {
-          "$ref": "#/definitions/LiftrBase.Storage.VnetInjectionUpdate",
-          "description": "Describes parameters for Virtual Network to deploy to (VNet injection)."
-        },
         "avsEnabled": {
           "type": "boolean",
           "description": "if true, VASA support is enabled and the AVS configuration parameters below may be passed to change the current password. if false, VASA support will be disabled (but previous password configuration is not lost)."
