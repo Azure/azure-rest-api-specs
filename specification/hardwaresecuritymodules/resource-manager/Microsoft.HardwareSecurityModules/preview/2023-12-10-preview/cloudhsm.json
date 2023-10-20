@@ -630,6 +630,9 @@
           "description": "SKU details"
         }
       },
+      "identity": {
+        "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+      },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
@@ -686,6 +689,9 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           }
+        },
+        "hardwareLog": {
+          "$ref": "#/definitions/CloudHsmClusterHardwareLog"
         }
       },
       "description": "Properties of a Cloud HSM Cluster.",
@@ -760,6 +766,33 @@
           "format": "int32",
           "type": "integer",
           "description": "Sku capacity"
+        }
+      }
+    },
+    "CloudHsmClusterHardwareLog": {
+      "properties": {
+        "storageResourceUri": {
+          "type": "string",
+          "description": "Azure Blob storage container Uri"
+        }
+      }
+    },
+    "CloudHsmClusterBackupProperties": {
+      "properties": {
+        "storageResourceUri": {
+          "type": "string",
+          "description": "Azure storage account to store the backup files"
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Last Date Time that Customer Enabled Backup was taken"
+        },
+        "BackupStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Status of backup operation"
         }
       }
     },
