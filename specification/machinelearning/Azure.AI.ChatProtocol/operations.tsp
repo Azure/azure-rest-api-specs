@@ -10,14 +10,14 @@ namespace Azure.AI.ChatProtocol;
 using TypeSpec.Http;
 using Azure.Core.Foundations;
 
-interface Chat<StateModel, ContextModel> {
+interface Chat<TState, TContext> {
   /* Using the Foundations.Operation template so the API version parameter is added */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Defining the operation in an Azure independent fashion"
   @doc("Creates a new streaming chat completion.")
   @sharedRoute
   createStreaming is Operation<
-    StreamingChatCompletionOptions<StateModel, ContextModel>,
-    ChatCompletionChunk<StateModel, ContextModel>
+    StreamingChatCompletionOptions<TState, TContext>,
+    ChatCompletionChunk<TState, TContext>
   >;
 
   /* Using the Foundations.Operation template so the API version parameter is added */
@@ -25,8 +25,8 @@ interface Chat<StateModel, ContextModel> {
   @doc("Creates a new chat completion.")
   @sharedRoute
   create is Operation<
-    ChatCompletionOptions<StateModel, ContextModel>,
-    ChatCompletion<StateModel, ContextModel>
+    ChatCompletionOptions<TState, TContext>,
+    ChatCompletion<TState, TContext>
   >;
 }
 
