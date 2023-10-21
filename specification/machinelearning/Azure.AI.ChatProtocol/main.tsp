@@ -12,7 +12,15 @@ using TypeSpec.Versioning;
 @service({
   title: "Azure ML Chat",
 })
-@useAuth(ApiKeyAuth<ApiKeyLocation.header, "api-key">)
+@useAuth(
+  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      scopes: [],
+    }
+  ]>
+)
 @server(
   "{endpoint}",
   "Azure Chat Protocol APIs",
