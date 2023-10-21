@@ -285,7 +285,7 @@ model TagsResult {
 }
 
 @doc("The visual features requested: tags, objects, caption, denseCaptions, read, smartCrops, people. This parameter needs to be specified if the parameter \"model-name\" is not specified.")
-enum VisualFeatures{
+enum VisualFeatures {
   @doc("Tags")
   tags,
 

@@ -80,7 +80,7 @@ op segmentFromUrl is Azure.Core.RpcOperation<
     @header
     contentType: "image/png";
     @body
-    bytes: bytes
+    bytes: bytes;
   }
 >;
 
@@ -107,6 +107,6 @@ op segmentFromStream is Azure.Core.RpcOperation<
     @header
     contentType: "image/png";
     @body
-    bytes: bytes
+    bytes: bytes;
   }
 >;
