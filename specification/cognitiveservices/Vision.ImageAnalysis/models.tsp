@@ -5,31 +5,31 @@ using TypeSpec.Http;
 
 @doc("Query parameters used for the analyze operator")
 model SharedAnalyzeQuery {
-    @query({
-      name: "features",
-      format: "csv",
-    })
-    @doc("A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. If VisualFeatures is not specified, then Categories, Tags, and Description are included in the response by default.")
-    visualFeatures?: Array<visualFeatures>;
+  @query({
+    name: "features",
+    format: "csv",
+  })
+  @doc("A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. If VisualFeatures is not specified, then Categories, Tags, and Description are included in the response by default.")
+  visualFeatures?: Array<visualFeatures>;
 
-    @query("language")
-    @doc("The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.")
-    language?: string = "en";
+  @query("language")
+  @doc("The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.")
+  language?: string = "en";
 
-    @query("gender-neutral-caption")
-    @doc("Boolean flag for enabling gender-neutral captioning for caption and denseCaptions features. If this parameter is not specified, the default value is \"false\".")
-    genderNeutralCaption?: boolean = false;
+  @query("gender-neutral-caption")
+  @doc("Boolean flag for enabling gender-neutral captioning for caption and denseCaptions features. If this parameter is not specified, the default value is \"false\".")
+  genderNeutralCaption?: boolean = false;
 
-    @query({
-      name: "smartcrops-aspect-ratios",
-      format: "csv"
-    })
-    @doc("A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).")
-    smartCropsAspectRatios?: Array<float32>;
+  @query({
+    name: "smartcrops-aspect-ratios",
+    format: "csv"
+  })
+  @doc("A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).")
+  smartCropsAspectRatios?: Array<float32>;
 
-    @query("model-name")
-    @doc("The name of the custom trained model. This parameter needs to be specified if the parameter \"features\" is not specified.")
-    modelName?: string;
+  @query("model-name")
+  @doc("The name of the custom trained model. This parameter needs to be specified if the parameter \"features\" is not specified.")
+  modelName?: string;
 }
 
 @doc("Query parameters used for the segment operator")
@@ -285,33 +285,33 @@ model TagsResult {
 }
 
 @doc("The visual features requested: tags, objects, caption, denseCaptions, read, smartCrops, people. This parameter needs to be specified if the parameter \"model-name\" is not specified.")
-enum visualFeatures{
+enum VisualFeatures{
   @doc("Tags")
-  "tags",
+  tags,
   @doc("Caption")
-  "caption",
+  caption,
   @doc("DenseCaptions")
-  "denseCaptions",
+  denseCaptions,
   @doc("Objects")
-  "objects",
+  objects,
   @doc("Read")
-  "read",
+  read,
   @doc("SmartCrops")
-  "smartCrops",
+  smartCrops,
   @doc("People")
-  "people"
+  people,
 }
 
 @doc("The segmentation mode requested.")
 enum segmentationMode {
   @doc("Remove the background")
-  "backgroundRemoval",
+  backgroundRemoval,
   @doc("Matt the foreground")
-  "foregroundMatting"
+  foregroundMatting,
 }
 
 @doc("A JSON document with a URL pointing to the image that is to be analyzed.")
 model ImageUrl{
   @doc("Publicly reachable URL of an image.")
-  url:url;
+  url: url;
 }

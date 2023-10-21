@@ -11,23 +11,23 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @service({
-    title: "ImageAnalysis Service",
-  })
+  title: "ImageAnalysis Service",
+})
 
 @versioned(ImageAnalysis.Versions)
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @useAuth(BearerAuth)
 @server(
-    "{endpoint}/computervision",
-    "Analyze an image to generate a description of its content.",
-    {
-      @doc("""
-  Supported Cognitive Services endpoints (protocol and hostname, for example:
-  https://<resource-name>.cognitiveservices.azure.com).
-  """)
-      endpoint: url,
-    }
-  )
+  "{endpoint}/computervision",
+  "Analyze an image to generate a description of its content.",
+  {
+    @doc("""
+Supported Cognitive Services endpoints (protocol and hostname, for example:
+https://<resource-name>.cognitiveservices.azure.com).
+""")
+    endpoint: url,
+  }
+)
 
 namespace ImageAnalysis;
 

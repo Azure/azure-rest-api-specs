@@ -24,14 +24,14 @@ namespace ImageAnalysis;
 op analyzeFromStream is Azure.Core.RpcOperation<
   {
     @doc("The format of the HTTP payload.")
-    @header()
+    @header
     contentType: "application/octet-stream";
 
     @doc("The image to be analyzed")
     @body
     imageContent: bytes;
 
-    ...SharedAnalyzeQuery,
+    ...SharedAnalyzeQuery;
   },
   ImageAnalysisResult
 >;
@@ -45,14 +45,14 @@ op analyzeFromStream is Azure.Core.RpcOperation<
 op analyzeFromUrl is Azure.Core.RpcOperation<
   {
     @doc("The format of the HTTP payload.")
-    @header("Content-Type")
+    @header
     contentType: "application/json";
 
     @doc("The image to be analyzed")
     @body
     imageContent: ImageUrl;
 
-    ...SharedAnalyzeQuery,
+    ...SharedAnalyzeQuery;
   },
   ImageAnalysisResult
 >;
@@ -65,23 +65,24 @@ op analyzeFromUrl is Azure.Core.RpcOperation<
 @sharedRoute
 @action("segment")
 op segmentFromUrl is Azure.Core.RpcOperation<
-{
-  @doc("The image to be analyzed")
-  @body
-  imageContent: ImageUrl;
+  {
+    @doc("The image to be analyzed")
+    @body
+    imageContent: ImageUrl;
 
-  @doc("The format of the HTTP payload.")
-  @header()
-  contentType: "application/json";
+    @doc("The format of the HTTP payload.")
+    @header()
+    contentType: "application/json";
 
-  ...SharedSegmentQuery,
-},
-{
-  @header 
-  contentType: "image/png";
-  @body
-  bytes:bytes
-} >;
+    ...SharedSegmentQuery,
+  },
+  {
+    @header 
+    contentType: "image/png";
+    @body
+    bytes:bytes
+  }
+>;
 
 #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to segment an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
 @doc("Segment the input image. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.")
@@ -91,20 +92,21 @@ op segmentFromUrl is Azure.Core.RpcOperation<
 @sharedRoute
 @action("segment")
 op segmentFromStream is Azure.Core.RpcOperation<
-{
-  @doc("The image to be analyzed")
-  @body
-  imageContent: bytes;
+  {
+    @doc("The image to be analyzed")
+    @body
+    imageContent: bytes;
 
-  @doc("The format of the HTTP payload.")
-  @header()
-  contentType: "application/octet-stream";
+    @doc("The format of the HTTP payload.")
+    @header
+    contentType: "application/octet-stream";
 
-  ...SharedSegmentQuery,
-},
-{
-  @header 
-  contentType: "image/png";
-  @body
-  bytes:bytes
-} >;
+    ...SharedSegmentQuery,
+  },
+  {
+    @header 
+    contentType: "image/png";
+    @body
+    bytes:bytes
+  }
+>;
