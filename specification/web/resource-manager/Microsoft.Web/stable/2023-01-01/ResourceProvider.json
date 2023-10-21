@@ -330,6 +330,38 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/aseRegions": {
+      "get": {
+        "summary": "Get a list of available ASE regions and it's supported Skus.",
+        "description": "Description for get a list of available ASE regions and it's supported Skus.",
+        "operationId": "ListAseRegions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AseRegionCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/geoRegions": {
       "get": {
         "summary": "Get a list of available geographical regions.",
@@ -921,6 +953,58 @@
         }
       }
     },
+    "AseRegion": {
+      "description": "ASE region.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ASE region resource specific properties",
+          "type": "object",
+          "properties": {
+            "displayName": {
+              "description": "Display name for region.",
+              "type": "string",
+              "readOnly": true
+            },
+            "standard": {
+              "description": "Is region standard.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "dedicatedHost": {
+              "description": "Dedicated host enabled.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "zoneRedundant": {
+              "description": "Zone redundant deployment enabled.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "availableSku": {
+              "description": "Available Skus in region.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "availableOS": {
+              "description": "Available OSs in region.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "GeoRegion": {
       "description": "Geographical region.",
       "type": "object",
@@ -951,6 +1035,27 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AseRegionCollection": {
+      "description": "Collection of ASE regions.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AseRegion"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
