@@ -22,7 +22,7 @@ model SharedAnalyzeQuery {
 
   @query({
     name: "smartcrops-aspect-ratios",
-    format: "csv"
+    format: "csv",
   })
   @doc("A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).")
   smartCropsAspectRatios?: Array<float32>;
@@ -288,16 +288,22 @@ model TagsResult {
 enum VisualFeatures{
   @doc("Tags")
   tags,
+
   @doc("Caption")
   caption,
+
   @doc("DenseCaptions")
   denseCaptions,
+
   @doc("Objects")
   objects,
+
   @doc("Read")
   read,
+
   @doc("SmartCrops")
   smartCrops,
+
   @doc("People")
   people,
 }
@@ -306,12 +312,13 @@ enum VisualFeatures{
 enum segmentationMode {
   @doc("Remove the background")
   backgroundRemoval,
+
   @doc("Matt the foreground")
   foregroundMatting,
 }
 
 @doc("A JSON document with a URL pointing to the image that is to be analyzed.")
-model ImageUrl{
+model ImageUrl {
   @doc("Publicly reachable URL of an image.")
   url: url;
 }

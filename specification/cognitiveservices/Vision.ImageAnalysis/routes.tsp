@@ -71,16 +71,16 @@ op segmentFromUrl is Azure.Core.RpcOperation<
     imageContent: ImageUrl;
 
     @doc("The format of the HTTP payload.")
-    @header()
+    @header
     contentType: "application/json";
 
-    ...SharedSegmentQuery,
+    ...SharedSegmentQuery;
   },
   {
-    @header 
+    @header
     contentType: "image/png";
     @body
-    bytes:bytes
+    bytes: bytes
   }
 >;
 
@@ -101,12 +101,12 @@ op segmentFromStream is Azure.Core.RpcOperation<
     @header
     contentType: "application/octet-stream";
 
-    ...SharedSegmentQuery,
+    ...SharedSegmentQuery;
   },
   {
-    @header 
+    @header
     contentType: "image/png";
     @body
-    bytes:bytes
+    bytes: bytes
   }
 >;
