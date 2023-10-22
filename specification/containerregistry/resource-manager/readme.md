@@ -26,14 +26,23 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-08-preview
+tag: package-preview-2023-12
 ```
 
+
+### Tag: package-preview-2023-12
+
+These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-12'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2023-12-01-preview/containerregistry.json
+```
 ### Tag: package-2023-08-preview-only
 
 These settings apply only when `--tag=package-2023-08-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08-preview-only'
+``` yaml $(tag) == 'package-2023-08-preview-only'
 input-file:
   - Microsoft.ContainerRegistry/preview/2023-08-01-preview/containerregistry.json
 ```
@@ -42,7 +51,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-08-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08-preview'
+``` yaml $(tag) == 'package-2023-08-preview'
 input-file:
   - Microsoft.ContainerRegistry/preview/2023-08-01-preview/containerregistry.json
   - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
