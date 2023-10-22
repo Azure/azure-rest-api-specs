@@ -1621,18 +1621,6 @@
       "description": "List Access Request Model",
       "type": "object",
       "properties": {
-        "organizationId": {
-          "description": "Id of the organization",
-          "type": "string"
-        },
-        "email": {
-          "description": "Email of the logged in user",
-          "type": "string"
-        },
-        "upn": {
-          "description": "Upn of the logged in user",
-          "type": "string"
-        },
         "searchFilters": {
           "description": "Search filters for the request",
           "type": "object",
@@ -1664,7 +1652,8 @@
         },
         "total_size": {
           "description": "Total size of the list",
-          "type": "integer"
+          "type": "integer",
+          "format" : "int32"
         }
       }
     },
