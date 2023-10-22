@@ -5,12 +5,20 @@
     "version": "2023-10-03-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -27,10 +35,14 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/agreements": {
       "get": {
-        "tags": ["Agreements"],
+        "tags": [
+          "Agreements"
+        ],
         "summary": "List Confluent marketplace agreements in the subscription.",
         "operationId": "MarketplaceAgreements_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -65,11 +77,17 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/agreements/default": {
       "put": {
-        "tags": ["Agreements"],
+        "tags": [
+          "Agreements"
+        ],
         "summary": "Create Confluent Marketplace agreement in the subscription.",
         "operationId": "MarketplaceAgreements_Create",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -109,10 +127,14 @@
     },
     "/providers/Microsoft.Confluent/operations": {
       "get": {
-        "tags": ["Organization"],
+        "tags": [
+          "Organization"
+        ],
         "summary": "List all operations provided by Microsoft.Confluent.",
         "operationId": "OrganizationOperations_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -144,10 +166,14 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/organizations": {
       "get": {
-        "tags": ["Organization"],
+        "tags": [
+          "Organization"
+        ],
         "summary": "List all organizations under the specified subscription.",
         "operationId": "Organization_ListBySubscription",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -182,10 +208,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations": {
       "get": {
-        "tags": ["Organization"],
+        "tags": [
+          "Organization"
+        ],
         "summary": "List all Organizations under the specified resource group.",
         "operationId": "Organization_ListByResourceGroup",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -223,10 +253,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}": {
       "get": {
-        "tags": ["Organization"],
+        "tags": [
+          "Organization"
+        ],
         "summary": "Get the properties of a specific Organization resource.",
         "operationId": "Organization_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -262,11 +296,17 @@
         }
       },
       "put": {
-        "tags": ["Organization"],
+        "tags": [
+          "Organization"
+        ],
         "summary": "Create Organization resource",
         "operationId": "Organization_Create",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -320,11 +360,17 @@
         }
       },
       "patch": {
-        "tags": ["Organization"],
+        "tags": [
+          "Organization"
+        ],
         "summary": "Update Organization resource",
         "operationId": "Organization_Update",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -368,10 +414,14 @@
         }
       },
       "delete": {
-        "tags": ["Organization"],
+        "tags": [
+          "Organization"
+        ],
         "summary": "Delete Organization resource",
         "operationId": "Organization_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -416,11 +466,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/validations/{organizationName}/orgvalidate": {
       "post": {
-        "tags": ["Validations"],
+        "tags": [
+          "Validations"
+        ],
         "summary": "Organization Validate proxy resource",
         "operationId": "Validations_ValidateOrganization",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -467,11 +523,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/validations/{organizationName}/orgvalidateV2": {
       "post": {
-        "tags": ["Validations"],
+        "tags": [
+          "Validations"
+        ],
         "summary": "Organization Validate proxy resource",
         "operationId": "Validations_ValidateOrganizationV2",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -518,11 +580,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listUsers": {
       "post": {
-        "tags": ["accessandaccounts"],
+        "tags": [
+          "accessandaccounts"
+        ],
         "summary": "Organization users details",
         "operationId": "Access_ListUsers",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -569,11 +637,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listServiceAccounts": {
       "post": {
-        "tags": ["accessandaccounts"],
+        "tags": [
+          "accessandaccounts"
+        ],
         "summary": "Organization service accounts details",
         "operationId": "Access_ListServiceAccounts",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -620,11 +694,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listInvitations": {
       "post": {
-        "tags": ["accessandaccounts"],
+        "tags": [
+          "accessandaccounts"
+        ],
         "summary": "Organization accounts invitation details",
         "operationId": "Access_ListInvitations",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -671,11 +751,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/createInvitation": {
       "post": {
-        "tags": ["accessandaccounts"],
+        "tags": [
+          "accessandaccounts"
+        ],
         "summary": "Invite user to the organization",
         "operationId": "Access_InviteUser",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -722,11 +808,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listEnvironments": {
       "post": {
-        "tags": ["accessandaccounts"],
+        "tags": [
+          "accessandaccounts"
+        ],
         "summary": "Environment list of an organization",
         "operationId": "Access_ListEnvironments",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -773,11 +865,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listClusters": {
       "post": {
-        "tags": ["accessandaccounts"],
+        "tags": [
+          "accessandaccounts"
+        ],
         "summary": "Cluster details",
         "operationId": "Access_ListClusters",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -824,11 +922,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listRoleBindings": {
       "post": {
-        "tags": ["accessandaccounts"],
+        "tags": [
+          "accessandaccounts"
+        ],
         "summary": "Organization role bindings",
         "operationId": "Access_ListRoleBindings",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -875,11 +979,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/createRoleBinding": {
       "post": {
-        "tags": ["accessandaccounts"],
+        "tags": [
+          "accessandaccounts"
+        ],
         "summary": "Organization role bindings",
         "operationId": "Access_CreateRoleBinding",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -926,11 +1036,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/deleteRoleBinding/{roleBindingId}": {
       "delete": {
-        "tags": ["accessandaccounts"],
+        "tags": [
+          "accessandaccounts"
+        ],
         "summary": "Organization role bindings",
         "operationId": "Access_DeleteRoleBinding",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -971,11 +1087,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/listRoleBindingNameList": {
       "post": {
-        "tags": ["accessandaccounts"],
+        "tags": [
+          "accessandaccounts"
+        ],
         "summary": "Organization role bindings",
         "operationId": "Access_ListRoleBindingName",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1270,7 +1392,13 @@
     "OfferDetail": {
       "description": "Confluent Offer detail",
       "type": "object",
-      "required": ["publisherId", "id", "planId", "planName", "termUnit"],
+      "required": [
+        "publisherId",
+        "id",
+        "planId",
+        "planName",
+        "termUnit"
+      ],
       "properties": {
         "publisherId": {
           "description": "Publisher Id",
@@ -1323,7 +1451,9 @@
     "UserDetail": {
       "description": "Subscriber detail",
       "type": "object",
-      "required": ["emailAddress"],
+      "required": [
+        "emailAddress"
+      ],
       "properties": {
         "firstName": {
           "description": "First name",
@@ -1353,12 +1483,16 @@
     "LinkOrganization": {
       "description": "Link an existing Confluent organization",
       "type": "object",
-      "required": ["token"],
+      "required": [
+        "token"
+      ],
       "properties": {
         "token": {
           "description": "User auth token",
           "type": "string",
-          "x-ms-mutability": ["create"],
+          "x-ms-mutability": [
+            "create"
+          ],
           "x-ms-secret": true
         }
       }
@@ -1366,7 +1500,10 @@
     "OrganizationResourceProperties": {
       "description": "Organization resource property",
       "type": "object",
-      "required": ["offerDetail", "userDetail"],
+      "required": [
+        "offerDetail",
+        "userDetail"
+      ],
       "properties": {
         "createdTime": {
           "format": "date-time",
@@ -1407,7 +1544,9 @@
       "description": "Organization resource.",
       "type": "object",
       "x-ms-azure-resource": true,
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "properties": {
         "id": {
           "description": "The ARM id of the resource.",
