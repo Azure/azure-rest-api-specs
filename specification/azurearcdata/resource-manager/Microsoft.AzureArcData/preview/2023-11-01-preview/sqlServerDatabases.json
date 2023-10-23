@@ -6,13 +6,21 @@
     "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/databases/{databaseName}": {
       "put": {
-        "tags": ["SqlServerDatabases"],
+        "tags": [
+          "SqlServerDatabases"
+        ],
         "operationId": "SqlServerDatabases_Create",
         "description": "Creates or replaces an Arc Sql Server Database.",
         "parameters": [
@@ -68,7 +76,9 @@
         }
       },
       "delete": {
-        "tags": ["SqlServerDatabases"],
+        "tags": [
+          "SqlServerDatabases"
+        ],
         "operationId": "SqlServerDatabases_Delete",
         "description": "Deletes an Arc Sql Server database resource.",
         "parameters": [
@@ -109,7 +119,9 @@
         }
       },
       "get": {
-        "tags": ["SqlServerDatabases"],
+        "tags": [
+          "SqlServerDatabases"
+        ],
         "operationId": "SqlServerDatabases_Get",
         "description": "Retrieves an Arc Sql Server database.",
         "parameters": [
@@ -150,7 +162,9 @@
         }
       },
       "patch": {
-        "tags": ["SqlServerDatabases"],
+        "tags": [
+          "SqlServerDatabases"
+        ],
         "description": "Updates an existing database.",
         "operationId": "SqlServerDatabases_Update",
         "parameters": [
@@ -202,7 +216,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/databases": {
       "get": {
-        "tags": ["SqlServerDatabases"],
+        "tags": [
+          "SqlServerDatabases"
+        ],
         "operationId": "SqlServerDatabases_List",
         "summary": "List the databases associated with the given Arc Sql Server.",
         "parameters": [
@@ -279,7 +295,9 @@
           "x-ms-client-flatten": false
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "SqlServerDatabaseResourceProperties": {
       "type": "object",
@@ -288,7 +306,10 @@
         "collationName": {
           "description": "Collation of the database.",
           "type": "string",
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "databaseCreationDate": {
           "format": "date-time",
@@ -337,7 +358,11 @@
         },
         "recoveryMode": {
           "description": "Status of the database.",
-          "enum": ["Full", "Bulk-logged", "Simple"],
+          "enum": [
+            "Full",
+            "Bulk-logged",
+            "Simple"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "RecoveryMode",
@@ -401,7 +426,10 @@
         },
         "createMode": {
           "description": "Database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. sourceDatabaseId and restorePointInTime must be specified.",
-          "enum": ["Default", "PointInTimeRestore"],
+          "enum": [
+            "Default",
+            "PointInTimeRestore"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "DatabaseCreateMode",
@@ -468,7 +496,10 @@
         },
         "differentialBackupHours": {
           "description": "The differential backup interval in hours.",
-          "enum": [12, 24],
+          "enum": [
+            12,
+            24
+          ],
           "type": "integer",
           "format": "int32",
           "x-ms-enum": {
