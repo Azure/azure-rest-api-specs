@@ -3,7 +3,7 @@
   "info": {
     "title": "Workloads Client",
     "description": "The workload SAP monitor Client.",
-    "version": "2023-04-01"
+    "version": "2023-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -37,15 +37,15 @@
         "description": "Gets a list of SAP monitors in the specified subscription. The operations returns various properties of each SAP monitor.",
         "x-ms-examples": {
           "List all SAP monitors in a subscription": {
-            "$ref": "./examples/workloadmonitor/monitors_List.json"
+            "$ref": "./examples/Monitors/monitors_List.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -58,7 +58,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -77,18 +77,18 @@
         "description": "Gets a list of SAP monitors in the specified resource group.",
         "x-ms-examples": {
           "List all SAP monitors in a resource group": {
-            "$ref": "./examples/workloadmonitor/monitors_ListByRG.json"
+            "$ref": "./examples/Monitors/monitors_ListByRG.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -101,7 +101,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -120,7 +120,7 @@
         "description": "Gets properties of a SAP monitor for the specified subscription, resource group, and resource name.",
         "x-ms-examples": {
           "Get properties of a SAP monitor": {
-            "$ref": "./examples/workloadmonitor/monitors_Get.json"
+            "$ref": "./examples/Monitors/monitors_Get.json"
           }
         },
         "produces": [
@@ -128,13 +128,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -150,7 +150,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -168,18 +168,24 @@
         "description": "Creates a SAP monitor for the specified subscription, resource group, and resource name.",
         "x-ms-examples": {
           "Create a SAP monitor": {
-            "$ref": "./examples/workloadmonitor/monitors_Create.json"
+            "$ref": "./examples/Monitors/monitors_Create.json"
+          },
+          "Create a SAP monitor with system assigned identity": {
+            "$ref": "./examples/Monitors/monitors_Create_Identity.json"
+          },
+          "Create a SAP monitor with user assigned identity": {
+            "$ref": "./examples/Monitors/monitors_Create_UserAssignedIdentity.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -204,7 +210,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -222,18 +228,18 @@
         "description": "Deletes a SAP monitor with the specified subscription, resource group, and SAP monitor name.",
         "x-ms-examples": {
           "Deletes a SAP monitor": {
-            "$ref": "./examples/workloadmonitor/monitors_Delete.json"
+            "$ref": "./examples/Monitors/monitors_Delete.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -241,10 +247,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Delete SAP monitor",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
-            }
+            "description": "Delete SAP monitor"
           },
           "202": {
             "description": "Deleting SAP monitor"
@@ -255,7 +258,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -269,21 +272,21 @@
         "description": "Patches the Tags field of a SAP monitor for the specified subscription, resource group, and SAP monitor name.",
         "x-ms-examples": {
           "Update Tags field of a SAP monitor": {
-            "$ref": "./examples/workloadmonitor/monitors_PatchTags.json"
+            "$ref": "./examples/Monitors/monitors_PatchTags.json"
           },
           "Delete Tags field of a SAP monitor": {
-            "$ref": "./examples/workloadmonitor/monitors_PatchTags_Delete.json"
+            "$ref": "./examples/Monitors/monitors_PatchTags_Delete.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -308,7 +311,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -324,18 +327,18 @@
         "description": "Gets a list of provider instances in the specified SAP monitor. The operations returns various properties of each provider instances.",
         "x-ms-examples": {
           "List all SAP monitors providers in a subscription": {
-            "$ref": "./examples/workloadmonitor/ProviderInstances_List.json"
+            "$ref": "./examples/ProviderInstances/ProviderInstances_List.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -351,7 +354,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -373,22 +376,22 @@
         "description": "Gets properties of a provider instance for the specified subscription, resource group, SAP monitor name, and resource name.",
         "x-ms-examples": {
           "Get properties of a SAP monitor Hana provider": {
-            "$ref": "./examples/workloadmonitor/ProviderInstances_Get.json"
+            "$ref": "./examples/ProviderInstances/ProviderInstances_Get.json"
           },
           "Get properties of a SAP monitor NetWeaver provider": {
-            "$ref": "./examples/workloadmonitor/NetWeaverProviderInstances_Get.json"
+            "$ref": "./examples/NetWeaverProviderInstances/NetWeaverProviderInstances_Get.json"
           },
           "Get properties of a OS provider": {
-            "$ref": "./examples/workloadmonitor/PrometheusOSProviderInstances_Get.json"
+            "$ref": "./examples/PrometheusOSProviderInstances/PrometheusOSProviderInstances_Get.json"
           },
           "Get properties of a Db2 provider": {
-            "$ref": "./examples/workloadmonitor/Db2ProviderInstances_Get.json"
+            "$ref": "./examples/Db2ProviderInstances/Db2ProviderInstances_Get.json"
           },
           "Get properties of a MsSqlServer provider": {
-            "$ref": "./examples/workloadmonitor/MsSqlServerProviderInstance_Get.json"
+            "$ref": "./examples/MsSqlServerProviderInstance/MsSqlServerProviderInstance_Get.json"
           },
           "Get properties of a PrometheusHaCluster provider": {
-            "$ref": "./examples/workloadmonitor/PrometheusHaClusterProviderInstances_Get.json"
+            "$ref": "./examples/PrometheusHaClusterProviderInstances/PrometheusHaClusterProviderInstances_Get.json"
           }
         },
         "produces": [
@@ -396,13 +399,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -421,7 +424,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -439,51 +442,51 @@
         "description": "Creates a provider instance for the specified subscription, resource group, SAP monitor name, and resource name.",
         "x-ms-examples": {
           "Create a SAP monitor Hana provider": {
-            "$ref": "./examples/workloadmonitor/ProviderInstances_Create.json"
+            "$ref": "./examples/ProviderInstances/ProviderInstances_Create.json"
           },
           "Create a SAP monitor NetWeaver provider": {
-            "$ref": "./examples/workloadmonitor/NetWeaverProviderInstances_Create.json"
+            "$ref": "./examples/NetWeaverProviderInstances/NetWeaverProviderInstances_Create.json"
           },
           "Create a OS provider": {
-            "$ref": "./examples/workloadmonitor/PrometheusOSProviderInstances_Create.json"
+            "$ref": "./examples/PrometheusOSProviderInstances/PrometheusOSProviderInstances_Create.json"
           },
           "Create a Db2 provider": {
-            "$ref": "./examples/workloadmonitor/Db2ProviderInstances_Create.json"
+            "$ref": "./examples/Db2ProviderInstances/Db2ProviderInstances_Create.json"
           },
           "Create a MsSqlServer provider": {
-            "$ref": "./examples/workloadmonitor/MsSqlServerProviderInstance_Create.json"
+            "$ref": "./examples/MsSqlServerProviderInstance/MsSqlServerProviderInstance_Create.json"
           },
           "Create a PrometheusHaCluster provider": {
-            "$ref": "./examples/workloadmonitor/PrometheusHaClusterProviderInstances_Create.json"
+            "$ref": "./examples/PrometheusHaClusterProviderInstances/PrometheusHaClusterProviderInstances_Create.json"
           },
           "Create a SAP monitor Hana provider with Root Certificate": {
-            "$ref": "./examples/workloadmonitor/ProviderInstances_Create_Root_Certificate.json"
+            "$ref": "./examples/ProviderInstances/ProviderInstances_Create_Root_Certificate.json"
           },
           "Create a SAP monitor NetWeaver provider with Root Certificate": {
-            "$ref": "./examples/workloadmonitor/NetWeaverProviderInstances_Create_Root_Certificate.json"
+            "$ref": "./examples/NetWeaverProviderInstances/NetWeaverProviderInstances_Create_Root_Certificate.json"
           },
           "Create a OS provider with Root Certificate": {
-            "$ref": "./examples/workloadmonitor/PrometheusOSProviderInstances_Create_Root_Certificate.json"
+            "$ref": "./examples/PrometheusOSProviderInstances/PrometheusOSProviderInstances_Create_Root_Certificate.json"
           },
           "Create a Db2 provider with Root Certificate": {
-            "$ref": "./examples/workloadmonitor/Db2ProviderInstances_Create_Root_Certificate.json"
+            "$ref": "./examples/Db2ProviderInstances/Db2ProviderInstances_Create_Root_Certificate.json"
           },
           "Create a MsSqlServer provider with Root Certificate": {
-            "$ref": "./examples/workloadmonitor/MsSqlServerProviderInstance_Create_Root_Certificate.json"
+            "$ref": "./examples/MsSqlServerProviderInstance/MsSqlServerProviderInstance_Create_Root_Certificate.json"
           },
           "Create a PrometheusHaCluster provider with Root Certificate": {
-            "$ref": "./examples/workloadmonitor/PrometheusHaClusterProviderInstances_Create_Root_Certificate.json"
+            "$ref": "./examples/PrometheusHaClusterProviderInstances/PrometheusHaClusterProviderInstances_Create_Root_Certificate.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -511,7 +514,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -529,18 +532,18 @@
         "description": "Deletes a provider instance for the specified subscription, resource group, SAP monitor name, and resource name.",
         "x-ms-examples": {
           "Deletes a SAP monitor provider": {
-            "$ref": "./examples/workloadmonitor/ProviderInstances_Delete.json"
+            "$ref": "./examples/ProviderInstances/ProviderInstances_Delete.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -551,10 +554,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Deleted provider instance",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
-            }
+            "description": "Deleted provider instance"
           },
           "202": {
             "description": "Deleting provider instance"
@@ -565,7 +565,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -581,7 +581,7 @@
         "description": "Gets configuration values for Single Pane Of Glass for SAP monitor for the specified subscription, resource group, and resource name.",
         "x-ms-examples": {
           "Get properties of a SAP monitor": {
-            "$ref": "./examples/workloadmonitor/SapLandscapeMonitor_Get.json"
+            "$ref": "./examples/SapLandscapeMonitor/SapLandscapeMonitor_Get.json"
           }
         },
         "produces": [
@@ -589,13 +589,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -611,7 +611,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -625,18 +625,18 @@
         "description": "Creates a SAP Landscape Monitor Dashboard for the specified subscription, resource group, and resource name.",
         "x-ms-examples": {
           "Create for SAP Landscape monitor Dashboard": {
-            "$ref": "./examples/workloadmonitor/SapLandscapeMonitor_Create.json"
+            "$ref": "./examples/SapLandscapeMonitor/SapLandscapeMonitor_Create.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -661,7 +661,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -675,18 +675,18 @@
         "description": "Deletes a SAP Landscape Monitor Dashboard with the specified subscription, resource group, and SAP monitor name.",
         "x-ms-examples": {
           "Deletes SAP monitor": {
-            "$ref": "./examples/workloadmonitor/SapLandscapeMonitor_Delete.json"
+            "$ref": "./examples/SapLandscapeMonitor/SapLandscapeMonitor_Delete.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -702,7 +702,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -716,18 +716,18 @@
         "description": "Patches the SAP Landscape Monitor Dashboard for the specified subscription, resource group, and SAP monitor name.",
         "x-ms-examples": {
           "Update SAP monitor": {
-            "$ref": "./examples/workloadmonitor/SapLandscapeMonitor_Update.json"
+            "$ref": "./examples/SapLandscapeMonitor/SapLandscapeMonitor_Update.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -746,7 +746,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -762,7 +762,7 @@
         "description": "Gets configuration values for Single Pane Of Glass for SAP monitor for the specified subscription, resource group, and resource name.",
         "x-ms-examples": {
           "Get properties of a SAP monitor": {
-            "$ref": "./examples/workloadmonitor/SapLandscapeMonitor_List.json"
+            "$ref": "./examples/SapLandscapeMonitor/SapLandscapeMonitor_List.json"
           }
         },
         "produces": [
@@ -770,13 +770,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -792,7 +792,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -800,6 +800,35 @@
     }
   },
   "definitions": {
+    "HealthState": {
+      "readOnly": true,
+      "type": "string",
+      "enum": [
+        "Healthy",
+        "Degraded",
+        "Unavailable",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadProviderInstanceHealthState",
+        "modelAsString": true
+      },
+      "description": "State of health of the provider instance"
+    },
+    "Health": {
+      "type": "object",
+      "properties": {
+        "healthState": {
+          "$ref": "#/definitions/HealthState"
+        },
+        "impactingReasons": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Reasons impacting health state"
+        }
+      },
+      "description": "Resource health details"
+    },
     "SslPreference": {
       "description": "Gets or sets certificate preference if secure communication is enabled.",
       "type": "string",
@@ -901,7 +930,7 @@
       "description": "Defines the workload operation content.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -1015,8 +1044,7 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "./commonTypes.json#/definitions/UserAssignedServiceIdentity",
-          "description": "[currently not in use] Managed service identity(user assigned identities)"
+          "$ref": "../../../common-types/v2/commonTypes.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1026,7 +1054,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "SAP monitor info on Azure (ARM properties and SAP monitor properties)"
@@ -1044,7 +1072,8 @@
             "Failed",
             "Succeeded",
             "Deleting",
-            "Migrating"
+            "Migrating",
+            "Canceled"
           ],
           "x-ms-enum": {
             "name": "WorkloadMonitorProvisioningState",
@@ -1118,8 +1147,7 @@
           }
         },
         "identity": {
-          "$ref": "./commonTypes.json#/definitions/UserAssignedServiceIdentity",
-          "description": "[currently not in use] Managed service identity(user assigned identities)"
+          "$ref": "../../../common-types/v2/commonTypes.json#/definitions/ManagedServiceIdentity"
         }
       }
     },
@@ -1143,10 +1171,6 @@
     "ProviderInstance": {
       "type": "object",
       "properties": {
-        "identity": {
-          "$ref": "./commonTypes.json#/definitions/UserAssignedServiceIdentity",
-          "description": "[currently not in use] Managed service identity(user assigned identities)"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProviderInstanceProperties",
@@ -1155,7 +1179,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "A provider instance associated with SAP monitor."
@@ -1460,13 +1484,20 @@
             "Failed",
             "Succeeded",
             "Deleting",
-            "Migrating"
+            "Migrating",
+            "Canceled"
           ],
           "x-ms-enum": {
             "name": "WorkloadMonitorProvisioningState",
             "modelAsString": true
           },
           "description": "State of provisioning of the provider instance"
+        },
+        "health": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Resource health details",
+          "$ref": "#/definitions/Health"
         },
         "errors": {
           "description": "Defines the provider instance errors.",
@@ -1552,7 +1583,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "configuration associated with SAP Landscape Monitor Dashboard."
@@ -1652,9 +1683,7 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/ProviderInstance"
-      },
-      "description": "Request body representing a provider instance",
-      "x-ms-parameter-location": "method"
+      }
     },
     "SapLandscapeMonitorParameter": {
       "name": "sapLandscapeMonitorParameter",
