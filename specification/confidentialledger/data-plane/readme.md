@@ -84,3 +84,12 @@ These settings apply only when `--tag=package-2023-01-18-preview-identity` is sp
 input-file:
   - Microsoft.ConfidentialLedger/preview/2023-01-18-preview/identityservice.json
 ```
+
+### Tag: package-2023-06-01-preview-mccf
+
+These settings apply only when `--tag=package-2023-06-01-preview-mccf` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06-01-preview-mccf'
+input-file:
+  - Microsoft.ManagedCcf/preview/2023-06-01-preview/mccfgov.json
+```
