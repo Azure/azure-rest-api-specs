@@ -27,7 +27,7 @@ These are the global settings for the PaloAltoNetworks.Cloudngfw.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-10-10-preview
+tag: package-2023-09-01
 ```
 
 
