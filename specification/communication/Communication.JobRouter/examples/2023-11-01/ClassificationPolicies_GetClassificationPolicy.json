@@ -4,7 +4,7 @@
   "parameters": {
     "endpoint": "https://contoso.westus.communications.azure.com",
     "api-version": "2023-11-01",
-    "id": "MainClassificationPolicy"
+    "classificationPolicyId": "MainClassificationPolicy"
   },
   "responses": {
     "200": {
@@ -12,7 +12,7 @@
         "id": "MainClassificationPolicy",
         "name": "Main",
         "fallbackQueueId": "MainQueue",
-        "queueSelectors": [
+        "queueSelectorAttachments": [
           {
             "kind": "conditional",
             "condition": {
@@ -33,13 +33,14 @@
           "kind": "static-rule",
           "value": "2"
         },
-        "workerSelectors": [
+        "workerSelectorAttachments": [
           {
             "kind": "pass-through",
             "key": "language",
             "labelOperator": "equal"
           }
-        ]
+        ],
+        "etag": "etag"
       }
     }
   }

@@ -229,7 +229,9 @@ enum ExpressionRouterRuleLanguage {
 @resource("classificationPolicies")
 @doc("A container for the rules that govern how jobs are classified.")
 model ClassificationPolicy {
-  @key("id")
+  ...RouterPageableEntity,
+
+  @key("classificationPolicyId")
   @doc("Unique identifier of this policy.")
   @visibility("read")
   id: string;
@@ -240,8 +242,8 @@ model ClassificationPolicy {
   @doc("The fallback queue to select if the queue selector doesn't find a match.")
   fallbackQueueId?: string;
 
-  @doc("The queue selectors to resolve a queue for a given job.")
-  queueSelectors?: QueueSelectorAttachment[];
+  @doc("The queue selector attachments used to resolve a queue for a given job.")
+  queueSelectorAttachments?: QueueSelectorAttachment[];
 
   @doc("""
 A rule of one of the following types:
@@ -260,8 +262,8 @@ OAuth2.0 authentication protocol.
 """)
   prioritizationRule?: RouterRule;
 
-  @doc("The worker label selectors to attach to a given job.")
-  workerSelectors?: WorkerSelectorAttachment[];
+  @doc("The worker selector attachments used to attach worker selectors to a given job.")
+  workerSelectorAttachments?: WorkerSelectorAttachment[];
 }
 
 @doc("""
@@ -280,25 +282,21 @@ WebhookRule: A rule providing a binding to a webserver following
 OAuth2.0 authentication protocol.
 """)
 @discriminator("kind")
-model RouterRule {}
+model RouterRule {
+  @doc("The type discriminator describing a sub-type of RouterRule")
+  kind: string;
+}
 
 @doc("A paged collection of classification policies.")
 model ClassificationPolicyCollection
-  is RouterPagedCollection<ClassificationPolicyItem>;
-
-@doc("Paged instance of ClassificationPolicy")
-model ClassificationPolicyItem {
-  @doc("A container for the rules that govern how jobs are classified.")
-  classificationPolicy: ClassificationPolicy;
-
-  @doc("(Optional) The Concurrency Token.")
-  etag: string;
-}
+  is RouterPagedCollection<ClassificationPolicy>;
 
 @resource("distributionPolicies")
 @doc("Policy governing how jobs are distributed to workers")
 model DistributionPolicy {
-  @key("id")
+  ...RouterPageableEntity,
+
+  @key("distributionPolicyId")
   @doc("The unique identifier of the policy.")
   @visibility("read")
   id: string;
@@ -336,24 +334,20 @@ This flag is intended more for temporary usage.
 By default, set to false.
 """)
   bypassSelectors?: boolean;
+
+  @doc("The type discriminator describing a sub-type of DistributionMode")
+  kind: string;
 }
 
 @doc("A paged collection of distribution policies.")
-model DistributionPolicyCollection is RouterPagedCollection<DistributionPolicyItem>;
-
-@doc("Paged instance of DistributionPolicy")
-model DistributionPolicyItem {
-  @doc("Policy governing how jobs are distributed to workers")
-  distributionPolicy: DistributionPolicy;
-
-  @doc("(Optional) The Concurrency Token.")
-  etag: string;
-}
+model DistributionPolicyCollection is RouterPagedCollection<DistributionPolicy>;
 
 @resource("exceptionPolicies")
 @doc("A policy that defines actions to execute when exception are triggered.")
 model ExceptionPolicy {
-  @key("id")
+  ...RouterPageableEntity,
+
+  @key("exceptionPolicyId")
   @doc("The Id of the exception policy")
   @visibility("read")
   id: string;
@@ -365,41 +359,47 @@ model ExceptionPolicy {
 (Optional) A dictionary collection of exception rules on the exception policy.
 Key is the Id of each exception rule.
 """)
-  exceptionRules?: Record<ExceptionRule>;
+  exceptionRules?: ExceptionRule[];
 }
 
 @doc("A rule that defines actions to execute upon a specific trigger.")
 model ExceptionRule {
+  
+  @doc("Id of the exception rule.")
+  id: string;
+  
   @doc("The trigger for this exception rule")
   trigger: ExceptionTrigger;
 
-  @doc("""
-A dictionary collection of actions to perform once the exception is triggered.
-Key is the Id of each exception action.
-""")
-  actions: Record<ExceptionAction>;
+  @doc("A collection of actions to perform once the exception is triggered.")
+  actions: ExceptionAction[];
 }
 
 @doc("The trigger for this exception rule")
 @discriminator("kind")
-model ExceptionTrigger {}
+model ExceptionTrigger {
+  @doc("The type discriminator describing a sub-type of ExceptionTrigger")
+  kind: string;
+}
 
 @doc("A paged collection of exception policies.")
-model ExceptionPolicyCollection is RouterPagedCollection<ExceptionPolicyItem>;
+model ExceptionPolicyCollection is RouterPagedCollection<ExceptionPolicy>;
 
-@doc("Paged instance of ExceptionPolicy")
-model ExceptionPolicyItem {
-  @doc("A policy that defines actions to execute when exception are triggered.")
-  exceptionPolicy: ExceptionPolicy;
-
-  @doc("(Optional) The Concurrency Token.")
-  etag: string;
+@doc("A note attached to a job.")
+model RouterJobNote {
+  @doc("The message contained in the note.")
+  message: string;
+  
+  @doc("The time at which the note was added in UTC. If not provided, will default to the current time.")
+  addedAt?: utcDateTime;
 }
 
 @resource("jobs")
 @doc("A unit of work to be routed")
 model RouterJob {
-  @key("id")
+  ...RouterPageableEntity,
+
+  @key("jobId")
   @doc("The id of the job.")
   @visibility("read")
   id: string;
@@ -460,7 +460,7 @@ Key is AssignmentId.
   tags?: Record<unknown>;
 
   @doc("Notes attached to a job, sorted by timestamp")
-  notes?: Record<string>;
+  notes?: RouterJobNote[];
 
   @doc("If set, job will be scheduled to be enqueued at a given time")
   @visibility("read")
@@ -552,7 +552,10 @@ SuspendMode: Used when matching workers
 to a job needs to be suspended.
 """)
 @discriminator("kind")
-model JobMatchingMode { }
+model JobMatchingMode { 
+  @doc("The type discriminator describing a sub-type of JobMatchingMode")
+  kind: string;
+}
 
 @doc("""
 Describes a matching mode used for scheduling jobs to be queued at a future
@@ -584,7 +587,7 @@ model SuspendMode extends JobMatchingMode {
 }
 
 @doc("Request payload for deleting a job")
-model CancelJobRequest {
+model CancelJobOptions {
   @doc("""
 (Optional) A note that will be appended to the jobs' Notes collection with the
 current timestamp.
@@ -600,7 +603,7 @@ If not provided, default value of \"Cancelled\" is set.
 }
 
 @doc("Request payload for completing jobs")
-model CompleteJobRequest {
+model CompleteJobOptions {
   @doc("The assignment within the job to complete.")
   assignmentId: string;
 
@@ -612,7 +615,7 @@ current timestamp.
 }
 
 @doc("Request payload for closing jobs")
-model CloseJobRequest {
+model CloseJobOptions {
   @doc("The assignment within which the job is to be closed.")
   assignmentId: string;
 
@@ -639,16 +642,7 @@ current timestamp.
 }
 
 @doc("A paged collection of jobs.")
-model RouterJobCollection is RouterPagedCollection<RouterJobItem>;
-
-@doc("Paged instance of RouterJob")
-model RouterJobItem {
-  @doc("A unit of work to be routed")
-  job: RouterJob;
-
-  @doc("(Optional) The Concurrency Token.")
-  etag: string;
-}
+model RouterJobCollection is RouterPagedCollection<RouterJob>;
 
 @doc("Position and estimated wait time for a job.")
 model RouterJobPositionDetails {
@@ -669,7 +663,7 @@ model RouterJobPositionDetails {
 }
 
 @doc("Request payload for unassigning a job.")
-model UnassignJobRequest {
+model UnassignJobOptions {
   @doc("""
 If SuspendMatching is true, then the job is not queued for re-matching with a
 worker.
@@ -702,7 +696,7 @@ model AcceptJobOfferResult {
 }
 
 @doc("Request payload for declining offers")
-model DeclineJobOfferRequest {
+model DeclineJobOfferOptions {
   @doc("""
 If the RetryOfferAt is not provided, then this job will not be offered again to
 the worker who declined this job unless
@@ -719,7 +713,9 @@ declined the job will also be eligible for the job at that time.
 @resource("queues")
 @doc("A queue that can contain jobs to be routed.")
 model RouterQueue {
-  @key("id")
+  ...RouterPageableEntity,
+
+  @key("queueId")
   @doc("The Id of this queue")
   @visibility("read")
   id: string;
@@ -747,16 +743,7 @@ escalation rules.
 }
 
 @doc("A paged collection of queues.")
-model RouterQueueCollection is RouterPagedCollection<RouterQueueItem>;
-
-@doc("Paged instance of RouterQueue")
-model RouterQueueItem {
-  @doc("A queue that can contain jobs to be routed.")
-  queue: RouterQueue;
-
-  @doc("(Optional) The Concurrency Token.")
-  etag: string;
-}
+model RouterQueueCollection is RouterPagedCollection<RouterQueue>;
 
 @doc("Statistics for the queue")
 model RouterQueueStatistics {
@@ -776,12 +763,12 @@ by job priority
   longestJobWaitTimeMinutes?: float64;
 }
 
-@doc("An assignment of a worker to a queue")
-model RouterQueueAssignment {}
 
 @resource("workers")
 @doc("An entity for jobs to be routed to")
 model RouterWorker {
+  ...RouterPageableEntity,
+
   @key("workerId")
   @doc("Id of the worker.")
   @visibility("read")
@@ -792,10 +779,10 @@ model RouterWorker {
   state?: RouterWorkerState;
   
   @doc("The queue(s) that this worker can receive work from.")
-  queueAssignments?: Record<RouterQueueAssignment>;
+  queues?: string[];
 
   @doc("The total capacity score this worker has to manage multiple concurrent jobs.")
-  totalCapacity?: int32;
+  capacity?: int32;
 
   @doc("""
 A set of key/value pairs that are identifying attributes used by the rules
@@ -807,7 +794,7 @@ engines to make decisions.
   tags?: Record<unknown>;
 
   @doc("The channel(s) this worker can handle and their impact on the workers capacity.")
-  channelConfigurations?: Record<ChannelConfiguration>;
+  channels?: RouterChannel[];
 
   @doc("A list of active offers issued to this worker.")
   @visibility("read")
@@ -829,7 +816,11 @@ consumed. A value of '0' means no capacity is currently consumed.
 }
 
 @doc("Represents the capacity a job in this channel will consume from a worker")
-model ChannelConfiguration {
+model RouterChannel {
+
+  @doc("Id of the channel.")
+  channelId: string;
+
   @doc("""
 The amount of capacity that an instance of a job of this channel will consume
 of the total worker capacity.
@@ -877,16 +868,7 @@ model RouterWorkerAssignment {
 }
 
 @doc("A paged collection of workers.")
-model RouterWorkerCollection is RouterPagedCollection<RouterWorkerItem>;
-
-@doc("Paged instance of RouterWorker")
-model RouterWorkerItem {
-  @doc("An entity for jobs to be routed to")
-  worker: RouterWorker;
-
-  @doc("(Optional) The Concurrency Token.")
-  etag: string;
-}
+model RouterWorkerCollection is RouterPagedCollection<RouterWorker>;
 
 @doc("Jobs are distributed to the worker with the strongest abilities available.")
 model BestWorkerMode extends DistributionMode {
@@ -979,7 +961,14 @@ custom values.
 
 @doc("The action to take when the exception is triggered")
 @discriminator("kind")
-model ExceptionAction {}
+model ExceptionAction {
+  @doc("Unique Id of the exception action")
+  @visibility("read")
+  id: string;
+
+  @doc("The type discriminator describing a sub-type of ExceptionAction")
+  kind: string;
+}
 
 @doc("""
 Describes a set of queue selectors that will be attached if the given condition
@@ -1033,7 +1022,10 @@ An attachment of queue selectors to resolve a queue to a job from a
 classification policy
 """)
 @discriminator("kind")
-model QueueSelectorAttachment {}
+model QueueSelectorAttachment {
+  @doc("The type discriminator describing a sub-type of QueueSelectorAttachment")
+  kind: string;
+}
 
 @doc("""
 Describes a set of worker selectors that will be attached if the given
@@ -1066,7 +1058,10 @@ OAuth2.0 authentication protocol.
 
 @doc("An attachment which attaches worker selectors to a job")
 @discriminator("kind")
-model WorkerSelectorAttachment {}
+model WorkerSelectorAttachment {
+  @doc("The type discriminator describing a sub-type of WorkerSelectorAttachment")
+  kind: string;
+}
 
 @doc("A rule that return the same labels as the input labels.")
 model DirectMapRouterRule extends RouterRule {
@@ -1393,8 +1388,9 @@ selected.
   workerSelectors: RouterWorkerSelector[];
 }
 
+@access(Access.internal)
 @doc("Request payload for reclassifying jobs")
-model ReclassifyJobRequest is Record<string>;
+model ReclassifyJobOptions is Record<string>;
 
 @doc("Response payload from reclassifying a job")
 model ReclassifyJobResult {}
@@ -1506,10 +1502,17 @@ jobs. Defaults to false.
   hasCapacity?: boolean;
 }
 
+@doc("Base class for all pageable entities")
+model RouterPageableEntity {
+  @doc("Concurrency Token.")
+  @visibility("read")
+  etag: eTag;
+}
+
 @pagedResult
 @friendlyName("Paged{name}", TResource)
 @doc("Paged collection of {name} items", TResource)
-model RouterPagedCollection<TResource extends TypeSpec.Reflection.Model> {
+model RouterPagedCollection<TResource extends TypeSpec.Reflection.Model & RouterPageableEntity> {
   @doc("The {name} items on this page", TResource)
   @items
   value: TResource[];

@@ -4,30 +4,33 @@
   "parameters": {
     "endpoint": "https://contoso.westus.communications.azure.com",
     "api-version": "2023-11-01",
-    "id": "MainExceptionPolicy"
+    "exceptionPolicyId": "MainExceptionPolicy"
   },
   "responses": {
     "200": {
       "body": {
         "id": "MainExceptionPolicy",
         "name": "Main",
-        "exceptionRules": {
-          "MaxWaitTimeExceeded": {
+        "exceptionRules": [
+          {
+            "id": "MaxWaitTimeExceeded",
             "trigger": {
               "kind": "wait-time",
               "thresholdSeconds": 20
             },
-            "actions": {
-              "MoveJobToEscalatedQueue": {
+            "actions": [
+              {
+                "id": "MoveJobToEscalatedQueue",
                 "kind": "reclassify",
                 "classificationPolicyId": "Main",
                 "labelsToUpsert": {
                   "escalated": true
                 }
               }
-            }
+            ]
           }
-        }
+        ],
+        "etag": "etag"
       }
     }
   }

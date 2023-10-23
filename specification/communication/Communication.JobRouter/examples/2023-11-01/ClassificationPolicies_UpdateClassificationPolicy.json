@@ -4,7 +4,7 @@
   "parameters": {
     "endpoint": "https://contoso.westus.communications.azure.com",
     "api-version": "2023-11-01",
-    "id": "90eb00c4-234e-4df7-a231-ef7895518384",
+    "classificationPolicyId": "90eb00c4-234e-4df7-a231-ef7895518384",
     "resource": {
       "name": "MainUpdate"
     }
@@ -15,7 +15,7 @@
         "id": "90eb00c4-234e-4df7-a231-ef7895518384",
         "name": "MainUpdate",
         "fallbackQueueId": "MainQueue",
-        "queueSelectors": [
+        "queueSelectorAttachments": [
           {
             "kind": "conditional",
             "condition": {
@@ -36,7 +36,8 @@
           "kind": "static-rule",
           "value": "2"
         },
-        "workerSelectors": []
+        "workerSelectorAttachments": [],
+        "etag": "etag"
       }
     },
     "201": {
@@ -44,7 +45,7 @@
         "id": "90eb00c4-234e-4df7-a231-ef7895518384",
         "name": "MainUpdate",
         "fallbackQueueId": "MainQueue",
-        "queueSelectors": [
+        "queueSelectorAttachments": [
           {
             "kind": "conditional",
             "condition": {
@@ -65,7 +66,8 @@
           "kind": "static-rule",
           "value": "2"
         },
-        "workerSelectors": []
+        "workerSelectorAttachments": [],
+        "etag": "etag"
       }
     }
   }

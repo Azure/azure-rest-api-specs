@@ -11,51 +11,51 @@
       "body": {
         "value": [
           {
-            "exceptionPolicy": {
-              "id": "MainExceptionPolicy",
-              "name": "Main",
-              "exceptionRules": {
-                "MaxWaitTimeExceeded": {
-                  "trigger": {
-                    "kind": "wait-time",
-                    "thresholdSeconds": 20
-                  },
-                  "actions": {
-                    "MoveJobToEscalatedQueue": {
-                      "kind": "reclassify",
-                      "classificationPolicyId": "Main",
-                      "labelsToUpsert": {
-                        "escalated": true
-                      }
+            "id": "MainExceptionPolicy",
+            "name": "Main",
+            "exceptionRules": [
+              {
+                "id": "MaxWaitTimeExceeded",
+                "trigger": {
+                  "kind": "wait-time",
+                  "thresholdSeconds": 20
+                },
+                "actions": [
+                  {
+                    "id": "MoveJobToEscalatedQueue",
+                    "kind": "reclassify",
+                    "classificationPolicyId": "Main",
+                    "labelsToUpsert": {
+                      "escalated": true
                     }
                   }
-                }
+                ]
               }
-            },
+            ],
             "etag": "etag"
           },
           {
-            "exceptionPolicy": {
-              "id": "SecondaryExceptionPolicy",
-              "name": "Secondary",
-              "exceptionRules": {
-                "MaxWaitTimeExceeded": {
-                  "trigger": {
-                    "kind": "wait-time",
-                    "thresholdSeconds": 50
-                  },
-                  "actions": {
-                    "MoveJobToVIPQueue": {
-                      "kind": "reclassify",
-                      "classificationPolicyId": "Main",
-                      "labelsToUpsert": {
-                        "VIP": true
-                      }
+            "id": "SecondaryExceptionPolicy",
+            "name": "Secondary",
+            "exceptionRules": [
+              {
+                "id": "MaxWaitTimeExceeded",
+                "trigger": {
+                  "kind": "wait-time",
+                  "thresholdSeconds": 50
+                },
+                "actions": [
+                  {
+                    "id": "MoveJobToVIPQueue",
+                    "kind": "reclassify",
+                    "classificationPolicyId": "Main",
+                    "labelsToUpsert": {
+                      "VIP": true
                     }
                   }
-                }
+                ]
               }
-            },
+            ],
             "etag": "etag"
           }
         ]

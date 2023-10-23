@@ -11,49 +11,45 @@
       "body": {
         "value": [
           {
-            "classificationPolicy": {
-              "id": "MainClassificationPolicy",
-              "name": "Main",
-              "fallbackQueueId": "MainQueue",
-              "queueSelectors": [
-                {
-                  "kind": "rule-engine",
-                  "rule": {
-                    "kind": "expression-rule",
-                    "language": "powerFx",
-                    "expression": "If(job.Escalated = true, \"SecondaryQueue\", \"MainQueue\")"
-                  }
+            "id": "MainClassificationPolicy",
+            "name": "Main",
+            "fallbackQueueId": "MainQueue",
+            "queueSelectorAttachments": [
+              {
+                "kind": "rule-engine",
+                "rule": {
+                  "kind": "expression-rule",
+                  "language": "powerFx",
+                  "expression": "If(job.Escalated = true, \"SecondaryQueue\", \"MainQueue\")"
                 }
-              ],
-              "prioritizationRule": {
-                "kind": "static-rule",
-                "value": "2"
-              },
-              "workerSelectors": []
+              }
+            ],
+            "prioritizationRule": {
+              "kind": "static-rule",
+              "value": "2"
             },
+            "workerSelectorAttachments": [],
             "etag": "etag"
           },
           {
-            "classificationPolicy": {
-              "id": "SecondaryClassificationPolicy",
-              "name": "Secondary",
-              "fallbackQueueId": "MainQueue",
-              "queueSelectors": [
-                {
-                  "kind": "rule-engine",
-                  "rule": {
-                    "kind": "expression-rule",
-                    "language": "powerFx",
-                    "expression": "If(job.VIP = true, \"VIPQueue\", \"MainQueue\")"
-                  }
+            "id": "SecondaryClassificationPolicy",
+            "name": "Secondary",
+            "fallbackQueueId": "MainQueue",
+            "queueSelectorAttachments": [
+              {
+                "kind": "rule-engine",
+                "rule": {
+                  "kind": "expression-rule",
+                  "language": "powerFx",
+                  "expression": "If(job.VIP = true, \"VIPQueue\", \"MainQueue\")"
                 }
-              ],
-              "prioritizationRule": {
-                "kind": "static-rule",
-                "value": "1"
-              },
-              "workerSelectors": []
+              }
+            ],
+            "prioritizationRule": {
+              "kind": "static-rule",
+              "value": "1"
             },
+            "workerSelectorAttachments": [],
             "etag": "etag"
           }
         ]
