@@ -23,17 +23,18 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{baseUrl}",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "positionInOperation": "first",
     "parameters": [
       {
-        "name": "baseUrl",
+        "name": "endpoint",
         "description": "The regional endpoint to use, for example https://eastus.metrics.monitor.azure.com. The region should match the region of the requested resources. For global resources, the region should be 'global'.",
         "required": true,
         "type": "string",
         "in": "path",
-        "x-ms-skip-url-encoding": true
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
       }
     ]
   },
@@ -49,7 +50,7 @@
         "tags": [
           "Metrics"
         ],
-        "operationId": "Metrics_Batch",
+        "operationId": "MetricsBatch_QueryBatch",
         "description": "Lists the metric values for multiple resources.",
         "parameters": [
           {
