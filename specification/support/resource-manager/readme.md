@@ -26,14 +26,23 @@ These are the global settings for the Support API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-09
+tag: package-preview-2023-06
 ```
 
+
+### Tag: package-preview-2023-06
+
+These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-06'
+input-file:
+  - Microsoft.Support/preview/2023-06-01-preview/support.json
+```
 ### Tag: package-preview-2022-09
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-09'
+``` yaml $(tag) == 'package-preview-2022-09'
 input-file:
   - Microsoft.Support/preview/2022-09-01-preview/support.json
 suppressions:
@@ -49,6 +58,7 @@ suppressions:
     reason: "Rule: The top-level resource 'FileWorkspaceDetails' does not have list by subscription operation, please add it. Justification: We cannot support get list for this resource type"
      
 ```
+
 ### Tag: package-preview-2021-06
 
 These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
@@ -84,6 +94,7 @@ These settings apply only when `--tag=package-2022-09-preview` is specified on t
 input-file:
   - Microsoft.Support/preview/2022-09-01-preview/support.json
 ```
+
 ---
 
 # Code Generation
