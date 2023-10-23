@@ -61,11 +61,11 @@ model Parameter { // this can be TrackedResource based on resourcetype
   value: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @armResourceOperations
 interface GenericGenevaActions {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<GenericGenevaActionsResource>;
   listBySubscription is ArmListBySubscription<GenericGenevaActionsResource>;
   listByResourceGroup is ArmResourceListByParent<GenericGenevaActionsResource>;
   get is ArmResourceRead<GenericGenevaActionsResource>;
-  delete is ArmResourceDeleteAsync<GenericGenevaActionsResource>;
 }
