@@ -911,6 +911,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/removeInfra": {
+      "post": {
+        "tags": [
+          "ReplicationInfrastructure"
+        ],
+        "summary": "Removes the appliance's infrastructure under the fabric.",
+        "operationId": "ReplicationInfrastructure_Delete",
+        "parameters": [
+          {
+            "required": true,
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "required": true,
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "required": true,
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "required": true,
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceDefaultError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Removes the appliance's infrastructure under the fabric.": {
+            "$ref": "./examples/ReplicationInfrastructure_Delete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationLogicalNetworks": {
       "get": {
         "tags": [
@@ -8548,6 +8602,18 @@
         "recoveryCapacityReservationGroupId": {
           "description": "The recovery capacity reservation group Id.",
           "type": "string"
+        },
+        "AutoProtectionOfDataDisk": {
+          "description": "A value indicating whether the auto protection is enabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AutoProtectionOfDataDisk",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "A2A"
