@@ -466,6 +466,47 @@
         }
       }
     },
+    "/imageWithText:analyze": {
+      "post": {
+        "operationId": "ImageWithTextOperations_AnalyzeImageWithText",
+        "summary": "Analyze Image With Text",
+        "description": "A synchronous API for the analysis of potentially harmful image with text content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The image with text analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeImageWithTextOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeImageWithTextResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/text/blocklists": {
       "get": {
         "operationId": "TextBlocklists_ListTextBlocklists",
@@ -1591,6 +1632,53 @@
         "categoriesAnalysis"
       ]
     },
+    "AnalyzeImageWithTextOptions": {
+      "type": "object",
+      "description": "The analysis request of the image with text.",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/ImageData",
+          "description": "The image needs to be analyzed."
+        },
+        "text": {
+          "type": "string",
+          "description": "The text attached to the image. We support at most 1k characters (unicode code points) in one text request.",
+          "maxLength": 1000
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.",
+          "items": {
+            "$ref": "#/definitions/ImageWithTextCategory"
+          }
+        },
+        "enableOcr": {
+          "type": "boolean",
+          "description": "When set to true, our service will perform OCR and concatenate the recognized text with input text before analyzing. We will recognize at most 256 characters (unicode code points) from input image. The others will be truncated."
+        }
+      },
+      "required": [
+        "image",
+        "enableOcr"
+      ]
+    },
+    "AnalyzeImageWithTextResult": {
+      "type": "object",
+      "description": "The analysis response of the image with text.",
+      "properties": {
+        "categoriesAnalysis": {
+          "type": "array",
+          "description": "Analysis result for categories.",
+          "items": {
+            "$ref": "#/definitions/TextCategoriesAnalysis"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "categoriesAnalysis"
+      ]
+    },
     "AnalyzeTextOptions": {
       "type": "object",
       "description": "The text analysis request.",
@@ -1948,6 +2036,38 @@
       "required": [
         "incidentSampleId"
       ]
+    },
+    "ImageWithTextCategoriesAnalysis": {
+      "type": "object",
+      "description": "ImageWithText analysis result.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ImageWithTextCategory",
+          "description": "The imageWithtext analysis category."
+        },
+        "severity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The higher the severity of input content, the larger this value is. The values could be: 0,2,4,6."
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "ImageWithTextCategory": {
+      "type": "string",
+      "description": "ImageWithText analyze category.",
+      "enum": [
+        "Hate",
+        "SelfHarm",
+        "Sexual",
+        "Violence"
+      ],
+      "x-ms-enum": {
+        "name": "ImageWithTextCategory",
+        "modelAsString": true
+      }
     },
     "IncidentMatch": {
       "type": "object",
