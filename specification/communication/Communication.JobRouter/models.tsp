@@ -931,7 +931,7 @@ and the parameter name for the worker labels will be sent as `worker`.
 Note: If
 enabled, use BatchSize to set batch size.
 """)
-  allowScoringBatchOfWorkers?: boolean;
+  isBatchScoringEnabled?: boolean;
 
   @doc("""
 (Optional)
@@ -1145,7 +1145,7 @@ OAuth2.0 Credentials used to Contoso's Authorization server.
 Reference:
 https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/
 """)
-model Oauth2ClientCredential {
+model OAuth2WebhookClientCredential {
   @doc("ClientId for Contoso Authorization server.")
   clientId?: string;
 
@@ -1338,7 +1338,7 @@ OAuth2.0 Credentials used to Contoso's Authorization server.
 Reference:
 https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/
 """)
-  clientCredential?: Oauth2ClientCredential;
+  clientCredential?: OAuth2WebhookClientCredential;
 
   @doc("Uri for Contoso's Web Server.")
   webhookUri?: url;
