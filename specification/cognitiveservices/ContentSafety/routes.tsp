@@ -222,3 +222,19 @@ interface TextCategoryCustomization {
   //   @path operationId: string,
   // ): TextCustomizedCategoryOperation;
 }
+
+@added(Versions.v2023_10_30_Preview)
+interface ImageWithTextOperations {
+  @summary("Analyze Image With Text")
+  @doc("A synchronous API for the analysis of potentially harmful image with text content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.")
+  @route("/imageWithText:analyze")
+  @post
+  analyzeImageWithText is Azure.Core.RpcOperation<
+    {
+      @doc("The image with text analysis request.")
+      @body
+      body: AnalyzeImageWithTextOptions;
+    },
+    AnalyzeImageWithTextResult
+  >;
+}
