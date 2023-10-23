@@ -67,4 +67,5 @@ interface GenericGenevaActions {
   listBySubscription is ArmListBySubscription<GenericGenevaActionsResource>;
   listByResourceGroup is ArmResourceListByParent<GenericGenevaActionsResource>;
   get is ArmResourceRead<GenericGenevaActionsResource>;
+  delete is ArmResourceDeleteAsync<GenericGenevaActionsResource>;
 }
