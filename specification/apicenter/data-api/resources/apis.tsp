@@ -17,9 +17,9 @@ namespace ApiCenter.DataApi;
 @resource("apis")
 model ApiResource extends Api {
   @doc("API identifier.")
-  @key("apiId")
+  @key("apiName")
   @visibility("query")
-  apiId: string;
+  apiName: string;
 }
 
 interface Apis {

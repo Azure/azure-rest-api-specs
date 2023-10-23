@@ -17,9 +17,9 @@ namespace ApiCenter.DataApi;
 @parentResource(ApiVersionResource)
 model ApiDefinitionResource extends ApiDefinition {
   @doc("Definition identifier.")
-  @key("apiDefinitionId")
+  @key("apiDefinitionName")
   @visibility("query")
-  apiDefinitionId: string;
+  apiDefinitionName: string;
 }
 
 interface ApiDefinitions {

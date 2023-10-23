@@ -110,7 +110,7 @@
         }
       }
     },
-    "/apis/{apiId}": {
+    "/apis/{apiName}": {
       "get": {
         "operationId": "Apis_GetApi",
         "description": "Get an API.",
@@ -119,7 +119,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "apiId",
+            "name": "apiName",
             "in": "path",
             "description": "API identifier.",
             "required": true,
@@ -182,7 +182,7 @@
         }
       }
     },
-    "/apis/{apiId}/deployments": {
+    "/apis/{apiName}/deployments": {
       "get": {
         "operationId": "ApiDeployments_ListDeployments",
         "description": "List a collection of API versions.",
@@ -191,7 +191,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "apiId",
+            "name": "apiName",
             "in": "path",
             "description": "API identifier.",
             "required": true,
@@ -253,7 +253,7 @@
         }
       }
     },
-    "/apis/{apiId}/deployments/{deploymentId}": {
+    "/apis/{apiName}/deployments/{deploymentName}": {
       "get": {
         "operationId": "ApiDeployments_GetDeployment",
         "description": "Get an API version.",
@@ -262,14 +262,14 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "apiId",
+            "name": "apiName",
             "in": "path",
             "description": "API identifier.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "deploymentId",
+            "name": "deploymentName",
             "in": "path",
             "description": "Deployment identifier.",
             "required": true,
@@ -332,7 +332,7 @@
         }
       }
     },
-    "/apis/{apiId}/versions": {
+    "/apis/{apiName}/versions": {
       "get": {
         "operationId": "ApiVersions_ListVersions",
         "description": "List a collection of API versions.",
@@ -341,7 +341,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "apiId",
+            "name": "apiName",
             "in": "path",
             "description": "API identifier.",
             "required": true,
@@ -403,7 +403,7 @@
         }
       }
     },
-    "/apis/{apiId}/versions/{versionId}": {
+    "/apis/{apiName}/versions/{versionName}": {
       "get": {
         "operationId": "ApiVersions_GetVersion",
         "description": "Get an API version.",
@@ -412,14 +412,14 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "apiId",
+            "name": "apiName",
             "in": "path",
             "description": "API identifier.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "versionId",
+            "name": "versionName",
             "in": "path",
             "description": "Version identifier.",
             "required": true,
@@ -482,7 +482,7 @@
         }
       }
     },
-    "/apis/{apiId}/versions/{versionId}/definitions": {
+    "/apis/{apiName}/versions/{versionName}/definitions": {
       "get": {
         "operationId": "ApiDefinitions_ListDefinitions",
         "description": "List a collection of API definitions.",
@@ -491,14 +491,14 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "apiId",
+            "name": "apiName",
             "in": "path",
             "description": "API identifier.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "versionId",
+            "name": "versionName",
             "in": "path",
             "description": "Version identifier.",
             "required": true,
@@ -560,7 +560,7 @@
         }
       }
     },
-    "/apis/{apiId}/versions/{versionId}/definitions/{apiDefinitionId}": {
+    "/apis/{apiName}/versions/{versionName}/definitions/{apiDefinitionName}": {
       "get": {
         "operationId": "ApiDefinitions_GetDefinition",
         "description": "Get an API definition.",
@@ -569,21 +569,21 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "apiId",
+            "name": "apiName",
             "in": "path",
             "description": "API identifier.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "versionId",
+            "name": "versionName",
             "in": "path",
             "description": "Version identifier.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "apiDefinitionId",
+            "name": "apiDefinitionName",
             "in": "path",
             "description": "Definition identifier.",
             "required": true,
@@ -646,7 +646,7 @@
         }
       }
     },
-    "/apis/{apiId}/versions/{versionId}/definitions/{apiDefinitionId}:exportSpecification": {
+    "/apis/{apiName}/versions/{versionName}/definitions/{apiDefinitionName}:exportSpecification": {
       "post": {
         "operationId": "ApiDefinitions_ExportSpecification",
         "description": "Export an API specification.",
@@ -655,21 +655,21 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "apiId",
+            "name": "apiName",
             "in": "path",
             "description": "API identifier.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "versionId",
+            "name": "versionName",
             "in": "path",
             "description": "Version identifier.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "apiDefinitionId",
+            "name": "apiDefinitionName",
             "in": "path",
             "description": "Definition identifier.",
             "required": true,
@@ -791,7 +791,7 @@
         }
       }
     },
-    "/environments/{environmentId}": {
+    "/environments/{environmentName}": {
       "get": {
         "operationId": "Environments_GetEnvironment",
         "description": "Get an environment.",
@@ -800,7 +800,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "environmentId",
+            "name": "environmentName",
             "in": "path",
             "description": "Environment identifier.",
             "required": true,
@@ -980,12 +980,17 @@
           "description": "The name of the API.",
           "maxLength": 50
         },
+        "summary": {
+          "type": "string",
+          "description": "Short descrption of the API.",
+          "maxLength": 200
+        },
         "description": {
           "type": "string",
           "description": "The description of the API",
           "maxLength": 1000
         },
-        "type": {
+        "kind": {
           "type": "string",
           "description": "Kind of API. For example, REST or GraphQL."
         },
@@ -993,13 +998,13 @@
           "$ref": "#/definitions/Models.ApiLifecycleStage",
           "description": "Current lifecycle stage of the API."
         },
-        "termsOfServiceUrl": {
-          "type": "string",
-          "description": "URL pointing to the terms of service."
+        "termsOfService": {
+          "$ref": "#/definitions/Models.ApiTermsOfService",
+          "description": "Terms of service for the API."
         },
-        "licenseUrl": {
-          "type": "string",
-          "description": "URL pointing to the license details."
+        "license": {
+          "$ref": "#/definitions/Models.ApiLicenseModel",
+          "description": "The license information for the API."
         },
         "externalDocumentation": {
           "type": "array",
@@ -1009,7 +1014,7 @@
           },
           "x-ms-identifiers": []
         },
-        "contact": {
+        "contacts": {
           "type": "array",
           "description": "Points of contact for the API.",
           "items": {
@@ -1024,10 +1029,6 @@
             "type": "string"
           }
         },
-        "createdBy": {
-          "type": "string",
-          "description": "Created by."
-        },
         "lastUpdated": {
           "type": "string",
           "format": "date-time",
@@ -1036,12 +1037,7 @@
       },
       "required": [
         "title",
-        "description",
-        "type",
-        "termsOfServiceUrl",
-        "licenseUrl",
-        "customProperties",
-        "createdBy",
+        "kind",
         "lastUpdated"
       ]
     },
@@ -1091,8 +1087,7 @@
         }
       },
       "required": [
-        "title",
-        "description"
+        "title"
       ]
     },
     "Models.ApiDeployment": {
@@ -1113,17 +1108,42 @@
           "type": "string",
           "description": "The name of the deployment environment."
         },
-        "deploymentRuntimeUrl": {
-          "type": "string",
-          "description": "Base runtime URIs for this deployment.",
-          "maxLength": 200
+        "server": {
+          "$ref": "#/definitions/Models.ApiDeploymentServer",
+          "description": "The server information of the API deployment."
+        },
+        "customProperties": {
+          "type": "object",
+          "description": "The custom metadata defined for Deployment entries..",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "recommended": {
+          "type": "boolean",
+          "description": "Indicates if this is currently recommended deployment."
         }
       },
       "required": [
         "title",
-        "description",
         "environment",
-        "deploymentRuntimeUrl"
+        "server"
+      ]
+    },
+    "Models.ApiDeploymentServer": {
+      "type": "object",
+      "description": "Api Deployment Server",
+      "properties": {
+        "runtimeUri": {
+          "type": "array",
+          "description": "Base runtime URIs for this deployment.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "runtimeUri"
       ]
     },
     "Models.ApiExternalDocumentation": {
@@ -1144,6 +1164,32 @@
       "required": [
         "title",
         "url"
+      ]
+    },
+    "Models.ApiLicenseModel": {
+      "type": "object",
+      "description": "API License Model",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the license.",
+          "maxLength": 50
+        },
+        "url": {
+          "type": "string",
+          "description": "URL pointing to the license details. The URL field is mutually exclusive of the identifier field.",
+          "maxLength": 200
+        },
+        "identifier": {
+          "type": "string",
+          "description": "SPDX license information for the API. The identifier field is mutually exclusive of the URL field.",
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "name",
+        "url",
+        "identifier"
       ]
     },
     "Models.ApiLifecycleStage": {
@@ -1218,6 +1264,20 @@
         "version"
       ]
     },
+    "Models.ApiTermsOfService": {
+      "type": "object",
+      "description": "API Terms of Service",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "URL pointing to the terms of service.",
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
     "Models.ApiVersion": {
       "type": "object",
       "description": "API version",
@@ -1232,7 +1292,8 @@
         }
       },
       "required": [
-        "title"
+        "title",
+        "lifeCycleStage"
       ]
     },
     "Models.Environment": {
@@ -1244,7 +1305,7 @@
           "description": "The name of the environment.",
           "maxLength": 50
         },
-        "type": {
+        "kind": {
           "type": "string",
           "description": "Kind of deployment environment."
         },
@@ -1271,8 +1332,7 @@
       },
       "required": [
         "title",
-        "type",
-        "description"
+        "kind"
       ]
     },
     "Models.EnvironmentOnboardingModel": {
@@ -1285,9 +1345,11 @@
           "maxLength": 1000
         },
         "developerPortalUri": {
-          "type": "string",
-          "description": "Developer portal URI of the environment.",
-          "maxLength": 200
+          "type": "array",
+          "description": "Developer portal URIs of the environment.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -1304,9 +1366,11 @@
           "description": "Type of the server that represents the environment."
         },
         "managementPortalUri": {
-          "type": "string",
-          "description": "URI of the server's management portal.",
-          "maxLength": 200
+          "type": "array",
+          "description": "URIs of the server's management portal.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [

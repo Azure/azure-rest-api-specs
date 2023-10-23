@@ -18,9 +18,9 @@ namespace ApiCenter.DataApi;
 @parentResource(ApiResource)
 model ApiDeploymentResource extends ApiDeployment {
   @doc("Deployment identifier.")
-  @key("deploymentId")
+  @key("deploymentName")
   @visibility("query")
-  deploymentId: string;
+  deploymentName: string;
 }
 
 interface ApiDeployments {

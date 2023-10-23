@@ -6,33 +6,34 @@ model Api {
   @maxLength(50)
   title: string;
 
+  @doc("Short descrption of the API.")
+  @maxLength(200)
+  summary?: string;
+
   @doc("The description of the API")
   @maxLength(1000)
-  description: string;
+  description?: string;
 
   @doc("Kind of API. For example, REST or GraphQL.")
-  type: string;
+  kind: string;
 
   @doc("Current lifecycle stage of the API.")
   lifeCycleStage?: ApiLifecycleStage;
 
-  @doc("URL pointing to the terms of service.")
-  termsOfServiceUrl: string;
+  @doc("Terms of service for the API.")
+  termsOfService?: ApiTermsOfService;
 
-  @doc("URL pointing to the license details.")
-  licenseUrl: string;
+  @doc("The license information for the API.")
+  license?: ApiLicenseModel;
 
   @doc("External documentation")
   externalDocumentation?: Array<ApiExternalDocumentation>;
 
   @doc("Points of contact for the API.")
-  contact?: Array<ApiContact>;
+  contacts?: Array<ApiContact>;
 
   @doc("The custom metadata defined for API entries.")
-  customProperties: Record<string>;
-
-  @doc("Created by.")
-  createdBy: string;
+  customProperties?: Record<string>;
 
   @doc("Last updated date and time.")
   lastUpdated: utcDateTime;
@@ -89,3 +90,24 @@ model ApiContact {
   email: string;
 }
 
+@doc("API Terms of Service")
+model ApiTermsOfService {
+  @doc("URL pointing to the terms of service.")
+  @maxLength(200)
+  url: string;
+}
+
+@doc("API License Model")
+model ApiLicenseModel {
+  @doc("Name of the license.")
+  @maxLength(50)
+  name: string;
+  
+  @doc("URL pointing to the license details. The URL field is mutually exclusive of the identifier field.")
+  @maxLength(200)
+  url: string;
+
+  @doc("SPDX license information for the API. The identifier field is mutually exclusive of the URL field.")
+  @maxLength(200)
+  identifier: string;
+}

@@ -17,9 +17,9 @@ namespace ApiCenter.DataApi;
 @resource("environments")
 model EnvironmentResource extends Environment {
   @doc("Environment identifier.")
-  @key("environmentId")
+  @key("environmentName")
   @visibility("query")
-  environmentId: string;
+  environmentName: string;
 }
 
 // Operations //////////////////////////////////////////////////////////////////

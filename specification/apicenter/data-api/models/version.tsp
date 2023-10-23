@@ -8,5 +8,5 @@ model ApiVersion {
   title: string;
 
   @doc("Current lifecycle stage of the API version.")
-  lifeCycleStage?: ApiLifecycleStage;
+  lifeCycleStage: ApiLifecycleStage;
 }

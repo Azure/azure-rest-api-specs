@@ -18,9 +18,9 @@ namespace ApiCenter.DataApi;
 @parentResource(ApiResource)
 model ApiVersionResource extends ApiVersion {
   @doc("Version identifier.")
-  @key("versionId")
+  @key("versionName")
   @visibility("query")
-  versionId: string;
+  versionName: string;
 }
 
 interface ApiVersions {

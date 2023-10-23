@@ -8,7 +8,7 @@ model ApiDefinition {
 
   @doc("The description of the API definition.")
   @maxLength(1000)
-  description: string;
+  description?: string;
 
   @doc("The API specification details.")
   specification?: ApiSpecification;

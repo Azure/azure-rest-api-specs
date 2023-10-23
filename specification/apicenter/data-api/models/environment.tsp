@@ -7,11 +7,11 @@ model Environment {
   title: string;
 
   @doc("Kind of deployment environment.")
-  type: string;
+  kind: string;
 
   @doc("Description of the environment.")
   @maxLength(1000)
-  description: string;
+  description?: string;
 
   @doc("Server information of the environment.")
   server?: EnvironmentServer;
@@ -28,9 +28,8 @@ model EnvironmentServer {
   @doc("Type of the server that represents the environment.")
   type: string;
 
-  @doc("URI of the server's management portal.")
-  @maxLength(200)
-  managementPortalUri: string;
+  @doc("URIs of the server's management portal.")
+  managementPortalUri: Array<string>;
 }
 
 @doc("Environment Onboarding Model")
@@ -39,7 +38,6 @@ model EnvironmentOnboardingModel {
   @maxLength(1000)
   instructions: string;
 
-  @doc("Developer portal URI of the environment.")
-  @maxLength(200)
-  developerPortalUri: string;
+  @doc("Developer portal URIs of the environment.")
+  developerPortalUri: Array<string>;
 }
