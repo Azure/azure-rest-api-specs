@@ -4,26 +4,28 @@
   "parameters": {
     "endpoint": "https://contoso.westus.communications.azure.com",
     "api-version": "2023-11-01",
-    "id": "cf1cda69-6f41-45ac-b252-213293f1b1cb",
+    "exceptionPolicyId": "cf1cda69-6f41-45ac-b252-213293f1b1cb",
     "resource": {
       "name": "Main",
-      "exceptionRules": {
-        "MaxWaitTimeExceeded": {
-          "actions": {
-            "MoveJobToEscalatedQueue": {
+      "exceptionRules": [
+        {
+          "id": "MaxWaitTimeExceeded",
+          "actions": [
+            {
+              "id": "MoveJobToEscalatedQueue",
               "kind": "reclassify",
               "classificationPolicyId": "Main",
               "labelsToUpsert": {
                 "escalated": true
               }
             }
-          },
+          ],
           "trigger": {
             "kind": "wait-time",
             "thresholdSeconds": 20
           }
         }
-      }
+      ]
     }
   },
   "responses": {
@@ -31,46 +33,52 @@
       "body": {
         "id": "cf1cda69-6f41-45ac-b252-213293f1b1cb",
         "name": "Main",
-        "exceptionRules": {
-          "MaxWaitTimeExceeded": {
+        "exceptionRules": [
+          {
+            "id": "MaxWaitTimeExceeded",
             "trigger": {
               "kind": "wait-time",
               "thresholdSeconds": 20
             },
-            "actions": {
-              "MoveJobToEscalatedQueue": {
+            "actions": [
+              {
+                "id": "MoveJobToEscalatedQueue",
                 "kind": "reclassify",
                 "classificationPolicyId": "Main",
                 "labelsToUpsert": {
                   "escalated": true
                 }
               }
-            }
+            ]
           }
-        }
+        ],
+        "etag": "etag"
       }
     },
     "201": {
       "body": {
         "id": "cf1cda69-6f41-45ac-b252-213293f1b1cb",
         "name": "Main",
-        "exceptionRules": {
-          "MaxWaitTimeExceeded": {
+        "exceptionRules": [
+          {
+            "id": "MaxWaitTimeExceeded",
             "trigger": {
               "kind": "wait-time",
               "thresholdSeconds": 20
             },
-            "actions": {
-              "MoveJobToEscalatedQueue": {
+            "actions": [
+              {
+                "id": "MoveJobToEscalatedQueue",
                 "kind": "reclassify",
                 "classificationPolicyId": "Main",
                 "labelsToUpsert": {
                   "escalated": true
                 }
               }
-            }
+            ]
           }
-        }
+        ],
+        "etag": "etag"
       }
     }
   }
