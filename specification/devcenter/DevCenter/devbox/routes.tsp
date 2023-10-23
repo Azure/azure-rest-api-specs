@@ -395,8 +395,9 @@ interface DevBoxesOperations {
       actionName: string;
 
       @doc("The time to delay the Dev Box action or actions until.")
+      @projectedName("client", "delayUntil")
       @query
-      delayUntil: utcDateTime;
+      until: utcDateTime;
     },
     DevBoxAction
   >;
@@ -419,8 +420,9 @@ interface DevBoxesOperations {
       devBoxName: string;
 
       @doc("The time to delay the Dev Box action or actions until.")
+      @projectedName("client", "delayUntil")
       @query
-      delayUntil: utcDateTime;
+      until: utcDateTime;
     },
     DevBoxActionsDelayMultipleResult
   >;
