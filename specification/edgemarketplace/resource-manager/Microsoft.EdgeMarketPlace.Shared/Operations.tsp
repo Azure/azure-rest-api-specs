@@ -13,11 +13,11 @@ using Azure.ResourceManager;
 
 @armProviderNamespace
 @service({
-  title: "EdgeMarketPlaceClient",
+  title: "EdgeMarketplaceClient",
   version: "2023-04-01-preview",
 })
 @doc("Edge Market Place Resource Provider management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-namespace Microsoft.EdgeMarketPlace;
+namespace Microsoft.EdgeMarketplace;
 
 interface Operations extends Azure.ResourceManager.Operations {}
