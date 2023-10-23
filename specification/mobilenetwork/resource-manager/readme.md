@@ -27,15 +27,44 @@ These are the global settings for the mobilenetwork.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-09
+tag: package-preview-2023-10
 ```
 
 
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/attachedWifiSsid.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/common.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/dataNetwork.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/diagnosticsPackage.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/edgeNetworkSecurityGroup.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/edgeVirtualNetwork.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/mobileNetwork.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/operation.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/packetCapture.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/radioAccessNetwork.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/service.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/sim.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/simGroup.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/simPolicy.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/site.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/slice.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/ts29571.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/ueInfo.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/wifiSsid.json
+```
 ### Tag: package-2023-09
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-09'
+``` yaml $(tag) == 'package-2023-09'
 input-file:
   - Microsoft.MobileNetwork/stable/2023-09-01/attachedDataNetwork.json
   - Microsoft.MobileNetwork/stable/2023-09-01/common.json
@@ -54,6 +83,7 @@ input-file:
   - Microsoft.MobileNetwork/stable/2023-09-01/slice.json
   - Microsoft.MobileNetwork/stable/2023-09-01/ts29571.json
 ```
+
 ### Tag: package-preview-2023-07
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.

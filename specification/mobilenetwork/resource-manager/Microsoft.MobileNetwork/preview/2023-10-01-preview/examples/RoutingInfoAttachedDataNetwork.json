@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "packetCoreControlPlaneName": "TestPacketCoreCP",
+    "packetCoreDataPlaneName": "TestPacketCoreDP",
+    "attachedDataNetworkName": "TestAttachedDataNetwork"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP/attachedDataNetworks/TestAttachedDataNetwork/routingInfo/default",
+        "name": "default",
+        "type": "Microsoft.MobileNetwork/packetCoreControlPlanes/packetCoreDataPlanes/attachedDataNetworks/routingInfo",
+        "properties": {
+          "ipv4Routes": [
+            {
+              "destination": "2.2.0.0/16",
+              "nextHops": [
+                {
+                  "address": "203.0.113.1",
+                  "priority": 100
+                },
+                {
+                  "address": "203.0.113.128",
+                  "priority": 200
+                }
+              ]
+            },
+            {
+              "destination": "2.4.0.0/16",
+              "nextHops": [
+                {
+                  "address": "203.0.113.1",
+                  "priority": 100
+                },
+                {
+                  "address": "203.0.113.128",
+                  "priority": 200
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
