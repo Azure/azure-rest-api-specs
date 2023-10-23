@@ -36,14 +36,6 @@ directive:
     from: iotSecuritySolutionAnalytics.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels"].get'
     reason: The list returns limited number of items
-  - suppress: SECRET_PROPERTY
-    from: ingestionSettings.json
-    where: $.definitions.IngestionSettingToken.properties.token
-    reason: Secrets are OK to return in a POST response.
-  - suppress: SECRET_PROPERTY
-    from: ingestionSettings.json
-    where: $.definitions.IngestionConnectionString.properties.value
-    reason: Secrets are OK to return in a POST response.
   - suppress: OperationsAPIImplementation
     where: $.paths
     from: settings.json
@@ -321,7 +313,6 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
-- Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -370,7 +361,6 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
-- Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -421,7 +411,6 @@ input-file:
 - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 - Microsoft.Security/stable/2022-01-01/alerts.json
 - Microsoft.Security/stable/2022-05-01/settings.json
-- Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
@@ -499,7 +488,6 @@ input-file:
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/stable/2022-01-01/alerts.json
 - Microsoft.Security/stable/2022-05-01/settings.json
-- Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
@@ -812,18 +800,6 @@ input-file:
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
-### Tag: package-2021-01-preview-only
-
-These settings apply only when `--tag=package-2021-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2021-01-preview-only'
-input-file:
-- Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
