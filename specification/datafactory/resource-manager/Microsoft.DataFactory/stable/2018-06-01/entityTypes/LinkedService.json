@@ -7366,6 +7366,105 @@
         "connectionString"
       ]
     },
+    "SnowflakeV2LinkedService": {
+      "x-ms-discriminator-value": "SnowflakeV2",
+      "description": "Snowflake linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Snowflake linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnowflakeLinkedV2ServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SnowflakeLinkedV2ServiceTypeProperties": {
+      "description": "Snowflake linked service properties.",
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the Snowflake account. For example: <account>.snowflakecomputing.com"
+        },
+        "user": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the Snowflake user."
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
+        "db": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the Snowflake database."
+        },
+        "warehouse": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the Snowflake warehouse."
+        },
+        "authenticationType": {
+          "x-ms-enum": {
+            "name": "SnowflakeAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "basic",
+            "snowflake_jwt",
+            "oauth"
+          ],
+          "type": "string",
+          "default": "basic",
+          "description": "The type used for authentication. Type: string."
+        },
+        "privateKey": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of privateKey for snowflake_jwt auth."
+        },
+        "privateKeyPwd": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of private key password for snowflake_jwt auth with encrypted private key."
+        },
+        "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        },
+        "clientId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The client ID of the application registered in Azure Active Directory for OAuth authentication."
+        },
+        "clientSecret": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of client secret for OAuth authentication."
+        },
+        "tenantId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The tenant ID of the application registered in Azure Active Directory for OAuth authentication."
+        },
+        "scope": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The scope of the application registered in Azure Active Directory for OAuth authentication."
+        }
+      },
+      "required": [
+        "account",
+        "db"
+      ]
+    },
     "SharePointOnlineListLinkedService": {
       "x-ms-discriminator-value": "SharePointOnlineList",
       "description": "SharePoint Online List linked service.",
