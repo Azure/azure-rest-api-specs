@@ -2753,7 +2753,7 @@
       ],
       "x-ms-discriminator-value": "manual-reclassify"
     },
-    "Oauth2ClientCredential": {
+    "OAuth2WebhookClientCredential": {
       "type": "object",
       "description": "OAuth2.0 Credentials used to Contoso's Authorization server.\nReference:\nhttps://www.oauth.com/oauth2-servers/access-tokens/client-credentials/",
       "properties": {
@@ -3941,7 +3941,7 @@
             "$ref": "#/definitions/ScoringRuleParameterSelector"
           }
         },
-        "allowScoringBatchOfWorkers": {
+        "isBatchScoringEnabled": {
           "type": "boolean",
           "description": "(Optional)\nIf set to true, will score workers in batches, and the parameter\nname of the worker labels will be sent as `workers`.\nBy default, set to false\nand the parameter name for the worker labels will be sent as `worker`.\nNote: If\nenabled, use BatchSize to set batch size."
         },
@@ -4122,7 +4122,7 @@
           "description": "Uri for Authorization Server."
         },
         "clientCredential": {
-          "$ref": "#/definitions/Oauth2ClientCredential",
+          "$ref": "#/definitions/OAuth2WebhookClientCredential",
           "description": "OAuth2.0 Credentials used to Contoso's Authorization server.\nReference:\nhttps://www.oauth.com/oauth2-servers/access-tokens/client-credentials/"
         },
         "webhookUri": {
@@ -4148,7 +4148,7 @@
           "description": "Uri for Authorization Server."
         },
         "clientCredential": {
-          "$ref": "#/definitions/Oauth2ClientCredential",
+          "$ref": "#/definitions/OAuth2WebhookClientCredential",
           "description": "OAuth2.0 Credentials used to Contoso's Authorization server.\nReference:\nhttps://www.oauth.com/oauth2-servers/access-tokens/client-credentials/"
         },
         "webhookUri": {
