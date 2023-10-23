@@ -791,7 +791,7 @@
         "values"
       ]
     },
-    "visualFeatures": {
+    "VisualFeatures": {
       "type": "string",
       "description": "The visual features requested: tags, objects, caption, denseCaptions, read, smartCrops, people. This parameter needs to be specified if the parameter \"model-name\" is not specified.",
       "enum": [
@@ -804,7 +804,7 @@
         "people"
       ],
       "x-ms-enum": {
-        "name": "visualFeatures",
+        "name": "VisualFeatures",
         "modelAsString": true,
         "values": [
           {
@@ -902,11 +902,11 @@
     "SharedAnalyzeQuery.visualFeatures": {
       "name": "features",
       "in": "query",
-      "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. If VisualFeatures is not specified, then Categories, Tags, and Description are included in the response by default.",
+      "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. At least one visual feature must be specified for Image Analysis.",
       "required": false,
       "type": "array",
       "items": {
-        "$ref": "#/definitions/visualFeatures"
+        "$ref": "#/definitions/VisualFeatures"
       },
       "collectionFormat": "csv",
       "x-ms-parameter-location": "method",

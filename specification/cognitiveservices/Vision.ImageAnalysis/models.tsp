@@ -9,7 +9,7 @@ model SharedAnalyzeQuery {
     name: "features",
     format: "csv",
   })
-  @doc("A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. If VisualFeatures is not specified, then Categories, Tags, and Description are included in the response by default.")
+  @doc("A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. At least one visual feature must be specified for Image Analysis.")
   visualFeatures?: Array<VisualFeatures>;
 
   @query("language")
