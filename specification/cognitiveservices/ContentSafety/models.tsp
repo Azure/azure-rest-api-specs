@@ -395,7 +395,6 @@ model PreDefinedConcept {
 @doc("Label definition.")
 model Label {
   label: integer;
-  labelName?: string;
   scenarios: string[];
 }
 
@@ -411,7 +410,7 @@ model TextCustomizedCategory {
   categoryName: string;
 
   preDefinedConcepts?: PreDefinedConcept[];
-  labels: Label[];
+  labelDefinitions: Label[];
   emphasis?: string[];
   exampleBlobUrl?: url;
 }
