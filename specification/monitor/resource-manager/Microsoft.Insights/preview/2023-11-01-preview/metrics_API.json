@@ -315,6 +315,29 @@
         "type": "string",
         "description": "Metric namespace to query metric definitions for.",
         "x-ms-parameter-location": "method"
+      },
+      "Unit": {
+        "type": "string",
+        "description": "The unit of the metric.",
+        "enum": [
+          "Count",
+          "Bytes",
+          "Seconds",
+          "CountPerSecond",
+          "BytesPerSecond",
+          "Percent",
+          "MilliSeconds",
+          "ByteSeconds",
+          "Unspecified",
+          "Cores",
+          "MilliCores",
+          "NanoCores",
+          "BitsPerSecond"
+        ],
+        "x-ms-enum": {
+          "name": "MetricUnit",
+          "modelAsString": true
+        }
       }
     }
   }
