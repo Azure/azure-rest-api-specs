@@ -3612,7 +3612,8 @@
         },
         "runType": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The run type."
         },
         "dataSourceType": {
           "enum": [
@@ -3656,6 +3657,7 @@
             "DatabricksUnityCatalog"
           ],
           "type": "string",
+          "description":"The data source type.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "DataSourceType",
@@ -3668,20 +3670,25 @@
       "type": "object",
       "properties": {
         "subscriptionId": {
-          "type": "string"
+          "type": "string",
+          "description":"The subscription identifier."
         },
         "resourceGroup": {
-          "type": "string"
+          "type": "string",
+          "description":"The resource group."
         }
       }
     },
     "ItemPath": {
       "type": "object",
+      "description":"The item path.",
       "properties": {
         "path": {
-          "type": "string"
+          "type": "string",
+          "description":"The path."
         },
         "extendedProperties": {
+          "description":"The extended properties.",
           "allOf": [
             {
               "$ref": "#/definitions/ExtendedProperties"
@@ -3692,12 +3699,15 @@
     },
     "QualifiedName": {
       "type": "object",
+      "description":"The qualified name.",
       "properties": {
         "typeName": {
-          "type": "string"
+          "type": "string",
+          "description":"The type name."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description":"The name."
         },
         "extendedProperties": {
           "allOf": [
@@ -3710,6 +3720,7 @@
     },
     "DataSourceIdentifier": {
       "type": "object",
+      "description":"The data source identifier.",
       "properties": {
         "itemPath": {
           "allOf": [
@@ -3726,13 +3737,16 @@
           ]
         },
         "dataSourceName": {
-          "type": "string"
+          "type": "string",
+          "description":"The data source name."
         },
         "guid": {
-          "type": "string"
+          "type": "string",
+          "description":"The guid."
         },
         "resourceId": {
-          "type": "string"
+          "type": "string",
+          "description":"The resource identifier."
         }
       }
     },
@@ -3741,6 +3755,7 @@
         "kind"
       ],
       "type": "object",
+      "description":"The scan.",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -3829,13 +3844,15 @@
         },
         "scanResultsWithIngestion": {
           "type": "array",
+          "description":"Scan results with ingestion of this scan.",
           "items": {
             "$ref": "#/definitions/ScanResultWithIngestion"
           },
           "readOnly": true
         },
         "scanId": {
-          "type": "string"
+          "type": "string",
+          "description":"The scan identifier."
         },
         "dataSourceIdentifier": {
           "allOf": [
@@ -3845,7 +3862,8 @@
           ]
         },
         "dataSourceName": {
-          "type": "string"
+          "type": "string",
+          "description":"The data source name."
         },
         "creationType": {
           "enum": [
@@ -3854,6 +3872,7 @@
             "AutoManaged"
           ],
           "type": "string",
+          "description":"The creation type.",
           "x-ms-enum": {
             "name": "CreationType",
             "modelAsString": true
@@ -3867,6 +3886,7 @@
         "kind"
       ],
       "type": "object",
+      "description":"The data source.",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -3923,6 +3943,7 @@
         },
         "scans": {
           "type": "array",
+          "description":"Scans of this data source.",
           "items": {
             "$ref": "#/definitions/Scan"
           },
@@ -3935,6 +3956,7 @@
             "AutoManaged"
           ],
           "type": "string",
+          "description":"The creation type.",
           "x-ms-enum": {
             "name": "CreationType",
             "modelAsString": true
@@ -3973,10 +3995,12 @@
         "includeUriPrefixes"
       ],
       "type": "object",
+      "description":"The filter properties.",
       "properties": {
         "excludeUriPrefixes": {
           "uniqueItems": true,
           "type": "array",
+          "description":"The exclude uri prefixes.",
           "items": {
             "type": "string"
           }
@@ -3984,6 +4008,7 @@
         "includeUriPrefixes": {
           "uniqueItems": true,
           "type": "array",
+          "description":"The include uri prefixes.",
           "items": {
             "type": "string"
           }
@@ -3991,6 +4016,7 @@
         "excludeRegexes": {
           "uniqueItems": true,
           "type": "array",
+          "description":"The exclude regexes.",
           "items": {
             "type": "string"
           }
@@ -3998,6 +4024,7 @@
         "includeRegexes": {
           "uniqueItems": true,
           "type": "array",
+          "description":"The include regexes.",
           "items": {
             "type": "string"
           }
@@ -4006,6 +4033,7 @@
     },
     "Filter": {
       "type": "object",
+      "description":"The filter.",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
