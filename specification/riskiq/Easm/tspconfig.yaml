@@ -1,14 +1,6 @@
 parameters:
   "service-dir":
     default: "sdk/easm"
-  "python-sdk-folder":
-    default: "{project-root}/azure-sdk-for-python/"
-  "java-sdk-folder": 
-    default: "{project-root}/azure-sdk-for-java/"
-  "js-sdk-folder":
-    default: "{project-root}/azure-sdk-for-js/"
-  "csharp-sdk-folder":
-    default: "{project-root}/azure-sdk-for-net/"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -25,15 +17,12 @@ options:
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
-    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-dir}/{package-dir}"
   "@azure-tools/typespec-ts":
     package-dir: "defendereasm-rest"
     packageDetails:
       name: "@azure-rest/defender-easm-rest"
-    emitter-output-dir: "{js-sdk-folder}/sdk/{service-dir}/{package-dir}"
   "@azure-tools/typespec-java":
     package-dir: "azure-analytics-defender-easm"
     namespace: com.azure.analytics.defender.easm
-    emitter-output-folder: "{java-sdk-folder}/sdk/{service-dir}/{package-dir}"
     partial-update: true
   
