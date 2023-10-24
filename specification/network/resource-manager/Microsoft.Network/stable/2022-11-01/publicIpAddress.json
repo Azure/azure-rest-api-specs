@@ -217,6 +217,9 @@
           },
           "Create public IP address DNS": {
             "$ref": "./examples/PublicIpAddressCreateDns.json"
+          },
+          "Create public IP address DNS with Domain Name Label Scope": {
+            "$ref": "./examples/PublicIpAddressCreateDnsWithDomainNameLabelScope.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -612,6 +615,20 @@
         "domainNameLabel": {
           "type": "string",
           "description": "The domain name label. The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system."
+        },
+        "domainNameLabelScope": {
+          "type": "string",
+          "description": "The domain name label scope. If a domain name label and a domain name label scope are specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system with a hashed value includes in FQDN.",
+          "enum": [
+            "TenantReuse",
+            "SubscriptionReuse",
+            "ResourceGroupReuse",
+            "NoReuse"
+          ],
+          "x-ms-enum": {
+            "name": "PublicIpAddressDnsSettingsDomainNameLabelScope",
+            "modelAsString": false
+          }
         },
         "fqdn": {
           "type": "string",

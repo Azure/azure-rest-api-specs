@@ -6149,7 +6149,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. Follow the location header for the effective routes list."
+            "description": "Request successful. Returns the list of the effective routes or follow the location header for the effective routes list.",
+            "schema": {
+              "$ref": "#/definitions/VirtualHubEffectiveRouteList"
+            }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
@@ -6209,7 +6212,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. Follow the location header for the inbound routes list."
+            "description": "Request successful. Returns the list of the effective route map routes or follow the location header for the inbound routes list.",
+            "schema": {
+              "$ref": "#/definitions/EffectiveRouteMapRouteList"
+            }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
@@ -6269,7 +6275,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. Follow the location header for the outbound routes list."
+            "description": "Request successful. Returns the list of the effective route map routes or follow the location header for the outbound routes list.",
+            "schema": {
+              "$ref": "#/definitions/EffectiveRouteMapRouteList"
+            }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
@@ -9331,16 +9340,27 @@
         }
       }
     },
+    "EffectiveRouteMapRouteList": {
+      "description": "EffectiveRouteMapRoute List.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveRouteMapRoute"
+          },
+          "description": "The list of Effective RouteMap Routes configured on the connection resource.",
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "EffectiveRouteMapRoute": {
       "description": "The effective RouteMap route configured on the connection resource.",
       "type": "object",
       "properties": {
         "prefix": {
           "description": "The address prefix of the route.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "bgpCommunities": {
           "description": "BGP communities of the route.",

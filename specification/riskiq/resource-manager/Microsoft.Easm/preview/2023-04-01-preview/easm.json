@@ -673,6 +673,22 @@
         }
       }
     },
+    "WorkspaceResourceProperties": {
+      "description": "Workspace properties.",
+      "type": "object",
+      "properties": {
+        "dataPlaneEndpoint": {
+          "description": "Data plane endpoint.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBaseProperties"
+        }
+      ]
+    },
     "LabelResourceProperties": {
       "description": "Label properties.",
       "type": "object",
@@ -698,7 +714,7 @@
       "properties": {
         "properties": {
           "description": "Workspace properties.",
-          "$ref": "#/definitions/ResourceBaseProperties",
+          "$ref": "#/definitions/WorkspaceResourceProperties",
           "x-ms-client-flatten": true
         }
       },

@@ -24,9 +24,21 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the servicenetworking.
 
+
 ```yaml
 openapi-type: arm
-tag: package-2022-10-01-preview
+tag: package-2023-05-01-preview
+```
+
+### Tag: package-2023-05-01-preview
+
+These settings apply only when `--tag=package-2023-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-05-01-preview'
+input-file:
+  - Microsoft.ServiceNetworking/preview/2023-05-01-preview/TrafficController.json
+openapi-type: arm
+tag: package-2023-05-01-preview
 ```
 
 ### Tag: package-2022-10-01-preview
