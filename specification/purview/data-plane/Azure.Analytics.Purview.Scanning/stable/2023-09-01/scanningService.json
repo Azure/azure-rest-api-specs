@@ -499,51 +499,6 @@
         }
       }
     },
-    "/collections/{collectionName}/scans": {
-      "get": {
-        "tags": [
-          "Collection"
-        ],
-        "description": "List scans of the collection.",
-        "operationId": "Scans_ListByCollection",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "collectionName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success.",
-            "schema": {
-              "$ref": "#/definitions/ScanByCollectionList"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Scanning Service.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Scans_ListByCollection": {
-            "$ref": "./examples/Scans_ListByCollection.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/credentials/{credentialName}": {
       "get": {
         "tags": [
