@@ -26,11 +26,47 @@
               },
               "patchVersions": {
                 "1.23.12": {
+                  "readiness": [
+                    {
+                      "osType": "Linux",
+                      "osSku": "CBLMariner",
+                      "ready": true
+                    },
+                    {
+                      "osType": "Windows",
+                      "osSku": "Windows",
+                      "ready": true
+                    },
+                    {
+                      "osType": "Windows",
+                      "osSku": "Windows2022",
+                      "ready": false,
+                      "errorMessage": "Not Ready. Reasons: Failed to find proudct stream windoes2022 in release aks-hybrid-catalog-stable-int"
+                    }
+                  ],
                   "upgrades": [
-                    "1.23.15",
-                    "1.24.6",
-                    "1.24.9"
+                    "1.23.13"
                   ]
+                },
+                "1.23.13": {
+                  "readiness": [
+                    {
+                      "osType": "Linux",
+                      "osSku": "CBLMariner",
+                      "ready": true
+                    },
+                    {
+                      "osType": "Windows",
+                      "osSku": "Windows",
+                      "ready": true
+                    },
+                    {
+                      "osType": "Windows",
+                      "osSku": "Windows2022",
+                      "ready": true
+                    }
+                  ],
+                  "upgrades": []
                 }
               }
             }
