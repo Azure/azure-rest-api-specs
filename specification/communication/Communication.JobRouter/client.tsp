@@ -18,6 +18,7 @@ namespace ClientForAcsJobRouter;
 interface JobRouterAdministrationRestClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @internal
+    @projectedName("csharp", "updateDistributionPolicy")
     upsertDistributionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertDistributionPolicy;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -31,6 +32,7 @@ interface JobRouterAdministrationRestClient {
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @internal
+    @projectedName("csharp", "updateClassificationPolicy")
     upsertClassificationPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertClassificationPolicy;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -44,6 +46,7 @@ interface JobRouterAdministrationRestClient {
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @internal
+    @projectedName("csharp", "updateExceptionPolicy")
     upsertExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertExceptionPolicy;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -57,6 +60,7 @@ interface JobRouterAdministrationRestClient {
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @internal
+    @projectedName("csharp", "updateQueue")
     upsertQueue is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertQueue;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -76,6 +80,7 @@ interface JobRouterAdministrationRestClient {
 interface JobRouterRestClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @internal
+    @projectedName("csharp", "updateJob")
     upsertJob is AzureCommunicationRoutingService.JobRouterOperations.upsertJob;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -117,6 +122,7 @@ interface JobRouterRestClient {
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
     @internal
+    @projectedName("csharp", "updateWorker")
     upsertWorker is AzureCommunicationRoutingService.JobRouterOperations.upsertWorker;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
