@@ -215,12 +215,6 @@ interface TextCategoryCustomization {
   getTextCustomizedCategory is ResourceRead<TextCustomizedCategory>;
 
   deleteTextCustomizedCategory is ResourceDelete<TextCustomizedCategory>;
-
-  // @route("/text/customizedCategories/operations/{operationId}")
-  // @get
-  // getTextCustomizedCategoryOperation(
-  //   @path operationId: string,
-  // ): TextCustomizedCategoryOperation;
 }
 
 @added(Versions.v2023_10_30_Preview)

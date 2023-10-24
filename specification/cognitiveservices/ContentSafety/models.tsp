@@ -353,16 +353,6 @@ model AddImageIncidentSamplesResult {
   incidentSamples: ListImageIncidentSampleResult[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@doc("Text analyze category.")
-@added(Versions.v2023_10_30_Preview)
-enum AnnotateTextBuiltinCategory {
-  Hate,
-  SelfHarm,
-  Sexual,
-  Violence,
-}
-
 @doc("Annotate text options")
 @added(Versions.v2023_10_30_Preview)
 model AnnotateTextOptions {
@@ -370,8 +360,8 @@ model AnnotateTextOptions {
   @maxLength(10000)
   text: string;
 
-  @doc("The category will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.")
-  category?: AnnotateTextBuiltinCategory;
+  @doc("The category will be analyzed, you can set your customized category or one of built-in categories in 'Hate','Selfharm', 'Sexual' and 'Violence'.")
+  category: string;
 }
 
 @doc("The text annotation response.")
@@ -393,14 +383,14 @@ model PreDefinedConcept {
 
 @added(Versions.v2023_10_30_Preview)
 @doc("Label definition.")
-model Label {
-  label: integer;
+model LabelDefinition {
+  label: int32;
   scenarios: string[];
 }
 
 @added(Versions.v2023_10_30_Preview)
 @doc("Text Customized categories.")
-@resource("text/customizedCategories")
+@resource("text/categories")
 model TextCustomizedCategory {
   @doc("Text customizedCategories name.")
   @pattern("^Customized_[0-9A-Za-z._~-]+$")
@@ -410,25 +400,10 @@ model TextCustomizedCategory {
   categoryName: string;
 
   preDefinedConcepts?: PreDefinedConcept[];
-  labelDefinitions: Label[];
+  labelDefinitions: LabelDefinition[];
   emphasis?: string[];
   exampleBlobUrl?: url;
 }
-
-// @doc("The text annotation response.")
-// @added(Versions.v2023_10_30_Preview)
-// @resource("text/customizedCategories/operations")
-// model TextCustomizedCategoryOperation {
-//   @doc("The operation id.")
-//   @key("operationId")
-//   operationId: int32;
-
-//   @doc("The status.")
-//   status: string;
-
-//   @doc("The reason of failure.")
-//   error?: string;
-// }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @added(ContentSafety.Versions.v2023_10_30_Preview)
@@ -442,7 +417,7 @@ enum ImageWithTextCategory {
 
 @added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("The analysis request of the image with text.")
-model AnalyzeImageWithTextOptions  {
+model AnalyzeImageWithTextOptions {
   @doc("The image needs to be analyzed.")
   image: ImageData;
 
