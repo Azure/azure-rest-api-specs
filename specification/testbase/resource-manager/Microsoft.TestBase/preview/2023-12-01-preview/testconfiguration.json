@@ -955,6 +955,46 @@
           "description": "The total number of packages scheduled for execution."
         }
       }
+    },
+    "TestConfigurationTestResultListResult": {
+      "description": "A list of Test Results for test configuration.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestConfigurationTestResultResource"
+          },
+          "description": "The list of Test Results."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "TestConfigurationTestResultResource": {
+      "description": "The Test Configuration Test Result Resource.",
+      "type": "object",
+      "properties": {
+        "testPassId": {
+          "type": "string",
+          "description": "Test pass ID for the run."
+        },
+        "testConfigurationName": {
+          "type": "string",
+          "description": "The test configuration name."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./testbase.json#/definitions/TestResultProperties"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     }
   },
   "parameters": {
