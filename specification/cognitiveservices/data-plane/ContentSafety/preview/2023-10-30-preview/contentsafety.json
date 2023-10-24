@@ -873,7 +873,7 @@
         }
       }
     },
-    "/text/customizedCategories/{categoryName}": {
+    "/text/categories/{categoryName}": {
       "get": {
         "operationId": "TextCategoryCustomization_GetTextCustomizedCategory",
         "description": "DEPRECATED: Use `ResourceRead` from a `ResourceOperations` interface instance.\nThis can be done by instantiating your own version with the traits you want `alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;`.\nSee https://azure.github.io/typespec-azure/docs/getstarted/azure-core/step05#defining-the-operation-interface for details on how to use.\n\nOperation signature to retrieve a resource.",
@@ -1784,20 +1784,6 @@
         "categoriesAnalysis"
       ]
     },
-    "AnnotateTextBuiltinCategory": {
-      "type": "string",
-      "description": "Text analyze category.",
-      "enum": [
-        "Hate",
-        "SelfHarm",
-        "Sexual",
-        "Violence"
-      ],
-      "x-ms-enum": {
-        "name": "AnnotateTextBuiltinCategory",
-        "modelAsString": true
-      }
-    },
     "AnnotateTextOptions": {
       "type": "object",
       "description": "Annotate text options",
@@ -1808,12 +1794,13 @@
           "maxLength": 10000
         },
         "category": {
-          "$ref": "#/definitions/AnnotateTextBuiltinCategory",
-          "description": "The category will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned."
+          "type": "string",
+          "description": "The category will be analyzed, you can set your customized category or one of built-in categories in 'Hate','Selfharm', 'Sexual' and 'Violence'."
         }
       },
       "required": [
-        "text"
+        "text",
+        "category"
       ]
     },
     "AnnotateTextResult": {
@@ -2083,13 +2070,13 @@
         "incidentName"
       ]
     },
-    "Label": {
+    "LabelDefinition": {
       "type": "object",
       "description": "Label definition.",
       "properties": {
         "label": {
           "type": "integer",
-          "format": "int64"
+          "format": "int32"
         },
         "scenarios": {
           "type": "array",
@@ -2467,7 +2454,7 @@
         "labelDefinitions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Label"
+            "$ref": "#/definitions/LabelDefinition"
           },
           "x-ms-identifiers": []
         },
