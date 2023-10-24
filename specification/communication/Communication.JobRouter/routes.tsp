@@ -155,13 +155,13 @@ interface JobRouterOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Reclassify a job.")
   @doc("Reclassify a job.")
-  @route("/routing/jobs/{id}:reclassify")
+  @route("/routing/jobs/{jobId}:reclassify")
   @post
   reclassifyJobAction is Azure.Core.Foundations.Operation<
     {
       @doc("Id of the job.")
       @path
-      id: string;
+      jobId: string;
 
       @doc("Request object for reclassifying a job.")
       @body
@@ -179,13 +179,13 @@ cancellation reason.
 Submits request to cancel an existing job by Id while supplying free-form
 cancellation reason.
 """)
-  @route("/routing/jobs/{id}:cancel")
+  @route("/routing/jobs/{jobId}:cancel")
   @post
   cancelJobAction is Azure.Core.Foundations.Operation<
     {
       @doc("Id of the job.")
       @path
-      id: string;
+      jobId: string;
 
       @doc("Request model for cancelling job.")
       @body
@@ -197,13 +197,13 @@ cancellation reason.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Completes an assigned job.")
   @doc("Completes an assigned job.")
-  @route("/routing/jobs/{id}:complete")
+  @route("/routing/jobs/{jobId}:complete")
   @post
   completeJobAction is Azure.Core.Foundations.Operation<
     {
       @doc("Id of the job.")
       @path
-      id: string;
+      jobId: string;
 
       @doc("Request model for completing job.")
       @body
@@ -215,13 +215,13 @@ cancellation reason.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Closes a completed job.")
   @doc("Closes a completed job.")
-  @route("/routing/jobs/{id}:close")
+  @route("/routing/jobs/{jobId}:close")
   @post
   closeJobAction is Azure.Core.Foundations.Operation<
     {
       @doc("Id of the job.")
       @path
-      id: string;
+      jobId: string;
 
       @doc("Request model for closing job.")
       @body
@@ -243,13 +243,13 @@ cancellation reason.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Gets a job's position details.")
   @doc("Gets a job's position details.")
-  @route("/routing/jobs/{id}/position")
+  @route("/routing/jobs/{jobId}/position")
   @get
   getInQueuePosition is Azure.Core.Foundations.Operation<
     {
       @doc("Id of the job.")
       @path
-      id: string;
+      jobId: string;
     },
     RouterJobPositionDetails
   >;
@@ -257,13 +257,13 @@ cancellation reason.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Un-assign a job.")
   @doc("Un-assign a job.")
-  @route("/routing/jobs/{id}/assignments/{assignmentId}:unassign")
+  @route("/routing/jobs/{jobId}/assignments/{assignmentId}:unassign")
   @post
   unassignJobAction is Azure.Core.Foundations.Operation<
     {
       @doc("Id of the job to un-assign.")
       @path
-      id: string;
+      jobId: string;
 
       @doc("Id of the assignment to un-assign.")
       @path
@@ -325,13 +325,13 @@ accepted the job already.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Retrieves a queue's statistics.")
   @doc("Retrieves a queue's statistics.")
-  @route("/routing/queues/{id}/statistics")
+  @route("/routing/queues/{queueId}/statistics")
   @get
   getQueueStatistics is Azure.Core.Foundations.Operation<
     {
       @doc("Id of the queue to retrieve statistics.")
       @path
-      id: string;
+      queueId: string;
     },
     RouterQueueStatistics
   >;
