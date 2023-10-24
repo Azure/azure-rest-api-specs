@@ -11,9 +11,9 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0/resiliency/resiliency-policy-1",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0/resiliencyPolicies/resiliency-policy-1",
             "name": "resiliency-policy-1",
-            "type": "Microsoft.App/containerApps/resiliency",
+            "type": "Microsoft.App/containerApps/resiliencyPolicies",
             "properties": {
               "timeoutPolicy": {
                 "responseTimeoutInSeconds": 15,
@@ -50,7 +50,8 @@
               },
               "circuitBreakerPolicy": {
                 "consecutiveErrors": 5,
-                "intervalInSeconds": 10
+                "intervalInSeconds": 10,
+                "maxEjectionPercent": 50
               },
               "tcpConnectionPool": {
                 "maxConnections": 100

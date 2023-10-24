@@ -85,6 +85,69 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "AppResiliency"
+        ],
+        "summary": "Update an application's resiliency policy.",
+        "description": "Update an application's resiliency policy.",
+        "operationId": "AppResiliency_Patch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appName",
+            "description": "Name of the Container App.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "name",
+            "description": "Name of the resiliency policy.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "resiliencyEnvelope",
+            "in": "body",
+            "description": "The resiliency policy to update.",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/AppResiliency"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/AppResiliency"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update App Resiliency": {
+            "$ref": "./examples/AppResiliency_Patch.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "AppResiliency"
@@ -236,7 +299,7 @@
           }
         },
         "x-ms-examples": {
-          "Get App Resiliency": {
+          "List App Resiliency": {
             "$ref": "./examples/AppResiliency_List.json"
           }
         },
