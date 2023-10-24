@@ -5591,7 +5591,8 @@
             {
               "$ref": "#/definitions/UserPassCredentialProperties"
             }
-          ]
+          ],
+          "description":"The properties of basic auth azure key vault credential."
         }
       },
       "x-ms-discriminator-value": "BasicAuth"
@@ -5600,7 +5601,8 @@
       "type": "object",
       "properties": {
         "roleARN": {
-          "type": "string"
+          "type": "string",
+          "description":"The role ARN of role ARN credential type properties."
         }
       }
     },
@@ -5642,7 +5644,8 @@
       "type": "object",
       "properties": {
         "servicePrincipalId": {
-          "type": "string"
+          "type": "string",
+          "description":"The service principal ID of key vault secret service principal credential type properties."
         },
         "servicePrincipalKey": {
           "allOf": [
@@ -5720,17 +5723,20 @@
             {
               "$ref": "#/definitions/KeyVaultSecret"
             }
-          ]
+          ],
+          "description":"The password of key vault secret consumer key credential type properties."
         },
         "consumerKey": {
-          "type": "string"
+          "type": "string",
+          "description":"The consumer key of key vault secret consumer key credential type properties."
         },
         "consumerSecret": {
           "allOf": [
             {
               "$ref": "#/definitions/KeyVaultSecret"
             }
-          ]
+          ],
+          "description":"The consumer secret of key vault secret consumer key credential type properties."
         }
       }
     },
@@ -5745,7 +5751,8 @@
           ]
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description":"description of credential properties."
         }
       }
     },
@@ -5782,7 +5789,8 @@
             {
               "$ref": "#/definitions/KeyVaultSecret"
             }
-          ]
+          ],
+          "description":"key vault secret"
         }
       }
     },
@@ -5794,7 +5802,8 @@
             {
               "$ref": "#/definitions/KeyVaultSecretDelegatedAuthCredentialTypeProperties"
             }
-          ]
+          ],
+          "description":"The type properties of delegated auth credential."
         },
         "description": {
           "type": "string"
@@ -5815,7 +5824,8 @@
             {
               "$ref": "#/definitions/DelegatedAuthCredentialProperties"
             }
-          ]
+          ],
+          "description":"The properties of delegated auth azure key vault credential."
         }
       },
       "x-ms-discriminator-value": "DelegatedAuth"
@@ -5824,13 +5834,16 @@
       "type": "object",
       "properties": {
         "principalId": {
-          "type": "string"
+          "type": "string",
+          "description":"The principal ID of key vault secret managed identity azure key vault credential type properties."
         },
         "tenantId": {
-          "type": "string"
+          "type": "string",
+          "description":"The tenant ID of key vault secret managed identity azure key vault credential type properties."
         },
         "resourceId": {
-          "type": "string"
+          "type": "string",
+          "description":"The resource ID of key vault secret managed identity azure key vault credential type properties."
         }
       }
     },
@@ -5842,7 +5855,8 @@
             {
               "$ref": "#/definitions/KeyVaultSecretManagedIdentityAzureKeyVaultCredentialTypeProperties"
             }
-          ]
+          ],
+          "description":"The type properties of managed identity azure key vault credential."
         },
         "description": {
           "type": "string"
@@ -5863,7 +5877,8 @@
             {
               "$ref": "#/definitions/ManagedIdentityAzureKeyVaultCredentialProperties"
             }
-          ]
+          ],
+          "description":"The properties of managed identity azure key vault credential."
         }
       },
       "x-ms-discriminator-value": "ManagedIdentity"
@@ -5875,11 +5890,13 @@
         "createdAt": {
           "format": "date-time",
           "type": "string",
+          "description":"The create time of data source.",
           "readOnly": true
         },
         "lastModifiedAt": {
           "format": "date-time",
           "type": "string",
+          "description":"The last modified time of data source.",
           "readOnly": true
         },
         "collection": {
@@ -5896,6 +5913,7 @@
             "Failed"
           ],
           "type": "string",
+          "description":"data source collection moving state",
           "x-ms-enum": {
             "name": "DataSourceCollectionState",
             "modelAsString": true
@@ -5913,10 +5931,12 @@
       ],
       "properties": {
         "subscriptionId": {
-          "type": "string"
+          "type": "string",
+          "description":"The subscription ID of azure subscription."
         },
         "resourceId": {
-          "type": "string"
+          "type": "string",
+          "description":"The resource ID of azure subscription."
         },
         "dataUseGovernance": {
           "enum": [
@@ -5926,6 +5946,7 @@
             "EnabledAtAncestorScope"
           ],
           "type": "string",
+          "description":"The data use governance of azure subscription.",
           "x-ms-enum": {
             "name": "DataUseGovernanceState",
             "modelAsString": true
@@ -5947,7 +5968,8 @@
             {
               "$ref": "#/definitions/AzureSubscriptionProperties"
             }
-          ]
+          ],
+          "description":"azure subscription properties"
         }
       },
       "x-ms-discriminator-value": "AzureSubscription"
@@ -5961,13 +5983,16 @@
       ],
       "properties": {
         "subscriptionId": {
-          "type": "string"
+          "type": "string",
+          "description":"subscription id"
         },
         "resourceGroup": {
-          "type": "string"
+          "type": "string",
+          "description":"resource group"
         },
         "resourceId": {
-          "type": "string"
+          "type": "string",
+          "description":"resource id"
         },
         "dataUseGovernance": {
           "enum": [
@@ -5977,6 +6002,7 @@
             "EnabledAtAncestorScope"
           ],
           "type": "string",
+          "description":"data use governance",
           "x-ms-enum": {
             "name": "DataUseGovernanceState",
             "modelAsString": true
@@ -5997,7 +6023,8 @@
             {
               "$ref": "#/definitions/AzureResourceGroupProperties"
             }
-          ]
+          ],
+          "description":"azure resource group properties"
         }
       },
       "x-ms-discriminator-value": "AzureResourceGroup"
@@ -6011,19 +6038,24 @@
       ],
       "properties": {
         "resourceGroup": {
-          "type": "string"
+          "type": "string",
+          "description":"resource group"
         },
         "subscriptionId": {
-          "type": "string"
+          "type": "string",
+          "description":"subscription id"
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "description":"location"
         },
         "resourceName": {
-          "type": "string"
+          "type": "string",
+          "description":"resource name"
         },
         "resourceId": {
-          "type": "string"
+          "type": "string",
+          "description":"resource id"
         },
         "dataUseGovernance": {
           "enum": [
@@ -6033,6 +6065,7 @@
             "EnabledAtAncestorScope"
           ],
           "type": "string",
+          "description":"data use governance",
           "x-ms-enum": {
             "name": "DataUseGovernanceState",
             "modelAsString": true
@@ -6042,6 +6075,7 @@
     },
     "AzureSynapseWorkspaceProperties": {
       "type": "object",
+      "description":"Azure synapse workspace data source properties.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6049,15 +6083,18 @@
       ],
       "properties": {
         "dedicatedSqlEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description":"The dedicated SQL endpoint of azure synapse workspace."
         },
         "serverlessSqlEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description":"The serverless SQL endpoint of azure synapse workspace."
         }
       }
     },
     "AzureSynapseWorkspaceDataSource": {
       "type": "object",
+      "description":"Azure synapse workspace data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6069,13 +6106,15 @@
             {
               "$ref": "#/definitions/AzureSynapseWorkspaceProperties"
             }
-          ]
+          ],
+          "description":"azure synapse workspace properties"
         }
       },
       "x-ms-discriminator-value": "AzureSynapseWorkspace"
     },
     "AzureSynapseProperties": {
       "type": "object",
+      "description":"Azure synapse data source properties.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6083,15 +6122,18 @@
       ],
       "properties": {
         "sqlEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description":"The SQL endpoint of azure synapse."
         },
         "sqlOnDemandEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description":"The SQL on demand endpoint of azure synapse."
         }
       }
     },
     "AzureSynapseDataSource": {
       "type": "object",
+      "description":"Azure synapse data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6103,13 +6145,15 @@
             {
               "$ref": "#/definitions/AzureSynapseProperties"
             }
-          ]
+          ],
+          "description":"azure synapse properties"
         }
       },
       "x-ms-discriminator-value": "AzureSynapse"
     },
     "AdlsGen1Properties": {
       "type": "object",
+      "description":"The properties of adls gen1.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6117,12 +6161,14 @@
       ],
       "properties": {
         "endpoint": {
-          "type": "string"
+          "type": "string",
+          "description":"The endpoint of adls gen1."
         }
       }
     },
     "AdlsGen1DataSource": {
       "type": "object",
+      "description":"The adls gen1 data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6134,13 +6180,15 @@
             {
               "$ref": "#/definitions/AdlsGen1Properties"
             }
-          ]
+          ],
+          "description":"The properties of adls gen1."
         }
       },
       "x-ms-discriminator-value": "AdlsGen1"
     },
     "AdlsGen2Properties": {
       "type": "object",
+      "description":"The properties of adls gen2.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6149,11 +6197,13 @@
       "properties": {
         "endpoint": {
           "type": "string"
-        }
+        },
+        "description":"The endpoint of adls gen2."
       }
     },
     "AdlsGen2DataSource": {
       "type": "object",
+      "description":"The adls gen2 data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6165,7 +6215,8 @@
             {
               "$ref": "#/definitions/AdlsGen2Properties"
             }
-          ]
+          ],
+          "description":"The properties of adls gen2."
         }
       },
       "x-ms-discriminator-value": "AdlsGen2"
