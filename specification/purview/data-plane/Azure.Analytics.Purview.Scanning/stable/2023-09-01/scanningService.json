@@ -6223,6 +6223,7 @@
     },
     "AmazonAccountProperties": {
       "type": "object",
+      "description": "The properties of amazon account.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -6230,15 +6231,18 @@
       ],
       "properties": {
         "awsAccountId": {
-          "type": "string"
+          "type": "string",
+          "description": "aws account id"
         },
         "roleARN": {
-          "type": "string"
+          "type": "string",
+          "description": "role arn"
         }
       }
     },
     "AmazonAccountDataSource": {
       "type": "object",
+      "description": "The amazon account data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6250,13 +6254,15 @@
             {
               "$ref": "#/definitions/AmazonAccountProperties"
             }
-          ]
+          ],
+          "description": "The properties of amazon account."
         }
       },
       "x-ms-discriminator-value": "AmazonAccount"
     },
     "AmazonS3Properties": {
       "type": "object",
+      "description": "The properties of amazon s3.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -6264,15 +6270,18 @@
       ],
       "properties": {
         "serviceUrl": {
-          "type": "string"
+          "type": "string",
+          "description": "service URL"
         },
         "roleARN": {
-          "type": "string"
+          "type": "string",
+          "description": "role ARN"
         }
       }
     },
     "AmazonS3DataSource": {
       "type": "object",
+      "description": "The amazon s3 data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6284,13 +6293,15 @@
             {
               "$ref": "#/definitions/AmazonS3Properties"
             }
-          ]
+          ],
+          "description": "Amazon s3 properties"
         }
       },
       "x-ms-discriminator-value": "AmazonS3"
     },
     "AmazonSqlProperties": {
       "type": "object",
+      "description": "The properties of amazon sql.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -6298,19 +6309,23 @@
       ],
       "properties": {
         "serverEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description": "server Endpoint"
         },
         "port": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description": "port"
         },
         "vpcEndpointServiceName": {
-          "type": "string"
+          "type": "string",
+          "description": "vpc Endpoint Service Name"
         }
       }
     },
     "AmazonSqlDataSource": {
       "type": "object",
+      "description": "The amazon sql data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6322,13 +6337,15 @@
             {
               "$ref": "#/definitions/AmazonSqlProperties"
             }
-          ]
+          ],
+          "description": "Amazon sql properties"
         }
       },
       "x-ms-discriminator-value": "AmazonSql"
     },
     "AzureCosmosDbProperties": {
       "type": "object",
+      "description": "The properties of azure cosmos db.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6336,12 +6353,14 @@
       ],
       "properties": {
         "accountUri": {
-          "type": "string"
+          "type": "string",
+          "description": "The account URI of azure cosmos db."
         }
       }
     },
     "AzureCosmosDbDataSource": {
       "type": "object",
+      "description": "The azure cosmos db data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6353,13 +6372,15 @@
             {
               "$ref": "#/definitions/AzureCosmosDbProperties"
             }
-          ]
+          ],
+          "description": "The properties of azure cosmos db."
         }
       },
       "x-ms-discriminator-value": "AzureCosmosDb"
     },
     "AzureDataExplorerProperties": {
       "type": "object",
+      "description": "The properties of azure data explorer.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6384,13 +6405,15 @@
             {
               "$ref": "#/definitions/AzureDataExplorerProperties"
             }
-          ]
+          ],
+          "description": "The properties of azure data explorer."
         }
       },
       "x-ms-discriminator-value": "AzureDataExplorer"
     },
     "AzureFileServiceProperties": {
       "type": "object",
+      "description": "The properties of azure file service.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6398,12 +6421,14 @@
       ],
       "properties": {
         "endpoint": {
-          "type": "string"
+          "type": "string",
+          "description": "The endpoint of azure file service."
         }
       }
     },
     "AzureFileServiceDataSource": {
       "type": "object",
+      "description": "The azure file service data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6415,13 +6440,15 @@
             {
               "$ref": "#/definitions/AzureFileServiceProperties"
             }
-          ]
+          ],
+          "description": "The properties of azure file service."
         }
       },
       "x-ms-discriminator-value": "AzureFileService"
     },
     "AzureSqlDatabaseProperties": {
       "type": "object",
+      "description": "The properties of azure sql database.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6429,12 +6456,14 @@
       ],
       "properties": {
         "serverEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description": "The server endpoint of azure sql database."
         }
       }
     },
     "AzureSqlDatabaseDataSource": {
       "type": "object",
+      "description": "The azure sql database data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6446,13 +6475,15 @@
             {
               "$ref": "#/definitions/AzureSqlDatabaseProperties"
             }
-          ]
+          ],
+          "description": "The properties of azure sql database."
         }
       },
       "x-ms-discriminator-value": "AzureSqlDatabase"
     },
     "AmazonPostgreSqlProperties": {
       "type": "object",
+      "description": "The properties of amazon postgre sql.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -6460,19 +6491,23 @@
       ],
       "properties": {
         "serverEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description": "The server endpoint of amazon postgre sql."
         },
         "port": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description": "The port of amazon postgre sql."
         },
         "vpcEndpointServiceName": {
-          "type": "string"
+          "type": "string",
+          "description": "The vpc endpoint service name of amazon postgre sql."
         }
       }
     },
     "AmazonPostgreSqlDataSource": {
       "type": "object",
+      "description": "The amazon postgre sql data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6484,13 +6519,15 @@
             {
               "$ref": "#/definitions/AmazonPostgreSqlProperties"
             }
-          ]
+          ],
+          "description": "The properties of amazon postgre sql."
         }
       },
       "x-ms-discriminator-value": "AmazonPostgreSql"
     },
     "AzurePostgreSqlProperties": {
       "type": "object",
+      "description": "The properties of azure postgre sql.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6498,7 +6535,8 @@
       ],
       "properties": {
         "serverEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description": "The server endpoint of azure postgre sql."
         },
         "port": {
           "format": "int32",
@@ -6508,6 +6546,7 @@
     },
     "AzurePostgreSqlDataSource": {
       "type": "object",
+      "description": "The azure postgre sql data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6519,13 +6558,15 @@
             {
               "$ref": "#/definitions/AzurePostgreSqlProperties"
             }
-          ]
+          ],
+          "description": "The properties of azure postgre sql."
         }
       },
       "x-ms-discriminator-value": "AzurePostgreSql"
     },
     "SqlServerDatabaseProperties": {
       "type": "object",
+      "description": "The properties of sql server database.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6533,12 +6574,14 @@
       ],
       "properties": {
         "serverEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description": "The server endpoint of sql server database."
         }
       }
     },
     "SqlServerDatabaseDataSource": {
       "type": "object",
+      "description": "The sql server database data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6557,6 +6600,7 @@
     },
     "AzureSqlDatabaseManagedInstanceProperties": {
       "type": "object",
+      "description": "The properties of azure sql database managed instance.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6570,6 +6614,7 @@
     },
     "AzureSqlDatabaseManagedInstanceDataSource": {
       "type": "object",
+      "description": "The azure sql database managed instance data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6588,6 +6633,7 @@
     },
     "AzureSqlDataWarehouseProperties": {
       "type": "object",
+      "description": "The properties of azure sql data warehouse.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6601,6 +6647,7 @@
     },
     "AzureSqlDataWarehouseDataSource": {
       "type": "object",
+      "description": "The azure sql data warehouse data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6619,6 +6666,7 @@
     },
     "AzureMySqlProperties": {
       "type": "object",
+      "description": "Azure MySql data source properties.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6626,16 +6674,19 @@
       ],
       "properties": {
         "serverEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description": "The server endpoint of azure my sql."
         },
         "port": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description": "The port of azure my sql."
         }
       }
     },
     "AzureMySqlDataSource": {
       "type": "object",
+      "description": "Azure MySql data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6647,13 +6698,15 @@
             {
               "$ref": "#/definitions/AzureMySqlProperties"
             }
-          ]
+          ],
+          "description": "Azure MySql properties"
         }
       },
       "x-ms-discriminator-value": "AzureMySql"
     },
     "AzureStorageProperties": {
       "type": "object",
+      "description": "The properties of azure storage.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6661,12 +6714,14 @@
       ],
       "properties": {
         "endpoint": {
-          "type": "string"
+          "type": "string",
+          "description": "The endpoint of azure storage."
         }
       }
     },
     "AzureStorageDataSource": {
       "type": "object",
+      "description": "The azure storage data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6678,13 +6733,15 @@
             {
               "$ref": "#/definitions/AzureStorageProperties"
             }
-          ]
+          ],
+          "description": "The properties of azure storage."
         }
       },
       "x-ms-discriminator-value": "AzureStorage"
     },
     "TeradataProperties": {
       "type": "object",
+      "description": "The properties of teradata.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -6692,12 +6749,14 @@
       ],
       "properties": {
         "host": {
-          "type": "string"
+          "type": "string",
+          "description": "The host of teradata."
         }
       }
     },
     "TeradataDataSource": {
       "type": "object",
+      "description": "The teradata data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6716,6 +6775,7 @@
     },
     "OracleProperties": {
       "type": "object",
+      "description": "The properties of oracle.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -6735,6 +6795,7 @@
     },
     "OracleDataSource": {
       "type": "object",
+      "description": "The oracle data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6753,6 +6814,7 @@
     },
     "SapS4HanaProperties": {
       "type": "object",
+      "description": "Sap S4 Hana data source properties.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -6760,15 +6822,18 @@
       ],
       "properties": {
         "applicationServer": {
-          "type": "string"
+          "type": "string",
+          "description": "The application server of sap s4 hana."
         },
         "systemNumber": {
-          "type": "string"
+          "type": "string",
+          "description": "The system number of sap s4 hana."
         }
       }
     },
     "SapS4HanaDataSource": {
       "type": "object",
+      "description": "Sap S4 Hana data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6787,6 +6852,7 @@
     },
     "SapEccProperties": {
       "type": "object",
+      "description": "Sap Ecc properties",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
