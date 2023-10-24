@@ -627,14 +627,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/EntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/EntitiesDocumentResultWithDetectedLanguage"
           }
         }
       },
@@ -645,6 +638,18 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "EntitiesDocumentResultWithDetectedLanguage":{
+      "type": "object",
+      "description": "Single entities recognition result with detected language.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntitiesDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "CustomSingleLabelClassificationTaskParameters": {
@@ -678,14 +683,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/ClassificationDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/ClassificationDocumentResultWithDetectedLanguage"
           }
         }
       },
@@ -696,6 +694,18 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "ClassificationDocumentResultWithDetectedLanguage": {
+      "type": "object",
+      "description": "Classification document result with language detection.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClassificationDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "ClassificationResult": {
@@ -1384,14 +1394,7 @@
           "type": "array",
           "description": "Sentiment analysis per document.",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/SentimentDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/SentimentDocumentResultWithDetectedLanguage"
           }
         }
       },
@@ -1402,6 +1405,17 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "SentimentDocumentResultWithDetectedLanguage":{
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SentimentDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "CustomSentimentDocumentResult": {
@@ -1790,14 +1804,7 @@
           "type": "array",
           "description": "Sentiment analysis per document.",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/CustomSentimentDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/CustomSentimentAnalysisResultWithDetectedLanguage"
           }
         }
       },
@@ -1808,6 +1815,18 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "CustomSentimentAnalysisResultWithDetectedLanguage":{
+      "description": "Custom Sentiment analysis result on one document with detected language",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomSentimentDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "EntityList": {
@@ -4043,14 +4062,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/KeyPhrasesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/KeyPhrasesDocumentResultWithDetectedLanguage"
           }
         }
       },
@@ -4061,6 +4073,18 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "KeyPhrasesDocumentResultWithDetectedLanguage": {
+      "type": "object",
+      "description": "Key phrases recognized in a document with detected language",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KeyPhrasesDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "KeyPhrasesDocumentResult": {
