@@ -979,16 +979,9 @@
       "type": "object",
       "properties": {
         "properties": {
+          "$ref": "#/definitions/TestConfigurationAdditionalProperties",
           "x-ms-client-flatten": true,
-          "description": "The properties of a Test Result.",
-          "testPassId": {
-            "type": "string",
-            "description": "Test pass ID for the run."
-          },
-          "testConfigurationName": {
-            "type": "string",
-            "description": "The test configuration name."
-          }
+          "description": "The properties of a Test Result."
         }
       },
       "allOf": [
@@ -999,6 +992,20 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "TestConfigurationAdditionalProperties": {
+      "description": "Test configuration additional properties.",
+      "type": "object",
+      "properties": {
+        "testPassId": {
+          "type": "string",
+          "description": "Test pass ID for the run."
+        },
+        "testConfigurationName": {
+          "type": "string",
+          "description": "The test configuration name."
+        }
+      }
     }
   },
   "parameters": {
