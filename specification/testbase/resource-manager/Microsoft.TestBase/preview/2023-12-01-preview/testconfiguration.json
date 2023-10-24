@@ -978,13 +978,19 @@
       "description": "The Test Configuration Test Result Resource.",
       "type": "object",
       "properties": {
-        "testPassId": {
-          "type": "string",
-          "description": "Test pass ID for the run."
-        },
-        "testConfigurationName": {
-          "type": "string",
-          "description": "The test configuration name."
+        "properties": {
+          "$ref": "#/definitions/TestResultProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a Test Result.",
+
+          "testPassId": {
+            "type": "string",
+            "description": "Test pass ID for the run."
+          },
+          "testConfigurationName": {
+            "type": "string",
+            "description": "The test configuration name."
+          }
         }
       },
       "allOf": [
