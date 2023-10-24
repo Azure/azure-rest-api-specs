@@ -96,10 +96,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "azureKeyVaultName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/azureKeyVaultName"
           },
           {
             "in": "body",
@@ -273,11 +270,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "classificationRuleName",
-            "required": true,
-            "type": "string",
-            "description": "the classification rule name"
+            "$ref": "#/parameters/classificationRuleName"
           },
           {
             "in": "body",
@@ -561,11 +554,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "credentialName",
-            "required": true,
-            "type": "string",
-            "description": "The name of the credential to retrieve."
+            "$ref": "#/parameters/credentialName"
           },
           {
             "in": "body",
@@ -698,11 +687,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "data source name"
+            "$ref": "#/parameters/dataSourceName"
           },
           {
             "in": "body",
@@ -923,18 +908,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "data source name"
+            "$ref": "#/parameters/dataSourceName"
           },
           {
-            "in": "path",
-            "name": "scanName",
-            "required": true,
-            "type": "string",
-            "description": "scan name"
+            "$ref": "#/parameters/scanName"
           },
           {
             "in": "body",
@@ -1689,18 +1666,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": " data source name"
+            "$ref": "#/parameters/dataSourceName"
           },
           {
-            "in": "path",
-            "name": "scanName",
-            "required": true,
-            "type": "string",
-            "description": "scan name"
+            "$ref": "#/parameters/scanName"
           },
           {
             "in": "body",
@@ -1893,25 +1862,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "data source name"
+            "$ref": "#/parameters/dataSourceName"
           },
           {
-            "in": "path",
-            "name": "scanName",
-            "required": true,
-            "type": "string",
-            "description": "scan name"
+            "$ref": "#/parameters/scanName"
           },
           {
-            "in": "path",
-            "name": "runId",
-            "required": true,
-            "type": "string",
-            "description": "run id"
+            "$ref": "#/parameters/runId"
           },
           {
             "in": "query",
@@ -2175,11 +2132,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "scanRulesetName",
-            "required": true,
-            "type": "string",
-            "description": "scan ruleset name"
+            "$ref": "#/parameters/scanRulesetName"
           },
           {
             "in": "body",
@@ -2705,18 +2658,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "data source name"
+            "$ref": "#/parameters/dataSourceName"
           },
           {
-            "in": "path",
-            "name": "scanName",
-            "required": true,
-            "type": "string",
-            "description": "scan name"
+            "$ref": "#/parameters/scanName"
           },
           {
             "in": "body",
@@ -10243,6 +10188,83 @@
       "minLength": 1,
       "maxLength": 127,
       "pattern": "^([_A-Za-z0-9]|([_A-Za-z0-9][-_A-Za-z0-9]{0,125}[_A-Za-z0-9]))$",
+      "x-ms-parameter-location": "method"
+    },
+    "azureKeyVaultName": {
+      "in": "path",
+      "name": "azureKeyVaultName",
+      "description": "The azure key vault name.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "x-ms-parameter-location": "method"
+    },
+    "classificationRuleName": {
+      "in": "path",
+      "name": "classificationRuleName",
+      "description": "classification rule name",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "x-ms-parameter-location": "method"
+    },
+    "credentialName": {
+      "in": "path",
+      "name": "credentialName",
+      "description": "The credential name.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "x-ms-parameter-location": "method"
+    },
+    "dataSourceName": {
+      "in": "path",
+      "name": "dataSourceName",
+      "description": "The dataSource name.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "x-ms-parameter-location": "method"
+    },
+    "scanName": {
+      "in": "path",
+      "name": "scanName",
+      "description": "The scan name.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "x-ms-parameter-location": "method"
+    },
+    "runId": {
+      "in": "path",
+      "name": "runId",
+      "description": "The scan run id.",
+      "required": true,
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
+      "x-ms-parameter-location": "method"
+    },
+    "scanRulesetName": {
+      "in": "path",
+      "name": "scanRulesetName",
+      "description": "The scan ruleset name.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
       "x-ms-parameter-location": "method"
     }
   }
