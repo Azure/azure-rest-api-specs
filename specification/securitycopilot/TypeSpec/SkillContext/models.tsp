@@ -89,7 +89,7 @@ model SessionPrompt {
   prompt: string;
 
   @doc("Prompt response returned by the prompt evaluation")
-  response: string;
+  response: string | null;
 }
 
 @doc("The progress message to log during a skill invocation")
