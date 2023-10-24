@@ -212,9 +212,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successful."
-          },
           "202": {
             "description": "Accepted response definition.",
             "headers": {
@@ -610,9 +607,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successful."
-          },
           "202": {
             "description": "Cluster delete request accepted.",
             "headers": {
@@ -2484,13 +2478,28 @@
           "x-ms-client-flatten": true,
           "description": "Define cluster patch specific properties.",
           "$ref": "#/definitions/ClusterPatchProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
+      }
     },
     "ClusterPatchProperties": {
       "type": "object",
