@@ -61,6 +61,7 @@ model TopologiesProperties {
   bindings?: BindingProperties[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "properties field is loosely defined and are dependent on customer scenarios"
 @doc("Defines a component binding for a provider.")
 model BindingProperties {
   @doc("Configuration values for the binding.")

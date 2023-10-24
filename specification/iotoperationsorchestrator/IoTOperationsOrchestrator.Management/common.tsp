@@ -37,6 +37,7 @@ enum ProvisioningState {
   Accepted,
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "properties field is loosely defined and are dependent on customer scenarios"
 @doc("Defines a desired runtime component.")
 model ComponentProperties {
   @doc("Component dependencies.")
