@@ -4838,6 +4838,7 @@
             "System"
           ],
           "type": "string",
+          "description":"versioned scan ruleset properties",
           "x-ms-enum": {
             "name": "ScanRulesetType",
             "modelAsString": true
@@ -4849,6 +4850,7 @@
             "Disabled"
           ],
           "type": "string",
+          "description":"status of versioned scan ruleset properties",
           "readOnly": true,
           "x-ms-enum": {
             "name": "ScanRulesetStatus",
@@ -4858,6 +4860,7 @@
         "version": {
           "format": "int32",
           "type": "integer",
+          "description":"version of versioned scan ruleset properties",
           "readOnly": true
         }
       }
@@ -4980,6 +4983,7 @@
             "PowerBI"
           ],
           "type": "string",
+          "description":"The properties of system scan ruleset, vary by datasource type.",
           "x-ms-enum": {
             "name": "DataSourceType",
             "modelAsString": true
@@ -5031,6 +5035,7 @@
             "Saturday"
           ],
           "type": "string",
+          "description":"The day of recurrence schedule occurrence.",
           "x-ms-enum": {
             "name": "DayOfWeek",
             "modelAsString": true
@@ -5051,6 +5056,7 @@
         },
         "minutes": {
           "type": "array",
+          "description":"The minutes of recurrence schedule.",
           "items": {
             "format": "int32",
             "type": "integer"
@@ -5058,6 +5064,7 @@
         },
         "hours": {
           "type": "array",
+          "description":"The hours of recurrence schedule.",
           "items": {
             "format": "int32",
             "type": "integer"
@@ -5065,6 +5072,7 @@
         },
         "weekDays": {
           "type": "array",
+          "description":"The week days of recurrence schedule.",
           "items": {
             "enum": [
               "Sunday",
@@ -5084,6 +5092,7 @@
         },
         "monthDays": {
           "type": "array",
+          "description":"month days of recurrence schedule.",
           "items": {
             "format": "int32",
             "type": "integer"
@@ -5091,6 +5100,7 @@
         },
         "monthlyOccurrences": {
           "type": "array",
+          "description":"The monthly occurrences of recurrence schedule.",
           "items": {
             "$ref": "#/definitions/RecurrenceScheduleOccurrence"
           }
@@ -5109,6 +5119,7 @@
             "Hour"
           ],
           "type": "string",
+          "description":"The frequency of trigger recurrence.",
           "x-ms-enum": {
             "name": "TriggerFrequency",
             "modelAsString": true
@@ -5116,25 +5127,30 @@
         },
         "interval": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description":"The interval of trigger recurrence."
         },
         "startTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description":"The start time of trigger recurrence."
         },
         "endTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description":"The end time of trigger recurrence."
         },
         "schedule": {
           "allOf": [
             {
               "$ref": "#/definitions/RecurrenceSchedule"
             }
-          ]
+          ],
+          "description":"The schedule of trigger recurrence."
         },
         "timeZone": {
-          "type": "string"
+          "type": "string",
+          "description":"The time zone of trigger recurrence."
         }
       }
     },
@@ -5147,24 +5163,29 @@
             {
               "$ref": "#/definitions/TriggerRecurrence"
             }
-          ]
+          ],
+          "description":"The recurrence of trigger."
         },
         "recurrenceInterval": {
-          "type": "string"
+          "type": "string",
+          "description":"The recurrence interval of trigger."
         },
         "createdAt": {
           "format": "date-time",
           "type": "string",
+          "description":"The create time of trigger.",
           "readOnly": true
         },
         "lastModifiedAt": {
           "format": "date-time",
           "type": "string",
+          "description":"The last modified time of trigger.",
           "readOnly": true
         },
         "lastScheduled": {
           "format": "date-time",
           "type": "string",
+          "description":"The last scheduled time of trigger.",
           "readOnly": true
         },
         "state": {
@@ -5174,6 +5195,7 @@
             "Disabled"
           ],
           "type": "string",
+          "description":"The state of trigger.",
           "x-ms-enum": {
             "name": "TriggerState",
             "modelAsString": true
@@ -5185,6 +5207,7 @@
             "Incremental"
           ],
           "type": "string",
+          "description":"The scan level of trigger.",
           "x-ms-enum": {
             "name": "ScanLevelType",
             "modelAsString": true
@@ -5192,7 +5215,8 @@
         },
         "incrementalScanStartTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description":"The incremental scan start time of trigger."
         }
       }
     },
@@ -5210,10 +5234,12 @@
             {
               "$ref": "#/definitions/TriggerProperties"
             }
-          ]
+          ],
+          "description":"The properties of trigger."
         },
         "validationErrorInfo": {
-          "type": "string"
+          "type": "string",
+          "description":"The validation error info of trigger.",
         }
       }
     },
@@ -5224,13 +5250,16 @@
         "lastModifiedAt": {
           "format": "date-time",
           "type": "string",
+          "description":"The last modified time of collection reference.",
           "readOnly": true
         },
         "referenceName": {
-          "type": "string"
+          "type": "string",
+          "description":"The reference name of collection reference."
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description":"The type of collection reference."
         }
       }
     },
@@ -5244,10 +5273,12 @@
         "version": {
           "format": "int32",
           "type": "integer",
+          "description":"The version of system classification rule.",
           "readOnly": true
         },
         "classificationName": {
-          "type": "string"
+          "type": "string",
+          "description":"The classification name of system classification rule."
         },
         "ruleStatus": {
           "enum": [
@@ -5255,6 +5286,7 @@
             "Disabled"
           ],
           "type": "string",
+          "description":"The rule status of system classification rule.",
           "x-ms-enum": {
             "name": "ClassificationRuleStatus",
             "modelAsString": true
@@ -5263,11 +5295,13 @@
         "createdAt": {
           "format": "date-time",
           "type": "string",
+          "description":"The create time of system classification rule.",
           "readOnly": true
         },
         "lastModifiedAt": {
           "format": "date-time",
           "type": "string",
+          "description":"The last modified time of system classification rule.",
           "readOnly": true
         }
       }
@@ -5303,6 +5337,7 @@
             "Regex"
           ],
           "type": "string",
+          "description":"The properties of classification rule pattern.",
           "x-ms-enum": {
             "name": "ClassificationRulePatternType",
             "modelAsString": true
@@ -5334,12 +5369,14 @@
         },
         "dataPatterns": {
           "type": "array",
+          "description":"The data patterns of custom classification rule.",
           "items": {
             "$ref": "#/definitions/ClassificationRulePattern"
           }
         },
         "columnPatterns": {
           "type": "array",
+          "description":"The column patterns of custom classification rule.",
           "items": {
             "$ref": "#/definitions/ClassificationRulePattern"
           }
@@ -5350,10 +5387,12 @@
         "version": {
           "format": "int32",
           "type": "integer",
+          "description":"The version of custom classification rule.",
           "readOnly": true
         },
         "classificationName": {
-          "type": "string"
+          "type": "string",
+          "description":"The classification name of custom classification rule."
         },
         "ruleStatus": {
           "enum": [
@@ -5361,6 +5400,7 @@
             "Disabled"
           ],
           "type": "string",
+          "description":"The rule status of custom classification rule.",
           "x-ms-enum": {
             "name": "ClassificationRuleStatus",
             "modelAsString": true
@@ -5369,11 +5409,13 @@
         "createdAt": {
           "format": "date-time",
           "type": "string",
+          "description":"The create time of custom classification rule.",
           "readOnly": true
         },
         "lastModifiedAt": {
           "format": "date-time",
           "type": "string",
+          "description":"The last modified time of custom classification rule.",
           "readOnly": true
         }
       }
@@ -5407,7 +5449,8 @@
       ],
       "properties": {
         "pattern": {
-          "type": "string"
+          "type": "string",
+          "description":"The pattern of regex classification rule pattern."
         }
       },
       "x-ms-discriminator-value": "Regex"
@@ -5416,10 +5459,12 @@
       "type": "object",
       "properties": {
         "referenceName": {
-          "type": "string"
+          "type": "string",
+          "description":"The reference name of store."
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description":"The type of store."
         }
       }
     },
@@ -5428,13 +5473,16 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "type": "string",
+          "description":"The type of key vault secret."
         },
         "secretName": {
-          "type": "string"
+          "type": "string",
+          "description":"The secret name of key vault secret."
         },
         "secretVersion": {
-          "type": "string"
+          "type": "string",
+          "description":"The secret version of key vault secret."
         },
         "store": {
           "allOf": [
@@ -5454,7 +5502,8 @@
             {
               "$ref": "#/definitions/KeyVaultSecret"
             }
-          ]
+          ],
+          "description":"The account key of key vault secret account key credential type."
         }
       }
     },
@@ -5467,7 +5516,8 @@
             {
               "$ref": "#/definitions/KeyVaultSecretAccountKeyCredentialTypeProperties"
             }
-          ]
+          ],
+          "description":"The type properties of account key credential."
         },
         "description": {
           "type": "string"
@@ -5488,7 +5538,8 @@
             {
               "$ref": "#/definitions/AccountKeyCredentialProperties"
             }
-          ]
+          ],
+          "description":"The properties of account key auth azure key vault credential."
         }
       },
       "x-ms-discriminator-value": "AccountKey"
@@ -5505,7 +5556,8 @@
             {
               "$ref": "#/definitions/KeyVaultSecret"
             }
-          ]
+          ],
+          "description":"The password of key vault secret user pass credential type."
         }
       }
     },
