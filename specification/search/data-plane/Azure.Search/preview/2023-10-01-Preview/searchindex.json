@@ -266,7 +266,7 @@
               "fail"
             ],
             "x-ms-enum": {
-              "name": "SemanticErrorHandling",
+              "name": "SemanticErrorMode",
               "modelAsString": true,
               "values": [
                 {
@@ -405,7 +405,7 @@
               "extractive"
             ],
             "x-ms-enum": {
-              "name": "Answers",
+              "name": "QueryAnswerType",
               "modelAsString": true,
               "values": [
                 {
@@ -535,7 +535,7 @@
               "extractive"
             ],
             "x-ms-enum": {
-              "name": "Captions",
+              "name": "QueryCaptionType",
               "modelAsString": true,
               "values": [
                 {
@@ -1266,7 +1266,7 @@
         "transient"
       ],
       "x-ms-enum": {
-        "name": "SemanticPartialResponseReason",
+        "name": "SemanticErrorReason",
         "modelAsString": true,
         "values": [
           {
@@ -1295,7 +1295,7 @@
         "rerankedResults"
       ],
       "x-ms-enum": {
-        "name": "SemanticPartialResponseType",
+        "name": "SemanticSearchResultsType",
         "modelAsString": true,
         "values": [
           {
@@ -1378,7 +1378,7 @@
         "partial"
       ],
       "x-ms-enum": {
-        "name": "QueryResultDocumentSemanticFieldState",
+        "name": "SemanticFieldState",
         "modelAsString": true,
         "values": [
           {
@@ -1678,7 +1678,7 @@
         "fail"
       ],
       "x-ms-enum": {
-        "name": "SemanticErrorHandling",
+        "name": "SemanticErrorMode",
         "modelAsString": true,
         "values": [
           {
@@ -1846,6 +1846,7 @@
       "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to `extractive`, highlighting is enabled by default, and can be configured by appending the pipe character `|` followed by the `highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults to `None`."
     },
     "VectorQuery": {
+      "x-ms-client-name": "VectorizableQuery",
       "type": "object",
       "discriminator": "kind",
       "properties": {
@@ -1874,6 +1875,7 @@
       "description": "The query parameters for vector and hybrid search queries."
     },
     "RawVectorQuery": {
+      "x-ms-client-name": "VectorQuery",
       "type": "object",
       "x-ms-discriminator-value": "vector",
       "allOf": [
@@ -1891,6 +1893,9 @@
           "description": "The vector representation of a search query."
         }
       },
+      "required": [
+        "vector"
+      ],
       "description": "The query parameters to use for vector search when a raw vector value is provided."
     },
     "VectorizableTextQuery": {
@@ -2596,6 +2601,7 @@
           "description": "The comma-separated list of field names used for semantic ranking."
         },
         "vectorQueries": {
+          "x-ms-client-name": "vectorizableQueries",
           "type": "array",
           "items": {
             "$ref": "#/definitions/VectorQuery"

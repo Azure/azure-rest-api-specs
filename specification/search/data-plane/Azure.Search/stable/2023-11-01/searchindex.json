@@ -379,7 +379,7 @@
               "fail"
             ],
             "x-ms-enum": {
-              "name": "SemanticErrorHandling",
+              "name": "SemanticErrorMode",
               "modelAsString": true,
               "values": [
                 {
@@ -419,7 +419,7 @@
               "extractive"
             ],
             "x-ms-enum": {
-              "name": "Answers",
+              "name": "QueryAnswerType",
               "modelAsString": true,
               "values": [
                 {
@@ -448,7 +448,7 @@
               "extractive"
             ],
             "x-ms-enum": {
-              "name": "Captions",
+              "name": "QueryCaptionType",
               "modelAsString": true,
               "values": [
                 {
@@ -1406,6 +1406,7 @@
       "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
     },
     "VectorQuery": {
+      "x-ms-client-name": "VectorizableQuery",
       "type": "object",
       "discriminator": "kind",
       "properties": {
@@ -1434,6 +1435,7 @@
       "description": "The query parameters for vector and hybrid search queries."
     },
     "RawVectorQuery": {
+      "x-ms-client-name": "VectorQuery",
       "type": "object",
       "x-ms-discriminator-value": "vector",
       "allOf": [
@@ -1451,6 +1453,9 @@
           "description": "The vector representation of a search query."
         }
       },
+      "required": [
+        "vector"
+      ],
       "description": "The query parameters to use for vector search when a raw vector value is provided."
     },
     "VectorQueryKind": {
@@ -1670,6 +1675,7 @@
           "description": "A value that specifies whether captions should be returned as part of the search response."
         },
         "vectorQueries": {
+          "x-ms-client-name": "vectorizableQueries",
           "type": "array",
           "items": {
             "$ref": "#/definitions/VectorQuery"
@@ -1922,7 +1928,7 @@
         "transient"
       ],
       "x-ms-enum": {
-        "name": "SemanticPartialResponseReason",
+        "name": "SemanticErrorReason",
         "modelAsString": true,
         "values": [
           {
@@ -1951,7 +1957,7 @@
         "rerankedResults"
       ],
       "x-ms-enum": {
-        "name": "SemanticPartialResponseType",
+        "name": "SemanticSearchResultsType",
         "modelAsString": true,
         "values": [
           {
@@ -1975,7 +1981,7 @@
         "fail"
       ],
       "x-ms-enum": {
-        "name": "SemanticErrorHandling",
+        "name": "SemanticErrorMode",
         "modelAsString": true,
         "values": [
           {
