@@ -70,14 +70,16 @@ enum environmentProvisioningState {
 enum environmentMode {
   @doc("Clone basic file")
   Basic,
+
   @doc("Clone customer config file")
   All,
 }
 
 @doc("Indicate APGold or PFGold")
 enum environmentEnlistmentType {
-  @doc("Indicate type ype is APGold")
+  @doc("Indicate type is APGold")
   APGold,
-  @doc("Indicate type ype is PFGold")
+
+  @doc("Indicate type is PFGold")
   PFGold,
 }
