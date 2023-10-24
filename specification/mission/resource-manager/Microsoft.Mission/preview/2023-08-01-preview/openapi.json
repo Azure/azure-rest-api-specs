@@ -4303,10 +4303,6 @@
             "name"
           ]
         },
-        "transitHubResourceId": {
-          "$ref": "#/definitions/TransitHubResourceId",
-          "description": "Transit Hub Resource Id."
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State.",
@@ -4314,8 +4310,7 @@
         }
       },
       "required": [
-        "destinationRuleCollection",
-        "transitHubResourceId"
+        "destinationRuleCollection"
       ]
     },
     "CommunityEndpointProtocol": {
@@ -4437,10 +4432,6 @@
           "x-ms-identifiers": [
             "name"
           ]
-        },
-        "transitHubResourceId": {
-          "$ref": "#/definitions/TransitHubResourceId",
-          "description": "Transit Hub Resource Id."
         }
       }
     },
@@ -4619,6 +4610,10 @@
           "items": {
             "$ref": "#/definitions/CommunityEndpointProtocol"
           }
+        },
+        "transitHubResourceId": {
+          "$ref": "#/definitions/TransitHubResourceId",
+          "description": "Transit Hub Resource Id."
         }
       },
       "required": [
@@ -4831,7 +4826,7 @@
             "type": "Microsoft.Mission/virtualEnclaves"
           },
           {
-            "type": "Microsoft.Mission/transitHubs"
+            "type": "Microsoft.Mission/communities/transitHubs"
           }
         ]
       }
@@ -5969,7 +5964,7 @@
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
-            "type": "Microsoft.Mission/transitHubs"
+            "type": "Microsoft.Mission/communities/transitHubs"
           }
         ]
       }
