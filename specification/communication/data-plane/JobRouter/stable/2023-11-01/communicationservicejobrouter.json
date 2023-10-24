@@ -974,7 +974,7 @@
         }
       }
     },
-    "/routing/jobs/{id}:reclassify": {
+    "/routing/jobs/{jobId}:reclassify": {
       "post": {
         "operationId": "JobRouterOperations_ReclassifyJobAction",
         "summary": "Reclassify a job.",
@@ -984,7 +984,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "jobId",
             "in": "path",
             "description": "Id of the job.",
             "required": true,
@@ -1024,7 +1024,7 @@
         }
       }
     },
-    "/routing/jobs/{id}:cancel": {
+    "/routing/jobs/{jobId}:cancel": {
       "post": {
         "operationId": "JobRouterOperations_CancelJobAction",
         "summary": "Submits request to cancel an existing job by Id while supplying free-form\ncancellation reason.",
@@ -1034,7 +1034,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "jobId",
             "in": "path",
             "description": "Id of the job.",
             "required": true,
@@ -1074,7 +1074,7 @@
         }
       }
     },
-    "/routing/jobs/{id}:complete": {
+    "/routing/jobs/{jobId}:complete": {
       "post": {
         "operationId": "JobRouterOperations_CompleteJobAction",
         "summary": "Completes an assigned job.",
@@ -1084,7 +1084,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "jobId",
             "in": "path",
             "description": "Id of the job.",
             "required": true,
@@ -1124,7 +1124,7 @@
         }
       }
     },
-    "/routing/jobs/{id}:close": {
+    "/routing/jobs/{jobId}:close": {
       "post": {
         "operationId": "JobRouterOperations_CloseJobAction",
         "summary": "Closes a completed job.",
@@ -1134,7 +1134,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "jobId",
             "in": "path",
             "description": "Id of the job.",
             "required": true,
@@ -1177,7 +1177,7 @@
         }
       }
     },
-    "/routing/jobs/{id}/assignments/{assignmentId}:unassign": {
+    "/routing/jobs/{jobId}/assignments/{assignmentId}:unassign": {
       "post": {
         "operationId": "JobRouterOperations_UnassignJobAction",
         "summary": "Un-assign a job.",
@@ -1187,7 +1187,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "jobId",
             "in": "path",
             "description": "Id of the job to un-assign.",
             "required": true,
@@ -1237,7 +1237,7 @@
         }
       }
     },
-    "/routing/jobs/{id}/position": {
+    "/routing/jobs/{jobId}/position": {
       "get": {
         "operationId": "JobRouterOperations_GetInQueuePosition",
         "summary": "Gets a job's position details.",
@@ -1247,7 +1247,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "jobId",
             "in": "path",
             "description": "Id of the job.",
             "required": true,
@@ -1511,7 +1511,7 @@
         }
       }
     },
-    "/routing/queues/{id}/statistics": {
+    "/routing/queues/{queueId}/statistics": {
       "get": {
         "operationId": "JobRouterOperations_GetQueueStatistics",
         "summary": "Retrieves a queue's statistics.",
@@ -1521,7 +1521,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "queueId",
             "in": "path",
             "description": "Id of the queue to retrieve statistics.",
             "required": true,

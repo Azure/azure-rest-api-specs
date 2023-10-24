@@ -7,7 +7,7 @@
     "workerId": "WorkerId",
     "resource": {
       "availableForOffers": true,
-      "totalCapacity": 10
+      "capacity": 10
     }
   },
   "responses": {
@@ -15,52 +15,54 @@
       "body": {
         "id": "WorkerId",
         "state": "active",
-        "queueAssignments": {
-          "MainQueue": {}
-        },
-        "totalCapacity": 10,
+        "queues": ["MainQueue"],
+        "capacity": 10,
         "labels": {},
         "tags": {},
-        "channelConfigurations": {
-          "CustomChatChannel": {
+        "channels": [
+          {
+            "channelId": "CustomChatChannel",
             "capacityCostPerJob": 11,
             "maxNumberOfJobs": 4
           },
-          "CustomVoiceChannel": {
+          {
+            "channelId": "CustomVoiceChannel",
             "capacityCostPerJob": 10,
             "maxNumberOfJobs": 1
           }
-        },
+        ],
         "offers": [],
         "assignedJobs": [],
         "loadRatio": 0,
-        "availableForOffers": true
+        "availableForOffers": true,
+        "etag": "etag"
       }
     },
     "201": {
       "body": {
         "id": "WorkerId",
         "state": "active",
-        "queueAssignments": {
-          "MainQueue": {}
-        },
-        "totalCapacity": 10,
+        "queues": ["MainQueue"],
+        "capacity": 10,
         "labels": {},
         "tags": {},
-        "channelConfigurations": {
-          "CustomChatChannel": {
+        "channels": [
+          {
+            "channelId": "CustomChatChannel",
             "capacityCostPerJob": 11,
             "maxNumberOfJobs": 4
           },
-          "CustomVoiceChannel": {
+          {
+            "channelId": "CustomVoiceChannel",
             "capacityCostPerJob": 10,
             "maxNumberOfJobs": 1
           }
-        },
+        ],
         "offers": [],
         "assignedJobs": [],
         "loadRatio": 0,
-        "availableForOffers": true
+        "availableForOffers": true,
+        "etag": "etag"
       }
     }
   }

@@ -11,27 +11,27 @@
       "body": {
         "id": "DefaultWorker",
         "state": "active",
-        "queueAssignments": {
-          "MainQueue": {},
-          "SecondaryQueue": {}
-        },
-        "totalCapacity": 100,
+        "queues": ["MainQueue", "SecondaryQueue"],
+        "capacity": 100,
         "labels": {},
         "tags": {},
-        "channelConfigurations": {
-          "CustomChatChannel": {
+        "channels": [
+          {
+            "channelId": "CustomChatChannel",
             "capacityCostPerJob": 10,
             "maxNumberOfJobs": 4
           },
-          "CustomVoiceChannel": {
+          {
+            "channelId": "CustomVoiceChannel",
             "capacityCostPerJob": 100,
             "maxNumberOfJobs": 1
           }
-        },
+        ],
         "offers": [],
         "assignedJobs": [],
         "loadRatio": 0,
-        "availableForOffers": true
+        "availableForOffers": true,
+        "etag": "etag"
       }
     }
   }
