@@ -3,6 +3,7 @@ parameters:
     default: "sdk/easm"
 emit:
   - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-java"
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"
@@ -24,4 +25,6 @@ options:
   "@azure-tools/typespec-java":
     package-dir: "azure-analytics-defender-easm"
     namespace: com.azure.analytics.defender.easm
+    emitter-output-folder: "{project-root}"
+    partial-update: true
   
