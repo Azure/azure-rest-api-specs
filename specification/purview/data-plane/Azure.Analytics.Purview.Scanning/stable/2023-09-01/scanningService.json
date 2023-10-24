@@ -9761,12 +9761,17 @@
     "managedVirtualNetworkName": {
       "in": "path",
       "name": "managedVirtualNetworkName",
-      "description": "The managed virtual network name.",
+      "description": "The managed virtual network name. It is restricted to the values 'default' and 'defaultv2' for now.",
       "required": true,
       "type": "string",
-      "minLength": 1,
-      "maxLength": 127,
-      "pattern": "^([_A-Za-z0-9]|([_A-Za-z0-9][-_A-Za-z0-9]{0,125}[_A-Za-z0-9]))$",
+      "enum": [
+        "default",
+        "defaultv2"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedVirtualNetworkName",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     },
     "managedPrivateEndpointName": {
