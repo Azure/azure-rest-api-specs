@@ -979,21 +979,18 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/TestConfigurationAdditionalProperties",
+          "$ref": "#/definitions/TestConfigurationTestResultProperties",
           "x-ms-client-flatten": true,
           "description": "The properties of a Test Result."
         }
       },
       "allOf": [
         {
-          "$ref": "./testbase.json#/definitions/TestResultProperties"
-        },
-        {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
-    "TestConfigurationAdditionalProperties": {
+    "TestConfigurationTestResultProperties": {
       "description": "Test configuration additional properties.",
       "type": "object",
       "properties": {
@@ -1005,7 +1002,12 @@
           "type": "string",
           "description": "The test configuration name."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "./testbase.json#/definitions/TestResultProperties"
+        }
+      ]
     }
   },
   "parameters": {
