@@ -5434,7 +5434,6 @@
     "AppAttachPackagePatch": {
       "description": "Schema for patchable App Attach Package properties.",
       "type": "object",
-      "x-ms-client-flatten": false,
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
@@ -5449,11 +5448,10 @@
           "description": "tags to be updated"
         },
         "properties": {
-          "properties": {
-            "description": "Detailed properties for App Attach Package",
-            "$ref": "#/definitions/AppAttachPackageProperties",
-            "x-nullable": false
-          }
+          "description": "Detailed properties for App Attach Package",
+          "$ref": "#/definitions/AppAttachPackageProperties",
+          "x-ms-client-flatten": false,
+          "x-nullable": false
         }
       }
     },
