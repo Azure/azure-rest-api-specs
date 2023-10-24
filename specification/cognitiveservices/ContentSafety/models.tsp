@@ -111,6 +111,7 @@ model ImageData {
   content?: bytes;
 
   @doc("The blob url of the image.")
+  @projectedName("csharp", "BlobUri")
   blobUrl?: url;
 }
 
@@ -137,6 +138,7 @@ model TextBlocklist {
   @key("blocklistName")
   @visibility("read", "create", "query")
   @maxLength(64)
+  @projectedName("csharp", "Name")
   blocklistName: string;
 
   @doc("Text blocklist description.")

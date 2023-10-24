@@ -20,6 +20,7 @@ interface TextOperations {
     {
       @body
       @doc("The text analysis request.")
+      @projectedName("csharp", "options")
       body: AnalyzeTextOptions;
     },
     AnalyzeTextResult
@@ -35,6 +36,7 @@ interface ImageOperations {
     {
       @doc("The image analysis request.")
       @body
+      @projectedName("csharp", "options")
       body: AnalyzeImageOptions;
     },
     AnalyzeImageResult
