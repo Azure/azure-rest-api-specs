@@ -45,7 +45,7 @@ function Get-ChangedCoreFiles($changedFiles = (Get-ChangedFiles)) {
   )
 
   $coreFiles = $changedFiles | Where-Object { 
-    # $_.StartsWith("eng/") -or
+    $_.StartsWith("eng/") -or
     $_.StartsWith("specification/common-types/") -or
     $_ -in $rootFiles
   }
