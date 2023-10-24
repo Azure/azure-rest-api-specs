@@ -3112,7 +3112,7 @@
             "Canceled"
           ],
           "type": "string",
-          "description":"operation status",
+          "description": "operation status",
           "x-ms-enum": {
             "name": "OperationStatus",
             "modelAsString": true
@@ -3150,7 +3150,7 @@
             "ManagedIdentity"
           ],
           "type": "string",
-          "description":"The kind of credential.",
+          "description": "The kind of credential.",
           "x-ms-enum": {
             "name": "CredentialType",
             "modelAsString": true
@@ -3188,12 +3188,12 @@
       "properties": {
         "message": {
           "type": "string",
-          "description":"notification message"
+          "description": "notification message"
         },
         "code": {
           "format": "int32",
           "type": "integer",
-          "description":"notification code"
+          "description": "notification code"
         }
       }
     },
@@ -3202,14 +3202,14 @@
       "properties": {
         "notifications": {
           "type": "array",
-          "description":"notifications",
+          "description": "notifications",
           "items": {
             "$ref": "#/definitions/Notification"
           }
         },
         "exceptionCountMap": {
           "type": "object",
-          "description":"exception count map",
+          "description": "exception count map",
           "additionalProperties": {
             "format": "int32",
             "type": "integer"
@@ -3225,55 +3225,55 @@
           "format": "int64",
           "type": "integer",
           "readOnly": true,
-          "description":"The number of assets discovered."
+          "description": "The number of assets discovered."
         },
         "assetsClassified": {
           "format": "int64",
           "type": "integer",
           "readOnly": true,
-          "description":"The number of assets classified."
+          "description": "The number of assets classified."
         },
         "queuedTime": {
           "format": "date-time",
           "type": "string",
           "readOnly": true,
-          "description":"The time the scan was queued."
+          "description": "The time the scan was queued."
         },
         "pipelineStartTime": {
           "format": "date-time",
           "type": "string",
           "readOnly": true,
-          "description":"The time the scan started."
+          "description": "The time the scan started."
         },
         "isErrorLogAvailable": {
           "type": "boolean",
           "readOnly": true,
-          "description":"Indicates whether the error log is available."
+          "description": "Indicates whether the error log is available."
         },
         "parentId": {
           "type": "string",
           "readOnly": true,
-          "description":"The parent scan result identifier."
+          "description": "The parent scan result identifier."
         },
         "ingestionJobId": {
           "type": "string",
           "readOnly": true,
-          "description":"The ingestion job identifier."
+          "description": "The ingestion job identifier."
         },
         "id": {
           "type": "string",
           "readOnly": true,
-          "description":"The scan result identifier."
+          "description": "The scan result identifier."
         },
         "resourceId": {
           "type": "string",
           "readOnly": true,
-          "description":"The resource identifier."
+          "description": "The resource identifier."
         },
         "status": {
           "type": "string",
           "readOnly": true,
-          "description":"The scan result status."
+          "description": "The scan result status."
         },
         "diagnostics": {
           "allOf": [
@@ -3282,25 +3282,25 @@
             }
           ],
           "readOnly": true,
-          "description":"The scan diagnostics."
+          "description": "The scan diagnostics."
         },
         "startTime": {
           "format": "date-time",
           "type": "string",
           "readOnly": true,
-          "description":"The scan start time."
+          "description": "The scan start time."
         },
         "endTime": {
           "format": "date-time",
           "type": "string",
           "readOnly": true,
-          "description":"The scan end time."
+          "description": "The scan end time."
         },
         "scanRulesetVersion": {
           "format": "int32",
           "type": "integer",
           "readOnly": true,
-          "description":"The scan ruleset version."
+          "description": "The scan ruleset version."
         },
         "scanRulesetType": {
           "enum": [
@@ -3308,7 +3308,7 @@
             "System"
           ],
           "type": "string",
-          "description":"The scan ruleset type.",
+          "description": "The scan ruleset type.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "ScanRulesetType",
@@ -3321,7 +3321,7 @@
             "Incremental"
           ],
           "type": "string",
-          "description":"scan level type",
+          "description": "scan level type",
           "readOnly": true,
           "x-ms-enum": {
             "name": "ScanLevelType",
@@ -3331,7 +3331,7 @@
         "errorMessage": {
           "type": "string",
           "readOnly": true,
-          "description":"The error message."
+          "description": "The error message."
         },
         "error": {
           "allOf": [
@@ -3344,7 +3344,7 @@
         "runType": {
           "type": "string",
           "readOnly": true,
-          "description":"The run type."
+          "description": "The run type."
         },
         "dataSourceType": {
           "enum": [
@@ -3388,7 +3388,7 @@
             "DatabricksUnityCatalog"
           ],
           "type": "string",
-          "description":"The data source type.",
+          "description": "The data source type.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "DataSourceType",
@@ -3403,12 +3403,12 @@
         "discoveryStartTime": {
           "format": "date-time",
           "type": "string",
-          "description":"The discovery start time."
+          "description": "The discovery start time."
         },
         "discoveryEndTime": {
           "format": "date-time",
           "type": "string",
-          "description":"The discovery end time."
+          "description": "The discovery end time."
         },
         "status": {
           "enum": [
@@ -3423,7 +3423,7 @@
             "CompleteWithWarning"
           ],
           "type": "string",
-          "description":"The discovery status.",
+          "description": "The discovery status.",
           "x-ms-enum": {
             "name": "ScanStatus",
             "modelAsString": true
@@ -3431,14 +3431,14 @@
         },
         "statistics": {
           "type": "object",
-          "description":"The discovery statistics.",
+          "description": "The discovery statistics.",
           "additionalProperties": {
             "type": "object"
           }
         },
         "isErrorLogAvailable": {
           "type": "boolean",
-          "description":"Indicates whether the error log is available."
+          "description": "Indicates whether the error log is available."
         }
       }
     },
@@ -3448,12 +3448,12 @@
         "ingestionStartTime": {
           "format": "date-time",
           "type": "string",
-          "description":"The ingestion start time."
+          "description": "The ingestion start time."
         },
         "ingestionEndTime": {
           "format": "date-time",
           "type": "string",
-          "description":"The ingestion end time."
+          "description": "The ingestion end time."
         },
         "status": {
           "enum": [
@@ -3468,7 +3468,7 @@
             "Canceling"
           ],
           "type": "string",
-          "description":"The ingestion status.",
+          "description": "The ingestion status.",
           "x-ms-enum": {
             "name": "IngestionPhaseStatus",
             "modelAsString": true
@@ -3476,30 +3476,30 @@
         },
         "statistics": {
           "type": "object",
-          "description":"The ingestion statistics.",
+          "description": "The ingestion statistics.",
           "additionalProperties": {
             "type": "object"
           }
         },
         "estimatedTimeRemainingInSeconds": {
           "format": "int64",
-          "description":"The estimated time remaining in seconds.",
+          "description": "The estimated time remaining in seconds.",
           "type": "integer"
         },
         "isErrorLogAvailable": {
           "type": "boolean",
-          "description":"Indicates whether the error log is available."
+          "description": "Indicates whether the error log is available."
         },
         "lastUpdatedAt": {
           "format": "date-time",
           "type": "string",
-          "description":"The last updated time."
+          "description": "The last updated time."
         }
       }
     },
     "ScanResultWithIngestion": {
       "type": "object",
-      "description":"The scan result with ingestion.",
+      "description": "The scan result with ingestion.",
       "properties": {
         "discoveryExecutionDetails": {
           "allOf": [
@@ -3508,7 +3508,7 @@
             }
           ],
           "readOnly": true,
-          "description":"The discovery execution details."
+          "description": "The discovery execution details."
         },
         "ingestionExecutionDetails": {
           "allOf": [
@@ -3517,31 +3517,31 @@
             }
           ],
           "readOnly": true,
-          "description":"The ingestion execution details."
+          "description": "The ingestion execution details."
         },
         "parentId": {
           "type": "string",
           "readOnly": true,
-          "description":"The parent scan result identifier."
+          "description": "The parent scan result identifier."
         },
         "id": {
           "type": "string",
           "readOnly": true,
-          "description":"The scan result identifier."
+          "description": "The scan result identifier."
         },
         "ingestionJobId": {
           "type": "string",
-          "description":"The ingestion job identifier."
+          "description": "The ingestion job identifier."
         },
         "resourceId": {
           "type": "string",
           "readOnly": true,
-          "description":"The resource identifier."
+          "description": "The resource identifier."
         },
         "status": {
           "type": "string",
           "readOnly": true,
-          "description":"The scan result status."
+          "description": "The scan result status."
         },
         "diagnostics": {
           "allOf": [
@@ -3550,24 +3550,24 @@
             }
           ],
           "readOnly": true,
-          "description":"The scan diagnostics."
+          "description": "The scan diagnostics."
         },
         "startTime": {
           "format": "date-time",
           "type": "string",
-          "description":"The scan start time.",
+          "description": "The scan start time.",
           "readOnly": true
         },
         "endTime": {
           "format": "date-time",
           "type": "string",
-          "description":"The scan end time.",
+          "description": "The scan end time.",
           "readOnly": true
         },
         "scanRulesetVersion": {
           "format": "int32",
           "type": "integer",
-          "description":"The scan ruleset version.",
+          "description": "The scan ruleset version.",
           "readOnly": true
         },
         "scanRulesetType": {
@@ -3576,7 +3576,7 @@
             "System"
           ],
           "type": "string",
-          "description":"The scan ruleset type.",
+          "description": "The scan ruleset type.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "ScanRulesetType",
@@ -3589,7 +3589,7 @@
             "Incremental"
           ],
           "type": "string",
-          "description":"scan level type",
+          "description": "scan level type",
           "readOnly": true,
           "x-ms-enum": {
             "name": "ScanLevelType",
@@ -3598,7 +3598,7 @@
         },
         "errorMessage": {
           "type": "string",
-          "description":"The error message.",
+          "description": "The error message.",
           "readOnly": true
         },
         "error": {
@@ -3608,12 +3608,12 @@
             }
           ],
           "readOnly": true,
-          "description":"The error."
+          "description": "The error."
         },
         "runType": {
           "type": "string",
           "readOnly": true,
-          "description":"The run type."
+          "description": "The run type."
         },
         "dataSourceType": {
           "enum": [
@@ -3657,7 +3657,7 @@
             "DatabricksUnityCatalog"
           ],
           "type": "string",
-          "description":"The data source type.",
+          "description": "The data source type.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "DataSourceType",
@@ -3671,24 +3671,24 @@
       "properties": {
         "subscriptionId": {
           "type": "string",
-          "description":"The subscription identifier."
+          "description": "The subscription identifier."
         },
         "resourceGroup": {
           "type": "string",
-          "description":"The resource group."
+          "description": "The resource group."
         }
       }
     },
     "ItemPath": {
       "type": "object",
-      "description":"The item path.",
+      "description": "The item path.",
       "properties": {
         "path": {
           "type": "string",
-          "description":"The path."
+          "description": "The path."
         },
         "extendedProperties": {
-          "description":"The extended properties.",
+          "description": "The extended properties.",
           "allOf": [
             {
               "$ref": "#/definitions/ExtendedProperties"
@@ -3699,15 +3699,15 @@
     },
     "QualifiedName": {
       "type": "object",
-      "description":"The qualified name.",
+      "description": "The qualified name.",
       "properties": {
         "typeName": {
           "type": "string",
-          "description":"The type name."
+          "description": "The type name."
         },
         "name": {
           "type": "string",
-          "description":"The name."
+          "description": "The name."
         },
         "extendedProperties": {
           "allOf": [
@@ -3720,7 +3720,7 @@
     },
     "DataSourceIdentifier": {
       "type": "object",
-      "description":"The data source identifier.",
+      "description": "The data source identifier.",
       "properties": {
         "itemPath": {
           "allOf": [
@@ -3738,15 +3738,15 @@
         },
         "dataSourceName": {
           "type": "string",
-          "description":"The data source name."
+          "description": "The data source name."
         },
         "guid": {
           "type": "string",
-          "description":"The guid."
+          "description": "The guid."
         },
         "resourceId": {
           "type": "string",
-          "description":"The resource identifier."
+          "description": "The resource identifier."
         }
       }
     },
@@ -3755,7 +3755,7 @@
         "kind"
       ],
       "type": "object",
-      "description":"The scan.",
+      "description": "The scan.",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -3844,7 +3844,7 @@
         },
         "scanResultsWithIngestion": {
           "type": "array",
-          "description":"Scan results with ingestion of this scan.",
+          "description": "Scan results with ingestion of this scan.",
           "items": {
             "$ref": "#/definitions/ScanResultWithIngestion"
           },
@@ -3852,7 +3852,7 @@
         },
         "scanId": {
           "type": "string",
-          "description":"The scan identifier."
+          "description": "The scan identifier."
         },
         "dataSourceIdentifier": {
           "allOf": [
@@ -3863,7 +3863,7 @@
         },
         "dataSourceName": {
           "type": "string",
-          "description":"The data source name."
+          "description": "The data source name."
         },
         "creationType": {
           "enum": [
@@ -3872,7 +3872,7 @@
             "AutoManaged"
           ],
           "type": "string",
-          "description":"The creation type.",
+          "description": "The creation type.",
           "x-ms-enum": {
             "name": "CreationType",
             "modelAsString": true
@@ -3886,7 +3886,7 @@
         "kind"
       ],
       "type": "object",
-      "description":"The data source.",
+      "description": "The data source.",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -3943,7 +3943,7 @@
         },
         "scans": {
           "type": "array",
-          "description":"Scans of this data source.",
+          "description": "Scans of this data source.",
           "items": {
             "$ref": "#/definitions/Scan"
           },
@@ -3956,7 +3956,7 @@
             "AutoManaged"
           ],
           "type": "string",
-          "description":"The creation type.",
+          "description": "The creation type.",
           "x-ms-enum": {
             "name": "CreationType",
             "modelAsString": true
@@ -3995,12 +3995,12 @@
         "includeUriPrefixes"
       ],
       "type": "object",
-      "description":"The filter properties.",
+      "description": "The filter properties.",
       "properties": {
         "excludeUriPrefixes": {
           "uniqueItems": true,
           "type": "array",
-          "description":"The exclude uri prefixes.",
+          "description": "The exclude uri prefixes.",
           "items": {
             "type": "string"
           }
@@ -4008,7 +4008,7 @@
         "includeUriPrefixes": {
           "uniqueItems": true,
           "type": "array",
-          "description":"The include uri prefixes.",
+          "description": "The include uri prefixes.",
           "items": {
             "type": "string"
           }
@@ -4016,7 +4016,7 @@
         "excludeRegexes": {
           "uniqueItems": true,
           "type": "array",
-          "description":"The exclude regexes.",
+          "description": "The exclude regexes.",
           "items": {
             "type": "string"
           }
@@ -4024,7 +4024,7 @@
         "includeRegexes": {
           "uniqueItems": true,
           "type": "array",
-          "description":"The include regexes.",
+          "description": "The include regexes.",
           "items": {
             "type": "string"
           }
@@ -4033,7 +4033,7 @@
     },
     "Filter": {
       "type": "object",
-      "description":"The filter.",
+      "description": "The filter.",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -4838,7 +4838,7 @@
             "System"
           ],
           "type": "string",
-          "description":"versioned scan ruleset properties",
+          "description": "versioned scan ruleset properties",
           "x-ms-enum": {
             "name": "ScanRulesetType",
             "modelAsString": true
@@ -4850,7 +4850,7 @@
             "Disabled"
           ],
           "type": "string",
-          "description":"status of versioned scan ruleset properties",
+          "description": "status of versioned scan ruleset properties",
           "readOnly": true,
           "x-ms-enum": {
             "name": "ScanRulesetStatus",
@@ -4860,7 +4860,7 @@
         "version": {
           "format": "int32",
           "type": "integer",
-          "description":"version of versioned scan ruleset properties",
+          "description": "version of versioned scan ruleset properties",
           "readOnly": true
         }
       }
@@ -4983,7 +4983,7 @@
             "PowerBI"
           ],
           "type": "string",
-          "description":"The properties of system scan ruleset, vary by datasource type.",
+          "description": "The properties of system scan ruleset, vary by datasource type.",
           "x-ms-enum": {
             "name": "DataSourceType",
             "modelAsString": true
@@ -5035,7 +5035,7 @@
             "Saturday"
           ],
           "type": "string",
-          "description":"The day of recurrence schedule occurrence.",
+          "description": "The day of recurrence schedule occurrence.",
           "x-ms-enum": {
             "name": "DayOfWeek",
             "modelAsString": true
@@ -5056,7 +5056,7 @@
         },
         "minutes": {
           "type": "array",
-          "description":"The minutes of recurrence schedule.",
+          "description": "The minutes of recurrence schedule.",
           "items": {
             "format": "int32",
             "type": "integer"
@@ -5064,7 +5064,7 @@
         },
         "hours": {
           "type": "array",
-          "description":"The hours of recurrence schedule.",
+          "description": "The hours of recurrence schedule.",
           "items": {
             "format": "int32",
             "type": "integer"
@@ -5072,7 +5072,7 @@
         },
         "weekDays": {
           "type": "array",
-          "description":"The week days of recurrence schedule.",
+          "description": "The week days of recurrence schedule.",
           "items": {
             "enum": [
               "Sunday",
@@ -5092,7 +5092,7 @@
         },
         "monthDays": {
           "type": "array",
-          "description":"month days of recurrence schedule.",
+          "description": "month days of recurrence schedule.",
           "items": {
             "format": "int32",
             "type": "integer"
@@ -5100,7 +5100,7 @@
         },
         "monthlyOccurrences": {
           "type": "array",
-          "description":"The monthly occurrences of recurrence schedule.",
+          "description": "The monthly occurrences of recurrence schedule.",
           "items": {
             "$ref": "#/definitions/RecurrenceScheduleOccurrence"
           }
@@ -5119,7 +5119,7 @@
             "Hour"
           ],
           "type": "string",
-          "description":"The frequency of trigger recurrence.",
+          "description": "The frequency of trigger recurrence.",
           "x-ms-enum": {
             "name": "TriggerFrequency",
             "modelAsString": true
@@ -5128,17 +5128,17 @@
         "interval": {
           "format": "int32",
           "type": "integer",
-          "description":"The interval of trigger recurrence."
+          "description": "The interval of trigger recurrence."
         },
         "startTime": {
           "format": "date-time",
           "type": "string",
-          "description":"The start time of trigger recurrence."
+          "description": "The start time of trigger recurrence."
         },
         "endTime": {
           "format": "date-time",
           "type": "string",
-          "description":"The end time of trigger recurrence."
+          "description": "The end time of trigger recurrence."
         },
         "schedule": {
           "allOf": [
@@ -5146,11 +5146,11 @@
               "$ref": "#/definitions/RecurrenceSchedule"
             }
           ],
-          "description":"The schedule of trigger recurrence."
+          "description": "The schedule of trigger recurrence."
         },
         "timeZone": {
           "type": "string",
-          "description":"The time zone of trigger recurrence."
+          "description": "The time zone of trigger recurrence."
         }
       }
     },
@@ -5164,28 +5164,28 @@
               "$ref": "#/definitions/TriggerRecurrence"
             }
           ],
-          "description":"The recurrence of trigger."
+          "description": "The recurrence of trigger."
         },
         "recurrenceInterval": {
           "type": "string",
-          "description":"The recurrence interval of trigger."
+          "description": "The recurrence interval of trigger."
         },
         "createdAt": {
           "format": "date-time",
           "type": "string",
-          "description":"The create time of trigger.",
+          "description": "The create time of trigger.",
           "readOnly": true
         },
         "lastModifiedAt": {
           "format": "date-time",
           "type": "string",
-          "description":"The last modified time of trigger.",
+          "description": "The last modified time of trigger.",
           "readOnly": true
         },
         "lastScheduled": {
           "format": "date-time",
           "type": "string",
-          "description":"The last scheduled time of trigger.",
+          "description": "The last scheduled time of trigger.",
           "readOnly": true
         },
         "state": {
@@ -5195,7 +5195,7 @@
             "Disabled"
           ],
           "type": "string",
-          "description":"The state of trigger.",
+          "description": "The state of trigger.",
           "x-ms-enum": {
             "name": "TriggerState",
             "modelAsString": true
@@ -5207,7 +5207,7 @@
             "Incremental"
           ],
           "type": "string",
-          "description":"The scan level of trigger.",
+          "description": "The scan level of trigger.",
           "x-ms-enum": {
             "name": "ScanLevelType",
             "modelAsString": true
@@ -5216,7 +5216,7 @@
         "incrementalScanStartTime": {
           "format": "date-time",
           "type": "string",
-          "description":"The incremental scan start time of trigger."
+          "description": "The incremental scan start time of trigger."
         }
       }
     },
@@ -5235,11 +5235,11 @@
               "$ref": "#/definitions/TriggerProperties"
             }
           ],
-          "description":"The properties of trigger."
+          "description": "The properties of trigger."
         },
         "validationErrorInfo": {
           "type": "string",
-          "description":"The validation error info of trigger."
+          "description": "The validation error info of trigger."
         }
       }
     },
@@ -5250,16 +5250,16 @@
         "lastModifiedAt": {
           "format": "date-time",
           "type": "string",
-          "description":"The last modified time of collection reference.",
+          "description": "The last modified time of collection reference.",
           "readOnly": true
         },
         "referenceName": {
           "type": "string",
-          "description":"The reference name of collection reference."
+          "description": "The reference name of collection reference."
         },
         "type": {
           "type": "string",
-          "description":"The type of collection reference."
+          "description": "The type of collection reference."
         }
       }
     },
@@ -5273,12 +5273,12 @@
         "version": {
           "format": "int32",
           "type": "integer",
-          "description":"The version of system classification rule.",
+          "description": "The version of system classification rule.",
           "readOnly": true
         },
         "classificationName": {
           "type": "string",
-          "description":"The classification name of system classification rule."
+          "description": "The classification name of system classification rule."
         },
         "ruleStatus": {
           "enum": [
@@ -5286,7 +5286,7 @@
             "Disabled"
           ],
           "type": "string",
-          "description":"The rule status of system classification rule.",
+          "description": "The rule status of system classification rule.",
           "x-ms-enum": {
             "name": "ClassificationRuleStatus",
             "modelAsString": true
@@ -5295,13 +5295,13 @@
         "createdAt": {
           "format": "date-time",
           "type": "string",
-          "description":"The create time of system classification rule.",
+          "description": "The create time of system classification rule.",
           "readOnly": true
         },
         "lastModifiedAt": {
           "format": "date-time",
           "type": "string",
-          "description":"The last modified time of system classification rule.",
+          "description": "The last modified time of system classification rule.",
           "readOnly": true
         }
       }
@@ -5337,7 +5337,7 @@
             "Regex"
           ],
           "type": "string",
-          "description":"The properties of classification rule pattern.",
+          "description": "The properties of classification rule pattern.",
           "x-ms-enum": {
             "name": "ClassificationRulePatternType",
             "modelAsString": true
@@ -5369,14 +5369,14 @@
         },
         "dataPatterns": {
           "type": "array",
-          "description":"The data patterns of custom classification rule.",
+          "description": "The data patterns of custom classification rule.",
           "items": {
             "$ref": "#/definitions/ClassificationRulePattern"
           }
         },
         "columnPatterns": {
           "type": "array",
-          "description":"The column patterns of custom classification rule.",
+          "description": "The column patterns of custom classification rule.",
           "items": {
             "$ref": "#/definitions/ClassificationRulePattern"
           }
@@ -5387,12 +5387,12 @@
         "version": {
           "format": "int32",
           "type": "integer",
-          "description":"The version of custom classification rule.",
+          "description": "The version of custom classification rule.",
           "readOnly": true
         },
         "classificationName": {
           "type": "string",
-          "description":"The classification name of custom classification rule."
+          "description": "The classification name of custom classification rule."
         },
         "ruleStatus": {
           "enum": [
@@ -5400,7 +5400,7 @@
             "Disabled"
           ],
           "type": "string",
-          "description":"The rule status of custom classification rule.",
+          "description": "The rule status of custom classification rule.",
           "x-ms-enum": {
             "name": "ClassificationRuleStatus",
             "modelAsString": true
@@ -5409,13 +5409,13 @@
         "createdAt": {
           "format": "date-time",
           "type": "string",
-          "description":"The create time of custom classification rule.",
+          "description": "The create time of custom classification rule.",
           "readOnly": true
         },
         "lastModifiedAt": {
           "format": "date-time",
           "type": "string",
-          "description":"The last modified time of custom classification rule.",
+          "description": "The last modified time of custom classification rule.",
           "readOnly": true
         }
       }
@@ -5450,7 +5450,7 @@
       "properties": {
         "pattern": {
           "type": "string",
-          "description":"The pattern of regex classification rule pattern."
+          "description": "The pattern of regex classification rule pattern."
         }
       },
       "x-ms-discriminator-value": "Regex"
@@ -5460,11 +5460,11 @@
       "properties": {
         "referenceName": {
           "type": "string",
-          "description":"The reference name of store."
+          "description": "The reference name of store."
         },
         "type": {
           "type": "string",
-          "description":"The type of store."
+          "description": "The type of store."
         }
       }
     },
@@ -5474,15 +5474,15 @@
       "properties": {
         "type": {
           "type": "string",
-          "description":"The type of key vault secret."
+          "description": "The type of key vault secret."
         },
         "secretName": {
           "type": "string",
-          "description":"The secret name of key vault secret."
+          "description": "The secret name of key vault secret."
         },
         "secretVersion": {
           "type": "string",
-          "description":"The secret version of key vault secret."
+          "description": "The secret version of key vault secret."
         },
         "store": {
           "allOf": [
@@ -5503,7 +5503,7 @@
               "$ref": "#/definitions/KeyVaultSecret"
             }
           ],
-          "description":"The account key of key vault secret account key credential type."
+          "description": "The account key of key vault secret account key credential type."
         }
       }
     },
@@ -5517,7 +5517,7 @@
               "$ref": "#/definitions/KeyVaultSecretAccountKeyCredentialTypeProperties"
             }
           ],
-          "description":"The type properties of account key credential."
+          "description": "The type properties of account key credential."
         },
         "description": {
           "type": "string"
@@ -5539,7 +5539,7 @@
               "$ref": "#/definitions/AccountKeyCredentialProperties"
             }
           ],
-          "description":"The properties of account key auth azure key vault credential."
+          "description": "The properties of account key auth azure key vault credential."
         }
       },
       "x-ms-discriminator-value": "AccountKey"
@@ -5557,7 +5557,7 @@
               "$ref": "#/definitions/KeyVaultSecret"
             }
           ],
-          "description":"The password of key vault secret user pass credential type."
+          "description": "The password of key vault secret user pass credential type."
         }
       }
     },
@@ -5592,7 +5592,7 @@
               "$ref": "#/definitions/UserPassCredentialProperties"
             }
           ],
-          "description":"The properties of basic auth azure key vault credential."
+          "description": "The properties of basic auth azure key vault credential."
         }
       },
       "x-ms-discriminator-value": "BasicAuth"
@@ -5602,7 +5602,7 @@
       "properties": {
         "roleARN": {
           "type": "string",
-          "description":"The role ARN of role ARN credential type properties."
+          "description": "The role ARN of role ARN credential type properties."
         }
       }
     },
@@ -5645,7 +5645,7 @@
       "properties": {
         "servicePrincipalId": {
           "type": "string",
-          "description":"The service principal ID of key vault secret service principal credential type properties."
+          "description": "The service principal ID of key vault secret service principal credential type properties."
         },
         "servicePrincipalKey": {
           "allOf": [
@@ -5724,11 +5724,11 @@
               "$ref": "#/definitions/KeyVaultSecret"
             }
           ],
-          "description":"The password of key vault secret consumer key credential type properties."
+          "description": "The password of key vault secret consumer key credential type properties."
         },
         "consumerKey": {
           "type": "string",
-          "description":"The consumer key of key vault secret consumer key credential type properties."
+          "description": "The consumer key of key vault secret consumer key credential type properties."
         },
         "consumerSecret": {
           "allOf": [
@@ -5736,7 +5736,7 @@
               "$ref": "#/definitions/KeyVaultSecret"
             }
           ],
-          "description":"The consumer secret of key vault secret consumer key credential type properties."
+          "description": "The consumer secret of key vault secret consumer key credential type properties."
         }
       }
     },
@@ -5752,7 +5752,7 @@
         },
         "description": {
           "type": "string",
-          "description":"description of credential properties."
+          "description": "description of credential properties."
         }
       }
     },
@@ -5790,7 +5790,7 @@
               "$ref": "#/definitions/KeyVaultSecret"
             }
           ],
-          "description":"key vault secret"
+          "description": "key vault secret"
         }
       }
     },
@@ -5803,7 +5803,7 @@
               "$ref": "#/definitions/KeyVaultSecretDelegatedAuthCredentialTypeProperties"
             }
           ],
-          "description":"The type properties of delegated auth credential."
+          "description": "The type properties of delegated auth credential."
         },
         "description": {
           "type": "string"
@@ -5825,7 +5825,7 @@
               "$ref": "#/definitions/DelegatedAuthCredentialProperties"
             }
           ],
-          "description":"The properties of delegated auth azure key vault credential."
+          "description": "The properties of delegated auth azure key vault credential."
         }
       },
       "x-ms-discriminator-value": "DelegatedAuth"
@@ -5835,15 +5835,15 @@
       "properties": {
         "principalId": {
           "type": "string",
-          "description":"The principal ID of key vault secret managed identity azure key vault credential type properties."
+          "description": "The principal ID of key vault secret managed identity azure key vault credential type properties."
         },
         "tenantId": {
           "type": "string",
-          "description":"The tenant ID of key vault secret managed identity azure key vault credential type properties."
+          "description": "The tenant ID of key vault secret managed identity azure key vault credential type properties."
         },
         "resourceId": {
           "type": "string",
-          "description":"The resource ID of key vault secret managed identity azure key vault credential type properties."
+          "description": "The resource ID of key vault secret managed identity azure key vault credential type properties."
         }
       }
     },
@@ -5856,7 +5856,7 @@
               "$ref": "#/definitions/KeyVaultSecretManagedIdentityAzureKeyVaultCredentialTypeProperties"
             }
           ],
-          "description":"The type properties of managed identity azure key vault credential."
+          "description": "The type properties of managed identity azure key vault credential."
         },
         "description": {
           "type": "string"
@@ -5878,7 +5878,7 @@
               "$ref": "#/definitions/ManagedIdentityAzureKeyVaultCredentialProperties"
             }
           ],
-          "description":"The properties of managed identity azure key vault credential."
+          "description": "The properties of managed identity azure key vault credential."
         }
       },
       "x-ms-discriminator-value": "ManagedIdentity"
@@ -5890,13 +5890,13 @@
         "createdAt": {
           "format": "date-time",
           "type": "string",
-          "description":"The create time of data source.",
+          "description": "The create time of data source.",
           "readOnly": true
         },
         "lastModifiedAt": {
           "format": "date-time",
           "type": "string",
-          "description":"The last modified time of data source.",
+          "description": "The last modified time of data source.",
           "readOnly": true
         },
         "collection": {
@@ -5913,7 +5913,7 @@
             "Failed"
           ],
           "type": "string",
-          "description":"data source collection moving state",
+          "description": "data source collection moving state",
           "x-ms-enum": {
             "name": "DataSourceCollectionState",
             "modelAsString": true
@@ -5932,11 +5932,11 @@
       "properties": {
         "subscriptionId": {
           "type": "string",
-          "description":"The subscription ID of azure subscription."
+          "description": "The subscription ID of azure subscription."
         },
         "resourceId": {
           "type": "string",
-          "description":"The resource ID of azure subscription."
+          "description": "The resource ID of azure subscription."
         },
         "dataUseGovernance": {
           "enum": [
@@ -5946,7 +5946,7 @@
             "EnabledAtAncestorScope"
           ],
           "type": "string",
-          "description":"The data use governance of azure subscription.",
+          "description": "The data use governance of azure subscription.",
           "x-ms-enum": {
             "name": "DataUseGovernanceState",
             "modelAsString": true
@@ -5969,7 +5969,7 @@
               "$ref": "#/definitions/AzureSubscriptionProperties"
             }
           ],
-          "description":"azure subscription properties"
+          "description": "azure subscription properties"
         }
       },
       "x-ms-discriminator-value": "AzureSubscription"
@@ -5984,15 +5984,15 @@
       "properties": {
         "subscriptionId": {
           "type": "string",
-          "description":"subscription id"
+          "description": "subscription id"
         },
         "resourceGroup": {
           "type": "string",
-          "description":"resource group"
+          "description": "resource group"
         },
         "resourceId": {
           "type": "string",
-          "description":"resource id"
+          "description": "resource id"
         },
         "dataUseGovernance": {
           "enum": [
@@ -6002,7 +6002,7 @@
             "EnabledAtAncestorScope"
           ],
           "type": "string",
-          "description":"data use governance",
+          "description": "data use governance",
           "x-ms-enum": {
             "name": "DataUseGovernanceState",
             "modelAsString": true
@@ -6024,7 +6024,7 @@
               "$ref": "#/definitions/AzureResourceGroupProperties"
             }
           ],
-          "description":"azure resource group properties"
+          "description": "azure resource group properties"
         }
       },
       "x-ms-discriminator-value": "AzureResourceGroup"
@@ -6039,23 +6039,23 @@
       "properties": {
         "resourceGroup": {
           "type": "string",
-          "description":"resource group"
+          "description": "resource group"
         },
         "subscriptionId": {
           "type": "string",
-          "description":"subscription id"
+          "description": "subscription id"
         },
         "location": {
           "type": "string",
-          "description":"location"
+          "description": "location"
         },
         "resourceName": {
           "type": "string",
-          "description":"resource name"
+          "description": "resource name"
         },
         "resourceId": {
           "type": "string",
-          "description":"resource id"
+          "description": "resource id"
         },
         "dataUseGovernance": {
           "enum": [
@@ -6065,7 +6065,7 @@
             "EnabledAtAncestorScope"
           ],
           "type": "string",
-          "description":"data use governance",
+          "description": "data use governance",
           "x-ms-enum": {
             "name": "DataUseGovernanceState",
             "modelAsString": true
@@ -6075,7 +6075,7 @@
     },
     "AzureSynapseWorkspaceProperties": {
       "type": "object",
-      "description":"Azure synapse workspace data source properties.",
+      "description": "Azure synapse workspace data source properties.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6084,17 +6084,17 @@
       "properties": {
         "dedicatedSqlEndpoint": {
           "type": "string",
-          "description":"The dedicated SQL endpoint of azure synapse workspace."
+          "description": "The dedicated SQL endpoint of azure synapse workspace."
         },
         "serverlessSqlEndpoint": {
           "type": "string",
-          "description":"The serverless SQL endpoint of azure synapse workspace."
+          "description": "The serverless SQL endpoint of azure synapse workspace."
         }
       }
     },
     "AzureSynapseWorkspaceDataSource": {
       "type": "object",
-      "description":"Azure synapse workspace data source.",
+      "description": "Azure synapse workspace data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6107,14 +6107,14 @@
               "$ref": "#/definitions/AzureSynapseWorkspaceProperties"
             }
           ],
-          "description":"azure synapse workspace properties"
+          "description": "azure synapse workspace properties"
         }
       },
       "x-ms-discriminator-value": "AzureSynapseWorkspace"
     },
     "AzureSynapseProperties": {
       "type": "object",
-      "description":"Azure synapse data source properties.",
+      "description": "Azure synapse data source properties.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6123,17 +6123,17 @@
       "properties": {
         "sqlEndpoint": {
           "type": "string",
-          "description":"The SQL endpoint of azure synapse."
+          "description": "The SQL endpoint of azure synapse."
         },
         "sqlOnDemandEndpoint": {
           "type": "string",
-          "description":"The SQL on demand endpoint of azure synapse."
+          "description": "The SQL on demand endpoint of azure synapse."
         }
       }
     },
     "AzureSynapseDataSource": {
       "type": "object",
-      "description":"Azure synapse data source.",
+      "description": "Azure synapse data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6146,14 +6146,14 @@
               "$ref": "#/definitions/AzureSynapseProperties"
             }
           ],
-          "description":"azure synapse properties"
+          "description": "azure synapse properties"
         }
       },
       "x-ms-discriminator-value": "AzureSynapse"
     },
     "AdlsGen1Properties": {
       "type": "object",
-      "description":"The properties of adls gen1.",
+      "description": "The properties of adls gen1.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6162,13 +6162,13 @@
       "properties": {
         "endpoint": {
           "type": "string",
-          "description":"The endpoint of adls gen1."
+          "description": "The endpoint of adls gen1."
         }
       }
     },
     "AdlsGen1DataSource": {
       "type": "object",
-      "description":"The adls gen1 data source.",
+      "description": "The adls gen1 data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6181,14 +6181,14 @@
               "$ref": "#/definitions/AdlsGen1Properties"
             }
           ],
-          "description":"The properties of adls gen1."
+          "description": "The properties of adls gen1."
         }
       },
       "x-ms-discriminator-value": "AdlsGen1"
     },
     "AdlsGen2Properties": {
       "type": "object",
-      "description":"The properties of adls gen2.",
+      "description": "The properties of adls gen2.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6198,12 +6198,12 @@
         "endpoint": {
           "type": "string"
         },
-        "description":"The endpoint of adls gen2."
+        "description": "The endpoint of adls gen2."
       }
     },
     "AdlsGen2DataSource": {
       "type": "object",
-      "description":"The adls gen2 data source.",
+      "description": "The adls gen2 data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6216,7 +6216,7 @@
               "$ref": "#/definitions/AdlsGen2Properties"
             }
           ],
-          "description":"The properties of adls gen2."
+          "description": "The properties of adls gen2."
         }
       },
       "x-ms-discriminator-value": "AdlsGen2"
