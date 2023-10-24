@@ -1086,26 +1086,16 @@
       "type": "object",
       "description": "Properties that define a Network Security Perimeter resource.",
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Azure resource name",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties that define a Network Security Perimeter resource.",
           "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties"
-        }
+        },
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          }
+        ]
       },
       "x-ms-azure-resource": true
     },
