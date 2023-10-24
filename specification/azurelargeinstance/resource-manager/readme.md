@@ -84,6 +84,7 @@ These set of linting rules aren't applicable to the AzureLargeInstance RP so sup
 ``` yaml
 suppressions:
   - code: TrackedResourcesMustHavePut
+    from: Microsoft.AzureLargeInstance/preview/2023-07-20-preview/azurelargeinstance.json
     reason: All PUT actions are carried out internally by our specialized team utilizing Geneva actions. This process is not currently available for external use.
     where:
       - $definitions.AzureLargeInstance
