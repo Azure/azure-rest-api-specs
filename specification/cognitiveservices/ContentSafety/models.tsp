@@ -401,7 +401,7 @@ model TextCustomizedCategory {
 
   preDefinedConcepts?: PreDefinedConcept[];
   labelDefinitions: LabelDefinition[];
-  emphasis?: string[];
+  emphases?: string[];
   exampleBlobUrl?: url;
 }
 
