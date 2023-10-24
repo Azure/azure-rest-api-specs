@@ -329,6 +329,10 @@
       "type": "object",
       "description": "environment properties",
       "properties": {
+        "naming": {
+          "type": "string",
+          "description": "Target environment/Cluster name"
+        },
         "modelEnvironment": {
           "type": "string",
           "description": "Source environment/Cluster model"
@@ -347,18 +351,38 @@
           "readOnly": true
         },
         "enlistmentType": {
-          "type": "string",
-          "description": "Indicate APGold or PFGold.",
-          "enum": [
-            "APGold",
-            "PFGold"
-          ]
+          "$ref": "#/definitions/environmentEnlistmentType",
+          "description": "Indicate APGold or PFGold."
         },
         "provisioningState": {
           "$ref": "#/definitions/environmentProvisioningState",
           "description": "Provisioning state",
           "readOnly": true
         }
+      }
+    },
+    "environmentEnlistmentType": {
+      "type": "string",
+      "description": "Indicate APGold or PFGold",
+      "enum": [
+        "APGold",
+        "PFGold"
+      ],
+      "x-ms-enum": {
+        "name": "environmentEnlistmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "APGold",
+            "value": "APGold",
+            "description": "Indicate type ype is APGold"
+          },
+          {
+            "name": "PFGold",
+            "value": "PFGold",
+            "description": "Indicate type ype is PFGold"
+          }
+        ]
       }
     },
     "environmentMode": {
@@ -375,12 +399,12 @@
           {
             "name": "Basic",
             "value": "Basic",
-            "description": "Basic"
+            "description": "Clone basic file"
           },
           {
             "name": "All",
             "value": "All",
-            "description": "All"
+            "description": "Clone customer config file"
           }
         ]
       }

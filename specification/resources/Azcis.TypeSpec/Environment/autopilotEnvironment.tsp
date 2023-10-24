@@ -13,6 +13,9 @@ namespace Microsoft.AzureCIS;
 
 @doc("environment properties")
 model EnvironmentResourceProperties {
+  @doc("Target environment/Cluster name")
+  naming?: string;
+
   @doc("Source environment/Cluster model")
   modelEnvironment?: string;
 
@@ -27,7 +30,7 @@ model EnvironmentResourceProperties {
   mode?: environmentMode;
 
   @doc("Indicate APGold or PFGold.")
-  enlistmentType?: "APGold" | "PFGold";
+  enlistmentType?: environmentEnlistmentType;
 
   @doc("Provisioning state")
   @visibility("read")
@@ -65,8 +68,16 @@ enum environmentProvisioningState {
 
 @doc("Basic or All Mode indicate clone customer config file or just basic file")
 enum environmentMode {
-  @doc("Basic")
+  @doc("Clone basic file")
   Basic,
-  @doc("All")
-  All
+  @doc("Clone customer config file")
+  All,
+}
+
+@doc("Indicate APGold or PFGold")
+enum environmentEnlistmentType {
+  @doc("Indicate type ype is APGold")
+  APGold,
+  @doc("Indicate type ype is PFGold")
+  PFGold,
 }
