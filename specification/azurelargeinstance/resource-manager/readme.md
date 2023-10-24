@@ -85,7 +85,7 @@ These set of linting rules aren't applicable to the AzureLargeInstance RP so sup
 suppressions:
   - code: TrackedResourcesMustHavePut
     where:
-      - $definitions.AzureLargeInstance
-      - $definitions.AzureLargeStorageInstance
+      - $.definitions.AzureLargeInstance
+      - $.definitions.AzureLargeStorageInstance
     reason: All PUT actions are carried out internally by our specialized team utilizing Geneva actions. This process is not currently available for external use.
 ```
