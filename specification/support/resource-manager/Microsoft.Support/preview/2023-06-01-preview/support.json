@@ -43,7 +43,7 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -79,7 +79,7 @@
         "operationId": "Services_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -115,14 +115,10 @@
         "operationId": "Services_Get",
         "parameters": [
           {
-            "name": "serviceName",
-            "in": "path",
-            "description": "Name of the Azure service.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -146,6 +142,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Support/services/{serviceName}/classifyProblems": {
+      "post": {
+        "tags": [
+          "ProblemClassifications"
+        ],
+        "description": "Classify the right problem classifications (categories) available for a specific Azure service. ",
+        "operationId": "ProblemClassifications_classifyProblems",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "problemClassificationsClassificationInput",
+            "in": "body",
+            "description": "Input to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProblemClassificationsClassificationInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully classified list of problem classifications for the specified Azure service.",
+            "schema": {
+              "$ref": "#/definitions/ProblemClassificationsClassificationOutput"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Classify list of problemClassifications for a specified Azure service": {
+            "$ref": "./examples/ClassifyProblemClassifications.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Support/services/{serviceName}/problemClassifications": {
       "get": {
         "tags": [
@@ -162,7 +206,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -198,21 +242,13 @@
         "operationId": "ProblemClassifications_Get",
         "parameters": [
           {
-            "name": "serviceName",
-            "in": "path",
-            "description": "Name of the Azure service available for support.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServiceNameParameter"
           },
           {
-            "name": "problemClassificationName",
-            "in": "path",
-            "description": "Name of problem classification.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ProblemClassificationNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -244,7 +280,7 @@
         "description": "Check the availability of a resource name. This API should be used to check the uniqueness of the name for support ticket creation for the selected subscription.",
         "operationId": "SupportTickets_CheckNameAvailability",
         "x-ms-examples": {
-          "Checks whether name is available for SupportTicket resource": {
+          "Checks whether name is available for subscription scoped SupportTicket resource": {
             "$ref": "./examples/CheckNameAvailabilityWithSubscription.json"
           }
         },
@@ -262,7 +298,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -304,7 +340,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -350,7 +386,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -419,7 +455,7 @@
             "description": "The filter to apply on the operation. We support 'odata v4.0' filter semantics. <a target='_blank' href='https://docs.microsoft.com/odata/concepts/queryoptions-overview'>Learn more</a> <br/><i>Status</i> , <i>ServiceId</i>, and <i>ProblemClassificationId</i> filters can only be used with 'eq' operator. For <i>CreatedDate</i> filter, the supported operators are 'gt' and 'ge'. When using both filters, combine them using the logical 'AND'."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -440,25 +476,25 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List support tickets for a subscription": {
+          "List support tickets": {
             "$ref": "./examples/ListSupportTickets.json"
           },
-          "List support tickets in open state for a subscription": {
+          "List support tickets in open state": {
             "$ref": "./examples/ListSupportTicketsInOpenState.json"
           },
-          "List support tickets created on or after a certain date and in open state for a subscription": {
+          "List support tickets created on or after a certain date and in open state": {
             "$ref": "./examples/ListSupportTicketsCreatedOnOrAfterAndInOpenState.json"
           },
-          "List support tickets in updating state for a subscription": {
+          "List support tickets in updating state": {
             "$ref": "./examples/ListSupportTicketsInUpdatingState.json"
           },
-          "List support tickets created on or after a certain date and in updating state for a subscription": {
+          "List support tickets created on or after a certain date and in updating state": {
             "$ref": "./examples/ListSupportTicketsCreatedOnOrAfterAndInUpdatingState.json"
           },
-          "List support tickets with a certain service id for a subscription": {
+          "List support tickets with a certain service id": {
             "$ref": "./examples/ListSupportTicketsServiceIdEquals.json"
           },
-          "List support tickets with a certain problem classification id for a subscription": {
+          "List support tickets with a certain problem classification id": {
             "$ref": "./examples/ListSupportTicketsProblemClassificationIdEquals.json"
           }
         }
@@ -473,17 +509,13 @@
         "operationId": "SupportTickets_Get",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -514,11 +546,7 @@
         "operationId": "SupportTickets_Update",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "name": "updateSupportTicket",
@@ -533,7 +561,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -551,13 +579,13 @@
           }
         },
         "x-ms-examples": {
-          "Update severity of a support ticket": {
+          "Update severity of a subscription scoped support ticket": {
             "$ref": "./examples/UpdateSeverityOfSupportTicketForSubscription.json"
           },
-          "Update contact details of a support ticket": {
+          "Update contact details of a subscription scoped support ticket": {
             "$ref": "./examples/UpdateContactDetailsOfSupportTicketForSubscription.json"
           },
-          "Update status of a support ticket": {
+          "Update status of a subscription scoped support ticket": {
             "$ref": "./examples/UpdateStatusOfSupportTicketForSubscription.json"
           },
           "Update advanced diagnostic consent of a support ticket": {
@@ -573,11 +601,7 @@
         "operationId": "SupportTickets_Create",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "name": "createSupportTicketParameters",
@@ -592,7 +616,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -617,13 +641,13 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Create a ticket for Billing related issues": {
+          "Create a subscription scoped ticket for Billing related issues": {
             "$ref": "./examples/CreateBillingSupportTicketForSubscription.json"
           },
-          "Create a ticket for Subscription Management related issues": {
+          "Create a subscription scoped ticket for Subscription Management related issues": {
             "$ref": "./examples/CreateSubMgmtSupportTicketForSubscription.json"
           },
-          "Create a ticket for Technical issue related to a specific resource": {
+          "Create a subscription scoped ticket for Technical issue related to a specific resource": {
             "$ref": "./examples/CreateTechnicalSupportTicketForSubscription.json"
           },
           "Create a ticket to request Quota increase for Compute VM Cores": {
@@ -680,14 +704,10 @@
         "operationId": "SupportTicketsNoSubscription_Get",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -718,11 +738,7 @@
         "operationId": "SupportTicketsNoSubscription_Update",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "name": "updateSupportTicket",
@@ -734,7 +750,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -774,11 +790,7 @@
         "operationId": "SupportTicketsNoSubscription_Create",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "name": "createSupportTicketParameters",
@@ -790,7 +802,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -840,17 +852,13 @@
         "description": "Check the availability of a resource name. This API should be used to check the uniqueness of the name for adding a new communication to the support ticket.",
         "operationId": "Communications_CheckNameAvailability",
         "x-ms-examples": {
-          "Checks whether name is available for Communication resource": {
+          "Checks whether name is available for subscription scoped Communication resource": {
             "$ref": "./examples/CheckNameAvailabilityForSupportTicketCommunication.json"
           }
         },
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "name": "checkNameAvailabilityInput",
@@ -865,7 +873,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -898,11 +906,7 @@
         },
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "name": "checkNameAvailabilityInput",
@@ -914,7 +918,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -942,11 +946,7 @@
         "operationId": "Communications_List",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "name": "$top",
@@ -967,7 +967,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1009,11 +1009,7 @@
         "operationId": "SupportTicketCommunicationsNoSubscription_List",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "name": "$top",
@@ -1031,7 +1027,7 @@
             "description": "The filter to apply on the operation. You can filter by communicationType and createdDate properties. CommunicationType supports Equals ('eq') operator and createdDate supports Greater Than ('gt') and Greater Than or Equals ('ge') operators. You may combine the CommunicationType and CreatedDate filters by Logical And ('and') operator."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1073,11 +1069,7 @@
         "operationId": "Communications_Get",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "name": "communicationName",
@@ -1090,7 +1082,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1121,11 +1113,7 @@
         "operationId": "Communications_Create",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "name": "communicationName",
@@ -1147,7 +1135,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1187,11 +1175,7 @@
         "operationId": "CommunicationsNoSubscription_Get",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "name": "communicationName",
@@ -1201,7 +1185,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1232,11 +1216,7 @@
         "operationId": "CommunicationsNoSubscription_Create",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "name": "communicationName",
@@ -1255,7 +1235,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1300,17 +1280,13 @@
         "operationId": "ChatTranscripts_List",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1331,7 +1307,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List communications for a subscription support ticket": {
+          "List chat transcripts for a subscription support ticket": {
             "$ref": "./examples/ListChatTranscriptsForSubscriptionSupportTicket.json"
           }
         }
@@ -1346,14 +1322,10 @@
         "operationId": "SupportTicketChatTranscriptsNoSubscription_List",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1389,11 +1361,7 @@
         "operationId": "ChatTranscripts_Get",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "name": "chatTranscriptName",
@@ -1406,7 +1374,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1439,11 +1407,7 @@
         "operationId": "ChatTranscriptsNoSubscription_Get",
         "parameters": [
           {
-            "name": "supportTicketName",
-            "in": "path",
-            "description": "Support ticket name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SupportTicketNameParameter"
           },
           {
             "name": "chatTranscriptName",
@@ -1453,7 +1417,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1496,7 +1460,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1538,7 +1502,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1556,7 +1520,7 @@
           }
         },
         "x-ms-examples": {
-          "Create a file workspace": {
+          "Create a subscription scoped file workspace": {
             "$ref": "./examples/CreateFileWorkspaceForSubscription.json"
           }
         }
@@ -1578,7 +1542,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1617,7 +1581,7 @@
             "pattern": "^[0-9a-zA-Z_\\-. ]+$"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1660,7 +1624,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1703,7 +1667,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1756,7 +1720,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1814,7 +1778,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1832,7 +1796,7 @@
           }
         },
         "x-ms-examples": {
-          "Create a file workspace": {
+          "Create a subscription scoped file": {
             "$ref": "./examples/CreateFileForSubscription.json"
           }
         }
@@ -1861,7 +1825,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1916,7 +1880,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1975,7 +1939,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -2028,7 +1992,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -2155,6 +2119,76 @@
           "items": {
             "type": "string"
           }
+        },
+        "metadata": {
+          "description": "Metadata about the service, only visible for 1P clients",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProblemClassificationsClassificationResult": {
+      "description": "ProblemClassification Classification result object.",
+      "type": "object",
+      "properties": {
+        "problemId": {
+          "description": "Identifier that may be used for solution discovery or some other purposes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "title": {
+          "description": "Title of the problem classification result.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description of the problem classification result.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceId": {
+          "description": "Identifier of the service associated with this problem classification result.",
+          "type": "string",
+          "readOnly": true
+        },
+        "problemClassificationId": {
+          "description": "Identifier that may be used for support ticket creation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProblemClassificationsClassificationInput": {
+      "description": "Input to problem classification Classification API.",
+      "type": "object",
+      "required": [
+        "issueSummary"
+      ],
+      "properties": {
+        "issueSummary": {
+          "description": "Natural language description of the customer’s issue.",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "ARM resource Id of the resource that is having the issue.",
+          "type": "string",
+          "format": "arm-id"
+        }
+      }
+    },
+    "ProblemClassificationsClassificationOutput": {
+      "description": "Output of the problem classification Classification API.",
+      "type": "object",
+      "properties": {
+        "problemClassificationResults": {
+          "description": "Set of problem classification objects classified.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/ProblemClassificationsClassificationResult"
+          }
         }
       }
     },
@@ -2212,6 +2246,17 @@
             "$ref": "#/definitions/SecondaryConsentEnabled"
           },
           "x-ms-identifiers": []
+        },
+        "metadata": {
+          "description": "String-to-string dictionary for additional metadata.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "ParentProblemClassification": {
+          "description": "Reference to the parent problem classification which has same structure as problemclassification",
+          "$ref": "#/definitions/ProblemClassification"
         }
       }
     },
@@ -3060,12 +3105,26 @@
       "type": "string",
       "description": "Azure subscription Id."
     },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
+    "ServiceNameParameter": {
+      "name": "serviceName",
+      "in": "path",
+      "description": "Name of the Azure service for which the problem classifications need to be retrieved.",
       "required": true,
-      "type": "string",
-      "description": "API version."
+      "type": "string"
+    },
+    "ProblemClassificationNameParameter": {
+      "name": "problemClassificationName",
+      "in": "path",
+      "description": "Name of problem classification.",
+      "required": true,
+      "type": "string"
+    },
+    "SupportTicketNameParameter": {
+      "name": "supportTicketName",
+      "in": "path",
+      "description": "Support ticket name.",
+      "required": true,
+      "type": "string"
     }
   }
 }
