@@ -1236,14 +1236,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/integrationRuntimeName"
+            "$ref": "#/parameters/integrationRuntimeName",
+            "description": "The name of the integration runtime to retrieve."
           },
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IntegrationRuntimeRegenerateKeyParameters"
+              "$ref": "#/definitions/IntegrationRuntimeRegenerateKeyParameters",
+              "description": "The request of regenerating auth key for integration runtime."
             }
           },
           {
@@ -1283,7 +1285,8 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/integrationRuntimeName"
+            "$ref": "#/parameters/integrationRuntimeName",
+            "description": "The name of the integration runtime to retrieve."
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1689,13 +1692,15 @@
             "in": "path",
             "name": "dataSourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": " data source name"
           },
           {
             "in": "path",
             "name": "scanName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "scan name"
           },
           {
             "in": "body",
@@ -1703,7 +1708,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/Scan"
-            }
+            },
+            "description": "The scan definition."
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1749,13 +1755,15 @@
             "in": "path",
             "name": "dataSourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "data source name"
           },
           {
             "in": "path",
             "name": "scanName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "scan name"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1795,13 +1803,15 @@
             "in": "path",
             "name": "dataSourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "data source name"
           },
           {
             "in": "path",
             "name": "scanName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "scan name"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1840,7 +1850,8 @@
             "in": "path",
             "name": "dataSourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "data source name"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1885,24 +1896,28 @@
             "in": "path",
             "name": "dataSourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "data source name"
           },
           {
             "in": "path",
             "name": "scanName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "scan name"
           },
           {
             "in": "path",
             "name": "runId",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "run id"
           },
           {
             "in": "query",
             "name": "scanLevel",
             "type": "string",
+            "description": "scan level",
             "enum": [
               "Full",
               "Incremental"
@@ -1951,19 +1966,22 @@
             "in": "path",
             "name": "dataSourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "data source name"
           },
           {
             "in": "path",
             "name": "scanName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "scan name"
           },
           {
             "in": "path",
             "name": "runId",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "run id"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2005,19 +2023,22 @@
             "in": "path",
             "name": "dataSourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "data source name"
           },
           {
             "in": "path",
             "name": "scanName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "scan name"
           },
           {
             "in": "path",
             "name": "runId",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "run id"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2060,13 +2081,15 @@
             "in": "path",
             "name": "dataSourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "data source name"
           },
           {
             "in": "path",
             "name": "scanName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "scan name"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2111,7 +2134,8 @@
             "in": "path",
             "name": "scanRulesetName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "scan ruleset name"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2154,7 +2178,8 @@
             "in": "path",
             "name": "scanRulesetName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "scan ruleset name"
           },
           {
             "in": "body",
@@ -2207,7 +2232,8 @@
             "in": "path",
             "name": "scanRulesetName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "scan rule set name"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2325,6 +2351,7 @@
             "name": "dataSourceType",
             "required": true,
             "type": "string",
+            "description": "data source type",
             "enum": [
               "None",
               "AzureSubscription",
@@ -2398,6 +2425,7 @@
             "in": "query",
             "name": "dataSourceType",
             "type": "string",
+            "description": "data source type",
             "enum": [
               "None",
               "AzureSubscription",
@@ -2478,6 +2506,7 @@
             "in": "query",
             "name": "dataSourceType",
             "type": "string",
+            "description": "data source type",
             "enum": [
               "None",
               "AzureSubscription",
@@ -2551,6 +2580,7 @@
             "in": "query",
             "name": "dataSourceType",
             "type": "string",
+            "description": "data source type",
             "enum": [
               "None",
               "AzureSubscription",
@@ -2627,13 +2657,15 @@
             "in": "path",
             "name": "dataSourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "data source name"
           },
           {
             "in": "path",
             "name": "scanName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "scan name"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2676,13 +2708,15 @@
             "in": "path",
             "name": "dataSourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "data source name"
           },
           {
             "in": "path",
             "name": "scanName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "scan name"
           },
           {
             "in": "body",
@@ -2736,13 +2770,15 @@
             "in": "path",
             "name": "dataSourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "data source name"
           },
           {
             "in": "path",
             "name": "scanName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "scan name"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2781,13 +2817,15 @@
             "in": "path",
             "name": "dataSourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "data source name"
           },
           {
             "in": "path",
             "name": "scanName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "scan name"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2829,13 +2867,15 @@
             "in": "path",
             "name": "dataSourceName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "data source name"
           },
           {
             "in": "path",
             "name": "scanName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "scan name"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2987,6 +3027,7 @@
             "Custom"
           ],
           "type": "string",
+          "description": "The kind of classification rule.",
           "x-ms-enum": {
             "name": "ClassificationRuleType",
             "modelAsString": true
@@ -3023,16 +3064,20 @@
       "type": "object",
       "properties": {
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "A unique error code that identifies the specific error."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "A human-readable error message that provides more details about the error."
         },
         "target": {
-          "type": "string"
+          "type": "string",
+          "description": "The specific component that the error is associated with."
         },
         "details": {
           "type": "array",
+          "description": "error info detail",
           "items": {
             "$ref": "#/definitions/ErrorInfo"
           }
@@ -3044,15 +3089,18 @@
       "properties": {
         "scanResultId": {
           "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "description": "The scan result identifier."
         },
         "startTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description": "The start time of the operation."
         },
         "endTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description": "The end time of the operation"
         },
         "status": {
           "enum": [
@@ -3064,6 +3112,7 @@
             "Canceled"
           ],
           "type": "string",
+          "description":"operation status",
           "x-ms-enum": {
             "name": "OperationStatus",
             "modelAsString": true
@@ -3101,6 +3150,7 @@
             "ManagedIdentity"
           ],
           "type": "string",
+          "description":"The kind of credential.",
           "x-ms-enum": {
             "name": "CredentialType",
             "modelAsString": true
@@ -3137,11 +3187,13 @@
       "type": "object",
       "properties": {
         "message": {
-          "type": "string"
+          "type": "string",
+          "description":"notification message"
         },
         "code": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description":"notification code"
         }
       }
     },
@@ -3150,12 +3202,14 @@
       "properties": {
         "notifications": {
           "type": "array",
+          "description":"notifications",
           "items": {
             "$ref": "#/definitions/Notification"
           }
         },
         "exceptionCountMap": {
           "type": "object",
+          "description":"exception count map",
           "additionalProperties": {
             "format": "int32",
             "type": "integer"
@@ -3170,46 +3224,56 @@
         "assetsDiscovered": {
           "format": "int64",
           "type": "integer",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The number of assets discovered."
         },
         "assetsClassified": {
           "format": "int64",
           "type": "integer",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The number of assets classified."
         },
         "queuedTime": {
           "format": "date-time",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The time the scan was queued."
         },
         "pipelineStartTime": {
           "format": "date-time",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The time the scan started."
         },
         "isErrorLogAvailable": {
           "type": "boolean",
-          "readOnly": true
+          "readOnly": true,
+          "description":"Indicates whether the error log is available."
         },
         "parentId": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The parent scan result identifier."
         },
         "ingestionJobId": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The ingestion job identifier."
         },
         "id": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The scan result identifier."
         },
         "resourceId": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The resource identifier."
         },
         "status": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The scan result status."
         },
         "diagnostics": {
           "allOf": [
@@ -3217,22 +3281,26 @@
               "$ref": "#/definitions/ScanDiagnostics"
             }
           ],
-          "readOnly": true
+          "readOnly": true,
+          "description":"The scan diagnostics."
         },
         "startTime": {
           "format": "date-time",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The scan start time."
         },
         "endTime": {
           "format": "date-time",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The scan end time."
         },
         "scanRulesetVersion": {
           "format": "int32",
           "type": "integer",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The scan ruleset version."
         },
         "scanRulesetType": {
           "enum": [
@@ -3240,6 +3308,7 @@
             "System"
           ],
           "type": "string",
+          "description":"The scan ruleset type.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "ScanRulesetType",
@@ -3252,6 +3321,7 @@
             "Incremental"
           ],
           "type": "string",
+          "description":"scan level type",
           "readOnly": true,
           "x-ms-enum": {
             "name": "ScanLevelType",
@@ -3260,7 +3330,8 @@
         },
         "errorMessage": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The error message."
         },
         "error": {
           "allOf": [
@@ -3272,7 +3343,8 @@
         },
         "runType": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The run type."
         },
         "dataSourceType": {
           "enum": [
@@ -3316,6 +3388,7 @@
             "DatabricksUnityCatalog"
           ],
           "type": "string",
+          "description":"The data source type.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "DataSourceType",
@@ -3329,11 +3402,13 @@
       "properties": {
         "discoveryStartTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description":"The discovery start time."
         },
         "discoveryEndTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description":"The discovery end time."
         },
         "status": {
           "enum": [
@@ -3348,6 +3423,7 @@
             "CompleteWithWarning"
           ],
           "type": "string",
+          "description":"The discovery status.",
           "x-ms-enum": {
             "name": "ScanStatus",
             "modelAsString": true
@@ -3355,12 +3431,14 @@
         },
         "statistics": {
           "type": "object",
+          "description":"The discovery statistics.",
           "additionalProperties": {
             "type": "object"
           }
         },
         "isErrorLogAvailable": {
-          "type": "boolean"
+          "type": "boolean",
+          "description":"Indicates whether the error log is available."
         }
       }
     },
@@ -3369,11 +3447,13 @@
       "properties": {
         "ingestionStartTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description":"The ingestion start time."
         },
         "ingestionEndTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description":"The ingestion end time."
         },
         "status": {
           "enum": [
@@ -3388,6 +3468,7 @@
             "Canceling"
           ],
           "type": "string",
+          "description":"The ingestion status.",
           "x-ms-enum": {
             "name": "IngestionPhaseStatus",
             "modelAsString": true
@@ -3395,25 +3476,30 @@
         },
         "statistics": {
           "type": "object",
+          "description":"The ingestion statistics.",
           "additionalProperties": {
             "type": "object"
           }
         },
         "estimatedTimeRemainingInSeconds": {
           "format": "int64",
+          "description":"The estimated time remaining in seconds.",
           "type": "integer"
         },
         "isErrorLogAvailable": {
-          "type": "boolean"
+          "type": "boolean",
+          "description":"Indicates whether the error log is available."
         },
         "lastUpdatedAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "description":"The last updated time."
         }
       }
     },
     "ScanResultWithIngestion": {
       "type": "object",
+      "description":"The scan result with ingestion.",
       "properties": {
         "discoveryExecutionDetails": {
           "allOf": [
@@ -3421,7 +3507,8 @@
               "$ref": "#/definitions/DiscoveryExecutionDetails"
             }
           ],
-          "readOnly": true
+          "readOnly": true,
+          "description":"The discovery execution details."
         },
         "ingestionExecutionDetails": {
           "allOf": [
@@ -3429,26 +3516,32 @@
               "$ref": "#/definitions/IngestionExecutionDetails"
             }
           ],
-          "readOnly": true
+          "readOnly": true,
+          "description":"The ingestion execution details."
         },
         "parentId": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The parent scan result identifier."
         },
         "id": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The scan result identifier."
         },
         "ingestionJobId": {
-          "type": "string"
+          "type": "string",
+          "description":"The ingestion job identifier."
         },
         "resourceId": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The resource identifier."
         },
         "status": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "description":"The scan result status."
         },
         "diagnostics": {
           "allOf": [
@@ -3456,21 +3549,25 @@
               "$ref": "#/definitions/ScanDiagnostics"
             }
           ],
-          "readOnly": true
+          "readOnly": true,
+          "description":"The scan diagnostics."
         },
         "startTime": {
           "format": "date-time",
           "type": "string",
+          "description":"The scan start time.",
           "readOnly": true
         },
         "endTime": {
           "format": "date-time",
           "type": "string",
+          "description":"The scan end time.",
           "readOnly": true
         },
         "scanRulesetVersion": {
           "format": "int32",
           "type": "integer",
+          "description":"The scan ruleset version.",
           "readOnly": true
         },
         "scanRulesetType": {
@@ -3479,6 +3576,7 @@
             "System"
           ],
           "type": "string",
+          "description":"The scan ruleset type.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "ScanRulesetType",
@@ -3491,6 +3589,7 @@
             "Incremental"
           ],
           "type": "string",
+          "description":"scan level type",
           "readOnly": true,
           "x-ms-enum": {
             "name": "ScanLevelType",
@@ -3499,6 +3598,7 @@
         },
         "errorMessage": {
           "type": "string",
+          "description":"The error message.",
           "readOnly": true
         },
         "error": {
@@ -3507,7 +3607,8 @@
               "$ref": "#/definitions/ErrorModel"
             }
           ],
-          "readOnly": true
+          "readOnly": true,
+          "description":"The error."
         },
         "runType": {
           "type": "string",
