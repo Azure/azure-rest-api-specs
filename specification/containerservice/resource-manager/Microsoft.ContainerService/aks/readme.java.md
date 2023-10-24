@@ -12,6 +12,11 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerservice
 title: ContainerServiceManagementClient
 description: "Container Service Client"
+directive:
+  from: managedClusters.json
+  where: "$.definitions.TrustedAccessRoleRule.properties.nonResourceURLs"
+  transform: >
+    $["x-ms-client-name"] = "nonResourceUrls";
 ```
 
 These settings also apply when `--tag=profile-hybrid-2020-09-01` is not specified.
