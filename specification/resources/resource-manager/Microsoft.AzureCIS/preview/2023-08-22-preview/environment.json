@@ -342,18 +342,47 @@
           "description": "Cluster name"
         },
         "mode": {
-          "type": "string",
-          "description": "Basic or All Mode indicate clone customer config file or just basic file"
+          "$ref": "#/definitions/environmentMode",
+          "description": "Basic or All Mode indicate clone customer config file or just basic file",
+          "readOnly": true
         },
         "enlistmentType": {
           "type": "string",
-          "description": "Indicate APGold or PFGold."
+          "description": "Indicate APGold or PFGold.",
+          "enum": [
+            "APGold",
+            "PFGold"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/environmentProvisioningState",
           "description": "Provisioning state",
           "readOnly": true
         }
+      }
+    },
+    "environmentMode": {
+      "type": "string",
+      "description": "Basic or All Mode indicate clone customer config file or just basic file",
+      "enum": [
+        "Basic",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "environmentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic"
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All"
+          }
+        ]
       }
     },
     "environmentProvisioningState": {

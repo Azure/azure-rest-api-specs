@@ -23,10 +23,11 @@ model EnvironmentResourceProperties {
   clusterName?: string;
 
   @doc("Basic or All Mode indicate clone customer config file or just basic file")
-  mode?: string;
+  @visibility("read")
+  mode?: environmentMode;
 
   @doc("Indicate APGold or PFGold.")
-  enlistmentType?: string;
+  enlistmentType?: "APGold" | "PFGold";
 
   @doc("Provisioning state")
   @visibility("read")
@@ -60,4 +61,12 @@ enum environmentProvisioningState {
 
   @doc("Accepted State")
   Accepted,
+}
+
+@doc("Basic or All Mode indicate clone customer config file or just basic file")
+enum environmentMode {
+  @doc("Basic")
+  Basic,
+  @doc("All")
+  All
 }
