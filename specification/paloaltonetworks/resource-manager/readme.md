@@ -30,6 +30,15 @@ openapi-subtype: rpaas
 tag: package-2023-09-01
 ```
 
+
+### Tag: package-2023-10-10-preview
+
+These settings apply only when `--tag=package-2023-10-10-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-10-preview'
+input-file:
+  - PaloAltoNetworks.Cloudngfw/preview/2023-10-10-preview/PaloAltoNetworks.Cloudngfw.json
+```
 ### Tag: package-2022-08-29
 
 These settings apply only when `--tag=package-2022-08-29` is specified on the command line.

@@ -11,11 +11,11 @@ linter:
     - "@azure-tools/typespec-azure-core/all"
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
     examples-directory: examples
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/EventGrid.json"
     omit-unreachable-types: true
+    output-file: "{azure-resource-provider-folder}/Microsoft.EventGrid/{version-status}/{version}/EventGrid.json"
+    azure-resource-provider-folder: "data-plane"
   "@azure-tools/typespec-python":
     package-pprint-name: "\"Azure Event Grid\""
     package-version: 4.12.0b1
