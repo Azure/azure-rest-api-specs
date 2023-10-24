@@ -964,7 +964,7 @@ custom values.
 model ExceptionAction {
   @doc("Unique Id of the exception action")
   @visibility("read")
-  id: string;
+  id?: string;
 
   @doc("The type discriminator describing a sub-type of ExceptionAction")
   kind: string;
