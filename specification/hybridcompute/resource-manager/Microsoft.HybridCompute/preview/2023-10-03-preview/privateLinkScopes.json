@@ -1019,11 +1019,19 @@
         },
         "networkConfigurationScopeId": {
           "type": "string",
-          "description": "Associated Network Configuration Scope Id"
+          "description": "Associated Network Configuration Scope Id (GUID)"
         },
         "networkConfigurationScopeResourceId": {
           "type": "string",
-          "description": "Associated Network Configuration Scope Resource Id"
+          "description": "Associated Network Configuration Scope Resource Id",
+          "format":"arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridCompute/privateLinkScopes"
+              }
+            ]
+          }
         },
         "keyProperties": {
           "description": "Public key information for client authentication",
