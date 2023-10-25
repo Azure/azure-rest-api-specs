@@ -1889,7 +1889,7 @@
       }
     },
     "EnvironmentRecord": {
-      "description": "Record of the environment",
+      "description": "Details about environment name, metadata and environment id of an enviroment",
       "type": "object",
       "properties": {
         "kind": {
@@ -1911,14 +1911,14 @@
       }
     },
     "EnvironmentsList": {
-      "description": "Data of the invitations list",
+      "description": "List of environment records",
       "type": "array",
       "items": {
         "$ref": "#/definitions/EnvironmentRecord"
       }
     },
     "Access_ListEnvironments_SuccessResponse": {
-      "description": "List environments success response",
+      "description": "Details of the environments returned on successful response",
       "type": "object",
       "properties": {
         "kind": {
@@ -1926,11 +1926,11 @@
           "type": "string"
         },
         "metadata": {
-          "description": "Metadata of the list",
+          "description": "Metadata of the  environment list",
           "$ref": "#/definitions/ConfluentListMetadata"
         },
         "data": {
-          "description": "Data of the environments list",
+          "description": "Environment list data",
           "$ref": "#/definitions/EnvironmentsList"
         }
       }
@@ -2077,15 +2077,15 @@
       }
     },
     "ClusterRecord": {
-      "description": "Record of the environment",
+      "description": "Details of cluster record",
       "type": "object",
       "properties": {
         "kind": {
-          "description": "Type of environment",
+          "description": "Type of cluster",
           "type": "string"
         },
         "id": {
-          "description": "Id of the environment",
+          "description": "Id of the cluster",
           "type": "string"
         },
         "metadata": {
@@ -2093,7 +2093,7 @@
           "$ref": "#/definitions/MetadataEntity"
         },
         "display_name": {
-          "description": "Display name of the user",
+          "description": "Display name of the cluster",
           "type": "string"
         },
         "spec": {
@@ -2107,14 +2107,14 @@
       }
     },
     "ClusterList": {
-      "description": "Data of the invitations list",
+      "description": "List of Cluster Records",
       "type": "array",
       "items": {
         "$ref": "#/definitions/ClusterRecord"
       }
     },
     "Access_ListCluster_SuccessResponse": {
-      "description": "List cluster success response",
+      "description": "Details of the clusters returned on successful response",
       "type": "object",
       "properties": {
         "kind": {
@@ -2126,13 +2126,13 @@
           "$ref": "#/definitions/ConfluentListMetadata"
         },
         "data": {
-          "description": "Data of the environments list",
+          "description": "List of clusters",
           "$ref": "#/definitions/ClusterList"
         }
       }
     },
     "RoleBindingRecord": {
-      "description": "Record of the environment",
+      "description": "Details on principal, role name and crn pattern of a role binding",
       "type": "object",
       "properties": {
         "kind": {
@@ -2140,7 +2140,7 @@
           "type": "string"
         },
         "id": {
-          "description": "Id of the role",
+          "description": "Id of the role binding",
           "type": "string"
         },
         "metadata": {
@@ -2162,14 +2162,14 @@
       }
     },
     "RoleBindingList": {
-      "description": "Data of the invitations list",
+      "description": "List of Role Binding records",
       "type": "array",
       "items": {
         "$ref": "#/definitions/RoleBindingRecord"
       }
     },
     "Access_ListRoleBindings_SuccessResponse": {
-      "description": "List role binding success response",
+      "description": "Details of the role bindings returned on successful response",
       "type": "object",
       "properties": {
         "kind": {
@@ -2181,7 +2181,7 @@
           "$ref": "#/definitions/ConfluentListMetadata"
         },
         "data": {
-          "description": "Data of the environments list",
+          "description": "List of role binding",
           "$ref": "#/definitions/RoleBindingList"
         }
       }
@@ -2212,7 +2212,7 @@
       }
     },
     "Access_RoleBindingNameList_SuccessResponse": {
-      "description": "List role binding names success response",
+      "description": "Details of the role binding names returned on successful response",
       "type": "object",
       "properties": {
         "kind": {
