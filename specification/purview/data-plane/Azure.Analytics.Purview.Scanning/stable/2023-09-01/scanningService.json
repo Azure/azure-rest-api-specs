@@ -7978,7 +7978,20 @@
       ],
       "properties": {
         "resourceTypes": {
-          "type": "object",
+          "$ref": "#/definitions/ExpandingResourceScanPropertiesResourceTypes"
+        },
+        "credential": {
+          "items": [
+            {
+              "$ref": "#/definitions/CredentialReference"
+            }
+          ]
+        }
+      }
+    },
+    "ExpandingResourceScanPropertiesResourceTypes": {
+      "type": "object",
+      "description": "Resource types of scan properties in expanding resources",
           "properties": {
             "none": {
               "$ref": "#/definitions/ResourceTypeFilter"
@@ -8059,15 +8072,6 @@
               "$ref": "#/definitions/ResourceTypeFilter"
             }
           }
-        },
-        "credential": {
-          "items": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
-        }
-      }
     },
     "AzureSubscriptionCredentialScanProperties": {
       "type": "object",
