@@ -137,7 +137,7 @@ enum RouterWorkerSelectorStatus {
   expired,
 }
 
-@access(Access.internal, "python")
+@projectedName("python", "_RouterJobStatusSelector")
 @doc("Enums used to filters jobs by state")
 enum RouterJobStatusSelector {
   @doc("Default")
@@ -195,7 +195,7 @@ enum RouterWorkerState {
   inactive,
 }
 
-@access(Access.internal, "python")
+@projectedName("python", "_RouterWorkerStateSelector")
 @doc("Enums used to filters workers by state")
 enum RouterWorkerStateSelector {
   @doc("Worker is active and available to take offers.")
