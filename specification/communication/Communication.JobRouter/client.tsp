@@ -17,7 +17,9 @@ namespace ClientForAcsJobRouter;
 })
 interface JobRouterAdministrationRestClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    @internal("csharp", "java", "python")
+    @internal("csharp")
+    @internal("python")
+    @internal("java")
     upsertDistributionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertDistributionPolicy;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -30,7 +32,9 @@ interface JobRouterAdministrationRestClient {
     deleteDistributionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteDistributionPolicy;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    @internal("csharp", "java", "python")
+    @internal("csharp")
+    @internal("python")
+    @internal("java")
     upsertClassificationPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertClassificationPolicy;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -43,7 +47,9 @@ interface JobRouterAdministrationRestClient {
     deleteClassificationPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteClassificationPolicy;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    @internal("csharp", "java", "python")
+    @internal("csharp")
+    @internal("python")
+    @internal("java")
     upsertExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertExceptionPolicy;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -56,7 +62,9 @@ interface JobRouterAdministrationRestClient {
     deleteExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteExceptionPolicy;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    @internal("csharp", "java", "python")
+    @internal("csharp")
+    @internal("python")
+    @internal("java")
     upsertQueue is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertQueue;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -75,7 +83,9 @@ interface JobRouterAdministrationRestClient {
 })
 interface JobRouterRestClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    @internal("csharp", "java", "python")
+    @internal("csharp")
+    @internal("python")
+    @internal("java")
     upsertJob is AzureCommunicationRoutingService.JobRouterOperations.upsertJob;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -85,7 +95,9 @@ interface JobRouterRestClient {
     deleteJob is AzureCommunicationRoutingService.JobRouterOperations.deleteJob;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    @internal("csharp", "java", "python")
+    @internal("csharp")
+    @internal("python")
+    @internal("java")
     reclassifyJob is AzureCommunicationRoutingService.JobRouterOperations.reclassifyJobAction;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -116,7 +128,9 @@ interface JobRouterRestClient {
     getQueueStatistics is  AzureCommunicationRoutingService.JobRouterOperations.getQueueStatistics;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-    @internal("csharp", "java", "python")
+    @internal("csharp")
+    @internal("python")
+    @internal("java")
     upsertWorker is AzureCommunicationRoutingService.JobRouterOperations.upsertWorker;
     
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
