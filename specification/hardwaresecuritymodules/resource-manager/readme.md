@@ -31,15 +31,6 @@ openapi-type: arm
 tag: package-preview-2023-12
 ```
 
-
-### Tag: package-preview-2023-12
-
-These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-12'
-input-file:
-  - Microsoft.HardwareSecurityModules/preview/2023-12-10-preview/cloudhsm.json
-```
 ### Tag: package-2018-10
 
 These settings apply only when `--tag=package-2018-10` is specified on the command line.
@@ -66,6 +57,16 @@ These settings apply only when `--tag=package-2022-08-preview` is specified on t
 input-file:
 - Microsoft.HardwareSecurityModules/preview/2022-08-31-preview/cloudhsm.json
 - Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
+```
+
+### Tag: package-preview-2023-12
+
+These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-12'
+input-file:
+  - Microsoft.HardwareSecurityModules/preview/2023-12-10-preview/cloudhsm.json
+  - Microsoft.HardwareSecurityModules/preview/2018-10-31-preview/dedicatedhsm.json
 ```
 
 # Code Generation
