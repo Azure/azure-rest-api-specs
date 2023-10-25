@@ -1161,17 +1161,21 @@
       "properties": {
         "uri": {
           "type": "string",
-          "description": "Gets or sets the uri of the runbook content."
+          "description": "Sets the uri of the content."
         },
         "contentHash": {
           "$ref": "#/definitions/ContentHash",
-          "description": "Gets or sets the hash."
+          "description": "Sets the hash."
         },
         "version": {
           "type": "string",
-          "description": "Gets or sets the version of the content."
+          "description": "Sets the version of the content."
         }
       },
+      "x-ms-mutability": [
+        "create",
+        "update"
+      ],
       "description": "Definition of the content link."
     },
     "RunbookProperties": {

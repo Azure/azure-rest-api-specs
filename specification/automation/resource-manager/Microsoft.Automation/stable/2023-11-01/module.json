@@ -783,11 +783,11 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets or sets the error code."
+          "description": "Gets the error code."
         },
         "message": {
           "type": "string",
-          "description": "Gets or sets the error message."
+          "description": "Gets the error message."
         }
       },
       "description": "Definition of the module error info type."
@@ -800,11 +800,11 @@
           "items": {
             "$ref": "#/definitions/Module"
           },
-          "description": "Gets or sets a list of modules."
+          "description": "Gets a list of modules."
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets or sets the next link."
+          "description": "Gets the next link."
         }
       },
       "description": "The response model for the list module operation."
@@ -832,24 +832,29 @@
       "properties": {
         "uri": {
           "type": "string",
-          "description": "Gets or sets the uri of the runbook content."
+          "description": "Sets the uri of the content."
         },
         "contentHash": {
           "$ref": "#/definitions/ContentHash",
-          "description": "Gets or sets the hash."
+          "description": "Sets the hash."
         },
         "version": {
           "type": "string",
-          "description": "Gets or sets the version of the content."
+          "description": "Sets the version of the content."
         }
       },
+      "x-ms-mutability": [
+        "create",
+        "update"
+      ],
       "description": "Definition of the content link."
     },
     "ModuleCreateOrUpdateProperties": {
+      "type": "object",
       "properties": {
         "contentLink": {
           "$ref": "#/definitions/ContentLink",
-          "description": "Gets or sets the module content link."
+          "description": "Sets the hash."
         }
       },
       "required": [
@@ -858,26 +863,27 @@
       "description": "The parameters supplied to the create or update module properties."
     },
     "ModuleCreateOrUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ModuleCreateOrUpdateProperties",
           "x-ms-client-flatten": true,
-          "description": "Gets or sets the module create properties."
+          "description": "Sets the module create properties."
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets name of the resource."
+          "description": "Sets name of the resource."
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the location of the resource."
+          "description": "Sets the location of the resource."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the tags attached to the resource."
+          "description": "Sets the tags attached to the resource."
         }
       },
       "required": [
@@ -890,25 +896,25 @@
       "properties": {
         "isGlobal": {
           "type": "boolean",
-          "description": "Gets or sets the isGlobal flag of the module."
+          "description": "Gets the isGlobal flag of the module."
         },
         "version": {
           "type": "string",
-          "description": "Gets or sets the version of the module."
+          "description": "Gets the version of the module."
         },
         "sizeInBytes": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets or sets the size in bytes of the module."
+          "description": "Gets the size in bytes of the module."
         },
         "activityCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the activity count of the module."
+          "description": "Gets the activity count of the module."
         },
         "provisioningState": {
           "type": "string",
-          "description": "Gets or sets the provisioning state of the module.",
+          "description": "Gets the provisioning state of the module.",
           "enum": [
             "Created",
             "Creating",
@@ -924,7 +930,7 @@
             "ModuleImportRunbookComplete",
             "Succeeded",
             "Failed",
-            "Cancelled",
+            "Canceled",
             "Updating"
           ],
           "x-ms-enum": {
@@ -938,18 +944,18 @@
         },
         "error": {
           "$ref": "#/definitions/ModuleErrorInfo",
-          "description": "Gets or sets the error info of the module."
+          "description": "Gets the error info of the module."
         },
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the creation time.",
+          "description": "Gets the creation time.",
           "x-nullable": false
         },
         "lastModifiedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets or sets the last modified time.",
+          "description": "Gets the last modified time.",
           "x-nullable": false
         },
         "description": {
@@ -958,43 +964,45 @@
         },
         "isComposite": {
           "type": "boolean",
-          "description": "Gets or sets type of module, if its composite or not."
+          "description": "Gets type of module, if its composite or not."
         }
       },
       "description": "Definition of the module property type."
     },
     "ModuleUpdateProperties": {
+      "type": "object",
       "properties": {
         "contentLink": {
           "$ref": "#/definitions/ContentLink",
-          "description": "Gets or sets the module content link."
+          "description": "Sets the module content link."
         }
       },
       "description": "The parameters supplied to the update properties."
     },
     "ModuleUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ModuleUpdateProperties",
           "x-ms-client-flatten": true,
-          "description": "Gets or sets the module update properties."
+          "description": "Sets the module update properties."
         },
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets or sets name of the resource."
+          "description": "Sets name of the resource."
         },
         "location": {
           "type": "string",
           "readOnly": true,
-          "description": "Gets or sets the location of the resource."
+          "description": "Sets the location of the resource."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the tags attached to the resource."
+          "description": "Sets the tags attached to the resource."
         }
       },
       "description": "The parameters supplied to the update module operation."
@@ -1005,11 +1013,11 @@
         "properties": {
           "$ref": "#/definitions/ModuleProperties",
           "x-ms-client-flatten": true,
-          "description": "Gets or sets the module properties."
+          "description": "Gets the module properties."
         },
         "etag": {
           "type": "string",
-          "description": "Gets or sets the etag of the resource."
+          "description": "Gets the etag of the resource."
         }
       },
       "allOf": [
