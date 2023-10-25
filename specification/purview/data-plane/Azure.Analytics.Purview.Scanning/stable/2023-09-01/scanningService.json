@@ -2927,14 +2927,14 @@
     },
     "AzureKeyVault": {
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureKeyVaultProperties"
             }
@@ -3007,7 +3007,7 @@
         "kind"
       ],
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
@@ -3111,7 +3111,7 @@
           }
         },
         "error": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ErrorInfo"
             }
@@ -3124,7 +3124,7 @@
         "kind"
       ],
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
@@ -3268,7 +3268,7 @@
           "description": "The scan result status."
         },
         "diagnostics": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ScanDiagnostics"
             }
@@ -3326,7 +3326,7 @@
           "description": "The error message."
         },
         "error": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ErrorModel"
             }
@@ -3494,7 +3494,7 @@
       "description": "The scan result with ingestion.",
       "properties": {
         "discoveryExecutionDetails": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/DiscoveryExecutionDetails"
             }
@@ -3503,7 +3503,7 @@
           "description": "The discovery execution details."
         },
         "ingestionExecutionDetails": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/IngestionExecutionDetails"
             }
@@ -3536,7 +3536,7 @@
           "description": "The scan result status."
         },
         "diagnostics": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ScanDiagnostics"
             }
@@ -3594,7 +3594,7 @@
           "readOnly": true
         },
         "error": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ErrorModel"
             }
@@ -3681,7 +3681,7 @@
         },
         "extendedProperties": {
           "description": "The extended properties.",
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ExtendedProperties"
             }
@@ -3702,7 +3702,7 @@
           "description": "The name."
         },
         "extendedProperties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ExtendedProperties"
             }
@@ -3715,14 +3715,14 @@
       "description": "The data source identifier.",
       "properties": {
         "itemPath": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ItemPath"
             }
           ]
         },
         "qualifiedName": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/QualifiedName"
             }
@@ -3748,7 +3748,7 @@
       ],
       "type": "object",
       "description": "The scan.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
@@ -3847,7 +3847,7 @@
           "description": "The scan identifier."
         },
         "dataSourceIdentifier": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/DataSourceIdentifier"
             }
@@ -4026,14 +4026,14 @@
     "Filter": {
       "type": "object",
       "description": "The filter.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/FilterProperties"
             }
@@ -4072,7 +4072,7 @@
         "kind"
       ],
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
@@ -4112,7 +4112,7 @@
       "type": "object",
       "properties": {
         "computeProperties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ManagedIntegrationRuntimeComputeProperties"
             }
@@ -4139,14 +4139,14 @@
       "type": "object",
       "properties": {
         "typeProperties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ManagedIntegrationRuntimeTypeProperties"
             }
           ]
         },
         "managedVirtualNetworkReference": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ManagedVirtualNetworkReference"
             }
@@ -4161,14 +4161,14 @@
     "ManagedIntegrationRuntime": {
       "description": "The managed integration runtime.",
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/IntegrationRuntime"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ManagedIntegrationRuntimeProperties"
             }
@@ -4190,14 +4190,14 @@
     "SelfHostedIntegrationRuntime": {
       "description": "Self-hosted integration runtime.",
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/IntegrationRuntime"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SelfHostedIntegrationRuntimeProperties"
             }
@@ -4420,7 +4420,7 @@
       "type": "object",
       "properties": {
         "typeProperties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SelfHostedIntegrationRuntimeStatusTypeProperties"
             }
@@ -4436,14 +4436,14 @@
     "SelfHostedIntegrationRuntimeStatus": {
       "description": "Self-hosted integration runtime status.",
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/IntegrationRuntimeStatus"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SelfHostedIntegrationRuntimeStatusProperties"
             }
@@ -4477,7 +4477,7 @@
           "type": "string"
         },
         "interactiveQuery": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/InteractiveQuery"
             }
@@ -4490,7 +4490,7 @@
       "type": "object",
       "properties": {
         "typeProperties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ManagedIntegrationRuntimeStatusTypeProperties"
             }
@@ -4506,14 +4506,14 @@
     "ManagedIntegrationRuntimeStatus": {
       "description": "Managed integration runtime status.",
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/IntegrationRuntimeStatus"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ManagedIntegrationRuntimeStatusProperties"
             }
@@ -4528,7 +4528,7 @@
         "kind"
       ],
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
@@ -4612,14 +4612,14 @@
     "ManagedVirtualNetwork": {
       "description": "The managed virtual network.",
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ManagedVirtualNetworkProperties"
             }
@@ -4671,14 +4671,14 @@
     "ManagedPrivateEndpoint": {
       "description": "The managed private endpoint.",
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ManagedPrivateEndpointProperties"
             }
@@ -4691,7 +4691,7 @@
       "type": "object",
       "properties": {
         "connectionState": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ConnectionStateProperties"
             }
@@ -4818,7 +4818,7 @@
     "VersionedScanRuleset": {
       "description": "The versioned scan ruleset.",
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
@@ -4863,7 +4863,7 @@
         "kind"
       ],
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/VersionedScanRuleset"
         }
@@ -4950,7 +4950,7 @@
       ],
       "type": "object",
       "description": "The system scan ruleset.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/VersionedScanRuleset"
         }
@@ -5155,7 +5155,7 @@
           "description": "The end time of trigger recurrence."
         },
         "schedule": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/RecurrenceSchedule"
             }
@@ -5173,7 +5173,7 @@
       "type": "object",
       "properties": {
         "recurrence": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/TriggerRecurrence"
             }
@@ -5237,14 +5237,14 @@
     "Trigger": {
       "description": "The trigger object.",
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/TriggerProperties"
             }
@@ -5323,14 +5323,14 @@
     "SystemClassificationRule": {
       "description": "The rule of system classification.",
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ClassificationRule"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SystemClassificationRuleProperties"
             }
@@ -5437,14 +5437,14 @@
     "CustomClassificationRule": {
       "description": "Rule of custom classification.",
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ClassificationRule"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CustomClassificationRuleProperties"
             }
@@ -5456,7 +5456,7 @@
     "RegexClassificationRulePattern": {
       "description": "Pattern of regex classification rule.",
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ClassificationRulePattern"
         }
@@ -5499,7 +5499,7 @@
           "description": "The secret version of key vault secret."
         },
         "store": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/Store"
             }
@@ -5512,7 +5512,7 @@
       "type": "object",
       "properties": {
         "accountKey": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/KeyVaultSecret"
             }
@@ -5526,7 +5526,7 @@
       "type": "object",
       "properties": {
         "typeProperties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/KeyVaultSecretAccountKeyCredentialTypeProperties"
             }
@@ -5541,14 +5541,14 @@
     "AccountKeyAuthAzureKeyVaultCredential": {
       "type": "object",
       "description": "Credential type that uses Account Key for authentication.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Credential"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AccountKeyCredentialProperties"
             }
@@ -5566,7 +5566,7 @@
           "type": "string"
         },
         "password": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/KeyVaultSecret"
             }
@@ -5580,7 +5580,7 @@
       "type": "object",
       "properties": {
         "typeProperties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/KeyVaultSecretUserPassCredentialTypeProperties"
             }
@@ -5594,14 +5594,14 @@
     "BasicAuthAzureKeyVaultCredential": {
       "type": "object",
       "description": "Credential type that uses Basic authentication.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Credential"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/UserPassCredentialProperties"
             }
@@ -5624,7 +5624,7 @@
       "type": "object",
       "properties": {
         "typeProperties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/RoleARNCredentialTypeProperties"
             }
@@ -5638,14 +5638,14 @@
     "RoleARNCredential": {
       "type": "object",
       "description": "Credential type that uses Account ID, External ID and Role ARN for authentication.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Credential"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/RoleARNCredentialProperties"
             }
@@ -5662,7 +5662,7 @@
           "description": "The service principal ID of key vault secret service principal credential type properties."
         },
         "servicePrincipalKey": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/KeyVaultSecret"
             }
@@ -5677,7 +5677,7 @@
       "type": "object",
       "properties": {
         "typeProperties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/KeyVaultSecretServicePrinipalCredentialTypeProperties"
             }
@@ -5691,14 +5691,14 @@
     "ServicePrincipalAzureKeyVaultCredential": {
       "type": "object",
       "description": "Credential type that uses Tenant ID and Service principal ID for authentication.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Credential"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ServicePrincipalAzureKeyVaultCredentialProperties"
             }
@@ -5710,14 +5710,14 @@
     "SqlAuthAzureKeyVaultCredential": {
       "type": "object",
       "description": "Credential type that uses Sql for authentication.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Credential"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/UserPassCredentialProperties"
             }
@@ -5733,7 +5733,7 @@
           "type": "string"
         },
         "password": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/KeyVaultSecret"
             }
@@ -5745,7 +5745,7 @@
           "description": "The consumer key of key vault secret consumer key credential type properties."
         },
         "consumerSecret": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/KeyVaultSecret"
             }
@@ -5758,7 +5758,7 @@
       "type": "object",
       "properties": {
         "typeProperties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/KeyVaultSecretConsumerKeyCredentialTypeProperties"
             }
@@ -5773,14 +5773,14 @@
     "ConsumerKeyAuthAzureKeyVaultCredential": {
       "type": "object",
       "description": "Credential type that uses consumer provided key and secret for authentication.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Credential"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ConsumerKeyCredentialProperties"
             }
@@ -5799,7 +5799,7 @@
           "type": "string"
         },
         "password": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/KeyVaultSecret"
             }
@@ -5812,7 +5812,7 @@
       "type": "object",
       "properties": {
         "typeProperties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/KeyVaultSecretDelegatedAuthCredentialTypeProperties"
             }
@@ -5827,14 +5827,14 @@
     "DelegatedAuthAzureKeyVaultCredential": {
       "type": "object",
       "description": "Credential type that uses Client ID for authentication.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Credential"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/DelegatedAuthCredentialProperties"
             }
@@ -5865,7 +5865,7 @@
       "type": "object",
       "properties": {
         "typeProperties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/KeyVaultSecretManagedIdentityAzureKeyVaultCredentialTypeProperties"
             }
@@ -5880,14 +5880,14 @@
     "ManagedIdentityAzureKeyVaultCredential": {
       "type": "object",
       "description": "Credential type that uses User assigned managed identities for authentication.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Credential"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ManagedIdentityAzureKeyVaultCredentialProperties"
             }
@@ -5914,7 +5914,7 @@
           "readOnly": true
         },
         "collection": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CollectionReference"
             }
@@ -5938,7 +5938,7 @@
     "AzureSubscriptionProperties": {
       "description": "Properties of azure subscription.",
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
         }
@@ -5971,14 +5971,14 @@
     "AzureSubscriptionDataSource": {
       "description": "Azure subscription data source.",
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSubscriptionProperties"
             }
@@ -5990,7 +5990,7 @@
     },
     "AzureResourceGroupProperties": {
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
         }
@@ -6026,14 +6026,14 @@
     },
     "AzureResourceGroupDataSource": {
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureResourceGroupProperties"
             }
@@ -6045,7 +6045,7 @@
     },
     "AzureDataSourceProperties": {
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
         }
@@ -6090,7 +6090,7 @@
     "AzureSynapseWorkspaceProperties": {
       "type": "object",
       "description": "Azure synapse workspace data source properties.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
         }
@@ -6109,14 +6109,14 @@
     "AzureSynapseWorkspaceDataSource": {
       "type": "object",
       "description": "Azure synapse workspace data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSynapseWorkspaceProperties"
             }
@@ -6129,7 +6129,7 @@
     "AzureSynapseProperties": {
       "type": "object",
       "description": "Azure synapse data source properties.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
         }
@@ -6148,14 +6148,14 @@
     "AzureSynapseDataSource": {
       "type": "object",
       "description": "Azure synapse data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSynapseProperties"
             }
@@ -6168,7 +6168,7 @@
     "AdlsGen1Properties": {
       "type": "object",
       "description": "The properties of adls gen1.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
         }
@@ -6183,14 +6183,14 @@
     "AdlsGen1DataSource": {
       "type": "object",
       "description": "The adls gen1 data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AdlsGen1Properties"
             }
@@ -6203,7 +6203,7 @@
     "AdlsGen2Properties": {
       "type": "object",
       "description": "The properties of adls gen2.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
         }
@@ -6217,14 +6217,14 @@
     "AdlsGen2DataSource": {
       "type": "object",
       "description": "The adls gen2 data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AdlsGen2Properties"
             }
@@ -6237,7 +6237,7 @@
     "AmazonAccountProperties": {
       "type": "object",
       "description": "The properties of amazon account.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
         }
@@ -6256,14 +6256,14 @@
     "AmazonAccountDataSource": {
       "type": "object",
       "description": "The amazon account data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonAccountProperties"
             }
@@ -6276,7 +6276,7 @@
     "AmazonS3Properties": {
       "type": "object",
       "description": "The properties of amazon s3.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
         }
@@ -6295,14 +6295,14 @@
     "AmazonS3DataSource": {
       "type": "object",
       "description": "The amazon s3 data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonS3Properties"
             }
@@ -6315,7 +6315,7 @@
     "AmazonSqlProperties": {
       "type": "object",
       "description": "The properties of amazon sql.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
         }
@@ -6339,14 +6339,14 @@
     "AmazonSqlDataSource": {
       "type": "object",
       "description": "The amazon sql data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonSqlProperties"
             }
@@ -6359,7 +6359,7 @@
     "AzureCosmosDbProperties": {
       "type": "object",
       "description": "The properties of azure cosmos db.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
         }
@@ -6374,14 +6374,14 @@
     "AzureCosmosDbDataSource": {
       "type": "object",
       "description": "The azure cosmos db data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureCosmosDbProperties"
             }
@@ -6394,7 +6394,7 @@
     "AzureDataExplorerProperties": {
       "type": "object",
       "description": "The properties of azure data explorer.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
         }
@@ -6407,14 +6407,14 @@
     },
     "AzureDataExplorerDataSource": {
       "type": "object",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureDataExplorerProperties"
             }
@@ -6427,7 +6427,7 @@
     "AzureFileServiceProperties": {
       "type": "object",
       "description": "The properties of azure file service.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
         }
@@ -6442,14 +6442,14 @@
     "AzureFileServiceDataSource": {
       "type": "object",
       "description": "The azure file service data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureFileServiceProperties"
             }
@@ -6462,7 +6462,7 @@
     "AzureSqlDatabaseProperties": {
       "type": "object",
       "description": "The properties of azure sql database.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
         }
@@ -6477,14 +6477,14 @@
     "AzureSqlDatabaseDataSource": {
       "type": "object",
       "description": "The azure sql database data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSqlDatabaseProperties"
             }
@@ -6497,7 +6497,7 @@
     "AmazonPostgreSqlProperties": {
       "type": "object",
       "description": "The properties of amazon postgre sql.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
         }
@@ -6521,14 +6521,14 @@
     "AmazonPostgreSqlDataSource": {
       "type": "object",
       "description": "The amazon postgre sql data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonPostgreSqlProperties"
             }
@@ -6541,7 +6541,7 @@
     "AzurePostgreSqlProperties": {
       "type": "object",
       "description": "The properties of azure postgre sql.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
         }
@@ -6560,14 +6560,14 @@
     "AzurePostgreSqlDataSource": {
       "type": "object",
       "description": "The azure postgre sql data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzurePostgreSqlProperties"
             }
@@ -6580,7 +6580,7 @@
     "SqlServerDatabaseProperties": {
       "type": "object",
       "description": "The properties of sql server database.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
         }
@@ -6595,14 +6595,14 @@
     "SqlServerDatabaseDataSource": {
       "type": "object",
       "description": "The sql server database data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SqlServerDatabaseProperties"
             }
@@ -6614,7 +6614,7 @@
     "AzureSqlDatabaseManagedInstanceProperties": {
       "type": "object",
       "description": "The properties of azure sql database managed instance.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
         }
@@ -6628,14 +6628,14 @@
     "AzureSqlDatabaseManagedInstanceDataSource": {
       "type": "object",
       "description": "The azure sql database managed instance data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceProperties"
             }
@@ -6647,7 +6647,7 @@
     "AzureSqlDataWarehouseProperties": {
       "type": "object",
       "description": "The properties of azure sql data warehouse.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
         }
@@ -6661,14 +6661,14 @@
     "AzureSqlDataWarehouseDataSource": {
       "type": "object",
       "description": "The azure sql data warehouse data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSqlDataWarehouseProperties"
             }
@@ -6680,7 +6680,7 @@
     "AzureMySqlProperties": {
       "type": "object",
       "description": "Azure MySql data source properties.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
         }
@@ -6700,14 +6700,14 @@
     "AzureMySqlDataSource": {
       "type": "object",
       "description": "Azure MySql data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureMySqlProperties"
             }
@@ -6720,7 +6720,7 @@
     "AzureStorageProperties": {
       "type": "object",
       "description": "The properties of azure storage.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
         }
@@ -6735,14 +6735,14 @@
     "AzureStorageDataSource": {
       "type": "object",
       "description": "The azure storage data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureStorageProperties"
             }
@@ -6755,7 +6755,7 @@
     "TeradataProperties": {
       "type": "object",
       "description": "The properties of teradata.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
         }
@@ -6770,14 +6770,14 @@
     "TeradataDataSource": {
       "type": "object",
       "description": "The teradata data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/TeradataProperties"
             }
@@ -6789,7 +6789,7 @@
     "OracleProperties": {
       "type": "object",
       "description": "The properties of oracle.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
         }
@@ -6809,14 +6809,14 @@
     "OracleDataSource": {
       "type": "object",
       "description": "The oracle data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/OracleProperties"
             }
@@ -6828,7 +6828,7 @@
     "SapS4HanaProperties": {
       "type": "object",
       "description": "Sap S4 Hana data source properties.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
         }
@@ -6847,14 +6847,14 @@
     "SapS4HanaDataSource": {
       "type": "object",
       "description": "Sap S4 Hana data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SapS4HanaProperties"
             }
@@ -6866,7 +6866,7 @@
     "SapEccProperties": {
       "type": "object",
       "description": "Sap Ecc properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
         }
@@ -6883,14 +6883,14 @@
     "SapEccDataSource": {
       "type": "object",
       "description": "Sap Ecc data source",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SapEccProperties"
             }
@@ -6902,7 +6902,7 @@
     "PowerBIProperties": {
       "type": "object",
       "description": "power bi properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
         }
@@ -6916,14 +6916,14 @@
     "PowerBIDataSource": {
       "type": "object",
       "description": "power bi data source",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/DataSource"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/PowerBIProperties"
             }
@@ -6972,7 +6972,7 @@
     "AzureSubscriptionScanRulesetProperties": {
       "type": "object",
       "description": "azure subscription scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -6981,14 +6981,14 @@
     "AzureSubscriptionScanRuleset": {
       "type": "object",
       "description": "azure subscription scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSubscriptionScanRulesetProperties"
             }
@@ -7001,7 +7001,7 @@
     "AzureResourceGroupScanRulesetProperties": {
       "type": "object",
       "description": "azure resource group scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7010,14 +7010,14 @@
     "AzureResourceGroupScanRuleset": {
       "type": "object",
       "description": "azure resource group scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureResourceGroupScanRulesetProperties"
             }
@@ -7030,7 +7030,7 @@
     "AzureSynapseWorkspaceScanRulesetProperties": {
       "type": "object",
       "description": "azure synapse workspace scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7039,14 +7039,14 @@
     "AzureSynapseWorkspaceScanRuleset": {
       "type": "object",
       "description": "azure synapse workspace scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSynapseWorkspaceScanRulesetProperties"
             }
@@ -7059,7 +7059,7 @@
     "AzureSynapseScanRulesetProperties": {
       "type": "object",
       "description": "azure synapse scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7068,14 +7068,14 @@
     "AzureSynapseScanRuleset": {
       "type": "object",
       "description": "azure synapse scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSynapseScanRulesetProperties"
             }
@@ -7142,7 +7142,7 @@
       "description": "custom file extension",
       "properties": {
         "customFileType": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CustomFileType"
             }
@@ -7226,14 +7226,14 @@
     "ScanningRuleScanRulesetProperties": {
       "type": "object",
       "description": "scanning rule scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
       ],
       "properties": {
         "scanningRule": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ScanningRule"
             }
@@ -7245,7 +7245,7 @@
     "AdlsGen1ScanRulesetProperties": {
       "type": "object",
       "description": "adls gen1 scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
         }
@@ -7254,14 +7254,14 @@
     "AdlsGen1ScanRuleset": {
       "type": "object",
       "description": "adls gen1 scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AdlsGen1ScanRulesetProperties"
             }
@@ -7273,7 +7273,7 @@
     "AdlsGen2ScanRulesetProperties": {
       "type": "object",
       "description": "adls gen 2 scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
         }
@@ -7282,14 +7282,14 @@
     "AdlsGen2ScanRuleset": {
       "type": "object",
       "description": "adls gen 2 scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AdlsGen2ScanRulesetProperties"
             }
@@ -7301,7 +7301,7 @@
     "AmazonAccountScanRulesetProperties": {
       "type": "object",
       "description": "amazon account scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7310,14 +7310,14 @@
     "AmazonAccountScanRuleset": {
       "type": "object",
       "description": "amazon account scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonAccountScanRulesetProperties"
             }
@@ -7329,7 +7329,7 @@
     "AmazonS3ScanRulesetProperties": {
       "type": "object",
       "description": "amazon s3 scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
         }
@@ -7338,14 +7338,14 @@
     "AmazonS3ScanRuleset": {
       "type": "object",
       "description": "amazon s3 scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonS3ScanRulesetProperties"
             }
@@ -7357,7 +7357,7 @@
     "AmazonSqlScanRulesetProperties": {
       "type": "object",
       "description": "amazon sql scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7366,14 +7366,14 @@
     "AmazonSqlScanRuleset": {
       "type": "object",
       "description": "amazon sql scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonSqlScanRulesetProperties"
             }
@@ -7385,7 +7385,7 @@
     "AzureCosmosDbScanRulesetProperties": {
       "type": "object",
       "description": "azure cosmos db scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7394,14 +7394,14 @@
     "AzureCosmosDbScanRuleset": {
       "type": "object",
       "description": "azure cosmos db scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureCosmosDbScanRulesetProperties"
             }
@@ -7413,7 +7413,7 @@
     "AzureDataExplorerScanRulesetProperties": {
       "type": "object",
       "description": "azure data explorer scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7422,14 +7422,14 @@
     "AzureDataExplorerScanRuleset": {
       "type": "object",
       "description": "azure data explorer scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureDataExplorerScanRulesetProperties"
             }
@@ -7441,7 +7441,7 @@
     "AzureFileServiceScanRulesetProperties": {
       "type": "object",
       "description": "azure file service scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
         }
@@ -7450,14 +7450,14 @@
     "AzureFileServiceScanRuleset": {
       "type": "object",
       "description": "azure file service scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureFileServiceScanRulesetProperties"
             }
@@ -7469,7 +7469,7 @@
     "AzureSqlDatabaseScanRulesetProperties": {
       "type": "object",
       "description": "azure sql db scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7478,14 +7478,14 @@
     "AzureSqlDatabaseScanRuleset": {
       "type": "object",
       "description": "azure sql db scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSqlDatabaseScanRulesetProperties"
             }
@@ -7497,7 +7497,7 @@
     "AmazonPostgreSqlScanRulesetProperties": {
       "type": "object",
       "description": "azure postgre sql scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7506,14 +7506,14 @@
     "AmazonPostgreSqlScanRuleset": {
       "type": "object",
       "description": "azure postgre sql scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonPostgreSqlScanRulesetProperties"
             }
@@ -7525,7 +7525,7 @@
     "AzurePostgreSqlScanRulesetProperties": {
       "type": "object",
       "description": "azure postgre sql scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7534,14 +7534,14 @@
     "AzurePostgreSqlScanRuleset": {
       "type": "object",
       "description": "azure postgre sql scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzurePostgreSqlScanRulesetProperties"
             }
@@ -7553,7 +7553,7 @@
     "SqlServerDatabaseScanRulesetProperties": {
       "type": "object",
       "description": "sql server database scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7562,14 +7562,14 @@
     "SqlServerDatabaseScanRuleset": {
       "type": "object",
       "description": "sql server database scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SqlServerDatabaseScanRulesetProperties"
             }
@@ -7581,7 +7581,7 @@
     "AzureSqlDatabaseManagedInstanceScanRulesetProperties": {
       "type": "object",
       "description": "azure sql db managed instance scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7590,14 +7590,14 @@
     "AzureSqlDatabaseManagedInstanceScanRuleset": {
       "type": "object",
       "description": "azure sql db managed instance scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceScanRulesetProperties"
             }
@@ -7609,7 +7609,7 @@
     "AzureSqlDataWarehouseScanRulesetProperties": {
       "type": "object",
       "description": "azure sql data ware house scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7618,14 +7618,14 @@
     "AzureSqlDataWarehouseScanRuleset": {
       "type": "object",
       "description": "azure sql data ware house scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSqlDataWarehouseScanRulesetProperties"
             }
@@ -7637,7 +7637,7 @@
     "AzureMySqlScanRulesetProperties": {
       "type": "object",
       "description": "azure mysql scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7646,14 +7646,14 @@
     "AzureMySqlScanRuleset": {
       "type": "object",
       "description": "azure mysql scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureMySqlScanRulesetProperties"
             }
@@ -7665,7 +7665,7 @@
     "AzureStorageScanRulesetProperties": {
       "type": "object",
       "description": "azure storage scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
         }
@@ -7674,14 +7674,14 @@
     "AzureStorageScanRuleset": {
       "type": "object",
       "description": "azure storage scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureStorageScanRulesetProperties"
             }
@@ -7693,7 +7693,7 @@
     "TeradataScanRulesetProperties": {
       "type": "object",
       "description": "teradata scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
         }
@@ -7702,14 +7702,14 @@
     "TeradataScanRuleset": {
       "type": "object",
       "description": "teradata scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/TeradataScanRulesetProperties"
             }
@@ -7721,7 +7721,7 @@
     "OracleScanRulesetProperties": {
       "type": "object",
       "description": "Oracle scan rule set properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
         }
@@ -7730,14 +7730,14 @@
     "OracleScanRuleset": {
       "type": "object",
       "description": "Oracle scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/OracleScanRulesetProperties"
             }
@@ -7749,7 +7749,7 @@
     "SapS4HanaScanRulesetProperties": {
       "type": "object",
       "description": "Sap S4 Hana scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7758,14 +7758,14 @@
     "SapS4HanaScanRuleset": {
       "type": "object",
       "description": "Sap S4 Hana scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SapS4HanaScanRulesetProperties"
             }
@@ -7777,7 +7777,7 @@
     "SapEccScanRulesetProperties": {
       "type": "object",
       "description": "Sap Ecc scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7786,14 +7786,14 @@
     "SapEccScanRuleset": {
       "type": "object",
       "description": "Sap Ecc scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SapEccScanRulesetProperties"
             }
@@ -7805,7 +7805,7 @@
     "PowerBIScanRulesetProperties": {
       "type": "object",
       "description": "power bi scan ruleset properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
         }
@@ -7814,14 +7814,14 @@
     "PowerBIScanRuleset": {
       "type": "object",
       "description": "power bi scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/PowerBIScanRulesetProperties"
             }
@@ -7903,14 +7903,14 @@
           }
         },
         "resourceNameFilter": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ResourceNameFilter"
             }
           ]
         },
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -7958,7 +7958,7 @@
           }
         },
         "collection": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CollectionReference"
             }
@@ -7987,7 +7987,7 @@
           "readOnly": true
         },
         "connectedVia": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/ConnectedVia"
             }
@@ -8016,7 +8016,7 @@
     "ExpandingResourceScanProperties": {
       "type": "object",
       "description": "expanding resource scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
@@ -8026,7 +8026,7 @@
           "$ref": "#/definitions/ExpandingResourceScanPropertiesResourceTypes"
         },
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -8121,7 +8121,7 @@
     "AzureSubscriptionCredentialScanProperties": {
       "type": "object",
       "description": "azure subscription credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
         }
@@ -8130,14 +8130,14 @@
     "AzureSubscriptionCredentialScan": {
       "type": "object",
       "description": "azure subscription credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSubscriptionCredentialScanProperties"
             }
@@ -8149,7 +8149,7 @@
     "AzureSubscriptionMsiScanProperties": {
       "type": "object",
       "description": "Azure subscription MSI scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
         }
@@ -8158,14 +8158,14 @@
     "AzureSubscriptionMsiScan": {
       "type": "object",
       "description": "Azure subscription MSI scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSubscriptionMsiScanProperties"
             }
@@ -8177,7 +8177,7 @@
     "AzureResourceGroupCredentialScanProperties": {
       "type": "object",
       "description": "azure resource group credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
         }
@@ -8186,14 +8186,14 @@
     "AzureResourceGroupCredentialScan": {
       "type": "object",
       "description": "azure resource group credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureResourceGroupCredentialScanProperties"
             }
@@ -8205,7 +8205,7 @@
     "AzureResourceGroupMsiScanProperties": {
       "type": "object",
       "description": "Azure resource group MSI scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
         }
@@ -8214,14 +8214,14 @@
     "AzureResourceGroupMsiScan": {
       "type": "object",
       "description": "Azure resource group MSI scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureResourceGroupMsiScanProperties"
             }
@@ -8233,7 +8233,7 @@
     "AzureSynapseWorkspaceCredentialScanProperties": {
       "type": "object",
       "description": "Azure synapse workspace credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
         }
@@ -8242,14 +8242,14 @@
     "AzureSynapseWorkspaceCredentialScan": {
       "type": "object",
       "description": "Azure synapse workspace credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSynapseWorkspaceCredentialScanProperties"
             }
@@ -8261,7 +8261,7 @@
     "AzureSynapseWorkspaceMsiScanProperties": {
       "type": "object",
       "description": "Azure synapse workspace MSI scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
         }
@@ -8270,14 +8270,14 @@
     "AzureSynapseWorkspaceMsiScan": {
       "type": "object",
       "description": "Azure synapse workspace MSI scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSynapseWorkspaceMsiScanProperties"
             }
@@ -8289,7 +8289,7 @@
     "AzureSynapseCredentialScanProperties": {
       "type": "object",
       "description": "Azure synapse credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
         }
@@ -8298,14 +8298,14 @@
     "AzureSynapseCredentialScan": {
       "type": "object",
       "description": "Azure synapse credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSynapseCredentialScanProperties"
             }
@@ -8317,7 +8317,7 @@
     "AzureSynapseMsiScanProperties": {
       "type": "object",
       "description": "Azure synapse MSI scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
         }
@@ -8326,14 +8326,14 @@
     "AzureSynapseMsiScan": {
       "type": "object",
       "description": "Azure synapse MSI scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSynapseMsiScanProperties"
             }
@@ -8345,14 +8345,14 @@
     "AdlsGen1CredentialScanProperties": {
       "type": "object",
       "description": "ADLS Gen1 credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
       ],
       "properties": {
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -8363,14 +8363,14 @@
     "AdlsGen1CredentialScan": {
       "type": "object",
       "description": "ADLS Gen1 credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AdlsGen1CredentialScanProperties"
             }
@@ -8382,7 +8382,7 @@
     "AdlsGen1MsiScanProperties": {
       "type": "object",
       "description": "ADLS Gen1 MSI scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
@@ -8391,14 +8391,14 @@
     "AdlsGen1MsiScan": {
       "type": "object",
       "description": "ADLS Gen1 MSI scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AdlsGen1MsiScanProperties"
             }
@@ -8410,14 +8410,14 @@
     "AdlsGen2CredentialScanProperties": {
       "type": "object",
       "description": "ADLS Gen2 credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
       ],
       "properties": {
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -8428,14 +8428,14 @@
     "AdlsGen2CredentialScan": {
       "type": "object",
       "description": "ADLS Gen2 credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AdlsGen2CredentialScanProperties"
             }
@@ -8447,7 +8447,7 @@
     "AdlsGen2MsiScanProperties": {
       "type": "object",
       "description": "ADLS Gen2 MSI scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
@@ -8456,14 +8456,14 @@
     "AdlsGen2MsiScan": {
       "type": "object",
       "description": "ADLS Gen2 MSI scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AdlsGen2MsiScanProperties"
             }
@@ -8475,7 +8475,7 @@
     "AmazonAccountCredentialScanProperties": {
       "type": "object",
       "description": "Amazon account credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
         }
@@ -8484,14 +8484,14 @@
     "AmazonAccountCredentialScan": {
       "type": "object",
       "description": "Amazon account credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonAccountCredentialScanProperties"
             }
@@ -8503,14 +8503,14 @@
     "AmazonS3CredentialScanProperties": {
       "type": "object",
       "description": "Amazon S3 credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
       ],
       "properties": {
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -8527,14 +8527,14 @@
     "AmazonS3CredentialScan": {
       "type": "object",
       "description": "Amazon S3 Credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonS3CredentialScanProperties"
             }
@@ -8546,14 +8546,14 @@
     "AmazonS3RoleARNScanProperties": {
       "type": "object",
       "description": "Amazon S3 role ARN scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
       ],
       "properties": {
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -8572,14 +8572,14 @@
     "AmazonS3RoleARNScan": {
       "type": "object",
       "description": "Amazon S3 role ARN scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonS3RoleARNScanProperties"
             }
@@ -8591,14 +8591,14 @@
     "AmazonSqlCredentialScanProperties": {
       "type": "object",
       "description": "Amazon SQL credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
       ],
       "properties": {
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -8626,14 +8626,14 @@
     "AmazonSqlCredentialScan": {
       "type": "object",
       "description": "Amazon SQL credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonSqlCredentialScanProperties"
             }
@@ -8645,14 +8645,14 @@
     "AzureCosmosDbCredentialScanProperties": {
       "type": "object",
       "description": "Azure Cosmos DB credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
       ],
       "properties": {
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -8666,14 +8666,14 @@
     "AzureCosmosDbCredentialScan": {
       "type": "object",
       "description": "Azure Cosmos DB credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureCosmosDbCredentialScanProperties"
             }
@@ -8685,14 +8685,14 @@
     "AzureDataExplorerCredentialScanProperties": {
       "type": "object",
       "description": "Azure data Explorer credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
       ],
       "properties": {
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -8706,14 +8706,14 @@
     "AzureDataExplorerCredentialScan": {
       "type": "object",
       "description": "Azure data Explorer credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureDataExplorerCredentialScanProperties"
             }
@@ -8725,7 +8725,7 @@
     "AzureDataExplorerMsiScanProperties": {
       "type": "object",
       "description": "Azure data Explorer MSI scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
@@ -8739,14 +8739,14 @@
     "AzureDataExplorerMsiScan": {
       "type": "object",
       "description": "Azure data Explorer MSI scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureDataExplorerMsiScanProperties"
             }
@@ -8758,14 +8758,14 @@
     "AzureFileServiceCredentialScanProperties": {
       "type": "object",
       "description": "Azure file service credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
       ],
       "properties": {
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -8779,14 +8779,14 @@
     "AzureFileServiceCredentialScan": {
       "type": "object",
       "description": "Azure file service credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureFileServiceCredentialScanProperties"
             }
@@ -8798,7 +8798,7 @@
     "AzureSqlScanProperties": {
       "type": "object",
       "description": "Azure SQL scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
@@ -8815,14 +8815,14 @@
     "AzureSqlCredentialScanProperties": {
       "type": "object",
       "description": "Azure SQL credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureSqlScanProperties"
         }
       ],
       "properties": {
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -8833,7 +8833,7 @@
     "AzureSqlDatabaseCredentialScanProperties": {
       "type": "object",
       "description": "Azure SQL database credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureSqlCredentialScanProperties"
         }
@@ -8842,14 +8842,14 @@
     "AzureSqlDatabaseCredentialScan": {
       "type": "object",
       "description": "Azure SQL database credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSqlDatabaseCredentialScanProperties"
             }
@@ -8861,7 +8861,7 @@
     "AzureSqlDatabaseMsiScanProperties": {
       "type": "object",
       "description": "Azure SQL database MSI scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureSqlScanProperties"
         }
@@ -8870,14 +8870,14 @@
     "AzureSqlDatabaseMsiScan": {
       "type": "object",
       "description": "Azure SQL database MSI scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSqlDatabaseMsiScanProperties"
             }
@@ -8889,14 +8889,14 @@
     "AmazonPostgreSqlCredentialScanProperties": {
       "type": "object",
       "description": "Amazon Postgre sql credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
       ],
       "properties": {
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -8920,14 +8920,14 @@
     "AmazonPostgreSqlCredentialScan": {
       "type": "object",
       "description": "Amazon postgre sql credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonPostgreSqlCredentialScanProperties"
             }
@@ -8939,14 +8939,14 @@
     "AzurePostgreSqlCredentialScanProperties": {
       "type": "object",
       "description": "Azure Postgre sql credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
       ],
       "properties": {
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -8971,14 +8971,14 @@
     "AzurePostgreSqlCredentialScan": {
       "type": "object",
       "description": "Azure postgre sql credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzurePostgreSqlCredentialScanProperties"
             }
@@ -8990,7 +8990,7 @@
     "SqlServerDatabaseCredentialScanProperties": {
       "type": "object",
       "description": "SQL server database credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureSqlCredentialScanProperties"
         }
@@ -8999,14 +8999,14 @@
     "SqlServerDatabaseCredentialScan": {
       "type": "object",
       "description": "SQL server database credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SqlServerDatabaseCredentialScanProperties"
             }
@@ -9018,7 +9018,7 @@
     "AzureSqlDatabaseManagedInstanceCredentialScanProperties": {
       "type": "object",
       "description": "Azure SQL database managed instance credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureSqlCredentialScanProperties"
         }
@@ -9027,14 +9027,14 @@
     "AzureSqlDatabaseManagedInstanceCredentialScan": {
       "type": "object",
       "description": "Azure SQL database managed instance credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceCredentialScanProperties"
             }
@@ -9046,7 +9046,7 @@
     "AzureSqlDatabaseManagedInstanceMsiScanProperties": {
       "type": "object",
       "description": "Azure SQL database managed instance MSI scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureSqlScanProperties"
         }
@@ -9055,14 +9055,14 @@
     "AzureSqlDatabaseManagedInstanceMsiScan": {
       "type": "object",
       "description": "Azure SQL database managed instance MSI scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceMsiScanProperties"
             }
@@ -9074,7 +9074,7 @@
     "AzureSqlDataWarehouseCredentialScanProperties": {
       "type": "object",
       "description": "Azure sql data ware house credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureSqlCredentialScanProperties"
         }
@@ -9083,14 +9083,14 @@
     "AzureSqlDataWarehouseCredentialScan": {
       "type": "object",
       "description": "Azure sql data ware house credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSqlDataWarehouseCredentialScanProperties"
             }
@@ -9102,7 +9102,7 @@
     "AzureSqlDataWarehouseMsiScanProperties": {
       "type": "object",
       "description": "Azure sql data ware house MSI scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureSqlScanProperties"
         }
@@ -9111,14 +9111,14 @@
     "AzureSqlDataWarehouseMsiScan": {
       "type": "object",
       "description": "Azure sql data ware house MSI scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSqlDataWarehouseMsiScanProperties"
             }
@@ -9130,7 +9130,7 @@
     "AzureMySqlScanProperties": {
       "type": "object",
       "description": "Azure Mysql scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
@@ -9147,7 +9147,7 @@
           "type": "string"
         },
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -9158,7 +9158,7 @@
     "AzureMySqlCredentialScanProperties": {
       "type": "object",
       "description": "Azure Mysql credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/AzureMySqlScanProperties"
         }
@@ -9167,14 +9167,14 @@
     "AzureMySqlCredentialScan": {
       "type": "object",
       "description": "Azure Mysql credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureMySqlCredentialScanProperties"
             }
@@ -9186,7 +9186,7 @@
     "MitiScanProperties": {
       "type": "object",
       "description": "Miti scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
@@ -9203,14 +9203,14 @@
     "AzureStorageCredentialScanProperties": {
       "type": "object",
       "description": "Azure storage credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
       ],
       "properties": {
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -9221,14 +9221,14 @@
     "AzureStorageCredentialScan": {
       "type": "object",
       "description": "Azure storage credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureStorageCredentialScanProperties"
             }
@@ -9240,7 +9240,7 @@
     "AzureStorageMsiScanProperties": {
       "type": "object",
       "description": "Azure storage MSI scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
@@ -9249,14 +9249,14 @@
     "AzureStorageMsiScan": {
       "type": "object",
       "description": "Azure storage MSI scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureStorageMsiScanProperties"
             }
@@ -9268,14 +9268,14 @@
     "TeradataTeradataCredentialScanProperties": {
       "type": "object",
       "description": "Tera data credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
         }
       ],
       "properties": {
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -9295,14 +9295,14 @@
     "TeradataTeradataCredentialScan": {
       "type": "object",
       "description": "Teradata credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/TeradataTeradataCredentialScanProperties"
             }
@@ -9314,7 +9314,7 @@
     "TeradataUserPassScanProperties": {
       "type": "object",
       "description": "Teradata user pass scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
@@ -9331,14 +9331,14 @@
     "TeradataUserPassScan": {
       "type": "object",
       "description": "Tera data user pass scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/TeradataUserPassScanProperties"
             }
@@ -9350,7 +9350,7 @@
     "TeradataTeradataUserPassScanProperties": {
       "type": "object",
       "description": "Tera data user pass scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
         }
@@ -9373,14 +9373,14 @@
     "TeradataTeradataUserPassScan": {
       "type": "object",
       "description": "Teradata user pass scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/TeradataTeradataUserPassScanProperties"
             }
@@ -9392,14 +9392,14 @@
     "OracleOracleCredentialScanProperties": {
       "type": "object",
       "description": "Oracle credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
         }
       ],
       "properties": {
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -9419,14 +9419,14 @@
     "OracleOracleCredentialScan": {
       "type": "object",
       "description": "Oracle credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/OracleOracleCredentialScanProperties"
             }
@@ -9438,7 +9438,7 @@
     "OracleOracleUserPassScanProperties": {
       "type": "object",
       "description": "Oracle user pass scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
         }
@@ -9461,14 +9461,14 @@
     "OracleOracleUserPassScan": {
       "type": "object",
       "description": "Oracle user pass scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/OracleOracleUserPassScanProperties"
             }
@@ -9480,7 +9480,7 @@
     "SapS4HanaSapS4HanaCredentialScanProperties": {
       "type": "object",
       "description": "Sap S4 hana credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
         }
@@ -9490,7 +9490,7 @@
           "type": "string"
         },
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -9504,14 +9504,14 @@
     "SapS4HanaSapS4HanaCredentialScan": {
       "type": "object",
       "description": "Sap S4 hana credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SapS4HanaSapS4HanaCredentialScanProperties"
             }
@@ -9523,7 +9523,7 @@
     "SapS4HanaSapS4HanaUserPassScanProperties": {
       "type": "object",
       "description": "Sap S4 hana user pass scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
         }
@@ -9546,14 +9546,14 @@
     "SapS4HanaSapS4HanaUserPassScan": {
       "type": "object",
       "description": "Sap S4 hana user pass scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SapS4HanaSapS4HanaUserPassScanProperties"
             }
@@ -9565,7 +9565,7 @@
     "SapEccSapEccCredentialScanProperties": {
       "type": "object",
       "description": "Sap ecc credential scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
         }
@@ -9575,7 +9575,7 @@
           "type": "string"
         },
         "credential": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/CredentialReference"
             }
@@ -9589,14 +9589,14 @@
     "SapEccSapEccCredentialScan": {
       "type": "object",
       "description": "Sap Ecc credential scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SapEccSapEccCredentialScanProperties"
             }
@@ -9608,7 +9608,7 @@
     "SapEccSapEccUserPassScanProperties": {
       "type": "object",
       "description": "Sap Ecc user pass scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
         }
@@ -9631,14 +9631,14 @@
     "SapEccSapEccUserPassScan": {
       "type": "object",
       "description": "Sap ecc user pass scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SapEccSapEccUserPassScanProperties"
             }
@@ -9650,7 +9650,7 @@
     "PowerBIDelegatedScanProperties": {
       "type": "object",
       "description": "Power BI delegated scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
@@ -9679,14 +9679,14 @@
     "PowerBIDelegatedScan": {
       "type": "object",
       "description": "Power BI delegated scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/PowerBIDelegatedScanProperties"
             }
@@ -9698,7 +9698,7 @@
     "PowerBIMsiScanProperties": {
       "type": "object",
       "description": "Power BI MSI scan properties",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
         }
@@ -9712,14 +9712,14 @@
     "PowerBIMsiScan": {
       "type": "object",
       "description": "Power BI MSI scan",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/Scan"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/PowerBIMsiScanProperties"
             }
@@ -9731,14 +9731,14 @@
     "AzureSubscriptionSystemScanRuleset": {
       "type": "object",
       "description": "Azure subscription system scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSubscriptionScanRulesetProperties"
             }
@@ -9750,14 +9750,14 @@
     "AzureResourceGroupSystemScanRuleset": {
       "type": "object",
       "description": "Azure resource group system scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureResourceGroupScanRulesetProperties"
             }
@@ -9769,14 +9769,14 @@
     "AzureSynapseWorkspaceSystemScanRuleset": {
       "type": "object",
       "description": "Azure synapse workspace system scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSynapseWorkspaceScanRulesetProperties"
             }
@@ -9788,14 +9788,14 @@
     "AzureSynapseSystemScanRuleset": {
       "type": "object",
       "description": "Azure Synapse System scan rule set",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSynapseScanRulesetProperties"
             }
@@ -9807,14 +9807,14 @@
     "AdlsGen1SystemScanRuleset": {
       "type": "object",
       "description": "Adls Gen1 System scan rule set",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AdlsGen1ScanRulesetProperties"
             }
@@ -9826,14 +9826,14 @@
     "AdlsGen2SystemScanRuleset": {
       "type": "object",
       "description": "Adls Gen2 system scan rule set",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AdlsGen2ScanRulesetProperties"
             }
@@ -9845,14 +9845,14 @@
     "AmazonAccountSystemScanRuleset": {
       "type": "object",
       "description": "Amazon account system scan rule set",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonAccountScanRulesetProperties"
             }
@@ -9864,14 +9864,14 @@
     "AmazonS3SystemScanRuleset": {
       "type": "object",
       "description": "Amazon S3 system scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonS3ScanRulesetProperties"
             }
@@ -9883,14 +9883,14 @@
     "AmazonSqlSystemScanRuleset": {
       "type": "object",
       "description": "Amazon sql system scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonSqlScanRulesetProperties"
             }
@@ -9902,14 +9902,14 @@
     "AzureCosmosDbSystemScanRuleset": {
       "type": "object",
       "description": "Azure cosmos DB system scan rule set",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureCosmosDbScanRulesetProperties"
             }
@@ -9921,14 +9921,14 @@
     "AzureDataExplorerSystemScanRuleset": {
       "type": "object",
       "description": "Azure data explorer system scan rule set",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureDataExplorerScanRulesetProperties"
             }
@@ -9940,14 +9940,14 @@
     "AzureFileServiceSystemScanRuleset": {
       "type": "object",
       "description": "Azure file service system scan rule set",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureFileServiceScanRulesetProperties"
             }
@@ -9959,14 +9959,14 @@
     "AzureSqlDatabaseSystemScanRuleset": {
       "type": "object",
       "description": "Azure sql db system scan rule set",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSqlDatabaseScanRulesetProperties"
             }
@@ -9978,14 +9978,14 @@
     "AmazonPostgreSqlSystemScanRuleset": {
       "type": "object",
       "description": "Amazon postgre sql system scan rule set",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AmazonPostgreSqlScanRulesetProperties"
             }
@@ -9997,14 +9997,14 @@
     "AzurePostgreSqlSystemScanRuleset": {
       "type": "object",
       "description": "Azure postgre sql system scan rule set",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzurePostgreSqlScanRulesetProperties"
             }
@@ -10016,14 +10016,14 @@
     "SqlServerDatabaseSystemScanRuleset": {
       "type": "object",
       "description": "Sql server database system scan rule set",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SqlServerDatabaseScanRulesetProperties"
             }
@@ -10035,14 +10035,14 @@
     "AzureSqlDatabaseManagedInstanceSystemScanRuleset": {
       "type": "object",
       "description": "Azure sql database managed instance system scan rule set",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceScanRulesetProperties"
             }
@@ -10054,14 +10054,14 @@
     "AzureSqlDataWarehouseSystemScanRuleset": {
       "type": "object",
       "description": "Azure sql data ware house system scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureSqlDataWarehouseScanRulesetProperties"
             }
@@ -10073,14 +10073,14 @@
     "AzureMySqlSystemScanRuleset": {
       "type": "object",
       "description": "Azure Mysql system scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureMySqlScanRulesetProperties"
             }
@@ -10092,14 +10092,14 @@
     "AzureStorageSystemScanRuleset": {
       "type": "object",
       "description": "Azure storage system scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/AzureStorageScanRulesetProperties"
             }
@@ -10111,14 +10111,14 @@
     "TeradataSystemScanRuleset": {
       "type": "object",
       "description": "Teradata system scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/TeradataScanRulesetProperties"
             }
@@ -10130,14 +10130,14 @@
     "OracleSystemScanRuleset": {
       "type": "object",
       "description": "Oracle system scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/OracleScanRulesetProperties"
             }
@@ -10149,14 +10149,14 @@
     "SapS4HanaSystemScanRuleset": {
       "type": "object",
       "description": "Sap S4 hana system scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SapS4HanaScanRulesetProperties"
             }
@@ -10168,14 +10168,14 @@
     "SapEccSystemScanRuleset": {
       "type": "object",
       "description": "Sap ecc system scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/SapEccScanRulesetProperties"
             }
@@ -10187,14 +10187,14 @@
     "PowerBISystemScanRuleset": {
       "type": "object",
       "description": "Power BI system scan ruleset",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
         }
       ],
       "properties": {
         "properties": {
-          "items": [
+          "allOf": [
             {
               "$ref": "#/definitions/PowerBIScanRulesetProperties"
             }
