@@ -2254,7 +2254,7 @@
             "type": "string"
           }
         },
-        "ParentProblemClassification": {
+        "parentProblemClassification": {
           "description": "Reference to the parent problem classification which has same structure as problemclassification",
           "$ref": "#/definitions/ProblemClassification"
         }
@@ -3108,6 +3108,7 @@
     "ServiceNameParameter": {
       "name": "serviceName",
       "in": "path",
+      "pattern": "^[0-9a-zA-Z_\\-. ]+$",
       "description": "Name of the Azure service for which the problem classifications need to be retrieved.",
       "required": true,
       "type": "string"
