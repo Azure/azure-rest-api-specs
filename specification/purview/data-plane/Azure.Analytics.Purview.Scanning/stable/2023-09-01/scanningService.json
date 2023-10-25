@@ -471,18 +471,10 @@
             "format": "int32"
           },
           {
-            "in": "query",
-            "name": "action",
-            "required": true,
-            "type": "string",
-            "description": "The action to take on the classification rule version.",
-            "enum": [
-              "Keep",
-              "Delete"
-            ],
-            "x-ms-enum": {
-              "name": "ClassificationAction",
-              "modelAsString": true
+            "classificationAction": {
+              "type": "string",
+              "description": "The classification action type.",
+              "$ref": "#/definitions/ClassificationAction"
             }
           },
           {
@@ -4097,6 +4089,19 @@
         "modelAsString": true
       }
     },
+    "ClassificationAction": {
+      "description": "The action of classification rule.",
+      "enum": [
+        "Keep",
+        "Delete"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "ClassificationAction",
+        "modelAsString": true
+      }
+    },
     "ManagedIntegrationRuntimeComputeProperties": {
       "description": "The compute resource properties for managed integration runtime.",
       "type": "object",
@@ -5369,17 +5374,9 @@
           "type": "number"
         },
         "classificationAction": {
-          "description": "The action of classification rule.",
-          "enum": [
-            "Keep",
-            "Delete"
-          ],
           "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ClassificationAction",
-            "modelAsString": true
-          }
+          "description": "The classification action type.",
+          "$ref": "#/definitions/ClassificationAction"
         },
         "dataPatterns": {
           "type": "array",
