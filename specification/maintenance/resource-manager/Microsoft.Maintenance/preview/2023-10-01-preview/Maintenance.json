@@ -16,6 +16,71 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{resourceName}/providers/Microsoft.Maintenance/scheduledevents/{scheduledEventId}/zones/{availabilityZone}/acknowledge": {
+      "post": {
+        "tags": [
+          "ScheduledEvents"
+        ],
+        "summary": "Post Scheduled Event Acknowledgement",
+        "operationId": "ScheduledEvent_Acknowledge",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduledEventId",
+            "in": "path",
+            "description": "Scheduled Event Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "availabilityZone",
+            "in": "path",
+            "description": "Availability zone of scheduledEvent",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledEvents_Acknowledge": {
+            "$ref": "./examples/ScheduledEvents_Acknowledge.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/publicMaintenanceConfigurations": {
       "get": {
         "tags": [
