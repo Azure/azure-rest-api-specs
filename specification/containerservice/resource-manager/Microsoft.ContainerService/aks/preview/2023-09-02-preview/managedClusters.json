@@ -3825,13 +3825,6 @@
         "artifactStreamingProfile": {
           "$ref": "#/definitions/AgentPoolArtifactStreamingProfile",
           "description": "Configuration for using artifact streaming on AKS."
-        },
-        "vmIdentityProfile": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentity"
-          },
-          "description": "Customers use this identity to grant AKS access permission to the Capacity Reservation Group and the reserved VMs inside."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -8003,17 +7996,8 @@
       "description": "The type of a snapshot. The default is NodePool."
     },
     "CapacityReservationGroupID": {
-      "type": "string",
-      "format": "arm-id",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.Compute/CapacityReservationGroups"
-          }
-        ]
-      },
-      "title": "The fully qualified resource ID of the Capacity Reservation Group to provide virtual machines from a reserved group of Virtual Machines.",
-      "description": "This is of the form: '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/capacityreservationgroups/{capacityReservationGroupName}' Customers use it to create an agentpool or to associate an existing agentpool based on a regular VM to a specified CRG. If A customer explicitly specifies this CapacityReservationGroupID as an empty string, AKS will disassociate the existing CRG from the nodepool. For more information refer [Capacity Reservation](https://learn.microsoft.com/en-us/azure/virtual-machines/capacity-reservation-overview)"
+      "description": "Capacity Reservation Group ID for AgentPool to associate",
+      "type": "string"
     },
     "TrustedAccessRoleRule": {
       "type": "object",
