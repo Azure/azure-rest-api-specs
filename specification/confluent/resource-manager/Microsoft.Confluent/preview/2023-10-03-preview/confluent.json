@@ -1017,7 +1017,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/Access_RoleBinding_SuccessResponse"
+              "$ref": "#/definitions/RoleBindingRecord"
             }
           },
           "default": {
@@ -2187,7 +2187,7 @@
       }
     },
     "RoleBindingNameList": {
-      "description": "Data of the role binding name list",
+      "description": "List of rolebinding names",
       "type": "array",
       "items": {
         "type": "string"
@@ -2206,15 +2206,10 @@
           "type": "string"
         },
         "crn_pattern": {
-          "description": "The name of the role to bind to the principal",
+          "description": "A CRN that specifies the scope and resource patterns necessary for the role to bind",
           "type": "string"
         }
       }
-    },
-    "Access_RoleBinding_SuccessResponse": {
-      "description": "Create role binding success response",
-      "type": "object",
-      "$ref": "#/definitions/RoleBindingRecord"
     },
     "Access_RoleBindingNameList_SuccessResponse": {
       "description": "List role binding names success response",
@@ -2229,7 +2224,7 @@
           "$ref": "#/definitions/ConfluentListMetadata"
         },
         "data": {
-          "description": "Data of the role binding names",
+          "description": "List of rolebinding names",
           "$ref": "#/definitions/RoleBindingNameList"
         }
       }
