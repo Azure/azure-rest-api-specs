@@ -732,26 +732,26 @@
           "description": "List of instance view of the capacity reservations under the capacity reservation group."
         },
         "sharedSubscriptionIds": {
-            "type" : "array",
-            "items": {
-                "$ref": "../../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
-            },
-            "x-ms-identifiers": [],
-            "readOnly" : true,
-            "description": "List of the subscriptions that the capacity reservation group is shared with. Minimum api-version: 2023-09-01"
+          "type": "array",
+          "items": {
+            "$ref": "../../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true,
+          "description": "List of the subscriptions that the capacity reservation group is shared with. Minimum api-version: 2023-09-01"
         }
       }
     },
     "CapacityReservationGroupSharingProfile": {
       "properties": {
-          "subscriptionIds" :{
-              "type": "array",
-              "description": "Specifies an array of refrences to subscriptionIds. Minimum api-version: 2023-09-01",
-              "items": {
-                  "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
-                }
-            }
+        "subscriptionIds": {
+          "type": "array",
+          "description": "Specifies an array of refrences to subscriptionIds. Minimum api-version: 2023-09-01",
+          "items": {
+            "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
+          }
         }
+      }
     },
     "CapacityReservationGroupProperties": {
       "type": "object",
@@ -780,7 +780,7 @@
         "sharingProfile": {
           "$ref": "#/definitions/CapacityReservationGroupSharingProfile",
           "description": "A list of all subscriptions that the capacity reservation group is shared with. Minimum api-version: 2023-09-01"
-		}
+        }
       },
       "description": "capacity reservation group Properties."
     },
