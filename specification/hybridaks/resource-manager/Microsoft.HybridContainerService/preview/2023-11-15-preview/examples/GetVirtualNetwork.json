@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b",
     "resourceGroupName": "test-arcappliance-resgrp",
-    "virtualNetworksName": "test-vnet-static",
+    "virtualNetworkName": "test-vnet-static",
     "api-version": "2023-11-15-preview"
   },
   "responses": {
@@ -19,10 +19,8 @@
         "properties": {
           "provisioningState": "Succeeded",
           "infraVnetProfile": {
-            "hci": {
-              "mocVnetName": "test-vnet",
-              "mocGroup": "target-group",
-              "mocLocation": "MocLocation"
+            "vmware": {
+              "segmentName": "test-network"
             }
           },
           "vipPool": [
@@ -41,7 +39,8 @@
             "192.168.0.1"
           ],
           "gateway": "192.168.0.1",
-          "ipAddressPrefix": "192.168.0.0/16"
+          "ipAddressPrefix": "192.168.0.0/16",
+          "vlanID": 10
         }
       }
     }

@@ -19,10 +19,8 @@
             "properties": {
               "provisioningState": "Succeeded",
               "infraVnetProfile": {
-                "hci": {
-                  "mocVnetName": "test-vnet",
-                  "mocGroup": "target-group",
-                  "mocLocation": "MocLocation"
+                "vmware": {
+                  "segmentName": "test-network"
                 }
               },
               "vipPool": [
@@ -41,7 +39,8 @@
                 "192.168.0.1"
               ],
               "gateway": "192.168.0.1",
-              "ipAddressPrefix": "192.168.0.0/16"
+              "ipAddressPrefix": "192.168.0.0/16",
+              "vlanID": 10
             }
           }
         ]

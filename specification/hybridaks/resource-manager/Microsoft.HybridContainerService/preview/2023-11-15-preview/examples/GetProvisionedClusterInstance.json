@@ -1,17 +1,14 @@
 {
   "parameters": {
-    "subscriptionId": "a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b",
-    "resourceGroupName": "test-arcappliance-resgrp",
-    "resourceName": "test-hybridakscluster",
+    "connectedClusterResourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster",
     "api-version": "2023-11-15-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.HybridContainerService/provisionedClusters/test-hybridakscluster",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default",
         "name": "test-hybridakscluster",
-        "type": "microsoft.hybridcontainerservice/provisionedclusters",
-        "location": "westus",
+        "type": "Microsoft.HybridContainerService/provisionedClusterInstances",
         "extendedLocation": {
           "name": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourcegroups/test-arcappliance-resgrp/providers/microsoft.extendedlocation/customlocations/testcustomlocation",
           "type": "CustomLocation"
@@ -34,21 +31,6 @@
           },
           "kubernetesVersion": "v1.20.5",
           "networkProfile": {
-            "loadBalancerSku": "unstacked-haproxy",
-            "loadBalancerProfile": {
-              "count": 1,
-              "vmSize": "Standard_K8S3_v1",
-              "osType": "Linux",
-              "linuxProfile": {
-                "ssh": {
-                  "publicKeys": [
-                    {
-                      "keyData": "ssh-rsa AAAAB2NzaC1yc2EAAAADAQABAAACAQCY......"
-                    }
-                  ]
-                }
-              }
-            },
             "networkPolicy": "calico",
             "podCidr": "10.244.0.0/16"
           },
@@ -72,14 +54,12 @@
           "cloudProviderProfile": {
             "infraNetworkProfile": {
               "vnetSubnetIds": [
-                "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.HybridContainerService/virtualNetworks/test-vnet-static"
-              ]
-            },
-            "infraStorageProfile": {
-              "storageSpaceIds": [
-                "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.HybridContainerService/storageSpaces/test-storage"
+                "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.AzureStackHCI/logicalNetworks/test-vnet-static"
               ]
             }
+          },
+          "licenseProfile": {
+            "azureHybridBenefit": "NotApplicable"
           }
         }
       }

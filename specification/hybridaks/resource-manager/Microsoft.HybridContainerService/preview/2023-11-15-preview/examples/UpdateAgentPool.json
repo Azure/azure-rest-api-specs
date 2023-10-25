@@ -1,14 +1,11 @@
 {
   "parameters": {
-    "subscriptionId": "a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b",
-    "resourceGroupName": "test-arcappliance-resgrp",
-    "resourceName": "test-hybridakscluster",
+    "connectedClusterResourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster",
     "agentPoolName": "test-hybridaksnodepool",
     "api-version": "2023-11-15-preview",
     "agentPool": {
-      "location": "westus",
-      "properties": {
-        "count": 3
+      "tags": {
+        "additionalProperties": "sample"
       }
     }
   },
@@ -16,14 +13,17 @@
     "200": {
       "body": {
         "location": "westus",
-        "id": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.HybridContainerService/provisionedClusters/test-hybridakscluster/agentPools/test-hybridaksnodepool",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/test-hybridaksnodepool",
         "name": "test-hybridaksnodepool",
-        "type": "microsoft.hybridcontainerservice/provisionedclusters/agentpools",
+        "type": "Microsoft.HybridContainerService/provisionedClusterInstances/agentpools",
         "properties": {
           "provisioningState": "Accepted",
           "count": 3,
           "vmSize": "Standard_A4_v2",
           "osType": "Linux"
+        },
+        "tags": {
+          "additionalProperties": "sample"
         }
       }
     },
@@ -33,14 +33,17 @@
       },
       "body": {
         "location": "westus",
-        "id": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.HybridContainerService/provisionedClusters/test-hybridakscluster/agentPools/test-hybridaksnodepool",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/test-hybridaksnodepool",
         "name": "test-hybridaksnodepool",
-        "type": "microsoft.hybridcontainerservice/provisionedclusters/agentpools",
+        "type": "Microsoft.HybridContainerService/provisionedClusterInstances/agentpools",
         "properties": {
           "provisioningState": "Accepted",
           "count": 3,
           "vmSize": "Standard_A4_v2",
           "osType": "Linux"
+        },
+        "tags": {
+          "additionalProperties": "sample"
         }
       }
     }
