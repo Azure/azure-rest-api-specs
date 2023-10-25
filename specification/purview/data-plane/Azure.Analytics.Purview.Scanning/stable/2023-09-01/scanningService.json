@@ -2918,7 +2918,9 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorModel"
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          }
         }
       }
     },
@@ -3823,7 +3825,7 @@
       ],
       "type": "object",
       "description": "The data source.",
-      "allOf": [
+      "items": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
@@ -7969,82 +7971,82 @@
         "resourceTypes": {
           "type": "object",
           "properties": {
-            "None": {
+            "none": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AzureSubscription": {
+            "azureSubscription": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AzureResourceGroup": {
+            "azureResourceGroup": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AzureSynapseWorkspace": {
+            "azureSynapseWorkspace": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AzureSynapse": {
+            "azureSynapse": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AdlsGen1": {
+            "adlsGen1": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AdlsGen2": {
+            "adlsGen2": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AmazonAccount": {
+            "amazonAccount": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AmazonS3": {
+            "amazonS3": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AmazonSql": {
+            "amazonSql": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AzureCosmosDb": {
+            "azureCosmosDb": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AzureDataExplorer": {
+            "azureDataExplorer": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AzureFileService": {
+            "azureFileService": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AzureSqlDatabase": {
+            "azureSqlDatabase": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AmazonPostgreSql": {
+            "amazonPostgreSql": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AzurePostgreSql": {
+            "azurePostgreSql": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "SqlServerDatabase": {
+            "sqlServerDatabase": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AzureSqlDatabaseManagedInstance": {
+            "azureSqlDatabaseManagedInstance": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AzureSqlDataWarehouse": {
+            "azureSqlDataWarehouse": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AzureMySql": {
+            "azureMySql": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "AzureStorage": {
+            "azureStorage": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "Teradata": {
+            "teradata": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "Oracle": {
+            "oracle": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "SapS4Hana": {
+            "sapS4Hana": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "SapEcc": {
+            "sapEcc": {
               "$ref": "#/definitions/ResourceTypeFilter"
             },
-            "PowerBI": {
+            "powerBI": {
               "$ref": "#/definitions/ResourceTypeFilter"
             }
           }
