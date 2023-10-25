@@ -19,6 +19,16 @@
               "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation2"
             }
           ],
+          "sharingProfile": {
+              "subscriptionIds": [
+              {
+                  "id": "/subscriptions/{subscription-id1}"
+              },
+              {
+                  "id": "/subscriptions/{subscription-id2}"
+              }
+            ]
+          },
           "instanceView": {
             "capacityReservations": [
               {
@@ -63,7 +73,15 @@
                   }
                 ]
               }
-            ]
+            ],
+            "sharedSubscriptiondIds": [
+            {
+                  "id": "/subscriptions/{subscription-id1}"
+            },
+            {
+                  "id": "/subscriptions/{subscription-id2}"
+            }
+           ]
           }
         },
         "location": "westus",

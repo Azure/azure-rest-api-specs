@@ -40,7 +40,7 @@
           "CapacityReservationGroups"
         ],
         "operationId": "CapacityReservationGroups_CreateOrUpdate",
-        "description": "The operation to create or update a capacity reservation group. When updating a capacity reservation group, only tags may be modified. Please refer to https://aka.ms/CapacityReservation for more details.",
+        "description": "The operation to create or update a capacity reservation group. When updating a capacity reservation group, only tags and sharing profile may be modified. Please refer to https://aka.ms/CapacityReservation for more details.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -103,7 +103,7 @@
           "CapacityReservationGroups"
         ],
         "operationId": "CapacityReservationGroups_Update",
-        "description": "The operation to update a capacity reservation group. When updating a capacity reservation group, only tags may be modified.",
+        "description": "The operation to update a capacity reservation group. When updating a capacity reservation group, only tags and sharing profile may be modified.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -730,8 +730,28 @@
           ],
           "readOnly": true,
           "description": "List of instance view of the capacity reservations under the capacity reservation group."
+        },
+        "sharedSubscriptionIds": {
+            "type" : "array",
+            "items": {
+                "$ref": "../../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
+            },
+            "x-ms-identifiers": [],
+            "readOnly" : true,
+            "description": "List of the subscriptions that the capacity reservation group is shared with. Minimum api-version: 2023-09-01"
         }
       }
+    },
+    "SharingProfile": {
+      "properties": {
+          "subscriptionIds" :{
+              "type": "array",
+              "description": "Specifies an array of refrences to subscriptionIds. Minimum api-version: 2023-09-01",
+              "items": {
+                  "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
+                }
+            }
+        }
     },
     "CapacityReservationGroupProperties": {
       "type": "object",
@@ -756,7 +776,11 @@
           "$ref": "#/definitions/CapacityReservationGroupInstanceView",
           "readOnly": true,
           "description": "The capacity reservation group instance view which has the list of instance views for all the capacity reservations that belong to the capacity reservation group."
-        }
+        },
+        "sharingProfile": {
+          "$ref": "#/definitions/SharingProfile",
+          "description": "A list of all subscriptions that the capacity reservation group is shared with. Minimum api-version: 2023-09-01"
+		}
       },
       "description": "capacity reservation group Properties."
     },
