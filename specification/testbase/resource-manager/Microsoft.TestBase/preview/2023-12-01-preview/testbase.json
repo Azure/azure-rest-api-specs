@@ -4074,6 +4074,19 @@
     "PackageRunTestParameters": {
       "description": "The parameters supplied to the Test Base Package to start a Test Run.",
       "type": "object",
+      "properties": {},
+      "required": [
+        "testType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TestRunParameters"
+        }
+      ]
+    },
+    "TestRunParameters": {
+      "type": "object",
+      "description": "Base parameters for Package and TestConfiguration Test Run.",
       "properties": {
         "testType": {
           "$ref": "#/definitions/TestType",
@@ -4105,9 +4118,17 @@
           "type": "string",
           "description": "The flighting ring, only for release of feature updates."
         },
+        "buildVersion": {
+          "type": "string",
+          "description": "The build version of the operating system."
+        },
         "customImageId": {
           "type": "string",
           "description": "The tested custom image id. 'osName', 'release', 'buildVersion' and 'mediaPackageVersion' would be ignored when it's eligible.'"
+        },
+        "mediaPackageVersion": {
+          "type": "string",
+          "description": "The package version of the operating system. It can be empty."
         }
       }
     },
