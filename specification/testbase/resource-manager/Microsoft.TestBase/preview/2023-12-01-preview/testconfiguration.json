@@ -181,12 +181,6 @@
               "$ref": "#/definitions/TestConfigurationResource"
             }
           },
-          "201": {
-            "description": "The operation is accepted.",
-            "schema": {
-              "$ref": "#/definitions/TestConfigurationResource"
-            }
-          },
           "202": {
             "description": "The operation is accepted.",
             "headers": {
@@ -299,9 +293,6 @@
               }
             },
             "description": "The operation is accepted."
-          },
-          "200": {
-            "description": "The operation is completed successfully."
           },
           "204": {
             "description": "The operation was completed successfully."
@@ -419,7 +410,7 @@
         "tags": [
           "Test Configuration"
         ],
-        "operationId": "TestConfigurations_RunTest",
+        "operationId": "TestConfiguration_RunTest",
         "summary": "Schedule On-Demand Run for all Packages",
         "description": "This endpoint allows initiating an on-demand run for a specific test configuration identified by the testConfigurationId within the specified organizationId. It triggers the execution of multiple packages with the provided payload parameters.",
         "parameters": [
@@ -474,7 +465,7 @@
         "tags": [
           "Test Result"
         ],
-        "operationId": "TestConfiguration_TestResults_List",
+        "operationId": "TestConfiguration_TestResultsList",
         "description": "Lists all the Test Results of packages associated with a test configuration. Can be filtered by testPassId (specific test configuration run).",
         "parameters": [
           {
