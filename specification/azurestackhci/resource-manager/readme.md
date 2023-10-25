@@ -42,6 +42,7 @@ directive:
       - clusters.json
       - extensions.json
       - galleryImages.json
+      - logicalNetworks.json
       - marketplaceGalleryImages.json
       - networkInterfaces.json
       - operations.json
@@ -56,10 +57,38 @@ directive:
       - updates.json
       - updateRuns.json
       - updateSummaries.json
+      - deploymentSettings.json
+      - edgeDevices.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
   - code: PathResourceProviderNamePascalCase
     reason: We had already gone to production with "HCI" in our namespace, so changing it to "Hci" now would be disruptive.
+    from: 
+      - arcSettings.json
+      - clusters.json
+      - extensions.json
+      - galleryImages.json
+      - logicalNetworks.json
+      - marketplaceGalleryImages.json
+      - networkInterfaces.json
+      - operations.json
+      - storageContainers.json
+      - virtualHardDisks.json
+      - virtualMachines.json
+      - virtualMachineInstances.json
+      - virtualNetworks.json
+      - offers.json
+      - publishers.json
+      - skus.json
+      - updates.json
+      - updateRuns.json
+      - updateSummaries.json
+      - deploymentSettings.json
+      - edgeDevices.json
+      
+  - code: ResourceNameRestriction
+    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+    from: clusters.json
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
     from: deploymentSettings.json
