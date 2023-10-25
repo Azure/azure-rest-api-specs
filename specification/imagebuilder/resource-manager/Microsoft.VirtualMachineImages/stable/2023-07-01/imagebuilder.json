@@ -59,7 +59,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -691,9 +691,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The operation was successful."
-          },
           "202": {
             "description": "The operation will be completed asynchronously.",
             "headers": {
@@ -1699,12 +1696,6 @@
         "identity": {
           "$ref": "#/definitions/ImageTemplateIdentity",
           "description": "The identity of the image template, if configured."
-        },
-        "distribute": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImageTemplateDistributor"
-          }
         }
       },
       "allOf": [
@@ -1714,7 +1705,8 @@
       ],
       "required": [
         "identity"
-      ]
+      ],
+      "x-ms-identifiers": [ ]
     },
     "ImageTemplateUpdateParameters": {
       "type": "object",
