@@ -57,6 +57,15 @@ input-file:
   - Microsoft.ServicesHub/preview/2023-04-17-preview/serviceshub-preview.json
 ```
 
+### Tag: package-2023-10-20-preview
+
+These settings apply only when `--tag=package-2023-10-20-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-20-preview'
+input-file:
+  - Microsoft.ServicesHub/preview/2023-10-20-preview/serviceshub-preview.json
+```
+
 ---
 
 # Code Generation
