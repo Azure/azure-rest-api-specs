@@ -177,22 +177,6 @@
               "$ref": "#/definitions/TestConfigurationResource"
             }
           },
-          "202": {
-            "description": "The operation is accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/TestConfigurationResource"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -273,18 +257,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            },
-            "description": "The operation is accepted."
+          "200": {
+            "description": "The operation was completed successfully."
           },
           "204": {
             "description": "The operation was completed successfully."
