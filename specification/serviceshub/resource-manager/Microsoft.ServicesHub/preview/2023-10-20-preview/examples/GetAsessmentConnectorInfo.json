@@ -1,0 +1,53 @@
+{
+  "title": "Get Assessment Connector Information",
+  "operationId": "Get_AsessmentConnectorInfo",
+  "parameters": {
+    "subscriptionId": "0afefe50-734e-4610-8a82-a144ahf49dea",
+    "resourceGroupName": "rgName",
+    "servicesHubConnectorName": "servicesHubResourceName1",
+    "api-version": "2023-10-20-preview",
+    "requestBody": {
+      "properties": {
+        "connectorName": "test1",
+        "spaceId": "test1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "targetScope": "user-hubid:4a89cd33-1fb6-5a21-b460-a9bfb292bf71",
+          "connectorName": "test1",
+          "timestamp": "2023-08-23T14:00:55.6010346+00:00",
+          "spaceId": "test1",
+          "puid": "100320022070AF3F",
+          "logAnalyticsWorkspaces": [
+            {
+              "omsWorkspaceName": "LAW1",
+              "omsWorkspaceId": "LAW1",
+              "location": "eastus",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "subscriptionId": null,
+              "resourceGroupName": null,
+              "linkedDate": null,
+              "isLatest": false
+            },
+            {
+              "omsWorkspaceName": "LAW2",
+              "omsWorkspaceId": "LAW2",
+              "location": "westus",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "subscriptionId": null,
+              "resourceGroupName": null,
+              "linkedDate": null,
+              "isLatest": false
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+
+

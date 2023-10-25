@@ -1,0 +1,1753 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-10-20-preview",
+    "title": "ServicesHubRPService API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}": {
+      "put": {
+        "tags": [
+          "ServicesHubConnector"
+        ],
+        "summary": "Creates or Updates an existing ServicesHub Connector\r\nThis links to Services Hub and Log Analytics workspace",
+        "operationId": "CreateOrUpdate_ServicesHubConnector",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "name": "x-ms-engagehub-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "EngageHub 1PA token to be send to EH Gateway",
+            "x-ms-secret": true
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "services hub resource object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicesHubConnector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Services Hub Connector has been created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServicesHubConnector"
+            }
+          },
+          "201": {
+            "description": "The Services Hub Connector has been created successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServicesHubConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a ServicesHub Connector": {
+            "$ref": "./examples/PutServicesHubConnector.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Update_ServicesHubConnector",
+        "description": "Updates the properties of a Services Hub Connector.",
+        "tags": [
+          "ServicesHubConnector"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "name": "x-ms-engagehub-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "EngageHub 1PA token to be send to EH Gateway",
+            "x-ms-secret": true
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "services hub resource object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicesHubConnector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Services Hub Connector has been updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServicesHubConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an existing Services Hub Connector": {
+            "$ref": "./examples/PatchServicesHubConnector.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ServicesHubConnector"
+        ],
+        "summary": "Gets an existing ServicesHub Connector\r\nIt also gets details of associated Services Hub and Log Analytics workspace",
+        "operationId": "Get_ServicesHubConnector",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "name": "x-ms-engagehub-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "EngageHub 1PA token to be send to EH Gateway",
+            "x-ms-secret": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServicesHubConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ServicesHub Connector": {
+            "$ref": "./examples/GetServicesHubConnector.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ServicesHubConnector"
+        ],
+        "summary": "Deletes an existing ServicesHub Connector",
+        "operationId": "Delete_ServicesHubConnector",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "name": "x-ms-engagehub-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "EngageHub 1PA token to be send to EH Gateway",
+            "x-ms-secret": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Deletion of ServicesHub Connector",
+            "schema": {
+              "$ref": "#/definitions/ServicesHubConnector"
+            }
+          },
+          "204": {
+            "description": "The Services Hub connector is not found or has been deleted already."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ServicesHub Connector": {
+            "$ref": "./examples/DeleteServicesHubConnector.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/checkAssessmentEntitlement": {
+      "post": {
+        "tags": [
+          "AssessmentEntitlement"
+        ],
+        "summary": "Gets the Entitlement for the Services Hub Workspace.",
+        "operationId": "Entitlement_ServicesHub",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AssessmentEntitlement"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Assessment Entitlement": {
+            "$ref": "./examples/GetAssessmentEntitlement.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ServicesHub/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "operationId": "Operations_List",
+        "description": "Gets a list of the operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Services Hub Operations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors": {
+      "get": {
+        "operationId": "ServicesHubConnectors_ListByResourceGroup",
+        "description": "Lists all Azure ServicesHub Connectors under the specified resource group.",
+        "tags": [
+          "ServicesHubConnectors"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure ServicesHubConnectors have been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServicesHubConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Azure Services Hub Connector under the specified resource group": {
+            "$ref": "./examples/ListAzureServicesHubConnectorsByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServicesHub/connectors": {
+      "get": {
+        "operationId": "ServicesHubConnectors_ListBySubscription",
+        "description": "Lists all Azure ServicesHub Connectors under the specified Azure subscription.",
+        "tags": [
+          "ServicesHubConnectors"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure ServicesHubConnectors have been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServicesHubConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Azure Services Hub Connector under the specified resource group": {
+            "$ref": "./examples/ListAzureServicesHubConnectorsBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServicesHub/supportOfferingEntitlement": {
+      "get": {
+        "tags": [
+          "SupportOfferingEntitlement"
+        ],
+        "summary": "Get the Entitlement of the user.",
+        "operationId": "SupportOfferingEntitlement_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SupportOfferingEntitlement"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Support Offering Entitlement": {
+            "$ref": "./examples/GetSupportOfferingEntitlement.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServicesHub/workspaces": {
+      "get": {
+        "tags": [
+          "ServicesHubWorkspace"
+        ],
+        "summary": "Gets the list Services Hub Workspaces user is part of.",
+        "operationId": "ServicesHubWorkspaces_ListForUser",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServicesHubWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ServicesHub Workspaces": {
+            "$ref": "./examples/ListServicesHubWorkspaces.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServicesHub/getRecommendationsContent": {
+      "post": {
+        "tags": [
+          "AssessmentsRecommendationsContent"
+        ],
+        "summary": "Gets an existing ServicesHub Recommendation Content details.",
+        "operationId": "Get_ServicesHubRecommendationContent",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "services hub content payload object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicesHubRecommendationContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServicesHubRecommendationContentResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Assessment Recommendation Content": {
+            "$ref": "./examples/GetServicesHubRecommendationContent.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/listConfigSettings": {
+      "post": {
+        "tags": [
+          "AssessmentConfigSettings"
+        ],
+        "summary": "Gets the Assessment Config Settings data from Ops Center for the  Services Hub Workspace.",
+        "operationId": "Get_ServicesHubAssessmentConfigSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServicesHubAssessmentConfigResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Assessment Config Settings": {
+            "$ref": "./examples/GetServicesHubAssessmentConfigSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/enableAMASolution": {
+      "post": {
+        "tags": [
+          "ServicesHubEnableSolution"
+        ],
+        "summary": "Triggers the Enable Solution Azure Function for the  Services Hub Workspace and linked Log analytics workspace.",
+        "operationId": "Post_ServicesHubEnableSolution",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "services hub enable solution payload object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicesHubEnableSolutionPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServicesHubEnableAMASolutionResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Post Enable Solution": {
+            "$ref": "./examples/PostServicesHubEnableSolution.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/getAMASolutionStatus": {
+      "post": {
+        "tags": [
+          "ServicesHubAMASolutionStatus"
+        ],
+        "summary": "Gets the ServicesHub AMA SolutionStatus from AzureFunction for the Log Analytics workspace.",
+        "operationId": "Get_ServicesHubAMASolutionStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "services hub get ama status payload object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicesHubGetSolutionStatusPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServicesHubAMASolutionStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get AMA Solution Status": {
+            "$ref": "./examples/GetServicesHubAMASolutionStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServicesHub/getEngageHubSpaces": {
+      "post": {
+        "tags": [
+          "EngageHubSpaces"
+        ],
+        "summary": "Get all the spaces for the logged-in user corresponding tothe user's EngageHub 1PA token.",
+        "operationId": "Get_EngageHubSpaces",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-engagehub-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "EngageHub 1PA token to be send to EH Gateway",
+            "x-ms-secret": true
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "spaces request payload object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpacesPayloadModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SpacesResponseModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Spaces List for EngageHub Context": {
+            "$ref": "./examples/GetEngageHubSpaces.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/getAsessmentConnectorInfo": {
+      "post": {
+        "tags": [
+          "AsessmentConnectorInfo"
+        ],
+        "summary": "Get Assessment Connector information stored with EngageHub Spaces'.",
+        "operationId": "Get_AsessmentConnectorInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-engagehub-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "EngageHub 1PA token to be send to EH Gateway",
+            "x-ms-secret": true
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "connector information payload object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectorInfoPayloadModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConnectorInfoPayloadModelResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Assessment Connector Information": {
+            "$ref": "./examples/GetAsessmentConnectorInfo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/upsertAsessmentConnectorInfo": {
+      "post": {
+        "tags": [
+          "AsessmentConnectorInfo"
+        ],
+        "summary": "Create or Update Assessment Connector information linked with EngageHub Spaces'.",
+        "operationId": "Post_AsessmentConnectorInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-engagehub-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "EngageHub 1PA token to be send to EH Gateway",
+            "x-ms-secret": true
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "post connector information payload object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostConnectorInfoPayloadModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConnectorInfoPayloadResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/Update Assessment Connector Information": {
+            "$ref": "./examples/PostAsessmentConnectorInfo.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "type": "object",
+      "description": "An Azure Resource Manager (ARM) resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource Tags"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "agreementType": {
+          "type": "string",
+          "description": "Resource AgreementType"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ServicesHubConnector": {
+      "type": "object",
+      "description": "Services Hub Connector",
+      "properties": {
+        "properties": {
+          "description": "Services Hub Connector Properties",
+          "$ref": "#/definitions/ServicesHubConnectorProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ServicesHubConnectorProperties": {
+      "type": "object",
+      "description": "Custom properties of a Services Hub Workspace.",
+      "properties": {
+        "servicesHubWorkspace": {
+          "description": "Properties of Services Hub Workspace.",
+          "$ref": "#/definitions/ServicesHubWorkspace"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of Services Hub Connector."
+        }
+      }
+    },
+    "ServicesHubWorkspace": {
+      "type": "object",
+      "description": "Services Hub Workspace",
+      "properties": {
+        "properties": {
+          "description": "Services Hub Workspace Properties",
+          "$ref": "#/definitions/ServicesHubWorkspaceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ServicesHubWorkspaceProperties": {
+      "type": "object",
+      "description": "Properties of Services Hub Workspace.",
+      "properties": {
+        "servicesHubWorkspaceId": {
+          "type": "string",
+          "description": "Unique identifier of Services Hub Workspace."
+        },
+        "servicesHubWorkspaceName": {
+          "type": "string",
+          "description": "Name of the Services Hub Workspace."
+        },
+        "logAnalyticsWorkspace": {
+          "description": "Properties of Log Analytics Workspace.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogAnalyticsWorkspace"
+          }
+        },
+        "consentedAzureSubscription": {
+          "type": "string",
+          "description": "Has Consent Been Provided for the Azure Subscription"
+        }
+      }
+    },
+    "LogAnalyticsWorkspace": {
+      "type": "object",
+      "description": "Properties of the Linked Azure Log Analytics Workspace.",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "ID of the Azure Log Analytics Workspace."
+        },
+        "workspaceName": {
+          "type": "string",
+          "description": "Name of the Azure Log Analytics Workspace."
+        },
+        "location": {
+          "type": "string",
+          "description": "Region where the Azure Log Analytics Workspace is deployed."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID in which Azure Log Analytics Workspace is present."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription ID where the Azure Log Analytics Workspace is present."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "Resource Group Name of the Azure Log Analytics Workspace."
+        }
+      }
+    },
+    "ServicesHubConnectorListResult": {
+      "type": "object",
+      "description": "Result of a request to list all Azure Services Hub Connector under a given scope.",
+      "properties": {
+        "value": {
+          "description": "List of ServicesHub Connector.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServicesHubConnector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of Services Hub connectors, if there are any."
+        }
+      }
+    },
+    "SupportOfferingEntitlement": {
+      "type": "object",
+      "description": "Defines the type of customer - Unified or Premier",
+      "properties": {
+        "customerTypeList": {
+          "type": "array",
+          "description": "Type of customer - Premier, Unified.",
+          "items": {
+            "$ref": "#/definitions/CustomerType"
+          }
+        }
+      }
+    },
+    "CustomerType": {
+      "type": "string",
+      "enum": [
+        "Unified",
+        "Premier"
+      ],
+      "description": "Type of customer - Premier or Unified."
+    },
+    "AssessmentEntitlement": {
+      "type": "object",
+      "description": "Defines the type of customer - Unified or Premier and the services they are entitled to",
+      "properties": {
+        "customerType": {
+          "type": "string",
+          "description": "Type of customer - Premier or Unified."
+        },
+        "assessment": {
+          "type": "array",
+          "description": "List of Assessments entitled.",
+          "items": {
+            "$ref": "#/definitions/Assessment"
+          }
+        }
+      }
+    },
+    "Assessment": {
+      "type": "object",
+      "description": "List of Assessment Services",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Assessment Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Internal Name of the Assessment."
+        }
+      }
+    },
+    "ServicesHubWorkspaceListResult": {
+      "type": "object",
+      "description": "Result of a request to list all Azure Services Hub Connector under a given scope.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of ServicesHub Workspace.",
+          "items": {
+            "$ref": "#/definitions/ServicesHubWorkspace"
+          }
+        }
+      }
+    },
+    "OperationList": {
+      "type": "object",
+      "description": "List of the operations.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of operations",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Properties of an Operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Operation"
+        },
+        "display": {
+          "description": "Operation Display Value",
+          "$ref": "#/definitions/OperationDisplayValue"
+        }
+      }
+    },
+    "OperationDisplayValue": {
+      "type": "object",
+      "description": "Properties of an Operation.",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "Name of the Operation"
+        },
+        "resource": {
+          "type": "string",
+          "description": "Name of the Resource"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation"
+        },
+        "provider": {
+          "type": "string",
+          "description": "Resource Provider"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "readOnly": true,
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Error code."
+            },
+            "message": {
+              "type": "string",
+              "description": "Error message indicating why the operation failed."
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ],
+          "type": "object",
+          "description": "Error response indicates Azure Resource Manager is not able to process the incoming request. The reason is provided in the error message."
+        }
+      }
+    },
+    "ServicesHubRecommendationContentResult": {
+      "type": "object",
+      "description": "Services Hub Content Payload",
+      "properties": {
+        "properties": {
+          "description": "Services Hub Recommendation Content Properties",
+          "$ref": "#/definitions/ServicesHubRecommendationContentResultProperties"
+        }
+      }
+    },
+    "ServicesHubRecommendationContentResultProperties": {
+      "type": "object",
+      "description": "Defines the content of Assessment recommendations",
+      "properties": {
+        "assessment": {
+          "type": "string",
+          "description": "Name of Assessment"
+        },
+        "slot": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Deployment slot"
+        },
+        "id": {
+          "type": "string",
+          "description": "Content Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of Recommendation"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason for this Recommendation"
+        },
+        "affectedEnvironments": {
+          "type": "string",
+          "description": "Affected environments for Recommendation"
+        },
+        "context": {
+          "type": "string",
+          "description": "Context of Recommendation"
+        },
+        "learnMore": {
+          "type": "string",
+          "description": "Learn more content for Recommendation"
+        },
+        "troubleshootingSteps": {
+          "type": "string",
+          "description": "Troubleshooting steps for Recommendation"
+        },
+        "suggestedActions": {
+          "type": "string",
+          "description": "Suggested actions for Recommendation"
+        },
+        "score": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Score of Recommendation"
+        },
+        "impact": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Impact of Recommendation"
+        },
+        "effort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Efforts for Recommendation"
+        },
+        "probability": {
+          "type": "number",
+          "format": "float",
+          "description": "Probability of Recommendation"
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Weight of Recommendation"
+        },
+        "focusArea": {
+          "type": "string",
+          "description": "Focus Area of Recommendation"
+        },
+        "focusAreaId": {
+          "type": "string",
+          "description": "Focus Area Id of Recommendation"
+        },
+        "actionArea": {
+          "type": "string",
+          "description": "Action Area of Recommendation"
+        },
+        "actionAreaId": {
+          "type": "string",
+          "description": "Action Area Id of Recommendation"
+        },
+        "lastRefresh": {
+          "type": "string",
+          "description": "Last Refresh timestamp of Recommendation"
+        }
+      }
+    },
+    "ServicesHubRecommendationContent": {
+      "type": "object",
+      "description": "Services Hub Content Payload",
+      "properties": {
+        "properties": {
+          "description": "Services Hub Recommendation Content Properties",
+          "$ref": "#/definitions/ServicesHubRecommendationContentProperties"
+        }
+      }
+    },
+    "ServicesHubRecommendationContentProperties": {
+      "type": "object",
+      "description": "Services Hub Recommendation Content Payload Properties",
+      "properties": {
+        "assessment": {
+          "type": "string",
+          "description": "Assessment Name."
+        },
+        "id": {
+          "type": "string",
+          "description": "Content Id."
+        },
+        "culture": {
+          "type": "string",
+          "description": "Content Culture."
+        },
+        "slot": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Content Deployment Slot."
+        }
+      }
+    },
+    "ServicesHubEnableSolutionPayload": {
+      "type": "object",
+      "description": "Services Hub Enable Solution Payload",
+      "properties": {
+        "properties": {
+          "description": "Services Hub Enable Solution Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServicesHubEnableSolutionProperties"
+        }
+      }
+    },
+    "ServicesHubEnableSolutionProperties": {
+      "type": "object",
+      "description": "Services Hub Enable Solution Payload Properties",
+      "properties": {
+        "logAnalyticsSubscriptionId": {
+          "type": "string",
+          "description": "Log Analytics Subscription Id."
+        },
+        "logAnalyticsResourceGroupName": {
+          "type": "string",
+          "description": "Log Analytics Resource Group Name."
+        },
+        "solutionName": {
+          "type": "string",
+          "description": "ServicesHub Assessment Name."
+        },
+        "logAnalyticsWorkspaceName": {
+          "type": "string",
+          "description": "Log Analytics Workspace Name."
+        },
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "description": "Log Analytics Workspace Id."
+        },
+        "location": {
+          "type": "string",
+          "description": "Log Analytics Location."
+        },
+        "token": {
+          "type": "string",
+          "description": "Log Analytics Workspace AAD token for Orchestration Azure function",
+          "x-ms-secret": true
+        },
+        "machineType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Type of Connected Machine - ARC or VM.",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "fileLocation": {
+          "type": "string",
+          "description": "File Location for DCR to pick logs from."
+        },
+        "connectedMachine": {
+          "type": "object",
+          "description": "Details of Connected Machine.",
+          "properties": {
+            "connectedMachineName": {
+              "type": "string",
+              "description": "Connected Machine Name."
+            },
+            "resourceGroupName": {
+              "type": "string",
+              "description": "Connected Machine Resource Group Name."
+            },
+            "location": {
+              "type": "string",
+              "description": "Connected Machine Location."
+            }
+          }
+        }
+      }
+    },
+    "MachineType": {
+      "type": "integer",
+      "enum": [
+        0,
+        1
+      ],
+      "description": "Type of Connected Machine - ARC or VM."
+    },
+    "ServicesHubAssessmentConfigResult": {
+      "type": "object",
+      "description": "Services Hub Assessment Config Result",
+      "properties": {
+        "properties": {
+          "description": "Services Hub Assessment Config Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServicesHubAssessmentConfigResultProperties"
+        }
+      }
+    },
+    "ServicesHubAssessmentConfigResultProperties": {
+      "type": "object",
+      "description": "Defines the content of Assessment recommendations.",
+      "properties": {
+        "mM_AMAFlowFlag": {
+          "type": "boolean",
+          "description": "Feature flag for AMA Migration"
+        },
+        "assessmentConfig": {
+          "type": "array",
+          "description": "Assessment Configuration Settings Object.",
+          "items": {
+            "$ref": "#/definitions/AssessmentModel"
+          }
+        }
+      }
+    },
+    "AssessmentModel": {
+      "type": "object",
+      "description": "Properties of Assessment we wish to install.",
+      "properties": {
+        "assessmentName": {
+          "type": "string",
+          "description": "Assessment Name which we want to install."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Publisher of the Assessment Extension."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the Assessment Extension."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "TypeHandlerVersion of the Assessment Extension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "DisplayName of the Assessment Extension."
+        }
+      }
+    },
+    "ServicesHubGetSolutionStatusPayload": {
+      "type": "object",
+      "description": "Services Hub Get Solution Status Payload",
+      "properties": {
+        "properties": {
+          "description": "Services Hub Get Solution Status Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServicesHubGetSolutionStatusPayloadProperties"
+        }
+      }
+    },
+    "ServicesHubGetSolutionStatusPayloadProperties": {
+      "type": "object",
+      "description": "Services Hub Get AMA Solution Status Payload Properties",
+      "properties": {
+        "solutionName": {
+          "type": "string",
+          "description": "Services Hub Assessment Name."
+        },
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "description": "Log Analytics Workspace Id."
+        },
+        "machineName": {
+          "type": "string",
+          "description": "Azure Connected Machine Name."
+        }
+      }
+    },
+    "ServicesHubAMASolutionStatusResult": {
+      "type": "object",
+      "description": "Services Hub AMA SolutionStatus Result.",
+      "properties": {
+        "properties": {
+          "description": "Services Hub AMA SolutionStatus Properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServicesHubAMASolutionStatusResultProperties"
+        }
+      }
+    },
+    "ServicesHubAMASolutionStatusResultProperties": {
+      "type": "object",
+      "description": "Defines the AMA Solution Get Status",
+      "properties": {
+        "instanceId": {
+          "type": "string",
+          "description": "Instance Id of Get AMA status API from Azure table."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of Get AMA Status API call in Azure Function."
+        },
+        "activity": {
+          "type": "string",
+          "description": "Process Name from Get AMA Status API call in Azure Function"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error Message from Get AMA Status API call in Azure Function."
+        }
+      }
+    },
+    "ServicesHubEnableAMASolutionResult": {
+      "type": "object",
+      "description": "Services Hub Enable AMA Solution Result.",
+      "properties": {
+        "properties": {
+          "description": "Services Hub Enable AMA Solution Properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServicesHubEnableAMASolutionResultProperties"
+        }
+      }
+    },
+    "ServicesHubEnableAMASolutionResultProperties": {
+      "type": "object",
+      "description": "Defines the Enable AMA solution properties",
+      "properties": {
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "description": "Log Analytics Workspace Id."
+        },
+        "solutionName": {
+          "type": "string",
+          "description": "Services Hub Assessment Name."
+        },
+        "machineName": {
+          "type": "string",
+          "description": "Azure Connected Machine Name."
+        }
+      }
+    },
+    "SpacesPayloadModel": {
+      "type": "object",
+      "description": "Engage Hub Get Spaces Payload",
+      "properties": {
+        "properties": {
+          "description": "Engage Hub Spaces Payload",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SpacesPayloadModelProperties"
+        }
+      }
+    },
+    "SpacesPayloadModelProperties": {
+      "type": "object",
+      "description": "Engage Hub Get Spaces Payload Properties",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "EngageHub Space Type."
+        }
+      }
+    },
+    "SpacesResponseModel": {
+      "type": "object",
+      "description": "EngageHub SpacesList Result.",
+      "properties": {
+        "properties": {
+          "description": "EngageHub SpaceList Properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SpacesResponseModelProperties"
+        }
+      }
+    },
+    "SpacesResponseModelProperties": {
+      "type": "object",
+      "description": "Gives the EngageHub SpaceList",
+      "properties": {
+        "spaces": {
+          "type": "array",
+          "description": "List of Spaces.",
+          "items": {
+            "$ref": "#/definitions/SpacesList"
+          }
+        }
+      }
+    },
+    "SpacesList": {
+      "type": "object",
+      "description": "List of Spaces.",
+      "properties": {
+        "spaceName": {
+          "type": "string",
+          "description": "Name of the Engagehub Space."
+        },
+        "id": {
+          "type": "string",
+          "description": "Id of the EngageHub Space."
+        }
+      }
+    },
+    "ConnectorInfoPayloadModel": {
+      "type": "object",
+      "description": "Assessment Connector Information Payload",
+      "properties": {
+        "properties": {
+          "description": "Assessment Connector Information Payload",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectorInfoPayloadModelProperties"
+        }
+      }
+    },
+    "ConnectorInfoPayloadModelProperties": {
+      "type": "object",
+      "description": "Assessment Connector Information Payload Properties",
+      "properties": {
+        "connectorName": {
+          "type": "string",
+          "description": "Name of the Connector Resource."
+        },
+        "spaceId": {
+          "type": "string",
+          "description": "EngageHub SpaceId linked to Connector."
+        }
+      }
+    },
+    "ConnectorInfoPayloadResult": {
+      "type": "object",
+      "description": "Connector Information Result.",
+      "properties": {
+        "properties": {
+          "description": "Connector Information Result.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectorInfoPayloadResultProperties"
+        }
+      }
+    },
+    "ConnectorInfoPayloadResultProperties": {
+      "type": "object",
+      "description": "Connector Information Result Properties",
+      "properties": {
+        "targetScope": {
+          "type": "string",
+          "description": "Target Scope is the unique identifier ofr the EngageHub Space."
+        },
+        "connectorName": {
+          "type": "string",
+          "description": "Name of the Connector Resource."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "TimeStamp when the connector is created/updated with the SpaceId."
+        },
+        "spaceId": {
+          "type": "string",
+          "description": "SpacesId linked to the connector."
+        },
+        "puid": {
+          "type": "string",
+          "description": "Puid of the EngageHub user."
+        },
+        "logAnalyticsWorkspaces": {
+          "description": "List of LogAnalyticsWorkspaces linked to Connector and SpaceId.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogAnalyticsWorkspaceForEngageHub"
+          }
+        }
+      }
+    },
+    "PostConnectorInfoPayloadModel": {
+      "type": "object",
+      "description": "Assessment Connector Information Post Payload",
+      "properties": {
+        "properties": {
+          "description": "Assessment Connector Information Post Payload",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PostConnectorInfoPayloadModelProperties"
+        }
+      }
+    },
+    "PostConnectorInfoPayloadModelProperties": {
+      "type": "object",
+      "description": "Assessment Connector Information Post Payload Properties",
+      "properties": {
+        "connectorName": {
+          "type": "string",
+          "description": "Name of the Connector Resource."
+        },
+        "spaceId": {
+          "type": "string",
+          "description": "EngageHub SpaceId linked to Connector."
+        },
+        "logAnalyticsWorkspaces": {
+          "description": "List of LogAnalyticsWorkspaces linked to Connector and SpaceId.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogAnalyticsWorkspaceForEngageHub"
+          }
+        },
+        "assessmentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of Assessments mapped to the Connector resource."
+        }
+      }
+    },
+    "LogAnalyticsWorkspaceForEngageHub": {
+      "type": "object",
+      "description": "Properties of the Linked Azure Log Analytics Workspace.",
+      "properties": {
+        "oMSWorkspaceName": {
+          "type": "string",
+          "description": "Name of the Azure Log Analytics Workspace."
+        },
+        "oMSWorkspaceId": {
+          "type": "string",
+          "description": "ID of the Azure Log Analytics Workspace."
+        },
+        "location": {
+          "type": "string",
+          "description": "Region where the Azure Log Analytics Workspace is deployed."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID in which Azure Log Analytics Workspace is present."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription ID where the Azure Log Analytics Workspace is present."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "Resource Group Name of the Azure Log Analytics Workspace."
+        },
+        "linkedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime when the Log Analytics workspace is linked to connector."
+        },
+        "isLatest": {
+          "type": "boolean",
+          "description": "Tracking the latest Log Analytics workspace linked to the connector."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Unique identifier of the Azure subscription. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the resource group within the Azure subscription.",
+      "x-ms-parameter-location": "method"
+    },
+    "ServicesHubConnectorNameParameter": {
+      "name": "servicesHubConnectorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of ServicesHub resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "API version to be used with the HTTP request.",
+      "x-ms-parameter-location": "method"
+    },
+    "ServicesHubWorkspaceIdParameter": {
+      "name": "servicesHubWorkspaceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Services Hub Workspace Id.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
