@@ -4,6 +4,7 @@ emit: [
 options:
   "@azure-tools/typespec-autorest":
     "output-file": "BatchService.json"
+    examples-directory: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     clear-output-folder: true
     model-namespace: false
@@ -13,3 +14,8 @@ options:
     namespace: "com.azure.compute.batch"
     service-name: "Batch"
     partial-update: true
+  "@azure-tools/cadl-python":
+    "basic-setup-py": true
+    "package-version": 14.0.0b
+    "package-name": azure-batch
+

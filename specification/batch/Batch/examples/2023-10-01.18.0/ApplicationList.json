@@ -1,19 +1,24 @@
 {
-  "operationId": "ComputeNode_GetRemoteLoginSettings",
-  "title": "Node get remote login settings",
+  "operationId": "Application_List",
+  "title": "List applications",
   "parameters": {
     "batchUrl": "account.region.batch.azure.com",
     "api-version": "2023-10-01.18.0",
-    "poolId": "poolId",
-    "nodeId": "tvm-1695681911_1-20161121t182739z",
     "client-request-id": "00000000-0000-0000-0000-000000000000",
     "ocp-date": "Fri, 17 Feb 2017 00:00:00 GMT"
   },
   "responses": {
     "200": {
       "body": {
-        "remoteLoginIPAddress": "1.1.1.1",
-        "remoteLoginPort": 50000
+        "value": [
+          {
+            "id": "my_application_id",
+            "versions": [
+              "v1.0"
+            ],
+            "displayName": "my_display_name"
+          }
+        ]
       }
     }
   }
