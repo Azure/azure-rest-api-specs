@@ -356,8 +356,7 @@ model ExceptionPolicy {
   name?: string;
 
   @doc("""
-(Optional) A dictionary collection of exception rules on the exception policy.
-Key is the Id of each exception rule.
+(Optional) A collection of exception rules on the exception policy.
 """)
   exceptionRules?: ExceptionRule[];
 }
