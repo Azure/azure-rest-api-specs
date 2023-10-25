@@ -22,10 +22,10 @@ provided prompt data.
 @sharedRoute
 @actionSeparator("/")
 @action("completions") //@convenientAPI(true)
-op getCompletions is Azure.Core.ResourceAction<
+op getCompletionsStreaming is Azure.Core.ResourceAction<
   Deployment,
   CompletionsOptions,
-  Completions
+  CompletionsStreamingChunk
 >;
 
 @doc("""
@@ -37,10 +37,10 @@ provided prompt data.
 @added(ServiceApiVersions.v2023_05_15)
 @actionSeparator("/")
 @action("chat/completions") //@convenientAPI(true)
-op getChatCompletions is ResourceAction<
+op getChatCompletionsStreaming is ResourceAction<
   Deployment,
   ChatCompletionsOptions,
-  ChatCompletions
+  ChatCompletionsStreamingChunk
 >;
 
 @doc("""
@@ -56,8 +56,8 @@ other augmentations to the base chat completions capabilities.
 @added(ServiceApiVersions.v2023_08_01_Preview)
 @actionSeparator("/")
 @action("extensions/chat/completions")
-op getChatCompletionsWithAzureExtensions is ResourceAction<
+op getChatCompletionsWithAzureExtensionsStreaming is ResourceAction<
   Deployment,
   ChatCompletionsOptions,
-  ChatCompletions
+  ChatCompletionsStreamingChunk
 >;

@@ -250,3 +250,9 @@ model CompletionsLogProbabilityModel {
   @projectedName("java", "textOffsets")
   textOffset: int32[];
 }
+
+@doc("""
+Representation of an intermediate SSE message for completions
+""")
+model CompletionsStreamingChunk {
+}

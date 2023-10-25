@@ -282,3 +282,8 @@ model ChatCompletions {
   @projectedName("json", "usage")
   usage: CompletionsUsage;
 }
+
+@doc("""
+Structure for intermediate streaming messages
+""")
+model ChatCompletionsStreamingChunk {}

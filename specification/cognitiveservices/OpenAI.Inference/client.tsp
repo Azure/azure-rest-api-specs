@@ -12,6 +12,9 @@ using Azure.ClientGenerator.Core;
 // shared Chat Completions route, with the selection gated by the presence or non-presence of additional child
 // configuration options on the request payload options model.
 @@internal(Azure.OpenAI.getChatCompletionsWithAzureExtensions);
+@@internal(Azure.OpenAI.getChatCompletionsWithAzureExtensionsStreaming);
+@@internal(Azure.OpenAI.getChatCompletionsStreaming);
+@@internal(Azure.OpenAI.getCompletionsStreaming);
 
 // Some models from routes with suppressed visibility are still desired for custom public surface.
 @@include(Azure.OpenAI.ImageGenerationOptions);
