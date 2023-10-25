@@ -10,24 +10,21 @@ using DevCenterService;
 using Azure.ClientGenerator.Core;
 
 @useDependency(APIVersions.v2023_04_01)
-namespace SDKCustomizations;
-
 @client({
     name: "DevCenterClient",
     service: DevCenterService,
 })
+namespace SDKCustomizations;
+
 interface DevCenterClientOperations {
+    
+    //DevCenters
     @convenientAPI(false)
     ListProjects is DevCenterService.DevCenterOperations.ListProjects;
     @convenientAPI(false)
     GetProject is DevCenterService.DevCenterOperations.GetProject;
-}
-
-@client({
-    name: "DevBoxesClient",
-    service: DevCenterService,
-})
-interface DevBoxesClientOperations {
+ 
+    //DevBoxes 
     @convenientAPI(false)
     ListPools is DevCenterService.DevBoxesOperations.ListPools;
     @convenientAPI(false)
@@ -61,18 +58,13 @@ interface DevBoxesClientOperations {
     @convenientAPI(false)
     GetDevBoxAction is DevCenterService.DevBoxesOperations.GetDevBoxAction;
     @convenientAPI(false)
-    SkipAction is DevCenterService.DevBoxesOperations.SkipAction;
+    SkipDevBoxAction is DevCenterService.DevBoxesOperations.SkipAction;
     @convenientAPI(false)
-    DelayAction is DevCenterService.DevBoxesOperations.DelayAction;
+    DelayDevBoxAction is DevCenterService.DevBoxesOperations.DelayAction;
     @convenientAPI(false)
-    DelayAllActions is DevCenterService.DevBoxesOperations.DelayAllActions;
-}
+    DelayAllDevBoxActions is DevCenterService.DevBoxesOperations.DelayAllActions;
 
-@client({
-    name: "DeploymentEnvironmentsClient",
-    service: DevCenterService,
-})
-interface EnvironmentClientOperations {
+    //Environments
     @convenientAPI(false)
     ListAllEnvironments is DevCenterService.EnvironmentsOperations.ListAllEnvironments;
     @convenientAPI(false)
@@ -96,3 +88,4 @@ interface EnvironmentClientOperations {
     @convenientAPI(false)
     ListEnvironmentTypes is DevCenterService.EnvironmentsOperations.ListEnvironmentTypes;
 }
+
