@@ -3568,6 +3568,71 @@
         "clientId"
       ]
     },
+    "VirtualMachinesProfile": {
+      "type": "object",
+      "properties": {
+        "scale": {
+          "$ref": "#/definitions/ScaleProfile",
+          "description": "Specifications on how to scale a VirtualMachines agent pool."
+        }
+      },
+      "description": "Specifications on VirtualMachines agent pool."
+    },
+    "ScaleProfile": {
+      "type": "object",
+      "properties": {
+        "manual": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManualScaleProfile"
+          },
+          "description": "Specifications on how to scale the VirtualMachines agent pool to a fixed size."
+        }
+      },
+      "description": "Specifications on how to scale a VirtualMachines agent pool."
+    },
+    "ManualScaleProfile": {
+      "type": "object",
+      "properties": {
+        "sizes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of allowed vm sizes. AKS will use the first available one when scaling. If a VM size is unavailable (e.g. due to quota or regional capacity reasons), AKS will use the next size."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 1000,
+          "description": "Number of nodes."
+        }
+      },
+      "description": "Specifications on number of machines."
+    },
+    "VirtualMachineNodesStatus": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/VirtualMachineNodes"
+      },
+      "description": "The status of nodes in a VirtualMachines agent pool."
+    },
+    "VirtualMachineNodes": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "string",
+          "description": "The VM size of the agents used to host this group of nodes."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nodes."
+        }
+      },
+      "description": "Current status on a group of nodes of the same vm size."
+    },
     "ManagedClusterAgentPoolProfileProperties": {
       "type": "object",
       "properties": {
@@ -3825,6 +3890,12 @@
         "artifactStreamingProfile": {
           "$ref": "#/definitions/AgentPoolArtifactStreamingProfile",
           "description": "Configuration for using artifact streaming on AKS."
+        },
+        "virtualMachinesProfile": {
+          "$ref": "#/definitions/VirtualMachinesProfile"
+        },
+        "virtualMachineNodesStatus": {
+          "$ref": "#/definitions/VirtualMachineNodesStatus"
         }
       },
       "description": "Properties for the container service agent pool profile."
