@@ -3293,9 +3293,45 @@
           },
           "title": "The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from, used only in creation scenario and not allowed to changed once set.",
           "description": "This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}. For more information see [Azure dedicated hosts](https://docs.microsoft.com/azure/virtual-machines/dedicated-hosts)."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/AgentPoolNetworkProfile",
+          "description": "Network-related settings of an agent pool."
         }
       },
       "description": "Properties for the container service agent pool profile."
+    },
+    "AgentPoolNetworkProfile": {
+      "type": "object",
+      "properties": {
+        "nodePublicIPTags": {
+          "$ref": "#/definitions/NodePublicIPTags",
+          "description": "IPTags of instance-level public IPs."
+        }
+      },
+      "description": "Network settings of an agent pool."
+    },
+    "NodePublicIPTags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IPTag"
+      },
+      "x-ms-identifiers": [],
+      "description": "The list of tags associated with the node public IP address."
+    },
+    "IPTag": {
+      "type": "object",
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "The IP tag type. Example: RoutingPreference."
+        },
+        "tag": {
+          "type": "string",
+          "description": "The value of the IP tag associated with the public IP. Example: Internet."
+        }
+      },
+      "description": "Contains the IPTag associated with the object."
     },
     "ManagedClusterAgentPoolProfile": {
       "type": "object",
