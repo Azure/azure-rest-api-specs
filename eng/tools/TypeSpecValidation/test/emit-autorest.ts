@@ -3,7 +3,7 @@ import { EmitAutorestRule } from "../src/rules/emit-autorest.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert } from "node:assert";
 
-describe("#EmitAutorest", function () {
+describe("emit-autorest", function () {
   it("should succeed if no main.tsp", async function () {
     let host = new TsvTestHost();
     host.checkFileExists = async (file: string) => file != join(TsvTestHost.folder, "main.tsp");
@@ -25,7 +25,7 @@ emit:
     assert(result.success);
   });
 
-  it("should fail if config empty", async function () {
+  it("should fail if no config", async function () {
     let host = new TsvTestHost();
     host.readTspConfig = async (_folder: string) => "";
 
@@ -40,6 +40,18 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"
+`;
+
+    const result = await new EmitAutorestRule().execute(host, TsvTestHost.folder);
+
+    assert(!result.success);
+  });
+
+  it("should fail if no emit autorest", async function () {
+    let host = new TsvTestHost();
+    host.readTspConfig = async (_folder: string) => `
+emit:
+- foo
 `;
 
     const result = await new EmitAutorestRule().execute(host, TsvTestHost.folder);
