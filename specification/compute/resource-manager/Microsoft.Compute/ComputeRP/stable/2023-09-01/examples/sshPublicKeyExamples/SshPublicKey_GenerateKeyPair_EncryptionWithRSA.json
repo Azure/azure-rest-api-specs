@@ -4,14 +4,16 @@
     "resourceGroupName": "myResourceGroup",
     "api-version": "2023-09-01",
     "sshPublicKeyName": "mySshPublicKeyName",
-    "encryption": "rsa"
+    "parameters": {
+      "encryptionType": "RSA"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "privateKey": "{ssh private key}",
-        "publicKey": "{ssh-rsa public key}",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/SshPublicKeys/mySshPublicKeyName?api-version=2023-09-01&encryption=rsa"
+        "privateKey": "{ed25519 private key}",
+        "publicKey": "{ed25519 public key}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/SshPublicKeys/mySshPublicKeyName"
       }
     }
   }

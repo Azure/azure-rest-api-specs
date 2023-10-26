@@ -372,11 +372,13 @@
             "description": "The name of the SSH public key."
           },
           {
-            "name": "encryption",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "SshKey pair encryption type. Options available are: ed25519 or rsa [encryption=ed25519 or encryption=rsa]. Default is RSA."
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SshGenerateKeyPairInput"
+            },
+            "description": "Parameters supplied to generate the SSH public key."
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -493,6 +495,38 @@
         "value"
       ],
       "description": "The list SSH public keys operation response."
+    },
+    "SshKeyPairConfigurationProperties": {
+      "properties": {
+        "encryptionType": {
+          "type": "string",
+          "description": "The encryption type of the SSH keys to be generated. See SshEncryptionTypes for possible set of values. If not provided, will default to RSA",
+          "enum": [
+            "RSA",
+            "Ed25519"
+          ],
+          "x-ms-enum": {
+            "name": "SshEncryptionTypes",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Specifies information about how the SSH key should be generated"
+    },
+    "SshGenerateKeyPairInput": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SshGenerateKeyPairInputnProperties",
+          "description": "Configurations for generating a SSH public key."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about how the SSH key should be generated"
     }
   }
 }
