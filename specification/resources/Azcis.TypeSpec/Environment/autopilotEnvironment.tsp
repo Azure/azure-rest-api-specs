@@ -13,9 +13,6 @@ namespace Microsoft.AzureCIS;
 
 @doc("environment properties")
 model EnvironmentResourceProperties {
-  @doc("Target environment/Cluster name")
-  naming?: string;
-
   @doc("Source environment/Cluster model")
   modelEnvironment?: string;
 
@@ -30,7 +27,7 @@ model EnvironmentResourceProperties {
   mode?: environmentMode;
 
   @doc("Indicate APGold or PFGold.")
-  enlistmentType?: environmentEnlistmentType;
+  enlistmentType?: string;
 
   @doc("Provisioning state")
   @visibility("read")
@@ -75,11 +72,3 @@ enum environmentMode {
   All,
 }
 
-@doc("Indicate APGold or PFGold")
-enum environmentEnlistmentType {
-  @doc("Indicate type is APGold")
-  APGold,
-
-  @doc("Indicate type is PFGold")
-  PFGold,
-}

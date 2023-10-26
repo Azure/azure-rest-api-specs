@@ -329,10 +329,6 @@
       "type": "object",
       "description": "environment properties",
       "properties": {
-        "naming": {
-          "type": "string",
-          "description": "Target environment/Cluster name"
-        },
         "modelEnvironment": {
           "type": "string",
           "description": "Source environment/Cluster model"
@@ -351,7 +347,7 @@
           "readOnly": true
         },
         "enlistmentType": {
-          "$ref": "#/definitions/environmentEnlistmentType",
+          "type": "string",
           "description": "Indicate APGold or PFGold."
         },
         "provisioningState": {
@@ -359,30 +355,6 @@
           "description": "Provisioning state",
           "readOnly": true
         }
-      }
-    },
-    "environmentEnlistmentType": {
-      "type": "string",
-      "description": "Indicate APGold or PFGold",
-      "enum": [
-        "APGold",
-        "PFGold"
-      ],
-      "x-ms-enum": {
-        "name": "environmentEnlistmentType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "APGold",
-            "value": "APGold",
-            "description": "Indicate type is APGold"
-          },
-          {
-            "name": "PFGold",
-            "value": "PFGold",
-            "description": "Indicate type is PFGold"
-          }
-        ]
       }
     },
     "environmentMode": {
