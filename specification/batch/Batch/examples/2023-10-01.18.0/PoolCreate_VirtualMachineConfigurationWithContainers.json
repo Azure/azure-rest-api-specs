@@ -1,6 +1,6 @@
 {
-  "operationId": "Pool_Add",
-  "title": "Add a VirtualMachineConfiguration pool with extensions",
+  "operationId": "Pools_CreatePool",
+  "title": "Creates a VirtualMachineConfiguration pool with containers",
   "parameters": {
     "batchUrl": "account.region.batch.azure.com",
     "api-version": "2023-10-01.18.0",
@@ -13,20 +13,15 @@
         "imageReference": {
           "publisher": "Canonical",
           "offer": "0001-com-ubuntu-server-focal",
-          "sku": "20_04-lts"
+          "sku": "120_04-lts"
         },
         "nodeAgentSKUId": "batch.node.ubuntu 20.04",
-        "extensions": [
-          {
-            "name": "batchextension1",
-            "type": "KeyVaultForLinux",
-            "publisher": "Microsoft.Azure.KeyVault",
-            "typeHandlerVersion": "2.0",
-            "autoUpgradeMinorVersion": true,
-            "enableAutomaticUpgrade": true,
-            "settings": "{\"secretsManagementSettingsKey\":\"secretsManagementSettingsValue\",\"authenticationSettingsKey\":\"authenticationSettingsValue\"}"
-          }
-        ]
+        "containerConfiguration": {
+          "type": "dockerCompatible",
+          "containerImageNames": [
+            "busybox"
+          ]
+        }
       },
       "resizeTimeout": "PT15M",
       "targetDedicatedNodes": 5,
@@ -35,15 +30,7 @@
       "taskSchedulingPolicy": {
         "nodeFillType": "spread"
       },
-      "enableAutoScale": false,
-      "enableInterNodeCommunication": true,
-      "metadata": [
-        {
-          "name": "myproperty",
-          "value": "myvalue"
-        }
-      ],
-      "targetNodeCommunicationMode": "simplified"
+      "enableAutoScale": false
     }
   },
   "responses": {

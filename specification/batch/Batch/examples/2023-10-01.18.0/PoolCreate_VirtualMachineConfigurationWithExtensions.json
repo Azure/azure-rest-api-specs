@@ -1,6 +1,6 @@
 {
-  "operationId": "Pool_Add",
-  "title": "Add a VirtualMachineConfiguration pool",
+  "operationId": "Pools_CreatePool",
+  "title": "Creates a VirtualMachineConfiguration pool with extensions",
   "parameters": {
     "batchUrl": "account.region.batch.azure.com",
     "api-version": "2023-10-01.18.0",
@@ -15,7 +15,18 @@
           "offer": "0001-com-ubuntu-server-focal",
           "sku": "20_04-lts"
         },
-        "nodeAgentSKUId": "batch.node.ubuntu 20.04"
+        "nodeAgentSKUId": "batch.node.ubuntu 20.04",
+        "extensions": [
+          {
+            "name": "batchextension1",
+            "type": "KeyVaultForLinux",
+            "publisher": "Microsoft.Azure.KeyVault",
+            "typeHandlerVersion": "2.0",
+            "autoUpgradeMinorVersion": true,
+            "enableAutomaticUpgrade": true,
+            "settings": "{\"secretsManagementSettingsKey\":\"secretsManagementSettingsValue\",\"authenticationSettingsKey\":\"authenticationSettingsValue\"}"
+          }
+        ]
       },
       "resizeTimeout": "PT15M",
       "targetDedicatedNodes": 5,
@@ -31,7 +42,8 @@
           "name": "myproperty",
           "value": "myvalue"
         }
-      ]
+      ],
+      "targetNodeCommunicationMode": "simplified"
     }
   },
   "responses": {
