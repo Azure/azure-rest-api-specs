@@ -57,13 +57,12 @@ suppressions:
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-09'
+```yaml $(tag) == 'package-preview-2022-09'
 input-file:
   - Microsoft.HybridContainerService/preview/2022-09-01-preview/provisionedClusters.json
   - Microsoft.HybridContainerService/preview/2022-09-01-preview/storageSpaces.json
   - Microsoft.HybridContainerService/preview/2022-09-01-preview/virtualNetworks.json
 ```
-
 ### Tag: package-2022-05-01-preview
 
 These settings apply only when `--tag=package-2022-05-01-preview` is specified on the command line.

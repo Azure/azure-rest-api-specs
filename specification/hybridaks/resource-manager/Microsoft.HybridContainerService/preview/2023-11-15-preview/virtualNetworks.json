@@ -219,7 +219,12 @@
             }
           },
           "202": {
-            "description": "Updates the virtualNetworks resource."
+            "description": "Updates the virtualNetworks resource.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -532,6 +537,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
       "x-ms-parameter-location": "method",
       "maxLength": 64,
       "minLength": 3
