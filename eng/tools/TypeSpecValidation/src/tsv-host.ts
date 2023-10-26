@@ -2,7 +2,6 @@ export interface TsvHost {
   gitOperation(folder: string): IGitOperation;
   runCmd(cmd: string, cwd: string): Promise<[Error | null, string, string]>;
   checkFileExists(file: string): Promise<boolean>;
-  // TODO: Other functions that need mocks
 }
 
 export interface IGitOperation {
