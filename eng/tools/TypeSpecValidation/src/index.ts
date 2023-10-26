@@ -19,7 +19,9 @@ export async function main() {
   const folder = parsedArgs.positionals[0];
   console.log("Running TypeSpecValidation on folder:", folder);
 
-  let rules = [
+  const host = new TsvRunnerHost();
+
+  const rules = [
     new FolderStructureRule(),
     new NpmPrefixRule(),
     new LinterRulesetRule(),
@@ -31,7 +33,7 @@ export async function main() {
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i];
     console.log("\nExecuting rule: " + rule.name);
-    const result = await rule.execute(TsvRunnerHost, folder);
+    const result = await rule.execute(host, folder);
     if (result.stdOutput) console.log(result.stdOutput);
     if (!result.success) {
       success = false;
