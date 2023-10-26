@@ -50,7 +50,7 @@ interface Organizations {
   get is ArmResourceRead<OrganizationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<OrganizationResource>;
   update is ArmResourcePatchAsync<OrganizationResource, OrganizationProperties>;
-  delete is ArmResourceDeleteAsync<OrganizationResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;
 }
