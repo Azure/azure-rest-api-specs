@@ -82,7 +82,6 @@ directive:
     transform: >
       $["x-ms-client-name"] = "ChaosTargetQuerySelector";
 ```
-
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
@@ -134,7 +133,6 @@ directive:
     transform: >
       $["x-ms-client-name"] = "ChaosTargetQuerySelector";
 ```
-
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
