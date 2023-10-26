@@ -63,62 +63,6 @@ directive:
 suppressions:
   - code: PathResourceProviderNamePascalCase
     reason: We had already gone to production with "HCI" in our namespace, so changing it to "Hci" now would be disruptive.
-    from: 
-      - arcSettings.json
-      - clusters.json
-      - extensions.json
-      - galleryImages.json
-      - logicalNetworks.json
-      - marketplaceGalleryImages.json
-      - networkInterfaces.json
-      - operations.json
-      - storageContainers.json
-      - virtualHardDisks.json
-      - virtualMachines.json
-      - virtualMachineInstances.json
-      - virtualNetworks.json
-      - offers.json
-      - publishers.json
-      - skus.json
-      - updates.json
-      - updateRuns.json
-      - updateSummaries.json
-      - deploymentSettings.json
-      - edgeDevices.json
-      
-  - code: ResourceNameRestriction
-    reason: publisherName, publisherName etc didn't have a pattern initially, adding the constraint now will cause a breaking change
-    from:
-      - arcSettings.json
-      - clusters.json
-      - extensions.json
-      - galleryImages.json
-      - logicalNetworks.json
-      - marketplaceGalleryImages.json
-      - networkInterfaces.json
-      - operations.json
-      - storageContainers.json
-      - virtualHardDisks.json
-      - virtualMachines.json
-      - virtualMachineInstances.json
-      - virtualNetworks.json
-      - offers.json
-      - publishers.json
-      - skus.json
-      - updates.json
-      - updateRuns.json
-      - updateSummaries.json
-      - deploymentSettings.json
-      - edgeDevices.json
-    
-  - code: DefinitionsPropertiesNamesCamelCase
-    reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility 
-    from: deploymentSettings.json
-    where: 
-    - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
-    - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
-    - $.definitions.QosPolicyOverrides.properties.bandwidthPercentage_SMB
-
   - code: TopLevelResourcesListBySubscription
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
   - code: PropertiesTypeObjectNoDefinition
@@ -127,6 +71,10 @@ suppressions:
   - code: DefinitionsPropertiesNamesCamelCase
     reason: There is a false positive reporting the two letter acronym ID should be lower camel case. The property is correctly capitalized according to guidance. 
     from: logicalNetworks.json
+  - code: ResourceNameRestriction
+    reason: publisherName, publisherName etc didn't have a pattern initially, adding the constraint now will cause a breaking change.
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility.
 ```
 
 
@@ -153,7 +101,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2023-09'
+```yaml $(tag) == 'package-preview-2023-09'
 input-file:
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/common.json
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/galleryImages.json
@@ -164,12 +112,11 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualHardDisks.json
   - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualMachineInstances.json
 ```
-
 ### Tag: package-2023-08
 
 These settings apply only when `--tag=package-2023-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-08'
+```yaml $(tag) == 'package-2023-08'
 input-file:
   - Microsoft.AzureStackHCI/stable/2023-08-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2023-08-01/clusters.json
@@ -182,7 +129,6 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2023-08-01/updateSummaries.json
   - Microsoft.AzureStackHCI/stable/2023-08-01/updates.json
 ```
-
 ### Tag: package-preview-2023-07
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
