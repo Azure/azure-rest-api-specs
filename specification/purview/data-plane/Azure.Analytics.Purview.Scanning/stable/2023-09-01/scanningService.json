@@ -53,11 +53,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "azureKeyVaultName",
-            "description": "Name of azure key vault.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/azureKeyVaultName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -102,11 +98,11 @@
           {
             "in": "body",
             "name": "body",
+            "description": "The azureKeyVault connection definition.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AzureKeyVault"
-            },
-            "description": "The azureKeyVault connection to create or replace."
+            }
           },
           {
             "$ref": "#/parameters/api-version"
@@ -149,11 +145,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "azureKeyVaultName",
-            "required": true,
-            "type": "string",
-            "description": "The name of the azureKeyVault connection to delete."
+            "$ref": "#/parameters/azureKeyVaultName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -213,7 +205,7 @@
           }
         },
         "x-ms-examples": {
-          "KeyVaultConnections_ListAll": {
+          "KeyVaultConnections_List": {
             "$ref": "./examples/KeyVaultConnections_List.json"
           }
         },
@@ -234,11 +226,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "classificationRuleName",
-            "required": true,
-            "type": "string",
-            "description": "The name of the classification rule to retrieve."
+            "$ref": "#/parameters/classificationRuleName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -283,6 +271,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "The classification rule definition.",
             "schema": {
               "$ref": "#/definitions/ClassificationRule"
             }
@@ -328,11 +317,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "classificationRuleName",
-            "required": true,
-            "type": "string",
-            "description": "The name of the classification rule to delete."
+            "$ref": "#/parameters/classificationRuleName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -368,7 +353,7 @@
           "ClassificationRules"
         ],
         "description": "List classification rules in Account.",
-        "operationId": "ClassificationRules_ListAll",
+        "operationId": "ClassificationRules_List",
         "produces": [
           "application/json"
         ],
@@ -392,8 +377,8 @@
           }
         },
         "x-ms-examples": {
-          "ClassificationRules_ListAll": {
-            "$ref": "./examples/ClassificationRules_ListAll.json"
+          "ClassificationRules_List": {
+            "$ref": "./examples/ClassificationRules_List.json"
           }
         },
         "x-ms-pageable": {
@@ -413,11 +398,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "classificationRuleName",
-            "required": true,
-            "type": "string",
-            "description": "The name of the classification rule to retrieve."
+            "$ref": "#/parameters/classificationRuleName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -459,25 +440,30 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "classificationRuleName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/classificationRuleName"
           },
           {
+            "description": "The version of the classification rule.",
             "in": "path",
             "name": "classificationRuleVersion",
             "required": true,
             "type": "integer",
-            "description": "The version of the classification rule to retrieve.",
             "format": "int32"
           },
           {
+            "description": "The action of classification rule.",
             "in": "query",
             "name": "action",
             "required": true,
-            "description": "The classification action type.",
-            "$ref": "#/definitions/ClassificationAction"
+            "type": "string",
+            "enum": [
+              "Keep",
+              "Delete"
+            ],
+            "x-ms-enum": {
+              "name": "ClassificationAction",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/api-version"
@@ -523,10 +509,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "credentialName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/credentialName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -572,6 +555,7 @@
             "in": "body",
             "name": "body",
             "required": true,
+            "description": "The credential definition.",
             "schema": {
               "$ref": "#/definitions/Credential"
             }
@@ -617,11 +601,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "credentialName",
-            "required": true,
-            "type": "string",
-            "description": "The name of the credential to delete."
+            "$ref": "#/parameters/credentialName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -657,7 +637,7 @@
           "Credential"
         ],
         "description": "List credentials in account.",
-        "operationId": "Credential_ListAll",
+        "operationId": "Credential_List",
         "produces": [
           "application/json"
         ],
@@ -681,8 +661,8 @@
           }
         },
         "x-ms-examples": {
-          "Credential_ListAll": {
-            "$ref": "./examples/Credential_ListAll.json"
+          "Credential_List": {
+            "$ref": "./examples/Credential_List.json"
           }
         },
         "x-ms-pageable": {
@@ -710,6 +690,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "The data source definition.",
             "schema": {
               "$ref": "#/definitions/DataSource"
             }
@@ -755,11 +736,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "The name of the data source to retrieve."
+            "$ref": "#/parameters/dataSourceName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -796,11 +773,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "The name of the data source to delete."
+            "$ref": "#/parameters/dataSourceName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -836,7 +809,7 @@
           "DataSources"
         ],
         "description": "List data sources in Data catalog.",
-        "operationId": "DataSources_ListAll",
+        "operationId": "DataSources_List",
         "produces": [
           "application/json"
         ],
@@ -860,8 +833,8 @@
           }
         },
         "x-ms-examples": {
-          "DataSources_ListAll": {
-            "$ref": "./examples/DataSources_ListAll.json"
+          "DataSources_List": {
+            "$ref": "./examples/DataSources_List.json"
           }
         },
         "x-ms-pageable": {
@@ -881,18 +854,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "The name of the data source to retrieve."
+            "$ref": "#/parameters/dataSourceName"
           },
           {
-            "in": "path",
-            "name": "scanName",
-            "required": true,
-            "type": "string",
-            "description": "The name of the scan to retrieve."
+            "$ref": "#/parameters/scanName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -940,6 +905,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "The filter definition.",
             "schema": {
               "$ref": "#/definitions/Filter"
             }
@@ -1112,6 +1078,7 @@
             "in": "body",
             "name": "body",
             "required": true,
+            "description": "The integration runtime definition.",
             "schema": {
               "$ref": "#/definitions/IntegrationRuntime"
             }
@@ -1246,6 +1213,7 @@
             "in": "body",
             "name": "body",
             "required": true,
+            "description": "The request of regenerating authentication key of an integration runtime.",
             "schema": {
               "$ref": "#/definitions/IntegrationRuntimeRegenerateKeyParameters"
             }
@@ -1330,9 +1298,9 @@
             "$ref": "#/parameters/integrationRuntimeName"
           },
           {
-            "description": "The request of enabling interactive query for integration runtime.",
             "in": "body",
             "name": "body",
+            "description": "The request of enabling interactive query for integration runtime.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/EnableInteractiveQueryForIntegrationRuntimeRequest"
@@ -1461,9 +1429,9 @@
             "$ref": "#/parameters/managedVirtualNetworkName"
           },
           {
-            "description": "Managed virtual network resource definition.",
-            "name": "body",
             "in": "body",
+            "name": "body",
+            "description": "The managed virtual network resource definition.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ManagedVirtualNetwork"
@@ -1646,9 +1614,9 @@
             "$ref": "#/parameters/managedPrivateEndpointName"
           },
           {
-            "description": "Managed private endpoint resource definition.",
             "in": "body",
             "name": "body",
+            "description": "The managed private endpoint resource definition.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ManagedPrivateEndpoint"
@@ -1708,11 +1676,11 @@
           {
             "in": "body",
             "name": "body",
+            "description": "The scan definition.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Scan"
-            },
-            "description": "The scan definition."
+            }
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1755,18 +1723,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "Data source name."
+            "$ref": "#/parameters/dataSourceName"
           },
           {
-            "in": "path",
-            "name": "scanName",
-            "required": true,
-            "type": "string",
-            "description": "Scan name."
+            "$ref": "#/parameters/scanName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1803,18 +1763,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "Data source name."
+            "$ref": "#/parameters/dataSourceName"
           },
           {
-            "in": "path",
-            "name": "scanName",
-            "required": true,
-            "type": "string",
-            "description": "Scan name."
+            "$ref": "#/parameters/scanName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1856,11 +1808,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "Data source name."
+            "$ref": "#/parameters/dataSourceName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1966,25 +1914,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "Data source name."
+            "$ref": "#/parameters/dataSourceName"
           },
           {
-            "in": "path",
-            "name": "scanName",
-            "required": true,
-            "type": "string",
-            "description": "Scan name."
+            "$ref": "#/parameters/scanName"
           },
           {
-            "in": "path",
-            "name": "runId",
-            "required": true,
-            "type": "string",
-            "description": "Run id."
+            "$ref": "#/parameters/runId"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2023,25 +1959,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "Data source name."
+            "$ref": "#/parameters/dataSourceName"
           },
           {
-            "in": "path",
-            "name": "scanName",
-            "required": true,
-            "type": "string",
-            "description": "Scan name."
+            "$ref": "#/parameters/scanName"
           },
           {
-            "in": "path",
-            "name": "runId",
-            "required": true,
-            "type": "string",
-            "description": "Run id."
+            "$ref": "#/parameters/runId"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2087,18 +2011,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "Data source name."
+            "$ref": "#/parameters/dataSourceName"
           },
           {
-            "in": "path",
-            "name": "scanName",
-            "required": true,
-            "type": "string",
-            "description": "Scan name."
+            "$ref": "#/parameters/scanName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2140,11 +2056,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "scanRulesetName",
-            "required": true,
-            "type": "string",
-            "description": "Scan ruleset name."
+            "$ref": "#/parameters/scanRulesetName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2189,6 +2101,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "The scan rule set definition.",
             "schema": {
               "$ref": "#/definitions/ScanRuleset"
             }
@@ -2234,11 +2147,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "scanRulesetName",
-            "required": true,
-            "type": "string",
-            "description": "Scan rule set name."
+            "$ref": "#/parameters/scanRulesetName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2274,7 +2183,7 @@
           "ScanRulesets"
         ],
         "description": "List scan rulesets in Data catalog.",
-        "operationId": "ScanRulesets_ListAll",
+        "operationId": "ScanRulesets_List",
         "produces": [
           "application/json"
         ],
@@ -2298,8 +2207,8 @@
           }
         },
         "x-ms-examples": {
-          "ScanRulesets_ListAll": {
-            "$ref": "./examples/ScanRulesets_ListAll.json"
+          "ScanRulesets_List": {
+            "$ref": "./examples/ScanRulesets_List.json"
           }
         },
         "x-ms-pageable": {
@@ -2313,7 +2222,7 @@
           "SystemScanRulesets"
         ],
         "description": "List all system scan rulesets for an account.",
-        "operationId": "SystemScanRulesets_ListAll",
+        "operationId": "SystemScanRulesets_List",
         "produces": [
           "application/json"
         ],
@@ -2337,8 +2246,8 @@
           }
         },
         "x-ms-examples": {
-          "SystemScanRulesets_ListAll": {
-            "$ref": "./examples/SystemScanRulesets_ListAll.json"
+          "SystemScanRulesets_List": {
+            "$ref": "./examples/SystemScanRulesets_List.json"
           }
         },
         "x-ms-pageable": {
@@ -2358,43 +2267,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceType",
-            "required": true,
-            "type": "string",
-            "description": "Data source type.",
-            "enum": [
-              "None",
-              "AzureSubscription",
-              "AzureResourceGroup",
-              "AzureSynapseWorkspace",
-              "AzureSynapse",
-              "AdlsGen1",
-              "AdlsGen2",
-              "AmazonAccount",
-              "AmazonS3",
-              "AmazonSql",
-              "AzureCosmosDb",
-              "AzureDataExplorer",
-              "AzureFileService",
-              "AzureSqlDatabase",
-              "AmazonPostgreSql",
-              "AzurePostgreSql",
-              "SqlServerDatabase",
-              "AzureSqlDatabaseManagedInstance",
-              "AzureSqlDataWarehouse",
-              "AzureMySql",
-              "AzureStorage",
-              "Teradata",
-              "Oracle",
-              "SapS4Hana",
-              "SapEcc",
-              "PowerBI"
-            ],
-            "x-ms-enum": {
-              "name": "DataSourceType",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/dataSourceTypeInPath"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2433,42 +2306,7 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "dataSourceType",
-            "type": "string",
-            "description": "Data source type.",
-            "enum": [
-              "None",
-              "AzureSubscription",
-              "AzureResourceGroup",
-              "AzureSynapseWorkspace",
-              "AzureSynapse",
-              "AdlsGen1",
-              "AdlsGen2",
-              "AmazonAccount",
-              "AmazonS3",
-              "AmazonSql",
-              "AzureCosmosDb",
-              "AzureDataExplorer",
-              "AzureFileService",
-              "AzureSqlDatabase",
-              "AmazonPostgreSql",
-              "AzurePostgreSql",
-              "SqlServerDatabase",
-              "AzureSqlDatabaseManagedInstance",
-              "AzureSqlDataWarehouse",
-              "AzureMySql",
-              "AzureStorage",
-              "Teradata",
-              "Oracle",
-              "SapS4Hana",
-              "SapEcc",
-              "PowerBI"
-            ],
-            "x-ms-enum": {
-              "name": "DataSourceType",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/dataSourceTypeInQuery"
           },
           {
             "in": "path",
@@ -2514,42 +2352,7 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "dataSourceType",
-            "type": "string",
-            "description": "Data source type.",
-            "enum": [
-              "None",
-              "AzureSubscription",
-              "AzureResourceGroup",
-              "AzureSynapseWorkspace",
-              "AzureSynapse",
-              "AdlsGen1",
-              "AdlsGen2",
-              "AmazonAccount",
-              "AmazonS3",
-              "AmazonSql",
-              "AzureCosmosDb",
-              "AzureDataExplorer",
-              "AzureFileService",
-              "AzureSqlDatabase",
-              "AmazonPostgreSql",
-              "AzurePostgreSql",
-              "SqlServerDatabase",
-              "AzureSqlDatabaseManagedInstance",
-              "AzureSqlDataWarehouse",
-              "AzureMySql",
-              "AzureStorage",
-              "Teradata",
-              "Oracle",
-              "SapS4Hana",
-              "SapEcc",
-              "PowerBI"
-            ],
-            "x-ms-enum": {
-              "name": "DataSourceType",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/dataSourceTypeInQuery"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2588,42 +2391,7 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "dataSourceType",
-            "type": "string",
-            "description": "Data source type.",
-            "enum": [
-              "None",
-              "AzureSubscription",
-              "AzureResourceGroup",
-              "AzureSynapseWorkspace",
-              "AzureSynapse",
-              "AdlsGen1",
-              "AdlsGen2",
-              "AmazonAccount",
-              "AmazonS3",
-              "AmazonSql",
-              "AzureCosmosDb",
-              "AzureDataExplorer",
-              "AzureFileService",
-              "AzureSqlDatabase",
-              "AmazonPostgreSql",
-              "AzurePostgreSql",
-              "SqlServerDatabase",
-              "AzureSqlDatabaseManagedInstance",
-              "AzureSqlDataWarehouse",
-              "AzureMySql",
-              "AzureStorage",
-              "Teradata",
-              "Oracle",
-              "SapS4Hana",
-              "SapEcc",
-              "PowerBI"
-            ],
-            "x-ms-enum": {
-              "name": "DataSourceType",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/dataSourceTypeInQuery"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2665,18 +2433,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "Data source name."
+            "$ref": "#/parameters/dataSourceName"
           },
           {
-            "in": "path",
-            "name": "scanName",
-            "required": true,
-            "type": "string",
-            "description": "Scan name."
+            "$ref": "#/parameters/scanName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2725,6 +2485,7 @@
             "in": "body",
             "name": "body",
             "required": true,
+            "description": "The trigger definition.",
             "schema": {
               "$ref": "#/definitions/Trigger"
             }
@@ -2770,18 +2531,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "Data source name."
+            "$ref": "#/parameters/dataSourceName"
           },
           {
-            "in": "path",
-            "name": "scanName",
-            "required": true,
-            "type": "string",
-            "description": "Scan name."
+            "$ref": "#/parameters/scanName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2823,18 +2576,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "Data source name."
+            "$ref": "#/parameters/dataSourceName"
           },
           {
-            "in": "path",
-            "name": "scanName",
-            "required": true,
-            "type": "string",
-            "description": "Scan name."
+            "$ref": "#/parameters/scanName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2873,18 +2618,10 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "dataSourceName",
-            "required": true,
-            "type": "string",
-            "description": "Data source name."
+            "$ref": "#/parameters/dataSourceName"
           },
           {
-            "in": "path",
-            "name": "scanName",
-            "required": true,
-            "type": "string",
-            "description": "Scan name."
+            "$ref": "#/parameters/scanName"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2945,10 +2682,18 @@
     "AzureKeyVault": {
       "description": "The Azure Key Vault connection.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "$ref": "#/definitions/ProxyResource",
         "properties": {
-          "$ref": "#/definitions/AzureKeyVaultProperties"
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureKeyVaultProperties"
+            }
+          ]
         }
       }
     },
@@ -3013,6 +2758,7 @@
       }
     },
     "ClassificationRule": {
+      "description": "The classification rule.",
       "required": [
         "kind"
       ],
@@ -3130,6 +2876,7 @@
       }
     },
     "Credential": {
+      "description": "The credential.",
       "required": [
         "kind"
       ],
@@ -3218,6 +2965,54 @@
           },
           "readOnly": true
         }
+      }
+    },
+    "DataSourceType": {
+      "description": "The data source type.",
+      "enum": [
+        "None",
+        "Fabric",
+        "AzureSubscription",
+        "AzureResourceGroup",
+        "AzureSynapseWorkspace",
+        "AzureSynapse",
+        "AdlsGen1",
+        "AdlsGen2",
+        "AmazonAccount",
+        "AmazonS3",
+        "AmazonSql",
+        "AzureCosmosDb",
+        "AzureDataExplorer",
+        "AzureFileService",
+        "AzureSqlDatabase",
+        "ArcEnabledSqlServer",
+        "AmazonPostgreSql",
+        "AzurePostgreSql",
+        "Databricks",
+        "SqlServerDatabase",
+        "AzureSqlDatabaseManagedInstance",
+        "AzureSqlDataWarehouse",
+        "AzureMySql",
+        "Hdfs",
+        "TableauServer",
+        "AzureStorage",
+        "Teradata",
+        "Oracle",
+        "PostgreSql",
+        "AmazonRedShift",
+        "DatabricksHms",
+        "SapS4Hana",
+        "SapEcc",
+        "Snowflake",
+        "PowerBI",
+        "Trident",
+        "Dataverse",
+        "DatabricksUnityCatalog"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DataSourceType",
+        "modelAsString": true
       }
     },
     "ScanResult": {
@@ -3349,53 +3144,8 @@
           "description": "The run type."
         },
         "dataSourceType": {
-          "enum": [
-            "None",
-            "Fabric",
-            "AzureSubscription",
-            "AzureResourceGroup",
-            "AzureSynapseWorkspace",
-            "AzureSynapse",
-            "AdlsGen1",
-            "AdlsGen2",
-            "AmazonAccount",
-            "AmazonS3",
-            "AmazonSql",
-            "AzureCosmosDb",
-            "AzureDataExplorer",
-            "AzureFileService",
-            "AzureSqlDatabase",
-            "ArcEnabledSqlServer",
-            "AmazonPostgreSql",
-            "AzurePostgreSql",
-            "Databricks",
-            "SqlServerDatabase",
-            "AzureSqlDatabaseManagedInstance",
-            "AzureSqlDataWarehouse",
-            "AzureMySql",
-            "Hdfs",
-            "TableauServer",
-            "AzureStorage",
-            "Teradata",
-            "Oracle",
-            "PostgreSql",
-            "AmazonRedShift",
-            "DatabricksHms",
-            "SapS4Hana",
-            "SapEcc",
-            "Snowflake",
-            "PowerBI",
-            "Trident",
-            "Dataverse",
-            "DatabricksUnityCatalog"
-          ],
-          "type": "string",
-          "description": "The properties of datasource, vary by datasource type.",
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "DataSourceType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DataSourceType"
         }
       }
     },
@@ -3618,53 +3368,8 @@
           "description": "The run type."
         },
         "dataSourceType": {
-          "enum": [
-            "None",
-            "Fabric",
-            "AzureSubscription",
-            "AzureResourceGroup",
-            "AzureSynapseWorkspace",
-            "AzureSynapse",
-            "AdlsGen1",
-            "AdlsGen2",
-            "AmazonAccount",
-            "AmazonS3",
-            "AmazonSql",
-            "AzureCosmosDb",
-            "AzureDataExplorer",
-            "AzureFileService",
-            "AzureSqlDatabase",
-            "ArcEnabledSqlServer",
-            "AmazonPostgreSql",
-            "AzurePostgreSql",
-            "Databricks",
-            "SqlServerDatabase",
-            "AzureSqlDatabaseManagedInstance",
-            "AzureSqlDataWarehouse",
-            "AzureMySql",
-            "Hdfs",
-            "TableauServer",
-            "AzureStorage",
-            "Teradata",
-            "Oracle",
-            "PostgreSql",
-            "AmazonRedShift",
-            "DatabricksHms",
-            "SapS4Hana",
-            "SapEcc",
-            "Snowflake",
-            "PowerBI",
-            "Trident",
-            "Dataverse",
-            "DatabricksUnityCatalog"
-          ],
-          "type": "string",
-          "description": "The properties of datasource, vary by datasource type.",
           "readOnly": true,
-          "x-ms-enum": {
-            "name": "DataSourceType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DataSourceType"
         }
       }
     },
@@ -3889,59 +3594,14 @@
       ],
       "type": "object",
       "description": "The data source.",
-      "items": [
+      "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "kind": {
-          "enum": [
-            "None",
-            "Fabric",
-            "AzureSubscription",
-            "AzureResourceGroup",
-            "AzureSynapseWorkspace",
-            "AzureSynapse",
-            "AdlsGen1",
-            "AdlsGen2",
-            "AmazonAccount",
-            "AmazonS3",
-            "AmazonSql",
-            "AzureCosmosDb",
-            "AzureDataExplorer",
-            "AzureFileService",
-            "AzureSqlDatabase",
-            "ArcEnabledSqlServer",
-            "AmazonPostgreSql",
-            "AzurePostgreSql",
-            "Databricks",
-            "SqlServerDatabase",
-            "AzureSqlDatabaseManagedInstance",
-            "AzureSqlDataWarehouse",
-            "AzureMySql",
-            "Hdfs",
-            "TableauServer",
-            "AzureStorage",
-            "Teradata",
-            "Oracle",
-            "PostgreSql",
-            "AmazonRedShift",
-            "DatabricksHms",
-            "SapS4Hana",
-            "SapEcc",
-            "Snowflake",
-            "PowerBI",
-            "Trident",
-            "Dataverse",
-            "DatabricksUnityCatalog"
-          ],
-          "type": "string",
-          "description": "The properties of datasource, vary by datasource type.",
-          "x-ms-enum": {
-            "name": "DataSourceType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DataSourceType"
         },
         "scans": {
           "type": "array",
@@ -4103,19 +3763,6 @@
       ],
       "x-ms-enum": {
         "name": "IntegrationRuntimeType",
-        "modelAsString": true
-      }
-    },
-    "ClassificationAction": {
-      "description": "The action of classification rule.",
-      "enum": [
-        "Keep",
-        "Delete"
-      ],
-      "type": "string",
-      "readOnly": true,
-      "x-ms-enum": {
-        "name": "ClassificationAction",
         "modelAsString": true
       }
     },
@@ -4891,51 +4538,7 @@
       ],
       "properties": {
         "kind": {
-          "enum": [
-            "None",
-            "Fabric",
-            "AzureSubscription",
-            "AzureResourceGroup",
-            "AzureSynapseWorkspace",
-            "AzureSynapse",
-            "AdlsGen1",
-            "AdlsGen2",
-            "AmazonAccount",
-            "AmazonS3",
-            "AmazonSql",
-            "AzureCosmosDb",
-            "AzureDataExplorer",
-            "AzureFileService",
-            "AzureSqlDatabase",
-            "ArcEnabledSqlServer",
-            "AmazonPostgreSql",
-            "AzurePostgreSql",
-            "Databricks",
-            "SqlServerDatabase",
-            "AzureSqlDatabaseManagedInstance",
-            "AzureSqlDataWarehouse",
-            "AzureMySql",
-            "Hdfs",
-            "TableauServer",
-            "AzureStorage",
-            "Teradata",
-            "Oracle",
-            "PostgreSql",
-            "AmazonRedShift",
-            "DatabricksHms",
-            "SapS4Hana",
-            "SapEcc",
-            "Snowflake",
-            "PowerBI",
-            "Trident",
-            "Dataverse",
-            "DatabricksUnityCatalog"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataSourceType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DataSourceType"
         }
       },
       "discriminator": "kind"
@@ -4978,51 +4581,7 @@
       ],
       "properties": {
         "kind": {
-          "enum": [
-            "None",
-            "Fabric",
-            "AzureSubscription",
-            "AzureResourceGroup",
-            "AzureSynapseWorkspace",
-            "AzureSynapse",
-            "AdlsGen1",
-            "AdlsGen2",
-            "AmazonAccount",
-            "AmazonS3",
-            "AmazonSql",
-            "AzureCosmosDb",
-            "AzureDataExplorer",
-            "AzureFileService",
-            "AzureSqlDatabase",
-            "ArcEnabledSqlServer",
-            "AmazonPostgreSql",
-            "AzurePostgreSql",
-            "Databricks",
-            "SqlServerDatabase",
-            "AzureSqlDatabaseManagedInstance",
-            "AzureSqlDataWarehouse",
-            "AzureMySql",
-            "Hdfs",
-            "TableauServer",
-            "AzureStorage",
-            "Teradata",
-            "Oracle",
-            "PostgreSql",
-            "AmazonRedShift",
-            "DatabricksHms",
-            "SapS4Hana",
-            "SapEcc",
-            "Snowflake",
-            "PowerBI",
-            "Trident",
-            "Dataverse",
-            "DatabricksUnityCatalog"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataSourceType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/DataSourceType"
         }
       },
       "discriminator": "kind"
@@ -5390,7 +4949,17 @@
           "type": "number"
         },
         "classificationAction": {
-          "$ref": "#/definitions/ClassificationAction"
+          "description": "The action of classification rule.",
+          "enum": [
+            "Keep",
+            "Delete"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ClassificationAction",
+            "modelAsString": true
+          }
         },
         "dataPatterns": {
           "type": "array",
@@ -10287,7 +9856,7 @@
     "classificationRuleName": {
       "in": "path",
       "name": "classificationRuleName",
-      "description": "Classification rule name.",
+      "description": "The classification rule name.",
       "required": true,
       "type": "string",
       "minLength": 3,
@@ -10315,6 +9884,109 @@
       "minLength": 3,
       "maxLength": 63,
       "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "x-ms-parameter-location": "method"
+    },
+    "dataSourceTypeInPath": {
+      "in": "path",
+      "name": "dataSourceType",
+      "required": true,
+      "description": "The data source type.",
+      "enum": [
+        "None",
+        "Fabric",
+        "AzureSubscription",
+        "AzureResourceGroup",
+        "AzureSynapseWorkspace",
+        "AzureSynapse",
+        "AdlsGen1",
+        "AdlsGen2",
+        "AmazonAccount",
+        "AmazonS3",
+        "AmazonSql",
+        "AzureCosmosDb",
+        "AzureDataExplorer",
+        "AzureFileService",
+        "AzureSqlDatabase",
+        "ArcEnabledSqlServer",
+        "AmazonPostgreSql",
+        "AzurePostgreSql",
+        "Databricks",
+        "SqlServerDatabase",
+        "AzureSqlDatabaseManagedInstance",
+        "AzureSqlDataWarehouse",
+        "AzureMySql",
+        "Hdfs",
+        "TableauServer",
+        "AzureStorage",
+        "Teradata",
+        "Oracle",
+        "PostgreSql",
+        "AmazonRedShift",
+        "DatabricksHms",
+        "SapS4Hana",
+        "SapEcc",
+        "Snowflake",
+        "PowerBI",
+        "Trident",
+        "Dataverse",
+        "DatabricksUnityCatalog"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DataSourceType",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "dataSourceTypeInQuery": {
+      "in": "query",
+      "name": "dataSourceType",
+      "description": "The data source type.",
+      "enum": [
+        "None",
+        "Fabric",
+        "AzureSubscription",
+        "AzureResourceGroup",
+        "AzureSynapseWorkspace",
+        "AzureSynapse",
+        "AdlsGen1",
+        "AdlsGen2",
+        "AmazonAccount",
+        "AmazonS3",
+        "AmazonSql",
+        "AzureCosmosDb",
+        "AzureDataExplorer",
+        "AzureFileService",
+        "AzureSqlDatabase",
+        "ArcEnabledSqlServer",
+        "AmazonPostgreSql",
+        "AzurePostgreSql",
+        "Databricks",
+        "SqlServerDatabase",
+        "AzureSqlDatabaseManagedInstance",
+        "AzureSqlDataWarehouse",
+        "AzureMySql",
+        "Hdfs",
+        "TableauServer",
+        "AzureStorage",
+        "Teradata",
+        "Oracle",
+        "PostgreSql",
+        "AmazonRedShift",
+        "DatabricksHms",
+        "SapS4Hana",
+        "SapEcc",
+        "Snowflake",
+        "PowerBI",
+        "Trident",
+        "Dataverse",
+        "DatabricksUnityCatalog"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DataSourceType",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     },
     "scanName": {
