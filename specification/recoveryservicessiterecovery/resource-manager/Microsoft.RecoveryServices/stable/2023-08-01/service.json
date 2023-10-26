@@ -923,7 +923,8 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/ResourceName"
+            "$ref": "#/parameters/ResourceName",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "$ref": "#/parameters/ResourceGroupName"
@@ -936,18 +937,27 @@
             "in": "path",
             "description": "Fabric name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern":  "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           }
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type":  "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
           },
           "default": {
-            "description": "Automation error response describing why the operation failed."
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
