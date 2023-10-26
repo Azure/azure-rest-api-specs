@@ -950,7 +950,7 @@ model BatchCertificate {
 
   @doc("The public part of the Certificate as a base-64 encoded .cer file.")
   @visibility("read")
-  publicData?: string;
+  publicData?: bytes;
 
   @doc("The error that occurred on the last attempt to delete this Certificate. This property is set only if the Certificate is in the DeleteFailed state.")
   @visibility("read")
@@ -958,7 +958,7 @@ model BatchCertificate {
 
   @doc("The base64-encoded contents of the Certificate. The maximum size is 10KB.")
   @visibility("create")
-  data: string;
+  data: bytes;
 
   @doc("The format of the Certificate data.")
   @visibility("create")
