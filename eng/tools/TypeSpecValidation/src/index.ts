@@ -5,6 +5,7 @@ import { FormatRule } from "./rules/format.js";
 import { GitDiffRule } from "./rules/git-diff.js";
 import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
+import { TsvRunnerHost } from "./tsv-runner-host.js";
 
 export async function main() {
   const args = process.argv.slice(2);
@@ -30,7 +31,7 @@ export async function main() {
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i];
     console.log("\nExecuting rule: " + rule.name);
-    const result = await rule.execute(folder);
+    const result = await rule.execute(TsvRunnerHost, folder);
     if (result.stdOutput) console.log(result.stdOutput);
     if (!result.success) {
       success = false;
