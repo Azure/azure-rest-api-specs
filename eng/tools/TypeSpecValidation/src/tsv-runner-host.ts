@@ -14,7 +14,7 @@ export class TsvRunnerHost implements TsvHost {
   }
 
   readTspConfig(folder: string): Promise<string> {
-    return readFile(join(folder, "main.tsp"), "utf-8");
+    return readFile(join(folder, "tspconfig.yaml"), "utf-8");
   }
 
   runCmd(cmd: string, cwd: string): Promise<[Error | null, string, string]> {
