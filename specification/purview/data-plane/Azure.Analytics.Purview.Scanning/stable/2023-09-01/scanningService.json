@@ -471,11 +471,8 @@
             "format": "int32"
           },
           {
-            "classificationAction": {
-              "type": "string",
-              "description": "The classification action type.",
-              "$ref": "#/definitions/ClassificationAction"
-            }
+            "description": "The classification action type.",
+            "$ref": "#/definitions/ClassificationAction"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -2894,10 +2891,12 @@
       "type": "object",
       "properties": {
         "baseUrl": {
-          "type": "string"
+          "type": "string",
+          "description": "The base URL of the Azure Key Vault."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "The description of the Azure Key Vault connection."
         }
       }
     },
@@ -2919,18 +2918,11 @@
     },
     "AzureKeyVault": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
+      "$ref": "#/definitions/ProxyResource",
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureKeyVaultProperties"
-            }
-          ]
+          "description": "The properties of the Azure Key Vault connection.",
+          "$ref": "#/definitions/AzureKeyVaultProperties"
         }
       }
     },
