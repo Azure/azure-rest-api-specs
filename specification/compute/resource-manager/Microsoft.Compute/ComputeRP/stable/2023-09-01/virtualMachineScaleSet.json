@@ -5065,7 +5065,12 @@
         "extendedLocation": {
           "$ref": "../../../common-types/v1/common.json#/definitions/ExtendedLocation",
           "description": "The extended location of the Virtual Machine Scale Set."
-        }
+        },
+		"etag": {
+		  "readOnly": true,
+		  "type": "string",
+		  "description": "Etag is property returned in Create/Update/Get response of the VMSS, so that customer can supply it in the header to ensure optimistic updates"
+		}
       },
       "allOf": [
         {
@@ -5625,7 +5630,12 @@
         "identity": {
           "$ref": "./virtualMachine.json#/definitions/VirtualMachineIdentity",
           "description": "The identity of the virtual machine, if configured."
-        }
+        },
+		"etag": {
+		  "readOnly": true,
+		  "type": "string",
+		  "description": "Etag is property returned in Update/Get response of the VMSS VM, so that customer can supply it in the header to ensure optimistic updates."
+		}
       },
       "allOf": [
         {
