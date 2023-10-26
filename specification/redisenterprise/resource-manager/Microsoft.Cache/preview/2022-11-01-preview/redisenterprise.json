@@ -1199,49 +1199,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/skus": {
-      "get": {
-        "tags": [
-          "SKU"
-        ],
-        "operationId": "Skus_List",
-        "description": "Gets information about skus in specified location for the given subscription id",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "x-ms-examples": {
-          "SkusList": {
-            "$ref": "./examples/RedisEnterpriseSkusList.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The request succeeded, response body contains the requested details.",
-            "schema": {
-              "$ref": "#/definitions/RegionSkuDetails"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    }
-  },
   "definitions": {
     "Sku": {
       "description": "SKU parameters supplied to the create RedisEnterprise operation.",
