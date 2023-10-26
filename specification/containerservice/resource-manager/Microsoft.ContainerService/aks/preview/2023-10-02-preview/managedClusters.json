@@ -1348,6 +1348,70 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/deleteMachines": {
+      "post": {
+        "tags": [
+          "AgentPools"
+        ],
+        "operationId": "AgentPools_DeleteMachines",
+        "summary": "Deletes specific machines in an agent pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentPoolNameParameter"
+          },
+          {
+            "name": "machines",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentPoolDeleteMachinesParameter"
+            },
+            "description": "A list of machines from the agent pool to be deleted."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Specific Machines in an Agent Pool": {
+            "$ref": "./examples/AgentPoolsDeleteMachines.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/machines": {
       "get": {
         "tags": [
@@ -8836,6 +8900,21 @@
           "description": "Once the mode it set to Auto, it cannot be changed back to Manual."
         }
       }
+    },
+    "AgentPoolDeleteMachinesParameter": {
+      "properties": {
+        "machineNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The agent pool machine names."
+        }
+      },
+      "required": [
+        "machineNames"
+      ],
+      "description": "Specifies a list of machine names from the agent pool to be deleted."
     }
   },
   "parameters": {
