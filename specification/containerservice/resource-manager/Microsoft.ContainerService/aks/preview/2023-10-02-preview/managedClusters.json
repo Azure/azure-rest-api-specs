@@ -7512,12 +7512,15 @@
               "allowedResources": [
                 {
                   "type": "Microsoft.Network/dnszones"
+                },
+                {
+                  "type": "Microsoft.Network/privateDnsZones"
                 }
               ]
             }
           },
           "maxItems": 5,
-          "description": "Resource IDs of the public DNS zones to be associated with the Web App Routing add-on. Used only when Web App Routing is enabled. All public DNS zones must be in the same resource group."
+          "description": "Resource IDs of the DNS zones to be associated with the Web App Routing add-on. Used only when Web App Routing is enabled. Public and private DNS zones can be in different resource groups, but all public DNS zones must be in the same resource group and all private DNS zones must be in the same resource group."
         },
         "identity": {
           "readOnly": true,
