@@ -26,18 +26,36 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-08
+tag: package-preview-2023-11
 azure-validator: false
 ```
 
 ---
 
 
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - Microsoft.CostManagement/preview/2023-11-01-preview/common-types.json
+  - Microsoft.CostManagement/preview/2023-11-01-preview/costallocation.json
+  - Microsoft.CostManagement/preview/2023-11-01-preview/costmanagement.benefits.json
+  - Microsoft.CostManagement/preview/2023-11-01-preview/costmanagement.budgets.json
+  - Microsoft.CostManagement/preview/2023-11-01-preview/costmanagement.exports.json
+  - Microsoft.CostManagement/preview/2023-11-01-preview/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/preview/2023-11-01-preview/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/preview/2023-11-01-preview/costmanagement.json
+  - Microsoft.CostManagement/preview/2023-11-01-preview/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/preview/2023-11-01-preview/scheduledActions.json
+  - Microsoft.CostManagement/preview/2023-11-01-preview/settings.json
+```
 ### Tag: package-2023-08
 
 These settings apply only when `--tag=package-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08'
+``` yaml $(tag) == 'package-2023-08'
 input-file:
   - Microsoft.CostManagement/stable/2023-08-01/common-types.json
   - Microsoft.CostManagement/stable/2023-08-01/costmanagement.benefits.json
@@ -51,6 +69,7 @@ input-file:
   - Microsoft.CostManagement/stable/2023-08-01/costallocation.json
   - Microsoft.CostManagement/stable/2023-08-01/settings.json
 ```
+
 ### Tag: package-2023-03
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
