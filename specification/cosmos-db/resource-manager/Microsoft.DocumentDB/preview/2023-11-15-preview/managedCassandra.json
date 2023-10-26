@@ -378,7 +378,7 @@
           "202": {
             "description": "Success. The command operation will begin as soon as possible.",
             "schema": {
-              "$ref": "#/definitions/CommandPostBody"
+              "$ref": "#/definitions/CommandPublicResource"
             }
           },
           "default": {
@@ -1506,6 +1506,10 @@
           "type": "string",
           "description": "IP address of the cassandra host to run the command on"
         },
+        "admin": {
+          "type": "boolean",
+          "description": "Whether command has admin privileges"
+        },
         "cassandra-stop-start": {
           "type": "boolean",
           "description": "If true, stops cassandra before executing the command and then start it again"
@@ -1521,6 +1525,10 @@
         "status": {
           "type": "string",
           "description": "status of the command."
+        },
+        "outputFile": {
+          "type": "string",
+          "description": "The name of the file where the result is written."
         }
       }
     },
