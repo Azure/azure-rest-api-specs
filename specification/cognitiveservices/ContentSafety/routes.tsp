@@ -41,17 +41,17 @@ interface TextOperations {
   >;
 
   @added(ContentSafety.Versions.v2023_10_15_Preview)
-  @summary("Analyze NL Snippy")
-  @doc("A synchronous API for the analysis of text snippy.")
-  @route("/text:analyzeNLSnippy")
+  @summary("Analyze Protected Material")
+  @doc("A synchronous API for the analysis of protected material.")
+  @route("/text:analyzeProtectedMaterial")
   @post
-  analyzeTextNlSnippy is Azure.Core.RpcOperation<
+  analyzeTextProtectedMaterial is Azure.Core.RpcOperation<
     {
       @body
       @doc("The text analysis request.")
-      body: AnalyzeTextNlSnippyOptions;
+      body: AnalyzeTextProtectedMaterialOptions;
     },
-    AnalyzeTextNlSnippyResult
+    AnalyzeTextProtectedMaterialResult
   >;
 }
 
