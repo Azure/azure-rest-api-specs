@@ -1,5 +1,6 @@
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { CompileRule } from "./rules/compile.js";
+import { EmitAutorestRule } from "./rules/emit-autorest.js";
 import { FolderStructureRule } from "./rules/folder-structure.js";
 import { FormatRule } from "./rules/format.js";
 import { GitDiffRule } from "./rules/git-diff.js";
@@ -25,6 +26,7 @@ export async function main() {
   const rules = [
     new FolderStructureRule(),
     new NpmPrefixRule(),
+    new EmitAutorestRule(),
     new LinterRulesetRule(),
     new CompileRule(),
     new FormatRule(),
