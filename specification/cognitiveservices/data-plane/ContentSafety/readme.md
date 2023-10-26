@@ -1,6 +1,6 @@
 # Content Safety
 
-> see https://aka.ms/autorest
+> see <https://aka.ms/autorest>
 
 This is the AutoRest configuration file for Content Safety.
 
@@ -56,8 +56,6 @@ input-file:
   - preview/2023-10-15-preview/contentsafety.json
 ```
 
----
-
 # Code Generation
 
 ## Swagger to SDK
@@ -75,6 +73,7 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)

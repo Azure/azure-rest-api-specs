@@ -27,16 +27,16 @@ enum ImageCategory {
 
 @doc("The type of text analysis output.")
 enum AnalyzeTextOutputType {
-  @doc("Output severities in four levels, the value could be 0, 2, 4, 6.")
+  @doc("Output severities in four levels, the value could be 0,2,4,6.")
   FourSeverityLevels,
 
-  @doc("Output severities in eight levels, the value could be 0, 1, 2, 3, 4, 5, 6, 7.")
+  @doc("Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7.")
   EightSeverityLevels,
 }
 
 @doc("The type of image analysis output.")
 enum AnalyzeImageOutputType {
-  @doc("Output severities in four levels, the value could be 0, 2, 4, 6.")
+  @doc("Output severities in four levels, the value could be 0,2,4,6.")
   FourSeverityLevels,
 }
 
@@ -96,7 +96,7 @@ model TextCategoriesAnalysis {
   @doc("The text analysis category.")
   category: TextCategory;
 
-  @doc("The value increases with the severity of the input content. The value of this field is determined by the outputType specified in the request. If 'FourSeverityLevels' or 'EightSeverityLevels' is chosen, this field will be included in the output.")
+  @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’ or ‘EightSeverity Levels’, and the output value can be 0, 2, 4, 6 or 0, 1, 2, 3, 4, 5, 6, or 7.")
   severity?: int32;
 
   @added(ContentSafety.Versions.v2023_10_15_Preview)
@@ -145,7 +145,7 @@ model ImageCategoriesAnalysis {
   @doc("The image analysis category.")
   category: ImageCategory;
 
-  @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’ or ‘EightSeverity Levels’, and the output value can be 0, 2, 4, 6 or 0, 1, 2, 3, 4, 5, 6, or 7.")
+  @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’, and the output value can be 0, 2, 4, 6.")
   severity?: int32;
 
   @added(ContentSafety.Versions.v2023_10_15_Preview)
@@ -250,6 +250,7 @@ model Project {
 enum ContentModality {
   @doc("Text modality.")
   Text,
+
   @doc("Image modality.")
   Image,
 }
@@ -269,7 +270,7 @@ model TextCategoryPolicy {
 model ImageCategoryPolicy {
   @doc("Image category.")
   category: ImageCategory;
-  
+
   @doc("Severity less than the threshold will be treated as accepted for the category. The value can only be 2, 4, 6 for FourSeverityLevels. If the threshold is undefined, it means all content are accepted.")
   acceptSeverityThreshold?: int32;
 }
@@ -294,7 +295,7 @@ model ImagePolicy {
   @doc("The category policy. The length must be larger than 0.")
   @minItems(1)
   categoryPolicies: ImageCategoryPolicy[];
-  
+
   @doc("The type of text analysis output. If not assigned, the default value is \"FourSeverityLevels\".")
   outputType?: AnalyzeTextOutputType = AnalyzeTextOutputType.FourSeverityLevels;
 }

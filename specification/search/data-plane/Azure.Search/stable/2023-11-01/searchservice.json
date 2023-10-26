@@ -212,7 +212,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
+            "description": "Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or `*` for all properties. The default is all properties."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -561,7 +561,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
+            "description": "Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or `*` for all properties. The default is all properties."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -869,7 +869,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Selects which top-level properties of the skillsets to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
+            "description": "Selects which top-level properties of the skillsets to retrieve. Specified as a comma-separated list of JSON property names, or `*` for all properties. The default is all properties."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -1130,7 +1130,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Selects which top-level properties of the synonym maps to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
+            "description": "Selects which top-level properties of the synonym maps to retrieve. Specified as a comma-separated list of JSON property names, or `*` for all properties. The default is all properties."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -1271,7 +1271,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
+            "description": "Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or `*` for all properties. The default is all properties."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -2272,7 +2272,7 @@
           }
         ]
       },
-      "description": "Defines the names of all text analyzers supported by Azure Cognitive Search.",
+      "description": "Defines the names of all text analyzers supported by the search engine.",
       "externalDocs": {
         "url": "https://learn.microsoft.com/rest/api/searchservice/Language-support"
       }
@@ -2365,7 +2365,7 @@
           }
         ]
       },
-      "description": "Defines the names of all tokenizers supported by Azure Cognitive Search.",
+      "description": "Defines the names of all tokenizers supported by the search engine.",
       "externalDocs": {
         "url": "https://learn.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
       }
@@ -2584,7 +2584,7 @@
           }
         ]
       },
-      "description": "Defines the names of all token filters supported by Azure Cognitive Search.",
+      "description": "Defines the names of all token filters supported by the search engine.",
       "externalDocs": {
         "url": "https://learn.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
       }
@@ -2605,7 +2605,7 @@
           }
         ]
       },
-      "description": "Defines the names of all character filters supported by Azure Cognitive Search.",
+      "description": "Defines the names of all character filters supported by the search engine.",
       "externalDocs": {
         "url": "https://learn.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
       }
@@ -2738,7 +2738,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the analyzer."
+          "description": "A URI fragment specifying the type of analyzer."
         },
         "name": {
           "type": "string",
@@ -2878,7 +2878,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the tokenizer."
+          "description": "A URI fragment specifying the type of tokenizer."
         },
         "name": {
           "type": "string",
@@ -3817,7 +3817,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the token filter."
+          "description": "A URI fragment specifying the type of token filter."
         },
         "name": {
           "type": "string",
@@ -5414,7 +5414,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the char filter."
+          "description": "A URI fragment specifying the type of char filter."
         },
         "name": {
           "type": "string",
@@ -5545,7 +5545,7 @@
           "items": {
             "$ref": "#/definitions/VectorSearchAlgorithmConfiguration"
           },
-          "description": "Contains configuration options specific to the algorithm used during indexing and/or querying."
+          "description": "Contains configuration options specific to the algorithm used during indexing or querying."
         }
       },
       "description": "Contains configuration options related to vector search."
@@ -5595,7 +5595,7 @@
         "name",
         "kind"
       ],
-      "description": "Contains configuration options specific to the algorithm used during indexing and/or querying."
+      "description": "Contains configuration options specific to the algorithm used during indexing or querying."
     },
     "HnswVectorSearchAlgorithmConfiguration": {
       "type": "object",
@@ -5609,10 +5609,10 @@
         "hnswParameters": {
           "x-ms-client-name": "Parameters",
           "$ref": "#/definitions/HnswParameters",
-          "description": "Contains the parameters specific to hnsw algorithm."
+          "description": "Contains the parameters specific to HNSW algorithm."
         }
       },
-      "description": "Contains configuration options specific to the hnsw approximate nearest neighbors algorithm used during indexing and querying. The hnsw algorithm offers a tunable trade-off between search speed and accuracy."
+      "description": "Contains configuration options specific to the HNSW approximate nearest neighbors algorithm used during indexing and querying. The HNSW algorithm offers a tunable trade-off between search speed and accuracy."
     },
     "HnswParameters": {
       "type": "object",
@@ -5650,7 +5650,7 @@
           "description": "The similarity metric to use for vector comparisons."
         }
       },
-      "description": "Contains the parameters specific to hnsw algorithm."
+      "description": "Contains the parameters specific to the HNSW algorithm."
     },
     "ExhaustiveKnnVectorSearchAlgorithmConfiguration": {
       "type": "object",
@@ -5720,7 +5720,7 @@
           {
             "value": "hnsw",
             "name": "Hnsw",
-            "description": "Hnsw (Hierarchical Navigable Small World), a type of approximate nearest neighbors algorithm."
+            "description": "HNSW (Hierarchical Navigable Small World), a type of approximate nearest neighbors algorithm."
           },
           {
             "value": "exhaustiveKnn",
@@ -5738,7 +5738,7 @@
             "url": "https://learn.microsoft.com/rest/api/searchservice/Create-Data-Source"
           },
           "type": "string",
-          "description": "The connection string for the datasource. Set to '<unchanged>' if you do not want the connection string updated."
+          "description": "The connection string for the datasource. Set to `<unchanged>` (with brackets) if you don't want the connection string updated. Set to `<redacted>` if you want to remove the connection string value from the datasource."
         }
       },
       "description": "Represents credentials that can be used to connect to a datasource."
@@ -5764,7 +5764,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the data change detection policy."
+          "description": "A URI fragment specifying the type of data change detection policy."
         }
       },
       "required": [
@@ -5804,7 +5804,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the data deletion detection policy."
+          "description": "A URI fragment specifying the type of data deletion detection policy."
         }
       },
       "required": [
@@ -5921,7 +5921,7 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your datasource definition when you want full assurance that no one, not even Microsoft, can decrypt your data source definition in Azure Cognitive Search. Once you have encrypted your data source definition, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your datasource definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your datasource definition when you want full assurance that no one, not even Microsoft, can decrypt your data source definition. Once you have encrypted your data source definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your datasource definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           },
@@ -6116,12 +6116,12 @@
           {
             "value": "jsonArray",
             "name": "JsonArray",
-            "description": "Set to jsonArray to extract individual elements of a JSON array as separate documents in Azure Cognitive Search."
+            "description": "Set to jsonArray to extract individual elements of a JSON array as separate documents."
           },
           {
             "value": "jsonLines",
             "name": "JsonLines",
-            "description": "Set to jsonLines to extract individual JSON entities, separated by a new line, as separate documents in Azure Cognitive Search."
+            "description": "Set to jsonLines to extract individual JSON entities, separated by a new line, as separate documents."
           }
         ]
       },
@@ -6228,7 +6228,7 @@
           {
             "value": "standard",
             "name": "standard",
-            "description": "Indicates that Azure Cognitive Search can determine where the indexer should execute. This is the default environment when nothing is specified and is the recommended value."
+            "description": "Indicates that the search service can determine where the indexer should execute. This is the default environment when nothing is specified and is the recommended value."
           },
           {
             "value": "private",
@@ -6353,7 +6353,7 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your indexer definition (as well as indexer execution status) when you want full assurance that no one, not even Microsoft, can decrypt them in Azure Cognitive Search. Once you have encrypted your indexer definition, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your indexer definition (and indexer execution status) will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your indexer definition (as well as indexer execution status) when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your indexer definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your indexer definition (and indexer execution status) will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           },
@@ -6687,7 +6687,7 @@
         },
         "searchable": {
           "type": "boolean",
-          "description": "A value indicating whether the field is full-text searchable. This means it will undergo analysis such as word-breaking during indexing. If you set a searchable field to a value like \"sunny day\", internally it will be split into the individual tokens \"sunny\" and \"day\". This enables full-text searches for these terms. Fields of type Edm.String or Collection(Edm.String) are searchable by default. This property must be false for simple fields of other non-string data types, and it must be null for complex fields. Note: searchable fields consume extra space in your index since Azure Cognitive Search will store an additional tokenized version of the field value for full-text searches. If you want to save space in your index and you don't need a field to be included in searches, set searchable to false."
+          "description": "A value indicating whether the field is full-text searchable. This means it will undergo analysis such as word-breaking during indexing. If you set a searchable field to a value like \"sunny day\", internally it will be split into the individual tokens \"sunny\" and \"day\". This enables full-text searches for these terms. Fields of type Edm.String or Collection(Edm.String) are searchable by default. This property must be false for simple fields of other non-string data types, and it must be null for complex fields. Note: searchable fields consume extra space in your index to accommodate additional tokenized versions of the field value for full-text searches. If you want to save space in your index and you don't need a field to be included in searches, set searchable to false."
         },
         "filterable": {
           "type": "boolean",
@@ -6695,7 +6695,7 @@
         },
         "sortable": {
           "type": "boolean",
-          "description": "A value indicating whether to enable the field to be referenced in $orderby expressions. By default Azure Cognitive Search sorts results by score, but in many experiences users will want to sort by fields in the documents. A simple field can be sortable only if it is single-valued (it has a single value in the scope of the parent document). Simple collection fields cannot be sortable, since they are multi-valued. Simple sub-fields of complex collections are also multi-valued, and therefore cannot be sortable. This is true whether it's an immediate parent field, or an ancestor field, that's the complex collection. Complex fields cannot be sortable and the sortable property must be null for such fields. The default for sortable is true for single-valued simple fields, false for multi-valued simple fields, and null for complex fields."
+          "description": "A value indicating whether to enable the field to be referenced in $orderby expressions. By default, the search engine sorts results by score, but in many experiences users will want to sort by fields in the documents. A simple field can be sortable only if it is single-valued (it has a single value in the scope of the parent document). Simple collection fields cannot be sortable, since they are multi-valued. Simple sub-fields of complex collections are also multi-valued, and therefore cannot be sortable. This is true whether it's an immediate parent field, or an ancestor field, that's the complex collection. Complex fields cannot be sortable and the sortable property must be null for such fields. The default for sortable is true for single-valued simple fields, false for multi-valued simple fields, and null for complex fields."
         },
         "facetable": {
           "type": "boolean",
@@ -7088,7 +7088,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended)."
+          "description": "The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single `*` to allow all origins (not recommended)."
         },
         "maxAgeInSeconds": {
           "type": "integer",
@@ -7225,7 +7225,7 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Cognitive Search. Once you have encrypted your data, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           },
@@ -7332,11 +7332,11 @@
         "cognitiveServices": {
           "x-ms-client-name": "CognitiveServicesAccount",
           "$ref": "#/definitions/CognitiveServicesAccount",
-          "description": "Details about cognitive services to be used when running skills."
+          "description": "Details about the Azure AI service to be used when running skills."
         },
         "knowledgeStore": {
           "$ref": "#/definitions/SearchIndexerKnowledgeStore",
-          "description": "Definition of additional projections to azure blob, table, or files, of enriched data."
+          "description": "Definition of additional projections to Azure blob, table, or files, of enriched data."
         },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
@@ -7345,7 +7345,7 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your skillset definition when you want full assurance that no one, not even Microsoft, can decrypt your skillset definition in Azure Cognitive Search. Once you have encrypted your skillset definition, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your skillset definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your skillset definition when you want full assurance that no one, not even Microsoft, can decrypt your skillset definition. Once you have encrypted your skillset definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your skillset definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           },
@@ -7366,17 +7366,17 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the cognitive service resource attached to a skillset."
+          "description": "A URI fragment specifying the type of Azure AI service resource attached to a skillset."
         },
         "description": {
           "type": "string",
-          "description": "Description of the cognitive service resource attached to a skillset."
+          "description": "Description of the Azure AI service resource attached to a skillset."
         }
       },
       "required": [
         "@odata.type"
       ],
-      "description": "Base type for describing any cognitive service resource attached to a skillset."
+      "description": "Base type for describing any Azure AI service resource attached to a skillset."
     },
     "SearchIndexerKnowledgeStore": {
       "properties": {
@@ -7511,7 +7511,7 @@
       "description": "Projection definition for what data to store in Azure Files."
     },
     "DefaultCognitiveServicesAccount": {
-      "description": "An empty object that represents the default cognitive service resource for a skillset.",
+      "description": "An empty object that represents the default Azure AI service resource for a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.DefaultCognitiveServices",
       "allOf": [
         {
@@ -7520,7 +7520,7 @@
       ]
     },
     "CognitiveServicesAccountKey": {
-      "description": "A cognitive service resource provisioned with a key that is attached to a skillset.",
+      "description": "An Azure AI service resource provisioned with a key that is attached to a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CognitiveServicesByKey",
       "allOf": [
         {
@@ -7530,7 +7530,7 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key used to provision the cognitive service resource attached to a skillset."
+          "description": "The key used to provision the Azure AI service resource attached to a skillset."
         }
       },
       "required": [
@@ -7542,11 +7542,11 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the skill."
+          "description": "A URI fragment specifying the type of skill."
         },
         "name": {
           "type": "string",
-          "description": "The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character '#'."
+          "description": "The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character `#`."
         },
         "description": {
           "type": "string",
@@ -7749,7 +7749,7 @@
       "properties": {
         "defaultLanguageCode": {
           "$ref": "#/definitions/KeyPhraseExtractionSkillLanguage",
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "maxKeyPhraseCount": {
           "type": "integer",
@@ -7778,7 +7778,7 @@
       "properties": {
         "defaultLanguageCode": {
           "$ref": "#/definitions/OcrSkillLanguage",
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "detectOrientation": {
           "x-ms-client-name": "ShouldDetectOrientation",
@@ -7802,7 +7802,7 @@
       "properties": {
         "defaultLanguageCode": {
           "$ref": "#/definitions/ImageAnalysisSkillLanguage",
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "visualFeatures": {
           "type": "array",
@@ -7904,7 +7904,7 @@
         },
         "defaultLanguageCode": {
           "$ref": "#/definitions/EntityRecognitionSkillLanguage",
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "includeTypelessEntities": {
           "type": "boolean",
@@ -7933,7 +7933,7 @@
       "properties": {
         "defaultLanguageCode": {
           "$ref": "#/definitions/SentimentSkillLanguage",
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         }
       },
       "externalDocs": {
@@ -7952,7 +7952,7 @@
         "defaultLanguageCode": {
           "type": "string",
           "x-nullable": true,
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "includeOpinionMining": {
           "type": "boolean",
@@ -7981,7 +7981,7 @@
         "defaultLanguageCode": {
           "type": "string",
           "x-nullable": true,
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "minimumPrecision": {
           "type": "number",
@@ -8021,7 +8021,7 @@
         "defaultLanguageCode": {
           "type": "string",
           "x-nullable": true,
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "minimumPrecision": {
           "type": "number",
@@ -8053,7 +8053,7 @@
         "defaultLanguageCode": {
           "type": "string",
           "x-nullable": true,
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "minimumPrecision": {
           "type": "number",
@@ -8071,7 +8071,7 @@
           "type": "string",
           "x-nullable": true,
           "maxLength": 1,
-          "description": "The character used to mask the text if the maskingMode parameter is set to replace. Default is '*'."
+          "description": "The character used to mask the text if the maskingMode parameter is set to replace. Default is `*`."
         },
         "modelVersion": {
           "type": "string",
@@ -8107,7 +8107,7 @@
       "properties": {
         "defaultLanguageCode": {
           "$ref": "#/definitions/SplitSkillLanguage",
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "textSplitMode": {
           "$ref": "#/definitions/TextSplitMode",
@@ -8137,7 +8137,7 @@
         "defaultLanguageCode": {
           "$ref": "#/definitions/CustomEntityLookupSkillLanguage",
           "x-nullable": true,
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "entitiesDefinitionUri": {
           "type": "string",
@@ -8193,7 +8193,7 @@
         "suggestedFrom": {
           "$ref": "#/definitions/TextTranslationSkillLanguage",
           "x-nullable": true,
-          "description": "The language code to translate documents from when neither the fromLanguageCode input nor the defaultFromLanguageCode parameter are provided, and the automatic language detection is unsuccessful. Default is en."
+          "description": "The language code to translate documents from when neither the fromLanguageCode input nor the defaultFromLanguageCode parameter are provided, and the automatic language detection is unsuccessful. Default is `en`."
         }
       },
       "required": [
@@ -10401,7 +10401,7 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Cognitive Search. Once you have encrypted your data, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your sensitive data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           },
@@ -10452,7 +10452,7 @@
         "keyVaultUri": {
           "x-ms-client-name": "vaultUri",
           "type": "string",
-          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be https://my-keyvault-name.vault.azure.net."
+          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be `https://my-keyvault-name.vault.azure.net`."
         },
         "accessCredentials": {
           "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
@@ -10467,7 +10467,7 @@
         "keyVaultKeyVersion",
         "keyVaultUri"
       ],
-      "description": "A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest in Azure Cognitive Search, such as indexes and synonym maps."
+      "description": "A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest on your search service, such as indexes and synonym maps."
     },
     "AzureActiveDirectoryApplicationCredentials": {
       "properties": {
@@ -10629,7 +10629,7 @@
       "required": [
         "message"
       ],
-      "description": "Describes an error condition for the Azure Cognitive Search API."
+      "description": "Describes an error condition for the API."
     },
     "SemanticSettings": {
       "properties": {
