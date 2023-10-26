@@ -30,3 +30,9 @@ alias MultipartFormDataRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTr
   @header("content-type")
   contentType: "multipart/form-data";
 }>;
+
+alias TextPlainResponseHeadersTraits = Azure.Core.Traits.ResponseHeadersTrait<{
+  @doc("'text/plain' content type for the resonse.")
+  @header("content-type")
+  contentType: "text/plain";
+}>;
