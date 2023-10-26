@@ -29,10 +29,7 @@ written language corresponding to the language it was spoken in.
 op getAudioTranscriptionAsPlainText is Azure.Core.ResourceAction<
   Deployment,
   AudioTranscriptionOptions,  // response_format must be one of: text, srt, vtt
-  {
-    @body
-    body: string
-  },
+  AudioTextResponse,
   MultipartFormDataRequestHeadersTraits & TextPlainResponseHeadersTraits
 >;
 

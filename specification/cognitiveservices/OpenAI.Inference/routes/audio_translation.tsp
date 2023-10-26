@@ -28,10 +28,7 @@ Gets English language transcribed text and associated metadata from provided spo
 op getAudioTranslationAsPlainText is Azure.Core.ResourceAction<
   Deployment,
   AudioTranslationOptions,  // response_format must be one of: text, srt, vtt
-  {
-    @body
-    body: string
-  },
+  AudioTextResponse,
   MultipartFormDataRequestHeadersTraits & TextPlainResponseHeadersTraits
 >;
 
