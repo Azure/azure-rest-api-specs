@@ -310,17 +310,17 @@ model BlocklistPolicy {
 }
 
 @added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("The text analysis request.")
-model AnalyzeTextNlSnippyOptions {
+@doc("The protected material analysis request.")
+model AnalyzeTextProtectedMaterialOptions {
   @doc("The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
   @maxLength(1000)
   text: string;
 }
 
 @added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("The text analysis response.")
-model AnalyzeTextNlSnippyResult {
-  @doc("Analysis result for NLSnippy.")
+@doc("The protected material analysis response.")
+model AnalyzeTextProtectedMaterialResult {
+  @doc("Analysis result for protected material.")
   detected: boolean;
 }
 

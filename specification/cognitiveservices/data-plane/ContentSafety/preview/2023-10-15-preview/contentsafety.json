@@ -799,11 +799,11 @@
         }
       }
     },
-    "/text:analyzeNLSnippy": {
+    "/text:analyzeProtectedMaterial": {
       "post": {
-        "operationId": "TextOperations_AnalyzeTextNlSnippy",
-        "summary": "Analyze NL Snippy",
-        "description": "A synchronous API for the analysis of text snippy.",
+        "operationId": "TextOperations_AnalyzeTextProtectedMaterial",
+        "summary": "Analyze Protected Material",
+        "description": "A synchronous API for the analysis of protected material.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -814,7 +814,7 @@
             "description": "The text analysis request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AnalyzeTextNlSnippyOptions"
+              "$ref": "#/definitions/AnalyzeTextProtectedMaterialOptions"
             }
           }
         ],
@@ -822,7 +822,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AnalyzeTextNlSnippyResult"
+              "$ref": "#/definitions/AnalyzeTextProtectedMaterialResult"
             }
           },
           "default": {
@@ -971,33 +971,6 @@
         "jailbreakAnalysis"
       ]
     },
-    "AnalyzeTextNlSnippyOptions": {
-      "type": "object",
-      "description": "The text analysis request.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.",
-          "maxLength": 1000
-        }
-      },
-      "required": [
-        "text"
-      ]
-    },
-    "AnalyzeTextNlSnippyResult": {
-      "type": "object",
-      "description": "The text analysis response.",
-      "properties": {
-        "detected": {
-          "type": "boolean",
-          "description": "Analysis result for NLSnippy."
-        }
-      },
-      "required": [
-        "detected"
-      ]
-    },
     "AnalyzeTextOptions": {
       "type": "object",
       "description": "The text analysis request.",
@@ -1062,6 +1035,33 @@
           }
         ]
       }
+    },
+    "AnalyzeTextProtectedMaterialOptions": {
+      "type": "object",
+      "description": "The protected material analysis request.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.",
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AnalyzeTextProtectedMaterialResult": {
+      "type": "object",
+      "description": "The protected material analysis response.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Analysis result for protected material."
+        }
+      },
+      "required": [
+        "detected"
+      ]
     },
     "AnalyzeTextResult": {
       "type": "object",
