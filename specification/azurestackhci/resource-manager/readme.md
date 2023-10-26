@@ -87,15 +87,29 @@ suppressions:
       - edgeDevices.json
       
   - code: ResourceNameRestriction
-    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+    reason: publisherName, publisherName etc didn't have a pattern initially, adding the constraint now will cause a breaking change
     from:
       - arcSettings.json
       - clusters.json
       - extensions.json
+      - galleryImages.json
+      - logicalNetworks.json
+      - marketplaceGalleryImages.json
+      - networkInterfaces.json
+      - operations.json
+      - storageContainers.json
+      - virtualHardDisks.json
+      - virtualMachines.json
+      - virtualMachineInstances.json
+      - virtualNetworks.json
+      - offers.json
+      - publishers.json
+      - skus.json
       - updates.json
       - updateRuns.json
       - updateSummaries.json
       - deploymentSettings.json
+      - edgeDevices.json
     
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility 
