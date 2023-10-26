@@ -29,12 +29,12 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-08
+tag: package-preview-2023-09
 ```
 
 ## Suppression
 
-```yaml
+``` yaml
 directive:
   - suppress: R3020
     from:
@@ -77,7 +77,21 @@ suppressions:
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility.
 ```
 
+### Tag: package-preview-2023-09
 
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/common.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/logicalNetworks.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualMachineInstances.json
+```
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
@@ -96,21 +110,6 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-08-01-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2023-08-01-preview/deploymentSettings.json
   - Microsoft.AzureStackHCI/preview/2023-08-01-preview/edgeDevices.json
-```
-### Tag: package-preview-2023-09
-
-These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-09'
-input-file:
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/common.json
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/galleryImages.json
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/logicalNetworks.json
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/marketplaceGalleryImages.json
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/networkInterfaces.json
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/storageContainers.json
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualHardDisks.json
-  - Microsoft.AzureStackHCI/preview/2023-09-01-preview/virtualMachineInstances.json
 ```
 ### Tag: package-2023-08
 
