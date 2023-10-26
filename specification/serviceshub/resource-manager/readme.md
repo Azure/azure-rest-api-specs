@@ -27,7 +27,7 @@ These are the global settings for the serviceshub.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-04-17-preview
+tag: package-2023-10-20-preview
 ```
 
 ### Tag: package-2019-08-15-preview
