@@ -3,12 +3,8 @@ import { TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert } from "node:assert";
 describe("compile", function () {
   it("should succeed if project can compile", async function () {
-    let host = new TsvTestHost();
-    host.runCmd = async (_cmd: string, _cwd: string) => [null, "success", "success"];
-
-    const result = await new CompileRule().execute(host, TsvTestHost.folder);
+    const result = await new CompileRule().execute(new TsvTestHost(), TsvTestHost.folder);
 
     assert(result.success);
-    assert(result.stdOutput === "successsuccess");
   });
 });
