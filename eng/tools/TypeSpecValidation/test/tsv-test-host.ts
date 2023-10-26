@@ -35,6 +35,7 @@ export class TsvTestHost implements TsvHost {
   }
 
   async readTspConfig(_folder: string): Promise<string> {
+    // Sample config that should cause all rules to succeed
     return `
 emit:
   - "@azure-tools/typespec-autorest"
