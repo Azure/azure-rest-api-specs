@@ -1,28 +1,11 @@
-import { TsvHost } from "../src/tsv-host.js";
+import { IGitOperation, TsvHost } from "../src/tsv-host.js";
 
-export function TsvTestHostGenerator(fnReturnSub: { [key: string]: Object }) {
-  let tsvTestHost = Object.assign({}, DefaultTsvTestHost); // Needs deep copy
-  for (let key in fnReturnSub) {
-    let typedKey = key as keyof TsvHost;
-    if (fnReturnSub[typedKey]) {
-      tsvTestHost = {
-        ...tsvTestHost,
-        [typedKey]: () => {
-          return fnReturnSub[typedKey];
-        },
-      };
-    } else {
-      tsvTestHost = {
-        ...tsvTestHost,
-        [typedKey]: () => {},
-      };
-    }
+export class TsvTestHost implements TsvHost {
+  static get folder() {
+    return "specification/foo/Foo";
   }
-  return tsvTestHost;
-}
 
-export const DefaultTsvTestHost: TsvHost = {
-  gitOperation: (folder: string) => {
+  gitOperation(folder: string): IGitOperation {
     return {
       status: () => {
         return Promise.resolve({
@@ -39,19 +22,18 @@ export const DefaultTsvTestHost: TsvHost = {
         return Promise.resolve("");
       },
     };
-  },
+  }
 
-  runCmd: async (cmd: string, cwd: string) => {
+  async runCmd(cmd: string, cwd: string): Promise<[Error | null, string, string]> {
     let err = null;
     let stdout = `default ${cmd} at ${cwd}`;
     let stderr = "";
 
     return [err, stdout, stderr];
-  },
+  }
 
-  checkFileExists: async (file: string) => {
+  async checkFileExists(file: string): Promise<boolean> {
     console.log(`file ${file} exists`);
     return true;
-  },
-  // TODO: Other functions that need mocks
-};
+  }
+}
