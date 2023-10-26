@@ -22,7 +22,7 @@ export async function main() {
 
   const host = new TsvRunnerHost();
 
-  let rules = [
+  const rules = [
     new FolderStructureRule(),
     new NpmPrefixRule(),
     new EmitAutorestRule(),
