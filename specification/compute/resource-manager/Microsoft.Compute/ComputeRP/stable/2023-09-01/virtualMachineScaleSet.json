@@ -223,6 +223,9 @@
           "Create a scale set with Fpga Network Interfaces.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_FromWithFpgaNetworkInterface.json"
           },
+          "Create a scale set with Network Interfaces with public ip address dns settings.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_FromWithNetworkInterfaceWithDnsSettings.json"
+          },
           "Create a scale set with Uefi Settings of secureBoot and vTPM.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithUefiSettings.json"
           },
@@ -4341,6 +4344,34 @@
             "name": "DeleteOptions",
             "modelAsString": true
           }
+        },
+        "auxiliaryMode": {
+          "type": "string",
+          "description": "Specifies whether the Auxiliary mode is enabled for the Network Interface resource.",
+          "enum": [
+            "None",
+            "AcceleratedConnections",
+            "Floating"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkInterfaceAuxiliaryMode",
+            "modelAsString": true
+          }
+        },
+        "auxiliarySku": {
+          "type": "string",
+          "description": "Specifies whether the Auxiliary sku is enabled for the Network Interface resource.",
+          "enum": [
+            "None",
+            "A1",
+            "A2",
+            "A4",
+            "A8"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkInterfaceAuxiliarySku",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -4399,6 +4430,34 @@
             "name": "DeleteOptions",
             "modelAsString": true
           }
+        },
+        "auxiliaryMode": {
+          "type": "string",
+          "description": "Specifies whether the Auxiliary mode is enabled for the Network Interface resource.",
+          "enum": [
+            "None",
+            "AcceleratedConnections",
+            "Floating"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkInterfaceAuxiliaryMode",
+            "modelAsString": true
+          }
+        },
+        "auxiliarySku": {
+          "type": "string",
+          "description": "Specifies whether the Auxiliary sku is enabled for the Network Interface resource.",
+          "enum": [
+            "None",
+            "A1",
+            "A2",
+            "A4",
+            "A8"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkInterfaceAuxiliarySku",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes a virtual machine scale set updatable network profile's IP configuration.Use this object for updating network profile's IP Configuration."
@@ -4450,6 +4509,20 @@
         "domainNameLabel": {
           "type": "string",
           "description": "The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created"
+        },
+        "domainNameLabelScope": {
+          "type": "string",
+          "description": "The Domain name label scope.The concatenation of the hashed domain name label that generated according to the policy from domain name label scope and vm index will be the domain name labels of the PublicIPAddress resources that will be created",
+          "enum": [
+            "TenantReuse",
+            "SubscriptionReuse",
+            "ResourceGroupReuse",
+            "NoReuse"
+          ],
+          "x-ms-enum": {
+            "name": "DomainNameLabelScopeTypes",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -5587,6 +5660,12 @@
         "userData": {
           "type": "string",
           "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
+        },
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time at which the Virtual Machine resource was created.<br><br>Minimum api-version: 2021-11-01."
         }
       },
       "description": "Describes the properties of a virtual machine scale set virtual machine."
