@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report bugs in Azure Go SDK packages.
+about: Report bugs.
 ---
 ### Bug Report
 
