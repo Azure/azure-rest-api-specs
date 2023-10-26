@@ -8,11 +8,11 @@ export async function runCmd(cmd: string, cwd: string) {
       cmd,
       { encoding: "utf8", maxBuffer: 1024 * 1024 * 64, cwd: cwd },
       (err: unknown, stdout: unknown, stderr: unknown) =>
-        res({ err: err, stdout: stdout, stderr: stderr })
-    )
+        res({ err: err, stdout: stdout, stderr: stderr }),
+    ),
   )) as any;
 
-  return [err, stdout, stderr];
+  return [err, stdout, stderr] as [Error | null, string, string];
 }
 
 export async function checkFileExists(file: string) {
