@@ -1,4 +1,3 @@
-import { readFile } from "fs/promises";
 import { join } from "path";
 import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
@@ -19,11 +18,10 @@ export class EmitAutorestRule implements Rule {
     stdOutput += `mainTspExists: ${mainTspExists}\n`;
 
     if (mainTspExists) {
-      const configFile = join(folder, "tspconfig.yaml");
-      const configText = await readFile(configFile, "utf8");
+      const configText = await host.readTspConfig(folder);
       const config = yamlParse(configText);
 
-      const emit = config.emit;
+      const emit = config?.emit;
       stdOutput += `emit: ${JSON.stringify(emit)}\n`;
 
       if (!emit?.includes("@azure-tools/typespec-autorest")) {
