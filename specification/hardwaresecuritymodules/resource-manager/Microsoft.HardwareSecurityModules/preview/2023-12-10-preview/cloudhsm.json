@@ -586,6 +586,42 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.HardwareSecurityModules/operations": {
+      "get": {
+        "tags": [
+          "CloudHsmOperations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Get a list of Cloud HSM operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmOperationListResult"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of Cloud HSM operations": {
+            "$ref": "./examples/CloudHsm_OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -797,6 +833,63 @@
           "type": "string",
           "readOnly": true,
           "description": "Status of backup operation"
+        }
+      }
+    },
+    "CloudHsmOperationListResult": {
+      "type": "object",
+      "description": "Result of the request to list Cloud HSM Provider operations. It contains a list of operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudHsmOperation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "List of Cloud HSM Resource Provider operations."
+        }
+      }
+    },
+    "CloudHsmOperation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the Cloud HSM Resource Provider Operation.",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Gets or sets a value indicating whether it is a data plane action",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "origin": {
+          "description": "The origin of the operation",
+          "type": "string"
+        },
+        "display": {
+          "properties": {
+            "provider": {
+              "description": "The Resource Provider of the operation",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The object that represents the operation.",
+              "type": "string"
+            }
+          },
+          "description": "The display string.",
+          "type": "object"
         }
       }
     },
