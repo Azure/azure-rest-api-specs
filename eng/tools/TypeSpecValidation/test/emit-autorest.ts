@@ -25,7 +25,7 @@ emit:
     assert(result.success);
   });
 
-  it("should fail if no config", async function () {
+  it("should fail if config is empty", async function () {
     let host = new TsvTestHost();
     host.readTspConfig = async (_folder: string) => "";
 
