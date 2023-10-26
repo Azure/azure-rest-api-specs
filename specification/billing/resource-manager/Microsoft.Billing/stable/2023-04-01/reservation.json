@@ -186,6 +186,71 @@
             }
           }
         }
+      },
+      "patch": {
+        "description": "Update reservation by billing account.",
+        "operationId": "Reservation_UpdateByBillingAccount",
+        "tags": [
+          "Reservation"
+        ],
+        "x-ms-examples": {
+          "ReservationUpdate": {
+            "$ref": "./examples/reservationUpdateByBillingAccount.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request is completed.",
+            "schema": {
+              "$ref": "#/definitions/Reservation"
+            }
+          },
+          "202": {
+            "description": "The request is accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "URL for determining when an operation has completed. Only use this value only when Azure-AsyncOperation isn't returned."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}/reservations": {
@@ -353,6 +418,10 @@
           "description": "The properties associated to this reservation order",
           "type": "object"
         },
+        "tags": {
+          "description": "Tags for this reservation",
+          "$ref": "#/definitions/Tags"
+        },
         "type": {
           "type": "string",
           "readOnly": true,
@@ -388,6 +457,10 @@
           "description": "The properties associated to this reservation",
           "type": "object",
           "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Tags for this reservation",
+          "$ref": "#/definitions/Tags"
         },
         "sku": {
           "$ref": "#/definitions/ReservationSkuProperty",
@@ -478,6 +551,9 @@
           "type": "string",
           "format": "date-time",
           "description": "This is the date-time when the Azure Hybrid Benefit needs to be reviewed."
+        },
+        "productCode": {
+          "$ref": "#/definitions/ProductCode"
         }
       }
     },
@@ -661,6 +737,9 @@
               "x-ms-identifiers": []
             }
           }
+        },
+        "productCode": {
+          "$ref": "#/definitions/ProductCode"
         }
       }
     },
@@ -846,6 +925,55 @@
         }
       }
     },
+    "Patch": {
+      "type": "object",
+      "description": "The request for reservation patch",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PatchProperties"
+        },
+        "tags": {
+          "description": "Tags for this reservation",
+          "$ref": "#/definitions/Tags"
+        }
+      }
+    },
+    "PatchProperties": {
+      "type": "object",
+      "description": "Properties for reservation patch",
+      "properties": {
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType"
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties"
+        },
+        "instanceFlexibility": {
+          "$ref": "#/definitions/InstanceFlexibility"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the reservation"
+        },
+        "renew": {
+          "$ref": "#/definitions/Renew"
+        },
+        "renewProperties": {
+          "type": "object",
+          "properties": {
+            "purchaseProperties": {
+              "$ref": "#/definitions/PurchaseRequest"
+            }
+          }
+        },
+        "reviewDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the date-time when the Azure hybrid benefit needs to be reviewed."
+        }
+      }
+    },
     "Price": {
       "type": "object",
       "properties": {
@@ -996,6 +1124,22 @@
       "type": "boolean",
       "default": false,
       "description": "Setting this to true will automatically purchase a new reservation on the expiration date time."
+    },
+    "Tags": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "x-ms-mutability": [
+        "read",
+        "create",
+        "update"
+      ],
+      "description": "Resource Tags"
+    },
+    "ProductCode": {
+      "type": "string",
+      "description": "Represents UPN"
     },
     "InstanceFlexibility": {
       "type": "string",
@@ -1220,6 +1364,16 @@
       "required": true,
       "type": "string",
       "description": "Order Id of the reservation"
+    },
+    "PatchParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Request body for patching a savings plan order alias",
+      "schema": {
+        "$ref": "#/definitions/Patch"
+      }
     }
   },
   "securityDefinitions": {
