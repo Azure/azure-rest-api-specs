@@ -1007,6 +1007,23 @@
         }
       }
     },
+    "CustomDnsSuffixConfigurationResource": {
+      "description": "ASE Custom DNS Suffix Configuration ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CustomDnsSuffixConfigurationProperties",
+          "description": "Core resource properties",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "CustomDnsSuffixConfigurationProperties": {
       "description": "Properties of an ASEv3 custom domain suffix configuration.",
       "type": "object",
@@ -1040,23 +1057,6 @@
         "keyVaultReferenceIdentity": {
           "description": "The user-assigned identity to use for resolving the key vault certificate reference. If not specified, the system-assigned ASE identity will be used if available.",
           "type": "string"
-        }
-      }
-    },
-    "CustomDnsSuffixConfigurationResource": {
-      "description": "ASE Custom DNS Suffix Configuration ARM resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CustomDnsSuffixConfigurationProperties",
-          "description": "Core resource properties",
-          "type": "object",
-          "x-ms-client-flatten": true
         }
       }
     },
