@@ -124,8 +124,7 @@
         },
         "interval": {
           "type": "string",
-          "format": "duration",
-          "description": "The interval (window size) for which the metric data was returned in.  This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made."
+          "description": "The interval (window size) for which the metric data was returned in ISO 8601 duration format with a special case for 'FULL' value that returns single datapoint for entire time span requested (*Examples: PT15M, PT1H, P1D, FULL*). \nThis may be adjusted and different from what was originally requested if AutoAdjustTimegrain=true is specified. This is not present if a metadata request was made."
         },
         "namespace": {
           "type": "string",
@@ -187,8 +186,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "format": "duration",
-      "description": "The interval (i.e. timegrain) of the query.",
+      "description": "The interval (i.e. timegrain) of the query in ISO 8601 duration format. Defaults to PT1M. Special case for 'FULL' value that returns single datapoint for entire time span requested.\n*Examples: PT15M, PT1H, P1D, FULL*",
       "x-ms-parameter-location": "method"
     },
     "MetricNamesParameter": {
