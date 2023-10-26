@@ -390,6 +390,46 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/commands": {
+      "post": {
+        "operationId": "CassandraClusters_ListCommand",
+        "description": "List all commands currently running on ring info",
+        "x-ms-examples": {
+          "CosmosDBManagedCassandraCommand": {
+            "$ref": "./examples/CosmosDBManagedCassandraListCommand.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of shell commands.",
+            "schema": {
+              "$ref": "#/definitions/CommandPublicResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/commands/{commandId}": {
       "post": {
         "operationId": "CassandraClusters_GetCommandAsync",
@@ -459,7 +499,7 @@
             "$ref": "#/parameters/clusterNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1506,15 +1546,15 @@
           "type": "string",
           "description": "IP address of the cassandra host to run the command on"
         },
-        "admin": {
+        "isAdmin": {
           "type": "boolean",
           "description": "Whether command has admin privileges"
         },
-        "cassandra-stop-start": {
+        "cassandraStopStart": {
           "type": "boolean",
           "description": "If true, stops cassandra before executing the command and then start it again"
         },
-        "readwrite": {
+        "readWrite": {
           "type": "boolean",
           "description": "If true, allows the command to *write* to the cassandra directory, otherwise read-only."
         },
