@@ -21,6 +21,7 @@
           "format": "Csv",
           "deliveryInfo": {
             "destination": {
+              "type": "AzureBlob",
               "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
               "container": "exports",
               "rootFolderPath": "ad-hoc"
@@ -42,9 +43,13 @@
                   "ResourceId",
                   "ResourceLocation",
                   "Quantity"
-                ]
+                ],
+                "datasetVersion": "2023-05-01"
               }
-            }
+            },
+            "dataOverwriteBehavior": "OverwritePreviousReport",
+            "compressionMode": "None",
+            "exportDescription": "This is an example export"
           }
         }
       }

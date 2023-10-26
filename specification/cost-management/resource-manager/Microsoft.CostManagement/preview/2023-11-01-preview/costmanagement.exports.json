@@ -455,10 +455,10 @@
       "type": "object",
       "properties": {
         "format": {
-          "description": "The format of the export being delivered. Currently only 'Csv' is supported.",
+          "description": "The format of the export being delivered. 'Csv is supported for all datasets. Parquet is supported only for hourly usage.'",
           "type": "string",
           "enum": [
-            "Csv"
+            "Csv", "Parquet"
           ],
           "x-ms-enum": {
             "name": "FormatType",
@@ -478,7 +478,7 @@
           "$ref": "#/definitions/ExportExecutionListResult"
         },
         "partitionData": {
-          "description": "If set to true, exported data will be partitioned by size and placed in a blob directory together with a manifest file. Note: this option is currently available only for Microsoft Customer Agreement commerce scopes.",
+          "description": "DEPRECATED: Only value accepted value is true. Previously:If set to true, exported data will be partitioned by size and placed in a blob directory together with a manifest file. Note: this option is currently available only for Microsoft Customer Agreement commerce scopes.",
           "type": "boolean"
         },
         "nextRunTimeEstimate": {
@@ -486,6 +486,35 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true
+        },
+        "compressionMode": {
+          "description": "The compression type of the export being delivered. gzip and snappy are only supported for hourly usage.",
+          "type": "string",
+          "enum": [
+            "None",
+            "gzip",
+            "snappy"
+          ],
+          "x-ms-enum": {
+            "name": "CompressionMode",
+            "modelAsString": true
+          }
+        },
+        "dataOverwriteBehavior": {
+          "description": "The behavior indicating to overwrite previous reports or create a new report.",
+          "type": "string",
+          "enum": [
+            "OverwritePreviousReport",
+            "CreateNewReport"
+          ],
+          "x-ms-enum": {
+            "name": "DataOverwriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "exportDescription": {
+          "description": "The description of the export being delivered.",
+          "type": "string"
         }
       },
       "required": [
@@ -585,6 +614,18 @@
         "storageAccount": {
           "description": "The storage account where exports will be uploaded. For a restricted set of Azure customers this together with sasToken can be specified instead of resourceId.",
           "type": "string"
+        },
+        "type": {
+          "description": "",
+          "type": "string",
+          "enum": [
+            "AzureBlob",
+            "AzureDataExplorer"
+          ],
+          "x-ms-enum": {
+            "name": "DestinationType",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -643,10 +684,12 @@
       "type": "object",
       "properties": {
         "granularity": {
-          "description": "The granularity of rows in the export. Currently only 'Daily' is supported.",
+          "description": "The granularity of rows in the export. This is N/A for Pricesheet, Reservation Transactions, and Reservation Recommendastions datasets. 'Daily' is supported for all other datasets. 'Monthly' is supported only for Reservation Summaries and Reservation Details datasets. 'Hourly' is supported only for the Usage dataset. ",
           "type": "string",
           "enum": [
-            "Daily"
+            "Daily",
+            "Monthly",
+            "Hourly"
           ],
           "x-ms-enum": {
             "name": "GranularityType",
@@ -669,7 +712,27 @@
           "items": {
             "type": "string"
           }
+        },
+        "datasetVersion": {
+          "description": "",
+          "type": "string",
+          "enum": [],
+          "x-ms-enum": {
+            "name": "DatasetVersion",
+            "modelAsString": true
+          },
+          "filters": {
+            "description": "Object that allows you to filter your export by values by column values and ranges.",
+            "$ref": "#/definitions/ExportDatasetConfigurationFilters"
+          }
         }
+      }
+    },
+    "ExportDatasetConfigurationFilters": {
+      "description": "Values and ranges of column names in order to filter out rows from your export.",
+      "type": "object",
+      "properties": {
+
       }
     },
     "ExportTimePeriod": {
