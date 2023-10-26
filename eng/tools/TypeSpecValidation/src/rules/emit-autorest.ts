@@ -3,19 +3,19 @@ import { join } from "path";
 import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
-import { checkFileExists } from "../utils.js";
+import { TsvHost } from "../tsv-host.js";
 
 export class EmitAutorestRule implements Rule {
   readonly name = "EmitAutorest";
 
   readonly description = 'Must emit "@azure-tools/typespec-autorest" by default';
 
-  async execute(folder: string): Promise<RuleResult> {
+  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
 
-    const mainTspExists = await checkFileExists(join(folder, "main.tsp"));
+    const mainTspExists = await host.checkFileExists(join(folder, "main.tsp"));
     stdOutput += `mainTspExists: ${mainTspExists}\n`;
 
     if (mainTspExists) {
