@@ -2,6 +2,10 @@ namespace ApiCenter.DataApi.Models;
 
 @doc("API deployment")
 model ApiDeployment {
+  @doc("The resource name.")
+  @maxLength(50)
+  name: string;
+  
   @doc("The name of the deployment.")
   @maxLength(50)
   title: string;

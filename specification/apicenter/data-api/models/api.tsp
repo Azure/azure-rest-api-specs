@@ -2,6 +2,10 @@ namespace ApiCenter.DataApi.Models;
 
 @doc("API contract")
 model Api {
+  @doc("The resource name.")
+  @maxLength(50)
+  name: string;
+
   @doc("The name of the API.")
   @maxLength(50)
   title: string;
@@ -44,6 +48,10 @@ model Api {
     @doc("Title of the documentation.")
     @maxLength(50)
     title: string;
+
+		@doc("Description of the documentation.")
+    @maxLength(1000)
+		description: string;
 
     @doc("URL pointing to the documentation.")
     @maxLength(200)

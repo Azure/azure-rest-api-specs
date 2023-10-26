@@ -2,6 +2,10 @@ namespace ApiCenter.DataApi.Models;
 
 @doc("Environment")
 model Environment {
+  @doc("The resource name.")
+  @maxLength(50)
+  name: string;
+
   @doc("The name of the environment.")
   @maxLength(50)
   title: string;

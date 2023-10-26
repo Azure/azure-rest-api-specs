@@ -2,6 +2,10 @@ namespace ApiCenter.DataApi.Models;
 
 @doc("API definition")
 model ApiDefinition {
+  @doc("The resource name.")
+  @maxLength(50)
+  name: string;
+  
   @doc("The name of the API definition.")
   @maxLength(50)
   title: string;
