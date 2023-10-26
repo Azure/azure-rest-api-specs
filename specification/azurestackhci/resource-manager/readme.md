@@ -88,14 +88,15 @@ suppressions:
       
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
-    from: clusters.json
-  - code: ResourceNameRestriction
-    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
-    from: deploymentSettings.json
-    where: 
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}"]
-
+    from:
+      - arcSettings.json
+      - clusters.json
+      - extensions.json
+      - updates.json
+      - updateRuns.json
+      - updateSummaries.json
+      - deploymentSettings.json
+    
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility 
     from: deploymentSettings.json
