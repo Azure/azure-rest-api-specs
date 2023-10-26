@@ -33,4 +33,21 @@ export class TsvTestHost implements TsvHost {
   async checkFileExists(_file: string): Promise<boolean> {
     return true;
   }
+
+  async readTspConfig(_folder: string): Promise<string> {
+    // Sample config that should cause all rules to succeed
+    return `
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+`;
+  }
 }

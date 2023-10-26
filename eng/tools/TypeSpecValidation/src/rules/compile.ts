@@ -17,6 +17,13 @@ export class CompileRule implements Rule {
         `npx --no tsp compile . --warn-as-error`,
         folder,
       );
+      if (
+        stdout.toLowerCase().includes("no emitter was configured") ||
+        stdout.toLowerCase().includes("no output was generated")
+      ) {
+        success = false;
+        errorOutput += "No emitter was configured and/or no output was generated.";
+      }
       if (err) {
         success = false;
         errorOutput += err.message;
