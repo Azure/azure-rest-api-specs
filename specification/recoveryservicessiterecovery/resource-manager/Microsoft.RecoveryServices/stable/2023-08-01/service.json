@@ -923,15 +923,19 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/ResourceName",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/SubscriptionId"
           },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+          }
           {
             "name": "fabricName",
             "in": "path",
@@ -956,7 +960,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ServiceError"
             }
           }
         },
