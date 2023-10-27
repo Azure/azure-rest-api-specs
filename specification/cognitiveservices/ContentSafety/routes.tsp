@@ -24,6 +24,34 @@ interface TextOperations {
     },
     AnalyzeTextResult
   >;
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @summary("Analyze Text Jailbreak")
+  @doc("A synchronous API for the analysis of text jailbreak.")
+  @route("/text:detectJailbreak")
+  @post
+  detectTextJailbreak is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text jailbreak analysis request.")
+      body: AnalyzeTextJailbreakOptions;
+    },
+    AnalyzeTextJailbreakResult
+  >;
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @summary("Analyze Protected Material")
+  @doc("A synchronous API for the analysis of protected material.")
+  @route("/text:detectProtectedMaterial")
+  @post
+  detectTextProtectedMaterial is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text analysis request.")
+      body: AnalyzeTextProtectedMaterialOptions;
+    },
+    AnalyzeTextProtectedMaterialResult
+  >;
 }
 
 interface ImageOperations {

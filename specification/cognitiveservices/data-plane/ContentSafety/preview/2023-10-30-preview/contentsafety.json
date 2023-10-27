@@ -1448,6 +1448,88 @@
           }
         }
       }
+    },
+    "/text:detectJailbreak": {
+      "post": {
+        "operationId": "TextOperations_DetectTextJailbreak",
+        "summary": "Analyze Text Jailbreak",
+        "description": "A synchronous API for the analysis of text jailbreak.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The text jailbreak analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextJailbreakOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextJailbreakResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text:detectProtectedMaterial": {
+      "post": {
+        "operationId": "TextOperations_DetectTextProtectedMaterial",
+        "summary": "Analyze Protected Material",
+        "description": "A synchronous API for the analysis of protected material.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The text analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextProtectedMaterialOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextProtectedMaterialResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1672,6 +1754,33 @@
         "categoriesAnalysis"
       ]
     },
+    "AnalyzeTextJailbreakOptions": {
+      "type": "object",
+      "description": "The text jailbreak analysis request.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text needs to be analyzed if it attempt to jailbreak. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.",
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AnalyzeTextJailbreakResult": {
+      "type": "object",
+      "description": "The text jailbreak analysis request.",
+      "properties": {
+        "jailbreakAnalysis": {
+          "$ref": "#/definitions/JailbreakAnalysisResult",
+          "description": "Analysis result for jailbreak."
+        }
+      },
+      "required": [
+        "jailbreakAnalysis"
+      ]
+    },
     "AnalyzeTextOptions": {
       "type": "object",
       "description": "The text analysis request.",
@@ -1736,6 +1845,33 @@
           }
         ]
       }
+    },
+    "AnalyzeTextProtectedMaterialOptions": {
+      "type": "object",
+      "description": "The protected material analysis request.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.",
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AnalyzeTextProtectedMaterialResult": {
+      "type": "object",
+      "description": "The protected material analysis response.",
+      "properties": {
+        "protectedMaterialAnalysis": {
+          "$ref": "#/definitions/ProtectedMaterialAnalysisResult",
+          "description": "Analysis result for protected material."
+        }
+      },
+      "required": [
+        "protectedMaterialAnalysis"
+      ]
     },
     "AnalyzeTextResult": {
       "type": "object",
@@ -2091,6 +2227,19 @@
         }
       }
     },
+    "JailbreakAnalysisResult": {
+      "type": "object",
+      "description": "The text jailbreak analysis response.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Analysis result for jailbreak."
+        }
+      },
+      "required": [
+        "detected"
+      ]
+    },
     "LabelDefinition": {
       "type": "object",
       "description": "Label definition.",
@@ -2272,6 +2421,19 @@
       "required": [
         "concept",
         "description"
+      ]
+    },
+    "ProtectedMaterialAnalysisResult": {
+      "type": "object",
+      "description": "The text protected material analysis response.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Analysis result for protected material.."
+        }
+      },
+      "required": [
+        "detected"
       ]
     },
     "RemoveImageIncidentSamplesOptions": {
@@ -2582,6 +2744,7 @@
       "type": "string",
       "enum": [
         "2023-10-01",
+        "2023-10-15-preview",
         "2023-10-30-preview"
       ],
       "x-ms-enum": {
@@ -2591,6 +2754,10 @@
           {
             "name": "v2023_10_01",
             "value": "2023-10-01"
+          },
+          {
+            "name": "v2023_10_15_Preview",
+            "value": "2023-10-15-preview"
           },
           {
             "name": "v2023_10_30_Preview",

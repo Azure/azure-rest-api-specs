@@ -110,6 +110,50 @@ model TextCategoriesAnalysis {
   severity?: int32;
 }
 
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The protected material analysis request.")
+model AnalyzeTextProtectedMaterialOptions {
+  @doc("The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
+  @maxLength(1000)
+  text: string;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The protected material analysis response.")
+model AnalyzeTextProtectedMaterialResult {
+  @doc("Analysis result for protected material.")
+  protectedMaterialAnalysis: ProtectedMaterialAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text protected material analysis response.")
+model ProtectedMaterialAnalysisResult {
+  @doc("Analysis result for protected material..")
+  detected: boolean;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text jailbreak analysis request.")
+model AnalyzeTextJailbreakOptions {
+  @doc("The text needs to be analyzed if it attempt to jailbreak. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
+  @maxLength(1000)
+  text: string;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text jailbreak analysis request.")
+model AnalyzeTextJailbreakResult {
+  @doc("Analysis result for jailbreak.")
+  jailbreakAnalysis: JailbreakAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text jailbreak analysis response.")
+model JailbreakAnalysisResult {
+  @doc("Analysis result for jailbreak.")
+  detected: boolean;
+}
+
 @added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("The result of text incident match.")
 model IncidentMatch {
@@ -233,6 +277,7 @@ model TextIncident {
   @doc("Incident created time.")
   @visibility("read", "query")
   created: utcDateTime;
+
   @doc("Incident updated time.")
   @visibility("read", "query")
   lastUpdated: utcDateTime;
@@ -293,6 +338,7 @@ model ImageIncident {
   @doc("Incident created time.")
   @visibility("read", "query")
   created: utcDateTime;
+
   @doc("Incident updated time.")
   @visibility("read", "query")
   lastUpdated: utcDateTime;
