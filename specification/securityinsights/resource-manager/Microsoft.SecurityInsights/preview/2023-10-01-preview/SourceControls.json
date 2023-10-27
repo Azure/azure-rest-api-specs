@@ -60,7 +60,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/RepoTypeParameter"
+            "$ref": "#/parameters/RepositoryAccess"
           }
         ],
         "responses": {
@@ -307,6 +307,11 @@
           "description": "The name of the repository.",
           "type": "string"
         },
+        "installationId": {
+          "description": "The installation id of the repository.",
+          "type": "integer",
+          "format": "int64"
+        },
         "branches": {
           "description": "Array of branches.",
           "items": {
@@ -347,6 +352,9 @@
         }
       ],
       "description": "Represents a SourceControl in Azure Security Insights.",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "description": "source control properties",
@@ -462,6 +470,34 @@
         }
       }
     },
+    "RepositoryAccessObject": {
+      "description": "Credentials to access repository.",
+      "type": "object",
+      "required": [
+        "repositoryAccess"
+      ],
+      "properties": {
+        "repositoryAccess": {
+          "description": "RepositoryAccess properties",
+          "$ref": "#/definitions/RepositoryAccess",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RepositoryAccessProperties": {
+      "description": "Credentials to access repository.",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "description": "RepositoryAccess properties",
+          "$ref": "#/definitions/RepositoryAccessObject",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "Repository": {
       "type": "object",
       "required": [
@@ -490,7 +526,6 @@
       }
     },
     "ServicePrincipal": {
-      "readOnly": true,
       "type": "object",
       "description": "Service principal metadata.",
       "properties": {
@@ -508,6 +543,11 @@
           "description": "App id of service principal.",
           "type": "string",
           "readOnly": true
+        },
+        "credentialsExpireOn": {
+          "format": "date-time",
+          "description": "Expiration time of service principal credentials.",
+          "type": "string"
         }
       }
     },
@@ -959,11 +999,7 @@
         "required": [
           "repositoryAccess"
         ],
-        "properties": {
-          "repositoryAccess": {
-            "$ref": "#/definitions/RepositoryAccess"
-          }
-        }
+        "$ref": "#/definitions/RepositoryAccessProperties"
       },
       "x-ms-parameter-location": "method"
     }
