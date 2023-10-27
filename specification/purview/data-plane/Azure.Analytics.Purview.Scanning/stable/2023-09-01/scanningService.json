@@ -2864,11 +2864,7 @@
           }
         },
         "error": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ErrorInfo"
-            }
-          ]
+          "$ref": "#/definitions/ErrorInfo"
         }
       }
     },
@@ -3070,11 +3066,7 @@
           "description": "The scan result status."
         },
         "diagnostics": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ScanDiagnostics"
-            }
-          ],
+          "$ref": "#/definitions/ScanDiagnostics",
           "readOnly": true,
           "description": "The scan diagnostics."
         },
@@ -3128,11 +3120,7 @@
           "description": "The error message."
         },
         "error": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          ],
+          "$ref": "#/definitions/ErrorModel",
           "readOnly": true
         },
         "runType": {
@@ -3251,20 +3239,12 @@
       "description": "The scan result with ingestion.",
       "properties": {
         "discoveryExecutionDetails": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/DiscoveryExecutionDetails"
-            }
-          ],
+          "$ref": "#/definitions/DiscoveryExecutionDetails",
           "readOnly": true,
           "description": "The discovery execution details."
         },
         "ingestionExecutionDetails": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/IngestionExecutionDetails"
-            }
-          ],
+          "$ref": "#/definitions/IngestionExecutionDetails",
           "readOnly": true,
           "description": "The ingestion execution details."
         },
@@ -3293,11 +3273,7 @@
           "description": "The scan result status."
         },
         "diagnostics": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ScanDiagnostics"
-            }
-          ],
+          "$ref": "#/definitions/ScanDiagnostics",
           "readOnly": true,
           "description": "The scan diagnostics."
         },
@@ -3351,11 +3327,7 @@
           "readOnly": true
         },
         "error": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          ],
+          "$ref": "#/definitions/ErrorModel",
           "readOnly": true,
           "description": "The error."
         },
@@ -3371,6 +3343,7 @@
       }
     },
     "ExtendedProperties": {
+      "description": "The extended properties.",
       "type": "object",
       "properties": {
         "subscriptionId": {
@@ -3393,11 +3366,7 @@
         },
         "extendedProperties": {
           "description": "The extended properties.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ExtendedProperties"
-            }
-          ]
+          "$ref": "#/definitions/ExtendedProperties"
         }
       }
     },
@@ -3414,11 +3383,7 @@
           "description": "The name."
         },
         "extendedProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ExtendedProperties"
-            }
-          ]
+          "$ref": "#/definitions/ExtendedProperties"
         }
       }
     },
@@ -3427,18 +3392,10 @@
       "description": "The data source identifier.",
       "properties": {
         "itemPath": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ItemPath"
-            }
-          ]
+          "$ref": "#/definitions/ItemPath"
         },
         "qualifiedName": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/QualifiedName"
-            }
-          ]
+          "$ref": "#/definitions/QualifiedName"
         },
         "dataSourceName": {
           "type": "string",
@@ -3559,11 +3516,7 @@
           "description": "The scan identifier."
         },
         "dataSourceIdentifier": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/DataSourceIdentifier"
-            }
-          ]
+          "$ref": "#/definitions/DataSourceIdentifier"
         },
         "dataSourceName": {
           "type": "string",
@@ -3700,11 +3653,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/FilterProperties"
-            }
-          ]
+          "$ref": "#/definitions/FilterProperties"
         }
       }
     },
@@ -3778,11 +3727,7 @@
       "type": "object",
       "properties": {
         "computeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedIntegrationRuntimeComputeProperties"
-            }
-          ]
+          "$ref": "#/definitions/ManagedIntegrationRuntimeComputeProperties"
         }
       }
     },
@@ -3805,18 +3750,10 @@
       "type": "object",
       "properties": {
         "typeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedIntegrationRuntimeTypeProperties"
-            }
-          ]
+          "$ref": "#/definitions/ManagedIntegrationRuntimeTypeProperties"
         },
         "managedVirtualNetworkReference": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedVirtualNetworkReference"
-            }
-          ]
+          "$ref": "#/definitions/ManagedVirtualNetworkReference"
         },
         "description": {
           "description": "The managed integration runtime description.",
@@ -3834,11 +3771,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedIntegrationRuntimeProperties"
-            }
-          ]
+          "$ref": "#/definitions/ManagedIntegrationRuntimeProperties"
         }
       },
       "x-ms-discriminator-value": "Managed"
@@ -3863,11 +3796,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SelfHostedIntegrationRuntimeProperties"
-            }
-          ]
+          "$ref": "#/definitions/SelfHostedIntegrationRuntimeProperties"
         }
       },
       "x-ms-discriminator-value": "SelfHosted"
@@ -4086,11 +4015,7 @@
       "type": "object",
       "properties": {
         "typeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SelfHostedIntegrationRuntimeStatusTypeProperties"
-            }
-          ]
+          "$ref": "#/definitions/SelfHostedIntegrationRuntimeStatusTypeProperties"
         },
         "state": {
           "description": "Self-hosted integration runtime state.",
@@ -4109,11 +4034,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SelfHostedIntegrationRuntimeStatusProperties"
-            }
-          ]
+          "$ref": "#/definitions/SelfHostedIntegrationRuntimeStatusProperties"
         }
       },
       "x-ms-discriminator-value": "SelfHosted"
@@ -4143,11 +4064,7 @@
           "type": "string"
         },
         "interactiveQuery": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/InteractiveQuery"
-            }
-          ]
+          "$ref": "#/definitions/InteractiveQuery"
         }
       }
     },
@@ -4156,11 +4073,7 @@
       "type": "object",
       "properties": {
         "typeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedIntegrationRuntimeStatusTypeProperties"
-            }
-          ]
+          "$ref": "#/definitions/ManagedIntegrationRuntimeStatusTypeProperties"
         },
         "state": {
           "description": "Managed integration runtime state.",
@@ -4179,11 +4092,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedIntegrationRuntimeStatusProperties"
-            }
-          ]
+          "$ref": "#/definitions/ManagedIntegrationRuntimeStatusProperties"
         }
       },
       "x-ms-discriminator-value": "Managed"
@@ -4284,11 +4193,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedVirtualNetworkProperties"
-            }
-          ]
+          "$ref": "#/definitions/ManagedVirtualNetworkProperties"
         }
       }
     },
@@ -4343,11 +4248,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedPrivateEndpointProperties"
-            }
-          ]
+          "$ref": "#/definitions/ManagedPrivateEndpointProperties"
         }
       }
     },
@@ -4356,11 +4257,7 @@
       "type": "object",
       "properties": {
         "connectionState": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ConnectionStateProperties"
-            }
-          ]
+          "$ref": "#/definitions/ConnectionStateProperties"
         },
         "fqdns": {
           "description": "The fqdns of managed private endpoint.",
@@ -4732,11 +4629,7 @@
           "description": "The end time of trigger recurrence."
         },
         "schedule": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/RecurrenceSchedule"
-            }
-          ],
+          "$ref": "#/definitions/RecurrenceSchedule",
           "description": "The schedule of trigger recurrence."
         },
         "timeZone": {
@@ -4750,11 +4643,7 @@
       "type": "object",
       "properties": {
         "recurrence": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TriggerRecurrence"
-            }
-          ],
+          "$ref": "#/definitions/TriggerRecurrence",
           "description": "The recurrence of trigger."
         },
         "recurrenceInterval": {
@@ -4821,11 +4710,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TriggerProperties"
-            }
-          ],
+          "$ref": "#/definitions/TriggerProperties",
           "description": "The properties of trigger."
         },
         "validationErrorInfo": {
@@ -4907,11 +4792,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SystemClassificationRuleProperties"
-            }
-          ]
+          "$ref": "#/definitions/SystemClassificationRuleProperties"
         }
       },
       "x-ms-discriminator-value": "System"
@@ -4959,20 +4840,21 @@
           }
         },
         "dataPatterns": {
-          "type": "array",
           "description": "The data patterns of custom classification rule.",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/ClassificationRulePattern"
           }
         },
         "columnPatterns": {
-          "type": "array",
           "description": "The column patterns of custom classification rule.",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/ClassificationRulePattern"
           }
         },
         "description": {
+          "description": "The description of custom classification rule.",
           "type": "string"
         },
         "version": {
@@ -5021,11 +4903,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CustomClassificationRuleProperties"
-            }
-          ]
+          "$ref": "#/definitions/CustomClassificationRuleProperties"
         }
       },
       "x-ms-discriminator-value": "Custom"
@@ -5076,11 +4954,7 @@
           "description": "The secret version of key vault secret."
         },
         "store": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/Store"
-            }
-          ]
+          "$ref": "#/definitions/Store"
         }
       }
     },
@@ -5089,11 +4963,7 @@
       "type": "object",
       "properties": {
         "accountKey": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/KeyVaultSecret"
-            }
-          ],
+          "$ref": "#/definitions/KeyVaultSecret",
           "description": "The account key of key vault secret account key credential type."
         }
       }
@@ -5103,11 +4973,7 @@
       "type": "object",
       "properties": {
         "typeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/KeyVaultSecretAccountKeyCredentialTypeProperties"
-            }
-          ],
+          "$ref": "#/definitions/KeyVaultSecretAccountKeyCredentialTypeProperties",
           "description": "The type properties of account key credential."
         },
         "description": {
@@ -5125,11 +4991,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AccountKeyCredentialProperties"
-            }
-          ],
+          "$ref": "#/definitions/AccountKeyCredentialProperties",
           "description": "The properties of account key auth azure key vault credential."
         }
       },
@@ -5143,11 +5005,7 @@
           "type": "string"
         },
         "password": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/KeyVaultSecret"
-            }
-          ],
+          "$ref": "#/definitions/KeyVaultSecret",
           "description": "The password of key vault secret user pass credential type."
         }
       }
@@ -5157,11 +5015,7 @@
       "type": "object",
       "properties": {
         "typeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/KeyVaultSecretUserPassCredentialTypeProperties"
-            }
-          ]
+          "$ref": "#/definitions/KeyVaultSecretUserPassCredentialTypeProperties"
         },
         "description": {
           "type": "string"
@@ -5178,17 +5032,14 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/UserPassCredentialProperties"
-            }
-          ],
+          "$ref": "#/definitions/UserPassCredentialProperties",
           "description": "The properties of basic auth azure key vault credential."
         }
       },
       "x-ms-discriminator-value": "BasicAuth"
     },
     "RoleARNCredentialTypeProperties": {
+      "description": "The type properties of role ARN credential.",
       "type": "object",
       "properties": {
         "roleARN": {
@@ -5198,17 +5049,15 @@
       }
     },
     "RoleARNCredentialProperties": {
+      "description": "The properties of role ARN credential.",
       "type": "object",
       "properties": {
         "typeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/RoleARNCredentialTypeProperties"
-            }
-          ]
+          "$ref": "#/definitions/RoleARNCredentialTypeProperties"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "The description of role ARN credential."
         }
       }
     },
@@ -5222,28 +5071,21 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/RoleARNCredentialProperties"
-            }
-          ]
+          "$ref": "#/definitions/RoleARNCredentialProperties"
         }
       },
       "x-ms-discriminator-value": "AmazonARN"
     },
     "KeyVaultSecretServicePrinipalCredentialTypeProperties": {
       "type": "object",
+      "description": "The type properties of key vault secret service principal credential.",
       "properties": {
         "servicePrincipalId": {
           "type": "string",
           "description": "The service principal ID of key vault secret service principal credential type properties."
         },
         "servicePrincipalKey": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/KeyVaultSecret"
-            }
-          ]
+          "$ref": "#/definitions/KeyVaultSecret"
         },
         "tenant": {
           "type": "string"
@@ -5251,14 +5093,11 @@
       }
     },
     "ServicePrincipalAzureKeyVaultCredentialProperties": {
+      "description": "The properties of service principal azure key vault credential.",
       "type": "object",
       "properties": {
         "typeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/KeyVaultSecretServicePrinipalCredentialTypeProperties"
-            }
-          ]
+          "$ref": "#/definitions/KeyVaultSecretServicePrinipalCredentialTypeProperties"
         },
         "description": {
           "type": "string"
@@ -5275,11 +5114,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ServicePrincipalAzureKeyVaultCredentialProperties"
-            }
-          ]
+          "$ref": "#/definitions/ServicePrincipalAzureKeyVaultCredentialProperties"
         }
       },
       "x-ms-discriminator-value": "ServicePrincipal"
@@ -5294,27 +5129,20 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/UserPassCredentialProperties"
-            }
-          ]
+          "$ref": "#/definitions/UserPassCredentialProperties"
         }
       },
       "x-ms-discriminator-value": "SqlAuth"
     },
     "KeyVaultSecretConsumerKeyCredentialTypeProperties": {
       "type": "object",
+      "description": "The type properties of key vault secret consumer key credential.",
       "properties": {
         "user": {
           "type": "string"
         },
         "password": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/KeyVaultSecret"
-            }
-          ],
+          "$ref": "#/definitions/KeyVaultSecret",
           "description": "The password of key vault secret consumer key credential type properties."
         },
         "consumerKey": {
@@ -5322,24 +5150,17 @@
           "description": "The consumer key of key vault secret consumer key credential type properties."
         },
         "consumerSecret": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/KeyVaultSecret"
-            }
-          ],
+          "$ref": "#/definitions/KeyVaultSecret",
           "description": "The consumer secret of key vault secret consumer key credential type properties."
         }
       }
     },
     "ConsumerKeyCredentialProperties": {
       "type": "object",
+      "description": "The properties of consumer key credential.",
       "properties": {
         "typeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/KeyVaultSecretConsumerKeyCredentialTypeProperties"
-            }
-          ]
+          "$ref": "#/definitions/KeyVaultSecretConsumerKeyCredentialTypeProperties"
         },
         "description": {
           "type": "string",
@@ -5357,17 +5178,14 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ConsumerKeyCredentialProperties"
-            }
-          ]
+          "$ref": "#/definitions/ConsumerKeyCredentialProperties"
         }
       },
       "x-ms-discriminator-value": "ConsumerKeyAuth"
     },
     "KeyVaultSecretDelegatedAuthCredentialTypeProperties": {
       "type": "object",
+      "description": "The type properties of key vault secret delegated auth credential.",
       "properties": {
         "clientId": {
           "type": "string"
@@ -5376,25 +5194,17 @@
           "type": "string"
         },
         "password": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/KeyVaultSecret"
-            }
-          ],
+          "$ref": "#/definitions/KeyVaultSecret",
           "description": "Key vault secret."
         }
       }
     },
     "DelegatedAuthCredentialProperties": {
       "type": "object",
+      "description": "The properties of delegated auth credential.",
       "properties": {
         "typeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/KeyVaultSecretDelegatedAuthCredentialTypeProperties"
-            }
-          ],
-          "description": "The type properties of delegated auth credential."
+          "$ref": "#/definitions/KeyVaultSecretDelegatedAuthCredentialTypeProperties"
         },
         "description": {
           "type": "string"
@@ -5411,11 +5221,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/DelegatedAuthCredentialProperties"
-            }
-          ],
+          "$ref": "#/definitions/DelegatedAuthCredentialProperties",
           "description": "The properties of delegated auth azure key vault credential."
         }
       },
@@ -5423,6 +5229,7 @@
     },
     "KeyVaultSecretManagedIdentityAzureKeyVaultCredentialTypeProperties": {
       "type": "object",
+      "description": "The type properties of key vault secret managed identity azure key vault credential.",
       "properties": {
         "principalId": {
           "type": "string",
@@ -5440,13 +5247,10 @@
     },
     "ManagedIdentityAzureKeyVaultCredentialProperties": {
       "type": "object",
+      "description": "The properties of managed identity azure key vault credential.",
       "properties": {
         "typeProperties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/KeyVaultSecretManagedIdentityAzureKeyVaultCredentialTypeProperties"
-            }
-          ],
+          "$ref": "#/definitions/KeyVaultSecretManagedIdentityAzureKeyVaultCredentialTypeProperties",
           "description": "The type properties of managed identity azure key vault credential."
         },
         "description": {
@@ -5464,11 +5268,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedIdentityAzureKeyVaultCredentialProperties"
-            }
-          ],
+          "$ref": "#/definitions/ManagedIdentityAzureKeyVaultCredentialProperties",
           "description": "The properties of managed identity azure key vault credential."
         }
       },
@@ -5491,11 +5291,7 @@
           "readOnly": true
         },
         "collection": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CollectionReference"
-            }
-          ]
+          "$ref": "#/definitions/CollectionReference"
         },
         "dataSourceCollectionMovingState": {
           "enum": [
@@ -5555,11 +5351,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSubscriptionProperties"
-            }
-          ],
+          "$ref": "#/definitions/AzureSubscriptionProperties",
           "description": "Azure subscription properties."
         }
       },
@@ -5610,11 +5402,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureResourceGroupProperties"
-            }
-          ],
+          "$ref": "#/definitions/AzureResourceGroupProperties",
           "description": "Azure resource group properties."
         }
       },
@@ -5693,11 +5481,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSynapseWorkspaceProperties"
-            }
-          ],
+          "$ref": "#/definitions/AzureSynapseWorkspaceProperties",
           "description": "Azure synapse workspace properties."
         }
       },
@@ -5732,11 +5516,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSynapseProperties"
-            }
-          ],
+          "$ref": "#/definitions/AzureSynapseProperties",
           "description": "Azure synapse properties."
         }
       },
@@ -5767,11 +5547,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AdlsGen1Properties"
-            }
-          ],
+          "$ref": "#/definitions/AdlsGen1Properties",
           "description": "The properties of adls gen1."
         }
       },
@@ -5801,11 +5577,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AdlsGen2Properties"
-            }
-          ],
+          "$ref": "#/definitions/AdlsGen2Properties",
           "description": "The properties of adls gen2."
         }
       },
@@ -5840,11 +5612,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonAccountProperties"
-            }
-          ],
+          "$ref": "#/definitions/AmazonAccountProperties",
           "description": "The properties of amazon account."
         }
       },
@@ -5879,11 +5647,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonS3Properties"
-            }
-          ],
+          "$ref": "#/definitions/AmazonS3Properties",
           "description": "Amazon s3 properties."
         }
       },
@@ -5923,11 +5687,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonSqlProperties"
-            }
-          ],
+          "$ref": "#/definitions/AmazonSqlProperties",
           "description": "Amazon sql properties."
         }
       },
@@ -5958,11 +5718,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureCosmosDbProperties"
-            }
-          ],
+          "$ref": "#/definitions/AzureCosmosDbProperties",
           "description": "The properties of azure cosmos db."
         }
       },
@@ -5991,11 +5747,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureDataExplorerProperties"
-            }
-          ],
+          "$ref": "#/definitions/AzureDataExplorerProperties",
           "description": "The properties of azure data explorer."
         }
       },
@@ -6026,11 +5778,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureFileServiceProperties"
-            }
-          ],
+          "$ref": "#/definitions/AzureFileServiceProperties",
           "description": "The properties of azure file service."
         }
       },
@@ -6061,11 +5809,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDatabaseProperties"
-            }
-          ],
+          "$ref": "#/definitions/AzureSqlDatabaseProperties",
           "description": "The properties of azure sql database."
         }
       },
@@ -6105,11 +5849,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonPostgreSqlProperties"
-            }
-          ],
+          "$ref": "#/definitions/AmazonPostgreSqlProperties",
           "description": "The properties of amazon postgre sql."
         }
       },
@@ -6144,11 +5884,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzurePostgreSqlProperties"
-            }
-          ],
+          "$ref": "#/definitions/AzurePostgreSqlProperties",
           "description": "The properties of azure postgre sql."
         }
       },
@@ -6179,11 +5915,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SqlServerDatabaseProperties"
-            }
-          ]
+          "$ref": "#/definitions/SqlServerDatabaseProperties"
         }
       },
       "x-ms-discriminator-value": "SqlServerDatabase"
@@ -6212,11 +5944,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSqlDatabaseManagedInstance"
@@ -6245,11 +5973,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDataWarehouseProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSqlDataWarehouseProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSqlDataWarehouse"
@@ -6284,11 +6008,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureMySqlProperties"
-            }
-          ],
+          "$ref": "#/definitions/AzureMySqlProperties",
           "description": "Azure MySql properties."
         }
       },
@@ -6319,11 +6039,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureStorageProperties"
-            }
-          ],
+          "$ref": "#/definitions/AzureStorageProperties",
           "description": "The properties of azure storage."
         }
       },
@@ -6354,11 +6070,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TeradataProperties"
-            }
-          ]
+          "$ref": "#/definitions/TeradataProperties"
         }
       },
       "x-ms-discriminator-value": "Teradata"
@@ -6393,11 +6105,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/OracleProperties"
-            }
-          ]
+          "$ref": "#/definitions/OracleProperties"
         }
       },
       "x-ms-discriminator-value": "Oracle"
@@ -6431,11 +6139,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SapS4HanaProperties"
-            }
-          ]
+          "$ref": "#/definitions/SapS4HanaProperties"
         }
       },
       "x-ms-discriminator-value": "SapS4Hana"
@@ -6467,11 +6171,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SapEccProperties"
-            }
-          ]
+          "$ref": "#/definitions/SapEccProperties"
         }
       },
       "x-ms-discriminator-value": "SapEcc"
@@ -6500,11 +6200,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/PowerBIProperties"
-            }
-          ]
+          "$ref": "#/definitions/PowerBIProperties"
         }
       },
       "x-ms-discriminator-value": "PowerBI"
@@ -6565,11 +6261,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSubscriptionScanRulesetProperties"
-            }
-          ],
+          "$ref": "#/definitions/AzureSubscriptionScanRulesetProperties",
           "description": "Azure subscription scan ruleset properties."
         }
       },
@@ -6594,11 +6286,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureResourceGroupScanRulesetProperties"
-            }
-          ],
+          "$ref": "#/definitions/AzureResourceGroupScanRulesetProperties",
           "description": "Azure resource group scan ruleset properties."
         }
       },
@@ -6623,11 +6311,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSynapseWorkspaceScanRulesetProperties"
-            }
-          ],
+          "$ref": "#/definitions/AzureSynapseWorkspaceScanRulesetProperties",
           "description": "Azure synapse workspace scan ruleset properties."
         }
       },
@@ -6652,11 +6336,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSynapseScanRulesetProperties"
-            }
-          ],
+          "$ref": "#/definitions/AzureSynapseScanRulesetProperties",
           "description": "Azure synapse scan ruleset properties."
         }
       },
@@ -6719,11 +6399,7 @@
       "description": "Custom file extension.",
       "properties": {
         "customFileType": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CustomFileType"
-            }
-          ],
+          "$ref": "#/definitions/CustomFileType",
           "description": "The custom file type of the custom file extension."
         },
         "description": {
@@ -6810,11 +6486,7 @@
       ],
       "properties": {
         "scanningRule": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ScanningRule"
-            }
-          ],
+          "$ref": "#/definitions/ScanningRule",
           "description": "The scanning rule of the scanning rule scan ruleset."
         }
       }
@@ -6838,11 +6510,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AdlsGen1ScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AdlsGen1ScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AdlsGen1"
@@ -6866,11 +6534,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AdlsGen2ScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AdlsGen2ScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AdlsGen2"
@@ -6894,11 +6558,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonAccountScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AmazonAccountScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AmazonAccount"
@@ -6922,11 +6582,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonS3ScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AmazonS3ScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AmazonS3"
@@ -6950,11 +6606,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonSqlScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AmazonSqlScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AmazonSql"
@@ -6978,11 +6630,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureCosmosDbScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureCosmosDbScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureCosmosDb"
@@ -7006,11 +6654,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureDataExplorerScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureDataExplorerScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureDataExplorer"
@@ -7034,11 +6678,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureFileServiceScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureFileServiceScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureFileService"
@@ -7062,11 +6702,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDatabaseScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSqlDatabaseScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSqlDatabase"
@@ -7090,11 +6726,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonPostgreSqlScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AmazonPostgreSqlScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AmazonPostgreSql"
@@ -7118,11 +6750,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzurePostgreSqlScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzurePostgreSqlScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzurePostgreSql"
@@ -7146,11 +6774,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SqlServerDatabaseScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/SqlServerDatabaseScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "SqlServerDatabase"
@@ -7174,11 +6798,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSqlDatabaseManagedInstance"
@@ -7202,11 +6822,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDataWarehouseScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSqlDataWarehouseScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSqlDataWarehouse"
@@ -7230,11 +6846,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureMySqlScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureMySqlScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureMySql"
@@ -7258,11 +6870,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureStorageScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureStorageScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureStorage"
@@ -7286,11 +6894,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TeradataScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/TeradataScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "Teradata"
@@ -7314,11 +6918,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/OracleScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/OracleScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "Oracle"
@@ -7342,11 +6942,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SapS4HanaScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/SapS4HanaScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "SapS4Hana"
@@ -7370,11 +6966,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SapEccScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/SapEccScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "SapEcc"
@@ -7398,11 +6990,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/PowerBIScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/PowerBIScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "PowerBI"
@@ -7480,18 +7068,10 @@
           }
         },
         "resourceNameFilter": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ResourceNameFilter"
-            }
-          ]
+          "$ref": "#/definitions/ResourceNameFilter"
         },
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         }
       }
     },
@@ -7535,11 +7115,7 @@
           }
         },
         "collection": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CollectionReference"
-            }
-          ],
+          "$ref": "#/definitions/CollectionReference",
           "description": "The collection reference of the scan."
         },
         "domain": {
@@ -7564,11 +7140,7 @@
           "readOnly": true
         },
         "connectedVia": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ConnectedVia"
-            }
-          ],
+          "$ref": "#/definitions/ConnectedVia",
           "description": "The integration runtime reference of the scan."
         },
         "isPresetScan": {
@@ -7603,11 +7175,7 @@
           "$ref": "#/definitions/ExpandingResourceScanPropertiesResourceTypes"
         },
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         }
       }
     },
@@ -7714,11 +7282,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSubscriptionCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSubscriptionCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSubscriptionCredential"
@@ -7742,11 +7306,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSubscriptionMsiScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSubscriptionMsiScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSubscriptionMsi"
@@ -7770,11 +7330,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureResourceGroupCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureResourceGroupCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureResourceGroupCredential"
@@ -7798,11 +7354,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureResourceGroupMsiScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureResourceGroupMsiScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureResourceGroupMsi"
@@ -7826,11 +7378,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSynapseWorkspaceCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSynapseWorkspaceCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSynapseWorkspaceCredential"
@@ -7854,11 +7402,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSynapseWorkspaceMsiScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSynapseWorkspaceMsiScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSynapseWorkspaceMsi"
@@ -7882,11 +7426,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSynapseCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSynapseCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSynapseCredential"
@@ -7910,11 +7450,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSynapseMsiScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSynapseMsiScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSynapseMsi"
@@ -7929,11 +7465,7 @@
       ],
       "properties": {
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         }
       }
     },
@@ -7947,11 +7479,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AdlsGen1CredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AdlsGen1CredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AdlsGen1Credential"
@@ -7975,11 +7503,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AdlsGen1MsiScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AdlsGen1MsiScanProperties"
         }
       },
       "x-ms-discriminator-value": "AdlsGen1Msi"
@@ -7994,11 +7518,7 @@
       ],
       "properties": {
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         }
       }
     },
@@ -8012,11 +7532,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AdlsGen2CredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AdlsGen2CredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AdlsGen2Credential"
@@ -8040,11 +7556,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AdlsGen2MsiScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AdlsGen2MsiScanProperties"
         }
       },
       "x-ms-discriminator-value": "AdlsGen2Msi"
@@ -8068,11 +7580,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonAccountCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AmazonAccountCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AmazonAccountCredential"
@@ -8087,11 +7595,7 @@
       ],
       "properties": {
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         },
         "roleARN": {
           "type": "string"
@@ -8111,11 +7615,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonS3CredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AmazonS3CredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AmazonS3Credential"
@@ -8130,11 +7630,7 @@
       ],
       "properties": {
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         },
         "roleARN": {
           "type": "string",
@@ -8156,11 +7652,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonS3RoleARNScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AmazonS3RoleARNScanProperties"
         }
       },
       "x-ms-discriminator-value": "AmazonS3RoleARN"
@@ -8175,11 +7667,7 @@
       ],
       "properties": {
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         },
         "serverEndpoint": {
           "type": "string",
@@ -8210,11 +7698,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonSqlCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AmazonSqlCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AmazonSqlCredential"
@@ -8229,11 +7713,7 @@
       ],
       "properties": {
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         },
         "databaseName": {
           "type": "string"
@@ -8250,11 +7730,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureCosmosDbCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureCosmosDbCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureCosmosDbCredential"
@@ -8269,11 +7745,7 @@
       ],
       "properties": {
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         },
         "database": {
           "type": "string"
@@ -8290,11 +7762,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureDataExplorerCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureDataExplorerCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureDataExplorerCredential"
@@ -8323,11 +7791,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureDataExplorerMsiScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureDataExplorerMsiScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureDataExplorerMsi"
@@ -8342,11 +7806,7 @@
       ],
       "properties": {
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         },
         "shareName": {
           "type": "string"
@@ -8363,11 +7823,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureFileServiceCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureFileServiceCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureFileServiceCredential"
@@ -8399,11 +7855,7 @@
       ],
       "properties": {
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         }
       }
     },
@@ -8426,11 +7878,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDatabaseCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSqlDatabaseCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSqlDatabaseCredential"
@@ -8454,11 +7902,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDatabaseMsiScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSqlDatabaseMsiScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSqlDatabaseMsi"
@@ -8473,11 +7917,7 @@
       ],
       "properties": {
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         },
         "serverEndpoint": {
           "type": "string"
@@ -8504,11 +7944,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonPostgreSqlCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AmazonPostgreSqlCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AmazonPostgreSqlCredential"
@@ -8523,11 +7959,7 @@
       ],
       "properties": {
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         },
         "serverEndpoint": {
           "type": "string"
@@ -8555,11 +7987,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzurePostgreSqlCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzurePostgreSqlCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzurePostgreSqlCredential"
@@ -8583,11 +8011,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SqlServerDatabaseCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/SqlServerDatabaseCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "SqlServerDatabaseCredential"
@@ -8611,11 +8035,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSqlDatabaseManagedInstanceCredential"
@@ -8639,11 +8059,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceMsiScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceMsiScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSqlDatabaseManagedInstanceMsi"
@@ -8667,11 +8083,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDataWarehouseCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSqlDataWarehouseCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSqlDataWarehouseCredential"
@@ -8695,11 +8107,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDataWarehouseMsiScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSqlDataWarehouseMsiScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSqlDataWarehouseMsi"
@@ -8724,11 +8132,7 @@
           "type": "string"
         },
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         }
       }
     },
@@ -8751,11 +8155,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureMySqlCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureMySqlCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureMySqlCredential"
@@ -8787,11 +8187,7 @@
       ],
       "properties": {
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         }
       }
     },
@@ -8805,11 +8201,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureStorageCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureStorageCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureStorageCredential"
@@ -8833,11 +8225,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureStorageMsiScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureStorageMsiScanProperties"
         }
       },
       "x-ms-discriminator-value": "AzureStorageMsi"
@@ -8852,11 +8240,7 @@
       ],
       "properties": {
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         },
         "schema": {
           "type": "string"
@@ -8879,11 +8263,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TeradataTeradataCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/TeradataTeradataCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "TeradataTeradataCredential"
@@ -8915,11 +8295,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TeradataUserPassScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/TeradataUserPassScanProperties"
         }
       },
       "x-ms-discriminator-value": "TeradataUserPass"
@@ -8957,11 +8333,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TeradataTeradataUserPassScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/TeradataTeradataUserPassScanProperties"
         }
       },
       "x-ms-discriminator-value": "TeradataTeradataUserPass"
@@ -8976,11 +8348,7 @@
       ],
       "properties": {
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         },
         "schema": {
           "type": "string"
@@ -9003,11 +8371,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/OracleOracleCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/OracleOracleCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "OracleOracleCredential"
@@ -9045,11 +8409,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/OracleOracleUserPassScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/OracleOracleUserPassScanProperties"
         }
       },
       "x-ms-discriminator-value": "OracleOracleUserPass"
@@ -9067,11 +8427,7 @@
           "type": "string"
         },
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         },
         "jCoLibraryPath": {
           "type": "string"
@@ -9088,11 +8444,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SapS4HanaSapS4HanaCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/SapS4HanaSapS4HanaCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "SapS4HanaSapS4HanaCredential"
@@ -9130,11 +8482,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SapS4HanaSapS4HanaUserPassScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/SapS4HanaSapS4HanaUserPassScanProperties"
         }
       },
       "x-ms-discriminator-value": "SapS4HanaSapS4HanaUserPass"
@@ -9152,11 +8500,7 @@
           "type": "string"
         },
         "credential": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/CredentialReference"
-            }
-          ]
+          "$ref": "#/definitions/CredentialReference"
         },
         "jCoLibraryPath": {
           "type": "string"
@@ -9173,11 +8517,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SapEccSapEccCredentialScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/SapEccSapEccCredentialScanProperties"
         }
       },
       "x-ms-discriminator-value": "SapEccSapEccCredential"
@@ -9215,11 +8555,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SapEccSapEccUserPassScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/SapEccSapEccUserPassScanProperties"
         }
       },
       "x-ms-discriminator-value": "SapEccSapEccUserPass"
@@ -9263,11 +8599,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/PowerBIDelegatedScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/PowerBIDelegatedScanProperties"
         }
       },
       "x-ms-discriminator-value": "PowerBIDelegated"
@@ -9296,11 +8628,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/PowerBIMsiScanProperties"
-            }
-          ]
+          "$ref": "#/definitions/PowerBIMsiScanProperties"
         }
       },
       "x-ms-discriminator-value": "PowerBIMsi"
@@ -9315,11 +8643,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSubscriptionScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSubscriptionScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSubscription"
@@ -9334,11 +8658,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureResourceGroupScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureResourceGroupScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureResourceGroup"
@@ -9353,11 +8673,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSynapseWorkspaceScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSynapseWorkspaceScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSynapseWorkspace"
@@ -9372,11 +8688,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSynapseScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSynapseScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSynapse"
@@ -9391,11 +8703,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AdlsGen1ScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AdlsGen1ScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AdlsGen1"
@@ -9410,11 +8718,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AdlsGen2ScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AdlsGen2ScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AdlsGen2"
@@ -9429,11 +8733,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonAccountScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AmazonAccountScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AmazonAccount"
@@ -9448,11 +8748,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonS3ScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AmazonS3ScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AmazonS3"
@@ -9467,11 +8763,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonSqlScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AmazonSqlScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AmazonSql"
@@ -9486,11 +8778,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureCosmosDbScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureCosmosDbScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureCosmosDb"
@@ -9505,11 +8793,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureDataExplorerScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureDataExplorerScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureDataExplorer"
@@ -9524,11 +8808,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureFileServiceScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureFileServiceScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureFileService"
@@ -9543,11 +8823,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDatabaseScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSqlDatabaseScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSqlDatabase"
@@ -9562,11 +8838,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AmazonPostgreSqlScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AmazonPostgreSqlScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AmazonPostgreSql"
@@ -9581,11 +8853,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzurePostgreSqlScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzurePostgreSqlScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzurePostgreSql"
@@ -9600,11 +8868,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SqlServerDatabaseScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/SqlServerDatabaseScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "SqlServerDatabase"
@@ -9619,11 +8883,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSqlDatabaseManagedInstanceScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSqlDatabaseManagedInstance"
@@ -9638,11 +8898,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDataWarehouseScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureSqlDataWarehouseScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSqlDataWarehouse"
@@ -9657,11 +8913,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureMySqlScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureMySqlScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureMySql"
@@ -9676,11 +8928,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureStorageScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/AzureStorageScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureStorage"
@@ -9695,11 +8943,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/TeradataScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/TeradataScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "Teradata"
@@ -9714,11 +8958,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/OracleScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/OracleScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "Oracle"
@@ -9733,11 +8973,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SapS4HanaScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/SapS4HanaScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "SapS4Hana"
@@ -9752,11 +8988,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/SapEccScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/SapEccScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "SapEcc"
@@ -9771,11 +9003,7 @@
       ],
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/PowerBIScanRulesetProperties"
-            }
-          ]
+          "$ref": "#/definitions/PowerBIScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "PowerBI"
