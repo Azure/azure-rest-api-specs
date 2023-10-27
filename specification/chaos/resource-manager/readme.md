@@ -28,9 +28,60 @@ These are the global settings for the chaos.
 title: ChaosManagementClient
 description: Chaos Management Client
 openapi-type: arm
-tag: package-preview-2023-10
+tag: package-2023-11
 ```
 
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.Chaos/stable/2023-11-01/capabilities.json
+  - Microsoft.Chaos/stable/2023-11-01/capabilityTypes.json
+  - Microsoft.Chaos/stable/2023-11-01/experiments.json
+  - Microsoft.Chaos/stable/2023-11-01/operationStatuses.json
+  - Microsoft.Chaos/stable/2023-11-01/operations.json
+  - Microsoft.Chaos/stable/2023-11-01/targetTypes.json
+  - Microsoft.Chaos/stable/2023-11-01/targets.json
+directive:
+  - from: swagger-document
+    where: "$.definitions.action"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentAction";
+  - from: swagger-document
+    where: "$.definitions.branch"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentBranch";
+  - from: swagger-document
+    where: "$.definitions.step"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentStep";
+  - from: swagger-document
+    where: "$.definitions.filter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilterParameters"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilterParameters";
+  - from: swagger-document
+    where: "$.definitions.selector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSelector";
+  - from: swagger-document
+    where: "$.definitions.listSelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetListSelector";
+  - from: swagger-document
+    where: "$.definitions.querySelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetQuerySelector";
+```
 
 ### Tag: package-preview-2023-10
 
@@ -43,6 +94,7 @@ input-file:
   - Microsoft.Chaos/preview/2023-10-27-preview/experiments.json
   - Microsoft.Chaos/preview/2023-10-27-preview/operationStatuses.json
   - Microsoft.Chaos/preview/2023-10-27-preview/operations.json
+  - Microsoft.Chaos/preview/2023-10-27-preview/privateAccesses.json
   - Microsoft.Chaos/preview/2023-10-27-preview/targetTypes.json
   - Microsoft.Chaos/preview/2023-10-27-preview/targets.json
 directive:
@@ -83,6 +135,7 @@ directive:
     transform: >
       $["x-ms-client-name"] = "ChaosTargetQuerySelector";
 ```
+
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
