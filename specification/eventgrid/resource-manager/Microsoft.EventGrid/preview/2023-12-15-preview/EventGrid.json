@@ -2733,6 +2733,84 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes": {
+      "post": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Get delivery attributes for an event subscription of a namespace topic.",
+        "description": "Get all delivery attributes for an event subscription of a namespace topic.",
+        "operationId": "NamespaceTopicEventSubscriptions_GetDeliveryAttributes",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "Name of the namespace.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 3,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "description": "Name of the namespace topic.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 3,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be created. Event subscription names must be between 3 and 100 characters in length and use alphanumeric letters only.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 3,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeliveryAttributeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NamespaceTopicEventSubscriptions_GetDeliveryAttributes": {
+            "$ref": "./examples/NamespaceTopicEventSubscriptions_GetDeliveryAttributes.json"
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}": {
       "get": {
         "tags": [
