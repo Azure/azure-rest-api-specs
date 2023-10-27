@@ -66,10 +66,6 @@ model AnalyzeTextResult {
 
   @doc("Analysis result for categories.")
   categoriesAnalysis: TextCategoriesAnalysis[];
-
-  @added(ContentSafety.Versions.v2023_10_15_Preview)
-  @doc("The accept decision made by service.")
-  accepted?: boolean;
 }
 
 @doc("The result of blocklist match.")
@@ -94,10 +90,6 @@ model TextCategoriesAnalysis {
 
   @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’ or ‘EightSeverity Levels’, and the output value can be 0, 2, 4, 6 or 0, 1, 2, 3, 4, 5, 6, or 7.")
   severity?: int32;
-
-  @added(ContentSafety.Versions.v2023_10_15_Preview)
-  @doc("The decision made by service.")
-  accepted?: boolean;
 }
 
 @doc("The image analysis request.")
@@ -126,10 +118,6 @@ model ImageData {
 model AnalyzeImageResult {
   @doc("Analysis result for categories.")
   categoriesAnalysis: ImageCategoriesAnalysis[];
-
-  @added(ContentSafety.Versions.v2023_10_15_Preview)
-  @doc("The decision made by service.")
-  accepted?: boolean;
 }
 
 @doc("Image analysis result.")
@@ -139,10 +127,6 @@ model ImageCategoriesAnalysis {
 
   @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’, and the output value can be 0, 2, 4, 6.")
   severity?: int32;
-
-  @added(ContentSafety.Versions.v2023_10_15_Preview)
-  @doc("The decision made by service.")
-  accepted?: boolean;
 }
 
 @doc("Text Blocklist.")
