@@ -28,18 +28,27 @@ These are the global settings for the external identities APIs.
 title: ExternalIdentitiesConfigurationClient
 description: External Identities Configuration Client
 openapi-type: arm
-tag: package-preview-2023-01
+tag: package-preview-2023-09
 ```
 
 
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.AzureActiveDirectory/preview/2023-09-08-preview/cpim.json
+```
 ### Tag: package-preview-2023-01
 
 These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-01'
+``` yaml $(tag) == 'package-preview-2023-01'
 input-file:
   - Microsoft.AzureActiveDirectory/preview/2023-01-18-preview/externalIdentities.json
 ```
+
 ### Tag: package-2019-01-01-preview
 
 These settings apply only when `--tag=package-2019-01-01-preview` is specified on the command line.
