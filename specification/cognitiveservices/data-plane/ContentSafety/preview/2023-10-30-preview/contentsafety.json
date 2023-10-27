@@ -59,7 +59,7 @@
   },
   "tags": [],
   "paths": {
-    "/image/incident": {
+    "/image/incidents": {
       "get": {
         "operationId": "ImageIncidents_ListIncidents",
         "summary": "Get All Image Incidents",
@@ -94,7 +94,7 @@
         }
       }
     },
-    "/image/incident/{incidentName}": {
+    "/image/incidents/{incidentName}": {
       "get": {
         "operationId": "ImageIncidents_GetIncidents",
         "summary": "Get Image Incident By incidentName",
@@ -228,7 +228,7 @@
         }
       }
     },
-    "/image/incident/{incidentName}:addIncidentSamples": {
+    "/image/incidents/{incidentName}:addIncidentSamples": {
       "post": {
         "operationId": "ImageIncidents_AddIncidentSamples",
         "summary": "Add ImageIncidentSamples To Incident",
@@ -277,7 +277,7 @@
         }
       }
     },
-    "/image/incident/{incidentName}:removeIncidentSamples": {
+    "/image/incidents/{incidentName}:removeIncidentSamples": {
       "post": {
         "operationId": "ImageIncidents_RemoveIncidentSamples",
         "summary": "Remove ImageIncidentSamples From Incident",
@@ -323,7 +323,7 @@
         }
       }
     },
-    "/image/incident/{incidentName}/incidentSamples": {
+    "/image/incidents/{incidentName}/incidentSamples": {
       "get": {
         "operationId": "ImageIncidents_ListIncidentSamples",
         "summary": "Get All ImageIncidentSamples By imageIncidentName",
@@ -376,7 +376,7 @@
         }
       }
     },
-    "/image/incident/{incidentName}/incidentSamples/{incidentSampleId}": {
+    "/image/incidents/{incidentName}/incidentSamples/{incidentSampleId}": {
       "get": {
         "operationId": "ImageIncidents_GetIncidentSample",
         "summary": "Get ImageIncidentSample By imageIncidentName And imageIncidentSampleId",
@@ -1001,7 +1001,7 @@
         }
       }
     },
-    "/text/incident": {
+    "/text/incidents": {
       "get": {
         "operationId": "TextIncidents_ListIncidents",
         "summary": "Get All Text Incidents",
@@ -1036,7 +1036,7 @@
         }
       }
     },
-    "/text/incident/{incidentName}": {
+    "/text/incidents/{incidentName}": {
       "get": {
         "operationId": "TextIncidents_GetIncidents",
         "summary": "Get Text Incident By incidentName",
@@ -1170,7 +1170,7 @@
         }
       }
     },
-    "/text/incident/{incidentName}:addIncidentSamples": {
+    "/text/incidents/{incidentName}:addIncidentSamples": {
       "post": {
         "operationId": "TextIncidents_AddIncidentSamples",
         "summary": "Add TextIncidentSamples To Incident",
@@ -1219,7 +1219,7 @@
         }
       }
     },
-    "/text/incident/{incidentName}:removeIncidentSamples": {
+    "/text/incidents/{incidentName}:removeIncidentSamples": {
       "post": {
         "operationId": "TextIncidents_RemoveIncidentSamples",
         "summary": "Remove TextIncidentSamples From Incident",
@@ -1265,7 +1265,7 @@
         }
       }
     },
-    "/text/incident/{incidentName}/incidentSamples": {
+    "/text/incidents/{incidentName}/incidentSamples": {
       "get": {
         "operationId": "TextIncidents_ListIncidentSamples",
         "summary": "Get All TextIncidentSamples By textIncidentName",
@@ -1318,7 +1318,7 @@
         }
       }
     },
-    "/text/incident/{incidentName}/incidentSamples/{incidentSampleId}": {
+    "/text/incidents/{incidentName}/incidentSamples/{incidentSampleId}": {
       "get": {
         "operationId": "TextIncidents_GetIncidentSample",
         "summary": "Get TextIncidentSample By textIncidentName And textIncidentSampleId",
@@ -1573,16 +1573,9 @@
           "description": "This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
           "default": "FourSeverityLevels"
         },
-        "incidentNames": {
-          "type": "array",
-          "description": "The accept decision made by service.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "haltOnIncidentHit": {
-          "type": "boolean",
-          "description": "When set to true, further analyses of harmful content will not be performed in cases where incidents are hit. When set to false, all analyses of harmful content will be performed, whether or not incidents are hit."
+        "incidents": {
+          "$ref": "#/definitions/IncidentOptions",
+          "description": "The incidents to detect."
         }
       },
       "required": [
@@ -1711,16 +1704,9 @@
           "description": "This refers to the type of text analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
           "default": "FourSeverityLevels"
         },
-        "incidentNames": {
-          "type": "array",
-          "description": "The accept decision made by service.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "haltOnIncidentHit": {
-          "type": "boolean",
-          "description": "When set to true, further analyses of harmful content will not be performed in cases where incidents are hit. When set to false, all analyses of harmful content will be performed, whether or not incidents are hit."
+        "incidents": {
+          "$ref": "#/definitions/IncidentOptions",
+          "description": "The incidents to detect."
         }
       },
       "required": [
@@ -1959,10 +1945,28 @@
           "type": "string",
           "description": "Incident description.",
           "maxLength": 1024
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Incident created time.",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Incident updated time.",
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "required": [
-        "incidentName"
+        "incidentName",
+        "created",
+        "lastUpdated"
       ]
     },
     "ImageIncidentCreateOrUpdate": {
@@ -2069,6 +2073,23 @@
       "required": [
         "incidentName"
       ]
+    },
+    "IncidentOptions": {
+      "type": "object",
+      "description": "The text analysis request.",
+      "properties": {
+        "incidentNames": {
+          "type": "array",
+          "description": "The accept decision made by service.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "haltOnIncidentHit": {
+          "type": "boolean",
+          "description": "When set to true, further analyses of harmful content will not be performed in cases where incidents are hit. When set to false, all analyses of harmful content will be performed, whether or not incidents are hit."
+        }
+      }
     },
     "LabelDefinition": {
       "type": "object",
@@ -2492,10 +2513,28 @@
           "type": "string",
           "description": "Incident description.",
           "maxLength": 1024
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Incident created time.",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Incident updated time.",
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "required": [
-        "incidentName"
+        "incidentName",
+        "created",
+        "lastUpdated"
       ]
     },
     "TextIncidentCreateOrUpdate": {

@@ -59,10 +59,16 @@ model AnalyzeTextOptions {
   outputType?: AnalyzeTextOutputType = AnalyzeTextOutputType.FourSeverityLevels;
 
   @added(ContentSafety.Versions.v2023_10_30_Preview)
+  @doc("The incidents to detect.")
+  incidents?: IncidentOptions;
+}
+
+@added(ContentSafety.Versions.v2023_10_30_Preview)
+@doc("The text analysis request.")
+model IncidentOptions {
   @doc("The accept decision made by service.")
   incidentNames?: string[];
 
-  @added(ContentSafety.Versions.v2023_10_30_Preview)
   @doc("When set to true, further analyses of harmful content will not be performed in cases where incidents are hit. When set to false, all analyses of harmful content will be performed, whether or not incidents are hit.")
   haltOnIncidentHit?: boolean;
 }
@@ -124,12 +130,8 @@ model AnalyzeImageOptions {
   outputType?: AnalyzeImageOutputType = AnalyzeImageOutputType.FourSeverityLevels;
 
   @added(ContentSafety.Versions.v2023_10_30_Preview)
-  @doc("The accept decision made by service.")
-  incidentNames?: string[];
-
-  @added(ContentSafety.Versions.v2023_10_30_Preview)
-  @doc("When set to true, further analyses of harmful content will not be performed in cases where incidents are hit. When set to false, all analyses of harmful content will be performed, whether or not incidents are hit.")
-  haltOnIncidentHit?: boolean;
+  @doc("The incidents to detect.")
+  incidents?: IncidentOptions;
 }
 
 @doc("The image can be either base64 encoded bytes or a blob URL. You can choose only one of these options. If both are provided, the request will be refused. The maximum image size is 2048 x 2048 pixels and should not exceed 4 MB, while the minimum image size is 50 x 50 pixels.")
@@ -215,7 +217,7 @@ model RemoveTextBlocklistItemsOptions {
 
 @added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("Text Incident.")
-@resource("text/incident")
+@resource("text/incidents")
 model TextIncident {
   @doc("incident name.")
   @pattern("^[0-9A-Za-z._~-]+$")
@@ -227,6 +229,13 @@ model TextIncident {
   @doc("Incident description.")
   @maxLength(1024)
   description?: string;
+
+  @doc("Incident created time.")
+  @visibility("read", "query")
+  created: utcDateTime;
+  @doc("Incident updated time.")
+  @visibility("read", "query")
+  lastUpdated: utcDateTime;
 }
 
 @added(ContentSafety.Versions.v2023_10_30_Preview)
@@ -268,7 +277,7 @@ model RemoveTextIncidentSamplesOptions {
 
 @added(ContentSafety.Versions.v2023_10_30_Preview)
 @doc("Image Incident.")
-@resource("image/incident")
+@resource("image/incidents")
 model ImageIncident {
   @doc("incident name.")
   @pattern("^[0-9A-Za-z._~-]+$")
@@ -280,6 +289,13 @@ model ImageIncident {
   @doc("Incident description.")
   @maxLength(1024)
   description?: string;
+
+  @doc("Incident created time.")
+  @visibility("read", "query")
+  created: utcDateTime;
+  @doc("Incident updated time.")
+  @visibility("read", "query")
+  lastUpdated: utcDateTime;
 }
 
 @added(ContentSafety.Versions.v2023_10_30_Preview)
