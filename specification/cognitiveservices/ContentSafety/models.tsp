@@ -67,10 +67,10 @@ model AnalyzeTextOptions {
 @doc("The text analysis request.")
 model IncidentOptions {
   @doc("The accept decision made by service.")
-  names?: string[];
+  incidentNames?: string[];
 
   @doc("When set to true, further analyses of harmful content will not be performed in cases where incidents are hit. When set to false, all analyses of harmful content will be performed, whether or not incidents are hit.")
-  haltOnHit?: boolean;
+  haltOnIncidentHit?: boolean;
 }
 
 @doc("The text analysis response.")
