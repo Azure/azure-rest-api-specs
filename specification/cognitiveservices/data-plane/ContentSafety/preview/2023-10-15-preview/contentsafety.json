@@ -1054,13 +1054,13 @@
       "type": "object",
       "description": "The protected material analysis response.",
       "properties": {
-        "detected": {
-          "type": "boolean",
+        "protectedMaterialAnalysis": {
+          "$ref": "#/definitions/ProtectedMaterialAnalysisResult",
           "description": "Analysis result for protected material."
         }
       },
       "required": [
-        "detected"
+        "protectedMaterialAnalysis"
       ]
     },
     "AnalyzeTextResult": {
@@ -1481,6 +1481,19 @@
           "description": "Deployed image policy.This value must be null if the modality is not Image."
         }
       }
+    },
+    "ProtectedMaterialAnalysisResult": {
+      "type": "object",
+      "description": "The text protected material analysis response.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Analysis result for protected material.."
+        }
+      },
+      "required": [
+        "detected"
+      ]
     },
     "RemoveTextBlocklistItemsOptions": {
       "type": "object",
