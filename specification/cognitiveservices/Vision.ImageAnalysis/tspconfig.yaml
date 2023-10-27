@@ -25,6 +25,8 @@ options:
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-vision-imageanalysis"
     namespace: "com.azure.ai.vision.imageanalysis"
+    # We switched two public methods to private. Make sure this is not overriden next time the SDK is emitted.
+    partial-update: true
   "@azure-tools/typespec-ts":
     package-dir: "imageAnalysis"
     generateMetadata: true
