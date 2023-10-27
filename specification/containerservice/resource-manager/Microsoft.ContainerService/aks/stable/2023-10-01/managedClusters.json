@@ -3307,6 +3307,29 @@
         "nodePublicIPTags": {
           "$ref": "#/definitions/NodePublicIPTags",
           "description": "IPTags of instance-level public IPs."
+        },
+        "allowedHostPorts": {
+          "type": "array",
+          "description": "The port ranges that are allowed to access. The specified ranges are allowed to overlap.",
+          "items": {
+            "$ref": "#/definitions/PortRange"
+          },
+          "x-ms-identifiers": []
+        },
+        "applicationSecurityGroups": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Network/applicationSecurityGroups"
+                }
+              ]
+            }
+          },
+          "description": "The IDs of the application security groups which agent pool will associate when created."
         }
       },
       "description": "Network settings of an agent pool."
@@ -3332,6 +3355,48 @@
         }
       },
       "description": "Contains the IPTag associated with the object."
+    },
+    "PortRange": {
+      "type": "object",
+      "description": "The port range.",
+      "properties": {
+        "portStart": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "The minimum port that is included in the range. It should be ranged from 1 to 65535, and be less than or equal to portEnd."
+        },
+        "portEnd": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "The maximum port that is included in the range. It should be ranged from 1 to 65535, and be greater than or equal to portStart."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The network protocol of the port.",
+          "enum": [
+            "TCP",
+            "UDP"
+          ],
+          "x-ms-enum": {
+            "name": "Protocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "TCP",
+                "description": "TCP protocol."
+              },
+              {
+                "value": "UDP",
+                "description": "UDP protocol."
+              }
+            ]
+          }
+        }
+      }
     },
     "ManagedClusterAgentPoolProfile": {
       "type": "object",
