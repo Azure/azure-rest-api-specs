@@ -208,13 +208,18 @@ interface PromptTextOperations {
   >;
 }
 
+interface CategoryOps
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
+
 @added(Versions.v2023_10_30_Preview)
 interface TextCategoryCustomization {
-  createOrReplaceTextCustomizedCategory is ResourceCreateOrReplace<TextCustomizedCategory>;
+  createOrReplaceTextCustomizedCategory is CategoryOps.ResourceCreateOrReplace<TextCustomizedCategory>;
 
-  getTextCustomizedCategory is ResourceRead<TextCustomizedCategory>;
+  getTextCustomizedCategory is CategoryOps.ResourceRead<TextCustomizedCategory>;
 
-  deleteTextCustomizedCategory is ResourceDelete<TextCustomizedCategory>;
+  deleteTextCustomizedCategory is CategoryOps.ResourceDelete<TextCustomizedCategory>;
 }
 
 @added(Versions.v2023_10_30_Preview)

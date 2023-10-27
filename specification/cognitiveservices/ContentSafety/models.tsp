@@ -401,7 +401,7 @@ model PreDefinedConcept {
 @doc("Label definition.")
 model LabelDefinition {
   label: int32;
-  scenarios: string[];
+  enumerations: string[];
 }
 
 @added(Versions.v2023_10_30_Preview)

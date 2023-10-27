@@ -876,7 +876,7 @@
     "/text/categories/{categoryName}": {
       "get": {
         "operationId": "TextCategoryCustomization_GetTextCustomizedCategory",
-        "description": "DEPRECATED: Use `ResourceRead` from a `ResourceOperations` interface instance.\nThis can be done by instantiating your own version with the traits you want `alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;`.\nSee https://azure.github.io/typespec-azure/docs/getstarted/azure-core/step05#defining-the-operation-interface for details on how to use.\n\nOperation signature to retrieve a resource.",
+        "description": "Resource read operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -914,7 +914,7 @@
       },
       "put": {
         "operationId": "TextCategoryCustomization_CreateOrReplaceTextCustomizedCategory",
-        "description": "DEPRECATED: Use `ResourceCreateOrReplace` from a `ResourceOperations` interface instance.\nThis can be done by instantiating your own version with the traits you want `alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;`.\nSee https://azure.github.io/typespec-azure/docs/getstarted/azure-core/step05#defining-the-operation-interface for details on how to use.\n\nOperation signature to create or replace a resource.",
+        "description": "Create or replace operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -967,7 +967,7 @@
       },
       "delete": {
         "operationId": "TextCategoryCustomization_DeleteTextCustomizedCategory",
-        "description": "DEPRECATED: Use `ResourceDelete` from a `ResourceOperations` interface instance.\nThis can be done by instantiating your own version with the traits you want `alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;`.\nSee https://azure.github.io/typespec-azure/docs/getstarted/azure-core/step05#defining-the-operation-interface for details on how to use.\n\nOperation signature to delete a resource.",
+        "description": "Resource delete operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2099,7 +2099,7 @@
           "type": "integer",
           "format": "int32"
         },
-        "scenarios": {
+        "enumerations": {
           "type": "array",
           "items": {
             "type": "string"
@@ -2108,7 +2108,7 @@
       },
       "required": [
         "label",
-        "scenarios"
+        "enumerations"
       ]
     },
     "ListImageIncidentSampleResult": {
