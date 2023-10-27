@@ -501,6 +501,21 @@
             "description": "The name of the virtual machine."
           },
           {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            },
+            "description": "Parameters supplied to the Create Virtual Machine operation."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+		  {
             "name": "If-Match",
             "in": "header",
             "required": false,
@@ -515,21 +530,6 @@
             "type": "string",
             "x-ms-client-name": "IfNoneMatch",
             "description": "Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will result in error from server as they are not supported."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualMachine"
-            },
-            "description": "Parameters supplied to the Create Virtual Machine operation."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -710,6 +710,21 @@
             "description": "The name of the virtual machine."
           },
           {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineUpdate"
+            },
+            "description": "Parameters supplied to the Update Virtual Machine operation."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+		  {
             "name": "If-Match",
             "in": "header",
             "required": false,
@@ -724,21 +739,6 @@
             "type": "string",
             "x-ms-client-name": "IfNoneMatch",
             "description": "Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will result in error from server as they are not supported."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualMachineUpdate"
-            },
-            "description": "Parameters supplied to the Update Virtual Machine operation."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
