@@ -1,15 +1,40 @@
-// import { error } from "node:console";
 import { CompileRule } from "../src/rules/compile.js";
-import { TsvTestHostGenerator } from "./tsv-test-host.js";
+import { TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert } from "node:assert";
-describe("#Compile", function () {
-  it("Should fail if project cannot compile.", async function () {
-    let compileRule = new CompileRule();
-    let TsvTestHost = TsvTestHostGenerator({
-      runCmd: Promise.resolve([null, "success", "success"]),
-    });
-    const result = await compileRule.execute(TsvTestHost, "mockFolder");
+describe("compile", function () {
+  it("should succeed if project can compile", async function () {
+    const result = await new CompileRule().execute(new TsvTestHost(), TsvTestHost.folder);
+
     assert(result.success);
-    assert(result.stdOutput === "successsuccess");
+  });
+
+  it("should fail if no emitter was configured", async function () {
+    let host = new TsvTestHost();
+    host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
+      if (cmd.includes("tsp compile .")) {
+        return [null, "no emitter was configured", ""];
+      } else {
+        return [null, "", ""];
+      }
+    };
+
+    const result = await new CompileRule().execute(host, TsvTestHost.folder);
+
+    assert(!result.success);
+  });
+
+  it("should fail if no output was generated", async function () {
+    let host = new TsvTestHost();
+    host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
+      if (cmd.includes("tsp compile .")) {
+        return [null, "no output was generated", ""];
+      } else {
+        return [null, "", ""];
+      }
+    };
+
+    const result = await new CompileRule().execute(host, TsvTestHost.folder);
+
+    assert(!result.success);
   });
 });
