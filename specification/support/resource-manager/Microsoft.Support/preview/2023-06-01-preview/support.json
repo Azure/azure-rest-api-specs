@@ -154,7 +154,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ServiceNameParameter"
+            "$ref": "#/parameters/ClassifyProblemServiceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3105,10 +3105,17 @@
       "type": "string",
       "description": "Azure subscription Id."
     },
-    "ServiceNameParameter": {
+    "ClassifyProblemServiceNameParameter": {
       "name": "serviceName",
       "in": "path",
       "pattern": "^[0-9a-zA-Z_\\-. ]+$",
+      "description": "Name of the Azure service for which the problem classifications need to be retrieved.",
+      "required": true,
+      "type": "string"
+    },
+    "ServiceNameParameter": {
+      "name": "serviceName",
+      "in": "path",
       "description": "Name of the Azure service for which the problem classifications need to be retrieved.",
       "required": true,
       "type": "string"
