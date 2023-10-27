@@ -31,15 +31,25 @@ openapi-type: arm
 tag: package-preview-2023-09
 ```
 
-
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2023-09'
 input-file:
-  - Microsoft.AzureActiveDirectory/preview/2023-09-08-preview/cpim.json
+  - Microsoft.AzureActiveDirectory/preview/2023-09-08-preview/externalIdentities.json
+tag: package-preview-2023-05
 ```
+
+### Tag: package-preview-2023-05
+
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-05'
+input-file:
+  - Microsoft.AzureActiveDirectory/preview/2023-05-17-preview/externalIdentities.json
+```
+
 ### Tag: package-preview-2023-01
 
 These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
