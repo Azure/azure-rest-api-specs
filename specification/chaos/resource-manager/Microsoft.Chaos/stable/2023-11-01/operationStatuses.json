@@ -128,7 +128,7 @@
       }
     },
     "OperationStatusErrorDetail": {
-      "description": "The error detail.",
+      "description": "The error detail, if present.",
       "type": "object",
       "properties": {
         "code": {
@@ -141,11 +141,6 @@
           "type": "string",
           "description": "The error message."
         },
-        "target": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error target."
-        },
         "details": {
           "readOnly": true,
           "type": "array",
@@ -155,34 +150,9 @@
           "x-ms-identifiers": [
             "message",
             "target"
-          ],
-          "description": "The error details."
-        },
-        "additionalInfo": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationStatusErrorAdditionalInfo"
-          },
-          "description": "The error additional info."
+          ]
         }
       }
-    },
-    "OperationStatusErrorAdditionalInfo": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The additional info type."
-        },
-        "info": {
-          "readOnly": true,
-          "type": "object",
-          "description": "The additional info."
-        }
-      },
-      "description": "The resource management error additional info."
     }
   },
   "parameters": {}
