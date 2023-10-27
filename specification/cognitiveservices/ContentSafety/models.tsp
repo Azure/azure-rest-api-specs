@@ -351,5 +351,5 @@ model AnalyzeTextJailbreakResult {
 @doc("The text jailbreak analysis response.")
 model JailbreakAnalysisResult {
   @doc("Analysis result for jailbreak.")
-  violated: boolean;
+  detected: boolean;
 }
