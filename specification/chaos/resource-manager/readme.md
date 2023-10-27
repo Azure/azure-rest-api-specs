@@ -94,6 +94,7 @@ input-file:
   - Microsoft.Chaos/preview/2023-10-27-preview/experiments.json
   - Microsoft.Chaos/preview/2023-10-27-preview/operationStatuses.json
   - Microsoft.Chaos/preview/2023-10-27-preview/operations.json
+  - Microsoft.Chaos/preview/2023-10-27-preview/privateAccesses.json
   - Microsoft.Chaos/preview/2023-10-27-preview/targetTypes.json
   - Microsoft.Chaos/preview/2023-10-27-preview/targets.json
 directive:
