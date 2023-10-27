@@ -142,7 +142,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Support/services/{serviceName}/classifyProblems": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Support/services/{problemServiceName}/classifyProblems": {
       "post": {
         "tags": [
           "ProblemClassifications"
@@ -154,7 +154,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ClassifyProblemServiceNameParameter"
+            "$ref": "#/parameters/ProblemServiceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3105,8 +3105,8 @@
       "type": "string",
       "description": "Azure subscription Id."
     },
-    "ClassifyProblemServiceNameParameter": {
-      "name": "classifyProblemServiceName",
+    "ProblemServiceNameParameter": {
+      "name": "problemServiceName",
       "in": "path",
       "pattern": "^[0-9a-zA-Z_\\-. ]+$",
       "description": "Name of the Azure service for which the problem classifications need to be retrieved.",
