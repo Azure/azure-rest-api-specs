@@ -1510,6 +1510,370 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.NotificationHubs/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Lists all available Notification Hubs operations.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/NHOperationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "put": {
+        "tags": [
+          "PrivateLink"
+        ],
+        "summary": "Approves or rejects Private Endpoint Connection.\r\nThis is a public API that can be called directly by Notification Hubs users.",
+        "operationId": "PrivateEndpointConnections_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceName"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Description of the Private Endpoint Connection resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Update": {
+            "$ref": "./examples/Namespaces/PrivateEndpointConnectionUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateLink"
+        ],
+        "summary": "Deletes the Private Endpoint Connection.\r\nThis is a public API that can be called directly by Notification Hubs users.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceName"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error code with reason.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/Namespaces/PrivateEndpointConnectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "PrivateLink"
+        ],
+        "summary": "Returns a Private Endpoint Connection with a given name. \r\nThis is a public API that can be called directly by Notification Hubs users.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceName"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/Namespaces/PrivateEndpointConnectionGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateLink"
+        ],
+        "summary": "Returns all Private Endpoint Connections that belong to the given Notification Hubs namespace.\r\nThis is a public API that can be called directly by Notification Hubs users.",
+        "operationId": "PrivateEndpointConnections_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_List": {
+            "$ref": "./examples/Namespaces/PrivateEndpointConnectionList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/privateLinkResources/{subResourceName}": {
+      "get": {
+        "tags": [
+          "PrivateLink"
+        ],
+        "summary": "Returns Group Id response. \r\nThis is a public API required by the Networking RP contract. It can be used directly by Notification Hubs users.",
+        "description": "Even though this namespace requires subscription id, resource group and namespace name, it returns a constant payload (for a given namespacE) every time it's called.\r\nThat's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.",
+        "operationId": "PrivateEndpointConnections_GetGroupId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceName"
+          },
+          {
+            "in": "path",
+            "name": "subResourceName",
+            "description": "Name of the Private Link sub-resource. The only supported sub-resource is \"namespace\"",
+            "required": true,
+            "type": "string",
+            "pattern": "^namespace$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_GetGroupId": {
+            "$ref": "./examples/Namespaces/PrivateLinkResourceGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLink"
+        ],
+        "summary": "Returns all Group Ids supported by the Notification Hubs RP.\r\nThis is a public API required by the Networking RP contract. It can be used directly by Notification Hubs users.",
+        "description": "Even though this namespace requires subscription id, resource group and namespace name, it returns a constant payload (for a given namespacE) every time it's called.\r\nThat's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.",
+        "operationId": "PrivateEndpointConnections_ListGroupIds",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ListGroupIds": {
+            "$ref": "./examples/Namespaces/PrivateLinkResourceList.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1628,6 +1992,22 @@
           "description": "Gets or sets provider Authentication Token, obtained through your\r\ndeveloper account",
           "type": "string",
           "x-ms-secret": true
+        }
+      }
+    },
+    "Availability": {
+      "description": "Represents metric availability (part of RP operation descriptions).",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "description": "Time grain of the availability.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blobDuration": {
+          "description": "Duration of the availability blob.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1790,6 +2170,37 @@
         }
       }
     },
+    "ConnectionDetails": {
+      "description": "Part of Private Endpoint description that stores information about a connection between Private Endpoint and Notification Hubs namespace.\r\nThis is internal class, not visible to customers, and we use it only to discover the link identifier.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "A unique ID of the connection. This is not the ARM id, but rather an internal identifier set by the Networking RP. Notification Hubs code\r\ndoes not analyze it.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateIpAddress": {
+          "description": "IP address of the Private Endpoint. This is not used by Notification Hubs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "linkIdentifier": {
+          "description": "Link identifier. This is a string representation of an integer that is also encoded in every IPv6 frame received by Front Door,\r\nand we use it to create implicit authorization rule that allows connection from the associated Private Endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "groupId": {
+          "description": "Group name. Always \"namespace\" for Notification Hubs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "memberName": {
+          "description": "Member name. Always \"namespace\" for Notification Hubs.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "DebugSendResponse": {
       "description": "Description of a NotificationHub Resource.",
       "type": "object",
@@ -1921,6 +2332,45 @@
         }
       }
     },
+    "GroupConnectivityInformation": {
+      "description": "Represents a connectivity information to Notification Hubs namespace. This is part of PrivateLinkService proxy that tell\r\nthe Networking RP how to connect to the Notification Hubs namespace.",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "Group id. Always set to \"namespace\".",
+          "type": "string",
+          "readOnly": true
+        },
+        "memberName": {
+          "description": "Member name. Always set to \"namespace\".",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerVisibleFqdns": {
+          "description": "List of customer-visible domain names that point to a Notification Hubs namespace.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "internalFqdn": {
+          "description": "One of the domain name from the customer-visible names; this is used internally by Private Link service to make connection to Notification Hubs\r\nnamespace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "redirectMapId": {
+          "description": "Not used by Notification Hubs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateLinkServiceArmRegion": {
+          "description": "ARM region for Private Link Service. We use the region that contains the connected Notification Hubs namespace.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "IpRule": {
       "description": "A network authorization rule that filters traffic based on IP address.",
       "required": [
@@ -1940,6 +2390,93 @@
           "items": {
             "$ref": "#/definitions/AccessRights"
           }
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "A single log category specification.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log category.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the log category.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blobDuration": {
+          "description": "Duration of data written to a single blob.",
+          "type": "string",
+          "readOnly": true
+        },
+        "categoryGroups": {
+          "description": "Category group for the log specification.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "A metric specification.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Metric name / id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "User-visible metric name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayDescription": {
+          "description": "Description of the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Metric unit.",
+          "type": "string",
+          "readOnly": true
+        },
+        "aggregationType": {
+          "description": "Type of the aggregation (Average, Minimum, Maximum, Total or Count).",
+          "type": "string",
+          "readOnly": true
+        },
+        "availabilities": {
+          "description": "List of availabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Availability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [ ]
+        },
+        "supportedTimeGrainTypes": {
+          "description": "List of supported time grain types.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [ ]
+        },
+        "metricFilterPattern": {
+          "description": "The matching regex pattern to be applied to the field pointed by the \"metricsFilterPathSelector\" flag in the ARM manifest.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fillGapWithZero": {
+          "description": "Optional property. If set to true, then zero will be returned for time duration where no metric is emitted / published.",
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },
@@ -2302,6 +2839,85 @@
         }
       }
     },
+    "Operation": {
+      "description": "A NotificationHubs REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets operation name: {provider}/{resource}/{operation}",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties"
+        },
+        "isDataAction": {
+          "description": "Gets or sets IsDataAction property. It is used to differentiate management and data plane operations.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Gets service provider: Microsoft.NotificationHubs",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "Gets resource on which the operation is performed: Invoice, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "Gets operation type: Read, write, delete, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Human-friendly operation description.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list NotificationHubs operations. It contains\r\na list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets list of NotificationHubs operations supported by the\r\nMicrosoft.NotificationHubs resource provider.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "description": "Gets URL to get the next set of operation list results if there are\r\nany.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Optional operation properties.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification"
+        }
+      }
+    },
     "OperationProvisioningState": {
       "description": "Defines values for OperationProvisioningState.",
       "enum": [
@@ -2461,6 +3077,25 @@
         }
       }
     },
+    "PrivateEndpointConnectionResourceListResult": {
+      "description": "The response of the List Private Endpoint Connections operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets result of the List AuthorizationRules operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Gets or sets link to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "PrivateLinkConnectionStatus": {
       "description": "State of Private Link Connection.",
       "enum": [
@@ -2473,6 +3108,87 @@
       "x-ms-enum": {
         "name": "PrivateLinkConnectionStatus",
         "modelAsString": true
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "A Private Link Arm Resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties"
+        }
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "description": "The response of the List Private Link Resources operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets result of the List AuthorizationRules operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Gets or sets link to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Represents properties of Private Link Resource.",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "A Group Id for Private Link. For Notification Hubs, it is always set to \"namespace\".",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "Required members. For Notification Hubs, it's always a collection with a single \"namespace\" item.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "Required DNS zone names. For Notification Hubs, it contains two CNames for Service Bus and Notification Hubs zones.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkServiceConnection": {
+      "description": "A customer-visible sub-resource of Private Endpoint, which describe the connection between Private Endpoint and Notification Hubs namespace.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the Private Link Service connection.",
+          "type": "string"
+        },
+        "groupIds": {
+          "description": "List of group ids. Always contains a single element - \"namespace\" - for Notification Hub Namespace.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requestMessage": {
+          "description": "Request message provided by the user that created the connection. This is usually used when the connection requires manual approval.",
+          "type": "string"
+        }
       }
     },
     "PublicInternetAuthorizationRule": {
@@ -2610,6 +3326,35 @@
           "description": "Gets or sets keyName of the created AuthorizationRule",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Optional service specification used in Operations API.",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Log specifications.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "metricSpecifications": {
+          "description": "Metric specification.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name",
+            "unit"
+          ]
         }
       }
     },
