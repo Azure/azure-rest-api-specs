@@ -578,6 +578,10 @@
           "description": "Savings plan SKU",
           "$ref": "#/definitions/Sku"
         },
+        "tags": {
+          "description": "Tags for this reservation",
+          "$ref": "#/definitions/Tags"
+        },
         "properties": {
           "description": "Savings plan properties",
           "x-ms-client-flatten": true,
@@ -681,6 +685,9 @@
         },
         "extendedStatusInfo": {
           "$ref": "#/definitions/ExtendedStatusInfo"
+        },
+        "productCode": {
+          "$ref": "#/definitions/ProductCode"
         }
       }
     },
@@ -771,6 +778,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SavingsPlanOrderModelProperties"
         },
+        "tags": {
+          "description": "Tags for this reservation",
+          "$ref": "#/definitions/Tags"
+        },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData",
           "description": "SystemData of Savings plan order.",
@@ -832,6 +843,9 @@
         },
         "extendedStatusInfo": {
           "$ref": "#/definitions/ExtendedStatusInfo"
+        },
+        "productCode": {
+          "$ref": "#/definitions/ProductCode"
         }
       }
     },
@@ -841,6 +855,10 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SavingsPlanUpdateRequestProperties"
+        },
+        "tags": {
+          "description": "Tags for this reservation",
+          "$ref": "#/definitions/Tags"
         }
       }
     },
@@ -935,6 +953,22 @@
           "format": "double"
         }
       }
+    },
+    "Tags": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "x-ms-mutability": [
+        "read",
+        "create",
+        "update"
+      ],
+      "description": "Resource Tags"
+    },
+    "ProductCode": {
+      "type": "string",
+      "description": "Represents UPN"
     },
     "BillingPlanInformation": {
       "type": "object",
