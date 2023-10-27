@@ -1474,10 +1474,18 @@
               "description": "The root file of the NGINX config file(s). It must match one of the files' filepath."
             },
             "files": {
-              "$ref": "#/definitions/NginxConfigurationFile"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NginxConfigurationFile"
+              },
+              "x-ms-identifiers": []
             },
             "protectedFiles": {
-              "$ref": "#/definitions/NginxConfigurationFile"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NginxConfigurationFile"
+              },
+              "x-ms-identifiers": []
             },
             "package": {
               "$ref": "#/definitions/NginxConfigurationPackage"
