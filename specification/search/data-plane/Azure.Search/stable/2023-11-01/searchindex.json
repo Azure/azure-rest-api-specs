@@ -1406,7 +1406,6 @@
       "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
     },
     "VectorQuery": {
-      "x-ms-client-name": "VectorizableQuery",
       "type": "object",
       "discriminator": "kind",
       "properties": {
@@ -1435,7 +1434,6 @@
       "description": "The query parameters for vector and hybrid search queries."
     },
     "RawVectorQuery": {
-      "x-ms-client-name": "VectorQuery",
       "type": "object",
       "x-ms-discriminator-value": "vector",
       "allOf": [
@@ -1876,6 +1874,7 @@
       "description": "Describes an error condition for the API."
     },
     "AnswerResult": {
+      "x-ms-client-name": "QueryAnswerResult",
       "properties": {
         "score": {
           "type": "number",
@@ -1904,6 +1903,7 @@
       "description": "An answer is a text passage extracted from the contents of the most relevant documents that matched the query. Answers are extracted from the top search results. Answer candidates are scored and the top answers are selected."
     },
     "CaptionResult": {
+      "x-ms-client-name": "QueryCaptionResult",
       "properties": {
         "text": {
           "type": "string",
