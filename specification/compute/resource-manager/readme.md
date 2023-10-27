@@ -242,6 +242,9 @@ directive:
   - suppress: ResourceNameRestriction
     from: virtualMachineScaleSet.json
     reason: there is no VMSS naming requirement. It only follows ARM resource naming requirement.
+  - suppress: ResourceNameRestriction
+    from: virtualMachine.json
+    reason: there is no Compute VM naming requirement. It only follows ARM resource naming requirement.
   - suppress: ArmResourcePropertiesBag
     reason: This was an existing definition. Too much impact to go through breaking change to address this. 
     from: virtualMachineScaleSet.json
