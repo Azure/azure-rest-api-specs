@@ -322,6 +322,13 @@ model AnalyzeTextProtectedMaterialOptions {
 @doc("The protected material analysis response.")
 model AnalyzeTextProtectedMaterialResult {
   @doc("Analysis result for protected material.")
+  protectedMaterialAnalysis: ProtectedMaterialAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text protected material analysis response.")
+model ProtectedMaterialAnalysisResult {
+  @doc("Analysis result for protected material..")
   detected: boolean;
 }
 
