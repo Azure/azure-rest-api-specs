@@ -4962,20 +4962,21 @@
           }
         },
         "dataPatterns": {
-          "type": "array",
           "description": "The data patterns of custom classification rule.",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/ClassificationRulePattern"
           }
         },
         "columnPatterns": {
-          "type": "array",
           "description": "The column patterns of custom classification rule.",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/ClassificationRulePattern"
           }
         },
         "description": {
+          "description": "The description of custom classification rule.",
           "type": "string"
         },
         "version": {
@@ -5192,6 +5193,7 @@
       "x-ms-discriminator-value": "BasicAuth"
     },
     "RoleARNCredentialTypeProperties": {
+      "description": "The type properties of role ARN credential.",
       "type": "object",
       "properties": {
         "roleARN": {
@@ -5201,6 +5203,7 @@
       }
     },
     "RoleARNCredentialProperties": {
+      "description": "The properties of role ARN credential.",
       "type": "object",
       "properties": {
         "typeProperties": {
@@ -5211,7 +5214,8 @@
           ]
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "The description of role ARN credential."
         }
       }
     },
@@ -5236,6 +5240,7 @@
     },
     "KeyVaultSecretServicePrinipalCredentialTypeProperties": {
       "type": "object",
+      "description": "The type properties of key vault secret service principal credential.",
       "properties": {
         "servicePrincipalId": {
           "type": "string",
@@ -5254,6 +5259,7 @@
       }
     },
     "ServicePrincipalAzureKeyVaultCredentialProperties": {
+      "description": "The properties of service principal azure key vault credential.",
       "type": "object",
       "properties": {
         "typeProperties": {
@@ -5308,6 +5314,7 @@
     },
     "KeyVaultSecretConsumerKeyCredentialTypeProperties": {
       "type": "object",
+      "description": "The type properties of key vault secret consumer key credential.",
       "properties": {
         "user": {
           "type": "string"
@@ -5336,6 +5343,7 @@
     },
     "ConsumerKeyCredentialProperties": {
       "type": "object",
+      "description": "The properties of consumer key credential.",
       "properties": {
         "typeProperties": {
           "allOf": [
@@ -5371,6 +5379,7 @@
     },
     "KeyVaultSecretDelegatedAuthCredentialTypeProperties": {
       "type": "object",
+      "description": "The type properties of key vault secret delegated auth credential.",
       "properties": {
         "clientId": {
           "type": "string"
@@ -5390,14 +5399,14 @@
     },
     "DelegatedAuthCredentialProperties": {
       "type": "object",
+      "description": "The properties of delegated auth credential.",
       "properties": {
         "typeProperties": {
           "allOf": [
             {
               "$ref": "#/definitions/KeyVaultSecretDelegatedAuthCredentialTypeProperties"
             }
-          ],
-          "description": "The type properties of delegated auth credential."
+          ]
         },
         "description": {
           "type": "string"
@@ -5426,6 +5435,7 @@
     },
     "KeyVaultSecretManagedIdentityAzureKeyVaultCredentialTypeProperties": {
       "type": "object",
+      "description": "The type properties of key vault secret managed identity azure key vault credential.",
       "properties": {
         "principalId": {
           "type": "string",
@@ -5443,6 +5453,7 @@
     },
     "ManagedIdentityAzureKeyVaultCredentialProperties": {
       "type": "object",
+      "description": "The properties of managed identity azure key vault credential.",
       "properties": {
         "typeProperties": {
           "allOf": [
