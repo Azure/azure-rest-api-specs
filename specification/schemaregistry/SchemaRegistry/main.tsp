@@ -20,25 +20,30 @@ using Azure.Core;
 //  POST https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}/:get-id?api-version={apiVersion}
 //  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{name}?api-version={apiVersion}
 @server(
-  "{endpoint}",
+  "{fullyQualifiedNamespace}",
   "The Schema Registry service endpoint.",
   {
     @doc("The Schema Registry service endpoint, for example 'my-namespace.servicebus.windows.net'.")
-    endpoint: url,
+    fullyQualifiedNamespace: url,
   }
 )
 @versioned(ServiceApiVersions)
+@doc("SchemaRegistryClient is a client for registering and retrieving schemas from the Azure Schema Registry service.")
 namespace Azure.SchemaRegistry;
 
-@doc("Azure Core Version")
+@doc("Represents the Schema Registry API version to use for requests.")
 enum ServiceApiVersions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @doc("Azure Schema Registry 2021-10 Version")
+  V2021_10: "2021-10",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @doc("Azure Schema Registry 2022-10 Version")
-  v2022_10: "2022-10",
+  V2022_10: "2022-10",
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("Azure Schema Registry 2023-07-01 Version")
-  v2023_07_01: "2023-07-01",
+  @doc("Azure Schema Registry 2023-07-01 Version. This is the default version.")
+  V2023_07_01: "2023-07-01",
 }
 
 @doc("Azure Active Directory OAuth2 Flow")
@@ -95,7 +100,7 @@ interface SchemaOperations {
   @doc("Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.")
   @action("get-id")
   getSchemaIdByContent is resourceOperations.ResourceAction<
-    Schema,
+    SchemaNameContent,
     {
       ...SchemaContentType;
 
@@ -114,7 +119,7 @@ interface SchemaOperations {
   @route("/$schemaGroups/{groupName}/schemas/{name}")
   @put
   registerSchema is Azure.Core.Foundations.Operation<
-    Azure.Core.Foundations.ItemKeysOf<Schema> &
+    Azure.Core.Foundations.ItemKeysOf<SchemaNameContent> &
       SchemaContent &
       SchemaContentType,
     NoContentResponse<SchemaHeaders>
@@ -129,8 +134,48 @@ union SchemaContentTypeValues {
   avro: "application/json; serialization=Avro",
   json: "application/json; serialization=json",
   custom: "text/plain; charset=utf-8",
-  @added(ServiceApiVersions.v2023_07_01)
+  @added(ServiceApiVersions.V2023_07_01)
   protobuf: "text/vnd.ms.protobuf",
+}
+
+@doc("Represents the format of the schema to be stored by the Schema Registry service.")
+enum SchemaFormat {
+  @doc("Represents the Apache Avro schema format.")
+  avro: "Avro",
+  @doc("Represents the JSON schema format.")
+  json: "Json",
+  @doc("Represents a custom schema format.")
+  custom: "Custom",
+  @added(ServiceApiVersions.V2023_07_01)
+  @doc("Represents a protobuf schema format.")
+  protobuf: "Protobuf",
+}
+
+@doc("Meta properties of a schema.")
+model SchemaProperties {
+  @doc("References a specific schema in the registry namespace.")
+  id: string;
+
+  @doc("Format for the schema being stored.")
+  format: SchemaFormat;
+
+  @doc("Schema group under which schema is stored.")
+  groupName: string;
+
+  @doc("Name of schema.")
+  name: string;
+
+  @doc("Version of schema.")
+  version: int32;
+}
+
+@doc("The schema content of a schema, along with id and meta properties.")
+model Schema {
+  @doc("The content of the schema.")
+  definition: string;
+
+  @doc("The properties of the schema.")
+  properties: SchemaProperties;
 }
 
 @doc("The content type for given schema. Each schema type has an associated content-type.")
@@ -195,7 +240,7 @@ model SchemaGroup {
 @doc("Schemas resource.")
 @resource("schemas")
 @parentResource(SchemaGroup)
-model Schema {
+model SchemaNameContent {
   @key("name")
   @doc("Name of schema.")
   @visibility("read")
@@ -209,7 +254,7 @@ model Schema {
 
 @doc("Schema versions resource.")
 @resource("versions")
-@parentResource(Schema)
+@parentResource(SchemaNameContent)
 model Version {
   @key("schemaVersion")
   @doc("Version number of specific schema.")
