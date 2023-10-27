@@ -105,7 +105,7 @@
         "files": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DecompileSuccessKeyValueTuple"
+            "$ref": "#/definitions/FileDefinition"
           },
           "description": "An array of key-value pairs containing the entryPoint string as the key for the Bicep file decompiled from the ARM json template"
         },
@@ -115,17 +115,17 @@
         }
       }
     },
-    "DecompileSuccessKeyValueTuple": {
+    "FileDefinition": {
       "type": "object",
       "properties": {
-        "bicepFileName": {
+        "name": {
           "type": "string"
         },
-        "bicepFile": {
+        "contents": {
           "type": "string"
         }
       },
-      "description": "Key-value tuple used in the files array for DecompileOperationSuccessResponse"
+      "description": "The definition of a file along with its contents"
     },
     "DecompileError": {
       "type": "object",
