@@ -25,13 +25,12 @@ interface TextOperations {
     AnalyzeTextResult
   >;
 
-  
   @added(ContentSafety.Versions.v2023_10_15_Preview)
   @summary("Analyze Text Jailbreak")
   @doc("A synchronous API for the analysis of text jailbreak.")
-  @route("/text:analyzeJailbreak")
+  @route("/text:detectJailbreak")
   @post
-  analyzeTextJailbreak is Azure.Core.RpcOperation<
+  detectTextJailbreak is Azure.Core.RpcOperation<
     {
       @body
       @doc("The text jailbreak analysis request.")
@@ -43,9 +42,9 @@ interface TextOperations {
   @added(ContentSafety.Versions.v2023_10_15_Preview)
   @summary("Analyze Protected Material")
   @doc("A synchronous API for the analysis of protected material.")
-  @route("/text:analyzeProtectedMaterial")
+  @route("/text:detectProtectedMaterial")
   @post
-  analyzeTextProtectedMaterial is Azure.Core.RpcOperation<
+  detectTextProtectedMaterial is Azure.Core.RpcOperation<
     {
       @body
       @doc("The text analysis request.")
