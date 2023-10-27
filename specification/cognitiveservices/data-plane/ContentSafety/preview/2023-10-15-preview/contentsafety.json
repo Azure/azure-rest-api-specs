@@ -105,207 +105,6 @@
         }
       }
     },
-    "/projects": {
-      "get": {
-        "operationId": "Projects_ListProjects",
-        "summary": "List Projects.",
-        "description": "List projects.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedProject"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Projects.": {
-            "$ref": "./examples/Projects_ListProjects.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/projects/{projectName}": {
-      "get": {
-        "operationId": "Projects_GetProject",
-        "summary": "Get Project Detailed Information By Project Name.",
-        "description": "Returns project details.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "Project name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 128,
-            "pattern": "^[a-zA-Z][0-9A-Za-z-]*[0-9a-zA-Z]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Project"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Project Detailed Information By Project Name.": {
-            "$ref": "./examples/Projects_GetProject.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "Projects_CreateOrUpdateProject",
-        "summary": "Create Or Update A Project.",
-        "description": "Update a project if project does exist, create a new project if not. Note that modality cannot be updated. The limitation is 10.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "Project name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 128,
-            "pattern": "^[a-zA-Z][0-9A-Za-z-]*[0-9a-zA-Z]$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProjectCreateOrUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Project"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/Project"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create Or Update A Project.": {
-            "$ref": "./examples/Projects_CreateOrUpdateProject.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Projects_DeleteProject",
-        "summary": "Delete A Project By Project Name.",
-        "description": "Delete a project by name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "Project name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 128,
-            "pattern": "^[a-zA-Z][0-9A-Za-z-]*[0-9a-zA-Z]$"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete An Project By Project Name.": {
-            "$ref": "./examples/Projects_DeleteProject.json"
-          }
-        }
-      }
-    },
     "/text/blocklists": {
       "get": {
         "operationId": "TextBlocklists_ListTextBlocklists",
@@ -895,10 +694,6 @@
           "$ref": "#/definitions/AnalyzeImageOutputType",
           "description": "This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
           "default": "FourSeverityLevels"
-        },
-        "projectName": {
-          "type": "string",
-          "description": "Name of the project. When this field is provided, it means service will analyze the text with specified policy based on the given project name. If project name occurs with other configuration like categories, a bad request error will be returned."
         }
       },
       "required": [
@@ -1002,10 +797,6 @@
           "$ref": "#/definitions/AnalyzeTextOutputType",
           "description": "This refers to the type of text analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
           "default": "FourSeverityLevels"
-        },
-        "projectName": {
-          "type": "string",
-          "description": "Name of the project. When this field is provided, it means service will analyze the text with specified policy based on the given project name. If project name occurs with other configuration like categories, a bad request error will be returned."
         }
       },
       "required": [
@@ -1153,47 +944,6 @@
         }
       }
     },
-    "BlocklistPolicy": {
-      "type": "object",
-      "description": "Policy for blocklist.",
-      "properties": {
-        "blocklistNames": {
-          "type": "array",
-          "description": "The names of blocklists.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "haltOnBlocklistHit": {
-          "type": "boolean",
-          "description": "When set to true, further analyses of harmful content will not be performed in cases where blocklists are hit. When set to false, all analyses of harmful content will be performed, whether or not blocklists are hit."
-        }
-      }
-    },
-    "ContentModality": {
-      "type": "string",
-      "description": "Modality type.",
-      "enum": [
-        "Text",
-        "Image"
-      ],
-      "x-ms-enum": {
-        "name": "ContentModality",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Text",
-            "value": "Text",
-            "description": "Text modality."
-          },
-          {
-            "name": "Image",
-            "value": "Image",
-            "description": "Image modality."
-          }
-        ]
-      }
-    },
     "ImageCategoriesAnalysis": {
       "type": "object",
       "description": "Image analysis result.",
@@ -1230,24 +980,6 @@
         "modelAsString": true
       }
     },
-    "ImageCategoryPolicy": {
-      "type": "object",
-      "description": "ImageCategoryPolicy. Content which severity less than the acceptLessThan will be accepted.",
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/ImageCategory",
-          "description": "Image category."
-        },
-        "acceptSeverityThreshold": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Severity less than the threshold will be treated as accepted for the category. The value can only be 2, 4, 6 for FourSeverityLevels. If the threshold is undefined, it means all content are accepted."
-        }
-      },
-      "required": [
-        "category"
-      ]
-    },
     "ImageData": {
       "type": "object",
       "description": "The image can be either base64 encoded bytes or a blob URL. You can choose only one of these options. If both are provided, the request will be refused. The maximum image size is 2048 x 2048 pixels and should not exceed 4 MB, while the minimum image size is 50 x 50 pixels.",
@@ -1264,49 +996,6 @@
         }
       }
     },
-    "ImagePolicy": {
-      "type": "object",
-      "description": "Policy for the image.",
-      "properties": {
-        "categoryPolicies": {
-          "type": "array",
-          "description": "The category policy. The length must be larger than 0.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/ImageCategoryPolicy"
-          },
-          "x-ms-identifiers": []
-        },
-        "outputType": {
-          "$ref": "#/definitions/AnalyzeTextOutputType",
-          "description": "The type of text analysis output. If not assigned, the default value is \"FourSeverityLevels\".",
-          "default": "FourSeverityLevels"
-        }
-      },
-      "required": [
-        "categoryPolicies"
-      ]
-    },
-    "ImagePolicyCreateOrUpdate": {
-      "type": "object",
-      "description": "Policy for the image.",
-      "properties": {
-        "categoryPolicies": {
-          "type": "array",
-          "description": "The category policy. The length must be larger than 0.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/ImageCategoryPolicy"
-          },
-          "x-ms-identifiers": []
-        },
-        "outputType": {
-          "$ref": "#/definitions/AnalyzeTextOutputType",
-          "description": "The type of text analysis output. If not assigned, the default value is \"FourSeverityLevels\".",
-          "default": "FourSeverityLevels"
-        }
-      }
-    },
     "JailbreakAnalysisResult": {
       "type": "object",
       "description": "The text jailbreak analysis response.",
@@ -1318,28 +1007,6 @@
       },
       "required": [
         "detected"
-      ]
-    },
-    "PagedProject": {
-      "type": "object",
-      "description": "Paged collection of Project items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Project items on this page",
-          "items": {
-            "$ref": "#/definitions/Project"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "PagedTextBlocklist": {
@@ -1385,102 +1052,6 @@
       "required": [
         "value"
       ]
-    },
-    "Project": {
-      "type": "object",
-      "description": "Project is an entity to manage deployment with specified policy.",
-      "properties": {
-        "projectName": {
-          "type": "string",
-          "description": "Project name.",
-          "minLength": 3,
-          "maxLength": 128,
-          "pattern": "^[a-zA-Z][0-9A-Za-z-]*[0-9a-zA-Z]$",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "description": "Project description.",
-          "maxLength": 255
-        },
-        "modality": {
-          "$ref": "#/definitions/ContentModality",
-          "description": "Project modality.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Project display name.",
-          "minLength": 3,
-          "maxLength": 128
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Project created time.",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Project last modified time.",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "textPolicy": {
-          "$ref": "#/definitions/TextPolicy",
-          "description": "Deployed text policy. This value must be null if the modality is not Text."
-        },
-        "imagePolicy": {
-          "$ref": "#/definitions/ImagePolicy",
-          "description": "Deployed image policy.This value must be null if the modality is not Image."
-        }
-      },
-      "required": [
-        "projectName",
-        "modality"
-      ]
-    },
-    "ProjectCreateOrUpdate": {
-      "type": "object",
-      "description": "Project is an entity to manage deployment with specified policy.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Project description.",
-          "maxLength": 255
-        },
-        "modality": {
-          "$ref": "#/definitions/ContentModality",
-          "description": "Project modality.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Project display name.",
-          "minLength": 3,
-          "maxLength": 128
-        },
-        "textPolicy": {
-          "$ref": "#/definitions/TextPolicyCreateOrUpdate",
-          "description": "Deployed text policy. This value must be null if the modality is not Text."
-        },
-        "imagePolicy": {
-          "$ref": "#/definitions/ImagePolicyCreateOrUpdate",
-          "description": "Deployed image policy.This value must be null if the modality is not Image."
-        }
-      }
     },
     "ProtectedMaterialAnalysisResult": {
       "type": "object",
@@ -1642,75 +1213,6 @@
       "x-ms-enum": {
         "name": "TextCategory",
         "modelAsString": true
-      }
-    },
-    "TextCategoryPolicy": {
-      "type": "object",
-      "description": "TextCategoryPolicy. Content which severity less than the acceptLessThan will be accepted.",
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/TextCategory",
-          "description": "Text category."
-        },
-        "acceptSeverityThreshold": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Severity less than the threshold will be treated as accepted for the category. The value can only be 2, 4, 6 for FourSeverityLevels. If the threshold is undefined, it means all content are accepted."
-        }
-      },
-      "required": [
-        "category"
-      ]
-    },
-    "TextPolicy": {
-      "type": "object",
-      "description": "Policy for the text.",
-      "properties": {
-        "categoryPolicies": {
-          "type": "array",
-          "description": "The category policy. The length must be larger than 0.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/TextCategoryPolicy"
-          },
-          "x-ms-identifiers": []
-        },
-        "blocklistPolicy": {
-          "$ref": "#/definitions/BlocklistPolicy",
-          "description": "The policy of blocklist."
-        },
-        "outputType": {
-          "$ref": "#/definitions/AnalyzeTextOutputType",
-          "description": "The type of text analysis output. If not assigned, the default value is \"FourSeverityLevels\".",
-          "default": "FourSeverityLevels"
-        }
-      },
-      "required": [
-        "categoryPolicies"
-      ]
-    },
-    "TextPolicyCreateOrUpdate": {
-      "type": "object",
-      "description": "Policy for the text.",
-      "properties": {
-        "categoryPolicies": {
-          "type": "array",
-          "description": "The category policy. The length must be larger than 0.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/TextCategoryPolicy"
-          },
-          "x-ms-identifiers": []
-        },
-        "blocklistPolicy": {
-          "$ref": "#/definitions/BlocklistPolicy",
-          "description": "The policy of blocklist."
-        },
-        "outputType": {
-          "$ref": "#/definitions/AnalyzeTextOutputType",
-          "description": "The type of text analysis output. If not assigned, the default value is \"FourSeverityLevels\".",
-          "default": "FourSeverityLevels"
-        }
       }
     },
     "Versions": {

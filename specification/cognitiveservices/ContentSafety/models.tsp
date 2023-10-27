@@ -57,10 +57,6 @@ model AnalyzeTextOptions {
 
   @doc("This refers to the type of text analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".")
   outputType?: AnalyzeTextOutputType = AnalyzeTextOutputType.FourSeverityLevels;
-
-  @added(ContentSafety.Versions.v2023_10_15_Preview)
-  @doc("Name of the project. When this field is provided, it means service will analyze the text with specified policy based on the given project name. If project name occurs with other configuration like categories, a bad request error will be returned.")
-  projectName?: string;
 }
 
 @doc("The text analysis response.")
@@ -114,10 +110,6 @@ model AnalyzeImageOptions {
 
   @doc("This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".")
   outputType?: AnalyzeImageOutputType = AnalyzeImageOutputType.FourSeverityLevels;
-
-  @added(ContentSafety.Versions.v2023_10_15_Preview)
-  @doc("Name of the project. When this field is provided, it means service will analyze the text with specified policy based on the given project name. If project name occurs with other configuration like categories, a bad request error will be returned.")
-  projectName?: string;
 }
 
 @doc("The image can be either base64 encoded bytes or a blob URL. You can choose only one of these options. If both are provided, the request will be refused. The maximum image size is 2048 x 2048 pixels and should not exceed 4 MB, while the minimum image size is 50 x 50 pixels.")
@@ -203,111 +195,6 @@ model AddOrUpdateTextBlocklistItemsResult {
 model RemoveTextBlocklistItemsOptions {
   @doc("Array of blocklistItemIds to remove.")
   blocklistItemIds: string[];
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("Project is an entity to manage deployment with specified policy.")
-@resource("projects")
-model Project {
-  @doc("Project name.")
-  @pattern("^[a-zA-Z][0-9A-Za-z-]*[0-9a-zA-Z]$")
-  @key("projectName")
-  @visibility("read", "query")
-  @maxLength(128)
-  @minLength(3)
-  projectName: string;
-
-  @doc("Project description.")
-  @maxLength(255)
-  description?: string;
-
-  @doc("Project modality.")
-  @visibility("read", "query", "create")
-  modality: ContentModality;
-
-  @doc("Project display name.")
-  @maxLength(128)
-  @minLength(3)
-  displayName?: string;
-
-  @doc("Project created time.")
-  @visibility("read", "query")
-  createdAt?: utcDateTime;
-
-  @doc("Project last modified time.")
-  @visibility("read", "query")
-  lastModifiedAt?: utcDateTime;
-
-  @doc("Deployed text policy. This value must be null if the modality is not Text.")
-  textPolicy?: TextPolicy;
-
-  @doc("Deployed image policy.This value must be null if the modality is not Image.")
-  imagePolicy?: ImagePolicy;
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("Modality type.")
-enum ContentModality {
-  @doc("Text modality.")
-  Text,
-
-  @doc("Image modality.")
-  Image,
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("TextCategoryPolicy. Content which severity less than the acceptLessThan will be accepted.")
-model TextCategoryPolicy {
-  @doc("Text category.")
-  category: TextCategory;
-
-  @doc("Severity less than the threshold will be treated as accepted for the category. The value can only be 2, 4, 6 for FourSeverityLevels. If the threshold is undefined, it means all content are accepted.")
-  acceptSeverityThreshold?: int32;
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("ImageCategoryPolicy. Content which severity less than the acceptLessThan will be accepted.")
-model ImageCategoryPolicy {
-  @doc("Image category.")
-  category: ImageCategory;
-
-  @doc("Severity less than the threshold will be treated as accepted for the category. The value can only be 2, 4, 6 for FourSeverityLevels. If the threshold is undefined, it means all content are accepted.")
-  acceptSeverityThreshold?: int32;
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("Policy for the text.")
-model TextPolicy {
-  @doc("The category policy. The length must be larger than 0.")
-  @minItems(1)
-  categoryPolicies: TextCategoryPolicy[];
-
-  @doc("The policy of blocklist.")
-  blocklistPolicy?: BlocklistPolicy;
-
-  @doc("The type of text analysis output. If not assigned, the default value is \"FourSeverityLevels\".")
-  outputType?: AnalyzeTextOutputType = AnalyzeTextOutputType.FourSeverityLevels;
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("Policy for the image.")
-model ImagePolicy {
-  @doc("The category policy. The length must be larger than 0.")
-  @minItems(1)
-  categoryPolicies: ImageCategoryPolicy[];
-
-  @doc("The type of text analysis output. If not assigned, the default value is \"FourSeverityLevels\".")
-  outputType?: AnalyzeTextOutputType = AnalyzeTextOutputType.FourSeverityLevels;
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("Policy for blocklist.")
-model BlocklistPolicy {
-  @doc("The names of blocklists.")
-  blocklistNames?: string[];
-
-  @doc("When set to true, further analyses of harmful content will not be performed in cases where blocklists are hit. When set to false, all analyses of harmful content will be performed, whether or not blocklists are hit.")
-  haltOnBlocklistHit?: boolean;
 }
 
 @added(ContentSafety.Versions.v2023_10_15_Preview)
