@@ -46,7 +46,7 @@
         "tags": [
           "AzureKeyVaults"
         ],
-        "description": "Gets azureKeyVault connection.",
+        "description": "Gets an Azure Key Vault connection.",
         "operationId": "KeyVaultConnections_Get",
         "produces": [
           "application/json"
@@ -83,7 +83,7 @@
         "tags": [
           "AzureKeyVaults"
         ],
-        "description": "Creates or replaces a connection to azureKeyVault.",
+        "description": "Creates or replaces a connection to Azure Key Vault.",
         "operationId": "KeyVaultConnections_CreateOrReplace",
         "consumes": [
           "application/json"
@@ -98,7 +98,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The azureKeyVault connection definition.",
+            "description": "The Azure Key Vault connection definition.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AzureKeyVault"
@@ -138,7 +138,7 @@
         "tags": [
           "AzureKeyVaults"
         ],
-        "description": "Deletes the azureKeyVault associated with the account.",
+        "description": "Deletes an Azure Key Vault connection associated with the account.",
         "operationId": "KeyVaultConnections_Delete",
         "produces": [
           "application/json"
@@ -180,7 +180,7 @@
         "tags": [
           "AzureKeyVaults"
         ],
-        "description": "List azureKeyVaults in account.",
+        "description": "Lists Azure Key Vaults in an account.",
         "operationId": "KeyVaultConnections_List",
         "produces": [
           "application/json"
@@ -219,7 +219,7 @@
         "tags": [
           "ClassificationRules"
         ],
-        "description": "Get a classification rule.",
+        "description": "Gets a classification rule.",
         "operationId": "ClassificationRules_Get",
         "produces": [
           "application/json"
@@ -352,7 +352,7 @@
         "tags": [
           "ClassificationRules"
         ],
-        "description": "List classification rules in Account.",
+        "description": "Lists classification rules in Account.",
         "operationId": "ClassificationRules_List",
         "produces": [
           "application/json"
@@ -433,7 +433,7 @@
         "tags": [
           "ClassificationRules"
         ],
-        "description": "Sets Classification Action on a specific classification rule version.",
+        "description": "Sets classification action on a specific classification rule version.",
         "operationId": "ClassificationRules_TagClassificationVersion",
         "produces": [
           "application/json"
@@ -443,17 +443,17 @@
             "$ref": "#/parameters/classificationRuleName"
           },
           {
-            "description": "The version of the classification rule.",
             "in": "path",
             "name": "classificationRuleVersion",
+            "description": "The version of the classification rule.",
             "required": true,
             "type": "integer",
             "format": "int32"
           },
           {
-            "description": "The action of classification rule.",
             "in": "query",
             "name": "action",
+            "description": "The action of classification rule.",
             "required": true,
             "type": "string",
             "enum": [
@@ -594,7 +594,7 @@
         "tags": [
           "Credential"
         ],
-        "description": "Deletes the credentials associated with the account.",
+        "description": "Deletes a credential associated with the account.",
         "operationId": "Credential_Delete",
         "produces": [
           "application/json"
@@ -636,7 +636,7 @@
         "tags": [
           "Credential"
         ],
-        "description": "List credentials in account.",
+        "description": "Lists credentials in account.",
         "operationId": "Credential_List",
         "produces": [
           "application/json"
@@ -729,7 +729,7 @@
         "tags": [
           "DataSources"
         ],
-        "description": "Get a data source.",
+        "description": "Gets a data source.",
         "operationId": "DataSources_Get",
         "produces": [
           "application/json"
@@ -808,7 +808,7 @@
         "tags": [
           "DataSources"
         ],
-        "description": "List data sources in Data catalog.",
+        "description": "Lists data sources in Data catalog.",
         "operationId": "DataSources_List",
         "produces": [
           "application/json"
@@ -847,7 +847,7 @@
         "tags": [
           "Filters"
         ],
-        "description": "Get a filter.",
+        "description": "Gets a filter.",
         "operationId": "Filters_Get",
         "produces": [
           "application/json"
@@ -1801,7 +1801,7 @@
         "tags": [
           "Scan"
         ],
-        "description": "List scans in data source.",
+        "description": "Lists scans in data source.",
         "operationId": "Scans_ListByDataSource",
         "produces": [
           "application/json"
@@ -1907,7 +1907,7 @@
         "tags": [
           "ScanResult"
         ],
-        "description": "Get the status of the scan run with ingestion details.",
+        "description": "Gets the status of the scan run with ingestion details.",
         "operationId": "ScanResult_GetScanStatus",
         "produces": [
           "application/json"
@@ -2049,7 +2049,7 @@
         "tags": [
           "ScanRulesets"
         ],
-        "description": "Get a scan ruleset.",
+        "description": "Gets a scan ruleset.",
         "operationId": "ScanRulesets_Get",
         "produces": [
           "application/json"
@@ -2182,7 +2182,7 @@
         "tags": [
           "ScanRulesets"
         ],
-        "description": "List scan rulesets in Data catalog.",
+        "description": "Lists scan rulesets in data catalog.",
         "operationId": "ScanRulesets_List",
         "produces": [
           "application/json"
@@ -2221,7 +2221,7 @@
         "tags": [
           "SystemScanRulesets"
         ],
-        "description": "List all system scan rulesets for an account.",
+        "description": "Lists all system scan rulesets for an account.",
         "operationId": "SystemScanRulesets_List",
         "produces": [
           "application/json"
@@ -2260,7 +2260,7 @@
         "tags": [
           "SystemScanRulesets"
         ],
-        "description": "Get a system scan ruleset for a data source.",
+        "description": "Gets a system scan ruleset for a data source.",
         "operationId": "SystemScanRulesets_Get",
         "produces": [
           "application/json"
@@ -2299,7 +2299,7 @@
         "tags": [
           "SystemScanRulesets"
         ],
-        "description": "Get a scan ruleset by version.",
+        "description": "Gets a scan ruleset by version.",
         "operationId": "SystemScanRulesets_GetByVersion",
         "produces": [
           "application/json"
@@ -2313,7 +2313,7 @@
             "name": "version",
             "required": true,
             "type": "integer",
-            "description": "the version number",
+            "description": "The version number.",
             "format": "int32"
           },
           {
@@ -2346,7 +2346,7 @@
         "tags": [
           "SystemScanRulesets"
         ],
-        "description": "Get the latest version of a system scan ruleset.",
+        "description": "Gets the latest version of a system scan ruleset.",
         "operationId": "SystemScanRulesets_GetLatest",
         "produces": [
           "application/json"
@@ -2385,7 +2385,7 @@
         "tags": [
           "SystemScanRulesets"
         ],
-        "description": "List system scan ruleset versions in Data catalog.",
+        "description": "Lists system scan ruleset versions in data catalog.",
         "operationId": "SystemScanRulesets_ListVersionsByDataSource",
         "produces": [
           "application/json"
@@ -2652,6 +2652,7 @@
   },
   "definitions": {
     "AzureKeyVaultProperties": {
+      "description": "Azure Key Vault connection properties.",
       "type": "object",
       "properties": {
         "baseUrl": {
@@ -2731,6 +2732,7 @@
       }
     },
     "AzureKeyVaultList": {
+      "description": "List of Azure Key Vault connections.",
       "required": [
         "value"
       ],
@@ -2782,6 +2784,7 @@
       "discriminator": "kind"
     },
     "ClassificationRuleList": {
+      "description": "List of classification rules.",
       "required": [
         "value"
       ],
@@ -2806,6 +2809,7 @@
       }
     },
     "ErrorInfo": {
+      "description": "The error info.",
       "type": "object",
       "properties": {
         "code": {
@@ -2830,6 +2834,7 @@
       }
     },
     "OperationResponse": {
+      "description": "The operation response.",
       "type": "object",
       "properties": {
         "scanResultId": {
@@ -2902,6 +2907,7 @@
       "discriminator": "kind"
     },
     "CredentialList": {
+      "description": "List of credentials.",
       "required": [
         "value"
       ],
@@ -2926,6 +2932,7 @@
       }
     },
     "Notification": {
+      "description": "The notification model.",
       "type": "object",
       "properties": {
         "message": {
@@ -2940,6 +2947,7 @@
       }
     },
     "ScanDiagnostics": {
+      "description": "The scan diagnostics.",
       "type": "object",
       "properties": {
         "notifications": {
@@ -3009,6 +3017,7 @@
       }
     },
     "ScanResult": {
+      "description": "The scan result.",
       "type": "object",
       "properties": {
         "assetsDiscovered": {
@@ -3135,6 +3144,7 @@
       }
     },
     "DiscoveryExecutionDetails": {
+      "description": "The discovery execution details.",
       "type": "object",
       "properties": {
         "discoveryStartTime": {
@@ -3180,6 +3190,7 @@
       }
     },
     "IngestionExecutionDetails": {
+      "description": "The ingestion execution details.",
       "type": "object",
       "properties": {
         "ingestionStartTime": {
@@ -3235,8 +3246,8 @@
       }
     },
     "ScanResultWithIngestion": {
-      "type": "object",
       "description": "The scan result with ingestion.",
+      "type": "object",
       "properties": {
         "discoveryExecutionDetails": {
           "$ref": "#/definitions/DiscoveryExecutionDetails",
@@ -3357,8 +3368,8 @@
       }
     },
     "ItemPath": {
-      "type": "object",
       "description": "The item path.",
+      "type": "object",
       "properties": {
         "path": {
           "type": "string",
@@ -3371,8 +3382,8 @@
       }
     },
     "QualifiedName": {
-      "type": "object",
       "description": "The qualified name.",
+      "type": "object",
       "properties": {
         "typeName": {
           "type": "string",
@@ -3388,8 +3399,8 @@
       }
     },
     "DataSourceIdentifier": {
-      "type": "object",
       "description": "The data source identifier.",
+      "type": "object",
       "properties": {
         "itemPath": {
           "$ref": "#/definitions/ItemPath"
@@ -3412,11 +3423,11 @@
       }
     },
     "Scan": {
+      "description": "The scan.",
       "required": [
         "kind"
       ],
       "type": "object",
-      "description": "The scan.",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -3539,11 +3550,11 @@
       "discriminator": "kind"
     },
     "DataSource": {
+      "description": "The data source.",
       "required": [
         "kind"
       ],
       "type": "object",
-      "description": "The data source.",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -3578,6 +3589,7 @@
       "discriminator": "kind"
     },
     "DataSourceList": {
+      "description": "List of data sources.",
       "required": [
         "value"
       ],
@@ -3602,12 +3614,12 @@
       }
     },
     "FilterProperties": {
+      "description": "The filter properties.",
       "required": [
         "excludeUriPrefixes",
         "includeUriPrefixes"
       ],
       "type": "object",
-      "description": "The filter properties.",
       "properties": {
         "excludeUriPrefixes": {
           "uniqueItems": true,
@@ -3644,8 +3656,8 @@
       }
     },
     "Filter": {
-      "type": "object",
       "description": "The filter.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -3658,7 +3670,7 @@
       }
     },
     "IntegrationRuntimeList": {
-      "description": "A list of integration runtime resources.",
+      "description": "List of integration runtime resources.",
       "required": [
         "value"
       ],
@@ -3936,7 +3948,7 @@
           "readOnly": true
         },
         "nodes": {
-          "description": "The list of nodes for this integration runtime.",
+          "description": "List of nodes for this integration runtime.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
@@ -4159,7 +4171,7 @@
       }
     },
     "ManagedVirtualNetworkList": {
-      "description": "A list of managed virtual network resources.",
+      "description": "List of managed virtual network resources.",
       "required": [
         "value"
       ],
@@ -4214,7 +4226,7 @@
       }
     },
     "ManagedPrivateEndpointList": {
-      "description": "A list of managed private endpoint resources.",
+      "description": "List of managed private endpoint resources.",
       "required": [
         "value"
       ],
@@ -4303,7 +4315,7 @@
       }
     },
     "ScanList": {
-      "description": "The list of scan.",
+      "description": "List of scans.",
       "required": [
         "value"
       ],
@@ -4328,7 +4340,7 @@
       }
     },
     "ScanHistoryList": {
-      "description": "The list of scan history.",
+      "description": "List of scan history.",
       "required": [
         "value"
       ],
@@ -4353,7 +4365,7 @@
       }
     },
     "ScanHistoryListWithIngestion": {
-      "description": "The list of scan history with ingestion.",
+      "description": "List of scan history with ingestion.",
       "required": [
         "value"
       ],
@@ -4438,11 +4450,11 @@
       "discriminator": "kind"
     },
     "ScanRulesetList": {
+      "description": "List of scan rulesets.",
       "required": [
         "value"
       ],
       "type": "object",
-      "description": "The list of scan rulesets.",
       "properties": {
         "value": {
           "description": "List of scan rulesets.",
@@ -4463,11 +4475,11 @@
       }
     },
     "SystemScanRuleset": {
+      "description": "The system scan ruleset.",
       "required": [
         "kind"
       ],
       "type": "object",
-      "description": "The system scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/VersionedScanRuleset"
@@ -4481,11 +4493,11 @@
       "discriminator": "kind"
     },
     "SystemScanRulesetList": {
+      "description": "List of system scan rulesets.",
       "required": [
         "value"
       ],
       "type": "object",
-      "description": "The list of system scan rulesets.",
       "properties": {
         "value": {
           "description": "List of system scan rulesets.",
@@ -4506,8 +4518,8 @@
       }
     },
     "RecurrenceScheduleOccurrence": {
-      "type": "object",
       "description": "The occurrence of recurrence schedule.",
+      "type": "object",
       "properties": {
         "additionalProperties": {
           "type": "object"
@@ -4925,6 +4937,7 @@
       "x-ms-discriminator-value": "Regex"
     },
     "Store": {
+      "description": "The store.",
       "type": "object",
       "properties": {
         "referenceName": {
@@ -4982,8 +4995,8 @@
       }
     },
     "AccountKeyAuthAzureKeyVaultCredential": {
-      "type": "object",
       "description": "Credential type that uses Account Key for authentication.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Credential"
@@ -4992,7 +5005,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AccountKeyCredentialProperties",
-          "description": "The properties of account key auth azure key vault credential."
+          "description": "The properties of account key auth Azure Key Vault credential."
         }
       },
       "x-ms-discriminator-value": "AccountKey"
@@ -5023,8 +5036,8 @@
       }
     },
     "BasicAuthAzureKeyVaultCredential": {
-      "type": "object",
       "description": "Credential type that uses Basic authentication.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Credential"
@@ -5033,7 +5046,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/UserPassCredentialProperties",
-          "description": "The properties of basic auth azure key vault credential."
+          "description": "The properties of basic auth Azure Key Vault credential."
         }
       },
       "x-ms-discriminator-value": "BasicAuth"
@@ -5062,8 +5075,8 @@
       }
     },
     "RoleARNCredential": {
-      "type": "object",
       "description": "Credential type that uses Account ID, External ID and Role ARN for authentication.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Credential"
@@ -5077,8 +5090,8 @@
       "x-ms-discriminator-value": "AmazonARN"
     },
     "KeyVaultSecretServicePrinipalCredentialTypeProperties": {
-      "type": "object",
       "description": "The type properties of key vault secret service principal credential.",
+      "type": "object",
       "properties": {
         "servicePrincipalId": {
           "type": "string",
@@ -5093,7 +5106,7 @@
       }
     },
     "ServicePrincipalAzureKeyVaultCredentialProperties": {
-      "description": "The properties of service principal azure key vault credential.",
+      "description": "The properties of service principal Azure Key Vault credential.",
       "type": "object",
       "properties": {
         "typeProperties": {
@@ -5105,8 +5118,8 @@
       }
     },
     "ServicePrincipalAzureKeyVaultCredential": {
-      "type": "object",
       "description": "Credential type that uses Tenant ID and Service principal ID for authentication.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Credential"
@@ -5120,8 +5133,8 @@
       "x-ms-discriminator-value": "ServicePrincipal"
     },
     "SqlAuthAzureKeyVaultCredential": {
-      "type": "object",
       "description": "Credential type that uses Sql for authentication.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Credential"
@@ -5135,8 +5148,8 @@
       "x-ms-discriminator-value": "SqlAuth"
     },
     "KeyVaultSecretConsumerKeyCredentialTypeProperties": {
-      "type": "object",
       "description": "The type properties of key vault secret consumer key credential.",
+      "type": "object",
       "properties": {
         "user": {
           "type": "string"
@@ -5156,8 +5169,8 @@
       }
     },
     "ConsumerKeyCredentialProperties": {
-      "type": "object",
       "description": "The properties of consumer key credential.",
+      "type": "object",
       "properties": {
         "typeProperties": {
           "$ref": "#/definitions/KeyVaultSecretConsumerKeyCredentialTypeProperties"
@@ -5169,8 +5182,8 @@
       }
     },
     "ConsumerKeyAuthAzureKeyVaultCredential": {
-      "type": "object",
       "description": "Credential type that uses consumer provided key and secret for authentication.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Credential"
@@ -5184,8 +5197,8 @@
       "x-ms-discriminator-value": "ConsumerKeyAuth"
     },
     "KeyVaultSecretDelegatedAuthCredentialTypeProperties": {
-      "type": "object",
       "description": "The type properties of key vault secret delegated auth credential.",
+      "type": "object",
       "properties": {
         "clientId": {
           "type": "string"
@@ -5200,8 +5213,8 @@
       }
     },
     "DelegatedAuthCredentialProperties": {
-      "type": "object",
       "description": "The properties of delegated auth credential.",
+      "type": "object",
       "properties": {
         "typeProperties": {
           "$ref": "#/definitions/KeyVaultSecretDelegatedAuthCredentialTypeProperties"
@@ -5212,8 +5225,8 @@
       }
     },
     "DelegatedAuthAzureKeyVaultCredential": {
-      "type": "object",
       "description": "Credential type that uses Client ID for authentication.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Credential"
@@ -5222,36 +5235,36 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DelegatedAuthCredentialProperties",
-          "description": "The properties of delegated auth azure key vault credential."
+          "description": "The properties of delegated auth Azure Key Vault credential."
         }
       },
       "x-ms-discriminator-value": "DelegatedAuth"
     },
     "KeyVaultSecretManagedIdentityAzureKeyVaultCredentialTypeProperties": {
+      "description": "The type properties of key vault secret managed identity Azure Key Vault credential.",
       "type": "object",
-      "description": "The type properties of key vault secret managed identity azure key vault credential.",
       "properties": {
         "principalId": {
           "type": "string",
-          "description": "The principal ID of key vault secret managed identity azure key vault credential type properties."
+          "description": "The principal ID of key vault secret managed identity Azure Key Vault credential type properties."
         },
         "tenantId": {
           "type": "string",
-          "description": "The tenant ID of key vault secret managed identity azure key vault credential type properties."
+          "description": "The tenant ID of key vault secret managed identity Azure Key Vault credential type properties."
         },
         "resourceId": {
           "type": "string",
-          "description": "The resource ID of key vault secret managed identity azure key vault credential type properties."
+          "description": "The resource ID of key vault secret managed identity Azure Key Vault credential type properties."
         }
       }
     },
     "ManagedIdentityAzureKeyVaultCredentialProperties": {
+      "description": "The properties of managed identity Azure Key Vault credential.",
       "type": "object",
-      "description": "The properties of managed identity azure key vault credential.",
       "properties": {
         "typeProperties": {
           "$ref": "#/definitions/KeyVaultSecretManagedIdentityAzureKeyVaultCredentialTypeProperties",
-          "description": "The type properties of managed identity azure key vault credential."
+          "description": "The type properties of managed identity Azure Key Vault credential."
         },
         "description": {
           "type": "string"
@@ -5259,8 +5272,8 @@
       }
     },
     "ManagedIdentityAzureKeyVaultCredential": {
-      "type": "object",
       "description": "Credential type that uses User assigned managed identities for authentication.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Credential"
@@ -5269,7 +5282,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ManagedIdentityAzureKeyVaultCredentialProperties",
-          "description": "The properties of managed identity azure key vault credential."
+          "description": "The properties of managed identity Azure Key Vault credential."
         }
       },
       "x-ms-discriminator-value": "ManagedIdentity"
@@ -5358,6 +5371,7 @@
       "x-ms-discriminator-value": "AzureSubscription"
     },
     "AzureResourceGroupProperties": {
+      "description": "Azure resource group properties.",
       "type": "object",
       "allOf": [
         {
@@ -5394,6 +5408,7 @@
       }
     },
     "AzureResourceGroupDataSource": {
+      "description": "Azure resource group data source.",
       "type": "object",
       "allOf": [
         {
@@ -5409,6 +5424,7 @@
       "x-ms-discriminator-value": "AzureResourceGroup"
     },
     "AzureDataSourceProperties": {
+      "description": "Azure data source properties.",
       "type": "object",
       "allOf": [
         {
@@ -5453,8 +5469,8 @@
       }
     },
     "AzureSynapseWorkspaceProperties": {
-      "type": "object",
       "description": "Azure synapse workspace data source properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -5472,8 +5488,8 @@
       }
     },
     "AzureSynapseWorkspaceDataSource": {
-      "type": "object",
       "description": "Azure synapse workspace data source.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -5488,8 +5504,8 @@
       "x-ms-discriminator-value": "AzureSynapseWorkspace"
     },
     "AzureSynapseProperties": {
-      "type": "object",
       "description": "Azure synapse data source properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -5507,8 +5523,8 @@
       }
     },
     "AzureSynapseDataSource": {
-      "type": "object",
       "description": "Azure synapse data source.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -5523,8 +5539,8 @@
       "x-ms-discriminator-value": "AzureSynapse"
     },
     "AdlsGen1Properties": {
+      "description": "The properties of ADLS Gen1.",
       "type": "object",
-      "description": "The properties of adls gen1.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -5533,13 +5549,13 @@
       "properties": {
         "endpoint": {
           "type": "string",
-          "description": "The endpoint of adls gen1."
+          "description": "The endpoint of ADLS Gen1."
         }
       }
     },
     "AdlsGen1DataSource": {
+      "description": "The ADLS Gen1 data source.",
       "type": "object",
-      "description": "The adls gen1 data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -5548,14 +5564,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AdlsGen1Properties",
-          "description": "The properties of adls gen1."
+          "description": "The properties of ADLS Gen1."
         }
       },
       "x-ms-discriminator-value": "AdlsGen1"
     },
     "AdlsGen2Properties": {
+      "description": "The properties of ADLS Gen2.",
       "type": "object",
-      "description": "The properties of adls gen2.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -5568,8 +5584,8 @@
       }
     },
     "AdlsGen2DataSource": {
+      "description": "The ADLS Gen2 data source.",
       "type": "object",
-      "description": "The adls gen2 data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -5578,14 +5594,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AdlsGen2Properties",
-          "description": "The properties of adls gen2."
+          "description": "The properties of ADLS Gen2."
         }
       },
       "x-ms-discriminator-value": "AdlsGen2"
     },
     "AmazonAccountProperties": {
+      "description": "The properties of Amazon account.",
       "type": "object",
-      "description": "The properties of amazon account.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -5594,7 +5610,7 @@
       "properties": {
         "awsAccountId": {
           "type": "string",
-          "description": "Aws account id."
+          "description": "AWS account id."
         },
         "roleARN": {
           "type": "string",
@@ -5603,8 +5619,8 @@
       }
     },
     "AmazonAccountDataSource": {
+      "description": "The Amazon account data source.",
       "type": "object",
-      "description": "The amazon account data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -5613,14 +5629,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AmazonAccountProperties",
-          "description": "The properties of amazon account."
+          "description": "The properties of Amazon account."
         }
       },
       "x-ms-discriminator-value": "AmazonAccount"
     },
     "AmazonS3Properties": {
+      "description": "The properties of Amazon S3.",
       "type": "object",
-      "description": "The properties of amazon s3.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -5638,8 +5654,8 @@
       }
     },
     "AmazonS3DataSource": {
+      "description": "The Amazon S3 data source.",
       "type": "object",
-      "description": "The amazon s3 data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -5648,14 +5664,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AmazonS3Properties",
-          "description": "Amazon s3 properties."
+          "description": "Amazon S3 properties."
         }
       },
       "x-ms-discriminator-value": "AmazonS3"
     },
     "AmazonSqlProperties": {
+      "description": "The properties of Amazon SQL.",
       "type": "object",
-      "description": "The properties of amazon sql.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -5678,8 +5694,8 @@
       }
     },
     "AmazonSqlDataSource": {
+      "description": "The Amazon SQL data source.",
       "type": "object",
-      "description": "The amazon sql data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -5688,14 +5704,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AmazonSqlProperties",
-          "description": "Amazon sql properties."
+          "description": "Amazon SQL properties."
         }
       },
       "x-ms-discriminator-value": "AmazonSql"
     },
     "AzureCosmosDbProperties": {
+      "description": "The properties of Azure Cosmos DB.",
       "type": "object",
-      "description": "The properties of azure cosmos db.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -5704,13 +5720,13 @@
       "properties": {
         "accountUri": {
           "type": "string",
-          "description": "The account URI of azure cosmos db."
+          "description": "The account URI of Azure Cosmos DB."
         }
       }
     },
     "AzureCosmosDbDataSource": {
+      "description": "The Azure Cosmos DB data source.",
       "type": "object",
-      "description": "The azure cosmos db data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -5719,14 +5735,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AzureCosmosDbProperties",
-          "description": "The properties of azure cosmos db."
+          "description": "The properties of Azure Cosmos DB."
         }
       },
       "x-ms-discriminator-value": "AzureCosmosDb"
     },
     "AzureDataExplorerProperties": {
-      "type": "object",
       "description": "The properties of azure data explorer.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -5739,6 +5755,7 @@
       }
     },
     "AzureDataExplorerDataSource": {
+      "description": "The azure data explorer data source.",
       "type": "object",
       "allOf": [
         {
@@ -5754,8 +5771,8 @@
       "x-ms-discriminator-value": "AzureDataExplorer"
     },
     "AzureFileServiceProperties": {
-      "type": "object",
       "description": "The properties of azure file service.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -5769,8 +5786,8 @@
       }
     },
     "AzureFileServiceDataSource": {
-      "type": "object",
       "description": "The azure file service data source.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -5785,8 +5802,8 @@
       "x-ms-discriminator-value": "AzureFileService"
     },
     "AzureSqlDatabaseProperties": {
+      "description": "The properties of Azure SQL database.",
       "type": "object",
-      "description": "The properties of azure sql database.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -5795,13 +5812,13 @@
       "properties": {
         "serverEndpoint": {
           "type": "string",
-          "description": "The server endpoint of azure sql database."
+          "description": "The server endpoint of Azure SQL database."
         }
       }
     },
     "AzureSqlDatabaseDataSource": {
+      "description": "The Azure SQL database data source.",
       "type": "object",
-      "description": "The azure sql database data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -5810,14 +5827,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AzureSqlDatabaseProperties",
-          "description": "The properties of azure sql database."
+          "description": "The properties of Azure SQL database."
         }
       },
       "x-ms-discriminator-value": "AzureSqlDatabase"
     },
     "AmazonPostgreSqlProperties": {
+      "description": "The properties of Amazon Postgre SQL.",
       "type": "object",
-      "description": "The properties of amazon postgre sql.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -5826,22 +5843,22 @@
       "properties": {
         "serverEndpoint": {
           "type": "string",
-          "description": "The server endpoint of amazon postgre sql."
+          "description": "The server endpoint of Amazon Postgre SQL."
         },
         "port": {
           "format": "int32",
           "type": "integer",
-          "description": "The port of amazon postgre sql."
+          "description": "The port of Amazon Postgre SQL."
         },
         "vpcEndpointServiceName": {
           "type": "string",
-          "description": "The vpc endpoint service name of amazon postgre sql."
+          "description": "The vpc endpoint service name of Amazon Postgre SQL."
         }
       }
     },
     "AmazonPostgreSqlDataSource": {
+      "description": "The Amazon Postgre SQL data source.",
       "type": "object",
-      "description": "The amazon postgre sql data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -5850,14 +5867,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AmazonPostgreSqlProperties",
-          "description": "The properties of amazon postgre sql."
+          "description": "The properties of Amazon Postgre SQL."
         }
       },
       "x-ms-discriminator-value": "AmazonPostgreSql"
     },
     "AzurePostgreSqlProperties": {
+      "description": "The properties of Azure Postgre SQL.",
       "type": "object",
-      "description": "The properties of azure postgre sql.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -5866,7 +5883,7 @@
       "properties": {
         "serverEndpoint": {
           "type": "string",
-          "description": "The server endpoint of azure postgre sql."
+          "description": "The server endpoint of Azure Postgre SQL."
         },
         "port": {
           "format": "int32",
@@ -5875,8 +5892,8 @@
       }
     },
     "AzurePostgreSqlDataSource": {
+      "description": "The Azure Postgre SQL data source.",
       "type": "object",
-      "description": "The azure postgre sql data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -5885,14 +5902,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AzurePostgreSqlProperties",
-          "description": "The properties of azure postgre sql."
+          "description": "The properties of Azure Postgre SQL."
         }
       },
       "x-ms-discriminator-value": "AzurePostgreSql"
     },
     "SqlServerDatabaseProperties": {
-      "type": "object",
       "description": "The properties of sql server database.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -5906,8 +5923,8 @@
       }
     },
     "SqlServerDatabaseDataSource": {
-      "type": "object",
       "description": "The sql server database data source.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -5921,8 +5938,8 @@
       "x-ms-discriminator-value": "SqlServerDatabase"
     },
     "AzureSqlDatabaseManagedInstanceProperties": {
+      "description": "The properties of Azure SQL database managed instance.",
       "type": "object",
-      "description": "The properties of azure sql database managed instance.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -5935,8 +5952,8 @@
       }
     },
     "AzureSqlDatabaseManagedInstanceDataSource": {
+      "description": "The Azure SQL database managed instance data source.",
       "type": "object",
-      "description": "The azure sql database managed instance data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -5950,8 +5967,8 @@
       "x-ms-discriminator-value": "AzureSqlDatabaseManagedInstance"
     },
     "AzureSqlDataWarehouseProperties": {
+      "description": "The properties of Azure SQL data warehouse.",
       "type": "object",
-      "description": "The properties of azure sql data warehouse.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -5964,8 +5981,8 @@
       }
     },
     "AzureSqlDataWarehouseDataSource": {
+      "description": "The Azure SQL data warehouse data source.",
       "type": "object",
-      "description": "The azure sql data warehouse data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -5979,8 +5996,8 @@
       "x-ms-discriminator-value": "AzureSqlDataWarehouse"
     },
     "AzureMySqlProperties": {
+      "description": "Azure MySQL data source properties.",
       "type": "object",
-      "description": "Azure MySql data source properties.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -5999,8 +6016,8 @@
       }
     },
     "AzureMySqlDataSource": {
+      "description": "Azure MySQL data source.",
       "type": "object",
-      "description": "Azure MySql data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6009,14 +6026,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AzureMySqlProperties",
-          "description": "Azure MySql properties."
+          "description": "Azure MySQL properties."
         }
       },
       "x-ms-discriminator-value": "AzureMySql"
     },
     "AzureStorageProperties": {
+      "description": "The properties of Azure Storage.",
       "type": "object",
-      "description": "The properties of azure storage.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureDataSourceProperties"
@@ -6025,13 +6042,13 @@
       "properties": {
         "endpoint": {
           "type": "string",
-          "description": "The endpoint of azure storage."
+          "description": "The endpoint of Azure Storage."
         }
       }
     },
     "AzureStorageDataSource": {
+      "description": "The Azure Storage data source.",
       "type": "object",
-      "description": "The azure storage data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6040,14 +6057,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AzureStorageProperties",
-          "description": "The properties of azure storage."
+          "description": "The properties of Azure Storage."
         }
       },
       "x-ms-discriminator-value": "AzureStorage"
     },
     "TeradataProperties": {
-      "type": "object",
       "description": "The properties of teradata.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -6061,8 +6078,8 @@
       }
     },
     "TeradataDataSource": {
-      "type": "object",
       "description": "The teradata data source.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6076,8 +6093,8 @@
       "x-ms-discriminator-value": "Teradata"
     },
     "OracleProperties": {
-      "type": "object",
       "description": "The properties of oracle.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -6085,19 +6102,22 @@
       ],
       "properties": {
         "host": {
+          "description": "The host of Oracle server.",
           "type": "string"
         },
         "port": {
+          "description": "The port of Oracle server.",
           "type": "string"
         },
         "service": {
+          "description": "The service of Oracle server.",
           "type": "string"
         }
       }
     },
     "OracleDataSource": {
-      "type": "object",
       "description": "The oracle data source.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6111,8 +6131,8 @@
       "x-ms-discriminator-value": "Oracle"
     },
     "SapS4HanaProperties": {
+      "description": "SAP S/4HANA data source properties.",
       "type": "object",
-      "description": "Sap S4 Hana data source properties.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -6121,17 +6141,17 @@
       "properties": {
         "applicationServer": {
           "type": "string",
-          "description": "The application server of sap s4 hana."
+          "description": "The application server of SAP S/4HANA."
         },
         "systemNumber": {
           "type": "string",
-          "description": "The system number of sap s4 hana."
+          "description": "The system number of SAP S/4HANA."
         }
       }
     },
     "SapS4HanaDataSource": {
+      "description": "SAP S/4HANA data source.",
       "type": "object",
-      "description": "Sap S4 Hana data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6145,8 +6165,8 @@
       "x-ms-discriminator-value": "SapS4Hana"
     },
     "SapEccProperties": {
+      "description": "SAP ECC properties.",
       "type": "object",
-      "description": "Sap Ecc properties.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -6154,16 +6174,18 @@
       ],
       "properties": {
         "applicationServer": {
+          "description": "The application server of SAP ECC.",
           "type": "string"
         },
         "systemNumber": {
+          "description": "The system number of SAP ECC.",
           "type": "string"
         }
       }
     },
     "SapEccDataSource": {
+      "description": "SAP ECC data source.",
       "type": "object",
-      "description": "Sap Ecc data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6177,8 +6199,8 @@
       "x-ms-discriminator-value": "SapEcc"
     },
     "PowerBIProperties": {
+      "description": "Power BI properties.",
       "type": "object",
-      "description": "Power bi properties.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSourceProperties"
@@ -6186,13 +6208,14 @@
       ],
       "properties": {
         "tenant": {
+          "description": "The tenant of Power BI.",
           "type": "string"
         }
       }
     },
     "PowerBIDataSource": {
+      "description": "Power BI data source.",
       "type": "object",
-      "description": "Power bi data source.",
       "allOf": [
         {
           "$ref": "#/definitions/DataSource"
@@ -6206,30 +6229,30 @@
       "x-ms-discriminator-value": "PowerBI"
     },
     "ScanRulesetProperties": {
-      "type": "object",
       "description": "Scan ruleset properties.",
+      "type": "object",
       "properties": {
         "createdAt": {
+          "description": "The time at which the scan ruleset was created.",
           "format": "date-time",
           "type": "string",
-          "description": "The time at which the scan ruleset was created.",
           "readOnly": true
         },
         "description": {
           "type": "string"
         },
         "excludedSystemClassifications": {
+          "description": "The system classifications that are excluded from the scan ruleset.",
           "uniqueItems": true,
           "type": "array",
-          "description": "The system classifications that are excluded from the scan ruleset.",
           "items": {
             "type": "string"
           }
         },
         "includedCustomClassificationRuleNames": {
+          "description": "The custom classification rule names that are included in the scan ruleset.",
           "uniqueItems": true,
           "type": "array",
-          "description": "The custom classification rule names that are included in the scan ruleset.",
           "items": {
             "type": "string"
           }
@@ -6243,8 +6266,8 @@
       }
     },
     "AzureSubscriptionScanRulesetProperties": {
-      "type": "object",
       "description": "Azure subscription scan ruleset properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6252,8 +6275,8 @@
       ]
     },
     "AzureSubscriptionScanRuleset": {
-      "type": "object",
       "description": "Azure subscription scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6261,15 +6284,15 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AzureSubscriptionScanRulesetProperties",
-          "description": "Azure subscription scan ruleset properties."
+          "description": "Azure subscription scan ruleset properties.",
+          "$ref": "#/definitions/AzureSubscriptionScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureSubscription"
     },
     "AzureResourceGroupScanRulesetProperties": {
-      "type": "object",
       "description": "Azure resource group scan ruleset properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6277,8 +6300,8 @@
       ]
     },
     "AzureResourceGroupScanRuleset": {
-      "type": "object",
       "description": "Azure resource group scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6286,15 +6309,15 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AzureResourceGroupScanRulesetProperties",
-          "description": "Azure resource group scan ruleset properties."
+          "description": "Azure resource group scan ruleset properties.",
+          "$ref": "#/definitions/AzureResourceGroupScanRulesetProperties"
         }
       },
       "x-ms-discriminator-value": "AzureResourceGroup"
     },
     "AzureSynapseWorkspaceScanRulesetProperties": {
-      "type": "object",
       "description": "Azure synapse workspace scan ruleset properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6302,8 +6325,8 @@
       ]
     },
     "AzureSynapseWorkspaceScanRuleset": {
-      "type": "object",
       "description": "Azure synapse workspace scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6318,8 +6341,8 @@
       "x-ms-discriminator-value": "AzureSynapseWorkspace"
     },
     "AzureSynapseScanRulesetProperties": {
-      "type": "object",
       "description": "Azure synapse scan ruleset properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6327,8 +6350,8 @@
       ]
     },
     "AzureSynapseScanRuleset": {
-      "type": "object",
       "description": "Azure synapse scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6343,10 +6366,11 @@
       "x-ms-discriminator-value": "AzureSynapse"
     },
     "CustomFileType": {
-      "type": "object",
       "description": "Custom file type.",
+      "type": "object",
       "properties": {
         "builtInType": {
+          "description": "The built-in file type of the custom file type.",
           "enum": [
             "AVRO",
             "ORC",
@@ -6382,7 +6406,6 @@
             "XLT"
           ],
           "type": "string",
-          "description": "The built-in file type of the custom file type.",
           "x-ms-enum": {
             "name": "FileExtensionsType",
             "modelAsString": true
@@ -6395,12 +6418,12 @@
       }
     },
     "CustomFileExtension": {
-      "type": "object",
       "description": "Custom file extension.",
+      "type": "object",
       "properties": {
         "customFileType": {
-          "$ref": "#/definitions/CustomFileType",
-          "description": "The custom file type of the custom file extension."
+          "description": "The custom file type of the custom file extension.",
+          "$ref": "#/definitions/CustomFileType"
         },
         "description": {
           "type": "string",
@@ -6417,13 +6440,14 @@
       }
     },
     "ScanningRule": {
-      "type": "object",
       "description": "Scanning rule.",
+      "type": "object",
       "properties": {
         "fileExtensions": {
           "uniqueItems": true,
           "type": "array",
           "items": {
+            "description": "The file extensions of the scanning rule.",
             "enum": [
               "AVRO",
               "ORC",
@@ -6459,7 +6483,6 @@
               "XLT"
             ],
             "type": "string",
-            "description": "The file extensions of the scanning rule.",
             "x-ms-enum": {
               "name": "FileExtensionsType",
               "modelAsString": true
@@ -6467,9 +6490,9 @@
           }
         },
         "customFileExtensions": {
+          "description": "The custom file extensions of the scanning rule.",
           "uniqueItems": true,
           "type": "array",
-          "description": "The custom file extensions of the scanning rule.",
           "items": {
             "$ref": "#/definitions/CustomFileExtension"
           }
@@ -6477,8 +6500,8 @@
       }
     },
     "ScanningRuleScanRulesetProperties": {
-      "type": "object",
       "description": "Scanning rule scan ruleset properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6492,8 +6515,8 @@
       }
     },
     "AdlsGen1ScanRulesetProperties": {
+      "description": "ADLS Gen1 scan ruleset properties.",
       "type": "object",
-      "description": "Adls gen1 scan ruleset properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
@@ -6501,8 +6524,8 @@
       ]
     },
     "AdlsGen1ScanRuleset": {
+      "description": "ADLS Gen1 scan ruleset.",
       "type": "object",
-      "description": "Adls gen1 scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6516,8 +6539,8 @@
       "x-ms-discriminator-value": "AdlsGen1"
     },
     "AdlsGen2ScanRulesetProperties": {
-      "type": "object",
       "description": "Adls gen 2 scan ruleset properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
@@ -6525,8 +6548,8 @@
       ]
     },
     "AdlsGen2ScanRuleset": {
-      "type": "object",
       "description": "Adls gen 2 scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6540,8 +6563,8 @@
       "x-ms-discriminator-value": "AdlsGen2"
     },
     "AmazonAccountScanRulesetProperties": {
-      "type": "object",
       "description": "Amazon account scan ruleset properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6549,8 +6572,8 @@
       ]
     },
     "AmazonAccountScanRuleset": {
-      "type": "object",
       "description": "Amazon account scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6564,8 +6587,8 @@
       "x-ms-discriminator-value": "AmazonAccount"
     },
     "AmazonS3ScanRulesetProperties": {
+      "description": "Amazon S3 scan ruleset properties.",
       "type": "object",
-      "description": "Amazon s3 scan ruleset properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
@@ -6573,8 +6596,8 @@
       ]
     },
     "AmazonS3ScanRuleset": {
+      "description": "Amazon S3 scan ruleset.",
       "type": "object",
-      "description": "Amazon s3 scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6588,8 +6611,8 @@
       "x-ms-discriminator-value": "AmazonS3"
     },
     "AmazonSqlScanRulesetProperties": {
+      "description": "Amazon SQL scan ruleset properties.",
       "type": "object",
-      "description": "Amazon sql scan ruleset properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6597,8 +6620,8 @@
       ]
     },
     "AmazonSqlScanRuleset": {
+      "description": "Amazon SQL scan ruleset.",
       "type": "object",
-      "description": "Amazon sql scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6612,8 +6635,8 @@
       "x-ms-discriminator-value": "AmazonSql"
     },
     "AzureCosmosDbScanRulesetProperties": {
+      "description": "Azure Cosmos DB scan ruleset properties.",
       "type": "object",
-      "description": "Azure cosmos db scan ruleset properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6621,8 +6644,8 @@
       ]
     },
     "AzureCosmosDbScanRuleset": {
+      "description": "Azure Cosmos DB scan ruleset.",
       "type": "object",
-      "description": "Azure cosmos db scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6636,8 +6659,8 @@
       "x-ms-discriminator-value": "AzureCosmosDb"
     },
     "AzureDataExplorerScanRulesetProperties": {
-      "type": "object",
       "description": "Azure data explorer scan ruleset properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6645,8 +6668,8 @@
       ]
     },
     "AzureDataExplorerScanRuleset": {
-      "type": "object",
       "description": "Azure data explorer scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6660,8 +6683,8 @@
       "x-ms-discriminator-value": "AzureDataExplorer"
     },
     "AzureFileServiceScanRulesetProperties": {
-      "type": "object",
       "description": "Azure file service scan ruleset properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
@@ -6669,8 +6692,8 @@
       ]
     },
     "AzureFileServiceScanRuleset": {
-      "type": "object",
       "description": "Azure file service scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6684,8 +6707,8 @@
       "x-ms-discriminator-value": "AzureFileService"
     },
     "AzureSqlDatabaseScanRulesetProperties": {
+      "description": "Azure SQL db scan ruleset properties.",
       "type": "object",
-      "description": "Azure sql db scan ruleset properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6693,8 +6716,8 @@
       ]
     },
     "AzureSqlDatabaseScanRuleset": {
+      "description": "Azure SQL db scan ruleset.",
       "type": "object",
-      "description": "Azure sql db scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6708,8 +6731,8 @@
       "x-ms-discriminator-value": "AzureSqlDatabase"
     },
     "AmazonPostgreSqlScanRulesetProperties": {
+      "description": "Azure Postgre SQL scan ruleset properties.",
       "type": "object",
-      "description": "Azure postgre sql scan ruleset properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6717,8 +6740,8 @@
       ]
     },
     "AmazonPostgreSqlScanRuleset": {
+      "description": "Azure Postgre SQL scan ruleset.",
       "type": "object",
-      "description": "Azure postgre sql scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6732,8 +6755,8 @@
       "x-ms-discriminator-value": "AmazonPostgreSql"
     },
     "AzurePostgreSqlScanRulesetProperties": {
+      "description": "Azure Postgre SQL scan ruleset properties.",
       "type": "object",
-      "description": "Azure postgre sql scan ruleset properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6741,8 +6764,8 @@
       ]
     },
     "AzurePostgreSqlScanRuleset": {
+      "description": "Azure Postgre SQL scan ruleset.",
       "type": "object",
-      "description": "Azure postgre sql scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6756,8 +6779,8 @@
       "x-ms-discriminator-value": "AzurePostgreSql"
     },
     "SqlServerDatabaseScanRulesetProperties": {
-      "type": "object",
       "description": "Sql server database scan ruleset properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6765,8 +6788,8 @@
       ]
     },
     "SqlServerDatabaseScanRuleset": {
-      "type": "object",
       "description": "Sql server database scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6780,8 +6803,8 @@
       "x-ms-discriminator-value": "SqlServerDatabase"
     },
     "AzureSqlDatabaseManagedInstanceScanRulesetProperties": {
+      "description": "Azure SQL db managed instance scan ruleset properties.",
       "type": "object",
-      "description": "Azure sql db managed instance scan ruleset properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6789,8 +6812,8 @@
       ]
     },
     "AzureSqlDatabaseManagedInstanceScanRuleset": {
+      "description": "Azure SQL db managed instance scan ruleset.",
       "type": "object",
-      "description": "Azure sql db managed instance scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6804,8 +6827,8 @@
       "x-ms-discriminator-value": "AzureSqlDatabaseManagedInstance"
     },
     "AzureSqlDataWarehouseScanRulesetProperties": {
+      "description": "Azure SQL data warehouse scan ruleset properties.",
       "type": "object",
-      "description": "Azure sql data ware house scan ruleset properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6813,8 +6836,8 @@
       ]
     },
     "AzureSqlDataWarehouseScanRuleset": {
+      "description": "Azure SQL data warehouse scan ruleset.",
       "type": "object",
-      "description": "Azure sql data ware house scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6828,8 +6851,8 @@
       "x-ms-discriminator-value": "AzureSqlDataWarehouse"
     },
     "AzureMySqlScanRulesetProperties": {
+      "description": "Azure MySQL scan ruleset properties.",
       "type": "object",
-      "description": "Azure mysql scan ruleset properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6837,8 +6860,8 @@
       ]
     },
     "AzureMySqlScanRuleset": {
+      "description": "Azure MySQL scan ruleset.",
       "type": "object",
-      "description": "Azure mysql scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6852,8 +6875,8 @@
       "x-ms-discriminator-value": "AzureMySql"
     },
     "AzureStorageScanRulesetProperties": {
+      "description": "Azure Storage scan ruleset properties.",
       "type": "object",
-      "description": "Azure storage scan ruleset properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
@@ -6861,8 +6884,8 @@
       ]
     },
     "AzureStorageScanRuleset": {
+      "description": "Azure Storage scan ruleset.",
       "type": "object",
-      "description": "Azure storage scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6876,8 +6899,8 @@
       "x-ms-discriminator-value": "AzureStorage"
     },
     "TeradataScanRulesetProperties": {
-      "type": "object",
       "description": "Teradata scan ruleset properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
@@ -6885,8 +6908,8 @@
       ]
     },
     "TeradataScanRuleset": {
-      "type": "object",
       "description": "Teradata scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6900,8 +6923,8 @@
       "x-ms-discriminator-value": "Teradata"
     },
     "OracleScanRulesetProperties": {
-      "type": "object",
       "description": "Oracle scan rule set properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanningRuleScanRulesetProperties"
@@ -6909,8 +6932,8 @@
       ]
     },
     "OracleScanRuleset": {
-      "type": "object",
       "description": "Oracle scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6924,8 +6947,8 @@
       "x-ms-discriminator-value": "Oracle"
     },
     "SapS4HanaScanRulesetProperties": {
+      "description": "SAP S/4HANA scan ruleset properties.",
       "type": "object",
-      "description": "Sap S4 Hana scan ruleset properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6933,8 +6956,8 @@
       ]
     },
     "SapS4HanaScanRuleset": {
+      "description": "SAP S/4HANA scan ruleset.",
       "type": "object",
-      "description": "Sap S4 Hana scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6948,8 +6971,8 @@
       "x-ms-discriminator-value": "SapS4Hana"
     },
     "SapEccScanRulesetProperties": {
+      "description": "SAP ECC scan ruleset properties.",
       "type": "object",
-      "description": "Sap Ecc scan ruleset properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6957,8 +6980,8 @@
       ]
     },
     "SapEccScanRuleset": {
+      "description": "SAP ECC scan ruleset.",
       "type": "object",
-      "description": "Sap Ecc scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -6972,8 +6995,8 @@
       "x-ms-discriminator-value": "SapEcc"
     },
     "PowerBIScanRulesetProperties": {
+      "description": "Power BI scan ruleset properties.",
       "type": "object",
-      "description": "Power bi scan ruleset properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRulesetProperties"
@@ -6981,8 +7004,8 @@
       ]
     },
     "PowerBIScanRuleset": {
+      "description": "Power BI scan ruleset.",
       "type": "object",
-      "description": "Power bi scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanRuleset"
@@ -7022,13 +7045,15 @@
       }
     },
     "CredentialReference": {
+      "description": "The credential reference.",
       "type": "object",
-      "description": "Credential reference.",
       "properties": {
         "referenceName": {
+          "description": "The reference name of the credential.",
           "type": "string"
         },
         "credentialType": {
+          "description": "The type of the credential.",
           "enum": [
             "AccountKey",
             "ServicePrincipal",
@@ -7048,8 +7073,8 @@
       }
     },
     "ResourceTypeFilter": {
-      "type": "object",
       "description": "Resource type filter.",
+      "type": "object",
       "properties": {
         "scanRulesetName": {
           "type": "string",
@@ -7076,8 +7101,8 @@
       }
     },
     "ConnectedVia": {
-      "type": "object",
       "description": "The integration runtime reference.",
+      "type": "object",
       "properties": {
         "referenceName": {
           "type": "string",
@@ -7091,8 +7116,8 @@
       }
     },
     "ScanProperties": {
-      "type": "object",
       "description": "Scan properties.",
+      "type": "object",
       "properties": {
         "scanRulesetName": {
           "type": "string",
@@ -7163,8 +7188,8 @@
       }
     },
     "ExpandingResourceScanProperties": {
-      "type": "object",
       "description": "Expanding resource scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -7180,8 +7205,8 @@
       }
     },
     "ExpandingResourceScanPropertiesResourceTypes": {
-      "type": "object",
       "description": "Resource types of scan properties in expanding resources.",
+      "type": "object",
       "properties": {
         "none": {
           "$ref": "#/definitions/ResourceTypeFilter"
@@ -7264,8 +7289,8 @@
       }
     },
     "AzureSubscriptionCredentialScanProperties": {
-      "type": "object",
       "description": "Azure subscription credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
@@ -7273,8 +7298,8 @@
       ]
     },
     "AzureSubscriptionCredentialScan": {
-      "type": "object",
       "description": "Azure subscription credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7288,8 +7313,8 @@
       "x-ms-discriminator-value": "AzureSubscriptionCredential"
     },
     "AzureSubscriptionMsiScanProperties": {
-      "type": "object",
       "description": "Azure subscription MSI scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
@@ -7297,8 +7322,8 @@
       ]
     },
     "AzureSubscriptionMsiScan": {
-      "type": "object",
       "description": "Azure subscription MSI scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7312,8 +7337,8 @@
       "x-ms-discriminator-value": "AzureSubscriptionMsi"
     },
     "AzureResourceGroupCredentialScanProperties": {
-      "type": "object",
       "description": "Azure resource group credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
@@ -7321,8 +7346,8 @@
       ]
     },
     "AzureResourceGroupCredentialScan": {
-      "type": "object",
       "description": "Azure resource group credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7336,8 +7361,8 @@
       "x-ms-discriminator-value": "AzureResourceGroupCredential"
     },
     "AzureResourceGroupMsiScanProperties": {
-      "type": "object",
       "description": "Azure resource group MSI scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
@@ -7345,8 +7370,8 @@
       ]
     },
     "AzureResourceGroupMsiScan": {
-      "type": "object",
       "description": "Azure resource group MSI scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7360,8 +7385,8 @@
       "x-ms-discriminator-value": "AzureResourceGroupMsi"
     },
     "AzureSynapseWorkspaceCredentialScanProperties": {
-      "type": "object",
       "description": "Azure synapse workspace credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
@@ -7369,8 +7394,8 @@
       ]
     },
     "AzureSynapseWorkspaceCredentialScan": {
-      "type": "object",
       "description": "Azure synapse workspace credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7384,8 +7409,8 @@
       "x-ms-discriminator-value": "AzureSynapseWorkspaceCredential"
     },
     "AzureSynapseWorkspaceMsiScanProperties": {
-      "type": "object",
       "description": "Azure synapse workspace MSI scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
@@ -7393,8 +7418,8 @@
       ]
     },
     "AzureSynapseWorkspaceMsiScan": {
-      "type": "object",
       "description": "Azure synapse workspace MSI scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7408,8 +7433,8 @@
       "x-ms-discriminator-value": "AzureSynapseWorkspaceMsi"
     },
     "AzureSynapseCredentialScanProperties": {
-      "type": "object",
       "description": "Azure synapse credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
@@ -7417,8 +7442,8 @@
       ]
     },
     "AzureSynapseCredentialScan": {
-      "type": "object",
       "description": "Azure synapse credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7432,8 +7457,8 @@
       "x-ms-discriminator-value": "AzureSynapseCredential"
     },
     "AzureSynapseMsiScanProperties": {
-      "type": "object",
       "description": "Azure synapse MSI scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
@@ -7441,8 +7466,8 @@
       ]
     },
     "AzureSynapseMsiScan": {
-      "type": "object",
       "description": "Azure synapse MSI scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7456,8 +7481,8 @@
       "x-ms-discriminator-value": "AzureSynapseMsi"
     },
     "AdlsGen1CredentialScanProperties": {
-      "type": "object",
       "description": "ADLS Gen1 credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -7470,8 +7495,8 @@
       }
     },
     "AdlsGen1CredentialScan": {
-      "type": "object",
       "description": "ADLS Gen1 credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7485,8 +7510,8 @@
       "x-ms-discriminator-value": "AdlsGen1Credential"
     },
     "AdlsGen1MsiScanProperties": {
-      "type": "object",
       "description": "ADLS Gen1 MSI scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -7494,8 +7519,8 @@
       ]
     },
     "AdlsGen1MsiScan": {
-      "type": "object",
       "description": "ADLS Gen1 MSI scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7509,8 +7534,8 @@
       "x-ms-discriminator-value": "AdlsGen1Msi"
     },
     "AdlsGen2CredentialScanProperties": {
-      "type": "object",
       "description": "ADLS Gen2 credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -7523,8 +7548,8 @@
       }
     },
     "AdlsGen2CredentialScan": {
-      "type": "object",
       "description": "ADLS Gen2 credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7538,8 +7563,8 @@
       "x-ms-discriminator-value": "AdlsGen2Credential"
     },
     "AdlsGen2MsiScanProperties": {
-      "type": "object",
       "description": "ADLS Gen2 MSI scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -7547,8 +7572,8 @@
       ]
     },
     "AdlsGen2MsiScan": {
-      "type": "object",
       "description": "ADLS Gen2 MSI scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7562,8 +7587,8 @@
       "x-ms-discriminator-value": "AdlsGen2Msi"
     },
     "AmazonAccountCredentialScanProperties": {
-      "type": "object",
       "description": "Amazon account credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExpandingResourceScanProperties"
@@ -7571,8 +7596,8 @@
       ]
     },
     "AmazonAccountCredentialScan": {
-      "type": "object",
       "description": "Amazon account credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7586,8 +7611,8 @@
       "x-ms-discriminator-value": "AmazonAccountCredential"
     },
     "AmazonS3CredentialScanProperties": {
-      "type": "object",
       "description": "Amazon S3 credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -7606,8 +7631,8 @@
       }
     },
     "AmazonS3CredentialScan": {
+      "description": "Amazon S3 credential scan.",
       "type": "object",
-      "description": "Amazon S3 Credential scan.",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7621,8 +7646,8 @@
       "x-ms-discriminator-value": "AmazonS3Credential"
     },
     "AmazonS3RoleARNScanProperties": {
-      "type": "object",
       "description": "Amazon S3 role ARN scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -7643,8 +7668,8 @@
       }
     },
     "AmazonS3RoleARNScan": {
-      "type": "object",
       "description": "Amazon S3 role ARN scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7658,8 +7683,8 @@
       "x-ms-discriminator-value": "AmazonS3RoleARN"
     },
     "AmazonSqlCredentialScanProperties": {
-      "type": "object",
       "description": "Amazon SQL credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -7670,27 +7695,27 @@
           "$ref": "#/definitions/CredentialReference"
         },
         "serverEndpoint": {
-          "type": "string",
-          "description": "The server endpoint of the scan."
+          "description": "The endpoint of Amazon SQL server.",
+          "type": "string"
         },
         "databaseName": {
-          "type": "string",
-          "description": "The database name of the scan."
+          "description": "The database name.",
+          "type": "string"
         },
         "port": {
+          "description": "The port of Amazon SQL server.",
           "format": "int32",
-          "type": "integer",
-          "description": "The port of the scan."
+          "type": "integer"
         },
         "vpcEndpointServiceName": {
           "type": "string",
-          "description": "The VPC endpoint service name of the scan."
+          "description": "The VPC endpoint service name of Amazon SQL server."
         }
       }
     },
     "AmazonSqlCredentialScan": {
-      "type": "object",
       "description": "Amazon SQL credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7704,8 +7729,8 @@
       "x-ms-discriminator-value": "AmazonSqlCredential"
     },
     "AzureCosmosDbCredentialScanProperties": {
-      "type": "object",
       "description": "Azure Cosmos DB credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -7721,8 +7746,8 @@
       }
     },
     "AzureCosmosDbCredentialScan": {
-      "type": "object",
       "description": "Azure Cosmos DB credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7736,8 +7761,8 @@
       "x-ms-discriminator-value": "AzureCosmosDbCredential"
     },
     "AzureDataExplorerCredentialScanProperties": {
-      "type": "object",
       "description": "Azure data Explorer credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -7753,8 +7778,8 @@
       }
     },
     "AzureDataExplorerCredentialScan": {
-      "type": "object",
       "description": "Azure data Explorer credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7768,8 +7793,8 @@
       "x-ms-discriminator-value": "AzureDataExplorerCredential"
     },
     "AzureDataExplorerMsiScanProperties": {
-      "type": "object",
       "description": "Azure data Explorer MSI scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -7782,8 +7807,8 @@
       }
     },
     "AzureDataExplorerMsiScan": {
-      "type": "object",
       "description": "Azure data Explorer MSI scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7797,8 +7822,8 @@
       "x-ms-discriminator-value": "AzureDataExplorerMsi"
     },
     "AzureFileServiceCredentialScanProperties": {
-      "type": "object",
       "description": "Azure file service credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -7814,8 +7839,8 @@
       }
     },
     "AzureFileServiceCredentialScan": {
-      "type": "object",
       "description": "Azure file service credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7829,8 +7854,8 @@
       "x-ms-discriminator-value": "AzureFileServiceCredential"
     },
     "AzureSqlScanProperties": {
-      "type": "object",
       "description": "Azure SQL scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -7838,16 +7863,18 @@
       ],
       "properties": {
         "serverEndpoint": {
+          "description": "The endpoint of Azure SQL server.",
           "type": "string"
         },
         "databaseName": {
+          "description": "The database name.",
           "type": "string"
         }
       }
     },
     "AzureSqlCredentialScanProperties": {
-      "type": "object",
       "description": "Azure SQL credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AzureSqlScanProperties"
@@ -7869,8 +7896,8 @@
       ]
     },
     "AzureSqlDatabaseCredentialScan": {
-      "type": "object",
       "description": "Azure SQL database credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7884,8 +7911,8 @@
       "x-ms-discriminator-value": "AzureSqlDatabaseCredential"
     },
     "AzureSqlDatabaseMsiScanProperties": {
-      "type": "object",
       "description": "Azure SQL database MSI scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AzureSqlScanProperties"
@@ -7893,8 +7920,8 @@
       ]
     },
     "AzureSqlDatabaseMsiScan": {
-      "type": "object",
       "description": "Azure SQL database MSI scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7908,8 +7935,8 @@
       "x-ms-discriminator-value": "AzureSqlDatabaseMsi"
     },
     "AmazonPostgreSqlCredentialScanProperties": {
+      "description": "Amazon Postgre SQL credential scan properties.",
       "type": "object",
-      "description": "Amazon Postgre sql credential scan properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -7920,23 +7947,27 @@
           "$ref": "#/definitions/CredentialReference"
         },
         "serverEndpoint": {
+          "description": "The endpoint of Amazon Postgre SQL server.",
           "type": "string"
         },
         "databaseName": {
+          "description": "The database name.",
           "type": "string"
         },
         "port": {
+          "description": "The port of Amazon Postgre SQL server.",
           "format": "int32",
           "type": "integer"
         },
         "vpcEndpointServiceName": {
+          "description": "The vpc endpoint service name of Amazon Postgre SQL server.",
           "type": "string"
         }
       }
     },
     "AmazonPostgreSqlCredentialScan": {
+      "description": "Amazon Postgre SQL credential scan.",
       "type": "object",
-      "description": "Amazon postgre sql credential scan.",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7950,8 +7981,8 @@
       "x-ms-discriminator-value": "AmazonPostgreSqlCredential"
     },
     "AzurePostgreSqlCredentialScanProperties": {
+      "description": "Azure Postgre SQL credential scan properties.",
       "type": "object",
-      "description": "Azure Postgre sql credential scan properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -7962,24 +7993,28 @@
           "$ref": "#/definitions/CredentialReference"
         },
         "serverEndpoint": {
+          "description": "The endpoint of Azure Postgre SQL server.",
           "type": "string"
         },
         "databaseName": {
+          "description": "The database name.",
           "type": "string"
         },
         "port": {
+          "description": "The port of Azure Postgre SQL server.",
           "format": "int32",
           "type": "integer"
         },
         "sslMode": {
+          "description": "The SSL mode of Azure Postgre SQL server.",
           "format": "int32",
           "type": "integer"
         }
       }
     },
     "AzurePostgreSqlCredentialScan": {
+      "description": "Azure Postgre SQL credential scan.",
       "type": "object",
-      "description": "Azure postgre sql credential scan.",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -7993,8 +8028,8 @@
       "x-ms-discriminator-value": "AzurePostgreSqlCredential"
     },
     "SqlServerDatabaseCredentialScanProperties": {
-      "type": "object",
       "description": "SQL server database credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AzureSqlCredentialScanProperties"
@@ -8002,8 +8037,8 @@
       ]
     },
     "SqlServerDatabaseCredentialScan": {
-      "type": "object",
       "description": "SQL server database credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8017,8 +8052,8 @@
       "x-ms-discriminator-value": "SqlServerDatabaseCredential"
     },
     "AzureSqlDatabaseManagedInstanceCredentialScanProperties": {
-      "type": "object",
       "description": "Azure SQL database managed instance credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AzureSqlCredentialScanProperties"
@@ -8026,8 +8061,8 @@
       ]
     },
     "AzureSqlDatabaseManagedInstanceCredentialScan": {
-      "type": "object",
       "description": "Azure SQL database managed instance credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8041,8 +8076,8 @@
       "x-ms-discriminator-value": "AzureSqlDatabaseManagedInstanceCredential"
     },
     "AzureSqlDatabaseManagedInstanceMsiScanProperties": {
-      "type": "object",
       "description": "Azure SQL database managed instance MSI scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AzureSqlScanProperties"
@@ -8050,8 +8085,8 @@
       ]
     },
     "AzureSqlDatabaseManagedInstanceMsiScan": {
-      "type": "object",
       "description": "Azure SQL database managed instance MSI scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8065,8 +8100,8 @@
       "x-ms-discriminator-value": "AzureSqlDatabaseManagedInstanceMsi"
     },
     "AzureSqlDataWarehouseCredentialScanProperties": {
+      "description": "Azure SQL data warehouse credential scan properties.",
       "type": "object",
-      "description": "Azure sql data ware house credential scan properties.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureSqlCredentialScanProperties"
@@ -8074,8 +8109,8 @@
       ]
     },
     "AzureSqlDataWarehouseCredentialScan": {
+      "description": "Azure SQL data warehouse credential scan.",
       "type": "object",
-      "description": "Azure sql data ware house credential scan.",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8089,8 +8124,8 @@
       "x-ms-discriminator-value": "AzureSqlDataWarehouseCredential"
     },
     "AzureSqlDataWarehouseMsiScanProperties": {
+      "description": "Azure SQL data warehouse MSI scan properties.",
       "type": "object",
-      "description": "Azure sql data ware house MSI scan properties.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureSqlScanProperties"
@@ -8098,8 +8133,8 @@
       ]
     },
     "AzureSqlDataWarehouseMsiScan": {
+      "description": "Azure SQL data warehouse MSI scan.",
       "type": "object",
-      "description": "Azure sql data ware house MSI scan.",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8113,8 +8148,8 @@
       "x-ms-discriminator-value": "AzureSqlDataWarehouseMsi"
     },
     "AzureMySqlScanProperties": {
+      "description": "Azure MySQL scan properties.",
       "type": "object",
-      "description": "Azure Mysql scan properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -8122,13 +8157,16 @@
       ],
       "properties": {
         "serverEndpoint": {
+          "description": "The endpoint of the Azure MySQL server.",
           "type": "string"
         },
         "port": {
+          "description": "The port of the Azure MySQL server.",
           "format": "int32",
           "type": "integer"
         },
         "databaseName": {
+          "description": "The database name.",
           "type": "string"
         },
         "credential": {
@@ -8137,8 +8175,8 @@
       }
     },
     "AzureMySqlCredentialScanProperties": {
+      "description": "Azure MySQL credential scan properties.",
       "type": "object",
-      "description": "Azure Mysql credential scan properties.",
       "allOf": [
         {
           "$ref": "#/definitions/AzureMySqlScanProperties"
@@ -8146,8 +8184,8 @@
       ]
     },
     "AzureMySqlCredentialScan": {
+      "description": "Azure MySQL credential scan.",
       "type": "object",
-      "description": "Azure Mysql credential scan.",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8161,8 +8199,8 @@
       "x-ms-discriminator-value": "AzureMySqlCredential"
     },
     "MitiScanProperties": {
-      "type": "object",
       "description": "Miti scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -8170,16 +8208,18 @@
       ],
       "properties": {
         "maximumMemoryAllowedInGb": {
+          "description": "The maximum memory allowed in GB.",
           "type": "string"
         },
         "mitiCache": {
+          "description": "The miti cache.",
           "type": "string"
         }
       }
     },
     "AzureStorageCredentialScanProperties": {
+      "description": "Azure Storage credential scan properties.",
       "type": "object",
-      "description": "Azure storage credential scan properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -8192,8 +8232,8 @@
       }
     },
     "AzureStorageCredentialScan": {
+      "description": "Azure Storage credential scan.",
       "type": "object",
-      "description": "Azure storage credential scan.",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8207,8 +8247,8 @@
       "x-ms-discriminator-value": "AzureStorageCredential"
     },
     "AzureStorageMsiScanProperties": {
+      "description": "Azure Storage MSI scan properties.",
       "type": "object",
-      "description": "Azure storage MSI scan properties.",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -8216,8 +8256,8 @@
       ]
     },
     "AzureStorageMsiScan": {
+      "description": "Azure Storage MSI scan.",
       "type": "object",
-      "description": "Azure storage MSI scan.",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8231,8 +8271,8 @@
       "x-ms-discriminator-value": "AzureStorageMsi"
     },
     "TeradataTeradataCredentialScanProperties": {
+      "description": "Teradata credential scan properties.",
       "type": "object",
-      "description": "Tera data credential scan properties.",
       "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
@@ -8254,8 +8294,8 @@
       }
     },
     "TeradataTeradataCredentialScan": {
-      "type": "object",
       "description": "Teradata credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8269,8 +8309,8 @@
       "x-ms-discriminator-value": "TeradataTeradataCredential"
     },
     "TeradataUserPassScanProperties": {
-      "type": "object",
       "description": "Teradata user pass scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -8286,8 +8326,8 @@
       }
     },
     "TeradataUserPassScan": {
+      "description": "Teradata user pass scan.",
       "type": "object",
-      "description": "Tera data user pass scan.",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8301,8 +8341,8 @@
       "x-ms-discriminator-value": "TeradataUserPass"
     },
     "TeradataTeradataUserPassScanProperties": {
+      "description": "Teradata user pass scan properties.",
       "type": "object",
-      "description": "Tera data user pass scan properties.",
       "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
@@ -8310,22 +8350,26 @@
       ],
       "properties": {
         "username": {
+          "description": "The username of Teradata server.",
           "type": "string"
         },
         "password": {
+          "description": "The password of Teradata server.",
           "type": "string"
         },
         "schema": {
+          "description": "The schema.",
           "type": "string"
         },
         "driverLocation": {
+          "description": "The driver location.",
           "type": "string"
         }
       }
     },
     "TeradataTeradataUserPassScan": {
-      "type": "object",
       "description": "Teradata user pass scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8339,8 +8383,8 @@
       "x-ms-discriminator-value": "TeradataTeradataUserPass"
     },
     "OracleOracleCredentialScanProperties": {
-      "type": "object",
       "description": "Oracle credential scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
@@ -8362,8 +8406,8 @@
       }
     },
     "OracleOracleCredentialScan": {
-      "type": "object",
       "description": "Oracle credential scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8377,8 +8421,8 @@
       "x-ms-discriminator-value": "OracleOracleCredential"
     },
     "OracleOracleUserPassScanProperties": {
-      "type": "object",
       "description": "Oracle user pass scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
@@ -8386,22 +8430,26 @@
       ],
       "properties": {
         "username": {
+          "description": "The username of Oracle server.",
           "type": "string"
         },
         "password": {
+          "description": "The password of Oracle server.",
           "type": "string"
         },
         "schema": {
+          "description": "The schema.",
           "type": "string"
         },
         "driverLocation": {
+          "description": "The driver location.",
           "type": "string"
         }
       }
     },
     "OracleOracleUserPassScan": {
-      "type": "object",
       "description": "Oracle user pass scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8415,8 +8463,8 @@
       "x-ms-discriminator-value": "OracleOracleUserPass"
     },
     "SapS4HanaSapS4HanaCredentialScanProperties": {
+      "description": "SAP S/4HANA credential scan properties.",
       "type": "object",
-      "description": "Sap S4 hana credential scan properties.",
       "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
@@ -8424,19 +8472,21 @@
       ],
       "properties": {
         "clientId": {
+          "description": "The client ID of SAP S/4HANA server.",
           "type": "string"
         },
         "credential": {
           "$ref": "#/definitions/CredentialReference"
         },
         "jCoLibraryPath": {
+          "description": "The JCo library path.",
           "type": "string"
         }
       }
     },
     "SapS4HanaSapS4HanaCredentialScan": {
+      "description": "SAP S/4HANA credential scan.",
       "type": "object",
-      "description": "Sap S4 hana credential scan.",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8450,8 +8500,8 @@
       "x-ms-discriminator-value": "SapS4HanaSapS4HanaCredential"
     },
     "SapS4HanaSapS4HanaUserPassScanProperties": {
+      "description": "SAP S/4HANA user pass scan properties.",
       "type": "object",
-      "description": "Sap S4 hana user pass scan properties.",
       "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
@@ -8473,8 +8523,8 @@
       }
     },
     "SapS4HanaSapS4HanaUserPassScan": {
+      "description": "SAP S/4HANA user pass scan.",
       "type": "object",
-      "description": "Sap S4 hana user pass scan.",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8488,8 +8538,8 @@
       "x-ms-discriminator-value": "SapS4HanaSapS4HanaUserPass"
     },
     "SapEccSapEccCredentialScanProperties": {
+      "description": "SAP ECC credential scan properties.",
       "type": "object",
-      "description": "Sap ecc credential scan properties.",
       "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
@@ -8508,8 +8558,8 @@
       }
     },
     "SapEccSapEccCredentialScan": {
+      "description": "SAP ECC credential scan.",
       "type": "object",
-      "description": "Sap Ecc credential scan.",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8523,8 +8573,8 @@
       "x-ms-discriminator-value": "SapEccSapEccCredential"
     },
     "SapEccSapEccUserPassScanProperties": {
+      "description": "SAP ECC user pass scan properties.",
       "type": "object",
-      "description": "Sap Ecc user pass scan properties.",
       "allOf": [
         {
           "$ref": "#/definitions/MitiScanProperties"
@@ -8546,8 +8596,8 @@
       }
     },
     "SapEccSapEccUserPassScan": {
+      "description": "SAP ECC user pass scan.",
       "type": "object",
-      "description": "Sap ecc user pass scan.",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8561,8 +8611,8 @@
       "x-ms-discriminator-value": "SapEccSapEccUserPass"
     },
     "PowerBIDelegatedScanProperties": {
-      "type": "object",
       "description": "Power BI delegated scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -8590,8 +8640,8 @@
       }
     },
     "PowerBIDelegatedScan": {
-      "type": "object",
       "description": "Power BI delegated scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8605,8 +8655,8 @@
       "x-ms-discriminator-value": "PowerBIDelegated"
     },
     "PowerBIMsiScanProperties": {
-      "type": "object",
       "description": "Power BI MSI scan properties.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ScanProperties"
@@ -8614,13 +8664,14 @@
       ],
       "properties": {
         "includePersonalWorkspaces": {
+          "description": "Whether to include personal workspaces or not.",
           "type": "boolean"
         }
       }
     },
     "PowerBIMsiScan": {
-      "type": "object",
       "description": "Power BI MSI scan.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Scan"
@@ -8634,8 +8685,8 @@
       "x-ms-discriminator-value": "PowerBIMsi"
     },
     "AzureSubscriptionSystemScanRuleset": {
-      "type": "object",
       "description": "Azure subscription system scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8649,8 +8700,8 @@
       "x-ms-discriminator-value": "AzureSubscription"
     },
     "AzureResourceGroupSystemScanRuleset": {
-      "type": "object",
       "description": "Azure resource group system scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8664,8 +8715,8 @@
       "x-ms-discriminator-value": "AzureResourceGroup"
     },
     "AzureSynapseWorkspaceSystemScanRuleset": {
-      "type": "object",
       "description": "Azure synapse workspace system scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8679,8 +8730,8 @@
       "x-ms-discriminator-value": "AzureSynapseWorkspace"
     },
     "AzureSynapseSystemScanRuleset": {
-      "type": "object",
       "description": "Azure Synapse System scan rule set.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8694,8 +8745,8 @@
       "x-ms-discriminator-value": "AzureSynapse"
     },
     "AdlsGen1SystemScanRuleset": {
+      "description": "ADLS Gen1 System scan rule set.",
       "type": "object",
-      "description": "Adls Gen1 System scan rule set.",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8709,8 +8760,8 @@
       "x-ms-discriminator-value": "AdlsGen1"
     },
     "AdlsGen2SystemScanRuleset": {
+      "description": "ADLS Gen2 system scan rule set.",
       "type": "object",
-      "description": "Adls Gen2 system scan rule set.",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8724,8 +8775,8 @@
       "x-ms-discriminator-value": "AdlsGen2"
     },
     "AmazonAccountSystemScanRuleset": {
-      "type": "object",
       "description": "Amazon account system scan rule set.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8739,8 +8790,8 @@
       "x-ms-discriminator-value": "AmazonAccount"
     },
     "AmazonS3SystemScanRuleset": {
-      "type": "object",
       "description": "Amazon S3 system scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8754,8 +8805,8 @@
       "x-ms-discriminator-value": "AmazonS3"
     },
     "AmazonSqlSystemScanRuleset": {
+      "description": "Amazon SQL system scan ruleset.",
       "type": "object",
-      "description": "Amazon sql system scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8769,8 +8820,8 @@
       "x-ms-discriminator-value": "AmazonSql"
     },
     "AzureCosmosDbSystemScanRuleset": {
+      "description": "Azure Cosmos DB system scan rule set.",
       "type": "object",
-      "description": "Azure cosmos DB system scan rule set.",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8784,8 +8835,8 @@
       "x-ms-discriminator-value": "AzureCosmosDb"
     },
     "AzureDataExplorerSystemScanRuleset": {
-      "type": "object",
       "description": "Azure data explorer system scan rule set.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8799,8 +8850,8 @@
       "x-ms-discriminator-value": "AzureDataExplorer"
     },
     "AzureFileServiceSystemScanRuleset": {
-      "type": "object",
       "description": "Azure file service system scan rule set.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8814,8 +8865,8 @@
       "x-ms-discriminator-value": "AzureFileService"
     },
     "AzureSqlDatabaseSystemScanRuleset": {
+      "description": "Azure SQL db system scan rule set.",
       "type": "object",
-      "description": "Azure sql db system scan rule set.",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8829,8 +8880,8 @@
       "x-ms-discriminator-value": "AzureSqlDatabase"
     },
     "AmazonPostgreSqlSystemScanRuleset": {
+      "description": "Amazon Postgre SQL system scan rule set.",
       "type": "object",
-      "description": "Amazon postgre sql system scan rule set.",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8844,8 +8895,8 @@
       "x-ms-discriminator-value": "AmazonPostgreSql"
     },
     "AzurePostgreSqlSystemScanRuleset": {
+      "description": "Azure Postgre SQL system scan rule set.",
       "type": "object",
-      "description": "Azure postgre sql system scan rule set.",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8859,8 +8910,8 @@
       "x-ms-discriminator-value": "AzurePostgreSql"
     },
     "SqlServerDatabaseSystemScanRuleset": {
-      "type": "object",
       "description": "Sql server database system scan rule set.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8874,8 +8925,8 @@
       "x-ms-discriminator-value": "SqlServerDatabase"
     },
     "AzureSqlDatabaseManagedInstanceSystemScanRuleset": {
+      "description": "Azure SQL database managed instance system scan rule set.",
       "type": "object",
-      "description": "Azure sql database managed instance system scan rule set.",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8889,8 +8940,8 @@
       "x-ms-discriminator-value": "AzureSqlDatabaseManagedInstance"
     },
     "AzureSqlDataWarehouseSystemScanRuleset": {
+      "description": "Azure SQL data warehouse system scan ruleset.",
       "type": "object",
-      "description": "Azure sql data ware house system scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8904,8 +8955,8 @@
       "x-ms-discriminator-value": "AzureSqlDataWarehouse"
     },
     "AzureMySqlSystemScanRuleset": {
+      "description": "Azure MySQL system scan ruleset.",
       "type": "object",
-      "description": "Azure Mysql system scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8919,8 +8970,8 @@
       "x-ms-discriminator-value": "AzureMySql"
     },
     "AzureStorageSystemScanRuleset": {
+      "description": "Azure Storage system scan ruleset.",
       "type": "object",
-      "description": "Azure storage system scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8934,8 +8985,8 @@
       "x-ms-discriminator-value": "AzureStorage"
     },
     "TeradataSystemScanRuleset": {
-      "type": "object",
       "description": "Teradata system scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8949,8 +9000,8 @@
       "x-ms-discriminator-value": "Teradata"
     },
     "OracleSystemScanRuleset": {
-      "type": "object",
       "description": "Oracle system scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8964,8 +9015,8 @@
       "x-ms-discriminator-value": "Oracle"
     },
     "SapS4HanaSystemScanRuleset": {
+      "description": "SAP S/4HANA system scan ruleset.",
       "type": "object",
-      "description": "Sap S4 hana system scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8979,8 +9030,8 @@
       "x-ms-discriminator-value": "SapS4Hana"
     },
     "SapEccSystemScanRuleset": {
+      "description": "SAP ECC system scan ruleset.",
       "type": "object",
-      "description": "Sap ecc system scan ruleset.",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -8994,8 +9045,8 @@
       "x-ms-discriminator-value": "SapEcc"
     },
     "PowerBISystemScanRuleset": {
-      "type": "object",
       "description": "Power BI system scan ruleset.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SystemScanRuleset"
@@ -9070,7 +9121,7 @@
     "azureKeyVaultName": {
       "in": "path",
       "name": "azureKeyVaultName",
-      "description": "The azure key vault name.",
+      "description": "The Azure Key Vault name.",
       "required": true,
       "type": "string",
       "minLength": 3,
@@ -9114,8 +9165,8 @@
     "dataSourceTypeInPath": {
       "in": "path",
       "name": "dataSourceType",
-      "required": true,
       "description": "The data source type.",
+      "required": true,
       "enum": [
         "None",
         "Fabric",
