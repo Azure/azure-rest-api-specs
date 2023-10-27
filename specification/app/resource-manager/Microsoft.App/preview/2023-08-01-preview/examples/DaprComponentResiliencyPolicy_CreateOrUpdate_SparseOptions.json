@@ -10,7 +10,11 @@
       "properties": {
         "inboundPolicy": {
           "httpRetryPolicy": {
-            "maxRetries": 5
+            "maxRetries": 5,
+            "retryBackOff": {
+              "initialDelayInMilliseconds": 2000,
+              "maxIntervalInMilliseconds": 5500
+            }
           }
         },
         "outboundPolicy": {
@@ -30,7 +34,11 @@
         "properties": {
           "inboundPolicy": {
             "httpRetryPolicy": {
-              "maxRetries": 5
+              "maxRetries": 5,
+              "retryBackOff": {
+                "initialDelayInMilliseconds": 2000,
+                "maxIntervalInMilliseconds": 5500
+              }
             }
           },
           "outboundPolicy": {
