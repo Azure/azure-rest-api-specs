@@ -230,7 +230,11 @@ model TextIncident {
   @maxLength(1024)
   description?: string;
 
+  @doc("Incident created time.")
+  @visibility("read", "query")
   created: utcDateTime;
+  @doc("Incident updated time.")
+  @visibility("read", "query")
   lastUpdated: utcDateTime;
 }
 
@@ -286,7 +290,11 @@ model ImageIncident {
   @maxLength(1024)
   description?: string;
 
+  @doc("Incident created time.")
+  @visibility("read", "query")
   created: utcDateTime;
+  @doc("Incident updated time.")
+  @visibility("read", "query")
   lastUpdated: utcDateTime;
 }
 
