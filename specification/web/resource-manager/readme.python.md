@@ -11,11 +11,6 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-web
 package-version: 0.42.0
 no-namespace-folders: true
-directive:
-  from: CommonDefinitions.json
-  where: "$.definitions.DaprConfig.properties.logLevel.x-ms-enum"
-  transform: >
-    $["name"] = "DaprConfigLogLevel ";  
 ```
 
 ### Python multi-api
