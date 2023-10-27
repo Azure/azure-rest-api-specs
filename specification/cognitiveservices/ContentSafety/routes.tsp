@@ -248,6 +248,8 @@ interface TextCategoryCustomization {
   getTextCustomizedCategory is CategoryOps.ResourceRead<TextCustomizedCategory>;
 
   deleteTextCustomizedCategory is CategoryOps.ResourceDelete<TextCustomizedCategory>;
+
+  listTextCustomizedCategory is CategoryOps.ResourceList<TextCustomizedCategory>;
 }
 
 @added(Versions.v2023_10_30_Preview)

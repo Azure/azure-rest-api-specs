@@ -873,6 +873,40 @@
         }
       }
     },
+    "/text/categories": {
+      "get": {
+        "operationId": "TextCategoryCustomization_ListTextCustomizedCategory",
+        "description": "Resource list operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTextCustomizedCategory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/text/categories/{categoryName}": {
       "get": {
         "operationId": "TextCategoryCustomization_GetTextCustomizedCategory",
@@ -2350,6 +2384,28 @@
           "description": "The TextBlocklistItem items on this page",
           "items": {
             "$ref": "#/definitions/TextBlocklistItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextCustomizedCategory": {
+      "type": "object",
+      "description": "Paged collection of TextCustomizedCategory items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextCustomizedCategory items on this page",
+          "items": {
+            "$ref": "#/definitions/TextCustomizedCategory"
           },
           "x-ms-identifiers": []
         },
