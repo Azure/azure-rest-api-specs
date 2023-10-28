@@ -46,6 +46,12 @@
           },
           "Migrations Create by passing user names": {
             "$ref": "./examples/Migrations_Create_With_Other_Users.json"
+          },
+          "Create External Migration with Validate and Migrate": {
+            "$ref": "./examples/Migrations_Create_External_Validate_Migrate.json"
+          },
+          "Create Pre-migration Validation": {
+            "$ref": "./examples/Migrations_Create_Validate_Only.json"
           }
         },
         "description": "Creates a new migration.",
@@ -104,6 +110,18 @@
         "x-ms-examples": {
           "Migrations_Get": {
             "$ref": "./examples/Migrations_Get.json"
+          },
+          "Migrations_GetMigrattionWithValidationFailures": {
+            "$ref": "./examples/Migrations_GetMigrationWithValidationFailures.json"
+          },
+          "Migrations_GetMigrationWithSuccessfulValidationOnly": {
+            "$ref": "./examples/Migrations_GetMigrationWithSuccessfulValidationOnly.json"
+          },
+          "Migrations_GetMigrationWithSuccessfulValidationButMigrationFailure": {
+            "$ref": "./examples/Migrations_GetMigrationWithSuccessfulValidationButMigrationFailure.json"
+          },
+          "Migrations_GetMigrationWithSuccessfulValidationAndMigration": {
+            "$ref": "./examples/Migrations_GetMigrationWithSuccessfulValidationAndMigration.json"
           }
         },
         "description": "Gets details of a migration.",
@@ -374,6 +392,18 @@
           "$ref": "#/definitions/MigrationMode",
           "description": "There are two types of migration modes Online and Offline"
         },
+        "migrationOption": {
+          "$ref": "#/definitions/MigrationOption",
+          "description": "This indicates the supported Migration option for the migration"
+        },
+        "sourceType": {
+          "$ref": "#/definitions/SourceType",
+          "description": "migration source server type : OnPremises, AWS, GCP, AzureVM or PostgreSQLSingleServer"
+        },
+        "sslMode": {
+          "$ref": "#/definitions/SslMode",
+          "description": "SSL modes for migration. Default SSL mode for PostgreSQLSingleServer is VerifyFull and Prefer for other source types"
+        },
         "sourceDbServerMetadata": {
           "$ref": "#/definitions/DbServerMetadata",
           "readOnly": true,
@@ -386,7 +416,7 @@
         },
         "sourceDbServerResourceId": {
           "type": "string",
-          "description": "ResourceId of the source database server"
+          "description": "ResourceId of the source database server in case the sourceType is PostgreSQLSingleServer. For other source types this should be ipaddress:port@username or hostname:port@username"
         },
         "sourceDbServerFullyQualifiedDomainName": {
           "type": "string",
@@ -733,7 +763,7 @@
         },
         "sku": {
           "$ref": "#/definitions/ServerSku",
-          "description": "SKU for the database server"
+          "description": "SKU for the database server. This object is empty for PG single server"
         }
       },
       "description": "Database server metadata."
@@ -760,6 +790,19 @@
       "description": "There are two types of migration modes Online and Offline",
       "x-ms-enum": {
         "name": "MigrationMode",
+        "modelAsString": true
+      }
+    },
+    "MigrationOption": {
+      "enum": [
+        "Validate",
+        "Migrate",
+        "ValidateAndMigrate"
+      ],
+      "type": "string",
+      "description": "Supported types of migration request include Validate, Migrate and ValidateAndMigrate",
+      "x-ms-enum": {
+        "name": "MigrationOption",
         "modelAsString": true
       }
     },
@@ -810,7 +853,9 @@
         "MigratingData",
         "WaitingForCutoverTrigger",
         "CompletingMigration",
-        "Completed"
+        "Completed",
+        "CancelingRequestedDBMigrations",
+        "ValidationInProgress"
       ],
       "type": "string",
       "description": "Migration sub state.",
@@ -825,9 +870,240 @@
         "currentSubState": {
           "$ref": "#/definitions/MigrationSubState",
           "readOnly": true
+        },
+        "dbDetails": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DbMigrationStatus"
+          }
+        },
+        "validationDetails": {
+          "$ref": "#/definitions/ValidationDetails"
         }
       },
       "description": "Migration sub state details."
+    },
+    "DbMigrationStatus": {
+      "type": "object",
+      "description": "Migration status of an individual database",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database"
+        },
+        "migrationState": {
+          "type": "string",
+          "description": "Migration db state of an individual database",
+          "enum": [
+            "InProgress",
+            "WaitingForCutoverTrigger",
+            "Failed",
+            "Canceled",
+            "Succeeded",
+            "Canceling"
+          ],
+          "x-ms-enum": {
+            "name": "MigrationDbState",
+            "modelAsString": true
+          }
+        },
+        "migrationOperation": {
+          "type": "string",
+          "description": "Migration operation of an individual database"
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date-time of a migration state"
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date-time of a migration state"
+        },
+        "fullLoadQueuedTables": {
+          "type": "integer",
+          "description": "Number of tables queued for the migration of a DB"
+        },
+        "fullLoadErroredTables": {
+          "type": "integer",
+          "description": "Number of tables errored out during the migration of a DB"
+        },
+        "fullLoadLoadingTables": {
+          "type": "integer",
+          "description": "Number of tables loading during the migration of a DB"
+        },
+        "fullLoadCompletedTables": {
+          "type": "integer",
+          "description": "Number of tables loaded during the migration of a DB"
+        },
+        "cdcUpdateCounter": {
+          "type": "integer",
+          "description": "CDC update counter"
+        },
+        "cdcDeleteCounter": {
+          "type": "integer",
+          "description": "CDC delete counter"
+        },
+        "cdcInsertCounter": {
+          "type": "integer",
+          "description": "CDC insert counter"
+        },
+        "appliedChanges": {
+          "type": "integer",
+          "description": "CDC applied changes counter"
+        },
+        "incomingChanges": {
+          "type": "integer",
+          "description": "CDC incoming changes counter"
+        },
+        "latency": {
+          "type": "integer",
+          "description": "Lag in seconds between source and target during online phase"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message, if any, for the migration state"
+        }
+      }
+    },
+    "ValidationDetails": {
+      "type": "object",
+      "description": "Details for the validation for migration",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ValidationState"
+        },
+        "validationStartTimeInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Validation Start date-time in UTC"
+        },
+        "validationEndTimeInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Validation End date-time in UTC"
+        },
+        "serverLevelValidationDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationSummaryItem"
+          },
+          "description": "Details of server level validations"
+        },
+        "dbLevelValidationDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DbLevelValidationStatus"
+          },
+          "description": "Details of server level validations"
+        }
+      }
+    },
+    "DbLevelValidationStatus": {
+      "type": "object",
+      "description": "Validation status summary for an individual database",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database"
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date-time of a database level validation"
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date-time of a database level validation"
+        },
+        "summary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationSummaryItem"
+          },
+          "description": "SUmmary of database level validations"
+        }
+      }
+    },
+    "ValidationSummaryItem": {
+      "type": "object",
+      "description": "Validation summary object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Validation type"
+        },
+        "state": {
+          "$ref": "#/definitions/ValidationState"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationMessage"
+          },
+          "description": "Validation messages"
+        }
+      }
+    },
+    "ValidationMessage": {
+      "type": "object",
+      "description": "Validation message object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ValidationState",
+          "description": "Severity of validation message"
+        },
+        "message": {
+          "type": "string",
+          "description": "Validation message string"
+        }
+      }
+    },
+    "ValidationState": {
+      "type": "string",
+      "description": "Validation status for migration",
+      "enum": [
+        "Failed",
+        "Succeeded",
+        "Warning"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationState",
+        "modelAsString": true
+      }
+    },
+    "SourceType": {
+      "enum": [
+        "OnPremises",
+        "AWS",
+        "GCP",
+        "AzureVM",
+        "PostgreSQLSingleServer"
+      ],
+      "type": "string",
+      "description": "Migration source server type : OnPremises, AWS, GCP, AzureVM or PostgreSQLSingleServer",
+      "x-ms-enum": {
+        "name": "SourceType",
+        "modelAsString": true
+      }
+    },
+    "SslMode": {
+      "enum": [
+        "Disable",
+        "Allow",
+        "Prefer",
+        "Require",
+        "VerifyCA",
+        "VerifyFull"
+      ],
+      "type": "string",
+      "description": "Supported SSL modes for migration: Disable, Allow, Prefer, Require, VerifyCA, VerifyFull",
+      "x-ms-enum": {
+        "name": "SslMode",
+        "modelAsString": true
+      }
     },
     "ServerSku": {
       "type": "object",
@@ -850,10 +1126,6 @@
           }
         }
       },
-      "required": [
-        "name",
-        "tier"
-      ],
       "description": "Sku information related properties of a server."
     },
     "MigrationNameAvailabilityReason": {
