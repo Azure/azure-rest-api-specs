@@ -111,7 +111,7 @@
           "Migrations_Get": {
             "$ref": "./examples/Migrations_Get.json"
           },
-          "Migrations_GetMigrattionWithValidationFailures": {
+          "Migrations_GetMigrationWithValidationFailures": {
             "$ref": "./examples/Migrations_GetMigrationWithValidationFailures.json"
           },
           "Migrations_GetMigrationWithSuccessfulValidationOnly": {
@@ -441,7 +441,9 @@
           "items": {
             "type": "string"
           },
-          "description": "Number of databases to migrate"
+          "description": "Number of databases to migrate",
+          "x-ms-identifiers": [
+          ]
         },
         "setupLogicalReplicationOnSourceDbIfNeeded": {
           "type": "string",
@@ -506,7 +508,9 @@
           "items": {
             "type": "string"
           },
-          "description": "When you want to trigger cutover for specific databases send triggerCutover flag as True and database names in this array"
+          "description": "When you want to trigger cutover for specific databases send triggerCutover flag as True and database names in this array",
+          "x-ms-identifiers": [
+          ]
         },
         "cancel": {
           "type": "string",
@@ -525,7 +529,9 @@
           "items": {
             "type": "string"
           },
-          "description": "When you want to trigger cancel for specific databases send cancel flag as True and database names in this array"
+          "description": "When you want to trigger cancel for specific databases send cancel flag as True and database names in this array",
+          "x-ms-identifiers": [
+          ]
         }
       },
       "description": "Migration resource properties."
@@ -539,7 +545,9 @@
             "$ref": "#/definitions/MigrationResource"
           },
           "readOnly": true,
-          "description": "A list of migration resources."
+          "description": "A list of migration resources.",
+          "x-ms-identifiers": [
+          ]
         },
         "nextLink": {
           "description": "The link used to get the next page of migrations.",
@@ -592,7 +600,9 @@
           "items": {
             "type": "string"
           },
-          "description": "Number of databases to migrate"
+          "description": "Number of databases to migrate",
+          "x-ms-identifiers": [
+          ]
         },
         "setupLogicalReplicationOnSourceDbIfNeeded": {
           "type": "string",
@@ -652,7 +662,9 @@
           "items": {
             "type": "string"
           },
-          "description": "When you want to trigger cutover for specific databases send triggerCutover flag as True and database names in this array"
+          "description": "When you want to trigger cutover for specific databases send triggerCutover flag as True and database names in this array",
+          "x-ms-identifiers": [
+          ]
         },
         "cancel": {
           "type": "string",
@@ -671,7 +683,9 @@
           "items": {
             "type": "string"
           },
-          "description": "When you want to trigger cancel for specific databases send cancel flag as True and database names in this array"
+          "description": "When you want to trigger cancel for specific databases send cancel flag as True and database names in this array",
+          "x-ms-identifiers": [
+          ]
         },
         "migrationMode": {
           "$ref": "#/definitions/MigrationMode",
@@ -922,42 +936,52 @@
           "description": "End date-time of a migration state"
         },
         "fullLoadQueuedTables": {
+          "format": "int32",
           "type": "integer",
           "description": "Number of tables queued for the migration of a DB"
         },
         "fullLoadErroredTables": {
+          "format": "int32",
           "type": "integer",
           "description": "Number of tables errored out during the migration of a DB"
         },
         "fullLoadLoadingTables": {
+          "format": "int32",
           "type": "integer",
           "description": "Number of tables loading during the migration of a DB"
         },
         "fullLoadCompletedTables": {
+          "format": "int32",
           "type": "integer",
           "description": "Number of tables loaded during the migration of a DB"
         },
         "cdcUpdateCounter": {
+          "format": "int32",
           "type": "integer",
           "description": "CDC update counter"
         },
         "cdcDeleteCounter": {
+          "format": "int32",
           "type": "integer",
           "description": "CDC delete counter"
         },
         "cdcInsertCounter": {
+          "format": "int32",
           "type": "integer",
           "description": "CDC insert counter"
         },
         "appliedChanges": {
+          "format": "int32",
           "type": "integer",
           "description": "CDC applied changes counter"
         },
         "incomingChanges": {
+          "format": "int32",
           "type": "integer",
           "description": "CDC incoming changes counter"
         },
         "latency": {
+          "format": "int32",
           "type": "integer",
           "description": "Lag in seconds between source and target during online phase"
         },
@@ -989,14 +1013,19 @@
           "items": {
             "$ref": "#/definitions/ValidationSummaryItem"
           },
-          "description": "Details of server level validations"
+          "description": "Details of server level validations",
+          "x-ms-identifiers": [
+          ]
         },
         "dbLevelValidationDetails": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DbLevelValidationStatus"
           },
-          "description": "Details of server level validations"
+          "description": "Details of server level validations",
+          "x-ms-identifiers": [
+            "databaseName"
+          ]
         }
       }
     },
@@ -1023,7 +1052,9 @@
           "items": {
             "$ref": "#/definitions/ValidationSummaryItem"
           },
-          "description": "SUmmary of database level validations"
+          "description": "Summary of database level validations",
+          "x-ms-identifiers": [
+          ]
         }
       }
     },
@@ -1043,7 +1074,9 @@
           "items": {
             "$ref": "#/definitions/ValidationMessage"
           },
-          "description": "Validation messages"
+          "description": "Validation messages",
+          "x-ms-identifiers": [
+          ]
         }
       }
     },
