@@ -58,6 +58,7 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/Migrations.json
   - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/Operations.json
   - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/QuotaUsages.json
   - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/Replicas.json
   - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/ServerLogs.json
   - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/ServerStartStopRestart.json
