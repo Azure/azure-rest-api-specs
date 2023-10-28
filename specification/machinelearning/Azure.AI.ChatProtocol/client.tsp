@@ -4,4 +4,4 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@internal(Azure.AI.ChatProtocol.Chat.createStreaming, "csharp");
+@@access(Azure.AI.ChatProtocol.Chat.createStreaming, Access.internal, "csharp");
