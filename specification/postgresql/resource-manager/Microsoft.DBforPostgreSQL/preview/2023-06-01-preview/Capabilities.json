@@ -154,10 +154,34 @@
           "description": "Supported IOPS",
           "readOnly": true
         },
+        "supportedMaximumIops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum IOPS supported by this #Vcores or PremiumV2_LRS Storage Size",
+          "readOnly": true
+        },
         "storageSizeMb": {
           "type": "integer",
           "format": "int64",
           "description": "Storage size in MB",
+          "readOnly": true
+        },
+        "maximumStorageSizeMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum value of Storage size in MB",
+          "readOnly": true
+        },
+        "supportedThroughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Values of throughput in MB/s",
+          "readOnly": true
+        },
+        "supportedMaximumThroughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum values of throughput in MB/s",
           "readOnly": true
         },
         "defaultIopsTier": {

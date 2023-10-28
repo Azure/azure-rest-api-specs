@@ -847,8 +847,16 @@
         "iops": {
           "type": "integer",
           "format": "int32",
-          "description": "Storage tier IOPS quantity.",
-          "readOnly": true
+          "description": "Storage tier IOPS quantity. This property is required to be set for storage Type PremiumV2_LRS"
+        },
+        "throughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Storage throughput for the server. This is required to be set for storage Type PremiumV2_LRS"
+        },
+        "type": {
+          "type": "string",
+          "description": "Storage type for the server. Allowed values are Premium_LRS and PremiumV2_LRS, and default is Premium_LRS if not specified"
         }
       },
       "description": "Storage properties of a server"
