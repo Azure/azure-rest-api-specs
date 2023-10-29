@@ -625,6 +625,9 @@
           "Create/Update Managed Cluster with dual-stack networking": {
             "$ref": "./examples/ManagedClustersCreate_DualStackNetworking.json"
           },
+          "Create Managed Cluster with Capacity Reservation Group": {
+            "$ref": "./examples/ManagedClustersCreate_CRG.json"
+          },
           "Create Managed Cluster with Dedicated Host Group": {
             "$ref": "./examples/ManagedClustersCreate_DedicatedHostGroup.json"
           },
@@ -1198,6 +1201,9 @@
           },
           "Start Agent Pool": {
             "$ref": "./examples/AgentPools_Start.json"
+          },
+          "Create Agent Pool with Capacity Reservation Group": {
+            "$ref": "./examples/AgentPoolsCreate_CRG.json"
           },
           "Create Agent Pool with Dedicated Host Group": {
             "$ref": "./examples/AgentPoolsCreate_DedicatedHostGroup.json"
@@ -3280,6 +3286,10 @@
         "creationData": {
           "$ref": "#/definitions/CreationData",
           "description": "CreationData to be used to specify the source Snapshot ID if the node pool will be created/upgraded using a snapshot."
+        },
+        "capacityReservationGroupID": {
+          "$ref": "#/definitions/CapacityReservationGroupID",
+          "description": "AKS will associate the specified agent pool with the Capacity Reservation Group."
         },
         "hostGroupID": {
           "type": "string",
@@ -7401,6 +7411,19 @@
           "readOnly": true
         }
       }
+    },
+    "CapacityReservationGroupID": {
+      "type": "string",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Compute/CapacityReservationGroups"
+          }
+        ]
+      },
+      "title": "The fully qualified resource ID of the Capacity Reservation Group to provide virtual machines from a reserved group of Virtual Machines.",
+      "description": "This is of the form: '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/capacityreservationgroups/{capacityReservationGroupName}' Customers use it to create an agentpool with a specified CRG. For more information see [Capacity Reservation](https://learn.microsoft.com/en-us/azure/virtual-machines/capacity-reservation-overview)"
     }
   },
   "parameters": {
