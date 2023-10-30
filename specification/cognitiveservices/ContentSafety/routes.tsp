@@ -140,7 +140,10 @@ interface TextIncidents {
 
   @summary("Get All Text Incidents")
   @doc("Get all incidents details.")
-  listIncidents is TextIncidentOps.ResourceList<TextIncident>;
+  listIncidents is TextIncidentOps.ResourceList<
+    TextIncident,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
 
   @summary("Add TextIncidentSamples To Incident")
   @doc("Add textIncidentSamples to an incident. You can add at most 100 textIncidentSamples in one request.")
@@ -191,7 +194,10 @@ interface ImageIncidents {
 
   @summary("Get All Image Incidents")
   @doc("Get all incidents details.")
-  listIncidents is ImageIncidentOps.ResourceList<ImageIncident>;
+  listIncidents is ImageIncidentOps.ResourceList<
+    ImageIncident,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
 
   @summary("Add ImageIncidentSamples To Incident")
   @doc("Add imageIncidentSamples to an incident. You can add at most 100 imageIncidentSamples in one request.")
