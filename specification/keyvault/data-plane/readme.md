@@ -496,10 +496,6 @@ directive:
     from: securitydomain.json
     where: $.definitions.TransferKey.properties.key_format
     reason: Consistency with other properties
-  - suppress: EnumUniqueValue
-    from: keys.json
-    where: $.definitions.LifetimeActionsType.properties.type
-    reason: SDK, docs workaround for current service behavior.
   - suppress: DOUBLE_FORWARD_SLASHES_IN_URL
     from: rbac.json
     reason: / is a valid scope in this scenario.
