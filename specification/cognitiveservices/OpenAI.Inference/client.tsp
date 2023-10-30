@@ -6,7 +6,9 @@ using Azure.ClientGenerator.Core;
 // Azure-specific long-running operations should be treated as implementation details that are wrapped into
 // appropriately merged public surface.
 @@access(Azure.OpenAI.beginAzureBatchImageGeneration, Access.internal);
-@@access(Azure.OpenAI.getAzureBatchImageGenerationOperationStatus, Access.internal);
+@@access(Azure.OpenAI.getAzureBatchImageGenerationOperationStatus,
+  Access.internal
+);
 
 // Azure-specific Chat Completions with extensions should be handled by clients as a conditional selection within the
 // shared Chat Completions route, with the selection gated by the presence or non-presence of additional child
@@ -19,11 +21,17 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.OpenAI.ImageGenerations, Access.public);
 @@access(Azure.OpenAI.ImageSize, Access.public);
 
-@@access(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions, Access.public);
+@@access(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions,
+  Access.public
+);
 @@usage(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions, Usage.input);
 
 @@access(Azure.OpenAI.AzureCognitiveSearchQueryType, Access.public);
 @@usage(Azure.OpenAI.AzureCognitiveSearchQueryType, Usage.input);
 
-@@access(Azure.OpenAI.AzureCognitiveSearchChatExtensionConfiguration, Access.public);
-@@usage(Azure.OpenAI.AzureCognitiveSearchChatExtensionConfiguration, Usage.input);
+@@access(Azure.OpenAI.AzureCognitiveSearchChatExtensionConfiguration,
+  Access.public
+);
+@@usage(Azure.OpenAI.AzureCognitiveSearchChatExtensionConfiguration,
+  Usage.input
+);
