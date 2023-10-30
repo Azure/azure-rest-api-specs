@@ -47,8 +47,8 @@
           "Migrations Create by passing user names": {
             "$ref": "./examples/Migrations_Create_With_Other_Users.json"
           },
-          "Create External Migration with Validate and Migrate": {
-            "$ref": "./examples/Migrations_Create_External_Validate_Migrate.json"
+          "Create Migration with other source types for Validate and Migrate": {
+            "$ref": "./examples/Migrations_Create_Other_SourceTypes_Validate_Migrate.json"
           },
           "Create Pre-migration Validation": {
             "$ref": "./examples/Migrations_Create_Validate_Only.json"
@@ -1116,15 +1116,13 @@
     },
     "SslMode": {
       "enum": [
-        "Disable",
-        "Allow",
         "Prefer",
         "Require",
         "VerifyCA",
         "VerifyFull"
       ],
       "type": "string",
-      "description": "Supported SSL modes for migration: Disable, Allow, Prefer, Require, VerifyCA, VerifyFull",
+      "description": "Supported SSL modes for migration. VerifyFull is the recommended SSL mode for Single server migration. Prefer, Require are recommended SSL modes for other source types",
       "x-ms-enum": {
         "name": "SslMode",
         "modelAsString": true
