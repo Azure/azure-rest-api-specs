@@ -78,15 +78,15 @@ tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-snapshots)
-tag: package-2023-11
+tag: package-bicep-2023-11
 ```
 
 
-### Tag: package-2023-11
+### Tag: package-bicep-2023-11
 
-These settings apply only when `--tag=package-2023-11` is specified on the command line.
+These settings apply only when `--tag=package-bicep-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-11'
+```yaml $(tag) == 'package-bicep-2023-11'
 input-file:
   - Microsoft.Resources/stable/2023-11-01/bicepRp.json
 ```
