@@ -51,7 +51,7 @@
           "description": "Connection state of the private endpoint connection."
         },
         "provisioningState": {
-          "description": "The provisioning state of the private endpoint connection. Can be Succeded, Updating, Deleting, Deleted or Failed.",
+          "description": "The provisioning state of the private endpoint connection. Can be Succeeded, Updating, Deleting, Deleted or Failed.",
           "type": "string",
           "readOnly": true
         },
@@ -111,6 +111,49 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Properties of a private link resource.",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "The private link resource required zone names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "A private link resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "The private link resource group id.",
+          "readOnly": true
         }
       }
     }
