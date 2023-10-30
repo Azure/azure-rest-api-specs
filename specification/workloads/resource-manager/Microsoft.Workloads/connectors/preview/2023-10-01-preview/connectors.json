@@ -211,12 +211,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
-            }
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -487,10 +481,12 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Describes the backup connection resource of virtual instance for SAP.",
-            "schema": {
-              "$ref": "#/definitions/ACSSBackupConnection"
+          "202": {
+            "description": "Describes the backup connection resource created which is being updated.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "200": {
@@ -540,12 +536,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
-            }
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -1090,6 +1080,7 @@
       "name": "connectorName",
       "in": "path",
       "required": true,
+      "pattern": "^[A-Za-z0-9]+-?[A-Za-z0-9]*$",
       "type": "string",
       "description": "The name of the connector resource",
       "x-ms-parameter-location": "method"
@@ -1098,6 +1089,7 @@
       "name": "backupName",
       "in": "path",
       "required": true,
+      "pattern": "^.+",
       "type": "string",
       "description": "The name of the backup connection resource of virtual instance for SAP.",
       "x-ms-parameter-location": "method"

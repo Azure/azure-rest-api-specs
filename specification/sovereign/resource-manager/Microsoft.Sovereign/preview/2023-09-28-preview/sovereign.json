@@ -296,6 +296,56 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/providers/Microsoft.Sovereign/landingZoneConfigurations/{name}/createCopy": {
+      "post": {
+        "operationId": "LandingZonesConfigurations_CreateCopy",
+        "tags": [
+          "LandingZonesConfigurations"
+        ],
+        "description": "Provides a mechanism to create a copy of the landing zone configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the landing zone configuration resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateCopyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CreateCopyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LandingZonesConfigurations_CreateCopy_0": {
+            "$ref": "./examples/LandingZoneConfiguration_createCopy.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Sovereign/landingZoneConfigurations/{name}/generateLandingZone": {
       "post": {
         "operationId": "LandingZonesConfigurations_GenerateLandingZone",
@@ -759,6 +809,41 @@
         ]
       }
     },
+    "CreateCopyRequest": {
+      "type": "object",
+      "description": "The request for the create copy action of landing zone configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the new landing zone configuration resource.",
+          "pattern": "^[a-zA-Z0-9-]{3,24}$"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "CreateCopyResponse": {
+      "type": "object",
+      "description": "The response of the create copy action of landing zone configuration.",
+      "properties": {
+        "copiedLandingZoneConfigurationId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The id of the copied landing zone configuration resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sovereign/landingZoneConfigurations"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "copiedLandingZoneConfigurationId"
+      ]
+    },
     "DecommissionedManagementGroupProperties": {
       "type": "object",
       "description": "Decommissioned management group properties.",
@@ -915,7 +1000,7 @@
         },
         "organization": {
           "type": "string",
-          "description": "The name of the country, region or agency the landing zone is being deployed for."
+          "description": "The name of the country/region or agency the landing zone is being deployed for"
         }
       },
       "required": [
@@ -1480,7 +1565,7 @@
         "assignmentParameters": {
           "type": "object",
           "description": "The parameters for the assignment of policy initiatives.",
-          "additionalProperties": true
+          "additionalProperties": {}
         }
       },
       "required": [

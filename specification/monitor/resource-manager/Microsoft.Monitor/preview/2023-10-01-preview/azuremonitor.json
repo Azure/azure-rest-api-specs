@@ -1,0 +1,1396 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Control Plane API",
+    "version": "2023-10-01-preview",
+    "description": "Provides operations for working with Azure Monitor",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AzureMonitorWorkspaces"
+    },
+    {
+      "name": "PipelineGroups"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Monitor/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the Microsoft.Monitor resource provider operations": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/accounts": {
+      "get": {
+        "operationId": "AzureMonitorWorkspaces_ListBySubscription",
+        "tags": [
+          "AzureMonitorWorkspaces"
+        ],
+        "description": "Lists all workspaces in the specified subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Azure Monitor Workspaces by subscription": {
+            "$ref": "./examples/AzureMonitorWorkspacesListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/pipelineGroups": {
+      "get": {
+        "operationId": "PipelineGroups_ListBySubscription",
+        "tags": [
+          "PipelineGroups"
+        ],
+        "description": "Lists all workspaces in the specified subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Pipeline groups by subscription": {
+            "$ref": "./examples/PipelineGroupListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts": {
+      "get": {
+        "operationId": "AzureMonitorWorkspaces_ListByResourceGroup",
+        "tags": [
+          "AzureMonitorWorkspaces"
+        ],
+        "description": "Lists all workspaces in the specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Azure Monitor Workspaces by resource group": {
+            "$ref": "./examples/AzureMonitorWorkspacesListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}": {
+      "get": {
+        "operationId": "AzureMonitorWorkspaces_Get",
+        "tags": [
+          "AzureMonitorWorkspaces"
+        ],
+        "description": "Returns the specific Azure Monitor workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the Azure Monitor workspace. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves an Azure Monitor Workspace": {
+            "$ref": "./examples/AzureMonitorWorkspaceGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AzureMonitorWorkspaces_CreateOrUpdate",
+        "tags": [
+          "AzureMonitorWorkspaces"
+        ],
+        "description": "Create or update a workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the Azure Monitor workspace. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AzureMonitorWorkspace' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspace"
+            }
+          },
+          "201": {
+            "description": "Resource 'AzureMonitorWorkspace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspace"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates an Azure Monitor Workspace": {
+            "$ref": "./examples/AzureMonitorWorkspaceCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AzureMonitorWorkspaces_Update",
+        "tags": [
+          "AzureMonitorWorkspaces"
+        ],
+        "description": "Updates part of a workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the Azure Monitor workspace. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspaceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates an Azure Monitor Workspace": {
+            "$ref": "./examples/AzureMonitorWorkspaceUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AzureMonitorWorkspaces_Delete",
+        "tags": [
+          "AzureMonitorWorkspaces"
+        ],
+        "description": "Delete a workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the Azure Monitor workspace. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an Azure Monitor Workspace asynchronously": {
+            "$ref": "./examples/AzureMonitorWorkspaceDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/pipelineGroups": {
+      "get": {
+        "operationId": "PipelineGroups_ListByResourceGroup",
+        "tags": [
+          "PipelineGroups"
+        ],
+        "description": "Lists all workspaces in the specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Pipeline groups by resource group": {
+            "$ref": "./examples/PipelineGroupListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/pipelineGroups/{pipelineGroupName}": {
+      "get": {
+        "operationId": "PipelineGroups_Get",
+        "tags": [
+          "PipelineGroups"
+        ],
+        "description": "Returns the specific pipeline group instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pipelineGroupName",
+            "in": "path",
+            "description": "The name of pipeline group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves a PipelineGroup instance by name": {
+            "$ref": "./examples/PipelineGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PipelineGroups_CreateOrUpdate",
+        "tags": [
+          "PipelineGroups"
+        ],
+        "description": "Create or update a pipeline group instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pipelineGroupName",
+            "in": "path",
+            "description": "The name of pipeline group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PipelineGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PipelineGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'PipelineGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PipelineGroup"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a PipelineGroup instance": {
+            "$ref": "./examples/PipelineGroupCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PipelineGroups_Delete",
+        "tags": [
+          "PipelineGroups"
+        ],
+        "description": "Delete a pipeline group instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pipelineGroupName",
+            "in": "path",
+            "description": "The name of pipeline group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a PipelineGroup instance": {
+            "$ref": "./examples/PipelineGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AzureMonitorWorkspace": {
+      "type": "object",
+      "description": "An Azure Monitor Workspace definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureMonitorWorkspaceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AzureMonitorWorkspaceListResult": {
+      "type": "object",
+      "description": "The response of a AzureMonitorWorkspace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AzureMonitorWorkspace items on this page",
+          "items": {
+            "$ref": "#/definitions/AzureMonitorWorkspace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AzureMonitorWorkspaceLogsApiConfig": {
+      "type": "object",
+      "description": "Azure Monitor Workspace Logs Api configurations.",
+      "properties": {
+        "dataCollectionEndpointUrl": {
+          "type": "string",
+          "description": "Data collection endpoint ingestion url.",
+          "pattern": "^(https?)://[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$"
+        },
+        "stream": {
+          "type": "string",
+          "description": "Stream name in destination. Azure Monitor stream is related to the destination table.",
+          "pattern": "^(?!-)[a-zA-Z0-9.-]{1,1000}[^-]$"
+        },
+        "dataCollectionRule": {
+          "type": "string",
+          "description": "Data Collection Rule (DCR) immutable id.",
+          "pattern": "^(?!-)[a-zA-Z0-9.-]{1,1000}[^-]$"
+        },
+        "schema": {
+          "$ref": "#/definitions/SchemaMap",
+          "description": "The schema mapping for incoming data."
+        }
+      },
+      "required": [
+        "dataCollectionEndpointUrl",
+        "stream",
+        "dataCollectionRule",
+        "schema"
+      ]
+    },
+    "AzureMonitorWorkspaceLogsConfig": {
+      "type": "object",
+      "description": "Azure Monitor Workspace Logs specific configurations.",
+      "properties": {
+        "api": {
+          "$ref": "#/definitions/AzureMonitorWorkspaceLogsApiConfig",
+          "description": "API configurations for Azure Monitor workspace exporter."
+        },
+        "concurrency": {
+          "$ref": "#/definitions/ConcurrencyConfiguration",
+          "description": "Concurrency configuration for the exporter."
+        }
+      },
+      "required": [
+        "api"
+      ]
+    },
+    "AzureMonitorWorkspaceProperties": {
+      "type": "object",
+      "description": "Properties that need to be specified to create a new workspace.",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "The immutable ID of the Azure Monitor workspace. This property is read-only.",
+          "readOnly": true
+        },
+        "metrics": {
+          "$ref": "#/definitions/Metrics",
+          "description": "Information about metrics for the Azure Monitor workspace"
+        },
+        "defaultIngestionSettings": {
+          "$ref": "#/definitions/IngestionSettings",
+          "description": "The Data Collection Rule and Endpoint used for ingestion by default.",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "List of private endpoint connections.",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Gets or sets allow or disallow public network access to workspace",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Azure Monitor workspace. Set to Succeeded if everything is healthy.",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureMonitorWorkspaceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the AzureMonitorWorkspace.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/AzureMonitorWorkspaceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureMonitorWorkspaceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the AzureMonitorWorkspace.",
+      "properties": {
+        "metrics": {
+          "$ref": "#/definitions/Metrics",
+          "description": "Information about metrics for the Azure Monitor workspace"
+        }
+      }
+    },
+    "ConcurrencyConfiguration": {
+      "type": "object",
+      "description": "Concurrent publishing configuration.",
+      "properties": {
+        "fixedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Fixed count of messages.",
+          "default": 10
+        },
+        "payloadQueueSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Payload queue size.",
+          "default": 100
+        },
+        "logQueueSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Log queue size.",
+          "default": 100
+        }
+      },
+      "required": [
+        "fixedCount",
+        "payloadQueueSize",
+        "logQueueSize"
+      ]
+    },
+    "Exporter": {
+      "type": "object",
+      "description": "Exporter Info.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ExporterType",
+          "description": "The type of exporter."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of exporter.",
+          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "azureMonitorWorkspaceLogsConfig": {
+          "$ref": "#/definitions/AzureMonitorWorkspaceLogsConfig",
+          "description": "Azure Monitor Workspace Logs specific configurations."
+        },
+        "tcpExporter": {
+          "$ref": "#/definitions/TcpExporter",
+          "description": "TCP based exporter. Used for pipelineGroup exporter."
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "ExporterType": {
+      "type": "string",
+      "description": "The exporter type.",
+      "enum": [
+        "AzureMonitorWorkspaceLogs",
+        "PipelineGroup"
+      ],
+      "x-ms-enum": {
+        "name": "ExporterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureMonitorWorkspaceLogs",
+            "value": "AzureMonitorWorkspaceLogs",
+            "description": "Export logs to Azure Monitor Workspace."
+          },
+          {
+            "name": "PipelineGroup",
+            "value": "PipelineGroup",
+            "description": "Export data to another pipeline group instance."
+          }
+        ]
+      }
+    },
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The extended location info.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ExtendedLocationType",
+          "description": "The type of extended location."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of extended location."
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "ExtendedLocationType": {
+      "type": "string",
+      "description": "The extended location type.",
+      "enum": [
+        "CustomLocation"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CustomLocation",
+            "value": "CustomLocation",
+            "description": "CustomLocation."
+          }
+        ]
+      }
+    },
+    "IngestionSettings": {
+      "type": "object",
+      "description": "Settings for data ingestion",
+      "properties": {
+        "dataCollectionRuleResourceId": {
+          "type": "string",
+          "description": "The Azure resource Id of the default data collection rule for this workspace.",
+          "readOnly": true
+        },
+        "dataCollectionEndpointResourceId": {
+          "type": "string",
+          "description": "The Azure resource Id of the default data collection endpoint for this workspace.",
+          "readOnly": true
+        }
+      }
+    },
+    "Metrics": {
+      "type": "object",
+      "description": "Information about metrics for the workspace",
+      "properties": {
+        "prometheusQueryEndpoint": {
+          "type": "string",
+          "description": "The Prometheus query endpoint for the workspace",
+          "readOnly": true
+        },
+        "internalId": {
+          "type": "string",
+          "description": "An internal identifier for the metrics container. Only to be used by the system",
+          "readOnly": true
+        }
+      }
+    },
+    "Pipeline": {
+      "type": "object",
+      "description": "Pipeline Info.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the pipeline.",
+          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "receivers": {
+          "type": "array",
+          "description": "Reference to receivers configured for the pipeline.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "processors": {
+          "type": "array",
+          "description": "Reference to processors configured for the pipeline.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "exporters": {
+          "type": "array",
+          "description": "Reference to exporters configured for the pipeline.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name",
+        "receivers",
+        "exporters"
+      ]
+    },
+    "PipelineGroup": {
+      "type": "object",
+      "description": "A pipeline group definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineGroupProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location for given pipeline group.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PipelineGroupListResult": {
+      "type": "object",
+      "description": "The response of a PipelineGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PipelineGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/PipelineGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PipelineGroupProperties": {
+      "type": "object",
+      "description": "Properties that need to be specified to create a new pipeline group instance.",
+      "properties": {
+        "receivers": {
+          "type": "array",
+          "description": "The receivers specified for a pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/Receiver"
+          },
+          "x-ms-identifiers": []
+        },
+        "processors": {
+          "type": "array",
+          "description": "The processors specified for a pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/Processor"
+          },
+          "x-ms-identifiers": []
+        },
+        "exporters": {
+          "type": "array",
+          "description": "The exporters specified for a pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/Exporter"
+          },
+          "x-ms-identifiers": []
+        },
+        "service": {
+          "$ref": "#/definitions/Service",
+          "description": "The service section for a given pipeline group instance."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "receivers",
+        "processors",
+        "exporters",
+        "service"
+      ]
+    },
+    "Processor": {
+      "type": "object",
+      "description": "Processor Info.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ProcessorType",
+          "description": "The type of processor."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of processor.",
+          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "ProcessorType": {
+      "type": "string",
+      "description": "The processor type.",
+      "enum": [
+        "Filter"
+      ],
+      "x-ms-enum": {
+        "name": "ProcessorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Filter",
+            "value": "Filter",
+            "description": "filter"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          }
+        ]
+      }
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "State of the public network access.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The public network access is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The public network access is disabled"
+          }
+        ]
+      }
+    },
+    "Receiver": {
+      "type": "object",
+      "description": "Receiver Info.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ReceiverType",
+          "description": "The type of receiver."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of receiver.",
+          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "tcpReceiver": {
+          "$ref": "#/definitions/TcpReceiver",
+          "description": "TCP service configurations. This field is mandatory for syslog, pipelineGroup type receivers."
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "ReceiverType": {
+      "type": "string",
+      "description": "The receiver type.",
+      "enum": [
+        "Syslog",
+        "Ama",
+        "PipelineGroup"
+      ],
+      "x-ms-enum": {
+        "name": "ReceiverType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Syslog",
+            "value": "Syslog",
+            "description": "Linux syslog."
+          },
+          {
+            "name": "Ama",
+            "value": "Ama",
+            "description": "Collect data from azure monitor agent receiver."
+          },
+          {
+            "name": "PipelineGroup",
+            "value": "PipelineGroup",
+            "description": "Collect data from pipeline group receiver."
+          }
+        ]
+      }
+    },
+    "RecordMap": {
+      "type": "object",
+      "description": "Record map for schema in azure monitor.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Record Map Key."
+        },
+        "to": {
+          "type": "string",
+          "description": "Record Map Value."
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "ResourceMap": {
+      "type": "object",
+      "description": "Resource map for schema in azure monitor.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Resource Map Key."
+        },
+        "to": {
+          "type": "string",
+          "description": "Resource Map Value."
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "SchemaMap": {
+      "type": "object",
+      "description": "Schema map for azure monitor for logs.",
+      "properties": {
+        "recordMap": {
+          "type": "array",
+          "description": "Record Map.",
+          "items": {
+            "$ref": "#/definitions/RecordMap"
+          },
+          "x-ms-identifiers": []
+        },
+        "resourceMap": {
+          "type": "array",
+          "description": "Resource Map captures information about the entity for which telemetry is recorded. For example, metrics exposed by a Kubernetes container can be linked to a resource that specifies the cluster, namespace, pod, and container name.Resource may capture an entire hierarchy of entity identification. It may describe the host in the cloud and specific container or an application running in the process.",
+          "items": {
+            "$ref": "#/definitions/ResourceMap"
+          },
+          "x-ms-identifiers": []
+        },
+        "scopeMap": {
+          "type": "array",
+          "description": "A scope map is a logical unit of the application code with which the emitted telemetry can be associated.",
+          "items": {
+            "$ref": "#/definitions/ScopeMap"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "recordMap"
+      ]
+    },
+    "ScopeMap": {
+      "type": "object",
+      "description": "Scope map for schema in azure monitor.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Scope Map Key."
+        },
+        "to": {
+          "type": "string",
+          "description": "Scope Map Value."
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "Service": {
+      "type": "object",
+      "description": "Service Info.",
+      "properties": {
+        "pipelines": {
+          "type": "array",
+          "description": "Pipelines belonging to a given pipeline group.",
+          "items": {
+            "$ref": "#/definitions/Pipeline"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "pipelines"
+      ]
+    },
+    "TcpExporter": {
+      "type": "object",
+      "description": "Base exporter using TCP as transport protocol.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "TCP url to export.",
+          "pattern": "^(https?)://[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$"
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "TcpReceiver": {
+      "type": "object",
+      "description": "Base receiver using TCP as transport protocol.",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "TCP port to listen for packages."
+        }
+      },
+      "required": [
+        "port"
+      ]
+    }
+  },
+  "parameters": {}
+}

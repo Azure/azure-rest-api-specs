@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "subscriptionId": "10e32bab-26da-4cc4-a441-52b318f824e6",
+    "resourceGroupName": "hiloResourcegroup",
+    "api-version": "2023-11-01-preview",
+    "clusterPoolName": "clusterpool1",
+    "clusterPoolTags": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/pathToOperationResult"
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.HDInsight/clusterPools/clusterpool1",
+        "name": "clusterpool1",
+        "type": "Microsoft.HDInsight/clusterPools",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentId": "45cd32aead6e4a91b079a0cdbfac8c36",
+          "managedResourceGroupName": "hdi-45cd32aead6e4a91b079a0cdbfac8c36",
+          "computeProfile": {
+            "vmSize": "Standard_D3_v2",
+            "count": 3
+          },
+          "aksClusterProfile": {
+            "aksClusterAgentPoolIdentityProfile": {
+              "msiResourceId": "/subscriptions/subid/resourceGroups/hdi-45cd32aead6e4a91b079a0cdbfac8c36/providers/Microsoft.ManagedIdentity/userAssignedIdentities/clusterpool1-agentpool",
+              "msiClientId": "a89fb478-2a84-4d9b-8f18-3e8c4d1db3eb",
+              "msiObjectId": "dc7ef861-8b55-4ffb-9003-20885cd895a9"
+            },
+            "aksClusterResourceId": "/subscriptions/subid/resourceGroups/hdi-45cd32aead6e4a91b079a0cdbfac8c36/providers/Microsoft.ContainerService/managedClusters/clusterpool1"
+          }
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        },
+        "location": "West US 2",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/pathToOperationResult"
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.HDInsight/clusterPools/clusterpool1",
+        "name": "clusterpool1",
+        "type": "Microsoft.HDInsight/clusterPools",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentId": "45cd32aead6e4a91b079a0cdbfac8c36",
+          "managedResourceGroupName": "hdi-45cd32aead6e4a91b079a0cdbfac8c36",
+          "computeProfile": {
+            "vmSize": "Standard_D3_v2",
+            "count": 3
+          },
+          "aksClusterProfile": {
+            "aksClusterAgentPoolIdentityProfile": {
+              "msiResourceId": "/subscriptions/subid/resourceGroups/hdi-45cd32aead6e4a91b079a0cdbfac8c36/providers/Microsoft.ManagedIdentity/userAssignedIdentities/clusterpool1-agentpool",
+              "msiClientId": "a89fb478-2a84-4d9b-8f18-3e8c4d1db3eb",
+              "msiObjectId": "dc7ef861-8b55-4ffb-9003-20885cd895a9"
+            },
+            "aksClusterResourceId": "/subscriptions/subid/resourceGroups/hdi-45cd32aead6e4a91b079a0cdbfac8c36/providers/Microsoft.ContainerService/managedClusters/clusterpool1"
+          }
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        },
+        "location": "West US 2",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  }
+}

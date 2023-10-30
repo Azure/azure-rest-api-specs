@@ -65,7 +65,7 @@ scalar EnclaveConnectionSourceResourceId
       type: "Microsoft.Mission/virtualEnclaves",
     },
     {
-      type: "Microsoft.Mission/transitHubs",
+      type: "Microsoft.Mission/communities/transitHubs",
     }
   ]>;
 
@@ -82,7 +82,7 @@ scalar DestinationEndpointResourceId
 scalar TransitHubResourceId
   extends ResourceIdentifier<[
     {
-      type: "Microsoft.Mission/transitHubs",
+      type: "Microsoft.Mission/communities/transitHubs",
     }
   ]>;
 

@@ -29,6 +29,12 @@ if ($typespecFolders) {
     }
     LogGroupEnd
   }
+} else {
+  if ($CheckAll) {
+    LogError "TypeSpec Validation - All did not validate any specs"
+    LogJobFailure
+    exit 1
+  }
 }
 
 if ($typespecFoldersWithFailures.Count -gt 0) {
