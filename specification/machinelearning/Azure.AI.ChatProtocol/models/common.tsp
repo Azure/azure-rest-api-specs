@@ -67,7 +67,7 @@ model ChatMessage<TState> {
 }
 
 @doc("A single, role-attributed text message within a chat completion interaction.")
-model TextMessage<TState> extends ChatMessage<TState> {
+model TextChatMessage<TState> extends ChatMessage<TState> {
   @doc("The type of the message.")
   kind: MessageKind.text;
 
