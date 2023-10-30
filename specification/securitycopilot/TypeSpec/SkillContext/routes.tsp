@@ -38,7 +38,7 @@ namespace SkillContext {
   ): NoContentResponse | UnauthorizedResponse | BadRequestResponse;
 
   @post
-  @route("setOutput")
+  @route("setOutputAsync")
   @doc("Sets the skill output")
   op setSkillOutput(
     @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
@@ -47,7 +47,7 @@ namespace SkillContext {
 
   @get
   @route("skillsetSettings")
-  @doc("Sets the skillset settings")
+  @doc("Gets the skillset settings")
   op getSkillsetSettings(
     @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
   ): Record<string> | UnauthorizedResponse;
@@ -65,4 +65,27 @@ namespace SkillContext {
   op setSkillInvocationCompleted(
     @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
   ): NoContentResponse;
+
+  @get
+  @route("getSkillsetAuthInfoAsync")
+  @doc("Gets the skillset auth related information")
+  op getSkillsetAuthInfo(
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+  ): AuthDetails | UnauthorizedResponse;
+
+  @get
+  @route("getTokenCredentialAsync")
+  @doc("Gets the token credentials")
+  op getTokenCredential(
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+    @body getTokenCredentialRequest : GetTokenCredentialRequest ,
+  ): AccessToken | UnauthorizedResponse;
+
+  @get
+  @route("getInputAsync")
+  @doc("Gets the skill input")
+  op getInput(
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+    @body getInputAsyncRequest : GetInputAsyncRequest,
+  ): SkillVariable | UnauthorizedResponse;
 }

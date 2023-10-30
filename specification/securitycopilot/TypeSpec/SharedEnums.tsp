@@ -21,3 +21,24 @@ enum ProgressLogLevel {
   @doc("Verbose log")
   Verbose,
 }
+
+@doc("Auth Location")
+enum AuthLocationEnum {
+  @doc("Using Header")
+  Header,
+
+  @doc("Using QueryParams")
+  QueryParams,
+}
+
+@doc("Token Credential Types")
+enum TokenCredentialEnum {
+  @doc("None")
+  None,
+
+  @doc("UserTokenCredential type")
+  UserTokenCredential,
+
+  @doc("ServiceTokenCredential type")
+  ServiceTokenCredential,
+}

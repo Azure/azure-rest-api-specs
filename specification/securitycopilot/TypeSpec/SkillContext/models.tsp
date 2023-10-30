@@ -100,3 +100,39 @@ model LogProgressRequest {
   @doc("Log message")
   message: string;
 }
+
+@doc("Auth Details")
+model AuthDetails {
+  @doc("Auth Location")
+  authLocation: AuthLocationEnum;
+
+  @doc("Auth Info")
+  authInfo: Record<string>;
+}
+
+@doc("TokenCredentialRequest")
+model GetTokenCredentialRequest {
+  @doc("Scopes")
+  scopes: Array<string>;
+
+  @doc("TokenCredential Type")
+  tokenCredentialType?: TokenCredentialEnum = TokenCredentialEnum.None;
+}
+
+@doc("AccessToken")
+model AccessToken {
+  @doc("Token string")
+  Token: string;
+
+  @doc("Expiry time")
+  ExpiresOn: offsetDateTime;
+}
+
+@doc("GetInputAsyncRequest")
+model GetInputAsyncRequest {
+  @doc("Input Name")
+  inputName: string;
+
+  @doc("Default value for the input")
+  defaultValue?: SkillVariable | null;
+}
