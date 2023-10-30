@@ -8,17 +8,14 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.SchemaRegistry.SchemaGroup, Access.internal);
 
 // csharp-specific public models
-@@access(Azure.SchemaRegistry.SchemaContentTypeValues, Access.public, "csharp");
+@@access(Azure.SchemaRegistry.SchemaContentTypeValues, Access.internal);
 @@usage(Azure.SchemaRegistry.SchemaContentTypeValues, Usage.input | Usage.output);
-@@projectedName(Azure.SchemaRegistry.SchemaContentTypeValues, "csharp", "ContentType");
+@@projectedName(Azure.SchemaRegistry.SchemaContentTypeValues, "client", "ContentType");
 
 // public client models
-@@access(Azure.SchemaRegistry.SchemaFormat, Access.public);
+@@access(Azure.SchemaRegistry.SchemaFormat, Access.internal);
 @@usage(Azure.SchemaRegistry.SchemaFormat, Usage.input | Usage.output);
-@@access(Azure.SchemaRegistry.SchemaProperties, Access.public);
+@@access(Azure.SchemaRegistry.SchemaProperties, Access.internal);
 @@usage(Azure.SchemaRegistry.SchemaProperties, Usage.input | Usage.output);
-@@access(Azure.SchemaRegistry.Schema, Access.public);
+@@access(Azure.SchemaRegistry.Schema, Access.internal);
 @@usage(Azure.SchemaRegistry.Schema, Usage.input | Usage.output);
-@@projectedName(Azure.SchemaRegistry.ServiceApiVersions, "client", "ApiVersion");
-@@access(Azure.SchemaRegistry.ServiceApiVersions, Access.public);
-@@usage(Azure.SchemaRegistry.ServiceApiVersions, Usage.input | Usage.output);
