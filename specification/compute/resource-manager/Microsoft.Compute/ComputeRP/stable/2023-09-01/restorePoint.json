@@ -6,20 +6,12 @@
     "version": "2023-09-01"
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -36,9 +28,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}": {
       "put": {
-        "tags": [
-          "RestorePointCollections"
-        ],
+        "tags": ["RestorePointCollections"],
         "operationId": "RestorePointCollections_CreateOrUpdate",
         "description": "The operation to create or update the restore point collection. Please refer to https://aka.ms/RestorePoints for more details. When updating a restore point collection, only tags may be modified.",
         "x-ms-examples": {
@@ -102,9 +92,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "RestorePointCollections"
-        ],
+        "tags": ["RestorePointCollections"],
         "operationId": "RestorePointCollections_Update",
         "description": "The operation to update the restore point collection.",
         "parameters": [
@@ -162,9 +150,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "RestorePointCollections"
-        ],
+        "tags": ["RestorePointCollections"],
         "operationId": "RestorePointCollections_Delete",
         "description": "The operation to delete the restore point collection. This operation will also delete all the contained restore points.",
         "parameters": [
@@ -217,9 +203,7 @@
         }
       },
       "get": {
-        "tags": [
-          "RestorePointCollections"
-        ],
+        "tags": ["RestorePointCollections"],
         "operationId": "RestorePointCollections_Get",
         "description": "The operation to get the restore point collection.",
         "parameters": [
@@ -246,9 +230,7 @@
             "required": false,
             "type": "string",
             "description": "The expand expression to apply on the operation. If expand=restorePoints, server will return all contained restore points in the restorePointCollection.",
-            "enum": [
-              "restorePoints"
-            ],
+            "enum": ["restorePoints"],
             "x-ms-enum": {
               "name": "RestorePointCollectionExpandOptions",
               "modelAsString": true
@@ -284,9 +266,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections": {
       "get": {
-        "tags": [
-          "RestorePointCollections"
-        ],
+        "tags": ["RestorePointCollections"],
         "operationId": "RestorePointCollections_List",
         "description": "Gets the list of restore point collections in a resource group.",
         "parameters": [
@@ -330,9 +310,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/restorePointCollections": {
       "get": {
-        "tags": [
-          "RestorePointCollections"
-        ],
+        "tags": ["RestorePointCollections"],
         "operationId": "RestorePointCollections_ListAll",
         "description": "Gets the list of restore point collections in the subscription. Use nextLink property in the response to get the next page of restore point collections. Do this till nextLink is not null to fetch all the restore point collections.",
         "parameters": [
@@ -526,9 +504,7 @@
             "required": false,
             "type": "string",
             "description": "The expand expression to apply on the operation. 'InstanceView' retrieves information about the run-time state of a restore point.",
-            "enum": [
-              "instanceView"
-            ],
+            "enum": ["instanceView"],
             "x-ms-enum": {
               "name": "RestorePointExpandOptions",
               "modelAsString": true
