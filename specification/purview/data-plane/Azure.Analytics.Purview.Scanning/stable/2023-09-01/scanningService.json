@@ -463,6 +463,16 @@
             ],
             "x-ms-enum": {
               "name": "ClassificationAction",
+              "values": [
+                {
+                  "value": "Keep",
+                  "description": "the classification action is keep"
+                },
+                {
+                  "value": "Delete",
+                  "description": "the classification action is delete"
+                }
+              ],
               "modelAsString": true
             }
           },
@@ -1937,6 +1947,16 @@
             ],
             "x-ms-enum": {
               "name": "ScanLevelType",
+              "values": [
+                {
+                  "value": "Full",
+                  "description": "the scan is full scan"
+                },
+                {
+                  "value": "Incremental",
+                  "description": "the scan is incremental scan"
+                }
+              ],
               "modelAsString": true
             }
           },
@@ -2845,6 +2865,16 @@
           "description": "The kind of classification rule.",
           "x-ms-enum": {
             "name": "ClassificationRuleType",
+            "values": [
+              {
+                "value": "System",
+                "description": "the classification rule is using system default"
+              },
+              {
+                "value": "Custom",
+                "description": "the classification rule is custom rule"
+              }
+            ],
             "modelAsString": true
           }
         }
@@ -2933,6 +2963,32 @@
           "description": "Operation status.",
           "x-ms-enum": {
             "name": "OperationStatus",
+            "values": [
+              {
+                "value": "Accepted",
+                "description": "the scan is accepted"
+              },
+              {
+                "value": "InProgress",
+                "description": "the scan is InProgress"
+              },
+              {
+                "value": "TransientFailure",
+                "description": "the scan is in transient failure"
+              },
+              {
+                "value": "Succeeded",
+                "description": "the scan is succeeded"
+              },
+              {
+                "value": "Failed",
+                "description": "the scan is failed"
+              },
+              {
+                "value": "Canceled",
+                "description": "the scan is canceled"
+              }
+            ],
             "modelAsString": true
           }
         },
@@ -2968,6 +3024,40 @@
           "description": "The kind of credential.",
           "x-ms-enum": {
             "name": "CredentialType",
+            "values": [
+              {
+                "value": "AccountKey",
+                "description": "the credential type is account key"
+              },
+              {
+                "value": "ServicePrincipal",
+                "description": "the credential type is service principal"
+              },
+              {
+                "value": "BasicAuth",
+                "description": "the credential type is basic auth"
+              },
+              {
+                "value": "SqlAuth",
+                "description": "the credential type is sql auth"
+              },
+              {
+                "value": "AmazonARN",
+                "description": "the credential type is amazon ARN"
+              },
+              {
+                "value": "ConsumerKeyAuth",
+                "description": "the credential type is Consumer Key Auth"
+              },
+              {
+                "value": "DelegatedAuth",
+                "description": "the credential type is delegated auth"
+              },
+              {
+                "value": "ManagedIdentity",
+                "description": "the credential type is managed identity"
+              }
+            ],
             "modelAsString": true
           }
         }
@@ -3175,6 +3265,16 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "ScanRulesetType",
+            "values": [
+              {
+                "value": "Custom",
+                "description": "the scan ruleset type is custom"
+              },
+              {
+                "value": "System",
+                "description": "the scan ruleset type is system default"
+              }
+            ],
             "modelAsString": true
           }
         },
@@ -3188,6 +3288,16 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "ScanLevelType",
+            "values": [
+              {
+                "value": "Full",
+                "description": "the scan is full scan"
+              },
+              {
+                "value": "Incremental",
+                "description": "the scan is incremental scan"
+              }
+            ],
             "modelAsString": true
           }
         },
@@ -3380,6 +3490,16 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "ScanRulesetType",
+            "values": [
+              {
+                "value": "Custom",
+                "description": "the scan ruleset type is custom"
+              },
+              {
+                "value": "System",
+                "description": "the scan ruleset type is system default"
+              }
+            ],
             "modelAsString": true
           }
         },
@@ -3393,6 +3513,16 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "ScanLevelType",
+            "values": [
+              {
+                "value": "Full",
+                "description": "the scan is full scan"
+              },
+              {
+                "value": "Incremental",
+                "description": "the scan is incremental scan"
+              }
+            ],
             "modelAsString": true
           }
         },
@@ -3607,6 +3737,20 @@
           "description": "The creation type.",
           "x-ms-enum": {
             "name": "CreationType",
+            "values": [
+              {
+                "value": "Manual",
+                "description": "the datasource creation type is Manual"
+              },
+              {
+                "value": "AutoNative",
+                "description": "the datasource creation type is auto created, native"
+              },
+              {
+                "value": "AutoManaged",
+                "description": "the datasource creation type is auto managed"
+              }
+            ],
             "modelAsString": true
           }
         }
@@ -3646,6 +3790,20 @@
           "description": "The creation type.",
           "x-ms-enum": {
             "name": "CreationType",
+            "values": [
+              {
+                "value": "Manual",
+                "description": "the datasource creation type is Manual"
+              },
+              {
+                "value": "AutoNative",
+                "description": "the datasource creation type is auto created, native"
+              },
+              {
+                "value": "AutoManaged",
+                "description": "the datasource creation type is auto managed"
+              }
+            ],
             "modelAsString": true
           }
         }
@@ -4493,6 +4651,16 @@
           "description": "Versioned scan ruleset properties.",
           "x-ms-enum": {
             "name": "ScanRulesetType",
+            "values": [
+              {
+                "value": "Custom",
+                "description": "the scan ruleset type is custom"
+              },
+              {
+                "value": "System",
+                "description": "the scan ruleset type is system default"
+              }
+            ],
             "modelAsString": true
           }
         },
@@ -4788,6 +4956,16 @@
           "description": "The scan level of trigger.",
           "x-ms-enum": {
             "name": "ScanLevelType",
+            "values": [
+              {
+                "value": "Full",
+                "description": "the scan is full scan"
+              },
+              {
+                "value": "Incremental",
+                "description": "the scan is incremental scan"
+              }
+            ],
             "modelAsString": true
           }
         },
@@ -7153,6 +7331,40 @@
           "type": "string",
           "x-ms-enum": {
             "name": "CredentialType",
+            "values": [
+              {
+                "value": "AccountKey",
+                "description": "the credential type is account key"
+              },
+              {
+                "value": "ServicePrincipal",
+                "description": "the credential type is service principal"
+              },
+              {
+                "value": "BasicAuth",
+                "description": "the credential type is basic auth"
+              },
+              {
+                "value": "SqlAuth",
+                "description": "the credential type is sql auth"
+              },
+              {
+                "value": "AmazonARN",
+                "description": "the credential type is amazon ARN"
+              },
+              {
+                "value": "ConsumerKeyAuth",
+                "description": "the credential type is Consumer Key Auth"
+              },
+              {
+                "value": "DelegatedAuth",
+                "description": "the credential type is delegated auth"
+              },
+              {
+                "value": "ManagedIdentity",
+                "description": "the credential type is managed identity"
+              }
+            ],
             "modelAsString": true
           }
         }
@@ -7175,6 +7387,16 @@
           "description": "The type of the scan ruleset.",
           "x-ms-enum": {
             "name": "ScanRulesetType",
+            "values": [
+              {
+                "value": "Custom",
+                "description": "the scan ruleset type is custom"
+              },
+              {
+                "value": "System",
+                "description": "the scan ruleset type is system default"
+              }
+            ],
             "modelAsString": true
           }
         },
@@ -7222,6 +7444,16 @@
           "description": "The type of the scan ruleset.",
           "x-ms-enum": {
             "name": "ScanRulesetType",
+            "values": [
+              {
+                "value": "Custom",
+                "description": "the scan ruleset type is custom"
+              },
+              {
+                "value": "System",
+                "description": "the scan ruleset type is system default"
+              }
+            ],
             "modelAsString": true
           }
         },
