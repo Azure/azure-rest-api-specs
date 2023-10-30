@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/advancedThreatProtectionSettings": {
       "get": {
         "tags": [
-          "ThreatProtectionSettings"
+          "AdvancedThreatProtectionSettings"
         ],
         "description": "Get a list of server's Threat Protection state.",
         "operationId": "ServerThreatProtectionSettings_ListByServer",
@@ -82,9 +82,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/advancedThreatProtectionSettings/{threatProtectionName}": {
       "get": {
         "tags": [
-          "ThreatProtectionSettings"
+          "AdvancedThreatProtectionSettings"
         ],
-        "description": "Get a server's Threat Protection settings.",
+        "description": "Get a server's Advanced Threat Protection settings.",
         "operationId": "ServerThreatProtectionSettings_Get",
         "parameters": [
           {
@@ -105,7 +105,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the server threat protection settings.",
+            "description": "Successfully retrieved the server advanced threat protection settings.",
             "schema": {
               "$ref": "#/definitions/ServerThreatProtectionSettingsModel"
             }
@@ -125,7 +125,7 @@
       },
       "put": {
         "tags": [
-          "ThreatProtectionSettings"
+          "AdvancedThreatProtectionSettings"
         ],
         "description": "Creates or updates a server's Advanced Threat Protection settings.",
         "operationId": "ServerThreatProtectionSettings_CreateOrUpdate",
@@ -180,11 +180,8 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Update a server's Threat Protection settings with minimal parameters": {
-            "$ref": "./examples/ServerThreatProtectionSettingsCreateMin.json"
-          },
-          "Update a database's Threat Protection settings with all parameters": {
-            "$ref": "./examples/ServerThreatProtectionSettingsCreateMax.json"
+          "Update a server's Threat Protection settings": {
+            "$ref": "./examples/ServerThreatProtectionSettingsCreate.json"
           }
         }
       }
@@ -219,7 +216,7 @@
       }
     },
     "ServerThreatProtectionSettingsModel": {
-      "description": "Server's Threat Protection settings.",
+      "description": "Server's Advanced Threat Protection settings.",
       "type": "object",
       "allOf": [
         {
@@ -229,13 +226,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServerThreatProtectionProperties",
-          "description": "Resource properties.",
+          "description": "Advanced Threat Protection properties.",
           "x-ms-client-flatten": true
         }
       }
     },
     "ServerThreatProtectionListResult": {
-      "description": "A list of the server's Threat Protection settings.",
+      "description": "A list of the server's Advanced Threat Protection settings.",
       "type": "object",
       "properties": {
         "value": {
