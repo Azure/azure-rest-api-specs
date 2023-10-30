@@ -266,7 +266,8 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/classificationRuleName"
+            "$ref": "#/parameters/classificationRuleName",
+            "required": true
           },
           {
             "in": "body",
@@ -472,6 +473,12 @@
         "responses": {
           "202": {
             "description": "Success.",
+            "headers": {
+              "Operation-Location": {
+                "description": "Response header for long running operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/OperationResponse"
             }
@@ -480,12 +487,6 @@
             "description": "An error response received from the Scanning Service.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseModel"
-            },
-            "headers": {
-              "Operation-Location": {
-                "description": "Response header for long running operation.",
-                "type": "string"
-              }
             }
           }
         },
@@ -897,7 +898,8 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/dataSourceName"
+            "$ref": "#/parameters/dataSourceName",
+            "required": true
           },
           {
             "$ref": "#/parameters/scanName"
@@ -1312,18 +1314,18 @@
         ],
         "responses": {
           "202": {
-            "description": "Success."
-          },
-          "default": {
-            "description": "An error response received from the Scanning Service.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            },
+            "description": "Success.",
             "headers": {
               "Operation-Location": {
                 "description": "Response header for long running operation.",
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -2096,7 +2098,8 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/scanRulesetName"
+            "$ref": "#/parameters/scanRulesetName",
+            "required": true
           },
           {
             "in": "body",
@@ -2745,7 +2748,8 @@
         },
         "nextLink": {
           "description": "The link to the next page of results, if any remaining results exist.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         },
         "count": {
           "description": "The number of Azure Key Vault connections.",
@@ -3177,9 +3181,7 @@
         "statistics": {
           "type": "object",
           "description": "The discovery statistics.",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "additionalProperties": {}
         },
         "isErrorLogAvailable": {
           "type": "boolean",
@@ -3223,9 +3225,7 @@
         "statistics": {
           "type": "object",
           "description": "The ingestion statistics.",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "additionalProperties": {}
         },
         "estimatedTimeRemainingInSeconds": {
           "format": "int64",
