@@ -1028,20 +1028,6 @@
       "description": "Properties of an ASE custom domain suffix configuration.",
       "type": "object",
       "properties": {
-        "provisioningState": {
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Degraded",
-            "InProgress"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "CustomDnsSuffixProvisioningState",
-            "modelAsString": false
-          }
-        },
         "provisioningDetails": {
           "type": "string",
           "readOnly": true
@@ -1057,6 +1043,20 @@
         "keyVaultReferenceIdentity": {
           "description": "The user-assigned identity to use for resolving the key vault certificate reference. If not specified, the system-assigned ASE identity will be used if available.",
           "type": "string"
+        },
+        "provisioningState": {
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Degraded",
+            "InProgress"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CustomDnsSuffixProvisioningState",
+            "modelAsString": false
+          }
         }
       }
     },
