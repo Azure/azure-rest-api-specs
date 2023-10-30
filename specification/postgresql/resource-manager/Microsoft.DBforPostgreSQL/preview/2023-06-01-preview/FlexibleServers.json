@@ -617,6 +617,13 @@
             "create",
             "update"
           ]
+        },
+        "privateEndpointConnections": {
+          "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionListResult",
+          "description": "List of private endpoint connections associated with the specified resource.",
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "description": "The properties of a server."
@@ -731,13 +738,6 @@
           "$ref": "#/definitions/Network",
           "default": null,
           "description": "Network properties of a server. These are required to be passed only in case if server is a private access server."
-        },
-        "privateEndpointConnections": {
-          "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionListResult",
-          "description": "List of private endpoint connections associated with the specified resource.",
-          "x-ms-mutability": [
-            "read"
-          ]
         }
       }
     },
