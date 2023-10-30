@@ -1665,72 +1665,6 @@
         }
       }
     },
-    "/datasources/{dataSourceName}/scans/{scanName}:run": {
-      "post": {
-        "tags": [
-          "Scan"
-        ],
-        "description": "Runs the scan",
-        "operationId": "Scans_Run",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/dataSourceName"
-          },
-          {
-            "$ref": "#/parameters/scanName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "the scan run properties",
-            "schema": {
-              "$ref": "#/definitions/ScanRunProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/OperationResponse"
-            }
-          },
-          "202": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/OperationResponse"
-            },
-            "headers": {
-              "Operation-Location": {
-                "description": "Response header for long running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "An error response received from the Scanning Service",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Scans_Run": {
-            "$ref": "./examples/Scans_Run.json"
-          }
-        }
-      }
-    },
     "/datasources/{dataSourceName}/scans/{scanName}": {
       "put": {
         "tags": [
@@ -4533,28 +4467,6 @@
           "description": "Status of a private link connection.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "ScanRunProperties": {
-      "description": "the scan run properties",
-      "type": "object",
-      "properties": {
-        "scanLevel": {
-          "enum": [
-            "Full",
-            "Incremental"
-          ],
-          "type": "string",
-          "description": "the scan run level",
-          "x-ms-enum": {
-            "name": "ScanLevelType",
-            "modelAsString": true
-          }
-        },
-        "incrementalScanStartTime": {
-          "format": "date-time",
-          "type": "string"
         }
       }
     },
