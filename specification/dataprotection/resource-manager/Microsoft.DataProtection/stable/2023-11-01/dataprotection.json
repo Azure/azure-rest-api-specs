@@ -4253,6 +4253,18 @@
           "format": "date-time",
           "type": "string",
           "readOnly": true
+        },
+        "recoveryPointState": {
+          "description": "Specifies recovery point completeness. Partial (i.e., only some of the intended items were backed up), or Completed (i.e., ALL intended items were backed up).",
+          "enum": [
+            "Completed",
+            "Partial"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryPointCompletionState",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -5248,7 +5260,7 @@
           }
         },
         "replicatedRegions": {
-          "description" : "List of replicated regions for Backup Vault",
+          "description": "List of replicated regions for Backup Vault",
           "items": {
             "type": "string"
           },
