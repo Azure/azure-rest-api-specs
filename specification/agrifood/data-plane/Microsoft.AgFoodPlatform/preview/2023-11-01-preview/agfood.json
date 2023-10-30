@@ -3,7 +3,22 @@
   "info": {
     "title": "Microsoft Azure Data Manager for Agriculture Data Plane Service",
     "description": "APIs documentation for Microsoft Azure Data Manager for Agriculture DataPlane Service.",
-    "version": "2023-07-01-preview"
+    "version": "2023-11-01-preview"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The host name of the namespace, e.g. admaInstanceName.farmbeats.azure.net",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
   },
   "paths": {
     "/application-data:search": {
@@ -29,12 +44,12 @@
           {
             "in": "query",
             "name": "maxPageSize",
-            "format": "int32",
             "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
+            "type": "integer",
+            "format": "int32",
             "default": 50,
             "maximum": 1000,
-            "minimum": 10,
-            "type": "integer"
+            "minimum": 10
           },
           {
             "in": "query",
@@ -903,6 +918,457 @@
         }
       }
     },
+    "/chemical-products": {
+      "get": {
+        "tags": [
+          "ChemicalProducts"
+        ],
+        "description": "Returns a paginated list of chemical product resources.",
+        "operationId": "ChemicalProducts_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cropIds",
+            "description": "CropIds of chemical product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "brands",
+            "description": "Brands of chemical product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "products",
+            "description": "Products of chemical product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "types",
+            "description": "Types of chemical product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "states",
+            "description": "States of chemical product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "activeIngredients",
+            "description": "ActiveIngredients of chemical product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "specificGravity",
+            "description": "SpecificGravity of chemical product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "formulation",
+            "description": "Formulation of chemical product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "registrationNumber",
+            "description": "RegistrationNumber of chemical product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "minReEntryInterval",
+            "description": "Min ReEntryInterval of chemical product.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "maxReEntryInterval",
+            "description": "Max ReEntryInterval of chemical product.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "locations",
+            "description": "Locations of chemical product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "companyNames",
+            "description": "Company names of chemical product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "datasetIds",
+            "description": "Reference dataset id of chemical product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "referenceRecordIds",
+            "description": "Reference record id of chemical product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "ids",
+            "description": "Ids of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "names",
+            "description": "Names of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "propertyFilters",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "statuses",
+            "description": "Statuses of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "minCreatedDateTime",
+            "description": "Minimum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxCreatedDateTime",
+            "description": "Maximum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "minLastModifiedDateTime",
+            "description": "Minimum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxLastModifiedDateTime",
+            "description": "Maximum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxPageSize",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ChemicalProductListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ChemicalProducts_List": {
+            "$ref": "./examples/ChemicalProducts_List.json"
+          }
+        }
+      }
+    },
+    "/chemical-products/{chemicalProductId}": {
+      "get": {
+        "tags": [
+          "ChemicalProducts"
+        ],
+        "description": "Gets a specified chemicalProduct resource.",
+        "operationId": "ChemicalProducts_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chemicalProductId",
+            "description": "Id of the chemicalProduct.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ChemicalProduct"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "ChemicalProducts_Get": {
+            "$ref": "./examples/ChemicalProducts_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ChemicalProducts"
+        ],
+        "description": "Creates or updates a chemicalProduct resource.",
+        "operationId": "ChemicalProducts_CreateOrUpdate",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chemicalProductId",
+            "description": "Id of the chemicalProduct resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "chemicalProduct",
+            "description": "ChemicalProduct resource payload to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChemicalProduct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ChemicalProduct"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ChemicalProduct"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "ChemicalProducts_CreateOrUpdate": {
+            "$ref": "./examples/ChemicalProducts_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ChemicalProducts"
+        ],
+        "description": "Deletes datast for given chemicalProduct id.",
+        "operationId": "ChemicalProducts_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chemicalProductId",
+            "description": "Id of chemicalProduct to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "ChemicalProducts_Delete": {
+            "$ref": "./examples/ChemicalProducts_Delete.json"
+          }
+        }
+      }
+    },
     "/crop-products": {
       "get": {
         "tags": [
@@ -917,7 +1383,7 @@
           {
             "in": "query",
             "name": "cropIds",
-            "description": "CropIds of the resource.",
+            "description": "CropIds of crop product.",
             "type": "array",
             "items": {
               "type": "string"
@@ -927,7 +1393,7 @@
           {
             "in": "query",
             "name": "brands",
-            "description": "Brands of the resource.",
+            "description": "Brands of crop product.",
             "type": "array",
             "items": {
               "type": "string"
@@ -937,7 +1403,17 @@
           {
             "in": "query",
             "name": "products",
-            "description": "Products of the resource.",
+            "description": "Products of crop product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "treatments",
+            "description": "Treatments of crop product.",
             "type": "array",
             "items": {
               "type": "string"
@@ -947,7 +1423,57 @@
           {
             "in": "query",
             "name": "traits",
-            "description": "Traits of the resource.",
+            "description": "Traits of crop product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "traitStacks",
+            "description": "TraitStacks of crop product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "locations",
+            "description": "Locations of crop product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "companyNames",
+            "description": "Company names of the crop product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "referenceDatasetIds",
+            "description": "Reference dataset id of the crop product.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "referenceRecordIds",
+            "description": "Reference record id of the crop product.",
             "type": "array",
             "items": {
               "type": "string"
@@ -1264,7 +1790,7 @@
           {
             "in": "query",
             "name": "phenotypes",
-            "description": "Crop phenotypes of the resource.",
+            "description": "Crop phenotypes of the crop.",
             "type": "array",
             "items": {
               "type": "string"
@@ -1274,7 +1800,37 @@
           {
             "in": "query",
             "name": "breedingMethods",
-            "description": "Breeding method of the resource.",
+            "description": "Breeding method of the crop.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "locations",
+            "description": "Location of the crop.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "referenceDatasetIds",
+            "description": "Reference dataset id of the crop.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "referenceRecordIds",
+            "description": "Reference record id of the crop.",
             "type": "array",
             "items": {
               "type": "string"
@@ -1573,6 +2129,886 @@
         "x-ms-examples": {
           "Crops_Delete": {
             "$ref": "./examples/Crops_Delete.json"
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}/records": {
+      "get": {
+        "tags": [
+          "DatasetRecords"
+        ],
+        "description": "Returns a paginated list of records.",
+        "operationId": "DatasetRecords_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "datasetId",
+            "description": "dataset id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "recordFilters",
+            "description": "Filters on key-value pairs within the Record object.\r\nOnly applicable for first level keys with value of type string, datetime or number.\r\neg. \"{testKey} eq {testValue}\".",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "ids",
+            "description": "Ids of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "names",
+            "description": "Names of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "propertyFilters",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "statuses",
+            "description": "Statuses of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "minCreatedDateTime",
+            "description": "Minimum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxCreatedDateTime",
+            "description": "Maximum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "minLastModifiedDateTime",
+            "description": "Minimum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxLastModifiedDateTime",
+            "description": "Maximum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxPageSize",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatasetRecordListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DatasetRecords_List": {
+            "$ref": "./examples/DatasetRecords_List.json"
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}/records/{recordId}": {
+      "get": {
+        "tags": [
+          "DatasetRecords"
+        ],
+        "description": "Gets a specified record.",
+        "operationId": "DatasetRecords_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "datasetId",
+            "description": "Id of the dataset.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "recordId",
+            "description": "Id of the record.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatasetRecord"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "DatasetRecords_Get": {
+            "$ref": "./examples/DatasetRecords_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DatasetRecords"
+        ],
+        "description": "Creates or updates a dataset record.",
+        "operationId": "DatasetRecords_CreateOrUpdate",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "datasetId",
+            "description": "Id of the dataset resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "recordId",
+            "description": "Id of the dataset record resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "datasetRecord",
+            "description": "Dataset record resource payload to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatasetRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatasetRecord"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DatasetRecord"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "DatasetRecords_CreateOrUpdate": {
+            "$ref": "./examples/DatasetRecords_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DatasetRecords"
+        ],
+        "description": "Deletes dataset record for given record id.",
+        "operationId": "DatasetRecords_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "datasetId",
+            "description": "Id of dataset the record belongs to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "recordId",
+            "description": "Id of the record to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "DatasetRecords_Delete": {
+            "$ref": "./examples/DatasetRecords_Delete.json"
+          }
+        }
+      }
+    },
+    "/datasets": {
+      "get": {
+        "tags": [
+          "Datasets"
+        ],
+        "description": "Returns a paginated list of datasets.",
+        "operationId": "Datasets_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "type",
+            "description": "Dataset type.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "ids",
+            "description": "Ids of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "names",
+            "description": "Names of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "propertyFilters",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "statuses",
+            "description": "Statuses of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "minCreatedDateTime",
+            "description": "Minimum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxCreatedDateTime",
+            "description": "Maximum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "minLastModifiedDateTime",
+            "description": "Minimum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxLastModifiedDateTime",
+            "description": "Maximum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxPageSize",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatasetListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Datasets_List": {
+            "$ref": "./examples/Datasets_List.json"
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}": {
+      "get": {
+        "tags": [
+          "Datasets"
+        ],
+        "description": "Gets a specified dataset.",
+        "operationId": "Datasets_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "datasetId",
+            "description": "Id of the dataset.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_Get": {
+            "$ref": "./examples/Datasets_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Datasets"
+        ],
+        "description": "Creates or updates a dataset.",
+        "operationId": "Datasets_CreateOrUpdate",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "datasetId",
+            "description": "Id of the dataset resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "dataset",
+            "description": "Dataset resource payload to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_CreateOrUpdate": {
+            "$ref": "./examples/Datasets_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Datasets"
+        ],
+        "description": "Deletes datast for given dataset id.",
+        "operationId": "Datasets_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "datasetId",
+            "description": "Id of dataset to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_Delete": {
+            "$ref": "./examples/Datasets_Delete.json"
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}/access": {
+      "get": {
+        "tags": [
+          "Datasets"
+        ],
+        "description": "Datast access list.",
+        "operationId": "Datasets_ListAuthorizedAccess",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "datasetId",
+            "description": "Id of dataset to be accessed.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "subscriptionIds",
+            "description": "Subscription Ids.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "resourceIds",
+            "description": "Resource Ids.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "maxPageSize",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatasetAccessListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Datasets_ListAuthorizedAccess": {
+            "$ref": "./examples/Datasets_ListAuthorizedAccess.json"
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}/access:grant": {
+      "post": {
+        "tags": [
+          "Datasets"
+        ],
+        "description": "Datast access grant.",
+        "operationId": "Datasets_AuthorizeAccess",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "datasetId",
+            "description": "Id of dataset to be accessed.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "datasetAccess",
+            "description": "Dataset access details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatasetAccess"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatasetAccess"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_AuthorizeAccess": {
+            "$ref": "./examples/Datasets_AuthorizeAccess.json"
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}/access:remove": {
+      "post": {
+        "tags": [
+          "Datasets"
+        ],
+        "description": "Datast access remove.",
+        "operationId": "Datasets_RemoveAccess",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "datasetId",
+            "description": "Id of dataset to be accessed.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "datasetAccess",
+            "description": "Dataset access details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatasetAccess"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_RemoveAccess": {
+            "$ref": "./examples/Datasets_RemoveAccess.json"
           }
         }
       }
@@ -2263,6 +3699,423 @@
         "x-ms-examples": {
           "Devices_Delete": {
             "$ref": "./examples/Devices_Delete.json"
+          }
+        }
+      }
+    },
+    "/farm-equipments": {
+      "get": {
+        "tags": [
+          "FarmEquipments"
+        ],
+        "description": "Returns a paginated list of farm equipment resources.",
+        "operationId": "FarmEquipments_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cropIds",
+            "description": "CropIds of farm equipment.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "brands",
+            "description": "Brands of farm equipment.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "equipmentSeries",
+            "description": "EqupmentSeries of farm equipment.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "models",
+            "description": "Model of farm equipment.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "serial",
+            "description": "Serial of farm equipment.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "types",
+            "description": "Type of farm equipment.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "ownership",
+            "description": "Ownership of farm equipment.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "locations",
+            "description": "Locations of farm equipment.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "companyNames",
+            "description": "Company names of farm equipment.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "referenceDatasetIds",
+            "description": "Reference dataset id of the farm equipment.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "referenceRecordIds",
+            "description": "Reference record id of the farm equipment.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "ids",
+            "description": "Ids of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "names",
+            "description": "Names of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "propertyFilters",
+            "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "statuses",
+            "description": "Statuses of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "minCreatedDateTime",
+            "description": "Minimum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxCreatedDateTime",
+            "description": "Maximum creation date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "minLastModifiedDateTime",
+            "description": "Minimum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxLastModifiedDateTime",
+            "description": "Maximum last modified date of resource (inclusive).",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "maxPageSize",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FarmEquipmentListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "FarmEquipments_List": {
+            "$ref": "./examples/FarmEquipments_List.json"
+          }
+        }
+      }
+    },
+    "/farm-equipments/{farmEquipmentId}": {
+      "get": {
+        "tags": [
+          "FarmEquipments"
+        ],
+        "description": "Gets a specified farm equipment resource.",
+        "operationId": "FarmEquipments_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "farmEquipmentId",
+            "description": "Id of the farm equipment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FarmEquipment"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "FarmEquipments_Get": {
+            "$ref": "./examples/FarmEquipments_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "FarmEquipments"
+        ],
+        "description": "Creates or updates a farm equipment resource.",
+        "operationId": "FarmEquipments_CreateOrUpdate",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "farmEquipmentId",
+            "description": "Id of the farm equipment resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "farmEquipment",
+            "description": "FarmEquipment resource payload to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FarmEquipment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FarmEquipment"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/FarmEquipment"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "FarmEquipments_CreateOrUpdate": {
+            "$ref": "./examples/FarmEquipments_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FarmEquipments"
+        ],
+        "description": "Deletes datast for given farm equipment id.",
+        "operationId": "FarmEquipments_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "farmEquipmentId",
+            "description": "Id of farm equipment to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "FarmEquipments_Delete": {
+            "$ref": "./examples/FarmEquipments_Delete.json"
           }
         }
       }
@@ -3005,12 +4858,12 @@
           {
             "in": "query",
             "name": "maxPageSize",
-            "format": "int32",
             "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
+            "type": "integer",
+            "format": "int32",
             "default": 50,
             "maximum": 1000,
-            "minimum": 10,
-            "type": "integer"
+            "minimum": 10
           },
           {
             "in": "query",
@@ -3398,12 +5251,12 @@
           {
             "in": "query",
             "name": "maxPageSize",
-            "format": "int32",
             "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
+            "type": "integer",
+            "format": "int32",
             "default": 50,
             "maximum": 1000,
-            "minimum": 10,
-            "type": "integer"
+            "minimum": 10
           },
           {
             "in": "query",
@@ -8093,12 +9946,12 @@
           {
             "in": "query",
             "name": "maxPageSize",
-            "format": "int32",
             "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
+            "type": "integer",
+            "format": "int32",
             "default": 50,
             "maximum": 1000,
-            "minimum": 10,
-            "type": "integer"
+            "minimum": 10
           },
           {
             "in": "query",
@@ -8486,12 +10339,12 @@
           {
             "in": "query",
             "name": "maxPageSize",
-            "format": "int32",
             "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
+            "type": "integer",
+            "format": "int32",
             "default": 50,
             "maximum": 1000,
-            "minimum": 10,
-            "type": "integer"
+            "minimum": 10
           },
           {
             "in": "query",
@@ -9572,12 +11425,12 @@
           {
             "in": "query",
             "name": "maxPageSize",
-            "format": "int32",
             "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
+            "type": "integer",
+            "format": "int32",
             "default": 50,
             "maximum": 1000,
-            "minimum": 10,
-            "type": "integer"
+            "minimum": 10
           },
           {
             "in": "query",
@@ -9777,19 +11630,27 @@
             "in": "query",
             "name": "associatedResourceId",
             "description": "Associated Resource Id of the resource.",
+            "required": true,
             "type": "string"
           },
           {
             "in": "query",
             "name": "associatedResourceType",
             "description": "Resource Types of the resource.\r\ni.e. Farmer, Farm, Field, SeasonalField, ApplicationData, HarvestData, TillageData, PlantingData, PlantTissueAnalysis.",
+            "required": true,
             "type": "string"
           },
           {
             "in": "query",
-            "name": "source",
-            "description": "Source name of scene data, Available Values: Sentinel_2_L2A, Sentinel_2_L1C.",
+            "name": "collection",
+            "description": "Collection name of scene data, Available Values: sentinel-2-l2a, sentinel-2l1c.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "itemId",
+            "description": "Item Id.",
             "type": "string"
           },
           {
@@ -10095,8 +11956,8 @@
         "tags": [
           "Scenes"
         ],
-        "description": "Search for STAC features by collection id, bbox, intersecting geometry, start and end datetime.",
-        "operationId": "Scenes_SearchFeatures",
+        "description": "Search for STAC items by collection id, bbox, intersecting geometry, start and end datetime.",
+        "operationId": "Scenes_SearchItems",
         "consumes": [
           "application/json"
         ],
@@ -10107,22 +11968,14 @@
           {
             "in": "path",
             "name": "collectionId",
-            "description": "Collection Id to be searched.",
+            "description": "Collection Id to be searched. Available Values are: sentinel-2-l2a, sentinel-2-l1c.",
             "required": true,
-            "type": "string",
-            "enum": [
-              "Sentinel_2_L2A",
-              "Sentinel_2_L1C"
-            ],
-            "x-ms-enum": {
-              "name": "collectionId",
-              "modelAsString": true
-            }
+            "type": "string"
           },
           {
             "in": "query",
             "name": "maxpagesize",
-            "description": "Maximum number of features needed (inclusive). Minimum = 1, Maximum = 100, Default value = 10.",
+            "description": "Maximum number of items needed (inclusive). Minimum = 1, Maximum = 100, Default value = 10.",
             "type": "integer",
             "format": "int32",
             "default": 10,
@@ -10147,11 +12000,11 @@
           },
           {
             "in": "body",
-            "name": "searchFeaturesQuery",
+            "name": "searchItemsQuery",
             "description": "Query filters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchFeaturesQuery"
+              "$ref": "#/definitions/SearchItemsQuery"
             }
           }
         ],
@@ -10159,7 +12012,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SearchFeaturesResponse"
+              "$ref": "#/definitions/SearchItemsResponse"
             }
           },
           "default": {
@@ -10177,8 +12030,8 @@
           }
         },
         "x-ms-examples": {
-          "Scenes_SearchFeatures": {
-            "$ref": "./examples/Scenes_SearchFeatures.json"
+          "Scenes_SearchItems": {
+            "$ref": "./examples/Scenes_SearchItems.json"
           }
         }
       }
@@ -10400,12 +12253,12 @@
           {
             "in": "query",
             "name": "maxPageSize",
-            "format": "int32",
             "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
+            "type": "integer",
+            "format": "int32",
             "default": 50,
             "maximum": 1000,
-            "minimum": 10,
-            "type": "integer"
+            "minimum": 10
           },
           {
             "in": "query",
@@ -12685,7 +14538,7 @@
             "description": "Id of solution for which job is to be cancelled.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z0-9]{3,100}$"
           },
           {
             "in": "query",
@@ -12753,7 +14606,7 @@
             "description": "Id of the solution resource.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z0-9]{3,100}$"
           },
           {
             "in": "query",
@@ -12825,7 +14678,7 @@
             "description": "Id of the solution.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z0-9]{3,100}$"
           },
           {
             "in": "query",
@@ -13090,12 +14943,12 @@
           {
             "in": "query",
             "name": "maxPageSize",
-            "format": "int32",
             "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
+            "type": "integer",
+            "format": "int32",
             "default": 50,
             "maximum": 1000,
-            "minimum": 10,
-            "type": "integer"
+            "minimum": 10
           },
           {
             "in": "query",
@@ -13542,12 +15395,12 @@
           {
             "in": "query",
             "name": "maxPageSize",
-            "format": "int32",
             "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
+            "type": "integer",
+            "format": "int32",
             "default": 50,
             "maximum": 1000,
-            "minimum": 10,
-            "type": "integer"
+            "minimum": 10
           },
           {
             "in": "query",
@@ -13726,6 +15579,8 @@
       "properties": {
         "iconResolution": {
           "description": "Icon Resolution (Only applicable for AzureWeatherMaps).",
+          "maxLength": 100,
+          "minLength": 2,
           "type": "string"
         },
         "details": {
@@ -14165,7 +16020,7 @@
       "discriminator": "kind"
     },
     "AuthCredentialsKind": {
-      "description": "CredentialTypeEnum.",
+      "description": "Enum for different types of AuthCredentials supported.",
       "enum": [
         "OAuthClientCredentials",
         "ApiKeyAuthCredentials"
@@ -14232,14 +16087,13 @@
           "description": "ExtensionId of weather data. Available values: DTN.ClearAg, DTN.ContentServices.",
           "maxLength": 100,
           "minLength": 2,
-          "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$",
+          "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z0-9]{3,100}$",
           "type": "string"
         },
         "satelliteProvider": {
-          "description": "Provider of satellite data. Available Value: Microsoft, SentinelHub (Sentinel Hub by Sinergise).",
+          "description": "Provider of satellite data. Available Value: SentinelHub (Sentinel Hub by Sinergise).",
           "minLength": 1,
           "enum": [
-            "Microsoft",
             "SentinelHub"
           ],
           "type": "string",
@@ -14249,17 +16103,9 @@
           }
         },
         "satelliteSource": {
-          "description": "Source of satellite data. Available Value: Sentinel_2_L2A.",
+          "description": "Source of satellite data. Available Value: sentinel-2-l2a, sentinel-2-l1c.",
           "minLength": 1,
-          "enum": [
-            "Sentinel_2_L2A",
-            "Sentinel_2_L1C"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "Source",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "imageResolution": {
           "format": "double",
@@ -14448,40 +16294,204 @@
         }
       }
     },
+    "ChemicalProduct": {
+      "description": "Schema of ChemicalProduct resource.",
+      "type": "object",
+      "properties": {
+        "cropIds": {
+          "description": "The Ids of the crops associated with the Chemical product.\r\nNote: A maximum of 25 crops can be associated with a cropProduct.",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reference": {
+          "$ref": "#/definitions/Reference"
+        },
+        "brand": {
+          "description": "Commercial brand of the chemical product.",
+          "type": "string"
+        },
+        "product": {
+          "description": "Commercial product name of the chemical product.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Herbicide, Additive, Insecticides, Fertilizers.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Liquid/non Liquid.",
+          "type": "string"
+        },
+        "activeIngredients": {
+          "description": "Active chemicals in the formulation.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "specificGravity": {
+          "description": "Specific gravity details.",
+          "type": "string"
+        },
+        "formulation": {
+          "description": "Formulation description. Percentage or other unit of N, P, K, CA, MG, S, FE, MN, ZN, CU, B, MO, CL\r\n(based on the source, the available chemical elements can vary, but this is a typical list).",
+          "type": "string"
+        },
+        "company": {
+          "$ref": "#/definitions/Company"
+        },
+        "location": {
+          "description": "Area where the chemical is used. This is important from a compliance perspective.",
+          "type": "string"
+        },
+        "registrationNumber": {
+          "description": "Registration number of the chemical. This could vary by geography.",
+          "type": "string"
+        },
+        "reEntryInterval": {
+          "format": "int32",
+          "description": "The number of days after which a person can visit the field after the chemical product is applied.",
+          "type": "integer"
+        },
+        "id": {
+          "description": "Unique resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z"
+        },
+        "source": {
+          "description": "Source of the resource.",
+          "maxLength": 100,
+          "minLength": 2,
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of the resource.",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "createdBy": {
+          "description": "Created by user/tenant id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "modifiedBy": {
+          "description": "Modified by user/tenant id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+          "type": "object",
+          "additionalProperties": {},
+          "example": {
+            "key1": "value1",
+            "key2": 123.45
+          }
+        }
+      }
+    },
+    "ChemicalProductListResponse": {
+      "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChemicalProduct"
+          }
+        },
+        "skipToken": {
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "type": "string"
+        }
+      }
+    },
+    "Company": {
+      "description": "Company/Manufacturer's details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the manufacturing company.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Manufacaturing Company description.",
+          "type": "string"
+        },
+        "registrationNumber": {
+          "description": "Registration number of the company.",
+          "type": "string"
+        }
+      }
+    },
     "Crop": {
       "description": "Schema of crop resource.",
       "type": "object",
       "properties": {
+        "reference": {
+          "$ref": "#/definitions/Reference"
+        },
         "phenotype": {
-          "description": "Crop phenotype.",
+          "description": "Phenotype of the crop. Example values are crop weight, height, color, etc.",
           "maxLength": 100,
           "minLength": 0,
           "type": "string"
         },
         "breedingMethod": {
-          "description": "Breeding Method.",
-          "enum": [
-            "VARIETY",
-            "HYBRID",
-            "UNKNOWN"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BreedingMethod",
-            "modelAsString": true
-          }
+          "description": "Type of breeding Method like VARIETY, HYBRID, UNKNOWN.",
+          "type": "string"
         },
         "measurements": {
-          "description": "Measurements.",
+          "description": "The properties that pertain to this crop such as nominal weight, nominal moisture, and shrink factor.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/Measure"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ]
+          }
+        },
+        "location": {
+          "description": "Region where the crop is planted.",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
         },
         "id": {
           "description": "Unique resource ID.",
@@ -14581,40 +16591,58 @@
       "type": "object",
       "properties": {
         "cropIds": {
-          "description": "Ids of the crops it belongs to.\r\nNote: A maximum of 25 crops can be associated with a cropProduct.",
+          "description": "The IDs of the crops associated with the Chemical product.\r\nNote: A maximum of 25 crops can be associated with a cropProduct.",
           "uniqueItems": true,
           "type": "array",
           "items": {
             "type": "string"
           }
         },
+        "reference": {
+          "$ref": "#/definitions/Reference"
+        },
         "brand": {
-          "description": "CropProduct Brand.",
+          "description": "Commercial brand of the crop product.",
           "maxLength": 100,
           "minLength": 0,
           "type": "string"
         },
         "product": {
-          "description": "CropProduct product.",
-          "maxLength": 100,
-          "minLength": 0,
-          "type": "string"
-        },
-        "trait": {
-          "description": "CropProduct trait.",
+          "description": "Commercial product name of the crop product.",
           "maxLength": 100,
           "minLength": 0,
           "type": "string"
         },
         "relativeMaturity": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/RelativeMaturityMeasure"
         },
         "treatments": {
-          "description": "CropProduct treatments.",
+          "description": "Seed Coatings Applied for fungus, insects etc.",
           "type": "array",
           "items": {
             "type": "string"
           }
+        },
+        "traitStack": {
+          "description": "Phenotypic expressions like CONV, RR2. These are the Phenotypic expressions like CONV (Conventional), RR2 (RoundUpReady).",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "traits": {
+          "description": "Traits that are in the stack.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "location": {
+          "description": "Trait.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "company": {
+          "$ref": "#/definitions/Company"
         },
         "id": {
           "description": "Unique resource ID.",
@@ -14709,15 +16737,286 @@
         }
       }
     },
-    "DataProvider": {
-      "description": "Provider of satellite data.",
-      "enum": [
-        "Microsoft"
+    "Dataset": {
+      "description": "Schema of dataset resource.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of the dataset. Supported types: Crop, CropProduct, ChemicalProduct, Equipment.",
+          "enum": [
+            "Crop",
+            "CropProduct",
+            "ChemicalProduct",
+            "FarmEquipment"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DatasetType",
+            "modelAsString": true
+          }
+        },
+        "recordsSchema": {
+          "description": "Schema for records under the dataset.",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "solutionId": {
+          "description": "Solution id of the dataset solution.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Unique resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z"
+        },
+        "source": {
+          "description": "Source of the resource.",
+          "maxLength": 100,
+          "minLength": 2,
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of the resource.",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "createdBy": {
+          "description": "Created by user/tenant id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "modifiedBy": {
+          "description": "Modified by user/tenant id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+          "type": "object",
+          "additionalProperties": {},
+          "example": {
+            "key1": "value1",
+            "key2": 123.45
+          }
+        }
+      }
+    },
+    "DatasetAccess": {
+      "description": "DatasetAccess object.",
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "description": "Subscription Id.",
+          "maxLength": 100,
+          "minLength": 2,
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "ADMA resource Id.",
+          "maxLength": 200,
+          "minLength": 2,
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z"
+        },
+        "createdBy": {
+          "description": "Created by user/tenant id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "modifiedBy": {
+          "description": "Modified by user/tenant id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DatasetAccessListResponse": {
+      "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
+      "required": [
+        "value"
       ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "DataProvider",
-        "modelAsString": true
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatasetAccess"
+          }
+        },
+        "skipToken": {
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "type": "string"
+        }
+      }
+    },
+    "DatasetListResponse": {
+      "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dataset"
+          }
+        },
+        "skipToken": {
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "type": "string"
+        }
+      }
+    },
+    "DatasetRecord": {
+      "description": "Schema of dataset records.",
+      "type": "object",
+      "properties": {
+        "datasetId": {
+          "description": "Dataset Id for this record.",
+          "type": "string",
+          "readOnly": true
+        },
+        "record": {
+          "description": "Record object.",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "id": {
+          "description": "Unique resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z"
+        },
+        "source": {
+          "description": "Source of the resource.",
+          "maxLength": 100,
+          "minLength": 2,
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of the resource.",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "createdBy": {
+          "description": "Created by user/tenant id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "modifiedBy": {
+          "description": "Modified by user/tenant id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+          "type": "object",
+          "additionalProperties": {},
+          "example": {
+            "key1": "value1",
+            "key2": 123.45
+          }
+        }
+      }
+    },
+    "DatasetRecordListResponse": {
+      "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatasetRecord"
+          }
+        },
+        "skipToken": {
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "type": "string"
+        }
       }
     },
     "Device": {
@@ -15116,6 +17415,141 @@
         }
       }
     },
+    "FarmEquipment": {
+      "description": "Schema of FarmEquipment resource.",
+      "type": "object",
+      "properties": {
+        "cropIds": {
+          "description": "The IDs of the crops associated with the Chemical product.\r\nNote: A maximum of 25 crops can be associated with a cropProduct.",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reference": {
+          "$ref": "#/definitions/Reference"
+        },
+        "brand": {
+          "description": "Commercial brand of the chemical product.",
+          "type": "string"
+        },
+        "series": {
+          "description": "Series number of the Farm Equipment.",
+          "type": "string"
+        },
+        "model": {
+          "description": "Model number of the Farm Equipment.",
+          "type": "string"
+        },
+        "serial": {
+          "description": "Serial number of the Farm Equipment.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the Farm Equipment (Tiller, Sower, harvester, Sprayer, …).",
+          "type": "string"
+        },
+        "ownership": {
+          "description": "Owned, rented, shared, etc.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Area where the equipment is used.",
+          "type": "string"
+        },
+        "company": {
+          "$ref": "#/definitions/Company"
+        },
+        "id": {
+          "description": "Unique resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z"
+        },
+        "source": {
+          "description": "Source of the resource.",
+          "maxLength": 100,
+          "minLength": 2,
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of the resource.",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "createdBy": {
+          "description": "Created by user/tenant id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "modifiedBy": {
+          "description": "Modified by user/tenant id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
+          "type": "object",
+          "additionalProperties": {},
+          "example": {
+            "key1": "value1",
+            "key2": 123.45
+          }
+        }
+      }
+    },
+    "FarmEquipmentListResponse": {
+      "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FarmEquipment"
+          }
+        },
+        "skipToken": {
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "type": "string"
+        }
+      }
+    },
     "FarmListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
       "required": [
@@ -15272,7 +17706,7 @@
       "type": "object",
       "properties": {
         "shapeType": {
-          "description": "Type of shape file to be ingested from Operation Data Provider.",
+          "description": "Type of shape file to be ingested from JohnDeere.\r\nPossible values of shape file type are taken from - https://developer-portal.deere.com/#/myjohndeere/field-operations/field-operations?hash=download-shapefile.",
           "minLength": 1,
           "enum": [
             "Point",
@@ -15285,7 +17719,7 @@
           }
         },
         "shapeResolution": {
-          "description": "Resolution of shape file to be ingested from Operation Data Provider.",
+          "description": "Resolution of shape file to be ingested from JohnDeere.\r\nPossible values of shape file resolution are taken from - https://developer-portal.deere.com/#/myjohndeere/field-operations/field-operations?hash=download-shapefile.",
           "minLength": 1,
           "enum": [
             "EachSection",
@@ -16311,17 +18745,20 @@
       "properties": {
         "keyVaultUri": {
           "description": "Uri of the key vault.",
-          "minLength": 1,
+          "maxLength": 100,
+          "minLength": 2,
           "type": "string"
         },
         "keyName": {
           "description": "Name of Key Vault key.",
-          "minLength": 1,
+          "maxLength": 256,
+          "minLength": 2,
           "type": "string"
         },
         "keyVersion": {
           "description": "Version of Key Vault key.",
-          "minLength": 1,
+          "maxLength": 256,
+          "minLength": 2,
           "type": "string"
         }
       }
@@ -16527,7 +18964,7 @@
           "minLength": 1,
           "type": "string"
         },
-        "values": {
+        "value": {
           "description": "Data values.",
           "type": "array",
           "items": {
@@ -16813,7 +19250,7 @@
           "type": "string"
         },
         "isProductionApp": {
-          "description": "An optional flag to determine if the App is ready to be used for Production scenarios in the provider side or not. (Default value: false)",
+          "description": "An optional flag to determine if the App is ready to be used for Production scenarios in the provider side or not. (Default value: false)\r\nNote: Currently applicable for JohnDeere.",
           "default": false,
           "type": "boolean"
         },
@@ -18279,6 +20716,47 @@
         }
       }
     },
+    "Reference": {
+      "description": "Reference to a dataset record.",
+      "type": "object",
+      "properties": {
+        "datasetId": {
+          "description": "Dataset id.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "recordId": {
+          "description": "Record id.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        }
+      }
+    },
+    "RelativeMaturityMeasure": {
+      "description": "Relative meaturity measure.",
+      "type": "object",
+      "properties": {
+        "unit": {
+          "description": "Data unit.",
+          "maxLength": 50,
+          "minLength": 1,
+          "type": "string"
+        },
+        "value": {
+          "format": "double",
+          "description": "Data value.",
+          "type": "number"
+        },
+        "method": {
+          "description": "The method used to determine the relative maturity of the product. Examples include\r\nComparative Relative Maturity or Heat Units.",
+          "maxLength": 50,
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    },
     "SatelliteData": {
       "description": "Data Model for SatelliteIngestionJobRequest.",
       "type": "object",
@@ -18320,11 +20798,8 @@
       "description": "Schema of satellite data ingestion job.",
       "required": [
         "associatedResource",
-        "endDateTime",
-        "partyId",
-        "provider",
-        "source",
-        "startDateTime"
+        "collection",
+        "partyId"
       ],
       "type": "object",
       "properties": {
@@ -18350,13 +20825,27 @@
           "type": "string"
         },
         "provider": {
-          "$ref": "#/definitions/DataProvider"
+          "description": "Provider of satellite data. Available Value: SentinelHub.",
+          "enum": [
+            "SentinelHub"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SatelliteDataProvider",
+            "modelAsString": true
+          }
         },
-        "source": {
-          "$ref": "#/definitions/Source"
+        "collection": {
+          "description": "Collection of satellite data. Available Value: sentinel-2-l2a, sentinel-2-l1c.",
+          "minLength": 1,
+          "type": "string"
         },
         "data": {
           "$ref": "#/definitions/SatelliteData"
+        },
+        "itemId": {
+          "description": "Item Id used to get scenes from sentinel hub.",
+          "type": "string"
         },
         "id": {
           "description": "Unique job id.",
@@ -18432,7 +20921,12 @@
         },
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {},
+          "example": {
+            "key1": "value1",
+            "key2": 123.45
+          }
         }
       }
     },
@@ -18451,8 +20945,8 @@
           "minLength": 2,
           "type": "string"
         },
-        "source": {
-          "description": "Data source of the scene.",
+        "collection": {
+          "description": "Data collection of the scene.",
           "maxLength": 100,
           "minLength": 2,
           "type": "string"
@@ -18466,6 +20960,10 @@
         },
         "imageFormat": {
           "$ref": "#/definitions/ImageFormat"
+        },
+        "itemId": {
+          "description": "ItemId to fetch scenes from sentinel hub.",
+          "type": "string"
         },
         "cloudCoverPercentage": {
           "format": "double",
@@ -18669,68 +21167,6 @@
         }
       }
     },
-    "SearchFeaturesQuery": {
-      "description": "Search stac Features parameters.",
-      "required": [
-        "endDateTime",
-        "startDateTime"
-      ],
-      "type": "object",
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/OAuthClientCredentials"
-        },
-        "startDateTime": {
-          "format": "date-time",
-          "description": "Start datetime of the time interval in which to search for Features.",
-          "type": "string"
-        },
-        "endDateTime": {
-          "format": "date-time",
-          "description": "End datetime of the time interval in which to search for Features.",
-          "type": "string"
-        },
-        "intersects": {
-          "$ref": "#/definitions/GeoJsonObject"
-        },
-        "bbox": {
-          "description": "Only features that have a geometry that intersects the bounding box are selected.\r\nThe bounding box is provided as four numbers. The coordinate reference system of the values is WGS84 longitude/latitude.",
-          "type": "array",
-          "items": {
-            "format": "double",
-            "type": "number"
-          }
-        },
-        "featureIds": {
-          "description": "Array of feature ids to return.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "SearchFeaturesResponse": {
-      "description": "Paged response contains list of features and next property to get the next set of results.",
-      "required": [
-        "features"
-      ],
-      "type": "object",
-      "properties": {
-        "features": {
-          "description": "List of features.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StacFeature"
-          }
-        },
-        "nextLink": {
-          "description": "URL to do the POST request with same filters,\r\nto get next set of features.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "SearchFieldQuery": {
       "description": "SearchAllBoundaries and SearchBoundaries parameters.",
       "type": "object",
@@ -18741,10 +21177,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "partyId": {
-          "description": "Party ID which belongs to the operation data.",
-          "type": "string"
         },
         "ids": {
           "description": "Ids of the resource.",
@@ -18796,6 +21228,10 @@
         },
         "intersectsWithGeometry": {
           "$ref": "#/definitions/GeoJsonObject"
+        },
+        "partyId": {
+          "description": "Party ID which belongs to the operation data.",
+          "type": "string"
         }
       }
     },
@@ -18975,6 +21411,68 @@
         "partyId": {
           "description": "Party ID which belongs to the operation data.",
           "type": "string"
+        }
+      }
+    },
+    "SearchItemsQuery": {
+      "description": "Search stac Items parameters.",
+      "required": [
+        "endDateTime",
+        "startDateTime"
+      ],
+      "type": "object",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/OAuthClientCredentials"
+        },
+        "startDateTime": {
+          "format": "date-time",
+          "description": "Start datetime of the time interval in which to search for Items.",
+          "type": "string"
+        },
+        "endDateTime": {
+          "format": "date-time",
+          "description": "End datetime of the time interval in which to search for Items.",
+          "type": "string"
+        },
+        "intersects": {
+          "$ref": "#/definitions/GeoJsonObject"
+        },
+        "bbox": {
+          "description": "Only items that have a geometry that intersects the bounding box are selected.\r\nThe bounding box is provided as four numbers. The coordinate reference system of the values is WGS84 longitude/latitude.",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "itemIds": {
+          "description": "Array of item ids to return.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SearchItemsResponse": {
+      "description": "Paged response contains list of items and next property to get the next set of results.",
+      "required": [
+        "items"
+      ],
+      "type": "object",
+      "properties": {
+        "items": {
+          "description": "List of items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StacItem"
+          }
+        },
+        "nextLink": {
+          "description": "URL to do the POST request with same filters,\r\nto get next set of items.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -20635,7 +23133,7 @@
           "type": "string"
         },
         "satelliteProvider": {
-          "description": "Provider of satellite data. Available Value: Microsoft, SentinelHub (Sentinel Hub by Sinergise).",
+          "description": "Provider of satellite data. Available Value: Microsoft.",
           "minLength": 1,
           "enum": [
             "Microsoft",
@@ -20648,17 +23146,9 @@
           }
         },
         "satelliteSource": {
-          "description": "Source of satellite data. Available Value: Sentinel_2_L2A.",
+          "description": "Source of satellite data. Available Value: sentinel-2-l2a, sentinel-2-l1c.",
           "minLength": 1,
-          "enum": [
-            "Sentinel_2_L2A",
-            "Sentinel_2_L1C"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "Source",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "sensorType": {
           "description": "SensorType. The sensor placement map generated for sensor type (e.g., soil moisture, soil temperature, npk). Available Value: SoilMoisture.",
@@ -20823,10 +23313,9 @@
           "type": "string"
         },
         "satelliteProvider": {
-          "description": "Provider of satellite data. Available Value: Microsoft, SentinelHub (Sentinel Hub by Sinergise).",
+          "description": "Provider of satellite data. Available Value: SentinelHub (Sentinel Hub by Sinergise).",
           "minLength": 1,
           "enum": [
-            "Microsoft",
             "SentinelHub"
           ],
           "type": "string",
@@ -20836,17 +23325,9 @@
           }
         },
         "satelliteSource": {
-          "description": "Source of satellite data. Available Value: Sentinel_2_L2A.",
+          "description": "Source of satellite data. Available Value: sentinel-2-l2a, sentinel-2-l1c.",
           "minLength": 1,
-          "enum": [
-            "Sentinel_2_L2A",
-            "Sentinel_2_L1C"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "Source",
-            "modelAsString": true
-          }
+          "type": "string"
         },
         "imageResolution": {
           "format": "double",
@@ -20998,23 +23479,18 @@
           "description": "Api input parameters required by partner to trigger/cancel job request.",
           "type": "object",
           "additionalProperties": {}
+        },
+        "partnerRequestHeaders": {
+          "description": "Additional Headers sent to partner.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
-    "Source": {
-      "description": "Source of satellite data.",
-      "enum": [
-        "Sentinel_2_L2A",
-        "Sentinel_2_L1C"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "Source",
-        "modelAsString": true
-      }
-    },
-    "StacFeature": {
-      "description": "Schema of STAC Feature(Item).\r\nRefer for spec: https://github.com/radiantearth/stac-spec/blob/v1.0.0-beta.2/item-spec/item-spec.md#item-fields.",
+    "StacItem": {
+      "description": "Schema of STAC Item.\r\nRefer for spec: https://github.com/radiantearth/stac-spec/blob/v1.0.0-beta.2/item-spec/item-spec.md#item-fields.",
       "required": [
         "assets",
         "id",
@@ -21026,12 +23502,12 @@
       "type": "object",
       "properties": {
         "stacVersion": {
-          "description": "The STAC version the Feature implements.",
+          "description": "The STAC version the Stac Item implements.",
           "minLength": 1,
           "type": "string"
         },
         "stacExtensions": {
-          "description": "A list of extensions the Feature implements.",
+          "description": "A list of extensions the Stac Item implements.",
           "type": "array",
           "items": {
             "type": "string"
@@ -21052,7 +23528,7 @@
           "type": "object"
         },
         "bbox": {
-          "description": "Bounding box of the feature.",
+          "description": "Bounding box of the item.",
           "type": "array",
           "items": {
             "format": "double",
@@ -21067,24 +23543,24 @@
           "description": "List of link objects to resources and related URLs.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StacFeatureLink"
+            "$ref": "#/definitions/StacItemLink"
           }
         },
         "assets": {
           "description": "Dictionary of asset objects, each with a unique key.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/StacFeatureAsset"
+            "$ref": "#/definitions/StacItemAsset"
           }
         },
         "collection": {
-          "description": "The id of the STAC Collection this Feature references.",
+          "description": "The id of the STAC Collection this Stac Item references.",
           "type": "string"
         }
       }
     },
-    "StacFeatureAsset": {
-      "description": "Schema of STAC Feature's Asset.\r\nRefer for spec: https://github.com/radiantearth/stac-spec/blob/v1.0.0-beta.2/item-spec/item-spec.md#asset-object.",
+    "StacItemAsset": {
+      "description": "Schema of STAC Item's Asset.\r\nRefer for spec: https://github.com/radiantearth/stac-spec/blob/v1.0.0-beta.2/item-spec/item-spec.md#asset-object.",
       "required": [
         "href"
       ],
@@ -21116,8 +23592,8 @@
         }
       }
     },
-    "StacFeatureLink": {
-      "description": "The Link object describes a relationship of this Feature with another entity.\r\nRefer for spec: https://github.com/radiantearth/stac-spec/blob/v1.0.0-beta.2/item-spec/item-spec.md#link-object.",
+    "StacItemLink": {
+      "description": "The Link object describes a relationship of this Stac Item with another entity.\r\nRefer for spec: https://github.com/radiantearth/stac-spec/blob/v1.0.0-beta.2/item-spec/item-spec.md#link-object.",
       "required": [
         "href",
         "rel"
@@ -21400,6 +23876,11 @@
       "description": "Schema of weather data.",
       "type": "object",
       "properties": {
+        "additionalAttributes": {
+          "description": "A collection of key value pairs that belongs to the resource. Each pair must not have a key greater than 50 characters and must not have a value greater than 250 characters. Note: A maximum of 100 key value pairs can be provided for a resource and only string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": {}
+        },
         "wetBulbTemperature": {
           "$ref": "#/definitions/Measures"
         },
@@ -21525,11 +24006,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "additionalAttributes": {
-          "description": "A collection of key value pairs that belongs to the resource. Each pair must not have a key greater than 50 characters and must not have a value greater than 250 characters. Note: A maximum of 100 key value pairs can be provided for a resource and only string and numeral values are supported.",
-          "type": "object",
-          "additionalProperties": {}
         }
       }
     },
@@ -21554,16 +24030,20 @@
         },
         "extensionId": {
           "description": "Id of the extension to be used for the providerInput. eg. DTN.ClearAg.",
-          "minLength": 1,
+          "maxLength": 100,
+          "minLength": 2,
           "type": "string"
         },
         "extensionApiName": {
           "description": "Extension api name to which request is to be made.",
-          "minLength": 1,
+          "maxLength": 100,
+          "minLength": 2,
           "type": "string"
         },
         "language": {
           "description": "Language (IETF BCP 47 language tag) in which search results should be returned by the data provider. Examples: 'en-US', 'es', 'es-MX', 'fr-FR'.",
+          "maxLength": 100,
+          "minLength": 0,
           "type": "string"
         },
         "startTimeHours": {
@@ -21657,7 +24137,8 @@
         },
         "value": {
           "description": "Location Value eg. \"10,-25\" for LocationType Type \"LatLong\".",
-          "minLength": 1,
+          "maxLength": 100,
+          "minLength": 2,
           "type": "string"
         }
       }
@@ -21707,16 +24188,20 @@
         },
         "extensionId": {
           "description": "Id of the extension to be used for the providerInput. eg. DTN.ClearAg.",
-          "minLength": 1,
+          "maxLength": 100,
+          "minLength": 2,
           "type": "string"
         },
         "extensionApiName": {
           "description": "Extension api name to which request is to be made.",
-          "minLength": 1,
+          "maxLength": 100,
+          "minLength": 2,
           "type": "string"
         },
         "language": {
           "description": "Language (IETF BCP 47 language tag) in which search results should be returned by the data provider. Examples: 'en-US', 'es', 'es-MX', 'fr-FR'.",
+          "maxLength": 100,
+          "minLength": 0,
           "type": "string"
         },
         "startTimeHours": {
