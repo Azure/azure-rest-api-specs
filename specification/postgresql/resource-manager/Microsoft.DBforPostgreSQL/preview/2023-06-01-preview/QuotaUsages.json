@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/resourceType/flexibleServers/{quotaUsages}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/resourceType/flexibleServers/usages": {
       "get": {
         "tags": [
           "QuotaUsagesForFlexibleServers"
@@ -55,9 +55,6 @@
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/LocationNameParameter"
-          },
-          {
-            "$ref": "#/parameters/QuotaUsagesName"
           }
         ],
         "responses": {
@@ -147,18 +144,5 @@
       "description": "Capability for the PostgreSQL server"
     }
   },
-  "parameters": {
-    "QuotaUsagesName": {
-      "name": "usagesName",
-      "type": "string",
-      "description": "Name of the usages API.",
-      "enum": [
-        "usages"
-      ],
-      "x-ms-enum": {
-        "name": "usagesName",
-        "modelAsString": true
-      }
-    }
-  }
+  "parameters": {}
 }
