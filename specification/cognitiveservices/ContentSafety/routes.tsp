@@ -255,7 +255,10 @@ interface TextCategoryCustomization {
 
   deleteTextCustomizedCategory is CategoryOps.ResourceDelete<TextCustomizedCategory>;
 
-  listTextCustomizedCategory is CategoryOps.ResourceList<TextCustomizedCategory>;
+  listTextCustomizedCategory is CategoryOps.ResourceList<
+    TextCustomizedCategory,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
 }
 
 @added(Versions.v2023_10_30_Preview)
