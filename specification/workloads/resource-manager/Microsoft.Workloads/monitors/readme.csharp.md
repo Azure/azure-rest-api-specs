@@ -7,8 +7,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Workloads.Monitors
+  namespace: Microsoft.Workloads.SAPMonitors
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/workloads/Microsoft.Workloads.Monitors/src/Generated
+  output-folder: $(csharp-sdks-folder)/workloads/Microsoft.Workloads.SAPMonitors/src/Generated
   clear-output-folder: true
 ```

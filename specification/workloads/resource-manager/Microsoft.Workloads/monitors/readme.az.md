@@ -6,11 +6,11 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: monitors
-    namespace: azure.mgmt.workloads.monitors
-    package-name: azure-mgmt-workloads-monitors
-az-output-folder: $(azure-cli-extension-folder)/src/workloads/monitors
-python-sdk-output-folder: "$(az-output-folder)/azext_workloads/vendored_sdks/workloads/monitors"
+    extensions: sapmonitors
+    namespace: azure.mgmt.workloads.sapmonitors
+    package-name: azure-mgmt-workloads-sapmonitors
+az-output-folder: $(azure-cli-extension-folder)/src/workloads/sapmonitors
+python-sdk-output-folder: "$(az-output-folder)/azext_workloads/vendored_sdks/workloads/sapmonitors"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
