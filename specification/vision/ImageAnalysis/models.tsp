@@ -36,7 +36,7 @@ model SharedAnalyzeQuery {
 model SharedSegmentQuery {
   @query("mode")
   @doc("The type of segmentation to perform")
-  mode: segmentationMode;
+  mode: SegmentationMode;
 }
 
 @doc("A basic rectangle")
@@ -309,7 +309,7 @@ enum VisualFeatures {
 }
 
 @doc("The segmentation mode requested.")
-enum segmentationMode {
+enum SegmentationMode {
   @doc("Remove the background")
   backgroundRemoval,
 
