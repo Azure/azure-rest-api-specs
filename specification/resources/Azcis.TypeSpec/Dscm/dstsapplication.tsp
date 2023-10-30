@@ -21,7 +21,7 @@ model DstsApplicationResourceProperties {
 
   @doc("Provisioning state")
   @visibility("read")
-  provisioningState?: dstsApplicationProvisioningState;
+  provisioningState?: DscmProvisioningState;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-invalid-chars" "Arm resource name must contain only alphanumeric characters"
@@ -125,14 +125,6 @@ model ApplicationGroup {
 model IpRange {
   @doc("To IP address.")
   toIpAddress: string;
-}
-
-@doc("Provisioning status of the resource.")
-enum dstsApplicationProvisioningState {
-  ...ResourceProvisioningState,
-
-  @doc("Accepted State")
-  Accepted,
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
