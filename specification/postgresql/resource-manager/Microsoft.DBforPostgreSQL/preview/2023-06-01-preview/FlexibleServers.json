@@ -61,9 +61,6 @@
           },
           "ServerCreateReviveDropped": {
             "$ref": "./examples/ServerCreateReviveDropped.json"
-          },
-          "Create a new server with Private endpoint": {
-            "$ref": "./examples/ServerCreateWithPrivateEndpoint.json"
           }
         },
         "description": "Creates a new server.",
@@ -271,6 +268,9 @@
           },
           "ServerGetWithVnet": {
             "$ref": "./examples/ServerGetWithVnet.json"
+          },
+          "ServerGetWithPrivateEndpoints": {
+            "$ref": "./examples/ServerGetWithPrivateEndpoints.json"
           }
         },
         "description": "Gets information about a server.",
@@ -731,6 +731,13 @@
           "$ref": "#/definitions/Network",
           "default": null,
           "description": "Network properties of a server. These are required to be passed only in case if server is a private access server."
+        },
+        "privateEndpointConnections": {
+          "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionListResult",
+          "description": "List of private endpoint connections associated with the specified resource.",
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       }
     },

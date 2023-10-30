@@ -218,7 +218,7 @@
           "200": {
             "description": "Successfully retrieved private endpoint connections.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -239,6 +239,27 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "PrivateEndpointConnectionListResult": {
+      "description": "A list of private endpoint connections.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "The URL to get the next set of results.",
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
+        }
+      }
+    }
+  },
   "parameters": {}
 }

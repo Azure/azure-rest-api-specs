@@ -59,7 +59,7 @@
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -111,7 +111,7 @@
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "../../../types/common-types.json#/definitions/PrivateLinkResource"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -129,6 +129,26 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "PrivateLinkResourceListResult": {
+      "description": "A list of private link resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
   "parameters": {}
 }
