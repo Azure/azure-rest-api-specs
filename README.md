@@ -168,7 +168,7 @@ If the AutoRest configuration file (aka. the readme.md) is placed out of sub-ser
 
 ### common-types
 
-Specification files and AutoRest configuration files in one RP folder are better to refer to files in the same RP folder. Entity type definition that can be shared cross resource providers or services should to be placed and maintained either under the folder [**common-types**](https://github.com/Azure/azure-rest-api-specs#common-types) under specification, or under **common-types** folder of service group folder structure. The former supports the entity type sharing cross rp folders, while the latter supports the enitity type sharing cross components or services under the same rp folder.
+Specification files and AutoRest configuration files in one RP folder are better to refer to files in the same RP folder. Entity type definition that can be shared cross resource providers or services should to be placed and maintained either under the folder [**common-types**](https://github.com/Azure/azure-rest-api-specs#common-types) under specification, or under **common-types** folder of service group folder structure. The former supports the entity type sharing cross rp folders, while the latter supports the entity type sharing cross components or services under the same rp folder.
 
 Refer to [Resource-Management](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/common-types/resource-management) common types for example.
 
