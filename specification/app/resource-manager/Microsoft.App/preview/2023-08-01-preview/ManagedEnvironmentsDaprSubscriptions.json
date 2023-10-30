@@ -34,7 +34,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -83,7 +84,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "name",
@@ -141,7 +143,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "name",
@@ -166,6 +169,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DaprSubscription"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DaprSubscription"
             }
@@ -209,7 +218,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "name",
