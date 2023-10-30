@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "../models/definition.tsp";
+import "../models/exportSpecification.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -22,6 +23,16 @@ model ApiDefinitionResource extends ApiDefinition {
   apiDefinitionName: string;
 }
 
+@doc("Export specification resource model.")
+@resource("definitions")
+@parentResource(ApiVersionResource)
+model ExportSpecificationResource extends ExportSpecification {
+  @doc("Definition identifier.")
+  @key("apiDefinitionName")
+  @visibility("query")
+  apiDefinitionName: string;
+}
+
 interface ApiDefinitions {
   @doc("List a collection of API definitions.")
   listDefinitions is Operations.ResourceList<ApiDefinitionResource, ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>>;
@@ -30,5 +41,5 @@ interface ApiDefinitions {
   getDefinition is Operations.ResourceRead<ApiDefinitionResource>;
 
   @doc("Export an API specification.")
-  exportSpecification is Operations.ResourceAction<ApiDefinitionResource, {}, TypeSpec.Http.AcceptedResponse>;
+  exportSpecification is Operations.ResourceAction<ExportSpecificationResource, {}, ExportSpecificationResource>;
 }

@@ -646,7 +646,7 @@
         }
       }
     },
-    "/apis/{apiName}/versions/{versionName}/definitions/{apiDefinitionName}:exportSpecification": {
+    "/apis/{apiName}/versions/{versionName}/definitions/{apiDefinitionName}/exportSpecification": {
       "post": {
         "operationId": "ApiDefinitions_ExportSpecification",
         "description": "Export an API specification.",
@@ -686,8 +686,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Models.ExportSpecification"
+            },
             "headers": {
               "Repeatability-Result": {
                 "type": "string",
@@ -968,6 +971,15 @@
       "allOf": [
         {
           "$ref": "#/definitions/Models.Environment"
+        }
+      ]
+    },
+    "ExportSpecificationResource": {
+      "type": "object",
+      "description": "Export specification resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Models.ExportSpecification"
         }
       ]
     },
@@ -1412,6 +1424,24 @@
       "required": [
         "type",
         "managementPortalUri"
+      ]
+    },
+    "Models.ExportSpecification": {
+      "type": "object",
+      "description": "Export specification",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The result of the specification export."
+        },
+        "format": {
+          "type": "string",
+          "description": "The result format of the specification export."
+        }
+      },
+      "required": [
+        "value",
+        "format"
       ]
     },
     "PagedApiDefinitionResource": {
