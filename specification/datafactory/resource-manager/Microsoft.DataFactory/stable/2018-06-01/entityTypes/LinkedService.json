@@ -7045,10 +7045,6 @@
       "description": "Google AdWords service linked service properties.",
       "type": "object",
       "properties": {
-        "connectionProperties": {
-          "description": "Properties used to connect to GoogleAds. It is mutually exclusive with any other properties in the linked service. Type: object.",
-          "type": "object"
-        },
         "clientCustomerID": {
           "description": "The Client customer ID of the AdWords account that you want to fetch report data for. Type: string (or Expression with resultType string).",
           "x-ms-format": "dfe-string",
@@ -7088,18 +7084,22 @@
           "x-ms-format": "dfe-string",
           "type": "object"
         },
-        "keyFilePath": {
-          "description": "The full path to the .p12 key file that is used to authenticate the service account email address and can only be used on self-hosted IR. Type: string (or Expression with resultType string).",
+        "privateKey": {
+          "description": "The private key that is used to authenticate the service account email address and can only be used on self-hosted IR.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "loginCustomerID": {
+          "description": "The customer ID of the Google Ads Manager account through which you want to fetch report data of specific Customer. Type: string (or Expression with resultType string).",
           "x-ms-format": "dfe-string",
           "type": "object"
         },
-        "trustedCertPath": {
-          "description": "The full path of the .pem file containing trusted CA certificates for verifying the server when connecting over SSL. This property can only be set when using SSL on self-hosted IR. The default value is the cacerts.pem file installed with the IR. Type: string (or Expression with resultType string).",
+        "googleAdsApiVersion": {
+          "description": "The Google Ads API major version such as v14. The supported major versions could be found on https://developers.google.com/google-ads/api/docs/sunset-dates#timetable. Type: string (or Expression with resultType string).",
           "x-ms-format": "dfe-string",
           "type": "object"
         },
-        "useSystemTrustStore": {
-          "description": "Specifies whether to use a CA certificate from the system trust store or from a specified PEM file. The default value is false. Type: boolean (or Expression with resultType boolean).",
+        "supportLegacyDataTypes": {
+          "description": "Specifies whether to use the legacy data type mappings, which maps float, int32 and int64 from Google to string. Do not set this to true unless you want to keep backward compatibility with legacy driver's data type mappings. Type: boolean (or Expression with resultType boolean).",
           "x-ms-format": "dfe-bool",
           "type": "object"
         },
