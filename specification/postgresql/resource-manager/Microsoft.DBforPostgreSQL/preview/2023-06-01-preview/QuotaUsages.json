@@ -34,12 +34,12 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/resourceType/flexibleServers/usages": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/resourceType/flexibleServers/{quotaUsages}": {
       "get": {
         "tags": [
           "QuotaUsagesForFlexibleServers"
         ],
-        "operationId": "QuotaUsages_Get",
+        "operationId": "QuotaUsages_List",
         "x-ms-examples": {
           "CapabilitiesList": {
             "$ref": "./examples/QuotaUsagesForFlexibleServers.json"
@@ -48,13 +48,16 @@
         "description": "Get quota usages at specified location in a given subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaUsagesName"
           }
         ],
         "responses": {
@@ -67,7 +70,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -144,5 +147,18 @@
       "description": "Capability for the PostgreSQL server"
     }
   },
-  "parameters": {}
+  "parameters": {
+    "QuotaUsagesName": {
+      "name": "usagesName",
+      "type": "string",
+      "description": "Name of the usages API.",
+      "enum": [
+        "usages"
+      ],
+      "x-ms-enum": {
+        "name": "usagesName",
+        "modelAsString": true
+      }
+    }
+  }
 }
