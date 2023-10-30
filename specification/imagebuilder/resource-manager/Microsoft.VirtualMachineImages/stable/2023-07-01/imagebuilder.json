@@ -3,7 +3,7 @@
   "info": {
     "title": "VirtualMachineImageTemplate",
     "description": "Virtual Machine Image Template",
-    "version": "2022-02-14"
+    "version": "2023-07-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -59,7 +59,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -101,7 +101,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -161,7 +161,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -220,7 +220,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -267,7 +267,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -298,11 +298,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The operation was successful."
-          },
           "202": {
-            "description": "The operation will be completed asynchronously."
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent -- VM image template does not exist in the subscription."
@@ -310,13 +313,13 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Delete an Image Template.": {
@@ -359,7 +362,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -408,7 +411,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -454,7 +457,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -502,13 +505,218 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Retrieve single runOutput": {
             "$ref": "./examples/GetRunOutput.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/triggers": {
+      "get": {
+        "tags": [
+          "Triggers"
+        ],
+        "operationId": "Triggers_ListByImageTemplate",
+        "description": "List all triggers for the specified Image Template resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageTemplateNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TriggerCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List triggers by image template": {
+            "$ref": "./examples/ListTriggers.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/triggers/{triggerName}": {
+      "get": {
+        "tags": [
+          "Triggers"
+        ],
+        "operationId": "Triggers_Get",
+        "description": "Get the specified trigger for the specified image template resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageTemplateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TriggerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a trigger resource": {
+            "$ref": "./examples/GetTrigger.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Triggers"
+        ],
+        "operationId": "Triggers_CreateOrUpdate",
+        "description": "Create or update a trigger for the specified virtual machine image template",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            },
+            "description": "Parameters supplied to the CreateTrigger operation"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageTemplateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TriggerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or update a source image type trigger": {
+            "$ref": "./examples/CreateSourceImageTrigger.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Triggers"
+        ],
+        "operationId": "Triggers_Delete",
+        "description": "Delete a trigger for the specified virtual machine image template",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageTemplateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TriggerNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent -- trigger by the name doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete a trigger resource": {
+            "$ref": "./examples/DeleteTrigger.json"
           }
         }
       }
@@ -535,7 +743,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -640,7 +848,7 @@
     },
     "ImageTemplateSharedImageVersionSource": {
       "type": "object",
-      "description": "Describes an image source that is an image version in a shared image gallery.",
+      "description": "Describes an image source that is an image version in an Azure Compute Gallery or a Direct Shared Gallery.",
       "x-ms-discriminator-value": "SharedImageVersion",
       "allOf": [
         {
@@ -650,7 +858,12 @@
       "properties": {
         "imageVersionId": {
           "type": "string",
-          "description": "ARM resource id of the image version in the shared image gallery"
+          "description": "ARM resource id of the image version. When image version name is 'latest', the version is evaluated when the image build takes place."
+        },
+        "exactVersion": {
+          "type": "string",
+          "description": "Exact ARM resource id of the image version. This readonly field differs from the image version Id in 'imageVersionId' only if the version name specified in 'imageVersionId' field is 'latest'.",
+          "readOnly": true
         }
       },
       "required": [
@@ -746,6 +959,31 @@
             "type": "integer",
             "format": "int32"
           }
+        }
+      }
+    },
+    "ImageTemplateFileValidator": {
+      "type": "object",
+      "description": "Uploads files required for validation to VMs (Linux, Windows). Corresponds to Packer file provisioner",
+      "x-ms-discriminator-value": "File",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateInVMValidator"
+        }
+      ],
+      "properties": {
+        "sourceUri": {
+          "type": "string",
+          "description": "The URI of the file to be uploaded to the VM for validation. It can be a github link, Azure Storage URI (authorized or SAS), etc"
+        },
+        "sha256Checksum": {
+          "type": "string",
+          "default": "",
+          "description": "SHA256 checksum of the file provided in the sourceUri field above"
+        },
+        "destination": {
+          "type": "string",
+          "description": "The absolute path to a file (with nested directory structures already created) where the file (from sourceUri) will be uploaded to in the VM"
         }
       }
     },
@@ -973,7 +1211,7 @@
     },
     "ImageTemplateSharedImageDistributor": {
       "x-ms-discriminator-value": "SharedImage",
-      "description": "Distribute via Shared Image Gallery.",
+      "description": "Distribute via Azure Compute Gallery.",
       "type": "object",
       "allOf": [
         {
@@ -983,14 +1221,10 @@
       "properties": {
         "galleryImageId": {
           "type": "string",
-          "description": "Resource Id of the Shared Image Gallery image",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Resource Id of the Azure Compute Gallery image"
         },
         "replicationRegions": {
-          "description": "A list of regions that the image will be replicated to",
+          "description": "[Deprecated] A list of regions that the image will be replicated to. This list can be specified only if targetRegions is not specified. This field is deprecated - use targetRegions instead.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1002,22 +1236,48 @@
           "description": "Flag that indicates whether created image version should be excluded from latest. Omit to use the default (false)."
         },
         "storageAccountType": {
-          "type": "string",
-          "enum": [
-            "Standard_LRS",
-            "Standard_ZRS"
-          ],
-          "x-ms-enum": {
-            "name": "SharedImageStorageAccountType",
-            "modelAsString": true
+          "$ref": "#/definitions/SharedImageStorageAccountType",
+          "description": "[Deprecated] Storage account type to be used to store the shared image. Omit to use the default (Standard_LRS). This field can be specified only if replicationRegions is specified. This field is deprecated - use targetRegions instead."
+        },
+        "targetRegions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TargetRegion"
           },
-          "description": "Storage account type to be used to store the shared image. Omit to use the default (Standard_LRS)."
+          "x-ms-identifiers": [],
+          "description": "The target regions where the distributed Image Version is going to be replicated to. This object supersedes replicationRegions and can be specified only if replicationRegions is not specified."
+        },
+        "versioning": {
+          "$ref": "#/definitions/DistributeVersioner"
         }
       },
       "required": [
-        "galleryImageId",
-        "replicationRegions"
+        "galleryImageId"
       ]
+    },
+    "TargetRegion": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the region."
+        },
+        "replicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "default": 1,
+          "description": "The number of replicas of the Image Version to be created in this region. Omit to use the default (1)."
+        },
+        "storageAccountType": {
+          "$ref": "#/definitions/SharedImageStorageAccountType",
+          "description": "Specifies the storage account type to be used to store the image in this region. Omit to use the default (Standard_LRS)."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Describes the target region information."
     },
     "ImageTemplateVhdDistributor": {
       "x-ms-discriminator-value": "VHD",
@@ -1027,7 +1287,13 @@
         {
           "$ref": "#/definitions/ImageTemplateDistributor"
         }
-      ]
+      ],
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Optional Azure Storage URI for the distributed VHD blob. Omit to use the default (empty string) in which case VHD would be published to the storage account in the staging resource group."
+        }
+      }
     },
     "PlatformImagePurchasePlan": {
       "type": "object",
@@ -1096,6 +1362,19 @@
         }
       }
     },
+    "SharedImageStorageAccountType": {
+      "type": "string",
+      "enum": [
+        "Standard_LRS",
+        "Standard_ZRS",
+        "Premium_LRS"
+      ],
+      "x-ms-enum": {
+        "name": "SharedImageStorageAccountType",
+        "modelAsString": true
+      },
+      "description": "Specifies the storage account type to be used to store the Azure Compute Gallery image version in."
+    },
     "ProvisioningState": {
       "type": "string",
       "enum": [
@@ -1103,13 +1382,26 @@
         "Updating",
         "Succeeded",
         "Failed",
-        "Deleting"
+        "Deleting",
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": false
       },
       "description": "Provisioning state of the resource"
+    },
+    "onBuildError": {
+      "type": "string",
+      "enum": [
+        "cleanup",
+        "abort"
+      ],
+      "x-ms-enum": {
+        "name": "onBuildError",
+        "modelAsString": true
+      },
+      "description": "Error handling behavior upon build failure"
     },
     "ProvisioningError": {
       "type": "object",
@@ -1182,6 +1474,7 @@
             "Queued",
             "Building",
             "Customizing",
+            "Optimizing",
             "Validating",
             "Distributing"
           ],
@@ -1212,6 +1505,30 @@
           },
           "x-ms-identifiers": [],
           "description": "Specifies the properties used to describe the customization steps of the image, like Image source etc"
+        },
+        "optimize": {
+          "type": "object",
+          "description": "Specifies optimization to be performed on image.",
+          "properties": {
+            "vmBoot": {
+              "type": "object",
+              "description": "Optimization is applied on the image for a faster VM boot.",
+              "properties": {
+                "state": {
+                  "type": "string",
+                  "enum": [
+                    "Enabled",
+                    "Disabled"
+                  ],
+                  "x-ms-enum": {
+                    "name": "VMBootOptimizationState",
+                    "modelAsString": false
+                  },
+                  "description": "Enabling this field will improve VM boot time by optimizing the final customized image output."
+                }
+              }
+            }
+          }
         },
         "validate": {
           "type": "object",
@@ -1245,6 +1562,22 @@
           "x-ms-identifiers": [],
           "description": "The distribution targets where the image output needs to go to."
         },
+        "errorHandling": {
+          "type": "object",
+          "description": "Error handling options upon a build failure",
+          "properties": {
+            "onCustomizerError": {
+              "$ref": "#/definitions/onBuildError",
+              "default": "cleanup",
+              "description": "If there is a customizer error and this field is set to 'cleanup', the build VM and associated network resources will be cleaned up. This is the default behavior. If there is a customizer error and this field is set to 'abort', the build VM will be preserved."
+            },
+            "onValidationError": {
+              "$ref": "#/definitions/onBuildError",
+              "default": "cleanup",
+              "description": "If there is a validation error and this field is set to 'cleanup', the build VM and associated network resources will be cleaned up. This is the default behavior. If there is a validation error and this field is set to 'abort', the build VM will be preserved."
+            }
+          }
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource",
@@ -1266,7 +1599,7 @@
           "minimum": 0,
           "maximum": 960,
           "default": 0,
-          "description": "Maximum duration to wait while building the image template (includes all customizations, validations, and distributions). Omit or specify 0 to use the default (4 hours)."
+          "description": "Maximum duration to wait while building the image template (includes all customizations, optimization, validations, and distributions). Omit or specify 0 to use the default (4 hours)."
         },
         "vmProfile": {
           "$ref": "#/definitions/ImageTemplateVmProfile",
@@ -1372,7 +1705,8 @@
       ],
       "required": [
         "identity"
-      ]
+      ],
+      "x-ms-identifiers": []
     },
     "ImageTemplateUpdateParameters": {
       "type": "object",
@@ -1387,6 +1721,11 @@
             "type": "string"
           },
           "description": "The user-specified tags associated with the image template."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ImageTemplateProperties",
+          "description": "The properties of the image template"
         }
       },
       "description": "Parameters for updating an image template."
@@ -1423,6 +1762,103 @@
           "description": "The continuation token."
         }
       }
+    },
+    "TriggerStatus": {
+      "type": "object",
+      "description": "Describes the status of a trigger",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The status code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed status message, including for alerts and error messages.",
+          "readOnly": true
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the status.",
+          "readOnly": true
+        }
+      }
+    },
+    "TriggerProperties": {
+      "type": "object",
+      "description": "Describes the properties of a trigger",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of trigger.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/TriggerStatus",
+          "description": "Trigger status",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "SourceImageTriggerProperties": {
+      "type": "object",
+      "description": "Properties of SourceImage kind of trigger",
+      "x-ms-discriminator-value": "SourceImage",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TriggerProperties"
+        }
+      ],
+      "properties": {}
+    },
+    "Trigger": {
+      "type": "object",
+      "description": "Represents a trigger that can invoke an image template build.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TriggerProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a trigger"
+        }
+      }
+    },
+    "TriggerCollection": {
+      "type": "object",
+      "description": "The result of List triggers operation",
+      "properties": {
+        "value": {
+          "description": "An array of triggers",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Trigger"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Operation": {
       "title": "A REST API operation",
@@ -1488,43 +1924,48 @@
         }
       }
     },
-    "CloudError": {
+    "DistributeVersioner": {
       "type": "object",
-      "x-ms-external": true,
+      "discriminator": "scheme",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "Details about the error."
+        "scheme": {
+          "type": "string",
+          "description": "Version numbering scheme to be used."
         }
       },
-      "description": "An error response from the Azure VM Image Builder service."
+      "description": "Describes how to generate new x.y.z version number for distribution.",
+      "required": [
+        "scheme"
+      ]
     },
-    "CloudErrorBody": {
+    "DistributeVersionerLatest": {
       "type": "object",
-      "x-ms-external": true,
+      "x-ms-discriminator-value": "Latest",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DistributeVersioner"
+        }
+      ],
       "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "x-ms-identifiers": [],
-          "description": "A list of additional details about the error."
+        "major": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": -1,
+          "default": -1,
+          "description": "Major version for the generated version number. Determine what is \"latest\" based on versions with this value as the major version. -1 is equivalent to leaving it unset."
         }
       },
-      "description": "An error response from the Azure VM Image Builder service."
+      "description": "Generates version number that will be latest based on existing version numbers."
+    },
+    "DistributeVersionerSource": {
+      "type": "object",
+      "x-ms-discriminator-value": "Source",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DistributeVersioner"
+        }
+      ],
+      "description": "Generates version number based on version number of source image"
     }
   },
   "parameters": {
@@ -1558,6 +1999,15 @@
       "required": true,
       "type": "string",
       "description": "The name of the run output",
+      "pattern": "^[A-Za-z0-9-_.]{1,64}$",
+      "x-ms-parameter-location": "method"
+    },
+    "TriggerNameParameter": {
+      "name": "triggerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the trigger",
       "pattern": "^[A-Za-z0-9-_.]{1,64}$",
       "x-ms-parameter-location": "method"
     },
