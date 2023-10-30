@@ -78,9 +78,12 @@ tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-snapshots)
-tag: package-bicep-2023-11
+tag: package-bicep-2022-11
 ```
 
+``` yaml $(package-bicep)
+tag: package-bicep-2023-11
+```
 
 ### Tag: package-bicep-2023-11
 
@@ -1344,6 +1347,7 @@ batch:
   - package-deploymentstacks: true
   - package-changes: true
   - package-snapshots: true
+  - package-bicep: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01
