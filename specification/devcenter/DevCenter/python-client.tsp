@@ -16,16 +16,15 @@ using Azure.ClientGenerator.Core;
 })
 namespace SDKCustomizations;
 
-@operationGroup
-interface DevCenter {
+interface DevCenterClientOperations {
+    
+    //DevCenters
     @convenientAPI(false)
     ListProjects is DevCenterService.DevCenterOperations.ListProjects;
     @convenientAPI(false)
     GetProject is DevCenterService.DevCenterOperations.GetProject;
-}
-
-@operationGroup
-interface DevBoxes {
+ 
+    //DevBoxes 
     @convenientAPI(false)
     ListPools is DevCenterService.DevBoxesOperations.ListPools;
     @convenientAPI(false)
@@ -59,15 +58,13 @@ interface DevBoxes {
     @convenientAPI(false)
     GetDevBoxAction is DevCenterService.DevBoxesOperations.GetDevBoxAction;
     @convenientAPI(false)
-    SkipAction is DevCenterService.DevBoxesOperations.SkipAction;
+    SkipDevBoxAction is DevCenterService.DevBoxesOperations.SkipAction;
     @convenientAPI(false)
-    DelayAction is DevCenterService.DevBoxesOperations.DelayAction;
+    DelayDevBoxAction is DevCenterService.DevBoxesOperations.DelayAction;
     @convenientAPI(false)
-    DelayAllActions is DevCenterService.DevBoxesOperations.DelayAllActions;
-}
+    DelayAllDevBoxActions is DevCenterService.DevBoxesOperations.DelayAllActions;
 
-@operationGroup
-interface DeploymentEnvironments {
+    //Environments
     @convenientAPI(false)
     ListAllEnvironments is DevCenterService.EnvironmentsOperations.ListAllEnvironments;
     @convenientAPI(false)
