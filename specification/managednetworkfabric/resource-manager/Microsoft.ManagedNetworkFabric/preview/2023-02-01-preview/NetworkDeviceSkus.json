@@ -139,82 +139,12 @@
           ],
           "items": {
             "description": "Network device interface properties.",
-            "type": "object",
-            "properties": {
-              "version": {
-                "type": "string",
-                "description": "Operating system and firmware combined versions."
-              },
-              "vendorOsVersion": {
-                "type": "string",
-                "description": "Operating system version."
-              },
-              "vendorFirmwareVersion": {
-                "type": "string",
-                "description": "Firmware version."
-              },
-              "isCurrent": {
-                "type": "string",
-                "enum": [
-                  "true",
-                  "false"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": true,
-                  "name": "isCurrentVersion"
-                },
-                "description": "If the current version is in use."
-              },
-              "isTest": {
-                "type": "string",
-                "enum": [
-                  "true",
-                  "false"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": true,
-                  "name": "isTestVersion"
-                },
-                "description": "If the current version is a test version."
-              }
-            }
+            "$ref": "#/definitions/SupportedVersionProperties"
           }
         },
         "limits": {
           "description": "Network device limits.",
-          "type": "object",
-          "properties": {
-            "physicalInterfaceCount": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Maximum number of physical interfaces."
-            },
-            "maxSubInterfaces": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Maximum number of sub-interfaces."
-            },
-            "maxTunnelInterfaces": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Maximum number of tunnel interfaces."
-            },
-            "maxVirtualRouterFunctions": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Maximum number of virtual router functions."
-            },
-            "maxBorderGatewayProtocolPeers": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Maximum number of Border Gateway Protocol (BGP) peers."
-            },
-            "maxBidirectionalForwardingDetectionPeers": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Maximum number of Bidirectional Forwarding Detection (BFD) peers."
-            }
-          }
+          "$ref": "#/definitions/DeviceLimits"
         },
         "supportedRoleTypes": {
           "type": "array",
@@ -243,39 +173,7 @@
           ],
           "items": {
             "description": "Network device interface properties.",
-            "type": "object",
-            "properties": {
-              "identifier": {
-                "type": "string",
-                "description": "Interface identifier. Example: HundredGigE0/0."
-              },
-              "interfaceType": {
-                "type": "string",
-                "description": "Interface type."
-              },
-              "supportedConnectorTypes": {
-                "type": "array",
-                "description": "List of supported connector types.",
-                "x-ms-identifiers": [
-                  "connectorType"
-                ],
-                "items": {
-                  "description": "Supported connector properties.",
-                  "type": "object",
-                  "properties": {
-                    "connectorType": {
-                      "type": "string",
-                      "description": "Connector type. Example: Optical."
-                    },
-                    "maxSpeedInMbps": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Maximum speed of the connector in Mbps."
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/definitions/DeviceInterfaceProperties"
           }
         },
         "provisioningState": {
@@ -323,6 +221,124 @@
         "nextLink": {
           "type": "string",
           "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "SupportedVersionProperties": {
+      "description": "Network device supported version properties.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Operating system and firmware combined versions."
+        },
+        "vendorOsVersion": {
+          "type": "string",
+          "description": "Operating system version."
+        },
+        "vendorFirmwareVersion": {
+          "type": "string",
+          "description": "Firmware version."
+        },
+        "isCurrent": {
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "isCurrentVersion"
+          },
+          "description": "If the current version is in use."
+        },
+        "isTest": {
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "isTestVersion"
+          },
+          "description": "If the current version is a test version."
+        }
+      }
+    },
+    "DeviceInterfaceProperties": {
+      "description": "Network device interface properties.",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "Interface identifier. Example: HundredGigE0/0."
+        },
+        "interfaceType": {
+          "type": "string",
+          "description": "Interface type."
+        },
+        "supportedConnectorTypes": {
+          "type": "array",
+          "description": "List of supported connector types.",
+          "x-ms-identifiers": [
+            "connectorType"
+          ],
+          "items": {
+            "description": "Supported connector properties.",
+            "$ref": "#/definitions/SupportedConnectorProperties"
+          }
+        }
+      }
+    },
+    "DeviceLimits": {
+      "description": "Network device limits.",
+      "type": "object",
+      "properties": {
+        "physicalInterfaceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of physical interfaces."
+        },
+        "maxSubInterfaces": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of sub-interfaces."
+        },
+        "maxTunnelInterfaces": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of tunnel interfaces."
+        },
+        "maxVirtualRouterFunctions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of virtual router functions."
+        },
+        "maxBorderGatewayProtocolPeers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of Border Gateway Protocol (BGP) peers."
+        },
+        "maxBidirectionalForwardingDetectionPeers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of Bidirectional Forwarding Detection (BFD) peers."
+        }
+      }
+    },
+    "SupportedConnectorProperties": {
+      "description": "Supported connector properties.",
+      "type": "object",
+      "properties": {
+        "connectorType": {
+          "type": "string",
+          "description": "Connector type. Example: Optical."
+        },
+        "maxSpeedInMbps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum speed of the connector in Mbps."
         }
       }
     }

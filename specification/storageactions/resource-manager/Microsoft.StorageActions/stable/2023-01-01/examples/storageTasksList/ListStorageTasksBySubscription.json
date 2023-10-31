@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "subscriptionId": "1f31ba14-ce16-4281-b9b4-3e78da6e1616",
+    "api-version": "2023-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/c86a9c18-8373-41fa-92d4-1d7bdc16977b/resourceGroups/res6117/providers/Microsoft.StorageActions/storageTasks/mytask1",
+            "name": "mytask1",
+            "type": "Microsoft.StorageActions/storageTasks",
+            "location": "eastus",
+            "identity": {
+              "principalId": "2fd475e8-8923-4597-842f-7ce1adfc6c4a",
+              "tenantId": "b4a2005c-32c1-434c-bbf0-ff486912fc75",
+              "type": "SystemAssigned"
+            },
+            "properties": {
+              "enabled": true,
+              "description": "Storage task",
+              "action": {
+                "if": {
+                  "condition": "[[greater(Content-Length, '100')]]",
+                  "operations": [
+                    {
+                      "name": "DeleteBlob",
+                      "onSuccess": "continue",
+                      "onFailure": "break"
+                    }
+                  ]
+                }
+              },
+              "taskVersion": 1,
+              "provisioningState": "Succeeded",
+              "creationTimeInUtc": "2023-07-05T23:06:50.7722358Z"
+            }
+          },
+          {
+            "id": "/subscriptions/c86a9c18-8373-41fa-92d4-1d7bdc16977b/resourceGroups/res6117/providers/Microsoft.StorageActions/storageTasks/mytask2",
+            "name": "mytask2",
+            "type": "Microsoft.StorageActions/storageTasks",
+            "location": "westus",
+            "properties": {
+              "enabled": true,
+              "description": "Storage task",
+              "action": {
+                "if": {
+                  "condition": "[[equals(AccessTier, 'Cool')]]",
+                  "operations": [
+                    {
+                      "name": "SetBlobTier",
+                      "parameters": {
+                        "tier": "Hot"
+                      },
+                      "onSuccess": "continue",
+                      "onFailure": "break"
+                    }
+                  ]
+                },
+                "else": {
+                  "operations": [
+                    {
+                      "name": "DeleteBlob",
+                      "onSuccess": "continue",
+                      "onFailure": "break"
+                    }
+                  ]
+                }
+              },
+              "taskVersion": 1,
+              "provisioningState": "Succeeded",
+              "creationTimeInUtc": "2023-07-06T00:24:59.1441663Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
