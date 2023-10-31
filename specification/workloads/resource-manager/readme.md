@@ -39,6 +39,7 @@ input-file:
   - Microsoft.Workloads/SAPVirtualInstance/preview/2023-10-01-preview/SAPVirtualInstance.json
   - Microsoft.Workloads/common-types/v1/commonTypes.json
   - Microsoft.Workloads/operations/preview/2023-10-01-preview/operations.json
+  - Microsoft.Workloads/connectors/preview/2023-10-01-preview/connectors.json
 ```
 ### Tag: package-2023-04
 
