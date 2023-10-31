@@ -5438,6 +5438,11 @@
     "AppAttachPackagePatch": {
       "description": "Schema for patchable App Attach Package properties.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
       "properties": {
         "tags": {
           "type": "object",
@@ -5448,7 +5453,7 @@
         },
         "properties": {
           "description": "Detailed properties for App Attach Package",
-          "$ref": "#/definitions/AppAttachPackageProperties",
+          "$ref": "#/definitions/AppAttachPackagePatchProperties",
           "x-ms-client-flatten": false,
           "x-nullable": false
         }
@@ -5499,16 +5504,32 @@
           "description": "URL of keyvault location to store certificate"
         },
         "failHealthCheckOnStagingFailure": {
-          "enum": [
-            "Unhealthy",
-            "NeedsAssistance",
-            "DoNotFail"
-          ],
-          "x-ms-enum": {
-            "name": "failHealthCheckOnStagingFailure",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/FailHealthCheckOnStagingFailureEnum",
+          "description": "Parameter indicating how the health check should behave if this package fails staging"
+        }
+      }
+    },
+    "AppAttachPackagePatchProperties": {
+      "description": "Schema for patchable fields on an App Attach Package.",
+      "type": "object",
+      "properties": {
+        "image": {
+          "description": "Detailed properties for App Attach Package",
+          "$ref": "#/definitions/AppAttachPackageInfoProperties"
+        },
+        "hostPoolReferences": {
+          "type": "array",
+          "description": "List of Hostpool resource Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "keyVaultURL": {
           "type": "string",
+          "description": "URL of keyvault location to store certificate"
+        },
+        "failHealthCheckOnStagingFailure": {
+          "$ref": "#/definitions/FailHealthCheckOnStagingFailureEnum",
           "description": "Parameter indicating how the health check should behave if this package fails staging"
         }
       }
@@ -5643,6 +5664,19 @@
           "x-nullable": true
         }
       }
+    },
+    "FailHealthCheckOnStagingFailureEnum": {
+      "enum": [
+        "Unhealthy",
+        "NeedsAssistance",
+        "DoNotFail"
+      ],
+      "x-ms-enum": {
+        "name": "failHealthCheckOnStagingFailure",
+        "modelAsString": true
+      },
+      "type": "string",
+      "description": "Parameter indicating how the health check should behave if this package fails staging"
     },
     "ProvisioningState": {
       "type": "string",
