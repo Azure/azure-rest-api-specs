@@ -119,13 +119,13 @@ enum LabelOperator {
   lessThan,
   
   @doc("Less than or equal")
-  lessThanEqual,
+  lessThanOrEqual,
   
   @doc("Greater than")
   greaterThan,
   
   @doc("Greater than or equal")
-  greaterThanEqual,
+  greaterThanOrEqual,
 }
 
 @doc("The status of the worker selector.")
