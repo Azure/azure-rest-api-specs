@@ -376,7 +376,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SshGenerateKeyPairInput"
+              "$ref": "#/definitions/SshGenerateKeyPairInputParameters"
             },
             "description": "Parameters supplied to generate the SSH public key."
           },
@@ -496,7 +496,7 @@
       ],
       "description": "The list SSH public keys operation response."
     },
-    "SshGenerateKeyPairInputProperties": {
+    "SshGenerateKeyPairInputParameters": {
       "properties": {
         "encryptionType": {
           "type": "string",
@@ -511,22 +511,7 @@
           }
         }
       },
-      "description": "Specifies information about how the SSH key should be generated"
-    },
-    "SshGenerateKeyPairInput": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SshGenerateKeyPairInputProperties",
-          "description": "Configurations for generating a SSH public key."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
-        }
-      ],
-      "description": "Specifies information about how the SSH key should be generated"
+      "description": "Parameters for GenerateSshKeyPair."
     }
   }
 }
