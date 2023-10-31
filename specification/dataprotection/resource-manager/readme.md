@@ -28,7 +28,11 @@ These are the global settings for the DataProtection API.
 title: Data Protection Client
 description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
+<<<<<<< HEAD
 tag: package-2023-11
+=======
+tag: package-2023-08
+>>>>>>> 2eb558d57315916e01631b6f862a58a1f2c01b40
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
