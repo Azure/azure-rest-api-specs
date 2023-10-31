@@ -3435,6 +3435,10 @@
         "eventState": {
           "description": "DICOM Service event support status.",
           "$ref": "#/definitions/ResourceEventState"
+        },
+        "encryption": {
+          "description": "The encryption settings of the DICOM service",
+          "$ref": "#/definitions/Encryption"
         }
       }
     },
@@ -3810,6 +3814,10 @@
         "implementationGuidesConfiguration": {
           "description": "Implementation Guides configuration.",
           "$ref": "#/definitions/ImplementationGuidesConfiguration"
+        },
+        "encryption": {
+          "description": "The encryption settings of the FHIR service",
+          "$ref": "#/definitions/Encryption"
         }
       }
     },
@@ -4069,6 +4077,24 @@
         "modelAsString": true
       },
       "readOnly": true
+    },
+    "Encryption": {
+      "description": "Settings to encrypt a service",
+      "type": "object",
+      "properties": {
+        "customerManagedKeyEncryption": {
+          "type": "object",
+          "description": "The encryption settings for the customer-managed key",
+          "readOnly": false,
+          "properties": {
+            "keyEncryptionKeyUrl": {
+              "type": "string",
+              "description": "The URL of the key to use for encryption",
+              "readOnly": false
+            }
+          }
+        }
+      }
     },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
