@@ -5438,11 +5438,6 @@
     "AppAttachPackagePatch": {
       "description": "Schema for patchable App Attach Package properties.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
-        }
-      ],
       "properties": {
         "tags": {
           "type": "object",
@@ -5450,14 +5445,6 @@
             "type": "string"
           },
           "description": "tags to be updated"
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Identity",
-          "description": "The identity of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         },
         "properties": {
           "description": "Detailed properties for App Attach Package",
