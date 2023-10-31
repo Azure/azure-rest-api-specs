@@ -165,7 +165,7 @@ interface JobRouterOperations {
 
       @doc("Request object for reclassifying a job.")
       @body
-      reclassifyJobOptions?: ReclassifyJobOptions;
+      options?: ReclassifyJobOptions;
     },
     ReclassfiyJobOkReponse
   >;
@@ -189,7 +189,7 @@ cancellation reason.
 
       @doc("Request model for cancelling job.")
       @body
-      cancelJobOptions?: CancelJobOptions;
+      options?: CancelJobOptions;
     },
     CancelJobResultWithOkResponse
   >;
@@ -207,7 +207,7 @@ cancellation reason.
 
       @doc("Request model for completing job.")
       @body
-      completeJobOptions: CompleteJobOptions;
+      options: CompleteJobOptions;
     },
     CompleteJobResultWithOkResponse
   >;
@@ -225,7 +225,7 @@ cancellation reason.
 
       @doc("Request model for closing job.")
       @body
-      closeJobOptions: CloseJobOptions;
+      options: CloseJobOptions;
     },
     CloseJobResultResponse
   >;
@@ -271,7 +271,7 @@ cancellation reason.
 
       @doc("Request body for unassign route.")
       @body
-      unassignJobOptions?: UnassignJobOptions;
+      options?: UnassignJobOptions;
     },
     UnassignJobResult
   >;
@@ -317,7 +317,7 @@ accepted the job already.
 
       @doc("Request model for declining offer.")
       @body
-      declineJobOfferOptions?: DeclineJobOfferOptions;
+      options?: DeclineJobOfferOptions;
     },
     DeclineJobOfferResultWithOkResponse
   >;

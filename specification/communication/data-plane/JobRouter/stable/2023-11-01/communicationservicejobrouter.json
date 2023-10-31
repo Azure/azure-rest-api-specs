@@ -991,7 +991,7 @@
             "type": "string"
           },
           {
-            "name": "reclassifyJobOptions",
+            "name": "options",
             "in": "body",
             "description": "Request object for reclassifying a job.",
             "required": false,
@@ -1041,7 +1041,7 @@
             "type": "string"
           },
           {
-            "name": "cancelJobOptions",
+            "name": "options",
             "in": "body",
             "description": "Request model for cancelling job.",
             "required": false,
@@ -1068,6 +1068,9 @@
           }
         },
         "x-ms-examples": {
+          "Cancels a job": {
+            "$ref": "./examples/Jobs_CancelJob.json"
+          },
           "Submits request to cancel an existing job": {
             "$ref": "./examples/Jobs_RequestJobCancel.json"
           }
@@ -1091,7 +1094,7 @@
             "type": "string"
           },
           {
-            "name": "completeJobOptions",
+            "name": "options",
             "in": "body",
             "description": "Request model for completing job.",
             "required": true,
@@ -1141,7 +1144,7 @@
             "type": "string"
           },
           {
-            "name": "closeJobOptions",
+            "name": "options",
             "in": "body",
             "description": "Request model for closing job.",
             "required": true,
@@ -1201,7 +1204,7 @@
             "type": "string"
           },
           {
-            "name": "unassignJobOptions",
+            "name": "options",
             "in": "body",
             "description": "Request body for unassign route.",
             "required": false,
@@ -1884,7 +1887,7 @@
             "type": "string"
           },
           {
-            "name": "declineJobOfferOptions",
+            "name": "options",
             "in": "body",
             "description": "Request model for declining offer.",
             "required": false,
@@ -2662,9 +2665,9 @@
         "equal",
         "notEqual",
         "lessThan",
-        "lessThanEqual",
+        "lessThanOrEqual",
         "greaterThan",
-        "greaterThanEqual"
+        "greaterThanOrEqual"
       ],
       "x-ms-enum": {
         "name": "LabelOperator",
@@ -2686,8 +2689,8 @@
             "description": "Less than"
           },
           {
-            "name": "lessThanEqual",
-            "value": "lessThanEqual",
+            "name": "lessThanOrEqual",
+            "value": "lessThanOrEqual",
             "description": "Less than or equal"
           },
           {
@@ -2696,8 +2699,8 @@
             "description": "Greater than"
           },
           {
-            "name": "greaterThanEqual",
-            "value": "greaterThanEqual",
+            "name": "greaterThanOrEqual",
+            "value": "greaterThanOrEqual",
             "description": "Greater than or equal"
           }
         ]
