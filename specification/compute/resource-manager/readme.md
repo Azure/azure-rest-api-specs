@@ -247,6 +247,8 @@ directive:
     from: virtualMachineScaleSet.json
     where:
       - $.definitions.VirtualMachineScaleSetVMExtension
+  - suppress: LroErrorContent
+    reason: Compute uses common types defined in our own common-types.json.
 ```
 
 ### Tag: package-2023-09-01
