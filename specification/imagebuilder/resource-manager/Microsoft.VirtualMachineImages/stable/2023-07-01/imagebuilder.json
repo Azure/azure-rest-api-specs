@@ -1723,9 +1723,18 @@
           "description": "The user-specified tags associated with the image template."
         },
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ImageTemplateProperties",
-          "description": "The properties of the image template"
+          "type": "object",
+          "description": "Parameters for updating an image template.",
+          "properties": {
+            "distribute": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ImageTemplateDistributor"
+              },
+              "x-ms-identifiers": [],
+              "description": "The distribution targets where the image output needs to go to."
+            }
+          }
         }
       },
       "description": "Parameters for updating an image template."
@@ -1915,7 +1924,7 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "x-ms-identifiers": [ ],
+          "x-ms-identifiers": [],
           "title": "The list of operations supported by the resource provider."
         },
         "nextLink": {
