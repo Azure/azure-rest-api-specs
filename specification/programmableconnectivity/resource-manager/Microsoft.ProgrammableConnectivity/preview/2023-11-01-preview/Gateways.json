@@ -1,0 +1,625 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ProgrammableConnectivity",
+    "version": "2023-11-01-preview",
+    "description": "Azure Programmable Connectivity Provider management API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Gateways"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/gateways": {
+      "get": {
+        "operationId": "Gateways_ListBySubscription",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "List Gateway resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Gateway' list operation on subscription ID succeeded",
+            "schema": {
+              "$ref": "#/definitions/GatewayListResult"
+            }
+          },
+          "default": {
+            "description": "Gateway error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gateways_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Gateways_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/gateways": {
+      "get": {
+        "operationId": "Gateways_ListByResourceGroup",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "List Gateway resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Gateway' list operation on resource group succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GatewayListResult"
+            }
+          },
+          "default": {
+            "description": "Gateway error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gateways_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Gateways_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/gateways/{gatewayName}": {
+      "get": {
+        "operationId": "Gateways_Get",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "Get a Gateway resource by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Gateway' get by name operation succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "default": {
+            "description": "Gateway error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Gateways_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Gateways_CreateOrUpdate",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "Create or update an APC Gateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Gateway resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Gateway' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "201": {
+            "description": "Resource 'Gateway' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "Gateway error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Gateways_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Gateways_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Gateways_Update",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "Update a Gateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Updatable properties for a Gateway resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Gateway' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "202": {
+            "description": "Resource 'Gateway' update operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "Gateway error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Gateways_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Gateways_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Gateways_Delete",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "Delete a Gateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource 'Gateway' delete operation succeeded.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource 'Gateway' delete operation succeeded."
+          },
+          "default": {
+            "description": "Gateway error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Gateways_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Gateways_Delete_MaximumSet_Gen.json"
+          },
+          "Gateways_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Gateways_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/gateways/{gatewayName}/listKeys": {
+      "post": {
+        "operationId": "Gateways_ListKeys",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "Returns a list of Primary and Secondary api-keys to be used by the end-user for using the Network APIs exposed through the APC Gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Gateway' list keys operation succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GatewayListKeysResult"
+            }
+          },
+          "default": {
+            "description": "Gateway error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_ListKeys_MaximumSet_Gen": {
+            "$ref": "./examples/Gateways_ListKeys_MaximumSet_Gen.json"
+          },
+          "Gateways_ListKeys_MinimumSet_Gen": {
+            "$ref": "./examples/Gateways_ListKeys_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/gateways/{gatewayName}/regenerateKey": {
+      "post": {
+        "operationId": "Gateways_RegenerateKey",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "Regenerate the api-keys. Primary and Secondary keys can be regenerated at a time. The old key would stop working immediately. The user has to use the new keys to access the Network APIs exposed through the APC Gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GatewayName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Properties for the regenerate keys operation on the Gateway resource. ",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayRegenerateKeyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource 'Gateway' regenerate key operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "Gateway error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Gateways_RegenerateKey_MaximumSet_Gen": {
+            "$ref": "./examples/Gateways_RegenerateKey_MaximumSet_Gen.json"
+          },
+          "Gateways_RegenerateKey_MinimumSet_Gen": {
+            "$ref": "./examples/Gateways_RegenerateKey_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Gateway": {
+      "type": "object",
+      "description": "A Programmable Connectivity Gateway resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GatewayProperties",
+          "description": "Properties for the Gateway resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "GatewayListKeysResult": {
+      "type": "object",
+      "description": "Gateway api-key list result",
+      "properties": {
+        "primaryKey": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Primary Key"
+        },
+        "secondaryKey": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Secondary Key"
+        }
+      }
+    },
+    "GatewayListResult": {
+      "type": "object",
+      "description": "The response of a Gateway list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Gateway items on this page",
+          "items": {
+            "$ref": "#/definitions/Gateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GatewayProperties": {
+      "type": "object",
+      "description": "Gateway resource properties",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "SKU of the Azure Programmable Connectivity resource"
+        },
+        "openApiGateways": {
+          "type": "array",
+          "description": "List of Open API gateways selected by the user",
+          "items": {
+            "$ref": "./common.json#/definitions/OpenApiGatewayResourceId"
+          },
+          "readOnly": true
+        },
+        "gatewayBaseUrl": {
+          "type": "string",
+          "description": "Base URL of the Gateway resource. This is the URL that the users would use to make Open API Gateway requests to the Operators via Azure.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The status of the last operation on the Gateway resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sku"
+      ]
+    },
+    "GatewayRegenerateKeyRequest": {
+      "type": "object",
+      "description": "Gateway API Key regenerate request properties",
+      "properties": {
+        "keyType": {
+          "$ref": "#/definitions/RegenerateKeyType",
+          "description": "Key type to regenerate. Primary or Secondary"
+        }
+      },
+      "required": [
+        "keyType"
+      ]
+    },
+    "GatewayUpdate": {
+      "type": "object",
+      "description": "Properties for update operations of the Gateway.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/GatewayUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GatewayUpdateProperties": {
+      "type": "object",
+      "description": "Updatable properties of the Gateway.",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "SKU of the Azure Programmable Connectivity resource"
+        }
+      }
+    },
+    "RegenerateKeyType": {
+      "type": "string",
+      "description": "Type of the api-key to regenerate for an APC Gateway. It can be either 'Primary' or 'Secondary' for a request.",
+      "enum": [
+        "Primary",
+        "Secondary"
+      ],
+      "x-ms-enum": {
+        "name": "RegenerateKeyType",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "GatewayName": {
+      "name": "gatewayName",
+      "in": "path",
+      "description": "Azure Programmable Connectivity Gateway Name",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$"
+    }
+  }
+}

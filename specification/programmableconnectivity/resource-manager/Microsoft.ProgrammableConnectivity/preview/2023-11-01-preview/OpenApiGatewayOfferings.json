@@ -1,0 +1,283 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ProgrammableConnectivity",
+    "version": "2023-11-01-preview",
+    "description": "Azure Programmable Connectivity Provider management API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "OpenApiGatewayOfferings"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/openApiGatewayOfferings/{openApiGatewayOfferingName}": {
+      "get": {
+        "operationId": "OpenApiGatewayOfferings_Get",
+        "tags": [
+          "OpenApiGatewayOfferings"
+        ],
+        "description": "Get an OpenApiGatewayOffering resource by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OpenApiGatewayOfferingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OpenApiGatewayOffering' get by name operation succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OpenApiGatewayOffering"
+            }
+          },
+          "default": {
+            "description": "OpenAPI Gateway Offering error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OpenApiGatewayOfferings_Get_MaximumSet_Gen": {
+            "$ref": "./examples/OpenApiGatewayOfferings_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/openApiGatewayOfferings": {
+      "get": {
+        "operationId": "OpenApiGatewayOfferings_ListBySubscription",
+        "tags": [
+          "OpenApiGatewayOfferings"
+        ],
+        "description": "List OpenApiGatewayOffering resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OpenApiGatewayOffering' list operation on subscription ID succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OpenApiGatewayOfferingListResult"
+            }
+          },
+          "default": {
+            "description": "OpenAPI Gateway Offering error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OpenApiGatewayOfferings_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/OpenApiGatewayOfferings_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OpenApiGatewayOffering": {
+      "type": "object",
+      "description": "A Programmable Connectivity OpenAPI Gateway Offerings resource. This is a readonly resource that helps get the available OpenAPI Gateway offerings.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OpenApiGatewayOfferingProperties",
+          "description": "OpenAPI Gateway Offering resource properties.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OpenApiGatewayOfferingListResult": {
+      "type": "object",
+      "description": "The response of a OpenApiGatewayOffering list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OpenApiGatewayOffering items on this page",
+          "items": {
+            "$ref": "#/definitions/OpenApiGatewayOffering"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OpenApiGatewayOfferingApi": {
+      "type": "object",
+      "description": "OpenAPI Gateway Offering API properties",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Open Gateway Offering API Display Name"
+        },
+        "version": {
+          "type": "string",
+          "description": "Open Gateway Offering API Version"
+        }
+      }
+    },
+    "OpenApiGatewayOfferingAuth": {
+      "type": "object",
+      "description": "OpenAPI Gateway Offering API Auth properties",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Open Gateway Offering API Auth mode."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Open Gateway Offering API Auth endpoint."
+        }
+      }
+    },
+    "OpenApiGatewayOfferingProperties": {
+      "type": "object",
+      "description": "OpenAPI Gateway Offering properties",
+      "properties": {
+        "offerName": {
+          "type": "string",
+          "description": "Open Gateway Offering Display Name"
+        },
+        "operatorName": {
+          "type": "string",
+          "description": "Name of the Operator this offering belongs to."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Endpoint (Base URL) for the Operator's Network API in current region/country."
+        },
+        "country": {
+          "type": "string",
+          "description": "Name of the country where this offering is being supported."
+        },
+        "supportedApis": {
+          "type": "array",
+          "description": "List of Network APIs supported in this offering. The APIs are specific to a country/region.",
+          "x-ms-identifiers": [
+            "displayName"
+          ],
+          "items": {
+            "$ref": "#/definitions/OpenApiGatewayOfferingApi"
+          }
+        },
+        "authentication": {
+          "type": "object",
+          "description": "Authentication details for the Operator's Network API.",
+          "$ref": "#/definitions/OpenApiGatewayOfferingAuth"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The status of the last operation on the Gateway resource."
+        }
+      }
+    },
+    "OpenApiGatewayAuthenticationMode": {
+      "type": "string",
+      "description": "The authentication mode accepted by the Open API based Network APIs hosted by the operators.",
+      "enum": [
+        "OpenGatewayCiba",
+        "OAuthClientCreds",
+        "Basic",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "OpenApiGatewayAuthenticationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OpenGatewayCiba",
+            "value": "OpenGatewayCiba",
+            "description": "Open API Gateway CIBA based authentication. OIDC Client-Initiated Back-channel Authentication (CIBA) flow like regular OpenID Connect."
+          },
+          {
+            "name": "OAuthClientCreds",
+            "value": "OAuthClientCreds",
+            "description": "Standard OAuth2 based client credentials authentication flow."
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic auth flow where the username and password is shared in the Authorization header."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Custom auth flow where the authentication is done by the operator."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "OpenApiGatewayOfferingName": {
+      "name": "openApiGatewayOfferingName",
+      "in": "path",
+      "description": "APC Gateway Offering Name",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$"
+    }
+  }
+}
