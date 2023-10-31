@@ -78,7 +78,7 @@ tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-snapshots)
-tag: package-bicep-2022-11
+tag: package-snapshots-2022-11
 ```
 
 ``` yaml $(package-bicep)
