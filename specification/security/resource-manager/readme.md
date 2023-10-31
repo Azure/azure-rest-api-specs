@@ -84,9 +84,8 @@ These settings apply only when `--tag=package-preview-2023-12` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-12'
 input-file:
-  - Microsoft.Security/preview/2023-12-01-preview/connectors.json
-  - Microsoft.Security/preview/2023-12-01-preview/secureScore.json
   - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
+  - Microsoft.Security/preview/2023-12-01-preview/automations.json
 ```
 ### Tag: package-2023-11-15
 
