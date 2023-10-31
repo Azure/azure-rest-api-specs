@@ -232,6 +232,31 @@ suppressions:
     reason: This will be fixed in new versions.
 ```
 
+### Tag: package-flexibleserver-2023-06-30
+
+These settings apply only when `--tag=package-flexibleserver-2023-06-30` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2023-06-30'
+input-file:
+- Microsoft.DBforMySQL/AAD/stable/2023-06-30/AzureADAdministrator.json
+- Microsoft.DBforMySQL/Backups/stable/2023-06-30/Backups.json
+- Microsoft.DBforMySQL/Backups/stable/2023-06-30/BackupAndExport.json
+- Microsoft.DBforMySQL/Configurations/stable/2023-06-30/Configurations.json
+- Microsoft.DBforMySQL/Databases/stable/2023-06-30/Databases.json
+- Microsoft.DBforMySQL/Firewall/stable/2023-06-30/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/stable/2023-06-30/FlexibleServers.json
+- Microsoft.DBforMySQL/LogFiles/stable/2023-06-30/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/stable/2023-06-30/ServiceOperations.json
+- Microsoft.DBforMySQL/common-types/v1/common-types.json
+suppressions:
+  - code: PostOperationAsyncResponseValidation
+    from: FlexibleServers.json
+    reason: This check is optional.
+  - code: PropertiesTypeObjectNoDefinition
+    from: common-types.json
+    reason: This will be fixed in new versions.
+```
+
 ### Tag: package-flexibleserver-2023-06-30-privatelink
 
 These settings apply only when `--tag=package-flexibleserver-2023-06-30-privatelink` is specified on the command line.
