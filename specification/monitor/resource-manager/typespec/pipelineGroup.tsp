@@ -8,6 +8,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./exporters/AzureMonitorWorkspaceLogs.tsp";
 import "./exporters/TcpExporters.tsp";
 import "./receivers/TcpReceivers.tsp";
+import "./receivers/OtlpReceiver.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -36,6 +37,9 @@ model PipelineGroup is TrackedResource<PipelineGroupProperties> {
 
 @doc("Properties that need to be specified to create a new pipeline group instance.")
 model PipelineGroupProperties {
+  @doc("Defines the amount of replicas of the pipeline group instance.")
+  replicas?: int32 = 1;
+
   @doc("The receivers specified for a pipeline group instance.")
   @extension("x-ms-identifiers", [])
   receivers: Receiver[];
@@ -65,8 +69,11 @@ model Receiver {
   @pattern("^(?!-)[a-zA-Z0-9-]{3,32}[^-]$")
   name: string;
 
-  @doc("TCP service configurations. This field is mandatory for syslog, pipelineGroup type receivers.")
+  @doc("TCP service configurations. This field is mandatory for syslog type receivers.")
   tcpReceiver?: TcpReceiver;
+
+  @doc("OTLP receiver configurations. This field is mandatory for OTLP and pipelineGroup receivers.")
+  otlpReceiver?: OtlpReceiver;
 }
 
 @doc("The receiver type.")
@@ -74,11 +81,14 @@ enum ReceiverType {
   @doc("Linux syslog.")
   Syslog,
 
-  @doc("Collect data from azure monitor agent receiver.")
+  @doc("Receives data from azure monitor agent receiver.")
   Ama,
 
-  @doc("Collect data from pipeline group receiver.")
+  @doc("Receives data from another pipeline group.")
   PipelineGroup,
+
+  @doc("Receives data from a OTLP collector.")
+  OTLP,
 }
 
 @doc("Processor Info.")
@@ -158,6 +168,9 @@ interface PipelineGroups {
 
   @doc("Delete a pipeline group instance.")
   delete is ArmResourceDeleteAsync<PipelineGroup>;
+
+  @doc("Updates a pipeline group instance")
+  update is ArmResourcePatchAsync<PipelineGroup, PipelineGroupProperties>;
 
   @doc("Lists all workspaces in the specified resource group")
   listByResourceGroup is ArmResourceListByParent<PipelineGroup>;

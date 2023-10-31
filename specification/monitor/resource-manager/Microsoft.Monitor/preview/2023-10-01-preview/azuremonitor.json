@@ -600,6 +600,78 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "PipelineGroups_Update",
+        "tags": [
+          "PipelineGroups"
+        ],
+        "description": "Updates a pipeline group instance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pipelineGroupName",
+            "in": "path",
+            "description": "The name of pipeline group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineGroupUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineGroup"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a PipelineGroup instance": {
+            "$ref": "./examples/PipelineGroupUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "PipelineGroups_Delete",
         "tags": [
@@ -969,6 +1041,19 @@
         }
       }
     },
+    "OtlpReceiver": {
+      "type": "object",
+      "description": "OTLP Receiver.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "OTLP GRPC endpoint definition. Example: 0.0.0.0:<port>"
+        }
+      },
+      "required": [
+        "endpoint"
+      ]
+    },
     "Pipeline": {
       "type": "object",
       "description": "Pipeline Info.",
@@ -1062,6 +1147,12 @@
       "type": "object",
       "description": "Properties that need to be specified to create a new pipeline group instance.",
       "properties": {
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Defines the amount of replicas of the pipeline group instance.",
+          "default": 1
+        },
         "receivers": {
           "type": "array",
           "description": "The receivers specified for a pipeline group instance.",
@@ -1102,6 +1193,63 @@
         "exporters",
         "service"
       ]
+    },
+    "PipelineGroupUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the PipelineGroup.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PipelineGroupUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PipelineGroupUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the PipelineGroup.",
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Defines the amount of replicas of the pipeline group instance.",
+          "default": 1
+        },
+        "receivers": {
+          "type": "array",
+          "description": "The receivers specified for a pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/Receiver"
+          },
+          "x-ms-identifiers": []
+        },
+        "processors": {
+          "type": "array",
+          "description": "The processors specified for a pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/Processor"
+          },
+          "x-ms-identifiers": []
+        },
+        "exporters": {
+          "type": "array",
+          "description": "The exporters specified for a pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/Exporter"
+          },
+          "x-ms-identifiers": []
+        },
+        "service": {
+          "$ref": "#/definitions/ServiceUpdate",
+          "description": "The service section for a given pipeline group instance."
+        }
+      }
     },
     "Processor": {
       "type": "object",
@@ -1221,7 +1369,11 @@
         },
         "tcpReceiver": {
           "$ref": "#/definitions/TcpReceiver",
-          "description": "TCP service configurations. This field is mandatory for syslog, pipelineGroup type receivers."
+          "description": "TCP service configurations. This field is mandatory for syslog type receivers."
+        },
+        "otlpReceiver": {
+          "$ref": "#/definitions/OtlpReceiver",
+          "description": "OTLP receiver configurations. This field is mandatory for OTLP and pipelineGroup receivers."
         }
       },
       "required": [
@@ -1235,7 +1387,8 @@
       "enum": [
         "Syslog",
         "Ama",
-        "PipelineGroup"
+        "PipelineGroup",
+        "OTLP"
       ],
       "x-ms-enum": {
         "name": "ReceiverType",
@@ -1249,12 +1402,17 @@
           {
             "name": "Ama",
             "value": "Ama",
-            "description": "Collect data from azure monitor agent receiver."
+            "description": "Receives data from azure monitor agent receiver."
           },
           {
             "name": "PipelineGroup",
             "value": "PipelineGroup",
-            "description": "Collect data from pipeline group receiver."
+            "description": "Receives data from another pipeline group."
+          },
+          {
+            "name": "OTLP",
+            "value": "OTLP",
+            "description": "Receives data from a OTLP collector."
           }
         ]
       }
@@ -1362,6 +1520,20 @@
       "required": [
         "pipelines"
       ]
+    },
+    "ServiceUpdate": {
+      "type": "object",
+      "description": "Service Info.",
+      "properties": {
+        "pipelines": {
+          "type": "array",
+          "description": "Pipelines belonging to a given pipeline group.",
+          "items": {
+            "$ref": "#/definitions/Pipeline"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "TcpExporter": {
       "type": "object",
