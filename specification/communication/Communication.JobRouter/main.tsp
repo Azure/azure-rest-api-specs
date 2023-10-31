@@ -14,9 +14,10 @@ using TypeSpec.Versioning;
   title: "Azure Communication Routing Service",
 })
 @server(
-  "",
+  "{endpoint}",
   "Azure Communication Routing Service",
   {
+    endpoint: string,
   }
 )
 @versioned(Versions)
