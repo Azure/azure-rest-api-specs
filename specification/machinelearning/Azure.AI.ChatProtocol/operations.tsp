@@ -27,5 +27,5 @@ interface Chat<TState, TContext> {
   >;
 }
 
-@route("/chat")
+@route("/")
 interface GenericChatClient extends Chat<unknown, Record<unknown>> {}

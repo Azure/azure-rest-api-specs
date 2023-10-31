@@ -44,7 +44,6 @@ model StateProperty<TState> {
   sends a new one. The data in this field can be used to implement stateful services, such as remembering previous
   conversations or user preferences.
   """)
-  @projectedName("json", "session_state")
   sessionState?: TState;
 }
 
