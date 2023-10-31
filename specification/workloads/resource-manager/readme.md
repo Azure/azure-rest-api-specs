@@ -27,10 +27,19 @@ These are the global settings for the workloads.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-04
+tag: package-2023-10
 ```
 
+### Tag: package-2023-10
 
+These settings apply only when `--tag=package-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10'
+input-file:
+  - Microsoft.Workloads/SAPVirtualInstance/preview/2023-10-01-preview/SAPVirtualInstance.json
+  - Microsoft.Workloads/common-types/v1/commonTypes.json
+  - Microsoft.Workloads/operations/preview/2023-10-01-preview/operations.json
+```
 ### Tag: package-2023-04
 
 These settings apply only when `--tag=package-2023-04` is specified on the command line.
