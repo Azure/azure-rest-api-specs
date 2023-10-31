@@ -552,14 +552,19 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name" : "apiName",
-            "in" : "path",
-            "description" : "Proxy API Name for Container App Job.",
-            "required" : true,
+            "name": "apiName",
+            "in": "path",
+            "description": "Proxy API Name for Container App Job.",
+            "required": true,
             "enum": [
               "rootApi"
             ],
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "x-ms-enum": {
+              "name": "ApiName",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
