@@ -62,6 +62,8 @@ suppressions:
   - code: ResourceNameRestriction
     reason: ScalingPlan was already implemented in previous versions of the API and
       we cannot change naming pattern now.
+  - code: PatchIdentityProperty
+    reason: There is an error loop with the identity property. We received approval to suppress this error, but we still need to investigate error loop.
 ```
 
 ### Tag: package-preview-2022-10
