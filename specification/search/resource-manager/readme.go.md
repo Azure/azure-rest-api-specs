@@ -36,10 +36,6 @@ directive:
   where: $.definitions.SharedPrivateLinkResourceListResult
   transform: >
     $["x-ms-external"] = false
-- from: swagger-document
-  where: $.definitions.QuotaUsagesListResult
-  transform: >
-    $["x-ms-external"] = false
 ```
 
 ### Go multi-api

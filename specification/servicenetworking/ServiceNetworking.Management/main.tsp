@@ -8,7 +8,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 @armProviderNamespace
 @service({
   title: "TrafficController",
-  version: "2023-11-01",
+  version: "2023-05-01-preview",
 })
 @doc("Traffic Controller Provider management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)

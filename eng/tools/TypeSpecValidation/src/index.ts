@@ -1,13 +1,10 @@
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { CompileRule } from "./rules/compile.js";
-import { EmitAutorestRule } from "./rules/emit-autorest.js";
 import { FolderStructureRule } from "./rules/folder-structure.js";
 import { FormatRule } from "./rules/format.js";
 import { GitDiffRule } from "./rules/git-diff.js";
 import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
-import path from "path";
-import { TsvRunnerHost } from "./tsv-runner-host.js";
 
 export async function main() {
   const args = process.argv.slice(2);
@@ -18,15 +15,12 @@ export async function main() {
     },
   };
   const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
-  const folder = parsedArgs.positionals[0].split(path.sep).join("/");
+  const folder = parsedArgs.positionals[0];
   console.log("Running TypeSpecValidation on folder:", folder);
 
-  const host = new TsvRunnerHost();
-
-  const rules = [
+  let rules = [
     new FolderStructureRule(),
     new NpmPrefixRule(),
-    new EmitAutorestRule(),
     new LinterRulesetRule(),
     new CompileRule(),
     new FormatRule(),
@@ -36,7 +30,7 @@ export async function main() {
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i];
     console.log("\nExecuting rule: " + rule.name);
-    const result = await rule.execute(host, folder);
+    const result = await rule.execute(folder);
     if (result.stdOutput) console.log(result.stdOutput);
     if (!result.success) {
       success = false;

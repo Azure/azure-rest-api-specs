@@ -3,7 +3,7 @@ import { join } from "path";
 import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
-import { TsvHost } from "../tsv-host.js";
+import { checkFileExists } from "../utils.js";
 
 export class LinterRulesetRule implements Rule {
   readonly name = "LinterRuleset";
@@ -11,7 +11,7 @@ export class LinterRulesetRule implements Rule {
   readonly description =
     "Ensures each spec includes the correct linter ruleset (data-plane or management-plane)";
 
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
@@ -24,8 +24,8 @@ export class LinterRulesetRule implements Rule {
       config.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
     stdOutput += `azure-resource-provider-folder: ${JSON.stringify(rpFolder)}\n`;
 
-    const mainTspExists = await host.checkFileExists(join(folder, "main.tsp"));
-    const clientTspExists = await host.checkFileExists(join(folder, "client.tsp"));
+    const mainTspExists = await checkFileExists(join(folder, "main.tsp"));
+    const clientTspExists = await checkFileExists(join(folder, "client.tsp"));
     let files = [];
     if (mainTspExists) {
       files.push("main.tsp");

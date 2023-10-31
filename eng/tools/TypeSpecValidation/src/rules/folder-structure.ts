@@ -2,18 +2,18 @@ import { globby } from "globby";
 import path from "path";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
-import { TsvHost } from "../tsv-host.js";
+import { checkFileExists } from "../utils.js";
 
 export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
   readonly description = "Verify spec directory's folder structure and naming conventions.";
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
 
     stdOutput += `folder: ${folder}\n`;
-    if (!(await host.checkFileExists(folder))) {
+    if (!(await checkFileExists(folder))) {
       return {
         success: false,
         stdOutput: stdOutput,
@@ -64,17 +64,17 @@ export class FolderStructureRule implements Rule {
 
     // Verify tspconfig, main.tsp, examples/
     let containsMinStruct =
-      (await host.checkFileExists(path.join(folder, "main.tsp"))) ||
-      (await host.checkFileExists(path.join(folder, "client.tsp")));
+      (await checkFileExists(path.join(folder, "main.tsp"))) ||
+      (await checkFileExists(path.join(folder, "client.tsp")));
 
-    if (await host.checkFileExists(path.join(folder, "main.tsp"))) {
+    if (await checkFileExists(path.join(folder, "main.tsp"))) {
       containsMinStruct =
-        containsMinStruct && (await host.checkFileExists(path.join(folder, "examples")));
+        containsMinStruct && (await checkFileExists(path.join(folder, "examples")));
     }
 
     if (!packageFolder.includes("Shared")) {
       containsMinStruct =
-        containsMinStruct && (await host.checkFileExists(path.join(folder, "tspconfig.yaml")));
+        containsMinStruct && (await checkFileExists(path.join(folder, "tspconfig.yaml")));
     }
     if (!containsMinStruct) {
       success = false;
