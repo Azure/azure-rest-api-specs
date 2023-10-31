@@ -141,18 +141,18 @@ union SchemaContentTypeValues {
 }
 
 @doc("The content type for the schema.")
-enum ContentType {
+enum ContentTypeEnum {
   @doc("The Avro schema content type.")
-  avroValue: "application/json; serialization=Avro",
+  avro: "application/json; serialization=Avro",
   @doc("The JSON schema content type.")
   @added(ServiceApiVersions.V2022_10)
-  jsonValue: "application/json; serialization=json",
+  json: "application/json; serialization=json",
   @doc("The custom schema content type.")
   @added(ServiceApiVersions.V2022_10)
-  customValue: "text/plain; charset=utf-8",
+  custom: "text/plain; charset=utf-8",
   @doc("The protobuf schema content type.")
   @added(ServiceApiVersions.V2023_07_01)
-  protobufValue: "text/vnd.ms.protobuf",
+  protobuf: "text/vnd.ms.protobuf",
 }
 
 @doc("Represents the format of the schema to be stored by the Schema Registry service.")
