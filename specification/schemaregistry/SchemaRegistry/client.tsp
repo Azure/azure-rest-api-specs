@@ -8,9 +8,8 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.SchemaRegistry.SchemaGroup, Access.internal);
 
 // csharp models
-@@access(Azure.SchemaRegistry.ContentTypeEnum, Access.internal);
-@@usage(Azure.SchemaRegistry.ContentTypeEnum, Usage.input | Usage.output);
-@@projectedName(Azure.SchemaRegistry.ContentTypeEnum, "client", "ContentType");
+@@access(Azure.SchemaRegistry.ContentType, Access.internal);
+@@usage(Azure.SchemaRegistry.ContentType, Usage.input | Usage.output);
 
 // public client models
 @@access(Azure.SchemaRegistry.SchemaFormat, Access.internal);
