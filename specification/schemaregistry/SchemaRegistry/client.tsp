@@ -10,7 +10,7 @@ using Azure.ClientGenerator.Core;
 // csharp-specific public models
 @@access(Azure.SchemaRegistry.SchemaContentTypeValues, Access.internal);
 @@usage(Azure.SchemaRegistry.SchemaContentTypeValues, Usage.input | Usage.output);
-@@projectedName(Azure.SchemaRegistry.SchemaContentTypeValues, "client", "ContentType");
+//@@projectedName(Azure.SchemaRegistry.SchemaContentTypeValues, "client", "ContentType");
 
 // public client models
 @@access(Azure.SchemaRegistry.SchemaFormat, Access.internal);
