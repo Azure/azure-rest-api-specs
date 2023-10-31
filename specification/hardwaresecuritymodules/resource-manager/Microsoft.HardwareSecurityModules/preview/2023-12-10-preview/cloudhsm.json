@@ -692,6 +692,14 @@
         },
         "hardwareLog": {
           "$ref": "#/definitions/CloudHsmClusterHardwareLog"
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Cloud HSM Cluster status message",
+          "readOnly": true
+        },
+        "cloudHsmClusterRestoreProperties": {
+          "$ref": "#/definitions/CloudHsmClusterRestoreProperties"
         }
       },
       "description": "Properties of a Cloud HSM Cluster.",
@@ -797,6 +805,20 @@
           "type": "string",
           "readOnly": true,
           "description": "Status of backup operation"
+        }
+      }
+    },
+    "cloudHsmClusterRestoreProperties": {
+      "type": "object",
+      "description": "Cloud Hsm Cluster restore information",
+      "properties": {
+        "blobFolderPath": {
+          "type": "string",
+          "description": "Folder Name in Azure Storage Blob where the backup is stored"
+        },
+        "restoreStorageAccountUri": {
+          "type": "string",
+          "description": "Uri of Azure Storage Account to use for restore operation"
         }
       }
     },
