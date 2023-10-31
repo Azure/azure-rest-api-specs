@@ -122,10 +122,10 @@ model GetTokenCredentialRequest {
 @doc("AccessToken")
 model AccessToken {
   @doc("Token string")
-  Token: string;
+  token: string;
 
   @doc("Expiry time")
-  ExpiresOn: offsetDateTime;
+  expiresOn: offsetDateTime;
 }
 
 @doc("GetInputAsyncRequest")
