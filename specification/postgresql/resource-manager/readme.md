@@ -67,6 +67,22 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/ThreatProtection.json
   - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/VirtualEndpoints.json
   - Microsoft.DBforPostgreSQL/preview/2023-06-01-preview/VirtualNetwork.json
+suppressions:
+  - code: PutResponseCodes
+    from: PrivateEndpointConnections.json
+    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: ThreatProtection.json
+    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: VirtualEndpoints.json
+    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+  - code: ProvisioningStateSpecifiedForLROPatch
+    from: VirtualEndpoints.json
+    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+  - code: PutResponseCodes
+    from: VirtualEndpoints.json
+    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
 ```
 ### Tag: package-flexibleserver-2023-03-01-preview
 
