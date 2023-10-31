@@ -1,0 +1,252 @@
+{
+  "title": "BusinessCasePaasSummaryOperations_Get",
+  "operationId": "BusinessCasePaasSummaryOperations_Get",
+  "parameters": {
+    "api-version": "2023-04-01-preview",
+    "subscriptionId": "68135DEC-32DF-4D87-938F-0E192C19C4EE",
+    "resourceGroupName": "rgopenapi",
+    "projectName": "multipleto8617project",
+    "businessCaseName": "sample-business-case",
+    "paasSummaryName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "azure": {
+            "totalSqlEntities": 11,
+            "suitableSqlEntities": 1,
+            "totalWebApps": 7,
+            "suitableWebApps": 4,
+            "cores": 5,
+            "memory": 8,
+            "storage": 14,
+            "estimatedCostByTarget": {
+              "azureSqlMiCost": 20,
+              "azureSqlDbCost": 26,
+              "appServiceCost": 20,
+              "appServiceContainerCost": 20,
+              "azureKubernetesServiceCost": 9
+            },
+            "estimatedSqlServerLicensingCost": 27,
+            "azureSqlSummary": {
+              "estimatedCostByOffer": [
+                {
+                  "offerName": "3 Year RI",
+                  "cost": 4
+                }
+              ],
+              "distributionByServiceTier": [
+                {
+                  "serviceTierName": "GeneralPurpose",
+                  "serviceTierNumber": 14
+                }
+              ],
+              "distributionByServiceTierForSqlMi": [
+                {
+                  "serviceTierName": "GeneralPurpose",
+                  "serviceTierNumber": 14
+                }
+              ],
+              "distributionByServiceTierForSqlDb": [
+                {
+                  "serviceTierName": "GeneralPurpose",
+                  "serviceTierNumber": 14
+                }
+              ]
+            },
+            "azureAppServiceSummary": {
+              "estimatedCostByOffer": [
+                {
+                  "offerName": "3 Year ASP",
+                  "cost": 4
+                }
+              ],
+              "distributionBySku": [
+                {
+                  "skuName": "Premium_V3",
+                  "cost": 17,
+                  "count": 22
+                }
+              ],
+              "distributionByApp": [
+                {
+                  "webAppType": "Unknown",
+                  "numberOfWebApps": 29
+                }
+              ]
+            },
+            "azureAppServiceContainerSummary": {
+              "estimatedCostByOffer": [
+                {
+                  "offerName": "3 Year ASP",
+                  "cost": 4
+                }
+              ],
+              "distributionBySku": [
+                {
+                  "skuName": "Premium_V3",
+                  "cost": 21,
+                  "count": 9
+                }
+              ],
+              "distributionByApp": [
+                {
+                  "webAppType": "Unknown",
+                  "numberOfWebApps": 29
+                }
+              ]
+            },
+            "azureKubernetesServiceSummary": {
+              "estimatedCostByOffer": [
+                {
+                  "offerName": "3 Year ASP",
+                  "cost": 4
+                }
+              ],
+              "distributionBySku": [
+                {
+                  "skuName": "Premium_V3",
+                  "cost": 21,
+                  "count": 9
+                }
+              ],
+              "distributionByApp": [
+                {
+                  "webAppType": "Unknown",
+                  "numberOfWebApps": 29
+                }
+              ]
+            },
+            "totalAzurePaasCost": {
+              "storageCost": 22,
+              "computeCost": 19,
+              "itLaborCost": 13,
+              "networkCost": 25,
+              "ahubSavings": 22,
+              "securityCost": 12,
+              "managementCostDetails": {
+                "managementCost": 20,
+                "managementCostComponents": [
+                  {
+                    "name": "Unknown",
+                    "value": 21
+                  }
+                ]
+              },
+              "esuSavings": 16
+            }
+          },
+          "onPremises": {
+            "totalServers": 4,
+            "cpuUtilization": 14,
+            "memoryUtilization": 20,
+            "totalOnPremisesPaasCost": {
+              "storageCost": 22,
+              "computeCost": 19,
+              "itLaborCost": 13,
+              "networkCost": 25,
+              "ahubSavings": 22,
+              "securityCost": 12,
+              "managementCostDetails": {
+                "managementCost": 20,
+                "managementCostComponents": [
+                  {
+                    "name": "Unknown",
+                    "value": 21
+                  }
+                ]
+              },
+              "esuSavings": 16
+            },
+            "onPremisesPaasCostForDecommisioned": {
+              "storageCost": 22,
+              "computeCost": 19,
+              "itLaborCost": 13,
+              "networkCost": 25,
+              "ahubSavings": 22,
+              "securityCost": 12,
+              "managementCostDetails": {
+                "managementCost": 20,
+                "managementCostComponents": [
+                  {
+                    "name": "Unknown",
+                    "value": 21
+                  }
+                ]
+              },
+              "esuSavings": 16
+            },
+            "onPremisesPaasLicensingCost": {
+              "version": null,
+              "totalCost": 6,
+              "decomissionServerCost": 20
+            },
+            "onPremisesSqlSummary": {
+              "sqlInstances": 5,
+              "sqlDatabases": 11,
+              "distributionBySqlVersion": [
+                {
+                  "sqlVersion": "SQL Server 2019",
+                  "numberOfInstances": 5
+                }
+              ],
+              "sqlOnPremisesUtilizationData": {
+                "numberOfActiveEntities": 1,
+                "numberOfInactiveEntities": 26,
+                "numberOfDecommisionEntities": 27,
+                "numberOfUnknownEntities": 29
+              },
+              "distributionBySqlEdition": [
+                {
+                  "type": "Enterprise Edition (64-bit)",
+                  "count": 3
+                }
+              ]
+            },
+            "onPremisesWebAppSummary": {
+              "numberOfWebServers": 4,
+              "numberOfWebApplications": 28,
+              "numberOfWebAppsPerType": {
+                "key1991": 22
+              }
+            },
+            "osSupportStatusDistribution": {
+              "unknownSupport": 23,
+              "mainStream": 17,
+              "extended": 6,
+              "outOfSupport": 30
+            },
+            "sqlSupportStatusDistribution": {
+              "unknownSupport": 23,
+              "mainStream": 17,
+              "extended": 6,
+              "outOfSupport": 30
+            },
+            "osServicePackInsight": {
+              "unknownServicePack": 13,
+              "patched": 10,
+              "unpatched": 5
+            },
+            "sqlServicePackInsight": {
+              "unknownServicePack": 13,
+              "patched": 10,
+              "unpatched": 5
+            }
+          }
+        },
+        "id": "/subscriptions/68135DEC-32DF-4D87-938F-0E192C19C4EE/resourceGroups/rgopenapi/providers/Microsoft.Migrate/assessmentprojects/multipleto8617project/businessCases/sample-business-case/paassummaries/default",
+        "name": "default",
+        "type": "Microsoft.Migrate/assessmentprojects/businessCases/paassummaries",
+        "systemData": {
+          "createdBy": "t72jdt@company.com",
+          "createdByType": "User",
+          "createdAt": "2023-10-31T07:04:46.929Z",
+          "lastModifiedBy": "t72jdt@company.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-10-31T07:04:46.929Z"
+        }
+      }
+    }
+  }
+}
