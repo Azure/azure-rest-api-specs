@@ -460,11 +460,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success. The operation deleted the BastionShareableLinks associated with the tokens, if they existed. No return body."
-          },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -873,6 +875,7 @@
       "description": "Post request for Create/Delete/Get Bastion Shareable Link endpoints."
     },
     "BastionShareableLinkTokenListRequest": {
+      "type": "object",
       "properties": {
         "tokens": {
           "type": "array",
