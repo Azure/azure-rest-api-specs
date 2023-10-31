@@ -28,18 +28,26 @@ These are the global settings for the Confluent API.
 title: ConfluentManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-12-01
+tag: package-2023-08-22
 ```
+### Tag: package-2023-08-22
 
+These settings apply only when `--tag=package-2023-08-22` is specified on the command line.
 
+```yaml $(tag) == 'package-2023-08-22'
+input-file:
+  - Microsoft.Confluent/stable/2023-08-22/confluent.json
+
+```
 ### Tag: package-2021-12-01
 
 These settings apply only when `--tag=package-2021-12-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-12-01'
+``` yaml $(tag) == 'package-2021-12-01'
 input-file:
   - Microsoft.Confluent/stable/2021-12-01/confluent.json
 ```
+
 ### Tag: package-preview-2021-09
 
 These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
