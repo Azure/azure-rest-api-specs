@@ -279,17 +279,9 @@
           "description": "The domain name associated with the monitored resource.",
           "type": "string"
         },
-        "extensionStatus": {
-          "description": "The status of the agent extension that is being installed.",
-          "type": "string",
-          "enum": [
-            "Failed",
-            "Succeeded"
-          ],
-          "x-ms-enum": {
-            "name": "extensionStatus",
-            "modelAsString": true
-          }
+        "onboardingStatus": {
+          "description": "The status of the agent onboarding process that is being installed.",
+          "$ref": "commonTypes.json#/definitions/OnboardingStatusProperties"
         },
         "managementServerEndpoint": {
           "description": "The management server endpoint to which the monitored resource is directed.",
@@ -343,9 +335,9 @@
           "description": "machineType of monitored resource.",
           "type": "string",
           "enum": [
-            "Azure",
-            "Azure Arc",
-            "On-Prem"
+            "Azure Virtual Machine",
+            "Azure Arc Machine",
+            "On-premise Machine"
           ],
           "x-ms-enum": {
             "name": "machineType",

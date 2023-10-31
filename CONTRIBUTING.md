@@ -48,11 +48,7 @@ Because the first rule is to avoid breaking changes and because we want APIs to 
 
 ## Coding Style
 
-REST APIs for Azure should be defined using the [OpenAPI v2](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md) or [Cadl](https://aka.ms/cadl/rpaas-start)format.
-
-The REST API should also adhere to the conventions documented in the [Azure API Style Guide](https://github.com/Azure/azure-api-style-guide/blob/main/openapi-style-guide.md).
-
-You can use the [Spectral linter](https://meta.stoplight.io/docs/spectral/674b27b261c3c-overview) with our [Spectral ruleset](https://github.com/Azure/azure-api-style-guide#how-to-use-the-spectral-ruleset) to check conformance with OpenAPI v2 and the Style Guide.
+All new services should use [TypeSpec](https://aka.ms/typespec/azure) to create their REST API definition. If you are working on an existing service, you should consider converting your existing REST API definition to TypeSpec. Services that use TypeSpec to describe their REST API should include both the TypeSpec source and generated OpenAPI in the specs repo.
 
 ## Directory Structure
 
@@ -69,7 +65,7 @@ If you want to contribute to the repository, follow these steps:
   5. Resolve any issues flagged by the [Pull Request checks](#pull-request-checks).
   6. Contact the ARM API Review board or Azure API Stewardship team to request PR review. 
 
-Microsoft employees can try out the experience at [OpenAPI Hub](https://aka.ms/openapihub) for [adding a new API version using OpenAPI Hub](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).
+Microsoft employees can use [OpenAPI Hub](https://aka.ms/openapihub) for adding a new API version.
 
 ## Pull Request Checks
 
@@ -93,8 +89,4 @@ When any of these PR checks fails it will post a comment to the PR with links to
 There is also the [CI Fix Guide](https://aka.ms/ci-fix) that describes how to fix common PR check failures.
 
 ## Internal Contribution Guide
-For management plane, please refer to https://aka.ms/rpguidelines; 
-
-For data-plane, please refer to [Guide to design and creation of Data Plane REST API and Client Libraries](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/591/Guide-to-design-and-creation-of-Data-Plane-REST-API-and-Client-Libraries); 
-
-For contribution access to spec repos, please refer to [Public repo vs. Private repo: To get write access](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/202/Overall-Process-of-Management-Plane-SDK-Onboarding?anchor=2.-create/update-the-openapi-specifications%2C-and-launch-swagger-pr-review)
+[Create high-level Azure REST API design](https://eng.ms/docs/products/azure-developer-experience/design/api-design)

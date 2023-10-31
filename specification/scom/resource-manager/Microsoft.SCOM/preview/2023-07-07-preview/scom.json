@@ -641,7 +641,7 @@
           "200": {
             "description": "OK. The gateway approval for onboarding has completed successfully.",
             "schema": {
-              "$ref": "#/definitions/onboardGatewayResponseProperties"
+              "$ref": "#/definitions/CommonResponseProperties"
             }
           },
           "202": {
@@ -674,9 +674,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/deboardGateway": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/offboardGateway": {
       "post": {
-        "operationId": "Deboard_Gateway",
+        "operationId": "Offboard_Gateway",
         "description": "Gateway removal approval for deleting gateway.",
         "consumes": [
           "application/json"
@@ -707,7 +707,7 @@
           "200": {
             "description": "OK. The remove gateway approval for deleting has completed successfully.",
             "schema": {
-              "$ref": "#/definitions/onboardGatewayResponseProperties"
+              "$ref": "#/definitions/CommonResponseProperties"
             }
           },
           "202": {
@@ -735,7 +735,73 @@
         },
         "x-ms-examples": {
           "Instances_Scale": {
-            "$ref": "./examples/Gateway_Deboard.json"
+            "$ref": "./examples/Gateway_Offboard.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/offboardMonitoredResource": {
+      "post": {
+        "operationId": "Offboard_MonitoredResource",
+        "description": "Api to remove monitored resource from management server.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MonitoredResourceOffboardingProperties"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The removal of monitored resource from management server before unregister has completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommonResponseProperties"
+            }
+          },
+          "202": {
+            "description": "Accepted. The removal of monitored resource from management server before unregister will complete asyncronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Instances_Scale": {
+            "$ref": "./examples/MonitoredResource_Offboard.json"
           }
         }
       }
@@ -1053,7 +1119,7 @@
           "$ref": "#/definitions/AzureHybridBenefitProperties"
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
+          "description": "Gets the provisioning state.",
           "type": "string",
           "readOnly": true
         },
@@ -1091,6 +1157,11 @@
         },
         "id": {
           "description": "Operation id",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationMessage": {
+          "description": "Operation message",
           "type": "string",
           "readOnly": true
         }
@@ -1147,20 +1218,22 @@
       }
     },
     "DomainUserCredentials": {
-      "description": "Get Domain user name and password from key vault",
+      "description": "Domain user name and password",
       "type": "object",
       "properties": {
         "keyVaultUrl": {
-          "description": "Key vault url to get the domain username and password",
+          "description": "Key vault url to get the domain username and password (not used)",
           "type": "string"
         },
         "userNameSecret": {
-          "description": "Domain user name secret ",
+          "description": "Domain user name",
           "type": "string"
         },
         "passwordSecret": {
-          "description": "Domain Password secret ",
-          "type": "string"
+          "description": "Domain password",
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -1195,9 +1268,8 @@
           "type": "string"
         },
         "databaseFqdn": {
-          "description": "Fully qualified domain name of existing database instance",
-          "type": "string",
-          "readOnly": true
+          "description": "Fully qualified domain name of public endpoint of existing database instance.",
+          "type": "string"
         },
         "dwDatabaseName": {
           "description": "Name of warehouse database on database instance",
@@ -1319,8 +1391,19 @@
       }
     },
     "MonitoringInstancePatch": {
+      "description": "Object containing updates for patch operations.",
       "type": "object",
       "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The properties of a SCOM instance resource",
+          "properties": {
+            "domainUserCredentials": {
+              "description": "Domain user which will be used to join VMs to domain and login to VMs.",
+              "$ref": "#/definitions/DomainUserCredentials"
+            }
+          }
+        },
         "identity": {
           "description": "The Azure Active Directory identity of the SCOM instance",
           "$ref": "#/definitions/ManagedIdentity",
@@ -1336,8 +1419,7 @@
           },
           "description": "Resource tags."
         }
-      },
-      "description": "Object containing updates for patch operations."
+      }
     },
     "ScalingProperties": {
       "type": "object",
@@ -1500,6 +1582,11 @@
           "items": {
             "$ref": "#/definitions/NexusResourcesProperties"
           }
+        },
+        "totalRecords": {
+          "description": "Total number of records present in Db to be used in pagination.",
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -1555,6 +1642,10 @@
           "description": "The domain name associated with the filtered resource.",
           "type": "string"
         },
+        "onboardingStatus": {
+          "description": "The status of the resource onboarding process that is being installed.",
+          "$ref": "commonTypes.json#/definitions/OnboardingStatusProperties"
+        },
         "managementServerEndpoint": {
           "description": "The management server endpoint to which the filtered resource is directed.",
           "type": "string",
@@ -1597,9 +1688,9 @@
           "description": "machineType of filtered resource.",
           "type": "string",
           "enum": [
-            "Azure",
-            "Azure Arc",
-            "On-Prem"
+            "Azure Virtual Machine",
+            "Azure Arc Machine",
+            "On-premise Machine"
           ],
           "x-ms-enum": {
             "name": "machineType",
@@ -1658,7 +1749,7 @@
         }
       }
     },
-    "onboardGatewayResponseProperties": {
+    "CommonResponseProperties": {
       "type": "object",
       "description": "Properties for gateway onboarding operation.",
       "properties": {
@@ -1668,11 +1759,44 @@
           "enum": [
             "Started",
             "Progress",
-            "Completed"
+            "Completed",
+            "Succeeded",
+            "Failed"
           ],
           "x-ms-enum": {
             "name": "status",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "MonitoredResourceOffboardingProperties": {
+      "type": "object",
+      "description": "Properties for offboarding of monitored resources.",
+      "properties": {
+        "computerName": {
+          "description": "computer name or fqdn of the monitored resource which is being offboard.",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "ArmId of the monitored resource.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachines"
+              },
+              {
+                "type": "Microsoft.SCVMM/VirtualMachines"
+              },
+              {
+                "type": "microsoft.scvmm/vmmservers"
+              },
+              {
+                "type": "Microsoft.HybridCompute/machines"
+              }
+            ]
           }
         }
       }

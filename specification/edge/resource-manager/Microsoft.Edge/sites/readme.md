@@ -17,6 +17,14 @@ To see additional help and options, run:
 For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
 
 ---
+## Suppression
+
+``` yaml
+directive:
+  - suppress: TopLevelResourcesListBySubscription
+    from: siteAwareResourceTypes.json
+    reason: This is an tenant-level resource
+```
 
 ## Configuration
 

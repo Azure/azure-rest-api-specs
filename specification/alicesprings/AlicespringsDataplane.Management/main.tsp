@@ -19,7 +19,7 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Microsoft.AlicespringsDataplane management service",
-  version: "2023-07-17-preview",
+  version: "2023-10-04-preview",
 })
 @doc("Microsoft.AlicespringsDataplane Resource Provider management API.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
@@ -27,49 +27,13 @@ namespace Microsoft.AlicespringsDataplane;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-/*Temporary ArmResourceCreateOrUpdateSync until Typespec library updates*/
-
-/** Compliant create or update template */ 
-/**
- * A long-running resource CreateOrUpdate (PUT)
- * @template TResource the resource being patched
- * @template TBaseParameters Optional. Allows overriding the operation parameters
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-interface" "This is a valid template"
-@autoRoute
-@doc("Create a {name}", TResource)
-@armResourceCreateOrUpdate(TResource)
-@put
-op ArmResourceCreateOrUpdate2Sync<
-  TResource extends Azure.ResourceManager.Foundations.ArmResource,
-  TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-
-  @doc("Resource create parameters.")
-  @body
-  resource: TResource,
-): ArmUpdatedResponse<TResource> | ArmCreatedResponseSync<TResource> | ErrorResponse;
-
-@doc("Arm resource update successful")
-model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.ArmResource> 
-  is ArmResponse<TResource> {}
-
-@doc("Arm resource create successful")
-model ArmCreatedResponseSync<TResource extends Azure.ResourceManager.Foundations.ArmResource> 
-  is Body<TResource>{
-  ...CreatedResponse;
-}
-
-
-
 // /e4k resource Operations
 @armResourceOperations
 interface E4k {
   get is ArmResourceRead<E4kResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Sync<E4kResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<E4kResource>;
   update is ArmResourcePatchSync<E4kResource, E4kProperties>;
-  delete is ArmResourceDeleteSync<E4kResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<E4kResource>;
   listByResourceGroup is ArmResourceListByParent<E4kResource>;
   listBySubscription is ArmListBySubscription<E4kResource>;
 }
@@ -78,9 +42,9 @@ interface E4k {
 @armResourceOperations
 interface Broker {
   get is ArmResourceRead<BrokerResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Sync<BrokerResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerResource>;
   update is ArmResourcePatchSync<BrokerResource, BrokerProperties>;
-  delete is ArmResourceDeleteSync<BrokerResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<BrokerResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerResource>;
 }
 
@@ -88,12 +52,12 @@ interface Broker {
 @armResourceOperations
 interface BrokerListener {
   get is ArmResourceRead<BrokerListenerResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Sync<BrokerListenerResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerListenerResource>;
   update is ArmResourcePatchSync<
     BrokerListenerResource,
     BrokerListenerProperties
   >;
-  delete is ArmResourceDeleteSync<BrokerListenerResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<BrokerListenerResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerListenerResource>;
 }
 
@@ -101,12 +65,12 @@ interface BrokerListener {
 @armResourceOperations
 interface BrokerAuthentication {
   get is ArmResourceRead<BrokerAuthenticationResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Sync<BrokerAuthenticationResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerAuthenticationResource>;
   update is ArmResourcePatchSync<
     BrokerAuthenticationResource,
     BrokerAuthenticationProperties
   >;
-  delete is ArmResourceDeleteSync<BrokerAuthenticationResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthenticationResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerAuthenticationResource>;
 }
 
@@ -114,12 +78,12 @@ interface BrokerAuthentication {
 @armResourceOperations
 interface BrokerAuthorization {
   get is ArmResourceRead<BrokerAuthorizationResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Sync<BrokerAuthorizationResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerAuthorizationResource>;
   update is ArmResourcePatchSync<
     BrokerAuthorizationResource,
     BrokerAuthorizationProperties
   >;
-  delete is ArmResourceDeleteSync<BrokerAuthorizationResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthorizationResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerAuthorizationResource>;
 }
 
@@ -127,12 +91,12 @@ interface BrokerAuthorization {
 @armResourceOperations
 interface MqttBridgeConnector {
   get is ArmResourceRead<MqttBridgeConnectorResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Sync<MqttBridgeConnectorResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<MqttBridgeConnectorResource>;
   update is ArmResourcePatchSync<
     MqttBridgeConnectorResource,
     MqttBridgeConnectorProperties
   >;
-  delete is ArmResourceDeleteSync<MqttBridgeConnectorResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<MqttBridgeConnectorResource>;
   listByResourceGroup is ArmResourceListByParent<MqttBridgeConnectorResource>;
 }
 
@@ -140,12 +104,12 @@ interface MqttBridgeConnector {
 @armResourceOperations
 interface MqttBridgeTopicMap {
   get is ArmResourceRead<MqttBridgeTopicMapResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Sync<MqttBridgeTopicMapResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<MqttBridgeTopicMapResource>;
   update is ArmResourcePatchSync<
     MqttBridgeTopicMapResource,
     MqttBridgeTopicMapProperties
   >;
-  delete is ArmResourceDeleteSync<MqttBridgeTopicMapResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<MqttBridgeTopicMapResource>;
   listByResourceGroup is ArmResourceListByParent<MqttBridgeTopicMapResource>;
 }
 
@@ -153,12 +117,12 @@ interface MqttBridgeTopicMap {
 @armResourceOperations
 interface DiagnosticService {
   get is ArmResourceRead<DiagnosticServiceResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Sync<DiagnosticServiceResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DiagnosticServiceResource>;
   update is ArmResourcePatchSync<
     DiagnosticServiceResource,
     DiagnosticServiceProperties
   >;
-  delete is ArmResourceDeleteSync<DiagnosticServiceResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DiagnosticServiceResource>;
   listByResourceGroup is ArmResourceListByParent<DiagnosticServiceResource>;
 }
 
@@ -166,12 +130,12 @@ interface DiagnosticService {
 @armResourceOperations
 interface DatalakeConnector {
   get is ArmResourceRead<DatalakeConnectorResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Sync<DatalakeConnectorResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DatalakeConnectorResource>;
   update is ArmResourcePatchSync<
     DatalakeConnectorResource,
     DatalakeConnectorProperties
   >;
-  delete is ArmResourceDeleteSync<DatalakeConnectorResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DatalakeConnectorResource>;
   listByResourceGroup is ArmResourceListByParent<DatalakeConnectorResource>;
 }
 
@@ -179,11 +143,11 @@ interface DatalakeConnector {
 @armResourceOperations
 interface DatalakeConnectorTopicMap {
   get is ArmResourceRead<DatalakeConnectorTopicMapResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Sync<DatalakeConnectorTopicMapResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DatalakeConnectorTopicMapResource>;
   update is ArmResourcePatchSync<
     DatalakeConnectorTopicMapResource,
     DatalakeConnectorTopicMapProperties
   >;
-  delete is ArmResourceDeleteSync<DatalakeConnectorTopicMapResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DatalakeConnectorTopicMapResource>;
   listByResourceGroup is ArmResourceListByParent<DatalakeConnectorTopicMapResource>;
 }

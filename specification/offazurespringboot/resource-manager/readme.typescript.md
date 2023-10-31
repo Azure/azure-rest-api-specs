@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-offazurespringboot"
-  output-folder: "$(typescript-sdks-folder)/sdk/offazurespringboot/arm-offazurespringboot"
+  package-name: "@azure/arm-springappdiscovery"
+  output-folder: "$(typescript-sdks-folder)/sdk/springappdiscovery/arm-springappdiscovery"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

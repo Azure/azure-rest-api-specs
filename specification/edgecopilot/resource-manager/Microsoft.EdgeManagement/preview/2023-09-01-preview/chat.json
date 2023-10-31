@@ -1,0 +1,234 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-09-01",
+    "title": "Edge Copilot",
+    "description": "The Azure Edge Copilot API."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.EdgeManagement/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/Operations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeManagement/locations/{location}/chat": {
+      "post": {
+        "tags": [
+          "PostChat"
+        ],
+        "operationId": "Edge_Chat",
+        "x-ms-examples": {
+          "PostChat": {
+            "$ref": "./examples/PostChat.json"
+          }
+        },
+        "description": "Post a message to chatbot",
+        "parameters": [
+          {
+            "name": "chatRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatRequest"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- return the reply messages from chatbot",
+            "schema": {
+              "$ref": "#/definitions/ChatResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ChatRequest": {
+      "type": "object",
+      "required": [
+        "userMessage"
+      ],
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/ChatContext"
+        },
+        "sessionId": {
+          "type": "string",
+          "description": "Session Id of current chat."
+        },
+        "userMessage": {
+          "$ref": "#/definitions/ChatMessage"
+        }
+      },
+      "description": "Chat request schema. Contains input message from user"
+    },
+    "ChatResponse": {
+      "type": "object",
+      "required": [
+        "replyMessages"
+      ],
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "description": "Session Id of current chat."
+        },
+        "replyMessages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "description": "Reply message schema. Contains reply messages from chatbot",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "Chat response schema. Contains reply messages from chatbot."
+    },
+    "ChatMessage": {
+      "type": "object",
+      "required": [
+        "content"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "x-ms-client-name": "messageType",
+          "default": "text",
+          "enum": [
+            "text",
+            "action"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "type"
+          },
+          "description": "Type of message. Can only be 'text' or 'action'."
+        },
+        "subType": {
+          "type": "string",
+          "default": "default",
+          "enum": [
+            "artifact",
+            "default"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "subtype"
+          },
+          "description": "Sub-type of message."
+        },
+        "role": {
+          "type": "string",
+          "default": "user",
+          "enum": [
+            "system",
+            "assistant",
+            "user"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "role"
+          },
+          "description": "Role of message. Can be 'system', 'assistant', or 'user'."
+        },
+        "content": {
+          "type": "string",
+          "description": "Message content from user or assistant."
+        }
+      }
+    },
+    "ChatContext": {
+      "type": "object",
+      "required": [
+        "bladeId"
+      ],
+      "properties": {
+        "bladeId": {
+          "type": "string",
+          "description": "The blade id of the current blade."
+        },
+        "resourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "arm-id"
+          },
+          "description": "Resource Ids of the chat is referring to.",
+          "x-ms-identifiers": []
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

@@ -6112,10 +6112,22 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SshPublicKey"
+          }
+        }
+      }
+    },
+    "AdministratorConfigurationPatch": {
+      "type": "object",
+      "title": "AdministratorConfigurationPatch represents the patching capabilities for the administrator configuration.",
+      "properties": {
+        "sshPublicKeys": {
+          "description": "SshPublicKey represents the public key used to authenticate with a resource through SSH.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SshPublicKey"
           },
-          "x-ms-mutability": [
-            "read",
-            "create"
+          "x-ms-identifiers": [
+            "keyData"
           ]
         }
       }
@@ -6186,11 +6198,7 @@
       "properties": {
         "administratorConfiguration": {
           "$ref": "#/definitions/AdministratorConfiguration",
-          "description": "The administrator credentials to be used for the nodes in this agent pool.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The administrator credentials to be used for the nodes in this agent pool."
         },
         "agentOptions": {
           "$ref": "#/definitions/AgentOptions",
@@ -6316,6 +6324,10 @@
       "type": "object",
       "title": "AgentPoolPatchProperties represents the properties of an agent pool that can be modified.",
       "properties": {
+        "administratorConfiguration": {
+          "$ref": "#/definitions/NodePoolAdministratorConfigurationPatch",
+          "description": "The configuration of administrator credentials for the control plane nodes."
+        },
         "count": {
           "description": "The number of virtual machines that use this configuration.",
           "type": "integer",
@@ -7058,6 +7070,14 @@
           "description": "The OS-level hostname assigned to this machine.",
           "type": "string",
           "pattern": "^([a-zA-Z0-9][a-zA-Z0-9]{0,62}[a-zA-Z0-9])$"
+        },
+        "machineRoles": {
+          "description": "The list of roles that are assigned to the cluster node running on this machine.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         },
         "machineSkuId": {
           "description": "The unique internal identifier of the bare metal machine SKU.",
@@ -8868,6 +8888,10 @@
       "type": "object",
       "title": "ControlPlaneNodePatchConfiguration represents the properties of the control plane that can be patched for this Kubernetes cluster.",
       "properties": {
+        "administratorConfiguration": {
+          "$ref": "#/definitions/AdministratorConfigurationPatch",
+          "description": "The configuration of administrator credentials for the control plane nodes."
+        },
         "count": {
           "description": "The number of virtual machines that use this configuration.",
           "type": "integer",
@@ -9557,6 +9581,10 @@
       "type": "object",
       "title": "KubernetesClusterPatchProperties represents the properties of the Kubernetes cluster that can be patched.",
       "properties": {
+        "administratorConfiguration": {
+          "$ref": "#/definitions/AdministratorConfigurationPatch",
+          "description": "The configuration of the default administrator credentials."
+        },
         "controlPlaneNodeConfiguration": {
           "$ref": "#/definitions/ControlPlaneNodePatchConfiguration",
           "description": "The defining characteristics of the control plane that can be patched for this Kubernetes cluster."
@@ -9587,11 +9615,7 @@
         },
         "administratorConfiguration": {
           "$ref": "#/definitions/AdministratorConfiguration",
-          "description": "The administrative credentials that will be applied to the control plane and agent pool nodes that do not specify their own values.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The administrative credentials that will be applied to the control plane and agent pool nodes that do not specify their own values."
         },
         "attachedNetworkIds": {
           "description": "The full list of network resource IDs that are attached to this cluster, including those attached only to specific agent pools.",
@@ -9636,11 +9660,7 @@
         },
         "controlPlaneNodeConfiguration": {
           "$ref": "#/definitions/ControlPlaneNodeConfiguration",
-          "description": "The defining characteristics of the control plane for this Kubernetes Cluster.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The defining characteristics of the control plane for this Kubernetes Cluster."
         },
         "detailedStatus": {
           "description": "The current status of the Kubernetes cluster.",
@@ -10677,6 +10697,22 @@
           "description": "The name of the NIC/interface.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "NodePoolAdministratorConfigurationPatch": {
+      "type": "object",
+      "title": "NodePoolAdministratorConfigurationPatch represents the patching capabilities for the administrator configuration.",
+      "properties": {
+        "sshPublicKeys": {
+          "description": "SshPublicKey represents the public key used to authenticate with a resource through SSH.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SshPublicKey"
+          },
+          "x-ms-identifiers": [
+            "keyData"
+          ]
         }
       }
     },
@@ -11959,7 +11995,6 @@
           "description": "The resource ID of the target object that the placement hints will be checked against, e.g., the bare metal node to host the virtual machine.",
           "type": "string",
           "format": "arm-id",
-          "minLength": 1,
           "x-ms-mutability": [
             "read",
             "create"
