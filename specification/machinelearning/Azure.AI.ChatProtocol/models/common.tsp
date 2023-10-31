@@ -57,3 +57,10 @@ model ChatMessage<TState> {
 
   ...StateProperty<TState>;
 }
+
+@doc("Parameter that describes the name of the operation to be performed.")
+model OperationNameParam {
+  @doc("The route where the endpoint exposes the chat operations.")
+  @path
+  operationName: string = "chat";
+}
