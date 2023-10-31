@@ -21,6 +21,7 @@ multiapi: true
 default-api-version: "2023-07-01"
 clear-output-folder: true
 batch:
+  - tag: package-2023-11-preview-only
   - tag: package-2023-08-preview-only
   - tag: package-2023-07-only
   - tag: package-2023-06-preview-only
@@ -48,6 +49,16 @@ batch:
 output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-2023-11-preview-only and python
+
+These settings apply only when `--tag=package-2023-11-preview-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-11-preview-only' && $(python)
+namespace: azure.mgmt.containerregistry.v2023_11_01_preview
+output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2023_11_01_preview
 ```
 
 ### Tag: package-2023-08-preview-only and python
