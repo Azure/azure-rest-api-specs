@@ -45,7 +45,18 @@
           },
           "provisioningState": "Succeeded",
           "serviceUrl": null,
-          "eventState": "Disabled"
+          "eventState": "Disabled",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyUrl": "https://mykeyvault.vault.azure.net/keys/myEncryptionKey/myKeyVersion"
+            }
+          },
+          "identity": {
+            "type": "UserAssigned",
+            "userAssignedIdentities": {
+              "/subscriptions/subid/resourcegroups/testRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-mi": {}
+            }
+          }
         }
       }
     },
@@ -65,7 +76,18 @@
           },
           "provisioningState": "Creating",
           "serviceUrl": null,
-          "eventState": "Disabled"
+          "eventState": "Disabled",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyUrl": "https://mykeyvault.vault.azure.net/keys/myEncryptionKey/myKeyVersion"
+            }
+          }
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/testRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-mi": {}
+          }
         }
       }
     },
@@ -85,7 +107,18 @@
           },
           "provisioningState": "Accepted",
           "serviceUrl": null,
-          "eventState": "Disabled"
+          "eventState": "Disabled",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyUrl": "https://mykeyvault.vault.azure.net/keys/myEncryptionKey/myKeyVersion"
+            }
+          }
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/testRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-mi": {}
+          }
         }
       }
     }

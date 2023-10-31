@@ -14,7 +14,10 @@
       },
       "kind": "fhir-R4",
       "identity": {
-        "type": "SystemAssigned"
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/subid/resourcegroups/testRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-mi": {}
+        }
       },
       "properties": {
         "acrConfiguration": {
@@ -55,6 +58,11 @@
         },
         "implementationGuidesConfiguration": {
           "usCoreMissingData": false
+        },
+        "encryption": {
+          "customerManagedKeyEncryption": {
+            "keyEncryptionKeyUrl": "https://mykeyvault.vault.azure.net/keys/myEncryptionKey/myKeyVersion"
+          }
         }
       }
     }
@@ -109,7 +117,18 @@
             "usCoreMissingData": false
           },
           "eventState": "Disabled",
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyUrl": "https://mykeyvault.vault.azure.net/keys/myEncryptionKey/myKeyVersion"
+            }
+          }
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/testRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-mi": {}
+          }
         }
       }
     },
@@ -162,7 +181,12 @@
             "usCoreMissingData": false
           },
           "eventState": "Disabled",
-          "provisioningState": "Creating"
+          "provisioningState": "Creating",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyUrl": "https://mykeyvault.vault.azure.net/keys/myEncryptionKey/myKeyVersion"
+            }
+          }
         }
       }
     },
@@ -215,7 +239,18 @@
             "usCoreMissingData": false
           },
           "eventState": "Disabled",
-          "provisioningState": "Accepted"
+          "provisioningState": "Accepted",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyUrl": "https://mykeyvault.vault.azure.net/keys/myEncryptionKey/myKeyVersion"
+            }
+          }
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/testRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-mi": {}
+          }
         }
       }
     }
