@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-12-01-preview",
+    "api-version": "2023-10-01-preview",
     "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
     "securityContactName": "default",
     "securityContact": {
@@ -11,12 +11,19 @@
             "Owner"
           ]
         },
+        "isEnabled":  true,
         "emails": "john@contoso.com;jane@contoso.com",
         "phone": "(214)275-4038",
-        "alertNotifications": {
-          "state": "On",
-          "minimalSeverity": "Low"
-        }
+        "notificationsSources": [
+          {
+            "type": "AttachPath",
+            "minimalRiskLevel": "Critical"
+          },
+          {
+            "type": "Alert",
+            "minimalRiskLevel": "Medium"
+          }
+        ]
       }
     }
   },
@@ -28,17 +35,24 @@
         "type": "Microsoft.Security/securityContact",
         "properties": {
           "notificationsByRole": {
-            "state": "On",
             "roles": [
               "Owner"
             ]
           },
+          "isEnabled": true,
           "emails": "john@microsoft.com;jane@microsoft.com",
           "phone": "(214)275-4038",
-          "alertNotifications": {
-            "state": "On",
-            "minimalSeverity": "Low"
-          }
+          "notificationsSources": [
+            {
+              "type": "AttachPath",
+              "state": "On",
+              "minimalRiskLevel": "Critical"
+            },
+            {
+              "type": "Alert",
+              "minimalRiskLevel": "Medium"
+            }
+          ]
         }
       }
     },
@@ -54,12 +68,19 @@
               "Owner"
             ]
           },
+          "isEnabled":  true,
           "emails": "john@microsoft.com;jane@microsoft.com",
           "phone": "(214)275-4038",
-          "alertNotifications": {
-            "state": "On",
-            "minimalSeverity": "Low"
-          }
+          "notificationsSources": [
+            {
+              "type": "AttachPath",
+              "minimalRiskLevel": "Critical"
+            },
+            {
+              "type": "Alert",
+              "minimalRiskLevel": "Medium"
+            }
+          ]
         }
       }
     }

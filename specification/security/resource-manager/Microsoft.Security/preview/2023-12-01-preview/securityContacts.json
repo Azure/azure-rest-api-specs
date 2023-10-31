@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Defender for Cloud",
     "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-    "version": "2023-12-01-preview"
+    "version": "2023-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -201,13 +201,11 @@
       "type": "object",
       "description": "List of security contacts response",
       "properties": {
-        "value": {
-          "readOnly": true,
-          "description": "List of security contacts",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SecurityContact"
-          }
+        "readOnly": true,
+        "description": "List of security contacts",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/SecurityContact"
         },
         "nextLink": {
           "readOnly": true,
@@ -244,59 +242,15 @@
           "type": "string",
           "description": "The security contact's phone number"
         },
-        "alertNotifications": {
-          "type": "object",
-          "description": "Defines whether to send email notifications about new security alerts",
-          "properties": {
-            "state": {
-              "type": "string",
-              "description": "Defines if email notifications will be sent about new security alerts",
-              "enum": [
-                "On",
-                "Off"
-              ],
-              "x-ms-enum": {
-                "name": "state",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "On",
-                    "description": "Get notifications on new alerts"
-                  },
-                  {
-                    "value": "Off",
-                    "description": "Don't get notifications on new alerts"
-                  }
-                ]
-              }
-            },
-            "minimalSeverity": {
-              "type": "string",
-              "description": "Defines the minimal alert severity which will be sent as email notifications",
-              "enum": [
-                "High",
-                "Medium",
-                "Low"
-              ],
-              "x-ms-enum": {
-                "name": "minimalSeverity",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "High",
-                    "description": "Get notifications on new alerts with High severity"
-                  },
-                  {
-                    "value": "Medium",
-                    "description": "Get notifications on new alerts with medium or high severity"
-                  },
-                  {
-                    "value": "Low",
-                    "description": "Don't get notifications on new alerts with low, medium or high severity"
-                  }
-                ]
-              }
-            }
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether the security contact is enabled."
+        },
+        "notificationsSources": {
+          "type": "array",
+          "description": "A collection of sources types which evaluate the email notification.",
+          "items": {
+            "$ref": "#/definitions/NotificationsSource"
           }
         },
         "notificationsByRole": {
@@ -336,6 +290,151 @@
         }
       }
     },
+    "NotificationsSource": {
+      "type": "object",
+      "description": "A valid notification source type",
+      "discriminator": "sourceType",
+      "required": [
+        "sourceType"
+      ],
+      "properties": {
+        "sourceType": {
+          "type": "string",
+          "description": "The source type that will trigger the notification",
+          "enum": [
+            "Alert",
+            "AttackPath"
+          ],
+          "x-ms-enum": {
+            "name": "sourceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Alert"
+              },
+              {
+                "value": "AttackPath"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "NotificationsSourceAlert": {
+      "type": "object",
+      "description": "",
+      "x-ms-discriminator-value": "Alert",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationsSource"
+        }
+      ],
+      "properties": {
+        "minimalSeverity": {
+          "type": {
+            "$ref": "#/definitions/MinimalSeverity"
+          }
+        }
+      }
+    },
+    "MinimalSeverity": {
+      "type": "string",
+      "description": "Defines the minimal alert severity which will be sent as email notifications",
+      "enum": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "x-ms-enum": {
+        "name": "minimalSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "High",
+            "description": "Get notifications on new alerts with High severity"
+          },
+          {
+            "value": "Medium",
+            "description": "Get notifications on new alerts with Medium or High severity"
+          },
+          {
+            "value": "Low",
+            "description": "Get notifications on new alerts with Low, Medium or High severity"
+          }
+        ]
+      }
+    },
+    "NotificationsSourceAttackPath": {
+      "type": "object",
+      "description": "",
+      "x-ms-discriminator-value": "AttackPath",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationsSource"
+        }
+      ],
+      "properties": {
+        "minimalRiskLevel": {
+          "type": {
+            "$ref": "#/definitions/MinimalRiskLevel"
+          }
+        }
+      }
+    },
+    "MinimalRiskLevel": {
+      "type": "string",
+      "description": "Defines the minimal attack path risk level which will be sent as email notifications",
+      "enum": [
+        "Critical",
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "x-ms-enum": {
+        "name": "minimalRiskLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Critical",
+            "description": "Get notifications on new attack paths with Critical risk level"
+          },
+          {
+            "value": "High",
+            "description": "Get notifications on new attack paths with High or Critical risk level"
+          },
+          {
+            "value": "Medium",
+            "description": "Get notifications on new attach paths with Medium, High or Critical risk level"
+          },
+          {
+            "value": "Low",
+            "description": "Get notifications on new attach paths with Low, Medium, High or Critical risk level"
+          }
+        ]
+      }
+    },
+    "State": {
+      "type": "string",
+      "description": "Defines if email notifications will be sent about new security events",
+      "enum": [
+        "On",
+        "Off"
+      ],
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "On",
+            "description": "Get notifications on new events"
+          },
+          {
+            "value": "Off",
+            "description": "Don't get notifications on new events"
+          }
+        ]
+      }
+    },
     "SecurityContactRole": {
       "type": "string",
       "description": "A possible role to configure sending security notification alerts to",
@@ -371,7 +470,19 @@
   },
   "parameters": {
     "SecurityContactName": {
-      "name": "securityContactName",
+      "enum": [
+        "Default"
+      ],
+      "x-ms-enum": {
+        "name": "securityContactName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Default",
+            "description": "The single applicable name of the security contact object"
+          }
+        ]
+      },
       "in": "path",
       "required": true,
       "type": "string",
