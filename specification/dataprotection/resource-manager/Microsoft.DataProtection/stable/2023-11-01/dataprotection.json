@@ -1847,6 +1847,13 @@
             "type": "string"
           },
           {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "description": "Request body for operation",
@@ -5281,6 +5288,13 @@
             "name": "SecureScoreLevel",
             "modelAsString": true
           }
+        },
+        "replicatedRegions": {
+          "description" : "List of replicated regions for Backup Vault",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -6689,7 +6703,7 @@
       "description": "Operation Job Extended Info",
       "properties": {
         "jobId": {
-          "description": "Arm Id of the job created for this operation.",
+          "description": "Name or Arm Id of the job created for this operation.",
           "type": "string"
         }
       },
