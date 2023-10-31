@@ -571,7 +571,10 @@ directive:
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
   - suppress: DeleteOperationResponses
     from: python2package.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.      
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: PutRequestResponseSchemeArm
+    from: powershell72Module.json
+    reason: This error format is inherited from previous api, cannot change it as it will result in inconsistency.      
 
 ```
 
