@@ -5,6 +5,7 @@ steps:
   - script: npm ci --force
     displayName: npm ci --force
 
-  - script: npm ls -a
+   # Append "|| cd ." to command to ignore errors (works on both Windows and Linux)
+  - script: npm ls -a || cd .
     displayName: npm ls -a
     condition: succeededOrFailed()
