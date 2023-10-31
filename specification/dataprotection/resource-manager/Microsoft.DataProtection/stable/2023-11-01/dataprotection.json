@@ -6536,6 +6536,15 @@
           "$ref": "#/definitions/RestoreJobRecoveryPointDetails",
           "description": "Details of the Target Recovery Point",
           "readOnly": true
+        },
+        "warningDetails": {
+          "description": "A List, detailing the warnings related to the job",
+          "items": {
+            "$ref": "#/definitions/UserFacingWarningDetail"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true,
+          "type": "array"
         }
       },
       "type": "object"
@@ -7739,6 +7748,23 @@
           "type": "string"
         }
       },
+      "type": "object"
+    },
+    "UserFacingWarningDetail": {
+      "description": "Warning object used by layers that have access to localized content, and propagate that to user",
+      "properties": {
+        "resourceName": {
+          "description": "Name of resource for which warning is raised.",
+          "type": "string"
+        },
+        "warning": {
+          "$ref": "#/definitions/UserFacingError",
+          "description": "Error details for the warning."
+        }
+      },
+      "required": [
+        "warning"
+      ],
       "type": "object"
     },
     "ValidateForBackupRequest": {
