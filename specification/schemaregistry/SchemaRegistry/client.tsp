@@ -7,10 +7,10 @@ using Azure.ClientGenerator.Core;
 @@projectedName(Azure.SchemaRegistry.Version, "client", "SchemaVersion");
 @@access(Azure.SchemaRegistry.SchemaGroup, Access.internal);
 
-// csharp-specific public models
-@@access(Azure.SchemaRegistry.SchemaContentTypeValues, Access.internal);
-@@usage(Azure.SchemaRegistry.SchemaContentTypeValues, Usage.input | Usage.output);
-//@@projectedName(Azure.SchemaRegistry.SchemaContentTypeValues, "client", "ContentType");
+// csharp models
+@@access(Azure.SchemaRegistry.ContentTypeEnum, Access.internal);
+@@usage(Azure.SchemaRegistry.ContentTypeEnum, Usage.input | Usage.output);
+@@projectedName(Azure.SchemaRegistry.ContentTypeEnum, "client", "ContentType");
 
 // public client models
 @@access(Azure.SchemaRegistry.SchemaFormat, Access.internal);

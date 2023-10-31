@@ -132,10 +132,23 @@ alias NoContentResponse<T> = TypeSpec.Http.Response<204> & T;
 
 union SchemaContentTypeValues {
   avro: "application/json; serialization=Avro",
+  @added(ServiceApiVersions.V2022_10)
   json: "application/json; serialization=json",
+  @added(ServiceApiVersions.V2022_10)
   custom: "text/plain; charset=utf-8",
   @added(ServiceApiVersions.V2023_07_01)
   protobuf: "text/vnd.ms.protobuf",
+}
+
+@doc("The content type for the schema.")
+enum ContentTypeEnum {
+  avroValue: "application/json; serialization=Avro",
+  @added(ServiceApiVersions.V2022_10)
+  jsonValue: "application/json; serialization=json",
+  @added(ServiceApiVersions.V2022_10)
+  customValue: "text/plain; charset=utf-8",
+  @added(ServiceApiVersions.V2023_07_01)
+  protobufValue: "text/vnd.ms.protobuf",
 }
 
 @doc("Represents the format of the schema to be stored by the Schema Registry service.")
