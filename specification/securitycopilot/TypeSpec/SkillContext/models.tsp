@@ -116,7 +116,10 @@ model GetTokenCredentialRequest {
   scopes: Array<string>;
 
   @doc("TokenCredential Type")
-  tokenCredentialType?: TokenCredentialEnum = TokenCredentialEnum.None;
+  tokenCredentialType: TokenCredentialEnum = TokenCredentialEnum.None;
+
+  @doc("TenantId")
+  tenantId?: string | null;
 }
 
 @doc("AccessToken")
@@ -128,8 +131,17 @@ model AccessToken {
   expiresOn: offsetDateTime;
 }
 
-@doc("GetInputAsyncRequest")
-model GetInputAsyncRequest {
+@doc("GetInputRequest")
+model GetInputRequest {
+  @doc("Input Name")
+  inputName: string;
+
+  @doc("Default value for the input")
+  defaultValue?: SkillVariable | null;
+}
+
+@doc("SetInputRequest")
+model SetInputRequest {
   @doc("Input Name")
   inputName: string;
 
