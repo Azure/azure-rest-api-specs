@@ -440,6 +440,7 @@ worker must satisfy in order to process this job.
   @visibility("read")
   attachedWorkerSelectors?: RouterWorkerSelector[];
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
   @doc("""
 A set of key/value pairs that are identifying attributes used by the rules
 engines to make decisions.
@@ -453,6 +454,7 @@ Key is AssignmentId.
   @visibility("read")
   assignments?: Record<RouterJobAssignment>;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
   @doc("A set of non-identifying attributes attached to this job")
   tags?: Record<unknown>;
 
@@ -494,6 +496,8 @@ label selector
 """)
   labelOperator: LabelOperator;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown"
   @doc("The value to compare against the actual label value with the given operator")
   value?: unknown;
 
@@ -726,6 +730,7 @@ to workers.
 """)
   distributionPolicyId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
   @doc("""
 A set of key/value pairs that are identifying attributes used by the rules
 engines to make decisions.
@@ -781,12 +786,14 @@ model RouterWorker {
   @doc("The total capacity score this worker has to manage multiple concurrent jobs.")
   capacity?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
   @doc("""
 A set of key/value pairs that are identifying attributes used by the rules
 engines to make decisions.
 """)
   labels?: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
   @doc("A set of non-identifying attributes attached to this worker.")
   tags?: Record<unknown>;
 
@@ -1010,6 +1017,8 @@ label selector
 """)
   labelOperator: LabelOperator;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
   @doc("The value to compare against the actual label value with the given operator")
   value?: unknown;
 }
@@ -1137,6 +1146,7 @@ model ManualReclassifyExceptionAction extends ExceptionAction {
   kind: "manual-reclassify";
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is standard naming convention for OAuth."
 @doc("""
 OAuth2.0 Credentials used to Contoso's Authorization server.
 Reference:
@@ -1215,6 +1225,8 @@ and worker selectors.
 """)
   classificationPolicyId?: string;
 
+
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
   @doc("""
 (optional) Dictionary containing the labels to update (or add if not existing)
 in key-value pairs
@@ -1297,6 +1309,8 @@ A rule providing static rules that always return the same result, regardless of
 input.
 """)
 model StaticRouterRule extends RouterRule {
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
   @doc("The static value this rule always returns.")
   value?: unknown;
 
@@ -1424,6 +1438,7 @@ alias CommonListParams = {
   maxpagesize?: int32;
 };
 
+@doc("List jobs query parameters")
 model ListJobQueryParams {
   ...CommonListParams;
 
@@ -1458,22 +1473,27 @@ If specified, filter on jobs that was scheduled at or after given value. Range:
   scheduledAfter?: utcDateTime;
 }
 
+@doc("List classification policies query parameters")
 model ListClassificationPoliciesQueryParams {
   ...CommonListParams;
 }
 
+@doc("List distribution policies query parameters")
 model ListDistributionPoliciesQueryParams {
   ...CommonListParams;
 }
 
+@doc("List exception policies query parameters")
 model ListExceptionPoliciesQueryParams {
   ...CommonListParams;
 }
 
+@doc("List queues query parameters")
 model ListQueuesQueryParams {
   ...CommonListParams;
 }
 
+@doc("List workers query parameters")
 model ListWorkerQueryParams {
   ...CommonListParams;
 
