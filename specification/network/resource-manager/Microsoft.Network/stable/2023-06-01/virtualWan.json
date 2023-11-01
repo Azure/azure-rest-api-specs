@@ -9051,7 +9051,7 @@
           "description": "Enable internet security."
         },
         "routingConfiguration": {
-          "$ref": "#/definitions/RoutingConfigurationNfv",
+          "$ref": "#/definitions/RoutingConfiguration",
           "description": "The Routing Configuration indicating the associated and propagated route tables on this connection."
         }
       },
@@ -9226,61 +9226,6 @@
         "nextHopIpAddress": {
           "type": "string",
           "description": "The ip address of the next hop."
-        }
-      }
-    },
-    "RoutingConfigurationNfvSubResource": {
-      "type": "object",
-      "properties": {
-        "resourceUri": {
-          "type": "string",
-          "description": "Resource ID."
-        }
-      },
-      "description": "Reference to RouteTableV3 associated with the connection."
-    },
-    "RoutingConfigurationNfv": {
-      "type": "object",
-      "description": "NFV version of Routing Configuration indicating the associated and propagated route tables for this connection.",
-      "properties": {
-        "associatedRouteTable": {
-          "$ref": "#/definitions/RoutingConfigurationNfvSubResource",
-          "description": "The resource id RouteTable associated with this RoutingConfiguration."
-        },
-        "propagatedRouteTables": {
-          "$ref": "#/definitions/PropagatedRouteTableNfv",
-          "description": "The list of RouteTables to advertise the routes to."
-        },
-        "inboundRouteMap": {
-          "$ref": "#/definitions/RoutingConfigurationNfvSubResource",
-          "description": "The resource id of the RouteMap associated with this RoutingConfiguration for inbound learned routes."
-        },
-        "outboundRouteMap": {
-          "$ref": "#/definitions/RoutingConfigurationNfvSubResource",
-          "description": "The resource id of the RouteMap associated with this RoutingConfiguration for outbound advertised routes."
-        }
-      }
-    },
-    "PropagatedRouteTableNfv": {
-      "type": "object",
-      "description": "Nfv version of the list of RouteTables to advertise the routes to.",
-      "properties": {
-        "labels": {
-          "type": "array",
-          "description": "The list of labels.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "ids": {
-          "type": "array",
-          "description": "The list of resource ids of all the RouteTables.",
-          "items": {
-            "$ref": "#/definitions/RoutingConfigurationNfvSubResource"
-          },
-          "x-ms-identifiers": [
-            "resourceUri"
-          ]
         }
       }
     },
