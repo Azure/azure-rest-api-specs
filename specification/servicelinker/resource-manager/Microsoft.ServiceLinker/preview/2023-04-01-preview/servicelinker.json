@@ -2041,6 +2041,18 @@
         }
       }
     },
+    "LinkerConfigurationType": {
+      "description": "Type of configuration to determine whether the configuration can be modified after creation. KeyvaultSecret means the configuration references a key vault secret, such as App Service/ACA key vault reference. Default means the configuration is real value, such as user name, raw secret, etc.",
+      "type": "string",
+      "enum": [
+        "Default",
+        "KeyVaultSecret"
+      ],
+      "x-ms-enum": {
+        "name": "LinkerConfigurationType",
+        "modelAsString": true
+      }
+    },
     "SourceConfiguration": {
       "description": "A configuration item for source resource",
       "type": "object",
@@ -2052,6 +2064,21 @@
         "value": {
           "x-nullable": true,
           "description": "The value of setting",
+          "type": "string"
+        },
+        "configType": {
+          "description": "The type of setting",
+          "readOnly": true,
+          "$ref": "#/definitions/LinkerConfigurationType"
+        },
+        "keyVaultReferenceIdentity": {
+          "x-nullable": true,
+          "description": "The identity for key vault reference, system or user-assigned managed identity ID",
+          "type": "string"
+        },
+        "description": {
+          "x-nullable": true,
+          "description": "Descriptive information for the configuration",
           "type": "string"
         }
       }
