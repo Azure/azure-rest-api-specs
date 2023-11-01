@@ -39,6 +39,7 @@ These settings apply only when `--tag=package-preview-2023-05` is specified on t
 ```yaml $(tag) == 'package-preview-2023-05'
 input-file:
   - Microsoft.ApiManagement/preview/2023-05-01-preview/apimanagement.json
+  - Microsoft.ApiManagement/preview/2023-05-01-preview/apimallpolicies.json
   - Microsoft.ApiManagement/preview/2023-05-01-preview/apimapis.json
   - Microsoft.ApiManagement/preview/2023-05-01-preview/apimapisByTags.json
   - Microsoft.ApiManagement/preview/2023-05-01-preview/apimapiversionsets.json
@@ -67,6 +68,8 @@ input-file:
   - Microsoft.ApiManagement/preview/2023-05-01-preview/apimpolicies.json
   - Microsoft.ApiManagement/preview/2023-05-01-preview/apimpolicydescriptions.json
   - Microsoft.ApiManagement/preview/2023-05-01-preview/apimpolicyfragments.json
+  - Microsoft.ApiManagement/preview/2023-05-01-preview/apimpolicyrestrictions.json
+  - Microsoft.ApiManagement/preview/2023-05-01-preview/apimpolicyrestrictionsvalidation.json
   - Microsoft.ApiManagement/preview/2023-05-01-preview/apimportalconfigs.json
   - Microsoft.ApiManagement/preview/2023-05-01-preview/apimportalrevisions.json
   - Microsoft.ApiManagement/preview/2023-05-01-preview/apimportalsettings.json
@@ -1057,4 +1060,10 @@ directive:
   - suppress: R4009
     from: apimpolicyfragments.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version. 
+suppressions:
+  - code: PropertiesTypeObjectNoDefinition
+    from: definitions.json
+    reason: Invalid error
 ```
+
+
