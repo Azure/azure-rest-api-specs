@@ -225,7 +225,7 @@
           "description": "Preferred day of the week in UTC to begin an upgrade"
         },
         "preferredstarthourofday": {
-          "type": "int",
+          "type": "integer",
           "minimum": 0,
           "maximum": 23,
           "description": "Preferred hour of the day in UTC to begin an upgrade"
@@ -266,14 +266,14 @@
           "description": "Name of the upgrade procedure performed on the cluster"
         },
         "start": {
-          "type": "date-time",
+          "type": "string",
           "readOnly": true,
-          "description": "Date time the upgrade started"
+          "description": "The UTC time when the upgrade started"
         },
         "end": {
-          "type": "date-time",
+          "type": "string",
           "readOnly": true,
-          "description": "Date time the upgrade ended"
+          "description": "The UTC time when the upgrade ended"
         }
       },
       "description": "Contains past history of all cluster upgrades cluster has gone through"
