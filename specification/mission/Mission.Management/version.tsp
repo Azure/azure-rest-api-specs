@@ -15,4 +15,8 @@ enum Versions {
   @doc("The 2023-08-01-preview version.")
   @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_08_01_preview: "2023-08-01-preview",
+
+  @doc("The 2023-11-01-preview version.")
+  @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2023_11_01_preview: "2023-11-01-preview",
 }

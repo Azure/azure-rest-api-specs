@@ -2,7 +2,7 @@
   "title": "Workload_Get",
   "operationId": "Workload_Get",
   "parameters": {
-    "api-version": "2023-08-01-preview",
+    "api-version": "2023-11-01-preview",
     "subscriptionId": "CA1CB369-DD26-4DB2-9D43-9AFEF0F22093",
     "resourceGroupName": "rgopenapi",
     "virtualEnclaveName": "TestMyEnclave",
@@ -12,10 +12,11 @@
     "200": {
       "body": {
         "properties": {
-          "managedResourceGroups": [
-            "MC_Deploy_TestMyRg"
-          ],
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "managedResourceGroupConfiguration": {
+            "name": "TestMRG",
+            "location": "westcentralus"
+          }
         },
         "tags": {
           "TestKey": "TestValue"
