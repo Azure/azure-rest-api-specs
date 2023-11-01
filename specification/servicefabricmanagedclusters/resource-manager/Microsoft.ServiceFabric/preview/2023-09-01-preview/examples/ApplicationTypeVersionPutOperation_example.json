@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "applicationTypeName": "myAppType",
+    "version": "1.0",
+    "api-version": "2023-09-01-preview",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "appPackageUrl": "http://fakelink.test.com/MyAppType"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "type": "Microsoft.ServiceFabric/managedClusters/applicationTypes/versions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applicationTypes/myAppType/versions/1.0",
+        "name": "1.0",
+        "properties": {
+          "provisioningState": "Creating",
+          "appPackageUrl": "http://fakelink.test.com/MyAppType"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": "10",
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/e2413c7e-d51b-40ac-8155-bc85bf8ae856?api-version=2023-09-01-preview"
+      },
+      "body": {
+        "type": "Microsoft.ServiceFabric/managedClusters/applicationTypes/versions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applicationTypes/myAppType/versions/1.0",
+        "name": "1.0",
+        "properties": {
+          "provisioningState": "Updating",
+          "appPackageUrl": "http://fakelink.test.com/MyAppType"
+        }
+      }
+    }
+  }
+}
