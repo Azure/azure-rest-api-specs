@@ -18,6 +18,7 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 alias GetOperations = Azure.Core.ResourceOperations<GetOperationTraits>;
 alias PatchOperations = Azure.Core.ResourceOperations<PatchOperationTraits>;
 
+@route("/routing")
 interface JobRouterAdministrationOperations {
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Creates or updates a classification policy.")
