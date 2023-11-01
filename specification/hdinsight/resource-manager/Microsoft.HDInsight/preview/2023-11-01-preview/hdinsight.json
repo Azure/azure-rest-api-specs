@@ -719,6 +719,13 @@
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The system query option to filter job returned in the response. Allowed value is 'jobName eq {jobName}' or 'jarName eq {jarName}'."
           }
         ],
         "responses": {
@@ -3040,15 +3047,16 @@
     "FlinkJobProperties": {
       "description": "Properties of flink job.",
       "type": "object",
-      "required": [
-        "jobName"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ClusterJobProperties"
         }
       ],
       "properties": {
+        "runId": {
+          "description": "Run id of job",
+          "type": "string"
+        },
         "jobName": {
           "description": "Name of job",
           "type": "string"
