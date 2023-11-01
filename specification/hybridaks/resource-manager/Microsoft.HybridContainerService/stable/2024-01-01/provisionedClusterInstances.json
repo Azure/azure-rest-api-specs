@@ -1417,6 +1417,20 @@
         "osSKU": {
           "$ref": "#/definitions/OSSKU"
         },
+        "nodeLabels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "NodeLabels - Agent pool node labels to be persisted across all nodes in agent pool."
+        },
+        "nodeTaints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "NodeTaints - Taints added to new nodes during node pool create and scale. For example, key=value:NoSchedule."
+        },
         "nodeImageVersion": {
           "type": "string",
           "description": "The version of node image"

@@ -32,7 +32,15 @@
             "name": "default-nodepool-1",
             "count": 1,
             "vmSize": "Standard_A4_v2",
-            "osType": "Linux"
+            "osType": "Linux",
+            "nodeLabels": {
+              "env": "dev",
+              "goal": "test"
+            },
+            "nodeTaints": [
+              "env=prod:NoSchedule",
+              "sku=gpu:NoSchedule"
+            ]
           }
         ],
         "linuxProfile": {
@@ -93,7 +101,15 @@
               "name": "default-nodepool-1",
               "count": 1,
               "vmSize": "Standard_A4_v2",
-              "osType": "Linux"
+              "osType": "Linux",
+              "nodeLabels": {
+                "env": "dev",
+                "goal": "test"
+              },
+              "nodeTaints": [
+                "env=prod:NoSchedule",
+                "sku=gpu:NoSchedule"
+              ]
             }
           ],
           "linuxProfile": {
@@ -153,7 +169,15 @@
               "name": "default-nodepool-1",
               "count": 1,
               "vmSize": "Standard_A4_v2",
-              "osType": "Linux"
+              "osType": "Linux",
+              "nodeLabels": {
+                "env": "dev",
+                "goal": "test"
+              },
+              "nodeTaints": [
+                "env=prod:NoSchedule",
+                "sku=gpu:NoSchedule"
+              ]
             }
           ],
           "linuxProfile": {

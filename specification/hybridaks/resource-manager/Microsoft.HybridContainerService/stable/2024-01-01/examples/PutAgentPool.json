@@ -8,7 +8,15 @@
       "properties": {
         "count": 1,
         "vmSize": "Standard_A4_v2",
-        "osType": "Linux"
+        "osType": "Linux",
+        "nodeLabels": {
+          "env": "dev",
+          "goal": "test"
+        },
+        "nodeTaints": [
+          "env=prod:NoSchedule",
+          "sku=gpu:NoSchedule"
+        ]
       }
     }
   },
@@ -23,7 +31,15 @@
           "provisioningState": "Accepted",
           "count": 1,
           "vmSize": "Standard_A4_v2",
-          "osType": "Linux"
+          "osType": "Linux",
+          "nodeLabels": {
+            "env": "dev",
+            "goal": "test"
+          },
+          "nodeTaints": [
+            "env=prod:NoSchedule",
+            "sku=gpu:NoSchedule"
+          ]
         }
       }
     },
@@ -37,7 +53,15 @@
           "provisioningState": "Accepted",
           "count": 1,
           "vmSize": "Standard_A4_v2",
-          "osType": "Linux"
+          "osType": "Linux",
+          "nodeLabels": {
+            "env": "dev",
+            "goal": "test"
+          },
+          "nodeTaints": [
+            "env=prod:NoSchedule",
+            "sku=gpu:NoSchedule"
+          ]
         }
       }
     }
