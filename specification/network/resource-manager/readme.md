@@ -3151,6 +3151,13 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: ipAllocation.json
     reason: name, id and type properties are inherited from the upper level
+
+suppressions:
+  - code: ResourceNameRestriction
+    from: bastionhost.json
+    reason: The resource name parameter 'bastionHostName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all Bastion APIs. 
+  - code: LroErrorContent
+    reason: CloudError does not follow required error schema. Suppress it for now to avoid breaking change because it is referenced by many files.
 ```
 
 ## Go
