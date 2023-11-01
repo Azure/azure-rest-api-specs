@@ -33,6 +33,696 @@
   ],
   "tags": [],
   "paths": {
+    "/routing/classificationPolicies": {
+      "get": {
+        "operationId": "JobRouterAdministrationOperations_ListClassificationPolicies",
+        "summary": "Retrieves existing classification policies.",
+        "description": "Retrieves existing classification policies.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "Number of objects to return per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedClassificationPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves existing classification policies": {
+            "$ref": "./examples/ClassificationPolicies_ListClassificationPoliciesWithPageSize.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/routing/classificationPolicies/{classificationPolicyId}": {
+      "get": {
+        "operationId": "JobRouterAdministrationOperations_GetClassificationPolicy",
+        "summary": "Retrieves an existing classification policy by Id.",
+        "description": "Retrieves an existing classification policy by Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "classificationPolicyId",
+            "in": "path",
+            "description": "Unique identifier of this policy.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ClassificationPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "The last modified timestamp."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves an existing classification policy by Id": {
+            "$ref": "./examples/ClassificationPolicies_GetClassificationPolicy.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "JobRouterAdministrationOperations_UpsertClassificationPolicy",
+        "summary": "Creates or updates a classification policy.",
+        "description": "Creates or updates a classification policy.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "classificationPolicyId",
+            "in": "path",
+            "description": "Unique identifier of this policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/RouterConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/RouterConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClassificationPolicyCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ClassificationPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "The last modified timestamp."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ClassificationPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "The last modified timestamp."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a Classification Policy": {
+            "$ref": "./examples/ClassificationPolicies_CreateClassificationPolicy.json"
+          },
+          "Updates a Classification Policy": {
+            "$ref": "./examples/ClassificationPolicies_UpdateClassificationPolicy.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "JobRouterAdministrationOperations_DeleteClassificationPolicy",
+        "summary": "Delete a classification policy by Id.",
+        "description": "Delete a classification policy by Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "classificationPolicyId",
+            "in": "path",
+            "description": "Unique identifier of this policy.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a classification policy": {
+            "$ref": "./examples/ClassificationPolicies_DeleteClassificationPolicy.json"
+          }
+        }
+      }
+    },
+    "/routing/distributionPolicies": {
+      "get": {
+        "operationId": "JobRouterAdministrationOperations_ListDistributionPolicies",
+        "summary": "Retrieves existing distribution policies.",
+        "description": "Retrieves existing distribution policies.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "Number of objects to return per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDistributionPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves existing distribution policies": {
+            "$ref": "./examples/DistributionPolicies_ListDistributionPoliciesWithPageSize.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/routing/distributionPolicies/{distributionPolicyId}": {
+      "get": {
+        "operationId": "JobRouterAdministrationOperations_GetDistributionPolicy",
+        "summary": "Retrieves an existing distribution policy by Id.",
+        "description": "Retrieves an existing distribution policy by Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "distributionPolicyId",
+            "in": "path",
+            "description": "The unique identifier of the policy.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DistributionPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "The last modified timestamp."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves an existing distribution policy by Id": {
+            "$ref": "./examples/DistributionPolicies_GetDistributionPolicy.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "JobRouterAdministrationOperations_UpsertDistributionPolicy",
+        "summary": "Creates or updates a distribution policy.",
+        "description": "Creates or updates a distribution policy.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "distributionPolicyId",
+            "in": "path",
+            "description": "The unique identifier of the policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/RouterConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/RouterConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DistributionPolicyCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DistributionPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "The last modified timestamp."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DistributionPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "The last modified timestamp."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a Distribution policy": {
+            "$ref": "./examples/DistributionPolicies_CreateDistributionPolicy.json"
+          },
+          "Updates a distribution policy": {
+            "$ref": "./examples/DistributionPolicies_UpdateDistributionPolicy.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "JobRouterAdministrationOperations_DeleteDistributionPolicy",
+        "summary": "Delete a distribution policy by Id.",
+        "description": "Delete a distribution policy by Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "distributionPolicyId",
+            "in": "path",
+            "description": "The unique identifier of the policy.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a distribution policy": {
+            "$ref": "./examples/DistributionPolicies_DeleteDistributionPolicy.json"
+          }
+        }
+      }
+    },
+    "/routing/exceptionPolicies": {
+      "get": {
+        "operationId": "JobRouterAdministrationOperations_ListExceptionPolicies",
+        "summary": "Retrieves existing exception policies.",
+        "description": "Retrieves existing exception policies.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "Number of objects to return per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedExceptionPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves existing exception policies": {
+            "$ref": "./examples/ExceptionPolicies_ListExceptionPoliciesWithPageSize.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/routing/exceptionPolicies/{exceptionPolicyId}": {
+      "get": {
+        "operationId": "JobRouterAdministrationOperations_GetExceptionPolicy",
+        "summary": "Retrieves an existing exception policy by Id.",
+        "description": "Retrieves an existing exception policy by Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "exceptionPolicyId",
+            "in": "path",
+            "description": "The Id of the exception policy",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "The last modified timestamp."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves an existing exception policy by Id": {
+            "$ref": "./examples/ExceptionPolicies_GetExceptionPolicy.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "JobRouterAdministrationOperations_UpsertExceptionPolicy",
+        "summary": "Creates or updates a exception policy.",
+        "description": "Creates or updates a exception policy.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "exceptionPolicyId",
+            "in": "path",
+            "description": "The Id of the exception policy",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/RouterConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/RouterConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExceptionPolicyCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "The last modified timestamp."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionPolicy"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "description": "The last modified timestamp."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates an exception policy": {
+            "$ref": "./examples/ExceptionPolicies_CreateExceptionPolicy.json"
+          },
+          "Updates an exception policy": {
+            "$ref": "./examples/ExceptionPolicies_UpdateExceptionPolicy.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "JobRouterAdministrationOperations_DeleteExceptionPolicy",
+        "summary": "Deletes a exception policy by Id.",
+        "description": "Deletes a exception policy by Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "exceptionPolicyId",
+            "in": "path",
+            "description": "The Id of the exception policy",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a exception policy": {
+            "$ref": "./examples/ExceptionPolicies_DeleteExceptionPolicy.json"
+          }
+        }
+      }
+    },
     "/routing/jobs": {
       "get": {
         "operationId": "JobRouterOperations_ListJobs",
@@ -594,741 +1284,7 @@
         }
       }
     },
-    "/routing/queues/{queueId}/statistics": {
-      "get": {
-        "operationId": "JobRouterOperations_GetQueueStatistics",
-        "summary": "Retrieves a queue's statistics.",
-        "description": "Retrieves a queue's statistics.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "queueId",
-            "in": "path",
-            "description": "Id of the queue to retrieve statistics.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/RouterQueueStatistics"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieves a queue's statistics": {
-            "$ref": "./examples/Queues_GetQueueStatistics.json"
-          }
-        }
-      }
-    },
-    "/routing/routing/classificationPolicies": {
-      "get": {
-        "operationId": "JobRouterAdministrationOperations_ListClassificationPolicies",
-        "summary": "Retrieves existing classification policies.",
-        "description": "Retrieves existing classification policies.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "Number of objects to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedClassificationPolicy"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieves existing classification policies": {
-            "$ref": "./examples/ClassificationPolicies_ListClassificationPoliciesWithPageSize.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/routing/routing/classificationPolicies/{classificationPolicyId}": {
-      "get": {
-        "operationId": "JobRouterAdministrationOperations_GetClassificationPolicy",
-        "summary": "Retrieves an existing classification policy by Id.",
-        "description": "Retrieves an existing classification policy by Id.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "classificationPolicyId",
-            "in": "path",
-            "description": "Unique identifier of this policy.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ClassificationPolicy"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "description": "The last modified timestamp."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieves an existing classification policy by Id": {
-            "$ref": "./examples/ClassificationPolicies_GetClassificationPolicy.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "JobRouterAdministrationOperations_UpsertClassificationPolicy",
-        "summary": "Creates or updates a classification policy.",
-        "description": "Creates or updates a classification policy.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "classificationPolicyId",
-            "in": "path",
-            "description": "Unique identifier of this policy.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/RouterConditionalRequestHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/parameters/RouterConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ClassificationPolicyCreateOrUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ClassificationPolicy"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "description": "The last modified timestamp."
-              }
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/ClassificationPolicy"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "description": "The last modified timestamp."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a Classification Policy": {
-            "$ref": "./examples/ClassificationPolicies_CreateClassificationPolicy.json"
-          },
-          "Updates a Classification Policy": {
-            "$ref": "./examples/ClassificationPolicies_UpdateClassificationPolicy.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "JobRouterAdministrationOperations_DeleteClassificationPolicy",
-        "summary": "Delete a classification policy by Id.",
-        "description": "Delete a classification policy by Id.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "classificationPolicyId",
-            "in": "path",
-            "description": "Unique identifier of this policy.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a classification policy": {
-            "$ref": "./examples/ClassificationPolicies_DeleteClassificationPolicy.json"
-          }
-        }
-      }
-    },
-    "/routing/routing/distributionPolicies": {
-      "get": {
-        "operationId": "JobRouterAdministrationOperations_ListDistributionPolicies",
-        "summary": "Retrieves existing distribution policies.",
-        "description": "Retrieves existing distribution policies.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "Number of objects to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedDistributionPolicy"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieves existing distribution policies": {
-            "$ref": "./examples/DistributionPolicies_ListDistributionPoliciesWithPageSize.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/routing/routing/distributionPolicies/{distributionPolicyId}": {
-      "get": {
-        "operationId": "JobRouterAdministrationOperations_GetDistributionPolicy",
-        "summary": "Retrieves an existing distribution policy by Id.",
-        "description": "Retrieves an existing distribution policy by Id.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "distributionPolicyId",
-            "in": "path",
-            "description": "The unique identifier of the policy.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DistributionPolicy"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "description": "The last modified timestamp."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieves an existing distribution policy by Id": {
-            "$ref": "./examples/DistributionPolicies_GetDistributionPolicy.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "JobRouterAdministrationOperations_UpsertDistributionPolicy",
-        "summary": "Creates or updates a distribution policy.",
-        "description": "Creates or updates a distribution policy.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "distributionPolicyId",
-            "in": "path",
-            "description": "The unique identifier of the policy.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/RouterConditionalRequestHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/parameters/RouterConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DistributionPolicyCreateOrUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DistributionPolicy"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "description": "The last modified timestamp."
-              }
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/DistributionPolicy"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "description": "The last modified timestamp."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a Distribution policy": {
-            "$ref": "./examples/DistributionPolicies_CreateDistributionPolicy.json"
-          },
-          "Updates a distribution policy": {
-            "$ref": "./examples/DistributionPolicies_UpdateDistributionPolicy.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "JobRouterAdministrationOperations_DeleteDistributionPolicy",
-        "summary": "Delete a distribution policy by Id.",
-        "description": "Delete a distribution policy by Id.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "distributionPolicyId",
-            "in": "path",
-            "description": "The unique identifier of the policy.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a distribution policy": {
-            "$ref": "./examples/DistributionPolicies_DeleteDistributionPolicy.json"
-          }
-        }
-      }
-    },
-    "/routing/routing/exceptionPolicies": {
-      "get": {
-        "operationId": "JobRouterAdministrationOperations_ListExceptionPolicies",
-        "summary": "Retrieves existing exception policies.",
-        "description": "Retrieves existing exception policies.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "Number of objects to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedExceptionPolicy"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieves existing exception policies": {
-            "$ref": "./examples/ExceptionPolicies_ListExceptionPoliciesWithPageSize.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/routing/routing/exceptionPolicies/{exceptionPolicyId}": {
-      "get": {
-        "operationId": "JobRouterAdministrationOperations_GetExceptionPolicy",
-        "summary": "Retrieves an existing exception policy by Id.",
-        "description": "Retrieves an existing exception policy by Id.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "exceptionPolicyId",
-            "in": "path",
-            "description": "The Id of the exception policy",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ExceptionPolicy"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "description": "The last modified timestamp."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieves an existing exception policy by Id": {
-            "$ref": "./examples/ExceptionPolicies_GetExceptionPolicy.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "JobRouterAdministrationOperations_UpsertExceptionPolicy",
-        "summary": "Creates or updates a exception policy.",
-        "description": "Creates or updates a exception policy.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "exceptionPolicyId",
-            "in": "path",
-            "description": "The Id of the exception policy",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/RouterConditionalRequestHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/parameters/RouterConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExceptionPolicyCreateOrUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ExceptionPolicy"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "description": "The last modified timestamp."
-              }
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/ExceptionPolicy"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "description": "The last modified timestamp."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Creates an exception policy": {
-            "$ref": "./examples/ExceptionPolicies_CreateExceptionPolicy.json"
-          },
-          "Updates an exception policy": {
-            "$ref": "./examples/ExceptionPolicies_UpdateExceptionPolicy.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "JobRouterAdministrationOperations_DeleteExceptionPolicy",
-        "summary": "Deletes a exception policy by Id.",
-        "description": "Deletes a exception policy by Id.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "exceptionPolicyId",
-            "in": "path",
-            "description": "The Id of the exception policy",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Deletes a exception policy": {
-            "$ref": "./examples/ExceptionPolicies_DeleteExceptionPolicy.json"
-          }
-        }
-      }
-    },
-    "/routing/routing/queues": {
+    "/routing/queues": {
       "get": {
         "operationId": "JobRouterAdministrationOperations_ListQueues",
         "summary": "Retrieves existing queues.",
@@ -1376,7 +1332,7 @@
         }
       }
     },
-    "/routing/routing/queues/{queueId}": {
+    "/routing/queues/{queueId}": {
       "get": {
         "operationId": "JobRouterAdministrationOperations_GetQueue",
         "summary": "Retrieves an existing queue by Id.",
@@ -1554,6 +1510,50 @@
         "x-ms-examples": {
           "Deletes a queue": {
             "$ref": "./examples/Queues_DeleteQueue.json"
+          }
+        }
+      }
+    },
+    "/routing/queues/{queueId}/statistics": {
+      "get": {
+        "operationId": "JobRouterOperations_GetQueueStatistics",
+        "summary": "Retrieves a queue's statistics.",
+        "description": "Retrieves a queue's statistics.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "queueId",
+            "in": "path",
+            "description": "Id of the queue to retrieve statistics.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RouterQueueStatistics"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves a queue's statistics": {
+            "$ref": "./examples/Queues_GetQueueStatistics.json"
           }
         }
       }
