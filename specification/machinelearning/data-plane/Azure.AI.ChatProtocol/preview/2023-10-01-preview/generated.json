@@ -54,11 +54,14 @@
   },
   "tags": [],
   "paths": {
-    "/": {
+    "/{operationRoute}": {
       "post": {
         "operationId": "GenericChatClient_Create",
         "description": "Creates a new chat completion.",
         "parameters": [
+          {
+            "$ref": "#/parameters/OperationRouteParam"
+          },
           {
             "name": "body",
             "in": "body",
@@ -248,5 +251,15 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "OperationRouteParam": {
+      "name": "operationRoute",
+      "in": "path",
+      "description": "The route where the endpoint exposes the chat operations.",
+      "required": true,
+      "type": "string",
+      "default": "chat",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
