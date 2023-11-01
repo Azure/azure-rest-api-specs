@@ -74,15 +74,6 @@ input-file:
 - Microsoft.Search/stable/2015-08-19/search.json
 ```
 
-### Tag: package-2015-02
-
-These settings apply only when `--tag=package-2015-02` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-02'
-input-file:
-- Microsoft.Search/stable/2015-02-28/search.json
-```
-
 ### Tag: package-2021-04-preview
 
 These settings apply only when `--tag=package-2021-04-preview` is specified on the command line.
