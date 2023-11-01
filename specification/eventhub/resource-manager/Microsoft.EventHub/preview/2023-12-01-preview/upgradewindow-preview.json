@@ -1,0 +1,283 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EventHubManagementClient",
+    "description": "Azure Event Hubs client for managing Cluster Upgrade Window properties.",
+    "version": "2023-12-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/upgradewindow": {
+      "patch": {
+        "tags": [
+          "Event Hubs Clusters Upgrade Window"
+        ],
+        "operationId": "UpgradeWindow_Patch",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterUpgradeWindow"
+            },
+            "description": "Parameters for updating Event Hubs Clusters Upgrade Window"
+          }
+        ],
+        "x-ms-examples": {
+          "ClusterUpgradeWindowPatch": {
+            "$ref": "./examples/Clusters/ClusterUpgradeWindowPatch.json"
+          }
+        },
+        "description": "Replace all specified Event Hubs Cluster upgrade window settings with those contained in the request body. Leaves the settings not specified in the request body unmodified.",
+        "responses": {
+          "200": {
+            "description": "Event Hubs Cluster upgrade window settings returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterUpgradeWindow"
+            }
+          },
+          "default": {
+            "description": "Event Hubs Cluster error response describing why the get cluster quotas and settings operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Event Hubs Clusters Upgrade Window"
+        ],
+        "operationId": "UpgradeWindow_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ClusterUpgradeWindowsGet": {
+            "$ref": "./examples/Clusters/ClusterUpgradeWindowGet.json"
+          }
+        },
+        "description": "Get all Event Hubs Cluster upgrade window settings",
+        "responses": {
+          "200": {
+            "description": "Event Hubs Cluster settings configuration returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterUpgradeWindow"
+            }
+          },
+          "default": {
+            "description": "Event Hubs Cluster error response describing why the get cluster cluster upgrade window settings operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/upgradewindowhistory": {
+      "get": {
+        "tags": [
+          "Event Hubs Clusters Upgrade Window"
+        ],
+        "operationId": "UpgradeWindowHistory_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ClusterUpgradeWindowHistoryGet": {
+            "$ref": "./examples/Clusters/ClusterUpgradeWindowHistoryGet.json"
+          }
+        },
+        "description": "Get Event Hubs Cluster upgrade window history",
+        "responses": {
+          "200": {
+            "description": "Event Hubs Cluster Upgrade Window History returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterUpgradeHistoryList"
+            }
+          },
+          "default": {
+            "description": "Event Hubs Cluster error response describing why the get cluster cluster upgrade window history operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/upgradewindowtrigger": {
+      "post": {
+        "tags": [
+          "Event Hubs Clusters Upgrade Window"
+        ],
+        "operationId": "UpgradeWindowTrigger_Post",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ClusterUpgradeWindowTriggerPost": {
+            "$ref": "./examples/Clusters/ClusterUpgradeWindowTriggerPost.json"
+          }
+        },
+        "description": "Trigger cluster upgrade if and when possible",
+        "responses": {
+          "200": {
+            "description": "Event Hubs Cluster upgrade window will be triggered as soon as it can"
+          },
+          "default": {
+            "description": "Event Hubs Cluster error response describing why the trigger cluster cluster upgrade window operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClusterUpgradeWindow": {
+      "type": "object",
+      "properties": {
+        "preferredstartdayofweek": {
+          "type": "string",
+          "enum": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "description": "Preferred day of the week in UTC to begin an upgrade"
+        },
+        "preferredstarthourofday": {
+          "type": "int",
+          "minimum": 0,
+          "maximum": 23,
+          "description": "Preferred hour of the day in UTC to begin an upgrade"
+        },
+        "preferredring": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Early",
+            "Late",
+            "Middle"
+          ],
+          "description": "Preferred ring to perform upgrade"
+        }
+      },
+      "description": "Contains all settings for the cluster upgrade window."
+    },
+    "ClusterUpgradeHistoryList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterUpgradeHistory"
+          },
+          "description": "Result of the List Cluster Upgrade History operation"
+        }
+      },
+      "description": "The response of the List Cluster Upgrade History operation"
+    },
+    "ClusterUpgradeHistory": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the upgrade procedure performed on the cluster"
+        },
+        "start": {
+          "type": "date-time",
+          "readOnly": true,
+          "description": "Date time the upgrade started"
+        },
+        "end": {
+          "type": "date-time",
+          "readOnly": true,
+          "description": "Date time the upgrade ended"
+        }
+      },
+      "description": "Contains past history of all cluster upgrades cluster has gone through"
+    }
+  },
+  "parameters": {}
+}

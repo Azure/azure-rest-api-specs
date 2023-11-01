@@ -369,6 +369,13 @@
     "Cluster": {
       "type": "object",
       "properties": {
+        "clusterUpgradeList": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ClusterUpgrade"
+          }
+        },
         "sku": {
           "$ref": "#/definitions/ClusterSku",
           "description": "Properties of the cluster SKU."
@@ -435,6 +442,30 @@
         }
       ],
       "description": "Single Event Hubs Cluster resource in List or Get operations."
+    },
+    "ClusterUpgrade": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Status of the cluster upgrade",
+          "enum": [
+            "Scheduled",
+            "Running",
+            "Terminated",
+            "Failed",
+            "Succeeded"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the cluster upgrade"
+        }
+      },
+      "description": "Details for a cluster upgrade"
     },
     "ClusterSku": {
       "type": "object",
