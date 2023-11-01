@@ -1307,9 +1307,9 @@
           "description": "The callback URI.",
           "type": "string"
         },
-        "cognitiveServicesEndpoint": {
-          "description": "The identifier of the Cognitive Service resource assigned to this call.",
-          "type": "string"
+        "callIntelligenceOptions": {
+          "$ref": "#/definitions/CallIntelligenceOptions",
+          "description": "AI options for the call."
         }
       }
     },
@@ -1321,6 +1321,16 @@
     },
     "CommunicationUserIdentifierModel": {
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationUserIdentifierModel"
+    },
+    "CallIntelligenceOptions": {
+      "description": "AI options for the call.",
+      "type": "object",
+      "properties": {
+        "cognitiveServicesEndpoint": {
+          "description": "The identifier of the Cognitive Service resource assigned to this call.",
+          "type": "string"
+        }
+      }
     },
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
@@ -1410,9 +1420,9 @@
           "description": "A customer set value used to track the answering of a call.",
           "type": "string"
         },
-        "cognitiveServicesEndpoint": {
-          "description": "The endpoint URL of the Azure Cognitive Services resource attached",
-          "type": "string"
+        "callIntelligenceOptions": {
+          "$ref": "#/definitions/CallIntelligenceOptions",
+          "description": "AI options for the call."
         },
         "answeredBy": {
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
@@ -2842,9 +2852,14 @@
     "ContinuousDtmfRecognitionToneReceived": {
       "type": "object",
       "properties": {
-        "toneInfo": {
-          "$ref": "#/definitions/ToneInfo",
-          "description": "Information about Tone."
+        "sequenceId": {
+          "format": "int32",
+          "description": "The sequence id which can be used to determine if the same tone was played multiple times or if any tones were missed.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "tone": {
+          "$ref": "#/definitions/Tone"
         },
         "callConnectionId": {
           "description": "Call connection ID.",
@@ -2865,24 +2880,6 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
-        }
-      }
-    },
-    "ToneInfo": {
-      "description": "The information about the tone.",
-      "required": [
-        "sequenceId",
-        "tone"
-      ],
-      "type": "object",
-      "properties": {
-        "sequenceId": {
-          "format": "int32",
-          "description": "The sequence id which can be used to determine if the same tone was played multiple times or if any tones were missed.",
-          "type": "integer"
-        },
-        "tone": {
-          "$ref": "#/definitions/Tone"
         }
       }
     },
