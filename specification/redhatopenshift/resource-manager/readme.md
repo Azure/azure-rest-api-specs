@@ -26,18 +26,28 @@ These are the global settings for the Azure Red Hat OpenShift API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-07
+tag: package-2023-09-04
 ```
 
+
+### Tag: package-2023-09-04
+
+These settings apply only when `--tag=package-2023-09-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09-04'
+input-file:
+  - Microsoft.RedHatOpenShift/stable/2023-09-04/redhatopenshift.json
+```
 
 ### Tag: package-preview-2023-07
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-07'
+``` yaml $(tag) == 'package-preview-2023-07'
 input-file:
   - Microsoft.RedHatOpenShift/preview/2023-07-01-preview/redhatopenshift.json
 ```
+
 ### Tag: package-2020-04-30
 
 These settings apply only when `--tag=package-2020-04-30` is specified on the command line.
@@ -96,7 +106,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
