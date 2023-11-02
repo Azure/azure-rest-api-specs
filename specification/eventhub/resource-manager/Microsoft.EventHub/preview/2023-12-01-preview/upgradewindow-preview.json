@@ -241,7 +241,11 @@
             "Late",
             "Middle"
           ],
-          "description": "Preferred ring to perform upgrade"
+          "description": "Preferred ring to perform upgrade",
+          "x-ms-enum": {
+            "name": "preferredRing",
+            "modelAsString": true
+          }
         }
       },
       "description": "Contains all settings for the cluster upgrade window."
@@ -249,21 +253,17 @@
     "ClusterUpgradeHistoryList": {
       "type": "object",
       "x-ms-identifiers": [],
-      "x-ms-enum": {
-        "name": "clusterUpgradeList",
-        "modelAsString": true
-      },
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClusterUpgradeHistory"
           },
-          "nextLink": {
-            "type": "string",
-            "description": "Link to the next set of results. Empty unless the value parameter contains an incomplete list of Event Hubs Clusters."
-          },
           "description": "Result of the List Cluster Upgrade History operation"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Empty unless the value parameter contains an incomplete list of Event Hubs Clusters."
         }
       },
       "description": "The response of the List Cluster Upgrade History operation"

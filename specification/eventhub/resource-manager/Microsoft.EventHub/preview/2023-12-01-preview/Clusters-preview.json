@@ -404,18 +404,6 @@
                 "name": "provisioningState",
                 "modelAsString": true
               },
-              "clusterUpgradeList": {
-                "type": "array",
-                "readOnly": true,
-                "items": {
-                  "$ref": "#/definitions/ClusterUpgrade"
-                },
-                "x-ms-identifiers": [],
-                "x-ms-enum": {
-                  "name": "clusterUpgradeList",
-                  "modelAsString": true
-                }
-              },
               "description": "Provisioning state of the Cluster."
             },
             "updatedAt": {
@@ -436,6 +424,15 @@
             "supportsScaling": {
               "type": "boolean",
               "description": "A value that indicates whether Scaling is Supported."
+            },
+            "clusterUpgradeList": {
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "$ref": "#/definitions/ClusterUpgrade"
+              },
+              "x-ms-identifiers": [],
+              "description": "List of cluster upgrades performed onto this cluster"
             }
           },
           "description": "Event Hubs Cluster properties supplied in responses in List or Get operations."
@@ -462,7 +459,11 @@
             "Terminated",
             "Failed",
             "Succeeded"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
         },
         "name": {
           "type": "string",
