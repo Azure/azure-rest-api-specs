@@ -1851,80 +1851,6 @@
       }
     },
     "/datasources/{dataSourceName}/scans/{scanName}/runs/{runId}": {
-      "put": {
-        "tags": [
-          "ScanResult"
-        ],
-        "description": "Runs the scan.",
-        "operationId": "ScanResult_RunScan",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/dataSourceName"
-          },
-          {
-            "$ref": "#/parameters/scanName"
-          },
-          {
-            "$ref": "#/parameters/runId"
-          },
-          {
-            "in": "query",
-            "name": "scanLevel",
-            "type": "string",
-            "description": "Scan level.",
-            "enum": [
-              "Full",
-              "Incremental"
-            ],
-            "x-ms-enum": {
-              "name": "ScanLevelType",
-              "values": [
-                {
-                  "value": "Full",
-                  "description": "the scan is full scan"
-                },
-                {
-                  "value": "Incremental",
-                  "description": "the scan is incremental scan"
-                }
-              ],
-              "modelAsString": true
-            }
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success.",
-            "schema": {
-              "$ref": "#/definitions/OperationResponse"
-            },
-            "headers": {
-              "Operation-Location": {
-                "description": "Response header for long running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "An error response received from the Scanning Service.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseModel"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ScanResult_RunScan": {
-            "$ref": "./examples/ScanResult_RunScan.json"
-          }
-        }
-      },
       "get": {
         "tags": [
           "ScanResult"
@@ -1965,6 +1891,82 @@
         "x-ms-examples": {
           "ScanResult_GetScanStatus": {
             "$ref": "./examples/ScanResult_GetScanStatus.json"
+          }
+        }
+      }
+    },
+    "/datasources/{dataSourceName}/scans/{scanName}:run": {
+      "post": {
+        "tags": [
+          "ScanResult"
+        ],
+        "description": "Runs the scan",
+        "operationId": "ScanResult_RunScan",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/dataSourceName"
+          },
+          {
+            "$ref": "#/parameters/scanName"
+          },
+          {
+            "$ref": "#/parameters/runId"
+          },
+          {
+            "in": "query",
+            "name": "scanLevel",
+            "type": "string",
+            "description": "The scan level.",
+            "enum": [
+              "Full",
+              "Incremental"
+            ],
+            "x-ms-enum": {
+              "name": "ScanLevelType",
+              "values": [
+                {
+                  "value": "Full",
+                  "description": "the scan is full scan"
+                },
+                {
+                  "value": "Incremental",
+                  "description": "the scan is incremental scan"
+                }
+              ],
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Operation-Location": {
+                "description": "Response header for long running operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Scanning Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ScanResult_RunScan": {
+            "$ref": "./examples/ScanResult_RunScan.json"
           }
         }
       }
