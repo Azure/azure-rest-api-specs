@@ -48,7 +48,7 @@ discover incidents and establish a logic flow for root cause analysis.
 """)
 namespace AnomalyDetector;
 
-@doc("The secret key for your Azure Cognitive Services subscription.")
+@doc("The secret key for your Azure Cognitive Services subscription..")
 model AnomalyDetectorApiKeyAuth
   is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
 
