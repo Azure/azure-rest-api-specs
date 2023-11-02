@@ -37,15 +37,11 @@ interface JobRouterAdministrationOperations {
   @route("/routing")
   deleteClassificationPolicy is Operations.ResourceDelete<ClassificationPolicy>;
   
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Retrieves existing classification policies.")
   @doc("Retrieves existing classification policies.")
-  @route("/routing/classificationPolicies")
-  @list
-  listClassificationPolicies is Azure.Core.Foundations.Operation<
-    ListClassificationPoliciesQueryParams,
-    ClassificationPolicyCollection
-  >;
+  @route("/routing")
+  listClassificationPolicies is Operations.ResourceList<ClassificationPolicy,ListClassificationPoliciesQueryParams>;
   
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Creates or updates a distribution policy.")
@@ -65,15 +61,11 @@ interface JobRouterAdministrationOperations {
   @route("/routing")
   deleteDistributionPolicy is Operations.ResourceDelete<DistributionPolicy>;
   
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Retrieves existing distribution policies.")
   @doc("Retrieves existing distribution policies.")
-  @route("/routing/distributionPolicies")
-  @list
-  listDistributionPolicies is Azure.Core.Foundations.Operation<
-    ListDistributionPoliciesQueryParams,
-    DistributionPolicyCollection
-  >;
+  @route("/routing")
+  listDistributionPolicies is Operations.ResourceList<DistributionPolicy,ListDistributionPoliciesQueryParams>;
   
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Creates or updates a exception policy.")
@@ -93,15 +85,11 @@ interface JobRouterAdministrationOperations {
   @route("/routing")
   deleteExceptionPolicy is Operations.ResourceDelete<ExceptionPolicy>;
   
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Retrieves existing exception policies.")
   @doc("Retrieves existing exception policies.")
-  @route("/routing/exceptionPolicies")
-  @list
-  listExceptionPolicies is Azure.Core.Foundations.Operation<
-    ListExceptionPoliciesQueryParams,
-    ExceptionPolicyCollection
-  >;
+  @route("/routing")
+  listExceptionPolicies is Operations.ResourceList<ExceptionPolicy,ListExceptionPoliciesQueryParams>;
   
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Creates or updates a queue.")
@@ -121,15 +109,11 @@ interface JobRouterAdministrationOperations {
   @route("/routing")
   deleteQueue is Operations.ResourceDelete<RouterQueue>;
   
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Retrieves existing queues.")
   @doc("Retrieves existing queues.")
-  @route("/routing/queues")
-  @list
-  listQueues is Azure.Core.Foundations.Operation<
-    ListQueuesQueryParams,
-    RouterQueueCollection
-  >;
+  @route("/routing")
+  listQueues is Operations.ResourceList<RouterQueue,ListQueuesQueryParams>;
 }
 
 interface JobRouterOperations {
@@ -171,14 +155,8 @@ interface JobRouterOperations {
   >;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @summary("""
-Submits request to cancel an existing job by Id while supplying free-form
-cancellation reason.
-""")
-  @doc("""
-Submits request to cancel an existing job by Id while supplying free-form
-cancellation reason.
-""")
+  @summary("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
+  @doc("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
   @route("/routing/jobs/{jobId}:cancel")
   @post
   cancelJobAction is Azure.Core.Foundations.Operation<
@@ -230,15 +208,11 @@ cancellation reason.
     CloseJobResultResponse
   >;
   
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Retrieves list of jobs based on filter parameters.")
   @doc("Retrieves list of jobs based on filter parameters.")
-  @route("/routing/jobs")
-  @list
-  listJobs is Azure.Core.Foundations.Operation<
-    ListJobQueryParams,
-    RouterJobCollection
-  >;
+  @route("/routing")
+  listJobs is Operations.ResourceList<RouterJob,ListJobQueryParams>;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Gets a job's position details.")
@@ -277,14 +251,8 @@ cancellation reason.
   >;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @summary("""
-Accepts an offer to work on a job and returns a 409/Conflict if another agent
-accepted the job already.
-""")
-  @doc("""
-Accepts an offer to work on a job and returns a 409/Conflict if another agent
-accepted the job already.
-""")
+  @summary("Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.")
+  @doc("Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.")
   @route("/routing/workers/{workerId}/offers/{offerId}:accept")
   @post
   acceptJobAction is Azure.Core.Foundations.Operation<
@@ -354,13 +322,9 @@ accepted the job already.
   @route("/routing")
   deleteWorker is Operations.ResourceDelete<RouterWorker>;
   
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Retrieves existing workers.")
   @doc("Retrieves existing workers.")
-  @route("/routing/workers")
-  @list
-  listWorkers is Azure.Core.Foundations.Operation<
-    ListWorkerQueryParams,
-    RouterWorkerCollection
-  >;
+  @route("/routing")
+  listWorkers is Operations.ResourceList<RouterWorker,ListWorkerQueryParams>;
 }

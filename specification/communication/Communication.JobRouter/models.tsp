@@ -227,7 +227,7 @@ enum ExpressionRouterRuleLanguage {
 @resource("classificationPolicies")
 @doc("A container for the rules that govern how jobs are classified.")
 model ClassificationPolicy {
-  ...RouterPageableEntity,
+  ...EtagProperty;
 
   @key("classificationPolicyId")
   @doc("Unique identifier of this policy.")
@@ -243,21 +243,7 @@ model ClassificationPolicy {
   @doc("The queue selector attachments used to resolve a queue for a given job.")
   queueSelectorAttachments?: QueueSelectorAttachment[];
 
-  @doc("""
-A rule of one of the following types:
-            
-StaticRule:  A rule
-providing static rules that always return the same result, regardless of
-input.
-DirectMapRule:  A rule that return the same labels as the input
-labels.
-ExpressionRule: A rule providing inline expression
-rules.
-FunctionRule: A rule providing a binding to an HTTP Triggered Azure
-Function.
-WebhookRule: A rule providing a binding to a webserver following
-OAuth2.0 authentication protocol.
-""")
+  @doc("The rule to determine a priority score for a given job.")
   prioritizationRule?: RouterRule;
 
   @doc("The worker selector attachments used to attach worker selectors to a given job.")
@@ -266,18 +252,11 @@ OAuth2.0 authentication protocol.
 
 @doc("""
 A rule of one of the following types:
-            
-StaticRule:  A rule
-providing static rules that always return the same result, regardless of
-input.
-DirectMapRule:  A rule that return the same labels as the input
-labels.
-ExpressionRule: A rule providing inline expression
-rules.
-FunctionRule: A rule providing a binding to an HTTP Triggered Azure
-Function.
-WebhookRule: A rule providing a binding to a webserver following
-OAuth2.0 authentication protocol.
+StaticRule:  A rule providing static rules that always return the same result, regardless of input.
+DirectMapRule:  A rule that return the same labels as the input labels.
+ExpressionRule: A rule providing inline expression rules.
+FunctionRule: A rule providing a binding to an HTTP Triggered Azure Function.
+WebhookRule: A rule providing a binding to a webserver following OAuth2.0 authentication protocol.
 """)
 @discriminator("kind")
 model RouterRule {
@@ -285,14 +264,11 @@ model RouterRule {
   kind: string;
 }
 
-@doc("A paged collection of classification policies.")
-model ClassificationPolicyCollection
-  is RouterPagedCollection<ClassificationPolicy>;
 
 @resource("distributionPolicies")
 @doc("Policy governing how jobs are distributed to workers")
 model DistributionPolicy {
-  ...RouterPageableEntity,
+  ...EtagProperty;
 
   @key("distributionPolicyId")
   @doc("The unique identifier of the policy.")
@@ -302,10 +278,7 @@ model DistributionPolicy {
   @doc("The human readable name of the policy.")
   name?: string;
 
-  @doc("""
-The number of seconds after which any offers created under this policy will be
-expired.
-""")
+  @doc("The number of seconds after which any offers created under this policy will be expired.")
   offerExpiresAfterSeconds?: float64;
 
   @doc("Abstract base class for defining a distribution mode")
@@ -321,41 +294,28 @@ model DistributionMode {
   @doc("Governs the maximum number of active concurrent offers a job can have.")
   maxConcurrentOffers?: int32;
 
-  @doc("""
-(Optional)
-If set to true, then router will match workers to jobs even if they
-don't match label selectors.
-Warning: You may get workers that are not
-qualified for the job they are matched with if you set this
-variable to true.
-This flag is intended more for temporary usage.
-By default, set to false.
-""")
+  @doc("If set to true, then router will match workers to jobs even if they don't match label selectors. Warning: You may get workers that are not qualified for the job they are matched with if you set this variable to true. This flag is intended more for temporary usage. By default, set to false.")
   bypassSelectors?: boolean;
 
   @doc("The type discriminator describing a sub-type of DistributionMode")
   kind: string;
 }
 
-@doc("A paged collection of distribution policies.")
-model DistributionPolicyCollection is RouterPagedCollection<DistributionPolicy>;
 
 @resource("exceptionPolicies")
 @doc("A policy that defines actions to execute when exception are triggered.")
 model ExceptionPolicy {
-  ...RouterPageableEntity,
+  ...EtagProperty;
 
   @key("exceptionPolicyId")
   @doc("The Id of the exception policy")
   @visibility("read")
   id: string;
 
-  @doc("(Optional) The name of the exception policy.")
+  @doc("The name of the exception policy.")
   name?: string;
 
-  @doc("""
-(Optional) A collection of exception rules on the exception policy.
-""")
+  @doc("A collection of exception rules on the exception policy.")
   exceptionRules?: ExceptionRule[];
 }
 
@@ -379,8 +339,6 @@ model ExceptionTrigger {
   kind: string;
 }
 
-@doc("A paged collection of exception policies.")
-model ExceptionPolicyCollection is RouterPagedCollection<ExceptionPolicy>;
 
 @doc("A note attached to a job.")
 model RouterJobNote {
@@ -394,7 +352,7 @@ model RouterJobNote {
 @resource("jobs")
 @doc("A unit of work to be routed")
 model RouterJob {
-  ...RouterPageableEntity,
+  ...EtagProperty;
 
   @key("jobId")
   @doc("The id of the job.")
@@ -427,30 +385,18 @@ model RouterJob {
   @doc("Reason code for cancelled or closed jobs.")
   dispositionCode?: string;
 
-  @doc("""
-A collection of manually specified label selectors, which a worker must satisfy
-in order to process this job.
-""")
+  @doc("A collection of manually specified label selectors, which a worker must satisfy in order to process this job.")
   requestedWorkerSelectors?: RouterWorkerSelector[];
 
-  @doc("""
-A collection of label selectors attached by a classification policy, which a
-worker must satisfy in order to process this job.
-""")
+  @doc("A collection of label selectors attached by a classification policy, which a worker must satisfy in order to process this job.")
   @visibility("read")
   attachedWorkerSelectors?: RouterWorkerSelector[];
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
-  @doc("""
-A set of key/value pairs that are identifying attributes used by the rules
-engines to make decisions.
-""")
+  @doc("A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.")
   labels?: Record<unknown>;
 
-  @doc("""
-A collection of the assignments of the job.
-Key is AssignmentId.
-""")
+  @doc("A collection of the assignments of the job. Key is AssignmentId.")
   @visibility("read")
   assignments?: Record<RouterJobAssignment>;
 
@@ -465,35 +411,16 @@ Key is AssignmentId.
   @visibility("read")
   scheduledAt?: utcDateTime;
 
-  @doc("""
-The matching mode to be applied to this job.
-            
-Supported types:
-    
-       
-QueueAndMatchMode: Used when matching worker to a job is required to be
-done right after job is queued.
-ScheduleAndSuspendMode: Used for scheduling
-jobs to be queued at a future time. At specified time, matching of a worker to
-the job will not start automatically.
-SuspendMode: Used when matching workers
-to a job needs to be suspended.
-""")
+  @doc("If provided, will determine how job matching will be carried out. Default mode: QueueAndMatchMode.")
   matchingMode?: JobMatchingMode;
 }
 
-@doc("""
-Describes a condition that must be met against a set of labels for worker
-selection
-""")
+@doc("Describes a condition that must be met against a set of labels for worker selection")
 model RouterWorkerSelector {
   @doc("The label key to query against")
   key: string;
 
-  @doc("""
-Describes how the value of the label is compared to the value defined on the
-label selector
-""")
+  @doc("Describes how the value of the label is compared to the value defined on the label selector")
   labelOperator: LabelOperator;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type"
@@ -539,18 +466,10 @@ model RouterJobAssignment {
 }
 
 @doc("""
-The matching mode to be applied to this job.
-            
-Supported types:
-    
-       
-QueueAndMatchMode: Used when matching worker to a job is required to be
-done right after job is queued.
-ScheduleAndSuspendMode: Used for scheduling
-jobs to be queued at a future time. At specified time, matching of a worker to
-the job will not start automatically.
-SuspendMode: Used when matching workers
-to a job needs to be suspended.
+A matching mode of one of the following types:
+QueueAndMatchMode: Used when matching worker to a job is required to be done right after job is queued.
+ScheduleAndSuspendMode: Used for scheduling jobs to be queued at a future time. At specified time, matching of a worker to the job will not start automatically.
+SuspendMode: Used when matching workers to a job needs to be suspended.
 """)
 @discriminator("kind")
 model JobMatchingMode { 
@@ -558,12 +477,7 @@ model JobMatchingMode {
   kind: string;
 }
 
-@doc("""
-Describes a matching mode used for scheduling jobs to be queued at a future
-time.
-At the specified time, matching worker to a job will not start
-automatically.
-""")
+@doc("Describes a matching mode used for scheduling jobs to be queued at a future time. At the specified time, matching worker to a job will not start automatically.")
 model ScheduleAndSuspendMode extends JobMatchingMode {
   
   @doc("Scheduled time.")
@@ -589,17 +503,10 @@ model SuspendMode extends JobMatchingMode {
 
 @doc("Request payload for deleting a job")
 model CancelJobOptions {
-  @doc("""
-(Optional) A note that will be appended to the jobs' Notes collection with the
-current timestamp.
-""")
+  @doc("A note that will be appended to the jobs' Notes collection with the current timestamp.")
   note?: string;
 
-  @doc("""
-Indicates the outcome of the job, populate this field with your own custom
-values.
-If not provided, default value of \"Cancelled\" is set.
-""")
+  @doc("Indicates the outcome of the job, populate this field with your own custom values. If not provided, default value of \"Cancelled\" is set.")
   dispositionCode?: string;
 }
 
@@ -608,10 +515,7 @@ model CompleteJobOptions {
   @doc("The assignment within the job to complete.")
   assignmentId: string;
 
-  @doc("""
-(Optional) A note that will be appended to the jobs' Notes collection with the
-current timestamp.
-""")
+  @doc("A note that will be appended to the jobs' Notes collection with the current timestamp.")
   note?: string;
 }
 
@@ -620,30 +524,16 @@ model CloseJobOptions {
   @doc("The assignment within which the job is to be closed.")
   assignmentId: string;
 
-  @doc("""
-Indicates the outcome of the job, populate this field with your own custom
-values.
-""")
+  @doc("Indicates the outcome of the job, populate this field with your own custom values.")
   dispositionCode?: string;
 
-  @doc("""
-If not provided, worker capacity is released immediately along with a
-JobClosedEvent notification.
-If provided, worker capacity is released along
-with a JobClosedEvent notification at a future time in UTC.
-""")
+  @doc("If not provided, worker capacity is released immediately along with a JobClosedEvent notification. If provided, worker capacity is released along with a JobClosedEvent notification at a future time in UTC.")
   
   closeAt?: utcDateTime;
 
-  @doc("""
-(Optional) A note that will be appended to the jobs' Notes collection with the
-current timestamp.
-""")
+  @doc("A note that will be appended to the jobs' Notes collection with the current timestamp.")
   note?: string;
 }
-
-@doc("A paged collection of jobs.")
-model RouterJobCollection is RouterPagedCollection<RouterJob>;
 
 @doc("Position and estimated wait time for a job.")
 model RouterJobPositionDetails {
@@ -665,10 +555,7 @@ model RouterJobPositionDetails {
 
 @doc("Request payload for unassigning a job.")
 model UnassignJobOptions {
-  @doc("""
-If SuspendMatching is true, then the job is not queued for re-matching with a
-worker.
-""")
+  @doc("If SuspendMatching is true, then the job is not queued for re-matching with a worker.")
   suspendMatching?: boolean;
 }
 
@@ -681,10 +568,7 @@ model UnassignJobResult {
   unassignmentCount: int32;
 }
 
-@doc("""
-Response containing Id's for the worker, job, and assignment from an accepted
-offer
-""")
+@doc("Response containing Id's for the worker, job, and assignment from an accepted offer")
 model AcceptJobOfferResult {
   @doc("The assignment Id that assigns a worker that has accepted an offer to a job.")
   assignmentId: string;
@@ -698,15 +582,7 @@ model AcceptJobOfferResult {
 
 @doc("Request payload for declining offers")
 model DeclineJobOfferOptions {
-  @doc("""
-If the RetryOfferAt is not provided, then this job will not be offered again to
-the worker who declined this job unless
-the worker is de-registered and
-re-registered.  If a RetryOfferAt time is provided, then the job will be
-re-matched to
-eligible workers at the retry time in UTC.  The worker that
-declined the job will also be eligible for the job at that time.
-""")
+  @doc("If the RetryOfferAt is not provided, then this job will not be offered again to the worker who declined this job unless the worker is de-registered and re-registered.  If a RetryOfferAt time is provided, then the job will be re-matched to eligible workers at the retry time in UTC.  The worker that declined the job will also be eligible for the job at that time.")
   
   retryOfferAt?: utcDateTime;
 }
@@ -714,7 +590,7 @@ declined the job will also be eligible for the job at that time.
 @resource("queues")
 @doc("A queue that can contain jobs to be routed.")
 model RouterQueue {
-  ...RouterPageableEntity,
+  ...EtagProperty;
 
   @key("queueId")
   @doc("The Id of this queue")
@@ -724,28 +600,16 @@ model RouterQueue {
   @doc("The name of this queue.")
   name?: string;
 
-  @doc("""
-The ID of the distribution policy that will determine how a job is distributed
-to workers.
-""")
+  @doc("The ID of the distribution policy that will determine how a job is distributed to workers.")
   distributionPolicyId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
-  @doc("""
-A set of key/value pairs that are identifying attributes used by the rules
-engines to make decisions.
-""")
+  @doc("A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.")
   labels?: Record<unknown>;
 
-  @doc("""
-(Optional) The ID of the exception policy that determines various job
-escalation rules.
-""")
+  @doc("The ID of the exception policy that determines various job escalation rules.")
   exceptionPolicyId?: string;
 }
-
-@doc("A paged collection of queues.")
-model RouterQueueCollection is RouterPagedCollection<RouterQueue>;
 
 @doc("Statistics for the queue")
 model RouterQueueStatistics {
@@ -755,10 +619,7 @@ model RouterQueueStatistics {
   @doc("Length of the queue: total number of enqueued jobs.")
   length: int32;
 
-  @doc("""
-The estimated wait time of this queue rounded up to the nearest minute, grouped
-by job priority
-""")
+  @doc("The estimated wait time of this queue rounded up to the nearest minute, grouped by job priority")
   estimatedWaitTimeMinutes?: Record<float64>;
 
   @doc("The wait time of the job that has been enqueued in this queue for the longest.")
@@ -769,7 +630,7 @@ by job priority
 @resource("workers")
 @doc("An entity for jobs to be routed to")
 model RouterWorker {
-  ...RouterPageableEntity,
+  ...EtagProperty;
 
   @key("workerId")
   @doc("Id of the worker.")
@@ -787,10 +648,7 @@ model RouterWorker {
   capacity?: int32;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
-  @doc("""
-A set of key/value pairs that are identifying attributes used by the rules
-engines to make decisions.
-""")
+  @doc("A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.")
   labels?: Record<unknown>;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
@@ -808,10 +666,7 @@ engines to make decisions.
   @visibility("read")
   assignedJobs?: RouterWorkerAssignment[];
 
-  @doc("""
-A value indicating the workers capacity. A value of '1' means all capacity is
-consumed. A value of '0' means no capacity is currently consumed.
-""")
+  @doc("A value indicating the workers capacity. A value of '1' means all capacity is consumed. A value of '0' means no capacity is currently consumed.")
   @visibility("read")
   loadRatio?: float64;
 
@@ -825,10 +680,7 @@ model RouterChannel {
   @doc("Id of the channel.")
   channelId: string;
 
-  @doc("""
-The amount of capacity that an instance of a job of this channel will consume
-of the total worker capacity.
-""")
+  @doc("The amount of capacity that an instance of a job of this channel will consume of the total worker capacity.")
   capacityCostPerJob: int32;
 
   @doc("The maximum number of jobs that can be supported concurrently for this channel.")
@@ -871,92 +723,39 @@ model RouterWorkerAssignment {
   assignedAt: utcDateTime;
 }
 
-@doc("A paged collection of workers.")
-model RouterWorkerCollection is RouterPagedCollection<RouterWorker>;
-
 @doc("Jobs are distributed to the worker with the strongest abilities available.")
 model BestWorkerMode extends DistributionMode {
-  @doc("""
-A rule of one of the following types:
-            
-StaticRule:  A rule
-providing static rules that always return the same result, regardless of
-input.
-DirectMapRule:  A rule that return the same labels as the input
-labels.
-ExpressionRule: A rule providing inline expression
-rules.
-FunctionRule: A rule providing a binding to an HTTP Triggered Azure
-Function.
-WebhookRule: A rule providing a binding to a webserver following
-OAuth2.0 authentication protocol.
-""")
+  @doc("Define a scoring rule to use, when calculating a score to determine the best worker. If not set, will use a default scoring formula that uses the number of job labels that the worker labels match, as well as the number of label selectors the worker labels match and/or exceed using a logistic function (https://en.wikipedia.org/wiki/Logistic_function).")
   scoringRule?: RouterRule;
 
-  @doc("""
-Encapsulates all options that can be passed as parameters for scoring rule with
-BestWorkerMode
-""")
+  @doc("Options to configure 'scoringRule'. If not set, default values are used.")
   scoringRuleOptions?: ScoringRuleOptions;
 
   @doc("The type discriminator describing a sub-type of Mode")
   kind: "best-worker";
 }
 
-@doc("""
-Encapsulates all options that can be passed as parameters for scoring rule with
-BestWorkerMode
-""")
+@doc("Encapsulates all options that can be passed as parameters for scoring rule with BestWorkerMode")
 model ScoringRuleOptions {
-  @doc("""
-(Optional) Set batch size when AllowScoringBatchOfWorkers is set to true.
-Defaults to 20 if not configured.
-""")
+  @doc("Set batch size when 'isBatchScoringEnabled' is set to true. Defaults to 20 if not configured.")
   batchSize?: int32;
 
-  @doc("""
-(Optional) List of extra parameters from the job that will be sent as part of
-the payload to scoring rule.
-If not set, the job's labels (sent in the payload
-as `job`) and the job's worker selectors (sent in the payload as
-`selectors`)
-are added to the payload of the scoring rule by default.
-Note:
-Worker labels are always sent with scoring payload.
-""")
+  @doc("List of extra parameters from the job that will be sent as part of the payload to scoring rule. If not set, the job's labels (sent in the payload as `job`) and the job's worker selectors (sent in the payload as `selectors`) are added to the payload of the scoring rule by default. Note: Worker labels are always sent with scoring payload.")
   scoringParameters?: ScoringRuleParameterSelector[];
 
-  @doc("""
-(Optional)
-If set to true, will score workers in batches, and the parameter
-name of the worker labels will be sent as `workers`.
-By default, set to false
-and the parameter name for the worker labels will be sent as `worker`.
-Note: If
-enabled, use BatchSize to set batch size.
-""")
+  @doc("If set to true, will score workers in batches, and the parameter name of the worker labels will be sent as `workers`. By default, set to false and the parameter name for the worker labels will be sent as `worker`. Note: If enabled, use 'batchSize' to set batch size.")
   isBatchScoringEnabled?: boolean;
 
-  @doc("""
-(Optional)
-If false, will sort scores by ascending order. By default, set to
-true.
-""")
+  @doc("If false, will sort scores by ascending order. By default, set to true.")
   descendingOrder?: boolean;
 }
 
 @doc("An action that marks a job as cancelled")
 model CancelExceptionAction extends ExceptionAction {
-  @doc("""
-(Optional) A note that will be appended to the jobs' Notes collection with the
-current timestamp.
-""")
+  @doc("A note that will be appended to the jobs' Notes collection with the current timestamp.")
   note?: string;
 
-  @doc("""
-(Optional) Indicates the outcome of the job, populate this field with your own
-custom values.
-""")
+  @doc("Indicates the outcome of the job, populate this field with your own custom values.")
   dispositionCode?: string;
 
   @doc("The type discriminator describing a sub-type of ExceptionAction")
@@ -974,26 +773,9 @@ model ExceptionAction {
   kind: string;
 }
 
-@doc("""
-Describes a set of queue selectors that will be attached if the given condition
-resolves to true
-""")
+@doc("Describes a set of queue selectors that will be attached if the given condition resolves to true")
 model ConditionalQueueSelectorAttachment extends QueueSelectorAttachment {
-  @doc("""
-A rule of one of the following types:
-            
-StaticRule:  A rule
-providing static rules that always return the same result, regardless of
-input.
-DirectMapRule:  A rule that return the same labels as the input
-labels.
-ExpressionRule: A rule providing inline expression
-rules.
-FunctionRule: A rule providing a binding to an HTTP Triggered Azure
-Function.
-WebhookRule: A rule providing a binding to a webserver following
-OAuth2.0 authentication protocol.
-""")
+  @doc("The condition that must be true for the queue selectors to be attached")
   condition: RouterRule;
 
   @doc("The queue selectors to attach")
@@ -1003,18 +785,12 @@ OAuth2.0 authentication protocol.
   kind: "conditional";
 }
 
-@doc("""
-Describes a condition that must be met against a set of labels for queue
-selection
-""")
+@doc("Describes a condition that must be met against a set of labels for queue selection")
 model RouterQueueSelector {
   @doc("The label key to query against")
   key: string;
 
-  @doc("""
-Describes how the value of the label is compared to the value defined on the
-label selector
-""")
+  @doc("Describes how the value of the label is compared to the value defined on the label selector")
   labelOperator: LabelOperator;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
@@ -1023,36 +799,16 @@ label selector
   value?: unknown;
 }
 
-@doc("""
-An attachment of queue selectors to resolve a queue to a job from a
-classification policy
-""")
+@doc("An attachment of queue selectors to resolve a queue to a job from a classification policy")
 @discriminator("kind")
 model QueueSelectorAttachment {
   @doc("The type discriminator describing a sub-type of QueueSelectorAttachment")
   kind: string;
 }
 
-@doc("""
-Describes a set of worker selectors that will be attached if the given
-condition resolves to true
-""")
+@doc("Describes a set of worker selectors that will be attached if the given condition resolves to true")
 model ConditionalWorkerSelectorAttachment extends WorkerSelectorAttachment {
-  @doc("""
-A rule of one of the following types:
-            
-StaticRule:  A rule
-providing static rules that always return the same result, regardless of
-input.
-DirectMapRule:  A rule that return the same labels as the input
-labels.
-ExpressionRule: A rule providing inline expression
-rules.
-FunctionRule: A rule providing a binding to an HTTP Triggered Azure
-Function.
-WebhookRule: A rule providing a binding to a webserver following
-OAuth2.0 authentication protocol.
-""")
+  @doc("The condition that must be true for the worker selectors to be attached")
   condition: RouterRule;
 
   @doc("The worker selectors to attach")
@@ -1080,10 +836,7 @@ model ExpressionRouterRule extends RouterRule {
   @doc("The expression language to compile to and execute")
   language?: ExpressionRouterRuleLanguage;
 
-  @doc("""
-The string containing the expression to evaluate. Should contain return
-statement with calculated values.
-""")
+  @doc("The string containing the expression to evaluate. Should contain return statement with calculated values.")
   expression: string;
 
   @doc("The type discriminator describing a sub-type of Rule")
@@ -1104,21 +857,13 @@ model FunctionRouterRule extends RouterRule {
 
 @doc("Credentials used to access Azure function rule")
 model FunctionRouterRuleCredential {
-  @doc("(Optional) Access key scoped to a particular function")
+  @doc("Access key scoped to a particular function")
   functionKey?: string;
 
-  @doc("""
-(Optional) Access key scoped to a Azure Function app.
-This key grants access to
-all functions under the app.
-""")
+  @doc("Access key scoped to a Azure Function app. This key grants access to all functions under the app.")
   appKey?: string;
 
-  @doc("""
-(Optional) Client id, when AppKey is provided
-In context of Azure function,
-this is usually the name of the key
-""")
+  @doc("Client id, when AppKey is provided In context of Azure function, this is usually the name of the key")
   clientId?: string;
 }
 
@@ -1128,10 +873,7 @@ model LongestIdleMode extends DistributionMode {
   kind: "longest-idle";
 }
 
-@doc("""
-An action that manually reclassifies a job by providing the queue, priority and
-worker selectors.
-""")
+@doc("An action that manually reclassifies a job by providing the queue, priority and worker selectors.")
 model ManualReclassifyExceptionAction extends ExceptionAction {
   @doc("Updated QueueId.")
   queueId?: string;
@@ -1147,11 +889,7 @@ model ManualReclassifyExceptionAction extends ExceptionAction {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is standard naming convention for OAuth."
-@doc("""
-OAuth2.0 Credentials used to Contoso's Authorization server.
-Reference:
-https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/
-""")
+@doc("OAuth2.0 Credentials used to Contoso's Authorization server. Reference: https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/")
 model OAuth2WebhookClientCredential {
   @doc("ClientId for Contoso Authorization server.")
   clientId?: string;
@@ -1160,10 +898,7 @@ model OAuth2WebhookClientCredential {
   clientSecret?: string;
 }
 
-@doc("""
-Attaches a queue selector where the value is passed through from the job label
-with the same key
-""")
+@doc("Attaches a queue selector where the value is passed through from the job label with the same key")
 model PassThroughQueueSelectorAttachment extends QueueSelectorAttachment {
   @doc("The label key to query against")
   key: string;
@@ -1175,10 +910,7 @@ model PassThroughQueueSelectorAttachment extends QueueSelectorAttachment {
   kind: "pass-through";
 }
 
-@doc("""
-Attaches a worker selector where the value is passed through from the job label
-with the same key
-""")
+@doc("Attaches a worker selector where the value is passed through from the job label with the same key")
 model PassThroughWorkerSelectorAttachment extends WorkerSelectorAttachment {
   @doc("The label key to query against")
   key: string;
@@ -1202,45 +934,30 @@ model QueueLengthExceptionTrigger extends ExceptionTrigger {
   kind: "queue-length";
 }
 
-@doc("""
-Contains the weight percentage and queue selectors to be applied if selected
-for weighted distributions.
-""")
+@doc("Contains the weight percentage and queue selectors to be applied if selected for weighted distributions.")
 model QueueWeightedAllocation {
   @doc("The percentage of this weight, expressed as a fraction of 1.")
   weight: float64;
 
-  @doc("""
-A collection of queue selectors that will be applied if this allocation is
-selected.
-""")
+  @doc("A collection of queue selectors that will be applied if this allocation is selected.")
   queueSelectors: RouterQueueSelector[];
 }
 
 @doc("An action that modifies labels on a job and then reclassifies it")
 model ReclassifyExceptionAction extends ExceptionAction {
-  @doc("""
-(optional) The new classification policy that will determine queue, priority
-and worker selectors.
-""")
+  @doc("The new classification policy that will determine queue, priority and worker selectors.")
   classificationPolicyId?: string;
 
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
-  @doc("""
-(optional) Dictionary containing the labels to update (or add if not existing)
-in key-value pairs
-""")
+  @doc("Dictionary containing the labels to update (or add if not existing) in key-value pairs")
   labelsToUpsert?: Record<unknown>;
 
   @doc("The type discriminator describing a sub-type of ExceptionAction")
   kind: "reclassify";
 }
 
-@doc("""
-Jobs are distributed in order to workers, starting with the worker that is
-after the last worker to receive a job.
-""")
+@doc("Jobs are distributed in order to workers, starting with the worker that is after the last worker to receive a job.")
 model RoundRobinMode extends DistributionMode {
   @doc("The type discriminator describing a sub-type of Mode")
   kind: "round-robin";
@@ -1248,21 +965,7 @@ model RoundRobinMode extends DistributionMode {
 
 @doc("Attaches queue selectors to a job when the RouterRule is resolved")
 model RuleEngineQueueSelectorAttachment extends QueueSelectorAttachment {
-  @doc("""
-A rule of one of the following types:
-            
-StaticRule:  A rule
-providing static rules that always return the same result, regardless of
-input.
-DirectMapRule:  A rule that return the same labels as the input
-labels.
-ExpressionRule: A rule providing inline expression
-rules.
-FunctionRule: A rule providing a binding to an HTTP Triggered Azure
-Function.
-WebhookRule: A rule providing a binding to a webserver following
-OAuth2.0 authentication protocol.
-""")
+  @doc("A RouterRule that resolves a collection of queue selectors to attach")
   rule: RouterRule;
 
   @doc("The type discriminator describing the type of queue selector attachment")
@@ -1271,21 +974,7 @@ OAuth2.0 authentication protocol.
 
 @doc("Attaches worker selectors to a job when a RouterRule is resolved")
 model RuleEngineWorkerSelectorAttachment extends WorkerSelectorAttachment {
-  @doc("""
-A rule of one of the following types:
-            
-StaticRule:  A rule
-providing static rules that always return the same result, regardless of
-input.
-DirectMapRule:  A rule that return the same labels as the input
-labels.
-ExpressionRule: A rule providing inline expression
-rules.
-FunctionRule: A rule providing a binding to an HTTP Triggered Azure
-Function.
-WebhookRule: A rule providing a binding to a webserver following
-OAuth2.0 authentication protocol.
-""")
+  @doc("A RouterRule that resolves a collection of worker selectors to attach")
   rule: RouterRule;
 
   @doc("The type discriminator describing the type of worker selector attachment")
@@ -1294,20 +983,14 @@ OAuth2.0 authentication protocol.
 
 @doc("Describes a queue selector that will be attached to the job")
 model StaticQueueSelectorAttachment extends QueueSelectorAttachment {
-  @doc("""
-Describes a condition that must be met against a set of labels for queue
-selection
-""")
+  @doc("The queue selector to attach.")
   queueSelector: RouterQueueSelector;
 
   @doc("The type discriminator describing the type of queue selector attachment")
   kind: "static";
 }
 
-@doc("""
-A rule providing static rules that always return the same result, regardless of
-input.
-""")
+@doc("A rule providing static rules that always return the same result, regardless of input.")
 model StaticRouterRule extends RouterRule {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
@@ -1320,10 +1003,7 @@ model StaticRouterRule extends RouterRule {
 
 @doc("Describes a worker selector that will be attached to the job")
 model StaticWorkerSelectorAttachment extends WorkerSelectorAttachment {
-  @doc("""
-Describes a condition that must be met against a set of labels for worker
-selection
-""")
+  @doc("The worker selector to attach.")
   workerSelector: RouterWorkerSelector;
 
   @doc("The type discriminator describing the type of worker selector attachment")
@@ -1344,11 +1024,7 @@ model WebhookRouterRule extends RouterRule {
   @doc("Uri for Authorization Server.")
   authorizationServerUri?: url;
 
-  @doc("""
-OAuth2.0 Credentials used to Contoso's Authorization server.
-Reference:
-https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/
-""")
+  @doc("OAuth2.0 Credentials used to Contoso's Authorization server. Reference: https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/")
   clientCredential?: OAuth2WebhookClientCredential;
 
   @doc("Uri for Contoso's Web Server.")
@@ -1358,10 +1034,7 @@ https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/
   kind: "webhook-rule";
 }
 
-@doc("""
-Describes multiple sets of queue selectors, of which one will be selected and
-attached according to a weighting
-""")
+@doc("Describes multiple sets of queue selectors, of which one will be selected and attached according to a weighting")
 model WeightedAllocationQueueSelectorAttachment
   extends QueueSelectorAttachment {
   @doc("A collection of percentage based weighted allocations.")
@@ -1371,10 +1044,7 @@ model WeightedAllocationQueueSelectorAttachment
   kind: "weighted-allocation-queue-selector";
 }
 
-@doc("""
-Describes multiple sets of worker selectors, of which one will be selected and
-attached according to a weighting
-""")
+@doc("Describes multiple sets of worker selectors, of which one will be selected and attached according to a weighting")
 model WeightedAllocationWorkerSelectorAttachment
   extends WorkerSelectorAttachment {
   @doc("A collection of percentage based weighted allocations.")
@@ -1384,18 +1054,12 @@ model WeightedAllocationWorkerSelectorAttachment
   kind: "weighted-allocation-worker-selector";
 }
 
-@doc("""
-Contains the weight percentage and worker selectors to be applied if selected
-for weighted distributions.
-""")
+@doc("Contains the weight percentage and worker selectors to be applied if selected for weighted distributions.")
 model WorkerWeightedAllocation {
   @doc("The percentage of this weight, expressed as a fraction of 1.")
   weight: float64;
 
-  @doc("""
-A collection of worker selectors that will be applied if this allocation is
-selected.
-""")
+  @doc("A collection of worker selectors that will be applied if this allocation is selected.")
   workerSelectors: RouterWorkerSelector[];
 }
 
@@ -1438,8 +1102,7 @@ alias CommonListParams = {
   maxpagesize?: int32;
 };
 
-@doc("List jobs query parameters")
-model ListJobQueryParams {
+alias ListJobQueryParams = ListQueryParametersTrait<{
   ...CommonListParams;
 
   @doc("If specified, filter jobs by status.")
@@ -1458,43 +1121,32 @@ model ListJobQueryParams {
   @query
   classificationPolicyId?: string;
 
-  @doc("""
-If specified, filter on jobs that was scheduled before or at given timestamp.
-Range: (-Inf, scheduledBefore].
-""")
+  @doc("If specified, filter on jobs that was scheduled before or at given timestamp. Range: (-Inf, scheduledBefore].")
   @query
   scheduledBefore?: utcDateTime;
 
-  @doc("""
-If specified, filter on jobs that was scheduled at or after given value. Range:
-[scheduledAfter, +Inf).
-""")
+  @doc("If specified, filter on jobs that was scheduled at or after given value. Range: [scheduledAfter, +Inf).")
   @query
   scheduledAfter?: utcDateTime;
-}
+}>;
 
-@doc("List classification policies query parameters")
-model ListClassificationPoliciesQueryParams {
+alias ListClassificationPoliciesQueryParams = ListQueryParametersTrait<{
   ...CommonListParams;
-}
+}>;
 
-@doc("List distribution policies query parameters")
-model ListDistributionPoliciesQueryParams {
+alias ListDistributionPoliciesQueryParams = ListQueryParametersTrait<{
   ...CommonListParams;
-}
+}>;
 
-@doc("List exception policies query parameters")
-model ListExceptionPoliciesQueryParams {
+alias ListExceptionPoliciesQueryParams = ListQueryParametersTrait<{
   ...CommonListParams;
-}
+}>;
 
-@doc("List queues query parameters")
-model ListQueuesQueryParams {
+alias ListQueuesQueryParams = ListQueryParametersTrait<{
   ...CommonListParams;
-}
+}>;
 
-@doc("List workers query parameters")
-model ListWorkerQueryParams {
+alias ListWorkerQueryParams = ListQueryParametersTrait<{
   ...CommonListParams;
 
   @doc("If specified, select workers by worker state.")
@@ -1509,35 +1161,11 @@ model ListWorkerQueryParams {
   @query
   queueId?: string;
 
-  @doc("""
-If set to true, select only workers who have capacity for the channel specified
-by `channelId` or for any channel if `channelId` not specified. If set to
-false, then will return all workers including workers without any capacity for
-jobs. Defaults to false.
-""")
+  @doc("If set to true, select only workers who have capacity for the channel specified by `channelId` or for any channel if `channelId` not specified. If set to false, then will return all workers including workers without any capacity for jobs. Defaults to false.")
   @query
   hasCapacity?: boolean;
-}
+}>;
 
-@doc("Base class for all pageable entities")
-model RouterPageableEntity {
-  @doc("Concurrency Token.")
-  @visibility("read")
-  etag: eTag;
-}
-
-@pagedResult
-@friendlyName("Paged{name}", TResource)
-@doc("Paged collection of {name} items", TResource)
-model RouterPagedCollection<TResource extends TypeSpec.Reflection.Model & RouterPageableEntity> {
-  @doc("The {name} items on this page", TResource)
-  @items
-  value: TResource[];
-
-  @doc("The link to the next page of items")
-  @nextLink
-  nextLink?: string;
-}
 
 @doc("JobRouter Versions")
 enum Versions {

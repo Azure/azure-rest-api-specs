@@ -741,22 +741,141 @@
             "format": "int32"
           },
           {
-            "$ref": "#/parameters/ListJobQueryParams.status"
+            "name": "status",
+            "in": "query",
+            "description": "If specified, filter jobs by status.",
+            "required": false,
+            "type": "string",
+            "default": "all",
+            "enum": [
+              "all",
+              "pendingClassification",
+              "queued",
+              "assigned",
+              "completed",
+              "closed",
+              "cancelled",
+              "classificationFailed",
+              "created",
+              "pendingSchedule",
+              "scheduled",
+              "scheduleFailed",
+              "waitingForActivation",
+              "active"
+            ],
+            "x-ms-enum": {
+              "name": "RouterJobStatusSelector",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "all",
+                  "value": "all",
+                  "description": "Default"
+                },
+                {
+                  "name": "pendingClassification",
+                  "value": "pendingClassification",
+                  "description": "Job is waiting to be classified."
+                },
+                {
+                  "name": "queued",
+                  "value": "queued",
+                  "description": "Job has been queued."
+                },
+                {
+                  "name": "assigned",
+                  "value": "assigned",
+                  "description": "Job has been assigned to a worker."
+                },
+                {
+                  "name": "completed",
+                  "value": "completed",
+                  "description": "Job has been completed by a worker."
+                },
+                {
+                  "name": "closed",
+                  "value": "closed",
+                  "description": "Job has been closed by a worker."
+                },
+                {
+                  "name": "cancelled",
+                  "value": "cancelled",
+                  "description": "Job has been cancelled."
+                },
+                {
+                  "name": "classificationFailed",
+                  "value": "classificationFailed",
+                  "description": "Classification process failed for the job."
+                },
+                {
+                  "name": "created",
+                  "value": "created",
+                  "description": "Job has been created."
+                },
+                {
+                  "name": "pendingSchedule",
+                  "value": "pendingSchedule",
+                  "description": "Job has been created but not been scheduled yet."
+                },
+                {
+                  "name": "scheduled",
+                  "value": "scheduled",
+                  "description": "Job has been scheduled successfully."
+                },
+                {
+                  "name": "scheduleFailed",
+                  "value": "scheduleFailed",
+                  "description": "Job scheduling failed."
+                },
+                {
+                  "name": "waitingForActivation",
+                  "value": "waitingForActivation",
+                  "description": "Job is in a suspended state and waiting for an update."
+                },
+                {
+                  "name": "active",
+                  "value": "active",
+                  "description": "Job is in a state of PendingClassification or Queued or Assigned or ClassificationFailed or Completed or PendingSchedule or Scheduled or ScheduleFailed or WaitingForActivation."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/ListJobQueryParams.queueId"
+            "name": "queueId",
+            "in": "query",
+            "description": "If specified, filter jobs by queue.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ListJobQueryParams.channelId"
+            "name": "channelId",
+            "in": "query",
+            "description": "If specified, filter jobs by channel.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ListJobQueryParams.classificationPolicyId"
+            "name": "classificationPolicyId",
+            "in": "query",
+            "description": "If specified, filter jobs by classificationPolicy.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ListJobQueryParams.scheduledBefore"
+            "name": "scheduledBefore",
+            "in": "query",
+            "description": "If specified, filter on jobs that was scheduled before or at given timestamp. Range: (-Inf, scheduledBefore].",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
           },
           {
-            "$ref": "#/parameters/ListJobQueryParams.scheduledAfter"
+            "name": "scheduledAfter",
+            "in": "query",
+            "description": "If specified, filter on jobs that was scheduled at or after given value. Range: [scheduledAfter, +Inf).",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "responses": {
@@ -1031,8 +1150,8 @@
     "/routing/jobs/{jobId}:cancel": {
       "post": {
         "operationId": "JobRouterOperations_CancelJobAction",
-        "summary": "Submits request to cancel an existing job by Id while supplying free-form\ncancellation reason.",
-        "description": "Submits request to cancel an existing job by Id while supplying free-form\ncancellation reason.",
+        "summary": "Submits request to cancel an existing job by Id while supplying free-form cancellation reason.",
+        "description": "Submits request to cancel an existing job by Id while supplying free-form cancellation reason.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1596,16 +1715,65 @@
             "format": "int32"
           },
           {
-            "$ref": "#/parameters/ListWorkerQueryParams.state"
+            "name": "state",
+            "in": "query",
+            "description": "If specified, select workers by worker state.",
+            "required": false,
+            "type": "string",
+            "default": "all",
+            "enum": [
+              "active",
+              "draining",
+              "inactive",
+              "all"
+            ],
+            "x-ms-enum": {
+              "name": "RouterWorkerStateSelector",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "active",
+                  "value": "active",
+                  "description": "Worker is active and available to take offers."
+                },
+                {
+                  "name": "draining",
+                  "value": "draining",
+                  "description": "Worker is not active, if there are existing offers they are being revoked. No new offers are sent."
+                },
+                {
+                  "name": "inactive",
+                  "value": "inactive",
+                  "description": "Worker is not active. No new offers are sent."
+                },
+                {
+                  "name": "all",
+                  "value": "all",
+                  "description": "Worker is active or draining or inactive."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/ListWorkerQueryParams.channelId"
+            "name": "channelId",
+            "in": "query",
+            "description": "If specified, select workers who have a channel configuration with this channel.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ListWorkerQueryParams.queueId"
+            "name": "queueId",
+            "in": "query",
+            "description": "If specified, select workers who are assigned to this queue.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ListWorkerQueryParams.hasCapacity"
+            "name": "hasCapacity",
+            "in": "query",
+            "description": "If set to true, select only workers who have capacity for the channel specified by `channelId` or for any channel if `channelId` not specified. If set to false, then will return all workers including workers without any capacity for jobs. Defaults to false.",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -1835,8 +2003,8 @@
     "/routing/workers/{workerId}/offers/{offerId}:accept": {
       "post": {
         "operationId": "JobRouterOperations_AcceptJobAction",
-        "summary": "Accepts an offer to work on a job and returns a 409/Conflict if another agent\naccepted the job already.",
-        "description": "Accepts an offer to work on a job and returns a 409/Conflict if another agent\naccepted the job already.",
+        "summary": "Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.",
+        "description": "Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1948,7 +2116,7 @@
   "definitions": {
     "AcceptJobOfferResult": {
       "type": "object",
-      "description": "Response containing Id's for the worker, job, and assignment from an accepted\noffer",
+      "description": "Response containing Id's for the worker, job, and assignment from an accepted offer",
       "properties": {
         "assignmentId": {
           "type": "string",
@@ -2041,11 +2209,11 @@
       "properties": {
         "scoringRule": {
           "$ref": "#/definitions/RouterRule",
-          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
+          "description": "Define a scoring rule to use, when calculating a score to determine the best worker. If not set, will use a default scoring formula that uses the number of job labels that the worker labels match, as well as the number of label selectors the worker labels match and/or exceed using a logistic function (https://en.wikipedia.org/wiki/Logistic_function)."
         },
         "scoringRuleOptions": {
           "$ref": "#/definitions/ScoringRuleOptions",
-          "description": "Encapsulates all options that can be passed as parameters for scoring rule with\nBestWorkerMode"
+          "description": "Options to configure 'scoringRule'. If not set, default values are used."
         }
       },
       "allOf": [
@@ -2061,11 +2229,11 @@
       "properties": {
         "scoringRule": {
           "$ref": "#/definitions/RouterRuleCreateOrUpdate",
-          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
+          "description": "Define a scoring rule to use, when calculating a score to determine the best worker. If not set, will use a default scoring formula that uses the number of job labels that the worker labels match, as well as the number of label selectors the worker labels match and/or exceed using a logistic function (https://en.wikipedia.org/wiki/Logistic_function)."
         },
         "scoringRuleOptions": {
           "$ref": "#/definitions/ScoringRuleOptions",
-          "description": "Encapsulates all options that can be passed as parameters for scoring rule with\nBestWorkerMode"
+          "description": "Options to configure 'scoringRule'. If not set, default values are used."
         }
       },
       "allOf": [
@@ -2081,11 +2249,11 @@
       "properties": {
         "note": {
           "type": "string",
-          "description": "(Optional) A note that will be appended to the jobs' Notes collection with the\ncurrent timestamp."
+          "description": "A note that will be appended to the jobs' Notes collection with the current timestamp."
         },
         "dispositionCode": {
           "type": "string",
-          "description": "(Optional) Indicates the outcome of the job, populate this field with your own\ncustom values."
+          "description": "Indicates the outcome of the job, populate this field with your own custom values."
         }
       },
       "allOf": [
@@ -2101,11 +2269,11 @@
       "properties": {
         "note": {
           "type": "string",
-          "description": "(Optional) A note that will be appended to the jobs' Notes collection with the\ncurrent timestamp."
+          "description": "A note that will be appended to the jobs' Notes collection with the current timestamp."
         },
         "dispositionCode": {
           "type": "string",
-          "description": "Indicates the outcome of the job, populate this field with your own custom\nvalues.\nIf not provided, default value of \"Cancelled\" is set."
+          "description": "Indicates the outcome of the job, populate this field with your own custom values. If not provided, default value of \"Cancelled\" is set."
         }
       }
     },
@@ -2115,7 +2283,7 @@
       "properties": {
         "etag": {
           "$ref": "#/definitions/Azure.Core.eTag",
-          "description": "Concurrency Token.",
+          "description": "The entity tag for this resource.",
           "readOnly": true
         },
         "id": {
@@ -2141,7 +2309,7 @@
         },
         "prioritizationRule": {
           "$ref": "#/definitions/RouterRule",
-          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
+          "description": "The rule to determine a priority score for a given job."
         },
         "workerSelectorAttachments": {
           "type": "array",
@@ -2179,7 +2347,7 @@
         },
         "prioritizationRule": {
           "$ref": "#/definitions/RouterRuleCreateOrUpdate",
-          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
+          "description": "The rule to determine a priority score for a given job."
         },
         "workerSelectorAttachments": {
           "type": "array",
@@ -2201,16 +2369,16 @@
         },
         "dispositionCode": {
           "type": "string",
-          "description": "Indicates the outcome of the job, populate this field with your own custom\nvalues."
+          "description": "Indicates the outcome of the job, populate this field with your own custom values."
         },
         "closeAt": {
           "type": "string",
           "format": "date-time",
-          "description": "If not provided, worker capacity is released immediately along with a\nJobClosedEvent notification.\nIf provided, worker capacity is released along\nwith a JobClosedEvent notification at a future time in UTC."
+          "description": "If not provided, worker capacity is released immediately along with a JobClosedEvent notification. If provided, worker capacity is released along with a JobClosedEvent notification at a future time in UTC."
         },
         "note": {
           "type": "string",
-          "description": "(Optional) A note that will be appended to the jobs' Notes collection with the\ncurrent timestamp."
+          "description": "A note that will be appended to the jobs' Notes collection with the current timestamp."
         }
       },
       "required": [
@@ -2227,7 +2395,7 @@
         },
         "note": {
           "type": "string",
-          "description": "(Optional) A note that will be appended to the jobs' Notes collection with the\ncurrent timestamp."
+          "description": "A note that will be appended to the jobs' Notes collection with the current timestamp."
         }
       },
       "required": [
@@ -2236,11 +2404,11 @@
     },
     "ConditionalQueueSelectorAttachment": {
       "type": "object",
-      "description": "Describes a set of queue selectors that will be attached if the given condition\nresolves to true",
+      "description": "Describes a set of queue selectors that will be attached if the given condition resolves to true",
       "properties": {
         "condition": {
           "$ref": "#/definitions/RouterRule",
-          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
+          "description": "The condition that must be true for the queue selectors to be attached"
         },
         "queueSelectors": {
           "type": "array",
@@ -2264,11 +2432,11 @@
     },
     "ConditionalWorkerSelectorAttachment": {
       "type": "object",
-      "description": "Describes a set of worker selectors that will be attached if the given\ncondition resolves to true",
+      "description": "Describes a set of worker selectors that will be attached if the given condition resolves to true",
       "properties": {
         "condition": {
           "$ref": "#/definitions/RouterRule",
-          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
+          "description": "The condition that must be true for the worker selectors to be attached"
         },
         "workerSelectors": {
           "type": "array",
@@ -2297,7 +2465,7 @@
         "retryOfferAt": {
           "type": "string",
           "format": "date-time",
-          "description": "If the RetryOfferAt is not provided, then this job will not be offered again to\nthe worker who declined this job unless\nthe worker is de-registered and\nre-registered.  If a RetryOfferAt time is provided, then the job will be\nre-matched to\neligible workers at the retry time in UTC.  The worker that\ndeclined the job will also be eligible for the job at that time."
+          "description": "If the RetryOfferAt is not provided, then this job will not be offered again to the worker who declined this job unless the worker is de-registered and re-registered.  If a RetryOfferAt time is provided, then the job will be re-matched to eligible workers at the retry time in UTC.  The worker that declined the job will also be eligible for the job at that time."
         }
       }
     },
@@ -2337,7 +2505,7 @@
         },
         "bypassSelectors": {
           "type": "boolean",
-          "description": "(Optional)\nIf set to true, then router will match workers to jobs even if they\ndon't match label selectors.\nWarning: You may get workers that are not\nqualified for the job they are matched with if you set this\nvariable to true.\nThis flag is intended more for temporary usage.\nBy default, set to false."
+          "description": "If set to true, then router will match workers to jobs even if they don't match label selectors. Warning: You may get workers that are not qualified for the job they are matched with if you set this variable to true. This flag is intended more for temporary usage. By default, set to false."
         },
         "kind": {
           "type": "string",
@@ -2365,7 +2533,7 @@
         },
         "bypassSelectors": {
           "type": "boolean",
-          "description": "(Optional)\nIf set to true, then router will match workers to jobs even if they\ndon't match label selectors.\nWarning: You may get workers that are not\nqualified for the job they are matched with if you set this\nvariable to true.\nThis flag is intended more for temporary usage.\nBy default, set to false."
+          "description": "If set to true, then router will match workers to jobs even if they don't match label selectors. Warning: You may get workers that are not qualified for the job they are matched with if you set this variable to true. This flag is intended more for temporary usage. By default, set to false."
         },
         "kind": {
           "type": "string",
@@ -2380,7 +2548,7 @@
       "properties": {
         "etag": {
           "$ref": "#/definitions/Azure.Core.eTag",
-          "description": "Concurrency Token.",
+          "description": "The entity tag for this resource.",
           "readOnly": true
         },
         "id": {
@@ -2395,7 +2563,7 @@
         "offerExpiresAfterSeconds": {
           "type": "number",
           "format": "double",
-          "description": "The number of seconds after which any offers created under this policy will be\nexpired."
+          "description": "The number of seconds after which any offers created under this policy will be expired."
         },
         "mode": {
           "$ref": "#/definitions/DistributionMode",
@@ -2418,7 +2586,7 @@
         "offerExpiresAfterSeconds": {
           "type": "number",
           "format": "double",
-          "description": "The number of seconds after which any offers created under this policy will be\nexpired."
+          "description": "The number of seconds after which any offers created under this policy will be expired."
         },
         "mode": {
           "$ref": "#/definitions/DistributionModeCreateOrUpdate",
@@ -2451,7 +2619,7 @@
       "properties": {
         "etag": {
           "$ref": "#/definitions/Azure.Core.eTag",
-          "description": "Concurrency Token.",
+          "description": "The entity tag for this resource.",
           "readOnly": true
         },
         "id": {
@@ -2461,11 +2629,11 @@
         },
         "name": {
           "type": "string",
-          "description": "(Optional) The name of the exception policy."
+          "description": "The name of the exception policy."
         },
         "exceptionRules": {
           "type": "array",
-          "description": "(Optional) A collection of exception rules on the exception policy.",
+          "description": "A collection of exception rules on the exception policy.",
           "items": {
             "$ref": "#/definitions/ExceptionRule"
           }
@@ -2482,11 +2650,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "(Optional) The name of the exception policy."
+          "description": "The name of the exception policy."
         },
         "exceptionRules": {
           "type": "array",
-          "description": "(Optional) A collection of exception rules on the exception policy.",
+          "description": "A collection of exception rules on the exception policy.",
           "items": {
             "$ref": "#/definitions/ExceptionRule"
           }
@@ -2543,7 +2711,7 @@
         },
         "expression": {
           "type": "string",
-          "description": "The string containing the expression to evaluate. Should contain return\nstatement with calculated values."
+          "description": "The string containing the expression to evaluate. Should contain return statement with calculated values."
         }
       },
       "required": [
@@ -2566,7 +2734,7 @@
         },
         "expression": {
           "type": "string",
-          "description": "The string containing the expression to evaluate. Should contain return\nstatement with calculated values."
+          "description": "The string containing the expression to evaluate. Should contain return statement with calculated values."
         }
       },
       "allOf": [
@@ -2645,21 +2813,21 @@
       "properties": {
         "functionKey": {
           "type": "string",
-          "description": "(Optional) Access key scoped to a particular function"
+          "description": "Access key scoped to a particular function"
         },
         "appKey": {
           "type": "string",
-          "description": "(Optional) Access key scoped to a Azure Function app.\nThis key grants access to\nall functions under the app."
+          "description": "Access key scoped to a Azure Function app. This key grants access to all functions under the app."
         },
         "clientId": {
           "type": "string",
-          "description": "(Optional) Client id, when AppKey is provided\nIn context of Azure function,\nthis is usually the name of the key"
+          "description": "Client id, when AppKey is provided In context of Azure function, this is usually the name of the key"
         }
       }
     },
     "JobMatchingMode": {
       "type": "object",
-      "description": "The matching mode to be applied to this job.\n            \nSupported types:\n    \n       \nQueueAndMatchMode: Used when matching worker to a job is required to be\ndone right after job is queued.\nScheduleAndSuspendMode: Used for scheduling\njobs to be queued at a future time. At specified time, matching of a worker to\nthe job will not start automatically.\nSuspendMode: Used when matching workers\nto a job needs to be suspended.",
+      "description": "A matching mode of one of the following types:\nQueueAndMatchMode: Used when matching worker to a job is required to be done right after job is queued.\nScheduleAndSuspendMode: Used for scheduling jobs to be queued at a future time. At specified time, matching of a worker to the job will not start automatically.\nSuspendMode: Used when matching workers to a job needs to be suspended.",
       "properties": {
         "kind": {
           "type": "string",
@@ -2673,7 +2841,7 @@
     },
     "JobMatchingModeCreateOrUpdate": {
       "type": "object",
-      "description": "The matching mode to be applied to this job.\n            \nSupported types:\n    \n       \nQueueAndMatchMode: Used when matching worker to a job is required to be\ndone right after job is queued.\nScheduleAndSuspendMode: Used for scheduling\njobs to be queued at a future time. At specified time, matching of a worker to\nthe job will not start automatically.\nSuspendMode: Used when matching workers\nto a job needs to be suspended.",
+      "description": "A matching mode of one of the following types:\nQueueAndMatchMode: Used when matching worker to a job is required to be done right after job is queued.\nScheduleAndSuspendMode: Used for scheduling jobs to be queued at a future time. At specified time, matching of a worker to the job will not start automatically.\nSuspendMode: Used when matching workers to a job needs to be suspended.",
       "properties": {
         "kind": {
           "type": "string",
@@ -2752,7 +2920,7 @@
     },
     "ManualReclassifyExceptionAction": {
       "type": "object",
-      "description": "An action that manually reclassifies a job by providing the queue, priority and\nworker selectors.",
+      "description": "An action that manually reclassifies a job by providing the queue, priority and worker selectors.",
       "properties": {
         "queueId": {
           "type": "string",
@@ -2781,7 +2949,7 @@
     },
     "OAuth2WebhookClientCredential": {
       "type": "object",
-      "description": "OAuth2.0 Credentials used to Contoso's Authorization server.\nReference:\nhttps://www.oauth.com/oauth2-servers/access-tokens/client-credentials/",
+      "description": "OAuth2.0 Credentials used to Contoso's Authorization server. Reference: https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/",
       "properties": {
         "clientId": {
           "type": "string",
@@ -2795,7 +2963,7 @@
     },
     "PagedClassificationPolicy": {
       "type": "object",
-      "description": "A paged collection of classification policies.",
+      "description": "Paged collection of ClassificationPolicy items",
       "properties": {
         "value": {
           "type": "array",
@@ -2806,6 +2974,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items"
         }
       },
@@ -2815,7 +2984,7 @@
     },
     "PagedDistributionPolicy": {
       "type": "object",
-      "description": "A paged collection of distribution policies.",
+      "description": "Paged collection of DistributionPolicy items",
       "properties": {
         "value": {
           "type": "array",
@@ -2826,6 +2995,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items"
         }
       },
@@ -2835,7 +3005,7 @@
     },
     "PagedExceptionPolicy": {
       "type": "object",
-      "description": "A paged collection of exception policies.",
+      "description": "Paged collection of ExceptionPolicy items",
       "properties": {
         "value": {
           "type": "array",
@@ -2846,6 +3016,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items"
         }
       },
@@ -2855,7 +3026,7 @@
     },
     "PagedRouterJob": {
       "type": "object",
-      "description": "A paged collection of jobs.",
+      "description": "Paged collection of RouterJob items",
       "properties": {
         "value": {
           "type": "array",
@@ -2866,6 +3037,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items"
         }
       },
@@ -2875,7 +3047,7 @@
     },
     "PagedRouterQueue": {
       "type": "object",
-      "description": "A paged collection of queues.",
+      "description": "Paged collection of RouterQueue items",
       "properties": {
         "value": {
           "type": "array",
@@ -2886,6 +3058,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items"
         }
       },
@@ -2895,7 +3068,7 @@
     },
     "PagedRouterWorker": {
       "type": "object",
-      "description": "A paged collection of workers.",
+      "description": "Paged collection of RouterWorker items",
       "properties": {
         "value": {
           "type": "array",
@@ -2906,6 +3079,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items"
         }
       },
@@ -2915,7 +3089,7 @@
     },
     "PassThroughQueueSelectorAttachment": {
       "type": "object",
-      "description": "Attaches a queue selector where the value is passed through from the job label\nwith the same key",
+      "description": "Attaches a queue selector where the value is passed through from the job label with the same key",
       "properties": {
         "key": {
           "type": "string",
@@ -2939,7 +3113,7 @@
     },
     "PassThroughWorkerSelectorAttachment": {
       "type": "object",
-      "description": "Attaches a worker selector where the value is passed through from the job label\nwith the same key",
+      "description": "Attaches a worker selector where the value is passed through from the job label with the same key",
       "properties": {
         "key": {
           "type": "string",
@@ -3008,7 +3182,7 @@
     },
     "QueueSelectorAttachment": {
       "type": "object",
-      "description": "An attachment of queue selectors to resolve a queue to a job from a\nclassification policy",
+      "description": "An attachment of queue selectors to resolve a queue to a job from a classification policy",
       "properties": {
         "kind": {
           "type": "string",
@@ -3022,7 +3196,7 @@
     },
     "QueueWeightedAllocation": {
       "type": "object",
-      "description": "Contains the weight percentage and queue selectors to be applied if selected\nfor weighted distributions.",
+      "description": "Contains the weight percentage and queue selectors to be applied if selected for weighted distributions.",
       "properties": {
         "weight": {
           "type": "number",
@@ -3031,7 +3205,7 @@
         },
         "queueSelectors": {
           "type": "array",
-          "description": "A collection of queue selectors that will be applied if this allocation is\nselected.",
+          "description": "A collection of queue selectors that will be applied if this allocation is selected.",
           "items": {
             "$ref": "#/definitions/RouterQueueSelector"
           },
@@ -3049,11 +3223,11 @@
       "properties": {
         "classificationPolicyId": {
           "type": "string",
-          "description": "(optional) The new classification policy that will determine queue, priority\nand worker selectors."
+          "description": "The new classification policy that will determine queue, priority and worker selectors."
         },
         "labelsToUpsert": {
           "type": "object",
-          "description": "(optional) Dictionary containing the labels to update (or add if not existing)\nin key-value pairs",
+          "description": "Dictionary containing the labels to update (or add if not existing) in key-value pairs",
           "additionalProperties": {}
         }
       },
@@ -3073,7 +3247,7 @@
     },
     "RoundRobinMode": {
       "type": "object",
-      "description": "Jobs are distributed in order to workers, starting with the worker that is\nafter the last worker to receive a job.",
+      "description": "Jobs are distributed in order to workers, starting with the worker that is after the last worker to receive a job.",
       "allOf": [
         {
           "$ref": "#/definitions/DistributionMode"
@@ -3083,7 +3257,7 @@
     },
     "RoundRobinModeCreateOrUpdate": {
       "type": "object",
-      "description": "Jobs are distributed in order to workers, starting with the worker that is\nafter the last worker to receive a job.",
+      "description": "Jobs are distributed in order to workers, starting with the worker that is after the last worker to receive a job.",
       "allOf": [
         {
           "$ref": "#/definitions/DistributionModeCreateOrUpdate"
@@ -3102,7 +3276,7 @@
         "capacityCostPerJob": {
           "type": "integer",
           "format": "int32",
-          "description": "The amount of capacity that an instance of a job of this channel will consume\nof the total worker capacity."
+          "description": "The amount of capacity that an instance of a job of this channel will consume of the total worker capacity."
         },
         "maxNumberOfJobs": {
           "type": "integer",
@@ -3121,7 +3295,7 @@
       "properties": {
         "etag": {
           "$ref": "#/definitions/Azure.Core.eTag",
-          "description": "Concurrency Token.",
+          "description": "The entity tag for this resource.",
           "readOnly": true
         },
         "id": {
@@ -3167,7 +3341,7 @@
         },
         "requestedWorkerSelectors": {
           "type": "array",
-          "description": "A collection of manually specified label selectors, which a worker must satisfy\nin order to process this job.",
+          "description": "A collection of manually specified label selectors, which a worker must satisfy in order to process this job.",
           "items": {
             "$ref": "#/definitions/RouterWorkerSelector"
           },
@@ -3175,7 +3349,7 @@
         },
         "attachedWorkerSelectors": {
           "type": "array",
-          "description": "A collection of label selectors attached by a classification policy, which a\nworker must satisfy in order to process this job.",
+          "description": "A collection of label selectors attached by a classification policy, which a worker must satisfy in order to process this job.",
           "items": {
             "$ref": "#/definitions/RouterWorkerSelector"
           },
@@ -3184,12 +3358,12 @@
         },
         "labels": {
           "type": "object",
-          "description": "A set of key/value pairs that are identifying attributes used by the rules\nengines to make decisions.",
+          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "additionalProperties": {}
         },
         "assignments": {
           "type": "object",
-          "description": "A collection of the assignments of the job.\nKey is AssignmentId.",
+          "description": "A collection of the assignments of the job. Key is AssignmentId.",
           "additionalProperties": {
             "$ref": "#/definitions/RouterJobAssignment"
           },
@@ -3216,7 +3390,7 @@
         },
         "matchingMode": {
           "$ref": "#/definitions/JobMatchingMode",
-          "description": "The matching mode to be applied to this job.\n            \nSupported types:\n    \n       \nQueueAndMatchMode: Used when matching worker to a job is required to be\ndone right after job is queued.\nScheduleAndSuspendMode: Used for scheduling\njobs to be queued at a future time. At specified time, matching of a worker to\nthe job will not start automatically.\nSuspendMode: Used when matching workers\nto a job needs to be suspended."
+          "description": "If provided, will determine how job matching will be carried out. Default mode: QueueAndMatchMode."
         }
       },
       "required": [
@@ -3288,7 +3462,7 @@
         },
         "requestedWorkerSelectors": {
           "type": "array",
-          "description": "A collection of manually specified label selectors, which a worker must satisfy\nin order to process this job.",
+          "description": "A collection of manually specified label selectors, which a worker must satisfy in order to process this job.",
           "items": {
             "$ref": "#/definitions/RouterWorkerSelector"
           },
@@ -3296,7 +3470,7 @@
         },
         "labels": {
           "type": "object",
-          "description": "A set of key/value pairs that are identifying attributes used by the rules\nengines to make decisions.",
+          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "additionalProperties": {}
         },
         "tags": {
@@ -3314,7 +3488,7 @@
         },
         "matchingMode": {
           "$ref": "#/definitions/JobMatchingModeCreateOrUpdate",
-          "description": "The matching mode to be applied to this job.\n            \nSupported types:\n    \n       \nQueueAndMatchMode: Used when matching worker to a job is required to be\ndone right after job is queued.\nScheduleAndSuspendMode: Used for scheduling\njobs to be queued at a future time. At specified time, matching of a worker to\nthe job will not start automatically.\nSuspendMode: Used when matching workers\nto a job needs to be suspended."
+          "description": "If provided, will determine how job matching will be carried out. Default mode: QueueAndMatchMode."
         }
       }
     },
@@ -3496,7 +3670,7 @@
       "properties": {
         "etag": {
           "$ref": "#/definitions/Azure.Core.eTag",
-          "description": "Concurrency Token.",
+          "description": "The entity tag for this resource.",
           "readOnly": true
         },
         "id": {
@@ -3510,16 +3684,16 @@
         },
         "distributionPolicyId": {
           "type": "string",
-          "description": "The ID of the distribution policy that will determine how a job is distributed\nto workers."
+          "description": "The ID of the distribution policy that will determine how a job is distributed to workers."
         },
         "labels": {
           "type": "object",
-          "description": "A set of key/value pairs that are identifying attributes used by the rules\nengines to make decisions.",
+          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "additionalProperties": {}
         },
         "exceptionPolicyId": {
           "type": "string",
-          "description": "(Optional) The ID of the exception policy that determines various job\nescalation rules."
+          "description": "The ID of the exception policy that determines various job escalation rules."
         }
       },
       "required": [
@@ -3537,22 +3711,22 @@
         },
         "distributionPolicyId": {
           "type": "string",
-          "description": "The ID of the distribution policy that will determine how a job is distributed\nto workers."
+          "description": "The ID of the distribution policy that will determine how a job is distributed to workers."
         },
         "labels": {
           "type": "object",
-          "description": "A set of key/value pairs that are identifying attributes used by the rules\nengines to make decisions.",
+          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "additionalProperties": {}
         },
         "exceptionPolicyId": {
           "type": "string",
-          "description": "(Optional) The ID of the exception policy that determines various job\nescalation rules."
+          "description": "The ID of the exception policy that determines various job escalation rules."
         }
       }
     },
     "RouterQueueSelector": {
       "type": "object",
-      "description": "Describes a condition that must be met against a set of labels for queue\nselection",
+      "description": "Describes a condition that must be met against a set of labels for queue selection",
       "properties": {
         "key": {
           "type": "string",
@@ -3560,7 +3734,7 @@
         },
         "labelOperator": {
           "$ref": "#/definitions/LabelOperator",
-          "description": "Describes how the value of the label is compared to the value defined on the\nlabel selector"
+          "description": "Describes how the value of the label is compared to the value defined on the label selector"
         },
         "value": {
           "description": "The value to compare against the actual label value with the given operator"
@@ -3586,7 +3760,7 @@
         },
         "estimatedWaitTimeMinutes": {
           "type": "object",
-          "description": "The estimated wait time of this queue rounded up to the nearest minute, grouped\nby job priority",
+          "description": "The estimated wait time of this queue rounded up to the nearest minute, grouped by job priority",
           "additionalProperties": {
             "format": "double",
             "type": "number"
@@ -3605,7 +3779,7 @@
     },
     "RouterRule": {
       "type": "object",
-      "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol.",
+      "description": "A rule of one of the following types:\nStaticRule:  A rule providing static rules that always return the same result, regardless of input.\nDirectMapRule:  A rule that return the same labels as the input labels.\nExpressionRule: A rule providing inline expression rules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure Function.\nWebhookRule: A rule providing a binding to a webserver following OAuth2.0 authentication protocol.",
       "properties": {
         "kind": {
           "type": "string",
@@ -3619,7 +3793,7 @@
     },
     "RouterRuleCreateOrUpdate": {
       "type": "object",
-      "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol.",
+      "description": "A rule of one of the following types:\nStaticRule:  A rule providing static rules that always return the same result, regardless of input.\nDirectMapRule:  A rule that return the same labels as the input labels.\nExpressionRule: A rule providing inline expression rules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure Function.\nWebhookRule: A rule providing a binding to a webserver following OAuth2.0 authentication protocol.",
       "properties": {
         "kind": {
           "type": "string",
@@ -3634,7 +3808,7 @@
       "properties": {
         "etag": {
           "$ref": "#/definitions/Azure.Core.eTag",
-          "description": "Concurrency Token.",
+          "description": "The entity tag for this resource.",
           "readOnly": true
         },
         "id": {
@@ -3661,7 +3835,7 @@
         },
         "labels": {
           "type": "object",
-          "description": "A set of key/value pairs that are identifying attributes used by the rules\nengines to make decisions.",
+          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "additionalProperties": {}
         },
         "tags": {
@@ -3698,7 +3872,7 @@
         "loadRatio": {
           "type": "number",
           "format": "double",
-          "description": "A value indicating the workers capacity. A value of '1' means all capacity is\nconsumed. A value of '0' means no capacity is currently consumed.",
+          "description": "A value indicating the workers capacity. A value of '1' means all capacity is consumed. A value of '0' means no capacity is currently consumed.",
           "readOnly": true
         },
         "availableForOffers": {
@@ -3759,7 +3933,7 @@
         },
         "labels": {
           "type": "object",
-          "description": "A set of key/value pairs that are identifying attributes used by the rules\nengines to make decisions.",
+          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "additionalProperties": {}
         },
         "tags": {
@@ -3783,7 +3957,7 @@
     },
     "RouterWorkerSelector": {
       "type": "object",
-      "description": "Describes a condition that must be met against a set of labels for worker\nselection",
+      "description": "Describes a condition that must be met against a set of labels for worker selection",
       "properties": {
         "key": {
           "type": "string",
@@ -3791,7 +3965,7 @@
         },
         "labelOperator": {
           "$ref": "#/definitions/LabelOperator",
-          "description": "Describes how the value of the label is compared to the value defined on the\nlabel selector"
+          "description": "Describes how the value of the label is compared to the value defined on the label selector"
         },
         "value": {
           "description": "The value to compare against the actual label value with the given operator"
@@ -3882,7 +4056,7 @@
       "properties": {
         "rule": {
           "$ref": "#/definitions/RouterRule",
-          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
+          "description": "A RouterRule that resolves a collection of queue selectors to attach"
         }
       },
       "required": [
@@ -3901,7 +4075,7 @@
       "properties": {
         "rule": {
           "$ref": "#/definitions/RouterRule",
-          "description": "A rule of one of the following types:\n            \nStaticRule:  A rule\nproviding static rules that always return the same result, regardless of\ninput.\nDirectMapRule:  A rule that return the same labels as the input\nlabels.\nExpressionRule: A rule providing inline expression\nrules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure\nFunction.\nWebhookRule: A rule providing a binding to a webserver following\nOAuth2.0 authentication protocol."
+          "description": "A RouterRule that resolves a collection of worker selectors to attach"
         }
       },
       "required": [
@@ -3916,7 +4090,7 @@
     },
     "ScheduleAndSuspendMode": {
       "type": "object",
-      "description": "Describes a matching mode used for scheduling jobs to be queued at a future\ntime.\nAt the specified time, matching worker to a job will not start\nautomatically.",
+      "description": "Describes a matching mode used for scheduling jobs to be queued at a future time. At the specified time, matching worker to a job will not start automatically.",
       "properties": {
         "scheduleAt": {
           "type": "string",
@@ -3936,7 +4110,7 @@
     },
     "ScheduleAndSuspendModeCreateOrUpdate": {
       "type": "object",
-      "description": "Describes a matching mode used for scheduling jobs to be queued at a future\ntime.\nAt the specified time, matching worker to a job will not start\nautomatically.",
+      "description": "Describes a matching mode used for scheduling jobs to be queued at a future time. At the specified time, matching worker to a job will not start automatically.",
       "properties": {
         "scheduleAt": {
           "type": "string",
@@ -3953,27 +4127,27 @@
     },
     "ScoringRuleOptions": {
       "type": "object",
-      "description": "Encapsulates all options that can be passed as parameters for scoring rule with\nBestWorkerMode",
+      "description": "Encapsulates all options that can be passed as parameters for scoring rule with BestWorkerMode",
       "properties": {
         "batchSize": {
           "type": "integer",
           "format": "int32",
-          "description": "(Optional) Set batch size when AllowScoringBatchOfWorkers is set to true.\nDefaults to 20 if not configured."
+          "description": "Set batch size when 'isBatchScoringEnabled' is set to true. Defaults to 20 if not configured."
         },
         "scoringParameters": {
           "type": "array",
-          "description": "(Optional) List of extra parameters from the job that will be sent as part of\nthe payload to scoring rule.\nIf not set, the job's labels (sent in the payload\nas `job`) and the job's worker selectors (sent in the payload as\n`selectors`)\nare added to the payload of the scoring rule by default.\nNote:\nWorker labels are always sent with scoring payload.",
+          "description": "List of extra parameters from the job that will be sent as part of the payload to scoring rule. If not set, the job's labels (sent in the payload as `job`) and the job's worker selectors (sent in the payload as `selectors`) are added to the payload of the scoring rule by default. Note: Worker labels are always sent with scoring payload.",
           "items": {
             "$ref": "#/definitions/ScoringRuleParameterSelector"
           }
         },
         "isBatchScoringEnabled": {
           "type": "boolean",
-          "description": "(Optional)\nIf set to true, will score workers in batches, and the parameter\nname of the worker labels will be sent as `workers`.\nBy default, set to false\nand the parameter name for the worker labels will be sent as `worker`.\nNote: If\nenabled, use BatchSize to set batch size."
+          "description": "If set to true, will score workers in batches, and the parameter name of the worker labels will be sent as `workers`. By default, set to false and the parameter name for the worker labels will be sent as `worker`. Note: If enabled, use 'batchSize' to set batch size."
         },
         "descendingOrder": {
           "type": "boolean",
-          "description": "(Optional)\nIf false, will sort scores by ascending order. By default, set to\ntrue."
+          "description": "If false, will sort scores by ascending order. By default, set to true."
         }
       }
     },
@@ -4007,7 +4181,7 @@
       "properties": {
         "queueSelector": {
           "$ref": "#/definitions/RouterQueueSelector",
-          "description": "Describes a condition that must be met against a set of labels for queue\nselection"
+          "description": "The queue selector to attach."
         }
       },
       "required": [
@@ -4022,7 +4196,7 @@
     },
     "StaticRouterRule": {
       "type": "object",
-      "description": "A rule providing static rules that always return the same result, regardless of\ninput.",
+      "description": "A rule providing static rules that always return the same result, regardless of input.",
       "properties": {
         "value": {
           "description": "The static value this rule always returns."
@@ -4037,7 +4211,7 @@
     },
     "StaticRouterRuleCreateOrUpdate": {
       "type": "object",
-      "description": "A rule providing static rules that always return the same result, regardless of\ninput.",
+      "description": "A rule providing static rules that always return the same result, regardless of input.",
       "properties": {
         "value": {
           "description": "The static value this rule always returns."
@@ -4056,7 +4230,7 @@
       "properties": {
         "workerSelector": {
           "$ref": "#/definitions/RouterWorkerSelector",
-          "description": "Describes a condition that must be met against a set of labels for worker\nselection"
+          "description": "The worker selector to attach."
         }
       },
       "required": [
@@ -4095,7 +4269,7 @@
       "properties": {
         "suspendMatching": {
           "type": "boolean",
-          "description": "If SuspendMatching is true, then the job is not queued for re-matching with a\nworker."
+          "description": "If SuspendMatching is true, then the job is not queued for re-matching with a worker."
         }
       }
     },
@@ -4149,7 +4323,7 @@
         },
         "clientCredential": {
           "$ref": "#/definitions/OAuth2WebhookClientCredential",
-          "description": "OAuth2.0 Credentials used to Contoso's Authorization server.\nReference:\nhttps://www.oauth.com/oauth2-servers/access-tokens/client-credentials/"
+          "description": "OAuth2.0 Credentials used to Contoso's Authorization server. Reference: https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/"
         },
         "webhookUri": {
           "type": "string",
@@ -4175,7 +4349,7 @@
         },
         "clientCredential": {
           "$ref": "#/definitions/OAuth2WebhookClientCredential",
-          "description": "OAuth2.0 Credentials used to Contoso's Authorization server.\nReference:\nhttps://www.oauth.com/oauth2-servers/access-tokens/client-credentials/"
+          "description": "OAuth2.0 Credentials used to Contoso's Authorization server. Reference: https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/"
         },
         "webhookUri": {
           "type": "string",
@@ -4192,7 +4366,7 @@
     },
     "WeightedAllocationQueueSelectorAttachment": {
       "type": "object",
-      "description": "Describes multiple sets of queue selectors, of which one will be selected and\nattached according to a weighting",
+      "description": "Describes multiple sets of queue selectors, of which one will be selected and attached according to a weighting",
       "properties": {
         "allocations": {
           "type": "array",
@@ -4215,7 +4389,7 @@
     },
     "WeightedAllocationWorkerSelectorAttachment": {
       "type": "object",
-      "description": "Describes multiple sets of worker selectors, of which one will be selected and\nattached according to a weighting",
+      "description": "Describes multiple sets of worker selectors, of which one will be selected and attached according to a weighting",
       "properties": {
         "allocations": {
           "type": "array",
@@ -4252,7 +4426,7 @@
     },
     "WorkerWeightedAllocation": {
       "type": "object",
-      "description": "Contains the weight percentage and worker selectors to be applied if selected\nfor weighted distributions.",
+      "description": "Contains the weight percentage and worker selectors to be applied if selected for weighted distributions.",
       "properties": {
         "weight": {
           "type": "number",
@@ -4261,7 +4435,7 @@
         },
         "workerSelectors": {
           "type": "array",
-          "description": "A collection of worker selectors that will be applied if this allocation is\nselected.",
+          "description": "A collection of worker selectors that will be applied if this allocation is selected.",
           "items": {
             "$ref": "#/definitions/RouterWorkerSelector"
           },
@@ -4284,214 +4458,6 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
-    },
-    "ListJobQueryParams.channelId": {
-      "name": "channelId",
-      "in": "query",
-      "description": "If specified, filter jobs by channel.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ListJobQueryParams.classificationPolicyId": {
-      "name": "classificationPolicyId",
-      "in": "query",
-      "description": "If specified, filter jobs by classificationPolicy.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ListJobQueryParams.queueId": {
-      "name": "queueId",
-      "in": "query",
-      "description": "If specified, filter jobs by queue.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ListJobQueryParams.scheduledAfter": {
-      "name": "scheduledAfter",
-      "in": "query",
-      "description": "If specified, filter on jobs that was scheduled at or after given value. Range:\n[scheduledAfter, +Inf).",
-      "required": false,
-      "type": "string",
-      "format": "date-time",
-      "x-ms-parameter-location": "method"
-    },
-    "ListJobQueryParams.scheduledBefore": {
-      "name": "scheduledBefore",
-      "in": "query",
-      "description": "If specified, filter on jobs that was scheduled before or at given timestamp.\nRange: (-Inf, scheduledBefore].",
-      "required": false,
-      "type": "string",
-      "format": "date-time",
-      "x-ms-parameter-location": "method"
-    },
-    "ListJobQueryParams.status": {
-      "name": "status",
-      "in": "query",
-      "description": "If specified, filter jobs by status.",
-      "required": false,
-      "type": "string",
-      "default": "all",
-      "enum": [
-        "all",
-        "pendingClassification",
-        "queued",
-        "assigned",
-        "completed",
-        "closed",
-        "cancelled",
-        "classificationFailed",
-        "created",
-        "pendingSchedule",
-        "scheduled",
-        "scheduleFailed",
-        "waitingForActivation",
-        "active"
-      ],
-      "x-ms-enum": {
-        "name": "RouterJobStatusSelector",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "all",
-            "value": "all",
-            "description": "Default"
-          },
-          {
-            "name": "pendingClassification",
-            "value": "pendingClassification",
-            "description": "Job is waiting to be classified."
-          },
-          {
-            "name": "queued",
-            "value": "queued",
-            "description": "Job has been queued."
-          },
-          {
-            "name": "assigned",
-            "value": "assigned",
-            "description": "Job has been assigned to a worker."
-          },
-          {
-            "name": "completed",
-            "value": "completed",
-            "description": "Job has been completed by a worker."
-          },
-          {
-            "name": "closed",
-            "value": "closed",
-            "description": "Job has been closed by a worker."
-          },
-          {
-            "name": "cancelled",
-            "value": "cancelled",
-            "description": "Job has been cancelled."
-          },
-          {
-            "name": "classificationFailed",
-            "value": "classificationFailed",
-            "description": "Classification process failed for the job."
-          },
-          {
-            "name": "created",
-            "value": "created",
-            "description": "Job has been created."
-          },
-          {
-            "name": "pendingSchedule",
-            "value": "pendingSchedule",
-            "description": "Job has been created but not been scheduled yet."
-          },
-          {
-            "name": "scheduled",
-            "value": "scheduled",
-            "description": "Job has been scheduled successfully."
-          },
-          {
-            "name": "scheduleFailed",
-            "value": "scheduleFailed",
-            "description": "Job scheduling failed."
-          },
-          {
-            "name": "waitingForActivation",
-            "value": "waitingForActivation",
-            "description": "Job is in a suspended state and waiting for an update."
-          },
-          {
-            "name": "active",
-            "value": "active",
-            "description": "Job is in a state of PendingClassification or Queued or Assigned or ClassificationFailed or Completed or PendingSchedule or Scheduled or ScheduleFailed or WaitingForActivation."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "ListWorkerQueryParams.channelId": {
-      "name": "channelId",
-      "in": "query",
-      "description": "If specified, select workers who have a channel configuration with this channel.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ListWorkerQueryParams.hasCapacity": {
-      "name": "hasCapacity",
-      "in": "query",
-      "description": "If set to true, select only workers who have capacity for the channel specified\nby `channelId` or for any channel if `channelId` not specified. If set to\nfalse, then will return all workers including workers without any capacity for\njobs. Defaults to false.",
-      "required": false,
-      "type": "boolean",
-      "x-ms-parameter-location": "method"
-    },
-    "ListWorkerQueryParams.queueId": {
-      "name": "queueId",
-      "in": "query",
-      "description": "If specified, select workers who are assigned to this queue.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ListWorkerQueryParams.state": {
-      "name": "state",
-      "in": "query",
-      "description": "If specified, select workers by worker state.",
-      "required": false,
-      "type": "string",
-      "default": "all",
-      "enum": [
-        "active",
-        "draining",
-        "inactive",
-        "all"
-      ],
-      "x-ms-enum": {
-        "name": "RouterWorkerStateSelector",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "active",
-            "value": "active",
-            "description": "Worker is active and available to take offers."
-          },
-          {
-            "name": "draining",
-            "value": "draining",
-            "description": "Worker is not active, if there are existing offers they are being revoked. No new offers are sent."
-          },
-          {
-            "name": "inactive",
-            "value": "inactive",
-            "description": "Worker is not active. No new offers are sent."
-          },
-          {
-            "name": "all",
-            "value": "all",
-            "description": "Worker is active or draining or inactive."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
     },
     "RouterConditionalRequestHeaders.ifMatch": {
       "name": "If-Match",
