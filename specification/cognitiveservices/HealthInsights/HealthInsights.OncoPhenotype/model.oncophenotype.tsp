@@ -15,7 +15,7 @@ model OncoPhenotypeData {
 }
 
 @resource("oncophenotype/jobs")
-@doc("The response for the Onco Phenotype request.")
+@doc("The response for the Onco Phenotype request..")
 model OncoPhenotypeResult {
   ...Response;
 
