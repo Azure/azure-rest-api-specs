@@ -20,7 +20,7 @@ If you need further help with anything, see `Getting help` section below.
 
 What's the purpose of this PR? Check all that apply. This is **mandatory**!
 
-  - [ ] New API version. (Such PR should have been generated with [OpenAPI Hub](https://aka.ms/openapihub)).
+  - [x] New API version. (Such PR should have been generated with [OpenAPI Hub](https://aka.ms/openapihub)).
   - [ ] Update existing version for a new feature. (This is applicable only when you are revising a private preview API version.)
   - [ ] Update existing version to fix swagger quality issues in S360.
   - [ ] Other, please clarify:
@@ -31,8 +31,8 @@ What's the purpose of this PR? Check all that apply. This is **mandatory**!
 To merge this PR, you **must** go through the following checklist and confirm you understood 
 and followed the instructions by checking all the boxes:
 
-- [ ] I confirm this PR is modifying Azure Resource Manager (ARM) related specifications, and not data plane related specifications.
-- [ ] I have reviewed following [Resource Provider guidelines](https://aka.ms/rpguidelines), including
+- [x] I confirm this PR is modifying Azure Resource Manager (ARM) related specifications, and not data plane related specifications.
+- [x] I have reviewed following [Resource Provider guidelines](https://aka.ms/rpguidelines), including
   [ARM resource provider contract](https://github.com/Azure/azure-resource-manager-rpc) and
   [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) (estimated time: 4 hours).  
   I understand this is required before I can proceed to Step 2, "ARM Review", for this PR.
