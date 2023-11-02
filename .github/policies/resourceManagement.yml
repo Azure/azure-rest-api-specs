@@ -2529,7 +2529,16 @@ configuration:
       then:
       - removeLabel:
           label: no-recent-activity
-      description: 
+      description:
+    - if:
+      - payloadType: Pull_Request
+      then:
+      - if:
+        - filesMatchPattern:
+            pattern: specification/.*(\.tsp|tspconfig.yaml)
+        then:
+        - addLabel:
+            label: TypeSpec
     - if:
       - payloadType: Pull_Request
       then:
