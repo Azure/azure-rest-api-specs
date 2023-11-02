@@ -363,6 +363,36 @@
         }
       ]
     },
+    "ComplianceStatus": {
+      "type": "string",
+      "description": "Compliance Status.",
+      "enum": [
+        "Compliant",
+        "NonCompliant",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "ComplianceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Compliant",
+            "value": "Compliant",
+            "description": "The resource is Compliant"
+          },
+          {
+            "name": "NonCompliant",
+            "value": "NonCompliant",
+            "description": "The resource is NonCompliant"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The resource compliance status is pending"
+          }
+        ]
+      }
+    },
     "DesiredSecurityCompliance": {
       "type": "object",
       "description": "SecuritySetting properties",
@@ -432,22 +462,22 @@
       "description": "SecuritySetting properties",
       "properties": {
         "securedCoreCompliance": {
-          "type": "boolean",
+          "$ref": "#/definitions/ComplianceStatus",
           "description": "Secured Core Compliance",
           "readOnly": true
         },
         "wdacCompliance": {
-          "type": "boolean",
+          "$ref": "#/definitions/ComplianceStatus",
           "description": "WDAC Compliance",
           "readOnly": true
         },
         "dataAtRestEncrypted": {
-          "type": "boolean",
+          "$ref": "#/definitions/ComplianceStatus",
           "description": "Data at rest Compliance",
           "readOnly": true
         },
         "dataInTransitProtected": {
-          "type": "boolean",
+          "$ref": "#/definitions/ComplianceStatus",
           "description": "Data In Transit Protected Compliance",
           "readOnly": true
         },
