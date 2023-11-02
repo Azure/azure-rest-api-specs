@@ -1167,6 +1167,10 @@
           "description": "NetworkProfile - Profile of network configuration.",
           "$ref": "#/definitions/NetworkProfile"
         },
+        "clusterVMAccessProfile": {
+          "description": "clusterVMAccessProfile - The profile for Access control of cluster vm.",
+          "$ref": "#/definitions/ClusterVMAccessProfile"
+        },
         "agentPoolProfiles": {
           "type": "array",
           "items": {
@@ -1463,6 +1467,16 @@
         "name": {
           "type": "string",
           "description": "Unique name of the agent pool profile in the context of the subscription and resource group."
+        }
+      }
+    },
+    "ClusterVMAccessProfile": {
+      "type": "object",
+      "description": "Access profile for cluster vm",
+      "properties": {
+        "authorizedIPRanges": {
+          "type": "string",
+          "description": "authorized ip or cidr for ssh access."
         }
       }
     },
