@@ -57,7 +57,7 @@ op analyzeFromStream is Azure.Core.RpcOperation<
     @body
     imageContent: bytes;
 
-    ... SharedAnalyzeQuery;
+    ...SharedAnalyzeQuery;
   },
   ImageAnalysisResult
 >;
@@ -76,7 +76,7 @@ op analyzeFromUrl is Azure.Core.RpcOperation<
     @body
     imageContent: ImageUrl;
 
-    ... SharedAnalyzeQuery;
+    ...SharedAnalyzeQuery;
   },
   ImageAnalysisResult
 >;
@@ -102,7 +102,7 @@ op segmentFromUrl is Azure.Core.RpcOperation<
     @header
     contentType: "application/json";
 
-    ... SharedSegmentQuery;
+    ...SharedSegmentQuery;
   },
   {
     @header
@@ -128,7 +128,7 @@ op segmentFromStream is Azure.Core.RpcOperation<
     @header
     contentType: "application/octet-stream";
 
-    ... SharedSegmentQuery;
+    ...SharedSegmentQuery;
   },
   {
     @header
