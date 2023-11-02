@@ -20,7 +20,7 @@ model PageResultBodyFields<TResultFields, Context = TraitContext.List> {
 
 alias AssetsListTrait = {
   ...PageResultBodyFields<{
-    @doc("The total number of items available in the full result set")
+    @doc("The total number of items available in the full result set.")
     totalElements?: int64;
 
     @doc("The cursor mark to be used on the next request.  Not set if using paging.")
