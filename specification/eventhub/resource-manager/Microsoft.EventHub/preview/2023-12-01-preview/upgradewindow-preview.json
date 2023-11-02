@@ -111,7 +111,7 @@
         "description": "Get all Event Hubs Cluster upgrade window settings",
         "responses": {
           "200": {
-            "description": "Event Hubs Cluster settings configuration returned.",
+            "description": "Event Hubs Cluster upgrade window settings returned.",
             "schema": {
               "$ref": "#/definitions/ClusterUpgradeWindow"
             }
@@ -122,6 +122,9 @@
               "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -164,6 +167,9 @@
               "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
