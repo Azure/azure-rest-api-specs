@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Text Analysis",
-    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
-    "version": "2023-04-15-preview"
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.",
+    "version": "2023-11-15-preview"
   },
   "securityDefinitions": {
     "AADToken": {
@@ -99,6 +99,9 @@
           },
           "Successful Entity Recognition Overlap Policy Request": {
             "$ref": "./examples/text/SuccessfulEntityRecognitionOverlapPolicy.json"
+          },
+          "Successful Entity Recognition InferenceOptions Request": {
+            "$ref": "./examples/text/SuccessfulEntityRecognitionInferenceOptionsRequest.json"
           },
           "Successful Key Phrase Extraction Request": {
             "$ref": "./examples/text/SuccessfulKeyPhraseExtractionRequest.json"
@@ -624,14 +627,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/EntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/EntitiesDocumentResultWithDetectedLanguage"
           }
         }
       },
@@ -642,6 +638,18 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "EntitiesDocumentResultWithDetectedLanguage": {
+      "type": "object",
+      "description": "Single entities recognition result with detected language.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntitiesDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "CustomSingleLabelClassificationTaskParameters": {
@@ -675,14 +683,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/ClassificationDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/ClassificationDocumentResultWithDetectedLanguage"
           }
         }
       },
@@ -693,6 +694,18 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "ClassificationDocumentResultWithDetectedLanguage": {
+      "type": "object",
+      "description": "Classification document result with language detection.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClassificationDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "ClassificationResult": {
@@ -1381,14 +1394,7 @@
           "type": "array",
           "description": "Sentiment analysis per document.",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/SentimentDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/SentimentDocumentResultWithDetectedLanguage"
           }
         }
       },
@@ -1399,6 +1405,17 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "SentimentDocumentResultWithDetectedLanguage": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SentimentDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "CustomSentimentDocumentResult": {
@@ -1787,14 +1804,7 @@
           "type": "array",
           "description": "Sentiment analysis per document.",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/CustomSentimentDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/CustomSentimentAnalysisResultWithDetectedLanguage"
           }
         }
       },
@@ -1805,6 +1815,18 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "CustomSentimentAnalysisResultWithDetectedLanguage": {
+      "description": "Custom Sentiment analysis result on one document with detected language",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomSentimentDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "EntityList": {
@@ -2107,6 +2129,17 @@
         "policyKind"
       ]
     },
+    "EntityInferenceOptions": {
+      "description": "The class that house the inference options allowed for named entity recognition.",
+      "type": "object",
+      "properties": {
+        "excludeNormalizedValues": {
+          "description": "Option to include/exclude the detected entity values to be normalized and included in the metadata. The numeric and temporal entity types support value normalization.",
+          "type": "boolean",
+          "default": "false"
+        }
+      }
+    },
     "MatchLongestEntityPolicyType": {
       "description": "Represents the Match longest overlap policy. No overlapping entities as far as it is possible. 1. If there are overlapping entities, the longest one will be returned. 2. If the set of characters predicted for 2 or more entities are exactly the same, select the entity that has the higher confidence score.3. If the entity scores are identical, return all entities that are still present after applying the previous rules. 3. If there is partial overlap (as in Hello Text Analytics) follow the above steps starting from 1.  ",
       "allOf": [
@@ -2145,6 +2178,10 @@
         "overlapPolicy": {
           "description": "(Optional) describes the type of overlap policy to apply to the ner output.",
           "$ref": "#/definitions/BaseEntityOverlapPolicy"
+        },
+        "inferenceOptions": {
+          "description": "(Optional) request parameter that allows the user to provide settings for running the inference.",
+          "$ref": "#/definitions/EntityInferenceOptions"
         }
       },
       "allOf": [
@@ -3844,6 +3881,10 @@
         },
         "stringIndexType": {
           "$ref": "common.json#/definitions/StringIndexType"
+        },
+        "query": {
+          "type": "string",
+          "description": "(Optional) If provided, the query will be used to extract most relevant sentences from the document."
         }
       },
       "allOf": [
@@ -4021,14 +4062,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/KeyPhrasesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
-              }
-            ]
+            "$ref": "#/definitions/KeyPhrasesDocumentResultWithDetectedLanguage"
           }
         }
       },
@@ -4039,6 +4073,18 @@
       ],
       "required": [
         "documents"
+      ]
+    },
+    "KeyPhrasesDocumentResultWithDetectedLanguage": {
+      "type": "object",
+      "description": "Key phrases recognized in a document with detected language",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KeyPhrasesDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
       ]
     },
     "KeyPhrasesDocumentResult": {
@@ -4752,6 +4798,12 @@
     "AbstractiveSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for the pre-build Abstractive Summarization task.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "(Optional) When supplied, this option guides the summary to emphasize specific keywords or areas of interest that you specify."
+        }
+      },
       "allOf": [
         {
           "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
@@ -4908,6 +4960,5 @@
         "text"
       ]
     }
-  },
-  "parameters": {}
+  }
 }
