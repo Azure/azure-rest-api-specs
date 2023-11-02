@@ -280,90 +280,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/subscriptionStatuses": {
-      "get": {
-        "tags": [
-          "CreateResource"
-        ],
-        "summary": "Informs if the current subscription is being already monitored for selected NewRelic organization & account.",
-        "operationId": "CreationSupported_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/OrganizationIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/CreateResourceSupportedResponse"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreationSupported_Get": {
-            "$ref": "./examples/CreationSupported_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/subscriptionStatuses/default": {
-      "get": {
-        "tags": [
-          "CreateResource"
-        ],
-        "summary": "Informs if the current subscription is being already monitored for selected NewRelic organization.",
-        "operationId": "CreationSupported_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/OrganizationIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/CreateResourceSupportedResponse"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreationSupported_Get": {
-            "$ref": "./examples/CreationSupported_Get.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors": {
       "get": {
         "tags": [
@@ -2872,32 +2788,6 @@
         }
       },
       "description": "Plan details"
-    },
-    "CreateResourceSupportedProperties": {
-      "description": "NewRelic resource can be created or not properties.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The ARM id of the subscription.",
-          "type": "string",
-          "readOnly": true
-        },
-        "creationSupported": {
-          "description": "Indicates if selected subscription supports NewRelic resource creation, if not it is already being monitored for the selected organization & account via multi subscription feature. ",
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
-    "CreateResourceSupportedResponse": {
-      "description": "NewRelic resource can be created or not.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CreateResourceSupportedProperties",
-          "description": "Represents the properties of the resource."
-        }
-      }
     },
     "MonitoredSubscription": {
       "description": "The list of subscriptions and it's monitoring status by current NewRelic monitor.",
