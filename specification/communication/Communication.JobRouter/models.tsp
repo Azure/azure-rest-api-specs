@@ -16,7 +16,6 @@ using Azure.ClientGenerator.Core;
 @versioned(AzureCommunicationRoutingService.Versions)
 namespace AzureCommunicationRoutingService;
 
-
 @doc("Provides the 'Last-Modified' header to enable conditional (cached) requests")
 model LastModifiedResponseEnvelope {
   @header("Last-Modified")
@@ -67,42 +66,41 @@ model RouterReturnConditionalResponseHeaders<TVersionAdded extends EnumMember | 
   };
 }
 
-
 @doc("The status of the Job.")
 enum RouterJobStatus {
   @doc("Job is waiting to be classified.")
   pendingClassification,
-  
+
   @doc("Job has been queued.")
   queued,
-  
+
   @doc("Job has been assigned to a worker.")
   assigned,
-  
+
   @doc("Job has been completed by a worker.")
   completed,
-  
+
   @doc("Job has been closed by a worker.")
   closed,
-  
+
   @doc("Job has been cancelled.")
   cancelled,
-  
+
   @doc("Classification process failed for the job.")
   classificationFailed,
-  
+
   @doc("Job has been created.")
   created,
-  
+
   @doc("Job has been created but not been scheduled yet.")
   pendingSchedule,
-  
+
   @doc("Job has been scheduled successfully.")
   scheduled,
-  
+
   @doc("Job scheduling failed.")
   scheduleFailed,
-  
+
   @doc("Job is in a suspended state and waiting for an update.")
   waitingForActivation,
 }
@@ -111,19 +109,19 @@ enum RouterJobStatus {
 enum LabelOperator {
   @doc("Equal")
   equal,
-  
+
   @doc("Not Equal")
   notEqual,
-  
+
   @doc("Less than")
   lessThan,
-  
+
   @doc("Less than or equal")
   lessThanOrEqual,
-  
+
   @doc("Greater than")
   greaterThan,
-  
+
   @doc("Greater than or equal")
   greaterThanOrEqual,
 }
@@ -132,7 +130,7 @@ enum LabelOperator {
 enum RouterWorkerSelectorStatus {
   @doc("Active")
   active,
-  
+
   @doc("Expired")
   expired,
 }
@@ -141,43 +139,43 @@ enum RouterWorkerSelectorStatus {
 enum RouterJobStatusSelector {
   @doc("Default")
   all,
-  
+
   @doc("Job is waiting to be classified.")
   pendingClassification,
-  
+
   @doc("Job has been queued.")
   queued,
-  
+
   @doc("Job has been assigned to a worker.")
   assigned,
-  
+
   @doc("Job has been completed by a worker.")
   completed,
-  
+
   @doc("Job has been closed by a worker.")
   closed,
-  
+
   @doc("Job has been cancelled.")
   cancelled,
-  
+
   @doc("Classification process failed for the job.")
   classificationFailed,
-  
+
   @doc("Job has been created.")
   created,
-  
+
   @doc("Job has been created but not been scheduled yet.")
   pendingSchedule,
-  
+
   @doc("Job has been scheduled successfully.")
   scheduled,
-  
+
   @doc("Job scheduling failed.")
   scheduleFailed,
-  
+
   @doc("Job is in a suspended state and waiting for an update.")
   waitingForActivation,
-  
+
   @doc("Job is in a state of PendingClassification or Queued or Assigned or ClassificationFailed or Completed or PendingSchedule or Scheduled or ScheduleFailed or WaitingForActivation.")
   active,
 }
@@ -186,10 +184,10 @@ enum RouterJobStatusSelector {
 enum RouterWorkerState {
   @doc("Worker is active and available to take offers.")
   active,
-  
+
   @doc("Worker is not active, if there are existing offers they are being revoked. No new offers are sent.")
   draining,
-  
+
   @doc("Worker is not active. No new offers are sent.")
   inactive,
 }
@@ -198,13 +196,13 @@ enum RouterWorkerState {
 enum RouterWorkerStateSelector {
   @doc("Worker is active and available to take offers.")
   active,
-  
+
   @doc("Worker is not active, if there are existing offers they are being revoked. No new offers are sent.")
   draining,
-  
+
   @doc("Worker is not active. No new offers are sent.")
   inactive,
-  
+
   @doc("Worker is active or draining or inactive.")
   all,
 }
@@ -213,7 +211,7 @@ enum RouterWorkerStateSelector {
 enum ScoringRuleParameterSelector {
   @doc("Parameter to add job labels to scoring payload.  Property is sent as `job`.")
   jobLabels,
-  
+
   @doc("Parameter to add worker selectors from the job to scoring payload.  Property is sent as `selectors`.")
   workerSelectors,
 }
@@ -264,7 +262,6 @@ model RouterRule {
   kind: string;
 }
 
-
 @resource("distributionPolicies")
 @doc("Policy governing how jobs are distributed to workers")
 model DistributionPolicy {
@@ -301,7 +298,6 @@ model DistributionMode {
   kind: string;
 }
 
-
 @resource("exceptionPolicies")
 @doc("A policy that defines actions to execute when exception are triggered.")
 model ExceptionPolicy {
@@ -321,10 +317,9 @@ model ExceptionPolicy {
 
 @doc("A rule that defines actions to execute upon a specific trigger.")
 model ExceptionRule {
-  
   @doc("Id of the exception rule.")
   id: string;
-  
+
   @doc("The trigger for this exception rule")
   trigger: ExceptionTrigger;
 
@@ -339,12 +334,11 @@ model ExceptionTrigger {
   kind: string;
 }
 
-
 @doc("A note attached to a job.")
 model RouterJobNote {
   @doc("The message contained in the note.")
   message: string;
-  
+
   @doc("The time at which the note was added in UTC. If not provided, will default to the current time.")
   addedAt?: utcDateTime;
 }
@@ -440,7 +434,6 @@ model RouterWorkerSelector {
 
   @doc("The time at which this worker selector expires in UTC")
   @visibility("read")
-  
   expiresAt?: utcDateTime;
 }
 
@@ -453,15 +446,12 @@ model RouterJobAssignment {
   workerId?: string;
 
   @doc("The assignment time of the job in UTC.")
-  
   assignedAt: utcDateTime;
 
   @doc("The time the job was marked as completed after being assigned in UTC.")
-  
   completedAt?: utcDateTime;
 
   @doc("The time the job was marked as closed after being completed in UTC.")
-  
   closedAt?: utcDateTime;
 }
 
@@ -472,14 +462,13 @@ ScheduleAndSuspendMode: Used for scheduling jobs to be queued at a future time. 
 SuspendMode: Used when matching workers to a job needs to be suspended.
 """)
 @discriminator("kind")
-model JobMatchingMode { 
+model JobMatchingMode {
   @doc("The type discriminator describing a sub-type of JobMatchingMode")
   kind: string;
 }
 
 @doc("Describes a matching mode used for scheduling jobs to be queued at a future time. At the specified time, matching worker to a job will not start automatically.")
 model ScheduleAndSuspendMode extends JobMatchingMode {
-  
   @doc("Scheduled time.")
   scheduleAt: utcDateTime;
 
@@ -489,14 +478,12 @@ model ScheduleAndSuspendMode extends JobMatchingMode {
 
 @doc("Describes a matching mode where matching worker to a job is automatically started after job is queued successfully.")
 model QueueAndMatchMode extends JobMatchingMode {
-
   @doc("The type discriminator describing QueueAndMatchMode")
   kind: "queue-and-match";
 }
 
 @doc("Describes a matching mode where matching worker to a job is suspended.")
 model SuspendMode extends JobMatchingMode {
-  
   @doc("The type discriminator describing SuspendMode")
   kind: "suspend";
 }
@@ -528,7 +515,6 @@ model CloseJobOptions {
   dispositionCode?: string;
 
   @doc("If not provided, worker capacity is released immediately along with a JobClosedEvent notification. If provided, worker capacity is released along with a JobClosedEvent notification at a future time in UTC.")
-  
   closeAt?: utcDateTime;
 
   @doc("A note that will be appended to the jobs' Notes collection with the current timestamp.")
@@ -583,7 +569,6 @@ model AcceptJobOfferResult {
 @doc("Request payload for declining offers")
 model DeclineJobOfferOptions {
   @doc("If the RetryOfferAt is not provided, then this job will not be offered again to the worker who declined this job unless the worker is de-registered and re-registered.  If a RetryOfferAt time is provided, then the job will be re-matched to eligible workers at the retry time in UTC.  The worker that declined the job will also be eligible for the job at that time.")
-  
   retryOfferAt?: utcDateTime;
 }
 
@@ -626,7 +611,6 @@ model RouterQueueStatistics {
   longestJobWaitTimeMinutes?: float64;
 }
 
-
 @resource("workers")
 @doc("An entity for jobs to be routed to")
 model RouterWorker {
@@ -640,7 +624,7 @@ model RouterWorker {
   @doc("The current state of the worker.")
   @visibility("read")
   state?: RouterWorkerState;
-  
+
   @doc("The queue(s) that this worker can receive work from.")
   queues?: string[];
 
@@ -676,7 +660,6 @@ model RouterWorker {
 
 @doc("Represents the capacity a job in this channel will consume from a worker")
 model RouterChannel {
-
   @doc("Id of the channel.")
   channelId: string;
 
@@ -699,11 +682,9 @@ model RouterJobOffer {
   capacityCost: int32;
 
   @doc("The time the offer was created in UTC.")
-  
   offeredAt?: utcDateTime;
 
   @doc("The time that the offer will expire in UTC.")
-  
   expiresAt?: utcDateTime;
 }
 
@@ -719,7 +700,6 @@ model RouterWorkerAssignment {
   capacityCost: int32;
 
   @doc("The assignment time of the job in UTC.")
-  
   assignedAt: utcDateTime;
 }
 
@@ -948,7 +928,6 @@ model ReclassifyExceptionAction extends ExceptionAction {
   @doc("The new classification policy that will determine queue, priority and worker selectors.")
   classificationPolicyId?: string;
 
-
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
   @doc("Dictionary containing the labels to update (or add if not existing) in key-value pairs")
   labelsToUpsert?: Record<unknown>;
@@ -1073,7 +1052,7 @@ model ReclassifyJobResult {}
 alias ReclassfiyJobOkReponse = ResourceOkResponse<ReclassifyJobResult>;
 
 @doc("Response payload from closing a job")
-model CloseJobResult {};
+model CloseJobResult {}
 
 alias CloseJobResultWithOkResponse = ResourceOkResponse<CloseJobResult>;
 
@@ -1087,12 +1066,12 @@ model CancelJobResult {}
 alias CancelJobResultWithOkResponse = ResourceOkResponse<CancelJobResult>;
 
 @doc("Response payload from completing a job")
-model CompleteJobResult {};
+model CompleteJobResult {}
 
 alias CompleteJobResultWithOkResponse = ResourceOkResponse<CompleteJobResult>;
 
 @doc("Response payload from declining a job")
-model DeclineJobOfferResult {};
+model DeclineJobOfferResult {}
 
 alias DeclineJobOfferResultWithOkResponse = ResourceOkResponse<DeclineJobOfferResult>;
 
@@ -1166,10 +1145,9 @@ alias ListWorkerQueryParams = ListQueryParametersTrait<{
   hasCapacity?: boolean;
 }>;
 
-
 @doc("JobRouter Versions")
 enum Versions {
-    @doc("JobRouter 2023-11-01 api version")
-    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    c2023_11_01: "2023-11-01",
+  @doc("JobRouter 2023-11-01 api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2023_11_01: "2023-11-01",
 }
