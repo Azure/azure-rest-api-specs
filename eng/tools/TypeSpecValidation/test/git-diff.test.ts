@@ -7,6 +7,5 @@ describe("git-diff", function () {
     const result = await new GitDiffRule().execute(new TsvTestHost(), TsvTestHost.folder);
 
     assert(result.success);
-    assert(false);
   });
 });
