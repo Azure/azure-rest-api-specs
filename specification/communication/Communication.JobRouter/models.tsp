@@ -224,6 +224,7 @@ enum ExpressionRouterRuleLanguage {
 
 @resource("classificationPolicies")
 @doc("A container for the rules that govern how jobs are classified.")
+@projectedName("java", "ClassificationPolicyInternal")
 model ClassificationPolicy {
   ...EtagProperty;
 
@@ -264,6 +265,7 @@ model RouterRule {
 
 @resource("distributionPolicies")
 @doc("Policy governing how jobs are distributed to workers")
+@projectedName("java", "DistributionPolicyInternal")
 model DistributionPolicy {
   ...EtagProperty;
 
@@ -300,6 +302,7 @@ model DistributionMode {
 
 @resource("exceptionPolicies")
 @doc("A policy that defines actions to execute when exception are triggered.")
+@projectedName("java", "ExceptionPolicyInternal")
 model ExceptionPolicy {
   ...EtagProperty;
 
@@ -316,6 +319,7 @@ model ExceptionPolicy {
 }
 
 @doc("A rule that defines actions to execute upon a specific trigger.")
+@projectedName("java", "ExceptionRuleInternal")
 model ExceptionRule {
   @doc("Id of the exception rule.")
   id: string;
@@ -345,6 +349,7 @@ model RouterJobNote {
 
 @resource("jobs")
 @doc("A unit of work to be routed")
+@projectedName("java", "RouterJobInternal")
 model RouterJob {
   ...EtagProperty;
 
@@ -410,6 +415,7 @@ model RouterJob {
 }
 
 @doc("Describes a condition that must be met against a set of labels for worker selection")
+@projectedName("java", "RouterWorkerSelectorInternal")
 model RouterWorkerSelector {
   @doc("The label key to query against")
   key: string;
@@ -574,6 +580,7 @@ model DeclineJobOfferOptions {
 
 @resource("queues")
 @doc("A queue that can contain jobs to be routed.")
+@projectedName("java", "RouterQueueInternal")
 model RouterQueue {
   ...EtagProperty;
 
@@ -597,6 +604,7 @@ model RouterQueue {
 }
 
 @doc("Statistics for the queue")
+@projectedName("java", "RouterQueueStatisticsInternal")
 model RouterQueueStatistics {
   @doc("Id of the queue these details are about.")
   queueId: string;
@@ -613,6 +621,7 @@ model RouterQueueStatistics {
 
 @resource("workers")
 @doc("An entity for jobs to be routed to")
+@projectedName("java", "RouterWorkerInternal")
 model RouterWorker {
   ...EtagProperty;
 
@@ -731,6 +740,7 @@ model ScoringRuleOptions {
 }
 
 @doc("An action that marks a job as cancelled")
+@projectedName("java", "CancelExceptionActionInternal")
 model CancelExceptionAction extends ExceptionAction {
   @doc("A note that will be appended to the jobs' Notes collection with the current timestamp.")
   note?: string;
@@ -744,6 +754,7 @@ model CancelExceptionAction extends ExceptionAction {
 
 @doc("The action to take when the exception is triggered")
 @discriminator("kind")
+@projectedName("java", "ExceptionActionInternal")
 model ExceptionAction {
   @doc("Unique Id of the exception action")
   @visibility("read")
@@ -754,6 +765,7 @@ model ExceptionAction {
 }
 
 @doc("Describes a set of queue selectors that will be attached if the given condition resolves to true")
+@projectedName("java", "ConditionalQueueSelectorAttachmentInternal")
 model ConditionalQueueSelectorAttachment extends QueueSelectorAttachment {
   @doc("The condition that must be true for the queue selectors to be attached")
   condition: RouterRule;
@@ -766,6 +778,7 @@ model ConditionalQueueSelectorAttachment extends QueueSelectorAttachment {
 }
 
 @doc("Describes a condition that must be met against a set of labels for queue selection")
+@projectedName("java", "RouterQueueSelectorInternal")
 model RouterQueueSelector {
   @doc("The label key to query against")
   key: string;
@@ -781,12 +794,14 @@ model RouterQueueSelector {
 
 @doc("An attachment of queue selectors to resolve a queue to a job from a classification policy")
 @discriminator("kind")
+@projectedName("java", "QueueSelectorAttachmentInternal")
 model QueueSelectorAttachment {
   @doc("The type discriminator describing a sub-type of QueueSelectorAttachment")
   kind: string;
 }
 
 @doc("Describes a set of worker selectors that will be attached if the given condition resolves to true")
+@projectedName("java", "ConditionalWorkerSelectorAttachmentInternal")
 model ConditionalWorkerSelectorAttachment extends WorkerSelectorAttachment {
   @doc("The condition that must be true for the worker selectors to be attached")
   condition: RouterRule;
@@ -800,6 +815,7 @@ model ConditionalWorkerSelectorAttachment extends WorkerSelectorAttachment {
 
 @doc("An attachment which attaches worker selectors to a job")
 @discriminator("kind")
+@projectedName("java", "WorkerSelectorAttachmentInternal")
 model WorkerSelectorAttachment {
   @doc("The type discriminator describing a sub-type of WorkerSelectorAttachment")
   kind: string;
@@ -854,6 +870,7 @@ model LongestIdleMode extends DistributionMode {
 }
 
 @doc("An action that manually reclassifies a job by providing the queue, priority and worker selectors.")
+@projectedName("java", "ManualReclassifyExceptionActionInternal")
 model ManualReclassifyExceptionAction extends ExceptionAction {
   @doc("Updated QueueId.")
   queueId?: string;
@@ -879,6 +896,7 @@ model OAuth2WebhookClientCredential {
 }
 
 @doc("Attaches a queue selector where the value is passed through from the job label with the same key")
+@projectedName("java", "PassThroughQueueSelectorAttachmentInternal")
 model PassThroughQueueSelectorAttachment extends QueueSelectorAttachment {
   @doc("The label key to query against")
   key: string;
@@ -891,6 +909,7 @@ model PassThroughQueueSelectorAttachment extends QueueSelectorAttachment {
 }
 
 @doc("Attaches a worker selector where the value is passed through from the job label with the same key")
+@projectedName("java", "PassThroughWorkerSelectorAttachmentInternal")
 model PassThroughWorkerSelectorAttachment extends WorkerSelectorAttachment {
   @doc("The label key to query against")
   key: string;
@@ -915,6 +934,7 @@ model QueueLengthExceptionTrigger extends ExceptionTrigger {
 }
 
 @doc("Contains the weight percentage and queue selectors to be applied if selected for weighted distributions.")
+@projectedName("java", "QueueWeightedAllocationInternal")
 model QueueWeightedAllocation {
   @doc("The percentage of this weight, expressed as a fraction of 1.")
   weight: float64;
@@ -924,6 +944,7 @@ model QueueWeightedAllocation {
 }
 
 @doc("An action that modifies labels on a job and then reclassifies it")
+@projectedName("java", "ReclassifyExceptionActionInternal")
 model ReclassifyExceptionAction extends ExceptionAction {
   @doc("The new classification policy that will determine queue, priority and worker selectors.")
   classificationPolicyId?: string;
@@ -943,6 +964,7 @@ model RoundRobinMode extends DistributionMode {
 }
 
 @doc("Attaches queue selectors to a job when the RouterRule is resolved")
+@projectedName("java", "RuleEngineQueueSelectorAttachmentInternal")
 model RuleEngineQueueSelectorAttachment extends QueueSelectorAttachment {
   @doc("A RouterRule that resolves a collection of queue selectors to attach")
   rule: RouterRule;
@@ -952,6 +974,7 @@ model RuleEngineQueueSelectorAttachment extends QueueSelectorAttachment {
 }
 
 @doc("Attaches worker selectors to a job when a RouterRule is resolved")
+@projectedName("java", "RuleEngineWorkerSelectorAttachmentInternal")
 model RuleEngineWorkerSelectorAttachment extends WorkerSelectorAttachment {
   @doc("A RouterRule that resolves a collection of worker selectors to attach")
   rule: RouterRule;
@@ -961,6 +984,7 @@ model RuleEngineWorkerSelectorAttachment extends WorkerSelectorAttachment {
 }
 
 @doc("Describes a queue selector that will be attached to the job")
+@projectedName("java", "StaticQueueSelectorAttachmentInternal")
 model StaticQueueSelectorAttachment extends QueueSelectorAttachment {
   @doc("The queue selector to attach.")
   queueSelector: RouterQueueSelector;
@@ -981,6 +1005,7 @@ model StaticRouterRule extends RouterRule {
 }
 
 @doc("Describes a worker selector that will be attached to the job")
+@projectedName("java", "StaticWorkerSelectorAttachmentInternal")
 model StaticWorkerSelectorAttachment extends WorkerSelectorAttachment {
   @doc("The worker selector to attach.")
   workerSelector: RouterWorkerSelector;
@@ -1014,6 +1039,7 @@ model WebhookRouterRule extends RouterRule {
 }
 
 @doc("Describes multiple sets of queue selectors, of which one will be selected and attached according to a weighting")
+@projectedName("java", "WeightedAllocationQueueSelectorAttachmentInternal")
 model WeightedAllocationQueueSelectorAttachment
   extends QueueSelectorAttachment {
   @doc("A collection of percentage based weighted allocations.")
@@ -1024,6 +1050,7 @@ model WeightedAllocationQueueSelectorAttachment
 }
 
 @doc("Describes multiple sets of worker selectors, of which one will be selected and attached according to a weighting")
+@projectedName("java", "WeightedAllocationWorkerSelectorAttachmentInternal")
 model WeightedAllocationWorkerSelectorAttachment
   extends WorkerSelectorAttachment {
   @doc("A collection of percentage based weighted allocations.")
@@ -1034,6 +1061,7 @@ model WeightedAllocationWorkerSelectorAttachment
 }
 
 @doc("Contains the weight percentage and worker selectors to be applied if selected for weighted distributions.")
+@projectedName("java", "WorkerWeightedAllocationInternal")
 model WorkerWeightedAllocation {
   @doc("The percentage of this weight, expressed as a fraction of 1.")
   weight: float64;
