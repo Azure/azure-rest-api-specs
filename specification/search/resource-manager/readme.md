@@ -26,7 +26,7 @@ These are the global settings for the SearchManagementClient API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-11
+tag: package-2021-04-preview
 ```
 
 
