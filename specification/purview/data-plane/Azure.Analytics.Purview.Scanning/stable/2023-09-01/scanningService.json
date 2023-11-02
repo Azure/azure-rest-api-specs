@@ -1913,10 +1913,7 @@
             "$ref": "#/parameters/scanName"
           },
           {
-            "in": "query",
-            "name": "runId",
-            "description": "The scan run id.",
-            "$ref": "#/parameters/runId"
+            "$ref": "#/parameters/runIdInQuery"
           },
           {
             "in": "query",
@@ -9506,6 +9503,17 @@
     },
     "runId": {
       "in": "path",
+      "name": "runId",
+      "description": "The scan run id.",
+      "required": true,
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
+      "x-ms-parameter-location": "method"
+    },
+    "runIdInQuery": {
+      "in": "query",
       "name": "runId",
       "description": "The scan run id.",
       "required": true,
