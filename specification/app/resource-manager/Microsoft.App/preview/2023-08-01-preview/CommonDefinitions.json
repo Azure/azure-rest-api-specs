@@ -623,7 +623,7 @@
           "items": {
             "$ref": "#/definitions/ServiceBind"
           },
-          "x-ms-identifier": [
+          "x-ms-identifiers": [
             "name"
           ]
         }
@@ -1110,7 +1110,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DaprSubscriptionRouteRule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "default": {
           "description": "The default path to deliver events that do not match any of the rules.",
@@ -1266,7 +1267,7 @@
               "type": "string",
               "readOnly": true
             },
-            "type": {
+            "certificateType": {
               "description": "The type of the certificate. Allowed values are `ServerSSLCertificate` and `ImagePullTrustedCA`",
               "type": "string",
               "enum": [
