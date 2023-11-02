@@ -369,13 +369,6 @@
     "Cluster": {
       "type": "object",
       "properties": {
-        "clusterUpgradeList": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ClusterUpgrade"
-          }
-        },
         "sku": {
           "$ref": "#/definitions/ClusterSku",
           "description": "Properties of the cluster SKU."
@@ -410,6 +403,18 @@
               "x-ms-enum": {
                 "name": "provisioningState",
                 "modelAsString": true
+              },
+              "clusterUpgradeList": {
+                "type": "array",
+                "readOnly": true,
+                "items": {
+                  "$ref": "#/definitions/ClusterUpgrade"
+                },
+                "x-ms-identifiers": [],
+                "x-ms-enum": {
+                  "name": "clusterUpgradeList",
+                  "modelAsString": true
+                }
               },
               "description": "Provisioning state of the Cluster."
             },

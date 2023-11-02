@@ -122,9 +122,6 @@
               "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -231,7 +228,7 @@
           "description": "Preferred day of the week in UTC to begin an upgrade"
         },
         "preferredstarthourofday": {
-          "type": "integer",
+          "type": "int32",
           "minimum": 0,
           "maximum": 23,
           "description": "Preferred hour of the day in UTC to begin an upgrade"
@@ -251,11 +248,20 @@
     },
     "ClusterUpgradeHistoryList": {
       "type": "object",
+      "x-ms-identifiers": [],
+      "x-ms-enum": {
+        "name": "clusterUpgradeList",
+        "modelAsString": true
+      },
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClusterUpgradeHistory"
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "Link to the next set of results. Empty unless the value parameter contains an incomplete list of Event Hubs Clusters."
           },
           "description": "Result of the List Cluster Upgrade History operation"
         }
