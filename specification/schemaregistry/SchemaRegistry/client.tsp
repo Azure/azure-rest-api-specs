@@ -7,12 +7,19 @@ using Azure.ClientGenerator.Core;
 @@projectedName(Azure.SchemaRegistry.Version, "client", "SchemaVersion");
 @@access(Azure.SchemaRegistry.SchemaGroup, Access.internal);
 
-// csharp models
+// csharp modifications
 @@access(Azure.SchemaRegistry.ContentTypeEnum, Access.internal);
 @@usage(Azure.SchemaRegistry.ContentTypeEnum, Usage.input | Usage.output);
 @@projectedName(Azure.SchemaRegistry.ContentTypeEnum, "csharp", "ContentType");
 
-// public client models
+// operations
+@@access(Azure.SchemaRegistry.SchemaOperations.listSchemaGroups, Access.internal);
+@@access(Azure.SchemaRegistry.SchemaOperations.getSchemaById, Access.internal);
+@@access(Azure.SchemaRegistry.SchemaOperations.listSchemaVersions, Access.internal);
+@@access(Azure.SchemaRegistry.SchemaOperations.getSchemaIdByContent, Access.internal);
+@@access(Azure.SchemaRegistry.SchemaOperations.registerSchema, Access.internal);
+
+// models
 @@access(Azure.SchemaRegistry.SchemaFormat, Access.internal);
 @@usage(Azure.SchemaRegistry.SchemaFormat, Usage.input | Usage.output);
 @@access(Azure.SchemaRegistry.SchemaProperties, Access.internal);
