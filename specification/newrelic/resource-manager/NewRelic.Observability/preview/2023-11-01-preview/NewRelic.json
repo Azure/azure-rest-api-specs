@@ -280,6 +280,90 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/subscriptionStatuses": {
+      "get": {
+        "tags": [
+          "CreateResource"
+        ],
+        "summary": "Informs if the current subscription is being already monitored for selected NewRelic organization & account.",
+        "operationId": "CreationSupported_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CreateResourceSupportedResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreationSupported_Get": {
+            "$ref": "./examples/CreationSupported_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/subscriptionStatuses/default": {
+      "get": {
+        "tags": [
+          "CreateResource"
+        ],
+        "summary": "Informs if the current subscription is being already monitored for selected NewRelic organization.",
+        "operationId": "CreationSupported_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CreateResourceSupportedResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreationSupported_Get": {
+            "$ref": "./examples/CreationSupported_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors": {
       "get": {
         "tags": [
@@ -1304,6 +1388,360 @@
           },
           "TagRules_Update_MinimumSet_Gen": {
             "$ref": "./examples/TagRules_Update_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/monitoredSubscriptions": {
+      "get": {
+        "tags": [
+          "monitoredSubscriptions"
+        ],
+        "summary": "List the subscriptions currently being monitored by the NewRelic monitor resource.",
+        "operationId": "MonitoredSubscriptions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the Monitors resource",
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_GetMonitoredSubscriptions": {
+            "$ref": "./examples/MonitoredSubscriptions_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}": {
+      "get": {
+        "tags": [
+          "monitoredSubscriptions"
+        ],
+        "summary": "List the subscriptions currently being monitored by the NewRelic monitor resource.",
+        "operationId": "MonitoredSubscriptions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the Monitors resource",
+            "type": "string"
+          },
+          {
+            "description": "The configuration name. Only 'default' value is supported.",
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_GetMonitoredSubscriptions": {
+            "$ref": "./examples/MonitoredSubscriptions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "monitoredSubscriptions"
+        ],
+        "summary": "Add the subscriptions that should be monitored by the NewRelic monitor resource.",
+        "operationId": "MonitoredSubscriptions_CreateorUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the Monitors resource",
+            "type": "string"
+          },
+          {
+            "description": "The configuration name. Only 'default' value is supported.",
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          },
+          "202": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitors_AddMonitoredSubscriptions": {
+            "$ref": "./examples/MonitoredSubscriptions_CreateorUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MonitoredSubscriptions"
+        ],
+        "summary": "Updates the subscriptions that are being monitored by the NewRelic monitor resource",
+        "operationId": "MonitoredSubscriptions_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the Monitors resource",
+            "type": "string"
+          },
+          {
+            "description": "The configuration name. Only 'default' value is supported.",
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+            }
+          },
+          "202": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitors_UpdateMonitoredSubscriptions": {
+            "$ref": "./examples/MonitoredSubscriptions_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MonitoredSubscriptions"
+        ],
+        "summary": "Updates the subscriptions that are being monitored by the NewRelic monitor resource",
+        "operationId": "MonitoredSubscriptions_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the Monitors resource",
+            "type": "string"
+          },
+          {
+            "description": "Configuration name",
+            "in": "path",
+            "name": "configurationName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Monitors_DeleteMonitoredSubscriptions": {
+            "$ref": "./examples/MonitoredSubscriptions_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/listLinkedResources": {
+      "post": {
+        "tags": [
+          "LinkedResources"
+        ],
+        "summary": "List all Azure resources associated to the same NewRelic organization and account as the target resource.",
+        "operationId": "Monitors_ListLinkedResources",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the Monitors resource",
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LinkedResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_ListLinkedResources": {
+            "$ref": "./examples/LinkedResources_List.json"
           }
         }
       }
@@ -2434,6 +2872,149 @@
         }
       },
       "description": "Plan details"
+    },
+    "CreateResourceSupportedProperties": {
+      "description": "NewRelic resource can be created or not properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The ARM id of the subscription.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creationSupported": {
+          "description": "Indicates if selected subscription supports NewRelic resource creation, if not it is already being monitored for the selected organization & account via multi subscription feature. ",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "CreateResourceSupportedResponse": {
+      "description": "NewRelic resource can be created or not.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CreateResourceSupportedProperties",
+          "description": "Represents the properties of the resource."
+        }
+      }
+    },
+    "MonitoredSubscription": {
+      "description": "The list of subscriptions and it's monitoring status by current NewRelic monitor.",
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "description": "The subscriptionId to be monitored.",
+          "required": [
+            "subscriptionId"
+          ],
+          "type": "string"
+        },
+        "status": {
+          "description": "The state of monitoring.",
+          "enum": [
+            "InProgress",
+            "Active",
+            "Failed",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "Status"
+          },
+          "type": "string"
+        },
+        "error": {
+          "description": "The reason of not monitoring the subscription.",
+          "type": "string"
+        },
+        "tagRules": {
+          "$ref": "#/definitions/MonitoringTagRulesProperties"
+        }
+      }
+    },
+    "SubscriptionList": {
+      "description": "The request to update subscriptions needed to be monitored by the NewRelic monitor resource.",
+      "type": "object",
+      "properties": {
+        "operation": {
+          "description": "The operation for the patch on the resource.",
+          "enum": [
+            "AddBegin",
+            "AddComplete",
+            "DeleteBegin",
+            "DeleteComplete",
+            "Active"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "Operation"
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "monitoredSubscriptionList": {
+          "description": "List of subscriptions and the state of the monitoring.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoredSubscription"
+          }
+        }
+      }
+    },
+    "MonitoredSubscriptionProperties": {
+      "description": "The request to update subscriptions needed to be monitored by the NewRelic monitor resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the monitored subscription resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The id of the monitored subscription resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the monitored subscription resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SubscriptionList"
+        }
+      }
+    },
+    "LinkedResource": {
+      "description": "The definition of a linked resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ARM id of the linked resource.",
+          "type": "string"
+        }
+      }
+    },
+    "LinkedResourceListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
     },
     "ProvisioningState": {
       "type": "string",
