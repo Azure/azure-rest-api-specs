@@ -1161,7 +1161,7 @@
         },
         "kubernetesVersion": {
           "type": "string",
-          "description": "KubernetesVersion - Version of Kubernetes specified when creating the managed cluster."
+          "description": "KubernetesVersion - Version of Kubernetes in use by the managed cluster."
         },
         "networkProfile": {
           "description": "NetworkProfile - Profile of network configuration.",
@@ -1198,9 +1198,13 @@
               "x-ms-identifiers": [],
               "description": "Status of the control plane components"
             },
+            "currentState": {
+              "$ref": "#/definitions/ProvisioningState",
+              "description": "The current running state of the cluster"
+            },
             "errorMessage": {
               "type": "string",
-              "description": "ErrorMessage - Error messages during creation of cluster"
+              "description": "ErrorMessage - Error messages during cluster lifecycle"
             },
             "operationStatus": {
               "type": "object",
@@ -1401,6 +1405,11 @@
         "vmSize": {
           "type": "string",
           "description": "VmSize - The size of the agent pool VMs."
+        },
+        "kubernetesVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "KubernetesVersion - Version of Kubernetes used by the agent pool."
         }
       }
     },
@@ -1434,10 +1443,6 @@
             "type": "string"
           },
           "description": "NodeTaints - Taints added to new nodes during node pool create and scale. For example, key=value:NoSchedule."
-        },
-        "nodeImageVersion": {
-          "type": "string",
-          "description": "The version of node image"
         },
         "maxCount": {
           "type": "integer",
@@ -1522,9 +1527,13 @@
         "status": {
           "type": "object",
           "properties": {
+            "currentState": {
+              "$ref": "#/definitions/ProvisioningState",
+              "description": "The current running state of the agent pool"
+            },
             "errorMessage": {
               "type": "string",
-              "description": "ErrorMessage - Error messages during creation of agent pool"
+              "description": "ErrorMessage - Error messages during lifecycle of agent pool"
             },
             "operationStatus": {
               "type": "object",
