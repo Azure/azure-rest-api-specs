@@ -1358,6 +1358,10 @@
           },
           "description": "The Availability Zones where this cluster will be deployed."
         },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the resource."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterProperties",
@@ -1385,6 +1389,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterProperties",
           "description": "Other properties of the cluster."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the resource."
         },
         "tags": {
           "type": "object",
@@ -1416,6 +1424,44 @@
           "x-ms-enum": {
             "name": "TlsVersion",
             "modelAsString": true
+          }
+        },
+        "encryption": {
+          "type": "object",
+          "description": "Encryption-at-rest configuration for the cluster.",
+          "properties": {
+            "customerManagedKeyEncryption": {
+              "type": "object",
+              "description": "All Customer-managed key encryption properties for the resource. Set this to an empty object to use Microsoft-managed key encryption.",
+              "properties": {
+                "keyEncryptionKeyIdentity": {
+                  "type": "object",
+                  "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
+                  "properties": {
+                    "userAssignedIdentityResourceId": {
+                      "type": "string",
+                      "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/<sub uuid>/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId."
+                    },
+                    "identityType": {
+                      "type": "string",
+                      "enum": [
+                        "systemAssignedIdentity",
+                        "userAssignedIdentity"
+                      ],
+                      "description": "Only userAssignedIdentity is supported in this API version; other types may be supported in the future",
+                      "x-ms-enum": {
+                        "name": "CmkIdentityType",
+                        "modelAsString": true
+                      }
+                    }
+                  }
+                },
+                "keyEncryptionKeyUrl": {
+                  "type": "string",
+                  "description": "Key encryption key Url, versioned only. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78"
+                }
+              }
+            }
           }
         },
         "hostName": {
