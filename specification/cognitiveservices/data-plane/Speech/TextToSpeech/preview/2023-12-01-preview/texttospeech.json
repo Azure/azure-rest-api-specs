@@ -1,0 +1,2294 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Custom Voice API",
+    "description": "Custom Voice API to create and deploy your voice.",
+    "contact": {
+      "name": "Cognitive Services - Speech Services",
+      "url": "https://docs.microsoft.com/azure/cognitive-services/speech-service/support"
+    },
+    "version": "2023-12-01-preview"
+  },
+  "paths": {
+    "/api/texttospeech/projects": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "summary": "Get Projects",
+        "description": "Gets a list of projects for the authenticated subscription.",
+        "operationId": "Projects_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedProjects"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all projects": {
+            "$ref": "./examples/get_projects.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/projects/{id}": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "summary": "Get Project",
+        "description": "Gets the project identified by the given ID.",
+        "operationId": "Projects_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Get a project": {
+            "$ref": "./examples/get_project.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Project"
+        ],
+        "summary": "Delete Project",
+        "description": "Deletes the project identified by the given ID.",
+        "operationId": "Projects_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "in": "query",
+            "name": "forceDelete",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Delete a project": {
+            "$ref": "./examples/delete_project.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Project"
+        ],
+        "summary": "Create Project",
+        "description": "Creates a new project.",
+        "operationId": "Projects_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "project",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Create a project": {
+            "$ref": "./examples/create_project.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/consents": {
+      "get": {
+        "tags": [
+          "Consent"
+        ],
+        "summary": "Get Consents",
+        "description": "Gets a list of consents for the authenticated subscription.",
+        "operationId": "Consents_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedConsents"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all consents": {
+            "$ref": "./examples/get_consents.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/consents/{id}": {
+      "get": {
+        "tags": [
+          "Consent"
+        ],
+        "summary": "Get Consent",
+        "description": "Gets the consent identified by the given ID.",
+        "operationId": "Consents_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/EntityError"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Get a consent": {
+            "$ref": "./examples/get_consent.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Consent"
+        ],
+        "summary": "Delete Consent",
+        "description": "Deletes the consent identified by the given ID.",
+        "operationId": "Consents_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete a consent": {
+            "$ref": "./examples/delete_consent.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Consent"
+        ],
+        "summary": "Create Consent",
+        "description": "Uploads and creates a new consent.",
+        "operationId": "Consents_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Operation-Id",
+            "required": false,
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "consent",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Create a consent": {
+            "$ref": "./examples/create_consent.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/trainingsets": {
+      "get": {
+        "tags": [
+          "Trainingset"
+        ],
+        "summary": "Get Training Sets",
+        "description": "Gets a list of training sets for the authenticated subscription.",
+        "operationId": "TrainingSets_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedTrainingsets"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all training sets": {
+            "$ref": "./examples/get_trainingsets.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/trainingsets/{id}": {
+      "get": {
+        "tags": [
+          "Trainingset"
+        ],
+        "summary": "Get Training Set",
+        "description": "Gets the training set identified by the given ID.",
+        "operationId": "TrainingSets_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Trainingset"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Get a training set": {
+            "$ref": "./examples/get_trainingset.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Trainingset"
+        ],
+        "summary": "Delete Training Set",
+        "description": "Deletes the project identified by the given ID.",
+        "operationId": "TrainingSets_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Delete a training set": {
+            "$ref": "./examples/delete_trainingset.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Trainingset"
+        ],
+        "summary": "Create Training Set",
+        "description": "Creates a new training set.",
+        "operationId": "TrainingSets_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "trainingset",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Trainingset"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Trainingset"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a training set": {
+            "$ref": "./examples/create_trainingset.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/trainingsets/{id}:upload": {
+      "post": {
+        "tags": [
+          "Trainingset"
+        ],
+        "summary": "Upload Data for Training Set",
+        "description": "Uploads data to the specified training set.",
+        "operationId": "TrainingSets_UploadData",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "formData",
+            "name": "displayName",
+            "description": "The name of this dataset.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "description",
+            "description": "Optional description of this dataset.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "kind",
+            "description": "The kind of this dataset.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "audio",
+            "description": "A zip file containing the audio data.",
+            "type": "file"
+          },
+          {
+            "in": "formData",
+            "name": "script",
+            "description": "A text/zip file containing the transcriptions for the audio data.",
+            "type": "file"
+          },
+          {
+            "in": "formData",
+            "name": "audioUrl",
+            "description": "The public access url of audio data.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "scriptUrl",
+            "description": "The public access url of script data.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Upload data to a training set": {
+            "$ref": "./examples/upload_trainingset.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/modelrecipes": {
+      "get": {
+        "tags": [
+          "Model"
+        ],
+        "summary": "Get Recipes",
+        "description": "Get a list of supported recipes.",
+        "operationId": "Models_ListRecipes",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Recipe"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all recipes": {
+            "$ref": "./examples/get_recipes.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/models": {
+      "get": {
+        "tags": [
+          "Model"
+        ],
+        "summary": "Get Models",
+        "description": "Gets the list of models for specified subscription.",
+        "operationId": "Models_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The number of models to skip.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "The number of models to return.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available models.\r\n            <ul><li><b>Supported properties:</b> name, created\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for created.\r\n              </li><li><b>Example:</b>```filter=name eq modelName```</li></ul>",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedModels"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all models": {
+            "$ref": "./examples/get_models.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/models/{id}": {
+      "get": {
+        "tags": [
+          "Model"
+        ],
+        "summary": "Get Model",
+        "description": "Gets the model identified by the given ID.",
+        "operationId": "Models_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Get a model": {
+            "$ref": "./examples/get_model.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Model"
+        ],
+        "summary": "Delete Model",
+        "description": "Deletes the model identified by the given ID.",
+        "operationId": "Models_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete a model": {
+            "$ref": "./examples/delete_model.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Model"
+        ],
+        "summary": "Create Model",
+        "description": "Creates a new voice model.",
+        "operationId": "Models_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Operation-Id",
+            "required": false,
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "modelDefinition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Create a model": {
+            "$ref": "./examples/create_model.json"
+          },
+          "Create a multi style model": {
+            "$ref": "./examples/create_multi_style_model.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/endpoints": {
+      "get": {
+        "tags": [
+          "Endpoint"
+        ],
+        "summary": "Get Endpoints",
+        "description": "Gets a list of endpoints for the authenticated subscription.",
+        "operationId": "Endpoints_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedEndpoints"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all endpoints": {
+            "$ref": "./examples/get_endpoints.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/endpoints/{id}": {
+      "get": {
+        "tags": [
+          "Endpoint"
+        ],
+        "summary": "Get Endpoint",
+        "description": "Gets the endpoint identified by the given ID.",
+        "operationId": "Endpoints_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Get an endpoint": {
+            "$ref": "./examples/get_endpoint.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Endpoint"
+        ],
+        "summary": "Delete Endpoint",
+        "description": "Deletes the endpoint identified by the given ID.",
+        "operationId": "Endpoints_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete an endpoint": {
+            "$ref": "./examples/delete_endpoint.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Endpoint"
+        ],
+        "summary": "Create Endpoint",
+        "description": "Creates a new endpoint.",
+        "operationId": "Endpoints_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Operation-Id",
+            "required": false,
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "uuid"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "endpoint",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an endpoint": {
+            "$ref": "./examples/create_endpoint.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/endpoints/{id}:resume": {
+      "post": {
+        "tags": [
+          "Endpoint"
+        ],
+        "summary": "Resume Endpoint",
+        "description": "Resumes the endpoint identified by the given ID.",
+        "operationId": "Endpoints_Resume",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Operation-Id",
+            "required": false,
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resume an endpoint": {
+            "$ref": "./examples/resume_endpoint.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/endpoints/{id}:suspend": {
+      "post": {
+        "tags": [
+          "Endpoint"
+        ],
+        "summary": "Suspend Endpoint",
+        "description": "Suspends the endpoint identified by the given ID.",
+        "operationId": "Endpoints_Suspend",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Operation-Id",
+            "required": false,
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Suspend an endpoint": {
+            "$ref": "./examples/suspend_endpoint.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/basemodels": {
+      "get": {
+        "tags": [
+          "Zeroshot"
+        ],
+        "summary": "Get Zero Shot Base Models",
+        "description": "Gets a list of base models for zero shot model training.",
+        "operationId": "ZeroShotModels_ListBaseModels",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BaseModel"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get zeroshot base models": {
+            "$ref": "./examples/get_zeroshot_base_models.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/zeroshots": {
+      "get": {
+        "tags": [
+          "Zeroshot"
+        ],
+        "summary": "Get Zero Shot Models",
+        "description": "Gets a list of zero shot models for the authenticated subscription.",
+        "operationId": "ZeroShotModels_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "Skip",
+            "description": "Gets or sets the number of resources to skip.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "Top",
+            "description": "Gets or sets the number of resources to return.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "Filter",
+            "description": "Gets or sets the filtering expression for selecting a subset of the available resources.\r\n<ul><li><b>Supported properties:</b> displayName, createdDateTime\r\n  </li><li><b>Operators:</b>\r\n    - eq, ne are supported for all properties.\r\n    - gt, ge, lt, le are supported for created.\r\n  </li><li><b>Example:</b>```filter=displayName eq resourceName```</li></ul>",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedZeroShots"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all zeroshot models": {
+            "$ref": "./examples/get_zeroshots.json"
+          }
+        }
+      }
+    },
+    "/api/texttospeech/zeroshots/{id}": {
+      "get": {
+        "tags": [
+          "Zeroshot"
+        ],
+        "summary": "Get Zero Shot Models",
+        "description": "Gets the zero shot model identified by the given ID.",
+        "operationId": "ZeroShotModels_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ZeroShot"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Get a zeroshot model": {
+            "$ref": "./examples/get_zeroshot.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Zeroshot"
+        ],
+        "summary": "Delete Zero Shot Model",
+        "description": "Deletes zero shot model identified by the given ID.",
+        "operationId": "ZeroShotModels_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete a zeroshot model": {
+            "$ref": "./examples/delete_zeroshot.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Zeroshot"
+        ],
+        "summary": "Create Zero Shot Model",
+        "description": "Creates a new zero shot model.",
+        "operationId": "ZeroShotModels_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Operation-Id",
+            "required": false,
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "zeroshot",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ZeroShot"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ZeroShot"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a zeroshot model": {
+            "$ref": "./examples/create_zeroshot.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BaseModel": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Consent": {
+      "required": [
+        "voiceTalentName",
+        "companyName",
+        "locale",
+        "projectId"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "displayName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "voiceTalentName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "companyName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "projectId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DetailedErrorCode": {
+      "title": "DetailedErrorCode",
+      "enum": [
+        "None",
+        "InvalidParameterValue",
+        "InvalidRequestBodyFormat",
+        "EmptyRequest",
+        "MissingInputRecords",
+        "InvalidDocument",
+        "ModelVersionIncorrect",
+        "InvalidDocumentBatch",
+        "UnsupportedLanguageCode",
+        "DataImportFailed",
+        "InUseViolation",
+        "InvalidLocale",
+        "InvalidGender",
+        "InvalidBaseModel",
+        "InvalidDataset",
+        "InvalidTest",
+        "InvalidWebPagePlayer",
+        "FailedDataset",
+        "InvalidModel",
+        "InvalidBatchSynthesis",
+        "InvalidPayload",
+        "InvalidParameter",
+        "EndpointWithoutLogging",
+        "InvalidPermissions",
+        "InvalidPrerequisite",
+        "UnsupportedSubscription",
+        "InvalidSubscription",
+        "InvalidProject",
+        "InaccessibleTrainingSet",
+        "InvalidProjectKind",
+        "InvalidUtterance",
+        "InvalidRecordingsUri",
+        "OnlyOneOfUrlsOrContainerOrDataset",
+        "ExceededNumberOfRecordingsUris",
+        "ModelMismatch",
+        "ProjectGenderMismatch",
+        "ModelDeprecated",
+        "ModelExists",
+        "ModelNotDeployable",
+        "EndpointNotUpdatable",
+        "SingleDefaultEndpoint",
+        "EndpointCannotBeDefault",
+        "InvalidModelUri",
+        "SubscriptionNotFound",
+        "QuotaViolation",
+        "UnsupportedDelta",
+        "UnsupportedFilter",
+        "UnsupportedPagination",
+        "UnsupportedDynamicConfiguration",
+        "UnsupportedOrderBy",
+        "InvalidEncoding",
+        "ModelDeploymentNotCompleteState",
+        "DeployingFailedModel",
+        "UnsupportedTimeRange",
+        "InvalidLogDate",
+        "InvalidLogId",
+        "InvalidLogStartTime",
+        "InvalidLogEndTime",
+        "InvalidTopForLogs",
+        "DeleteNotAllowed",
+        "Forbidden",
+        "DeployNotAllowed",
+        "UnexpectedError",
+        "InvalidCollection",
+        "InvalidCallbackUri",
+        "InvalidSasValidityDuration",
+        "InaccessibleCustomerStorageAccount",
+        "InaccessibleVerbalConsentStatement",
+        "InvalidDiscountPatch",
+        "InvalidRecordingScriptName",
+        "UtteranceExists",
+        "InvalidDeployment",
+        "ModelEncryptionError",
+        "UnsupportedApiRegion",
+        "InvalidQueryParameterValue",
+        "UnsupportedOrdering",
+        "InvalidOrderByExpression",
+        "InvalidFilter",
+        "MissingRequiredQueryParameter",
+        "InvalidSkipQueryParameterValue",
+        "InvalidTopQueryParameterValue",
+        "InvalidTopParameterValue",
+        "InvalidModelName",
+        "InaccessibleProject",
+        "UnsupportedBaseModelName",
+        "UnsupportedRecipeKind",
+        "UnsupportedRecipeShortName",
+        "UnsupportedRecipeVersion",
+        "EmptyTrainingRecipeForLocale",
+        "TrainingSetNotReady",
+        "MissingValidTrainingSet",
+        "MissingTrainingSetInRequestBody",
+        "LocaleNotFoundInTrainingSet",
+        "VoiceLocaleSameAsDataLocale",
+        "InconsistentVoiceAndDataLocales",
+        "StyleNameOnlyForMultistyleModel",
+        "MissingStyleName",
+        "StyleNameTooLong",
+        "InvalidStyleName",
+        "EmptyBaseModel",
+        "InaccessibleBaseModel",
+        "NoResumeForOldTrainingEngine",
+        "MissingValidVerbalConsentStatement",
+        "NeuralTrainingNotSupported",
+        "NeuralTrainingNotAvailableInThisRegion",
+        "ZeroshotNotAvailableInThisRegion",
+        "VideoTranslationNotAvailableInThisRegion",
+        "NoPermissionToTrainModel",
+        "ReachedConcurrentLimit",
+        "MissingRequiredVerbalConsentStatement",
+        "UnsupportedVoiceLocale",
+        "MissingRequiredGenderInfo",
+        "UnsupportedPresetStyle",
+        "UnsupportedTestSampleRate",
+        "EmptyTrainingSet",
+        "EmptyGeneralStyleTrainingset",
+        "DuplicateCustomStyleName",
+        "InvalidCustomStyleName",
+        "NotEnoughValidWaves",
+        "MultipleTrainingSetsOnlyForMultistyle",
+        "IncorrectTrainingParameters",
+        "InvalidVoiceConsentType",
+        "ReachedCustomStyleNamesLimit",
+        "ExceededNumberOfTrainingAudios",
+        "InvalidAudioType",
+        "ExceededSizeOfTrainingAudios",
+        "DisableUpdateFrontend"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DetailedErrorCode",
+        "modelAsString": true
+      }
+    },
+    "Endpoint": {
+      "required": [
+        "projectId",
+        "modelId"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "displayName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "projectId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "modelId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "properties": {
+          "$ref": "#/definitions/EndpointProperties"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EndpointKind": {
+      "title": "EndpointKind",
+      "enum": [
+        "HighPerformance",
+        "FastResume"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EndpointKind",
+        "modelAsString": true
+      }
+    },
+    "EndpointProperties": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EndpointKind"
+        }
+      }
+    },
+    "EntityError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Error": {
+      "description": "New format which conforms to the new Cognitive Services API guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ErrorCode"
+        },
+        "target": {
+          "description": "Gets or sets the source of the error.\r\nFor example it would be \"model\" or \"model id\" in case of invalid model.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Gets or sets high level error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Gets or sets additional supportive details regarding the error and/or expected policies.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError"
+        }
+      }
+    },
+    "ErrorCode": {
+      "title": "ErrorCode",
+      "enum": [
+        "BadRequest",
+        "BadArgument",
+        "Unauthorized",
+        "Forbidden",
+        "NotFound",
+        "UnsupportedMediaType",
+        "TooManyRequests",
+        "InternalServerError",
+        "ServiceUnavailable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true
+      }
+    },
+    "ErrorResponse": {
+      "description": "Contains unified error information used for HTTP responses across any Cognitive Service. Instances\r\ncan be created by returning it directly from a controller.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "VoiceKind": {
+      "description": "Voice Kind",
+      "enum": [
+        "Male",
+        "Female"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "VoiceKind",
+        "modelAsString": true
+      }
+    },
+    "InnerError": {
+      "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains required properties ErrorCode, message and optional properties target, inner error(this can be nested).",
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/DetailedErrorCode"
+        },
+        "target": {
+          "description": "Gets or sets the source of the error.\r\nFor example it would be \"model\" or \"model id\" in case of invalid model.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Gets or sets high level error message.",
+          "type": "string"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError"
+        }
+      }
+    },
+    "Model": {
+      "required": [
+        "recipe",
+        "projectId",
+        "consentId",
+        "trainingsetId"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "displayName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "recipe": {
+          "$ref": "#/definitions/Recipe"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "projectId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "consentId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "trainingsetId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "engineVersion": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ModelProperties"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ModelFailureReason": {
+      "title": "ModelFailureReason",
+      "enum": [
+        "None",
+        "InaccessibleCustomerStorage",
+        "SpeakerVerificationFailed",
+        "TerminateByUser",
+        "Internal"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ModelFailureReason",
+        "modelAsString": true
+      }
+    },
+    "ModelProperties": {
+      "type": "object",
+      "properties": {
+        "presetStyles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "styleTrainingsetIds": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceId"
+          }
+        },
+        "voiceStyles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "failureReason": {
+          "$ref": "#/definitions/ModelFailureReason"
+        }
+      }
+    },
+    "PaginatedConsents": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Consent"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedEndpoints": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedModels": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Model"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedProjects": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Project"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedTrainingsets": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Trainingset"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedZeroShots": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZeroShot"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "Project": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "displayName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/ProjectKind"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProjectKind": {
+      "title": "ProjectKind",
+      "enum": [
+        "TextToSpeech",
+        "QuickTrialTextToSpeech",
+        "ZeroShot"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProjectKind",
+        "modelAsString": true
+      }
+    },
+    "Recipe": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
+        "minUtteranceCount": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "minStyleUtteranceCount": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "maxCustomStyleNum": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "datasetLocales": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "modelLocales": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "presetStyles": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceId": {
+      "description": "Resource id",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+      "maxLength": 64
+    },
+    "Status": {
+      "title": "Status",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Disabling",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true
+      }
+    },
+    "Trainingset": {
+      "required": [
+        "locale",
+        "projectId"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "displayName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "locale": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "voiceKind": {
+          "$ref": "#/definitions/VoiceKind"
+        },
+        "properties": {
+          "$ref": "#/definitions/TrainingsetProperties"
+        },
+        "projectId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TrainingsetProperties": {
+      "type": "object",
+      "properties": {
+        "utteranceCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "readOnly": true
+    },
+    "ZeroShot": {
+      "required": [
+        "projectId",
+        "consentId"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "speakerProfileId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "displayName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "projectId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "consentId": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "properties": {
+          "$ref": "#/definitions/ZeroShotProperties"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ZeroShotProperties": {
+      "type": "object",
+      "properties": {
+        "failureReason": {
+          "$ref": "#/definitions/ModelFailureReason"
+        }
+      },
+      "readOnly": true
+    }
+  },
+  "securityDefinitions": {
+    "subscription_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header",
+      "description": "Provide your cognitive services subscription key here."
+    },
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows.",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": "https://cognitiveservices.azure.com/.default"
+      }
+    }
+  },
+  "security": [
+    {
+      "subscription_key": [],
+      "AADToken": []
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/customvoice",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://eastus.api.cognitive.microsoft.com).",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "parameters": {
+    "QueryApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
