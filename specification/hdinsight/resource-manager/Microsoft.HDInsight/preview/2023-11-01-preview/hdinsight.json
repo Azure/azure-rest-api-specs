@@ -308,6 +308,109 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/upgrade": {
+      "post": {
+        "description": "Upgrade a cluster pool.",
+        "operationId": "ClusterPool_Upgrade",
+        "x-ms-examples": {
+          "ClusterPoolsUpgradeAKSPatchVersion": {
+            "$ref": "./examples/UpgradeAKSPatchVersionForClusterPool.json"
+          },
+          "ClusterPoolsUpgradeNodeOs": {
+            "$ref": "./examples/UpgradeNodeOsForClusterPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "name": "ClusterPoolUpgradeRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterPoolUpgrade"
+            },
+            "description": "Upgrade a cluster pool."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPool"
+            }
+          },
+          "202": {
+            "description": "Cluster Pool Upgrade request accepted.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "URL to get the status of the resize operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/availableupgrades/default": {
+      "get": {
+        "description": "Gets a cluster pool available upgrade.",
+        "operationId": "ClusterPoolAvailableUpgrades_Get",
+        "x-ms-examples": {
+          "ClusterPoolGet": {
+            "$ref": "./examples/GetClusterPoolAvailableUpgrade.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Clusterpool Available Upgrade details.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPoolAvailableUpgrade"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters": {
       "get": {
         "operationId": "Clusters_ListByClusterPoolName",
@@ -347,6 +450,112 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/upgrade": {
+      "post": {
+        "description": "Upgrade a cluster.",
+        "operationId": "Cluster_Upgrade",
+        "x-ms-examples": {
+          "ClustersUpgradeAKSPatchVersion": {
+            "$ref": "./examples/UpgradeAKSPatchVersionForCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "ClusterUpgradeRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterUpgrade"
+            },
+            "description": "Upgrade a cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPool"
+            }
+          },
+          "202": {
+            "description": "Cluster Pool Upgrade request accepted.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "URL to get the status of the resize operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/availableupgrades/default": {
+      "get": {
+        "description": "Gets a cluster available upgrade.",
+        "operationId": "ClusterAvailableUpgrades_Get",
+        "x-ms-examples": {
+          "ClusterPoolGet": {
+            "$ref": "./examples/GetClusterAvailableUpgrade.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cluster Available Upgrade details.",
+            "schema": {
+              "$ref": "#/definitions/ClusterAvailableUpgrade"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -3126,6 +3335,219 @@
         }
       },
       "x-ms-discriminator-value": "FlinkJob"
+    },
+    "ClusterPoolAvailableUpgrade": {
+      "type": "object",
+      "description": "Cluster pool available upgrade.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties. Define cluster pool upgrade specific properties.",
+          "$ref": "#/definitions/ClusterPoolAvailableUpgradeProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterPoolAvailableUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster pool available upgrade properties.",
+      "properties": {
+        "aksPatchUpgrade": {
+          "description": "The details of aks patch version upgrade",
+          "$ref": "#/definitions/ClusterPoolAvailableUpgradeAksPatchUpgrade"
+        },
+        "nodeOsUpgrade": {
+          "description": "The details of node os update",
+          "$ref": "#/definitions/ClusterPoolAvailableUpgradeNodeOsUpgrade"
+        }
+      }
+    },
+    "ClusterPoolAvailableUpgradeAksPatchUpgrade": {
+      "type": "object",
+      "description": "Cluster pool available aks patch version upgrade.",
+      "properties": {
+        "currentVersion": {
+          "description": "Current AKS version.",
+          "type": "string"
+        },
+        "isDeprecated": {
+          "description": "Whether Current AKS version is deprecated",
+          "type": "boolean"
+        },
+        "latestVersion": {
+          "description": "Latest AKS patch version.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterPoolAvailableUpgradeNodeOsUpgrade": {
+      "type": "object",
+      "description": "Cluster pool available node os update.",
+      "properties": {
+        "currentNodeOs": {
+          "description": "Current node os.",
+          "type": "string"
+        },
+        "latestNodeOs": {
+          "description": "The latest node os.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterAvailableUpgrade": {
+      "type": "object",
+      "description": "Cluster available upgrade.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties. Define cluster upgrade specific properties.",
+          "$ref": "#/definitions/ClusterAvailableUpgradeProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterAvailableUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster available upgrade properties.",
+      "properties": {
+        "aksPatchUpgrade": {
+          "description": "The details of aks patch version upgrade",
+          "$ref": "#/definitions/ClusterAvailableUpgradeAksPatchUpgrade"
+        }
+      }
+    },
+    "ClusterAvailableUpgradeAksPatchUpgrade": {
+      "type": "object",
+      "description": "Cluster available aks patch version upgrade.",
+      "properties": {
+        "currentVersion": {
+          "description": "Current node pool version.",
+          "type": "string"
+        },
+        "isDeprecated": {
+          "description": "Whether Current node pool version is deprecated",
+          "type": "boolean"
+        },
+        "latestVersion": {
+          "description": "Latest available version, which should be equal to aks control plane version if it's not deprecated.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterPoolUpgrade":{
+      "description": "Cluster Pool Upgrade.",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterPoolUpgradeProperties"
+        }
+      }
+    },
+    "ClusterPoolUpgradeProperties": {
+      "description": "Properties of upgrading cluster pool.",
+      "properties": {
+        "upgradeType": {
+          "description": "Type of upgrade.",
+          "enum": [
+            "AKSPatchUpgrade",
+            "NodeOsUpgrade"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "upgradeType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "upgradeType",
+      "required": [
+        "upgradeType"
+      ]
+    },
+    "ClusterPoolAKSPatchVersionUpgradeProperties": {
+      "description": "Properties of upgrading cluster pool's aks patch version.",
+      "type": "object",
+      "allOf": [
+        {"$ref": "#/definitions/ClusterPoolUpgradeProperties"}
+      ],
+      "properties": {
+        "upgradeClusterPool": {
+          "description": "whether upgrade cluster pool or not. If it's true, upgradeAllClusterNodes should be false.",
+          "type": "boolean",
+          "default": false
+        },
+        "upgradeAllClusterNodes": {
+          "description": "whether upgrade all clusters' nodes. If it's true, upgradeClusterPool should be false.",
+          "type": "boolean",
+          "default": false
+        },
+        "targetAksVersion": {
+          "description": "Target aks version. When it's not set, latest version will be used. When upgradeClusterPool is true and upgradeAllClusterNodes is false, target version should be greater than current version. When upgradeClusterPool is false and upgradeAllClusterNodes is true, target version should be equal to aks version of cluster pool.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AKSPatchUpgrade"
+    },
+    "ClusterPoolNodeOsImageUpdateProperties": {
+      "description": "Properties of upgrading cluster pool's aks patch version.",
+      "type": "object",
+      "allOf": [
+        {"$ref": "#/definitions/ClusterPoolUpgradeProperties"}
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "NodeOsUpgrade"
+    },
+    "ClusterUpgrade":{
+      "description": "Cluster Upgrade.",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterUpgradeProperties"
+        }
+      }
+    },
+    "ClusterUpgradeProperties": {
+      "description": "Properties of upgrading cluster.",
+      "properties": {
+        "upgradeType": {
+          "description": "Type of upgrade.",
+          "enum": [
+            "AKSPatchUpgrade"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "upgradeType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "upgradeType",
+      "required": [
+        "upgradeType"
+      ]
+    },
+    "ClusterAKSPatchVersionUpgradeProperties": {
+      "description": "Properties of upgrading cluster's aks patch version.",
+      "type": "object",
+      "allOf": [
+        {"$ref": "#/definitions/ClusterUpgradeProperties"}
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "AKSPatchUpgrade"
     }
   },
   "parameters": {
