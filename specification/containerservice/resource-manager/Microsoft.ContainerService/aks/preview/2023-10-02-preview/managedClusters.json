@@ -3880,6 +3880,14 @@
           },
           "description": "The taints added to new nodes during node pool create and scale. For example, key=value:NoSchedule."
         },
+        "nodeInitializationTaints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Taints added on the nodes during creation that will not be reconciled by AKS.",
+          "description": "These taints will not be reconciled by AKS and can be removed with a kubectl call. This field can be modified after node pool is created, but nodes will not be recreated with new taints until another operation that requires recreation (e.g. node image upgrade) happens. These taints allow for required configuration to run before the node is ready to accept workloads, for example 'key1=value1:NoSchedule' that then can be removed with `kubectl taint nodes node1 key1=value1:NoSchedule-`"
+        },
         "proximityPlacementGroupID": {
           "$ref": "#/definitions/ProximityPlacementGroupID",
           "description": "The ID for Proximity Placement Group."
