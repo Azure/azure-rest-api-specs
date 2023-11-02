@@ -25,7 +25,7 @@ These are the global settings for the Automation API.
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2022-08-08
+tag: package-2023-05-15-preview
 ```
 
 ### Tag: package-2015-10
@@ -392,6 +392,50 @@ input-file:
 - Microsoft.Automation/stable/2022-08-08/variable.json
 ```
 
+
+### Tag: package-2023-05-15-preview
+
+These settings apply only when `--tag=package-2023-05-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-05-15-preview'
+input-file:
+- Microsoft.Automation/preview/2023-05-15-preview/dscNodeCounts.json
+- Microsoft.Automation/preview/2023-05-15-preview/softwareUpdateConfiguration.json
+- Microsoft.Automation/preview/2023-05-15-preview/deletedAutomationAccount.json
+- Microsoft.Automation/preview/2023-05-15-preview/privateLinkResources.json
+- Microsoft.Automation/preview/2023-05-15-preview/dscNode.json
+- Microsoft.Automation/preview/2023-05-15-preview/account.json
+- Microsoft.Automation/preview/2023-05-15-preview/certificate.json
+- Microsoft.Automation/preview/2023-05-15-preview/connection.json
+- Microsoft.Automation/preview/2023-05-15-preview/connectionType.json
+- Microsoft.Automation/preview/2023-05-15-preview/credential.json
+- Microsoft.Automation/preview/2023-05-15-preview/dscCompilationJob.json
+- Microsoft.Automation/preview/2023-05-15-preview/dscConfiguration.json
+- Microsoft.Automation/preview/2023-05-15-preview/dscNodeConfiguration.json
+- Microsoft.Automation/preview/2023-05-15-preview/hybridRunbookWorker.json
+- Microsoft.Automation/preview/2023-05-15-preview/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/preview/2023-05-15-preview/job.json
+- Microsoft.Automation/preview/2023-05-15-preview/jobSchedule.json
+- Microsoft.Automation/preview/2023-05-15-preview/linkedWorkspace.json
+- Microsoft.Automation/preview/2023-05-15-preview/module.json
+- Microsoft.Automation/preview/2023-05-15-preview/operations.json
+- Microsoft.Automation/preview/2023-05-15-preview/package.json
+- Microsoft.Automation/preview/2023-05-15-preview/privateEndpointConnection.json
+- Microsoft.Automation/preview/2023-05-15-preview/python2package.json
+- Microsoft.Automation/preview/2023-05-15-preview/python3package.json
+- Microsoft.Automation/preview/2023-05-15-preview/runbook.json
+- Microsoft.Automation/preview/2023-05-15-preview/runtimeEnvironment.json
+- Microsoft.Automation/preview/2023-05-15-preview/schedule.json
+- Microsoft.Automation/preview/2023-05-15-preview/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/preview/2023-05-15-preview/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/preview/2023-05-15-preview/sourceControl.json
+- Microsoft.Automation/preview/2023-05-15-preview/sourceControlSyncJob.json
+- Microsoft.Automation/preview/2023-05-15-preview/sourceControlSyncJobStreams.json
+- Microsoft.Automation/preview/2023-05-15-preview/variable.json
+- Microsoft.Automation/preview/2023-05-15-preview/watcher.json
+- Microsoft.Automation/preview/2023-05-15-preview/webhook.json
+```
+
 ---
 ## Suppression
 ``` yaml
@@ -499,7 +543,13 @@ directive:
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
   - suppress: DefaultErrorResponseSchema
     from: runbook.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.   
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: DefaultErrorResponseSchema
+    from: runtimeEnvironment.json
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: ResourceNameRestriction
+    from: runtimeEnvironment.json
+    reason: This Automation account name is part of the previous api, cannot change it as it will result in breaking change.     
   - suppress: DeleteOperationResponses
     from: credential.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
@@ -611,6 +661,7 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
 
 
 
