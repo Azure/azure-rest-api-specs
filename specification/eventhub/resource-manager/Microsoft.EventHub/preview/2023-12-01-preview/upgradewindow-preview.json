@@ -225,7 +225,11 @@
             "Friday",
             "Saturday"
           ],
-          "description": "Preferred day of the week in UTC to begin an upgrade"
+          "description": "Preferred day of the week in UTC to begin an upgrade",
+          "x-ms-enum": {
+            "name": "preferredstartdayofweek",
+            "modelAsString": true
+          }
         },
         "preferredstarthourofday": {
           "format": "int32",
@@ -260,6 +264,7 @@
           "items": {
             "$ref": "#/definitions/ClusterUpgradeHistory"
           },
+          "x-ms-identifiers": [],
           "description": "Result of the List Cluster Upgrade History operation"
         },
         "nextLink": {
