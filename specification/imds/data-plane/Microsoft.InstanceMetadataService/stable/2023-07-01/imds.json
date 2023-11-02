@@ -32,7 +32,10 @@
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/Versions"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1080,13 +1083,6 @@
           "type": "string",
           "description": "This is the AAD tenantId of the identity of the system assigned managed identity."
         }
-      }
-    },
-    "Versions": {
-      "type": "array",
-      "description": "This is the set of supported API versions.",
-      "items": {
-        "type": "string"
       }
     }
   },
