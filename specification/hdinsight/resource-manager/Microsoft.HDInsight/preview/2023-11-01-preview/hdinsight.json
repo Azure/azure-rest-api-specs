@@ -311,7 +311,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/upgrade": {
       "post": {
         "description": "Upgrade a cluster pool.",
-        "operationId": "ClusterPool_Upgrade",
+        "operationId": "ClusterPools_Upgrade",
         "x-ms-examples": {
           "ClusterPoolsUpgradeAKSPatchVersion": {
             "$ref": "./examples/UpgradeAKSPatchVersionForClusterPool.json"
@@ -372,12 +372,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/availableupgrades/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/availableUpgrades/default": {
       "get": {
         "description": "Gets a cluster pool available upgrade.",
         "operationId": "ClusterPoolAvailableUpgrades_Get",
         "x-ms-examples": {
-          "ClusterPoolGet": {
+          "GetClusterPoolAvailableUpgrade": {
             "$ref": "./examples/GetClusterPoolAvailableUpgrade.json"
           }
         },
@@ -456,7 +456,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/upgrade": {
       "post": {
         "description": "Upgrade a cluster.",
-        "operationId": "Cluster_Upgrade",
+        "operationId": "Clusters_Upgrade",
         "x-ms-examples": {
           "ClustersUpgradeAKSPatchVersion": {
             "$ref": "./examples/UpgradeAKSPatchVersionForCluster.json"
@@ -492,11 +492,11 @@
           "200": {
             "description": "Successful.",
             "schema": {
-              "$ref": "#/definitions/ClusterPool"
+              "$ref": "#/definitions/Cluster"
             }
           },
           "202": {
-            "description": "Cluster Pool Upgrade request accepted.",
+            "description": "Cluster Upgrade request accepted.",
             "headers": {
               "location": {
                 "type": "string",
@@ -517,12 +517,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/availableupgrades/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/availableUpgrades/default": {
       "get": {
         "description": "Gets a cluster available upgrade.",
         "operationId": "ClusterAvailableUpgrades_Get",
         "x-ms-examples": {
-          "ClusterPoolGet": {
+          "GetClusterAvailableUpgrade": {
             "$ref": "./examples/GetClusterAvailableUpgrade.json"
           }
         },
@@ -3388,9 +3388,9 @@
       "type": "object",
       "description": "Cluster pool available node os update.",
       "properties": {
-        "currentNodeOs": {
-          "description": "Current node os.",
-          "type": "string"
+        "canUpgrade": {
+          "description": "Whether can upgrade the node os for nodes in the clusterPool.",
+          "type": "boolean"
         },
         "latestNodeOs": {
           "description": "The latest node os.",
@@ -3442,7 +3442,7 @@
         }
       }
     },
-    "ClusterPoolUpgrade":{
+    "ClusterPoolUpgrade": {
       "description": "Cluster Pool Upgrade.",
       "type": "object",
       "required": [
@@ -3456,6 +3456,7 @@
     },
     "ClusterPoolUpgradeProperties": {
       "description": "Properties of upgrading cluster pool.",
+      "type": "object",
       "properties": {
         "upgradeType": {
           "description": "Type of upgrade.",
@@ -3465,7 +3466,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "upgradeType",
+            "name": "clusterPoolUpgradeType",
             "modelAsString": true
           }
         }
@@ -3479,7 +3480,9 @@
       "description": "Properties of upgrading cluster pool's aks patch version.",
       "type": "object",
       "allOf": [
-        {"$ref": "#/definitions/ClusterPoolUpgradeProperties"}
+        {
+          "$ref": "#/definitions/ClusterPoolUpgradeProperties"
+        }
       ],
       "properties": {
         "upgradeClusterPool": {
@@ -3503,12 +3506,14 @@
       "description": "Properties of upgrading cluster pool's aks patch version.",
       "type": "object",
       "allOf": [
-        {"$ref": "#/definitions/ClusterPoolUpgradeProperties"}
+        {
+          "$ref": "#/definitions/ClusterPoolUpgradeProperties"
+        }
       ],
       "properties": {},
       "x-ms-discriminator-value": "NodeOsUpgrade"
     },
-    "ClusterUpgrade":{
+    "ClusterUpgrade": {
       "description": "Cluster Upgrade.",
       "type": "object",
       "required": [
@@ -3522,6 +3527,7 @@
     },
     "ClusterUpgradeProperties": {
       "description": "Properties of upgrading cluster.",
+      "type": "object",
       "properties": {
         "upgradeType": {
           "description": "Type of upgrade.",
@@ -3530,7 +3536,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "upgradeType",
+            "name": "clusterUpgradeType",
             "modelAsString": true
           }
         }
@@ -3544,7 +3550,9 @@
       "description": "Properties of upgrading cluster's aks patch version.",
       "type": "object",
       "allOf": [
-        {"$ref": "#/definitions/ClusterUpgradeProperties"}
+        {
+          "$ref": "#/definitions/ClusterUpgradeProperties"
+        }
       ],
       "properties": {},
       "x-ms-discriminator-value": "AKSPatchUpgrade"
