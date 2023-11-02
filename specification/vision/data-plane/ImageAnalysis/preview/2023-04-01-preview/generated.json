@@ -59,19 +59,104 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SharedAnalyzeQuery.visualFeatures"
+            "name": "features",
+            "in": "query",
+            "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. At least one visual feature must be specified for Image Analysis.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "tags",
+                "caption",
+                "denseCaptions",
+                "objects",
+                "read",
+                "smartCrops",
+                "people"
+              ],
+              "x-ms-enum": {
+                "name": "VisualFeatures",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags"
+                  },
+                  {
+                    "name": "caption",
+                    "value": "caption",
+                    "description": "Caption"
+                  },
+                  {
+                    "name": "denseCaptions",
+                    "value": "denseCaptions",
+                    "description": "DenseCaptions"
+                  },
+                  {
+                    "name": "objects",
+                    "value": "objects",
+                    "description": "Objects"
+                  },
+                  {
+                    "name": "read",
+                    "value": "read",
+                    "description": "Read"
+                  },
+                  {
+                    "name": "smartCrops",
+                    "value": "smartCrops",
+                    "description": "SmartCrops"
+                  },
+                  {
+                    "name": "people",
+                    "value": "people",
+                    "description": "People"
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "visualFeatures"
           },
           {
-            "$ref": "#/parameters/SharedAnalyzeQuery.language"
+            "name": "language",
+            "in": "query",
+            "description": "The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.",
+            "required": false,
+            "type": "string",
+            "default": "en"
           },
           {
-            "$ref": "#/parameters/SharedAnalyzeQuery.genderNeutralCaption"
+            "name": "gender-neutral-caption",
+            "in": "query",
+            "description": "Boolean flag for enabling gender-neutral captioning for caption and denseCaptions features. If this parameter is not specified, the default value is \"false\".",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "genderNeutralCaption"
           },
           {
-            "$ref": "#/parameters/SharedAnalyzeQuery.smartCropsAspectRatios"
+            "name": "smartcrops-aspect-ratios",
+            "in": "query",
+            "description": "A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "smartCropsAspectRatios"
           },
           {
-            "$ref": "#/parameters/SharedAnalyzeQuery.modelName"
+            "name": "model-name",
+            "in": "query",
+            "description": "The name of the custom trained model. This parameter needs to be specified if the parameter \"features\" is not specified.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "modelName"
           },
           {
             "name": "imageContent",
@@ -119,7 +204,31 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SharedSegmentQuery"
+            "name": "mode",
+            "in": "query",
+            "description": "The type of segmentation to perform",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "backgroundRemoval",
+              "foregroundMatting"
+            ],
+            "x-ms-enum": {
+              "name": "SegmentationMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "backgroundRemoval",
+                  "value": "backgroundRemoval",
+                  "description": "Remove the background"
+                },
+                {
+                  "name": "foregroundMatting",
+                  "value": "foregroundMatting",
+                  "description": "Matt the foreground"
+                }
+              ]
+            }
           },
           {
             "name": "imageContent",
@@ -164,19 +273,104 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SharedAnalyzeQuery.visualFeatures"
+            "name": "features",
+            "in": "query",
+            "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. At least one visual feature must be specified for Image Analysis.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "tags",
+                "caption",
+                "denseCaptions",
+                "objects",
+                "read",
+                "smartCrops",
+                "people"
+              ],
+              "x-ms-enum": {
+                "name": "VisualFeatures",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags"
+                  },
+                  {
+                    "name": "caption",
+                    "value": "caption",
+                    "description": "Caption"
+                  },
+                  {
+                    "name": "denseCaptions",
+                    "value": "denseCaptions",
+                    "description": "DenseCaptions"
+                  },
+                  {
+                    "name": "objects",
+                    "value": "objects",
+                    "description": "Objects"
+                  },
+                  {
+                    "name": "read",
+                    "value": "read",
+                    "description": "Read"
+                  },
+                  {
+                    "name": "smartCrops",
+                    "value": "smartCrops",
+                    "description": "SmartCrops"
+                  },
+                  {
+                    "name": "people",
+                    "value": "people",
+                    "description": "People"
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "visualFeatures"
           },
           {
-            "$ref": "#/parameters/SharedAnalyzeQuery.language"
+            "name": "language",
+            "in": "query",
+            "description": "The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.",
+            "required": false,
+            "type": "string",
+            "default": "en"
           },
           {
-            "$ref": "#/parameters/SharedAnalyzeQuery.genderNeutralCaption"
+            "name": "gender-neutral-caption",
+            "in": "query",
+            "description": "Boolean flag for enabling gender-neutral captioning for caption and denseCaptions features. If this parameter is not specified, the default value is \"false\".",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "genderNeutralCaption"
           },
           {
-            "$ref": "#/parameters/SharedAnalyzeQuery.smartCropsAspectRatios"
+            "name": "smartcrops-aspect-ratios",
+            "in": "query",
+            "description": "A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "smartCropsAspectRatios"
           },
           {
-            "$ref": "#/parameters/SharedAnalyzeQuery.modelName"
+            "name": "model-name",
+            "in": "query",
+            "description": "The name of the custom trained model. This parameter needs to be specified if the parameter \"features\" is not specified.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "modelName"
           },
           {
             "name": "imageContent",
@@ -234,7 +428,31 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SharedSegmentQuery"
+            "name": "mode",
+            "in": "query",
+            "description": "The type of segmentation to perform",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "backgroundRemoval",
+              "foregroundMatting"
+            ],
+            "x-ms-enum": {
+              "name": "SegmentationMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "backgroundRemoval",
+                  "value": "backgroundRemoval",
+                  "description": "Remove the background"
+                },
+                {
+                  "name": "foregroundMatting",
+                  "value": "foregroundMatting",
+                  "description": "Matt the foreground"
+                }
+              ]
+            }
           },
           {
             "name": "imageContent",
@@ -906,139 +1124,6 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
-    },
-    "SharedAnalyzeQuery.genderNeutralCaption": {
-      "name": "gender-neutral-caption",
-      "in": "query",
-      "description": "Boolean flag for enabling gender-neutral captioning for caption and denseCaptions features. If this parameter is not specified, the default value is \"false\".",
-      "required": false,
-      "type": "boolean",
-      "default": false,
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "genderNeutralCaption"
-    },
-    "SharedAnalyzeQuery.language": {
-      "name": "language",
-      "in": "query",
-      "description": "The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.",
-      "required": false,
-      "type": "string",
-      "default": "en",
-      "x-ms-parameter-location": "method"
-    },
-    "SharedAnalyzeQuery.modelName": {
-      "name": "model-name",
-      "in": "query",
-      "description": "The name of the custom trained model. This parameter needs to be specified if the parameter \"features\" is not specified.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "modelName"
-    },
-    "SharedAnalyzeQuery.smartCropsAspectRatios": {
-      "name": "smartcrops-aspect-ratios",
-      "in": "query",
-      "description": "A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "number",
-        "format": "float"
-      },
-      "collectionFormat": "csv",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "smartCropsAspectRatios"
-    },
-    "SharedAnalyzeQuery.visualFeatures": {
-      "name": "features",
-      "in": "query",
-      "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. At least one visual feature must be specified for Image Analysis.",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "tags",
-          "caption",
-          "denseCaptions",
-          "objects",
-          "read",
-          "smartCrops",
-          "people"
-        ],
-        "x-ms-enum": {
-          "name": "VisualFeatures",
-          "modelAsString": true,
-          "values": [
-            {
-              "name": "tags",
-              "value": "tags",
-              "description": "Tags"
-            },
-            {
-              "name": "caption",
-              "value": "caption",
-              "description": "Caption"
-            },
-            {
-              "name": "denseCaptions",
-              "value": "denseCaptions",
-              "description": "DenseCaptions"
-            },
-            {
-              "name": "objects",
-              "value": "objects",
-              "description": "Objects"
-            },
-            {
-              "name": "read",
-              "value": "read",
-              "description": "Read"
-            },
-            {
-              "name": "smartCrops",
-              "value": "smartCrops",
-              "description": "SmartCrops"
-            },
-            {
-              "name": "people",
-              "value": "people",
-              "description": "People"
-            }
-          ]
-        }
-      },
-      "collectionFormat": "csv",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "visualFeatures"
-    },
-    "SharedSegmentQuery": {
-      "name": "mode",
-      "in": "query",
-      "description": "The type of segmentation to perform",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "backgroundRemoval",
-        "foregroundMatting"
-      ],
-      "x-ms-enum": {
-        "name": "SegmentationMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "backgroundRemoval",
-            "value": "backgroundRemoval",
-            "description": "Remove the background"
-          },
-          {
-            "name": "foregroundMatting",
-            "value": "foregroundMatting",
-            "description": "Matt the foreground"
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
     }
   }
 }
