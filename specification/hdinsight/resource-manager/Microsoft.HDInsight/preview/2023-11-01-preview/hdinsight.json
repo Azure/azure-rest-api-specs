@@ -2316,6 +2316,21 @@
         },
         "catalogOptions": {
           "$ref": "#/definitions/FlinkCatalogOptions"
+        },
+        "deploymentMode": {
+          "description": "A string property that indicates the deployment mode of Flink cluster. It can have one of the following enum values => Application, Session. Default value is Session",
+          "type": "string",
+          "enum": [
+            "Application",
+            "Session"
+          ],
+          "x-ms-enum": {
+            "name": "deploymentMode",
+            "modelAsString": true
+          }
+        },
+        "job": {
+          "$ref": "#/definitions/FlinkJobProfile"
         }
       }
     },
@@ -3093,7 +3108,9 @@
             "CANCEL",
             "SAVEPOINT",
             "LIST_SAVEPOINT",
-            "DELETE"
+            "DELETE",
+            "LAST_STATE_UPDATE",
+            "RE_LAUNCH"
           ],
           "x-ms-enum": {
             "name": "action",
