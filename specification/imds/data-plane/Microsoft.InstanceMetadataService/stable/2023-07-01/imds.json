@@ -24,6 +24,31 @@
     }
   },
   "paths": {
+    "/versions": {
+      "get": {
+        "operationId": "GetVersions",
+        "description": "Get supported API versions.",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Versions"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Supported API Versions": {
+            "$ref": "./examples/GetVersions.json"
+          }
+        }
+      }
+    },
     "/instance": {
       "get": {
         "operationId": "Instances_GetMetadata",
@@ -1055,6 +1080,13 @@
           "type": "string",
           "description": "This is the AAD tenantId of the identity of the system assigned managed identity."
         }
+      }
+    },
+    "Versions": {
+      "type": "array",
+      "description": "This is the set of supported API versions.",
+      "items": {
+        "type": "string"
       }
     }
   },
