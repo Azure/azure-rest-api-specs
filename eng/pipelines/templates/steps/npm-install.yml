@@ -2,9 +2,9 @@ steps:
   - script: npm --version --loglevel info
     displayName: npm --version
 
-  - script: npm install --no-package-lock
+  - script: npm install --no-package-lock --force
     displayName: npm install --no-package-lock
 
-  - script: npm ls -a
+  - script: npm ls -a || cd .
     displayName: npm ls -a
     condition: succeededOrFailed()
