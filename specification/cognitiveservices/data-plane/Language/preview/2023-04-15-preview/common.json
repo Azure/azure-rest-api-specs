@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
-    "version": "2023-11-15-preview"
+    "version": "2023-04-15-preview"
   },
   "paths": {},
   "definitions": {
@@ -407,7 +407,7 @@
           "type": "array",
           "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/DocumentError"
+            "$ref": "#/definitions/InputError"
           }
         },
         "statistics": {
@@ -832,33 +832,7 @@
         "sentenceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "(NOTE: Recommended to use summaryLength instead) Controls the approximate number of sentences in the output summaries."
-        },
-        "summaryLength": {
-          "type": "string",
-          "enum": [
-            "short",
-            "medium",
-            "long"
-          ],
-          "x-ms-enum": {
-            "name": "SummaryLengthBucket",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "short",
-                "description": "Instructs model to generate shorter length summaries."
-              },
-              {
-                "value": "medium",
-                "description": "Instructs model to generate medium length summaries."
-              },
-              {
-                "value": "long",
-                "description": "Instructs model to generate longer length summaries."
-              }
-            ]
-          }
+          "description": "It controls the approximate number of sentences in the output summaries."
         },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
@@ -938,7 +912,6 @@
     },
     "DocumentError": {
       "type": "object",
-      "description": "Contains details of errors encountered during a job execution.",
       "required": [
         "id",
         "error"
@@ -946,11 +919,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The id of the input document."
+          "description": "Document Id."
         },
         "error": {
           "type": "object",
-          "description": "Error encountered.",
+          "description": "Document Error.",
           "$ref": "#/definitions/Error"
         }
       }
