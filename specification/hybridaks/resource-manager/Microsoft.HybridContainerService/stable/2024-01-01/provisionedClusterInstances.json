@@ -1167,6 +1167,10 @@
           "description": "NetworkProfile - Profile of network configuration.",
           "$ref": "#/definitions/NetworkProfile"
         },
+        "storageProfile" : {
+          "description": "StorageProfile - Profile of storage configuration.",
+          "$ref": "#/definitions/StorageProfile"
+        },
         "clusterVMAccessProfile": {
           "description": "clusterVMAccessProfile - The profile for Access control of cluster vm.",
           "$ref": "#/definitions/ClusterVMAccessProfile"
@@ -1733,6 +1737,42 @@
         }
       },
       "description": "NetworkProfile - Profile of network configuration."
+    },
+    "StorageProfile" : {
+      "type": "object",
+      "properties": {
+        "smbCsiDriver": {
+          "$ref": "#/definitions/StorageProfileSmbCSIDriver",
+          "description": "SMB CSI Driver settings for the storage profile."
+        },
+        "nfsCsiDriver": {
+          "$ref": "#/definitions/StorageProfileNfsCSIDriver",
+          "description": "NFS CSI Driver settings for the storage profile."
+        }
+      },
+      "description": "Storage profile for the provisioned cluster."
+    },
+    "StorageProfileNfsCSIDriver": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to enable AKS Hybrid NFS CSI Driver. The default value is true."
+        }
+      },
+      "description": "AKS Hybrid CSI Driver settings for the storage profile."
+    },
+    "StorageProfileSmbCSIDriver": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to enable AKS Hybrid SMB CSI Driver. The default value is true."
+        }
+      },
+      "description": "AKS Hybrid CSI Driver settings for the storage profile."
     },
     "ControlPlaneEndpointProfile": {
       "type": "object",
