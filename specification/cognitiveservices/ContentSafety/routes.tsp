@@ -13,7 +13,7 @@ namespace ContentSafety;
 
 interface TextOperations {
   @summary("Analyze Text")
-  @doc("A synchronous API for the analysis of potentially harmful text content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.")
+  @doc("A synchronous API for the analysis of potentially harmful text content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence..")
   @route("/text:analyze")
   @post
   analyzeText is Azure.Core.RpcOperation<
