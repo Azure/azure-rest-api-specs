@@ -207,7 +207,7 @@ directive:
     where:
       - $(this-folder)/Microsoft.DataFactory/stable/2018-06-01/entityTypes/LinkedService.json
     reason:
-      - DataFlow add type required
+      - DataFlow add type required 
 ```
 
 
