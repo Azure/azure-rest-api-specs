@@ -363,6 +363,45 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/triggerupgrade": {
+      "post": {
+        "tags": [
+          "EventHubs Clusters Upgrade"
+        ],
+        "operationId": "Clusters_TriggerUpgradePost",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "description": "Remove cluster preferences on whatever upgrades are scheduled",
+        "x-ms-examples": {
+          "ListNamespacesInCluster": {
+            "$ref": "./examples/Clusters/TriggerUpgradeInCluster.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully removed upgrade preferences on upgrade."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -372,6 +411,10 @@
         "sku": {
           "$ref": "#/definitions/ClusterSku",
           "description": "Properties of the cluster SKU."
+        },
+        "upgradePreferences": {
+          "$ref": "#/definitions/UpgradePreferences",
+          "description": "Properties of the cluster upgrade preferences."
         },
         "systemData": {
           "readOnly": true,
@@ -501,6 +544,37 @@
         }
       },
       "description": "The full ARM ID of an Event Hubs Namespace"
+    },
+    "UpgradePreferences": {
+      "type": "object",
+      "properties": {
+        "startdayofweek": {
+          "type": "string",
+          "enum": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "None"
+          ],
+          "description": "Preferred day of the week in UTC to begin an upgrade",
+          "x-ms-enum": {
+            "name": "preferredstartdayofweek",
+            "modelAsString": true
+          }
+        },
+        "starthourofday": {
+          "format": "int32",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 23,
+          "description": "Preferred hour of the day in UTC to begin an upgrade"
+        }
+      },
+      "description": "Contains all settings for the cluster upgrade window."
     }
   },
   "parameters": {}
