@@ -24,7 +24,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 // START POOL
 
-@doc("Pool resource")
+@doc("Pool resource.")
 model Pool is TrackedResource<PoolProperties> {
   @doc("Pool Object")
   @minLength(3)

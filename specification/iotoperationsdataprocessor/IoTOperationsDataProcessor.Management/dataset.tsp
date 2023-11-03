@@ -37,7 +37,7 @@ model DatasetProperties {
   @doc("Detailed description of the Dataset.")
   description?: string;
 
-  @doc("Path to the payload in the message. Enrich will add only the payload to the enriched message, other fields will not be kept except for in the indexes.")
+  @doc("Path to the payload in the message. Enrich will add only the payload to the enriched message, other fields will not be kept except for in the indexes..")
   payload?: string;
 
   @doc("Path to an RFC3339 timestamp in the message. If no path is provided, the ingestion time of the record is used for time-based joins.")

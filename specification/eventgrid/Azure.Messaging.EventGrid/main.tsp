@@ -69,7 +69,7 @@ namespace Microsoft.EventGrid {
     source: string;
 
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Using 'unknown' for data is intentional. Following CloudEvent spec."
-    @doc("Event data specific to the event type.")
+    @doc("Event data specific to the event type..")
     data?: unknown;
 
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Using 'data_base64' is intentional. Following CloudEvent spec."

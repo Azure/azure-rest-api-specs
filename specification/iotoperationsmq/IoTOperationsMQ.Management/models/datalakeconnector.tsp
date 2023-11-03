@@ -21,7 +21,7 @@ namespace Microsoft.IoTOperationsMQ;
  * CRD - DataLakeConnector
  * CRD Version - v1alpha4
  */
-@doc("MQ dataLakeConnector resource")
+@doc("MQ dataLakeConnector resource.")
 @parentResource(MqResource)
 model DataLakeConnectorResource
   is TrackedResource<DataLakeConnectorProperties> {

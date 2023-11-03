@@ -17,7 +17,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
 
-@doc("The Fleet resource.")
+@doc("The Fleet resource..")
 @resource("fleets")
 model Fleet is TrackedResource<FleetProperties> {
   @doc("The name of the Fleet resource.")
