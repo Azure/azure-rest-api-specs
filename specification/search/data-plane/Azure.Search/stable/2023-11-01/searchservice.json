@@ -2683,7 +2683,8 @@
         "Edm.Boolean",
         "Edm.DateTimeOffset",
         "Edm.GeographyPoint",
-        "Edm.ComplexType"
+        "Edm.ComplexType",
+        "Edm.Single"
       ],
       "x-ms-enum": {
         "name": "SearchFieldDataType",
@@ -2728,6 +2729,11 @@
             "value": "Edm.ComplexType",
             "name": "Complex",
             "description": "Indicates that a field contains one or more complex objects that in turn have sub-fields of other types."
+          },
+          {
+            "value": "Edm.Single",
+            "name": "Single",
+            "description": "Indicates that a field contains a single-precision floating point number. This is only valid when used with Collection(Edm.Single)."
           }
         ]
       },
@@ -5562,6 +5568,7 @@
           "x-nullable": false
         },
         "algorithm": {
+          "x-ms-client-name": "algorithmConfigurationName",
           "type": "string",
           "description": "The name of the vector search algorithm configuration that specifies the algorithm and optional parameters.",
           "x-nullable": false
@@ -5598,6 +5605,7 @@
       "description": "Contains configuration options specific to the algorithm used during indexing or querying."
     },
     "HnswVectorSearchAlgorithmConfiguration": {
+      "x-ms-client-name": "HnswAlgorithmConfiguration",
       "type": "object",
       "x-ms-discriminator-value": "hnsw",
       "allOf": [
@@ -5653,6 +5661,7 @@
       "description": "Contains the parameters specific to the HNSW algorithm."
     },
     "ExhaustiveKnnVectorSearchAlgorithmConfiguration": {
+      "x-ms-client-name": "ExhaustiveKnnAlgorithmConfiguration",
       "type": "object",
       "x-ms-discriminator-value": "exhaustiveKnn",
       "allOf": [
@@ -6726,6 +6735,7 @@
           "x-nullable": true
         },
         "dimensions": {
+          "x-ms-client-name": "vectorSearchDimensions",
           "type": "integer",
           "format": "int32",
           "x-nullable": true,
@@ -6734,6 +6744,7 @@
           "description": "The dimensionality of the vector field."
         },
         "vectorSearchProfile": {
+          "x-ms-client-name": "vectorSearchProfileName",
           "type": "string",
           "x-nullable": true,
           "description": "The name of the vector search profile that specifies the algorithm to use when searching the vector field."
@@ -7244,7 +7255,7 @@
           "externalDocs": {
             "url": "https://learn.microsoft.com/azure/search/semantic-search-overview"
           },
-          "x-ms-client-name": "SemanticSettings",
+          "x-ms-client-name": "SemanticSearch",
           "x-nullable": true
         },
         "vectorSearch": {
@@ -8068,6 +8079,7 @@
           "description": "A parameter that provides various ways to mask the personal information detected in the input text. Default is 'none'."
         },
         "maskingCharacter": {
+          "x-ms-client-name": "mask",
           "type": "string",
           "x-nullable": true,
           "maxLength": 1,
@@ -9528,20 +9540,56 @@
     "SplitSkillLanguage": {
       "type": "string",
       "enum": [
+        "am",
+        "bs",
+        "cs",
         "da",
         "de",
         "en",
         "es",
+        "et",
         "fi",
         "fr",
+        "he",
+        "hi",
+        "hr",
+        "hu",
+        "id",
+        "is",
         "it",
+        "ja",
         "ko",
-        "pt"
+        "lv",
+        "nb",
+        "nl",
+        "pl",
+        "pt",
+        "pt-br",
+        "ru",
+        "sk",
+        "sl",
+        "sr",
+        "sv",
+        "tr",
+        "ur",
+        "zh"
       ],
       "x-ms-enum": {
         "name": "SplitSkillLanguage",
         "modelAsString": true,
         "values": [
+          {
+            "value": "am",
+            "description": "Amharic"
+          },
+          {
+            "value": "bs",
+            "description": "Bosnian"
+          },
+          {
+            "value": "cs",
+            "description": "Czech"
+          },
           {
             "value": "da",
             "description": "Danish"
@@ -9559,6 +9607,10 @@
             "description": "Spanish"
           },
           {
+            "value": "et",
+            "description": "Estonian"
+          },
+          {
             "value": "fi",
             "description": "Finnish"
           },
@@ -9567,16 +9619,96 @@
             "description": "French"
           },
           {
+            "value": "he",
+            "description": "Hebrew"
+          },
+          {
+            "value": "hi",
+            "description": "Hindi"
+          },
+          {
+            "value": "hr",
+            "description": "Croatian"
+          },
+          {
+            "value": "hu",
+            "description": "Hungarian"
+          },
+          {
+            "value": "id",
+            "description": "Indonesian"
+          },
+          {
+            "value": "is",
+            "description": "Icelandic"
+          },
+          {
             "value": "it",
             "description": "Italian"
+          },
+          {
+            "value": "ja",
+            "description": "Japanese"
           },
           {
             "value": "ko",
             "description": "Korean"
           },
           {
+            "value": "lv",
+            "description": "Latvian"
+          },
+          {
+            "value": "nb",
+            "description": "Norwegian"
+          },
+          {
+            "value": "nl",
+            "description": "Dutch"
+          },
+          {
+            "value": "pl",
+            "description": "Polish"
+          },
+          {
             "value": "pt",
-            "description": "Portuguese"
+            "description": "Portuguese (Portugal)"
+          },
+          {
+            "value": "pt-br",
+            "description": "Portuguese (Brazil)"
+          },
+          {
+            "value": "ru",
+            "description": "Russian"
+          },
+          {
+            "value": "sk",
+            "description": "Slovak"
+          },
+          {
+            "value": "sl",
+            "description": "Slovenian"
+          },
+          {
+            "value": "sr",
+            "description": "Serbian"
+          },
+          {
+            "value": "sv",
+            "description": "Swedish"
+          },
+          {
+            "value": "tr",
+            "description": "Turkish"
+          },
+          {
+            "value": "ur",
+            "description": "Urdu"
+          },
+          {
+            "value": "zh",
+            "description": "Chinese (Simplified)"
           }
         ]
       },
@@ -10632,8 +10764,10 @@
       "description": "Describes an error condition for the API."
     },
     "SemanticSettings": {
+      "x-ms-client-name": "SemanticSearch",
       "properties": {
         "defaultConfiguration": {
+          "x-ms-client-name": "defaultConfigurationName",
           "type": "string",
           "description": "Allows you to set the name of a default semantic configuration in your index, making it optional to pass it on as a query parameter every time."
         },
@@ -10676,12 +10810,14 @@
       "description": "Defines a specific configuration to be used in the context of semantic capabilities."
     },
     "PrioritizedFields": {
+      "x-ms-client-name": "SemanticPrioritizedFields",
       "properties": {
         "titleField": {
           "$ref": "#/definitions/SemanticField",
           "description": "Defines the title field to be used for semantic ranking, captions, highlights, and answers. If you don't have a title field in your index, leave this blank."
         },
         "prioritizedContentFields": {
+          "x-ms-client-name": "contentFields",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SemanticField"
@@ -10689,6 +10825,7 @@
           "description": "Defines the content fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain text in natural language form. The order of the fields in the array represents their priority. Fields with lower priority may get truncated if the content is long."
         },
         "prioritizedKeywordsFields": {
+          "x-ms-client-name": "keywordsFields",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SemanticField"
@@ -10709,6 +10846,9 @@
           "x-nullable": false
         }
       },
+      "required": [
+        "fieldName"
+      ],
       "description": "A field that is used as part of the semantic configuration."
     }
   },

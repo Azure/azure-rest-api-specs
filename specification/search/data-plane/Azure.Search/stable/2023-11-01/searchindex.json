@@ -379,7 +379,7 @@
               "fail"
             ],
             "x-ms-enum": {
-              "name": "SemanticErrorHandling",
+              "name": "SemanticErrorMode",
               "modelAsString": true,
               "values": [
                 {
@@ -419,7 +419,7 @@
               "extractive"
             ],
             "x-ms-enum": {
-              "name": "Answers",
+              "name": "QueryAnswerType",
               "modelAsString": true,
               "values": [
                 {
@@ -448,7 +448,7 @@
               "extractive"
             ],
             "x-ms-enum": {
-              "name": "Captions",
+              "name": "QueryCaptionType",
               "modelAsString": true,
               "values": [
                 {
@@ -1451,6 +1451,9 @@
           "description": "The vector representation of a search query."
         }
       },
+      "required": [
+        "vector"
+      ],
       "description": "The query parameters to use for vector search when a raw vector value is provided."
     },
     "VectorQueryKind": {
@@ -1870,6 +1873,7 @@
       "description": "Describes an error condition for the API."
     },
     "AnswerResult": {
+      "x-ms-client-name": "QueryAnswerResult",
       "properties": {
         "score": {
           "type": "number",
@@ -1898,6 +1902,7 @@
       "description": "An answer is a text passage extracted from the contents of the most relevant documents that matched the query. Answers are extracted from the top search results. Answer candidates are scored and the top answers are selected."
     },
     "CaptionResult": {
+      "x-ms-client-name": "QueryCaptionResult",
       "properties": {
         "text": {
           "type": "string",
@@ -1922,7 +1927,7 @@
         "transient"
       ],
       "x-ms-enum": {
-        "name": "SemanticPartialResponseReason",
+        "name": "SemanticErrorReason",
         "modelAsString": true,
         "values": [
           {
@@ -1951,7 +1956,7 @@
         "rerankedResults"
       ],
       "x-ms-enum": {
-        "name": "SemanticPartialResponseType",
+        "name": "SemanticSearchResultsType",
         "modelAsString": true,
         "values": [
           {
@@ -1975,7 +1980,7 @@
         "fail"
       ],
       "x-ms-enum": {
-        "name": "SemanticErrorHandling",
+        "name": "SemanticErrorMode",
         "modelAsString": true,
         "values": [
           {
