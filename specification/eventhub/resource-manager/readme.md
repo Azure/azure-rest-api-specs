@@ -149,19 +149,19 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2024-01'
 input-file:
-- Microsoft.EventHub/preview/2024-01-01/AvailableClusterRegions.json
-- Microsoft.EventHub/preview/2024-01-01/Clusters.json
-- Microsoft.EventHub/preview/2024-01-01/namespaces.json
-- Microsoft.EventHub/preview/2024-01-01/quotaConfiguration.json
-- Microsoft.EventHub/preview/2024-01-01/networkrulessets.json
-- Microsoft.EventHub/preview/2024-01-01/AuthorizationRules.json
-- Microsoft.EventHub/preview/2024-01-01/CheckNameAvailability.json
-- Microsoft.EventHub/preview/2024-01-01/consumergroups.json
-- Microsoft.EventHub/preview/2024-01-01/disasterRecoveryConfigs.json
-- Microsoft.EventHub/preview/2024-01-01/operations.json
-- Microsoft.EventHub/preview/2024-01-01/eventhubs.json
-- Microsoft.EventHub/preview/2024-01-01/SchemaRegistry.json
-- Microsoft.EventHub/preview/2024-01-01/ApplicationGroups.json
+- Microsoft.EventHub/stable/2024-01-01/AvailableClusterRegions.json
+- Microsoft.EventHub/stable/2024-01-01/Clusters.json
+- Microsoft.EventHub/stable/2024-01-01/namespaces.json
+- Microsoft.EventHub/stable/2024-01-01/quotaConfiguration.json
+- Microsoft.EventHub/stable/2024-01-01/networkrulessets.json
+- Microsoft.EventHub/stable/2024-01-01/AuthorizationRules.json
+- Microsoft.EventHub/stable/2024-01-01/CheckNameAvailability.json
+- Microsoft.EventHub/stable/2024-01-01/consumergroups.json
+- Microsoft.EventHub/stable/2024-01-01/disasterRecoveryConfigs.json
+- Microsoft.EventHub/stable/2024-01-01/operations.json
+- Microsoft.EventHub/stable/2024-01-01/eventhubs.json
+- Microsoft.EventHub/stable/2024-01-01/SchemaRegistry.json
+- Microsoft.EventHub/stable/2024-01-01/ApplicationGroups.json
 ```
 
 ### Tag: package-2022-01-preview
