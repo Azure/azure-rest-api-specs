@@ -76,7 +76,7 @@ model Account {
   @visibility("read")
   tenantId: uuid;
 
-  @doc("The account resource ARM location, for eg. eastus, southeastasia.")
+  @doc("The account resource ARM location, for eg. eastus, southeastasia..")
   @visibility("read")
   location: string;
 

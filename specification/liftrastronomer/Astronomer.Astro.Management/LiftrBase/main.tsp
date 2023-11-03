@@ -40,7 +40,7 @@ model MarketplaceDetails {
   @doc("Marketplace subscription status")
   subscriptionStatus?: MarketplaceSubscriptionStatus;
 
-  @doc("Offer details for the marketplace that is selected by the user")
+  @doc("Offer details for the marketplace that is selected by the user.")
   offerDetails: OfferDetails;
 }
 

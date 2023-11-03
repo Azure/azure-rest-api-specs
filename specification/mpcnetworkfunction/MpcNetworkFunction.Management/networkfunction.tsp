@@ -18,7 +18,7 @@ namespace Microsoft.MobilePacketCore;
 @doc("AO5GC Network Function Resource")
 model NetworkFunctionResource
   is TrackedResource<NetworkFunctionResourceProperties> {
-  @doc("The name of the network function")
+  @doc("The name of the network function.")
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   @minLength(1)
   @maxLength(63)
