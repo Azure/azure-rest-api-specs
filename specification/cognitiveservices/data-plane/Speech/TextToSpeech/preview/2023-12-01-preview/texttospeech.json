@@ -10,7 +10,7 @@
     "version": "2023-12-01-preview"
   },
   "paths": {
-    "/api/texttospeech/projects": {
+    "/projects": {
       "get": {
         "tags": [
           "Project"
@@ -64,7 +64,7 @@
         }
       }
     },
-    "/api/texttospeech/projects/{id}": {
+    "/projects/{id}": {
       "get": {
         "tags": [
           "Project"
@@ -209,7 +209,7 @@
         }
       }
     },
-    "/api/texttospeech/consents": {
+    "/consents": {
       "get": {
         "tags": [
           "Consent"
@@ -263,7 +263,7 @@
         }
       }
     },
-    "/api/texttospeech/consents/{id}": {
+    "/consents/{id}": {
       "get": {
         "tags": [
           "Consent"
@@ -420,7 +420,7 @@
         }
       }
     },
-    "/api/texttospeech/trainingsets": {
+    "/trainingsets": {
       "get": {
         "tags": [
           "Trainingset"
@@ -474,7 +474,7 @@
         }
       }
     },
-    "/api/texttospeech/trainingsets/{id}": {
+    "/trainingsets/{id}": {
       "get": {
         "tags": [
           "Trainingset"
@@ -614,7 +614,7 @@
         }
       }
     },
-    "/api/texttospeech/trainingsets/{id}:upload": {
+    "/trainingsets/{id}:upload": {
       "post": {
         "tags": [
           "Trainingset"
@@ -687,7 +687,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
           },
           "default": {
             "description": "An error occurred.",
@@ -703,7 +706,7 @@
         }
       }
     },
-    "/api/texttospeech/modelrecipes": {
+    "/modelrecipes": {
       "get": {
         "tags": [
           "Model"
@@ -743,7 +746,7 @@
         }
       }
     },
-    "/api/texttospeech/models": {
+    "/models": {
       "get": {
         "tags": [
           "Model"
@@ -800,7 +803,7 @@
         }
       }
     },
-    "/api/texttospeech/models/{id}": {
+    "/models/{id}": {
       "get": {
         "tags": [
           "Model"
@@ -960,7 +963,7 @@
         }
       }
     },
-    "/api/texttospeech/endpoints": {
+    "/endpoints": {
       "get": {
         "tags": [
           "Endpoint"
@@ -1014,7 +1017,7 @@
         }
       }
     },
-    "/api/texttospeech/endpoints/{id}": {
+    "/endpoints/{id}": {
       "get": {
         "tags": [
           "Endpoint"
@@ -1168,7 +1171,7 @@
         }
       }
     },
-    "/api/texttospeech/endpoints/{id}:resume": {
+    "/endpoints/{id}:resume": {
       "post": {
         "tags": [
           "Endpoint"
@@ -1233,7 +1236,7 @@
         }
       }
     },
-    "/api/texttospeech/endpoints/{id}:suspend": {
+    "/endpoints/{id}:suspend": {
       "post": {
         "tags": [
           "Endpoint"
@@ -1298,7 +1301,7 @@
         }
       }
     },
-    "/api/texttospeech/basemodels": {
+    "/basemodels": {
       "get": {
         "tags": [
           "Zeroshot"
@@ -1338,7 +1341,7 @@
         }
       }
     },
-    "/api/texttospeech/zeroshots": {
+    "/zeroshots": {
       "get": {
         "tags": [
           "Zeroshot"
@@ -1395,7 +1398,7 @@
         }
       }
     },
-    "/api/texttospeech/zeroshots/{id}": {
+    "/zeroshots/{id}": {
       "get": {
         "tags": [
           "Zeroshot"
@@ -2108,6 +2111,23 @@
         }
       }
     },
+    "PresetStyleItem": {
+      "type": "object",
+      "properties": {
+        "male": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "female": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "Project": {
       "required": [
         "kind"
@@ -2192,13 +2212,7 @@
         "presetStyles": {
           "type": "object",
           "additionalProperties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
+            "$ref": "#/definitions/PresetStyleItem"
           },
           "readOnly": true
         }
