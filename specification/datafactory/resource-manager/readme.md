@@ -48,7 +48,7 @@ input-file:
 suppressions:
   - code: PropertiesTypeObjectNoDefinition
     reason: ADF parameterization feature is widely adopted and requires object type for most of the swagger properties.
-  - code: PropertiesTypeObjectNoDefinition
+  - code: AvoidAdditionalProperties
     reason: ADF feature is widely adopted and requires additionalProperties for most of the swagger properties.
 ```
 
