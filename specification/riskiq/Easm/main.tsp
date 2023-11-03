@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 @useAuth(
   OAuth2Auth<[
     {
-      @doc("implicit flow")
+      @doc("implicit flow.")
       type: OAuth2FlowType.implicit,
 
       @doc("the authorization URL")

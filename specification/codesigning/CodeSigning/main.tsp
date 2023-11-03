@@ -42,7 +42,7 @@ enum Versions {
 interface CertificateProfileOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
   @summary("Gets the status of a codesigning operation.")
-  @doc("This status operation requires that a Sign request has been submitted and the operationId is known.")
+  @doc("This status operation requires that a Sign request has been submitted and the operationId is known..")
   @route("/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/{operationId}")
   getCodeSigningStatus is Foundations.GetOperationStatus<
     CodeSigningOptions,

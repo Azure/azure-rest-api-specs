@@ -22,7 +22,7 @@ model TrialMatcherModelConfiguration {
 The clinical trials that the patient(s) should be matched to. <br />The trial
 selection can be given as a list of custom clinical trials and/or a list of
 filters to known clinical trial registries. In case both are given, the
-resulting trial set is a union of the two sets.
+resulting trial set is a union of the two sets..
 """)
   clinicalTrials: ClinicalTrials;
 }

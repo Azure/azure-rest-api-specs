@@ -22,7 +22,7 @@ model EmbeddingsOptions {
   @doc("""
     The model name to provide as part of this embeddings request.
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
-    resource URI that's connected to.
+    resource URI that's connected to..
     """)
   @projectedName("json", "model")
   @projectedName("csharp", "InternalNonAzureModelName")
