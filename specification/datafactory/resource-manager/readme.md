@@ -202,7 +202,15 @@ directive:
     where:
       - $(this-folder)/Microsoft.DataFactory/stable/2018-06-01/entityTypes/LinkedService.json
     reason:
-      - DataFlow add type required  
+      - DataFlow add type required
+
+suppressions:
+  - code: PropertiesTypeObjectNoDefinition
+    from: containerregistry.json
+    reason: ADF parameterization feature is widely adopted and requires object type for most of the swagger properties. 
+  - code: AvoidAdditionalProperties
+    from: containerregistry.json
+    reason: ADF feature is widely adopted and requires additionalProperties for most of the swagger properties. 
 ```
 
 
