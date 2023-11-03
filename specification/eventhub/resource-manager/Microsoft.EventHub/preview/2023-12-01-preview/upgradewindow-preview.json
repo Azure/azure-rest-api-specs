@@ -214,42 +214,45 @@
     "ClusterUpgradeWindow": {
       "type": "object",
       "properties": {
-        "preferredstartdayofweek": {
-          "type": "string",
-          "enum": [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday"
-          ],
-          "description": "Preferred day of the week in UTC to begin an upgrade",
-          "x-ms-enum": {
-            "name": "preferredstartdayofweek",
-            "modelAsString": true
-          }
-        },
-        "preferredstarthourofday": {
-          "format": "int32",
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 23,
-          "description": "Preferred hour of the day in UTC to begin an upgrade"
-        },
-        "preferredring": {
-          "type": "string",
-          "enum": [
-            "None",
-            "Early",
-            "Late",
-            "Middle"
-          ],
-          "description": "Preferred ring to perform upgrade",
-          "x-ms-enum": {
-            "name": "preferredRing",
-            "modelAsString": true
+        "settings": {
+          "type": "object",
+          "preferredstartdayofweek": {
+            "type": "string",
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "description": "Preferred day of the week in UTC to begin an upgrade",
+            "x-ms-enum": {
+              "name": "preferredstartdayofweek",
+              "modelAsString": true
+            }
+          },
+          "preferredstarthourofday": {
+            "format": "int32",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 23,
+            "description": "Preferred hour of the day in UTC to begin an upgrade"
+          },
+          "preferredring": {
+            "type": "string",
+            "enum": [
+              "None",
+              "Early",
+              "Late",
+              "Middle"
+            ],
+            "description": "Preferred ring to perform upgrade",
+            "x-ms-enum": {
+              "name": "preferredRing",
+              "modelAsString": true
+            }
           }
         }
       },
