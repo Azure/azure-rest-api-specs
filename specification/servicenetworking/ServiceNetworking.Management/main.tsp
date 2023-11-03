@@ -26,7 +26,7 @@ using Azure.ResourceManager;
 @parentResource(TrafficController)
 model Frontend is TrackedResource<FrontendProperties> {
   @key("frontendName")
-  @doc("Frontends")
+  @doc("Frontends.")
   @visibility("read")
   @path
   @segment("frontends")

@@ -24,7 +24,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("An account resource")
 model Account is TrackedResource<AccountProperties> {
-  @doc("Name of account")
+  @doc("Name of account.")
   @minLength(3)
   @maxLength(64)
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$")

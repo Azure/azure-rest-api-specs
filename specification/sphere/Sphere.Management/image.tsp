@@ -16,7 +16,7 @@ namespace Microsoft.AzureSphere;
 @doc("An image resource belonging to a catalog resource.")
 @parentResource(Catalog)
 model Image is ProxyResource<ImageProperties> {
-  @doc("Image name. Use .default for image creation.")
+  @doc("Image name. Use .default for image creation..")
   @key("imageName")
   @path
   @segment("images")

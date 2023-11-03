@@ -21,7 +21,7 @@ alias DictionaryBaseParameters = {
   @query
   @doc("""
     Specifies the language of the output text.
-    The target language must be one of the supported languages included in the dictionary scope.
+    The target language must be one of the supported languages included in the dictionary scope..
     """)
   to: string;
 };

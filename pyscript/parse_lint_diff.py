@@ -3,10 +3,10 @@ from pprint import pprint
 import re
 
 def extract_service_and_provider(url):
-    pattern = r"specification/(.*?)/data-plane/(.*?)/"
+    pattern = r"specification/(.*?)/(data-plane|resource-manager)/(.*?)/"
     match = re.search(pattern, url)
     if match:
-        return match.group(1), match.group(2)
+        return match.group(1), match.group(3)
     else:
         return None, None
 
@@ -31,6 +31,8 @@ for line in lines:
             source_file = data['source'][0]['document']
             pt1, pt2 = extract_service_and_provider(source_file)
             service = f"{pt1}/{pt2}"
+            if service == "None/None":
+                test = "best"
             item = results.get(service, None) or { code: { "level": level, "count": 0 } }
             if code not in item:
                 item[code] = { "level": level, "count": 0 }
@@ -42,4 +44,5 @@ for line in lines:
         pass
 
 # pprint errors using double quotes around keys
-print(json.dumps(results, indent=4, sort_keys=True))
+with open("pyscript/results.json", "w") as f:
+    f.write(json.dumps(results, indent=4, sort_keys=True))
