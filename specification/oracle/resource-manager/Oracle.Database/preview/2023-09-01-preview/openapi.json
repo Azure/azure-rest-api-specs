@@ -64,6 +64,12 @@
     },
     {
       "name": "DbSystemShapes"
+    },
+    {
+      "name": "DnsPrivateViews"
+    },
+    {
+      "name": "DnsPrivateZones"
     }
   ],
   "paths": {
@@ -273,6 +279,200 @@
         "x-ms-examples": {
           "Get a DbSystemShape by name": {
             "$ref": "./examples/dbSystemShapes_get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/locations/{location}/dnsPrivateViews": {
+      "get": {
+        "operationId": "DnsPrivateViews_ListByLocation",
+        "tags": [
+          "DnsPrivateViews"
+        ],
+        "description": "List DnsPrivateView resources by Location",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DnsPrivateViewListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List DnsPrivateViews by location": {
+            "$ref": "./examples/dnsPrivateViews_listByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/locations/{location}/dnsPrivateViews/{dnsprivateviewocid}": {
+      "get": {
+        "operationId": "DnsPrivateViews_Get",
+        "tags": [
+          "DnsPrivateViews"
+        ],
+        "description": "Get a DnsPrivateView",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dnsprivateviewocid",
+            "in": "path",
+            "description": "DnsPrivateView OCID",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DnsPrivateView"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a DnsPrivateView by name": {
+            "$ref": "./examples/dnsPrivateViews_get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/locations/{location}/dnsPrivateZones": {
+      "get": {
+        "operationId": "DnsPrivateZones_ListByLocation",
+        "tags": [
+          "DnsPrivateZones"
+        ],
+        "description": "List DnsPrivateZone resources by Location",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DnsPrivateZoneListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List DnsPrivateZones by location": {
+            "$ref": "./examples/dnsPrivateZones_listByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/locations/{location}/dnsPrivateZones/{dnsprivatezonename}": {
+      "get": {
+        "operationId": "DnsPrivateZones_Get",
+        "tags": [
+          "DnsPrivateZones"
+        ],
+        "description": "Get a DnsPrivateZone",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dnsprivatezonename",
+            "in": "path",
+            "description": "DnsPrivateZone name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DnsPrivateZone"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a DnsPrivateZone by name": {
+            "$ref": "./examples/dnsPrivateZones_get.json"
           }
         }
       }
@@ -2183,7 +2383,7 @@
           "readOnly": true
         },
         "shape": {
-          "$ref": "#/definitions/DbSystemShapeId",
+          "type": "string",
           "description": "The model name of the cloud Exadata infrastructure resource.",
           "x-ms-mutability": [
             "read",
@@ -2665,7 +2865,7 @@
           ]
         },
         "giVersion": {
-          "$ref": "#/definitions/GiVersionId",
+          "type": "string",
           "description": "Oracle Grid Infrastructure (GI) software version",
           "x-ms-mutability": [
             "read",
@@ -3578,18 +3778,6 @@
         }
       ]
     },
-    "DbSystemShapeId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an ARM resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Oracle.Database/dbSystemShapes"
-          }
-        ]
-      }
-    },
     "DbSystemShapeListResult": {
       "type": "object",
       "description": "The response of a DbSystemShape list operation.",
@@ -3765,6 +3953,314 @@
         ]
       }
     },
+    "DnsPrivateView": {
+      "type": "object",
+      "description": "DnsPrivateView resource definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DnsPrivateViewProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DnsPrivateViewListResult": {
+      "type": "object",
+      "description": "The response of a DnsPrivateView list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DnsPrivateView items on this page",
+          "items": {
+            "$ref": "#/definitions/DnsPrivateView"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DnsPrivateViewProperties": {
+      "type": "object",
+      "description": "Views resource model",
+      "properties": {
+        "ocid": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the view",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the view resource",
+          "readOnly": true
+        },
+        "isProtected": {
+          "type": "boolean",
+          "description": "A Boolean flag indicating whether or not parts of the resource are unable to be explicitly managed.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DnsPrivateViewsProvisioningState",
+          "description": "Views lifecycleState",
+          "readOnly": true
+        },
+        "self": {
+          "type": "string",
+          "description": "The canonical absolute URL of the resource.",
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "views timeCreated",
+          "readOnly": true
+        },
+        "timeUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "views timeCreated",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "ocid",
+        "isProtected",
+        "self",
+        "timeCreated",
+        "timeUpdated"
+      ]
+    },
+    "DnsPrivateViewsProvisioningState": {
+      "type": "string",
+      "description": "DnsPrivateViews provisioning state enum",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Active",
+        "Deleted",
+        "Deleting",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "DnsPrivateViewsProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active value"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted value"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting value"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating value"
+          }
+        ]
+      }
+    },
+    "DnsPrivateZone": {
+      "type": "object",
+      "description": "DnsPrivateZone resource definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DnsPrivateZoneProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DnsPrivateZoneListResult": {
+      "type": "object",
+      "description": "The response of a DnsPrivateZone list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DnsPrivateZone items on this page",
+          "items": {
+            "$ref": "#/definitions/DnsPrivateZone"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DnsPrivateZoneProperties": {
+      "type": "object",
+      "description": "Zones resource model",
+      "properties": {
+        "ocid": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the Zone",
+          "readOnly": true
+        },
+        "isProtected": {
+          "type": "boolean",
+          "description": "A Boolean flag indicating whether or not parts of the resource are unable to be explicitly managed.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DnsPrivateZonesProvisioningState",
+          "description": "Zones lifecycleState",
+          "readOnly": true
+        },
+        "self": {
+          "type": "string",
+          "description": "The canonical absolute URL of the resource.",
+          "readOnly": true
+        },
+        "serial": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current serial of the zone. As seen in the zone's SOA record.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Version is the never-repeating, totally-orderable, version of the zone, from which the serial field of the zone's SOA record is derived.",
+          "readOnly": true
+        },
+        "viewId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the private view containing the zone. This value will be null for zones in the global DNS, which are publicly resolvable and not part of a private view.",
+          "readOnly": true
+        },
+        "zoneType": {
+          "$ref": "#/definitions/ZoneType",
+          "description": "The type of the zone. Must be either PRIMARY or SECONDARY. SECONDARY is only supported for GLOBAL zones.",
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Zones timeCreated",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "ocid",
+        "isProtected",
+        "self",
+        "serial",
+        "version",
+        "zoneType",
+        "timeCreated"
+      ]
+    },
+    "DnsPrivateZonesProvisioningState": {
+      "type": "string",
+      "description": "DnsPrivateZones provisioning state enum",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Active",
+        "Creating",
+        "Deleted",
+        "Deleting",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "DnsPrivateZonesProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active value"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating value"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted value"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting value"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating value"
+          }
+        ]
+      }
+    },
     "EstimatedPatchingTime": {
       "type": "object",
       "description": "The estimated total time required in minutes for all patching operations (database server, storage server, and network switch patching).",
@@ -3844,18 +4340,6 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "GiVersionId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an ARM resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Oracle.Database/giVersions"
-          }
-        ]
-      }
     },
     "GiVersionListResult": {
       "type": "object",
@@ -4822,6 +5306,30 @@
     "Void": {
       "type": "object",
       "description": "Do not use. Model support location based path"
+    },
+    "ZoneType": {
+      "type": "string",
+      "description": "ZoneType enum",
+      "enum": [
+        "Primary",
+        "Secondary"
+      ],
+      "x-ms-enum": {
+        "name": "ZoneType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Primary",
+            "value": "Primary",
+            "description": "Primary value"
+          },
+          {
+            "name": "Secondary",
+            "value": "Secondary",
+            "description": "Secondary value"
+          }
+        ]
+      }
     }
   },
   "parameters": {}
