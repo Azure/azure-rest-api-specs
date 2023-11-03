@@ -1,0 +1,36 @@
+parameters:  
+  "service-dir":
+    default: "sdk/azure.ai.documenttranslation"
+  "dependencies":
+    "additionalDirectories": []
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/Azure.AI.DocumentTranslation/{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-python":    
+    package-dir: "azure-ai-documenttranslation"
+    package-name: "{package-dir}"  
+    package-mode: dataplane
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.AI.DocumentTranslation"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    package-dir: "azure-ai-documenttranslation-rest"
+    generateMetadata: true
+    generateTest: true
+    packageDetails:
+      name: "@azure-rest/azure-ai-documenttranslation-rest"
+      description: "Azure.AI.DocumentTranslation Service"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-documenttranslation"
+    namespace: com.azure.ai.documenttranslation
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
