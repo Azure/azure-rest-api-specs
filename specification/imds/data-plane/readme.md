@@ -35,7 +35,7 @@ tag: package-2023-07-01
 
 These settings apply only when `--tag=package-2023-07-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-07'
+```yaml $(tag) == 'package-2023-07-01'
 input-file:
   - Microsoft.InstanceMetadataService/stable/2023-07-01/imds.json
 ```
