@@ -19,7 +19,6 @@ Gets completions for the provided input prompts.
 Completions support a wide variety of tasks and generate text that continues from or "completes"
 provided prompt data.
 """)
-@sharedRoute
 @actionSeparator("/")
 @action("completions") //@convenientAPI(true)
 op getCompletions is Azure.Core.ResourceAction<
@@ -33,7 +32,6 @@ Gets chat completions for the provided chat messages.
 Completions support a wide variety of tasks and generate text that continues from or "completes"
 provided prompt data.
 """)
-@sharedRoute
 @added(ServiceApiVersions.v2023_05_15)
 @actionSeparator("/")
 @action("chat/completions") //@convenientAPI(true)
@@ -52,7 +50,6 @@ other augmentations to the base chat completions capabilities.
 //        selection of the appropriate request URL structure based on the presence or non-presence of matching
 //        chat extensions configuration in the request options model. Future service API versions may merge this
 //        capability into the standard /chat/completions route.
-@sharedRoute
 @added(ServiceApiVersions.v2023_08_01_Preview)
 @actionSeparator("/")
 @action("extensions/chat/completions")

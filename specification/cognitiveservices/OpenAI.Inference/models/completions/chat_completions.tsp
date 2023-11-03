@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 
+import "./streaming/chat_completions.tsp"; // exposed through client.tsp access modifiers
 import "./azure_chat_extensions.tsp";
 import "./common.tsp";
 import "./functions.tsp";
@@ -41,7 +42,8 @@ model ChatMessage {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "we explicitly want a nullable string"
   @doc("The text associated with this message payload.")
   @projectedName("json", "content")
-  content: string | null;
+  content: string | null; // they key might not be present on a streaming scenario
+  // content is optional in the streaming scenario therefore we define as content?: string
 
   @doc("""
     The name of the author of this message. `name` is required if role is `function`, and it should be the name of the
@@ -226,11 +228,6 @@ model ChatChoice {
   @projectedName("json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
 
-  @doc("The delta message content for a streaming response.")
-  @projectedName("json", "delta")
-  @projectedName("csharp", "InternalStreamingDeltaMessage")
-  delta?: ChatMessage;
-
   @doc("""
     Information about the content filtering category (hate, sexual, violence, self_harm), if it
     has been detected, as well as the severity level (very_low, low, medium, high-scale that
@@ -282,8 +279,3 @@ model ChatCompletions {
   @projectedName("json", "usage")
   usage: CompletionsUsage;
 }
-
-@doc("""
-Structure for intermediate streaming messages
-""")
-model ChatCompletionsStreamingChunk {}
