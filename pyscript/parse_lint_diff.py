@@ -1,5 +1,14 @@
 import json
 from pprint import pprint
+import re
+
+def extract_service_and_provider(url):
+    pattern = r"specification/(.*?)/data-plane/(.*?)/"
+    match = re.search(pattern, url)
+    if match:
+        return match.group(1), match.group(2)
+    else:
+        return None, None
 
 with open('pyscript/log.txt', 'r') as f:
     lines = f.readlines()
@@ -7,7 +16,7 @@ with open('pyscript/log.txt', 'r') as f:
 for i in range(len(lines)):
     lines[i] = lines[i][29:]
 
-errors = {}
+results = {}
 for line in lines:
     try:
         data = json.loads(line)
@@ -19,14 +28,18 @@ for line in lines:
         if all(key in data for key in requiredKeys):
             level = data['level']
             code = data['code']
-            if code not in errors:
-                errors[code] = {"level": level, "count": 1}
-            else:
-                errors[code]["count"] += 1
-                if errors[code]["level"] != level:
-                    raise ValueError("Level mismatch")
+            source_file = data['source'][0]['document']
+            pt1, pt2 = extract_service_and_provider(source_file)
+            service = f"{pt1}/{pt2}"
+            item = results.get(service, None) or { code: { "level": level, "count": 0 } }
+            if code not in item:
+                item[code] = { "level": level, "count": 0 }
+            item[code]["count"] += 1
+            if item[code]["level"] != level:
+                raise ValueError("Level mismatch")
+            results[service] = item
     except:
         pass
 
 # pprint errors using double quotes around keys
-print(json.dumps(errors, indent=4, sort_keys=True))
+print(json.dumps(results, indent=4, sort_keys=True))
