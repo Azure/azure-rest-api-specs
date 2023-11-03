@@ -204,10 +204,8 @@ directive:
     reason:
       - DataFlow add type required
   - suppress: PropertiesTypeObjectNoDefinition
-    from: datafactory.json
     reason: ADF parameterization feature is widely adopted and requires object type for most of the swagger properties.
   - suppress: PropertiesTypeObjectNoDefinition
-    from: datafactory.json
     reason: ADF feature is widely adopted and requires additionalProperties for most of the swagger properties.
 ```
 
