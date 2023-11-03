@@ -35,7 +35,6 @@ jobs:
   steps:
   - template: /eng/pipelines/templates/steps/npm-install.yml
 
-  - pwsh: |
-      npm test
+  - script: npm test
     displayName: Test TypeSpecValidation Tool
     workingDirectory: $(Build.SourcesDirectory)/eng/tools/TypeSpecValidation
