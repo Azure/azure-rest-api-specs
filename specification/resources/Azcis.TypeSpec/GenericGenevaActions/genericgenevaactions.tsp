@@ -46,7 +46,7 @@ model GenericGenevaActionsResource
   @doc("The name of resource.")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("resourceName")
-  @segment("genericGenevaActionss") // start with lower case
+  @segment("genericGenevaActions") // start with lower case
   @visibility("read")
   @path
   name: string;
