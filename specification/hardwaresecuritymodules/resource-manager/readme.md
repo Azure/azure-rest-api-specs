@@ -66,7 +66,7 @@ These settings apply only when `--tag=package-preview-2023-12` is specified on t
 ```yaml $(tag) == 'package-preview-2023-12'
 input-file:
   - Microsoft.HardwareSecurityModules/preview/2023-12-10-preview/cloudhsm.json
-  - Microsoft.HardwareSecurityModules/preview/2018-10-31-preview/dedicatedhsm.json
+  - Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
 ```
 
 # Code Generation
