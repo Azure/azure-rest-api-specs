@@ -45,6 +45,11 @@ input-file:
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Trigger.json
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/ChangeDataCapture.json
+suppressions:
+  - code: PropertiesTypeObjectNoDefinition
+    reason: ADF parameterization feature is widely adopted and requires object type for most of the swagger properties.
+  - code: PropertiesTypeObjectNoDefinition
+    reason: ADF feature is widely adopted and requires additionalProperties for most of the swagger properties.
 ```
 
 ### Tag: package-2017-09-preview
@@ -203,10 +208,6 @@ directive:
       - $(this-folder)/Microsoft.DataFactory/stable/2018-06-01/entityTypes/LinkedService.json
     reason:
       - DataFlow add type required
-  - suppress: PropertiesTypeObjectNoDefinition
-    reason: ADF parameterization feature is widely adopted and requires object type for most of the swagger properties.
-  - suppress: PropertiesTypeObjectNoDefinition
-    reason: ADF feature is widely adopted and requires additionalProperties for most of the swagger properties.
 ```
 
 
