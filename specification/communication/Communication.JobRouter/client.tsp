@@ -98,14 +98,23 @@ interface JobRouterRestClient {
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @internal("csharp")
+  @internal("python")
+  @internal("java")
   cancelJob is AzureCommunicationRoutingService.JobRouterOperations.cancelJobAction;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @internal("csharp")
+  @internal("python")
+  @internal("java")
   completeJob is AzureCommunicationRoutingService.JobRouterOperations.completeJobAction;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @internal("csharp")
+  @internal("python")
+  @internal("java")
   closeJob is AzureCommunicationRoutingService.JobRouterOperations.closeJobAction;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
@@ -125,6 +134,9 @@ interface JobRouterRestClient {
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @internal("csharp")
+  @internal("python")
+  @internal("java")
   declineJobOffer is AzureCommunicationRoutingService.JobRouterOperations.declineJobAction;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
