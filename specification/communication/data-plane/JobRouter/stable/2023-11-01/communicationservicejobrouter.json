@@ -1121,7 +1121,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReclassifyJobResult"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1171,7 +1174,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "OK Response payload from cancelling a job",
+            "schema": {
+              "$ref": "#/definitions/CancelJobResult"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1224,7 +1230,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "OK Response payload from completing a job",
+            "schema": {
+              "$ref": "#/definitions/CompleteJobResult"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1274,10 +1283,16 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Response payload from closing a job synchronously.",
+            "schema": {
+              "$ref": "#/definitions/CloseJobResult"
+            }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+            "description": "Response payload from closing a job at a future time.",
+            "schema": {
+              "$ref": "#/definitions/CloseJobResult"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2066,7 +2081,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "OK Response payload from declining a job.",
+            "schema": {
+              "$ref": "#/definitions/DeclineJobOfferResult"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2253,6 +2271,11 @@
         }
       }
     },
+    "CancelJobResult": {
+      "type": "object",
+      "description": "Response payload from cancelling a job",
+      "additionalProperties": {}
+    },
     "ClassificationPolicy": {
       "type": "object",
       "description": "A container for the rules that govern how jobs are classified.",
@@ -2361,6 +2384,11 @@
         "assignmentId"
       ]
     },
+    "CloseJobResult": {
+      "type": "object",
+      "description": "Response payload from closing a job",
+      "additionalProperties": {}
+    },
     "CompleteJobOptions": {
       "type": "object",
       "description": "Request payload for completing jobs",
@@ -2377,6 +2405,11 @@
       "required": [
         "assignmentId"
       ]
+    },
+    "CompleteJobResult": {
+      "type": "object",
+      "description": "Response payload from completing a job",
+      "additionalProperties": {}
     },
     "ConditionalQueueSelectorAttachment": {
       "type": "object",
@@ -2444,6 +2477,11 @@
           "description": "If the RetryOfferAt is not provided, then this job will not be offered again to the worker who declined this job unless the worker is de-registered and re-registered.  If a RetryOfferAt time is provided, then the job will be re-matched to eligible workers at the retry time in UTC.  The worker that declined the job will also be eligible for the job at that time."
         }
       }
+    },
+    "DeclineJobOfferResult": {
+      "type": "object",
+      "description": "Response payload from declining a job",
+      "additionalProperties": {}
     },
     "DirectMapRouterRule": {
       "type": "object",
@@ -3220,6 +3258,11 @@
       "additionalProperties": {
         "type": "string"
       }
+    },
+    "ReclassifyJobResult": {
+      "type": "object",
+      "description": "Response payload from reclassifying a job",
+      "additionalProperties": {}
     },
     "RoundRobinMode": {
       "type": "object",

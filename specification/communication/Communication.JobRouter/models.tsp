@@ -1046,34 +1046,92 @@ model WorkerWeightedAllocation {
 @doc("Request payload for reclassifying jobs")
 model ReclassifyJobOptions is Record<string>;
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
+@access(Access.internal)
 @doc("Response payload from reclassifying a job")
-model ReclassifyJobResult {}
+model ReclassifyJobResult is Record<unknown>;
 
-alias ReclassfiyJobOkReponse = ResourceOkResponse<ReclassifyJobResult>;
-
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
+@access(Access.internal)
 @doc("Response payload from closing a job")
-model CloseJobResult {}
+model CloseJobResult is Record<unknown>;
 
-alias CloseJobResultWithOkResponse = ResourceOkResponse<CloseJobResult>;
+@doc("Response payload from closing a job synchronously.")
+model CloseJobResultWithOkResponse {
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
+  @doc("Response after closing a job.")
+  @body
+  body: CloseJobResult;
 
-alias CloseJobResultWithAcceptedResponse = Azure.Core.Foundations.AcceptedResponse<CloseJobResult>;
+  @doc("Status code.")
+  @statusCode
+  _: 200;
+}
+
+@doc("Response payload from closing a job at a future time.")
+model CloseJobResultWithAcceptedResponse {
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
+  @doc("Response after closing a job.")
+  @body
+  body: CloseJobResult;
+
+  @doc("Status code.")
+  @statusCode
+  _: 202;
+}
 
 alias CloseJobResultResponse = CloseJobResultWithOkResponse | CloseJobResultWithAcceptedResponse;
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
+@access(Access.internal)
 @doc("Response payload from cancelling a job")
-model CancelJobResult {}
+model CancelJobResult is Record<unknown>;
 
-alias CancelJobResultWithOkResponse = ResourceOkResponse<CancelJobResult>;
+@doc("OK Response payload from cancelling a job")
+model CancelJobResultWithOkResponse {
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
+  @doc("Response after cancelling a job.")
+  @body
+  body: CancelJobResult;
 
+  @doc("Status code.")
+  @statusCode
+  _: 200;
+}
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
+@access(Access.internal)
 @doc("Response payload from completing a job")
-model CompleteJobResult {}
+model CompleteJobResult is Record<unknown>;
 
-alias CompleteJobResultWithOkResponse = ResourceOkResponse<CompleteJobResult>;
+@doc("OK Response payload from completing a job")
+model CompleteJobResultWithOkResponse {
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
+  @doc("Response after completing a job.")
+  @body
+  body: CompleteJobResult;
 
+  @doc("Status code.")
+  @statusCode
+  _: 200;
+}
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
+@access(Access.internal)
 @doc("Response payload from declining a job")
-model DeclineJobOfferResult {}
+model DeclineJobOfferResult is Record<unknown>;
 
-alias DeclineJobOfferResultWithOkResponse = ResourceOkResponse<DeclineJobOfferResult>;
+@doc("OK Response payload from declining a job.")
+model DeclineJobOfferResultWithOkResponse {
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
+  @doc("Response payload from declining a job.")
+  @body
+  body: DeclineJobOfferResult;
+
+  @doc("Status code.")
+  @statusCode
+  _: 200;
+}
 
 alias CommonListParams = {
   @doc("Number of objects to return per page.")

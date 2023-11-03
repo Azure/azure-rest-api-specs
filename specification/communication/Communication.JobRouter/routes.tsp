@@ -164,7 +164,15 @@ interface JobRouterOperations {
       @body
       options?: ReclassifyJobOptions;
     },
-    ReclassfiyJobOkReponse
+    {
+      #suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
+      @doc("Response after reclassifying a job.")
+      @body
+      body: ReclassifyJobResult;
+
+      @statusCode
+      _: 200;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
