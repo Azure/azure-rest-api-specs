@@ -277,6 +277,96 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/availableVMConfigurationTypes/{availableVMConfigurationTypeName}": {
+      "get": {
+        "tags": [
+          "Available VM Configuration Type"
+        ],
+        "operationId": "AvailableVMConfigurationType_Get",
+        "description": "Get an available VM configuration type",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AvailableVMConfigurationTypeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/AvailableVMConfigurationTypeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailableVMConfigurationTypeGet": {
+            "$ref": "./examples/AvailableVMConfigurationTypeGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/availableVMConfigurationTypes": {
+      "get": {
+        "tags": [
+          "Available VM Configuration Type"
+        ],
+        "operationId": "AvailableVMConfigurationTypes_List",
+        "description": "List available VM configuration types",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/AvailableVMConfigurationTypeResources"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AvailableVMConfigurationTypeList": {
+            "$ref": "./examples/AvailableVMConfigurationTypeList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/testConfigurations/{testConfigurationName}/runTest": {
       "post": {
         "tags": [
@@ -880,6 +970,15 @@
       "required": true,
       "type": "string",
       "description": "test configuration Name.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
+    },
+    "AvailableVMConfigurationTypeName": {
+      "name": "availableVMConfigurationTypeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "available VM Configuration Type Name.",
       "x-ms-parameter-location": "method",
       "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
     },
