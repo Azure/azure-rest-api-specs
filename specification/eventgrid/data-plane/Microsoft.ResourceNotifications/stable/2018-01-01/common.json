@@ -60,14 +60,49 @@
           "$ref": "#/definitions/ResourceNotificationsResourceUpdatedDetails",
           "x-ms-client-name": "resourceDetails"
         },
+        "apiVersion": {
+          "description": "api version of the resource properties bag",
+          "type": "string"
+        },
         "operationalInfo": {
           "description": "details about operational info",
           "$ref": "#/definitions/ResourceNotificationsOperationalDetails",
           "x-ms-client-name": "operationalDetails"
+        }
+      }
+    },
+    "ResourceNotificationsResourceDeletedDetails": {
+      "description": "Describes the schema of the properties under resource info which are common across all ARN system topic delete events",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "id of the resource for which the event is being emitted",
+          "type": "string",
+          "format": "arm-id"
         },
-        "apiVersion": {
-          "description": "api version of the resource properties bag",
+        "name": {
+          "description": "name of the resource for which the event is being emitted",
           "type": "string"
+        },
+        "type": {
+          "description": "the type of the resource for which the event is being emitted",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceNotificationsResourceDeletedEventData": {
+      "description": "Describes the schema of the common properties across all ARN system topic delete events",
+      "type": "object",
+      "properties": {
+        "resourceInfo": {
+          "description": "resourceInfo details for delete event",
+          "$ref": "#/definitions/ResourceNotificationsResourceDeletedDetails",
+          "x-ms-client-name": "resourceDetails"
+        },
+        "operationalInfo": {
+          "description": "details about operational info",
+          "$ref": "#/definitions/ResourceNotificationsOperationalDetails",
+          "x-ms-client-name": "operationalDetails"
         }
       }
     }
