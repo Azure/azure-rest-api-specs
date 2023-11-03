@@ -11,11 +11,11 @@ using TypeSpec.Rest;
 @doc("A specific deployment")
 @TypeSpec.Rest.resource("deployments")
 model Deployment {
-    @visibility("read")
-    @doc("Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.")
-    @projectedName("java", "deploymentOrModelName")
-    @key
-    deploymentId: string;
+  @visibility("read")
+  @doc("Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.")
+  @projectedName("java", "deploymentOrModelName")
+  @key
+  deploymentId: string;
 }
 
 // Audio implementation note: depending on the response_format provided in operation request bodies, these operations
@@ -26,7 +26,7 @@ model Deployment {
 // that share common characteristics whenever possible.
 
 alias MultipartFormDataRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTrait<{
-    @doc("The content type for the operation. Always multipart/form-data for this operation.")
-    @header("content-type")
-    contentType: "multipart/form-data";
+  @doc("The content type for the operation. Always multipart/form-data for this operation.")
+  @header("content-type")
+  contentType: "multipart/form-data";
 }>;

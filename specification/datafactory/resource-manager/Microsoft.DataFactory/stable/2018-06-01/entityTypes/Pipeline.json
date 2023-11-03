@@ -1271,6 +1271,21 @@
         }
       }
     },
+    "ParquetReadSettings": {
+      "description": "Parquet read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatReadSettings"
+        }
+      ],
+      "properties": {
+        "compressionProperties": {
+          "$ref": "#/definitions/CompressionReadSettings",
+          "description": "Compression settings."
+        }
+      }
+    },
     "DelimitedTextReadSettings": {
       "description": "Delimited text read settings.",
       "type": "object",
@@ -1554,6 +1569,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreReadSettings",
           "description": "Parquet store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/ParquetReadSettings",
+          "description": "Parquet format settings."
         },
         "additionalColumns": {
           "type": "object",
