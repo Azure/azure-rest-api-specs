@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ImageAnalysis Service",
+    "title": "Image Analysis",
     "version": "2023-04-01-preview",
     "x-typespec-generated": [
       {
@@ -580,22 +580,26 @@
         "x": {
           "type": "integer",
           "format": "int32",
-          "description": "X coordinate"
+          "description": "X coordinate",
+          "minimum": 0
         },
         "y": {
           "type": "integer",
           "format": "int32",
-          "description": "Y coordinate"
+          "description": "Y coordinate",
+          "minimum": 0
         },
         "w": {
           "type": "integer",
           "format": "int32",
-          "description": "Width of the box"
+          "description": "Width of the box",
+          "minimum": 0
         },
         "h": {
           "type": "integer",
           "format": "int32",
-          "description": "Height of the box"
+          "description": "Height of the box",
+          "minimum": 0
         }
       },
       "required": [
@@ -612,11 +616,14 @@
         "confidence": {
           "type": "number",
           "format": "float",
-          "description": "The level of confidence the service has in the caption."
+          "description": "The level of confidence the service has in the caption.",
+          "minimum": 0,
+          "maximum": 1
         },
         "text": {
           "type": "string",
-          "description": "The text of the caption."
+          "description": "The text of the caption.",
+          "minLength": 1
         }
       },
       "required": [
@@ -631,7 +638,8 @@
         "aspectRatio": {
           "type": "number",
           "format": "float",
-          "description": "The aspect ratio of the crop region."
+          "description": "The aspect ratio of the crop region.",
+          "minimum": 0
         },
         "boundingBox": {
           "$ref": "#/definitions/BoundingBox",
@@ -668,11 +676,14 @@
         "confidence": {
           "type": "number",
           "format": "float",
-          "description": "The level of confidence the service has in the caption."
+          "description": "The level of confidence the service has in the caption.",
+          "minimum": 0,
+          "maximum": 1
         },
         "text": {
           "type": "string",
-          "description": "The text of the caption."
+          "description": "The text of the caption.",
+          "minLength": 1
         },
         "boundingBox": {
           "$ref": "#/definitions/BoundingBox",
@@ -692,6 +703,7 @@
         "values": {
           "type": "array",
           "description": "The list of captions.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/DenseCaption"
           },
@@ -713,6 +725,7 @@
         "tags": {
           "type": "array",
           "description": "Classification confidences of the detected object.",
+          "minItems": 0,
           "items": {
             "$ref": "#/definitions/DetectedTag"
           },
@@ -737,6 +750,8 @@
           "type": "number",
           "format": "float",
           "description": "Gets the confidence value of the detected person.",
+          "minimum": 0,
+          "maximum": 1,
           "readOnly": true
         }
       },
@@ -752,11 +767,14 @@
         "confidence": {
           "type": "number",
           "format": "float",
-          "description": "The level of confidence that the entity was observed."
+          "description": "The level of confidence that the entity was observed.",
+          "minimum": 0,
+          "maximum": 1
         },
         "name": {
           "type": "string",
-          "description": "Name of the entity."
+          "description": "Name of the entity.",
+          "minLength": 1
         }
       },
       "required": [
@@ -881,7 +899,9 @@
         "confidence": {
           "type": "number",
           "format": "float",
-          "description": "Confidence of correctly identifying the style."
+          "description": "Confidence of correctly identifying the style.",
+          "minimum": 0,
+          "maximum": 1
         },
         "isHandwritten": {
           "type": "boolean",
@@ -992,12 +1012,14 @@
         "height": {
           "type": "integer",
           "format": "int32",
-          "description": "The height of the image in pixels."
+          "description": "The height of the image in pixels.",
+          "minimum": 1
         },
         "width": {
           "type": "integer",
           "format": "int32",
-          "description": "The width of the image in pixels."
+          "description": "The width of the image in pixels.",
+          "minimum": 1
         }
       },
       "required": [
@@ -1026,6 +1048,7 @@
         "values": {
           "type": "array",
           "description": "An array of detected objects.",
+          "minItems": 0,
           "items": {
             "$ref": "#/definitions/DetectedObject"
           },
@@ -1043,6 +1066,7 @@
         "values": {
           "type": "array",
           "description": "An array of detected people.",
+          "minItems": 0,
           "items": {
             "$ref": "#/definitions/DetectedPerson"
           },
@@ -1101,6 +1125,7 @@
         "values": {
           "type": "array",
           "description": "Recommended regions for cropping the image.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/CropRegion"
           },
@@ -1118,6 +1143,7 @@
         "values": {
           "type": "array",
           "description": "A list of tags with confidence level.",
+          "minItems": 0,
           "items": {
             "$ref": "#/definitions/DetectedTag"
           },

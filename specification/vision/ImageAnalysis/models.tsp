@@ -6,30 +6,38 @@ using TypeSpec.Http;
 @doc("A basic rectangle")
 model BoundingBox {
   @doc("X coordinate")
+  @minValue(0)
   x: int32;
 
   @doc("Y coordinate")
+  @minValue(0)
   y: int32;
 
   @doc("Width of the box")
+  @minValue(0)
   w: int32;
 
   @doc("Height of the box")
+  @minValue(0)
   h: int32;
 }
 
 @doc("A brief description of what the image depicts.")
 model CaptionResult {
   @doc("The level of confidence the service has in the caption.")
+  @minValue(0.0)
+  @maxValue(1.0)
   confidence: float32;
 
   @doc("The text of the caption.")
+  @minLength(1)
   text: string;
 }
 
 @doc("A region identified for smart cropping. There will be one region returned for each requested aspect ratio.")
 model CropRegion {
   @doc("The aspect ratio of the crop region.")
+  @minValue(0.0)
   aspectRatio: float32;
 
   @doc("The bounding box of the crop region.")
@@ -39,9 +47,12 @@ model CropRegion {
 @doc("A brief description of what the image depicts.")
 model DenseCaption {
   @doc("The level of confidence the service has in the caption.")
+  @minValue(0.0)
+  @maxValue(1.0)
   confidence: float32;
 
   @doc("The text of the caption.")
+  @minLength(1)
   text: string;
 
   @doc("The bounding box of the caption.")
@@ -51,6 +62,7 @@ model DenseCaption {
 @doc("A list of captions.")
 model DenseCaptionsResult {
   @doc("The list of captions.")
+  @minItems(1)
   values: Array<DenseCaption>;
 }
 
@@ -60,6 +72,7 @@ model DetectedObject {
   boundingBox: BoundingBox;
 
   @doc("Classification confidences of the detected object.")
+  @minItems(0)
   tags: Array<DetectedTag>;
 }
 
@@ -71,6 +84,8 @@ model DetectedPerson {
 
   @doc("Gets the confidence value of the detected person.")
   @visibility("read")
+  @minValue(0.0)
+  @maxValue(1.0)
   confidence: float32;
 }
 
@@ -122,6 +137,8 @@ model DocumentSpan {
 @doc("An object representing observed text styles.")
 model DocumentStyle {
   @doc("Confidence of correctly identifying the style.")
+  @minValue(0.0)
+  @maxValue(1.0)
   confidence: float32;
 
   @doc("Is content handwritten or not.")
@@ -182,9 +199,11 @@ model ImageAnalysisResult {
 @doc("The image metadata information such as height and width.")
 model ImageMetadata {
   @doc("The height of the image in pixels.")
+  @minValue(1)
   height: int32;
 
   @doc("The width of the image in pixels.")
+  @minValue(1)
   width: int32;
 }
 
@@ -200,12 +219,14 @@ model CustomModelResult {
 @doc("Describes detected objects in an image.")
 model ObjectsResult {
   @doc("An array of detected objects.")
+  @minItems(0)
   values: Array<DetectedObject>;
 }
 
 @doc("An object describing whether the image contains people.")
 model PeopleResult {
   @doc("An array of detected people.")
+  @minItems(0)
   values: Array<DetectedPerson>;
 }
 
@@ -230,21 +251,26 @@ model ReadResult {
 @doc("Smart cropping result.")
 model SmartCropsResult {
   @doc("Recommended regions for cropping the image.")
+  @minItems(1)
   values: Array<CropRegion>;
 }
 
 @doc("An entity observation in the image, along with the confidence score.")
 model DetectedTag {
   @doc("The level of confidence that the entity was observed.")
+  @minValue(0.0)
+  @maxValue(1.0)
   confidence: float32;
 
   @doc("Name of the entity.")
+  @minLength(1)
   name: string;
 }
 
 @doc("A list of tags with confidence level.")
 model TagsResult {
   @doc("A list of tags with confidence level.")
+  @minItems(0)
   values: Array<DetectedTag>;
 }
 

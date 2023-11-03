@@ -11,7 +11,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @service({
-  title: "ImageAnalysis Service",
+  title: "Image Analysis",
 })
 @versioned(ImageAnalysis.Versions)
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
