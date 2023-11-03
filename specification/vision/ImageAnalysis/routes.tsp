@@ -84,7 +84,7 @@ op analyzeFromUrl is Azure.Core.RpcOperation<
 alias SharedSegmentQuery = {
   @query("mode")
   @doc("The type of segmentation to perform")
-  mode: SegmentationMode;
+  segmentationMode: SegmentationMode;
 };
 
 #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to analyze an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
