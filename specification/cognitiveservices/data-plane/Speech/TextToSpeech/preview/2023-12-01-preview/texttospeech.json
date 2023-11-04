@@ -49,6 +49,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Get all projects": {
             "$ref": "./examples/get_projects.json"
@@ -240,6 +243,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Get all consents": {
             "$ref": "./examples/get_consents.json"
@@ -409,7 +415,7 @@
         ],
         "summary": "Create Consent",
         "description": "Creates a new consent with audio file.",
-        "operationId": "Consents_Create_With_Multipart_Form",
+        "operationId": "Consents_Post",
         "consumes": [
           "multipart/form-data"
         ],
@@ -564,6 +570,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Get all training sets": {
@@ -883,6 +892,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Get all models": {
             "$ref": "./examples/get_models.json"
@@ -1088,6 +1100,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Get all endpoints": {
@@ -1459,6 +1474,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Get all zeroshot models": {
             "$ref": "./examples/get_zeroshots.json"
@@ -1625,7 +1643,7 @@
         ],
         "summary": "Create Zero Shot Model",
         "description": "Creates a new zero shot model.",
-        "operationId": "ZeroShotModels_Create_With_Multipart_Form",
+        "operationId": "ZeroShotModels_Post",
         "consumes": [
           "multipart/form-data"
         ],
