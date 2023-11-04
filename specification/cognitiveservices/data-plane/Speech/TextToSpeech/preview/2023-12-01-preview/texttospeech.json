@@ -23,21 +23,13 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/QuerySkip"
           },
           {
-            "in": "query",
-            "name": "top",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/QueryTop"
           },
           {
-            "in": "query",
-            "name": "filter",
-            "type": "string"
+            "$ref": "#/parameters/QueryFilter"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -222,21 +214,13 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/QuerySkip"
           },
           {
-            "in": "query",
-            "name": "top",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/QueryTop"
           },
           {
-            "in": "query",
-            "name": "filter",
-            "type": "string"
+            "$ref": "#/parameters/QueryFilter"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -555,21 +539,13 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/QuerySkip"
           },
           {
-            "in": "query",
-            "name": "top",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/QueryTop"
           },
           {
-            "in": "query",
-            "name": "filter",
-            "type": "string"
+            "$ref": "#/parameters/QueryFilter"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -881,24 +857,13 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "description": "The number of models to skip.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/QuerySkip"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "The number of models to return.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/QueryTop"
           },
           {
-            "in": "query",
-            "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available models.\r\n            <ul><li><b>Supported properties:</b> name, created\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for created.\r\n              </li><li><b>Example:</b>```filter=name eq modelName```</li></ul>",
-            "type": "string"
+            "$ref": "#/parameters/QueryFilter"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1098,21 +1063,13 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/QuerySkip"
           },
           {
-            "in": "query",
-            "name": "top",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/QueryTop"
           },
           {
-            "in": "query",
-            "name": "filter",
-            "type": "string"
+            "$ref": "#/parameters/QueryFilter"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1476,24 +1433,13 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "Skip",
-            "description": "Gets or sets the number of resources to skip.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/QuerySkip"
           },
           {
-            "in": "query",
-            "name": "Top",
-            "description": "Gets or sets the number of resources to return.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/QueryTop"
           },
           {
-            "in": "query",
-            "name": "Filter",
-            "description": "Gets or sets the filtering expression for selecting a subset of the available resources.\r\n<ul><li><b>Supported properties:</b> displayName, createdDateTime\r\n  </li><li><b>Operators:</b>\r\n    - eq, ne are supported for all properties.\r\n    - gt, ge, lt, le are supported for created.\r\n  </li><li><b>Example:</b>```filter=displayName eq resourceName```</li></ul>",
-            "type": "string"
+            "$ref": "#/parameters/QueryFilter"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -2693,6 +2639,34 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "QuerySkip": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "QueryTop": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "QueryFilter": {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter condition",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
