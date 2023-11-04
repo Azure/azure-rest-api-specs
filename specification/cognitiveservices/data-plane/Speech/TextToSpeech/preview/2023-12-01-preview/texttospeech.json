@@ -349,7 +349,7 @@
           "Consent"
         ],
         "summary": "Create Consent",
-        "description": "Uploads and creates a new consent.",
+        "description": "Creates a new consent with audio URL.",
         "operationId": "Consents_Create",
         "consumes": [
           "application/json"
@@ -416,6 +416,128 @@
         "x-ms-examples": {
           "Create a consent": {
             "$ref": "./examples/create_consent.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Consent"
+        ],
+        "summary": "Create Consent",
+        "description": "Creates a new consent with audio file.",
+        "operationId": "Consents_Create_With_Multipart_Form",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Operation-Id",
+            "required": false,
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "formData",
+            "name": "projectId",
+            "description": "The project Id.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "in": "formData",
+            "name": "displayName",
+            "description": "The display name of this consent.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "description",
+            "description": "Optional description of this consent.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "voiceTalentName",
+            "description": "The name of voice talent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "companyName",
+            "description": "The name of company.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "audiodata",
+            "description": "An audio file containing the audio data.",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "in": "formData",
+            "name": "locale",
+            "description": "The locale of this consent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "properties",
+            "description": "properties.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a consent": {
+            "$ref": "./examples/create_consent_with_multipart_from.json"
           }
         }
       }
@@ -1415,8 +1537,7 @@
             "name": "id",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1455,8 +1576,7 @@
             "name": "id",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1507,8 +1627,7 @@
             "name": "id",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "format": "uuid"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1551,6 +1670,151 @@
         "x-ms-examples": {
           "Create a zeroshot model": {
             "$ref": "./examples/create_zeroshot.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Zeroshot"
+        ],
+        "summary": "Create Zero Shot Model",
+        "description": "Creates a new zero shot model.",
+        "operationId": "ZeroShotModels_Create_With_Multipart_Form",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Operation-Id",
+            "required": false,
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "formData",
+            "name": "displayName",
+            "description": "The display name of this model.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "description",
+            "description": "Optional description of this model.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "projectId",
+            "description": "The project Id.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "in": "formData",
+            "name": "audioData",
+            "description": "Audio files.",
+            "type": "file"
+          },
+          {
+            "in": "formData",
+            "name": "properties",
+            "description": "properties.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ZeroShot"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a zeroshot model": {
+            "$ref": "./examples/create_zeroshot_with_multipart_form.json"
+          }
+        }
+      }
+    },
+    "/operations/{id}": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Gets operation info.",
+        "description": "Gets operation info.",
+        "operationId": "Operations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The id of the operation",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error encountered.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation": {
+            "$ref": "./examples/get_operation.json"
           }
         }
       }
@@ -1598,6 +1862,11 @@
         "companyName": {
           "minLength": 1,
           "type": "string"
+        },
+        "audioUrl": {
+          "description": "The public accessible url of consent audio file.",
+          "type": "string",
+          "format": "uri"
         },
         "locale": {
           "type": "string"
@@ -2015,6 +2284,24 @@
         }
       }
     },
+    "OperationId": {
+      "description": "Unique operation ID.",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+      "maxLength": 64
+    },
+    "OperationStatus": {
+      "description": "Status of a long running operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/OperationId"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        }
+      }
+    },
     "PaginatedConsents": {
       "type": "object",
       "properties": {
@@ -2323,6 +2610,11 @@
         },
         "consentId": {
           "$ref": "#/definitions/ResourceId"
+        },
+        "audioUrl": {
+          "description": "The public accessible url of audio file. Or, Azure blob perfix of multi audio files. Total audio length less than 1 minute.",
+          "type": "string",
+          "format": "uri"
         },
         "properties": {
           "$ref": "#/definitions/ZeroShotProperties"
