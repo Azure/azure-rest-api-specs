@@ -82,7 +82,6 @@ model Step {
 enum StepType {
   /** Step type that performs code execution. */
   Inline,
-
   /** Step type that installs another update. */
   Reference,
 }
@@ -92,8 +91,8 @@ model InlineStep extends Step {
   @doc("Identity of handler that will execute this step. Required if step type is inline.")
   handler: string;
 
-  @doc("Parameters to be passed to handler during execution.")
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Properties can be anything"
+  @doc("Parameters to be passed to handler during execution.")
   handlerProperties?: Record<unknown>;
 
   @doc("Collection of file names to be passed to handler during execution.")

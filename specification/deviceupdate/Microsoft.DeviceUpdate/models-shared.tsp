@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-core";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-@useDependency(Azure.Core.)
 namespace Microsoft.DeviceUpdate;
 
 // TODO virtual resource?
@@ -139,18 +138,14 @@ enum OperationFilterStatus {
   NotStarted,
 }
 
-
 /** Device deployement state */
 enum DeviceDeploymentState {
   /** Deployment has completed with success. */
   Succeeded,
-
   /** Deployment is in progress. */
   InProgress,
-
   /** Deployment was canceled. */
   Canceled,
-
   /** Deployment has completed with failure. */
   Failed,
 }

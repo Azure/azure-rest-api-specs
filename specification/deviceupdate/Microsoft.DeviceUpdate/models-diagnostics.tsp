@@ -94,4 +94,3 @@ model LogCollectionOperationDeviceStatus {
   /** Log upload location */
   logLocation?: string;
 }
-
