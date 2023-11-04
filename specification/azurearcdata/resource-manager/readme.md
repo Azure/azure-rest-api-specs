@@ -45,9 +45,11 @@ input-file:
   - Microsoft.AzureArcData/preview/2023-11-01-preview/operations.json
   - Microsoft.AzureArcData/preview/2023-11-01-preview/postgresInstances.json
   - Microsoft.AzureArcData/preview/2023-11-01-preview/sqlManagedInstances.json
+  - Microsoft.AzureArcData/preview/2023-11-01-preview/sqlServerAvailabilityGroups.json
   - Microsoft.AzureArcData/preview/2023-11-01-preview/sqlServerDatabases.json
   - Microsoft.AzureArcData/preview/2023-11-01-preview/sqlServerInstances.json
 ```
+
 ### Tag: package-preview-2023-01
 
 These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
@@ -148,6 +150,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-ruby
@@ -176,3 +179,23 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Powershell
+
+These settings apply only when `--powershell` is specified on the command line.
+
+``` yaml $(powershell)
+directive:
+  - from: swagger-document
+    where: $.definitions.BackupPolicy.properties.differentialBackupHours
+    transform: >-
+      return {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            12,
+            24
+          ],
+          "description": "The differential backup interval in hours."
+        }
+```

@@ -803,6 +803,75 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/getTelemetry": {
+      "post": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_getTelemetry",
+        "description": "Retrieves SQL Server instance telemetry",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "name": "sqlServerInstanceTelemetryRequest",
+            "in": "body",
+            "description": "Contains the parameters to get SQL Server instance telemetry.",
+            "required": true,
+            "schema": {
+              "$ref": "./sqlServerInstances.json#/definitions/SqlServerInstanceTelemetryRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./sqlServerInstances.json#/definitions/SqlServerInstanceTelemetryResponse"
+            }
+          },
+          "202": {
+            "description": "Arc SQL Server telemetry retrieval is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "operationName": "SqlServerInstances_PostInstanceTelemetry",
+          "itemName": "rows"
+        },
+        "x-ms-examples": {
+          "Retrieves Arc SQL Server cpu utilization telemetry": {
+            "$ref": "./examples/GetSqlServerInstanceTelemetry.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/dataControllers": {
       "get": {
         "tags": [
@@ -1632,7 +1701,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9_-]+$"
     },
     "postgresInstanceName": {
       "name": "postgresInstanceName",

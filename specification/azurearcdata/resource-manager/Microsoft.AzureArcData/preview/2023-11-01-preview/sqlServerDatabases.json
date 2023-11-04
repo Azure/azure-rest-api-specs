@@ -56,6 +56,12 @@
               "$ref": "#/definitions/SqlServerDatabaseResource"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SqlServerDatabaseResource"
+            }
+          },
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
@@ -408,9 +414,47 @@
             }
           }
         },
+        "backupPolicy": {
+          "description": "The backup profile for the SQL server.",
+          "$ref": "#/definitions/BackupPolicy"
+        },
+        "earliestRestoreDate": {
+          "format": "date-time",
+          "description": "This records the earliest start date and time that restore is available for this database (ISO8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "createMode": {
+          "description": "Database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. sourceDatabaseId and restorePointInTime must be specified.",
+          "enum": [
+            "Default",
+            "PointInTimeRestore"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DatabaseCreateMode",
+            "modelAsString": true
+          }
+        },
+        "sourceDatabaseId": {
+          "description": "The resource identifier of the source database associated with create operation of this database.",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "restorePointInTime": {
+          "format": "date-time",
+          "description": "Conditional. If createMode is PointInTimeRestore, this value is required. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database.",
+          "type": "string"
+        },
         "provisioningState": {
           "type": "string",
           "description": "The provisioning state of the Arc-enabled SQL Server database resource.",
+          "readOnly": true
+        },
+        "lastDatabaseUploadTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when last successful database upload was performed.",
           "readOnly": true
         }
       }
@@ -430,6 +474,46 @@
           "$ref": "#/definitions/SqlServerDatabaseResourceProperties",
           "description": "The data controller's properties",
           "x-ms-client-flatten": false
+        }
+      }
+    },
+    "BackupPolicy": {
+      "description": "The backup profile for the SQL server.",
+      "type": "object",
+      "properties": {
+        "retentionPeriodDays": {
+          "type": "integer",
+          "description": "The retention period for all the databases in this managed instance.",
+          "minimum": 0,
+          "maximum": 35,
+          "format": "int32"
+        },
+        "fullBackupDays": {
+          "type": "integer",
+          "description": "The value indicating days between full backups.",
+          "minimum": 0,
+          "maximum": 7,
+          "format": "int32"
+        },
+        "differentialBackupHours": {
+          "description": "The differential backup interval in hours.",
+          "enum": [
+            12,
+            24
+          ],
+          "type": "integer",
+          "format": "int32",
+          "x-ms-enum": {
+            "name": "differentialBackupHours",
+            "modelAsString": false
+          }
+        },
+        "transactionLogBackupMinutes": {
+          "type": "integer",
+          "description": "The value indicating minutes between transaction log backups.",
+          "minimum": 0,
+          "maximum": 60,
+          "format": "int32"
         }
       }
     }
@@ -465,7 +549,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9_-]+$"
     },
     "databaseName": {
       "name": "databaseName",
