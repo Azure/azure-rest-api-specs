@@ -9,21 +9,13 @@
       }
     ]
   },
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "host": "management.azure.com",
-  "produces": [
-    "application/json"
-  ],
-  "consumes": [
-    "application/json"
-  ],
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -49,9 +41,7 @@
     "/providers/Microsoft.DevOpsInfrastructure/operations": {
       "get": {
         "operationId": "Operations_List",
-        "tags": [
-          "Operations"
-        ],
+        "tags": ["Operations"],
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -80,9 +70,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DevOpsInfrastructure/pools": {
       "get": {
         "operationId": "Pools_ListBySubscription",
-        "tags": [
-          "Pools"
-        ],
+        "tags": ["Pools"],
         "description": "List Pool resources by subscription ID",
         "parameters": [
           {
@@ -119,9 +107,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOpsInfrastructure/pools": {
       "get": {
         "operationId": "Pools_ListByResourceGroup",
-        "tags": [
-          "Pools"
-        ],
+        "tags": ["Pools"],
         "description": "List Pool resources by resource group",
         "parameters": [
           {
@@ -161,9 +147,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOpsInfrastructure/pools/{poolName}": {
       "get": {
         "operationId": "Pools_Get",
-        "tags": [
-          "Pools"
-        ],
+        "tags": ["Pools"],
         "description": "Get a Pool",
         "parameters": [
           {
@@ -205,9 +189,7 @@
       },
       "put": {
         "operationId": "Pools_CreateOrUpdate",
-        "tags": [
-          "Pools"
-        ],
+        "tags": ["Pools"],
         "description": "Create a Pool",
         "parameters": [
           {
@@ -275,9 +257,7 @@
       },
       "patch": {
         "operationId": "Pools_Update",
-        "tags": [
-          "Pools"
-        ],
+        "tags": ["Pools"],
         "description": "Update a Pool",
         "parameters": [
           {
@@ -328,9 +308,7 @@
       },
       "delete": {
         "operationId": "Pools_Delete",
-        "tags": [
-          "Pools"
-        ],
+        "tags": ["Pools"],
         "description": "Delete a Pool",
         "parameters": [
           {
@@ -385,10 +363,7 @@
         }
       },
       "discriminator": "kind",
-      "required": [
-        "kind",
-        "resourcePredictions"
-      ]
+      "required": ["kind", "resourcePredictions"]
     },
     "AgentProfileUpdate": {
       "type": "object",
@@ -402,9 +377,7 @@
         }
       },
       "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "required": ["kind"]
     },
     "AzureDevOpsOrganizationProfile": {
       "type": "object",
@@ -417,9 +390,7 @@
           "x-ms-identifiers": []
         }
       },
-      "required": [
-        "organizations"
-      ],
+      "required": ["organizations"],
       "allOf": [
         {
           "$ref": "#/definitions/OrganizationProfile"
@@ -438,10 +409,7 @@
           "default": "Standard"
         }
       },
-      "required": [
-        "name",
-        "tier"
-      ]
+      "required": ["name", "tier"]
     },
     "FabricProfile": {
       "type": "object",
@@ -452,9 +420,7 @@
         }
       },
       "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "required": ["kind"]
     },
     "NetworkProfile": {
       "type": "object",
@@ -463,9 +429,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "subnetId"
-      ]
+      "required": ["subnetId"]
     },
     "Organization": {
       "type": "object",
@@ -484,11 +448,7 @@
           "format": "int32"
         }
       },
-      "required": [
-        "url",
-        "projects",
-        "parallelism"
-      ]
+      "required": ["url", "projects", "parallelism"]
     },
     "OrganizationProfile": {
       "type": "object",
@@ -499,9 +459,7 @@
         }
       },
       "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "required": ["kind"]
     },
     "OsProfile": {
       "type": "object",
@@ -510,9 +468,7 @@
           "$ref": "#/definitions/SecretsManagementSettings"
         }
       },
-      "required": [
-        "secretsManagementSettings"
-      ]
+      "required": ["secretsManagementSettings"]
     },
     "Pool": {
       "type": "object",
@@ -522,10 +478,7 @@
           "$ref": "#/definitions/PoolProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         }
       },
       "allOf": [
@@ -551,11 +504,7 @@
           "default": "*"
         }
       },
-      "required": [
-        "resourceId",
-        "aliases",
-        "buffer"
-      ]
+      "required": ["resourceId", "aliases", "buffer"]
     },
     "PoolListResult": {
       "type": "object",
@@ -574,9 +523,7 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": [
-        "value"
-      ]
+      "required": ["value"]
     },
     "PoolProperties": {
       "type": "object",
@@ -727,9 +674,7 @@
       "properties": {
         "maxAgentLifetime": {}
       },
-      "required": [
-        "maxAgentLifetime"
-      ],
+      "required": ["maxAgentLifetime"],
       "allOf": [
         {
           "$ref": "#/definitions/AgentProfile"
@@ -787,12 +732,7 @@
           "$ref": "#/definitions/NetworkProfile"
         }
       },
-      "required": [
-        "sku",
-        "images",
-        "osProfile",
-        "networkProfile"
-      ],
+      "required": ["sku", "images", "osProfile", "networkProfile"],
       "allOf": [
         {
           "$ref": "#/definitions/FabricProfile"
