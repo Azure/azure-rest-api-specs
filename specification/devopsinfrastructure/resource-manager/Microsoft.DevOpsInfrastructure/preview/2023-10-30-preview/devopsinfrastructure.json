@@ -74,11 +74,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Pools_Update": {
-            "$ref": "./examples/ListOperations.json"
-          }
         }
       }
     },
@@ -183,6 +178,7 @@
           {
             "name": "poolName",
             "in": "path",
+            "description": "Name of the pool. It needs to be globally unique.",
             "required": true,
             "type": "string",
             "pattern": "^[a-z][a-z0-9]*$"
@@ -227,6 +223,7 @@
           {
             "name": "poolName",
             "in": "path",
+            "description": "Name of the pool. It needs to be globally unique.",
             "required": true,
             "type": "string",
             "pattern": "^[a-z][a-z0-9]*$"
@@ -297,6 +294,7 @@
           {
             "name": "poolName",
             "in": "path",
+            "description": "Name of the pool. It needs to be globally unique.",
             "required": true,
             "type": "string",
             "pattern": "^[a-z][a-z0-9]*$"
@@ -368,12 +366,16 @@
           {
             "name": "poolName",
             "in": "path",
+            "description": "Name of the pool. It needs to be globally unique.",
             "required": true,
             "type": "string",
             "pattern": "^[a-z][a-z0-9]*$"
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -413,13 +415,15 @@
   "definitions": {
     "AgentProfile": {
       "type": "object",
+      "description": "The agent profile of the machines in the pool.",
       "properties": {
         "kind": {
           "type": "string",
           "description": "Discriminator property for AgentProfile."
         },
         "resourcePredictions": {
-          "$ref": "#/definitions/ResourcePredictions"
+          "$ref": "#/definitions/ResourcePredictions",
+          "description": "Defines pool buffer."
         }
       },
       "discriminator": "kind",
@@ -429,9 +433,11 @@
     },
     "AzureDevOpsOrganizationProfile": {
       "type": "object",
+      "description": "Azure DevOps organization profile",
       "properties": {
         "organizations": {
           "type": "array",
+          "description": "The list of Azure DevOps organizations the pool should be present in.",
           "items": {
             "$ref": "#/definitions/Organization"
           },
@@ -450,12 +456,15 @@
     },
     "DevOpsAzureSku": {
       "type": "object",
+      "description": "The Azure SKU of the machines in the pool.",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "The Azure SKU name of the machines in the pool."
         },
         "tier": {
           "type": "string",
+          "description": "The Azure SKU tier of the machines in the pool.",
           "default": "Standard"
         }
       },
@@ -465,6 +474,7 @@
     },
     "FabricProfile": {
       "type": "object",
+      "description": "Defines the type of fabric the agent will run on.",
       "properties": {
         "kind": {
           "type": "string",
@@ -478,9 +488,11 @@
     },
     "NetworkProfile": {
       "type": "object",
+      "description": "The network profile of the machines in the pool.",
       "properties": {
         "subnetId": {
-          "type": "string"
+          "type": "string",
+          "description": "The subnet id on which to put all machines created in the pool."
         }
       },
       "required": [
@@ -489,19 +501,23 @@
     },
     "Organization": {
       "type": "object",
+      "description": "Defines an Azure DevOps organization.",
       "properties": {
         "url": {
-          "type": "string"
+          "type": "string",
+          "description": "The Aure DevOps organization URL in which the pool should be created."
         },
         "projects": {
           "type": "array",
+          "description": "Optional list of projects in which the pool should be created.",
           "items": {
             "type": "string"
           }
         },
         "parallelism": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "How many machines can be created at maximum in this organization out of the maximumConcurrency of the pool."
         }
       },
       "required": [
@@ -510,6 +526,7 @@
     },
     "OrganizationProfile": {
       "type": "object",
+      "description": "Defines the organization in which the pool will be used.",
       "properties": {
         "kind": {
           "type": "string",
@@ -523,9 +540,11 @@
     },
     "OsProfile": {
       "type": "object",
+      "description": "The OS profile of the machines in the pool.",
       "properties": {
         "secretsManagementSettings": {
-          "$ref": "#/definitions/SecretsManagementSettings"
+          "$ref": "#/definitions/SecretsManagementSettings",
+          "description": "The secret mannagement settings of the machines in the pool."
         }
       },
       "required": [
@@ -554,18 +573,22 @@
     },
     "PoolImage": {
       "type": "object",
+      "description": "The VM image of the machines in the pool.",
       "properties": {
         "resourceId": {
-          "type": "string"
+          "type": "string",
+          "description": "The resource id of the image."
         },
         "aliases": {
           "type": "array",
+          "description": "List of aliases to reference the image by.",
           "items": {
             "type": "string"
           }
         },
         "buffer": {
           "type": "string",
+          "description": "The percentage of the buffer to be allocated to this image.",
           "default": "*"
         }
       },
@@ -596,24 +619,30 @@
     },
     "PoolProperties": {
       "type": "object",
+      "description": "Pool properties",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the current operation."
         },
         "maximumConcurrency": {
           "type": "integer",
           "format": "int32",
+          "description": "Defines how many resources can there be created at any given time.",
           "minimum": 1,
           "maximum": 10000
         },
         "organizationProfile": {
-          "$ref": "#/definitions/OrganizationProfile"
+          "$ref": "#/definitions/OrganizationProfile",
+          "description": "Defines the organization in which the pool will be used."
         },
         "agentProfile": {
-          "$ref": "#/definitions/AgentProfile"
+          "$ref": "#/definitions/AgentProfile",
+          "description": "Defines how the machine will be handled once it executed a job."
         },
         "fabricProfile": {
-          "$ref": "#/definitions/FabricProfile"
+          "$ref": "#/definitions/FabricProfile",
+          "description": "Defines the type of fabric the agent will run on."
         }
       },
       "required": [
@@ -645,22 +674,27 @@
       "description": "The updatable properties of the Pool.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the current operation."
         },
         "maximumConcurrency": {
           "type": "integer",
           "format": "int32",
+          "description": "Defines how many resources can there be created at any given time.",
           "minimum": 1,
           "maximum": 10000
         },
         "organizationProfile": {
-          "$ref": "#/definitions/OrganizationProfile"
+          "$ref": "#/definitions/OrganizationProfile",
+          "description": "Defines the organization in which the pool will be used."
         },
         "agentProfile": {
-          "$ref": "#/definitions/AgentProfile"
+          "$ref": "#/definitions/AgentProfile",
+          "description": "Defines how the machine will be handled once it executed a job."
         },
         "fabricProfile": {
-          "$ref": "#/definitions/FabricProfile"
+          "$ref": "#/definitions/FabricProfile",
+          "description": "Defines the type of fabric the agent will run on."
         }
       }
     },
@@ -719,23 +753,28 @@
       }
     },
     "ResourcePredictions": {
-      "type": "object"
+      "type": "object",
+      "description": "Defines pool buffer."
     },
     "SecretsManagementSettings": {
       "type": "object",
+      "description": "The secret management settings of the machines in the pool.",
       "properties": {
         "certificateStoreLocation": {
-          "type": "string"
+          "type": "string",
+          "description": "Where to store certificates on the machine."
         },
         "observedCertificates": {
           "type": "array",
+          "description": "The list of certificates to install on all machines in the pool.",
           "items": {
             "type": "string",
             "format": "uri"
           }
         },
         "keyExportable": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Defines if the key of the certificates should be exportable."
         }
       },
       "required": [
@@ -745,8 +784,12 @@
     },
     "Stateful": {
       "type": "object",
+      "description": "Stateful profile meaning that the machines will be returned to the pool after running a job.",
       "properties": {
-        "maxAgentLifetime": {}
+        "maxAgentLifetime": {
+          "type": "string",
+          "description": "How long should stateful machines be kept around. The maximum is one week."
+        }
       },
       "required": [
         "maxAgentLifetime"
@@ -760,6 +803,7 @@
     },
     "StatelessAgentProfile": {
       "type": "object",
+      "description": "Stateless profile meaning that the machines will be cleaned up after running a job.",
       "allOf": [
         {
           "$ref": "#/definitions/AgentProfile"
@@ -769,22 +813,27 @@
     },
     "VmssFabricProfile": {
       "type": "object",
+      "description": "The agents will run on Virtual Machine Scale Sets.",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/DevOpsAzureSku"
+          "$ref": "#/definitions/DevOpsAzureSku",
+          "description": "The Azure SKU of the machines in the pool."
         },
         "images": {
           "type": "array",
+          "description": "The VM images of the machines in the pool.",
           "items": {
             "$ref": "#/definitions/PoolImage"
           },
           "x-ms-identifiers": []
         },
         "osProfile": {
-          "$ref": "#/definitions/OsProfile"
+          "$ref": "#/definitions/OsProfile",
+          "description": "The OS profile of the machines in the pool."
         },
         "networkProfile": {
-          "$ref": "#/definitions/NetworkProfile"
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "The network profile of the machines in the pool."
         }
       },
       "required": [
