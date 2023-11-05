@@ -13,13 +13,14 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Managed DevOps Infrastructure",
-  version: "2023-11-07",
+  version: "2023-10-30-preview",
 })
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.DevOpsInfrastructure;
 
 model Pool is TrackedResource<PoolProperties> {
   @key("poolName")
+  @pattern("^[a-z][a-z0-9]*$")
   @path
   @segment("pools")
   name: string;
@@ -93,6 +94,24 @@ model Stateful extends AgentProfile {
   maxAgentLifetime: unknown;
 }
 model ResourcePredictions {
+}
+
+@doc("The status of the current operation.")
+enum ProvisioningState {
+  /** Represents a succeeded operation. */
+  Succeeded,
+  /** Represents a failed operation. */
+  Failed,
+  /** Represents a canceled operation. */
+  Canceled,
+  /** Represents a pending operation. */
+  Provisioning,
+  /** Represents a pending operation. */
+  Updating,
+  /** Represents an operation under deletion. */
+  Deleting,
+  /** Represents an accepted operation. */
+  Accepted,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

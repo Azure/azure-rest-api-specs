@@ -179,7 +179,8 @@
             "name": "poolName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
           }
         ],
         "responses": {
@@ -222,7 +223,8 @@
             "name": "poolName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "resource",
@@ -291,7 +293,8 @@
             "name": "poolName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "properties",
@@ -343,7 +346,8 @@
             "name": "poolName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
           }
         ],
         "responses": {
@@ -636,6 +640,60 @@
         "fabricProfile": {
           "$ref": "#/definitions/FabricProfile"
         }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Represents a succeeded operation."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Represents a failed operation."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Represents a canceled operation."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Represents a pending operation."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Represents a pending operation."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Represents an operation under deletion."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Represents an accepted operation."
+          }
+        ]
       }
     },
     "ResourcePredictions": {
