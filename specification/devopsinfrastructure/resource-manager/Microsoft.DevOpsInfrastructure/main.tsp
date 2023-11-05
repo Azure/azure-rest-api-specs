@@ -49,8 +49,8 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
 }
 model Organization {
   url: string;
-  projects: string[];
-  parallelism: int32;
+  projects?: string[];
+  parallelism?: int32;
 }
 
 @discriminator("kind")
@@ -60,23 +60,23 @@ model VmssFabricProfile extends FabricProfile {
   kind: "Vmss";
   sku: DevOpsAzureSku;
   images: PoolImage[];
-  osProfile: OsProfile;
-  networkProfile: NetworkProfile;
+  osProfile?: OsProfile;
+  networkProfile?: NetworkProfile;
 }
 model DevOpsAzureSku {
     name: string;
-    tier: string = "Standard";
+    tier?: string = "Standard";
 }
 model PoolImage {
     resourceId: string;
-    aliases: string[];
-    buffer: string = "*";
+    aliases?: string[];
+    buffer?: string = "*";
 }
 model OsProfile {
     secretsManagementSettings: SecretsManagementSettings
 }
 model SecretsManagementSettings {
-    certificateStoreLocation: string;
+    certificateStoreLocation?: string;
     observedCertificates: url[];
     keyExportable: boolean;
 }
@@ -86,7 +86,7 @@ model NetworkProfile {
 
 @discriminator("kind")
 model AgentProfile {
-    resourcePredictions: ResourcePredictions;
+    resourcePredictions?: ResourcePredictions;
 }
 model StatelessAgentProfile extends AgentProfile {
   kind: "Stateless";
@@ -122,8 +122,8 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface Pools {
   get is ArmResourceRead<Pool>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Pool>;
-  update is ArmResourcePatchSync<Pool, PoolProperties>;
-  delete is ArmResourceDeleteSync<Pool>;
+  update is ArmResourcePatchAsync<Pool, PoolProperties>;
+  delete is ArmResourceDeleteAsync<Pool>;
   listByResourceGroup is ArmResourceListByParent<Pool>;
   listBySubscription is ArmListBySubscription<Pool>;
 }
