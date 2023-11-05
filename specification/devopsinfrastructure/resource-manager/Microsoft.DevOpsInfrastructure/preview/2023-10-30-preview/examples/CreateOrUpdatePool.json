@@ -4,17 +4,27 @@
   "parameters": {
     "api-version": "2023-10-30-preview",
     "subscriptionId": "00000000-0000-0000-0000-00000000000",
-    "resourceGroup": "rg"
+    "resourceGroupName": "rg",
+    "location": "eastus",
+    "resource": {
+      "properties": {
+        "provisioningState": "Succeeded",
+        "fabricProfile": {
+          "kind": "vmss"
+        }
+      }
+    }
   },
   "responses": {
-    "200": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
       "body": {
-        "value": [
-          {
+        "properties": {
             "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/rg/providers/Microsoft.DevOpsIndrastructure/Pools/pool",
             "location": "eastus"
-          }
-        ]
+        }
       }
     }
   }
