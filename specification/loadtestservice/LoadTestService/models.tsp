@@ -166,21 +166,13 @@ enum TestType {
 @doc("Test file info.")
 @resource("files")
 @parentResource(Test)
-model TestFileInfo extends FileInfo {
-  @doc("Name of the file.")
-  @key
-  @visibility
-  fileName: string;
+model TestFileInfo is FileInfo {
 }
 
 @doc("Test run file info.")
 @resource("files")
 @parentResource(TestRun)
-model TestRunFileInfo extends FileInfo {
-  @doc("Name of the file.")
-  @key
-  @visibility
-  fileName: string;
+model TestRunFileInfo is FileInfo {
 }
 
 @doc("Load test model.")
@@ -397,6 +389,11 @@ model TestInputArtifacts {
 
 @doc("File info")
 model FileInfo {
+  @doc("Name of the file.")
+  @key
+  @visibility
+  fileName: string;
+
   @doc("File URL.")
   @visibility("read")
   url?: string;
@@ -417,10 +414,6 @@ model FileInfo {
   @visibility("read")
   validationFailureDetails?: string;
 }
-
-@doc("Collection of tests")
-@friendlyName("TestsList")
-model TestsList is Azure.Core.Page<Test>;
 
 @doc("Test app components")
 model TestAppComponents {
@@ -457,7 +450,7 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
   resourceType: string;
 
   @doc("Azure resource display name")
-  displayName: string;
+  displayName?: string;
 
   @doc("Resource group name of the Azure resource")
   @visibility("read")
@@ -605,7 +598,7 @@ SECRET_VALUE.
 
   @doc("Test run duration in milliseconds.")
   @visibility("read")
-  duration?: int32;
+  duration?: int64;
 
   @doc("Subnet ID on which the load test instances should run.")
   @visibility("read")
@@ -737,10 +730,6 @@ model ContainerInfo {
   @doc("Expiry time of the container (ISO 8601 literal format)")
   expireDateTime?: utcDateTime;
 }
-
-@doc("Collection of test runs")
-@friendlyName("TestRunsList")
-model TestRunsList is Azure.Core.Page<TestRun>;
 
 @doc("Represents collection of metric namespaces.")
 model MetricNamespaceCollection {

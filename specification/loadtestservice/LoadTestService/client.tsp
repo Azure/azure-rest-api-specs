@@ -16,20 +16,20 @@ namespace Customizations;
   service: Microsoft.LoadTestService,
 })
 interface AdministrationOperations {
-  CreateOrUpdateTest is LoadTestAdministration.createOrUpdateTest;
-  CreateOrUpdateAppComponents is LoadTestAdministration.createOrUpdateAppComponents;
-  CreateOrUpdateServerMetricsConfig is LoadTestAdministration.createOrUpdateServerMetricsConfig;
-  GetAppComponents is LoadTestAdministration.getAppComponents;
-  GetServerMetricsConfig is LoadTestAdministration.getServerMetricsConfig;
-  GetTest is LoadTestAdministration.getTest;
-  GetTestFile is LoadTestAdministration.getTestFile;
-  ListTestFiles is LoadTestAdministration.listTestFiles;
-  ListTests is LoadTestAdministration.listTests;
+  createOrUpdateTest is LoadTestAdministration.createOrUpdateTest;
+  createOrUpdateAppComponents is LoadTestAdministration.createOrUpdateAppComponents;
+  createOrUpdateServerMetricsConfig is LoadTestAdministration.createOrUpdateServerMetricsConfig;
+  getAppComponents is LoadTestAdministration.getAppComponents;
+  getServerMetricsConfig is LoadTestAdministration.getServerMetricsConfig;
+  getTest is LoadTestAdministration.getTest;
+  getTestFile is LoadTestAdministration.getTestFile;
+  listTestFiles is LoadTestAdministration.listTestFiles;
+  listTests is LoadTestAdministration.listTests;
   #suppress "@azure-tools/typespec-azure-core/byos"
   @projectedName("python", "BeginUploadTestFile")
-  UploadTestFile is LoadTestAdministration.uploadTestFile;
-  DeleteTestFile is LoadTestAdministration.deleteTestFile;
-  DeleteTest is LoadTestAdministration.deleteTest;
+  uploadTestFile is LoadTestAdministration.uploadTestFile;
+  deleteTestFile is LoadTestAdministration.deleteTestFile;
+  deleteTest is LoadTestAdministration.deleteTest;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -39,25 +39,24 @@ interface AdministrationOperations {
   service: Microsoft.LoadTestService,
 })
 interface TestRunOperations {
-  // TODO check with service team why is Python different here?
   @projectedName("python", "BeginTestRun")
-  CreateOrUpdateTestRun is LoadTestRun.createOrUpdateTestRun;
-  CreateOrUpdateAppComponents is LoadTestRun.createOrUpdateAppComponents;
-  CreateOrUpdateServerMetricsConfig is LoadTestRun.createOrUpdateServerMetricsConfig;
-  DeleteTestRun is LoadTestRun.deleteTestRun;
-  GetAppComponents is LoadTestRun.getAppComponents;
-  GetServerMetricsConfig is LoadTestRun.getServerMetricsConfig;
-  GetTestRun is LoadTestRun.getTestRun;
-  GetTestRunFile is LoadTestRun.getTestRunFile;
-  ListMetricDimensionValues is LoadTestRun.listMetricDimensionValues;
+  createOrUpdateTestRun is LoadTestRun.createOrUpdateTestRun;
+  createOrUpdateAppComponents is LoadTestRun.createOrUpdateAppComponents;
+  createOrUpdateServerMetricsConfig is LoadTestRun.createOrUpdateServerMetricsConfig;
+  deleteTestRun is LoadTestRun.deleteTestRun;
+  getAppComponents is LoadTestRun.getAppComponents;
+  getServerMetricsConfig is LoadTestRun.getServerMetricsConfig;
+  getTestRun is LoadTestRun.getTestRun;
+  getTestRunFile is LoadTestRun.getTestRunFile;
+  listMetricDimensionValues is LoadTestRun.listMetricDimensionValues;
   @projectedName("python", "get_metric_definitions")
   @projectedName("java", "getMetricDefinitions")
-  ListMetricDefinitions is LoadTestRun.listMetricDefinitions;
+  listMetricDefinitions is LoadTestRun.listMetricDefinitions;
   @projectedName("python", "get_metric_namespaces")
   @projectedName("java", "getMetricNamespaces")
-  ListMetricNamespaces is LoadTestRun.listMetricNamespaces;
-  ListMetrics is LoadTestRun.listMetrics;
-  ListTestRuns is LoadTestRun.listTestRuns;
+  listMetricNamespaces is LoadTestRun.listMetricNamespaces;
+  listMetrics is LoadTestRun.listMetrics;
+  listTestRuns is LoadTestRun.listTestRuns;
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
-  StopTestRun is LoadTestRun.stop;
+  stopTestRun is LoadTestRun.stop;
 }

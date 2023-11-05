@@ -22,11 +22,12 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/loadtestservice.json"
     azure-resource-provider-folder: "data-plane"
     examples-directory: ./examples
+    omit-unreachable-types: true
   "@azure-tools/typespec-python":
     package-dir: "azure-developer-loadtesting"
     package-name: "{package-dir}"
     # emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
-    package-mode: dataplane
+    package-mode: azure-dataplane
   "@azure-tools/typespec-ts":
     package-dir: "load-testing-rest"
     title: Azure Load Testing

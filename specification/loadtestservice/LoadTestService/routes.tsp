@@ -232,10 +232,10 @@ interface LoadTestRun {
   @route("/test-runs/{testRunId}")
   @patch
   createOrUpdateTestRun is Azure.Core.Foundations.Operation<
-    {
-      @header
-      @doc("Content type.")
-      contentType: "application/merge-patch+json";
+  {
+  @header
+  @doc("Content type.")
+  contentType: "application/merge-patch+json";
 
       @doc("""
 Unique Id for the load test run, must contain only lower-case alphabetic,

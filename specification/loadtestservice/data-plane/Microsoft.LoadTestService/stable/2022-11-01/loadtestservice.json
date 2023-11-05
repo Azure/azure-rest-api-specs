@@ -41,7 +41,7 @@
   "securityDefinitions": {
     "Oauth2": {
       "type": "oauth2",
-      "description": "The Azure Active Directory OAuth2 Flow",
+      "description": "OAuth 2.0 Flow with Microsoft Entra ID.",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "scopes": {
@@ -1602,30 +1602,6 @@
     }
   },
   "definitions": {
-    "APIVersions": {
-      "type": "string",
-      "description": "Azure Load Testing API versions.",
-      "enum": [
-        "2022-11-01",
-        "2023-04-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "APIVersions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2022_11_01",
-            "value": "2022-11-01",
-            "description": "The 2022-11-01 version of the Azure Load Testing API."
-          },
-          {
-            "name": "v2023_04_01_preview",
-            "value": "2023-04-01-preview",
-            "description": "The 2023-04-01-preview version of the Azure Load Testing API."
-          }
-        ]
-      }
-    },
     "AggregationType": {
       "type": "string",
       "description": "Aggregation type.",
@@ -1719,8 +1695,7 @@
       "required": [
         "resourceId",
         "resourceName",
-        "resourceType",
-        "displayName"
+        "resourceType"
       ]
     },
     "AppComponentUpdate": {
@@ -1903,38 +1878,6 @@
         "message": {
           "type": "string",
           "description": "Error details in case test run was not successfully run.",
-          "readOnly": true
-        }
-      }
-    },
-    "FileInfo": {
-      "type": "object",
-      "description": "File info",
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "File URL.",
-          "readOnly": true
-        },
-        "fileType": {
-          "$ref": "#/definitions/FileType",
-          "description": "File type",
-          "readOnly": true
-        },
-        "expireDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Expiry time of the file (ISO 8601 literal format)",
-          "readOnly": true
-        },
-        "validationStatus": {
-          "$ref": "#/definitions/FileStatus",
-          "description": "Validation status of the file",
-          "readOnly": true
-        },
-        "validationFailureDetails": {
-          "type": "string",
-          "description": "Validation failure error details",
           "readOnly": true
         }
       }
@@ -2268,28 +2211,6 @@
           "description": "The name"
         }
       }
-    },
-    "Oauth2": {
-      "type": "object",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "OAuth2 authentication",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flows": {
-          "type": "array",
-          "description": "Supported OAuth2 flows",
-          "items": {}
-        }
-      },
-      "required": [
-        "type",
-        "flows"
-      ]
     },
     "OptionalLoadTestConfig": {
       "type": "object",
@@ -2856,34 +2777,6 @@
         ]
       }
     },
-    "SystemMetaData": {
-      "type": "object",
-      "description": "System metadata.",
-      "properties": {
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation datetime(ISO 8601 literal format).",
-          "readOnly": true
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "The user that created.",
-          "readOnly": true
-        },
-        "lastModifiedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last Modified datetime(ISO 8601 literal format).",
-          "readOnly": true
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The user that last modified.",
-          "readOnly": true
-        }
-      }
-    },
     "Test": {
       "type": "object",
       "description": "Load test model.",
@@ -3040,32 +2933,36 @@
         "fileName": {
           "type": "string",
           "description": "Name of the file."
-        }
-      },
-      "required": [
-        "fileName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FileInfo"
-        }
-      ]
-    },
-    "TestIdPathParameter": {
-      "type": "object",
-      "description": "Test Id path parameter.",
-      "properties": {
-        "testId": {
+        },
+        "url": {
           "type": "string",
-          "description": "Unique test identifier for the load test, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
-          "minLength": 2,
-          "maxLength": 50,
-          "pattern": "^[a-z0-9_-]*$",
+          "description": "File URL.",
+          "readOnly": true
+        },
+        "fileType": {
+          "$ref": "#/definitions/FileType",
+          "description": "File type",
+          "readOnly": true
+        },
+        "expireDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry time of the file (ISO 8601 literal format)",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/FileStatus",
+          "description": "Validation status of the file",
+          "readOnly": true
+        },
+        "validationFailureDetails": {
+          "type": "string",
+          "description": "Validation failure error details",
           "readOnly": true
         }
       },
       "required": [
-        "testId"
+        "fileName"
       ]
     },
     "TestInputArtifacts": {
@@ -3217,7 +3114,7 @@
         },
         "duration": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Test run duration in milliseconds.",
           "readOnly": true
         },
@@ -3331,32 +3228,36 @@
         "fileName": {
           "type": "string",
           "description": "Name of the file."
-        }
-      },
-      "required": [
-        "fileName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FileInfo"
-        }
-      ]
-    },
-    "TestRunIdPathParameter": {
-      "type": "object",
-      "description": "Test run Id path parameter.",
-      "properties": {
-        "testRunId": {
+        },
+        "url": {
           "type": "string",
-          "description": "Unique test run identifier for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
-          "minLength": 2,
-          "maxLength": 50,
-          "pattern": "^[a-z0-9_-]*$",
+          "description": "File URL.",
+          "readOnly": true
+        },
+        "fileType": {
+          "$ref": "#/definitions/FileType",
+          "description": "File type",
+          "readOnly": true
+        },
+        "expireDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry time of the file (ISO 8601 literal format)",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/FileStatus",
+          "description": "Validation status of the file",
+          "readOnly": true
+        },
+        "validationFailureDetails": {
+          "type": "string",
+          "description": "Validation failure error details",
           "readOnly": true
         }
       },
       "required": [
-        "testRunId"
+        "fileName"
       ]
     },
     "TestRunInputArtifacts": {
@@ -3582,28 +3483,6 @@
         }
       }
     },
-    "TestRunsList": {
-      "type": "object",
-      "description": "Collection of test runs",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The TestRun items on this page",
-          "items": {
-            "$ref": "#/definitions/TestRun"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "TestServerMetricConfig": {
       "type": "object",
       "description": "Test server metrics configuration",
@@ -3714,28 +3593,6 @@
           "description": "Resource Id of the managed identity referencing the Key vault."
         }
       }
-    },
-    "TestsList": {
-      "type": "object",
-      "description": "Collection of tests",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Test items on this page",
-          "items": {
-            "$ref": "#/definitions/Test"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "TimeGrain": {
       "type": "string",

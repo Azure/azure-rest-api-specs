@@ -36,7 +36,7 @@ enum APIVersions {
   v2023_04_01_preview: "2023-04-01-preview",
 }
 
-@doc("The Azure Active Directory OAuth2 Flow")
+@doc("OAuth 2.0 Flow with Microsoft Entra ID.")
 model Oauth2
   is OAuth2Auth<[
     {
