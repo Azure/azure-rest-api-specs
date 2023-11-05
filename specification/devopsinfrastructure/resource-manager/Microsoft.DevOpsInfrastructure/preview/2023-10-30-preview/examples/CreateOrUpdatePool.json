@@ -6,11 +6,30 @@
     "subscriptionId": "00000000-0000-0000-0000-00000000000",
     "resourceGroupName": "rg",
     "location": "eastus",
+    "poolName": "pool",
     "resource": {
       "properties": {
         "provisioningState": "Succeeded",
+        "maximumConcurrency": 10,
+        "organizationProfile": {
+          "type": "AzureDevOps",
+          "organizations": [
+            {
+              "url": "https://mseng.visualstudio.com"
+            }
+          ]
+        },
+        "agentProfile": {
+          "type": "Stateless"
+        },
         "fabricProfile": {
-          "kind": "vmss"
+          "kind": "vmss",
+          "sku": "Standard_D4ads_v5",
+          "images": [
+            {
+              "resourceId": "/MicrosoftWindowsServer/WindowsServer/2019-Datacenter/latest"
+            }
+          ]
         }
       }
     }
@@ -22,8 +41,29 @@
       },
       "body": {
         "properties": {
-            "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/rg/providers/Microsoft.DevOpsIndrastructure/Pools/pool",
-            "location": "eastus"
+            "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/rg/providers/Microsoft.DevOpsInfrastructure/Pools/pool",
+            "provisioningState": "Succeeded",
+            "maximumConcurrency": 10,
+            "organizationProfile": {
+              "type": "AzureDevOps",
+              "organizations": [
+                {
+                  "url": "https://mseng.visualstudio.com"
+                }
+              ]
+            },
+            "agentProfile": {
+              "type": "Stateless"
+            },
+            "fabricProfile": {
+              "kind": "Vmss",
+              "sku": "Standard_D4ads_v5",
+              "images": [
+                {
+                  "resourceId": "/MicrosoftWindowsServer/WindowsServer/2019-Datacenter/latest"
+                }
+              ]
+            }
         }
       }
     }
