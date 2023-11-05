@@ -27,6 +27,8 @@ model Pool is TrackedResource<PoolProperties> {
 }
 
 model PoolProperties {
+  provisioningState?: ProvisioningState;
+
   @minValue(1)
   @maxValue(10000)
   maximumConcurrency: int32;
