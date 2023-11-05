@@ -61,7 +61,7 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
 }
 @doc("Defines an Azure DevOps organization.")
 model Organization {
-  @doc("The Aure DevOps organization URL in which the pool should be created.")
+  @doc("The Azure DevOps organization URL in which the pool should be created.")
   url: string;
 
   @doc("Optional list of projects in which the pool should be created.")
@@ -113,7 +113,7 @@ model PoolImage {
 }
 @doc("The OS profile of the machines in the pool.")
 model OsProfile {
-  @doc("The secret mannagement settings of the machines in the pool.")
+  @doc("The secret management settings of the machines in the pool.")
   secretsManagementSettings: SecretsManagementSettings;
 }
 @doc("The secret management settings of the machines in the pool.")
