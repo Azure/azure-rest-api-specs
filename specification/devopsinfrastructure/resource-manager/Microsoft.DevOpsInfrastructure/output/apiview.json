@@ -1,1 +1,3008 @@
-{"Name":"Managed DevOps Infrastructure","PackageName":"Microsoft.DevOpsInfrastructure","Tokens":[{"Kind":15},{"Kind":8,"Value":"// Package parsed using @azure-tools/typespec-apiview (version:0.4.4)"},{"Kind":5,"DefinitionId":"GLOBAL"},{"Kind":1},{"Kind":1},{"Kind":1},{"Kind":3,"Value":"@"},{"Kind":4,"Value":"armProviderNamespace"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.@armProviderNamespace"},{"Kind":1},{"Kind":3,"Value":"@"},{"Kind":4,"Value":"service"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.@service"},{"Kind":3,"Value":"("},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"title"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.@service.anonymous.title"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":8,"Value":"\"Managed DevOps Infrastructure\""},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"version"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.@service.anonymous.version"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":8,"Value":"\"2023-10-30-preview\""},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":3,"Value":")"},{"Kind":1},{"Kind":3,"Value":"@"},{"Kind":4,"Value":"useDependency"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.@useDependency"},{"Kind":3,"Value":"("},{"Kind":6,"Value":"Azure.ResourceManager.Versions.v1_0_Preview_1"},{"Kind":3,"Value":")"},{"Kind":1},{"Kind":4,"Value":"namespace"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure","Value":"Microsoft.DevOpsInfrastructure"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"interface"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.Operations","Value":"Operations"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"@"},{"Kind":4,"Value":"armResourceOperations"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.Pools.@armResourceOperations"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"interface"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.Pools","Value":"Pools"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.Pools.get","Value":"get"},{"Kind":2,"Value":" "},{"Kind":4,"Value":"is"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"ArmResourceRead"},{"Kind":3,"Value":"<"},{"Kind":6,"Value":"Pool","NavigateToId":"Microsoft.DevOpsInfrastructure.Pool"},{"Kind":3,"Value":">"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.Pools.createOrUpdate","Value":"createOrUpdate"},{"Kind":2,"Value":" "},{"Kind":4,"Value":"is"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"ArmResourceCreateOrUpdateAsync"},{"Kind":3,"Value":"<"},{"Kind":6,"Value":"Pool","NavigateToId":"Microsoft.DevOpsInfrastructure.Pool"},{"Kind":3,"Value":">"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.Pools.update","Value":"update"},{"Kind":2,"Value":" "},{"Kind":4,"Value":"is"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"ArmResourcePatchSync"},{"Kind":3,"Value":"<"},{"Kind":6,"Value":"Pool","NavigateToId":"Microsoft.DevOpsInfrastructure.Pool"},{"Kind":3,"Value":","},{"Kind":2,"Value":" "},{"Kind":6,"Value":"PoolProperties","NavigateToId":"Microsoft.DevOpsInfrastructure.PoolProperties"},{"Kind":3,"Value":">"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.Pools.delete","Value":"delete"},{"Kind":2,"Value":" "},{"Kind":4,"Value":"is"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"ArmResourceDeleteSync"},{"Kind":3,"Value":"<"},{"Kind":6,"Value":"Pool","NavigateToId":"Microsoft.DevOpsInfrastructure.Pool"},{"Kind":3,"Value":">"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.Pools.listByResourceGroup","Value":"listByResourceGroup"},{"Kind":2,"Value":" "},{"Kind":4,"Value":"is"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"ArmResourceListByParent"},{"Kind":3,"Value":"<"},{"Kind":6,"Value":"Pool","NavigateToId":"Microsoft.DevOpsInfrastructure.Pool"},{"Kind":3,"Value":">"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.Pools.listBySubscription","Value":"listBySubscription"},{"Kind":2,"Value":" "},{"Kind":4,"Value":"is"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"ArmListBySubscription"},{"Kind":3,"Value":"<"},{"Kind":6,"Value":"Pool","NavigateToId":"Microsoft.DevOpsInfrastructure.Pool"},{"Kind":3,"Value":">"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"@"},{"Kind":4,"Value":"discriminator"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.AgentProfile.@discriminator"},{"Kind":3,"Value":"("},{"Kind":8,"Value":"\"kind\""},{"Kind":3,"Value":")"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.AgentProfile","Value":"AgentProfile"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"resourcePredictions"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.AgentProfile.resourcePredictions"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"ResourcePredictions","NavigateToId":"Microsoft.DevOpsInfrastructure.ResourcePredictions"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.AzureDevOpsOrganizationProfile","Value":"AzureDevOpsOrganizationProfile"},{"Kind":2,"Value":" "},{"Kind":4,"Value":"extends"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"OrganizationProfile","NavigateToId":"Microsoft.DevOpsInfrastructure.OrganizationProfile"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"kind"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.AzureDevOpsOrganizationProfile.kind"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":8,"Value":"\"AzureDevOps\""},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"organizations"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.AzureDevOpsOrganizationProfile.organizations"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"Organization","NavigateToId":"Microsoft.DevOpsInfrastructure.Organization"},{"Kind":3,"Value":"[]"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.DevOpsAzureSku","Value":"DevOpsAzureSku"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"name"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.DevOpsAzureSku.name"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"string"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"tier"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.DevOpsAzureSku.tier"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"string"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"="},{"Kind":2,"Value":" "},{"Kind":8,"Value":"\"Standard\""},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"@"},{"Kind":4,"Value":"discriminator"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.FabricProfile.@discriminator"},{"Kind":3,"Value":"("},{"Kind":8,"Value":"\"kind\""},{"Kind":3,"Value":")"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.FabricProfile","Value":"FabricProfile"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{}"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.NetworkProfile","Value":"NetworkProfile"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"subnetId"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.NetworkProfile.subnetId"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"string"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.Organization","Value":"Organization"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"url"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.Organization.url"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"string"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"projects"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.Organization.projects"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"string"},{"Kind":3,"Value":"[]"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"parallelism"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.Organization.parallelism"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"int32"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"@"},{"Kind":4,"Value":"discriminator"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.OrganizationProfile.@discriminator"},{"Kind":3,"Value":"("},{"Kind":8,"Value":"\"kind\""},{"Kind":3,"Value":")"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.OrganizationProfile","Value":"OrganizationProfile"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{}"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.OsProfile","Value":"OsProfile"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"secretsManagementSettings"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.OsProfile.secretsManagementSettings"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"SecretsManagementSettings","NavigateToId":"Microsoft.DevOpsInfrastructure.SecretsManagementSettings"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.Pool","Value":"Pool"},{"Kind":2,"Value":" "},{"Kind":4,"Value":"is"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"TrackedResource"},{"Kind":3,"Value":"<"},{"Kind":6,"Value":"PoolProperties","NavigateToId":"Microsoft.DevOpsInfrastructure.PoolProperties"},{"Kind":3,"Value":">"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":3,"Value":"@"},{"Kind":4,"Value":"key"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.Pool.name.@key"},{"Kind":3,"Value":"("},{"Kind":8,"Value":"\"poolName\""},{"Kind":3,"Value":")"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":3,"Value":"@"},{"Kind":4,"Value":"pattern"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.Pool.name.@pattern"},{"Kind":3,"Value":"("},{"Kind":8,"Value":"\"^[a-z][a-z0-9]*$\""},{"Kind":3,"Value":")"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":3,"Value":"@"},{"Kind":4,"Value":"path"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.Pool.name.@path"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":3,"Value":"@"},{"Kind":4,"Value":"segment"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.Pool.name.@segment"},{"Kind":3,"Value":"("},{"Kind":8,"Value":"\"pools\""},{"Kind":3,"Value":")"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"name"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.Pool.name"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"string"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.PoolImage","Value":"PoolImage"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"resourceId"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.PoolImage.resourceId"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"string"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"aliases"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.PoolImage.aliases"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"string"},{"Kind":3,"Value":"[]"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"buffer"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.PoolImage.buffer"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"string"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"="},{"Kind":2,"Value":" "},{"Kind":8,"Value":"\"*\""},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.PoolProperties","Value":"PoolProperties"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":3,"Value":"@"},{"Kind":4,"Value":"minValue"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.PoolProperties.maximumConcurrency.@minValue"},{"Kind":3,"Value":"("},{"Kind":8,"Value":"1"},{"Kind":3,"Value":")"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":3,"Value":"@"},{"Kind":4,"Value":"maxValue"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.PoolProperties.maximumConcurrency.@maxValue"},{"Kind":3,"Value":"("},{"Kind":8,"Value":"10000"},{"Kind":3,"Value":")"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"maximumConcurrency"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.PoolProperties.maximumConcurrency"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"int32"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"organizationProfile"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.PoolProperties.organizationProfile"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"OrganizationProfile","NavigateToId":"Microsoft.DevOpsInfrastructure.OrganizationProfile"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"agentProfile"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.PoolProperties.agentProfile"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"AgentProfile","NavigateToId":"Microsoft.DevOpsInfrastructure.AgentProfile"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"fabricProfile"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.PoolProperties.fabricProfile"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"FabricProfile","NavigateToId":"Microsoft.DevOpsInfrastructure.FabricProfile"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":11},{"Kind":3,"Value":"@"},{"Kind":4,"Value":"doc"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.ProvisioningState.@doc"},{"Kind":3,"Value":"("},{"Kind":8,"Value":"\"The status of the current operation.\""},{"Kind":3,"Value":")"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":12},{"Kind":4,"Value":"enum"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.ProvisioningState","Value":"ProvisioningState"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"Succeeded"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.ProvisioningState.Succeeded"},{"Kind":3,"Value":","},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"Failed"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.ProvisioningState.Failed"},{"Kind":3,"Value":","},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"Canceled"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.ProvisioningState.Canceled"},{"Kind":3,"Value":","},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"Provisioning"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.ProvisioningState.Provisioning"},{"Kind":3,"Value":","},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"Updating"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.ProvisioningState.Updating"},{"Kind":3,"Value":","},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"Deleting"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.ProvisioningState.Deleting"},{"Kind":3,"Value":","},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"Accepted"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.ProvisioningState.Accepted"},{"Kind":3,"Value":","},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.ResourcePredictions","Value":"ResourcePredictions"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{}"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.SecretsManagementSettings","Value":"SecretsManagementSettings"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"certificateStoreLocation"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.SecretsManagementSettings.certificateStoreLocation"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"string"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"observedCertificates"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.SecretsManagementSettings.observedCertificates"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"url"},{"Kind":3,"Value":"[]"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"keyExportable"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.SecretsManagementSettings.keyExportable"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"boolean"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.Stateful","Value":"Stateful"},{"Kind":2,"Value":" "},{"Kind":4,"Value":"extends"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"AgentProfile","NavigateToId":"Microsoft.DevOpsInfrastructure.AgentProfile"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"kind"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.Stateful.kind"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":8,"Value":"\"Stateful\""},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"maxAgentLifetime"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.Stateful.maxAgentLifetime"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":4,"Value":"any"},{"Kind":2,"Value":" "},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.StatelessAgentProfile","Value":"StatelessAgentProfile"},{"Kind":2,"Value":" "},{"Kind":4,"Value":"extends"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"AgentProfile","NavigateToId":"Microsoft.DevOpsInfrastructure.AgentProfile"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"kind"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.StatelessAgentProfile.kind"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":8,"Value":"\"Stateless\""},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":4,"Value":"model"},{"Kind":2,"Value":" "},{"Kind":6,"DefinitionId":"Microsoft.DevOpsInfrastructure.VmssFabricProfile","Value":"VmssFabricProfile"},{"Kind":2,"Value":" "},{"Kind":4,"Value":"extends"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"FabricProfile","NavigateToId":"Microsoft.DevOpsInfrastructure.FabricProfile"},{"Kind":2,"Value":" "},{"Kind":3,"Value":"{"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"kind"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.VmssFabricProfile.kind"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":8,"Value":"\"Vmss\""},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"sku"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.VmssFabricProfile.sku"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"DevOpsAzureSku","NavigateToId":"Microsoft.DevOpsInfrastructure.DevOpsAzureSku"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"images"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.VmssFabricProfile.images"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"PoolImage","NavigateToId":"Microsoft.DevOpsInfrastructure.PoolImage"},{"Kind":3,"Value":"[]"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"osProfile"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.VmssFabricProfile.osProfile"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"OsProfile","NavigateToId":"Microsoft.DevOpsInfrastructure.OsProfile"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"    "},{"Kind":7,"Value":"networkProfile"},{"Kind":5,"DefinitionId":"Microsoft.DevOpsInfrastructure.VmssFabricProfile.networkProfile"},{"Kind":3,"Value":":"},{"Kind":2,"Value":" "},{"Kind":6,"Value":"NetworkProfile","NavigateToId":"Microsoft.DevOpsInfrastructure.NetworkProfile"},{"Kind":3,"Value":";"},{"Kind":1},{"Kind":2,"Value":"  "},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":3,"Value":"}"},{"Kind":1},{"Kind":1}],"Navigation":[{"Text":"Microsoft.DevOpsInfrastructure","Tags":{"TypeKind":"namespace"},"ChildItems":[{"Text":"Operations","ChildItems":[{"Text":"Operations","Tags":{"TypeKind":"method"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.Operations"},{"Text":"Pools","Tags":{"TypeKind":"method"},"ChildItems":[{"Text":"get","Tags":{"TypeKind":"method"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.Pools.get"},{"Text":"createOrUpdate","Tags":{"TypeKind":"method"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.Pools.createOrUpdate"},{"Text":"update","Tags":{"TypeKind":"method"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.Pools.update"},{"Text":"delete","Tags":{"TypeKind":"method"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.Pools.delete"},{"Text":"listByResourceGroup","Tags":{"TypeKind":"method"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.Pools.listByResourceGroup"},{"Text":"listBySubscription","Tags":{"TypeKind":"method"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.Pools.listBySubscription"}],"NavigationId":"Microsoft.DevOpsInfrastructure.Pools"}],"Tags":{"TypeKind":"method"},"NavigationId":""},{"Text":"Models","ChildItems":[{"Text":"AgentProfile","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.AgentProfile"},{"Text":"AzureDevOpsOrganizationProfile","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.AzureDevOpsOrganizationProfile"},{"Text":"DevOpsAzureSku","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.DevOpsAzureSku"},{"Text":"FabricProfile","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.FabricProfile"},{"Text":"NetworkProfile","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.NetworkProfile"},{"Text":"Organization","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.Organization"},{"Text":"OrganizationProfile","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.OrganizationProfile"},{"Text":"OsProfile","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.OsProfile"},{"Text":"Pool","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.Pool"},{"Text":"PoolImage","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.PoolImage"},{"Text":"PoolProperties","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.PoolProperties"},{"Text":"ProvisioningState","Tags":{"TypeKind":"enum"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.ProvisioningState"},{"Text":"ResourcePredictions","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.ResourcePredictions"},{"Text":"SecretsManagementSettings","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.SecretsManagementSettings"},{"Text":"Stateful","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.Stateful"},{"Text":"StatelessAgentProfile","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.StatelessAgentProfile"},{"Text":"VmssFabricProfile","Tags":{"TypeKind":"class"},"ChildItems":[],"NavigationId":"Microsoft.DevOpsInfrastructure.VmssFabricProfile"}],"Tags":{"TypeKind":"class"},"NavigationId":""}],"NavigationId":"Microsoft.DevOpsInfrastructure"}],"Diagnostics":[],"VersionString":"2023-10-30-preview","Language":"TypeSpec"}
+{
+  "Name": "Managed DevOps Infrastructure",
+  "PackageName": "Microsoft.DevOpsInfrastructure",
+  "Tokens": [
+    {
+      "Kind": 15
+    },
+    {
+      "Kind": 8,
+      "Value": "// Package parsed using @azure-tools/typespec-apiview (version:0.4.4)"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "GLOBAL"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 3,
+      "Value": "@"
+    },
+    {
+      "Kind": 4,
+      "Value": "armProviderNamespace"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.@armProviderNamespace"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 3,
+      "Value": "@"
+    },
+    {
+      "Kind": 4,
+      "Value": "service"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.@service"
+    },
+    {
+      "Kind": 3,
+      "Value": "("
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "title"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.@service.anonymous.title"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 8,
+      "Value": "\"Managed DevOps Infrastructure\""
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "version"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.@service.anonymous.version"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 8,
+      "Value": "\"2023-10-30-preview\""
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 3,
+      "Value": ")"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 3,
+      "Value": "@"
+    },
+    {
+      "Kind": 4,
+      "Value": "useDependency"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.@useDependency"
+    },
+    {
+      "Kind": 3,
+      "Value": "("
+    },
+    {
+      "Kind": 6,
+      "Value": "Azure.ResourceManager.Versions.v1_0_Preview_1"
+    },
+    {
+      "Kind": 3,
+      "Value": ")"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 4,
+      "Value": "namespace"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure",
+      "Value": "Microsoft.DevOpsInfrastructure"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "interface"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Operations",
+      "Value": "Operations"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "@"
+    },
+    {
+      "Kind": 4,
+      "Value": "armResourceOperations"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Pools.@armResourceOperations"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "interface"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Pools",
+      "Value": "Pools"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Pools.get",
+      "Value": "get"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 4,
+      "Value": "is"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "ArmResourceRead"
+    },
+    {
+      "Kind": 3,
+      "Value": "<"
+    },
+    {
+      "Kind": 6,
+      "Value": "Pool",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.Pool"
+    },
+    {
+      "Kind": 3,
+      "Value": ">"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Pools.createOrUpdate",
+      "Value": "createOrUpdate"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 4,
+      "Value": "is"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "ArmResourceCreateOrUpdateAsync"
+    },
+    {
+      "Kind": 3,
+      "Value": "<"
+    },
+    {
+      "Kind": 6,
+      "Value": "Pool",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.Pool"
+    },
+    {
+      "Kind": 3,
+      "Value": ">"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Pools.update",
+      "Value": "update"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 4,
+      "Value": "is"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "ArmResourcePatchSync"
+    },
+    {
+      "Kind": 3,
+      "Value": "<"
+    },
+    {
+      "Kind": 6,
+      "Value": "Pool",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.Pool"
+    },
+    {
+      "Kind": 3,
+      "Value": ","
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "PoolProperties",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.PoolProperties"
+    },
+    {
+      "Kind": 3,
+      "Value": ">"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Pools.delete",
+      "Value": "delete"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 4,
+      "Value": "is"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "ArmResourceDeleteSync"
+    },
+    {
+      "Kind": 3,
+      "Value": "<"
+    },
+    {
+      "Kind": 6,
+      "Value": "Pool",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.Pool"
+    },
+    {
+      "Kind": 3,
+      "Value": ">"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Pools.listByResourceGroup",
+      "Value": "listByResourceGroup"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 4,
+      "Value": "is"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "ArmResourceListByParent"
+    },
+    {
+      "Kind": 3,
+      "Value": "<"
+    },
+    {
+      "Kind": 6,
+      "Value": "Pool",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.Pool"
+    },
+    {
+      "Kind": 3,
+      "Value": ">"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Pools.listBySubscription",
+      "Value": "listBySubscription"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 4,
+      "Value": "is"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "ArmListBySubscription"
+    },
+    {
+      "Kind": 3,
+      "Value": "<"
+    },
+    {
+      "Kind": 6,
+      "Value": "Pool",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.Pool"
+    },
+    {
+      "Kind": 3,
+      "Value": ">"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "@"
+    },
+    {
+      "Kind": 4,
+      "Value": "discriminator"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.AgentProfile.@discriminator"
+    },
+    {
+      "Kind": 3,
+      "Value": "("
+    },
+    {
+      "Kind": 8,
+      "Value": "\"kind\""
+    },
+    {
+      "Kind": 3,
+      "Value": ")"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.AgentProfile",
+      "Value": "AgentProfile"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "resourcePredictions"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.AgentProfile.resourcePredictions"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "ResourcePredictions",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.ResourcePredictions"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.AzureDevOpsOrganizationProfile",
+      "Value": "AzureDevOpsOrganizationProfile"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 4,
+      "Value": "extends"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "OrganizationProfile",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.OrganizationProfile"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "kind"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.AzureDevOpsOrganizationProfile.kind"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 8,
+      "Value": "\"AzureDevOps\""
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "organizations"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.AzureDevOpsOrganizationProfile.organizations"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "Organization",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.Organization"
+    },
+    {
+      "Kind": 3,
+      "Value": "[]"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.DevOpsAzureSku",
+      "Value": "DevOpsAzureSku"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "name"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.DevOpsAzureSku.name"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "string"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "tier"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.DevOpsAzureSku.tier"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "string"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "="
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 8,
+      "Value": "\"Standard\""
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "@"
+    },
+    {
+      "Kind": 4,
+      "Value": "discriminator"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.FabricProfile.@discriminator"
+    },
+    {
+      "Kind": 3,
+      "Value": "("
+    },
+    {
+      "Kind": 8,
+      "Value": "\"kind\""
+    },
+    {
+      "Kind": 3,
+      "Value": ")"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.FabricProfile",
+      "Value": "FabricProfile"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.NetworkProfile",
+      "Value": "NetworkProfile"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "subnetId"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.NetworkProfile.subnetId"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "string"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Organization",
+      "Value": "Organization"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "url"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Organization.url"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "string"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "projects"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Organization.projects"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "string"
+    },
+    {
+      "Kind": 3,
+      "Value": "[]"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "parallelism"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Organization.parallelism"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "int32"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "@"
+    },
+    {
+      "Kind": 4,
+      "Value": "discriminator"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.OrganizationProfile.@discriminator"
+    },
+    {
+      "Kind": 3,
+      "Value": "("
+    },
+    {
+      "Kind": 8,
+      "Value": "\"kind\""
+    },
+    {
+      "Kind": 3,
+      "Value": ")"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.OrganizationProfile",
+      "Value": "OrganizationProfile"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.OsProfile",
+      "Value": "OsProfile"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "secretsManagementSettings"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.OsProfile.secretsManagementSettings"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "SecretsManagementSettings",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.SecretsManagementSettings"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Pool",
+      "Value": "Pool"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 4,
+      "Value": "is"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "TrackedResource"
+    },
+    {
+      "Kind": 3,
+      "Value": "<"
+    },
+    {
+      "Kind": 6,
+      "Value": "PoolProperties",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.PoolProperties"
+    },
+    {
+      "Kind": 3,
+      "Value": ">"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 3,
+      "Value": "@"
+    },
+    {
+      "Kind": 4,
+      "Value": "key"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Pool.name.@key"
+    },
+    {
+      "Kind": 3,
+      "Value": "("
+    },
+    {
+      "Kind": 8,
+      "Value": "\"poolName\""
+    },
+    {
+      "Kind": 3,
+      "Value": ")"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 3,
+      "Value": "@"
+    },
+    {
+      "Kind": 4,
+      "Value": "pattern"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Pool.name.@pattern"
+    },
+    {
+      "Kind": 3,
+      "Value": "("
+    },
+    {
+      "Kind": 8,
+      "Value": "\"^[a-z][a-z0-9]*$\""
+    },
+    {
+      "Kind": 3,
+      "Value": ")"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 3,
+      "Value": "@"
+    },
+    {
+      "Kind": 4,
+      "Value": "path"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Pool.name.@path"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 3,
+      "Value": "@"
+    },
+    {
+      "Kind": 4,
+      "Value": "segment"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Pool.name.@segment"
+    },
+    {
+      "Kind": 3,
+      "Value": "("
+    },
+    {
+      "Kind": 8,
+      "Value": "\"pools\""
+    },
+    {
+      "Kind": 3,
+      "Value": ")"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "name"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Pool.name"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "string"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.PoolImage",
+      "Value": "PoolImage"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "resourceId"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.PoolImage.resourceId"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "string"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "aliases"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.PoolImage.aliases"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "string"
+    },
+    {
+      "Kind": 3,
+      "Value": "[]"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "buffer"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.PoolImage.buffer"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "string"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "="
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 8,
+      "Value": "\"*\""
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.PoolProperties",
+      "Value": "PoolProperties"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 3,
+      "Value": "@"
+    },
+    {
+      "Kind": 4,
+      "Value": "minValue"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.PoolProperties.maximumConcurrency.@minValue"
+    },
+    {
+      "Kind": 3,
+      "Value": "("
+    },
+    {
+      "Kind": 8,
+      "Value": "1"
+    },
+    {
+      "Kind": 3,
+      "Value": ")"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 3,
+      "Value": "@"
+    },
+    {
+      "Kind": 4,
+      "Value": "maxValue"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.PoolProperties.maximumConcurrency.@maxValue"
+    },
+    {
+      "Kind": 3,
+      "Value": "("
+    },
+    {
+      "Kind": 8,
+      "Value": "10000"
+    },
+    {
+      "Kind": 3,
+      "Value": ")"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "maximumConcurrency"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.PoolProperties.maximumConcurrency"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "int32"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "organizationProfile"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.PoolProperties.organizationProfile"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "OrganizationProfile",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.OrganizationProfile"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "agentProfile"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.PoolProperties.agentProfile"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "AgentProfile",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.AgentProfile"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "fabricProfile"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.PoolProperties.fabricProfile"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "FabricProfile",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.FabricProfile"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 11
+    },
+    {
+      "Kind": 3,
+      "Value": "@"
+    },
+    {
+      "Kind": 4,
+      "Value": "doc"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.ProvisioningState.@doc"
+    },
+    {
+      "Kind": 3,
+      "Value": "("
+    },
+    {
+      "Kind": 8,
+      "Value": "\"The status of the current operation.\""
+    },
+    {
+      "Kind": 3,
+      "Value": ")"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 12
+    },
+    {
+      "Kind": 4,
+      "Value": "enum"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.ProvisioningState",
+      "Value": "ProvisioningState"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "Succeeded"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.ProvisioningState.Succeeded"
+    },
+    {
+      "Kind": 3,
+      "Value": ","
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "Failed"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.ProvisioningState.Failed"
+    },
+    {
+      "Kind": 3,
+      "Value": ","
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "Canceled"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.ProvisioningState.Canceled"
+    },
+    {
+      "Kind": 3,
+      "Value": ","
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "Provisioning"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.ProvisioningState.Provisioning"
+    },
+    {
+      "Kind": 3,
+      "Value": ","
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "Updating"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.ProvisioningState.Updating"
+    },
+    {
+      "Kind": 3,
+      "Value": ","
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "Deleting"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.ProvisioningState.Deleting"
+    },
+    {
+      "Kind": 3,
+      "Value": ","
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "Accepted"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.ProvisioningState.Accepted"
+    },
+    {
+      "Kind": 3,
+      "Value": ","
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.ResourcePredictions",
+      "Value": "ResourcePredictions"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.SecretsManagementSettings",
+      "Value": "SecretsManagementSettings"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "certificateStoreLocation"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.SecretsManagementSettings.certificateStoreLocation"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "string"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "observedCertificates"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.SecretsManagementSettings.observedCertificates"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "url"
+    },
+    {
+      "Kind": 3,
+      "Value": "[]"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "keyExportable"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.SecretsManagementSettings.keyExportable"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "boolean"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Stateful",
+      "Value": "Stateful"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 4,
+      "Value": "extends"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "AgentProfile",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.AgentProfile"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "kind"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Stateful.kind"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 8,
+      "Value": "\"Stateful\""
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "maxAgentLifetime"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.Stateful.maxAgentLifetime"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 4,
+      "Value": "any"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.StatelessAgentProfile",
+      "Value": "StatelessAgentProfile"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 4,
+      "Value": "extends"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "AgentProfile",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.AgentProfile"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "kind"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.StatelessAgentProfile.kind"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 8,
+      "Value": "\"Stateless\""
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 4,
+      "Value": "model"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.VmssFabricProfile",
+      "Value": "VmssFabricProfile"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 4,
+      "Value": "extends"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "FabricProfile",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.FabricProfile"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 3,
+      "Value": "{"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "kind"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.VmssFabricProfile.kind"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 8,
+      "Value": "\"Vmss\""
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "sku"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.VmssFabricProfile.sku"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "DevOpsAzureSku",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.DevOpsAzureSku"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "images"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.VmssFabricProfile.images"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "PoolImage",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.PoolImage"
+    },
+    {
+      "Kind": 3,
+      "Value": "[]"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "osProfile"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.VmssFabricProfile.osProfile"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "OsProfile",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.OsProfile"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "    "
+    },
+    {
+      "Kind": 7,
+      "Value": "networkProfile"
+    },
+    {
+      "Kind": 5,
+      "DefinitionId": "Microsoft.DevOpsInfrastructure.VmssFabricProfile.networkProfile"
+    },
+    {
+      "Kind": 3,
+      "Value": ":"
+    },
+    {
+      "Kind": 2,
+      "Value": " "
+    },
+    {
+      "Kind": 6,
+      "Value": "NetworkProfile",
+      "NavigateToId": "Microsoft.DevOpsInfrastructure.NetworkProfile"
+    },
+    {
+      "Kind": 3,
+      "Value": ";"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 2,
+      "Value": "  "
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 3,
+      "Value": "}"
+    },
+    {
+      "Kind": 1
+    },
+    {
+      "Kind": 1
+    }
+  ],
+  "Navigation": [
+    {
+      "Text": "Microsoft.DevOpsInfrastructure",
+      "Tags": {
+        "TypeKind": "namespace"
+      },
+      "ChildItems": [
+        {
+          "Text": "Operations",
+          "ChildItems": [
+            {
+              "Text": "Operations",
+              "Tags": {
+                "TypeKind": "method"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.Operations"
+            },
+            {
+              "Text": "Pools",
+              "Tags": {
+                "TypeKind": "method"
+              },
+              "ChildItems": [
+                {
+                  "Text": "get",
+                  "Tags": {
+                    "TypeKind": "method"
+                  },
+                  "ChildItems": [],
+                  "NavigationId": "Microsoft.DevOpsInfrastructure.Pools.get"
+                },
+                {
+                  "Text": "createOrUpdate",
+                  "Tags": {
+                    "TypeKind": "method"
+                  },
+                  "ChildItems": [],
+                  "NavigationId": "Microsoft.DevOpsInfrastructure.Pools.createOrUpdate"
+                },
+                {
+                  "Text": "update",
+                  "Tags": {
+                    "TypeKind": "method"
+                  },
+                  "ChildItems": [],
+                  "NavigationId": "Microsoft.DevOpsInfrastructure.Pools.update"
+                },
+                {
+                  "Text": "delete",
+                  "Tags": {
+                    "TypeKind": "method"
+                  },
+                  "ChildItems": [],
+                  "NavigationId": "Microsoft.DevOpsInfrastructure.Pools.delete"
+                },
+                {
+                  "Text": "listByResourceGroup",
+                  "Tags": {
+                    "TypeKind": "method"
+                  },
+                  "ChildItems": [],
+                  "NavigationId": "Microsoft.DevOpsInfrastructure.Pools.listByResourceGroup"
+                },
+                {
+                  "Text": "listBySubscription",
+                  "Tags": {
+                    "TypeKind": "method"
+                  },
+                  "ChildItems": [],
+                  "NavigationId": "Microsoft.DevOpsInfrastructure.Pools.listBySubscription"
+                }
+              ],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.Pools"
+            }
+          ],
+          "Tags": {
+            "TypeKind": "method"
+          },
+          "NavigationId": ""
+        },
+        {
+          "Text": "Models",
+          "ChildItems": [
+            {
+              "Text": "AgentProfile",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.AgentProfile"
+            },
+            {
+              "Text": "AzureDevOpsOrganizationProfile",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.AzureDevOpsOrganizationProfile"
+            },
+            {
+              "Text": "DevOpsAzureSku",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.DevOpsAzureSku"
+            },
+            {
+              "Text": "FabricProfile",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.FabricProfile"
+            },
+            {
+              "Text": "NetworkProfile",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.NetworkProfile"
+            },
+            {
+              "Text": "Organization",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.Organization"
+            },
+            {
+              "Text": "OrganizationProfile",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.OrganizationProfile"
+            },
+            {
+              "Text": "OsProfile",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.OsProfile"
+            },
+            {
+              "Text": "Pool",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.Pool"
+            },
+            {
+              "Text": "PoolImage",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.PoolImage"
+            },
+            {
+              "Text": "PoolProperties",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.PoolProperties"
+            },
+            {
+              "Text": "ProvisioningState",
+              "Tags": {
+                "TypeKind": "enum"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.ProvisioningState"
+            },
+            {
+              "Text": "ResourcePredictions",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.ResourcePredictions"
+            },
+            {
+              "Text": "SecretsManagementSettings",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.SecretsManagementSettings"
+            },
+            {
+              "Text": "Stateful",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.Stateful"
+            },
+            {
+              "Text": "StatelessAgentProfile",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.StatelessAgentProfile"
+            },
+            {
+              "Text": "VmssFabricProfile",
+              "Tags": {
+                "TypeKind": "class"
+              },
+              "ChildItems": [],
+              "NavigationId": "Microsoft.DevOpsInfrastructure.VmssFabricProfile"
+            }
+          ],
+          "Tags": {
+            "TypeKind": "class"
+          },
+          "NavigationId": ""
+        }
+      ],
+      "NavigationId": "Microsoft.DevOpsInfrastructure"
+    }
+  ],
+  "Diagnostics": [],
+  "VersionString": "2023-10-30-preview",
+  "Language": "TypeSpec"
+}
