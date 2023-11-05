@@ -74,7 +74,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/ListOperations.json"
+          }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DevOpsInfrastructure/pools": {
@@ -239,12 +243,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource 'Pool' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Pool"
-            }
-          },
           "201": {
             "description": "Resource 'Pool' create operation succeeded",
             "schema": {
@@ -373,9 +371,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -544,7 +539,7 @@
       "properties": {
         "secretsManagementSettings": {
           "$ref": "#/definitions/SecretsManagementSettings",
-          "description": "The secret manbagement settings of the machines in the pool."
+          "description": "The secret management settings of the machines in the pool."
         }
       },
       "required": [

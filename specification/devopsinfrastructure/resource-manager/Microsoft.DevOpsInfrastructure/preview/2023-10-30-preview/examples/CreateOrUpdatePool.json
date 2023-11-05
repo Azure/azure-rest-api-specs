@@ -3,11 +3,11 @@
   "operationId": "Pools_CreateOrUpdate",
   "parameters": {
     "api-version": "2023-10-30-preview",
-    "subscriptionId": "00000000-0000-0000-0000-00000000000",
+    "subscriptionId": "a2e95d27-c161-4b61-bda4-11512c14c2c2",
     "resourceGroupName": "rg",
-    "location": "eastus",
     "poolName": "pool",
     "resource": {
+      "location": "eastus",
       "properties": {
         "provisioningState": "Succeeded",
         "maximumConcurrency": 10,
@@ -41,7 +41,8 @@
       },
       "body": {
         "properties": {
-          "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/rg/providers/Microsoft.DevOpsInfrastructure/Pools/pool",
+          "location": "eastus",
+          "id": "/subscriptions/a2e95d27-c161-4b61-bda4-11512c14c2c2/resourceGroups/rg/providers/Microsoft.DevOpsInfrastructure/Pools/pool",
           "provisioningState": "Succeeded",
           "maximumConcurrency": 10,
           "organizationProfile": {
@@ -57,7 +58,9 @@
           },
           "fabricProfile": {
             "kind": "Vmss",
-            "sku": "Standard_D4ads_v5",
+            "sku": {
+              "name": "Standard_D4ads_v5"
+            },
             "images": [
               {
                 "resourceId": "/MicrosoftWindowsServer/WindowsServer/2019-Datacenter/latest"
@@ -69,8 +72,9 @@
     },
     "201": {
       "body": {
+        "location": "eastus",
+        "id": "/subscriptions/a2e95d27-c161-4b61-bda4-11512c14c2c2/resourceGroups/rg/providers/Microsoft.DevOpsInfrastructure/Pools/pool",
         "properties": {
-          "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/rg/providers/Microsoft.DevOpsInfrastructure/Pools/pool",
           "provisioningState": "Succeeded",
           "maximumConcurrency": 10,
           "organizationProfile": {
@@ -86,7 +90,9 @@
           },
           "fabricProfile": {
             "kind": "Vmss",
-            "sku": "Standard_D4ads_v5",
+            "sku": {
+              "name": "Standard_D4ads_v5"
+            },
             "images": [
               {
                 "resourceId": "/MicrosoftWindowsServer/WindowsServer/2019-Datacenter/latest"
