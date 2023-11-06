@@ -26,7 +26,35 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-jobrouter-2022-07-18-preview
+tag: package-jobrouter-2023-08-25-preview
+```
+
+### Tag: package-jobrouter-2023-08-25-preview
+
+These settings apply only when `--tag=package-jobrouter-2023-08-25-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-jobrouter-2023-08-25-preview'
+input-file:
+  - preview/2023-08-25-preview/communicationservicejobrouter.json
+title:
+  Azure Communication Services
+directive:
+# Set reference to WorkerSelectorAttachment in ClassificationPolicy
+  - from: swagger-document
+    where: "$.definitions.ClassificationPolicy.properties.workerSelectors.items"
+    transform: >
+      $["$ref"] = "#/definitions/WorkerSelectorAttachment";
+# Set reference to QueueSelectorAttachment in ClassificationPolicy  
+  - from: swagger-document
+    where: "$.definitions.ClassificationPolicy.properties.queueSelectors.items"
+    transform: >
+      $["$ref"] = "#/definitions/QueueSelectorAttachment";
+# Set reference to ExceptionAction in ExceptionRule
+  - from: swagger-document
+    where: "$.definitions.ExceptionRule.properties.actions"
+    transform: >
+      $.type = "object";
+      $.additionalProperties["$ref"] = "#/definitions/ExceptionAction";
 ```
 
 ### Tag: package-jobrouter-2022-07-18-preview
