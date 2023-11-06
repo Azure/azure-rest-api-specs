@@ -62,6 +62,8 @@ suppressions:
     reason: ADF feature is widely adopted and requires TrackedResourcePatchOperation for most of the swagger properties.
   - code: XmsEnumValidation
     reason: ADF feature is widely adopted and requires XmsEnumValidation for most of the swagger properties.
+  - code: NestedResourcesMustHaveListOperation
+    reason: ADF feature is widely adopted and requires NestedResourcesMustHaveListOperation for most of the swagger properties.
 ```
 
 ### Tag: package-2017-09-preview
