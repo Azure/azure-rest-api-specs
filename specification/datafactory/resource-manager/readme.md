@@ -50,6 +50,18 @@ suppressions:
     reason: ADF parameterization feature is widely adopted and requires object type for most of the swagger properties.
   - code: AvoidAdditionalProperties
     reason: ADF feature is widely adopted and requires additionalProperties for most of the swagger properties.
+  - code: MissingTypeObject
+    reason: ADF feature is widely adopted and requires MissingTypeObject for most of the swagger properties.
+  - code: IntegerTypeMustHaveFormat
+    reason: ADF feature is widely adopted and requires IntegerTypeMustHaveFormat for most of the swagger properties.
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: ADF feature is widely adopted and requires RequiredPropertiesMissingInResourceModel for most of the swagger properties.
+  - code: BodyTopLevelProperties
+    reason: ADF feature is widely adopted and requires BodyTopLevelProperties for most of the swagger properties.
+  - code: TrackedResourcePatchOperation
+    reason: ADF feature is widely adopted and requires TrackedResourcePatchOperation for most of the swagger properties.
+  - code: XmsEnumValidation
+    reason: ADF feature is widely adopted and requires XmsEnumValidation for most of the swagger properties.
 ```
 
 ### Tag: package-2017-09-preview
