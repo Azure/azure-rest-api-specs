@@ -2221,10 +2221,9 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of the action.",
+          "description": "The type of the action. The value should be compared case-insensitively.",
           "enum": [
             "Rotate",
-            "rotate",
             "Notify"
           ],
           "x-ms-enum": {
@@ -2233,11 +2232,7 @@
             "values": [
               {
                 "value": "Rotate",
-                "description": "Rotate the key based on the key policy. Key Vault only. Managed HSM uses camelCase 'rotate' instead."
-              },
-              {
-                "value": "rotate",
-                "description": "Rotate the key based on the key policy. Managed HSM only. Key Vault uses PascalCase 'Rotate' instead."
+                "description": "Rotate the key based on the key policy."
               },
               {
                 "value": "Notify",

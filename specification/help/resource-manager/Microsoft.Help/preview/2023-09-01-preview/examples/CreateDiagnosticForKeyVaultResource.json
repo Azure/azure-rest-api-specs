@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "scope": "subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourceGroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read",
+    "diagnosticsResourceName": "VMNotWorkingInsight",
+    "diagnosticItemRequest": {
+      "properties": {
+        "insights": [
+          {
+            "solutionId": "SampleSolutionId",
+            "additionalParameters": {
+              "serverName": "testServer"
+            }
+          }
+        ],
+        "globalParameters": {
+          "startTime": "2020-07-01"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourceGroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read/providers/Microsoft.Help/diagnostics/VMNotWorkingInsight",
+        "name": "VMNotWorkingInsight",
+        "type": "Microsoft.Help/diagnostics",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "acceptedAt": "2023-03-10T03:04:40Z"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourceGroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read/providers/Microsoft.Help/diagnostics/VMNotWorkingInsight",
+        "type": "VMNotWorkingInsight",
+        "name": "Microsoft.Help/diagnostics",
+        "properties": {
+          "acceptedAt": "2023-03-10T03:04:40Z",
+          "provisioningState": "Succeeded",
+          "diagnostics": [
+            {
+              "solutionId": "sampleSolutionId",
+              "status": "Succeeded",
+              "insights": [
+                {
+                  "id": "InsightArticleId",
+                  "title": "An example title for an Insight",
+                  "results": "Article Content",
+                  "importanceLevel": "Critical"
+                }
+              ],
+              "error": {
+                "code": "errorCode",
+                "message": "errorMessage"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
