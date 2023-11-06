@@ -51,7 +51,7 @@ model InsightProperties is ResourceProperties{
   @doc("status of the impact. example resolved, repaired, other.")
   "status"? : string;
 
-  @doc("time at which imsight has been generated.")
+  @doc("time at which insight has been generated.")
   "createdTime": zonedDateTime;
   
   @doc("time at which insight has been updated.")
@@ -93,7 +93,7 @@ model ImpactDetails {
  * query parameter for azure resource
  */
 @doc("The ID of the azure resource.")
-model ImpactedazureResourceIdParameter {
+model ImpactedAzureResourceIdParameter {
   @query
   @minLength(1)
   @segment("azureResourceId")
@@ -106,7 +106,7 @@ model InsightCustomResourceCommonParameters<TResource> {
   ...ApiVersionParameter;
   ...SubscriptionIdParameter;
   ...ProviderNamespace<TResource>;
-  ...ImpactedazureResourceIdParameter;
+  ...ImpactedAzureResourceIdParameter;
 }
 
 
