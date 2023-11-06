@@ -718,6 +718,545 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs": {
+      "get": {
+        "tags": [
+          "Project Catalogs"
+        ],
+        "description": "Lists the catalogs associated with a project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "ProjectCatalogs_List",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProjectCatalogs_List": {
+            "$ref": "./examples/ProjectCatalogs_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}": {
+      "get": {
+        "tags": [
+          "Project Catalogs"
+        ],
+        "description": "Gets an associated project catalog.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          }
+        ],
+        "operationId": "ProjectCatalogs_Get",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProjectCatalogs_Get": {
+            "$ref": "./examples/ProjectCatalogs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Project Catalogs"
+        ],
+        "description": "Creates or updates a project catalog.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents a catalog.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          }
+        ],
+        "operationId": "ProjectCatalogs_CreateOrUpdate",
+        "responses": {
+          "201": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ProjectCatalogs_CreateOrUpdateGitHub": {
+            "$ref": "./examples/ProjectCatalogs_CreateGitHub.json"
+          },
+          "ProjectCatalogs_CreateOrUpdateAdo": {
+            "$ref": "./examples/ProjectCatalogs_CreateAdo.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Project Catalogs"
+        ],
+        "description": "Partially updates a project catalog.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updatable project catalog properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogUpdate"
+            }
+          }
+        ],
+        "operationId": "ProjectCatalogs_Patch",
+        "responses": {
+          "200": {
+            "description": "The resource was updated.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
+          "202": {
+            "description": "The request will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ProjectCatalogs_Patch": {
+            "$ref": "./examples/ProjectCatalogs_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Project Catalogs"
+        ],
+        "description": "Deletes a project catalog resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          }
+        ],
+        "operationId": "ProjectCatalogs_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. Resource has been deleted"
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProjectCatalogs_Delete": {
+            "$ref": "./examples/ProjectCatalogs_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/environmentdefinitions": {
+      "get": {
+        "tags": [
+          "Environment Definitions"
+        ],
+        "description": "Lists the environment definitions in this project catalog.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          }
+        ],
+        "operationId": "EnvironmentDefinitions_ListByProjectCatalog",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnvironmentDefinitions_ListByProjectCatalog": {
+            "$ref": "./examples/EnvironmentDefinitions_ListByProjectCatalog.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{environmentDefinitionName}": {
+      "get": {
+        "tags": [
+          "Environment Definitions"
+        ],
+        "description": "Gets an environment definition from the catalog.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentDefinitionNameParameter"
+          }
+        ],
+        "operationId": "EnvironmentDefinitions_GetByProjectCatalog",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnvironmentDefinitions_GetByProjectCatalog": {
+            "$ref": "./examples/EnvironmentDefinitions_GetByProjectCatalog.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{environmentDefinitionName}/getErrorDetails": {
+      "post": {
+        "tags": [
+          "Environment Definitions"
+        ],
+        "description": "Gets Environment Definition error details",
+        "operationId": "ProjectCatalogEnvironmentDefinitions_GetErrorDetails",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentDefinitionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "vdi.json#/definitions/CatalogResourceValidationErrorDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProjectCatalogEnvironmentDefinitions_GetErrorDetails": {
+            "$ref": "./examples/ProjectCatalogEnvironmentDefinitions_GetErrorDetails.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/getSyncErrorDetails": {
+      "post": {
+        "tags": [
+          "Project Catalogs"
+        ],
+        "description": "Gets project catalog synchronization error details",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          }
+        ],
+        "operationId": "ProjectCatalogs_GetSyncErrorDetails",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SyncErrorDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProjectCatalogs_GetSyncErrorDetails": {
+            "$ref": "./examples/ProjectCatalogs_GetSyncErrorDetails.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/sync": {
+      "post": {
+        "tags": [
+          "Project Catalogs"
+        ],
+        "description": "Syncs templates for a template source.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          }
+        ],
+        "operationId": "ProjectCatalogs_Sync",
+        "responses": {
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ProjectCatalogs_Sync": {
+            "$ref": "./examples/ProjectCatalogs_Sync.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/connect": {
+      "post": {
+        "tags": [
+          "Project Catalogs"
+        ],
+        "description": "Connects a project catalog to enable syncing.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          }
+        ],
+        "operationId": "ProjectCatalogs_Connect",
+        "responses": {
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ProjectCatalogs_Connect": {
+            "$ref": "./examples/ProjectCatalogs_Connect.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/galleries": {
       "get": {
         "tags": [
@@ -2824,6 +3363,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevCenter/checkScopedNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckScopedNameAvailability"
+        ],
+        "operationId": "CheckScopedNameAvailability_Execute",
+        "x-ms-examples": {
+          "DevcenterCatalogNameAvailability": {
+            "$ref": "./examples/CheckScopedNameAvailability_DevCenterCatalog.json"
+          },
+          "ProjectCatalogNameAvailability": {
+            "$ref": "./examples/CheckScopedNameAvailability_ProjectCatalog.json"
+          }
+        },
+        "description": "Check the availability of name for resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "nameAvailabilityRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckScopedNameAvailabilityRequest"
+            },
+            "description": "The required parameters for checking if resource name is available."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/devboxdefinitions": {
       "parameters": [
         {
@@ -3310,7 +3897,8 @@
         },
         "devCenterUri": {
           "description": "The URI of the Dev Center.",
-          "$ref": "#/definitions/DevCenterUri"
+          "$ref": "#/definitions/DevCenterUri",
+          "readOnly": true
         }
       }
     },
@@ -3393,6 +3981,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProjectProperties",
           "description": "Properties of a project."
+        },
+        "identity": {
+          "description": "Managed identity properties",
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       }
     },
@@ -3417,6 +4009,23 @@
         "displayName": {
           "type": "string",
           "description": "The display name of the project."
+        },
+        "catalogSettings": {
+          "$ref": "#/definitions/CatalogSettings",
+          "description": "Settings to be used when associating a project with a catalog."
+        }
+      }
+    },
+    "CatalogSettings": {
+      "description": "Settings to be used when associating a project with a catalog.",
+      "type": "object",
+      "properties": {
+        "catalogItemSyncTypes": {
+          "description": "Indicates catalog item types that can be synced.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogItemType"
+          }
         }
       }
     },
@@ -3436,7 +4045,8 @@
         },
         "devCenterUri": {
           "description": "The URI of the Dev Center resource this project is associated with.",
-          "$ref": "#/definitions/DevCenterUri"
+          "$ref": "#/definitions/DevCenterUri",
+          "readOnly": true
         }
       }
     },
@@ -3453,6 +4063,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProjectUpdateProperties",
           "description": "Properties of a project to be updated."
+        },
+        "identity": {
+          "description": "Managed identity properties",
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       }
     },
@@ -4157,6 +4771,10 @@
           "description": "Id of a subscription that the environment type will be mapped to. The environment's resources will be deployed into this subscription.",
           "type": "string"
         },
+        "displayName": {
+          "description": "The display name of the project environment type.",
+          "type": "string"
+        },
         "status": {
           "description": "Defines whether this Environment Type can be used in this Project.",
           "$ref": "#/definitions/EnvironmentTypeEnableStatus"
@@ -4196,10 +4814,6 @@
           "description": "The provisioning state of the resource.",
           "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
           "readOnly": true
-        },
-        "displayName": {
-          "description": "The display name of the project environment type.",
-          "type": "string"
         },
         "environmentCount": {
           "description": "The number of environments of this type.",
@@ -4481,6 +5095,17 @@
           "type": "object",
           "readOnly": true
         }
+      }
+    },
+    "CatalogItemType": {
+      "description": "Indicates catalog item types.",
+      "enum": [
+        "EnvironmentDefinition"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CatalogItemType",
+        "modelAsString": true
       }
     },
     "EnvironmentTypeEnableStatus": {
@@ -4807,6 +5432,24 @@
             "description": "The parameter accepts a string value."
           }
         ]
+      }
+    },
+    "CheckScopedNameAvailabilityRequest": {
+      "description": "The scoped name check availability request body.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the resource for which availability needs to be checked.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource type.",
+          "type": "string"
+        },
+        "scope": {
+          "description": "The resource id to scope the name check.",
+          "type": "string"
+        }
       }
     }
   },
