@@ -33,6 +33,10 @@ csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
 license-header: MICROSOFT_MIT
+suppressions:
+    - code: ResourceNameRestriction
+      reason: BackupInstance Resource is created by DPP Service, so regex wont add much value here.
+    
 ```
 
 ### Validations
@@ -54,6 +58,14 @@ These settings apply only when `--tag=package-2023-11` is specified on the comma
 ```yaml $(tag) == 'package-2023-11'
 input-file:
   - Microsoft.DataProtection/stable/2023-11-01/dataprotection.json
+```
+### Tag: package-preview-2023-08
+
+These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-08'
+input-file:
+  - Microsoft.DataProtection/preview/2023-08-01-preview/dataprotection.json
 ```
 ### Tag: package-preview-2023-06
 
