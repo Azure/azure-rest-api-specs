@@ -89,24 +89,17 @@ model ImpactDetails {
   "impactUniqueId": string;
 }
 
-/**
- * query parameter for azure resource
- */
-@doc("The ID of the azure resource.")
-model ImpactedAzureResourceIdParameter {
-  @query
-  @minLength(1)
-  @segment("azureResourceId")
-  @doc("The ID of the azure resource.")
-  azureResourceId?: string;
-}
-
 @doc("context of post call for insight")
 model InsightCustomResourceCommonParameters<TResource> {
   ...ApiVersionParameter;
   ...SubscriptionIdParameter;
   ...ProviderNamespace<TResource>;
-  ...ImpactedAzureResourceIdParameter;
+}
+
+@doc("Body of the get all insights")
+model insightDetails {
+ @doc("The ID of the azure resource.")
+  azureResourceId?: string;
 }
 
 
@@ -121,7 +114,8 @@ interface Insights  {
   @post
   @doc("get all insights under subscription")
   @segment("getAllInsights")
-  op getAllInsights(
-  ...InsightCustomResourceCommonParameters<InsightUnderSubscription>
+  op getAll(
+  ...InsightCustomResourceCommonParameters<InsightUnderSubscription>,
+  @body impactInfo: insightDetails, 
 ): ArmResponse<ResourceListResult<Insight>> | ErrorResponse;
 }

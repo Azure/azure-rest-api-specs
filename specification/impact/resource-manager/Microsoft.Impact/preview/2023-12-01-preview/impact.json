@@ -49,6 +49,9 @@
     },
     {
       "name": "Insights"
+    },
+    {
+      "name": "TopologyImpacts"
     }
   ],
   "paths": {
@@ -93,7 +96,7 @@
         "tags": [
           "Insights"
         ],
-        "operationId": "Insights_GetAllInsights",
+        "operationId": "Insights_GetAll",
         "description": "get all insights under subscription",
         "parameters": [
           {
@@ -103,7 +106,12 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ImpactedAzureResourceIdParameter"
+            "name": "impactInfo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/insightDetails"
+            }
           }
         ],
         "responses": {
@@ -125,7 +133,7 @@
         },
         "x-ms-examples": {
           "Get Insights list by subscription": {
-            "$ref": "./examples/Insights_GetAllInsights.json"
+            "$ref": "./examples/Insights_GetAll.json"
           }
         }
       }
@@ -215,6 +223,195 @@
         "x-ms-examples": {
           "Get WorkloadImpact Resource by name": {
             "$ref": "./examples/ImpactCategories_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/topologyImpacts": {
+      "get": {
+        "tags": [
+          "TopologyImpacts"
+        ],
+        "operationId": "TopologyImpacts_ListBySubscription",
+        "description": "List TopologyImpact resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TopologyImpactListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List TopologyImpact resources by subscription": {
+            "$ref": "./examples/TopologyImpact_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/topologyImpacts/{topologyImpactName}": {
+      "put": {
+        "tags": [
+          "TopologyImpacts"
+        ],
+        "operationId": "TopologyImpacts_Create",
+        "description": "Create a TopologyImpact",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "topologyImpactName",
+            "in": "path",
+            "required": true,
+            "description": "topologyImpact resource ",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$",
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/TopologyImpact"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TopologyImpact"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TopologyImpact"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reporting a topology impact": {
+            "$ref": "./examples/topologyImpact_Create.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "TopologyImpacts"
+        ],
+        "operationId": "TopologyImpacts_Get",
+        "description": "Get a TopologyImpact",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "topologyImpactName",
+            "in": "path",
+            "required": true,
+            "description": "topologyImpact resource ",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TopologyImpact"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get TopologyImpact Resource by name": {
+            "$ref": "./examples/TopologyImpact_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TopologyImpacts"
+        ],
+        "operationId": "TopologyImpacts_Delete",
+        "description": "Delete a TopologyImpact",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "topologyImpactName",
+            "in": "path",
+            "required": true,
+            "description": "topologyImpact resource ",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete topologyImpact Resource by name": {
+            "$ref": "./examples/TopologyImpact_Delete.json"
           }
         }
       }
@@ -749,10 +946,18 @@
         "impactUniqueId"
       ]
     },
-    "ImpactedAzureResourceIdParameter": {
+    "ImpactedResources": {
       "type": "object",
-      "properties": {},
-      "description": "The ID of the azure resource."
+      "properties": {
+        "impactedResourceId": {
+          "type": "string",
+          "description": "Azure resource id of the impacted resource"
+        }
+      },
+      "description": "resource and associated arm correlation ids",
+      "required": [
+        "impactedResourceId"
+      ]
     },
     "IncidentSource": {
       "type": "string",
@@ -1016,6 +1221,138 @@
         "modelAsString": true
       }
     },
+    "TopologyImpact": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TopologyImpactProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Topology Impact properties",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TopologyImpactListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TopologyImpact"
+          },
+          "x-cadl-name": "TopologyImpact[]",
+          "description": "The TopologyImpact items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a TopologyImpact list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "TopologyImpactProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which impact was observed "
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which impact has ended "
+        },
+        "impactedResources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImpactedResources"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "ImpactedResources[]",
+          "description": "list of impacted resources and associated arm correlation ids"
+        },
+        "topologyImpactUniqueId": {
+          "type": "string",
+          "description": "Unique ID of the impact (UUID)",
+          "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
+          "readOnly": true
+        },
+        "reportedTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which impact is reported",
+          "readOnly": true
+        },
+        "impactCategory": {
+          "$ref": "#/definitions/ImpactCategoryEnum",
+          "description": "Category of the impact,  if not provided default category would be considered as dataplane impact"
+        },
+        "impactDescription": {
+          "type": "string",
+          "description": "A detailed description of the impact"
+        },
+        "additionalProperties": {
+          "type": "object",
+          "properties": {},
+          "description": "Additional fields related to impact, applicable fields per resource type are list under /impactCategories API",
+          "x-cadl-name": "{}"
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/ErrorDetailProperties",
+          "description": "ARM error code and error message associated with the impact"
+        },
+        "performance": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Performance"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Performance[]",
+          "description": "Details about performance issue. Applicable for performance impacts."
+        },
+        "workload": {
+          "$ref": "#/definitions/Workload",
+          "description": "Information about the impacted workload"
+        },
+        "impactGroupId": {
+          "type": "string",
+          "description": "Use this field to group impacts"
+        },
+        "confidenceLevel": {
+          "$ref": "#/definitions/ConfidenceLevel",
+          "description": "Degree of confidence on the impact being a platform issue"
+        },
+        "clientIncidentDetails": {
+          "$ref": "#/definitions/ClientIncidentDetails",
+          "description": "Client incident details ex: incidentId , incident source"
+        }
+      },
+      "description": "Topology impact properties",
+      "required": [
+        "startDateTime",
+        "impactedResources"
+      ]
+    },
     "Workload": {
       "type": "object",
       "properties": {
@@ -1170,6 +1507,16 @@
         "impactedResourceId",
         "impactCategory"
       ]
+    },
+    "insightDetails": {
+      "type": "object",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "The ID of the azure resource."
+        }
+      },
+      "description": "Body of the get all insights"
     }
   },
   "parameters": {
@@ -1188,15 +1535,6 @@
       "in": "query",
       "required": false,
       "description": "Filter by resource type",
-      "minLength": 1,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ImpactedAzureResourceIdParameter": {
-      "name": "azureResourceId",
-      "in": "query",
-      "required": false,
-      "description": "The ID of the azure resource.",
       "minLength": 1,
       "type": "string",
       "x-ms-parameter-location": "method"
