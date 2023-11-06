@@ -6,24 +6,26 @@ using TypeSpec.Http;
 namespace Microsoft.DeviceUpdate;
 
 /** The list of device classes. */
-model DeviceClassesList is Azure.Core.Page<DeviceClass>;
+//model DeviceClassesList is Azure.Core.Page<DeviceClass>;
 
 /** Device class metadata. */
 @resource("management/deviceClasses")
+@parentResource(Instance)
 model DeviceClass {
+  /**
+   * The device class identifier. This is generated from the model Id and the compat
+   * properties reported by the device update agent in the Device Update PnP
+   * interface in IoT Hub. It is a hex-encoded SHA1 hash.
+   */
   @key
   @path
-  @doc("""
-The device class identifier. This is generated from the model Id and the compat
-properties reported by the device update agent in the Device Update PnP
-interface in IoT Hub. It is a hex-encoded SHA1 hash.
-""")
+  @visibility("read")
   deviceClassId: string;
 
-  @doc("""
-The device class friendly name. This can be updated by callers after the device
-class has been automatically created.
-""")
+  /**
+   * The device class friendly name. This can be updated by callers after the device
+   * class has been automatically created.
+   */
   friendlyName?: string;
 
   /** The device class properties that are used to calculate the device class Id */
@@ -38,36 +40,36 @@ model DeviceClassProperties {
   /** The Device Update agent contract model. */
   contractModel?: ContractModel;
 
-  @doc("""
-The compat properties of the device class. This object can be thought of as a
-set of key-value pairs where the key is the name of the compatibility property
-and the value is the value of the compatibility property. There will always be
-at least 1 compat property
-""")
+  /**
+   * The compat properties of the device class. This object can be thought of as a
+   * set of key-value pairs where the key is the name of the compatibility property
+   * and the value is the value of the compatibility property. There will always be
+   * at least 1 compat property
+   */
   compatProperties: Record<string>;
 }
 
 /** The Device Update agent contract model. */
 model ContractModel {
-  @doc("""
-The Device Update agent contract model Id of the device class. This is also
-used to calculate the device class Id.
-""")
+  /**
+   * The Device Update agent contract model Id of the device class. This is also
+   * used to calculate the device class Id.
+   */
   id: string;
 
-  @doc("""
-The Device Update agent contract model name of the device class. Intended to be
-a more readable form of the contract model Id.
-""")
+  /**
+   * The Device Update agent contract model name of the device class. Intended to be
+   * a more readable form of the contract model Id.
+   */
   name: string;
 }
 
 /** Device Class JSON Merge Patch request body */
 model PatchBody {
-  @doc("""
-The device class friendly name. Friendly name can be 1-100 characters,
-alphanumeric, dot, and dash.
-""")
+  /**
+   * The device class friendly name. Friendly name can be 1-100 characters,
+   * alphanumeric, dot, and dash.
+   */
   friendlyName: string;
 }
 

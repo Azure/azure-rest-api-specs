@@ -5,12 +5,14 @@ using TypeSpec.Http;
 
 namespace Microsoft.DeviceUpdate;
 
-/** The list of devices. */
-model DevicesList is Azure.Core.Page<Device>;
-
 /** Device metadata. */
+@resource("management/devices")
+@parentResource(Instance)
 model Device {
   /** Device identity. */
+  @key
+  @path
+  @visibility("read")
   deviceId: string;
 
   /** Device module identity. */
@@ -31,10 +33,10 @@ model Device {
   /** Currently installed update on device. */
   installedUpdate?: UpdateInfo;
 
-  @doc("""
-Boolean flag indicating whether the latest update (the best compatible update
-for the device's device class and group) is installed on the device
-""")
+  /**
+   * Boolean flag indicating whether the latest update (the best compatible update
+   * for the device's device class and group) is installed on the device
+   */
   onLatestUpdate: boolean;
 
   /** The deployment identifier for the last deployment to the device */
@@ -104,6 +106,7 @@ model DeviceHealth {
 enum DeviceHealthState {
   /** Agent is healthy */
   healthy,
+
   /** Agent is in an unhealthy state */
   unhealthy,
 }
@@ -121,6 +124,7 @@ model HealthCheck {
 enum HealthCheckResult {
   /** Health check succeeded */
   success,
+
   /** Health check failed due to user error */
   userError,
 }
@@ -163,11 +167,9 @@ model DeviceOperation {
   status: OperationStatus;
 
   /** Operation error encountered, if any. */
-  error?: Error;
+  error?: Azure.Core.Foundations.Error;
 
-  /**
-   *  Operation correlation identity that can used by Microsoft Support for troubleshooting.
-   */
+  /** Operation correlation identity that can used by Microsoft Support for troubleshooting. */
   traceId?: string;
 
   /** Date and time in UTC when the operation status was last updated. */
@@ -184,8 +186,10 @@ model DeviceOperation {
 enum ImportType {
   /** Import only devices but not modules. */
   Devices,
+
   /** Import only modules but not devices. */
   Modules,
+
   /** Import both devices and modules. */
   All,
 }

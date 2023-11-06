@@ -9,23 +9,16 @@ namespace Microsoft.DeviceUpdate;
  * The list of limits of how many of each resource are currently in use and how
  * many are allowed.
  */
-@resource("limits")
-@parentResource(Instance)
 model Limits {
-  @key("limitsId")
-  id: "default";
-
-  @doc("""
-The list of current counts of each limited resource and the maximum quota that
-are allowed.
-""")
+  /**
+   * The list of current counts of each limited resource and the maximum quota that are allowed.
+   */
   counters?: Counters;
 }
 
-@doc("""
-The list of counts of each limited resource with both current usage and overall
-quota.
-""")
+/**
+ * The list of counts of each limited resource with both current usage and overall quota.
+ */
 model Counters {
   /** The current usage and quota of devices. */
   deviceCount?: UsageQuotaCounter;

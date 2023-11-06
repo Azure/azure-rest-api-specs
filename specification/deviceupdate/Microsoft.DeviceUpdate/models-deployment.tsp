@@ -5,18 +5,20 @@ using TypeSpec.Http;
 
 namespace Microsoft.DeviceUpdate;
 
-/** The list of deployments. */
-model DeploymentsList is Azure.Core.Page<Deployment>;
-
 /** Deployment metadata. */
+@resource("deployments")
+@parentResource(Group)
 model Deployment {
-  @doc("""
-The caller-provided deployment identifier. This cannot be longer than 73
-characters, must be all lower-case, and cannot contain '&', '^', '[', ']', '{',
-'}', '|', '<', '>', forward slash, backslash, or double quote. The Updates view
-in the Azure Portal IoT Hub resource generates a GUID for deploymentId when you
-create a deployment.
-""")
+  /**
+   * The caller-provided deployment identifier. This cannot be longer than 73
+   * characters, must be all lower-case, and cannot contain '&', '^', '[', ']', '{',
+   * '}', '|', '<', '>', forward slash, backslash, or double quote. The Updates view
+   * in the Azure Portal IoT Hub resource generates a GUID for deploymentId when you
+   * create a deployment.
+   */
+  @key
+  @path
+  @visibility("read", "create")
   deploymentId: string;
 
   /** The deployment start datetime. */
@@ -28,11 +30,11 @@ create a deployment.
   /** The group identity for the devices the deployment is intended to update. */
   groupId: string;
 
-  @doc("""
-The device class subgroups the deployment is compatible with and subgroup
-deployments have been created for. This is not provided by the caller during
-CreateOrUpdateDeployment but is automatically determined by Device Update
-""")
+  /**
+   * The device class subgroups the deployment is compatible with and subgroup
+   * deployments have been created for. This is not provided by the caller during
+   * CreateOrUpdateDeployment but is automatically determined by Device Update
+   */
   deviceClassSubgroups?: string[];
 
   /** Boolean flag indicating whether the deployment was canceled. */
@@ -47,6 +49,11 @@ CreateOrUpdateDeployment but is automatically determined by Device Update
   /** Boolean flag indicating whether the deployment is a rollback deployment. */
   isCloudInitiatedRollback?: boolean;
 }
+
+/** DeviceClass Subgroup Deployment metadata */
+@resource("deployments")
+@parentResource(DeviceClassSubgroup)
+model DeviceClassSubgroupDeployment is Deployment;
 
 /** Rollback policy for deployment */
 model CloudInitiatedRollbackPolicy {
@@ -66,12 +73,14 @@ model CloudInitiatedRollbackPolicyFailure {
   devicesFailedCount: int32;
 }
 
-/** The list of deployment device states. */
-model DeploymentDeviceStatesList is Azure.Core.Page<DeploymentDeviceState>;
-
 /** Deployment device status. */
+@resource("devicestates")
+@parentResource(DeviceClassSubgroupDeployment)
 model DeploymentDeviceState {
   /** Device identity. */
+  @key
+  @path
+  @visibility("read")
   deviceId: string;
 
   /** Device module identity. */
@@ -80,10 +89,10 @@ model DeploymentDeviceState {
   /** The number of times this deployment has been retried on this device. */
   retryCount: int32;
 
-  @doc("""
-Boolean flag indicating whether this device is in a newer deployment and can no
-longer retry this deployment.
-""")
+  /**
+   * Boolean flag indicating whether this device is in a newer deployment and can no
+   * longer retry this deployment.
+   */
   movedOnToNewDeployment: boolean;
 
   /** Deployment device state. */
@@ -98,11 +107,11 @@ model DeploymentStatus {
   /** The state of the deployment. */
   deploymentState: DeploymentState;
 
-  @doc("""
-The error details of the Failed state.  This is not present if the deployment
-state is not Failed.
-""")
-  error?: Error;
+  /**
+   * The error details of the Failed state.  This is not present if the deployment
+   * state is not Failed.
+   */
+  error?: Azure.Core.Foundations.Error;
 
   /** The collection of device class subgroup status objects */
   subgroupStatus: DeviceClassSubgroupDeploymentStatus[];
@@ -112,18 +121,22 @@ state is not Failed.
 enum DeploymentState {
   /** The deployment can be sent to devices targeted in the deployment. */
   Active,
+
   /**
    * The deployment can be sent to some devices targeted in the deployment but at least 1 subgroup is in a failed state.
    */
   ActiveWithSubgroupFailures,
+
   /**
    * The deployment will not be sent to any devices.  Consult error for more details about what failed.
    */
   Failed,
+
   /**
    * A newer deployment for this group has been created and no devices in the group will receive this deployment.
    */
   Inactive,
+
   /** The deployment has been canceled and no devices will receive it. */
   Canceled,
 }
@@ -139,11 +152,11 @@ model DeviceClassSubgroupDeploymentStatus {
   /** The state of the subgroup deployment. */
   deploymentState: DeviceClassSubgroupDeploymentState;
 
-  @doc("""
-The error details of the Failed state.  This is not present if the deployment
-state is not Failed.
-""")
-  error?: Error;
+  /**
+   * The error details of the Failed state.  This is not present if the deployment
+   * state is not Failed.
+   */
+  error?: Azure.Core.Foundations.Error;
 
   /** The total number of devices in the deployment. */
   totalDevices?: int32;
@@ -161,15 +174,21 @@ state is not Failed.
   devicesCanceledCount?: int32;
 }
 
+/**
+ * Device class subgroup deployment state.
+ */
 enum DeviceClassSubgroupDeploymentState {
   /** The subgroup deployment can be sent to devices targeted in the deployment. */
   Active,
+
   /** The subgroup deployment failed and will not be sent to any devices. */
   Failed,
+
   /**
    * A newer deployment for this subgroup has been created and no devices in the subgroup will receive this deployment.
    */
   Inactive,
+
   /** The subgroup deployment has been canceled and no devices will receive it. */
   Canceled,
 }

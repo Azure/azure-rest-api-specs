@@ -82,9 +82,7 @@ model DeviceClassSubgroup {
 model DeviceClassSubgroupUpdatableDevicesList
   is Azure.Core.Page<DeviceClassSubgroupUpdatableDevices>;
 
-@doc("""
-Device class subgroup, update information, and the number of devices for which the update is applicable.
-""")
+/** Device class subgroup, update information, and the number of devices for which the update is applicable.*/
 model DeviceClassSubgroupUpdatableDevices {
   /** The group Id */
   groupId: string;

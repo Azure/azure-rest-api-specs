@@ -1,6 +1,14 @@
-import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
-import "./models.tsp";
+import "@azure-tools/typespec-azure-core";
+import "./parameters.tsp";
+import "./models-compliance.tsp";
+import "./models-deployment.tsp";
+import "./models-device.tsp";
+import "./models-deviceClass.tsp";
+import "./models-diagnostics.tsp";
+import "./models-group.tsp";
+import "./models-limits.tsp";
+import "./models-update.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -9,22 +17,17 @@ using Azure.Core.Traits;
 
 namespace Microsoft.DeviceUpdate;
 
-// TODO Verify trait supported
-alias ServiceTraits = SupportsRepeatableRequests &
-  SupportsConditionalRequests &
-  SupportsClientRequestId;
+alias ServiceTraits = SupportsClientRequestId &
+  NoConditionalRequests &
+  NoRepeatableRequests;
+
 alias ServiceOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface DeviceUpdateOperations {
   /** Get a list of all updates that have been imported to Device Update for IoT Hub. */
-  @get
-  @route("/deviceUpdate/{instanceId}/updates")
-  listUpdates is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
+  listUpdates is ServiceOperations.ResourceList<
+    Update,
+    QueryParametersTrait<{
       /** Request updates matching a free-text search expression. */
       @query
       search: string;
@@ -32,339 +35,210 @@ interface DeviceUpdateOperations {
       /** Optional to filter updates by isDeployable property. */
       @query
       filter: string;
+    }>
+  >;
+
+  /** Get a specific update version. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure Core doesn't support composite resource key."
+  @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}")
+  @get
+  getUpdate is Azure.Core.Foundations.Operation<
+    {
+      ...UpdateVersionParameter;
+      ...IfNoneMatchParameter;
     },
-    UpdateList
+    Update
   >;
 
   /**
    * Import new update version. This is a long-running-operation; use
    * Operation-Location response header value to check for operation status.
    */
-  @post
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO doesn't return status monitor in 202 resposne body."
+  @pollingOperation(DeviceUpdateOperations.getOperationStatus)
   @route("/deviceUpdate/{instanceId}/updates:import")
+  @post
   importUpdate is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
+      ...InstanceIdParameter;
 
       /**
        * The update to be imported (see schema https://json.schemastore.org/azure-deviceupdate-import-manifest-5.0.json for details).
        */
       @body updateToImport: ImportUpdateInput;
     },
-    Update | void
-  >;
-
-  /** Get a specific update version. */
-  @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}")
-  @get
-  getUpdate is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
+      @statusCode _: 202;
 
-      /** Update provider. */
-      @path
-      provider: string;
-
-      /** Update name. */
-      @path
-      name: string;
-
-      /** Update version. */
-      @path
-      version: string;
-
-      @doc("""
-Defines the If-None-Match condition. The operation will be performed only if
-the ETag on the server does not match this value.
-""")
-      @header
-      `If-None-Match`: string;
-    },
-    Update
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation?: ResourceLocation<UpdateOperation>;
+    }
   >;
 
-  @doc("""
-Delete a specific update version. This is a long-running-operation; use
-Operation-Location response header value to check for operation status.
-""")
+  /**
+   * Delete a specific update version. This is a long-running-operation; use
+   * Operation-Location response header value to check for operation status.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO doesn't return status monitor in 202 resposne body."
+  @pollingOperation(DeviceUpdateOperations.getOperationStatus)
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}")
   @delete
   deleteUpdate is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Update provider. */
-      @path
-      provider: string;
-
-      /** Update name. */
-      @path
-      name: string;
-
-      /** Update version. */
-      @path
-      version: string;
+      ...UpdateVersionParameter;
     },
-    void
+    {
+      @statusCode _: 202;
+
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation?: ResourceLocation<UpdateOperation>;
+    }
   >;
 
   /** Get a list of all update providers that have been imported to Device Update for IoT Hub. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Not a standard resource."
   @route("/deviceUpdate/{instanceId}/updates/providers")
   listProviders is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path instanceId: string;
+      ...InstanceIdParameter;
     },
     StringsList,
     {},
-    ErrorResponse
+    Azure.Core.Foundations.ErrorResponse
   >;
 
   /** Get a list of all update names that match the specified provider. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Not a standard resource."
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names")
   listNames is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path instanceId: string;
-
-      /** Update provider. */
-      @path provider: string;
+      ...UpdateProviderParameter;
     },
     StringsList,
     {},
-    ErrorResponse
+    Azure.Core.Foundations.ErrorResponse
   >;
 
   /** Get a list of all update versions that match the specified provider and name. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Not a standard resource."
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions")
+  @get
   listVersions is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path instanceId: string;
-
-      /** Update provider. */
-      @path provider: string;
-
-      /** Update name. */
-      @path name: string;
-
-      /** Optional to filter updates by isDeployable property. */
-      @query filter: string;
+      ...UpdateNameParameter;
     },
     StringsList,
     {},
-    ErrorResponse
+    Azure.Core.Foundations.ErrorResponse
   >;
 
   /** Get a list of all update file identifiers for the specified version. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure Core doesn't support composite resource key."
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files")
+  @get
   listFiles is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path instanceId: string;
-
-      /** Update provider. */
-      @path provider: string;
-
-      /** Update name. */
-      @path name: string;
-
-      /** Update version. */
-      @path version: string;
-
-      /** Optional to filter updates by isDeployable property. */
-      @query filter: string;
+      ...UpdateVersionParameter;
     },
     StringsList,
     {},
-    ErrorResponse
+    Azure.Core.Foundations.ErrorResponse
   >;
 
   /** Get a specific update file from the version. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure Core doesn't support composite resource key."
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files/{fileId}")
   @get
   getFile is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Update provider. */
-      @path
-      provider: string;
-
-      /** Update name. */
-      @path
-      name: string;
-
-      /** Update version. */
-      @path
-      version: string;
+      ...UpdateVersionParameter;
 
       /** File identifier. */
       @path
       fileId: string;
 
-      @doc("""
-Defines the If-None-Match condition. The operation will be performed only if
-the ETag on the server does not match this value.
-""")
-      @header
-      `If-None-Match`: string;
+      ...IfNoneMatchParameter;
     },
     UpdateFile
   >;
 
-  @doc("""
-Get a list of all import update operations. Completed operations are kept for 7
-days before auto-deleted. Delete operations are not returned by this API
-version.
-""")
-  @route("/deviceUpdate/{instanceId}/updates/operations")
-  @get
-  listOperationStatuses is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      @doc("""
-Optional to filter operations by status property. Only one specific filter is
-supported: \"status eq 'NotStarted' or status eq 'Running'\"
-""")
+  /**
+   * Get a list of all import update operations. Completed operations are kept for 7
+   * days before auto-deleted. Delete operations are not returned by this API
+   * version.
+   */
+  listOperationStatuses is ServiceOperations.ResourceList<
+    UpdateOperation,
+    QueryParametersTrait<{
+      /**
+       * Optional to filter operations by status property. Only one specific filter is
+       * supported: \"status eq 'NotStarted' or status eq 'Running'\"
+       */
       @query
       filter: string;
 
-      @doc("""
-Specifies a non-negative integer n that limits the number of items returned
-from a collection. The service returns the number of available items up to but
-not greater than the specified value n.
-""")
+      /**
+       * Specifies a non-negative integer n that limits the number of items returned
+       * from a collection. The service returns the number of available items up to but
+       * not greater than the specified value n.
+       */
       @query
       top: int32;
-    },
-    UpdateOperationsList
+    }>
   >;
 
   /** Retrieve operation status. */
-  @route("/deviceUpdate/{instanceId}/updates/operations/{operationId}")
-  @get
-  GetOperationStatus is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Operation identifier. */
-      @path
-      operationId: string;
-
-      @doc("""
-Defines the If-None-Match condition. The operation will be performed only if
-the ETag on the server does not match this value.
-""")
-      @header
-      `If-None-Match`: string;
-    },
-    UpdateOperation
+  getOperationStatus is ServiceOperations.ResourceRead<
+    UpdateOperation,
+    TraitOverride<RequestHeadersTrait<
+      {
+        ...IfNoneMatchParameter;
+      },
+      TraitContext.Read
+    >>
   >;
 }
 
 interface DeviceManagementOperations {
-  @doc("""
-Gets a list of all device classes (sets of devices compatible with the same
-updates based on the model Id and compat properties reported in the Device
-Update PnP interface in IoT Hub) for all devices connected to Device Update for
-IoT Hub.
-""")
-  @route("/deviceUpdate/{instanceId}/management/deviceClasses")
-  @get
-  ListDeviceClasses is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
+  /**
+   * Gets a list of all device classes (sets of devices compatible with the same
+   * updates based on the model Id and compat properties reported in the Device
+   * Update PnP interface in IoT Hub) for all devices connected to Device Update for
+   * IoT Hub.
+   */
+  listDeviceClasses is ServiceOperations.ResourceList<
+    DeviceClass,
+    QueryParametersTrait<{
       /** Restricts the set of device classes returned. You can filter on friendly name. */
-      @query
-      filter: string;
-    },
-    DeviceClassesList
+      @query filter: string;
+    }>
   >;
 
   /** Gets the properties of a device class. */
-  @route("/deviceUpdate/{instanceId}/management/deviceClasses/{deviceClassId}")
-  @get
-  GetDeviceClass is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
+  getDeviceClass is ServiceOperations.ResourceRead<DeviceClass>;
 
-      /** Device class identifier. */
-      @path
-      deviceClassId: string;
-    },
-    DeviceClass
-  >;
-
+  // TODO: this doesn't generate request body, and we also need to restrict which prop can be patched.
   /** Update device class details. */
-  @route("/deviceUpdate/{instanceId}/management/deviceClasses/{deviceClassId}")
-  @patch
-  UpdateDeviceClass is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
+  updateDeviceClass is ServiceOperations.ResourceUpdate<DeviceClass>;
 
-      /** Device class identifier. */
-      @path
-      deviceClassId: string;
-
-      @doc("""
-The device class json merge patch body. Currently only supports patching
-friendlyName.
-""")
-      @body
-      deviceClassPatch: PatchBody;
-    },
-    DeviceClass
-  >;
-
-  @doc("""
-Deletes a device class. Device classes are created automatically when Device
-Update-enabled devices are connected to the hub but are not automatically
-cleaned up since they are referenced by DeviceClassSubgroups. If the user has
-deleted all DeviceClassSubgroups for a device class they can also delete the
-device class to remove the records from the system and to stop checking the
-compatibility of this device class with new updates. If a device is ever
-reconnected for this device class it will be re-created.
-""")
-  @route("/deviceUpdate/{instanceId}/management/deviceClasses/{deviceClassId}")
-  @delete
-  DeleteDeviceClass is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Device class identifier. */
-      @path
-      deviceClassId: string;
-    },
-    void
-  >;
+  /**
+   * Deletes a device class. Device classes are created automatically when Device
+   * Update-enabled devices are connected to the hub but are not automatically
+   * cleaned up since they are referenced by DeviceClassSubgroups. If the user has
+   * deleted all DeviceClassSubgroups for a device class they can also delete the
+   * device class to remove the records from the system and to stop checking the
+   * compatibility of this device class with new updates. If a device is ever
+   * reconnected for this device class it will be re-created.
+   */
+  deleteDeviceClass is ServiceOperations.ResourceDelete<DeviceClass>;
 
   /** Gets a list of installable updates for a device class. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "UpdateInfo model is not a resource and reused in several places."
   @route("/deviceUpdate/{instanceId}/management/deviceClasses/{deviceClassId}/installableUpdates")
   @get
-  ListInstallableUpdatesForDeviceClass is Azure.Core.Foundations.Operation<
+  listInstallableUpdatesForDeviceClass is Azure.Core.Foundations.Operation<
     {
       /** The Device Update for IoT Hub account instance identifier. */
       @path
@@ -378,74 +252,59 @@ reconnected for this device class it will be re-created.
   >;
 
   /** Gets a list of devices connected to Device Update for IoT Hub. */
-  @route("/deviceUpdate/{instanceId}/management/devices")
-  @get
-  listDevices is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      @doc("""
-Restricts the set of devices returned. You can filter on GroupId,
-DeviceClassId, or GroupId and DeploymentStatus. Use DeploymentStatus eq null to
-query for devices with no deployment status (that have never been deployed to).
-""")
-      @query
-      filter: string;
-    },
-    DevicesList
+  listDevices is ServiceOperations.ResourceList<
+    Device,
+    QueryParametersTrait<{
+      /**
+       * Restricts the set of devices returned. You can filter on GroupId,
+       * DeviceClassId, or GroupId and DeploymentStatus. Use DeploymentStatus eq null to
+       * query for devices with no deployment status (that have never been deployed to).
+       */
+      @query filter: string;
+    }>
   >;
 
-  @doc("""
-Import existing devices from IoT Hub. This is a long-running-operation; use
-Operation-Location response header value to check for operation status.
-""")
+  /**
+   * Import existing devices from IoT Hub. This is a long-running-operation; use
+   * Operation-Location response header value to check for operation status.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO doesn't return status monitor in 202 response body."
+  @pollingOperation(DeviceManagementOperations.getOperationStatus)
   @route("/deviceUpdate/{instanceId}/management/devices:import")
   @post
-  importDevices is Azure.Core.Foundations.Operation<
+  importDevice is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
+      ...InstanceIdParameter;
 
       /** The types of devices to import. */
       @body
       importType: ImportType;
     },
-    void
-  >;
-
-  @doc("""
-Gets the device properties and latest deployment status for a device connected
-to Device Update for IoT Hub.
-""")
-  @route("/deviceUpdate/{instanceId}/management/devices/{deviceId}")
-  @get
-  getDevice is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
+      @statusCode _: 202;
 
-      /** Device identifier in Azure IoT Hub. */
-      @path
-      deviceId: string;
-    },
-    Device
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation?: ResourceLocation<DeviceOperation>;
+    }
   >;
 
-  @doc("""
-Gets the device module properties and latest deployment status for a device
-module connected to Device Update for IoT Hub.
-""")
+  /**
+   * Gets the device properties and latest deployment status for a device connected
+   * to Device Update for IoT Hub.
+   */
+  getDevice is ServiceOperations.ResourceRead<Device>;
+
+  /**
+   * Gets the device module properties and latest deployment status for a device
+   * module connected to Device Update for IoT Hub.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Get Module API returns model identical to Device."
   @route("/deviceUpdate/{instanceId}/management/devices/{deviceId}/modules/{moduleId}")
   @get
   getDeviceModule is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
+      ...InstanceIdParameter;
 
       /** Device identifier in Azure IoT Hub. */
       @path
@@ -458,17 +317,16 @@ module connected to Device Update for IoT Hub.
     Device
   >;
 
-  @doc("""
-Gets the breakdown of how many devices are on their latest update, have new
-updates available, or are in progress receiving new updates.
-""")
+  /**
+   * Gets the breakdown of how many devices are on their latest update, have new
+   * updates available, or are in progress receiving new updates.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
   @route("/deviceUpdate/{instanceId}/management/updateCompliance")
   @get
-  GetUpdateCompliance is Azure.Core.Foundations.Operation<
+  getUpdateCompliance is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
+      ...InstanceIdParameter;
     },
     UpdateCompliance
   >;
@@ -501,11 +359,12 @@ updates available, or are in progress receiving new updates.
    */
   deleteGroup is ServiceOperations.ResourceDelete<Group>;
 
-  @doc("""
-Get device group update compliance information such as how many devices are on
-their latest update, how many need new updates, and how many are in progress on
-receiving a new update.
-""")
+  /**
+   * Get device group update compliance information such as how many devices are on
+   * their latest update, how many need new updates, and how many are in progress on
+   * receiving a new update.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/updateCompliance")
   @get
   getUpdateComplianceForGroup is Azure.Core.Foundations.Operation<
@@ -513,10 +372,11 @@ receiving a new update.
     UpdateCompliance
   >;
 
-  @doc("""
-Get the best available updates for a device group and a count of how many
-devices need each update.
-""")
+  /**
+   * Get the best available updates for a device group and a count of how many
+   * devices need each update.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/bestUpdates")
   @get
   listBestUpdatesForGroup is Azure.Core.Foundations.Operation<
@@ -525,69 +385,29 @@ devices need each update.
   >;
 
   /** Gets a list of deployments for a device group. */
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments")
-  @get
-  listDeploymentsForGroup is Azure.Core.Foundations.Operation<
-    {
-      ...Azure.Core.Foundations.ItemKeysOf<Group>;
-
+  listDeploymentsForGroup is ServiceOperations.ResourceList<
+    Deployment,
+    ListQueryParametersTrait<{
       /** Orders the set of deployments returned. You can order by start date. */
       @query
       orderby: string;
-    },
-    DeploymentsList
+    }>
   >;
 
   /** Gets the deployment properties. */
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}")
-  @get
-  getDeployment is Azure.Core.Foundations.Operation<
-    {
-      ...Azure.Core.Foundations.ItemKeysOf<Group>;
-
-      /** Deployment identifier. */
-      @path
-      deploymentId: string;
-    },
-    Deployment
-  >;
+  getDeployment is ServiceOperations.ResourceRead<Deployment>;
 
   /** Creates or updates a deployment. */
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}")
-  @put
-  createOrUpdateDeployment is Azure.Core.Foundations.Operation<
-    {
-      ...Azure.Core.Foundations.ItemKeysOf<Group>;
-
-      /** Deployment identifier. */
-      @path
-      deploymentId: string;
-
-      /** The deployment properties. */
-      @body
-      deployment: Deployment;
-    },
-    Deployment
-  >;
+  createOrUpdateDeployment is ServiceOperations.ResourceCreateOrUpdate<Deployment>;
 
   /** Deletes a deployment. */
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}")
-  @delete
-  deleteDeployment is Azure.Core.Foundations.Operation<
-    {
-      ...Azure.Core.Foundations.ItemKeysOf<Group>;
+  deleteDeployment is ServiceOperations.ResourceDelete<Deployment>;
 
-      /** Deployment identifier. */
-      @path
-      deploymentId: string;
-    },
-    void
-  >;
-
-  @doc("""
-Gets the status of a deployment including a breakdown of how many devices in
-the deployment are in progress, completed, or failed.
-""")
+  /**
+   * Gets the status of a deployment including a breakdown of how many devices in
+   * the deployment are in progress, completed, or failed.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}/status")
   @get
   getDeploymentStatus is Azure.Core.Foundations.Operation<
@@ -638,11 +458,12 @@ the deployment are in progress, completed, or failed.
    */
   deleteDeviceClassSubgroup is ServiceOperations.ResourceDelete<DeviceClassSubgroup>;
 
-  @doc("""
-Get device class subgroup update compliance information such as how many
-devices are on their latest update, how many need new updates, and how many are
-in progress on receiving a new update.
-""")
+  /**
+   * Get device class subgroup update compliance information such as how many
+   * devices are on their latest update, how many need new updates, and how many are
+   * in progress on receiving a new update.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/updateCompliance")
   @get
   getDeviceClassSubgroupUpdateCompliance is Azure.Core.Foundations.Operation<
@@ -650,10 +471,11 @@ in progress on receiving a new update.
     UpdateCompliance
   >;
 
-  @doc("""
-Get the best available update for a device class subgroup and a count of how
-many devices need this update.
-""")
+  /**
+   * Get the best available update for a device class subgroup and a count of how
+   * many devices need this update.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/bestUpdates")
   @get
   getBestUpdatesForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
@@ -662,114 +484,63 @@ many devices need this update.
   >;
 
   /** Gets a list of deployments for a device class subgroup. */
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments")
-  @get
-  listDeploymentsForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
-    {
-      ...Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>;
-
+  listDeploymentsForDeviceClassSubgroup is ServiceOperations.ResourceList<
+    DeviceClassSubgroupDeployment,
+    ListQueryParametersTrait<{
       /** Orders the set of deployments returned. You can order by start date. */
       @query
       orderby: string;
-    },
-    DeploymentsList
+    }>
   >;
 
   /** Gets the deployment properties. */
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}")
-  @get
-  getDeploymentForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
-    {
-      ...Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>;
-
-      /** Deployment identifier. */
-      @path
-      deploymentId: string;
-    },
-    Deployment
-  >;
+  getDeploymentForDeviceClassSubgroup is ServiceOperations.ResourceRead<DeviceClassSubgroupDeployment>;
 
   /** Deletes a device class subgroup deployment. */
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}")
-  @delete
-  deleteDeploymentForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
-    {
-      ...Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>;
-
-      /** Deployment identifier. */
-      @path
-      deploymentId: string;
-    },
-    void
-  >;
+  deleteDeploymentForDeviceClassSubgroup is ServiceOperations.ResourceDelete<DeviceClassSubgroupDeployment>;
 
   /** Stops a deployment. */
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}:cancel")
-  @post
-  stopDeployment is Azure.Core.Foundations.Operation<
-    {
-      ...Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>;
-
-      /** Deployment identifier. */
-      @path
-      deploymentId: string;
-    },
-    Deployment
+  cancel is ServiceOperations.ResourceAction<
+    DeviceClassSubgroupDeployment,
+    {},
+    DeviceClassSubgroupDeployment
   >;
 
   /** Retries a deployment with failed devices. */
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}:retry")
-  @post
-  retryDeployment is Azure.Core.Foundations.Operation<
-    {
-      ...Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>;
-
-      /** Deployment identifier. */
-      @path
-      deploymentId: string;
-    },
-    Deployment
+  retry is ServiceOperations.ResourceAction<
+    DeviceClassSubgroupDeployment,
+    {},
+    DeviceClassSubgroupDeployment
   >;
 
-  @doc("""
-Gets the status of a deployment including a breakdown of how many devices in
-the deployment are in progress, completed, or failed.
-""")
+  /**
+   * Gets the status of a deployment including a breakdown of how many devices in
+   * the deployment are in progress, completed, or failed.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}/status")
   @get
   getDeviceClassSubgroupDeploymentStatus is Azure.Core.Foundations.Operation<
     {
-      ...Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>;
-
-      /** Deployment identifier. */
-      @path
-      deploymentId: string;
+      ...Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroupDeployment>;
     },
     DeviceClassSubgroupDeploymentStatus
   >;
 
-  @doc("""
-Gets a list of devices in a deployment along with their state. Useful for
-getting a list of failed devices.
-""")
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}/devicestates")
-  @get
-  listDeviceStatesForDeviceClassSubgroupDeployment is Azure.Core.Foundations.Operation<
-    {
-      ...Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>;
-
-      /** Deployment identifier. */
-      @path
-      deploymentId: string;
-
-      @doc("""
-Restricts the set of deployment device states returned. You can filter on
-deviceId and moduleId and/or deviceState.
-""")
+  /**
+   * Gets a list of devices in a deployment along with their state. Useful for
+   * getting a list of failed devices.
+   */
+  listDeviceStatesForDeviceClassSubgroupDeployment is ServiceOperations.ResourceList<
+    DeploymentDeviceState,
+    ListQueryParametersTrait<{
+      /**
+       * Restricts the set of deployment device states returned. You can filter on
+       * deviceId and moduleId and/or deviceState.
+       */
       @query
       filter: string;
-    },
-    DeploymentDeviceStatesList
+    }>
   >;
 
   /** Retrieve operation status. */
@@ -807,16 +578,11 @@ deviceId and moduleId and/or deviceState.
   startLogCollection is ServiceOperations.ResourceCreateOrReplace<LogCollection>;
 
   /** Get log collection with detailed status */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
   @route("/deviceUpdate/{instanceId}/management/deviceDiagnostics/logCollections/{operationId}/detailedStatus")
   getLogCollectionDetailedStatus is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
-      /** Log collection identifier. */
-      @path
-      operationId: string;
+      ...Azure.Core.Foundations.ItemKeysOf<LogCollection>;
     },
     LogCollectionOperationDetailedStatus
   >;
@@ -836,18 +602,11 @@ deviceId and moduleId and/or deviceState.
 }
 
 interface InstanceManagementOperations {
-  @doc("""
+  /**
 Gets the instance limits for active deployments, devices, device classes, and
 groups.
-""")
-  @route("/deviceUpdate/{instanceId}/limits")
-  @get
-  getLimits is Azure.Core.Foundations.Operation<
-    {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-    },
-    LimitsResponse
-  >;
+*/
+  // @route("/deviceUpdate/{instanceId}/limits")
+  // @get
+  // getLimits is ServiceOperations.ResourceRead<Limits>;
 }
