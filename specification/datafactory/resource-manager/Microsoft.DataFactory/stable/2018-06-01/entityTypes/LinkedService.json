@@ -1757,7 +1757,8 @@
       "properties": {
         "connectionString": {
           "description": "Teradata ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "server": {
           "type": "object",
@@ -4673,7 +4674,7 @@
         },
         "requestGoogleDriveScope": {
           "description": "Whether to request access to Google Drive. Allowing Google Drive access enables support for federated tables that combine BigQuery data with data from Google Drive. The default value is false. Type: string (or Expression with resultType string).",
-          "x-ms-format": "dfe-string",
+          "x-ms-format": "dfe-bool",
           "type": "object"
         },
         "authenticationType": {
@@ -4757,7 +4758,8 @@
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "pwd": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -5777,7 +5779,8 @@
       "properties": {
         "endpoint": {
           "description": "The endpoint of the ServiceNow server. (i.e. <instance>.service-now.com)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "authenticationType": {
           "description": "The authentication type to use.",
@@ -6860,6 +6863,7 @@
       "type": "object",
       "properties": {
         "endpoint": {
+          "x-ms-format": "dfe-string",
           "description": "The endpoint of the Responsys server.",
           "type": "object"
         },
@@ -6923,6 +6927,7 @@
       "type": "object",
       "properties": {
         "url": {
+          "x-ms-format": "dfe-string",
           "description": "The Dynamics AX (or Dynamics 365 Finance and Operations) instance OData endpoint.",
           "type": "object"
         },
@@ -6985,11 +6990,13 @@
       "properties": {
         "host": {
           "description": "The URL of the Oracle Service Cloud instance.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "username": {
           "description": "The user name that you use to access Oracle Service Cloud server.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "password": {
           "description": "The password corresponding to the user name that you provided in the username key.",
