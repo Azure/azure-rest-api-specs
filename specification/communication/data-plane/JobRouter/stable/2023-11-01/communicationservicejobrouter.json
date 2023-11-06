@@ -1202,7 +1202,7 @@
         }
       }
     },
-    "/routing/jobs/{jobId}:complete": {
+    "/routing/jobs/{jobId}/assignments/{assignmentId}:complete": {
       "post": {
         "operationId": "JobRouterOperations_CompleteJobAction",
         "summary": "Completes an assigned job.",
@@ -1219,10 +1219,17 @@
             "type": "string"
           },
           {
+            "name": "assignmentId",
+            "in": "path",
+            "description": "The assignment within the job to complete.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "options",
             "in": "body",
             "description": "Request model for completing job.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/CompleteJobOptions"
             }
@@ -1255,7 +1262,7 @@
         }
       }
     },
-    "/routing/jobs/{jobId}:close": {
+    "/routing/jobs/{jobId}/assignments/{assignmentId}:close": {
       "post": {
         "operationId": "JobRouterOperations_CloseJobAction",
         "summary": "Closes a completed job.",
@@ -1272,10 +1279,17 @@
             "type": "string"
           },
           {
+            "name": "assignmentId",
+            "in": "path",
+            "description": "The assignment within which the job is to be closed.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "options",
             "in": "body",
             "description": "Request model for closing job.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/CloseJobOptions"
             }
@@ -2362,10 +2376,6 @@
       "type": "object",
       "description": "Request payload for closing jobs",
       "properties": {
-        "assignmentId": {
-          "type": "string",
-          "description": "The assignment within which the job is to be closed."
-        },
         "dispositionCode": {
           "type": "string",
           "description": "Indicates the outcome of the job, populate this field with your own custom values."
@@ -2379,10 +2389,7 @@
           "type": "string",
           "description": "A note that will be appended to the jobs' Notes collection with the current timestamp."
         }
-      },
-      "required": [
-        "assignmentId"
-      ]
+      }
     },
     "CloseJobResult": {
       "type": "object",
@@ -2393,18 +2400,11 @@
       "type": "object",
       "description": "Request payload for completing jobs",
       "properties": {
-        "assignmentId": {
-          "type": "string",
-          "description": "The assignment within the job to complete."
-        },
         "note": {
           "type": "string",
           "description": "A note that will be appended to the jobs' Notes collection with the current timestamp."
         }
-      },
-      "required": [
-        "assignmentId"
-      ]
+      }
     },
     "CompleteJobResult": {
       "type": "object",

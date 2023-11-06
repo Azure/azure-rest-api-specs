@@ -499,18 +499,12 @@ model CancelJobOptions {
 
 @doc("Request payload for completing jobs")
 model CompleteJobOptions {
-  @doc("The assignment within the job to complete.")
-  assignmentId: string;
-
   @doc("A note that will be appended to the jobs' Notes collection with the current timestamp.")
   note?: string;
 }
 
 @doc("Request payload for closing jobs")
-model CloseJobOptions {
-  @doc("The assignment within which the job is to be closed.")
-  assignmentId: string;
-
+model CloseJobOptions {  
   @doc("Indicates the outcome of the job, populate this field with your own custom values.")
   dispositionCode?: string;
 

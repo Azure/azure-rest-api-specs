@@ -196,7 +196,7 @@ interface JobRouterOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Completes an assigned job.")
   @doc("Completes an assigned job.")
-  @route("/routing/jobs/{jobId}:complete")
+  @route("/routing/jobs/{jobId}/assignments/{assignmentId}:complete")
   @post
   completeJobAction is Azure.Core.Foundations.Operation<
     {
@@ -204,9 +204,13 @@ interface JobRouterOperations {
       @path
       jobId: string;
 
+      @doc("The assignment within the job to complete.")
+      @path
+      assignmentId: string;
+
       @doc("Request model for completing job.")
       @body
-      options: CompleteJobOptions;
+      options?: CompleteJobOptions;
     },
     CompleteJobResultWithOkResponse
   >;
@@ -214,7 +218,7 @@ interface JobRouterOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Closes a completed job.")
   @doc("Closes a completed job.")
-  @route("/routing/jobs/{jobId}:close")
+  @route("/routing/jobs/{jobId}/assignments/{assignmentId}:close")
   @post
   closeJobAction is Azure.Core.Foundations.Operation<
     {
@@ -222,9 +226,13 @@ interface JobRouterOperations {
       @path
       jobId: string;
 
+      @doc("The assignment within which the job is to be closed.")
+      @path
+      assignmentId: string;
+
       @doc("Request model for closing job.")
       @body
-      options: CloseJobOptions;
+      options?: CloseJobOptions;
     },
     CloseJobResultResponse
   >;
