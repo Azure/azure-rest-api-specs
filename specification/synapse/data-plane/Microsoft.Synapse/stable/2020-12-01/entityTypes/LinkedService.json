@@ -6890,26 +6890,22 @@
       "properties": {
         "workspaceId": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "The ID of Microsoft Fabric workspace. Type: string (or Expression with resultType string)."
         },
         "artifactId": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "The ID of Microsoft Fabric LakeHouse artifact. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalId": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "The ID of the application used to authenticate against Microsoft Fabric LakeHouse. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalKey": {
           "description": "The Key of the application used to authenticate against Microsoft Fabric LakeHouse.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "tenant": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
@@ -6918,12 +6914,11 @@
         },
         "servicePrincipalCredentialType": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalCredential": {
           "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "$ref": "../artifacts.json#/definitions/SecretBase"
         }
       }
     },
