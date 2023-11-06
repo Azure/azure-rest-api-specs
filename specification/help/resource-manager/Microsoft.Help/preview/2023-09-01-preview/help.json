@@ -1001,14 +1001,24 @@
     },
     "SolutionResource": {
       "description": "Solution response.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
+        "id": {
+          "description": "Full resource uri of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/SolutionResourceProperties",
           "x-ms-client-flatten": true
