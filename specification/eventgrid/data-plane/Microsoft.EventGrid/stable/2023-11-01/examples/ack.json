@@ -1,15 +1,14 @@
 {
-  "operationId": "ReleaseCloudEvents",
-  "title": "Release Cloud Event with an optional delay.",
+  "operationId": "AcknowledgeCloudEvents",
+  "title": "Acknowledge Cloud Event",
   "parameters": {
     "endpoint": "myNamespaceName.westus-1.eventgrid.azure.net",
     "topicName": "myTopic",
     "eventSubscriptionName": "myEventSubscription",
     "content-type": "application/json",
     "authorization": "SharedAccessKey 123",
-    "api-version": "2023-10-01-preview",
-    "releaseDelayInSeconds": 10,
-    "releaseOptions": {
+    "api-version": "2023-06-01-preview",
+    "acknowledgeOptions": {
       "lockTokens": [
         "CgMKATESCQoHdG9rZW4tMQ=="
       ]
@@ -18,7 +17,15 @@
   "responses": {
     "200": {
       "body": {
-        "failedLockTokens": [],
+        "failedLockTokens": [
+          {
+            "lockToken": "CgMKATESCQoHdG9rZW4tMQ==",
+            "error": {
+              "code": "BadToken",
+              "message": ""
+            }
+          }
+        ],
         "succeededLockTokens": [
           "CgMKATESCQoHdG9rZW4tMQ=="
         ]
