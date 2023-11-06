@@ -262,6 +262,10 @@ directive:
 - suppress: R3026
   from: ContainerAppsRevisions.json
   reason: Patch operation will be implemented in later version.
+suppressions:
+  - code: RPC-Put-V1-25
+    from: Microsoft.Web/stable/2023-01-01/WebApps.json
+    reason: "Rule: A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT . Justification: Suppressing this rule since this API is simply a passthrough to the onedeploy siteextension APIs"  
 ```
 
 ### Tag: package-2022-09
