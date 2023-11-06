@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-06-28",
+    "version": "2023-10-11-preview",
     "title": "azuredatatransferrp",
     "description": "Azure Data Transfer service resource provider"
   },
@@ -34,6 +34,45 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.AzureDataTransfer/action": {
+      "post": {
+        "description": "Performs an action request on Azure Data Transfer.",
+        "x-ms-examples": {
+          "Performs action request": {
+            "$ref": "examples/postAction.json"
+          }
+        },
+        "operationId": "AzureDataTransfer_action",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/actionRequest"
+            },
+            "description": "The action request parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Performed the action.",
+            "schema": {
+              "$ref": "#/definitions/actionResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}": {
       "get": {
         "description": "Gets flow resource.",
@@ -1405,6 +1444,32 @@
     }
   },
   "definitions": {
+    "actionRequest": {
+      "type": "object",
+      "description": "An action request",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the action"
+        },
+        "payload": {
+          "type": "object",
+          "description": "Action request payload",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "actionResult": {
+      "type": "object",
+      "description": "An action result",
+      "properties": {
+        "result": {
+          "type": "object",
+          "description": "Action request result",
+          "additionalProperties": {}
+        }
+      }
+    },
     "selectedResource": {
       "type": "object",
       "description": "A resource selected from ARM",
@@ -1572,6 +1637,10 @@
         },
         "plan": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Plan"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed identity of the flow resource, if configured."
         }
       },
       "required": [
@@ -2191,7 +2260,8 @@
         "DevSecOps",
         "Messaging",
         "Mission",
-        "MicrosoftInternal"
+        "MicrosoftInternal",
+        "BasicFiles"
       ],
       "type": "string",
       "x-ms-enum": {
