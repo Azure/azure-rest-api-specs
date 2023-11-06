@@ -1095,7 +1095,7 @@
     },
     "/routing/jobs/{jobId}:reclassify": {
       "post": {
-        "operationId": "JobRouterOperations_ReclassifyJobAction",
+        "operationId": "JobRouterOperations_Reclassify",
         "summary": "Reclassify a job.",
         "description": "Reclassify a job.",
         "parameters": [
@@ -1105,7 +1105,7 @@
           {
             "name": "jobId",
             "in": "path",
-            "description": "Id of the job.",
+            "description": "The id of the job.",
             "required": true,
             "type": "string"
           },
@@ -1148,7 +1148,7 @@
     },
     "/routing/jobs/{jobId}:cancel": {
       "post": {
-        "operationId": "JobRouterOperations_CancelJobAction",
+        "operationId": "JobRouterOperations_Cancel",
         "summary": "Submits request to cancel an existing job by Id while supplying free-form cancellation reason.",
         "description": "Submits request to cancel an existing job by Id while supplying free-form cancellation reason.",
         "parameters": [
@@ -1158,7 +1158,7 @@
           {
             "name": "jobId",
             "in": "path",
-            "description": "Id of the job.",
+            "description": "The id of the job.",
             "required": true,
             "type": "string"
           },
@@ -1174,7 +1174,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK Response payload from cancelling a job",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CancelJobResult"
             }
@@ -1204,7 +1204,7 @@
     },
     "/routing/jobs/{jobId}/assignments/{assignmentId}:complete": {
       "post": {
-        "operationId": "JobRouterOperations_CompleteJobAction",
+        "operationId": "JobRouterOperations_Complete",
         "summary": "Completes an assigned job.",
         "description": "Completes an assigned job.",
         "parameters": [
@@ -1214,14 +1214,14 @@
           {
             "name": "jobId",
             "in": "path",
-            "description": "Id of the job.",
+            "description": "The id of the job.",
             "required": true,
             "type": "string"
           },
           {
             "name": "assignmentId",
             "in": "path",
-            "description": "The assignment within the job to complete.",
+            "description": "The Id of the job assignment.",
             "required": true,
             "type": "string"
           },
@@ -1237,7 +1237,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK Response payload from completing a job",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CompleteJobResult"
             }
@@ -1264,7 +1264,7 @@
     },
     "/routing/jobs/{jobId}/assignments/{assignmentId}:close": {
       "post": {
-        "operationId": "JobRouterOperations_CloseJobAction",
+        "operationId": "JobRouterOperations_Close",
         "summary": "Closes a completed job.",
         "description": "Closes a completed job.",
         "parameters": [
@@ -1330,7 +1330,7 @@
     },
     "/routing/jobs/{jobId}/assignments/{assignmentId}:unassign": {
       "post": {
-        "operationId": "JobRouterOperations_UnassignJobAction",
+        "operationId": "JobRouterOperations_Unassign",
         "summary": "Un-assign a job.",
         "description": "Un-assign a job.",
         "parameters": [
@@ -1340,14 +1340,14 @@
           {
             "name": "jobId",
             "in": "path",
-            "description": "Id of the job to un-assign.",
+            "description": "The id of the job.",
             "required": true,
             "type": "string"
           },
           {
             "name": "assignmentId",
             "in": "path",
-            "description": "Id of the assignment to un-assign.",
+            "description": "The Id of the job assignment.",
             "required": true,
             "type": "string"
           },
@@ -2011,7 +2011,7 @@
     },
     "/routing/workers/{workerId}/offers/{offerId}:accept": {
       "post": {
-        "operationId": "JobRouterOperations_AcceptJobAction",
+        "operationId": "JobRouterOperations_Accept",
         "summary": "Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.",
         "description": "Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.",
         "parameters": [
@@ -2028,7 +2028,7 @@
           {
             "name": "offerId",
             "in": "path",
-            "description": "Id of the offer.",
+            "description": "The Id of the offer.",
             "required": true,
             "type": "string"
           }
@@ -2062,7 +2062,7 @@
     },
     "/routing/workers/{workerId}/offers/{offerId}:decline": {
       "post": {
-        "operationId": "JobRouterOperations_DeclineJobAction",
+        "operationId": "JobRouterOperations_Decline",
         "summary": "Declines an offer to work on a job.",
         "description": "Declines an offer to work on a job.",
         "parameters": [
@@ -2079,7 +2079,7 @@
           {
             "name": "offerId",
             "in": "path",
-            "description": "Id of the offer.",
+            "description": "The Id of the offer.",
             "required": true,
             "type": "string"
           },
@@ -2095,7 +2095,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK Response payload from declining a job.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DeclineJobOfferResult"
             }
@@ -3422,7 +3422,8 @@
       "properties": {
         "assignmentId": {
           "type": "string",
-          "description": "The Id of the job assignment."
+          "description": "The Id of the job assignment.",
+          "readOnly": true
         },
         "workerId": {
           "type": "string",
@@ -3534,7 +3535,8 @@
       "properties": {
         "offerId": {
           "type": "string",
-          "description": "The Id of the offer."
+          "description": "The Id of the offer.",
+          "readOnly": true
         },
         "jobId": {
           "type": "string",

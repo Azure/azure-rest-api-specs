@@ -438,8 +438,12 @@ model RouterWorkerSelector {
 }
 
 @doc("Assignment details of a job to a worker")
+@resource("assignments")
+@parentResource(RouterJob)
 model RouterJobAssignment {
+  @key
   @doc("The Id of the job assignment.")
+  @visibility("read")
   assignmentId: string;
 
   @doc("The Id of the Worker assigned to the job.")
@@ -665,8 +669,12 @@ model RouterChannel {
 }
 
 @doc("An offer of a job to a worker")
+@resource("offers")
+@parentResource(RouterWorker)
 model RouterJobOffer {
+  @key
   @doc("The Id of the offer.")
+  @visibility("read")
   offerId: string;
 
   @doc("The Id of the job.")

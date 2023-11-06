@@ -149,17 +149,12 @@ interface JobRouterOperations {
   @route("/routing")
   deleteJob is Operations.ResourceDelete<RouterJob>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Reclassify a job.")
   @doc("Reclassify a job.")
-  @route("/routing/jobs/{jobId}:reclassify")
-  @post
-  reclassifyJobAction is Azure.Core.Foundations.Operation<
+  @route("/routing")
+  reclassify is Operations.ResourceAction<RouterJob,
     {
-      @doc("Id of the job.")
-      @path
-      jobId: string;
-
       @doc("Request object for reclassifying a job.")
       @body
       options?: ReclassifyJobOptions;
@@ -175,16 +170,12 @@ interface JobRouterOperations {
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
   @doc("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
-  @route("/routing/jobs/{jobId}:cancel")
-  @post
-  cancelJobAction is Azure.Core.Foundations.Operation<
+  @route("/routing")
+  cancel is Operations.ResourceAction<RouterJob,
     {
-      @doc("Id of the job.")
-      @path
-      jobId: string;
 
       @doc("Request model for cancelling job.")
       @body
@@ -193,20 +184,12 @@ interface JobRouterOperations {
     CancelJobResultWithOkResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Completes an assigned job.")
   @doc("Completes an assigned job.")
-  @route("/routing/jobs/{jobId}/assignments/{assignmentId}:complete")
-  @post
-  completeJobAction is Azure.Core.Foundations.Operation<
+  @route("/routing")
+  complete is Operations.ResourceAction<RouterJobAssignment,
     {
-      @doc("Id of the job.")
-      @path
-      jobId: string;
-
-      @doc("The assignment within the job to complete.")
-      @path
-      assignmentId: string;
 
       @doc("Request model for completing job.")
       @body
@@ -220,7 +203,7 @@ interface JobRouterOperations {
   @doc("Closes a completed job.")
   @route("/routing/jobs/{jobId}/assignments/{assignmentId}:close")
   @post
-  closeJobAction is Azure.Core.Foundations.Operation<
+  close is Azure.Core.Foundations.Operation<
     {
       @doc("Id of the job.")
       @path
@@ -243,7 +226,7 @@ interface JobRouterOperations {
   @route("/routing")
   listJobs is Operations.ResourceList<RouterJob, ListJobQueryParams>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to revist how to correctly define singletons https://github.com/Azure/azure-rest-api-specs/issues/25605#issuecomment-1736265997"
   @summary("Gets a job's position details.")
   @doc("Gets a job's position details.")
   @route("/routing/jobs/{jobId}/position")
@@ -257,20 +240,12 @@ interface JobRouterOperations {
     RouterJobPositionDetails
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Un-assign a job.")
   @doc("Un-assign a job.")
-  @route("/routing/jobs/{jobId}/assignments/{assignmentId}:unassign")
-  @post
-  unassignJobAction is Azure.Core.Foundations.Operation<
+  @route("/routing")
+  unassign is Operations.ResourceAction<RouterJobAssignment,
     {
-      @doc("Id of the job to un-assign.")
-      @path
-      jobId: string;
-
-      @doc("Id of the assignment to un-assign.")
-      @path
-      assignmentId: string;
 
       @doc("Request body for unassign route.")
       @body
@@ -279,39 +254,21 @@ interface JobRouterOperations {
     UnassignJobResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.")
   @doc("Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.")
-  @route("/routing/workers/{workerId}/offers/{offerId}:accept")
-  @post
-  acceptJobAction is Azure.Core.Foundations.Operation<
-    {
-      @doc("Id of the worker.")
-      @path
-      workerId: string;
-
-      @doc("Id of the offer.")
-      @path
-      offerId: string;
-    },
+  @route("/routing")
+  accept is Operations.ResourceAction<RouterJobOffer,
+    {},
     AcceptJobOfferResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Declines an offer to work on a job.")
   @doc("Declines an offer to work on a job.")
-  @route("/routing/workers/{workerId}/offers/{offerId}:decline")
-  @post
-  declineJobAction is Azure.Core.Foundations.Operation<
+  @route("/routing")
+  decline is Operations.ResourceAction<RouterJobOffer,
     {
-      @doc("Id of the worker.")
-      @path
-      workerId: string;
-
-      @doc("Id of the offer.")
-      @path
-      offerId: string;
-
       @doc("Request model for declining offer.")
       @body
       options?: DeclineJobOfferOptions;
@@ -319,7 +276,7 @@ interface JobRouterOperations {
     DeclineJobOfferResultWithOkResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to revist how to correctly define singletons https://github.com/Azure/azure-rest-api-specs/issues/25605#issuecomment-1736265997"
   @summary("Retrieves a queue's statistics.")
   @doc("Retrieves a queue's statistics.")
   @route("/routing/queues/{queueId}/statistics")
