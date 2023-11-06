@@ -91,8 +91,8 @@ model InlineStep extends Step {
   /** Identity of handler that will execute this step. Required if step type is inline. */
   handler: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Properties can be anything"
   /** Parameters to be passed to handler during execution. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Properties can be anything"
   handlerProperties?: Record<unknown>;
 
   /** Collection of file names to be passed to handler during execution. */
@@ -132,21 +132,21 @@ and other metadata about an update version.
 */
 model ImportManifestMetadata {
   /**
-* Azure Blob location from which the import manifest can be downloaded by Device
-* Update for IoT Hub. This is typically a read-only SAS-protected blob URL with
-* an expiration set to at least 4 hours.
-*/
+   * Azure Blob location from which the import manifest can be downloaded by Device
+   * Update for IoT Hub. This is typically a read-only SAS-protected blob URL with
+   * an expiration set to at least 4 hours.
+   */
   url: string;
 
   /** File size in number of bytes. */
   sizeInBytes: int64;
 
   /**
-* A JSON object containing the hash(es) of the file. At least SHA256 hash is
-* required. This object can be thought of as a set of key-value pairs where the
-* key is the hash algorithm, and the value is the hash of the file calculated
-* using that algorithm.
-*/
+   * A JSON object containing the hash(es) of the file. At least SHA256 hash is
+   * required. This object can be thought of as a set of key-value pairs where the
+   * key is the hash algorithm, and the value is the hash of the file calculated
+   * using that algorithm.
+   */
   hashes: Record<string>;
 }
 
@@ -156,10 +156,10 @@ model FileImportMetadata {
   filename: string;
 
   /**
-* Azure Blob location from which the update file can be downloaded by Device
-* Update for IoT Hub. This is typically a read-only SAS-protected blob URL with
-* an expiration set to at least 4 hours.
-*/
+   * Azure Blob location from which the update file can be downloaded by Device
+   * Update for IoT Hub. This is typically a read-only SAS-protected blob URL with
+   * an expiration set to at least 4 hours.
+   */
   url: string;
 }
 
@@ -185,9 +185,9 @@ model UpdateFile {
   fileId: string;
 
   /**
-* Optional related files metadata used together DownloadHandler metadata to
-* download payload file.
-*/
+   * Optional related files metadata used together DownloadHandler metadata to
+   * download payload file.
+   */
   relatedFiles?: UpdateFileBase[];
 
   /** Optional download handler for utilizing related files to download payload file. */
