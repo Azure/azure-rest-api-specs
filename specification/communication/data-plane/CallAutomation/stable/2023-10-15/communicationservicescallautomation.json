@@ -953,14 +953,14 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants:cancelAddParticipant": {
+    "/calling/callConnections/{callConnectionId}/participants:cancelAddParticipantOperation": {
       "post": {
         "tags": [
           "MidConnections"
         ],
         "summary": "Cancel add participant operation.",
         "description": "Cancel add participant operation.",
-        "operationId": "CallConnection_CancelAddParticipant",
+        "operationId": "CallConnection_CancelAddParticipantOperation",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -970,12 +970,12 @@
             "type": "string"
           },
           {
-            "name": "cancelAddParticipantRequest",
+            "name": "cancelAddParticipantOperationRequest",
             "in": "body",
             "description": "Cancellation request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CancelAddParticipantRequest"
+              "$ref": "#/definitions/CancelAddParticipantOperationRequest"
             }
           },
           {
@@ -1004,15 +1004,15 @@
             }
           },
           "202": {
-            "description": "Returns the cancelAddParticipant response",
+            "description": "Returns the cancelAddParticipantOperation response",
             "schema": {
-              "$ref": "#/definitions/CancelAddParticipantResponse"
+              "$ref": "#/definitions/CancelAddParticipantOperationResponse"
             }
           }
         },
         "x-ms-examples": {
-          "CallConnection_CancelAddParticipant": {
-            "$ref": "./examples/CallConnection_CancelAddParticipant.json"
+          "CallConnection_CancelAddParticipantOperation": {
+            "$ref": "./examples/CallConnection_CancelAddParticipantOperation.json"
           }
         }
       }
@@ -2075,7 +2075,7 @@
         }
       }
     },
-    "CancelAddParticipantRequest": {
+    "CancelAddParticipantOperationRequest": {
       "description": "Request payload for cancelling add participant request.",
       "required": [
         "invitationId"
@@ -2096,7 +2096,7 @@
         }
       }
     },
-    "CancelAddParticipantResponse": {
+    "CancelAddParticipantOperationResponse": {
       "description": "Response payload for cancel add participant request.",
       "type": "object",
       "properties": {
