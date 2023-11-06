@@ -1539,6 +1539,11 @@
             }
           },
           "202": {
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "description": "Success"
           },
           "default": {
@@ -1592,10 +1597,12 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "description": "Success"
           },
           "204": {
@@ -1637,6 +1644,7 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
+            "pattern": "^.*$",
             "description": "Name of the Monitors resource",
             "type": "string"
           },
@@ -2857,7 +2865,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MonitoredSubscription"
-          }
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State of the resource",
+          "readOnly": true
         }
       }
     },
