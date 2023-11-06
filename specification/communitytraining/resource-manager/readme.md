@@ -26,6 +26,7 @@ These are the global settings for the communitytraining.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2023-11-01
 ```
 
@@ -35,7 +36,7 @@ These settings apply only when `--tag=package-2023-11-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-11-01'
 input-file:
-  - Microsoft.Community/stable/2023-11-01/communitytraining.json
+  - Microsoft.Community/stable/2023-11-01/CommunityTrainings.json
 ```
 
 ---
