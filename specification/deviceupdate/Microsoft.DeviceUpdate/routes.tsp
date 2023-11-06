@@ -60,7 +60,7 @@ interface DeviceUpdateOperations {
    * Operation-Location response header value to check for operation status.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO doesn't return status monitor in 202 resposne body."
-  @pollingOperation(DeviceUpdateOperations.getUpdateOperationStatus)
+  @pollingOperation(DeviceUpdateOperations.getOperationStatus)
   @route("/deviceUpdate/{instanceId}/updates:import")
   @post
   importUpdate is Azure.Core.Foundations.Operation<
@@ -86,7 +86,7 @@ interface DeviceUpdateOperations {
    * Operation-Location response header value to check for operation status.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO doesn't return status monitor in 202 resposne body."
-  @pollingOperation(DeviceUpdateOperations.getUpdateOperationStatus)
+  @pollingOperation(DeviceUpdateOperations.getOperationStatus)
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}")
   @delete
   deleteUpdate is Azure.Core.Foundations.Operation<
@@ -174,7 +174,7 @@ interface DeviceUpdateOperations {
    * days before auto-deleted. Delete operations are not returned by this API
    * version.
    */
-  listUpdateOperationStatuses is ServiceOperations.ResourceList<
+  listOperationStatuses is ServiceOperations.ResourceList<
     UpdateOperation,
     QueryParametersTrait<{
       /**
@@ -195,7 +195,7 @@ interface DeviceUpdateOperations {
   >;
 
   /** Retrieve operation status. */
-  getUpdateOperationStatus is ServiceOperations.ResourceRead<
+  getOperationStatus is ServiceOperations.ResourceRead<
     UpdateOperation,
     TraitOverride<RequestHeadersTrait<
       {
