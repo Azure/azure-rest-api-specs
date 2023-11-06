@@ -695,8 +695,11 @@
           "description": "Cloud HSM Cluster status message",
           "readOnly": true
         },
-        "cloudHsmClusterRestoreProperties": {
-          "$ref": "#/definitions/CloudHsmClusterRestoreProperties"
+        "restoreProperties": {
+          "$ref": "#/definitions/RestoreProperties"
+        },
+        "backupProperties": {
+          "$ref": "#/definitions/BackupProperties"
         }
       },
       "description": "Properties of a Cloud HSM Cluster.",
@@ -718,6 +721,9 @@
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "backupProperties": {
+          "$ref": "#/definitions/BackupProperties"
         }
       },
       "description": "Patchable properties of the Cloud HSM Cluster",
@@ -777,7 +783,7 @@
         }
       }
     },
-    "CloudHsmClusterBackupProperties": {
+    "BackupProperties": {
       "type": "object",
       "description": "Cloud Hsm Cluster backup information",
       "properties": {
@@ -785,7 +791,7 @@
           "type": "string",
           "description": "Azure storage account to store the backup files"
         },
-        "lastUpdatedDateTime": {
+        "lastBackupDateTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
@@ -798,13 +804,13 @@
         }
       }
     },
-    "CloudHsmClusterRestoreProperties": {
+    "RestoreProperties": {
       "type": "object",
       "description": "Cloud Hsm Cluster restore information",
       "properties": {
-        "blobFolderPath": {
+        "blobStoreDirectory": {
           "type": "string",
-          "description": "Folder Name in Azure Storage Blob where the backup is stored"
+          "description": "Directory name in Azure Storage Blob where the backup is stored"
         },
         "restoreStorageAccountUri": {
           "type": "string",
