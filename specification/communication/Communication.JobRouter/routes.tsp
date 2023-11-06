@@ -153,7 +153,8 @@ interface JobRouterOperations {
   @summary("Reclassify a job.")
   @doc("Reclassify a job.")
   @route("/routing")
-  reclassify is Operations.ResourceAction<RouterJob,
+  reclassify is Operations.ResourceAction<
+    RouterJob,
     {
       @doc("Request object for reclassifying a job.")
       @body
@@ -174,9 +175,9 @@ interface JobRouterOperations {
   @summary("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
   @doc("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
   @route("/routing")
-  cancel is Operations.ResourceAction<RouterJob,
+  cancel is Operations.ResourceAction<
+    RouterJob,
     {
-
       @doc("Request model for cancelling job.")
       @body
       options?: CancelJobOptions;
@@ -188,9 +189,9 @@ interface JobRouterOperations {
   @summary("Completes an assigned job.")
   @doc("Completes an assigned job.")
   @route("/routing")
-  complete is Operations.ResourceAction<RouterJobAssignment,
+  complete is Operations.ResourceAction<
+    RouterJobAssignment,
     {
-
       @doc("Request model for completing job.")
       @body
       options?: CompleteJobOptions;
@@ -244,9 +245,9 @@ interface JobRouterOperations {
   @summary("Un-assign a job.")
   @doc("Un-assign a job.")
   @route("/routing")
-  unassign is Operations.ResourceAction<RouterJobAssignment,
+  unassign is Operations.ResourceAction<
+    RouterJobAssignment,
     {
-
       @doc("Request body for unassign route.")
       @body
       options?: UnassignJobOptions;
@@ -258,16 +259,14 @@ interface JobRouterOperations {
   @summary("Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.")
   @doc("Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.")
   @route("/routing")
-  accept is Operations.ResourceAction<RouterJobOffer,
-    {},
-    AcceptJobOfferResult
-  >;
+  accept is Operations.ResourceAction<RouterJobOffer, {}, AcceptJobOfferResult>;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Declines an offer to work on a job.")
   @doc("Declines an offer to work on a job.")
   @route("/routing")
-  decline is Operations.ResourceAction<RouterJobOffer,
+  decline is Operations.ResourceAction<
+    RouterJobOffer,
     {
       @doc("Request model for declining offer.")
       @body
