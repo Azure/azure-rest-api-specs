@@ -24,6 +24,8 @@ model Pool is TrackedResource<PoolProperties> {
   @segment("pools")
   @doc("Name of the pool. It needs to be globally unique.")
   name: string;
+
+  ...ManagedServiceIdentity;
 }
 
 @doc("Pool properties")
@@ -185,7 +187,7 @@ interface Pools {
   get is ArmResourceRead<Pool>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Pool>;
   update is ArmResourcePatchAsync<Pool, PoolProperties>;
-  delete is ArmResourceDeleteAsync<Pool>;
+  delete is ArmResourceDeleteWithoutOkAsync<Pool>;
   listByResourceGroup is ArmResourceListByParent<Pool>;
   listBySubscription is ArmListBySubscription<Pool>;
 }
