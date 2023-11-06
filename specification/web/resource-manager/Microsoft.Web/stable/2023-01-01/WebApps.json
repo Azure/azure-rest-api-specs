@@ -3831,7 +3831,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Deployment"
+              "type": "object"
             }
           },
           "default": {
@@ -3861,14 +3861,6 @@
             "type": "string"
           },
           {
-            "name": "request",
-            "in": "body",
-            "description": "Information on OneDeploy request",
-            "schema": {
-              "$ref": "#/definitions/OneDeployRequest"
-            }
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -3879,7 +3871,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Deployment"
+              "type": "object"
             }
           },
           "default": {
@@ -26509,53 +26501,6 @@
     "Object": {
       "type": "object",
       "properties": {}
-    },
-    "OneDeployRequest": {
-      "type": "object",
-      "description": "OneDeploy settings defined by user",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "packageUri": {
-          "description": "The Uri where the source artifact can be pulled from",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type of the artifact being deployed",
-          "type": "string"
-        },
-        "async": {
-          "description": "Specifies whether the deployment should be performed asynchronously",
-          "type": "boolean"
-        },
-        "path": {
-          "description": "The absolute path to deploy the artifact to",
-          "type": "string"
-        },
-        "restart": {
-          "description": "Specifies whether to restart the app following the deployment",
-          "type": "boolean"
-        },
-        "clean": {
-          "description": "Specifies whether to clean the target deployment directory",
-          "type": "boolean"
-        },
-        "ignoreStack": {
-          "description": "Disables any language-specific defaults",
-          "type": "boolean"
-        },
-        "trackDeploymentProgress": {
-          "description": "The type of the artifact being deployed",
-          "type": "boolean"
-        },
-        "reset": {
-          "description": "Resets Java apps to the default parking page if set to true with no type specified",
-          "type": "boolean"
-        }
-      }
     },
     "OpenAuthenticationAccessPolicies": {
       "type": "object",
