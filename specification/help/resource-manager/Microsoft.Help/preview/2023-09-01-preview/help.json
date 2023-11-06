@@ -702,7 +702,7 @@
       "type": "object",
       "properties": {
         "globalParameters": {
-          "description": "Global parameters that can be passed to all solutionIds.",
+          "description": "Global parameters is an optional map which can be used to add key and  value to request body to improve the diagnostics results",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -985,36 +985,33 @@
     },
     "SolutionPatchRequestBody": {
       "description": "Solution response.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SolutionResourceProperties"
+          "$ref": "#/definitions/SolutionResourceProperties",
+          "x-ms-client-flatten": true
         }
       }
     },
     "SolutionResource": {
       "description": "Solution response.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "description": "Full resource uri of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Type of resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
-          "$ref": "#/definitions/SolutionResourceProperties"
+          "$ref": "#/definitions/SolutionResourceProperties",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -1041,11 +1038,13 @@
         },
         "solutionId": {
           "description": "Solution Id to identify single solution.",
+          "readOnly": true,
           "type": "string"
         },
         "provisioningState": {
           "description": "Status of solution provisioning.",
           "type": "string",
+          "readOnly": true,
           "enum": [
             "Succeeded",
             "Failed",
@@ -1058,17 +1057,21 @@
         },
         "title": {
           "description": "The title.",
+          "readOnly": true,
           "type": "string"
         },
         "content": {
           "description": "The HTML content that needs to be rendered and shown to customer.",
+          "readOnly": true,
           "type": "string"
         },
         "replacementMaps": {
+          "readOnly": true,
           "$ref": "#/definitions/ReplacementMaps"
         },
         "sections": {
           "description": "List of section object.",
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Section"
