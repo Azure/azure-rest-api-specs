@@ -266,12 +266,12 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/classificationRuleName",
-            "required": true
+            "$ref": "#/parameters/classificationRuleName"
           },
           {
             "in": "body",
             "name": "body",
+            "required": true,
             "description": "The classification rule definition.",
             "schema": {
               "$ref": "#/definitions/ClassificationRule"
@@ -908,8 +908,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/dataSourceName",
-            "required": true
+            "$ref": "#/parameters/dataSourceName"
           },
           {
             "$ref": "#/parameters/scanName"
@@ -917,6 +916,7 @@
           {
             "in": "body",
             "name": "body",
+            "required": true,
             "description": "The filter definition.",
             "schema": {
               "$ref": "#/definitions/Filter"
@@ -1330,6 +1330,9 @@
                 "description": "Response header for long running operation.",
                 "type": "string"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
             }
           },
           "default": {
@@ -1953,7 +1956,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/OperationResponse"
+              "$ref": "#/definitions/ScanResultWithIngestion"
             }
           },
           "default": {
@@ -2120,12 +2123,12 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/scanRulesetName",
-            "required": true
+            "$ref": "#/parameters/scanRulesetName"
           },
           {
             "in": "body",
             "name": "body",
+            "required": true,
             "description": "The scan rule set definition.",
             "schema": {
               "$ref": "#/definitions/ScanRuleset"
@@ -2743,7 +2746,8 @@
             "$ref": "#/definitions/ErrorModel"
           }
         }
-      }
+      },
+      "required": ["code", "message"]
     },
     "ErrorResponseModel": {
       "description": "The error response model.",
@@ -2752,7 +2756,8 @@
         "error": {
           "$ref": "#/definitions/ErrorModel"
         }
-      }
+      },
+      "required": ["error"]
     },
     "AzureKeyVaultList": {
       "description": "List of Azure Key Vault connections.",
@@ -2896,7 +2901,7 @@
             "Canceled"
           ],
           "type": "string",
-          "description": "Operation status.",
+          "description": "Scan operation status.",
           "x-ms-enum": {
             "name": "OperationStatus",
             "values": [
@@ -3390,8 +3395,45 @@
         },
         "status": {
           "type": "string",
-          "readOnly": true,
-          "description": "The scan result status."
+          "enum": [
+            "Accepted",
+            "InProgress",
+            "TransientFailure",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "description": "The scan result status.",
+          "x-ms-enum": {
+            "name": "ScanRunStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Accepted",
+                "description": "the scan is accepted"
+              },
+              {
+                "value": "InProgress",
+                "description": "the scan is InProgress"
+              },
+              {
+                "value": "TransientFailure",
+                "description": "the scan is in transient failure"
+              },
+              {
+                "value": "Succeeded",
+                "description": "the scan is succeeded"
+              },
+              {
+                "value": "Failed",
+                "description": "the scan is failed"
+              },
+              {
+                "value": "Canceled",
+                "description": "the scan is canceled"
+              }
+            ]
+          }
         },
         "diagnostics": {
           "$ref": "#/definitions/ScanDiagnostics",
@@ -3639,14 +3681,6 @@
         "scanResults": {
           "description": "Scan results of this scan.",
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScanResult"
-          },
-          "readOnly": true
-        },
-        "scanResultsWithIngestion": {
-          "type": "array",
-          "description": "Scan results with ingestion of this scan.",
           "items": {
             "$ref": "#/definitions/ScanResultWithIngestion"
           },
