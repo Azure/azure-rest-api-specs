@@ -126,7 +126,6 @@ interface JobRouterRestClient {
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @internal("csharp")
   unassignJob is AzureCommunicationRoutingService.JobRouterOperations.unassignJobAction;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
