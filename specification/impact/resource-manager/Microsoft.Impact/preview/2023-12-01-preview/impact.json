@@ -620,7 +620,7 @@
           "Insights"
         ],
         "operationId": "Insights_ListBySubscription",
-        "description": "List Insight resources by subscription ID",
+        "description": "List Insight resources by workloadImpactName",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -635,12 +635,6 @@
             "description": "workloadImpact resource ",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$",
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.CategoryNameParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceTypeParameter"
           }
         ],
         "responses": {
@@ -673,7 +667,7 @@
           "Insights"
         ],
         "operationId": "Insights_Get",
-        "description": "Get a Insight",
+        "description": "Get Insight resources by workloadImpactName and insightName",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"

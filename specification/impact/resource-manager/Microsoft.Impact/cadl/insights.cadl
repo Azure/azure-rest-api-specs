@@ -107,8 +107,11 @@ model insightDetails {
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
 @armResourceOperations
 interface Insights  {
+  @doc("Get Insight resources by workloadImpactName and insightName", TResource)
   get  is SubscriptionResourceRead<Insight>;
-  listBySubscription is ArmListBySubscriptionWithCustomQueryParams<Insight>;
+
+  @doc("List Insight resources by workloadImpactName", TResource)
+  listBySubscription is ArmListBySubscription<Insight>;
 
   #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
   @post
