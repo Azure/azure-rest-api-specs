@@ -504,7 +504,7 @@ model CompleteJobOptions {
 }
 
 @doc("Request payload for closing jobs")
-model CloseJobOptions {  
+model CloseJobOptions {
   @doc("Indicates the outcome of the job, populate this field with your own custom values.")
   dispositionCode?: string;
 
