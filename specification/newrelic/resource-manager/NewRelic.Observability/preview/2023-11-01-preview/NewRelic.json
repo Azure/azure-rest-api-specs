@@ -1329,6 +1329,7 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
+            "pattern": "^.*$",
             "description": "Name of the Monitors resource",
             "type": "string"
           },
@@ -1340,7 +1341,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+              "$ref": "#/definitions/MonitoredSubscriptionPropertiesList"
             }
           },
           "default": {
@@ -1378,6 +1379,7 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
+            "pattern": "^.*$",
             "description": "Name of the Monitors resource",
             "type": "string"
           },
@@ -1385,6 +1387,7 @@
             "description": "The configuration name. Only 'default' value is supported.",
             "in": "path",
             "name": "configurationName",
+            "pattern": "^.*$",
             "required": true,
             "type": "string"
           },
@@ -1436,12 +1439,14 @@
             "in": "path",
             "required": true,
             "description": "Name of the Monitors resource",
+            "pattern": "^.*$",
             "type": "string"
           },
           {
             "description": "The configuration name. Only 'default' value is supported.",
             "in": "path",
             "name": "configurationName",
+            "pattern": "^.*$",
             "required": true,
             "type": "string"
           },
@@ -1468,9 +1473,6 @@
             "schema": {
               "$ref": "#/definitions/MonitoredSubscriptionProperties"
             }
-          },
-          "202": {
-            "description": "Success"
           },
           "default": {
             "description": "Default error response.",
@@ -1507,12 +1509,14 @@
             "in": "path",
             "required": true,
             "description": "Name of the Monitors resource",
+            "pattern": "^.*$",
             "type": "string"
           },
           {
             "description": "The configuration name. Only 'default' value is supported.",
             "in": "path",
             "name": "configurationName",
+            "pattern": "^.*$",
             "required": true,
             "type": "string"
           },
@@ -1572,12 +1576,14 @@
             "in": "path",
             "required": true,
             "description": "Name of the Monitors resource",
+            "pattern": "^.*$",
             "type": "string"
           },
           {
             "description": "Configuration name",
             "in": "path",
             "name": "configurationName",
+            "pattern": "^.*$",
             "required": true,
             "type": "string"
           },
@@ -2858,6 +2864,7 @@
     "MonitoredSubscriptionProperties": {
       "description": "The request to update subscriptions needed to be monitored by the NewRelic monitor resource.",
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "name": {
           "description": "Name of the monitored subscription resource.",
@@ -2876,6 +2883,21 @@
         },
         "properties": {
           "$ref": "#/definitions/SubscriptionList"
+        }
+      }
+    },
+    "MonitoredSubscriptionPropertiesList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoredSubscriptionProperties"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
         }
       }
     },
