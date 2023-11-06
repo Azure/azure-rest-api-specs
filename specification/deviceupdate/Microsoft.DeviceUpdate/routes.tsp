@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "./parameters.tsp";
 import "./models-compliance.tsp";
 import "./models-deployment.tsp";
@@ -12,6 +13,7 @@ import "./models-update.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Azure.Core.Traits;
 
@@ -23,6 +25,9 @@ alias ServiceTraits = SupportsClientRequestId &
 
 alias ServiceOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
+@client({
+  name: "DeviceUpdateClient",
+})
 interface DeviceUpdateOperations {
   /** Get a list of all updates that have been imported to Device Update for IoT Hub. */
   listUpdates is ServiceOperations.ResourceList<
@@ -201,6 +206,9 @@ interface DeviceUpdateOperations {
   >;
 }
 
+@client({
+  name: "DeviceManagementClient",
+})
 interface DeviceManagementOperations {
   /**
    * Gets a list of all device classes (sets of devices compatible with the same
