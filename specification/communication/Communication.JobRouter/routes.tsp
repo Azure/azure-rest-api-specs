@@ -153,10 +153,7 @@ interface JobRouterOperations {
   @summary("Reclassify a job.")
   @doc("Reclassify a job.")
   @route("/routing")
-  @projectedName("python", "reclassifyJob")
-  @projectedName("csharp", "reclassifyJob")
-  @projectedName("javascript", "reclassifyJob")
-  @projectedName("java", "reclassifyJob")
+  @projectedName("client", "reclassifyJob")
   reclassify is Operations.ResourceAction<
     RouterJob,
     {
@@ -179,10 +176,7 @@ interface JobRouterOperations {
   @summary("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
   @doc("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
   @route("/routing")
-  @projectedName("python", "cancelJob")
-  @projectedName("csharp", "cancelJob")
-  @projectedName("javascript", "cancelJob")
-  @projectedName("java", "cancelJob")
+  @projectedName("client", "cancelJob")
   cancel is Operations.ResourceAction<
     RouterJob,
     {
@@ -197,10 +191,7 @@ interface JobRouterOperations {
   @summary("Completes an assigned job.")
   @doc("Completes an assigned job.")
   @route("/routing")
-  @projectedName("python", "completeJob")
-  @projectedName("csharp", "completeJob")
-  @projectedName("javascript", "completeJob")
-  @projectedName("java", "completeJob")
+  @projectedName("client", "completeJob")
   complete is Operations.ResourceAction<
     RouterJobAssignment,
     {
@@ -215,10 +206,7 @@ interface JobRouterOperations {
   @summary("Closes a completed job.")
   @doc("Closes a completed job.")
   @route("/routing")
-  @projectedName("python", "closeJob")
-  @projectedName("csharp", "closeJob")
-  @projectedName("javascript", "closeJob")
-  @projectedName("java", "closeJob")
+  @projectedName("client", "closeJob")
   close is Operations.ResourceAction<
     RouterJobAssignment,
     {
@@ -253,10 +241,7 @@ interface JobRouterOperations {
   @summary("Un-assign a job.")
   @doc("Un-assign a job.")
   @route("/routing")
-  @projectedName("python", "unassignJob")
-  @projectedName("csharp", "unassignJob")
-  @projectedName("javascript", "unassignJob")
-  @projectedName("java", "unassignJob")
+  @projectedName("client", "unassignJob")
   unassign is Operations.ResourceAction<
     RouterJobAssignment,
     {
@@ -271,10 +256,7 @@ interface JobRouterOperations {
   @summary("Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.")
   @doc("Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.")
   @route("/routing")
-  @projectedName("python", "acceptJobOffer")
-  @projectedName("csharp", "acceptJobOffer")
-  @projectedName("javascript", "acceptJobOffer")
-  @projectedName("java", "acceptJobOffer")
+  @projectedName("client", "acceptJobOffer")
   accept is Operations.ResourceAction<RouterJobOffer, {}, AcceptJobOfferResult>;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"

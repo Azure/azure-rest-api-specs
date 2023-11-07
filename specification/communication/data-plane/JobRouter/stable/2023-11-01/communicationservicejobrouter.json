@@ -1095,7 +1095,7 @@
     },
     "/routing/jobs/{jobId}:reclassify": {
       "post": {
-        "operationId": "JobRouterOperations_Reclassify",
+        "operationId": "JobRouterOperations_ReclassifyJob",
         "summary": "Reclassify a job.",
         "description": "Reclassify a job.",
         "parameters": [
@@ -1148,7 +1148,7 @@
     },
     "/routing/jobs/{jobId}:cancel": {
       "post": {
-        "operationId": "JobRouterOperations_Cancel",
+        "operationId": "JobRouterOperations_CancelJob",
         "summary": "Submits request to cancel an existing job by Id while supplying free-form cancellation reason.",
         "description": "Submits request to cancel an existing job by Id while supplying free-form cancellation reason.",
         "parameters": [
@@ -1204,7 +1204,7 @@
     },
     "/routing/jobs/{jobId}/assignments/{assignmentId}:complete": {
       "post": {
-        "operationId": "JobRouterOperations_Complete",
+        "operationId": "JobRouterOperations_CompleteJob",
         "summary": "Completes an assigned job.",
         "description": "Completes an assigned job.",
         "parameters": [
@@ -1264,7 +1264,7 @@
     },
     "/routing/jobs/{jobId}/assignments/{assignmentId}:close": {
       "post": {
-        "operationId": "JobRouterOperations_Close",
+        "operationId": "JobRouterOperations_CloseJob",
         "summary": "Closes a completed job.",
         "description": "Closes a completed job.",
         "parameters": [
@@ -1324,7 +1324,7 @@
     },
     "/routing/jobs/{jobId}/assignments/{assignmentId}:unassign": {
       "post": {
-        "operationId": "JobRouterOperations_Unassign",
+        "operationId": "JobRouterOperations_UnassignJob",
         "summary": "Un-assign a job.",
         "description": "Un-assign a job.",
         "parameters": [
@@ -2005,7 +2005,7 @@
     },
     "/routing/workers/{workerId}/offers/{offerId}:accept": {
       "post": {
-        "operationId": "JobRouterOperations_Accept",
+        "operationId": "JobRouterOperations_AcceptJobOffer",
         "summary": "Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.",
         "description": "Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.",
         "parameters": [
@@ -2105,6 +2105,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Declines an offer to work on a job": {
+            "$ref": "./examples/Offers_DeclineJobOffer.json"
           }
         }
       }
