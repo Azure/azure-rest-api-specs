@@ -254,7 +254,7 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputPools/{poolName}/throughputPoolAccounts/{poolAccountName}": {
           "put": {
-            "operationId": "ThroughputPoolAccount_CreateOrUpdate",
+            "operationId": "ThroughputPoolAccount_Create",
             "description": "Creates or updates an Azure Cosmos DB ThroughputPool account. The \"Update\" method is preferred when performing updates on an account.",
             "x-ms-long-running-operation": true,
             "parameters": [
@@ -272,6 +272,15 @@
             },
             {
                 "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "name": "createParameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+              "$ref": "#/definitions/ThroughputPoolAccountCreateParameters"
+              },
+              "description": "The parameters to provide for the current ThroughputPoolAccount."
             }
             ],
             "responses": {
@@ -467,7 +476,7 @@
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
           }
-        ],
+        ]
       },
       "ThroughputPoolCreateUpdateParameters": {
         "description": "Parameters for patching Azure Cosmos DB throughput pool properties.",
@@ -506,11 +515,32 @@
         },
         "description": "The List operation response, that contains the global database accounts and their properties."
       },
+      "ThroughputPoolAccountCreateParameters": {
+        "description": "Parameters for creating a Azure Cosmos DB throughput pool account.",
+        "type": "object",
+        "properties": {
+          "tags": {
+            "$ref": "#/definitions/Tags"
+          },
+          "properties": {
+            "AccountURI": {
+              "readOnly": true,
+              "description": "The resource identifier of global database account in the throughputPool.",
+              "type": "string"
+            },
+            "AccountLocation": {
+              "readOnly": true,
+              "description": "The location of  global database account in the throughputPool.",
+              "type": "string"
+            }
+          }
+        }
+      },
       "ThroughputPoolAccountGetResult": {
         "description": "An Azure Cosmos DB Global Database Account which is part of a Throughputpool.",
         "type": "object",
         "properties": {
-          "AccountResourceIdentifier": {
+          "AccountURI": {
             "readOnly": true,
             "description": "The resource identifier of global database account in the throughputPool.",
             "type": "string"
@@ -530,7 +560,7 @@
           {
             "$ref": ".../../cosmos-db.json#/definitions/ARMProxyResource"
           }
-        ],
+        ]
       },
       "ThroughputPoolLocationAccountsListResult": {
         "properties": {
