@@ -1,0 +1,237 @@
+{
+  "parameters": {
+    "subscriptionId": "2f00cc51-6809-498f-9ffc-48c42aff570d",
+    "targetType": "microsoft.compute/virtualmachines",
+    "api-version": "2023-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/providers/Microsoft.AlertsManagement/alertRuleRecommendations/Percentage CPU",
+            "name": "Percentage CPU",
+            "type": "Microsoft.AlertsManagement/alertRuleRecommendations",
+            "properties": {
+              "alertRuleType": "Microsoft.Insights/metricAlerts",
+              "displayInformation": {
+                "infoBallonMessage": "Rule1 InfoBalloon Message",
+                "infoBallonLink": "Rule1 InfoBalloon Link",
+                "metricDisplayName": "Percentage CPU",
+                "displayUnits": "Percentage"
+              },
+              "ruleArmTemplate": {
+                "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                "contentVersion": "1.0.0.0",
+                "parameters": {
+                  "targetResourceId": {
+                    "type": "string"
+                  },
+                  "targetResourceName": {
+                    "type": "string"
+                  },
+                  "actionGroupIds": {
+                    "type": "array",
+                    "defaultValue": [],
+                    "metadata": {
+                      "description": "Insert Action groups ids to attach them to the below alert rules."
+                    }
+                  },
+                  "alertNamePrefix": {
+                    "type": "string",
+                    "defaultValue": "Percentage CPU",
+                    "minLength": 1,
+                    "metadata": {
+                      "description": "prefix of the alert rule name"
+                    }
+                  },
+                  "alertName": {
+                    "type": "string",
+                    "defaultValue": "[concat('parameters('alertNamePrefix'), ' - ', parameters('targetResourceName'))]",
+                    "minLength": 1,
+                    "metadata": {
+                      "description": "Name of the alert rule"
+                    }
+                  },
+                  "alertSeverity": {
+                    "type": "int",
+                    "allowedValues": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4
+                    ],
+                    "defaultValue": 3,
+                    "metadata": {
+                      "description": "Severity of alert {0,1,2,3,4}"
+                    }
+                  },
+                  "threshold": {
+                    "type": "int",
+                    "defaultValue": 80,
+                    "metadata": {
+                      "description": "The threshold value at which the alert is activated."
+                    }
+                  }
+                },
+                "variables": {
+                  "scopes": "[array(parameters('targetResourceId'))]",
+                  "copy": [
+                    {
+                      "name": "actionsForMetricAlerts",
+                      "count": "[length(parameters('actionGroupIds'))]",
+                      "input": {
+                        "actiongroupId": "[parameters('actionGroupIds')[copyIndex('actionsForMetricAlerts')]]"
+                      }
+                    }
+                  ]
+                },
+                "resources": [
+                  {
+                    "name": "[parameters('alertName')]",
+                    "type": "Microsoft.Insights/metricAlerts",
+                    "apiVersion": "2018-03-01",
+                    "location": "global",
+                    "properties": {
+                      "description": "Percentage CPU is greater than 80 %",
+                      "severity": "[parameters('alertSeverity')]",
+                      "enabled": true,
+                      "scopes": "[variables('scopes')]",
+                      "evaluationFrequency": "PT5M",
+                      "windowSize": "PT5M",
+                      "criteria": {
+                        "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
+                        "allOf": [
+                          {
+                            "name": "Metric1",
+                            "metricName": "Percentage CPU",
+                            "operator": "GreaterThan",
+                            "threshold": "[parameters('threshold')]",
+                            "timeAggregation": "Average"
+                          }
+                        ]
+                      },
+                      "actions": "[variables('actionsForMetricAlerts')]"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/providers/Microsoft.AlertsManagement/alertRuleRecommendations/Available Memory Bytes",
+            "name": "Available Memory Bytes",
+            "type": "Microsoft.AlertsManagement/alertRuleRecommendations",
+            "properties": {
+              "alertRuleType": "Microsoft.Insights/metricAlerts",
+              "displayInformation": {
+                "infoBallonMessage": "Rule2 InfoBalloon Message",
+                "infoBallonLink": "Rule2 InfoBalloon Link",
+                "metricDisplayName": "Available Memory Bytes",
+                "displayUnits": "Gigabytes"
+              },
+              "ruleArmTemplate": {
+                "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                "contentVersion": "1.0.0.0",
+                "parameters": {
+                  "targetResourceId": {
+                    "type": "string"
+                  },
+                  "targetResourceName": {
+                    "type": "string"
+                  },
+                  "actionGroupIds": {
+                    "type": "array",
+                    "defaultValue": [],
+                    "metadata": {
+                      "description": "Insert Action groups ids to attach them to the below alert rules."
+                    }
+                  },
+                  "alertNamePrefix": {
+                    "type": "string",
+                    "defaultValue": "Available Memory Bytes",
+                    "minLength": 1,
+                    "metadata": {
+                      "description": "prefix of the alert rule name"
+                    }
+                  },
+                  "alertName": {
+                    "type": "string",
+                    "defaultValue": "[concat('parameters('alertNamePrefix'), ' - ', parameters('targetResourceName'))]",
+                    "minLength": 1,
+                    "metadata": {
+                      "description": "Name of the alert rule"
+                    }
+                  },
+                  "alertSeverity": {
+                    "type": "int",
+                    "allowedValues": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4
+                    ],
+                    "defaultValue": 3,
+                    "metadata": {
+                      "description": "Severity of alert {0,1,2,3,4}"
+                    }
+                  },
+                  "threshold": {
+                    "type": "int",
+                    "defaultValue": 1000000000,
+                    "metadata": {
+                      "description": "The threshold value at which the alert is activated."
+                    }
+                  }
+                },
+                "variables": {
+                  "scopes": "[array(parameters('targetResourceId'))]",
+                  "copy": [
+                    {
+                      "name": "actionsForMetricAlerts",
+                      "count": "[length(parameters('actionGroupIds'))]",
+                      "input": {
+                        "actiongroupId": "[parameters('actionGroupIds')[copyIndex('actionsForMetricAlerts')]]"
+                      }
+                    }
+                  ]
+                },
+                "resources": [
+                  {
+                    "name": "[parameters('alertName')]",
+                    "type": "Microsoft.Insights/metricAlerts",
+                    "apiVersion": "2018-03-01",
+                    "location": "global",
+                    "properties": {
+                      "description": "Available Memory Bytes is less than 1 GB",
+                      "severity": "[parameters('alertSeverity')]",
+                      "enabled": true,
+                      "scopes": "[variables('scopes')]",
+                      "evaluationFrequency": "PT5M",
+                      "windowSize": "PT5M",
+                      "criteria": {
+                        "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
+                        "allOf": [
+                          {
+                            "name": "Metric1",
+                            "metricName": "Available Memory Bytes",
+                            "operator": "LessThan",
+                            "threshold": "[parameters('threshold')]",
+                            "timeAggregation": "Average"
+                          }
+                        ]
+                      },
+                      "actions": "[variables('actionsForMetricAlerts')]"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
