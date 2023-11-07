@@ -10,7 +10,6 @@ namespace Microsoft.DeviceUpdate;
 
 /** Update metadata. */
 @resource("updates")
-@parentResource(Instance)
 model Update {
   /** Update identity. */
   @key
@@ -229,7 +228,6 @@ model UpdateFileDownloadHandler {
 
 /** Operation metadata. */
 @resource("updates/operations")
-@parentResource(Instance)
 model UpdateOperation {
   /** Operation Id. */
   @key

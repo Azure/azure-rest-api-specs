@@ -45,7 +45,7 @@ interface DeviceUpdateOperations {
 
   /** Get a specific update version. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure Core doesn't support composite resource key."
-  @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}")
+  @route("updates/providers/{provider}/names/{name}/versions/{version}")
   @get
   getUpdate is Azure.Core.Foundations.Operation<
     {
@@ -61,12 +61,10 @@ interface DeviceUpdateOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO doesn't return status monitor in 202 resposne body."
   @pollingOperation(DeviceUpdateOperations.getOperationStatus)
-  @route("/deviceUpdate/{instanceId}/updates:import")
+  @route("updates:import")
   @post
   importUpdate is Azure.Core.Foundations.Operation<
     {
-      ...InstanceIdParameter;
-
       /**
        * The update to be imported (see schema https://json.schemastore.org/azure-deviceupdate-import-manifest-5.0.json for details).
        */
@@ -87,7 +85,7 @@ interface DeviceUpdateOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO doesn't return status monitor in 202 resposne body."
   @pollingOperation(DeviceUpdateOperations.getOperationStatus)
-  @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}")
+  @route("updates/providers/{provider}/names/{name}/versions/{version}")
   @delete
   deleteUpdate is Azure.Core.Foundations.Operation<
     {
@@ -104,7 +102,7 @@ interface DeviceUpdateOperations {
 
   /** Get a list of all update providers that have been imported to Device Update for IoT Hub. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Not a standard resource."
-  @route("/deviceUpdate/{instanceId}/updates/providers")
+  @route("updates/providers")
   listProviders is Azure.Core.Foundations.Operation<
     {
       ...InstanceIdParameter;
@@ -116,7 +114,7 @@ interface DeviceUpdateOperations {
 
   /** Get a list of all update names that match the specified provider. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Not a standard resource."
-  @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names")
+  @route("updates/providers/{provider}/names")
   listNames is Azure.Core.Foundations.Operation<
     {
       ...UpdateProviderParameter;
@@ -128,7 +126,7 @@ interface DeviceUpdateOperations {
 
   /** Get a list of all update versions that match the specified provider and name. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Not a standard resource."
-  @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions")
+  @route("updates/providers/{provider}/names/{name}/versions")
   @get
   listVersions is Azure.Core.Foundations.Operation<
     {
@@ -141,7 +139,7 @@ interface DeviceUpdateOperations {
 
   /** Get a list of all update file identifiers for the specified version. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure Core doesn't support composite resource key."
-  @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files")
+  @route("updates/providers/{provider}/names/{name}/versions/{version}/files")
   @get
   listFiles is Azure.Core.Foundations.Operation<
     {
@@ -154,7 +152,7 @@ interface DeviceUpdateOperations {
 
   /** Get a specific update file from the version. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure Core doesn't support composite resource key."
-  @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions/{version}/files/{fileId}")
+  @route("updates/providers/{provider}/names/{name}/versions/{version}/files/{fileId}")
   @get
   getFile is Azure.Core.Foundations.Operation<
     {
@@ -244,7 +242,7 @@ interface DeviceManagementOperations {
 
   /** Gets a list of installable updates for a device class. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "UpdateInfo model is not a resource and reused in several places."
-  @route("/deviceUpdate/{instanceId}/management/deviceClasses/{deviceClassId}/installableUpdates")
+  @route("management/deviceClasses/{deviceClassId}/installableUpdates")
   @get
   listInstallableUpdatesForDeviceClass is Azure.Core.Foundations.Operation<
     {
@@ -278,12 +276,10 @@ interface DeviceManagementOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO doesn't return status monitor in 202 response body."
   @pollingOperation(DeviceManagementOperations.getOperationStatus)
-  @route("/deviceUpdate/{instanceId}/management/devices:import")
+  @route("management/devices:import")
   @post
   importDevice is Azure.Core.Foundations.Operation<
     {
-      ...InstanceIdParameter;
-
       /** The types of devices to import. */
       @body
       importType: ImportType;
@@ -308,12 +304,10 @@ interface DeviceManagementOperations {
    * module connected to Device Update for IoT Hub.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Get Module API returns model identical to Device."
-  @route("/deviceUpdate/{instanceId}/management/devices/{deviceId}/modules/{moduleId}")
+  @route("management/devices/{deviceId}/modules/{moduleId}")
   @get
   getDeviceModule is Azure.Core.Foundations.Operation<
     {
-      ...InstanceIdParameter;
-
       /** Device identifier in Azure IoT Hub. */
       @path
       deviceId: string;
@@ -330,12 +324,10 @@ interface DeviceManagementOperations {
    * updates available, or are in progress receiving new updates.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
-  @route("/deviceUpdate/{instanceId}/management/updateCompliance")
+  @route("management/updateCompliance")
   @get
   getUpdateCompliance is Azure.Core.Foundations.Operation<
-    {
-      ...InstanceIdParameter;
-    },
+    {},
     UpdateCompliance
   >;
 
@@ -373,7 +365,7 @@ interface DeviceManagementOperations {
    * receiving a new update.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/updateCompliance")
+  @route("management/groups/{groupId}/updateCompliance")
   @get
   getUpdateComplianceForGroup is Azure.Core.Foundations.Operation<
     Azure.Core.Foundations.ItemKeysOf<Group>,
@@ -385,7 +377,7 @@ interface DeviceManagementOperations {
    * devices need each update.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/bestUpdates")
+  @route("management/groups/{groupId}/bestUpdates")
   @get
   listBestUpdatesForGroup is Azure.Core.Foundations.Operation<
     Azure.Core.Foundations.ItemKeysOf<Group>,
@@ -416,7 +408,7 @@ interface DeviceManagementOperations {
    * the deployment are in progress, completed, or failed.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments/{deploymentId}/status")
+  @route("management/groups/{groupId}/deployments/{deploymentId}/status")
   @get
   getDeploymentStatus is Azure.Core.Foundations.Operation<
     {
@@ -472,7 +464,7 @@ interface DeviceManagementOperations {
    * in progress on receiving a new update.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/updateCompliance")
+  @route("management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/updateCompliance")
   @get
   getDeviceClassSubgroupUpdateCompliance is Azure.Core.Foundations.Operation<
     Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>,
@@ -484,7 +476,7 @@ interface DeviceManagementOperations {
    * many devices need this update.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/bestUpdates")
+  @route("management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/bestUpdates")
   @get
   getBestUpdatesForDeviceClassSubgroup is Azure.Core.Foundations.Operation<
     Azure.Core.Foundations.ItemKeysOf<DeviceClassSubgroup>,
@@ -526,7 +518,7 @@ interface DeviceManagementOperations {
    * the deployment are in progress, completed, or failed.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
-  @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}/status")
+  @route("management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}/status")
   @get
   getDeviceClassSubgroupDeploymentStatus is Azure.Core.Foundations.Operation<
     {
@@ -587,7 +579,7 @@ interface DeviceManagementOperations {
 
   /** Get log collection with detailed status */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
-  @route("/deviceUpdate/{instanceId}/management/deviceDiagnostics/logCollections/{operationId}/detailedStatus")
+  @route("management/deviceDiagnostics/logCollections/{operationId}/detailedStatus")
   getLogCollectionDetailedStatus is Azure.Core.Foundations.Operation<
     {
       ...Azure.Core.Foundations.ItemKeysOf<LogCollection>;
@@ -614,7 +606,7 @@ interface InstanceManagementOperations {
 Gets the instance limits for active deployments, devices, device classes, and
 groups.
 */
-  // @route("/deviceUpdate/{instanceId}/limits")
+  // @route("limits")
   // @get
   // getLimits is ServiceOperations.ResourceRead<Limits>;
 }

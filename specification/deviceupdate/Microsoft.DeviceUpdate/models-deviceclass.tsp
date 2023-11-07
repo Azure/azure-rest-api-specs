@@ -10,7 +10,6 @@ namespace Microsoft.DeviceUpdate;
 
 /** Device class metadata. */
 @resource("management/deviceClasses")
-@parentResource(Instance)
 model DeviceClass {
   /**
    * The device class identifier. This is generated from the model Id and the compat

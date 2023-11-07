@@ -19,10 +19,13 @@ using TypeSpec.Versioning;
   title: "DeviceUpdateClient",
 })
 @server(
-  "https://{endpoint}",
+  "https://{endpoint}/deviceUpdate/{instanceId}",
   "Device Update for IoT Hub is an Azure service that enables customers to publish updates for their IoT devices to the cloud, and then deploy that update to their devices (approve updates to groups of devices managed and provisioned in IoT Hub). It leverages the proven security and reliability of the Windows Update platform, optimized for IoT devices. It works globally and knows when and how to update devices, enabling customers to focus on their business goals and let Device Update for IoT Hub handle the updates.",
   {
     endpoint: string,
+
+    /** The Device Update for IoT Hub account instance identifier. */
+    instanceId: string
   }
 )
 @versioned(Microsoft.DeviceUpdate.Versions)

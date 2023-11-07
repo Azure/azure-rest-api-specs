@@ -7,7 +7,6 @@ namespace Microsoft.DeviceUpdate;
 
 /** Device metadata. */
 @resource("management/devices")
-@parentResource(Instance)
 model Device {
   /** Device identity. */
   @key
@@ -81,7 +80,6 @@ model StepResult {
 
 /** Device Health */
 @resource("management/deviceDiagnostics/deviceHealth")
-@parentResource(Instance)
 model DeviceHealth {
   /** Device id */
   @key
@@ -155,7 +153,6 @@ model DeviceHealthFilter {
 
 /** Operation metadata. */
 @resource("management/operations")
-@parentResource(Instance)
 model DeviceOperation {
   /** Operation Id. */
   @key

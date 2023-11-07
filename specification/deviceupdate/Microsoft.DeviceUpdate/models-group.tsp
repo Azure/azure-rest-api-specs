@@ -7,7 +7,6 @@ namespace Microsoft.DeviceUpdate;
 
 /** Group details. */
 @resource("management/groups")
-@parentResource(Instance)
 model Group {
   /**
    * Group identity. This is created from the value of the ADUGroup tag in the Iot

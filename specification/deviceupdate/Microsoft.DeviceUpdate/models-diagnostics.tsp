@@ -7,7 +7,6 @@ namespace Microsoft.DeviceUpdate;
 
 /** Diagnostics request body */
 @resource("management/deviceDiagnostics/logCollections")
-@parentResource(Instance)
 model LogCollection {
   /** The log collection id. */
   @key
