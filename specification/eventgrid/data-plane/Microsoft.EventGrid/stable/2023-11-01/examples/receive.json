@@ -1,0 +1,38 @@
+{
+  "operationId": "ReceiveCloudEvents",
+  "title": "Receive Cloud Event",
+  "parameters": {
+    "endpoint": "myNamespaceName.westus-1.eventgrid.azure.net",
+    "topicName": "myTopic",
+    "eventSubscriptionName": "myEventSubscription",
+    "content-type": "application/json",
+    "authorization": "SharedAccessKey 123",
+    "api-version": "2023-06-01-preview",
+    "maxEvents": 1,
+    "maxWaitTime": 60
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "brokerProperties": {
+              "lockToken": "CgMKATESCQoHdG9rZW4tMQ==",
+              "deliveryCount": 1
+            },
+            "event": {
+              "specversion": "1.0",
+              "type": "demo-started",
+              "source": "/test",
+              "subject": "all-hands-0405",
+              "id": "e770f36b-381a-41db-8b2b-b7199daeb202",
+              "time": "2023-05-05T17:31:00Z",
+              "datacontenttype": "application/json",
+              "data": "test"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
