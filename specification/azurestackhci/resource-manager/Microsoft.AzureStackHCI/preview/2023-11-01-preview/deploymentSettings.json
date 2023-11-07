@@ -803,6 +803,92 @@
         }
       }
     },
+    "SbePartnerInfo": {
+      "type": "object",
+      "description": "The SBE partner deployment info for cluster.",
+      "properties": {
+        "deploymentSbeInfo": {
+          "$ref": "#/definitions/DeploymentSbeInfo",
+          "description": "Deployment Sbe Info contains SBE family manifest info."
+        },
+        "partnerProperties": {
+          "type": "array",
+          "description": "List of SBE partner properties for AzureStackHCI cluster deployment.",
+          "items": {
+            "$ref": "#/definitions/SbePartnerProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "credentialList": {
+          "type": "array",
+          "description": "SBE credentials list for AzureStackHCI cluster deployment.",
+          "items": {
+            "$ref": "#/definitions/CredentialList"
+          },
+          "x-ms-identifiers": [
+            "kvId"
+          ]
+        }
+      }
+    },
+    "DeploymentSbeInfo": {
+      "type": "object",
+      "description": "Deployment Sbe Info contains SBE family manifest info.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "SBE manifest version info."
+        },
+        "family": {
+          "type": "string",
+          "description": "SBE family name."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "SBE manifest publisher."
+        },
+        "sbeManifestSource": {
+          "type": "string",
+          "description": "SBE Manifest Source."
+        },
+        "sbeManifestCreationDate": {
+          "type": "string",
+          "description": "SBE Manifest Creation Date."
+        }
+      }
+    },
+    "SbePartnerProperties": {
+      "type": "object",
+      "description": "SBE partner properties object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "SBE partner property name."
+        },
+        "value": {
+          "type": "string",
+          "description": "SBE partner property value."
+        }
+      }
+    },
+    "CredentialList": {
+      "type": "object",
+      "description": "SBE partner properties object.",
+      "properties": {
+        "kvId": {
+          "type": "string",
+          "description": "keyvault URI."
+        },
+        "secretNames": {
+          "type": "array",
+          "description": "SBE partner credential list of secret names stored in keyvault.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "ScaleUnits": {
       "type": "object",
       "description": "Scale units will contains list of deployment data",
@@ -810,6 +896,10 @@
         "deploymentData": {
           "$ref": "#/definitions/DeploymentData",
           "description": "Deployment Data to deploy AzureStackHCI Cluster."
+        },
+        "sbePartnerInfo": {
+          "$ref": "#/definitions/SbePartnerInfo",
+          "description": "SBE partner properties"
         }
       },
       "required": [
