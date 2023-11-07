@@ -1,13 +1,12 @@
 {
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "api-version": "2023-11-15-preview",
+    "api-version": "2023-04-01",
     "Endpoint": "{Endpoint}",
     "body": {
       "kind": "PiiEntityRecognition",
       "parameters": {
-        "modelVersion": "latest",
-        "redactionCharacter": "-"
+        "modelVersion": "latest"
       },
       "analysisInput": {
         "documents": [
@@ -39,10 +38,10 @@
           "documents": [
             {
               "id": "1",
-              "redactedText": "My SSN is -----------",
+              "redactedText": "My SSN is ***********",
               "entities": [
                 {
-                  "category": "USSocialSecurityNumber",
+                  "category": "U.S. Social Security Number (SSN)",
                   "confidenceScore": 0.65,
                   "length": 11,
                   "offset": 28,
@@ -53,10 +52,10 @@
             },
             {
               "id": "2",
-              "redactedText": "Your ABA number - --------- - is the first 9 digits in the lower left hand corner of your personal check.",
+              "redactedText": "Your ABA number - ********* - is the first 9 digits in the lower left hand corner of your personal check.",
               "entities": [
                 {
-                  "category": "ABARoutingNumber",
+                  "category": "ABA Routing Number",
                   "confidenceScore": 0.75,
                   "length": 9,
                   "offset": 18,
@@ -67,10 +66,10 @@
             },
             {
               "id": "3",
-              "redactedText": "Is -------------- your Brazilian CPF number?",
+              "redactedText": "Is ************** your Brazilian CPF number?",
               "entities": [
                 {
-                  "category": "BRCPFNumber",
+                  "category": "Brazil CPF Number",
                   "confidenceScore": 0.85,
                   "length": 14,
                   "offset": 3,
@@ -81,7 +80,7 @@
             }
           ],
           "errors": [],
-          "modelVersion": "2021-01-15"
+          "modelVersion": "2019-10-01"
         }
       }
     }
