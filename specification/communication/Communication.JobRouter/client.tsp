@@ -78,6 +78,7 @@ interface JobRouterRestClient {
   @internal("csharp")
   @internal("python")
   @internal("java")
+  @projectedName("csharp", "cancelJobInternal")
   cancel is AzureCommunicationRoutingService.JobRouterOperations.cancel;
 
   @internal("csharp")
@@ -89,6 +90,7 @@ interface JobRouterRestClient {
   @internal("csharp")
   @internal("python")
   @internal("java")
+  @projectedName("csharp", "closeJobInternal")
   close is AzureCommunicationRoutingService.JobRouterOperations.close;
 
   listJobs is AzureCommunicationRoutingService.JobRouterOperations.listJobs;
@@ -104,6 +106,7 @@ interface JobRouterRestClient {
   @internal("csharp")
   @internal("python")
   @internal("java")
+  @projectedName("csharp", "declineJobOfferInternal")
   decline is AzureCommunicationRoutingService.JobRouterOperations.decline;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Need to revist how to correctly define singletons https://github.com/Azure/azure-rest-api-specs/issues/25605#issuecomment-1736265997"
