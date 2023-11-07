@@ -448,45 +448,26 @@
             "items": {
               "$ref": "#/definitions/ThroughputPoolGetResults"
             },
-            "description": "List of database account and their properties."
+            "description": "List of throughput pools and their properties."
           }
         },
-        "description": "The List operation response, that contains the database accounts and their properties."
+        "description": "The List operation response, that contains the throughput pools and their properties."
       },
       "ThroughputPoolGetResults": {
-        "description": "An Azure Cosmos DB database Throughputpool.",
+        "description": "An Azure Cosmos DB Throughputpool.",
         "type": "object",
         "properties": {
-          "properties": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/ThroughputPoolGetProperties"
-          },
-          "systemData": {
-            "readOnly": true,
-            "description": "The system meta data relating to this resource.",
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/definitions/ARMResourceProperties"
-          }
-        ]
-      },
-      "ThroughputPoolGetProperties": {
-        "description": "Properties for the database account.",
-        "type": "object",
-        "properties": {
-          "status": {
-            "description": "Flag to indicate enabling/disabling of sharing throughput among the accounts in the pool",
-            "type": "boolean"
-          },
           "maxThroughput": {
             "type": "integer",
             "description": "Value for throughput to be shared among CosmosDB resources in the pool.",
             "readOnly": true
           }
-        }
+        },
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          }
+        ],
       },
       "ThroughputPoolCreateUpdateParameters": {
         "description": "Parameters for patching Azure Cosmos DB throughput pool properties.",
@@ -502,13 +483,9 @@
         }
       },
       "ThroughputPoolUpdateProperties": {
-        "description": "Properties to update Azure Cosmos DB database accounts.",
+        "description": "Properties to update Azure Cosmos DB throughput pool.",
         "type": "object",
         "properties": {
-          "status": {
-            "description": "Flag to indicate enabling/disabling of sharing throughput among the accounts in the pool",
-            "type": "boolean"
-          },
           "maxThroughput": {
             "type": "integer",
             "description": "Value for throughput to be shared among CosmosDB resources in the pool.",
@@ -524,31 +501,35 @@
             "items": {
               "$ref": "#/definitions/ThroughputPoolAccountGetResult"
             },
-            "description": "List of database accounts in a throughput pool and their properties."
+            "description": "List of global database accounts in a throughput pool and their properties."
           }
         },
-        "description": "The List operation response, that contains the database accounts and their properties."
+        "description": "The List operation response, that contains the global database accounts and their properties."
       },
       "ThroughputPoolAccountGetResult": {
-        "description": "An Azure Cosmos DB database Throughputpool.",
+        "description": "An Azure Cosmos DB Global Database Account which is part of a Throughputpool.",
         "type": "object",
         "properties": {
-          "systemData": {
+          "AccountResourceIdentifier": {
             "readOnly": true,
-            "description": "The system meta data relating to this resource.",
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+            "description": "The resource identifier of global database account in the throughputPool.",
+            "type": "string"
           },
-          "name": {
+          "AccountLocation": true,
+            "description": "The location of  global database account in the throughputPool.",
+            "type": "string"
+          },
+          "AccountInstanceId": {
             "readOnly": true,
-            "description": "The URI of database account",
+            "description": "The instance id of global database account in the throughputPool.",
             "type": "string"
           }
         },
         "allOf": [
           {
-            "$ref": "#/definitions/ARMResourceProperties"
+            "$ref": ".../../cosmos-db.json#/definitions/ARMProxyResource"
           }
-        ]
+        ],
       },
       "ThroughputPoolLocationAccountsListResult": {
         "properties": {
@@ -558,10 +539,10 @@
             "items": {
               "$ref": "#/definitions/ThroughputPoolAccountGetResult"
             },
-            "description": "List of database accounts in a throughput pool location and their properties."
+            "description": "List of global database accounts in a throughput pool and their properties."
           }
         },
-        "description": "The List operation response, that contains the database accounts and their properties."
+        "description": "The List operation response, that contains the global database accounts and their properties."
       }
     },
     "parameters": {
@@ -582,7 +563,7 @@
         "required": true,
         "type": "string",
         "x-ms-parameter-location": "method",
-        "description": "Cosmos DB database account in a Throughput Pool",
+        "description": "Cosmos DB global database account in a Throughput Pool",
         "minLength": 3,
         "maxLength": 50,
         "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
