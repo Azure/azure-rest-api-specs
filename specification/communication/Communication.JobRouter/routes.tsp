@@ -199,26 +199,17 @@ interface JobRouterOperations {
     CompleteJobResultWithOkResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Closes a completed job.")
   @doc("Closes a completed job.")
-  @route("/routing/jobs/{jobId}/assignments/{assignmentId}:close")
-  @post
-  close is Azure.Core.Foundations.Operation<
+  @route("/routing")
+  close is Operations.ResourceAction<RouterJobAssignment,
     {
-      @doc("Id of the job.")
-      @path
-      jobId: string;
-
-      @doc("The assignment within which the job is to be closed.")
-      @path
-      assignmentId: string;
-
       @doc("Request model for closing job.")
       @body
       options?: CloseJobOptions;
     },
-    CloseJobResultResponse
+    CloseJobResultWithOkResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"

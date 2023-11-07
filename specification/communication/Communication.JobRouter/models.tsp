@@ -1069,20 +1069,6 @@ model CloseJobResultWithOkResponse {
   _: 200;
 }
 
-@doc("Response payload from closing a job at a future time.")
-model CloseJobResultWithAcceptedResponse {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
-  @doc("Response after closing a job.")
-  @body
-  body: CloseJobResult;
-
-  @doc("Status code.")
-  @statusCode
-  _: 202;
-}
-
-alias CloseJobResultResponse = CloseJobResultWithOkResponse | CloseJobResultWithAcceptedResponse;
-
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
 @access(Access.internal)
 @doc("Response payload from cancelling a job")

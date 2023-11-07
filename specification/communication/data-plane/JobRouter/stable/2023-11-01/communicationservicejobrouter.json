@@ -1274,14 +1274,14 @@
           {
             "name": "jobId",
             "in": "path",
-            "description": "Id of the job.",
+            "description": "The id of the job.",
             "required": true,
             "type": "string"
           },
           {
             "name": "assignmentId",
             "in": "path",
-            "description": "The assignment within which the job is to be closed.",
+            "description": "The Id of the job assignment.",
             "required": true,
             "type": "string"
           },
@@ -1297,13 +1297,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Response payload from closing a job synchronously.",
-            "schema": {
-              "$ref": "#/definitions/CloseJobResult"
-            }
-          },
-          "202": {
-            "description": "Response payload from closing a job at a future time.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CloseJobResult"
             }
