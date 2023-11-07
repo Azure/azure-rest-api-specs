@@ -2,7 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 
-import "./streaming/chat_completions.tsp"; // exposed through client.tsp access modifiers
+import "./streaming/chat_completions.tsp";
 import "./azure_chat_extensions.tsp";
 import "./common.tsp";
 import "./functions.tsp";
@@ -42,8 +42,7 @@ model ChatMessage {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "we explicitly want a nullable string"
   @doc("The text associated with this message payload.")
   @projectedName("json", "content")
-  content: string | null; // they key might not be present on a streaming scenario
-  // content is optional in the streaming scenario therefore we define as content?: string
+  content: string | null;
 
   @doc("""
     The name of the author of this message. `name` is required if role is `function`, and it should be the name of the
