@@ -701,6 +701,7 @@
           {
             "in": "body",
             "name": "body",
+            "required": true,
             "description": "The data source definition.",
             "schema": {
               "$ref": "#/definitions/DataSource"
@@ -1274,8 +1275,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success."
+          "202": {
+            "description": "Success.",
+            "headers": {
+              "Operation-Location": {
+                "description": "Response header for long running operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
           },
           "default": {
             "description": "An error response received from the Scanning Service.",
@@ -1923,6 +1933,7 @@
             "name": "scanLevel",
             "type": "string",
             "description": "The scan level.",
+            "default": "Incremental",
             "enum": [
               "Full",
               "Incremental"
@@ -1956,7 +1967,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/OperationResponse"
+              "$ref": "#/definitions/ScanResultWithIngestion"
             }
           },
           "default": {
