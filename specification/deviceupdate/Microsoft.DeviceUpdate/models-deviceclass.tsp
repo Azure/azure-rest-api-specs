@@ -22,7 +22,7 @@ model DeviceClass {
    * The device class friendly name. This can be updated by callers after the device
    * class has been automatically created.
    */
-  @visibility("read", "create", "update")
+  @visibility("read", "update")
   friendlyName?: string;
 
   /** The device class properties that are used to calculate the device class Id */
