@@ -28,7 +28,7 @@ These are the global settings for the Hardware Security Modules API.
 title: Azure HSM Resource Provider
 description: The Azure management API provides a RESTful set of web services that interact with Azure HSM RP.
 openapi-type: arm
-tag: package-preview-2023-12
+tag: package-2023-12-preview
 ```
 
 ### Tag: package-2018-10
@@ -59,7 +59,7 @@ input-file:
 - Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
 ```
 
-### Tag: package-preview-2023-12
+### Tag: package-2023-12-preview
 
 These settings apply only when `--tag=package-2023-12-preview` is specified on the command line.
 
