@@ -222,7 +222,7 @@ enum ExpressionRouterRuleLanguage {
   powerFx,
 }
 
-@resource("classificationPolicies")
+@resource("routing/classificationPolicies")
 @doc("A container for the rules that govern how jobs are classified.")
 model ClassificationPolicy {
   ...EtagProperty;
@@ -262,7 +262,7 @@ model RouterRule {
   kind: string;
 }
 
-@resource("distributionPolicies")
+@resource("routing/distributionPolicies")
 @doc("Policy governing how jobs are distributed to workers")
 model DistributionPolicy {
   ...EtagProperty;
@@ -298,7 +298,7 @@ model DistributionMode {
   kind: string;
 }
 
-@resource("exceptionPolicies")
+@resource("routing/exceptionPolicies")
 @doc("A policy that defines actions to execute when exception are triggered.")
 model ExceptionPolicy {
   ...EtagProperty;
@@ -343,7 +343,7 @@ model RouterJobNote {
   addedAt?: utcDateTime;
 }
 
-@resource("jobs")
+@resource("routing/jobs")
 @doc("A unit of work to be routed")
 model RouterJob {
   ...EtagProperty;
@@ -570,7 +570,7 @@ model DeclineJobOfferOptions {
   retryOfferAt?: utcDateTime;
 }
 
-@resource("queues")
+@resource("routing/queues")
 @doc("A queue that can contain jobs to be routed.")
 model RouterQueue {
   ...EtagProperty;
@@ -609,7 +609,7 @@ model RouterQueueStatistics {
   longestJobWaitTimeMinutes?: float64;
 }
 
-@resource("workers")
+@resource("routing/workers")
 @doc("An entity for jobs to be routed to")
 model RouterWorker {
   ...EtagProperty;
