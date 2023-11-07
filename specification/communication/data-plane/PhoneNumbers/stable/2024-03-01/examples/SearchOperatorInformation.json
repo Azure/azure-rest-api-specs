@@ -2,12 +2,10 @@
   "parameters": {
     "api-version": "2024-03-01",
     "endpoint": "https://resourcename.communication.azure.com/",
+    "expand": "numberDetails",
     "body": {
       "phoneNumbers": [
         "+11234567890"
-      ],
-      "options": [
-        "IncludeOperatorDetails"
       ]
     }
   },
@@ -19,12 +17,14 @@
             "phoneNumber": "+11234567890",
             "nationalFormat": "+1 (123) 456-7890",
             "internationalFormat": "+1 123 456 7890",
-            "numberType": "mobile",
-            "isoCountryCode": "US",
-            "operatorDetails": {
-              "name": "T-Mobile",
-              "mobileNetworkCode": "260",
-              "mobileCountryCode": "310"
+            "numberDetails": {
+              "numberType": "mobile",
+              "isoCountryCode": "US",
+              "operatorDetails": {
+                "name": "T-Mobile",
+                "mobileNetworkCode": "260",
+                "mobileCountryCode": "310"
+              }
             }
           }
         ]

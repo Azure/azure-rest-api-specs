@@ -870,6 +870,15 @@
             "schema": {
               "$ref": "#/definitions/OperatorInformationRequest"
             }
+          },
+          {
+            "in": "query",
+            "name": "expand",
+            "description": "Option to expand returned values beyond the default fields. Please note: additional data requested may result in an increased cost for the query.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1477,20 +1486,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "options": {
-          "description": "Options to modify the search to include additional properties in the response. Please note: use of options may affect the cost of the query.",
-          "type": "array",
-          "items": {
-            "enum": [
-              "IncludeOperatorDetails"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "OperatorInformationRequestOptions",
-              "modelAsString": true
-            }
-          }
         }
       }
     },
@@ -1523,6 +1518,33 @@
           "description": "International format of the phone number",
           "type": "string"
         },
+        "numberDetails": {
+          "$ref": "#/definitions/OperatorNumberDetails"
+        }
+      }
+    },
+    "OperatorDetails": {
+      "description": "Represents metadata describing the operator of a phone number",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the phone operator",
+          "type": "string"
+        },
+        "mobileNetworkCode": {
+          "description": "Mobile Network Code",
+          "type": "string"
+        },
+        "mobileCountryCode": {
+          "description": "Mobile Country Code",
+          "type": "string"
+        }
+      }
+    },
+    "OperatorNumberDetails": {
+      "description": "Represents number specific details including information about the number operator",
+      "type": "object",
+      "properties": {
         "numberType": {
           "description": "Type of service associated with the phone number",
           "enum": [
@@ -1543,24 +1565,6 @@
         },
         "operatorDetails": {
           "$ref": "#/definitions/OperatorDetails"
-        }
-      }
-    },
-    "OperatorDetails": {
-      "description": "Represents metadata describing the operator of a phone number",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the phone operator",
-          "type": "string"
-        },
-        "mobileNetworkCode": {
-          "description": "Mobile Network Code",
-          "type": "string"
-        },
-        "mobileCountryCode": {
-          "description": "Mobile Country Code",
-          "type": "string"
         }
       }
     }
