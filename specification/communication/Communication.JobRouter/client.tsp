@@ -83,6 +83,7 @@ interface JobRouterRestClient {
   @internal("csharp")
   @internal("python")
   @internal("java")
+  @projectedName("csharp", "completeJobInternal")
   complete is AzureCommunicationRoutingService.JobRouterOperations.complete;
 
   @internal("csharp")
