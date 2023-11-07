@@ -118,13 +118,13 @@ directive:
     reason: Existing API, change would potentially be breaking.
 ```
 
-## SpeechToText 3.2-preview2
+## SpeechToText 3.2-preview.2
 
 These settings apply only when `--tag=release_3_2_preview_2` is specified on the command line.
 
 ```yaml $(tag) == 'release_3_2_preview_2'
 input-file:
-  - preview/v3.2-preview2/speechtotext.json
+  - preview/v3.2-preview.2/speechtotext.json
 ```
 
 AutoRest-Linter Suppressions
