@@ -249,6 +249,9 @@ directive:
       - $.definitions.VirtualMachineScaleSetVMExtension
   - suppress: LroErrorContent
     reason: Compute uses common types defined in our own common-types.json.
+  - suppress: ResourceNameRestriction
+    from: dedicatedHost.json
+    reason: there is no dedicated host naming requirement. It only follows ARM resource naming requirement.
 ```
 
 ### Tag: package-2023-09-01
