@@ -96,7 +96,6 @@ interface JobRouterRestClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to revist how to correctly define singletons https://github.com/Azure/azure-rest-api-specs/issues/25605#issuecomment-1736265997"
   getQueuePosition is AzureCommunicationRoutingService.JobRouterOperations.getInQueuePosition;
 
-  @internal("csharp")
   unassign is AzureCommunicationRoutingService.JobRouterOperations.unassign;
 
   accept is AzureCommunicationRoutingService.JobRouterOperations.accept;
