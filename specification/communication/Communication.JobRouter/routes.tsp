@@ -203,7 +203,8 @@ interface JobRouterOperations {
   @summary("Closes a completed job.")
   @doc("Closes a completed job.")
   @route("/routing")
-  close is Operations.ResourceAction<RouterJobAssignment,
+  close is Operations.ResourceAction<
+    RouterJobAssignment,
     {
       @doc("Request model for closing job.")
       @body
