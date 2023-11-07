@@ -985,11 +985,6 @@
     },
     "SolutionPatchRequestBody": {
       "description": "Solution response.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
@@ -1048,13 +1043,11 @@
         },
         "solutionId": {
           "description": "Solution Id to identify single solution.",
-          "readOnly": true,
           "type": "string"
         },
         "provisioningState": {
           "description": "Status of solution provisioning.",
           "type": "string",
-          "readOnly": true,
           "enum": [
             "Succeeded",
             "Failed",
@@ -1067,21 +1060,17 @@
         },
         "title": {
           "description": "The title.",
-          "readOnly": true,
           "type": "string"
         },
         "content": {
           "description": "The HTML content that needs to be rendered and shown to customer.",
-          "readOnly": true,
           "type": "string"
         },
         "replacementMaps": {
-          "readOnly": true,
           "$ref": "#/definitions/ReplacementMaps"
         },
         "sections": {
           "description": "List of section object.",
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Section"
