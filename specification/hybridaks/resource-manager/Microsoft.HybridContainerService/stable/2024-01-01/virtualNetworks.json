@@ -42,8 +42,8 @@
             "$ref": "./examples/GetVirtualNetwork.json"
           }
         },
-        "summary": "Gets the virtual network",
-        "description": "Gets the Hybrid AKS virtual network",
+        "summary": "Gets the specified virtual network resource",
+        "description": "Gets the specified virtual network resource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -60,7 +60,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the virtualNetwork resource.",
+            "description": "Gets the virtualNetwork resource.",
             "schema": {
               "$ref": "#/definitions/virtualNetwork"
             }
@@ -84,8 +84,8 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "summary": "Puts the virtual network",
-        "description": "Puts the Hybrid AKS virtual network",
+        "summary": "Creates or updates the virtual network resource",
+        "description": "Creates or updates the virtual network resource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -103,6 +103,7 @@
             "name": "virtualNetworks",
             "in": "body",
             "required": true,
+            "description": "Virtual Network resource definition",
             "schema": {
               "$ref": "#/definitions/virtualNetwork"
             }
@@ -140,8 +141,8 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "summary": "Deletes the virtual network",
-        "description": "Deletes the Hybrid AKS virtual network",
+        "summary": "Deletes the specified virtual network resource",
+        "description": "Deletes the specified virtual network resource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -187,8 +188,8 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "summary": "Patches the virtual network",
-        "description": "Patches the Hybrid AKS virtual network",
+        "summary": "Patches the virtual network resource",
+        "description": "Patches the virtual network resource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -206,6 +207,7 @@
             "name": "virtualNetworks",
             "in": "body",
             "required": true,
+            "description": "Virtual Network resource patch definition",
             "schema": {
               "$ref": "#/definitions/virtualNetworksPatch"
             }
@@ -238,8 +240,8 @@
             "$ref": "./examples/ListVirtualNetworkByResourceGroup.json"
           }
         },
-        "summary": "List virtual networks by resource group",
-        "description": "Lists the Hybrid AKS virtual networks by resource group",
+        "summary": "Lists the virtual networks in the specified resource group",
+        "description": "Lists the virtual networks in the specified resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -253,7 +255,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all virtualNetworks under the resource group.",
+            "description": "Lists the virtual networks in the specified resource group",
             "schema": {
               "$ref": "#/definitions/virtualNetworksListResult"
             }
@@ -278,8 +280,8 @@
             "$ref": "./examples/ListVirtualNetworkBySubscription.json"
           }
         },
-        "summary": "List virtual networks by subscription",
-        "description": "Lists the Hybrid AKS virtual networks by subscription",
+        "summary": "Lists the virtual networks in the specified subscription",
+        "description": "Lists the virtual networks in the specified subscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -290,7 +292,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all virtualNetworks under the subscription.",
+            "description": "Lists the virtual networks in the specified subscription",
             "schema": {
               "$ref": "#/definitions/virtualNetworksListResult"
             }
@@ -321,7 +323,7 @@
               "properties": {
                 "mocGroup": {
                   "type": "string",
-                  "description": "Resource group in MOC(Microsoft On-premises Cloud)"
+                  "description": "Group in MOC(Microsoft On-premises Cloud)"
                 },
                 "mocLocation": {
                   "type": "string",
@@ -332,23 +334,13 @@
                   "description": "Virtual Network name in MOC(Microsoft On-premises Cloud)"
                 }
               },
-              "description": "Infra network profile for HCI platform"
-            },
-            "vmware": {
-              "type": "object",
-              "properties": {
-                "segmentName": {
-                  "type": "string",
-                  "description": "Name of the network segment in VSphere"
-                }
-              },
-              "description": "Infra network profile for VMware platform"
+              "description": "Infrastructure network profile for HCI platform"
             }
           }
         },
         "vipPool": {
           "type": "array",
-          "description": "Virtual IP Pool for Kubernetes",
+          "description": "Range of IP Addresses for Kubernetes API Server and services if using HA Proxy load balancer",
           "x-ms-identifiers": [],
           "items": {
             "type": "object",
@@ -366,7 +358,7 @@
         },
         "vmipPool": {
           "type": "array",
-          "description": "IP Pool for Virtual Machines",
+          "description": "Range of IP Addresses for Kubernetes node VMs",
           "x-ms-identifiers": [],
           "items": {
             "type": "object",
@@ -382,23 +374,16 @@
             }
           }
         },
-        "dhcpServers": {
-          "type": "array",
-          "description": "Address of the DHCP servers associated with the network",
-          "items": {
-            "type": "string"
-          }
-        },
         "dnsServers": {
           "type": "array",
-          "description": "Address of the DNS servers associated with the network",
+          "description": "List of DNS server IP Addreses associated with the network",
           "items": {
             "type": "string"
           }
         },
         "gateway": {
           "type": "string",
-          "description": "Address of the Gateway associated with the network"
+          "description": "IP Address of the Gateway associated with the network"
         },
         "ipAddressPrefix": {
           "type": "string",
@@ -416,11 +401,11 @@
             "Succeeded",
             "Failed",
             "Canceled",
-            "InProgress",
+            "Pending",
+            "Creating",
             "Deleting",
             "Updating",
-            "Accepted",
-            "Created"
+            "Accepted"
           ],
           "x-ms-enum": {
             "modelAsString": true,
@@ -433,36 +418,37 @@
           "properties": {
             "operationStatus": {
               "type": "object",
+              "description": "The detailed status of the long running operation.",
               "properties": {
                 "error": {
                   "type": "object",
+                  "description": "The error if any from the operation.",
                   "properties": {
                     "code": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "The error code from the operation."
                     },
                     "message": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "The error message from the operation."
                     }
                   }
                 },
                 "operationId": {
-                  "type": "string"
-                },
-                "phase": {
                   "type": "string",
-                  "description": "Phase represents the current phase of the virtual network provisioning. E.g. Pending, Running, Terminating, Failed etc."
+                  "description": "The identifier of the operation."
                 },
                 "status": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "The status of the operation."
                 }
-              },
-              "description": "Contains Provisioning errors"
+              }
             }
           },
-          "description": "HybridAKSNetworkStatus defines the observed state of HybridAKSNetwork"
+          "description": "Status of the virtual network resource"
         }
       },
-      "description": "HybridAKSNetworkSpec defines the desired state of HybridAKSNetwork"
+      "description": "Properties of the virtual network resource"
     },
     "virtualNetwork": {
       "type": "object",
@@ -471,20 +457,24 @@
         "properties": {
           "$ref": "#/definitions/virtualNetworkProperties"
         },
-        "systemData": {
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
-        },
         "extendedLocation": {
           "type": "object",
+          "description": "Extended location pointing to the underlying infrastructure",
           "properties": {
             "type": {
               "type": "string",
-              "description": "The extended location type."
+              "description": "The extended location type. Allowed value: 'CustomLocation'",
+              "enum": [
+                "CustomLocation"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true,
+                "name": "ExtendedLocationTypes"
+              }
             },
             "name": {
               "type": "string",
-              "description": "The extended location name."
+              "description": "ARM Id of the extended location."
             }
           }
         }
@@ -494,7 +484,7 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "The virtualNetworks resource definition."
+      "description": "The Virtual Network resource definition."
     },
     "virtualNetworksPatch": {
       "type": "object",
@@ -507,10 +497,11 @@
           "description": "Resource tags"
         }
       },
-      "description": "The virtualNetworks resource patch definition."
+      "description": "The Virtual Network resource patch definition."
     },
     "virtualNetworksListResult": {
       "type": "object",
+      "description": "A list of virtual network resources.",
       "properties": {
         "value": {
           "type": "array",
@@ -532,6 +523,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
       "x-ms-parameter-location": "method",
       "maxLength": 64,
       "minLength": 3
