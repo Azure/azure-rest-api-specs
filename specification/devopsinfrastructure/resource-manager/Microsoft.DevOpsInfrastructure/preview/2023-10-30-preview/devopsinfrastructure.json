@@ -649,13 +649,18 @@
         "fabricProfile": {
           "$ref": "#/definitions/FabricProfile",
           "description": "Defines the type of fabric the agent will run on."
+        },
+        "devCenterProjectResourceId": {
+          "type": "string",
+          "description": "The resource id of the DevCenter Project the pool belongs to."
         }
       },
       "required": [
         "maximumConcurrency",
         "organizationProfile",
         "agentProfile",
-        "fabricProfile"
+        "fabricProfile",
+        "devCenterProjectResourceId"
       ]
     },
     "PoolUpdate": {
@@ -705,6 +710,10 @@
         "fabricProfile": {
           "$ref": "#/definitions/FabricProfile",
           "description": "Defines the type of fabric the agent will run on."
+        },
+        "devCenterProjectResourceId": {
+          "type": "string",
+          "description": "The resource id of the DevCenter Project the pool belongs to."
         }
       }
     },
