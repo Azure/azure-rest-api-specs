@@ -14,10 +14,10 @@ pr:
     - package-lock.json
     - package.json
     - tsconfig.json
-    - eng/tools/TypeSpecValidation
+    - eng/tools/typespec-validation
 
 jobs:
-- job: Test_TypeSpec_Validation
+- job: Test
 
   strategy:
     matrix:
@@ -36,5 +36,5 @@ jobs:
   - template: /eng/pipelines/templates/steps/npm-install.yml
 
   - script: npm test
-    displayName: Test TypeSpecValidation Tool
-    workingDirectory: $(Build.SourcesDirectory)/eng/tools/TypeSpecValidation
+    displayName: npm test
+    workingDirectory: $(Build.SourcesDirectory)/eng/tools/typespec-validation
