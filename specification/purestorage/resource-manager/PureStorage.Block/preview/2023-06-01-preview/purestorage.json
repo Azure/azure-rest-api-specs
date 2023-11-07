@@ -809,59 +809,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/avs": {
-      "post": {
-        "operationId": "StoragePools_Avs",
-        "tags": [
-          "StoragePools"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the Storage Pool.",
-            "required": true,
-            "type": "string",
-            "minLength": 4,
-            "maxLength": 20,
-            "pattern": "^[a-zA-Z0-9_]*$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/StoragePoolAvs"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/avsStorageContainers": {
       "get": {
         "operationId": "AvsStorageContainers_ListByStoragePool",
@@ -1959,13 +1906,66 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/health": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/listAvsDetails": {
       "post": {
-        "operationId": "StoragePools_Health",
+        "operationId": "StoragePools_ListAvsDetails",
         "tags": [
           "StoragePools"
         ],
-        "description": "A synchronous resource action.",
+        "description": "Lists AVS properties for specific Storage Pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storagePoolName",
+            "in": "path",
+            "description": "Name of the Storage Pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9_]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvsDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/listHealthMetadata": {
+      "post": {
+        "operationId": "StoragePools_ListHealthMetadata",
+        "tags": [
+          "StoragePools"
+        ],
+        "description": "Lists health metadata for specific Storage Pool.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2058,6 +2058,36 @@
           }
         ]
       }
+    },
+    "AvsDetails": {
+      "type": "object",
+      "description": "AVS (Azure VMware Solution) related properties.",
+      "properties": {
+        "vasaProviderUsername": {
+          "type": "string",
+          "description": "Username for VMware VASA service login."
+        },
+        "vasaProviderUrls": {
+          "type": "array",
+          "description": "URLs to use for VMware VASA.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vasaIscsiEndpoints": {
+          "type": "array",
+          "description": "Array of iSCSI endpoints and IQNs.",
+          "items": {
+            "$ref": "#/definitions/VasaIscsiEndpoints"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "vasaProviderUsername",
+        "vasaProviderUrls",
+        "vasaIscsiEndpoints"
+      ]
     },
     "AvsDiskDetails": {
       "type": "object",
@@ -2918,36 +2948,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
-      ]
-    },
-    "StoragePoolAvs": {
-      "type": "object",
-      "description": "AVS (Azure VMware Solution) related properties.",
-      "properties": {
-        "vasaProviderUsername": {
-          "type": "string",
-          "description": "Username for VMware VASA service login."
-        },
-        "vasaProviderUrls": {
-          "type": "array",
-          "description": "URLs to use for VMware VASA.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "vasaIscsiEndpoints": {
-          "type": "array",
-          "description": "Array of iSCSI endpoints and IQNs.",
-          "items": {
-            "$ref": "#/definitions/VasaIscsiEndpoints"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "vasaProviderUsername",
-        "vasaProviderUrls",
-        "vasaIscsiEndpoints"
       ]
     },
     "StoragePoolListResult": {

@@ -80,7 +80,7 @@ model StoragePoolProperties {
   provisioningState?: ResourceProvisioningState;
 
   @doc("Resource id of the reservation resource. The RP should make sure this is a valid resource before allowing StoragePool creation to continue.")
-  @visibility("create", "read") // TODO: check
+  @visibility("create", "read")
   reservationResourceId: string;
 }
 
@@ -107,12 +107,15 @@ interface StoragePools {
   listByResourceGroup is ArmResourceListByParent<StoragePool>;
   listBySubscription is ArmListBySubscription<StoragePool>;
   
-  Health is ArmResourceActionSync<StoragePool, {}, HealthResponse>; // TODO: is this the right way to do this?
-  Avs is ArmResourceActionSync<StoragePool, {}, StoragePoolAvs>; // TODO: is this the right way to do this?
+  @doc("Lists health metadata for specific Storage Pool.")
+  listHealthMetadata is ArmResourceActionSync<StoragePool, {}, HealthResponse>;
+
+  @doc("Lists AVS properties for specific Storage Pool.")
+  listAvsDetails is ArmResourceActionSync<StoragePool, {}, AvsDetails>; 
 }
 
 @doc("AVS (Azure VMware Solution) related properties.")
-model StoragePoolAvs {
+model AvsDetails {
   @doc("Username for VMware VASA service login.")
   vasaProviderUsername: string;
 
