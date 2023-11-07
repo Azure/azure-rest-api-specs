@@ -106,12 +106,12 @@ interface StoragePools {
   delete is ArmResourceDeleteWithoutOkAsync<StoragePool>;
   listByResourceGroup is ArmResourceListByParent<StoragePool>;
   listBySubscription is ArmListBySubscription<StoragePool>;
-  
+
   @doc("Lists health metadata for specific Storage Pool.")
   listHealthMetadata is ArmResourceActionSync<StoragePool, {}, HealthResponse>;
 
   @doc("Lists AVS properties for specific Storage Pool.")
-  listAvsDetails is ArmResourceActionSync<StoragePool, {}, AvsDetails>; 
+  listAvsDetails is ArmResourceActionSync<StoragePool, {}, AvsDetails>;
 }
 
 @doc("AVS (Azure VMware Solution) related properties.")
@@ -128,7 +128,6 @@ model AvsDetails {
 
 @doc("iSCSI endpoint and IQN.")
 model VasaIscsiEndpoints {
-
   @doc("IP address of the iSCSI endpoint.")
   address: string;
 
@@ -141,7 +140,6 @@ model VasaIscsiEndpoints {
 
 @doc("Health metadata reported for a given resource.")
 model HealthResponse {
-
   @doc("Health metrics reported for a given resource.")
   health: HealthDetails;
 
@@ -151,7 +149,6 @@ model HealthResponse {
 
 @doc("Health metrics reported for a given resource.")
 model HealthDetails {
-
   @doc("How full the pool is right now, in %, compared to the maximum size it can grow to.")
   usedCapacityPercentage: float64;
 
@@ -164,7 +161,6 @@ model HealthDetails {
 
 @doc("Bandwidth usage metrics reported for a given resource.")
 model BandwidthUsage {
-
   @doc("The number of bytes written and read per second. Max over 10 mins.")
   current: int64;
 
@@ -177,7 +173,6 @@ model BandwidthUsage {
 
 @doc("IOPS usage metrics reported for a given resource.")
 model IopsUsage {
-
   @doc("The number of operations per second. Max over 10 mins.")
   current: int64;
 
@@ -190,7 +185,6 @@ model IopsUsage {
 
 @doc("Health alerts for a given pool.")
 model Alert {
-
   @doc("The severity level of the alert.")
   level: AlertLevel;
 
@@ -200,8 +194,13 @@ model Alert {
 
 @doc("The severity level of the alert.")
 enum AlertLevel {
+  @doc("Information level.")
   Info: "info",
+
+  @doc("Warning level.")
   Warning: "warning",
+
+  @doc("Error level.")
   Error: "error",
 }
 
@@ -248,7 +247,6 @@ model AvsStorageContainerVolume is ProxyResource<VolumeProperties> {
 
 @doc("Volume properties.")
 model VolumeProperties {
-
   @doc("Pure Storage's internal Id for the StoragePool.")
   @visibility("read")
   storagePoolInternalId?: string;
@@ -272,11 +270,11 @@ model VolumeProperties {
   @doc("Unix Timestamp when Volume Group was created (in seconds).")
   @visibility("read")
   createdTimestamp?: int64;
-  
+
   @doc("Provisioned size of the volume, that is, how large the volume can grow. In bytes.")
   @visibility("read")
   provisionedSize?: int64;
-  
+
   @doc("Which system is responsible for the lifecycle of that Volume.")
   @visibility("read")
   volumeType?: VolumeType;
@@ -290,21 +288,21 @@ model VolumeProperties {
   azure?: AzureProperties;
 
   // TODO: check if it is required since only update/read is allowed
+  @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
 }
 
 @doc("Shows if Resource is destroyed and when eradication will happen.")
 model SoftDeletion {
-  
   @doc("Shows if Resource is destroyed.")
   @visibility("read", "update")
   destroyed: boolean;
-  
+
   @doc("Unix Timestamp when Resource will be eradicated (in seconds). Present only if `destroyed` is true.")
   @visibility("read")
   eradicationTimestamp?: int64;
-  
+
   @doc("Set to the previous volumeResourceId for this volume if destroyed is true, and this used to be a VolumeGroup/Volume, the former Azure resourceId for that VolumeGroup/Volume before it was delete.")
   @visibility("read")
   previousVolumeResourceId?: string;
@@ -312,20 +310,21 @@ model SoftDeletion {
 
 @doc("Consistency Group the Volume belongs to.")
 model VolumeConsistencyGroup {
-
   @doc("Internal ID for the Consistency Group the Volume belongs to.")
   consistencyGroupId: string;
 }
 
 @doc("Enum of possible Volume types.")
 enum VolumeType {
+  @doc("Azure Volume Type.")
   Azure: "azure",
+
+  @doc("AVS Volume Type.")
   AVS: "avs",
 }
 
 @doc("AVS disk details.")
 model AvsDiskDetails {
-
   @doc("Id of the disk.")
   diskId: string;
 
@@ -337,14 +336,13 @@ model AvsDiskDetails {
 
   @doc("VMware id assigned to the volume.")
   avsVmInternalId: string;
-  
+
   @doc("AVS storage container name that contains exact volume.")
   avsStorageContainerName: string;
 }
 
 @doc("Azure Volume Group assigned to the volume.")
 model AzureProperties {
-  
   @doc("Azure Volume Group ID assigned to the volume.")
   volumeGroupInternalId: string;
 }
@@ -358,7 +356,7 @@ interface AvsStorageContainerVolumes {
 }
 
 @parentResource(StoragePool)
-model AvsVM is ProxyResource<AvsVmProperties> {
+model AvsVm is ProxyResource<AvsVmProperties> {
   @doc("Name of the AVS VM.")
   @segment("avsVms")
   @key("avsVmName")
@@ -371,16 +369,15 @@ model AvsVM is ProxyResource<AvsVmProperties> {
 }
 
 @doc("AVS VM properties.")
-model AvsVmProperties  {
-  
+model AvsVmProperties {
   @doc("Name to use in UI for this AVS VM.")
   @visibility("read")
   displayName?: string;
-  
+
   @doc("Unix Timestamp when AVS VM was created (in seconds).")
   @visibility("read")
   createdTimestamp?: int64;
-  
+
   @doc("Shows if Resource is destroyed and when eradication will happen.")
   @visibility("read", "update")
   softDeletion?: SoftDeletion;
@@ -400,7 +397,6 @@ model AvsVmProperties  {
 
 @doc("AVS VM details.")
 model AvsVmDetails {
-
   @doc("VMware VM id using this set of volumes.")
   vmId: string;
 
@@ -416,25 +412,29 @@ model AvsVmDetails {
 
 @doc("Enum of possible VM types.")
 enum VmType {
+  @doc("vvol Vm Type.")
   vVol: "vvol",
 }
 
 @doc("Enum of possible Volume container types.")
 enum VolumeContainerType {
+  @doc("Azure Volume Container Type.")
   Azure: "azure",
+
+  @doc("AVS Volume Container Type.")
   AVS: "avs",
 }
 
 @armResourceOperations
-interface AvsVMs {
-  update is ArmResourcePatchAsync<AvsVM, AvsVmProperties>;
-  get is ArmResourceRead<AvsVM>;
-  delete is ArmResourceDeleteWithoutOkAsync<AvsVM>;
-  listByParent is ArmResourceListByParent<AvsVM>;
+interface AvsVms {
+  update is ArmResourcePatchAsync<AvsVm, AvsVmProperties>;
+  get is ArmResourceRead<AvsVm>;
+  delete is ArmResourceDeleteWithoutOkAsync<AvsVm>;
+  listByParent is ArmResourceListByParent<AvsVm>;
 }
 
 @doc("The AVS VM Volume resource type.")
-@parentResource(AvsVM)
+@parentResource(AvsVm)
 model AvsVmVolume is ProxyResource<VolumeProperties> {
   @doc("Name of the AVS VM Volume.")
   @segment("avsVmVolumes")

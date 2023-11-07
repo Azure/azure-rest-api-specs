@@ -54,7 +54,7 @@
       "name": "AvsStorageContainerVolumes"
     },
     {
-      "name": "AvsVMs"
+      "name": "AvsVms"
     },
     {
       "name": "AvsVmVolumes"
@@ -1355,11 +1355,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/avsVms": {
       "get": {
-        "operationId": "AvsVMs_ListByStoragePool",
+        "operationId": "AvsVms_ListByStoragePool",
         "tags": [
-          "AvsVMs"
+          "AvsVms"
         ],
-        "description": "List AvsVM resources by StoragePool",
+        "description": "List AvsVm resources by StoragePool",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1385,7 +1385,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AvsVMListResult"
+              "$ref": "#/definitions/AvsVmListResult"
             }
           },
           "default": {
@@ -1396,8 +1396,8 @@
           }
         },
         "x-ms-examples": {
-          "AvsVMs_ListByStoragePool": {
-            "$ref": "./examples/AvsVMs_ListByStoragePool_MaximumSet_Gen.json"
+          "AvsVms_ListByStoragePool": {
+            "$ref": "./examples/AvsVms_ListByStoragePool_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1407,11 +1407,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/avsVms/{avsVmName}": {
       "get": {
-        "operationId": "AvsVMs_Get",
+        "operationId": "AvsVms_Get",
         "tags": [
-          "AvsVMs"
+          "AvsVms"
         ],
-        "description": "Get a AvsVM",
+        "description": "Get a AvsVm",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1447,7 +1447,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AvsVM"
+              "$ref": "#/definitions/AvsVm"
             }
           },
           "default": {
@@ -1458,17 +1458,17 @@
           }
         },
         "x-ms-examples": {
-          "AvsVMs_Get": {
-            "$ref": "./examples/AvsVMs_Get_MaximumSet_Gen.json"
+          "AvsVms_Get": {
+            "$ref": "./examples/AvsVms_Get_MaximumSet_Gen.json"
           }
         }
       },
       "patch": {
-        "operationId": "AvsVMs_Update",
+        "operationId": "AvsVms_Update",
         "tags": [
-          "AvsVMs"
+          "AvsVms"
         ],
-        "description": "Update a AvsVM",
+        "description": "Update a AvsVm",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1505,7 +1505,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AvsVMUpdate"
+              "$ref": "#/definitions/AvsVmUpdate"
             }
           }
         ],
@@ -1513,7 +1513,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AvsVM"
+              "$ref": "#/definitions/AvsVm"
             }
           },
           "202": {
@@ -1538,8 +1538,8 @@
           }
         },
         "x-ms-examples": {
-          "AvsVMs_Update": {
-            "$ref": "./examples/AvsVMs_Update_MaximumSet_Gen.json"
+          "AvsVms_Update": {
+            "$ref": "./examples/AvsVms_Update_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1548,11 +1548,11 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "AvsVMs_Delete",
+        "operationId": "AvsVms_Delete",
         "tags": [
-          "AvsVMs"
+          "AvsVms"
         ],
-        "description": "Delete a AvsVM",
+        "description": "Delete a AvsVm",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1610,8 +1610,8 @@
           }
         },
         "x-ms-examples": {
-          "AvsVMs_Delete": {
-            "$ref": "./examples/AvsVMs_Delete_MaximumSet_Gen.json"
+          "AvsVms_Delete": {
+            "$ref": "./examples/AvsVms_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1626,7 +1626,7 @@
         "tags": [
           "AvsVmVolumes"
         ],
-        "description": "List AvsVmVolume resources by AvsVM",
+        "description": "List AvsVmVolume resources by AvsVm",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2083,15 +2083,18 @@
         "values": [
           {
             "name": "Info",
-            "value": "info"
+            "value": "info",
+            "description": "Information level."
           },
           {
             "name": "Warning",
-            "value": "warning"
+            "value": "warning",
+            "description": "Warning level."
           },
           {
             "name": "Error",
-            "value": "error"
+            "value": "error",
+            "description": "Error level."
           }
         ]
       }
@@ -2276,7 +2279,7 @@
         }
       }
     },
-    "AvsVM": {
+    "AvsVm": {
       "type": "object",
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
@@ -2295,51 +2298,6 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "AvsVMListResult": {
-      "type": "object",
-      "description": "The response of a AvsVM list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AvsVM items on this page",
-          "items": {
-            "$ref": "#/definitions/AvsVM"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AvsVMUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the AvsVM.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AvsVMUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AvsVMUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the AvsVM.",
-      "properties": {
-        "softDeletion": {
-          "$ref": "#/definitions/SoftDeletionUpdate",
-          "description": "Shows if Resource is destroyed and when eradication will happen.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        }
-      }
     },
     "AvsVmDetails": {
       "type": "object",
@@ -2367,6 +2325,27 @@
         "vmName",
         "vmType",
         "avsVmInternalId"
+      ]
+    },
+    "AvsVmListResult": {
+      "type": "object",
+      "description": "The response of a AvsVm list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AvsVm items on this page",
+          "items": {
+            "$ref": "#/definitions/AvsVm"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "AvsVmProperties": {
@@ -2406,6 +2385,30 @@
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
+        }
+      }
+    },
+    "AvsVmUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the AvsVm.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AvsVmUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AvsVmUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the AvsVm.",
+      "properties": {
+        "softDeletion": {
+          "$ref": "#/definitions/SoftDeletionUpdate",
+          "description": "Shows if Resource is destroyed and when eradication will happen.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         }
       }
     },
@@ -3174,7 +3177,8 @@
         "values": [
           {
             "name": "vVol",
-            "value": "vvol"
+            "value": "vvol",
+            "description": "vvol Vm Type."
           }
         ]
       }
@@ -3205,11 +3209,13 @@
         "values": [
           {
             "name": "Azure",
-            "value": "azure"
+            "value": "azure",
+            "description": "Azure Volume Container Type."
           },
           {
             "name": "AVS",
-            "value": "avs"
+            "value": "avs",
+            "description": "AVS Volume Container Type."
           }
         ]
       }
@@ -3275,6 +3281,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
           "readOnly": true
         }
       },
@@ -3295,11 +3302,13 @@
         "values": [
           {
             "name": "Azure",
-            "value": "azure"
+            "value": "azure",
+            "description": "Azure Volume Type."
           },
           {
             "name": "AVS",
-            "value": "avs"
+            "value": "avs",
+            "description": "AVS Volume Type."
           }
         ]
       }
