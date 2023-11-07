@@ -175,7 +175,7 @@ interface JobRouterOperations {
   @summary("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
   @doc("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
   @route("/routing")
-  @projectedName("python", "cancelJob")
+  @projectedName("clients", "cancelJob")
   cancel is Operations.ResourceAction<
     RouterJob,
     {
