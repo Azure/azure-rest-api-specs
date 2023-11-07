@@ -77,9 +77,9 @@
                     "type": "object",
                     "description": "A single, role-attributed message within a chat completion interaction.",
                     "properties": {
-                      "content": {
-                        "type": "string",
-                        "description": "The text associated with the message."
+                      "kind": {
+                        "$ref": "#/definitions/MessageKind",
+                        "description": "The type of the message. If not specified, the message is assumed to be text."
                       },
                       "role": {
                         "$ref": "#/definitions/ChatRole",
@@ -89,8 +89,8 @@
                         "description": "Field that allows the chat app to store and retrieve data, the structure of such data is dependant on the backend\nbeing used. The client must send back the data in this field unchanged in subsequent requests, until the chat app\nsends a new one. The data in this field can be used to implement stateful services, such as remembering previous\nconversations or user preferences."
                       }
                     },
+                    "discriminator": "kind",
                     "required": [
-                      "content",
                       "role"
                     ]
                   },
@@ -142,9 +142,9 @@
                         "type": "object",
                         "description": "The chat message for a given chat completion.",
                         "properties": {
-                          "content": {
-                            "type": "string",
-                            "description": "The text associated with the message."
+                          "kind": {
+                            "$ref": "#/definitions/MessageKind",
+                            "description": "The type of the message. If not specified, the message is assumed to be text."
                           },
                           "role": {
                             "$ref": "#/definitions/ChatRole",
@@ -154,8 +154,8 @@
                             "description": "Field that allows the chat app to store and retrieve data, the structure of such data is dependant on the backend\nbeing used. The client must send back the data in this field unchanged in subsequent requests, until the chat app\nsends a new one. The data in this field can be used to implement stateful services, such as remembering previous\nconversations or user preferences."
                           }
                         },
+                        "discriminator": "kind",
                         "required": [
-                          "content",
                           "role"
                         ]
                       },
@@ -246,6 +246,24 @@
             "name": "tokenLimitReached",
             "value": "length",
             "description": "The completion exhausted available tokens before generation could complete."
+          }
+        ]
+      }
+    },
+    "MessageKind": {
+      "type": "string",
+      "description": "Identifies the type of a message.",
+      "enum": [
+        "text"
+      ],
+      "x-ms-enum": {
+        "name": "MessageKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "The message context is text."
           }
         ]
       }

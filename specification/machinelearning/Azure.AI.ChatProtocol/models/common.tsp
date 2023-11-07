@@ -47,15 +47,32 @@ model StateProperty<TState> {
   sessionState?: TState;
 }
 
+@doc("Identifies the type of a message.")
+enum MessageKind
+{
+  @doc("The message context is text.")
+  text,
+}
+
 @doc("A single, role-attributed message within a chat completion interaction.")
+@discriminator("kind")
 model ChatMessage<TState> {
-  @doc("The text associated with the message.")
-  content: string;
+  @doc("The type of the message. If not specified, the message is assumed to be text.")
+  kind?: MessageKind;
 
   @doc("The role associated with the message.")
   role: ChatRole;
 
   ...StateProperty<TState>;
+}
+
+@doc("A single, role-attributed text message within a chat completion interaction.")
+model TextMessage<TState> extends ChatMessage<TState> {
+  @doc("The type of the message.")
+  kind: MessageKind.text;
+
+  @doc("The text associated with the message.")
+  content: string;
 }
 
 @doc("Parameter that describes the route of the operation to be performed.")
