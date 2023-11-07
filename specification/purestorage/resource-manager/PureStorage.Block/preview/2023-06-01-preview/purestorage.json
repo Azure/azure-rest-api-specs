@@ -2074,12 +2074,22 @@
         "folder": {
           "type": "string",
           "description": "Name of the top-level folder in which the Volume is located."
+        },
+        "avsVmInternalId": {
+          "type": "string",
+          "description": "VMware id assigned to the volume."
+        },
+        "avsStorageContainerName": {
+          "type": "string",
+          "description": "AVS storage container name that contains exact volume."
         }
       },
       "required": [
         "diskId",
         "diskName",
-        "folder"
+        "folder",
+        "avsVmInternalId",
+        "avsStorageContainerName"
       ]
     },
     "AvsStorageContainer": {
@@ -2337,7 +2347,7 @@
       "description": "The AVS VM Volume resource type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AvsVmVolumeProperties",
+          "$ref": "#/definitions/VolumeProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -2371,71 +2381,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "AvsVmVolumeProperties": {
-      "type": "object",
-      "description": "AVS VM Volume properties.",
-      "properties": {
-        "storagePoolInternalId": {
-          "type": "string",
-          "description": "Pure Storage's internal Id for the StoragePool.",
-          "readOnly": true
-        },
-        "volumeInternalId": {
-          "type": "string",
-          "description": "Pure Storage's internal Id for the Volume.",
-          "readOnly": true
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Human readable name for that Volume.",
-          "readOnly": true
-        },
-        "softDeletion": {
-          "$ref": "#/definitions/SoftDeletion",
-          "description": "Shows if Resource is destroyed and when eradication will happen.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        },
-        "createdTimestamp": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Unix Timestamp when Volume Group was created (in seconds).",
-          "readOnly": true
-        },
-        "provisionedSize": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Provisioned size of the volume, that is, how large the volume can grow. In bytes.",
-          "readOnly": true
-        },
-        "volumeType": {
-          "$ref": "#/definitions/VolumeType",
-          "description": "Which system is responsible for the lifecycle of that Volume.",
-          "readOnly": true
-        },
-        "avs": {
-          "$ref": "#/definitions/AvsDiskDetails",
-          "description": "AVS details.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "readOnly": true
-        },
-        "avsVmInternalId": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "softDeletion",
-        "createdTimestamp",
-        "provisionedSize",
-        "volumeType"
       ]
     },
     "AvsVmVolumeUpdate": {
@@ -2491,6 +2436,19 @@
           }
         ]
       }
+    },
+    "AzureProperties": {
+      "type": "object",
+      "description": "Azure Volume Group assigned to the volume.",
+      "properties": {
+        "volumeGroupInternalId": {
+          "type": "string",
+          "description": "Azure Volume Group ID assigned to the volume."
+        }
+      },
+      "required": [
+        "volumeGroupInternalId"
+      ]
     },
     "AzureVmwareService": {
       "type": "object",
@@ -3017,7 +2975,7 @@
       "type": "object",
       "description": "Properties of a Storage Pool resource.",
       "properties": {
-        "storagePooInternallId": {
+        "storagePooInternalId": {
           "type": "string",
           "description": "ID of StoragePool in Pure Storage systems.",
           "readOnly": true
@@ -3184,6 +3142,19 @@
         ]
       }
     },
+    "VolumeConsistencyGroup": {
+      "type": "object",
+      "description": "Consistency Group the Volume belongs to.",
+      "properties": {
+        "consistencyGroupId": {
+          "type": "string",
+          "description": "Internal ID for the Consistency Group the Volume belongs to."
+        }
+      },
+      "required": [
+        "consistencyGroupId"
+      ]
+    },
     "VolumeContainerType": {
       "type": "string",
       "description": "Enum of possible Volume container types.",
@@ -3233,6 +3204,11 @@
             "update"
           ]
         },
+        "consistencyGroup": {
+          "$ref": "#/definitions/VolumeConsistencyGroup",
+          "description": "Consistency Group the Volume belongs to.",
+          "readOnly": true
+        },
         "createdTimestamp": {
           "type": "integer",
           "format": "int64",
@@ -3255,16 +3231,18 @@
           "description": "AVS details.",
           "readOnly": true
         },
+        "azure": {
+          "$ref": "#/definitions/AzureProperties",
+          "description": "Azure Volume Group assigned to the volume.",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "readOnly": true
         }
       },
       "required": [
-        "softDeletion",
-        "createdTimestamp",
-        "provisionedSize",
-        "volumeType"
+        "softDeletion"
       ]
     },
     "VolumeType": {

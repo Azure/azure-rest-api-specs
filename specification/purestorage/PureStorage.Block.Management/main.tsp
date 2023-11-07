@@ -48,7 +48,7 @@ model StoragePool is TrackedResource<StoragePoolProperties> {
 model StoragePoolProperties {
   @doc("ID of StoragePool in Pure Storage systems.")
   @visibility("read")
-  storagePooInternallId?: string;
+  storagePooInternalId?: string;
 
   @doc("Azure Availability Zone the Pool is located in.")
   @visibility("read", "create")
@@ -256,33 +256,37 @@ model VolumeProperties {
 
   @doc("Human readable name for that Volume.")
   @visibility("read")
-  displayName?: string; // TODO: how is it decided if read-only
+  displayName?: string;
 
   @doc("Shows if Resource is destroyed and when eradication will happen.")
   @visibility("read", "update")
   softDeletion: SoftDeletion;
 
-  //consistencyGroup?: VolumeConsistencyGroup; // TODO: check with partner
+  @doc("Consistency Group the Volume belongs to.")
+  @visibility("read")
+  consistencyGroup?: VolumeConsistencyGroup;
 
   @doc("Unix Timestamp when Volume Group was created (in seconds).")
   @visibility("read")
-  createdTimestamp: int64; // TODO: I don't think this is required here.
+  createdTimestamp?: int64;
   
   @doc("Provisioned size of the volume, that is, how large the volume can grow. In bytes.")
   @visibility("read")
-  provisionedSize: int64; // TODO: I think this read-only property.
+  provisionedSize?: int64;
   
   @doc("Which system is responsible for the lifecycle of that Volume.")
   @visibility("read")
-  volumeType: VolumeType;
+  volumeType?: VolumeType;
 
   @doc("AVS details.")
   @visibility("read")
   avs?: AvsDiskDetails;
 
-  //@visibility("read")
-  //azure?: AzureProperties; // TODO: remove this
+  @doc("Azure Volume Group assigned to the volume.")
+  @visibility("read")
+  azure?: AzureProperties;
 
+  // TODO: check if it is required since only update/read is allowed
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
 }
@@ -303,9 +307,12 @@ model SoftDeletion {
   previousVolumeResourceId?: string;
 }
 
-/*model VolumeConsistencyGroup {
+@doc("Consistency Group the Volume belongs to.")
+model VolumeConsistencyGroup {
+
+  @doc("Internal ID for the Consistency Group the Volume belongs to.")
   consistencyGroupId: string;
-}*/
+}
 
 @doc("Enum of possible Volume types.")
 enum VolumeType {
@@ -325,13 +332,19 @@ model AvsDiskDetails {
   @doc("Name of the top-level folder in which the Volume is located.")
   folder: string;
 
-  //avsInternalId: string; // TODO: I don't think this is required here.
-  //avsStorageContainerName: string; // TODO: I don't think this is required here - implicit from the path.
+  @doc("VMware id assigned to the volume.")
+  avsVmInternalId: string;
+  
+  @doc("AVS storage container name that contains exact volume.")
+  avsStorageContainerName: string;
 }
 
-/*model AzureProperties {
+@doc("Azure Volume Group assigned to the volume.")
+model AzureProperties {
+  
+  @doc("Azure Volume Group ID assigned to the volume.")
   volumeGroupInternalId: string;
-}*/
+}
 
 @armResourceOperations
 interface AvsStorageContainerVolumes {
@@ -359,7 +372,7 @@ model AvsVmProperties  {
   
   @doc("Name to use in UI for this AVS VM.")
   @visibility("read")
-  displayName?: string; // TODO: how is this set if read-only?
+  displayName?: string;
   
   @doc("Unix Timestamp when AVS VM was created (in seconds).")
   @visibility("read")
@@ -395,7 +408,7 @@ model AvsVmDetails {
   vmType: VmType;
 
   @doc("Pure Storage's internal Id for this AVS VM.")
-  avsVmInternalId: string; // TODO: shouldn't this be in AVS VM properties.
+  avsVmInternalId: string;
 }
 
 @doc("Enum of possible VM types.")
@@ -419,7 +432,7 @@ interface AvsVMs {
 
 @doc("The AVS VM Volume resource type.")
 @parentResource(AvsVM)
-model AvsVmVolume is ProxyResource<AvsVmVolumeProperties> {
+model AvsVmVolume is ProxyResource<VolumeProperties> {
   @doc("Name of the AVS VM Volume.")
   @segment("avsVmVolumes")
   @key("avsVmVolumeName")
@@ -431,16 +444,9 @@ model AvsVmVolume is ProxyResource<AvsVmVolumeProperties> {
   name: string;
 }
 
-@doc("AVS VM Volume properties.")
-model AvsVmVolumeProperties is VolumeProperties {
-  //volumeGroupId: string; 
-  @visibility("read")
-  avsVmInternalId?: string;
-}
-
 @armResourceOperations
 interface AvsVmVolumes {
-  update is ArmResourcePatchAsync<AvsVmVolume, AvsVmVolumeProperties>;
+  update is ArmResourcePatchAsync<AvsVmVolume, VolumeProperties>;
   get is ArmResourceRead<AvsVmVolume>;
   delete is ArmResourceDeleteAsync<AvsVmVolume>;
   listByParent is ArmResourceListByParent<AvsVmVolume>;
