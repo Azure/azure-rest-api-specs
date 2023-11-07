@@ -10,6 +10,7 @@ This is the AutoRest configuration file for Databricks.
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2023-09-15-preview
   - tag: package-2023-02-01
   - tag: package-2022-04-01-preview
   - tag: package-2021-04-01-preview
@@ -17,16 +18,19 @@ batch:
   - tag: package-2023-05-01
 ```
 
+### Tag: package-2023-09-15-preview and java
 
-### Tag: package-preview-2023-09
+These settings apply only when `--tag=package-2023-09-15-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-09'
-input-file:
-  - Microsoft.Databricks/preview/2023-09-15-preview/databricks.json
-  - Microsoft.Databricks/preview/2023-09-15-preview/vnetpeering.json
+``` yaml $(tag) == 'package-2023-09-15-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databricks.v2023_09_15_preview	
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databricks/mgmt-v2023_09_15_preview
+regenerate-manager: true
+generate-interface: true
 ```
+
 ### Tag: package-2023-05-01 and java
 
 These settings apply only when `--tag=package-2023-05-01 --java` is specified on the command line.
@@ -167,6 +171,17 @@ These settings apply only when `--tag=package-2023-05-01` is specified on the co
 input-file:
 - Microsoft.Databricks/stable/2023-02-01/databricks.json
 - Microsoft.Databricks/stable/2023-02-01/vnetpeering.json
+- Microsoft.Databricks/stable/2023-05-01/accessconnector.json
+```
+
+### Tag: package-2023-09-15-preview
+
+These settings apply only when `--tag=package-2023-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09-15-preview'
+input-file:
+- Microsoft.Databricks/preview/2023-09-15-preview/databricks.json
+- Microsoft.Databricks/preview/2023-09-15-preview/vnetpeering.json
 - Microsoft.Databricks/stable/2023-05-01/accessconnector.json
 ```
 
