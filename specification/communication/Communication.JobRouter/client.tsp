@@ -101,7 +101,7 @@ interface JobRouterRestClient {
   @internal("csharp")
   @internal("python")
   @internal("java")
-  cancelJob is AzureCommunicationRoutingService.JobRouterOperations.cancel;
+  cancel is AzureCommunicationRoutingService.JobRouterOperations.cancel;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
