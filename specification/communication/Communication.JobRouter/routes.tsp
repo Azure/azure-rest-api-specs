@@ -153,6 +153,7 @@ interface JobRouterOperations {
   @summary("Reclassify a job.")
   @doc("Reclassify a job.")
   @route("/routing")
+  @projectedName("client", "reclassifyJob")
   reclassify is Operations.ResourceAction<
     RouterJob,
     {
@@ -175,6 +176,7 @@ interface JobRouterOperations {
   @summary("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
   @doc("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
   @route("/routing")
+  @projectedName("client", "cancelJob")
   cancel is Operations.ResourceAction<
     RouterJob,
     {
@@ -189,6 +191,7 @@ interface JobRouterOperations {
   @summary("Completes an assigned job.")
   @doc("Completes an assigned job.")
   @route("/routing")
+  @projectedName("client", "completeJob")
   complete is Operations.ResourceAction<
     RouterJobAssignment,
     {
@@ -203,6 +206,7 @@ interface JobRouterOperations {
   @summary("Closes a completed job.")
   @doc("Closes a completed job.")
   @route("/routing")
+  @projectedName("client", "closeJob")
   close is Operations.ResourceAction<
     RouterJobAssignment,
     {
@@ -237,6 +241,7 @@ interface JobRouterOperations {
   @summary("Un-assign a job.")
   @doc("Un-assign a job.")
   @route("/routing")
+  @projectedName("client", "unassignJob")
   unassign is Operations.ResourceAction<
     RouterJobAssignment,
     {
@@ -251,12 +256,14 @@ interface JobRouterOperations {
   @summary("Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.")
   @doc("Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.")
   @route("/routing")
+  @projectedName("client", "acceptJobOffer")
   accept is Operations.ResourceAction<RouterJobOffer, {}, AcceptJobOfferResult>;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Codegen cannot import prefixes from namespace"
   @summary("Declines an offer to work on a job.")
   @doc("Declines an offer to work on a job.")
   @route("/routing")
+  @projectedName("client", "declineJobOffer")
   decline is Operations.ResourceAction<
     RouterJobOffer,
     {
