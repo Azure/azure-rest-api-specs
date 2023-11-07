@@ -11,13 +11,15 @@ model LogCollection {
   /** The log collection id. */
   @key
   @path
-  @visibility("read")
+  @visibility("read", "create")
   operationId: string;
 
   /** Array of Device Update agent ids */
+  @visibility("read", "create")
   deviceList: DeviceUpdateAgentId[];
 
   /** Description of the diagnostics operation. */
+  @visibility("read", "create")
   description?: string;
 
   /** The timestamp when the operation was created. */

@@ -12,3 +12,7 @@ namespace Customizations;
 @@client(Azure.IoT.DeviceUpdate.DeviceManagementOperations, {
   name: "DeviceManagementClient",
 });
+
+@@client(Azure.IoT.DeviceUpdate.InstanceManagementOperations, {
+  name: "InstanceManagementClient",
+});

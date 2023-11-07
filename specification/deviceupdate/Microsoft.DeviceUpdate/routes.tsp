@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 import "./parameters.tsp";
 import "./models-compliance.tsp";
 import "./models-deployment.tsp";
@@ -13,7 +12,6 @@ import "./models-update.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Azure.Core.Traits;
 
@@ -25,9 +23,6 @@ alias ServiceTraits = SupportsClientRequestId &
 
 alias ServiceOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-@client({
-  name: "DeviceUpdateClient",
-})
 interface DeviceUpdateOperations {
   /** Get a list of all updates that have been imported to Device Update for IoT Hub. */
   listUpdates is ServiceOperations.ResourceList<
@@ -60,6 +55,7 @@ interface DeviceUpdateOperations {
    * Operation-Location response header value to check for operation status.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO doesn't return status monitor in 202 resposne body."
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior."
   @pollingOperation(DeviceUpdateOperations.getOperationStatus)
   @route("updates:import")
   @post
@@ -84,6 +80,7 @@ interface DeviceUpdateOperations {
    * Operation-Location response header value to check for operation status.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO doesn't return status monitor in 202 resposne body."
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior."
   @pollingOperation(DeviceUpdateOperations.getOperationStatus)
   @route("updates/providers/{provider}/names/{name}/versions/{version}")
   @delete
@@ -202,9 +199,6 @@ interface DeviceUpdateOperations {
   >;
 }
 
-@client({
-  name: "DeviceManagementClient",
-})
 interface DeviceManagementOperations {
   /**
    * Gets a list of all device classes (sets of devices compatible with the same
@@ -223,7 +217,6 @@ interface DeviceManagementOperations {
   /** Gets the properties of a device class. */
   getDeviceClass is ServiceOperations.ResourceRead<DeviceClass>;
 
-  // TODO: this doesn't generate request body, and we also need to restrict which prop can be patched.
   /** Update device class details. */
   updateDeviceClass is ServiceOperations.ResourceUpdate<DeviceClass>;
 
@@ -269,6 +262,7 @@ interface DeviceManagementOperations {
    * Operation-Location response header value to check for operation status.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO doesn't return status monitor in 202 response body."
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior."
   @pollingOperation(DeviceManagementOperations.getOperationStatus)
   @route("management/devices:import")
   @post
@@ -320,10 +314,7 @@ interface DeviceManagementOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
   @route("management/updateCompliance")
   @get
-  getUpdateCompliance is Azure.Core.Foundations.Operation<
-    {},
-    UpdateCompliance
-  >;
+  getUpdateCompliance is Azure.Core.Foundations.Operation<{}, UpdateCompliance>;
 
   /** Gets a list of all device groups.  The $default group will always be returned first. */
   listGroups is ServiceOperations.ResourceList<
@@ -568,12 +559,15 @@ interface DeviceManagementOperations {
   /** Get the device diagnostics log collection */
   getLogCollection is ServiceOperations.ResourceRead<LogCollection>;
 
+  // TODO: Is there ResourceCreateOnly?
   /** Start the device diagnostics log collection on specified devices. */
-  startLogCollection is ServiceOperations.ResourceCreateOrReplace<LogCollection>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name."
+  startLogCollection is ServiceOperations.ResourceCreateOrUpdate<LogCollection>;
 
   /** Get log collection with detailed status */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
   @route("management/deviceDiagnostics/logCollections/{operationId}/detailedStatus")
+  @get
   getLogCollectionDetailedStatus is Azure.Core.Foundations.Operation<
     {
       ...Azure.Core.Foundations.ItemKeysOf<LogCollection>;
@@ -597,10 +591,11 @@ interface DeviceManagementOperations {
 
 interface InstanceManagementOperations {
   /**
-Gets the instance limits for active deployments, devices, device classes, and
-groups.
-*/
-  // @route("limits")
-  // @get
-  // getLimits is ServiceOperations.ResourceRead<Limits>;
+   * Gets the instance limits for active deployments, devices, device classes, and
+   * groups.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
+  @route("limits")
+  @get
+  getLimits is Azure.Core.Foundations.Operation<{}, Limits>;
 }

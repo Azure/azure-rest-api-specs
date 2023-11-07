@@ -5,9 +5,6 @@ using TypeSpec.Http;
 
 namespace Azure.IoT.DeviceUpdate;
 
-/** The list of device classes. */
-//model DeviceClassesList is Azure.Core.Page<DeviceClass>;
-
 /** Device class metadata. */
 @resource("management/deviceClasses")
 model DeviceClass {
@@ -25,12 +22,15 @@ model DeviceClass {
    * The device class friendly name. This can be updated by callers after the device
    * class has been automatically created.
    */
+  @visibility("read", "update")
   friendlyName?: string;
 
   /** The device class properties that are used to calculate the device class Id */
+  @visibility("read")
   deviceClassProperties: DeviceClassProperties;
 
   /** Update that is the highest version compatible with this device class. */
+  @visibility("read")
   bestCompatibleUpdate?: UpdateInfo;
 }
 

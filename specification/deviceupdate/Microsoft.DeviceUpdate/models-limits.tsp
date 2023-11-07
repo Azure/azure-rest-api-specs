@@ -13,7 +13,7 @@ model Limits {
   /**
    * The list of current counts of each limited resource and the maximum quota that are allowed.
    */
-  counters?: Counters;
+  counters: Counters;
 }
 
 /**
@@ -21,26 +21,26 @@ model Limits {
  */
 model Counters {
   /** The current usage and quota of devices. */
-  deviceCount?: UsageQuotaCounter;
+  deviceCount: UsageQuotaCounter;
 
   /** The current usage and quota of device classes. */
-  deviceClassCount?: UsageQuotaCounter;
+  deviceClassCount: UsageQuotaCounter;
 
   /** The current usage and quota of device groups. */
-  deviceGroupCount?: UsageQuotaCounter;
+  deviceGroupCount: UsageQuotaCounter;
 
   /** The current usage and quota of active deployments. */
-  activeDeploymentCount?: UsageQuotaCounter;
+  activeDeploymentCount: UsageQuotaCounter;
 
   /** The current usage and quota of deployments. */
-  deploymentCount?: UsageQuotaCounter;
+  deploymentCount: UsageQuotaCounter;
 }
 
 /** A counter with both usage and quota information. */
 model UsageQuotaCounter {
   /** The current number of the resource that exist */
-  usage?: int32;
+  usage: int32;
 
   /** The maximum number of the resource that can be created */
-  quota?: int32;
+  quota: int32;
 }

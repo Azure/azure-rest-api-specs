@@ -22,12 +22,15 @@ model Deployment {
   deploymentId: string;
 
   /** The deployment start datetime. */
+  @visibility("read", "create")
   startDateTime: utcDateTime;
 
   /** Update information for the update in the deployment. */
+  @visibility("read", "create")
   update: UpdateInfo;
 
   /** The group identity for the devices the deployment is intended to update. */
+  @visibility("read", "create")
   groupId: string;
 
   /**
@@ -35,18 +38,23 @@ model Deployment {
    * deployments have been created for. This is not provided by the caller during
    * CreateOrUpdateDeployment but is automatically determined by Device Update
    */
+  @visibility("read")
   deviceClassSubgroups?: string[];
 
   /** Boolean flag indicating whether the deployment was canceled. */
+  @visibility("read")
   isCanceled?: boolean;
 
   /** Boolean flag indicating whether the deployment has been retried. */
+  @visibility("read")
   isRetried?: boolean;
 
   /** The rollback policy for the deployment. */
+  @visibility("read", "create")
   rollbackPolicy?: CloudInitiatedRollbackPolicy;
 
   /** Boolean flag indicating whether the deployment is a rollback deployment. */
+  @visibility("read")
   isCloudInitiatedRollback?: boolean;
 }
 

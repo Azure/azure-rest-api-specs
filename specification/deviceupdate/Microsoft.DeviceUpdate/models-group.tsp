@@ -78,10 +78,9 @@ model DeviceClassSubgroup {
 }
 
 /** The list of updatable devices for a device class subgroup. */
-model DeviceClassSubgroupUpdatableDevicesList
-  is Azure.Core.Page<DeviceClassSubgroupUpdatableDevices>;
+model DeviceClassSubgroupUpdatableDevicesList is Azure.Core.Page<DeviceClassSubgroupUpdatableDevices>;
 
-/** Device class subgroup, update information, and the number of devices for which the update is applicable.*/
+/** Device class subgroup, update information, and the number of devices for which the update is applicable. */
 model DeviceClassSubgroupUpdatableDevices {
   /** The group Id */
   groupId: string;
