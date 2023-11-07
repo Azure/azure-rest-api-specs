@@ -350,10 +350,71 @@
           "type": "string",
           "readOnly": true,
           "description": "The mobile network resource identifier"
+        },
+        "publicLandMobileNetworkIdentifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/publicLandMobileNetworkIdentifier"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "A list of public land mobile network identifiers. This is made up of the mobile country code and mobile network code, as defined in https://www.itu.int/rec/T-REC-E.212. The values 001-01 and 001-001 can be used for testing and the values 999-99 and 999-999 can be used on internal private networks. Each identifier can optionally include a list of home network public keys for encrypting SUPIs.",
+          "x-ms-identifiers": [
+            "mcc",
+            "mnc"
+          ]
         }
       },
       "required": [
         "publicLandMobileNetworkIdentifier"
+      ]
+    },
+    "publicLandMobileNetworkIdentifier": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "homeNetworkPublicKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/homeNetworkPublicKey"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "",
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "allOf": [
+          {
+            "$ref": "./ts29571.json#/definitions/PlmnId"
+          }
+        ]
+      }
+    },
+    "homeNetworkPublicKey": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 255,
+          "description": "The Home Network Public Key Identifier determines which public key was used to generate the Protection Scheme Output."
+        },
+        "keyUrl": {
+          "type": "string",
+          "description": "The URL of the secret containing the private key, unversioned. For example: https://contosovault.vault.azure.net/secrets/mySuciPrivateKey."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Home Network Public Keys."
+        }
+      },
+      "required": [
+        "id",
+        "publicKey"
       ]
     },
     "MobileNetworkListResult": {
