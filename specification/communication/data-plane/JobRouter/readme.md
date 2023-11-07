@@ -29,6 +29,14 @@ openapi-type: data-plane
 tag: package-jobrouter-2023-11-01
 ```
 
+### Suppression
+``` yaml
+suppressions:
+  - code: ValidFormats
+    # where: $.definitions.Azure.Core.eTag.format
+    reason: eTag should be an allowed format
+```
+
 ### Tag: package-jobrouter-2023-11-01
 
 These settings apply only when `--tag=package-jobrouter-2023-11-01` is specified on the command line.
