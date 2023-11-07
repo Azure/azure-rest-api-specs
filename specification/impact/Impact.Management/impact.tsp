@@ -10,11 +10,11 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({title:"Microsoft.Impact"})
+@service({
+  title: "Microsoft.Impact",
+})
 @versioned(Versions)
 namespace Microsoft.Impact;
-
-
 
 @doc("API Versions")
 enum Versions {

@@ -1,11 +1,8 @@
-
-
 import "@typespec/openapi";
 import "@typespec/rest";
 
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-
 
 namespace Microsoft.Impact;
 
@@ -14,7 +11,6 @@ using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-
 
 @doc("Workload Impact properties")
 @subscriptionResource
@@ -28,12 +24,8 @@ model WorkloadImpact is ProxyResource<WorkloadImpactProperties> {
   name: string;
 }
 
-
-
-
 @doc("Workload impact properties")
-model WorkloadImpactProperties is ResourceProperties{
-
+model WorkloadImpactProperties is ResourceProperties {
   @doc("Time at which impact was observed ")
   startDateTime: utcDateTime;
 
@@ -50,7 +42,7 @@ model WorkloadImpactProperties is ResourceProperties{
 
   @doc("Time at which impact is reported")
   @visibility("read")
-  reportedTimeUtc? :utcDateTime;
+  reportedTimeUtc?: utcDateTime;
 
   @doc("Category of the impact,  details can found from /impactCategories API")
   impactCategory: string;
@@ -73,7 +65,7 @@ model WorkloadImpactProperties is ResourceProperties{
   additionalProperties?: {};
 
   @doc("ARM error code and error message associated with the impact")
-  errorDetails?:ErrorDetailProperties;
+  errorDetails?: ErrorDetailProperties;
 
   @doc("Information about the impacted workload")
   workload?: Workload;
@@ -90,7 +82,6 @@ model WorkloadImpactProperties is ResourceProperties{
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
 @armResourceOperations
 interface WorkloadImpacts {
@@ -98,5 +89,4 @@ interface WorkloadImpacts {
   get is ArmResourceRead<WorkloadImpact>;
   delete is ArmResourceDeleteSync<WorkloadImpact>;
   listBySubscription is ArmListBySubscription<WorkloadImpact>;
-
 }

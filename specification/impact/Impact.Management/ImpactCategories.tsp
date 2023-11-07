@@ -12,9 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-
 namespace Microsoft.Impact;
-
 
 @doc("ImpactCategory resource")
 @subscriptionResource
@@ -25,14 +23,11 @@ model ImpactCategory is ProxyResource<ImpactCategoryProperties> {
   @doc("Name of the impact category")
   @visibility("Read")
   @path
-  name: string;  
+  name: string;
 }
 
-
-
 @doc("Impact category properties.")
-model ImpactCategoryProperties is ResourceProperties{
-
+model ImpactCategoryProperties is ResourceProperties {
   @doc("Unique ID of the category")
   @pattern("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}")
   categoryId: string;
@@ -42,31 +37,30 @@ model ImpactCategoryProperties is ResourceProperties{
   parentCategoryId?: string;
 
   @doc("Description of the category")
-  description? : string;
+  description?: string;
 
   @doc("The workloadImpact properties which are required when reporting with the impact category")
-  @extension("x-ms-identifiers",[])
-  requiredImpactProperties?:RequiredImpactProperties[];
+  @extension("x-ms-identifiers", [])
+  requiredImpactProperties?: RequiredImpactProperties[];
 }
 
 @doc("Required impact properties")
-model RequiredImpactProperties{
-@doc("Name of the property")
-name: string;
-@doc("Allowed values values for the property")
-allowedValues? : string[];
+model RequiredImpactProperties {
+  @doc("Name of the property")
+  name: string;
+
+  @doc("Allowed values values for the property")
+  allowedValues?: string[];
 }
-
-
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
 @armResourceOperations
-interface ImpactCategories  {
-  get  is ArmResourceRead<ImpactCategory>;
+interface ImpactCategories {
+  get is ArmResourceRead<ImpactCategory>;
 
   //listBySubscription is ArmListBySubscription<ImpactCategory>;
 
-    listBySubscription is ArmResourceListByParent<
+  listBySubscription is ArmResourceListByParent<
     ImpactCategory,
     BaseParameters<ImpactCategory> & CustomParameters
   >;
@@ -85,4 +79,3 @@ model CustomParameters {
   @doc("Filter by resource type")
   resourceType?: string;
 }
-

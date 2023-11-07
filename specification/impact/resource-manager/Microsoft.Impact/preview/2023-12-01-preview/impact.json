@@ -106,12 +106,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "impactInfo",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/insightDetails"
-            }
+            "$ref": "#/parameters/InsightCustomResourceCommonParameters.impactInfo"
           }
         ],
         "responses": {
@@ -762,7 +757,24 @@
       ],
       "x-ms-enum": {
         "name": "ConfidenceLevel",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low confidence on azure being the source of impact"
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium confidence on azure being the source of impact"
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High confidence on azure being the source of impact"
+          }
+        ]
       }
     },
     "Connectivity": {
@@ -861,11 +873,13 @@
           },
           {
             "name": "Performance",
-            "value": "Performance"
+            "value": "Performance",
+            "description": "Performance category"
           },
           {
             "name": "Other",
-            "value": "Other"
+            "value": "Other",
+            "description": "Other category"
           }
         ]
       }
@@ -998,7 +1012,34 @@
       ],
       "x-ms-enum": {
         "name": "IncidentSource",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureDevops",
+            "value": "AzureDevops",
+            "description": "When source of Incident is AzureDevops"
+          },
+          {
+            "name": "ICM",
+            "value": "ICM",
+            "description": "When source of Incident is Microsoft ICM"
+          },
+          {
+            "name": "Jira",
+            "value": "Jira",
+            "description": "When source of Incident is Jira"
+          },
+          {
+            "name": "ServiceNow",
+            "value": "ServiceNow",
+            "description": "When source of Incident is ServiceNow"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "When source of Incident is Other"
+          }
+        ]
       }
     },
     "Insight": {
@@ -1021,36 +1062,15 @@
         }
       ]
     },
-    "InsightCustomResourceCommonParameters": {
+    "InsightDetails": {
       "type": "object",
-      "description": "context of post call for insight",
+      "description": "Body of the get all insights",
       "properties": {
-        "apiVersion": {
+        "azureResourceId": {
           "type": "string",
-          "description": "The API version to use for this operation.",
-          "minLength": 1
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "The ID of the target subscription.",
-          "minLength": 1
-        },
-        "provider": {
-          "type": "string",
-          "description": "The provider namespace for the resource.",
-          "enum": [
-            "Microsoft.Impact"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "description": "The ID of the azure resource."
         }
-      },
-      "required": [
-        "apiVersion",
-        "subscriptionId",
-        "provider"
-      ]
+      }
     },
     "InsightListResult": {
       "type": "object",
@@ -1086,9 +1106,9 @@
           "type": "string",
           "description": "summary of the insight."
         },
-        "type": {
+        "category": {
           "type": "string",
-          "description": "type of the insight."
+          "description": "category of the insight."
         },
         "status": {
           "type": "string",
@@ -1163,7 +1183,69 @@
       ],
       "x-ms-enum": {
         "name": "MetricUnit",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ByteSeconds",
+            "value": "ByteSeconds",
+            "description": "When measurement is in ByteSeconds"
+          },
+          {
+            "name": "Bytes",
+            "value": "Bytes",
+            "description": "When measurement is in Bytes"
+          },
+          {
+            "name": "BytesPerSecond",
+            "value": "BytesPerSecond",
+            "description": "When measurement is in BytesPerSecond"
+          },
+          {
+            "name": "Cores",
+            "value": "Cores",
+            "description": "When measurement is in Cores"
+          },
+          {
+            "name": "Count",
+            "value": "Count",
+            "description": "When measurement is in Count"
+          },
+          {
+            "name": "CountPerSecond",
+            "value": "CountPerSecond",
+            "description": "When measurement is in CountPerSecond"
+          },
+          {
+            "name": "MilliCores",
+            "value": "MilliCores",
+            "description": "When measurement is in MilliCores"
+          },
+          {
+            "name": "MilliSeconds",
+            "value": "MilliSeconds",
+            "description": "When measurement is in MilliSeconds"
+          },
+          {
+            "name": "NanoCores",
+            "value": "NanoCores",
+            "description": "When measurement is in NanoCores"
+          },
+          {
+            "name": "Percent",
+            "value": "Percent",
+            "description": "When measurement is in Percent"
+          },
+          {
+            "name": "Seconds",
+            "value": "Seconds",
+            "description": "When measurement is in Seconds"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "When measurement is in Other than listed"
+          }
+        ]
       }
     },
     "Performance": {
@@ -1209,7 +1291,49 @@
       ],
       "x-ms-enum": {
         "name": "Protocol",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TCP",
+            "value": "TCP",
+            "description": "When communication protocol is TCP"
+          },
+          {
+            "name": "UDP",
+            "value": "UDP",
+            "description": "When communication protocol is UDP"
+          },
+          {
+            "name": "HTTP",
+            "value": "HTTP",
+            "description": "When communication protocol is HTTP"
+          },
+          {
+            "name": "HTTPS",
+            "value": "HTTPS",
+            "description": "When communication protocol is HTTPS"
+          },
+          {
+            "name": "RDP",
+            "value": "RDP",
+            "description": "When communication protocol is RDP"
+          },
+          {
+            "name": "FTP",
+            "value": "FTP",
+            "description": "When communication protocol is FTP"
+          },
+          {
+            "name": "SSH",
+            "value": "SSH",
+            "description": "When communication protocol is SSH"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "When communication protocol is Other"
+          }
+        ]
       }
     },
     "ProvisioningState": {
@@ -1222,7 +1346,24 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Provisioning Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Provisioning Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Provisioning Canceled"
+          }
+        ]
       }
     },
     "RequiredImpactProperties": {
@@ -1272,7 +1413,54 @@
       ],
       "x-ms-enum": {
         "name": "Toolset",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Terraform",
+            "value": "Terraform",
+            "description": "If communication toolset is Terraform"
+          },
+          {
+            "name": "Puppet",
+            "value": "Puppet",
+            "description": "If communication toolset is Puppet"
+          },
+          {
+            "name": "Chef",
+            "value": "Chef",
+            "description": "If communication toolset is Chef"
+          },
+          {
+            "name": "SDK",
+            "value": "SDK",
+            "description": "If communication toolset is SDK"
+          },
+          {
+            "name": "Ansible",
+            "value": "Ansible",
+            "description": "If communication toolset is Ansible"
+          },
+          {
+            "name": "ARM",
+            "value": "ARM",
+            "description": "If communication toolset is ARM"
+          },
+          {
+            "name": "Portal",
+            "value": "Portal",
+            "description": "If communication toolset is Portal"
+          },
+          {
+            "name": "Shell",
+            "value": "Shell",
+            "description": "If communication toolset is Shell"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "If communication toolset is Other"
+          }
+        ]
       }
     },
     "TopologyImpact": {
@@ -1567,16 +1755,6 @@
         "impactedResourceId",
         "impactCategory"
       ]
-    },
-    "insightDetails": {
-      "type": "object",
-      "description": "Body of the get all insights",
-      "properties": {
-        "azureResourceId": {
-          "type": "string",
-          "description": "The ID of the azure resource."
-        }
-      }
     }
   },
   "parameters": {
@@ -1597,6 +1775,16 @@
       "required": false,
       "type": "string",
       "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "InsightCustomResourceCommonParameters.impactInfo": {
+      "name": "impactInfo",
+      "in": "body",
+      "description": "Imppact information",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/InsightDetails"
+      },
       "x-ms-parameter-location": "method"
     }
   }

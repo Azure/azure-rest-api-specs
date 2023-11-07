@@ -3,7 +3,6 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-
 namespace Microsoft.Impact;
 
 using TypeSpec.Http;
@@ -11,7 +10,6 @@ using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-
 
 @doc("Topology Impact properties")
 @subscriptionResource
@@ -26,8 +24,7 @@ model TopologyImpact is ProxyResource<TopologyImpactProperties> {
 }
 
 @doc("Topology impact properties")
-model TopologyImpactProperties is ResourceProperties{
-
+model TopologyImpactProperties is ResourceProperties {
   @doc("Time at which impact was observed ")
   startDateTime: utcDateTime;
 
@@ -45,7 +42,7 @@ model TopologyImpactProperties is ResourceProperties{
 
   @doc("Time at which impact is reported")
   @visibility("read")
-  reportedTimeUtc? :utcDateTime;
+  reportedTimeUtc?: utcDateTime;
 
   @doc("Category of the impact,  if not provided default category would be considered as dataplane impact")
   impactCategory?: ImpactCategoryEnum;
@@ -57,7 +54,7 @@ model TopologyImpactProperties is ResourceProperties{
   additionalProperties?: {};
 
   @doc("ARM error code and error message associated with the impact")
-  errorDetails?:ErrorDetailProperties;
+  errorDetails?: ErrorDetailProperties;
 
   @doc("Details about performance issue. Applicable for performance impacts.")
   @extension("x-ms-identifiers", [])
@@ -78,9 +75,8 @@ model TopologyImpactProperties is ResourceProperties{
 
 @doc("resource and associated arm correlation ids")
 model ImpactedResources {
-    @doc("Azure resource id of the impacted resource")
-    impactedResourceId: string;
-
+  @doc("Azure resource id of the impacted resource")
+  impactedResourceId: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
@@ -90,5 +86,4 @@ interface TopologyImpacts {
   get is ArmResourceRead<TopologyImpact>;
   delete is ArmResourceDeleteSync<TopologyImpact>;
   listBySubscription is ArmListBySubscription<TopologyImpact>;
-
 }
