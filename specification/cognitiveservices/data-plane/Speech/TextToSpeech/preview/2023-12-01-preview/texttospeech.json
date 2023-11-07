@@ -15,7 +15,6 @@
         "tags": [
           "Project"
         ],
-        "summary": "Get Projects",
         "description": "Gets a list of projects for the authenticated subscription.",
         "operationId": "Projects_List",
         "produces": [
@@ -65,7 +64,6 @@
         "tags": [
           "Project"
         ],
-        "summary": "Get Project",
         "description": "Gets the project identified by the given ID.",
         "operationId": "Projects_Get",
         "produces": [
@@ -73,12 +71,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -108,7 +101,6 @@
         "tags": [
           "Project"
         ],
-        "summary": "Delete Project",
         "description": "Deletes the project identified by the given ID.",
         "operationId": "Projects_Delete",
         "produces": [
@@ -116,12 +108,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/PathId"
           },
           {
             "in": "query",
@@ -153,7 +140,6 @@
         "tags": [
           "Project"
         ],
-        "summary": "Create Project",
         "description": "Creates a new project.",
         "operationId": "Projects_Create",
         "consumes": [
@@ -164,12 +150,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -210,7 +191,6 @@
         "tags": [
           "Consent"
         ],
-        "summary": "Get Consents",
         "description": "Gets a list of consents for the authenticated subscription.",
         "operationId": "Consents_List",
         "produces": [
@@ -260,7 +240,6 @@
         "tags": [
           "Consent"
         ],
-        "summary": "Get Consent",
         "description": "Gets the consent identified by the given ID.",
         "operationId": "Consents_Get",
         "produces": [
@@ -268,12 +247,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -303,17 +277,11 @@
         "tags": [
           "Consent"
         ],
-        "summary": "Delete Consent",
         "description": "Deletes the consent identified by the given ID.",
         "operationId": "Consents_Delete",
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -340,7 +308,6 @@
         "tags": [
           "Consent"
         ],
-        "summary": "Create Consent",
         "description": "Creates a new consent with audio URL.",
         "operationId": "Consents_Create",
         "consumes": [
@@ -351,21 +318,10 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "Operation-Id",
-            "required": false,
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/HeaderOperationId"
           },
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -415,7 +371,6 @@
         "tags": [
           "Consent"
         ],
-        "summary": "Create Consent",
         "description": "Creates a new consent with audio file.",
         "operationId": "Consents_Post",
         "consumes": [
@@ -426,21 +381,10 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "Operation-Id",
-            "required": false,
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/HeaderOperationId"
           },
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -451,7 +395,8 @@
             "description": "The project Id.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,63}$",
+            "minLength": 3,
             "maxLength": 64
           },
           {
@@ -539,7 +484,6 @@
         "tags": [
           "Trainingset"
         ],
-        "summary": "Get Training Sets",
         "description": "Gets a list of training sets for the authenticated subscription.",
         "operationId": "TrainingSets_List",
         "produces": [
@@ -589,7 +533,6 @@
         "tags": [
           "Trainingset"
         ],
-        "summary": "Get Training Set",
         "description": "Gets the training set identified by the given ID.",
         "operationId": "TrainingSets_Get",
         "produces": [
@@ -597,12 +540,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -632,7 +570,6 @@
         "tags": [
           "Trainingset"
         ],
-        "summary": "Delete Training Set",
         "description": "Deletes the project identified by the given ID.",
         "operationId": "TrainingSets_Delete",
         "produces": [
@@ -640,12 +577,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -672,7 +604,6 @@
         "tags": [
           "Trainingset"
         ],
-        "summary": "Create Training Set",
         "description": "Creates a new training set.",
         "operationId": "TrainingSets_Create",
         "consumes": [
@@ -683,12 +614,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -729,77 +655,46 @@
         "tags": [
           "Trainingset"
         ],
-        "summary": "Upload Data for Training Set",
         "description": "Uploads data to the specified training set.",
         "operationId": "TrainingSets_UploadData",
         "consumes": [
-          "multipart/form-data"
+          "application/json"
         ],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/HeaderOperationId"
+          },
+          {
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
           },
           {
-            "in": "formData",
-            "name": "displayName",
-            "description": "The name of this dataset.",
+            "in": "body",
+            "name": "dataset",
             "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "description",
-            "description": "Optional description of this dataset.",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "kind",
-            "description": "The kind of this dataset.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "audio",
-            "description": "A zip file containing the audio data.",
-            "type": "file"
-          },
-          {
-            "in": "formData",
-            "name": "script",
-            "description": "A text/zip file containing the transcriptions for the audio data.",
-            "type": "file"
-          },
-          {
-            "in": "formData",
-            "name": "audioUrl",
-            "description": "The public access url of audio data.",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "scriptUrl",
-            "description": "The public access url of script data.",
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              }
             }
           },
           "default": {
@@ -809,6 +704,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Upload data to a training set": {
             "$ref": "./examples/upload_trainingset.json"
@@ -821,7 +717,6 @@
         "tags": [
           "Model"
         ],
-        "summary": "Get Recipes",
         "description": "Get a list of supported recipes.",
         "operationId": "Models_ListRecipes",
         "produces": [
@@ -861,7 +756,6 @@
         "tags": [
           "Model"
         ],
-        "summary": "Get Models",
         "description": "Gets the list of models for specified subscription.",
         "operationId": "Models_List",
         "produces": [
@@ -911,7 +805,6 @@
         "tags": [
           "Model"
         ],
-        "summary": "Get Model",
         "description": "Gets the model identified by the given ID.",
         "operationId": "Models_Get",
         "produces": [
@@ -919,12 +812,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -954,17 +842,11 @@
         "tags": [
           "Model"
         ],
-        "summary": "Delete Model",
         "description": "Deletes the model identified by the given ID.",
         "operationId": "Models_Delete",
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -991,7 +873,6 @@
         "tags": [
           "Model"
         ],
-        "summary": "Create Model",
         "description": "Creates a new voice model.",
         "operationId": "Models_Create",
         "consumes": [
@@ -1002,21 +883,10 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "Operation-Id",
-            "required": false,
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/HeaderOperationId"
           },
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1071,7 +941,6 @@
         "tags": [
           "Endpoint"
         ],
-        "summary": "Get Endpoints",
         "description": "Gets a list of endpoints for the authenticated subscription.",
         "operationId": "Endpoints_List",
         "produces": [
@@ -1121,7 +990,6 @@
         "tags": [
           "Endpoint"
         ],
-        "summary": "Get Endpoint",
         "description": "Gets the endpoint identified by the given ID.",
         "operationId": "Endpoints_Get",
         "produces": [
@@ -1163,7 +1031,6 @@
         "tags": [
           "Endpoint"
         ],
-        "summary": "Delete Endpoint",
         "description": "Deletes the endpoint identified by the given ID.",
         "operationId": "Endpoints_Delete",
         "parameters": [
@@ -1199,7 +1066,6 @@
         "tags": [
           "Endpoint"
         ],
-        "summary": "Create Endpoint",
         "description": "Creates a new endpoint.",
         "operationId": "Endpoints_Create",
         "consumes": [
@@ -1210,13 +1076,7 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "Operation-Id",
-            "required": false,
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/HeaderOperationId"
           },
           {
             "in": "path",
@@ -1275,7 +1135,6 @@
         "tags": [
           "Endpoint"
         ],
-        "summary": "Resume Endpoint",
         "description": "Resumes the endpoint identified by the given ID.",
         "operationId": "Endpoints_Resume",
         "produces": [
@@ -1283,13 +1142,7 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "Operation-Id",
-            "required": false,
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/HeaderOperationId"
           },
           {
             "in": "path",
@@ -1340,7 +1193,6 @@
         "tags": [
           "Endpoint"
         ],
-        "summary": "Suspend Endpoint",
         "description": "Suspends the endpoint identified by the given ID.",
         "operationId": "Endpoints_Suspend",
         "produces": [
@@ -1348,13 +1200,7 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "Operation-Id",
-            "required": false,
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/HeaderOperationId"
           },
           {
             "in": "path",
@@ -1405,7 +1251,6 @@
         "tags": [
           "Zeroshot"
         ],
-        "summary": "Get Zero Shot Base Models",
         "description": "Gets a list of base models for zero shot model training.",
         "operationId": "ZeroShotModels_ListBaseModels",
         "produces": [
@@ -1445,7 +1290,6 @@
         "tags": [
           "Zeroshot"
         ],
-        "summary": "Get Zero Shot Models",
         "description": "Gets a list of zero shot models for the authenticated subscription.",
         "operationId": "ZeroShotModels_List",
         "produces": [
@@ -1495,7 +1339,6 @@
         "tags": [
           "Zeroshot"
         ],
-        "summary": "Get Zero Shot Models",
         "description": "Gets the zero shot model identified by the given ID.",
         "operationId": "ZeroShotModels_Get",
         "produces": [
@@ -1537,7 +1380,6 @@
         "tags": [
           "Zeroshot"
         ],
-        "summary": "Delete Zero Shot Model",
         "description": "Deletes zero shot model identified by the given ID.",
         "operationId": "ZeroShotModels_Delete",
         "parameters": [
@@ -1573,7 +1415,6 @@
         "tags": [
           "Zeroshot"
         ],
-        "summary": "Create Zero Shot Model",
         "description": "Creates a new zero shot model.",
         "operationId": "ZeroShotModels_Create",
         "consumes": [
@@ -1584,13 +1425,7 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "Operation-Id",
-            "required": false,
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/HeaderOperationId"
           },
           {
             "in": "path",
@@ -1647,7 +1482,6 @@
         "tags": [
           "Zeroshot"
         ],
-        "summary": "Create Zero Shot Model",
         "description": "Creates a new zero shot model.",
         "operationId": "ZeroShotModels_Post",
         "consumes": [
@@ -1658,13 +1492,7 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "Operation-Id",
-            "required": false,
-            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
-            "maxLength": 64
+            "$ref": "#/parameters/HeaderOperationId"
           },
           {
             "in": "path",
@@ -1694,7 +1522,8 @@
             "description": "The project Id.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,63}$",
+            "minLength": 3,
             "maxLength": 64
           },
           {
@@ -1748,7 +1577,6 @@
         "tags": [
           "Operations"
         ],
-        "summary": "Gets operation info.",
         "description": "Gets operation info.",
         "operationId": "Operations_Get",
         "produces": [
@@ -1761,7 +1589,8 @@
             "required": true,
             "description": "The id of the operation",
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,63}$",
+            "minLength": 3,
             "maxLength": 64
           },
           {
@@ -1772,7 +1601,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/OperationStatus"
+              "$ref": "#/definitions/Operation"
             }
           },
           "default": {
@@ -1859,8 +1688,53 @@
         }
       }
     },
+    "Dataset": {
+      "description": "Data set",
+      "required": [
+        "displayName",
+        "kind",
+        "audioUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "The name of this dataset.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Optional description of this dataset.",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/DatasetKind"
+        },
+        "audioUrl": {
+          "description": "The public accessible url of audio file.",
+          "type": "string",
+          "format": "uri"
+        },
+        "scriptUrl": {
+          "description": "The public accessible url of script file.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "DatasetKind": {
+      "description": "Data set kind",
+      "enum": [
+        "AudioAndScript",
+        "LongAudio",
+        "AudioOnly"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DatasetKind",
+        "modelAsString": true
+      }
+    },
     "DetailedErrorCode": {
-      "title": "DetailedErrorCode",
+      "description": "Detailed error code",
       "enum": [
         "None",
         "InvalidParameterValue",
@@ -2039,7 +1913,7 @@
       }
     },
     "EndpointKind": {
-      "title": "EndpointKind",
+      "description": "Endpoint kind",
       "enum": [
         "HighPerformance",
         "FastResume"
@@ -2097,7 +1971,7 @@
       }
     },
     "ErrorCode": {
-      "title": "ErrorCode",
+      "description": "Top-level error code",
       "enum": [
         "BadRequest",
         "BadArgument",
@@ -2213,7 +2087,7 @@
       }
     },
     "ModelFailureReason": {
-      "title": "ModelFailureReason",
+      "description": "Model training failure reason",
       "enum": [
         "None",
         "InaccessibleCustomerStorage",
@@ -2257,10 +2131,11 @@
     "OperationId": {
       "description": "Unique operation ID.",
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,63}$",
+      "minLength": 3,
       "maxLength": 64
     },
-    "OperationStatus": {
+    "Operation": {
       "description": "Status of a long running operation.",
       "type": "object",
       "properties": {
@@ -2268,14 +2143,30 @@
           "$ref": "#/definitions/OperationId"
         },
         "status": {
-          "$ref": "#/definitions/Status"
+          "$ref": "#/definitions/OperationStatus"
         }
       }
     },
+    "OperationStatus": {
+      "description": "Status of an operation.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true
+      }
+    },
     "PaginatedConsents": {
+      "description": "Paginated consent list",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Consent list",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Consent"
@@ -2283,15 +2174,18 @@
           "readOnly": true
         },
         "nextLink": {
+          "description": "Link to next page.",
           "format": "uri",
           "type": "string"
         }
       }
     },
     "PaginatedEndpoints": {
+      "description": "Paginated endpoint list",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Endpoint list",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Endpoint"
@@ -2299,15 +2193,18 @@
           "readOnly": true
         },
         "nextLink": {
+          "description": "Link to next page.",
           "format": "uri",
           "type": "string"
         }
       }
     },
     "PaginatedModels": {
+      "description": "Paginated model list",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Model list",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Model"
@@ -2315,15 +2212,18 @@
           "readOnly": true
         },
         "nextLink": {
+          "description": "Link to next page.",
           "format": "uri",
           "type": "string"
         }
       }
     },
     "PaginatedProjects": {
+      "description": "Paginated project list",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Project list",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Project"
@@ -2331,15 +2231,18 @@
           "readOnly": true
         },
         "nextLink": {
+          "description": "Link to next page.",
           "format": "uri",
           "type": "string"
         }
       }
     },
     "PaginatedTrainingsets": {
+      "description": "Paginated training set list",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Training set list",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Trainingset"
@@ -2347,15 +2250,18 @@
           "readOnly": true
         },
         "nextLink": {
+          "description": "Link to next page.",
           "format": "uri",
           "type": "string"
         }
       }
     },
     "PaginatedZeroShots": {
+      "description": "Paginated zero shot list",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Zero shot list",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ZeroShot"
@@ -2363,6 +2269,7 @@
           "readOnly": true
         },
         "nextLink": {
+          "description": "Link to next page.",
           "format": "uri",
           "type": "string"
         }
@@ -2412,10 +2319,9 @@
       }
     },
     "ProjectKind": {
-      "title": "ProjectKind",
+      "description": "Project kind",
       "enum": [
         "TextToSpeech",
-        "QuickTrialTextToSpeech",
         "ZeroShot"
       ],
       "type": "string",
@@ -2478,11 +2384,12 @@
     "ResourceId": {
       "description": "Resource id",
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,63}$",
+      "minLength": 3,
       "maxLength": 64
     },
     "Status": {
-      "title": "Status",
+      "description": "Status of a resource.",
       "enum": [
         "NotStarted",
         "Running",
@@ -2690,6 +2597,28 @@
       "description": "Filter condition",
       "required": false,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PathId": {
+      "name": "id",
+      "in": "path",
+      "description": "The id of resource.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,63}$",
+      "minLength": 3,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "HeaderOperationId": {
+      "name": "Operation-Id",
+      "in": "header",
+      "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
+      "required": false,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,63}$",
+      "minLength": 3,
+      "maxLength": 64,
       "x-ms-parameter-location": "method"
     }
   }
