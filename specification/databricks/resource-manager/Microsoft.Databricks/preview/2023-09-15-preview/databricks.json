@@ -104,6 +104,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "retainUcData",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Optional parameter to retain default unity catalog data. By default the data will retained if Uc is enabled on the workspace."
           }
         ],
         "responses": {
@@ -844,6 +851,10 @@
             "modelAsString": true,
             "name": "RequiredNsgRules"
           }
+        },
+        "defaultCatalog": {
+          "description": "Properties for Default Catalog configuration during workspace creation.",
+          "$ref": "#/definitions/DefaultCatalogProperties"
         }
       },
       "required": [
@@ -1184,6 +1195,28 @@
         }
       },
       "description": "The object that contains details of encryption used on the workspace."
+    },
+    "DefaultCatalogProperties": {
+      "properties": {
+        "initialType": {
+          "type": "string",
+          "description": "Defines the initial type of the default catalog. Possible values (case-insensitive):  HiveMetastore, UnityCatalog",
+          "enum": [
+            "HiveMetastore",
+            "UnityCatalog"
+          ],
+          "x-ms-enum": {
+            "name": "initialType",
+            "modelAsString": true
+          },
+          "default": "HiveMetastore"
+        },
+        "initialName": {
+          "type": "string",
+          "description": "Specifies the initial Name of default catalog. If not specified, the name of the workspace will be used."
+        }
+      },
+      "description": "These properties lets user specify default catalog properties during workspace creation."
     },
     "EncryptionEntitiesDefinition": {
       "properties": {
