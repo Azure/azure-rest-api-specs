@@ -1,6 +1,6 @@
 {
   "operationId": "Insights_Get",
-  "title": "Get Insight Resource by name",
+  "title": "Get Insight resources by workloadImpactName and insightName",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "api-version": "2023-12-01-preview",
@@ -27,7 +27,9 @@
           ],
           "impactDetails": {
             "impactedResources": [
-              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.Sql/sqlserver/dbservername"
+              {
+                "impactedResourceId":"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.Sql/sqlserver/dbservername"
+              }
             ],
             "impactStartTime": "2023-06-15T01:00:00.009223Z",
             "impactId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.Impact/workloadImpacts/impactid22",

@@ -1,23 +1,23 @@
 
 
-import "@cadl-lang/openapi";
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
-import "./subscriptionResource.cadl";
+import "@typespec/openapi";
+import "@typespec/rest";
+
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
 
 namespace Microsoft.Impact;
 
-using Cadl.Http;
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 
 @doc("Workload Impact properties")
+@subscriptionResource
 model WorkloadImpact is ProxyResource<WorkloadImpactProperties> {
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$")
   @key("workloadImpactName")
@@ -35,10 +35,10 @@ model WorkloadImpact is ProxyResource<WorkloadImpactProperties> {
 model WorkloadImpactProperties is ResourceProperties{
 
   @doc("Time at which impact was observed ")
-  startDateTime: zonedDateTime;
+  startDateTime: utcDateTime;
 
   @doc("Time at which impact has ended ")
-  endDateTime?: zonedDateTime;
+  endDateTime?: utcDateTime;
 
   @doc("Azure resource id of the impacted resource")
   impactedResourceId: string;
@@ -50,7 +50,7 @@ model WorkloadImpactProperties is ResourceProperties{
 
   @doc("Time at which impact is reported")
   @visibility("read")
-  reportedTimeUtc? :zonedDateTime;
+  reportedTimeUtc? :utcDateTime;
 
   @doc("Category of the impact,  details can found from /impactCategories API")
   impactCategory: string;
@@ -91,12 +91,12 @@ model WorkloadImpactProperties is ResourceProperties{
 interface Operations extends Azure.ResourceManager.Operations {}
 
 
-#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
 @armResourceOperations
 interface WorkloadImpacts {
-  create is SubscriptionResourceCreateOrUpdateSync<WorkloadImpact>;
-  get is SubscriptionResourceRead<WorkloadImpact>;
-  delete is SubscriptionResourceDeleteSync<WorkloadImpact>;
+  create is ArmResourceCreateOrUpdateAsync<WorkloadImpact>;
+  get is ArmResourceRead<WorkloadImpact>;
+  delete is ArmResourceDeleteSync<WorkloadImpact>;
   listBySubscription is ArmListBySubscription<WorkloadImpact>;
 
 }

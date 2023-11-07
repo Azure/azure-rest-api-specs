@@ -3,9 +3,9 @@
   "info": {
     "title": "Microsoft.Impact",
     "version": "2023-12-01-preview",
-    "x-cadl-generated": [
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -57,10 +57,10 @@
   "paths": {
     "/providers/Microsoft.Impact/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -81,22 +81,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "OperationsList": {
             "$ref": "./examples/Operations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/getAllInsights": {
       "post": {
+        "operationId": "Insights_GetAll",
         "tags": [
           "Insights"
         ],
-        "operationId": "Insights_GetAll",
         "description": "get all insights under subscription",
         "parameters": [
           {
@@ -128,23 +128,23 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Get Insights list by subscription": {
             "$ref": "./examples/Insights_GetAll.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/impactCategories": {
       "get": {
+        "operationId": "ImpactCategories_ListBySubscription",
         "tags": [
           "ImpactCategories"
         ],
-        "operationId": "ImpactCategories_ListBySubscription",
-        "description": "List ImpactCategory resources by subscription ID",
+        "description": "List ImpactCategory resources by subscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -153,10 +153,10 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.CategoryNameParameter"
+            "$ref": "#/parameters/CustomParameters.categoryName"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceTypeParameter"
+            "$ref": "#/parameters/CustomParameters.resourceType"
           }
         ],
         "responses": {
@@ -173,22 +173,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Get ImpactCategories list by subscription": {
             "$ref": "./examples/ImpactCategories_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/impactCategories/{impactCategoryName}": {
       "get": {
+        "operationId": "ImpactCategories_Get",
         "tags": [
           "ImpactCategories"
         ],
-        "operationId": "ImpactCategories_Get",
         "description": "Get a ImpactCategory",
         "parameters": [
           {
@@ -200,10 +200,10 @@
           {
             "name": "impactCategoryName",
             "in": "path",
-            "required": true,
             "description": "Name of the impact category",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$"
           }
         ],
         "responses": {
@@ -229,10 +229,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/topologyImpacts": {
       "get": {
+        "operationId": "TopologyImpacts_ListBySubscription",
         "tags": [
           "TopologyImpacts"
         ],
-        "operationId": "TopologyImpacts_ListBySubscription",
         "description": "List TopologyImpact resources by subscription ID",
         "parameters": [
           {
@@ -256,86 +256,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "List TopologyImpact resources by subscription": {
             "$ref": "./examples/TopologyImpact_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/topologyImpacts/{topologyImpactName}": {
-      "put": {
-        "tags": [
-          "TopologyImpacts"
-        ],
-        "operationId": "TopologyImpacts_Create",
-        "description": "Create a TopologyImpact",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "topologyImpactName",
-            "in": "path",
-            "required": true,
-            "description": "topologyImpact resource ",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$",
-            "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "required": true,
-            "description": "Resource create parameters.",
-            "schema": {
-              "$ref": "#/definitions/TopologyImpact"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TopologyImpact"
-            }
-          },
-          "201": {
-            "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/TopologyImpact"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Reporting a topology impact": {
-            "$ref": "./examples/topologyImpact_Create.json"
-          }
-        }
-      },
       "get": {
+        "operationId": "TopologyImpacts_Get",
         "tags": [
           "TopologyImpacts"
         ],
-        "operationId": "TopologyImpacts_Get",
         "description": "Get a TopologyImpact",
         "parameters": [
           {
@@ -347,10 +283,10 @@
           {
             "name": "topologyImpactName",
             "in": "path",
-            "required": true,
             "description": "topologyImpact resource ",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
           }
         ],
         "responses": {
@@ -373,11 +309,79 @@
           }
         }
       },
-      "delete": {
+      "put": {
+        "operationId": "TopologyImpacts_Create",
         "tags": [
           "TopologyImpacts"
         ],
+        "description": "Create a TopologyImpact",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "topologyImpactName",
+            "in": "path",
+            "description": "topologyImpact resource ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TopologyImpact"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'TopologyImpact' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TopologyImpact"
+            }
+          },
+          "201": {
+            "description": "Resource 'TopologyImpact' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TopologyImpact"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reporting a topology impact": {
+            "$ref": "./examples/topologyImpact_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
         "operationId": "TopologyImpacts_Delete",
+        "tags": [
+          "TopologyImpacts"
+        ],
         "description": "Delete a TopologyImpact",
         "parameters": [
           {
@@ -389,10 +393,10 @@
           {
             "name": "topologyImpactName",
             "in": "path",
-            "required": true,
             "description": "topologyImpact resource ",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
           }
         ],
         "responses": {
@@ -418,10 +422,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts": {
       "get": {
+        "operationId": "WorkloadImpacts_ListBySubscription",
         "tags": [
           "WorkloadImpacts"
         ],
-        "operationId": "WorkloadImpacts_ListBySubscription",
         "description": "List WorkloadImpact resources by subscription ID",
         "parameters": [
           {
@@ -445,95 +449,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "List WorkloadImpact resources by subscription": {
             "$ref": "./examples/WorkloadImpacts_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}": {
-      "put": {
-        "tags": [
-          "WorkloadImpacts"
-        ],
-        "operationId": "WorkloadImpacts_Create",
-        "description": "Create a WorkloadImpact",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "workloadImpactName",
-            "in": "path",
-            "required": true,
-            "description": "workloadImpact resource ",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$",
-            "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "required": true,
-            "description": "Resource create parameters.",
-            "schema": {
-              "$ref": "#/definitions/WorkloadImpact"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/WorkloadImpact"
-            }
-          },
-          "201": {
-            "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/WorkloadImpact"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Reporting Arm operation failure": {
-            "$ref": "./examples/WorkloadArmOperation_create.json"
-          },
-          "Reporting availability related impact": {
-            "$ref": "./examples/WorkloadAvailability_Create.json"
-          },
-          "Reporting a connectivity impact": {
-            "$ref": "./examples/WorkloadConnectivityImpact_Create.json"
-          },
-          "Reporting performance related impact": {
-            "$ref": "./examples/WorkloadPerformance_Create.json"
-          }
-        }
-      },
       "get": {
+        "operationId": "WorkloadImpacts_Get",
         "tags": [
           "WorkloadImpacts"
         ],
-        "operationId": "WorkloadImpacts_Get",
         "description": "Get a WorkloadImpact",
         "parameters": [
           {
@@ -545,10 +476,10 @@
           {
             "name": "workloadImpactName",
             "in": "path",
-            "required": true,
             "description": "workloadImpact resource ",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
           }
         ],
         "responses": {
@@ -571,11 +502,88 @@
           }
         }
       },
-      "delete": {
+      "put": {
+        "operationId": "WorkloadImpacts_Create",
         "tags": [
           "WorkloadImpacts"
         ],
+        "description": "Create a WorkloadImpact",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "workloadImpactName",
+            "in": "path",
+            "description": "workloadImpact resource ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadImpact"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WorkloadImpact' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WorkloadImpact"
+            }
+          },
+          "201": {
+            "description": "Resource 'WorkloadImpact' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WorkloadImpact"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reporting Arm operation failure": {
+            "$ref": "./examples/WorkloadArmOperation_create.json"
+          },
+          "Reporting a connectivity impact": {
+            "$ref": "./examples/WorkloadConnectivityImpact_Create.json"
+          },
+          "Reporting availability related impact": {
+            "$ref": "./examples/WorkloadAvailability_Create.json"
+          },
+          "Reporting performance related impact": {
+            "$ref": "./examples/WorkloadPerformance_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
         "operationId": "WorkloadImpacts_Delete",
+        "tags": [
+          "WorkloadImpacts"
+        ],
         "description": "Delete a WorkloadImpact",
         "parameters": [
           {
@@ -587,10 +595,10 @@
           {
             "name": "workloadImpactName",
             "in": "path",
-            "required": true,
             "description": "workloadImpact resource ",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
           }
         ],
         "responses": {
@@ -616,10 +624,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}/insights": {
       "get": {
+        "operationId": "Insights_ListBySubscription",
         "tags": [
           "Insights"
         ],
-        "operationId": "Insights_ListBySubscription",
         "description": "List Insight resources by workloadImpactName",
         "parameters": [
           {
@@ -631,10 +639,10 @@
           {
             "name": "workloadImpactName",
             "in": "path",
-            "required": true,
             "description": "workloadImpact resource ",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
           }
         ],
         "responses": {
@@ -651,22 +659,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Get Insights list by subscription": {
+          "List Insight resources by workloadImpactName": {
             "$ref": "./examples/Insights_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}/insights/{insightName}": {
       "get": {
+        "operationId": "Insights_Get",
         "tags": [
           "Insights"
         ],
-        "operationId": "Insights_Get",
         "description": "Get Insight resources by workloadImpactName and insightName",
         "parameters": [
           {
@@ -678,18 +686,18 @@
           {
             "name": "workloadImpactName",
             "in": "path",
-            "required": true,
             "description": "workloadImpact resource ",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$"
           },
           {
             "name": "insightName",
             "in": "path",
-            "required": true,
             "description": "Name of the insight",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$"
           }
         ],
         "responses": {
@@ -707,7 +715,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Insight Resource by name": {
+          "Get Insight resources by workloadImpactName and insightName": {
             "$ref": "./examples/Insights_Get.json"
           }
         }
@@ -717,6 +725,7 @@
   "definitions": {
     "Action": {
       "type": "object",
+      "description": "details of the action performed to or for the azure resource.",
       "properties": {
         "summary": {
           "type": "string",
@@ -727,11 +736,11 @@
           "format": "date-time",
           "description": "time at which action was performed."
         }
-      },
-      "description": "details of the action performed to or for the azure resource."
+      }
     },
     "ClientIncidentDetails": {
       "type": "object",
+      "description": "Client incident details ex: incidentId , incident source",
       "properties": {
         "clientIncidentId": {
           "type": "string",
@@ -741,8 +750,7 @@
           "$ref": "#/definitions/IncidentSource",
           "description": "Client incident source. ex : source system name where the incident is created"
         }
-      },
-      "description": "Client incident details ex: incidentId , incident source"
+      }
     },
     "ConfidenceLevel": {
       "type": "string",
@@ -759,6 +767,7 @@
     },
     "Connectivity": {
       "type": "object",
+      "description": "Details about connectivity issue. Applicable when root resource causing the issue is not identified. For example, when a VM is impacted due to a network issue, the impacted resource could be VM or the network. In such cases, the connectivity field will have the details about both VM and network.",
       "properties": {
         "protocol": {
           "$ref": "#/definitions/Protocol",
@@ -777,11 +786,11 @@
           "$ref": "#/definitions/SourceOrTarget",
           "description": "target which connection was attempted"
         }
-      },
-      "description": "Details about connectivity issue. Applicable when root resource causing the issue is not identified. For example, when a VM is impacted due to a network issue, the impacted resource could be VM or the network. In such cases, the connectivity field will have the details about both VM and network."
+      }
     },
     "ErrorDetailProperties": {
       "type": "object",
+      "description": "ARM error code and error message associated with the impact",
       "properties": {
         "errorCode": {
           "type": "string",
@@ -791,11 +800,11 @@
           "type": "string",
           "description": "ARM Error Message associated with the impact"
         }
-      },
-      "description": "ARM error code and error message associated with the impact"
+      }
     },
     "ExpectedValueRange": {
       "type": "object",
+      "description": "Max and Min Threshold values for the metric",
       "properties": {
         "min": {
           "type": "number",
@@ -808,7 +817,6 @@
           "description": "Max threshold value for the metric"
         }
       },
-      "description": "Max and Min Threshold values for the metric",
       "required": [
         "min",
         "max"
@@ -816,6 +824,7 @@
     },
     "ImpactCategory": {
       "type": "object",
+      "description": "ImpactCategory resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ImpactCategoryProperties",
@@ -827,7 +836,6 @@
           ]
         }
       },
-      "description": "ImpactCategory resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -844,34 +852,48 @@
       ],
       "x-ms-enum": {
         "name": "ImpactCategoryEnum",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Availability",
+            "value": "Availability",
+            "description": "Availability category"
+          },
+          {
+            "name": "Performance",
+            "value": "Performance"
+          },
+          {
+            "name": "Other",
+            "value": "Other"
+          }
+        ]
       }
     },
     "ImpactCategoryListResult": {
       "type": "object",
+      "description": "The response of a ImpactCategory list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The ImpactCategory items on this page",
           "items": {
             "$ref": "#/definitions/ImpactCategory"
-          },
-          "x-cadl-name": "ImpactCategory[]",
-          "description": "The ImpactCategory items on this page"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a ImpactCategory list operation.",
       "required": [
         "value"
       ]
     },
     "ImpactCategoryProperties": {
       "type": "object",
+      "description": "Impact category properties.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -894,29 +916,28 @@
         },
         "requiredImpactProperties": {
           "type": "array",
+          "description": "The workloadImpact properties which are required when reporting with the impact category",
           "items": {
             "$ref": "#/definitions/RequiredImpactProperties"
           },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "RequiredImpactProperties[]",
-          "description": "The workloadImpact properties which are required when reporting with the impact category"
+          "x-ms-identifiers": []
         }
       },
-      "description": "Impact category properties.",
       "required": [
         "categoryId"
       ]
     },
     "ImpactDetails": {
       "type": "object",
+      "description": "details of of the impact for which insight has been generated.",
       "properties": {
         "impactedResources": {
           "type": "array",
+          "description": "List of impacted Azure resources.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ImpactedResource"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of impacted Azure resources."
+          "x-ms-identifiers": []
         },
         "impactStartTime": {
           "type": "string",
@@ -932,7 +953,6 @@
           "description": "unique (guid) id of the impact generated during impact creation."
         }
       },
-      "description": "details of of the impact for which insight has been generated.",
       "required": [
         "impactedResources",
         "impactStartTime",
@@ -940,15 +960,28 @@
         "impactUniqueId"
       ]
     },
+    "ImpactedResource": {
+      "type": "object",
+      "description": "impacted azure resource id.",
+      "properties": {
+        "impactedResourceId": {
+          "type": "string",
+          "description": "impacted azure resource id"
+        }
+      },
+      "required": [
+        "impactedResourceId"
+      ]
+    },
     "ImpactedResources": {
       "type": "object",
+      "description": "resource and associated arm correlation ids",
       "properties": {
         "impactedResourceId": {
           "type": "string",
           "description": "Azure resource id of the impacted resource"
         }
       },
-      "description": "resource and associated arm correlation ids",
       "required": [
         "impactedResourceId"
       ]
@@ -970,6 +1003,7 @@
     },
     "Insight": {
       "type": "object",
+      "description": "Insight resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/InsightProperties",
@@ -981,38 +1015,67 @@
           ]
         }
       },
-      "description": "Insight resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
+    "InsightCustomResourceCommonParameters": {
+      "type": "object",
+      "description": "context of post call for insight",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use for this operation.",
+          "minLength": 1
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The ID of the target subscription.",
+          "minLength": 1
+        },
+        "provider": {
+          "type": "string",
+          "description": "The provider namespace for the resource.",
+          "enum": [
+            "Microsoft.Impact"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "apiVersion",
+        "subscriptionId",
+        "provider"
+      ]
+    },
     "InsightListResult": {
       "type": "object",
+      "description": "The response of a Insight list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The Insight items on this page",
           "items": {
             "$ref": "#/definitions/Insight"
-          },
-          "x-cadl-name": "Insight[]",
-          "description": "The Insight items on this page"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a Insight list operation.",
       "required": [
         "value"
       ]
     },
     "InsightProperties": {
       "type": "object",
+      "description": "Impact category properties.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1043,19 +1106,17 @@
         },
         "actions": {
           "type": "array",
+          "description": "list of actions performed to or for the azure resource.",
           "items": {
             "$ref": "#/definitions/Action"
           },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "Action[]",
-          "description": "list of actions performed to or for the azure resource."
+          "x-ms-identifiers": []
         },
         "impactDetails": {
           "$ref": "#/definitions/ImpactDetails",
           "description": "details of of the impact for which insight has been generated."
         }
       },
-      "description": "Impact category properties.",
       "required": [
         "createdTime",
         "updatedTime",
@@ -1065,6 +1126,7 @@
     },
     "InsightUnderSubscription": {
       "type": "object",
+      "description": "Insight resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/InsightProperties",
@@ -1076,7 +1138,6 @@
           ]
         }
       },
-      "description": "Insight resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -1107,6 +1168,7 @@
     },
     "Performance": {
       "type": "object",
+      "description": "Details about impacted performance metrics. Applicable for performance related impact",
       "properties": {
         "metricName": {
           "type": "string",
@@ -1130,8 +1192,7 @@
           "$ref": "#/definitions/MetricUnit",
           "description": "Unit of the metric ex: Bytes, Percentage, Count, Seconds, Milliseconds, Bytes/Second, Count/Second, etc.., Other"
         }
-      },
-      "description": "Details about impacted performance metrics. Applicable for performance related impact"
+      }
     },
     "Protocol": {
       "type": "string",
@@ -1166,6 +1227,7 @@
     },
     "RequiredImpactProperties": {
       "type": "object",
+      "description": "Required impact properties",
       "properties": {
         "name": {
           "type": "string",
@@ -1173,28 +1235,26 @@
         },
         "allowedValues": {
           "type": "array",
+          "description": "Allowed values values for the property",
           "items": {
             "type": "string"
-          },
-          "x-cadl-name": "string[]",
-          "description": "Allowed values values for the property"
+          }
         }
       },
-      "description": "Required impact properties",
       "required": [
         "name"
       ]
     },
     "SourceOrTarget": {
       "type": "object",
+      "description": "Resource details",
       "properties": {
         "azureResourceId": {
           "type": "string",
           "description": "Azure resource id, example /subscription/{subscription}/resourceGroup/{rg}/Microsoft.compute/virtualMachine/{vmName}",
           "pattern": "(\\/[0-9a-zA-Z]+)*"
         }
-      },
-      "description": "Resource details"
+      }
     },
     "Toolset": {
       "type": "string",
@@ -1217,6 +1277,7 @@
     },
     "TopologyImpact": {
       "type": "object",
+      "description": "Topology Impact properties",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TopologyImpactProperties",
@@ -1228,7 +1289,6 @@
           ]
         }
       },
-      "description": "Topology Impact properties",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -1237,29 +1297,28 @@
     },
     "TopologyImpactListResult": {
       "type": "object",
+      "description": "The response of a TopologyImpact list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The TopologyImpact items on this page",
           "items": {
             "$ref": "#/definitions/TopologyImpact"
-          },
-          "x-cadl-name": "TopologyImpact[]",
-          "description": "The TopologyImpact items on this page"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a TopologyImpact list operation.",
       "required": [
         "value"
       ]
     },
     "TopologyImpactProperties": {
       "type": "object",
+      "description": "Topology impact properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1278,12 +1337,11 @@
         },
         "impactedResources": {
           "type": "array",
+          "description": "list of impacted resources and associated arm correlation ids",
           "items": {
             "$ref": "#/definitions/ImpactedResources"
           },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "ImpactedResources[]",
-          "description": "list of impacted resources and associated arm correlation ids"
+          "x-ms-identifiers": []
         },
         "topologyImpactUniqueId": {
           "type": "string",
@@ -1307,9 +1365,7 @@
         },
         "additionalProperties": {
           "type": "object",
-          "properties": {},
-          "description": "Additional fields related to impact, applicable fields per resource type are list under /impactCategories API",
-          "x-cadl-name": "{}"
+          "description": "Additional fields related to impact, applicable fields per resource type are list under /impactCategories API"
         },
         "errorDetails": {
           "$ref": "#/definitions/ErrorDetailProperties",
@@ -1317,12 +1373,11 @@
         },
         "performance": {
           "type": "array",
+          "description": "Details about performance issue. Applicable for performance impacts.",
           "items": {
             "$ref": "#/definitions/Performance"
           },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "Performance[]",
-          "description": "Details about performance issue. Applicable for performance impacts."
+          "x-ms-identifiers": []
         },
         "workload": {
           "$ref": "#/definitions/Workload",
@@ -1341,14 +1396,32 @@
           "description": "Client incident details ex: incidentId , incident source"
         }
       },
-      "description": "Topology impact properties",
       "required": [
         "startDateTime",
         "impactedResources"
       ]
     },
+    "Versions": {
+      "type": "string",
+      "description": "API Versions",
+      "enum": [
+        "2023-12-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_12_01_preview",
+            "value": "2023-12-01-preview",
+            "description": "Dec 01, 2023 Preview API Version"
+          }
+        ]
+      }
+    },
     "Workload": {
       "type": "object",
+      "description": "Information about the impacted workload",
       "properties": {
         "context": {
           "type": "string",
@@ -1358,11 +1431,11 @@
           "$ref": "#/definitions/Toolset",
           "description": "Tool used to interact with Azure. SDK, AzPortal, etc.., Other"
         }
-      },
-      "description": "Information about the impacted workload"
+      }
     },
     "WorkloadImpact": {
       "type": "object",
+      "description": "Workload Impact properties",
       "properties": {
         "properties": {
           "$ref": "#/definitions/WorkloadImpactProperties",
@@ -1374,7 +1447,6 @@
           ]
         }
       },
-      "description": "Workload Impact properties",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -1383,29 +1455,28 @@
     },
     "WorkloadImpactListResult": {
       "type": "object",
+      "description": "The response of a WorkloadImpact list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The WorkloadImpact items on this page",
           "items": {
             "$ref": "#/definitions/WorkloadImpact"
-          },
-          "x-cadl-name": "WorkloadImpact[]",
-          "description": "The WorkloadImpact items on this page"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a WorkloadImpact list operation.",
       "required": [
         "value"
       ]
     },
     "WorkloadImpactProperties": {
       "type": "object",
+      "description": "Workload impact properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1448,21 +1519,19 @@
         },
         "armCorrelationIds": {
           "type": "array",
+          "description": "The ARM correlation ids, this is important field for control plane related impacts",
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "The ARM correlation ids, this is important field for control plane related impacts",
           "x-ms-identifiers": []
         },
         "performance": {
           "type": "array",
+          "description": "Details about performance issue. Applicable for performance impacts.",
           "items": {
             "$ref": "#/definitions/Performance"
           },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "Performance[]",
-          "description": "Details about performance issue. Applicable for performance impacts."
+          "x-ms-identifiers": []
         },
         "connectivity": {
           "$ref": "#/definitions/Connectivity",
@@ -1470,9 +1539,7 @@
         },
         "additionalProperties": {
           "type": "object",
-          "properties": {},
-          "description": "Additional fields related to impact, applicable fields per resource type are list under /impactCategories API",
-          "x-cadl-name": "{}"
+          "description": "Additional fields related to impact, applicable fields per resource type are list under /impactCategories API"
         },
         "errorDetails": {
           "$ref": "#/definitions/ErrorDetailProperties",
@@ -1495,7 +1562,6 @@
           "description": "Client incident details ex: incidentId , incident source"
         }
       },
-      "description": "Workload impact properties",
       "required": [
         "startDateTime",
         "impactedResourceId",
@@ -1504,33 +1570,33 @@
     },
     "insightDetails": {
       "type": "object",
+      "description": "Body of the get all insights",
       "properties": {
         "azureResourceId": {
           "type": "string",
           "description": "The ID of the azure resource."
         }
-      },
-      "description": "Body of the get all insights"
+      }
     }
   },
   "parameters": {
-    "Azure.ResourceManager.CategoryNameParameter": {
+    "CustomParameters.categoryName": {
       "name": "categoryName",
       "in": "query",
-      "required": false,
       "description": "Filter by category name ",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$",
-      "minLength": 1,
+      "required": false,
       "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$",
       "x-ms-parameter-location": "method"
     },
-    "Azure.ResourceManager.ResourceTypeParameter": {
+    "CustomParameters.resourceType": {
       "name": "resourceType",
       "in": "query",
-      "required": false,
       "description": "Filter by resource type",
-      "minLength": 1,
+      "required": false,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   }

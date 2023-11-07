@@ -1,10 +1,13 @@
 // First, import the common Microsoft.Voiceservice definition
-import "./impact.cadl";
-//import "./subscriptionResource.cadl";
+import "./impact.tsp";
+//
 
 // Then import the resource API definitions
-import "./workloadImpacts.cadl";
-import "./ImpactCategories.cadl";
+import "./workloadImpacts.tsp";
+import "./ImpactCategories.tsp";
+import "./commonModels.tsp";
+import "./insights.tsp";
+import "./topologyImpacts.tsp";
 
 
 
@@ -25,3 +28,5 @@ model ResourceProperties {
 	@visibility("read")
 	provisioningState?: ProvisioningState;
 }
+
+

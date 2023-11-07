@@ -1,23 +1,20 @@
-// Definitions for the TeamsCallingResource
+import "@typespec/openapi";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
-import "@cadl-lang/openapi";
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
-import "./subscriptionResource.cadl";
 
 namespace Microsoft.Impact;
 
-using Cadl.Http;
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 
 @doc("Topology Impact properties")
+@subscriptionResource
 model TopologyImpact is ProxyResource<TopologyImpactProperties> {
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$")
   @key("topologyImpactName")
@@ -32,10 +29,10 @@ model TopologyImpact is ProxyResource<TopologyImpactProperties> {
 model TopologyImpactProperties is ResourceProperties{
 
   @doc("Time at which impact was observed ")
-  startDateTime: zonedDateTime;
+  startDateTime: utcDateTime;
 
   @doc("Time at which impact has ended ")
-  endDateTime?: zonedDateTime;
+  endDateTime?: utcDateTime;
 
   @doc("list of impacted resources and associated arm correlation ids")
   @extension("x-ms-identifiers", [])
@@ -48,7 +45,7 @@ model TopologyImpactProperties is ResourceProperties{
 
   @doc("Time at which impact is reported")
   @visibility("read")
-  reportedTimeUtc? :zonedDateTime;
+  reportedTimeUtc? :utcDateTime;
 
   @doc("Category of the impact,  if not provided default category would be considered as dataplane impact")
   impactCategory?: ImpactCategoryEnum;
@@ -86,12 +83,12 @@ model ImpactedResources {
 
 }
 
-#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
 @armResourceOperations
 interface TopologyImpacts {
-  create is SubscriptionResourceCreateOrUpdateSync<TopologyImpact>;
-  get is SubscriptionResourceRead<TopologyImpact>;
-  delete is SubscriptionResourceDeleteSync<TopologyImpact>;
+  create is ArmResourceCreateOrUpdateAsync<TopologyImpact>;
+  get is ArmResourceRead<TopologyImpact>;
+  delete is ArmResourceDeleteSync<TopologyImpact>;
   listBySubscription is ArmListBySubscription<TopologyImpact>;
 
 }

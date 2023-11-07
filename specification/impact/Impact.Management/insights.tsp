@@ -1,20 +1,19 @@
-import "@cadl-lang/openapi";
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
-import "./subscriptionResource.cadl";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
 
 namespace Microsoft.Impact;
 
-using Cadl.Http;
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
 
 @doc("Insight resource")
 @parentResource(WorkloadImpact)
+@subscriptionResource
 model Insight is ProxyResource<InsightProperties> {
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$")
   @key("insightName")
@@ -26,6 +25,7 @@ model Insight is ProxyResource<InsightProperties> {
 }
 
 @doc("Insight resource")
+@subscriptionResource
 model InsightUnderSubscription is ProxyResource<InsightProperties> {
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$")
   @key("insightName")
@@ -52,10 +52,10 @@ model InsightProperties is ResourceProperties{
   "status"? : string;
 
   @doc("time at which insight has been generated.")
-  "createdTime": zonedDateTime;
+  "createdTime": utcDateTime;
   
   @doc("time at which insight has been updated.")
-  "updatedTime": zonedDateTime;
+  "updatedTime": utcDateTime;
 
   @doc("list of actions performed to or for the azure resource.")
   @extension("x-ms-identifiers", [])
@@ -71,7 +71,7 @@ model Action {
 	summary?: string;
 
 	@doc("time at which action was performed.")
-	time?: zonedDateTime;
+	time?: utcDateTime;
 }
 
 @doc("details of of the impact for which insight has been generated.")
@@ -80,7 +80,7 @@ model ImpactDetails {
   "impactedResources": ImpactedResource[];
 
   @doc("Time at which impact was started according to reported impact.")
-  "impactStartTime": zonedDateTime;
+  "impactStartTime": utcDateTime;
 
   @doc("azure Id of the impact.")
   "impactId": string;
@@ -96,10 +96,10 @@ model ImpactedResource {
 }
 
 @doc("context of post call for insight")
-model InsightCustomResourceCommonParameters<TResource> {
+model InsightCustomResourceCommonParameters {
   ...ApiVersionParameter;
   ...SubscriptionIdParameter;
-  ...ProviderNamespace<TResource>;
+  ...ProviderNamespace<InsightUnderSubscription>;
 }
 
 @doc("Body of the get all insights")
@@ -110,16 +110,16 @@ model insightDetails {
 
 
 
-#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
 @armResourceOperations
 interface Insights  {
-  @doc("Get Insight resources by workloadImpactName and insightName", TResource)
-  get  is SubscriptionResourceRead<Insight>;
+  @doc("Get Insight resources by workloadImpactName and insightName")
+  get  is ArmResourceRead<Insight>;
 
-  @doc("List Insight resources by workloadImpactName", TResource)
+  @doc("List Insight resources by workloadImpactName")
   listBySubscription is ArmListBySubscription<Insight>;
 
-  #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
+  /*#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
   @post
   @doc("get all insights under subscription")
   @segment("getAllInsights")
@@ -127,4 +127,18 @@ interface Insights  {
   ...InsightCustomResourceCommonParameters<InsightUnderSubscription>,
   @body impactInfo: insightDetails, 
 ): ArmResponse<ResourceListResult<Insight>> | ErrorResponse;
+*/
+@post
+@doc("get all insights under subscription")
+  @segment("getAllInsights")
+op getAll(
+  ...InsightCustomResourceCommonParameters,
+  @body impactInfo: insightDetails,
+): ArmResponse<ResourceListResult<Insight>> | ErrorResponse;
+
+
+ /* @doc("get all insights under subscription")
+  @segment("getAllInsights")
+  getAll2 is ResourceAct<InsightUnderSubscription,insightDetails,ResourceListResult<Insight>>;
+  */
 }

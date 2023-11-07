@@ -1,19 +1,23 @@
-import "@cadl-lang/openapi";
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
-import "./subscriptionResource.cadl";
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using OpenAPI;
+using Azure.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+
 
 namespace Microsoft.Impact;
 
-using Cadl.Http;
-using Cadl.Rest;
-using OpenAPI;
-using Azure.ResourceManager;
 
 @doc("ImpactCategory resource")
+@subscriptionResource
 model ImpactCategory is ProxyResource<ImpactCategoryProperties> {
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$")
   @key("impactCategoryName")
@@ -23,6 +27,7 @@ model ImpactCategory is ProxyResource<ImpactCategoryProperties> {
   @path
   name: string;  
 }
+
 
 
 @doc("Impact category properties.")
@@ -54,11 +59,30 @@ allowedValues? : string[];
 
 
 
-
-#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
 @armResourceOperations
 interface ImpactCategories  {
-  get  is SubscriptionResourceRead<ImpactCategory>;
-  listBySubscription is ArmListBySubscriptionWithCustomQueryParams<ImpactCategory>;
+  get  is ArmResourceRead<ImpactCategory>;
+
+  //listBySubscription is ArmListBySubscription<ImpactCategory>;
+
+    listBySubscription is ArmResourceListByParent<
+    ImpactCategory,
+    BaseParameters<ImpactCategory> & CustomParameters
+  >;
+}
+
+@doc("Custom query params")
+model CustomParameters {
+  @query
+  @minLength(1)
+  @doc("Filter by category name ")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$")
+  categoryName?: string;
+
+  @query
+  @minLength(1)
+  @doc("Filter by resource type")
+  resourceType?: string;
 }
 

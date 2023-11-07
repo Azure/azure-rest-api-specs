@@ -1,16 +1,15 @@
 
-import "@cadl-lang/openapi";
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
-import "./subscriptionResource.cadl";
+import "@typespec/openapi";
+import "@typespec/rest";
+
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
 
 namespace Microsoft.Impact;
 
-using Cadl.Http;
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -94,6 +93,7 @@ enum IncidentSource {
 
 @doc("List of impact categories.")
 enum ImpactCategoryEnum {
+/** Availability category */
   Availability,
   Performance,
   Other
