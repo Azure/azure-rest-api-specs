@@ -170,7 +170,7 @@ model Completions {
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @projectedName("json", "prompt_filter_results")
-  promptFilterResults?: PromptFilterResult[];
+  promptFilterResults: PromptFilterResult[];
 
   @doc("""
     The collection of completions choices associated with this completions response.

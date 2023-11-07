@@ -48,11 +48,12 @@ model CompletionsStreamDelta {
   @projectedName("json", "choices")
   choices: ChoiceStreamDelta[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
   @doc("""
     Usage information for tokens processed and generated as part of this completions operation.
     """)
   @projectedName("json", "usage")
-  usage: CompletionsUsage;
+  usage: CompletionsUsage | null;
 }
 
 @doc("""
