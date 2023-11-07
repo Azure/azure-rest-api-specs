@@ -2276,6 +2276,10 @@
           "type": "string",
           "description": "The database name of the cluster. Only one database per cluster is supported."
         },
+        "enableGeoBackup":{
+          "type":"boolean",
+          "description": "If cluster backup is stored in another Azure region in addition to the copy of the backup stored in the cluster's region. Enabled only at the time of cluster creation."
+        },
         "authConfig": {
           "$ref": "#/definitions/AuthConfig",
           "description": "Authentication configuration of a cluster."
@@ -2291,14 +2295,22 @@
           "enum": [
             "enabled",
             "disabled"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "ActiveDirectoryAuth",
+            "modelAsString": true
+          }
         },
         "passwordAuth": {
           "type": "string",
           "enum": [
             "enabled",
             "disabled"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "PasswordAuth",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2606,47 +2618,17 @@
           ],
           "description": "The password of the cluster role."
         },
-        "externalPrincipal": {
+        "entraIdPrincipal":{
           "type": "object",
-          "required": [
-            "principalId",
-            "principalType"
-          ],
+          "required": ["objectId", "principalType"],
           "properties": {
-            "principalId": {
+            "objectId":{
               "type": "string",
               "format": "uuid"
             },
-            "principalType": {
+            "principalType":{
               "type": "string",
-              "enum": [
-                "user",
-                "servicePrincipal"
-              ]
-            },
-            "tenantId": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        },
-        "entraIdPrincipal": {
-          "type": "object",
-          "required": [
-            "objectId",
-            "principalType"
-          ],
-          "properties": {
-            "objectId": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "principalType": {
-              "type": "string",
-              "enum": [
-                "user",
-                "servicePrincipal"
-              ]
+              "enum": ["user", "servicePrincipal"]
             },
             "tenantId": {
               "type": "string",
