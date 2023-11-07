@@ -97,7 +97,7 @@ model InsightCustomResourceCommonParameters {
   ...SubscriptionIdParameter;
   ...ProviderNamespace<InsightUnderSubscription>;
 
-  /** Imppact information */
+  /** impactinformation */
   @body impactInfo: InsightDetails;
 }
 
