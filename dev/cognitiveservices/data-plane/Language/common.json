@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
-    "version": "2023-04-01"
+    "version": "2023-11-15-preview"
   },
   "paths": {},
   "definitions": {
@@ -144,6 +144,31 @@
     "Language": {
       "type": "string",
       "description": "Language of the text records. This is BCP-47 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+    },
+    "RedactionCharacter": {
+      "type": "string",
+      "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
+      "default": "*",
+      "x-ms-enum": {
+        "name": "redactionCharacter",
+        "modelAsString": true
+      },
+      "enum": [
+        "!",
+        "#",
+        "$",
+        "%",
+        "&",
+        "*",
+        "+",
+        "-",
+        "=",
+        "?",
+        "@",
+        "^",
+        "_",
+        "~"
+      ]
     },
     "StringIndexType": {
       "type": "string",
@@ -301,7 +326,7 @@
       },
       "type": "object"
     },
-    "DocumentError": {
+    "InputError": {
       "type": "object",
       "description": "Contains details of errors encountered during a job execution.",
       "required": [
@@ -311,7 +336,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID of the input document."
+          "description": "The ID of the input."
         },
         "error": {
           "type": "object",
@@ -372,6 +397,7 @@
           "description": "Number of transactions for the request."
         }
       },
+      "additionalProperties": true,
       "description": "if showStats=true was specified in the request this field will contain information about the request payload."
     },
     "PreBuiltResult": {
@@ -806,7 +832,33 @@
         "sentenceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "It controls the approximate number of sentences in the output summaries."
+          "description": "(NOTE: Recommended to use summaryLength instead) Controls the approximate number of sentences in the output summaries."
+        },
+        "summaryLength": {
+          "type": "string",
+          "enum": [
+            "short",
+            "medium",
+            "long"
+          ],
+          "x-ms-enum": {
+            "name": "SummaryLengthBucket",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "short",
+                "description": "Instructs model to generate shorter length summaries."
+              },
+              {
+                "value": "medium",
+                "description": "Instructs model to generate medium length summaries."
+              },
+              {
+                "value": "long",
+                "description": "Instructs model to generate longer length summaries."
+              }
+            ]
+          }
         },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
@@ -832,15 +884,86 @@
           "description": "The length of the context. Use of different 'stringIndexType' values can affect the length returned."
         }
       }
+    },
+    "CustomTaskParameters": {
+      "type": "object",
+      "description": "Parameters object for a text analysis task using custom models.",
+      "properties": {
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        }
+      ],
+      "required": [
+        "projectName",
+        "deploymentName"
+      ]
+    },
+    "CustomResult": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      },
+      "required": [
+        "errors",
+        "projectName",
+        "deploymentName"
+      ]
+    },
+    "DocumentError": {
+      "type": "object",
+      "description": "Contains details of errors encountered during a job execution.",
+      "required": [
+        "id",
+        "error"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the input document."
+        },
+        "error": {
+          "type": "object",
+          "description": "Error encountered.",
+          "$ref": "#/definitions/Error"
+        }
+      }
     }
   },
   "parameters": {
     "Endpoint": {
-      "name": "Endpoint",
+      "name": "endpoint",
       "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
+      "format": "url",
       "in": "path",
       "x-ms-skip-url-encoding": true
     },

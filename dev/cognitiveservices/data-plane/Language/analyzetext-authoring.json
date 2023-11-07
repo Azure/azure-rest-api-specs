@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Text Authoring",
-    "version": "2023-04-01",
+    "version": "2023-11-15-preview",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>."
   },
   "securityDefinitions": {
@@ -214,6 +214,106 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/authoring/analyze-text/projects/{projectName}/:authorize-copy": {
+      "post": {
+        "description": "Generates a copy project operation authorization to the current target Azure resource.",
+        "operationId": "TextAnalysisAuthoring_CopyProjectAuthorization",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The copy project authorization info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringCopyAuthorizationOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payload to send to source resource to initiate project copying.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringCopyProjectOptions"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Copy Project Authorization": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulCopyProjectAuthorization.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/:copy": {
+      "post": {
+        "description": "Copies an existing project to another Azure resource.",
+        "operationId": "TextAnalysisAuthoring_CopyProject",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The copy project info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringCopyProjectOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Copy Project": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulCopyProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/authoring/analyze-text/projects/{projectName}/:export": {
       "post": {
         "description": "Triggers a job to export a project's data.",
@@ -284,6 +384,13 @@
         "parameters": [
           {
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "header",
+            "name": "format",
+            "description": "The format of the project to import. The currently supported formats are json and aml formats. If not provided, the default is set to json.",
+            "type": "string",
+            "x-ms-parameter-location": "method"
           },
           {
             "in": "body",
@@ -373,6 +480,45 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/copy/jobs/{jobId}": {
+      "get": {
+        "description": "Gets the status of an existing copy project job.",
+        "operationId": "TextAnalysisAuthoring_GetCopyProjectStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the long running operation.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringCopyProjectJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Copy Project Status": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetCopyProjectStatus.json"
+          }
+        }
       }
     },
     "/authoring/analyze-text/projects/{projectName}/deployments": {
@@ -609,6 +755,103 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
+      "post": {
+        "description": "Deletes a project deployment from the specified assigned resources.",
+        "operationId": "TextAnalysisAuthoring_DeleteDeploymentFromResources",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/DeploymentNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The options for deleting the deployment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringDeleteDeploymentOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Deployment": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteDeploymentFromResources.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}": {
+      "get": {
+        "description": "Gets the status of an existing delete deployment from specific resources job.",
+        "operationId": "TextAnalysisAuthoring_GetDeploymentDeleteFromResourcesStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/DeploymentNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deployment job result.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Deployment Status": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetDeploymentStatus.json"
+          }
+        }
+      }
+    },
     "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
         "description": "Gets the status of an existing deployment job.",
@@ -725,6 +968,269 @@
         "x-ms-examples": {
           "Successful Get Export Status": {
             "$ref": "./examples/analyzetext-authoring/SuccessfulGetExportStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/exported-models": {
+      "get": {
+        "description": "Lists the exported models belonging to a project.",
+        "operationId": "TextAnalysisAuthoring_ListExportedModels",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all exported models.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringExportedTrainedModels"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful List Exported Models": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulListExportedModels.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}": {
+      "get": {
+        "description": "Gets the details of an exported model.",
+        "operationId": "TextAnalysisAuthoring_GetExportedModel",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringExportedModelNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exported model info",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringExportedTrainedModel"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Exported Model": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetExportedModel.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing exported model.",
+        "operationId": "TextAnalysisAuthoring_DeleteExportedModel",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringExportedModelNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results in triggering the deletion of the exported model.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the deletion job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Exported Model": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteExportedModel.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "description": "Creates a new exported model or replaces an existing one.",
+        "operationId": "TextAnalysisAuthoring_CreateOrUpdateExportedModel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringExportedModelNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The exported model info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringExportedModelOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results in loading the working directory with the snapshot of the model provided.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Load Snapshot": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulCreateExportedModel.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}/jobs/{jobId}": {
+      "get": {
+        "description": "Gets the status for an existing job to create or update an exported model.",
+        "operationId": "TextAnalysisAuthoring_GetExportedModelJobStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringExportedModelNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The details of the long running operation.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringExportedModelJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Exported Model Status": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetExportedModelStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}/manifest": {
+      "get": {
+        "description": "Gets the details and URL needed to download the exported model.",
+        "operationId": "TextAnalysisAuthoring_GetExportedModelManifest",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringExportedModelNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The exported model manifest.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringExportedModelManifest"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Exported Model Manifest": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetExportedModelManifest.json"
           }
         }
       }
@@ -890,6 +1396,61 @@
         }
       }
     },
+    "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:evaluate": {
+      "post": {
+        "description": "Triggers evaluation operation on a trained model.",
+        "operationId": "TextAnalysisAuthoring_EvaluateModel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringTrainedModelLabelPathParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The training input parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Evaluation": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulEvaluationProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
       "post": {
         "description": "Restores the snapshot of this trained model to be the current working directory of the project.",
@@ -931,6 +1492,48 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}": {
+      "get": {
+        "description": "Gets the status for an evaluation job.",
+        "operationId": "TextAnalysisAuthoring_GetEvaluationStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringTrainedModelLabelPathParameter"
+          },
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The evaluation job result.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringEvaluationJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Evaluation Status": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetEvaluationStatus.json"
+          }
+        }
       }
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
@@ -1065,6 +1668,237 @@
         "x-ms-examples": {
           "Successful Get Load Snapshot Status": {
             "$ref": "./examples/analyzetext-authoring/SuccessfulGetLoadSnapshotStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/resources": {
+      "get": {
+        "description": "Lists the deployments resources assigned to the project.",
+        "operationId": "TextAnalysisAuthoring_ListDeploymentResources",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The assigned deployment resources.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringAssignedDeploymentResources"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful List Deployment Resources": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulListDeploymentResources.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/resources/:assign": {
+      "post": {
+        "description": "Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
+        "operationId": "TextAnalysisAuthoring_AssignDeploymentResources",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The new project resources info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringAssignDeploymentResourcesOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Assign Deployment Resources": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulAssignDeploymentResources.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/resources/:unassign": {
+      "post": {
+        "description": "Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.",
+        "operationId": "TextAnalysisAuthoring_UnassignDeploymentResources",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The info for the deployment resources to be deleted.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringUnassignDeploymentResourcesOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Unassign Deployment Resources": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulUnassignDeploymentResources.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/resources/assign/jobs/{jobId}": {
+      "get": {
+        "description": "Gets the status of an existing assign deployment resources job.",
+        "operationId": "TextAnalysisAuthoring_GetAssignDeploymentResourcesStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The assign deployment resources job result.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentResourcesJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Assign Deployment Resources Status": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetAssignDeploymentResourcesStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-text/projects/{projectName}/resources/unassign/jobs/{jobId}": {
+      "get": {
+        "description": "Gets the status of an existing unassign deployment resources job.",
+        "operationId": "TextAnalysisAuthoring_GetUnassignDeploymentResourcesStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringJobIdPathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The unassign deployment resources job result.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentResourcesJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Unassign Deployment Resources Status": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetUnassignDeploymentResourcesStatus.json"
           }
         }
       }
@@ -1236,6 +2070,52 @@
         }
       }
     },
+    "/authoring/analyze-text/projects/global/deployments/resources": {
+      "get": {
+        "description": "Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.",
+        "operationId": "TextAnalysisAuthoring_ListAssignedResourceDeployments",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The assigned deployments metadata for the resource.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringAssignedResourceDeploymentsMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful List Assigned Resource Deployments": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulListAssignedResourceDeployments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
     "/authoring/analyze-text/projects/global/languages": {
       "get": {
         "description": "Lists the supported languages.",
@@ -1277,6 +2157,69 @@
         "x-ms-examples": {
           "Successful Supported Languages": {
             "$ref": "./examples/analyzetext-authoring/SuccessfulGetSupportedLanguages.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
+    "/authoring/analyze-text/projects/global/prebuilt-entities": {
+      "get": {
+        "description": "Lists the supported prebuilt entities that can be used while creating composed entities.",
+        "operationId": "TextAnalysisAuthoring_GetSupportedPrebuiltEntities",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringProjectKindQueryOptionalParameter"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "description": "The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "in": "query",
+            "name": "multilingual",
+            "description": "Whether to get the support prebuilt entities for multilingual or monolingual projects. If true, the language parameter is ignored.",
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of supported prebuilt entities.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringPrebuiltEntities"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Supported Prebuilt Entities": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetSupportedPrebuiltEntities.json"
           }
         },
         "x-ms-pageable": {
@@ -1336,6 +2279,158 @@
     }
   },
   "definitions": {
+    "TextAnalysisAuthoringAssignDeploymentResourcesOptions": {
+      "description": "Represents the options for assigning Azure resources to a project.",
+      "required": [
+        "resourcesMetadata"
+      ],
+      "type": "object",
+      "properties": {
+        "resourcesMetadata": {
+          "description": "Represents the metadata for the resources to be assigned.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringResourceMetadata"
+          }
+        }
+      },
+      "x-ms-client-name": "AssignDeploymentResourcesOptions"
+    },
+    "TextAnalysisAuthoringAssignedDeploymentResource": {
+      "description": "Represents the assigned deployment resource.",
+      "required": [
+        "azureResourceId",
+        "region"
+      ],
+      "type": "object",
+      "properties": {
+        "azureResourceId": {
+          "description": "The resource ID.",
+          "type": "string"
+        },
+        "region": {
+          "description": "The resource region.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "AssignedDeploymentResource"
+    },
+    "TextAnalysisAuthoringAssignedDeploymentResources": {
+      "description": "Represents the assigned deployment resources.",
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of assigned deployment resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringAssignedDeploymentResource"
+          }
+        },
+        "nextLink": {
+          "description": "The next page link.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-client-name": "AssignedDeploymentResources"
+    },
+    "TextAnalysisAuthoringAssignedProjectDeploymentMetadata": {
+      "description": "Represents the metadata for an assigned deployment",
+      "required": [
+        "deploymentName",
+        "lastDeployedDateTime",
+        "deploymentExpirationDate"
+      ],
+      "type": "object",
+      "properties": {
+        "deploymentName": {
+          "description": "Represents the deployment name.",
+          "type": "string"
+        },
+        "lastDeployedDateTime": {
+          "format": "date-time",
+          "description": "Represents deployment last deployed time.",
+          "type": "string"
+        },
+        "deploymentExpirationDate": {
+          "format": "date",
+          "description": "Represents deployment expiration date in the runtime.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "AssignedProjectDeploymentMetadata"
+    },
+    "TextAnalysisAuthoringAssignedProjectDeploymentsMetadata": {
+      "description": "Represents the metadata for assigned deployments for a project.",
+      "required": [
+        "projectName",
+        "deploymentsMetadata"
+      ],
+      "type": "object",
+      "properties": {
+        "projectName": {
+          "description": "Represents the project name.",
+          "type": "string"
+        },
+        "deploymentsMetadata": {
+          "description": "Represents the resource region.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringAssignedProjectDeploymentMetadata"
+          }
+        }
+      },
+      "x-ms-client-name": "AssignedProjectDeploymentsMetadata"
+    },
+    "TextAnalysisAuthoringAssignedResourceDeploymentsMetadata": {
+      "description": "Represents the metadata for deployments assigned to a resource.",
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of retrieved assigned project deployments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringAssignedProjectDeploymentsMetadata"
+          }
+        },
+        "nextLink": {
+          "description": "The next page link.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-client-name": "AssignedResourceDeploymentsMetadata"
+    },
+    "TextAnalysisAuthoringCompositionSetting": {
+      "enum": [
+        "separateComponents",
+        "combineComponents"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CompositionSetting",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "separateComponents",
+            "description": "Every component's match or prediction is returned as a separate instance of the entity."
+          },
+          {
+            "value": "combineComponents",
+            "description": "When two or more components are found in the text and overlap, the components' spans are merged together into one span combining all of them."
+          }
+        ]
+      },
+      "x-ms-client-name": "CompositionSetting"
+    },
     "TextAnalysisAuthoringConfusionMatrix": {
       "type": "object",
       "additionalProperties": {
@@ -1371,6 +2466,78 @@
       },
       "x-ms-client-name": "ConfusionMatrixRow"
     },
+    "TextAnalysisAuthoringCopyAuthorizationOptions": {
+      "description": "Represents the options for authorizing a project copy to the current Azure resource.",
+      "required": [
+        "projectKind"
+      ],
+      "type": "object",
+      "properties": {
+        "projectKind": {
+          "description": "Represents the project kind.",
+          "$ref": "#/definitions/TextAnalysisAuthoringProjectKind"
+        },
+        "storageInputContainerName": {
+          "description": "The name of the storage container.",
+          "type": "string"
+        },
+        "allowOverwrite": {
+          "description": "Whether to allow an existing project to be overwritten using the resulting copy authorization.",
+          "type": "boolean"
+        }
+      },
+      "x-ms-client-name": "CopyAuthorizationOptions"
+    },
+    "TextAnalysisAuthoringCopyProjectJobState": {
+      "description": "Represents the state of a copy job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
+        }
+      ],
+      "x-ms-client-name": "CopyProjectJobState"
+    },
+    "TextAnalysisAuthoringCopyProjectOptions": {
+      "description": "Represents the options for copying an existing project to another Azure resource.",
+      "required": [
+        "projectKind",
+        "targetProjectName",
+        "accessToken",
+        "expiresAt",
+        "targetResourceId",
+        "targetResourceRegion"
+      ],
+      "type": "object",
+      "properties": {
+        "projectKind": {
+          "description": "Represents the project kind.",
+          "$ref": "#/definitions/TextAnalysisAuthoringProjectKind"
+        },
+        "targetProjectName": {
+          "description": "The project name to be copied-into.",
+          "type": "string"
+        },
+        "accessToken": {
+          "description": "The access token.",
+          "type": "string"
+        },
+        "expiresAt": {
+          "format": "date-time",
+          "description": "The expiration of the access token.",
+          "type": "string"
+        },
+        "targetResourceId": {
+          "description": "Represents the target Azure resource ID.",
+          "type": "string"
+        },
+        "targetResourceRegion": {
+          "description": "Represents the target Azure resource region.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "CopyProjectOptions"
+    },
     "TextAnalysisAuthoringCreateDeploymentOptions": {
       "description": "Represents the options for creating or updating a project deployment.",
       "required": [
@@ -1381,6 +2548,13 @@
         "trainedModelLabel": {
           "description": "Represents the trained model label.",
           "type": "string"
+        },
+        "assignedResourceIds": {
+          "description": "Represents the resource IDs to be assigned to the deployment.\n            If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "x-ms-client-name": "CreateDeploymentOptions"
@@ -1466,6 +2640,46 @@
       "x-ms-discriminator-value": "CustomEntityRecognition",
       "x-ms-client-name": "CustomEntityRecognitionEvaluationSummary"
     },
+    "TextAnalysisAuthoringCustomHealthcareDocumentEvaluationResult": {
+      "description": "Represents the document evaluation result for a custom entity recognition project.",
+      "required": [
+        "customHealthcareResult"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
+        }
+      ],
+      "properties": {
+        "customHealthcareResult": {
+          "description": "Represents the evaluation prediction for entity recognition.",
+          "$ref": "#/definitions/TextAnalysisAuthoringDocumentHealthcareEvaluationResult"
+        }
+      },
+      "x-ms-discriminator-value": "CustomHealthcare",
+      "x-ms-client-name": "CustomHealthcareDocumentEvaluationResult"
+    },
+    "TextAnalysisAuthoringCustomHealthcareEvaluationSummary": {
+      "description": "Represents the evaluation summary for a custom health care project.",
+      "required": [
+        "customHealthcareEvaluation"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationSummary"
+        }
+      ],
+      "properties": {
+        "customHealthcareEvaluation": {
+          "description": "Contains the data related to health care evaluation.",
+          "$ref": "#/definitions/TextAnalysisAuthoringEntityRecognitionEvaluationSummary"
+        }
+      },
+      "x-ms-discriminator-value": "CustomHealthcare",
+      "x-ms-client-name": "CustomHealthcareEvaluationSummary"
+    },
     "TextAnalysisAuthoringCustomMultiLabelClassificationDocumentEvaluationResult": {
       "description": "Represents the document evaluation result for a custom multi-label classification project.",
       "required": [
@@ -1546,6 +2760,60 @@
       "x-ms-discriminator-value": "CustomSingleLabelClassification",
       "x-ms-client-name": "CustomSingleLabelClassificationEvaluationSummary"
     },
+    "TextAnalysisAuthoringCustomTextSentimentDocumentEvaluationResult": {
+      "description": "Represents the document evaluation result for a custom sentiment project.",
+      "required": [
+        "customTextSentimentResult"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
+        }
+      ],
+      "properties": {
+        "customTextSentimentResult": {
+          "description": "Represents the evaluation prediction for text sentiment.",
+          "$ref": "#/definitions/TextAnalysisAuthoringDocumentTextSentimentEvaluationResult"
+        }
+      },
+      "x-ms-discriminator-value": "CustomTextSentiment",
+      "x-ms-client-name": "CustomTextSentimentDocumentEvaluationResult"
+    },
+    "TextAnalysisAuthoringCustomTextSentimentEvaluationSummary": {
+      "description": "Represents the evaluation summary for a custom text sentiment project.",
+      "required": [
+        "customTextSentimentEvaluation"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationSummary"
+        }
+      ],
+      "properties": {
+        "customTextSentimentEvaluation": {
+          "description": "Contains the data related to custom sentiment evaluation.",
+          "$ref": "#/definitions/TextAnalysisAuthoringTextSentimentEvaluationSummary"
+        }
+      },
+      "x-ms-discriminator-value": "CustomTextSentiment",
+      "x-ms-client-name": "CustomTextSentimentEvaluationSummary"
+    },
+    "TextAnalysisAuthoringDeleteDeploymentOptions": {
+      "description": "Represents the options for deleting a project deployment.",
+      "type": "object",
+      "properties": {
+        "assignedResourceIds": {
+          "description": "Represents the resource IDs to delete the deployment from.\n            If not provided, the deployment will be rolled out from all the resources it is deployed to.\n            If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-client-name": "DeleteDeploymentOptions"
+    },
     "TextAnalysisAuthoringDeploymentJobState": {
       "description": "Represents the state of a deployment job.",
       "type": "object",
@@ -1555,6 +2823,35 @@
         }
       ],
       "x-ms-client-name": "DeploymentJobState"
+    },
+    "TextAnalysisAuthoringDeploymentResource": {
+      "description": "Represents an Azure resource assigned to a deployment.",
+      "required": [
+        "resourceId",
+        "region"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Represents the Azure resource Id.",
+          "type": "string"
+        },
+        "region": {
+          "description": "Represents the resource region.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "DeploymentResource"
+    },
+    "TextAnalysisAuthoringDeploymentResourcesJobState": {
+      "description": "Represents the state of a deployment resources job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
+        }
+      ],
+      "x-ms-client-name": "DeploymentResourcesJobState"
     },
     "TextAnalysisAuthoringDocumentEntityLabelEvaluationResult": {
       "description": "Represents an evaluation result entity label.",
@@ -1661,6 +2958,23 @@
       "discriminator": "projectKind",
       "x-ms-client-name": "DocumentEvaluationResult"
     },
+    "TextAnalysisAuthoringDocumentHealthcareEvaluationResult": {
+      "description": "Represents the healthcare evaluation result for a document.",
+      "required": [
+        "entities"
+      ],
+      "type": "object",
+      "properties": {
+        "entities": {
+          "description": "Represents the document labelled entities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityRegionEvaluationResult"
+          }
+        }
+      },
+      "x-ms-client-name": "DocumentHealthcareEvaluationResult"
+    },
     "TextAnalysisAuthoringDocumentMultiLabelClassificationEvaluationResult": {
       "description": "Represents the comparison between the expected and predicted classes that are result from the evaluation operation.",
       "required": [
@@ -1686,6 +3000,32 @@
       },
       "x-ms-client-name": "DocumentMultiLabelClassificationEvaluationResult"
     },
+    "TextAnalysisAuthoringDocumentSentimentLabelEvaluationResult": {
+      "description": "Represents an evaluation result Sentiment label.",
+      "required": [
+        "category",
+        "offset",
+        "length"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "Represents the sentiment category.",
+          "$ref": "#/definitions/TextAnalysisAuthoringSentiment"
+        },
+        "offset": {
+          "format": "int32",
+          "description": "Represents the sentiment offset index relative to the original text.",
+          "type": "integer"
+        },
+        "length": {
+          "format": "int32",
+          "description": "Represents the sentiment length.",
+          "type": "integer"
+        }
+      },
+      "x-ms-client-name": "DocumentSentimentLabelEvaluationResult"
+    },
     "TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult": {
       "description": "Represents the comparison between the expected and predicted class that result from an evaluation operation.",
       "required": [
@@ -1704,6 +3044,31 @@
         }
       },
       "x-ms-client-name": "DocumentSingleLabelClassificationEvaluationResult"
+    },
+    "TextAnalysisAuthoringDocumentTextSentimentEvaluationResult": {
+      "description": "Represents the comparison between the expected and predicted sentiment that result from an evaluation operation.",
+      "required": [
+        "expectedSentimentSpans",
+        "predictedSentimentSpans"
+      ],
+      "type": "object",
+      "properties": {
+        "expectedSentimentSpans": {
+          "description": "Represents the document's expected sentiment labels.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringDocumentSentimentLabelEvaluationResult"
+          }
+        },
+        "predictedSentimentSpans": {
+          "description": "Represents the document's predicted sentiment labels.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringDocumentSentimentLabelEvaluationResult"
+          }
+        }
+      },
+      "x-ms-client-name": "DocumentTextSentimentEvaluationResult"
     },
     "TextAnalysisAuthoringEntityEvaluationSummary": {
       "description": "Represents the evaluation summary for an entity.",
@@ -1783,36 +3148,84 @@
         },
         "microF1": {
           "format": "float",
-          "description": "Represents the micro F1",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microPrecision": {
           "format": "float",
-          "description": "Represents the micro precision",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microRecall": {
           "format": "float",
-          "description": "Represents the micro recall",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroF1": {
           "format": "float",
-          "description": "Represents the macro F1",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroPrecision": {
           "format": "float",
-          "description": "Represents the macro precision",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroRecall": {
           "format": "float",
-          "description": "Represents the macro recall",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         }
       },
       "x-ms-client-name": "EntityRecognitionEvaluationSummary"
+    },
+    "TextAnalysisAuthoringEvaluationJobResult": {
+      "required": [
+        "evaluationOptions",
+        "modelLabel",
+        "trainingConfigVersion",
+        "percentComplete"
+      ],
+      "type": "object",
+      "properties": {
+        "evaluationOptions": {
+          "description": "Represents the options used running the evaluation.",
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions"
+        },
+        "modelLabel": {
+          "description": "Represents trained model label.",
+          "type": "string"
+        },
+        "trainingConfigVersion": {
+          "description": "Represents training config version.",
+          "type": "string"
+        },
+        "percentComplete": {
+          "format": "int32",
+          "description": "Represents progress percentage.",
+          "type": "integer"
+        }
+      },
+      "x-ms-client-name": "EvaluationJobResult"
+    },
+    "TextAnalysisAuthoringEvaluationJobState": {
+      "description": "Represents the state of a evaluation job.",
+      "required": [
+        "result"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
+        }
+      ],
+      "properties": {
+        "result": {
+          "description": "Represents evaluation task detailed result.",
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationJobResult"
+        }
+      },
+      "x-ms-client-name": "EvaluationJobState"
     },
     "TextAnalysisAuthoringEvaluationKind": {
       "enum": [
@@ -1910,6 +3323,78 @@
       },
       "x-ms-client-name": "ExportedClass"
     },
+    "TextAnalysisAuthoringExportedCompositeEntity": {
+      "description": "Represents an entity in an exported project with composite entities enabled.",
+      "type": "object",
+      "properties": {
+        "compositionSetting": {
+          "description": "The behavior to follow when the entity's components overlap with each other.",
+          "$ref": "#/definitions/TextAnalysisAuthoringCompositionSetting"
+        },
+        "list": {
+          "description": "The list component of the entity.",
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedEntityList"
+        },
+        "prebuilts": {
+          "description": "The prebuilt entities components.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedPrebuiltEntity"
+          }
+        },
+        "category": {
+          "description": "The entity category.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "ExportedCompositeEntity"
+    },
+    "TextAnalysisAuthoringExportedCustomAbstractiveSummarizationDocument": {
+      "description": "Represents an exported document for a custom abstractive summarization project.",
+      "required": [
+        "summaryLocation"
+      ],
+      "type": "object",
+      "properties": {
+        "summaryLocation": {
+          "description": "Represents the summary file location in the blob store container associated with the project.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the document in the storage.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+          "type": "string"
+        },
+        "dataset": {
+          "description": "The dataset for this document. Allowed values are 'Train' and 'Test'.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "ExportedCustomAbstractiveSummarizationDocument"
+    },
+    "TextAnalysisAuthoringExportedCustomAbstractiveSummarizationProjectAssets": {
+      "description": "Represents the exported assets for an abstractive summarization project.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
+        }
+      ],
+      "properties": {
+        "documents": {
+          "description": "The list of documents belonging to this project.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomAbstractiveSummarizationDocument"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "CustomAbstractiveSummarization",
+      "x-ms-client-name": "ExportedCustomAbstractiveSummarizationProjectAssets"
+    },
     "TextAnalysisAuthoringExportedCustomEntityRecognitionDocument": {
       "description": "Represents an exported document for a custom entity recognition project.",
       "type": "object",
@@ -1918,7 +3403,7 @@
           "description": "The list of entity labels belonging to the document.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentRegion"
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentEntityRegion"
           }
         },
         "location": {
@@ -1962,6 +3447,59 @@
       },
       "x-ms-discriminator-value": "CustomEntityRecognition",
       "x-ms-client-name": "ExportedCustomEntityRecognitionProjectAssets"
+    },
+    "TextAnalysisAuthoringExportedCustomHealthcareDocument": {
+      "description": "Represents an exported document for a CustomHealthcare project.",
+      "type": "object",
+      "properties": {
+        "entities": {
+          "description": "The list of entity labels belonging to the document.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentEntityRegion"
+          }
+        },
+        "location": {
+          "description": "The location of the document in the storage.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+          "type": "string"
+        },
+        "dataset": {
+          "description": "The dataset for this document. Allowed values are 'Train' and 'Test'.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "ExportedCustomHealthcareDocument"
+    },
+    "TextAnalysisAuthoringExportedCustomHealthcareProjectAssets": {
+      "description": "Represents the exported assets for a CustomHealthcare project.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
+        }
+      ],
+      "properties": {
+        "entities": {
+          "description": "The list of entities belonging to the project.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedCompositeEntity"
+          }
+        },
+        "documents": {
+          "description": "The list of documents belonging to the project.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomHealthcareDocument"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "CustomHealthcare",
+      "x-ms-client-name": "ExportedCustomHealthcareProjectAssets"
     },
     "TextAnalysisAuthoringExportedCustomMultiLabelClassificationDocument": {
       "description": "Represents an exported document of a custom multi-label classification project.",
@@ -2066,6 +3604,51 @@
       "x-ms-discriminator-value": "CustomSingleLabelClassification",
       "x-ms-client-name": "ExportedCustomSingleLabelClassificationProjectAssets"
     },
+    "TextAnalysisAuthoringExportedCustomTextSentimentDocument": {
+      "description": "Represents an exported document for a custom text sentiment project.",
+      "type": "object",
+      "properties": {
+        "sentimentSpans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentSentimentLabel"
+          }
+        },
+        "location": {
+          "description": "The location of the document in the storage.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+          "type": "string"
+        },
+        "dataset": {
+          "description": "The dataset for this document. Allowed values are 'Train' and 'Test'.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "ExportedCustomTextSentimentDocument"
+    },
+    "TextAnalysisAuthoringExportedCustomTextSentimentProjectAssets": {
+      "description": "Represents the exported assets for a custom text sentiment project.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
+        }
+      ],
+      "properties": {
+        "documents": {
+          "description": "The list of documents belonging to the project.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomTextSentimentDocument"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "CustomTextSentiment",
+      "x-ms-client-name": "ExportedCustomTextSentimentProjectAssets"
+    },
     "TextAnalysisAuthoringExportedDocumentClass": {
       "description": "Represents a classification label for a document.",
       "type": "object",
@@ -2097,7 +3680,7 @@
       },
       "x-ms-client-name": "ExportedDocumentEntityLabel"
     },
-    "TextAnalysisAuthoringExportedDocumentRegion": {
+    "TextAnalysisAuthoringExportedDocumentEntityRegion": {
       "description": "Represents a region in a document for entity labeling.",
       "type": "object",
       "properties": {
@@ -2119,7 +3702,28 @@
           }
         }
       },
-      "x-ms-client-name": "ExportedDocumentRegion"
+      "x-ms-client-name": "ExportedDocumentEntityRegion"
+    },
+    "TextAnalysisAuthoringExportedDocumentSentimentLabel": {
+      "description": "Represents an entity label for a document.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The sentiment category.",
+          "$ref": "#/definitions/TextAnalysisAuthoringSentiment"
+        },
+        "offset": {
+          "format": "int32",
+          "description": "Start position for the sentiment text.",
+          "type": "integer"
+        },
+        "length": {
+          "format": "int32",
+          "description": "Length for the sentiment text.",
+          "type": "integer"
+        }
+      },
+      "x-ms-client-name": "ExportedDocumentSentimentLabel"
     },
     "TextAnalysisAuthoringExportedEntity": {
       "description": "Represents an entity in an exported project.",
@@ -2131,6 +3735,111 @@
         }
       },
       "x-ms-client-name": "ExportedEntity"
+    },
+    "TextAnalysisAuthoringExportedEntityList": {
+      "description": "Represents a list component of an entity.",
+      "type": "object",
+      "properties": {
+        "sublists": {
+          "description": "The sub-lists of the list component.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedEntitySublist"
+          }
+        }
+      },
+      "x-ms-client-name": "ExportedEntityList"
+    },
+    "TextAnalysisAuthoringExportedEntityListSynonym": {
+      "description": "Represents a list of synonyms inside a list component",
+      "type": "object",
+      "properties": {
+        "language": {
+          "description": "Represents the language of the synonyms. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+          "type": "string"
+        },
+        "values": {
+          "description": "The list of synonyms.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-client-name": "ExportedEntityListSynonym"
+    },
+    "TextAnalysisAuthoringExportedEntitySublist": {
+      "description": "Represents a sub-list inside a list component.",
+      "type": "object",
+      "properties": {
+        "listKey": {
+          "description": "The key of the sub-list.",
+          "type": "string"
+        },
+        "synonyms": {
+          "description": "The phrases of that correspond to the sub-list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedEntityListSynonym"
+          }
+        }
+      },
+      "x-ms-client-name": "ExportedEntitySublist"
+    },
+    "TextAnalysisAuthoringExportedModelJobState": {
+      "description": "Represents the state of a job to create or updated an exported model.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
+        }
+      ],
+      "x-ms-client-name": "ExportedModelJobState"
+    },
+    "TextAnalysisAuthoringExportedModelManifest": {
+      "description": "Represents the properties for the exported model manifest.",
+      "required": [
+        "modelFiles"
+      ],
+      "type": "object",
+      "properties": {
+        "modelFiles": {
+          "description": "The model files belonging to this model.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringModelFile"
+          }
+        }
+      },
+      "x-ms-client-name": "ExportedModelManifest"
+    },
+    "TextAnalysisAuthoringExportedModelOptions": {
+      "description": "Represents the options for creating or replacing an exported model.",
+      "required": [
+        "trainedModelLabel"
+      ],
+      "type": "object",
+      "properties": {
+        "trainedModelLabel": {
+          "description": "The trained model label.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "ExportedModelOptions"
+    },
+    "TextAnalysisAuthoringExportedPrebuiltEntity": {
+      "description": "Represents an exported prebuilt entity component",
+      "required": [
+        "category"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The prebuilt entity category.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "ExportedPrebuiltEntity"
     },
     "TextAnalysisAuthoringExportedProject": {
       "description": "Represents an exported project.",
@@ -2174,6 +3883,71 @@
       },
       "discriminator": "projectKind",
       "x-ms-client-name": "ExportedProjectAssets"
+    },
+    "TextAnalysisAuthoringExportedTrainedModel": {
+      "description": "Represents an exported trained model.",
+      "required": [
+        "exportedModelName",
+        "modelId",
+        "lastTrainedDateTime",
+        "lastExportedModelDateTime",
+        "modelExpirationDate",
+        "modelTrainingConfigVersion"
+      ],
+      "type": "object",
+      "properties": {
+        "exportedModelName": {
+          "description": "The exported model name.",
+          "type": "string"
+        },
+        "modelId": {
+          "description": "The model ID.",
+          "type": "string"
+        },
+        "lastTrainedDateTime": {
+          "format": "date-time",
+          "description": "The last trained date time of the model.",
+          "type": "string"
+        },
+        "lastExportedModelDateTime": {
+          "format": "date-time",
+          "description": "The last exported date time of the model.",
+          "type": "string"
+        },
+        "modelExpirationDate": {
+          "format": "date",
+          "description": "The model expiration date.",
+          "type": "string"
+        },
+        "modelTrainingConfigVersion": {
+          "description": "The model training config version.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "ExportedTrainedModel"
+    },
+    "TextAnalysisAuthoringExportedTrainedModels": {
+      "description": "Represents a list of exported trained models.",
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of exported models.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedTrainedModel"
+          }
+        },
+        "nextLink": {
+          "description": "The next page link.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-client-name": "ExportedTrainedModels"
     },
     "TextAnalysisAuthoringExportProjectJobState": {
       "description": "Represents the state of an export job.",
@@ -2278,6 +4052,26 @@
       ],
       "x-ms-client-name": "LoadSnapshotJobState"
     },
+    "TextAnalysisAuthoringModelFile": {
+      "description": "Represents the properties for the model file.",
+      "required": [
+        "name",
+        "contentUri"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the file.",
+          "type": "string"
+        },
+        "contentUri": {
+          "format": "uri",
+          "description": "The URI to retrieve the content of the file.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "ModelFile"
+    },
     "TextAnalysisAuthoringMultiLabelClassEvaluationSummary": {
       "description": "Represents the evaluation summary of a class in a multi-label classification project.",
       "required": [
@@ -2351,36 +4145,83 @@
         },
         "microF1": {
           "format": "float",
-          "description": "Represents the micro F1",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microPrecision": {
           "format": "float",
-          "description": "Represents the micro precision",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microRecall": {
           "format": "float",
-          "description": "Represents the micro recall",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroF1": {
           "format": "float",
-          "description": "Represents the macro F1",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroPrecision": {
           "format": "float",
-          "description": "Represents the macro precision",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroRecall": {
           "format": "float",
-          "description": "Represents the macro recall",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         }
       },
       "x-ms-client-name": "MultiLabelClassificationEvaluationSummary"
+    },
+    "TextAnalysisAuthoringPrebuiltEntities": {
+      "description": "Represents a list of the retrieved supported prebuilt entities.",
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The supported prebuilt entities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringPrebuiltEntity"
+          }
+        },
+        "nextLink": {
+          "description": "The next page link.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-client-name": "PrebuiltEntities"
+    },
+    "TextAnalysisAuthoringPrebuiltEntity": {
+      "description": "Represents a supported prebuilt entity.",
+      "required": [
+        "category",
+        "description",
+        "examples"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The prebuilt entity category.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description.",
+          "type": "string"
+        },
+        "examples": {
+          "description": "English examples for the entity.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "PrebuiltEntity"
     },
     "TextAnalysisAuthoringProjectDeletionJobState": {
       "description": "Represents the state of a project deletion job.",
@@ -2400,7 +4241,8 @@
         "lastTrainedDateTime",
         "lastDeployedDateTime",
         "deploymentExpirationDate",
-        "modelTrainingConfigVersion"
+        "modelTrainingConfigVersion",
+        "assignedResources"
       ],
       "type": "object",
       "properties": {
@@ -2430,6 +4272,13 @@
         "modelTrainingConfigVersion": {
           "description": "Represents model training config version.",
           "type": "string"
+        },
+        "assignedResources": {
+          "description": "Represents the metadata of the assigned Azure resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringDeploymentResource"
+          }
         }
       },
       "x-ms-client-name": "ProjectDeployment"
@@ -2461,7 +4310,10 @@
       "enum": [
         "CustomSingleLabelClassification",
         "CustomMultiLabelClassification",
-        "CustomEntityRecognition"
+        "CustomEntityRecognition",
+        "CustomAbstractiveSummarization",
+        "CustomHealthcare",
+        "CustomTextSentiment"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2479,6 +4331,18 @@
           {
             "value": "CustomEntityRecognition",
             "description": "For building an extraction model to identify your domain categories using your own data."
+          },
+          {
+            "value": "CustomAbstractiveSummarization",
+            "description": "For building an abstractive summarization models which are able to summarize long documents."
+          },
+          {
+            "value": "CustomHealthcare",
+            "description": "For building an text analytics for health model to identify your health domain data."
+          },
+          {
+            "value": "CustomTextSentiment",
+            "description": "For building a sentiment models which are able to extract sentiment for long documents."
           }
         ]
       },
@@ -2555,6 +4419,23 @@
           "format": "float",
           "description": "The threshold of the class with the highest confidence, at which the prediction will automatically be changed to \"None\". The value of the threshold should be between 0 and 1 inclusive.",
           "type": "number"
+        },
+        "amlProjectPath": {
+          "description": "The path to the AML connected project.",
+          "type": "string"
+        },
+        "isLabelingLocked": {
+          "description": "Indicates whether the labeling experience can be modified or not.",
+          "type": "boolean"
+        },
+        "runGptPredictions": {
+          "description": "Indicates whether to run GPT predictions or not.",
+          "type": "boolean"
+        },
+        "gptPredictiveLookahead": {
+          "format": "int32",
+          "description": "The predictive lookahead for GPT predictions that is specified by the user.",
+          "type": "integer"
         }
       },
       "x-ms-client-name": "ProjectSettings"
@@ -2638,7 +4519,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of retrieved jobs.",
+          "description": "The list of trained models.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringProjectTrainedModel"
@@ -2651,6 +4532,94 @@
         }
       },
       "x-ms-client-name": "ProjectTrainedModels"
+    },
+    "TextAnalysisAuthoringResourceMetadata": {
+      "description": "Represents metadata for the Azure resource..",
+      "required": [
+        "azureResourceId",
+        "customDomain",
+        "region"
+      ],
+      "type": "object",
+      "properties": {
+        "azureResourceId": {
+          "description": "Represents the Azure resource ID.",
+          "type": "string"
+        },
+        "customDomain": {
+          "description": "Represents the Azure resource custom domain.",
+          "type": "string"
+        },
+        "region": {
+          "description": "Represents the Azure resource region.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "ResourceMetadata"
+    },
+    "TextAnalysisAuthoringSentiment": {
+      "enum": [
+        "positive",
+        "negative",
+        "neutral"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Sentiment",
+        "modelAsString": true
+      },
+      "x-ms-client-name": "Sentiment"
+    },
+    "TextAnalysisAuthoringSentimentEvaluationSummary": {
+      "description": "Represents the evaluation summary for a sentiment in a custom sentiment project.",
+      "required": [
+        "f1",
+        "precision",
+        "recall",
+        "truePositiveCount",
+        "trueNegativeCount",
+        "falsePositiveCount",
+        "falseNegativeCount"
+      ],
+      "type": "object",
+      "properties": {
+        "f1": {
+          "format": "double",
+          "description": "Represents the model precision",
+          "type": "number"
+        },
+        "precision": {
+          "format": "double",
+          "description": "Represents the model recall",
+          "type": "number"
+        },
+        "recall": {
+          "format": "double",
+          "description": "Represents the model F1 score",
+          "type": "number"
+        },
+        "truePositiveCount": {
+          "format": "int32",
+          "description": "Represents the count of true positive",
+          "type": "integer"
+        },
+        "trueNegativeCount": {
+          "format": "int32",
+          "description": "Represents the count of true negative",
+          "type": "integer"
+        },
+        "falsePositiveCount": {
+          "format": "int32",
+          "description": "Represents the count of false positive",
+          "type": "integer"
+        },
+        "falseNegativeCount": {
+          "format": "int32",
+          "description": "Represents the count of false negative",
+          "type": "integer"
+        }
+      },
+      "x-ms-client-name": "SentimentEvaluationSummary"
     },
     "TextAnalysisAuthoringSingleLabelClassEvaluationSummary": {
       "description": "Represents the evaluation summary for a class in a single-label classification project.",
@@ -2730,36 +4699,94 @@
         },
         "microF1": {
           "format": "float",
-          "description": "Represents the micro F1",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microPrecision": {
           "format": "float",
-          "description": "Represents the micro precision",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microRecall": {
           "format": "float",
-          "description": "Represents the micro recall",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroF1": {
           "format": "float",
-          "description": "Represents the macro F1",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroPrecision": {
           "format": "float",
-          "description": "Represents the macro precision",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroRecall": {
           "format": "float",
-          "description": "Represents the macro recall",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         }
       },
       "x-ms-client-name": "SingleLabelClassificationEvaluationSummary"
+    },
+    "TextAnalysisAuthoringSpanSentimentEvaluationSummary": {
+      "description": "Represents the evaluation summary for a custom sentiment project.",
+      "required": [
+        "confusionMatrix",
+        "sentiments",
+        "microF1",
+        "microPrecision",
+        "microRecall",
+        "macroF1",
+        "macroPrecision",
+        "macroRecall"
+      ],
+      "type": "object",
+      "properties": {
+        "confusionMatrix": {
+          "description": "Represents the confusion matrix between two sentiments (the two sentiments can be the same). The matrix is between the sentiment that was labelled and the sentiment that was predicted.",
+          "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrix"
+        },
+        "sentiments": {
+          "description": "Represents the sentiment evaluation",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TextAnalysisAuthoringSentimentEvaluationSummary"
+          }
+        },
+        "microF1": {
+          "format": "float",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive.",
+          "type": "number"
+        },
+        "microPrecision": {
+          "format": "float",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive.",
+          "type": "number"
+        },
+        "microRecall": {
+          "format": "float",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive.",
+          "type": "number"
+        },
+        "macroF1": {
+          "format": "float",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive.",
+          "type": "number"
+        },
+        "macroPrecision": {
+          "format": "float",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive.",
+          "type": "number"
+        },
+        "macroRecall": {
+          "format": "float",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive.",
+          "type": "number"
+        }
+      },
+      "x-ms-client-name": "SpanSentimentEvaluationSummary"
     },
     "TextAnalysisAuthoringStringIndexType": {
       "enum": [
@@ -2868,6 +4895,56 @@
         }
       },
       "x-ms-client-name": "SwapDeploymentsOptions"
+    },
+    "TextAnalysisAuthoringTextSentimentEvaluationSummary": {
+      "description": "Represents the evaluation summary for a custom text sentiment project.",
+      "required": [
+        "spanSentimentsEvaluation",
+        "microF1",
+        "microPrecision",
+        "microRecall",
+        "macroF1",
+        "macroPrecision",
+        "macroRecall"
+      ],
+      "type": "object",
+      "properties": {
+        "spanSentimentsEvaluation": {
+          "description": "Represents evaluation of span level sentiments",
+          "$ref": "#/definitions/TextAnalysisAuthoringSpanSentimentEvaluationSummary"
+        },
+        "microF1": {
+          "format": "float",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive.",
+          "type": "number"
+        },
+        "microPrecision": {
+          "format": "float",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive.",
+          "type": "number"
+        },
+        "microRecall": {
+          "format": "float",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive.",
+          "type": "number"
+        },
+        "macroF1": {
+          "format": "float",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive.",
+          "type": "number"
+        },
+        "macroPrecision": {
+          "format": "float",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive.",
+          "type": "number"
+        },
+        "macroRecall": {
+          "format": "float",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive.",
+          "type": "number"
+        }
+      },
+      "x-ms-client-name": "TextSentimentEvaluationSummary"
     },
     "TextAnalysisAuthoringTrainingConfigVersion": {
       "description": "Represents a training config version.",
@@ -3010,6 +5087,23 @@
       },
       "x-ms-client-name": "TrainingJobState"
     },
+    "TextAnalysisAuthoringUnassignDeploymentResourcesOptions": {
+      "description": "Represents the options to unassign Azure resources from a project.",
+      "required": [
+        "assignedResourceIds"
+      ],
+      "type": "object",
+      "properties": {
+        "assignedResourceIds": {
+          "description": "Represents the assigned resource IDs to be unassigned.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-client-name": "UnassignDeploymentResourcesOptions"
+    },
     "TextAnalysisAuthoringWarning": {
       "description": "Represents a warning that was encountered while executing the request.",
       "required": [
@@ -3060,6 +5154,14 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "TextAnalysisAuthoringExportedModelNamePathParameter": {
+      "in": "path",
+      "name": "exportedModelName",
+      "description": "The exported model name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "TextAnalysisAuthoringTrainedModelLabelPathParameter": {
       "in": "path",
       "name": "trainedModelLabel",
@@ -3076,7 +5178,10 @@
       "enum": [
         "CustomSingleLabelClassification",
         "CustomMultiLabelClassification",
-        "CustomEntityRecognition"
+        "CustomEntityRecognition",
+        "CustomAbstractiveSummarization",
+        "CustomHealthcare",
+        "CustomTextSentiment"
       ],
       "x-ms-enum": {
         "name": "ProjectKind",
@@ -3093,6 +5198,18 @@
           {
             "value": "CustomEntityRecognition",
             "description": "For building an extraction model to identify your domain categories using your own data."
+          },
+          {
+            "value": "CustomAbstractiveSummarization",
+            "description": "For building an abstractive summarization models which are able to summarize long documents."
+          },
+          {
+            "value": "CustomHealthcare",
+            "description": "For building an text analytics for health model to identify your health domain data."
+          },
+          {
+            "value": "CustomTextSentiment",
+            "description": "For building a sentiment models which are able to extract sentiment for long documents."
           }
         ]
       },
@@ -3107,7 +5224,10 @@
       "enum": [
         "CustomSingleLabelClassification",
         "CustomMultiLabelClassification",
-        "CustomEntityRecognition"
+        "CustomEntityRecognition",
+        "CustomAbstractiveSummarization",
+        "CustomHealthcare",
+        "CustomTextSentiment"
       ],
       "x-ms-enum": {
         "name": "ProjectKind",
@@ -3124,6 +5244,18 @@
           {
             "value": "CustomEntityRecognition",
             "description": "For building an extraction model to identify your domain categories using your own data."
+          },
+          {
+            "value": "CustomAbstractiveSummarization",
+            "description": "For building an abstractive summarization models which are able to summarize long documents."
+          },
+          {
+            "value": "CustomHealthcare",
+            "description": "For building an text analytics for health model to identify your health domain data."
+          },
+          {
+            "value": "CustomTextSentiment",
+            "description": "For building a sentiment models which are able to extract sentiment for long documents."
           }
         ]
       },
