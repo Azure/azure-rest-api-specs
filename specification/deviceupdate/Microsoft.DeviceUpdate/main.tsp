@@ -38,12 +38,12 @@ using TypeSpec.Versioning;
     instanceId: string,
   }
 )
-@versioned(Microsoft.DeviceUpdate.Versions)
-namespace Microsoft.DeviceUpdate;
+@versioned(Azure.IoT.DeviceUpdate.Versions)
+namespace Azure.IoT.DeviceUpdate;
 
 /** Device Update service versions */
 enum Versions {
-  /** The 2023-10-01-preview version of the Microsoft.DeviceUpdate service. */
+  /** The 2023-10-01-preview version of the Azure.IoT.DeviceUpdate service. */
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   `2023-10-01-preview`,
 }

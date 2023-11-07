@@ -1,6 +1,6 @@
 import "./models-shared.tsp";
 
-namespace Microsoft.DeviceUpdate;
+namespace Azure.IoT.DeviceUpdate;
 
 /** Update compliance information. */
 model UpdateCompliance {

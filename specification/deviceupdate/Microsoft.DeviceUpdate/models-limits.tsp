@@ -3,7 +3,7 @@ import "./models-shared.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace Microsoft.DeviceUpdate;
+namespace Azure.IoT.DeviceUpdate;
 
 /**
  * The list of limits of how many of each resource are currently in use and how

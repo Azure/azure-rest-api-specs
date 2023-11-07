@@ -3,7 +3,7 @@ import "./models-shared.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace Microsoft.DeviceUpdate;
+namespace Azure.IoT.DeviceUpdate;
 
 /** Diagnostics request body */
 @resource("management/deviceDiagnostics/logCollections")

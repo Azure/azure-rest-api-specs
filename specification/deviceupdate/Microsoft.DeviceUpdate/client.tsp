@@ -5,10 +5,10 @@ using Azure.ClientGenerator.Core;
 
 namespace Customizations;
 
-@@client(Microsoft.DeviceUpdate.DeviceUpdateOperations, {
+@@client(Azure.IoT.DeviceUpdate.DeviceUpdateOperations, {
   name: "DeviceUpdateClient",
 });
 
-@@client(Microsoft.DeviceUpdate.DeviceManagementOperations, {
+@@client(Azure.IoT.DeviceUpdate.DeviceManagementOperations, {
   name: "DeviceManagementClient",
 });

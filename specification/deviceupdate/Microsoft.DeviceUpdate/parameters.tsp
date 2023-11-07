@@ -2,7 +2,7 @@ import "@typespec/http";
 
 using TypeSpec.Http;
 
-namespace Microsoft.DeviceUpdate;
+namespace Azure.IoT.DeviceUpdate;
 
 /** If-None-Match conditional request parameter */
 model IfNoneMatchParameter {

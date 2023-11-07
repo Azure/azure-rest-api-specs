@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 
-namespace Microsoft.DeviceUpdate;
+namespace Azure.IoT.DeviceUpdate;
 
 /** Update identifier. */
 model UpdateId {

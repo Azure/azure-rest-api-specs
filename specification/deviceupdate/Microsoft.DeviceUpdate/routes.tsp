@@ -17,7 +17,7 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Microsoft.DeviceUpdate;
+namespace Azure.IoT.DeviceUpdate;
 
 alias ServiceTraits = SupportsClientRequestId &
   NoConditionalRequests &
