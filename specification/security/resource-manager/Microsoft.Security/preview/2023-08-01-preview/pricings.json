@@ -59,7 +59,7 @@
         "tags": [
           "Pricings"
         ],
-        "description": "Update Defender plans configurations in the selected scope (valid scopes are resource id or a subscription id). At the resource level, this API currently supports only Defender for Servers P1  (Supported resources are 'VirtualMachines, VMSS & ARC machines', plan='VirtualMachines' and subPlan='P1').",
+        "description": "Get the Defender plans pricing configurations of the selected scope (valid scopes are resource id or a subscription id). At the resource level, supported resource types are 'VirtualMachines & VMSS'.",
         "operationId": "Pricings_Get",
         "parameters": [
           {
@@ -89,23 +89,23 @@
       },
       "put": {
         "x-ms-examples": {
-          "Update pricing on subscription CloudPosture": {
+          "Update pricing on subscription (example for CloudPosture plan)": {
             "$ref": "./examples/Pricings/PutPricingByName_example.json"
           },
-          "Update pricing on subscription VirtualMachines": {
+          "Update pricing on subscription (example for VirtualMachines plan)": {
             "$ref": "./examples/Pricings/PutPricingVMsByName_example.json"
           },
-          "Update pricing on resource": {
+          "Update pricing on resource (example for VirtualMachines plan)": {
             "$ref": "./examples/Pricings/PutResourcePricingByNameVirtualMachines_example.json"
           },
-          "Update pricing on subscription CloudPosture - partial success": {
+          "Update pricing on subscription (example for CloudPosture plan) - partial success": {
             "$ref": "./examples/Pricings/PutPricingByNamePartialSuccess_example.json"
           }
         },
         "tags": [
           "Pricings"
         ],
-        "description": "Updates a provided Microsoft Defender for Cloud pricing configuration in the scope. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS & ARC machines' and only for plan='VirtualMachines' and subPlan='P1').",
+        "description": "Updates a provided Microsoft Defender for Cloud pricing configuration in the scope. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines & VMSS' and only for plan='VirtualMachines' and subPlan='P1').",
         "operationId": "Pricings_Update",
         "parameters": [
           {
@@ -151,7 +151,7 @@
         "tags": [
           "Pricings"
         ],
-        "description": "Deletes a provided Microsoft Defender for Cloud pricing configuration in a specific resource. Valid only for resource scope (Supported resources are: 'VirtualMachines, VMSS & ARC machines').",
+        "description": "Deletes a provided Microsoft Defender for Cloud pricing configuration in a specific resource. Valid only for resource scope (Supported resources are: 'VirtualMachines & VMSS').",
         "operationId": "Pricings_Delete",
         "parameters": [
           {
@@ -196,7 +196,7 @@
         "tags": [
           "Pricings"
         ],
-        "description": "Lists Microsoft Defender for Cloud pricing configurations of the scopeId, that match the optional given $filter. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS & ARC machines'). Valid $filter is: 'name in ({planName1},{planName2},...)'. If $filter is not provided, the unfiltered list will be returned. If '$filter=name in (planName1,planName2)' is provided, the returned list includes the pricings set for 'planName1' and 'planName2' only.",
+        "description": "Lists Microsoft Defender for Cloud pricing configurations of the scopeId, that match the optional given $filter. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines & VMSS'). Valid $filter is: 'name in ({planName1},{planName2},...)'. If $filter is not provided, the unfiltered list will be returned. If '$filter=name in (planName1,planName2)' is provided, the returned list includes the pricings set for 'planName1' and 'planName2' only.",
         "operationId": "Pricings_List",
         "parameters": [
           {
@@ -303,7 +303,7 @@
         },
         "enforce": {
           "type": "string",
-          "description": "If set to \"False\", it allows the descendants of this scope to override the pricing configuration set on this scope (allows setting inherited=\"False\"). If set to \"True\", it prevents overrides and forces this pricing configuration on all descendants. This field is only available for subscription-level pricing.",
+          "description": "If set to \"False\", it allows the descendants of this scope to override the pricing configuration set on this scope (allows setting inherited=\"False\"). If set to \"True\", it prevents overrides and forces this pricing configuration on all the descendants of this scope. This field is only available for subscription-level pricing.",
           "enum": [
             "False",
             "True"
@@ -326,7 +326,7 @@
         "inherited": {
           "type": "string",
           "readOnly": true,
-          "description": "When set to \"True\", it means that the current scope inherits its pricing configuration from its parent. The ID of the parent scope that provides the inherited configuration is displayed in the \"inheritedFrom\" field. On the other hand, if the parameter is set to \"False\", it indicates that the current scope sets its own pricing configuration and does not inherit it from its parent. This field is only available for resource-level pricing.",
+          "description": "\"inherited\" = \"True\" indicates that the current scope inherits its pricing configuration from its parent. The ID of the parent scope that provides the inherited configuration is displayed in the \"inheritedFrom\" field. On the other hand, \"inherited\" = \"False\" indicates that the current scope has its own pricing configuration explicitly set, and does not inherit from its parent. This field is read only and available only for resource-level pricing.",
           "enum": [
             "True",
             "False"
@@ -354,7 +354,7 @@
         "resourcesCoverageStatus": {
           "type": "string",
           "readOnly": true,
-          "description": "This field reflect the coverage status of the resources associated with the subscription, and it is relevant only at the subscription level. Please note: The \"pricingTier\" field reflects the plan status of the subscription. However, since the plan status can also be defined at the resource level, there might be misalignment between the subscription's plan status and the resource status. This field helps indicate the coverage status of the resources.",
+          "description": "This field is available for subscription-level only, and reflects the coverage status of the resources under the subscription. Please note: The \"pricingTier\" field reflects the plan status of the subscription. However, since the plan status can also be defined at the resource level, there might be misalignment between the subscription's plan status and the resource status. This field helps indicate the coverage status of the resources.",
           "enum": [
             "FullyCovered",
             "PartiallyCovered",
