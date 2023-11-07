@@ -8,16 +8,6 @@ using Azure.Core;
 
 namespace Microsoft.DeviceUpdate;
 
-// TODO virtual resource?
-/** The Device Update for IoT Hub account instance. */
-@resource("deviceUpdate")
-model Instance {
-  /** The Device Update for IoT Hub account instance identifier. */
-  @key
-  @visibility("read")
-  instanceId: string;
-}
-
 /** Update identifier. */
 model UpdateId {
   /** Update provider. */

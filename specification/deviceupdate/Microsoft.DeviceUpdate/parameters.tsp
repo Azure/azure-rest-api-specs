@@ -15,19 +15,9 @@ model IfNoneMatchParameter {
   `if-none-match`?: string;
 }
 
-/** The Device Update for IoT Hub account instance identifier. */
-model InstanceIdParameter {
-
-  /** The Device Update for IoT Hub account instance identifier. */
-  @path
-  instanceId: string
-}
-
 /** Update provider parameter */
 model UpdateProviderParameter
 {
-  ...InstanceIdParameter,
-
   /** Update provider */
   @path
   provider: string

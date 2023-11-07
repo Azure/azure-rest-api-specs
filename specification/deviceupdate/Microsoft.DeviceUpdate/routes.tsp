@@ -104,9 +104,7 @@ interface DeviceUpdateOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Not a standard resource."
   @route("updates/providers")
   listProviders is Azure.Core.Foundations.Operation<
-    {
-      ...InstanceIdParameter;
-    },
+    {},
     StringsList,
     {},
     Azure.Core.Foundations.ErrorResponse
@@ -246,10 +244,6 @@ interface DeviceManagementOperations {
   @get
   listInstallableUpdatesForDeviceClass is Azure.Core.Foundations.Operation<
     {
-      /** The Device Update for IoT Hub account instance identifier. */
-      @path
-      instanceId: string;
-
       /** Device class identifier. */
       @path
       deviceClassId: string;
