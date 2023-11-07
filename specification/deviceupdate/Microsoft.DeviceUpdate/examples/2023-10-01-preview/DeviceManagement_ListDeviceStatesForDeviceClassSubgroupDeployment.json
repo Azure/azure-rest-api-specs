@@ -1,0 +1,33 @@
+{
+  "title": "Device Management List Device States For Device Class Subgroup Deployment",
+  "operationId": "DeviceManagement_ListDeviceStatesForDeviceClassSubgroupDeployment",
+  "parameters": {
+    "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
+    "groupId": "TestGroup",
+    "deviceClassId": "deviceClassId",
+    "deploymentId": "deploymentId",
+    "deviceState": "Succeeded",
+    "api-version": "2023-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "deviceId": "deviceId1",
+            "retryCount": 1,
+            "movedOnToNewDeployment": false,
+            "deviceState": "Succeeded"
+          },
+          {
+            "deviceId": "deviceId2",
+            "retryCount": 1,
+            "movedOnToNewDeployment": false,
+            "deviceState": "Succeeded"
+          }
+        ]
+      }
+    }
+  }
+}
