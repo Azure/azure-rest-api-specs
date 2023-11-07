@@ -52,7 +52,7 @@ The representation of a single prompt completion as part of an overall chat comp
 Generally, `n` choices are generated per provided prompt with a default value of 1.
 Token limits and other settings may limit the number of choices generated.
 """)
-model ChatChoiceStreamChunk {
+model ChatChoiceStream {
   @doc("The ordered index associated with this chat completions choice.")
   @projectedName("json", "index")
   index: int32;
@@ -103,7 +103,7 @@ model ChatCompletionsStream {
     Token limits and other settings may limit the number of choices generated.
     """)
   @projectedName("json", "choices")
-  choices: ChatChoiceStreamChunk[];
+  choices: ChatChoiceStream[];
 
   @doc("""
   Content filtering results for zero or more prompts in the request. In a streaming request,
