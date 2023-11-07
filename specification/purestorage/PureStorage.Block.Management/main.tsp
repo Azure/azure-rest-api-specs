@@ -70,7 +70,7 @@ model StoragePoolProperties {
 
   @doc("Total IOPS provisioned for the pool (in MB/s).")
   @visibility("read")
-  provisionedIOPS?: int64;
+  provisionedIops?: int64;
 
   @doc("Presented if avsEnabled is true.")
   avs?: AzureVmwareService;
@@ -103,7 +103,7 @@ interface StoragePools {
   get is ArmResourceRead<StoragePool>;
   create is ArmResourceCreateOrUpdateAsync<StoragePool>;
   update is ArmResourcePatchAsync<StoragePool, StoragePoolProperties>;
-  delete is ArmResourceDeleteAsync<StoragePool>;
+  delete is ArmResourceDeleteWithoutOkAsync<StoragePool>;
   listByResourceGroup is ArmResourceListByParent<StoragePool>;
   listBySubscription is ArmListBySubscription<StoragePool>;
   
@@ -228,7 +228,7 @@ model AvsStorageContainerProperties {
 interface AvsStorageContainers {
   create is ArmResourceCreateOrUpdateAsync<AvsStorageContainer>;
   get is ArmResourceRead<AvsStorageContainer>;
-  delete is ArmResourceDeleteAsync<AvsStorageContainer>;
+  delete is ArmResourceDeleteWithoutOkAsync<AvsStorageContainer>;
   listByParent is ArmResourceListByParent<AvsStorageContainer>;
 }
 
@@ -353,7 +353,7 @@ model AzureProperties {
 interface AvsStorageContainerVolumes {
   update is ArmResourcePatchAsync<AvsStorageContainerVolume, VolumeProperties>;
   get is ArmResourceRead<AvsStorageContainerVolume>;
-  delete is ArmResourceDeleteAsync<AvsStorageContainerVolume>;
+  delete is ArmResourceDeleteWithoutOkAsync<AvsStorageContainerVolume>;
   listByParent is ArmResourceListByParent<AvsStorageContainerVolume>;
 }
 
@@ -429,7 +429,7 @@ enum VolumeContainerType {
 interface AvsVMs {
   update is ArmResourcePatchAsync<AvsVM, AvsVmProperties>;
   get is ArmResourceRead<AvsVM>;
-  delete is ArmResourceDeleteAsync<AvsVM>;
+  delete is ArmResourceDeleteWithoutOkAsync<AvsVM>;
   listByParent is ArmResourceListByParent<AvsVM>;
 }
 
@@ -451,6 +451,6 @@ model AvsVmVolume is ProxyResource<VolumeProperties> {
 interface AvsVmVolumes {
   update is ArmResourcePatchAsync<AvsVmVolume, VolumeProperties>;
   get is ArmResourceRead<AvsVmVolume>;
-  delete is ArmResourceDeleteAsync<AvsVmVolume>;
+  delete is ArmResourceDeleteWithoutOkAsync<AvsVmVolume>;
   listByParent is ArmResourceListByParent<AvsVmVolume>;
 }
