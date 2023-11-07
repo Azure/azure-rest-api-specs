@@ -122,11 +122,11 @@ model AvsDetails {
   @doc("URLs to use for VMware VASA.")
   vasaProviderUrls: string[];
 
-  @doc("Array of iSCSI endpoints and IQNs.")
+  @doc("Array of iSCSI endpoint and IQN.")
   vasaIscsiEndpoints: VasaIscsiEndpoints[];
 }
 
-@doc("iSCSI endpoints and IQNs.")
+@doc("iSCSI endpoint and IQN.")
 model VasaIscsiEndpoints {
 
   @doc("IP address of the iSCSI endpoint.")
