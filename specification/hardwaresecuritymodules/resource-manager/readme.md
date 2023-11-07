@@ -63,7 +63,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-12'
+```yaml $(tag) == 'package-2023-12-preview'
 input-file:
   - Microsoft.HardwareSecurityModules/preview/2023-12-10-preview/cloudhsm.json
   - Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
