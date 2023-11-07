@@ -113,7 +113,9 @@
           {
             "in": "query",
             "name": "forceDelete",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Set this to true if you want to delete a project with model and endpoint",
+            "default": false
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -435,7 +437,7 @@
           {
             "in": "formData",
             "name": "locale",
-            "description": "The locale of this consent.",
+            "description": "The locale of this consent. Locale code follows BCP-47. You can find TextToSpeech locale list here https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts.",
             "required": true,
             "type": "string"
           },
@@ -997,11 +999,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/PathUuid"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1035,11 +1033,7 @@
         "operationId": "Endpoints_Delete",
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/PathUuid"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1079,11 +1073,7 @@
             "$ref": "#/parameters/HeaderOperationId"
           },
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/PathUuid"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1145,11 +1135,7 @@
             "$ref": "#/parameters/HeaderOperationId"
           },
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/PathUuid"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1203,11 +1189,7 @@
             "$ref": "#/parameters/HeaderOperationId"
           },
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/PathUuid"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1346,11 +1328,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/PathUuid"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1384,11 +1362,7 @@
         "operationId": "ZeroShotModels_Delete",
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/PathUuid"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1428,11 +1402,7 @@
             "$ref": "#/parameters/HeaderOperationId"
           },
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/PathUuid"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1495,11 +1465,7 @@
             "$ref": "#/parameters/HeaderOperationId"
           },
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/PathUuid"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1621,6 +1587,7 @@
   },
   "definitions": {
     "BaseModel": {
+      "description": "Base model",
       "required": [
         "name"
       ],
@@ -1636,6 +1603,7 @@
       }
     },
     "Consent": {
+      "description": "Consent object",
       "required": [
         "voiceTalentName",
         "companyName",
@@ -1648,17 +1616,21 @@
           "$ref": "#/definitions/ResourceId"
         },
         "displayName": {
+          "description": "Name of consent",
           "minLength": 1,
           "type": "string"
         },
         "description": {
+          "description": "Description of consent",
           "type": "string"
         },
         "voiceTalentName": {
+          "description": "Voice talent name. Must match with consent audio file.",
           "minLength": 1,
           "type": "string"
         },
         "companyName": {
+          "description": "Company name. Must match with consent audio file.",
           "minLength": 1,
           "type": "string"
         },
@@ -1668,7 +1640,9 @@
           "format": "uri"
         },
         "locale": {
-          "type": "string"
+          "description": "The locale of this consent. Locale code follows BCP-47. You can find TextToSpeech locale list here https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "type": "string",
+          "example": "en-US"
         },
         "projectId": {
           "$ref": "#/definitions/ResourceId"
@@ -1677,11 +1651,13 @@
           "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
+          "description": "The time-stamp when the object was created. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
           "format": "date-time",
           "type": "string",
           "readOnly": true
         },
         "lastActionDateTime": {
+          "description": "The time-stamp when the current status was entered. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
           "readOnly": true
@@ -1871,6 +1847,7 @@
       }
     },
     "Endpoint": {
+      "description": "Endpoint object",
       "required": [
         "projectId",
         "modelId"
@@ -1878,14 +1855,17 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "Endpoint Id",
           "type": "string",
           "format": "uuid"
         },
         "displayName": {
+          "description": "Endpoint name",
           "minLength": 1,
           "type": "string"
         },
         "description": {
+          "description": "Endpoint description",
           "type": "string"
         },
         "projectId": {
@@ -1901,11 +1881,13 @@
           "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
+          "description": "The time-stamp when the object was created. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
           "format": "date-time",
           "type": "string",
           "readOnly": true
         },
         "lastActionDateTime": {
+          "description": "The time-stamp when the current status was entered. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
           "readOnly": true
@@ -1925,6 +1907,7 @@
       }
     },
     "EndpointProperties": {
+      "description": "Endpoint properties",
       "type": "object",
       "properties": {
         "kind": {
@@ -1932,34 +1915,23 @@
         }
       }
     },
-    "EntityError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
     "Error": {
-      "description": "New format which conforms to the new Cognitive Services API guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
+      "description": "New format which conforms to the new Cognitive Services API guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
       "type": "object",
       "properties": {
         "code": {
           "$ref": "#/definitions/ErrorCode"
         },
         "target": {
-          "description": "Gets or sets the source of the error.\r\nFor example it would be \"model\" or \"model id\" in case of invalid model.",
+          "description": "The source of the error. For example it would be \"model\" or \"model id\" in case of invalid model.",
           "type": "string"
         },
         "message": {
-          "description": "Gets or sets high level error message.",
+          "description": "Top-level error message.",
           "type": "string"
         },
         "details": {
-          "description": "Gets or sets additional supportive details regarding the error and/or expected policies.",
+          "description": "Additional supportive details regarding the error and/or expected policies.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Error"
@@ -1990,7 +1962,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Contains unified error information used for HTTP responses across any Cognitive Service. Instances\r\ncan be created by returning it directly from a controller.",
+      "description": "Contains unified error information used for HTTP responses across any Cognitive Service. Instances can be created by returning it directly from a controller.",
       "type": "object",
       "properties": {
         "error": {
@@ -2011,18 +1983,18 @@
       }
     },
     "InnerError": {
-      "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains required properties ErrorCode, message and optional properties target, inner error(this can be nested).",
+      "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow. This contains required properties ErrorCode, message and optional properties target, inner error(this can be nested).",
       "type": "object",
       "properties": {
         "code": {
           "$ref": "#/definitions/DetailedErrorCode"
         },
         "target": {
-          "description": "Gets or sets the source of the error.\r\nFor example it would be \"model\" or \"model id\" in case of invalid model.",
+          "description": "The source of the error. For example it would be \"model\" or \"model id\" in case of invalid model.",
           "type": "string"
         },
         "message": {
-          "description": "Gets or sets high level error message.",
+          "description": "Detailed error message.",
           "type": "string"
         },
         "innererror": {
@@ -2031,6 +2003,7 @@
       }
     },
     "Model": {
+      "description": "Model object",
       "required": [
         "recipe",
         "projectId",
@@ -2043,17 +2016,21 @@
           "$ref": "#/definitions/ResourceId"
         },
         "voiceName": {
+          "description": "Voice name",
           "minLength": 1,
           "type": "string"
         },
         "description": {
+          "description": "Model description",
           "type": "string"
         },
         "recipe": {
           "$ref": "#/definitions/Recipe"
         },
         "locale": {
-          "type": "string"
+          "description": "The locale of this model. Locale code follows BCP-47. You can find TextToSpeech locale list here https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "type": "string",
+          "example": "en-US"
         },
         "projectId": {
           "$ref": "#/definitions/ResourceId"
@@ -2065,6 +2042,7 @@
           "$ref": "#/definitions/ResourceId"
         },
         "engineVersion": {
+          "description": "Engine version. Update this version can get the latest pronunciation bug fixing.",
           "type": "string",
           "readOnly": true
         },
@@ -2075,11 +2053,13 @@
           "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
+          "description": "The time-stamp when the object was created. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
           "format": "date-time",
           "type": "string",
           "readOnly": true
         },
         "lastActionDateTime": {
+          "description": "The time-stamp when the current status was entered. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
           "readOnly": true
@@ -2102,21 +2082,25 @@
       }
     },
     "ModelProperties": {
+      "description": "Model properties",
       "type": "object",
       "properties": {
         "presetStyles": {
+          "description": "Preset styles of this model.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "styleTrainingsetIds": {
+          "description": "Customized styles and associated training sets.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ResourceId"
           }
         },
         "voiceStyles": {
+          "description": "All styles supported by this model.",
           "type": "array",
           "items": {
             "type": "string"
@@ -2276,15 +2260,18 @@
       }
     },
     "PresetStyleItem": {
+      "description": "Preset styles supported by recipe. Voice model can support these styles without style training set.",
       "type": "object",
       "properties": {
         "male": {
+          "description": "Preset styles supported on male voice model.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "female": {
+          "description": "Preset styles supported on female voice model.",
           "type": "array",
           "items": {
             "type": "string"
@@ -2293,6 +2280,7 @@
       }
     },
     "Project": {
+      "description": "Project object. Consents, training sets, models and endpoints are organized in a project.",
       "required": [
         "kind"
       ],
@@ -2302,16 +2290,19 @@
           "$ref": "#/definitions/ResourceId"
         },
         "displayName": {
+          "description": "Project name",
           "minLength": 1,
           "type": "string"
         },
         "description": {
+          "description": "Project description",
           "type": "string"
         },
         "kind": {
           "$ref": "#/definitions/ProjectKind"
         },
         "createdDateTime": {
+          "description": "The time-stamp when the object was created. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
           "format": "date-time",
           "type": "string",
           "readOnly": true
@@ -2331,48 +2322,60 @@
       }
     },
     "Recipe": {
+      "description": "Recipe for model building. Different recipes have different capability.",
       "type": "object",
       "properties": {
-        "version": {
+        "kind": {
+          "description": "Recipe kind",
           "type": "string"
         },
-        "kind": {
+        "version": {
+          "description": "Recipe version",
           "type": "string"
         },
         "description": {
+          "description": "Recipe description",
           "type": "string",
           "readOnly": true
         },
         "minUtteranceCount": {
+          "description": "Minimum utterance count required to train a voice model with this recipe.",
           "format": "int32",
           "type": "integer",
           "readOnly": true
         },
         "minStyleUtteranceCount": {
+          "description": "Minimum utterance count required to train each customized style.",
           "format": "int32",
           "type": "integer",
           "readOnly": true
         },
         "maxCustomStyleNum": {
+          "description": "Maximum customized style number supported in one voice model.",
           "format": "int32",
           "type": "integer",
           "readOnly": true
         },
         "datasetLocales": {
+          "description": "The locale of training data set. Locale code follows BCP-47. You can find TextToSpeech locale list here https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "example": "en-US"
           },
           "readOnly": true
         },
         "modelLocales": {
+          "description": "The locale this recipe can speak. Locale code follows BCP-47. You can find TextToSpeech locale list here https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "example": "en-US"
           },
           "readOnly": true
         },
         "presetStyles": {
+          "description": "Preset styles supported by this recipe. You can get these styles without style training set.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/PresetStyleItem"
@@ -2405,6 +2408,7 @@
       }
     },
     "Trainingset": {
+      "description": "Training set",
       "required": [
         "locale",
         "projectId"
@@ -2415,15 +2419,18 @@
           "$ref": "#/definitions/ResourceId"
         },
         "displayName": {
+          "description": "Training set name",
           "minLength": 1,
           "type": "string"
         },
         "description": {
+          "description": "Training set description",
           "type": "string"
         },
         "locale": {
-          "minLength": 1,
-          "type": "string"
+          "description": "The locale of training data set. Locale code follows BCP-47. You can find TextToSpeech locale list here https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "type": "string",
+          "example": "en-US"
         },
         "voiceKind": {
           "$ref": "#/definitions/VoiceKind"
@@ -2438,11 +2445,13 @@
           "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
+          "description": "The time-stamp when the object was created. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
           "format": "date-time",
           "type": "string",
           "readOnly": true
         },
         "lastActionDateTime": {
+          "description": "The time-stamp when the current status was entered. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
           "readOnly": true
@@ -2450,9 +2459,11 @@
       }
     },
     "TrainingsetProperties": {
+      "description": "Training set properties",
       "type": "object",
       "properties": {
         "utteranceCount": {
+          "description": "Utterance count in this training set",
           "format": "int32",
           "type": "integer"
         }
@@ -2460,6 +2471,7 @@
       "readOnly": true
     },
     "ZeroShot": {
+      "description": "Zero shot speaker profile",
       "required": [
         "projectId",
         "consentId"
@@ -2467,19 +2479,23 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "Zero shot speaker profile id",
           "type": "string",
           "format": "uuid"
         },
         "speakerProfileId": {
+          "description": "Zero shot speaker profile id. Fill this property in SSML.",
           "type": "string",
           "format": "uuid",
           "readOnly": true
         },
         "displayName": {
+          "description": "Zero shot speaker profile name",
           "minLength": 1,
           "type": "string"
         },
         "description": {
+          "description": "Zero shot speaker profile description",
           "type": "string"
         },
         "projectId": {
@@ -2489,7 +2505,7 @@
           "$ref": "#/definitions/ResourceId"
         },
         "audioUrl": {
-          "description": "The public accessible url of audio file. Or, Azure blob prefix of multi audio files. Total audio length less than 1 minute.",
+          "description": "The public accessible url of audio file. Or, Azure blob prefix of multi audio files.",
           "type": "string",
           "format": "uri"
         },
@@ -2500,11 +2516,13 @@
           "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
+          "description": "The time-stamp when the object was created. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
           "format": "date-time",
           "type": "string",
           "readOnly": true
         },
         "lastActionDateTime": {
+          "description": "The time-stamp when the current status was entered. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
           "readOnly": true
@@ -2512,6 +2530,7 @@
       }
     },
     "ZeroShotProperties": {
+      "description": "Zero shot speaker properties",
       "type": "object",
       "properties": {
         "failureReason": {
@@ -2608,6 +2627,15 @@
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,63}$",
       "minLength": 3,
       "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "PathUuid": {
+      "name": "id",
+      "in": "path",
+      "description": "The resource id, which should be uuid.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
       "x-ms-parameter-location": "method"
     },
     "HeaderOperationId": {
