@@ -45,7 +45,6 @@ interface Reservations {
 
 @doc("Properties of a Reservation resource.")
 model ReservationProperties is BaseResourceProperties {
-  
   @doc("Internal ID of Reservation.")
   @visibility("read")
   reservationInternalId?: string;
