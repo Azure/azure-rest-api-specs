@@ -984,7 +984,7 @@
       }
     },
     "SolutionPatchRequestBody": {
-      "description": "Solution response.",
+      "description": "Solution response",
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
@@ -998,22 +998,12 @@
       "description": "Solution response.",
       "type": "object",
       "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Full resource uri of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Type of resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/SolutionResourceProperties",
           "x-ms-client-flatten": true
@@ -1043,11 +1033,13 @@
         },
         "solutionId": {
           "description": "Solution Id to identify single solution.",
+          "readOnly": true,
           "type": "string"
         },
         "provisioningState": {
           "description": "Status of solution provisioning.",
           "type": "string",
+          "readOnly": true,
           "enum": [
             "Succeeded",
             "Failed",
@@ -1060,18 +1052,22 @@
         },
         "title": {
           "description": "The title.",
+          "readOnly": true,
           "type": "string"
         },
         "content": {
           "description": "The HTML content that needs to be rendered and shown to customer.",
+          "readOnly": true,
           "type": "string"
         },
         "replacementMaps": {
-          "$ref": "#/definitions/ReplacementMaps"
+          "$ref": "#/definitions/ReplacementMaps",
+          "readOnly": true
         },
         "sections": {
           "description": "List of section object.",
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Section"
           },
