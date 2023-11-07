@@ -24,5 +24,5 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.OpenAI.ChatCompletionsStream, Access.internal);
 @@usage(Azure.OpenAI.ChatCompletionsStream, Usage.output);
 
-@@access(Azure.OpenAI.CompletionsStreamingChunk, Access.internal);
-@@usage(Azure.OpenAI.CompletionsStreamingChunk, Usage.output);
+@@access(Azure.OpenAI.CompletionsStreamDelta, Access.internal);
+@@usage(Azure.OpenAI.CompletionsStreamDelta, Usage.output);

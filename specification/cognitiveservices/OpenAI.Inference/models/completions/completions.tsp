@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 
+import "./streaming/completions.tsp";
 import "./common.tsp";
 
 using TypeSpec.Rest;
@@ -222,8 +223,6 @@ model Choice {
   finishReason: CompletionsFinishReason | null;
 }
 
-alias NullableFloat = float32 | null;
-
 @doc("""
 Representation of a log probabilities model for a completions generation.
 """)
@@ -249,10 +248,4 @@ model CompletionsLogProbabilityModel {
   @projectedName("csharp", "TextOffsets")
   @projectedName("java", "textOffsets")
   textOffset: int32[];
-}
-
-@doc("""
-Representation of an intermediate SSE message for completions
-""")
-model CompletionsStreamingChunk {
 }
