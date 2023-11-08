@@ -1860,7 +1860,8 @@
             "in": "path",
             "description": "Gets the Name of the Avs Summary.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
           }
         ],
         "responses": {
@@ -2726,7 +2727,8 @@
             "in": "path",
             "description": "Gets the Name of the Iaas Summary.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
           }
         ],
         "responses": {
@@ -2842,7 +2844,8 @@
             "in": "path",
             "description": "Gets the Name of the Overview Summary.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
           }
         ],
         "responses": {
@@ -2958,7 +2961,8 @@
             "in": "path",
             "description": "Gets the Name of the Paas Summary.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
           }
         ],
         "responses": {
@@ -10421,8 +10425,11 @@
           "readOnly": true
         },
         "targetSpecificResult": {
-          "$ref": "#/definitions/TargetSpecificResult",
+          "type": "object",
           "description": "Gets or sets the target specific result.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TargetSpecificResult"
+          },
           "readOnly": true
         },
         "appServicePlanName": {
@@ -19095,52 +19102,52 @@
           {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "Unknown."
+            "description": "Unknown Management Cost Component."
           },
           {
             "name": "SystemCenterLicenseCost",
             "value": "SystemCenterLicenseCost",
-            "description": "SystemCenterLicenseCost."
+            "description": "System Center License Cost."
           },
           {
             "name": "VSphereManagementCost",
             "value": "VSphereManagementCost",
-            "description": "VSphereManagementCost."
+            "description": "VSpher eManagement Cost."
           },
           {
             "name": "ThirdPartyManagementCost",
             "value": "ThirdPartyManagementCost",
-            "description": "ThirdPartyManagementCost."
+            "description": "Third Party Management Cost."
           },
           {
             "name": "OtherMonitoringCost",
             "value": "OtherMonitoringCost",
-            "description": "OtherMonitoringCost."
+            "description": "Other Monitoring Cost."
           },
           {
             "name": "OtherDataProtectionCost",
             "value": "OtherDataProtectionCost",
-            "description": "OtherDataProtectionCost."
+            "description": "Other Data Protection Cost."
           },
           {
             "name": "OtherPatchingCost",
             "value": "OtherPatchingCost",
-            "description": "OtherPatchingCost."
+            "description": "Other Patching Cost."
           },
           {
             "name": "AzureMonitoringCost",
             "value": "AzureMonitoringCost",
-            "description": "AzureMonitoringCost."
+            "description": "Azure Monitoring Cost."
           },
           {
             "name": "AzurePatchingCost",
             "value": "AzurePatchingCost",
-            "description": "AzurePatchingCost."
+            "description": "Azure Patching Cost."
           },
           {
             "name": "AzureDataProtectionCost",
             "value": "AzureDataProtectionCost",
-            "description": "AzureDataProtectionCost."
+            "description": "Azure Data Protection Cost."
           }
         ]
       }
@@ -22859,39 +22866,13 @@
       "type": "object",
       "description": "Web app Assessment options properties Web model object.",
       "properties": {
-        "vmFamilies": {
+        "webAppSkus": {
           "type": "array",
-          "description": "Gets the list of VM families.",
+          "description": "Gets the list of web app target options.",
           "items": {
-            "$ref": "#/definitions/VmFamilyOptions"
+            "$ref": "#/definitions/WebAppTargetOptions"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "reservedInstanceVmFamilies": {
-          "type": "array",
-          "description": "Gets the Reserved Instance VM Families list.",
-          "items": {
-            "$ref": "#/definitions/AzureVmFamily"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "premiumDiskVmFamilies": {
-          "type": "array",
-          "description": "Gets the Premium disk VM Families list.",
-          "items": {
-            "$ref": "#/definitions/AzureVmFamily"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "savingsPlanVmFamilies": {
-          "type": "array",
-          "description": "Gets or sets the Premium disk VM Families list.",
-          "items": {
-            "$ref": "#/definitions/AzureVmFamily"
-          },
           "x-ms-identifiers": []
         },
         "savingsPlanSupportedLocations": {
@@ -22899,14 +22880,6 @@
           "description": "Gets or sets the list of Azure locations supporting Saving Plans for IAAS.",
           "items": {
             "$ref": "#/definitions/AzureLocation"
-          },
-          "x-ms-identifiers": []
-        },
-        "savingsPlanSupportedOffers": {
-          "type": "array",
-          "description": "Gets or sets the list of Azure Offers supporting Saving Plans.",
-          "items": {
-            "$ref": "#/definitions/AzureOfferCode"
           },
           "x-ms-identifiers": []
         },
@@ -22934,7 +22907,7 @@
           },
           "x-ms-identifiers": []
         },
-        "reservedInstanceWebAppTiers": {
+        "reservedInstanceSupportedWebAppTiers": {
           "type": "array",
           "description": "Gets or sets the list of currencies supported for Reserved Instances.",
           "items": {
@@ -22947,14 +22920,6 @@
           "description": "Gets or sets the list of Azure Offers supporting Saving Plans.",
           "items": {
             "$ref": "#/definitions/AzureWebAppTier"
-          },
-          "x-ms-identifiers": []
-        },
-        "supportedOffers": {
-          "type": "array",
-          "description": "Gets or sets the list of offers supported for Web app assessments.",
-          "items": {
-            "$ref": "#/definitions/AzureOfferCode"
           },
           "x-ms-identifiers": []
         }
@@ -23007,14 +22972,6 @@
         "entityUptime": {
           "$ref": "#/definitions/EntityUptime",
           "description": "Gets or sets the duration for which the entity (Web app, VMs) are up in the\non-premises environment."
-        },
-        "reservedInstanceForVm": {
-          "$ref": "#/definitions/AzureReservedInstance",
-          "description": "Gets or sets azure reserved instance for VM."
-        },
-        "azureOfferCodeForVm": {
-          "$ref": "#/definitions/AzureOfferCode",
-          "description": "Gets or sets Azure Offer Code for VM."
         },
         "eaSubscriptionId": {
           "type": "string",
@@ -23399,17 +23356,55 @@
       "type": "object",
       "description": "Web app discovered entities summary data.",
       "properties": {
-        "TotalMonthlyCost": {
+        "totalMonthlyCost": {
           "type": "number",
           "format": "float",
           "description": "Total monthly cost",
           "readOnly": true
         },
-        "MonthlySecurityCost": {
+        "monthlySecurityCost": {
           "type": "number",
           "format": "float",
           "description": "Monthly security data",
           "readOnly": true
+        },
+        "skuName": {
+          "type": "string",
+          "description": "Sku name",
+          "readOnly": true
+        },
+        "skuSize": {
+          "type": "string",
+          "description": "Sku size",
+          "readOnly": true
+        },
+        "appServicePlanCount": {
+          "type": "object",
+          "description": "App service plan count",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": true
+        }
+      },
+      "required": ["skuName", "skuSize", "appServicePlanCount"]
+    },
+    "WebAppTargetOptions": {
+      "type": "object",
+      "description": "Web app target options.",
+      "properties": {
+        "webAppTier": {
+          "$ref": "#/definitions/AzureWebAppTier",
+          "description": "Gets or sets the Azure web app tier."
+        },
+        "targetLocations": {
+          "type": "array",
+          "description": "Gets or sets the target location.",
+          "items": {
+            "$ref": "#/definitions/AzureLocation"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
