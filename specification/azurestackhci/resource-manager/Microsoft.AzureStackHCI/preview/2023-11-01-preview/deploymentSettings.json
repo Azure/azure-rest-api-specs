@@ -809,7 +809,7 @@
       "properties": {
         "deploymentSbeInfo": {
           "$ref": "#/definitions/DeploymentSbeInfo",
-          "description": "Deployment Sbe Info contains SBE family manifest info."
+          "description": "SBE package and manifest information for the Solution Builder Extension staged for AzureStackHCI cluster deployment."
         },
         "partnerProperties": {
           "type": "array",
@@ -833,11 +833,11 @@
     },
     "DeploymentSbeInfo": {
       "type": "object",
-      "description": "Deployment Sbe Info contains SBE family manifest info.",
+      "description": "SBE package and manifest information for the Solution Builder Extension staged for AzureStackHCI cluster deployment.",
       "properties": {
         "version": {
           "type": "string",
-          "description": "SBE manifest version info."
+          "description": "SBE package version."
         },
         "family": {
           "type": "string",
@@ -873,7 +873,7 @@
     },
     "CredentialList": {
       "type": "object",
-      "description": "SBE partner properties object.",
+      "description": "SBE partner properties object, used to populate SBE $PartnerProperties.",
       "properties": {
         "kvId": {
           "type": "string",
@@ -881,7 +881,7 @@
         },
         "secretNames": {
           "type": "array",
-          "description": "SBE partner credential list of secret names stored in keyvault.",
+          "description": "SBE partner list of secret names stored in keyvault, used to populate SBE $CredentialList.",
           "items": {
             "type": "string"
           },
