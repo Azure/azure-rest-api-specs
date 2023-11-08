@@ -5,33 +5,32 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.EdgeMarketPlace;
-@doc("An offer.")
-@parentResource(ArmResource)
-model Offer is ExtensionResource<OfferProperties> {
-  @doc("Id of the offer")
+@doc("A publisher who provides offers.")
+model Publisher is ExtensionResource<PublisherProperties> {
+  @doc("Name of the publisher")
+  @pattern("^.*$")
   @path
-  @key("offerId")
-  @segment("offers")
+  @key("publisherName")
+  @segment("publishers")
   name: string;
 }
 
 @armResourceOperations
-interface Offers {
-  @doc("Get a Offer")
-  get is ArmResourceRead<Offer>;
-  @doc("List Offer resources by parent")
+interface Publishers {
+  @doc("Get a Publisher")
+  get is ArmResourceRead<Publisher>;
+  @doc("List Publisher resources by parent")
   list is ArmResourceListByParent<
-    Offer,
+    Publisher,
     {
-      ...BaseParameters<Offer>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Publisher>;
 
       @doc("The number of result items to return.")
       @query("$top")
-      $top?: int32;
+      top?: int32;
 
       @doc("The number of result items to skip.")
       @query("skip")
@@ -43,23 +42,11 @@ interface Offers {
 
       @doc("Filter the result list using the given expression.")
       @query("$filter")
-      $filter?: string;
+      filter?: string;
 
       @doc("Skip over when retrieving results.")
       @query("$skipToken")
-      $skipToken?: string;
+      skipToken?: string;
     }
-  >;
-  @doc("A long-running resource action.")
-  generateAccessToken is ArmResourceActionAsync<
-    Offer,
-    AccessTokenRequest,
-    DiskAccessToken
-  >;
-  @doc("get access token.")
-  getAccessToken is ArmResourceActionSync<
-    Offer,
-    AccessTokenReadRequest,
-    DiskAccessToken
   >;
 }

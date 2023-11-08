@@ -22,6 +22,7 @@ namespace Microsoft.EdgeMarketPlace;
 
 @doc("The available API versions.")
 enum Versions {
+  @doc("Version 2023-08-01")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_08_01: "2023-08-01",

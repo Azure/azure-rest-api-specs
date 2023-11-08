@@ -10,34 +10,48 @@ namespace Microsoft.EdgeMarketPlace;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("ResourceProvisioningState Enum")
 enum ResourceProvisioningState {
   @doc("Resource has been created.") Succeeded,
   @doc("Resource creation failed.") Failed,
   @doc("Resource creation was canceled.") Canceled,
 }
 
+@doc("Enum for CreatedBy")
 enum CreatedByType {
+  @doc("The resource is created by user")
   User,
+  @doc("The resource is created by application")
   Application,
+  @doc("The resource is created by managed identity")
   ManagedIdentity,
+  @doc("The resource is created by key")
   Key,
 }
 
+@doc("Origin Enum")
 enum Origin {
+  @doc("Origin is user")
   user,
+  @doc("Origin is system")
   system,
+  @doc("Origin is user and system")
   `user,system`,
 }
 
+@doc("ActionType Enum")
 enum ActionType {
+  @doc("ActionType is internal")
   Internal,
 }
 
+@doc("OfferAvailability Enum")
 enum OfferAvailability {
   @doc("The offer availability is private") Private,
   @doc("The offer availability is public") Public,
 }
 
+@doc("OffereReleaseType Enum")
 enum OfferReleaseType {
   @doc("The offer in preview") Preview,
   @doc("The offer in GA") GA,
