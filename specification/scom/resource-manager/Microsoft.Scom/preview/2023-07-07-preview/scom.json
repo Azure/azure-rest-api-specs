@@ -54,11 +54,10 @@
   "paths": {
     "/providers/Microsoft.Scom/operations": {
       "get": {
-        "operationId": "Operations_List",
+        "operationId": "Operations_ListV2",
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -298,7 +297,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedInstanceTagsUpdate"
+              "$ref": "#/definitions/MonitoringInstancePatch"
             }
           }
         ],
@@ -1150,6 +1149,43 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all available operations on SCOM managed instance (SCOM MI)r",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -1297,6 +1333,7 @@
     },
     "HybridLicenseType": {
       "type": "string",
+      "description": "The license type associated with different SCOM infrastructure components.",
       "enum": [
         "None",
         "AzureHybridBenefit"
@@ -1538,19 +1575,6 @@
         }
       }
     },
-    "ManagedInstanceTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in ManagedInstance resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ManagementServerProperties": {
       "type": "object",
       "description": "The properties of management server",
@@ -1671,6 +1695,23 @@
         "provisioningState": {
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "MonitoringInstancePatch": {
+      "type": "object",
+      "description": "Object containing updates for patch operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "The Azure Active Directory identity of the SCOM instance"
         }
       }
     },

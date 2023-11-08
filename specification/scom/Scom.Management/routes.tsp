@@ -4,10 +4,29 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 
 namespace Microsoft.Scom;
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations {
+    // TODO - is this correct?? Should be using `interface Operations extends Azure.ResourceManager.Operations {}`
+    /** Lists all available operations on SCOM managed instance (SCOM MI)r */
+    @tag("Operations")
+    @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/operations")
+    @get
+    list(
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+    ): ArmResponse<Foundations.OperationListResult> | ErrorResponse;
+
+    @tag("Operations")
+    @route("/providers/Microsoft.Scom/operations")
+    @get
+    listV2(
+        ...ApiVersionParameter,
+    ): ArmResponse<Foundations.OperationListResult> | ErrorResponse;
+}
 
 // Issue: The 'operation list' does not require this operation. It has been commented out.
 // interface OperationsOperations {

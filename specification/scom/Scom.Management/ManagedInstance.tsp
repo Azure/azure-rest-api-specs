@@ -37,7 +37,7 @@ interface Instances {
     }
   >;
   /** Patch SCOM managed instance */
-  update is ArmTagsPatchAsync<ManagedInstance>;
+  update is ArmCustomPatchAsync<ManagedInstance, MonitoringInstancePatch>;
   /** Delete a SCOM managed instance */
   delete is ArmResourceDeleteAsync<ManagedInstance>;
   /** Lists all SCOM managed instances in a resource group */

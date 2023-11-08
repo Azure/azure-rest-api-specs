@@ -18,6 +18,7 @@ enum ActionType {
   Internal,
 }
 
+/** The license type associated with different SCOM infrastructure components. */
 enum HybridLicenseType {
   None,
   AzureHybridBenefit,
@@ -85,6 +86,14 @@ model MonitoringInstanceProperties {
   operationsStatus?: ManagedInstanceOperationStatus[];
 }
 
+/** Object containing updates for patch operations. */
+model MonitoringInstancePatch {
+  ...Foundations.ArmTagsProperty;
+
+  /** The Azure Active Directory identity of the SCOM instance */
+  identity: ManagedIdentity;
+}
+
 /** The properties of management server */
 model ManagementServerProperties {
   /** Management server Name */
@@ -135,7 +144,7 @@ model DomainControllerProperties {
   /** Fully qualified domain name */
   domainName?: string;
 
-  /** IP address of DNS server  */
+  /** IP address of DNS server */
   dnsServer?: string;
 
   /** Organizational Unit path in which the SCOM servers will be present */
@@ -147,10 +156,10 @@ model DomainUserCredentials {
   /** Key vault url to get the domain username and password */
   keyVaultUrl?: string;
 
-  /** Domain user name secret  */
+  /** Domain user name secret */
   userNameSecret?: string;
 
-  /** Domain Password secret  */
+  /** Domain Password secret */
   passwordSecret?: string;
 }
 
