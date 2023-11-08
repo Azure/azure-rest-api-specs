@@ -398,7 +398,7 @@
             "description": "The project Id.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,63}$",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
             "minLength": 3,
             "maxLength": 64
           },
@@ -1344,7 +1344,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/PathUuid"
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1378,7 +1378,7 @@
         "operationId": "ZeroShotModels_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/PathUuid"
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1418,7 +1418,7 @@
             "$ref": "#/parameters/HeaderOperationId"
           },
           {
-            "$ref": "#/parameters/PathUuid"
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1482,7 +1482,7 @@
             "$ref": "#/parameters/HeaderOperationId"
           },
           {
-            "$ref": "#/parameters/PathUuid"
+            "$ref": "#/parameters/PathId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -1505,7 +1505,7 @@
             "description": "The project Id.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,63}$",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
             "minLength": 3,
             "maxLength": 64
           },
@@ -1575,7 +1575,7 @@
             "required": true,
             "description": "The id of the operation",
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,63}$",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
             "minLength": 3,
             "maxLength": 64
           },
@@ -1690,7 +1690,6 @@
     "Dataset": {
       "description": "Data set",
       "required": [
-        "displayName",
         "kind",
         "audioUrl"
       ],
@@ -2156,7 +2155,7 @@
     "OperationId": {
       "description": "Unique operation ID.",
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,63}$",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
       "minLength": 3,
       "maxLength": 64
     },
@@ -2440,7 +2439,7 @@
     "ResourceId": {
       "description": "Resource id",
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,63}$",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
       "minLength": 3,
       "maxLength": 64
     },
@@ -2532,9 +2531,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Zero shot speaker profile id",
-          "type": "string",
-          "format": "uuid"
+          "$ref": "#/definitions/ResourceId"
         },
         "speakerProfileId": {
           "description": "Zero shot speaker profile id. Fill this property in SSML.",
@@ -2677,7 +2674,7 @@
       "description": "The id of resource.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,63}$",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
       "minLength": 3,
       "maxLength": 64,
       "x-ms-parameter-location": "method"
@@ -2697,7 +2694,7 @@
       "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
       "required": false,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,63}$",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
       "minLength": 3,
       "maxLength": 64,
       "x-ms-parameter-location": "method"
