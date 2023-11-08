@@ -9,6 +9,8 @@ using LiftrBase;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.Reflection;
+using Azure.ResourceManager.Foundations;
 
 @versioned(LiftrBase.Storage.Versions)
 @armLibraryNamespace
@@ -23,7 +25,9 @@ enum Versions {
 }
 
 @doc("Reservation resource type.")
-model Reservation is TrackedResource<ReservationProperties> {
+@friendlyName("Reservation")
+model Reservation<TProperties extends Model = ReservationProperties>
+  is TrackedResource<TProperties> {
   @doc("The name of the reservation.")
   @segment("reservations")
   @key("reservationName")
@@ -34,18 +38,24 @@ model Reservation is TrackedResource<ReservationProperties> {
 }
 
 @armResourceOperations
-interface Reservations {
-  get is ArmResourceRead<Reservation>;
-  create is ArmResourceCreateOrUpdateAsync<Reservation>;
-  update is ArmResourcePatchAsync<Reservation, ReservationProperties>;
-  delete is ArmResourceDeleteAsync<Reservation>;
-  listByResourceGroup is ArmResourceListByParent<Reservation>;
-  listBySubscription is ArmListBySubscription<Reservation>;
+interface Reservations<
+  TReservation extends ArmResource = Reservation,
+  TReservationProperties extends Model = ReservationProperties
+> {
+  get is ArmResourceRead<TReservation>;
+  create is ArmResourceCreateOrUpdateAsync<TReservation>;
+  update is ArmResourcePatchAsync<TReservation, TReservationProperties>;
+  delete is ArmResourceDeleteAsync<TReservation>;
+  listByResourceGroup is ArmResourceListByParent<TReservation>;
+  listBySubscription is ArmListBySubscription<TReservation>;
 }
 
 @doc("Properties of a Reservation resource.")
-model ReservationProperties is BaseResourceProperties {
+model ReservationProperties<TProperties extends Model = BaseResourceProperties> {
+
   @doc("Internal ID of Reservation.")
   @visibility("read")
   reservationInternalId?: string;
+
+  ...TProperties;
 }

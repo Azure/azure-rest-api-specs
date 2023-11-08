@@ -1,8 +1,13 @@
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-providerhub";
+import "@typespec/rest";
 import "@typespec/versioning";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using TypeSpec.Reflection;
 
 @versioned(LiftrBase.Versions)
 namespace LiftrBase;
@@ -69,8 +74,47 @@ model OfferDetails {
 @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
 scalar email extends string;
 
+@doc("Company details.")
+model CompanyDetails {
+  @doc("Company name.")
+  companyName: string;
+
+  @doc("Company address.")
+  address?: Address;
+}
+
+@doc("Address details.")
+model Address {
+  @doc("Address line 1")
+  addressLine1: string;
+
+  @doc("Address line 2")
+  addressLine2?: string;
+
+  @doc("Name of the city")
+  city: string;
+
+  @doc("Name of the state")
+  state: string;
+
+  @doc("Name of the country")
+  country: string;
+
+  @doc("Postal code")
+  postalCode: string;
+}
+
+@doc("User company details.")
+model UserCompanyDetails {
+  @doc("Company details of the user.")
+  companyDetails?: CompanyDetails;
+}
+
+alias UserDetailsDefaultExtraProperties = UserCompanyDetails;
+
 @doc("Details of the User.")
-model UserDetails {
+@friendlyName("UserDetails")
+model UserDetails<TExtraProperties extends Model = UserDetailsDefaultExtraProperties> {
   @doc("First name of the user")
   firstName: string;
 
@@ -85,16 +129,18 @@ model UserDetails {
 
   @doc("User's phone number")
   phoneNumber?: string;
+
+  ...TExtraProperties;
 }
 
 @doc("Base resource properties that can be extended for arm resources.")
-model BaseResourceProperties {
+model BaseResourceProperties<TUserDetailsExtraProperties extends Model = UserDetailsDefaultExtraProperties> {
   @doc("Marketplace details of the resource.")
   @visibility("create", "read")
   marketplace: MarketplaceDetails;
 
   @doc("Details of the user.")
-  user: UserDetails;
+  user: UserDetails<TUserDetailsExtraProperties>;
 
   @doc("Provisioning state of the resource.")
   @visibility("read")

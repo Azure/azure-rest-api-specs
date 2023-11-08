@@ -1,5 +1,7 @@
 import "./LiftrBase.Storage/main.tsp";
 
+import "@typespec/openapi";
+
 @armProviderNamespace
 @useLibraryNamespace(LiftrBase.Storage)
 @service({
@@ -12,6 +14,7 @@ using Azure.ResourceManager;
 using LiftrBase;
 using LiftrBase.Storage;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
@@ -26,8 +29,13 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+alias BaseResourceProperties = LiftrBase.BaseResourceProperties;
+alias ReservationProperties = LiftrBase.Storage.ReservationProperties<BaseResourceProperties>;
+alias Reservation = LiftrBase.Storage.Reservation<ReservationProperties>;
+
 @armResourceOperations
-interface Reservations extends LiftrBase.Storage.Reservations {}
+interface Reservations
+  extends LiftrBase.Storage.Reservations<Reservation, ReservationProperties> {}
 
 @doc("Storage Pool resource type.")
 model StoragePool is TrackedResource<StoragePoolProperties> {
@@ -123,6 +131,7 @@ model AvsDetails {
   vasaProviderUrls: string[];
 
   @doc("Array of iSCSI endpoint and IQN.")
+  @extension("x-ms-identifiers", [])
   vasaIscsiEndpoints: VasaIscsiEndpoints[];
 }
 
@@ -144,6 +153,7 @@ model HealthResponse {
   health: HealthDetails;
 
   @doc("Array of health alerts for a given pool.")
+  @extension("x-ms-identifiers", [])
   alerts: Alert[];
 }
 
