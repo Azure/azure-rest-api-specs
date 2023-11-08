@@ -1606,6 +1606,9 @@
         },
         "description": {
           "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/ModelKind"
         }
       }
     },
@@ -2092,6 +2095,17 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ModelFailureReason",
+        "modelAsString": true
+      }
+    },
+    "ModelKind": {
+      "description": "Model kind",
+      "enum": [
+        "InstanceVoiceBaseModel"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ModelKind",
         "modelAsString": true
       }
     },
