@@ -24,6 +24,7 @@ alias SharedAnalyzeQuery = {
 
   @query("language")
   @doc("The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.")
+  @minLength(2)
   language?: string = "en";
 
   @query("gender-neutral-caption")
@@ -39,10 +40,12 @@ alias SharedAnalyzeQuery = {
 
   @query("model-version")
   @doc("The version of cloud AI-model used for analysis. The default value is \"latest\". Only relevant when doing analysis with standard models. Not relevant when doing analysis with a custom-trained AI model.")
+  @minLength(1)
   modelVersion?: string = "latest";
 
   @query("model-name")
   @doc("The name of the custom-trained cloud AI model. This parameter needs to be specified if the parameter \"features\" is not specified.")
+  @minLength(1)
   customModelName?: string;
 };
 
