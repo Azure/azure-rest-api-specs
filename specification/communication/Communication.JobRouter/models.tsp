@@ -387,7 +387,7 @@ model RouterJob {
   attachedWorkerSelectors?: RouterWorkerSelector[];
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
-  @doc("A set of key/value pairs that are identifying attributes used by the rules engines to make decisions. Values must be primivite values - number, string, boolean.")
+  @doc("A set of key/value pairs that are identifying attributes used by the rules engines to make decisions. Values must be primitive values - number, string, boolean.")
   labels?: Record<unknown>;
 
   @doc("A collection of the assignments of the job. Key is AssignmentId.")
@@ -395,7 +395,7 @@ model RouterJob {
   assignments?: Record<RouterJobAssignment>;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
-  @doc("A set of non-identifying attributes attached to this job. Values must be primivite values - number, string, boolean.")
+  @doc("A set of non-identifying attributes attached to this job. Values must be primitive values - number, string, boolean.")
   tags?: Record<unknown>;
 
   @doc("Notes attached to a job, sorted by timestamp")
@@ -418,7 +418,7 @@ model RouterWorkerSelector {
   labelOperator: LabelOperator;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Unions are currently not allowed in spec."
-  @doc("The value to compare against the actual label value with the given operator. Values must be primivite values - number, string, boolean.")
+  @doc("The value to compare against the actual label value with the given operator. Values must be primitive values - number, string, boolean.")
   value?: unknown;
 
   @doc("Describes how long this label selector is valid in seconds.")
@@ -586,7 +586,7 @@ model RouterQueue {
   distributionPolicyId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
-  @doc("A set of key/value pairs that are identifying attributes used by the rules engines to make decisions. Values must be primivite values - number, string, boolean.")
+  @doc("A set of key/value pairs that are identifying attributes used by the rules engines to make decisions. Values must be primitive values - number, string, boolean.")
   labels?: Record<unknown>;
 
   @doc("The ID of the exception policy that determines various job escalation rules.")
@@ -629,11 +629,11 @@ model RouterWorker {
   capacity?: int32;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
-  @doc("A set of key/value pairs that are identifying attributes used by the rules engines to make decisions. Values must be primivite values - number, string, boolean.")
+  @doc("A set of key/value pairs that are identifying attributes used by the rules engines to make decisions. Values must be primitive values - number, string, boolean.")
   labels?: Record<unknown>;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
-  @doc("A set of non-identifying attributes attached to this worker. Values must be primivite values - number, string, boolean.")
+  @doc("A set of non-identifying attributes attached to this worker. Values must be primitive values - number, string, boolean.")
   tags?: Record<unknown>;
 
   @doc("The channel(s) this worker can handle and their impact on the workers capacity.")
@@ -774,7 +774,7 @@ model RouterQueueSelector {
   labelOperator: LabelOperator;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Unions are currently not allowed in spec."
-  @doc("The value to compare against the actual label value with the given operator. Values must be primivite values - number, string, boolean.")
+  @doc("The value to compare against the actual label value with the given operator. Values must be primitive values - number, string, boolean.")
   value?: unknown;
 }
 
@@ -928,7 +928,7 @@ model ReclassifyExceptionAction extends ExceptionAction {
   classificationPolicyId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
-  @doc("Dictionary containing the labels to update (or add if not existing) in key-value pairs.  Values must be primivite values - number, string, boolean.")
+  @doc("Dictionary containing the labels to update (or add if not existing) in key-value pairs.  Values must be primitive values - number, string, boolean.")
   labelsToUpsert?: Record<unknown>;
 
   @doc("The type discriminator describing a sub-type of ExceptionAction")
@@ -971,7 +971,7 @@ model StaticQueueSelectorAttachment extends QueueSelectorAttachment {
 @doc("A rule providing static rules that always return the same result, regardless of input.")
 model StaticRouterRule extends RouterRule {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Unions are currently not allowed in spec."
-  @doc("The static value this rule always returns. Values must be primivite values - number, string, boolean.")
+  @doc("The static value this rule always returns. Values must be primitive values - number, string, boolean.")
   value?: unknown;
 
   @doc("The type discriminator describing a sub-type of Rule")
