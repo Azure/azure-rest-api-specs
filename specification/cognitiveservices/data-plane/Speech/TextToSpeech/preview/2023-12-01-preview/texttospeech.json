@@ -475,6 +475,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "Operation-Location"
+        },
         "x-ms-examples": {
           "Create a consent": {
             "$ref": "./examples/create_consent_with_multipart_form.json"
@@ -709,6 +712,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "Operation-Location"
+        },
         "x-ms-examples": {
           "Upload data to a training set": {
             "$ref": "./examples/upload_trainingset.json"
@@ -1171,6 +1177,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "Operation-Location"
+        },
         "x-ms-examples": {
           "Resume an endpoint": {
             "$ref": "./examples/resume_endpoint.json"
@@ -1225,6 +1234,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "Operation-Location"
+        },
         "x-ms-examples": {
           "Suspend an endpoint": {
             "$ref": "./examples/suspend_endpoint.json"
@@ -1536,6 +1548,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "Operation-Location"
+        },
         "x-ms-examples": {
           "Create a zeroshot model": {
             "$ref": "./examples/create_zeroshot_with_multipart_form.json"
@@ -2651,7 +2666,7 @@
     "QueryFilter": {
       "name": "filter",
       "in": "query",
-      "description": "Filter condition",
+      "description": "Filter condition.\r\n            <ul><li><b>Supported properties:</b>projectId, created, locale, kind\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for created.\r\n              </li><li><b>Example:</b>\r\n                - ```filter=projectId eq Jessica``` (filter by project id)\r\n                - ```filter=kind eq TextToSpeech``` (filter project by kind)\r\n                - ```filter=locale eq en-US``` (filter traing set and model by locale)\r\n                - ```filter=created gt 2023-11-01``` (filter resource created time after 2023-11-01)</li></ul>",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
