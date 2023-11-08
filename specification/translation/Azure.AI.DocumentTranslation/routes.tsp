@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "./models-glossaryformats.tsp";
 import "./models-documentformats.tsp";
+import "./models-documenttranslate.tsp";
 
 using Azure.Core;
 using TypeSpec.Rest;
