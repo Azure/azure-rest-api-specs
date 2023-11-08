@@ -1620,8 +1620,12 @@
         "description": {
           "type": "string"
         },
-        "kind": {
-          "$ref": "#/definitions/ModelKind"
+        "capabilities": {
+          "description": "Capabilities of base model",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelCapability"
+          }
         }
       }
     },
@@ -2110,10 +2114,10 @@
         "modelAsString": true
       }
     },
-    "ModelKind": {
-      "description": "Model kind",
+    "ModelCapability": {
+      "description": "Model capability",
       "enum": [
-        "InstanceVoiceBaseModel"
+        "InstanceVoice"
       ],
       "type": "string",
       "x-ms-enum": {
