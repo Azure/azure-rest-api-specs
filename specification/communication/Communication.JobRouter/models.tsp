@@ -719,16 +719,16 @@ model BestWorkerMode extends DistributionMode {
 @doc("Encapsulates all options that can be passed as parameters for scoring rule with BestWorkerMode")
 model ScoringRuleOptions {
   @doc("Set batch size when 'isBatchScoringEnabled' is set to true. Defaults to 20 if not configured.")
-  batchSize?: int32;
+  batchSize?: int32 = 20;
 
   @doc("List of extra parameters from the job that will be sent as part of the payload to scoring rule. If not set, the job's labels (sent in the payload as `job`) and the job's worker selectors (sent in the payload as `selectors`) are added to the payload of the scoring rule by default. Note: Worker labels are always sent with scoring payload.")
-  scoringParameters?: ScoringRuleParameterSelector[];
+  scoringParameters?: ScoringRuleParameterSelector[] = [ScoringRuleParameterSelector.jobLabels, ScoringRuleParameterSelector.workerSelectors];
 
   @doc("If set to true, will score workers in batches, and the parameter name of the worker labels will be sent as `workers`. By default, set to false and the parameter name for the worker labels will be sent as `worker`. Note: If enabled, use 'batchSize' to set batch size.")
-  isBatchScoringEnabled?: boolean;
+  isBatchScoringEnabled?: boolean = false;
 
   @doc("If false, will sort scores by ascending order. By default, set to true.")
-  descendingOrder?: boolean;
+  descendingOrder?: boolean = true;
 }
 
 @doc("An action that marks a job as cancelled")
@@ -1042,7 +1042,7 @@ model WorkerWeightedAllocation {
 
 @access(Access.internal)
 @doc("Request payload for reclassifying jobs")
-model ReclassifyJobOptions is Record<string>;
+model ReclassifyJobOptions {}
 
 @access(Access.internal)
 @doc("Response payload from reclassifying a job")
