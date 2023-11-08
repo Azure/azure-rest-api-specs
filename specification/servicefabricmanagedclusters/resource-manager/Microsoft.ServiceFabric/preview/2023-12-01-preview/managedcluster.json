@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2023-11-01-preview"
+    "version": "2023-12-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1573,6 +1573,15 @@
         "upgradeDescription": {
           "$ref": "#/definitions/ClusterUpgradePolicy",
           "description": "The policy to use when upgrading the cluster."
+        },
+        "httpGatewayTokenAuthConnectionPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port used for token-auth based HTTP connections to the cluster. Cannot be set to the same port as HttpGatewayEndpoint."
+        },
+        "enableGatewayExclusiveAuthMode": {
+          "type": "boolean",
+          "description": "If true, token-based authentication is not allowed on the HttpGatewayEndpoint. This is required to support TLS versions 1.3 and above. If token-based authentication is used, HttpGatewayTokenAuthEndpoint must be defined."
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -2237,7 +2246,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-11-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-12-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
