@@ -51,8 +51,6 @@ suppressions:
     reason: The operation id is valid.
   - code: EnumInsteadOfBoolean
     reason: The boolean property is expected.
-  - code: NestedResourcesMustHaveListOperation
-    reason: It is expected that the getting available upgrades for clusterPools and clusters don't have list operation.
 ```
 ### Tag: package-2023-06-preview
 

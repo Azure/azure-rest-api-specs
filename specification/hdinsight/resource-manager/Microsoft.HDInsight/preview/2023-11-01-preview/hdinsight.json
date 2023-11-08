@@ -372,13 +372,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/availableUpgrades/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/availableUpgrades": {
       "get": {
-        "description": "Gets a cluster pool available upgrade.",
-        "operationId": "ClusterPoolAvailableUpgrades_Get",
+        "description": "List a cluster pool available upgrade.",
+        "operationId": "ClusterPoolAvailableUpgrades_List",
         "x-ms-examples": {
           "GetClusterPoolAvailableUpgrade": {
-            "$ref": "./examples/GetClusterPoolAvailableUpgrade.json"
+            "$ref": "./examples/ListClusterPoolAvailableUpgrades.json"
           }
         },
         "parameters": [
@@ -399,7 +399,7 @@
           "200": {
             "description": "Clusterpool Available Upgrade details.",
             "schema": {
-              "$ref": "#/definitions/ClusterPoolAvailableUpgrade"
+              "$ref": "#/definitions/ClusterPoolAvailableUpgradeList"
             }
           },
           "default": {
@@ -517,13 +517,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/availableUpgrades/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/availableUpgrades": {
       "get": {
-        "description": "Gets a cluster available upgrade.",
-        "operationId": "ClusterAvailableUpgrades_Get",
+        "description": "List a cluster available upgrade.",
+        "operationId": "ClusterAvailableUpgrades_List",
         "x-ms-examples": {
           "GetClusterAvailableUpgrade": {
-            "$ref": "./examples/GetClusterAvailableUpgrade.json"
+            "$ref": "./examples/ListClusterAvailableUpgrades.json"
           }
         },
         "parameters": [
@@ -547,7 +547,7 @@
           "200": {
             "description": "Cluster Available Upgrade details.",
             "schema": {
-              "$ref": "#/definitions/ClusterAvailableUpgrade"
+              "$ref": "#/definitions/ClusterAvailableUpgradeList"
             }
           },
           "default": {
@@ -3336,6 +3336,28 @@
       },
       "x-ms-discriminator-value": "FlinkJob"
     },
+    "ClusterPoolAvailableUpgradeList": {
+      "type": "object",
+      "description": "Collection of Cluster pool available upgrade.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of Cluster pool available upgrade.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/ClusterPoolAvailableUpgrade"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        }
+      }
+    },
     "ClusterPoolAvailableUpgrade": {
       "type": "object",
       "description": "Cluster pool available upgrade.",
@@ -3356,19 +3378,32 @@
       "type": "object",
       "description": "Cluster pool available upgrade properties.",
       "properties": {
-        "aksPatchUpgrade": {
-          "description": "The details of aks patch version upgrade",
-          "$ref": "#/definitions/ClusterPoolAvailableUpgradeAksPatchUpgrade"
-        },
-        "nodeOsUpgrade": {
-          "description": "The details of node os update",
-          "$ref": "#/definitions/ClusterPoolAvailableUpgradeNodeOsUpgrade"
+        "upgradeType": {
+          "description": "Type of upgrade.",
+          "enum": [
+              "AKSPatchUpgrade",
+              "NodeOsUpgrade"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+              "name": "clusterPoolAvailableUpgradeType",
+              "modelAsString": true
         }
       }
     },
-    "ClusterPoolAvailableUpgradeAksPatchUpgrade": {
+      "discriminator": "upgradeType",
+      "required": [
+        "upgradeType"
+      ]
+    },
+    "ClusterPoolAvailableUpgradeAksPatchUpgradeProperties": {
       "type": "object",
       "description": "Cluster pool available aks patch version upgrade.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterPoolAvailableUpgradeProperties"
+        }
+      ],
       "properties": {
         "currentVersion": {
           "description": "Current AKS version.",
@@ -3382,18 +3417,43 @@
           "description": "Latest AKS patch version.",
           "type": "string"
         }
-      }
     },
-    "ClusterPoolAvailableUpgradeNodeOsUpgrade": {
+      "x-ms-discriminator-value": "AKSPatchUpgrade"
+    },
+    "ClusterPoolAvailableUpgradeNodeOsUpgradeProperties": {
       "type": "object",
       "description": "Cluster pool available node os update.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterPoolAvailableUpgradeProperties"
+        }
+      ],
       "properties": {
-        "canUpgrade": {
-          "description": "Whether can upgrade the node os for nodes in the clusterPool.",
-          "type": "boolean"
+        "latestVersion": {
+          "description": "The latest node os version.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "NodeOsUpgrade"
+    },
+    "ClusterAvailableUpgradeList": {
+      "type": "object",
+      "description": "Collection of Cluster available upgrade.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of Cluster available upgrade.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/ClusterAvailableUpgrade"
         },
-        "latestNodeOs": {
-          "description": "The latest node os.",
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
           "type": "string"
         }
       }
@@ -3418,15 +3478,31 @@
       "type": "object",
       "description": "Cluster available upgrade properties.",
       "properties": {
-        "aksPatchUpgrade": {
-          "description": "The details of aks patch version upgrade",
-          "$ref": "#/definitions/ClusterAvailableUpgradeAksPatchUpgrade"
+        "upgradeType": {
+          "description": "Type of upgrade.",
+          "enum": [
+            "AKSPatchUpgrade"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "clusterAvailableUpgradeType",
+            "modelAsString": true
         }
       }
     },
-    "ClusterAvailableUpgradeAksPatchUpgrade": {
+      "discriminator": "upgradeType",
+      "required": [
+        "upgradeType"
+      ]
+    },
+    "ClusterAvailableUpgradeAksPatchUpgradeProperties": {
       "type": "object",
       "description": "Cluster available aks patch version upgrade.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterAvailableUpgradeProperties"
+        }
+      ],
       "properties": {
         "currentVersion": {
           "description": "Current node pool version.",
@@ -3440,7 +3516,8 @@
           "description": "Latest available version, which should be equal to aks control plane version if it's not deprecated.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-discriminator-value": "AKSPatchUpgrade"
     },
     "ClusterPoolUpgrade": {
       "description": "Cluster Pool Upgrade.",
