@@ -14,15 +14,16 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+
+/** Azure Monitor Operations Manager Managed Instance (SCOM MI) management APIs */
 @armProviderNamespace
 @service({
   title: "Azure API for managing SCOM managed instances and monitored resources.",
 })
 @versioned(Versions)
-@doc("Azure Monitor Operations Manager Managed Instance (SCOM MI) management APIs")
 namespace Microsoft.Scom;
 
-@doc("The available API versions.")
+/** The available API versions. */
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
