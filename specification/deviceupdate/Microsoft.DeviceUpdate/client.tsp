@@ -22,3 +22,13 @@ namespace Customizations;
     name: "InstanceManagementClient",
   }
 );
+
+@@projectedName(Azure.IoT.DeviceUpdate.DeviceManagementOperations.cancel,
+  "client",
+  "StopDeployment"
+);
+
+@@projectedName(Azure.IoT.DeviceUpdate.DeviceManagementOperations.retry,
+  "client",
+  "RetryDeployment"
+);

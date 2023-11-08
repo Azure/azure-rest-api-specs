@@ -56,8 +56,7 @@ model LogCollectionDetailedStatusList {
 /** Device diagnostics operation detailed status */
 model LogCollectionOperationDetailedStatus {
   /** The device diagnostics operation id. */
-  @projectedName("json", "operationId")
-  logCollectionId?: string;
+  operationId?: string;
 
   /** The timestamp when the operation was created. */
   createdDateTime?: string;

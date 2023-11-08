@@ -797,7 +797,7 @@
     },
     "/management/devices:import": {
       "post": {
-        "operationId": "DeviceManagementOperations_ImportDevice",
+        "operationId": "DeviceManagementOperations_ImportDevices",
         "description": "Import existing devices from IoT Hub. This is a long-running-operation; use\nOperation-Location response header value to check for operation status.",
         "parameters": [
           {
@@ -835,6 +835,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Device Management Import Devices": {
+            "$ref": "./examples/DeviceManagement_ImportDevices.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1840,6 +1845,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Device Management Stop Deployment": {
+            "$ref": "./examples/DeviceManagement_CancelDeployment.json"
+          }
         }
       }
     },
@@ -1901,6 +1911,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Device Management Retry Deployment": {
+            "$ref": "./examples/DeviceManagement_RetryDeployment.json"
           }
         }
       }
@@ -4277,8 +4292,7 @@
       "properties": {
         "operationId": {
           "type": "string",
-          "description": "The device diagnostics operation id.",
-          "x-ms-client-name": "logCollectionId"
+          "description": "The device diagnostics operation id."
         },
         "createdDateTime": {
           "type": "string",

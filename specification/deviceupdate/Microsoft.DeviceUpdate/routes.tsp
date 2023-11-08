@@ -268,7 +268,7 @@ interface DeviceManagementOperations {
   @pollingOperation(DeviceManagementOperations.getOperationStatus)
   @route("management/devices:import")
   @post
-  importDevice is Azure.Core.Foundations.Operation<
+  importDevices is Azure.Core.Foundations.Operation<
     {
       /** The types of devices to import. */
       @body
