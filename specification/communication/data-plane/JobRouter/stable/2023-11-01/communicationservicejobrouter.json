@@ -3249,10 +3249,7 @@
     },
     "ReclassifyJobOptions": {
       "type": "object",
-      "description": "Request payload for reclassifying jobs",
-      "additionalProperties": {
-        "type": "string"
-      }
+      "description": "Request payload for reclassifying jobs"
     },
     "ReclassifyJobResult": {
       "type": "object",
@@ -4147,22 +4144,29 @@
         "batchSize": {
           "type": "integer",
           "format": "int32",
-          "description": "Set batch size when 'isBatchScoringEnabled' is set to true. Defaults to 20 if not configured."
+          "description": "Set batch size when 'isBatchScoringEnabled' is set to true. Defaults to 20 if not configured.",
+          "default": 20
         },
         "scoringParameters": {
           "type": "array",
           "description": "List of extra parameters from the job that will be sent as part of the payload to scoring rule. If not set, the job's labels (sent in the payload as `job`) and the job's worker selectors (sent in the payload as `selectors`) are added to the payload of the scoring rule by default. Note: Worker labels are always sent with scoring payload.",
+          "default": [
+            "jobLabels",
+            "workerSelectors"
+          ],
           "items": {
             "$ref": "#/definitions/ScoringRuleParameterSelector"
           }
         },
         "isBatchScoringEnabled": {
           "type": "boolean",
-          "description": "If set to true, will score workers in batches, and the parameter name of the worker labels will be sent as `workers`. By default, set to false and the parameter name for the worker labels will be sent as `worker`. Note: If enabled, use 'batchSize' to set batch size."
+          "description": "If set to true, will score workers in batches, and the parameter name of the worker labels will be sent as `workers`. By default, set to false and the parameter name for the worker labels will be sent as `worker`. Note: If enabled, use 'batchSize' to set batch size.",
+          "default": false
         },
         "descendingOrder": {
           "type": "boolean",
-          "description": "If false, will sort scores by ascending order. By default, set to true."
+          "description": "If false, will sort scores by ascending order. By default, set to true.",
+          "default": true
         }
       }
     },
