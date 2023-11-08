@@ -39,8 +39,14 @@ alias SharedAnalyzeQuery = {
   smartCropsAspectRatios?: Array<float32>;
 
   @query("model-version")
-  @doc("The version of cloud AI-model used for analysis. The default value is \"latest\". Only relevant when doing analysis with standard models. Not relevant when doing analysis with a custom-trained AI model.")
-  @minLength(1)
+  @doc("""
+  The version of cloud AI-model used for analysis.
+  The format is the following: 'latest' (default value) or 'YYYY-MM-DD' or 'YYYY-MM-DD-preview', where `YYYY`, `MM`, `DD` are the year, month and day.
+  Only relevant when doing analysis with standard models. Not relevant when doing analysis with a custom-trained AI model.
+  """)
+  @pattern("^(latest|\\d{4}-\\d{2}-\\d{2})(-preview)?$")
+  @minLength(6)
+  @maxLength(18)
   modelVersion?: string = "latest";
 
   @query("model-name")

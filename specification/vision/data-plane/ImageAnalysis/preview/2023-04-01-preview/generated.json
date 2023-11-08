@@ -154,11 +154,13 @@
           {
             "name": "model-version",
             "in": "query",
-            "description": "The version of cloud AI-model used for analysis. The default value is \"latest\". Only relevant when doing analysis with standard models. Not relevant when doing analysis with a custom-trained AI model.",
+            "description": "The version of cloud AI-model used for analysis.\nThe format is the following: 'latest' (default value) or 'YYYY-MM-DD' or 'YYYY-MM-DD-preview', where `YYYY`, `MM`, `DD` are the year, month and day.\nOnly relevant when doing analysis with standard models. Not relevant when doing analysis with a custom-trained AI model.",
             "required": false,
             "type": "string",
             "default": "latest",
-            "minLength": 1,
+            "minLength": 6,
+            "maxLength": 18,
+            "pattern": "^(latest|\\d{4}-\\d{2}-\\d{2})(-preview)?$",
             "x-ms-client-name": "modelVersion"
           },
           {
@@ -394,11 +396,13 @@
           {
             "name": "model-version",
             "in": "query",
-            "description": "The version of cloud AI-model used for analysis. The default value is \"latest\". Only relevant when doing analysis with standard models. Not relevant when doing analysis with a custom-trained AI model.",
+            "description": "The version of cloud AI-model used for analysis.\nThe format is the following: 'latest' (default value) or 'YYYY-MM-DD' or 'YYYY-MM-DD-preview', where `YYYY`, `MM`, `DD` are the year, month and day.\nOnly relevant when doing analysis with standard models. Not relevant when doing analysis with a custom-trained AI model.",
             "required": false,
             "type": "string",
             "default": "latest",
-            "minLength": 1,
+            "minLength": 6,
+            "maxLength": 18,
+            "pattern": "^(latest|\\d{4}-\\d{2}-\\d{2})(-preview)?$",
             "x-ms-client-name": "modelVersion"
           },
           {
