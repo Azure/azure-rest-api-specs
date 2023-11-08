@@ -1353,6 +1353,18 @@
           "type": "string",
           "readOnly": true,
           "description": "Version of Kubernetes in use by the agent pool. This is inherited from the kubernetesVersion of the provisioned cluster."
+        }
+      }
+    },
+    "AgentPoolProfile": {
+      "type": "object",
+      "description": "Profile for agent pool properties specified during creation",
+      "properties": {
+        "osType": {
+          "$ref": "#/definitions/OSType"
+        },
+        "osSKU": {
+          "$ref": "#/definitions/OSSKU"
         },
         "nodeLabels": {
           "type": "object",
@@ -1367,18 +1379,6 @@
             "type": "string"
           },
           "description": "Taints added to new nodes during node pool create and scale. For example, key=value:NoSchedule."
-        }
-      }
-    },
-    "AgentPoolProfile": {
-      "type": "object",
-      "description": "Profile for agent pool properties specified during creation",
-      "properties": {
-        "osType": {
-          "$ref": "#/definitions/OSType"
-        },
-        "osSKU": {
-          "$ref": "#/definitions/OSSKU"
         },
         "maxCount": {
           "type": "integer",
