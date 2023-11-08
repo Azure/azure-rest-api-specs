@@ -51,7 +51,6 @@ model OrderProperties {
   billingInformation?:BillingInformation;
 
   @doc("Currency for the order")
-  @visibility("read")
   currency?:string;
 
   @doc("Market - country code for Order")
@@ -171,7 +170,6 @@ model Price {
   taxes?: Tax[];
 
   @doc("Fees for this line")
-  @visibility("read")
   @OpenAPI.extension("x-ms-identifiers",["type"])
   fees?: Fee[];
 }
@@ -239,8 +237,16 @@ enum ProductIdType{
 enum ShippingMethod{
   @doc("Ground shipping")
   Ground,
-  @doc("OverNight shipping")
-  OverNight
+  @doc("Two day shipping")
+  TwoDay,
+  @doc("Three day shipping")
+  ThreeDay,
+  @doc("Sustainable shipping")
+  Sustainable,
+  @doc("Street date shipping")
+  StreetDate,
+  @doc("APO FPO shipping")
+  ApoFpo
 }
 
 @doc("shipToId Type")

@@ -765,8 +765,7 @@
         },
         "currency": {
           "type": "string",
-          "description": "Currency for the order",
-          "readOnly": true
+          "description": "Currency for the order"
         },
         "market": {
           "type": "string",
@@ -889,6 +888,10 @@
           "$ref": "#/definitions/BillingInformationUpdate",
           "description": "Billing Information"
         },
+        "currency": {
+          "type": "string",
+          "description": "Currency for the order"
+        },
         "market": {
           "type": "string",
           "description": "Market - country code for Order"
@@ -931,7 +934,6 @@
           "items": {
             "$ref": "#/definitions/Fee"
           },
-          "readOnly": true,
           "x-ms-identifiers": [
             "type"
           ]
@@ -1072,7 +1074,11 @@
       "description": "Shipping Method",
       "enum": [
         "Ground",
-        "OverNight"
+        "TwoDay",
+        "ThreeDay",
+        "Sustainable",
+        "StreetDate",
+        "ApoFpo"
       ],
       "x-ms-enum": {
         "name": "ShippingMethod",
@@ -1084,9 +1090,29 @@
             "description": "Ground shipping"
           },
           {
-            "name": "OverNight",
-            "value": "OverNight",
-            "description": "OverNight shipping"
+            "name": "TwoDay",
+            "value": "TwoDay",
+            "description": "Two day shipping"
+          },
+          {
+            "name": "ThreeDay",
+            "value": "ThreeDay",
+            "description": "Three day shipping"
+          },
+          {
+            "name": "Sustainable",
+            "value": "Sustainable",
+            "description": "Sustainable shipping"
+          },
+          {
+            "name": "StreetDate",
+            "value": "StreetDate",
+            "description": "Street date shipping"
+          },
+          {
+            "name": "ApoFpo",
+            "value": "ApoFpo",
+            "description": "APO FPO shipping"
           }
         ]
       }
