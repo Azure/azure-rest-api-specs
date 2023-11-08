@@ -662,7 +662,7 @@
             "$ref": "#/parameters/AzureBareMetalStorageInstanceNameParameter"
           },
           {
-            "$ref": "#/parameters/TagsParameter"
+            "$ref": "#/parameters/AzureBareMetalStorageInstanceBodyParameter"
           }
         ],
         "responses": {
@@ -1030,6 +1030,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AzureBareMetalStorageInstanceProperties",
           "description": "AzureBareMetalStorageInstance properties"
+        },
+        "identity": {
+          "$ref": "#/definitions/AzureBareMetalStorageInstanceIdentity",
+          "description": "The identity of Azure Bare Metal Storage Instance, if configured."
         }
       },
       "allOf": [
@@ -1052,6 +1056,51 @@
         }
       },
       "description": "Describes the properties of an AzureBareMetalStorageInstance."
+    },
+    "AzureBareMetalStorageInstanceBody": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AzureBareMetalStorageInstanceIdentity",
+          "description": "The identity of Azure Bare Metal Storage Instance, if configured."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags field of the AzureBareMetal/AzureBareMetaStorage instance."
+        }
+      },
+      "description": "properties of body during PUT/PATCH for an AzureBareMetalStorageInstance."
+    },
+    "AzureBareMetalStorageInstanceIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of Azure Bare Metal Storage Instance identity. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID associated with the Azure Bare Metal Storage Instance. This property will only be provided for a system assigned identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the Azure Bare Metal Storage Instance. The type 'SystemAssigned' refers to an implicitly created identity. The type 'None' will remove any identities from the Azure Bare Metal Storage Instance.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Identity for Azure Bare Metal Storage Instance."
     },
     "StorageProperties": {
       "type": "object",
@@ -1226,6 +1275,16 @@
         "$ref": "#/definitions/Tags"
       },
       "description": "Request body that only contains the new Tags field",
+      "x-ms-parameter-location": "method"
+    },
+    "AzureBareMetalStorageInstanceBodyParameter": {
+      "name": "azureBareMetalStorageInstanceBodyParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/AzureBareMetalStorageInstanceBody"
+      },
+      "description": "Request body that only contains the Tags and Identity Field",
       "x-ms-parameter-location": "method"
     }
   }
