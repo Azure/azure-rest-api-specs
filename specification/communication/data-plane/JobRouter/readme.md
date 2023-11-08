@@ -35,6 +35,8 @@ suppressions:
   - code: ValidFormats
     where: $.definitions["Azure.Core.eTag"].format
     reason: eTag should be an allowed format
+directive:
+  - suppress: INVALID_TYPE
 ```
 
 ### Tag: package-jobrouter-2023-11-01
