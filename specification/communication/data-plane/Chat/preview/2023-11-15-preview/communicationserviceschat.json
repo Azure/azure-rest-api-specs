@@ -1365,16 +1365,15 @@
         }
       }
     },
-    "AttachmentType": {
+    "ChatAttachmentType": {
       "description": "The type of attachment.",
       "enum": [
-        "teamsInlineImage",
-        "teamsImage",
+        "image",
         "file"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "AttachmentType",
+        "name": "ChatAttachmentType",
         "modelAsString": true
       }
     },
@@ -1382,8 +1381,7 @@
       "description": "An attachment in a chat message.",
       "required": [
         "id",
-        "attachmentType",
-        "url"
+        "attachmentType"
       ],
       "type": "object",
       "properties": {
@@ -1393,10 +1391,10 @@
           "example": "f508ce15-e878-431f-b871-f530cac5331d"
         },
         "attachmentType": {
-          "$ref": "#/definitions/AttachmentType"
+          "$ref": "#/definitions/ChatAttachmentType"
         },
-        "contentType": {
-          "description": "The type of content of the attachment, if available",
+        "extension": {
+          "description": "The file extension of the attachment, if available",
           "type": "string",
           "example": "png"
         },
@@ -1409,13 +1407,13 @@
           "description": "The URL where the attachment can be downloaded",
           "type": "string",
           "format": "uri",
-          "example": "https://{geoChatGW}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/original"
+          "example": "https://{geoChatGW}/threads/{chatThreadId}/images/{imageId}/views/original"
         },
         "previewUrl": {
           "description": "The URL where the preview of attachment can be downloaded",
           "type": "string",
           "format": "uri",
-          "example": "https://{geoChatGW}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/small"
+          "example": "https://{geoChatGW}/threads/{chatThreadId}/images/{imageId}/views/small"
         }
       }
     },
