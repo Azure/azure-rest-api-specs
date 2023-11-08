@@ -731,6 +731,7 @@
             "Succeeded",
             "PartialComplete",
             "Failed",
+            "Running",
             "Canceled"
           ],
           "x-ms-enum": {
@@ -748,6 +749,10 @@
               {
                 "value": "Failed",
                 "description": "All Diagnostics failed to run."
+              },
+              {
+                "value": "Running",
+                "description": "All Diagnostics are still running."
               },
               {
                 "value": "Canceled",
@@ -1042,12 +1047,36 @@
           "readOnly": true,
           "enum": [
             "Succeeded",
+            "PartialComplete",
             "Failed",
+            "Running",
             "Canceled"
           ],
           "x-ms-enum": {
             "name": "SolutionProvisioningState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "All Solutions in the Batch succeeded."
+              },
+              {
+                "value": "PartialComplete",
+                "description": "Some Solutions are still running or failed."
+              },
+              {
+                "value": "Failed",
+                "description": "All Solutions failed to run."
+              },
+              {
+                "value": "Running",
+                "description": "All Solutions are still running."
+              },
+              {
+                "value": "Canceled",
+                "description": "When Solutions request gets canceled."
+              }
+            ]
           }
         },
         "title": {
@@ -1540,7 +1569,25 @@
           ],
           "x-ms-enum": {
             "name": "executionStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Success",
+                "description": "Step execution succeeded."
+              },
+              {
+                "value": "Running",
+                "description": "Step execution running"
+              },
+              {
+                "value": "Failed",
+                "description": "Step execution failed"
+              },
+              {
+                "value": "Warning",
+                "description": "Step execution warning"
+              }
+            ]
           }
         },
         "executionStatusDescription": {
