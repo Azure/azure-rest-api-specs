@@ -1482,16 +1482,19 @@
           "description": "Options to modify the search to include additional properties in the response. Please note: use of options may affect the cost of the query.",
           "type": "array",
           "items": {
-            "enum": [
-              "IncludeOperatorDetails"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "OperatorInformationRequestOptions",
-              "modelAsString": true
-            }
+            "ref": "#/definitions/OperatorInformationRequestOptions"
           }
         }
+      }
+    },
+    "OperatorInformationRequestOptions": {
+      "enum": [
+        "IncludeOperatorDetails"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OperatorInformationRequestOptions",
+        "modelAsString": true
       }
     },
     "OperatorInformationResult": {
