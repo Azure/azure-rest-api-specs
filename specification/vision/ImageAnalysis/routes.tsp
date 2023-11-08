@@ -20,7 +20,8 @@ alias SharedAnalyzeQuery = {
     format: "csv",
   })
   @doc("A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. At least one visual feature must be specified for Image Analysis.")
-  visualFeatures?: Array<VisualFeatures>;
+  @minItems(1)
+  visualFeatures: Array<VisualFeatures>;
 
   @query("language")
   @doc("The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.")
@@ -48,11 +49,6 @@ alias SharedAnalyzeQuery = {
   @minLength(6)
   @maxLength(18)
   modelVersion?: string = "latest";
-
-  @query("model-name")
-  @doc("The name of the custom-trained cloud AI model. This parameter needs to be specified if the parameter \"features\" is not specified.")
-  @minLength(1)
-  customModelName?: string;
 };
 
 #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to analyze an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
@@ -92,62 +88,4 @@ op analyzeFromUrl is Azure.Core.RpcOperation<
     ...SharedAnalyzeQuery;
   },
   ImageAnalysisResult
->;
-
-alias SharedSegmentQuery = {
-  @query("mode")
-  @doc("The type of segmentation to perform")
-  segmentationMode: SegmentationMode;
-};
-
-#suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to analyze an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-@doc("Segment the input image. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.")
-@route("imageanalysis:segment")
-@post
-@sharedRoute
-op segmentFromUrl is Azure.Core.RpcOperation<
-  {
-    @doc("The image to be analyzed")
-    @body
-    imageContent: ImageUrl;
-
-    @doc("The format of the HTTP payload.")
-    @header
-    contentType: "application/json";
-
-    ...SharedSegmentQuery;
-  },
-  {
-    @header
-    contentType: "image/png";
-
-    @body
-    bytes: bytes;
-  }
->;
-
-#suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to segment an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-@doc("Segment the input image. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.")
-@route("imageanalysis:segment")
-@post
-@sharedRoute
-op segmentFromStream is Azure.Core.RpcOperation<
-  {
-    @doc("The image to be analyzed")
-    @body
-    imageContent: bytes;
-
-    @doc("The format of the HTTP payload.")
-    @header
-    contentType: "application/octet-stream";
-
-    ...SharedSegmentQuery;
-  },
-  {
-    @header
-    contentType: "image/png";
-
-    @body
-    bytes: bytes;
-  }
 >;
