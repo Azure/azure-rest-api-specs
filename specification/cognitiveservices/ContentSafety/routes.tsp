@@ -70,6 +70,7 @@ interface TextBlocklists {
   addOrUpdateBlocklistItems is BlockOps.ResourceAction<
     TextBlocklist,
     {
+      @doc("Options for adding or updating blocklist items.")
       @projectedName("csharp", "options")
       options: AddOrUpdateTextBlocklistItemsOptions,
     },
@@ -81,6 +82,7 @@ interface TextBlocklists {
   removeBlocklistItems is BlockOps.ResourceAction<
     TextBlocklist,
     {
+      @doc("Options for removing blocklist items.")
       @projectedName("csharp", "options")
       options: RemoveTextBlocklistItemsOptions,
     },
