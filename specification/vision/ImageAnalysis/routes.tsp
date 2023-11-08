@@ -37,9 +37,13 @@ alias SharedAnalyzeQuery = {
   @doc("A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).")
   smartCropsAspectRatios?: Array<float32>;
 
+  @query("model-version")
+  @doc("The version of cloud AI-model used for analysis. The default value is \"latest\". Only relevant when doing analysis with standard models. Not relevant when doing analysis with a custom-trained AI model.")
+  modelVersion?: string = "latest";
+
   @query("model-name")
-  @doc("The name of the custom trained model. This parameter needs to be specified if the parameter \"features\" is not specified.")
-  modelName?: string;
+  @doc("The name of the custom-trained cloud AI model. This parameter needs to be specified if the parameter \"features\" is not specified.")
+  customModelName?: string;
 };
 
 #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to analyze an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."

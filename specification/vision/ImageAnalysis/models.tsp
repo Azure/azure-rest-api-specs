@@ -4,7 +4,7 @@ namespace ImageAnalysis;
 using TypeSpec.Http;
 
 @doc("A basic rectangle")
-model BoundingBox {
+model ImageBoundingBox {
   @doc("X coordinate")
   @minValue(0)
   x: int32;
@@ -15,11 +15,13 @@ model BoundingBox {
 
   @doc("Width of the box")
   @minValue(0)
-  w: int32;
+  @projectedName("json", "w")
+  width: int32;
 
   @doc("Height of the box")
   @minValue(0)
-  h: int32;
+  @projectedName("json", "h")
+  height: int32;
 }
 
 @doc("A brief description of what the image depicts.")
@@ -41,7 +43,7 @@ model CropRegion {
   aspectRatio: float32;
 
   @doc("The bounding box of the crop region.")
-  boundingBox: BoundingBox;
+  boundingBox: ImageBoundingBox;
 }
 
 @doc("A brief description of what the image depicts.")
@@ -56,7 +58,7 @@ model DenseCaption {
   text: string;
 
   @doc("The bounding box of the caption.")
-  boundingBox: BoundingBox;
+  boundingBox: ImageBoundingBox;
 }
 
 @doc("A list of captions.")
@@ -69,7 +71,7 @@ model DenseCaptionsResult {
 @doc("Describes a detected object in an image.")
 model DetectedObject {
   @doc("Gets a rectangular boundary within which the object was detected.")
-  boundingBox: BoundingBox;
+  boundingBox: ImageBoundingBox;
 
   @doc("Classification confidences of the detected object.")
   @minItems(0)
@@ -80,7 +82,7 @@ model DetectedObject {
 model DetectedPerson {
   @doc("Gets a rectangular boundary within which the person was detected.")
   @visibility("read")
-  boundingBox: BoundingBox;
+  boundingBox: ImageBoundingBox;
 
   @doc("Gets the confidence value of the detected person.")
   @visibility("read")
@@ -166,13 +168,15 @@ model DocumentWord {
 @doc("Describe the combined results of different types of image analysis.")
 model ImageAnalysisResult {
   @doc("A CaptionResult for the image.")
-  captionResult?: CaptionResult;
+  @projectedName("json", "captionResult")
+  caption?: CaptionResult;
 
   @doc("A list of categories for the image.")
   customModelResult?: CustomModelResult;
 
   @doc("A denseCaptionsResult for the image.")
-  denseCaptionsResult?: DenseCaptionsResult;
+  @projectedName("json", "denseCaptionsResult")
+  denseCaptions?: DenseCaptionsResult;
 
   @doc("The model used for the analysis")
   metadata: ImageMetadata;
@@ -181,19 +185,24 @@ model ImageAnalysisResult {
   modelVersion: string;
 
   @doc("A list of objects for the image.")
-  objectsResult?: ObjectsResult;
+  @projectedName("json", "objectsResult")
+  objects?: ObjectsResult;
 
   @doc("A list of people for the image.")
-  peopleResult?: PeopleResult;
+  @projectedName("json", "peopleResult")
+  people?: PeopleResult;
 
   @doc("A readResult for the image.")
-  readResult?: ReadResult;
+  @projectedName("json", "readResult")
+  read?: ReadResult;
 
   @doc("A list of regions for the image.")
-  smartCropsResult?: SmartCropsResult;
+  @projectedName("json", "smartCropsResult")
+  smartCrops?: SmartCropsResult;
 
   @doc("A list of tags for the image.")
-  tagsResult?: TagsResult;
+  @projectedName("json", "tagsResult")
+  tags?: TagsResult;
 }
 
 @doc("The image metadata information such as height and width.")
@@ -210,10 +219,12 @@ model ImageMetadata {
 @doc("Describes the result of image analysis using a custom model.")
 model CustomModelResult {
   @doc("The list of predicted objects.")
-  objectsResult: ObjectsResult;
+  @projectedName("json", "objectsResult")
+  objects: ObjectsResult;
 
   @doc("The list of predicted tags.")
-  tagsResult: TagsResult;
+  @projectedName("json", "tagsResult")
+  tags: TagsResult;
 }
 
 @doc("Describes detected objects in an image.")
