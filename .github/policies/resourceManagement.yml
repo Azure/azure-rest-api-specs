@@ -2540,11 +2540,11 @@ configuration:
         - addLabel:
             label: TypeSpec
     - if:
-      - payloadType: Pull_Request_Review_Comment
+      - payloadType: Issue_Comment
       then:
       - if:
         - commentContains:
-            pattern: "^\/pr RequestMerge$"
+            pattern: "^/pr RequestMerge$"
             isRegex: true
         then:
         - addLabel:
