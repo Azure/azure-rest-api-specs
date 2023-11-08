@@ -98,7 +98,10 @@ model InsightCustomResourceCommonParameters {
   ...ProviderNamespace<InsightUnderSubscription>;
 
   /** impact information */
-  @body impactInfo: InsightDetails;
+  @query
+  @minLength(1)
+  @doc("Filter by resource type")
+  azureResourceId?: string;
 }
 
 @doc("Body of the get all insights")
@@ -117,7 +120,7 @@ interface Insights {
   listBySubscription is ArmListBySubscription<Insight>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Using subscription level action"
-  @post
+  @get
   @doc("get all insights under subscription")
   @segment("getAllInsights")
   getAll(

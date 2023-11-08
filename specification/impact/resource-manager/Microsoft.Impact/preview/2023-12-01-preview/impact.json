@@ -92,7 +92,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/getAllInsights": {
-      "post": {
+      "get": {
         "operationId": "Insights_GetAll",
         "tags": [
           "Insights"
@@ -106,7 +106,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/InsightCustomResourceCommonParameters.impactInfo"
+            "$ref": "#/parameters/InsightCustomResourceCommonParameters.azureResourceId"
           }
         ],
         "responses": {
@@ -1777,14 +1777,13 @@
       "minLength": 1,
       "x-ms-parameter-location": "method"
     },
-    "InsightCustomResourceCommonParameters.impactInfo": {
-      "name": "impactInfo",
-      "in": "body",
-      "description": "impact information",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/InsightDetails"
-      },
+    "InsightCustomResourceCommonParameters.azureResourceId": {
+      "name": "azureResourceId",
+      "in": "query",
+      "description": "Filter by resource type",
+      "required": false,
+      "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   }
