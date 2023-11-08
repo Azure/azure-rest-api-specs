@@ -51,30 +51,30 @@ enum CompletionsFinishReason {
 @doc("Ratings for the intensity and risk level of harmful content.")
 enum ContentFilterSeverity {
   @doc("""
-  Content may be related to violence, self-harm, sexual, or hate categories but the terms
-  are used in general, journalistic, scientific, medical, and similar professional contexts,
+  Content may be related to violence, self-harm, sexual, or hate categories but the terms 
+  are used in general, journalistic, scientific, medical, and similar professional contexts, 
   which are appropriate for most audiences.
   """)
   safe: "safe",
 
   @doc("""
-  Content that expresses prejudiced, judgmental, or opinionated views, includes offensive
+  Content that expresses prejudiced, judgmental, or opinionated views, includes offensive 
   use of language, stereotyping, use cases exploring a fictional world (for example, gaming,
   literature) and depictions at low intensity.
   """)
   low: "low",
 
   @doc("""
-  Content that uses offensive, insulting, mocking, intimidating, or demeaning language
-  towards specific identity groups, includes depictions of seeking and executing harmful
+  Content that uses offensive, insulting, mocking, intimidating, or demeaning language 
+  towards specific identity groups, includes depictions of seeking and executing harmful 
   instructions, fantasies, glorification, promotion of harm at medium intensity.
   """)
   medium: "medium",
 
   @doc("""
-  Content that displays explicit and severe harmful instructions, actions,
-  damage, or abuse; includes endorsement, glorification, or promotion of severe
-  harmful acts, extreme or illegal forms of harm, radicalization, or non-consensual
+  Content that displays explicit and severe harmful instructions, actions, 
+  damage, or abuse; includes endorsement, glorification, or promotion of severe 
+  harmful acts, extreme or illegal forms of harm, radicalization, or non-consensual 
   power exchange or abuse.
   """)
   high: "high",
@@ -97,21 +97,21 @@ model ContentFilterResult {
 model ContentFilterResults {
   @doc("""
   Describes language related to anatomical organs and genitals, romantic relationships,
-   acts portrayed in erotic or affectionate terms, physical sexual acts, including
-   those portrayed as an assault or a forced sexual violent act against one’s will,
+   acts portrayed in erotic or affectionate terms, physical sexual acts, including 
+   those portrayed as an assault or a forced sexual violent act against one’s will, 
    prostitution, pornography, and abuse.
   """)
   sexual?: ContentFilterResult;
 
   @doc("""
-  Describes language related to physical actions intended to hurt, injure, damage, or
+  Describes language related to physical actions intended to hurt, injure, damage, or 
   kill someone or something; describes weapons, etc.
   """)
   violence?: ContentFilterResult;
 
   @doc("""
-  Describes language attacks or uses that include pejorative or discriminatory language
-  with reference to a person or identity group on the basis of certain differentiating
+  Describes language attacks or uses that include pejorative or discriminatory language 
+  with reference to a person or identity group on the basis of certain differentiating 
   attributes of these groups including but not limited to race, ethnicity, nationality,
   gender identity and expression, sexual orientation, religion, immigration status, ability
   status, personal appearance, and body size.
