@@ -1247,10 +1247,10 @@
     "/basemodels": {
       "get": {
         "tags": [
-          "Zeroshot"
+          "BaseModel"
         ],
-        "description": "Gets a list of base models for zero shot model training.",
-        "operationId": "ZeroShotModels_ListBaseModels",
+        "description": "Gets a list of base models.",
+        "operationId": "BaseModels_List",
         "produces": [
           "application/json"
         ],
@@ -1277,19 +1277,19 @@
           }
         },
         "x-ms-examples": {
-          "Get zeroshot base models": {
-            "$ref": "./examples/get_zeroshot_base_models.json"
+          "Get base models": {
+            "$ref": "./examples/get_base_models.json"
           }
         }
       }
     },
-    "/zeroshots": {
+    "/instantvoices": {
       "get": {
         "tags": [
-          "Zeroshot"
+          "InstantVoice"
         ],
-        "description": "Gets a list of zero shot models for the authenticated subscription.",
-        "operationId": "ZeroShotModels_List",
+        "description": "Gets a list of instant voices for the authenticated subscription.",
+        "operationId": "InstantVoices_List",
         "produces": [
           "application/json"
         ],
@@ -1311,7 +1311,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/PaginatedZeroShots"
+              "$ref": "#/definitions/PaginatedInstantVoices"
             }
           },
           "default": {
@@ -1326,19 +1326,19 @@
           "itemName": "value"
         },
         "x-ms-examples": {
-          "Get all zeroshot models": {
-            "$ref": "./examples/get_zeroshots.json"
+          "Get all instant voices": {
+            "$ref": "./examples/get_instantvoices.json"
           }
         }
       }
     },
-    "/zeroshots/{id}": {
+    "/instantvoices/{id}": {
       "get": {
         "tags": [
-          "Zeroshot"
+          "InstantVoice"
         ],
-        "description": "Gets the zero shot model identified by the given ID.",
-        "operationId": "ZeroShotModels_Get",
+        "description": "Gets the instant voice identified by the given ID.",
+        "operationId": "InstantVoices_Get",
         "produces": [
           "application/json"
         ],
@@ -1354,7 +1354,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ZeroShot"
+              "$ref": "#/definitions/InstantVoice"
             }
           },
           "default": {
@@ -1365,17 +1365,17 @@
           }
         },
         "x-ms-examples": {
-          "Get a zeroshot model": {
-            "$ref": "./examples/get_zeroshot.json"
+          "Get an instant voice": {
+            "$ref": "./examples/get_instantvoice.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "Zeroshot"
+          "InstantVoice"
         ],
-        "description": "Deletes zero shot model identified by the given ID.",
-        "operationId": "ZeroShotModels_Delete",
+        "description": "Deletes the instant voice identified by the given ID.",
+        "operationId": "InstantVoices_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/PathId"
@@ -1396,17 +1396,17 @@
           }
         },
         "x-ms-examples": {
-          "Delete a zeroshot model": {
-            "$ref": "./examples/delete_zeroshot.json"
+          "Delete an instant voice": {
+            "$ref": "./examples/delete_instantvoice.json"
           }
         }
       },
       "put": {
         "tags": [
-          "Zeroshot"
+          "InstantVoice"
         ],
-        "description": "Creates a new zero shot model.",
-        "operationId": "ZeroShotModels_Create",
+        "description": "Creates a new instant voice.",
+        "operationId": "InstantVoices_Create",
         "consumes": [
           "application/json"
         ],
@@ -1425,11 +1425,11 @@
           },
           {
             "in": "body",
-            "name": "zeroshot",
-            "description": "zeroshot definition",
+            "name": "instantvoice",
+            "description": "instant voice definition",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ZeroShot"
+              "$ref": "#/definitions/InstantVoice"
             }
           }
         ],
@@ -1437,7 +1437,7 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ZeroShot"
+              "$ref": "#/definitions/InstantVoice"
             },
             "headers": {
               "Operation-Id": {
@@ -1460,17 +1460,17 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create a zeroshot model": {
-            "$ref": "./examples/create_zeroshot.json"
+          "Create an instantvoice": {
+            "$ref": "./examples/create_instantvoice.json"
           }
         }
       },
       "post": {
         "tags": [
-          "Zeroshot"
+          "InstantVoice"
         ],
-        "description": "Creates a new zero shot model.",
-        "operationId": "ZeroShotModels_Post",
+        "description": "Creates a new instant voice.",
+        "operationId": "InstantVoices_Post",
         "consumes": [
           "multipart/form-data"
         ],
@@ -1526,7 +1526,7 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ZeroShot"
+              "$ref": "#/definitions/InstantVoice"
             },
             "headers": {
               "Operation-Id": {
@@ -1552,8 +1552,8 @@
           "final-state-via": "operation-location"
         },
         "x-ms-examples": {
-          "Create a zeroshot model": {
-            "$ref": "./examples/create_zeroshot_with_multipart_form.json"
+          "Create an instant voice": {
+            "$ref": "./examples/create_instantvoice_with_multipart_form.json"
           }
         }
       }
@@ -1839,7 +1839,7 @@
         "MissingValidVerbalConsentStatement",
         "NeuralTrainingNotSupported",
         "NeuralTrainingNotAvailableInThisRegion",
-        "ZeroshotNotAvailableInThisRegion",
+        "InstantVoiceNotAvailableInThisRegion",
         "VideoTranslationNotAvailableInThisRegion",
         "NoPermissionToTrainModel",
         "ReachedConcurrentLimit",
@@ -2290,18 +2290,18 @@
         }
       }
     },
-    "PaginatedZeroShots": {
-      "description": "Paginated zero shot list",
+    "PaginatedInstantVoices": {
+      "description": "Paginated instant voice list",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
-          "description": "Zero shot list",
+          "description": "Instant voice list",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ZeroShot"
+            "$ref": "#/definitions/InstantVoice"
           }
         },
         "nextLink": {
@@ -2365,7 +2365,7 @@
       "description": "Project kind",
       "enum": [
         "TextToSpeech",
-        "ZeroShot"
+        "InstantVoice"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2522,8 +2522,8 @@
       },
       "readOnly": true
     },
-    "ZeroShot": {
-      "description": "Zero shot speaker profile",
+    "InstantVoice": {
+      "description": "Instant voice object",
       "required": [
         "projectId",
         "consentId"
@@ -2534,18 +2534,18 @@
           "$ref": "#/definitions/ResourceId"
         },
         "speakerProfileId": {
-          "description": "Zero shot speaker profile id. Fill this property in SSML.",
+          "description": "Instant voice speaker profile id. Fill this property in SSML.",
           "type": "string",
           "format": "uuid",
           "readOnly": true
         },
         "displayName": {
-          "description": "Zero shot speaker profile name",
+          "description": "Display name of instant voice",
           "minLength": 1,
           "type": "string"
         },
         "description": {
-          "description": "Zero shot speaker profile description",
+          "description": "Instant voice description",
           "type": "string"
         },
         "projectId": {
@@ -2560,7 +2560,7 @@
           "format": "uri"
         },
         "properties": {
-          "$ref": "#/definitions/ZeroShotProperties"
+          "$ref": "#/definitions/InstantVoiceProperties"
         },
         "status": {
           "$ref": "#/definitions/Status"
@@ -2579,8 +2579,8 @@
         }
       }
     },
-    "ZeroShotProperties": {
-      "description": "Zero shot speaker properties",
+    "InstantVoiceProperties": {
+      "description": "Instant voice properties",
       "type": "object",
       "properties": {
         "failureReason": {
