@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-02-22-preview",
+    "api-version": "2023-07-12-preview",
     "subscriptionId": "subid"
   },
   "responses": {
@@ -13,14 +13,14 @@
             "location": "eus2",
             "properties": {
               "provisioningState": "Pending",
-              "purchaseOrder": {
+              "customerOrder": {
                 "id": "Customer_ORDER_Number",
-                "createdDateTime": "2022-06-06"
+                "createdDate": "2022-06-06"
               },
               "status": "Pending",
               "orderLines": [
                 {
-                  "id": "1",
+                  "id": 1,
                   "createdDateTime": "2022-06-06T17:18:21.373+00:00",
                   "status": "Pending",
                   "quantity": {
@@ -35,11 +35,16 @@
                   },
                   "price": {
                     "unitAmount": 636.99,
-                    "tax": 63.699,
+                    "taxes": [
+                      {
+                        "type": "Unit",
+                        "amount": 63.699
+                      }
+                    ],
                     "fees": [
                       {
                         "type": "Recycling",
-                        "feeAmount": 6
+                        "amount": 6
                       }
                     ]
                   },
@@ -49,8 +54,8 @@
                   },
                   "shippingMethod": "shipment",
                   "requestedDeliveryDate": "2022-06-27",
-                  "estimatedDeliverDateTime": "2022-06-27",
-                  "estimatedShippedDateTime": "2022-06-27"
+                  "estimatedDeliveryDate": "2022-06-27",
+                  "estimatedShippedDate": "2022-06-27"
                 }
               ],
               "currency": "USD"
