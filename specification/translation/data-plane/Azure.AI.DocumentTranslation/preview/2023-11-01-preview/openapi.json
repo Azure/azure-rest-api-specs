@@ -151,6 +151,56 @@
           }
         }
       }
+    },
+    "/single:translateDocument": {
+      "post": {
+        "operationId": "PostCommaSeparatedValues",
+        "description": "Translate Single Document.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "X-ClientTraceId",
+            "in": "header",
+            "description": "A client-generated GUID to uniquely identify the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientTraceId"
+          },
+          {
+            "$ref": "#/parameters/TranslateDocumentParameters.from"
+          },
+          {
+            "$ref": "#/parameters/TranslateDocumentParameters.to"
+          },
+          {
+            "$ref": "#/parameters/TranslateDocumentParameters.category"
+          },
+          {
+            "$ref": "#/parameters/TranslateDocumentParameters.allowFallback"
+          },
+          {
+            "$ref": "#/parameters/TranslateDocumentParameters.apiVersion"
+          },
+          {
+            "name": "document",
+            "in": "formData",
+            "description": "Actual Document in the form.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -270,6 +320,36 @@
         "value"
       ]
     },
+    "TranslateDocumentRequestBody": {
+      "type": "object",
+      "description": "Translate Document Request Body.",
+      "properties": {
+        "document": {
+          "type": "array",
+          "description": "Actual Document in the form.",
+          "items": {
+            "$ref": "#/definitions/binary"
+          }
+        }
+      },
+      "required": [
+        "document"
+      ]
+    },
+    "TranslateDocumentResult": {
+      "type": "object",
+      "description": "Successful request and the document is translated.  The translated document is returned in the body.",
+      "properties": {
+        "document": {
+          "type": "string",
+          "format": "byte",
+          "description": "Translated document"
+        }
+      },
+      "required": [
+        "document"
+      ]
+    },
     "Versions": {
       "type": "string",
       "description": "The Azure.AI.DocumentTranslation service versions.",
@@ -287,7 +367,58 @@
           }
         ]
       }
+    },
+    "binary": {
+      "type": "string",
+      "format": "binary",
+      "description": "Binary data format."
     }
   },
-  "parameters": {}
+  "parameters": {
+    "TranslateDocumentParameters.allowFallback": {
+      "name": "AllowFallback",
+      "in": "query",
+      "description": "The category of the translation. If not specified, default to true.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "allowFallback"
+    },
+    "TranslateDocumentParameters.apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Mandatory API version parameter",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "TranslateDocumentParameters.category": {
+      "name": "Category",
+      "in": "query",
+      "description": "The category of the translation. If empty, default to general.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "category"
+    },
+    "TranslateDocumentParameters.from": {
+      "name": "From",
+      "in": "query",
+      "description": "The from language of the Translation Request, if empty or not specified it will be autodetect.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "from"
+    },
+    "TranslateDocumentParameters.to": {
+      "name": "To",
+      "in": "query",
+      "description": "The to language of the Translation Request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "to"
+    }
+  }
 }
