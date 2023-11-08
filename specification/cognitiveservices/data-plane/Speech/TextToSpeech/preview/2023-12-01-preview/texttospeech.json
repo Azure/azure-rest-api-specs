@@ -160,6 +160,7 @@
           {
             "in": "body",
             "name": "project",
+            "description": "project definition",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Project"
@@ -331,6 +332,7 @@
           {
             "in": "body",
             "name": "consent",
+            "description": "consent definition",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Consent"
@@ -624,6 +626,7 @@
           {
             "in": "body",
             "name": "trainingset",
+            "description": "training set definition",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Trainingset"
@@ -678,6 +681,7 @@
           {
             "in": "body",
             "name": "dataset",
+            "description": "Data set to be uploaded",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Dataset"
@@ -895,7 +899,8 @@
           },
           {
             "in": "body",
-            "name": "modelDefinition",
+            "name": "model",
+            "description": "Model definition",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Model"
@@ -1081,6 +1086,7 @@
           {
             "in": "body",
             "name": "endpoint",
+            "description": "Endpoint definition",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Endpoint"
@@ -1410,6 +1416,7 @@
           {
             "in": "body",
             "name": "zeroshot",
+            "description": "zeroshot definition",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ZeroShot"
@@ -1917,6 +1924,10 @@
     },
     "Error": {
       "description": "New format which conforms to the new Cognitive Services API guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
+      "required": [
+        "code",
+        "message"
+      ],
       "type": "object",
       "properties": {
         "code": {
@@ -1963,6 +1974,9 @@
     },
     "ErrorResponse": {
       "description": "Contains unified error information used for HTTP responses across any Cognitive Service. Instances can be created by returning it directly from a controller.",
+      "required": [
+        "error"
+      ],
       "type": "object",
       "properties": {
         "error": {
@@ -2147,6 +2161,9 @@
     },
     "PaginatedConsents": {
       "description": "Paginated consent list",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
@@ -2154,8 +2171,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Consent"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "description": "Link to next page.",
@@ -2166,6 +2182,9 @@
     },
     "PaginatedEndpoints": {
       "description": "Paginated endpoint list",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
@@ -2173,8 +2192,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Endpoint"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "description": "Link to next page.",
@@ -2185,6 +2203,9 @@
     },
     "PaginatedModels": {
       "description": "Paginated model list",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
@@ -2192,8 +2213,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Model"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "description": "Link to next page.",
@@ -2204,6 +2224,9 @@
     },
     "PaginatedProjects": {
       "description": "Paginated project list",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
@@ -2211,8 +2234,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Project"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "description": "Link to next page.",
@@ -2223,6 +2245,9 @@
     },
     "PaginatedTrainingsets": {
       "description": "Paginated training set list",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
@@ -2230,8 +2255,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Trainingset"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "description": "Link to next page.",
@@ -2242,6 +2266,9 @@
     },
     "PaginatedZeroShots": {
       "description": "Paginated zero shot list",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
@@ -2249,8 +2276,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ZeroShot"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "description": "Link to next page.",
