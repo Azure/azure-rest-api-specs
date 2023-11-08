@@ -42,6 +42,7 @@ Dictionary lookup. Returns equivalent words for the source term in the target la
 Dictionary example Returns grammatical structure and context examples for the source term and target term pair.
 """)
 @versioned(APIVersion)
+@useAuth([ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">, ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Region">])
 namespace TextTranslation;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
