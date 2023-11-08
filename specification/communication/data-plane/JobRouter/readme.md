@@ -33,7 +33,7 @@ tag: package-jobrouter-2023-11-01
 ``` yaml
 suppressions:
   - code: ValidFormats
-    # where: $.definitions.Azure.Core.eTag.format
+    where: $.definitions["Azure.Core.eTag"].format
     reason: eTag should be an allowed format
 ```
 
