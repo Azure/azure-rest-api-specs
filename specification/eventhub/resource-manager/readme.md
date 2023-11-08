@@ -143,6 +143,27 @@ input-file:
 - Microsoft.EventHub/stable/2021-11-01/SchemaRegistry.json
 ```
 
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-01'
+input-file:
+- Microsoft.EventHub/stable/2024-01-01/AvailableClusterRegions.json
+- Microsoft.EventHub/stable/2024-01-01/Clusters.json
+- Microsoft.EventHub/stable/2024-01-01/namespaces.json
+- Microsoft.EventHub/stable/2024-01-01/quotaConfiguration.json
+- Microsoft.EventHub/stable/2024-01-01/networkrulessets.json
+- Microsoft.EventHub/stable/2024-01-01/AuthorizationRules.json
+- Microsoft.EventHub/stable/2024-01-01/CheckNameAvailability.json
+- Microsoft.EventHub/stable/2024-01-01/consumergroups.json
+- Microsoft.EventHub/stable/2024-01-01/disasterRecoveryConfigs.json
+- Microsoft.EventHub/stable/2024-01-01/operations.json
+- Microsoft.EventHub/stable/2024-01-01/eventhubs.json
+- Microsoft.EventHub/stable/2024-01-01/SchemaRegistry.json
+- Microsoft.EventHub/stable/2024-01-01/ApplicationGroups.json
+```
+
 ### Tag: package-2022-01-preview
 
 These settings apply only when `--tag=package-2022-01-preview` is specified on the command line.
