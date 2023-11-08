@@ -50,14 +50,14 @@ model StateProperty {
 @doc("Identifies the type of a message.")
 enum MessageKind {
   @doc("The message context is text.")
-  text,
+  text: "text",
 }
 
 @doc("A single, role-attributed message within a chat completion interaction.")
 @discriminator("kind")
 model ChatMessage {
   @doc("The type of the message. If not specified, the message is assumed to be text.")
-  kind?: MessageKind;
+  kind: MessageKind;
 
   @doc("The role associated with the message.")
   role: ChatRole;

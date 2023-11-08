@@ -3,10 +3,11 @@
   "title": "Creates a chat completion for the provided prompt using streaming.",
   "parameters": {
     "endpoint": "{endpoint}",
-    "operationRoute": "/chat",
+    "operationRoute": "chat",
     "body": {
       "messages": [
         {
+          "kind": "text",
           "content": "Tell me a joke",
           "role": "user"
         }
@@ -21,6 +22,7 @@
           {
             "index": 0,
             "message": {
+              "kind": "text",
               "content": "Why did the tomato turn red?\nBecause it saw the salad dressing!",
               "role": "assistant",
               "sessionState": {
