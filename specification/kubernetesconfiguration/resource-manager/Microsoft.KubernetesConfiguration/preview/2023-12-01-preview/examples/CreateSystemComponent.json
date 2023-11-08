@@ -22,6 +22,37 @@
     }
   },
   "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/systemComponents/ClusterMonitor/operations/{operationId}",
+        "x-ms-async-operation-timeout": "PT48H",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Kubernetes/ConnectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/systemComponents/ClusterMonitor/operations/operationId?api-version=2023-12-01-preview"
+      },
+      "description": "Details of the Kubernetes Extension's current status.",
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/systemComponents/default",
+        "type": "Microsoft.KubernetesConfiguration/systemComponents",
+        "name": "default",
+        "properties": {
+          "arcAgentryAutoUpgrade": false,
+          "status": "Succeeded",
+          "components": [
+            {
+              "extensionType": "Strato",
+              "userSpecifiedVersion": "0.1.4",
+              "CurrentInstalledVersion": "0.1.9",
+              "status": "Succeeded"
+            },
+            {
+              "extensionType": "SomeOtherSystemExtension",
+              "userSpecifiedVersion": "0.1.1",
+              "currentInstalledVersion": "0.1.1",
+              "status": "Succeeded"
+            }
+          ]
+        }
+      }
+    },
     "200": {
       "headers": {},
       "description": "Details of the Kubernetes SystemComponent's current status.",
@@ -37,14 +68,12 @@
               "extensionType": "Strato",
               "userSpecifiedVersion": "0.1.4",
               "CurrentInstalledVersion": "0.1.9",
-              "installedMajorVersion": "0",
               "status": "Succeeded"
             },
             {
               "extensionType": "SomeOtherSystemExtension",
               "userSpecifiedVersion": "0.1.1",
               "currentInstalledVersion": "0.1.1",
-              "installedMajorVersion": "0",
               "status": "Succeeded"
             }
           ]

@@ -43,7 +43,7 @@
         "description": "Create a new Kubernetes Cluster System Components.",
         "operationId": "SystemComponents_Create",
         "x-ms-examples": {
-          "Create SystemComonent": {
+          "Create SystemComponent": {
             "$ref": "./examples/CreateSystemComponent.json"
           }
         },
@@ -55,13 +55,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2023-05-01-preview/parameters.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2023-05-01-preview/parameters.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2023-05-01-preview/parameters.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -77,6 +77,12 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Request received successfully.",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
           "200": {
             "description": "Request received successfully",
             "schema": {
@@ -111,13 +117,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterRpParameter"
+            "$ref": "../../common/2023-05-01-preview/parameters.json#/parameters/ClusterRpParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterResourceNameParameter"
+            "$ref": "../../common/2023-05-01-preview/parameters.json#/parameters/ClusterResourceNameParameter"
           },
           {
-            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
+            "$ref": "../../common/2023-05-01-preview/parameters.json#/parameters/ClusterNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -159,12 +165,7 @@
         "currentInstalledVersion": {
           "type": "string",
           "readOnly": true,
-          "description": "Current installed version for the extension type."
-        },
-        "installedMajorVersion": {
-          "type": "integer",
-          "readOnly": true,
-          "description": "Current installed Major version for the extension type."
+          "description": "Version currently installed for the extension type."
         },
         "status": {
           "type": "string",
@@ -184,32 +185,32 @@
       "type": "object",
       "properties": {
         "type": "object",
-        "x-ms-client-flatten": true,
-        "description": "Properties of an SystemComponent of the cluster",
-        "components": {
-          "description": "Components of  the clusters.",
-          "type": "array",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/Component"
+        "properties": {
+          "components": {
+            "description": "Components of  the clusters.",
+            "type": "array",
+            "x-nullable": true,
+            "items": {
+              "$ref": "#/definitions/Component"
+            },
+            "x-ms-identifiers": []
           },
-          "x-ms-identifiers": []
-        },
-        "arcAgentryAutoUpgrade": {
-          "description": "Flag to note if this arc agentry is auto upgrade of minor version, or not.",
-          "type": "boolean",
-          "default": true
-        },
-        "status": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Combined Status of the system components.",
-          "enum": [
-            "transitioning",
-            "success",
-            "failure"
-          ],
-          "default": "transitioning"
+          "arcAgentryAutoUpgrade": {
+            "description": "Flag to note if arc agentry is auto upgradable or not.",
+            "type": "boolean",
+            "default": true
+          },
+          "status": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Combined Status of the system components.",
+            "enum": [
+              "transitioning",
+              "success",
+              "failure"
+            ],
+            "default": "transitioning"
+          }
         }
       }
     }
