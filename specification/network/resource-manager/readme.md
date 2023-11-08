@@ -28,7 +28,7 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2023-05
+tag: package-2023-06
 ```
 
 ### Tag: package-2023-08-preview
@@ -51,11 +51,79 @@ input-file:
   - Microsoft.Network/preview/2023-07-01-preview/networkSecurityPerimeter.json
 ```
 
+### Tag: package-2023-06
+
+These settings apply only when `--tag=package-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06'
+input-file:
+  - Microsoft.Network/stable/2023-06-01/applicationGateway.json
+  - Microsoft.Network/stable/2023-06-01/applicationGatewayWafDynamicManifests.json
+  - Microsoft.Network/stable/2023-06-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2023-06-01/availableDelegations.json
+  - Microsoft.Network/stable/2023-06-01/availableServiceAliases.json
+  - Microsoft.Network/stable/2023-06-01/azureFirewall.json
+  - Microsoft.Network/stable/2023-06-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2023-06-01/azureWebCategory.json
+  - Microsoft.Network/stable/2023-06-01/bastionHost.json
+  - Microsoft.Network/stable/2023-06-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2023-06-01/cloudServiceNetworkInterface.json
+  - Microsoft.Network/stable/2023-06-01/cloudServicePublicIpAddress.json
+  - Microsoft.Network/stable/2023-06-01/cloudServiceSwap.json
+  - Microsoft.Network/stable/2023-06-01/customIpPrefix.json
+  - Microsoft.Network/stable/2023-06-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2023-06-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2023-06-01/dscpConfiguration.json
+  - Microsoft.Network/stable/2023-06-01/endpointService.json
+  - Microsoft.Network/stable/2023-06-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2023-06-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2023-06-01/expressRoutePort.json
+  - Microsoft.Network/stable/2023-06-01/expressRouteProviderPort.json
+  - Microsoft.Network/stable/2023-06-01/firewallPolicy.json
+  - Microsoft.Network/stable/2023-06-01/ipAllocation.json
+  - Microsoft.Network/stable/2023-06-01/ipGroups.json
+  - Microsoft.Network/stable/2023-06-01/loadBalancer.json
+  - Microsoft.Network/stable/2023-06-01/natGateway.json
+  - Microsoft.Network/stable/2023-06-01/network.json
+  - Microsoft.Network/stable/2023-06-01/networkInterface.json
+  - Microsoft.Network/stable/2023-06-01/networkManager.json
+  - Microsoft.Network/stable/2023-06-01/networkManagerActiveConfiguration.json
+  - Microsoft.Network/stable/2023-06-01/networkManagerConnection.json
+  - Microsoft.Network/stable/2023-06-01/networkManagerConnectivityConfiguration.json
+  - Microsoft.Network/stable/2023-06-01/networkManagerEffectiveConfiguration.json
+  - Microsoft.Network/stable/2023-06-01/networkManagerGroup.json
+  - Microsoft.Network/stable/2023-06-01/networkManagerScopeConnection.json
+  - Microsoft.Network/stable/2023-06-01/networkManagerSecurityAdminConfiguration.json
+  - Microsoft.Network/stable/2023-06-01/networkProfile.json
+  - Microsoft.Network/stable/2023-06-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2023-06-01/networkVirtualAppliance.json
+  - Microsoft.Network/stable/2023-06-01/networkWatcher.json
+  - Microsoft.Network/stable/2023-06-01/operation.json
+  - Microsoft.Network/stable/2023-06-01/privateEndpoint.json
+  - Microsoft.Network/stable/2023-06-01/privateLinkService.json
+  - Microsoft.Network/stable/2023-06-01/publicIpAddress.json
+  - Microsoft.Network/stable/2023-06-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2023-06-01/routeFilter.json
+  - Microsoft.Network/stable/2023-06-01/routeTable.json
+  - Microsoft.Network/stable/2023-06-01/securityPartnerProvider.json
+  - Microsoft.Network/stable/2023-06-01/serviceCommunity.json
+  - Microsoft.Network/stable/2023-06-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2023-06-01/serviceTags.json
+  - Microsoft.Network/stable/2023-06-01/usage.json
+  - Microsoft.Network/stable/2023-06-01/virtualNetwork.json
+  - Microsoft.Network/stable/2023-06-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2023-06-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2023-06-01/virtualRouter.json
+  - Microsoft.Network/stable/2023-06-01/virtualWan.json
+  - Microsoft.Network/stable/2023-06-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2023-06-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2023-06-01/webapplicationfirewall.json
+```
 ### Tag: package-2023-05
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-05'
+``` yaml $(tag) == 'package-2023-05'
 input-file:
   - Microsoft.Network/stable/2023-05-01/applicationGateway.json
   - Microsoft.Network/stable/2023-05-01/applicationGatewayWafDynamicManifests.json
@@ -119,6 +187,7 @@ input-file:
   - Microsoft.Network/stable/2023-05-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2023-05-01/webapplicationfirewall.json
 ```
+
 ### Tag: package-2023-04
 
 These settings apply only when `--tag=package-2023-04` is specified on the command line.
@@ -3101,6 +3170,13 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: ipAllocation.json
     reason: name, id and type properties are inherited from the upper level
+
+suppressions:
+  - code: ResourceNameRestriction
+    from: bastionhost.json
+    reason: The resource name parameter 'bastionHostName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all Bastion APIs. 
+  - code: LroErrorContent
+    reason: CloudError does not follow required error schema. Suppress it for now to avoid breaking change because it is referenced by many files.
 ```
 
 ## Go
