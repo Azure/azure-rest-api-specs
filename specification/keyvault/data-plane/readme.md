@@ -218,6 +218,7 @@ These transforms apply to any generator.
 directive:
 # Rename models back to what they were before 7.4 for autorest-based code generators.
 # Generated names were disambiguated for generators not using autorest but still processing x-ms-enum.name.
+# See https://github.com/Azure/azure-rest-api-specs/pull/22435 for details.
 - from: certificates.json
   where: $.definitions.Action
   transform: $.properties.action_type["x-ms-enum"].name = "ActionType";

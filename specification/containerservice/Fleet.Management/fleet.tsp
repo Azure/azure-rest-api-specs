@@ -13,7 +13,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.Core.Traits;
-using OpenAPI;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
 
@@ -48,7 +48,9 @@ model FleetProperties {
   @doc("The status of the last operation.")
   provisioningState?: FleetProvisioningState;
 
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "https://github.com/Azure/typespec-azure/issues/3558"
   @doc("The FleetHubProfile configures the Fleet's hub.")
+  @removed(Versions.v2023_10_15)
   hubProfile?: FleetHubProfile;
 }
 

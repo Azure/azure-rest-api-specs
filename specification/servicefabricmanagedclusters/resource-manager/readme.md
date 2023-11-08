@@ -27,7 +27,7 @@ These are the global settings for the ServiceFabricManagedClustersManagementClie
 title: ServiceFabricManagedClustersManagementClient
 description: Service Fabric Managed Clusters Management Client
 openapi-type: arm
-tag: package-2023-09-preview
+tag: package-2023-11-preview
 
 directive:
   - suppress: ListInOperationName
@@ -69,6 +69,17 @@ directive:
 
 ```
 
+### Tag: package-2023-11-preview
+
+These settings apply only when `--tag=package-2023-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11-preview'
+input-file:
+- Microsoft.ServiceFabric/preview/2023-11-01-preview/managedapplication.json
+- Microsoft.ServiceFabric/preview/2023-11-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2023-11-01-preview/nodetype.json
+```
+
 ### Tag: package-2023-09-preview
 
 These settings apply only when `--tag=package-2023-09-preview` is specified on the command line.
@@ -79,7 +90,6 @@ input-file:
 - Microsoft.ServiceFabric/preview/2023-09-01-preview/managedcluster.json
 - Microsoft.ServiceFabric/preview/2023-09-01-preview/nodetype.json
 ```
-
 
 ### Tag: package-2023-07-preview
 
@@ -233,6 +243,9 @@ suppressions:
 
   - code: PutResponseSchemaDescription
     reason: service created with the 202 pattern before this rule was introduced.
+  
+  - code: LroErrorContent
+    reason: Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215) but its going to take some time because we generate the swagger from an internal repo that currently can't reference the common types.
 ```
 
 ---

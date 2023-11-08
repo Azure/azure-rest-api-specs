@@ -4,14 +4,13 @@ on:
   issue_comment:
     types: [created]
 
-permissions:
-  pull-requests: write
-  repository-projects: read
+permissions: { }
 
 jobs:
   comment-handler:
     permissions:
-      pull-requests: write # to read pull requests and write comments
+      pull-requests: write      # to read pull requests and write comments
+      repository-projects: read # Workaround issue with cli trying to read projects during edit
     name: Handle ${{ github.event_name }} ${{ github.event.action }} event
     runs-on: ubuntu-latest
     steps:

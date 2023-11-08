@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
 
@@ -21,12 +21,16 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState,
+
   /** The resource is being provisioned */
   Provisioning,
+
   /** The resource is being updated */
   Updating,
+
   /** The resource is being deleted */
   Deleting,
+
   /** The resource create request has been accepted */
   Accepted,
 }
@@ -35,6 +39,7 @@ enum ProvisioningState {
 enum RegionalDataBoundary {
   /** No data boundary */
   None,
+
   /** EU data boundary */
   EU,
 }
@@ -43,6 +48,7 @@ enum RegionalDataBoundary {
 enum AllowCrashDumpCollection {
   /** Crash dump collection enabled */
   Enabled,
+
   /** Crash dump collection disabled */
   Disabled,
 }
@@ -51,10 +57,13 @@ enum AllowCrashDumpCollection {
 enum CertificateStatus {
   /** Certificate is active */
   Active,
+
   /** Certificate is inactive */
   Inactive,
+
   /** Certificate has expired */
   Expired,
+
   /** Certificate has been revoked */
   Revoked,
 }
