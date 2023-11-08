@@ -116,10 +116,18 @@ interface StoragePools {
   listBySubscription is ArmListBySubscription<StoragePool>;
 
   @doc("Lists health metadata for specific Storage Pool.")
-  listHealthMetadata is ArmResourceActionSync<StoragePool, {}, HealthResponse>;
+  @armResourceAction(StoragePool)
+  @post
+  listHealthMetadata(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): ArmResponse<HealthResponse> | ErrorResponse;
 
   @doc("Lists AVS properties for specific Storage Pool.")
-  listAvsDetails is ArmResourceActionSync<StoragePool, {}, AvsDetails>;
+  @armResourceAction(StoragePool)
+  @post
+  listAvsDetails(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): ArmResponse<AvsDetails> | ErrorResponse;
 }
 
 @doc("AVS (Azure VMware Solution) related properties.")
