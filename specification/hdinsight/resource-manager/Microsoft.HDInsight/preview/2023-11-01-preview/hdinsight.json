@@ -3381,16 +3381,16 @@
         "upgradeType": {
           "description": "Type of upgrade.",
           "enum": [
-              "AKSPatchUpgrade",
-              "NodeOsUpgrade"
+            "AKSPatchUpgrade",
+            "NodeOsUpgrade"
           ],
           "type": "string",
           "x-ms-enum": {
-              "name": "clusterPoolAvailableUpgradeType",
-              "modelAsString": true
+            "name": "clusterPoolAvailableUpgradeType",
+            "modelAsString": true
+          }
         }
-      }
-    },
+      },
       "discriminator": "upgradeType",
       "required": [
         "upgradeType"
@@ -3417,7 +3417,7 @@
           "description": "Latest AKS patch version.",
           "type": "string"
         }
-    },
+      },
       "x-ms-discriminator-value": "AKSPatchUpgrade"
     },
     "ClusterPoolAvailableUpgradeNodeOsUpgradeProperties": {
@@ -3449,7 +3449,7 @@
           "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/ClusterAvailableUpgrade"
-        },
+          },
           "x-ms-identifiers": []
         },
         "nextLink": {
@@ -3487,9 +3487,9 @@
           "x-ms-enum": {
             "name": "clusterAvailableUpgradeType",
             "modelAsString": true
+          }
         }
-      }
-    },
+      },
       "discriminator": "upgradeType",
       "required": [
         "upgradeType"
