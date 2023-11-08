@@ -46,6 +46,9 @@ model PoolProperties {
 
   @doc("Defines the type of fabric the agent will run on.")
   fabricProfile: FabricProfile;
+
+  @doc("The resource id of the DevCenter Project the pool belongs to.")
+  devCenterProjectResourceId: string;
 }
 
 @doc("Defines the organization in which the pool will be used.")

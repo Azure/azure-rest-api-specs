@@ -27,6 +27,7 @@ These are the global settings for the devopsinfrastructure.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
+openapi-subtype: providerHub
 tag: package-2023-10-30-preview
 ```
 
