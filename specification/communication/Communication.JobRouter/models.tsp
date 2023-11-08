@@ -722,7 +722,10 @@ model ScoringRuleOptions {
   batchSize?: int32 = 20;
 
   @doc("List of extra parameters from the job that will be sent as part of the payload to scoring rule. If not set, the job's labels (sent in the payload as `job`) and the job's worker selectors (sent in the payload as `selectors`) are added to the payload of the scoring rule by default. Note: Worker labels are always sent with scoring payload.")
-  scoringParameters?: ScoringRuleParameterSelector[] = [ScoringRuleParameterSelector.jobLabels, ScoringRuleParameterSelector.workerSelectors];
+  scoringParameters?: ScoringRuleParameterSelector[] = [
+    ScoringRuleParameterSelector.jobLabels,
+    ScoringRuleParameterSelector.workerSelectors
+  ];
 
   @doc("If set to true, will score workers in batches, and the parameter name of the worker labels will be sent as `workers`. By default, set to false and the parameter name for the worker labels will be sent as `worker`. Note: If enabled, use 'batchSize' to set batch size.")
   isBatchScoringEnabled?: boolean = false;
