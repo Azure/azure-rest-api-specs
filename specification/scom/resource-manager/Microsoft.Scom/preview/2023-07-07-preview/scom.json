@@ -39,16 +39,16 @@
   },
   "tags": [
     {
-      "name": "Operations"
-    },
-    {
-      "name": "ManagedInstances"
+      "name": "Instances"
     },
     {
       "name": "MonitoredResources"
     },
     {
       "name": "ManagedGateways"
+    },
+    {
+      "name": "Operations"
     }
   ],
   "paths": {
@@ -85,9 +85,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Scom/managedInstances": {
       "get": {
-        "operationId": "ManagedInstances_ListBySubscription",
+        "operationId": "Instances_ListBySubscription",
         "tags": [
-          "ManagedInstances"
+          "Instances"
         ],
         "description": "Lists all SCOM managed instances in a subscription",
         "parameters": [
@@ -119,9 +119,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances": {
       "get": {
-        "operationId": "ManagedInstances_ListByResourceGroup",
+        "operationId": "Instances_ListByResourceGroup",
         "tags": [
-          "ManagedInstances"
+          "Instances"
         ],
         "description": "Lists all SCOM managed instances in a resource group",
         "parameters": [
@@ -156,9 +156,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}": {
       "get": {
-        "operationId": "ManagedInstances_Get",
+        "operationId": "Instances_Get",
         "tags": [
-          "ManagedInstances"
+          "Instances"
         ],
         "description": "Get SCOM managed instance details",
         "parameters": [
@@ -196,9 +196,9 @@
         }
       },
       "put": {
-        "operationId": "ManagedInstances_CreateOrUpdate",
+        "operationId": "Instances_CreateOrUpdate",
         "tags": [
-          "ManagedInstances"
+          "Instances"
         ],
         "description": "Create or update SCOM managed instance",
         "parameters": [
@@ -269,9 +269,9 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "ManagedInstances_Update",
+        "operationId": "Instances_Update",
         "tags": [
-          "ManagedInstances"
+          "Instances"
         ],
         "description": "Patch SCOM managed instance",
         "parameters": [
@@ -336,9 +336,9 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "ManagedInstances_Delete",
+        "operationId": "Instances_Delete",
         "tags": [
-          "ManagedInstances"
+          "Instances"
         ],
         "description": "Delete a SCOM managed instance",
         "parameters": [
@@ -396,9 +396,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/linkLogAnalytics": {
       "post": {
-        "operationId": "ManagedInstances_LinkLogAnalytics",
+        "operationId": "Instances_LinkLogAnalytics",
         "tags": [
-          "ManagedInstances"
+          "Instances"
         ],
         "description": "Link Log Analytics workspace for SCOM monitoring instance",
         "parameters": [
@@ -877,9 +877,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/patchServers": {
       "post": {
-        "operationId": "ManagedInstances_PatchServers",
+        "operationId": "Instances_PatchServers",
         "tags": [
-          "ManagedInstances"
+          "Instances"
         ],
         "description": "Update SCOM servers with latest scom software.",
         "parameters": [
@@ -944,11 +944,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/scale": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/setServerCount": {
       "post": {
-        "operationId": "ManagedInstances_Scale",
+        "operationId": "Instances_Scale",
         "tags": [
-          "ManagedInstances"
+          "Instances"
         ],
         "description": "Scaling SCOM managed instance.",
         "parameters": [
@@ -1015,9 +1015,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/unlinkLogAnalytics": {
       "post": {
-        "operationId": "ManagedInstances_UnlinkLogAnalytics",
+        "operationId": "Instances_UnlinkLogAnalytics",
         "tags": [
-          "ManagedInstances"
+          "Instances"
         ],
         "description": "Unlink Log Analytics workspace for SCOM monitoring instance",
         "parameters": [
@@ -1084,9 +1084,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/updateLogAnalytics": {
       "post": {
-        "operationId": "ManagedInstances_UpdateLogAnalytics",
+        "operationId": "Instances_UpdateLogAnalytics",
         "tags": [
-          "ManagedInstances"
+          "Instances"
         ],
         "description": "Update configuration for log analytics linking for SCOM monitoring instance",
         "parameters": [

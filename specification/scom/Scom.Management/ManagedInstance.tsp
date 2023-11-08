@@ -22,7 +22,7 @@ model ManagedInstance is TrackedResource<MonitoringInstanceProperties> {
 }
 
 @armResourceOperations
-interface ManagedInstances {
+interface Instances {
   /** Get SCOM managed instance details */
   get is ArmResourceRead<ManagedInstance>;
   /** Create or update SCOM managed instance */
@@ -42,20 +42,24 @@ interface ManagedInstances {
   delete is ArmResourceDeleteAsync<ManagedInstance>;
   /** Lists all SCOM managed instances in a resource group */
   listByResourceGroup is ArmResourceListByParent<ManagedInstance>;
-  /** Lists all SCOM managed instances in a subscription  */
+  /** Lists all SCOM managed instances in a subscription */
   listBySubscription is ArmListBySubscription<ManagedInstance>;
+
   /** Scaling SCOM managed instance. */
+  @action("setServerCount")
   scale is ArmResourceActionAsync<
     ManagedInstance,
     ScalingProperties,
     SetServerCountResponseProperties
   >;
+
   /** Update SCOM servers with latest scom software. */
   patchServers is ArmResourceActionAsync<
     ManagedInstance,
     {},
     PatchServersResponseProperties
   >;
+
   /** Link Log Analytics workspace for SCOM monitoring instance */
   linkLogAnalytics is ArmResourceActionAsync<
     ManagedInstance,

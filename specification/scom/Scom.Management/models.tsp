@@ -8,8 +8,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Scom;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 enum Origin {
   user,
   system,

@@ -7,6 +7,8 @@ using TypeSpec.Http;
 
 namespace Microsoft.Scom;
 
+interface Operations extends Azure.ResourceManager.Operations {}
+
 // Issue: The 'operation list' does not require this operation. It has been commented out.
 // interface OperationsOperations {
 //   /** Lists all available operations on SCOM monitoring instance */
