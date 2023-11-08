@@ -2541,6 +2541,8 @@ configuration:
             label: TypeSpec
     - if:
       - payloadType: Issue_Comment
+      - and:
+        - isPullRequest
       then:
       - if:
         - commentContains:
