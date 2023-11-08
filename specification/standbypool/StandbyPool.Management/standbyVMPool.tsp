@@ -79,7 +79,7 @@ enum ProvisioningState {
 interface StandbyVirtualMachinePools {
   get is ArmResourceRead<StandbyVirtualMachinePoolResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<StandbyVirtualMachinePoolResource>;
-  delete is ArmResourceDeleteAsync<StandbyVirtualMachinePoolResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<StandbyVirtualMachinePoolResource>;
   update is ArmResourcePatchSync<
     StandbyVirtualMachinePoolResource,
     StandbyVirtualMachinePoolResourceProperties
