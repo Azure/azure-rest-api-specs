@@ -37,6 +37,7 @@ model RouterConditionalRequestHeaders {
   @visibility("read", "query", "create", "update", "delete")
   @header("If-Unmodified-Since")
   @doc("The request should only proceed if the entity was not modified after this time.")
+  @encode("rfc7231")
   ifUnmodifiedSince?: utcDateTime;
 }
 
