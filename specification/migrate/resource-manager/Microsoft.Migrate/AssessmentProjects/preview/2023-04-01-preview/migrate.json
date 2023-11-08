@@ -17527,6 +17527,16 @@
       "type": "object",
       "description": "Evaluated AVS machine properties class.",
       "properties": {
+        "machineId": {
+          "type": "string",
+          "description": "Machine Id.",
+          "readOnly": true
+        },
+        "serverName": {
+          "type": "string",
+          "description": "Server Name.",
+          "readOnly": true
+        },
         "virtualizationType": {
           "type": "string",
           "description": "Virtualisation type.",
@@ -17555,6 +17565,11 @@
         "readyForMigration": {
           "type": "string",
           "description": "Is machine ready for migration.",
+          "readOnly": true
+        },
+        "supportStatus": {
+          "$ref": "#/definitions/SupportabilityStatus",
+          "description": "End of Support status.",
           "readOnly": true
         }
       }
