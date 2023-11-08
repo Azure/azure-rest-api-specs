@@ -717,9 +717,26 @@
             "lun"
           ],
           "description": "Gets the data disks of the VM captured at the time of the restore point creation."
+        },
+        "diskControllerType": {
+          "$ref": "#/definitions/RestorePointSourceVMDiskControllerType",
+          "readOnly": true,
+          "description": "Gets the disk controller type of the VM captured at the time of the restore point creation."
         }
       },
       "description": "Describes the storage profile."
+    },
+    "RestorePointSourceVMDiskControllerType": {
+      "type": "string",
+      "enum": [
+        "SCSI",
+        "NVMe"
+      ],
+      "x-ms-enum": {
+        "name": "DiskControllerTypes",
+        "modelAsString": true
+      },
+      "description": "Provides the disk controller type configured for the VM. This property is only supported for virtual machines whose operating system disk and VM sku supports Generation 2 (https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2). For more information about Disk Controller Types supported please refer to https://aka.ms/azure-diskcontrollertypes."
     },
     "RestorePointSourceVMOSDisk": {
       "properties": {
