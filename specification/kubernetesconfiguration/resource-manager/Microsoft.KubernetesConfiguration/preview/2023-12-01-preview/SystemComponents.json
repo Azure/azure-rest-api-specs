@@ -40,7 +40,7 @@
           "SystemComponents",
           "ClusterSystemComponents"
         ],
-        "description": "Create a new Kubernetes Cluster System Components.",
+        "description": "Create a new Kubernetes Cluster System Component.",
         "operationId": "SystemComponents_Create",
         "x-ms-examples": {
           "Create SystemComponent": {
@@ -80,7 +80,7 @@
           "201": {
             "description": "Request received successfully.",
             "schema": {
-              "$ref": "#/definitions/Extension"
+              "$ref": "#/definitions/SystemComponent"
             }
           },
           "200": {
@@ -176,13 +176,25 @@
             "success",
             "failure"
           ],
-          "default": "transitioning"
+          "default": "transitioning",
+          "x-ms-enum": {
+            "name": "SystemComponentStatus",
+            "modelAsString": true
+          }
         }
       }
     },
     "SystemComponent": {
       "description": "The SystemComponent for the cluster object.",
       "type": "object",
+      "name": {
+        "type": "string",
+        "readOnly": true
+      },
+      "id": {
+        "type": "string",
+        "readOnly": true
+      },
       "properties": {
         "type": "object",
         "properties": {
@@ -209,10 +221,15 @@
               "success",
               "failure"
             ],
-            "default": "transitioning"
+            "default": "transitioning",
+            "x-ms-enum": {
+              "name": "SystemComponentsStatus",
+              "modelAsString": true
+            }
           }
         }
-      }
+      },
+      "x-ms-azure-resource": true
     }
   }
 }
