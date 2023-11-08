@@ -1,0 +1,217 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-05-01-preview",
+    "title": "SystemComponentClient",
+    "description": "Use these APIs to create system components through ARM, for Kubernetes Clusters."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/systemComponents/default": {
+      "put": {
+        "tags": [
+          "SystemComponents",
+          "ClusterSystemComponents"
+        ],
+        "description": "Create a new Kubernetes Cluster System Components.",
+        "operationId": "SystemComponents_Create",
+        "x-ms-examples": {
+          "Create SystemComonent": {
+            "$ref": "./examples/CreateSystemComponent.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "systemComponents",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SystemComponent"
+            },
+            "description": "Properties necessary to Create an System component."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request received successfully",
+            "schema": {
+              "$ref": "#/definitions/SystemComponent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SystemComponents",
+          "ClusterSystemComponents"
+        ],
+        "description": "Gets Kubernetes Cluster SystemComponents.",
+        "operationId": "SystemComponents_Get",
+        "x-ms-examples": {
+          "Get System component": {
+            "$ref": "./examples/GetSystemComponent.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SystemComponent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Component": {
+      "description": "System components registered in the cluster and its versions.",
+      "type": "object",
+      "readOnly": false,
+      "properties": {
+        "extensionType": {
+          "type": "string",
+          "description": "Extension type",
+          "readOnly": false
+        },
+        "userSpecifiedVersion": {
+          "type": "string",
+          "readOnly": false,
+          "description": "User specified version for the extension type."
+        },
+        "currentInstalledVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Current installed version for the extension type."
+        },
+        "installedMajorVersion": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Current installed Major version for the extension type."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Status of the each components.",
+          "enum": [
+            "transitioning",
+            "success",
+            "failure"
+          ],
+          "default": "transitioning"
+        }
+      }
+    },
+    "SystemComponent": {
+      "description": "The SystemComponent for the cluster object.",
+      "type": "object",
+      "properties": {
+        "type": "object",
+        "x-ms-client-flatten": true,
+        "description": "Properties of an SystemComponent of the cluster",
+        "components": {
+          "description": "Components of  the clusters.",
+          "type": "array",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/Component"
+          },
+          "x-ms-identifiers": []
+        },
+        "arcAgentryAutoUpgrade": {
+          "description": "Flag to note if this arc agentry is auto upgrade of minor version, or not.",
+          "type": "boolean",
+          "default": true
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Combined Status of the system components.",
+          "enum": [
+            "transitioning",
+            "success",
+            "failure"
+          ],
+          "default": "transitioning"
+        }
+      }
+    }
+  }
+}

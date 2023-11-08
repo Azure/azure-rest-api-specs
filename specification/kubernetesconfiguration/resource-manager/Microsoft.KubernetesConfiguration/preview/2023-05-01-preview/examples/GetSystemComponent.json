@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "api-version": "2023-05-01-preview",
+    "clusterName": "clusterName1"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "description": "Details of the Kubernetes clusters systemComponents details.",
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/systemComponents/default",
+        "type": "Microsoft.KubernetesConfiguration/systemComponents",
+        "name": "default",
+        "properties": {
+          "arcAgentryAutoUpgrade": false,
+          "status": "Succeeded",
+          "components": [
+            {
+              "extensionType": "Strato",
+              "userSpecifiedVersion": "0.1.4",
+              "currentInstalledVersion": "0.1.9",
+              "installedMajorVersion": "0",
+              "status": "Succeeded"
+            },
+            {
+              "extensionType": "SomeOtherSystemExtension",
+              "userSpecifiedVersion": "0.1.1",
+              "currentInstalledVersion": "0.1.1",
+              "installedMajorVersion": "0",
+              "status": "Succeeded"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
