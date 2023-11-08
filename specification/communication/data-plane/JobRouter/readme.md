@@ -26,7 +26,16 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-jobrouter-2022-07-18-preview
+tag: package-jobrouter-2023-11-01
+```
+
+### Tag: package-jobrouter-2023-11-01
+
+These settings apply only when `--tag=package-jobrouter-2023-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-jobrouter-2023-11-01'
+input-file:
+  - stable/2023-11-01/communicationservicejobrouter.json
 ```
 
 ### Tag: package-jobrouter-2022-07-18-preview
