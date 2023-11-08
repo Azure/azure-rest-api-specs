@@ -9,17 +9,17 @@ namespace Microsoft.Scom;
 
 // Issue: The 'operation list' does not require this operation. It has been commented out.
 // interface OperationsOperations {
-//   @doc("Lists all available operations on SCOM monitoring instance")
+//   /** Lists all available operations on SCOM monitoring instance */
 //   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/operations")
 //   @get
 //   List is Azure.Core.Foundations.Operation<
 //     {
-//       @doc("The ID of the target subscription.")
+//       /** The ID of the target subscription. */
 //       @minLength(1)
 //       @path
 //       subscriptionId: string;
 
-//       @doc("The name of the resource group. The name is case insensitive.")
+//       /** The name of the resource group. The name is case insensitive. */
 //       @maxLength(90)
 //       @minLength(1)
 //       @path

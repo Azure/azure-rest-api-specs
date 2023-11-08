@@ -10,10 +10,10 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.Scom;
-@doc("A gateway resource.")
+/** A gateway resource. */
 @parentResource(ManagedInstance)
 model ManagedGateway is ProxyResource<ManagedGatewayProperties> {
-  @doc("The gateway resource name.")
+  /** The gateway resource name. */
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
   @path
   @key("managedGatewayName")
@@ -23,12 +23,12 @@ model ManagedGateway is ProxyResource<ManagedGatewayProperties> {
 
 @armResourceOperations
 interface ManagedGateways {
-  @doc("Retrieve the details of the gateway resource.")
+  /** Retrieve the details of the gateway resource. */
   get is ArmResourceRead<ManagedGateway>;
-  @doc("Create or update a gateway resource.")
+  /** Create or update a gateway resource. */
   createOrUpdate is ArmResourceCreateOrReplaceSync<ManagedGateway>;
-  @doc("Remove a gateway resource.")
+  /** Remove a gateway resource. */
   delete is ArmResourceDeleteSync<ManagedGateway>;
-  @doc("A comprehensive list of all gateway resources within a SCOM managed instance.")
+  /** A comprehensive list of all gateway resources within a SCOM managed instance. */
   listByManagedInstance is ArmResourceListByParent<ManagedGateway>;
 }
