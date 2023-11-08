@@ -151,12 +151,21 @@
             "x-ms-client-name": "smartCropsAspectRatios"
           },
           {
-            "name": "model-name",
+            "name": "model-version",
             "in": "query",
-            "description": "The name of the custom trained model. This parameter needs to be specified if the parameter \"features\" is not specified.",
+            "description": "The version of cloud AI-model used for analysis. The default value is \"latest\". Only relevant when doing analysis with standard models. Not relevant when doing analysis with a custom-trained AI model.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "modelName"
+            "default": "latest",
+            "x-ms-client-name": "modelVersion"
+          },
+          {
+            "name": "model-name",
+            "in": "query",
+            "description": "The name of the custom-trained cloud AI model. This parameter needs to be specified if the parameter \"features\" is not specified.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "customModelName"
           },
           {
             "name": "imageContent",
@@ -379,12 +388,21 @@
             "x-ms-client-name": "smartCropsAspectRatios"
           },
           {
-            "name": "model-name",
+            "name": "model-version",
             "in": "query",
-            "description": "The name of the custom trained model. This parameter needs to be specified if the parameter \"features\" is not specified.",
+            "description": "The version of cloud AI-model used for analysis. The default value is \"latest\". Only relevant when doing analysis with standard models. Not relevant when doing analysis with a custom-trained AI model.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "modelName"
+            "default": "latest",
+            "x-ms-client-name": "modelVersion"
+          },
+          {
+            "name": "model-name",
+            "in": "query",
+            "description": "The name of the custom-trained cloud AI model. This parameter needs to be specified if the parameter \"features\" is not specified.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "customModelName"
           },
           {
             "name": "imageContent",
@@ -573,42 +591,6 @@
         }
       }
     },
-    "BoundingBox": {
-      "type": "object",
-      "description": "A basic rectangle",
-      "properties": {
-        "x": {
-          "type": "integer",
-          "format": "int32",
-          "description": "X coordinate",
-          "minimum": 0
-        },
-        "y": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Y coordinate",
-          "minimum": 0
-        },
-        "w": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Width of the box",
-          "minimum": 0
-        },
-        "h": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Height of the box",
-          "minimum": 0
-        }
-      },
-      "required": [
-        "x",
-        "y",
-        "w",
-        "h"
-      ]
-    },
     "CaptionResult": {
       "type": "object",
       "description": "A brief description of what the image depicts.",
@@ -642,7 +624,7 @@
           "minimum": 0
         },
         "boundingBox": {
-          "$ref": "#/definitions/BoundingBox",
+          "$ref": "#/definitions/ImageBoundingBox",
           "description": "The bounding box of the crop region."
         }
       },
@@ -657,11 +639,13 @@
       "properties": {
         "objectsResult": {
           "$ref": "#/definitions/ObjectsResult",
-          "description": "The list of predicted objects."
+          "description": "The list of predicted objects.",
+          "x-ms-client-name": "objects"
         },
         "tagsResult": {
           "$ref": "#/definitions/TagsResult",
-          "description": "The list of predicted tags."
+          "description": "The list of predicted tags.",
+          "x-ms-client-name": "tags"
         }
       },
       "required": [
@@ -686,7 +670,7 @@
           "minLength": 1
         },
         "boundingBox": {
-          "$ref": "#/definitions/BoundingBox",
+          "$ref": "#/definitions/ImageBoundingBox",
           "description": "The bounding box of the caption."
         }
       },
@@ -719,7 +703,7 @@
       "description": "Describes a detected object in an image.",
       "properties": {
         "boundingBox": {
-          "$ref": "#/definitions/BoundingBox",
+          "$ref": "#/definitions/ImageBoundingBox",
           "description": "Gets a rectangular boundary within which the object was detected."
         },
         "tags": {
@@ -742,7 +726,7 @@
       "description": "Represents a person detected in an image",
       "properties": {
         "boundingBox": {
-          "$ref": "#/definitions/BoundingBox",
+          "$ref": "#/definitions/ImageBoundingBox",
           "description": "Gets a rectangular boundary within which the person was detected.",
           "readOnly": true
         },
@@ -961,7 +945,8 @@
       "properties": {
         "captionResult": {
           "$ref": "#/definitions/CaptionResult",
-          "description": "A CaptionResult for the image."
+          "description": "A CaptionResult for the image.",
+          "x-ms-client-name": "caption"
         },
         "customModelResult": {
           "$ref": "#/definitions/CustomModelResult",
@@ -969,7 +954,8 @@
         },
         "denseCaptionsResult": {
           "$ref": "#/definitions/DenseCaptionsResult",
-          "description": "A denseCaptionsResult for the image."
+          "description": "A denseCaptionsResult for the image.",
+          "x-ms-client-name": "denseCaptions"
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadata",
@@ -981,28 +967,71 @@
         },
         "objectsResult": {
           "$ref": "#/definitions/ObjectsResult",
-          "description": "A list of objects for the image."
+          "description": "A list of objects for the image.",
+          "x-ms-client-name": "objects"
         },
         "peopleResult": {
           "$ref": "#/definitions/PeopleResult",
-          "description": "A list of people for the image."
+          "description": "A list of people for the image.",
+          "x-ms-client-name": "people"
         },
         "readResult": {
           "$ref": "#/definitions/ReadResult",
-          "description": "A readResult for the image."
+          "description": "A readResult for the image.",
+          "x-ms-client-name": "read"
         },
         "smartCropsResult": {
           "$ref": "#/definitions/SmartCropsResult",
-          "description": "A list of regions for the image."
+          "description": "A list of regions for the image.",
+          "x-ms-client-name": "smartCrops"
         },
         "tagsResult": {
           "$ref": "#/definitions/TagsResult",
-          "description": "A list of tags for the image."
+          "description": "A list of tags for the image.",
+          "x-ms-client-name": "tags"
         }
       },
       "required": [
         "metadata",
         "modelVersion"
+      ]
+    },
+    "ImageBoundingBox": {
+      "type": "object",
+      "description": "A basic rectangle",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "X coordinate",
+          "minimum": 0
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Y coordinate",
+          "minimum": 0
+        },
+        "w": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Width of the box",
+          "minimum": 0,
+          "x-ms-client-name": "width"
+        },
+        "h": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Height of the box",
+          "minimum": 0,
+          "x-ms-client-name": "height"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "w",
+        "h"
       ]
     },
     "ImageMetadata": {
