@@ -26,17 +26,17 @@ enum ChatRole {
 }
 
 @doc("A property that represents backend-specific context or arguments.")
-model ContextProperty<TContext> {
+model ContextProperty {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Protocol defines the type as Record<any>"
   @doc("""
   Context allows the chat app to receive extra parameters from the client, such as temperature, functions, or
   customer_info. These parameters are specific to the chat app and not understood by the generic clients.
   """)
-  context?: TContext;
+  context?: Record<unknown>;
 }
 
 @doc("A property that represents backend-specific information for the tracking of a session.")
-model StateProperty<TState> {
+model StateProperty {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "The protocol defines these as any (object/scalar) for now"
   @doc("""
   Field that allows the chat app to store and retrieve data, the structure of such data is dependant on the backend
@@ -44,30 +44,29 @@ model StateProperty<TState> {
   sends a new one. The data in this field can be used to implement stateful services, such as remembering previous
   conversations or user preferences.
   """)
-  sessionState?: TState;
+  sessionState?: unknown;
 }
 
 @doc("Identifies the type of a message.")
-enum MessageKind
-{
+enum MessageKind {
   @doc("The message context is text.")
   text,
 }
 
 @doc("A single, role-attributed message within a chat completion interaction.")
 @discriminator("kind")
-model ChatMessage<TState> {
+model ChatMessage {
   @doc("The type of the message. If not specified, the message is assumed to be text.")
   kind?: MessageKind;
 
   @doc("The role associated with the message.")
   role: ChatRole;
 
-  ...StateProperty<TState>;
+  ...StateProperty;
 }
 
 @doc("A single, role-attributed text message within a chat completion interaction.")
-model TextChatMessage<TState> extends ChatMessage<TState> {
+model TextChatMessage extends ChatMessage {
   @doc("The type of the message.")
   kind: MessageKind.text;
 
