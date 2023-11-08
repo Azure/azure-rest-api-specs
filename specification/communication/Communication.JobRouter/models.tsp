@@ -21,7 +21,8 @@ model LastModifiedResponseEnvelope {
   @header("Last-Modified")
   @visibility("read")
   @doc("The last modified timestamp.")
-  lastModifiedTimestamp?: string;
+  @encode("rfc7231")
+  lastModifiedTimestamp?: utcDateTime;
 }
 
 // https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#conditional-requests
