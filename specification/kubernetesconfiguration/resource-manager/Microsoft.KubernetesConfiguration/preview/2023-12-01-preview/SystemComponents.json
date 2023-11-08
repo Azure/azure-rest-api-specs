@@ -187,14 +187,6 @@
     "SystemComponent": {
       "description": "The SystemComponent for the cluster object.",
       "type": "object",
-      "name": {
-        "type": "string",
-        "readOnly": true
-      },
-      "id": {
-        "type": "string",
-        "readOnly": true
-      },
       "properties": {
         "type": "object",
         "properties": {
@@ -206,6 +198,18 @@
               "$ref": "#/definitions/Component"
             },
             "x-ms-identifiers": []
+          },
+          "name": {
+            "type": "string",
+            "readOnly": true
+          },
+          "id": {
+            "type": "string",
+            "readOnly": true
+          },
+          "type": {
+            "type": "object",
+            "readOnly": true
           },
           "arcAgentryAutoUpgrade": {
             "description": "Flag to note if arc agentry is auto upgradable or not.",
