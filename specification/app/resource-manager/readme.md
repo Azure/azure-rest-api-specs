@@ -66,16 +66,6 @@ directive:
     reason: |
       The linting thinks that 'Builder' in 'Builds_ListByBuilderResource' is a noun, while it
       is really the parent.
-  - suppress: LroErrorContent
-    from: Builds.json
-    reason: |
-      We are not using the common error response for these new resources to promote consistency 
-      with the rest of the Microsoft.App RP, as it also doesn't use the common-types error.
-  - suppress: LroErrorContent
-    from: Builders.json
-    reason: |
-      We are not using the common error response for these new resources to promote consistency 
-      with the rest of the Microsoft.App RP, as it also doesn't use the common-types error.
 ```
 ### Tag: package-preview-2023-05
 
