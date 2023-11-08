@@ -742,9 +742,6 @@
           "200": {
             "description": "OK"
           },
-          "202": {
-            "description": "Accepted"
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -780,6 +777,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the dedicated host group."
           },
           {
@@ -787,6 +785,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the dedicated host."
           },
           {
@@ -797,11 +796,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
