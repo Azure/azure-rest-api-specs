@@ -296,8 +296,8 @@ GET
 The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
-      @query
-      `attr:qualifiedName`: string;
+      @query("attr:qualifiedName")
+      attr: string;
     },
     AtlasEntityWithExtInfo
   >;
@@ -332,8 +332,8 @@ PUT
 The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
-      @query
-      `attr:qualifiedName`: string;
+      @query("attr:qualifiedName")
+      attr: string;
 
       @doc("Atlas entity with extended information.")
       @body
@@ -368,8 +368,8 @@ DELETE
 The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
-      @query
-      `attr:qualifiedName`: string;
+      @query("attr:qualifiedName")
+      attr: string;
     },
     EntityMutationResponse
   >;
@@ -394,8 +394,8 @@ attributes.
 The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
-      @query
-      `attr:qualifiedName`: string;
+      @query("attr:qualifiedName")
+      attr: string;
     },
     void
   >;
@@ -413,8 +413,8 @@ be changed to other unique attributes)
 The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
-      @query
-      `attr:qualifiedName`: string;
+      @query("attr:qualifiedName")
+      attr: string;
 
       @doc("An array of classification to be added.")
       @body
@@ -436,8 +436,8 @@ be changed to other unique attributes)
 The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
-      @query
-      `attr:qualifiedName`: string;
+      @query("attr:qualifiedName")
+      attr: string;
 
       @doc("An array of classification to be updated.")
       @body
@@ -683,8 +683,8 @@ this: DELETE
 The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
-      @query
-      `attr:qualifiedName`: string;
+      @query("attr:qualifiedName")
+      attr: string;
 
       @doc("set of labels to be deleted")
       @body
@@ -722,8 +722,8 @@ request would look something like this: POST
 The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
-      @query
-      `attr:qualifiedName`: string;
+      @query("attr:qualifiedName")
+      attr: string;
 
       @doc("set of labels to be set")
       @body
@@ -761,8 +761,8 @@ request would look something like this: PUT
 The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
-      @query
-      `attr:qualifiedName`: string;
+      @query("attr:qualifiedName")
+      attr: string;
 
       @doc("set of labels to be added")
       @body
@@ -1511,8 +1511,8 @@ GET
 The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
-      @query
-      `attr:qualifiedName`: string;
+      @query("attr:qualifiedName")
+      attr: string;
     },
     AtlasLineageInfo
   >;
