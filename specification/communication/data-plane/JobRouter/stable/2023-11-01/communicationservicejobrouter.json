@@ -2281,8 +2281,7 @@
     },
     "CancelJobResult": {
       "type": "object",
-      "description": "Response payload from cancelling a job",
-      "additionalProperties": {}
+      "description": "Response payload from cancelling a job"
     },
     "ClassificationPolicy": {
       "type": "object",
@@ -2387,8 +2386,7 @@
     },
     "CloseJobResult": {
       "type": "object",
-      "description": "Response payload from closing a job",
-      "additionalProperties": {}
+      "description": "Response payload from closing a job"
     },
     "CompleteJobOptions": {
       "type": "object",
@@ -2402,8 +2400,7 @@
     },
     "CompleteJobResult": {
       "type": "object",
-      "description": "Response payload from completing a job",
-      "additionalProperties": {}
+      "description": "Response payload from completing a job"
     },
     "ConditionalQueueSelectorAttachment": {
       "type": "object",
@@ -2474,8 +2471,7 @@
     },
     "DeclineJobOfferResult": {
       "type": "object",
-      "description": "Response payload from declining a job",
-      "additionalProperties": {}
+      "description": "Response payload from declining a job"
     },
     "DirectMapRouterRule": {
       "type": "object",
@@ -3240,7 +3236,7 @@
         },
         "labelsToUpsert": {
           "type": "object",
-          "description": "Dictionary containing the labels to update (or add if not existing) in key-value pairs",
+          "description": "Dictionary containing the labels to update (or add if not existing) in key-value pairs.  Values must be primivite values - number, string, boolean.",
           "additionalProperties": {}
         }
       },
@@ -3260,8 +3256,7 @@
     },
     "ReclassifyJobResult": {
       "type": "object",
-      "description": "Response payload from reclassifying a job",
-      "additionalProperties": {}
+      "description": "Response payload from reclassifying a job"
     },
     "RoundRobinMode": {
       "type": "object",
@@ -3376,7 +3371,7 @@
         },
         "labels": {
           "type": "object",
-          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
+          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions. Values must be primivite values - number, string, boolean.",
           "additionalProperties": {}
         },
         "assignments": {
@@ -3389,7 +3384,7 @@
         },
         "tags": {
           "type": "object",
-          "description": "A set of non-identifying attributes attached to this job",
+          "description": "A set of non-identifying attributes attached to this job. Values must be primivite values - number, string, boolean.",
           "additionalProperties": {}
         },
         "notes": {
@@ -3489,12 +3484,12 @@
         },
         "labels": {
           "type": "object",
-          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
+          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions. Values must be primivite values - number, string, boolean.",
           "additionalProperties": {}
         },
         "tags": {
           "type": "object",
-          "description": "A set of non-identifying attributes attached to this job",
+          "description": "A set of non-identifying attributes attached to this job. Values must be primivite values - number, string, boolean.",
           "additionalProperties": {}
         },
         "notes": {
@@ -3708,7 +3703,7 @@
         },
         "labels": {
           "type": "object",
-          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
+          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions. Values must be primivite values - number, string, boolean.",
           "additionalProperties": {}
         },
         "exceptionPolicyId": {
@@ -3735,7 +3730,7 @@
         },
         "labels": {
           "type": "object",
-          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
+          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions. Values must be primivite values - number, string, boolean.",
           "additionalProperties": {}
         },
         "exceptionPolicyId": {
@@ -3757,7 +3752,7 @@
           "description": "Describes how the value of the label is compared to the value defined on the label selector"
         },
         "value": {
-          "description": "The value to compare against the actual label value with the given operator"
+          "description": "The value to compare against the actual label value with the given operator. Values must be primivite values - number, string, boolean."
         }
       },
       "required": [
@@ -3855,12 +3850,12 @@
         },
         "labels": {
           "type": "object",
-          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
+          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions. Values must be primivite values - number, string, boolean.",
           "additionalProperties": {}
         },
         "tags": {
           "type": "object",
-          "description": "A set of non-identifying attributes attached to this worker.",
+          "description": "A set of non-identifying attributes attached to this worker. Values must be primivite values - number, string, boolean.",
           "additionalProperties": {}
         },
         "channels": {
@@ -3953,12 +3948,12 @@
         },
         "labels": {
           "type": "object",
-          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
+          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions. Values must be primivite values - number, string, boolean.",
           "additionalProperties": {}
         },
         "tags": {
           "type": "object",
-          "description": "A set of non-identifying attributes attached to this worker.",
+          "description": "A set of non-identifying attributes attached to this worker. Values must be primivite values - number, string, boolean.",
           "additionalProperties": {}
         },
         "channels": {
@@ -3988,7 +3983,7 @@
           "description": "Describes how the value of the label is compared to the value defined on the label selector"
         },
         "value": {
-          "description": "The value to compare against the actual label value with the given operator"
+          "description": "The value to compare against the actual label value with the given operator. Values must be primivite values - number, string, boolean."
         },
         "expiresAfterSeconds": {
           "type": "number",
@@ -4219,7 +4214,7 @@
       "description": "A rule providing static rules that always return the same result, regardless of input.",
       "properties": {
         "value": {
-          "description": "The static value this rule always returns."
+          "description": "The static value this rule always returns. Values must be primivite values - number, string, boolean."
         }
       },
       "allOf": [
@@ -4234,7 +4229,7 @@
       "description": "A rule providing static rules that always return the same result, regardless of input.",
       "properties": {
         "value": {
-          "description": "The static value this rule always returns."
+          "description": "The static value this rule always returns. Values must be primivite values - number, string, boolean."
         }
       },
       "allOf": [

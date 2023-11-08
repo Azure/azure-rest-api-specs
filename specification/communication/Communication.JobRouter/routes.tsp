@@ -121,15 +121,7 @@ interface JobRouterOperations {
       @body
       options?: ReclassifyJobOptions;
     },
-    {
-      #suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
-      @doc("Response after reclassifying a job.")
-      @body
-      body: ReclassifyJobResult;
-
-      @statusCode
-      _: 200;
-    }
+    ReclassifyJobResultWithOkResponse
   >;
 
   @summary("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
