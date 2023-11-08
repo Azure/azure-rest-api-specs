@@ -69,7 +69,8 @@ interface CertificateProfileOperations {
   sign is StandardResourceOperations.LongRunningResourceAction<
     CertificateProfileName,
     SigningPayloadOptions,
-    SignResult
+    SignResult,
+    SigningRequestHeadersTraits
   >;
 }
 
@@ -142,7 +143,6 @@ model SigningPayloadOptions {
 
 @doc("The sign status model.")
 model SignResult {
-
   @doc("Digital signature of the requested content digest.")
   signature?: bytes;
 
@@ -184,3 +184,13 @@ model BytesBody<ContentType> {
   @header
   contentType: ContentType;
 }
+
+alias SigningRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTrait<{
+  @doc("An optional client version.")
+  @header
+  clientVersion: string;
+
+  @doc("An identifier used to batch multiple requests.")
+  @header
+  xCorrelationId: string;
+}>;
