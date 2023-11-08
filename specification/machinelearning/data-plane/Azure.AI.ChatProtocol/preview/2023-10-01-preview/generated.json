@@ -213,9 +213,9 @@
       "type": "object",
       "description": "The representation of a delta message received in a streaming completion.",
       "properties": {
-        "content": {
-          "type": "string",
-          "description": "An incremental part of the text associated with the message."
+        "kind": {
+          "$ref": "#/definitions/MessageKind",
+          "description": "The type of the message. If not specified, the message is assumed to be text."
         },
         "role": {
           "$ref": "#/definitions/ChatRole",
@@ -224,7 +224,11 @@
         "sessionState": {
           "description": "Field that allows the chat app to store and retrieve data, the structure of such data is dependant on the backend\nbeing used. The client must send back the data in this field unchanged in subsequent requests, until the chat app\nsends a new one. The data in this field can be used to implement stateful services, such as remembering previous\nconversations or user preferences."
         }
-      }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "ChatRole": {
       "type": "string",
@@ -377,6 +381,22 @@
       "allOf": [
         {
           "$ref": "#/definitions/ChatMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
+    },
+    "TextChatMessageDelta": {
+      "type": "object",
+      "description": "The representation of a delta text message received in a streaming completion.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "An incremental part of the text associated with the message."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessageDelta"
         }
       ],
       "x-ms-discriminator-value": "text"

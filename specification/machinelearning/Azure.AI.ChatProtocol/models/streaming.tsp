@@ -3,14 +3,24 @@ import "./common.tsp";
 namespace Azure.AI.ChatProtocol;
 
 @doc("The representation of a delta message received in a streaming completion.")
+@discriminator("kind")
 model ChatMessageDelta {
-  @doc("An incremental part of the text associated with the message.")
-  content?: string;
+  @doc("The type of the message. If not specified, the message is assumed to be text.")
+  kind: MessageKind;
 
   @doc("The role associated with the message.")
   role?: ChatRole;
 
   ...StateProperty;
+}
+
+@doc("The representation of a delta text message received in a streaming completion.")
+model TextChatMessageDelta extends ChatMessageDelta {
+  @doc("The type of the message.")
+  kind: MessageKind.text;
+
+  @doc("An incremental part of the text associated with the message.")
+  content?: string;
 }
 
 @doc("The representation of an incremental choice received in a streaming completion.")
