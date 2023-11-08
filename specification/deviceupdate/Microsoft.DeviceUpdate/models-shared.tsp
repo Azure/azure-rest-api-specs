@@ -86,7 +86,7 @@ enum OperationFilterStatus {
   NotStarted,
 }
 
-/** Device deployement state */
+/** Device deployment state */
 enum DeviceDeploymentState {
   /** Deployment has completed with success. */
   Succeeded,

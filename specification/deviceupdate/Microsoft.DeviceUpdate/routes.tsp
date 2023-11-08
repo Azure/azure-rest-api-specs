@@ -30,11 +30,11 @@ interface DeviceUpdateOperations {
     QueryParametersTrait<{
       /** Request updates matching a free-text search expression. */
       @query
-      search: string;
+      search?: string;
 
       /** Optional to filter updates by isDeployable property. */
       @query
-      filter: string;
+      filter?: string;
     }>
   >;
 
@@ -175,7 +175,7 @@ interface DeviceUpdateOperations {
        * supported: \"status eq 'NotStarted' or status eq 'Running'\"
        */
       @query
-      filter: string;
+      filter?: string;
 
       /**
        * Specifies a non-negative integer n that limits the number of items returned
@@ -183,7 +183,7 @@ interface DeviceUpdateOperations {
        * not greater than the specified value n.
        */
       @query
-      top: int32;
+      top?: int32;
     }>
   >;
 
@@ -210,7 +210,8 @@ interface DeviceManagementOperations {
     DeviceClass,
     QueryParametersTrait<{
       /** Restricts the set of device classes returned. You can filter on friendly name. */
-      @query filter: string;
+      @query
+      filter?: string;
     }>
   >;
 
@@ -253,7 +254,8 @@ interface DeviceManagementOperations {
        * DeviceClassId, or GroupId and DeploymentStatus. Use DeploymentStatus eq null to
        * query for devices with no deployment status (that have never been deployed to).
        */
-      @query filter: string;
+      @query
+      filter?: string;
     }>
   >;
 
@@ -326,7 +328,7 @@ interface DeviceManagementOperations {
        * subgroupsWithUpdatesInProgressCount, or subgroupsOnLatestUpdateCount.
        */
       @query
-      orderby: string;
+      orderby?: string;
     }>
   >;
 
@@ -375,7 +377,7 @@ interface DeviceManagementOperations {
     ListQueryParametersTrait<{
       /** Orders the set of deployments returned. You can order by start date. */
       @query
-      orderby: string;
+      orderby?: string;
     }>
   >;
 
@@ -420,7 +422,7 @@ interface DeviceManagementOperations {
        * 'value1' and compatProperties/propertyName2 eq 'value2')
        */
       @query
-      filter: string;
+      filter?: string;
     }>
   >;
 
@@ -474,7 +476,7 @@ interface DeviceManagementOperations {
     ListQueryParametersTrait<{
       /** Orders the set of deployments returned. You can order by start date. */
       @query
-      orderby: string;
+      orderby?: string;
     }>
   >;
 
@@ -524,7 +526,7 @@ interface DeviceManagementOperations {
        * deviceId and moduleId and/or deviceState.
        */
       @query
-      filter: string;
+      filter?: string;
     }>
   >;
 
@@ -541,7 +543,7 @@ interface DeviceManagementOperations {
        * Restricts the set of operations returned. Only one specific filter is supported: \"status eq 'NotStarted' or status eq 'Running'\"
        */
       @query
-      filter: string;
+      filter?: string;
 
       /**
        * Specifies a non-negative integer n that limits the number of items returned
@@ -549,7 +551,7 @@ interface DeviceManagementOperations {
        * not greater than the specified value n.
        */
       @query
-      top: int32;
+      top?: int32;
     }>
   >;
 
@@ -584,7 +586,7 @@ interface DeviceManagementOperations {
        * filter on status, device id and module id.
        */
       @query
-      filter: string;
+      filter?: string;
     }>
   >;
 }
