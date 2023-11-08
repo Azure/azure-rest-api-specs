@@ -4,7 +4,7 @@ import "./parameters.tsp";
 import "./models-compliance.tsp";
 import "./models-deployment.tsp";
 import "./models-device.tsp";
-import "./models-deviceClass.tsp";
+import "./models-deviceclass.tsp";
 import "./models-diagnostics.tsp";
 import "./models-group.tsp";
 import "./models-limits.tsp";
@@ -291,7 +291,7 @@ interface DeviceManagementOperations {
    * Gets the device module properties and latest deployment status for a device
    * module connected to Device Update for IoT Hub.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Get Module API returns model identical to Device."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Get Module API returns model identical to Device and TS complains about duplicate key."
   @route("management/devices/{deviceId}/modules/{moduleId}")
   @get
   getDeviceModule is Azure.Core.Foundations.Operation<
@@ -559,7 +559,7 @@ interface DeviceManagementOperations {
   /** Get the device diagnostics log collection */
   getLogCollection is ServiceOperations.ResourceRead<LogCollection>;
 
-  // TODO: Is there ResourceCreateOnly?
+  // TODO: Is there ResourceCreateOnly? DO resource action with create operation. @createResource @parameterVisibility
   /** Start the device diagnostics log collection on specified devices. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name."
   startLogCollection is ServiceOperations.ResourceCreateOrUpdate<LogCollection>;

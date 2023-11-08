@@ -43,6 +43,7 @@ model Group {
 enum GroupType {
   /** IoT Hub tag based group, all devices in the group share an ADUGroup tag value. */
   IoTHubTag,
+
   /** Default group for untagged devices. */
   DefaultNoTag,
 }
@@ -78,7 +79,8 @@ model DeviceClassSubgroup {
 }
 
 /** The list of updatable devices for a device class subgroup. */
-model DeviceClassSubgroupUpdatableDevicesList is Azure.Core.Page<DeviceClassSubgroupUpdatableDevices>;
+model DeviceClassSubgroupUpdatableDevicesList
+  is Azure.Core.Page<DeviceClassSubgroupUpdatableDevices>;
 
 /** Device class subgroup, update information, and the number of devices for which the update is applicable. */
 model DeviceClassSubgroupUpdatableDevices {

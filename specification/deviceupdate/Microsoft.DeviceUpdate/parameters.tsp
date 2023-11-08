@@ -16,29 +16,26 @@ model IfNoneMatchParameter {
 }
 
 /** Update provider parameter */
-model UpdateProviderParameter
-{
+model UpdateProviderParameter {
   /** Update provider */
   @path
-  provider: string
+  provider: string;
 }
 
 /** Update name parameter. */
-model UpdateNameParameter
-{
-  ...UpdateProviderParameter,
+model UpdateNameParameter {
+  ...UpdateProviderParameter;
 
   /** Update name */
   @path
-  name: string
+  name: string;
 }
 
 /** Update version parameter. */
-model UpdateVersionParameter
-{
-  ...UpdateNameParameter,
+model UpdateVersionParameter {
+  ...UpdateNameParameter;
 
   /** Update version */
   @path
-  version: string
+  version: string;
 }

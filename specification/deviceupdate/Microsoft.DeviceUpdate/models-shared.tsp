@@ -61,9 +61,11 @@ enum OperationStatus {
   Running,
 
   /** Background operation finished with success. */
+  @lroSucceeded
   Succeeded,
 
   /** Background operation finished with failure. */
+  @lroFailed
   Failed,
 }
 
