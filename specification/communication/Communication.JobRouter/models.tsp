@@ -386,16 +386,16 @@ model RouterJob {
   @visibility("read")
   attachedWorkerSelectors?: RouterWorkerSelector[];
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
-  @doc("A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.")
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
+  @doc("A set of key/value pairs that are identifying attributes used by the rules engines to make decisions. Values must be primivite values - number, string, boolean.")
   labels?: Record<unknown>;
 
   @doc("A collection of the assignments of the job. Key is AssignmentId.")
   @visibility("read")
   assignments?: Record<RouterJobAssignment>;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
-  @doc("A set of non-identifying attributes attached to this job")
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
+  @doc("A set of non-identifying attributes attached to this job. Values must be primivite values - number, string, boolean.")
   tags?: Record<unknown>;
 
   @doc("Notes attached to a job, sorted by timestamp")
@@ -417,9 +417,8 @@ model RouterWorkerSelector {
   @doc("Describes how the value of the label is compared to the value defined on the label selector")
   labelOperator: LabelOperator;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
-  #suppress "@azure-tools/typespec-azure-core/no-unknown"
-  @doc("The value to compare against the actual label value with the given operator")
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Unions are currently not allowed in spec."
+  @doc("The value to compare against the actual label value with the given operator. Values must be primivite values - number, string, boolean.")
   value?: unknown;
 
   @doc("Describes how long this label selector is valid in seconds.")
@@ -586,8 +585,8 @@ model RouterQueue {
   @doc("The ID of the distribution policy that will determine how a job is distributed to workers.")
   distributionPolicyId?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
-  @doc("A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.")
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
+  @doc("A set of key/value pairs that are identifying attributes used by the rules engines to make decisions. Values must be primivite values - number, string, boolean.")
   labels?: Record<unknown>;
 
   @doc("The ID of the exception policy that determines various job escalation rules.")
@@ -629,12 +628,12 @@ model RouterWorker {
   @doc("The total capacity score this worker has to manage multiple concurrent jobs.")
   capacity?: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
-  @doc("A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.")
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
+  @doc("A set of key/value pairs that are identifying attributes used by the rules engines to make decisions. Values must be primivite values - number, string, boolean.")
   labels?: Record<unknown>;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
-  @doc("A set of non-identifying attributes attached to this worker.")
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
+  @doc("A set of non-identifying attributes attached to this worker. Values must be primivite values - number, string, boolean.")
   tags?: Record<unknown>;
 
   @doc("The channel(s) this worker can handle and their impact on the workers capacity.")
@@ -774,9 +773,8 @@ model RouterQueueSelector {
   @doc("Describes how the value of the label is compared to the value defined on the label selector")
   labelOperator: LabelOperator;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
-  @doc("The value to compare against the actual label value with the given operator")
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Unions are currently not allowed in spec."
+  @doc("The value to compare against the actual label value with the given operator. Values must be primivite values - number, string, boolean.")
   value?: unknown;
 }
 
@@ -929,8 +927,8 @@ model ReclassifyExceptionAction extends ExceptionAction {
   @doc("The new classification policy that will determine queue, priority and worker selectors.")
   classificationPolicyId?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
-  @doc("Dictionary containing the labels to update (or add if not existing) in key-value pairs")
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Unions are currently not allowed in spec."
+  @doc("Dictionary containing the labels to update (or add if not existing) in key-value pairs.  Values must be primivite values - number, string, boolean.")
   labelsToUpsert?: Record<unknown>;
 
   @doc("The type discriminator describing a sub-type of ExceptionAction")
@@ -972,9 +970,8 @@ model StaticQueueSelectorAttachment extends QueueSelectorAttachment {
 
 @doc("A rule providing static rules that always return the same result, regardless of input.")
 model StaticRouterRule extends RouterRule {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "This accepts only primivite values - number, string, boolean. Unions are currently not allowed in spec."
-  @doc("The static value this rule always returns.")
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Unions are currently not allowed in spec."
+  @doc("The static value this rule always returns. Values must be primivite values - number, string, boolean.")
   value?: unknown;
 
   @doc("The type discriminator describing a sub-type of Rule")
@@ -1047,19 +1044,27 @@ model WorkerWeightedAllocation {
 @doc("Request payload for reclassifying jobs")
 model ReclassifyJobOptions is Record<string>;
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
 @access(Access.internal)
 @doc("Response payload from reclassifying a job")
-model ReclassifyJobResult is Record<unknown>;
+model ReclassifyJobResult {}
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
+@doc("OK Response payload from reclassifying a job.")
+model ReclassifyJobResultWithOkResponse {
+  @doc("Response payload from reclassifying a job.")
+  @body
+  body: ReclassifyJobResult;
+
+  @doc("Status code.")
+  @statusCode
+  _: 200;
+}
+
 @access(Access.internal)
 @doc("Response payload from closing a job")
-model CloseJobResult is Record<unknown>;
+model CloseJobResult {}
 
 @doc("Response payload from closing a job synchronously.")
 model CloseJobResultWithOkResponse {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
   @doc("Response after closing a job.")
   @body
   body: CloseJobResult;
@@ -1069,14 +1074,12 @@ model CloseJobResultWithOkResponse {
   _: 200;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
 @access(Access.internal)
 @doc("Response payload from cancelling a job")
-model CancelJobResult is Record<unknown>;
+model CancelJobResult {}
 
 @doc("OK Response payload from cancelling a job")
 model CancelJobResultWithOkResponse {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
   @doc("Response after cancelling a job.")
   @body
   body: CancelJobResult;
@@ -1086,14 +1089,12 @@ model CancelJobResultWithOkResponse {
   _: 200;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
 @access(Access.internal)
 @doc("Response payload from completing a job")
-model CompleteJobResult is Record<unknown>;
+model CompleteJobResult {}
 
 @doc("OK Response payload from completing a job")
 model CompleteJobResultWithOkResponse {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
   @doc("Response after completing a job.")
   @body
   body: CompleteJobResult;
@@ -1103,14 +1104,12 @@ model CompleteJobResultWithOkResponse {
   _: 200;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
 @access(Access.internal)
 @doc("Response payload from declining a job")
-model DeclineJobOfferResult is Record<unknown>;
+model DeclineJobOfferResult {}
 
 @doc("OK Response payload from declining a job.")
 model DeclineJobOfferResultWithOkResponse {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/microsoft/typespec/issues/2542"
   @doc("Response payload from declining a job.")
   @body
   body: DeclineJobOfferResult;
