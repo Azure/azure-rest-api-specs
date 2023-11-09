@@ -87,7 +87,7 @@ namespace SkillContext {
   op getInput(
     @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
     @body getInputRequest : GetInputRequest,
-  ): SkillVariable;
+  ): SkillVariable | NoContentResponse ;
 
   @post
   @route("setInputAsync")
