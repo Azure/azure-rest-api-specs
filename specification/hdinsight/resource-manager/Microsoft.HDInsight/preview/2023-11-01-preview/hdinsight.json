@@ -3415,9 +3415,17 @@
           "description": "Current AKS version.",
           "type": "string"
         },
-        "isDeprecated": {
-          "description": "Whether Current AKS version is deprecated",
-          "type": "boolean"
+        "currentVersionStatus": {
+          "description": "Current AKS version's status: whether it is deprecated or supported",
+          "enum": [
+            "Deprecated",
+            "Supported"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "currentClusterPoolAksVersionStatus",
+            "modelAsString": true
+          }
         },
         "latestVersion": {
           "description": "Latest AKS patch version.",
@@ -3514,9 +3522,17 @@
           "description": "Current node pool version.",
           "type": "string"
         },
-        "isDeprecated": {
-          "description": "Whether Current node pool version is deprecated",
-          "type": "boolean"
+        "currentVersionStatus": {
+          "description": "Current AKS version's status: whether it is deprecated or supported",
+          "enum": [
+            "Deprecated",
+            "Supported"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "currentClusterAksVersionStatus",
+            "modelAsString": true
+          }
         },
         "latestVersion": {
           "description": "Latest available version, which should be equal to aks control plane version if it's not deprecated.",
