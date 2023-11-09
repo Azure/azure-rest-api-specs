@@ -41,6 +41,11 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2024-01-01-preview/registries.json
   - Microsoft.MachineLearningServices/preview/2024-01-01-preview/workspaceFeatures.json
   - Microsoft.MachineLearningServices/preview/2024-01-01-preview/workspaceRP.json
+suppressions:
+  - code: PathForResourceAction
+    reason: Keep identical to stable GA version to avoid breaking changes. https://dev.azure.com/msdata/Vienna/_workitems/edit/2803196
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}"].post
 ```
 ### Tag: package-preview-2023-08
 
