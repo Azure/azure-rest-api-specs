@@ -1,0 +1,3435 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DeviceUpdate",
+    "description": "Microsoft Device Update resource provider.",
+    "version": "2024-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceUpdate/checknameavailability": {
+      "post": {
+        "description": "Checks ADU resource name availability.",
+        "operationId": "CheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+            },
+            "in": "body",
+            "name": "request",
+            "required": true,
+            "description": "Check Name Availability Request."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Check Name Availability Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckNameAvailability_Available": {
+            "$ref": "./examples/CheckNameAvailability_Available.json"
+          },
+          "CheckNameAvailability_AlreadyExists": {
+            "$ref": "./examples/CheckNameAvailability_AlreadyExists.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceUpdate/updateAccounts": {
+      "get": {
+        "description": "Returns list of Update Accounts.",
+        "operationId": "UpdateAccounts_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Update Accounts.",
+            "schema": {
+              "$ref": "#/definitions/UpdateAccountList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get list of UpdateAccounts": {
+            "$ref": "./examples/UpdateAccounts/UpdateAccounts_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts": {
+      "get": {
+        "description": "Returns list of Update Accounts.",
+        "operationId": "UpdateAccounts_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Update Accounts.",
+            "schema": {
+              "$ref": "#/definitions/UpdateAccountList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of Accounts": {
+            "$ref": "./examples/UpdateAccounts/UpdateAccounts_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}": {
+      "get": {
+        "description": "Returns update account details for the given update account name.",
+        "operationId": "UpdateAccounts_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update account details.",
+            "schema": {
+              "$ref": "#/definitions/UpdateAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets Update Account details": {
+            "$ref": "./examples/UpdateAccounts/UpdateAccounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates or updates an Update Account.",
+        "operationId": "UpdateAccounts_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "name": "UpdateAccount",
+            "description": "Update Account details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Async operation to create or update an Update Account succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UpdateAccount"
+            }
+          },
+          "201": {
+            "description": "Async operation to create or update an Update Account was created.",
+            "schema": {
+              "$ref": "#/definitions/UpdateAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates an Update Account": {
+            "$ref": "./examples/UpdateAccounts/UpdateAccounts_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an update account.",
+        "operationId": "UpdateAccounts_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Async operation to delete an Update Account was created.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              }
+            }
+          },
+          "204": {
+            "description": "Update Account has been already deleted."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an update account": {
+            "$ref": "./examples/UpdateAccounts/UpdateAccounts_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates update account's patchable properties",
+        "operationId": "UpdateAccounts_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "name": "updateAccountUpdatePayload",
+            "description": "Updated Update Account.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateAccountUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update Account updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateAccount"
+            }
+          },
+          "202": {
+            "description": "Async operation to update an update account was created.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UpdateAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Updates Update Account": {
+            "$ref": "./examples/UpdateAccounts/UpdateAccounts_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/calculateUpdateCompliance": {
+      "post": {
+        "description": "Calculate update compliance for the Account.",
+        "operationId": "Accounts_CalculateUpdateCompliance",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The update compliance details for the Account.",
+            "schema": {
+              "$ref": "#/definitions/UpdateCompliance"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Calculates Update Compliance": {
+            "$ref": "./examples/UpdateAccounts/UpdateAccounts_CalculateUpdateCompliance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/calculateHighestVersionUpdates": {
+      "post": {
+        "description": "Calculate the highest version updates for the Account.",
+        "operationId": "UpdateAccounts_CalculateHighestVersionUpdates",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The highest version updates for the Account.",
+            "schema": {
+              "$ref": "#/definitions/DeviceClassUpdatableDevicesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Calculates Highest Version Updates": {
+            "$ref": "./examples/UpdateAccounts/UpdateAccounts_CalculateHighestVersionUpdates.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/importUpdate": {
+      "post": {
+        "description": "Import update into given update account.",
+        "operationId": "UpdateAccounts_ImportUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "updateToImport",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportUpdateInput"
+            },
+            "description": "The update to be imported (see schema https://json.schemastore.org/azure-deviceupdate-import-manifest-5.0.json for details)."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates the import operation is performed in the background.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Import Update": {
+            "$ref": "./examples/UpdateAccounts/UpdateAccounts_ImportUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/updates": {
+      "get": {
+        "description": "Returns list of Updates.",
+        "operationId": "Updates_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Updates.",
+            "schema": {
+              "$ref": "#/definitions/UpdateList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of Updates": {
+            "$ref": "./examples/Updates/Updates_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/updates/{updateResourceName}": {
+      "put": {
+        "description": "Create update resource.",
+        "operationId": "Updates_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "update",
+            "description": "Update details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update is created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
+          "201": {
+            "description": "Update is created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets Update details": {
+            "$ref": "./examples/Updates/Updates_Create.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Returns update details.",
+        "operationId": "Updates_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update details.",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets Update details": {
+            "$ref": "./examples/Updates/Updates_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes update.",
+        "operationId": "Updates_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Async operation to delete an Update was created.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              }
+            }
+          },
+          "204": {
+            "description": "Update has been already deleted."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an update": {
+            "$ref": "./examples/Updates/Updates_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update update tags.",
+        "operationId": "Updates_Modify",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "tagUpdatePayload",
+            "description": "Updated tags.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update tags updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates Update Account": {
+            "$ref": "./examples/Updates/Updates_Modify.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/agents": {
+      "get": {
+        "description": "Returns agents for the given update account name.",
+        "operationId": "Agents_ListByUpdateAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Agents.",
+            "schema": {
+              "$ref": "#/definitions/AgentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of Agents by an Update Account": {
+            "$ref": "./examples/Agents/Agents_ListByUpdateAccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/agents/{agentName}": {
+      "get": {
+        "description": "Returns agent details.",
+        "operationId": "Agents_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent details.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets details for an agent": {
+            "$ref": "./examples/Agents/Agents_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates or updates an Agent.",
+        "operationId": "Agents_Create",
+        "x-ms-long-running-operation": false,
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "agent",
+            "description": "Agent details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent was created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "201": {
+            "description": "Agent was created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates Agent": {
+            "$ref": "./examples/Agents/Agents_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete Agent.",
+        "operationId": "Agents_Delete",
+        "x-ms-long-running-operation": false,
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent was deleted."
+          },
+          "204": {
+            "description": "Agent has been already deleted."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes Agent": {
+            "$ref": "./examples/Agents/Agents_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates Agent.",
+        "operationId": "Agents_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "tagUpdatePayload",
+            "description": "Updated tags.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates Agent": {
+            "$ref": "./examples/Agents/Agents_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/deviceClasses": {
+      "get": {
+        "description": "Returns device compatibility classes for the given account name.",
+        "operationId": "DeviceClasses_ListByUpdateAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Device Classes.",
+            "schema": {
+              "$ref": "#/definitions/DeviceClassList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of Device Compatibility Classes by Account": {
+            "$ref": "./examples/DeviceClasses/DeviceClasses_ListByUpdateAccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/deviceClasses/{deviceClassName}": {
+      "get": {
+        "description": "Returns Device Class details.",
+        "operationId": "DeviceClasses_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceClassNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Device Class details.",
+            "schema": {
+              "$ref": "#/definitions/DeviceClass"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets details for a Device Class": {
+            "$ref": "./examples/DeviceClasses/DeviceClasses_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates or updates a Device Class.",
+        "operationId": "DeviceClasses_Create",
+        "x-ms-long-running-operation": false,
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceClassNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "deviceClass",
+            "description": "Device Class details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceClass"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Device Class was created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceClass"
+            }
+          },
+          "201": {
+            "description": "Device Class was created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceClass"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates Device Class": {
+            "$ref": "./examples/DeviceClasses/DeviceClasses_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete Device Class.",
+        "operationId": "DeviceClasses_Delete",
+        "x-ms-long-running-operation": false,
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceClassNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Device Class was deleted."
+          },
+          "204": {
+            "description": "Device Class has been already deleted."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes Device Class": {
+            "$ref": "./examples/DeviceClasses/DeviceClasses_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates Device Class.",
+        "operationId": "DeviceClasses_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceClassNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "tagUpdatePayload",
+            "description": "Updated tags.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Device Class updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceClass"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates Device Class": {
+            "$ref": "./examples/DeviceClasses/DeviceClasses_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/activeDeployments": {
+      "get": {
+        "description": "Returns active deployments for the given update account name.",
+        "operationId": "ActiveDeployments_ListByUpdateAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Active Deployments.",
+            "schema": {
+              "$ref": "#/definitions/ActiveDeploymentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of Active Deployments by Update Account": {
+            "$ref": "./examples/ActiveDeployments/ActiveDeployments_ListByUpdateAccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/activeDeployments/{activeDeploymentName}": {
+      "get": {
+        "description": "Returns Active Deployment details.",
+        "operationId": "ActiveDeployments_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ActiveDeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Active Deployment details.",
+            "schema": {
+              "$ref": "#/definitions/ActiveDeployment"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets details for an Active Deployment": {
+            "$ref": "./examples/ActiveDeployments/ActiveDeployments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates or updates an Active Deployment.",
+        "operationId": "ActiveDeployments_Create",
+        "x-ms-long-running-operation": false,
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ActiveDeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "activeDeployment",
+            "description": "Active Deployment details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActiveDeployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Active Deployment was created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/ActiveDeployment"
+            }
+          },
+          "201": {
+            "description": "Active Deployment was created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/ActiveDeployment"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates Active Deployment": {
+            "$ref": "./examples/ActiveDeployments/ActiveDeployments_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete Active Deployment.",
+        "operationId": "ActiveDeployments_Delete",
+        "x-ms-long-running-operation": false,
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ActiveDeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Active Deployment was deleted."
+          },
+          "204": {
+            "description": "Active Deployment has been already deleted."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes Active Deployment": {
+            "$ref": "./examples/ActiveDeployments/ActiveDeployments_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates Active Deployment.",
+        "operationId": "ActiveDeployments_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ActiveDeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "tagUpdatePayload",
+            "description": "Updated tags.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Active Deployment updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/ActiveDeployment"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates Active Deployment": {
+            "$ref": "./examples/ActiveDeployments/ActiveDeployments_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/deployments": {
+      "get": {
+        "description": "Returns deployments for the given update account name.",
+        "operationId": "Deployments_ListByUpdateAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Deployments.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of Deployments by Account": {
+            "$ref": "./examples/Deployments/Deployments_ListByUpdateAccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/deployments/{deploymentName}": {
+      "get": {
+        "description": "Returns Deployment details.",
+        "operationId": "Deployments_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployment details.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets details for a Deployment": {
+            "$ref": "./examples/Deployments/Deployments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates or updates a Deployment.",
+        "operationId": "Deployments_Create",
+        "x-ms-long-running-operation": false,
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "deployment",
+            "description": "Deployment details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployment was created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "201": {
+            "description": "Deployment was created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a Deployment": {
+            "$ref": "./examples/Deployments/Deployments_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete Deployment.",
+        "operationId": "Deployments_Delete",
+        "x-ms-long-running-operation": false,
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployment was deleted."
+          },
+          "204": {
+            "description": "Deployment has been already deleted."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes Deployment": {
+            "$ref": "./examples/Deployments/Deployments_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates Deployment.",
+        "operationId": "Deployments_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "tagUpdatePayload",
+            "description": "Updated tags.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deployment updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates Deployment": {
+            "$ref": "./examples/Deployments/Deployments_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/deployments/{deploymentName}/calculateStatus": {
+      "post": {
+        "description": "Calculate the status of a deployment including a breakdown of how many devices in the deployment are in progress, completed, or failed.",
+        "operationId": "Deployments_CalculateStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the deployment.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the status of a Deployment": {
+            "$ref": "./examples/Deployments/Deployments_CalculateStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}/deployments/{deploymentName}/calculateDeviceStates": {
+      "post": {
+        "description": "Calculates the list of devices in a deployment along with their state. Useful for getting a list of failed devices.",
+        "operationId": "Deployments_CalculateDeviceStates",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "filter",
+            "description": "Device state filter. Uses OData syntax. Example: deviceState eq 'Succeeded'",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The devices in the deployment along with their states.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentDeviceStatesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of devices in a Deployment": {
+            "$ref": "./examples/Deployments/Deployments_CalculateDeviceStates.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DeviceUpdate/operations": {
+      "get": {
+        "description": "Returns list of operations for Microsoft.DeviceUpdate resource provider.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of Operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UpdateAccount": {
+      "description": "Device Update update account details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Device Update update account properties.",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state.",
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Deleted",
+                "Failed",
+                "Canceled",
+                "Accepted",
+                "Creating",
+                "Deleting"
+              ],
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "sku": {
+              "description": "Device Update Acount Sku",
+              "type": "string",
+              "enum": [
+                "Free",
+                "Standard"
+              ],
+              "default": "Standard",
+              "readOnly": false,
+              "x-ms-enum": {
+                "name": "SKU",
+                "modelAsString": true
+              }
+            },
+            "encryption": {
+              "$ref": "#/definitions/Encryption",
+              "description": "CMK encryption at rest properties"
+            },
+            "locations": {
+              "description": "Device Update update account primary and failover location details",
+              "readOnly": true,
+              "x-ms-identifiers": [],
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Location"
+              }
+            },
+            "mqttBrokerEndpoints": {
+              "description": "MQTT Broker endpoints used for device communication.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deviceEnrollmentScope": {
+              "description": "Subscription or resource group used for device enrollment.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "deviceEnrollmentManagedIdentityResourceId": {
+              "description": "User assigned managed identity used for device enrollment.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "mqttBrokerEndpoints",
+            "deviceEnrollmentScope",
+            "deviceEnrollmentManagedIdentityResourceId"
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The type of identity used for the resource."
+        }
+      }
+    },
+    "Encryption": {
+      "type": "object",
+      "properties": {
+        "keyVaultKeyUri": {
+          "description": "The URI of the key vault",
+          "type": "string"
+        },
+        "userAssignedIdentity": {
+          "description": "The full resourceId of the user assigned identity to be used for key vault access. Identity has to be also assigned to the Account",
+          "type": "string"
+        }
+      },
+      "description": "The CMK encryption settings on the Device Update account."
+    },
+    "Location": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "role": {
+          "description": "Whether the location is primary or failover",
+          "default": "Primary",
+          "enum": [
+            "Primary",
+            "Failover"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Role",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "UpdateAccountList": {
+      "description": "List of Update Accounts.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Update Accounts list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of Update Accounts.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/UpdateAccount"
+          }
+        }
+      }
+    },
+    "UpdateAccountUpdate": {
+      "description": "Request payload used to update an existing Update Account.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The type of identity used for the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TagUpdate"
+        }
+      ]
+    },
+    "TagUpdate": {
+      "description": "Request payload used to update an existing resource's tags.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "List of key value pairs that describe the resource. This will overwrite the existing tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpdateProtocol": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The update protocol identifier",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "The update protocol representing the version of the device update protocol the agent supports."
+    },
+    "AgentInfo": {
+      "type": "object",
+      "properties": {
+        "updateProtocol": {
+          "description": "The update protocol representing the version of the device update protocol the agent supports",
+          "$ref": "#/definitions/UpdateProtocol"
+        },
+        "compatibilityProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The compat properties of the agent. This object can be thought of as a set of key-value pairs where the key is the name of the compatibility property and the value is the value of the compatibility property. There will always be at least 1 compat property and no more than 5"
+        },
+        "sequenceNumber": {
+          "description": "The sequence number of the agent info used to distinguish whether the agent info needs to be updated from the agent",
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "description": "The agent info for the agent that indicates what updates it is compatible with."
+    },
+    "DeploymentAction": {
+      "type": "string",
+      "enum": [
+        "ApplyDeployment"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ApplyDeployment",
+            "name": "ApplyDeployment",
+            "description": "Apply the deployment to the agent"
+          }
+        ]
+      },
+      "description": "The deployment action the agent take"
+    },
+    "DeploymentWorkflow": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Deployment identifier."
+        },
+        "action": {
+          "$ref": "#/definitions/DeploymentAction",
+          "description": "Deployment action."
+        },
+        "retryTimestamp": {
+          "type": "string",
+          "description": "Datetime when the call requested the deployment be retried."
+        }
+      },
+      "required": [
+        "id",
+        "action"
+      ],
+      "description": "Deployment workflow metadata."
+    },
+    "StepResult": {
+      "type": "object",
+      "properties": {
+        "updateId": {
+          "$ref": "#/definitions/UpdateId",
+          "description": "The update that this step installs if it is of reference type."
+        },
+        "description": {
+          "type": "string",
+          "description": "Step description."
+        },
+        "resultCode": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Install result code."
+        },
+        "extendedResultCode": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Install extended result code"
+        },
+        "resultDetails": {
+          "type": "string",
+          "description": "A string containing further details about the install result"
+        }
+      },
+      "required": [
+        "resultCode",
+        "extendedResultCode"
+      ],
+      "description": "The step result under an update."
+    },
+    "InstallResult": {
+      "type": "object",
+      "properties": {
+        "resultCode": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Install result code."
+        },
+        "extendedResultCode": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Install extended result code"
+        },
+        "resultDetails": {
+          "type": "string",
+          "description": "A string containing further details about the install result"
+        },
+        "stepResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StepResult",
+            "description": "Step results"
+          },
+          "x-ms-identifiers": [],
+          "description": "Array of step results"
+        }
+      },
+      "required": [
+        "resultCode",
+        "extendedResultCode"
+      ],
+      "description": "The install result of an update and any step results under it."
+    },
+    "DeviceDeploymentState": {
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "InProgress",
+        "Canceled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceDeploymentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Succeeded",
+            "name": "Succeeded",
+            "description": "Deployment has completed with success."
+          },
+          {
+            "value": "InProgress",
+            "name": "InProgress",
+            "description": "Deployment is in progress."
+          },
+          {
+            "value": "Canceled",
+            "name": "Canceled",
+            "description": "Deployment was canceled."
+          },
+          {
+            "value": "Failed",
+            "name": "Failed",
+            "description": "Deployment has completed with failure."
+          }
+        ]
+      },
+      "description": "Deployment state."
+    },
+    "DeploymentDeviceStatesList": {
+      "description": "The list of deployment device states.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of pageable items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentDeviceState"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link to the next page of items.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeploymentDeviceState": {
+      "type": "object",
+      "properties": {
+        "agentId": {
+          "type": "string",
+          "description": "Agent identity."
+        },
+        "retryCount": {
+          "type": "integer",
+          "description": "The number of times this deployment has been retried on this device.",
+          "format": "int32"
+        },
+        "movedOnToNewDeployment": {
+          "type": "boolean",
+          "description": "Boolean flag indicating whether this device is in a newer deployment and can no longer retry this deployment."
+        },
+        "deviceState": {
+          "$ref": "#/definitions/DeviceDeploymentState",
+          "description": "Deployment device state."
+        }
+      },
+      "required": [
+        "agentId",
+        "retryCount",
+        "movedOnToNewDeployment",
+        "deviceState"
+      ],
+      "description": "Deployment device status."
+    },
+    "DeploymentStatus": {
+      "description": "Deployment status metadata.",
+      "type": "object",
+      "properties": {
+        "deploymentState": {
+          "description": "The state of the deployment.",
+          "$ref": "#/definitions/DeploymentState"
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+          "description": "The error details of the Failed state.  This is not present if the deployment state is not Failed."
+        },
+        "subgroupStatus": {
+          "type": "array",
+          "description": "The collection of device class subgroup status objects",
+          "items": {
+            "$ref": "#/definitions/DeviceClassSubgroupDeploymentStatus"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "deploymentState",
+        "subgroupStatus"
+      ]
+    },
+    "DeploymentState": {
+      "description": "Deployment state.",
+      "type": "string",
+      "enum": [
+        "Active",
+        "ActiveWithSubgroupFailures",
+        "Failed",
+        "Inactive",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Active",
+            "name": "Active",
+            "description": "The deployment can be sent to devices targeted in the deployment."
+          },
+          {
+            "value": "ActiveWithSubgroupFailures",
+            "name": "ActiveWithSubgroupFailures",
+            "description": "The deployment can be sent to some devices targeted in the deployment but at least 1 subgroup is in a failed state."
+          },
+          {
+            "value": "Failed",
+            "name": "Failed",
+            "description": "The deployment will not be sent to any devices.  Consult error for more details about what failed."
+          },
+          {
+            "value": "Inactive",
+            "name": "Inactive",
+            "description": "A newer deployment for this group has been created and no devices in the group will receive this deployment."
+          },
+          {
+            "value": "Canceled",
+            "name": "Canceled",
+            "description": "The deployment has been canceled and no devices will receive it."
+          }
+        ]
+      }
+    },
+    "DeviceClassSubgroupDeploymentStatus": {
+      "description": "Device class subgroup deployment status metadata.",
+      "type": "object",
+      "properties": {
+        "deviceClassId": {
+          "type": "string",
+          "description": "The device class subgroup identity"
+        },
+        "deploymentState": {
+          "$ref": "#/definitions/DeviceClassSubgroupDeploymentState",
+          "description": "The state of the subgroup deployment."
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+          "description": "The error details of the Failed state.  This is not present if the deployment state is not Failed."
+        },
+        "totalDevices": {
+          "type": "integer",
+          "description": "The total number of devices in the deployment.",
+          "format": "int32"
+        },
+        "devicesInProgressCount": {
+          "type": "integer",
+          "description": "The number of devices that are currently in deployment.",
+          "format": "int32"
+        },
+        "devicesCompletedFailedCount": {
+          "type": "integer",
+          "description": "The number of devices that have completed deployment with a failure.",
+          "format": "int32"
+        },
+        "devicesCompletedSucceededCount": {
+          "type": "integer",
+          "description": "The number of devices which have successfully completed deployment.",
+          "format": "int32"
+        },
+        "devicesCanceledCount": {
+          "type": "integer",
+          "description": "The number of devices which have had their deployment canceled.",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "deviceClassId",
+        "deploymentState"
+      ]
+    },
+    "DeviceClassSubgroupDeploymentState": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Failed",
+        "Inactive",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceClassSubgroupDeploymentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Active",
+            "name": "Active",
+            "description": "The subgroup deployment can be sent to devices targeted in the deployment."
+          },
+          {
+            "value": "Failed",
+            "name": "Failed",
+            "description": "The subgroup deployment failed and will not be sent to any devices."
+          },
+          {
+            "value": "Inactive",
+            "name": "Inactive",
+            "description": "A newer deployment for this subgroup has been created and no devices in the subgroup will receive this deployment."
+          },
+          {
+            "value": "Canceled",
+            "name": "Canceled",
+            "description": "The subgroup deployment has been canceled and no devices will receive it."
+          }
+        ]
+      }
+    },
+    "DeploymentInfo": {
+      "type": "object",
+      "properties": {
+        "workflow": {
+          "description": "The deployment workflow metadata",
+          "$ref": "#/definitions/DeploymentWorkflow"
+        },
+        "updateId": {
+          "description": "The update Id for the deployment",
+          "$ref": "#/definitions/UpdateId"
+        },
+        "state": {
+          "description": "The state the agent is in this deployment",
+          "$ref": "#/definitions/DeviceDeploymentState"
+        },
+        "installResult": {
+          "description": "The deployment install result",
+          "$ref": "#/definitions/InstallResult"
+        }
+      },
+      "description": "The agent metadata for a deployment."
+    },
+    "AgentEnrollmentStatus": {
+      "type": "object",
+      "description": "Agent enrollment status.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/AgentEnrollmentState",
+          "description": "The agent enrollment state."
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "The agent enrollment error detail. This is only populated when state is Failed"
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "AgentEnrollmentState": {
+      "type": "string",
+      "description": "The agent enrollment state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "AgentEnrollmentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Succeeded",
+            "name": "Succeeded",
+            "description": "Agent enrollment succeeded."
+          },
+          {
+            "value": "Failed",
+            "name": "Failed",
+            "description": "Agent enrollment failed."
+          },
+          {
+            "value": "InProgress",
+            "name": "InProgress",
+            "description": "Agent enrollment is in progress."
+          }
+        ]
+      }
+    },
+    "Agent": {
+      "description": "Device Update Agent details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Device Update Agent properties.",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state.",
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Deleted",
+                "Failed",
+                "Canceled",
+                "Accepted",
+                "Creating",
+                "Deleting"
+              ],
+              "readOnly": false,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "agentId": {
+              "description": "This is the external device Id of the Microsoft.Devices/Device resource referenced by this agent",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "deviceClassId": {
+              "description": "This is the ID of the device class of this agent",
+              "type": "string"
+            },
+            "deviceResourceId": {
+              "description": "This is the resource Id of the Microsoft.Devices/Device resource referenced by this agent",
+              "type": "string"
+            },
+            "activeMqttBrokerEndpoint": {
+              "description": "This is the active MQTT broker endpoint for this agent",
+              "type": "string"
+            },
+            "agentInfo": {
+              "description": "This is the compatibility info for the agent that indicates what version of the device update protocol it supports and its compat properties.",
+              "$ref": "#/definitions/AgentInfo"
+            },
+            "latestDeploymentInfo": {
+              "description": "This is the metadata about the latest deployment the agent has attempted",
+              "$ref": "#/definitions/DeploymentInfo"
+            },
+            "installedUpdateId": {
+              "description": "The current installed update Id on this agent",
+              "$ref": "#/definitions/UpdateId"
+            },
+            "enrollmentStatus": {
+              "description": "Enrollment status",
+              "$ref": "#/definitions/AgentEnrollmentStatus"
+            },
+            "deviceUuid": {
+              "description": "This is the device UUID for this agent",
+              "type": "string"
+            }
+          },
+          "required": [
+            "deviceResourceId",
+            "enrollmentStatus",
+            "deviceUuid"
+          ]
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "AgentList": {
+      "description": "List of Agents.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Agents list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of Agents.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/Agent",
+            "description": "Agent details."
+          }
+        }
+      }
+    },
+    "DeviceClassInfo": {
+      "type": "object",
+      "properties": {
+        "updateProtocol": {
+          "description": "The update protocol representing the version of the device update protocol the agent supports",
+          "$ref": "#/definitions/UpdateProtocol"
+        },
+        "compatibilityProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The compat properties of the device class. This object can be thought of as a set of key-value pairs where the key is the name of the compatibility property and the value is the value of the compatibility property. There will always be at least 1 compat property and no more than 5"
+        }
+      },
+      "description": "The compatiblity info for the device class that indicates what updates it is compatible with."
+    },
+    "DeviceClass": {
+      "description": "Device Update Device Class details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Device Update Device Class properties.",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state.",
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Deleted",
+                "Failed",
+                "Canceled",
+                "Accepted",
+                "Creating",
+                "Deleting"
+              ],
+              "readOnly": false,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "deviceClassId": {
+              "description": "This is the ID of the Device Class",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "deviceClassInfo": {
+              "description": "This is the compatibility info for the device class that will be used to check compatibility with updates.",
+              "$ref": "#/definitions/DeviceClassInfo"
+            },
+            "highestVersionCompatibleUpdateId": {
+              "description": "UpdateId that is the highest version compatible with this device compatibility class.",
+              "$ref": "#/definitions/UpdateId"
+            },
+            "installableUpdates": {
+              "description": "The list of installable update Ids.",
+              "type": "array",
+              "x-ms-identifiers": [],
+              "items": {
+                "$ref": "#/definitions/UpdateId"
+              }
+            }
+          },
+          "required": [
+            "deviceClassId",
+            "deviceClassInfo"
+          ]
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "DeviceClassList": {
+      "description": "List of Device Classes.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Device Classes list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of Device Classes.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/DeviceClass",
+            "description": "Device Class details."
+          }
+        }
+      }
+    },
+    "ActiveDeployment": {
+      "description": "The details of an active deployment that is currently being offered to agents.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Active Deployment properties.",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state.",
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Deleted",
+                "Failed",
+                "Canceled",
+                "Accepted",
+                "Creating",
+                "Deleting"
+              ],
+              "readOnly": false,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "deploymentId": {
+              "description": "The deployment Id",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "startDateTime": {
+              "description": "The start date for the active deployment",
+              "type": "string",
+              "format": "date-time",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "deviceClassId": {
+              "description": "The device class Id",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "updateProtocol": {
+              "description": "The update protocol",
+              "$ref": "#/definitions/UpdateProtocol",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "workflow": {
+              "description": "The deployment workflow metadata",
+              "$ref": "#/definitions/DeploymentWorkflow",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "updateManifest": {
+              "description": "The update manifest that contains all of the metadata for the active deployment",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "updateManifestSignature": {
+              "description": "The update manifest signature that is used to validate the integrity of the update manifest",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            }
+          },
+          "required": [
+            "deploymentId",
+            "startDateTime",
+            "deviceClassId",
+            "updateProtocol",
+            "workflow",
+            "updateManifest",
+            "updateManifestSignature"
+          ]
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ActiveDeploymentList": {
+      "description": "List of Active Deployments.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Active Deployments list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of Active Deployments.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/ActiveDeployment",
+            "description": "Active Deployment details."
+          }
+        }
+      }
+    },
+    "Deployment": {
+      "description": "Deployment details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Deployment properties.",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state.",
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Deleted",
+                "Failed",
+                "Canceled",
+                "Accepted",
+                "Creating",
+                "Deleting"
+              ],
+              "readOnly": false,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "deploymentId": {
+              "description": "The caller-provided deployment identifier. This cannot be longer than 73 characters, must be all lower-case, and cannot contain '&', '^', '[', ']', '{', '}', '|', '<', '>', forward slash, backslash, or double quote.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "startDateTime": {
+              "type": "string",
+              "description": "The deployment start datetime.",
+              "format": "date-time",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "updateId": {
+              "description": "UpdateId that is deployed as part of this deployment.",
+              "$ref": "#/definitions/UpdateId",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "deviceClasses": {
+              "description": "The device classes the deployment is compatible with. This is not provided by the caller during creating the deployment but is automatically determined by Device Update",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            }
+          },
+          "required": [
+            "deploymentId",
+            "startDateTime",
+            "updateId"
+          ]
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "DeploymentList": {
+      "description": "List of Deployments.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of the Deployments list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of Deployments.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/Deployment",
+            "description": "Deployment details."
+          }
+        }
+      }
+    },
+    "ImportUpdateInput": {
+      "type": "array",
+      "x-ms-identifiers": [],
+      "items": {
+        "$ref": "#/definitions/ImportUpdateInputItem"
+      },
+      "minItems": 1,
+      "maxItems": 11,
+      "description": "Import update input metadata."
+    },
+    "ImportUpdateInputItem": {
+      "type": "object",
+      "properties": {
+        "importManifest": {
+          "$ref": "#/definitions/ImportManifestMetadata",
+          "description": "Import manifest metadata like source URL, file size/hashes, etc."
+        },
+        "friendlyName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "description": "Friendly update name."
+        },
+        "files": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/FileImportMetadata"
+          },
+          "minItems": 0,
+          "maxItems": 10,
+          "description": "One or more update file properties like filename and source URL."
+        }
+      },
+      "required": [
+        "importManifest"
+      ],
+      "description": "Import update input item metadata."
+    },
+    "ImportManifestMetadata": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Azure Blob location from which the import manifest can be downloaded by Device Update for IoT Hub. This is typically a read-only SAS-protected blob URL with an expiration set to at least 4 hours."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "description": "File size in number of bytes.",
+          "format": "int64"
+        },
+        "hashes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "minItems": 1
+          },
+          "description": "A JSON object containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm."
+        }
+      },
+      "required": [
+        "url",
+        "sizeInBytes",
+        "hashes"
+      ],
+      "description": "Metadata describing the import manifest, a document which describes the files and other metadata about an update version."
+    },
+    "FileImportMetadata": {
+      "type": "object",
+      "properties": {
+        "filename": {
+          "type": "string",
+          "description": "Update file name as specified inside import manifest."
+        },
+        "url": {
+          "type": "string",
+          "description": "Azure Blob location from which the update file can be downloaded by Device Update for IoT Hub. This is typically a read-only SAS-protected blob URL with an expiration set to at least 4 hours."
+        }
+      },
+      "required": [
+        "filename",
+        "url"
+      ],
+      "description": "Metadata describing an update file."
+    },
+    "UpdateList": {
+      "description": "List of Updates.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Update list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of Updates.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/Update"
+          }
+        }
+      }
+    },
+    "UpdateId": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Update provider."
+        },
+        "name": {
+          "type": "string",
+          "description": "Update name."
+        },
+        "version": {
+          "type": "string",
+          "description": "Update version."
+        }
+      },
+      "required": [
+        "provider",
+        "name",
+        "version"
+      ],
+      "description": "Update identifier."
+    },
+    "Update": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Update properties.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "type": "object",
+          "properties": {
+            "updateId": {
+              "$ref": "#/definitions/UpdateId",
+              "description": "Update identity."
+            },
+            "description": {
+              "type": "string",
+              "description": "Update description specified by creator.",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "friendlyName": {
+              "type": "string",
+              "description": "Friendly update name specified by importer.",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "isDeployable": {
+              "type": "boolean",
+              "description": "Whether the update can be deployed to a device on its own.",
+              "default": true
+            },
+            "compatibility": {
+              "type": "array",
+              "x-ms-identifiers": [],
+              "items": {
+                "$ref": "#/definitions/Compatibility"
+              },
+              "minItems": 1,
+              "maxItems": 10,
+              "description": "List of update compatibility information."
+            },
+            "instructions": {
+              "$ref": "#/definitions/Instructions",
+              "description": "Update install instructions."
+            },
+            "referencedBy": {
+              "type": "array",
+              "x-ms-identifiers": [
+                "provider",
+                "name",
+                "version"
+              ],
+              "items": {
+                "$ref": "#/definitions/UpdateId"
+              },
+              "minItems": 1,
+              "description": "List of update identities that reference this update."
+            },
+            "files": {
+              "type": "array",
+              "x-ms-identifiers": [
+                "fileId"
+              ],
+              "items": {
+                "$ref": "#/definitions/UpdateFile"
+              },
+              "minItems": 0,
+              "maxItems": 10,
+              "description": "List of update file metadata."
+            },
+            "scanResult": {
+              "type": "string",
+              "description": "Update aggregate scan result (calculated from payload file scan results)."
+            },
+            "manifestVersion": {
+              "type": "string",
+              "description": "Schema version of manifest used to import the update."
+            },
+            "importedDateTime": {
+              "type": "string",
+              "description": "Date and time in UTC when the update was imported.",
+              "format": "date-time"
+            },
+            "createdDateTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Date and time in UTC when the update was created."
+            }
+          },
+          "required": [
+            "updateId",
+            "compatibility",
+            "instructions",
+            "manifestVersion",
+            "importedDateTime",
+            "createdDateTime"
+          ]
+        }
+      }
+    },
+    "Compatibility": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minItems": 1,
+        "maxItems": 5
+      },
+      "description": "Key-value pairs representing update compatibility information."
+    },
+    "Instructions": {
+      "type": "object",
+      "properties": {
+        "steps": {
+          "description": "Collection of installation steps.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/Step"
+          },
+          "minItems": 1,
+          "maxItems": 10
+        }
+      },
+      "required": [
+        "steps"
+      ]
+    },
+    "Step": {
+      "description": "Update install instruction step.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Step type.",
+          "type": "string",
+          "enum": [
+            "inline",
+            "reference"
+          ],
+          "default": "inline",
+          "x-ms-enum": {
+            "name": "StepType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Inline",
+                "name": "Inline",
+                "description": "Step type that performs code execution."
+              },
+              {
+                "value": "Reference",
+                "name": "Reference",
+                "description": "Step type that installs another update."
+              }
+            ]
+          }
+        },
+        "description": {
+          "description": "Step description.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "handler": {
+          "description": "Identity of handler that will execute this step. Required if step type is inline.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32
+        },
+        "handlerProperties": {
+          "description": "Parameters to be passed to handler during execution.",
+          "type": "object"
+        },
+        "files": {
+          "description": "Collection of file names to be passed to handler during execution. Required if step type is inline.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 5
+        },
+        "updateId": {
+          "description": "Referenced child update identity.  Required if step type is reference.",
+          "$ref": "#/definitions/UpdateId"
+        }
+      },
+      "minProperties": 2
+    },
+    "UpdateFileBase": {
+      "type": "object",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "File name."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "description": "File size in number of bytes.",
+          "format": "int64"
+        },
+        "hashes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "minItems": 1
+          },
+          "description": "Mapping of hashing algorithm to base64 encoded hash values."
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "File MIME type."
+        },
+        "scanResult": {
+          "type": "string",
+          "description": "Anti-malware scan result."
+        },
+        "scanDetails": {
+          "type": "string",
+          "description": "Anti-malware scan details."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "minItems": 0
+          },
+          "description": "Optional file properties (not consumed by service but pass-through to device)."
+        }
+      },
+      "required": [
+        "fileName",
+        "sizeInBytes",
+        "hashes"
+      ],
+      "description": "Update file basic metadata."
+    },
+    "UpdateFile": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateFileBase"
+        }
+      ],
+      "properties": {
+        "relatedFiles": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/UpdateFileBase"
+          },
+          "description": "Optional related files metadata used together DownloadHandler metadata to download payload file."
+        },
+        "downloadHandler": {
+          "$ref": "#/definitions/UpdateFileDownloadHandler",
+          "description": "Optional download handler for utilizing related files to download payload file."
+        },
+        "etag": {
+          "type": "string",
+          "description": "File ETag."
+        }
+      },
+      "description": "Update file metadata."
+    },
+    "UpdateFileDownloadHandler": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Download handler identifier."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Download handler for utilizing related files to download payload file."
+    },
+    "UpdateCompliance": {
+      "type": "object",
+      "properties": {
+        "totalDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of devices."
+        },
+        "onHighestVersionUpdateDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of devices on the highest version update."
+        },
+        "newUpdatesAvailableDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of devices with a newer update available."
+        },
+        "updatesInProgressDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of devices with update in-progress."
+        }
+      },
+      "required": [
+        "totalDeviceCount",
+        "onHighestVersionUpdateDeviceCount",
+        "newUpdatesAvailableDeviceCount",
+        "updatesInProgressDeviceCount"
+      ],
+      "description": "Update compliance information."
+    },
+    "DeviceClassUpdatableDevices": {
+      "type": "object",
+      "properties": {
+        "deviceClassId": {
+          "type": "string",
+          "description": "The device compatibility class Id"
+        },
+        "updateId": {
+          "$ref": "#/definitions/UpdateId",
+          "description": "Update Id."
+        },
+        "deviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of devices in the device class that need the update."
+        }
+      },
+      "required": [
+        "deviceClassId",
+        "updateId",
+        "deviceCount"
+      ],
+      "description": "Device compatibility class Id, update Id, and the number of devices that need the update."
+    },
+    "DeviceClassUpdatableDevicesList": {
+      "description": "The list of updatable devices for a device class.",
+      "type": "object",
+      "properties": {
+        "deviceClassHighestVersionUpdates": {
+          "description": "The list of device classes and the highest version update details for each.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/DeviceClassUpdatableDevices"
+          }
+        }
+      },
+      "required": [
+        "deviceClassHighestVersionUpdates"
+      ]
+    }
+  },
+  "parameters": {
+    "FilterParameter": {
+      "name": "$filter",
+      "description": "May be used to filter the items in the result.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "ADU schema API version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The resource group name.",
+      "x-ms-parameter-location": "method"
+    },
+    "UpdateAccountNameParameter": {
+      "name": "updateAccountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Account name.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 24
+    },
+    "AgentNameParameter": {
+      "name": "agentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Agent Id.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 1016
+    },
+    "DeviceClassNameParameter": {
+      "name": "deviceClassName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Device Class Name.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "ActiveDeploymentNameParameter": {
+      "name": "activeDeploymentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Active Deployment Name.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 73
+    },
+    "DeploymentNameParameter": {
+      "name": "deploymentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Deployment Name.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 73
+    },
+    "UpdateResourceNameParameter": {
+      "name": "updateResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Concatenated update provider, name and version separated by underscore.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9.-_]+$",
+      "minLength": 7,
+      "maximum": 173
+    },
+    "DeviceClassIdParameter": {
+      "name": "deviceClassId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Device class identifier.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 255
+    }
+  }
+}
