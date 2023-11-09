@@ -115,17 +115,19 @@ interface StoragePools {
   listByResourceGroup is ArmResourceListByParent<StoragePool>;
   listBySubscription is ArmListBySubscription<StoragePool>;
 
+  @autoRoute
   @doc("Lists health metadata for specific Storage Pool.")
-  @armResourceAction(StoragePool)
-  @post
-  listHealthMetadata(
+  @segment("health")
+  @armResourceRead(StoragePool)
+  getHealthStatus(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<HealthResponse> | ErrorResponse;
 
+  @autoRoute
   @doc("Lists AVS properties for specific Storage Pool.")
-  @armResourceAction(StoragePool)
-  @post
-  listAvsDetails(
+  @segment("avs")
+  @armResourceRead(StoragePool)
+  getAvsParameters(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<AvsDetails> | ErrorResponse;
 }
@@ -269,6 +271,10 @@ model VolumeProperties {
   @visibility("read")
   storagePoolInternalId?: string;
 
+  @doc("Resource Id for the StoragePool.")
+  @visibility("read")
+  storagePoolResourceId?: string;
+
   @doc("Pure Storage's internal Id for the Volume.")
   @visibility("read")
   volumeInternalId?: string;
@@ -305,7 +311,6 @@ model VolumeProperties {
   @visibility("read")
   azure?: AzureProperties;
 
-  // TODO: check if it is required since only update/read is allowed
   @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
@@ -329,7 +334,10 @@ model SoftDeletion {
 @doc("Consistency Group the Volume belongs to.")
 model VolumeConsistencyGroup {
   @doc("Internal ID for the Consistency Group the Volume belongs to.")
-  consistencyGroupId: string;
+  consistencyGroupInternalId: string;
+
+  @doc("Resource ID for the Consistency Group the Volume belongs to.")
+  consistencyGroupResourceId: string;
 }
 
 @doc("Enum of possible Volume types.")
@@ -355,8 +363,11 @@ model AvsDiskDetails {
   @doc("VMware id assigned to the volume.")
   avsVmInternalId: string;
 
-  @doc("AVS storage container name that contains exact volume.")
-  avsStorageContainerName: string;
+  @doc("Resource id of the avs vm.")
+  avsVmResourceId: string;
+
+  @doc("AVS storage container resource id that contains exact volume.")
+  avsStorageContainerResourceId: string;
 }
 
 @doc("Azure Volume Group assigned to the volume.")
@@ -388,6 +399,14 @@ model AvsVm is ProxyResource<AvsVmProperties> {
 
 @doc("AVS VM properties.")
 model AvsVmProperties {
+  @doc("Pure Storage's internal Id for the StoragePool.")
+  @visibility("read")
+  storagePoolInternalId?: string;
+
+  @doc("Resource Id for the StoragePool.")
+  @visibility("read")
+  storagePoolResourceId?: string;
+
   @doc("Name to use in UI for this AVS VM.")
   @visibility("read")
   displayName?: string;

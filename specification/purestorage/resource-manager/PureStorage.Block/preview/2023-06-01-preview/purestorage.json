@@ -800,6 +800,55 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/avs": {
+      "get": {
+        "operationId": "StoragePools_GetAvsParameters",
+        "tags": [
+          "StoragePools"
+        ],
+        "description": "Lists AVS properties for specific Storage Pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storagePoolName",
+            "in": "path",
+            "description": "Name of the Storage Pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 20,
+            "pattern": "^[a-zA-Z0-9_]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvsDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StoragePools_GetAvsParameters": {
+            "$ref": "./examples/StoragePools_GetAvsParameters_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/avsStorageContainers": {
       "get": {
         "operationId": "AvsStorageContainers_ListByStoragePool",
@@ -1948,61 +1997,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/listAvsDetails": {
-      "post": {
-        "operationId": "StoragePools_ListAvsDetails",
-        "tags": [
-          "StoragePools"
-        ],
-        "description": "Lists AVS properties for specific Storage Pool.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the Storage Pool.",
-            "required": true,
-            "type": "string",
-            "minLength": 4,
-            "maxLength": 20,
-            "pattern": "^[a-zA-Z0-9_]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AvsDetails"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "StoragePools_ListAvsDetails": {
-            "$ref": "./examples/StoragePools_ListAvsDetails_MaximumSet_Gen.json"
-          },
-          "StoragePools_ListAvsDetails_MinSet": {
-            "$ref": "./examples/StoragePools_ListAvsDetails_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/listHealthMetadata": {
-      "post": {
-        "operationId": "StoragePools_ListHealthMetadata",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/health": {
+      "get": {
+        "operationId": "StoragePools_GetHealthStatus",
         "tags": [
           "StoragePools"
         ],
@@ -2043,8 +2040,8 @@
           }
         },
         "x-ms-examples": {
-          "StoragePools_ListHealthMetadata": {
-            "$ref": "./examples/StoragePools_ListHealthMetadata_MaximumSet_Gen.json"
+          "StoragePools_GetHealthStatus": {
+            "$ref": "./examples/StoragePools_GetHealthStatus_MaximumSet_Gen.json"
           }
         }
       }
@@ -2149,9 +2146,13 @@
           "type": "string",
           "description": "VMware id assigned to the volume."
         },
-        "avsStorageContainerName": {
+        "avsVmResourceId": {
           "type": "string",
-          "description": "AVS storage container name that contains exact volume."
+          "description": "Resource id of the avs vm."
+        },
+        "avsStorageContainerResourceId": {
+          "type": "string",
+          "description": "AVS storage container resource id that contains exact volume."
         }
       },
       "required": [
@@ -2159,7 +2160,8 @@
         "diskName",
         "folder",
         "avsVmInternalId",
-        "avsStorageContainerName"
+        "avsVmResourceId",
+        "avsStorageContainerResourceId"
       ]
     },
     "AvsStorageContainer": {
@@ -2352,6 +2354,16 @@
       "type": "object",
       "description": "AVS VM properties.",
       "properties": {
+        "storagePoolInternalId": {
+          "type": "string",
+          "description": "Pure Storage's internal Id for the StoragePool.",
+          "readOnly": true
+        },
+        "storagePoolResourceId": {
+          "type": "string",
+          "description": "Resource Id for the StoragePool.",
+          "readOnly": true
+        },
         "displayName": {
           "type": "string",
           "description": "Name to use in UI for this AVS VM.",
@@ -3289,13 +3301,18 @@
       "type": "object",
       "description": "Consistency Group the Volume belongs to.",
       "properties": {
-        "consistencyGroupId": {
+        "consistencyGroupInternalId": {
           "type": "string",
           "description": "Internal ID for the Consistency Group the Volume belongs to."
+        },
+        "consistencyGroupResourceId": {
+          "type": "string",
+          "description": "Resource ID for the Consistency Group the Volume belongs to."
         }
       },
       "required": [
-        "consistencyGroupId"
+        "consistencyGroupInternalId",
+        "consistencyGroupResourceId"
       ]
     },
     "VolumeContainerType": {
@@ -3329,6 +3346,11 @@
         "storagePoolInternalId": {
           "type": "string",
           "description": "Pure Storage's internal Id for the StoragePool.",
+          "readOnly": true
+        },
+        "storagePoolResourceId": {
+          "type": "string",
+          "description": "Resource Id for the StoragePool.",
           "readOnly": true
         },
         "volumeInternalId": {
