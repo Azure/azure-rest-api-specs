@@ -25,10 +25,6 @@ using Azure.ClientGenerator.Core;
   "csharp",
   "InternalAudioTaskLabel"
 );
-@@projectedName(Azure.OpenAI.AudioTranscriptionOptions.`model`,
-  "csharp",
-  "InternalNonAzureModelName"
-);
 @@projectedName(Azure.OpenAI.AudioTranscriptionOptions.file,
   "csharp",
   "AudioData"
@@ -44,10 +40,6 @@ using Azure.ClientGenerator.Core;
 @@projectedName(Azure.OpenAI.AudioTranslation.task,
   "csharp",
   "InternalAudioTaskLabel"
-);
-@@projectedName(Azure.OpenAI.AudioTranslationOptions.`model`,
-  "csharp",
-  "InternalNonAzureModelName"
 );
 @@projectedName(Azure.OpenAI.AudioTranslationOptions.file,
   "csharp",
@@ -106,10 +98,6 @@ using Azure.ClientGenerator.Core;
   "InternalStreamingDeltaMessage"
 );
 @@projectedName(Azure.OpenAI.ChatCompletions.created, "java", "createdAt");
-@@projectedName(Azure.OpenAI.ChatCompletionsOptions.`model`,
-  "csharp",
-  "InternalNonAzureModelName"
-);
 @@projectedName(Azure.OpenAI.ChatCompletionsOptions.dataSources,
   "csharp",
   "InternalAzureExtensionsDataSources"
@@ -161,10 +149,6 @@ using Azure.ClientGenerator.Core;
   "java",
   "topLogProbabilities"
 );
-@@projectedName(Azure.OpenAI.CompletionsOptions.`model`,
-  "csharp",
-  "InternalNonAzureModelName"
-);
 @@projectedName(Azure.OpenAI.CompletionsOptions.bestOf,
   "csharp",
   "GenerationSampleCount"
@@ -199,9 +183,5 @@ using Azure.ClientGenerator.Core;
   "deploymentOrModelName"
 );
 @@projectedName(Azure.OpenAI.EmbeddingItem, "java", "promptIndex");
-@@projectedName(Azure.OpenAI.EmbeddingsOptions.`model`,
-  "csharp",
-  "InternalNonAzureModelName"
-);
 @@projectedName(Azure.OpenAI.ImageGenerationOptions.n, "csharp", "ImageCount");
 @@projectedName(Azure.OpenAI.ImageGenerations.created, "java", "createdAt");
