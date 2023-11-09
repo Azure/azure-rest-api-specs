@@ -115,18 +115,18 @@ interface StoragePools {
   listByResourceGroup is ArmResourceListByParent<StoragePool>;
   listBySubscription is ArmListBySubscription<StoragePool>;
 
-  @autoRoute
   @doc("Lists health metadata for specific Storage Pool.")
-  @segment("health")
-  @armResourceRead(StoragePool)
+  @armResourceAction(StoragePool)
+  @action("health")
+  @post
   getHealthStatus(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<HealthResponse> | ErrorResponse;
 
-  @autoRoute
   @doc("Lists AVS properties for specific Storage Pool.")
-  @segment("avs")
-  @armResourceRead(StoragePool)
+  @armResourceAction(StoragePool)
+  @action("avs")
+  @post
   getAvsParameters(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<AvsDetails> | ErrorResponse;
