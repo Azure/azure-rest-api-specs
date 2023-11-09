@@ -37,6 +37,10 @@ These settings apply only when `--tag=package-preview-2023-11` is specified on t
 ```yaml $(tag) == 'package-preview-2023-11'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2023-11-01-preview/desktopvirtualization.json
+suppressions:
+  - code: ResourceNameRestriction
+    from: desktopvirtualization.json
+    reason: Pattern restriction will be a breaking change. Update for next stable version. Work item to fix https://microsoft.visualstudio.com/OS/_workitems/edit/47527278
 ```
 ### Tag: package-preview-2023-10
 
