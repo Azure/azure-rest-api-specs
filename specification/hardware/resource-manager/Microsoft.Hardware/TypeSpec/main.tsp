@@ -343,5 +343,5 @@ interface OrderPreviewInterface {
     @doc("The orderPreview request")
     @body
     body: OrderProperties,
-  ): OrderProperties | ErrorResponse;
+  ): Order | ErrorResponse;
 }
