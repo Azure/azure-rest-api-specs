@@ -7,8 +7,20 @@
     "Operation-Id": "284b7e37-f42d-4054-8fa9-08523c3de345",
     "dataset": {
       "kind": "AudioAndScript",
-      "audioUrl": "https://contoso.blob.core.windows.net/public/jessica300/recording/",
-      "scriptUrl": "https://github.com/Azure-Samples/Cognitive-Speech-TTS/blob/master/CustomVoice/Sample%20Data/Individual%20utterances%20%2B%20matching%20script/SampleScript.txt"
+      "audios": {
+        "containerUrl": "https://contoso.blob.core.windows.net/voicecontainer?mySasToken",
+        "prefix": "jessica300/",
+        "extensions": [
+          "*.wav"
+        ]
+      },
+      "scripts": {
+        "containerUrl": "https://contoso.blob.core.windows.net/voicecontainer?mySasToken",
+        "prefix": "jessica300/",
+        "extensions": [
+          "*.txt"
+        ]
+      }
     },
     "Content-Type": "application/json"
   },

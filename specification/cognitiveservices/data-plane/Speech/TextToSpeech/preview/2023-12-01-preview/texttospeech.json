@@ -1606,6 +1606,32 @@
     }
   },
   "definitions": {
+    "AzureBlobContentSource": {
+      "description": "Azure Blob Storage content.",
+      "type": "object",
+      "required": [
+        "containerUrl",
+        "extensions"
+      ],
+      "properties": {
+        "containerUrl": {
+          "description": "Azure Blob Storage container URL.",
+          "type": "string",
+          "format": "url"
+        },
+        "prefix": {
+          "description": "Blob name prefix.",
+          "type": "string"
+        },
+        "extensions": {
+          "description": "file name extensions.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "BaseModel": {
       "description": "Base model",
       "required": [
@@ -1710,15 +1736,11 @@
         "kind": {
           "$ref": "#/definitions/DatasetKind"
         },
-        "audioUrl": {
-          "description": "The public accessible url of audio file.",
-          "type": "string",
-          "format": "uri"
+        "audios": {
+          "$ref": "#/definitions/AzureBlobContentSource"
         },
-        "scriptUrl": {
-          "description": "The public accessible url of script file.",
-          "type": "string",
-          "format": "uri"
+        "scripts": {
+          "$ref": "#/definitions/AzureBlobContentSource"
         }
       }
     },
@@ -2558,10 +2580,8 @@
         "consentId": {
           "$ref": "#/definitions/ResourceId"
         },
-        "audioUrl": {
-          "description": "The public accessible url of audio file. Or, Azure blob prefix of multi audio files.",
-          "type": "string",
-          "format": "uri"
+        "audios": {
+          "$ref": "#/definitions/AzureBlobContentSource"
         },
         "properties": {
           "$ref": "#/definitions/PersonalVoiceProperties"
