@@ -42,11 +42,13 @@ Dictionary lookup. Returns equivalent words for the source term in the target la
 Dictionary example Returns grammatical structure and context examples for the source term and target term pair.
 """)
 @versioned(APIVersion)
-@useAuth([ApimKey, ApimRegion])
+@useAuth(ApimKey | ApimRegion)
 
 namespace TextTranslation;
 
+@doc Auth Header
 model ApimKey is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
+@doc Region Header
 model ApimRegion is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Region">;
 
 
