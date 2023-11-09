@@ -1742,13 +1742,13 @@
         },
         "errorRate": {
           "type": "number",
-          "format": "double",
-          "description": "Threshold percentage of errors on which test run should be automatically stopped."
+          "format": "float",
+          "description": "Threshold percentage of errors on which test run should be automatically stopped. Allowed values are in range of 0.0-100.0"
         },
         "errorRateTimeWindow": {
           "type": "integer",
-          "format": "int64",
-          "description": "Time window during which the error percentage should be evaluated."
+          "format": "uint32",
+          "description": "Time window during which the error percentage should be evaluated in seconds."
         }
       }
     },
@@ -2035,10 +2035,6 @@
         "optionalLoadTestConfig": {
           "$ref": "#/definitions/OptionalLoadTestConfig",
           "description": "Configuration for quick load test"
-        },
-        "testType": {
-          "$ref": "#/definitions/TestType",
-          "description": "Type of test. e.g. Url or JMX"
         }
       }
     },
@@ -2916,6 +2912,10 @@
           "type": "string",
           "description": "Subnet ID on which the load test instances should run."
         },
+        "testType": {
+          "$ref": "#/definitions/TestType",
+          "description": "Type of test."
+        },
         "keyvaultReferenceIdentityType": {
           "type": "string",
           "description": "Type of the managed identity referencing the Key vault."
@@ -3210,6 +3210,11 @@
         "subnetId": {
           "type": "string",
           "description": "Subnet ID on which the load test instances should run.",
+          "readOnly": true
+        },
+        "testType": {
+          "$ref": "#/definitions/TestType",
+          "description": "Type of test.",
           "readOnly": true
         },
         "createdDateTime": {
@@ -3716,6 +3721,10 @@
         "subnetId": {
           "type": "string",
           "description": "Subnet ID on which the load test instances should run."
+        },
+        "testType": {
+          "$ref": "#/definitions/TestType",
+          "description": "Type of test."
         },
         "keyvaultReferenceIdentityType": {
           "type": "string",
