@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 import "../shared/provisioningstate.tsp";
 import "../shared/resourceid.tsp";
+import "../shared/endpointrulebase.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -36,25 +37,16 @@ enum EnclaveEndpointProtocol {
 }
 
 @doc("Enclave Endpoint Rule Properties")
-model EnclaveEndpointRule {
-  @doc("Endpoint Rule Name.")
-  name?: string;
-
-  @doc("IP Address. Can include multiple CIDR/IP Addresses separated by commas.")
-  address?: string;
-
-  @doc("Port. Can include multiple ports separated by commas or a range indicated by a hyphen.")
-  port?: string;
-
+model EnclaveEndpointDestinationRule extends EndpointRuleBase {
   @doc("Protocol. Options specified by Endpoint Protocol Enum.")
-  protocol?: EnclaveEndpointProtocol;
+  protocol?: EnclaveEndpointProtocol[];
 }
 
 @doc("Enclave Endpoint Resource properties")
 model EnclaveEndpointProperties {
-  @extension("x-ms-identifiers", ["name"])
-  @doc("Endpoint Rule Collection.")
-  endpointRuleCollection?: EnclaveEndpointRule[];
+  @extension("x-ms-identifiers", [])
+  @doc("Enclave Endpoint Rule Collection.")
+  ruleCollection: EnclaveEndpointDestinationRule[];
 
   @doc("Provisioning State.")
   @visibility("read")

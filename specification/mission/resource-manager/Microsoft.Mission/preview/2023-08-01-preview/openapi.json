@@ -4289,19 +4289,43 @@
         "value"
       ]
     },
+    "CommunityEndpointDestinationRule": {
+      "type": "object",
+      "description": "Base type for destination rules.",
+      "properties": {
+        "destinationType": {
+          "$ref": "#/definitions/DestinationType",
+          "description": "Destination Type."
+        },
+        "protocol": {
+          "type": "array",
+          "description": "Protocol. Options specified by Endpoint Protocol Enum.",
+          "items": {
+            "$ref": "#/definitions/CommunityEndpointProtocol"
+          }
+        },
+        "transitHubResourceId": {
+          "$ref": "#/definitions/TransitHubResourceId",
+          "description": "Transit Hub Resource Id."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointRuleBase"
+        }
+      ]
+    },
     "CommunityEndpointProperties": {
       "type": "object",
       "description": "Community Endpoint Resource properties",
       "properties": {
-        "destinationRuleCollection": {
+        "ruleCollection": {
           "type": "array",
-          "description": "Destination Rule Collection.",
+          "description": "Community Endpoint Rule Collection.",
           "items": {
-            "$ref": "#/definitions/DestinationRule"
+            "$ref": "#/definitions/CommunityEndpointDestinationRule"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -4310,7 +4334,7 @@
         }
       },
       "required": [
-        "destinationRuleCollection"
+        "ruleCollection"
       ]
     },
     "CommunityEndpointProtocol": {
@@ -4322,7 +4346,9 @@
         "UDP",
         "ICMP",
         "ESP",
-        "AH"
+        "AH",
+        "HTTPS",
+        "HTTP"
       ],
       "x-ms-enum": {
         "name": "CommunityEndpointProtocol",
@@ -4357,6 +4383,16 @@
             "name": "AH",
             "value": "AH",
             "description": "CommunityEndpointProtocol Type AH"
+          },
+          {
+            "name": "HTTPS",
+            "value": "HTTPS",
+            "description": "CommunityEndpointProtocol Type HTTPS"
+          },
+          {
+            "name": "HTTP",
+            "value": "HTTP",
+            "description": "CommunityEndpointProtocol Type HTTP"
           }
         ]
       }
@@ -4423,15 +4459,13 @@
       "type": "object",
       "description": "The updatable properties of the CommunityEndpointResource.",
       "properties": {
-        "destinationRuleCollection": {
+        "ruleCollection": {
           "type": "array",
-          "description": "Destination Rule Collection.",
+          "description": "Community Endpoint Rule Collection.",
           "items": {
-            "$ref": "#/definitions/DestinationRule"
+            "$ref": "#/definitions/CommunityEndpointDestinationRule"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4580,45 +4614,6 @@
           }
         ]
       }
-    },
-    "DestinationRule": {
-      "type": "object",
-      "description": "Base type for destination rules.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Destination Rule Name."
-        },
-        "destinationType": {
-          "$ref": "#/definitions/DestinationType",
-          "description": "Destination Type."
-        },
-        "destination": {
-          "type": "array",
-          "description": "Destination must follow the format for FQDNs if it is selected as the destination type (no IP/CIDR or full web URLs).",
-          "items": {
-            "type": "string"
-          }
-        },
-        "port": {
-          "type": "string",
-          "description": "Port. Can include multiple ports separated by commas or a range indicated by a hyphen."
-        },
-        "protocol": {
-          "type": "array",
-          "description": "Protocol. Options specified by Endpoint Protocol Enum.",
-          "items": {
-            "$ref": "#/definitions/CommunityEndpointProtocol"
-          }
-        },
-        "transitHubResourceId": {
-          "$ref": "#/definitions/TransitHubResourceId",
-          "description": "Transit Hub Resource Id."
-        }
-      },
-      "required": [
-        "destination"
-      ]
     },
     "DestinationType": {
       "type": "string",
@@ -4891,26 +4886,45 @@
         }
       }
     },
+    "EnclaveEndpointDestinationRule": {
+      "type": "object",
+      "description": "Enclave Endpoint Rule Properties",
+      "properties": {
+        "protocol": {
+          "type": "array",
+          "description": "Protocol. Options specified by Endpoint Protocol Enum.",
+          "items": {
+            "$ref": "#/definitions/EnclaveEndpointProtocol"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointRuleBase"
+        }
+      ]
+    },
     "EnclaveEndpointProperties": {
       "type": "object",
       "description": "Enclave Endpoint Resource properties",
       "properties": {
-        "endpointRuleCollection": {
+        "ruleCollection": {
           "type": "array",
-          "description": "Endpoint Rule Collection.",
+          "description": "Enclave Endpoint Rule Collection.",
           "items": {
-            "$ref": "#/definitions/EnclaveEndpointRule"
+            "$ref": "#/definitions/EnclaveEndpointDestinationRule"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "ruleCollection"
+      ]
     },
     "EnclaveEndpointProtocol": {
       "type": "string",
@@ -5022,37 +5036,13 @@
       "type": "object",
       "description": "The updatable properties of the EnclaveEndpointResource.",
       "properties": {
-        "endpointRuleCollection": {
+        "ruleCollection": {
           "type": "array",
-          "description": "Endpoint Rule Collection.",
+          "description": "Enclave Endpoint Rule Collection.",
           "items": {
-            "$ref": "#/definitions/EnclaveEndpointRule"
+            "$ref": "#/definitions/EnclaveEndpointDestinationRule"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "EnclaveEndpointRule": {
-      "type": "object",
-      "description": "Enclave Endpoint Rule Properties",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Endpoint Rule Name."
-        },
-        "address": {
-          "type": "string",
-          "description": "IP Address. Can include multiple CIDR/IP Addresses separated by commas."
-        },
-        "port": {
-          "type": "string",
-          "description": "Port. Can include multiple ports separated by commas or a range indicated by a hyphen."
-        },
-        "protocol": {
-          "$ref": "#/definitions/EnclaveEndpointProtocol",
-          "description": "Protocol. Options specified by Endpoint Protocol Enum."
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5348,6 +5338,24 @@
         "protocol": {
           "$ref": "#/definitions/EndpointProtocol",
           "description": "Protocol. Options specified by Endpoint Protocol Enum."
+        }
+      }
+    },
+    "EndpointRuleBase": {
+      "type": "object",
+      "description": "Base Endpoint Rule Properties",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Endpoint Rule Name."
+        },
+        "destination": {
+          "type": "string",
+          "description": "Destination address. Can include multiple CIDR/IP Addresses or fqdn tags or fqdns (for community endpoint) separated by commas."
+        },
+        "port": {
+          "type": "string",
+          "description": "Port. Can include multiple ports separated by commas or a range indicated by a hyphen."
         }
       }
     },
