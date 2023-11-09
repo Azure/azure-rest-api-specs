@@ -117,7 +117,7 @@ interface StoragePools {
 
   @doc("Lists health metadata for specific Storage Pool.")
   @armResourceAction(StoragePool)
-  @action("health")
+  @action("getHealthStatus")
   @post
   getHealthStatus(
     ...ResourceInstanceParameters<StoragePool>,
@@ -125,7 +125,7 @@ interface StoragePools {
 
   @doc("Lists AVS properties for specific Storage Pool.")
   @armResourceAction(StoragePool)
-  @action("avs")
+  @action("getAvsParameters")
   @post
   getAvsParameters(
     ...ResourceInstanceParameters<StoragePool>,
