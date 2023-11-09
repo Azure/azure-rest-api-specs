@@ -46,9 +46,14 @@ Dictionary example Returns grammatical structure and context examples for the so
 
 namespace TextTranslation;
 
-@doc Auth Header
+@doc("""
+AuthKey Header
+""")
 model ApimKey is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
-@doc Region Header
+
+@doc("""
+Region Header
+""")
 model ApimRegion is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Region">;
 
 
