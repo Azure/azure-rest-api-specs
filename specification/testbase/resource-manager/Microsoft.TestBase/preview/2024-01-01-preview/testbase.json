@@ -5957,6 +5957,13 @@
             "$ref": "#/definitions/BillingHubPackageUsage"
           }
         },
+        "imageValidationUsageEntries": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/BillingHubImageValidationUsage"
+          }
+        },
         "nextRequest": {
           "type": "object",
           "$ref": "#/definitions/BillingHubGetUsageRequest"
@@ -6128,6 +6135,51 @@
         "startTimeStamp",
         "endTimeStamp"
       ]
+    },
+    "BillingHubImageValidationUsage": {
+      "type": "object",
+      "description": "Image validation usage under the Test Base account presented in billing hub.",
+      "properties": {
+        "azureResourceUri": {
+          "type": "string",
+          "description": "Azure resource uri of the custom image."
+        },
+        "definitionName": {
+          "type": "string",
+          "description": "Definition name of the custom image."
+        },
+        "versionName": {
+          "type": "string",
+          "description": "Version name of the custom image."
+        },
+        "osName": {
+          "type": "string",
+          "description": "OS name of the custom image."
+        },
+        "release": {
+          "type": "string",
+          "description": "Release of the custom image."
+        },
+        "testType": {
+          "type": "string",
+          "description": "Specify the test type of the image validation test."
+        },
+        "usedFreeHours": {
+          "type": "number",
+          "format": "double",
+          "description": "Free usage included in the image validation test."
+        },
+        "usedBillableHours": {
+          "type": "number",
+          "format": "double",
+          "description": "Billable usage included in the image validation test."
+        },
+        "charges": {
+          "type": "number",
+          "format": "double",
+          "description": "Charged usage consumed in the image validation test."
+        }
+      }
     },
     "AvailableInplaceUpgradeOSListResult": {
       "description": "A list of available In-place Upgrade OSs.",
