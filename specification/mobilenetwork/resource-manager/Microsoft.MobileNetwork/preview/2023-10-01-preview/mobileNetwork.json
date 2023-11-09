@@ -350,6 +350,18 @@
           "type": "string",
           "readOnly": true,
           "description": "The mobile network resource identifier"
+        },
+        "endpointSecurityGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/EndpointSecurityGroup"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "The list of endpoint security groups used in the mobile network.",
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
