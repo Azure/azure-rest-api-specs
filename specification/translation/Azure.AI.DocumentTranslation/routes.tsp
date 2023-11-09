@@ -68,4 +68,4 @@ op getSingleDocumentFormats is CustomGetOperation<
 #suppress "@azure-tools/typespec-azure-core/byos"
 @doc("Translate Single Document.")
 @route("single:translateDocument")
-op postCommaSeparatedValues(@header contentType: "multipart/form-data", ...TranslateDocumentParameters, @body image: TranslateDocumentRequestBody): void;
+op singleTranslateDocument(...TranslateDocumentParameters, @body image: TranslateDocumentRequest): TranslateDocumentResult;
