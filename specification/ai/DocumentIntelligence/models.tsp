@@ -305,6 +305,7 @@ model ErrorResponse {
 }
 
 @doc("The error object.")
+@projectedName("csharp", "DocumentIntelligenceError")
 model Error {
   @doc("One of a server-defined set of error codes.")
   code: string;
@@ -859,6 +860,7 @@ model DocumentLanguage {
 }
 
 @doc("An object describing the location and semantic content of a document.")
+@projectedName("csharp", "AnalyzedDocument")
 model Document {
   @doc("Document type.")
   @minLength(2)
