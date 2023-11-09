@@ -2529,7 +2529,28 @@ configuration:
       then:
       - removeLabel:
           label: no-recent-activity
-      description: 
+      description:
+    - if:
+      - payloadType: Pull_Request
+      then:
+      - if:
+        - filesMatchPattern:
+            pattern: specification/.*(\.tsp|tspconfig.yaml)
+        then:
+        - addLabel:
+            label: TypeSpec
+    - if:
+      - payloadType: Issue_Comment
+      - and:
+        - isPullRequest
+      then:
+      - if:
+        - commentContains:
+            pattern: "^/pr RequestMerge$"
+            isRegex: true
+        then:
+        - addLabel:
+            label: MergeRequested
     - if:
       - payloadType: Pull_Request
       then:
