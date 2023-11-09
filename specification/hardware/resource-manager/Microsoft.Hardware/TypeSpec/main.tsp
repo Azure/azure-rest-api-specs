@@ -342,6 +342,6 @@ interface OrderPreviewInterface {
 
     @doc("The orderPreview request")
     @body
-    body: Order,
+    body: OrderProperties,
   ): Order | ErrorResponse;
 }
