@@ -3,7 +3,7 @@ import "@typespec/http";
 namespace ImageAnalysis;
 using TypeSpec.Http;
 
-@doc("A basic rectangle")
+@doc("A basic rectangle specifying a sub-region of the image")
 model ImageBoundingBox {
   @doc("X coordinate")
   @minValue(0)
@@ -171,9 +171,6 @@ model ImageAnalysisResult {
   @projectedName("json", "captionResult")
   caption?: CaptionResult;
 
-  @doc("A list of categories for the image.")
-  customModelResult?: CustomModelResult;
-
   @doc("A denseCaptionsResult for the image.")
   @projectedName("json", "denseCaptionsResult")
   denseCaptions?: DenseCaptionsResult;
@@ -214,17 +211,6 @@ model ImageMetadata {
   @doc("The width of the image in pixels.")
   @minValue(1)
   width: int32;
-}
-
-@doc("Describes the result of image analysis using a custom model.")
-model CustomModelResult {
-  @doc("The list of predicted objects.")
-  @projectedName("json", "objectsResult")
-  objects: ObjectsResult;
-
-  @doc("The list of predicted tags.")
-  @projectedName("json", "tagsResult")
-  tags: TagsResult;
 }
 
 @doc("Describes detected objects in an image.")
@@ -307,15 +293,6 @@ enum VisualFeatures {
 
   @doc("People")
   people,
-}
-
-@doc("The segmentation mode requested.")
-enum SegmentationMode {
-  @doc("Remove the background")
-  backgroundRemoval,
-
-  @doc("Matt the foreground")
-  foregroundMatting,
 }
 
 @doc("A JSON document with a URL pointing to the image that is to be analyzed.")

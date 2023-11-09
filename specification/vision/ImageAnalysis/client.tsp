@@ -3,7 +3,5 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@internal(ImageAnalysis.analyzeFromStream, "csharp");
-@@internal(ImageAnalysis.analyzeFromUrl, "csharp");
-@@internal(ImageAnalysis.segmentFromStream, "csharp");
-@@internal(ImageAnalysis.segmentFromUrl, "csharp");
+@@access(ImageAnalysis.analyzeFromStream, Access.internal, "csharp");
+@@access(ImageAnalysis.analyzeFromUrl, Access.internal, "csharp");
