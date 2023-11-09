@@ -115,6 +115,12 @@
               "$ref": "#/definitions/ActionRequest"
             }
           },
+          "201": {
+            "description": "Succeeded to create (submit) an action request.",
+            "schema": {
+              "$ref": "#/definitions/ActionRequest"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -355,7 +361,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
     },
     "RequestTypeFilter": {
       "name": "requestType",
