@@ -34,7 +34,7 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2022-09
+tag: package-2023-01
 ```
 
 ### Suppression
@@ -91,11 +91,34 @@ directive:
 ```
 
 
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01'
+input-file:
+  - Microsoft.Web/stable/2023-01-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2023-01-01/AppServicePlans.json
+  - Microsoft.Web/stable/2023-01-01/Certificates.json
+  - Microsoft.Web/stable/2023-01-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2023-01-01/ContainerApps.json
+  - Microsoft.Web/stable/2023-01-01/ContainerAppsRevisions.json
+  - Microsoft.Web/stable/2023-01-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2023-01-01/Diagnostics.json
+  - Microsoft.Web/stable/2023-01-01/Global.json
+  - Microsoft.Web/stable/2023-01-01/KubeEnvironments.json
+  - Microsoft.Web/stable/2023-01-01/Provider.json
+  - Microsoft.Web/stable/2023-01-01/Recommendations.json
+  - Microsoft.Web/stable/2023-01-01/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2023-01-01/ResourceProvider.json
+  - Microsoft.Web/stable/2023-01-01/StaticSites.json
+  - Microsoft.Web/stable/2023-01-01/WebApps.json
+```
 ### Tag: package-2022-09
 
 These settings apply only when `--tag=package-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-09'
+``` yaml $(tag) == 'package-2022-09'
 input-file:
   - Microsoft.CertificateRegistration/stable/2022-09-01/AppServiceCertificateOrders.json
   - Microsoft.CertificateRegistration/stable/2022-09-01/CertificateOrdersDiagnostics.json
@@ -264,6 +287,7 @@ directive:
   from: ContainerAppsRevisions.json
   reason: Patch operation will be implemented in later version.
 ```
+
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
