@@ -192,33 +192,35 @@
           "type": "object",
           "x-ms-client-flatten": true,
           "description": "Properties of an SystemComponent resource",
-          "components": {
-            "description": "Components of  the clusters.",
-            "type": "array",
-            "x-nullable": true,
-            "items": {
-              "$ref": "#/definitions/Component"
+          "properties": {
+            "components": {
+              "description": "Components of  the clusters.",
+              "type": "array",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/Component"
+              },
+              "x-ms-identifiers": []
             },
-            "x-ms-identifiers": []
-          },
-          "arcAgentryAutoUpgrade": {
-            "description": "Flag to note if arc agentry is auto upgradable or not.",
-            "type": "boolean",
-            "default": true
-          },
-          "status": {
-            "type": "string",
-            "readOnly": true,
-            "description": "Combined Status of the system components.",
-            "enum": [
-              "transitioning",
-              "success",
-              "failure"
-            ],
-            "default": "transitioning",
-            "x-ms-enum": {
-              "name": "SystemComponentsStatus",
-              "modelAsString": true
+            "arcAgentryAutoUpgrade": {
+              "description": "Flag to note if arc agentry is auto upgradable or not.",
+              "type": "boolean",
+              "default": true
+            },
+            "status": {
+              "type": "string",
+              "readOnly": true,
+              "description": "Combined Status of the system components.",
+              "enum": [
+                "transitioning",
+                "success",
+                "failure"
+              ],
+              "default": "transitioning",
+              "x-ms-enum": {
+                "name": "SystemComponentsStatus",
+                "modelAsString": true
+              }
             }
           }
         }
