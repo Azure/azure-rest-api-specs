@@ -10,7 +10,6 @@ using Microsoft.LoadTestService;
 namespace Customizations;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @client({
   name: "LoadTestAdministrationClient",
   service: Microsoft.LoadTestService,
@@ -33,7 +32,6 @@ interface AdministrationOperations {
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @client({
   name: "LoadTestRunClient",
   service: Microsoft.LoadTestService,

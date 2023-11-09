@@ -225,6 +225,10 @@ SECRET_VALUE.
   @doc("Subnet ID on which the load test instances should run.")
   subnetId?: string;
 
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Type of test.")
+  testType?: TestType;
+
   @doc("Type of the managed identity referencing the Key vault.")
   keyvaultReferenceIdentityType?: string;
 
@@ -304,11 +308,11 @@ model AutoStopCriteria {
   @doc("Whether auto-stop should be enabled.")
   autoStopEnabled?: boolean;
 
-  @doc("Threshold percentage of errors on which test run should be automatically stopped.")
-  errorRate?: float64;
+  @doc("Threshold percentage of errors on which test run should be automatically stopped. Allowed values are in range of 0.0-100.0")
+  errorRate?: float32;
 
-  @doc("Time window during which the error percentage should be evaluated.")
-  errorRateTimeWindow?: int64;
+  @doc("Time window during which the error percentage should be evaluated in seconds.")
+  errorRateTimeWindow?: uint32;
 }
 
 @doc("Configurations for the load test.")
@@ -336,9 +340,6 @@ not required to upload.
   @doc("Configuration for quick load test")
   optionalLoadTestConfig?: OptionalLoadTestConfig;
 
-  @added(APIVersions.v2023_04_01_preview)
-  @doc("Type of test. e.g. Url or JMX")
-  testType?: TestType;
 }
 
 @doc("Configuration for quick load test")
@@ -604,6 +605,11 @@ SECRET_VALUE.
   @visibility("read")
   subnetId?: string;
 
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Type of test.")
+  @visibility("read")
+  testType?: TestType;
+
   ...SystemMetaData;
 }
 
@@ -845,6 +851,7 @@ model MetricValue {
 @doc("Represents a metric dimension value.")
 model DimensionValue {
   @doc("The name of the dimension.")
+  @added(APIVersions.v2023_04_01_preview)
   name?: string;
 
   @doc("The value of the dimension.")
