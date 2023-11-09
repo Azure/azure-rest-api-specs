@@ -28,7 +28,7 @@ namespace Microsoft.StandbyPool;
 @parentResource(StandbyVirtualMachinePoolResource)
 model StandbyVirtualMachineResource
   is ProxyResource<StandbyVirtualMachineResourceProperties> {
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[_a-zA-Z0-9-]{3,64}$")
   @key("standbyVirtualMachineName")
   @segment("standbyVirtualMachines")
   @visibility("read")
