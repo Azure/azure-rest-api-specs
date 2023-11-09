@@ -1613,49 +1613,39 @@
     "BackupResource": {
       "description": "A restorable backup of a Cassandra cluster.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "cosmos-db.json#/definitions/ARMProxyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "type": "object",
-          "properties": {
-            "backupId": {
-              "description": "The unique identifier of backup.",
-              "type": "string"
-            },
-            "backupState": {
-              "description": "The current state of the backup.",
-              "type": "string",
-              "enum": [
-                "Initiated",
-                "InProgress",
-                "Succeeded",
-                "Failed"
-              ],
-              "x-ms-enum": {
-                "name": "BackupState",
-                "modelAsString": true
-              }
-            },
-            "backupStartTimestamp": {
-              "description": "The time at which the backup process begins.",
-              "type": "string",
-              "format": "date-time"
-            },
-            "backupStopTimestamp": {
-              "description": "The time at which the backup process ends.",
-              "type": "string",
-              "format": "date-time"
-            },
-            "backupExpiryTimestamp": {
-              "description": "The time at which the backup will expire.",
-              "type": "string",
-              "format": "date-time"
-            }
+        "backupId": {
+          "description": "The unique identifier of backup.",
+          "type": "string"
+        },
+        "backupState": {
+          "description": "The current state of the backup.",
+          "type": "string",
+          "enum": [
+            "Initiated",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "BackupState",
+            "modelAsString": true
           }
+        },
+        "backupStartTimestamp": {
+          "description": "The time at which the backup process begins.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "backupStopTimestamp": {
+          "description": "The time at which the backup process ends.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "backupExpiryTimestamp": {
+          "description": "The time at which the backup will expire.",
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
