@@ -290,6 +290,15 @@
         }
       ]
     },
+    "LakeHouseLocation": {
+      "description": "The location of Microsoft Fabric LakeHouse Files dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
     "DatasetDataElement": {
       "description": "Columns that define the structure of the dataset.",
       "type": "object",
@@ -773,6 +782,7 @@
         },
         "compressionLevel": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The data compression method used for DelimitedText."
         },
         "quoteChar": {
@@ -1092,6 +1102,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "schema": {
@@ -1128,6 +1139,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "schema": {
@@ -1164,6 +1176,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "schema": {
@@ -1727,6 +1740,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "schema": {
@@ -1863,6 +1877,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "table": {
@@ -1899,6 +1914,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "schema": {
@@ -2043,6 +2059,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "table": {
@@ -3304,6 +3321,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "table": {
@@ -3576,6 +3594,34 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The database name of delta table. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "LakeHouseTableDataset": {
+      "x-ms-discriminator-value": "LakeHouseTable",
+      "description": "Microsoft Fabric LakeHouse Table.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Microsoft Fabric LakeHouse Table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LakeHouseTableDatasetTypeProperties"
+        }
+      }
+    },
+    "LakeHouseTableDatasetTypeProperties": {
+      "description": "Microsoft Fabric LakeHouse Table dataset properties.",
+      "type": "object",
+      "properties": {
+        "table": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of Microsoft Fabric LakeHouse Table. Type: string (or Expression with resultType string)."
         }
       }
     }
