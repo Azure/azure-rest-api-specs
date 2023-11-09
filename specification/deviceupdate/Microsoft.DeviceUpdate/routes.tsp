@@ -385,7 +385,24 @@ interface DeviceManagementOperations {
   getDeployment is ServiceOperations.ResourceRead<Deployment>;
 
   /** Creates or updates a deployment. */
-  createOrUpdateDeployment is ServiceOperations.ResourceCreateOrUpdate<Deployment>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation is neither ResourceCreateOrReplace nor ResourceCreateOrUpdate."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name."
+  @createsResource(Deployment)
+  @route("management/groups/{groupId}/deployments/{deploymentId}")
+  @put
+  createOrUpdateDeployment is Azure.Core.Foundations.Operation<
+    {
+      ...Azure.Core.Foundations.ItemKeysOf<Group>;
+
+      /** Deployment identifier. */
+      @path
+      deploymentId: string;
+    },
+    {
+      @statusCode _: 201 | 200;
+      @body body: Deployment;
+    }
+  >;
 
   /** Deletes a deployment. */
   deleteDeployment is ServiceOperations.ResourceDelete<Deployment>;
@@ -487,14 +504,16 @@ interface DeviceManagementOperations {
   deleteDeploymentForDeviceClassSubgroup is ServiceOperations.ResourceDelete<DeviceClassSubgroupDeployment>;
 
   /** Stops a deployment. */
-  cancel is ServiceOperations.ResourceAction<
+  @action("cancel")
+  stopDeployment is ServiceOperations.ResourceAction<
     DeviceClassSubgroupDeployment,
     {},
     DeviceClassSubgroupDeployment
   >;
 
   /** Retries a deployment with failed devices. */
-  retry is ServiceOperations.ResourceAction<
+  @action("retry")
+  retryDeployment is ServiceOperations.ResourceAction<
     DeviceClassSubgroupDeployment,
     {},
     DeviceClassSubgroupDeployment
@@ -561,10 +580,21 @@ interface DeviceManagementOperations {
   /** Get the device diagnostics log collection */
   getLogCollection is ServiceOperations.ResourceRead<LogCollection>;
 
-  // TODO: Is there ResourceCreateOnly? DO resource action with create operation. @createResource @parameterVisibility
   /** Start the device diagnostics log collection on specified devices. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation is neither ResourceCreateOrReplace nor ResourceCreateOrUpdate."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name."
-  startLogCollection is ServiceOperations.ResourceCreateOrUpdate<LogCollection>;
+  @createsResource(LogCollection)
+  @route("management/deviceDiagnostics/logCollections/{operationId}")
+  @put
+  startLogCollection is Azure.Core.Foundations.Operation<
+  {
+    ...Azure.Core.Foundations.ItemKeysOf<LogCollection>;
+  },
+  {
+    @statusCode _: 201;
+    @body body: LogCollection;
+  }
+>;
 
   /** Get log collection with detailed status */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."

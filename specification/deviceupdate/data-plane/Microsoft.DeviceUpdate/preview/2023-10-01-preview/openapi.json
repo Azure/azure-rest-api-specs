@@ -516,12 +516,9 @@
           }
         }
       },
-      "patch": {
+      "put": {
         "operationId": "DeviceManagementOperations_StartLogCollection",
         "description": "Start the device diagnostics log collection on specified devices.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -532,45 +529,13 @@
             "description": "The log collection id.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LogCollectionCreateOrUpdate"
-            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/LogCollection"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/LogCollection"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
             }
           },
           "default": {
@@ -1170,12 +1135,9 @@
           }
         }
       },
-      "patch": {
+      "put": {
         "operationId": "DeviceManagementOperations_CreateOrUpdateDeployment",
         "description": "Creates or updates a deployment.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1190,21 +1152,9 @@
           {
             "name": "deploymentId",
             "in": "path",
-            "description": "The caller-provided deployment identifier. This cannot be longer than 73\ncharacters, must be all lower-case, and cannot contain '&', '^', '[', ']', '{',\n'}', '|', '<', '>', forward slash, backslash, or double quote. The Updates view\nin the Azure Portal IoT Hub resource generates a GUID for deploymentId when you\ncreate a deployment.",
+            "description": "Deployment identifier.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeploymentCreateOrUpdate"
-            }
           }
         ],
         "responses": {
@@ -1212,26 +1162,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Deployment"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Deployment"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
             }
           },
           "default": {
@@ -1788,7 +1724,7 @@
     },
     "/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}:cancel": {
       "post": {
-        "operationId": "DeviceManagementOperations_Cancel",
+        "operationId": "DeviceManagementOperations_StopDeployment",
         "description": "Stops a deployment.",
         "parameters": [
           {
@@ -1848,14 +1784,14 @@
         },
         "x-ms-examples": {
           "Device Management Stop Deployment": {
-            "$ref": "./examples/DeviceManagement_CancelDeployment.json"
+            "$ref": "./examples/DeviceManagement_StopDeployment.json"
           }
         }
       }
     },
     "/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}:retry": {
       "post": {
-        "operationId": "DeviceManagementOperations_Retry",
+        "operationId": "DeviceManagementOperations_RetryDeployment",
         "description": "Retries a deployment with failed devices.",
         "parameters": [
           {
@@ -2939,20 +2875,6 @@
         "failure"
       ]
     },
-    "CloudInitiatedRollbackPolicyCreateOrUpdate": {
-      "type": "object",
-      "description": "Rollback policy for deployment",
-      "properties": {
-        "update": {
-          "$ref": "#/definitions/UpdateInfoCreateOrUpdate",
-          "description": "Update to rollback to."
-        },
-        "failure": {
-          "$ref": "#/definitions/CloudInitiatedRollbackPolicyFailureCreateOrUpdate",
-          "description": "Failure conditions to initiate rollback policy."
-        }
-      }
-    },
     "CloudInitiatedRollbackPolicyFailure": {
       "type": "object",
       "description": "Failure conditions to initiate rollback policy",
@@ -2972,22 +2894,6 @@
         "devicesFailedPercentage",
         "devicesFailedCount"
       ]
-    },
-    "CloudInitiatedRollbackPolicyFailureCreateOrUpdate": {
-      "type": "object",
-      "description": "Failure conditions to initiate rollback policy",
-      "properties": {
-        "devicesFailedPercentage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Percentage of devices that failed."
-        },
-        "devicesFailedCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of devices that failed."
-        }
-      }
     },
     "ContractModel": {
       "type": "object",
@@ -3058,6 +2964,7 @@
           "description": "The deployment start datetime.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -3115,45 +3022,6 @@
         "update",
         "groupId"
       ]
-    },
-    "DeploymentCreateOrUpdate": {
-      "type": "object",
-      "description": "Deployment metadata.",
-      "properties": {
-        "startDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The deployment start datetime.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "update": {
-          "$ref": "#/definitions/UpdateInfoCreateOrUpdate",
-          "description": "Update information for the update in the deployment.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "groupId": {
-          "type": "string",
-          "description": "The group identity for the devices the deployment is intended to update.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "rollbackPolicy": {
-          "$ref": "#/definitions/CloudInitiatedRollbackPolicyCreateOrUpdate",
-          "description": "The rollback policy for the deployment.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      }
     },
     "DeploymentDeviceState": {
       "type": "object",
@@ -3439,6 +3307,7 @@
           "description": "The deployment start datetime.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -4120,7 +3989,8 @@
         {
           "$ref": "#/definitions/Step"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Inline"
     },
     "InstallResult": {
       "type": "object",
@@ -4238,32 +4108,6 @@
         "operationId",
         "deviceList"
       ]
-    },
-    "LogCollectionCreateOrUpdate": {
-      "type": "object",
-      "description": "Diagnostics request body",
-      "properties": {
-        "deviceList": {
-          "type": "array",
-          "description": "Array of Device Update agent ids",
-          "items": {
-            "$ref": "#/definitions/DeviceUpdateAgentId"
-          },
-          "x-ms-identifiers": [],
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the diagnostics operation.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      }
     },
     "LogCollectionDetailedStatusList": {
       "type": "object",
@@ -4761,7 +4605,8 @@
         {
           "$ref": "#/definitions/Step"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Reference"
     },
     "Step": {
       "type": "object",
@@ -4769,14 +4614,17 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/StepType",
-          "description": "Step type.",
-          "default": "Inline"
+          "description": "Step type."
         },
         "description": {
           "type": "string",
           "description": "Step description."
         }
-      }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
     },
     "StepResult": {
       "type": "object",
@@ -5159,10 +5007,6 @@
       "required": [
         "updateId"
       ]
-    },
-    "UpdateInfoCreateOrUpdate": {
-      "type": "object",
-      "description": "Update information."
     },
     "UpdateOperation": {
       "type": "object",

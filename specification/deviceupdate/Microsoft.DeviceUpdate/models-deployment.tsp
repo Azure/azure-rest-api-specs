@@ -22,7 +22,7 @@ model Deployment {
   deploymentId: string;
 
   /** The deployment start datetime. */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   startDateTime: utcDateTime;
 
   /** Update information for the update in the deployment. */

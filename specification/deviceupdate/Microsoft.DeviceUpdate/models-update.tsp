@@ -68,9 +68,10 @@ model Instructions {
 }
 
 /** Update install instruction step. */
+@discriminator("type")
 model Step {
   /** Step type. */
-  type?: StepType = StepType.Inline;
+  type: StepType;
 
   /** Step description. */
   description?: string;
@@ -87,6 +88,9 @@ enum StepType {
 
 /** Installation instruction step that performs code execution. */
 model InlineStep extends Step {
+  /** Step type. */
+  type: StepType.Inline;
+
   /** Identity of handler that will execute this step. Required if step type is inline. */
   handler: string;
 
@@ -102,6 +106,9 @@ model InlineStep extends Step {
 
 /** Installation instruction step that installs another update. */
 model ReferenceStep extends Step {
+  /** Step type. */
+  type: StepType.Reference;
+
   /** Referenced child update identity. */
   updateId: UpdateId;
 }
