@@ -435,8 +435,8 @@ interface DeviceManagementOperations {
     ListQueryParametersTrait<{
       /**
        * Restricts the set of device class subgroups returned. You can filter on compat
-       * properties by name and value. (i.e. filter=compatProperties/propertyName1 eq
-       * 'value1' and compatProperties/propertyName2 eq 'value2')
+       * properties by name and value. (i.e. filter=compatProperties/propertyName1 eq 'value1'
+       * and compatProperties/propertyName2 eq 'value2')
        */
       @query
       filter?: string;
