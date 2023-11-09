@@ -1283,13 +1283,13 @@
         }
       }
     },
-    "/instantvoices": {
+    "/personalvoices": {
       "get": {
         "tags": [
-          "InstantVoice"
+          "PersonalVoice"
         ],
-        "description": "Gets a list of instant voices for the authenticated subscription.",
-        "operationId": "InstantVoices_List",
+        "description": "Gets a list of personal voices for the authenticated subscription.",
+        "operationId": "PersonalVoices_List",
         "produces": [
           "application/json"
         ],
@@ -1311,7 +1311,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/PaginatedInstantVoices"
+              "$ref": "#/definitions/PaginatedPersonalVoices"
             }
           },
           "default": {
@@ -1326,19 +1326,19 @@
           "itemName": "value"
         },
         "x-ms-examples": {
-          "Get all instant voices": {
-            "$ref": "./examples/get_instantvoices.json"
+          "Get all personal voices": {
+            "$ref": "./examples/get_personalvoices.json"
           }
         }
       }
     },
-    "/instantvoices/{id}": {
+    "/personalvoices/{id}": {
       "get": {
         "tags": [
-          "InstantVoice"
+          "PersonalVoice"
         ],
-        "description": "Gets the instant voice identified by the given ID.",
-        "operationId": "InstantVoices_Get",
+        "description": "Gets the personal voice identified by the given ID.",
+        "operationId": "PersonalVoices_Get",
         "produces": [
           "application/json"
         ],
@@ -1354,7 +1354,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/InstantVoice"
+              "$ref": "#/definitions/PersonalVoice"
             }
           },
           "default": {
@@ -1365,17 +1365,17 @@
           }
         },
         "x-ms-examples": {
-          "Get an instant voice": {
-            "$ref": "./examples/get_instantvoice.json"
+          "Get a personal voice": {
+            "$ref": "./examples/get_personalvoice.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "InstantVoice"
+          "PersonalVoice"
         ],
-        "description": "Deletes the instant voice identified by the given ID.",
-        "operationId": "InstantVoices_Delete",
+        "description": "Deletes the personal voice identified by the given ID.",
+        "operationId": "PersonalVoices_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/PathId"
@@ -1396,17 +1396,17 @@
           }
         },
         "x-ms-examples": {
-          "Delete an instant voice": {
-            "$ref": "./examples/delete_instantvoice.json"
+          "Delete a personal voice": {
+            "$ref": "./examples/delete_personalvoice.json"
           }
         }
       },
       "put": {
         "tags": [
-          "InstantVoice"
+          "PersonalVoice"
         ],
-        "description": "Creates a new instant voice.",
-        "operationId": "InstantVoices_Create",
+        "description": "Creates a new personal voice.",
+        "operationId": "PersonalVoices_Create",
         "consumes": [
           "application/json"
         ],
@@ -1425,11 +1425,11 @@
           },
           {
             "in": "body",
-            "name": "instantvoice",
-            "description": "instant voice definition",
+            "name": "personalvoice",
+            "description": "personal voice definition",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InstantVoice"
+              "$ref": "#/definitions/PersonalVoice"
             }
           }
         ],
@@ -1437,7 +1437,7 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/InstantVoice"
+              "$ref": "#/definitions/PersonalVoice"
             },
             "headers": {
               "Operation-Id": {
@@ -1460,17 +1460,17 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create an instantvoice": {
-            "$ref": "./examples/create_instantvoice.json"
+          "Create a personal voice": {
+            "$ref": "./examples/create_personalvoice.json"
           }
         }
       },
       "post": {
         "tags": [
-          "InstantVoice"
+          "PersonalVoice"
         ],
-        "description": "Creates a new instant voice.",
-        "operationId": "InstantVoices_Post",
+        "description": "Creates a new personal voice.",
+        "operationId": "PersonalVoices_Post",
         "consumes": [
           "multipart/form-data"
         ],
@@ -1526,7 +1526,7 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/InstantVoice"
+              "$ref": "#/definitions/PersonalVoice"
             },
             "headers": {
               "Operation-Id": {
@@ -1552,8 +1552,8 @@
           "final-state-via": "operation-location"
         },
         "x-ms-examples": {
-          "Create an instant voice": {
-            "$ref": "./examples/create_instantvoice_with_multipart_form.json"
+          "Create a personal voice": {
+            "$ref": "./examples/create_personalvoice_with_multipart_form.json"
           }
         }
       }
@@ -1843,7 +1843,7 @@
         "MissingValidVerbalConsentStatement",
         "NeuralTrainingNotSupported",
         "NeuralTrainingNotAvailableInThisRegion",
-        "InstantVoiceNotAvailableInThisRegion",
+        "PersonalVoiceNotAvailableInThisRegion",
         "VideoTranslationNotAvailableInThisRegion",
         "NoPermissionToTrainModel",
         "ReachedConcurrentLimit",
@@ -2294,18 +2294,18 @@
         }
       }
     },
-    "PaginatedInstantVoices": {
-      "description": "Paginated instant voice list",
+    "PaginatedPersonalVoices": {
+      "description": "Paginated personal voice list",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
-          "description": "Instant voice list",
+          "description": "Personal voice list",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/InstantVoice"
+            "$ref": "#/definitions/PersonalVoice"
           }
         },
         "nextLink": {
@@ -2369,7 +2369,7 @@
       "description": "Project kind",
       "enum": [
         "TextToSpeech",
-        "InstantVoice"
+        "PersonaltVoice"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2526,8 +2526,8 @@
       },
       "readOnly": true
     },
-    "InstantVoice": {
-      "description": "Instant voice object",
+    "PersonalVoice": {
+      "description": "Personal voice object",
       "required": [
         "projectId",
         "consentId"
@@ -2538,18 +2538,18 @@
           "$ref": "#/definitions/ResourceId"
         },
         "speakerProfileId": {
-          "description": "Instant voice speaker profile id. Fill this property in SSML.",
+          "description": "Personal voice speaker profile id. Fill this property in SSML.",
           "type": "string",
           "format": "uuid",
           "readOnly": true
         },
         "displayName": {
-          "description": "Display name of instant voice",
+          "description": "Display name of personal voice",
           "minLength": 1,
           "type": "string"
         },
         "description": {
-          "description": "Instant voice description",
+          "description": "Personal voice description",
           "type": "string"
         },
         "projectId": {
@@ -2564,7 +2564,7 @@
           "format": "uri"
         },
         "properties": {
-          "$ref": "#/definitions/InstantVoiceProperties"
+          "$ref": "#/definitions/PersonalVoiceProperties"
         },
         "status": {
           "$ref": "#/definitions/Status"
@@ -2583,8 +2583,8 @@
         }
       }
     },
-    "InstantVoiceProperties": {
-      "description": "Instant voice properties",
+    "PersonalVoiceProperties": {
+      "description": "Personal voice properties",
       "type": "object",
       "properties": {
         "failureReason": {
