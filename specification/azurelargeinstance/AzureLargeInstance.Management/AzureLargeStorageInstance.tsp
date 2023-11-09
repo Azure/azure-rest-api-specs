@@ -24,6 +24,7 @@ model AzureLargeStorageInstance
 }
 
 @armResourceOperations
+@friendlyName("AzureLargeStorageInstance")
 interface AzureLargeStorageInstances {
   @doc("""
 Gets an Azure Large Storage instance for the specified subscription, resource

@@ -229,6 +229,7 @@ model NetworkProfile {
 @doc("Specifies the IP address of the network interface.")
 model IpAddress {
   @doc("Specifies the IP address of the network interface.")
+  @projectedName("csharp", "ipAddressValue")
   ipAddress?: string;
 }
 
