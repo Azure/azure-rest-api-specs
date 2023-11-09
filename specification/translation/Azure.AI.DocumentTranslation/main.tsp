@@ -17,9 +17,9 @@ using Azure.Core;
 @versioned(DocumentTranslation.Versions)
 namespace DocumentTranslation;
 
-@doc("The Azure.AI.DocumentTranslation service versions.")
+/** The Azure.AI.DocumentTranslation service versions. */
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  @doc("The 2023-11-01-preview version of the Azure.AI.DocumentTranslation service.")
+  /** The 2023-11-01-preview version of the Azure.AI.DocumentTranslation service. */
   `2023-11-01-preview`,
 }

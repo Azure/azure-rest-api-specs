@@ -36,16 +36,8 @@
       "get": {
         "operationId": "GetSingleDocumentFormats",
         "summary": "Gets the set of file formats currently supported by documents.",
-        "description": "Gets the set of file formats currently supported by documents.",
+        "description": "The Get supported document formats method returns a list of document formats supported by the Document Translation service.\nThe list includes the common file extension used.",
         "parameters": [
-          {
-            "name": "X-ClientTraceId",
-            "in": "header",
-            "description": "A client-generated GUID to uniquely identify the request.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientTraceId"
-          },
           {
             "name": "api-version",
             "in": "query",
@@ -53,6 +45,14 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "X-ClientTraceId",
+            "in": "header",
+            "description": "A client-generated GUID to uniquely identify the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientTraceId"
           }
         ],
         "responses": {
@@ -96,16 +96,8 @@
       "get": {
         "operationId": "GetSingleGlossaryFormats",
         "summary": "Gets the set of file formats currently supported by glossaries.",
-        "description": "Gets the set of file formats currently supported by glossaries.",
+        "description": "The Get supported glossary formats method returns a list of glossary formats supported by the Document Translation service.\nThe list includes the common file extension used.",
         "parameters": [
-          {
-            "name": "X-ClientTraceId",
-            "in": "header",
-            "description": "A client-generated GUID to uniquely identify the request.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientTraceId"
-          },
           {
             "name": "api-version",
             "in": "query",
@@ -113,6 +105,14 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "X-ClientTraceId",
+            "in": "header",
+            "description": "A client-generated GUID to uniquely identify the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientTraceId"
           }
         ],
         "responses": {
@@ -155,29 +155,23 @@
     "/single:translateDocument": {
       "post": {
         "operationId": "SingleTranslateDocument",
-        "description": "Translate Single Document.",
+        "description": "Use this API to translate a single document.\nAll supported document formats can be obtained with `single/formats` API.\nSingle Glossary / Translation memory can be included in the request and applied by the service when the document is translated.",
         "produces": [
           "application/octet-stream",
-          "text/csv",
-          "text/html",
-          "text/markdown",
-          "text/x-markdown",
-          "message/rfc822",
-          "application/x-mimearchive",
-          "multipart/related",
-          "application/vnd.openxmlformats-officedocument",
-          "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-          "application/vnd.ms-outlook",
-          "text/plain",
-          "text/tab-separated-values",
-          "application/xliff+xml"
+          "application/json"
         ],
         "consumes": [
           "multipart/form-data"
         ],
         "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Mandatory API version parameter",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
           {
             "name": "X-ClientTraceId",
             "in": "header",
@@ -199,40 +193,39 @@
             "$ref": "#/parameters/TranslateDocumentParameters.allowFallback"
           },
           {
-            "$ref": "#/parameters/TranslateDocumentParameters.apiVersion"
-          },
-          {
-            "$ref": "#/parameters/TranslateDocumentParameters.accept"
-          },
-          {
             "name": "document",
             "in": "formData",
             "description": "Actual Document in the form.",
             "required": true,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "binary"
-            }
+            "type": "string",
+            "format": "byte"
           },
           {
             "name": "glossary",
             "in": "formData",
             "description": "Actual glossary in the form.",
             "required": true,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "binary"
-            }
+            "type": "string",
+            "format": "byte"
           }
         ],
         "responses": {
           "200": {
             "description": "Successful request and the document is translated. The translated document is returned in the body.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
+            },
+            "headers": {
+              "X-RequestId": {
+                "type": "string",
+                "description": "Value generated by the service to identify the request. It is used for troubleshooting purposes."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             },
             "headers": {
               "X-RequestId": {
@@ -248,7 +241,16 @@
   "definitions": {
     "DocumentFormatParameters": {
       "type": "object",
-      "description": "Request parameters for the Document file Formats."
+      "description": "Request parameters for the Document file Formats.",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "Mandatory API version parameter"
+        }
+      },
+      "required": [
+        "apiVersion"
+      ]
     },
     "DocumentormatResult": {
       "type": "object",
@@ -272,8 +274,7 @@
       "description": "Error details as returned by Translator Service.",
       "properties": {
         "code": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "Number identifier of the error."
         },
         "message": {
@@ -343,7 +344,16 @@
     },
     "GlossaryFormatParameters": {
       "type": "object",
-      "description": "Request parameters for the Glossary Formats."
+      "description": "Request parameters for the Glossary Formats.",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "Mandatory API version parameter"
+        }
+      },
+      "required": [
+        "apiVersion"
+      ]
     },
     "GlossaryFormatResult": {
       "type": "object",
@@ -367,18 +377,14 @@
       "description": "Translate Document Request Body.",
       "properties": {
         "document": {
-          "type": "array",
-          "description": "Actual Document in the form.",
-          "items": {
-            "$ref": "#/definitions/binary"
-          }
+          "type": "string",
+          "format": "byte",
+          "description": "Actual Document in the form."
         },
         "glossary": {
-          "type": "array",
-          "description": "Actual glossary in the form.",
-          "items": {
-            "$ref": "#/definitions/binary"
-          }
+          "type": "string",
+          "format": "byte",
+          "description": "Actual glossary in the form."
         }
       },
       "required": [
@@ -417,40 +423,9 @@
           }
         ]
       }
-    },
-    "binary": {
-      "type": "string",
-      "format": "binary",
-      "description": "Binary data format."
     }
   },
   "parameters": {
-    "TranslateDocumentParameters.accept": {
-      "name": "accept",
-      "in": "header",
-      "description": "accepted content types",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "application/octet-stream",
-        "text/csv",
-        "text/html",
-        "text/markdown",
-        "text/x-markdown",
-        "message/rfc822",
-        "application/x-mimearchive",
-        "multipart/related",
-        "application/vnd.openxmlformats-officedocument",
-        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        "application/vnd.ms-outlook",
-        "text/plain",
-        "text/tab-separated-values",
-        "application/xliff+xml"
-      ],
-      "x-ms-parameter-location": "method"
-    },
     "TranslateDocumentParameters.allowFallback": {
       "name": "AllowFallback",
       "in": "query",
@@ -459,15 +434,6 @@
       "type": "boolean",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "allowFallback"
-    },
-    "TranslateDocumentParameters.apiVersion": {
-      "name": "api-version",
-      "in": "query",
-      "description": "Mandatory API version parameter",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "apiVersion"
     },
     "TranslateDocumentParameters.category": {
       "name": "Category",

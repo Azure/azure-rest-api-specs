@@ -8,15 +8,15 @@ using Azure.Core;
 
 namespace DocumentTranslation;
 
-@doc("Request parameters for the Glossary Formats.")
+/** Request parameters for the Glossary Formats. */
 model GlossaryFormatParameters {
   ...CommonParameters;
 }
 
-@doc("Response for the Glossary Formats.")
+/** Response for the Glossary Formats. */
 model GlossaryFormatResult {
   ...CommonResultHeaders;
   @body
-  @doc("Array of the FileFormat.")
+  /** Array of the FileFormat. */
   value: FileFormat[];
 }

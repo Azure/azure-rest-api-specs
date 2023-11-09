@@ -8,15 +8,15 @@ using Azure.Core;
 
 namespace DocumentTranslation;
 
-@doc("Request parameters for the Document file Formats.")
+/** Request parameters for the Document file Formats. */
 model DocumentFormatParameters {
   ...CommonParameters;
 }
 
-@doc("Response for the Document Formats.")
+/** Response for the Document Formats. */
 model DocumentormatResult {
   ...CommonResultHeaders;
   @body
-  @doc("Array of the FileFormat.")
+  /** Array of the FileFormat. */
   value: FileFormat[];
 }
