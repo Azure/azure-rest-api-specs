@@ -385,7 +385,8 @@
             "HealthCheckFailed",
             "ReadyToInstall",
             "ScanInProgress",
-            "ScanFailed"
+            "ScanFailed",
+            "AdditionalContentRequired"
           ],
           "x-ms-enum": {
             "name": "state",
@@ -554,6 +555,10 @@
       "properties": {
         "name": {
           "description": "Name of the individual test/rule/alert that was executed. Unique, not exposed to the customer.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The healthcheck DisplayName localized of the individual test executed.",
           "type": "string"
         },
         "tags": {
