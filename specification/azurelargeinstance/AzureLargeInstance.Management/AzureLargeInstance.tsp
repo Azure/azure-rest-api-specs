@@ -23,6 +23,7 @@ model AzureLargeInstance is ProxyResource<AzureLargeInstanceProperties> {
 }
 
 @armResourceOperations
+@friendlyName("AzureLargeInstance")
 interface AzureLargeInstances {
   @doc("""
 Gets an Azure Large Instance for the specified subscription, resource group,

@@ -238,11 +238,13 @@ and halt any existing processes that may be running on the server
 """)
 model ForceState {
   @doc("Whether to force restart by shutting all processes.")
+  @projectedName("csharp", "forceStateValue")
   forceState?: AzureLargeInstanceForcePowerState;
 }
 
 @doc("Tags field of the AzureLargeInstance instance.")
 model Tags {
+  @projectedName("csharp", "tagsValue")
   @doc("Tags field of the AzureLargeInstance instance.")
   tags?: Record<string>;
 }
