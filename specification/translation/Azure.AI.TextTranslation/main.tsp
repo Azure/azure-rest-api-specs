@@ -42,7 +42,17 @@ Dictionary lookup. Returns equivalent words for the source term in the target la
 Dictionary example Returns grammatical structure and context examples for the source term and target term pair.
 """)
 @versioned(APIVersion)
-@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
+
+@useAuth(
+  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.clientCredentials,
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      refreshUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      scopes: ["https://cognitiveservices.azure.com/.default"],
+    }
+  ]>
+)
 
 namespace TextTranslation;
 
