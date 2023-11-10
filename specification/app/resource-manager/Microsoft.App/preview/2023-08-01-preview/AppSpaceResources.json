@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-03-01",
-    "title": "AppSpaceResources API Client"
+    "version": "2023-08-01-preview",
+    "title": "AppSpaces API Client"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/appSpaces/{appSpaceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/appSpaces/{appSpaceName}/spaceResources": {
       "get": {
         "tags": [
           "AppSpaceResources"
@@ -115,7 +115,7 @@
           }
         },
         "x-ms-examples": {
-          "Get App Space": {
+          "Get App Space Resource": {
             "$ref": "./examples/AppSpaceResources_Get.json"
           }
         }
@@ -165,7 +165,7 @@
           "200": {
             "description": "App Space Resource create or update has been completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AppSpace"
+              "$ref": "#/definitions/AppSpaceResource"
             }
           },
           "default": {
@@ -176,7 +176,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or Update App Space": {
+          "Create or Update App Space Resource": {
             "$ref": "./examples/AppSpaceResources_CreateOrUpdate.json"
           }
         },
@@ -229,7 +229,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete App Space": {
+          "Delete App Space Resource": {
             "$ref": "./examples/AppSpaceResources_Delete.json"
           }
         },
