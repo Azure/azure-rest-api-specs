@@ -46,8 +46,8 @@ Dictionary example Returns grammatical structure and context examples for the so
 @useAuth(AzureKey)
 namespace TextTranslation;
 
-@doc(“The secret key and region for your Azure Cognitive Services subscription.”)
-model AzureKey is ApiKeyAuth<ApiKeyLocation.header, “Ocp-Apim-Subscription-Key”, “Ocp-Apim-Subscription-Region”>;
+@doc("""The secret key and region for your Azure Cognitive Services subscription.""")
+model AzureKey is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key", "Ocp-Apim-Subscription-Region">;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 @doc("Text Translation supported versions")
