@@ -45,6 +45,7 @@ These settings apply only when `--tag=package-2022-10-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-10-01'
 input-file:
+  - Microsoft.DeviceUpdate/stable/2022-10-01/deviceupdate.json
   - Microsoft.DeviceUpdate/duiothub/stable/2022-10-01/deviceupdate.json
 ```
 
@@ -54,6 +55,7 @@ These settings apply only when `--tag=package-2022-04-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-04-01-preview'
 input-file:
+  - Microsoft.DeviceUpdate/preview/2022-04-01-preview/deviceupdate.json
   - Microsoft.DeviceUpdate/duiothub/preview/2022-04-01-preview/deviceupdate.json
 ```
 
@@ -63,6 +65,7 @@ These settings apply only when `--tag=package-2020-03-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-03-01-preview'
 input-file:
+  - Microsoft.DeviceUpdate/preview/2020-03-01-preview/deviceupdate.json
   - Microsoft.DeviceUpdate/duiothub/preview/2020-03-01-preview/deviceupdate.json
 ```
 
