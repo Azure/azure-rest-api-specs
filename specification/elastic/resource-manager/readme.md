@@ -154,6 +154,7 @@ These settings apply only when `--tag=package-2023-11-01-preview` is specified o
 ```yaml $(tag) == 'package-2023-11-01-preview'
 input-file:
   - Microsoft.Elastic/preview/2023-11-01-preview/elastic.json
+```
 
 ---
 # Code Generation
