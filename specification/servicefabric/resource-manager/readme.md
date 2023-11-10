@@ -65,8 +65,8 @@ These settings apply only when `--tag=package-2023-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-11'
 input-file:
-- Microsoft.ServiceFabric/preview/2023-11-01/cluster.json
-- Microsoft.ServiceFabric/preview/2023-11-01/application.json
+- Microsoft.ServiceFabric/preview/2023-11-01-preview/cluster.json
+- Microsoft.ServiceFabric/preview/2023-11-01-preview/application.json
 ```
 
 ### Tag: package-2021-06
