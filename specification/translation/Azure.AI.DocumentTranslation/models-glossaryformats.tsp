@@ -16,7 +16,8 @@ model GlossaryFormatParameters {
 /** Response for the Glossary Formats. */
 model GlossaryFormatResult {
   ...CommonResultHeaders;
-  @body
+
   /** Array of the FileFormat. */
+  @body
   value: FileFormat[];
 }

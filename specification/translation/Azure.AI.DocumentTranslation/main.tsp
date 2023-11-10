@@ -8,9 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-@useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">
-)
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @service({
   title: "Azure.AI.DocumentTranslation service",
 })
@@ -19,7 +17,7 @@ namespace DocumentTranslation;
 
 /** The Azure.AI.DocumentTranslation service versions. */
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   /** The 2023-11-01-preview version of the Azure.AI.DocumentTranslation service. */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   `2023-11-01-preview`,
 }

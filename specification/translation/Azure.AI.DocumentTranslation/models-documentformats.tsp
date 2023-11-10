@@ -16,7 +16,8 @@ model DocumentFormatParameters {
 /** Response for the Document Formats. */
 model DocumentFormatResult {
   ...CommonResultHeaders;
-  @body
+
   /** Array of the FileFormat. */
+  @body
   value: FileFormat[];
 }
