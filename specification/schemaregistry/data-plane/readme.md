@@ -26,7 +26,7 @@ These are the global settings for the schemaregistry.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2022-10
+tag: package-2023-07-01
 ```
 
 ### Tag: package-2021-10
@@ -45,4 +45,13 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 ```yaml $(tag) == 'package-2022-10'
 input-file:
   - Microsoft.EventHub/stable/2022-10/schemaregistry.json
+```
+
+### Tag: package-2023-07-01
+
+These settings apply only when `--tag=package-2023-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-07-01'
+input-file:
+  - Microsoft.EventHub/stable/2023-07-01/schemaregistry.json
 ```

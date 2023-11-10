@@ -48,6 +48,8 @@ input-file:
   - Microsoft.CostManagement/stable/2023-08-01/costmanagement.json
   - Microsoft.CostManagement/stable/2023-08-01/costmanagement.pricesheets.json
   - Microsoft.CostManagement/stable/2023-08-01/scheduledActions.json
+  - Microsoft.CostManagement/stable/2023-08-01/costallocation.json
+  - Microsoft.CostManagement/stable/2023-08-01/settings.json
 ```
 ### Tag: package-2023-03
 
@@ -406,6 +408,42 @@ directive:
   - suppress: GetCollectionResponseSchema
     from: common-types.json
     reason: 'Operations does not contain a path for individual GET'
+  - suppress: TopLevelResourcesListBySubscription
+    from: costallocation.json
+    reason: 'List by subscription is not supported in cost allocation by desgin'
+  - suppress: PathForResourceAction
+    from: costallocation.json
+    reason: 'This is not a valid scenario for the checkNameAvailability API as the name itself represents an action.'
+  - suppress: PathForPutOperation
+    from: costallocation.json
+    reason: 'Subscripiton and ResourceGroup scope is not supported in cost allocation by desgin'
+  - suppress: RequiredReadOnlySystemData
+    from: costallocation.json
+    reason: 'cost allocation does not return system data and will consider adding it in the future or upcoming api version'
+  - suppress: EnumInsteadOfBoolean
+    from: costallocation.json
+    reason: 'Keeping it as boolean property as per the design'
+  - suppress: NoDuplicatePathsForScopeParameter
+    from: settings.json
+    reason: 'Settings does not use scope for List API'
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: settings.json
+    reason: 'Settings List designed to deliver very limited records'
+  - suppress: PageableOperation
+    from: settings.json
+    reason: 'Settings List designed to deliver very limited records'
+  - suppress: TopLevelResourcesListBySubscription
+    from: settings.json
+    reason: 'List by subscription is not supported in settings by desgin'
+  - suppress: EnumInsteadOfBoolean
+    from: settings.json
+    reason: 'Keeping it as boolean property as per the design'
+  - suppress: ParameterNotUsingCommonTypes
+    from: settings.json
+    reason: 'Settings does not support all the scopes to use it from common types, hence we have defined exclusively with custom description.'
+  - suppress: RequiredReadOnlySystemData
+    from: settings.json
+    reason: 'Settings does not return system data and will consider adding it in the future or upcoming api version'
         
 ```
 

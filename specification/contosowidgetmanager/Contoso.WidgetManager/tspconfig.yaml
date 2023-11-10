@@ -1,4 +1,4 @@
-parameters:  
+parameters:
   "service-dir":
     default: "sdk/contosowidgetmanager"
   "dependencies":
@@ -7,6 +7,9 @@ parameters:
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
@@ -15,7 +18,6 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/widgets.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-contoso-widgetmanager"
-    package-mode: "dataplane"
     package-name: "{package-dir}"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Template.Contoso"

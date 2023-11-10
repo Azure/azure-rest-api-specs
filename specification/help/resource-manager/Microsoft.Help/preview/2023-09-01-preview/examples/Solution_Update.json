@@ -1,0 +1,316 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "scope": "subscriptions/mySubscription/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp",
+    "solutionResourceName": "SolutionResourceName1",
+    "solutionRequestBody": {
+      "properties": {
+        "triggerCriteria": [
+          {
+            "name": "ReplacementKey",
+            "value": "<!--12345678-BBBb-cCCCC-0000-123456789012-->"
+          }
+        ],
+        "parameters": {
+          "SupportTopic": "Application Gateway\\502 errors\\Unhealthy backend pool",
+          "SupportTopicSapId": "12345678-BBBb-cCCCC-0000-123456789012",
+          "SrId": "0000000000000000",
+          "ProblemStartTime": "6/15/2021 2:00:00 PM",
+          "CaseCreationTime": "6/16/2021 11:53:04 PM"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/mySubscription/resourceGroups/myresourceGroup/providers/Microsoft.Help/solutions/SolutionResourceName1/operationResults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2023-03-03-preview",
+        "Location": "https://management.azure.com/subscriptions/mySubscription/resourceGroups/myresourceGroup/providers/Microsoft.Help/solutions/SolutionResourceName1/operationResults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2023-03-03-preview"
+      },
+      "body": {
+        "id": "/subscriptions/mySubscription/resourceGroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp/providers/Microsoft.Help/solutions/SolutionResourceName1",
+        "name": "SolutionResourceName1",
+        "type": "Microsoft.Help/solutions",
+        "properties": {
+          "solutionId": "sampleSolutionId",
+          "provisioningState": "Succeeded",
+          "title": "RBAC Authentication Common Solutions",
+          "content": "<p>sample content</p>",
+          "replacementMaps": {
+            "webResults": [
+              {
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->",
+                "searchResults": [
+                  {
+                    "solutionId": "sampleSolutionId",
+                    "content": "I sysprep a VM and now I cannot connect to it via <b>RDP</b>",
+                    "title": "Cannot RDP VM after SysPrep",
+                    "confidence": "High",
+                    "source": "sampleSource",
+                    "resultType": "Community",
+                    "rank": 1,
+                    "link": "sampleLink"
+                  }
+                ]
+              }
+            ],
+            "diagnostics": [
+              {
+                "solutionId": "sampleSolutionId1",
+                "status": "Succeeded",
+                "statusDetails": "",
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->",
+                "requiredParameters": null,
+                "insights": [
+                  {
+                    "id": "InsightArticleId",
+                    "title": "An example title for an Insight",
+                    "results": "Article Content",
+                    "importanceLevel": "Critical"
+                  }
+                ]
+              },
+              {
+                "solutionId": "sampleSolutionId2",
+                "status": "Failed",
+                "statusDetails": "",
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->",
+                "requiredParameters": [
+                  "parameter1",
+                  "parameter2"
+                ],
+                "insights": []
+              },
+              {
+                "solutionId": "sampleSolutionId3",
+                "status": "Failed",
+                "statusDetails": "Timeout text authored in Solution article ",
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->",
+                "requiredParameters": [
+                  "parameter1",
+                  "parameter2"
+                ],
+                "insights": []
+              },
+              {
+                "solutionId": "sampleSolutionId4",
+                "status": "Failed",
+                "statusDetails": "Sample status details",
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->",
+                "requiredParameters": [
+                  "parameter1",
+                  "parameter2"
+                ],
+                "insights": []
+              }
+            ],
+            "metricsBasedCharts": [
+              {
+                "name": "CPU_percent",
+                "aggregationType": "Max",
+                "timeSpanDuration": "1d",
+                "title": "CPU Usage in the last one day",
+                "filterGroup": null,
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->"
+              },
+              {
+                "name": "memory_percent",
+                "aggregationType": "Max",
+                "timeSpanDuration": "1d",
+                "title": "Memory Usage in the last one day",
+                "filterGroup": null,
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->"
+              },
+              {
+                "name": "io_consumption_percent",
+                "aggregationType": "Max",
+                "timeSpanDuration": "1d",
+                "title": "IOPS Usage in the last one day",
+                "filterGroup": null,
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->"
+              },
+              {
+                "name": "active_connections",
+                "aggregationType": "Max",
+                "timeSpanDuration": "1d",
+                "title": "Active Connections in the last one day",
+                "filterGroup": null,
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->"
+              }
+            ],
+            "videos": [
+              {
+                "src": "sampleLink",
+                "title": "CI - CD with Azure DevOps",
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->"
+              }
+            ],
+            "videoGroups": [
+              {
+                "videos": [
+                  {
+                    "src": "sampleLink",
+                    "title": "widthtest"
+                  }
+                ],
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->"
+              }
+            ]
+          },
+          "sections": [
+            {
+              "title": "RBAC Authentication Common Solutions",
+              "content": "<p>sample content</p>",
+              "replacementMaps": {}
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/mySubscription/resourceGroups/myresourceGroup/providers/Microsoft.Help/solutions/SolutionResourceName1/operationResults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2023-03-03-preview",
+        "Location": "https://management.azure.com/subscriptions/mySubscription/resourceGroups/myresourceGroup/providers/Microsoft.Help/solutions/SolutionResourceName1/operationResults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2023-03-03-preview"
+      },
+      "body": {
+        "id": "/subscriptions/mySubscription/resourceGroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-rp/providers/Microsoft.Help/solutions/SolutionResourceName1",
+        "name": "SolutionResourceName1",
+        "type": "Microsoft.Help/solutions",
+        "properties": {
+          "solutionId": "sampleSolutionId",
+          "provisioningState": "Succeeded",
+          "title": "RBAC Authentication Common Solutions",
+          "content": "<p>sample content</p>",
+          "replacementMaps": {
+            "webResults": [
+              {
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->",
+                "searchResults": [
+                  {
+                    "solutionId": "sampleSolutionId",
+                    "content": "I sysprep a VM and now I cannot connect to it via <b>RDP</b>",
+                    "title": "Cannot RDP VM after SysPrep",
+                    "confidence": "High",
+                    "source": "sampleSource",
+                    "resultType": "Community",
+                    "rank": 1,
+                    "link": "sampleLink"
+                  }
+                ]
+              }
+            ],
+            "diagnostics": [
+              {
+                "solutionId": "sampleSolutionId1",
+                "status": "Succeeded",
+                "statusDetails": "",
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->",
+                "requiredParameters": null,
+                "insights": [
+                  {
+                    "id": "InsightArticleId",
+                    "title": "An example title for an Insight",
+                    "results": "Article Content",
+                    "importanceLevel": "Critical"
+                  }
+                ]
+              },
+              {
+                "solutionId": "sampleSolutionId2",
+                "status": "Failed",
+                "statusDetails": "",
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->",
+                "requiredParameters": [
+                  "parameter1",
+                  "parameter2"
+                ],
+                "insights": []
+              },
+              {
+                "solutionId": "sampleSolutionId3",
+                "status": "Failed",
+                "statusDetails": "Timeout text authored in Solution article ",
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->",
+                "requiredParameters": [
+                  "parameter1",
+                  "parameter2"
+                ],
+                "insights": []
+              },
+              {
+                "solutionId": "sampleSolutionId4",
+                "status": "Failed",
+                "statusDetails": "Sample status details",
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->",
+                "requiredParameters": [
+                  "parameter1",
+                  "parameter2"
+                ],
+                "insights": []
+              }
+            ],
+            "metricsBasedCharts": [
+              {
+                "name": "CPU_percent",
+                "aggregationType": "Max",
+                "timeSpanDuration": "1d",
+                "title": "CPU Usage in the last one day",
+                "filterGroup": null,
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->"
+              },
+              {
+                "name": "memory_percent",
+                "aggregationType": "Max",
+                "timeSpanDuration": "1d",
+                "title": "Memory Usage in the last one day",
+                "filterGroup": null,
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->"
+              },
+              {
+                "name": "io_consumption_percent",
+                "aggregationType": "Max",
+                "timeSpanDuration": "1d",
+                "title": "IOPS Usage in the last one day",
+                "filterGroup": null,
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->"
+              },
+              {
+                "name": "active_connections",
+                "aggregationType": "Max",
+                "timeSpanDuration": "1d",
+                "title": "Active Connections in the last one day",
+                "filterGroup": null,
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->"
+              }
+            ],
+            "videos": [
+              {
+                "src": "sampleLink",
+                "title": "CI - CD with Azure DevOps",
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->"
+              }
+            ],
+            "videoGroups": [
+              {
+                "videos": [
+                  {
+                    "src": "sampleLink",
+                    "title": "widthtest"
+                  }
+                ],
+                "replacementKey": "<!--12345678-BBBb-cCCCC-0000-123456789012-->"
+              }
+            ]
+          },
+          "sections": [
+            {
+              "title": "RBAC Authentication Common Solutions",
+              "content": "<p>sample content</p>",
+              "replacementMaps": {}
+            }
+          ]
+        }
+      }
+    }
+  }
+}
