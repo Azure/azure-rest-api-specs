@@ -27,27 +27,25 @@ These are the global settings for the deviceupdate.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-04-01-preview
+tag: package-2023-07-01
 ```
 
 
-### Tag: package-2024-04-01-preview
+### Tag: package-2023-07-01
 
-These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2023-07-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-04-01-preview'
+```yaml $(tag) == 'package-2023-07-01'
 input-file:
-  - Microsoft.DeviceUpdate/duedge/preview/2024-04-01-preview/deviceupdate.json
+  - Microsoft.DeviceUpdate/stable/2023-07-01/deviceupdate.json
 ```
+### Tag: package-2022-12-01-preview
 
-### Tag: package-2023-09-01-preview
+These settings apply only when `--tag=package-2022-12-01-preview` is specified on the command line.
 
-These settings apply only when `--tag=package-2023-09-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-09-01-preview'
+``` yaml $(tag) == 'package-2022-12-01-preview'
 input-file:
-  - Microsoft.DeviceUpdate/duiothub/preview/2023-09-01-preview/deviceupdate.json
-  - Microsoft.DeviceUpdate/preview/2023-09-01-preview/deviceupdate.json
+  - Microsoft.DeviceUpdate/preview/2022-12-01-preview/deviceupdate.json
 ```
 
 ### Tag: package-2022-10-01
@@ -56,7 +54,6 @@ These settings apply only when `--tag=package-2022-10-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-10-01'
 input-file:
-  - Microsoft.DeviceUpdate/duiothub/stable/2022-10-01/deviceupdate.json
   - Microsoft.DeviceUpdate/stable/2022-10-01/deviceupdate.json
 ```
 
@@ -66,7 +63,6 @@ These settings apply only when `--tag=package-2022-04-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-04-01-preview'
 input-file:
-  - Microsoft.DeviceUpdate/duiothub/preview/2022-04-01-preview/deviceupdate.json
   - Microsoft.DeviceUpdate/preview/2022-04-01-preview/deviceupdate.json
 ```
 
@@ -76,7 +72,6 @@ These settings apply only when `--tag=package-2020-03-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-03-01-preview'
 input-file:
-  - Microsoft.DeviceUpdate/duiothub/preview/2020-03-01-preview/deviceupdate.json
   - Microsoft.DeviceUpdate/preview/2020-03-01-preview/deviceupdate.json
 ```
 
@@ -90,7 +85,7 @@ directive:
     reason: Managed Identity type can be case in-sensitive
   - suppress: BodyTopLevelProperties
     from: deviceupdate.json
-    where: $.definitions.PrivateEndpointConnectionProxy
+    where: $.definitions.PrivateEndpointConnectionProxy.properties
     reason: Internal NRP resource, all properties are top level properties
 ```
 
