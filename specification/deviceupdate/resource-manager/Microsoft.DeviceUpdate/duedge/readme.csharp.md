@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.Azure.Management.DeviceUpdate
-  output-folder: $(csharp-sdks-folder)/deviceupdate/Microsoft.Azure.Management.DeviceUpdate/src/Generated
+  output-folder: $(csharp-sdks-folder)/deviceupdateedge/Microsoft.Azure.Management.DeviceUpdate/src/Generated
 ```

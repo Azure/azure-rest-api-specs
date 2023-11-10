@@ -13,5 +13,5 @@ no-namespace-folders: true
 
 ```yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/deviceupdate/azure-mgmt-deviceupdate/azure/mgmt/deviceupdate
+output-folder: $(python-sdks-folder)/deviceupdateedge/azure-mgmt-deviceupdate/azure/mgmt/deviceupdate
 ```

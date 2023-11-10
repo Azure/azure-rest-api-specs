@@ -7,6 +7,6 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-deviceupdate"
-  output-folder: "$(typescript-sdks-folder)/sdk/deviceupdate/arm-deviceupdate"
+  output-folder: "$(typescript-sdks-folder)/sdk/deviceupdateedge/arm-deviceupdate"
   generate-metadata: true
 ```
