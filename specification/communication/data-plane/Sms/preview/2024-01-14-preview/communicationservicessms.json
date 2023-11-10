@@ -176,18 +176,34 @@
     "MmsSendRequestAttachment": {
       "description": "Represents the properties of a send request attachment.",
       "required": [
-        "content",
-        "mimeType"
+        "contentInBase64",
+        "contentType"
       ],
       "type": "object",
       "properties": {
-        "mimeType": {
-          "description": "MIME type of attachment",
-          "minLength": 1,
+        "contentType": {
+          "description": "MIME type of attachment. See https://en.wikipedia.org/wiki/Media_type\r\n            \r\nThe following MIME types are supported\r\n- audio/wav\r\n- audio/x-wav\r\n- audio/ac3\r\n- audio/amr\r\n- image/png\r\n- image/jpeg\r\n- image/gif\r\n- image/bmp\r\n- video/mp4\r\n- video/x-msvideo\r\n- text/plain(Unlike other media types, the maximum .txt file size supported is 64KB per attachment.)",
+          "enum": [
+            "image/png",
+            "image/jpeg",
+            "image/gif",
+            "image/bmp",
+            "audio/wav",
+            "audio/x-wav",
+            "audio/ac3",
+            "audio/amr",
+            "video/mp4",
+            "video/x-msvideo",
+            "text/plain"
+          ],
           "type": "string",
-          "example": "image/png"
+          "example": "image/png",
+          "x-ms-enum": {
+            "name": "MmsContentType",
+            "modelAsString": true
+          }
         },
-        "content": {
+        "contentInBase64": {
           "description": "Content of the attachment encoded in base 64.",
           "minLength": 1,
           "type": "string",
