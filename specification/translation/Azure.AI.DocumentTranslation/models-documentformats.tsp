@@ -14,7 +14,7 @@ model DocumentFormatParameters {
 }
 
 /** Response for the Document Formats. */
-model DocumentormatResult {
+model DocumentFormatResult {
   ...CommonResultHeaders;
   @body
   /** Array of the FileFormat. */

@@ -50,7 +50,7 @@ op getSingleGlossaryFormats is CustomGetOperation<
  *  The list includes the common file extension used. */
 op getSingleDocumentFormats is CustomGetOperation<
   DocumentFormatParameters,
-  DocumentormatResult,
+  DocumentFormatResult,
   ErrorResponse
 >;
 
