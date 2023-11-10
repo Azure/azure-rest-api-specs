@@ -16,6 +16,24 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.OpenAI.getChatCompletionsWithAzureExtensions, Access.internal);
 
 // Some models from routes with suppressed visibility are still desired for custom public surface.
-@@usage(Azure.OpenAI.ImageGenerationOptions, Usage.input | Usage.output);
-@@usage(Azure.OpenAI.ImageLocation, Usage.input | Usage.output);
-@@usage(Azure.OpenAI.ImageGenerations, Usage.input | Usage.output);
+@@access(Azure.OpenAI.ImageGenerationOptions, Access.public);
+@@access(Azure.OpenAI.ImageLocation, Access.public);
+@@access(Azure.OpenAI.ImageGenerations, Access.public, "csharp");
+@@access(Azure.OpenAI.ImageGenerations, Access.public, "python");
+@@access(Azure.OpenAI.ImageGenerations, Access.public, "javascript");
+@@access(Azure.OpenAI.ImageSize, Access.public);
+
+@@access(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions,
+  Access.public
+);
+@@usage(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions, Usage.input);
+
+@@access(Azure.OpenAI.AzureCognitiveSearchQueryType, Access.public);
+@@usage(Azure.OpenAI.AzureCognitiveSearchQueryType, Usage.input);
+
+@@access(Azure.OpenAI.AzureCognitiveSearchChatExtensionConfiguration,
+  Access.public
+);
+@@usage(Azure.OpenAI.AzureCognitiveSearchChatExtensionConfiguration,
+  Usage.input
+);
