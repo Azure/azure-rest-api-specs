@@ -481,7 +481,7 @@
     "TranslateDocumentParameters.allowFallback": {
       "name": "AllowFallback",
       "in": "query",
-      "description": "Specifies that the service is allowed to fall back to a generalnn system when a custom system doesn't exist. \n    Possible values are: true (default) or false.\n    allowFallback=false specifies that the translation should only use systems trained for the category specified \n    by the request. If a translation for language X to language Y requires chaining through a pivot language E, \n    then all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. \n    If no system is found with the specific category, the request will return a 400 status code. allowFallback=true \n    specifies that the service is allowed to fall back to a generalnn system when a custom system doesn't exist.",
+      "description": "Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. \n    Possible values are: true (default) or false.\n    allowFallback=false specifies that the translation should only use systems trained for the category specified \n    by the request. If a translation for language X to language Y requires chaining through a pivot language E, \n    then all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. \n    If no system is found with the specific category, the request will return a 400 status code. allowFallback=true \n    specifies that the service is allowed to fall back to a general system when a custom system doesn't exist.",
       "required": false,
       "type": "boolean",
       "x-ms-parameter-location": "method",
@@ -493,7 +493,7 @@
       "description": "A string specifying the category (domain) of the translation. This parameter is used to get translations \n    from a customized system built with Custom Translator. Add the Category ID from your Custom Translator \n    project details to this parameter to use your deployed customized system. Default value is: general.",
       "required": false,
       "type": "string",
-      "default": "generalnn",
+      "default": "general",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "category"
     },
@@ -509,7 +509,7 @@
     "TranslateDocumentParameters.to": {
       "name": "To",
       "in": "query",
-      "description": "Specifies the language of the output docuement. The target language must be one of the supported languages included \n    in the translation scope. For example, use to=de to translate to German.",
+      "description": "Specifies the language of the output document. The target language must be one of the supported languages included \n    in the translation scope. For example, use to=de to translate to German.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
