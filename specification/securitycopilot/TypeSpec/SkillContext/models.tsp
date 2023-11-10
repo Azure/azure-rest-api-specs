@@ -29,7 +29,7 @@ model SkillContextResponse {
   startTime: utcDateTime;
 
   @doc("Tenant id of tenant in which skill invocation occured")
-  TenantId: string;
+  tenantId: string;
 
   @doc("User id of user that invoked the skill")
   userId: string;
@@ -99,52 +99,4 @@ model LogProgressRequest {
 
   @doc("Log message")
   message: string;
-}
-
-@doc("Auth Details")
-model AuthDetails {
-  @doc("Auth Location")
-  authLocation: AuthLocationEnum;
-
-  @doc("Auth Info")
-  authInfo: Record<string>;
-}
-
-@doc("TokenCredentialRequest")
-model GetTokenCredentialRequest {
-  @doc("Scopes")
-  scopes: Array<string>;
-
-  @doc("TokenCredential Type")
-  tokenCredentialType: TokenCredentialEnum = TokenCredentialEnum.None;
-
-  @doc("TenantId")
-  tenantId?: string | null;
-}
-
-@doc("AccessToken")
-model AccessToken {
-  @doc("Token string")
-  token: string;
-
-  @doc("Expiry time")
-  expiresOn: offsetDateTime;
-}
-
-@doc("GetInputRequest")
-model GetInputRequest {
-  @doc("Input Name")
-  inputName: string;
-
-  @doc("Default value for the input")
-  defaultValue?: SkillVariable | null;
-}
-
-@doc("SetInputRequest")
-model SetInputRequest {
-  @doc("Input Name")
-  inputName: string;
-
-  @doc("Default value for the input")
-  defaultValue?: SkillVariable | null;
 }
