@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-04-01-preview'
 input-file:
-  - Microsoft.DeviceUpdate/duedge/preview/2024-04-01-preview/deviceupdate.json
+  - preview/2024-04-01-preview/deviceupdate.json
 ```
 
 ## Suppression
