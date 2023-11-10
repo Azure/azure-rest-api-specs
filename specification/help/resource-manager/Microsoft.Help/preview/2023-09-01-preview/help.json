@@ -1671,8 +1671,7 @@
           "type": "string"
         },
         "questionType": {
-          "description": "Text Input. Will be a single line input.",
-          "type": "string"
+          "$ref": "#/definitions/QuestionType"
         },
         "questionContent": {
           "description": "User question content.",
@@ -1763,41 +1762,44 @@
           "type": "string"
         },
         "questionType": {
-          "description": "Text Input. Will be a single line input.",
-          "type": "string",
-          "enum": [
-            "RadioButton",
-            "Dropdown",
-            "TextInput",
-            "MultiLineInfoBox"
-          ],
-          "x-ms-enum": {
-            "name": "questionType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "RadioButton",
-                "description": "SingleChoice radio button"
-              },
-              {
-                "value": "Dropdown",
-                "description": "SingleChoice dropdown."
-              },
-              {
-                "value": "TextInput",
-                "description": "Text Input"
-              },
-              {
-                "value": "MultiLineInfoBox",
-                "description": "MultiLineInfoBox"
-              }
-            ]
-          }
+          "$ref": "#/definitions/QuestionType"
         },
         "response": {
           "description": "Response key for SingleInput. For Multi-line test/open ended question it is free form text",
           "type": "string"
         }
+      }
+    },
+    "QuestionType": {
+      "description": "QuestionType",
+      "type": "string",
+      "enum": [
+        "RadioButton",
+        "Dropdown",
+        "TextInput",
+        "MultiLineInfoBox"
+      ],
+      "x-ms-enum": {
+        "name": "questionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "RadioButton",
+            "description": "SingleChoice radio button"
+          },
+          {
+            "value": "Dropdown",
+            "description": "SingleChoice dropdown."
+          },
+          {
+            "value": "TextInput",
+            "description": "Text Input"
+          },
+          {
+            "value": "MultiLineInfoBox",
+            "description": "MultiLineInfoBox"
+          }
+        ]
       }
     },
     "Insight": {
