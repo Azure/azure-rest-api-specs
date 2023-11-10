@@ -256,7 +256,7 @@
         "operationId": "UpdateAccounts_Delete",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -278,7 +278,7 @@
             "headers": {
               "Location": {
                 "type": "string",
-                "description": "Operation Status Location URI"
+                "description": "Operation Result Location URI"
               }
             }
           },
@@ -336,7 +336,7 @@
             "headers": {
               "Location": {
                 "type": "string",
-                "description": "Operation Status Location URI"
+                "description": "Operation Result Location URI"
               }
             },
             "schema": {
@@ -476,7 +476,7 @@
             "headers": {
               "Location": {
                 "type": "string",
-                "description": "Operation Status Location URI"
+                "description": "Operation Result Location URI"
               }
             }
           },
@@ -640,7 +640,7 @@
         "operationId": "Updates_Delete",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -665,7 +665,7 @@
             "headers": {
               "Location": {
                 "type": "string",
-                "description": "Operation Status Location URI"
+                "description": "Operation Result Location URI"
               }
             }
           },
@@ -821,7 +821,6 @@
       "put": {
         "description": "Creates or updates an Agent.",
         "operationId": "Agents_Create",
-        "x-ms-long-running-operation": false,
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -877,7 +876,6 @@
       "delete": {
         "description": "Delete Agent.",
         "operationId": "Agents_Delete",
-        "x-ms-long-running-operation": false,
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1051,7 +1049,6 @@
       "put": {
         "description": "Creates or updates a Device Class.",
         "operationId": "DeviceClasses_Create",
-        "x-ms-long-running-operation": false,
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1107,7 +1104,6 @@
       "delete": {
         "description": "Delete Device Class.",
         "operationId": "DeviceClasses_Delete",
-        "x-ms-long-running-operation": false,
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1281,7 +1277,6 @@
       "put": {
         "description": "Creates or updates an Active Deployment.",
         "operationId": "ActiveDeployments_Create",
-        "x-ms-long-running-operation": false,
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1337,7 +1332,6 @@
       "delete": {
         "description": "Delete Active Deployment.",
         "operationId": "ActiveDeployments_Delete",
-        "x-ms-long-running-operation": false,
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1511,7 +1505,6 @@
       "put": {
         "description": "Creates or updates a Deployment.",
         "operationId": "Deployments_Create",
-        "x-ms-long-running-operation": false,
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1567,7 +1560,6 @@
       "delete": {
         "description": "Delete Deployment.",
         "operationId": "Deployments_Delete",
-        "x-ms-long-running-operation": false,
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3034,7 +3026,7 @@
             "files": {
               "type": "array",
               "x-ms-identifiers": [
-                "fileId"
+                "fileName"
               ],
               "items": {
                 "$ref": "#/definitions/UpdateFile"
