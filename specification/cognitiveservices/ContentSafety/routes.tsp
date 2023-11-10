@@ -286,7 +286,7 @@ interface TextUngroundednessDetectionOperations{
   detectUngroundedness is Azure.Core.RpcOperation<
     {
       @body
-      @doc("The text jailbreak analysis request.")
+      @doc("The ungroundedness detection request.")
       body: DetectUngroundednessOptions;
     },
     DetectUngroundednessResult
