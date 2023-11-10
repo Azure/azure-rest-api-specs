@@ -66,3 +66,9 @@ operations returns various properties of each Azure Large Instance.
     OperationStatusResult
   >;
 }
+
+@@TypeSpec.OpenAPI.extension(AzureLargeInstances.restart::parameters.body,
+  "x-ms-client-name",
+  "forceParameter"
+);
+@@projectedName(AzureLargeInstances.restart::parameters.body, "json", "forceParameter");

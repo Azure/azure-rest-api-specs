@@ -10,6 +10,7 @@ namespace Microsoft.AzureLargeInstance;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("Enum of the hardware options for an Azure Large Instance")
 enum AzureLargeInstanceHardwareTypeNamesEnum {
   Cisco_UCS,
   HPE,
@@ -64,6 +65,7 @@ enum AzureLargeInstanceSizeNamesEnum {
   S960m,
 }
 
+@doc("Power states that an Azure Large Instance can be in")
 enum AzureLargeInstancePowerStateEnum {
   starting,
   started,
@@ -73,6 +75,7 @@ enum AzureLargeInstancePowerStateEnum {
   `unknown`,
 }
 
+@doc("Provisioning states that an Azure Large Instance can be in")
 enum AzureLargeInstanceProvisioningStatesEnum {
   Accepted,
   Creating,
