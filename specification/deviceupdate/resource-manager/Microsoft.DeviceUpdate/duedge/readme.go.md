@@ -5,13 +5,13 @@ These settings apply only when `--go` is specified on the command line.
 ```yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: deviceupdateforedge
+  namespace: deviceupdateedge
   clear-output-folder: true
 ```
 
 ``` yaml $(go) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/deviceupdate/armdeviceupdate
+module-name: sdk/resourcemanager/deviceupdateedge/armdeviceupdate
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
