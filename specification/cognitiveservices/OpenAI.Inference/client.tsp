@@ -17,8 +17,11 @@ using Azure.ClientGenerator.Core;
 
 // Some models from routes with suppressed visibility are still desired for custom public surface.
 @@access(Azure.OpenAI.ImageGenerationOptions, Access.public);
+@@usage(Azure.OpenAI.ImageGenerationOptions, Usage.input | Usage.output);
 @@access(Azure.OpenAI.ImageLocation, Access.public);
+@@usage(Azure.OpenAI.ImageLocation, Usage.input | Usage.output);
 @@access(Azure.OpenAI.ImageSize, Access.public);
+@@usage(Azure.OpenAI.ImageGenerations, Usage.input | Usage.output);
 
 // Java will need to have those models expose in public surface.
 @@access(Azure.OpenAI.AudioTaskLabel, Access.public, "java");
