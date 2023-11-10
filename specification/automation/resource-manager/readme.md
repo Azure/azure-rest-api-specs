@@ -25,7 +25,7 @@ These are the global settings for the Automation API.
 title: AutomationClient
 description: Automation Client
 openapi-type: arm
-tag: package-2023-05-15-preview
+tag: package-2023-11-01
 ```
 
 ### Tag: package-2015-10
@@ -392,7 +392,6 @@ input-file:
 - Microsoft.Automation/stable/2022-08-08/variable.json
 ```
 
-
 ### Tag: package-2023-05-15-preview
 
 These settings apply only when `--tag=package-2023-05-15-preview` is specified on the command line.
@@ -434,6 +433,48 @@ input-file:
 - Microsoft.Automation/preview/2023-05-15-preview/variable.json
 - Microsoft.Automation/preview/2023-05-15-preview/watcher.json
 - Microsoft.Automation/preview/2023-05-15-preview/webhook.json
+```
+
+### Tag: package-2023-11-01
+
+These settings apply only when `--tag=package-2023-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11-01'
+input-file:
+- Microsoft.Automation/preview/2020-01-13-preview/privateEndpointConnection.json
+- Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNode.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscCompilationJob.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNodeCounts.json
+- Microsoft.Automation/preview/2020-01-13-preview/watcher.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
+- Microsoft.Automation/stable/2015-10-31/webhook.json
+- Microsoft.Automation/stable/2022-01-31/deletedAutomationAccount.json
+- Microsoft.Automation/stable/2023-11-01/account.json
+- Microsoft.Automation/stable/2023-11-01/certificate.json
+- Microsoft.Automation/stable/2023-11-01/connection.json
+- Microsoft.Automation/stable/2023-11-01/connectionType.json
+- Microsoft.Automation/stable/2023-11-01/credential.json
+- Microsoft.Automation/stable/2023-11-01/dscConfiguration.json
+- Microsoft.Automation/stable/2023-11-01/dscNodeConfiguration.json
+- Microsoft.Automation/stable/2023-11-01/hybridRunbookWorker.json
+- Microsoft.Automation/stable/2023-11-01/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/stable/2023-11-01/job.json
+- Microsoft.Automation/stable/2023-11-01/jobSchedule.json
+- Microsoft.Automation/stable/2023-11-01/linkedWorkspace.json
+- Microsoft.Automation/stable/2023-11-01/module.json
+- Microsoft.Automation/stable/2023-11-01/powershell72Module.json
+- Microsoft.Automation/stable/2023-11-01/operations.json
+- Microsoft.Automation/stable/2023-11-01/python2package.json
+- Microsoft.Automation/stable/2023-11-01/python3package.json
+- Microsoft.Automation/stable/2023-11-01/runbook.json
+- Microsoft.Automation/stable/2023-11-01/schedule.json
+- Microsoft.Automation/stable/2023-11-01/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/stable/2023-11-01/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/stable/2023-11-01/sourceControl.json
+- Microsoft.Automation/stable/2023-11-01/sourceControlSyncJob.json
+- Microsoft.Automation/stable/2023-11-01/sourceControlSyncJobStreams.json
+- Microsoft.Automation/stable/2023-11-01/variable.json
 ```
 
 ---
@@ -579,7 +620,10 @@ directive:
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
   - suppress: DeleteOperationResponses
     from: python2package.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.      
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
+  - suppress: PutRequestResponseSchemeArm
+    from: powershell72Module.json
+    reason: This error format is inherited from previous api, cannot change it as it will result in inconsistency.      
 
 ```
 
