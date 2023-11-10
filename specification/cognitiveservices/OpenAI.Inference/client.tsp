@@ -31,10 +31,8 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.OpenAI.AzureOpenAIOperationState, Access.public, "java");
 @@access(Azure.OpenAI.ChatChoice, Access.public, "java");
 @@access(Azure.OpenAI.ChatCompletions, Access.public, "java");
-
 // Error: Model 'ChatCompletionsOptions' cannot be set as access=public, as it refers Union 'FunctionCallPreset | FunctionName'
 // @@access(Azure.OpenAI.ChatCompletionsOptions, Access.public, "java");
-
 @@access(Azure.OpenAI.ChatMessage, Access.public, "java");
 @@access(Azure.OpenAI.ChatRole, Access.public, "java");
 @@access(Azure.OpenAI.FunctionCall, Access.public, "java");
@@ -42,4 +40,20 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.OpenAI.FunctionName, Access.public, "java");
 @@access(Azure.OpenAI.ImageGenerationOptions, Access.public, "java");
 @@access(Azure.OpenAI.ImageLocation, Access.public, "java");
-@@access(Azure.OpenAI.ImageSize, Access.public, "java");
+
+@@access(Azure.OpenAI.ImageSize, Access.public);
+
+@@access(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions,
+  Access.public
+);
+@@usage(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions, Usage.input);
+
+@@access(Azure.OpenAI.AzureCognitiveSearchQueryType, Access.public);
+@@usage(Azure.OpenAI.AzureCognitiveSearchQueryType, Usage.input);
+
+@@access(Azure.OpenAI.AzureCognitiveSearchChatExtensionConfiguration,
+  Access.public
+);
+@@usage(Azure.OpenAI.AzureCognitiveSearchChatExtensionConfiguration,
+  Usage.input
+);
