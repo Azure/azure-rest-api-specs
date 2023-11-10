@@ -43,9 +43,9 @@ model TranslateDocumentParameters {
 
 /** Translate Document Request Body. */
 model TranslateDocumentRequest {
-    /** Actual Document in the form. */
+    /** Document to be translated in the form */
     document: bytes;
-    /** Actual glossary in the form. */
+    /** Glossary / translation memory will be used during translation in the form. */
     glossary?: bytes;
   }
 

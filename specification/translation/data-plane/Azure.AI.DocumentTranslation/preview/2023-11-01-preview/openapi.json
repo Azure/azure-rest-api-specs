@@ -235,7 +235,7 @@
           {
             "name": "document",
             "in": "formData",
-            "description": "Actual Document in the form.",
+            "description": "Document to be translated in the form",
             "required": true,
             "type": "string",
             "format": "byte"
@@ -243,7 +243,7 @@
           {
             "name": "glossary",
             "in": "formData",
-            "description": "Actual glossary in the form.",
+            "description": "Glossary / translation memory will be used during translation in the form.",
             "required": false,
             "type": "string",
             "format": "byte"
@@ -281,6 +281,11 @@
                 "description": "This will have value of response hash, customer can provide this value for any consecutive request as “If-None-Match” header. To make sure get response if the value is changed otherwise 304."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Document Translate": {
+            "$ref": "./examples/DocumentTranslate_MaximumSet_Gen.json"
           }
         }
       }
@@ -427,12 +432,12 @@
         "document": {
           "type": "string",
           "format": "byte",
-          "description": "Actual Document in the form."
+          "description": "Document to be translated in the form"
         },
         "glossary": {
           "type": "string",
           "format": "byte",
-          "description": "Actual glossary in the form."
+          "description": "Glossary / translation memory will be used during translation in the form."
         }
       },
       "required": [
