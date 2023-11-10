@@ -264,6 +264,7 @@ model RouterRule {
   kind: string;
 }
 
+@projectedName("java", "DistributionPolicyInternal")
 @resource("routing/distributionPolicies")
 @doc("Policy governing how jobs are distributed to workers")
 model DistributionPolicy {
@@ -710,6 +711,7 @@ model RouterWorkerAssignment {
   assignedAt: utcDateTime;
 }
 
+@projectedName("java", "BestWorkerModeInternal")
 @doc("Jobs are distributed to the worker with the strongest abilities available.")
 model BestWorkerMode extends DistributionMode {
   @doc("Define a scoring rule to use, when calculating a score to determine the best worker. If not set, will use a default scoring formula that uses the number of job labels that the worker labels match, as well as the number of label selectors the worker labels match and/or exceed using a logistic function (https://en.wikipedia.org/wiki/Logistic_function).")
