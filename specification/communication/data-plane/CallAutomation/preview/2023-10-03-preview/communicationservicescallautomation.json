@@ -476,7 +476,7 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}:StartTranscription": {
+    "/calling/callConnections/{callConnectionId}:startTranscription": {
       "post": {
         "tags": [
           "MidConnections"
@@ -522,7 +522,7 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}:StopTranscription": {
+    "/calling/callConnections/{callConnectionId}:stopTranscription": {
       "post": {
         "tags": [
           "MidConnections"
@@ -810,14 +810,14 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}:updateTranscriptionData": {
+    "/calling/callConnections/{callConnectionId}:updateTranscription": {
       "post": {
         "tags": [
           "MidConnections"
         ],
-        "summary": "UpdateTranscriptionData Api.",
+        "summary": "UpdateTranscription Api.",
         "description": "API to change transcription language.",
-        "operationId": "CallMedia_UpdateTranscriptionData",
+        "operationId": "CallMedia_UpdateTranscription",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -827,12 +827,12 @@
             "type": "string"
           },
           {
-            "name": "updateTranscriptionDataRequest",
+            "name": "updateTranscriptionRequest",
             "in": "body",
-            "description": "The updateTranscriptionData request",
+            "description": "The UpdateTranscription request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateTranscriptionDataRequest"
+              "$ref": "#/definitions/UpdateTranscriptionRequest"
             }
           },
           {
@@ -847,12 +847,12 @@
             }
           },
           "202": {
-            "description": "Returns the update transcription data response"
+            "description": "Returns the update transcription response"
           }
         },
         "x-ms-examples": {
-          "CallMedia_UpdateTranscriptionData": {
-            "$ref": "./examples/CallMedia_UpdateTranscriptionData.json"
+          "CallMedia_UpdateTranscription": {
+            "$ref": "./examples/CallMedia_UpdateTranscription.json"
           }
         }
       }
@@ -1717,9 +1717,9 @@
           "description": "The identifier of the Cognitive Service resource assigned to this call.",
           "type": "string"
         },
-        "customContext": {
-          "$ref": "#/definitions/CustomContext",
-          "description": "Used by customer to send custom context to targets"
+        "customCallingContext": {
+          "$ref": "#/definitions/CustomCallingContext",
+          "description": "Used by customer to send custom calling context to targets"
         }
       }
     },
@@ -1841,7 +1841,7 @@
         }
       }
     },
-    "CustomContext": {
+    "CustomCallingContext": {
       "type": "object",
       "properties": {
         "voipHeaders": {
@@ -2011,9 +2011,9 @@
           "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The target identity to redirect the call to."
         },
-        "customContext": {
-          "$ref": "#/definitions/CustomContext",
-          "description": "Used by customer to send custom context to targets"
+        "customCallingContext": {
+          "$ref": "#/definitions/CustomCallingContext",
+          "description": "Used by customer to send custom calling context to targets"
         }
       }
     },
@@ -2057,9 +2057,9 @@
           "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The identity of the target where call should be transferred to."
         },
-        "customContext": {
-          "$ref": "#/definitions/CustomContext",
-          "description": "Used by customer to send custom context to targets"
+        "customCallingContext": {
+          "$ref": "#/definitions/CustomCallingContext",
+          "description": "Used by customer to send custom calling context to targets"
         },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
@@ -2493,7 +2493,7 @@
         }
       }
     },
-    "UpdateTranscriptionDataRequest": {
+    "UpdateTranscriptionRequest": {
       "required": [
         "locale"
       ],
@@ -2677,9 +2677,9 @@
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         },
-        "customContext": {
-          "$ref": "#/definitions/CustomContext",
-          "description": "Used by customer to send custom context to targets"
+        "customCallingContext": {
+          "$ref": "#/definitions/CustomCallingContext",
+          "description": "Used by customer to send custom calling context to targets"
         },
         "operationCallbackUri": {
           "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
