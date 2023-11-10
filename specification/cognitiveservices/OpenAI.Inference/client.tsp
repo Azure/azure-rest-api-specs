@@ -16,9 +16,15 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.OpenAI.getChatCompletionsWithAzureExtensions, Access.internal);
 
 // Some models from routes with suppressed visibility are still desired for custom public surface.
+@@access(Azure.OpenAI.ImageGenerationOptions, Access.public);
 @@usage(Azure.OpenAI.ImageGenerationOptions, Usage.input | Usage.output);
+@@access(Azure.OpenAI.ImageLocation, Access.public);
 @@usage(Azure.OpenAI.ImageLocation, Usage.input | Usage.output);
+@@access(Azure.OpenAI.ImageGenerations, Access.public, "csharp");
+@@access(Azure.OpenAI.ImageGenerations, Access.public, "python");
+@@access(Azure.OpenAI.ImageGenerations, Access.public, "javascript");
 @@usage(Azure.OpenAI.ImageGenerations, Usage.input | Usage.output);
+@@access(Azure.OpenAI.ImageSize, Access.public);
 
 // Java will need to have those models expose in public surface.
 @@access(Azure.OpenAI.AudioTaskLabel, Access.public, "java");
@@ -38,10 +44,6 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.OpenAI.FunctionCall, Access.public, "java");
 @@access(Azure.OpenAI.FunctionDefinition, Access.public, "java");
 @@access(Azure.OpenAI.FunctionName, Access.public, "java");
-@@access(Azure.OpenAI.ImageGenerationOptions, Access.public, "java");
-@@access(Azure.OpenAI.ImageLocation, Access.public, "java");
-
-@@access(Azure.OpenAI.ImageSize, Access.public);
 
 @@access(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions,
   Access.public
