@@ -825,6 +825,53 @@
         }
       }
     },
+    "LakeHouseReadSettings": {
+      "description": "Microsoft Fabric LakeHouse Files read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Microsoft Fabric LakeHouse Files wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Microsoft Fabric LakeHouse Files wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "object",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
+        "deleteFilesAfterCompletion": {
+          "type": "object",
+          "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "StoreWriteSettings": {
       "description": "Connector write settings.",
       "discriminator": "type",
@@ -913,6 +960,15 @@
         }
       ]
     },
+    "LakeHouseWriteSettings": {
+      "description": "Microsoft Fabric LakeHouse Files write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ]
+    },
     "FormatReadSettings": {
       "description": "Format read settings.",
       "discriminator": "type",
@@ -989,6 +1045,21 @@
         "preserveCompressionFileNameAsFolder": {
           "description": "Preserve the compression file name as folder path. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
+        }
+      }
+    },
+    "ParquetReadSettings": {
+      "description": "Parquet read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatReadSettings"
+        }
+      ],
+      "properties": {
+        "compressionProperties": {
+          "$ref": "#/definitions/CompressionReadSettings",
+          "description": "Compression settings."
         }
       }
     },
@@ -1261,6 +1332,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreReadSettings",
           "description": "Parquet store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/ParquetReadSettings",
+          "description": "Parquet format settings."
         },
         "additionalColumns": {
           "type": "object",
@@ -2256,10 +2331,7 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "isolationLevel": {
           "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
@@ -2294,10 +2366,7 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "isolationLevel": {
           "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
@@ -2336,10 +2405,7 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "isolationLevel": {
           "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
@@ -2378,10 +2444,7 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "isolationLevel": {
           "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
@@ -2420,10 +2483,7 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "isolationLevel": {
           "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
@@ -3669,6 +3729,29 @@
         }
       }
     },
+    "LakeHouseTableSource": {
+      "description": "A copy activity source for Microsoft Fabric LakeHouse Table.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "timestampAsOf": {
+          "type": "object",
+          "description": "Query an older snapshot by timestamp. Type: string (or Expression with resultType string)."
+        },
+        "versionAsOf": {
+          "type": "object",
+          "description": "Query an older snapshot by version. Type: integer (or Expression with resultType integer)."
+        },
+        "additionalColumns": {
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+        }
+      }
+    },
     "RedshiftUnloadSettings": {
       "description": "The Amazon S3 settings needed for the interim Amazon S3 when copying from Amazon Redshift with unload. With this, data from Amazon Redshift source will be unloaded into S3 first and then copied into the targeted sink from the interim S3.",
       "type": "object",
@@ -4154,10 +4237,7 @@
         },
         "storedProcedureParameters": {
           "description": "SQL stored procedure parameters.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
@@ -4192,10 +4272,7 @@
         },
         "storedProcedureParameters": {
           "description": "SQL stored procedure parameters.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
@@ -4230,10 +4307,7 @@
         },
         "storedProcedureParameters": {
           "description": "SQL stored procedure parameters.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
@@ -4268,10 +4342,7 @@
         },
         "storedProcedureParameters": {
           "description": "SQL stored procedure parameters.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
@@ -4905,6 +4976,29 @@
         "writeBehavior": {
           "type": "object",
           "description": "Specifies whether the document with same key to be overwritten (upsert) rather than throw exception (insert). The default value is \"insert\". Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "LakeHouseTableSink": {
+      "description": "A copy activity for Microsoft Fabric LakeHouse Table sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "tableActionOption": {
+          "type": "object",
+          "description": "The type of table action for LakeHouse Table sink. Possible values include: \"None\", \"Append\", \"Overwrite\"."
+        },
+        "partitionOption": {
+          "type": "object",
+          "description": "Create partitions in folder structure based on one or multiple columns. Each distinct column value (pair) will be a new partition. Possible values include: \"None\", \"PartitionByKey\"."
+        },
+        "partitionNameList": {
+          "type": "object",
+          "description": "Specify the partition column names from sink columns. Type: array of objects (or Expression with resultType array of objects)."
         }
       }
     },
@@ -7735,10 +7829,7 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/StoredProcedureParameter"
-          }
+          "type": "object"
         }
       },
       "required": [

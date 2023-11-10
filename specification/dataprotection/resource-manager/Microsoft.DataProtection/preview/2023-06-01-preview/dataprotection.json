@@ -91,12 +91,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Contains additional information like job Id",
-            "schema": {
-              "$ref": "#/definitions/OperationJobExtendedInfo"
-            }
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -113,6 +107,12 @@
                 "type": "integer",
                 "format": "int32"
               }
+            }
+          },
+          "200": {
+            "description": "Contains additional information like job Id",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
             }
           },
           "default": {
@@ -369,6 +369,9 @@
           },
           "Get BackupVault With MSI": {
             "$ref": "./examples/VaultCRUD/GetBackupVaultWithMSI.json"
+          },
+          "Get BackupVault With CMK": {
+            "$ref": "./examples/VaultCRUD/GetBackupVaultWithCMK.json"
           }
         }
       },
@@ -433,6 +436,9 @@
           },
           "Create BackupVault With MSI": {
             "$ref": "./examples/VaultCRUD/PutBackupVaultWithMSI.json"
+          },
+          "Create BackupVault With CMK": {
+            "$ref": "./examples/VaultCRUD/PutBackupVaultWithCMK.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -537,6 +543,9 @@
         "x-ms-examples": {
           "Patch BackupVault": {
             "$ref": "./examples/VaultCRUD/PatchBackupVault.json"
+          },
+          "Patch BackupVault with CMK": {
+            "$ref": "./examples/VaultCRUD/PatchBackupVaultWithCMK.json"
           }
         }
       }
@@ -1163,9 +1172,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Ok"
-          },
           "202": {
             "description": "The operation will be completed asynchronously.",
             "headers": {
@@ -1186,6 +1192,9 @@
           },
           "204": {
             "description": "NoContent"
+          },
+          "200": {
+            "description": "Ok"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -5411,7 +5420,14 @@
         "objectType": {
           "description": "Type of the specific object - used for deserializing",
           "type": "string",
-          "readOnly": false
+          "readOnly": false,
+          "enum": [
+            "DefaultResourceProperties"
+          ],
+          "x-ms-enum": {
+            "name": "ResourcePropertiesObjectType",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "objectType"
@@ -5587,6 +5603,38 @@
       },
       "title": "CloudError",
       "x-ms-external": true
+    },
+    "CmkKeyVaultProperties": {
+      "type": "object",
+      "description": "The properties of the Key Vault which hosts CMK",
+      "properties": {
+        "keyUri": {
+          "description": "The key uri of the Customer Managed Key",
+          "type": "string"
+        }
+      }
+    },
+    "CmkKekIdentity": {
+      "type": "object",
+      "description": "The details of the managed identity used for CMK",
+      "properties": {
+        "identityType": {
+          "type": "string",
+          "description": "The identity type. 'SystemAssigned' and 'UserAssigned' are mutually exclusive. 'SystemAssigned' will use implicitly created managed identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "identityId": {
+          "type": "string",
+          "description": "The managed identity to be used which has access permissions to the Key Vault. Provide a value here in case identity types: 'UserAssigned' only."
+        }
+      }
     },
     "CopyOnExpiryOption": {
       "allOf": [
@@ -5866,6 +5914,19 @@
         }
       }
     },
+    "DefaultResourceProperties": {
+      "description": "Default source properties",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DefaultResourceProperties"
+    },
     "DeletedBackupInstanceResource": {
       "description": "Deleted Backup Instance",
       "type": "object",
@@ -5972,22 +6033,6 @@
       },
       "title": "DppIdentityDetails",
       "type": "object"
-    },
-    "UserAssignedIdentityDetails": {
-      "description": "User Assigned Identity Details",
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "description": "The Client Id of the User Assigned Managed Identity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "principalId": {
-          "description": "The Object Id of the User Assigned Managed Identity.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     },
     "DppBaseResourceList": {
       "description": "Base for all lists of V2 resources.",
@@ -6212,6 +6257,57 @@
         },
         "httpMethod": {
           "type": "string"
+        }
+      }
+    },
+    "encryptionSettings": {
+      "description": "Customer Managed Key details of the resource.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Encryption state of the Backup Vault.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "Inconsistent"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionState",
+            "modelAsString": true,
+            "values": [
+              {
+                "description": "CMK encryption is enabled on the Backup Vault",
+                "value": "Enabled"
+              },
+              {
+                "description": "CMK encryption is disabled on the Backup Vault. User can not set this state once Encryption State is 'Enabled'.",
+                "value": "Disabled"
+              },
+              {
+                "description": "CMK encryption is in inconsistent state on the Backup Vault. This state indicates that user needs to retry the encryption settings operation immediately to correct the state.",
+                "value": "Inconsistent"
+              }
+            ]
+          }
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/CmkKeyVaultProperties"
+        },
+        "kekIdentity": {
+          "$ref": "#/definitions/CmkKekIdentity"
+        },
+        "infrastructureEncryption": {
+          "description": "Enabling/Disabling the Double Encryption state",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "InfrastructureEncryptionState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -7021,14 +7117,6 @@
           },
           "x-ms-identifiers": [],
           "type": "array"
-        },
-        "stagingResourceGroupId": {
-          "description": "Gets or sets the staging RG Id for creating staging disks and snapshots during restore.",
-          "type": "string"
-        },
-        "stagingStorageAccountId": {
-          "description": "Gets or sets the staging Storage Account Id for creating backup object store data during restore.",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "KubernetesClusterRestoreCriteria"
@@ -7456,6 +7544,9 @@
         },
         "immutabilitySettings": {
           "$ref": "#/definitions/ImmutabilitySettings"
+        },
+        "encryptionSettings": {
+          "$ref": "#/definitions/encryptionSettings"
         }
       }
     },

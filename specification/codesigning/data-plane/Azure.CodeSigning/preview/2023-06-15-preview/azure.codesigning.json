@@ -20,8 +20,8 @@
       {
         "name": "region",
         "in": "path",
-        "required": true,
         "description": "The Azure region wherein requests for signing will be sent.",
+        "required": true,
         "type": "string"
       }
     ]
@@ -127,8 +127,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -151,17 +151,17 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/CodeSigningOptions.codeSigningAccountName"
+          },
+          {
+            "$ref": "#/parameters/CodeSigningOptions.certificateProfileName"
+          },
+          {
             "name": "operationId",
             "in": "path",
             "description": "The unique ID of the operation.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/CodeSigningOptions.codeSigningAccountName"
-          },
-          {
-            "$ref": "#/parameters/CodeSigningOptions.certificateProfileName"
           }
         ],
         "responses": {
@@ -201,8 +201,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -252,8 +252,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -302,8 +302,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -382,7 +382,8 @@
       "type": "string",
       "description": "Enum describing allowed operation states.",
       "enum": [
-        "InProgress",
+        "NotStarted",
+        "Running",
         "Succeeded",
         "Failed",
         "Canceled"
@@ -392,8 +393,13 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "InProgress",
-            "value": "InProgress",
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
             "description": "The operation is in progress."
           },
           {
