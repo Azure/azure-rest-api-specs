@@ -276,3 +276,19 @@ interface ImageWithTextOperations {
     AnalyzeImageWithTextResult
   >;
 }
+
+@added(Versions.v2023_11_30_Preview)
+interface TextUngroundednessDetectionOperations{
+  @summary("Detect ungroundedness content")
+  @doc("A synchronous API for the ungroundedness detection.")
+  @route("/detectUngroundedness")
+  @post 
+  detectUngroundedness is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text jailbreak analysis request.")
+      body: DetectUngroundednessOptions;
+    },
+    DetectUngroundednessResult
+  >;
+}

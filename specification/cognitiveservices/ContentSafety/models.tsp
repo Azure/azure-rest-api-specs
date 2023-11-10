@@ -510,3 +510,94 @@ model AnalyzeImageWithTextResult {
   @doc("Analysis result for categories.")
   categoriesAnalysis: ImageWithTextCategoriesAnalysis[];
 }
+
+@added(Versions.v2023_11_30_Preview)
+@doc("The text to detect ungroundedness.")
+model DetectUngroundednessInputContent {
+  @doc("Identity of the text.")
+  id: string;
+
+  @doc("Text for analysis.")
+  text: string;
+}
+
+@added(Versions.v2023_11_30_Preview)
+@doc("User input for ungroudedness detection.")
+model DetectUngroundednessInput {
+  @doc("This is optional and only used for QnA or chat task.")
+  query?: string;
+
+  @doc("Content for analysis.")
+  contents: DetectUngroundednessInputContent[];
+
+  @doc("Source information that serves as grounding source.")
+  groundingSource: string[];
+}
+
+@added(Versions.v2023_11_30_Preview)
+@doc("Connection information for GPT resource.")
+model DetectUngroundednessGptxOptions {
+  @doc("Endpoint of GPT resource.")
+  azureOpenAIEndpoint: string;
+
+  @doc("Deployment id of GPT resource.")
+  deploymentId: string;
+}
+
+@added(Versions.v2023_11_30_Preview)
+@doc("The request of ungroudedness detection.")
+model DetectUngroundednessOptions {
+  @doc("Domain that the current request belongs to.")
+  domain: string;
+
+  @doc("Type of work that the customer want the API to execute.")
+  task: string;
+
+  @doc("The input to be examined for detection.")
+  input: DetectUngroundednessInput;
+
+  @doc("Options to set GPT resources for BYO scenario.")
+  gptxOptions?: DetectUngroundednessGptxOptions;
+}
+
+@added(Versions.v2023_11_30_Preview)
+@doc("The detection result of ungroudedness.")
+model TextUngroundednessDetection {
+  @doc("Identity of content.")
+  id: string;
+
+  @doc("Detection result for ungroudedness.")
+  isUngrounded: boolean;
+
+  @doc("The confidence store of the model in the analysis results.")
+  score: float64;
+
+  @doc("Ungroundedness rate of content.")
+  ungroundednessRate: float64;
+
+  @doc("The detailed information about a text identified as ungroundness.")
+  textSpan: UngroundednessTextSpan[];
+}
+
+@added(Versions.v2023_11_30_Preview)
+@doc("The detailed information about a text identified as ungroundness.")
+model UngroundednessTextSpan {
+  @doc("The starting character where ungroundness information occurs.")
+  startCharIdx: int32;
+
+  @doc("The length of the ungroundness information.")
+  charLen: int32;
+
+  @doc("The text identified as ungroundness.")
+  ungroundednessText: string;
+
+  @doc("The reason for text being identified as ungroundness.")
+  reason: string;
+}
+
+@added(Versions.v2023_11_30_Preview)
+@doc("The response of ungroudedness detection.")
+model DetectUngroundednessResult {
+  @doc("Ungroudedness detection result.")
+  detectionResult: TextUngroundednessDetection[];
+}

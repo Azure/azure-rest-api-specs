@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ContentSafety Service",
-    "version": "2023-10-30-preview",
+    "version": "2023-11-30-preview",
     "description": "Analyze harmful content",
     "x-typespec-generated": [
       {
@@ -59,6 +59,47 @@
   },
   "tags": [],
   "paths": {
+    "/detectUngroundedness": {
+      "post": {
+        "operationId": "TextUngroundednessDetectionOperations_DetectUngroundedness",
+        "summary": "Detect ungroundedness content",
+        "description": "A synchronous API for the ungroundedness detection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The text jailbreak analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectUngroundednessOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DetectUngroundednessResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/image/incidents": {
       "get": {
         "operationId": "ImageIncidents_ListIncidents",
@@ -2065,6 +2106,113 @@
         }
       }
     },
+    "DetectUngroundednessGptxOptions": {
+      "type": "object",
+      "description": "Connection information for GPT resource.",
+      "properties": {
+        "azureOpenAIEndpoint": {
+          "type": "string",
+          "description": "Endpoint of GPT resource."
+        },
+        "deploymentId": {
+          "type": "string",
+          "description": "Deployment id of GPT resource."
+        }
+      },
+      "required": [
+        "azureOpenAIEndpoint",
+        "deploymentId"
+      ]
+    },
+    "DetectUngroundednessInput": {
+      "type": "object",
+      "description": "User input for ungroudedness detection.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "This is optional and only used for QnA or chat task."
+        },
+        "contents": {
+          "type": "array",
+          "description": "Content for analysis.",
+          "items": {
+            "$ref": "#/definitions/DetectUngroundednessInputContent"
+          }
+        },
+        "groundingSource": {
+          "type": "array",
+          "description": "Source information that serves as grounding source.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "contents",
+        "groundingSource"
+      ]
+    },
+    "DetectUngroundednessInputContent": {
+      "type": "object",
+      "description": "The text to detect ungroundedness.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identity of the text."
+        },
+        "text": {
+          "type": "string",
+          "description": "Text for analysis."
+        }
+      },
+      "required": [
+        "id",
+        "text"
+      ]
+    },
+    "DetectUngroundednessOptions": {
+      "type": "object",
+      "description": "The request of ungroudedness detection.",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Domain that the current request belongs to."
+        },
+        "task": {
+          "type": "string",
+          "description": "Type of work that the customer want the API to execute."
+        },
+        "input": {
+          "$ref": "#/definitions/DetectUngroundednessInput",
+          "description": "The input to be examined for detection."
+        },
+        "gptxOptions": {
+          "$ref": "#/definitions/DetectUngroundednessGptxOptions",
+          "description": "Options to set GPT resources for BYO scenario."
+        }
+      },
+      "required": [
+        "domain",
+        "task",
+        "input"
+      ]
+    },
+    "DetectUngroundednessResult": {
+      "type": "object",
+      "description": "The response of ungroudedness detection.",
+      "properties": {
+        "detectionResult": {
+          "type": "array",
+          "description": "Ungroudedness detection result.",
+          "items": {
+            "$ref": "#/definitions/TextUngroundednessDetection"
+          }
+        }
+      },
+      "required": [
+        "detectionResult"
+      ]
+    },
     "ImageCategoriesAnalysis": {
       "type": "object",
       "description": "Image analysis result.",
@@ -2821,6 +2969,75 @@
       },
       "required": [
         "incidentSampleId"
+      ]
+    },
+    "TextUngroundednessDetection": {
+      "type": "object",
+      "description": "The detection result of ungroudedness.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identity of content."
+        },
+        "isUngrounded": {
+          "type": "boolean",
+          "description": "Detection result for ungroudedness."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "The confidence store of the model in the analysis results."
+        },
+        "ungroundednessRate": {
+          "type": "number",
+          "format": "double",
+          "description": "Ungroundedness rate of content."
+        },
+        "textSpan": {
+          "type": "array",
+          "description": "The detailed information about a text identified as ungroundness.",
+          "items": {
+            "$ref": "#/definitions/UngroundednessTextSpan"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "isUngrounded",
+        "score",
+        "ungroundednessRate",
+        "textSpan"
+      ]
+    },
+    "UngroundednessTextSpan": {
+      "type": "object",
+      "description": "The detailed information about a text identified as ungroundness.",
+      "properties": {
+        "startCharIdx": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The starting character where ungroundness information occurs."
+        },
+        "charLen": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the ungroundness information."
+        },
+        "ungroundednessText": {
+          "type": "string",
+          "description": "The text identified as ungroundness."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for text being identified as ungroundness."
+        }
+      },
+      "required": [
+        "startCharIdx",
+        "charLen",
+        "ungroundednessText",
+        "reason"
       ]
     },
     "Versions": {
