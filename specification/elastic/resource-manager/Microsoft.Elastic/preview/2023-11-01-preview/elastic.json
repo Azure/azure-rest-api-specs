@@ -1888,6 +1888,32 @@
         }
       }
     },
+    "PlanDetails": {
+      "description": "Plan details of the monitor resource.",
+      "type": "object",
+      "properties": {
+        "offerID": {
+          "description": "Offer ID of the plan",
+          "type": "string"
+        },
+        "publisherID": {
+          "description": "Publisher ID of the plan",
+          "type": "string"
+        },
+        "termID": {
+          "description": "Term ID of the plan",
+          "type": "string"
+        },
+        "planID": {
+          "description": "Plan ID",
+          "type": "string"
+        },
+        "planName": {
+          "description": "Plan Name",
+          "type": "string"
+        }
+      }
+    },
     "LiftrResourceCategories": {
       "enum": [
         "Unknown",
@@ -1923,8 +1949,24 @@
             "create"
           ]
         },
+        "planDetails": {
+          "description": "Plan details of the monitor resource.",
+          "$ref": "#/definitions/PlanDetails"
+        },
         "version": {
           "description": "Version of elastic of the monitor resource",
+          "type": "string"
+        },
+        "saaSAzureSubscriptionStatus": {
+          "description": "Status of azure subscription where Marketplace SaaS is located.",
+          "type": "string"
+        },
+        "sourceCampaignName": {
+          "description": "Name of the marketing campaign.",
+          "type": "string"
+        },
+        "sourceCampaignId": {
+          "description": "A unique identifier associated with the campaign.",
           "type": "string"
         },
         "liftrResourceCategory": {
