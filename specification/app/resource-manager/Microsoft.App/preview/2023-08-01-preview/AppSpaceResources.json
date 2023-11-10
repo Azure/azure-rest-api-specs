@@ -20,7 +20,7 @@
         "tags": [
           "AppSpaceResources"
         ],
-        "summary": "Get the App Resources in a given App Space.",
+        "summary": "Get all of the App Space Resources in a given App Space. Returns a collection of App Space Resources.",
         "operationId": "AppSpaces_ListByResourceGroup",
         "parameters": [
           {
@@ -69,7 +69,7 @@
         "tags": [
           "AppSpaceResources"
         ],
-        "summary": "Get an App Space Resource.",
+        "summary": "Get an App Space Resource in an App Space.",
         "operationId": "AppSpaceResources_Get",
         "parameters": [
           {
@@ -125,7 +125,7 @@
           "AppSpaceResources"
         ],
         "summary": "Create or update an App Space Resource.",
-        "description": "Create or update an App Space Resource.",
+        "description": "Create or update an App Space Resource used to track an ARM resource the customer would like to track in an App Space.",
         "operationId": "AppSpaceResources_CreateOrUpdate",
         "parameters": [
           {
@@ -163,12 +163,6 @@
         ],
         "responses": {
           "200": {
-            "description": "No change performed on the App Space Resource.",
-            "schema": {
-              "$ref": "#/definitions/AppSpace"
-            }
-          },
-          "201": {
             "description": "App Space Resource create or update has been completed successfully.",
             "schema": {
               "$ref": "#/definitions/AppSpace"
@@ -245,7 +239,7 @@
   },
   "definitions": {
     "DeploymentInformation": {
-      "description": "App Space Resource Deployment Information",
+      "description": "App Space Resource Deployment Information - used to track the deployment information for an App Space Resource's tracked ARM resource",
       "type": "object",
       "properties": {
         "id": {
@@ -259,7 +253,7 @@
       }
     },
     "RepositoryInformation": {
-      "description": "App Space Resource Repository Information",
+      "description": "App Space Resource Repository Information - used to track the github repository for an App Space Resource's tracked ARM resource",
       "type": "object",
       "properties": {
         "url": {
