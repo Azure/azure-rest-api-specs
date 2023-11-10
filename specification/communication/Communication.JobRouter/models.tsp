@@ -502,8 +502,9 @@ model SuspendMode extends JobMatchingMode {
   kind: "suspend";
 }
 
+@projectedName("java", "CancelJobOptionsInternal")
 @access(Access.public, "python")
-@doc("Request payload for deleting a job")
+@doc("Request payload for canceling a job")
 model CancelJobOptions {
   @doc("A note that will be appended to the jobs' Notes collection with the current timestamp.")
   note?: string;
@@ -512,6 +513,7 @@ model CancelJobOptions {
   dispositionCode?: string;
 }
 
+@projectedName("java", "CompleteJobOptionsInternal")
 @access(Access.public, "python")
 @doc("Request payload for completing jobs")
 model CompleteJobOptions {
@@ -519,6 +521,7 @@ model CompleteJobOptions {
   note?: string;
 }
 
+@projectedName("java", "CloseJobOptionsInternal")
 @access(Access.public, "python")
 @doc("Request payload for closing jobs")
 model CloseJobOptions {
@@ -577,6 +580,7 @@ model AcceptJobOfferResult {
   workerId: string;
 }
 
+@projectedName("java", "DeclineJobOfferOptionsInternal")
 @access(Access.public, "python")
 @doc("Request payload for declining offers")
 model DeclineJobOfferOptions {
@@ -1090,10 +1094,12 @@ model WorkerWeightedAllocation {
   workerSelectors: RouterWorkerSelector[];
 }
 
+@projectedName("java", "ReclassifyJobOptionsInternal")
 @access(Access.internal)
 @doc("Request payload for reclassifying jobs")
 model ReclassifyJobOptions {}
 
+@projectedName("java", "ReclassifyJobResultInternal")
 @access(Access.internal)
 @doc("Response payload from reclassifying a job")
 model ReclassifyJobResult {}
@@ -1109,6 +1115,7 @@ model ReclassifyJobResultWithOkResponse {
   _: 200;
 }
 
+@projectedName("java", "CloseJobResultInternal")
 @access(Access.internal)
 @doc("Response payload from closing a job")
 model CloseJobResult {}
@@ -1124,6 +1131,7 @@ model CloseJobResultWithOkResponse {
   _: 200;
 }
 
+@projectedName("java", "CancelJobResultInternal")
 @access(Access.internal)
 @doc("Response payload from cancelling a job")
 model CancelJobResult {}
@@ -1139,6 +1147,7 @@ model CancelJobResultWithOkResponse {
   _: 200;
 }
 
+@projectedName("java", "CompleteJobResultInternal")
 @access(Access.internal)
 @doc("Response payload from completing a job")
 model CompleteJobResult {}
@@ -1154,6 +1163,7 @@ model CompleteJobResultWithOkResponse {
   _: 200;
 }
 
+@projectedName("java", "DeclineJobOfferResultInternal")
 @access(Access.internal)
 @doc("Response payload from declining a job")
 model DeclineJobOfferResult {}
