@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
-    "api-version": "2021-06-01",
+    "api-version": "2023-11-01-preview",
     "parameters": {
       "tags": {
         "a": "b"
@@ -24,7 +24,8 @@
             },
             "isPrimary": true,
             "vmInstanceCount": 5,
-            "durabilityLevel": "Bronze"
+            "durabilityLevel": "Bronze",
+            "httpGatewayTokenAuthEndpointPort": 19081
           },
           {
             "name": "testnt1",
@@ -40,9 +41,11 @@
             },
             "isPrimary": false,
             "vmInstanceCount": 3,
-            "durabilityLevel": "Bronze"
+            "durabilityLevel": "Bronze",
+            "httpGatewayTokenAuthEndpointPort": 19081
           }
         ],
+        "enableHttpGatewayExclusiveAuthMode": true,
         "reliabilityLevel": "Bronze",
         "upgradeMode": "Automatic",
         "eventStoreServiceEnabled": true,
@@ -137,7 +140,8 @@
               },
               "isPrimary": true,
               "vmInstanceCount": 5,
-              "durabilityLevel": "Bronze"
+              "durabilityLevel": "Bronze",
+              "httpGatewayTokenAuthEndpointPort": 19081
             },
             {
               "name": "testnt1",
@@ -153,9 +157,11 @@
               },
               "isPrimary": false,
               "vmInstanceCount": 3,
-              "durabilityLevel": "Bronze"
+              "durabilityLevel": "Bronze",
+              "httpGatewayTokenAuthEndpointPort": 19081
             }
           ],
+          "enableHttpGatewayExclusiveAuthMode": true,
           "reliabilityLevel": "Bronze",
           "upgradeMode": "Automatic",
           "availableClusterVersions": [
@@ -255,7 +261,8 @@
               },
               "isPrimary": true,
               "vmInstanceCount": 5,
-              "durabilityLevel": "Bronze"
+              "durabilityLevel": "Bronze",
+              "httpGatewayTokenAuthEndpointPort": 19081
             },
             {
               "name": "testnt1",
@@ -271,9 +278,11 @@
               },
               "isPrimary": false,
               "vmInstanceCount": 3,
-              "durabilityLevel": "Bronze"
+              "durabilityLevel": "Bronze",
+              "httpGatewayTokenAuthEndpointPort": 19081
             }
           ],
+          "enableHttpGatewayExclusiveAuthMode": true,
           "reliabilityLevel": "Bronze",
           "upgradeMode": "Automatic",
           "availableClusterVersions": [
