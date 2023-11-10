@@ -40,6 +40,7 @@ These settings apply only when `--tag=package-2023-10` is specified on the comma
 input-file:
   - Microsoft.Insights/stable/2023-10-01/metricBatch.json
 ```
+
 ### Tag: package-preview-2023-05
 
 These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
@@ -78,7 +79,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
 ```
 
 ## C#
