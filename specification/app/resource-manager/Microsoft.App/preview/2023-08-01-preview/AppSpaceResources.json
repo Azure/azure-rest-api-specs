@@ -34,7 +34,8 @@
             "in": "path",
             "description": "Name of the App Space.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -83,14 +84,16 @@
             "in": "path",
             "description": "Name of the App Space.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "spaceResourceName",
             "in": "path",
             "description": "Name of the App Space Resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -289,7 +292,7 @@
               "description": "Friendly name of the App Space Resource.",
               "type": "string"
             },
-            "location": {
+            "resourceLocation": {
               "description": "Location of the tracked ARM resource. Can be different from the location of the app space resource.",
               "type": "string"
             },
