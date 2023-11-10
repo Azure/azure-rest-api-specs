@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Mission",
-    "version": "2023-08-01-preview",
+    "version": "2023-11-01-preview",
     "description": "Microsoft Mission Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -6218,19 +6218,19 @@
       "type": "object",
       "description": "Workload Resource properties",
       "properties": {
-        "managedResourceGroups": {
-          "type": "array",
-          "description": "Managed Resource Groups.",
-          "items": {
-            "type": "string"
-          }
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State.",
           "readOnly": true
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Managed resource group configuration."
         }
-      }
+      },
+      "required": [
+        "managedResourceGroupConfiguration"
+      ]
     },
     "WorkloadResource": {
       "type": "object",
@@ -6294,12 +6294,9 @@
       "type": "object",
       "description": "The updatable properties of the WorkloadResource.",
       "properties": {
-        "managedResourceGroups": {
-          "type": "array",
-          "description": "Managed Resource Groups.",
-          "items": {
-            "type": "string"
-          }
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Managed resource group configuration."
         }
       }
     }
