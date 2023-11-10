@@ -30,12 +30,11 @@ openapi-subtype: rpaas
 tag: package-2024-04-01-preview
 ```
 
-
 ### Tag: package-2024-04-01-preview
 
 These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-04-01-preview'
+``` yaml $(tag) == 'package-2024-04-01-preview'
 input-file:
   - Microsoft.DeviceUpdate/duedge/preview/2024-04-01-preview/deviceupdate.json
 ```
@@ -50,7 +49,7 @@ directive:
     reason: Managed Identity type can be case in-sensitive
   - suppress: BodyTopLevelProperties
     from: deviceupdate.json
-    where: $.definitions.PrivateEndpointConnectionProxy.properties
+    where: $.definitions.PrivateEndpointConnectionProxy
     reason: Internal NRP resource, all properties are top level properties
 ```
 
