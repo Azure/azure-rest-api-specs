@@ -2,6 +2,13 @@
 
 These settings apply only when `--go` is specified on the command line.
 
+``` yaml $(go)
+use-extension:
+  "@autorest/modelerfour": 4.15.421
+modelerfour:
+    lenient-model-deduplication: true    
+```
+
 ```yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
