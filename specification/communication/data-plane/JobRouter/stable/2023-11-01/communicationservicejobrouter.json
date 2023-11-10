@@ -2241,7 +2241,7 @@
           "$ref": "#/definitions/DistributionMode"
         }
       ],
-      "x-ms-discriminator-value": "best-worker"
+      "x-ms-discriminator-value": "bestWorker"
     },
     "BestWorkerModeCreateOrUpdate": {
       "type": "object",
@@ -2261,7 +2261,7 @@
           "$ref": "#/definitions/DistributionModeCreateOrUpdate"
         }
       ],
-      "x-ms-discriminator-value": "best-worker"
+      "x-ms-discriminator-value": "bestWorker"
     },
     "CancelExceptionAction": {
       "type": "object",
@@ -2499,7 +2499,7 @@
           "$ref": "#/definitions/RouterRule"
         }
       ],
-      "x-ms-discriminator-value": "direct-map-rule"
+      "x-ms-discriminator-value": "directMap"
     },
     "DirectMapRouterRuleCreateOrUpdate": {
       "type": "object",
@@ -2509,7 +2509,7 @@
           "$ref": "#/definitions/RouterRuleCreateOrUpdate"
         }
       ],
-      "x-ms-discriminator-value": "direct-map-rule"
+      "x-ms-discriminator-value": "directMap"
     },
     "DistributionMode": {
       "type": "object",
@@ -2533,7 +2533,7 @@
           "default": false
         },
         "kind": {
-          "type": "string",
+          "$ref": "#/definitions/DistributionModeKind",
           "description": "The type discriminator describing a sub-type of DistributionMode"
         }
       },
@@ -2564,11 +2564,41 @@
           "default": false
         },
         "kind": {
-          "type": "string",
+          "$ref": "#/definitions/DistributionModeKind",
           "description": "The type discriminator describing a sub-type of DistributionMode"
         }
       },
       "discriminator": "kind"
+    },
+    "DistributionModeKind": {
+      "type": "string",
+      "description": "Supported distribution mode types",
+      "enum": [
+        "bestWorker",
+        "longestIdle",
+        "roundRobin"
+      ],
+      "x-ms-enum": {
+        "name": "DistributionModeKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "bestWorker",
+            "value": "bestWorker",
+            "description": "Discriminator value for BestWorkerMode."
+          },
+          {
+            "name": "longestIdle",
+            "value": "longestIdle",
+            "description": "Discriminator value for LongestIdleMode."
+          },
+          {
+            "name": "roundRobin",
+            "value": "roundRobin",
+            "description": "Discriminator value for RoundRobinMode."
+          }
+        ]
+      }
     },
     "DistributionPolicy": {
       "type": "object",
@@ -2631,7 +2661,7 @@
           "description": "Unique Id of the exception action"
         },
         "kind": {
-          "type": "string",
+          "$ref": "#/definitions/ExceptionActionKind",
           "description": "The type discriminator describing a sub-type of ExceptionAction"
         }
       },
@@ -2639,6 +2669,36 @@
       "required": [
         "kind"
       ]
+    },
+    "ExceptionActionKind": {
+      "type": "string",
+      "description": "Supported exception action types",
+      "enum": [
+        "cancel",
+        "manualReclassify",
+        "reclassify"
+      ],
+      "x-ms-enum": {
+        "name": "ExceptionActionKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "cancel",
+            "value": "cancel",
+            "description": "Discriminator value for CancelExceptionAction."
+          },
+          {
+            "name": "manualReclassify",
+            "value": "manualReclassify",
+            "description": "Discriminator value for ManualReclassifyExceptionAction."
+          },
+          {
+            "name": "reclassify",
+            "value": "reclassify",
+            "description": "Discriminator value for ReclassifyExceptionAction."
+          }
+        ]
+      }
     },
     "ExceptionPolicy": {
       "type": "object",
@@ -2719,7 +2779,7 @@
       "description": "The trigger for this exception rule",
       "properties": {
         "kind": {
-          "type": "string",
+          "$ref": "#/definitions/ExceptionTriggerKind",
           "description": "The type discriminator describing a sub-type of ExceptionTrigger"
         }
       },
@@ -2727,6 +2787,30 @@
       "required": [
         "kind"
       ]
+    },
+    "ExceptionTriggerKind": {
+      "type": "string",
+      "description": "Supported exception trigger types",
+      "enum": [
+        "queueLength",
+        "waitTime"
+      ],
+      "x-ms-enum": {
+        "name": "ExceptionTriggerKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "queueLength",
+            "value": "queueLength",
+            "description": "Discriminator value for QueueLengthExceptionTrigger."
+          },
+          {
+            "name": "waitTime",
+            "value": "waitTime",
+            "description": "Discriminator value for WaitTimeExceptionTrigger."
+          }
+        ]
+      }
     },
     "ExpressionRouterRule": {
       "type": "object",
@@ -2749,7 +2833,7 @@
           "$ref": "#/definitions/RouterRule"
         }
       ],
-      "x-ms-discriminator-value": "expression-rule"
+      "x-ms-discriminator-value": "expression"
     },
     "ExpressionRouterRuleCreateOrUpdate": {
       "type": "object",
@@ -2769,7 +2853,7 @@
           "$ref": "#/definitions/RouterRuleCreateOrUpdate"
         }
       ],
-      "x-ms-discriminator-value": "expression-rule"
+      "x-ms-discriminator-value": "expression"
     },
     "ExpressionRouterRuleLanguage": {
       "type": "string",
@@ -2811,7 +2895,7 @@
           "$ref": "#/definitions/RouterRule"
         }
       ],
-      "x-ms-discriminator-value": "azure-function-rule"
+      "x-ms-discriminator-value": "function"
     },
     "FunctionRouterRuleCreateOrUpdate": {
       "type": "object",
@@ -2832,7 +2916,7 @@
           "$ref": "#/definitions/RouterRuleCreateOrUpdate"
         }
       ],
-      "x-ms-discriminator-value": "azure-function-rule"
+      "x-ms-discriminator-value": "function"
     },
     "FunctionRouterRuleCredential": {
       "type": "object",
@@ -2857,7 +2941,7 @@
       "description": "A matching mode of one of the following types:\nQueueAndMatchMode: Used when matching worker to a job is required to be done right after job is queued.\nScheduleAndSuspendMode: Used for scheduling jobs to be queued at a future time. At specified time, matching of a worker to the job will not start automatically.\nSuspendMode: Used when matching workers to a job needs to be suspended.",
       "properties": {
         "kind": {
-          "type": "string",
+          "$ref": "#/definitions/JobMatchingModeKind",
           "description": "The type discriminator describing a sub-type of JobMatchingMode"
         }
       },
@@ -2871,11 +2955,41 @@
       "description": "A matching mode of one of the following types:\nQueueAndMatchMode: Used when matching worker to a job is required to be done right after job is queued.\nScheduleAndSuspendMode: Used for scheduling jobs to be queued at a future time. At specified time, matching of a worker to the job will not start automatically.\nSuspendMode: Used when matching workers to a job needs to be suspended.",
       "properties": {
         "kind": {
-          "type": "string",
+          "$ref": "#/definitions/JobMatchingModeKind",
           "description": "The type discriminator describing a sub-type of JobMatchingMode"
         }
       },
       "discriminator": "kind"
+    },
+    "JobMatchingModeKind": {
+      "type": "string",
+      "description": "Supported matching mode types",
+      "enum": [
+        "queueAndMatch",
+        "scheduleAndSuspend",
+        "suspend"
+      ],
+      "x-ms-enum": {
+        "name": "JobMatchingModeKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "queueAndMatch",
+            "value": "queueAndMatch",
+            "description": "Discriminator value for QueueAndMatchMode."
+          },
+          {
+            "name": "scheduleAndSuspend",
+            "value": "scheduleAndSuspend",
+            "description": "Discriminator value for ScheduleAndSuspendMode."
+          },
+          {
+            "name": "suspend",
+            "value": "suspend",
+            "description": "Discriminator value for SuspendMode."
+          }
+        ]
+      }
     },
     "LabelOperator": {
       "type": "string",
@@ -2933,7 +3047,7 @@
           "$ref": "#/definitions/DistributionMode"
         }
       ],
-      "x-ms-discriminator-value": "longest-idle"
+      "x-ms-discriminator-value": "longestIdle"
     },
     "LongestIdleModeCreateOrUpdate": {
       "type": "object",
@@ -2943,7 +3057,7 @@
           "$ref": "#/definitions/DistributionModeCreateOrUpdate"
         }
       ],
-      "x-ms-discriminator-value": "longest-idle"
+      "x-ms-discriminator-value": "longestIdle"
     },
     "ManualReclassifyExceptionAction": {
       "type": "object",
@@ -2972,7 +3086,7 @@
           "$ref": "#/definitions/ExceptionAction"
         }
       ],
-      "x-ms-discriminator-value": "manual-reclassify"
+      "x-ms-discriminator-value": "manualReclassify"
     },
     "OAuth2WebhookClientCredential": {
       "type": "object",
@@ -3136,7 +3250,7 @@
           "$ref": "#/definitions/QueueSelectorAttachment"
         }
       ],
-      "x-ms-discriminator-value": "pass-through"
+      "x-ms-discriminator-value": "passThrough"
     },
     "PassThroughWorkerSelectorAttachment": {
       "type": "object",
@@ -3165,7 +3279,7 @@
           "$ref": "#/definitions/WorkerSelectorAttachment"
         }
       ],
-      "x-ms-discriminator-value": "pass-through"
+      "x-ms-discriminator-value": "passThrough"
     },
     "QueueAndMatchMode": {
       "type": "object",
@@ -3175,7 +3289,7 @@
           "$ref": "#/definitions/JobMatchingMode"
         }
       ],
-      "x-ms-discriminator-value": "queue-and-match"
+      "x-ms-discriminator-value": "queueAndMatch"
     },
     "QueueAndMatchModeCreateOrUpdate": {
       "type": "object",
@@ -3185,7 +3299,7 @@
           "$ref": "#/definitions/JobMatchingModeCreateOrUpdate"
         }
       ],
-      "x-ms-discriminator-value": "queue-and-match"
+      "x-ms-discriminator-value": "queueAndMatch"
     },
     "QueueLengthExceptionTrigger": {
       "type": "object",
@@ -3205,14 +3319,14 @@
           "$ref": "#/definitions/ExceptionTrigger"
         }
       ],
-      "x-ms-discriminator-value": "queue-length"
+      "x-ms-discriminator-value": "queueLength"
     },
     "QueueSelectorAttachment": {
       "type": "object",
       "description": "An attachment of queue selectors to resolve a queue to a job from a classification policy",
       "properties": {
         "kind": {
-          "type": "string",
+          "$ref": "#/definitions/QueueSelectorAttachmentKind",
           "description": "The type discriminator describing a sub-type of QueueSelectorAttachment"
         }
       },
@@ -3220,6 +3334,48 @@
       "required": [
         "kind"
       ]
+    },
+    "QueueSelectorAttachmentKind": {
+      "type": "string",
+      "description": "Supported queue selector attachment types",
+      "enum": [
+        "conditional",
+        "passThrough",
+        "ruleEngine",
+        "static",
+        "weightedAllocation"
+      ],
+      "x-ms-enum": {
+        "name": "QueueSelectorAttachmentKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "conditional",
+            "value": "conditional",
+            "description": "Discriminator value for ConditionalQueueSelectorAttachment."
+          },
+          {
+            "name": "passThrough",
+            "value": "passThrough",
+            "description": "Discriminator value for PassThroughQueueSelectorAttachment."
+          },
+          {
+            "name": "ruleEngine",
+            "value": "ruleEngine",
+            "description": "Discriminator value for RuleEngineQueueSelectorAttachment."
+          },
+          {
+            "name": "static",
+            "value": "static",
+            "description": "Discriminator value for StaticQueueSelectorAttachment."
+          },
+          {
+            "name": "weightedAllocation",
+            "value": "weightedAllocation",
+            "description": "Discriminator value for WeightedAllocationQueueSelectorAttachment."
+          }
+        ]
+      }
     },
     "QueueWeightedAllocation": {
       "type": "object",
@@ -3281,7 +3437,7 @@
           "$ref": "#/definitions/DistributionMode"
         }
       ],
-      "x-ms-discriminator-value": "round-robin"
+      "x-ms-discriminator-value": "roundRobin"
     },
     "RoundRobinModeCreateOrUpdate": {
       "type": "object",
@@ -3291,7 +3447,7 @@
           "$ref": "#/definitions/DistributionModeCreateOrUpdate"
         }
       ],
-      "x-ms-discriminator-value": "round-robin"
+      "x-ms-discriminator-value": "roundRobin"
     },
     "RouterChannel": {
       "type": "object",
@@ -3812,7 +3968,7 @@
       "description": "A rule of one of the following types:\nStaticRule:  A rule providing static rules that always return the same result, regardless of input.\nDirectMapRule:  A rule that return the same labels as the input labels.\nExpressionRule: A rule providing inline expression rules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure Function.\nWebhookRule: A rule providing a binding to a webserver following OAuth2.0 authentication protocol.",
       "properties": {
         "kind": {
-          "type": "string",
+          "$ref": "#/definitions/RouterRuleKind",
           "description": "The type discriminator describing a sub-type of RouterRule"
         }
       },
@@ -3826,11 +3982,53 @@
       "description": "A rule of one of the following types:\nStaticRule:  A rule providing static rules that always return the same result, regardless of input.\nDirectMapRule:  A rule that return the same labels as the input labels.\nExpressionRule: A rule providing inline expression rules.\nFunctionRule: A rule providing a binding to an HTTP Triggered Azure Function.\nWebhookRule: A rule providing a binding to a webserver following OAuth2.0 authentication protocol.",
       "properties": {
         "kind": {
-          "type": "string",
+          "$ref": "#/definitions/RouterRuleKind",
           "description": "The type discriminator describing a sub-type of RouterRule"
         }
       },
       "discriminator": "kind"
+    },
+    "RouterRuleKind": {
+      "type": "string",
+      "description": "Supported router rule types",
+      "enum": [
+        "directMap",
+        "expression",
+        "function",
+        "static",
+        "webhook"
+      ],
+      "x-ms-enum": {
+        "name": "RouterRuleKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "directMap",
+            "value": "directMap",
+            "description": "Discriminator value for DirectMapRouterRule."
+          },
+          {
+            "name": "expression",
+            "value": "expression",
+            "description": "Discriminator value for ExpressionRouterRule."
+          },
+          {
+            "name": "function",
+            "value": "function",
+            "description": "Discriminator value for FunctionRouterRule."
+          },
+          {
+            "name": "static",
+            "value": "static",
+            "description": "Discriminator value for StaticRouterRule."
+          },
+          {
+            "name": "webhook",
+            "value": "webhook",
+            "description": "Discriminator value for WebhookRouterRule."
+          }
+        ]
+      }
     },
     "RouterWorker": {
       "type": "object",
@@ -4097,7 +4295,7 @@
           "$ref": "#/definitions/QueueSelectorAttachment"
         }
       ],
-      "x-ms-discriminator-value": "rule-engine"
+      "x-ms-discriminator-value": "ruleEngine"
     },
     "RuleEngineWorkerSelectorAttachment": {
       "type": "object",
@@ -4116,7 +4314,7 @@
           "$ref": "#/definitions/WorkerSelectorAttachment"
         }
       ],
-      "x-ms-discriminator-value": "rule-engine"
+      "x-ms-discriminator-value": "ruleEngine"
     },
     "ScheduleAndSuspendMode": {
       "type": "object",
@@ -4136,7 +4334,7 @@
           "$ref": "#/definitions/JobMatchingMode"
         }
       ],
-      "x-ms-discriminator-value": "schedule-and-suspend"
+      "x-ms-discriminator-value": "scheduleAndSuspend"
     },
     "ScheduleAndSuspendModeCreateOrUpdate": {
       "type": "object",
@@ -4153,7 +4351,7 @@
           "$ref": "#/definitions/JobMatchingModeCreateOrUpdate"
         }
       ],
-      "x-ms-discriminator-value": "schedule-and-suspend"
+      "x-ms-discriminator-value": "scheduleAndSuspend"
     },
     "ScoringRuleOptions": {
       "type": "object",
@@ -4244,7 +4442,7 @@
           "$ref": "#/definitions/RouterRule"
         }
       ],
-      "x-ms-discriminator-value": "static-rule"
+      "x-ms-discriminator-value": "static"
     },
     "StaticRouterRuleCreateOrUpdate": {
       "type": "object",
@@ -4259,7 +4457,7 @@
           "$ref": "#/definitions/RouterRuleCreateOrUpdate"
         }
       ],
-      "x-ms-discriminator-value": "static-rule"
+      "x-ms-discriminator-value": "static"
     },
     "StaticWorkerSelectorAttachment": {
       "type": "object",
@@ -4347,7 +4545,7 @@
           "$ref": "#/definitions/ExceptionTrigger"
         }
       ],
-      "x-ms-discriminator-value": "wait-time"
+      "x-ms-discriminator-value": "waitTime"
     },
     "WebhookRouterRule": {
       "type": "object",
@@ -4373,7 +4571,7 @@
           "$ref": "#/definitions/RouterRule"
         }
       ],
-      "x-ms-discriminator-value": "webhook-rule"
+      "x-ms-discriminator-value": "webhook"
     },
     "WebhookRouterRuleCreateOrUpdate": {
       "type": "object",
@@ -4399,7 +4597,7 @@
           "$ref": "#/definitions/RouterRuleCreateOrUpdate"
         }
       ],
-      "x-ms-discriminator-value": "webhook-rule"
+      "x-ms-discriminator-value": "webhook"
     },
     "WeightedAllocationQueueSelectorAttachment": {
       "type": "object",
@@ -4422,7 +4620,7 @@
           "$ref": "#/definitions/QueueSelectorAttachment"
         }
       ],
-      "x-ms-discriminator-value": "weighted-allocation-queue-selector"
+      "x-ms-discriminator-value": "weightedAllocation"
     },
     "WeightedAllocationWorkerSelectorAttachment": {
       "type": "object",
@@ -4445,14 +4643,14 @@
           "$ref": "#/definitions/WorkerSelectorAttachment"
         }
       ],
-      "x-ms-discriminator-value": "weighted-allocation-worker-selector"
+      "x-ms-discriminator-value": "weightedAllocation"
     },
     "WorkerSelectorAttachment": {
       "type": "object",
       "description": "An attachment which attaches worker selectors to a job",
       "properties": {
         "kind": {
-          "type": "string",
+          "$ref": "#/definitions/WorkerSelectorAttachmentKind",
           "description": "The type discriminator describing a sub-type of WorkerSelectorAttachment"
         }
       },
@@ -4460,6 +4658,48 @@
       "required": [
         "kind"
       ]
+    },
+    "WorkerSelectorAttachmentKind": {
+      "type": "string",
+      "description": "Supported worker selector attachment types",
+      "enum": [
+        "conditional",
+        "passThrough",
+        "ruleEngine",
+        "static",
+        "weightedAllocation"
+      ],
+      "x-ms-enum": {
+        "name": "WorkerSelectorAttachmentKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "conditional",
+            "value": "conditional",
+            "description": "Discriminator value for ConditionalWorkerSelectorAttachment."
+          },
+          {
+            "name": "passThrough",
+            "value": "passThrough",
+            "description": "Discriminator value for PassThroughWorkerSelectorAttachment."
+          },
+          {
+            "name": "ruleEngine",
+            "value": "ruleEngine",
+            "description": "Discriminator value for RuleEngineWorkerSelectorAttachment."
+          },
+          {
+            "name": "static",
+            "value": "static",
+            "description": "Discriminator value for StaticWorkerSelectorAttachment."
+          },
+          {
+            "name": "weightedAllocation",
+            "value": "weightedAllocation",
+            "description": "Discriminator value for WeightedAllocationWorkerSelectorAttachment."
+          }
+        ]
+      }
     },
     "WorkerWeightedAllocation": {
       "type": "object",

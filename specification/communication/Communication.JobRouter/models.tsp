@@ -224,6 +224,105 @@ enum ExpressionRouterRuleLanguage {
   powerFx,
 }
 
+@doc("Supported matching mode types")
+enum JobMatchingModeKind {
+  @doc("Discriminator value for QueueAndMatchMode.")
+  queueAndMatch,
+
+  @doc("Discriminator value for ScheduleAndSuspendMode.")
+  scheduleAndSuspend,
+
+  @doc("Discriminator value for SuspendMode.")
+  suspend,
+}
+
+@doc("Supported router rule types")
+enum RouterRuleKind {
+  @doc("Discriminator value for DirectMapRouterRule.")
+  directMap,
+
+  @doc("Discriminator value for ExpressionRouterRule.")
+  expression,
+
+  @doc("Discriminator value for FunctionRouterRule.")
+  function,
+
+  @doc("Discriminator value for StaticRouterRule.")
+  static,
+
+  @doc("Discriminator value for WebhookRouterRule.")
+  webhook,
+}
+
+@doc("Supported distribution mode types")
+enum DistributionModeKind {
+  @doc("Discriminator value for BestWorkerMode.")
+  bestWorker,
+
+  @doc("Discriminator value for LongestIdleMode.")
+  longestIdle,
+
+  @doc("Discriminator value for RoundRobinMode.")
+  roundRobin,
+}
+
+@doc("Supported exception trigger types")
+enum ExceptionTriggerKind {
+  @doc("Discriminator value for QueueLengthExceptionTrigger.")
+  queueLength,
+
+  @doc("Discriminator value for WaitTimeExceptionTrigger.")
+  waitTime,
+}
+
+@doc("Supported exception action types")
+enum ExceptionActionKind {
+  @doc("Discriminator value for CancelExceptionAction.")
+  cancel,
+
+  @doc("Discriminator value for ManualReclassifyExceptionAction.")
+  manualReclassify,
+
+  @doc("Discriminator value for ReclassifyExceptionAction.")
+  reclassify,
+}
+
+@doc("Supported queue selector attachment types")
+enum QueueSelectorAttachmentKind {
+  @doc("Discriminator value for ConditionalQueueSelectorAttachment.")
+  conditional,
+
+  @doc("Discriminator value for PassThroughQueueSelectorAttachment.")
+  passThrough,
+
+  @doc("Discriminator value for RuleEngineQueueSelectorAttachment.")
+  ruleEngine,
+
+  @doc("Discriminator value for StaticQueueSelectorAttachment.")
+  static,
+
+  @doc("Discriminator value for WeightedAllocationQueueSelectorAttachment.")
+  weightedAllocation,
+}
+
+@doc("Supported worker selector attachment types")
+enum WorkerSelectorAttachmentKind {
+  @doc("Discriminator value for ConditionalWorkerSelectorAttachment.")
+  conditional,
+
+  @doc("Discriminator value for PassThroughWorkerSelectorAttachment.")
+  passThrough,
+
+  @doc("Discriminator value for RuleEngineWorkerSelectorAttachment.")
+  ruleEngine,
+
+  @doc("Discriminator value for StaticWorkerSelectorAttachment.")
+  static,
+
+  @doc("Discriminator value for WeightedAllocationWorkerSelectorAttachment.")
+  weightedAllocation,
+}
+
 @resource("routing/classificationPolicies")
 @doc("A container for the rules that govern how jobs are classified.")
 model ClassificationPolicy {
@@ -261,7 +360,7 @@ WebhookRule: A rule providing a binding to a webserver following OAuth2.0 authen
 @discriminator("kind")
 model RouterRule {
   @doc("The type discriminator describing a sub-type of RouterRule")
-  kind: string;
+  kind: RouterRuleKind;
 }
 
 @resource("routing/distributionPolicies")
@@ -297,7 +396,7 @@ model DistributionMode {
   bypassSelectors?: boolean = false;
 
   @doc("The type discriminator describing a sub-type of DistributionMode")
-  kind: string;
+  kind: DistributionModeKind;
 }
 
 @resource("routing/exceptionPolicies")
@@ -333,7 +432,7 @@ model ExceptionRule {
 @discriminator("kind")
 model ExceptionTrigger {
   @doc("The type discriminator describing a sub-type of ExceptionTrigger")
-  kind: string;
+  kind: ExceptionTriggerKind;
 }
 
 @doc("A note attached to a job.")
@@ -469,7 +568,7 @@ SuspendMode: Used when matching workers to a job needs to be suspended.
 @discriminator("kind")
 model JobMatchingMode {
   @doc("The type discriminator describing a sub-type of JobMatchingMode")
-  kind: string;
+  kind: JobMatchingModeKind;
 }
 
 @doc("Describes a matching mode used for scheduling jobs to be queued at a future time. At the specified time, matching worker to a job will not start automatically.")
@@ -478,19 +577,19 @@ model ScheduleAndSuspendMode extends JobMatchingMode {
   scheduleAt: utcDateTime;
 
   @doc("The type discriminator describing ScheduleAndSuspendMode")
-  kind: "schedule-and-suspend";
+  kind: JobMatchingModeKind.scheduleAndSuspend;
 }
 
 @doc("Describes a matching mode where matching worker to a job is automatically started after job is queued successfully.")
 model QueueAndMatchMode extends JobMatchingMode {
   @doc("The type discriminator describing QueueAndMatchMode")
-  kind: "queue-and-match";
+  kind: JobMatchingModeKind.queueAndMatch;
 }
 
 @doc("Describes a matching mode where matching worker to a job is suspended.")
 model SuspendMode extends JobMatchingMode {
   @doc("The type discriminator describing SuspendMode")
-  kind: "suspend";
+  kind: JobMatchingModeKind.suspend;
 }
 
 @access(Access.public, "python")
@@ -719,7 +818,7 @@ model BestWorkerMode extends DistributionMode {
   scoringRuleOptions?: ScoringRuleOptions;
 
   @doc("The type discriminator describing a sub-type of Mode")
-  kind: "best-worker";
+  kind: DistributionModeKind.bestWorker;
 }
 
 @doc("Encapsulates all options that can be passed as parameters for scoring rule with BestWorkerMode")
@@ -749,7 +848,7 @@ model CancelExceptionAction extends ExceptionAction {
   dispositionCode?: string;
 
   @doc("The type discriminator describing a sub-type of ExceptionAction")
-  kind: "cancel";
+  kind: ExceptionActionKind.cancel;
 }
 
 @doc("The action to take when the exception is triggered")
@@ -759,7 +858,7 @@ model ExceptionAction {
   id?: string;
 
   @doc("The type discriminator describing a sub-type of ExceptionAction")
-  kind: string;
+  kind: ExceptionActionKind;
 }
 
 @doc("Describes a set of queue selectors that will be attached if the given condition resolves to true")
@@ -771,7 +870,7 @@ model ConditionalQueueSelectorAttachment extends QueueSelectorAttachment {
   queueSelectors: RouterQueueSelector[];
 
   @doc("The type discriminator describing the type of queue selector attachment")
-  kind: "conditional";
+  kind: QueueSelectorAttachmentKind.conditional;
 }
 
 @doc("Describes a condition that must be met against a set of labels for queue selection")
@@ -791,7 +890,7 @@ model RouterQueueSelector {
 @discriminator("kind")
 model QueueSelectorAttachment {
   @doc("The type discriminator describing a sub-type of QueueSelectorAttachment")
-  kind: string;
+  kind: QueueSelectorAttachmentKind;
 }
 
 @doc("Describes a set of worker selectors that will be attached if the given condition resolves to true")
@@ -803,20 +902,20 @@ model ConditionalWorkerSelectorAttachment extends WorkerSelectorAttachment {
   workerSelectors: RouterWorkerSelector[];
 
   @doc("The type discriminator describing the type of worker selector attachment")
-  kind: "conditional";
+  kind: WorkerSelectorAttachmentKind.conditional;
 }
 
 @doc("An attachment which attaches worker selectors to a job")
 @discriminator("kind")
 model WorkerSelectorAttachment {
   @doc("The type discriminator describing a sub-type of WorkerSelectorAttachment")
-  kind: string;
+  kind: WorkerSelectorAttachmentKind;
 }
 
 @doc("A rule that return the same labels as the input labels.")
 model DirectMapRouterRule extends RouterRule {
   @doc("The type discriminator describing a sub-type of Rule")
-  kind: "direct-map-rule";
+  kind: RouterRuleKind.directMap;
 }
 
 @doc("A rule providing inline expression rules.")
@@ -828,7 +927,7 @@ model ExpressionRouterRule extends RouterRule {
   expression: string;
 
   @doc("The type discriminator describing a sub-type of Rule")
-  kind: "expression-rule";
+  kind: RouterRuleKind.expression;
 }
 
 @doc("A rule providing a binding to an HTTP Triggered Azure Function.")
@@ -840,7 +939,7 @@ model FunctionRouterRule extends RouterRule {
   credential?: FunctionRouterRuleCredential;
 
   @doc("The type discriminator describing a sub-type of Rule")
-  kind: "azure-function-rule";
+  kind: RouterRuleKind.function;
 }
 
 @doc("Credentials used to access Azure function rule")
@@ -858,7 +957,7 @@ model FunctionRouterRuleCredential {
 @doc("Jobs are directed to the worker who has been idle longest.")
 model LongestIdleMode extends DistributionMode {
   @doc("The type discriminator describing a sub-type of Mode")
-  kind: "longest-idle";
+  kind: DistributionModeKind.longestIdle;
 }
 
 @doc("An action that manually reclassifies a job by providing the queue, priority and worker selectors.")
@@ -873,7 +972,7 @@ model ManualReclassifyExceptionAction extends ExceptionAction {
   workerSelectors?: RouterWorkerSelector[];
 
   @doc("The type discriminator describing a sub-type of ExceptionAction")
-  kind: "manual-reclassify";
+  kind: ExceptionActionKind.manualReclassify;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is standard naming convention for OAuth."
@@ -895,7 +994,7 @@ model PassThroughQueueSelectorAttachment extends QueueSelectorAttachment {
   labelOperator: LabelOperator;
 
   @doc("The type discriminator describing the type of queue selector attachment")
-  kind: "pass-through";
+  kind: QueueSelectorAttachmentKind.passThrough;
 }
 
 @doc("Attaches a worker selector where the value is passed through from the job label with the same key")
@@ -910,7 +1009,7 @@ model PassThroughWorkerSelectorAttachment extends WorkerSelectorAttachment {
   expiresAfterSeconds?: float64;
 
   @doc("The type discriminator describing the type of worker selector attachment")
-  kind: "pass-through";
+  kind: WorkerSelectorAttachmentKind.passThrough;
 }
 
 @doc("Trigger for an exception action on exceeding queue length")
@@ -919,7 +1018,7 @@ model QueueLengthExceptionTrigger extends ExceptionTrigger {
   threshold: int32;
 
   @doc("The type discriminator describing a sub-type of ExceptionTrigger")
-  kind: "queue-length";
+  kind: ExceptionTriggerKind.queueLength;
 }
 
 @doc("Contains the weight percentage and queue selectors to be applied if selected for weighted distributions.")
@@ -941,13 +1040,13 @@ model ReclassifyExceptionAction extends ExceptionAction {
   labelsToUpsert?: Record<unknown>;
 
   @doc("The type discriminator describing a sub-type of ExceptionAction")
-  kind: "reclassify";
+  kind: ExceptionActionKind.reclassify;
 }
 
 @doc("Jobs are distributed in order to workers, starting with the worker that is after the last worker to receive a job.")
 model RoundRobinMode extends DistributionMode {
   @doc("The type discriminator describing a sub-type of Mode")
-  kind: "round-robin";
+  kind: DistributionModeKind.roundRobin;
 }
 
 @doc("Attaches queue selectors to a job when the RouterRule is resolved")
@@ -956,7 +1055,7 @@ model RuleEngineQueueSelectorAttachment extends QueueSelectorAttachment {
   rule: RouterRule;
 
   @doc("The type discriminator describing the type of queue selector attachment")
-  kind: "rule-engine";
+  kind: QueueSelectorAttachmentKind.ruleEngine;
 }
 
 @doc("Attaches worker selectors to a job when a RouterRule is resolved")
@@ -965,7 +1064,7 @@ model RuleEngineWorkerSelectorAttachment extends WorkerSelectorAttachment {
   rule: RouterRule;
 
   @doc("The type discriminator describing the type of worker selector attachment")
-  kind: "rule-engine";
+  kind: WorkerSelectorAttachmentKind.ruleEngine;
 }
 
 @doc("Describes a queue selector that will be attached to the job")
@@ -974,7 +1073,7 @@ model StaticQueueSelectorAttachment extends QueueSelectorAttachment {
   queueSelector: RouterQueueSelector;
 
   @doc("The type discriminator describing the type of queue selector attachment")
-  kind: "static";
+  kind: QueueSelectorAttachmentKind.static;
 }
 
 @doc("A rule providing static rules that always return the same result, regardless of input.")
@@ -984,7 +1083,7 @@ model StaticRouterRule extends RouterRule {
   value?: unknown;
 
   @doc("The type discriminator describing a sub-type of Rule")
-  kind: "static-rule";
+  kind: RouterRuleKind.static;
 }
 
 @doc("Describes a worker selector that will be attached to the job")
@@ -993,7 +1092,7 @@ model StaticWorkerSelectorAttachment extends WorkerSelectorAttachment {
   workerSelector: RouterWorkerSelector;
 
   @doc("The type discriminator describing the type of worker selector attachment")
-  kind: "static";
+  kind: WorkerSelectorAttachmentKind.static;
 }
 
 @doc("Trigger for an exception action on exceeding wait time")
@@ -1002,7 +1101,7 @@ model WaitTimeExceptionTrigger extends ExceptionTrigger {
   thresholdSeconds: float64;
 
   @doc("The type discriminator describing a sub-type of ExceptionTrigger")
-  kind: "wait-time";
+  kind: ExceptionTriggerKind.waitTime;
 }
 
 @doc("A rule providing a binding to an external web server.")
@@ -1017,7 +1116,7 @@ model WebhookRouterRule extends RouterRule {
   webhookUri?: url;
 
   @doc("The type discriminator describing a sub-type of Rule")
-  kind: "webhook-rule";
+  kind: RouterRuleKind.webhook;
 }
 
 @doc("Describes multiple sets of queue selectors, of which one will be selected and attached according to a weighting")
@@ -1027,7 +1126,7 @@ model WeightedAllocationQueueSelectorAttachment
   allocations: QueueWeightedAllocation[];
 
   @doc("The type discriminator describing the type of queue selector attachment")
-  kind: "weighted-allocation-queue-selector";
+  kind: QueueSelectorAttachmentKind.weightedAllocation;
 }
 
 @doc("Describes multiple sets of worker selectors, of which one will be selected and attached according to a weighting")
@@ -1037,7 +1136,7 @@ model WeightedAllocationWorkerSelectorAttachment
   allocations: WorkerWeightedAllocation[];
 
   @doc("The type discriminator describing the type of worker selector attachment")
-  kind: "weighted-allocation-worker-selector";
+  kind: WorkerSelectorAttachmentKind.weightedAllocation;
 }
 
 @doc("Contains the weight percentage and worker selectors to be applied if selected for weighted distributions.")
