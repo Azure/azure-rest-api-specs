@@ -92,4 +92,6 @@ model ProofOfPossessionNonceRequest {
 }
 
 @doc("Result of the action to generate a proof of possession nonce")
-model ProofOfPossessionNonceResponse extends CertificateProperties {}
+model ProofOfPossessionNonceResponse {
+  ...CertificateProperties;
+}

@@ -4103,11 +4103,45 @@
     "ProofOfPossessionNonceResponse": {
       "type": "object",
       "description": "Result of the action to generate a proof of possession nonce",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CertificateProperties"
+      "properties": {
+        "certificate": {
+          "type": "string",
+          "description": "The certificate as a UTF-8 encoded base 64 string.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CertificateStatus",
+          "description": "The certificate status.",
+          "readOnly": true
+        },
+        "subject": {
+          "type": "string",
+          "description": "The certificate subject.",
+          "readOnly": true
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "The certificate thumbprint.",
+          "readOnly": true
+        },
+        "expiryUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The certificate expiry date.",
+          "readOnly": true
+        },
+        "notBeforeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The certificate not before date.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
         }
-      ]
+      }
     },
     "ProvisioningState": {
       "type": "string",
