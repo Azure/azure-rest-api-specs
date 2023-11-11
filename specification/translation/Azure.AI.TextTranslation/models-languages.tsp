@@ -95,7 +95,9 @@ model TransliterationLanguage {
 }
 
 @doc("Script definition with list of script into which given script can be translitered.")
-model TransliterableScript extends CommonScriptModel {
+model TransliterableScript {
+  ...CommonScriptModel;
+
   @doc("List of scripts available to convert text to.")
   toScripts: CommonScriptModel[];
 }

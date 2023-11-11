@@ -1352,6 +1352,22 @@
       "type": "object",
       "description": "Script definition with list of script into which given script can be translitered.",
       "properties": {
+        "code": {
+          "type": "string",
+          "description": "Code identifying the script."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the script in the locale requested via Accept-Language header."
+        },
+        "nativeName": {
+          "type": "string",
+          "description": "Display name of the language in the locale native for the language."
+        },
+        "dir": {
+          "type": "string",
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
+        },
         "toScripts": {
           "type": "array",
           "description": "List of scripts available to convert text to.",
@@ -1362,12 +1378,11 @@
         }
       },
       "required": [
+        "code",
+        "name",
+        "nativeName",
+        "dir",
         "toScripts"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/CommonScriptModel"
-        }
       ]
     },
     "TransliterateResult": {
