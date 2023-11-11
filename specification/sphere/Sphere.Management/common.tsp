@@ -104,10 +104,7 @@ alias StandardListQueryParametersWithCorrectNames = {
 };
 
 @doc("Response to the action call for count devices in a catalog.")
-model CountDeviceResponse extends CountElementsResponse {}
-
-@doc("Response of the count for elements.")
-model CountElementsResponse {
+model CountDeviceResponse {
   @doc("Number of children resources in parent resource.")
   value: int32;
 }
