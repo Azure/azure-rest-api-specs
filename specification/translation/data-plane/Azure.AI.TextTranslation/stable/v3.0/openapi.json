@@ -779,18 +779,18 @@
       "type": "object",
       "description": "Element containing the text with translation.",
       "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text to translate."
+        },
         "translation": {
           "type": "string",
           "description": "A string specifying the translated text previously returned by the Dictionary lookup operation. \nThis should be the value from the normalizedTarget field in the translations list of the Dictionary \nlookup response. The service will return examples for the specific source-target word-pair."
         }
       },
       "required": [
+        "text",
         "translation"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/InputTextItem"
-        }
       ]
     },
     "DictionaryExamplesParameters": {
