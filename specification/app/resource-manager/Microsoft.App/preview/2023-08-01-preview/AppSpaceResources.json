@@ -267,7 +267,7 @@
             "type": "string"
           },
           {
-            "name": "appSpaceResourceEnvelope",
+            "name": "spaceResourceEnvelope",
             "in": "body",
             "required": true,
             "description": "Properties of an App Space Resource that need to be updated",
@@ -343,6 +343,9 @@
         }
       ],
       "properties": {
+        "extendedLocation": {
+          "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
+        },
         "properties": {
           "description": "AppSpaceResource resource specific properties",
           "type": "object",
