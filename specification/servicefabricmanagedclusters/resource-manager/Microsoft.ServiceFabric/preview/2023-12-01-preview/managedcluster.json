@@ -1577,11 +1577,11 @@
         "httpGatewayTokenAuthConnectionPort": {
           "type": "integer",
           "format": "int32",
-          "description": "The port used for token-auth based HTTP connections to the cluster. Cannot be set to the same port as HttpGatewayEndpoint."
+          "description": "The port used for token-auth based HTTPS connections to the cluster. Cannot be set to the same port as HttpGatewayEndpoint."
         },
-        "enableGatewayExclusiveAuthMode": {
+        "enableHttpGatewayExclusiveAuthMode": {
           "type": "boolean",
-          "description": "If true, token-based authentication is not allowed on the HttpGatewayEndpoint. This is required to support TLS versions 1.3 and above. If token-based authentication is used, HttpGatewayTokenAuthEndpoint must be defined."
+          "description": "If true, token-based authentication is not allowed on the HttpGatewayEndpoint. This is required to support TLS versions 1.3 and above. If token-based authentication is used, HttpGatewayTokenAuthConnectionPort must be defined."
         }
       },
       "description": "Describes the managed cluster resource properties."
