@@ -180,7 +180,7 @@ model JsEndpointInfo {
 }
 
 @doc("The collection of operations available on each path. Keyed by HTTP method.")
-model JsOperations extends Record<JsEndpointInfo> {}
+model JsOperations is Record<JsEndpointInfo>;
 
 @TypeSpec.Rest.resource("service")
 @doc("Describes the currently installed JavaScript application.")
