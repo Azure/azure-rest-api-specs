@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2023-08-01-preview",
-    "title": "AppSpaces API Client"
+    "title": "ContainerApps API Client"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -129,10 +129,6 @@
               "$ref": "#/definitions/AppSpace"
             }
           },
-          "404": {
-            "description": "Not found.",
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "Common error response.",
             "schema": {
@@ -183,6 +179,12 @@
         ],
         "responses": {
           "200": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/AppSpace"
+            }
+          },
+          "201": {
             "description": "App Space create or update has been completed successfully.",
             "schema": {
               "$ref": "#/definitions/AppSpace"
@@ -243,6 +245,60 @@
         "x-ms-examples": {
           "Delete App Space": {
             "$ref": "./examples/AppSpaces_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AppSpaces"
+        ],
+        "summary": "Update properties of an App Space",
+        "description": "Patches an App Space using JSON Merge Patch",
+        "operationId": "AppSpaces_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appSpaceName",
+            "in": "path",
+            "description": "Name of the App Space.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appSpaceEnvelope",
+            "in": "body",
+            "required": true,
+            "description": "Properties of an App Space that need to be updated",
+            "schema": {
+              "$ref": "#/definitions/AppSpace"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/AppSpace"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Container App": {
+            "$ref": "./examples/AppSpaces_Patch.json"
           }
         }
       }
