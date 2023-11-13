@@ -493,6 +493,7 @@ model SuspendMode extends JobMatchingMode {
   kind: "suspend";
 }
 
+@access(Access.public, "python")
 @doc("Request payload for deleting a job")
 model CancelJobOptions {
   @doc("A note that will be appended to the jobs' Notes collection with the current timestamp.")
@@ -502,12 +503,14 @@ model CancelJobOptions {
   dispositionCode?: string;
 }
 
+@access(Access.public, "python")
 @doc("Request payload for completing jobs")
 model CompleteJobOptions {
   @doc("A note that will be appended to the jobs' Notes collection with the current timestamp.")
   note?: string;
 }
 
+@access(Access.public, "python")
 @doc("Request payload for closing jobs")
 model CloseJobOptions {
   @doc("Indicates the outcome of the job, populate this field with your own custom values.")
@@ -565,6 +568,7 @@ model AcceptJobOfferResult {
   workerId: string;
 }
 
+@access(Access.public, "python")
 @doc("Request payload for declining offers")
 model DeclineJobOfferOptions {
   @doc("If the RetryOfferAt is not provided, then this job will not be offered again to the worker who declined this job unless the worker is de-registered and re-registered.  If a RetryOfferAt time is provided, then the job will be re-matched to eligible workers at the retry time in UTC.  The worker that declined the job will also be eligible for the job at that time.")
