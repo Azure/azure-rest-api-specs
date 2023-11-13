@@ -579,7 +579,7 @@
         "tags": [
           "SubscriptionRequests"
         ],
-        "summary": "Get the status of a single subscriptionId request by requestId.",
+        "summary": "Get the status of a single subscriptionId request by requestId. The Async pattern will be used, if we determine the request is taking longer, else it can return 200 response as response to the subscription add API call.",
         "description": "Get API to check the status of a subscriptionIds request by requestId.  Use the polling API - OperationsStatus URI specified in Azure-AsyncOperation header field, with retry-after duration in seconds to check the intermediate status. This API provides the finals status with the request details and status.",
         "operationId": "SubscriptionRequests_Get",
         "x-ms-examples": {
@@ -617,13 +617,13 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits/{resourceName}": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits/{resourceName}": {
       "put": {
         "tags": [
           "GroupQuotaLimits"
         ],
         "summary": "Updates the GroupQuotaLimits for the specific resource under a Management Group.",
-        "description": "Updates the GroupQuotaLimits for the specific resource under a Management Group. A groupQuotaLimitRequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.",
+        "description": "Updates the GroupQuotaLimits for the specific resource under a Management Group. The resourceProviderScope will be provided in the request body, as resourceProviderScope. GroupQuotaLimitRequestId will be returned by the Service in the response. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI for groupQuotaRequests and full details can be checked from the Get API for groupQuotaRequests.",
         "operationId": "GroupQuotaLimits_CreateOrUpdate",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Request_ForCompute": {
@@ -634,9 +634,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/MgIdInParameters"
-          },
-          {
-            "$ref": "#/parameters/ScopeInParameters"
           },
           {
             "$ref": "#/parameters/GroupQuotaNameInParameters"
@@ -697,7 +694,7 @@
           "GroupQuotaLimits"
         ],
         "summary": "Updates the GroupQuotaLimits for the specific resource under a Management Group.",
-        "description": "Updates the GroupQuotaLimits for the specific resource under a Management Group. A groupQuotaLimitRequestId will be returned by the Service. The status will be updated periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed,then the URI will change to Get URI and full details can be checked.",
+        "description": "Updates the GroupQuotaLimits for the specific resource under a Management Group. The resourceProviderScope will be provided in the request body, as resourceProviderScope field. A groupQuotaLimitRequestId will be returned by the Service. The status will be updated periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.",
         "operationId": "GroupQuotaLimits_Update",
         "x-ms-examples": {
           "GroupQuotaLimits_Patch_Request_ForCompute": {
@@ -708,9 +705,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/MgIdInParameters"
-          },
-          {
-            "$ref": "#/parameters/ScopeInParameters"
           },
           {
             "$ref": "#/parameters/GroupQuotaNameInParameters"
@@ -767,8 +761,8 @@
         "tags": [
           "GroupQuotaLimits"
         ],
-        "summary": "Gets the resource groupQuotaLimits for the MGId.",
-        "description": "Gets the resource groupQuotaLimits for the MGId. It will include the limits, availableLimits, assignedToSubscriptions: Quotas assigned to subscriptions from the groupQuota.",
+        "summary": "Gets the resource groupQuotaLimits for the MGId for a resource.",
+        "description": "Gets the resource groupQuotaLimits for the MGId. The resourceProviderScope will be included in the filer query parameter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. It will include the limits, availableLimits, assignedToSubscriptions: Quotas assigned to subscriptions from the groupQuota.",
         "operationId": "GroupQuotaLimits_Get",
         "x-ms-examples": {
           "GroupQuotaLimits_Get_Request_ForCompute": {
@@ -780,9 +774,6 @@
             "$ref": "#/parameters/MgIdInParameters"
           },
           {
-            "$ref": "#/parameters/ScopeInParameters"
-          },
-          {
             "$ref": "#/parameters/GroupQuotaNameInParameters"
           },
           {
@@ -790,6 +781,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterInQueryParamters"
           }
         ],
         "responses": {
@@ -808,7 +802,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits": {
       "get": {
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -817,7 +811,7 @@
           "GroupQuotaLimits"
         ],
         "summary": "Gets the List of resources groupQuotaLimits for the MGId, based on the scope.",
-        "description": "Gets the List of resources groupQuotaLimits for the MGId, based on the scope. The scope can be - providers/Microsoft.Compute/locations/<eastus>. The list elements will be same as the Get API - It will include the limits, availableLimits, assignedToSubscriptions: Quotas assigned to subscriptions from the groupQuota.",
+        "description": "Gets the List of resources groupQuotaLimits for the MGId, based on the filter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. The list elements will be same as the Get API - It will include the limits, availableLimits, assignedToSubscriptions: Quotas assigned to subscriptions from the groupQuota.",
         "operationId": "GroupQuotaLimits_List",
         "x-ms-examples": {
           "GroupQuotaLimits_List_Request_ForCompute": {
@@ -836,6 +830,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterInQueryParamters"
           }
         ],
         "responses": {
@@ -854,7 +851,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests": {
       "get": {
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -875,13 +872,13 @@
             "$ref": "#/parameters/MgIdInParameters"
           },
           {
-            "$ref": "#/parameters/ScopeInParameters"
-          },
-          {
             "$ref": "#/parameters/GroupQuotaNameInParameters"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterInQueryParamters"
           }
         ],
         "responses": {
@@ -900,7 +897,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests/{requestId}": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests/{requestId}": {
       "get": {
         "tags": [
           "GroupQuotaLimitsRequests"
@@ -918,9 +915,6 @@
             "$ref": "#/parameters/MgIdInParameters"
           },
           {
-            "$ref": "#/parameters/ScopeInParameters"
-          },
-          {
             "$ref": "#/parameters/GroupQuotaNameInParameters"
           },
           {
@@ -928,6 +922,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterInQueryParamters"
           }
         ],
         "responses": {
@@ -946,7 +943,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations": {
       "get": {
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -970,13 +967,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ScopeInParameters"
-          },
-          {
             "$ref": "#/parameters/GroupQuotaNameInParameters"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterInQueryParamters"
           }
         ],
         "responses": {
@@ -995,7 +992,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations/{resourceName}": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations/{resourceName}": {
       "put": {
         "tags": [
           "SubscriptionQuotaAllocation"
@@ -1015,9 +1012,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ScopeInParameters"
           },
           {
             "$ref": "#/parameters/GroupQuotaNameInParameters"
@@ -1095,9 +1089,6 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ScopeInParameters"
-          },
-          {
             "$ref": "#/parameters/GroupQuotaNameInParameters"
           },
           {
@@ -1169,9 +1160,6 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ScopeInParameters"
-          },
-          {
             "$ref": "#/parameters/GroupQuotaNameInParameters"
           },
           {
@@ -1179,6 +1167,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterInQueryParamters"
           }
         ],
         "responses": {
@@ -1197,7 +1188,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocationRequests/{allocationId}": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocationRequests/{allocationId}": {
       "get": {
         "tags": [
           "SubscriptionQuotaAllocationRequests"
@@ -1218,9 +1209,6 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ScopeInParameters"
-          },
-          {
             "$ref": "#/parameters/GroupQuotaNameInParameters"
           },
           {
@@ -1228,6 +1216,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterInQueryParamters"
           }
         ],
         "responses": {
@@ -1246,7 +1237,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocationRequests": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocationRequests": {
       "get": {
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1270,13 +1261,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ScopeInParameters"
-          },
-          {
             "$ref": "#/parameters/GroupQuotaNameInParameters"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterInQueryParamters"
           }
         ],
         "responses": {
@@ -1354,10 +1345,14 @@
         }
       }
     },
-    "GroupQuotaDetails": {
+    "GroupQuotaDetails":  {
       "type": "object",
       "description": "Group Quota details.",
       "properties": {
+        "resourceProviderScope": {
+          "description": "ResourceProviderScope  for the quota request. Format: /providers/{ResourceProviderName}/locations/{Azure region} Example: /providers/{Microsoft.Compute}/locations/{eastus}. Please replace the ResourceProviderName, Azure region as per the requested resource.",
+          "type": "string"
+        },
         "limit": {
           "type": "integer",
           "format": "int64",
@@ -1395,7 +1390,8 @@
           "description": "The available Group Quota Limit at the MG level. This Group quota can be assigned to subscription(s)."
         },
         "assignedToSubscriptions": {
-          "$ref": "#/definitions/AssignedQuotaToSubscriptionList"
+          "$ref": "#/definitions/AssignedQuotaToSubscriptionList",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/RequestState",
@@ -1804,13 +1800,13 @@
       "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
       "x-ms-parameter-location": "method"
     },
-    "ScopeInParameters": {
-      "name": "resourceProviderScope",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Scope for the resource. Some resources do not require location parameter, such as CosmosDb, so can be skipped in scope. For most of the resources require - providers/Microsoft.Compute/locations/{locationName}. Some Rps such as Batch requires batchAccountName - providers/Microsoft.Batch/locations/{locationName}/accountName/{batchAccountName}. This extension enables to specify resources for any all the RPs.",
-      "x-ms-parameter-location": "method"
+    "FilterInQueryParamters": {
+        "name": "$filter",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "| Field                    | Supported operators  \n|---------------------|------------------------\n\r\n|provider  eq {resourceProvider}  and location eq {location}\n Example: $filter= provider eq Microsoft.Compute and location eq eastus",
+        "minLength": 63
     }
   }
 }
