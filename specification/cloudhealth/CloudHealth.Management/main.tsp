@@ -29,9 +29,11 @@ alias ProviderName = "Microsoft.CloudHealth";
 alias resourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,58}[a-zA-Z0-9]$";
 
 @pattern(resourceNameRegex)
+@doc("String with regex validation to match the resource name requirements")
 scalar stringResourceName extends string;
 
 @maxLength(4096)
+@doc("String with max length validation of 4096 characters")
 scalar string4096 extends string;
 
 interface Operations extends Azure.ResourceManager.Operations {}
