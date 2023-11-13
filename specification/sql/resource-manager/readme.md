@@ -36,7 +36,6 @@ These settings apply only when `--tag=package-composite-v5` is specified on the 
 
 ```yaml $(tag) == 'package-composite-v5'
 input-file:
-input-file:
   - Microsoft.Sql/preview/2023-05-01-preview/BackupShortTermRetentionPolicies.json
   - Microsoft.Sql/preview/2023-05-01-preview/BlobAuditing.json
   - Microsoft.Sql/preview/2023-05-01-preview/DataMaskingPolicies.json
