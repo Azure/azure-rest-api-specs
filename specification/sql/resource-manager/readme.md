@@ -177,7 +177,6 @@ input-file:
   - Microsoft.Sql/preview/2023-05-01-preview/WorkloadClassifiers.json
   - Microsoft.Sql/preview/2023-05-01-preview/WorkloadGroups.json
 ``` 
-
 ### Tag: package-preview-2023-02
 
 These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
