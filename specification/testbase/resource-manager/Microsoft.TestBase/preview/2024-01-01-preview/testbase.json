@@ -3062,7 +3062,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/getAggregateUsage": {
-      "post": {
+      "get": {
         "operationId": "BillingHubService_GetAggregateUsage",
         "description": "Get test usage including all resources under a Test Base account.",
         "responses": {
@@ -3093,11 +3093,16 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "getUsageRequest",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/BillingHubGetAggregateUsageRequest"
-            }
+            "$ref": "#/parameters/PageSizeFilter"
+          },
+          {
+            "$ref": "#/parameters/PageIndexFilter"
+          },
+          {
+            "$ref": "#/parameters/StartTimeStampFilter"
+          },
+          {
+            "$ref": "#/parameters/EndTimeStampFilter"
           }
         ],
         "tags": [
@@ -6179,8 +6184,9 @@
         "endTimeStamp"
       ]
     },
-    "BillingHubGetAggregateUsageRequest": {
+    "BillingHubGetAggregateUsagePaginationModel": {
       "type": "object",
+      "description": "Pagination model for get aggregate usage.",
       "properties": {
         "startTimeStamp": {
           "type": "string",
@@ -6202,11 +6208,7 @@
           "format": "int32",
           "description": "Specify the pagination index of the usage query."
         }
-      },
-      "required": [
-        "startTimeStamp",
-        "endTimeStamp"
-      ]
+      }
     },
     "BillingHubGetAggregateUsageResponse": {
       "type": "object",
@@ -6232,7 +6234,7 @@
         },
         "nextRequest": {
           "type": "object",
-          "$ref": "#/definitions/BillingHubGetAggregateUsageRequest"
+          "$ref": "#/definitions/BillingHubGetAggregateUsagePaginationModel"
         }
       }
     },
@@ -6307,7 +6309,7 @@
         }
       ]
     },
-    "BillingHubImageAggregateValidationUsage": {
+    "BillingHubAggregateImageValidationUsage": {
       "description": "Image validation usage counting for an image.",
       "type": "object",
       "x-ms-discriminator-value": "ImageValidationUsage",
@@ -6327,6 +6329,14 @@
         "release": {
           "type": "string",
           "description": "Release of the custom image."
+        },
+        "executionUsageDetails": {
+          "type": "array",
+          "description": "Detail information of each test execution.",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/BillingHubExecutionUsageDetail"
+          }
         }
       },
       "allOf": [
@@ -6762,5 +6772,41 @@
       "x-ms-parameter-location": "method",
       "description": "The name of the free hour balance of a Test Base Account."
     }
+  },
+  "StartTimeStampFilter": {
+    "name": "startTimeStamp",
+    "type": "string",
+    "format": "date-time",
+    "in": "query",
+    "required": true,
+    "x-ms-parameter-location": "method",
+    "description": "Specify the start time of the result set."
+  },
+  "EndTimeStampFilter": {
+    "name": "endTimeStamp",
+    "type": "string",
+    "format": "date-time",
+    "in": "query",
+    "required": false,
+    "x-ms-parameter-location": "method",
+    "description": "Specify the end time of the result set."
+  },
+  "PageSzieFilter": {
+    "name": "pageSize",
+    "type": "integer",
+    "format": "int32",
+    "in": "query",
+    "required": false,
+    "x-ms-parameter-location": "method",
+    "description": "Limit the number of visible pages in pagination."
+  },
+  "PageIndexFilter": {
+    "name": "pageIndex",
+    "type": "integer",
+    "format": "int32",
+    "in": "query",
+    "required": false,
+    "x-ms-parameter-location": "method",
+    "description": "Specify item offset of the pagination."
   }
 }
