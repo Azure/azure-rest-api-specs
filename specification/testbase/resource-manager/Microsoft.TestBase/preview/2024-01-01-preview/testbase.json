@@ -3061,7 +3061,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/getAggregateUsage": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/aggregateUsage": {
       "get": {
         "operationId": "BillingHubService_GetAggregateUsage",
         "description": "Get test usage including all resources under a Test Base account.",
@@ -3093,10 +3093,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/PageSizeFilter"
+            "$ref": "#/parameters/TopFilter"
           },
           {
-            "$ref": "#/parameters/PageIndexFilter"
+            "$ref": "#/parameters/OffsetFilter"
           },
           {
             "$ref": "#/parameters/StartTimeStampFilter"
@@ -6815,16 +6815,7 @@
       "x-ms-parameter-location": "method",
       "description": "Specify the end time of the result set."
     },
-    "PageSizeFilter": {
-      "name": "pageSize",
-      "type": "integer",
-      "format": "int32",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method",
-      "description": "Limit the number of visible pages in pagination."
-    },
-    "PageIndexFilter": {
+    "OffsetFilter": {
       "name": "pageIndex",
       "type": "integer",
       "format": "int32",
