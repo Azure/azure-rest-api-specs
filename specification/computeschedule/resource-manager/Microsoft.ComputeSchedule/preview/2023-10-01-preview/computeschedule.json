@@ -1,132 +1,1190 @@
 {
   "swagger": "2.0",
   "info": {
+    "title": "Microsoft.ComputeSchedule management service",
     "version": "2023-10-01-preview",
-    "title": "computeschedule",
-    "description": "Description of the new service",
-    "x-ms-code-generation-settings": {
-      "name": "computescheduleClient"
-    }
+    "description": "Microsoft.ComputeSchedule Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
+  "schemes": [
+    "https"
+  ],
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "Operations"
+    }
+  ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/operations": {
+    "/providers/Microsoft.ComputeSchedule/operations": {
       "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
-        "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
-        },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          },
+          "Operations_List": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/cancelOperations": {
+      "post": {
+        "operationId": "ScheduledActions_Cancelops",
+        "description": "cancelOperations on a virtual machine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelOperationsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CancelOperationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/RequestLevelError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancelops": {
+            "$ref": "./examples/ScheduledActions_Cancelops_MinimumSet_Gen.json"
+          },
+          "ScheduledActions_Cancelops": {
+            "$ref": "./examples/ScheduledActions_Cancelops_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/deallocate": {
+      "post": {
+        "operationId": "ScheduledActions_Deallocate",
+        "description": "submitDeallocate for a virtual machine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubmitDeallocateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeallocateResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/RequestLevelError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_Deallocate": {
+            "$ref": "./examples/ScheduledActions_Deallocate_MaximumSet_Gen.json"
+          },
+          "_Deallocate": {
+            "$ref": "./examples/ScheduledActions_Deallocate_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/getOperationStatus": {
+      "post": {
+        "operationId": "ScheduledActions_Getoperationstatus",
+        "description": "getOperationStatus for a virtual machine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetOperationStatusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetOperationStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/RequestLevelError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Getoperationstatus": {
+            "$ref": "./examples/ScheduledActions_Getoperationstatus_MinimumSet_Gen.json"
+          },
+          "ScheduledActions_Getoperationstatus": {
+            "$ref": "./examples/ScheduledActions_Getoperationstatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/hibernate": {
+      "post": {
+        "operationId": "ScheduledActions_Hibernate",
+        "description": "submitHibernate for a virtual machine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubmitHibernateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HibernateResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/RequestLevelError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Hibernate": {
+            "$ref": "./examples/ScheduledActions_Hibernate_MinimumSet_Gen.json"
+          },
+          "ScheduledActions_Hibernate": {
+            "$ref": "./examples/ScheduledActions_Hibernate_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/start": {
+      "post": {
+        "operationId": "ScheduledActions_Start",
+        "description": "submitStart for a virtual machine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubmitStartRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StartResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/RequestLevelError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_Start": {
+            "$ref": "./examples/ScheduledActions_Start_MaximumSet_Gen.json"
+          },
+          "Start": {
+            "$ref": "./examples/ScheduledActions_Start_MinimumSet_Gen.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "CancelOperationsRequest": {
+      "type": "object",
+      "description": "This is the request to cancel running operations in scheduled actions using the operation ids",
       "properties": {
-        "sampleProperty": {
+        "operationIds": {
+          "type": "array",
+          "description": "The list of operation ids to cancel operations on",
+          "items": {
+            "type": "string"
+          }
+        },
+        "correlationid": {
           "type": "string",
-          "description": "Sample property of type string"
+          "description": "Correlationid item"
         }
-      }
+      },
+      "required": [
+        "operationIds",
+        "correlationid"
+      ]
     },
-    "ErrorResponse": {
-      "description": "Error response.",
+    "CancelOperationsResponse": {
+      "type": "object",
+      "description": "This is the response from a cancel operations request",
       "properties": {
+        "results": {
+          "type": "array",
+          "description": "An array of vm operations that were successfully cancelled",
+          "items": {
+            "$ref": "#/definitions/VmOperationResult"
+          },
+          "x-ms-identifiers": [
+            "operationId"
+          ]
+        }
+      },
+      "required": [
+        "results"
+      ]
+    },
+    "DeadlineType": {
+      "type": "string",
+      "description": "The types of deadlines supported by ScheduledActions",
+      "enum": [
+        "Unknown",
+        "InitiateAt",
+        "CompleteBy"
+      ],
+      "x-ms-enum": {
+        "name": "DeadlineType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Default value of Unknown."
+          },
+          {
+            "name": "InitiateAt",
+            "value": "InitiateAt",
+            "description": "Initiate the operation at the given deadline."
+          },
+          {
+            "name": "CompleteBy",
+            "value": "CompleteBy",
+            "description": "Complete the operation by the given deadline."
+          }
+        ]
+      }
+    },
+    "DeallocateResourceOperationResponse": {
+      "type": "object",
+      "description": "The response from a deallocate request",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the operation response"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of resources used in the deallocate request eg virtual machines"
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the deallocate request eg westus",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "results": {
+          "type": "array",
+          "description": "The results from the deallocate request if no errors exist",
+          "items": {
+            "$ref": "#/definitions/ResourceOperation"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
         "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+          "$ref": "#/definitions/RequestError",
+          "description": "Request level error if it exists"
+        }
+      },
+      "required": [
+        "description",
+        "type",
+        "location"
+      ]
+    },
+    "ErrorInfo": {
+      "type": "object",
+      "description": "Error for the vm operation",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "Error code for the error, eg 404"
+        },
+        "errorDetails": {
+          "type": "string",
+          "description": "More details about the error"
+        }
+      },
+      "required": [
+        "errorCode",
+        "errorDetails"
+      ]
+    },
+    "ExecutionParameters": {
+      "type": "object",
+      "description": "Extra details needed to run the user's request",
+      "properties": {
+        "stopRetriesAfter": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time to stop retries after in hours"
+        },
+        "optimizationPreference": {
+          "$ref": "#/definitions/OptimizationPreference",
+          "description": "Details that could optimize the user's request"
         }
       }
     },
-    "ErrorDefinition": {
-      "description": "Error definition.",
+    "GetOperationStatusRequest": {
+      "type": "object",
+      "description": "This is the request to get operation status using operationids",
+      "properties": {
+        "operationIds": {
+          "type": "array",
+          "description": "The list of operation ids to get the status of",
+          "items": {
+            "type": "string"
+          }
+        },
+        "correlationid": {
+          "type": "string",
+          "description": "Correlationid item"
+        }
+      },
+      "required": [
+        "operationIds",
+        "correlationid"
+      ]
+    },
+    "GetOperationStatusResponse": {
+      "type": "object",
+      "description": "This is the response from a get operations status request",
+      "properties": {
+        "results": {
+          "type": "array",
+          "description": "An array of vm operations based on their operation ids",
+          "items": {
+            "$ref": "#/definitions/VmOperationResult"
+          },
+          "x-ms-identifiers": [
+            "operationId"
+          ]
+        }
+      },
+      "required": [
+        "results"
+      ]
+    },
+    "HibernateResourceOperationResponse": {
+      "type": "object",
+      "description": "The response from a Hibernate request",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the operation response"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of resources used in the Hibernate request eg virtual machines"
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the Hibernate request eg westus",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "results": {
+          "type": "array",
+          "description": "The results from the Hibernate request if no errors exist",
+          "items": {
+            "$ref": "#/definitions/ResourceOperation"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "error": {
+          "$ref": "#/definitions/RequestError",
+          "description": "Request level error if it exists"
+        }
+      },
+      "required": [
+        "description",
+        "type",
+        "location"
+      ]
+    },
+    "OperationState": {
+      "type": "string",
+      "description": "Values that define the states of operations in Scheduled Actions",
+      "enum": [
+        "Unknown",
+        "PendingScheduling",
+        "Scheduled",
+        "PendingExecution",
+        "Executing",
+        "Succeeded",
+        "Failed",
+        "Cancelled",
+        "Blocked"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The default value for the operation state enum"
+          },
+          {
+            "name": "PendingScheduling",
+            "value": "PendingScheduling",
+            "description": "Operations that are pending scheduling"
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "Operations that have been scheduled"
+          },
+          {
+            "name": "PendingExecution",
+            "value": "PendingExecution",
+            "description": "Operations that are waiting to be executed"
+          },
+          {
+            "name": "Executing",
+            "value": "Executing",
+            "description": "Operations that are in the process of being executed"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Operations that suceeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Operations that have failed"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Operations that have been cancelled by the user"
+          },
+          {
+            "name": "Blocked",
+            "value": "Blocked",
+            "description": "Operations that are blocked"
+          }
+        ]
+      }
+    },
+    "OptimizationPreference": {
+      "type": "string",
+      "description": "The preferences customers can select to optimize their requests to ScheduledActions",
+      "enum": [
+        "Cost",
+        "Availability",
+        "CostAvailabilityBalanced"
+      ],
+      "x-ms-enum": {
+        "name": "OptimizationPreference",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cost",
+            "value": "Cost",
+            "description": "Optimize while considering cost savings"
+          },
+          {
+            "name": "Availability",
+            "value": "Availability",
+            "description": "Optimize while considering availability of resources"
+          },
+          {
+            "name": "CostAvailabilityBalanced",
+            "value": "CostAvailabilityBalanced",
+            "description": "Optimize while considering a balance of cost and availability"
+          }
+        ]
+      }
+    },
+    "RequestError": {
+      "type": "object",
+      "description": "These describe errors that occur at the request level",
       "properties": {
         "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
           "type": "string",
-          "readOnly": true
+          "description": "Code for the error eg 404, 500"
         },
         "message": {
-          "description": "Description of the error.",
           "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "readOnly": true
+          "description": "Detailed message about the error"
         }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "RequestLevelError": {
+      "type": "object",
+      "description": "This is the default error for requests made with ScheduledActions",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the request that failed, ie SubmitDeallocateRequest/SubmitStartRequest/SubmitHibernateRequest"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of resources used in the request"
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource used in the request",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "error": {
+          "$ref": "#/definitions/RequestError",
+          "description": "The error details"
+        }
+      },
+      "required": [
+        "description",
+        "type",
+        "location",
+        "error"
+      ]
+    },
+    "ResourceOperation": {
+      "type": "object",
+      "description": "High level response from an operation on a resource",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Unique identifier for the resource involved in the operation, eg ArmId"
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "Resource level error code if it exists"
+        },
+        "errorDetails": {
+          "type": "string",
+          "description": "Resource level error details if they exist"
+        },
+        "operation": {
+          "$ref": "#/definitions/ResourceOperationDetails",
+          "description": "Details of the operation performed on a resource"
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "ResourceOperationDetails": {
+      "type": "object",
+      "description": "The details of a response from an operation on a resource",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "Operation identifier for the unique operation"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Unique identifier for the resource involved in the operation, eg ArmId"
+        },
+        "opType": {
+          "$ref": "#/definitions/VmOperationType",
+          "description": "Type of operation performed on the virtual machine",
+          "default": "Unknown",
+          "x-ms-enum.modelAsString": true
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription id attached to the request"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Deadline for the operation"
+        },
+        "deadlineType": {
+          "$ref": "#/definitions/DeadlineType",
+          "description": "Type of deadline of the operation",
+          "default": "Unknown",
+          "x-ms-enum.modelAsString": true
+        },
+        "state": {
+          "$ref": "#/definitions/OperationState",
+          "description": "Current state of the operation",
+          "default": "Unknown",
+          "x-ms-enum.modelAsString": true
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Timezone for the operation"
+        },
+        "resourceOperationError": {
+          "$ref": "#/definitions/ResourceOperationError",
+          "description": "Operation level errors if they exist"
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time the operation was complete if errors are null"
+        }
+      },
+      "required": [
+        "operationId",
+        "resourceId",
+        "opType",
+        "subscriptionId",
+        "deadline",
+        "deadlineType",
+        "state",
+        "timeZone"
+      ]
+    },
+    "ResourceOperationError": {
+      "type": "object",
+      "description": "These describe errors that occur at the resource level",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "Code for the error eg 404, 500"
+        },
+        "errorDetails": {
+          "type": "string",
+          "description": "Detailed message about the error"
+        }
+      },
+      "required": [
+        "errorCode",
+        "errorDetails"
+      ]
+    },
+    "Resources": {
+      "type": "object",
+      "description": "The resources needed for the user request",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "description": "The resource ids used for the request",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "ids"
+      ]
+    },
+    "Schedule": {
+      "type": "object",
+      "description": "The schedule details for the user request",
+      "properties": {
+        "deadLine": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deadline for the operation"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The timezone for the operation"
+        },
+        "deadlineType": {
+          "$ref": "#/definitions/DeadlineType",
+          "description": "The deadlinetype of the operation, this can either be InitiateAt or CompleteBy",
+          "default": "Unknown",
+          "x-ms-enum.modelAsString": true
+        }
+      },
+      "required": [
+        "deadLine",
+        "timeZone",
+        "deadlineType"
+      ]
+    },
+    "StartResourceOperationResponse": {
+      "type": "object",
+      "description": "The response from a start request",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the operation response"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of resources used in the start request eg virtual machines"
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the start request eg westus",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "results": {
+          "type": "array",
+          "description": "The results from the start request if no errors exist",
+          "items": {
+            "$ref": "#/definitions/ResourceOperation"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "error": {
+          "$ref": "#/definitions/RequestError",
+          "description": "Request level error if it exists"
+        }
+      },
+      "required": [
+        "description",
+        "type",
+        "location"
+      ]
+    },
+    "SubmitDeallocateRequest": {
+      "type": "object",
+      "description": "The deallocate request for resources",
+      "properties": {
+        "deadLine": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deadline for the operation"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The timezone for the operation"
+        },
+        "deadlineType": {
+          "$ref": "#/definitions/DeadlineType",
+          "description": "The deadlinetype of the operation, this can either be InitiateAt or CompleteBy",
+          "default": "Unknown",
+          "x-ms-enum.modelAsString": true
+        },
+        "stopRetriesAfter": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time to stop retries after in hours"
+        },
+        "optimizationPreference": {
+          "$ref": "#/definitions/OptimizationPreference",
+          "description": "Details that could optimize the user's request"
+        },
+        "ids": {
+          "type": "array",
+          "description": "The resource ids used for the request",
+          "items": {
+            "type": "string"
+          }
+        },
+        "correlationid": {
+          "type": "string",
+          "description": "Correlationid item"
+        }
+      },
+      "required": [
+        "deadLine",
+        "timeZone",
+        "deadlineType",
+        "ids",
+        "correlationid"
+      ]
+    },
+    "SubmitHibernateRequest": {
+      "type": "object",
+      "description": "This is the request for hibernate",
+      "properties": {
+        "deadLine": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deadline for the operation"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The timezone for the operation"
+        },
+        "deadlineType": {
+          "$ref": "#/definitions/DeadlineType",
+          "description": "The deadlinetype of the operation, this can either be InitiateAt or CompleteBy",
+          "default": "Unknown",
+          "x-ms-enum.modelAsString": true
+        },
+        "stopRetriesAfter": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time to stop retries after in hours"
+        },
+        "optimizationPreference": {
+          "$ref": "#/definitions/OptimizationPreference",
+          "description": "Details that could optimize the user's request"
+        },
+        "ids": {
+          "type": "array",
+          "description": "The resource ids used for the request",
+          "items": {
+            "type": "string"
+          }
+        },
+        "correlationid": {
+          "type": "string",
+          "description": "Correlationid item"
+        }
+      },
+      "required": [
+        "deadLine",
+        "timeZone",
+        "deadlineType",
+        "ids",
+        "correlationid"
+      ]
+    },
+    "SubmitStartRequest": {
+      "type": "object",
+      "description": "This is the request for start",
+      "properties": {
+        "deadLine": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deadline for the operation"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The timezone for the operation"
+        },
+        "deadlineType": {
+          "$ref": "#/definitions/DeadlineType",
+          "description": "The deadlinetype of the operation, this can either be InitiateAt or CompleteBy",
+          "default": "Unknown",
+          "x-ms-enum.modelAsString": true
+        },
+        "stopRetriesAfter": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time to stop retries after in hours"
+        },
+        "optimizationPreference": {
+          "$ref": "#/definitions/OptimizationPreference",
+          "description": "Details that could optimize the user's request"
+        },
+        "ids": {
+          "type": "array",
+          "description": "The resource ids used for the request",
+          "items": {
+            "type": "string"
+          }
+        },
+        "correlationid": {
+          "type": "string",
+          "description": "Correlationid item"
+        }
+      },
+      "required": [
+        "deadLine",
+        "timeZone",
+        "deadlineType",
+        "ids",
+        "correlationid"
+      ]
+    },
+    "VmOperation": {
+      "type": "object",
+      "description": "Details of result from getting an operation status or cancelling an operation on a virtual machine",
+      "properties": {
+        "opType": {
+          "$ref": "#/definitions/VmOperationType",
+          "description": "The type of operation scheduled for the virtual machine, ie start/deallocate/hibernate",
+          "default": "Unknown",
+          "x-ms-enum.modelAsString": true
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id attached to the request"
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique id for the operation"
+        },
+        "vmId": {
+          "type": "string",
+          "description": "Unique id for the virtual machine"
+        },
+        "deadlineUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Deadline for the user selected operation"
+        },
+        "activationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time for activation of the operation"
+        },
+        "deadlineType": {
+          "$ref": "#/definitions/DeadlineType",
+          "description": "Type of deadline used in the operation ie InitiateAt/CompleteBy",
+          "default": "Unknown",
+          "x-ms-enum.modelAsString": true
+        },
+        "state": {
+          "$ref": "#/definitions/OperationState",
+          "description": "Current state of the operation",
+          "default": "Unknown",
+          "x-ms-enum.modelAsString": true
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorInfo",
+          "description": "Errors in the vm operation"
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time the operation was completed if no error occured"
+        }
+      },
+      "required": [
+        "opType",
+        "subscriptionId",
+        "id",
+        "vmId",
+        "deadlineUtc",
+        "activationTime",
+        "deadlineType",
+        "state"
+      ]
+    },
+    "VmOperationResult": {
+      "type": "object",
+      "description": "High level result from getting an operation status or cancelling an operation on a virtual machine",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "Error code if it exists"
+        },
+        "errorDetails": {
+          "type": "string",
+          "description": "More details of the error if it exists"
+        },
+        "vmId": {
+          "type": "string",
+          "description": "Unique id for the virtual machine involved in the operation"
+        },
+        "operationId": {
+          "type": "string",
+          "description": "Unique id for the operation performed on the virtual machine"
+        },
+        "vmOperation": {
+          "$ref": "#/definitions/VmOperation",
+          "description": "More details on the operation performed on the vm"
+        }
+      },
+      "required": [
+        "operationId"
+      ]
+    },
+    "VmOperationType": {
+      "type": "string",
+      "description": "The kind of operation types that can be performed on virtual machines using ScheduledActions",
+      "enum": [
+        "Unknown",
+        "Start",
+        "Deallocate",
+        "Hibernate"
+      ],
+      "x-ms-enum": {
+        "name": "VmOperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The default value for this enum type"
+          },
+          {
+            "name": "Start",
+            "value": "Start",
+            "description": "Start operations on the virtual machines"
+          },
+          {
+            "name": "Deallocate",
+            "value": "Deallocate",
+            "description": "Deallocate operations on the virtual machines"
+          },
+          {
+            "name": "Hibernate",
+            "value": "Hibernate",
+            "description": "Hibernate operations on the virtual machines"
+          }
+        ]
       }
     }
   },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to be used with the HTTP request."
-    }
-  }
+  "parameters": {}
 }
