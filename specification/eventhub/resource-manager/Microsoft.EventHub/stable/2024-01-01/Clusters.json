@@ -364,7 +364,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/triggerupgrade": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/triggerUpgrade": {
       "post": {
         "tags": [
           "EventHubs Clusters Upgrade"
@@ -384,15 +384,15 @@
             "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
-        "description": "Remove cluster preferences on whatever upgrades are scheduled",
+        "description": "Trigger pending cluster upgrade by skipping customer-set upgrade preferences",
         "x-ms-examples": {
           "TriggerUpgradeInCluster": {
             "$ref": "./examples/Clusters/TriggerUpgradeInCluster.json"
           }
         },
         "responses": {
-          "200": {
-            "description": "Successfully removed upgrade preferences on upgrade."
+          "204": {
+            "description": "Successfully bypassed customer-set upgrade preferences on pending cluster upgrade."
           },
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
@@ -548,7 +548,7 @@
     "UpgradePreferences": {
       "type": "object",
       "properties": {
-        "startdayofweek": {
+        "startDayOfWeek": {
           "type": "string",
           "enum": [
             "Sunday",
@@ -558,20 +558,20 @@
             "Thursday",
             "Friday",
             "Saturday",
-            "None"
+            "Any"
           ],
-          "description": "Preferred day of the week in UTC to begin an upgrade",
+          "description": "Preferred day of the week in UTC time to begin an upgrade. If 'Any' is selected, upgrade will proceed at any given weekday",
           "x-ms-enum": {
-            "name": "startdayofweek",
+            "name": "startDayOfWeek",
             "modelAsString": true
           }
         },
-        "starthourofday": {
+        "startHourOfDay": {
           "format": "int32",
           "type": "integer",
           "minimum": 0,
           "maximum": 23,
-          "description": "Preferred hour of the day in UTC to begin an upgrade"
+          "description": "Preferred hour of the day in UTC time to begin an upgrade"
         }
       },
       "description": "Contains all settings for the cluster upgrade window."
