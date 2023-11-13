@@ -44,15 +44,6 @@ model DeviceUpdateAgentId {
   moduleId?: string;
 }
 
-/** The list of log collections with detailed status, with server paging support. */
-model LogCollectionDetailedStatusList {
-  /** The collection of pageable items. */
-  value: LogCollectionOperationDetailedStatus[];
-
-  /** The link to the next page of items. */
-  nextLink?: string;
-}
-
 /** Device diagnostics operation detailed status */
 model LogCollectionOperationDetailedStatus {
   /** The device diagnostics operation id. */

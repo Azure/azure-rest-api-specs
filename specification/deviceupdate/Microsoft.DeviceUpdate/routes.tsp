@@ -598,13 +598,14 @@ interface DeviceManagementOperations {
 
   /** Get log collection with detailed status */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name."
   @route("management/deviceDiagnostics/logCollections/{operationId}/detailedStatus")
   @get
   getLogCollectionDetailedStatus is Azure.Core.Foundations.Operation<
     {
       ...Azure.Core.Foundations.ItemKeysOf<LogCollection>;
     },
-    LogCollectionOperationDetailedStatus
+    Azure.Core.Page<LogCollectionOperationDetailedStatus>
   >;
 
   /** Get list of device health */

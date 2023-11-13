@@ -578,7 +578,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LogCollectionOperationDetailedStatus"
+              "$ref": "#/definitions/PagedLogCollectionOperationDetailedStatus"
             }
           },
           "default": {
@@ -598,6 +598,9 @@
           "Device Management Get Log Collection Detailed Status": {
             "$ref": "./examples/DeviceManagement_GetLogCollectionDetailedStatus.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4109,27 +4112,6 @@
         "deviceList"
       ]
     },
-    "LogCollectionDetailedStatusList": {
-      "type": "object",
-      "description": "The list of log collections with detailed status, with server paging support.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The collection of pageable items.",
-          "items": {
-            "$ref": "#/definitions/LogCollectionOperationDetailedStatus"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "LogCollectionOperationDetailedStatus": {
       "type": "object",
       "description": "Device diagnostics operation detailed status",
@@ -4497,6 +4479,28 @@
           "description": "The LogCollection items on this page",
           "items": {
             "$ref": "#/definitions/LogCollection"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedLogCollectionOperationDetailedStatus": {
+      "type": "object",
+      "description": "Paged collection of LogCollectionOperationDetailedStatus items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LogCollectionOperationDetailedStatus items on this page",
+          "items": {
+            "$ref": "#/definitions/LogCollectionOperationDetailedStatus"
           },
           "x-ms-identifiers": []
         },
