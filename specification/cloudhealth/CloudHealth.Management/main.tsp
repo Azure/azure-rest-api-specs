@@ -483,8 +483,8 @@ model LogAnalyticsSignalGroup is SignalAssignmentGroup {
   logAnalyticsWorkspaceResourceId: LogAnalyticsWorkspaceResourceId;
 
   @doc("Log Analytics workspace ID") // Ideally, we dont need this since we also have the Resource Id. But at the moment we need this ID for querying
-  @minLength(32)
-  @maxLength(32)
+  @minLength(36)
+  @maxLength(36)
   logAnalyticsWorkspaceId: string;
 }
 
