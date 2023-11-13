@@ -142,6 +142,54 @@
         }
       }
     },
+    "/providers/Microsoft.Support/services/{problemServiceName}/classifyProblems": {
+      "post": {
+        "tags": [
+          "ProblemClassifications"
+        ],
+        "description": "Classify the right problem classifications (categories) available for a specific Azure service. ",
+        "operationId": "ProblemClassificationsNoSubscription_classifyProblems",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProblemServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "problemClassificationsClassificationInput",
+            "in": "body",
+            "description": "Input to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProblemClassificationsClassificationInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully classified list of problem classifications for the specified Azure service.",
+            "schema": {
+              "$ref": "#/definitions/ProblemClassificationsClassificationOutput"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Classify list of problemClassifications for a specified Azure service": {
+            "$ref": "./examples/ClassifyProblemClassifications.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Support/services/{problemServiceName}/classifyProblems": {
       "post": {
         "tags": [
@@ -185,7 +233,7 @@
         },
         "x-ms-examples": {
           "Classify list of problemClassifications for a specified Azure service": {
-            "$ref": "./examples/ClassifyProblemClassifications.json"
+            "$ref": "./examples/ClassifyProblemClassificationsForSubscription.json"
           }
         }
       }
