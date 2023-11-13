@@ -151,17 +151,17 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/CodeSigningOptions.codeSigningAccountName"
+          },
+          {
+            "$ref": "#/parameters/CodeSigningOptions.certificateProfileName"
+          },
+          {
             "name": "operationId",
             "in": "path",
             "description": "The unique ID of the operation.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/CodeSigningOptions.codeSigningAccountName"
-          },
-          {
-            "$ref": "#/parameters/CodeSigningOptions.certificateProfileName"
           }
         ],
         "responses": {
@@ -382,7 +382,8 @@
       "type": "string",
       "description": "Enum describing allowed operation states.",
       "enum": [
-        "InProgress",
+        "NotStarted",
+        "Running",
         "Succeeded",
         "Failed",
         "Canceled"
@@ -392,8 +393,13 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "InProgress",
-            "value": "InProgress",
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
             "description": "The operation is in progress."
           },
           {

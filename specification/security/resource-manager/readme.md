@@ -36,14 +36,6 @@ directive:
     from: iotSecuritySolutionAnalytics.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels"].get'
     reason: The list returns limited number of items
-  - suppress: SECRET_PROPERTY
-    from: ingestionSettings.json
-    where: $.definitions.IngestionSettingToken.properties.token
-    reason: Secrets are OK to return in a POST response.
-  - suppress: SECRET_PROPERTY
-    from: ingestionSettings.json
-    where: $.definitions.IngestionConnectionString.properties.value
-    reason: Secrets are OK to return in a POST response.
   - suppress: OperationsAPIImplementation
     where: $.paths
     from: settings.json
@@ -94,7 +86,14 @@ These settings apply only when `--tag=package-2023-11-15` is specified on the co
 input-file:
   - Microsoft.Security/stable/2023-11-15/apiCollections.json
 ```
+### Tag: package-preview-2023-10
 
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
+```
 ### Tag: package-preview-2023-09
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
@@ -124,6 +123,7 @@ These settings apply only when `--tag=package-preview-2023-05` is specified on t
 input-file:
   - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 ```
+
 ### Tag: package-preview-2023-03-only
 
 These settings apply only when `--tag=package-preview-2023-03-only` is specified on the command line.
@@ -176,6 +176,7 @@ input-file:
   - Microsoft.Security/preview/2023-02-01-preview/healthReports.json
   - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 ```
+
 ### Tag: package-preview-2022-12
 
 These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
@@ -184,7 +185,6 @@ These settings apply only when `--tag=package-preview-2022-12` is specified on t
 input-file:
   - Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
 ```
-
 
 ### Tag: package-preview-2022-11
 
@@ -321,7 +321,6 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
-- Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -370,7 +369,6 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
-- Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -421,7 +419,6 @@ input-file:
 - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 - Microsoft.Security/stable/2022-01-01/alerts.json
 - Microsoft.Security/stable/2022-05-01/settings.json
-- Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
@@ -430,12 +427,12 @@ input-file:
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
-- Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 - Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
 - Microsoft.Security/preview/2023-09-01-preview/securityConnectorsDevOps.json
+- Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
 
 # Autorest suppressions
 suppressions:
@@ -499,7 +496,6 @@ input-file:
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
 - Microsoft.Security/stable/2022-01-01/alerts.json
 - Microsoft.Security/stable/2022-05-01/settings.json
-- Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
@@ -817,18 +813,6 @@ override-info:
   title: SecurityCenter
 ```
 
-### Tag: package-2021-01-preview-only
-
-These settings apply only when `--tag=package-2021-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2021-01-preview-only'
-input-file:
-- Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
 ### Tag: package-2021-01-only
 
 These settings apply only when `--tag=package-2021-01-only` is specified on the command line. This tag is used for Ruby SDK.
@@ -950,7 +934,7 @@ override-info:
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-05'
+``` yaml $(tag) == 'package-2023-05'
 input-file:
   - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 ```
