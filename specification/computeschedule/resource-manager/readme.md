@@ -25,6 +25,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the computeschedule.
 
 ```yaml
+openapi-subtype: providerHub
 openapi-type: arm
 tag: package-2023-10-01-preview
 ```
