@@ -383,64 +383,65 @@
           "x-ms-identifiers": [
             "keyId"
           ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./ts29571.json#/definitions/PlmnId"
+        }
+      ]
+    }
+  },
+  "homeNetworkPublicKey": {
+    "type": "object",
+    "properties": {
+      "keyId": {
+        "type": "integer",
+        "format": "int32",
+        "minimum": 1,
+        "maximum": 255,
+        "description": "The Home Network Public Key Identifier determines which public key was used to generate the Protection Scheme Output."
+      },
+      "keyUrl": {
+        "type": "string",
+        "description": "The URL of the secret containing the private key, unversioned. For example: https://contosovault.vault.azure.net/secrets/mySuciPrivateKey."
+      },
+      "keyProfile": {
+        "type": "string",
+        "enum": [
+          "A",
+          "B"
+        ],
+        "x-ms-enum": {
+          "name": "keyProfile",
+          "modelAsString": true
         },
-        "allOf": [
-          {
-            "$ref": "./ts29571.json#/definitions/PlmnId"
-          }
-        ]
+        "description": "The protection scheme that has been used to conceal the SUPI."
       }
     },
-    "homeNetworkPublicKey": {
-      "type": "object",
-      "properties": {
-        "keyId": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "maximum": 255,
-          "description": "The Home Network Public Key Identifier determines which public key was used to generate the Protection Scheme Output."
+    "required": [
+      "keyId",
+      "publicKey",
+      "keyProfile"
+    ]
+  },
+  "MobileNetworkListResult": {
+    "type": "object",
+    "properties": {
+      "value": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/MobileNetwork"
         },
-        "keyUrl": {
-          "type": "string",
-          "description": "The URL of the secret containing the private key, unversioned. For example: https://contosovault.vault.azure.net/secrets/mySuciPrivateKey."
-        },
-        "keyProfile": {
-          "type": "string",
-          "enum": [
-            "A",
-            "B"
-          ],
-          "x-ms-enum": {
-            "name": "keyProfile",
-            "modelAsString": true
-          },
-          "description": "The protection scheme that has been used to conceal the SUPI."
-        }
+        "description": "A list of mobile networks in a resource group."
       },
-      "required": [
-        "keyId",
-        "publicKey",
-        "keyProfile"
-      ]
+      "nextLink": {
+        "type": "string",
+        "readOnly": true,
+        "description": "The URL to get the next set of results."
+      }
     },
-    "MobileNetworkListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MobileNetwork"
-          },
-          "description": "A list of mobile networks in a resource group."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The URL to get the next set of results."
-        }
-      },
-      "description": "Response for mobile networks API service call."
-    }
+    "description": "Response for mobile networks API service call."
   }
+}
 }
