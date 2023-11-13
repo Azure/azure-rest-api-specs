@@ -20,6 +20,7 @@ using Azure.ResourceManager.Foundations;
 })
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.CloudHealth;
 
 alias ProviderName = "Microsoft.CloudHealth";
@@ -482,7 +483,9 @@ model LogAnalyticsSignalGroup is SignalAssignmentGroup {
   logAnalyticsWorkspaceResourceId: LogAnalyticsWorkspaceResourceId;
 
   @doc("Log Analytics workspace ID") // Ideally, we dont need this since we also have the Resource Id. But at the moment we need this ID for querying
-  logAnalyticsWorkspaceId: uuid;
+  @minLength(32)
+  @maxLength(32)
+  logAnalyticsWorkspaceId: string;
 }
 
 @doc("A grouping of signal assignments for a Azure Monitor Workspace")
@@ -591,7 +594,7 @@ interface SignalDefinitions {
     SignalDefinition,
     BaseParameters<SignalDefinition> & TimestampQueryParam
   >;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<SignalDefinition>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<SignalDefinition>;
   delete is ArmResourceDeleteSync<SignalDefinition>;
 
   listByParent is ArmResourceListByParent<
