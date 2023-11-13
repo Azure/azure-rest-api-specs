@@ -91,7 +91,12 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceIdList"
+            "in": "body",
+            "name": "body",
+            "description": "Metrics batch body including the list of resource ids",
+            "schema": {
+              "$ref": "#/definitions/ResourceIdList"
+            }
           }
         ],
         "responses": {
@@ -126,16 +131,6 @@
     }
   },
   "parameters": {
-    "ResourceIdList": {
-      "name": "resourceIds",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/ResourceIdList"
-      },
-      "description": "The comma separated list of resource IDs to query metrics for.",
-      "x-ms-parameter-location": "method"
-    },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
