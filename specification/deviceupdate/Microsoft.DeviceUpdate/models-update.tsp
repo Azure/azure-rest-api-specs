@@ -1,0 +1,280 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "./models-shared.tsp";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+
+namespace Azure.IoT.DeviceUpdate;
+
+/** Update metadata. */
+@resource("updates")
+model Update {
+  /** Update identity. */
+  @key
+  @visibility("read")
+  updateId: UpdateId;
+
+  /** Update description specified by creator. */
+  description?: string;
+
+  /** Friendly update name specified by importer. */
+  friendlyName?: string;
+
+  /** Whether the update can be deployed to a device on its own. */
+  isDeployable?: boolean;
+
+  /** Update type. Deprecated in latest import manifest schema. */
+  updateType?: string;
+
+  /**
+   * String interpreted by Device Update client to determine if the update is
+   * installed on the device. Deprecated in latest import manifest schema.
+   */
+  installedCriteria?: string;
+
+  /** List of update compatibility information. */
+  compatibility: Record<string>[];
+
+  /** Update install instructions. */
+  instructions?: Instructions;
+
+  /** List of update identities that reference this update. */
+  referencedBy?: UpdateId[];
+
+  /** Update aggregate scan result (calculated from payload file scan results). */
+  scanResult?: string;
+
+  /** Schema version of manifest used to import the update. */
+  manifestVersion: string;
+
+  /** Date and time in UTC when the update was imported. */
+  importedDateTime: utcDateTime;
+
+  /** Date and time in UTC when the update was created. */
+  createdDateTime: utcDateTime;
+
+  /** Update ETag. */
+  etag?: string;
+}
+
+/** Update installation instructions. */
+model Instructions {
+  /** Collection of installation steps. */
+  @minItems(1)
+  @maxItems(10)
+  steps: Step[];
+}
+
+/** Update install instruction step. */
+@discriminator("type")
+model Step {
+  /** Step type. */
+  type: StepType;
+
+  /** Step description. */
+  description?: string;
+}
+
+/** Step type */
+enum StepType {
+  /** Step type that performs code execution. */
+  Inline,
+
+  /** Step type that installs another update. */
+  Reference,
+}
+
+/** Installation instruction step that performs code execution. */
+model InlineStep extends Step {
+  /** Step type. */
+  type: StepType.Inline;
+
+  /** Identity of handler that will execute this step. Required if step type is inline. */
+  handler: string;
+
+  /** Parameters to be passed to handler during execution. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Properties can be anything"
+  handlerProperties?: Record<unknown>;
+
+  /** Collection of file names to be passed to handler during execution. */
+  @minItems(1)
+  @maxItems(10)
+  files: string[];
+}
+
+/** Installation instruction step that installs another update. */
+model ReferenceStep extends Step {
+  /** Step type. */
+  type: StepType.Reference;
+
+  /** Referenced child update identity. */
+  updateId: UpdateId;
+}
+
+/** Import update input item metadata. */
+model ImportUpdateInputItem {
+  /** Import manifest metadata like source URL, file size/hashes, etc. */
+  importManifest: ImportManifestMetadata;
+
+  /** Friendly update name. */
+  friendlyName?: string;
+
+  /** One or more update file properties like filename and source URL. */
+  @minItems(0)
+  @maxItems(10)
+  files?: FileImportMetadata[];
+}
+
+/** Import update input metadata. */
+@minItems(1)
+@maxItems(11)
+model ImportUpdateInput is ImportUpdateInputItem[];
+
+/**
+Metadata describing the import manifest, a document which describes the files
+and other metadata about an update version.
+*/
+model ImportManifestMetadata {
+  /**
+   * Azure Blob location from which the import manifest can be downloaded by Device
+   * Update for IoT Hub. This is typically a read-only SAS-protected blob URL with
+   * an expiration set to at least 4 hours.
+   */
+  url: string;
+
+  /** File size in number of bytes. */
+  sizeInBytes: int64;
+
+  /**
+   * A JSON object containing the hash(es) of the file. At least SHA256 hash is
+   * required. This object can be thought of as a set of key-value pairs where the
+   * key is the hash algorithm, and the value is the hash of the file calculated
+   * using that algorithm.
+   */
+  hashes: Record<string>;
+}
+
+/** Metadata describing an update file. */
+model FileImportMetadata {
+  /** Update file name as specified inside import manifest. */
+  filename: string;
+
+  /**
+   * Azure Blob location from which the update file can be downloaded by Device
+   * Update for IoT Hub. This is typically a read-only SAS-protected blob URL with
+   * an expiration set to at least 4 hours.
+   */
+  url: string;
+}
+
+/**
+ * The list of strings with server paging support.
+ */
+@Azure.Core.pagedResult
+model StringsList {
+  /** The collection of pageable items. */
+  @Azure.Core.items
+  value: string[];
+
+  /** The link to the next page of items */
+  @Azure.Core.nextLink
+  nextLink?: string;
+}
+
+/** Update file metadata. */
+model UpdateFile {
+  ...UpdateFileBase;
+
+  /** File identity, generated by server at import time. */
+  fileId: string;
+
+  /**
+   * Optional related files metadata used together DownloadHandler metadata to
+   * download payload file.
+   */
+  relatedFiles?: UpdateFileBase[];
+
+  /** Optional download handler for utilizing related files to download payload file. */
+  downloadHandler?: UpdateFileDownloadHandler;
+
+  /** File ETag. */
+  etag?: string;
+}
+
+/** Update file basic metadata. */
+model UpdateFileBase {
+  /** File name. */
+  fileName: string;
+
+  /** File size in number of bytes. */
+  sizeInBytes: int64;
+
+  /** Mapping of hashing algorithm to base64 encoded hash values. */
+  hashes: Record<string>;
+
+  /** File MIME type. */
+  mimeType?: string;
+
+  /** Anti-malware scan result. */
+  scanResult?: string;
+
+  /** Anti-malware scan details. */
+  scanDetails?: string;
+
+  /** Optional file properties (not consumed by service but pass-through to device). */
+  properties?: Record<string>;
+}
+
+/** Download handler for utilizing related files to download payload file. */
+model UpdateFileDownloadHandler {
+  /** Download handler identifier. */
+  id: string;
+}
+
+/** Operation metadata. */
+@resource("updates/operations")
+model UpdateOperation {
+  /** Operation Id. */
+  @key
+  @path
+  @visibility("read")
+  operationId: string;
+
+  /** Operation status. */
+  status: OperationStatus;
+
+  /**
+   * The update being imported or deleted. For import, this property will only be
+   * populated after import manifest is processed successfully.
+   */
+  update?: UpdateInfo;
+
+  /** Location of the imported update when operation is successful. */
+  resourceLocation?: string;
+
+  /** Operation error encountered, if any. */
+  error?: Azure.Core.Foundations.Error;
+
+  /**
+   * Operation correlation identity that can used by Microsoft Support for
+   * troubleshooting.
+   */
+  traceId?: string;
+
+  /** Date and time in UTC when the operation status was last updated. */
+  lastActionDateTime: utcDateTime;
+
+  /** Date and time in UTC when the operation was created. */
+  createdDateTime: utcDateTime;
+
+  /** Operation ETag. */
+  etag?: string;
+}
+
+/** Update filter. */
+model UpdateFilter {
+  /** Update isDeployable property. */
+  isDeployable?: boolean;
+}
