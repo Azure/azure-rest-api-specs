@@ -46,7 +46,6 @@ These settings apply only when `--tag=package-2023-09` is specified on the comma
 ```yaml $(tag) == 'package-2023-09'
 input-file:
   - Microsoft.OperationalInsights/stable/2023-09-01/Operations.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/Tables.json
   - Microsoft.OperationalInsights/stable/2023-09-01/Workspaces.json
 ```
 ### Tag: package-2015-11-preview
