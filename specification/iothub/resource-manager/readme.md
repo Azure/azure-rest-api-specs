@@ -37,6 +37,15 @@ These settings apply only when `--tag=package-2023-06` is specified on the comma
 ```yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.Devices/stable/2023-06-30/iothub.json
+
+directive:
+  - from: swagger-document
+    where: $.definitions.FallbackRouteProperties.properties.source
+    transform: >
+      $['x-ms-enum'] = {
+        "name": "RoutingSource",
+        "modelAsString": true
+      };
 ```
 
 ### Tag: package-preview-2023-06
@@ -46,6 +55,15 @@ These settings apply only when `--tag=package-preview-2023-06` is specified on t
 ```yaml $(tag) == 'package-preview-2023-06'
 input-file:
   - Microsoft.Devices/preview/2023-06-30-preview/iothub.json
+
+directive:
+  - from: swagger-document
+    where: $.definitions.FallbackRouteProperties.properties.source
+    transform: >
+      $['x-ms-enum'] = {
+        "name": "RoutingSource",
+        "modelAsString": true
+      };
 ```
 
 ### Tag: package-preview-2022-11
