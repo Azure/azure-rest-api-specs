@@ -71,6 +71,7 @@ interface TextBlocklists {
     TextBlocklist,
     {
       @doc("Options for adding or updating blocklist items.")
+      @body
       @projectedName("csharp", "options")
       options: AddOrUpdateTextBlocklistItemsOptions,
     },
@@ -83,6 +84,7 @@ interface TextBlocklists {
     TextBlocklist,
     {
       @doc("Options for removing blocklist items.")
+      @body
       @projectedName("csharp", "options")
       options: RemoveTextBlocklistItemsOptions,
     },
