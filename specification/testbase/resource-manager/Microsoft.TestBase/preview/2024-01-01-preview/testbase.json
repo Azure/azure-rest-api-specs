@@ -6216,39 +6216,46 @@
     "BillingHubGetAggregateUsageResponse": {
       "type": "object",
       "properties": {
-        "totalUsedFreeHours": {
-          "type": "number",
-          "format": "double",
-          "description": "Free usage of all tests."
-        },
-        "totalUsedBillableHours": {
-          "type": "number",
-          "format": "double",
-          "description": "Billable usage of all tests."
-        },
-        "totalCharges": {
-          "type": "number",
-          "format": "double",
-          "description": "Charing usage of all tests."
-        },
         "value": {
-          "type": "array",
-          "x-ms-identifiers": [],
-          "items": {
-            "$ref": "#/definitions/BillingHubAggregateUsage"
-          },
-          "description": "The result set of usage entries."
-        },
-        "nextRequest": {
           "type": "object",
-          "$ref": "#/definitions/BillingHubGetAggregateUsagePaginationModel",
-          "description": "Pagination model for the next request."
+          "$ref": "#/definitions/BillingHubGetAggregateUsage",
+          "description": "The result set of usage."
         },
         "nextLink": {
           "type": "string",
           "readOnly": true,
           "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
         }
+      }
+    },
+    "BillingHubGetAggregateUsage": {
+      "totalUsedFreeHours": {
+        "type": "number",
+        "format": "double",
+        "description": "Free usage of all tests."
+      },
+      "totalUsedBillableHours": {
+        "type": "number",
+        "format": "double",
+        "description": "Billable usage of all tests."
+      },
+      "totalCharges": {
+        "type": "number",
+        "format": "double",
+        "description": "Charing usage of all tests."
+      },
+      "usageEntries": {
+        "type": "array",
+        "x-ms-identifiers": [],
+        "items": {
+          "$ref": "#/definitions/BillingHubAggregateUsage"
+        },
+        "description": "The result set of usage entries."
+      },
+      "nextRequest": {
+        "type": "object",
+        "$ref": "#/definitions/BillingHubGetAggregateUsagePaginationModel",
+        "description": "Pagination model for the next request."
       }
     },
     "BillingHubAggregateUsage": {
