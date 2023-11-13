@@ -17,7 +17,6 @@ model Deployment {
    * create a deployment.
    */
   @key
-  @path
   @visibility("read", "create")
   deploymentId: string;
 

@@ -397,6 +397,10 @@ interface DeviceManagementOperations {
       /** Deployment identifier. */
       @path
       deploymentId: string;
+
+      /** Deployment details. */
+      @body
+      resource: Deployment;
     },
     {
       @statusCode _: 201 | 200;
@@ -587,14 +591,18 @@ interface DeviceManagementOperations {
   @route("management/deviceDiagnostics/logCollections/{operationId}")
   @put
   startLogCollection is Azure.Core.Foundations.Operation<
-  {
-    ...Azure.Core.Foundations.ItemKeysOf<LogCollection>;
-  },
-  {
-    @statusCode _: 201;
-    @body body: LogCollection;
-  }
->;
+    {
+      ...Azure.Core.Foundations.ItemKeysOf<LogCollection>;
+
+      /** Log collection details. */
+      @body
+      resource: LogCollection;
+    },
+    {
+      @statusCode _: 201;
+      @body body: LogCollection;
+    }
+  >;
 
   /** Get log collection with detailed status */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Route segment is both resource type and instance."

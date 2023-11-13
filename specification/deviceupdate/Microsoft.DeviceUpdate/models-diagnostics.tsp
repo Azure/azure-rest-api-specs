@@ -10,7 +10,6 @@ namespace Azure.IoT.DeviceUpdate;
 model LogCollection {
   /** The log collection id. */
   @key
-  @path
   @visibility("read", "create")
   operationId: string;
 
