@@ -350,97 +350,29 @@
           "type": "string",
           "readOnly": true,
           "description": "The mobile network resource identifier"
-        },
-        "publicLandMobileNetworkIdentifiers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/publicLandMobileNetworkIdentifier"
-          },
-          "minItems": 1,
-          "uniqueItems": true,
-          "description": "A list of public land mobile network identifiers. This is made up of the mobile country code and mobile network code, as defined in https://www.itu.int/rec/T-REC-E.212. The values 001-01 and 001-001 can be used for testing and the values 999-99 and 999-999 can be used on internal private networks. Each identifier can optionally include a list of home network public keys for encrypting SUPIs.",
-          "x-ms-identifiers": [
-            "mcc",
-            "mnc"
-          ]
         }
       },
       "required": [
         "publicLandMobileNetworkIdentifier"
       ]
     },
-    "publicLandMobileNetworkIdentifier": {
+    "MobileNetworkListResult": {
       "type": "object",
       "properties": {
-        "homeNetworkPublicKeys": {
+        "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/homeNetworkPublicKey"
+            "$ref": "#/definitions/MobileNetwork"
           },
-          "minItems": 1,
-          "uniqueItems": true,
-          "description": "This provides a mapping to identify which public key has been used for SUPI concealment.",
-          "x-ms-identifiers": [
-            "keyId"
-          ]
+          "description": "A list of mobile networks in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
         }
       },
-      "allOf": [
-        {
-          "$ref": "./ts29571.json#/definitions/PlmnId"
-        }
-      ]
+      "description": "Response for mobile networks API service call."
     }
-  },
-  "homeNetworkPublicKey": {
-    "type": "object",
-    "properties": {
-      "keyId": {
-        "type": "integer",
-        "format": "int32",
-        "minimum": 1,
-        "maximum": 255,
-        "description": "The Home Network Public Key Identifier determines which public key was used to generate the Protection Scheme Output."
-      },
-      "keyUrl": {
-        "type": "string",
-        "description": "The URL of the secret containing the private key, unversioned. For example: https://contosovault.vault.azure.net/secrets/mySuciPrivateKey."
-      },
-      "keyProfile": {
-        "type": "string",
-        "enum": [
-          "A",
-          "B"
-        ],
-        "x-ms-enum": {
-          "name": "keyProfile",
-          "modelAsString": true
-        },
-        "description": "The protection scheme that has been used to conceal the SUPI."
-      }
-    },
-    "required": [
-      "keyId",
-      "publicKey",
-      "keyProfile"
-    ]
-  },
-  "MobileNetworkListResult": {
-    "type": "object",
-    "properties": {
-      "value": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/MobileNetwork"
-        },
-        "description": "A list of mobile networks in a resource group."
-      },
-      "nextLink": {
-        "type": "string",
-        "readOnly": true,
-        "description": "The URL to get the next set of results."
-      }
-    },
-    "description": "Response for mobile networks API service call."
   }
 }
