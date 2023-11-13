@@ -6,76 +6,125 @@ using TypeSpec.Http;
 
 namespace PurviewDataMap;
 
+@doc("Enum for business attribute update behavior")
 enum BusinessAttributeUpdateBehavior {
+  @doc("Ignore the business attribute payload for update.")
   ignore,
+  @doc("Replace all the business attributes using the payload.")
   replace,
+  @doc("Merge the business attributes. Business attributes will not be updated if not provided.")
   merge,
 }
 
+@doc("Status - can be active or deleted")
 enum Status {
+  @doc("The status is active.")
   ACTIVE,
+  @doc("The status is deleted.")
   DELETED,
 }
 
+@doc("Status for term assignment")
 enum AtlasTermAssignmentStatus {
+  @doc("The status is discorverred.")
   DISCOVERED,
+  @doc("The status is proposed.")
   PROPOSED,
+  @doc("The status is imported.")
   IMPORTED,
+  @doc("The status is validated.")
   VALIDATED,
+  @doc("The status is deprecated.")
   DEPRECATED,
+  @doc("The status is obsolete.")
   OBSOLETE,
+  @doc("Other status.")
   OTHER,
 }
 
+@doc("Type for sorting")
 enum SortType {
+  @doc("No sorting order")
   NONE,
+  @doc("Use ascending order for sorting")
   ASC,
+  @doc("Use descending order for sorting")
   DESC,
 }
 
+@doc("Status for import")
 enum ImportStatus {
+  @doc("Success")
   SUCCESS,
+  @doc("Failed")
   FAILED,
 }
 
+@doc("Status for atlas term relationship")
 enum AtlasTermRelationshipStatus {
+  @doc("draft")
   DRAFT,
+  @doc("active")
   ACTIVE,
+  @doc("deprecated")
   DEPRECATED,
+  @doc("obsolete")
   OBSOLETE,
+  @doc("other")
   OTHER,
 }
 
+@doc("Status for term")
 enum TermStatus {
+  @doc("draft")
   Draft,
+  @doc("approved")
   Approved,
+  @doc("alert")
   Alert,
+  @doc("expired")
   Expired,
 }
 
+@doc("Status for atlas relationship")
 enum StatusAtlasRelationship {
+  @doc("active")
   ACTIVE,
+  @doc("deleted")
   DELETED,
 }
 
+@doc("Direction")
 enum Direction {
+  @doc("both")
   BOTH,
+  @doc("input")
   INPUT,
+  @doc("output")
   OUTPUT,
 }
 
+@doc("Lineage direction")
 enum LineageDirection {
+  @doc("input")
   INPUT,
+  @doc("output")
   OUTPUT,
+  @doc("both")
   BOTH,
 }
 
+@doc("Cardinality")
 enum Cardinality {
+  @doc("single")
   SINGLE,
+  @doc("list")
   LIST,
+  @doc("set")
   SET,
 }
 
+@doc("Type Category")
 enum TypeCategory {
   PRIMITIVE,
   OBJECT_ID_TYPE,
@@ -429,6 +478,7 @@ model ImportInfo {
   remarks?: string;
 }
 
+@doc("MoveEntitiesRequest")
 model MoveEntitiesRequest {
   @doc("An array of entity guids to be moved to target collection.")
   entityGuids?: string[];
