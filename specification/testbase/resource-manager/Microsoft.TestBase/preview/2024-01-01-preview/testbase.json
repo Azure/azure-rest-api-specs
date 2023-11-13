@@ -3015,6 +3015,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/getUsage": {
       "post": {
         "operationId": "BillingHubService_GetUsage",
+        "description": "Get test usage for pacakge resource under a Test Base account.",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -3056,6 +3057,55 @@
         "x-ms-examples": {
           "BillingHubGetUsage": {
             "$ref": "./examples/BillingHubGetUsage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/getAggregateUsage": {
+      "post": {
+        "operationId": "BillingHubService_GetAggregateUsage",
+        "description": "Get test usage including all resources under a Test Base account.",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/BillingHubGetAggregateUsageResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "getUsageRequest",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BillingHubGetAggregateUsageRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BillingHubService"
+        ],
+        "x-ms-examples": {
+          "BillingHubGetAggregateUsage": {
+            "$ref": "./examples/BillingHubGetAggregateUsage.json"
           }
         }
       }
@@ -6136,14 +6186,136 @@
         "endTimeStamp"
       ]
     },
-    "BillingHubImageValidationUsage": {
+    "BillingHubGetAggregateUsageRequest": {
       "type": "object",
-      "description": "Image validation usage under the Test Base account presented in billing hub.",
       "properties": {
-        "azureResourceUri": {
+        "startTimeStamp": {
           "type": "string",
-          "description": "Azure resource uri of the custom image."
+          "format": "date-time",
+          "description": "Specify the start time of the target usage items."
         },
+        "endTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Specify the end time of the target usage items."
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specify the pagination size of the usage query."
+        },
+        "pageIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specify the pagination index of the usage query."
+        }
+      },
+      "required": [
+        "startTimeStamp",
+        "endTimeStamp"
+      ]
+    },
+    "BillingHubGetAggregateUsageResponse": {
+      "type": "object",
+      "properties": {
+        "totalUsedFreeHours": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalUsedBillableHours": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalCharges": {
+          "type": "number",
+          "format": "double"
+        },
+        "usageEntries": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/BillingHubAggregateUsage"
+          }
+        },
+        "nextRequest": {
+          "type": "object",
+          "$ref": "#/definitions/BillingHubGetAggregateUsageRequest"
+        }
+      }
+    },
+    "BillingHubAggregateUsage": {
+      "type": "object",
+      "discriminator": "usageType",
+      "properties": {
+        "usageType": {
+          "type": "string",
+          "description": "Usage type for charging purpose.",
+          "enum": [
+            "PackageUsage",
+            "ImageValidationUsage"
+          ],
+          "x-ms-enum": {
+            "name": "UsageType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "PackageUsage",
+                "description": "Test usage counting for a package."
+              },
+              {
+                "value": "ImageValidationUsage",
+                "description": "Image validatoin usage counting for an image."
+              }
+            ]
+          }
+        },
+        "azureResourceUri": {
+          "type": "string"
+        },
+        "totalUsedFreeHours": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalUsedBillableHours": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalCharges": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "BillingHubAggregatedPackageUsage": {
+      "description": "Test usage counting for a package.",
+      "type": "object",
+      "x-ms-discriminator-value": "PackageUsage",
+      "properties": {
+        "applicationName": {
+          "type": "string"
+        },
+        "applicationVersion": {
+          "type": "string"
+        },
+        "usageEntriesGroupedByUpdateType": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/BillingHubUsageGroupedByUpdateType"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BillingHubAggregateUsage"
+        }
+      ]
+    },
+    "BillingHubImageAggregatedValidationUsage": {
+      "description": "Image validation usage counting for an image.",
+      "type": "object",
+      "x-ms-discriminator-value": "ImageValidationUsage",
+      "properties": {
         "definitionName": {
           "type": "string",
           "description": "Definition name of the custom image."
@@ -6152,34 +6324,20 @@
           "type": "string",
           "description": "Version name of the custom image."
         },
-        "osName": {
+        "osBuild": {
           "type": "string",
-          "description": "OS name of the custom image."
+          "description": "OS build of the custom image."
         },
         "release": {
           "type": "string",
           "description": "Release of the custom image."
-        },
-        "testType": {
-          "type": "string",
-          "description": "Specify the test type of the image validation test."
-        },
-        "usedFreeHours": {
-          "type": "number",
-          "format": "double",
-          "description": "Free usage included in the image validation test."
-        },
-        "usedBillableHours": {
-          "type": "number",
-          "format": "double",
-          "description": "Billable usage included in the image validation test."
-        },
-        "charges": {
-          "type": "number",
-          "format": "double",
-          "description": "Charged usage consumed in the image validation test."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BillingHubAggregateUsage"
+        }
+      ]
     },
     "AvailableInplaceUpgradeOSListResult": {
       "description": "A list of available In-place Upgrade OSs.",
