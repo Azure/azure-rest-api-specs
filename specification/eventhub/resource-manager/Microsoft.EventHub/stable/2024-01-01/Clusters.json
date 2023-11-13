@@ -384,7 +384,7 @@
             "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
-        "description": "Trigger pending cluster upgrade by skipping customer-set upgrade preferences",
+        "description": "Trigger pending cluster upgrades if any. Bypasses any upgrade preferences set by customer.",
         "x-ms-examples": {
           "TriggerUpgradeInCluster": {
             "$ref": "./examples/Clusters/TriggerUpgradeInCluster.json"
@@ -392,7 +392,7 @@
         },
         "responses": {
           "204": {
-            "description": "Successfully started applying pending cluster updates"
+            "description": "Successfully started applying pending cluster upgrades"
           },
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
