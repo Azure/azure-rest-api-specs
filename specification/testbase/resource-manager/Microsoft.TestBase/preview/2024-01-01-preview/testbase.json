@@ -3093,7 +3093,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/PageSizeFilter"
+            "$ref": "#/parameters/PageIndexFilter"
           },
           {
             "$ref": "#/parameters/PageIndexFilter"
@@ -6215,26 +6215,36 @@
       "properties": {
         "totalUsedFreeHours": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Free usage of all tests."
         },
         "totalUsedBillableHours": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Billable usage of all tests."
         },
         "totalCharges": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Charing usage of all tests."
         },
-        "usageEntries": {
+        "values": {
           "type": "array",
           "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/BillingHubAggregateUsage"
-          }
+          },
+          "description": "The result set of usage entries."
         },
         "nextRequest": {
           "type": "object",
-          "$ref": "#/definitions/BillingHubGetAggregateUsagePaginationModel"
+          "$ref": "#/definitions/BillingHubGetAggregateUsagePaginationModel",
+          "description": "Pagination model for the next request."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
         }
       }
     },
@@ -6791,7 +6801,7 @@
     "x-ms-parameter-location": "method",
     "description": "Specify the end time of the result set."
   },
-  "PageSzieFilter": {
+  "PageSizeFilter": {
     "name": "pageSize",
     "type": "integer",
     "format": "int32",
