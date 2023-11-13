@@ -371,7 +371,6 @@
     },
     "publicLandMobileNetworkIdentifier": {
       "type": "object",
-      "description": "",
       "properties": {
         "homeNetworkPublicKeys": {
           "type": "array",
@@ -380,9 +379,9 @@
           },
           "minItems": 1,
           "uniqueItems": true,
-          "description": "",
+          "description": "This provides a mapping to identify which public key has been used for SUPI concealment.",
           "x-ms-identifiers": [
-            "id"
+            "keyId"
           ]
         },
         "allOf": [
@@ -395,10 +394,10 @@
     "homeNetworkPublicKey": {
       "type": "object",
       "properties": {
-        "id": {
+        "keyId": {
           "type": "integer",
           "format": "int32",
-          "minimum": 0,
+          "minimum": 1,
           "maximum": 255,
           "description": "The Home Network Public Key Identifier determines which public key was used to generate the Protection Scheme Output."
         },
@@ -406,15 +405,23 @@
           "type": "string",
           "description": "The URL of the secret containing the private key, unversioned. For example: https://contosovault.vault.azure.net/secrets/mySuciPrivateKey."
         },
-        "provisioningState": {
-          "readOnly": true,
-          "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the Home Network Public Keys."
+        "keyProfile": {
+          "type": "string",
+          "enum": [
+            "A",
+            "B"
+          ],
+          "x-ms-enum": {
+            "name": "keyProfile",
+            "modelAsString": true
+          },
+          "description": "The protection scheme that has been used to conceal the SUPI."
         }
       },
       "required": [
-        "id",
-        "publicKey"
+        "keyId",
+        "publicKey",
+        "keyProfile"
       ]
     },
     "MobileNetworkListResult": {
