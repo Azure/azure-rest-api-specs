@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for OperationalInsights.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for OperationalInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,29 +15,40 @@ To build the SDK for OperationalInsights, simply [Install AutoRest](https://aka.
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the OperationalInsights API.
 
-```yaml !$(python) || !$(track2)
+``` yaml !$(python) || !$(track2)
 title: OperationalInsightsManagementClient
 ```
-```yaml $(python)
+
+``` yaml $(python)
 title: LogAnalyticsManagementClient
 ```
 
 ``` yaml
 description: Operational Insights Client
 openapi-type: arm
-tag: package-2022-10
+tag: package-2023-09
 ```
 
 
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09'
+input-file:
+  - Microsoft.OperationalInsights/stable/2023-09-01/Operations.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Tables.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Workspaces.json
+```
 ### Tag: package-2015-11-preview
 
 These settings apply only when `--tag=package-2015-11-preview` is specified on the command line.
@@ -161,6 +172,7 @@ input-file:
 ```
 
 ### Tag: package-2020-10-only
+
 These settings apply only when `--tag=package-2020-10-only` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-10-only'
@@ -282,9 +294,10 @@ input-file:
 - Microsoft.OperationalInsights/stable/2022-10-01/Workspaces.json
 - Microsoft.OperationalInsights/stable/2022-10-01/Tables.json
 ```
----
-# Code Generation
 
+---
+
+# Code Generation
 
 ## Swagger to SDK
 
@@ -305,13 +318,12 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
-
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-```yaml $(csharp)
+``` yaml $(csharp)
 csharp:
   # last generated using AutoRest.1.0.0-Nightly20170126
   azure-arm: true
@@ -334,7 +346,6 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-
 ## Suppression
 
 ``` yaml
@@ -343,6 +354,3 @@ directive:
     suppress: R3006  # BodyTopLevelProperties/R3006/RPCViolation
     reason: properties etag defined as eTag in model
 ```
-
-
-
