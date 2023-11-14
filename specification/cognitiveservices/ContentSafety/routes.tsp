@@ -48,8 +48,7 @@ interface BlockOps
       NoConditionalRequests &
       NoClientRequestId> {}
 
-@@projectedName(Azure.Core.Foundations.ResourceBody.resource, "json", "body");
-@@projectedName(Azure.Core.Foundations.ResourceBody.resource, "client", "body");
+@@projectedName(Azure.Core.Foundations.ResourceBody.resource, "client", "options");
 
 interface TextBlocklists {
   @summary("Get Text Blocklist By blocklistName")
@@ -76,7 +75,7 @@ interface TextBlocklists {
       @doc("Options for adding or updating blocklist items.")
       @body
       @projectedName("csharp", "options")
-      options: AddOrUpdateTextBlocklistItemsOptions,
+      body: AddOrUpdateTextBlocklistItemsOptions,
     },
     AddOrUpdateTextBlocklistItemsResult
   >;
@@ -89,7 +88,7 @@ interface TextBlocklists {
       @doc("Options for removing blocklist items.")
       @body
       @projectedName("csharp", "options")
-      options: RemoveTextBlocklistItemsOptions,
+      body: RemoveTextBlocklistItemsOptions,
     },
     NoContentResponse
   >;
