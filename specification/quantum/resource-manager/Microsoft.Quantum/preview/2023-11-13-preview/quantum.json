@@ -446,8 +446,11 @@
               "$ref": "#/definitions/WorkspaceKeys"
             }
           },
-          "404": {
-            "description": "The specified Workspace does not exist."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -488,8 +491,11 @@
           "200": {
             "description": "The request was successful."
           },
-          "404": {
-            "description": "The specified Workspace does not exist."
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
