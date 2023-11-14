@@ -1,0 +1,168 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Hybrid Connectivity Management API",
+    "description": "REST API for Multi-cloud",
+    "version": "2023-12-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/generateAwsTemplate": {
+      "post": {
+        "tags": [
+          "GenerateAwsTemplate"
+        ],
+        "description": "Retrieve AWS Cloud Formation template",
+        "operationId": "GenerateAwsTemplate",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Generated AWS CFT Template": {
+            "$ref": "./examples/GenerateAwsTemplate_POST.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "GenerateAwsTemplateRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateAwsTemplateRequest"
+            },
+            "description": "ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cloud formation template for specified solution types.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "GenerateAwsTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "connectorId": {
+          "type": "string",
+          "description": "The name of public cloud connector."
+        },
+        "solutionTypes": {
+          "type": "array",
+          "description": "The list of solution types and their settings.",
+          "items": {
+            "$ref": "#/definitions/SolutionConfigurationProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SolutionConfigurationProperties": {
+      "type": "object",
+      "description": "The properties of Solution Configuration",
+      "required": [
+        "solutionType"
+      ],
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource provisioning state.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        },
+        "solutionType": {
+          "type": "string",
+          "description": "The type of the solution"
+        },
+        "solutionSettings": {
+          "type": "object",
+          "description": "solution settings",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The status of solution configurations",
+          "enum": [
+            "New",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "solutionConfigurationStatus",
+            "modelAsString": true
+          }
+        },
+        "statusDetails": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The detailed message of status details"
+        },
+        "lastExecutionTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The last execution time of solution configuration"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
