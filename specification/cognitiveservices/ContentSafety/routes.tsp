@@ -21,6 +21,7 @@ interface TextOperations {
       @body
       @doc("The text analysis request.")
       @projectedName("csharp", "options")
+      @projectedName("java", "options")
       body: AnalyzeTextOptions;
     },
     AnalyzeTextResult
@@ -37,6 +38,7 @@ interface ImageOperations {
       @doc("The image analysis request.")
       @body
       @projectedName("csharp", "options")
+      @projectedName("java", "options")
       body: AnalyzeImageOptions;
     },
     AnalyzeImageResult
@@ -73,6 +75,7 @@ interface TextBlocklists {
       @doc("Options for adding or updating blocklist items.")
       @body
       @projectedName("csharp", "options")
+      @projectedName("java", "options")
       options: AddOrUpdateTextBlocklistItemsOptions,
     },
     AddOrUpdateTextBlocklistItemsResult
@@ -86,6 +89,7 @@ interface TextBlocklists {
       @doc("Options for removing blocklist items.")
       @body
       @projectedName("csharp", "options")
+      @projectedName("java", "options")
       options: RemoveTextBlocklistItemsOptions,
     },
     NoContentResponse
