@@ -9,8 +9,7 @@
       "properties": {
         "resourceProviderScope": "providers/Microsoft.Compute/locations/westus",
         "limit": 110,
-        "comment": "Contoso requires more quota.",
-        "name": {}
+        "comment": "Contoso requires more quota."
       }
     }
   },
@@ -22,12 +21,11 @@
         "name": "cores",
         "properties": {
           "limit": 100,
-          "comment": "Contoso requires more quota.",
           "name": {
             "value": "cores",
             "localizedValue": "Total Regional vCPUs"
           },
-          "unit": "vCPUs",
+          "unit": "count",
           "availableLimit": 80,
           "assignedToSubscriptions": [
             {
@@ -35,14 +33,24 @@
               "quotaAllocated": 20
             }
           ],
-          "provisioningState": "Accepted"
+          "provisioningState": "Succeeded"
         }
       }
     },
-    "202": {
+    "201": {
       "headers": {
-        "location": "https://contoso.com/operationstatus"
+        "location": "https://contoso.com/operationstatus",
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
+        "Operation-Location": "https://contoso.com/operationstatus",
+        "retry-after": 30
+      },
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Compute/locations/westus/providers/Microsoft.Quota/groupQuotas/groupquota1/groupQuotaLimits/cores",
+        "type": "Microsoft.Quota/groupQuotaLimits",
+        "name": "cores",
+        "properties": {
+          "provisioningState": "Accepted"
+        }
       }
     }
-  }
 }

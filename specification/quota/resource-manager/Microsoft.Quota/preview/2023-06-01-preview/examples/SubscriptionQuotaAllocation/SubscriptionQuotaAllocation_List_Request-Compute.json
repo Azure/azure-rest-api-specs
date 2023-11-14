@@ -12,19 +12,23 @@
       "body": {
         "value": [
           {
-            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/westus/providers/Microsoft.Quota/groupQuotas/groupquota1/quotaAllocations/cores",
+            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Quota/groupQuotas/groupquota1/quotaAllocations/cores",
             "type": "Microsoft.Quota/quotaAllocations",
             "name": "cores",
             "properties": {
-              "limit": 100,
-              "nonShareableQuota": 25,
+              "limit": 25,
               "provisioningState": "Accepted",
-              "quotaSources": [
-                {
-                  "managementGroupId": "00000000-0000-0000-0000-000000000000",
-                  "quotaAllocated": 75
-                }
-              ]
+              "resourceProviderScope": "providers/Microsoft.Compute/locations/westus"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Quota/groupQuotas/groupquota1/quotaAllocations/standardav2family",
+            "type": "Microsoft.Quota/quotaAllocations",
+            "name": "standardav2family",
+            "properties": {
+              "limit": 30,
+              "provisioningState": "Succeeded",
+              "resourceProviderScope": "providers/Microsoft.Compute/locations/westus"
             }
           }
         ],

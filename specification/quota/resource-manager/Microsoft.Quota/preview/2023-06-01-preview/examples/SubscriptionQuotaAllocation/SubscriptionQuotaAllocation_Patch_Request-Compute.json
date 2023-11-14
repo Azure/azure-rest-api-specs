@@ -3,14 +3,13 @@
   "parameters": {
     "mgId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceProviderScope": "providers/Microsoft.Compute/locations/westus",
     "groupQuotaName": "groupquota1",
     "resourceName": "cores",
     "api-version": "2023-06-01-preview",
     "allocateQuotaRequest": {
       "properties": {
         "resourceProviderScope": "providers/Microsoft.Compute/locations/westus",
-        "quotaAllocated": 75
+        "limit": 75
       }
     }
   },
@@ -22,14 +21,8 @@
         "name": "cores",
         "properties": {
           "limit": 100,
-          "nonShareableQuota": 25,
-          "provisioningState": "Accepted",
-          "quotaSources": [
-            {
-              "managementGroupId": "00000000-0000-0000-0000-000000000000",
-              "quotaAllocated": 75
-            }
-          ]
+          "shareableQuota": 75,
+          "provisioningState": "Succeeded"
         }
       }
     },
