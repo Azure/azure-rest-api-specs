@@ -783,7 +783,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterInQueryParamters"
+            "$ref": "#/parameters/FilterInQueryParameters"
           }
         ],
         "responses": {
@@ -829,7 +829,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterInQueryParamters"
+            "$ref": "#/parameters/FilterInQueryParameters"
           }
         ],
         "responses": {
@@ -875,7 +875,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterInQueryParamters"
+            "$ref": "#/parameters/FilterInQueryParameters"
           }
         ],
         "responses": {
@@ -921,7 +921,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterInQueryParamters"
+            "$ref": "#/parameters/FilterInQueryParameters"
           }
         ],
         "responses": {
@@ -970,7 +970,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterInQueryParamters"
+            "$ref": "#/parameters/FilterInQueryParameters"
           }
         ],
         "responses": {
@@ -1166,7 +1166,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterInQueryParamters"
+            "$ref": "#/parameters/FilterInQueryParameters"
           }
         ],
         "responses": {
@@ -1215,7 +1215,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterInQueryParamters"
+            "$ref": "#/parameters/FilterInQueryParameters"
           }
         ],
         "responses": {
@@ -1264,7 +1264,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterInQueryParamters"
+            "$ref": "#/parameters/FilterInQueryParameters"
           }
         ],
         "responses": {
@@ -1301,6 +1301,40 @@
       "x-ms-enum": {
         "name": "RequestState",
         "modelAsString": true
+      }
+    },
+    "QuotaAllocationRequestBase": {
+      "type": "object",
+      "description": "The new quota limit requested.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "$ref": "#/definitions/RequestState",
+              "readOnly": true
+            },
+            "limit": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The new quota limit for the subscription. The incremental quota will be assigned from pre-approved groupQuota."
+            },
+            "name": {
+              "$ref": "#/definitions/name",
+              "readOnly": true
+            },
+            "resourceProvider": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The name of the resource provider."
+            },
+            "location": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The azure location/region."
+            }
+          }
+        }
       }
     },
     "AssignedToSubscription": {
@@ -1346,12 +1380,12 @@
       "description": "ResourceProviderScope  for the quota request. Format: /providers/{ResourceProviderName}/locations/{Azure region} Example: /providers/{Microsoft.Compute}/locations/{eastus}. Please replace the ResourceProviderName, Azure region as per the requested resource.",
       "type": "string"
     },
-    "GroupQuotaDetails":  {
+    "GroupQuotaDetails": {
       "type": "object",
       "description": "Group Quota details.",
       "properties": {
         "resourceProviderScope": {
-        "$ref": "#/definitions/ResourceProviderScope"
+          "$ref": "#/definitions/ResourceProviderScope"
         },
         "limit": {
           "type": "integer",
@@ -1458,40 +1492,6 @@
           "description": "The URL to use for getting the next set of results.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "QuotaAllocationRequestBase": {
-      "type": "object",
-      "description": "The new quota limit requested.",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "properties": {
-            "provisioningState": {
-              "$ref": "#/definitions/RequestState",
-              "readOnly": true
-            },
-            "limit": {
-              "type": "integer",
-              "format": "int64",
-              "description": "The new quota limit for the subscription. The incremental quota will be assigned from pre-approved groupQuota."
-            },
-            "name": {
-              "$ref": "#/definitions/name",
-              "readOnly": true
-            },
-            "resourceProvider": {
-              "type": "string",
-              "readOnly": true,
-              "description": "The name of the resource provider."
-            },
-            "location": {
-              "type": "string",
-              "readOnly": true,
-              "description": "The azure location/region."
-            }
-          }
         }
       }
     },
@@ -1605,7 +1605,6 @@
           "readOnly": true,
           "description": "Representing the units of the usage quota. Possible values are: Count, Bytes, Seconds, Percent, CountPerSecond, BytesPerSecond. Based on - https://armwiki.azurewebsites.net/api_contracts/UsagesAPIContract.html?q=usages . Different RPs may have different units, Count, type as int64 should work for most of the integer values."
         }
-
       }
     },
     "SubmittedResourceRequestStatus": {
@@ -1809,13 +1808,13 @@
       "description": "The GroupQuota name. The name should be unique for the provided context tenantId/MgId.",
       "x-ms-parameter-location": "method"
     },
-    "FilterInQueryParamters": {
-        "name": "$filter",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "description": "| Field                    | Supported operators  \n|---------------------|------------------------\n\r\n|provider  eq {resourceProvider}  and location eq {location}\n Example: $filter= provider eq Microsoft.Compute and location eq eastus",
-        "minLength": 63
+    "FilterInQueryParameters": {
+      "name": "$filter",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "| Field                    | Supported operators  \n|---------------------|------------------------\n\r\n|provider  eq {resourceProvider}  and location eq {location}\n Example: $filter= provider eq Microsoft.Compute and location eq eastus",
+      "minLength": 63
     }
   }
 }
