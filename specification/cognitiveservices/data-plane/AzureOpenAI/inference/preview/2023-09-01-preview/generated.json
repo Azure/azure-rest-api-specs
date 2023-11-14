@@ -78,10 +78,10 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.file"
+            "$ref": "#/parameters/AudioTranscriptionJsonOptions"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.responseFormat"
+            "$ref": "#/parameters/AudioTranscriptionOptions.file"
           },
           {
             "$ref": "#/parameters/AudioTranscriptionOptions.language"
@@ -542,18 +542,15 @@
         "text"
       ]
     },
-    "AudioTranscriptionFormat": {
+    "AudioTranscriptionJsonFormat": {
       "type": "string",
       "description": "Defines available options for the underlying response format of output transcription information.",
       "enum": [
         "json",
-        "verbose_json",
-        "text",
-        "srt",
-        "vtt"
+        "verbose_json"
       ],
       "x-ms-enum": {
-        "name": "AudioTranscriptionFormat",
+        "name": "AudioTranscriptionJsonFormat",
         "modelAsString": true,
         "values": [
           {
@@ -565,24 +562,25 @@
             "name": "verbose_json",
             "value": "verbose_json",
             "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
-          },
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Use a response body that is plain text containing the raw, unannotated transcription."
-          },
-          {
-            "name": "srt",
-            "value": "srt",
-            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
-          },
-          {
-            "name": "vtt",
-            "value": "vtt",
-            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
           }
         ]
       }
+    },
+    "AudioTranscriptionJsonOptions": {
+      "type": "object",
+      "description": "The configuration information for an audio transcription request.",
+      "properties": {
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionJsonFormat",
+          "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+          "x-ms-client-name": "responseFormat"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AudioTranscriptionOptions"
+        }
+      ]
     },
     "AudioTranscriptionOptions": {
       "type": "object",
@@ -592,11 +590,6 @@
           "type": "string",
           "format": "byte",
           "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm."
-        },
-        "response_format": {
-          "$ref": "#/definitions/AudioTranscriptionFormat",
-          "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
-          "x-ms-client-name": "responseFormat"
         },
         "language": {
           "type": "string",
@@ -618,6 +611,52 @@
       },
       "required": [
         "file"
+      ]
+    },
+    "AudioTranscriptionPlainTextFormat": {
+      "type": "string",
+      "description": "Defines available options for the underlying response format of output transcription information.",
+      "enum": [
+        "text",
+        "srt",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionPlainTextFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Use a response body that is plain text containing the raw, unannotated transcription."
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+          }
+        ]
+      }
+    },
+    "AudioTranscriptionPlainTextOptions": {
+      "type": "object",
+      "description": "The configuration information for an audio transcription request.",
+      "properties": {
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionPlainTextFormat",
+          "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+          "x-ms-client-name": "responseFormat"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AudioTranscriptionOptions"
+        }
       ]
     },
     "AudioTranscriptionSegment": {
@@ -1942,6 +1981,35 @@
     }
   },
   "parameters": {
+    "AudioTranscriptionJsonOptions": {
+      "name": "response_format",
+      "in": "formData",
+      "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "json",
+        "verbose_json"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionJsonFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
+          },
+          {
+            "name": "verbose_json",
+            "value": "verbose_json",
+            "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "responseFormat"
+    },
     "AudioTranscriptionOptions.file": {
       "name": "file",
       "in": "formData",
@@ -1974,53 +2042,6 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "AudioTranscriptionOptions.responseFormat": {
-      "name": "response_format",
-      "in": "formData",
-      "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "json",
-        "verbose_json",
-        "text",
-        "srt",
-        "vtt"
-      ],
-      "x-ms-enum": {
-        "name": "AudioTranscriptionFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "json",
-            "value": "json",
-            "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
-          },
-          {
-            "name": "verbose_json",
-            "value": "verbose_json",
-            "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
-          },
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Use a response body that is plain text containing the raw, unannotated transcription."
-          },
-          {
-            "name": "srt",
-            "value": "srt",
-            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
-          },
-          {
-            "name": "vtt",
-            "value": "vtt",
-            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "responseFormat"
     },
     "AudioTranscriptionOptions.temperature": {
       "name": "temperature",

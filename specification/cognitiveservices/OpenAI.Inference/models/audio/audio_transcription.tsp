@@ -70,12 +70,6 @@ model AudioTranscriptionOptions {
   file: bytes;
 
   @doc("""
-  The requested format of the transcription response data, which will influence the content and detail of the result.
-  """)
-  @projectedName("json", "response_format")
-  responseFormat?: AudioTranscriptionPlainTextFormat | AudioTranscriptionJsonFormat;
-
-  @doc("""
   The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code
   such as 'en' or 'fr'.
   Providing this known input language is optional but may improve the accuracy and/or latency of transcription.
