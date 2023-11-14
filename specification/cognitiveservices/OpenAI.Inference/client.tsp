@@ -29,18 +29,9 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.OpenAI.AudioTranscriptionSegment, Access.public, "java");
 @@access(Azure.OpenAI.AudioTranslation, Access.public, "java");
 @@access(Azure.OpenAI.AudioTranslationSegment, Access.public, "java");
-@@access(Azure.OpenAI.AzureChatExtensionConfiguration, Access.public, "java");
-@@access(Azure.OpenAI.AzureChatExtensionType, Access.public, "java");
 @@access(Azure.OpenAI.AzureOpenAIOperationState, Access.public, "java");
-@@access(Azure.OpenAI.ChatChoice, Access.public, "java");
 @@access(Azure.OpenAI.ChatCompletions, Access.public, "java");
-// Error: Model 'ChatCompletionsOptions' cannot be set as access=public, as it refers Union 'FunctionCallPreset | FunctionName'
-// @@access(Azure.OpenAI.ChatCompletionsOptions, Access.public, "java");
-@@access(Azure.OpenAI.ChatMessage, Access.public, "java");
-@@access(Azure.OpenAI.ChatRole, Access.public, "java");
-@@access(Azure.OpenAI.FunctionCall, Access.public, "java");
-@@access(Azure.OpenAI.FunctionDefinition, Access.public, "java");
-@@access(Azure.OpenAI.FunctionName, Access.public, "java");
+@@access(Azure.OpenAI.ChatCompletionsOptions, Access.public, "java");
 
 @@access(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions,
   Access.public
