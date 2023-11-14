@@ -17,7 +17,7 @@ using TypeSpec.Versioning;
   "{endpoint}",
   "Azure Communication Routing Service",
   {
-    @doc("Uri of your ACS resource")
+    @doc("Uri of your Communication resource")
     endpoint: string,
   }
 )
