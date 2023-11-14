@@ -44,6 +44,8 @@ interface DeviceUpdateOperations {
   @get
   getUpdate is Azure.Core.Foundations.Operation<
     {
+      ...UpdateProviderParameter;
+      ...UpdateNameParameter;
       ...UpdateVersionParameter;
       ...IfNoneMatchParameter;
     },
@@ -86,6 +88,8 @@ interface DeviceUpdateOperations {
   @delete
   deleteUpdate is Azure.Core.Foundations.Operation<
     {
+      ...UpdateProviderParameter;
+      ...UpdateNameParameter;
       ...UpdateVersionParameter;
     },
     {
@@ -125,6 +129,7 @@ interface DeviceUpdateOperations {
   @get
   listVersions is Azure.Core.Foundations.Operation<
     {
+      ...UpdateProviderParameter;
       ...UpdateNameParameter;
     },
     StringsList,
@@ -138,6 +143,8 @@ interface DeviceUpdateOperations {
   @get
   listFiles is Azure.Core.Foundations.Operation<
     {
+      ...UpdateProviderParameter;
+      ...UpdateNameParameter;
       ...UpdateVersionParameter;
     },
     StringsList,
@@ -151,6 +158,8 @@ interface DeviceUpdateOperations {
   @get
   getFile is Azure.Core.Foundations.Operation<
     {
+      ...UpdateProviderParameter;
+      ...UpdateNameParameter;
       ...UpdateVersionParameter;
 
       /** File identifier. */

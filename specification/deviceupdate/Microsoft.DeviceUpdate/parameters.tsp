@@ -24,8 +24,6 @@ model UpdateProviderParameter {
 
 /** Update name parameter. */
 model UpdateNameParameter {
-  ...UpdateProviderParameter;
-
   /** Update name */
   @path
   name: string;
@@ -33,8 +31,6 @@ model UpdateNameParameter {
 
 /** Update version parameter. */
 model UpdateVersionParameter {
-  ...UpdateNameParameter;
-
   /** Update version */
   @path
   version: string;
