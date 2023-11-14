@@ -47,6 +47,7 @@ These settings apply only when `--tag=package-2023-09` is specified on the comma
 input-file:
   - Microsoft.OperationalInsights/stable/2023-09-01/Operations.json
   - Microsoft.OperationalInsights/stable/2023-09-01/Workspaces.json
+  - Microsoft.OperationalInsights/stable/2022-10-01/Tables.json
 ```
 ### Tag: package-2015-11-preview
 
