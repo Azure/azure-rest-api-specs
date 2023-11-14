@@ -9,7 +9,8 @@
       "properties": {
         "resourceProviderScope": "providers/Microsoft.Compute/locations/westus",
         "limit": 110,
-        "comment": "Contoso requires more quota."
+        "comment": "Contoso requires more quota.",
+        "name":{}
       }
     }
   },
@@ -21,16 +22,21 @@
         "name": "cores",
         "properties": {
           "limit": 100,
+          "comment": "",
           "name": {
             "value": "cores",
             "localizedValue": "Total Regional vCPUs"
           },
           "unit": "count",
-          "availableLimit": 80,
+          "availableLimit": 40,
           "assignedToSubscriptions": [
             {
               "subscriptionId": "00000000-0000-0000-0000-000000000000",
               "quotaAllocated": 20
+            },
+            {
+              "subscriptionId": "A0000000-0000-0000-0000-00000000000EF",
+              "quotaAllocated": 40
             }
           ],
           "provisioningState": "Succeeded"
