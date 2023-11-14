@@ -23,7 +23,7 @@ interface TextOperations {
       @projectedName("csharp", "options")
       @projectedName("python", "options")
       @projectedName("java", "options")
-      body: AnalyzeTextOptions;
+      options: AnalyzeTextOptions;
     },
     AnalyzeTextResult
   >;
@@ -41,7 +41,7 @@ interface ImageOperations {
       @projectedName("csharp", "options")
       @projectedName("python", "options")
       @projectedName("java", "options")
-      body: AnalyzeImageOptions;
+      options: AnalyzeImageOptions;
     },
     AnalyzeImageResult
   >;
@@ -81,7 +81,7 @@ interface TextBlocklists {
       @projectedName("csharp", "options")
       @projectedName("python", "options")
       @projectedName("java", "options")
-      body: AddOrUpdateTextBlocklistItemsOptions,
+      options: AddOrUpdateTextBlocklistItemsOptions,
     },
     AddOrUpdateTextBlocklistItemsResult
   >;
@@ -96,7 +96,7 @@ interface TextBlocklists {
       @projectedName("csharp", "options")
       @projectedName("python", "options")
       @projectedName("java", "options")
-      body: RemoveTextBlocklistItemsOptions,
+      options: RemoveTextBlocklistItemsOptions,
     },
     NoContentResponse
   >;
