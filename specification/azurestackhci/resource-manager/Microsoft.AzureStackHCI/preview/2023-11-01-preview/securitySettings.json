@@ -128,11 +128,7 @@
             "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "clusterName",
-            "in": "path",
-            "description": "Name of Cluster",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ClusterNameParameter"
           }
         ],
         "responses": {
@@ -331,37 +327,29 @@
     }
   },
   "definitions": {
-    "ClusterProperties": {
-      "type": "object",
-      "description": "A ClusterProperties"
-    },
-    "Clusters": {
-      "type": "object",
-      "description": "A Cluster",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ClusterProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of Cluster",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "name"
+     "ComplianceAssignmentType": {
+      "type": "string",
+      "description": "Compliance Assignment type",
+      "enum": [
+        "Audit",
+        "ApplyAndAutoCorrect"
       ],
-      "allOf": [
-        {
-          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
+      "x-ms-enum": {
+        "name": "ComplianceAssignmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Audit",
+            "value": "Audit",
+            "description": "Report on the state of the machine, but don't make changes."
+          },
+          {
+            "name": "ApplyAndAutoCorrect",
+            "value": "ApplyAndAutoCorrect",
+            "description": "Applied to the machine. If it drifts, the local service inside the machine makes a correction at the next evaluation."
+          }
+        ]
+      }
     },
     "ComplianceStatus": {
       "type": "string",
@@ -391,16 +379,6 @@
             "description": "The resource compliance status is pending"
           }
         ]
-      }
-    },
-    "DesiredSecurityCompliance": {
-      "type": "object",
-      "description": "SecuritySetting properties",
-      "properties": {
-        "securedCoreCompliance": {
-          "type": "boolean",
-          "description": "Secured Core Compliance"
-        }
       }
     },
     "ProvisioningState": {
@@ -463,27 +441,28 @@
       "properties": {
         "securedCoreCompliance": {
           "$ref": "#/definitions/ComplianceStatus",
-          "description": "Secured Core Compliance",
+          "description": "Indicates whether HCI hosts meets Secured-core server requirements.",
           "readOnly": true
         },
         "wdacCompliance": {
           "$ref": "#/definitions/ComplianceStatus",
-          "description": "WDAC Compliance",
+          "description": "Indicates whether HCI hosts have enforced consistent Windows Defender Application Control.",
           "readOnly": true
         },
         "dataAtRestEncrypted": {
           "$ref": "#/definitions/ComplianceStatus",
-          "description": "Data at rest Compliance",
+          "description": "Indicates whether data at-rest encryption is enabled on Azure Stack HCI clustered volumes.",
           "readOnly": true
         },
         "dataInTransitProtected": {
           "$ref": "#/definitions/ComplianceStatus",
-          "description": "Data In Transit Protected Compliance",
+          "description": "Indicates whether HCI cluster has data in-transit protection.",
           "readOnly": true
         },
-        "lastComplianceStatusChecked": {
+        "lastUpdated": {
           "type": "string",
-          "description": "Last Datetime Compliance Status Checked",
+	  "format": "date-time",
+          "description": "Time in UTC when compliance status was last updated.",
           "readOnly": true
         }
       }
@@ -492,9 +471,10 @@
       "type": "object",
       "description": "Security properties",
       "properties": {
-        "desiredSecurityCompliance": {
-          "$ref": "#/definitions/DesiredSecurityCompliance",
-          "description": "Security Desired Properties"
+        "securedCoreComplianceAssignment": {
+          "$ref": "#/definitions/ComplianceAssignmentType",
+          "description": "Secured Core Compliance Assignment",
+          "default": "Audit"
         },
         "securityComplianceStatus": {
           "$ref": "#/definitions/SecurityComplianceStatus",
