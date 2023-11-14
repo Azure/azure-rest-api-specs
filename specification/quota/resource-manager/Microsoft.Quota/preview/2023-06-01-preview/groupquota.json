@@ -1332,8 +1332,21 @@
               "description": "The new quota limit for the subscription. The incremental quota will be assigned from pre-approved groupQuota."
             },
             "name": {
-              "$ref": "#/definitions/name",
-              "readOnly": true
+              "type": "object",
+              "readOnly": true,
+              "description": "Name of the resource provided by the resource Provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+              "properties": {
+                "value": {
+                  "description": "Resource name.",
+                  "type": "string",
+                  "readOnly": true
+                },
+                "localizedValue": {
+                  "description": "Resource display name.",
+                  "type": "string",
+                  "readOnly": true
+                }
+              }
             },
             "resourceProviderScope": {
               "$ref": "#/definitions/ResourceProviderScope"
