@@ -1031,37 +1031,39 @@
           "description": "Job Type.",
           "type": "string"
         },
-        "status": {
-          "description": "Current running State of the job",
-          "enum": [
-            "Running",
-            "Processing",
-            "Stopped",
-            "Degraded",
-            "Failed",
-            "Unknown",
-            "Succeeded"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "JobExecutionRunningState",
-            "modelAsString": true
+        "properties": {
+          "status": {
+            "description": "Current running State of the job",
+            "enum": [
+              "Running",
+              "Processing",
+              "Stopped",
+              "Degraded",
+              "Failed",
+              "Unknown",
+              "Succeeded"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "JobExecutionRunningState",
+              "modelAsString": true
+            }
+          },
+          "startTime": {
+            "description": "Job execution start time.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "endTime": {
+            "description": "Job execution end time.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "template": {
+            "description": "Job's execution container.",
+            "$ref": "#/definitions/JobExecutionTemplate"
           }
-        },
-        "startTime": {
-          "description": "Job execution start time.",
-          "format": "date-time",
-          "type": "string"
-        },
-        "endTime": {
-          "description": "Job execution end time.",
-          "format": "date-time",
-          "type": "string"
-        },
-        "template": {
-          "description": "Job's execution container.",
-          "$ref": "#/definitions/JobExecutionTemplate"
         }
       }
     },
