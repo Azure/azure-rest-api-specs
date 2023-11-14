@@ -12,4 +12,5 @@ jobs:
   - pwsh: |
       $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 -GitClean -Verbose
     displayName: Validate Impacted Specs
+    ignoreLASTEXITCODE: true
     condition: succeededOrFailed()

@@ -4,7 +4,7 @@
 
 Please understand this diagram before proceeding. It explains how to get your PR approved & merged.
 
-![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/b321e1dc-5e07-4940-9cd6-a65ac6729a8b)
+![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/029a11fd-eaf9-4865-9d77-a16b5ea5eb26)
 
 [1] [ARM review queue] (for **merge** queues, see [4])  
 The PRs are processed by time opened, ascending. Your PR may show up on 2nd or later page. 
@@ -20,7 +20,7 @@ If you need further help with anything, see `Getting help` section below.
 
 What's the purpose of this PR? Check all that apply. This is **mandatory**!
 
-  - [ ] New API version. (Such PR should have been generated with [OpenAPI Hub](https://aka.ms/openapihub), per [this wiki doc](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).)
+  - [ ] New API version. (If API spec is not defined in TypeSpec, the PR should have been generated using [OpenAPI Hub](https://aka.ms/openapihub)).
   - [ ] Update existing version for a new feature. (This is applicable only when you are revising a private preview API version.)
   - [ ] Update existing version to fix swagger quality issues in S360.
   - [ ] Other, please clarify:
