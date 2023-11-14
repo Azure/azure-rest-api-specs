@@ -70,7 +70,7 @@
               "$ref": "#/definitions/GroupQuotasEntity"
             }
           },
-          "201": {
+          "202": {
             "description": "Request Accepted, Create or Update",
             "headers": {
               "Retry-After": {
@@ -316,7 +316,7 @@
               "$ref": "#/definitions/GroupQuotaSubscriptionId"
             }
           },
-          "201": {
+          "202": {
             "description": "Request Accepted, Create or Update",
             "headers": {
               "Retry-After": {
@@ -1225,7 +1225,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/QuotaAllocationRequestBase"
+              "$ref": "#/definitions/QuotaAllocationRequestStatus"
             }
           },
           "default": {
@@ -1832,7 +1832,7 @@
       "required": true,
       "type": "string",
       "description": "| Field                    | Supported operators  \r\n|---------------------|------------------------\n\r\n|provider  eq {resourceProvider}  and location eq {location}\n Example: $filter= provider eq Microsoft.Compute and location eq eastus",
-      "minLength": 63
+      "minLength": 24
     }
   }
 }
