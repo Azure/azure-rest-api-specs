@@ -86,6 +86,9 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
+            },
+            "schema":{
+              "$ref": "#/definitions/LROResponse"
             }
           },
           "default": {
@@ -329,6 +332,9 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
+            },
+            "schema":{
+              "$ref": "#/definitions/LROResponse"
             }
           },
           "default": {
@@ -670,6 +676,9 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
+            },
+            "schema":{
+              "$ref": "#/definitions/LROResponse"
             }
           },
           "default": {
@@ -1046,6 +1055,9 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
+            },
+            "schema":{
+              "$ref": "#/definitions/LROResponse"
             }
           },
           "default": {
@@ -1301,6 +1313,16 @@
         "requestedResource": {
           "$ref": "#/definitions/QuotaAllocationRequestBase"
         },
+        "provisioningState": {
+          "$ref": "#/definitions/RequestState",
+          "readOnly": true
+        }
+      }
+    },
+    "LROResponse":{
+      "type": "object",
+      "description": "The provisioning state for the operation.",
+      "properties": {
         "provisioningState": {
           "$ref": "#/definitions/RequestState",
           "readOnly": true
