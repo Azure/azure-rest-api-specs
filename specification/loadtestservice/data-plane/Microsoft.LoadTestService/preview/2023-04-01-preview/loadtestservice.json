@@ -188,7 +188,7 @@
           {
             "name": "testRunId",
             "in": "path",
-            "description": "Unique Id for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "description": "Unique test run identifier for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -196,20 +196,17 @@
             "pattern": "^[a-z0-9_-]*$"
           },
           {
-            "name": "oldTestRunId",
-            "in": "query",
-            "description": "Existing test run identifier that should be rerun, if this is provided, the\ntest will run with the JMX file, configuration and app components from the\nexisting test run. You can override the configuration values for new test run\nin the request body.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/OldTestRunIdQueryParam"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Load test run model",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TestRunUpdate"
-            }
+              "$ref": "#/definitions/TestRunCreateOrUpdate"
+            },
+            "x-ms-client-name": "resource"
           }
         ],
         "responses": {
@@ -1010,7 +1007,7 @@
           {
             "name": "testId",
             "in": "path",
-            "description": "Unique Id for the load test, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "description": "Unique test identifier for the load test, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -1020,11 +1017,12 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Load test model",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TestUpdate"
-            }
+              "$ref": "#/definitions/TestCreateOrUpdate"
+            },
+            "x-ms-client-name": "resource"
           }
         ],
         "responses": {
@@ -1670,11 +1668,11 @@
     },
     "AppComponent": {
       "type": "object",
-      "description": "An Azure resource object (Refer azure generic resource model :\nhttps://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
+      "description": "An Azure resource object (Refer azure generic resource model :https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "fully qualified resource Id e.g\nsubscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}",
+          "description": "fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}",
           "readOnly": true
         },
         "resourceName": {
@@ -1712,7 +1710,7 @@
     },
     "AppComponentUpdate": {
       "type": "object",
-      "description": "An Azure resource object (Refer azure generic resource model :\nhttps://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
+      "description": "An Azure resource object (Refer azure generic resource model :https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
       "properties": {
         "resourceName": {
           "type": "string",
@@ -1736,18 +1734,19 @@
       "type": "object",
       "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window.",
       "properties": {
-        "autoStopEnabled": {
+        "autoStopDisabled": {
           "type": "boolean",
-          "description": "Whether auto-stop should be enabled."
+          "description": "Whether auto-stop should be disabled. The default value is false.",
+          "default": false
         },
         "errorRate": {
           "type": "number",
           "format": "float",
           "description": "Threshold percentage of errors on which test run should be automatically stopped. Allowed values are in range of 0.0-100.0"
         },
-        "errorRateTimeWindow": {
+        "errorRateTimeWindowInSeconds": {
           "type": "integer",
-          "format": "uint32",
+          "format": "int32",
           "description": "Time window during which the error percentage should be evaluated in seconds."
         }
       }
@@ -1855,12 +1854,13 @@
       "properties": {
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "Container URL."
         },
         "expireDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Expiry time of the container (ISO 8601 literal format)"
+          "description": "Expiry time of the container (RFC3339 literal format)"
         }
       }
     },
@@ -2226,7 +2226,7 @@
         "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp for the metric value in ISO 8601 format."
+          "description": "The timestamp for the metric value in RFC3339 format."
         },
         "value": {
           "type": "number",
@@ -2279,12 +2279,12 @@
           "type": "string",
           "description": "Test URL. Provide the complete HTTP URL. For example, https://contoso-app.azurewebsites.net/login"
         },
-        "rps": {
+        "requestsPerSecond": {
           "type": "integer",
           "format": "int32",
-          "description": "Throughput required (requests per second)."
+          "description": "Target throughput (requests per second). This my not be necessarily achieved. The actual throughput will be lower if the application is not capable of handling it."
         },
-        "maxResponseTime": {
+        "maxResponseTimeInMs": {
           "type": "integer",
           "format": "int32",
           "description": "Maximum response time in milliseconds of the API/endpoint."
@@ -2912,9 +2912,9 @@
           "type": "string",
           "description": "Subnet ID on which the load test instances should run."
         },
-        "testType": {
-          "$ref": "#/definitions/TestType",
-          "description": "Type of test."
+        "kind": {
+          "$ref": "#/definitions/TestKind",
+          "description": "Kind of test."
         },
         "keyvaultReferenceIdentityType": {
           "type": "string",
@@ -2927,7 +2927,7 @@
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation datetime(ISO 8601 literal format).",
+          "description": "The creation datetime(RFC3339 literal format).",
           "readOnly": true
         },
         "createdBy": {
@@ -2938,7 +2938,7 @@
         "lastModifiedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last Modified datetime(ISO 8601 literal format).",
+          "description": "The last Modified datetime(RFC3339 literal format).",
           "readOnly": true
         },
         "lastModifiedBy": {
@@ -2970,7 +2970,7 @@
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation datetime(ISO 8601 literal format).",
+          "description": "The creation datetime(RFC3339 literal format).",
           "readOnly": true
         },
         "createdBy": {
@@ -2981,7 +2981,7 @@
         "lastModifiedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last Modified datetime(ISO 8601 literal format).",
+          "description": "The last Modified datetime(RFC3339 literal format).",
           "readOnly": true
         },
         "lastModifiedBy": {
@@ -3007,6 +3007,73 @@
         }
       }
     },
+    "TestCreateOrUpdate": {
+      "type": "object",
+      "description": "Load test model.",
+      "properties": {
+        "passFailCriteria": {
+          "$ref": "#/definitions/PassFailCriteria",
+          "description": "Pass fail criteria for a test."
+        },
+        "autoStopCriteria": {
+          "$ref": "#/definitions/AutoStopCriteria",
+          "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window."
+        },
+        "secrets": {
+          "type": "object",
+          "description": "Secrets can be stored in an Azure Key Vault or any other secret store. If the\nsecret is stored in an Azure Key Vault, the value should be the secret\nidentifier and the type should be AKV_SECRET_URI. If the secret is stored\nelsewhere, the secret value should be provided directly and the type should be\nSECRET_VALUE.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Secret"
+          }
+        },
+        "certificate": {
+          "$ref": "#/definitions/CertificateMetadata",
+          "description": "Certificates metadata."
+        },
+        "environmentVariables": {
+          "type": "object",
+          "description": "Environment variables which are defined as a set of <name,value> pairs.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "loadTestConfiguration": {
+          "$ref": "#/definitions/LoadTestConfiguration",
+          "description": "The load test configuration."
+        },
+        "baselineTestRunId": {
+          "type": "string",
+          "description": "Id of the test run to be marked as baseline to view trends of client-side metrics from recent test runs"
+        },
+        "description": {
+          "type": "string",
+          "description": "The test description.",
+          "maxLength": 100
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of a test.",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "Subnet ID on which the load test instances should run."
+        },
+        "kind": {
+          "$ref": "#/definitions/TestKind",
+          "description": "Kind of test."
+        },
+        "keyvaultReferenceIdentityType": {
+          "type": "string",
+          "description": "Type of the managed identity referencing the Key vault."
+        },
+        "keyvaultReferenceIdentityId": {
+          "type": "string",
+          "description": "Resource Id of the managed identity referencing the Key vault."
+        }
+      }
+    },
     "TestFileInfo": {
       "type": "object",
       "description": "Test file info.",
@@ -3017,6 +3084,7 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "File URL.",
           "readOnly": true
         },
@@ -3028,7 +3096,7 @@
         "expireDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Expiry time of the file (ISO 8601 literal format)",
+          "description": "Expiry time of the file (RFC3339 literal format)",
           "readOnly": true
         },
         "validationStatus": {
@@ -3066,7 +3134,7 @@
           "$ref": "#/definitions/TestFileInfo",
           "description": "File info"
         },
-        "urlTestsConfigFileInfo": {
+        "urlTestConfigFileInfo": {
           "$ref": "#/definitions/TestFileInfo",
           "description": "The config json file for url based test"
         },
@@ -3079,6 +3147,30 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
+      }
+    },
+    "TestKind": {
+      "type": "string",
+      "description": "Test kind",
+      "enum": [
+        "URL",
+        "JMX"
+      ],
+      "x-ms-enum": {
+        "name": "TestKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "URL",
+            "value": "URL",
+            "description": "URL Test"
+          },
+          {
+            "name": "JMX",
+            "value": "JMX",
+            "description": "JMX Test"
+          }
+        ]
       }
     },
     "TestRun": {
@@ -3181,13 +3273,13 @@
         "startDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The test run start DateTime(ISO 8601 literal format).",
+          "description": "The test run start DateTime(RFC3339 literal format).",
           "readOnly": true
         },
         "endDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The test run end DateTime(ISO 8601 literal format).",
+          "description": "The test run end DateTime(RFC3339 literal format).",
           "readOnly": true
         },
         "executedDateTime": {
@@ -3212,15 +3304,15 @@
           "description": "Subnet ID on which the load test instances should run.",
           "readOnly": true
         },
-        "testType": {
-          "$ref": "#/definitions/TestType",
+        "kind": {
+          "$ref": "#/definitions/TestKind",
           "description": "Type of test.",
           "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation datetime(ISO 8601 literal format).",
+          "description": "The creation datetime(RFC3339 literal format).",
           "readOnly": true
         },
         "createdBy": {
@@ -3231,7 +3323,7 @@
         "lastModifiedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last Modified datetime(ISO 8601 literal format).",
+          "description": "The last Modified datetime(RFC3339 literal format).",
           "readOnly": true
         },
         "lastModifiedBy": {
@@ -3263,7 +3355,7 @@
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation datetime(ISO 8601 literal format).",
+          "description": "The creation datetime(RFC3339 literal format).",
           "readOnly": true
         },
         "createdBy": {
@@ -3274,7 +3366,7 @@
         "lastModifiedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last Modified datetime(ISO 8601 literal format).",
+          "description": "The last Modified datetime(RFC3339 literal format).",
           "readOnly": true
         },
         "lastModifiedBy": {
@@ -3315,6 +3407,59 @@
         }
       }
     },
+    "TestRunCreateOrUpdate": {
+      "type": "object",
+      "description": "Load test run model",
+      "properties": {
+        "passFailCriteria": {
+          "$ref": "#/definitions/PassFailCriteria",
+          "description": "Pass fail criteria for a test."
+        },
+        "autoStopCriteria": {
+          "$ref": "#/definitions/AutoStopCriteria",
+          "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window."
+        },
+        "secrets": {
+          "type": "object",
+          "description": "Secrets can be stored in an Azure Key Vault or any other secret store. If the\nsecret is stored in an Azure Key Vault, the value should be the secret\nidentifier and the type should be AKV_SECRET_URI. If the secret is stored\nelsewhere, the secret value should be provided directly and the type should be\nSECRET_VALUE.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Secret"
+          }
+        },
+        "certificate": {
+          "$ref": "#/definitions/CertificateMetadata",
+          "description": "Certificates metadata"
+        },
+        "environmentVariables": {
+          "type": "object",
+          "description": "Environment variables which are defined as a set of <name,value> pairs.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "loadTestConfiguration": {
+          "$ref": "#/definitions/LoadTestConfiguration",
+          "description": "The load test configuration."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of a testRun.",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "testId": {
+          "type": "string",
+          "description": "Associated test Id.",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "The test run description.",
+          "maxLength": 100
+        }
+      }
+    },
     "TestRunFileInfo": {
       "type": "object",
       "description": "Test run file info.",
@@ -3325,6 +3470,7 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "File URL.",
           "readOnly": true
         },
@@ -3336,7 +3482,7 @@
         "expireDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Expiry time of the file (ISO 8601 literal format)",
+          "description": "Expiry time of the file (RFC3339 literal format)",
           "readOnly": true
         },
         "validationStatus": {
@@ -3426,7 +3572,7 @@
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation datetime(ISO 8601 literal format).",
+          "description": "The creation datetime(RFC3339 literal format).",
           "readOnly": true
         },
         "createdBy": {
@@ -3437,7 +3583,7 @@
         "lastModifiedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last Modified datetime(ISO 8601 literal format).",
+          "description": "The last Modified datetime(RFC3339 literal format).",
           "readOnly": true
         },
         "lastModifiedBy": {
@@ -3536,59 +3682,6 @@
         }
       }
     },
-    "TestRunUpdate": {
-      "type": "object",
-      "description": "Load test run model",
-      "properties": {
-        "passFailCriteria": {
-          "$ref": "#/definitions/PassFailCriteria",
-          "description": "Pass fail criteria for a test."
-        },
-        "autoStopCriteria": {
-          "$ref": "#/definitions/AutoStopCriteria",
-          "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window."
-        },
-        "secrets": {
-          "type": "object",
-          "description": "Secrets can be stored in an Azure Key Vault or any other secret store. If the\nsecret is stored in an Azure Key Vault, the value should be the secret\nidentifier and the type should be AKV_SECRET_URI. If the secret is stored\nelsewhere, the secret value should be provided directly and the type should be\nSECRET_VALUE.",
-          "additionalProperties": {
-            "$ref": "#/definitions/Secret"
-          }
-        },
-        "certificate": {
-          "$ref": "#/definitions/CertificateMetadata",
-          "description": "Certificates metadata"
-        },
-        "environmentVariables": {
-          "type": "object",
-          "description": "Environment variables which are defined as a set of <name,value> pairs.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "loadTestConfiguration": {
-          "$ref": "#/definitions/LoadTestConfiguration",
-          "description": "The load test configuration."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name of a testRun.",
-          "minLength": 2,
-          "maxLength": 50
-        },
-        "testId": {
-          "type": "string",
-          "description": "Associated test Id.",
-          "minLength": 2,
-          "maxLength": 50
-        },
-        "description": {
-          "type": "string",
-          "description": "The test run description.",
-          "maxLength": 100
-        }
-      }
-    },
     "TestServerMetricConfig": {
       "type": "object",
       "description": "Test server metrics configuration",
@@ -3608,7 +3701,7 @@
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation datetime(ISO 8601 literal format).",
+          "description": "The creation datetime(RFC3339 literal format).",
           "readOnly": true
         },
         "createdBy": {
@@ -3619,7 +3712,7 @@
         "lastModifiedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last Modified datetime(ISO 8601 literal format).",
+          "description": "The last Modified datetime(RFC3339 literal format).",
           "readOnly": true
         },
         "lastModifiedBy": {
@@ -3642,97 +3735,6 @@
           "additionalProperties": {
             "$ref": "#/definitions/ResourceMetricUpdate"
           }
-        }
-      }
-    },
-    "TestType": {
-      "type": "string",
-      "description": "Test type",
-      "enum": [
-        "URL",
-        "JMX"
-      ],
-      "x-ms-enum": {
-        "name": "TestType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "URL",
-            "value": "URL",
-            "description": "URL Test"
-          },
-          {
-            "name": "JMX",
-            "value": "JMX",
-            "description": "JMX Test"
-          }
-        ]
-      }
-    },
-    "TestUpdate": {
-      "type": "object",
-      "description": "Load test model.",
-      "properties": {
-        "passFailCriteria": {
-          "$ref": "#/definitions/PassFailCriteria",
-          "description": "Pass fail criteria for a test."
-        },
-        "autoStopCriteria": {
-          "$ref": "#/definitions/AutoStopCriteria",
-          "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window."
-        },
-        "secrets": {
-          "type": "object",
-          "description": "Secrets can be stored in an Azure Key Vault or any other secret store. If the\nsecret is stored in an Azure Key Vault, the value should be the secret\nidentifier and the type should be AKV_SECRET_URI. If the secret is stored\nelsewhere, the secret value should be provided directly and the type should be\nSECRET_VALUE.",
-          "additionalProperties": {
-            "$ref": "#/definitions/Secret"
-          }
-        },
-        "certificate": {
-          "$ref": "#/definitions/CertificateMetadata",
-          "description": "Certificates metadata."
-        },
-        "environmentVariables": {
-          "type": "object",
-          "description": "Environment variables which are defined as a set of <name,value> pairs.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "loadTestConfiguration": {
-          "$ref": "#/definitions/LoadTestConfiguration",
-          "description": "The load test configuration."
-        },
-        "baselineTestRunId": {
-          "type": "string",
-          "description": "Id of the test run to be marked as baseline to view trends of client-side metrics from recent test runs"
-        },
-        "description": {
-          "type": "string",
-          "description": "The test description.",
-          "maxLength": 100
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name of a test.",
-          "minLength": 2,
-          "maxLength": 50
-        },
-        "subnetId": {
-          "type": "string",
-          "description": "Subnet ID on which the load test instances should run."
-        },
-        "testType": {
-          "$ref": "#/definitions/TestType",
-          "description": "Type of test."
-        },
-        "keyvaultReferenceIdentityType": {
-          "type": "string",
-          "description": "Type of the managed identity referencing the Key vault."
-        },
-        "keyvaultReferenceIdentityId": {
-          "type": "string",
-          "description": "Resource Id of the managed identity referencing the Key vault."
         }
       }
     },
@@ -3815,7 +3817,7 @@
     "ListTestQueryParams.lastModifiedEndTime": {
       "name": "lastModifiedEndTime",
       "in": "query",
-      "description": "End DateTime(ISO 8601 literal format) of the last updated time range to filter tests.",
+      "description": "End DateTime(RFC3339 literal format) of the last updated time range to filter tests.",
       "required": false,
       "type": "string",
       "format": "date-time",
@@ -3824,7 +3826,7 @@
     "ListTestQueryParams.lastModifiedStartTime": {
       "name": "lastModifiedStartTime",
       "in": "query",
-      "description": "Start DateTime(ISO 8601 literal format) of the last updated time range to filter tests.",
+      "description": "Start DateTime(RFC3339 literal format) of the last updated time range to filter tests.",
       "required": false,
       "type": "string",
       "format": "date-time",
@@ -3859,7 +3861,7 @@
     "ListTestRunQueryParams.executionFrom": {
       "name": "executionFrom",
       "in": "query",
-      "description": "Start DateTime(ISO 8601 literal format) of test-run execution time filter range.",
+      "description": "Start DateTime(RFC3339 literal format) of test-run execution time filter range.",
       "required": false,
       "type": "string",
       "format": "date-time",
@@ -3868,7 +3870,7 @@
     "ListTestRunQueryParams.executionTo": {
       "name": "executionTo",
       "in": "query",
-      "description": "End DateTime(ISO 8601 literal format) of test-run execution time filter range.",
+      "description": "End DateTime(RFC3339 literal format) of test-run execution time filter range.",
       "required": false,
       "type": "string",
       "format": "date-time",
@@ -3984,6 +3986,14 @@
       "in": "query",
       "description": "The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.",
       "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OldTestRunIdQueryParam": {
+      "name": "oldTestRunId",
+      "in": "query",
+      "description": "Existing test run identifier that should be rerun, if this is provided, the\ntest will run with the JMX file, configuration and app components from the\nexisting test run. You can override the configuration values for new test run\nin the request body.",
+      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     }

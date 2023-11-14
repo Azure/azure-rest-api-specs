@@ -154,8 +154,9 @@ enum TimeGrain {
 }
 
 @added(APIVersions.v2023_04_01_preview)
-@doc("Test type")
-enum TestType {
+@doc("Test kind")
+// testtype to test kind
+enum TestKind {
   @doc("URL Test")
   URL,
 
@@ -226,8 +227,8 @@ SECRET_VALUE.
   subnetId?: string;
 
   @added(APIVersions.v2023_04_01_preview)
-  @doc("Type of test.")
-  testType?: TestType;
+  @doc("Kind of test.")
+  kind?: TestKind;
 
   @doc("Type of the managed identity referencing the Key vault.")
   keyvaultReferenceIdentityType?: string;
@@ -305,14 +306,17 @@ model CertificateMetadata {
 @added(APIVersions.v2023_04_01_preview)
 @doc("Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window.")
 model AutoStopCriteria {
-  @doc("Whether auto-stop should be enabled.")
-  autoStopEnabled?: boolean;
+  @doc("Whether auto-stop should be disabled. The default value is false.")
+  //update description with default values.
+  //change to use it false by default
+  autoStopDisabled?: boolean = false;
 
   @doc("Threshold percentage of errors on which test run should be automatically stopped. Allowed values are in range of 0.0-100.0")
   errorRate?: float32;
 
   @doc("Time window during which the error percentage should be evaluated in seconds.")
-  errorRateTimeWindow?: uint32;
+  // adding time unit in name
+  errorRateTimeWindowInSeconds?: int32;
 }
 
 @doc("Configurations for the load test.")
@@ -347,13 +351,13 @@ model OptionalLoadTestConfig {
   @doc("Test URL. Provide the complete HTTP URL. For example, https://contoso-app.azurewebsites.net/login")
   endpointUrl?: string;
 
-  @doc("Throughput required (requests per second).")
+  @doc("Target throughput (requests per second). This my not be necessarily achieved. The actual throughput will be lower if the application is not capable of handling it.")
   @added(APIVersions.v2023_04_01_preview)
-  rps?: int32;
+  requestsPerSecond?: int32;
 
   @doc("Maximum response time in milliseconds of the API/endpoint.")
   @added(APIVersions.v2023_04_01_preview)
-  maxResponseTime?: int32;
+  maxResponseTimeInMs?: int32;
 
   @doc("No of concurrent virtual users.")
   virtualUsers?: int32;
@@ -381,7 +385,8 @@ model TestInputArtifacts {
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("The config json file for url based test")
-  urlTestsConfigFileInfo?: TestFileInfo;
+  //name urlTest
+  urlTestConfigFileInfo?: TestFileInfo;
 
   @doc("Additional supported files for the test run")
   @visibility("read")
@@ -396,14 +401,15 @@ model FileInfo {
   fileName: string;
 
   @doc("File URL.")
+  //update description
   @visibility("read")
-  url?: string;
+  url?: url;
 
   @doc("File type")
   @visibility("read")
   fileType?: FileType;
 
-  @doc("Expiry time of the file (ISO 8601 literal format)")
+  @doc("Expiry time of the file (RFC3339 literal format)")
   @visibility("read")
   expireDateTime?: utcDateTime;
 
@@ -433,13 +439,11 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
 }
 
 @doc("""
-An Azure resource object (Refer azure generic resource model :
-https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)
+An Azure resource object (Refer azure generic resource model :https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)
 """)
 model AppComponent {
   @doc("""
-fully qualified resource Id e.g
-subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
+fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
 """)
   @visibility("read")
   resourceId: string;
@@ -581,11 +585,11 @@ SECRET_VALUE.
   @visibility("read")
   status?: Status;
 
-  @doc("The test run start DateTime(ISO 8601 literal format).")
+  @doc("The test run start DateTime(RFC3339 literal format).")
   @visibility("read")
   startDateTime?: utcDateTime;
 
-  @doc("The test run end DateTime(ISO 8601 literal format).")
+  @doc("The test run end DateTime(RFC3339 literal format).")
   @visibility("read")
   endDateTime?: utcDateTime;
 
@@ -608,7 +612,7 @@ SECRET_VALUE.
   @added(APIVersions.v2023_04_01_preview)
   @doc("Type of test.")
   @visibility("read")
-  testType?: TestType;
+  kind?: TestKind;
 
   ...SystemMetaData;
 }
@@ -728,12 +732,13 @@ model TestRunOutputArtifacts {
 }
 
 @doc("Container info.")
+// update description and name
 @added(APIVersions.v2023_04_01_preview)
 model ContainerInfo {
   @doc("Container URL.")
-  url?: string;
+  url?: url;
 
-  @doc("Expiry time of the container (ISO 8601 literal format)")
+  @doc("Expiry time of the container (RFC3339 literal format)")
   expireDateTime?: utcDateTime;
 }
 
@@ -828,6 +833,7 @@ model DimensionFilter {
 
 @doc("The response to a metrics query.")
 @friendlyName("Metrics")
+// using friendlyName to change the name of the model due to issue in using projectedName '@projectedName("json", "Metrics")' https://github.com/microsoft/typespec/issues/2276
 model Metrics is Azure.Core.Page<TimeSeriesElement>;
 
 @doc("The time series returned when a data query is performed.")
@@ -841,7 +847,7 @@ model TimeSeriesElement {
 
 @doc("Represents a metric value.")
 model MetricValue {
-  @doc("The timestamp for the metric value in ISO 8601 format.")
+  @doc("The timestamp for the metric value in RFC3339 format.")
   timestamp?: utcDateTime;
 
   @doc("The metric value.")
@@ -925,6 +931,18 @@ for metric id).
   ...SystemMetaData;
 }
 
+@doc("Query parameters for list test run operation")
+model OldTestRunIdQueryParam{
+  @doc("""
+Existing test run identifier that should be rerun, if this is provided, the
+test will run with the JMX file, configuration and app components from the
+existing test run. You can override the configuration values for new test run
+in the request body.
+""")
+  @query
+  oldTestRunId?: string;
+}
+
 @doc("Parameters for list test run operation")
 model ListTestRunQueryParams {
   @doc("""
@@ -946,11 +964,11 @@ the search parameter can be 500.
   @query
   testId?: string;
 
-  @doc("Start DateTime(ISO 8601 literal format) of test-run execution time filter range.")
+  @doc("Start DateTime(RFC3339 literal format) of test-run execution time filter range.")
   @query
   executionFrom?: utcDateTime;
 
-  @doc("End DateTime(ISO 8601 literal format) of test-run execution time filter range.")
+  @doc("End DateTime(RFC3339 literal format) of test-run execution time filter range.")
   @query
   executionTo?: utcDateTime;
 
@@ -981,13 +999,13 @@ the search parameter can be Login.
   search?: string;
 
   @doc("""
-Start DateTime(ISO 8601 literal format) of the last updated time range to filter tests.
+Start DateTime(RFC3339 literal format) of the last updated time range to filter tests.
 """)
   @query
   lastModifiedStartTime?: utcDateTime;
 
   @doc("""
-End DateTime(ISO 8601 literal format) of the last updated time range to filter tests.
+End DateTime(RFC3339 literal format) of the last updated time range to filter tests.
 """)
   @query
   lastModifiedEndTime?: utcDateTime;
@@ -999,7 +1017,7 @@ End DateTime(ISO 8601 literal format) of the last updated time range to filter t
 
 @doc("System metadata.")
 model SystemMetaData {
-  @doc("The creation datetime(ISO 8601 literal format).")
+  @doc("The creation datetime(RFC3339 literal format).")
   @visibility("read")
   createdDateTime?: utcDateTime;
 
@@ -1007,7 +1025,7 @@ model SystemMetaData {
   @visibility("read")
   createdBy?: string;
 
-  @doc("The last Modified datetime(ISO 8601 literal format).")
+  @doc("The last Modified datetime(RFC3339 literal format).")
   @visibility("read")
   lastModifiedDateTime?: utcDateTime;
 

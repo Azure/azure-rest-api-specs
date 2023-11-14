@@ -15,35 +15,14 @@ using OpenAPI;
 
 namespace Microsoft.LoadTestService;
 
+@@projectedName(Azure.Core.Foundations.ResourceBody.resource, "json", "body");
+@@projectedName(Azure.Core.Foundations.ResourceBody.resource, "client", "body");
+
 @tag("Test")
 interface LoadTestAdministration {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Create a new test or update an existing test by providing the test Id.")
   @doc("Create a new test or update an existing test by providing the test Id.")
-  @route("/tests/{testId}")
-  @patch
-  createOrUpdateTest is Azure.Core.Foundations.Operation<
-    {
-      @header
-      @doc("Content type.")
-      contentType: "application/merge-patch+json";
-
-      @doc("""
-Unique Id for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testId: string;
-
-      @doc("Load test model")
-      @body
-      body: Test;
-    },
-    ResourceCreatedOrOkResponse<Test>
-  >;
+  createOrUpdateTest is StandardResourceOperations.ResourceCreateOrUpdate<Test>;
 
   @summary("Delete a test by its test Id.")
   @doc("Delete a test by its test Id.")
@@ -66,7 +45,7 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
     ListQueryParametersTrait<ListTestQueryParams>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" //Our operation is not following the standard put behavior https://github.com/Azure/typespec-azure/issues/3743
   #suppress "@azure-tools/typespec-azure-core/byos" //It is limiting for users to have storage first before creating a load test also it will be breaking change for us.
   @summary("""
 Upload input file for a given test Id. File size can't be more than 50 MB.
@@ -227,41 +206,10 @@ interface LoadTestRun {
   getTestRun is StandardResourceOperations.ResourceRead<TestRun>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+
   @summary("Create and start a new test run with the given test run Id.")
   @doc("Create and start a new test run with the given test run Id.")
-  @route("/test-runs/{testRunId}")
-  @patch
-  createOrUpdateTestRun is Azure.Core.Foundations.Operation<
-  {
-  @header
-  @doc("Content type.")
-  contentType: "application/merge-patch+json";
-
-      @doc("""
-Unique Id for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
-
-      @doc("""
-Existing test run identifier that should be rerun, if this is provided, the
-test will run with the JMX file, configuration and app components from the
-existing test run. You can override the configuration values for new test run
-in the request body.
-""")
-      @query
-      oldTestRunId?: string;
-
-      @doc("Load test run model")
-      @body
-      body: TestRun;
-    },
-    ResourceCreatedOrOkResponse<TestRun>
-  >;
+  createOrUpdateTestRun is StandardResourceOperations.ResourceCreateOrUpdate<TestRun, QueryParametersTrait<OldTestRunIdQueryParam>>;
 
   @summary("Delete an existing load test run.")
   @doc("Delete an existing load test run by providing the testRunId.")

@@ -24,7 +24,7 @@ interface AdministrationOperations {
   getTestFile is LoadTestAdministration.getTestFile;
   listTestFiles is LoadTestAdministration.listTestFiles;
   listTests is LoadTestAdministration.listTests;
-  #suppress "@azure-tools/typespec-azure-core/byos"
+  #suppress "@azure-tools/typespec-azure-core/byos" //It is limiting for users to have storage first before creating a load test also it will be breaking change for us.
   @projectedName("python", "BeginUploadTestFile")
   uploadTestFile is LoadTestAdministration.uploadTestFile;
   deleteTestFile is LoadTestAdministration.deleteTestFile;
