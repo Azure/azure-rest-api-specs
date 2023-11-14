@@ -34,13 +34,19 @@
       "scopes": {
         "https://quantum.microsoft.com/.default": "client credential scope"
       }
+    },
+    "quantum_api_key": {
+      "type": "apiKey",
+      "name": "x-ms-quanutum-api-key",
+      "in": "header"
     }
   },
   "security": [
     {
       "AzureAuth": [
         "https://quantum.microsoft.com/.default"
-      ]
+      ],
+      "quantum_api_key": []
     }
   ],
   "paths": {
