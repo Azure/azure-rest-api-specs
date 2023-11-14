@@ -1026,7 +1026,7 @@ model PassThroughQueueSelectorAttachment extends QueueSelectorAttachment {
   kind: QueueSelectorAttachmentKind.passThrough;
 }
 
-@projectedName("java","PassThroughWorkerSelectorAttachmentInternal")
+@projectedName("java", "PassThroughWorkerSelectorAttachmentInternal")
 @doc("Attaches a worker selector where the value is passed through from a job's label with the same key.")
 model PassThroughWorkerSelectorAttachment extends WorkerSelectorAttachment {
   @doc("The label key to query against.")
