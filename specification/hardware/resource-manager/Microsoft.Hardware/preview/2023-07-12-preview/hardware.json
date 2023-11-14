@@ -77,6 +77,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/Operations_List.json"
+          }
         }
       }
     },
@@ -97,19 +102,9 @@
           {
             "name": "body",
             "in": "body",
-													  
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "body": {
-                  "$ref": "#/definitions/Order",
-                  "description": "The orderPreview request"
-                }
-              },
-              "required": [
-                "body"
-              ]
+			  "$ref": "#/definitions/Order"
             }
           }
         ],
