@@ -59,7 +59,7 @@
         "tags": [
           "Pricings"
         ],
-        "description": "Get the Defender plans pricing configurations of the selected scope (valid scopes are resource id or a subscription id). At the resource level, supported resource types are 'VirtualMachines & VMSS'.",
+        "description": "Get the Defender plans pricing configurations of the selected scope (valid scopes are resource id or a subscription id). At the resource level, supported resource types are 'VirtualMachines, VMSS and ARC Machines'.",
         "operationId": "Pricings_Get",
         "parameters": [
           {
@@ -105,7 +105,7 @@
         "tags": [
           "Pricings"
         ],
-        "description": "Updates a provided Microsoft Defender for Cloud pricing configuration in the scope. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines & VMSS' and only for plan='VirtualMachines' and subPlan='P1').",
+        "description": "Updates a provided Microsoft Defender for Cloud pricing configuration in the scope. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS and ARC Machines' and only for plan='VirtualMachines' and subPlan='P1').",
         "operationId": "Pricings_Update",
         "parameters": [
           {
@@ -151,7 +151,7 @@
         "tags": [
           "Pricings"
         ],
-        "description": "Deletes a provided Microsoft Defender for Cloud pricing configuration in a specific resource. Valid only for resource scope (Supported resources are: 'VirtualMachines & VMSS').",
+        "description": "Deletes a provided Microsoft Defender for Cloud pricing configuration in a specific resource. Valid only for resource scope (Supported resources are: 'VirtualMachines, VMSS and ARC MachinesS').",
         "operationId": "Pricings_Delete",
         "parameters": [
           {
@@ -196,7 +196,7 @@
         "tags": [
           "Pricings"
         ],
-        "description": "Lists Microsoft Defender for Cloud pricing configurations of the scopeId, that match the optional given $filter. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines & VMSS'). Valid $filter is: 'name in ({planName1},{planName2},...)'. If $filter is not provided, the unfiltered list will be returned. If '$filter=name in (planName1,planName2)' is provided, the returned list includes the pricings set for 'planName1' and 'planName2' only.",
+        "description": "Lists Microsoft Defender for Cloud pricing configurations of the scopeId, that match the optional given $filter. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS and ARC Machines'). Valid $filter is: 'name in ({planName1},{planName2},...)'. If $filter is not provided, the unfiltered list will be returned. If '$filter=name in (planName1,planName2)' is provided, the returned list includes the pricings set for 'planName1' and 'planName2' only.",
         "operationId": "Pricings_List",
         "parameters": [
           {
@@ -287,7 +287,7 @@
         },
         "subPlan": {
           "type": "string",
-          "description": "The sub-plan selected for a Standard pricing configuration, when more than one sub-plan is available. Each sub-plan enables a set of security features. When not specified, full plan is applied."
+          "description": "The sub-plan selected for a Standard pricing configuration, when more than one sub-plan is available. Each sub-plan enables a set of security features. When not specified, full plan is applied. For VirtualMachines plan, available sub plans are 'P1' & 'P2', where for resource level private preview, only 'P1' sub plan is supported."
         },
         "freeTrialRemainingTime": {
           "type": "string",
