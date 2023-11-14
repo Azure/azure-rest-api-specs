@@ -341,7 +341,6 @@ interface OrderPreviewInterface {
     ...ApiVersionParameter,
 
     @doc("The orderPreview request")
-    @body
-    body: OrderProperties,
+    body: Order,
   ): Order | ErrorResponse;
 }
