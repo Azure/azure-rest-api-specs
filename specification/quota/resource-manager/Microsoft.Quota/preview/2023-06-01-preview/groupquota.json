@@ -823,9 +823,6 @@
             "$ref": "#/parameters/MgIdInParameters"
           },
           {
-            "$ref": "#/parameters/ScopeInParameters"
-          },
-          {
             "$ref": "#/parameters/GroupQuotaNameInParameters"
           },
           {
@@ -1345,13 +1342,16 @@
         }
       }
     },
+    "ResourceProviderScope": {
+      "description": "ResourceProviderScope  for the quota request. Format: /providers/{ResourceProviderName}/locations/{Azure region} Example: /providers/{Microsoft.Compute}/locations/{eastus}. Please replace the ResourceProviderName, Azure region as per the requested resource.",
+      "type": "string"
+    },
     "GroupQuotaDetails":  {
       "type": "object",
       "description": "Group Quota details.",
       "properties": {
         "resourceProviderScope": {
-          "description": "ResourceProviderScope  for the quota request. Format: /providers/{ResourceProviderName}/locations/{Azure region} Example: /providers/{Microsoft.Compute}/locations/{eastus}. Please replace the ResourceProviderName, Azure region as per the requested resource.",
-          "type": "string"
+        "$ref": "#/definitions/ResourceProviderScope"
         },
         "limit": {
           "type": "integer",
@@ -1364,6 +1364,7 @@
         },
         "name": {
           "type": "object",
+          "readOnly": false,
           "description": "Name of the resource provided by the resource Provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
           "properties": {
             "value": {
@@ -1460,9 +1461,9 @@
         }
       }
     },
-    "SubscriptionQuotaAllocationRequest": {
+    "QuotaAllocationRequestBase": {
       "type": "object",
-      "description": "The new quota limit for the subscription.",
+      "description": "The new quota limit requested.",
       "properties": {
         "properties": {
           "type": "object",
@@ -1475,6 +1476,20 @@
               "type": "integer",
               "format": "int64",
               "description": "The new quota limit for the subscription. The incremental quota will be assigned from pre-approved groupQuota."
+            },
+            "name": {
+              "$ref": "#/definitions/name",
+              "readOnly": true
+            },
+            "resourceProvider": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The name of the resource provider."
+            },
+            "location": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The azure location/region."
             }
           }
         }
@@ -1487,7 +1502,7 @@
           "type": "array",
           "description": "Assigned Group Quota to subscriptions.",
           "items": {
-            "$ref": "#/definitions/SubscriptionQuotaAllocationRequest"
+            "$ref": "#/definitions/QuotaAllocationRequestBase"
           },
           "x-ms-identifiers": []
         },
@@ -1502,9 +1517,9 @@
       "type": "object",
       "description": "MGId the source of groupQuota.",
       "properties": {
-        "managementGroupId": {
+        "groupQuotaId": {
           "type": "string",
-          "description": "The management group id of the quota source."
+          "description": "The groupQuota id of the quota source."
         },
         "quotaAllocated": {
           "type": "integer",
@@ -1512,14 +1527,6 @@
           "description": "The amount of quota allocated to this subscriptionId from the quota source."
         }
       }
-    },
-    "SubscriptionGroupQuotaAssignmentList": {
-      "type": "array",
-      "description": "Assigned Group Quota to subscriptions.",
-      "items": {
-        "$ref": "#/definitions/SubscriptionGroupQuotaAssignment"
-      },
-      "x-ms-identifiers": []
     },
     "SubscriptionQuotaAllocations": {
       "type": "object",
@@ -1540,11 +1547,14 @@
       "type": "object",
       "description": "Subscription Quota details.",
       "properties": {
+        "resourceProviderScope": {
+          "$ref": "#/definitions/ResourceProviderScope"
+        },
         "limit": {
           "type": "integer",
           "format": "int64",
           "description": "The total quota limit for the subscription.",
-          "readOnly": true
+          "readOnly": false
         },
         "nonShareableQuota": {
           "type": "integer",
@@ -1555,9 +1565,6 @@
         "provisioningState": {
           "$ref": "#/definitions/RequestState",
           "readOnly": true
-        },
-        "quotaSources": {
-          "$ref": "#/definitions/SubscriptionGroupQuotaAssignmentList"
         }
       }
     },
@@ -1585,7 +1592,8 @@
       "properties": {
         "resourceName": {
           "type": "string",
-          "description": "The resource name, such as SKU name."
+          "description": "The resource name, such as SKU name.",
+          "readOnly": true
         },
         "limits": {
           "type": "integer",
@@ -1597,6 +1605,7 @@
           "readOnly": true,
           "description": "Representing the units of the usage quota. Possible values are: Count, Bytes, Seconds, Percent, CountPerSecond, BytesPerSecond. Based on - https://armwiki.azurewebsites.net/api_contracts/UsagesAPIContract.html?q=usages . Different RPs may have different units, Count, type as int64 should work for most of the integer values."
         }
+
       }
     },
     "SubmittedResourceRequestStatus": {
@@ -1605,7 +1614,7 @@
       "properties": {
         "requestedResource": {
           "description": "Requested Resource.",
-          "$ref": "#/definitions/ResourceBaseRequest"
+          "$ref": "#/definitions/quotaAllocationRequestBase"
         },
         "status": {
           "$ref": "#/definitions/RequestState",
