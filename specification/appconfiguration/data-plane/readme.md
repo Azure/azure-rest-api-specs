@@ -15,6 +15,7 @@ To build the SDK for AppConfiguration, simply [Install AutoRest](https://aka.ms/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
@@ -24,11 +25,19 @@ To see additional help and options, run:
 These are the global settings for the AppConfiguration API.
 
 ``` yaml
-# common
 openapi-type: data-plane
-tag: package-2023-11-01
+tag: package-preview-2023-11
 ```
 
+
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - Microsoft.AppConfiguration/preview/2023-11-11-preview/appconfiguration.json
+```
 ### Tag: package-2023-11-01
 
 These settings apply only when `--tag=package-2023-11-01` is specified on the command line.
@@ -91,6 +100,7 @@ csharp:
   clear-output-folder: true
   add-credentials: true
 ```
+
 ## Suppression
 
 ``` yaml
@@ -120,7 +130,8 @@ directive:
     where: $.parameters.SyncTokens
     reason: The latest sync token should be used on every request. It is more proper to be globally stored per client rather than passed in for individual requests.
 ```
-## Multi-API/Profile support for AutoRest v3 generators 
+
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -138,11 +149,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
