@@ -1025,56 +1025,66 @@
       }
     },
     "JobExecution": {
-      "properties":{
-        "description": "Container Apps Job execution.",
-        "type": "object",
+      "description": "Container Apps Job execution.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
         "properties": {
-          "name": {
-            "description": "Job execution Name.",
-            "type": "string"
-          },
-          "id": {
-            "description": "Job execution Id.",
-            "type": "string"
-          },
-          "type": {
-            "description": "Job Type.",
-            "type": "string"
-          },
-          "status": {
-            "description": "Current running State of the job",
-            "enum": [
-              "Running",
-              "Processing",
-              "Stopped",
-              "Degraded",
-              "Failed",
-              "Unknown",
-              "Succeeded"
-            ],
-            "type": "string",
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "JobExecutionRunningState",
-              "modelAsString": true
+          "description": "Container Apps Job execution specific properties.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Job execution Name.",
+              "type": "string"
+            },
+            "id": {
+              "description": "Job execution Id.",
+              "type": "string"
+            },
+            "type": {
+              "description": "Job Type.",
+              "type": "string"
+            },
+            "status": {
+              "description": "Current running State of the job",
+              "enum": [
+                "Running",
+                "Processing",
+                "Stopped",
+                "Degraded",
+                "Failed",
+                "Unknown",
+                "Succeeded"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "JobExecutionRunningState",
+                "modelAsString": true
+              }
+            },
+            "startTime": {
+              "description": "Job execution start time.",
+              "format": "date-time",
+              "type": "string"
+            },
+            "endTime": {
+              "description": "Job execution end time.",
+              "format": "date-time",
+              "type": "string"
+            },
+            "template": {
+              "description": "Job's execution container.",
+              "$ref": "#/definitions/JobExecutionTemplate"
             }
-          },
-          "startTime": {
-            "description": "Job execution start time.",
-            "format": "date-time",
-            "type": "string"
-          },
-          "endTime": {
-            "description": "Job execution end time.",
-            "format": "date-time",
-            "type": "string"
-          },
-          "template": {
-            "description": "Job's execution container.",
-            "$ref": "#/definitions/JobExecutionTemplate"
           }
         }
-      }
+      },
+      "x-ms-client-flatten": true
     },
     "ContainerAppJobExecutions": {
       "description": "Container App executions collection ARM resource.",
