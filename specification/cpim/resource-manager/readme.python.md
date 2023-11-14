@@ -8,6 +8,8 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-azureadexternalidentities
 package-version: 1.0.0b2
 no-namespace-folders: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Python multi-api
@@ -54,4 +56,3 @@ These settings apply only when `--tag=package-2019-01-01-preview --python` is sp
 namespace: azure.mgmt.azureadexternalidentities.v2019_01_01_preview
 output-folder: $(python-sdks-folder)/azureadexternalidentities/azure-mgmt-azureadexternalidentities/azure/mgmt/azureadexternalidentities/v2019_01_01_preview
 ```
-
