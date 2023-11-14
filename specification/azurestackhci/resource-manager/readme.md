@@ -59,6 +59,7 @@ directive:
       - updateSummaries.json
       - deploymentSettings.json
       - edgeDevices.json
+      - securitySettings.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
   - code: PathResourceProviderNamePascalCase
@@ -84,7 +85,8 @@ suppressions:
       - updateRuns.json
       - updateSummaries.json
       - deploymentSettings.json
-      - edgeDevices.json    
+      - edgeDevices.json
+      - securitySettings.json   
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -128,6 +130,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/offers.json
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/operations.json
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/publishers.json
+  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/securitySettings.json
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/skus.json
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updateRuns.json
   - Microsoft.AzureStackHCI/preview/2023-11-01-preview/updateSummaries.json
