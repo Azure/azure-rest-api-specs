@@ -21,6 +21,7 @@ interface TextOperations {
       @body
       @doc("The text analysis request.")
       @projectedName("csharp", "options")
+      @projectedName("python", "options")
       @projectedName("java", "options")
       body: AnalyzeTextOptions;
     },
@@ -38,6 +39,7 @@ interface ImageOperations {
       @doc("The image analysis request.")
       @body
       @projectedName("csharp", "options")
+      @projectedName("python", "options")
       @projectedName("java", "options")
       body: AnalyzeImageOptions;
     },
@@ -49,6 +51,8 @@ interface BlockOps
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &
       NoConditionalRequests &
       NoClientRequestId> {}
+
+@@projectedName(Azure.Core.Foundations.ResourceBody.resource, "client", "options");
 
 interface TextBlocklists {
   @summary("Get Text Blocklist By blocklistName")
@@ -75,8 +79,9 @@ interface TextBlocklists {
       @doc("Options for adding or updating blocklist items.")
       @body
       @projectedName("csharp", "options")
+      @projectedName("python", "options")
       @projectedName("java", "options")
-      options: AddOrUpdateTextBlocklistItemsOptions,
+      body: AddOrUpdateTextBlocklistItemsOptions,
     },
     AddOrUpdateTextBlocklistItemsResult
   >;
@@ -89,8 +94,9 @@ interface TextBlocklists {
       @doc("Options for removing blocklist items.")
       @body
       @projectedName("csharp", "options")
+      @projectedName("python", "options")
       @projectedName("java", "options")
-      options: RemoveTextBlocklistItemsOptions,
+      body: RemoveTextBlocklistItemsOptions,
     },
     NoContentResponse
   >;

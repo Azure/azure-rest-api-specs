@@ -113,7 +113,7 @@ model ImageData {
 
   @doc("The blob url of the image.")
   @projectedName("csharp", "BlobUri")
-  @projectedName("java", "BlobUri")
+  @projectedName("java", "blobUri")
   blobUrl?: url;
 }
 
@@ -141,7 +141,7 @@ model TextBlocklist {
   @visibility("read", "create", "query")
   @maxLength(64)
   @projectedName("csharp", "Name")
-  @projectedName("java", "Name")
+  @projectedName("java", "name")
   blocklistName: string;
 
   @doc("Text blocklist description.")
