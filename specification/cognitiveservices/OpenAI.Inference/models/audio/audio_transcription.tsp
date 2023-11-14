@@ -7,6 +7,34 @@ using TypeSpec.Versioning;
 
 @doc("Defines available options for the underlying response format of output transcription information.")
 @added(ServiceApiVersions.v2023_09_01_Preview)
+enum AudioTranscriptionPlainTextFormat {
+  @doc("Use a response body that is plain text containing the raw, unannotated transcription.")
+  text: "text",
+
+  @doc("Use a response body that is plain text in SubRip (SRT) format that also includes timing information.")
+  srt: "srt",
+
+  @doc("""
+    Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information.
+    """)
+  vtt: "vtt",
+}
+
+@doc("Defines available options for the underlying response format of output transcription information.")
+@added(ServiceApiVersions.v2023_09_01_Preview)
+enum AudioTranscriptionJsonFormat {
+  @doc("Use a response body that is a JSON object containing a single 'text' field for the transcription.")
+  json: "json",
+
+  @doc("""
+    Use a response body that is a JSON object containing transcription text along with timing, segments, and other
+    metadata.
+    """)
+  verbose_json: "verbose_json",
+}
+
+@doc("Defines available options for the underlying response format of output transcription information.")
+@added(ServiceApiVersions.v2023_09_01_Preview)
 enum AudioTranscriptionFormat {
   @doc("Use a response body that is a JSON object containing a single 'text' field for the transcription.")
   json: "json",
@@ -45,7 +73,7 @@ model AudioTranscriptionOptions {
   The requested format of the transcription response data, which will influence the content and detail of the result.
   """)
   @projectedName("json", "response_format")
-  responseFormat?: AudioTranscriptionFormat;
+  responseFormat?: AudioTranscriptionPlainTextFormat | AudioTranscriptionJsonFormat;
 
   @doc("""
   The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code
@@ -75,6 +103,30 @@ model AudioTranscriptionOptions {
   // clients if operation parameters are used and populated into the request body on an as-needed basis.
   @projectedName("csharp", "InternalNonAzureModelName")
   `model`?: string;
+}
+
+@doc("""
+The configuration information for an audio transcription request.
+""")
+@added(ServiceApiVersions.v2023_09_01_Preview)
+model AudioTranscriptionPlainTextOptions extends AudioTranscriptionOptions {
+  @doc("""
+  The requested format of the transcription response data, which will influence the content and detail of the result.
+  """)
+  @projectedName("json", "response_format")
+  responseFormat?: AudioTranscriptionPlainTextFormat;
+}
+
+@doc("""
+The configuration information for an audio transcription request.
+""")
+@added(ServiceApiVersions.v2023_09_01_Preview)
+model AudioTranscriptionJsonOptions extends AudioTranscriptionOptions {
+  @doc("""
+  The requested format of the transcription response data, which will influence the content and detail of the result.
+  """)
+  @projectedName("json", "response_format")
+  responseFormat?: AudioTranscriptionJsonFormat;
 }
 
 @doc("""

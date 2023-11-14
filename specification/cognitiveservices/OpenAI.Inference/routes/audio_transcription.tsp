@@ -28,7 +28,7 @@ written language corresponding to the language it was spoken in.
 @sharedRoute
 op getAudioTranscriptionAsPlainText is Azure.Core.Foundations.ResourceOperation<
   Deployment,
-  AudioTranscriptionOptions,  // response_format must be one of: text, srt, vtt
+  AudioTranscriptionPlainTextOptions,  // response_format must be one of: text, srt, vtt
   string,
   MultipartFormDataRequestHeadersTraits
 >;
@@ -44,7 +44,7 @@ written language corresponding to the language it was spoken in.
 @sharedRoute
 op getAudioTranscriptionAsResponseObject is Azure.Core.ResourceAction<
   Deployment,
-  AudioTranscriptionOptions,  // response_format must be unspecified (json) or one of: json, verbose_json
+  AudioTranscriptionJsonOptions,  // response_format must be unspecified (json) or one of: json, verbose_json
   AudioTranscription,
   MultipartFormDataRequestHeadersTraits
 >;
