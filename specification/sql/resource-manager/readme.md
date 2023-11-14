@@ -31,10 +31,10 @@ tag: package-composite-v5
 
 The following packages may be composed from multiple api-versions.
 
-### Tag: package-composite-v5
-These settings apply only when `--tag=package-composite-v5` is specified on the command line.
+### Tag: package-preview-2023-05
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
 
-```yaml $(tag) == 'package-composite-v5'
+```yaml $(tag) == 'package-preview-2023-05'
 input-file:
   - Microsoft.Sql/preview/2023-05-01-preview/BackupShortTermRetentionPolicies.json
   - Microsoft.Sql/preview/2023-05-01-preview/BlobAuditing.json
@@ -1184,7 +1184,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobTargetGroups.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobVersions.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/LocationCapabilities.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionPolicies.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/MaintenanceWindowOptions.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/MaintenanceWindows.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedBackupShortTermRetentionPolicies.json
@@ -1243,7 +1242,6 @@ input-file:
 - ./Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUploads.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/Usages.json
-- ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionBackups.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionManagedInstanceBackups.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
@@ -1292,6 +1290,8 @@ input-file:
 - ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseSqlVulnerabilityAssessmentsSettings.json
 - ./Microsoft.Sql/preview/2023-02-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2023-02-01-preview/FailoverGroups.json
+- ./Microsoft.Sql/preview/2023-05-01-preview/LongTermRetentionBackups.json
+- ./Microsoft.Sql/preview/2023-05-01-preview/LongTermRetentionPolicies.json
 
 
 # Needed when there is more than one input file
