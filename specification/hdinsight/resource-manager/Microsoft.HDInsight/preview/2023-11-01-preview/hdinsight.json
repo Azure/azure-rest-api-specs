@@ -934,6 +934,13 @@
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The system query option to filter job returned in the response. Allowed value is 'jobName eq {jobName}' or 'jarName eq {jarName}'."
           }
         ],
         "responses": {
@@ -2524,6 +2531,65 @@
         },
         "catalogOptions": {
           "$ref": "#/definitions/FlinkCatalogOptions"
+        },
+        "deploymentMode": {
+          "description": "A string property that indicates the deployment mode of Flink cluster. It can have one of the following enum values => Application, Session. Default value is Session",
+          "type": "string",
+          "enum": [
+            "Application",
+            "Session"
+          ],
+          "x-ms-enum": {
+            "name": "deploymentMode",
+            "modelAsString": true
+          }
+        },
+        "jobSpec": {
+          "$ref": "#/definitions/FlinkJobProfile"
+        }
+      }
+    },
+    "FlinkJobProfile": {
+      "type": "object",
+      "description": "Job specifications for flink clusters in application deployment mode. The specification is immutable even if job properties are changed by calling the RunJob API, please use the ListJob API to get the latest job information.",
+      "required": [
+        "jobJarDirectory",
+        "jarName",
+        "upgradeMode"
+      ],
+      "properties": {
+        "jobJarDirectory": {
+          "description": "A string property that specifies the directory where the job JAR is located.",
+          "type": "string"
+        },
+        "jarName": {
+          "description": "A string property that represents the name of the job JAR.",
+          "type": "string"
+        },
+        "entryClass": {
+          "description": "A string property that specifies the entry class for the Flink job.",
+          "type": "string"
+        },
+        "args": {
+          "description": "A string property representing additional JVM arguments for the Flink job. It should be space separated value.",
+          "type": "string"
+        },
+        "savePointName": {
+          "description": "A string property that represents the name of the savepoint for the Flink job",
+          "type": "string"
+        },
+        "upgradeMode": {
+          "description": "A string property that indicates the upgrade mode to be performed on the Flink job. It can have one of the following enum values => STATELESS_UPDATE, SAVEPOINT, LAST_STATE_UPDATE.",
+          "type": "string",
+          "enum": [
+            "STATELESS_UPDATE",
+            "SAVEPOINT",
+            "LAST_STATE_UPDATE"
+          ],
+          "x-ms-enum": {
+            "name": "upgradeMode",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3255,15 +3321,16 @@
     "FlinkJobProperties": {
       "description": "Properties of flink job.",
       "type": "object",
-      "required": [
-        "jobName"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ClusterJobProperties"
         }
       ],
       "properties": {
+        "runId": {
+          "description": "Run id of job",
+          "type": "string"
+        },
         "jobName": {
           "description": "Name of job",
           "type": "string"
@@ -3300,7 +3367,9 @@
             "CANCEL",
             "SAVEPOINT",
             "LIST_SAVEPOINT",
-            "DELETE"
+            "DELETE",
+            "LAST_STATE_UPDATE",
+            "RE_LAUNCH"
           ],
           "x-ms-enum": {
             "name": "action",
