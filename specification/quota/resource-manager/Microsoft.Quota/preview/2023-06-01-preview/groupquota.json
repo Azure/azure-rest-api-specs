@@ -660,7 +660,7 @@
               "$ref": "#/definitions/GroupQuotaLimit"
             }
           },
-          "201": {
+          "202": {
             "description": "Request Created. Create or Update",
             "headers": {
               "Retry-After": {
@@ -678,7 +678,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/GroupQuotaLimit"
+              "$ref": "#/definitions/QuotaAllocationRequestStatus"
             }
           },
           "default": {
@@ -747,6 +747,9 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/QuotaAllocationRequestStatus"
             }
           },
           "default": {
@@ -1036,7 +1039,7 @@
               "$ref": "#/definitions/SubscriptionQuotaAllocations"
             }
           },
-          "201": {
+          "202": {
             "description": "Request Created. Create or Update",
             "headers": {
               "Retry-After": {
@@ -1054,7 +1057,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/SubscriptionQuotaAllocations"
+              "$ref": "#/definitions/QuotaAllocationRequestStatus"
             }
           },
           "default": {
@@ -1127,6 +1130,9 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/QuotaAllocationRequestStatus"
             }
           },
           "default": {
@@ -1213,16 +1219,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/FilterInQueryParameters"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SubscriptionQuotaAllocationRequest"
+              "$ref": "#/definitions/QuotaAllocationRequestBase"
             }
           },
           "default": {
@@ -1303,6 +1306,19 @@
         "modelAsString": true
       }
     },
+    "QuotaAllocationRequestStatus": {
+      "type": "object",
+      "description": "The new quota limit request status.",
+      "properties": {
+        "requestedResource": {
+          "$ref": "#/definitions/QuotaAllocationRequestBase"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/RequestState",
+          "readOnly": true
+        }
+      }
+    },
     "QuotaAllocationRequestBase": {
       "type": "object",
       "description": "The new quota limit requested.",
@@ -1310,10 +1326,6 @@
         "properties": {
           "type": "object",
           "properties": {
-            "provisioningState": {
-              "$ref": "#/definitions/RequestState",
-              "readOnly": true
-            },
             "limit": {
               "type": "integer",
               "format": "int64",
@@ -1323,15 +1335,8 @@
               "$ref": "#/definitions/name",
               "readOnly": true
             },
-            "resourceProvider": {
-              "type": "string",
-              "readOnly": true,
-              "description": "The name of the resource provider."
-            },
-            "location": {
-              "type": "string",
-              "readOnly": true,
-              "description": "The azure location/region."
+            "resourceProviderScope": {
+              "$ref": "#/definitions/resourceProviderScope"
             }
           }
         }
@@ -1398,7 +1403,7 @@
         },
         "name": {
           "type": "object",
-          "readOnly": false,
+          "readOnly": true,
           "description": "Name of the resource provided by the resource Provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
           "properties": {
             "value": {
@@ -1613,7 +1618,7 @@
       "properties": {
         "requestedResource": {
           "description": "Requested Resource.",
-          "$ref": "#/definitions/quotaAllocationRequestBase"
+          "$ref": "#/definitions/QuotaAllocationRequestBase"
         },
         "status": {
           "$ref": "#/definitions/RequestState",
