@@ -24,11 +24,10 @@ using Azure.ClientGenerator.Core;
 @@usage(Azure.OpenAI.ImageGenerations, Usage.input | Usage.output);
 
 // Java will need to have those models expose in public surface.
-@@access(Azure.OpenAI.AudioTaskLabel, Access.public, "java");
 @@access(Azure.OpenAI.AudioTranscription, Access.public, "java");
-@@access(Azure.OpenAI.AudioTranscriptionSegment, Access.public, "java");
+@@access(Azure.OpenAI.AudioTranscriptionOptions, Access.public, "java");
 @@access(Azure.OpenAI.AudioTranslation, Access.public, "java");
-@@access(Azure.OpenAI.AudioTranslationSegment, Access.public, "java");
+@@access(Azure.OpenAI.AudioTranslationOptions, Access.public, "java");
 @@access(Azure.OpenAI.AzureOpenAIOperationState, Access.public, "java");
 @@access(Azure.OpenAI.ChatCompletions, Access.public, "java");
 @@access(Azure.OpenAI.ChatCompletionsOptions, Access.public, "java");
