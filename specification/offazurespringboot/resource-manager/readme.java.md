@@ -13,6 +13,7 @@ title: SpringAppsDiscoveryClient
 description: "Spring App Discovery Client"
 ```
 
+
 ### Java multi-api
 
 ``` yaml $(java) && $(multiapi)
