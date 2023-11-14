@@ -412,6 +412,84 @@
         },
         "deprecated": false
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/listKeys": {
+      "post": {
+        "description": "Get the keys to use with the Quantum APIs. A key is used to authenticate and authorize access to the Quantum REST APIs. Only one key is needed at a time; two are given to provide seamless key regeneration.",
+        "operationId": "Workspace_ListKeys",
+        "x-ms-examples": {
+          "ListKeys": {
+            "$ref": "./examples/ListKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceKeys"
+            }
+          },
+          "404": {
+            "description": "The specified Workspace does not exist."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/regenerateKey": {
+      "post": {
+        "description": "Regenerate either the primary or secondary key for use with the Quantum APIs. The old key will stop working immediately.",
+        "operationId": "Workspace_RegenerateKeys",
+        "x-ms-examples": {
+          "RegenerateKey": {
+            "$ref": "./examples/RegenerateKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "keySpecification",
+            "in": "body",
+            "required": true,
+            "description": "Which key to regenerate:  primary or secondary.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceKeySpecification"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful."
+          },
+          "404": {
+            "description": "The specified Workspace does not exist."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -496,6 +574,57 @@
         }
       ]
     },
+    "WorkspaceKey": {
+      "description": "Result of list workspace keys.",
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "type": "string"
+        },
+        "key": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The secondary workspace key."
+        }
+      }
+    },
+    "WorkspaceKeys": {
+      "description": "Result of list workspace keys.",
+      "type": "object",
+      "properties": {
+        "workspaceKeyEnabled": {
+          "type": "boolean",
+          "description": "Indicator of enablement of the Quantum Workspace keys."
+        },
+        "primaryKey": {
+          "$ref": "#/definitions/WorkspaceKey"
+        },
+        "secondaryKey": {
+          "$ref": "#/definitions/WorkspaceKey"
+        },
+        "primaryConnectionString": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The connection string of the primary workspace key."
+        },
+        "secondaryConnectionString ": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The connection string of the secondary workspace key."
+        }
+      }
+    },
+    "WorkspaceKeySpecification": {
+      "properties": {
+        "keys": {
+          "description": "A list of all the previously uploaded data.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "TagsObject": {
       "properties": {
         "tags": {
@@ -575,8 +704,6 @@
           "readOnly": true
         },
         "properties": {
-          "type": "object",
-          "description": "A list of provider-specific properties.",
           "$ref": "#/definitions/ProviderProperties"
         }
       }
