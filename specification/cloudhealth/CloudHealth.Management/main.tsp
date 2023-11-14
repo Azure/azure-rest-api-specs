@@ -577,7 +577,8 @@ model RelationshipProperties {
 
 alias TimestampQueryParam = {
   @doc("Timestamp to use for the operation. When specified, the version of the resource at this point in time is retrieved. If not specified, the latest version is used.")
-  @query timestamp?: utcDateTime;
+  @query
+  timestamp?: utcDateTime;
 };
 
 @armResourceOperations
@@ -592,10 +593,7 @@ interface HealthModels {
 
 @armResourceOperations
 interface SignalDefinitions {
-  get is ArmResourceRead<
-    SignalDefinition,
-    BaseParameters<SignalDefinition> & TimestampQueryParam
-  >;
+  get is ArmResourceRead<SignalDefinition>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<SignalDefinition>;
   delete is ArmResourceDeleteSync<SignalDefinition>;
 
@@ -616,7 +614,7 @@ interface AuthenticationSettings {
 
 @armResourceOperations
 interface Entities {
-  get is ArmResourceRead<Entity, BaseParameters<Entity> & TimestampQueryParam>;
+  get is ArmResourceRead<Entity>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<Entity>;
   delete is ArmResourceDeleteSync<Entity>;
 
@@ -628,10 +626,7 @@ interface Entities {
 
 @armResourceOperations
 interface Relationships {
-  get is ArmResourceRead<
-    Relationship,
-    BaseParameters<Relationship> & TimestampQueryParam
-  >;
+  get is ArmResourceRead<Relationship>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<Relationship>;
   delete is ArmResourceDeleteSync<Relationship>;
 
