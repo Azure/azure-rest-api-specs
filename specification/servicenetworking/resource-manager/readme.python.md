@@ -11,9 +11,14 @@ package-name: azure-mgmt-servicenetworking
 namespace: azure.mgmt.servicenetworking
 package-version: 1.0.0b1
 clear-output-folder: true
+modelerfour:
+  group-parameters: false
+  flatten-models: false
+  flatten-payloads: false
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/servicenetworking/azure-mgmt-servicenetworking/azure/mgmt/servicenetworking
 ```
+
