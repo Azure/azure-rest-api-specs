@@ -226,7 +226,6 @@ directive:
   - suppress: R2018 # XmsEnumValidation
     where:
       - $.definitions.AADToken.properties.type
-    from: BatchService.json
     reason: Single-value enums are expressed to force the values to be used for de/serialization but should not be exposed or settable by the a client.
 
   - suppress: R2029
@@ -438,6 +437,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Batch/preview/2023-11-01.18.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2020-09-01.12.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2020-03-01.11.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2019-08-01.10.0/BatchService.json
