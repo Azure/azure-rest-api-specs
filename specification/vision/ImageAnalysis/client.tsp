@@ -15,7 +15,6 @@ using Azure.ClientGenerator.Core;
 @@access(ImageAnalysis.ReadResult, Access.public, "csharp");
 @@access(ImageAnalysis.SmartCropsResult, Access.public, "csharp");
 @@access(ImageAnalysis.TagsResult, Access.public, "csharp");
-@@access(ImageAnalysis.VisualFeatures, Access.public, "csharp");
 @@access(ImageAnalysis.DenseCaption, Access.public, "csharp");
 @@access(ImageAnalysis.DetectedObject, Access.public, "csharp");
 @@access(ImageAnalysis.DetectedPerson, Access.public, "csharp");
@@ -27,3 +26,5 @@ using Azure.ClientGenerator.Core;
 @@access(ImageAnalysis.DocumentStyle, Access.public, "csharp");
 @@access(ImageAnalysis.DocumentWord, Access.public, "csharp");
 @@access(ImageAnalysis.ImageBoundingBox, Access.public, "csharp");
+
+@@projectedName(ImageAnalysis.VisualFeatures, "csharp", "VisualFeaturesImpl");
