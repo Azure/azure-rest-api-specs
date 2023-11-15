@@ -30,13 +30,13 @@ openapi-type: data-plane
 tag: package-2023-05.17.0
 ```
 
-### Tag: package-2023-05.17.0-preview
+### Tag: package-2023-11.18.0-preview
 
-These settings apply only when `--tag=package-2023-05.17.0-preview` is specified on the command line.
+These settings apply only when `--tag=package-2023-11.18.0-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-05.17.0-preview'
+```yaml $(tag) == 'package-2023-11.18.0-preview'
 input-file:
-  - Azure.Batch/preview/2023-05-01.17.0/BatchService.json
+  - Azure.Batch/preview/2023-11-01.18.0/BatchService.json
 ```
 
 ### Tag: package-2023-05.17.0
