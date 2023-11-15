@@ -7,7 +7,7 @@ using TypeSpec.Http;
 
 namespace PurviewDataMap;
 
-interface EntityOperations {
+interface Entity {
   @doc("""
 Create or update an entity.
 Existing entity is matched using its unique guid if
@@ -792,7 +792,7 @@ be changed to other unique attributes)
   >;
 }
 
-interface GlossaryOperations {
+interface Glossary {
   @doc("""
 Get all glossaries. Recommend using limit/offset to get pagination result.
 Recommend using 'ignoreTermsAndCategories=true' and fetch terms/categories
@@ -1394,7 +1394,7 @@ to get pagination result.
   >;
 }
 
-interface DiscoveryOperations {
+interface Discovery {
   @doc("Get data using search.")
   @route("/search/query")
   @post
@@ -1432,7 +1432,7 @@ interface DiscoveryOperations {
   >;
 }
 
-interface LineageOperations {
+interface Lineage {
   @doc("Get lineage info of the entity specified by GUID.")
   @route("/atlas/v2/lineage/{guid}")
   @get
@@ -1522,7 +1522,7 @@ be changed to other unique attributes)
   >;
 }
 
-interface RelationshipOperations {
+interface Relationship {
   @doc("Create a new relationship between entities.")
   @route("/atlas/v2/relationship")
   @post
@@ -1582,7 +1582,7 @@ be created.
   >;
 }
 
-interface TypeOperations {
+interface TypeDef{
   @doc("Get the businessMetadata definition for the given guid.")
   @route("/atlas/v2/types/businessmetadatadef/guid/{guid}")
   @get
