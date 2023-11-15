@@ -11,6 +11,8 @@ export class FolderStructureRule implements Rule {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
+    let gitRoot = path.normalize(await host.gitOperation(folder).revparse("--show-toplevel"));
+    let relativePath = path.relative(gitRoot, folder);
 
     stdOutput += `folder: ${folder}\n`;
     if (!(await host.checkFileExists(folder))) {
@@ -31,7 +33,7 @@ export class FolderStructureRule implements Rule {
     });
 
     // Verify top level folder is lower case
-    let folderStruct = folder.split("/");
+    let folderStruct = relativePath.split("/");
     if (folderStruct[1].match(/[A-Z]/g)) {
       success = false;
       errorOutput += `Invalid folder name. Folders under specification/ must be lower case.\n`;

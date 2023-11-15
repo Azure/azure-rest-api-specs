@@ -19,7 +19,9 @@ export async function main() {
   };
   const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
   const folder = parsedArgs.positionals[0].split(path.sep).join("/");
-  console.log("Running TypeSpecValidation on folder:", folder);
+  const absolutePath = path.resolve(folder);
+
+  console.log("Running TypeSpecValidation on folder:", absolutePath);
 
   const host = new TsvRunnerHost();
 
@@ -36,7 +38,7 @@ export async function main() {
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i];
     console.log("\nExecuting rule: " + rule.name);
-    const result = await rule.execute(host, folder);
+    const result = await rule.execute(host, absolutePath);
     if (result.stdOutput) console.log(result.stdOutput);
     if (!result.success) {
       success = false;
