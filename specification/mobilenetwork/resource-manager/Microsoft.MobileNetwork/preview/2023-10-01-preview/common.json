@@ -597,6 +597,18 @@
         ]
       }
     },
+    "EndpointSecurityGroup": {
+      "type": "object",
+      "description": "A group of User Equipment endpoints to which security policy can be applied.",
+      "properties": {
+        "name": {
+          "description": "The name of the endpoint security group.",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+          "maxLength": 64
+        }
+      }
+    },
     "ManagedServiceIdentityType": {
       "description": "Type of managed service identity (currently only UserAssigned allowed).",
       "enum": [
