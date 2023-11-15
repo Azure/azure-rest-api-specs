@@ -29,6 +29,7 @@ enum Versions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
+#suppress "@azure-tools/typespec-azure-core/XmsEnumValidation" "The enum types should have x-ms-enum type extension set with appropriate options."
 @doc("The Azure Active Directory OAuth2 Flow")
 model AADToken
   is OAuth2Auth<[
