@@ -138,7 +138,7 @@
           "Azure Large Instances"
         ],
         "operationId": "AzureLargeInstance_CreateResource",
-        "summary": "Initialize Azure Large Instance in the specified subscription and resource group, even with pending provisioning",
+        "summary": "Create a tracked Azure Large Instance in the specified subscription and resource group, only if there is an available reserved instance.",
         "description": "Created a tracked resource checking availability per location and sku.",
         "x-ms-examples": {
           "Create an Azure Large Instances resource": {
@@ -156,7 +156,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AzureResourceCreationProperties"
+            "$ref": "#/parameters/AzureLargeInstanceResourceCreationParam"
           }
         ],
         "responses": {
@@ -166,18 +166,12 @@
               "$ref": "#/definitions/AzureLargeInstance"
             }
           },
-          "422": {
-            "description": "Unprocessable Entity. The server understands your request but cannot process it due to issues with the specified location and SKU. Please validate the provided information with your point of contact. Alternatively, you may initiate the pre-provisioning process with our commerce team for further assistance."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1155,8 +1149,8 @@
       "description": "When set to 'active', this parameter empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server",
       "x-ms-parameter-location": "method"
     },
-    "AzureResourceCreationProperties": {
-      "name": "AzureLargeInstanceCreate",
+    "AzureLargeInstanceResourceCreationParam": {
+      "name": "azureLargeInstanceResourceCreationParam",
       "in": "body",
       "required": true,
       "schema": {
