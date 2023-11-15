@@ -595,7 +595,7 @@ default is false.
     {
       @doc("Accept header")
       @header
-      Accept: "application/octet-stream";
+      accept: "application/octet-stream";
     },
     void
   >;

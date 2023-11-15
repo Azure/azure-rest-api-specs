@@ -854,7 +854,9 @@ batch, and will return new token in each response unless there's no more data.
 
   @doc("The filter for the search. See examples for the usage of supported filters.")
   filter?: unknown;
+  @doc("The facets for search. See examples for the usage of supported facets.")
   facets?: SearchFacetItem[];
+  @doc("The taxonomy setting for search.")
   taxonomySetting?: SearchRequestTaxonomySetting;
 }
 
@@ -1875,9 +1877,4 @@ model AtlasTypeDefHeader {
 
   @doc("The name of the type definition.")
   name?: string;
-}
-
-model PathsEsavagAtlasV2EntityBusinessmetadataImportPostRequestbodyContentMultipartFormDataSchema {
-  @doc("InputStream of file")
-  uploadedInputStream?: bytes;
 }
