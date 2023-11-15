@@ -36,17 +36,42 @@ enum EnclaveEndpointProtocol {
   AH,
 }
 
+#suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+@removed(Microsoft.Mission.Versions.v2023_11_01_preview)
 @doc("Enclave Endpoint Rule Properties")
-model EnclaveEndpointDestinationRule extends EndpointRuleBase {
+model EnclaveEndpointRule {
+  @doc("Endpoint Rule Name.")
+  name?: string;
+
+  @doc("IP Address. Can include multiple CIDR/IP Addresses separated by commas.")
+  address?: string;
+
+  @doc("Port. Can include multiple ports separated by commas or a range indicated by a hyphen.")
+  port?: string;
+
+  @doc("Protocol. Options specified by Endpoint Protocol Enum.")
+  protocol?: EnclaveEndpointProtocol;
+}
+
+@doc("Enclave Endpoint Rule Properties")
+model EnclaveEndpointDestinationRule is EndpointRuleBase {
   @doc("Protocol. Options specified by Endpoint Protocol Enum.")
   protocol?: EnclaveEndpointProtocol[];
 }
 
 @doc("Enclave Endpoint Resource properties")
 model EnclaveEndpointProperties {
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
+  @added(Microsoft.Mission.Versions.v2023_11_01_preview)
   @extension("x-ms-identifiers", [])
   @doc("Enclave Endpoint Rule Collection.")
   ruleCollection: EnclaveEndpointDestinationRule[];
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+  @removed(Microsoft.Mission.Versions.v2023_11_01_preview)
+  @extension("x-ms-identifiers", ["name"])
+  @doc("Endpoint Rule Collection.")
+  endpointRuleCollection?: EnclaveEndpointRule[];
 
   @doc("Provisioning State.")
   @visibility("read")
