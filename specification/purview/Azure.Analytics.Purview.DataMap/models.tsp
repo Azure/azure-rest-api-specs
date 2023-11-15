@@ -961,7 +961,7 @@ The search score calculated by the search engine. The results are ordered by
 search score by default.
 """)
   @projectedName("json", "@search.score")
-  SearchScore?: float32;
+  searchScore?: float32;
 
   @doc("""
 A highlight list that consists of index fields id ,qualifiedName, name,
@@ -970,7 +970,7 @@ the field, attached with emphasis mark, is returned as an element of
 @search.highlights.
 """)
   @projectedName("json", "@search.highlights")
-  SearchHighlights?: SearchHighlights;
+  searchHighlights?: SearchHighlights;
 
   @doc("""
 The object type of the record. Object type is the top-level property to
@@ -1448,6 +1448,8 @@ model AtlasBaseTypeDef {
 model DateFormat {
   @doc("An array of available locales.")
   availableLocales?: string[];
+
+  @doc("Calendar")
   calendar?: float32;
 
   @doc("The date format.")
