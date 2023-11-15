@@ -132,47 +132,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      },
-      "put": {
-        "tags": [
-          "Azure Large Instances"
-        ],
-        "operationId": "AzureLargeInstance_CreateResource",
-        "summary": "Create a tracked Azure Large Instance in the specified subscription and resource group, only if there is an available reserved instance.",
-        "description": "Created a tracked resource checking availability per location and sku.",
-        "x-ms-examples": {
-          "Create an Azure Large Instances resource": {
-            "$ref": "./examples/AzureLargeInstance_CreateResource.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AzureLargeInstanceResourceCreationParam"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AzureLargeInstance"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstances/{azureLargeInstanceName}/start": {
@@ -435,6 +394,50 @@
           },
           {
             "$ref": "#/parameters/AzureLargeInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureLargeInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Azure Large Instances"
+        ],
+        "operationId": "AzureLargeInstance_CreateResource",
+        "summary": "Create a tracked Azure Large Instance in the specified subscription and resource group, only if there is an available reserved instance.",
+        "description": "Created a tracked resource checking availability per location and sku.",
+        "x-ms-examples": {
+          "Create an Azure Large Instances resource": {
+            "$ref": "./examples/AzureLargeInstance_CreateResource.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureLargeInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureLargeInstanceResourceCreationParam"
           }
         ],
         "responses": {
