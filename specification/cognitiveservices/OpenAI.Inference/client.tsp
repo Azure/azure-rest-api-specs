@@ -29,8 +29,6 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.OpenAI.AudioTranslation, Access.public, "java");
 @@access(Azure.OpenAI.AudioTranslationOptions, Access.public, "java");
 @@access(Azure.OpenAI.AzureOpenAIOperationState, Access.public, "java");
-@@access(Azure.OpenAI.ChatCompletions, Access.public, "java");
-@@access(Azure.OpenAI.ChatCompletionsOptions, Access.public, "java");
 
 @@access(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions,
   Access.public
