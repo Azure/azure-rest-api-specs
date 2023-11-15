@@ -545,6 +545,7 @@ default is false.
 """)
       @query
       isOverwrite: boolean;
+      @doc("BusinessMetadata payload")
       @body businessMetadata: Record<unknown>;
     },
     void
@@ -562,6 +563,8 @@ default is false.
       @doc("The globally unique identifier of the entity.")
       @path
       guid: string;
+
+      @doc("Business metadata attribute payload")
       @body businessMetadataAttributes: Record<unknown>;
     },
     void
@@ -579,6 +582,7 @@ default is false.
       @doc("The globally unique identifier of the entity.")
       @path
       guid: string;
+      @doc("Business metadata attribute payload")
       @body businessMetadataAttributes: Record<unknown>;
     },
     void

@@ -126,41 +126,71 @@ enum Cardinality {
 
 @doc("Type Category")
 enum TypeCategory {
+  @doc("primitive")
   PRIMITIVE,
+  @doc("object id type")
   OBJECT_ID_TYPE,
+  @doc("enum")
   ENUM,
+  @doc("struct")
   STRUCT,
+  @doc("classification")
   CLASSIFICATION,
+  @doc("entity")
   ENTITY,
+  @doc("array")
   ARRAY,
+  @doc("map")
   MAP,
+  @doc("relationship")
   RELATIONSHIP,
+  @doc("term template")
   TERM_TEMPLATE,
 }
 
+@doc("Rounding Mode")
 enum RoundingMode {
+  @doc("up")
   UP,
+  @doc("down")
   DOWN,
+  @doc("ceiling")
   CEILING,
+  @doc("floor")
   FLOOR,
+  @doc("half up")
   HALF_UP,
+  @doc("half down")
   HALF_DOWN,
+  @doc("half even")
   HALF_EVEN,
+  @doc("unnecessary")
   UNNECESSARY,
 }
 
+@doc("Relationship Category")
 enum RelationshipCategory {
+  @doc("association")
   ASSOCIATION,
+  @doc("aggregation")
   AGGREGATION,
+  @doc("composition")
   COMPOSITION,
 }
 
+@doc("Type")
 enum Type {
+  @doc("enum")
   `enum`,
+  @doc("entity")
   entity,
+  @doc("classification")
   classification,
+  @doc("relationship")
   relationship,
+  @doc("struct")
   struct,
+  @doc("term template")
   term_template,
 }
 
@@ -179,7 +209,7 @@ model AtlasEntityWithExtInfo {
 model AtlasEntity {
   ...AtlasStruct;
 
-  @doc("Business Attributes")
+  @doc("Business attributes")
   businessAttributes?: Record<unknown>;
 
   @doc("An array of classifications.")
@@ -619,6 +649,8 @@ model AtlasGlossaryTerm {
 
   @doc("The abbreviation of the term.")
   abbreviation?: string;
+
+  @doc("The name of the template.")
   templateName?: unknown[];
 
   @doc("The glossary header with basic information.")
@@ -701,9 +733,17 @@ key of the first layer map is term template name.
 @doc("PurviewObjectId")
 model PurviewObjectId {
   ...AtlasObjectId;
+
+  @doc("Name")
   name?: string;
+
+  @doc("Display text")
   displayText?: string;
+
+  @doc("Item path")
   itemPath?: string;
+
+  @doc("Resouce Id")
   resourceId?: string;
 
   @doc("Dictionary of <any>")
@@ -746,6 +786,8 @@ Status of the entity - can be active or deleted. Deleted entities are not
 removed.
 """)
   entityStatus?: Status;
+
+  @doc("Relationship type")
   relationshipType?: string;
 
   @doc("""
@@ -818,6 +860,7 @@ batch, and will return new token in each response unless there's no more data.
 
 @doc("The content of a search facet result item.")
 model SearchFacetItem {
+
   @doc("The count of the facet item.")
   count?: int32;
 
@@ -828,7 +871,9 @@ model SearchFacetItem {
   sort?: unknown;
 }
 
+@doc("Taxonomy setting for search request")
 model SearchRequestTaxonomySetting {
+  @doc("Asset types")
   assetTypes?: string[];
 
   @doc("The content of a search facet result item.")
@@ -858,6 +903,8 @@ the facet is returned as an element of @search.facets.
 """)
   @projectedName("json", "@search.facets")
   SearchFacets?: SearchFacetResultValue;
+
+  @doc("Search result value")
   value?: SearchResultValue[];
 }
 
@@ -867,15 +914,34 @@ contactId, and label. When the facet is specified in the request, the value of
 the facet is returned as an element of @search.facets.
 """)
 model SearchFacetResultValue {
+  @doc("Entity type")
   entityType?: SearchFacetItemValue[];
+
+  @doc("Asset type")
   assetType?: SearchFacetItemValue[];
+
+  @doc("Classiciation")
   classification?: SearchFacetItemValue[];
+
+  @doc("Term")
   term?: SearchFacetItemValue[];
+
+  @doc("Contact id")
   contactId?: SearchFacetItemValue[];
+
+  @doc("Contact type")
   contactType?: SearchFacetItemValue[];
+
+  @doc("Label")
   label?: SearchFacetItemValue[];
+
+  @doc("Glossary type")
   glossaryType?: SearchFacetItemValue[];
+
+  @doc("Term status")
   termStatus?: SearchFacetItemValue[];
+
+  @doc("Term template")
   termTemplate?: SearchFacetItemValue[];
 }
 
@@ -980,10 +1046,19 @@ the field, attached with emphasis mark, is returned as an element of
 @search.highlights.
 """)
 model SearchHighlights {
+  @doc("Id")
   id?: string[];
+
+  @doc("Qualified name")
   qualifiedName?: string[];
+
+  @doc("Name")
   name?: string[];
+
+  @doc("Descirption")
   description?: string[];
+
+  @doc("Entity type")
   entityType?: string[];
 }
 
@@ -1036,6 +1111,7 @@ must be a number between 1 and 100.
 
 @doc("The result item of the search suggest.")
 model SuggestResult {
+  @doc("The result value")
   value?: SuggestResultValue[];
 }
 
@@ -1142,6 +1218,7 @@ The value must be a number between 1 and 100.
 
 @doc("The result of the autocomplete request.")
 model AutoCompleteResult {
+  @doc("The result value")
   value?: AutoCompleteResultValue[];
 }
 
