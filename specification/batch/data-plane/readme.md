@@ -223,6 +223,12 @@ directive:
       - $.paths["/pools/{poolId}/nodes/{nodeId}/users/{userName}"].put
     reason: Matching service response.
 
+  - suppress: R2018 # XmsEnumValidation
+    where:
+      - $.definitions.AADToken.properties.type
+    from: BatchService.json
+    reason: Single-value enums are expressed to force the values to be used for de/serialization but should not be exposed or settable by the a client.
+
   - suppress: R2029
     where:
      - $.paths["/applications/{applicationId}"].get
