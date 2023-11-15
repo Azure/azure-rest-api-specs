@@ -12,6 +12,7 @@ add-credentials: true
 openapi-type: data-plane
 ```
 
+
 # Releases
 
 ## AzureOpenAI 2022-03-01-preview
