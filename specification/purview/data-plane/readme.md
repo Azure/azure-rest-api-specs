@@ -34,7 +34,7 @@ tag: package-2023-09
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-09'
+```yaml $(tag) == 'package-2023-09'
 input-file:
   - Azure.Analytics.Purview.DataMap/stable/2023-09-01/purviewdatamap.json
 ```
@@ -43,7 +43,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-02'
+``` yaml $(tag) == 'package-preview-2023-02'
 input-file:
   - Azure.Analytics.Purview.Catalog/preview/2023-02-01-preview/purviewcatalog.json
 ```
