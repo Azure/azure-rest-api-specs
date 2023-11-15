@@ -437,7 +437,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Batch/preview/2023-11-01.18.0/BatchService.json
+  - $(this-folder)/Azure.Batch/preview/2023-11-01.18.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2020-09-01.12.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2020-03-01.11.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2019-08-01.10.0/BatchService.json
