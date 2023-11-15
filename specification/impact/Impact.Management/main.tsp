@@ -1,27 +1,32 @@
 // First, import the common Microsoft.Voiceservice definition
-import "./impact.cadl";
-//import "./subscriptionResource.cadl";
+import "./impact.tsp";
+//
 
 // Then import the resource API definitions
-import "./workloadImpacts.cadl";
-import "./ImpactCategories.cadl";
-
-
+import "./workloadImpacts.tsp";
+import "./ImpactCategories.tsp";
+import "./commonModels.tsp";
+import "./insights.tsp";
+import "./topologyImpacts.tsp";
 
 // Common elements:
 // Various tooling enforces (or at least suggests) that all models should have a provisioning State field, as this means something special to ARM.
 
 @doc("Provisioning state of the resource.")
 enum ProvisioningState {
-	Succeeded,
-	Failed,
-	Canceled
-}
+  /** Provisioning Succeeded */
+  Succeeded,
 
+  /** Provisioning Failed */
+  Failed,
+
+  /** Provisioning Canceled */
+  Canceled,
+}
 
 @doc("General resource properties.")
 model ResourceProperties {
-	@doc("Resource provisioning state.")
-	@visibility("read")
-	provisioningState?: ProvisioningState;
+  @doc("Resource provisioning state.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
