@@ -4,7 +4,7 @@
     "title": "Custom Voice API",
     "description": "Custom Voice API to create and deploy your voice.",
     "contact": {
-      "name": "Cognitive Services - Speech Services",
+      "name": "Azure AI - Speech Services",
       "url": "https://docs.microsoft.com/azure/cognitive-services/speech-service/support"
     },
     "version": "2023-12-01-preview"
@@ -25,7 +25,7 @@
             "$ref": "#/parameters/QuerySkip"
           },
           {
-            "$ref": "#/parameters/QueryTop"
+            "$ref": "#/parameters/QueryMaxPageSize"
           },
           {
             "$ref": "#/parameters/QueryFilter"
@@ -203,7 +203,7 @@
             "$ref": "#/parameters/QuerySkip"
           },
           {
-            "$ref": "#/parameters/QueryTop"
+            "$ref": "#/parameters/QueryMaxPageSize"
           },
           {
             "$ref": "#/parameters/QueryFilter"
@@ -500,7 +500,7 @@
             "$ref": "#/parameters/QuerySkip"
           },
           {
-            "$ref": "#/parameters/QueryTop"
+            "$ref": "#/parameters/QueryMaxPageSize"
           },
           {
             "$ref": "#/parameters/QueryFilter"
@@ -776,7 +776,7 @@
             "$ref": "#/parameters/QuerySkip"
           },
           {
-            "$ref": "#/parameters/QueryTop"
+            "$ref": "#/parameters/QueryMaxPageSize"
           },
           {
             "$ref": "#/parameters/QueryFilter"
@@ -962,7 +962,7 @@
             "$ref": "#/parameters/QuerySkip"
           },
           {
-            "$ref": "#/parameters/QueryTop"
+            "$ref": "#/parameters/QueryMaxPageSize"
           },
           {
             "$ref": "#/parameters/QueryFilter"
@@ -1298,7 +1298,7 @@
             "$ref": "#/parameters/QuerySkip"
           },
           {
-            "$ref": "#/parameters/QueryTop"
+            "$ref": "#/parameters/QueryMaxPageSize"
           },
           {
             "$ref": "#/parameters/QueryFilter"
@@ -1964,7 +1964,7 @@
       }
     },
     "Error": {
-      "description": "New format which conforms to the new Cognitive Services API guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
+      "description": "Top-level error follows Microsoft Azure REST API Guidelines which is available at https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors. This contains an top-level error with error code, message, details, target and an inner error with more descriptive details.",
       "required": [
         "code",
         "message"
@@ -2014,7 +2014,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Contains unified error information used for HTTP responses across any Cognitive Service. Instances can be created by returning it directly from a controller.",
+      "description": "Error response follows Microsoft Azure REST API Guidelines which is available at https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
       "required": [
         "error"
       ],
@@ -2038,7 +2038,7 @@
       }
     },
     "InnerError": {
-      "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow. This contains required properties ErrorCode, message and optional properties target, inner error(this can be nested).",
+      "description": "Inner error follows Microsoft Azure REST API Guidelines which is available at https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors. This contains required properties error code, message and optional properties target, inner error(this can be nested).",
       "type": "object",
       "properties": {
         "code": {
@@ -2619,7 +2619,7 @@
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header",
-      "description": "Provide your cognitive services subscription key here."
+      "description": "Provide your subscription key here."
     },
     "AADToken": {
       "type": "oauth2",
@@ -2674,10 +2674,10 @@
       "default": 0,
       "x-ms-parameter-location": "method"
     },
-    "QueryTop": {
-      "name": "top",
+    "QueryMaxPageSize": {
+      "name": "maxpagesize",
       "in": "query",
-      "description": "The number of result items to return.",
+      "description": "The maximum number of items to include in a single response.",
       "required": false,
       "type": "integer",
       "format": "int32",
