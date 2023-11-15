@@ -38,7 +38,6 @@ These settings apply only when `--tag=package-2023-09` is specified on the comma
 input-file:
   - Azure.Analytics.Purview.DataMap/stable/2023-09-01/purviewdatamap.json
 ```
-
 ### Tag: package-preview-2023-02
 
 These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
