@@ -6187,32 +6187,6 @@
         "endTimeStamp"
       ]
     },
-    "BillingHubGetAggregateUsagePaginationModel": {
-      "type": "object",
-      "description": "Pagination model for get aggregate usage.",
-      "properties": {
-        "startTimeStamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Specify the start time of the target usage items."
-        },
-        "endTimeStamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Specify the end time of the target usage items."
-        },
-        "top": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Specify the number of visible pages."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Specify the offset of the usage query."
-        }
-      }
-    },
     "BillingHubGetAggregateUsageResponse": {
       "type": "object",
       "description": "Aggregate usage result response.",
@@ -6255,11 +6229,6 @@
             "$ref": "#/definitions/BillingHubAggregateUsage"
           },
           "description": "The result set of usage entries."
-        },
-        "nextRequest": {
-          "type": "object",
-          "$ref": "#/definitions/BillingHubGetAggregateUsagePaginationModel",
-          "description": "Pagination model for the next request."
         }
       }
     },
@@ -6354,6 +6323,27 @@
         "release": {
           "type": "string",
           "description": "Release of the custom image."
+        },
+        "architecture": {
+          "type": "string",
+          "description": "Architecture of the custom image."
+        },
+        "osState": {
+          "type": "string",
+          "description": "Os state of the custom image."
+        },
+        "hyperVGeneration": {
+          "type": "string",
+          "description": "Hyper V generation of the custom image."
+        },
+        "imageSizeInGB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The size of the VHD."
+        },
+        "vhdFileName": {
+          "type": "string",
+          "description": "The file name of the associated VHD resource, VHD sourced image specific property."
         },
         "executionUsageDetails": {
           "type": "array",
