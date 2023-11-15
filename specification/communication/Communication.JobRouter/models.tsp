@@ -323,6 +323,7 @@ enum WorkerSelectorAttachmentKind {
   weightedAllocation,
 }
 
+@projectedName("java", "ClassificationPolicyInternal")
 @resource("routing/classificationPolicies")
 @doc("A container for the rules that govern how jobs are classified.")
 model ClassificationPolicy {
