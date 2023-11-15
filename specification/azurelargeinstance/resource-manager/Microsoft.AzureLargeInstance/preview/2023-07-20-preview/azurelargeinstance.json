@@ -132,6 +132,53 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      },
+      "put": {
+        "tags": [
+          "Azure Large Instances"
+        ],
+        "operationId": "AzureLargeInstance_CreateResource",
+        "summary": "Initialize Azure Large Instance in the specified subscription and resource group, even with pending provisioning",
+        "description": "Created a tracked resource checking availability per location and sku.",
+        "x-ms-examples": {
+          "Create an Azure Large Instances resource": {
+            "$ref": "./examples/AzureLargeInstance_CreateResource.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureResourceCreationProperties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureLargeInstance"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity. The server understands your request but cannot process it due to issues with the specified location and SKU. Please validate the provided information with your point of contact. Alternatively, you may initiate the pre-provisioning process with our commerce team for further assistance."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstances/{azureLargeInstanceName}/start": {
@@ -762,63 +809,65 @@
           "description": "Name of the hardware type (vendor and/or their product name)"
         },
         "azureLargeInstanceSize": {
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "S72m",
-            "S144m",
-            "S72",
-            "S144",
-            "S192",
-            "S192m",
-            "S192xm",
-            "S96",
-            "S112",
-            "S224",
-            "S224m",
-            "S224om",
-            "S224oo",
-            "S224oom",
-            "S224ooo",
-            "S224se",
-            "S384",
-            "S384m",
-            "S384xm",
-            "S384xxm",
-            "S448",
-            "S448m",
-            "S448om",
-            "S448oo",
-            "S448oom",
-            "S448ooo",
-            "S448se",
-            "S576m",
-            "S576xm",
-            "S672",
-            "S672m",
-            "S672om",
-            "S672oo",
-            "S672oom",
-            "S672ooo",
-            "S768",
-            "S768m",
-            "S768xm",
-            "S896",
-            "S896m",
-            "S896om",
-            "S896oo",
-            "S896oom",
-            "S896ooo",
-            "S960m"
-          ],
-          "x-ms-enum": {
-            "name": "azureLargeInstanceSizeNamesEnum",
-            "modelAsString": true
-          },
-          "description": "Specifies the Azure Large Instance SKU."
+          "$ref": "#/definitions/SKU"
         }
       },
       "description": "Specifies the hardware settings for the Azure Large Instance."
+    },
+    "SKU": {
+      "type": "string",
+      "enum": [
+        "S72m",
+        "S144m",
+        "S72",
+        "S144",
+        "S192",
+        "S192m",
+        "S192xm",
+        "S96",
+        "S112",
+        "S224",
+        "S224m",
+        "S224om",
+        "S224oo",
+        "S224oom",
+        "S224ooo",
+        "S224se",
+        "S384",
+        "S384m",
+        "S384xm",
+        "S384xxm",
+        "S448",
+        "S448m",
+        "S448om",
+        "S448oo",
+        "S448oom",
+        "S448ooo",
+        "S448se",
+        "S576m",
+        "S576xm",
+        "S672",
+        "S672m",
+        "S672om",
+        "S672oo",
+        "S672oom",
+        "S672ooo",
+        "S768",
+        "S768m",
+        "S768xm",
+        "S896",
+        "S896m",
+        "S896om",
+        "S896oo",
+        "S896oom",
+        "S896ooo",
+        "S960m"
+      ],
+      "x-ms-enum": {
+        "name": "azureLargeInstanceSizeNamesEnum",
+        "modelAsString": true
+      },
+      "description": "Specifies the Azure Large Instance SKU."
     },
     "Disk": {
       "type": "object",
@@ -1044,6 +1093,20 @@
       },
       "description": "Tags field of the AzureLargeInstance instance."
     },
+    "AzureResourceCreationProperties": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Specifies the geographic location where the Azure Large Instance resource should be created."
+        },
+        "sku": {
+          "$ref": "#/definitions/SKU",
+          "description": "Specifies the geographic location where the Azure Large Instance resource should be created."
+        }
+      },
+      "description": "Defines the structure for the initial request object used to create a new Azure Large Instance resource. This request includes key details like the geographic location and the desired SKU, setting the stage for provisioning and deployment of the resource in the Azure environment."
+    },
     "ForceState": {
       "type": "object",
       "properties": {
@@ -1090,6 +1153,16 @@
         "$ref": "#/definitions/ForceState"
       },
       "description": "When set to 'active', this parameter empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server",
+      "x-ms-parameter-location": "method"
+    },
+    "AzureResourceCreationProperties": {
+      "name": "AzureLargeInstanceCreate",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/AzureResourceCreationProperties"
+      },
+      "description": "Request body that t request the creation of AzureLargeInstance.",
       "x-ms-parameter-location": "method"
     },
     "TagsParameter": {
