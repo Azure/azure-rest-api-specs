@@ -162,6 +162,7 @@ input-file:
   - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
   - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
   - Microsoft.Security/preview/2023-02-01-preview/healthReports.json
+  - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 ```
 
 ### Tag: package-preview-2023-02
