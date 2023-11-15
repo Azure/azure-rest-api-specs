@@ -55,7 +55,7 @@ operations returns various properties of each Azure Large Instance.
   @doc("The operation to restart an Azure Large Instance (only for compute instances)")
   restart is ArmResourceActionAsync<
     AzureLargeInstance,
-    ForceState,
+    OptionalBodyParameter<ForceState>,
     OperationStatusResult
   >;
   // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter

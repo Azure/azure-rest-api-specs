@@ -10,6 +10,14 @@ namespace Microsoft.AzureLargeInstance;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+/** A template for optional body parameters
+ * @template T The body parameter type
+ */
+model OptionalBodyParameter<T extends {}> {
+  /** The body parameter */
+  @body body?: T;
+}
+
 @doc("Enum of the hardware options for an Azure Large Instance")
 enum AzureLargeInstanceHardwareTypeNamesEnum {
   Cisco_UCS,
@@ -236,7 +244,7 @@ model IpAddress {
   ipAddress?: string;
 }
 
-@doc("""
+@doc(""" 
 The active state empowers the server with the ability to forcefully terminate
 and halt any existing processes that may be running on the server
 """)
