@@ -616,7 +616,7 @@
           "type": "string",
           "description": "The connection string of the primary workspace key."
         },
-        "secondaryConnectionString ": {
+        "secondaryConnectionString": {
           "readOnly": true,
           "type": "string",
           "description": "The connection string of the secondary workspace key."
@@ -624,9 +624,10 @@
       }
     },
     "WorkspaceKeySpecification": {
+      "type": "object",
       "properties": {
         "keys": {
-          "description": "A list of all the previously uploaded data.",
+          "description": "A list of workspace key names.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1122,6 +1123,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
       "description": "The name of the quantum workspace resource.",
       "x-ms-parameter-location": "method"
     }
