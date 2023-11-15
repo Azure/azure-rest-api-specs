@@ -44,6 +44,7 @@ input-file:
   - Microsoft.App/preview/2023-11-02-preview/Builds.json
   - Microsoft.App/preview/2023-11-02-preview/CommonDefinitions.json
   - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironmentsSecrets.json
   - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironmentsCertificates.json
   - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironmentsDaprComponents.json
   - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironmentsStorages.json
@@ -57,6 +58,7 @@ input-file:
   - Microsoft.App/preview/2023-11-02-preview/ManagedEnvironmentsDaprComponents.json
   - Microsoft.App/preview/2023-11-02-preview/ManagedEnvironmentsDaprSubscriptions.json
   - Microsoft.App/preview/2023-11-02-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2023-11-02-preview/ManagedEnvironmentsSecrets.json
   - Microsoft.App/preview/2023-11-02-preview/SourceControls.json
   - Microsoft.App/preview/2023-11-02-preview/Subscriptions.json
   - Microsoft.App/preview/2023-11-02-preview/Usages.json
