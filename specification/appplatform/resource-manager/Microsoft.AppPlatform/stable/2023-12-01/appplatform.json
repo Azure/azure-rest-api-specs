@@ -1009,218 +1009,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/eurekaServers": {
-      "get": {
-        "tags": [
-          "AppPlatform"
-        ],
-        "description": "List the eureka server settings.",
-        "operationId": "EurekaServers_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the corresponding eureka server settings.",
-            "schema": {
-              "$ref": "#/definitions/EurekaServerResourceCollection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EurekaServers_List_Consumption": {
-            "$ref": "./examples/EurekaServers_List_Consumption.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/eurekaServers/default": {
-      "get": {
-        "tags": [
-          "AppPlatform"
-        ],
-        "description": "Get the eureka server settings.",
-        "operationId": "EurekaServers_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the corresponding eureka server settings.",
-            "schema": {
-              "$ref": "#/definitions/EurekaServerResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EurekaServers_Get_Consumption": {
-            "$ref": "./examples/EurekaServers_Get_Consumption.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "AppPlatform"
-        ],
-        "description": "Update the eureka server settings.",
-        "operationId": "EurekaServers_UpdatePut",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "eurekaServerResource",
-            "in": "body",
-            "description": "Parameters for the update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EurekaServerResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the updated eureka server settings.",
-            "schema": {
-              "$ref": "#/definitions/EurekaServerResource"
-            }
-          },
-          "201": {
-            "description": "Created. The response indicates the exiting eureka server settings are now updating and contain a Azure-AsyncOperation\r\nheader to query the operation result.",
-            "schema": {
-              "$ref": "#/definitions/EurekaServerResource"
-            },
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "EurekaServers_UpdatePut_Consumption": {
-            "$ref": "./examples/EurekaServers_UpdatePut_Consumption.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "AppPlatform"
-        ],
-        "description": "Update the eureka server settings.",
-        "operationId": "EurekaServers_UpdatePatch",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "eurekaServerResource",
-            "in": "body",
-            "description": "Parameters for the update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EurekaServerResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the updated eureka server settings.",
-            "schema": {
-              "$ref": "#/definitions/EurekaServerResource"
-            }
-          },
-          "202": {
-            "description": "Accepted. The response indicates the exiting eureka server settings are now updating and contain a Location\r\nheader to query the operation result.",
-            "schema": {
-              "$ref": "#/definitions/EurekaServerResource"
-            },
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "EurekaServers_UpdatePatch": {
-            "$ref": "./examples/EurekaServers_UpdatePatch_Consumption.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/default": {
       "get": {
         "tags": [
@@ -5878,13 +5666,6 @@
             },
             "collectionFormat": "multi",
             "uniqueItems": false
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "The expand expression to apply on the operation.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -6896,70 +6677,6 @@
         "x-ms-examples": {
           "Gateways_CreateOrUpdate": {
             "$ref": "./examples/Gateways_CreateOrUpdate.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "AppPlatform"
-        ],
-        "description": "Operation to update an exiting Spring Cloud Gateway capacity.",
-        "operationId": "Gateways_UpdateCapacity",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/GatewayNameParameter"
-          },
-          {
-            "name": "gatewayCapacityResource",
-            "in": "body",
-            "description": "The gateway capacity for the update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SkuObject"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success. The response describes the updated Spring Cloud Gateway capacity.",
-            "schema": {
-              "$ref": "#/definitions/GatewayResource"
-            }
-          },
-          "202": {
-            "description": "Accepted. The response indicates the new exiting Spring Cloud Gateway capacity is now updating and contains a Location\r\nheader to query the operation result.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Gateway_Scale": {
-            "$ref": "./examples/Gateway_Scale.json"
           }
         }
       },
@@ -8897,10 +8614,6 @@
           "$ref": "#/definitions/ServiceVNetAddons",
           "description": "Additional Service settings in vnet injection instance"
         },
-        "maintenanceScheduleConfiguration": {
-          "$ref": "#/definitions/MaintenanceScheduleConfiguration",
-          "description": "Additional Service settings for planned maintenance"
-        },
         "version": {
           "format": "int32",
           "description": "Version of the Service",
@@ -8911,14 +8624,6 @@
           "description": "ServiceInstanceEntity Id which uniquely identifies a created resource",
           "type": "string",
           "readOnly": true
-        },
-        "managedEnvironmentId": {
-          "description": "The resource Id of the Managed Environment that the Spring Apps instance builds on",
-          "type": "string"
-        },
-        "infraResourceGroup": {
-          "description": "The name of the resource group that contains the infrastructure resources",
-          "type": "string"
         },
         "powerState": {
           "description": "Power state of the Service",
@@ -10570,87 +10275,6 @@
         }
       }
     },
-    "EurekaServerResourceCollection": {
-      "description": "Object that includes an array of Eureka server resources and a possible link for next set",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of Eureka server resources",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EurekaServerResource"
-          }
-        },
-        "nextLink": {
-          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
-          "type": "string"
-        }
-      }
-    },
-    "EurekaServerResource": {
-      "description": "Eureka server resource",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EurekaServerProperties",
-          "description": "Properties of the eureka server resource",
-          "x-ms-client-flatten": false
-        }
-      }
-    },
-    "EurekaServerProperties": {
-      "description": "Eureka server properties payload",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "description": "State of the eureka server.",
-          "enum": [
-            "Failed",
-            "Succeeded",
-            "Updating",
-            "Canceled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "EurekaServerState",
-            "modelAsString": true
-          }
-        },
-        "enabledState": {
-          "type": "string",
-          "description": "Enabled state of the eureka server. This is only used in Consumption tier.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "EurekaServerEnabledState",
-            "values": [
-              {
-                "description": "Enable the eureka server.",
-                "value": "Enabled"
-              },
-              {
-                "description": "Disable the eureka server.",
-                "value": "Disabled"
-              }
-            ]
-          }
-        },
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "Error when applying eureka server settings."
-        }
-      }
-    },
     "ConfigServerResource": {
       "description": "Config Server resource",
       "type": "object",
@@ -10690,28 +10314,6 @@
         "error": {
           "$ref": "#/definitions/Error",
           "description": "Error when apply config server settings."
-        },
-        "enabledState": {
-          "type": "string",
-          "description": "Enabled state of the config server. This is only used in Consumption tier.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ConfigServerEnabledState",
-            "values": [
-              {
-                "description": "Enable the config server.",
-                "value": "Enabled"
-              },
-              {
-                "description": "Disable the config server.",
-                "value": "Disabled"
-              }
-            ]
-          }
         },
         "configServer": {
           "$ref": "#/definitions/ConfigServerSettings",
@@ -10957,73 +10559,6 @@
           "default": false
         }
       }
-    },
-    "MaintenanceScheduleConfiguration": {
-      "description": "Configuration for the planned maintenance",
-      "type": "object",
-      "required": [
-        "frequency"
-      ],
-      "properties": {
-        "frequency": {
-          "description": "The frequency to run the maintenance job",
-          "enum": [
-            "Weekly"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "Frequency",
-            "modelAsString": true
-          }
-        }
-      },
-      "discriminator": "frequency"
-    },
-    "WeeklyMaintenanceScheduleConfiguration": {
-      "description": "Weekly planned maintenance",
-      "required": [
-        "frequency",
-        "hour",
-        "day"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MaintenanceScheduleConfiguration"
-        }
-      ],
-      "properties": {
-        "hour": {
-          "description": "The hour to run the maintenance job",
-          "format": "int32",
-          "maximum": 23,
-          "minimum": 0,
-          "type": "integer"
-        },
-        "duration": {
-          "description": "The duration time to run the maintenance job, specified in ISO8601 format, e.g. PT8H",
-          "type": "string",
-          "readOnly": true
-        },
-        "day": {
-          "description": "The day to run the maintenance job",
-          "type": "string",
-          "enum": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday"
-          ],
-          "x-ms-enum": {
-            "name": "WeekDay",
-            "modelAsString": true
-          }
-        }
-      },
-      "x-ms-discriminator-value": "Weekly"
     },
     "ConfigServerSettings": {
       "description": "The settings of config server.",
@@ -11309,20 +10844,6 @@
         "ingressSettings": {
           "description": "App ingress settings payload.",
           "$ref": "#/definitions/IngressSettings"
-        },
-        "secrets": {
-          "description": "Collection of auth secrets",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Secret"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "workloadProfileName": {
-          "description": "The workload profile used for this app. Supported for Consumption + Dedicated plan.",
-          "type": "string"
         }
       }
     },
@@ -12104,190 +11625,6 @@
         }
       }
     },
-    "CustomScaleRule": {
-      "description": "Azure Spring Apps App Instance Custom scaling rule.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type of the custom scale rule\neg: azure-servicebus, redis etc.",
-          "type": "string"
-        },
-        "metadata": {
-          "description": "Metadata properties to describe custom scale rule.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "auth": {
-          "description": "Authentication secrets for the custom scale rule.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScaleRuleAuth"
-          },
-          "x-ms-identifiers": [
-            "triggerParameter"
-          ]
-        }
-      }
-    },
-    "HttpScaleRule": {
-      "description": "Azure Spring Apps App Instance Http scaling rule.",
-      "type": "object",
-      "properties": {
-        "metadata": {
-          "description": "Metadata properties to describe http scale rule.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "auth": {
-          "description": "Authentication secrets for the custom scale rule.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScaleRuleAuth"
-          },
-          "x-ms-identifiers": [
-            "triggerParameter"
-          ]
-        }
-      }
-    },
-    "TcpScaleRule": {
-      "description": "Azure Spring Apps App Instance Tcp scaling rule.",
-      "type": "object",
-      "properties": {
-        "metadata": {
-          "description": "Metadata properties to describe tcp scale rule.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "auth": {
-          "description": "Authentication secrets for the tcp scale rule.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScaleRuleAuth"
-          },
-          "x-ms-identifiers": [
-            "triggerParameter"
-          ]
-        }
-      }
-    },
-    "QueueScaleRule": {
-      "description": "Azure Spring Apps App Instance Azure Queue based scaling rule.",
-      "type": "object",
-      "properties": {
-        "queueName": {
-          "description": "Queue name.",
-          "type": "string"
-        },
-        "queueLength": {
-          "format": "int32",
-          "description": "Queue length.",
-          "type": "integer"
-        },
-        "auth": {
-          "description": "Authentication secrets for the queue scale rule.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScaleRuleAuth"
-          },
-          "x-ms-identifiers": [
-            "triggerParameter"
-          ]
-        }
-      }
-    },
-    "Scale": {
-      "description": "Azure Spring Apps scaling configurations.",
-      "type": "object",
-      "properties": {
-        "minReplicas": {
-          "format": "int32",
-          "description": "Optional. Minimum number of container replicas.",
-          "type": "integer"
-        },
-        "maxReplicas": {
-          "format": "int32",
-          "description": "Optional. Maximum number of container replicas. Defaults to 10 if not set.",
-          "type": "integer",
-          "default": 10
-        },
-        "rules": {
-          "description": "Scaling rules.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScaleRule"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "ScaleRule": {
-      "description": "Azure Spring Apps App Instance scaling rule.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Scale Rule Name",
-          "type": "string"
-        },
-        "azureQueue": {
-          "$ref": "#/definitions/QueueScaleRule",
-          "description": "Azure Queue based scaling."
-        },
-        "custom": {
-          "$ref": "#/definitions/CustomScaleRule",
-          "description": "Custom scale rule."
-        },
-        "http": {
-          "$ref": "#/definitions/HttpScaleRule",
-          "description": "HTTP requests based scaling."
-        },
-        "tcp": {
-          "$ref": "#/definitions/TcpScaleRule",
-          "description": "Tcp requests based scaling."
-        }
-      }
-    },
-    "ScaleRuleAuth": {
-      "description": "Auth Secrets for Azure Spring Apps App Instance Scale Rule",
-      "type": "object",
-      "properties": {
-        "secretRef": {
-          "description": "Name of the Azure Spring Apps App Instance secret from which to pull the auth params.",
-          "type": "string"
-        },
-        "triggerParameter": {
-          "description": "Trigger Parameter that uses the secret",
-          "type": "string"
-        }
-      }
-    },
-    "Secret": {
-      "description": "Secret definition.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Secret Name.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Secret Value.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "x-ms-secret": true
-        }
-      }
-    },
     "DeploymentResource": {
       "description": "Deployment resource payload",
       "type": "object",
@@ -12606,10 +11943,6 @@
           "format": "int32",
           "type": "integer",
           "default": 90
-        },
-        "scale": {
-          "$ref": "#/definitions/Scale",
-          "description": "Scaling properties for the Azure Spring Apps App Instance."
         },
         "containerProbeSettings": {
           "$ref": "#/definitions/ContainerProbeSettings"
@@ -13490,8 +12823,7 @@
             "AppDynamics",
             "Dynatrace",
             "NewRelic",
-            "ElasticAPM",
-            "CACertificates"
+            "ElasticAPM"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -13856,26 +13188,6 @@
             }
           }
         },
-        "apmTypes": {
-          "description": "Collection of APM type used in Spring Cloud Gateway",
-          "uniqueItems": true,
-          "type": "array",
-          "items": {
-            "description": "Type of application performance monitoring",
-            "enum": [
-              "ApplicationInsights",
-              "AppDynamics",
-              "Dynatrace",
-              "NewRelic",
-              "ElasticAPM"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "ApmType",
-              "modelAsString": true
-            }
-          }
-        },
         "apms": {
           "$ref": "#/definitions/ApmReferenceCollection",
           "description": "Collection of ApmReferences in service level"
@@ -13905,13 +13217,6 @@
           "$ref": "#/definitions/GatewayResourceRequests",
           "description": "The requested resource quantity for required CPU and Memory."
         },
-        "addonConfigs": {
-          "description": "Collection of addons for Spring Cloud Gateway",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        },
         "instances": {
           "description": "Collection of instances belong to Spring Cloud Gateway.",
           "uniqueItems": false,
@@ -13924,11 +13229,6 @@
         "operatorProperties": {
           "$ref": "#/definitions/GatewayOperatorProperties",
           "readOnly": true
-        },
-        "responseCacheProperties": {
-          "$ref": "#/definitions/GatewayResponseCacheProperties",
-          "description": "The properties to configure different types of response cache for Spring Cloud Gateway.",
-          "x-ms-client-flatten": false
         }
       }
     },
@@ -14326,70 +13626,6 @@
           "type": "string"
         }
       }
-    },
-    "GatewayResponseCacheProperties": {
-      "description": "Spring Cloud Gateway response cache properties.",
-      "required": [
-        "responseCacheType"
-      ],
-      "type": "object",
-      "properties": {
-        "responseCacheType": {
-          "description": "The type of the response cache.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "discriminator": "responseCacheType"
-    },
-    "GatewayLocalResponseCachePerRouteProperties": {
-      "description": "Spring Cloud Gateway local response cache per route properties.",
-      "required": [
-        "responseCacheType"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GatewayResponseCacheProperties"
-        }
-      ],
-      "properties": {
-        "size": {
-          "description": "Maximum size of cache (10MB, 900KB, 1GB...) to determine if the cache needs to evict some entries.",
-          "type": "string"
-        },
-        "timeToLive": {
-          "description": "Time before a cached entry is expired (300s, 5m, 1h...)",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "LocalCachePerRoute"
-    },
-    "GatewayLocalResponseCachePerInstanceProperties": {
-      "description": "Spring Cloud Gateway local response cache per instance properties.",
-      "required": [
-        "responseCacheType"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GatewayResponseCacheProperties"
-        }
-      ],
-      "properties": {
-        "size": {
-          "description": "Maximum size of cache (10MB, 900KB, 1GB...) to determine if the cache needs to evict some entries",
-          "type": "string"
-        },
-        "timeToLive": {
-          "description": "Time before a cached entry is expired (300s, 5m, 1h...)",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "LocalCachePerInstance"
     },
     "ApiPortalResourceCollection": {
       "description": "Object that includes an array of API portal resources and a possible link for next set",
