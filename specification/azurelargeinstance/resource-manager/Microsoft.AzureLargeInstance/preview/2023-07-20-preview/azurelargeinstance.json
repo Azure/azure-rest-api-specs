@@ -336,13 +336,21 @@
             "pattern": ".*"
           },
           {
-            "name": "body",
+            "name": "forceParameter",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ForceState"
-            }
+              "type": "object",
+              "description": "A template for optional body parameters",
+              "properties": {
+                "body": {
+                  "$ref": "#/definitions/ForceState",
+                  "description": "The body parameter"
+                }
+              }
+            },
+            "x-ms-client-name": "forceParameter"
           }
         ],
         "responses": {
@@ -723,6 +731,7 @@
     },
     "AzureLargeInstanceHardwareTypeNamesEnum": {
       "type": "string",
+      "description": "Enum of the hardware options for an Azure Large Instance",
       "enum": [
         "Cisco_UCS",
         "HPE",
@@ -756,6 +765,7 @@
     },
     "AzureLargeInstancePowerStateEnum": {
       "type": "string",
+      "description": "Power states that an Azure Large Instance can be in",
       "enum": [
         "starting",
         "started",
@@ -822,6 +832,7 @@
     },
     "AzureLargeInstanceProvisioningStatesEnum": {
       "type": "string",
+      "description": "Provisioning states that an Azure Large Instance can be in",
       "enum": [
         "Accepted",
         "Creating",
