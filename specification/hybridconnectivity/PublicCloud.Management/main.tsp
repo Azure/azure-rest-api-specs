@@ -97,7 +97,7 @@ interface GenerateAwsTemplate {
   @action
   @tag("GenerateAwsTemplate")
   @doc("Retrieve AWS Cloud Formation template")
-  generateAwsTemplate(
+  post(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
