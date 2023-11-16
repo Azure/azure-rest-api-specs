@@ -3089,6 +3089,49 @@
         }
       }
     },
+    "/browse": {
+      "post": {
+        "tags": [
+          "Discovery"
+        ],
+        "description": "Browse entities by itemPath.",
+        "operationId": "Discovery_Browse",
+        "x-ms-examples": {
+          "Discovery_Browse": {
+            "$ref": "./examples/Discovery_Browse.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "browseRequest",
+            "description": "An object specifying the browse criteria.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BrowseRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. On successful get the entities to browse.",
+            "schema": {
+              "$ref": "#/definitions/BrowseResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+
+    },
     "/atlas/v2/lineage/{guid}": {
       "get": {
         "tags": [
@@ -6854,6 +6897,129 @@
       },
       "title": "SuggestRequest",
       "description": "The query of suggest request."
+    },
+    "BrowseRequest": {
+      "type": "object",
+      "properties": {
+        "navigationMode": {
+          "$ref": "#/definitions/NavigationModeCategory"
+        },
+        "itemPath": {
+          "$ref": "#/definitions/itemPathIdentifier"
+        },
+        "properties": {
+          "type": "object",
+          "description": "The additional properties of the item.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The token used to get next batch of data. Default 'Null' to get the first batch, and will return new token in each response"
+        },
+        "count": {
+          "type": "boolean",
+          "description": "Whether to return the count of the children."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of navigation results we hope to return in one page. The default value is 100."
+        }
+      }
+    },
+    "NavigationModeCategory": {
+      "type": "string",
+      "title": "NavigationModeCategory",
+      "description": "The enum of navigation mode.",
+      "enum": [
+        "assetType",
+        "assetHierarchy",
+        "azureResourceHierarchy"
+      ],
+      "x-ms-enum": {
+        "name": "NavigationModeCategory",
+        "modelAsString": true
+      }
+    },
+    "itemPathIdentifier": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path of the item."
+        },
+        "extendedProperties": {
+          "type": "object",
+          "description": "The extended properties of the item.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BrowseResult": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BrowseResultValue"
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The token used to get next batch of data. Absent if there's no more data."
+        }
+      },
+      "title": "BrowseResult",
+      "description": "The result item of the browse request."
+    },
+    "BrowseResultValue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the item."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type name of the item. Eg. EntityType."
+        },
+        "leafNode": {
+          "type": "boolean",
+          "description": "Whether the item is a leaf node."
+        },
+        "kind": {
+          "type": "string",
+          "title": "Kind",
+          "description": "The kind of the item. Whether it is entity or category.",
+          "enum": [
+            "entity",
+            "category"
+          ],
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
+        },
+        "itemPath": {
+          "$ref": "#/definitions/itemPathIdentifier"
+        },
+        "count": {
+          "type": "int",
+          "format": "int32",
+          "description": "The count of the browse result."
+        },
+        "properties": {
+          "type": "object",
+          "description": "The additional properties of the item.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "LastModifiedTS": {
       "type": "string",
