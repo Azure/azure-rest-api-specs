@@ -1,0 +1,379 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BootstrapRP",
+    "description": "Microsoft BareMetal Azure Resource Provider specification",
+    "version": "2021-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BareMetal/bareMetalConnections": {
+      "get": {
+        "tags": [
+          "BareMetalConnections"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "List all BareMetalConnection objects in the subscription. ",
+        "operationId": "BareMetalConnections_ListSubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bareMetalConnectionList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Get": {
+            "$ref": "examples/BareMetalConnections_ListSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroup/{resourceGroupName}/providers/Microsoft.BareMetal/bareMetalConnections": {
+      "get": {
+        "tags": [
+          "BareMetalConnections"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "List all BareMetalConnection objects in the resource group.",
+        "operationId": "BareMetalConnections_ListResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bareMetalConnectionList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Get": {
+            "$ref": "examples/BareMetalConnections_ListResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroup/{resourceGroupName}/providers/Microsoft.BareMetal/bareMetalConnections/{connectionName}": {
+      "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+      ],
+      "get": {
+        "tags": [
+          "BareMetalConnections"
+        ],
+        "description": "Get the BareMetalConnection.",
+        "operationId": "BareMetalConnections_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bareMetalConnection"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Get": {
+            "$ref": "examples/BareMetalConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BareMetalConnections"
+        ],
+        "description": "Create or update the BareMetalConnection.",
+        "operationId": "BareMetalConnections_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "name": "bareMetalConnectionObject",
+            "in": "body",
+            "description": "The BareMetalConnection object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/bareMetalConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bareMetalConnection"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Operation will complete asynchronously, check ProvisioningState for status.",
+            "schema": {
+              "$ref": "#/definitions/bareMetalConnection"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Get": {
+            "$ref": "examples/BareMetalConnections_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BareMetalConnections"
+        ],
+        "description": "Delete the BareMetalConnection.",
+        "operationId": "BareMetalConnections_Delete",
+        "responses": {
+          "202": {
+            "description": "The resourced was deleted."
+          },
+          "204": {
+            "description": "The resource was not found."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Get": {
+            "$ref": "examples/BareMetalConnections_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BareMetalConnections"
+        ],
+        "description": "Patch the BareMetalConnection.",
+        "operationId": "BareMetalConnections_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "name": "bareMetalConnectionObject",
+            "in": "body",
+            "description": "The BareMetalConnection object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/bareMetalConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bareMetalConnection"
+            }
+          },
+          "202": {
+            "description": "Request received successfully. Operation will complete asynchronously, check provisioningState for status."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Get": {
+            "$ref": "examples/BareMetalConnections_Update.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "bareMetalConnection": {
+        "description": "Model representing a BareMetal Connection object.",
+        "type": "object",
+        "x-ms-azure-resource": true,
+        "required": [
+          "properties"
+        ],
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          }
+        ],
+        "properties": {
+          "etag": {
+            "type": "string",
+            "description": "Resource Etag."
+          },
+          "properties": {
+            "description": "BareMetal Connection properties.",
+            "$ref": "#/definitions/bareMetalConnectionProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+    },
+    "bareMetalConnectionProperties": {
+        "description": "Basic PowerVm properties needed for the request and response.",
+        "type": "object",
+        "required": [
+            "ipAddress",
+            "vlanId",
+            "deviceId",
+            "subnetResourceId",
+            "provisioningState"
+        ],
+        "properties": {
+            "ipAddress": {
+            "description": "IP address to be allocated in the delegated subnet of the associated BareMetal Connection.",
+            "type": "string"
+            },
+            "vlanId": {
+            "description": "VLAN ID for the delegated subnet of the associated BareMetal Connection.",
+            "type": "string"
+            },
+            "deviceId": {
+            "description": "The IBM Power POD ASR baremetal ID.",
+            "type": "string"
+            },
+            "subnetResourceId": {
+            "description": "The Microsoft.BareMetal/AzureHostedService delegated subnet ID.",
+            "type": "string"
+            },
+            "provisioningState": {
+            "$ref": "#/definitions/provisioningState"
+            }
+        }
+    },
+    "bareMetalConnectionList": {
+      "description": "List of IBM Power interfaces.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of BareMetal Connectoins.",
+          "items": {
+            "$ref": "#/definitions/bareMetalConnection"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "provisioningState": {
+      "type": "string",
+      "description": "The current provisioning state.",
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "provisioningState",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "ConnectionName": {
+      "name": "connectionName",
+      "description": "The name of the console connection. The name is case insensitive.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
