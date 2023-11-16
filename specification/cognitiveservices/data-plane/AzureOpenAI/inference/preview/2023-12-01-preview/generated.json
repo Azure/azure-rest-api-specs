@@ -1454,6 +1454,25 @@
         "usage"
       ]
     },
+    "ChatCompletionsFunctionToolDefinition": {
+      "type": "object",
+      "description": "The definition information for a chat completions function tool that can call a function in response to a tool call.",
+      "properties": {
+        "function": {
+          "$ref": "#/definitions/FunctionDefinition",
+          "description": "The function definition details for the function tool."
+        }
+      },
+      "required": [
+        "function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
+    },
     "ChatCompletionsOptions": {
       "type": "object",
       "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
@@ -1547,10 +1566,70 @@
             "$ref": "#/definitions/AzureChatExtensionConfiguration"
           },
           "x-ms-identifiers": []
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "If specified, the system will make a best effort to sample deterministically such that repeated requests with the\nsame seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the\nsystem_fingerprint response parameter to monitor changes in the backend.\""
+        },
+        "response_format": {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat",
+          "description": "An object specifying the format that the model must output. Used to enable JSON mode.",
+          "x-ms-client-name": "responseFormat"
+        },
+        "tools": {
+          "type": "array",
+          "description": "The available tool definitions that the chat completions request can use, including caller-defined functions.",
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsToolDefinition"
+          },
+          "x-ms-identifiers": []
+        },
+        "tool_choice": {
+          "description": "If specified, the model will configure which of the provided tools it can use for the chat completions response.",
+          "x-ms-client-name": "toolChoice"
         }
       },
       "required": [
         "messages"
+      ]
+    },
+    "ChatCompletionsResponseFormat": {
+      "type": "string",
+      "description": "The valid response formats Chat Completions can provide. Used to enable JSON mode.",
+      "enum": [
+        "text",
+        "json_object"
+      ],
+      "x-ms-enum": {
+        "name": "ChatCompletionsResponseFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Use the default, plain text response format."
+          },
+          {
+            "name": "jsonObject",
+            "value": "json_object",
+            "description": "Use a response format that guarantees emission of a valid JSON object. Only structure is guaranteed and contents must\nstill be validated."
+          }
+        ]
+      }
+    },
+    "ChatCompletionsToolDefinition": {
+      "type": "object",
+      "description": "An abstraction representation of a tool that can be used by the model to improve a chat completions response.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
       ]
     },
     "ChatMessage": {

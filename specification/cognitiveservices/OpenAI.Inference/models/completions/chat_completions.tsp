@@ -5,6 +5,7 @@ import "@typespec/versioning";
 import "./azure_chat_extensions.tsp";
 import "./common.tsp";
 import "./functions.tsp";
+import "./tools.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -65,6 +66,19 @@ model ChatMessage {
   @added(ServiceApiVersions.v2023_08_01_Preview)
   @projectedName("csharp", "AzureExtensionsContext")
   context?: AzureChatExtensionsMessageContext;
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("The valid response formats Chat Completions can provide. Used to enable JSON mode.")
+enum ChatCompletionsResponseFormat {
+  @doc("Use the default, plain text response format.")
+  text: "text",
+
+  @doc("""
+  Use a response format that guarantees emission of a valid JSON object. Only structure is guaranteed and contents must
+  still be validated.
+  """)
+  jsonObject: "json_object",
 }
 
 @doc("""
@@ -204,6 +218,30 @@ model ChatCompletionsOptions {
   @projectedName("json", "dataSources")
   @projectedName("csharp", "InternalAzureExtensionsDataSources")
   dataSources?: AzureChatExtensionConfiguration[];
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("""
+  If specified, the system will make a best effort to sample deterministically such that repeated requests with the
+  same seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the
+  system_fingerprint response parameter to monitor changes in the backend."
+  """)
+  seed?: int64;
+
+  @projectedName("json", "response_format")
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("An object specifying the format that the model must output. Used to enable JSON mode.")
+  responseFormat?: ChatCompletionsResponseFormat;
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("The available tool definitions that the chat completions request can use, including caller-defined functions.")
+  tools?: ChatCompletionsToolDefinition[];
+
+  @projectedName("json", "tool_choice")
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("""
+  If specified, the model will configure which of the provided tools it can use for the chat completions response.
+  """)
+  toolChoice?: ChatCompletionsToolSelection;
 }
 
 @doc("""
