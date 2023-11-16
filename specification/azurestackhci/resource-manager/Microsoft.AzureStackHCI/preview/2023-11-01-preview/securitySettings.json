@@ -78,45 +78,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings": {
-      "get": {
-        "operationId": "SecuritySettings_ListBySubscription",
-        "tags": [
-          "SecuritySettings"
-        ],
-        "description": "List SecuritySetting resources by subscription ID",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SecuritySettingListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Security Settings": {
-            "$ref": "./examples/ListSecuritySettingsBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings": {
       "get": {
         "operationId": "SecuritySettings_ListByClusters",
