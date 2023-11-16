@@ -199,9 +199,6 @@
         "description": "Create or update the BareMetalConnection.",
         "operationId": "BareMetalConnections_CreateOrUpdate",
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "parameters": [
           {
             "name": "bareMetalConnectionObject",
@@ -246,9 +243,6 @@
         "description": "Delete the BareMetalConnection.",
         "operationId": "BareMetalConnections_Delete",
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "responses": {
           "202": {
             "description": "The resourced was deleted.",
@@ -282,14 +276,12 @@
         "description": "Patch the BareMetalConnection.",
         "operationId": "BareMetalConnections_Update",
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "parameters": [
           {
             "name": "bareMetalConnectionObject",
             "in": "body",
             "description": "The BareMetalConnection object.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/bareMetalConnection"
             }
