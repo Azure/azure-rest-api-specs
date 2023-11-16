@@ -1047,7 +1047,8 @@
       "properties": {
         "endpoint": {
           "type": "string",
-          "description": "OTLP GRPC endpoint definition. Example: 0.0.0.0:<port>"
+          "description": "OTLP GRPC endpoint definition. Example: 0.0.0.0:<port>.",
+          "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
         }
       },
       "required": [
@@ -1553,14 +1554,14 @@
       "type": "object",
       "description": "Base receiver using TCP as transport protocol.",
       "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "TCP port to listen for packages."
+        "endpoint": {
+          "type": "string",
+          "description": "TCP endpoint definition. Example: 0.0.0.0:<port>.",
+          "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
         }
       },
       "required": [
-        "port"
+        "endpoint"
       ]
     }
   },
