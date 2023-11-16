@@ -12,7 +12,7 @@ export class FolderStructureRule implements Rule {
     let stdOutput = "";
     let errorOutput = "";
     let gitRoot = path.normalize(await host.gitOperation(folder).revparse("--show-toplevel"));
-    let relativePath = path.relative(gitRoot, folder);
+    let relativePath = path.relative(gitRoot, folder).split(path.sep).join("/");
 
     stdOutput += `folder: ${folder}\n`;
     if (!(await host.checkFileExists(folder))) {

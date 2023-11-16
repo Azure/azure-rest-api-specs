@@ -18,8 +18,8 @@ export async function main() {
     },
   };
   const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
-  const folder = parsedArgs.positionals[0].split(path.sep).join("/");
-  const absolutePath = path.resolve(folder);
+  const folder = parsedArgs.positionals[0];
+  const absolutePath = path.resolve(folder).split(path.sep).join("/");
 
   console.log("Running TypeSpecValidation on folder:", absolutePath);
 
