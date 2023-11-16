@@ -35,9 +35,6 @@ suppressions:
  - code: LroExtension
    from: communicationservicessms.json
    reason: Lro attribute was not part of any previous version. Trying to add it signals breaking changes and requires adding operation-location, etc.
- - code: IntegerTypeMustHaveFormat
-   from: communicationservicessms.json
-   reason: Integer type for HttpStatusCode was not part of any previous version. Trying to add it signals breaking changes.
  - code: XmsEnumValidation
    from: communicationservicessms.json
    reason: In the stable version repeatabilityResult has enum with accepted/rejected. Also SDK generation of SmsSendResponseItemRepeatabilityResult will fail without it.
