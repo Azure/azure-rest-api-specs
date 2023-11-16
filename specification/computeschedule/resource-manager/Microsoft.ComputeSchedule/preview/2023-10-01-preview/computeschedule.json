@@ -180,11 +180,170 @@
           }
         },
         "x-ms-examples": {
+          "Deallocate": {
+            "$ref": "./examples/ScheduledActions_Deallocate_MinimumSet_Gen.json"
+          },
           "ScheduledActions_Deallocate": {
             "$ref": "./examples/ScheduledActions_Deallocate_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/executeDeallocate": {
+      "post": {
+        "operationId": "ScheduledActions_ExecuteDeallocate",
+        "description": "executeDeallocate for a virtual machine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
-          "_Deallocate": {
-            "$ref": "./examples/ScheduledActions_Deallocate_MinimumSet_Gen.json"
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeallocateResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/RequestLevelError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExecuteDeallocate": {
+            "$ref": "./examples/ScheduledActions_ExecuteDeallocate_MinimumSet_Gen.json"
+          },
+          "ScheduledActions_ExecuteDeallocate": {
+            "$ref": "./examples/ScheduledActions_ExecuteDeallocate_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/executeHibernate": {
+      "post": {
+        "operationId": "ScheduledActions_ExecuteHibernate",
+        "description": "executeHibernate for a virtual machine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HibernateResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/RequestLevelError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExecuteHibernate": {
+            "$ref": "./examples/ScheduledActions_ExecuteHibernate_MinimumSet_Gen.json"
+          },
+          "ScheduledActions_ExecuteHibernate": {
+            "$ref": "./examples/ScheduledActions_ExecuteHibernate_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/executeStart": {
+      "post": {
+        "operationId": "ScheduledActions_ExecuteStart",
+        "description": "executeStart for a virtual machine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StartResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/RequestLevelError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExecuteStart": {
+            "$ref": "./examples/ScheduledActions_ExecuteStart_MinimumSet_Gen.json"
+          },
+          "ScheduledActions_ExecuteStart": {
+            "$ref": "./examples/ScheduledActions_ExecuteStart_MaximumSet_Gen.json"
           }
         }
       }
@@ -477,6 +636,29 @@
       "required": [
         "errorCode",
         "errorDetails"
+      ]
+    },
+    "ExecuteActionRequest": {
+      "type": "object",
+      "description": "The ExecuteAction request for resources",
+      "properties": {
+        "executionParameters": {
+          "$ref": "#/definitions/ExecutionParameters",
+          "description": "The execution parameters for the request"
+        },
+        "resources": {
+          "$ref": "#/definitions/Resources",
+          "description": "The resources for the request"
+        },
+        "correlationid": {
+          "type": "string",
+          "description": "Correlationid item"
+        }
+      },
+      "required": [
+        "executionParameters",
+        "resources",
+        "correlationid"
       ]
     },
     "ExecutionParameters": {
@@ -915,36 +1097,17 @@
       "type": "object",
       "description": "The deallocate request for resources",
       "properties": {
-        "deadLine": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The deadline for the operation"
+        "schedule": {
+          "$ref": "#/definitions/Schedule",
+          "description": "The schedule for the request"
         },
-        "timeZone": {
-          "type": "string",
-          "description": "The timezone for the operation"
+        "executionParameters": {
+          "$ref": "#/definitions/ExecutionParameters",
+          "description": "The execution parameters for the request"
         },
-        "deadlineType": {
-          "$ref": "#/definitions/DeadlineType",
-          "description": "The deadlinetype of the operation, this can either be InitiateAt or CompleteBy",
-          "default": "Unknown",
-          "x-ms-enum.modelAsString": true
-        },
-        "stopRetriesAfter": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Time to stop retries after in hours"
-        },
-        "optimizationPreference": {
-          "$ref": "#/definitions/OptimizationPreference",
-          "description": "Details that could optimize the user's request"
-        },
-        "ids": {
-          "type": "array",
-          "description": "The resource ids used for the request",
-          "items": {
-            "type": "string"
-          }
+        "resources": {
+          "$ref": "#/definitions/Resources",
+          "description": "The resources for the request"
         },
         "correlationid": {
           "type": "string",
@@ -952,10 +1115,9 @@
         }
       },
       "required": [
-        "deadLine",
-        "timeZone",
-        "deadlineType",
-        "ids",
+        "schedule",
+        "executionParameters",
+        "resources",
         "correlationid"
       ]
     },
@@ -963,36 +1125,17 @@
       "type": "object",
       "description": "This is the request for hibernate",
       "properties": {
-        "deadLine": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The deadline for the operation"
+        "schedule": {
+          "$ref": "#/definitions/Schedule",
+          "description": "The schedule for the request"
         },
-        "timeZone": {
-          "type": "string",
-          "description": "The timezone for the operation"
+        "executionParameters": {
+          "$ref": "#/definitions/ExecutionParameters",
+          "description": "The execution parameters for the request"
         },
-        "deadlineType": {
-          "$ref": "#/definitions/DeadlineType",
-          "description": "The deadlinetype of the operation, this can either be InitiateAt or CompleteBy",
-          "default": "Unknown",
-          "x-ms-enum.modelAsString": true
-        },
-        "stopRetriesAfter": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Time to stop retries after in hours"
-        },
-        "optimizationPreference": {
-          "$ref": "#/definitions/OptimizationPreference",
-          "description": "Details that could optimize the user's request"
-        },
-        "ids": {
-          "type": "array",
-          "description": "The resource ids used for the request",
-          "items": {
-            "type": "string"
-          }
+        "resources": {
+          "$ref": "#/definitions/Resources",
+          "description": "The resources for the request"
         },
         "correlationid": {
           "type": "string",
@@ -1000,10 +1143,9 @@
         }
       },
       "required": [
-        "deadLine",
-        "timeZone",
-        "deadlineType",
-        "ids",
+        "schedule",
+        "executionParameters",
+        "resources",
         "correlationid"
       ]
     },
@@ -1011,36 +1153,17 @@
       "type": "object",
       "description": "This is the request for start",
       "properties": {
-        "deadLine": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The deadline for the operation"
+        "schedule": {
+          "$ref": "#/definitions/Schedule",
+          "description": "The schedule for the request"
         },
-        "timeZone": {
-          "type": "string",
-          "description": "The timezone for the operation"
+        "executionParameters": {
+          "$ref": "#/definitions/ExecutionParameters",
+          "description": "The execution parameters for the request"
         },
-        "deadlineType": {
-          "$ref": "#/definitions/DeadlineType",
-          "description": "The deadlinetype of the operation, this can either be InitiateAt or CompleteBy",
-          "default": "Unknown",
-          "x-ms-enum.modelAsString": true
-        },
-        "stopRetriesAfter": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Time to stop retries after in hours"
-        },
-        "optimizationPreference": {
-          "$ref": "#/definitions/OptimizationPreference",
-          "description": "Details that could optimize the user's request"
-        },
-        "ids": {
-          "type": "array",
-          "description": "The resource ids used for the request",
-          "items": {
-            "type": "string"
-          }
+        "resources": {
+          "$ref": "#/definitions/Resources",
+          "description": "The resources for the request"
         },
         "correlationid": {
           "type": "string",
@@ -1048,10 +1171,9 @@
         }
       },
       "required": [
-        "deadLine",
-        "timeZone",
-        "deadlineType",
-        "ids",
+        "schedule",
+        "executionParameters",
+        "resources",
         "correlationid"
       ]
     },

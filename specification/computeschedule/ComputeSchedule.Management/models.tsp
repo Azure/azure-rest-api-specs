@@ -269,9 +269,14 @@ model VmOperation {
 // ----------- SubmitDeallocate ---------
 @doc("The deallocate request for resources")
 model SubmitDeallocateRequest {
-  ...Schedule;
-  ...ExecutionParameters;
-  ...Resources;
+  @doc("The schedule for the request")
+  schedule: Schedule;
+
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("The resources for the request")
+  resources: Resources;
 
   @doc("Correlationid item")
   correlationid: string;
@@ -300,9 +305,14 @@ model DeallocateResourceOperationResponse {
 // ----------- SubmitStart ---------
 @doc("This is the request for start")
 model SubmitStartRequest {
-  ...Schedule;
-  ...ExecutionParameters;
-  ...Resources;
+  @doc("The schedule for the request")
+  schedule: Schedule;
+
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("The resources for the request")
+  resources: Resources;
 
   @doc("Correlationid item")
   correlationid: string;
@@ -331,9 +341,14 @@ model StartResourceOperationResponse {
 // ----------- SubmitHibernate ---------
 @doc("This is the request for hibernate")
 model SubmitHibernateRequest {
-  ...Schedule;
-  ...ExecutionParameters;
-  ...Resources;
+  @doc("The schedule for the request")
+  schedule: Schedule;
+
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("The resources for the request")
+  resources: Resources;
 
   @doc("Correlationid item")
   correlationid: string;
@@ -359,6 +374,18 @@ model HibernateResourceOperationResponse {
   error?: RequestError;
 }
 
+// ----------- ExecuteActionRequest ---------
+@doc("The ExecuteAction request for resources")
+model ExecuteActionRequest {
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("The resources for the request")
+  resources: Resources;
+
+  @doc("Correlationid item")
+  correlationid: string;
+}
 // ----------- GetOperationStatus ---------
 @doc("This is the request to get operation status using operationids")
 model GetOperationStatusRequest {

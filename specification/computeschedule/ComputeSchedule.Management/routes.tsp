@@ -49,6 +49,36 @@ interface ScheduledActions {
     @body @doc("The request body") requestBody: SubmitStartRequest,
   ): ArmResponse<StartResourceOperationResponse> | RequestLevelError;
 
+  /** executeDeallocate for a virtual machine */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
+  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/executeDeallocate")
+  @post
+  @action
+  executeDeallocate(
+    ...Params,
+    @body @doc("The request body") requestBody: ExecuteActionRequest,
+  ): ArmResponse<DeallocateResourceOperationResponse> | RequestLevelError;
+
+  /** executeHibernate for a virtual machine */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
+  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/executeHibernate")
+  @post
+  @action
+  executeHibernate(
+    ...Params,
+    @body @doc("The request body") requestBody: ExecuteActionRequest,
+  ): ArmResponse<HibernateResourceOperationResponse> | RequestLevelError;
+
+  /** executeStart for a virtual machine */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
+  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/executeStart")
+  @post
+  @action
+  executeStart(
+    ...Params,
+    @body @doc("The request body") requestBody: ExecuteActionRequest,
+  ): ArmResponse<StartResourceOperationResponse> | RequestLevelError;
+
   /** getOperationStatus for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/getOperationStatus")
