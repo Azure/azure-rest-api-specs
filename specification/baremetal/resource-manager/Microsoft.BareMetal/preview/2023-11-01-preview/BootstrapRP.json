@@ -199,9 +199,6 @@
         "description": "Create or update the BareMetalConnection.",
         "operationId": "BareMetalConnections_CreateOrUpdate",
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "parameters": [
           {
             "name": "bareMetalConnectionObject",
@@ -246,9 +243,6 @@
         "description": "Delete the BareMetalConnection.",
         "operationId": "BareMetalConnections_Delete",
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "responses": {
           "202": {
             "description": "The resourced was deleted."
@@ -276,9 +270,6 @@
         "description": "Patch the BareMetalConnection.",
         "operationId": "BareMetalConnections_Update",
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "parameters": [
           {
             "name": "bareMetalConnectionObject",
@@ -345,27 +336,27 @@
       "type": "object",
       "required": [
         "ipAddress",
-        "vlanId",
         "deviceId",
-        "subnetResourceId",
-        "provisioningState"
+        "subnetResourceId"
       ],
       "properties": {
         "ipAddress": {
-          "description": "IP address to be allocated in the delegated subnet of the associated BareMetal Connection.",
+          "description": "IPv4 address to be allocated in the subnet of the associated BareMetal Connection.",
           "type": "string"
         },
         "vlanId": {
-          "description": "VLAN ID for the delegated subnet of the associated BareMetal Connection.",
-          "type": "string"
+          "description": "VLAN ID assigned to the subnet of the associated BareMetal Connection.  Assigned by resource provider.",
+          "type": "string",
+          "readOnly": true
         },
         "deviceId": {
-          "description": "The IBM Power POD ASR baremetal ID.",
+          "description": "Id of the baremetal device",
           "type": "string"
         },
         "subnetResourceId": {
-          "description": "The Microsoft.BareMetal/AzureHostedService delegated subnet ID.",
-          "type": "string"
+          "description": "The subnet resource ID.",
+          "type": "string",
+          "format": "arm-id"
         },
         "provisioningState": {
           "$ref": "#/definitions/provisioningState"
@@ -400,6 +391,7 @@
         "Failed",
         "Canceled"
       ],
+      "readOnly": true,
       "x-ms-enum": {
         "name": "provisioningState",
         "modelAsString": true
