@@ -16,21 +16,25 @@ namespace Azure.OpenAI;
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
 alias ChatMessageContent = string | ChatMessageContentItem[];
 
+@added(ServiceApiVersions.v2023_05_15)
 model ChatMessageContentItem {
   type: string;
 }
 
+@added(ServiceApiVersions.v2023_05_15)
 model ChatMessageTextContentItem extends ChatMessageContentItem {
   type: "text";
   content: string;
 }
 
+@added(ServiceApiVersions.v2023_05_15)
 enum ChatMessageImageDetailLevel {
   auto: "auto",
   low: "low",
   high: "high",
 }
 
+@added(ServiceApiVersions.v2023_05_15)
 model ChatMessageImageContentItem extends ChatMessageContentItem {
   type: "image_url";
   url: url;
@@ -38,22 +42,29 @@ model ChatMessageImageContentItem extends ChatMessageContentItem {
 }
 
 @discriminator("role")
+@added(ServiceApiVersions.v2023_05_15)
 model ChatRequestMessage {
   role: ChatRole;
 }
 
+@added(ServiceApiVersions.v2023_05_15)
 model ChatRequestSystemMessage extends ChatRequestMessage {
   role: ChatRole.system;
   content: string;
   name?: string;
 }
 
+@added(ServiceApiVersions.v2023_05_15)
 model ChatRequestUserMessage extends ChatRequestMessage {
   role: ChatRole.user;
   content: ChatMessageContent;
   name?: string;
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  enhancements?: AzureChatEnhancementConfiguration;
 }
 
+@added(ServiceApiVersions.v2023_05_15)
 model ChatRequestAssistantMessage extends ChatRequestMessage {
   role: ChatRole.assistant;
   content: string | null;
@@ -86,6 +97,7 @@ model ChatRequestFunctionMessage extends ChatRequestMessage {
   name: string;
 }
 
+@added(ServiceApiVersions.v2023_05_15)
 model ChatResponseMessage {
   role: ChatRole;
   content: string | null;
@@ -98,4 +110,7 @@ model ChatResponseMessage {
   @removed(ServiceApiVersions.v2023_12_01_Preview)
   @projectedName("json", "function_call")
   functionCall?: FunctionCall;
+
+  @added(ServiceApiVersions.v2023_08_01_Preview)
+  context?: ChatResponseMessage[];
 }

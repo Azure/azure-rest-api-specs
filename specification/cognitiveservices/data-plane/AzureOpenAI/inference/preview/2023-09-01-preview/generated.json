@@ -1564,6 +1564,13 @@
         "content": {},
         "name": {
           "type": "string"
+        },
+        "dataSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureChatExtensionConfiguration"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1589,6 +1596,13 @@
         "function_call": {
           "$ref": "#/definitions/FunctionCall",
           "x-ms-client-name": "functionCall"
+        },
+        "context": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatResponseMessage"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [

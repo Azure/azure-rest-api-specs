@@ -32,6 +32,7 @@ The configuration information for a chat completions request.
 Completions support a wide variety of tasks and generate text that continues from or "completes"
 provided prompt data.
 """)
+@added(ServiceApiVersions.v2023_05_15)
 model ChatCompletionsOptions {
   @doc("""
     The collection of context messages associated with this chat completions request.
@@ -197,6 +198,7 @@ The representation of a single prompt completion as part of an overall chat comp
 Generally, `n` choices are generated per provided prompt with a default value of 1.
 Token limits and other settings may limit the number of choices generated.
 """)
+@added(ServiceApiVersions.v2023_05_15)
 model ChatChoice {
   @doc("The chat message for a given chat completions prompt.")
   @projectedName("json", "message")
@@ -232,6 +234,7 @@ Representation of the response data from a chat completions request.
 Completions support a wide variety of tasks and generate text that continues from or "completes"
 provided prompt data.
 """)
+@added(ServiceApiVersions.v2023_05_15)
 model ChatCompletions {
   @doc("A unique identifier associated with this chat completions response.")
   @projectedName("json", "id")
@@ -261,6 +264,14 @@ model ChatCompletions {
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @projectedName("json", "prompt_filter_results")
   promptFilterResults?: PromptFilterResult[];
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @projectedName("json", "system_fingerprint")
+  @doc("""
+  Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that
+  might impact determinism.
+  """)
+  systemFingerprint: string;
 
   @doc("""
     Usage information for tokens processed and generated as part of this completions operation.

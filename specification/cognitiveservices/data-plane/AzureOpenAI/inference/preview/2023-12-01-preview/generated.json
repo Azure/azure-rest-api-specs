@@ -1015,6 +1015,17 @@
         }
       }
     },
+    "AzureChatEnhancementConfiguration": {
+      "type": "object",
+      "properties": {
+        "grounding": {
+          "$ref": "#/definitions/AzureChatGroundingEnhancementConfiguration"
+        },
+        "ocr": {
+          "$ref": "#/definitions/AzureChatOCREnhancementConfiguration"
+        }
+      }
+    },
     "AzureChatExtensionConfiguration": {
       "type": "object",
       "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
@@ -1074,6 +1085,28 @@
           }
         ]
       }
+    },
+    "AzureChatGroundingEnhancementConfiguration": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "AzureChatOCREnhancementConfiguration": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ]
     },
     "AzureCognitiveSearchChatExtensionConfiguration": {
       "type": "object",
@@ -1428,6 +1461,11 @@
           "x-ms-client-name": "promptFilterResults",
           "x-ms-identifiers": []
         },
+        "system_fingerprint": {
+          "type": "string",
+          "description": "Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that\nmight impact determinism.",
+          "x-ms-client-name": "systemFingerprint"
+        },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
           "description": "Usage information for tokens processed and generated as part of this completions operation."
@@ -1437,6 +1475,7 @@
         "id",
         "created",
         "choices",
+        "system_fingerprint",
         "usage"
       ]
     },
@@ -1733,6 +1772,16 @@
         "content": {},
         "name": {
           "type": "string"
+        },
+        "dataSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureChatExtensionConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "enhancements": {
+          "$ref": "#/definitions/AzureChatEnhancementConfiguration"
         }
       },
       "required": [
@@ -1761,6 +1810,13 @@
             "$ref": "#/definitions/ChatCompletionsToolCall"
           },
           "x-ms-client-name": "toolCalls"
+        },
+        "context": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatResponseMessage"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [

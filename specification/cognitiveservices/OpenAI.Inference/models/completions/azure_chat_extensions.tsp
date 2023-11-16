@@ -90,3 +90,19 @@ model AzureChatExtensionsMessageContext {
   """)
   messages?: ChatRequestMessage[];
 }
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+model AzureChatGroundingEnhancementConfiguration {
+  enabled: boolean;
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+model AzureChatOCREnhancementConfiguration {
+  enabled: boolean;
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+model AzureChatEnhancementConfiguration {
+  grounding?: AzureChatGroundingEnhancementConfiguration;
+  ocr?: AzureChatOCREnhancementConfiguration;
+}
