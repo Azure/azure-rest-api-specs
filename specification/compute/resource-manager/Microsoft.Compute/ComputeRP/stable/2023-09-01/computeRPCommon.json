@@ -1090,6 +1090,16 @@
       },
       "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine. Minimum api-version: 2020-12-01."
     },
+    "EncryptionIdentity": {
+      "type": "object",
+      "properties": {
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "description": "Specifies ARM Resource ID of one of the user identities associated with the VM."
+        }
+      },
+      "description": "Specifies the Managed Identity used by ADE to get access token for keyvault operations."
+    },
     "ProxyAgentSettings": {
       "type": "object",
       "properties": {
@@ -1138,6 +1148,10 @@
             "name": "SecurityTypes",
             "modelAsString": true
           }
+        },
+        "encryptionIdentity": {
+          "$ref": "#/definitions/EncryptionIdentity",
+          "description": "Specifies the Managed Identity used by ADE to get access token for keyvault operations."
         },
         "proxyAgentSettings": {
           "$ref": "#/definitions/ProxyAgentSettings",
