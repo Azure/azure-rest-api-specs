@@ -26,6 +26,7 @@ These are the global settings for the hardware.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: providerHub
 tag: package-2023-07-12-preview
 ```
 
