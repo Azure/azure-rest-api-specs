@@ -38,9 +38,6 @@ enum AnalyzeTextOutputType {
 enum AnalyzeImageOutputType {
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
   FourSeverityLevels,
-
-  @doc("Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7.")
-  EightSeverityLevels,
 }
 
 @doc("The text analysis request.")
@@ -91,7 +88,7 @@ model TextCategoriesAnalysis {
   @doc("The text analysis category.")
   category: TextCategory;
 
-  @doc("The value increases with the severity of the input content. The value of this field is determined by the outputType specified in the request. If 'FourSeverityLevels' or 'EightSeverityLevels' is chosen, this field will be included in the output.")
+  @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’ or ‘EightSeverity Levels’, and the output value can be 0, 2, 4, 6 or 0, 1, 2, 3, 4, 5, 6, or 7.")
   severity?: int32;
 }
 
@@ -128,7 +125,7 @@ model ImageCategoriesAnalysis {
   @doc("The image analysis category.")
   category: ImageCategory;
 
-  @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’ or ‘EightSeverity Levels’, and the output value can be 0, 2, 4, 6 or 0, 1, 2, 3, 4, 5, 6, or 7.")
+  @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’, and the output value can be 0, 2, 4, 6.")
   severity?: int32;
 }
 
