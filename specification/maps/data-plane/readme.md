@@ -38,6 +38,10 @@ directive:
     from: timezone.json
     reason: It will break existing clients if we change the name
 
+  - suppress: LroExtension
+    from: search.json
+    where: $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get
+    reason: The reason for this suppression is the API is already released and introducing new LRO properties will not function and are not supported today and will only be developed for the next version of this API.
 ``` 
 
 
@@ -66,6 +70,7 @@ input-file:
   - Microsoft.Maps/Weather/preview/1.0/weather.json
   - Microsoft.Maps/WFS/preview/2.0/wfs.json
 ```
+
 ### Tag: package-1.0-preview
 
 These settings apply only when `--tag=package-1.0-preview` is specified on the command line.

@@ -61,11 +61,8 @@
   "paths": {
     "/deployments/{deploymentId}/audio/transcriptions": {
       "post": {
-        "operationId": "GetAudioTranscriptionAsResponseObject",
+        "operationId": "GetAudioTranscriptionAsPlainText",
         "description": "Gets transcribed text and associated metadata from provided spoken audio data. Audio will be transcribed in the\nwritten language corresponding to the language it was spoken in.",
-        "consumes": [
-          "multipart/form-data"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -78,29 +75,19 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.file"
-          },
-          {
-            "$ref": "#/parameters/AudioTranscriptionOptions.responseFormat"
-          },
-          {
-            "$ref": "#/parameters/AudioTranscriptionOptions.language"
-          },
-          {
-            "$ref": "#/parameters/AudioTranscriptionOptions.prompt"
-          },
-          {
-            "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
-          },
-          {
-            "$ref": "#/parameters/AudioTranscriptionOptions.model"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AudioTranscriptionOptions"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AudioTranscription"
+              "type": "string"
             }
           },
           "default": {
@@ -118,18 +105,15 @@
         },
         "x-ms-examples": {
           "Gets transcribed text and associated metadata from provided spoken audio data.": {
-            "$ref": "./examples/audio_transcription_object.json"
+            "$ref": "./examples/audio_transcription_text.json"
           }
         }
       }
     },
     "/deployments/{deploymentId}/audio/translations": {
       "post": {
-        "operationId": "GetAudioTranslationAsResponseObject",
+        "operationId": "GetAudioTranslationAsPlainText",
         "description": "Gets English language transcribed text and associated metadata from provided spoken audio data.",
-        "consumes": [
-          "multipart/form-data"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -142,26 +126,19 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.file"
-          },
-          {
-            "$ref": "#/parameters/AudioTranslationOptions.responseFormat"
-          },
-          {
-            "$ref": "#/parameters/AudioTranslationOptions.prompt"
-          },
-          {
-            "$ref": "#/parameters/AudioTranslationOptions.temperature"
-          },
-          {
-            "$ref": "#/parameters/AudioTranslationOptions.model"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AudioTranslationOptions"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AudioTranslation"
+              "type": "string"
             }
           },
           "default": {
@@ -179,7 +156,7 @@
         },
         "x-ms-examples": {
           "Gets English language transcribed text and associated metadata from provided spoken audio data.": {
-            "$ref": "./examples/audio_translation_object.json"
+            "$ref": "./examples/audio_translation_text.json"
           }
         }
       }
@@ -479,6 +456,133 @@
         "x-ms-examples": {
           "Returns the status of the images operation": {
             "$ref": "./examples/get_image_operation_status.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/deployments/{deploymentId}/audio/transcriptions?_overload=getAudioTranscriptionAsResponseObject": {
+      "post": {
+        "operationId": "GetAudioTranscriptionAsResponseObject",
+        "description": "Gets transcribed text and associated metadata from provided spoken audio data. Audio will be transcribed in the\nwritten language corresponding to the language it was spoken in.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.file"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.responseFormat"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.language"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.prompt"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.model"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AudioTranscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets transcribed text and associated metadata from provided spoken audio data.": {
+            "$ref": "./examples/audio_transcription_object.json"
+          }
+        }
+      }
+    },
+    "/deployments/{deploymentId}/audio/translations?_overload=getAudioTranslationAsResponseObject": {
+      "post": {
+        "operationId": "GetAudioTranslationAsResponseObject",
+        "description": "Gets English language transcribed text and associated metadata from provided spoken audio data.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.file"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.responseFormat"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.prompt"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.temperature"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.model"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AudioTranslation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets English language transcribed text and associated metadata from provided spoken audio data.": {
+            "$ref": "./examples/audio_translation_object.json"
           }
         }
       }
