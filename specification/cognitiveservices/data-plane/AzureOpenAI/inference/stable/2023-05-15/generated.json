@@ -280,7 +280,7 @@
       "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
       "properties": {
         "message": {
-          "$ref": "#/definitions/ChatMessage",
+          "$ref": "#/definitions/ChatResponseMessage",
           "description": "The chat message for a given chat completions prompt."
         },
         "index": {
@@ -295,7 +295,7 @@
           "x-ms-client-name": "finishReason"
         },
         "delta": {
-          "$ref": "#/definitions/ChatMessage",
+          "$ref": "#/definitions/ChatResponseMessage",
           "description": "The delta message content for a streaming response."
         }
       },
@@ -345,7 +345,7 @@
           "type": "array",
           "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
           "items": {
-            "$ref": "#/definitions/ChatMessage"
+            "$ref": "#/definitions/ChatRequestMessage"
           },
           "x-ms-identifiers": []
         },
@@ -416,17 +416,85 @@
         "messages"
       ]
     },
-    "ChatMessage": {
+    "ChatRequestAssistantMessage": {
       "type": "object",
-      "description": "A single, role-attributed message within a chat completion interaction.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "assistant"
+    },
+    "ChatRequestMessage": {
+      "type": "object",
       "properties": {
         "role": {
-          "$ref": "#/definitions/ChatRole",
-          "description": "The role associated with this message payload."
+          "$ref": "#/definitions/ChatRole"
+        }
+      },
+      "discriminator": "role",
+      "required": [
+        "role"
+      ]
+    },
+    "ChatRequestSystemMessage": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "system"
+    },
+    "ChatRequestUserMessage": {
+      "type": "object",
+      "properties": {
+        "content": {},
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "user"
+    },
+    "ChatResponseMessage": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole"
         },
         "content": {
           "type": "string",
-          "description": "The text associated with this message payload.",
           "x-nullable": true
         }
       },

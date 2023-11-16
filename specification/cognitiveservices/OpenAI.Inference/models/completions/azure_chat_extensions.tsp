@@ -1,5 +1,6 @@
 import "@typespec/versioning";
 import "./chat_completions.tsp";
+import "./chat_messages.tsp";
 import "./extensions_onyourdata_azure_cognitive_search_options.tsp";
 import "./extensions_onyourdata_azure_machinelearning_index_options.tsp";
 import "./extensions_onyourdata_azure_cosmosdb_options.tsp";
@@ -87,5 +88,5 @@ model AzureChatExtensionsMessageContext {
     course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat
     extensions.
   """)
-  messages?: ChatMessage[];
+  messages?: ChatRequestMessage[];
 }

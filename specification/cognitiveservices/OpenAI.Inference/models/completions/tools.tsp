@@ -44,8 +44,10 @@ model ChatCompletionsNamedFunctionToolSelection
   name: "string";
 }
 
+// tool definitions: provided in the request options
+
 @discriminator("type")
-@doc("An abstraction representation of a tool that can be used by the model to improve a chat completions response.")
+@doc("An abstract representation of a tool that can be used by the model to improve a chat completions response.")
 @added(ServiceApiVersions.v2023_12_01_Preview)
 model ChatCompletionsToolDefinition {
   @doc("The object type.")
@@ -63,4 +65,33 @@ model ChatCompletionsFunctionToolDefinition
 
   @doc("The function definition details for the function tool.")
   function: FunctionDefinition;
+}
+
+// tool calls: received in responses
+
+@discriminator("type")
+@doc("""
+An abstract representation of a tool call that must be resolved in a subsequent request to perform the requested
+chat completion.
+""")
+@added(ServiceApiVersions.v2023_12_01_Preview)
+model ChatCompletionsToolCall {
+  @doc("The object type.")
+  type: string;
+
+  @doc("The ID of the tool call.")
+  id: string;
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("""
+A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents
+a function invocation needed for a subsequent chat completions request to resolve.
+""")
+model ChatCompletionsFunctionToolCall extends ChatCompletionsToolCall {
+  @doc("The type of tool call, in this case always 'function'.")
+  type: "function";
+
+  @doc("The details of the function invocation requested by the tool call.")
+  function: FunctionCall;
 }

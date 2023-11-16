@@ -1075,20 +1075,6 @@
         ]
       }
     },
-    "AzureChatExtensionsMessageContext": {
-      "type": "object",
-      "description": "  A representation of the additional context information available when Azure OpenAI chat extensions are involved\n  in the generation of a corresponding chat completions response. This context information is only populated when\n  using an Azure OpenAI request configured to use a matching extension.",
-      "properties": {
-        "messages": {
-          "type": "array",
-          "description": "  The contextual message payload associated with the Azure chat extensions used for a chat completions request.\n  These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the\n  course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat\n  extensions.",
-          "items": {
-            "$ref": "#/definitions/ChatMessage"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "AzureCognitiveSearchChatExtensionConfiguration": {
       "type": "object",
       "description": "A specific representation of configurable options for Azure Cognitive Search when using it as an Azure OpenAI chat\nextension.",
@@ -1383,7 +1369,7 @@
       "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
       "properties": {
         "message": {
-          "$ref": "#/definitions/ChatMessage",
+          "$ref": "#/definitions/ChatResponseMessage",
           "description": "The chat message for a given chat completions prompt."
         },
         "index": {
@@ -1398,7 +1384,7 @@
           "x-ms-client-name": "finishReason"
         },
         "delta": {
-          "$ref": "#/definitions/ChatMessage",
+          "$ref": "#/definitions/ChatResponseMessage",
           "description": "The delta message content for a streaming response."
         },
         "content_filter_results": {
@@ -1454,6 +1440,25 @@
         "usage"
       ]
     },
+    "ChatCompletionsFunctionToolCall": {
+      "type": "object",
+      "description": "A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents\na function invocation needed for a subsequent chat completions request to resolve.",
+      "properties": {
+        "function": {
+          "$ref": "#/definitions/FunctionCall",
+          "description": "The details of the function invocation requested by the tool call."
+        }
+      },
+      "required": [
+        "function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
+    },
     "ChatCompletionsFunctionToolDefinition": {
       "type": "object",
       "description": "The definition information for a chat completions function tool that can call a function in response to a tool call.",
@@ -1481,21 +1486,9 @@
           "type": "array",
           "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
           "items": {
-            "$ref": "#/definitions/ChatMessage"
+            "$ref": "#/definitions/ChatRequestMessage"
           },
           "x-ms-identifiers": []
-        },
-        "functions": {
-          "type": "array",
-          "description": "A list of functions the model may generate JSON inputs for.",
-          "items": {
-            "$ref": "#/definitions/FunctionDefinition"
-          },
-          "x-ms-identifiers": []
-        },
-        "function_call": {
-          "description": "Controls how the model responds to function calls. \"none\" means the model does not call a function,\nand responds to the end-user. \"auto\" means the model can pick between an end-user or calling a function.\n Specifying a particular function via `{\"name\": \"my_function\"}` forces the model to call that function.\n \"none\" is the default when no functions are present. \"auto\" is the default if functions are present.",
-          "x-ms-client-name": "functionCall"
         },
         "max_tokens": {
           "type": "integer",
@@ -1618,9 +1611,28 @@
         ]
       }
     },
+    "ChatCompletionsToolCall": {
+      "type": "object",
+      "description": "An abstract representation of a tool call that must be resolved in a subsequent request to perform the requested\nchat completion.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the tool call."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "id"
+      ]
+    },
     "ChatCompletionsToolDefinition": {
       "type": "object",
-      "description": "An abstraction representation of a tool that can be used by the model to improve a chat completions response.",
+      "description": "An abstract representation of a tool that can be used by the model to improve a chat completions response.",
       "properties": {
         "type": {
           "type": "string",
@@ -1632,31 +1644,123 @@
         "type"
       ]
     },
-    "ChatMessage": {
+    "ChatRequestAssistantMessage": {
       "type": "object",
-      "description": "A single, role-attributed message within a chat completion interaction.",
       "properties": {
-        "role": {
-          "$ref": "#/definitions/ChatRole",
-          "description": "The role associated with this message payload."
-        },
         "content": {
           "type": "string",
-          "description": "The text associated with this message payload.",
           "x-nullable": true
         },
         "name": {
+          "type": "string"
+        },
+        "tool_calls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "assistant"
+    },
+    "ChatRequestMessage": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole"
+        }
+      },
+      "discriminator": "role",
+      "required": [
+        "role"
+      ]
+    },
+    "ChatRequestSystemMessage": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "system"
+    },
+    "ChatRequestToolMessage": {
+      "type": "object",
+      "properties": {
+        "content": {
           "type": "string",
-          "description": "The name of the author of this message. `name` is required if role is `function`, and it should be the name of the\nfunction whose response is in the `content`. May contain a-z, A-Z, 0-9, and underscores, with a maximum length of\n64 characters."
+          "x-nullable": true
         },
-        "function_call": {
-          "$ref": "#/definitions/FunctionCall",
-          "description": "The name and arguments of a function that should be called, as generated by the model.",
-          "x-ms-client-name": "functionCall"
+        "tool_call_id": {
+          "type": "string",
+          "x-ms-client-name": "toolCallId"
+        }
+      },
+      "required": [
+        "content",
+        "tool_call_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "tool"
+    },
+    "ChatRequestUserMessage": {
+      "type": "object",
+      "properties": {
+        "content": {},
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "user"
+    },
+    "ChatResponseMessage": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole"
         },
-        "context": {
-          "$ref": "#/definitions/AzureChatExtensionsMessageContext",
-          "description": "  Additional context data associated with a chat message when requesting chat completions using compatible Azure\n  OpenAI chat extensions. This includes information like the intermediate data source retrievals used to service a\n  request.\n  This context information is only populated when using Azure OpenAI with chat extensions capabilities configured."
+        "content": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "tool_calls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
         }
       },
       "required": [
