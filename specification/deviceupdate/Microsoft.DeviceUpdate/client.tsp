@@ -5,23 +5,23 @@ using Azure.ClientGenerator.Core;
 
 namespace Customizations;
 
-@@client(Azure.IoT.DeviceUpdate.DeviceUpdateOperations,
-  {
-    name: "DeviceUpdateClient",
-  }
-);
+// @@client(Azure.IoT.DeviceUpdate.DeviceUpdateOperations,
+//   {
+//     name: "DeviceUpdateClient",
+//   }
+// );
 
-@@client(Azure.IoT.DeviceUpdate.DeviceManagementOperations,
-  {
-    name: "DeviceManagementClient",
-  }
-);
+// @@client(Azure.IoT.DeviceUpdate.DeviceManagementOperations,
+//   {
+//     name: "DeviceManagementClient",
+//   }
+// );
 
-@@client(Azure.IoT.DeviceUpdate.InstanceManagementOperations,
-  {
-    name: "InstanceManagementClient",
-  }
-);
+// @@client(Azure.IoT.DeviceUpdate.InstanceManagementOperations,
+//   {
+//     name: "InstanceManagementClient",
+//   }
+// );
 
-@@projectedName(Azure.IoT.DeviceUpdate.DeviceUpdateOperations, "typescript", "DeviceUpdate");
-@@projectedName(Azure.IoT.DeviceUpdate.DeviceManagementOperations, "typescript", "DeviceManagement");
+// @@projectedName(Azure.IoT.DeviceUpdate.DeviceUpdateOperations, "typescript", "DeviceUpdate");
+// @@projectedName(Azure.IoT.DeviceUpdate.DeviceManagementOperations, "typescript", "DeviceManagement");

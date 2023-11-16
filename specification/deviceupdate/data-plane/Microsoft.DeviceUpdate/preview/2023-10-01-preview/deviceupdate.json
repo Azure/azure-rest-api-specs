@@ -60,7 +60,7 @@
   "paths": {
     "/limits": {
       "get": {
-        "operationId": "InstanceManagementOperations_GetLimits",
+        "operationId": "InstanceManagement_GetLimits",
         "description": "Gets the instance limits for active deployments, devices, device classes, and\ngroups.",
         "parameters": [
           {
@@ -96,7 +96,7 @@
     },
     "/management/deviceClasses": {
       "get": {
-        "operationId": "DeviceManagementOperations_ListDeviceClasses",
+        "operationId": "DeviceManagement_ListDeviceClasses",
         "description": "Gets a list of all device classes (sets of devices compatible with the same\nupdates based on the model Id and compat properties reported in the Device\nUpdate PnP interface in IoT Hub) for all devices connected to Device Update for\nIoT Hub.",
         "parameters": [
           {
@@ -152,7 +152,7 @@
     },
     "/management/deviceClasses/{deviceClassId}": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetDeviceClass",
+        "operationId": "DeviceManagement_GetDeviceClass",
         "description": "Gets the properties of a device class.",
         "parameters": [
           {
@@ -203,7 +203,7 @@
         }
       },
       "patch": {
-        "operationId": "DeviceManagementOperations_UpdateDeviceClass",
+        "operationId": "DeviceManagement_UpdateDeviceClass",
         "description": "Update device class details.",
         "consumes": [
           "application/merge-patch+json"
@@ -266,7 +266,7 @@
         }
       },
       "delete": {
-        "operationId": "DeviceManagementOperations_DeleteDeviceClass",
+        "operationId": "DeviceManagement_DeleteDeviceClass",
         "description": "Deletes a device class. Device classes are created automatically when Device\nUpdate-enabled devices are connected to the hub but are not automatically\ncleaned up since they are referenced by DeviceClassSubgroups. If the user has\ndeleted all DeviceClassSubgroups for a device class they can also delete the\ndevice class to remove the records from the system and to stop checking the\ncompatibility of this device class with new updates. If a device is ever\nreconnected for this device class it will be re-created.",
         "parameters": [
           {
@@ -316,7 +316,7 @@
     },
     "/management/deviceClasses/{deviceClassId}/installableUpdates": {
       "get": {
-        "operationId": "DeviceManagementOperations_ListInstallableUpdatesForDeviceClass",
+        "operationId": "DeviceManagement_ListInstallableUpdatesForDeviceClass",
         "description": "Gets a list of installable updates for a device class.",
         "parameters": [
           {
@@ -362,7 +362,7 @@
     },
     "/management/deviceDiagnostics/deviceHealth": {
       "get": {
-        "operationId": "DeviceManagementOperations_ListHealthOfDevices",
+        "operationId": "DeviceManagement_ListHealthOfDevices",
         "description": "Get list of device health",
         "parameters": [
           {
@@ -418,7 +418,7 @@
     },
     "/management/deviceDiagnostics/logCollections": {
       "get": {
-        "operationId": "DeviceManagementOperations_ListLogCollections",
+        "operationId": "DeviceManagement_ListLogCollections",
         "description": "Get all device diagnostics log collections",
         "parameters": [
           {
@@ -467,7 +467,7 @@
     },
     "/management/deviceDiagnostics/logCollections/{operationId}": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetLogCollection",
+        "operationId": "DeviceManagement_GetLogCollection",
         "description": "Get the device diagnostics log collection",
         "parameters": [
           {
@@ -518,7 +518,7 @@
         }
       },
       "put": {
-        "operationId": "DeviceManagementOperations_StartLogCollection",
+        "operationId": "DeviceManagement_StartLogCollection",
         "description": "Start the device diagnostics log collection on specified devices.",
         "parameters": [
           {
@@ -570,7 +570,7 @@
     },
     "/management/deviceDiagnostics/logCollections/{operationId}/detailedStatus": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetLogCollectionDetailedStatus",
+        "operationId": "DeviceManagement_GetLogCollectionDetailedStatus",
         "description": "Get log collection with detailed status",
         "parameters": [
           {
@@ -616,7 +616,7 @@
     },
     "/management/devices": {
       "get": {
-        "operationId": "DeviceManagementOperations_ListDevices",
+        "operationId": "DeviceManagement_ListDevices",
         "description": "Gets a list of devices connected to Device Update for IoT Hub.",
         "parameters": [
           {
@@ -672,7 +672,7 @@
     },
     "/management/devices/{deviceId}": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetDevice",
+        "operationId": "DeviceManagement_GetDevice",
         "description": "Gets the device properties and latest deployment status for a device connected\nto Device Update for IoT Hub.",
         "parameters": [
           {
@@ -725,7 +725,7 @@
     },
     "/management/devices/{deviceId}/modules/{moduleId}": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetDeviceModule",
+        "operationId": "DeviceManagement_GetDeviceModule",
         "description": "Gets the device module properties and latest deployment status for a device\nmodule connected to Device Update for IoT Hub.",
         "parameters": [
           {
@@ -775,7 +775,7 @@
     },
     "/management/devices:import": {
       "post": {
-        "operationId": "DeviceManagementOperations_ImportDevices",
+        "operationId": "DeviceManagement_ImportDevices",
         "description": "Import existing devices from IoT Hub. This is a long-running-operation; use\nOperation-Location response header value to check for operation status.",
         "parameters": [
           {
@@ -825,7 +825,7 @@
     },
     "/management/groups": {
       "get": {
-        "operationId": "DeviceManagementOperations_ListGroups",
+        "operationId": "DeviceManagement_ListGroups",
         "description": "Gets a list of all device groups.  The $default group will always be returned first.",
         "parameters": [
           {
@@ -881,7 +881,7 @@
     },
     "/management/groups/{groupId}": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetGroup",
+        "operationId": "DeviceManagement_GetGroup",
         "description": "Gets the device group properties.",
         "parameters": [
           {
@@ -932,7 +932,7 @@
         }
       },
       "delete": {
-        "operationId": "DeviceManagementOperations_DeleteGroup",
+        "operationId": "DeviceManagement_DeleteGroup",
         "description": "Deletes a device group. This group is automatically created when a Device\nUpdate-enabled device is connected to the hub and reports its properties.\nGroups, subgroups, and deployments are not automatically cleaned up but are\nretained for history purposes. Users can call this method to delete a group if\nthey do not need to retain any of the history of the group and no longer need\nit. If a device is ever connected again for this group after the group was\ndeleted it will be automatically re-created but there will be no history.",
         "parameters": [
           {
@@ -982,7 +982,7 @@
     },
     "/management/groups/{groupId}/bestUpdates": {
       "get": {
-        "operationId": "DeviceManagementOperations_ListBestUpdatesForGroup",
+        "operationId": "DeviceManagement_ListBestUpdatesForGroup",
         "description": "Get the best available updates for a device group and a count of how many\ndevices need each update.",
         "parameters": [
           {
@@ -1028,7 +1028,7 @@
     },
     "/management/groups/{groupId}/deployments": {
       "get": {
-        "operationId": "DeviceManagementOperations_ListDeploymentsForGroup",
+        "operationId": "DeviceManagement_ListDeploymentsForGroup",
         "description": "Gets a list of deployments for a device group.",
         "parameters": [
           {
@@ -1091,7 +1091,7 @@
     },
     "/management/groups/{groupId}/deployments/{deploymentId}": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetDeployment",
+        "operationId": "DeviceManagement_GetDeployment",
         "description": "Gets the deployment properties.",
         "parameters": [
           {
@@ -1149,7 +1149,7 @@
         }
       },
       "put": {
-        "operationId": "DeviceManagementOperations_CreateOrUpdateDeployment",
+        "operationId": "DeviceManagement_CreateOrUpdateDeployment",
         "description": "Creates or updates a deployment.",
         "parameters": [
           {
@@ -1212,7 +1212,7 @@
         }
       },
       "delete": {
-        "operationId": "DeviceManagementOperations_DeleteDeployment",
+        "operationId": "DeviceManagement_DeleteDeployment",
         "description": "Deletes a deployment.",
         "parameters": [
           {
@@ -1269,7 +1269,7 @@
     },
     "/management/groups/{groupId}/deployments/{deploymentId}/status": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetDeploymentStatus",
+        "operationId": "DeviceManagement_GetDeploymentStatus",
         "description": "Gets the status of a deployment including a breakdown of how many devices in\nthe deployment are in progress, completed, or failed.",
         "parameters": [
           {
@@ -1319,7 +1319,7 @@
     },
     "/management/groups/{groupId}/deviceClassSubgroups": {
       "get": {
-        "operationId": "DeviceManagementOperations_ListDeviceClassSubgroupsForGroup",
+        "operationId": "DeviceManagement_ListDeviceClassSubgroupsForGroup",
         "description": "Get the device class subgroups for the group. A device class subgroup is the\nset of devices within the group that share the same device class. All devices\nwithin the same device class are compatible with the same updates.",
         "parameters": [
           {
@@ -1382,7 +1382,7 @@
     },
     "/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetDeviceClassSubgroup",
+        "operationId": "DeviceManagement_GetDeviceClassSubgroup",
         "description": "Gets device class subgroup details. A device class subgroup is the set of\ndevices within the group that share the same device class. All devices within\nthe same device class are compatible with the same updates.",
         "parameters": [
           {
@@ -1440,7 +1440,7 @@
         }
       },
       "delete": {
-        "operationId": "DeviceManagementOperations_DeleteDeviceClassSubgroup",
+        "operationId": "DeviceManagement_DeleteDeviceClassSubgroup",
         "description": "Deletes a device class subgroup. This subgroup is automatically created when a\nDevice Update-enabled device is connected to the hub and reports its\nproperties. Groups, subgroups, and deployments are not automatically cleaned up\nbut are retained for history purposes. Users can call this method to delete a\nsubgroup if they do not need to retain any of the history of the subgroup and\nno longer need it. If a device is ever connected again for this subgroup after\nthe subgroup was deleted it will be automatically re-created but there will be\nno history.",
         "parameters": [
           {
@@ -1497,7 +1497,7 @@
     },
     "/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/bestUpdates": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetBestUpdatesForDeviceClassSubgroup",
+        "operationId": "DeviceManagement_GetBestUpdatesForDeviceClassSubgroup",
         "description": "Get the best available update for a device class subgroup and a count of how\nmany devices need this update.",
         "parameters": [
           {
@@ -1547,7 +1547,7 @@
     },
     "/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments": {
       "get": {
-        "operationId": "DeviceManagementOperations_ListDeploymentsForDeviceClassSubgroup",
+        "operationId": "DeviceManagement_ListDeploymentsForDeviceClassSubgroup",
         "description": "Gets a list of deployments for a device class subgroup.",
         "parameters": [
           {
@@ -1617,7 +1617,7 @@
     },
     "/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetDeploymentForDeviceClassSubgroup",
+        "operationId": "DeviceManagement_GetDeploymentForDeviceClassSubgroup",
         "description": "Gets the deployment properties.",
         "parameters": [
           {
@@ -1682,7 +1682,7 @@
         }
       },
       "delete": {
-        "operationId": "DeviceManagementOperations_DeleteDeploymentForDeviceClassSubgroup",
+        "operationId": "DeviceManagement_DeleteDeploymentForDeviceClassSubgroup",
         "description": "Deletes a device class subgroup deployment.",
         "parameters": [
           {
@@ -1746,7 +1746,7 @@
     },
     "/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}:cancel": {
       "post": {
-        "operationId": "DeviceManagementOperations_StopDeployment",
+        "operationId": "DeviceManagement_StopDeployment",
         "description": "Stops a deployment.",
         "parameters": [
           {
@@ -1813,7 +1813,7 @@
     },
     "/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}:retry": {
       "post": {
-        "operationId": "DeviceManagementOperations_RetryDeployment",
+        "operationId": "DeviceManagement_RetryDeployment",
         "description": "Retries a deployment with failed devices.",
         "parameters": [
           {
@@ -1880,7 +1880,7 @@
     },
     "/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}/devicestates": {
       "get": {
-        "operationId": "DeviceManagementOperations_ListDeviceStatesForDeviceClassSubgroupDeployment",
+        "operationId": "DeviceManagement_ListDeviceStatesForDeviceClassSubgroupDeployment",
         "description": "Gets a list of devices in a deployment along with their state. Useful for\ngetting a list of failed devices.",
         "parameters": [
           {
@@ -1957,7 +1957,7 @@
     },
     "/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}/status": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetDeviceClassSubgroupDeploymentStatus",
+        "operationId": "DeviceManagement_GetDeviceClassSubgroupDeploymentStatus",
         "description": "Gets the status of a deployment including a breakdown of how many devices in\nthe deployment are in progress, completed, or failed.",
         "parameters": [
           {
@@ -2014,7 +2014,7 @@
     },
     "/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/updateCompliance": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetDeviceClassSubgroupUpdateCompliance",
+        "operationId": "DeviceManagement_GetDeviceClassSubgroupUpdateCompliance",
         "description": "Get device class subgroup update compliance information such as how many\ndevices are on their latest update, how many need new updates, and how many are\nin progress on receiving a new update.",
         "parameters": [
           {
@@ -2064,7 +2064,7 @@
     },
     "/management/groups/{groupId}/updateCompliance": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetUpdateComplianceForGroup",
+        "operationId": "DeviceManagement_GetUpdateComplianceForGroup",
         "description": "Get device group update compliance information such as how many devices are on\ntheir latest update, how many need new updates, and how many are in progress on\nreceiving a new update.",
         "parameters": [
           {
@@ -2107,7 +2107,7 @@
     },
     "/management/operations": {
       "get": {
-        "operationId": "DeviceManagementOperations_ListOperationStatuses",
+        "operationId": "DeviceManagement_ListOperationStatuses",
         "description": "Get a list of all device import operations. Completed operations are kept for 7 days before auto-deleted.",
         "parameters": [
           {
@@ -2171,7 +2171,7 @@
     },
     "/management/operations/{operationId}": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetOperationStatus",
+        "operationId": "DeviceManagement_GetOperationStatus",
         "description": "Retrieve operation status.",
         "parameters": [
           {
@@ -2224,7 +2224,7 @@
     },
     "/management/updateCompliance": {
       "get": {
-        "operationId": "DeviceManagementOperations_GetUpdateCompliance",
+        "operationId": "DeviceManagement_GetUpdateCompliance",
         "description": "Gets the breakdown of how many devices are on their latest update, have new\nupdates available, or are in progress receiving new updates.",
         "parameters": [
           {
@@ -2260,7 +2260,7 @@
     },
     "/updates": {
       "get": {
-        "operationId": "DeviceUpdateOperations_ListUpdates",
+        "operationId": "DeviceUpdate_ListUpdates",
         "description": "Get a list of all updates that have been imported to Device Update for IoT Hub.",
         "parameters": [
           {
@@ -2323,7 +2323,7 @@
     },
     "/updates/operations": {
       "get": {
-        "operationId": "DeviceUpdateOperations_ListOperationStatuses",
+        "operationId": "DeviceUpdate_ListOperationStatuses",
         "description": "Get a list of all import update operations. Completed operations are kept for 7\ndays before auto-deleted. Delete operations are not returned by this API\nversion.",
         "parameters": [
           {
@@ -2387,7 +2387,7 @@
     },
     "/updates/operations/{operationId}": {
       "get": {
-        "operationId": "DeviceUpdateOperations_GetOperationStatus",
+        "operationId": "DeviceUpdate_GetOperationStatus",
         "description": "Retrieve operation status.",
         "parameters": [
           {
@@ -2443,7 +2443,7 @@
     },
     "/updates/providers": {
       "get": {
-        "operationId": "DeviceUpdateOperations_ListProviders",
+        "operationId": "DeviceUpdate_ListProviders",
         "description": "Get a list of all update providers that have been imported to Device Update for IoT Hub.",
         "parameters": [
           {
@@ -2482,7 +2482,7 @@
     },
     "/updates/providers/{provider}/names": {
       "get": {
-        "operationId": "DeviceUpdateOperations_ListNames",
+        "operationId": "DeviceUpdate_ListNames",
         "description": "Get a list of all update names that match the specified provider.",
         "parameters": [
           {
@@ -2524,7 +2524,7 @@
     },
     "/updates/providers/{provider}/names/{name}/versions": {
       "get": {
-        "operationId": "DeviceUpdateOperations_ListVersions",
+        "operationId": "DeviceUpdate_ListVersions",
         "description": "Get a list of all update versions that match the specified provider and name.",
         "parameters": [
           {
@@ -2569,7 +2569,7 @@
     },
     "/updates/providers/{provider}/names/{name}/versions/{version}": {
       "get": {
-        "operationId": "DeviceUpdateOperations_GetUpdate",
+        "operationId": "DeviceUpdate_GetUpdate",
         "description": "Get a specific update version.",
         "parameters": [
           {
@@ -2615,7 +2615,7 @@
         }
       },
       "delete": {
-        "operationId": "DeviceUpdateOperations_DeleteUpdate",
+        "operationId": "DeviceUpdate_DeleteUpdate",
         "description": "Delete a specific update version. This is a long-running-operation; use\nOperation-Location response header value to check for operation status.",
         "parameters": [
           {
@@ -2665,7 +2665,7 @@
     },
     "/updates/providers/{provider}/names/{name}/versions/{version}/files": {
       "get": {
-        "operationId": "DeviceUpdateOperations_ListFiles",
+        "operationId": "DeviceUpdate_ListFiles",
         "description": "Get a list of all update file identifiers for the specified version.",
         "parameters": [
           {
@@ -2713,7 +2713,7 @@
     },
     "/updates/providers/{provider}/names/{name}/versions/{version}/files/{fileId}": {
       "get": {
-        "operationId": "DeviceUpdateOperations_GetFile",
+        "operationId": "DeviceUpdate_GetFile",
         "description": "Get a specific update file from the version.",
         "parameters": [
           {
@@ -2768,7 +2768,7 @@
     },
     "/updates:import": {
       "post": {
-        "operationId": "DeviceUpdateOperations_ImportUpdate",
+        "operationId": "DeviceUpdate_ImportUpdate",
         "description": "Import new update version. This is a long-running-operation; use\nOperation-Location response header value to check for operation status.",
         "parameters": [
           {

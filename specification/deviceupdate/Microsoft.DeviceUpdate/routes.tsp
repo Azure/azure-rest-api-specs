@@ -23,7 +23,7 @@ alias ServiceTraits = SupportsClientRequestId &
 
 alias ServiceOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-interface DeviceUpdateOperations {
+interface DeviceUpdate {
   /** Get a list of all updates that have been imported to Device Update for IoT Hub. */
   listUpdates is ServiceOperations.ResourceList<
     Update,
@@ -58,7 +58,7 @@ interface DeviceUpdateOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO doesn't return status monitor in 202 resposne body."
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior."
-  @pollingOperation(DeviceUpdateOperations.getOperationStatus)
+  @pollingOperation(DeviceUpdate.getOperationStatus)
   @route("updates:import")
   @post
   importUpdate is Azure.Core.Foundations.Operation<
@@ -83,7 +83,7 @@ interface DeviceUpdateOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO doesn't return status monitor in 202 resposne body."
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior."
-  @pollingOperation(DeviceUpdateOperations.getOperationStatus)
+  @pollingOperation(DeviceUpdate.getOperationStatus)
   @route("updates/providers/{provider}/names/{name}/versions/{version}")
   @delete
   deleteUpdate is Azure.Core.Foundations.Operation<
@@ -208,7 +208,7 @@ interface DeviceUpdateOperations {
   >;
 }
 
-interface DeviceManagementOperations {
+interface DeviceManagement {
   /**
    * Gets a list of all device classes (sets of devices compatible with the same
    * updates based on the model Id and compat properties reported in the Device
@@ -274,7 +274,7 @@ interface DeviceManagementOperations {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "LRO doesn't return status monitor in 202 response body."
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior."
-  @pollingOperation(DeviceManagementOperations.getOperationStatus)
+  @pollingOperation(DeviceManagement.getOperationStatus)
   @route("management/devices:import")
   @post
   importDevices is Azure.Core.Foundations.Operation<
@@ -639,7 +639,7 @@ interface DeviceManagementOperations {
   >;
 }
 
-interface InstanceManagementOperations {
+interface InstanceManagement {
   /**
    * Gets the instance limits for active deployments, devices, device classes, and
    * groups.
