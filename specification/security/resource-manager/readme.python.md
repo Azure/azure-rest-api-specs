@@ -64,7 +64,6 @@ batch:
   - tag: package-2021-06-only
   - tag: package-2021-05-preview-only
   - tag: package-2021-01-only
-  - tag: package-2021-01-preview-only
   - tag: package-2020-07-preview-only
   - tag: package-2020-01-python-only
   - tag: package-2020-01-preview-python-only
