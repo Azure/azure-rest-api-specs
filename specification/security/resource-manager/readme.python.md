@@ -45,6 +45,7 @@ batch:
   - tag: package-2023-05
   - tag: package-preview-2023-05
   - tag: package-preview-2023-03-only
+  - tag: package-preview-2023-02-15-only
   - tag: package-preview-2023-02-only
   - tag: package-preview-2023-01-only
   - tag: package-2023-01
@@ -141,6 +142,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-preview-2023-03-only' && $(python)
 namespace: azure.mgmt.security.v2023_03_01_preview
 output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2023_03_01_preview
+```
+
+### Tag: package-preview-2023-02-15-only and python
+
+These settings apply only when `--tag=package-preview-2023-02-15-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2023-02-15-only' && $(python)
+namespace: azure.mgmt.security.v2023_02_15_preview
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2023_02_15_preview
 ```
 
 ### Tag: package-preview-2023-02-only and python

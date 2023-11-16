@@ -152,6 +152,15 @@ input-file:
   - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
 ```
 
+### Tag: package-preview-2023-02-15-only
+
+These settings apply only when `--tag=package-preview-2023-02-15-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-02-15-only'
+input-file:
+  - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
+```
+
 ### Tag: package-preview-2023-02-only
 
 These settings apply only when `--tag=package-preview-2023-02-only` is specified on the command line.
@@ -162,7 +171,6 @@ input-file:
   - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
   - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
   - Microsoft.Security/preview/2023-02-01-preview/healthReports.json
-  - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 ```
 
 ### Tag: package-preview-2023-02
