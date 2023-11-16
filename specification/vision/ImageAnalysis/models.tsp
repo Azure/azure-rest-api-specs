@@ -219,7 +219,7 @@ model ImageAnalysisResult {
   @doc("""
   A list of crop regions at the desired as aspect ratios (if provided) that can be used as image thumbnails.
   These regions preserve as much content as possible from the analyzed image, with priority given to detected faces.
-  "")
+  """)
   @projectedName("json", "smartCropsResult")
   smartCrops?: SmartCropsResult;
 
@@ -330,7 +330,7 @@ enum VisualFeatures {
   smartCrops,
 
   @doc("Detect people in the image and return their location.")
-  people
+  people,
 }
 
 @doc("An object holding the publicly reachable URL of an image to analyze.")
