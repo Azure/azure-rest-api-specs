@@ -34,5 +34,5 @@ These settings apply only when `--tag=package-2021-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-06'
 input-file:
-    - Microsoft.Baremetal/preview/2021-06-01-preview/BootstrapRP.json
+    - Microsoft.BareMetal/preview/2021-06-01-preview/BootstrapRP.json
 ```
