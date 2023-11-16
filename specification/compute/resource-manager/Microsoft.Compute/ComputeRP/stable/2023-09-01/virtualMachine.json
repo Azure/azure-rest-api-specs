@@ -514,6 +514,22 @@
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will result in error from server as they are not supported."
           }
         ],
         "responses": {
@@ -628,6 +644,9 @@
           "Create a VM with Uefi Settings of secureBoot and vTPM.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithUefiSettings.json"
           },
+          "Create a VM with ProxyAgent Settings of enabled and mode.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithProxyAgentSettings.json"
+          },
           "Create a vm from a generalized shared image.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_FromAGeneralizedSharedImage.json"
           },
@@ -666,6 +685,9 @@
           },
           "Create a VM with securityType ConfidentialVM with Customer Managed Keys": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSecurityTypeConfidentialVMWithCustomerManagedKeys.json"
+          },
+          "Create a VM with securityType ConfidentialVM with NonPersistedTPM securityEncryptionType": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSecurityTypeConfidentialVMWithNonPersistedTPM.json"
           },
           "Create a VM with Disk Controller Type": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithDiskControllerType.json"
@@ -707,6 +729,22 @@
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch",
+            "description": "The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch",
+            "description": "Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will result in error from server as they are not supported."
           }
         ],
         "responses": {
@@ -3069,6 +3107,11 @@
         "patchStatus": {
           "$ref": "#/definitions/VirtualMachinePatchStatus",
           "description": "[Preview Feature] The status of virtual machine patch operations."
+        },
+        "isVMInStandbyPool": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "[Preview Feature] Specifies whether the VM is currently in or out of the Standby Pool."
         }
       },
       "description": "The instance view of a virtual machine."
@@ -3225,6 +3268,11 @@
           "readOnly": true,
           "type": "string",
           "description": "ManagedBy is set to Virtual Machine Scale Set(VMSS) flex ARM resourceID, if the VM is part of the VMSS. This property is used by platform for internal resource group delete optimization."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Etag is property returned in Create/Update/Get response of the VM, so that customer can supply it in the header to ensure optimistic updates."
         }
       },
       "allOf": [
