@@ -41,6 +41,9 @@
   "tags": [
     {
       "name": "Operations"
+    },
+    {
+      "name": "GenerateAwsTemplate"
     }
   ],
   "paths": {
@@ -83,6 +86,9 @@
     "/susbscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/generateAwsTemplate": {
       "post": {
         "operationId": "GenerateAwsTemplate",
+        "tags": [
+          "GenerateAwsTemplate"
+        ],
         "description": "Retrieve AWS Cloud Formation template",
         "parameters": [
           {
@@ -130,11 +136,11 @@
       "properties": {
         "connectorId": {
           "type": "string",
-          "description": "The name of public cloud connector."
+          "description": "The name of public cloud connector"
         },
         "solutionTypes": {
           "type": "array",
-          "description": "The list of solution types and their settings.",
+          "description": "The list of solution types and their settings",
           "items": {
             "$ref": "#/definitions/SolutionTypeProperties"
           },
@@ -147,29 +153,29 @@
     },
     "SolutionTypeProperties": {
       "type": "object",
-      "description": "The properties of Solution Configuration.",
+      "description": "The properties of Solution Configuration",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/provisioningState",
-          "description": "he resource provisioning state..",
+          "description": "The resource provisioning state",
           "readOnly": true
         },
         "solutionType": {
           "type": "string",
-          "description": "The type of the solution."
+          "description": "The type of the solution"
         },
         "solutionSettings": {
           "type": "string",
-          "description": "solution settings."
+          "description": "Solution settings"
         },
         "status": {
           "$ref": "#/definitions/solutionConfigurationStatus",
-          "description": "The status of solution configurations.",
+          "description": "The status of solution configurations",
           "readOnly": true
         },
         "statusDetails": {
           "type": "string",
-          "description": "The detailed message of status details.",
+          "description": "The detailed message of status details",
           "readOnly": true
         },
         "lastExecutionTime": {
@@ -188,7 +194,7 @@
       "description": "Cloud formation template response.",
       "properties": {
         "body": {
-          "description": "Cloud formation template for specified solution types."
+          "description": "Cloud formation template for specified solution types"
         }
       },
       "required": [

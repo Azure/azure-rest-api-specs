@@ -25,23 +25,23 @@ namespace Microsoft.HybridConnectivity;
 //---------------------------------------------- Models ----------------------------------------------
 
 
-@doc("The properties of Solution Configuration.")
+@doc("The properties of Solution Configuration")
 model SolutionTypeProperties {
-  @doc("he resource provisioning state..")
+  @doc("The resource provisioning state")
   @visibility("read")
   provisioningState?: provisioningState;
 
-  @doc("The type of the solution.")
+  @doc("The type of the solution")
   solutionType: string;
 
-  @doc("solution settings.")
+  @doc("Solution settings")
   solutionSettings?: string;
 
-  @doc("The status of solution configurations.")
+  @doc("The status of solution configurations")
   @visibility("read")
   status?: solutionConfigurationStatus;
 
-  @doc("The detailed message of status details.")
+  @doc("The detailed message of status details")
   @visibility("read")
   statusDetails?: string;
 
@@ -65,16 +65,16 @@ enum provisioningState {
 
 @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
 model GenerateAwsTemplateRequest {
-  @doc("The name of public cloud connector.")
+  @doc("The name of public cloud connector")
   connectorId: string;
 
-  @doc("The list of solution types and their settings.")
+  @doc("The list of solution types and their settings")
   solutionTypes?: Array<SolutionTypeProperties>;
 }
 
 @doc("Cloud formation template response.")
 model generateAwsTemplateResponse {
-  @doc("Cloud formation template for specified solution types.")
+  @doc("Cloud formation template for specified solution types")
   body: unknown;
 }
 
