@@ -1329,9 +1329,14 @@
       "type": "object",
       "description": "The provisioning state for the operation.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/RequestState",
-          "readOnly": true
+        "properties": {
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "$ref": "#/definitions/RequestState",
+              "readOnly": true
+            }
+          }
         }
       }
     },
