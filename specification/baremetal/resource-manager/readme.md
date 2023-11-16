@@ -1,0 +1,38 @@
+# AzureBridge Admin
+
+> see https://aka.ms/autorest
+
+This is the AutoRest configuration file for IBM PowerVm.
+
+---
+## Getting Started
+To build the SDK for AzureBridge Admin, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+
+> `autorest`
+
+To see additional help and options, run:
+
+> `autorest --help`
+---
+
+## Configuration
+
+### Basic Information
+These are the global settings for the IBM PowerVM API.
+
+``` yaml
+title: BootstrapRP
+description: BootstrapRP Client
+openapi-type: arm
+openapi-subtype: providerHub
+tag: package-2021-06
+```
+
+### Tag: 2021-06-01
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06'
+input-file:
+    - Microsoft.IbmPower/preview/2021-06-01-preview/Bootstrap.json
+```
