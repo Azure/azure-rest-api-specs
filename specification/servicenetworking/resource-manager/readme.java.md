@@ -4,5 +4,5 @@ These settings apply only when `--java` is specified on the command line.
 
 ``` yaml $(java)
 title: ServiceNetworkingMgmtClient
-serviceName: Service Networking
+service-name: Service Networking
 ```
