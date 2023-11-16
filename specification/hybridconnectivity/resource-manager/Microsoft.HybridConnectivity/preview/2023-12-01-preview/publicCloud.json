@@ -73,11 +73,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -85,7 +80,7 @@
     },
     "/subscriptionId/{subscriptionId}/providers/Microsoft.HybridConnectivity/generateAwsTemplate": {
       "post": {
-        "operationId": "GenerateAwsTemplate",
+        "operationId": "GenerateAwsTemplate_GenerateAwsTemplate",
         "tags": [
           "GenerateAwsTemplate"
         ],
@@ -98,7 +93,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "GenerateAwsTemplateRequest",
+            "name": "generateAwsTemplateRequest",
             "in": "body",
             "description": "ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.",
             "required": true,
@@ -119,11 +114,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "GenerateAwsTemplate": {
-            "$ref": "./examples/GenerateAwsTemplate.json"
           }
         }
       }
@@ -191,6 +181,7 @@
     },
     "provisioningState": {
       "type": "string",
+      "description": "Provisioning State enums.",
       "enum": [
         "Succeeded",
         "Failed",
@@ -198,11 +189,29 @@
       ],
       "x-ms-enum": {
         "name": "provisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          }
+        ]
       }
     },
     "solutionConfigurationStatus": {
       "type": "string",
+      "description": "Solution Configuration Status enums.",
       "enum": [
         "New",
         "InProgress",
@@ -211,7 +220,29 @@
       ],
       "x-ms-enum": {
         "name": "solutionConfigurationStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "New",
+            "value": "New",
+            "description": "New"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          }
+        ]
       }
     }
   },

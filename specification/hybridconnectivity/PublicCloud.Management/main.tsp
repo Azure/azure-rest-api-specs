@@ -21,9 +21,7 @@ using TypeSpec.OpenAPI;
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.HybridConnectivity;
 
-
 //---------------------------------------------- Models ----------------------------------------------
-
 
 @doc("The properties of Solution Configuration")
 model SolutionTypeProperties {
@@ -50,17 +48,31 @@ model SolutionTypeProperties {
   lastExecutionTime?: utcDateTime;
 }
 
+@doc("Solution Configuration Status enums.")
 enum solutionConfigurationStatus {
+  @doc("New")
   New,
+
+  @doc("InProgress")
   InProgress,
+
+  @doc("Completed")
   Completed,
+
+  @doc("Failed")
   Failed,
 }
 
+@doc("Provisioning State enums.")
 enum provisioningState {
+  @doc("Succeeded")
   Succeeded,
-  Failed, 
-  Canceled
+
+  @doc("Failed")
+  Failed,
+
+  @doc("Canceled")
+  Canceled,
 }
 
 @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
@@ -84,12 +96,12 @@ interface GenerateAwsTemplate {
   @post
   @action
   @tag("GenerateAwsTemplate")
-  @operationId("GenerateAwsTemplate")
   @doc("Retrieve AWS Cloud Formation template")
   generateAwsTemplate(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
-    @body GenerateAwsTemplateRequest: GenerateAwsTemplateRequest,
+    @body
+    generateAwsTemplateRequest: GenerateAwsTemplateRequest,
   ): Azure.ResourceManager.ArmResponse<{}> | ErrorResponse;
 }
