@@ -190,6 +190,8 @@
         "description": "Use this API to translate a single document.\nAll supported document formats can be obtained with `single/formats` API.\nSingle Glossary / Translation memory can be included in the request and applied by the service when the document is translated.",
         "produces": [
           "application/octet-stream",
+          "text/csv",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
           "application/json"
         ],
         "consumes": [
@@ -237,16 +239,14 @@
             "in": "formData",
             "description": "Document to be translated in the form",
             "required": true,
-            "type": "string",
-            "format": "byte"
+            "type": "file"
           },
           {
             "name": "glossary",
             "in": "formData",
             "description": "Glossary / translation memory will be used during translation in the form.",
             "required": false,
-            "type": "string",
-            "format": "byte"
+            "type": "file"
           }
         ],
         "responses": {
