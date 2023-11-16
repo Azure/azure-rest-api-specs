@@ -1,0 +1,225 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Hybrid Connectivity Management API",
+    "version": "2023-12-01-preview",
+    "description": "REST API for public clouds.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.HybridConnectivity/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/susbscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/generateAwsTemplate": {
+      "post": {
+        "operationId": "GenerateAwsTemplate",
+        "description": "Retrieve AWS Cloud Formation template",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "GenerateAwsTemplateRequest",
+            "in": "body",
+            "description": "ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateAwsTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/generateAwsTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateAwsTemplate": {
+            "$ref": "./examples/GenerateAwsTemplate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GenerateAwsTemplateRequest": {
+      "type": "object",
+      "description": "ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.",
+      "properties": {
+        "connectorId": {
+          "type": "string",
+          "description": "The name of public cloud connector."
+        },
+        "solutionTypes": {
+          "type": "array",
+          "description": "The list of solution types and their settings.",
+          "items": {
+            "$ref": "#/definitions/SolutionTypeProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "connectorId"
+      ]
+    },
+    "SolutionTypeProperties": {
+      "type": "object",
+      "description": "The properties of Solution Configuration.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/provisioningState",
+          "description": "he resource provisioning state..",
+          "readOnly": true
+        },
+        "solutionType": {
+          "type": "string",
+          "description": "The type of the solution."
+        },
+        "solutionSettings": {
+          "type": "string",
+          "description": "solution settings."
+        },
+        "status": {
+          "$ref": "#/definitions/solutionConfigurationStatus",
+          "description": "The status of solution configurations.",
+          "readOnly": true
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The detailed message of status details.",
+          "readOnly": true
+        },
+        "lastExecutionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last execution time of solution configuration.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "solutionType"
+      ]
+    },
+    "generateAwsTemplateResponse": {
+      "type": "object",
+      "description": "Cloud formation template response.",
+      "properties": {
+        "body": {
+          "description": "Cloud formation template for specified solution types."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "provisioningState": {
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "provisioningState",
+        "modelAsString": true
+      }
+    },
+    "solutionConfigurationStatus": {
+      "type": "string",
+      "enum": [
+        "New",
+        "InProgress",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "solutionConfigurationStatus",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {}
+}
