@@ -44,3 +44,4 @@ directive:
   - suppress: ParametersInPointGet
     from: deploymentScripts.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+```
