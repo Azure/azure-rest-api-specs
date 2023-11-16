@@ -38,67 +38,7 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-09'
 input-file:
-  - Microsoft.Network/preview/2023-09-01-preview/applicationGateway.json
-  - Microsoft.Network/preview/2023-09-01-preview/applicationGatewayWafDynamicManifests.json
-  - Microsoft.Network/preview/2023-09-01-preview/applicationSecurityGroup.json
-  - Microsoft.Network/preview/2023-09-01-preview/availableDelegations.json
-  - Microsoft.Network/preview/2023-09-01-preview/availableServiceAliases.json
-  - Microsoft.Network/preview/2023-09-01-preview/azureFirewall.json
-  - Microsoft.Network/preview/2023-09-01-preview/azureFirewallFqdnTag.json
-  - Microsoft.Network/preview/2023-09-01-preview/azureWebCategory.json
-  - Microsoft.Network/preview/2023-09-01-preview/bastionHost.json
-  - Microsoft.Network/preview/2023-09-01-preview/checkDnsAvailability.json
-  - Microsoft.Network/preview/2023-09-01-preview/cloudServiceNetworkInterface.json
-  - Microsoft.Network/preview/2023-09-01-preview/cloudServicePublicIpAddress.json
-  - Microsoft.Network/preview/2023-09-01-preview/cloudServiceSwap.json
-  - Microsoft.Network/preview/2023-09-01-preview/customIpPrefix.json
-  - Microsoft.Network/preview/2023-09-01-preview/ddosCustomPolicy.json
-  - Microsoft.Network/preview/2023-09-01-preview/ddosProtectionPlan.json
-  - Microsoft.Network/preview/2023-09-01-preview/dscpConfiguration.json
-  - Microsoft.Network/preview/2023-09-01-preview/endpointService.json
-  - Microsoft.Network/preview/2023-09-01-preview/expressRouteCircuit.json
-  - Microsoft.Network/preview/2023-09-01-preview/expressRouteCrossConnection.json
-  - Microsoft.Network/preview/2023-09-01-preview/expressRoutePort.json
-  - Microsoft.Network/preview/2023-09-01-preview/expressRouteProviderPort.json
-  - Microsoft.Network/preview/2023-09-01-preview/firewallPolicy.json
-  - Microsoft.Network/preview/2023-09-01-preview/ipAllocation.json
-  - Microsoft.Network/preview/2023-09-01-preview/ipGroups.json
-  - Microsoft.Network/preview/2023-09-01-preview/loadBalancer.json
-  - Microsoft.Network/preview/2023-09-01-preview/natGateway.json
-  - Microsoft.Network/preview/2023-09-01-preview/network.json
-  - Microsoft.Network/preview/2023-09-01-preview/networkInterface.json
-  - Microsoft.Network/preview/2023-09-01-preview/networkManager.json
-  - Microsoft.Network/preview/2023-09-01-preview/networkManagerActiveConfiguration.json
-  - Microsoft.Network/preview/2023-09-01-preview/networkManagerConnection.json
-  - Microsoft.Network/preview/2023-09-01-preview/networkManagerConnectivityConfiguration.json
-  - Microsoft.Network/preview/2023-09-01-preview/networkManagerEffectiveConfiguration.json
-  - Microsoft.Network/preview/2023-09-01-preview/networkManagerGroup.json
-  - Microsoft.Network/preview/2023-09-01-preview/networkManagerScopeConnection.json
-  - Microsoft.Network/preview/2023-09-01-preview/networkManagerSecurityAdminConfiguration.json
-  - Microsoft.Network/preview/2023-09-01-preview/networkProfile.json
-  - Microsoft.Network/preview/2023-09-01-preview/networkSecurityGroup.json
-  - Microsoft.Network/preview/2023-09-01-preview/networkVirtualAppliance.json
   - Microsoft.Network/preview/2023-09-01-preview/networkWatcher.json
-  - Microsoft.Network/preview/2023-09-01-preview/operation.json
-  - Microsoft.Network/preview/2023-09-01-preview/privateEndpoint.json
-  - Microsoft.Network/preview/2023-09-01-preview/privateLinkService.json
-  - Microsoft.Network/preview/2023-09-01-preview/publicIpAddress.json
-  - Microsoft.Network/preview/2023-09-01-preview/publicIpPrefix.json
-  - Microsoft.Network/preview/2023-09-01-preview/routeFilter.json
-  - Microsoft.Network/preview/2023-09-01-preview/routeTable.json
-  - Microsoft.Network/preview/2023-09-01-preview/securityPartnerProvider.json
-  - Microsoft.Network/preview/2023-09-01-preview/serviceCommunity.json
-  - Microsoft.Network/preview/2023-09-01-preview/serviceEndpointPolicy.json
-  - Microsoft.Network/preview/2023-09-01-preview/serviceTags.json
-  - Microsoft.Network/preview/2023-09-01-preview/usage.json
-  - Microsoft.Network/preview/2023-09-01-preview/virtualNetwork.json
-  - Microsoft.Network/preview/2023-09-01-preview/virtualNetworkGateway.json
-  - Microsoft.Network/preview/2023-09-01-preview/virtualNetworkTap.json
-  - Microsoft.Network/preview/2023-09-01-preview/virtualRouter.json
-  - Microsoft.Network/preview/2023-09-01-preview/virtualWan.json
-  - Microsoft.Network/preview/2023-09-01-preview/vmssNetworkInterface.json
-  - Microsoft.Network/preview/2023-09-01-preview/vmssPublicIpAddress.json
-  - Microsoft.Network/preview/2023-09-01-preview/webapplicationfirewall.json
 ```
 ### Tag: package-2023-08-preview
 
