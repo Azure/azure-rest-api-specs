@@ -3,7 +3,7 @@
   "info": {
     "title": "BootstrapRP",
     "description": "Microsoft BareMetal Azure Resource Provider specification",
-    "version": "2021-06-01"
+    "version": "2021-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,6 +34,42 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.BareMetal/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Microsoft.BareMetal Rest API operations",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "examples/Operations_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.BareMetal/bareMetalConnections": {
       "get": {
         "tags": [
@@ -67,7 +103,7 @@
           }
         },
         "x-ms-examples": {
-          "Accounts_Get": {
+          "BareMetalConnections list subscription": {
             "$ref": "examples/BareMetalConnections_ListSubscription.json"
           }
         }
@@ -109,7 +145,7 @@
           }
         },
         "x-ms-examples": {
-          "Accounts_Get": {
+          "BareMetalConnections list resource group": {
             "$ref": "examples/BareMetalConnections_ListResourceGroup.json"
           }
         }
@@ -117,18 +153,18 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroup/{resourceGroupName}/providers/Microsoft.BareMetal/bareMetalConnections/{connectionName}": {
       "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConnectionName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ConnectionName"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
       ],
       "get": {
         "tags": [
@@ -151,7 +187,7 @@
           }
         },
         "x-ms-examples": {
-          "Accounts_Get": {
+          "BareMetalConnections get": {
             "$ref": "examples/BareMetalConnections_Get.json"
           }
         }
@@ -198,7 +234,7 @@
           }
         },
         "x-ms-examples": {
-          "Accounts_Get": {
+          "BareMetalConnections create or update": {
             "$ref": "examples/BareMetalConnections_CreateOrUpdate.json"
           }
         }
@@ -224,7 +260,7 @@
           }
         },
         "x-ms-examples": {
-          "Accounts_Get": {
+          "BareMetalConnections delete": {
             "$ref": "examples/BareMetalConnections_Delete.json"
           }
         }
@@ -268,7 +304,7 @@
           }
         },
         "x-ms-examples": {
-          "Accounts_Get": {
+          "BareMetalConnections update": {
             "$ref": "examples/BareMetalConnections_Update.json"
           }
         }
@@ -277,60 +313,60 @@
   },
   "definitions": {
     "bareMetalConnection": {
-        "description": "Model representing a BareMetal Connection object.",
-        "type": "object",
-        "x-ms-azure-resource": true,
-        "required": [
-          "properties"
-        ],
-        "allOf": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-          }
-        ],
-        "properties": {
-          "etag": {
-            "type": "string",
-            "description": "Resource Etag."
-          },
-          "properties": {
-            "description": "BareMetal Connection properties.",
-            "$ref": "#/definitions/bareMetalConnectionProperties",
-            "x-ms-client-flatten": true
-          }
+      "description": "Model representing a BareMetal Connection object.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
+      ],
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag."
+        },
+        "properties": {
+          "description": "BareMetal Connection properties.",
+          "$ref": "#/definitions/bareMetalConnectionProperties",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "bareMetalConnectionProperties": {
-        "description": "Basic PowerVm properties needed for the request and response.",
-        "type": "object",
-        "required": [
-            "ipAddress",
-            "vlanId",
-            "deviceId",
-            "subnetResourceId",
-            "provisioningState"
-        ],
-        "properties": {
-            "ipAddress": {
-            "description": "IP address to be allocated in the delegated subnet of the associated BareMetal Connection.",
-            "type": "string"
-            },
-            "vlanId": {
-            "description": "VLAN ID for the delegated subnet of the associated BareMetal Connection.",
-            "type": "string"
-            },
-            "deviceId": {
-            "description": "The IBM Power POD ASR baremetal ID.",
-            "type": "string"
-            },
-            "subnetResourceId": {
-            "description": "The Microsoft.BareMetal/AzureHostedService delegated subnet ID.",
-            "type": "string"
-            },
-            "provisioningState": {
-            "$ref": "#/definitions/provisioningState"
-            }
+      "description": "Basic PowerVm properties needed for the request and response.",
+      "type": "object",
+      "required": [
+        "ipAddress",
+        "vlanId",
+        "deviceId",
+        "subnetResourceId",
+        "provisioningState"
+      ],
+      "properties": {
+        "ipAddress": {
+          "description": "IP address to be allocated in the delegated subnet of the associated BareMetal Connection.",
+          "type": "string"
+        },
+        "vlanId": {
+          "description": "VLAN ID for the delegated subnet of the associated BareMetal Connection.",
+          "type": "string"
+        },
+        "deviceId": {
+          "description": "The IBM Power POD ASR baremetal ID.",
+          "type": "string"
+        },
+        "subnetResourceId": {
+          "description": "The Microsoft.BareMetal/AzureHostedService delegated subnet ID.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/provisioningState"
         }
+      }
     },
     "bareMetalConnectionList": {
       "description": "List of IBM Power interfaces.",
@@ -338,7 +374,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of BareMetal Connectoins.",
+          "description": "List of BareMetal Connections.",
           "items": {
             "$ref": "#/definitions/bareMetalConnection"
           }
