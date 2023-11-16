@@ -11,6 +11,9 @@ using Azure.Core;
 @service({
   title: "Azure.AI.DocumentTranslation service",
 })
+
+/** Use following line to generate Swagger specification for dev machine */
+/** @server("http://localhost:80", "Development endpoint") */
 @versioned(DocumentTranslation.Versions)
 namespace DocumentTranslation;
 
