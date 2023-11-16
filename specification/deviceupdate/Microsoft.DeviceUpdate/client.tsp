@@ -22,3 +22,6 @@ namespace Customizations;
     name: "InstanceManagementClient",
   }
 );
+
+@@projectedName(Azure.IoT.DeviceUpdate.DeviceUpdateOperations, "typescript", "DeviceUpdate");
+@@projectedName(Azure.IoT.DeviceUpdate.DeviceManagementOperations, "typescript", "DeviceManagement");
