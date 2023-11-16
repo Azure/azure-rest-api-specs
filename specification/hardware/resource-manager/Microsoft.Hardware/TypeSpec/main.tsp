@@ -47,9 +47,6 @@ model OrderProperties {
   @OpenAPI.extension("x-ms-identifiers",["id"])
   orderLines:OrderLine[];
 
-  @doc("Billing Information")
-  billingInformation?:BillingInformation;
-
   @doc("Currency for the order")
   currency?:string;
 
@@ -74,15 +71,6 @@ model CustomerOrder {
 
   @doc("Customer PurchaseOrder Date")
   createdDate: plainDate;
-}
-
-@doc("Billing Details for Order")
-model BillingInformation {
-  @doc("Credit Card Auth Token - if blank defaults to Invoicing")
-  authorizationToken: string;
-
-  @doc("base64 Risk Token")
-  riskToken: string;
 }
 
 @doc("Order Line")
@@ -341,6 +329,7 @@ interface OrderPreviewInterface {
     ...ApiVersionParameter,
 
     @doc("The orderPreview request")
+    @body
     body: Order,
   ): Order | ErrorResponse;
 }

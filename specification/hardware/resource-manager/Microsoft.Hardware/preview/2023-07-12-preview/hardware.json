@@ -102,6 +102,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "The orderPreview request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Order"
@@ -425,38 +426,6 @@
     }
   },
   "definitions": {
-    "BillingInformation": {
-      "type": "object",
-      "description": "Billing Details for Order",
-      "properties": {
-        "authorizationToken": {
-          "type": "string",
-          "description": "Credit Card Auth Token - if blank defaults to Invoicing"
-        },
-        "riskToken": {
-          "type": "string",
-          "description": "base64 Risk Token"
-        }
-      },
-      "required": [
-        "authorizationToken",
-        "riskToken"
-      ]
-    },
-    "BillingInformationUpdate": {
-      "type": "object",
-      "description": "Billing Details for Order",
-      "properties": {
-        "authorizationToken": {
-          "type": "string",
-          "description": "Credit Card Auth Token - if blank defaults to Invoicing"
-        },
-        "riskToken": {
-          "type": "string",
-          "description": "base64 Risk Token"
-        }
-      }
-    },
     "CustomerOrder": {
       "type": "object",
       "description": "Customer PurchaseOrder",
@@ -763,10 +732,6 @@
             "id"
           ]
         },
-        "billingInformation": {
-          "$ref": "#/definitions/BillingInformation",
-          "description": "Billing Information"
-        },
         "currency": {
           "type": "string",
           "description": "Currency for the order"
@@ -887,10 +852,6 @@
           "x-ms-identifiers": [
             "id"
           ]
-        },
-        "billingInformation": {
-          "$ref": "#/definitions/BillingInformationUpdate",
-          "description": "Billing Information"
         },
         "currency": {
           "type": "string",
