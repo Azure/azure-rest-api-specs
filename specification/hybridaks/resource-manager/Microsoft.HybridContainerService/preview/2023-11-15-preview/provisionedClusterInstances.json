@@ -232,6 +232,42 @@
         }
       }
     },
+    "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/upgradeProfiles": {
+      "get": {
+        "tags": [
+          "provisionedClusterInstances"
+        ],
+        "operationId": "provisionedClusterInstances_ListUpgradeProfile",
+        "summary": "Lists the upgrade profiles of a provisioned cluster instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/connectedClusterResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProvisionedClusterUpgradeProfileList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetUpgradeProfileForProvisionedClusterInstance": {
+            "$ref": "./examples/ProvisionedClusterInstanceListUpgradeProfile.json"
+          }
+        }
+      }
+    },
     "/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/hybridIdentityMetadata/default": {
       "put": {
         "operationId": "HybridIdentityMetadata_Put",
@@ -2138,6 +2174,23 @@
         "properties"
       ],
       "description": "The list of available upgrades for compute pools."
+    },
+    "ProvisionedClusterUpgradeProfileList": {
+      "description": "List of upgradeProfiles for the provisioned cluster.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of upgradeProfiles.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of upgradeProfiles",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProvisionedClusterUpgradeProfile"
+          }
+        }
+      }
     },
     "OSType": {
       "type": "string",
