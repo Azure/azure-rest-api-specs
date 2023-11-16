@@ -3264,6 +3264,11 @@
           "$ref": "../../../common-types/v1/common.json#/definitions/ExtendedLocation",
           "description": "The extended location of the Virtual Machine."
         },
+        "managedBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ManagedBy is set to Virtual Machine Scale Set(VMSS) flex ARM resourceID, if the VM is part of the VMSS. This property is used by platform for internal resource group delete optimization."
+        },
         "etag": {
           "readOnly": true,
           "type": "string",
