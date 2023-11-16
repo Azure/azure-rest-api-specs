@@ -280,6 +280,12 @@
           "Create a scale set with Security Posture Reference": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSecurityPostureReference.json"
           },
+          "Create a scale set with Resilient VM Creation enabled": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithResilientVMCreationPolicy.json"
+          },
+          "Create a scale set with Resilient VM Deletion enabled": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithResilientVMDeletionPolicy.json"
+          },
           "Create a scale set with SecurityType as ConfidentialVM and NonPersistedTPM securityEncryptionType": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSecurityTypeConfidentialVMWithNonPersistedTPM.json"
           }
@@ -3905,6 +3911,40 @@
       },
       "description": "Describes an upgrade policy - automatic, manual, or rolling."
     },
+    "ResiliencyPolicy": {
+      "type": "object",
+      "properties": {
+        "resilientVMCreationPolicy": {
+          "$ref": "#/definitions/ResilientVMCreationPolicy",
+          "description": "The configuration parameters used while performing resilient VM creation."
+        },
+        "resilientVMDeletionPolicy": {
+          "$ref": "#/definitions/ResilientVMDeletionPolicy",
+          "description": "The configuration parameters used while performing resilient VM deletion."
+        }
+      },
+      "description": "Describes an resiliency policy - resilientVMCreationPolicy and/or resilientVMDeletionPolicy."
+    },
+    "ResilientVMCreationPolicy": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether resilient VM creation should be enabled on the virtual machine scale set. The default value is false."
+        }
+      },
+      "description": "The configuration parameters used while performing resilient VM creation."
+    },
+    "ResilientVMDeletionPolicy": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether resilient VM deletion should be enabled on the virtual machine scale set. The default value is false."
+        }
+      },
+      "description": "The configuration parameters used while performing resilient VM deletion."
+    },
     "RollingUpgradePolicy": {
       "properties": {
         "maxBatchInstancePercent": {
@@ -5276,6 +5316,10 @@
         "constrainedMaximumCapacity": {
           "type": "boolean",
           "description": "Optional property which must either be set to True or omitted."
+        },
+        "resiliencyPolicy": {
+          "$ref": "#/definitions/ResiliencyPolicy",
+          "description": "Policy for Resiliency"
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -5325,6 +5369,10 @@
         "spotRestorePolicy": {
           "$ref": "#/definitions/SpotRestorePolicy",
           "description": "Specifies the Spot Restore properties for the virtual machine scale set."
+        },
+        "resiliencyPolicy": {
+          "$ref": "#/definitions/ResiliencyPolicy",
+          "description": "Policy for Resiliency"
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
