@@ -1,9 +1,21 @@
 {
   "parameters": {
-    "api-version": "2023-11-01",
+    "api-version": "2021-06-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "connectionName": "myBMConnection"
+    "connectionName": "myBMConnection",
+    "bareMetalConnectionObject": {
+      "etag": "f0e24442-4477-44c1-b906-0aa402de7c0d",
+      "location": "westcentralus",
+      "tags": {
+        "additionalProp1": "descriptiveTag"
+      },
+      "properties": {
+        "ipAddress": "10.1.1.10",
+        "deviceId": "MyDevice1",
+        "subnetResourceId": "/subscriptions/subscriptionId/resourceGroups/rg-1/providers/Microsoft.Network/virtualNetworks/vnet-1/subnets/subnet-1"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -31,6 +43,11 @@
           "deviceId": "MyDevice1",
           "subnetResourceId": "/subscriptions/subscriptionId/resourceGroups/rg-1/providers/Microsoft.Network/virtualNetworks/vnet-1/subnets/subnet-1"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://eastus2euap.management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Workloads/locations/NORTHEUROPE/operationStatuses/sample-op-status?api-version=2022-10-15-preview"
       }
     }
   }
