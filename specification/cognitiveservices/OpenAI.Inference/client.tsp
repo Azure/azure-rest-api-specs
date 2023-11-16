@@ -44,3 +44,9 @@ using Azure.ClientGenerator.Core;
 @@usage(Azure.OpenAI.AzureCognitiveSearchChatExtensionConfiguration,
   Usage.input
 );
+
+// Remap "model" nomenclature to "DeploymentName" in appropriate containers; comments should clarify the dual use
+@@projectedName(Azure.OpenAI.ImageGenerationOptions.`model`,
+  "csharp",
+  "DeploymentName"
+);

@@ -1,6 +1,7 @@
 import "@typespec/versioning";
-
 import "./azure_chat_extensions.tsp";
+import "./extensions_onyourdata_common_options.tsp";
+import "./extensions_onyourdata_vector_search.tsp";
 
 namespace Azure.OpenAI;
 
@@ -23,15 +24,20 @@ model AzureCognitiveSearchIndexFieldMappingOptions {
 
   @doc("The names of index fields that should be treated as content.")
   @projectedName("csharp", "ContentFieldNames")
-  contentFieldNames?: string[];
+  contentFields?: string[];
 
   @doc("The separator pattern that content fields should use.")
   @projectedName("csharp", "ContentFieldSeparator")
-  contentFieldSeparator?: string;
+  contentFieldsSeparator?: string;
 
   @doc("The names of fields that represent vector data.")
   @projectedName("csharp", "VectorFieldNames")
   vectorFields?: string[];
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("The names of fields that represent image vector data.")
+  @projectedName("csharp", "ImageVectorFieldNames")
+  imageVectorFields?: string[];
 }
 
 @doc("""
@@ -60,7 +66,11 @@ enum AzureCognitiveSearchQueryType {
 A specific representation of configurable options for Azure Cognitive Search when using it as an Azure OpenAI chat
 extension.
 """)
-model AzureCognitiveSearchChatExtensionConfiguration {
+@added(ServiceApiVersions.v2023_08_01_Preview)
+model AzureCognitiveSearchChatExtensionConfiguration
+  extends AzureChatExtensionConfiguration {
+  ...OnYourDataCommonChatExtensionConfiguration;
+
   @doc("""
   The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
   default value for Azure Cognitive Search.
@@ -71,10 +81,6 @@ model AzureCognitiveSearchChatExtensionConfiguration {
   @projectedName("csharp", "SearchEndpoint")
   endpoint: url;
 
-  @doc("The API admin key to use with the specified Azure Cognitive Search endpoint.")
-  @projectedName("csharp", "SearchKey")
-  key: string;
-
   @doc("The name of the index to use as available in the referenced Azure Cognitive Search resource.")
   indexName: string;
 
@@ -82,24 +88,26 @@ model AzureCognitiveSearchChatExtensionConfiguration {
   @projectedName("csharp", "FieldMappingOptions")
   fieldsMapping?: AzureCognitiveSearchIndexFieldMappingOptions;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
-  @doc("The configured top number of documents to feature for the configured query.")
-  @projectedName("csharp", "DocumentCount")
-  topNDocuments?: int32;
-
   @doc("The query type to use with Azure Cognitive Search.")
   queryType?: AzureCognitiveSearchQueryType;
-
-  @doc("Whether queries should be restricted to use of indexed data.")
-  @projectedName("csharp", "ShouldRestrictResultScope")
-  inScope?: boolean;
 
   @doc("The additional semantic configuration for the query.")
   semanticConfiguration?: string;
 
-  @doc("When using embeddings for search, specifies the resource URL from which embeddings should be retrieved.")
+  @doc("Search filter.")
+  filter?: string;
+
+  @doc("When using embeddings for search, specifies the resource endpoint URL from which embeddings should be retrieved. It should be in the format of format https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/YOUR_DEPLOYMENT_NAME/embeddings?api-version={api-version}.")
+  @added(ServiceApiVersions.v2023_08_01_Preview)
+  @removed(ServiceApiVersions.v2023_12_01_Preview)
   embeddingEndpoint?: url;
 
+  @added(ServiceApiVersions.v2023_08_01_Preview)
+  @removed(ServiceApiVersions.v2023_12_01_Preview)
   @doc("When using embeddings, specifies the API key to use with the provided embeddings endpoint.")
   embeddingKey?: string;
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("The embedding dependency for vector search.")
+  embeddingDependency?: OnYourDataEmbeddingDependency;
 }

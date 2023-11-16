@@ -1,8 +1,10 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
+import "@typespec/versioning";
 
 using Azure.Core;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
@@ -32,6 +34,7 @@ enum AzureOpenAIOperationState {
 @Foundations.Private.needsRoute
 @post
 @doc("Long running operation template to match Azure OpenAI .")
+@removed(ServiceApiVersions.v2023_12_01_Preview)
 op OaiLongRunningRpcOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model,

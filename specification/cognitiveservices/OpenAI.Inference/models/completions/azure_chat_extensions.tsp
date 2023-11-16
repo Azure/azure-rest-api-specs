@@ -1,7 +1,10 @@
 import "@typespec/versioning";
-
 import "./chat_completions.tsp";
-import "./azure_cognitive_search_options.tsp";
+import "./extensions_onyourdata_azure_cognitive_search_options.tsp";
+import "./extensions_onyourdata_azure_machinelearning_index_options.tsp";
+import "./extensions_onyourdata_azure_cosmosdb_options.tsp";
+import "./extensions_onyourdata_elasticsearch_options.tsp";
+import "./extensions_onyourdata_pinecone_options.tsp";
 
 namespace Azure.OpenAI;
 
@@ -30,8 +33,25 @@ using TypeSpec.Versioning;
 enum AzureChatExtensionType {
   @doc("Represents the use of Azure Cognitive Search as an Azure OpenAI chat extension.")
   azureCognitiveSearch: "AzureCognitiveSearch",
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("Represents the use of Azure Machine Learning index as an Azure OpenAI chat extension.")
+  azureMachineLearningIndex: "AzureMLIndex",
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("Represents the use of Azure Cosmos DB as an Azure OpenAI chat extension.")
+  azureCosmosDB: "AzureCosmosDB",
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("Represents the use of Elasticsearch® index as an Azure OpenAI chat extension.")
+  elasticsearch: "Elasticsearch",
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("Represents the use of Pinecone index as an Azure OpenAI chat extension.")
+  pinecone: "Pinecone",
 }
 
+@discriminator("type")
 @added(ServiceApiVersions.v2023_08_01_Preview)
 @doc("""
   A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat
