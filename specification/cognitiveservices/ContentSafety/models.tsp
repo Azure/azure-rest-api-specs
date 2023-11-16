@@ -512,92 +512,90 @@ model AnalyzeImageWithTextResult {
 }
 
 @added(Versions.v2023_11_30_Preview)
-@doc("The text to detect ungroundedness.")
-model DetectUngroundednessInputContent {
-  @doc("Identity of the text.")
-  id: string;
-
-  @doc("Text for analysis.")
-  text: string;
-}
-
-@added(Versions.v2023_11_30_Preview)
-@doc("User input for ungroudedness detection.")
-model DetectUngroundednessInput {
-  @doc("This is optional and only used for QnA or chat task.")
-  query?: string;
-
-  @doc("Content for analysis.")
-  contents: DetectUngroundednessInputContent[];
-
-  @doc("Source information that serves as grounding source.")
-  groundingSource: string[];
-}
-
-@added(Versions.v2023_11_30_Preview)
 @doc("Connection information for GPT resource.")
-model DetectUngroundednessGptxOptions {
-  @doc("Endpoint of GPT resource.")
+model DetectUngroundednessGptxResource {
+  @doc("Endpoint of Azure OpenAI resource.")
   azureOpenAIEndpoint: string;
 
-  @doc("Deployment id of GPT resource.")
-  deploymentId: string;
+  @doc("Deployment name of GPT model.")
+  deploymentName: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+@added(ContentSafety.Versions.v2023_11_30_Preview)
+@doc("Text analyze domain category.")
+enum TextDomainCategory {
+  Office,
+  Medical,
+  Generic,
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+@added(ContentSafety.Versions.v2023_11_30_Preview)
+@doc("Text analyze task.")
+enum TextTask {
+  QNA,
+  Chat,
+  Summarization,
 }
 
 @added(Versions.v2023_11_30_Preview)
 @doc("The request of ungroudedness detection.")
 model DetectUngroundednessOptions {
-  @doc("Domain that the current request belongs to.")
-  domain: string;
+  @doc("Domain of the text to be analyzed.")
+  domainCategory: TextDomainCategory;
 
-  @doc("Type of work that the customer want the API to execute.")
-  task: string;
+  @doc("Task type of the text to be analyzed.")
+  task?: TextTask;
 
-  @doc("The input to be examined for detection.")
-  input: DetectUngroundednessInput;
+  @doc("This is optional and only used for QnA or chat task.")
+  qaQuery?: string;
 
-  @doc("Options to set GPT resources for BYO scenario.")
-  gptxOptions?: DetectUngroundednessGptxOptions;
+  @doc("The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
+  text: string;
+
+  @doc("Source information that serves as grounding source. We support a maximum of 10k Unicode characters (Unicode code points) in all grounding sources of one request.")
+  groundingSources: string[];
+
+  @doc("GPT resources connection information for BYO scenario.")
+  gptxResource?: DetectUngroundednessGptxResource;
 }
 
 @added(Versions.v2023_11_30_Preview)
 @doc("The detection result of ungroudedness.")
-model TextUngroundednessDetection {
-  @doc("Identity of content.")
-  id: string;
-
-  @doc("Detection result for ungroudedness.")
+model UngroundednessAnalysis {
+  @doc("Detection result for ungrouded text.")
   isUngrounded: boolean;
 
-  @doc("The confidence store of the model in the analysis results.")
-  score: float64;
+  @doc("Model confidence store in the analysis results.")
+  confidenceScore: float32;
 
-  @doc("Ungroundedness rate of content.")
-  ungroundednessRate: float64;
+  @doc("Percentage of Ungrounded Text.")
+  ungroundednessPercentage: float32;
 
   @doc("The detailed information about a text identified as ungroundness.")
-  textSpan: UngroundednessTextSpan[];
+  ungroundedTextDetails: UngroundedTextDetails[];
 }
 
 @added(Versions.v2023_11_30_Preview)
 @doc("The detailed information about a text identified as ungroundness.")
-model UngroundednessTextSpan {
-  @doc("The starting character where ungroundness information occurs.")
-  startCharIdx: int32;
+model UngroundedTextDetails {
+  @doc("The index of the ungrounded text from the beginning of the original text.")
+  ungroundedTextOffset: int32;
 
-  @doc("The length of the ungroundness information.")
-  charLen: int32;
+  @doc("The length of the ungrounded text.")
+  ungroundedTextLength: int32;
 
-  @doc("The text identified as ungroundness.")
-  ungroundednessText: string;
+  @doc("The ungrounded text.")
+  ungroundedText: string;
 
-  @doc("The reason for text being identified as ungroundness.")
-  reason: string;
+  @doc("The reason or explanation for identifying the text as ungrounded.")
+  ungroundedTextReason: string;
 }
 
 @added(Versions.v2023_11_30_Preview)
 @doc("The response of ungroudedness detection.")
 model DetectUngroundednessResult {
   @doc("Ungroudedness detection result.")
-  detectionResult: TextUngroundednessDetection[];
+  ungroundednessAnalysis: UngroundednessAnalysis[];
 }

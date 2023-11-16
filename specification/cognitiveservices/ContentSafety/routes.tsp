@@ -279,10 +279,10 @@ interface ImageWithTextOperations {
 
 @added(Versions.v2023_11_30_Preview)
 interface TextUngroundednessDetectionOperations{
-  @summary("Detect ungroundedness content")
-  @doc("A synchronous API for the ungroundedness detection.")
-  @route("/detectUngroundedness")
-  @post 
+  @summary("Detect Ungrounded Information")
+  @doc("A synchronous API for the analysis of language model outputs to determine if they align with the information provided by the user or contain fictional content.")
+  @route("/text:detectUngroundedness")
+  @post
   detectUngroundedness is Azure.Core.RpcOperation<
     {
       @body
