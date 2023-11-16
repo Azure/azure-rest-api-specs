@@ -111,7 +111,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/generateAwsTemplateResponse"
+              "type": "object"
             }
           },
           "default": {
@@ -187,18 +187,6 @@
       },
       "required": [
         "solutionType"
-      ]
-    },
-    "generateAwsTemplateResponse": {
-      "type": "object",
-      "description": "Cloud formation template response.",
-      "properties": {
-        "body": {
-          "description": "Cloud formation template for specified solution types"
-        }
-      },
-      "required": [
-        "body"
       ]
     },
     "provisioningState": {

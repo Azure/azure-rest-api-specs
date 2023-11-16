@@ -72,12 +72,6 @@ model GenerateAwsTemplateRequest {
   solutionTypes?: Array<SolutionTypeProperties>;
 }
 
-@doc("Cloud formation template response.")
-model generateAwsTemplateResponse {
-  @doc("Cloud formation template for specified solution types")
-  body: unknown;
-}
-
 //---------------------------------------------- Operations ----------------------------------------------
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -97,5 +91,5 @@ interface GenerateAwsTemplate {
     ...SubscriptionIdParameter,
     @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
     @body GenerateAwsTemplateRequest: GenerateAwsTemplateRequest,
-  ): Azure.ResourceManager.ArmResponse<generateAwsTemplateResponse> | ErrorResponse;
+  ): Azure.ResourceManager.ArmResponse<{}> | ErrorResponse;
 }
