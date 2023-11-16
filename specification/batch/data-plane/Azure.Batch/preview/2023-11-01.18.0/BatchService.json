@@ -36,17 +36,16 @@
   ],
   "security": [
     {
-      "AADToken": [
+      "OAuth2Auth": [
         "https://batch.core.windows.net//.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "AADToken": {
+    "OAuth2Auth": {
       "type": "oauth2",
-      "description": "The Azure Active Directory OAuth2 Flow",
       "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "scopes": {
         "https://batch.core.windows.net//.default": ""
       }
@@ -3901,9 +3900,6 @@
           }
         },
         "x-ms-examples": {
-          "Creates a pool with accelerated networking": {
-            "$ref": "./examples/PoolCreate_AcceleratedNetworking.json"
-          },
           "Creates a CloudServiceConfiguration pool": {
             "$ref": "./examples/PoolCreate_CloudServiceConfiguration.json"
           },
@@ -3915,6 +3911,9 @@
           },
           "Creates a VirtualMachineConfiguration pool with extensions": {
             "$ref": "./examples/PoolCreate_VirtualMachineConfigurationWithExtensions.json"
+          },
+          "Creates a pool with accelerated networking": {
+            "$ref": "./examples/PoolCreate_AcceleratedNetworking.json"
           },
           "Creates a pool with mount drive specified": {
             "$ref": "./examples/PoolCreate_MountConfiguration.json"
@@ -6554,28 +6553,6 @@
     }
   },
   "definitions": {
-    "AADToken": {
-      "type": "object",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "OAuth2 authentication",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flows": {
-          "type": "array",
-          "description": "Supported OAuth2 flows",
-          "items": {}
-        }
-      },
-      "required": [
-        "type",
-        "flows"
-      ]
-    },
     "AccessScope": {
       "type": "string",
       "description": "AccessScope enums",
