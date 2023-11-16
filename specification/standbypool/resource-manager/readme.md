@@ -30,6 +30,14 @@ openapi-subtype: rpaas
 tag: package-preview-2023-12
 ```
 
+### Suppression
+``` yaml
+suppressions:
+  - code: OperationIdNounVerb
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/{standbyVirtualMachinePoolName}/standbyVirtualMachines"].get.operationId
+    reason: OperationId "StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource" does seem to be a Noun_Verb
+```
+
 
 ### Tag: package-preview-2023-12
 
