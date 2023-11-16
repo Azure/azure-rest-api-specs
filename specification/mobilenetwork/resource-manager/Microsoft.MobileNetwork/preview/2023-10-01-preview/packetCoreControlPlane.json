@@ -1228,6 +1228,7 @@
           "description": "The provisioning state of the secret containing private keys and keyIds for SUPI concealment.",
           "enum": [
             "NotProvisioned",
+            "PartiallyProvisioned",
             "Provisioned",
             "Failed"
           ],
@@ -1237,15 +1238,19 @@
             "values": [
               {
                 "value": "NotProvisioned",
-                "description": "The secret has not been provisioned."
+                "description": "The secrets have not been provisioned. The \"reason\" property explains why."
+              },
+              {
+                "value": "PartiallyProvisioned",
+                "description": "Not all secrets have been provisioned. The \"reason\" property explains why."
               },
               {
                 "value": "Provisioned",
-                "description": "The secret has been provisioned."
+                "description": "All secrets have been provisioned."
               },
               {
                 "value": "Failed",
-                "description": "The secret failed to be provisioned. The \"reason\" property explains why."
+                "description": "The secrets failed to be provisioned. The \"reason\" property explains why."
               }
             ]
           }
@@ -1253,7 +1258,7 @@
         "reason": {
           "readOnly": true,
           "type": "string",
-          "description": "Reason for certificate provisioning failure."
+          "description": "Reason(s) for the current provisioning state of the Home Network Private Keys."
         }
       }
     },

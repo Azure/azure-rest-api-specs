@@ -321,6 +321,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/MobileNetworkPropertiesFormat",
           "description": "Mobile network properties."
+        },
+        "identity": {
+          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity used to retrieve the ingress certificate from Azure key vault."
         }
       },
       "allOf": [
@@ -415,7 +419,7 @@
         },
         "keyUrl": {
           "type": "string",
-          "description": "The URL of the secret containing the private key, unversioned. For example: https://contosovault.vault.azure.net/secrets/mySuciPrivateKey."
+          "description": "The URL of the secret containing the private key, versioned or unversioned. For example: https://contosovault.vault.azure.net/secrets/mySuciPrivateKey/562a4bb76b524a1493a6afe8e536ee78."
         },
         "keyProfile": {
           "type": "string",
