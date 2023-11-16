@@ -372,6 +372,15 @@
             "description": "The name of the SSH public key."
           },
           {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SshGenerateKeyPairInputParameters"
+            },
+            "description": "Parameters supplied to generate the SSH public key."
+          },
+          {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
           },
           {
@@ -395,6 +404,12 @@
         "x-ms-examples": {
           "Generate an SSH key pair.": {
             "$ref": "./examples/sshPublicKeyExamples/SshPublicKey_GenerateKeyPair.json"
+          },
+          "Generate an SSH key pair with RSA encryption.": {
+            "$ref": "./examples/sshPublicKeyExamples/SshPublicKey_GenerateKeyPair_EncryptionWithRSA.json"
+          },
+          "Generate an SSH key pair with Ed25519 encryption.": {
+            "$ref": "./examples/sshPublicKeyExamples/SshPublicKey_GenerateKeyPair_EncryptionWithEd25519.json"
           }
         }
       }
@@ -480,6 +495,24 @@
         "value"
       ],
       "description": "The list SSH public keys operation response."
+    },
+    "SshGenerateKeyPairInputParameters": {
+      "type": "object",
+      "properties": {
+        "encryptionType": {
+          "type": "string",
+          "description": "The encryption type of the SSH keys to be generated. See SshEncryptionTypes for possible set of values. If not provided, will default to RSA",
+          "enum": [
+            "RSA",
+            "Ed25519"
+          ],
+          "x-ms-enum": {
+            "name": "SshEncryptionTypes",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Parameters for GenerateSshKeyPair."
     }
   }
 }

@@ -753,10 +753,11 @@
       "properties": {
         "securityEncryptionType": {
           "type": "string",
-          "description": "Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, and VMGuestStateOnly for encryption of just the VMGuestState blob. **Note:** It can be set for only Confidential VMs.",
+          "description": "Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob.. **Note:** It can be set for only Confidential VMs.",
           "enum": [
             "VMGuestStateOnly",
-            "DiskWithVMGuestState"
+            "DiskWithVMGuestState",
+            "NonPersistedTPM"
           ],
           "x-ms-enum": {
             "name": "securityEncryptionTypes",
@@ -1089,6 +1090,43 @@
       },
       "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine. Minimum api-version: 2020-12-01."
     },
+    "EncryptionIdentity": {
+      "type": "object",
+      "properties": {
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "description": "Specifies ARM Resource ID of one of the user identities associated with the VM."
+        }
+      },
+      "description": "Specifies the Managed Identity used by ADE to get access token for keyvault operations."
+    },
+    "ProxyAgentSettings": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether ProxyAgent feature should be enabled on the virtual machine or virtual machine scale set."
+        },
+        "mode": {
+          "type": "string",
+          "description": "Specifies the mode that ProxyAgent will execute on if the feature is enabled. ProxyAgent will start to audit or monitor but not enforce access control over requests to host endpoints in Audit mode, while in Enforce mode it will enforce access control. The default value is Enforce mode.",
+          "enum": [
+            "Audit",
+            "Enforce"
+          ],
+          "x-ms-enum": {
+            "name": "Mode",
+            "modelAsString": true
+          }
+        },
+        "keyIncarnationId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Increase the value of this property allows user to reset the key used for securing communication channel between guest and host."
+        }
+      },
+      "description": "Specifies ProxyAgent settings while creating the virtual machine. Minimum api-version: 2023-09-01."
+    },
     "SecurityProfile": {
       "properties": {
         "uefiSettings": {
@@ -1110,6 +1148,14 @@
             "name": "SecurityTypes",
             "modelAsString": true
           }
+        },
+        "encryptionIdentity": {
+          "$ref": "#/definitions/EncryptionIdentity",
+          "description": "Specifies the Managed Identity used by ADE to get access token for keyvault operations."
+        },
+        "proxyAgentSettings": {
+          "$ref": "#/definitions/ProxyAgentSettings",
+          "description": "Specifies ProxyAgent settings while creating the virtual machine. Minimum api-version: 2023-09-01."
         }
       },
       "description": "Specifies the Security profile settings for the virtual machine or virtual machine scale set."
@@ -1913,6 +1959,69 @@
         }
       },
       "description": "Specifies additional settings to be applied when patch mode AutomaticByPlatform is selected in Linux patch settings."
+    },
+    "AttachDetachDataDisksRequest": {
+      "type": "object",
+      "properties": {
+        "dataDisksToAttach": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/DataDisksToAttach"
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ],
+          "description": "The list of managed data disks to be attached."
+        },
+        "dataDisksToDetach": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/DataDisksToDetach"
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ],
+          "description": "The list of managed data disks to be detached."
+        }
+      },
+      "description": "Specifies the input for attaching and detaching a list of managed data disks."
+    },
+    "DataDisksToAttach": {
+      "type": "object",
+      "properties": {
+        "diskId": {
+          "type": "string",
+          "description": "ID of the managed data disk."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM. If not specified, lun would be auto assigned."
+        }
+      },
+      "required": [
+        "diskId"
+      ],
+      "description": "Describes the data disk to be attached."
+    },
+    "DataDisksToDetach": {
+      "type": "object",
+      "properties": {
+        "diskId": {
+          "type": "string",
+          "description": "ID of the managed data disk."
+        },
+        "detachOption": {
+          "$ref": "#/definitions/DetachOption",
+          "description": "Supported options available for Detach of a disk from a VM. Refer to DetachOption object reference for more details."
+        }
+      },
+      "required": [
+        "diskId"
+      ],
+      "description": "Describes the data disk to be detached."
     }
   }
 }
