@@ -1551,6 +1551,116 @@
         }
       }
     },
+    "/entity/bulk/delete": {
+      "delete": {
+        "tags": [
+          "Entity"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "description": "Delete entities with hierarchy",
+        "operationId": "Entity_DeleteWithHierarchy",
+        "x-ms-examples": {
+          "Entity_DeleteWithHierarchy": {
+            "$ref": "./examples/Entity_DeleteWithHierarchy.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "guid",
+            "in": "query",
+            "description": "An array of GUIDs of entities to delete.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "x-ms-client-name": "guids"
+          },
+          {
+            "name": "parallelCount",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              4,
+              8,
+              16,
+              32,
+              64
+            ],
+            "x-ms-enum": {
+              "name": "parallelCount",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. A job to delete entities with hierarchy.",
+            "headers": {
+              "Operation-Location": {
+                "description": "Response header for long running operation",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/entity/operations/{operationGuid}": {
+      "get": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Get the status of entity asynchronous operation",
+        "operationId": "Entity_GetOperationStatus",
+        "x-ms-examples": {
+          "Entity_GetOperationStatus": {
+            "$ref": "./examples/Entity_GetOperationStatusByOperationGuid.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/operationGuid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return the status of import csv operation.",
+            "schema": {
+              "$ref": "#/definitions/EntityAsyncOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/atlas/v2/glossary": {
       "get": {
         "tags": [
@@ -7054,6 +7164,75 @@
       },
       "title": "AuditLog",
       "description": "Data map audit log."
+    },
+    "EntityAsyncOperation": {
+      "type": "object",
+      "title": "Status of entity operation",
+      "description": "The status of entity operation",
+      "required": [
+        "id",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/EntityAsyncOperationStatus"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "The created time of the record."
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "description": "The last updated time of the record."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EntityAsyncOperationProperties"
+        },
+        "error": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AsyncOperationError"
+        }
+      }
+    },
+    "EntityAsyncOperationProperties": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "EntityAsyncOperationStatus": {
+      "type": "string",
+      "enum": [
+        "NotStarted",
+        "Succeeded",
+        "Failed",
+        "Running",
+        "Aborted",
+        "PartialSucceeded"
+      ],
+      "x-ms-enum": {
+        "name": "EntityAsyncOperationStatus",
+        "modelAsString": true
+      },
+      "title": "EntityAsyncOperationStatus",
+      "description": "Enum of the status of entity asynchronous operation."
+    },
+    "AsyncOperationError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Code from async job if fail"
+        },
+        "message": {
+          "type": "string",
+          "description": "Message from async job if fail"
+        }
+      }
     }
   },
   "parameters": {
