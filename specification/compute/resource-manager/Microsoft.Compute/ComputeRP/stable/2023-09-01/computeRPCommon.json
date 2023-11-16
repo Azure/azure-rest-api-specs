@@ -753,10 +753,11 @@
       "properties": {
         "securityEncryptionType": {
           "type": "string",
-          "description": "Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, and VMGuestStateOnly for encryption of just the VMGuestState blob. **Note:** It can be set for only Confidential VMs.",
+          "description": "Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob.. **Note:** It can be set for only Confidential VMs.",
           "enum": [
             "VMGuestStateOnly",
-            "DiskWithVMGuestState"
+            "DiskWithVMGuestState",
+            "NonPersistedTPM"
           ],
           "x-ms-enum": {
             "name": "securityEncryptionTypes",
@@ -1099,6 +1100,33 @@
       },
       "description": "Specifies the Managed Identity used by ADE to get access token for keyvault operations."
     },
+    "ProxyAgentSettings": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether ProxyAgent feature should be enabled on the virtual machine or virtual machine scale set."
+        },
+        "mode": {
+          "type": "string",
+          "description": "Specifies the mode that ProxyAgent will execute on if the feature is enabled. ProxyAgent will start to audit or monitor but not enforce access control over requests to host endpoints in Audit mode, while in Enforce mode it will enforce access control. The default value is Enforce mode.",
+          "enum": [
+            "Audit",
+            "Enforce"
+          ],
+          "x-ms-enum": {
+            "name": "Mode",
+            "modelAsString": true
+          }
+        },
+        "keyIncarnationId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Increase the value of this property allows user to reset the key used for securing communication channel between guest and host."
+        }
+      },
+      "description": "Specifies ProxyAgent settings while creating the virtual machine. Minimum api-version: 2023-09-01."
+    },
     "SecurityProfile": {
       "properties": {
         "uefiSettings": {
@@ -1124,6 +1152,10 @@
         "encryptionIdentity": {
           "$ref": "#/definitions/EncryptionIdentity",
           "description": "Specifies the Managed Identity used by ADE to get access token for keyvault operations."
+        },
+        "proxyAgentSettings": {
+          "$ref": "#/definitions/ProxyAgentSettings",
+          "description": "Specifies ProxyAgent settings while creating the virtual machine. Minimum api-version: 2023-09-01."
         }
       },
       "description": "Specifies the Security profile settings for the virtual machine or virtual machine scale set."
