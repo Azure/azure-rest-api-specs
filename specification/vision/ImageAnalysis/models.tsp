@@ -3,30 +3,33 @@ import "@typespec/http";
 namespace ImageAnalysis;
 using TypeSpec.Http;
 
-@doc("A basic rectangle specifying a sub-region of the image")
+@doc("A basic rectangle specifying a sub-region of the image.")
 model ImageBoundingBox {
-  @doc("X coordinate")
+  @doc("X-coordinate of the top left point of the area, in pixels.")
   @minValue(0)
   x: int32;
 
-  @doc("Y coordinate")
+  @doc("Y-coordinate of the top left point of the area, in pixels.")
   @minValue(0)
   y: int32;
 
-  @doc("Width of the box")
+  @doc("Width of the area, in pixels.")
   @minValue(0)
   @projectedName("json", "w")
   width: int32;
 
-  @doc("Height of the box")
+  @doc("Height of the area, in pixels.")
   @minValue(0)
   @projectedName("json", "h")
   height: int32;
 }
 
-@doc("A brief description of what the image depicts.")
+@doc("Represents a generated phrase that describes the content of the whole image.")
 model CaptionResult {
-  @doc("The level of confidence the service has in the caption.")
+  @doc("""
+  A score, in the range of 0 to 1 (inclusive), representing the confidence that this description is accurate.
+  Higher values indicating higher confidence.
+  """)
   @minValue(0.0)
   @maxValue(1.0)
   confidence: float32;
@@ -36,19 +39,30 @@ model CaptionResult {
   text: string;
 }
 
-@doc("A region identified for smart cropping. There will be one region returned for each requested aspect ratio.")
+@doc("""
+A region at the desired aspect ratio that can be used as image thumbnail.
+The region preserves as much content as possible from the analyzed image, with priority given to detected faces.
+""")
 model CropRegion {
-  @doc("The aspect ratio of the crop region.")
+  @doc("""
+  The aspect ratio of the crop region.
+  Aspect ratio is calculated by dividing the width of the region in pixels by its height in pixels.
+  The aspect ratio will be in the range 0.75 to 1.8 (inclusive) if provided by the developer during the analyze call.
+  Otherwise, it will be in the range 0.5 to 2.0 (inclusive).
+  """)
   @minValue(0.0)
   aspectRatio: float32;
 
-  @doc("The bounding box of the crop region.")
+  @doc("The bounding box of the region.")
   boundingBox: ImageBoundingBox;
 }
 
-@doc("A brief description of what the image depicts.")
+@doc("Represents a generated phrase that describes the content of the whole image or a region in the image")
 model DenseCaption {
-  @doc("The level of confidence the service has in the caption.")
+  @doc("""
+  A score, in the range of 0 to 1 (inclusive), representing the confidence that this description is accurate.
+  Higher values indicating higher confidence.
+  """)
   @minValue(0.0)
   @maxValue(1.0)
   confidence: float32;
@@ -57,34 +71,40 @@ model DenseCaption {
   @minLength(1)
   text: string;
 
-  @doc("The bounding box of the caption.")
+  @doc("The image region of which this caption applies.")
   boundingBox: ImageBoundingBox;
 }
 
-@doc("A list of captions.")
+@doc("""
+Represents a list of up to 10 image captions for different regions of the image.
+The first caption always applies to the whole image.
+""")
 model DenseCaptionsResult {
-  @doc("The list of captions.")
+  @doc("The list of image captions.")
   @minItems(1)
   values: Array<DenseCaption>;
 }
 
-@doc("Describes a detected object in an image.")
+@doc("Represents a physical object detected in an image.")
 model DetectedObject {
-  @doc("Gets a rectangular boundary within which the object was detected.")
+  @doc("A rectangular boundary where the object was detected.")
   boundingBox: ImageBoundingBox;
 
-  @doc("Classification confidences of the detected object.")
+  @doc("A single-item list containing the object information.")
   @minItems(0)
   tags: Array<DetectedTag>;
 }
 
-@doc("Represents a person detected in an image")
+@doc("Represents a person detected in an image.")
 model DetectedPerson {
-  @doc("Gets a rectangular boundary within which the person was detected.")
+  @doc("A rectangular boundary where the person was detected.")
   @visibility("read")
   boundingBox: ImageBoundingBox;
 
-  @doc("Gets the confidence value of the detected person.")
+  @doc("""
+  A score, in the range of 0 to 1 (inclusive), representing the confidence that this detection was accurate.
+  Higher values indicating higher confidence.
+  """)
   @visibility("read")
   @minValue(0.0)
   @maxValue(1.0)
@@ -165,44 +185,50 @@ model DocumentWord {
   span: DocumentSpan;
 }
 
-@doc("Describe the combined results of different types of image analysis.")
+@doc("Represents the outcome of an Image Analysis operation.")
 model ImageAnalysisResult {
-  @doc("A CaptionResult for the image.")
+  @doc("The generated phrase that describes the content of the analyzed image.")
   @projectedName("json", "captionResult")
   caption?: CaptionResult;
 
-  @doc("A denseCaptionsResult for the image.")
+  @doc("""
+  The up to 10 generated phrases, the first describing the content of the whole image,
+  and the others describing the content of different regions of the image.
+  """)
   @projectedName("json", "denseCaptionsResult")
   denseCaptions?: DenseCaptionsResult;
 
-  @doc("The model used for the analysis")
+  @doc("Metadata associated with the analyzed image.")
   metadata: ImageMetadata;
 
-  @doc("The model used for the analysis")
+  @doc("The cloud AI model used for the analysis")
   modelVersion: string;
 
-  @doc("A list of objects for the image.")
+  @doc("A list of detected physical objects in the analyzed image, and their location.")
   @projectedName("json", "objectsResult")
   objects?: ObjectsResult;
 
-  @doc("A list of people for the image.")
+  @doc("A list of detected people in the analyzed image, and their location.")
   @projectedName("json", "peopleResult")
   people?: PeopleResult;
 
-  @doc("A readResult for the image.")
+  @doc("The extracted printed and hand-written text in the analyze image. Also knows as OCR.")
   @projectedName("json", "readResult")
   read?: ReadResult;
 
-  @doc("A list of regions for the image.")
+  @doc("""
+  A list of crop regions at the desired as aspect ratios (if provided) that can be used as image thumbnails.
+  These regions preserve as much content as possible from the analyzed image, with priority given to detected faces.
+  "")
   @projectedName("json", "smartCropsResult")
   smartCrops?: SmartCropsResult;
 
-  @doc("A list of tags for the image.")
+  @doc("A list of content tags in the analyzed image.")
   @projectedName("json", "tagsResult")
   tags?: TagsResult;
 }
 
-@doc("The image metadata information such as height and width.")
+@doc("Metadata associated with the analyzed image.")
 model ImageMetadata {
   @doc("The height of the image in pixels.")
   @minValue(1)
@@ -213,21 +239,21 @@ model ImageMetadata {
   width: int32;
 }
 
-@doc("Describes detected objects in an image.")
+@doc("Represents a list of physical object detected in an image and their location.")
 model ObjectsResult {
-  @doc("An array of detected objects.")
+  @doc("A list of physical object detected in an image and their location.")
   @minItems(0)
   values: Array<DetectedObject>;
 }
 
-@doc("An object describing whether the image contains people.")
+@doc("Represents a list of people detected in an image and their location.")
 model PeopleResult {
-  @doc("An array of detected people.")
+  @doc("A list of people detected in an image and their location.")
   @minItems(0)
   values: Array<DetectedPerson>;
 }
 
-@doc("The results of an Read operation.")
+@doc("The results of a Read (OCR) operation.")
 model ReadResult {
   @doc("Concatenate string representation of all textual and visual elements in reading order.")
   content: string;
@@ -245,16 +271,25 @@ model ReadResult {
   modelVersion: string;
 }
 
-@doc("Smart cropping result.")
+@doc("""
+Smart cropping result. A list of crop regions at the desired as aspect ratios (if provided) that can be used as image thumbnails.
+These regions preserve as much content as possible from the analyzed image, with priority given to detected faces.
+""")
 model SmartCropsResult {
-  @doc("Recommended regions for cropping the image.")
+  @doc("A list of crop regions.")
   @minItems(1)
   values: Array<CropRegion>;
 }
 
-@doc("An entity observation in the image, along with the confidence score.")
+@doc("""
+A content entity observation in the image. A tag can be a physical object, living being, scenery, or action
+that appear in the image.
+""")
 model DetectedTag {
-  @doc("The level of confidence that the entity was observed.")
+  @doc("""
+  A score, in the range of 0 to 1 (inclusive), representing the confidence that this entity was observed.
+  Higher values indicating higher confidence.
+  """)
   @minValue(0.0)
   @maxValue(1.0)
   confidence: float32;
@@ -264,39 +299,42 @@ model DetectedTag {
   name: string;
 }
 
-@doc("A list of tags with confidence level.")
+@doc("""
+A list of entities observed in the image. Tags can be physical objects, living being, scenery, or actions
+that appear in the image.
+""")
 model TagsResult {
-  @doc("A list of tags with confidence level.")
+  @doc("A list of tags.")
   @minItems(0)
   values: Array<DetectedTag>;
 }
 
-@doc("The visual features requested: tags, objects, caption, denseCaptions, read, smartCrops, people. This parameter needs to be specified if the parameter \"model-name\" is not specified.")
+@doc("The visual features supported by the Image Analysis service")
 enum VisualFeatures {
-  @doc("Tags")
+  @doc("Extract content tags for thousands of recognizable objects, living beings, scenery, and actions that appear in the image.")
   tags,
 
-  @doc("Caption")
+  @doc("Generate a human-readable caption sentence that describes the content of the image.")
   caption,
 
-  @doc("DenseCaptions")
+  @doc("Generate human-readable caption sentences for up to 10 different regions in the image, including one for the whole image.")
   denseCaptions,
 
-  @doc("Objects")
+  @doc("Object detection. This is similar to tags, but focused on detecting physical objects in the image and returning their location.")
   objects,
 
-  @doc("Read")
+  @doc("Extract printed or handwritten text from the image. Also known as Optical Character Recognition (OCR).")
   read,
 
-  @doc("SmartCrops")
+  @doc("Find representative sub-regions of the image for thumbnail generation, at desired aspect ratios, with priority given to detected faces.")
   smartCrops,
 
-  @doc("People")
-  people,
+  @doc("Detect people in the image and return their location.")
+  people
 }
 
-@doc("A JSON document with a URL pointing to the image that is to be analyzed.")
+@doc("An object holding the publicly reachable URL of an image to analyze.")
 model ImageUrl {
-  @doc("Publicly reachable URL of an image.")
+  @doc("Publicly reachable URL of an image to analyze.")
   url: url;
 }
