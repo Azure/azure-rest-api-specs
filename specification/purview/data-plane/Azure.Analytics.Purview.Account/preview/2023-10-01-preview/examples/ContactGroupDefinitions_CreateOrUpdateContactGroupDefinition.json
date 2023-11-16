@@ -1,7 +1,10 @@
 {
   "parameters": {
-    "collectionName": "myCollection1",
-    "api-version": "2023-10-01-preview"
+    "contactGroupDefinitionName": "myOwnerGroup1",
+    "api-version": "2023-10-01-preview",
+    "body": {
+      "description": "People to contact for data security."
+    }
   },
   "responses": {
     "200": {
@@ -12,15 +15,9 @@
         "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
       },
       "body": {
-        "parentNameChain": [
-          "myDomain1",
-          "myParentCollection1"
-        ],
-        "parentFriendlyNameChain": [
-          "Test Account Friendly Name",
-          "My Domain 1",
-          "My Parent Collection 1"
-        ]
+        "name": "myOwnerGroup1",
+        "description": "People to contact for data security.",
+        "contactGroupType": "Custom"
       }
     }
   }

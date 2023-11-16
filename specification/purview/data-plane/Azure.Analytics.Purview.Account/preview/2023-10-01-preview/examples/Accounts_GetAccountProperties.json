@@ -1,7 +1,6 @@
 {
   "parameters": {
-    "endpoint": "{endpoint}",
-    "api-version": "2018-12-01-preview"
+    "api-version": "2023-10-01-preview"
   },
   "responses": {
     "200": {
@@ -19,7 +18,7 @@
         "type": "Microsoft.ProjectBabylon/accounts",
         "sku": {
           "name": "Standard",
-          "capacity": 4
+          "capacity": 1
         },
         "systemData": {
           "createdBy": "client-name",
@@ -37,8 +36,7 @@
           "provisioningState": "Succeeded",
           "endpoints": {
             "catalog": "https://account1.catalog.babylon.azure-test.com",
-            "scan": "https://account1.scan.babylon.azure-test.com",
-            "guardian": "https://account1.guardian.babylon.azure-test.com"
+            "scan": "https://account1.scan.babylon.azure-test.com"
           },
           "privateEndpointConnections": [
             {
@@ -62,6 +60,19 @@
             "resourceGroup": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl",
             "storageAccount": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.Storage/storageAccounts/scanwestustzaagzr",
             "eventHubNamespace": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.EventHub/namespaces/atlas-westusdddnbtp"
+          },
+          "ingestionStorage": {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/ingestion-storage-rg-mwjotkl",
+            "primaryEndpoint": "https://ingestioneastusddnpkar.z31.blob.storage.azure.net/",
+            "publicNetworkAccess": "Enabled"
+          },
+          "mergeInfo": {
+            "accountLocation": "westus2",
+            "accountName": "account2",
+            "accountResourceGroupName": "SampleResourceGroup",
+            "accountSubscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+            "typeOfAccount": "Secondary",
+            "mergeStatus": "Succeeded"
           }
         }
       }

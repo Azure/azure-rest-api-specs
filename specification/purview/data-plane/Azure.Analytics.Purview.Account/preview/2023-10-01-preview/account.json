@@ -1,28 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-11-01-preview",
     "title": "DataPlaneAccountClient",
-    "description": "Creates a Microsoft.Purview data plane account client."
+    "description": "Creates a Microsoft.Purview data plane account client.",
+    "version": "2023-10-01-preview"
   },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
-    "useSchemePrefix": false,
-    "parameters": [
-      {
-        "$ref": "#/parameters/endpoint"
-      }
-    ]
-  },
-  "basePath": "/",
+  "host": "purview.azure.com",
+  "basePath": "/account/",
   "schemes": [
     "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
   ],
   "paths": {
     "/": {
@@ -32,6 +18,9 @@
         ],
         "description": "Get an account",
         "operationId": "Accounts_GetAccountProperties",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -63,17 +52,23 @@
         ],
         "description": "Updates an account",
         "operationId": "Accounts_UpdateAccountProperties",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "accountUpdateParameters",
+            "$ref": "#/parameters/api-version"
+          },
+          {
             "in": "body",
+            "name": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataPlaneAccountUpdateParameters"
             }
-          },
-          {
-            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -102,8 +97,11 @@
         "tags": [
           "Account"
         ],
-        "description": "List the authorization keys associated with this account.",
+        "description": "Lists the connection strings that allow connecting with the Managed Event Hub, if it is provisioned. Those connection strings are aimed to receive messages from the ATLAS_ENTITIES hub or to send messages to the ATLAS_HOOK hub.",
         "operationId": "Accounts_GetAccessKeys",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -135,19 +133,25 @@
         "tags": [
           "Account"
         ],
-        "description": "Regenerate the authorization keys associated with this data catalog.",
-        "operationId": "Accounts_RegenerateAccessKey",
+        "description": "Regenerates either the primary or secondary key of the Managed Event Hub, if it is provisioned.",
+        "operationId": "Accounts_RegenerateAccessKeys",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "keyOptions",
+            "$ref": "#/parameters/api-version"
+          },
+          {
             "in": "body",
+            "name": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AccessKeyOptions"
             }
-          },
-          {
-            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -165,8 +169,8 @@
           }
         },
         "x-ms-examples": {
-          "Accounts_RegenerateKeys": {
-            "$ref": "./examples/Accounts_RegenerateAccessKey.json"
+          "Accounts_RegenerateAccessKeys": {
+            "$ref": "./examples/Accounts_RegenerateAccessKeys.json"
           }
         }
       }
@@ -178,10 +182,13 @@
         ],
         "description": "Get a collection",
         "operationId": "Collections_GetCollection",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "collectionName",
             "in": "path",
+            "name": "collectionName",
             "required": true,
             "type": "string"
           },
@@ -215,23 +222,29 @@
         ],
         "description": "Creates or updates a collection entity.",
         "operationId": "Collections_CreateOrUpdateCollection",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "collectionName",
             "in": "path",
+            "name": "collectionName",
             "required": true,
             "type": "string"
           },
           {
-            "name": "collection",
+            "$ref": "#/parameters/api-version"
+          },
+          {
             "in": "body",
+            "name": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Collection"
             }
-          },
-          {
-            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -260,10 +273,13 @@
         ],
         "description": "Deletes a Collection entity.",
         "operationId": "Collections_DeleteCollection",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "collectionName",
             "in": "path",
+            "name": "collectionName",
             "required": true,
             "type": "string"
           },
@@ -273,7 +289,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "An error response received from the provider.",
@@ -296,14 +312,16 @@
         ],
         "description": "List the collections in the account.",
         "operationId": "Collections_ListCollections",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "$skipToken",
             "in": "query",
-            "required": false,
+            "name": "$skipToken",
             "type": "string"
           }
         ],
@@ -338,10 +356,13 @@
         ],
         "description": "Lists the child collections names in the collection.",
         "operationId": "Collections_ListChildCollectionNames",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "collectionName",
             "in": "path",
+            "name": "collectionName",
             "required": true,
             "type": "string"
           },
@@ -349,9 +370,8 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "$skipToken",
             "in": "query",
-            "required": false,
+            "name": "$skipToken",
             "type": "string"
           }
         ],
@@ -386,15 +406,23 @@
         ],
         "description": "Gets the parent name and parent friendly name chains that represent the collection path.",
         "operationId": "Collections_GetCollectionPath",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "collectionName",
             "in": "path",
+            "name": "collectionName",
             "required": true,
             "type": "string"
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "type": "string"
           }
         ],
         "responses": {
@@ -418,6 +446,580 @@
         }
       }
     },
+    "/contactAssignments/{contactAssignmentId}": {
+      "get": {
+        "tags": [
+          "ContactAssignment"
+        ],
+        "description": "Get a contactAssignment",
+        "operationId": "ContactAssignments_GetContactAssignment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contactAssignmentId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContactAssignment"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContactAssignments_GetContactAssignment": {
+            "$ref": "./examples/ContactAssignments_GetContactAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ContactAssignment"
+        ],
+        "description": "Creates or updates a contactAssignment entity.",
+        "operationId": "ContactAssignments_CreateOrUpdateContactAssignment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contactAssignmentId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContactAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContactAssignment"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContactAssignments_CreateOrUpdateContactAssignment": {
+            "$ref": "./examples/ContactAssignments_CreateOrUpdateContactAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ContactAssignment"
+        ],
+        "description": "Deletes a ContactAssignment entity.",
+        "operationId": "ContactAssignments_DeleteContactAssignment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contactAssignmentId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContactAssignments_DeleteContactAssignment": {
+            "$ref": "./examples/ContactAssignments_DeleteContactAssignment.json"
+          }
+        }
+      }
+    },
+    "/contactAssignments": {
+      "get": {
+        "tags": [
+          "ContactAssignment"
+        ],
+        "description": "List the contactAssignments in the account.",
+        "operationId": "ContactAssignments_ListContactAssignments",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "scope",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "contactGroupDefinition",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "referenceType",
+            "type": "string",
+            "enum": [
+              "Unknown",
+              "CollectionReference",
+              "ContactGroupDefinitionReference",
+              "DatasourceReference",
+              "ScanReference",
+              "AdaptiveScopeReference"
+            ],
+            "x-ms-enum": {
+              "name": "EntityReferenceType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContactAssignmentList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ContactAssignments_ListContactAssignments": {
+            "$ref": "./examples/ContactAssignments_ListContactAssignments.json"
+          }
+        }
+      }
+    },
+    "/getScopedContactGroupNames": {
+      "get": {
+        "tags": [
+          "ContactAssignment"
+        ],
+        "description": "Gets the distinct list of contact group names for the provided scope.",
+        "operationId": "ContactAssignments_ListScopedContactGroupNames",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "scope",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "referenceType",
+            "type": "string",
+            "enum": [
+              "Unknown",
+              "CollectionReference",
+              "ContactGroupDefinitionReference",
+              "DatasourceReference",
+              "ScanReference",
+              "AdaptiveScopeReference"
+            ],
+            "x-ms-enum": {
+              "name": "EntityReferenceType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContactGroupNameList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ContactAssignments_ListScopedContactGroupNames": {
+            "$ref": "./examples/ContactAssignments_ListScopedContactGroupNames.json"
+          }
+        }
+      }
+    },
+    "/contactGroupDefinitions/{contactGroupDefinitionName}": {
+      "get": {
+        "tags": [
+          "ContactGroupDefinition"
+        ],
+        "description": "Get a contactGroupDefinition",
+        "operationId": "ContactGroupDefinitions_GetContactGroupDefinition",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contactGroupDefinitionName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContactGroupDefinition"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContactGroupDefinitions_GetContactGroupDefinition": {
+            "$ref": "./examples/ContactGroupDefinitions_GetContactGroupDefinition.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ContactGroupDefinition"
+        ],
+        "description": "Creates or updates a contact group definition entity.",
+        "operationId": "ContactGroupDefinitions_CreateOrUpdateContactGroupDefinition",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contactGroupDefinitionName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContactGroupDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContactGroupDefinition"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContactGroupDefinitions_CreateOrUpdateContactGroupDefinition": {
+            "$ref": "./examples/ContactGroupDefinitions_CreateOrUpdateContactGroupDefinition.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ContactGroupDefinition"
+        ],
+        "description": "Deletes a ContactGroupDefinition entity.",
+        "operationId": "ContactGroupDefinitions_DeleteContactGroupDefinition",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contactGroupDefinitionName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContactGroupDefinitions_DeleteContactGroupDefinition": {
+            "$ref": "./examples/ContactGroupDefinitions_DeleteContactGroupDefinition.json"
+          }
+        }
+      }
+    },
+    "/contactGroupDefinitions": {
+      "get": {
+        "tags": [
+          "ContactGroupDefinition"
+        ],
+        "description": "List the contactGroupDefinitions in the account.",
+        "operationId": "ContactGroupDefinitions_ListContactGroupDefinitions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContactGroupDefinitionList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ContactGroupDefinitions_ListContactGroupDefinitions": {
+            "$ref": "./examples/ContactGroupDefinitions_ListContactGroupDefinitions.json"
+          }
+        }
+      }
+    },
+    "/domains/{domainName}": {
+      "get": {
+        "tags": [
+          "Domain"
+        ],
+        "description": "Get a domain",
+        "operationId": "Domains_GetDomain",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "domainName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Domains_GetDomain": {
+            "$ref": "./examples/Domains_GetDomain.json"
+          }
+        }
+      }
+    },
+    "/domains": {
+      "get": {
+        "tags": [
+          "Domain"
+        ],
+        "description": "List the domains in the account.",
+        "operationId": "Domains_ListDomains",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DomainList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Domains_ListDomains": {
+            "$ref": "./examples/Domains_ListDomains.json"
+          }
+        }
+      }
+    },
+    "/features": {
+      "post": {
+        "tags": [
+          "ExposureControl"
+        ],
+        "description": "Gets details from a list of features.",
+        "operationId": "ExposureControl_GetFeatures",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchFeatureRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchFeatureStatus"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExposureControl_GetFeatures": {
+            "$ref": "./examples/ExposureControl_GetFeatures.json"
+          }
+        }
+      }
+    },
     "/resourceSetRuleConfigs/defaultResourceSetRuleConfig": {
       "get": {
         "tags": [
@@ -425,6 +1027,9 @@
         ],
         "description": "Get a resource set config service model.",
         "operationId": "ResourceSetRules_GetResourceSetRule",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -456,17 +1061,23 @@
         ],
         "description": "Creates or updates an resource set config.",
         "operationId": "ResourceSetRules_CreateOrUpdateResourceSetRule",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "resourceSetRuleConfig",
+            "$ref": "#/parameters/api-version"
+          },
+          {
             "in": "body",
+            "name": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ResourceSetRuleConfig"
             }
-          },
-          {
-            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -495,6 +1106,9 @@
         ],
         "description": "Deletes a ResourceSetRuleConfig resource.",
         "operationId": "ResourceSetRules_DeleteResourceSetRule",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -505,7 +1119,7 @@
             "description": "Success"
           },
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "An error response received from the provider.",
@@ -528,14 +1142,16 @@
         ],
         "description": "Get a resource set config service model.",
         "operationId": "ResourceSetRules_ListResourceSetRules",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "$skipToken",
             "in": "query",
-            "required": false,
+            "name": "$skipToken",
             "type": "string"
           }
         ],
@@ -565,6 +1181,38 @@
     }
   },
   "definitions": {
+    "AccessKeyOptions": {
+      "description": "A access key options used for regeneration.",
+      "type": "object",
+      "properties": {
+        "keyType": {
+          "description": "The access key type.",
+          "enum": [
+            "PrimaryAtlasKafkaKey",
+            "SecondaryAtlasKafkaKey"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AccessKeyType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AccessKeys": {
+      "description": "The Account access keys.",
+      "type": "object",
+      "properties": {
+        "atlasKafkaPrimaryEndpoint": {
+          "description": "Gets or sets the primary connection string.",
+          "type": "string"
+        },
+        "atlasKafkaSecondaryEndpoint": {
+          "description": "Gets or sets the secondary connection string.",
+          "type": "string"
+        }
+      }
+    },
     "Account": {
       "description": "Account resource",
       "type": "object",
@@ -575,8 +1223,7 @@
           "readOnly": true
         },
         "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "Identity Info on the tracked resource"
+          "$ref": "#/definitions/Identity"
         },
         "location": {
           "description": "Gets or sets the location.",
@@ -588,21 +1235,13 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/AccountProperties",
-          "description": "Gets or sets the properties."
+          "$ref": "#/definitions/AccountProperties"
         },
         "sku": {
-          "$ref": "#/definitions/AccountSku",
-          "description": "Gets or sets the Sku."
+          "$ref": "#/definitions/AccountSku"
         },
         "systemData": {
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SystemData"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/SystemData"
         },
         "tags": {
           "description": "Tags on the azure resource.",
@@ -618,23 +1257,70 @@
         }
       }
     },
-    "AccountSku": {
-      "description": "The Sku",
+    "AccountEndpoints": {
+      "description": "The account endpoints",
       "type": "object",
       "properties": {
-        "capacity": {
-          "format": "int32",
-          "description": "Gets or sets the sku capacity. Possible values include: 4, 16",
-          "type": "integer"
+        "catalog": {
+          "description": "Gets the catalog endpoint.",
+          "type": "string",
+          "readOnly": true
         },
-        "name": {
-          "description": "Gets or sets the sku name.",
+        "scan": {
+          "description": "Gets the scan endpoint.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AccountMergeInfo": {
+      "description": "The public Account Merge Info model.",
+      "type": "object",
+      "properties": {
+        "accountLocation": {
+          "description": "The account location of the *other* account in the merge operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountName": {
+          "description": "The account name of the *other* account in the merge operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountResourceGroupName": {
+          "description": "The resource group name of the *other* account in the merge operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountSubscriptionId": {
+          "description": "The subscription id of the *other* account in the merge operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "mergeStatus": {
+          "description": "The status of the merge operation.",
           "enum": [
-            "Standard"
+            "Succeeded",
+            "Failed",
+            "InProgress"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
-            "name": "name",
+            "name": "MergeStatus",
+            "modelAsString": true
+          }
+        },
+        "typeOfAccount": {
+          "description": "The type of account this account is for the merge operation.",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MergeAccountType",
             "modelAsString": true
           }
         }
@@ -644,9 +1330,11 @@
       "description": "The account properties",
       "type": "object",
       "properties": {
+        "accountStatus": {
+          "$ref": "#/definitions/AccountStatus"
+        },
         "cloudConnectors": {
-          "$ref": "#/definitions/CloudConnectors",
-          "description": "Cloud connectors.\r\nExternal cloud identifier used as part of scanning configuration."
+          "$ref": "#/definitions/CloudConnectors"
         },
         "createdAt": {
           "format": "date-time",
@@ -664,40 +1352,61 @@
           "type": "string",
           "readOnly": true
         },
-        "endpoints": {
-          "description": "The URIs that are the public endpoints of the account.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AccountEndpoints"
-            }
-          ],
+        "defaultDomain": {
+          "description": "Gets or sets the default domain in the account.",
+          "type": "string",
           "readOnly": true
+        },
+        "endpoints": {
+          "$ref": "#/definitions/AccountEndpoints"
         },
         "friendlyName": {
           "description": "Gets or sets the friendly name.",
           "type": "string",
           "readOnly": true
         },
+        "ingestionStorage": {
+          "$ref": "#/definitions/IngestionStorage"
+        },
+        "managedEventHubState": {
+          "description": "Gets or sets the state of managed eventhub. If enabled managed eventhub will be created, if disabled the managed eventhub will be removed.",
+          "default": "NotSpecified",
+          "enum": [
+            "NotSpecified",
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedEventHubState",
+            "modelAsString": true
+          }
+        },
         "managedResourceGroupName": {
           "description": "Gets or sets the managed resource group name",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "type": "string"
         },
         "managedResources": {
-          "description": "Gets the resource identifiers of the managed resources.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedResources"
-            }
+          "$ref": "#/definitions/ManagedResources"
+        },
+        "managedResourcesPublicNetworkAccess": {
+          "description": "Gets or sets the public network access for managed resources",
+          "enum": [
+            "NotSpecified",
+            "Enabled",
+            "Disabled"
           ],
-          "readOnly": true
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "mergeInfo": {
+          "$ref": "#/definitions/AccountMergeInfo"
         },
         "privateEndpointConnections": {
           "description": "Gets the private endpoint connections information.",
-          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
@@ -720,7 +1429,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "provisioningState",
+            "name": "ProvisioningState",
             "modelAsString": true
           }
         },
@@ -734,561 +1443,62 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "publicNetworkAccess",
+            "name": "PublicNetworkAccess",
             "modelAsString": true
           }
         }
       }
     },
-    "Identity": {
-      "description": "The Managed Identity of the resource",
+    "AccountSku": {
+      "description": "The Sku",
       "type": "object",
       "properties": {
-        "principalId": {
-          "description": "Service principal object Id",
-          "type": "string",
-          "readOnly": true
-        },
-        "tenantId": {
-          "description": "Tenant Id",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Identity Type",
-          "enum": [
-            "SystemAssigned"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "type",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "properties": {
-        "createdAt": {
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC).",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdBy": {
-          "description": "The identity that created the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdByType": {
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "description": "The timestamp of the last modification the resource (UTC).",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedBy": {
-          "description": "The identity that last modified the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedByType": {
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "lastModifiedByType",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "CloudConnectors": {
-      "type": "object",
-      "properties": {
-        "awsExternalId": {
-          "description": "AWS external identifier.\r\nConfigured in AWS to allow use of the role arn used for scanning",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "AccountEndpoints": {
-      "description": "The account endpoints",
-      "type": "object",
-      "properties": {
-        "catalog": {
-          "description": "Gets the catalog endpoint.",
-          "type": "string",
-          "readOnly": true
-        },
-        "guardian": {
-          "description": "Gets the guardian endpoint.",
-          "type": "string",
-          "readOnly": true
-        },
-        "scan": {
-          "description": "Gets the scan endpoint.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointConnection": {
-      "description": "A private endpoint connection class.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Gets or sets the identifier.",
-          "type": "string",
-          "readOnly": true
+        "capacity": {
+          "format": "int32",
+          "description": "Gets or sets the sku capacity.",
+          "type": "integer"
         },
         "name": {
-          "description": "Gets or sets the name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The connection identifier."
-        },
-        "type": {
-          "description": "Gets or sets the type.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ManagedResources": {
-      "description": "The managed resources in customer subscription.",
-      "type": "object",
-      "properties": {
-        "eventHubNamespace": {
-          "description": "Gets the managed event hub namespace resource identifier.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resourceGroup": {
-          "description": "Gets the managed resource group resource identifier. This resource group will host resource dependencies for the account.",
-          "type": "string",
-          "readOnly": true
-        },
-        "storageAccount": {
-          "description": "Gets the managed storage account resource identifier.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointConnectionProperties": {
-      "description": "A private endpoint connection properties class.",
-      "type": "object",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
-          "description": "The private endpoint information."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "The private link service connection state."
-        },
-        "provisioningState": {
-          "description": "The provisioning state.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpoint": {
-      "description": "A private endpoint class.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The private endpoint identifier.",
-          "type": "string"
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionState": {
-      "description": "The private link service connection state.",
-      "type": "object",
-      "properties": {
-        "actionsRequired": {
-          "description": "The required actions.",
-          "type": "string"
-        },
-        "description": {
-          "description": "The description.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The status.",
+          "description": "Gets or sets the sku name.",
           "enum": [
-            "Unknown",
-            "Pending",
-            "Approved",
-            "Rejected",
-            "Disconnected"
+            "Standard",
+            "Free"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "status",
+            "name": "AccountSkuName",
             "modelAsString": true
           }
         }
       }
     },
-    "ErrorResponseModel": {
-      "description": "Default error response model",
+    "AccountStatus": {
+      "description": "The account status.",
       "type": "object",
       "properties": {
-        "error": {
-          "description": "Gets or sets the error.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          ],
-          "readOnly": true
-        }
-      }
-    },
-    "ErrorModel": {
-      "description": "Default error model",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Gets or sets the code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Gets or sets the details.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorModel"
-          },
-          "readOnly": true
-        },
-        "message": {
-          "description": "Gets or sets the messages.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "Gets or sets the target.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "DataPlaneAccountUpdateParameters": {
-      "description": "The account properties that can be updated through data plane.",
-      "type": "object",
-      "properties": {
-        "friendlyName": {
-          "description": "The friendly name for the azure resource.",
-          "type": "string"
-        }
-      }
-    },
-    "AccessKeys": {
-      "description": "The Account access keys.",
-      "type": "object",
-      "properties": {
-        "atlasKafkaPrimaryEndpoint": {
-          "description": "Gets or sets the primary connection string.",
-          "type": "string"
-        },
-        "atlasKafkaSecondaryEndpoint": {
-          "description": "Gets or sets the secondary connection string.",
-          "type": "string"
-        }
-      }
-    },
-    "AccessKeyOptions": {
-      "description": "A access key options used for regeneration.",
-      "type": "object",
-      "properties": {
-        "keyType": {
-          "description": "The access key type.",
-          "enum": [
-            "PrimaryAtlasKafkaKey",
-            "SecondaryAtlasKafkaKey"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "keyType",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "Collection": {
-      "description": "Collection resource.",
-      "type": "object",
-      "properties": {
-        "collectionProvisioningState": {
-          "description": "Gets the state of the provisioning.",
+        "accountProvisioningState": {
+          "description": "Gets the account status code.",
           "enum": [
             "Unknown",
             "Creating",
+            "Updating",
             "Moving",
             "Deleting",
+            "SoftDeleting",
+            "SoftDeleted",
             "Failed",
-            "Succeeded"
+            "Succeeded",
+            "Canceled"
           ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "collectionProvisioningState",
+            "name": "AccountProvisioningState",
             "modelAsString": true
           }
         },
-        "description": {
-          "description": "Gets or sets the description.",
-          "type": "string"
-        },
-        "friendlyName": {
-          "description": "Gets or sets the friendly name of the collection.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Gets the name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "parentCollection": {
-          "$ref": "#/definitions/CollectionReference",
-          "description": "Gets or sets the parent collection reference."
-        },
-        "systemData": {
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SystemData"
-            }
-          ],
-          "readOnly": true
-        }
-      }
-    },
-    "CollectionReference": {
-      "description": "Reference to a Collection.",
-      "type": "object",
-      "properties": {
-        "referenceName": {
-          "description": "Gets or sets the reference name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Gets or sets the reference type property.",
-          "type": "string",
-          "x-ms-client-default": "CollectionReference"
-        }
-      }
-    },
-    "CollectionList": {
-      "description": "Paged list of collections.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "count": {
-          "format": "int64",
-          "description": "Total item count.",
-          "type": "integer"
-        },
-        "nextLink": {
-          "description": "The Url of next result page.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Collection of items of type results.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Collection"
-          }
-        }
-      }
-    },
-    "CollectionNameResponseList": {
-      "description": "Paged list of collections.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "count": {
-          "format": "int64",
-          "description": "Total item count.",
-          "type": "integer"
-        },
-        "nextLink": {
-          "description": "The Url of next result page.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Collection of items of type results.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CollectionNameResponse"
-          }
-        }
-      }
-    },
-    "CollectionNameResponse": {
-      "description": "Collection resource.",
-      "type": "object",
-      "properties": {
-        "friendlyName": {
-          "description": "Gets or sets the friendly name of the collection.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Gets the name.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "CollectionPathResponse": {
-      "description": "Collection resource.",
-      "type": "object",
-      "properties": {
-        "parentFriendlyNameChain": {
-          "description": "The friendly names of ancestors starting from the default (root) collection and ending with the immediate parent.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "parentNameChain": {
-          "description": "The names of ancestors starting from the default (root) collection and ending with the immediate parent.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ResourceSetRuleConfig": {
-      "description": "ResourceSetRuleConfig implementation class.",
-      "type": "object",
-      "properties": {
-        "advancedResourceSet": {
-          "$ref": "#/definitions/AdvancedResourceSet",
-          "description": "Gets or sets the advanced resource set property of the account."
-        },
-        "name": {
-          "description": "The name of the rule",
-          "type": "string",
-          "readOnly": true
-        },
-        "pathPatternConfig": {
-          "$ref": "#/definitions/PathPatternExtractorConfig",
-          "description": "The configuration rules for path pattern extraction."
-        }
-      }
-    },
-    "PathPatternExtractorConfig": {
-      "required": [
-        "enableDefaultPatterns",
-        "createdBy"
-      ],
-      "type": "object",
-      "properties": {
-        "acceptedPatterns": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Filter"
-          }
-        },
-        "complexReplacers": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ComplexReplacerConfig"
-          }
-        },
-        "createdBy": {
-          "type": "string"
-        },
-        "enableDefaultPatterns": {
-          "type": "boolean"
-        },
-        "lastUpdatedTimestamp": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "modifiedBy": {
-          "default": "AzureDataCatalog",
-          "type": "string"
-        },
-        "normalizationRules": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NormalizationRule"
-          }
-        },
-        "regexReplacers": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RegexReplacer"
-          }
-        },
-        "rejectedPatterns": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Filter"
-          }
-        },
-        "scopedRules": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScopedRule"
-          }
-        },
-        "version": {
-          "format": "int32",
-          "default": 0,
-          "type": "integer"
+        "errorDetails": {
+          "$ref": "#/definitions/ErrorModel"
         }
       }
     },
@@ -1315,86 +1525,190 @@
         }
       }
     },
-    "Filter": {
-      "required": [
-        "name",
-        "path"
-      ],
+    "BatchFeatureRequest": {
+      "description": "Feature request model",
       "type": "object",
       "properties": {
-        "createdBy": {
-          "default": "AzureDataCatalog",
-          "type": "string"
-        },
-        "filterType": {
-          "default": "Pattern",
-          "enum": [
-            "Pattern",
-            "Regex"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "filterType",
-            "modelAsString": true
+        "features": {
+          "description": "Set of features",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
           }
-        },
-        "lastUpdatedTimestamp": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "modifiedBy": {
-          "default": "AzureDataCatalog",
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "path": {
-          "type": "string"
         }
       }
     },
-    "RegexReplacer": {
-      "required": [
-        "name",
-        "disabled"
-      ],
+    "BatchFeatureStatus": {
+      "description": "List of features with enabled status",
       "type": "object",
       "properties": {
-        "condition": {
-          "type": "string"
-        },
-        "createdBy": {
-          "default": "AzureDataCatalog",
-          "type": "string"
+        "features": {
+          "description": "Features with enabled status",
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "CloudConnectors": {
+      "description": "External Cloud Service connectors",
+      "type": "object",
+      "properties": {
+        "awsExternalId": {
+          "description": "AWS external identifier.\r\nConfigured in AWS to allow use of the role arn used for scanning",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Collection": {
+      "description": "Collection resource.",
+      "type": "object",
+      "properties": {
+        "collectionProvisioningState": {
+          "description": "Gets the state of the provisioning.",
+          "enum": [
+            "Unknown",
+            "Creating",
+            "Moving",
+            "Deleting",
+            "Failed",
+            "Succeeded"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CollectionProvisioningState",
+            "modelAsString": true
+          }
         },
         "description": {
+          "description": "Gets or sets the description.",
           "type": "string"
         },
-        "disabled": {
-          "type": "boolean"
+        "domain": {
+          "description": "Gets the domain.",
+          "type": "string",
+          "readOnly": true
         },
-        "disableRecursiveReplacerApplication": {
-          "type": "boolean"
-        },
-        "doNotReplaceRegex": {
-          "$ref": "#/definitions/FastRegex"
-        },
-        "lastUpdatedTimestamp": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "modifiedBy": {
-          "default": "AzureDataCatalog",
+        "friendlyName": {
+          "description": "Gets or sets the friendly name of the collection.",
           "type": "string"
         },
         "name": {
+          "description": "Gets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parentCollection": {
+          "$ref": "#/definitions/CollectionReference"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        }
+      }
+    },
+    "CollectionList": {
+      "description": "Paged list of collections.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "description": "Total item count.",
+          "type": "integer"
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
           "type": "string"
         },
-        "regex": {
-          "$ref": "#/definitions/FastRegex"
+        "value": {
+          "description": "Collection of items of type results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Collection"
+          }
+        }
+      }
+    },
+    "CollectionNameResponse": {
+      "description": "Collection resource.",
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "description": "Gets or sets the friendly name of the collection.",
+          "type": "string",
+          "readOnly": true
         },
-        "replaceWith": {
+        "name": {
+          "description": "Gets the name.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CollectionNameResponseList": {
+      "description": "Paged list of collections.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "description": "Total item count.",
+          "type": "integer"
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CollectionNameResponse"
+          }
+        }
+      }
+    },
+    "CollectionPathResponse": {
+      "description": "Collection resource.",
+      "type": "object",
+      "properties": {
+        "parentFriendlyNameChain": {
+          "description": "The friendly names of ancestors starting from the default (root) collection and ending with the immediate parent.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "parentNameChain": {
+          "description": "The names of ancestors starting from the default (root) collection and ending with the immediate parent.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "CollectionReference": {
+      "description": "Reference to a Collection.",
+      "type": "object",
+      "properties": {
+        "referenceName": {
+          "description": "Gets or sets the reference name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Gets or sets the reference type property.",
           "type": "string"
         }
       }
@@ -1429,63 +1743,343 @@
         }
       }
     },
-    "NormalizationRule": {
+    "ContactAssignment": {
+      "description": "ContactAssignment resource.",
       "type": "object",
       "properties": {
-        "description": {
+        "assignmentId": {
+          "format": "uuid",
+          "description": "Gets or sets the id of the assignment.",
           "type": "string"
         },
-        "disabled": {
-          "type": "boolean"
+        "contactGroup": {
+          "$ref": "#/definitions/EntityReference"
         },
-        "dynamicReplacement": {
-          "type": "boolean"
+        "principalId": {
+          "description": "Gets or sets the principal Id.",
+          "type": "string"
         },
-        "entityTypes": {
-          "uniqueItems": false,
+        "scope": {
+          "$ref": "#/definitions/EntityReference"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        }
+      }
+    },
+    "ContactAssignmentList": {
+      "description": "Paged list of contactAssignment.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "description": "Total item count.",
+          "type": "integer"
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContactAssignment"
+          }
+        }
+      }
+    },
+    "ContactGroupDefinition": {
+      "description": "ContactGroupDefinition resource.",
+      "type": "object",
+      "properties": {
+        "contactGroupType": {
+          "description": "Gets or sets the contact group definition type.",
+          "enum": [
+            "Custom",
+            "System"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ContactGroupType",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Gets or sets the description.",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "Gets or sets the friendly name.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets the name.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ContactGroupDefinitionList": {
+      "description": "Paged list of contactGroupDefinition.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "description": "Total item count.",
+          "type": "integer"
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContactGroupDefinition"
+          }
+        }
+      }
+    },
+    "ContactGroupNameList": {
+      "description": "Paged list of contact group names.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "description": "Total item count.",
+          "type": "integer"
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
           "type": "array",
           "items": {
             "type": "string"
           }
-        },
-        "lastUpdatedTimestamp": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "name": {
-          "type": "string"
-        },
-        "regex": {
-          "$ref": "#/definitions/FastRegex"
-        },
-        "replaceWith": {
-          "type": "string"
-        },
-        "version": {
-          "format": "double",
-          "type": "number"
         }
       }
     },
-    "ScopedRule": {
+    "DataPlaneAccountUpdateParameters": {
+      "description": "The account properties that can be updated through data plane.",
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "description": "The friendly name for the azure resource.",
+          "type": "string"
+        }
+      }
+    },
+    "Domain": {
+      "description": "Domain resource.",
+      "type": "object",
+      "properties": {
+        "containerType": {
+          "description": "Gets the container type.",
+          "enum": [
+            "Domain",
+            "AdminUnit",
+            "Collection"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ContainerType",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Gets or sets the description.",
+          "type": "string"
+        },
+        "environment": {
+          "description": "Gets the environment of the domain.",
+          "enum": [
+            "Prod",
+            "Test"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DomainEnvironment",
+            "modelAsString": true
+          }
+        },
+        "friendlyName": {
+          "description": "Gets or sets the friendly name of the domain.",
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity"
+        },
+        "mergeInfo": {
+          "$ref": "#/definitions/DomainMergeInfo"
+        },
+        "name": {
+          "description": "Gets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets the state of the provisioning.",
+          "enum": [
+            "Unknown",
+            "Creating",
+            "Moving",
+            "Deleting",
+            "Failed",
+            "Succeeded"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DomainProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        }
+      }
+    },
+    "DomainList": {
+      "description": "Paged list of domains.",
       "required": [
-        "bindingUrl",
-        "storeType"
+        "value"
       ],
       "type": "object",
       "properties": {
-        "bindingUrl": {
+        "count": {
+          "format": "int64",
+          "description": "Total item count.",
+          "type": "integer"
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
           "type": "string"
         },
-        "rules": {
-          "uniqueItems": false,
+        "value": {
+          "description": "Collection of items of type results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Rule"
+            "$ref": "#/definitions/Domain"
           }
+        }
+      }
+    },
+    "DomainMergeInfo": {
+      "description": "The public Domain Merge Info model.",
+      "type": "object",
+      "properties": {
+        "accountLocation": {
+          "description": "The account location of the source account in the merge operation.",
+          "type": "string",
+          "readOnly": true
         },
-        "storeType": {
+        "accountName": {
+          "description": "The account name of the source account in the merge operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountResourceGroupName": {
+          "description": "The resource group name of the source account in the merge operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountSubscriptionId": {
+          "description": "The subscription id of the source account in the merge operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "mergeStatus": {
+          "description": "The status of the merge operation.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MergeStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "EntityReference": {
+      "description": "Entity reference type.",
+      "type": "object",
+      "properties": {
+        "referenceName": {
+          "description": "Gets or sets the reference name.",
           "type": "string"
+        },
+        "type": {
+          "description": "Gets or sets the reference type property.",
+          "enum": [
+            "Unknown",
+            "CollectionReference",
+            "ContactGroupDefinitionReference",
+            "DatasourceReference",
+            "ScanReference",
+            "AdaptiveScopeReference"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EntityReferenceType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ErrorModel": {
+      "description": "Default error model",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Gets or sets the code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Gets or sets the details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          },
+          "readOnly": true
+        },
+        "message": {
+          "description": "Gets or sets the messages.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Gets or sets the target.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "description": "Default error response model",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModel"
         }
       }
     },
@@ -1537,6 +2131,401 @@
         }
       }
     },
+    "Filter": {
+      "required": [
+        "name",
+        "path"
+      ],
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "default": "AzureDataCatalog",
+          "type": "string"
+        },
+        "filterType": {
+          "enum": [
+            "Pattern",
+            "Regex"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FilterType",
+            "modelAsString": true
+          }
+        },
+        "lastUpdatedTimestamp": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "modifiedBy": {
+          "default": "AzureDataCatalog",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    },
+    "Identity": {
+      "description": "The Managed Identity of the resource",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Service principal object Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Tenant Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Identity Type",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedIdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "User Assigned Identities",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "IngestionStorage": {
+      "description": "Ingestion Storage Account Info",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "primaryEndpoint": {
+          "description": "Gets or sets the primary endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "description": "Gets or sets the public network access setting",
+          "enum": [
+            "NotSpecified",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ManagedResources": {
+      "description": "The managed resources in customer subscription.",
+      "type": "object",
+      "properties": {
+        "eventHubNamespace": {
+          "description": "Gets the managed event hub namespace resource identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "description": "Gets the managed resource group resource identifier. This resource group will host resource dependencies for the account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "storageAccount": {
+          "description": "Gets the managed storage account resource identifier.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NormalizationRule": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "dynamicReplacement": {
+          "type": "boolean"
+        },
+        "entityTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastUpdatedTimestamp": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "regex": {
+          "$ref": "#/definitions/FastRegex"
+        },
+        "replaceWith": {
+          "type": "string"
+        },
+        "version": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "PathPatternExtractorConfig": {
+      "required": [
+        "createdBy",
+        "enableDefaultPatterns"
+      ],
+      "type": "object",
+      "properties": {
+        "acceptedPatterns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          }
+        },
+        "complexReplacers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComplexReplacerConfig"
+          }
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "enableDefaultPatterns": {
+          "type": "boolean"
+        },
+        "lastUpdatedTimestamp": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "modifiedBy": {
+          "default": "AzureDataCatalog",
+          "type": "string"
+        },
+        "normalizationRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NormalizationRule"
+          }
+        },
+        "regexReplacers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegexReplacer"
+          }
+        },
+        "rejectedPatterns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          }
+        },
+        "scopedRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopedRule"
+          }
+        },
+        "version": {
+          "format": "int32",
+          "default": 0,
+          "type": "integer"
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "description": "A private endpoint class.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The private endpoint identifier.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection class.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        },
+        "type": {
+          "description": "Gets or sets the type.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "A private endpoint connection properties class.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint"
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        },
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "description": "The private link service connection state.",
+      "type": "object",
+      "properties": {
+        "actionsRequired": {
+          "description": "The required actions.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status.",
+          "enum": [
+            "Unknown",
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateEndpointConnectionStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "RegexReplacer": {
+      "required": [
+        "disabled",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "condition": {
+          "type": "string"
+        },
+        "createdBy": {
+          "default": "AzureDataCatalog",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "disableRecursiveReplacerApplication": {
+          "type": "boolean"
+        },
+        "doNotReplaceRegex": {
+          "$ref": "#/definitions/FastRegex"
+        },
+        "lastUpdatedTimestamp": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "modifiedBy": {
+          "default": "AzureDataCatalog",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "regex": {
+          "$ref": "#/definitions/FastRegex"
+        },
+        "replaceWith": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceSetRuleConfig": {
+      "description": "ResourceSetRuleConfig implementation class.",
+      "type": "object",
+      "properties": {
+        "advancedResourceSet": {
+          "$ref": "#/definitions/AdvancedResourceSet"
+        },
+        "name": {
+          "description": "The name of the rule",
+          "type": "string",
+          "readOnly": true
+        },
+        "pathPatternConfig": {
+          "$ref": "#/definitions/PathPatternExtractorConfig"
+        }
+      }
+    },
+    "ResourceSetRuleConfigList": {
+      "description": "Paged list of account resources",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "description": "Total item count.",
+          "type": "integer"
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSetRuleConfig"
+          }
+        }
+      }
+    },
     "Rule": {
       "required": [
         "qualifiedName"
@@ -1562,68 +2551,130 @@
         }
       }
     },
-    "ResourceSetRuleConfigList": {
-      "description": "Paged list of account resources",
+    "ScopedRule": {
       "required": [
-        "value"
+        "bindingUrl",
+        "storeType"
       ],
       "type": "object",
       "properties": {
-        "count": {
-          "format": "int64",
-          "description": "Total item count.",
-          "type": "integer"
-        },
-        "nextLink": {
-          "description": "The Url of next result page.",
+        "bindingUrl": {
           "type": "string"
         },
-        "value": {
-          "description": "Collection of items of type results.",
-          "uniqueItems": false,
+        "rules": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceSetRuleConfig"
+            "$ref": "#/definitions/Rule"
           }
+        },
+        "storeType": {
+          "type": "string"
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdBy": {
+          "description": "The identity that created the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of the last modification the resource (UTC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "The identity that last modified the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "description": "Uses client ID and Principal ID",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "Gets or Sets Client ID",
+          "type": "string",
+          "readOnly": true
+        },
+        "principalId": {
+          "description": "Gets or Sets Principal ID",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
   },
   "parameters": {
-    "api-version": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The api version to use.",
-      "required": true,
-      "type": "string"
-    },
-    "endpoint": {
-      "name": "endpoint",
-      "description": "The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/",
-      "x-ms-parameter-location": "client",
+    "Endpoint": {
+      "in": "path",
+      "name": "Endpoint",
+      "description": "The endpoint. Example: https://{accountName}.purview.azure.com",
       "required": true,
       "type": "string",
-      "in": "path",
+      "x-ms-parameter-location": "client",
       "x-ms-skip-url-encoding": true
+    },
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string",
+      "x-ms-client-name": "ApiVersion"
     }
   },
   "securityDefinitions": {
     "azure_auth": {
+      "type": "oauth2",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       },
-      "type": "oauth2",
       "description": "Azure Active Directory OAuth2 Flow."
     }
-  },
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "tags": []
+  }
 }
