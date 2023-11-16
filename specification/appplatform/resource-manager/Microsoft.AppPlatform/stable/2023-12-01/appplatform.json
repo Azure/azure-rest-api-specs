@@ -1907,7 +1907,12 @@
             "description": "Success. The response indicates the default Application Live View has deleted."
           },
           "202": {
-            "description": "Accepted. The response indicates the default Application Live View is now deleting."
+            "description": "Accepted. The response indicates the default Application Live View is now deleting.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Success. The response indicates the defaultApplication Live View doesn't exist or has deleted."
@@ -2103,7 +2108,12 @@
             "description": "Success. The response indicates the default Dev Tool Portal has deleted."
           },
           "202": {
-            "description": "Accepted. The response indicates the default Dev Tool Portal is now deleting."
+            "description": "Accepted. The response indicates the default Dev Tool Portal is now deleting.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Success. The response indicates the defaultDev Tool Portal doesn't exist or has deleted."
@@ -7961,7 +7971,12 @@
             "description": "Success. The response indicates the application accelerator has deleted."
           },
           "202": {
-            "description": "Accepted. The response indicates the application accelerator is now deleting."
+            "description": "Accepted. The response indicates the application accelerator is now deleting.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Success. The response indicates the application accelerator doesn't exist or has deleted."
@@ -8169,7 +8184,12 @@
             "description": "Success. The response indicates the customized accelerator has deleted."
           },
           "202": {
-            "description": "Accepted. The response indicates the customized accelerator is now deleting."
+            "description": "Accepted. The response indicates the customized accelerator is now deleting.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Success. The response indicates the customized accelerator doesn't exist or has deleted."
@@ -8233,7 +8253,12 @@
             }
           },
           "202": {
-            "description": "Accepted. The response indicates the CustomizedAccelerator is validating."
+            "description": "Accepted. The response indicates the CustomizedAccelerator is validating.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -8377,7 +8402,12 @@
             "description": "Success."
           },
           "202": {
-            "description": "Accepted. The response indicates the PredefinedAccelerator is now disabling and contains a Location header to query the operation result."
+            "description": "Accepted. The response indicates the PredefinedAccelerator is now disabling and contains a Location header to query the operation result.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -8426,7 +8456,12 @@
             "description": "Success."
           },
           "202": {
-            "description": "Accepted. The response indicates the PredefinedAccelerator is now enabling and contains a Location header to query the operation result."
+            "description": "Accepted. The response indicates the PredefinedAccelerator is now enabling and contains a Location header to query the operation result.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -14503,6 +14538,7 @@
       "description": "The name of Application Live View.",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
       "x-ms-parameter-location": "method"
     },
     "DevToolPortalNameParameter": {
@@ -14511,6 +14547,7 @@
       "description": "The name of Dev Tool Portal.",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
       "x-ms-parameter-location": "method"
     },
     "GatewayNameParameter": {
@@ -14560,6 +14597,7 @@
       "description": "The name of the application accelerator.",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
       "x-ms-parameter-location": "method"
     },
     "CustomizedAcceleratorNameParameter": {
@@ -14568,6 +14606,7 @@
       "description": "The name of the customized accelerator.",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
       "x-ms-parameter-location": "method"
     },
     "PredefinedAcceleratorNameParameter": {
@@ -14576,6 +14615,7 @@
       "description": "The name of the predefined accelerator.",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
       "x-ms-parameter-location": "method"
     }
   },
