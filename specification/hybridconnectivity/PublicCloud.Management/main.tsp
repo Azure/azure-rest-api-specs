@@ -50,28 +50,28 @@ model SolutionTypeProperties {
 
 @doc("Solution Configuration Status enums.")
 enum solutionConfigurationStatus {
-  @doc("New")
+  @doc("New enum")
   New,
 
-  @doc("InProgress")
+  @doc("InProgress enum")
   InProgress,
 
-  @doc("Completed")
+  @doc("Completed enum")
   Completed,
 
-  @doc("Failed")
+  @doc("Failed enum")
   Failed,
 }
 
 @doc("Provisioning State enums.")
 enum provisioningState {
-  @doc("Succeeded")
+  @doc("Succeeded enum")
   Succeeded,
 
-  @doc("Failed")
+  @doc("Failed enum")
   Failed,
 
-  @doc("Canceled")
+  @doc("Canceled enum")
   Canceled,
 }
 
@@ -101,7 +101,6 @@ interface GenerateAwsTemplate {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
-    @body
-    generateAwsTemplateRequest: GenerateAwsTemplateRequest,
+    @body generateAwsTemplateRequest: GenerateAwsTemplateRequest,
   ): Azure.ResourceManager.ArmResponse<{}> | ErrorResponse;
 }
