@@ -92,17 +92,82 @@ model AzureChatExtensionsMessageContext {
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("A representation of the available options for the Azure OpenAI grounding enhancement.")
 model AzureChatGroundingEnhancementConfiguration {
+  @doc("Specifies whether the enhancement is enabled.")
   enabled: boolean;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "established industry acronym"
 @added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("A representation of the available options for the Azure OpenAI optical character recognition (OCR) enhancement.")
 model AzureChatOCREnhancementConfiguration {
+  @doc("Specifies whether the enhancement is enabled.")
   enabled: boolean;
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("A representation of the available Azure OpenAI enhancement configurations.")
 model AzureChatEnhancementConfiguration {
+  @doc("A representation of the available options for the Azure OpenAI grounding enhancement.")
   grounding?: AzureChatGroundingEnhancementConfiguration;
+
+  @doc("A representation of the available options for the Azure OpenAI optical character recognition (OCR) enhancement.")
   ocr?: AzureChatOCREnhancementConfiguration;
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("""
+Represents the output results of Azure enhancements to chat completions, as configured via the matching input provided
+in the request.
+""")
+model AzureChatEnhancements {
+  @doc("The grounding enhancement that returns the bounding box of the objects detected in the image.")
+  grounding?: AzureGroundingEnhancement;
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("The grounding enhancement that returns the bounding box of the objects detected in the image.")
+model AzureGroundingEnhancement {
+  @doc("The lines of text detected by the grounding enhancement.")
+  lines: AzureGroundingEnhancementLine[];
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.")
+model AzureGroundingEnhancementLine {
+  @doc("The text within the line.")
+  text: string;
+
+  @doc("An array of spans that represent detected objects and its bounding box information.")
+  spans: AzureGroundingEnhancementLineSpan[];
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("A span object that represents a detected object and its bounding box information.")
+model AzureGroundingEnhancementLineSpan {
+  @doc("The text content of the span that represents the detected object.")
+  text: string;
+
+  @doc("""
+  The character offset within the text where the span begins. This offset is defined as the position of the first
+  character of the span, counting from the start of the text as Unicode codepoints.
+  """)
+  offset: int32;
+
+  @doc("The length of the span in characters, measured in Unicode codepoints.")
+  length: int32;
+
+  @doc("An array of objects representing points in the polygon that encloses the detected object.")
+  polygon: AzureGroundingEnhancementCoordinatePoint[];
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("A representation of a single polygon point as used by the Azure grounding enhancement.")
+model AzureGroundingEnhancementCoordinatePoint {
+  @doc("The x-coordinate (horizontal axis) of the point.")
+  x: float32;
+
+  @doc("The y-coordinate (vertical axis) of the point.")
+  y: float32;
 }

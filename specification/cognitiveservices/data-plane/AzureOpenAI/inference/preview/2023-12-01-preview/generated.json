@@ -1017,12 +1017,25 @@
     },
     "AzureChatEnhancementConfiguration": {
       "type": "object",
+      "description": "A representation of the available Azure OpenAI enhancement configurations.",
       "properties": {
         "grounding": {
-          "$ref": "#/definitions/AzureChatGroundingEnhancementConfiguration"
+          "$ref": "#/definitions/AzureChatGroundingEnhancementConfiguration",
+          "description": "A representation of the available options for the Azure OpenAI grounding enhancement."
         },
         "ocr": {
-          "$ref": "#/definitions/AzureChatOCREnhancementConfiguration"
+          "$ref": "#/definitions/AzureChatOCREnhancementConfiguration",
+          "description": "A representation of the available options for the Azure OpenAI optical character recognition (OCR) enhancement."
+        }
+      }
+    },
+    "AzureChatEnhancements": {
+      "type": "object",
+      "description": "Represents the output results of Azure enhancements to chat completions, as configured via the matching input provided\nin the request.",
+      "properties": {
+        "grounding": {
+          "$ref": "#/definitions/AzureGroundingEnhancement",
+          "description": "The grounding enhancement that returns the bounding box of the objects detected in the image."
         }
       }
     },
@@ -1088,9 +1101,11 @@
     },
     "AzureChatGroundingEnhancementConfiguration": {
       "type": "object",
+      "description": "A representation of the available options for the Azure OpenAI grounding enhancement.",
       "properties": {
         "enabled": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Specifies whether the enhancement is enabled."
         }
       },
       "required": [
@@ -1099,9 +1114,11 @@
     },
     "AzureChatOCREnhancementConfiguration": {
       "type": "object",
+      "description": "A representation of the available options for the Azure OpenAI optical character recognition (OCR) enhancement.",
       "properties": {
         "enabled": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Specifies whether the enhancement is enabled."
         }
       },
       "required": [
@@ -1340,6 +1357,99 @@
         "vectorFields"
       ]
     },
+    "AzureGroundingEnhancement": {
+      "type": "object",
+      "description": "The grounding enhancement that returns the bounding box of the objects detected in the image.",
+      "properties": {
+        "lines": {
+          "type": "array",
+          "description": "The lines of text detected by the grounding enhancement.",
+          "items": {
+            "$ref": "#/definitions/AzureGroundingEnhancementLine"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "lines"
+      ]
+    },
+    "AzureGroundingEnhancementCoordinatePoint": {
+      "type": "object",
+      "description": "A representation of a single polygon point as used by the Azure grounding enhancement.",
+      "properties": {
+        "x": {
+          "type": "number",
+          "format": "float",
+          "description": "The x-coordinate (horizontal axis) of the point."
+        },
+        "y": {
+          "type": "number",
+          "format": "float",
+          "description": "The y-coordinate (vertical axis) of the point."
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ]
+    },
+    "AzureGroundingEnhancementLine": {
+      "type": "object",
+      "description": "A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text within the line."
+        },
+        "spans": {
+          "type": "array",
+          "description": "An array of spans that represent detected objects and its bounding box information.",
+          "items": {
+            "$ref": "#/definitions/AzureGroundingEnhancementLineSpan"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "text",
+        "spans"
+      ]
+    },
+    "AzureGroundingEnhancementLineSpan": {
+      "type": "object",
+      "description": "A span object that represents a detected object and its bounding box information.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text content of the span that represents the detected object."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The character offset within the text where the span begins. This offset is defined as the position of the first\ncharacter of the span, counting from the start of the text as Unicode codepoints."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the span in characters, measured in Unicode codepoints."
+        },
+        "polygon": {
+          "type": "array",
+          "description": "An array of objects representing points in the polygon that encloses the detected object.",
+          "items": {
+            "$ref": "#/definitions/AzureGroundingEnhancementCoordinatePoint"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "text",
+        "offset",
+        "length",
+        "polygon"
+      ]
+    },
     "AzureMachineLearningIndexChatExtensionConfiguration": {
       "type": "object",
       "description": "A specific representation of configurable options for Azure Machine Learning index when using it as an Azure OpenAI chat\nextension.",
@@ -1424,11 +1534,16 @@
           "$ref": "#/definitions/ContentFilterResults",
           "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it\nhas been detected, as well as the severity level (very_low, low, medium, high-scale that\ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
           "x-ms-client-name": "contentFilterResults"
+        },
+        "enhancements": {
+          "$ref": "#/definitions/AzureChatEnhancements",
+          "description": "Represents the output results of Azure OpenAI enhancements to chat completions, as configured via the matching input\nprovided in the request. This supplementary information is only available when using Azure OpenAI and only when the\nrequest is configured to use enhancements."
         }
       },
       "required": [
         "index",
-        "finish_reason"
+        "finish_reason",
+        "enhancements"
       ]
     },
     "ChatCompletions": {
@@ -1599,6 +1714,10 @@
           },
           "x-ms-identifiers": []
         },
+        "enhancements": {
+          "$ref": "#/definitions/AzureChatEnhancementConfiguration",
+          "description": "If provided, the configuration options for available Azure OpenAI chat enhancements."
+        },
         "seed": {
           "type": "integer",
           "format": "int64",
@@ -1685,16 +1804,20 @@
     },
     "ChatRequestAssistantMessage": {
       "type": "object",
+      "description": "A request chat message representing response or action from the assistant.",
       "properties": {
         "content": {
           "type": "string",
+          "description": "The content of the message.",
           "x-nullable": true
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "An optional name for the participant."
         },
         "tool_calls": {
           "type": "array",
+          "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
           "items": {
             "$ref": "#/definitions/ChatCompletionsToolCall"
           },
@@ -1713,9 +1836,11 @@
     },
     "ChatRequestMessage": {
       "type": "object",
+      "description": "An abstract representation of a chat message as provided in a request.",
       "properties": {
         "role": {
-          "$ref": "#/definitions/ChatRole"
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with this message."
         }
       },
       "discriminator": "role",
@@ -1725,12 +1850,15 @@
     },
     "ChatRequestSystemMessage": {
       "type": "object",
+      "description": "A request chat message containing system instructions that influence how the model will generate a chat completions\nresponse.",
       "properties": {
         "content": {
-          "type": "string"
+          "type": "string",
+          "description": "The contents of the system message."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "An optional name for the participant."
         }
       },
       "required": [
@@ -1745,13 +1873,16 @@
     },
     "ChatRequestToolMessage": {
       "type": "object",
+      "description": "A request chat message representing requested output from a configured tool.",
       "properties": {
         "content": {
           "type": "string",
+          "description": "The content of the message.",
           "x-nullable": true
         },
         "tool_call_id": {
           "type": "string",
+          "description": "The ID of the tool call resolved by the provided content.",
           "x-ms-client-name": "toolCallId"
         }
       },
@@ -1768,20 +1899,14 @@
     },
     "ChatRequestUserMessage": {
       "type": "object",
+      "description": "A request chat message representing user input to the assistant.",
       "properties": {
-        "content": {},
+        "content": {
+          "description": "The contents of the user message, with available input types varying by selected model."
+        },
         "name": {
-          "type": "string"
-        },
-        "dataSources": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AzureChatExtensionConfiguration"
-          },
-          "x-ms-identifiers": []
-        },
-        "enhancements": {
-          "$ref": "#/definitions/AzureChatEnhancementConfiguration"
+          "type": "string",
+          "description": "An optional name for the participant."
         }
       },
       "required": [
@@ -1796,16 +1921,20 @@
     },
     "ChatResponseMessage": {
       "type": "object",
+      "description": "A representation of a chat message as received in a response.",
       "properties": {
         "role": {
-          "$ref": "#/definitions/ChatRole"
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with the message."
         },
         "content": {
           "type": "string",
+          "description": "The content of the message.",
           "x-nullable": true
         },
         "tool_calls": {
           "type": "array",
+          "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
           "items": {
             "$ref": "#/definitions/ChatCompletionsToolCall"
           },
@@ -1813,6 +1942,7 @@
         },
         "context": {
           "type": "array",
+          "description": "If Azure OpenAI chat extensions are configured, this array represents the incremental steps performed by those\nextensions while processing the chat completions request.",
           "items": {
             "$ref": "#/definitions/ChatResponseMessage"
           },

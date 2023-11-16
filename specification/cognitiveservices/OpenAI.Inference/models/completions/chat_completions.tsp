@@ -169,6 +169,10 @@ model ChatCompletionsOptions {
   dataSources?: AzureChatExtensionConfiguration[];
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("If provided, the configuration options for available Azure OpenAI chat enhancements.")
+  enhancements?: AzureChatEnhancementConfiguration;
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
   @doc("""
   If specified, the system will make a best effort to sample deterministically such that repeated requests with the
   same seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the
@@ -227,6 +231,14 @@ model ChatChoice {
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @projectedName("json", "content_filter_results")
   contentFilterResults?: ContentFilterResults;
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @doc("""
+  Represents the output results of Azure OpenAI enhancements to chat completions, as configured via the matching input
+  provided in the request. This supplementary information is only available when using Azure OpenAI and only when the
+  request is configured to use enhancements.
+  """)
+  enhancements: AzureChatEnhancements;
 }
 
 @doc("""
