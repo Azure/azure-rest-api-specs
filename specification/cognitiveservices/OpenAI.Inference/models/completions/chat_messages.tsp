@@ -159,7 +159,11 @@ model ChatRequestFunctionMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'function' for function messages.")
   role: ChatRole.function;
 
-  ...FunctionCall;
+  @doc("The name of the function that was called to produce output.")
+  name: string;
+
+  @doc("The output of the function as requested by the function call.")
+  content: string;
 }
 
 @added(ServiceApiVersions.v2023_05_15)
