@@ -782,9 +782,22 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'AKSAssessment' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/AKSAssessment"
+            }
+          },
+          "201": {
+            "description": "Resource 'AKSAssessment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AKSAssessment"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -794,6 +807,10 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "AksAssessmentOperations_Create_MaximumSet_Gen": {
             "$ref": "./examples/AksAssessmentOperations_Create_MaximumSet_Gen.json"
@@ -995,6 +1012,69 @@
         "x-ms-examples": {
           "AssessedWebApplicationOperations_Get_MaximumSet_Gen": {
             "$ref": "./examples/AssessedWebApplicationOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/aksAssessments/{assessmentName}/clusters": {
+      "get": {
+        "operationId": "AksClusterOperations_ListByAksAssessment",
+        "tags": ["AKSClusterOperations"],
+        "description": "List AKSCluster resources by AKSAssessment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter Query Parameter.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Assessment Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "description": "AKS Assessment Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AKSClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AksClusterOperations_ListByAksAssessment_MaximumSet_Gen": {
+            "$ref": "./examples/AksClusterOperations_ListByAksAssessment_MaximumSet_Gen.json"
           }
         }
       }
@@ -1295,7 +1375,8 @@
             "in": "path",
             "description": "AKS Assessment Summary Name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
           }
         ],
         "responses": {
@@ -8428,25 +8509,6 @@
         }
       ]
     },
-    "AKSAssessmentCollection": {
-      "type": "object",
-      "description": "Collection of AKS Assessment.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Gets the list of items.",
-          "items": {
-            "$ref": "#/definitions/AKSAssessment"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets link to the next pagination instance."
-        }
-      },
-      "required": ["value"]
-    },
     "AKSAssessmentDetails": {
       "type": "object",
       "description": "Data model of AKS Assessment Details.",
@@ -8524,25 +8586,6 @@
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "AKSAssessmentOptionsCollection": {
-      "type": "object",
-      "description": "Collection of AKS Assessment Options.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Gets the list of items.",
-          "items": {
-            "$ref": "#/definitions/AKSAssessmentOptions"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets link to the next pagination instance."
-        }
-      },
-      "required": ["value"]
     },
     "AKSAssessmentOptionsListResult": {
       "type": "object",
@@ -8704,6 +8747,25 @@
         }
       ]
     },
+    "AKSClusterListResult": {
+      "type": "object",
+      "description": "The response of a AKSCluster list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AKSCluster items on this page",
+          "items": {
+            "$ref": "#/definitions/AKSCluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": ["value"]
+    },
     "AKSClusterProperties": {
       "type": "object",
       "description": "ARM model of AKS Cluster Properties.",
@@ -8734,25 +8796,6 @@
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "AKSCostDetailCollection": {
-      "type": "object",
-      "description": "Collection of AKS Cost Detail.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Gets the list of items.",
-          "items": {
-            "$ref": "#/definitions/AKSCostDetail"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets link to the next pagination instance."
-        }
-      },
-      "required": ["value"]
     },
     "AKSCostDetailListResult": {
       "type": "object",
@@ -8788,7 +8831,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "AKS Assessment Summary Name."
+          "description": "AKS Assessment Summary Name.",
+          "pattern": "^[^<>&:\\?/#]{1,260}$"
         },
         "eTag": {
           "type": "string",
@@ -8816,25 +8860,6 @@
           ]
         }
       ]
-    },
-    "AKSSummaryCollection": {
-      "type": "object",
-      "description": "Collection of AKS Assessment Summary Properties.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Gets the list of items.",
-          "items": {
-            "$ref": "#/definitions/AKSSummary"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets link to the next pagination instance."
-        }
-      },
-      "required": ["value"]
     },
     "AKSSummaryListResult": {
       "type": "object",
@@ -10419,7 +10444,7 @@
       "type": "object",
       "description": "Assessed Web app database properties web model.",
       "properties": {
-        "WebAppType": {
+        "webAppType": {
           "$ref": "#/definitions/WebAppType",
           "description": "Gets or sets the web app type.",
           "readOnly": true
@@ -10509,25 +10534,6 @@
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "AssessedWebApplicationCollection": {
-      "type": "object",
-      "description": "Collection of Assessed Web Application.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Gets the list of items.",
-          "items": {
-            "$ref": "#/definitions/AssessedWebApplication"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets link to the next pagination instance."
-        }
-      },
-      "required": ["value"]
     },
     "AssessedWebApplicationListResult": {
       "type": "object",
@@ -10969,17 +10975,8 @@
         "serverGroupId": {
           "type": "string",
           "description": "Gets or sets the server group id."
-        },
-        "tags": {
-          "type": "array",
-          "description": "Gets list of tags.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
         }
-      },
-      "required": ["tags"]
+      }
     },
     "AssessmentSettings": {
       "type": "object",
@@ -13435,7 +13432,7 @@
           {
             "name": "All",
             "value": "All",
-            "description": "All. Indicates All categories of VM."
+            "description": "Indicates All categories of VM."
           },
           {
             "name": "ComputeOptimized",
@@ -16633,22 +16630,22 @@
           {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "Unknown."
+            "description": "Indicates missing value."
           },
           {
             "name": "Issue",
             "value": "Issue",
-            "description": "Issue."
+            "description": "Indicates Migration Issue."
           },
           {
             "name": "Warn",
             "value": "Warn",
-            "description": "Warn."
+            "description": "Indicates Migration Warning."
           },
           {
             "name": "Pass",
             "value": "Pass",
-            "description": "Pass."
+            "description": "Indicates check is passed."
           }
         ]
       }
@@ -16932,6 +16929,23 @@
         "name": "CompatibilityLevel",
         "modelAsString": true
       }
+    },
+    "ComputeResource": {
+      "type": "object",
+      "description": "Data model of Cores and Memory Compute Resource.",
+      "properties": {
+        "cores": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or sets cores."
+        },
+        "memory": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or sets memory."
+        }
+      },
+      "required": ["cores", "memory"]
     },
     "ComputeSettings": {
       "type": "object",
@@ -19416,12 +19430,12 @@
           {
             "name": "User",
             "value": "User",
-            "description": "User."
+            "description": "Indicates User node pool."
           },
           {
             "name": "System",
             "value": "System",
-            "description": "System."
+            "description": "Indicates System node pool."
           }
         ]
       }
@@ -19437,12 +19451,12 @@
           {
             "name": "Linux",
             "value": "Linux",
-            "description": "Linux."
+            "description": "Linux OS Type."
           },
           {
             "name": "Windows",
             "value": "Windows",
-            "description": "Windows."
+            "description": "Windows OS Type."
           }
         ]
       }
@@ -19801,13 +19815,7 @@
           "type": "object",
           "description": "Gets or sets the mapping of Assessment Options in graph representation.",
           "additionalProperties": {
-            "additionalProperties": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "type": "object"
+            "$ref": "#/definitions/RecordOfStringArray"
           }
         }
       },
@@ -20139,12 +20147,12 @@
           {
             "name": "Standard",
             "value": "Standard",
-            "description": "Standard."
+            "description": "Standard Pricing Tier."
           },
           {
             "name": "Free",
             "value": "Free",
-            "description": "Free."
+            "description": "Free Pricing Tier."
           }
         ]
       }
@@ -20532,7 +20540,7 @@
           {
             "name": "Ready",
             "value": "Ready",
-            "description": "Ready."
+            "description": "Ready for migration."
           }
         ]
       }
@@ -20542,11 +20550,11 @@
       "description": "Data model of Recommendation Result.",
       "properties": {
         "request": {
-          "$ref": "#/definitions/Resource",
+          "$ref": "#/definitions/ComputeResource",
           "description": "Gets or sets cores and memory request."
         },
         "limit": {
-          "$ref": "#/definitions/Resource",
+          "$ref": "#/definitions/ComputeResource",
           "description": "Gets or sets cores and memory limit."
         },
         "osType": {
@@ -20641,6 +20649,24 @@
         }
       }
     },
+    "RecordOfInt": {
+      "type": "object",
+      "description": "Data Model for Dictionary<string, int>.",
+      "additionalProperties": {
+        "format": "int32",
+        "type": "integer"
+      }
+    },
+    "RecordOfStringArray": {
+      "type": "object",
+      "description": "Data Model for Dictionary<string, string[]>.",
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      }
+    },
     "ReportDetails": {
       "type": "object",
       "description": "Business case report details.",
@@ -20731,23 +20757,6 @@
         ]
       }
     },
-    "Resource": {
-      "type": "object",
-      "description": "Data model of Cores and Memory Resource.",
-      "properties": {
-        "cores": {
-          "type": "number",
-          "format": "float",
-          "description": "Gets or sets cores."
-        },
-        "memory": {
-          "type": "number",
-          "format": "float",
-          "description": "Gets or sets memory."
-        }
-      },
-      "required": ["cores", "memory"]
-    },
     "ResourceId": {
       "type": "object",
       "description": "ARM id for a resource.",
@@ -20802,7 +20811,7 @@
           {
             "name": "None",
             "value": "None",
-            "description": "None."
+            "description": "Savings Options is not applicable."
           },
           {
             "name": "OneYearSavings",
@@ -22256,7 +22265,7 @@
           {
             "name": "None",
             "value": "None",
-            "description": "None."
+            "description": "No Migration Tool is suggested."
           },
           {
             "name": "WebAppMigration",
@@ -22282,12 +22291,12 @@
           {
             "name": "NotSuitable",
             "value": "NotSuitable",
-            "description": "Not Suitable."
+            "description": "Not Suitable for Azure."
           },
           {
             "name": "Suitable",
             "value": "Suitable",
-            "description": "Suitable."
+            "description": "Suitable for Azure."
           }
         ]
       }
@@ -22359,11 +22368,7 @@
           "type": "object",
           "description": "Gets the cloud suitability summary for all entities in the assessment per target.",
           "additionalProperties": {
-            "additionalProperties": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "type": "object"
+            "$ref": "#/definitions/RecordOfInt"
           },
           "readOnly": true
         },
@@ -23282,7 +23287,7 @@
       "type": "object",
       "description": "Assessed Web app database properties web model.",
       "properties": {
-        "WebAppType": {
+        "webAppType": {
           "$ref": "#/definitions/WebAppType",
           "description": "Gets or sets the web app type.",
           "readOnly": true
@@ -23333,12 +23338,12 @@
           "description": "Machine arm id.",
           "readOnly": true
         },
-        "WebAppSkuName": {
+        "webAppSkuName": {
           "type": "string",
           "description": "Confidence Rating in Percentage.",
           "readOnly": true
         },
-        "WebAppSkuSize": {
+        "webAppSkuSize": {
           "type": "string",
           "description": "Confidence Rating in Percentage.",
           "readOnly": true
@@ -23394,12 +23399,9 @@
           "readOnly": true
         },
         "appServicePlanCount": {
-          "type": "object",
+          "type": "integer",
+          "format": "int32",
           "description": "App service plan count",
-          "additionalProperties": {
-            "format": "int32",
-            "type": "integer"
-          },
           "readOnly": true
         }
       },
@@ -23475,7 +23477,7 @@
     "WebAppTypes": {
       "type": "string",
       "description": "Business case supported WebApp types.",
-      "enum": ["Unknown", "ASPNET"],
+      "enum": ["Unknown", "ASPNET", "Tomcat"],
       "x-ms-enum": {
         "name": "WebAppTypes",
         "modelAsString": true,
@@ -23489,6 +23491,11 @@
             "name": "ASPNET",
             "value": "ASPNET",
             "description": "ASPNET Type."
+          },
+          {
+            "name": "Tomcat",
+            "value": "Tomcat",
+            "description": "Tomcat Type."
           }
         ]
       }
