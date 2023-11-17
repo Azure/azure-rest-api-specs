@@ -136,59 +136,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/deallocate": {
-      "post": {
-        "operationId": "ScheduledActions_Deallocate",
-        "description": "submitDeallocate for a virtual machine",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "locationparameter",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "requestBody",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SubmitDeallocateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DeallocateResourceOperationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/RequestLevelError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Deallocate": {
-            "$ref": "./examples/ScheduledActions_Deallocate_MinimumSet_Gen.json"
-          },
-          "ScheduledActions_Deallocate": {
-            "$ref": "./examples/ScheduledActions_Deallocate_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/executeDeallocate": {
       "post": {
         "operationId": "ScheduledActions_ExecuteDeallocate",
@@ -401,9 +348,62 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/hibernate": {
+    "/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/submitDeallocate": {
       "post": {
-        "operationId": "ScheduledActions_Hibernate",
+        "operationId": "ScheduledActions_SubmitDeallocate",
+        "description": "submitDeallocate for a virtual machine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubmitDeallocateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeallocateResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/RequestLevelError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_SubmitDeallocate": {
+            "$ref": "./examples/ScheduledActions_SubmitDeallocate_MaximumSet_Gen.json"
+          },
+          "SubmitDeallocate": {
+            "$ref": "./examples/ScheduledActions_SubmitDeallocate_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/submitHibernate": {
+      "post": {
+        "operationId": "ScheduledActions_SubmitHibernate",
         "description": "submitHibernate for a virtual machine",
         "parameters": [
           {
@@ -445,18 +445,18 @@
           }
         },
         "x-ms-examples": {
-          "Hibernate": {
-            "$ref": "./examples/ScheduledActions_Hibernate_MinimumSet_Gen.json"
+          "ScheduledActions_SubmitHibernate": {
+            "$ref": "./examples/ScheduledActions_SubmitHibernate_MaximumSet_Gen.json"
           },
-          "ScheduledActions_Hibernate": {
-            "$ref": "./examples/ScheduledActions_Hibernate_MaximumSet_Gen.json"
+          "SubmitHibernate": {
+            "$ref": "./examples/ScheduledActions_SubmitHibernate_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/start": {
+    "/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/submitStart": {
       "post": {
-        "operationId": "ScheduledActions_Start",
+        "operationId": "ScheduledActions_SubmitStart",
         "description": "submitStart for a virtual machine",
         "parameters": [
           {
@@ -498,11 +498,11 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_Start": {
-            "$ref": "./examples/ScheduledActions_Start_MaximumSet_Gen.json"
+          "ScheduledActions_SubmitStart": {
+            "$ref": "./examples/ScheduledActions_SubmitStart_MaximumSet_Gen.json"
           },
-          "Start": {
-            "$ref": "./examples/ScheduledActions_Start_MinimumSet_Gen.json"
+          "SubmitStart": {
+            "$ref": "./examples/ScheduledActions_SubmitStart_MinimumSet_Gen.json"
           }
         }
       }

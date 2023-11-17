@@ -21,30 +21,30 @@ interface ScheduledActions {
   // -------------- Routes -------------
   /** submitDeallocate for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/deallocate")
+  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/submitDeallocate")
   @post
   @action
-  deallocate(
+  submitDeallocate(
     ...Params,
     @body @doc("The request body") requestBody: SubmitDeallocateRequest,
   ): ArmResponse<DeallocateResourceOperationResponse> | RequestLevelError;
 
   /** submitHibernate for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/hibernate")
+  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/submitHibernate")
   @post
   @action
-  hibernate(
+  submitHibernate(
     ...Params,
     @body @doc("The request body") requestBody: SubmitHibernateRequest,
   ): ArmResponse<HibernateResourceOperationResponse> | RequestLevelError;
 
   /** submitStart for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/start")
+  @route("/subscriptions/{subscriptionId}/locations/{locationparameter}/providers/Microsoft.Compute/virtualMachines/providers/Microsoft.ComputeSchedule/submitStart")
   @post
   @action
-  start(
+  submitStart(
     ...Params,
     @body @doc("The request body") requestBody: SubmitStartRequest,
   ): ArmResponse<StartResourceOperationResponse> | RequestLevelError;
