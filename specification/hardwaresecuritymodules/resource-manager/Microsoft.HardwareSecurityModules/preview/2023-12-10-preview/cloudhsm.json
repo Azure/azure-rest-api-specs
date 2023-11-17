@@ -794,15 +794,20 @@
       "type": "object",
       "description": "Cloud Hsm Cluster backup information",
       "properties": {
-        "azureStorageBlobContainerUri": {
+        "azureStorageResourceUri": {
           "type": "string",
-          "description": "Azure Blob storage container Uri"
+          "description": "Azure storate Resource Uri"
         },
         "lastBackupDateTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
           "description": "Last Date Time that Customer Enabled Backup was taken"
+        },
+        "lastBackupStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Status of last backup"
         }
       }
     },
