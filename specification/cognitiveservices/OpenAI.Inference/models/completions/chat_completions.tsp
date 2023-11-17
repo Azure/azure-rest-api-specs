@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 
 import "./azure_chat_extensions.tsp";
+import "./azure_content_filtering.tsp";
 import "./chat_messages.tsp";
 import "./common.tsp";
 import "./functions.tsp";
@@ -230,7 +231,7 @@ model ChatChoice {
     """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @projectedName("json", "content_filter_results")
-  contentFilterResults?: ContentFilterResults;
+  contentFilterResults?: ContentFilterResultsForChoice;
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
   @doc("""
@@ -275,7 +276,7 @@ model ChatCompletions {
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @projectedName("json", "prompt_filter_results")
-  promptFilterResults?: PromptFilterResult[];
+  promptFilterResults?: ContentFilterResultsForPrompt[];
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
   @projectedName("json", "system_fingerprint")
