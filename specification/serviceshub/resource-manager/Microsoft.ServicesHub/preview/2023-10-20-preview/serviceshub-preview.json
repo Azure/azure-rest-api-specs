@@ -763,13 +763,13 @@
           "200": {
             "description": "The Assessment Connector has been created or updated successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectorInfoPayloadResult"
+              "$ref": "#/definitions/AssessmentConnectorResource"
             }
           },
           "201": {
             "description": "The Assessment Connector has been created successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectorInfoPayloadResult"
+              "$ref": "#/definitions/AssessmentConnectorResource"
             }
           },
           "default": {
@@ -1537,7 +1537,8 @@
           },
           "x-ms-identifiers": []
         }
-      }
+      },
+      "x-ms-azure-resource":  true
     },
     "AssessmentConnectorResource": {
       "type": "object",
@@ -1561,6 +1562,10 @@
         "spaceId": {
           "type": "string",
           "description": "EngageHub SpaceId linked to Connector."
+        },
+        "puid": {
+          "type": "string",
+          "description": "Puid of the EngageHub user."
         },
         "logAnalyticsWorkspaces": {
           "description": "List of LogAnalyticsWorkspaces linked to Connector and SpaceId.",
