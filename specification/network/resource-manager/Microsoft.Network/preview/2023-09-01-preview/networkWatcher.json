@@ -43,18 +43,19 @@
         "description": "Creates or updates a network watcher in the specified resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
+            "description": "The name of the resource group.",
             "in": "path",
+            "name": "resourceGroupName",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
             "name": "networkWatcherName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "parameters",
@@ -117,7 +118,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -176,18 +177,22 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
-          },
-          "204": {
-            "description": "Delete successful."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "204": {
+              "description": "Delete successful."
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
             }
-          }
-        },
+          },
         "x-ms-examples": {
           "Delete network watcher": {
             "$ref": "./examples/NetworkWatcherDelete.json"
@@ -293,7 +298,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "null"
         },
         "x-ms-examples": {
           "List network watchers": {
@@ -332,7 +337,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "null"
         },
         "x-ms-examples": {
           "List all network watchers": {
@@ -361,7 +366,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "parameters",
@@ -420,7 +426,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "parameters",
@@ -449,15 +456,19 @@
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/VerificationIPFlowResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
         "x-ms-examples": {
           "Ip flow verify": {
             "$ref": "./examples/NetworkWatcherIpFlowVerify.json"
@@ -489,7 +500,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "parameters",
@@ -518,15 +530,19 @@
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/NextHopResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
         "x-ms-examples": {
           "Get next hop": {
             "$ref": "./examples/NetworkWatcherNextHopGet.json"
@@ -558,7 +574,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "parameters",
@@ -627,14 +644,16 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "packetCaptureName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the packet capture session."
+            "description": "The name of the packet capture session.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "parameters",
@@ -771,15 +790,19 @@
             "description": "Delete successful."
           },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
             }
-          }
-        },
+          },
         "x-ms-examples": {
           "Delete packet capture": {
             "$ref": "./examples/NetworkWatcherPacketCaptureDelete.json"
@@ -811,14 +834,16 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "packetCaptureName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the packet capture session."
+            "description": "The name of the packet capture session.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -832,15 +857,19 @@
             "description": "Request successful. The operation stops the packet capture session."
           },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
             }
-          }
-        },
+          },
         "x-ms-examples": {
           "Stop packet capture": {
             "$ref": "./examples/NetworkWatcherPacketCaptureStop.json"
@@ -872,14 +901,16 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Network Watcher resource."
+            "description": "The name of the Network Watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "packetCaptureName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name given to the packet capture session."
+            "description": "The name given to the packet capture session.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
