@@ -158,7 +158,7 @@ model ContentFilterCitedDetectionResult {
 
   @projectedName("json", "URL")
   @doc("The internet location associated with the detection.")
-  url: url;
+  url?: url;
 
   @doc("The license description associated with the detection.")
   license: string;
