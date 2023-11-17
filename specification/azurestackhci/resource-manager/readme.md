@@ -111,7 +111,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-08-01-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2023-08-01-preview/deploymentSettings.json
   - Microsoft.AzureStackHCI/preview/2023-08-01-preview/edgeDevices.json
-  - Microsoft.AzureStackHCI/preview/2023-11-01-preview/securitySettings.json
+  - Microsoft.AzureStackHCI/preview/2023-08-01-preview/securitySettings.json
 ```
 ### Tag: package-2023-08
 
