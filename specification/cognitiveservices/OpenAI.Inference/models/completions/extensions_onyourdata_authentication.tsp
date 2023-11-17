@@ -41,7 +41,7 @@ model OnYourDataApiKeyAuthenticationOptions
   type: OnYourDataAuthenticationType.apiKey;
 
   @doc("The API key to use for authentication.")
-  apiKey: string;
+  key: string;
 }
 
 @doc("The authentication option using connection string.")
