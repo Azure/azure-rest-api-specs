@@ -513,6 +513,50 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Azure Large Instances"
+        ],
+        "operationId": "AzureLargeInstances_Delete",
+        "summary": "Delete the azure large instance.",
+        "description": "Delete the azure large instance after physical decomission is completed.",
+        "x-ms-examples": {
+          "Delete Azure Large Instance": {
+            "$ref": "./examples/AzureLargeInstance_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureLargeInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureLargeInstance/azureLargeStorageInstances": {
