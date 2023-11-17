@@ -16,7 +16,7 @@ namespace Azure.OpenAI;
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
 alias ChatMessageContent = string | ChatMessageContentItem[];
 
-@added(ServiceApiVersions.v2023_05_15)
+@added(ServiceApiVersions.v2023_12_01_Preview)
 @doc("An abstract representation of a structured content item within a chat message.")
 @discriminator("type")
 model ChatMessageContentItem {
@@ -24,7 +24,7 @@ model ChatMessageContentItem {
   type: string;
 }
 
-@added(ServiceApiVersions.v2023_05_15)
+@added(ServiceApiVersions.v2023_12_01_Preview)
 @doc("A structured chat content item containing plain text.")
 model ChatMessageTextContentItem extends ChatMessageContentItem {
   @doc("The discriminated object type: always 'text' for this type.")
@@ -34,7 +34,7 @@ model ChatMessageTextContentItem extends ChatMessageContentItem {
   text: string;
 }
 
-@added(ServiceApiVersions.v2023_05_15)
+@added(ServiceApiVersions.v2023_12_01_Preview)
 @doc("A representation of the possible image detail levels for image-based chat completions message content.")
 enum ChatMessageImageDetailLevel {
   @doc("Specifies that the model should determine which detail level to apply using heuristics like image size.")
@@ -53,20 +53,28 @@ enum ChatMessageImageDetailLevel {
   high: "high",
 }
 
-@added(ServiceApiVersions.v2023_05_15)
+@added(ServiceApiVersions.v2023_12_01_Preview)
 @doc("A structured chat content item containing an image reference.")
 model ChatMessageImageContentItem extends ChatMessageContentItem {
   @doc("The discriminated object type: always 'image_url' for this type.")
   type: "image_url";
 
   @doc("An internet location, which must be accessible to the model,from which the image may be retrieved.")
-  url: url;
+  @projectedName("json", "image_url")
+  imageUrl: ChatMessageImageUrl;
 
   @doc("""
   The evaluation quality setting to use, which controls relative prioritization of speed, token consumption, and
   accuracy.
   """)
   detail?: ChatMessageImageDetailLevel;
+}
+
+@doc("An internet location from which the model may retrieve an image.")
+@added(ServiceApiVersions.v2023_12_01_Preview)
+model ChatMessageImageUrl {
+  @doc("The URL of the image.")
+  url: url;
 }
 
 @discriminator("role")
