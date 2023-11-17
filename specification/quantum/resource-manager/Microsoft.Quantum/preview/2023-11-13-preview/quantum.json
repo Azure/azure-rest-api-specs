@@ -633,7 +633,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "description": "List of workspace keys to be generated."
     },
     "TagsObject": {
       "properties": {
@@ -1093,7 +1094,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Azure subscription ID."
+      "format": "uuid",
+      "description": "The ID of the target subscription. The value must be an UUID."
     },
     "LocationParameter": {
       "name": "locationName",
@@ -1108,14 +1110,17 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "The API version to use for this operation.",
+      "minLength": 1
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the resource group.",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "minLength": 1,
+      "maxLength": 90,
       "x-ms-parameter-location": "method"
     },
     "WorkspaceNameParameter": {
