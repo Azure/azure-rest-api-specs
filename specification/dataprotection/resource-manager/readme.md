@@ -307,3 +307,12 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## Suppression
+``` yaml
+directive:
+  - suppress: ParametersInPost
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchSecondaryRecoveryPoints"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchCrossRegionRestoreJobs"].post
+```
