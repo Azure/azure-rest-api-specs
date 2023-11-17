@@ -162,8 +162,9 @@ model ChatRequestFunctionMessage extends ChatRequestMessage {
   @doc("The name of the function that was called to produce output.")
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI specification"
   @doc("The output of the function as requested by the function call.")
-  content: string;
+  content: string | null;
 }
 
 @added(ServiceApiVersions.v2023_05_15)
@@ -185,7 +186,6 @@ model ChatResponseMessage {
   toolCalls?: ChatCompletionsToolCall[];
 
   @added(ServiceApiVersions.v2023_07_01_Preview)
-  @removed(ServiceApiVersions.v2023_12_01_Preview)
   @projectedName("json", "function_call")
   @doc("""
   The function call that must be resolved and have its output appended to subsequent input messages for the chat

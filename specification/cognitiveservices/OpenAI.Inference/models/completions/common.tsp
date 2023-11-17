@@ -43,6 +43,10 @@ enum CompletionsFinishReason {
   @doc("Completion ended normally, with the model requesting a function to be called.")
   @added(ServiceApiVersions.v2023_07_01_Preview)
   functionCall: "function_call",
+
+  @doc("Completion ended with the model calling a provided tool for output.")
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  toolCalls: "tool_calls",
 }
 
 @doc("A description of the intended purpose of a message within a chat completions interaction.")
