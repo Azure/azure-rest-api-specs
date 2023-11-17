@@ -379,9 +379,6 @@
           },
           "Creates a completion for the provided Pinecone resource. Uses Azure OpenAI chat extensions.": {
             "$ref": "./examples/extensions_chat_completions_pinecone.json"
-          },
-          "Creates a completion for the provided prompt, parameters and chosen model. Uses Azure OpenAI chat extensions.": {
-            "$ref": "./examples/extensions_chat_completions.json"
           }
         }
       }
@@ -2308,6 +2305,36 @@
         "filtered"
       ]
     },
+    "ContentFilterCitedDetectionResult": {
+      "type": "object",
+      "description": "Represents the outcome of a detection operation against protected resources as performed by content filtering.",
+      "properties": {
+        "filtered": {
+          "type": "boolean",
+          "description": "A value indicating whether or not the content has been filtered."
+        },
+        "detected": {
+          "type": "boolean",
+          "description": "A value indicating whether detection occurred, irrespective of severity or whether the content was filtered."
+        },
+        "URL": {
+          "type": "string",
+          "format": "uri",
+          "description": "The internet location associated with the detection.",
+          "x-ms-client-name": "url"
+        },
+        "license": {
+          "type": "string",
+          "description": "The license associated with the detection."
+        }
+      },
+      "required": [
+        "filtered",
+        "detected",
+        "URL",
+        "license"
+      ]
+    },
     "ContentFilterDetectionResult": {
       "type": "object",
       "description": "Represents the outcome of a detection operation performed by content filtering.",
@@ -2317,7 +2344,7 @@
           "description": "A value indicating whether or not the content has been filtered."
         },
         "detected": {
-          "type": "string",
+          "type": "boolean",
           "description": "A value indicating whether detection occurred, irrespective of severity or whether the content was filtered."
         }
       },
@@ -2426,6 +2453,16 @@
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "Describes an error returned if the content filtering system is\ndown or otherwise unable to complete the operation in time."
+        },
+        "protected_material_text": {
+          "$ref": "#/definitions/ContentFilterDetectionResult",
+          "description": "Information about detection of protected text material.",
+          "x-ms-client-name": "protectedMaterialText"
+        },
+        "protected_material_code": {
+          "$ref": "#/definitions/ContentFilterCitedDetectionResult",
+          "description": "Information about detection of protected code material.",
+          "x-ms-client-name": "protectedMaterialCode"
         }
       }
     },

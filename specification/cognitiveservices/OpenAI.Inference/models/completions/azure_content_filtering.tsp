@@ -115,6 +115,16 @@ model ContentFilterResultDetailsForPrompt {
 @doc("Information about content filtering evaluated against generated model output.")
 model ContentFilterResultsForChoice {
   ...ContentFilterResultsBase;
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @projectedName("json", "protected_material_text")
+  @doc("Information about detection of protected text material.")
+  protectedMaterialText?: ContentFilterDetectionResult;
+
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @projectedName("json", "protected_material_code")
+  @doc("Information about detection of protected code material.")
+  protectedMaterialCode?: ContentFilterCitedDetectionResult;
 }
 
 @added(ServiceApiVersions.v2023_06_01_Preview)
@@ -138,7 +148,7 @@ model ContentFilterDetectionResult {
   filtered: boolean;
 
   @doc("A value indicating whether detection occurred, irrespective of severity or whether the content was filtered.")
-  detected: string;
+  detected: boolean;
 }
 
 @doc("Represents the outcome of a detection operation against protected resources as performed by content filtering.")
