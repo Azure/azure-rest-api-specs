@@ -19,6 +19,15 @@ model ApiVersionParameter {
   apiVersion: string;
 }
 
+@doc("The path for name.")
+@resource("name")
+model NameInPath {
+  @key("name")
+  @visibility("read")
+  @doc("name")
+  name: string;
+}
+
 @doc("Operation for Atlas service")
 op AtlasOperation<
   TParams extends TypeSpec.Reflection.Model,
@@ -33,7 +42,7 @@ op AtlasOperation<
   ...TParams,
 ): TResponse | TErrorResponse;
 
-@doc("Operation for Atlas service")
+@doc("Operation for DataMap service")
 op DataMapBaseOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse,
@@ -46,6 +55,8 @@ op DataMapBaseOperation<
   >,
   ...TParams,
 ): TResponse | TErrorResponse;
+ 
+alias DataMapResourceOperations = Azure.Core.ResourceOperations<NoClientRequestId & NoConditionalRequests & NoRepeatableRequests, ErrorResponse>;
 
 interface Entity {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -2051,16 +2062,11 @@ when search filter type=term_template
     },
     TermTemplateDef
   >;
+  
 
+  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Need to put types API under the same interface"
   @doc("Get the term template definition by its name (unique).")
-  @route("/types/termtemplatedef/name/{name}")
+  @route("/types/termtemplatedef")
   @get
-  getTermTemplateDefByName is DataMapBaseOperation<
-    {
-      @doc("The name of the term template.")
-      @path
-      name: string;
-    },
-    TermTemplateDef
-  >;
+  getTermTemplateDefByName is DataMapResourceOperations.ResourceRead<TermTemplateDef, NameInPath>;
 }

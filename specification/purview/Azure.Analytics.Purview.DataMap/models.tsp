@@ -1,5 +1,5 @@
-import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/rest";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -1444,8 +1444,10 @@ model AtlasBaseTypeDef {
   @doc("The GUID of the type definition.")
   guid?: string;
 
+  @key("name")
+  @visibility("read")
   @doc("The name of the type definition.")
-  name?: string;
+  name: string;
 
   @doc("The options for the type definition.")
   options?: Record<string>;
@@ -1885,7 +1887,9 @@ model AtlasTypesDef {
   termTemplateDefs?: TermTemplateDef[];
 }
 
-@doc("term template definition for glossary term.")
+@doc("Term template definition for glossary term.")
+@resource("name")
+@resource("guid")
 model TermTemplateDef {
   ...AtlasStructDef;
 }
