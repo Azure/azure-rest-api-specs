@@ -671,7 +671,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ServicesHub/getEngageHubSpaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/getEngageHubSpaces": {
       "post": {
         "tags": [
           "EngageHubSpaces"
@@ -724,72 +724,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/getAssessmentConnectorInfo": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/assessmentConnectorInfo": {
+      "put": {
         "tags": [
           "AssessmentConnectorInfo"
         ],
-        "summary": "Get Assessment Connector information stored with EngageHub Spaces'.",
-        "operationId": "Get_AssessmentConnectorInfo",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "x-ms-engage-hub-token",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "EngageHub 1PA token to be send to EH Gateway",
-            "x-ms-secret": true
-          },
-          {
-            "name": "requestBody",
-            "in": "body",
-            "description": "connector information payload object",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConnectorInfoPayloadModel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ConnectorInfoPayloadResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Assessment Connector Information": {
-            "$ref": "./examples/GetAssessmentConnectorInfo.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/upsertAssessmentConnectorInfo": {
-      "post": {
-        "tags": [
-          "PostAssessmentConnectorInfo"
-        ],
         "summary": "Create or Update Assessment Connector information linked with EngageHub Spaces'.",
-        "operationId": "Post_AssessmentConnectorInfo",
+        "operationId": "CreateOrUpdate_AssessmentConnectorInfo",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -817,7 +758,7 @@
             "description": "post connector information payload object",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PostConnectorInfoPayloadModel"
+              "$ref": "#/definitions/PutConnectorInfoPayloadModel"
             }
           }
         ],
@@ -837,7 +778,7 @@
         },
         "x-ms-examples": {
           "Create/Update Assessment Connector Information": {
-            "$ref": "./examples/PostAssessmentConnectorInfo.json"
+            "$ref": "./examples/PutAssessmentConnectorInfo.json"
           }
         }
       }
@@ -1570,31 +1511,6 @@
         }
       }
     },
-    "ConnectorInfoPayloadModel": {
-      "type": "object",
-      "description": "Assessment Connector Information Payload",
-      "properties": {
-        "properties": {
-          "description": "Assessment Connector Information Payload",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConnectorInfoPayloadModelProperties"
-        }
-      }
-    },
-    "ConnectorInfoPayloadModelProperties": {
-      "type": "object",
-      "description": "Assessment Connector Information Payload Properties",
-      "properties": {
-        "connectorName": {
-          "type": "string",
-          "description": "Name of the Connector Resource."
-        },
-        "spaceId": {
-          "type": "string",
-          "description": "EngageHub SpaceId linked to Connector."
-        }
-      }
-    },
     "ConnectorInfoPayloadResult": {
       "type": "object",
       "description": "Connector Information Result.",
@@ -1641,20 +1557,20 @@
         }
       }
     },
-    "PostConnectorInfoPayloadModel": {
+    "PutConnectorInfoPayloadModel": {
       "type": "object",
-      "description": "Assessment Connector Information Post Payload",
+      "description": "Assessment Connector Information Put Payload",
       "properties": {
         "properties": {
-          "description": "Assessment Connector Information Post Payload",
+          "description": "Assessment Connector Information Put Payload",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PostConnectorInfoPayloadModelProperties"
+          "$ref": "#/definitions/PutConnectorInfoPayloadModelProperties"
         }
       }
     },
-    "PostConnectorInfoPayloadModelProperties": {
+    "PutConnectorInfoPayloadModelProperties": {
       "type": "object",
-      "description": "Assessment Connector Information Post Payload Properties",
+      "description": "Assessment Connector Information Put Payload Properties",
       "properties": {
         "connectorName": {
           "type": "string",
