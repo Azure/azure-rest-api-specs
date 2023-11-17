@@ -74,6 +74,9 @@ model Receiver {
 
   @doc("OTLP receiver configurations. This field is mandatory for OTLP and pipelineGroup receivers.")
   otlpReceiver?: OtlpReceiver;
+
+  @doc("UDP receiver configurations. This field is mandatory for UDP receivers.")
+  udpReceiver?: UdpReceiver;
 }
 
 @doc("The receiver type.")
@@ -89,6 +92,9 @@ enum ReceiverType {
 
   @doc("Receives data from a OTLP collector.")
   OTLP,
+
+  @doc("Receives data from an UDP collector.")
+  UDP,
 }
 
 @doc("Processor Info.")

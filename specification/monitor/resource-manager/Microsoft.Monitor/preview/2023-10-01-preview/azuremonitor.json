@@ -593,6 +593,9 @@
         "x-ms-examples": {
           "Create a PipelineGroup instance": {
             "$ref": "./examples/PipelineGroupCreate.json"
+          },
+          "Create a PipelineGroup instance using UDP receiver": {
+            "$ref": "./examples/PipelineGroupCreateUdp.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -738,6 +741,21 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.PrivateEndpointConnection": {
+      "type": "object",
+      "description": "The private endpoint connection resource",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The private endpoint connection properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "AzureMonitorWorkspace": {
       "type": "object",
       "description": "An Azure Monitor Workspace definition.",
@@ -849,10 +867,9 @@
           "type": "array",
           "description": "List of private endpoint connections.",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnection"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess",
@@ -1375,6 +1392,10 @@
         "otlpReceiver": {
           "$ref": "#/definitions/OtlpReceiver",
           "description": "OTLP receiver configurations. This field is mandatory for OTLP and pipelineGroup receivers."
+        },
+        "udpReceiver": {
+          "$ref": "#/definitions/UdpReceiver",
+          "description": "UDP receiver configurations. This field is mandatory for UDP receivers."
         }
       },
       "required": [
@@ -1389,7 +1410,8 @@
         "Syslog",
         "Ama",
         "PipelineGroup",
-        "OTLP"
+        "OTLP",
+        "UDP"
       ],
       "x-ms-enum": {
         "name": "ReceiverType",
@@ -1414,6 +1436,11 @@
             "name": "OTLP",
             "value": "OTLP",
             "description": "Receives data from a OTLP collector."
+          },
+          {
+            "name": "UDP",
+            "value": "UDP",
+            "description": "Receives data from an UDP collector."
           }
         ]
       }
@@ -1553,6 +1580,20 @@
     "TcpReceiver": {
       "type": "object",
       "description": "Base receiver using TCP as transport protocol.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "TCP endpoint definition. Example: 0.0.0.0:<port>.",
+          "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
+        }
+      },
+      "required": [
+        "endpoint"
+      ]
+    },
+    "UdpReceiver": {
+      "type": "object",
+      "description": "Receiver using UDP as transport protocol.",
       "properties": {
         "endpoint": {
           "type": "string",
