@@ -615,6 +615,13 @@
           "type": "integer",
           "minimum": 0
         },
+        "groupBy": {
+          "description": "Describes the list of variables to group the rate limit requests",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupByVariable"
+          }
+        },
         "matchConditions": {
           "description": "List of match conditions.",
           "type": "array",
@@ -625,6 +632,27 @@
         "action": {
           "description": "Describes what action to be applied when rule matches.",
           "$ref": "#/definitions/ActionType"
+        }
+      }
+    },
+    "GroupByVariable": {
+      "description": "Describes the variables available to group the rate limit requests",
+      "required": [
+        "groupByDimension"
+      ],
+      "properties": {
+        "groupByDimension": {
+          "description": "Describes the supported dimensions for group by",
+          "type": "string",
+          "enum": [
+            "SocketAddr",
+            "GeoLocation",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "GroupByDimension",
+            "modelAsString": true
+          }
         }
       }
     },
