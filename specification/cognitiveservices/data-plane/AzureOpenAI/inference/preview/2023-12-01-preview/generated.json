@@ -1096,6 +1096,20 @@
         ]
       }
     },
+    "AzureChatExtensionsMessageContext": {
+      "type": "object",
+      "description": "  A representation of the additional context information available when Azure OpenAI chat extensions are involved\n  in the generation of a corresponding chat completions response. This context information is only populated when\n  using an Azure OpenAI request configured to use a matching extension.",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "  The contextual message payload associated with the Azure chat extensions used for a chat completions request.\n  These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the\n  course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat\n  extensions.",
+          "items": {
+            "$ref": "#/definitions/ChatResponseMessage"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "AzureChatGroundingEnhancementConfiguration": {
       "type": "object",
       "description": "A representation of the available options for the Azure OpenAI grounding enhancement.",
@@ -1938,12 +1952,8 @@
           "x-ms-client-name": "toolCalls"
         },
         "context": {
-          "type": "array",
-          "description": "If Azure OpenAI chat extensions are configured, this array represents the incremental steps performed by those\nextensions while processing the chat completions request.",
-          "items": {
-            "$ref": "#/definitions/ChatResponseMessage"
-          },
-          "x-ms-identifiers": []
+          "$ref": "#/definitions/AzureChatExtensionsMessageContext",
+          "description": "If Azure OpenAI chat extensions are configured, this array represents the incremental steps performed by those\nextensions while processing the chat completions request."
         }
       },
       "required": [

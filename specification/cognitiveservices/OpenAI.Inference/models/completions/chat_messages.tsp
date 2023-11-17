@@ -194,5 +194,5 @@ model ChatResponseMessage {
   If Azure OpenAI chat extensions are configured, this array represents the incremental steps performed by those
   extensions while processing the chat completions request.
   """)
-  context?: ChatResponseMessage[];
+  context?: AzureChatExtensionsMessageContext;
 }

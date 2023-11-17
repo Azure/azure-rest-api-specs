@@ -88,7 +88,7 @@ model AzureChatExtensionsMessageContext {
     course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat
     extensions.
   """)
-  messages?: ChatRequestMessage[];
+  messages?: ChatResponseMessage[];
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
