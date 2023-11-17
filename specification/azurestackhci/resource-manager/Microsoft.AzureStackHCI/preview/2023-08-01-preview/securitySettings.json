@@ -108,13 +108,7 @@
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "name": "securitySettingsName",
-            "in": "path",
-            "description": "Name of security Setting",
-            "required": true,
-            "type": "string",
-            "default": "default",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "#/parameters/securitySettingsNameParameter"
           }
         ],
         "responses": {
@@ -157,18 +151,12 @@
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "name": "securitySettingsName",
-            "in": "path",
-            "description": "Name of security Setting",
-            "required": true,
-            "type": "string",
-            "default": "default",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "#/parameters/securitySettingsNameParameter"
           },
           {
-            "name": "resource",
             "in": "body",
-            "description": "Resource create parameters.",
+            "name": "body",
+            "description": "Body must be valid DataConnector request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SecuritySetting"
@@ -232,13 +220,7 @@
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "name": "securitySettingsName",
-            "in": "path",
-            "description": "Name of security Setting",
-            "required": true,
-            "type": "string",
-            "default": "default",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "#/parameters/securitySettingsNameParameter"
           }
         ],
         "responses": {
@@ -490,6 +472,15 @@
       "type": "string",
       "description": "The name of the cluster.",
       "x-ms-parameter-location": "method"
+    },
+    "securitySettingsNameParameter": {
+      "name": "securitySettingsName",
+      "in": "path",
+      "description": "Name of security Setting",
+      "required": true,
+      "type": "string",
+      "default": "default",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$"
     }
   }
 }
