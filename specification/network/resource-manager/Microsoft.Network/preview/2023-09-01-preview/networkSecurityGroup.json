@@ -172,6 +172,22 @@
       ],
       "description": "Network security rule."
     },
+    "SecurityRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityRule"
+          },
+          "description": "The security rules in a network security group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListSecurityRule API service call. Retrieves all security rules that belongs to a network security group."
+    },
     "SecurityRuleAccess": {
       "type": "string",
       "description": "Whether network traffic is allowed or denied.",
@@ -181,6 +197,18 @@
       ],
       "x-ms-enum": {
         "name": "SecurityRuleAccess",
+        "modelAsString": true
+      }
+    },
+    "SecurityRuleDirection": {
+      "type": "string",
+      "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.",
+      "enum": [
+        "Inbound",
+        "Outbound"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityRuleDirection",
         "modelAsString": true
       }
     }
