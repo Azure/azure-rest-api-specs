@@ -824,64 +824,15 @@
       "properties": {
         "architecture": {
           "description": "Custom image architecture.",
-          "type": "string",
-          "enum": [
-            "x64"
-          ],
-          "x-ms-enum": {
-            "name": "ImageArchitecture",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "x64",
-                "description": "64-bit architecture."
-              }
-            ]
-          }
+          "$ref": "#/definitions/ImageArchitecture"
         },
         "osState": {
           "description": "Custom image OS state.",
-          "type": "string",
-          "enum": [
-            "Generalized",
-            "Specialized"
-          ],
-          "x-ms-enum": {
-            "name": "ImageOSState",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Generalized",
-                "description": "Sysprep generalization processed."
-              },
-              {
-                "value": "Specialized",
-                "description": "Fully kept with user specified settings."
-              }
-            ]
-          }
+          "$ref": "#/definitions/ImageOSState"
         },
         "securityType": {
           "description": "Custom image security type.",
-          "type": "string",
-          "enum": [
-            "Standard",
-            "TrustedLaunch"
-          ],
-          "x-ms-enum": {
-            "name": "ImageSecurityType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Standard",
-                "description": "Standard security type."
-              },
-              {
-                "value": "TrustedLaunch",
-                "description": "Specify higher security level compared to Standard."
-              }
-            ]
-          }
+          "$ref": "#/definitions/ImageSecurityType"
         },
         "provisioningState": {
           "type": "string",
@@ -893,6 +844,67 @@
         "osState",
         "securityType"
       ]
+    },
+    "ImageOSState": {
+      "description": "Custom image OS state.",
+      "type": "string",
+      "enum": [
+        "Generalized",
+        "Specialized"
+      ],
+      "x-ms-enum": {
+        "name": "ImageOSState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Generalized",
+            "description": "Sysprep generalization processed."
+          },
+          {
+            "value": "Specialized",
+            "description": "Fully kept with user specified settings."
+          }
+        ]
+      }
+    },
+    "ImageSecurityType": {
+      "description": "Custom image security type.",
+      "type": "string",
+      "enum": [
+        "Standard",
+        "TrustedLaunch"
+      ],
+      "x-ms-enum": {
+        "name": "ImageSecurityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Standard",
+            "description": "Standard security type."
+          },
+          {
+            "value": "TrustedLaunch",
+            "description": "Specify higher security level compared to Standard."
+          }
+        ]
+      }
+    },
+    "ImageArchitecture": {
+      "description": "Custom image architecture.",
+      "type": "string",
+      "enum": [
+        "x64"
+      ],
+      "x-ms-enum": {
+        "name": "ImageArchitecture",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "x64",
+            "description": "64-bit architecture."
+          }
+        ]
+      }
     },
     "ImageValidationResults": {
       "description": "The image validation result.",
