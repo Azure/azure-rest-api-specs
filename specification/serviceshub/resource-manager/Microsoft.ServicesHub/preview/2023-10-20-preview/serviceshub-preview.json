@@ -1453,10 +1453,12 @@
       "type": "object",
       "description": "EngageHub SpacesList Result.",
       "properties": {
-        "properties": {
-          "description": "EngageHub SpaceList Properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SpacesResponseModelProperties"
+        "value": {
+          "type": "array",
+          "description": "List of Spaces.",
+          "items": {
+            "$ref": "#/definitions/SpacesList"
+          }
         }
       }
     },
