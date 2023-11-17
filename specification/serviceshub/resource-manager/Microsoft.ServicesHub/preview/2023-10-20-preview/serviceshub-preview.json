@@ -671,13 +671,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/getEngageHubSpaces": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/spaces": {
+      "get": {
         "tags": [
-          "EngageHubSpaces"
+          "EngageHubSpacesList"
         ],
         "summary": "Get all the spaces for the logged-in user corresponding to the user's EngageHub 1PA token.",
-        "operationId": "Get_EngageHubSpaces",
+        "operationId": "Get_EngageHubSpacesList",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -692,15 +692,6 @@
             "type": "string",
             "description": "EngageHub 1PA token to be send to EH Gateway",
             "x-ms-secret": true
-          },
-          {
-            "name": "requestBody",
-            "in": "body",
-            "description": "spaces request payload object",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SpacesPayloadModel"
-            }
           }
         ],
         "responses": {
@@ -758,7 +749,7 @@
             "description": "post connector information payload object",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PutConnectorInfoPayloadModel"
+              "$ref": "#/definitions/AssessmentConnectorResource"
             }
           }
         ],
@@ -1452,27 +1443,6 @@
         }
       }
     },
-    "SpacesPayloadModel": {
-      "type": "object",
-      "description": "Engage Hub Get Spaces Payload",
-      "properties": {
-        "properties": {
-          "description": "Engage Hub Spaces Payload",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SpacesPayloadModelProperties"
-        }
-      }
-    },
-    "SpacesPayloadModelProperties": {
-      "type": "object",
-      "description": "Engage Hub Get Spaces Payload Properties",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "EngageHub Space Type."
-        }
-      }
-    },
     "SpacesResponseModel": {
       "type": "object",
       "description": "EngageHub SpacesList Result.",
@@ -1528,7 +1498,7 @@
       "properties": {
         "targetScope": {
           "type": "string",
-          "description": "Target Scope is the unique identifier ofr the EngageHub Space."
+          "description": "Target Scope is the unique identifier for the EngageHub Space.For example: user-hubid:4a89cd33-1fb6-5a21-b460-a9bfb292bf71"
         },
         "connectorName": {
           "type": "string",
@@ -1541,7 +1511,7 @@
         },
         "spaceId": {
           "type": "string",
-          "description": "SpacesId linked to the connector."
+          "description": "SpacesId linked to the connector.Example: West Joyce and Sons"
         },
         "puid": {
           "type": "string",
@@ -1557,20 +1527,20 @@
         }
       }
     },
-    "PutConnectorInfoPayloadModel": {
+    "AssessmentConnectorResource": {
       "type": "object",
-      "description": "Assessment Connector Information Put Payload",
+      "description": "Assessment Connector Information Payload",
       "properties": {
         "properties": {
-          "description": "Assessment Connector Information Put Payload",
+          "description": "Assessment Connector Information Payload",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PutConnectorInfoPayloadModelProperties"
+          "$ref": "#/definitions/AssessmentConnectorProperties"
         }
       }
     },
-    "PutConnectorInfoPayloadModelProperties": {
+    "AssessmentConnectorProperties": {
       "type": "object",
-      "description": "Assessment Connector Information Put Payload Properties",
+      "description": "Assessment connector properties",
       "properties": {
         "connectorName": {
           "type": "string",
