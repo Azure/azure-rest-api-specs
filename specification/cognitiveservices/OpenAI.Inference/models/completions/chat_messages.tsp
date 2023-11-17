@@ -31,7 +31,7 @@ model ChatMessageTextContentItem extends ChatMessageContentItem {
   type: "text";
 
   @doc("The content of the message.")
-  content: string;
+  text: string;
 }
 
 @added(ServiceApiVersions.v2023_05_15)
