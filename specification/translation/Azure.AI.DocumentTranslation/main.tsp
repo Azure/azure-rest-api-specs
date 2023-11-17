@@ -29,6 +29,11 @@ alias CommonParameters = {
   @query("api-version")
   apiVersion: string;
 
+  /** The value is the region of the translator resource. This value is optional if when custom endpoint is used.
+   * The value can be found in Azure portal. Translator resouce => Resource Management => Keys and Endpoint => Location/Region  */
+  @header("Ocp-Apim-Subscription-Region")
+  subscriptionRegion?: string = "westus2";
+
   /** A client-generated GUID to uniquely identify the request. */
   @header("X-ClientTraceId")
   clientTraceId?: string;
