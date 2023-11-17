@@ -160,7 +160,7 @@ model ContentFilterCitedDetectionResult {
   @doc("The internet location associated with the detection.")
   url: url;
 
-  @doc("The license associated with the detection.")
+  @doc("The license description associated with the detection.")
   license: string;
 }
 
