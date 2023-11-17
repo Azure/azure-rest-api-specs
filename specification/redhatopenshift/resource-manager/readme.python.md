@@ -16,7 +16,7 @@ no-namespace-folders: true
 Generate all API versions currently shipped for this package
 
 ```yaml $(python)
-default-api-version: "2023-04-01"
+default-api-version: "2023-09-04"
 multiapi: true
 batch:
   - tag: package-2020-04-30
@@ -24,6 +24,7 @@ batch:
   - tag: package-2022-04-01
   - tag: package-2022-09-04
   - tag: package-2023-04-01
+  - tag: package-2023-09-04
   - multiapiscript: true
 ```
 
@@ -84,4 +85,15 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2023-04-01' && $(python)
 namespace: azure.mgmt.redhatopenshift.v2022_09_04
 output-folder: $(python-sdks-folder)/redhatopenshift/azure-mgmt-redhatopenshift/azure/mgmt/redhatopenshift/v2023_04_01
+```
+
+### Tag: package-2023-09-04 and python
+
+These settings apply only when `--tag=package-2023-09-04 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+
+``` yaml $(tag) == 'package-2023-09-04' && $(python)
+namespace: azure.mgmt.redhatopenshift.v2023_09_04
+output-folder: $(python-sdks-folder)/redhatopenshift/azure-mgmt-redhatopenshift/azure/mgmt/redhatopenshift/v2023_09_04
 ```

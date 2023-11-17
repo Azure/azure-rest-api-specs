@@ -28,11 +28,15 @@ These are the global settings for the DataProtection API.
 title: Data Protection Client
 description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
-tag: package-2023-05
+tag: package-2023-08
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
 license-header: MICROSOFT_MIT
+suppressions:
+    - code: ResourceNameRestriction
+      reason: BackupInstance Resource is created by DPP Service, so regex wont add much value here.
+    
 ```
 
 ### Validations
@@ -44,6 +48,34 @@ azure-validator: true
 model-validator: true
 semantic-validator: true
 message-format: json
+```
+
+
+### Tag: package-2023-08
+
+These settings apply only when `--tag=package-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08'
+input-file:
+  - Microsoft.DataProtection/stable/2023-08-01/dataprotection.json
+```
+
+### Tag: package-preview-2023-08
+
+These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-08'
+input-file:
+  - Microsoft.DataProtection/preview/2023-08-01-preview/dataprotection.json
+```
+
+### Tag: package-preview-2023-06
+
+These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-06'
+input-file:
+  - Microsoft.DataProtection/preview/2023-06-01-preview/dataprotection.json
 ```
 
 ### Tag: package-2023-05
@@ -59,10 +91,11 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-04'
+``` yaml $(tag) == 'package-preview-2023-04'
 input-file:
   - Microsoft.DataProtection/preview/2023-04-01-preview/dataprotection.json
 ```
+
 ### Tag: package-2023-01
 
 These settings apply only when `--tag=package-2023-01` is specified on the command line.
