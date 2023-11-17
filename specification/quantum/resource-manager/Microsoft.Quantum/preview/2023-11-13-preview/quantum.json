@@ -443,7 +443,7 @@
           "200": {
             "description": "The request was successful.",
             "schema": {
-              "$ref": "#/definitions/WorkspaceKeys"
+              "$ref": "#/definitions/ListKeysResult"
             }
           },
           "default": {
@@ -483,7 +483,7 @@
             "required": true,
             "description": "Which key to regenerate:  primary or secondary.",
             "schema": {
-              "$ref": "#/definitions/WorkspaceKeySpecification"
+              "$ref": "#/definitions/ApiKeySpecification"
             }
           }
         ],
@@ -583,8 +583,8 @@
         }
       ]
     },
-    "WorkspaceKey": {
-      "description": "Result of list workspace keys.",
+    "ApiKey": {
+      "description": "Result of Api key.",
       "type": "object",
       "properties": {
         "createTime": {
@@ -593,48 +593,52 @@
         "key": {
           "readOnly": true,
           "type": "string",
-          "description": "The secondary workspace key."
+          "description": "The Api key."
         }
       }
     },
-    "WorkspaceKeys": {
-      "description": "Result of list workspace keys.",
+    "ListKeysResult": {
+      "description": "Result of list Api keys and connection strings.",
       "type": "object",
       "properties": {
-        "workspaceKeyEnabled": {
+        "apiKeyEnabled": {
           "type": "boolean",
-          "description": "Indicator of enablement of the Quantum Workspace keys."
+          "description": "Indicator of enablement of the Quantum workspace Api keys."
         },
         "primaryKey": {
-          "$ref": "#/definitions/WorkspaceKey"
+          "$ref": "#/definitions/ApiKey"
         },
         "secondaryKey": {
-          "$ref": "#/definitions/WorkspaceKey"
+          "$ref": "#/definitions/ApiKey"
         },
         "primaryConnectionString": {
           "readOnly": true,
           "type": "string",
-          "description": "The connection string of the primary workspace key."
+          "description": "The connection string of the primary key."
         },
         "secondaryConnectionString": {
           "readOnly": true,
           "type": "string",
-          "description": "The connection string of the secondary workspace key."
+          "description": "The connection string of the secondary key."
         }
       }
     },
-    "WorkspaceKeySpecification": {
+    "ApiKeySpecification": {
       "type": "object",
       "properties": {
         "keys": {
-          "description": "A list of workspace key names.",
+          "description": "A list of api key names.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "primary",
+              "secondary"
+            ]
           }
         }
       },
-      "description": "List of workspace keys to be generated."
+      "description": "List of api keys to be generated."
     },
     "TagsObject": {
       "properties": {
