@@ -219,6 +219,15 @@ model ChatChoice {
   @projectedName("json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
 
+  // Note: this property is currently speculative via observation and not yet documented anywhere.
+  @doc("""
+  The reason the model stopped generating tokens, together with any applicable details.
+  This structured representation replaces 'finish_reason' for some models.
+  """)
+  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @projectedName("json", "finish_details")
+  finishDetails?: ChatFinishDetails;
+
   @doc("The delta message content for a streaming response.")
   @projectedName("json", "delta")
   @projectedName("csharp", "InternalStreamingDeltaMessage")
@@ -291,4 +300,32 @@ model ChatCompletions {
     """)
   @projectedName("json", "usage")
   usage: CompletionsUsage;
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@discriminator("type")
+@doc("An abstract representation of structured information about why a chat completions response terminated.")
+model ChatFinishDetails {
+  @doc("The object type.")
+  type: string;
+}
+
+@doc("A structured representation of a stop reason that signifies natural termination by the model.")
+@added(ServiceApiVersions.v2023_12_01_Preview)
+model StopFinishDetails extends ChatFinishDetails {
+  @doc("The object type, which is always 'stop' for this object.")
+  type: "stop";
+
+  @doc("The token sequence that the model terminated with.")
+  stop: string;
+}
+
+@doc("""
+A structured representation of a stop reason that signifies a token limit was reached before the model could naturally
+complete.
+""")
+@added(ServiceApiVersions.v2023_12_01_Preview)
+model MaxTokensFinishDetails extends ChatFinishDetails {
+  @doc("The object type, which is always 'max_tokens' for this object.")
+  type: "max_tokens";
 }
