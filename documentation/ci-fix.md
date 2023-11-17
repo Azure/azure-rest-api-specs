@@ -51,7 +51,7 @@ oav validate-example <swagger-spec-path>
 Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default).
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
-Refer to [Swagger-Example-Generation](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/393/Swagger-Example-Generation) for example automatic generation.
+Refer to [Swagger-Example-Generation](https://github.com/Azure/oav/blob/develop/documentation/example-generation.md) for example automatic generation.
 
 ## Semantic Validation
 
@@ -126,7 +126,7 @@ If you see `Swagger ApiDocPreview ` check fail with a failure [like this one](ht
 |-|-|
 | ❌ RestBuild error | "logUrl":"https://apidrop.visualstudio.com/Content%20CI/_build/results?buildId=373646&view=logs&j=fd490c07-0b22-5182-fac9-6d67fe1e939b",<br/>"detail":"Run.ps1 failed with exit code 1 " |
 
-Then refer to [this TSG](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/79/Generation-of-docs-on-learn.microsoft.com?anchor=%22swagger-apidocpreview%22-build-is-failing).
+Refer to [troubleshoothing REST API documentation](https://eng.ms/docs/products/azure-developer-experience/design/api-docs-troubleshooting).
 
 ## TypeSpec Validation
 

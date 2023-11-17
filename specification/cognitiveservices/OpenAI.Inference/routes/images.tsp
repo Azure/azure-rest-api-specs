@@ -23,10 +23,10 @@ namespace Azure.OpenAI;
 @added(ServiceApiVersions.v2023_06_01_Preview)
 @route("/operations/images/{operationId}")
 op getAzureBatchImageGenerationOperationStatus is RpcOperation<
-    {
-        @doc(".") @path operationId: string;
-    },
-    BatchImageGenerationOperationResponse
+  {
+    @doc(".") @path operationId: string;
+  },
+  BatchImageGenerationOperationResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
@@ -34,13 +34,13 @@ op getAzureBatchImageGenerationOperationStatus is RpcOperation<
 @added(ServiceApiVersions.v2023_06_01_Preview)
 @route("/images/generations:submit")
 @pollingOperation(
-    getAzureBatchImageGenerationOperationStatus,
-    {
-        operationId: ResponseProperty<"id">,
-    }
+  getAzureBatchImageGenerationOperationStatus,
+  {
+    operationId: ResponseProperty<"id">,
+  }
 )
 op beginAzureBatchImageGeneration is OaiLongRunningRpcOperation<
-    ImageGenerationOptions,
-    BatchImageGenerationOperationResponse,
-    BatchImageGenerationOperationResponse
+  ImageGenerationOptions,
+  BatchImageGenerationOperationResponse,
+  BatchImageGenerationOperationResponse
 >;

@@ -26,7 +26,40 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-jobrouter-2022-07-18-preview
+tag: package-jobrouter-2023-11-01
+```
+
+### Suppression
+``` yaml
+suppressions:
+  - code: ValidFormats
+    where: $.definitions["Azure.Core.eTag"].format
+    reason: eTag should be an allowed format
+directive:
+  - suppress: INVALID_TYPE
+
+  - suppress: OAV131 # DISCRIMINATOR_NOT_REQUIRED
+    where:
+    - $.definitions.DistributionModeCreateOrUpdate
+    - $.definitions.JobMatchingModeCreateOrUpdate
+    - $.definitions.RouterRuleCreateOrUpdate
+    reason: TypeSpec generates optional discriminators (Azure/typespec-azure#3833)
+
+  - suppress: OAV132 # INVALID_DISCRIMINATOR_TYPE
+    where:
+    - $.definitions.DistributionModeCreateOrUpdate
+    - $.definitions.JobMatchingModeCreateOrUpdate
+    - $.definitions.RouterRuleCreateOrUpdate
+    reason: False positive if discriminator is optional $ref (Azure/oav#1018)
+```
+
+### Tag: package-jobrouter-2023-11-01
+
+These settings apply only when `--tag=package-jobrouter-2023-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-jobrouter-2023-11-01'
+input-file:
+  - stable/2023-11-01/communicationservicejobrouter.json
 ```
 
 ### Tag: package-jobrouter-2022-07-18-preview

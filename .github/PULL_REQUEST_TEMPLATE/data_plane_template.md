@@ -27,7 +27,7 @@ in the `Generated ApiView` comment added to this PR. You can use ApiView to show
 ### Suppressing failures
 
 If one or multiple validation error/warning suppression(s) is detected in your PR, please follow the 
-[Swagger-Suppression-Process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) 
+[Swagger-Suppression-Process](https://aka.ms/pr-suppressions) 
 to get approval.
 
 ## ❔Got questions? Need additional info?? We are here to help!
@@ -47,13 +47,13 @@ The [Azure API Review Board](https://aka.ms/azsdk/onboarding/restapischedule) is
 ### Tooling
 
  * [Open API validation tools](https://aka.ms/swaggertools) were run on this PR. Go here to see [how to fix errors](https://aka.ms/ci-fix)
- * [Spectral Linting](https://aka.ms/style)
+ * [Spectral Linting](https://github.com/Azure/azure-api-style-guide/blob/main/README.md)
  * [Open API Hub](https://aka.ms/openapiportal)
 
 ### Guidelines & Specifications
 
- * [Azure REST API Guidelines](https://aka.ms/guidelines)
- * [OpenAPI Style Guidelines](https://aka.ms/style)
+ * [Azure REST API Guidelines](https://aka.ms/azapi/guidelines)
+ * [OpenAPI Style Guidelines](https://aka.ms/azapi/style)
  * [Azure Breaking Change Policy](https://aka.ms/AzBreakingChangesPolicy)
 
 ### Helpful Links
