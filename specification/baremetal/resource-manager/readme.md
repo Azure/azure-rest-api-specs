@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for IBM PowerVm.
+This is the AutoRest configuration file for BootstrapRP.
 
 ---
 ## Getting Started
@@ -18,7 +18,7 @@ To see additional help and options, run:
 ## Configuration
 
 ### Basic Information
-These are the global settings for the IBM PowerVM API.
+These are the global settings for the BootstrapRP API.
 
 ``` yaml
 title: BootstrapRP
