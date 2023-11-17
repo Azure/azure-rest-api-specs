@@ -19,6 +19,10 @@ namespace Microsoft.VoiceServices;
 
 @doc("API Versions")
 enum Versions {
+  @doc("2023-01-31")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2023_01_31: "2023-01-31",
+
   @doc("2023-04-03")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_04_03: "2023-04-03",
@@ -26,6 +30,14 @@ enum Versions {
   @doc("2023-07-13-preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_07_13_preview: "2023-07-13-preview",
+
+  @doc("2023-09-01")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2023_09_01: "2023-09-01",
+
+  @doc("2023-09-21")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2023_09_21: "2023-09-21",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -114,6 +126,7 @@ model CheckNameAvailabilityResponse {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-missing-decorator" "CheckNameAvailability is not supported by typespec-azure-resource-manager."
 interface NameAvailability {
   @doc("Check whether the resource name is available in the given region.")
+  @armResourceAction(CheckNameAvailabilityRequest)
   @post
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.VoiceServices/locations/{location}/checkNameAvailability")
   checkLocal(

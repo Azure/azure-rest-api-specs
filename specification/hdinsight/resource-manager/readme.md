@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for HDInsight AKS.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for HDInsight AKS, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,12 +15,13 @@ To build the SDK for HDInsight AKS, simply [Install AutoRest](https://aka.ms/aut
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
 ### Basic Information
+
 These are the global settings for the HDInsight AKS API.
 
 ``` yaml
@@ -29,9 +30,28 @@ description: HDInsight AKS Management Client
 openapi-type: arm
 openapi-subtype: rpaas
 azure-arm: true
-tag: package-2023-06-preview
+tag: package-preview-2023-11
 ```
 
+
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - Microsoft.HDInsight/preview/2023-11-01-preview/hdinsight.json
+  
+suppressions:
+  - code: ResourceNameRestriction
+    reason: Keep compatibility with old API version.
+  - code: TrackedResourcePatchOperation
+    reason: This is a false positive, the "tags" property is defined in TrackedResource.
+  - code: OperationIdNounVerb
+    reason: The operation id is valid.
+  - code: EnumInsteadOfBoolean
+    reason: The boolean property is expected.
+```
 ### Tag: package-2023-06-preview
 
 These settings apply only when `--tag=package-2023-06-preview` is specified on the command line.
@@ -69,7 +89,6 @@ suppressions:
 ---
 
 # Code Generation
-
 
 ## Swagger to SDK
 
@@ -116,7 +135,6 @@ See configuration in [readme.java.md](./readme.java.md)
 ## Typescript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
-
 
 ## AzureResourceSchema
 

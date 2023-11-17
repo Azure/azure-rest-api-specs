@@ -80,10 +80,10 @@
         },
         "x-ms-examples": {
           "Operations_List": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List1": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          },
+          "Operations_List - maximum set": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -122,59 +122,10 @@
         },
         "x-ms-examples": {
           "Organizations_ListBySubscription": {
-            "$ref": "./examples/Organizations_ListBySubscription_MaximumSet_Gen.json"
-          },
-          "Organizations_ListBySubscription1": {
             "$ref": "./examples/Organizations_ListBySubscription_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Informatica.DataManagement/organizations/{organizationName}/serverlessRuntimes": {
-      "get": {
-        "operationId": "ServerlessRuntimes_ListBySubscription",
-        "tags": [
-          "ServerlessRuntimes"
-        ],
-        "description": "List InformaticaServerlessRuntimeResource resources by subscription ID",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "description": "Name of the Organizations resource",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/InformaticaServerlessRuntimeResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ServerlessRuntimes_ListBySubscription": {
-            "$ref": "./examples/ServerlessRuntimes_ListBySubscription_MaximumSet_Gen.json"
-          },
-          "ServerlessRuntimes_ListBySubscription1": {
-            "$ref": "./examples/ServerlessRuntimes_ListBySubscription_MinimumSet_Gen.json"
+          "Organizations_ListBySubscription - maximum set": {
+            "$ref": "./examples/Organizations_ListBySubscription_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -216,10 +167,10 @@
         },
         "x-ms-examples": {
           "Organizations_ListByResourceGroup": {
-            "$ref": "./examples/Organizations_ListByResourceGroup_MaximumSet_Gen.json"
-          },
-          "Organizations_ListByResourceGroup1": {
             "$ref": "./examples/Organizations_ListByResourceGroup_MinimumSet_Gen.json"
+          },
+          "Organizations_ListByResourceGroup - maximum set": {
+            "$ref": "./examples/Organizations_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -268,10 +219,10 @@
         },
         "x-ms-examples": {
           "Organizations_Get": {
-            "$ref": "./examples/Organizations_Get_MaximumSet_Gen.json"
-          },
-          "Organizations_Get1": {
             "$ref": "./examples/Organizations_Get_MinimumSet_Gen.json"
+          },
+          "Organizations_Get - maximum set": {
+            "$ref": "./examples/Organizations_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -337,10 +288,10 @@
         },
         "x-ms-examples": {
           "Organizations_CreateOrUpdate": {
-            "$ref": "./examples/Organizations_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "Organizations_CreateOrUpdate1": {
             "$ref": "./examples/Organizations_CreateOrUpdate_MinimumSet_Gen.json"
+          },
+          "Organizations_CreateOrUpdate - maximum set": {
+            "$ref": "./examples/Organizations_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -397,10 +348,10 @@
         },
         "x-ms-examples": {
           "Organizations_Update": {
-            "$ref": "./examples/Organizations_Update_MaximumSet_Gen.json"
-          },
-          "Organizations_Update1": {
             "$ref": "./examples/Organizations_Update_MinimumSet_Gen.json"
+          },
+          "Organizations_Update - maximum set": {
+            "$ref": "./examples/Organizations_Update_MaximumSet_Gen.json"
           }
         }
       },
@@ -458,16 +409,65 @@
         },
         "x-ms-examples": {
           "Organizations_Delete": {
-            "$ref": "./examples/Organizations_Delete_MaximumSet_Gen.json"
-          },
-          "Organizations_Delete1": {
             "$ref": "./examples/Organizations_Delete_MinimumSet_Gen.json"
+          },
+          "Organizations_Delete - maximum set": {
+            "$ref": "./examples/Organizations_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/getAllServerlessRuntimes": {
+      "post": {
+        "operationId": "Organizations_GetAllServerlessRuntimes",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "Gets all serverless runtime resources in a given informatica organization resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InformaticaServerlessRuntimeResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_GetAllServerlessRuntimes": {
+            "$ref": "./examples/Organizations_GetAllServerlessRuntimes_MinimumSet_Gen.json"
+          },
+          "Organizations_GetAllServerlessRuntimes - maximum set": {
+            "$ref": "./examples/Organizations_GetAllServerlessRuntimes_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/getServerlessMetadata": {
@@ -511,10 +511,10 @@
         },
         "x-ms-examples": {
           "Organizations_GetServerlessMetadata": {
-            "$ref": "./examples/Organizations_GetServerlessMetadata_MaximumSet_Gen.json"
-          },
-          "Organizations_GetServerlessMetadata1": {
             "$ref": "./examples/Organizations_GetServerlessMetadata_MinimumSet_Gen.json"
+          },
+          "Organizations_GetServerlessMetadata - maximum set": {
+            "$ref": "./examples/Organizations_GetServerlessMetadata_MaximumSet_Gen.json"
           }
         }
       }
@@ -560,10 +560,10 @@
         },
         "x-ms-examples": {
           "ServerlessRuntimes_ListByInformaticaOrganizationResource": {
-            "$ref": "./examples/ServerlessRuntimes_ListByInformaticaOrganizationResource_MaximumSet_Gen.json"
-          },
-          "ServerlessRuntimes_ListByInformaticaOrganizationResource1": {
             "$ref": "./examples/ServerlessRuntimes_ListByInformaticaOrganizationResource_MinimumSet_Gen.json"
+          },
+          "ServerlessRuntimes_ListByInformaticaOrganizationResource - maximum set": {
+            "$ref": "./examples/ServerlessRuntimes_ListByInformaticaOrganizationResource_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -619,10 +619,10 @@
         },
         "x-ms-examples": {
           "ServerlessRuntimes_Get": {
-            "$ref": "./examples/ServerlessRuntimes_Get_MaximumSet_Gen.json"
-          },
-          "ServerlessRuntimes_Get1": {
             "$ref": "./examples/ServerlessRuntimes_Get_MinimumSet_Gen.json"
+          },
+          "ServerlessRuntimes_Get - maximum set": {
+            "$ref": "./examples/ServerlessRuntimes_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -695,10 +695,10 @@
         },
         "x-ms-examples": {
           "ServerlessRuntimes_CreateOrUpdate": {
-            "$ref": "./examples/ServerlessRuntimes_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "ServerlessRuntimes_CreateOrUpdate1": {
             "$ref": "./examples/ServerlessRuntimes_CreateOrUpdate_MinimumSet_Gen.json"
+          },
+          "ServerlessRuntimes_CreateOrUpdate - maximum set": {
+            "$ref": "./examples/ServerlessRuntimes_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -762,10 +762,10 @@
         },
         "x-ms-examples": {
           "ServerlessRuntimes_Update": {
-            "$ref": "./examples/ServerlessRuntimes_Update_MaximumSet_Gen.json"
-          },
-          "ServerlessRuntimes_Update1": {
             "$ref": "./examples/ServerlessRuntimes_Update_MinimumSet_Gen.json"
+          },
+          "ServerlessRuntimes_Update - maximum set": {
+            "$ref": "./examples/ServerlessRuntimes_Update_MaximumSet_Gen.json"
           }
         }
       },
@@ -830,16 +830,181 @@
         },
         "x-ms-examples": {
           "ServerlessRuntimes_Delete": {
-            "$ref": "./examples/ServerlessRuntimes_Delete_MaximumSet_Gen.json"
-          },
-          "ServerlessRuntimes_Delete1": {
             "$ref": "./examples/ServerlessRuntimes_Delete_MinimumSet_Gen.json"
+          },
+          "ServerlessRuntimes_Delete - maximum set": {
+            "$ref": "./examples/ServerlessRuntimes_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/serverlessRuntimes/{serverlessRuntimeName}/checkDependencies": {
+      "post": {
+        "operationId": "ServerlessRuntimes_CheckDependencies",
+        "tags": [
+          "ServerlessRuntimes"
+        ],
+        "description": "Checks all dependencies for a serverless runtime resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverlessRuntimeName",
+            "in": "path",
+            "description": "Name of the Serverless Runtime resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckDependenciesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerlessRuntimes_CheckDependencies": {
+            "$ref": "./examples/ServerlessRuntimes_CheckDependencies_MinimumSet_Gen.json"
+          },
+          "ServerlessRuntimes_CheckDependencies - maximum set": {
+            "$ref": "./examples/ServerlessRuntimes_CheckDependencies_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/serverlessRuntimes/{serverlessRuntimeName}/serverlessResourceByID": {
+      "post": {
+        "operationId": "ServerlessRuntimes_ServerlessResourceById",
+        "tags": [
+          "ServerlessRuntimes"
+        ],
+        "description": "Returns a serverless runtime resource by ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverlessRuntimeName",
+            "in": "path",
+            "description": "Name of the Serverless Runtime resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InformaticaServerlessRuntimeResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerlessRuntimes_ServerlessResourceById": {
+            "$ref": "./examples/ServerlessRuntimes_ServerlessResourceById_MinimumSet_Gen.json"
+          },
+          "ServerlessRuntimes_ServerlessResourceById - maximum set": {
+            "$ref": "./examples/ServerlessRuntimes_ServerlessResourceById_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/serverlessRuntimes/{serverlessRuntimeName}/startFailedServerlessRuntime": {
+      "post": {
+        "operationId": "ServerlessRuntimes_StartFailedServerlessRuntime",
+        "tags": [
+          "ServerlessRuntimes"
+        ],
+        "description": "Starts a failed runtime resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverlessRuntimeName",
+            "in": "path",
+            "description": "Name of the Serverless Runtime resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerlessRuntimes_StartFailedServerlessRuntime": {
+            "$ref": "./examples/ServerlessRuntimes_StartFailedServerlessRuntime_MinimumSet_Gen.json"
+          },
+          "ServerlessRuntimes_StartFailedServerlessRuntime - maximum set": {
+            "$ref": "./examples/ServerlessRuntimes_StartFailedServerlessRuntime_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/singleSignOnConfigurations": {
@@ -883,10 +1048,10 @@
         },
         "x-ms-examples": {
           "SingleSignOnOperations_ListByInformaticaOrganizationResource": {
-            "$ref": "./examples/SingleSignOnOperations_ListByInformaticaOrganizationResource_MaximumSet_Gen.json"
-          },
-          "SingleSignOnOperations_ListByInformaticaOrganizationResource1": {
             "$ref": "./examples/SingleSignOnOperations_ListByInformaticaOrganizationResource_MinimumSet_Gen.json"
+          },
+          "SingleSignOnOperations_ListByInformaticaOrganizationResource - maximum set": {
+            "$ref": "./examples/SingleSignOnOperations_ListByInformaticaOrganizationResource_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -942,10 +1107,10 @@
         },
         "x-ms-examples": {
           "SingleSignOnOperations_Get": {
-            "$ref": "./examples/SingleSignOnOperations_Get_MaximumSet_Gen.json"
-          },
-          "SingleSignOnOperations_Get1": {
             "$ref": "./examples/SingleSignOnOperations_Get_MinimumSet_Gen.json"
+          },
+          "SingleSignOnOperations_Get - maximum set": {
+            "$ref": "./examples/SingleSignOnOperations_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -1018,10 +1183,10 @@
         },
         "x-ms-examples": {
           "SingleSignOnOperations_CreateOrUpdate": {
-            "$ref": "./examples/SingleSignOnOperations_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "SingleSignOnOperations_CreateOrUpdate1": {
             "$ref": "./examples/SingleSignOnOperations_CreateOrUpdate_MinimumSet_Gen.json"
+          },
+          "SingleSignOnOperations_CreateOrUpdate - maximum set": {
+            "$ref": "./examples/SingleSignOnOperations_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1090,10 +1255,10 @@
         },
         "x-ms-examples": {
           "SingleSignOnOperations_Delete": {
-            "$ref": "./examples/SingleSignOnOperations_Delete_MaximumSet_Gen.json"
-          },
-          "SingleSignOnOperations_Delete1": {
             "$ref": "./examples/SingleSignOnOperations_Delete_MinimumSet_Gen.json"
+          },
+          "SingleSignOnOperations_Delete - maximum set": {
+            "$ref": "./examples/SingleSignOnOperations_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1202,7 +1367,7 @@
           "type": "string",
           "description": "EngineName of the application config."
         },
-        "name": {
+        "engineVersion": {
           "type": "string",
           "description": "EngineVersion of the application config."
         },
@@ -1217,8 +1382,35 @@
       },
       "required": [
         "engineName",
-        "name",
+        "engineVersion",
         "applicationConfigs"
+      ]
+    },
+    "CheckDependenciesResponse": {
+      "type": "object",
+      "description": "Model for the check dependencies API for an informatica serverless runtime resource",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of dependencies"
+        },
+        "id": {
+          "type": "string",
+          "description": "id of resource"
+        },
+        "references": {
+          "type": "array",
+          "description": "List of dependencies",
+          "items": {
+            "$ref": "#/definitions/ServerlessRuntimeDependency"
+          }
+        }
+      },
+      "required": [
+        "count",
+        "id",
+        "references"
       ]
     },
     "CompanyDetails": {
@@ -1266,6 +1458,139 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "InfaRuntimeResourceFetchMetaData": {
+      "type": "object",
+      "description": "Informatica runtime resource metadata as received via the informatica fetch all runtime environments API",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Environment name"
+        },
+        "createdTime": {
+          "type": "string",
+          "description": "Created time"
+        },
+        "updatedTime": {
+          "type": "string",
+          "description": "Updated Time"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Created by"
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "Last Updated by"
+        },
+        "id": {
+          "type": "string",
+          "description": "Informatica serverless runtime id"
+        },
+        "type": {
+          "$ref": "#/definitions/RuntimeType",
+          "description": "Environment Type"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the environment"
+        },
+        "statusLocalized": {
+          "type": "string",
+          "description": "Display message for the given status"
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "status message"
+        },
+        "serverlessConfigProperties": {
+          "$ref": "#/definitions/InfaServerlessFetchConfigProperties",
+          "description": "Serverless Config Properties"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the runtime resource"
+        }
+      },
+      "required": [
+        "name",
+        "createdTime",
+        "updatedTime",
+        "createdBy",
+        "updatedBy",
+        "id",
+        "type",
+        "status",
+        "statusLocalized",
+        "statusMessage",
+        "serverlessConfigProperties"
+      ]
+    },
+    "InfaServerlessFetchConfigProperties": {
+      "type": "object",
+      "description": "InfaServerlessFetchConfigProperties for the fetch all serverless API as received from informatica API response",
+      "properties": {
+        "subnet": {
+          "type": "string",
+          "description": "subnet name"
+        },
+        "applicationType": {
+          "type": "string",
+          "description": "applicationType name"
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "Resource group name"
+        },
+        "nsg": {
+          "type": "string",
+          "description": "network Security Group"
+        },
+        "advancedCustomProperties": {
+          "type": "string",
+          "description": "Advanced custom properties"
+        },
+        "supplementaryFileLocation": {
+          "type": "string",
+          "description": "Supplementary File location"
+        },
+        "platform": {
+          "type": "string",
+          "description": "Serverless Account Platform"
+        },
+        "tags": {
+          "type": "string",
+          "description": "Tags for the resource"
+        },
+        "vnet": {
+          "type": "string",
+          "description": "virtual network"
+        },
+        "executionTimeout": {
+          "type": "string",
+          "description": "Execution timeout"
+        },
+        "computeUnits": {
+          "type": "string",
+          "description": "Compute Units"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "subscription ID"
+        },
+        "region": {
+          "type": "string",
+          "description": "region name for the runtime environment"
+        },
+        "serverlessArmResourceId": {
+          "type": "string",
+          "description": "Serverless Arm Resource ID"
         }
       }
     },
@@ -1349,6 +1674,14 @@
           "type": "string",
           "description": "Compute units of the serverless runtime."
         },
+        "executionTimeout": {
+          "type": "string",
+          "description": "Serverless Execution timeout"
+        },
+        "serverlessAccountLocation": {
+          "type": "string",
+          "description": "Serverless account creation location"
+        },
         "serverlessRuntimeNetworkProfile": {
           "$ref": "#/definitions/ServerlessRuntimeNetworkProfile",
           "description": "Informatica Serverless Network profile properties."
@@ -1369,7 +1702,10 @@
           "$ref": "#/definitions/ServerlessRuntimeConfigProperties",
           "description": "Serverless config properties"
         }
-      }
+      },
+      "required": [
+        "serverlessAccountLocation"
+      ]
     },
     "InformaticaServerlessRuntimePropertiesUpdate": {
       "type": "object",
@@ -1390,6 +1726,14 @@
         "computeUnits": {
           "type": "string",
           "description": "Compute units of the serverless runtime."
+        },
+        "executionTimeout": {
+          "type": "string",
+          "description": "Serverless Execution timeout"
+        },
+        "serverlessAccountLocation": {
+          "type": "string",
+          "description": "Serverless account creation location"
         },
         "serverlessRuntimeNetworkProfile": {
           "$ref": "#/definitions/ServerlessRuntimeNetworkProfileUpdate",
@@ -1429,8 +1773,24 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "InformaticaServerlessRuntimeResourceList": {
+      "type": "object",
+      "description": "A list of serverless runtime resources as fetched using the informatica APIs",
+      "properties": {
+        "informaticaRuntimeResources": {
+          "type": "array",
+          "description": "List of runtime resources for the fetch all API",
+          "items": {
+            "$ref": "#/definitions/InfaRuntimeResourceFetchMetaData"
+          }
+        }
+      },
+      "required": [
+        "informaticaRuntimeResources"
       ]
     },
     "InformaticaServerlessRuntimeResourceListResult": {
@@ -1566,32 +1926,32 @@
         "publisherId": {
           "type": "string",
           "description": "Id of the product publisher.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "offerId": {
           "type": "string",
           "description": "Id of the product offering.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "planId": {
           "type": "string",
           "description": "Id of the product offer plan.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "planName": {
           "type": "string",
           "description": "Name of the product offer plan.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "termUnit": {
           "type": "string",
           "description": "Offer plan term unit.",
-          "maxLength": 25
+          "maxLength": 50
         },
         "termId": {
           "type": "string",
           "description": "Offer plan term id.",
-          "maxLength": 50
+          "maxLength": 250
         }
       },
       "required": [
@@ -1609,32 +1969,32 @@
         "publisherId": {
           "type": "string",
           "description": "Id of the product publisher.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "offerId": {
           "type": "string",
           "description": "Id of the product offering.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "planId": {
           "type": "string",
           "description": "Id of the product offer plan.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "planName": {
           "type": "string",
           "description": "Name of the product offer plan.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "termUnit": {
           "type": "string",
           "description": "Offer plan term unit.",
-          "maxLength": 25
+          "maxLength": 50
         },
         "termId": {
           "type": "string",
           "description": "Offer plan term id.",
-          "maxLength": 50
+          "maxLength": 250
         }
       }
     },
@@ -1888,6 +2248,44 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "ServerlessRuntimeDependency": {
+      "type": "object",
+      "description": "Dependency reference for a serverless runtime resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Dependency ID"
+        },
+        "appContextId": {
+          "type": "string",
+          "description": "Application context ID"
+        },
+        "path": {
+          "type": "string",
+          "description": "Dependency path"
+        },
+        "documentType": {
+          "type": "string",
+          "description": "document type"
+        },
+        "description": {
+          "type": "string",
+          "description": "description of Dependency"
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "description": "Last Update Time"
+        }
+      },
+      "required": [
+        "id",
+        "appContextId",
+        "path",
+        "documentType",
+        "description",
+        "lastUpdatedTime"
+      ]
     },
     "ServerlessRuntimeNetworkProfile": {
       "type": "object",

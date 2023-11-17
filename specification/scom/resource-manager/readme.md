@@ -75,6 +75,7 @@ input-file:
   - Microsoft.SCOM/preview/2023-07-07-preview/scom.json
   - Microsoft.SCOM/preview/2023-07-07-preview/monitoredResources.json
   - Microsoft.SCOM/preview/2023-07-07-preview/managedGateways.json
+  - Microsoft.SCOM/preview/2023-07-07-preview/commonTypes.json
 ```
 ---
 

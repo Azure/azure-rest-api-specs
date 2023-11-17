@@ -1151,11 +1151,14 @@
             "format": "int32"
           }
         },
-        "isAssessmentReady": {
-          "description": "Marks if this instance is assessment ready.",
-          "type": "boolean",
-          "default": false,
-          "readOnly": true
+        "assessmentReadinessIssues": {
+          "description": "List of issues blocking this Sap system to be assessment ready.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
@@ -1502,7 +1505,7 @@
     "SAPDiscoverySiteNameParameter": {
       "name": "sapDiscoverySiteName",
       "in": "path",
-      "pattern": "^[A-Za-z][\\w]*[A-Za-z0-9]$",
+      "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$",
       "required": true,
       "type": "string",
       "description": "The name of the discovery site resource for SAP Migration.",
@@ -1511,7 +1514,7 @@
     "ServerInstanceNameParameter": {
       "name": "serverInstanceName",
       "in": "path",
-      "pattern": "^[A-Za-z][\\w]*[A-Za-z0-9]$",
+      "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$",
       "required": true,
       "type": "string",
       "description": "The name of the Server instance resource for SAP Migration.",
@@ -1519,7 +1522,7 @@
     },
     "SAPInstanceNameParameter": {
       "name": "sapInstanceName",
-      "pattern": "^[A-Za-z][\\w]*[A-Za-z0-9]$",
+      "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$",
       "in": "path",
       "required": true,
       "type": "string",

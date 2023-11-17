@@ -5,12 +5,12 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 azure-arm: true
 fluent: true
-namespace: com.microsoft.azure.management.offazurespringboot
+namespace: com.azure.resourcemanager.springappdiscovery
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-offazurespringboot
-title: OffAzureSpringBootClient
-description: "OffAzureSpringBoot Client"
+output-folder: $(azure-libraries-for-java-folder)/azure-resourcemanager-springappdiscovery
+title: SpringAppsDiscoveryClient
+description: "Spring App Discovery Client"
 ```
 
 ### Java multi-api
@@ -27,8 +27,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'package-2023-01-01-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.offazurespringboot.v2023-01-01-preview
-  output-folder: $(azure-libraries-for-java-folder)/offazurespringboot/resource-manager/v2023-01-01-preview
+  namespace: com.azure.resourcemanager.springappdiscovery.v2023-01-01-preview
+  output-folder: $(azure-libraries-for-java-folder)/springappdiscovery/resource-manager/v2023-01-01-preview
 regenerate-manager: true
 generate-interface: true
 ```

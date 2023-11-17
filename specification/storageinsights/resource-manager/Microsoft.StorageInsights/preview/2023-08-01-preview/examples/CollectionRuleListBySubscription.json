@@ -1,0 +1,40 @@
+{
+  "operationId": "StorageCollectionRules_ListBySubscription",
+  "title": "List StorageCollectionRule by subscription",
+  "parameters": {
+    "storageCollectionRuleName": "sample-storageCollectionRule",
+    "resourceGroupName": "sample-rg",
+    "api-version": "2023-08-01-preview",
+    "subscriptionId": "sample-subscription-id"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/sample-subscription-id/resourceGroups/sample-rg/providers/Microsoft.StorageInsights/storageCollectionRules/sample-storageCollectionRule",
+            "name": "sample-storageCollectionRule",
+            "type": "Microsoft.StorageInsights/storageCollectionRules",
+            "location": "westeurope",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "enabled": true,
+              "filters": {
+                "includeFilter": {
+                  "scopes": [
+                    "/subscriptions/sample-subscription-id/resourceGroups/sample-rg"
+                  ]
+                }
+              },
+              "destinations": {
+                "dataCollectionRuleResourceId": "/subscriptions/sample-subscription-id/resourceGroups/sample-rg/providers/Microsoft.Insights/dataCollectionRules/sample-data-collection-rule"
+              },
+              "configuration": {}
+            }
+          }
+        ],
+        "nextLink": "https://next-link.com"
+      }
+    }
+  }
+}

@@ -74,25 +74,18 @@ interface Organizations
   getServerlessMetadata(
     ...ResourceInstanceParameters<InformaticaOrganizationResource>,
   ): ArmResponse<ServerlessMetadataResponse> | ErrorResponse;
-}
 
-@doc("A Serverless Runtime environment  resource by Informatica.")
-@parentResource(InformaticaOrganizationResource)
-model InformaticaServerlessRuntimeResource
-  is TrackedResource<InformaticaServerlessRuntimeProperties> {
-  @key("serverlessRuntimeName")
-  @segment("serverlessRuntimes")
-  @doc("Name of the Serverless Runtime resource")
-  @path
-  name: string;
+  @doc("Gets all serverless runtime resources in a given informatica organization resource.")
+  @armResourceAction(InformaticaOrganizationResource)
+  @post
+  getAllServerlessRuntimes(
+    ...ResourceInstanceParameters<InformaticaOrganizationResource>,
+  ): ArmResponse<InformaticaServerlessRuntimeResourceList> | ErrorResponse;
 }
 
 @armResourceOperations
 interface ServerlessRuntimes
-  extends Azure.ResourceManager.TrackedResourceOperations<
-      InformaticaServerlessRuntimeResource,
-      InformaticaServerlessRuntimeProperties
-    > {
+  extends ProxyResourceOperations<InformaticaServerlessRuntimeResource> {
   get is ArmResourceRead<InformaticaServerlessRuntimeResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaServerlessRuntimeResource>;
   delete is ArmResourceDeleteAsync<InformaticaServerlessRuntimeResource>;
@@ -100,6 +93,164 @@ interface ServerlessRuntimes
     InformaticaServerlessRuntimeResource,
     InformaticaServerlessRuntimeProperties
   >;
+
+  @doc("Checks all dependencies for a serverless runtime resource")
+  @armResourceAction(InformaticaServerlessRuntimeResource)
+  @post
+  checkDependencies(
+    ...ResourceInstanceParameters<InformaticaServerlessRuntimeResource>,
+  ): ArmResponse<CheckDependenciesResponse> | ErrorResponse;
+
+  @doc("Starts a failed runtime resource")
+  @armResourceAction(InformaticaServerlessRuntimeResource)
+  @post
+  startFailedServerlessRuntime(
+    ...ResourceInstanceParameters<InformaticaServerlessRuntimeResource>,
+  ): ArmNoContentResponse | ErrorResponse;
+
+  @doc("Returns a serverless runtime resource by ID")
+  @armResourceAction(InformaticaServerlessRuntimeResource)
+  @post
+  serverlessResourceByID(
+    ...ResourceInstanceParameters<InformaticaServerlessRuntimeResource>,
+  ): ArmResponse<InformaticaServerlessRuntimeResource> | ErrorResponse;
+}
+
+@doc("Model for the check dependencies API for an informatica serverless runtime resource")
+model CheckDependenciesResponse {
+  @doc("Count of dependencies")
+  count: int32;
+
+  @doc("id of resource")
+  id: string;
+
+  @doc("List of dependencies")
+  references: ServerlessRuntimeDependency[];
+}
+
+@doc("Dependency reference for a serverless runtime resource")
+model ServerlessRuntimeDependency {
+  @doc("Dependency ID")
+  id: string;
+
+  @doc("Application context ID")
+  appContextId: string;
+
+  @doc("Dependency path")
+  path: string;
+
+  @doc("document type")
+  documentType: string;
+
+  @doc("description of Dependency")
+  description: string;
+
+  @doc("Last Update Time")
+  lastUpdatedTime: string;
+}
+
+@doc("A list of serverless runtime resources as fetched using the informatica APIs")
+model InformaticaServerlessRuntimeResourceList {
+  @doc("List of runtime resources for the fetch all API")
+  informaticaRuntimeResources: InfaRuntimeResourceFetchMetaData[];
+}
+
+@doc("Informatica runtime resource metadata as received via the informatica fetch all runtime environments API")
+model InfaRuntimeResourceFetchMetaData {
+  @doc("Environment name")
+  name: string;
+
+  @doc("Created time")
+  createdTime: string;
+
+  @doc("Updated Time")
+  updatedTime: string;
+
+  @doc("Created by")
+  createdBy: string;
+
+  @doc("Last Updated by")
+  updatedBy: string;
+
+  @doc("Informatica serverless runtime id")
+  id: string;
+
+  @doc("Environment Type")
+  type: RuntimeType;
+
+  @doc("Status of the environment")
+  status: string;
+
+  @doc("Display message for the given status")
+  statusLocalized: string;
+
+  @doc("status message")
+  statusMessage: string;
+
+  @doc("Serverless Config Properties")
+  serverlessConfigProperties: InfaServerlessFetchConfigProperties;
+
+  @doc("Description of the runtime resource")
+  description?: string;
+}
+
+@doc("InfaServerlessFetchConfigProperties for the fetch all serverless API as received from informatica API response")
+model InfaServerlessFetchConfigProperties {
+  @doc("subnet name")
+  subnet?: string;
+
+  @doc("applicationType name")
+  applicationType?: string;
+
+  @doc("Resource group name")
+  resourceGroupName?: string;
+
+  @doc("network Security Group")
+  nsg?: string;
+
+  @doc("Advanced custom properties")
+  advancedCustomProperties?: string;
+
+  @doc("Supplementary File location")
+  supplementaryFileLocation?: string;
+
+  @doc("Serverless Account Platform")
+  platform?: string;
+
+  @doc("Tags for the resource")
+  tags?: string;
+
+  @doc("virtual network")
+  vnet?: string;
+
+  @doc("Execution timeout")
+  executionTimeout?: string;
+
+  @doc("Compute Units")
+  computeUnits?: string;
+
+  @doc("Tenant ID")
+  tenantId?: string;
+
+  @doc("subscription ID")
+  subscriptionId?: string;
+
+  @doc("region name for the runtime environment")
+  region?: string;
+
+  @doc("Serverless Arm Resource ID")
+  serverlessArmResourceId?: string;
+}
+
+@doc("A Serverless Runtime environment  resource by Informatica.")
+@parentResource(InformaticaOrganizationResource)
+model InformaticaServerlessRuntimeResource
+  is ProxyResource<InformaticaServerlessRuntimeProperties> {
+  @key("serverlessRuntimeName")
+  @segment("serverlessRuntimes")
+  @doc("Name of the Serverless Runtime resource")
+  @path
+  name: string;
 }
 
 @doc("Properties specific to the Informatica DataManagement Organization resource.")
@@ -156,27 +307,27 @@ model MarketplaceDetails {
 
 @doc("Details of the product offering.")
 model OfferDetails {
-  @maxLength(50)
+  @maxLength(250)
   @doc("Id of the product publisher.")
   publisherId: string;
 
-  @maxLength(50)
+  @maxLength(250)
   @doc("Id of the product offering.")
   offerId: string;
 
-  @maxLength(50)
+  @maxLength(250)
   @doc("Id of the product offer plan.")
   planId: string;
 
-  @maxLength(50)
+  @maxLength(250)
   @doc("Name of the product offer plan.")
   planName: string;
 
-  @maxLength(25)
+  @maxLength(50)
   @doc("Offer plan term unit.")
   termUnit?: string;
 
-  @maxLength(50)
+  @maxLength(250)
   @doc("Offer plan term id.")
   termId: string;
 }
@@ -261,6 +412,12 @@ model InformaticaServerlessRuntimeProperties {
 
   @doc("Compute units of the serverless runtime.")
   computeUnits?: string;
+
+  @doc("Serverless Execution timeout")
+  executionTimeout?: string;
+
+  @doc("Serverless account creation location")
+  serverlessAccountLocation: string;
 
   @doc("Informatica Serverless Network profile properties.")
   serverlessRuntimeNetworkProfile?: ServerlessRuntimeNetworkProfile;
@@ -350,7 +507,7 @@ model CdiConfigProps {
   engineName: string;
 
   @doc("EngineVersion of the application config.")
-  name: string;
+  engineVersion: string;
 
   @doc("ApplicationConfigs of the CDI or CDIE.")
   @extension("x-ms-identifiers", [])

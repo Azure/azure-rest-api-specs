@@ -778,22 +778,37 @@ model VirtualNetworkConfiguration {
 #suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "Suppressing updateable property warning for metrics ingestion endpoint for now."
 @doc("An ingestion endpoint for metrics relating to the parent resource")
 @added(Versions.v2023_04_30_preview)
-@singleton
+@removed(Versions.v2023_11_15)
 model MetricsIngestionEndpointResources
-  is ExtensionResource<MetricsIngestionEndpointProperties> {
+  is TrackedResource<MetricsIngestionEndpointProperties> {
   @doc("Metrics Ingestion Endpoint Name")
   @key("metricsIngestionEndpointName")
   @segment("metricsIngestionEndpoints")
   @path
+  @pattern("^[a-z][a-z0-9]*$")
+  @minLength(3)
+  @maxLength(63)
   name: string;
 }
 
 @doc("The resource-specific properties of a Metrics Ingestion Endpoint")
 @added(Versions.v2023_04_30_preview)
+@removed(Versions.v2023_11_15)
 model MetricsIngestionEndpointProperties {
   @doc("Name of the External Metrics Ingress Gateway region where the compute should be deployed")
   @visibility("create", "read")
   ingressRegionName: string;
+
+  @doc("Parent resource identifier for which this metrics ingestion endpoint is being created")
+  @visibility("create", "read")
+  targetResourceId: ResourceIdentifier<[
+    {
+      type: "Microsoft.MobileNetwork/radioAccessNetworks";
+    },
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
 
   @visibility("read")
   @doc("Event Hub URL to which the metrics should be sent for this resource")
@@ -994,12 +1009,10 @@ model ConsumptionEndpointsProperties {
 @added(Versions.v2023_11_15)
 model AccountSas {
   @doc("Sas token start timestamp.")
-  @format("date-time")
-  startTimeStamp: string;
+  startTimeStamp: utcDateTime;
 
   @doc("Sas token expiry timestamp.")
-  @format("date-time")
-  expiryTimeStamp: string;
+  expiryTimeStamp: utcDateTime;
 
   @doc("Ip Address")
   ipAddress: string;
@@ -1214,13 +1227,32 @@ interface NetworkAnalyticsProduct
 interface DataConnector
   extends TrackedResourceOperations<DataConnectors, DataConnectorsProperties> {}
 
+@doc("Operations on Metrics Ingestion Endpoint.")
 @added(Versions.v2023_04_30_preview)
-@armResourceOperations(MetricsIngestionEndpointProperties)
-interface MetricsIngestionEndpoints
-  extends ExtensionResourceOperations<
-      MetricsIngestionEndpointResources,
-      MetricsIngestionEndpointProperties
-    > {}
+@removed(Versions.v2023_11_15)
+@armResourceOperations(MetricsIngestionEndpoints)
+interface MetricsIngestionEndpoints {
+  @doc("Create Metrics Ingestion Endpoint.")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<MetricsIngestionEndpointResources>;
+
+  @doc("Retrieve Metrics Ingestion Endpoint.")
+  get is ArmResourceRead<MetricsIngestionEndpointResources>;
+
+  @doc("Update Metrics Ingestion Endpoint.")
+  update is ArmResourcePatchAsync<
+    MetricsIngestionEndpointResources,
+    MetricsIngestionEndpointProperties
+  >;
+
+  @doc("Delete Metrics Ingestion Endpoint.")
+  delete is ArmResourceDeleteWithoutOkAsync<MetricsIngestionEndpointResources>;
+
+  @doc("List Metrics Ingestion Endpoint by resource group.")
+  listByResourceGroup is ArmResourceListByParent<MetricsIngestionEndpointResources>;
+
+  @doc("List Metrics Ingestion Endpoint by subscription.")
+  listBySubscription is ArmListBySubscription<MetricsIngestionEndpointResources>;
+}
 
 @doc("Operations on data catalog resource.")
 @added(Versions.v2023_11_15)

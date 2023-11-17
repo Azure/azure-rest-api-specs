@@ -1,0 +1,194 @@
+{
+  "parameters": {
+    "dashboardName": "testdashboard",
+    "resourceGroupName": "testRG",
+    "api-version": "2023-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "dashboard": {
+      "properties": {
+        "title": "testdashboard",
+        "pages": [
+          {
+            "title": "New 1",
+            "tiles": [
+              {
+                "title": "ARG: Top 10 resource counts by type",
+                "type": "QueryTile",
+                "layout": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 6,
+                  "height": 4
+                },
+                "data": {
+                  "kind": "arg",
+                  "query": "summarize ResourceCount=count() by type | order by ResourceCount | extend ['Resource count']=ResourceCount, ['Resource type']=type | project ['Resource type'], ['Resource count'] | take 10",
+                  "usedParameters": [
+                    "sampleLocationParameter"
+                  ]
+                },
+                "visualization": {
+                  "type": "table",
+                  "options": {
+                    "hideTileTitle": false,
+                    "table__enableRenderLinks": true,
+                    "table__renderLinksForColumns": [],
+                    "colorRules": [],
+                    "colorRulesDisabled": true,
+                    "colorStyle": "light",
+                    "crossFilter": [],
+                    "crossFilterDisabled": false,
+                    "drillthrough": [],
+                    "drillthroughDisabled": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "title": "Location",
+            "kind": "location",
+            "parameterNames": [
+              "sampleLocationParameter"
+            ],
+            "defaultValues": [
+              "eastus"
+            ],
+            "showOnPages": []
+          }
+        ]
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "properties": {
+          "title": "testdashboard",
+          "pages": [
+            {
+              "title": "New 1",
+              "tiles": [
+                {
+                  "title": "ARG: Top 10 resource counts by type",
+                  "type": "QueryTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 6,
+                    "height": 4
+                  },
+                  "data": {
+                    "kind": "arg",
+                    "query": "summarize ResourceCount=count() by type | order by ResourceCount | extend ['Resource count']=ResourceCount, ['Resource type']=type | project ['Resource type'], ['Resource count'] | take 10",
+                    "usedParameters": [
+                      "sampleLocationParameter"
+                    ]
+                  },
+                  "visualization": {
+                    "type": "table",
+                    "options": {
+                      "hideTileTitle": false,
+                      "table__enableRenderLinks": true,
+                      "table__renderLinksForColumns": [],
+                      "colorRules": [],
+                      "colorRulesDisabled": true,
+                      "colorStyle": "light",
+                      "crossFilter": [],
+                      "crossFilterDisabled": false,
+                      "drillthrough": [],
+                      "drillthroughDisabled": false
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "title": "Location",
+              "kind": "location",
+              "parameterNames": [
+                "sampleLocationParameter"
+              ],
+              "defaultValues": [
+                "eastus"
+              ],
+              "showOnPages": []
+            }
+          ]
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/testRG/SayeedRG/providers/Microsoft.Portal/dashboards/testdashboard",
+        "name": "testdashboard",
+        "type": "Microsoft.PortalServices/dashboards"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "title": "testdashboard",
+          "pages": [
+            {
+              "title": "New 1",
+              "tiles": [
+                {
+                  "title": "ARG: Top 10 resource counts by type",
+                  "type": "QueryTile",
+                  "layout": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 6,
+                    "height": 4
+                  },
+                  "data": {
+                    "kind": "arg",
+                    "query": "summarize ResourceCount=count() by type | order by ResourceCount | extend ['Resource count']=ResourceCount, ['Resource type']=type | project ['Resource type'], ['Resource count'] | take 10",
+                    "usedParameters": [
+                      "sampleLocationParameter"
+                    ]
+                  },
+                  "visualization": {
+                    "type": "table",
+                    "options": {
+                      "hideTileTitle": false,
+                      "table__enableRenderLinks": true,
+                      "table__renderLinksForColumns": [],
+                      "colorRules": [],
+                      "colorRulesDisabled": true,
+                      "colorStyle": "light",
+                      "crossFilter": [],
+                      "crossFilterDisabled": false,
+                      "drillthrough": [],
+                      "drillthroughDisabled": false
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "title": "Location",
+              "kind": "location",
+              "parameterNames": [
+                "sampleLocationParameter"
+              ],
+              "defaultValues": [
+                "eastus"
+              ],
+              "showOnPages": []
+            }
+          ]
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/testRG/SayeedRG/providers/Microsoft.Portal/dashboards/testdashboard",
+        "name": "testdashboard",
+        "type": "Microsoft.PortalServices/dashboards"
+      }
+    }
+  }
+}

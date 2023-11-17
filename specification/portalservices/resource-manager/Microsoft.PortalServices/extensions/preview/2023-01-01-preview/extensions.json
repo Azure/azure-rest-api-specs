@@ -785,8 +785,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK response definition."
+          "202": {
+            "description": "Accepted - Extension Version Delete in progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "OK resource was not found."
@@ -797,6 +802,10 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "produces": [
           "application/json"
