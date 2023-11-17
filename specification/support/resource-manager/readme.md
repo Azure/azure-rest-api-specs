@@ -42,7 +42,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-09'
+```yaml $(tag) == 'package-preview-2022-09'
 input-file:
   - Microsoft.Support/preview/2022-09-01-preview/support.json
 suppressions:
