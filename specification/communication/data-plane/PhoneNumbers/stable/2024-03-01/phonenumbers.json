@@ -1479,22 +1479,18 @@
           }
         },
         "options": {
-          "description": "Options to modify the search to include additional properties in the response. Please note: use of options may affect the cost of the query.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperatorInformationRequestOptions"
-          }
+          "$ref": "#/definitions/OperatorInformationRequestOptions"
         }
       }
     },
     "OperatorInformationRequestOptions": {
-      "enum": [
-        "IncludeOperatorDetails"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "OperatorInformationRequestOptions",
-        "modelAsString": true
+      "description": "Represents options to modify a search request for operator information",
+      "type": "object",
+      "properties": {
+        "includeAdditionalPhoneAndOperatorDetails": {
+          "description": "Includes the fields operatorDetails, numberType, and isoCountryCode in the response.  Please note: use of this option will result in additional costs",
+          "type": "boolean"
+        }
       }
     },
     "OperatorInformationResult": {
@@ -1516,15 +1512,18 @@
       "properties": {
         "phoneNumber": {
           "description": "E.164 formatted string representation of the phone number",
-          "type": "string"
+          "type": "string",
+          "required": "true"
         },
         "nationalFormat": {
           "description": "National format of the phone number",
-          "type": "string"
+          "type": "string",
+          "required": "true"
         },
         "internationalFormat": {
           "description": "International format of the phone number",
-          "type": "string"
+          "type": "string",
+          "required": "true"
         },
         "numberType": {
           "description": "Type of service associated with the phone number",
