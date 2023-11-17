@@ -568,7 +568,7 @@
           "200": {
             "description": "Success, with the details of the subscriptionId request.",
             "schema": {
-              "$ref": "#/definitions/GroupQuotaSubscriptionIdList"
+              "$ref": "#/definitions/GroupQuotaSubscriptionRequestStatusList"
             }
           },
           "default": {
@@ -611,7 +611,7 @@
           "200": {
             "description": "Success, with the details of the subscriptionId request.",
             "schema": {
-              "$ref": "#/definitions/GroupQuotaSubscriptionId"
+              "$ref": "#/definitions/GroupQuotaSubscriptionRequestStatus"
             }
           },
           "default": {
@@ -1280,7 +1280,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SubscriptionQuotaAllocationRequestList"
+              "$ref": "#/definitions/QuotaAllocationRequestStatusList"
             }
           },
           "default": {
@@ -1319,8 +1319,30 @@
         "requestedResource": {
           "$ref": "#/definitions/QuotaAllocationRequestBase"
         },
+        "requestProperties": {
+          "description": "Request properties.",
+          "$ref": "#/definitions/RequestProperties"
+        },
         "provisioningState": {
           "$ref": "#/definitions/RequestState",
+          "readOnly": true
+        }
+      }
+    },
+    "QuotaAllocationRequestStatusList": {
+      "type": "object",
+      "description": "List of QuotaAllocation Request Status",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of QuotaAllocation Request Status",
+          "items": {
+            "$ref": "#/definitions/QuotaAllocationRequestStatus"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
           "readOnly": true
         }
       }
@@ -1491,6 +1513,37 @@
         }
       }
     },
+    "GroupQuotaSubscriptionRequestStatus": {
+      "type": "object",
+      "description": "The new quota limit request status.",
+      "properties": {
+        "subscriptionId": {
+          "$ref": "#/definitions/GroupQuotaSubscriptionId"
+        },
+        "requestProperties": {
+          "description": "Request properties.",
+          "$ref": "#/definitions/RequestProperties"
+        }
+      }
+    },
+    "GroupQuotaSubscriptionRequestStatusList": {
+      "type": "object",
+      "description": "List of GroupQuotaSubscriptionRequests Status",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of GroupQuotaSubscriptionRequests Status",
+          "items": {
+            "$ref": "#/definitions/GroupQuotaSubscriptionRequestStatus"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "GroupQuotaSubscriptionId": {
       "type": "object",
       "description": "This represents a Azure subscriptionId that is associated with a GroupQuotaSEntity.",
@@ -1646,6 +1699,18 @@
         }
       }
     },
+    "RequestProperties": {
+      "type": "object",
+      "description": "Request properties.",
+      "properties": {
+        "requestSubmitTime": {
+          "description": "The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        }
+      }
+    },
     "SubmittedResourceRequestStatus": {
       "type": "object",
       "description": "Status of a single GroupQuota request.",
@@ -1653,6 +1718,10 @@
         "requestedResource": {
           "description": "Requested Resource.",
           "$ref": "#/definitions/QuotaAllocationRequestBase"
+        },
+        "requestProperties": {
+          "description": "Request properties.",
+          "$ref": "#/definitions/RequestProperties"
         },
         "status": {
           "$ref": "#/definitions/RequestState",
