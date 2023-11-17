@@ -32,11 +32,11 @@ tag: package-preview-2023-09
 ```
 
 
-### Tag: package-preview-2023-09
+### Tag: package-2023-09-preview
 
-These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+These settings apply only when `--tag=package-2023-09-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-09'
+```yaml $(tag) == 'package-2023-09-preview'
 input-file:
   - Microsoft.Network/preview/2023-09-01-preview/applicationSecurityGroup.json
   - Microsoft.Network/preview/2023-09-01-preview/network.json
