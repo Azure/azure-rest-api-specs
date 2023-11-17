@@ -636,6 +636,7 @@ These settings apply only when `--tag=package-2020-01-preview-python-only` is sp
 ``` yaml $(tag) == 'package-2020-01-preview-python-only'
 input-file:
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 
 # Needed when there is more than one input file
 override-info:
