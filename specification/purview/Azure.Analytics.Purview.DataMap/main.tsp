@@ -16,6 +16,7 @@ using TypeSpec.Versioning;
     endpoint: string,
   }
 )
+
 @doc("""
 Purview Data Map Service is a fully managed cloud service whose users can
 discover the data sources they need and understand the data sources they find.
@@ -33,6 +34,7 @@ enum ApiVersions {
   "2023-09-01",
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "It follows the rule"
 @doc("The Azure Active Directory OAuth2 Flow")
 model AADToken is OAuth2Auth<[
   {
