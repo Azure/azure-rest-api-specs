@@ -437,7 +437,13 @@
             "$ref": "#/parameters/AzureLargeInstanceNameParameter"
           },
           {
-            "$ref": "#/parameters/AzureLargeInstanceParameter"
+            "in": "body",
+            "name": "azurelargeinstanceproperties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureLargeInstance"
+            },
+            "description": "Request body that contains the azure large instance."
           }
         ],
         "responses": {
@@ -1148,16 +1154,6 @@
         "$ref": "#/definitions/Tags"
       },
       "description": "Request body that only contains the new Tags field",
-      "x-ms-parameter-location": "method"
-    },
-    "AzureLargeInstanceParameter": {
-      "name": "azureLargeInstanceParameter",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/AzureLargeInstanceProperties"
-      },
-      "description": "Request body that contains the azure large instance.",
       "x-ms-parameter-location": "method"
     }
   }
