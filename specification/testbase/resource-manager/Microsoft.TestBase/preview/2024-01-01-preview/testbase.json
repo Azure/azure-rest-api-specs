@@ -6325,11 +6325,11 @@
           "description": "Release of the custom image."
         },
         "architecture": {
-          "$ref": "./customimage.json/#/definitions/ImageArchitecture",
+          "$ref": "#/definitions/ImageArchitecture",
           "description": "Architecture of the custom image."
         },
         "osState": {
-          "$ref": "./customimage.json/#/definitions/ImageOSState",
+          "$ref": "#/definitions/ImageOSState",
           "description": "Os state of the custom image."
         },
         "hyperVGeneration": {
@@ -6359,6 +6359,45 @@
           "$ref": "#/definitions/BillingHubAggregateUsage"
         }
       ]
+    },
+    "ImageOSState": {
+      "description": "Custom image OS state.",
+      "type": "string",
+      "enum": [
+        "Generalized",
+        "Specialized"
+      ],
+      "x-ms-enum": {
+        "name": "ImageOSState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Generalized",
+            "description": "Sysprep generalization processed."
+          },
+          {
+            "value": "Specialized",
+            "description": "Fully kept with user specified settings."
+          }
+        ]
+      }
+    },
+    "ImageArchitecture": {
+      "description": "Custom image architecture.",
+      "type": "string",
+      "enum": [
+        "x64"
+      ],
+      "x-ms-enum": {
+        "name": "ImageArchitecture",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "x64",
+            "description": "64-bit architecture."
+          }
+        ]
+      }
     },
     "AvailableInplaceUpgradeOSListResult": {
       "description": "A list of available In-place Upgrade OSs.",
