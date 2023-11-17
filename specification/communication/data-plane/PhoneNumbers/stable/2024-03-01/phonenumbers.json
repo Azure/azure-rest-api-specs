@@ -1509,21 +1509,23 @@
     "OperatorInformation": {
       "description": "Represents metadata about a phone number that is controlled/provided by that phone number's operator.",
       "type": "object",
+      "required": [
+        "phoneNumber",
+        "nationalFormat",
+        "internationalFormat"
+      ]
       "properties": {
         "phoneNumber": {
           "description": "E.164 formatted string representation of the phone number",
-          "type": "string",
-          "required": "true"
+          "type": "string"
         },
         "nationalFormat": {
           "description": "National format of the phone number",
-          "type": "string",
-          "required": "true"
+          "type": "string"
         },
         "internationalFormat": {
           "description": "International format of the phone number",
-          "type": "string",
-          "required": "true"
+          "type": "string"
         },
         "numberType": {
           "description": "Type of service associated with the phone number",
