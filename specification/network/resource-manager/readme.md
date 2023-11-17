@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-09'
 input-file:
+  - Microsoft.Network/preview/2023-09-01-preview/applicationSecurityGroup.json
   - Microsoft.Network/preview/2023-09-01-preview/network.json
   - Microsoft.Network/preview/2023-09-01-preview/networkInterface.json
   - Microsoft.Network/preview/2023-09-01-preview/networkSecurityGroup.json
