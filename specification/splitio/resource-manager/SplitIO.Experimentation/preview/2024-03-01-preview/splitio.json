@@ -422,6 +422,16 @@
     }
   },
   "definitions": {
+    "AccessPolicy": {
+      "type": "object",
+      "description": "AccessPolicy for an experimentation workspace",
+      "properties": {
+        "aadAppId": {
+          "type": "string",
+          "description": "AAD application id used for access to the experimentation workspace"
+        }
+      }
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -450,6 +460,21 @@
             "description": "Resource creation was canceled."
           }
         ]
+      }
+    },
+    "DataSource": {
+      "type": "object",
+      "description": "DataSource for an experimentation workspace",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id in partner's system",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource id of the data source"
+        }
       }
     },
     "ExperimentationWorkspace": {
@@ -501,12 +526,32 @@
       "type": "object",
       "description": "The properties of ExperimentationWorkspace",
       "properties": {
+        "marketplace": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
+          "description": "Marketplace details of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "user": {
+          "$ref": "#/definitions/UserDetails",
+          "description": "Details of the user."
+        },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
+        },
+        "partnerExperimentationWorkspaceProperties": {
+          "$ref": "#/definitions/PartnerExperimentationWorkspaceProperties",
+          "description": "Partner ExperimentationWorkspace properties"
         }
-      }
+      },
+      "required": [
+        "marketplace",
+        "user"
+      ]
     },
     "ExperimentationWorkspaceUpdate": {
       "type": "object",
@@ -522,6 +567,308 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/ExperimentationWorkspaceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExperimentationWorkspaceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ExperimentationWorkspace.",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/UserDetailsUpdate",
+          "description": "Details of the user."
+        },
+        "partnerExperimentationWorkspaceProperties": {
+          "$ref": "#/definitions/PartnerExperimentationWorkspaceProperties",
+          "description": "Partner ExperimentationWorkspace properties"
+        }
+      }
+    },
+    "LiftrBase.Address": {
+      "type": "object",
+      "description": "Address details.",
+      "properties": {
+        "addressLine1": {
+          "type": "string",
+          "description": "Address line 1"
+        },
+        "addressLine2": {
+          "type": "string",
+          "description": "Address line 2"
+        },
+        "city": {
+          "type": "string",
+          "description": "Name of the city"
+        },
+        "state": {
+          "type": "string",
+          "description": "Name of the state"
+        },
+        "country": {
+          "type": "string",
+          "description": "Name of the country"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal code"
+        }
+      },
+      "required": [
+        "addressLine1",
+        "city",
+        "state",
+        "country",
+        "postalCode"
+      ]
+    },
+    "LiftrBase.AddressUpdate": {
+      "type": "object",
+      "description": "Address details.",
+      "properties": {
+        "addressLine1": {
+          "type": "string",
+          "description": "Address line 1"
+        },
+        "addressLine2": {
+          "type": "string",
+          "description": "Address line 2"
+        },
+        "city": {
+          "type": "string",
+          "description": "Name of the city"
+        },
+        "state": {
+          "type": "string",
+          "description": "Name of the state"
+        },
+        "country": {
+          "type": "string",
+          "description": "Name of the country"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal code"
+        }
+      }
+    },
+    "LiftrBase.CompanyDetails": {
+      "type": "object",
+      "description": "Company details.",
+      "properties": {
+        "companyName": {
+          "type": "string",
+          "description": "Company name."
+        },
+        "address": {
+          "$ref": "#/definitions/LiftrBase.Address",
+          "description": "Company address."
+        }
+      },
+      "required": [
+        "companyName"
+      ]
+    },
+    "LiftrBase.CompanyDetailsUpdate": {
+      "type": "object",
+      "description": "Company details.",
+      "properties": {
+        "companyName": {
+          "type": "string",
+          "description": "Company name."
+        },
+        "address": {
+          "$ref": "#/definitions/LiftrBase.AddressUpdate",
+          "description": "Company address."
+        }
+      }
+    },
+    "LiftrBase.MarketplaceDetails": {
+      "type": "object",
+      "description": "Marketplace details of a resource.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Azure subscription id for the the marketplace offer is purchased from"
+        },
+        "subscriptionStatus": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceSubscriptionStatus",
+          "description": "Marketplace subscription status"
+        },
+        "offerDetails": {
+          "$ref": "#/definitions/LiftrBase.OfferDetails",
+          "description": "Offer details for the marketplace that is selected by the user"
+        }
+      },
+      "required": [
+        "subscriptionId",
+        "offerDetails"
+      ]
+    },
+    "LiftrBase.MarketplaceSubscriptionStatus": {
+      "type": "string",
+      "description": "Marketplace subscription status of a resource.",
+      "enum": [
+        "PendingFulfillmentStart",
+        "Subscribed",
+        "Suspended",
+        "Unsubscribed"
+      ],
+      "x-ms-enum": {
+        "name": "MarketplaceSubscriptionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PendingFulfillmentStart",
+            "value": "PendingFulfillmentStart",
+            "description": "Purchased but not yet activated"
+          },
+          {
+            "name": "Subscribed",
+            "value": "Subscribed",
+            "description": "Marketplace subscription is activated"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "This state indicates that a customer's payment for the Marketplace service was not received"
+          },
+          {
+            "name": "Unsubscribed",
+            "value": "Unsubscribed",
+            "description": "Customer has cancelled the subscription"
+          }
+        ]
+      }
+    },
+    "LiftrBase.OfferDetails": {
+      "type": "object",
+      "description": "Offer details for the marketplace that is selected by the user",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id for the marketplace offer"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer Id for the marketplace offer"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan Id for the marketplace offer"
+        },
+        "planName": {
+          "type": "string",
+          "description": "Plan Name for the marketplace offer"
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Term Unit for the marketplace offer"
+        },
+        "termId": {
+          "type": "string",
+          "description": "Term ID for the marketplace offer"
+        }
+      },
+      "required": [
+        "publisherId",
+        "offerId",
+        "planId"
+      ]
+    },
+    "LiftrBase.email": {
+      "type": "string",
+      "description": "Reusable representation of an email address.",
+      "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
+    },
+    "PartnerExperimentationWorkspaceProperties": {
+      "type": "object",
+      "description": "Properties specific to Partner's ExperimentationWorkspace",
+      "properties": {
+        "experimentationWorkspaceId": {
+          "type": "string",
+          "description": "ExperimentationWorkspace id in partner's system",
+          "readOnly": true
+        },
+        "experimentationEnabled": {
+          "type": "boolean",
+          "description": "Whether experimentation is enabled"
+        },
+        "accessPolicy": {
+          "$ref": "#/definitions/AccessPolicy",
+          "description": "Access policy for an experimentation workspace"
+        },
+        "dataSource": {
+          "$ref": "#/definitions/DataSource",
+          "description": "DataSource for an experimentation workspace"
+        }
+      }
+    },
+    "UserDetails": {
+      "type": "object",
+      "description": "Details of the User.",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First name of the user"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the user"
+        },
+        "emailAddress": {
+          "$ref": "#/definitions/LiftrBase.email",
+          "description": "Email address of the user"
+        },
+        "upn": {
+          "type": "string",
+          "description": "User's principal name"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "User's phone number"
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/LiftrBase.CompanyDetails",
+          "description": "Company details of the user."
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "emailAddress"
+      ]
+    },
+    "UserDetailsUpdate": {
+      "type": "object",
+      "description": "Details of the User.",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First name of the user"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the user"
+        },
+        "emailAddress": {
+          "$ref": "#/definitions/LiftrBase.email",
+          "description": "Email address of the user"
+        },
+        "upn": {
+          "type": "string",
+          "description": "User's principal name"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "User's phone number"
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/LiftrBase.CompanyDetailsUpdate",
+          "description": "Company details of the user."
         }
       }
     },

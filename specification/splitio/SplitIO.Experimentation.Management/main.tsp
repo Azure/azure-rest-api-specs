@@ -1,3 +1,5 @@
+import "./LiftrBase/main.tsp";
+
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
@@ -6,6 +8,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-providerhub";
 
 using Azure.ResourceManager;
+using LiftrBase;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -22,16 +25,48 @@ namespace SplitIO.Experimentation;
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(LiftrBase.Versions.v1_preview)
   v1_preview: "2024-03-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("The properties of ExperimentationWorkspace")
-model ExperimentationWorkspaceProperties {
-  @doc("Provisioning state of the resource.")
+model ExperimentationWorkspaceProperties is BaseResourceProperties {
+  @doc("Partner ExperimentationWorkspace properties")
+  partnerExperimentationWorkspaceProperties?: PartnerExperimentationWorkspaceProperties;
+}
+
+@doc("Properties specific to Partner's ExperimentationWorkspace")
+model PartnerExperimentationWorkspaceProperties {
+  @doc("ExperimentationWorkspace id in partner's system")
   @visibility("read")
-  provisioningState?: ResourceProvisioningState;
+  experimentationWorkspaceId?: string;
+
+  @doc("Whether experimentation is enabled")
+  experimentationEnabled?: boolean;
+
+  @doc("Access policy for an experimentation workspace")
+  accessPolicy?: AccessPolicy;
+
+  @doc("DataSource for an experimentation workspace")
+  dataSource?: DataSource;
+}
+
+@doc("AccessPolicy for an experimentation workspace")
+model AccessPolicy {
+  @doc("AAD application id used for access to the experimentation workspace")
+  aadAppId?: string;
+}
+
+@doc("DataSource for an experimentation workspace")
+model DataSource {
+  @doc("Id in partner's system")
+  @visibility("read")
+  id?: string;
+
+  @doc("Resource id of the data source")
+  resourceId?: string;
 }
 
 @doc("A ExperimentationWorkspace Resource by Split.IO")
