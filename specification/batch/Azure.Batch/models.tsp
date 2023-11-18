@@ -151,6 +151,9 @@ enum StorageAccountType {
 
   @doc("The data disk should use premium locally redundant storage.")
   PremiumLRS: "premium_lrs",
+
+  @doc("The data disk / OS disk should use standard SSD locally redundant storage.")
+  StandardSSDLRS: "standardssd_lrs",
 }
 
 @doc("DiskEncryptionTarget enums")
@@ -575,6 +578,12 @@ enum StatusLevelTypes {
   Warning,
 }
 
+@doc("Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.")
+enum SecurityTypes {
+  @doc("Trusted launch protects against advanced and persistent attack techniques.")
+  trustedLaunch,
+}
+
 @doc("The result of listing the applications available in an Account.")
 @pagedResult
 model BatchApplicationListResult {
@@ -702,9 +711,9 @@ model ImageInfo {
 }
 
 @doc("""
-A reference to an Azure Virtual Machines Marketplace Image or a Shared Image
-Gallery Image. To get the list of all Azure Marketplace Image references
-verified by Azure Batch, see the 'List Supported Images' operation.
+A reference to an Azure Virtual Machines Marketplace Image or a Azure Compute Gallery Image. 
+To get the list of all Azure Marketplace Image references verified by Azure Batch, see the 
+'List Supported Images' operation.
 """)
 model ImageReference {
   @doc("The publisher of the Azure Virtual Machines Marketplace Image. For example, Canonical or MicrosoftWindowsServer.")
@@ -719,7 +728,7 @@ model ImageReference {
   @doc("The version of the Azure Virtual Machines Marketplace Image. A value of 'latest' can be specified to select the latest version of an Image. If omitted, the default is 'latest'.")
   version?: string;
 
-  @doc("The ARM resource identifier of the Shared Image Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{VersionId} or /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName} for always defaulting to the latest image version. This property is mutually exclusive with other ImageReference properties. The Shared Image Gallery Image must have replicas in the same region and must be in the same subscription as the Azure Batch account. If the image version is not specified in the imageId, the latest version will be used. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.")
+  @doc("The ARM resource identifier of the Azure Compute Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{VersionId} or /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName} for always defaulting to the latest image version. This property is mutually exclusive with other ImageReference properties. The Azure Compute Gallery Image must have replicas in the same region and must be in the same subscription as the Azure Batch account. If the image version is not specified in the imageId, the latest version will be used. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.")
   virtualMachineImageId?: string;
 
   @doc("The specific version of the platform image or marketplace image used to create the node. This read-only field differs from 'version' only if the value specified for 'version' when the pool was created was 'latest'.")
@@ -1167,6 +1176,27 @@ model Schedule {
   recurrenceInterval?: duration;
 }
 
+@doc("Specifies the security profile settings for the virtual machine or virtual machine scale set.")
+model SecurityProfile {
+  @doc("This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself.")
+  encryptionAtHost: boolean;
+
+  @doc("Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.")
+  securityType: SecurityTypes;
+
+  @doc("Specifies the security settings like secure boot and vTPM used while creating the virtual machine. Specifies the security settings like secure boot and vTPM used while creating the virtual machine.")
+  uefiSettings: UefiSettings;
+}
+
+@doc("""
+Specifies the service artifact reference id used to set same image version 
+for all virtual machines in the scale set when using 'latest' image version.
+""")
+model ServiceArtifactReference {
+  @doc("The service artifact reference id of ServiceArtifactReference. The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}")
+  id: string;
+}
+
 @doc("Specifies details of the Jobs to be created on a schedule.")
 model BatchJobSpecification {
   @doc("The priority of Jobs created under this schedule. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0. This priority is used as the default for all Jobs under the Job Schedule. You can update a Job's priority after it has been created using by using the update Job API.")
@@ -1457,6 +1487,15 @@ model UserIdentity {
   autoUser?: AutoUserSpecification;
 }
 
+@doc("Specifies the security settings like secure boot and vTPM used while creating the virtual machine.")
+model UefiSettings {
+  @doc("Specifies whether secure boot should be enabled on the virtual machine.")
+  secureBootEnabled?: boolean;
+
+  @doc("Specifies whether vTPM should be enabled on the virtual machine.")
+  vTpmEnabled?: boolean;
+}
+
 @doc("""
 Specifies the options for the auto user that runs an Azure Batch Task.
 """)
@@ -1637,6 +1676,9 @@ model BatchPoolSpecification {
   @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   resizeTimeout?: duration;
 
+  @doc("The user-specified tags associated with the pool.The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.")
+  resourceTags?: string;
+
   @doc("The desired number of dedicated Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
   targetDedicatedNodes?: int32;
 
@@ -1799,9 +1841,9 @@ model ContainerConfiguration {
 }
 
 @doc("""
-The disk encryption configuration applied on compute nodes in the pool. Disk
-encryption configuration is not supported on Linux pool created with Shared
-Image Gallery Image.
+The disk encryption configuration applied on compute nodes in the pool. 
+Disk encryption configuration is not supported on Linux pool created with 
+Azure Compute Gallery Image.
 """)
 model DiskEncryptionConfiguration {
   @doc("The list of disk targets Batch Service will encrypt on the compute node. If omitted, no disks on the compute nodes in the pool will be encrypted. On Linux pool, only \"TemporaryDisk\" is supported; on Windows pool, \"OsDisk\" and \"TemporaryDisk\" must be specified.")
@@ -1854,6 +1896,18 @@ model VMExtension {
 model OSDisk {
   @doc("Specifies the ephemeral Disk Settings for the operating system disk used by the compute node (VM).")
   ephemeralOSDiskSettings?: DiffDiskSettings;
+
+  @doc("Specifies the caching requirements. Possible values are: None, ReadOnly, ReadWrite. The default values are: None for Standard storage. ReadOnly for Premium storage.")
+  caching?: CachingType;
+
+  @doc("The initial disk size in GB when creating new OS disk.")
+  diskSizeGB?: int32;
+
+  @doc("The managed disk parameters.")
+  managedDisk?: ManagedDisk;
+
+  @doc("Specifies whether writeAccelerator should be enabled or disabled on the disk.")
+  writeAcceleratorEnabled?: boolean;
 }
 
 @doc("""
@@ -2044,6 +2098,12 @@ model LinuxUserConfiguration {
 model WindowsUserConfiguration {
   @doc("The login mode for the user. The default value for VirtualMachineConfiguration Pools is 'batch' and for CloudServiceConfiguration Pools is 'interactive'.")
   loginMode?: LoginMode;
+}
+
+@doc("The managed disk parameters.")
+model ManagedDisk {
+  @doc("The storage account type for managed disk.")
+  storageAccountType: StorageAccountType;
 }
 
 @doc("""
@@ -2703,6 +2763,10 @@ model BatchPool {
   @visibility("read")
   resizeErrors?: ResizeError[];
 
+  @doc("The user-specified tags associated with the pool. The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.")
+  @visibility("read")
+  resourceTags?: string;
+
   @doc("The number of dedicated Compute Nodes currently in the Pool.")
   @visibility("read")
   currentDedicatedNodes?: int32;
@@ -2818,6 +2882,9 @@ model BatchPoolCreateParameters {
 
   @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   resizeTimeout?: duration;
+
+  @doc("The user-specified tags associated with the pool. The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.")
+  resourceTags?: string;
 
   @doc("The desired number of dedicated Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
   targetDedicatedNodes?: int32;
@@ -3717,6 +3784,9 @@ model BatchNodeAgentInfo {
 model VirtualMachineInfo {
   @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
   imageReference?: ImageReference;
+
+  @doc("The resource ID of the Compute Node's current Virtual Machine Scale Set VM. Only defined if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'.")
+  scaleSetVmResourceId?: string;
 }
 
 @doc("Parameters for rebooting an Azure Batch Compute Node.")
