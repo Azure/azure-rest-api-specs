@@ -541,14 +541,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "URL to track the operation status of the Microsoft Azure Large Instance in the specified location."
-              }
-            }
+          "200": {
+            "description": "OK. The workspace for Grafana resource is deleted."
           },
           "204": {
             "description": "NoContent"
@@ -742,7 +736,7 @@
         "summary": "Create an azure large storage resource.",
         "operationId": "AzureLargeStorageInstances_Create",
         "x-ms-examples": {
-          "Put a new AzureLargeStoragetorageInstance": {
+          "Put a new AzureLargeStoragInstance": {
             "$ref": "./examples/AzureLargeStorageInstance_Create.json"
           }
         },
@@ -785,7 +779,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -803,13 +797,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/AzureLargeStorageInstanceNameParameter"
@@ -825,7 +819,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
