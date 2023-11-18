@@ -49,7 +49,7 @@ directive:
 
 These settings apply only when `--tag=package-stable-2023-07-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-07-01'
+```yaml $(tag) == 'package-stable-2023-07-01'
 input-file:
   - Common/stable/2023-07-01/common.json
   - Creator/stable/2023-07-01/alias.json
