@@ -26,9 +26,18 @@ These are the global settings for the Managed Service Identity API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-01-31
+tag: package-preview-2023-07
 ```
 
+
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - Microsoft.ManagedIdentity/preview/2023-07-31-preview/ManagedIdentity.json
+```
 ### Tag: package-2023-01-31
 
 These settings apply only when `--tag=package-2023-01-31` is specified on the command line.
@@ -42,20 +51,20 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-01'
+``` yaml $(tag) == 'package-preview-2022-01'
 input-file:
   - Microsoft.ManagedIdentity/preview/2022-01-31-preview/ManagedIdentity.json
 ```
-
 
 ### Tag: package-preview-2021-09-30
 
 These settings apply only when `--tag=package-preview-2021-09-30` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-09-30'
+``` yaml $(tag) == 'package-preview-2021-09-30'
 input-file:
   - Microsoft.ManagedIdentity/preview/2021-09-30-preview/ManagedIdentity.json
 ```
+
 ### Tag: package-2018-11-30
 
 These settings apply only when `--tag=package-2018-11-30` is specified on the command line.
