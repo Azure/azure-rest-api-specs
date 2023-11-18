@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-preview-2024-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-01'
 input-file:
-  - Microsoft.AzureLargeInstance/preview/2024-01-10/azurelargeinstance.json
+  - Microsoft.AzureLargeInstance/preview/2024-01-10-preview/azurelargeinstance.json
 ```
 ### Tag: package-2023-07-20-preview
 
