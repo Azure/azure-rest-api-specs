@@ -118,7 +118,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -166,7 +167,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -223,7 +225,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "parameters",
@@ -299,7 +302,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "null"
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "List network watchers": {
@@ -338,7 +341,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "null"
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "List all network watchers": {
@@ -455,9 +458,6 @@
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/VerificationIPFlowResult"
-            },
             "headers": {
               "Location": {
                 "type": "string"
@@ -530,9 +530,6 @@
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/NextHopResult"
-            },
             "headers": {
               "Location": {
                 "type": "string"
@@ -605,8 +602,10 @@
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/SecurityGroupViewResult"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -717,7 +716,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "packetCaptureName",
@@ -772,7 +772,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "packetCaptureName",
@@ -933,8 +934,10 @@
           },
           "202": {
             "description": "Accepted query status of packet capture.",
-            "schema": {
-              "$ref": "#/definitions/PacketCaptureQueryStatusResult"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -975,7 +978,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Network Watcher resource."
+            "description": "The name of the Network Watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -1028,7 +1032,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher resource."
+            "description": "The name of the network watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "parameters",
@@ -1055,8 +1060,10 @@
           },
           "202": {
             "description": "Accepted get troubleshooting request.",
-            "schema": {
-              "$ref": "#/definitions/TroubleshootingResult"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1097,7 +1104,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher resource."
+            "description": "The name of the network watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "parameters",
@@ -1124,8 +1132,10 @@
           },
           "202": {
             "description": "Accepted get troubleshooting result request.",
-            "schema": {
-              "$ref": "#/definitions/TroubleshootingResult"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1167,7 +1177,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher resource."
+            "description": "The name of the network watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "parameters",
@@ -1194,8 +1205,10 @@
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/FlowLogInformation"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1237,7 +1250,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher resource."
+            "description": "The name of the network watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "parameters",
@@ -1264,8 +1278,10 @@
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/FlowLogInformation"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1306,7 +1322,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher resource."
+            "description": "The name of the network watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "parameters",
@@ -1333,8 +1350,10 @@
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/ConnectivityInformation"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1375,7 +1394,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher resource."
+            "description": "The name of the network watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "parameters",
@@ -1402,8 +1422,10 @@
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/AzureReachabilityReport"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1444,7 +1466,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher resource."
+            "description": "The name of the network watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "parameters",
@@ -1471,8 +1494,10 @@
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/AvailableProvidersList"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1513,7 +1538,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "parameters",
@@ -1540,8 +1566,10 @@
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/NetworkConfigurationDiagnosticResponse"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1582,7 +1610,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Network Watcher resource."
+            "description": "The name of the Network Watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "connectionMonitorName",
@@ -1666,7 +1695,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Network Watcher resource."
+            "description": "The name of the Network Watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "connectionMonitorName",
@@ -1721,7 +1751,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Network Watcher resource."
+            "description": "The name of the Network Watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "connectionMonitorName",
@@ -1780,7 +1811,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "connectionMonitorName",
@@ -1846,7 +1878,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Network Watcher resource."
+            "description": "The name of the Network Watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "connectionMonitorName",
@@ -1907,7 +1940,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Network Watcher resource."
+            "description": "The name of the Network Watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "connectionMonitorName",
@@ -1968,7 +2002,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Network Watcher resource."
+            "description": "The name of the Network Watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "connectionMonitorName",
@@ -1993,8 +2028,10 @@
           },
           "202": {
             "description": "Accepted query of connection states.",
-            "schema": {
-              "$ref": "#/definitions/ConnectionMonitorQueryResult"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -2035,7 +2072,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Network Watcher resource."
+            "description": "The name of the Network Watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -2088,7 +2126,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "flowLogName",
@@ -2162,7 +2201,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "flowLogName",
@@ -2226,7 +2266,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "flowLogName",
@@ -2281,7 +2322,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the network watcher."
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "name": "flowLogName",
@@ -2342,7 +2384,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Network Watcher resource."
+            "description": "The name of the Network Watcher resource.",
+            "pattern": "^[a-z][a-z0-9_@#$%_]*$"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
