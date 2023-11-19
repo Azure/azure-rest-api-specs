@@ -466,7 +466,7 @@
         },
         "type": {
           "$ref": "#/definitions/FeeType",
-          "description": "Fee Type"
+          "description": "Fee type"
         }
       },
       "required": [
@@ -476,7 +476,7 @@
     },
     "FeeType": {
       "type": "string",
-      "description": "Fee Type",
+      "description": "Fee type",
       "enum": [
         "Recycling"
       ],
@@ -487,7 +487,7 @@
           {
             "name": "Recycling",
             "value": "Recycling",
-            "description": "Recycling Fee"
+            "description": "Recycling fee"
           }
         ]
       }
@@ -533,8 +533,8 @@
           "readOnly": true
         },
         "quantity": {
-          "$ref": "#/definitions/OrderLineQty",
-          "description": "Order line qty"
+          "$ref": "#/definitions/OrderLineQuantity",
+          "description": "Order line quantity"
         },
         "product": {
           "$ref": "#/definitions/Product",
@@ -586,9 +586,9 @@
         "shipTo"
       ]
     },
-    "OrderLineQty": {
+    "OrderLineQuantity": {
       "type": "object",
-      "description": "Order Line Qty",
+      "description": "Order line quantity",
       "properties": {
         "ordered": {
           "type": "integer",
@@ -643,17 +643,17 @@
           {
             "name": "Created",
             "value": "Created",
-            "description": "Order is Created"
+            "description": "Order is created"
           },
           {
             "name": "Confirmed",
             "value": "Confirmed",
-            "description": "Order is Confirmed"
+            "description": "Order is confirmed"
           },
           {
             "name": "PartiallyConfirmed",
             "value": "PartiallyConfirmed",
-            "description": "Order is PartiallyConfirmed"
+            "description": "Order is partially confirmed"
           },
           {
             "name": "PendingCancel",
@@ -663,17 +663,17 @@
           {
             "name": "PendingShipment",
             "value": "PendingShipment",
-            "description": "Order is Ready to Ship cannot be cancelled"
+            "description": "Order is ready to ship cannot be cancelled"
           },
           {
             "name": "PartiallyShipped",
             "value": "PartiallyShipped",
-            "description": "Order is PartiallyShipped"
+            "description": "Order is partially shipped"
           },
           {
             "name": "Shipped",
             "value": "Shipped",
-            "description": "Order is Shipped"
+            "description": "Order is shipped"
           }
         ]
       }
@@ -778,12 +778,12 @@
           {
             "name": "Created",
             "value": "Created",
-            "description": "Order is Created"
+            "description": "Order is created"
           },
           {
             "name": "Confirmed",
             "value": "Confirmed",
-            "description": "Order is Confirmed"
+            "description": "Order is confirmed"
           },
           {
             "name": "PartiallyConfirmed",
@@ -798,17 +798,17 @@
           {
             "name": "PendingShipment",
             "value": "PendingShipment",
-            "description": "Order is Ready to Ship cannot be cancelled"
+            "description": "Order is ready to ship cannot be cancelled"
           },
           {
             "name": "PartiallyShipped",
             "value": "PartiallyShipped",
-            "description": "Order is PartiallyShipped"
+            "description": "Order is partially shipped"
           },
           {
             "name": "Shipped",
             "value": "Shipped",
-            "description": "Order is Shipped"
+            "description": "Order is shipped"
           }
         ]
       }
@@ -868,17 +868,17 @@
     },
     "Price": {
       "type": "object",
-      "description": "Order line Price",
+      "description": "Order line price",
       "properties": {
         "unitAmount": {
           "type": "number",
           "format": "double",
-          "description": "Price per Unit"
+          "description": "Price per unit"
         },
         "shippingCost": {
           "type": "number",
           "format": "double",
-          "description": "Shipping Cost for the line"
+          "description": "Shipping cost for the line"
         },
         "taxes": {
           "type": "array",
@@ -905,7 +905,7 @@
     },
     "Product": {
       "type": "object",
-      "description": "Order line Product",
+      "description": "Order line product",
       "properties": {
         "id": {
           "type": "string",
@@ -923,7 +923,7 @@
     },
     "ProductIdType": {
       "type": "string",
-      "description": "ProductId Type",
+      "description": "Product-Id type",
       "enum": [
         "UPN",
         "PSA",
@@ -946,7 +946,7 @@
           {
             "name": "FulfillmentProductId",
             "value": "FulfillmentProductId",
-            "description": "MS Product Identifier (3x5 SKU)"
+            "description": "MS product identifier (3x5 SKU)"
           }
         ]
       }
@@ -989,7 +989,7 @@
     },
     "ShipTo": {
       "type": "object",
-      "description": "ShipTo Id",
+      "description": "Ship-To id",
       "properties": {
         "id": {
           "type": "string",
@@ -997,7 +997,7 @@
         },
         "type": {
           "$ref": "#/definitions/ShipToIdType",
-          "description": "ShipTo Type"
+          "description": "Ship-To type"
         }
       },
       "required": [
@@ -1007,7 +1007,7 @@
     },
     "ShipToIdType": {
       "type": "string",
-      "description": "shipToId Type",
+      "description": "Ship-To-Id Type",
       "enum": [
         "BusinessLocation",
         "ExternalId"
@@ -1019,7 +1019,7 @@
           {
             "name": "BusinessLocation",
             "value": "BusinessLocation",
-            "description": "Modern Commerce API Business Location"
+            "description": "Modern Commerce API business location"
           },
           {
             "name": "ExternalId",
@@ -1031,7 +1031,7 @@
     },
     "ShippingMethod": {
       "type": "string",
-      "description": "Shipping Method",
+      "description": "Shipping method",
       "enum": [
         "Ground",
         "TwoDay",
@@ -1088,7 +1088,7 @@
         },
         "type": {
           "$ref": "#/definitions/TaxType",
-          "description": "Tax Type"
+          "description": "Tax type"
         }
       },
       "required": [
@@ -1110,12 +1110,12 @@
           {
             "name": "Unit",
             "value": "Unit",
-            "description": "Tax on Unit amount for Product cost"
+            "description": "Tax on unit amount for product cost"
           },
           {
             "name": "Shipping",
             "value": "Shipping",
-            "description": "Tax on Shipping cost"
+            "description": "Tax on shipping cost"
           }
         ]
       }

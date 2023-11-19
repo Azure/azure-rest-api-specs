@@ -23,7 +23,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A Hardware Resource Provider Order resource")
 model Order is TrackedResource<OrderProperties> {
-  @doc("Order Name")
+  @doc("Order Id")
   @key("orderId")
   @path
   @segment("orders")
@@ -48,7 +48,7 @@ model OrderProperties {
   orderLines:OrderLine[];
 
   @doc("Currency for the order")
-  currency?:string;
+  currency:string;
 
   @doc("Market - country code for Order")
   market?:string;
@@ -86,8 +86,8 @@ model OrderLine {
   @visibility("read")
   createdDateTime?: utcDateTime;
   
-  @doc("Order line qty")
-  quantity: OrderLineQty;
+  @doc("Order line quantity")
+  quantity: OrderLineQuantity;
   
   @doc("order line Product")
   product: Product;
@@ -119,8 +119,8 @@ model OrderLine {
   estimatedShippedDate?:plainDate;
 }
 
-@doc("Order Line Qty")
-model OrderLineQty {
+@doc("Order line quantity")
+model OrderLineQuantity {
   @doc("Order lineId Ordered Quantity")
   ordered: int64;
 
@@ -137,7 +137,7 @@ model OrderLineQty {
   returned?:int64;
 }
 
-@doc("Order line Product")
+@doc("Order line product")
 model Product {
   @doc("ProductId")
   id: string;
@@ -146,12 +146,12 @@ model Product {
   type:ProductIdType;
 }
 
-@doc("Order line Price")
+@doc("Order line price")
 model Price {
-  @doc("Price per Unit")
+  @doc("Price per unit")
   unitAmount: float64;
 
-  @doc("Shipping Cost for the line")
+  @doc("Shipping cost for the line")
   shippingCost?: float64;
 
   @doc("Tax for this line")
@@ -167,7 +167,7 @@ model Fee{
   @doc("Fee charged")
   amount: float64;
 
-  @doc("Fee Type")
+  @doc("Fee type")
   type: FeeType;
 }
 
@@ -176,16 +176,16 @@ model Tax{
   @doc("Tax charged")
   amount: float64;
   
-  @doc("Tax Type")
+  @doc("Tax type")
   type: TaxType;
 }
 
-@doc("ShipTo Id")
+@doc("Ship-To id")
 model ShipTo{
   @doc("ShipTo Id")
   id: string;
 
-  @doc("ShipTo Type")
+  @doc("Ship-To type")
   type: ShipToIdType;
 }
 
@@ -211,17 +211,17 @@ interface Orders
   listBySubscription is ArmListBySubscription<Order>;
 }
 
-@doc("ProductId Type")
+@doc("Product-Id type")
 enum ProductIdType{
   @doc("UPN in Big-Catalog")
   UPN,
   @doc("Product, SKU, Availability in Big-Catalog")
   PSA,
-  @doc("MS Product Identifier (3x5 SKU)")
+  @doc("MS product identifier (3x5 SKU)")
   FulfillmentProductId
 }
 
-@doc("Shipping Method")
+@doc("Shipping method")
 enum ShippingMethod{
   @doc("Ground shipping")
   Ground,
@@ -237,25 +237,25 @@ enum ShippingMethod{
   ApoFpo
 }
 
-@doc("shipToId Type")
+@doc("Ship-To-Id Type")
 enum ShipToIdType{
-  @doc("Modern Commerce API Business Location")
+  @doc("Modern Commerce API business location")
   BusinessLocation,
   @doc("Partner External-Id")
   ExternalId
 }
 
-@doc("Fee Type")
+@doc("Fee type")
 enum FeeType{
-  @doc("Recycling Fee")
+  @doc("Recycling fee")
   Recycling
 }
 
 @doc("Tax Type")
 enum TaxType{
-  @doc("Tax on Unit amount for Product cost")
+  @doc("Tax on unit amount for product cost")
   Unit,
-  @doc("Tax on Shipping cost")
+  @doc("Tax on shipping cost")
   Shipping
 }
 
@@ -263,19 +263,19 @@ enum TaxType{
 enum OrderStatus{
   @doc("Order is pending")
   Pending,
-  @doc("Order is Created")
+  @doc("Order is created")
   Created,
-  @doc("Order is Confirmed")
+  @doc("Order is confirmed")
   Confirmed,
   @doc("Order is PartiallyConfirmed")
   PartiallyConfirmed,
   @doc("Order is pending cancellation")
   PendingCancel,
-  @doc("Order is Ready to Ship cannot be cancelled")
+  @doc("Order is ready to ship cannot be cancelled")
   PendingShipment,
-  @doc("Order is PartiallyShipped")
+  @doc("Order is partially shipped")
   PartiallyShipped,
-  @doc("Order is Shipped")
+  @doc("Order is shipped")
   Shipped
 }
 
@@ -283,19 +283,19 @@ enum OrderStatus{
 enum OrderLineStatus{
   @doc("Order is pending")
   Pending,
-  @doc("Order is Created")
+  @doc("Order is created")
   Created,
-  @doc("Order is Confirmed")
+  @doc("Order is confirmed")
   Confirmed,
-  @doc("Order is PartiallyConfirmed")
+  @doc("Order is partially confirmed")
   PartiallyConfirmed,
   @doc("Order is pending cancellation")
   PendingCancel,
-  @doc("Order is Ready to Ship cannot be cancelled")
+  @doc("Order is ready to ship cannot be cancelled")
   PendingShipment,
-  @doc("Order is PartiallyShipped")
+  @doc("Order is partially shipped")
   PartiallyShipped,
-  @doc("Order is Shipped")
+  @doc("Order is shipped")
   Shipped
 }
 
