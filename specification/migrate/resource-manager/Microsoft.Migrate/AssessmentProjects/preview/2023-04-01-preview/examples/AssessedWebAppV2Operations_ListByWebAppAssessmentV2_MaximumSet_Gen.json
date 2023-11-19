@@ -21,22 +21,24 @@
             "properties": {
               "webAppType": "IIS",
               "targetSpecificResult": {
-                "assessmentResult": {
-                  "appServicePlanName": "plan-003-azureappservicecontainer",
-                  "suitability": "ConditionallySuitable",
-                  "securitySuitability": "Suitable",
-                  "webAppSkuName": "Premium_V3",
-                  "webAppSkuSize": "P1 v3"
-                },
-                "migrationIssues": [
-                  {
-                    "issueId": "AuthCheckContainer",
-                    "issueCategory": "Info",
-                    "issueDescriptionList": [
+                "azureAppService": {
+                  "assessmentResult":{
+                    "appServicePlanName": "plan-003-azureappservicecontainer",
+                    "suitability": "ConditionallySuitable",
+                    "securitySuitability": "Suitable",
+                    "webAppSkuName": "Premium_V3",
+                    "webAppSkuSize": "P1 v3"
+                  },
+                  "migrationIssues": [
+                    {
+                      "issueId": "AuthCheckContainer",
+                      "issueCategory": "Info",
+                      "issueDescriptionList": [
                         "windowsAuthentication (/)"
-                    ]
-                  }
-                ]
+                      ]
+                    }
+                  ]
+                }
               },
               "appServicePlanName": "plan-001-azureappservice",
               "machineName": "windows-2k16",
