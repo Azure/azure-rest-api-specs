@@ -2421,6 +2421,7 @@
   },
   "definitions": {
     "ErrorResponse": {
+      "type":"object",
       "description": "The error object.",
       "properties": {
         "error": {
@@ -2431,6 +2432,7 @@
       }
     },
     "NetworkWatcher": {
+      "type": "object",
       "properties": {
         "etag": {
           "readOnly": true,
@@ -2451,6 +2453,7 @@
       "description": "Network watcher in a resource group."
     },
     "NetworkWatcherPropertiesFormat": {
+      "type": "object",
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -2461,6 +2464,7 @@
       "description": "The network watcher properties."
     },
     "NetworkWatcherListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2473,6 +2477,7 @@
       "description": "Response for ListNetworkWatchers API service call."
     },
     "TopologyParameters": {
+      "type": "object",
       "properties": {
         "targetResourceGroupName": {
           "type": "string",
@@ -2490,6 +2495,7 @@
       "description": "Parameters that define the representation of topology."
     },
     "Topology": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -2519,6 +2525,7 @@
       "description": "Topology of the specified resource group."
     },
     "TopologyResource": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -2537,12 +2544,14 @@
           "description": "Holds the associations the resource has with other resources in the resource group.",
           "items": {
             "$ref": "#/definitions/TopologyAssociation"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "description": "The network resource topology information for the given resource group."
     },
     "TopologyAssociation": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -2568,6 +2577,7 @@
       "description": "Resources that have an association with the parent resource."
     },
     "VerificationIPFlowParameters": {
+      "type": "object",
       "description": "Parameters that define the IP flow to be verified.",
       "required": [
         "targetResourceId",
@@ -2622,6 +2632,7 @@
       }
     },
     "VerificationIPFlowResult": {
+      "type": "object",
       "description": "Results of IP flow verification on the target resource.",
       "properties": {
         "access": {
@@ -2635,6 +2646,7 @@
       }
     },
     "NextHopParameters": {
+      "type": "object",
       "description": "Parameters that define the source and destination endpoint.",
       "required": [
         "targetResourceId",
@@ -2661,6 +2673,7 @@
       }
     },
     "NextHopResult": {
+      "type": "object",
       "description": "The information about next hop from the specified VM.",
       "properties": {
         "nextHopType": {
@@ -2690,6 +2703,7 @@
       }
     },
     "SecurityGroupViewParameters": {
+      "type": "object",
       "description": "Parameters that define the VM to check security groups for.",
       "required": [
         "targetResourceId"
@@ -2702,6 +2716,7 @@
       }
     },
     "SecurityGroupViewResult": {
+      "type": "object",
       "description": "The information about security rules applied to the specified VM.",
       "properties": {
         "networkInterfaces": {
@@ -2714,6 +2729,7 @@
       }
     },
     "SecurityGroupNetworkInterface": {
+      "type": "object",
       "description": "Network interface and all its associated security rules.",
       "properties": {
         "id": {
@@ -2727,6 +2743,7 @@
       }
     },
     "SecurityRuleAssociations": {
+      "type": "object",
       "description": "All security rules associated with the network interface.",
       "properties": {
         "networkInterfaceAssociation": {
@@ -2754,6 +2771,7 @@
       }
     },
     "NetworkInterfaceAssociation": {
+      "type": "object",
       "description": "Network interface and its custom security rules.",
       "properties": {
         "id": {
@@ -2771,6 +2789,7 @@
       }
     },
     "SubnetAssociation": {
+      "type": "object",
       "description": "Subnet and it's custom security rules.",
       "properties": {
         "id": {
@@ -2801,6 +2820,7 @@
       "description": "Parameters that define the create packet capture operation."
     },
     "PacketCaptureParameters": {
+      "type": "object",
       "properties": {
         "target": {
           "type": "string",
@@ -2885,6 +2905,7 @@
       "description": "A list of AzureVMSS instances which can be included or excluded to run packet capture. If both included and excluded are empty, then the packet capture will run on all instances of AzureVMSS."
     },
     "PacketCaptureStorageLocation": {
+      "type": "object",
       "properties": {
         "storageId": {
           "type": "string",
@@ -2902,6 +2923,7 @@
       "description": "The storage location for a packet capture session."
     },
     "PacketCaptureFilter": {
+      "type": "object",
       "properties": {
         "protocol": {
           "type": "string",
@@ -2937,6 +2959,7 @@
       "description": "Filter that is applied to packet capture request. Multiple filters can be applied."
     },
     "PacketCaptureListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2949,6 +2972,7 @@
       "description": "List of packet capture sessions."
     },
     "PacketCaptureResult": {
+      "type": "object",
       "properties": {
         "name": {
           "readOnly": true,
@@ -2974,6 +2998,7 @@
       "description": "Information about packet capture session."
     },
     "PacketCaptureResultProperties": {
+      "type": "object",
       "properties": {
         "provisioningState": {
           "readOnly": true,
