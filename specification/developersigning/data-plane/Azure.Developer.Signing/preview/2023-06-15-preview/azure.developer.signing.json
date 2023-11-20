@@ -75,6 +75,22 @@
             "type": "string"
           },
           {
+            "name": "client-version",
+            "in": "header",
+            "description": "An optional client version.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientVersion"
+          },
+          {
+            "name": "x-correlation-id",
+            "in": "header",
+            "description": "An identifier used to batch multiple requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "xCorrelationId"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -98,6 +114,10 @@
                   "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
                   "description": "The status of the operation"
                 },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
                 "result": {
                   "$ref": "#/definitions/SignResult",
                   "description": "The result of the operation."
@@ -114,13 +134,9 @@
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
               },
-              "client-version": {
+              "x-ms-error-code": {
                 "type": "string",
-                "description": "An optional client version."
-              },
-              "x-correlation-id": {
-                "type": "string",
-                "description": "An identifier used to batch multiple requests."
+                "description": "String error code indicating what went wrong."
               }
             }
           },
@@ -386,7 +402,8 @@
       "type": "string",
       "description": "Enum describing allowed operation states.",
       "enum": [
-        "InProgress",
+        "NotStarted",
+        "Running",
         "Succeeded",
         "Failed",
         "Canceled"
@@ -396,8 +413,13 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "InProgress",
-            "value": "InProgress",
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
             "description": "The operation is in progress."
           },
           {

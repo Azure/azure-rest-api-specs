@@ -70,6 +70,7 @@ interface CertificateProfileOperations {
     CertificateProfileName,
     SigningPayloadOptions,
     SignResult,
+    Foundations.ErrorResponse,
     SigningRequestHeadersTraits
   >;
 }
