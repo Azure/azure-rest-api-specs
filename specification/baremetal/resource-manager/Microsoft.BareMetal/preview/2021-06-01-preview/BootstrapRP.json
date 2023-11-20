@@ -274,7 +274,7 @@
           "BareMetalConnections"
         ],
         "description": "Patch the BareMetalConnection. Only the tags may be updated.",
-        "operationId": "BareMetalConnections_Patch",
+        "operationId": "BareMetalConnections_Update",
         "parameters": [
           {
             "name": "bareMetalConnectionObject",
@@ -282,7 +282,7 @@
             "description": "The BareMetalConnection object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/bareMetalConnection"
+              "$ref": "#/definitions/bareMetalConnectionUpdate"
             }
           }
         ],
@@ -302,7 +302,7 @@
         },
         "x-ms-examples": {
           "BareMetalConnections patch": {
-            "$ref": "examples/BareMetalConnections_Patch.json"
+            "$ref": "examples/BareMetalConnections_Update.json"
           }
         }
       }
@@ -316,6 +316,27 @@
       "required": [
         "properties"
       ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag."
+        },
+        "properties": {
+          "description": "BareMetal Connection properties.",
+          "$ref": "#/definitions/bareMetalConnectionProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "bareMetalConnectionUpdate": {
+      "description": "Model representing a BareMetal Connection object.",
+      "type": "object",
+      "x-ms-azure-resource": true,
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
