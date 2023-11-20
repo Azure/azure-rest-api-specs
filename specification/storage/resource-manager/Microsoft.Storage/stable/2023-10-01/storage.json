@@ -1998,6 +1998,9 @@
           "ListLocalUsers": {
             "$ref": "./examples/LocalUsersList.json"
           }
+          "ListNFSv3EnabledLocalUsers": {
+            "$ref": "./examples/LocalUsersListNFSv3Enabled.json"
+          }
         },
         "parameters": [
           {
@@ -2011,6 +2014,20 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$include",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "nfsv3"
+            ],
+            "x-ms-enum": {
+              "name": "ListLocalUserIncludeParam",
+              "modelAsString": true
+            },
+            "description": "Optional, used to include the properties for soft deleted blob containers."
           }
         ],
         "responses": {
