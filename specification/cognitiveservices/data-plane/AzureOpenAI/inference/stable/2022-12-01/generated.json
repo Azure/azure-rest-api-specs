@@ -20,8 +20,8 @@
       {
         "name": "endpoint",
         "in": "path",
-        "required": true,
         "description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus.api.cognitive.microsoft.com).",
+        "required": true,
         "type": "string"
       }
     ]
@@ -97,8 +97,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -148,8 +148,8 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -349,7 +349,12 @@
           "type": "array",
           "description": "A mapping of tokens to maximum log probability values in this completions data.",
           "items": {
-            "type": "object"
+            "type": "object",
+            "additionalProperties": {
+              "format": "float",
+              "type": "number",
+              "x-nullable": true
+            }
           },
           "x-ms-client-name": "topLogprobs",
           "x-ms-identifiers": []

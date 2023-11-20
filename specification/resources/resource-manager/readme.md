@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: package-subscriptions-2022-12
+tag: package-2022-12
 ```
 
 ``` yaml $(package-privatelinks)
@@ -42,7 +42,7 @@ tag: package-locks-2020-05
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2022-06
+tag: package-policy-2023-04
 ```
 
 ``` yaml $(package-resources)
@@ -62,7 +62,7 @@ tag: package-managedapplications-2018-06
 ```
 
 ``` yaml $(package-deploymentscripts)
-tag: package-deploymentscripts-2020-10
+tag: package-deploymentscripts-2023-08
 ```
 
 ``` yaml $(package-templatespecs)
@@ -81,7 +81,87 @@ tag: package-changes-2022-05
 tag: package-snapshots-2022-11
 ```
 
+### Tag: package-policy-2023-04
 
+These settings apply only when `--tag=package-policy-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2023-04'
+input-file:
+- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+- Microsoft.Authorization/stable/2023-04-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2023-04-01/policyDefinitionVersions.json
+- Microsoft.Authorization/stable/2023-04-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2023-04-01/policySetDefinitionVersions.json
+- Microsoft.Authorization/stable/2023-04-01/policyAssignments.json
+- Microsoft.Authorization/preview/2022-07-01-preview/policyExemptions.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+
+suppressions:
+  - code: PathForPutOperation
+    from: policyDefinitions.json
+    reason: Policy definitions can be created at management group or subscriptions
+  - code: PathForPutOperation
+    from: policySetDefinitions.json
+    reason: Policy sets can be created at management group or subscriptions
+  - code: PathForPutOperation
+    from: policyAssignments.json
+    reason: Policy assignments can be created at management group or subscriptions
+  - code: PathForPutOperation
+    from: policyDefinitionVersions.json
+    reason: Policy definition versions can be created at management group or subscriptions
+  - code: PathForPutOperation
+    from: policySetDefinitionVersions.json
+    reason: Policy set versions can be created at management group or subscriptions
+  - code: DeleteResponseBodyEmpty
+    from: policyAssignments.json
+    reason: Policy assignment body is returned on delete and this must match API
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: policyAssignments.json
+    reason: Policy assignments are not tracked resources
+  - code: RepeatedPathInfo
+    from: policyAssignments.json
+    reason: Service requires the scope to be in the body
+  - code: PutResponseSchemaDescription
+    from: policyAssignments.json
+    reason: Service only returns 201 on all successful PUTs
+  - code: PutResponseSchemaDescription
+    from: policyDefinitions.json
+    reason: Service only returns 201 on all successful PUTs
+  - code: PutResponseSchemaDescription
+    from: policySetDefinitions.json
+    reason: Service only returns 201 on all successful PUTs
+  - code: UnSupportedPatchProperties
+    from: policyAssignments.json
+    reason: The location property represents the user-assigned identity location and is changeable for policy assignments
+  - code: PathContainsResourceType
+    from: policyAssignments.json
+    reason: The policy assignment id does contain the resource type
+  - code: ResourceNameRestriction
+    from: policyDefinitionVersions.json
+    reason: Using common types for management group name
+  - code: ResourceNameRestriction
+    from: policySetDefinitionVersions.json
+    reason: Using common types for management group name
+
+```
+
+### Tag: package-deploymentscripts-2023-08
+
+These settings apply only when `--tag=package-deploymentscripts-2023-08` is specified on the command line.
+
+```yaml $(tag) == 'package-deploymentscripts-2023-08'
+input-file:
+  - Microsoft.Resources/stable/2023-08-01/deploymentScripts.json
+
+suppressions:
+  - code: OperationsAPIImplementation
+    reason: OperationsAPI will come from Resources
+```
 ### Tag: package-resources-2023-07
 
 These settings apply only when `--tag=package-resources-2023-07` is specified on the command line.
@@ -1002,10 +1082,37 @@ directive:
     suppress: TrackedResourcePatchOperation
     where: $.definitions.AzurePowerShellScript
     reason: Tooling issue
-  - from: deploymentScripts.json
-    suppress: OperationsAPIImplementation
+  - suppress: OperationsAPIImplementation
+    from: deploymentScripts.json
     where: $.paths
     reason: OperationsAPI will come from Resources
+  - suppress: IntegerTypeMustHaveFormat
+    from: deploymentScripts.json
+    reason: Tooling issue, default is int32, explictly mentioning the format as per doc, it still flags breaking change.
+  - suppress: ResourceNameRestriction
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PropertiesTypeObjectNoDefinition
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: SubscriptionsAndResourceGroupCasing
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ParametersInPointGet
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PatchIdentityProperty
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroErrorContent
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - from: deploymentScripts.json
     suppress: R3006
     where:

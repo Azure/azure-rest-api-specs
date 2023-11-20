@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "id": "827712a5-f942-4997-91c3-7c6cde35600b",
+    "sasValidityInSeconds": 120
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "model": {
+          "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.2-preview1/models/02231df2-012f-45d4-9af0-8a3e4ccc877c"
+        },
+        "modelFiles": [
+          {
+            "name": "0_EN_US_V4.14_UNI/adaptedPrepAM/model.fe",
+            "contentUrl": "https://https://customspeech-usw.blob.core.windows.net/models/0_EN_US_V4.14_UNI/adaptedPrepAM/model.fe?sv=2017-04-17&sr=b&sig=*****%3D&st=2019-01-09T15:56:05Z&se=2019-01-16T16:01:05Z&sp=rl"
+          },
+          {
+            "name": "0_EN_US_V4.14_UNI/graphV2/base.lms",
+            "contentUrl": "https://customspeech-usw.blob.core.windows.net/models/0_EN_US_V4.14_UNI/graphV2/base.lms?sv=2017-04-17&sr=b&sig=*****%3D&st=2019-01-09T15:56:05Z&se=2019-01-16T16:01:05Z&sp=rl"
+          },
+          {
+            "name": "02231df2-012f-45d4-9af0-8a3e4ccc877c/graphV2/custom.lms",
+            "contentUrl": "https://customspeech-usw.blob.core.windows.net/models/02231df2-012f-45d4-9af0-8a3e4ccc877c/graphV2/custom.lms?sv=2017-04-17&sr=b&sig=*****%3D&st=2019-01-09T15:56:05Z&se=2019-01-16T16:01:05Z&sp=rl"
+          },
+          {
+            "name": "02231df2-012f-45d4-9af0-8a3e4ccc877c/graphV2/custom.i1.hclg",
+            "contentUrl": "https://customspeech-usw.blob.core.windows.net/models/02231df2-012f-45d4-9af0-8a3e4ccc877c/graphV2/custom.i1.hclg?sv=2017-04-17&sr=b&sig=*****%3D&st=2019-01-09T15:56:05Z&se=2019-01-16T16:01:05Z&sp=rl"
+          },
+          {
+            "name": "02231df2-012f-45d4-9af0-8a3e4ccc877c/graphV2/custom.i1.lms",
+            "contentUrl": "https://customspeech-usw.blob.core.windows.net/models/02231df2-012f-45d4-9af0-8a3e4ccc877c/graphV2/custom.i1.lms?sv=2017-04-17&sr=b&sig=*****%3D&st=2019-01-09T15:56:05Z&se=2019-01-16T16:01:05Z&sp=rl"
+          },
+          {
+            "name": "0_EN_US_V4.14_UNI/adaptedPrepAM/model.dbn.am",
+            "contentUrl": "https://customspeech-usw.blob.core.windows.net/models/0_EN_US_V4.14_UNI/adaptedPrepAM/model.dbn.am?sv=2017-04-17&sr=b&sig=*****%3D&st=2019-01-09T15:56:05Z&se=2019-01-16T16:01:05Z&sp=rl"
+          }
+        ],
+        "properties": {
+          "IN_FESpec": "audio(%MODELSPATH%0_EN_US_V4.14_UNI/adaptedPrepAM/model.fe,8kHz16kHzLFB80EnergyMLPVADRuntime)",
+          "IN_DNNSpec": "dnn_spec(%MODELSPATH%0_EN_US_V4.14_UNI/adaptedPrepAM/model.dbn.am,40,20),allValidInUtt(1),frameCopyCount(1),resetOnSegmentation(1)",
+          "IN_HCLGSpecBase": "interpolated_lm_base(%MODELSPATH%0_EN_US_V4.14_UNI/graphV2/base.lms)",
+          "IN_HCLGSpec": "interpolated_lm_custom(0.9,%MODELSPATH%fc4fecb3-791a-4c47-88c0-043be3d4967e/graphV2/custom.i1.hclg,%MODELSPATH%fc4fecb3-791a-4c47-88c0-043be3d4967e/graphV2/custom.i1.lms,%MODELSPATH%fc4fecb3-791a-4c47-88c0-043be3d4967e/graphV2/custom.lms)",
+          "IN_BeamSize": 5000,
+          "IN_BeamThreshold": 190,
+          "IN_NBestBeamSize": 1
+        }
+      }
+    }
+  }
+}

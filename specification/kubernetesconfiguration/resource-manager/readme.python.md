@@ -42,6 +42,7 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/
+clear-output-folder: false
 perform-load: false
 ```
 
