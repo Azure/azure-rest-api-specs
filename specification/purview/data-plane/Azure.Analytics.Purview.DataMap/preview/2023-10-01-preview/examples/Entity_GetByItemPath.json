@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "navigationMode": "assetType",
+    "loadHierarchyInfo": true,
+    "itemPath:path": "/azure_sql_server/exampleServer/databases/exampleDatabase",
+    "itemPath:extProp:resourceGroup": "exampleResourceGroup",
+    "itemPath:extProp:subscriptionId": "12345678-1234-5678-1234-86b7251e0353",
+    "itemPath:extProp:serverEndpoint": "exampleServer.database.windows.net"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "entity": {
+          "typeName": "azure_sql_db",
+          "attributes": {
+            "owner": null,
+            "resourceGroupName": "exampleResourceGroup",
+            "qualifiedName": "mssql://exampleServer.database.windows.net/exampleDatabase",
+            "createTime": 0,
+            "compatibilityLevel": 0,
+            "name": "exampleDatabase",
+            "subscriptionId": "12345678-1234-5678-1234-86b7251e0353"
+          },
+          "lastModifiedTS": "1",
+          "guid": "e0ba3f20-f3b5-4d52-b769-ed35a02df60a",
+          "status": "ACTIVE",
+          "createdBy": "ServiceAdmin",
+          "updatedBy": "ServiceAdmin",
+          "createTime": "2023-09-08T06:12:09.626+00:00",
+          "updateTime": "2023-09-08T06:12:09.626+00:00",
+          "version": 0,
+          "isIndexed": true,
+          "hierarchyInfo": [
+            {
+              "typeName": "azure_sql_server",
+              "uniqueAttributes": {
+                "qualifiedName": "mssql://exampleServer.database.windows.net"
+              },
+              "name": "exampleServer",
+              "displayText": "exampleServer"
+            },
+            {
+              "typeName": "azure_sql_db",
+              "uniqueAttributes": {
+                "qualifiedName": "mssql://exampleServer.database.windows.net/exampleDatabase"
+              },
+              "name": "exampleDatabase",
+              "displayText": "exampleDatabase"
+            }
+          ],
+          "relationshipAttributes": {
+            "server": {},
+            "meanings": []
+          },
+          "labels": [],
+          "sensitiveInfoTypes": [],
+          "displayText": "exampleDatabase",
+          "isSourceSystemOwner": false,
+          "proxy": false
+        },
+        "referredEntities": {}
+      }
+    }
+  }
+}

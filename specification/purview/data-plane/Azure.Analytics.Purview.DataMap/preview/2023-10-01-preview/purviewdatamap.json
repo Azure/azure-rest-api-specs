@@ -3131,6 +3131,67 @@
         }
       }
     },
+    "/entity": {
+      "get": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Get complete definition of an entity given its itemPath.",
+        "operationId": "Entity_GetByItemPath",
+        "x-ms-examples": {
+          "Entity_GetByItemPath": {
+            "$ref": "./examples/Entity_GetByItemPath.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/minExtInfo"
+          },
+          {
+            "$ref": "#/parameters/ignoreRelationships"
+          },
+          {
+            "$ref": "#/parameters/loadHiearchyInfo"
+          },
+          {
+            "$ref": "#/parameters/navigationMode"
+          },
+          {
+            "name": "itemPath:path",
+            "in": "query",
+            "description": "The itemPath of the entity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemPath:extProp:{prop}",
+            "in": "query",
+            "description": "The extended property of the itemPath.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AtlasEntityWithExtInfo.",
+            "schema": {
+              "$ref": "#/definitions/AtlasEntityWithExtInfo"
+            }
+          },
+          "404": {
+            "description": "Asset Not Found. If the entity does not exist for the given itemPath.",
+            "$ref": "#/definitions/ErrorResponse"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        }
+      }
+    },
     "/atlas/v2/lineage/{guid}": {
       "get": {
         "tags": [
@@ -7507,6 +7568,32 @@
       "required": false,
       "type": "boolean",
       "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "loadHierarchyInfo": {
+      "name": "loadHierarchyInfo",
+      "description": "Whether to load hierarchy information.",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "navigationMode": {
+      "name": "navigationMode",
+      "description": "The navigation mode of itemPath. Default value: assetType.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "assetType",
+        "assetHierarchy",
+        "azureResourceHierarchy"
+      ],
+      "x-ms-enum": {
+        "name": "NavigationMode",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     },
     "includeTermTemplate": {
