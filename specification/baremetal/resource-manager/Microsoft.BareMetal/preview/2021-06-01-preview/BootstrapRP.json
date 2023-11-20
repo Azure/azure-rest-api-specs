@@ -337,20 +337,12 @@
       "description": "Model representing a BareMetal Connection object.",
       "type": "object",
       "x-ms-azure-resource": true,
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ],
       "properties": {
-        "etag": {
-          "type": "string",
-          "description": "Resource Etag."
-        },
-        "properties": {
-          "description": "BareMetal Connection properties.",
-          "$ref": "#/definitions/bareMetalConnectionProperties",
-          "x-ms-client-flatten": true
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
