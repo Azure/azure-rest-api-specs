@@ -55,3 +55,10 @@ These settings apply only when `--tag=package-2023-07-01` is specified on the co
 input-file:
   - Microsoft.EventHub/stable/2023-07-01/schemaregistry.json
 ```
+
+To use the tsp generated swagger, use the following:
+
+```yaml $(tag) == 'package-2023-07-01'
+input-file:
+  - Microsoft.EventHub/preview/2023-07-01/SchemaRegistry.json
+```
