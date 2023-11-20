@@ -53,4 +53,7 @@ suppressions:
   - code: PathForTrackedResourceTypes
     from: BootstrapRP.json
     reason: Error with Lint test
+  - code: PatchPropertiesCorrespondToPutProperties
+    from: BootstrapRP.json
+    reason: Tags are the only property permitted to be updated.  Tags is inside TrackedResource on the PUT, which has a required field, location.
 ```
