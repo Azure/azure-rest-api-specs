@@ -24,16 +24,25 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the communicationservices.
 
-```yaml
+``` yaml
 openapi-type: data-plane
-tag: package-2020-07-20-preview1
+tag: package-preview-2023-05
 ```
 
+
+### Tag: package-preview-2023-05
+
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-05'
+input-file:
+  - preview/2023-05-14-privatepreview/communicationservicessms.json
+```
 ### Tag: package-2020-07-20-preview1
 
 These settings apply only when `--tag=package-2020-07-20-preview1` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-07-20-preview1'
+``` yaml $(tag) == 'package-2020-07-20-preview1'
 input-file:
   - preview/2020-07-20-preview1/communicationservicessms.json
 title:
@@ -44,7 +53,7 @@ title:
 
 These settings apply only when `--tag=package-sms-2021-03-07` is specified on the command line.
 
-```yaml $(tag) == 'package-sms-2021-03-07'
+``` yaml $(tag) == 'package-sms-2021-03-07'
 input-file:
   - stable/2021-03-07/communicationservicessms.json
 title:
