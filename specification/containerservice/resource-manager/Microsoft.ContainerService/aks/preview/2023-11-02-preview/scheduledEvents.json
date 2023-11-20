@@ -1,0 +1,254 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerServiceClient",
+    "description": "The Container Service Client.",
+    "version": "2023-11-02-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/scheduledEvents/{scheduledEventName}": {
+      "get": {
+        "tags": [
+          "ScheduledEvents"
+        ],
+        "operationId": "ScheduledEvents_Get",
+        "summary": "Access to this resource type is not currently available via GET. To consume please use System Topics or Azure Resource Graph.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./managedClusters.json#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScheduledEventNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScheduledEvent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./managedClusters.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Scheduled Event": {
+            "$ref": "./examples/ScheduledEventsGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/scheduledEvents": {
+      "get": {
+        "tags": [
+          "ScheduledEvents"
+        ],
+        "operationId": "ScheduledEvents_List",
+        "summary": "Access to this resource type is not currently available via GET. To consume please use System Topics or Azure Resource Graph.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./managedClusters.json#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScheduledEventList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./managedClusters.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Scheduled Event": {
+            "$ref": "./examples/ScheduledEventsList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ScheduledEventList": {
+      "type": "object",
+      "description": "List of scheduled events",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScheduledEvent"
+          },
+          "description": "Scheduled events list"
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ScheduledEvent": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties for a scheduled event.",
+          "$ref": "#/definitions/ScheduledEventProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Scheduled event."
+    },
+    "ScheduledEventProperties": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of a scheduled event."
+        },
+        "eventId": {
+          "type": "string",
+          "description": "The event id of a scheduled event."
+        },
+        "eventSource": {
+          "type": "string",
+          "description": "The source of a scheduled event."
+        },
+        "eventStatus": {
+          "type": "string",
+          "enum": [
+            "Scheduled",
+            "Started",
+            "Completed",
+            "Cancelled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "eventStatus",
+            "modelAsString": true
+          },
+          "description": "The status of a scheduled event."
+        },
+        "scheduledTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of a scheduled event."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of a scheduled event starts."
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of a scheduled event last updates."
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ContainerService/managedClusters"
+                },
+                {
+                  "type": "Microsoft.ContainerService/managedClusters/agentPools"
+                }
+              ]
+            }
+          },
+          "description": "The list of resources of a scheduled event."
+        },
+        "resourceType": {
+          "type": "string",
+          "enum": [
+            "ManagedCluster",
+            "AgentPool"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceType",
+            "modelAsString": true
+          },
+          "description": "The resource type of a scheduled event."
+        }
+      },
+      "description": "Properties for a scheduled event."
+    }
+  },
+  "parameters": {
+    "ScheduledEventNameParameter": {
+      "name": "scheduledEventName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "description": "The name of the scheduled event."
+    }
+  }
+}

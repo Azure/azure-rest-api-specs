@@ -45,6 +45,7 @@ These settings apply only when `--tag=package-preview-2023-11` is specified on t
 ```yaml $(tag) == 'package-preview-2023-11'
 input-file:
   - preview/2023-11-02-preview/managedClusters.json
+  - preview/2023-11-02-preview/scheduledEvents.json
 ```
 ### Tag: package-2023-10
 
