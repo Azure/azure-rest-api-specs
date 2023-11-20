@@ -55,6 +55,14 @@ input-file:
   - stable/2022-07-13/common.json
 ```
 
+### Tag: package-2023-11-15-stable
+These settings apply only when `--tag=package-2023-11-15-stable` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11-15-stable'
+input-file:
+  - stable/2023-11-15/common.json
+```
+
 ---
 
 # Code Generation
