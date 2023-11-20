@@ -57,6 +57,8 @@ directive:
 suppressions:
   - code: LroPostReturn
     reason: start,stop,flushDNSsetting api do not have return body in async operation
+  - code: PostResponseCodes
+    reason: start,stop,flushDNSSetting API do not have return body
 ```
 
 
@@ -68,6 +70,15 @@ These settings apply only when `--tag=package-2023-12` is specified on the comma
 input-file:
   - Microsoft.AppPlatform/stable/2023-12-01/appplatform.json
 ```
+### Tag: package-2023-12
+
+These settings apply only when `--tag=package-2023-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-12'
+input-file:
+  - Microsoft.AppPlatform/stable/2023-12-01/appplatform.json
+```
+
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
