@@ -95,6 +95,7 @@ need to move an entity to another collection.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "This is an existing Atlas API"
   @doc("List entities in bulk identified by its GUIDs.")
   @route("/atlas/v2/entity/bulk")
   @get
@@ -151,6 +152,8 @@ entities.
     EntityMutationResponse
   >;
 
+  
+  #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "This is an existing Atlas API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("""
 Delete a list of entities in bulk identified by their GUIDs or unique
@@ -637,6 +640,7 @@ default is false.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an Atlas existing api"
   @doc("Delete business metadata attributes from an entity.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata/{bmName}")
   @delete
@@ -656,7 +660,8 @@ default is false.
     },
     void
   >;
-
+  
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an Atlas existing api"
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
   @doc("Add or update business metadata attributes.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata/{bmName}")
