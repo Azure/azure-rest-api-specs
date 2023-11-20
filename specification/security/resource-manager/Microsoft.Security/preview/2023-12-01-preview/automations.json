@@ -240,6 +240,9 @@
           "204": {
             "description": "NoContent"
           },
+          "200": {
+            "description": "Automation deleted"
+          },
           "default": {
             "description": "Error response that describes why the operation failed.",
             "schema": {
@@ -296,6 +299,7 @@
     }
   },
   "definitions": {
+    "type": "object",
     "AutomationList": {
       "description": "List of security automations response.",
       "required": [
@@ -349,21 +353,24 @@
           "description": "A collection of scopes on which the security automations logic is applied. Supported scopes are the subscription itself or a resource group under that subscription. The automation will only apply on defined scopes.",
           "items": {
             "$ref": "#/definitions/AutomationScope"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "sources": {
           "type": "array",
           "description": "A collection of the source event types which evaluate the security automation set of rules.",
           "items": {
             "$ref": "#/definitions/AutomationSource"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "actions": {
           "type": "array",
           "description": "A collection of the actions which are triggered if all the configured rules evaluations, within at least one rule set, are true.",
           "items": {
             "$ref": "#/definitions/AutomationAction"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -440,7 +447,8 @@
           "description": "A set of rules which evaluate upon event interception. A logical disjunction is applied between defined rule sets (logical 'or').",
           "items": {
             "$ref": "#/definitions/AutomationRuleSet"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -535,6 +543,10 @@
         "connectionString": {
           "type": "string",
           "description": "The target Event Hub connection string (it will not be included in any response)."
+        },
+        "isTrustedServiceEnabled": {
+          "type": "boolean",
+          "description": "Indicates wheter the trusted service is enabled or not."
         }
       }
     },
@@ -562,7 +574,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AutomationTriggeringRule"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
