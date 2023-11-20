@@ -413,7 +413,7 @@
         "Off"
       ],
       "x-ms-enum": {
-        "name": "State",
+        "name": "state",
         "modelAsString": true,
         "values": [
           {
@@ -437,7 +437,7 @@
         "Contributor"
       ],
       "x-ms-enum": {
-        "name": "roles",
+        "name": "securityContactRole",
         "modelAsString": true,
         "values": [
           {
@@ -462,6 +462,7 @@
   },
   "parameters": {
     "SecurityContactName": {
+      "type": "string",
       "enum": [
         "Default"
       ],
@@ -477,7 +478,6 @@
       },
       "in": "path",
       "required": true,
-      "type": "string",
       "description": "Name of the security contact object",
       "x-ms-parameter-location": "method"
     },
