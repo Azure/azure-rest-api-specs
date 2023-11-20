@@ -35,6 +35,11 @@
   },
   "paths": {
     "/providers/Microsoft.BareMetal/operations": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "tags": [
           "Operations"
@@ -46,11 +51,6 @@
             "$ref": "examples/Operations_List.json"
           }
         },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
