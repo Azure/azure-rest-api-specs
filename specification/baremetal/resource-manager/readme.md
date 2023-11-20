@@ -40,8 +40,8 @@ input-file:
 ## Suppression
 
 ``` yaml
-directive:
-  - suppress: ParametersInPointGet
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+suppressions:
+  - code: ParametersInPointGet
+    from: swagger-document
+    reason: Error with Lint test
 ```
