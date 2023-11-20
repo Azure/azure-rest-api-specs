@@ -42,6 +42,22 @@ input-file:
 ``` yaml
 suppressions:
   - code: ParametersInPointGet
-    from: swagger-document
+    from: BootstrapRP.json
+    reason: Error with Lint test
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: BootstrapRP.json
+    reason: Error with Lint test
+suppressions:
+  - code: RequestBodyMustExistForPutPatch
+    from: BootstrapRP.json
+    reason: Error with Lint test
+suppressions:
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: BootstrapRP.json
+    reason: Error with Lint test
+suppressions:
+  - code: PathForTrackedResourceTypes
+    from: BootstrapRP.json
     reason: Error with Lint test
 ```
