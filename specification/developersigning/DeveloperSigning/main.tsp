@@ -188,9 +188,9 @@ model BytesBody<ContentType> {
 alias SigningRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTrait<{
   @doc("An optional client version.")
   @header
-  clientVersion: string;
+  clientVersion?: string;
 
   @doc("An identifier used to batch multiple requests.")
   @header
-  xCorrelationId: string;
+  xCorrelationId?: string;
 }>;
