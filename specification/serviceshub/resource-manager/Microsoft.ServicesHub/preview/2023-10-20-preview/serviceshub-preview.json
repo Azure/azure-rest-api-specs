@@ -755,7 +755,7 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "post connector information payload object",
+            "description": "connector information payload object",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AssessmentConnectorResource"
@@ -785,6 +785,114 @@
         "x-ms-examples": {
           "Create/Update Assessment Connector Information": {
             "$ref": "./examples/PutAssessmentConnectorInfo.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AssessmentConnectorInfo"
+        ],
+        "summary": "Update Assessment Connector information linked with EngageHub Spaces'.",
+        "operationId": "Update_AssessmentConnectorInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-engage-hub-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "EngageHub 1PA token to be send to EH Gateway",
+            "x-ms-secret": true
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "connector information payload object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssessmentConnectorResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Assessment Connector has been updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssessmentConnectorResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/Update Assessment Connector Information": {
+            "$ref": "./examples/PatchAssessmentConnectorInfo.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AssessmentConnectorInfo"
+        ],
+        "summary": "Deletes Assessment Connector information linked with EngageHub Spaces'.",
+        "operationId": "Delete_AssessmentConnectorInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-engage-hub-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "EngageHub 1PA token to be send to EH Gateway",
+            "x-ms-secret": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Assessment Connector information has been deleted successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssessmentConnectorResource"
+            }
+          },
+          "204": {
+            "description": "The Assessment Connector information is not found or has been deleted already."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/Update Assessment Connector Information": {
+            "$ref": "./examples/DeleteAssessmentConnectorInfo.json"
           }
         }
       }
@@ -1481,6 +1589,7 @@
       "properties": {
         "properties": {
           "description": "Engage Hub Space Properties",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/EngageHubSpaceProperties"
         }
       },
