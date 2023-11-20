@@ -704,7 +704,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SpacesResponseModel"
+              "$ref": "#/definitions/EngageHubSpacesListResult"
             }
           },
           "default": {
@@ -713,6 +713,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Get Spaces List for Engage Hub Context": {
@@ -1455,31 +1458,39 @@
         }
       }
     },
-    "SpacesResponseModel": {
+    "EngageHubSpacesListResult": {
       "type": "object",
       "description": "EngageHub SpacesList Result.",
       "properties": {
-        "properties": {
-          "description": "EngageHub SpaceList Properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SpacesResponseModelProperties"
-        }
-      }
-    },
-    "SpacesResponseModelProperties": {
-      "type": "object",
-      "description": "Gives the EngageHub SpaceList",
-      "properties": {
         "value": {
+          "description": "List of EngageHub Spaces.",
           "type": "array",
-          "description": "List of Spaces.",
           "items": {
-            "$ref": "#/definitions/SpacesList"
+            "$ref": "#/definitions/EngageHubSpace"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of Engage Hub Spaces, if there are any."
         }
       }
     },
-    "SpacesList": {
+    "EngageHubSpace": {
+      "type": "object",
+      "description": "EngageHub Space",
+      "properties": {
+        "properties": {
+          "description": "Engage Hub Space Properties",
+          "$ref": "#/definitions/EngageHubSpaceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]      
+    },
+    "EngageHubSpaceProperties": {
       "type": "object",
       "description": "List of Spaces.",
       "properties": {
@@ -1549,7 +1560,12 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AssessmentConnectorProperties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "AssessmentConnectorProperties": {
       "type": "object",
@@ -1580,8 +1596,7 @@
           "format": "int32",
           "description": "Count of Assessments mapped to the Connector resource."
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "LogAnalyticsWorkspaceForEngageHub": {
       "type": "object",
