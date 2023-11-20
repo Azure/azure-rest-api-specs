@@ -41,9 +41,6 @@ input-file:
 
 ``` yaml
 suppressions:
-  - code: ParametersInPointGet
-    from: BootstrapRP.json
-    reason: Error with Lint test
   - code: RequestBodyMustExistForPutPatch
     from: BootstrapRP.json
     reason: Error with Lint test

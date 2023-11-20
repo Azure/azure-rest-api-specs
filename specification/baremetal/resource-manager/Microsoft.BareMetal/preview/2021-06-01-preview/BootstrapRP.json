@@ -71,6 +71,14 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.BareMetal/bareMetalConnections": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "tags": [
           "BareMetalConnections"
@@ -80,14 +88,6 @@
         },
         "description": "List all BareMetalConnection objects in the subscription. ",
         "operationId": "BareMetalConnections_ListSubscription",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -110,6 +110,17 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroup/{resourceGroupName}/providers/Microsoft.BareMetal/bareMetalConnections": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "tags": [
           "BareMetalConnections"
@@ -119,17 +130,6 @@
         },
         "description": "List all BareMetalConnection objects in the resource group.",
         "operationId": "BareMetalConnections_ListResourceGroup",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
