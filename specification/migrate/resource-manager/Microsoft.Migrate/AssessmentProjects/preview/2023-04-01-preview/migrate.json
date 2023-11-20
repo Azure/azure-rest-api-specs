@@ -10,13 +10,21 @@
       }
     ]
   },
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "host": "management.azure.com",
-  "produces": ["application/json"],
-  "consumes": ["application/json"],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -174,7 +182,9 @@
     "/providers/Microsoft.Migrate/operations": {
       "get": {
         "operationId": "Operations_List",
-        "tags": ["Operations"],
+        "tags": [
+          "Operations"
+        ],
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -208,7 +218,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/assessmentProjects": {
       "get": {
         "operationId": "AssessmentProjectsOperations_ListBySubscription",
-        "tags": ["AssessmentProjectsOperations"],
+        "tags": [
+          "AssessmentProjectsOperations"
+        ],
         "description": "List AssessmentProject resources by subscription ID",
         "parameters": [
           {
@@ -245,7 +257,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects": {
       "get": {
         "operationId": "AssessmentProjectsOperations_ListByResourceGroup",
-        "tags": ["AssessmentProjectsOperations"],
+        "tags": [
+          "AssessmentProjectsOperations"
+        ],
         "description": "List AssessmentProject resources by resource group",
         "parameters": [
           {
@@ -285,7 +299,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}": {
       "get": {
         "operationId": "AssessmentProjectsOperations_Get",
-        "tags": ["AssessmentProjectsOperations"],
+        "tags": [
+          "AssessmentProjectsOperations"
+        ],
         "description": "Get a AssessmentProject",
         "parameters": [
           {
@@ -328,7 +344,9 @@
       },
       "put": {
         "operationId": "AssessmentProjectsOperations_Create",
-        "tags": ["AssessmentProjectsOperations"],
+        "tags": [
+          "AssessmentProjectsOperations"
+        ],
         "description": "Create a AssessmentProject",
         "parameters": [
           {
@@ -397,7 +415,9 @@
       },
       "patch": {
         "operationId": "AssessmentProjectsOperations_Update",
-        "tags": ["AssessmentProjectsOperations"],
+        "tags": [
+          "AssessmentProjectsOperations"
+        ],
         "description": "Update a AssessmentProject",
         "parameters": [
           {
@@ -467,7 +487,9 @@
       },
       "delete": {
         "operationId": "AssessmentProjectsOperations_Delete",
-        "tags": ["AssessmentProjectsOperations"],
+        "tags": [
+          "AssessmentProjectsOperations"
+        ],
         "description": "Delete a AssessmentProject",
         "parameters": [
           {
@@ -512,7 +534,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/aksAssessmentOptions": {
       "get": {
         "operationId": "AksOptionsOperations_ListByAssessmentProject",
-        "tags": ["AKSOptionsOperations"],
+        "tags": [
+          "AKSOptionsOperations"
+        ],
         "description": "List AKSAssessmentOptions resources by AssessmentProject",
         "parameters": [
           {
@@ -560,7 +584,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/aksAssessmentOptions/{assessmentOptionsName}": {
       "get": {
         "operationId": "AksOptionsOperations_Get",
-        "tags": ["AKSOptionsOperations"],
+        "tags": [
+          "AKSOptionsOperations"
+        ],
         "description": "Get a AKSAssessmentOptions",
         "parameters": [
           {
@@ -613,7 +639,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/aksAssessments": {
       "get": {
         "operationId": "AksAssessmentOperations_ListByAssessmentProject",
-        "tags": ["AKSAssessmentOperations"],
+        "tags": [
+          "AKSAssessmentOperations"
+        ],
         "description": "List AKSAssessment resources by AssessmentProject",
         "parameters": [
           {
@@ -691,7 +719,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/aksAssessments/{assessmentName}": {
       "get": {
         "operationId": "AksAssessmentOperations_Get",
-        "tags": ["AKSAssessmentOperations"],
+        "tags": [
+          "AKSAssessmentOperations"
+        ],
         "description": "Get a AKSAssessment",
         "parameters": [
           {
@@ -742,7 +772,9 @@
       },
       "put": {
         "operationId": "AksAssessmentOperations_Create",
-        "tags": ["AKSAssessmentOperations"],
+        "tags": [
+          "AKSAssessmentOperations"
+        ],
         "description": "Create a AKSAssessment",
         "parameters": [
           {
@@ -819,7 +851,9 @@
       },
       "delete": {
         "operationId": "AksAssessmentOperations_Delete",
-        "tags": ["AKSAssessmentOperations"],
+        "tags": [
+          "AKSAssessmentOperations"
+        ],
         "description": "Delete a AKSAssessment",
         "parameters": [
           {
@@ -872,7 +906,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/aksAssessments/{assessmentName}/assessedWebApps": {
       "get": {
         "operationId": "AssessedWebApplicationOperations_ListByAksAssessment",
-        "tags": ["AssessedWebApplicationOperations"],
+        "tags": [
+          "AssessedWebApplicationOperations"
+        ],
         "description": "List AssessedWebApplication resources by AKSAssessment",
         "parameters": [
           {
@@ -958,7 +994,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/aksAssessments/{assessmentName}/assessedWebApps/{assessedWorkload}": {
       "get": {
         "operationId": "AssessedWebApplicationOperations_Get",
-        "tags": ["AssessedWebApplicationOperations"],
+        "tags": [
+          "AssessedWebApplicationOperations"
+        ],
         "description": "Get a AssessedWebApplication",
         "parameters": [
           {
@@ -1019,7 +1057,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/aksAssessments/{assessmentName}/clusters": {
       "get": {
         "operationId": "AksClusterOperations_ListByAksAssessment",
-        "tags": ["AKSClusterOperations"],
+        "tags": [
+          "AKSClusterOperations"
+        ],
         "description": "List AKSCluster resources by AKSAssessment",
         "parameters": [
           {
@@ -1082,7 +1122,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/aksAssessments/{assessmentName}/clusters/{clusterName}": {
       "get": {
         "operationId": "AksClusterOperations_Get",
-        "tags": ["AKSClusterOperations"],
+        "tags": [
+          "AKSClusterOperations"
+        ],
         "description": "Get a AKSCluster",
         "parameters": [
           {
@@ -1143,7 +1185,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/aksAssessments/{assessmentName}/costDetails": {
       "get": {
         "operationId": "AksCostDetailOperations_ListByAksAssessment",
-        "tags": ["AKSCostDetailOperations"],
+        "tags": [
+          "AKSCostDetailOperations"
+        ],
         "description": "List AKSCostDetail resources by AKSAssessment",
         "parameters": [
           {
@@ -1206,7 +1250,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/aksAssessments/{assessmentName}/downloadUrl": {
       "post": {
         "operationId": "AksAssessmentOperations_DownloadUrl",
-        "tags": ["AKSAssessmentOperations"],
+        "tags": [
+          "AKSAssessmentOperations"
+        ],
         "description": "Get URL for downloading AKS Assessment Report.",
         "parameters": [
           {
@@ -1286,7 +1332,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/aksAssessments/{assessmentName}/summaries": {
       "get": {
         "operationId": "AksSummaryOperations_ListByAksAssessment",
-        "tags": ["AKSSummaryOperations"],
+        "tags": [
+          "AKSSummaryOperations"
+        ],
         "description": "List AKSSummary resources by AKSAssessment",
         "parameters": [
           {
@@ -1342,7 +1390,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/aksAssessments/{assessmentName}/summaries/{summaryName}": {
       "get": {
         "operationId": "AksSummaryOperations_Get",
-        "tags": ["AKSSummaryOperations"],
+        "tags": [
+          "AKSSummaryOperations"
+        ],
         "description": "Get a AKSSummary",
         "parameters": [
           {
@@ -1403,7 +1453,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/assessmentOptions": {
       "get": {
         "operationId": "AssessmentOptionsOperations_ListByAssessmentProject",
-        "tags": ["AssessmentOptionsOperations"],
+        "tags": [
+          "AssessmentOptionsOperations"
+        ],
         "description": "List AssessmentOptions resources by AssessmentProject",
         "parameters": [
           {
@@ -1451,7 +1503,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/assessmentOptions/{assessmentOptionsName}": {
       "get": {
         "operationId": "AssessmentOptionsOperations_Get",
-        "tags": ["AssessmentOptionsOperations"],
+        "tags": [
+          "AssessmentOptionsOperations"
+        ],
         "description": "Get a AssessmentOptions",
         "parameters": [
           {
@@ -1504,7 +1558,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/avsAssessmentOptions": {
       "get": {
         "operationId": "AvsAssessmentOptionsOperations_ListByAssessmentProject",
-        "tags": ["AvsAssessmentOptionsOperations"],
+        "tags": [
+          "AvsAssessmentOptionsOperations"
+        ],
         "description": "List AvsAssessmentOptions resources by AssessmentProject",
         "parameters": [
           {
@@ -1552,7 +1608,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/avsAssessmentOptions/{avsAssessmentOptionsName}": {
       "get": {
         "operationId": "AvsAssessmentOptionsOperations_Get",
-        "tags": ["AvsAssessmentOptionsOperations"],
+        "tags": [
+          "AvsAssessmentOptionsOperations"
+        ],
         "description": "Get a AvsAssessmentOptions",
         "parameters": [
           {
@@ -1605,7 +1663,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases": {
       "get": {
         "operationId": "BusinessCaseOperations_ListByAssessmentProject",
-        "tags": ["BusinessCaseOperations"],
+        "tags": [
+          "BusinessCaseOperations"
+        ],
         "description": "List BusinessCase resources by AssessmentProject",
         "parameters": [
           {
@@ -1653,7 +1713,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}": {
       "get": {
         "operationId": "BusinessCaseOperations_Get",
-        "tags": ["BusinessCaseOperations"],
+        "tags": [
+          "BusinessCaseOperations"
+        ],
         "description": "Get a BusinessCase",
         "parameters": [
           {
@@ -1704,7 +1766,9 @@
       },
       "put": {
         "operationId": "BusinessCaseOperations_Create",
-        "tags": ["BusinessCaseOperations"],
+        "tags": [
+          "BusinessCaseOperations"
+        ],
         "description": "Create a BusinessCase",
         "parameters": [
           {
@@ -1781,7 +1845,9 @@
       },
       "delete": {
         "operationId": "BusinessCaseOperations_Delete",
-        "tags": ["BusinessCaseOperations"],
+        "tags": [
+          "BusinessCaseOperations"
+        ],
         "description": "Delete a BusinessCase",
         "parameters": [
           {
@@ -1834,7 +1900,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/avssummaries": {
       "get": {
         "operationId": "BusinessCaseAvsSummaryOperations_ListByBusinessCase",
-        "tags": ["BusinessCaseAvsSummaryOperations"],
+        "tags": [
+          "BusinessCaseAvsSummaryOperations"
+        ],
         "description": "List AvsSummary resources by BusinessCase",
         "parameters": [
           {
@@ -1890,7 +1958,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/avssummaries/{avsSummaryName}": {
       "get": {
         "operationId": "BusinessCaseAvsSummaryOperations_Get",
-        "tags": ["BusinessCaseAvsSummaryOperations"],
+        "tags": [
+          "BusinessCaseAvsSummaryOperations"
+        ],
         "description": "Get a AvsSummary",
         "parameters": [
           {
@@ -1951,7 +2021,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/compareSummary": {
       "post": {
         "operationId": "BusinessCaseOperations_CompareSummary",
-        "tags": ["BusinessCaseOperations"],
+        "tags": [
+          "BusinessCaseOperations"
+        ],
         "summary": "Get Compare summary report for Business case.",
         "description": "A long-running resource action.",
         "parameters": [
@@ -2032,7 +2104,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/evaluatedAvsMachines": {
       "get": {
         "operationId": "EvaluatedAvsMachinesOperations_ListByBusinessCase",
-        "tags": ["EvaluatedAvsMachinesOperations"],
+        "tags": [
+          "EvaluatedAvsMachinesOperations"
+        ],
         "description": "List EvaluatedAvsMachine resources by BusinessCase",
         "parameters": [
           {
@@ -2118,7 +2192,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/evaluatedAvsMachines/{evaluatedAvsMachineName}": {
       "get": {
         "operationId": "EvaluatedAvsMachinesOperations_Get",
-        "tags": ["EvaluatedAvsMachinesOperations"],
+        "tags": [
+          "EvaluatedAvsMachinesOperations"
+        ],
         "description": "Get a EvaluatedAvsMachine",
         "parameters": [
           {
@@ -2179,7 +2255,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/evaluatedMachines": {
       "get": {
         "operationId": "EvaluatedMachinesOperations_ListByBusinessCase",
-        "tags": ["EvaluatedMachinesOperations"],
+        "tags": [
+          "EvaluatedMachinesOperations"
+        ],
         "description": "List EvaluatedMachine resources by BusinessCase",
         "parameters": [
           {
@@ -2265,7 +2343,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/evaluatedMachines/{evaluatedMachineName}": {
       "get": {
         "operationId": "EvaluatedMachinesOperations_Get",
-        "tags": ["EvaluatedMachinesOperations"],
+        "tags": [
+          "EvaluatedMachinesOperations"
+        ],
         "description": "Get a EvaluatedMachine",
         "parameters": [
           {
@@ -2326,7 +2406,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/evaluatedSqlEntities": {
       "get": {
         "operationId": "EvaluatedSqlEntitiesOperations_ListByBusinessCase",
-        "tags": ["EvaluatedSqlEntitiesOperations"],
+        "tags": [
+          "EvaluatedSqlEntitiesOperations"
+        ],
         "description": "List EvaluatedSqlEntity resources by BusinessCase",
         "parameters": [
           {
@@ -2412,7 +2494,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/evaluatedSqlEntities/{evaluatedSqlEntityName}": {
       "get": {
         "operationId": "EvaluatedSqlEntitiesOperations_Get",
-        "tags": ["EvaluatedSqlEntitiesOperations"],
+        "tags": [
+          "EvaluatedSqlEntitiesOperations"
+        ],
         "description": "Get a EvaluatedSqlEntity",
         "parameters": [
           {
@@ -2473,7 +2557,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/evaluatedWebApps": {
       "get": {
         "operationId": "EvaluatedWebAppsOperations_ListByBusinessCase",
-        "tags": ["EvaluatedWebAppsOperations"],
+        "tags": [
+          "EvaluatedWebAppsOperations"
+        ],
         "description": "List EvaluatedWebApp resources by BusinessCase",
         "parameters": [
           {
@@ -2559,7 +2645,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/evaluatedWebApps/{evaluatedWebAppName}": {
       "get": {
         "operationId": "EvaluatedWebAppsOperations_Get",
-        "tags": ["EvaluatedWebAppsOperations"],
+        "tags": [
+          "EvaluatedWebAppsOperations"
+        ],
         "description": "Get a EvaluatedWebApp",
         "parameters": [
           {
@@ -2620,7 +2708,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/getReportDownloadUrl": {
       "post": {
         "operationId": "BusinessCaseOperations_GetReportDownloadUrl",
-        "tags": ["BusinessCaseOperations"],
+        "tags": [
+          "BusinessCaseOperations"
+        ],
         "summary": "Get download URL for the business case report.",
         "description": "Get the URL for downloading the business case in a report format.",
         "parameters": [
@@ -2701,7 +2791,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/iaassummaries": {
       "get": {
         "operationId": "BusinessCaseIaasSummaryOperations_ListByBusinessCase",
-        "tags": ["BusinessCaseIaasSummaryOperations"],
+        "tags": [
+          "BusinessCaseIaasSummaryOperations"
+        ],
         "description": "List IaasSummary resources by BusinessCase",
         "parameters": [
           {
@@ -2757,7 +2849,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/iaassummaries/{iaasSummaryName}": {
       "get": {
         "operationId": "BusinessCaseIaasSummaryOperations_Get",
-        "tags": ["BusinessCaseIaasSummaryOperations"],
+        "tags": [
+          "BusinessCaseIaasSummaryOperations"
+        ],
         "description": "Get a IaasSummary",
         "parameters": [
           {
@@ -2818,7 +2912,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/overviewsummaries": {
       "get": {
         "operationId": "BusinessCaseOverviewSummaryOperations_ListByBusinessCase",
-        "tags": ["BusinessCaseOverviewSummaryOperations"],
+        "tags": [
+          "BusinessCaseOverviewSummaryOperations"
+        ],
         "description": "List OverviewSummary resources by BusinessCase",
         "parameters": [
           {
@@ -2874,7 +2970,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/overviewsummaries/{overviewSummaryName}": {
       "get": {
         "operationId": "BusinessCaseOverviewSummaryOperations_Get",
-        "tags": ["BusinessCaseOverviewSummaryOperations"],
+        "tags": [
+          "BusinessCaseOverviewSummaryOperations"
+        ],
         "description": "Get a OverviewSummary",
         "parameters": [
           {
@@ -2935,7 +3033,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/paassummaries": {
       "get": {
         "operationId": "BusinessCasePaasSummaryOperations_ListByBusinessCase",
-        "tags": ["BusinessCasePaasSummaryOperations"],
+        "tags": [
+          "BusinessCasePaasSummaryOperations"
+        ],
         "description": "List PaasSummary resources by BusinessCase",
         "parameters": [
           {
@@ -2991,7 +3091,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/businesscases/{businessCaseName}/paassummaries/{paasSummaryName}": {
       "get": {
         "operationId": "BusinessCasePaasSummaryOperations_Get",
-        "tags": ["BusinessCasePaasSummaryOperations"],
+        "tags": [
+          "BusinessCasePaasSummaryOperations"
+        ],
         "description": "Get a PaasSummary",
         "parameters": [
           {
@@ -3052,7 +3154,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups": {
       "get": {
         "operationId": "GroupsOperations_ListByAssessmentProject",
-        "tags": ["GroupsOperations"],
+        "tags": [
+          "GroupsOperations"
+        ],
         "description": "List Group resources by AssessmentProject",
         "parameters": [
           {
@@ -3100,7 +3204,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}": {
       "get": {
         "operationId": "GroupsOperations_Get",
-        "tags": ["GroupsOperations"],
+        "tags": [
+          "GroupsOperations"
+        ],
         "description": "Get a Group",
         "parameters": [
           {
@@ -3151,7 +3257,9 @@
       },
       "put": {
         "operationId": "GroupsOperations_Create",
-        "tags": ["GroupsOperations"],
+        "tags": [
+          "GroupsOperations"
+        ],
         "description": "Create a Group",
         "parameters": [
           {
@@ -3228,7 +3336,9 @@
       },
       "delete": {
         "operationId": "GroupsOperations_Delete",
-        "tags": ["GroupsOperations"],
+        "tags": [
+          "GroupsOperations"
+        ],
         "description": "Delete a Group",
         "parameters": [
           {
@@ -3281,7 +3391,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/assessments": {
       "get": {
         "operationId": "AssessmentsOperations_ListByGroup",
-        "tags": ["AssessmentsOperations"],
+        "tags": [
+          "AssessmentsOperations"
+        ],
         "description": "List Assessment resources by Group",
         "parameters": [
           {
@@ -3337,7 +3449,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/assessments/{assessmentName}": {
       "get": {
         "operationId": "AssessmentsOperations_Get",
-        "tags": ["AssessmentsOperations"],
+        "tags": [
+          "AssessmentsOperations"
+        ],
         "description": "Get a Assessment",
         "parameters": [
           {
@@ -3396,7 +3510,9 @@
       },
       "put": {
         "operationId": "AssessmentsOperations_Create",
-        "tags": ["AssessmentsOperations"],
+        "tags": [
+          "AssessmentsOperations"
+        ],
         "description": "Create a Assessment",
         "parameters": [
           {
@@ -3481,7 +3597,9 @@
       },
       "delete": {
         "operationId": "AssessmentsOperations_Delete",
-        "tags": ["AssessmentsOperations"],
+        "tags": [
+          "AssessmentsOperations"
+        ],
         "description": "Delete a Assessment",
         "parameters": [
           {
@@ -3542,7 +3660,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/assessments/{assessmentName}/assessedMachines": {
       "get": {
         "operationId": "AssessedMachinesOperations_ListByAssessment",
-        "tags": ["AssessedMachinesOperations"],
+        "tags": [
+          "AssessedMachinesOperations"
+        ],
         "description": "List AssessedMachine resources by Assessment",
         "parameters": [
           {
@@ -3636,7 +3756,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/assessments/{assessmentName}/assessedMachines/{assessedMachineName}": {
       "get": {
         "operationId": "AssessedMachinesOperations_Get",
-        "tags": ["AssessedMachinesOperations"],
+        "tags": [
+          "AssessedMachinesOperations"
+        ],
         "description": "Get a AssessedMachine",
         "parameters": [
           {
@@ -3705,7 +3827,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/assessments/{assessmentName}/downloadUrl": {
       "post": {
         "operationId": "AssessmentsOperations_DownloadUrl",
-        "tags": ["AssessmentsOperations"],
+        "tags": [
+          "AssessmentsOperations"
+        ],
         "summary": "Get download URL for the assessment report.",
         "description": "Get the URL for downloading the assessment in a report format.",
         "parameters": [
@@ -3794,7 +3918,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/avsAssessments": {
       "get": {
         "operationId": "AvsAssessmentsOperations_ListByGroup",
-        "tags": ["AvsAssessmentsOperations"],
+        "tags": [
+          "AvsAssessmentsOperations"
+        ],
         "description": "List AvsAssessment resources by Group",
         "parameters": [
           {
@@ -3850,7 +3976,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/avsAssessments/{assessmentName}": {
       "get": {
         "operationId": "AvsAssessmentsOperations_Get",
-        "tags": ["AvsAssessmentsOperations"],
+        "tags": [
+          "AvsAssessmentsOperations"
+        ],
         "description": "Get a AvsAssessment",
         "parameters": [
           {
@@ -3909,7 +4037,9 @@
       },
       "put": {
         "operationId": "AvsAssessmentsOperations_Create",
-        "tags": ["AvsAssessmentsOperations"],
+        "tags": [
+          "AvsAssessmentsOperations"
+        ],
         "description": "Create a AvsAssessment",
         "parameters": [
           {
@@ -3994,7 +4124,9 @@
       },
       "delete": {
         "operationId": "AvsAssessmentsOperations_Delete",
-        "tags": ["AvsAssessmentsOperations"],
+        "tags": [
+          "AvsAssessmentsOperations"
+        ],
         "description": "Delete a AvsAssessment",
         "parameters": [
           {
@@ -4055,7 +4187,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/avsAssessments/{assessmentName}/avsAssessedMachines": {
       "get": {
         "operationId": "AvsAssessedMachinesOperations_ListByAvsAssessment",
-        "tags": ["AvsAssessedMachinesOperations"],
+        "tags": [
+          "AvsAssessedMachinesOperations"
+        ],
         "description": "List AvsAssessedMachine resources by AvsAssessment",
         "parameters": [
           {
@@ -4149,7 +4283,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/avsAssessments/{assessmentName}/avsAssessedMachines/{avsAssessedMachineName}": {
       "get": {
         "operationId": "AvsAssessedMachinesOperations_Get",
-        "tags": ["AvsAssessedMachinesOperations"],
+        "tags": [
+          "AvsAssessedMachinesOperations"
+        ],
         "description": "Get a AvsAssessedMachine",
         "parameters": [
           {
@@ -4218,7 +4354,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/avsAssessments/{assessmentName}/downloadUrl": {
       "post": {
         "operationId": "AvsAssessmentsOperations_DownloadUrl",
-        "tags": ["AvsAssessmentsOperations"],
+        "tags": [
+          "AvsAssessmentsOperations"
+        ],
         "summary": "Get download URL for the assessment report.",
         "description": "Get the URL for downloading the assessment in a report format.",
         "parameters": [
@@ -4307,7 +4445,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/sqlAssessments": {
       "get": {
         "operationId": "SqlAssessmentV2Operations_ListByGroup",
-        "tags": ["SqlAssessmentV2Operations"],
+        "tags": [
+          "SqlAssessmentV2Operations"
+        ],
         "description": "List SqlAssessmentV2 resources by Group",
         "parameters": [
           {
@@ -4363,7 +4503,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/sqlAssessments/{assessmentName}": {
       "get": {
         "operationId": "SqlAssessmentV2Operations_Get",
-        "tags": ["SqlAssessmentV2Operations"],
+        "tags": [
+          "SqlAssessmentV2Operations"
+        ],
         "description": "Get a SqlAssessmentV2",
         "parameters": [
           {
@@ -4422,7 +4564,9 @@
       },
       "put": {
         "operationId": "SqlAssessmentV2Operations_Create",
-        "tags": ["SqlAssessmentV2Operations"],
+        "tags": [
+          "SqlAssessmentV2Operations"
+        ],
         "description": "Create a SqlAssessmentV2",
         "parameters": [
           {
@@ -4507,7 +4651,9 @@
       },
       "delete": {
         "operationId": "SqlAssessmentV2Operations_Delete",
-        "tags": ["SqlAssessmentV2Operations"],
+        "tags": [
+          "SqlAssessmentV2Operations"
+        ],
         "description": "Delete a SqlAssessmentV2",
         "parameters": [
           {
@@ -4568,7 +4714,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/sqlAssessments/{assessmentName}/assessedSqlDatabases": {
       "get": {
         "operationId": "AssessedSqlDatabaseV2Operations_ListBySqlAssessmentV2",
-        "tags": ["AssessedSqlDatabaseV2Operations"],
+        "tags": [
+          "AssessedSqlDatabaseV2Operations"
+        ],
         "description": "List AssessedSqlDatabaseV2 resources by SqlAssessmentV2",
         "parameters": [
           {
@@ -4662,7 +4810,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/sqlAssessments/{assessmentName}/assessedSqlDatabases/{assessedSqlDatabaseName}": {
       "get": {
         "operationId": "AssessedSqlDatabaseV2Operations_Get",
-        "tags": ["AssessedSqlDatabaseV2Operations"],
+        "tags": [
+          "AssessedSqlDatabaseV2Operations"
+        ],
         "description": "Get a AssessedSqlDatabaseV2",
         "parameters": [
           {
@@ -4731,7 +4881,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/sqlAssessments/{assessmentName}/assessedSqlInstances": {
       "get": {
         "operationId": "AssessedSqlInstanceV2Operations_ListBySqlAssessmentV2",
-        "tags": ["AssessedSqlInstanceV2Operations"],
+        "tags": [
+          "AssessedSqlInstanceV2Operations"
+        ],
         "description": "List AssessedSqlInstanceV2 resources by SqlAssessmentV2",
         "parameters": [
           {
@@ -4825,7 +4977,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/sqlAssessments/{assessmentName}/assessedSqlInstances/{assessedSqlInstanceName}": {
       "get": {
         "operationId": "AssessedSqlInstanceV2Operations_Get",
-        "tags": ["AssessedSqlInstanceV2Operations"],
+        "tags": [
+          "AssessedSqlInstanceV2Operations"
+        ],
         "description": "Get a AssessedSqlInstanceV2",
         "parameters": [
           {
@@ -4894,7 +5048,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/sqlAssessments/{assessmentName}/assessedSqlMachines": {
       "get": {
         "operationId": "AssessedSqlMachinesOperations_ListBySqlAssessmentV2",
-        "tags": ["AssessedSqlMachinesOperations"],
+        "tags": [
+          "AssessedSqlMachinesOperations"
+        ],
         "description": "List AssessedSqlMachine resources by SqlAssessmentV2",
         "parameters": [
           {
@@ -4988,7 +5144,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/sqlAssessments/{assessmentName}/assessedSqlMachines/{assessedSqlMachineName}": {
       "get": {
         "operationId": "AssessedSqlMachinesOperations_Get",
-        "tags": ["AssessedSqlMachinesOperations"],
+        "tags": [
+          "AssessedSqlMachinesOperations"
+        ],
         "description": "Get a AssessedSqlMachine",
         "parameters": [
           {
@@ -5057,7 +5215,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/sqlAssessments/{assessmentName}/downloadUrl": {
       "post": {
         "operationId": "SqlAssessmentV2Operations_DownloadUrl",
-        "tags": ["SqlAssessmentV2Operations"],
+        "tags": [
+          "SqlAssessmentV2Operations"
+        ],
         "summary": "Get download URL for the assessment report.",
         "description": "Get the URL for downloading the assessment in a report format.",
         "parameters": [
@@ -5146,7 +5306,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/sqlAssessments/{assessmentName}/recommendedAssessedEntities": {
       "get": {
         "operationId": "AssessedSqlRecommendedEntityOperations_ListBySqlAssessmentV2",
-        "tags": ["AssessedSqlRecommendedEntityOperations"],
+        "tags": [
+          "AssessedSqlRecommendedEntityOperations"
+        ],
         "description": "List AssessedSqlRecommendedEntity resources by SqlAssessmentV2",
         "parameters": [
           {
@@ -5240,7 +5402,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/sqlAssessments/{assessmentName}/recommendedAssessedEntities/{recommendedAssessedEntityName}": {
       "get": {
         "operationId": "AssessedSqlRecommendedEntityOperations_Get",
-        "tags": ["AssessedSqlRecommendedEntityOperations"],
+        "tags": [
+          "AssessedSqlRecommendedEntityOperations"
+        ],
         "description": "Get a AssessedSqlRecommendedEntity",
         "parameters": [
           {
@@ -5309,7 +5473,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/sqlAssessments/{assessmentName}/summaries": {
       "get": {
         "operationId": "SqlAssessmentV2SummaryOperations_ListBySqlAssessmentV2",
-        "tags": ["SqlAssessmentV2SummaryOperations"],
+        "tags": [
+          "SqlAssessmentV2SummaryOperations"
+        ],
         "description": "List SqlAssessmentV2Summary resources by SqlAssessmentV2",
         "parameters": [
           {
@@ -5373,7 +5539,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/sqlAssessments/{assessmentName}/summaries/{summaryName}": {
       "get": {
         "operationId": "SqlAssessmentV2SummaryOperations_Get",
-        "tags": ["SqlAssessmentV2SummaryOperations"],
+        "tags": [
+          "SqlAssessmentV2SummaryOperations"
+        ],
         "description": "Get a SqlAssessmentV2Summary",
         "parameters": [
           {
@@ -5442,7 +5610,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/updateMachines": {
       "post": {
         "operationId": "GroupsOperations_UpdateMachines",
-        "tags": ["GroupsOperations"],
+        "tags": [
+          "GroupsOperations"
+        ],
         "summary": "Update machines in group.",
         "description": "Update machines in group by adding or removing machines.",
         "parameters": [
@@ -5523,7 +5693,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments": {
       "get": {
         "operationId": "WebAppAssessmentV2Operations_ListByGroup",
-        "tags": ["WebAppAssessmentV2Operations"],
+        "tags": [
+          "WebAppAssessmentV2Operations"
+        ],
         "description": "List WebAppAssessmentV2 resources by Group",
         "parameters": [
           {
@@ -5579,7 +5751,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}": {
       "get": {
         "operationId": "WebAppAssessmentV2Operations_Get",
-        "tags": ["WebAppAssessmentV2Operations"],
+        "tags": [
+          "WebAppAssessmentV2Operations"
+        ],
         "description": "Get a WebAppAssessmentV2",
         "parameters": [
           {
@@ -5638,7 +5812,9 @@
       },
       "put": {
         "operationId": "WebAppAssessmentV2Operations_Create",
-        "tags": ["WebAppAssessmentV2Operations"],
+        "tags": [
+          "WebAppAssessmentV2Operations"
+        ],
         "description": "Create a WebAppAssessmentV2",
         "parameters": [
           {
@@ -5723,7 +5899,9 @@
       },
       "delete": {
         "operationId": "WebAppAssessmentV2Operations_Delete",
-        "tags": ["WebAppAssessmentV2Operations"],
+        "tags": [
+          "WebAppAssessmentV2Operations"
+        ],
         "description": "Delete a WebAppAssessmentV2",
         "parameters": [
           {
@@ -5784,7 +5962,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}/assessedWebApps": {
       "get": {
         "operationId": "AssessedWebAppV2Operations_ListByWebAppAssessmentV2",
-        "tags": ["AssessedWebAppV2Operations"],
+        "tags": [
+          "AssessedWebAppV2Operations"
+        ],
         "description": "List AssessedWebAppV2 resources by WebAppAssessmentV2",
         "parameters": [
           {
@@ -5878,7 +6058,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}/assessedWebApps/{assessedWebAppName}": {
       "get": {
         "operationId": "AssessedWebAppV2Operations_Get",
-        "tags": ["AssessedWebAppV2Operations"],
+        "tags": [
+          "AssessedWebAppV2Operations"
+        ],
         "description": "Get a AssessedWebAppV2",
         "parameters": [
           {
@@ -5947,7 +6129,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}/downloadUrl": {
       "post": {
         "operationId": "WebAppAssessmentV2Operations_DownloadUrl",
-        "tags": ["WebAppAssessmentV2Operations"],
+        "tags": [
+          "WebAppAssessmentV2Operations"
+        ],
         "summary": "Get download URL for the assessment report.",
         "description": "Get the URL for downloading the assessment in a report format.",
         "parameters": [
@@ -6036,7 +6220,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}/summaries": {
       "get": {
         "operationId": "WebAppAssessmentV2SummaryOperations_ListByWebAppAssessmentV2",
-        "tags": ["WebAppAssessmentV2SummaryOperations"],
+        "tags": [
+          "WebAppAssessmentV2SummaryOperations"
+        ],
         "description": "List WebAppAssessmentV2Summary resources by WebAppAssessmentV2",
         "parameters": [
           {
@@ -6100,7 +6286,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}/summaries/{summaryName}": {
       "get": {
         "operationId": "WebAppAssessmentV2SummaryOperations_Get",
-        "tags": ["WebAppAssessmentV2SummaryOperations"],
+        "tags": [
+          "WebAppAssessmentV2SummaryOperations"
+        ],
         "description": "Get a WebAppAssessmentV2Summary",
         "parameters": [
           {
@@ -6169,7 +6357,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}/webAppServicePlans": {
       "get": {
         "operationId": "WebAppServicePlanV2Operations_ListByWebAppAssessmentV2",
-        "tags": ["WebAppServicePlanV2Operations"],
+        "tags": [
+          "WebAppServicePlanV2Operations"
+        ],
         "description": "List WebAppServicePlanV2 resources by WebAppAssessmentV2",
         "parameters": [
           {
@@ -6263,7 +6453,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/webAppAssessments/{assessmentName}/webAppServicePlans/{webAppServicePlanName}": {
       "get": {
         "operationId": "WebAppServicePlanV2Operations_Get",
-        "tags": ["WebAppServicePlanV2Operations"],
+        "tags": [
+          "WebAppServicePlanV2Operations"
+        ],
         "description": "Get a WebAppServicePlanV2",
         "parameters": [
           {
@@ -6332,7 +6524,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/hypervcollectors": {
       "get": {
         "operationId": "HypervCollectorsOperations_ListByAssessmentProject",
-        "tags": ["HypervCollectorsOperations"],
+        "tags": [
+          "HypervCollectorsOperations"
+        ],
         "description": "List HypervCollector resources by AssessmentProject",
         "parameters": [
           {
@@ -6380,7 +6574,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/hypervcollectors/{hypervCollectorName}": {
       "get": {
         "operationId": "HypervCollectorsOperations_Get",
-        "tags": ["HypervCollectorsOperations"],
+        "tags": [
+          "HypervCollectorsOperations"
+        ],
         "description": "Get a HypervCollector",
         "parameters": [
           {
@@ -6431,7 +6627,9 @@
       },
       "put": {
         "operationId": "HypervCollectorsOperations_Create",
-        "tags": ["HypervCollectorsOperations"],
+        "tags": [
+          "HypervCollectorsOperations"
+        ],
         "description": "Create a HypervCollector",
         "parameters": [
           {
@@ -6508,7 +6706,9 @@
       },
       "delete": {
         "operationId": "HypervCollectorsOperations_Delete",
-        "tags": ["HypervCollectorsOperations"],
+        "tags": [
+          "HypervCollectorsOperations"
+        ],
         "description": "Delete a HypervCollector",
         "parameters": [
           {
@@ -6561,7 +6761,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/importcollectors": {
       "get": {
         "operationId": "ImportCollectorsOperations_ListByAssessmentProject",
-        "tags": ["ImportCollectorsOperations"],
+        "tags": [
+          "ImportCollectorsOperations"
+        ],
         "description": "List ImportCollector resources by AssessmentProject",
         "parameters": [
           {
@@ -6609,7 +6811,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/importcollectors/{importCollectorName}": {
       "get": {
         "operationId": "ImportCollectorsOperations_Get",
-        "tags": ["ImportCollectorsOperations"],
+        "tags": [
+          "ImportCollectorsOperations"
+        ],
         "description": "Get a ImportCollector",
         "parameters": [
           {
@@ -6660,7 +6864,9 @@
       },
       "put": {
         "operationId": "ImportCollectorsOperations_Create",
-        "tags": ["ImportCollectorsOperations"],
+        "tags": [
+          "ImportCollectorsOperations"
+        ],
         "description": "Create a ImportCollector",
         "parameters": [
           {
@@ -6737,7 +6943,9 @@
       },
       "delete": {
         "operationId": "ImportCollectorsOperations_Delete",
-        "tags": ["ImportCollectorsOperations"],
+        "tags": [
+          "ImportCollectorsOperations"
+        ],
         "description": "Delete a ImportCollector",
         "parameters": [
           {
@@ -6790,7 +6998,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/machines": {
       "get": {
         "operationId": "MachinesOperations_ListByAssessmentProject",
-        "tags": ["MachinesOperations"],
+        "tags": [
+          "MachinesOperations"
+        ],
         "description": "List Machine resources by AssessmentProject",
         "parameters": [
           {
@@ -6868,7 +7078,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/machines/{machineName}": {
       "get": {
         "operationId": "MachinesOperations_Get",
-        "tags": ["MachinesOperations"],
+        "tags": [
+          "MachinesOperations"
+        ],
         "description": "Get a Machine",
         "parameters": [
           {
@@ -6921,7 +7133,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/privateEndpointConnections": {
       "get": {
         "operationId": "PrivateEndpointConnectionOperations_ListByAssessmentProject",
-        "tags": ["PrivateEndpointConnectionOperations"],
+        "tags": [
+          "PrivateEndpointConnectionOperations"
+        ],
         "description": "List PrivateEndpointConnection resources by AssessmentProject",
         "parameters": [
           {
@@ -6969,7 +7183,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "operationId": "PrivateEndpointConnectionOperations_Get",
-        "tags": ["PrivateEndpointConnectionOperations"],
+        "tags": [
+          "PrivateEndpointConnectionOperations"
+        ],
         "description": "Get a PrivateEndpointConnection",
         "parameters": [
           {
@@ -7020,7 +7236,9 @@
       },
       "put": {
         "operationId": "PrivateEndpointConnectionOperations_Update",
-        "tags": ["PrivateEndpointConnectionOperations"],
+        "tags": [
+          "PrivateEndpointConnectionOperations"
+        ],
         "description": "Create a PrivateEndpointConnection",
         "parameters": [
           {
@@ -7097,7 +7315,9 @@
       },
       "delete": {
         "operationId": "PrivateEndpointConnectionOperations_Delete",
-        "tags": ["PrivateEndpointConnectionOperations"],
+        "tags": [
+          "PrivateEndpointConnectionOperations"
+        ],
         "description": "Delete a PrivateEndpointConnection",
         "parameters": [
           {
@@ -7150,7 +7370,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/privateLinkResources": {
       "get": {
         "operationId": "PrivateLinkResourceOperations_ListByAssessmentProject",
-        "tags": ["PrivateLinkResourceOperations"],
+        "tags": [
+          "PrivateLinkResourceOperations"
+        ],
         "description": "List PrivateLinkResource resources by AssessmentProject",
         "parameters": [
           {
@@ -7198,7 +7420,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/privateLinkResources/{privateLinkResourceName}": {
       "get": {
         "operationId": "PrivateLinkResourceOperations_Get",
-        "tags": ["PrivateLinkResourceOperations"],
+        "tags": [
+          "PrivateLinkResourceOperations"
+        ],
         "description": "Get a PrivateLinkResource",
         "parameters": [
           {
@@ -7251,7 +7475,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/projectSummary": {
       "get": {
         "operationId": "AssessmentProjectSummaryOperations_ListByAssessmentProject",
-        "tags": ["AssessmentProjectSummaryOperations"],
+        "tags": [
+          "AssessmentProjectSummaryOperations"
+        ],
         "description": "List AssessmentProjectSummary resources by AssessmentProject",
         "parameters": [
           {
@@ -7299,7 +7525,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/projectSummary/{projectSummaryName}": {
       "get": {
         "operationId": "AssessmentProjectSummaryOperations_Get",
-        "tags": ["AssessmentProjectSummaryOperations"],
+        "tags": [
+          "AssessmentProjectSummaryOperations"
+        ],
         "description": "Get a AssessmentProjectSummary",
         "parameters": [
           {
@@ -7352,7 +7580,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/servercollectors": {
       "get": {
         "operationId": "ServerCollectorsOperations_ListByAssessmentProject",
-        "tags": ["ServerCollectorsOperations"],
+        "tags": [
+          "ServerCollectorsOperations"
+        ],
         "description": "List ServerCollector resources by AssessmentProject",
         "parameters": [
           {
@@ -7400,7 +7630,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/servercollectors/{serverCollectorName}": {
       "get": {
         "operationId": "ServerCollectorsOperations_Get",
-        "tags": ["ServerCollectorsOperations"],
+        "tags": [
+          "ServerCollectorsOperations"
+        ],
         "description": "Get a ServerCollector",
         "parameters": [
           {
@@ -7451,7 +7683,9 @@
       },
       "put": {
         "operationId": "ServerCollectorsOperations_Create",
-        "tags": ["ServerCollectorsOperations"],
+        "tags": [
+          "ServerCollectorsOperations"
+        ],
         "description": "Create a ServerCollector",
         "parameters": [
           {
@@ -7528,7 +7762,9 @@
       },
       "delete": {
         "operationId": "ServerCollectorsOperations_Delete",
-        "tags": ["ServerCollectorsOperations"],
+        "tags": [
+          "ServerCollectorsOperations"
+        ],
         "description": "Delete a ServerCollector",
         "parameters": [
           {
@@ -7581,7 +7817,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/sqlAssessmentOptions": {
       "get": {
         "operationId": "SqlAssessmentOptionsOperations_ListByAssessmentProject",
-        "tags": ["SqlAssessmentOptionsOperations"],
+        "tags": [
+          "SqlAssessmentOptionsOperations"
+        ],
         "description": "List SqlAssessmentOptions resources by AssessmentProject",
         "parameters": [
           {
@@ -7629,7 +7867,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/sqlAssessmentOptions/{assessmentOptionsName}": {
       "get": {
         "operationId": "SqlAssessmentOptionsOperations_Get",
-        "tags": ["SqlAssessmentOptionsOperations"],
+        "tags": [
+          "SqlAssessmentOptionsOperations"
+        ],
         "description": "Get a SqlAssessmentOptions",
         "parameters": [
           {
@@ -7682,7 +7922,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/sqlcollectors": {
       "get": {
         "operationId": "SqlCollectorOperations_ListByAssessmentProject",
-        "tags": ["SqlCollectorOperations"],
+        "tags": [
+          "SqlCollectorOperations"
+        ],
         "description": "List SqlCollector resources by AssessmentProject",
         "parameters": [
           {
@@ -7730,7 +7972,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/sqlcollectors/{collectorName}": {
       "get": {
         "operationId": "SqlCollectorOperations_Get",
-        "tags": ["SqlCollectorOperations"],
+        "tags": [
+          "SqlCollectorOperations"
+        ],
         "description": "Get a SqlCollector",
         "parameters": [
           {
@@ -7781,7 +8025,9 @@
       },
       "put": {
         "operationId": "SqlCollectorOperations_Create",
-        "tags": ["SqlCollectorOperations"],
+        "tags": [
+          "SqlCollectorOperations"
+        ],
         "description": "Create a SqlCollector",
         "parameters": [
           {
@@ -7858,7 +8104,9 @@
       },
       "delete": {
         "operationId": "SqlCollectorOperations_Delete",
-        "tags": ["SqlCollectorOperations"],
+        "tags": [
+          "SqlCollectorOperations"
+        ],
         "description": "Delete a SqlCollector",
         "parameters": [
           {
@@ -7911,7 +8159,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/vmwarecollectors": {
       "get": {
         "operationId": "VmwareCollectorsOperations_ListByAssessmentProject",
-        "tags": ["VmwareCollectorsOperations"],
+        "tags": [
+          "VmwareCollectorsOperations"
+        ],
         "description": "List VmwareCollector resources by AssessmentProject",
         "parameters": [
           {
@@ -7959,7 +8209,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/vmwarecollectors/{vmWareCollectorName}": {
       "get": {
         "operationId": "VmwareCollectorsOperations_Get",
-        "tags": ["VmwareCollectorsOperations"],
+        "tags": [
+          "VmwareCollectorsOperations"
+        ],
         "description": "Get a VmwareCollector",
         "parameters": [
           {
@@ -8010,7 +8262,9 @@
       },
       "put": {
         "operationId": "VmwareCollectorsOperations_Create",
-        "tags": ["VmwareCollectorsOperations"],
+        "tags": [
+          "VmwareCollectorsOperations"
+        ],
         "description": "Create a VmwareCollector",
         "parameters": [
           {
@@ -8087,7 +8341,9 @@
       },
       "delete": {
         "operationId": "VmwareCollectorsOperations_Delete",
-        "tags": ["VmwareCollectorsOperations"],
+        "tags": [
+          "VmwareCollectorsOperations"
+        ],
         "description": "Delete a VmwareCollector",
         "parameters": [
           {
@@ -8140,7 +8396,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/webAppAssessmentOptions": {
       "get": {
         "operationId": "WebAppAssessmentOptionsOperations_ListByAssessmentProject",
-        "tags": ["WebAppAssessmentOptionsOperations"],
+        "tags": [
+          "WebAppAssessmentOptionsOperations"
+        ],
         "description": "List WebAppAssessmentOptions resources by AssessmentProject",
         "parameters": [
           {
@@ -8188,7 +8446,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/webAppAssessmentOptions/{assessmentOptionsName}": {
       "get": {
         "operationId": "WebAppAssessmentOptionsOperations_Get",
-        "tags": ["WebAppAssessmentOptionsOperations"],
+        "tags": [
+          "WebAppAssessmentOptionsOperations"
+        ],
         "description": "Get a WebAppAssessmentOptions",
         "parameters": [
           {
@@ -8241,7 +8501,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/webappcollectors": {
       "get": {
         "operationId": "WebAppCollectorOperations_ListByAssessmentProject",
-        "tags": ["WebAppCollectorOperations"],
+        "tags": [
+          "WebAppCollectorOperations"
+        ],
         "description": "List WebAppCollector resources by AssessmentProject",
         "parameters": [
           {
@@ -8289,7 +8551,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/webappcollectors/{collectorName}": {
       "get": {
         "operationId": "WebAppCollectorOperations_Get",
-        "tags": ["WebAppCollectorOperations"],
+        "tags": [
+          "WebAppCollectorOperations"
+        ],
         "description": "Get a WebAppCollector",
         "parameters": [
           {
@@ -8340,7 +8604,9 @@
       },
       "put": {
         "operationId": "WebAppCollectorOperations_Create",
-        "tags": ["WebAppCollectorOperations"],
+        "tags": [
+          "WebAppCollectorOperations"
+        ],
         "description": "Create a WebAppCollector",
         "parameters": [
           {
@@ -8417,7 +8683,9 @@
       },
       "delete": {
         "operationId": "WebAppCollectorOperations_Delete",
-        "tags": ["WebAppCollectorOperations"],
+        "tags": [
+          "WebAppCollectorOperations"
+        ],
         "description": "Delete a WebAppCollector",
         "parameters": [
           {
@@ -8477,7 +8745,10 @@
           "$ref": "#/definitions/AKSAssessmentProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "eTag": {
           "type": "string",
@@ -8545,7 +8816,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AKSAssessmentOptions": {
       "type": "object",
@@ -8555,7 +8828,10 @@
           "$ref": "#/definitions/AKSAssessmentOptionsProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "eTag": {
           "type": "string",
@@ -8586,7 +8862,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AKSAssessmentOptionsProperties": {
       "type": "object",
@@ -8610,7 +8888,9 @@
           "description": "Gets or sets AKS Assessment Details."
         }
       },
-      "required": ["settings"],
+      "required": [
+        "settings"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AssessmentPropertiesBase"
@@ -8715,7 +8995,10 @@
           "$ref": "#/definitions/AKSClusterProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "eTag": {
           "type": "string",
@@ -8746,7 +9029,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AKSClusterProperties": {
       "type": "object",
@@ -8765,7 +9050,10 @@
           "$ref": "#/definitions/AKSCostDetailProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "eTag": {
           "type": "string",
@@ -8796,7 +9084,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AKSCostDetailProperties": {
       "type": "object",
@@ -8822,7 +9112,9 @@
           "readOnly": true
         }
       },
-      "required": ["name"],
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "type": "object",
@@ -8832,7 +9124,10 @@
               "$ref": "#/definitions/AKSSummaryProperties",
               "description": "The resource-specific properties for this resource.",
               "x-ms-client-flatten": true,
-              "x-ms-mutability": ["read", "create"]
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
             }
           },
           "allOf": [
@@ -8860,7 +9155,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AKSSummaryProperties": {
       "type": "object",
@@ -8871,7 +9168,9 @@
           "description": "Gets or sets AKS assessment summary."
         }
       },
-      "required": ["aksAssessmentSummary"],
+      "required": [
+        "aksAssessmentSummary"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/SummaryPropertiesBase"
@@ -8976,7 +9275,9 @@
           "description": "Gets or sets the isolation required."
         }
       },
-      "required": ["isolationRequired"]
+      "required": [
+        "isolationRequired"
+      ]
     },
     "AppSvcNativeSettings": {
       "type": "object",
@@ -8987,7 +9288,9 @@
           "description": "Gets or sets the isolation required."
         }
       },
-      "required": ["isolationRequired"]
+      "required": [
+        "isolationRequired"
+      ]
     },
     "AssessedDisk": {
       "type": "object",
@@ -9154,7 +9457,10 @@
           "$ref": "#/definitions/AssessedMachineProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -9180,7 +9486,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AssessedMachineProperties": {
       "type": "object",
@@ -9471,7 +9779,10 @@
           "$ref": "#/definitions/AssessedSqlDatabaseV2Properties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -9497,7 +9808,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AssessedSqlDatabaseV2Properties": {
       "type": "object",
@@ -9786,7 +10099,10 @@
           "$ref": "#/definitions/AssessedSqlInstanceV2Properties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -9812,7 +10128,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AssessedSqlInstanceV2Properties": {
       "type": "object",
@@ -9986,7 +10304,10 @@
           "$ref": "#/definitions/AssessedSqlMachineProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -10012,7 +10333,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AssessedSqlMachineProperties": {
       "type": "object",
@@ -10247,7 +10570,10 @@
           "$ref": "#/definitions/AssessedSqlRecommendedEntityProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -10273,7 +10599,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AssessedSqlRecommendedEntityProperties": {
       "type": "object",
@@ -10394,7 +10722,10 @@
           "$ref": "#/definitions/AssessedWebAppV2Properties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -10420,7 +10751,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AssessedWebAppV2Properties": {
       "type": "object",
@@ -10493,7 +10826,10 @@
           "readOnly": true
         }
       },
-      "required": ["appServicePlanName", "machineName"]
+      "required": [
+        "appServicePlanName",
+        "machineName"
+      ]
     },
     "AssessedWebApplication": {
       "type": "object",
@@ -10503,7 +10839,10 @@
           "$ref": "#/definitions/AssessedWebApplicationProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "eTag": {
           "type": "string",
@@ -10534,7 +10873,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AssessedWebApplicationProperties": {
       "type": "object",
@@ -10553,7 +10894,10 @@
           "$ref": "#/definitions/MachineAssessmentProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -10591,7 +10935,11 @@
           "description": "Gets or sets assessment status."
         }
       },
-      "required": ["createdTimestamp", "updatedTimestamp", "status"]
+      "required": [
+        "createdTimestamp",
+        "updatedTimestamp",
+        "status"
+      ]
     },
     "AssessmentListResult": {
       "type": "object",
@@ -10610,7 +10958,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AssessmentOptions": {
       "type": "object",
@@ -10620,7 +10970,10 @@
           "$ref": "#/definitions/AssessmentOptionsProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -10646,7 +10999,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AssessmentOptionsProperties": {
       "type": "object",
@@ -10736,7 +11091,10 @@
           "$ref": "#/definitions/ProjectProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -10762,7 +11120,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AssessmentProjectSummary": {
       "type": "object",
@@ -10772,7 +11132,10 @@
           "$ref": "#/definitions/AssessmentProjectSummaryProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -10798,7 +11161,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AssessmentProjectSummaryProperties": {
       "type": "object",
@@ -10967,7 +11332,9 @@
           "readOnly": true
         }
       },
-      "required": ["tags"]
+      "required": [
+        "tags"
+      ]
     },
     "AssessmentSettings": {
       "type": "object",
@@ -11020,7 +11387,10 @@
     "AssessmentSizingCriterion": {
       "type": "string",
       "description": "Assessment Sizing Criteria.",
-      "enum": ["PerformanceBased", "AsOnPremises"],
+      "enum": [
+        "PerformanceBased",
+        "AsOnPremises"
+      ],
       "x-ms-enum": {
         "name": "AssessmentSizingCriterion",
         "modelAsString": true,
@@ -11040,7 +11410,11 @@
     },
     "AssessmentStage": {
       "type": "string",
-      "enum": ["InProgress", "UnderReview", "Approved"],
+      "enum": [
+        "InProgress",
+        "UnderReview",
+        "Approved"
+      ],
       "x-ms-enum": {
         "name": "AssessmentStage",
         "modelAsString": true
@@ -11122,7 +11496,11 @@
     },
     "AsyncCommitModeIntent": {
       "type": "string",
-      "enum": ["None", "HighAvailability", "DisasterRecovery"],
+      "enum": [
+        "None",
+        "HighAvailability",
+        "DisasterRecovery"
+      ],
       "x-ms-enum": {
         "name": "AsyncCommitModeIntent",
         "modelAsString": true
@@ -11182,7 +11560,10 @@
           "$ref": "#/definitions/AvsAssessedMachineProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -11208,7 +11589,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AvsAssessedMachineProperties": {
       "type": "object",
@@ -11403,7 +11786,10 @@
           "$ref": "#/definitions/AvsAssessmentProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -11429,7 +11815,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AvsAssessmentOptions": {
       "type": "object",
@@ -11439,7 +11827,10 @@
           "$ref": "#/definitions/AvsAssessmentOptionsProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -11465,7 +11856,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AvsAssessmentOptionsProperties": {
       "type": "object",
@@ -11828,7 +12221,10 @@
           "$ref": "#/definitions/AvsSummaryProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -11854,7 +12250,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AvsSummaryProperties": {
       "type": "object",
@@ -11940,7 +12338,10 @@
     },
     "AzureAvsNodeType": {
       "type": "string",
-      "enum": ["Unknown", "AV36"],
+      "enum": [
+        "Unknown",
+        "AV36"
+      ],
       "x-ms-enum": {
         "name": "AzureAvsNodeType",
         "modelAsString": true
@@ -12323,7 +12724,11 @@
     "AzureEnvironmentType": {
       "type": "string",
       "description": "Environment Type for Azure.",
-      "enum": ["Unknown", "DevTest", "Production"],
+      "enum": [
+        "Unknown",
+        "DevTest",
+        "Production"
+      ],
       "x-ms-enum": {
         "name": "AzureEnvironmentType",
         "modelAsString": true,
@@ -12348,7 +12753,11 @@
     },
     "AzureHybridUseBenefit": {
       "type": "string",
-      "enum": ["Unknown", "Yes", "No"],
+      "enum": [
+        "Unknown",
+        "Yes",
+        "No"
+      ],
       "x-ms-enum": {
         "name": "AzureHybridUseBenefit",
         "modelAsString": true
@@ -12666,7 +13075,11 @@
     },
     "AzureManagedDiskSkuDTODiskRedundancy": {
       "type": "string",
-      "enum": ["Unknown", "LRS", "ZRS"],
+      "enum": [
+        "Unknown",
+        "LRS",
+        "ZRS"
+      ],
       "x-ms-enum": {
         "name": "AzureManagedDiskSkuDTODiskRedundancy",
         "modelAsString": true
@@ -12704,7 +13117,11 @@
     },
     "AzureNetworkAdapterSuitabilityExplanation": {
       "type": "string",
-      "enum": ["Unknown", "NotApplicable", "InternalErrorOccurred"],
+      "enum": [
+        "Unknown",
+        "NotApplicable",
+        "InternalErrorOccurred"
+      ],
       "x-ms-enum": {
         "name": "AzureNetworkAdapterSuitabilityExplanation",
         "modelAsString": true
@@ -13022,7 +13439,10 @@
     },
     "AzurePricingTier": {
       "type": "string",
-      "enum": ["Standard", "Basic"],
+      "enum": [
+        "Standard",
+        "Basic"
+      ],
       "x-ms-enum": {
         "name": "AzurePricingTier",
         "modelAsString": true
@@ -13041,7 +13461,11 @@
     },
     "AzureQuorumWitnessDTOQuorumWitnessType": {
       "type": "string",
-      "enum": ["Unknown", "Cloud", "Disk"],
+      "enum": [
+        "Unknown",
+        "Cloud",
+        "Disk"
+      ],
       "x-ms-enum": {
         "name": "AzureQuorumWitnessDTOQuorumWitnessType",
         "modelAsString": true
@@ -13049,7 +13473,11 @@
     },
     "AzureReservedInstance": {
       "type": "string",
-      "enum": ["None", "RI1Year", "RI3Year"],
+      "enum": [
+        "None",
+        "RI1Year",
+        "RI3Year"
+      ],
       "x-ms-enum": {
         "name": "AzureReservedInstance",
         "modelAsString": true
@@ -13067,7 +13495,10 @@
     },
     "AzureSecurityOfferingType": {
       "type": "string",
-      "enum": ["NO", "MDC"],
+      "enum": [
+        "NO",
+        "MDC"
+      ],
       "x-ms-enum": {
         "name": "AzureSecurityOfferingType",
         "modelAsString": true
@@ -13189,11 +13620,19 @@
           "default": "RI3Year"
         }
       },
-      "required": ["targetLocation", "currency"]
+      "required": [
+        "targetLocation",
+        "currency"
+      ]
     },
     "AzureSqlDataBaseType": {
       "type": "string",
-      "enum": ["Unknown", "Automatic", "SingleDatabase", "ElasticPool"],
+      "enum": [
+        "Unknown",
+        "Automatic",
+        "SingleDatabase",
+        "ElasticPool"
+      ],
       "x-ms-enum": {
         "name": "AzureSqlDataBaseType",
         "modelAsString": true
@@ -13235,7 +13674,12 @@
     },
     "AzureSqlInstanceType": {
       "type": "string",
-      "enum": ["Unknown", "Automatic", "SingleInstance", "InstancePools"],
+      "enum": [
+        "Unknown",
+        "Automatic",
+        "SingleInstance",
+        "InstancePools"
+      ],
       "x-ms-enum": {
         "name": "AzureSqlInstanceType",
         "modelAsString": true
@@ -13293,7 +13737,11 @@
     },
     "AzureSqlPurchaseModel": {
       "type": "string",
-      "enum": ["Unknown", "VCore", "DTU"],
+      "enum": [
+        "Unknown",
+        "VCore",
+        "DTU"
+      ],
       "x-ms-enum": {
         "name": "AzureSqlPurchaseModel",
         "modelAsString": true
@@ -16263,7 +16711,11 @@
     },
     "AzureWebAppSuitabilityIssueCategory": {
       "type": "string",
-      "enum": ["Unknown", "Issue", "Info"],
+      "enum": [
+        "Unknown",
+        "Issue",
+        "Info"
+      ],
       "x-ms-enum": {
         "name": "AzureWebAppSuitabilityIssueCategory",
         "modelAsString": true
@@ -16271,7 +16723,11 @@
     },
     "AzureWebAppTargetType": {
       "type": "string",
-      "enum": ["Unknown", "AzureAppService", "AzureAppServiceContainer"],
+      "enum": [
+        "Unknown",
+        "AzureAppService",
+        "AzureAppServiceContainer"
+      ],
       "x-ms-enum": {
         "name": "AzureWebAppTargetType",
         "modelAsString": true
@@ -16279,7 +16735,13 @@
     },
     "AzureWebAppTier": {
       "type": "string",
-      "enum": ["Unknown", "Free", "Premium_V2", "Premium_V3", "Isolated"],
+      "enum": [
+        "Unknown",
+        "Free",
+        "Premium_V2",
+        "Premium_V3",
+        "Isolated"
+      ],
       "x-ms-enum": {
         "name": "AzureWebAppTier",
         "modelAsString": true
@@ -16293,7 +16755,10 @@
           "$ref": "#/definitions/BusinessCaseProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -16487,7 +16952,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "BusinessCaseProperties": {
       "type": "object",
@@ -16613,7 +17080,12 @@
     "CheckResult": {
       "type": "string",
       "description": "Suitability Check or Rule Result.",
-      "enum": ["Unknown", "Issue", "Warn", "Pass"],
+      "enum": [
+        "Unknown",
+        "Issue",
+        "Warn",
+        "Pass"
+      ],
       "x-ms-enum": {
         "name": "CheckResult",
         "modelAsString": true,
@@ -16962,7 +17434,12 @@
     },
     "ComputeTier": {
       "type": "string",
-      "enum": ["Unknown", "Automatic", "Provisioned", "Serverless"],
+      "enum": [
+        "Unknown",
+        "Automatic",
+        "Provisioned",
+        "Serverless"
+      ],
       "x-ms-enum": {
         "name": "ComputeTier",
         "modelAsString": true
@@ -16971,7 +17448,10 @@
     "ConsolidationType": {
       "type": "string",
       "description": "Consolidation Type.",
-      "enum": ["Full", "AsOnSource"],
+      "enum": [
+        "Full",
+        "AsOnSource"
+      ],
       "x-ms-enum": {
         "name": "ConsolidationType",
         "modelAsString": true,
@@ -17191,12 +17671,20 @@
           "description": "Gets or sets the number of machines."
         }
       },
-      "required": ["numberOfServers", "numberOfWebApps", "numberOfMachines"]
+      "required": [
+        "numberOfServers",
+        "numberOfWebApps",
+        "numberOfMachines"
+      ]
     },
     "DiscoverySource": {
       "type": "string",
       "description": "Business case supported Discovery source types.",
-      "enum": ["Unknown", "Appliance", "Import"],
+      "enum": [
+        "Unknown",
+        "Appliance",
+        "Import"
+      ],
       "x-ms-enum": {
         "name": "DiscoverySource",
         "modelAsString": true,
@@ -17303,7 +17791,10 @@
           "readOnly": true
         }
       },
-      "required": ["assessmentReportUrl", "expirationTime"]
+      "required": [
+        "assessmentReportUrl",
+        "expirationTime"
+      ]
     },
     "EntityUptime": {
       "type": "object",
@@ -17323,7 +17814,10 @@
     },
     "EnvironmentType": {
       "type": "string",
-      "enum": ["Production", "Test"],
+      "enum": [
+        "Production",
+        "Test"
+      ],
       "x-ms-enum": {
         "name": "EnvironmentType",
         "modelAsString": true
@@ -17483,7 +17977,10 @@
           "$ref": "#/definitions/EvaluatedAvsMachineProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -17509,7 +18006,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "EvaluatedAvsMachineProperties": {
       "type": "object",
@@ -17570,7 +18069,10 @@
           "$ref": "#/definitions/EvaluatedMachineProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -17596,7 +18098,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "EvaluatedMachineProperties": {
       "type": "object",
@@ -17657,7 +18161,10 @@
           "$ref": "#/definitions/EvaluatedSqlEntityProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -17683,7 +18190,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "EvaluatedSqlEntityProperties": {
       "type": "object",
@@ -17750,7 +18259,10 @@
           "$ref": "#/definitions/EvaluatedWebAppProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -17776,7 +18288,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "EvaluatedWebAppProperties": {
       "type": "object",
@@ -17822,7 +18336,9 @@
           "description": "The facilities cost."
         }
       },
-      "required": ["facilitiesCost"]
+      "required": [
+        "facilitiesCost"
+      ]
     },
     "FttAndRaidLevel": {
       "type": "string",
@@ -17847,7 +18363,10 @@
           "$ref": "#/definitions/GroupProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -17890,7 +18409,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "GroupProperties": {
       "type": "object",
@@ -17942,7 +18463,10 @@
         "groupType": {
           "$ref": "#/definitions/GroupType",
           "description": "The type of group.",
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -17953,7 +18477,13 @@
     },
     "GroupStatus": {
       "type": "string",
-      "enum": ["Created", "Updated", "Running", "Completed", "Invalid"],
+      "enum": [
+        "Created",
+        "Updated",
+        "Running",
+        "Completed",
+        "Invalid"
+      ],
       "x-ms-enum": {
         "name": "GroupStatus",
         "modelAsString": true
@@ -17961,7 +18491,10 @@
     },
     "GroupType": {
       "type": "string",
-      "enum": ["Default", "Import"],
+      "enum": [
+        "Default",
+        "Import"
+      ],
       "x-ms-enum": {
         "name": "GroupType",
         "modelAsString": true
@@ -17969,7 +18502,10 @@
     },
     "GroupUpdateOperation": {
       "type": "string",
-      "enum": ["Add", "Remove"],
+      "enum": [
+        "Add",
+        "Remove"
+      ],
       "x-ms-enum": {
         "name": "GroupUpdateOperation",
         "modelAsString": true
@@ -17977,7 +18513,11 @@
     },
     "GuestOperatingSystemArchitecture": {
       "type": "string",
-      "enum": ["Unknown", "X86", "X64"],
+      "enum": [
+        "Unknown",
+        "X86",
+        "X64"
+      ],
       "x-ms-enum": {
         "name": "GuestOperatingSystemArchitecture",
         "modelAsString": true
@@ -18027,7 +18567,11 @@
     "HyperVLicenseType": {
       "type": "string",
       "description": "Business case supported HyperV License types.",
-      "enum": ["Unknown", "Datacentre", "Standard"],
+      "enum": [
+        "Unknown",
+        "Datacentre",
+        "Standard"
+      ],
       "x-ms-enum": {
         "name": "HyperVLicenseType",
         "modelAsString": true,
@@ -18058,7 +18602,10 @@
           "$ref": "#/definitions/CollectorPropertiesBaseWithAgent",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -18084,7 +18631,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "HypervLicense": {
       "type": "object",
@@ -18100,7 +18649,10 @@
           "description": "HyperV licence type."
         }
       },
-      "required": ["licenseCost", "licenseType"]
+      "required": [
+        "licenseCost",
+        "licenseType"
+      ]
     },
     "HypervVirtualizationManagementSettings": {
       "type": "object",
@@ -18187,7 +18739,10 @@
           "$ref": "#/definitions/IaasSummaryProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -18213,7 +18768,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "IaasSummaryProperties": {
       "type": "object",
@@ -18255,7 +18812,10 @@
           "$ref": "#/definitions/CollectorPropertiesBase",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -18281,7 +18841,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "LaborSettings": {
       "type": "object",
@@ -18314,7 +18876,11 @@
     "LicenseType": {
       "type": "string",
       "description": "Business case supported VmWare License types.",
-      "enum": ["Unknown", "VSphereStandard", "VSphereEnterprisePlus"],
+      "enum": [
+        "Unknown",
+        "VSphereStandard",
+        "VSphereEnterprisePlus"
+      ],
       "x-ms-enum": {
         "name": "LicenseType",
         "modelAsString": true,
@@ -18340,7 +18906,10 @@
     "LicensingProgram": {
       "type": "string",
       "description": "Licensing Program for Azure.",
-      "enum": ["Default", "EA"],
+      "enum": [
+        "Default",
+        "EA"
+      ],
       "x-ms-enum": {
         "name": "LicensingProgram",
         "modelAsString": true,
@@ -18636,7 +19205,10 @@
           "$ref": "#/definitions/MachineProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -18885,7 +19457,12 @@
     },
     "MachineBootType": {
       "type": "string",
-      "enum": ["Unknown", "EFI", "BIOS", "NotSpecified"],
+      "enum": [
+        "Unknown",
+        "EFI",
+        "BIOS",
+        "NotSpecified"
+      ],
       "x-ms-enum": {
         "name": "MachineBootType",
         "modelAsString": true,
@@ -18926,7 +19503,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "MachineProperties": {
       "type": "object",
@@ -19081,7 +19660,9 @@
           "description": "Cost of Management Component."
         }
       },
-      "required": ["name"]
+      "required": [
+        "name"
+      ]
     },
     "ManagementCostComponentName": {
       "type": "string",
@@ -19273,11 +19854,18 @@
           "description": "Gets or sets url."
         }
       },
-      "required": ["title", "url"]
+      "required": [
+        "title",
+        "url"
+      ]
     },
     "MultiSubnetIntent": {
       "type": "string",
-      "enum": ["None", "HighAvailability", "DisasterRecovery"],
+      "enum": [
+        "None",
+        "HighAvailability",
+        "DisasterRecovery"
+      ],
       "x-ms-enum": {
         "name": "MultiSubnetIntent",
         "modelAsString": true
@@ -19407,7 +19995,10 @@
     "NodePoolMode": {
       "type": "string",
       "description": "Node Pool Mode.",
-      "enum": ["User", "System"],
+      "enum": [
+        "User",
+        "System"
+      ],
       "x-ms-enum": {
         "name": "NodePoolMode",
         "modelAsString": true,
@@ -19428,7 +20019,10 @@
     "OSType": {
       "type": "string",
       "description": "Operating System Type.",
-      "enum": ["Linux", "Windows"],
+      "enum": [
+        "Linux",
+        "Windows"
+      ],
       "x-ms-enum": {
         "name": "OSType",
         "modelAsString": true,
@@ -19804,11 +20398,17 @@
           }
         }
       },
-      "required": ["edges"]
+      "required": [
+        "edges"
+      ]
     },
     "OsLicense": {
       "type": "string",
-      "enum": ["Unknown", "Yes", "No"],
+      "enum": [
+        "Unknown",
+        "Yes",
+        "No"
+      ],
       "x-ms-enum": {
         "name": "OsLicense",
         "modelAsString": true
@@ -19848,7 +20448,10 @@
           "$ref": "#/definitions/OverviewSummaryProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -19874,7 +20477,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "OverviewSummaryProperties": {
       "type": "object",
@@ -20012,7 +20617,10 @@
           "$ref": "#/definitions/PaasSummaryProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -20038,7 +20646,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "PaasSummaryProperties": {
       "type": "object",
@@ -20058,7 +20668,12 @@
     },
     "Percentile": {
       "type": "string",
-      "enum": ["Percentile50", "Percentile90", "Percentile95", "Percentile99"],
+      "enum": [
+        "Percentile50",
+        "Percentile90",
+        "Percentile95",
+        "Percentile99"
+      ],
       "x-ms-enum": {
         "name": "Percentile",
         "modelAsString": true
@@ -20088,12 +20703,20 @@
           "description": "Gets percentile utilization for performance data."
         }
       },
-      "required": ["timeRange", "percentile"]
+      "required": [
+        "timeRange",
+        "percentile"
+      ]
     },
     "PerformanceDataTimeRange": {
       "type": "string",
       "description": "Performance Data Time Range.",
-      "enum": ["Day", "Week", "Month", "Custom"],
+      "enum": [
+        "Day",
+        "Week",
+        "Month",
+        "Custom"
+      ],
       "x-ms-enum": {
         "name": "PerformanceDataTimeRange",
         "modelAsString": true,
@@ -20124,7 +20747,10 @@
     "PricingTier": {
       "type": "string",
       "description": "Pricing Tier for Azure.",
-      "enum": ["Standard", "Free"],
+      "enum": [
+        "Standard",
+        "Free"
+      ],
       "x-ms-enum": {
         "name": "PricingTier",
         "modelAsString": true,
@@ -20150,7 +20776,10 @@
           "$ref": "../../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -20176,7 +20805,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "PrivateLinkResource": {
       "type": "object",
@@ -20186,7 +20817,10 @@
           "$ref": "../../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResourceProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -20212,7 +20846,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "ProblemDetails": {
       "type": "object",
@@ -20391,7 +21027,10 @@
     "ProjectStatus": {
       "type": "string",
       "description": "Project Status.",
-      "enum": ["Active", "Inactive"],
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
       "x-ms-enum": {
         "name": "ProjectStatus",
         "modelAsString": true,
@@ -20466,7 +21105,13 @@
     "ProvisioningStatus": {
       "type": "string",
       "description": "Provisioning Status.",
-      "enum": ["Unknown", "Succeeded", "Failed", "Canceled", "InProgress"],
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress"
+      ],
       "x-ms-enum": {
         "name": "ProvisioningStatus",
         "modelAsString": true,
@@ -20502,7 +21147,12 @@
     "Readiness": {
       "type": "string",
       "description": "Readiness for Azure.",
-      "enum": ["Unknown", "NotReady", "ReadyWithConditions", "Ready"],
+      "enum": [
+        "Unknown",
+        "NotReady",
+        "ReadyWithConditions",
+        "Ready"
+      ],
       "x-ms-enum": {
         "name": "Readiness",
         "modelAsString": true,
@@ -20688,7 +21338,13 @@
     "ReportStatus": {
       "type": "string",
       "description": "Business case supported report status types.",
-      "enum": ["Unknown", "None", "InProgress", "Failed", "Completed"],
+      "enum": [
+        "Unknown",
+        "None",
+        "InProgress",
+        "Failed",
+        "Completed"
+      ],
       "x-ms-enum": {
         "name": "ReportStatus",
         "modelAsString": true,
@@ -20724,7 +21380,10 @@
     "ReportType": {
       "type": "string",
       "description": "Business case supported report types.",
-      "enum": ["Unknown", "Excel"],
+      "enum": [
+        "Unknown",
+        "Excel"
+      ],
       "x-ms-enum": {
         "name": "ReportType",
         "modelAsString": true,
@@ -20757,7 +21416,10 @@
           "description": "Gets or sets memory."
         }
       },
-      "required": ["cores", "memory"]
+      "required": [
+        "cores",
+        "memory"
+      ]
     },
     "ResourceId": {
       "type": "object",
@@ -20773,7 +21435,11 @@
     "SavingsOption": {
       "type": "string",
       "description": "Business case supported Savings Option types.",
-      "enum": ["Unknown", "RI3Year", "SavingsPlan3Year"],
+      "enum": [
+        "Unknown",
+        "RI3Year",
+        "SavingsPlan3Year"
+      ],
       "x-ms-enum": {
         "name": "SavingsOption",
         "modelAsString": true,
@@ -20866,7 +21532,10 @@
           "$ref": "#/definitions/CollectorPropertiesBaseWithAgent",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -20892,7 +21561,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "ServersDiscovered": {
       "type": "object",
@@ -20961,7 +21632,9 @@
           "description": "On-premise settings."
         }
       },
-      "required": ["azureSettings"]
+      "required": [
+        "azureSettings"
+      ]
     },
     "SharedResourcesDTO": {
       "type": "object",
@@ -21105,7 +21778,11 @@
     },
     "SqlAssessmentMigrationIssueCategory": {
       "type": "string",
-      "enum": ["Issue", "Warning", "Internal"],
+      "enum": [
+        "Issue",
+        "Warning",
+        "Internal"
+      ],
       "x-ms-enum": {
         "name": "SqlAssessmentMigrationIssueCategory",
         "modelAsString": true
@@ -21119,7 +21796,10 @@
           "$ref": "#/definitions/SqlAssessmentOptionsProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -21145,7 +21825,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "SqlAssessmentOptionsProperties": {
       "type": "object",
@@ -21276,7 +21958,10 @@
           "$ref": "#/definitions/SqlAssessmentV2Properties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -21399,7 +22084,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "SqlAssessmentV2PaasSuitabilityData": {
       "type": "object",
@@ -21679,7 +22366,10 @@
           "$ref": "#/definitions/SqlAssessmentV2SummaryProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -21750,7 +22440,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "SqlAssessmentV2SummaryProperties": {
       "type": "object",
@@ -21915,7 +22607,10 @@
           "$ref": "#/definitions/CollectorPropertiesBaseWithAgent",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -21941,7 +22636,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "SqlDbSettings": {
       "type": "object",
@@ -22004,7 +22701,12 @@
     },
     "SqlFCIState": {
       "type": "string",
-      "enum": ["Unknown", "Active", "Passive", "NotApplicable"],
+      "enum": [
+        "Unknown",
+        "Active",
+        "Passive",
+        "NotApplicable"
+      ],
       "x-ms-enum": {
         "name": "SqlFCIState",
         "modelAsString": true
@@ -22133,7 +22835,11 @@
     },
     "SqlServerLicense": {
       "type": "string",
-      "enum": ["Unknown", "Yes", "No"],
+      "enum": [
+        "Unknown",
+        "Yes",
+        "No"
+      ],
       "x-ms-enum": {
         "name": "SqlServerLicense",
         "modelAsString": true
@@ -22142,7 +22848,11 @@
     "SqlServerLicenseType": {
       "type": "string",
       "description": "Business case supported SQL Server License types.",
-      "enum": ["Unknown", "Enterprise", "Standard"],
+      "enum": [
+        "Unknown",
+        "Enterprise",
+        "Standard"
+      ],
       "x-ms-enum": {
         "name": "SqlServerLicenseType",
         "modelAsString": true,
@@ -22184,7 +22894,11 @@
           "description": "Software assurance (SA) cost."
         }
       },
-      "required": ["version", "licenseCost", "softwareAssuranceCost"]
+      "required": [
+        "version",
+        "licenseCost",
+        "softwareAssuranceCost"
+      ]
     },
     "SqlServiceTier": {
       "type": "object",
@@ -22259,7 +22973,11 @@
     "SuggestedMigrationTool": {
       "type": "string",
       "description": "Suggested Migration Tool for Azure.",
-      "enum": ["None", "WebAppMigration", "ServerMigration"],
+      "enum": [
+        "None",
+        "WebAppMigration",
+        "ServerMigration"
+      ],
       "x-ms-enum": {
         "name": "SuggestedMigrationTool",
         "modelAsString": true,
@@ -22285,7 +23003,10 @@
     "Suitability": {
       "type": "string",
       "description": "Suitability for Azure.",
-      "enum": ["NotSuitable", "Suitable"],
+      "enum": [
+        "NotSuitable",
+        "Suitable"
+      ],
       "x-ms-enum": {
         "name": "Suitability",
         "modelAsString": true,
@@ -22350,7 +23071,10 @@
           "description": "Gets or sets monthly cost."
         }
       },
-      "required": ["count", "monthlyCost"]
+      "required": [
+        "count",
+        "monthlyCost"
+      ]
     },
     "SummaryPropertiesBase": {
       "type": "object",
@@ -22435,7 +23159,12 @@
     "SupportabilityStatus": {
       "type": "string",
       "description": "Supportability Status.",
-      "enum": ["Unknown", "Mainstream", "Extended", "OutOfSupport"],
+      "enum": [
+        "Unknown",
+        "Mainstream",
+        "Extended",
+        "OutOfSupport"
+      ],
       "x-ms-enum": {
         "name": "SupportabilityStatus",
         "modelAsString": true,
@@ -22480,7 +23209,10 @@
           "x-ms-identifiers": []
         }
       },
-      "required": ["assessmentResult", "migrationIssues"]
+      "required": [
+        "assessmentResult",
+        "migrationIssues"
+      ]
     },
     "TargetSpecificSummary": {
       "type": "object",
@@ -22535,11 +23267,19 @@
           "description": "Support Cost."
         }
       },
-      "required": ["licenseCost", "supportCost"]
+      "required": [
+        "licenseCost",
+        "supportCost"
+      ]
     },
     "TimeRange": {
       "type": "string",
-      "enum": ["Day", "Week", "Month", "Custom"],
+      "enum": [
+        "Day",
+        "Week",
+        "Month",
+        "Custom"
+      ],
       "x-ms-enum": {
         "name": "TimeRange",
         "modelAsString": true
@@ -22687,7 +23427,10 @@
           "$ref": "#/definitions/CollectorPropertiesBaseWithAgent",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -22713,7 +23456,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "VsphereLicense": {
       "type": "object",
@@ -22724,7 +23469,9 @@
           "description": "VSphere licence type."
         }
       },
-      "required": ["licenseType"],
+      "required": [
+        "licenseType"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/VsphereLicenseBase"
@@ -22751,7 +23498,11 @@
           "description": "Production support cost."
         }
       },
-      "required": ["licenseCost", "basicSupportCost", "productionSupportCost"]
+      "required": [
+        "licenseCost",
+        "basicSupportCost",
+        "productionSupportCost"
+      ]
     },
     "VsphereManagementLicense": {
       "type": "object",
@@ -22762,7 +23513,9 @@
           "description": "VSphere licence type."
         }
       },
-      "required": ["licenseType"],
+      "required": [
+        "licenseType"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/VsphereLicenseBase"
@@ -22772,7 +23525,10 @@
     "VsphereManagementLicenseType": {
       "type": "string",
       "description": "Business case supported Vsphere Management License types.",
-      "enum": ["Unknown", "VSphereServerStandard"],
+      "enum": [
+        "Unknown",
+        "VSphereServerStandard"
+      ],
       "x-ms-enum": {
         "name": "VsphereManagementLicenseType",
         "modelAsString": true,
@@ -22803,7 +23559,9 @@
           "x-ms-identifiers": []
         }
       },
-      "required": ["licenseAndSupportList"]
+      "required": [
+        "licenseAndSupportList"
+      ]
     },
     "WebApp": {
       "type": "object",
@@ -22856,7 +23614,10 @@
           "$ref": "#/definitions/WebAppAssessmentOptionsProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -22882,7 +23643,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "WebAppAssessmentOptionsProperties": {
       "type": "object",
@@ -22955,7 +23718,10 @@
           "$ref": "#/definitions/WebAppAssessmentV2Properties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -22981,7 +23747,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "WebAppAssessmentV2Properties": {
       "type": "object",
@@ -23124,7 +23892,10 @@
           "$ref": "#/definitions/WebAppAssessmentV2SummaryProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -23150,7 +23921,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "WebAppAssessmentV2SummaryProperties": {
       "type": "object",
@@ -23182,7 +23955,10 @@
           "$ref": "#/definitions/CollectorPropertiesBaseWithAgent",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -23208,7 +23984,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "WebAppDistribution": {
       "type": "object",
@@ -23247,7 +24025,11 @@
           }
         }
       },
-      "required": ["issueId", "issueCategory", "issueDescriptionList"]
+      "required": [
+        "issueId",
+        "issueCategory",
+        "issueDescriptionList"
+      ]
     },
     "WebAppServicePlanV2": {
       "type": "object",
@@ -23257,7 +24039,10 @@
           "$ref": "#/definitions/WebAppServicePlanV2Properties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -23283,7 +24068,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "WebAppServicePlanV2Properties": {
       "type": "object",
@@ -23372,7 +24159,10 @@
           "x-ms-identifiers": []
         }
       },
-      "required": ["webAppServicePlanName", "numberOfWebApps"]
+      "required": [
+        "webAppServicePlanName",
+        "numberOfWebApps"
+      ]
     },
     "WebAppSkuDetails": {
       "type": "object",
@@ -23407,7 +24197,11 @@
           "readOnly": true
         }
       },
-      "required": ["skuName", "skuSize", "appServicePlanCount"]
+      "required": [
+        "skuName",
+        "skuSize",
+        "appServicePlanCount"
+      ]
     },
     "WebAppTargetOptions": {
       "type": "object",
@@ -23453,7 +24247,11 @@
     "WebAppType": {
       "type": "string",
       "description": "Web App Type.",
-      "enum": ["Unknown", "IIS", "Tomcat"],
+      "enum": [
+        "Unknown",
+        "IIS",
+        "Tomcat"
+      ],
       "x-ms-enum": {
         "name": "WebAppType",
         "modelAsString": true,
@@ -23479,7 +24277,11 @@
     "WebAppTypes": {
       "type": "string",
       "description": "Business case supported WebApp types.",
-      "enum": ["Unknown", "ASPNET", "Tomcat"],
+      "enum": [
+        "Unknown",
+        "ASPNET",
+        "Tomcat"
+      ],
       "x-ms-enum": {
         "name": "WebAppTypes",
         "modelAsString": true,
@@ -23522,7 +24324,11 @@
           "description": "Licenses per core."
         }
       },
-      "required": ["licenseCost", "softwareAssuranceCost", "licensesPerCore"]
+      "required": [
+        "licenseCost",
+        "softwareAssuranceCost",
+        "licensesPerCore"
+      ]
     },
     "WorkloadSummary": {
       "type": "object",
