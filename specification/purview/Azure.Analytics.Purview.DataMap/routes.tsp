@@ -28,20 +28,6 @@ model NameInPath {
   name: string;
 }
 
-@doc("Operation for Atlas service")
-op AtlasOperation<
-  TParams extends TypeSpec.Reflection.Model,
-  TResponse,
-  Traits extends TypeSpec.Reflection.Model = {},
-  TErrorResponse = ErrorResponse
->(
-  ...TraitProperties<
-    Traits & VersionParameterTrait<ApiVersionParameter>,
-    TraitLocation.ApiVersionParameter
-  >,
-  ...TParams,
-): TResponse | TErrorResponse;
-
 @doc("Operation for DataMap service")
 op DataMapBaseOperation<
   TParams extends TypeSpec.Reflection.Model,
@@ -71,7 +57,7 @@ For each contact type, the maximum number of contacts is 20.
 """)
   @route("/atlas/v2/entity")
   @post
-  createOrUpdate is AtlasOperation<
+  createOrUpdate is DataMapBaseOperation<
     {
       @doc("""
 Used to define the update behavior for business attributes when updating
@@ -99,7 +85,7 @@ need to move an entity to another collection.
   @doc("List entities in bulk identified by its GUIDs.")
   @route("/atlas/v2/entity/bulk")
   @get
-  listByGuids is AtlasOperation<
+  listByGuids is DataMapBaseOperation<
     {
       @doc("An array of GUIDs of entities to list.")
       @query({format: "multi"})
@@ -129,7 +115,7 @@ is 20.
 """)
   @route("/atlas/v2/entity/bulk")
   @post
-  bulkCreateOrUpdate is AtlasOperation<
+  bulkCreateOrUpdate is DataMapBaseOperation<
     {
       @doc("""
 The collection where entities will be moved to. Only specify a value if you
@@ -161,7 +147,7 @@ attributes.
 """)
   @route("/atlas/v2/entity/bulk")
   @delete
-  bulkDelete is AtlasOperation<
+  bulkDelete is DataMapBaseOperation<
     {
       @doc("An array of GUIDs of entities to delete.")
       @query({format: "multi"})
@@ -174,7 +160,7 @@ attributes.
   @doc("Associate a classification to multiple entities in bulk.")
   @route("/atlas/v2/entity/bulk/classification")
   @post
-  addClassification is AtlasOperation<
+  addClassification is DataMapBaseOperation<
     {
       @doc("The request to associate a classification to multiple entities.")
       @body
@@ -187,7 +173,7 @@ attributes.
   @doc("Get complete definition of an entity given its GUID.")
   @route("/atlas/v2/entity/guid/{guid}")
   @get
-  get is AtlasOperation<
+  get is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -216,7 +202,7 @@ possible.
 """)
   @route("/atlas/v2/entity/guid/{guid}")
   @put
-  partialUpdateAttributeByGuid is AtlasOperation<
+  partialUpdateAttributeByGuid is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -238,7 +224,7 @@ possible.
   @doc("Delete an entity identified by its GUID.")
   @route("/atlas/v2/entity/guid/{guid}")
   @delete
-  delete is AtlasOperation<
+  delete is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -251,7 +237,7 @@ possible.
   @doc("Get classification for a given entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classification/{classificationName}")
   @get
-  getClassification is AtlasOperation<
+  getClassification is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -268,7 +254,7 @@ possible.
   @doc("Delete a given classification from an existing entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classification/{classificationName}")
   @delete
-  removeClassification is AtlasOperation<
+  removeClassification is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -285,7 +271,7 @@ possible.
   @doc("List classifications for a given entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classifications")
   @get
-  getClassifications is AtlasOperation<
+  getClassifications is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -299,7 +285,7 @@ possible.
   @doc("Add classifications to an existing entity represented by a GUID.")
   @route("/atlas/v2/entity/guid/{guid}/classifications")
   @post
-  addClassifications is AtlasOperation<
+  addClassifications is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -317,7 +303,7 @@ possible.
   @doc("Update classifications to an existing entity represented by a guid.")
   @route("/atlas/v2/entity/guid/{guid}/classifications")
   @put
-  updateClassifications is AtlasOperation<
+  updateClassifications is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -349,7 +335,7 @@ GET
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}")
   @get
-  getByUniqueAttributes is AtlasOperation<
+  getByUniqueAttributes is DataMapBaseOperation<
     {
       @doc("The name of the type.")
       @path
@@ -394,7 +380,7 @@ PUT
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}")
   @put
-  partialUpdateByUniqueAttributes is AtlasOperation<
+  partialUpdateByUniqueAttributes is DataMapBaseOperation<
     {
       @doc("The name of the type.")
       @path
@@ -431,7 +417,7 @@ DELETE
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}")
   @delete
-  deleteByUniqueAttribute is AtlasOperation<
+  deleteByUniqueAttribute is DataMapBaseOperation<
     {
       @doc("The name of the type.")
       @path
@@ -454,7 +440,7 @@ attributes.
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/classification/{classificationName}")
   @delete
-  removeClassificationByUniqueAttribute is AtlasOperation<
+  removeClassificationByUniqueAttribute is DataMapBaseOperation<
     {
       @doc("The name of the type.")
       @path
@@ -479,7 +465,7 @@ be changed to other unique attributes)
   @doc("Add classification to the entity identified by its type and unique attributes.")
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/classifications")
   @post
-  addClassificationsByUniqueAttribute is AtlasOperation<
+  addClassificationsByUniqueAttribute is DataMapBaseOperation<
     {
       @doc("The name of the type.")
       @path
@@ -504,7 +490,7 @@ be changed to other unique attributes)
   @doc("Update classification on an entity identified by its type and unique attributes.")
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/classifications")
   @put
-  updateClassificationsByUniqueAttribute is AtlasOperation<
+  updateClassificationsByUniqueAttribute is DataMapBaseOperation<
     {
       @doc("The name of the type.")
       @path
@@ -528,7 +514,7 @@ be changed to other unique attributes)
   @doc("Set classifications on entities in bulk.")
   @route("/atlas/v2/entity/bulk/setClassifications")
   @post
-  bulkSetClassifications is AtlasOperation<
+  bulkSetClassifications is DataMapBaseOperation<
     {
       @doc("Atlas entity headers.")
       @body
@@ -561,7 +547,7 @@ at least one unique attribute must be provided.
 """)
   @route("/atlas/v2/entity/bulk/uniqueAttribute/type/{typeName}")
   @get
-  listByUniqueAttributes is AtlasOperation<
+  listByUniqueAttributes is DataMapBaseOperation<
     {
       @doc("The name of the type.")
       @path
@@ -590,7 +576,7 @@ example. qualifiedName can be changed to other unique attributes)
   @doc("Get entity header given its GUID.")
   @route("/atlas/v2/entity/guid/{guid}/header")
   @get
-  getHeader is AtlasOperation<
+  getHeader is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -603,7 +589,7 @@ example. qualifiedName can be changed to other unique attributes)
   @doc("Remove business metadata from an entity.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata")
   @delete
-  removeBusinessMetadata is AtlasOperation<
+  removeBusinessMetadata is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -620,7 +606,7 @@ example. qualifiedName can be changed to other unique attributes)
   @doc("Add business metadata to an entity.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata")
   @post
-  addOrUpdateBusinessMetadata is AtlasOperation<
+  addOrUpdateBusinessMetadata is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -644,7 +630,7 @@ default is false.
   @doc("Delete business metadata attributes from an entity.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata/{bmName}")
   @delete
-  removeBusinessMetadataAttributes is AtlasOperation<
+  removeBusinessMetadataAttributes is DataMapBaseOperation<
     {
       @doc("BusinessMetadata name")
       @path
@@ -666,7 +652,7 @@ default is false.
   @doc("Add or update business metadata attributes.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata/{bmName}")
   @post
-  addOrUpdateBusinessMetadataAttributes is AtlasOperation<
+  addOrUpdateBusinessMetadataAttributes is DataMapBaseOperation<
     {
       @doc("BusinessMetadata name")
       @path
@@ -686,7 +672,7 @@ default is false.
   @doc("Get the sample Template for uploading/creating bulk BusinessMetaData")
   @route("/atlas/v2/entity/businessmetadata/import/template")
   @get
-  getSampleBusinessMetadataTemplate is AtlasOperation<
+  getSampleBusinessMetadataTemplate is DataMapBaseOperation<
     {
       @doc("Accept header")
       @header
@@ -699,7 +685,7 @@ default is false.
   @doc("Upload the file for creating Business Metadata in BULK")
   @route("/atlas/v2/entity/businessmetadata/import")
   @post
-  importBusinessMetadata is AtlasOperation<
+  importBusinessMetadata is DataMapBaseOperation<
     {
       @doc("InputStream of file")
       @body
@@ -713,7 +699,7 @@ default is false.
   @doc("Delete given labels to a given entity.")
   @route("/atlas/v2/entity/guid/{guid}/labels")
   @delete
-  removeLabels is AtlasOperation<
+  removeLabels is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -731,7 +717,7 @@ default is false.
   @doc("Set labels to a given entity.")
   @route("/atlas/v2/entity/guid/{guid}/labels")
   @post
-  setLabels is AtlasOperation<
+  setLabels is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -749,7 +735,7 @@ default is false.
   @doc("Add given labels to a given entity.")
   @route("/atlas/v2/entity/guid/{guid}/labels")
   @put
-  addLabel is AtlasOperation<
+  addLabel is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -781,7 +767,7 @@ this: DELETE
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/labels")
   @delete
-  removeLabelsByUniqueAttribute is AtlasOperation<
+  removeLabelsByUniqueAttribute is DataMapBaseOperation<
     {
       @doc("The name of the type.")
       @path
@@ -822,7 +808,7 @@ request would look something like this: POST
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/labels")
   @post
-  setLabelsByUniqueAttribute is AtlasOperation<
+  setLabelsByUniqueAttribute is DataMapBaseOperation<
     {
       @doc("The name of the type.")
       @path
@@ -863,7 +849,7 @@ request would look something like this: PUT
 """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/labels")
   @put
-  addLabelsByUniqueAttribute is AtlasOperation<
+  addLabelsByUniqueAttribute is DataMapBaseOperation<
     {
       @doc("The name of the type.")
       @path
@@ -883,6 +869,7 @@ be changed to other unique attributes)
     void
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Move existing entities to the target collection.")
   @route("/entity/moveTo")
   @post
@@ -914,7 +901,7 @@ and
 """)
   @route("/atlas/v2/glossary")
   @get
-  list is AtlasOperation<
+  list is DataMapBaseOperation<
     {
       @doc("The page size - by default there is no paging.")
       @query
@@ -940,7 +927,7 @@ and
   @doc("Create a glossary.")
   @route("/atlas/v2/glossary")
   @post
-  create is AtlasOperation<
+  create is DataMapBaseOperation<
     {
       @doc("""
 Glossary definition, terms & categories can be anchored to a glossary.
@@ -958,7 +945,7 @@ the anchor attribute when creating the Term/Category.
   @doc("Create glossary category in bulk.")
   @route("/atlas/v2/glossary/categories")
   @post
-  createCategories is AtlasOperation<
+  createCategories is DataMapBaseOperation<
     {
       @doc("An array of glossary category definitions to be created.")
       @body
@@ -971,7 +958,7 @@ the anchor attribute when creating the Term/Category.
   @doc("Create a glossary category.")
   @route("/atlas/v2/glossary/category")
   @post
-  createCategory is AtlasOperation<
+  createCategory is DataMapBaseOperation<
     {
       @doc("""
 The glossary category definition. A category must be anchored to a Glossary
@@ -989,7 +976,7 @@ can also be defined during creation.
   @doc("Get specific glossary category by its GUID.")
   @route("/atlas/v2/glossary/category/{categoryGuid}")
   @get
-  getCategory is AtlasOperation<
+  getCategory is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1002,7 +989,7 @@ can also be defined during creation.
   @doc("Update the given glossary category by its GUID.")
   @route("/atlas/v2/glossary/category/{categoryGuid}")
   @put
-  updateCategory is AtlasOperation<
+  updateCategory is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1019,7 +1006,7 @@ can also be defined during creation.
   @doc("Delete a glossary category.")
   @route("/atlas/v2/glossary/category/{categoryGuid}")
   @delete
-  deleteCategory is AtlasOperation<
+  deleteCategory is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1037,7 +1024,7 @@ updating shortDescription and longDescription for category.
 """)
   @route("/atlas/v2/glossary/category/{categoryGuid}/partial")
   @put
-  partialUpdateCategory is AtlasOperation<
+  partialUpdateCategory is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1060,7 +1047,7 @@ parameters are currently not being enabled and won't work even they are passed.
 """)
   @route("/atlas/v2/glossary/category/{categoryGuid}/related")
   @get
-  listRelatedCategories is AtlasOperation<
+  listRelatedCategories is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1085,7 +1072,7 @@ parameters are currently not being enabled and won't work even they are passed.
   @doc("Get all terms associated with the specific category.")
   @route("/atlas/v2/glossary/category/{categoryGuid}/terms")
   @get
-  listCategoryTerms is AtlasOperation<
+  listCategoryTerms is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the category.")
       @path
@@ -1110,7 +1097,7 @@ parameters are currently not being enabled and won't work even they are passed.
   @doc("Create a glossary term.")
   @route("/atlas/v2/glossary/term")
   @post
-  createTerm is AtlasOperation<
+  createTerm is DataMapBaseOperation<
     {
       @doc("Whether include term hierarchy")
       @query
@@ -1131,7 +1118,7 @@ Optionally it can be categorized as well.
   @doc("Get a specific glossary term by its GUID. ")
   @route("/atlas/v2/glossary/term/{termGuid}")
   @get
-  getTerm is AtlasOperation<
+  getTerm is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1144,7 +1131,7 @@ Optionally it can be categorized as well.
   @doc("Update the given glossary term by its GUID.")
   @route("/atlas/v2/glossary/term/{termGuid}")
   @put
-  updateTerm is AtlasOperation<
+  updateTerm is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1165,7 +1152,7 @@ Optionally it can be categorized as well.
   @doc("Delete a glossary term.")
   @route("/atlas/v2/glossary/term/{termGuid}")
   @delete
-  deleteTerm is AtlasOperation<
+  deleteTerm is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1182,7 +1169,7 @@ shortDescription, longDescription, abbreviation, usage and status for term.
 """)
   @route("/atlas/v2/glossary/term/{termGuid}/partial")
   @put
-  partialUpdateTerm is AtlasOperation<
+  partialUpdateTerm is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1207,7 +1194,7 @@ values to be updated.
   @doc("Create glossary terms in bulk.")
   @route("/atlas/v2/glossary/terms")
   @post
-  createTerms is AtlasOperation<
+  createTerms is DataMapBaseOperation<
     {
       @doc("Whether include term hierarchy")
       @query
@@ -1227,7 +1214,7 @@ limit/offset to get pagination result.
 """)
   @route("/atlas/v2/glossary/terms/{termGuid}/assignedEntities")
   @get
-  listEntitiesAssignedWithTerm is AtlasOperation<
+  listEntitiesAssignedWithTerm is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1260,7 +1247,7 @@ is an alternative to assign a term to multiple entities.
 """)
   @route("/atlas/v2/glossary/terms/{termGuid}/assignedEntities")
   @post
-  assignTermToEntities is AtlasOperation<
+  assignTermToEntities is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1278,7 +1265,7 @@ is an alternative to assign a term to multiple entities.
   @doc("Delete the term assignment for the given list of related objects.")
   @route("/atlas/v2/glossary/terms/{termGuid}/assignedEntities")
   @delete
-  deleteTermAssignmentFromEntities is AtlasOperation<
+  deleteTermAssignmentFromEntities is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1298,7 +1285,7 @@ parameters are currently not being enabled and won't work even they are passed.
 """)
   @route("/atlas/v2/glossary/terms/{termGuid}/related")
   @get
-  listRelatedTerms is AtlasOperation<
+  listRelatedTerms is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary term.")
       @path
@@ -1323,7 +1310,7 @@ parameters are currently not being enabled and won't work even they are passed.
   @doc("Get a specific Glossary by its GUID.")
   @route("/atlas/v2/glossary/{glossaryGuid}")
   @get
-  get is AtlasOperation<
+  get is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1336,7 +1323,7 @@ parameters are currently not being enabled and won't work even they are passed.
   @doc("Update the given glossary.")
   @route("/atlas/v2/glossary/{glossaryGuid}")
   @put
-  update is AtlasOperation<
+  update is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1360,7 +1347,7 @@ separate delete terms and categories.
 """)
   @route("/atlas/v2/glossary/{glossaryGuid}")
   @delete
-  delete is AtlasOperation<
+  delete is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1376,7 +1363,7 @@ limit/offset to get pagination result.
 """)
   @route("/atlas/v2/glossary/{glossaryGuid}/categories")
   @get
-  listCategories is AtlasOperation<
+  listCategories is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1404,7 +1391,7 @@ limit/offset to get pagination result.
 """)
   @route("/atlas/v2/glossary/{glossaryGuid}/categories/headers")
   @get
-  listCategoriesHeaders is AtlasOperation<
+  listCategoriesHeaders is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1440,7 +1427,7 @@ Recommend to fetch terms/categories details separately using
 """)
   @route("/atlas/v2/glossary/{glossaryGuid}/detailed")
   @get
-  getDetailed is AtlasOperation<
+  getDetailed is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1463,7 +1450,7 @@ using 'ignoreTermsAndCategories=true' to reduce response body size.
 """)
   @route("/atlas/v2/glossary/{glossaryGuid}/partial")
   @put
-  partialUpdate is AtlasOperation<
+  partialUpdate is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1490,7 +1477,7 @@ pagination result.
 """)
   @route("/atlas/v2/glossary/{glossaryGuid}/terms")
   @get
-  listTerms is AtlasOperation<
+  listTerms is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1518,7 +1505,7 @@ to get pagination result.
 """)
   @route("/atlas/v2/glossary/{glossaryGuid}/terms/headers")
   @get
-  listTermHeaders is AtlasOperation<
+  listTermHeaders is DataMapBaseOperation<
     {
       @doc("The globally unique identifier for glossary.")
       @path
@@ -1541,6 +1528,7 @@ to get pagination result.
 }
 
 interface Discovery {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Get data using search.")
   @route("/search/query")
   @post
@@ -1553,6 +1541,7 @@ interface Discovery {
     SearchResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Get search suggestions by query criteria.")
   @route("/search/suggest")
   @post
@@ -1565,6 +1554,7 @@ interface Discovery {
     SuggestResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Get auto complete options.")
   @route("/search/autocomplete")
   @post
@@ -1583,7 +1573,7 @@ interface Lineage {
   @doc("Get lineage info of the entity specified by GUID.")
   @route("/atlas/v2/lineage/{guid}")
   @get
-  get is AtlasOperation<
+  get is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -1600,6 +1590,7 @@ interface Lineage {
     AtlasLineageInfo
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Return immediate next page lineage info about entity with pagination")
   @route("/lineage/{guid}/next/")
   @get
@@ -1645,7 +1636,7 @@ GET
 """)
   @route("/atlas/v2/lineage/uniqueAttribute/type/{typeName}")
   @get
-  getByUniqueAttribute is AtlasOperation<
+  getByUniqueAttribute is DataMapBaseOperation<
     {
       @doc("The name of the type.")
       @path
@@ -1675,7 +1666,7 @@ interface Relationship {
   @doc("Create a new relationship between entities.")
   @route("/atlas/v2/relationship")
   @post
-  create is AtlasOperation<
+  create is DataMapBaseOperation<
     {
       @doc("""
 The AtlasRelationship object containing the information for the relationship to
@@ -1691,7 +1682,7 @@ be created.
   @doc("Update an existing relationship between entities.")
   @route("/atlas/v2/relationship")
   @put
-  update is AtlasOperation<
+  update is DataMapBaseOperation<
     {
       @doc("""
 The AtlasRelationship object containing the information for the relationship to
@@ -1707,7 +1698,7 @@ be created.
   @doc("Get relationship information between entities by its GUID.")
   @route("/atlas/v2/relationship/guid/{guid}")
   @get
-  get is AtlasOperation<
+  get is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the relationship.")
       @path
@@ -1724,7 +1715,7 @@ be created.
   @doc("Delete a relationship between entities by its GUID.")
   @route("/atlas/v2/relationship/guid/{guid}")
   @delete
-  delete is AtlasOperation<
+  delete is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the relationship.")
       @path
@@ -1760,7 +1751,7 @@ be created.
 //   @doc("Get the term template definition for the given GUID.")
 //   @route("/test/termtemplatedef/guid/{guid}")
 //   @get
-//   get_TermTemplateDefByGuid is AtlasOperation<
+//   get_TermTemplateDefByGuid is DataMapBaseOperation<
 //   {
 //     @doc("Ddd")
 //     @path
@@ -1775,7 +1766,7 @@ interface TypeDef{
   @doc("Get the businessMetadata definition for the given guid.")
   @route("/atlas/v2/types/businessmetadatadef/guid/{guid}")
   @get
-  getBusinessMetadataDefByGuid is AtlasOperation<
+  getBusinessMetadataDefByGuid is DataMapBaseOperation<
     {
       @doc("businessMetadata guid")
       @path
@@ -1788,7 +1779,7 @@ interface TypeDef{
   @doc("Get the businessMetadata definition by it's name (unique).")
   @route("/atlas/v2/types/businessmetadatadef/name/{name}")
   @get
-  getBusinessMetadataDefByName is AtlasOperation<
+  getBusinessMetadataDefByName is DataMapBaseOperation<
     {
       @doc("businessMetadata name")
       @path
@@ -1801,7 +1792,7 @@ interface TypeDef{
   @doc("Get the classification definition for the given GUID.")
   @route("/atlas/v2/types/classificationdef/guid/{guid}")
   @get
-  getClassificationDefByGuid is AtlasOperation<
+  getClassificationDefByGuid is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the classification.")
       @path
@@ -1814,7 +1805,7 @@ interface TypeDef{
   @doc("Get the classification definition by its name (unique).")
   @route("/atlas/v2/types/classificationdef/name/{name}")
   @get
-  getClassificationDefByName is AtlasOperation<
+  getClassificationDefByName is DataMapBaseOperation<
     {
       @doc("The name of the classification.")
       @path
@@ -1827,7 +1818,7 @@ interface TypeDef{
   @doc("Get the Entity definition for the given GUID.")
   @route("/atlas/v2/types/entitydef/guid/{guid}")
   @get
-  getEntityDefByGuid is AtlasOperation<
+  getEntityDefByGuid is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
@@ -1840,7 +1831,7 @@ interface TypeDef{
   @doc("Get the entity definition by its name (unique).")
   @route("/atlas/v2/types/entitydef/name/{name}")
   @get
-  getEntityDefByName is AtlasOperation<
+  getEntityDefByName is DataMapBaseOperation<
     {
       @doc("The name of the entity.")
       @path
@@ -1853,7 +1844,7 @@ interface TypeDef{
   @doc("Get the enum definition for the given GUID.")
   @route("/atlas/v2/types/enumdef/guid/{guid}")
   @get
-  getEnumDefByGuid is AtlasOperation<
+  getEnumDefByGuid is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the enum.")
       @path
@@ -1866,7 +1857,7 @@ interface TypeDef{
   @doc("Get the enum definition by its name (unique).")
   @route("/atlas/v2/types/enumdef/name/{name}")
   @get
-  getEnumDefByName is AtlasOperation<
+  getEnumDefByName is DataMapBaseOperation<
     {
       @doc("The name of the enum.")
       @path
@@ -1879,7 +1870,7 @@ interface TypeDef{
   @doc("Get the relationship definition for the given GUID.")
   @route("/atlas/v2/types/relationshipdef/guid/{guid}")
   @get
-  getRelationshipDefByGuid is AtlasOperation<
+  getRelationshipDefByGuid is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the relationship.")
       @path
@@ -1892,7 +1883,7 @@ interface TypeDef{
   @doc("Get the relationship definition by its name (unique).")
   @route("/atlas/v2/types/relationshipdef/name/{name}")
   @get
-  getRelationshipDefByName is AtlasOperation<
+  getRelationshipDefByName is DataMapBaseOperation<
     {
       @doc("The name of the relationship.")
       @path
@@ -1905,7 +1896,7 @@ interface TypeDef{
   @doc("Get the struct definition for the given GUID.")
   @route("/atlas/v2/types/structdef/guid/{guid}")
   @get
-  getStructDefByGuid is AtlasOperation<
+  getStructDefByGuid is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the struct.")
       @path
@@ -1918,7 +1909,7 @@ interface TypeDef{
   @doc("Get the struct definition by its name (unique).")
   @route("/atlas/v2/types/structdef/name/{name}")
   @get
-  getStructDefByName is AtlasOperation<
+  getStructDefByName is DataMapBaseOperation<
     {
       @doc("The name of the struct.")
       @path
@@ -1931,7 +1922,7 @@ interface TypeDef{
   @doc("Get the type definition for the given GUID.")
   @route("/atlas/v2/types/typedef/guid/{guid}")
   @get
-  getByGuid is AtlasOperation<
+  getByGuid is DataMapBaseOperation<
     {
       @doc("The globally unique identifier of the type.")
       @path
@@ -1944,7 +1935,7 @@ interface TypeDef{
   @doc("Get the type definition by its name (unique).")
   @route("/atlas/v2/types/typedef/name/{name}")
   @get
-  getByName is AtlasOperation<
+  getByName is DataMapBaseOperation<
     {
       @doc("The name of the type.")
       @path
@@ -1957,7 +1948,7 @@ interface TypeDef{
   @doc("Delete API for type identified by its name.")
   @route("/atlas/v2/types/typedef/name/{name}")
   @delete
-  delete is AtlasOperation<
+  delete is DataMapBaseOperation<
     {
       @doc("The name of the type.")
       @path
@@ -1970,7 +1961,7 @@ interface TypeDef{
   @doc("List all type definitions in bulk.")
   @route("/atlas/v2/types/typedefs")
   @get
-  list is AtlasOperation<
+  list is DataMapBaseOperation<
     {
       @doc("""
 Whether include termtemplatedef when return all typedefs.
@@ -1995,7 +1986,7 @@ Any changes to the existing definitions will be discarded.
 """)
   @route("/atlas/v2/types/typedefs")
   @post
-  bulkCreate is AtlasOperation<
+  bulkCreate is DataMapBaseOperation<
     {
       @doc("A composite wrapper object with corresponding lists of the type definition.")
       @body
@@ -2011,7 +2002,7 @@ persisted.
 """)
   @route("/atlas/v2/types/typedefs")
   @put
-  bulkUpdate is AtlasOperation<
+  bulkUpdate is DataMapBaseOperation<
     {
       @doc("A composite object that captures all type definition changes.")
       @body
@@ -2024,7 +2015,7 @@ persisted.
   @doc("Delete API for all types in bulk.")
   @route("/atlas/v2/types/typedefs")
   @delete
-  bulkDelete is AtlasOperation<
+  bulkDelete is DataMapBaseOperation<
     {
       @doc("A composite object that captures all types to be deleted")
       @body
@@ -2037,7 +2028,7 @@ persisted.
   @doc("List all type definitions returned as a list of minimal information header.")
   @route("/atlas/v2/types/typedefs/headers")
   @get
-  listHeaders is AtlasOperation<
+  listHeaders is DataMapBaseOperation<
     {
       @doc("""
 Whether include termtemplatedef when return all typedefs.
@@ -2054,6 +2045,7 @@ when search filter type=term_template
     void
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Get the term template definition for the given GUID.")
   @route("/types/termtemplatedef/guid/{guid}")
   @get
