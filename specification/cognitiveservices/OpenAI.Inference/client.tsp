@@ -22,7 +22,6 @@ namespace Azure.OpenAI;
 @@access(AudioTranscriptionOptions, Access.public, "java");
 @@access(AudioTranslation, Access.public, "java");
 @@access(AudioTranslationOptions, Access.public, "java");
-@@access(AzureOpenAIOperationState, Access.public, "java");
 
 @@access(AzureCognitiveSearchIndexFieldMappingOptions, Access.public);
 @@usage(AzureCognitiveSearchIndexFieldMappingOptions, Usage.input);
