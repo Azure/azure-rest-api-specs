@@ -14,13 +14,16 @@ A specific representation of configurable options for Elasticsearch when using i
 extension.
 """)
 model PineconeChatExtensionConfiguration
-  extends AzureChatExtensionConfiguration<AzureChatExtensionParameters> {
+  extends AzureChatExtensionConfiguration {
 
   @doc("""
   The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
   default value for Pinecone.
   """)
   type: AzureChatExtensionType.pinecone;
+
+  @doc("The parameters to use when configuring Azure OpenAI chat extensions.")
+  parameters: AzureChatExtensionParameters;
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)

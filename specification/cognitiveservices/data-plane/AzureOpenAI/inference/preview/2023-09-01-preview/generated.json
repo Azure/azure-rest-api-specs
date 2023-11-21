@@ -1092,6 +1092,24 @@
       "type": "object",
       "description": "A specific representation of configurable options for Azure Cognitive Search when using it as an Azure OpenAI chat\nextension.",
       "properties": {
+        "paramters": {
+          "$ref": "#/definitions/AzureCognitiveSearchChatExtensionParameters",
+          "description": "The parameters to use when configuring Azure Cognitive Search."
+        }
+      },
+      "required": [
+        "paramters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureCognitiveSearch"
+    },
+    "AzureCognitiveSearchChatExtensionParameters": {
+      "type": "object",
+      "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication option to access the data."
@@ -1154,13 +1172,7 @@
       "required": [
         "endpoint",
         "indexName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureChatExtensionConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureCognitiveSearch"
+      ]
     },
     "AzureCognitiveSearchIndexFieldMappingOptions": {
       "type": "object",
@@ -2507,7 +2519,8 @@
       "in": "formData",
       "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
       "required": true,
-      "type": "file",
+      "type": "string",
+      "format": "byte",
       "x-ms-parameter-location": "method"
     },
     "AudioTranscriptionOptions.language": {
@@ -2595,7 +2608,8 @@
       "in": "formData",
       "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
       "required": true,
-      "type": "file",
+      "type": "string",
+      "format": "byte",
       "x-ms-parameter-location": "method"
     },
     "AudioTranslationOptions.model": {

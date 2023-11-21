@@ -1054,6 +1054,56 @@
         "parameters"
       ]
     },
+    "AzureChatExtensionParameters": {
+      "type": "object",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
+          "description": "The authentication option to access the data."
+        },
+        "topNDocuments": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured top number of documents to feature for the configured query."
+        },
+        "inScope": {
+          "type": "boolean",
+          "description": "Whether queries should be restricted to use of indexed data."
+        },
+        "strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "roleInformation": {
+          "type": "string",
+          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
+        },
+        "environment": {
+          "type": "string",
+          "description": "The environment name of Pinecone."
+        },
+        "indexName": {
+          "type": "string",
+          "description": "The index name name of Pinecone."
+        },
+        "fieldsMapping": {
+          "$ref": "#/definitions/PineconeFieldMappingOptions",
+          "description": "Customized field mapping behavior to use when interacting with the search index."
+        },
+        "embeddingDependency": {
+          "$ref": "#/definitions/OnYourDataEmbeddingDependency",
+          "description": "The embedding dependency for vector search."
+        }
+      },
+      "required": [
+        "environment",
+        "indexName",
+        "fieldsMapping"
+      ]
+    },
     "AzureChatExtensionType": {
       "type": "string",
       "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
@@ -1140,6 +1190,24 @@
       "type": "object",
       "description": "A specific representation of configurable options for Azure Cognitive Search when using it as an Azure OpenAI chat\nextension.",
       "properties": {
+        "paramters": {
+          "$ref": "#/definitions/AzureCognitiveSearchChatExtensionParameters",
+          "description": "The parameters to use when configuring Azure Cognitive Search."
+        }
+      },
+      "required": [
+        "paramters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureCognitiveSearch"
+    },
+    "AzureCognitiveSearchChatExtensionParameters": {
+      "type": "object",
+      "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication option to access the data."
@@ -1197,13 +1265,7 @@
       "required": [
         "endpoint",
         "indexName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureChatExtensionConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureCognitiveSearch"
+      ]
     },
     "AzureCognitiveSearchIndexFieldMappingOptions": {
       "type": "object",
@@ -1294,6 +1356,24 @@
       "type": "object",
       "description": "A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat\nextension.",
       "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AzureCosmosDBChatExtensionParameters",
+          "description": "The parameters to use when configuring Azure OpenAI CosmosDB chat extensions."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureCosmosDB"
+    },
+    "AzureCosmosDBChatExtensionParameters": {
+      "type": "object",
+      "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication option to access the data."
@@ -1344,13 +1424,7 @@
         "containerName",
         "indexName",
         "fieldsMapping"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureChatExtensionConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureCosmosDB"
+      ]
     },
     "AzureCosmosDBFieldMappingOptions": {
       "type": "object",
@@ -1465,6 +1539,24 @@
       "type": "object",
       "description": "A specific representation of configurable options for Azure Machine Learning index when using it as an Azure OpenAI chat\nextension.",
       "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AzureMachineLearningIndexChatExtensionParameters",
+          "description": "The parameters for the Azure Machine Learning index chat extension."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureMLIndex"
+    },
+    "AzureMachineLearningIndexChatExtensionParameters": {
+      "type": "object",
+      "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication option to access the data."
@@ -1510,13 +1602,7 @@
         "projectResourceId",
         "name",
         "version"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureChatExtensionConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureMLIndex"
+      ]
     },
     "ChatChoice": {
       "type": "object",
@@ -2565,6 +2651,24 @@
       "type": "object",
       "description": "A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat\nextension.",
       "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ElasticsearchChatExtensionParameters",
+          "description": "The parameters to use when configuring Elasticsearch."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Elasticsearch"
+    },
+    "ElasticsearchChatExtensionParameters": {
+      "type": "object",
+      "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication option to access the data."
@@ -2614,13 +2718,7 @@
       "required": [
         "endpoint",
         "indexName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureChatExtensionConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "Elasticsearch"
+      ]
     },
     "ElasticsearchIndexFieldMappingOptions": {
       "type": "object",
@@ -3285,51 +3383,13 @@
       "type": "object",
       "description": "A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat\nextension.",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
-          "description": "The authentication option to access the data."
-        },
-        "topNDocuments": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The configured top number of documents to feature for the configured query."
-        },
-        "inScope": {
-          "type": "boolean",
-          "description": "Whether queries should be restricted to use of indexed data."
-        },
-        "strictness": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
-          "minimum": 1,
-          "maximum": 5
-        },
-        "roleInformation": {
-          "type": "string",
-          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
-        },
-        "environment": {
-          "type": "string",
-          "description": "The environment name of Pinecone."
-        },
-        "indexName": {
-          "type": "string",
-          "description": "The index name name of Pinecone."
-        },
-        "fieldsMapping": {
-          "$ref": "#/definitions/PineconeFieldMappingOptions",
-          "description": "Customized field mapping behavior to use when interacting with the search index."
-        },
-        "embeddingDependency": {
-          "$ref": "#/definitions/OnYourDataEmbeddingDependency",
-          "description": "The embedding dependency for vector search."
+        "parameters": {
+          "$ref": "#/definitions/AzureChatExtensionParameters",
+          "description": "The parameters to use when configuring Azure OpenAI chat extensions."
         }
       },
       "required": [
-        "environment",
-        "indexName",
-        "fieldsMapping"
+        "parameters"
       ],
       "allOf": [
         {
@@ -3407,7 +3467,8 @@
       "in": "formData",
       "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
       "required": true,
-      "type": "file",
+      "type": "string",
+      "format": "byte",
       "x-ms-parameter-location": "method"
     },
     "AudioTranscriptionOptions.language": {
@@ -3495,7 +3556,8 @@
       "in": "formData",
       "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
       "required": true,
-      "type": "file",
+      "type": "string",
+      "format": "byte",
       "x-ms-parameter-location": "method"
     },
     "AudioTranslationOptions.model": {

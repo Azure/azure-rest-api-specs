@@ -12,13 +12,16 @@ A specific representation of configurable options for Elasticsearch when using i
 extension.
 """)
 model ElasticsearchChatExtensionConfiguration
-  extends AzureChatExtensionConfiguration<ElasticsearchChatExtensionParameters> {
+  extends AzureChatExtensionConfiguration {
 
   @doc("""
   The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
   default value for Elasticsearch.
   """)
   type: AzureChatExtensionType.elasticsearch;
+
+  @doc("The parameters to use when configuring Elasticsearch.")
+  parameters: ElasticsearchChatExtensionParameters;
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)

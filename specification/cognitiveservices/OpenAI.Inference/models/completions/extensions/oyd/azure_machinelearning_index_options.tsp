@@ -12,13 +12,16 @@ A specific representation of configurable options for Azure Machine Learning ind
 extension.
 """)
 model AzureMachineLearningIndexChatExtensionConfiguration
-  extends AzureChatExtensionConfiguration<AzureMachineLearningIndexChatExtensionParameters> {
+  extends AzureChatExtensionConfiguration {
 
   @doc("""
   The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
   default value for Azure Machine Learning index.
   """)
   type: AzureChatExtensionType.azureMachineLearningIndex;
+
+  @doc("The parameters for the Azure Machine Learning index chat extension.")
+  parameters: AzureMachineLearningIndexChatExtensionParameters;
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)

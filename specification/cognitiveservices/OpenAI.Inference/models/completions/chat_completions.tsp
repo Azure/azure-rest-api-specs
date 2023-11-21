@@ -155,7 +155,6 @@ model ChatCompletionsOptions {
   @projectedName("csharp", "InternalNonAzureModelName")
   `model`?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "API explicitly uses arbitrary JSON structure"
   @doc("""
     The configuration entries for Azure OpenAI chat extensions that use them.
     This additional specification is only compatible with Azure OpenAI.
@@ -168,7 +167,7 @@ model ChatCompletionsOptions {
   @added(ServiceApiVersions.v2023_08_01_Preview)
   @projectedName("json", "dataSources")
   @projectedName("csharp", "InternalAzureExtensionsDataSources")
-  dataSources?: AzureChatExtensionConfiguration<unknown>[];
+  dataSources?: AzureChatExtensionConfiguration[];
 
   @added(ServiceApiVersions.v2023_12_01_Preview)
   @doc("If provided, the configuration options for available Azure OpenAI chat enhancements.")

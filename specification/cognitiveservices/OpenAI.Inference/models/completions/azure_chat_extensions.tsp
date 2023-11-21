@@ -59,19 +59,20 @@ enum AzureChatExtensionType {
   completions request that should use Azure OpenAI chat extensions to augment the response behavior.
   The use of this configuration is compatible only with Azure OpenAI.
 """)
-model AzureChatExtensionConfiguration<T> {
+model AzureChatExtensionConfiguration{
   @doc("""
     The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.
     Azure chat extensions are only compatible with Azure OpenAI.
   """)
   type: AzureChatExtensionType;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "API explicitly uses arbitrary JSON structure"
   @doc("""
     The configuration payload used for the Azure chat extension. The structure payload details are specific to the
     extension being configured.
     Azure chat extensions are only compatible with Azure OpenAI.
   """)
-  parameters: T;
+  parameters: unknown;
 }
 
 @added(ServiceApiVersions.v2023_08_01_Preview)

@@ -14,13 +14,16 @@ A specific representation of configurable options for Elasticsearch when using i
 extension.
 """)
 model AzureCosmosDBChatExtensionConfiguration
-  extends AzureChatExtensionConfiguration<AzureCosmosDBChatExtensionParameters> {
+  extends AzureChatExtensionConfiguration {
 
   @doc("""
   The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
   default value for Azure Cosmos DB.
   """)
   type: AzureChatExtensionType.azureCosmosDB;
+
+  @doc("The parameters to use when configuring Azure OpenAI CosmosDB chat extensions.")
+  parameters: AzureCosmosDBChatExtensionParameters;
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
