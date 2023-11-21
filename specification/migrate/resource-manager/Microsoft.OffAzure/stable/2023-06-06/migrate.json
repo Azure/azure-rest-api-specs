@@ -4498,20 +4498,6 @@
           "200": {
             "description": "Resource deleted successfully."
           },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
           "204": {
             "description": "Resource deleted successfully."
           },
@@ -4522,10 +4508,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "PrivateEndpointConnectionController_Delete_MaximumSet_Gen": {
             "$ref": "./examples/PrivateEndpointConnectionController_Delete_MaximumSet_Gen.json"
@@ -5236,20 +5218,6 @@
           "200": {
             "description": "Resource deleted successfully."
           },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
           "204": {
             "description": "Resource deleted successfully."
           },
@@ -5260,83 +5228,12 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "SqlDiscoverySiteDataSourceController_Delete_MaximumSet_Gen": {
             "$ref": "./examples/SqlDiscoverySiteDataSourceController_Delete_MaximumSet_Gen.json"
           },
           "SqlDiscoverySiteDataSourceController_Delete_MinimumSet_Gen": {
             "$ref": "./examples/SqlDiscoverySiteDataSourceController_Delete_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/errorDetailedSummary": {
-      "post": {
-        "operationId": "SqlSitesController_ErrorDetailedSummary",
-        "tags": [
-          "SqlSitesController"
-        ],
-        "description": "Method to get error detailed summary from SQL site.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "Site name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "sqlSiteName",
-            "in": "path",
-            "description": "SQL site name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorSummaryRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SqlSiteErrorDetails"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SqlSitesController_ErrorDetailedSummary_MaximumSet_Gen": {
-            "$ref": "./examples/SqlSitesController_ErrorDetailedSummary_MaximumSet_Gen.json"
-          },
-          "SqlSitesController_ErrorDetailedSummary_MinimumSet_Gen": {
-            "$ref": "./examples/SqlSitesController_ErrorDetailedSummary_MinimumSet_Gen.json"
           }
         }
       }
@@ -13296,20 +13193,6 @@
           "200": {
             "description": "Resource deleted successfully."
           },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
           "204": {
             "description": "Resource deleted successfully."
           },
@@ -13320,10 +13203,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "VcenterController_Delete_MaximumSet_Gen": {
             "$ref": "./examples/VcenterController_Delete_MaximumSet_Gen.json"
@@ -14160,90 +14039,6 @@
           "readOnly": true
         }
       }
-    },
-    "ErrorDetailedSummary": {
-      "type": "object",
-      "description": "The site detailed error summary model.",
-      "properties": {
-        "countOfServersAffected": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Count of servers affected by the error."
-        },
-        "message": {
-          "type": "string",
-          "description": "Gets the error message.",
-          "readOnly": true
-        },
-        "messageParameters": {
-          "type": "object",
-          "description": "Gets the message parameters.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "applianceName": {
-          "type": "string",
-          "description": "Gets the appliance name.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets the error ID.",
-          "readOnly": true
-        },
-        "code": {
-          "type": "string",
-          "description": "Gets the error name.",
-          "readOnly": true
-        },
-        "possibleCauses": {
-          "type": "string",
-          "description": "Gets the possible causes of error.",
-          "readOnly": true
-        },
-        "recommendedAction": {
-          "type": "string",
-          "description": "Gets the recommended action to resolve error.",
-          "readOnly": true
-        },
-        "severity": {
-          "type": "string",
-          "description": "Gets the error severity.",
-          "readOnly": true
-        },
-        "summaryMessage": {
-          "type": "string",
-          "description": "Gets the error summary message.",
-          "readOnly": true
-        },
-        "source": {
-          "$ref": "#/definitions/MicrosoftAzureFDSWebRoleHealthErrorDetailsSource",
-          "description": "Gets the error source.",
-          "readOnly": true
-        },
-        "updatedTimeStamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets the time stamp when the error was updated.",
-          "readOnly": true
-        },
-        "runAsAccountId": {
-          "type": "string",
-          "description": "Gets run as account id used while performing discovery of entity.",
-          "readOnly": true
-        },
-        "discoveryScope": {
-          "$ref": "#/definitions/HealthErrorDetailsDiscoveryScope",
-          "description": "Gets discovery scope for which error is encountered.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "countOfServersAffected"
-      ]
     },
     "ErrorDetails": {
       "type": "object",
@@ -20269,28 +20064,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "SqlSiteErrorDetails": {
-      "type": "object",
-      "description": "Sql site error detailed summary.",
-      "properties": {
-        "applianceName": {
-          "type": "string",
-          "description": "Appliance Name."
-        },
-        "siteErrorDetails": {
-          "$ref": "#/definitions/ErrorDetailedSummary",
-          "description": "Gets the error detailed summary."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to fetch more models."
-        }
-      },
-      "required": [
-        "applianceName",
-        "siteErrorDetails"
       ]
     },
     "SqlSiteListResult": {
