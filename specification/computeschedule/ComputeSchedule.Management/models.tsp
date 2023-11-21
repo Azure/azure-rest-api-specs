@@ -39,18 +39,18 @@ enum OptimizationPreference {
   CostAvailabilityBalanced,
 }
 
-@doc("The kind of operation types that can be performed on virtual machines using ScheduledActions")
-enum VmOperationType {
+@doc("The kind of operation types that can be performed on resources using ScheduledActions")
+enum ResourceOperationType {
   @doc("The default value for this enum type")
   Unknown,
 
-  @doc("Start operations on the virtual machines")
+  @doc("Start operations on the resources")
   Start,
 
-  @doc("Deallocate operations on the virtual machines")
+  @doc("Deallocate operations on the resources")
   Deallocate,
 
-  @doc("Hibernate operations on the virtual machines")
+  @doc("Hibernate operations on the resources")
   Hibernate,
 }
 
@@ -94,12 +94,6 @@ alias Params = {
   @segment("locations")
   @doc("The location name.")
   locationparameter: string;
-};
-
-alias HibernateQueryParam = {
-  @doc("Hibernate query for hibernate request")
-  @query
-  hibernate: boolean = true;
 };
 
 // ------------------ Models ---------------
@@ -158,9 +152,9 @@ model ResourceOperationDetails {
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
   resourceId: string;
 
-  @doc("Type of operation performed on the virtual machine")
+  @doc("Type of operation performed on the resources")
   @extension("x-ms-enum.modelAsString", true)
-  opType: VmOperationType = VmOperationType.Unknown;
+  opType: ResourceOperationType = ResourceOperationType.Unknown;
 
   @doc("Subscription id attached to the request")
   subscriptionId: string;
@@ -203,67 +197,13 @@ model ResourceOperation {
   operation?: ResourceOperationDetails;
 }
 
-@doc("Error for the vm operation")
+@doc("Error for the resource operation")
 model ErrorInfo {
   @doc("Error code for the error, eg 404")
   errorCode: string;
 
   @doc("More details about the error")
   errorDetails: string;
-}
-
-@doc("High level result from getting an operation status or cancelling an operation on a virtual machine")
-model VmOperationResult {
-  @doc("Error code if it exists")
-  errorCode?: string;
-
-  @doc("More details of the error if it exists")
-  errorDetails?: string;
-
-  @doc("Unique id for the virtual machine involved in the operation")
-  vmId?: string;
-
-  @doc("Unique id for the operation performed on the virtual machine")
-  operationId: string;
-
-  @doc("More details on the operation performed on the vm")
-  vmOperation?: VmOperation;
-}
-
-@doc("Details of result from getting an operation status or cancelling an operation on a virtual machine")
-model VmOperation {
-  @doc("The type of operation scheduled for the virtual machine, ie start/deallocate/hibernate")
-  @extension("x-ms-enum.modelAsString", true)
-  opType: VmOperationType = VmOperationType.Unknown;
-
-  @doc("Subscription Id attached to the request")
-  subscriptionId: string;
-
-  @doc("Unique id for the operation")
-  id: string;
-
-  @doc("Unique id for the virtual machine")
-  vmId: string;
-
-  @doc("Deadline for the user selected operation")
-  deadlineUtc: utcDateTime;
-
-  @doc("Time for activation of the operation")
-  activationTime: utcDateTime;
-
-  @doc("Type of deadline used in the operation ie InitiateAt/CompleteBy")
-  @extension("x-ms-enum.modelAsString", true)
-  deadlineType: DeadlineType = DeadlineType.Unknown;
-
-  @doc("Current state of the operation")
-  @extension("x-ms-enum.modelAsString", true)
-  state: OperationState = OperationState.Unknown;
-
-  @doc("Errors in the vm operation")
-  error?: ErrorInfo;
-
-  @doc("Time the operation was completed if no error occured")
-  completedAt?: utcDateTime;
 }
 
 // ----------- SubmitDeallocate ---------
@@ -374,9 +314,9 @@ model HibernateResourceOperationResponse {
   error?: RequestError;
 }
 
-// ----------- ExecuteActionRequest ---------
-@doc("The ExecuteAction request for resources")
-model ExecuteActionRequest {
+// ----------- Execute Operations Request ---------
+@doc("The ExecuteDeallocateRequest request for executeDeallocate operations")
+model ExecuteDeallocateRequest {
   @doc("The execution parameters for the request")
   executionParameters: ExecutionParameters;
 
@@ -386,6 +326,31 @@ model ExecuteActionRequest {
   @doc("Correlationid item")
   correlationid: string;
 }
+
+@doc("The ExecuteHibernateRequest request for executeHibernate operations")
+model ExecuteHibernateRequest {
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("The resources for the request")
+  resources: Resources;
+
+  @doc("Correlationid item")
+  correlationid: string;
+}
+
+@doc("The ExecuteStartRequest request for executeStart operations")
+model ExecuteStartRequest {
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("The resources for the request")
+  resources: Resources;
+
+  @doc("Correlationid item")
+  correlationid: string;
+}
+
 // ----------- GetOperationStatus ---------
 @doc("This is the request to get operation status using operationids")
 model GetOperationStatusRequest {
@@ -398,9 +363,9 @@ model GetOperationStatusRequest {
 
 @doc("This is the response from a get operations status request")
 model GetOperationStatusResponse {
-  @extension("x-ms-identifiers", ["operationId"])
-  @doc("An array of vm operations based on their operation ids")
-  results: VmOperationResult[];
+  @extension("x-ms-identifiers", ["resourceId"])
+  @doc("An array of resource operations based on their operation ids")
+  results: ResourceOperation[];
 }
 
 // ----------- CancelOperations ---------
@@ -415,9 +380,9 @@ model CancelOperationsRequest {
 
 @doc("This is the response from a cancel operations request")
 model CancelOperationsResponse {
-  @extension("x-ms-identifiers", ["operationId"])
-  @doc("An array of vm operations that were successfully cancelled")
-  results: VmOperationResult[];
+  @extension("x-ms-identifiers", ["resourceId"])
+  @doc("An array of resource operations that were successfully cancelled")
+  results: ResourceOperation[];
 }
 
 @doc("This is the default error for requests made with ScheduledActions")
