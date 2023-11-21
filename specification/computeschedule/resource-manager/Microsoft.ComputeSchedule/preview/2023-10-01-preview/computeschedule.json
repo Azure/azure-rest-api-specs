@@ -161,7 +161,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExecuteActionRequest"
+              "$ref": "#/definitions/ExecuteDeallocateRequest"
             }
           }
         ],
@@ -214,7 +214,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExecuteActionRequest"
+              "$ref": "#/definitions/ExecuteHibernateRequest"
             }
           }
         ],
@@ -267,7 +267,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExecuteActionRequest"
+              "$ref": "#/definitions/ExecuteStartRequest"
             }
           }
         ],
@@ -536,12 +536,12 @@
       "properties": {
         "results": {
           "type": "array",
-          "description": "An array of vm operations that were successfully cancelled",
+          "description": "An array of resource operations that were successfully cancelled",
           "items": {
-            "$ref": "#/definitions/VmOperationResult"
+            "$ref": "#/definitions/ResourceOperation"
           },
           "x-ms-identifiers": [
-            "operationId"
+            "resourceId"
           ]
         }
       },
@@ -622,7 +622,7 @@
     },
     "ErrorInfo": {
       "type": "object",
-      "description": "Error for the vm operation",
+      "description": "Error for the resource operation",
       "properties": {
         "errorCode": {
           "type": "string",
@@ -638,9 +638,55 @@
         "errorDetails"
       ]
     },
-    "ExecuteActionRequest": {
+    "ExecuteDeallocateRequest": {
       "type": "object",
-      "description": "The ExecuteAction request for resources",
+      "description": "The ExecuteDeallocateRequest request for executeDeallocate operations",
+      "properties": {
+        "executionParameters": {
+          "$ref": "#/definitions/ExecutionParameters",
+          "description": "The execution parameters for the request"
+        },
+        "resources": {
+          "$ref": "#/definitions/Resources",
+          "description": "The resources for the request"
+        },
+        "correlationid": {
+          "type": "string",
+          "description": "Correlationid item"
+        }
+      },
+      "required": [
+        "executionParameters",
+        "resources",
+        "correlationid"
+      ]
+    },
+    "ExecuteHibernateRequest": {
+      "type": "object",
+      "description": "The ExecuteHibernateRequest request for executeHibernate operations",
+      "properties": {
+        "executionParameters": {
+          "$ref": "#/definitions/ExecutionParameters",
+          "description": "The execution parameters for the request"
+        },
+        "resources": {
+          "$ref": "#/definitions/Resources",
+          "description": "The resources for the request"
+        },
+        "correlationid": {
+          "type": "string",
+          "description": "Correlationid item"
+        }
+      },
+      "required": [
+        "executionParameters",
+        "resources",
+        "correlationid"
+      ]
+    },
+    "ExecuteStartRequest": {
+      "type": "object",
+      "description": "The ExecuteStartRequest request for executeStart operations",
       "properties": {
         "executionParameters": {
           "$ref": "#/definitions/ExecutionParameters",
@@ -703,12 +749,12 @@
       "properties": {
         "results": {
           "type": "array",
-          "description": "An array of vm operations based on their operation ids",
+          "description": "An array of resource operations based on their operation ids",
           "items": {
-            "$ref": "#/definitions/VmOperationResult"
+            "$ref": "#/definitions/ResourceOperation"
           },
           "x-ms-identifiers": [
-            "operationId"
+            "resourceId"
           ]
         }
       },
@@ -941,8 +987,8 @@
           "description": "Unique identifier for the resource involved in the operation, eg ArmId"
         },
         "opType": {
-          "$ref": "#/definitions/VmOperationType",
-          "description": "Type of operation performed on the virtual machine",
+          "$ref": "#/definitions/ResourceOperationType",
+          "description": "Type of operation performed on the resources",
           "default": "Unknown",
           "x-ms-enum.modelAsString": true
         },
@@ -1009,6 +1055,42 @@
         "errorCode",
         "errorDetails"
       ]
+    },
+    "ResourceOperationType": {
+      "type": "string",
+      "description": "The kind of operation types that can be performed on resources using ScheduledActions",
+      "enum": [
+        "Unknown",
+        "Start",
+        "Deallocate",
+        "Hibernate"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceOperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The default value for this enum type"
+          },
+          {
+            "name": "Start",
+            "value": "Start",
+            "description": "Start operations on the resources"
+          },
+          {
+            "name": "Deallocate",
+            "value": "Deallocate",
+            "description": "Deallocate operations on the resources"
+          },
+          {
+            "name": "Hibernate",
+            "value": "Hibernate",
+            "description": "Hibernate operations on the resources"
+          }
+        ]
+      }
     },
     "Resources": {
       "type": "object",
@@ -1176,136 +1258,6 @@
         "resources",
         "correlationid"
       ]
-    },
-    "VmOperation": {
-      "type": "object",
-      "description": "Details of result from getting an operation status or cancelling an operation on a virtual machine",
-      "properties": {
-        "opType": {
-          "$ref": "#/definitions/VmOperationType",
-          "description": "The type of operation scheduled for the virtual machine, ie start/deallocate/hibernate",
-          "default": "Unknown",
-          "x-ms-enum.modelAsString": true
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "Subscription Id attached to the request"
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique id for the operation"
-        },
-        "vmId": {
-          "type": "string",
-          "description": "Unique id for the virtual machine"
-        },
-        "deadlineUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Deadline for the user selected operation"
-        },
-        "activationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time for activation of the operation"
-        },
-        "deadlineType": {
-          "$ref": "#/definitions/DeadlineType",
-          "description": "Type of deadline used in the operation ie InitiateAt/CompleteBy",
-          "default": "Unknown",
-          "x-ms-enum.modelAsString": true
-        },
-        "state": {
-          "$ref": "#/definitions/OperationState",
-          "description": "Current state of the operation",
-          "default": "Unknown",
-          "x-ms-enum.modelAsString": true
-        },
-        "error": {
-          "$ref": "#/definitions/ErrorInfo",
-          "description": "Errors in the vm operation"
-        },
-        "completedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time the operation was completed if no error occured"
-        }
-      },
-      "required": [
-        "opType",
-        "subscriptionId",
-        "id",
-        "vmId",
-        "deadlineUtc",
-        "activationTime",
-        "deadlineType",
-        "state"
-      ]
-    },
-    "VmOperationResult": {
-      "type": "object",
-      "description": "High level result from getting an operation status or cancelling an operation on a virtual machine",
-      "properties": {
-        "errorCode": {
-          "type": "string",
-          "description": "Error code if it exists"
-        },
-        "errorDetails": {
-          "type": "string",
-          "description": "More details of the error if it exists"
-        },
-        "vmId": {
-          "type": "string",
-          "description": "Unique id for the virtual machine involved in the operation"
-        },
-        "operationId": {
-          "type": "string",
-          "description": "Unique id for the operation performed on the virtual machine"
-        },
-        "vmOperation": {
-          "$ref": "#/definitions/VmOperation",
-          "description": "More details on the operation performed on the vm"
-        }
-      },
-      "required": [
-        "operationId"
-      ]
-    },
-    "VmOperationType": {
-      "type": "string",
-      "description": "The kind of operation types that can be performed on virtual machines using ScheduledActions",
-      "enum": [
-        "Unknown",
-        "Start",
-        "Deallocate",
-        "Hibernate"
-      ],
-      "x-ms-enum": {
-        "name": "VmOperationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "The default value for this enum type"
-          },
-          {
-            "name": "Start",
-            "value": "Start",
-            "description": "Start operations on the virtual machines"
-          },
-          {
-            "name": "Deallocate",
-            "value": "Deallocate",
-            "description": "Deallocate operations on the virtual machines"
-          },
-          {
-            "name": "Hibernate",
-            "value": "Hibernate",
-            "description": "Hibernate operations on the virtual machines"
-          }
-        ]
-      }
     }
   },
   "parameters": {}

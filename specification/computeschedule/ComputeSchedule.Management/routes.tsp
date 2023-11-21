@@ -56,7 +56,7 @@ interface ScheduledActions {
   @action
   executeDeallocate(
     ...Params,
-    @body @doc("The request body") requestBody: ExecuteActionRequest,
+    @body @doc("The request body") requestBody: ExecuteDeallocateRequest,
   ): ArmResponse<DeallocateResourceOperationResponse> | RequestLevelError;
 
   /** executeHibernate for a virtual machine */
@@ -66,7 +66,7 @@ interface ScheduledActions {
   @action
   executeHibernate(
     ...Params,
-    @body @doc("The request body") requestBody: ExecuteActionRequest,
+    @body @doc("The request body") requestBody: ExecuteHibernateRequest,
   ): ArmResponse<HibernateResourceOperationResponse> | RequestLevelError;
 
   /** executeStart for a virtual machine */
@@ -76,7 +76,7 @@ interface ScheduledActions {
   @action
   executeStart(
     ...Params,
-    @body @doc("The request body") requestBody: ExecuteActionRequest,
+    @body @doc("The request body") requestBody: ExecuteStartRequest,
   ): ArmResponse<StartResourceOperationResponse> | RequestLevelError;
 
   /** getOperationStatus for a virtual machine */
