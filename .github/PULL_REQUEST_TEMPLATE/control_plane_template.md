@@ -45,6 +45,7 @@ is removed from your PR. This should cause the label `WaitForARMFeedback` to be 
 [4] [public repo merge queue], [private repo merge queue] (for **ARM review** queue, [1])
 
 If you need further help with anything, see `Getting help` section below.
+
 </details>
 
 ## Purpose of this PR
@@ -94,7 +95,6 @@ to get approval.
 - If the PR CI checks appear to be stuck in `queued` state, please add a comment with contents `/azp run`.
 This should result in a new comment denoting a `PR validation pipeline` has started and the checks should be updated after few minutes.
 - If the help provided by the previous points is not enough, post to https://aka.ms/azsdk/support/specreview-channel and link to this PR.
-
 
 [ARM review queue]: https://github.com/search?q=org%3AAzure+is%3Apr+is%3Aopen+label%3AWaitForARMFeedback+-label%3AIDCDevDiv++draft%3Afalse+sort%3Acreated-asc+&type=pullrequests
 [List of SDK breaking changes approvers]: https://teams.microsoft.com/l/message/19:0351f5f9404446e4b4fd4eaf2c27448d@thread.skype/1689115217750?tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47&groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&parentMessageId=1689115217750&teamName=Azure%20SDK&channelName=API%20Spec%20Review&createdTime=1689115217750
