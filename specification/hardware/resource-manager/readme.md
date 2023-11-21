@@ -37,6 +37,9 @@ These settings apply only when `--tag=package-2023-07-12-preview` is specified o
 ```yaml $(tag) == 'package-2023-07-12-preview'
 input-file:
   - Microsoft.Hardware/preview/2023-07-12-preview/hardware.json
+suppressions:
+  - code: TrackedResourcePatchOperation
+    reason: This is a false positive.
 ```
 
 ---
