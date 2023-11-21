@@ -53,7 +53,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/License"
+              "$ref": "#/definitions/LicenseValidateModel"
             },
             "description": "Parameters supplied to the license validation operation."
           }
@@ -2909,6 +2909,21 @@
         }
       ],
       "description": "Describes a license in a hybrid machine."
+    },
+    "LicenseValidateModel": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LicenseProperties",
+          "description": "Hybrid Compute License properties"
+        }        
+      },      
+      "description": "Describes a license in a hybrid machine, as needed for the validation api."
     },
     "LicenseProperties": {
       "type": "object",
