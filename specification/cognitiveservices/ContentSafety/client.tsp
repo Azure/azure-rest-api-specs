@@ -4,32 +4,29 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@TypeSpec.Versioning.useDependency(
-    ContentSafety.Versions.v2023_10_01
-)
+@TypeSpec.Versioning.useDependency(ContentSafety.Versions.v2023_10_01)
 namespace Customizations;
 
 @client({
-    name: "ContentSafetyClient",
-    service: ContentSafety
-  })
+  name: "ContentSafetyClient",
+  service: ContentSafety,
+})
 interface ContentSafetyClient {
-    analyzeText is ContentSafety.TextOperations.analyzeText;
-    analyzeImage is ContentSafety.ImageOperations.analyzeImage;
+  analyzeText is ContentSafety.TextOperations.analyzeText;
+  analyzeImage is ContentSafety.ImageOperations.analyzeImage;
 }
-  
 
 @client({
-    name: "BlocklistClient",
-    service: ContentSafety
+  name: "BlocklistClient",
+  service: ContentSafety,
 })
 interface BlocklistClient {
-    addOrUpdateBlocklistItems is ContentSafety.TextBlocklists.addOrUpdateBlocklistItems;
-    createOrUpdateTextBlocklist is ContentSafety.TextBlocklists.createOrUpdateTextBlocklist;
-    deleteTextBlocklist is ContentSafety.TextBlocklists.deleteTextBlocklist;
-    getTextBlocklist is ContentSafety.TextBlocklists.getTextBlocklist;
-    getTextBlocklistItem is ContentSafety.TextBlocklists.getTextBlocklistItem;
-    listTextBlocklistItems is ContentSafety.TextBlocklists.listTextBlocklistItems;
-    listTextBlocklists is ContentSafety.TextBlocklists.listTextBlocklists;
-    removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
+  addOrUpdateBlocklistItems is ContentSafety.TextBlocklists.addOrUpdateBlocklistItems;
+  createOrUpdateTextBlocklist is ContentSafety.TextBlocklists.createOrUpdateTextBlocklist;
+  deleteTextBlocklist is ContentSafety.TextBlocklists.deleteTextBlocklist;
+  getTextBlocklist is ContentSafety.TextBlocklists.getTextBlocklist;
+  getTextBlocklistItem is ContentSafety.TextBlocklists.getTextBlocklistItem;
+  listTextBlocklistItems is ContentSafety.TextBlocklists.listTextBlocklistItems;
+  listTextBlocklists is ContentSafety.TextBlocklists.listTextBlocklists;
+  removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
