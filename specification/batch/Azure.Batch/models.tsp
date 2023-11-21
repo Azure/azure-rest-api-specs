@@ -1107,7 +1107,7 @@ model BatchJobSchedule {
   previousStateTransitionTime?: utcDateTime;
 
   @doc("The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time.")
-  schedule: Schedule;
+  schedule?: Schedule;
 
   @doc("The details of the Jobs to be created on this schedule.")
   jobSpecification: BatchJobSpecification;
