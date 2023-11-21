@@ -440,23 +440,6 @@
         ]
       }
     },
-    "CertificateProfileName": {
-      "type": "object",
-      "description": "Azure Developer Signing certificate profile configured on an account.",
-      "properties": {
-        "certificateProfile": {
-          "type": "string",
-          "description": "Azure Developer Signing certificate profile name under an account.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        }
-      },
-      "required": [
-        "certificateProfile"
-      ]
-    },
     "ExtendedKeyUsage": {
       "type": "object",
       "description": "Extended key usage object identifier that are allowable.",
@@ -581,23 +564,6 @@
         ]
       }
     },
-    "SigningAccount": {
-      "type": "object",
-      "description": "Azure Developer Signing customer account created upon registration on the service.",
-      "properties": {
-        "accountName": {
-          "type": "string",
-          "description": "Azure Developer Signing account name.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        }
-      },
-      "required": [
-        "accountName"
-      ]
-    },
     "SigningPayloadOptions": {
       "type": "object",
       "description": "The artifact request information to be signed by the service.",
@@ -632,24 +598,6 @@
         "signatureAlgorithm",
         "digest"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Versions info.",
-      "enum": [
-        "2023-06-15-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_06_15_preview",
-            "value": "2023-06-15-preview",
-            "description": "The 2023-06-15-preview version."
-          }
-        ]
-      }
     }
   },
   "parameters": {
