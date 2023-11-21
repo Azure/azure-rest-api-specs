@@ -579,6 +579,9 @@
         "x-ms-examples": {
           "Entity_GetByUniqueAttributes": {
             "$ref": "./examples/Entity_GetByUniqueAttributes.json"
+          },
+          "Entity_GetByUniqueAttributesHierarchyInfo": {
+            "$ref": "./examples/Entity_GetByUniqueAttributesHierarchyInfo.json"
           }
         },
         "parameters": [
@@ -595,6 +598,16 @@
             "name": "attr:qualifiedName",
             "in": "query",
             "description": "The qualified name of the entity. (This is only an example. qualifiedName can be changed to other unique attributes)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/loadHierarchyInfo"
+          },
+          {
+            "name": "extProp:{propName}",
+            "in": "query",
+            "description": "The extended property of the UniqueAttribute. (This is only an example. propName can be changed to other key)",
             "required": false,
             "type": "string"
           }
@@ -3151,7 +3164,7 @@
             "$ref": "#/parameters/ignoreRelationships"
           },
           {
-            "$ref": "#/parameters/loadHiearchyInfo"
+            "$ref": "#/parameters/loadHierarchyInfo"
           },
           {
             "$ref": "#/parameters/navigationMode"
@@ -3164,7 +3177,7 @@
             "type": "string"
           },
           {
-            "name": "itemPath:extProp:{prop}",
+            "name": "itemPath:extProp:{propName}",
             "in": "query",
             "description": "The extended property of the itemPath.",
             "required": false,
@@ -4725,6 +4738,13 @@
           "type": "object",
           "description": "The attributes of relationship.",
           "additionalProperties": {}
+        },
+        "hierarchyInfo": {
+          "type": "array",
+          "description": "The hierarchy information of the Entity.",
+          "items": {
+            "$ref": "#/definitions/PurviewObjectId"
+          }
         },
         "status": {
           "$ref": "#/definitions/Status"
