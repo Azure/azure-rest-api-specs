@@ -84,6 +84,10 @@ model AnalyzeTextResult {
   @added(ContentSafety.Versions.v2023_10_30_Preview)
   @doc("The incident match details.")
   incidentMatches?: IncidentMatch[];
+
+  @added(ContentSafety.Versions.v2023_11_30_Preview)
+  @doc("Sentences detected as harmful content")
+  reason?: string[];
 }
 
 @doc("The result of blocklist match.")
