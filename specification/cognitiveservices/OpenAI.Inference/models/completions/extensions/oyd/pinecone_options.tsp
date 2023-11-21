@@ -1,7 +1,7 @@
 import "@typespec/versioning";
-import "./azure_chat_extensions.tsp";
-import "./extensions_onyourdata_common_options.tsp";
-import "./extensions_onyourdata_vector_search.tsp";
+import "./../../azure_chat_extensions.tsp";
+import "./common_options.tsp";
+import "./vector_search.tsp";
 
 namespace Azure.OpenAI;
 
@@ -14,14 +14,19 @@ A specific representation of configurable options for Elasticsearch when using i
 extension.
 """)
 model PineconeChatExtensionConfiguration
-  extends AzureChatExtensionConfiguration {
-  ...OnYourDataCommonChatExtensionConfiguration;
+  extends AzureChatExtensionConfiguration<AzureChatExtensionParameters> {
 
   @doc("""
   The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
   default value for Pinecone.
   """)
   type: AzureChatExtensionType.pinecone;
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+model AzureChatExtensionParameters {
+  ...OnYourDataCommonChatExtensionConfiguration;
+
 
   @doc("The environment name of Pinecone.")
   @projectedName("csharp", "Environment")

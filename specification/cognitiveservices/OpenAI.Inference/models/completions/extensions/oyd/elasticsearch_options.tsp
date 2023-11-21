@@ -1,10 +1,46 @@
 import "@typespec/versioning";
-import "./azure_chat_extensions.tsp";
-import "./extensions_onyourdata_common_options.tsp";
+import "./../../azure_chat_extensions.tsp";
+import "./common_options.tsp";
 
 namespace Azure.OpenAI;
 
 using TypeSpec.Versioning;
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("""
+A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat
+extension.
+""")
+model ElasticsearchChatExtensionConfiguration
+  extends AzureChatExtensionConfiguration<ElasticsearchChatExtensionParameters> {
+
+  @doc("""
+  The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
+  default value for Elasticsearch.
+  """)
+  type: AzureChatExtensionType.elasticsearch;
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+model ElasticsearchChatExtensionParameters {
+  ...OnYourDataCommonChatExtensionConfiguration;
+
+  @doc("The endpoint of Elasticsearch.")
+  endpoint: url;
+
+  @doc("The index name of Elasticsearch.")
+  indexName: string;
+
+  @doc("The index field mapping options of Elasticsearch.")
+  @projectedName("csharp", "FieldMappingOptions")
+  fieldsMapping?: ElasticsearchIndexFieldMappingOptions;
+
+  @doc("The query type of Elasticsearch.")
+  queryType?: ElasticsearchQueryType;
+
+  @doc("The embedding dependency for vector search.")
+  embeddingDependency?: OnYourDataEmbeddingDependency;
+}
 
 @doc("Optional settings to control how fields are processed when using a configured Elasticsearch resource.")
 @added(ServiceApiVersions.v2023_12_01_Preview)
@@ -44,36 +80,4 @@ enum ElasticsearchQueryType {
 
   @doc("Represents vector search over computed data.")
   vector: "vector",
-}
-
-@added(ServiceApiVersions.v2023_12_01_Preview)
-@doc("""
-A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat
-extension.
-""")
-model ElasticsearchChatExtensionConfiguration
-  extends AzureChatExtensionConfiguration {
-  ...OnYourDataCommonChatExtensionConfiguration;
-
-  @doc("""
-  The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
-  default value for Elasticsearch.
-  """)
-  type: AzureChatExtensionType.elasticsearch;
-
-  @doc("The endpoint of Elasticsearch.")
-  endpoint: url;
-
-  @doc("The index name of Elasticsearch.")
-  indexName: string;
-
-  @doc("The index field mapping options of Elasticsearch.")
-  @projectedName("csharp", "FieldMappingOptions")
-  fieldsMapping?: ElasticsearchIndexFieldMappingOptions;
-
-  @doc("The query type of Elasticsearch.")
-  queryType?: ElasticsearchQueryType;
-
-  @doc("The embedding dependency for vector search.")
-  embeddingDependency?: OnYourDataEmbeddingDependency;
 }

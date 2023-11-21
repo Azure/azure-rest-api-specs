@@ -1,11 +1,11 @@
 import "@typespec/versioning";
 import "./chat_completions.tsp";
 import "./chat_messages.tsp";
-import "./extensions_onyourdata_azure_cognitive_search_options.tsp";
-import "./extensions_onyourdata_azure_machinelearning_index_options.tsp";
-import "./extensions_onyourdata_azure_cosmosdb_options.tsp";
-import "./extensions_onyourdata_elasticsearch_options.tsp";
-import "./extensions_onyourdata_pinecone_options.tsp";
+import "./extensions/oyd/azure_cognitive_search_options.tsp";
+import "./extensions/oyd/azure_machinelearning_index_options.tsp";
+import "./extensions/oyd/azure_cosmosdb_options.tsp";
+import "./extensions/oyd/elasticsearch_options.tsp";
+import "./extensions/oyd/pinecone_options.tsp";
 
 namespace Azure.OpenAI;
 

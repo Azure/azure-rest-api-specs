@@ -1,6 +1,6 @@
 import "@typespec/versioning";
-import "./azure_chat_extensions.tsp";
-import "./extensions_onyourdata_common_options.tsp";
+import "./../../azure_chat_extensions.tsp";
+import "./common_options.tsp";
 
 namespace Azure.OpenAI;
 
@@ -12,14 +12,18 @@ A specific representation of configurable options for Azure Machine Learning ind
 extension.
 """)
 model AzureMachineLearningIndexChatExtensionConfiguration
-  extends AzureChatExtensionConfiguration {
-  ...OnYourDataCommonChatExtensionConfiguration;
+  extends AzureChatExtensionConfiguration<AzureMachineLearningIndexChatExtensionParameters> {
 
   @doc("""
   The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
   default value for Azure Machine Learning index.
   """)
   type: AzureChatExtensionType.azureMachineLearningIndex;
+}
+
+@added(ServiceApiVersions.v2023_12_01_Preview)
+model AzureMachineLearningIndexChatExtensionParameters {
+  ...OnYourDataCommonChatExtensionConfiguration;
 
   @doc("The resource id of the Azure Machine Learning project.")
   @projectedName("csharp", "ProjectResourceId")
