@@ -1,4 +1,20 @@
-{
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "./routes.tsp";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.Core;
+using TypeSpec.Versioning;
+
+@service({
+  title: "Text Translation",
+})
+@server(
+  "{Endpoint}",
+  "Text translation is a cloud-based REST API feature of the Translator service that uses neural machine translation technology to enable quick and accurate source-to-target text translation in real time across all supported languages.",
+  {
     @doc("""
 Supported Text Translation endpoints (protocol and hostname, for example:
     https://api.cognitive.microsofttranslator.com).
@@ -26,7 +42,17 @@ Dictionary lookup. Returns equivalent words for the source term in the target la
 Dictionary example Returns grammatical structure and context examples for the source term and target term pair.
 """)
 @versioned(APIVersion)
-@useAuth([ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">, ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Region">])
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
+
+@header("Ocp-Apim-Subscription-Region", "westus")
+interface Translator {
+  @property("region", "string")
+  region: string;
+
+  @post("/translate")
+  translate(@body input: TranslationInput): TranslationOutput;
+}
+
 namespace TextTranslation;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
