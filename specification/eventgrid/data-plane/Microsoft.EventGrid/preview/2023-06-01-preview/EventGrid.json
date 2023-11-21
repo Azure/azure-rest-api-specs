@@ -254,51 +254,6 @@
             "type": "string"
           },
           {
-            "name": "releaseDelayInSeconds",
-            "in": "query",
-            "description": "Release cloud events with the specified delay in seconds.",
-            "required": false,
-            "type": "number",
-            "enum": [
-              0,
-              10,
-              60,
-              600,
-              3600
-            ],
-            "x-ms-enum": {
-              "name": "ReleaseDelay",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "By0Seconds",
-                  "value": 0,
-                  "description": "Release the event after 0 seconds."
-                },
-                {
-                  "name": "By10Seconds",
-                  "value": 10,
-                  "description": "Release the event after 10 seconds."
-                },
-                {
-                  "name": "By60Seconds",
-                  "value": 60,
-                  "description": "Release the event after 60 seconds."
-                },
-                {
-                  "name": "By600Seconds",
-                  "value": 600,
-                  "description": "Release the event after 600 seconds."
-                },
-                {
-                  "name": "By3600Seconds",
-                  "value": 3600,
-                  "description": "Release the event after 3600 seconds."
-                }
-              ]
-            }
-          },
-          {
             "name": "releaseOptions",
             "in": "body",
             "description": "ReleaseOptions",
@@ -390,60 +345,6 @@
         "x-ms-examples": {
           "Reject Cloud Event": {
             "$ref": "./examples/reject.json"
-          }
-        }
-      }
-    },
-    "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewLock": {
-      "post": {
-        "operationId": "RenewCloudEventLocks",
-        "description": "Renew lock for batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully renewed lockTokens, along with other failed lockTokens with their corresponding error information.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "topicName",
-            "in": "path",
-            "description": "Topic Name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "eventSubscriptionName",
-            "in": "path",
-            "description": "Event Subscription Name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "renewLockOptions",
-            "in": "body",
-            "description": "RenewLockOptions",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RenewLockOptions"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/RenewCloudEventLocksResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
           }
         }
       }
@@ -821,47 +722,6 @@
       "required": [
         "failedLockTokens",
         "succeededLockTokens"
-      ]
-    },
-    "RenewCloudEventLocksResult": {
-      "type": "object",
-      "description": "The result of the RenewLock operation.",
-      "properties": {
-        "failedLockTokens": {
-          "type": "array",
-          "description": "Array of FailedLockToken for failed cloud events. Each FailedLockToken includes the lock token along with the related error information (namely, the error code and description).",
-          "items": {
-            "$ref": "#/definitions/FailedLockToken"
-          },
-          "x-ms-identifiers": []
-        },
-        "succeededLockTokens": {
-          "type": "array",
-          "description": "Array of lock tokens for the successfully renewed locks.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "failedLockTokens",
-        "succeededLockTokens"
-      ]
-    },
-    "RenewLockOptions": {
-      "type": "object",
-      "description": "Array of lock tokens for the corresponding received Cloud Events to be renewed.",
-      "properties": {
-        "lockTokens": {
-          "type": "array",
-          "description": "Array of lock tokens.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "lockTokens"
       ]
     }
   },
