@@ -10,7 +10,6 @@ namespace Azure.IoT.DeviceUpdate;
 model Device {
   /** Device identity. */
   @key
-  @path
   @visibility("read")
   deviceId: string;
 
@@ -83,7 +82,6 @@ model StepResult {
 model DeviceHealth {
   /** Device id */
   @key
-  @path
   @visibility("read")
   deviceId: string;
 
@@ -156,7 +154,6 @@ model DeviceHealthFilter {
 model DeviceOperation {
   /** Operation Id. */
   @key
-  @path
   @visibility("read")
   operationId: string;
 

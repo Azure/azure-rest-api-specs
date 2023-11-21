@@ -238,7 +238,6 @@ model UpdateFileDownloadHandler {
 model UpdateOperation {
   /** Operation Id. */
   @key
-  @path
   @visibility("read")
   operationId: string;
 

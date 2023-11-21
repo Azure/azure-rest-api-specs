@@ -14,7 +14,6 @@ model DeviceClass {
    * interface in IoT Hub. It is a hex-encoded SHA1 hash.
    */
   @key
-  @path
   @visibility("read")
   deviceClassId: string;
 

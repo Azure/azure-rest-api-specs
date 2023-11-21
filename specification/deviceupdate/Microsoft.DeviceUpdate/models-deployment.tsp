@@ -86,7 +86,6 @@ model CloudInitiatedRollbackPolicyFailure {
 model DeploymentDeviceState {
   /** Device identity. */
   @key
-  @path
   @visibility("read")
   deviceId: string;
 

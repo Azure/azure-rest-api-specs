@@ -13,7 +13,6 @@ model Group {
    * Hub's device/module twin or $default for devices with no tag.
    */
   @key
-  @path
   @visibility("read")
   groupId: string;
 
@@ -61,7 +60,6 @@ model DeviceClassSubgroup {
    * interface in IoT Hub. It is a hex-encoded SHA1 hash.
    */
   @key
-  @path
   @visibility("read")
   deviceClassId: string;
 
