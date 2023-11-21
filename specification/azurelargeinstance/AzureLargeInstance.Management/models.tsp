@@ -10,14 +10,6 @@ namespace Microsoft.AzureLargeInstance;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-/** A template for optional body parameters
- * @template T The body parameter type
- */
-model OptionalBodyParameter<T extends {}> {
-  /** The body parameter */
-  @body body?: T;
-}
-
 @doc("Enum of the hardware options for an Azure Large Instance")
 enum AzureLargeInstanceHardwareTypeNamesEnum {
   Cisco_UCS,

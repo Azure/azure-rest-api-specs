@@ -53,9 +53,12 @@ operations returns various properties of each Azure Large Instance.
     OperationStatusResult
   >;
   @doc("The operation to restart an Azure Large Instance (only for compute instances)")
-  restart is ArmResourceActionAsync<
+  restart is ArmResourceActionNoBody<
     AzureLargeInstance,
-    OptionalBodyParameter<ForceState>,
+    {
+      /** When set to 'active', this parameter empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server */
+      @body forceParameter?: ForceState;
+    },
     OperationStatusResult
   >;
   // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
@@ -67,8 +70,30 @@ operations returns various properties of each Azure Large Instance.
   >;
 }
 
-@@TypeSpec.OpenAPI.extension(AzureLargeInstances.restart::parameters.body,
-  "x-ms-client-name",
-  "forceParameter"
-);
-@@projectedName(AzureLargeInstances.restart::parameters.body, "json", "forceParameter");
+/**
+ * A long-running resource action.
+ * @template TResource The resource being acted upon
+ * @template TRequest The request model for the action
+ * @template TResponse The response type for the action
+ * @template TBaseParameters Optional. Allows overriding the parameters for the operation
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template for optional body"
+@autoRoute
+@OpenAPI.extension("x-ms-long-running-operation", true)
+@OpenAPI.extension(
+  "x-ms-long-running-operation-options",
+  {
+    `final-state-via`: "location",
+  }
+)
+@armResourceAction(TResource)
+@post
+op ArmResourceActionNoBody<
+  TResource extends Azure.ResourceManager.Foundations.ArmResource,
+  TRequest extends TypeSpec.Reflection.Model,
+  TResponse extends TypeSpec.Reflection.Model | void,
+  TBaseParameters extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.BaseParameters<AzureLargeInstance>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+  ...TRequest,
+): ArmAcceptedLroResponse | TResponse | ErrorResponse;
