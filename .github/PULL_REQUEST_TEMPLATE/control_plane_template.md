@@ -32,7 +32,7 @@ If the automation determines you have breaking changes, i.e. Step 1 from the dia
 </details>
 
 <details>
-<summary> Click here to see diagram footnotes</summary>
+<summary> Click here to see the diagram footnotes</summary>
 
 ### Diagram footnotes
 
