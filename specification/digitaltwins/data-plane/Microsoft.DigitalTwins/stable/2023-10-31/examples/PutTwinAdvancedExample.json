@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2023-10-31",
+    "id": "myNewTwinId",
+    "If-None-Match": "*",
+    "twin": {
+      "$metadata": {
+        "$model": "dtmi:com:example:interfaces:interfaceName;1",
+        "property1": {
+          "sourceTime": "2022-05-31T12:00:01.000125009Z"
+        }
+      },
+      "property1": 1,
+      "property2": {
+        "subProperty1": "some value",
+        "subProperty2": "some other value"
+      },
+      "component1": {
+        "$metadata": {
+          "componentProperty": {
+            "sourceTime": "2022-05-31T12:00:00.000125009Z"
+          }
+        },
+        "componentProperty": "some value"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "$dtId": "myNewTwinId",
+        "$etag": "W/\"9c2876c2-aff0-40b3-9fba-0c6be9d020a6\"",
+        "property1": 1,
+        "property2": {
+          "subProperty1": "some value",
+          "subProperty2": "some other value"
+        },
+        "component1": {
+          "componentProperty": "some value",
+          "$metadata": {
+            "$lastUpdateTime": "2022-02-28T00:30:00.1234567Z",
+            "componentProperty": {
+              "lastUpdateTime": "2022-02-28T00:30:00.1234567Z",
+              "sourceTime": "2022-05-31T12:00:01.000125009Z"
+            }
+          }
+        },
+        "$metadata": {
+          "$lastUpdateTime": "2022-02-28T00:30:00.1234567Z",
+          "$model": "dtmi:com:example:interfaces:interfaceName;1",
+          "property1": {
+            "lastUpdateTime": "2022-02-28T00:30:00.1234567Z",
+            "sourceTime": "2022-05-31T12:00:01.000125009Z"
+          },
+          "property2": {
+            "lastUpdateTime": "2022-02-28T00:30:00.1234567Z"
+          }
+        }
+      }
+    }
+  }
+}

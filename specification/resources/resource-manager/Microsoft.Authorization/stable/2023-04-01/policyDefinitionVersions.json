@@ -1,0 +1,820 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PolicyClient",
+    "version": "2023-04-01",
+    "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Authorization/listPolicyDefinitionVersions": {
+      "post": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_ListAllBuiltins",
+        "summary": "Lists all built-in policy definition versions.",
+        "description": "This operation lists all the built-in policy definition versions for all built-in policy definitions.",
+        "x-ms-examples": {
+          "List all built-in policy definition versions": {
+            "$ref": "./examples/listAllBuiltInPolicyDefinitionVersions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy definition versions.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Authorization/listPolicyDefinitionVersions": {
+      "post": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_ListAllAtManagementGroup",
+        "summary": "Lists all policy definition versions at management group scope.",
+        "description": "This operation lists all the policy definition versions for all policy definitions at the management group scope.",
+        "x-ms-examples": {
+          "List all policy definition versions at management group": {
+            "$ref": "./examples/listAllPolicyDefinitionVersionsByManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy definition versions.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/listPolicyDefinitionVersions": {
+      "post": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_ListAll",
+        "summary": "Lists all policy definition versions within a subscription.",
+        "description": "This operation lists all the policy definition versions for all policy definitions within a subscription.",
+        "x-ms-examples": {
+          "List all policy definition versions at subscription": {
+            "$ref": "./examples/listAllPolicyDefinitionVersions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy definition versions.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}/versions/{policyDefinitionVersion}": {
+      "put": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_CreateOrUpdate",
+        "summary": "Creates or updates a policy definition in a subscription.",
+        "description": "This operation creates or updates a policy definition in the given subscription with the given name.",
+        "x-ms-examples": {
+          "Create or update a policy definition version": {
+            "$ref": "./examples/createOrUpdatePolicyDefinitionVersion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/PolicyDefinitionVersion"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            },
+            "description": "The policy definition properties."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - Returns information about the policy definition version.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          },
+          "200": {
+            "description": "OK - Successfully updated policy definition version.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_Delete",
+        "summary": "Deletes a policy definition version in a subscription.",
+        "description": "This operation deletes the policy definition version in the given subscription with the given name.",
+        "x-ms-examples": {
+          "Delete a policy definition version": {
+            "$ref": "./examples/deletePolicyDefinitionVersion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/PolicyDefinitionVersion"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_Get",
+        "summary": "Retrieves a policy definition version in a subscription.",
+        "description": "This operation retrieves the policy definition version in the given subscription with the given name.",
+        "x-ms-examples": {
+          "Retrieve a policy definition version": {
+            "$ref": "./examples/getPolicyDefinitionVersion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/PolicyDefinitionVersion"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the policy definition.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}/versions/{policyDefinitionVersion}": {
+      "get": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_GetBuiltIn",
+        "summary": "Retrieves a built-in policy definition version.",
+        "description": "This operation retrieves the built-in policy definition version with the given name.",
+        "x-ms-examples": {
+          "Retrieve a built-in policy definition version": {
+            "$ref": "./examples/getBuiltinPolicyDefinitionVersion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/PolicyDefinitionVersion"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the built-in policy definition.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}/versions/{policyDefinitionVersion}": {
+      "put": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_CreateOrUpdateAtManagementGroup",
+        "summary": "Creates or updates a policy definition version in a management group.",
+        "description": "This operation creates or updates a policy definition version in the given management group with the given name.",
+        "x-ms-examples": {
+          "Create or update a policy definition version at management group level": {
+            "$ref": "./examples/createOrUpdatePolicyDefinitionVersionAtManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/PolicyDefinitionVersion"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            },
+            "description": "The policy definition properties."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - Returns information about the policy definition version.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          },
+          "200": {
+            "description": "OK - Successfully updated policy definition version.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_DeleteAtManagementGroup",
+        "summary": "Deletes a policy definition in a management group.",
+        "description": "This operation deletes the policy definition in the given management group with the given name.",
+        "x-ms-examples": {
+          "Delete a policy definition version at management group level": {
+            "$ref": "./examples/deletePolicyDefinitionVersionAtManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/PolicyDefinitionVersion"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_GetAtManagementGroup",
+        "summary": "Retrieve a policy definition version in a management group.",
+        "description": "This operation retrieves the policy definition version in the given management group with the given name.",
+        "x-ms-examples": {
+          "Retrieve a policy definition version at management group level": {
+            "$ref": "./examples/getPolicyDefinitionVersionAtManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyDefinitionName"
+          },
+          {
+            "$ref": "#/parameters/PolicyDefinitionVersion"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the policy definition.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}/versions": {
+      "get": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_List",
+        "summary": "Retrieves policy definition versions for a given policy definition in a subscription",
+        "description": "This operation retrieves a list of all the policy definition versions for the given policy definition.",
+        "x-ms-examples": {
+          "List policy definition versions by subscription": {
+            "$ref": "./examples/listPolicyDefinitionVersions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyDefinitionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy definition versions.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}/versions": {
+      "get": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_ListBuiltIn",
+        "summary": "Retrieve built-in policy definition versions",
+        "description": "This operation retrieves a list of all the built-in policy definition versions for the given policy definition.",
+        "x-ms-examples": {
+          "List built-in policy definition versions": {
+            "$ref": "./examples/listBuiltInPolicyDefinitionVersions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyDefinitionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of built-in policy definition versions.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}/versions": {
+      "get": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_ListByManagementGroup",
+        "summary": "Retrieve policy definition versions in a management group policy definition.",
+        "description": "This operation retrieves a list of all the policy definition versions for the given policy definition in the given management group.",
+        "x-ms-examples": {
+          "List policy definition versions by management group": {
+            "$ref": "./examples/listPolicyDefinitionVersionsByManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyDefinitionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy definition versions.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "type": "object",
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response from a policy operation."
+    },
+    "PolicyDefinitionVersionProperties": {
+      "type": "object",
+      "properties": {
+        "policyType": {
+          "type": "string",
+          "description": "The type of policy definition. Possible values are NotSpecified, BuiltIn, Custom, and Static.",
+          "enum": [
+            "NotSpecified",
+            "BuiltIn",
+            "Custom",
+            "Static"
+          ],
+          "x-ms-enum": {
+            "name": "policyType",
+            "modelAsString": true
+          }
+        },
+        "mode": {
+          "type": "string",
+          "description": "The policy definition mode. Some examples are All, Indexed, Microsoft.KeyVault.Data.",
+          "default": "Indexed"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the policy definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "The policy definition description."
+        },
+        "policyRule": {
+          "type": "object",
+          "description": "The policy rule."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The policy definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs."
+        },
+        "parameters": {
+          "description": "The parameter definitions for parameters used in the policy rule. The keys are the parameter names.",
+          "$ref": "#/definitions/ParameterDefinitions"
+        },
+        "version": {
+          "type": "string",
+          "description": "The policy definition version in #.#.# format."
+        }
+      },
+      "description": "The policy definition properties."
+    },
+    "ParameterDefinitionsValue": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The data type of the parameter.",
+          "type": "string",
+          "enum": [
+            "String",
+            "Array",
+            "Object",
+            "Boolean",
+            "Integer",
+            "Float",
+            "DateTime"
+          ],
+          "x-ms-enum": {
+            "name": "parameterType",
+            "modelAsString": true
+          }
+        },
+        "allowedValues": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "x-ms-identifiers": [],
+          "description": "The allowed values for the parameter."
+        },
+        "defaultValue": {
+          "type": "object",
+          "description": "The default value for the parameter if no value is provided."
+        },
+        "schema": {
+          "type": "object",
+          "description": "Provides validation of parameter inputs during assignment using a self-defined JSON schema. This property is only supported for object-type parameters and follows the Json.NET Schema 2019-09 implementation. You can learn more about using schemas at https://json-schema.org/ and test draft schemas at https://www.jsonschemavalidator.net/."
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "displayName": {
+              "type": "string",
+              "description": "The display name for the parameter."
+            },
+            "description": {
+              "type": "string",
+              "description": "The description of the parameter."
+            },
+            "strongType": {
+              "type": "string",
+              "description": "Used when assigning the policy definition through the portal. Provides a context aware list of values for the user to choose from."
+            },
+            "assignPermissions": {
+              "type": "boolean",
+              "description": "Set to true to have Azure portal create role assignments on the resource ID or resource scope value of this parameter during policy assignment. This property is useful in case you wish to assign permissions outside the assignment scope."
+            }
+          },
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "General metadata for the parameter."
+        }
+      },
+      "description": "The definition of a parameter that can be provided to the policy."
+    },
+    "ParameterDefinitions": {
+      "description": "The parameter definitions for parameters used in the policy. The keys are the parameter names.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ParameterDefinitionsValue"
+      }
+    },
+    "PolicyDefinitionVersion": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyDefinitionVersionProperties",
+          "description": "The policy definition version properties."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the policy definition version."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the policy definition version."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource (Microsoft.Authorization/policyDefinitions/versions)."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this resource."
+        }
+      },
+      "description": "The ID of the policy definition version.",
+      "x-ms-azure-resource": true
+    },
+    "PolicyDefinitionVersionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyDefinitionVersion"
+          },
+          "description": "An array of policy definitions versions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of policy definition versions."
+    }
+  },
+  "parameters": {
+    "PolicyDefinitionName": {
+      "name": "policyDefinitionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$",
+      "description": "The name of the policy definition."
+    },
+    "PolicyDefinitionVersion": {
+      "name": "policyDefinitionVersion",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "The policy definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number"
+    },
+    "PolicyDefinitionsFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The filter to apply on the operation. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter='category -eq {value}' is provided, the returned list only includes all policy definitions whose category match the {value}.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 1000,
+      "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

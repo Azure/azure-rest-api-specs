@@ -38,6 +38,15 @@ input-file:
   - preview/2023-04-30-preview/contentsafety.json
 ```
 
+### Tag: package-2023-10-01
+
+These settings apply only when `--tag=package-2023-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-01'
+input-file:
+  - stable/2023-10-01/contentsafety.json
+```
+
 ---
 
 # Code Generation

@@ -1,0 +1,196 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "ruleSetName": "ruleSet1",
+    "ruleName": "rule1",
+    "rule": {
+      "properties": {
+        "order": 1,
+        "conditions": [
+          {
+            "name": "RequestMethod",
+            "parameters": {
+              "typeName": "DeliveryRuleRequestMethodConditionParameters",
+              "operator": "Equal",
+              "matchValues": [
+                "GET"
+              ],
+              "negateCondition": false
+            }
+          }
+        ],
+        "actions": [
+          {
+            "name": "AfdUrlSigning",
+            "parameters": {
+              "typeName": "DeliveryRuleAfdUrlSigningActionParameters",
+              "keyGroupReference": {
+                "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/keygroups/kg1"
+              },
+              "algorithm": "SHA256",
+              "parameterNameOverride": [
+                {
+                  "paramIndicator": "Expires",
+                  "paramName": "Expiration-Date"
+                },
+                {
+                  "paramIndicator": "Signature",
+                  "paramName": "Sig-Hash"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "rule1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/rulesets/ruleSet1/rules/rule1",
+        "type": "Microsoft.Cdn/profiles/rulesets/rules",
+        "properties": {
+          "order": 1,
+          "conditions": [
+            {
+              "name": "RequestMethod",
+              "parameters": {
+                "typeName": "DeliveryRuleRequestMethodConditionParameters",
+                "operator": "Equal",
+                "matchValues": [
+                  "GET"
+                ],
+                "negateCondition": false
+              }
+            }
+          ],
+          "actions": [
+            {
+              "name": "AfdUrlSigning",
+              "parameters": {
+                "typeName": "DeliveryRuleAfdUrlSigningActionParameters",
+                "keyGroupReference": {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/keygroups/kg1"
+                },
+                "algorithm": "SHA256",
+                "parameterNameOverride": [
+                  {
+                    "paramIndicator": "Expires",
+                    "paramName": "Expiration-Date"
+                  },
+                  {
+                    "paramIndicator": "Signature",
+                    "paramName": "Sig-Hash"
+                  }
+                ]
+              }
+            }
+          ],
+          "matchProcessingBehavior": "Continue",
+          "provisioningState": "Succeeded",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "rule1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/rulesets/ruleSet1/rules/rule1",
+        "type": "Microsoft.Cdn/profiles/rulesets/rules",
+        "properties": {
+          "order": 1,
+          "conditions": [
+            {
+              "name": "RequestMethod",
+              "parameters": {
+                "typeName": "DeliveryRuleRequestMethodConditionParameters",
+                "operator": "Equal",
+                "matchValues": [
+                  "GET"
+                ],
+                "negateCondition": false
+              }
+            }
+          ],
+          "actions": [
+            {
+              "name": "AfdUrlSigning",
+              "parameters": {
+                "typeName": "DeliveryRuleAfdUrlSigningActionParameters",
+                "keyGroupReference": {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/keygroups/kg1"
+                },
+                "algorithm": "SHA256",
+                "parameterNameOverride": [
+                  {
+                    "paramIndicator": "Expires",
+                    "paramName": "Expiration-Date"
+                  },
+                  {
+                    "paramIndicator": "Signature",
+                    "paramName": "Sig-Hash"
+                  }
+                ]
+              }
+            }
+          ],
+          "matchProcessingBehavior": "Continue",
+          "provisioningState": "Succeeded",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "rule1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/rulesets/ruleSet1/rules/rule1",
+        "type": "Microsoft.Cdn/profiles/rulesets/rules",
+        "properties": {
+          "order": 1,
+          "conditions": [
+            {
+              "name": "RequestMethod",
+              "parameters": {
+                "typeName": "DeliveryRuleRequestMethodConditionParameters",
+                "operator": "Equal",
+                "matchValues": [
+                  "GET"
+                ],
+                "negateCondition": false
+              }
+            }
+          ],
+          "actions": [
+            {
+              "name": "AfdUrlSigning",
+              "parameters": {
+                "typeName": "DeliveryRuleAfdUrlSigningActionParameters",
+                "keyGroupReference": {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/keygroups/kg1"
+                },
+                "algorithm": "SHA256",
+                "parameterNameOverride": [
+                  {
+                    "paramIndicator": "Expires",
+                    "paramName": "Expiration-Date"
+                  },
+                  {
+                    "paramIndicator": "Signature",
+                    "paramName": "Sig-Hash"
+                  }
+                ]
+              }
+            }
+          ],
+          "matchProcessingBehavior": "Continue",
+          "provisioningState": "Creating",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    }
+  }
+}
