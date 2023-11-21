@@ -113,7 +113,6 @@ model ImageData {
 
   @doc("The blob url of the image.")
   @projectedName("csharp", "BlobUri")
-  @projectedName("java", "blobUri")
   blobUrl?: url;
 }
 
