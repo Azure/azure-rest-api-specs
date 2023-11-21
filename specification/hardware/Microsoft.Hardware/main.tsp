@@ -37,27 +37,27 @@ model OrderProperties {
 
   @doc("Type of action Pre-Fulfill/Fulfill")
   @visibility("read")
-  action?:string;
+  action?: string;
 
   @doc("Order status")
   @visibility("read")
   status?: OrderStatus;
 
   @doc("Order line details")
-  @OpenAPI.extension("x-ms-identifiers",["id"])
-  orderLines:OrderLine[];
+  @OpenAPI.extension("x-ms-identifiers", ["id"])
+  orderLines: OrderLine[];
 
   @doc("Currency for the order")
-  currency:string;
+  currency: string;
 
   @doc("Market - country code for Order")
-  market?:string;
+  market?: string;
 
   @doc("Language - language code for Order")
-  language?:string;
+  language?: string;
 
   @doc("Reservation for order if applicable")
-  reservationId?:string;
+  reservationId?: string;
 
   @visibility("read")
   @doc("The status of the last operation.")
@@ -81,19 +81,19 @@ model OrderLine {
   @doc("Order line status")
   @visibility("read")
   status?: OrderLineStatus;
-  
+
   @doc("Order line date")
   @visibility("read")
   createdDateTime?: utcDateTime;
-  
+
   @doc("Order line quantity")
   quantity: OrderLineQuantity;
-  
+
   @doc("order line Product")
   product: Product;
-  
+
   @doc("line level Price")
-  price:Price;
+  price: Price;
 
   @doc("shipTo Address")
   shipTo: ShipTo;
@@ -102,21 +102,21 @@ model OrderLine {
   shippingMethod?: ShippingMethod;
 
   @doc("Requested Delivery Date")
-  requestedDeliveryDate?:plainDate;
+  requestedDeliveryDate?: plainDate;
 
   @doc("Cancellation Reason")
-  cancellationReason?:string;
+  cancellationReason?: string;
 
   @doc("Cancelled By User details")
-  cancelledBy?:string;
+  cancelledBy?: string;
 
   @doc("Estimated Deliver Date")
   @visibility("read")
-  estimatedDeliveryDate?:plainDate;
+  estimatedDeliveryDate?: plainDate;
 
   @doc("Estimated Shipped Date")
   @visibility("read")
-  estimatedShippedDate?:plainDate;
+  estimatedShippedDate?: plainDate;
 }
 
 @doc("Order line quantity")
@@ -127,14 +127,14 @@ model OrderLineQuantity {
   @doc("Order lineId Confirmed Quantity")
   @visibility("read")
   confirmed?: int64;
-  
+
   @doc("Order lineId Shipped Quantity")
   @visibility("read")
-  shipped?:int64;
-  
+  shipped?: int64;
+
   @doc("Order lineId Returned Quantity")
   @visibility("read")
-  returned?:int64;
+  returned?: int64;
 }
 
 @doc("Order line product")
@@ -143,7 +143,7 @@ model Product {
   id: string;
 
   @doc("ProductId Type")
-  type:ProductIdType;
+  type: ProductIdType;
 }
 
 @doc("Order line price")
@@ -158,12 +158,12 @@ model Price {
   taxes?: Tax[];
 
   @doc("Fees for this line")
-  @OpenAPI.extension("x-ms-identifiers",["type"])
+  @OpenAPI.extension("x-ms-identifiers", ["type"])
   fees?: Fee[];
 }
 
 @doc("Fee model")
-model Fee{
+model Fee {
   @doc("Fee charged")
   amount: float64;
 
@@ -172,16 +172,16 @@ model Fee{
 }
 
 @doc("Tax model")
-model Tax{
+model Tax {
   @doc("Tax charged")
   amount: float64;
-  
+
   @doc("Tax type")
   type: TaxType;
 }
 
 @doc("Ship-To id")
-model ShipTo{
+model ShipTo {
   @doc("ShipTo Id")
   id: string;
 
@@ -190,122 +190,150 @@ model ShipTo{
 }
 
 @armResourceOperations
-interface Orders
-{
-  @Autorest.example("./examples/Orders_Get.json","OrderById")
+interface Orders {
+  @Autorest.example("./examples/Orders_Get.json", "OrderById")
   get is ArmResourceRead<Order>;
 
-  @Autorest.example("./examples/Orders_Create.json","CreateOrder")
+  @Autorest.example("./examples/Orders_Create.json", "CreateOrder")
   create is ArmResourceCreateOrUpdateAsync<Order>;
-  
-  @Autorest.example("./examples/Orders_Update.json","UpdateOrder")
+
+  @Autorest.example("./examples/Orders_Update.json", "UpdateOrder")
   update is ArmResourcePatchSync<Order, OrderProperties>;
-  
-  @Autorest.example("./examples/Orders_Delete.json","DeleteOrder")
+
+  @Autorest.example("./examples/Orders_Delete.json", "DeleteOrder")
   delete is ArmResourceDeleteSync<Order>;
-  
-  @Autorest.example("./examples/Orders_ListByResourceGroup.json","GetByResourceGroup")
+
+  @Autorest.example(
+    "./examples/Orders_ListByResourceGroup.json",
+    "GetByResourceGroup"
+  )
   listByResourceGroup is ArmResourceListByParent<Order>;
-  
-  @Autorest.example("./examples/Orders_ListBySubscription.json","GetBySubscription")
+
+  @Autorest.example(
+    "./examples/Orders_ListBySubscription.json",
+    "GetBySubscription"
+  )
   listBySubscription is ArmListBySubscription<Order>;
 }
 
 @doc("Product-Id type")
-enum ProductIdType{
+enum ProductIdType {
   @doc("UPN in Big-Catalog")
   UPN,
+
   @doc("Product, SKU, Availability in Big-Catalog")
   PSA,
+
   @doc("MS product identifier (3x5 SKU)")
-  FulfillmentProductId
+  FulfillmentProductId,
 }
 
 @doc("Shipping method")
-enum ShippingMethod{
+enum ShippingMethod {
   @doc("Ground shipping")
   Ground,
+
   @doc("Two day shipping")
   TwoDay,
+
   @doc("Three day shipping")
   ThreeDay,
+
   @doc("Sustainable shipping")
   Sustainable,
+
   @doc("Street date shipping")
   StreetDate,
+
   @doc("APO FPO shipping")
-  ApoFpo
+  ApoFpo,
 }
 
 @doc("Ship-To-Id Type")
-enum ShipToIdType{
+enum ShipToIdType {
   @doc("Modern Commerce API business location")
   BusinessLocation,
+
   @doc("Partner External-Id")
-  ExternalId
+  ExternalId,
 }
 
 @doc("Fee type")
-enum FeeType{
+enum FeeType {
   @doc("Recycling fee")
-  Recycling
+  Recycling,
 }
 
 @doc("Tax Type")
-enum TaxType{
+enum TaxType {
   @doc("Tax on unit amount for product cost")
   Unit,
+
   @doc("Tax on shipping cost")
-  Shipping
+  Shipping,
 }
 
 @doc("Order Status")
-enum OrderStatus{
+enum OrderStatus {
   @doc("Order is pending")
   Pending,
+
   @doc("Order is created")
   Created,
+
   @doc("Order is confirmed")
   Confirmed,
+
   @doc("Order is PartiallyConfirmed")
   PartiallyConfirmed,
+
   @doc("Order is pending cancellation")
   PendingCancel,
+
   @doc("Order is ready to ship cannot be cancelled")
   PendingShipment,
+
   @doc("Order is partially shipped")
   PartiallyShipped,
+
   @doc("Order is shipped")
-  Shipped
+  Shipped,
 }
 
 @doc("Order Line Status")
-enum OrderLineStatus{
+enum OrderLineStatus {
   @doc("Order is pending")
   Pending,
+
   @doc("Order is created")
   Created,
+
   @doc("Order is confirmed")
   Confirmed,
+
   @doc("Order is partially confirmed")
   PartiallyConfirmed,
+
   @doc("Order is pending cancellation")
   PendingCancel,
+
   @doc("Order is ready to ship cannot be cancelled")
   PendingShipment,
+
   @doc("Order is partially shipped")
   PartiallyShipped,
+
   @doc("Order is shipped")
-  Shipped
+  Shipped,
 }
 
 @doc("Provisioning State")
 @lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState,
-  @doc("Order is pending")
-  Pending
 
+  @doc("Order is pending")
+  Pending,
 }
 
 alias DefaultProviderNamespace = {
@@ -317,13 +345,13 @@ alias DefaultProviderNamespace = {
 
 @armResourceOperations
 interface OrderPreviewInterface {
-@armResourceCollectionAction
+  @armResourceCollectionAction
   @armProviderNameValue
   @doc("Enables preview of hardware order for passed order lines by populating fees, taxes, shipping estimates.")
-  @Autorest.example("./examples/Orders_Preview.json","OrderPreview")
+  @Autorest.example("./examples/Orders_Preview.json", "OrderPreview")
   @TypeSpec.Rest.action("orderPreview")
   @post
-  op orderPreview(
+  orderPreview(
     ...SubscriptionIdParameter,
     ...DefaultProviderNamespace,
     ...ApiVersionParameter,

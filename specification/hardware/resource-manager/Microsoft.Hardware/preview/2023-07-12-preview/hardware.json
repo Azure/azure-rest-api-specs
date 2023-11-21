@@ -75,13 +75,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-            "OperationsList": {
-              "$ref": "./examples/Operations_List.json"
-            }
         }
       }
     },
@@ -162,6 +162,9 @@
         "x-ms-examples": {
           "GetBySubscription": {
             "$ref": "./examples/Orders_ListBySubscription.json"
+          },
+          "Orders_ListBySubscription": {
+            "$ref": "./examples/Orders_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -204,6 +207,9 @@
         "x-ms-examples": {
           "GetByResourceGroup": {
             "$ref": "./examples/Orders_ListByResourceGroup.json"
+          },
+          "Orders_ListByResourceGroup": {
+            "$ref": "./examples/Orders_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -231,7 +237,7 @@
           {
             "name": "orderId",
             "in": "path",
-            "description": "Order Name",
+            "description": "Order Id",
             "required": true,
             "type": "string"
           }
@@ -252,6 +258,9 @@
         },
         "x-ms-examples": {
           "OrderById": {
+            "$ref": "./examples/Orders_Get.json"
+          },
+          "Orders_Get": {
             "$ref": "./examples/Orders_Get.json"
           }
         }
@@ -275,7 +284,7 @@
           {
             "name": "orderId",
             "in": "path",
-            "description": "Order Name",
+            "description": "Order Id",
             "required": true,
             "type": "string"
           },
@@ -319,6 +328,9 @@
         "x-ms-examples": {
           "CreateOrder": {
             "$ref": "./examples/Orders_Create.json"
+          },
+          "Orders_Create": {
+            "$ref": "./examples/Orders_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -345,7 +357,7 @@
           {
             "name": "orderId",
             "in": "path",
-            "description": "Order Name",
+            "description": "Order Id",
             "required": true,
             "type": "string"
           },
@@ -374,6 +386,9 @@
           }
         },
         "x-ms-examples": {
+          "Orders_Update": {
+            "$ref": "./examples/Orders_Update.json"
+          },
           "UpdateOrder": {
             "$ref": "./examples/Orders_Update.json"
           }
@@ -398,7 +413,7 @@
           {
             "name": "orderId",
             "in": "path",
-            "description": "Order Name",
+            "description": "Order Id",
             "required": true,
             "type": "string"
           }
@@ -419,6 +434,9 @@
         },
         "x-ms-examples": {
           "DeleteOrder": {
+            "$ref": "./examples/Orders_Delete.json"
+          },
+          "Orders_Delete": {
             "$ref": "./examples/Orders_Delete.json"
           }
         }
@@ -755,7 +773,8 @@
         }
       },
       "required": [
-        "orderLines"
+        "orderLines",
+        "currency"
       ]
     },
     "OrderStatus": {
