@@ -1757,7 +1757,8 @@
       "properties": {
         "connectionString": {
           "description": "Teradata ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "server": {
           "type": "object",
@@ -4673,7 +4674,7 @@
         },
         "requestGoogleDriveScope": {
           "description": "Whether to request access to Google Drive. Allowing Google Drive access enables support for federated tables that combine BigQuery data with data from Google Drive. The default value is false. Type: string (or Expression with resultType string).",
-          "x-ms-format": "dfe-string",
+          "x-ms-format": "dfe-bool",
           "type": "object"
         },
         "authenticationType": {
@@ -4757,7 +4758,8 @@
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "pwd": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -5777,7 +5779,8 @@
       "properties": {
         "endpoint": {
           "description": "The endpoint of the ServiceNow server. (i.e. <instance>.service-now.com)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "authenticationType": {
           "description": "The authentication type to use.",
@@ -6860,6 +6863,7 @@
       "type": "object",
       "properties": {
         "endpoint": {
+          "x-ms-format": "dfe-string",
           "description": "The endpoint of the Responsys server.",
           "type": "object"
         },
@@ -6923,6 +6927,7 @@
       "type": "object",
       "properties": {
         "url": {
+          "x-ms-format": "dfe-string",
           "description": "The Dynamics AX (or Dynamics 365 Finance and Operations) instance OData endpoint.",
           "type": "object"
         },
@@ -6985,11 +6990,13 @@
       "properties": {
         "host": {
           "description": "The URL of the Oracle Service Cloud instance.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "username": {
           "description": "The user name that you use to access Oracle Service Cloud server.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "password": {
           "description": "The password corresponding to the user name that you provided in the username key.",
@@ -7045,6 +7052,10 @@
       "description": "Google AdWords service linked service properties.",
       "type": "object",
       "properties": {
+        "connectionProperties": {
+          "description": "(Deprecated) Properties used to connect to GoogleAds. It is mutually exclusive with any other properties in the linked service. Type: object.",
+          "type": "object"
+        },
         "clientCustomerID": {
           "description": "The Client customer ID of the AdWords account that you want to fetch report data for. Type: string (or Expression with resultType string).",
           "x-ms-format": "dfe-string",
@@ -7084,6 +7095,21 @@
           "x-ms-format": "dfe-string",
           "type": "object"
         },
+        "keyFilePath": {
+          "description": "(Deprecated) The full path to the .p12 key file that is used to authenticate the service account email address and can only be used on self-hosted IR. Type: string (or Expression with resultType string).",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "trustedCertPath": {
+          "description": "(Deprecated) The full path of the .pem file containing trusted CA certificates for verifying the server when connecting over SSL. This property can only be set when using SSL on self-hosted IR. The default value is the cacerts.pem file installed with the IR. Type: string (or Expression with resultType string).",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "useSystemTrustStore": {
+          "description": "(Deprecated) Specifies whether to use a CA certificate from the system trust store or from a specified PEM file. The default value is false. Type: boolean (or Expression with resultType boolean).",
+          "x-ms-format": "dfe-bool",
+          "type": "object"
+        },
         "privateKey": {
           "description": "The private key that is used to authenticate the service account email address and can only be used on self-hosted IR.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
@@ -7094,7 +7120,7 @@
           "type": "object"
         },
         "googleAdsApiVersion": {
-          "description": "The Google Ads API major version such as v14. The supported major versions could be found on https://developers.google.com/google-ads/api/docs/sunset-dates#timetable. Type: string (or Expression with resultType string).",
+          "description": "The Google Ads API major version such as v14. The supported major versions could be found on https://developers.google.com/google-ads/api/docs/release-notes. Type: string (or Expression with resultType string).",
           "x-ms-format": "dfe-string",
           "type": "object"
         },
@@ -7464,6 +7490,69 @@
       "required": [
         "endpoint"
       ]
+    },
+    "LakeHouseLinkedService": {
+      "x-ms-discriminator-value": "LakeHouse",
+      "description": "Microsoft Fabric LakeHouse linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Microsoft Fabric LakeHouse linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LakeHouseLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "LakeHouseLinkedServiceTypeProperties": {
+      "description": "Microsoft Fabric LakeHouse linked service properties.",
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The ID of Microsoft Fabric workspace. Type: string (or Expression with resultType string)."
+        },
+        "artifactId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The ID of Microsoft Fabric LakeHouse artifact. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The ID of the application used to authenticate against Microsoft Fabric LakeHouse. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "description": "The Key of the application used to authenticate against Microsoft Fabric LakeHouse.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "tenant": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredential": {
+          "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        }
+      }
     }
   }
 }
