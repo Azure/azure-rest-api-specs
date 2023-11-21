@@ -1045,15 +1045,11 @@
         "type": {
           "$ref": "#/definitions/AzureChatExtensionType",
           "description": "  The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.\n  Azure chat extensions are only compatible with Azure OpenAI."
-        },
-        "parameters": {
-          "description": "  The configuration payload used for the Azure chat extension. The structure payload details are specific to the\n  extension being configured.\n  Azure chat extensions are only compatible with Azure OpenAI."
         }
       },
       "discriminator": "type",
       "required": [
-        "type",
-        "parameters"
+        "type"
       ]
     },
     "AzureChatExtensionType": {

@@ -66,13 +66,13 @@ model AzureChatExtensionConfiguration{
   """)
   type: AzureChatExtensionType;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "API explicitly uses arbitrary JSON structure"
-  @doc("""
-    The configuration payload used for the Azure chat extension. The structure payload details are specific to the
-    extension being configured.
-    Azure chat extensions are only compatible with Azure OpenAI.
-  """)
-  parameters: unknown;
+  // #suppress "@azure-tools/typespec-azure-core/no-unknown" "API explicitly uses arbitrary JSON structure"
+  // @doc("""
+  //   The configuration payload used for the Azure chat extension. The structure payload details are specific to the
+  //   extension being configured.
+  //   Azure chat extensions are only compatible with Azure OpenAI.
+  // """)
+  // parameters: unknown;
 }
 
 @added(ServiceApiVersions.v2023_08_01_Preview)
