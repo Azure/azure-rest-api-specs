@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationClient",
-    "version": "2021-02-01-preview",
+    "version": "2023-12-01-preview",
     "description": "ARM applications"
   },
   "host": "management.azure.com",
@@ -1315,6 +1315,48 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Solutions/registryPackage": {
+      "post": {
+        "tags": [
+          "RegistryPackages"
+        ],
+        "operationId": "RegistryPackage_Generate",
+        "description": "Generates the registry package links for Managed Applications and Solution Templates.",
+        "x-ms-examples": {
+          "Generates a registry package": {
+            "$ref": "./examples/generateRegistryPackage.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegistryPackagePlan"
+            },
+            "description": "Request body parameters to get registry packages."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns information about the registry package and generated links.",
+            "schema": {
+              "$ref": "#/definitions/RegistryPackage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "x-ms-paths": {
@@ -1831,6 +1873,80 @@
         }
       },
       "description": "Information about an application definition request."
+    },
+    "RegistryPackage": {
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "The publisher"
+        },
+        "offer": {
+          "type": "string",
+          "description": "The offer Id"
+        },
+        "plan": {
+          "type": "string",
+          "description": "The plan Id"
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the plan"
+        },
+        "packageLinks": {
+          "$ref": "#/definitions/RegistryPackageLinks",
+          "description": "The registry package links."
+        }
+      },
+      "required": [
+        "offer",
+        "publisher",
+        "plan",
+        "version",
+        "packageLinks"
+      ],
+      "description": "Information about an application definition request."
+    },
+    "RegistryPackageLinks": {
+      "type": "object",
+      "properties": {
+        "createUiDefinitionLink": {
+          "type": "string",
+          "description": "The create ui definition link."
+        },
+        "deploymentTemplateLink": {
+          "type": "string",
+          "description": "The deployment template link."
+        }
+      },
+      "description": "Resource information."
+    },
+    "RegistryPackagePlan": {
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "The publisher ID."
+        },
+        "offer": {
+          "type": "string",
+          "description": "The offer Id."
+        },
+        "plan": {
+          "type": "string",
+          "description": "The plan Id."
+        },
+        "version": {
+          "type": "string",
+          "description": "The plan's version."
+        }
+      },
+      "required": [
+        "offer",
+        "publisher",
+        "plan"
+      ],
+      "description": "Plan for the managed application."
     },
     "Plan": {
       "type": "object",
