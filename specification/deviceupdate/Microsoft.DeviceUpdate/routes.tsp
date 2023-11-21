@@ -563,7 +563,15 @@ interface DeviceManagement {
   >;
 
   /** Retrieve operation status. */
-  getOperationStatus is ServiceOperations.ResourceRead<DeviceOperation>;
+  getOperationStatus is ServiceOperations.ResourceRead<
+    DeviceOperation,
+    TraitOverride<RequestHeadersTrait<
+      {
+        ...IfNoneMatchParameter;
+      },
+      TraitContext.Read
+    >>
+  >;
 
   /**
    * Get a list of all device import operations. Completed operations are kept for 7 days before auto-deleted.
