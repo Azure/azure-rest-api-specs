@@ -6,11 +6,6 @@ using Azure.ClientGenerator.Core;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 namespace Azure.OpenAI;
 
-// Azure-specific long-running operations should be treated as implementation details that are wrapped into
-// appropriately merged public surface.
-@@access(beginAzureBatchImageGeneration, Access.internal);
-@@access(getAzureBatchImageGenerationOperationStatus, Access.internal);
-
 // Azure-specific Chat Completions with extensions should be handled by clients as a conditional selection within the
 // shared Chat Completions route, with the selection gated by the presence or non-presence of additional child
 // configuration options on the request payload options model.
