@@ -1369,6 +1369,15 @@ directive:
     from: actionGroups_API.json
     where: $.paths
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: metricDefinitions_API.json
+    reason: 'Breaking change to modify metricDefinitions now'
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: metrics_API.json
+    reason: 'Due to the ability to sort and order the list, this is incompatible with paging. It would also be a breaking change to modify this now'
+  - suppress: ParametersInPost
+    from: metrics_API.json
+    reason: 'metrics API is really a GET action that allows some parameters to be in the body due to length concerns. It would also be a breaking change to modify this now'
 ```
 
 This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1.
