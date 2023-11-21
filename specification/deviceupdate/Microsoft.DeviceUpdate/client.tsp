@@ -3,22 +3,25 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-namespace Customizations;
+namespace Azure.IoT.DeviceUpdate;
 
-@@client(Azure.IoT.DeviceUpdate.DeviceUpdate,
+@@client(DeviceUpdate,
   {
     name: "DeviceUpdateClient",
   }
 );
 
-@@client(Azure.IoT.DeviceUpdate.DeviceManagement,
+@@client(DeviceManagement,
   {
     name: "DeviceManagementClient",
   }
 );
 
-@@client(Azure.IoT.DeviceUpdate.InstanceManagement,
+@@client(InstanceManagement,
   {
     name: "InstanceManagementClient",
   }
 );
+
+@@projectedName(DeviceUpdate.importUpdate, "csharp", "StartImportUpdate");
+@@projectedName(DeviceUpdate.deleteUpdate, "csharp", "StartDeleteUpdate");

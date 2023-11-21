@@ -131,6 +131,10 @@ interface DeviceUpdate {
     {
       ...UpdateProviderParameter;
       ...UpdateNameParameter;
+
+      /** Optional to filter updates by isDeployable property. */
+      @query
+      filter?: string;
     },
     StringsList,
     {},
@@ -630,7 +634,7 @@ interface DeviceManagement {
     {
       ...Azure.Core.Foundations.ItemKeysOf<LogCollection>;
     },
-    Azure.Core.Page<LogCollectionOperationDetailedStatus>
+    LogCollectionOperationDetailedStatus
   >;
 
   /** Get list of device health */
