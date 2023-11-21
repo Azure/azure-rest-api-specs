@@ -36,12 +36,3 @@ These settings apply only when `--tag=package-2023-11` is specified on the comma
 input-file:
     - Microsoft.BareMetal/preview/2023-11-01-preview/BootstrapRP.json
 ```
-
-## Suppression
-
-``` yaml
-suppressions:
-  - code: ParametersInPointGet
-    from: BootstrapRP.json
-    reason: Error with Lint test
-```
