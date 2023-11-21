@@ -337,14 +337,11 @@
       "description": "Model representing a BareMetal Connection object.",
       "type": "object",
       "x-ms-azure-resource": true,
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
-      }
+      ]
     },
     "bareMetalConnectionProperties": {
       "description": "Basic BareMetal Connection properties needed for the request and response.",
