@@ -845,6 +845,7 @@ model AtlasGlossaryExtInfo {
   termInfo?: Record<AtlasGlossaryTerm>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
 @doc("The search query of advanced search request.")
 model SearchRequest {
   @doc("The keywords applied to all searchable fields.")
@@ -862,6 +863,7 @@ batch, and will return new token in each response unless there's no more data.
 """)
   continuationToken?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This is a flexible property"
   @doc("The sort order of search results, can specify multiple fields.")
   orderby?: unknown[];
 
@@ -885,7 +887,7 @@ model SearchFacetItem {
   @doc("The name of the facet item.")
   facet?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
   @doc("Any object")
   sort?: unknown;
 }
@@ -1108,7 +1110,7 @@ Expert or Steward for a glossary term.
   contactType?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
 @doc("The query of suggest request.")
 model SuggestRequest {
   @doc("""
@@ -1218,7 +1220,7 @@ AtlasGlossaryCategory.
   longDescription?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
 @doc("The query of autocomplete request.")
 model AutoCompleteRequest {
   @doc("""
@@ -1904,4 +1906,211 @@ model AtlasTypeDefHeader {
 
   @doc("The name of the type definition.")
   name?: string;
+}
+
+@discriminator("kind")
+@doc("Base model for search filter")
+model SearchFilter {
+
+}
+
+
+@doc("And filter for search")
+model AndFilter extends SearchFilter {
+  @doc("And filter for search")
+  kind: "AndFilter";
+  @doc("List of filters")
+  @projectedName("json", "and")
+  andFilters : SearchFilter[];
+}
+
+@doc("Not filter for search")
+model NotFilter extends SearchFilter {
+  @doc("Not filter for search")
+  kind: "NotFilter";
+  
+  @doc("Not filter")
+  @projectedName("json", "not")
+  notFilters : SearchFilter;
+}
+
+@doc("Or filter for search")
+model OrFilter extends SearchFilter {
+  @doc("Or filter for search")
+  kind: "OrFilter";
+  @doc("List of filters")
+  @projectedName("json", "or")
+  orFilters : SearchFilter[];
+}
+
+@doc("Asset type filter for search")
+model AssetTypeFilter extends SearchFilter {
+  @doc("Asset type filter for search")
+  kind: "AssetTypeFilter";
+  @doc("Asset type name")
+  assetType: string;
+}
+
+@doc("Attribute filter for search")
+model AttributeFilter extends SearchFilter {
+  @doc("Attribute filter for search")
+  kind: "AttributeFilter";
+  
+  @doc("Attribute name")
+  attributeName: string;
+  @doc("Operator")
+  operator: string;
+  
+  @doc("Attribute value")
+  attributeValue: string;
+}
+
+@doc("Classification type filter for search")
+model ClassificationFilter extends SearchFilter {
+  @doc("Classification type filter for search")
+  kind: "ClassificationFilter";
+  @doc("Classification name")
+  classificationName: string;
+  @doc("Whether to include sub classifications")
+  includeSubClassifications?: boolean;
+}
+
+@doc("Collection id filter for search")
+model CollectionIdFilter extends SearchFilter {
+  @doc("Collection id filter for search")
+  kind: "CollectionIdFilter";
+  @doc("Collection id")
+  collectionId: string;
+}
+
+@doc("Contact filter for search")
+model ContactFilter extends SearchFilter {
+  @doc("Contact filter for search")
+  kind: "ContactFilter";
+  @doc("Contact type")
+  contactType: string;
+  @doc("Contact Id")
+  contactId: string;
+}
+
+@doc("Domain id filter for search")
+model DomainIdFilter extends SearchFilter {
+  @doc("Domain id filter for search")
+  kind: "DomainIdFilter";
+  @doc("Domain id")
+  domainId: string;
+}
+
+@doc("Exists filter for search")
+model ExistsFilter extends SearchFilter {
+  @doc("Exists filter for search")
+  kind: "ExistsFilter";
+  @projectedName("json", "exists")
+  @doc("Field")
+  field: string;
+}
+
+@doc("File extension filter for search")
+model FileExtensionFilter extends SearchFilter {
+  @doc("File extension filter for search")
+  kind: "FileExtensionFilter";
+  @doc("File extension")
+  fileExtension: string;
+}
+
+@doc("Label filter for search")
+model LabelFilter extends SearchFilter {
+  @doc("Label filter for search")
+  kind: "LabelFilter";
+  @doc("Label")
+  label: string;
+  @doc("Whether to include sub labels")
+  includeSubLabels?: boolean;
+}
+
+
+@doc("Label filter for search")
+model ObjectTypeFilter extends SearchFilter {
+  @doc("Label filter for search")
+  kind: "ObjectTypeFilter";
+  @doc("Object type")
+  objectType: string;
+}
+
+@doc("Path filter for search")
+model PathFilter extends SearchFilter {
+  @doc("Path filter for search")
+  kind: "PathFilter";
+  @doc("Path")
+  path: string;
+  @doc("Whether the path is parent path")
+  isParent?: boolean;
+}
+
+@doc("Scan info filter for search")
+model ScanInfoFilter extends SearchFilter {
+  @doc("Scan info filter for search")
+  kind: "ScanInfoFilter";
+  @doc("Data source name")
+  dataSourceName?: string;
+  @doc("Scan name")
+  scanName: string;
+}
+
+@doc("Glossary filter for search")
+model GlossaryFilter extends SearchFilter {
+  @doc("Glossary filter for search")
+  kind: "GlossaryFilter";
+  @doc("Glossary type. Either AtlasGlossary or AtlasGlossaryType")
+  glossaryType: string;
+}
+
+@doc("Id filter for search")
+model IdFilter extends SearchFilter {
+  @doc("Id filter for search")
+  kind: "IdFilter";
+  @doc("Id value")
+  id: string;
+}
+
+@doc("Type filter for search")
+model TypeFilter extends SearchFilter {
+  @doc("Type filter for search")
+  kind: "TypeFilter";
+  @doc("Type name")
+  typeName: string;
+  @doc("Whether to include sub types")
+  includeSubTypes?: boolean;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
+@doc("Create time filter for search")
+model CreateTimeFilter extends SearchFilter {
+  @doc("Create time filter for search")
+  kind: "CreateTimeFilter";
+  @doc("""
+Either using a string 'LAST_24H|LAST_7D|LAST_30D|LAST_365D|MORE_THAN_365D', or using a map for example
+{
+  "operator": "lt",
+  "timeThreshold": 1545580800000
+} 
+to represent the time filter
+""")
+  createTime: unknown;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
+@doc("Update time filter for search")
+model UpdateTimeFilter extends SearchFilter {
+  @doc("Update time filter for search")
+  kind: "UpdateTimeFilter";
+  @doc("""
+Either using a string 'LAST_24H|LAST_7D|LAST_30D|LAST_365D|MORE_THAN_365D', or using a map for example
+{
+  "operator": "lt",
+  "timeThreshold": 1545580800000
+} 
+to represent the time filter
+""")
+  updateTime: unknown;
 }

@@ -1030,7 +1030,7 @@ can also be defined during creation.
 
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
   @doc("""
 Update the glossary category partially. So far we only supports partial
 updating shortDescription and longDescription for category.
@@ -1043,7 +1043,6 @@ updating shortDescription and longDescription for category.
       @path
       categoryGuid: string;
 
-      #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @doc("""
 A map containing keys as attribute names and values as corresponding attribute
 values for partial update.
@@ -1176,7 +1175,7 @@ Optionally it can be categorized as well.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
   @doc("""
 Update the glossary term partially. So far we only supports partial updating
 shortDescription, longDescription, abbreviation, usage and status for term.
@@ -1193,7 +1192,6 @@ shortDescription, longDescription, abbreviation, usage and status for term.
       @query
       includeTermHierarchy: boolean;
 
-      #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @doc("""
 A map containing keys as attribute names and values as corresponding attribute
 values to be updated.
@@ -1452,6 +1450,7 @@ Recommend to fetch terms/categories details separately using
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
   @doc("""
 Update the glossary partially. Some properties such as qualifiedName are not
 allowed to be updated.
@@ -1474,7 +1473,6 @@ using 'ignoreTermsAndCategories=true' to reduce response body size.
       @query
       ignoreTermsAndCategories: boolean;
 
-      #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @doc("""
 A map containing keys as attribute names and values as corresponding attribute
 values.
