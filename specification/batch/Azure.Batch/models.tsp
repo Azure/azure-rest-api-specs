@@ -443,7 +443,7 @@ enum BatchTaskState {
 @doc("BatchTaskAddStatus enums")
 enum BatchTaskAddStatus {
   @doc("The Task was added successfully.")
-  Success: "Success",
+  Success: "success",
 
   @doc("The Task failed to add due to a client error and should not be retried without modifying the request as appropriate.")
   ClientError: "clienterror",
@@ -713,7 +713,7 @@ model ImageInfo {
 @doc("""
 A reference to an Azure Virtual Machines Marketplace Image or a Azure Compute Gallery Image. 
 To get the list of all Azure Marketplace Image references verified by Azure Batch, see the 
-'List Supported Images' operation.
+' List Supported Images ' operation.
 """)
 model ImageReference {
   @doc("The publisher of the Azure Virtual Machines Marketplace Image. For example, Canonical or MicrosoftWindowsServer.")
@@ -1799,6 +1799,12 @@ Server.
 
   @doc("Settings for the operating system disk of the Virtual Machine.")
   osDisk?: OSDisk;
+
+  @doc("Specifies the security profile settings for the virtual machine or virtual machine scale set.")
+  securityProfile?: SecurityProfile;
+
+  @doc("Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}")
+  serviceArtifactReference?: ServiceArtifactReference;
 }
 
 @doc("Windows operating system settings to apply to the virtual machine.")
