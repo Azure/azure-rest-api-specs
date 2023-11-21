@@ -4,7 +4,7 @@
     "resourceGroupName": "test-rg",
     "clusterName": "myCluster",
     "deploymentSettingsName": "default",
-    "api-version": "2023-12-01-preview"
+    "api-version": "2023-11-01-preview"
   },
   "responses": {
     "200": {
@@ -130,6 +130,38 @@
                   "optionalServices": {
                     "customLocation": "customLocationName"
                   }
+                },
+                "sbePartnerInfo": {
+                  "deploymentSbeInfo": {
+                    "version": "4.0.2309.13",
+                    "family": "Gen5",
+                    "publisher": "Contoso",
+                    "sbeManifestSource": "default",
+                    "sbeManifestCreationDate": "2023-07-25T02:40:33Z"
+                  },
+                  "partnerProperties": [
+                    {
+                      "name": "EnableBMCIpV6",
+                      "value": "false"
+                    },
+                    {
+                      "name": "PhoneHomePort",
+                      "value": "1653"
+                    },
+                    {
+                      "name": "BMCSecurityState",
+                      "value": "HighSecurity"
+                    }
+                  ],
+                  "credentialList": [
+                    {
+                      "kvId": "/subscriptions/<GUID>/resourceGroups/SomethingRG/providers/Microsoft.KeyVault/vaults/testkv",
+                      "secretNames": [
+                        "BMCAdminUserCred",
+                        "DownloadConnectorCred"
+                      ]
+                    }
+                  ]
                 }
               }
             ]
