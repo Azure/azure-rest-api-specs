@@ -4242,6 +4242,143 @@
           }
         }
       }
+    },
+    "/intelligence/chat": {
+      "post": {
+        "tags": [
+          "Intelligence"
+        ],
+        "description": "Supports multi-round dialogues, enabling users to discover, analyze, and optimize their assets through natural language interactions.",
+        "operationId": "Intelligence_Chat",
+        "consumes": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Intelligence_StartANewConversation": {
+            "$ref": "./examples/Intelligence_StartANewConversation.json"
+          },
+          "Intelligence_StartFetchResponse": {
+            "$ref": "./examples/Intelligence_FetchResponse.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "$ref": "#/parameters/intelligenceOperationName"
+          },
+          {
+            "name": "chatId",
+            "in": "query",
+            "description": "The unique identifier for a conversation. Required when op=fetchResponse/stopResponding/closeConversation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "startingMessageId",
+            "in": "query",
+            "description": "The message ID to start fetching the conversation history from.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "userMessage",
+            "required": false,
+            "description": "The user's input message. Either this or userChoice must be provided when op=newMessage.",
+            "schema": {
+              "description": "The user's input message.",
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "userChoice",
+            "required": false,
+            "description": "The user's choice (suggestion ID from the previous round of Chat API response). Either this or userMessage must be provided when op=newMessage.",
+            "schema": {
+              "description": "The user's choice (suggestion ID from the previous round of Chat API response).",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntelligenceChatResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/intelligence/skill": {
+      "post": {
+        "tags": [
+          "Intelligence"
+        ],
+        "description": "Execute specific skills based on natural language input, without requiring conversational context or history.",
+        "operationId": "Intelligence_Skill",
+        "consumes": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Intelligence_AssetDiscoverySkill": {
+            "$ref": "./examples/Intelligence_AssetDiscoverySkill.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "$ref": "#/parameters/intelligenceSkillType"
+          },
+          {
+            "in": "body",
+            "name": "userInput",
+            "required": true,
+            "description": "The user's natural language input.",
+            "schema": {
+              "description": "The user's natural language input.",
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "reference",
+            "required": false,
+            "description": "An optional reference to provide asset context. Required when skillType=assetSummary/annotationSuggestion/assetAnalysis.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/IntelligenceReference"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntelligenceSkillResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7204,6 +7341,136 @@
           "description": "Message from async job if fail"
         }
       }
+    },
+    "IntelligenceChatResponse": {
+      "type": "object",
+      "title": "ChatResponse",
+      "description": "The response body of Intelligence Chat API.",
+      "properties": {
+        "chatId": {
+          "type": "string",
+          "description": "The unique identifier for a conversation."
+        },
+        "messages": {
+          "description": "The message items in the conversation, arranged in chronological order.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntelligenceMessage"
+          }
+        }
+      }
+    },
+    "IntelligenceMessage": {
+      "type": "object",
+      "title": "Message",
+      "description": "The message item in a conversation",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "The unique identifier for the message."
+        },
+        "role": {
+          "$ref": "#/definitions/IntelligenceRole"
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the message, which could be the user's input, system status, and AI response."
+        },
+        "isCompleted": {
+          "type": "boolean",
+          "description": "Indicates whether the message is complete or still being processed."
+        },
+        "references": {
+          "type": "object",
+          "description": "An optional field containing strong-type references to provide additional details about the mentioned assets or individuals in the Assistant message content.",
+          "additionalProperties": {
+            "$ref": "#/definitions/IntelligenceReference"
+          }
+        },
+        "suggestions": {
+          "type": "array",
+          "description": "An optional field providing suggested inputs for the next steps that the user can select from.",
+          "items": {
+            "$ref": "#/definitions/IntelligenceSuggestion"
+          }
+        }
+      }
+    },
+    "IntelligenceRole": {
+      "type": "string",
+      "description": "The role of the message, including: User/System/Assistant",
+      "title": "Role",
+      "enum": [
+        "User",
+        "System",
+        "Assistant"
+      ],
+      "x-ms-enum": {
+        "name": "IntelligenceRole",
+        "modelAsString": true
+      }
+    },
+    "IntelligenceReference": {
+      "type": "object",
+      "description": "Provide additional details about particular assets and individuals",
+      "title": "Reference",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/IntelligenceReferenceType"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Attributes that correspond to the specific type of instance. For example, asset type will include id, name, qualifiedName attributes in properties."
+        }
+      }
+    },
+    "IntelligenceReferenceType": {
+      "type": "string",
+      "description": "Indicates the type of the individual being referenced, including asset, glossaryTerm, classificationType and contact.",
+      "title": "Type",
+      "enum": [
+        "asset",
+        "glossaryTerm",
+        "classificationType",
+        "contact"
+      ],
+      "x-ms-enum": {
+        "name": "IntelligenceReferenceType",
+        "modelAsString": true
+      }
+    },
+    "IntelligenceSuggestion": {
+      "type": "object",
+      "description": "Provide suggested inputs",
+      "title": "Suggestion",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the suggestion."
+        },
+        "displayText": {
+          "type": "string",
+          "description": "The display text of the suggestion."
+        }
+      }
+    },
+    "IntelligenceSkillResponse": {
+      "type": "object",
+      "title": "SkillResponse",
+      "description": "The response body of Intelligence Skill API.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The intelligence service-generated natural language response."
+        },
+        "references": {
+          "type": "object",
+          "description": "Attributes that correspond to the specific type of instance.",
+          "additionalProperties": {
+            "$ref": "#/definitions/IntelligenceReference"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -7715,6 +7982,42 @@
       ],
       "x-ms-enum": {
         "name": "businessAttributeUpdateBehavior",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "intelligenceOperationName": {
+      "name": "op",
+      "in": "query",
+      "description": "The operation to perform.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "newMessage",
+        "fetchResponse",
+        "stopResponding",
+        "closeConversation"
+      ],
+      "x-ms-enum": {
+        "name": "intelligenceOperationName",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "intelligenceSkillType": {
+      "name": "skillType",
+      "in": "query",
+      "description": "The type of skill to execute.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "assetDiscovery",
+        "assetSummary",
+        "annotationSuggestion",
+        "assetAnalysis"
+      ],
+      "x-ms-enum": {
+        "name": "intelligenceSkillType",
         "modelAsString": true
       },
       "x-ms-parameter-location": "method"
