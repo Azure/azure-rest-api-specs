@@ -1054,56 +1054,6 @@
         "parameters"
       ]
     },
-    "AzureChatExtensionParameters": {
-      "type": "object",
-      "properties": {
-        "authentication": {
-          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
-          "description": "The authentication option to access the data."
-        },
-        "topNDocuments": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The configured top number of documents to feature for the configured query."
-        },
-        "inScope": {
-          "type": "boolean",
-          "description": "Whether queries should be restricted to use of indexed data."
-        },
-        "strictness": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
-          "minimum": 1,
-          "maximum": 5
-        },
-        "roleInformation": {
-          "type": "string",
-          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
-        },
-        "environment": {
-          "type": "string",
-          "description": "The environment name of Pinecone."
-        },
-        "indexName": {
-          "type": "string",
-          "description": "The index name name of Pinecone."
-        },
-        "fieldsMapping": {
-          "$ref": "#/definitions/PineconeFieldMappingOptions",
-          "description": "Customized field mapping behavior to use when interacting with the search index."
-        },
-        "embeddingDependency": {
-          "$ref": "#/definitions/OnYourDataEmbeddingDependency",
-          "description": "The embedding dependency for vector search."
-        }
-      },
-      "required": [
-        "environment",
-        "indexName",
-        "fieldsMapping"
-      ]
-    },
     "AzureChatExtensionType": {
       "type": "string",
       "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
@@ -1190,13 +1140,13 @@
       "type": "object",
       "description": "A specific representation of configurable options for Azure Cognitive Search when using it as an Azure OpenAI chat\nextension.",
       "properties": {
-        "paramters": {
+        "parameters": {
           "$ref": "#/definitions/AzureCognitiveSearchChatExtensionParameters",
           "description": "The parameters to use when configuring Azure Cognitive Search."
         }
       },
       "required": [
-        "paramters"
+        "parameters"
       ],
       "allOf": [
         {
@@ -1207,6 +1157,7 @@
     },
     "AzureCognitiveSearchChatExtensionParameters": {
       "type": "object",
+      "description": "Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -1240,6 +1191,10 @@
         "indexName": {
           "type": "string",
           "description": "The name of the index to use as available in the referenced Azure Cognitive Search resource."
+        },
+        "key": {
+          "type": "string",
+          "description": "The API key to use when interacting with the Azure Cognitive Search resource."
         },
         "fieldsMapping": {
           "$ref": "#/definitions/AzureCognitiveSearchIndexFieldMappingOptions",
@@ -1373,6 +1328,7 @@
     },
     "AzureCosmosDBChatExtensionParameters": {
       "type": "object",
+      "description": "Parameters to use when configuring Azure OpenAI CosmosDB chat extensions.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -1556,6 +1512,7 @@
     },
     "AzureMachineLearningIndexChatExtensionParameters": {
       "type": "object",
+      "description": "Parameters for the Azure Machine Learning index chat extension.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -2668,6 +2625,7 @@
     },
     "ElasticsearchChatExtensionParameters": {
       "type": "object",
+      "description": "Parameters to use when configuring Elasticsearch as an Azure OpenAI chat extension.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -3384,7 +3342,7 @@
       "description": "A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat\nextension.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/AzureChatExtensionParameters",
+          "$ref": "#/definitions/PineconeChatExtensionParameters",
           "description": "The parameters to use when configuring Azure OpenAI chat extensions."
         }
       },
@@ -3397,6 +3355,57 @@
         }
       ],
       "x-ms-discriminator-value": "Pinecone"
+    },
+    "PineconeChatExtensionParameters": {
+      "type": "object",
+      "description": "Parameters for configuring Azure OpenAI Pinecone chat extensions.",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
+          "description": "The authentication option to access the data."
+        },
+        "topNDocuments": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured top number of documents to feature for the configured query."
+        },
+        "inScope": {
+          "type": "boolean",
+          "description": "Whether queries should be restricted to use of indexed data."
+        },
+        "strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "roleInformation": {
+          "type": "string",
+          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
+        },
+        "environment": {
+          "type": "string",
+          "description": "The environment name of Pinecone."
+        },
+        "indexName": {
+          "type": "string",
+          "description": "The index name name of Pinecone."
+        },
+        "fieldsMapping": {
+          "$ref": "#/definitions/PineconeFieldMappingOptions",
+          "description": "Customized field mapping behavior to use when interacting with the search index."
+        },
+        "embeddingDependency": {
+          "$ref": "#/definitions/OnYourDataEmbeddingDependency",
+          "description": "The embedding dependency for vector search."
+        }
+      },
+      "required": [
+        "environment",
+        "indexName",
+        "fieldsMapping"
+      ]
     },
     "PineconeFieldMappingOptions": {
       "type": "object",

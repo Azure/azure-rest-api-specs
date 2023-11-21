@@ -475,13 +475,13 @@
       "type": "object",
       "description": "A specific representation of configurable options for Azure Cognitive Search when using it as an Azure OpenAI chat\nextension.",
       "properties": {
-        "paramters": {
+        "parameters": {
           "$ref": "#/definitions/AzureCognitiveSearchChatExtensionParameters",
           "description": "The parameters to use when configuring Azure Cognitive Search."
         }
       },
       "required": [
-        "paramters"
+        "parameters"
       ],
       "allOf": [
         {
@@ -492,6 +492,7 @@
     },
     "AzureCognitiveSearchChatExtensionParameters": {
       "type": "object",
+      "description": "Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension.",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
@@ -525,6 +526,10 @@
         "indexName": {
           "type": "string",
           "description": "The name of the index to use as available in the referenced Azure Cognitive Search resource."
+        },
+        "key": {
+          "type": "string",
+          "description": "The API key to use when interacting with the Azure Cognitive Search resource."
         },
         "fieldsMapping": {
           "$ref": "#/definitions/AzureCognitiveSearchIndexFieldMappingOptions",

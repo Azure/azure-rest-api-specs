@@ -23,10 +23,11 @@ model AzureCognitiveSearchChatExtensionConfiguration
   type: AzureChatExtensionType.azureCognitiveSearch;
 
   @doc("The parameters to use when configuring Azure Cognitive Search.")
-  paramters: AzureCognitiveSearchChatExtensionParameters;
+  parameters: AzureCognitiveSearchChatExtensionParameters;
 }
 
 @added(ServiceApiVersions.v2023_08_01_Preview)
+@doc("Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension.")
 model AzureCognitiveSearchChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
@@ -36,6 +37,10 @@ model AzureCognitiveSearchChatExtensionParameters {
 
   @doc("The name of the index to use as available in the referenced Azure Cognitive Search resource.")
   indexName: string;
+
+  // TODO: this is the only field I added to the definition of what was already there. 
+  @doc("The API key to use when interacting with the Azure Cognitive Search resource.")
+  key?: string;
 
   @doc("Customized field mapping behavior to use when interacting with the search index.")
   @projectedName("csharp", "FieldMappingOptions")

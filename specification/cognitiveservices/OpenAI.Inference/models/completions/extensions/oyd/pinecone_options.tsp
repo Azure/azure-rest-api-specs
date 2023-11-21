@@ -23,11 +23,12 @@ model PineconeChatExtensionConfiguration
   type: AzureChatExtensionType.pinecone;
 
   @doc("The parameters to use when configuring Azure OpenAI chat extensions.")
-  parameters: AzureChatExtensionParameters;
+  parameters: PineconeChatExtensionParameters;
 }
 
 @added(ServiceApiVersions.v2023_12_01_Preview)
-model AzureChatExtensionParameters {
+@doc("Parameters for configuring Azure OpenAI Pinecone chat extensions.")
+model PineconeChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
 

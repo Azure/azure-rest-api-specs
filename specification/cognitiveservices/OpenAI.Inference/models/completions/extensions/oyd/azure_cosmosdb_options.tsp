@@ -26,7 +26,9 @@ model AzureCosmosDBChatExtensionConfiguration
   parameters: AzureCosmosDBChatExtensionParameters;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
 @added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("Parameters to use when configuring Azure OpenAI CosmosDB chat extensions.")
 model AzureCosmosDBChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
