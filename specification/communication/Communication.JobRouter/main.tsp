@@ -10,9 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-@useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "api-key">
-)
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "api-key">)
 @service({
   title: "Azure Communication Routing Service",
 })
