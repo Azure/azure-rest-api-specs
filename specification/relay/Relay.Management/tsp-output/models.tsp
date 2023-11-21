@@ -1,0 +1,632 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+
+namespace RelayAPI;
+
+enum AccessRights {
+  Manage,
+  Send,
+  Listen,
+}
+
+enum CreatedByType {
+  User,
+  Application,
+  ManagedIdentity,
+  Key,
+}
+
+enum KeyType {
+  PrimaryKey,
+  SecondaryKey,
+}
+
+enum UnavailableReason {
+  None,
+  InvalidName,
+  SubscriptionIsDisabled,
+  NameInUse,
+  NameInLockdown,
+  TooManyNamespaceInCurrentSubscription,
+}
+
+enum SkuName {
+  Standard,
+}
+
+enum SkuTier {
+  Standard,
+}
+
+enum PrivateLinkConnectionStatus {
+  Pending,
+  Approved,
+  Rejected,
+  Disconnected,
+}
+
+enum EndPointProvisioningState {
+  Creating,
+  Updating,
+  Deleting,
+  Succeeded,
+  Canceled,
+  Failed,
+}
+
+enum PublicNetworkAccess {
+  Enabled,
+  Disabled,
+  SecuredByPerimeter,
+}
+
+enum DefaultAction {
+  Allow,
+  Deny,
+}
+
+enum NetworkRuleIPAction {
+  Allow,
+}
+@Azure.Core.fixed
+enum Relaytype {
+  NetTcp,
+  Http,
+}
+
+@doc("The response from the list namespace operation.")
+model AuthorizationRuleListResult is Azure.Core.Page<AuthorizationRule>;
+
+@doc("Single item in a List or Get AuthorizationRule operation")
+model AuthorizationRule {
+  ...ProxyResource;
+
+  @doc("Properties supplied to create or update AuthorizationRule")
+  properties?: AuthorizationRuleProperties;
+
+  @doc("The system meta data relating to this resource.")
+  @visibility("read")
+  systemData?: SystemData;
+}
+
+@doc("Properties supplied to create or update AuthorizationRule")
+model AuthorizationRuleProperties {
+  @doc("The rights associated with the rule.")
+  rights: AccessRights[];
+}
+
+@doc("Metadata pertaining to creation and last modification of the resource.")
+model SystemData {
+  @doc("The identity that created the resource.")
+  createdBy?: string;
+
+  @doc("The type of identity that created the resource.")
+  createdByType?: CreatedByType;
+
+  @doc("The timestamp of resource creation (UTC).")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdAt?: utcDateTime;
+
+  @doc("The identity that last modified the resource.")
+  lastModifiedBy?: string;
+
+  @doc("The type of identity that last modified the resource.")
+  lastModifiedByType?: CreatedByType;
+
+  @doc("The timestamp of resource last modification (UTC)")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedAt?: utcDateTime;
+}
+
+@doc("""
+Common fields that are returned in the response for all Azure Resource Manager
+resources
+""")
+model ProxyResource {
+  @doc("""
+Fully qualified resource ID for the resource. Ex -
+/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+""")
+  @visibility("read")
+  id?: string;
+
+  @doc("The name of the resource")
+  @visibility("read")
+  name?: string;
+
+  @doc("""
+The type of the resource. E.g. \"Microsoft.EventHub/Namespaces\" or
+\"Microsoft.EventHub/Namespaces/EventHubs\"
+""")
+  @visibility("read")
+  type?: string;
+
+  @doc("The geo-location where the resource lives")
+  @visibility("read")
+  location?: string;
+}
+
+@doc("""
+Common error response for all Azure Resource Manager APIs to return error
+details for failed operations. (This also follows the OData error response
+format.).
+""")
+@error
+model ErrorResponse {
+  @doc("The error object.")
+  error?: ErrorDetail;
+}
+
+@doc("The error detail.")
+model ErrorDetail {
+  @doc("The error code.")
+  @visibility("read")
+  code?: string;
+
+  @doc("The error message.")
+  @visibility("read")
+  message?: string;
+
+  @doc("The error target.")
+  @visibility("read")
+  target?: string;
+
+  @doc("The error details.")
+  @visibility("read")
+  details?: ErrorDetail[];
+
+  @doc("The error additional info.")
+  @visibility("read")
+  additionalInfo?: ErrorAdditionalInfo[];
+}
+
+@doc("The resource management error additional info.")
+model ErrorAdditionalInfo {
+  @doc("The additional info type.")
+  @visibility("read")
+  type?: string;
+
+  @doc("The additional info.")
+  @visibility("read")
+  info?: unknown;
+}
+
+@doc("Namespace/Relay Connection String")
+model AccessKeys {
+  @doc("Primary connection string of the created namespace authorization rule.")
+  primaryConnectionString?: string;
+
+  @doc("Secondary connection string of the created namespace authorization rule.")
+  secondaryConnectionString?: string;
+
+  @doc("A base64-encoded 256-bit primary key for signing and validating the SAS token.")
+  primaryKey?: string;
+
+  @doc("A base64-encoded 256-bit secondary key for signing and validating the SAS token.")
+  secondaryKey?: string;
+
+  @doc("A string that describes the authorization rule.")
+  keyName?: string;
+}
+
+@doc("""
+Parameters supplied to the regenerate authorization rule operation, specifies
+which key needs to be reset.
+""")
+model RegenerateAccessKeyParameters {
+  @doc("The access key to regenerate.")
+  keyType: KeyType;
+
+  @doc("""
+Optional. If the key value is provided, this is set to key type, or
+autogenerated key value set for key type.
+""")
+  key?: string;
+}
+
+@doc("The response of the list hybrid connection operation.")
+model HybridConnectionListResult is Azure.Core.Page<HybridConnection>;
+
+@doc("Description of hybrid connection resource.")
+model HybridConnection {
+  ...ProxyResource;
+
+  @doc("Properties of the HybridConnection.")
+  properties?: HybridConnectionProperties;
+
+  @doc("The system meta data relating to this resource.")
+  @visibility("read")
+  systemData?: SystemData;
+}
+
+@doc("Properties of the HybridConnection.")
+model HybridConnectionProperties {
+  @doc("The time the hybrid connection was created.")
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdAt?: utcDateTime;
+
+  @doc("The time the namespace was updated.")
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  updatedAt?: utcDateTime;
+
+  @doc("""
+The number of listeners for this hybrid connection. Note that min : 1 and
+max:25 are supported.
+""")
+  @visibility("read")
+  listenerCount?: int32;
+
+  @doc("""
+Returns true if client authorization is needed for this hybrid connection;
+otherwise, false.
+""")
+  requiresClientAuthorization?: boolean;
+
+  @doc("""
+The usermetadata is a placeholder to store user-defined string data for the
+hybrid connection endpoint. For example, it can be used to store descriptive
+data, such as a list of teams and their contact information. Also, user-defined
+configuration settings can be stored.
+""")
+  userMetadata?: string;
+}
+
+@doc("Description of the check name availability request properties.")
+model CheckNameAvailability {
+  @doc("""
+The namespace name to check for availability. The namespace name can contain
+only letters, numbers, and hyphens. The namespace must start with a letter, and
+it must end with a letter or number.
+""")
+  name: string;
+}
+
+@doc("Description of the check name availability request properties.")
+model CheckNameAvailabilityResult {
+  @doc("The detailed info regarding the reason associated with the namespace.")
+  @visibility("read")
+  message?: string;
+
+  @doc("""
+Value indicating namespace is available. Returns true if the namespace is
+available; otherwise, false.
+""")
+  nameAvailable?: boolean;
+
+  @doc("The reason for unavailability of a namespace.")
+  reason?: UnavailableReason;
+}
+
+@doc("The response from the list namespace operation.")
+model RelayNamespaceListResult is Azure.Core.Page<RelayNamespace>;
+
+@doc("Description of a namespace resource.")
+model RelayNamespace {
+  ...TrackedResource;
+
+  @doc("SKU of the namespace.")
+  sku?: Sku;
+
+  @doc("The system meta data relating to this resource.")
+  @visibility("read")
+  systemData?: SystemData;
+
+  @doc("Description of Relay namespace")
+  properties?: RelayNamespaceProperties;
+}
+
+@doc("SKU of the namespace.")
+model Sku {
+  @doc("Name of this SKU.")
+  name: SkuName;
+
+  @doc("The tier of this SKU.")
+  tier?: SkuTier;
+}
+
+@doc("Properties of the namespace.")
+model RelayNamespaceProperties {
+  @doc("Provisioning state of the Namespace.")
+  @visibility("read")
+  provisioningState?: string;
+
+  @doc("Status of the Namespace.")
+  @visibility("read")
+  status?: string;
+
+  @doc("The time the namespace was created.")
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdAt?: utcDateTime;
+
+  @doc("The time the namespace was updated.")
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  updatedAt?: utcDateTime;
+
+  @doc("Endpoint you can use to perform Service Bus operations.")
+  @visibility("read")
+  serviceBusEndpoint?: string;
+
+  @doc("Identifier for Azure Insights metrics.")
+  @visibility("read")
+  metricId?: string;
+
+  @doc("List of private endpoint connections.")
+  privateEndpointConnections?: PrivateEndpointConnection[];
+
+  @doc("""
+This determines if traffic is allowed over public network. By default it is
+enabled.
+""")
+  publicNetworkAccess?: PublicNetworkAccess;
+}
+
+@doc("Properties of the PrivateEndpointConnection.")
+model PrivateEndpointConnection {
+  ...ProxyResource;
+
+  @doc("Properties of the PrivateEndpointConnection.")
+  properties?: PrivateEndpointConnectionProperties;
+
+  @doc("The system meta data relating to this resource.")
+  @visibility("read")
+  systemData?: SystemData;
+}
+
+@doc("Properties of the private endpoint connection resource.")
+model PrivateEndpointConnectionProperties {
+  @doc("The Private Endpoint resource for this Connection.")
+  privateEndpoint?: PrivateEndpoint;
+
+  @doc("Details about the state of the connection.")
+  privateLinkServiceConnectionState?: ConnectionState;
+
+  @doc("Provisioning state of the Private Endpoint Connection.")
+  provisioningState?: EndPointProvisioningState;
+}
+
+@doc("PrivateEndpoint information.")
+model PrivateEndpoint {
+  @doc("The ARM identifier for Private Endpoint.")
+  id?: string;
+}
+
+@doc("ConnectionState information.")
+model ConnectionState {
+  @doc("Status of the connection.")
+  status?: PrivateLinkConnectionStatus;
+
+  @doc("Description of the connection state.")
+  description?: string;
+}
+
+@doc("Definition of resource.")
+model TrackedResource {
+  ...Resource;
+
+  @doc("Resource location.")
+  location: string;
+
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
+@doc("The resource definition.")
+model Resource {
+  @doc("Resource ID.")
+  @visibility("read")
+  id?: string;
+
+  @doc("Resource name.")
+  @visibility("read")
+  name?: string;
+
+  @doc("Resource type.")
+  @visibility("read")
+  type?: string;
+}
+
+@doc("Description of a namespace resource.")
+model RelayUpdateParameters {
+  ...ResourceNamespacePatch;
+
+  @doc("SKU of the namespace.")
+  sku?: Sku;
+
+  @doc("Description of Relay namespace.")
+  properties?: RelayNamespaceProperties;
+}
+
+@doc("Definition of resource.")
+model ResourceNamespacePatch {
+  ...Resource;
+
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
+@doc("Result of the list of all private endpoint connections operation.")
+model PrivateEndpointConnectionListResult
+  is Azure.Core.Page<PrivateEndpointConnection>;
+
+@doc("Information of the private link resource.")
+model PrivateLinkResource {
+  @doc("Properties of the private link resource.")
+  properties?: PrivateLinkResourceProperties;
+
+  @doc("Fully qualified identifier of the resource.")
+  id?: string;
+
+  @doc("Name of the resource")
+  name?: string;
+
+  @doc("Type of the resource")
+  type?: string;
+}
+
+@doc("Properties of PrivateLinkResource")
+model PrivateLinkResourceProperties {
+  @doc("The private link resource group id.")
+  groupId?: string;
+
+  @doc("The private link resource required member names.")
+  requiredMembers?: string[];
+
+  @doc("The private link resource Private link DNS zone name.")
+  requiredZoneNames?: string[];
+}
+
+@doc("Result of the List private link resources operation.")
+model PrivateLinkResourcesListResult {
+  @doc("A collection of private link resources")
+  value?: PrivateLinkResource[];
+
+  @doc("A link for the next page of private link resources.")
+  nextLink?: string;
+}
+
+@doc("Description of topic resource.")
+model NetworkRuleSet {
+  ...Resource;
+
+  @doc("NetworkRuleSet properties")
+  properties?: NetworkRuleSetProperties;
+
+  @doc("The system meta data relating to this resource.")
+  @visibility("read")
+  systemData?: SystemData;
+}
+
+@doc("NetworkRuleSet properties")
+model NetworkRuleSetProperties {
+  @doc("Default Action for Network Rule Set")
+  defaultAction?: DefaultAction;
+
+  @doc("""
+This determines if traffic is allowed over public network. By default it is
+enabled
+""")
+  publicNetworkAccess?: PublicNetworkAccess;
+
+  @doc("List of IpRules")
+  ipRules?: NWRuleSetIpRules[];
+}
+
+@doc("The response from the List namespace operation.")
+model NWRuleSetIpRules {
+  @doc("IP Mask")
+  ipMask?: string;
+
+  @doc("The IP Filter Action")
+  action?: NetworkRuleIPAction;
+}
+
+@doc("""
+Result of the request to list Relay operations. It contains a list of
+operations and a URL link to get the next set of results.
+""")
+model OperationListResult is Azure.Core.Page<Operation>;
+
+@doc("A Relay REST API operation")
+model Operation {
+  @doc("Operation name: {provider}/{resource}/{operation}")
+  @visibility("read")
+  name?: string;
+
+  @doc("Indicates whether the operation is a data action")
+  @visibility("read")
+  isDataAction?: boolean;
+
+  @doc("Display of the operation")
+  @visibility("read")
+  display?: OperationDisplay;
+
+  @doc("Origin of the operation")
+  @visibility("read")
+  origin?: string;
+
+  @doc("Properties of the operation")
+  properties?: unknown;
+}
+
+@doc("Operation display payload")
+model OperationDisplay {
+  @doc("Resource provider of the operation")
+  @visibility("read")
+  provider?: string;
+
+  @doc("Resource of the operation")
+  @visibility("read")
+  resource?: string;
+
+  @doc("Localized friendly name for the operation")
+  @visibility("read")
+  operation?: string;
+
+  @doc("Localized friendly description for the operation")
+  @visibility("read")
+  description?: string;
+}
+
+@doc("The response of the list WCF relay operation.")
+model WcfRelaysListResult is Azure.Core.Page<WcfRelay>;
+
+@doc("Description of the WCF relay resource.")
+model WcfRelay {
+  ...ProxyResource;
+
+  @doc("Properties of the WCF relay.")
+  properties?: WcfRelayProperties;
+
+  @doc("The system meta data relating to this resource.")
+  @visibility("read")
+  systemData?: SystemData;
+}
+
+@doc("Properties of the WCF relay.")
+model WcfRelayProperties {
+  @doc("Returns true if the relay is dynamic; otherwise, false.")
+  @visibility("read")
+  isDynamic?: boolean;
+
+  @doc("The time the WCF relay was created.")
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdAt?: utcDateTime;
+
+  @doc("The time the namespace was updated.")
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  updatedAt?: utcDateTime;
+
+  @doc("""
+The number of listeners for this relay. Note that min :1 and max:25 are
+supported.
+""")
+  @visibility("read")
+  listenerCount?: int32;
+
+  @doc("WCF relay type.")
+  relayType?: Relaytype;
+
+  @doc("Returns true if client authorization is needed for this relay; otherwise, false.")
+  requiresClientAuthorization?: boolean;
+
+  @doc("Returns true if transport security is needed for this relay; otherwise, false.")
+  requiresTransportSecurity?: boolean;
+
+  @doc("""
+The usermetadata is a placeholder to store user-defined string data for the WCF
+Relay endpoint. For example, it can be used to store descriptive data, such as
+list of teams and their contact information. Also, user-defined configuration
+settings can be stored.
+""")
+  userMetadata?: string;
+}

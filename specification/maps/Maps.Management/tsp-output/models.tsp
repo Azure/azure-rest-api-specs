@@ -1,0 +1,543 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+
+namespace AzureMapsManagementClient;
+
+enum Name {
+  S0,
+  S1,
+  G2,
+}
+
+enum Kind {
+  Gen1,
+  Gen2,
+}
+
+enum CreatedByType {
+  User,
+  Application,
+  ManagedIdentity,
+  Key,
+}
+
+enum SigningKey {
+  primaryKey,
+  secondaryKey,
+}
+
+enum KeyType {
+  primary,
+  secondary,
+}
+@Azure.Core.fixed
+enum ResourceIdentityType {
+  SystemAssigned,
+  UserAssigned,
+  `SystemAssigned, UserAssigned`,
+  None,
+}
+
+@doc("An Azure resource which represents access to a suite of Maps REST APIs.")
+model MapsAccount {
+  ...TrackedResource;
+
+  @doc("The SKU of this account.")
+  sku: Sku;
+
+  @doc("Get or Set Kind property.")
+  kind?: Kind;
+
+  @doc("The system meta data relating to this resource.")
+  @visibility("read")
+  systemData?: SystemData;
+
+  @doc("Sets the identity property for maps account.")
+  identity?: ManagedServiceIdentity;
+
+  @doc("The map account properties.")
+  properties?: MapsAccountProperties;
+}
+
+@doc("The SKU of the Maps Account.")
+model Sku {
+  @doc("The name of the SKU, in standard format (such as S0).")
+  name: Name;
+
+  @doc("Gets the sku tier. This is based on the SKU name.")
+  @visibility("read")
+  tier?: string;
+}
+
+@doc("Metadata pertaining to creation and last modification of the resource.")
+model SystemData {
+  @doc("The identity that created the resource.")
+  createdBy?: string;
+
+  @doc("The type of identity that created the resource.")
+  createdByType?: CreatedByType;
+
+  @doc("The timestamp of resource creation (UTC).")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdAt?: utcDateTime;
+
+  @doc("The identity that last modified the resource.")
+  lastModifiedBy?: string;
+
+  @doc("The type of identity that last modified the resource.")
+  lastModifiedByType?: CreatedByType;
+
+  @doc("The timestamp of resource last modification (UTC)")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedAt?: utcDateTime;
+}
+
+@doc("Identity for the resource.")
+model ManagedServiceIdentity {
+  @doc("The principal ID of resource identity.")
+  @visibility("read")
+  principalId?: string;
+
+  @doc("The tenant ID of resource.")
+  @visibility("read")
+  tenantId?: string;
+
+  @doc("The identity type.")
+  type?: ResourceIdentityType;
+
+  @doc("""
+The list of user identities associated with the resource. The user identity
+dictionary key references will be ARM resource ids in the form:
+'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+""")
+  userAssignedIdentities?: Record<Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties>;
+}
+
+model Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties {
+  @doc("The principal id of user assigned identity.")
+  @visibility("read")
+  principalId?: string;
+
+  @doc("The client id of user assigned identity.")
+  @visibility("read")
+  clientId?: string;
+}
+
+@doc("Additional Map account properties")
+model MapsAccountProperties {
+  @doc("A unique identifier for the maps account")
+  @visibility("read")
+  uniqueId?: string;
+
+  @doc("""
+Allows toggle functionality on Azure Policy to disable Azure Maps local
+authentication support. This will disable Shared Keys authentication from any
+usage.
+""")
+  disableLocalAuth?: boolean;
+
+  @doc("The provisioning state of the Map account resource.")
+  @visibility("read")
+  provisioningState?: string;
+
+  @doc("""
+Sets the resources to be used for Managed Identities based operations for the
+Map account resource.
+""")
+  linkedResources?: LinkedResource[];
+
+  @doc("""
+Specifies CORS rules for the Blob service. You can include up to five CorsRule
+elements in the request. If no CorsRule elements are included in the request
+body, all CORS rules will be deleted, and CORS will be disabled for the Blob
+service.
+""")
+  cors?: CorsRules;
+}
+
+@doc("""
+Linked resource is reference to a resource deployed in an Azure subscription,
+add the linked resource `uniqueName` value as an optional parameter for
+operations on Azure Maps Geospatial REST APIs.
+""")
+model LinkedResource {
+  @doc("A provided name which uniquely identifies the linked resource.")
+  uniqueName: string;
+
+  @doc("""
+ARM resource id in the form:
+'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/accounts/{storageName}'.
+""")
+  id: string;
+}
+
+@doc("""
+Sets the CORS rules. You can include up to five CorsRule elements in the
+request. 
+""")
+model CorsRules {
+  @doc("""
+The list of CORS rules. You can include up to five CorsRule elements in the
+request. 
+""")
+  corsRules?: CorsRule[];
+}
+
+@doc("Specifies a CORS rule for the Map Account.")
+model CorsRule {
+  @doc("""
+Required if CorsRule element is present. A list of origin domains that will be
+allowed via CORS, or \"*\" to allow all domains
+""")
+  allowedOrigins: string[];
+}
+
+@doc("""
+The resource model definition for an Azure Resource Manager tracked top level
+resource which has 'tags' and a 'location'
+""")
+model TrackedResource {
+  ...Resource;
+
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The geo-location where the resource lives")
+  location: string;
+}
+
+@doc("""
+Common fields that are returned in the response for all Azure Resource Manager
+resources
+""")
+model Resource {
+  @doc("""
+Fully qualified resource ID for the resource. Ex -
+/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+""")
+  @visibility("read")
+  id?: string;
+
+  @doc("The name of the resource")
+  @visibility("read")
+  name?: string;
+
+  @doc("""
+The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or
+\"Microsoft.Storage/storageAccounts\"
+""")
+  @visibility("read")
+  type?: string;
+}
+
+@doc("""
+Common error response for all Azure Resource Manager APIs to return error
+details for failed operations. (This also follows the OData error response
+format.).
+""")
+@error
+model ErrorResponse {
+  @doc("The error object.")
+  error?: ErrorDetail;
+}
+
+@doc("The error detail.")
+model ErrorDetail {
+  @doc("The error code.")
+  @visibility("read")
+  code?: string;
+
+  @doc("The error message.")
+  @visibility("read")
+  message?: string;
+
+  @doc("The error target.")
+  @visibility("read")
+  target?: string;
+
+  @doc("The error details.")
+  @visibility("read")
+  details?: ErrorDetail[];
+
+  @doc("The error additional info.")
+  @visibility("read")
+  additionalInfo?: ErrorAdditionalInfo[];
+}
+
+@doc("The resource management error additional info.")
+model ErrorAdditionalInfo {
+  @doc("The additional info type.")
+  @visibility("read")
+  type?: string;
+
+  @doc("The additional info.")
+  @visibility("read")
+  info?: unknown;
+}
+
+@doc("Parameters used to update an existing Maps Account.")
+model MapsAccountUpdateParameters {
+  @doc("""
+Gets or sets a list of key value pairs that describe the resource. These tags
+can be used in viewing and grouping this resource (across resource groups). A
+maximum of 15 tags can be provided for a resource. Each tag must have a key no
+greater than 128 characters and value no greater than 256 characters.
+""")
+  tags?: Record<string>;
+
+  @doc("Get or Set Kind property.")
+  kind?: Kind;
+
+  @doc("The SKU of this account.")
+  sku?: Sku;
+
+  @doc("Sets the identity property for maps account.")
+  identity?: ManagedServiceIdentity;
+
+  @doc("The map account properties.")
+  properties?: MapsAccountProperties;
+}
+
+@doc("A list of Maps Accounts.")
+model MapsAccounts is Azure.Core.Page<MapsAccount>;
+
+@doc("""
+Parameters used to create an account Shared Access Signature (SAS) token. The
+REST API access control is provided by Azure Maps Role Based Access (RBAC)
+identity and access.
+""")
+model AccountSasParameters {
+  @doc("The Map account key to use for signing.")
+  signingKey: SigningKey;
+
+  @doc("""
+The principal Id also known as the object Id of a User Assigned Managed
+Identity currently assigned to the Map Account. To assign a Managed Identity of
+the account, use operation Create or Update an assign a User Assigned Identity
+resource Id.
+""")
+  principalId: string;
+
+  @doc("""
+Optional, allows control of which region locations are permitted access to
+Azure Maps REST APIs with the SAS token. Example: \"eastus\", \"westus2\".
+Omitting this parameter will allow all region locations to be accessible.
+""")
+  regions?: string[];
+
+  @doc("""
+Required parameter which represents the desired maximum request per second to
+allowed for the given SAS token. This does not guarantee perfect accuracy in
+measurements but provides application safe guards of abuse with eventual
+enforcement.
+""")
+  maxRatePerSecond: int32;
+
+  @doc("""
+The date time offset of when the token validity begins. For example
+\"2017-05-24T10:42:03.1567373Z\".
+""")
+  start: string;
+
+  @doc("""
+The date time offset of when the token validity expires. For example
+\"2017-05-24T10:42:03.1567373Z\"
+""")
+  expiry: string;
+}
+
+@doc("""
+A new Sas token which can be used to access the Maps REST APIs and is
+controlled by the specified Managed identity permissions on Azure (IAM) Role
+Based Access Control.
+""")
+model MapsAccountSasToken {
+  @doc("The shared access signature access token.")
+  @visibility("read")
+  accountSasToken?: string;
+}
+
+@doc("""
+The set of keys which can be used to access the Maps REST APIs. Two keys are
+provided for key rotation without interruption.
+""")
+model MapsAccountKeys {
+  @doc("The last updated date and time of the primary key.")
+  @visibility("read")
+  primaryKeyLastUpdated?: string;
+
+  @doc("The primary key for accessing the Maps REST APIs.")
+  @visibility("read")
+  primaryKey?: string;
+
+  @doc("The secondary key for accessing the Maps REST APIs.")
+  @visibility("read")
+  secondaryKey?: string;
+
+  @doc("The last updated date and time of the secondary key.")
+  @visibility("read")
+  secondaryKeyLastUpdated?: string;
+}
+
+@doc("Whether the operation refers to the primary or secondary key.")
+model MapsKeySpecification {
+  @doc("Whether the operation refers to the primary or secondary key.")
+  keyType: KeyType;
+}
+
+@doc("The set of operations available for Maps.")
+model MapsOperations is Azure.Core.Page<OperationDetail>;
+
+@doc("Operation detail payload")
+model OperationDetail {
+  @doc("Name of the operation")
+  name?: string;
+
+  @doc("Indicates whether the operation is a data action")
+  isDataAction?: boolean;
+
+  @doc("Display of the operation")
+  display?: OperationDisplay;
+
+  @doc("Origin of the operation")
+  origin?: string;
+
+  @doc("Properties of the operation")
+  properties?: OperationProperties;
+}
+
+@doc("Operation display payload")
+model OperationDisplay {
+  @doc("Resource provider of the operation")
+  provider?: string;
+
+  @doc("Resource of the operation")
+  resource?: string;
+
+  @doc("Localized friendly name for the operation")
+  operation?: string;
+
+  @doc("Localized friendly description for the operation")
+  description?: string;
+}
+
+@doc("Properties of operation, include metric specifications.")
+model OperationProperties {
+  @doc("One property of operation, include metric specifications.")
+  serviceSpecification?: ServiceSpecification;
+}
+
+@doc("One property of operation, include metric specifications.")
+model ServiceSpecification {
+  @doc("Metric specifications of operation.")
+  metricSpecifications?: MetricSpecification[];
+}
+
+@doc("Metric specification of operation.")
+model MetricSpecification {
+  @doc("Name of metric specification.")
+  name?: string;
+
+  @doc("Display name of metric specification.")
+  displayName?: string;
+
+  @doc("Display description of metric specification.")
+  displayDescription?: string;
+
+  @doc("Unit could be Count.")
+  unit?: string;
+
+  @doc("Dimensions of map account.")
+  dimensions?: Dimension[];
+
+  @doc("Aggregation type could be Average.")
+  aggregationType?: string;
+
+  @doc("The property to decide fill gap with zero or not.")
+  fillGapWithZero?: boolean;
+
+  @doc("The category this metric specification belong to, could be Capacity.")
+  category?: string;
+
+  @doc("Account Resource Id.")
+  resourceIdDimensionNameOverride?: string;
+
+  @doc("Source metrics account.")
+  sourceMdmAccount?: string;
+
+  @doc("Internal metric name.")
+  internalMetricName?: string;
+}
+
+@doc("""
+Dimension of map account, for example API Category, Api Name, Result Type, and
+Response Code.
+""")
+model Dimension {
+  @doc("Display name of dimension.")
+  name?: string;
+
+  @doc("Display name of dimension.")
+  displayName?: string;
+
+  @doc("Internal name of the dimension.")
+  internalName?: string;
+
+  @doc("Internal metric name of the dimension.")
+  internalMetricName?: string;
+
+  @doc("Source Mdm Namespace of the dimension.")
+  sourceMdmNamespace?: string;
+
+  @doc("Flag to indicate exporting to Azure Monitor.")
+  toBeExportedToShoebox?: boolean;
+}
+
+@doc("A list of Creator resources.")
+model CreatorList is Azure.Core.Page<Creator>;
+
+@doc("""
+An Azure resource which represents Maps Creator product and provides ability to
+manage private location data.
+""")
+model Creator {
+  ...TrackedResource;
+
+  @doc("The Creator resource properties.")
+  properties: CreatorProperties;
+
+  @doc("The system meta data relating to this resource.")
+  @visibility("read")
+  systemData?: SystemData;
+}
+
+@doc("Creator resource properties")
+model CreatorProperties {
+  @doc("""
+The state of the resource provisioning, terminal states: Succeeded, Failed,
+Canceled
+""")
+  @visibility("read")
+  provisioningState?: string;
+
+  @doc("The storage units to be allocated. Integer values from 1 to 100, inclusive.")
+  storageUnits: int32;
+}
+
+@doc("Parameters used to update an existing Creator resource.")
+model CreatorUpdateParameters {
+  @doc("""
+Gets or sets a list of key value pairs that describe the resource. These tags
+can be used in viewing and grouping this resource (across resource groups). A
+maximum of 15 tags can be provided for a resource. Each tag must have a key no
+greater than 128 characters and value no greater than 256 characters.
+""")
+  tags?: Record<string>;
+
+  @doc("Creator resource properties.")
+  properties?: CreatorProperties;
+}
