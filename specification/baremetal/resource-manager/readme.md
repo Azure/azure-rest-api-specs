@@ -25,16 +25,16 @@ title: BootstrapRP
 description: BootstrapRP Client
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2021-06
+tag: package-2023-11
 ```
 
-### Tag: 2021-06-01
+### Tag: 2023-11-01
 
-These settings apply only when `--tag=package-2021-06` is specified on the command line.
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-06'
+``` yaml $(tag) == 'package-2023-11'
 input-file:
-    - Microsoft.BareMetal/preview/2021-06-01-preview/BootstrapRP.json
+    - Microsoft.BareMetal/preview/2023-11-01-preview/BootstrapRP.json
 ```
 
 ## Suppression
@@ -44,16 +44,4 @@ suppressions:
   - code: ParametersInPointGet
     from: BootstrapRP.json
     reason: Error with Lint test
-  - code: RequestBodyMustExistForPutPatch
-    from: BootstrapRP.json
-    reason: Error with Lint test
-  - code: TrackedExtensionResourcesAreNotAllowed
-    from: BootstrapRP.json
-    reason: Error with Lint test
-  - code: PathForTrackedResourceTypes
-    from: BootstrapRP.json
-    reason: Error with Lint test
-  - code: PatchPropertiesCorrespondToPutProperties
-    from: BootstrapRP.json
-    reason: Tags are the only property permitted to be updated.  Tags is inside TrackedResource on the PUT, which has a required field, location.
 ```
