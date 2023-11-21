@@ -24,4 +24,3 @@ namespace Azure.IoT.DeviceUpdate;
 );
 
 @@projectedName(DeviceUpdate.importUpdate, "csharp", "StartImportUpdate");
-@@projectedName(DeviceUpdate.deleteUpdate, "csharp", "StartDeleteUpdate");
