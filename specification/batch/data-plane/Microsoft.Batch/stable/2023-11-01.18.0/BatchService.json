@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchServiceClient",
-    "version": "2023-05-01.17.0",
+    "version": "2023-11-01.18.0",
     "description": "A client for issuing REST requests to the Azure Batch service."
   },
   "x-ms-parameterized-host": {
@@ -38,7 +38,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Microsoft Entra OAuth 2.0 auth code flow",
       "scopes": {
         "user_impersonation": "Impersonate your user account"
       }
@@ -5771,6 +5771,9 @@
         ],
         "operationId": "Pool_Add",
         "x-ms-examples": {
+          "Add a simple pool with resourceTags": {
+            "$ref": "./examples/PoolAdd_ResourceTags.json"
+          },
           "Add a CloudServiceConfiguration pool": {
             "$ref": "./examples/PoolAdd_CloudServiceConfiguration.json"
           },
@@ -5788,6 +5791,15 @@
           },
           "Add a pool with accelerated networking": {
             "$ref": "./examples/PoolAdd_AcceleratedNetworking.json"
+          },
+          "Add a pool with SecurityProfile": {
+            "$ref": "./examples/PoolAdd_SecurityProfile.json"
+          },
+          "Add a VirtualMachineConfiguration pool with ServiceArtifactReference": {
+            "$ref": "./examples/PoolAdd_VirtualMachineConfigurationWithServiceArtifactReference.json"
+          },
+          "Add a VirtualMachineConfiguration pool with OS disk": {
+            "$ref": "./examples/PoolAdd_OSDisk.json"
           }
         },
         "summary": "Adds a Pool to the specified Account.",
@@ -6336,6 +6348,15 @@
           },
           "Get a pool with AcceleratedNetworking": {
             "$ref": "./examples/PoolGet_AcceleratedNetworking.json"
+          },
+          "Get a VirtualMachineConfiguration pool with SecurityProfile": {
+            "$ref": "./examples/PoolGet_SecurityProfile.json"
+          },
+          "Get a VirtualMachineConfiguration pool with ServiceArtifactReference": {
+            "$ref": "./examples/PoolGet_VirtualMachineConfigurationWithServiceArtifactReference.json"
+          },
+          "Add a VirtualMachineConfiguration pool with OS disk": {
+            "$ref": "./examples/PoolGet_VirtualMachineConfigurationWithOSDisk.json"
           }
         },
         "description": "Gets information about the specified Pool.",
@@ -12425,6 +12446,14 @@
           "title": "The desired node communication mode for the pool.",
           "description": "If omitted, the default value is Default.",
           "$ref": "#/definitions/NodeCommunicationMode"
+        },
+        "resourceTags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "The user-specified tags associated with the pool.",
+          "description": "The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'."
         }
       },
       "required": [
@@ -13615,8 +13644,8 @@
         },
         "virtualMachineImageId": {
           "type": "string",
-          "title": "The ARM resource identifier of the Shared Image Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{VersionId} or /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName} for always defaulting to the latest image version.",
-          "description": "This property is mutually exclusive with other ImageReference properties. The Shared Image Gallery Image must have replicas in the same region and must be in the same subscription as the Azure Batch account. If the image version is not specified in the imageId, the latest version will be used. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
+          "title": "The ARM resource identifier of the Azure Compute Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{VersionId} or /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName} for always defaulting to the latest image version.",
+          "description": "This property is mutually exclusive with other ImageReference properties. The Azure Compute Gallery Image must have replicas in the same region and must be in the same subscription as the Azure Batch account. If the image version is not specified in the imageId, the latest version will be used. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
         },
         "exactVersion": {
           "type": "string",
@@ -13624,7 +13653,7 @@
           "description": "The specific version of the platform image or marketplace image used to create the node. This read-only field differs from 'version' only if the value specified for 'version' when the pool was created was 'latest'."
         }
       },
-      "title": "A reference to an Azure Virtual Machines Marketplace Image or a Shared Image Gallery Image. To get the list of all Azure Marketplace Image references verified by Azure Batch, see the 'List Supported Images' operation."
+      "title": "A reference to an Azure Virtual Machines Marketplace Image or a Azure Compute Gallery Image. To get the list of all Azure Marketplace Image references verified by Azure Batch, see the 'List Supported Images' operation."
     },
     "WindowsConfiguration": {
       "type": "object",
@@ -13670,10 +13699,11 @@
     },
     "StorageAccountType": {
       "type": "string",
-      "title": "The storage Account type for use in creating data disks.",
+      "title": "The storage Account type for use in creating data disks or OS disk.",
       "enum": [
         "standard_lrs",
-        "premium_lrs"
+        "premium_lrs",
+        "standardssd_lrs"
       ],
       "x-ms-enum": {
         "name": "StorageAccountType",
@@ -13681,13 +13711,18 @@
         "values": [
           {
             "value": "standard_lrs",
-            "description": "The data disk should use standard locally redundant storage.",
+            "description": "The data disk / OS disk should use standard locally redundant storage.",
             "name": "StandardLRS"
           },
           {
             "value": "premium_lrs",
-            "description": "The data disk should use premium locally redundant storage.",
+            "description": "The data disk / OS disk should use premium locally redundant storage.",
             "name": "PremiumLRS"
+          },
+          {
+            "value": "standardssd_lrs",
+            "description": "The data disk / OS disk should use standard SSD locally redundant storage.",
+            "name": "StandardSSDLRS"
           }
         ]
       }
@@ -13721,6 +13756,20 @@
           }
         ]
       }
+    },
+    "ServiceArtifactReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "The service artifact reference id of ServiceArtifactReference",
+          "description": "The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version."
     },
     "VirtualMachineConfiguration": {
       "type": "object",
@@ -13778,6 +13827,15 @@
         "osDisk": {
           "$ref": "#/definitions/OSDisk",
           "title": "Settings for the operating system disk of the Virtual Machine."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "title": "Specifies the security profile settings for the virtual machine or virtual machine scale set."
+        },
+        "serviceArtifactReference": {
+          "$ref": "#/definitions/ServiceArtifactReference",
+          "title": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version.",
+          "description": "The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}"
         }
       },
       "required": [
@@ -13891,7 +13949,7 @@
           "description": "If omitted, no disks on the compute nodes in the pool will be encrypted. On Linux pool, only \"TemporaryDisk\" is supported; on Windows pool, \"OsDisk\" and \"TemporaryDisk\" must be specified."
         }
       },
-      "description": "The disk encryption configuration applied on compute nodes in the pool. Disk encryption configuration is not supported on Linux pool created with Shared Image Gallery Image."
+      "description": "The disk encryption configuration applied on compute nodes in the pool. Disk encryption configuration is not supported on Linux pool created with Azure Compute Gallery Image."
     },
     "NodePlacementPolicyType": {
       "type": "string",
@@ -14123,6 +14181,23 @@
         "ephemeralOSDiskSettings": {
           "$ref": "#/definitions/DiffDiskSettings",
           "title": "Specifies the ephemeral Disk Settings for the operating system disk used by the compute node (VM)."
+        },
+        "caching": {
+          "$ref": "#/definitions/CachingType",
+          "title": "Specifies the caching requirements. Possible values are: None, ReadOnly, ReadWrite. The default values are: None for Standard storage. ReadOnly for Premium storage."
+        },
+        "managedDisk": {
+          "$ref": "#/definitions/ManagedDisk",
+          "title": "The managed disk parameters."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The initial disk size in GB when creating new OS disk."
+        },
+        "writeAcceleratorEnabled": {
+          "type": "boolean",
+          "title": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
         }
       },
       "title": "Settings for the operating system disk of the compute node (VM)."
@@ -14512,6 +14587,14 @@
           "$ref": "#/definitions/NodeCommunicationMode",
           "x-nullable": true,
           "readOnly": true
+        },
+        "resourceTags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "The user-specified tags associated with the pool.",
+          "description": "The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'."
         }
       },
       "title": "A Pool in the Azure Batch service."
@@ -14654,6 +14737,14 @@
           "title": "The desired node communication mode for the pool.",
           "description": "If omitted, the default value is Default.",
           "$ref": "#/definitions/NodeCommunicationMode"
+        },
+        "resourceTags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "The user-specified tags associated with the pool.",
+          "description": "The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'."
         }
       },
       "required": [
@@ -15766,6 +15857,10 @@
         "imageReference": {
           "$ref": "#/definitions/ImageReference",
           "title": "The reference to the Azure Virtual Machine's Marketplace Image."
+        },
+        "scaleSetVmResourceId": {
+          "type": "string",
+          "title": "The resource ID of the Compute Node's current Virtual Machine Scale Set VM. Only defined if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'."
         }
       }
     },
@@ -17455,6 +17550,61 @@
         }
       },
       "description": "The reference to a user assigned identity associated with the Batch pool which a compute node will use."
+    },
+    "ManagedDisk": {
+      "type": "object",
+      "properties": {
+        "storageAccountType": {
+          "$ref": "#/definitions/StorageAccountType",
+          "title": "The storage account type for managed disk."
+        }
+      }
+    },
+    "SecurityProfile": {
+      "type": "object",
+      "properties": {
+        "securityType": {
+          "type": "string",
+          "title": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.",
+          "enum": [
+            "trustedLaunch"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityTypes",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "trustedLaunch",
+                "description": "Trusted launch protects against advanced and persistent attack techniques."
+              }
+            ]
+          }
+        },
+        "encryptionAtHost": {
+          "type": "boolean",
+          "description": "This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself."
+        },
+        "uefiSettings": {
+          "$ref": "#/definitions/UefiSettings",
+          "title": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine.",
+          "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine."
+        }
+      },
+      "description": "Specifies the security profile settings for the virtual machine or virtual machine scale set."
+    },
+    "UefiSettings": {
+      "type": "object",
+      "properties": {
+        "secureBootEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether secure boot should be enabled on the virtual machine."
+        },
+        "vTpmEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether vTPM should be enabled on the virtual machine."
+        }
+      },
+      "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine."
     }
   },
   "parameters": {
