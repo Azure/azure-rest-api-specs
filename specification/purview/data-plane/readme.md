@@ -26,18 +26,27 @@ These are the global settings for the Azure Purview Catalog API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-preview-2023-02
+tag: package-2023-09
 ```
 
 
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09'
+input-file:
+  - Azure.Analytics.Purview.DataMap/stable/2023-09-01/purviewdatamap.json
+```
 ### Tag: package-preview-2023-02
 
 These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-02'
+``` yaml $(tag) == 'package-preview-2023-02'
 input-file:
   - Azure.Analytics.Purview.Catalog/preview/2023-02-01-preview/purviewcatalog.json
 ```
+
 ### Tag: package-2022-11-01-preview
 
 These settings apply only when `--tag=package-2022-11-01-preview` is specified on the command line.
@@ -90,6 +99,16 @@ openapi-type: data-plane
 tag: package-2018-12-01-preview
 title: PurviewScanningClient
 ```
+
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09-01'
+input-file:
+  - Azure.Analytics.Purview.Scanning/stable/2023-09-01/scanningService.json
+```
+
 
 ### Tag: package-2022-07-01-preview
 
