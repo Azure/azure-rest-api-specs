@@ -429,8 +429,11 @@ model AnnotateTextOptions {
 @doc("The text annotation response.")
 @added(Versions.v2023_10_30_Preview)
 model AnnotateTextResult {
-  @doc("The label.")
-  label: int32;
+  @doc("The id of annotated subcategory.")
+  id: int32;
+
+  @doc("The name of annotated subcategory.")
+  name: string;
 
   @doc("The reasoning.")
   reasoning?: string;
@@ -445,9 +448,10 @@ model PreDefinedConcept {
 
 @added(Versions.v2023_10_30_Preview)
 @doc("Label definition.")
-model LabelDefinition {
-  label: int32;
-  enumerations: string[];
+model SubCategory {
+  id: int32;
+  name: string;
+  statements: string[];
 }
 
 @added(Versions.v2023_10_30_Preview)
@@ -462,7 +466,7 @@ model TextCustomizedCategory {
   categoryName: string;
 
   preDefinedConcepts?: PreDefinedConcept[];
-  labelDefinitions: LabelDefinition[];
+  subCategories: SubCategory[];
   emphases?: string[];
   exampleBlobUrl?: url;
 }
