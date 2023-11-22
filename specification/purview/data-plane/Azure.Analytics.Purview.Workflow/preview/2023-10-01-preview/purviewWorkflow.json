@@ -1307,7 +1307,8 @@
           "description": "The workflow task type.",
           "enum": [
             "Approval",
-            "SimpleTask"
+            "SimpleTask",
+            "DsarTask"
           ],
           "x-ms-enum": {
             "name": "TaskType",
@@ -1850,8 +1851,9 @@
       "items": {
         "type": "string",
         "enum": [
-          "approval",
-          "simpleTask"
+          "Approval",
+          "SimpleTask",
+          "DsarTask"
         ],
         "x-ms-enum": {
           "name": "TaskType",
@@ -1964,7 +1966,7 @@
           "mine"
         ],
         "x-ms-enum": {
-          "name": "status",
+          "name": "viewMode",
           "modelAsString": true
         }
       },
@@ -1983,7 +1985,7 @@
           "mine"
         ],
         "x-ms-enum": {
-          "name": "status",
+          "name": "workflowRunViewMode",
           "modelAsString": true
         }
       },
