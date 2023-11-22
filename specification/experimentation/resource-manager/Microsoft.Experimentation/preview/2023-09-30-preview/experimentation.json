@@ -166,6 +166,12 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "The request to patch the experiment workspace is accepted and is running asynchronously",
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspace"
+            }
+          },
           "200": {
             "description": "The experiment workspace is patched",
             "schema": {
@@ -425,6 +431,9 @@
         },
         "remoteVariantAssignment": {
           "$ref": "#/definitions/RemoteVariantAssignment"
+        },
+        "userAssignedIdentityVariables": {
+          "$ref": "#/definitions/UserAssignedIdentityVariables"
         }
       }
     },
@@ -598,6 +607,14 @@
             "modelAsString": false
           }
         }
+      }
+    },
+    "UserAssignedIdentityVariables": {
+      "type": "object",
+      "description": "The identity variables for the workspace. These variables will be used to identify which managed identity to be used for the workspace (or the dependent resources) authentication when multiple user assigned identities assigned to resource.",
+      "additionalProperties": {
+        "type": "string",
+        "format": "arm-id"
       }
     }
   },
