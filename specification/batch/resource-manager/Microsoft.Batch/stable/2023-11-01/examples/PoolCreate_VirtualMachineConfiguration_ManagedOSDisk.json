@@ -7,18 +7,21 @@
     "api-version": "2023-11-01",
     "parameters": {
       "properties": {
-        "vmSize": "STANDARD_D1_V2",
-        "networkConfiguration": {
-          "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
-          "enableAcceleratedNetworking": true
-        },
+        "vmSize": "Standard_d2s_v3",
         "deploymentConfiguration": {
           "virtualMachineConfiguration": {
             "imageReference": {
-              "publisher": "MicrosoftWindowsServer",
-              "offer": "WindowsServer",
-              "sku": "2016-datacenter-smalldisk",
-              "version": "latest"
+              "publisher": "microsoftwindowsserver",
+              "offer": "windowsserver",
+              "sku": "2022-datacenter-smalldisk"
+            },
+            "osDisk": {
+              "diskSizeGB": 100,
+              "managedDisk": {
+                "storageAccountType": "StandardSSD_LRS"
+              },
+              "caching": "ReadWrite",
+              "writeAcceleratorEnabled": false
             },
             "nodeAgentSkuId": "batch.node.windows amd64"
           }
@@ -35,21 +38,21 @@
   "responses": {
     "200": {
       "headers": {
-        "ETag": "W/\"0x8DB46CB72A227E2\""
+        "ETag": "W/\"0x8DB51F14DC1A8AD\""
       },
       "body": {
         "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
         "name": "testpool",
         "type": "Microsoft.Batch/batchAccounts/pools",
-        "etag": "W/\"0x8DB46CB72A227E2\"",
+        "etag": "W/\"0x8DB51F396992B8D\"",
         "properties": {
-          "lastModified": "2023-04-27T02:59:41.8592226Z",
-          "creationTime": "2023-04-27T02:59:41.8592226Z",
+          "lastModified": "2023-08-24T02:12:27.7527697Z",
+          "creationTime": "2023-08-24T02:12:27.7527697Z",
           "provisioningState": "Succeeded",
-          "provisioningStateTransitionTime": "2023-04-27T02:59:41.8592226Z",
-          "allocationState": "Steady",
-          "allocationStateTransitionTime": "2023-04-27T03:00:34.0646502Z",
-          "vmSize": "STANDARD_D1_V2",
+          "provisioningStateTransitionTime": "2023-08-24T02:12:27.7527697Z",
+          "allocationState": "Resizing",
+          "allocationStateTransitionTime": "2023-08-24T02:12:27.7527697Z",
+          "vmSize": "STANDARD_D2_V3",
           "interNodeCommunication": "Disabled",
           "taskSlotsPerNode": 1,
           "taskSchedulingPolicy": {
@@ -58,18 +61,21 @@
           "deploymentConfiguration": {
             "virtualMachineConfiguration": {
               "imageReference": {
-                "publisher": "MicrosoftWindowsServer",
-                "offer": "WindowsServer",
-                "sku": "2016-datacenter-smalldisk",
+                "publisher": "microsoftwindowsserver",
+                "offer": "windowsserver",
+                "sku": "2022-datacenter-smalldisk",
                 "version": "latest"
               },
-              "nodeAgentSkuId": "batch.node.windows amd64"
+              "nodeAgentSkuId": "batch.node.windows amd64",
+              "osDisk": {
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "StandardSSD_LRS"
+                },
+                "diskSizeGB": 100,
+                "writeAcceleratorEnabled": false
+              }
             }
-          },
-          "networkConfiguration": {
-            "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
-            "dynamicVnetAssignmentScope": "none",
-            "enableAcceleratedNetworking": true
           },
           "scaleSettings": {
             "fixedScale": {
@@ -82,11 +88,10 @@
             "targetDedicatedNodes": 1,
             "nodeDeallocationOption": "Requeue",
             "resizeTimeout": "PT15M",
-            "startTime": "2023-04-27T02:59:41.8592226Z"
+            "startTime": "2023-08-24T02:12:27.7527697Z"
           },
-          "currentDedicatedNodes": 1,
-          "currentLowPriorityNodes": 0,
-          "currentNodeCommunicationMode": "Classic"
+          "currentDedicatedNodes": 0,
+          "currentLowPriorityNodes": 0
         }
       }
     }

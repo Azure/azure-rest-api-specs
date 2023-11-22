@@ -9,21 +9,21 @@
   "responses": {
     "200": {
       "headers": {
-        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
+        "ETag": "W/\"0x8DB554F8E08BCF4\""
       },
       "body": {
         "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
         "name": "testpool",
         "type": "Microsoft.Batch/batchAccounts/pools",
-        "etag": "W/\"0x8D4EDFEBFADF4AB\"",
+        "etag": "W/\"0x8DB554F8E08BCF4\"",
         "properties": {
-          "lastModified": "2023-04-28T02:32:32.8696419Z",
-          "creationTime": "2023-04-28T02:32:32.8696419Z",
+          "lastModified": "2023-06-14T07:03:58.3231917Z",
+          "creationTime": "2023-06-14T07:03:58.3231917Z",
           "provisioningState": "Succeeded",
-          "provisioningStateTransitionTime": "2023-04-28T02:32:32.8696419Z",
+          "provisioningStateTransitionTime": "2023-06-14T07:03:58.3231917Z",
           "allocationState": "Steady",
-          "allocationStateTransitionTime": "2023-04-28T02:33:40.82831Z",
-          "vmSize": "STANDARD_D1_V2",
+          "allocationStateTransitionTime": "2023-06-14T07:04:57.3413444Z",
+          "vmSize": "STANDARD_D4S_V3",
           "interNodeCommunication": "Disabled",
           "taskSlotsPerNode": 1,
           "taskSchedulingPolicy": {
@@ -32,17 +32,20 @@
           "deploymentConfiguration": {
             "virtualMachineConfiguration": {
               "imageReference": {
-                "publisher": "MicrosoftWindowsServer",
-                "offer": "WindowsServer",
-                "sku": "2016-datacenter-smalldisk",
+                "publisher": "Canonical",
+                "offer": "UbuntuServer",
+                "sku": "18_04-lts-gen2",
                 "version": "latest"
               },
-              "nodeAgentSkuId": "batch.node.windows amd64"
+              "nodeAgentSkuId": "batch.node.ubuntu 18.04",
+              "securityProfile": {
+                "securityType": "trustedLaunch",
+                "encryptionAtHost": true,
+                "uefiSettings": {
+                  "vTpmEnabled": false
+                }
+              }
             }
-          },
-          "networkConfiguration": {
-            "dynamicVnetAssignmentScope": "none",
-            "enableAcceleratedNetworking": true
           },
           "scaleSettings": {
             "fixedScale": {
@@ -55,7 +58,7 @@
             "targetDedicatedNodes": 1,
             "nodeDeallocationOption": "Requeue",
             "resizeTimeout": "PT15M",
-            "startTime": "2023-04-28T02:32:32.8696419Z"
+            "startTime": "2023-06-14T07:03:58.3231917Z"
           },
           "currentDedicatedNodes": 1,
           "currentLowPriorityNodes": 0,

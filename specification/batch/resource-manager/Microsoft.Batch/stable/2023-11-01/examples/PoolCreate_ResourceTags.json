@@ -7,21 +7,21 @@
     "api-version": "2023-11-01",
     "parameters": {
       "properties": {
-        "vmSize": "STANDARD_D1_V2",
-        "networkConfiguration": {
-          "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
-          "enableAcceleratedNetworking": true
-        },
+        "vmSize": "Standard_d4s_v3",
         "deploymentConfiguration": {
           "virtualMachineConfiguration": {
             "imageReference": {
-              "publisher": "MicrosoftWindowsServer",
-              "offer": "WindowsServer",
-              "sku": "2016-datacenter-smalldisk",
+              "publisher": "Canonical",
+              "offer": "UbuntuServer",
+              "sku": "18_04-lts-gen2",
               "version": "latest"
             },
-            "nodeAgentSkuId": "batch.node.windows amd64"
+            "nodeAgentSkuId": "batch.node.ubuntu 18.04"
           }
+        },
+        "resourceTags": {
+          "TagName1": "TagValue1",
+          "TagName2": "TagValue2"
         },
         "scaleSettings": {
           "fixedScale": {
@@ -35,21 +35,21 @@
   "responses": {
     "200": {
       "headers": {
-        "ETag": "W/\"0x8DB46CB72A227E2\""
+        "ETag": "W/\"0x8DB554F8E08BCF4\""
       },
       "body": {
         "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
         "name": "testpool",
         "type": "Microsoft.Batch/batchAccounts/pools",
-        "etag": "W/\"0x8DB46CB72A227E2\"",
+        "etag": "W/\"0x8DB554F8E08BCF4\"",
         "properties": {
-          "lastModified": "2023-04-27T02:59:41.8592226Z",
-          "creationTime": "2023-04-27T02:59:41.8592226Z",
+          "lastModified": "2023-06-14T07:03:58.3231917Z",
+          "creationTime": "2023-06-14T07:03:58.3231917Z",
           "provisioningState": "Succeeded",
-          "provisioningStateTransitionTime": "2023-04-27T02:59:41.8592226Z",
-          "allocationState": "Steady",
-          "allocationStateTransitionTime": "2023-04-27T03:00:34.0646502Z",
-          "vmSize": "STANDARD_D1_V2",
+          "provisioningStateTransitionTime": "2023-06-14T07:03:58.3231917Z",
+          "allocationState": "Resizing",
+          "allocationStateTransitionTime": "2023-06-14T07:03:58.3231917Z",
+          "vmSize": "STANDARD_D4S_V3",
           "interNodeCommunication": "Disabled",
           "taskSlotsPerNode": 1,
           "taskSchedulingPolicy": {
@@ -58,18 +58,13 @@
           "deploymentConfiguration": {
             "virtualMachineConfiguration": {
               "imageReference": {
-                "publisher": "MicrosoftWindowsServer",
-                "offer": "WindowsServer",
-                "sku": "2016-datacenter-smalldisk",
+                "publisher": "Canonical",
+                "offer": "UbuntuServer",
+                "sku": "18_04-lts-gen2",
                 "version": "latest"
               },
-              "nodeAgentSkuId": "batch.node.windows amd64"
+              "nodeAgentSkuId": "batch.node.ubuntu 18.04"
             }
-          },
-          "networkConfiguration": {
-            "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
-            "dynamicVnetAssignmentScope": "none",
-            "enableAcceleratedNetworking": true
           },
           "scaleSettings": {
             "fixedScale": {
@@ -82,11 +77,14 @@
             "targetDedicatedNodes": 1,
             "nodeDeallocationOption": "Requeue",
             "resizeTimeout": "PT15M",
-            "startTime": "2023-04-27T02:59:41.8592226Z"
+            "startTime": "2023-09-27T07:33:13.0625789Z"
           },
-          "currentDedicatedNodes": 1,
+          "currentDedicatedNodes": 0,
           "currentLowPriorityNodes": 0,
-          "currentNodeCommunicationMode": "Classic"
+          "resourceTags": {
+            "TagName1": "TagValue1",
+            "TagName2": "TagValue2"
+          }
         }
       }
     }
