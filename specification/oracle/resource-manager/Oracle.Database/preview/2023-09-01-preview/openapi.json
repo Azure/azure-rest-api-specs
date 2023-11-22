@@ -818,13 +818,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Oracle.Database/oracleSubscriptions/default/getCloudAccountDetails": {
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/oracleSubscriptions/default/listCloudAccountDetails": {
       "post": {
-        "operationId": "OracleSubscriptions_GetCloudAccountDetails",
+        "operationId": "OracleSubscriptions_ListCloudAccountDetails",
         "tags": [
           "OracleSubscriptions"
         ],
-        "description": "Get OCI Account Details",
+        "description": "List Cloud Account Details",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -862,8 +862,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Cloud Account details for the Oracle Subscription": {
-            "$ref": "./examples/oracleSubscriptions_getCloudAccountDetails.json"
+          "List Cloud Account details for the Oracle Subscription": {
+            "$ref": "./examples/oracleSubscriptions_listCloudAccountDetails.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -872,13 +872,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Oracle.Database/oracleSubscriptions/default/getSaasSubscriptionDetails": {
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/oracleSubscriptions/default/listSaasSubscriptionDetails": {
       "post": {
-        "operationId": "OracleSubscriptions_GetSaasSubscriptionDetails",
+        "operationId": "OracleSubscriptions_ListSaasSubscriptionDetails",
         "tags": [
           "OracleSubscriptions"
         ],
-        "description": "Get SaaS Subscription Details",
+        "description": "List Saas Subscription Details",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -916,8 +916,8 @@
           }
         },
         "x-ms-examples": {
-          "Get SaaS Subscription details for the Oracle Subscription": {
-            "$ref": "./examples/oracleSubscriptions_getSaasSubscriptionDetails.json"
+          "List Saas Subscription details for the Oracle Subscription": {
+            "$ref": "./examples/oracleSubscriptions_listSaasSubscriptionDetails.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1316,70 +1316,6 @@
             "$ref": "./examples/dbServers_get.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudExadataInfrastructures/{cloudexadatainfrastructurename}/getOciAccountName": {
-      "post": {
-        "operationId": "CloudExadataInfrastructures_GetOciAccountName",
-        "tags": [
-          "CloudExadataInfrastructures"
-        ],
-        "description": "Get OCI Account Name",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "cloudexadatainfrastructurename",
-            "in": "path",
-            "description": "CloudExadataInfrastructure name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get OCI Account in Exadata Infrastructure": {
-            "$ref": "./examples/exaInfra_getOciAccountName.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudVmClusters": {

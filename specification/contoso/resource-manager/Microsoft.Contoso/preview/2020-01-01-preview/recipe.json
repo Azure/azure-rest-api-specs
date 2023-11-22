@@ -61,7 +61,7 @@
         },
         "x-ms-examples": {
           "Retrieves extension cluster resource": {
-            "$ref": "examples/getExtensionCluster.json"
+            "$ref": "examples/listRecipeBySubscription.json"
           }
         }
       }
@@ -100,7 +100,7 @@
         },
         "x-ms-examples": {
           "Retrieves extension cluster resource": {
-            "$ref": "examples/getExtensionCluster.json"
+            "$ref": "examples/listRecipeByResourceGroup.json"
           }
         }
       }
@@ -139,7 +139,7 @@
         },
         "x-ms-examples": {
           "Retrieves extension cluster resource": {
-            "$ref": "examples/getExtensionCluster.json"
+            "$ref": "examples/getRecipe.json"
           }
         }
       },
@@ -203,8 +203,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create or update extension clusters resource": {
-            "$ref": "examples/createOrUpdateExtensionCluster.json"
+          "Create or update Recipe resource": {
+            "$ref": "examples/createOrUpdateRecipe.json"
           }
         }
       },
@@ -269,7 +269,7 @@
         },
         "x-ms-examples": {
           "Create or update extension clusters resource": {
-            "$ref": "examples/createOrUpdateExtensionCluster.json"
+            "$ref": "examples/updateRecipe.json"
           }
         }
       },
@@ -294,11 +294,6 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "The URL to retrieve the status of the asynchronous operation."
@@ -325,7 +320,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Deletes the extension cluster resource": {
-            "$ref": "examples/deleteExtensionCluster.json"
+            "$ref": "examples/deleteRecipe.json"
           }
         }
       }
@@ -385,7 +380,7 @@
         },
         "x-ms-examples": {
           "Patches extension cluster resource": {
-            "$ref": "examples/updateExtensionCluster.json"
+            "$ref": "examples/postRecipe.json"
           }
         },
         "x-ms-long-running-operation-options": {
