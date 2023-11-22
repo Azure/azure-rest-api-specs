@@ -392,6 +392,10 @@
           "$ref": "#/definitions/HostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster."
         },
+        "sdnIntegration": {
+          "$ref": "#/definitions/SdnIntegration",
+          "description": "SDN Integration config to deploy AzureStackHCI Cluster."
+        },
         "adouPath": {
           "type": "string",
           "description": "The path to the Active Directory Organizational Unit container object prepared for the deployment. "
@@ -664,6 +668,24 @@
         }
       }
     },
+    "NetworkController": {
+      "type": "object",
+      "description": "network controller config for SDN Integration to deploy AzureStackHCI Cluster.",
+      "properties": {
+        "macAddressPoolStart": {
+          "type": "string",
+          "description": "macAddressPoolStart of network controller used for SDN Integration."
+        },
+        "macAddressPoolStop": {
+          "type": "string",
+          "description": "macAddressPoolStop of network controller used for SDN Integration."
+        },
+        "NetworkVirtualizationEnabled": {
+          "type": "boolean",
+          "description": "NetworkVirtualizationEnabled of network controller used for SDN Integration."
+        }
+      }
+    },
     "Observability": {
       "type": "object",
       "description": "The Observability of AzureStackHCI Cluster.",
@@ -709,6 +731,7 @@
         }
       }
     },
+    
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource.",
@@ -910,6 +933,16 @@
         "url": "https://learn.microsoft.com/en-us/azure-stack/hci/deploy/deployment-tool-existing-file"
       }
     },
+    "SdnIntegration": {
+      "type": "object",
+      "description": "SDN Integration config to deploy AzureStackHCI Cluster.",
+      "properties": {
+        "networkController": {
+          "$ref": "#/definitions/NetworkController",
+          "description": "network controller config for SDN Integration to deploy AzureStackHCI Cluster."
+        }
+      }
+    },
     "SecuritySettings": {
       "type": "object",
       "description": "The SecuritySettings of AzureStackHCI Cluster.",
@@ -1031,6 +1064,24 @@
         }
       }
     },
+    "StorageAdapterIPInfo": {
+      "type": "object",
+      "description": "The StorageAdapter physical nodes of a cluster.",
+      "properties": {
+        "physicalNode": {
+          "type": "string",
+          "description": "storage adapter physical node name."
+        },
+        "ipv4Address": {
+          "type": "string",
+          "description": "The IPv4 address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
+        },
+        "SubnetMask": {
+          "type": "string",
+          "description": "The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
+        }
+      }
+    },
     "StorageNetworks": {
       "type": "object",
       "description": "The StorageNetworks of a cluster.",
@@ -1046,6 +1097,16 @@
         "vlanId": {
           "type": "string",
           "description": "ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic. "
+        },
+        "storageAdapterIPInfo": {
+          "type": "array",
+          "description": "List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/StorageAdapterIPInfo"
+          },
+          "x-ms-identifiers": [
+            "physicalNode"
+          ]
         }
       }
     },
