@@ -1000,6 +1000,19 @@
       "format": "uuid",
       "description": "The person who submitted the user request."
     },
+    "TaskType": {
+      "type": "string",
+      "description": "The workflow task type.",
+      "enum": [
+        "Approval",
+        "SimpleTask",
+        "DsarTask"
+      ],
+      "x-ms-enum": {
+        "name": "TaskType",
+        "modelAsString": true
+      }
+    },
     "WorkflowRunList": {
       "type": "object",
       "properties": {
@@ -1303,16 +1316,7 @@
       "description": "An actionable item assigned to assignees. It is created when approval or task action starts to execute. Approval is one kind of task.",
       "properties": {
         "type": {
-          "type": "string",
-          "description": "The workflow task type.",
-          "enum": [
-            "Approval",
-            "SimpleTask"
-          ],
-          "x-ms-enum": {
-            "name": "TaskType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/TaskType"
         },
         "id": {
           "type": "string",
@@ -1848,15 +1852,7 @@
       "required": false,
       "type": "array",
       "items": {
-        "type": "string",
-        "enum": [
-          "approval",
-          "simpleTask"
-        ],
-        "x-ms-enum": {
-          "name": "TaskType",
-          "modelAsString": true
-        }
+        "$ref": "#/definitions/TaskType"
       },
       "description": "Filter items by workflow task type.",
       "x-ms-parameter-location": "method"
@@ -1964,7 +1960,7 @@
           "mine"
         ],
         "x-ms-enum": {
-          "name": "status",
+          "name": "viewMode",
           "modelAsString": true
         }
       },
@@ -1983,7 +1979,7 @@
           "mine"
         ],
         "x-ms-enum": {
-          "name": "status",
+          "name": "workflowRunViewMode",
           "modelAsString": true
         }
       },
