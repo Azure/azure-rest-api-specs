@@ -83,7 +83,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Certify/TestSuites": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Certify/testSuites": {
       "get": {
         "operationId": "TestSuites_ListBySubscription",
         "summary": "List TestSuites   by subscription ID",
@@ -125,7 +125,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/TestSuites": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/testSuites": {
       "get": {
         "operationId": "TestSuites_ListByResourceGroup",
         "summary": "List TestSuiteNameParameter resources by resource group",
@@ -170,7 +170,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/TestSuites/{TestSuiteName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/testSuites/{TestSuiteName}": {
       "put": {
         "operationId": "TestSuites_CreateOrUpdate",
         "summary": "Create or update a TestSuites.",
@@ -185,7 +185,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/TestSuitesNamParameter"
+            "$ref": "#/parameters/TestSuiteNameParameter"
           },
           {
             "name": "parameters",
@@ -199,6 +199,12 @@
         ],
         "responses": {
           "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestSuites"
+            }
+          },
+          "201": {
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TestSuites"
@@ -310,7 +316,94 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/Validations/{ValidationName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Certify/validations": {
+      "get": {
+        "operationId": "Validations_ListBySubscription",
+        "summary": "List Validations by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationsListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Validations"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Validations_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Validations_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Validations_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/Validations_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/validations": {
+      "get": {
+        "operationId": "Validations_ListByResourceGroup",
+        "summary": "List validation name resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationsListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Validations"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Validations_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Validations_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Validations_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/Validations_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/validations/{ValidationName}": {
       "put": {
         "operationId": "Validations_CreateOrUpdate",
         "summary": "Create or update a Validations Resource.",
@@ -339,6 +432,12 @@
         ],
         "responses": {
           "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Validations"
+            }
+          },
+          "201": {
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Validations"
@@ -638,11 +737,12 @@
         "false"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningState",
+        "name": "DeleteResources",
         "modelAsString": true
       }
     },
     "TestSuiteDefinitionReference": {
+      "type": "object",
       "properties": {
         "testSuiteId": {
           "type": "string",
