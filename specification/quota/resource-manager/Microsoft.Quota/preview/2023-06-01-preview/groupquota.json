@@ -771,7 +771,7 @@
           "GroupQuotaLimits"
         ],
         "summary": "Gets the resource groupQuotaLimits for the MGId for a resource.",
-        "description": "Gets the resource groupQuotaLimits for the MGId. The resourceProviderScope will be included in the filer query parameter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. It will include the limits, availableLimits, assignedToSubscriptions: Quotas allocated to subscriptions from the groupQuota.",
+        "description": "Gets the resource groupQuotaLimits for the MGId. The resourceProviderScope will be included in the filer query parameter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. It will include the limits, availableLimits, AllocatedToSubscriptions: Quotas allocated to subscriptions from the groupQuota.",
         "operationId": "GroupQuotaLimits_Get",
         "x-ms-examples": {
           "GroupQuotaLimits_Get_Request_ForCompute": {
@@ -820,7 +820,7 @@
           "GroupQuotaLimits"
         ],
         "summary": "Gets the List of resources groupQuotaLimits for the MGId, based on the scope.",
-        "description": "Gets the List of resources groupQuotaLimits for the MGId, based on the filter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. The list elements will be same as the Get API - It will include the limits, availableLimits, assignedToSubscriptions: Quotas allocated to subscriptions from the groupQuota.",
+        "description": "Gets the List of resources groupQuotaLimits for the MGId, based on the filter. The filter can be - $filter= provider eq Microsoft.Compute and location eq eastus. The list elements will be same as the Get API - It will include the limits, availableLimits, AllocatedToSubscriptions: Quotas allocated to subscriptions from the groupQuota.",
         "operationId": "GroupQuotaLimits_List",
         "x-ms-examples": {
           "GroupQuotaLimits_List_Request_ForCompute": {
@@ -1399,7 +1399,7 @@
         }
       }
     },
-    "AssignedToSubscription": {
+    "AllocatedToSubscription": {
       "type": "object",
       "description": "SubscriptionIds and quota allocated to subscriptions from the GroupQuota.",
       "properties": {
@@ -1419,7 +1419,7 @@
       "readOnly": true,
       "description": "Allocated Group Quota to subscriptions.",
       "items": {
-        "$ref": "#/definitions/AssignedToSubscription"
+        "$ref": "#/definitions/AllocatedToSubscription"
       },
       "x-ms-identifiers": []
     },
