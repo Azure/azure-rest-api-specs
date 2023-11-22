@@ -71,4 +71,3 @@ enum environmentMode {
   @doc("Clone customer config file")
   All,
 }
-
