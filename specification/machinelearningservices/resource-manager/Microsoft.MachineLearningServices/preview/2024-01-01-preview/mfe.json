@@ -9150,6 +9150,8 @@
         "tags": [
           "Indexes"
         ],
+        "summary": "Delete container.",
+        "operationId": "Indexes_Delete",
         "produces": [
           "application/json"
         ],
@@ -9166,6 +9168,7 @@
           {
             "in": "path",
             "name": "name",
+            "description": "Container name.",
             "required": true,
             "type": "string"
           },
@@ -9179,6 +9182,17 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Workspace Indexes.": {
+            "$ref": "./examples/Workspace/Indexes/delete.json"
           }
         }
       },
@@ -9186,6 +9200,8 @@
         "tags": [
           "Indexes"
         ],
+        "summary": "Get container.",
+        "operationId": "Indexes_Get",
         "produces": [
           "application/json"
         ],
@@ -9202,6 +9218,7 @@
           {
             "in": "path",
             "name": "name",
+            "description": "Container name.",
             "required": true,
             "type": "string"
           },
@@ -9215,6 +9232,17 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IndexesResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Workspace Indexes.": {
+            "$ref": "./examples/Workspace/Indexes/get.json"
           }
         }
       },
@@ -9222,6 +9250,8 @@
         "tags": [
           "Indexes"
         ],
+        "summary": "Create or update container.",
+        "operationId": "Indexes_CreateOrUpdate",
         "consumes": [
           "application/json"
         ],
@@ -9241,6 +9271,7 @@
           {
             "in": "path",
             "name": "name",
+            "description": "Container name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
@@ -9251,6 +9282,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "Container entity to create or update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/IndexesResource"
@@ -9263,6 +9295,23 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          },
+          "200": {
+            "description": "Create or update request is successful.",
+            "schema": {
+              "$ref": "#/definitions/IndexesResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IndexesResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Workspace Indexes.": {
+            "$ref": "./examples/Workspace/Indexes/createOrUpdate.json"
           }
         }
       }
