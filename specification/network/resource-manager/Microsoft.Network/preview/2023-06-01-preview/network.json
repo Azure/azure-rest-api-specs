@@ -36,6 +36,7 @@
   "paths": {},
   "definitions": {
     "ErrorDetails": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -53,6 +54,7 @@
       "description": "Common error details representation."
     },
     "Error": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -71,7 +73,8 @@
           "items": {
             "$ref": "#/definitions/ErrorDetails"
           },
-          "description": "Error details."
+          "description": "Error details.",
+          "x-ms-identifiers": []
         },
         "innerError": {
           "type": "string",
@@ -81,6 +84,7 @@
       "description": "Common error representation."
     },
     "CloudError": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -91,6 +95,7 @@
       "description": "An error response from the service."
     },
     "CloudErrorBody": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "code": {
@@ -107,6 +112,7 @@
         },
         "details": {
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
@@ -116,6 +122,7 @@
       "description": "An error response from the service."
     },
     "AzureAsyncOperationResult": {
+      "type": "object",
       "properties": {
         "status": {
           "type": "string",
@@ -138,6 +145,7 @@
       "description": "The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is in progress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure."
     },
     "Resource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -196,6 +204,7 @@
       "x-ms-azure-resource": true
     },
     "SubResource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -206,6 +215,7 @@
       "x-ms-azure-resource": true
     },
     "TagsObject": {
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -271,6 +281,7 @@
       }
     },
     "ManagedServiceIdentity": {
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -326,7 +337,8 @@
         "Succeeded",
         "Updating",
         "Deleting",
-        "Failed"
+        "Failed",
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -393,6 +405,7 @@
       }
     },
     "ExtendedLocation": {
+      "type": "object",
       "description": "ExtendedLocation complex type.",
       "properties": {
         "name": {
@@ -412,14 +425,16 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "x-ms-parameter-location": "client"
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client API version."
+      "description": "Client API version.",
+      "x-ms-parameter-location": "client"
     },
     "ApiVersionVmssParameter": {
       "name": "api-version",
@@ -433,7 +448,8 @@
         "name": "ApiVersion",
         "modelAsString": true
       },
-      "description": "Client API version."
+      "description": "Client API version.",
+      "x-ms-parameter-location": "client"
     }
   }
 }
