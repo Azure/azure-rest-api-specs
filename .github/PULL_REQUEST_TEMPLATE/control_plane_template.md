@@ -4,7 +4,7 @@
 
 Please understand this diagram before proceeding. It explains how to get your PR approved & merged.
 
-![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/029a11fd-eaf9-4865-9d77-a16b5ea5eb26)
+![diagram](https://github.com/Azure/azure-rest-api-specs/assets/20296335/93ad7897-061a-4724-8a51-dcb797d5a6e0)
 
 <details>
 <summary> Click here to see the details of Step 1 </summary>
@@ -39,10 +39,8 @@ If the automation determines you have breaking changes, i.e. Step 1 from the dia
 [1] [ARM review queue] (for **merge** queues, see [4])  
 The PRs are processed by time opened, ascending. Your PR may show up on 2nd or later page. 
 If you addressed Step 1 from the diagram and your PR is not showing up in the queue, ensure the label `ARMChangesRequested` 
-is removed from your PR. This should cause the label `WaitForARMFeedback` to be added.  
-[2] https://aka.ms/azsdk/support/specreview-channel  
-[3] [List of SDK breaking changes approvers] in pinned Teams announcement  
-[4] [public repo merge queue], [private repo merge queue] (for **ARM review** queue, [1])
+is removed from your PR. This should cause the label `WaitForARMFeedback` to be added.
+[2] [public repo merge queue], [private repo merge queue] (for **ARM review** queue, [1])
 
 If you need further help with anything, see `Getting help` section below.
 
