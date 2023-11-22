@@ -5465,7 +5465,7 @@
           "description": "Specifies the number of days after which data that is not accessed by clients will be tiered.",
           "example": 7,
           "minimum": 7,
-          "maximum": 63,
+          "maximum": 183,
           "format": "int32"
         },
         "coolAccessRetrievalPolicy": {
@@ -6048,7 +6048,7 @@
           "description": "Specifies the number of days after which data that is not accessed by clients will be tiered.",
           "example": 7,
           "minimum": 7,
-          "maximum": 63,
+          "maximum": 183,
           "format": "int32"
         },
         "coolAccessRetrievalPolicy": {
@@ -6742,7 +6742,9 @@
           "description": "Status of the restore SnapMirror relationship",
           "enum": [
             "Idle",
-            "Transferring"
+            "Transferring",
+            "Failed",
+            "Unknown"
           ],
           "x-ms-enum": {
             "name": "RelationshipStatus",
@@ -7094,11 +7096,6 @@
           "x-ms-identifiers": [
             "key"
           ]
-        },
-        "deploymentSpecId": {
-          "type": "string",
-          "description": "Application specific identifier of deployment rules for the volume group",
-          "example": "20542149-bfca-5618-1879-9863dc6767f1"
         },
         "volumesCount": {
           "type": "integer",
@@ -7514,10 +7511,6 @@
           "title": "size",
           "type": "integer",
           "x-nullable": true,
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
           "format": "int64",
           "description": "Truncate subvolume to the provided size in bytes",
           "example": 5
