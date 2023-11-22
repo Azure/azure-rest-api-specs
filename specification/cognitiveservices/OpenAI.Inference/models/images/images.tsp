@@ -179,29 +179,35 @@ model ImageGenerations {
 // Note: pending resolution of  cross-language code emission behavior for long-running operations, image generation
 //        reuses its final operation response model as its status polling model.
 
+// Note2: the Java emitter currently does not support versioning annotations
+// To prevent code generation from picking this up we have to flat out remove it
+// We need to check in an arch board meeting, whether @removed indeed should prevent 
+// models from being generated. It might not be the case, it should probably enforce a "maximum"
+// version, but not prevent generation of models for older versions.
+
 // @lroStatus
-@doc("A polling status update or final response payload for an image operation.")
-@added(ServiceApiVersions.v2023_06_01_Preview)
-@removed(ServiceApiVersions.v2023_12_01_Preview)
-model BatchImageGenerationOperationResponse {
-  @doc("The ID of the operation.")
-  id: string;
+// @doc("A polling status update or final response payload for an image operation.")
+// @added(ServiceApiVersions.v2023_06_01_Preview)
+// @removed(ServiceApiVersions.v2023_12_01_Preview)
+// model BatchImageGenerationOperationResponse {
+//   @doc("The ID of the operation.")
+//   id: string;
 
-  @doc("A timestamp when this job or item was created (in unix epochs).")
-  @projectedName("json", "created")
-  @projectedName("java", "createdAt")
-  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
-  created: utcDateTime;
+//   @doc("A timestamp when this job or item was created (in unix epochs).")
+//   @projectedName("json", "created")
+//   @projectedName("java", "createdAt")
+//   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+//   created: utcDateTime;
 
-  @doc("A timestamp when this operation and its associated images expire and will be deleted (in unix epochs).")
-  expires?: int64;
+//   @doc("A timestamp when this operation and its associated images expire and will be deleted (in unix epochs).")
+//   expires?: int64;
 
-  @doc("The result of the operation if the operation succeeded.")
-  result?: ImageGenerations;
+//   @doc("The result of the operation if the operation succeeded.")
+//   result?: ImageGenerations;
 
-  @doc("The status of the operation")
-  status: AzureOpenAIOperationState;
+//   @doc("The status of the operation")
+//   status: AzureOpenAIOperationState;
 
-  @doc("The error if the operation failed.")
-  error?: Foundations.Error;
-}
+//   @doc("The error if the operation failed.")
+//   error?: Foundations.Error;
+// }

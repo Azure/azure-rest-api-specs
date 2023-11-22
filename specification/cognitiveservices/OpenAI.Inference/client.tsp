@@ -39,3 +39,26 @@ namespace Azure.OpenAI;
   "csharp",
   "AzureExtensionsContext"
 );
+
+
+// I would love to use this approach but we get an error related to duplicate routes, only for some routes
+// I suspect that's for the ones that have models using unions.
+// @client({
+//   name: "OpenAIClient",
+//   service: Azure.OpenAI
+// })
+// interface OpenAIClient {
+//   getAudioTranscriptionAsPlainText is Azure.OpenAI.getAudioTranscriptionAsPlainText;
+//   getAudioTranscriptionAsResponseObject is Azure.OpenAI.getAudioTranscriptionAsResponseObject;
+
+//   getAudioTranslationAsPlainText is Azure.OpenAI.getAudioTranslationAsPlainText;
+//   getAudioTranslationAsResponseObject is Azure.OpenAI.getAudioTranslationAsResponseObject;
+
+//   getImageGenerations is Azure.OpenAI.getImageGenerations;
+
+//   getEmbeddings is Azure.OpenAI.getEmbeddings;
+
+//   getCompletions is Azure.OpenAI.getCompletions;
+//   getChatCompletions is Azure.OpenAI.getChatCompletions;
+//   getChatCompletionsWithAzureExtensions is Azure.OpenAI.getChatCompletionsWithAzureExtensions;
+// }
