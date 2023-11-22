@@ -4445,22 +4445,11 @@
           },
           {
             "in": "body",
-            "name": "userMessage",
+            "name": "intelligenceChatRequest",
             "required": false,
-            "description": "The user's input message. Either this or userChoice must be provided when op=newMessage.",
+            "description": "An object specifying the chat criteria.",
             "schema": {
-              "description": "The user's input message.",
-              "type": "string"
-            }
-          },
-          {
-            "in": "body",
-            "name": "userChoice",
-            "required": false,
-            "description": "The user's choice (suggestion ID from the previous round of Chat API response). Either this or userMessage must be provided when op=newMessage.",
-            "schema": {
-              "description": "The user's choice (suggestion ID from the previous round of Chat API response).",
-              "type": "string"
+              "$ref": "#/definitions/IntelligenceChatRequest"
             }
           }
         ],
@@ -4492,7 +4481,7 @@
         ],
         "x-ms-examples": {
           "Intelligence_AssetDiscoverySkill": {
-            "$ref": "./examples/Intelligence_AssetDiscoverySkill.json"
+            "$ref": "./examples/Intelligence_AssetSummarySkill.json"
           }
         },
         "parameters": [
@@ -4504,24 +4493,11 @@
           },
           {
             "in": "body",
-            "name": "userInput",
+            "name": "intelligenceSkillRequest",
             "required": true,
-            "description": "The user's natural language input.",
+            "description": "An object specifying the skill criteria.",
             "schema": {
-              "description": "The user's natural language input.",
-              "type": "string"
-            }
-          },
-          {
-            "in": "body",
-            "name": "reference",
-            "required": false,
-            "description": "An optional reference to provide asset context. Required when skillType=assetSummary/annotationSuggestion/assetAnalysis.",
-            "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/IntelligenceReference"
-              }
+              "$ref": "#/definitions/IntelligenceSkillRequest"
             }
           }
         ],
@@ -7512,6 +7488,21 @@
         }
       }
     },
+    "IntelligenceChatRequest": {
+      "type": "object",
+      "title": "ChatRequest",
+      "description": "The request body of Intelligence Chat API.",
+      "properties": {
+        "userMessage": {
+          "type": "string",
+          "description": "The user's input message. Either this or userChoice must be provided when op=newMessage."
+        },
+        "userChoice": {
+          "description": "The user's choice (suggestion ID from the previous round of Chat API response). Either this or userMessage must be provided when op=newMessage.",
+          "type": "string"
+        }
+      }
+    },
     "IntelligenceChatResponse": {
       "type": "object",
       "title": "ChatResponse",
@@ -7551,11 +7542,7 @@
           "description": "Indicates whether the message is complete or still being processed."
         },
         "references": {
-          "type": "object",
-          "description": "An optional field containing strong-type references to provide additional details about the mentioned assets or individuals in the Assistant message content.",
-          "additionalProperties": {
-            "$ref": "#/definitions/IntelligenceReference"
-          }
+          "$ref": "#/definitions/IntelligenceReferences"
         },
         "suggestions": {
           "type": "array",
@@ -7580,10 +7567,18 @@
         "modelAsString": true
       }
     },
-    "IntelligenceReference": {
+    "IntelligenceReferences": {
+      "type": "object",
+      "description": "Containing strong-type references to provide additional details about the mentioned assets or individuals",
+      "title": "References",
+      "additionalProperties": {
+        "$ref": "#/definitions/IntelligenceReferenceItem"
+      }
+    },
+    "IntelligenceReferenceItem": {
       "type": "object",
       "description": "Provide additional details about particular assets and individuals",
-      "title": "Reference",
+      "title": "ReferenceItem",
       "properties": {
         "type": {
           "$ref": "#/definitions/IntelligenceReferenceType"
@@ -7624,6 +7619,20 @@
         }
       }
     },
+    "IntelligenceSkillRequest": {
+      "type": "object",
+      "title": "IntelligenceSkillRequest",
+      "description": "The request body of Intelligence Skill API.",
+      "properties": {
+        "userInput": {
+          "type": "string",
+          "description": "The user's natural language input."
+        },
+        "reference": {
+          "$ref": "#/definitions/IntelligenceReferences"
+        }
+      }
+    },
     "IntelligenceSkillResponse": {
       "type": "object",
       "title": "SkillResponse",
@@ -7634,11 +7643,7 @@
           "description": "The intelligence service-generated natural language response."
         },
         "references": {
-          "type": "object",
-          "description": "Attributes that correspond to the specific type of instance.",
-          "additionalProperties": {
-            "$ref": "#/definitions/IntelligenceReference"
-          }
+          "$ref": "#/definitions/IntelligenceReferences"
         }
       }
     }
