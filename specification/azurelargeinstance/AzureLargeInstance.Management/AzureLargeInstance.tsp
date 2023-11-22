@@ -13,7 +13,7 @@ namespace Microsoft.AzureLargeInstance;
 Azure Large Instance info on Azure (ARM properties and AzureLargeInstance
 properties)
 """)
-model AzureLargeInstance is ProxyResource<AzureLargeInstanceProperties> {
+model AzureLargeInstance is TrackedResource<AzureLargeInstanceProperties> {
   @doc("Name of the AzureLargeInstance.")
   @pattern(".*")
   @path
@@ -29,30 +29,41 @@ interface AzureLargeInstances {
 Gets an Azure Large Instance for the specified subscription, resource group,
 and instance name.
 """)
+  @projectedName("json", "AzureLargeInstance_Get")
   get is ArmResourceRead<AzureLargeInstance>;
+  
   @doc("""
 Patches the Tags field of an Azure Large Instance for the specified
 subscription, resource group, and instance name.
 """)
+  @projectedName("json", "AzureLargeInstance_Update")
   update is ArmTagsPatchSync<AzureLargeInstance>;
+  
   @doc("""
 Gets a list of Azure Large Instances in the specified subscription and resource
 group. The operations returns various properties of each Azure Large Instance.
 """)
+  @projectedName("json", "AzureLargeInstance_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<AzureLargeInstance>;
+  
   @doc("""
 Gets a list of Azure Large Instances in the specified subscription. The
 operations returns various properties of each Azure Large Instance.
 """)
+  @projectedName("json", "AzureLargeInstance_ListBySubscription")
   listBySubscription is ArmListBySubscription<AzureLargeInstance>;
   // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
+  
   @doc("The operation to start an Azure Large Instance (only for compute instances)")
+  @projectedName("json", "AzureLargeInstance_Start")
   start is ArmResourceActionAsync<
     AzureLargeInstance,
     {},
     OperationStatusResult
   >;
+  
   @doc("The operation to restart an Azure Large Instance (only for compute instances)")
+  @projectedName("json", "AzureLargeInstance_Restart")
   restart is ArmResourceActionNoBody<
     AzureLargeInstance,
     {
@@ -61,8 +72,10 @@ operations returns various properties of each Azure Large Instance.
     },
     OperationStatusResult
   >;
+  
   // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("The operation to shutdown an Azure Large Instance (only for compute instances)")
+  @projectedName("json", "AzureLargeInstance_Start")
   shutdown is ArmResourceActionAsync<
     AzureLargeInstance,
     {},
