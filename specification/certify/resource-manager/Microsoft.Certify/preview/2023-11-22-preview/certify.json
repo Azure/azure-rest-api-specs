@@ -128,7 +128,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/TestSuites": {
       "get": {
         "operationId": "TestSuites_ListByResourceGroup",
-        "summary": "List TestSuitesNameParameter resources by resource group",
+        "summary": "List TestSuiteNameParameter resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -170,7 +170,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/TestSuites/{TestSuitesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/TestSuites/{TestSuiteName}": {
       "put": {
         "operationId": "TestSuites_CreateOrUpdate",
         "summary": "Create or update a TestSuites.",
@@ -185,7 +185,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/TestSuitesNameParameter"
+            "$ref": "#/parameters/TestSuitesNamParameter"
           },
           {
             "name": "parameters",
@@ -237,7 +237,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/TestSuitesNameParameter"
+            "$ref": "#/parameters/TestSuiteNameParameter"
           }
         ],
         "responses": {
@@ -280,7 +280,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/TestSuitesNameParameter"
+            "$ref": "#/parameters/TestSuiteNameParameter"
           }
         ],
         "responses": {
@@ -310,7 +310,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/Validations/{ValidationsName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Certify/Validations/{ValidationName}": {
       "put": {
         "operationId": "Validations_CreateOrUpdate",
         "summary": "Create or update a Validations Resource.",
@@ -325,7 +325,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ValidationsNameParameter"
+            "$ref": "#/parameters/ValidationNameParameter"
           },
           {
             "name": "parameters",
@@ -377,7 +377,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ValidationsNameParameter"
+            "$ref": "#/parameters/ValidationNameParameter"
           }
         ],
         "responses": {
@@ -420,7 +420,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ValidationsNameParameter"
+            "$ref": "#/parameters/ValidationNameParameter"
           }
         ],
         "responses": {
@@ -485,7 +485,7 @@
       "properties": {
         "certificationResourceId": {
           "type": "string",
-          "description": "Id of certification  object inbackend."
+          "description": "Id of certification  object in backend."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -555,7 +555,7 @@
         },
         "resourceType": {
           "type": "string",
-          "description": "Resource Type of Validations ie Image or SASURI"
+          "description": "Resource Type of Validations ie Image"
         },
         "os": {
           "type": "string",
@@ -583,7 +583,7 @@
         },
         "deleteResources": {
           "$ref": "#/definitions/DeleteResources",
-          "description": "Status if resources needs to be delted or not"
+          "description": "Status if resources needs to be deleted or not"
         }
       },
       "description": "Properties of Validations Resource",
@@ -653,17 +653,17 @@
     }
   },
   "parameters": {
-    "ValidationsNameParameter": {
+    "ValidationNameParameter": {
       "x-ms-parameter-location": "method",
-      "name": "ValidationsName",
+      "name": "ValidationName",
       "in": "path",
       "required": true,
       "description": "Name of the validation Job Parameter.",
       "type": "string"
     },
-    "TestSuitesNameParameter": {
+    "TestSuiteNameParameter": {
       "x-ms-parameter-location": "method",
-      "name": "TestSuitesName",
+      "name": "TestSuiteName",
       "in": "path",
       "required": true,
       "description": "Name of the TestSuitesName Parameter.",
