@@ -7195,6 +7195,8 @@
     },
     "BrowseResultValue": {
       "type": "object",
+      "title": "BrowseResultValue",
+      "description": "The value item of the browse request.",
       "properties": {
         "name": {
           "type": "string",
@@ -7225,9 +7227,9 @@
           "$ref": "#/definitions/itemPathIdentifier"
         },
         "count": {
-          "type": "int",
+          "type": "integer",
           "format": "int32",
-          "description": "The count of the browse result."
+          "description": "The count of the top level asset. Won't return if request payload 'count' is false."
         },
         "properties": {
           "type": "object",
