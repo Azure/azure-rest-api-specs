@@ -746,7 +746,7 @@
           "description": "Specifies the storage settings for the Azure Large Instance disks."
         },
         "osProfile": {
-          "$ref": "#/definitions/OSProfile",
+          "$ref": "#/definitions/OsProfile",
           "description": "Specifies the operating system settings for the Azure Large Instance."
         },
         "networkProfile": {
@@ -1026,7 +1026,19 @@
         }
       }
     },
-    "OSProfile": {
+    "Origin": {
+      "type": "string",
+      "enum": [
+        "user",
+        "system",
+        "user,system"
+      ],
+      "x-ms-enum": {
+        "name": "Origin",
+        "modelAsString": true
+      }
+    },
+    "OsProfile": {
       "type": "object",
       "description": "Specifies the operating system settings for the Azure Large Instance.",
       "properties": {
@@ -1050,20 +1062,9 @@
         }
       }
     },
-    "Origin": {
-      "type": "string",
-      "enum": [
-        "user",
-        "system",
-        "user,system"
-      ],
-      "x-ms-enum": {
-        "name": "Origin",
-        "modelAsString": true
-      }
-    },
     "ProvisioningState": {
       "type": "string",
+      "description": "An enum of possible operation states for an AzureLargeStorageInstances",
       "enum": [
         "Accepted",
         "Creating",
@@ -1076,7 +1077,49 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted means ARM resource has been accepted."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating means ARM resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating means an existing ARM resource is being updated"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed means resource is in failed state"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded means resource created succeeded during last create/update"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting means resource is in the process of being deleted"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Cancelled means resource operation has been cancelled"
+          },
+          {
+            "name": "Migrating",
+            "value": "Migrating",
+            "description": "Migrating means resource is being migrated from one subscription or resource group to another"
+          }
+        ]
       }
     },
     "StorageBillingProperties": {

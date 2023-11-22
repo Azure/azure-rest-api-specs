@@ -109,14 +109,30 @@ enum ActionType {
   Internal,
 }
 
+@doc("An enum of possible operation states for an AzureLargeStorageInstances")
 enum ProvisioningState {
+  @doc("Accepted means ARM resource has been accepted.")
   Accepted,
+
+  @doc("Creating means ARM resource is being created.")
   Creating,
+
+  @doc("Updating means an existing ARM resource is being updated")
   Updating,
+
+  @doc("Failed means resource is in failed state")
   Failed,
+
+  @doc("Succeeded means resource created succeeded during last create/update")
   Succeeded,
+
+  @doc("Deleting means resource is in the process of being deleted")
   Deleting,
+
+  @doc("Cancelled means resource operation has been cancelled")
   Canceled,
+
+  @doc("Migrating means resource is being migrated from one subscription or resource group to another")
   Migrating,
 }
 
@@ -129,7 +145,7 @@ model AzureLargeInstanceProperties {
   storageProfile?: StorageProfile;
 
   @doc("Specifies the operating system settings for the Azure Large Instance.")
-  osProfile?: OSProfile;
+  osProfile?: OsProfile;
 
   @doc("Specifies the network settings for the Azure Large Instance.")
   networkProfile?: NetworkProfile;
@@ -203,7 +219,7 @@ disk attached to a VM.
 }
 
 @doc("Specifies the operating system settings for the Azure Large Instance.")
-model OSProfile {
+model OsProfile {
   @doc("Specifies the host OS name of the Azure Large Instance.")
   computerName?: string;
 
