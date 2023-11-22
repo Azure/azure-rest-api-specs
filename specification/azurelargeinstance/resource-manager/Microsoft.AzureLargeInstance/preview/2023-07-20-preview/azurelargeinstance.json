@@ -88,7 +88,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureLargeInstance/azureLargeInstances": {
       "get": {
-        "operationId": "AzureLargeInstances_ListBySubscription",
+        "operationId": "AzureLargeInstance_ListBySubscription",
         "tags": [
           "AzureLargeInstances"
         ],
@@ -113,11 +113,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "AzureLargeInstances_ListBySubscription": {
-            "$ref": "./examples/AzureLargeInstance_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -166,7 +161,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstances": {
       "get": {
-        "operationId": "AzureLargeInstances_ListByResourceGroup",
+        "operationId": "AzureLargeInstance_ListByResourceGroup",
         "tags": [
           "AzureLargeInstances"
         ],
@@ -196,11 +191,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "AzureLargeInstances_ListByResourceGroup": {
-            "$ref": "./examples/AzureLargeInstance_ListByResourceGroup.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -208,7 +198,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstances/{azureLargeInstanceName}": {
       "get": {
-        "operationId": "AzureLargeInstances_Get",
+        "operationId": "AzureLargeInstance_Get",
         "tags": [
           "AzureLargeInstances"
         ],
@@ -245,15 +235,10 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "AzureLargeInstances_Get": {
-            "$ref": "./examples/AzureLargeInstance_Get.json"
-          }
         }
       },
       "patch": {
-        "operationId": "AzureLargeInstances_Update",
+        "operationId": "AzureLargeInstance_Update",
         "tags": [
           "AzureLargeInstances"
         ],
@@ -299,20 +284,12 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "AzureLargeInstances_Delete_Tag": {
-            "$ref": "./examples/AzureLargeInstance_PatchTags_Delete.json"
-          },
-          "AzureLargeInstances_Update_Tag": {
-            "$ref": "./examples/AzureLargeInstance_PatchTags.json"
-          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstances/{azureLargeInstanceName}/restart": {
       "post": {
-        "operationId": "AzureLargeInstances_Restart",
+        "operationId": "AzureLargeInstance_Restart",
         "tags": [
           "AzureLargeInstances"
         ],
@@ -373,11 +350,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "AzureLargeInstances_Restart": {
-            "$ref": "./examples/AzureLargeInstance_Restart.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -386,7 +358,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstances/{azureLargeInstanceName}/shutdown": {
       "post": {
-        "operationId": "AzureLargeInstances_Shutdown",
+        "operationId": "AzureLargeInstance_Shutdown",
         "tags": [
           "AzureLargeInstances"
         ],
@@ -447,11 +419,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "AzureLargeInstances_Shutdown": {
-            "$ref": "./examples/AzureLargeInstance_Shutdown.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -460,7 +427,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeInstances/{azureLargeInstanceName}/start": {
       "post": {
-        "operationId": "AzureLargeInstances_Start",
+        "operationId": "AzureLargeInstance_Start",
         "tags": [
           "AzureLargeInstances"
         ],
@@ -519,11 +486,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "AzureLargeInstances_Start": {
-            "$ref": "./examples/AzureLargeInstance_Start.json"
           }
         },
         "x-ms-long-running-operation-options": {
