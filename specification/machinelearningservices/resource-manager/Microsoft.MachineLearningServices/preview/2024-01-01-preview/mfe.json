@@ -9110,7 +9110,7 @@
           {
             "in": "query",
             "name": "latest",
-            "description": "If set to true, return only the lastest of each index (default false).",
+            "description": "If set to true, return only the latest of each index (default false).",
             "type": "boolean",
             "default": false
           },
@@ -21516,12 +21516,12 @@
           "x-nullable": true
         },
         "previousVersionIndexId": {
-          "description": "Reference to the Index this index was versioned off of. Null implies creation of a new versioned set.\r\nUri azureml://subscriptions/{{sub}}/resourcegroups/{{rg}}/workspaces/{{workspace}}/indexes/previndexname\r\nShould not be required to be the latest. Just one of the assets in the set.",
+          "description": "Reference to the Index this index was versioned off of. Null implies creation of a new versioned set.\r\nUri azureml://subscriptions/{{sub}}/resourcegroups/{{rg}}/workspaces/{{workspace}}/indexes/{{previous}}\r\nShould not be required to be the latest. Just one of the assets in the set.",
           "type": "string",
           "x-nullable": true
         },
         "storageUri": {
-          "description": "Default workspaceblob. Should work across storage types and auth scenarios.\r\nUri azureml://subscriptions/{{sub}}/resourcegroups/{{rg}}/workspaces/{{workspace}}/datastores/workspaceblobstore/paths/azureml",
+          "description": "Default workspace blob storage Uri. Should work across storage types and auth scenarios.\r\nUri azureml://subscriptions/{{sub}}/resourcegroups/{{rg}}/workspaces/{{workspace}}/datastores/workspaceblobstore/paths/azureml",
           "type": "string",
           "x-nullable": true
         },
