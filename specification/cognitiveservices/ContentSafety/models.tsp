@@ -86,7 +86,7 @@ model AnalyzeTextResult {
   incidentMatches?: IncidentMatch[];
 
   @added(ContentSafety.Versions.v2023_11_30_Preview)
-  @doc("Sentences detected as harmful content")
+  @doc("Sentences detected as harmful content.")
   reason?: string[];
 }
 
