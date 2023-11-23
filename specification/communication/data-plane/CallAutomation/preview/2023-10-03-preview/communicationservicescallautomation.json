@@ -1030,6 +1030,13 @@
             "type": "string"
           },
           {
+            "name": "operationCallbackUri",
+            "in": "query",
+            "description": "Opeation callback URI.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -1713,9 +1720,9 @@
           "$ref": "#/definitions/TranscriptionConfiguration",
           "description": "Live Transcription Configuration."
         },
-        "cognitiveServicesEndpoint": {
-          "description": "The identifier of the Cognitive Service resource assigned to this call.",
-          "type": "string"
+        "callIntelligenceOptions": {
+          "$ref": "#/definitions/CallIntelligenceOptions",
+          "description": "AI options for the call."
         },
         "customCallingContext": {
           "$ref": "#/definitions/CustomCallingContext",
@@ -1838,6 +1845,16 @@
         "startTranscription": {
           "description": "Determines if the transcription should be started immediately after call is answered or not.",
           "type": "boolean"
+        }
+      }
+    },
+    "CallIntelligenceOptions": {
+      "description": "AI options for the call.",
+      "type": "object",
+      "properties": {
+        "cognitiveServicesEndpoint": {
+          "description": "The identifier of the Cognitive Service resource assigned to this call.",
+          "type": "string"
         }
       }
     },
@@ -1985,9 +2002,9 @@
           "$ref": "#/definitions/TranscriptionConfiguration",
           "description": "Live Transcription Configuration."
         },
-        "cognitiveServicesEndpoint": {
-          "description": "The endpoint URL of the Azure Cognitive Services resource attached",
-          "type": "string"
+        "callIntelligenceOptions": {
+          "$ref": "#/definitions/CallIntelligenceOptions",
+          "description": "AI options for the call."
         },
         "answeredBy": {
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
@@ -2557,6 +2574,10 @@
         "dialog": {
           "$ref": "#/definitions/BaseDialog",
           "description": "Defines the dialog."
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
         },
         "operationContext": {
           "description": "The value to identify context of the operation.",
@@ -4115,13 +4136,16 @@
           "description": "Result information defines the code, subcode and message",
           "readOnly": true
         },
-        "toneInfo": {
-          "$ref": "#/definitions/ToneInfo",
-          "description": "Define the information for a tone",
+        "sequenceId": {
+          "format": "int32",
+          "description": "The sequence id which can be used to determine if the same tone was played multiple times or if any tones were missed.",
+          "type": "integer",
           "readOnly": true
         },
+        "tone": {
+          "$ref": "#/definitions/Tone"
+        },
         "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string",
           "readOnly": true
         },
@@ -4139,24 +4163,6 @@
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "ToneInfo": {
-      "description": "The information about the tone.",
-      "required": [
-        "sequenceId",
-        "tone"
-      ],
-      "type": "object",
-      "properties": {
-        "sequenceId": {
-          "format": "int32",
-          "description": "The sequence id which can be used to determine if the same tone was played multiple times or if any tones were missed.",
-          "type": "integer"
-        },
-        "tone": {
-          "$ref": "#/definitions/Tone"
         }
       }
     },
@@ -4291,7 +4297,7 @@
         "transcriptionStarted",
         "transcriptionFailed",
         "transcriptionResumed",
-        "transcriptionLocaleUpdated",
+        "transcriptionUpdated",
         "transcriptionStopped",
         "unspecifiedError"
       ],
@@ -4311,7 +4317,13 @@
         "streamConnectionInterrupted",
         "speechServicesConnectionError",
         "subscriptionStopped",
-        "unspecifiedError"
+        "unspecifiedError",
+        "authenticationFailure",
+        "badRequest",
+        "tooManyRequests",
+        "forbidden",
+        "serviceTimeout",
+        "transcriptionLocaleUpdated"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -4401,6 +4413,41 @@
       }
     },
     "TranscriptionFailed": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
+        "transcriptionUpdate": {
+          "$ref": "#/definitions/TranscriptionUpdate",
+          "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TranscriptionUpdated": {
       "type": "object",
       "properties": {
         "operationContext": {
