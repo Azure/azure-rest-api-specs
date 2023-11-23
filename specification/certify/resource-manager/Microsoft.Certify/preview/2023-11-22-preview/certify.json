@@ -833,7 +833,10 @@
       "in": "path",
       "required": true,
       "description": "Name of the validation Job Parameter.",
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 40
     },
     "TestSuiteNameParameter": {
       "x-ms-parameter-location": "method",
@@ -841,7 +844,10 @@
       "in": "path",
       "required": true,
       "description": "Name of the TestSuitesName Parameter.",
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 40
     }
   }
 }
