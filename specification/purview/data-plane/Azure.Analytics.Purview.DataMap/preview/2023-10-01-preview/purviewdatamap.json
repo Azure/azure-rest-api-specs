@@ -719,7 +719,7 @@
           "Entity"
         ],
         "description": "Get complete definition of an entity given its type and unique attribute.\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format:\nattr:\\<attrName>=<attrValue>. \nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\nThe REST request would look something like this:\nGET /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
-        "operationId": "Entity_GetByUniqueAttributes",
+        "operationId": "Entity_Federated_GetByUniqueAttributes",
         "x-ms-examples": {
           "Entity_GetByUniqueAttributes": {
             "$ref": "./examples/Entity_GetByUniqueAttributes.json"
@@ -771,91 +771,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "Entity"
-        ],
-        "description": "Update entity partially - Allow a subset of attributes to be updated on\nan entity which is identified by its type and unique attribute  eg: Referenceable.qualifiedName.\nNull updates are not possible.\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format:\nattr:<attrName>=<attrValue>.\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\nThe REST request would look something like this:\nPUT /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
-        "operationId": "Entity_PartialUpdateByUniqueAttributes",
-        "x-ms-examples": {
-          "Entity_PartialUpdateEntityByUniqueAttributes": {
-            "$ref": "./examples/Entity_PartialUpdateByUniqueAttributes.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/typeName"
-          },
-          {
-            "name": "attr:qualifiedName",
-            "in": "query",
-            "description": "The qualified name of the entity. (This is only an example. qualifiedName can be changed to other unique attributes)",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "atlasEntityWithExtInfo",
-            "description": "Atlas entity with extended information.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AtlasEntityWithExtInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated with EntityMutationResponse.",
-            "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Entity"
-        ],
-        "description": "Delete an entity identified by its type and unique attributes.\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format:\nattr:\\<attrName>=\\<attrValue>.\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\nThe REST request would look something like this:\nDELETE /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
-        "operationId": "Entity_DeleteByUniqueAttribute",
-        "x-ms-examples": {
-          "Entity_DeleteByUniqueAttribute": {
-            "$ref": "./examples/Entity_DeleteByUniqueAttribute.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/typeName"
-          },
-          {
-            "name": "attr:qualifiedName",
-            "in": "query",
-            "description": "The qualified name of the entity. (This is only an example. qualifiedName can be changed to other unique attributes)",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Deleted with EntityMutationResponse.",
-            "schema": {
-              "$ref": "#/definitions/EntityMutationResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     },
     "/atlas/v2/entity/uniqueAttribute/type/{typeName}/classification/{classificationName}": {
       "delete": {
