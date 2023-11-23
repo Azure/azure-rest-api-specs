@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg123",
+    "workspaceName": "workspace123",
+    "api-version": "2024-01-01-preview",
+    "name": "indexname123",
+    "body": {
+      "properties": {
+        "storageUri":"azureml://subscriptions/{{sub}}/resourcegroups/{{rg}}/workspaces/{{workspace}}/datastores/workspaceblobstore/paths/azureml",
+        "indexConfigurations": {
+            "FieldsMapping": "embeddings"
+        },
+        "description": "string",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "properties1": "value1",
+          "properties2": "value2"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/indexes/indexname123",
+        "name": "indexname123",
+        "type": "Microsoft.MachineLearningServices/workspaces/indexes",
+        "properties": {
+          "storageUri":"azureml://subscriptions/{{sub}}/resourcegroups/{{rg}}/workspaces/{{workspace}}/datastores/workspaceblobstore/paths/azureml",
+          "indexConfigurations": {
+              "fieldsMapping": "embeddings"
+          },
+          "version": "1.0",
+          "description": "string",
+          "tags": {
+            "tag1": "value1",
+            "tag2": "value2"
+          },
+          "properties": {
+            "properties1": "value1",
+            "properties2": "value2"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-12-01T12:00:00.000Z",
+          "createdBy": "John Smith",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-12-01T12:00:00.000Z",
+          "lastModifiedBy": "John Smith",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspace123/indexes/indexname123",
+        "name": "indexname123",
+        "type": "Microsoft.MachineLearningServices/workspaces/indexes",
+        "properties": {
+          "StorageUri":"azureml://subscriptions/{{sub}}/resourcegroups/{{rg}}/workspaces/{{workspace}}/datastores/workspaceblobstore/paths/azureml",
+          "IndexConfigurations": {
+              "FieldsMapping": "embeddings"
+          },
+          "Version": "1.0",
+          "description": "string",
+          "tags": {
+            "tag1": "value1",
+            "tag2": "value2"
+          },
+          "properties": {
+            "properties1": "value1",
+            "properties2": "value2"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-12-01T12:00:00.000Z",
+          "createdBy": "John Smith",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-12-01T12:00:00.000Z",
+          "lastModifiedBy": "John Smith",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  }
+}
