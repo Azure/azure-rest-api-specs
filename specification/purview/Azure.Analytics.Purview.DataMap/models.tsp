@@ -218,7 +218,7 @@ model AtlasEntity {
   classifications?: AtlasClassification[];
 
   @doc("The created time of the record.")
-  createTime?: int32;
+  createTime?: int64;
 
   @doc("The user who created the record.")
   createdBy?: string;
@@ -246,7 +246,7 @@ model AtlasEntity {
   meanings?: AtlasTermAssignmentHeader[];
 
   @doc("Used to record the provenance of an instance of an entity or relationship.")
-  provenanceType?: float32;
+  provenanceType?: int32;
 
   @doc("Determines if there's a proxy.")
   proxy?: boolean;
@@ -262,13 +262,13 @@ removed.
   status?: Status;
 
   @doc("The update time of the record.")
-  updateTime?: int32;
+  updateTime?: int64;
 
   @doc("The user who updated the record.")
   updatedBy?: string;
 
   @doc("The version of the entity.")
-  version?: float32;
+  version?: int64;
 
   @doc("The dictionary of contacts for entities. Key could be Expert or Owner.")
   contacts?: Record<ContactBasic[]>;
@@ -605,13 +605,13 @@ model AtlasGlossaryBaseObject {
   lastModifiedTS?: string;
 
   @doc("The created time of the record.")
-  createTime?: int32;
+  createTime?: int64;
 
   @doc("The user who created the record.")
   createdBy?: string;
 
   @doc("The update time of the record.")
-  updateTime?: int32;
+  updateTime?: int64;
 
   @doc("The user who updated the record.")
   updatedBy?: string;
@@ -1000,10 +1000,10 @@ distinguish whether a record is an asset or a term.
   objectType?: string;
 
   @doc("The create time of the record. The Unix epoch format.")
-  createTime?: int32;
+  createTime?: int64;
 
   @doc("The last update time of the record. The Unix epoch format.")
-  updateTime?: int32;
+  updateTime?: int64;
 
   @doc("The GUID of the record.")
   id?: string;
@@ -1160,10 +1160,10 @@ distinguish whether a record is an asset or a term.
   objectType?: string;
 
   @doc("The create time of the record. The Unix epoch format.")
-  createTime?: int32;
+  createTime?: int64;
 
   @doc("The last update time of the record. The Unix epoch format.")
-  updateTime?: int32;
+  updateTime?: int64;
 
   @doc("The GUID of the record.")
   id?: string;
@@ -1315,7 +1315,7 @@ model AtlasRelationship {
   ...AtlasStruct;
 
   @doc("The created time of the record.")
-  createTime?: int32;
+  createTime?: int64;
 
   @doc("The user who created the record.")
   createdBy?: string;
@@ -1336,19 +1336,19 @@ model AtlasRelationship {
   label?: string;
 
   @doc("Used to record the provenance of an instance of an entity or relationship")
-  provenanceType?: float32;
+  provenanceType?: int32;
 
   @doc("The enum of relationship status.")
   status?: StatusAtlasRelationship;
 
   @doc("The update time of the record.")
-  updateTime?: int32;
+  updateTime?: int64;
 
   @doc("The user who updated the record.")
   updatedBy?: string;
 
   @doc("The version of the relationship.")
-  version?: float32;
+  version?: int64;
 }
 
 @doc("The relationship with extended information.")
@@ -1432,7 +1432,7 @@ model AtlasBaseTypeDef {
   category?: TypeCategory;
 
   @doc("The created time of the record.")
-  createTime?: int32;
+  createTime?: int64;
 
   @doc("The user who created the record.")
   createdBy?: string;
@@ -1446,10 +1446,8 @@ model AtlasBaseTypeDef {
   @doc("The GUID of the type definition.")
   guid?: string;
 
-  @key("name")
-  @visibility("read")
   @doc("The name of the type definition.")
-  name: string;
+  name?: string;
 
   @doc("The options for the type definition.")
   options?: Record<string>;
@@ -1461,13 +1459,13 @@ model AtlasBaseTypeDef {
   typeVersion?: string;
 
   @doc("The update time of the record.")
-  updateTime?: int32;
+  updateTime?: int64;
 
   @doc("The user who updated the record.")
   updatedBy?: string;
 
   @doc("The version of the record.")
-  version?: float32;
+  version?: int64;
 
   @doc("ETag for concurrency control.")
   lastModifiedTS?: string;
@@ -1652,7 +1650,7 @@ model AtlasEnumElementDef {
   description?: string;
 
   @doc("The ordinal of the enum element definition.")
-  ordinal?: float32;
+  ordinal?: int32;
 
   @doc("The value of the enum element definition.")
   value?: string;
@@ -1890,8 +1888,6 @@ model AtlasTypesDef {
 }
 
 @doc("Term template definition for glossary term.")
-@resource("name")
-@resource("guid")
 model TermTemplateDef {
   ...AtlasStructDef;
 }

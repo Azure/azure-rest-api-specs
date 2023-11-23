@@ -64,14 +64,14 @@ Used to define the update behavior for business attributes when updating
 entities.
 """)
       @query
-      businessAttributeUpdateBehavior: BusinessAttributeUpdateBehavior;
+      businessAttributeUpdateBehavior?: BusinessAttributeUpdateBehavior;
 
       @doc("""
 The collection where entities will be moved to. Only specify a value if you
 need to move an entity to another collection.
 """)
       @query
-      collectionId: string;
+      collectionId?: string;
 
       @doc("Atlas entity with extended information.")
       @body
@@ -93,11 +93,11 @@ need to move an entity to another collection.
 
       @doc("Whether to return minimal information for referred entities.")
       @query
-      minExtInfo: boolean;
+      minExtInfo?: boolean;
 
       @doc("Whether to ignore relationship attributes.")
       @query
-      ignoreRelationships: boolean;
+      ignoreRelationships?: boolean;
     },
     AtlasEntitiesWithExtInfo
   >;
@@ -122,14 +122,14 @@ The collection where entities will be moved to. Only specify a value if you
 need to move an entity to another collection.
 """)
       @query
-      collectionId: string;
+      collectionId?: string;
 
       @doc("""
 Used to define the update behavior for business attributes when updating
 entities.
 """)
       @query
-      businessAttributeUpdateBehavior: BusinessAttributeUpdateBehavior;
+      businessAttributeUpdateBehavior?: BusinessAttributeUpdateBehavior;
 
       @doc("An array of entities to create or update.")
       @body
@@ -181,11 +181,11 @@ attributes.
 
       @doc("Whether to return minimal information for referred entities.")
       @query
-      minExtInfo: boolean;
+      minExtInfo?: boolean;
 
       @doc("Whether to ignore relationship attributes.")
       @query
-      ignoreRelationships: boolean;
+      ignoreRelationships?: boolean;
     },
     AtlasEntityWithExtInfo
   >;
@@ -343,18 +343,18 @@ GET
 
       @doc("Whether to return minimal information for referred entities.")
       @query
-      minExtInfo: boolean;
+      minExtInfo?: boolean;
 
       @doc("Whether to ignore relationship attributes.")
       @query
-      ignoreRelationships: boolean;
+      ignoreRelationships?: boolean;
 
       @doc("""
 The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
       @query("attr:qualifiedName")
-      attr: string;
+      attr?: string;
     },
     AtlasEntityWithExtInfo
   >;
@@ -391,7 +391,7 @@ The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
       @query("attr:qualifiedName")
-      attr: string;
+      attr?: string;
 
       @doc("Atlas entity with extended information.")
       @body
@@ -428,7 +428,7 @@ The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
       @query("attr:qualifiedName")
-      attr: string;
+      attr?: string;
     },
     EntityMutationResponse
   >;
@@ -455,7 +455,7 @@ The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
       @query("attr:qualifiedName")
-      attr: string;
+      attr?: string;
     },
     void
   >;
@@ -476,7 +476,7 @@ The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
       @query("attr:qualifiedName")
-      attr: string;
+      attr?: string;
 
       @doc("An array of classification to be added.")
       @body
@@ -501,7 +501,7 @@ The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
       @query("attr:qualifiedName")
-      attr: string;
+      attr?: string;
 
       @doc("An array of classification to be updated.")
       @body
@@ -555,11 +555,11 @@ at least one unique attribute must be provided.
 
       @doc("Whether to return minimal information for referred entities.")
       @query
-      minExtInfo: boolean;
+      minExtInfo?: boolean;
 
       @doc("Whether to ignore relationship attributes.")
       @query
-      ignoreRelationships: boolean;
+      ignoreRelationships?: boolean;
 
       @doc("""
 Qualified name of an entity. E.g. to find 2 entities you can set
@@ -617,7 +617,7 @@ Whether to overwrite the existing business metadata on the entity or not,
 default is false.
 """)
       @query
-      isOverwrite: boolean;
+      isOverwrite?: boolean;
       @doc("BusinessMetadata payload")
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @body businessMetadata: Record<unknown>;
@@ -778,7 +778,7 @@ The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
       @query("attr:qualifiedName")
-      attr: string;
+      attr?: string;
 
       @doc("set of labels to be deleted")
       @body
@@ -819,7 +819,7 @@ The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
       @query("attr:qualifiedName")
-      attr: string;
+      attr?: string;
 
       @doc("set of labels to be set")
       @body
@@ -860,7 +860,7 @@ The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
       @query("attr:qualifiedName")
-      attr: string;
+      attr?: string;
 
       @doc("set of labels to be added")
       @body
@@ -905,19 +905,19 @@ and
     {
       @doc("The page size - by default there is no paging.")
       @query
-      limit: int32;
+      limit?: int32;
 
       @doc("The offset for pagination purpose.")
       @query
-      offset: int32;
+      offset?: int32;
 
       @doc("The sort order, ASC (default) or DESC.")
       @query
-      sort: string;
+      sort?: string;
 
       @doc("Whether ignore terms and categories")
       @query
-      ignoreTermsAndCategories: boolean;
+      ignoreTermsAndCategories?: boolean;
     },
     void
   >;
@@ -1055,15 +1055,15 @@ parameters are currently not being enabled and won't work even they are passed.
 
       @doc("The page size - by default there is no paging.")
       @query
-      limit: int32;
+      limit?: int32;
 
       @doc("The offset for pagination purpose.")
       @query
-      offset: int32;
+      offset?: int32;
 
       @doc("The sort order, ASC (default) or DESC.")
       @query
-      sort: string;
+      sort?: string;
     },
     void
   >;
@@ -1080,15 +1080,15 @@ parameters are currently not being enabled and won't work even they are passed.
 
       @doc("The page size - by default there is no paging.")
       @query
-      limit: int32;
+      limit?: int32;
 
       @doc("The offset for pagination purpose.")
       @query
-      offset: int32;
+      offset?: int32;
 
       @doc("The sort order, ASC (default) or DESC.")
       @query
-      sort: string;
+      sort?: string;
     },
     void
   >;
@@ -1101,7 +1101,7 @@ parameters are currently not being enabled and won't work even they are passed.
     {
       @doc("Whether include term hierarchy")
       @query
-      includeTermHierarchy: boolean;
+      includeTermHierarchy?: boolean;
 
       @doc("""
 The glossary term definition. A term must be anchored to a Glossary at the time
@@ -1139,7 +1139,7 @@ Optionally it can be categorized as well.
 
       @doc("Whether include term hierarchy")
       @query
-      includeTermHierarchy: boolean;
+      includeTermHierarchy?: boolean;
 
       @doc("The glossary term to be updated.")
       @body
@@ -1177,7 +1177,7 @@ shortDescription, longDescription, abbreviation, usage and status for term.
 
       @doc("Whether include term hierarchy")
       @query
-      includeTermHierarchy: boolean;
+      includeTermHierarchy?: boolean;
 
       @doc("""
 A map containing keys as attribute names and values as corresponding attribute
@@ -1198,7 +1198,7 @@ values to be updated.
     {
       @doc("Whether include term hierarchy")
       @query
-      includeTermHierarchy: boolean;
+      includeTermHierarchy?: boolean;
 
       @doc("An array of glossary term definitions to be created in bulk.")
       @body
@@ -1222,15 +1222,15 @@ limit/offset to get pagination result.
 
       @doc("The page size - by default there is no paging.")
       @query
-      limit: int32;
+      limit?: int32;
 
       @doc("The offset for pagination purpose.")
       @query
-      offset: int32;
+      offset?: int32;
 
       @doc("The sort order, ASC (default) or DESC.")
       @query
-      sort: string;
+      sort?: string;
     },
     void
   >;
@@ -1293,15 +1293,15 @@ parameters are currently not being enabled and won't work even they are passed.
 
       @doc("The page size - by default there is no paging.")
       @query
-      limit: int32;
+      limit?: int32;
 
       @doc("The offset for pagination purpose.")
       @query
-      offset: int32;
+      offset?: int32;
 
       @doc("The sort order, ASC (default) or DESC.")
       @query
-      sort: string;
+      sort?: string;
     },
     void
   >;
@@ -1331,7 +1331,7 @@ parameters are currently not being enabled and won't work even they are passed.
 
       @doc("Whether ignore terms and categories")
       @query
-      ignoreTermsAndCategories: boolean;
+      ignoreTermsAndCategories?: boolean;
 
       @doc("The glossary definition to be updated.")
       @body
@@ -1371,15 +1371,15 @@ limit/offset to get pagination result.
 
       @doc("The page size - by default there is no paging.")
       @query
-      limit: int32;
+      limit?: int32;
 
       @doc("The offset for pagination purpose.")
       @query
-      offset: int32;
+      offset?: int32;
 
       @doc("The sort order, ASC (default) or DESC.")
       @query
-      sort: string;
+      sort?: string;
     },
     void
   >;
@@ -1399,15 +1399,15 @@ limit/offset to get pagination result.
 
       @doc("The page size - by default there is no paging.")
       @query
-      limit: int32;
+      limit?: int32;
 
       @doc("The offset for pagination purpose.")
       @query
-      offset: int32;
+      offset?: int32;
 
       @doc("The sort order, ASC (default) or DESC.")
       @query
-      sort: string;
+      sort?: string;
     },
     void
   >;
@@ -1458,7 +1458,7 @@ using 'ignoreTermsAndCategories=true' to reduce response body size.
 
       @doc("Whether ignore terms and categories")
       @query
-      ignoreTermsAndCategories: boolean;
+      ignoreTermsAndCategories?: boolean;
 
       @doc("""
 A map containing keys as attribute names and values as corresponding attribute
@@ -1485,15 +1485,15 @@ pagination result.
 
       @doc("The page size - by default there is no paging.")
       @query
-      limit: int32;
+      limit?: int32;
 
       @doc("The offset for pagination purpose.")
       @query
-      offset: int32;
+      offset?: int32;
 
       @doc("The sort order, ASC (default) or DESC.")
       @query
-      sort: string;
+      sort?: string;
     },
     void
   >;
@@ -1513,15 +1513,15 @@ to get pagination result.
 
       @doc("The page size - by default there is no paging.")
       @query
-      limit: int32;
+      limit?: int32;
 
       @doc("The offset for pagination purpose.")
       @query
-      offset: int32;
+      offset?: int32;
 
       @doc("The sort order, ASC (default) or DESC.")
       @query
-      sort: string;
+      sort?: string;
     },
     void
   >;
@@ -1581,7 +1581,7 @@ interface Lineage {
 
       @doc("The number of hops for lineage.")
       @query
-      depth: int32;
+      depth?: int32;
 
       @doc("The direction of the lineage, which could be INPUT, OUTPUT or BOTH.")
       @query
@@ -1606,11 +1606,11 @@ interface Lineage {
 
       @doc("The offset for pagination purpose.")
       @query
-      offset: int32;
+      offset?: int32;
 
       @doc("The page size - by default there is no paging.")
       @query
-      limit: int32;
+      limit?: int32;
     },
     AtlasLineageInfo
   >;
@@ -1644,7 +1644,7 @@ GET
 
       @doc("The number of hops for lineage.")
       @query
-      depth: int32;
+      depth?: int32;
 
       @doc("The direction of the lineage, which could be INPUT, OUTPUT or BOTH.")
       @query
@@ -1655,7 +1655,7 @@ The qualified name of the entity. (This is only an example. qualifiedName can
 be changed to other unique attributes)
 """)
       @query("attr:qualifiedName")
-      attr: string;
+      attr?: string;
     },
     AtlasLineageInfo
   >;
@@ -1706,7 +1706,7 @@ be created.
 
       @doc("Limits whether includes extended information.")
       @query
-      extendedInfo: boolean;
+      extendedInfo?: boolean;
     },
     AtlasRelationshipWithExtInfo
   >;
@@ -1933,11 +1933,11 @@ This is always true
 when search filter type=term_template
 """)
       @query
-      includeTermTemplate: boolean;
+      includeTermTemplate?: boolean;
 
       @doc("Typedef name as search filter when get typedefs.")
       @query
-      type: Typedef;
+      type?: Typedef;
     },
     AtlasTypesDef
   >;
@@ -2000,11 +2000,11 @@ This is always true
 when search filter type=term_template
 """)
       @query
-      includeTermTemplate: boolean;
+      includeTermTemplate?: boolean;
 
       @doc("Typedef name as search filter when get typedefs.")
       @query
-      type: Typedef;
+      type?: Typedef;
     },
     void
   >;
@@ -2022,10 +2022,16 @@ when search filter type=term_template
     TermTemplateDef
   >;
   
-
-  #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Need to put types API under the same interface"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Get the term template definition by its name (unique).")
-  @route("/types/termtemplatedef")
+  @route("/types/termtemplatedef/name/{name}")
   @get
-  getTermTemplateDefByName is DataMapResourceOperations.ResourceRead<TermTemplateDef, NameInPath>;
+  getTermTemplateDefByName is DataMapBaseOperation<
+  {
+    @doc("The unique name of the term template.")
+    @path
+    name: string;
+  },
+  TermTemplateDef
+>;
 }
