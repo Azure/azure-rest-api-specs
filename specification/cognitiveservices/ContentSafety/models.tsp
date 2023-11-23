@@ -38,9 +38,6 @@ enum AnalyzeTextOutputType {
 enum AnalyzeImageOutputType {
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
   FourSeverityLevels,
-
-  @doc("Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7.")
-  EightSeverityLevels,
 }
 
 @doc("The text analysis request.")
@@ -91,7 +88,7 @@ model TextCategoriesAnalysis {
   @doc("The text analysis category.")
   category: TextCategory;
 
-  @doc("The value increases with the severity of the input content. The value of this field is determined by the outputType specified in the request. If 'FourSeverityLevels' or 'EightSeverityLevels' is chosen, this field will be included in the output.")
+  @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’ or ‘EightSeverity Levels’, and the output value can be 0, 2, 4, 6 or 0, 1, 2, 3, 4, 5, 6, or 7.")
   severity?: int32;
 }
 
@@ -109,11 +106,13 @@ model AnalyzeImageOptions {
 
 @doc("The image can be either base64 encoded bytes or a blob URL. You can choose only one of these options. If both are provided, the request will be refused. The maximum image size is 2048 x 2048 pixels and should not exceed 4 MB, while the minimum image size is 50 x 50 pixels.")
 @projectedName("csharp", "ContentSafetyImageData")
+@projectedName("java", "ContentSafetyImageData")
 model ImageData {
   @doc("The Base64 encoding of the image.")
   content?: bytes;
 
   @doc("The blob url of the image.")
+  @projectedName("csharp", "BlobUri")
   blobUrl?: url;
 }
 
@@ -128,7 +127,7 @@ model ImageCategoriesAnalysis {
   @doc("The image analysis category.")
   category: ImageCategory;
 
-  @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’ or ‘EightSeverity Levels’, and the output value can be 0, 2, 4, 6 or 0, 1, 2, 3, 4, 5, 6, or 7.")
+  @doc("The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’, and the output value can be 0, 2, 4, 6.")
   severity?: int32;
 }
 
@@ -140,6 +139,8 @@ model TextBlocklist {
   @key("blocklistName")
   @visibility("read", "create", "query")
   @maxLength(64)
+  @projectedName("csharp", "Name")
+  @projectedName("java", "name")
   blocklistName: string;
 
   @doc("Text blocklist description.")
