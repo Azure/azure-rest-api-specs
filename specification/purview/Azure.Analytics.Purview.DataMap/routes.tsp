@@ -19,6 +19,13 @@ model ApiVersionParameter {
   apiVersion: string;
 }
 
+model OkResponse<T> {
+  @statusCode
+  status: 200;
+  @body
+  data: T;
+}
+
 @doc("The path for name.")
 @resource("name")
 model NameInPath {
@@ -520,7 +527,7 @@ be changed to other unique attributes)
       @body
       entityHeaders: AtlasEntityHeaders;
     },
-    void
+    OkResponse<string[]>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -567,7 +574,7 @@ attrs_1:qualifiedName=db1@cl1&attrs_2:qualifiedName=db2@cl1. (This is only an
 example. qualifiedName can be changed to other unique attributes)
 """)
       @query
-      `attr_N:qualifiedName`: string;
+      `attr_N:qualifiedName`?: string;
     },
     AtlasEntitiesWithExtInfo
   >;
@@ -672,14 +679,10 @@ default is false.
   @doc("Get the sample Template for uploading/creating bulk BusinessMetaData")
   @route("/atlas/v2/entity/businessmetadata/import/template")
   @get
-  getSampleBusinessMetadataTemplate is DataMapBaseOperation<
-    {
-      @doc("Accept header")
-      @header
-      accept: "application/octet-stream";
-    },
-    void
-  >;
+  getSampleBusinessMetadataTemplate is Azure.Core.RpcOperation<{}, {
+    @header contentType: "application/octet-stream";
+    @body template: bytes;
+  }>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Upload the file for creating Business Metadata in BULK")
@@ -919,7 +922,7 @@ and
       @query
       ignoreTermsAndCategories?: boolean;
     },
-    void
+    OkResponse<AtlasGlossary[]>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -951,7 +954,7 @@ the anchor attribute when creating the Term/Category.
       @body
       glossaryCategory: AtlasGlossaryCategory[];
     },
-    void
+    OkResponse<AtlasGlossaryCategory[]>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1065,7 +1068,7 @@ parameters are currently not being enabled and won't work even they are passed.
       @query
       sort?: string;
     },
-    void
+    OkResponse<Record<AtlasRelatedCategoryHeader[]>>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1090,7 +1093,7 @@ parameters are currently not being enabled and won't work even they are passed.
       @query
       sort?: string;
     },
-    void
+    OkResponse<AtlasRelatedTermHeader[]>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1204,7 +1207,7 @@ values to be updated.
       @body
       glossaryTerm: AtlasGlossaryTerm[];
     },
-    void
+    OkResponse<AtlasGlossaryTerm[]>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1232,7 +1235,7 @@ limit/offset to get pagination result.
       @query
       sort?: string;
     },
-    void
+    OkResponse<AtlasRelatedObjectId[]>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -1303,7 +1306,7 @@ parameters are currently not being enabled and won't work even they are passed.
       @query
       sort?: string;
     },
-    void
+    OkResponse<Record<AtlasRelatedTermHeader[]>>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1381,7 +1384,7 @@ limit/offset to get pagination result.
       @query
       sort?: string;
     },
-    void
+    OkResponse<AtlasGlossaryCategory[]>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1409,7 +1412,7 @@ limit/offset to get pagination result.
       @query
       sort?: string;
     },
-    void
+    OkResponse<AtlasRelatedCategoryHeader[]>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1495,7 +1498,7 @@ pagination result.
       @query
       sort?: string;
     },
-    void
+    OkResponse<AtlasGlossaryTerm[]>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1523,7 +1526,7 @@ to get pagination result.
       @query
       sort?: string;
     },
-    void
+    OkResponse<AtlasRelatedTermHeader[]>
   >;
 }
 
@@ -2006,7 +2009,7 @@ when search filter type=term_template
       @query
       type?: Typedef;
     },
-    void
+    OkResponse<AtlasTypeDefHeader[]>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
