@@ -26,18 +26,30 @@ These are the global settings for the DesktopVirtualizationClient API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-09
+tag: package-preview-2023-10
 ```
 
 
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.DesktopVirtualization/preview/2023-10-04-preview/desktopvirtualization.json
+suppressions:
+  - code: ResourceNameRestriction
+    reason: HostPoolName, ApplicationGroupName, WorkspaceName, ScalingPlanName were already implemented in previous versions of the API and we cannot change naming pattern now.
+```
 ### Tag: package-2023-09
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-09'
+``` yaml $(tag) == 'package-2023-09'
 input-file:
   - Microsoft.DesktopVirtualization/stable/2023-09-05/desktopvirtualization.json
 ```
+
 ### Tag: package-preview-2023-07
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
@@ -50,6 +62,8 @@ suppressions:
   - code: ResourceNameRestriction
     reason: ScalingPlan was already implemented in previous versions of the API and
       we cannot change naming pattern now.
+  - code: PatchIdentityProperty
+    reason: There is an error loop with the identity property. We received approval to suppress this error, but we still need to investigate error loop.
 ```
 
 ### Tag: package-preview-2022-10
