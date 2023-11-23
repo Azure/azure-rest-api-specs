@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "2023-03-01",
+        "version": "2023-12-01",
         "title": "DataBoxManagementClient"
     },
     "host": "management.azure.com",
@@ -4069,7 +4069,16 @@
                         "PAR22",
                         "BN7",
                         "SN6",
-                        "BJS20"
+                        "BJS20",
+                        "BL24",
+                        "IDC5",
+                        "TYO23",
+                        "NTG20",
+                        "DXB23",
+                        "DSM11",
+                        "AMS25",
+                        "CPQ21",
+                        "OSA23"
                     ],
                     "type": "string",
                     "readOnly": true,
@@ -4253,6 +4262,33 @@
                             },
                             {
                                 "value": "BJS20"
+                            },
+                            {
+                                "value": "BL24"
+                            },
+                            {
+                                "value": "IDC5"
+                            },
+                            {
+                                "value": "TYO23"
+                            },
+                            {
+                                "value": "CPQ21"
+                            },
+                            {
+                                "value": "NTG20"
+                            },
+                            {
+                                "value": "DXB23"
+                            },
+                            {
+                                "value": "DSM11"
+                            },
+                            {
+                                "value": "OSA23"
+                            },
+                            {
+                                "value": "AMS25"
                             }
                         ]
                     }
@@ -5584,6 +5620,10 @@
                 "datacenterAddressRequest": {
                     "$ref": "#/definitions/DatacenterAddressRequest",
                     "description": "Request body to get the datacenter address for given sku."
+                },
+                "deviceCapabilityRequest": {
+                    "$ref": "#/definitions/DeviceCapabilityRequest",
+                    "description": "Request body to get the device capabilities for a given sku."
                 }
             }
         },
@@ -5604,6 +5644,11 @@
                 "datacenterAddressResponse": {
                     "$ref": "#/definitions/DatacenterAddressResponse",
                     "description": "Datacenter address for given sku in a region.",
+                    "readOnly": true
+                },
+                "deviceCapabilityResponse": {
+                    "$ref": "#/definitions/DeviceCapabilityResponse",
+                    "description": "Device capabilities available for a given sku in a region.",
                     "readOnly": true
                 }
             }
@@ -6625,6 +6670,87 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/TransportAvailabilityDetails"
+                    },
+                    "readOnly": true
+                }
+            }
+        },
+        "DeviceCapabilityDetails": {
+            "description": "Device capability details for a given sku for a given region.",
+            "type": "object",
+            "properties": {
+                "hardwareEncryption": {
+                    "description": "Hardware encryption support for a given sku for a given region.",
+                    "enum": [
+                        "Enabled",
+                        "Disabled"
+                    ],
+                    "type": "string",
+                    "readOnly": true,
+                    "x-ms-enum": {
+                        "name ": "HardwareEncryption",
+                        "modelAsExtensible": true,
+                        "values": [
+                            {
+                                "value": "Enabled",
+                                "description": "Hardware-based encryption is enabled."
+                            },
+                            {
+                                "value": "Disabled",
+                                "description": "Hardware-based encryption is disabled."
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "DeviceCapabilityRequest": {
+            "description": "Request body to get the device capabilities for given sku.",
+            "type": "object",
+            "properties": {
+                "skuName": {
+                    "description": "Type of the device.",
+                    "enum": [
+                        "DataBox",
+                        "DataBoxDisk",
+                        "DataBoxHeavy",
+                        "DataBoxCustomerDisk"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name ": "SkuName",
+                        "modelAsExtensible": true,
+                        "values": [
+                            {
+                                "value": "DataBox",
+                                "description": "Data Box."
+                            },
+                            {
+                                "value": "DataBoxDisk",
+                                "description": "Data Box Disk."
+                            },
+                            {
+                                "value": "DataBoxHeavy",
+                                "description": "Data Box Heavy."
+                            },
+                            {
+                                "value": "DataBoxCustomerDisk",
+                                "description": "Data Box Customer Disk."
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "DeviceCapabilityResponse": {
+            "description": "Device capabilities for given sku in a region",
+            "type": "object",
+            "properties": {
+                "deviceCapabilityDetails": {
+                    "description": "List of device capabilities available for a given region and a given sku",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DeviceCapabilityDetails"
                     },
                     "readOnly": true
                 }
