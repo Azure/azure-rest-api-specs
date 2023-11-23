@@ -229,6 +229,57 @@
           }
         }
       },
+      "patch": {
+        "operationId": "TestSuites_Update",
+        "description": "Update a TestSuites Resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestSuiteNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestSuitesResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestSuites"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "TestSuites"
+        ],
+        "x-ms-examples": {
+          "TestSuites_Update_MaximumSet_Gen": {
+            "$ref": "./examples/TestSuites_Update_MaximumSet_Gen.json"
+          },
+          "TestSuites_Update_MinimumSet_Gen": {
+            "$ref": "./examples/TestSuites_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
       "get": {
         "operationId": "TestSuites_Get",
         "summary": "Get a TestSuites",
@@ -579,6 +630,28 @@
         }
       ]
     },
+    "TestSuitesResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/TestSuitesProperties",
+          "description": "The updatable resource-specific properties for a TestSuite."
+        }
+      },
+      "description": "The Update model for a TestSuite Resource"
+    },
     "TestSuitesProperties": {
       "type": "object",
       "properties": {
@@ -673,6 +746,7 @@
           "items": {
             "$ref": "#/definitions/TestSuiteDefinitionReference"
           },
+          "x-ms-identifiers": [],
           "description": "An array of Test definition references."
         },
         "provisioningState": {
