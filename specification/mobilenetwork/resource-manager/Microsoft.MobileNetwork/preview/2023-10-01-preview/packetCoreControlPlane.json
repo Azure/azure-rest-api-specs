@@ -781,9 +781,9 @@
           "type": "object",
           "description": "Settings to allow interoperability with third party components e.g. RANs and UEs."
         },
-        "homeNetworkPrivateKeysProvisioningState": {
+        "homeNetworkPrivateKeysProvisioning": {
           "readOnly": true,
-          "$ref": "#/definitions/homeNetworkPrivateKeysProvisioningState",
+          "$ref": "#/definitions/homeNetworkPrivateKeysProvisioning",
           "description": "The provisioning state of the secret containing private keys and keyIds for SUPI concealment."
         }
       },
@@ -1218,17 +1218,15 @@
         }
       }
     },
-    "homeNetworkPrivateKeysProvisioningState": {
-      "description": "The provisioning state of the secret containing private keys and keyIds for SUPI concealment.",
+    "homeNetworkPrivateKeysProvisioning": {
       "type": "object",
       "properties": {
         "state": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state of the secret containing private keys and keyIds for SUPI concealment.",
+          "description": "The provisioning state of the private keys for SUPI concealment.",
           "enum": [
             "NotProvisioned",
-            "PartiallyProvisioned",
             "Provisioned",
             "Failed"
           ],
@@ -1238,27 +1236,18 @@
             "values": [
               {
                 "value": "NotProvisioned",
-                "description": "The secrets have not been provisioned. The \"reason\" property explains why."
-              },
-              {
-                "value": "PartiallyProvisioned",
-                "description": "Not all secrets have been provisioned. The \"reason\" property explains why."
+                "description": "Provisioning of the private keys for SUPI concealment has not been attempted."
               },
               {
                 "value": "Provisioned",
-                "description": "All secrets have been provisioned."
+                "description": "The private keys for SUPI concealment are successfully provisioned."
               },
               {
                 "value": "Failed",
-                "description": "The secrets failed to be provisioned. The \"reason\" property explains why."
+                "description": "Provisioning of the private keys for SUPI concealment has failed."
               }
             ]
           }
-        },
-        "reason": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Reason(s) for the current provisioning state of the Home Network Private Keys."
         }
       },
       "required": [

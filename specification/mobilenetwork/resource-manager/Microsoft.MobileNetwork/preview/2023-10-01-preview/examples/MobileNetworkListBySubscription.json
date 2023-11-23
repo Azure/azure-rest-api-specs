@@ -29,13 +29,24 @@
               },
               "publicLandMobileNetworkIdentifiers": [
                 {
-                  "homeNetworkPublicKeys": [
-                    {
-                      "keyId": 1,
-                      "keyProfile": "B",
-                      "keySecretUrl": "https://contosovault.vault.azure.net/secrets/exampleHnpk"
-                    }
-                  ],
+                  "homeNetworkPublicKeys": {
+                    "profileA": [
+                      {
+                        "Id": 1,
+                        "Url": "https://contosovault.vault.azure.net/secrets/exampleHnpk"
+                      },
+                      {
+                        "Id": 2,
+                        "Url": "https://contosovault.vault.azure.net/secrets/exampleHnpk2/5e4876e9140e4e16bfe6e2cf92e0cbd2"
+                      }
+                    ],
+                    "profileB": [
+                      {
+                        "Id": 1,
+                        "Url": "https://contosovault.vault.azure.net/secrets/exampleHnpkProfileB"
+                      }
+                    ]
+                  },
                   "mcc": "001",
                   "mnc": "01"
                 }
