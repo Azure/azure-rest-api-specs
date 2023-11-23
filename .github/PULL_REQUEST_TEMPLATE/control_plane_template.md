@@ -6,6 +6,36 @@ Please understand this diagram before proceeding. It explains how to get your PR
 
 ![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/029a11fd-eaf9-4865-9d77-a16b5ea5eb26)
 
+<details>
+<summary> Click here to see the details of Step 1 </summary>
+
+### Breaking changes review (Diagram Step 1)
+
+If the automation determines you have breaking changes, i.e. Step 1 from the diagram applies to you,
+  you must follow the [breaking changes process].  
+  **IMPORTANT** This applies even if:
+- The tool fails while it shouldn't, e.g. due to runtime exception, or incorrect detection of breaking changes.
+- You believe there is no need for you to request breaking change approval, for any reason. 
+    Such claims must be reviewed, and the process is the same.
+
+</details>
+
+<details> 
+<summary> Click here to see the details of Step 2 </summary>
+
+### ARM API changes review (Diagram Step 2)
+
+- If this PR is in purview of ARM review then automation will add the `ARMReview` label.
+- If you want to force ARM review, add the label yourself.
+- Proceed according to the diagram at the top of this comment.
+
+</details>
+
+<details>
+<summary> Click here to see the diagram footnotes</summary>
+
+### Diagram footnotes
+
 [1] [ARM review queue] (for **merge** queues, see [4])  
 The PRs are processed by time opened, ascending. Your PR may show up on 2nd or later page. 
 If you addressed Step 1 from the diagram and your PR is not showing up in the queue, ensure the label `ARMChangesRequested` 
@@ -15,6 +45,8 @@ is removed from your PR. This should cause the label `WaitForARMFeedback` to be 
 [4] [public repo merge queue], [private repo merge queue] (for **ARM review** queue, [1])
 
 If you need further help with anything, see `Getting help` section below.
+
+</details>
 
 ## Purpose of this PR
 
@@ -35,39 +67,33 @@ and followed the instructions by checking all the boxes:
 - [ ] I have reviewed following [Resource Provider guidelines](https://aka.ms/rpguidelines), including
   [ARM resource provider contract](https://github.com/Azure/azure-resource-manager-rpc) and
   [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) (estimated time: 4 hours).  
-  I understand this is required before I can proceed to Step 2, "ARM Review", for this PR.
+  I understand this is required before I can proceed to the Diagram Step 2, "ARM API changes Review", for this PR.
 
-### Breaking changes review (Step 1)
+## Additional information
 
-- If the automation determines you have breaking changes, i.e. Step 1 from the diagram applies to you,
-  you must follow the [breaking changes process].  
-  **IMPORTANT** This applies even if:
-  - The tool fails while it shouldn't, e.g. due to runtime exception, or incorrect detection of breaking changes.
-  - You believe there is no need for you to request breaking change approval, for any reason. 
-    Such claims must be reviewed, and the process is the same.
-
-### ARM API changes review (Step 2)
-
-- If this PR is in purview of ARM review then automation will add the `ARMReview` label.
-- If you want to force ARM review, add the label yourself.
-- Proceed according to the diagram at the top of this comment.
-
-## Viewing API changes
+<details>
+<summary> Viewing API changes</summary>
 
 For convenient view of the API changes made by this PR, refer to the URLs provided in the table 
 in the `Generated ApiView` comment added to this PR. You can use ApiView to show API versions diff. 
 
-## Suppressing failures
+</details>
+<details>
+<summary>Suppressing failures</summary>
 
 If one or multiple validation error/warning suppression(s) is detected in your PR, please follow the 
 [Swagger-Suppression-Process](https://aka.ms/azsdk/pr-suppressions) 
 to get approval.
+
+</details>
 
 ## Getting help
 
 - For general PR approval workflow, see the diagram at the top of this comment.
 - For guidance on fixing this PR CI check failures, see the hyperlinks provided in given failure 
   and https://aka.ms/ci-fix.
+- If the PR CI checks appear to be stuck in `queued` state, please add a comment with contents `/azp run`.
+This should result in a new comment denoting a `PR validation pipeline` has started and the checks should be updated after few minutes.
 - If the help provided by the previous points is not enough, post to https://aka.ms/azsdk/support/specreview-channel and link to this PR.
 
 [ARM review queue]: https://github.com/search?q=org%3AAzure+is%3Apr+is%3Aopen+label%3AWaitForARMFeedback+-label%3AIDCDevDiv++draft%3Afalse+sort%3Acreated-asc+&type=pullrequests
