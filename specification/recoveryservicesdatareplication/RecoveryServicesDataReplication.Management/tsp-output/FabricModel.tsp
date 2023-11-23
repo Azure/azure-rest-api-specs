@@ -1,0 +1,73 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Microsoft.DataReplication;
+@doc("Fabric model.")
+model FabricModel is TrackedResource<FabricModelProperties> {
+  @doc("The fabric name.")
+  @pattern("^[a-zA-Z0-9]*$")
+  @path
+  @key("fabricName")
+  @segment("replicationFabrics")
+  name: string;
+}
+
+@armResourceOperations
+interface FabricModels {
+  @doc("Gets the details of the fabric.")
+  get is ArmResourceRead<FabricModel>;
+  @doc("Creates the fabric.")
+  create is ArmResourceCreateOrUpdateAsync<FabricModel>;
+  @doc("Performs update on the fabric.")
+  update is ArmResourcePatchAsync<FabricModel, FabricModelProperties>;
+  @doc("Removes the fabric.")
+  delete is ArmResourceDeleteWithoutOkAsync<FabricModel>;
+  @doc("Gets the list of fabrics in the given subscription and resource group.")
+  list is ArmResourceListByParent<
+    FabricModel,
+    {
+      ...BaseParameters<FabricModel>;
+
+      @doc("Continuation token from the previous call.")
+      @query("continuationToken")
+      continuationToken?: string;
+    }
+  >;
+  @doc("Gets the list of fabrics in the given subscription.")
+  listBySubscription is ArmListBySubscription<FabricModel>;
+  @summary("Gets the fabric operation status.")
+  @doc("Tracks the results of an asynchronous operation on the fabric.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}/operations/{operationId}")
+  @get
+  Get is Azure.Core.Foundations.Operation<
+    {
+      @doc("The ID of the target subscription. The value must be an UUID.")
+      @path
+      subscriptionId: string;
+
+      @doc("The name of the resource group. The name is case insensitive.")
+      @maxLength(90)
+      @minLength(1)
+      @path
+      resourceGroupName: string;
+
+      @doc("The fabric name.")
+      @pattern("^[a-zA-Z0-9]*$")
+      @path
+      fabricName: string;
+
+      @doc("The ID of an ongoing async operation.")
+      @minLength(1)
+      @path
+      operationId: string;
+    },
+    OperationStatus
+  >;
+}
