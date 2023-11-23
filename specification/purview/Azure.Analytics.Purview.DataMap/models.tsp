@@ -179,7 +179,7 @@ enum RelationshipCategory {
 }
 
 @doc("Type")
-enum Type {
+enum Typedef {
   @doc("enum")
   `enum`,
   @doc("entity")

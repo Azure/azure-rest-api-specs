@@ -1725,43 +1725,7 @@ be created.
   >;
 }
 
-// @doc("Guid")
-// @resource("guid")
-// model Guid {
-//   @key("guid")
-//   @visibility("read")
-//   @doc("guid")
-//   guid: string;
-// }
-
-// @doc("Name")
-// @resource("name")
-// model Name {
-//   @key("name")
-//   @visibility("read")
-//   @doc("name")
-//   name: string;
-// }
-
-
-
-// alias ReadByNameOperations = Azure.Core.ResourceOperations<Name>;
-// alias ReadByGuidOperations = Azure.Core.ResourceOperations<Guid, TermTemplateDef>;
-// interface Test{
-//   @doc("Get the term template definition for the given GUID.")
-//   @route("/test/termtemplatedef/guid/{guid}")
-//   @get
-//   get_TermTemplateDefByGuid is DataMapBaseOperation<
-//   {
-//     @doc("Ddd")
-//     @path
-//     guid: string;
-//   },
-//   TermTemplateDef
-//   >;
-// }
-
-interface TypeDef{
+interface `Type`{
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the businessMetadata definition for the given guid.")
   @route("/atlas/v2/types/businessmetadatadef/guid/{guid}")
@@ -1973,7 +1937,7 @@ when search filter type=term_template
 
       @doc("Typedef name as search filter when get typedefs.")
       @query
-      type: Type;
+      type: Typedef;
     },
     AtlasTypesDef
   >;
@@ -2040,7 +2004,7 @@ when search filter type=term_template
 
       @doc("Typedef name as search filter when get typedefs.")
       @query
-      type: Type;
+      type: Typedef;
     },
     void
   >;
