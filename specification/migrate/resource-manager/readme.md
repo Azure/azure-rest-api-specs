@@ -29,6 +29,16 @@ These settings apply only when `--tag=package-2023-06` is specified on the comma
 input-file:
   - Microsoft.OffAzure/stable/2023-06-06/migrate.json
 ```
+
+### Tag: package-migrate-2023-03
+
+These settings apply only when `--tag=package-migrate-2023-03` is specified on the command line.
+
+```yaml $(tag) == 'package-migrate-2023-03'
+input-file:
+  - Microsoft.Migrate/AssessmentProjects/stable/2023-03-15/migrate.json
+```
+
 ### Tag: package-migrate-2018-02 and java
 
 These settings apply only when `--tag=package-migrate-2018-02 --java` is specified on the command line.
@@ -153,7 +163,16 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-migrate-2019-10
+tag: package-migrate-2023-03
+```
+
+### Tag: package-migrate-2023-03
+
+These settings apply only when `--tag=package-migrate-2023-03` is specified on the command line.
+
+```yaml $(tag) == 'package-migrate-2023-03'
+input-file:
+  - Microsoft.Migrate/AssessmentProjects/stable/2023-03-15/migrate.json
 ```
 
 ### Tag: package-migrate-2018-02
