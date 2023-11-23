@@ -431,19 +431,20 @@
       "post": {
         "operationId": "Entity_ImportBusinessMetadata",
         "description": "Upload the file for creating Business Metadata in BULK",
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "uploadedInputStream",
-            "in": "body",
+            "in": "formData",
             "description": "InputStream of file",
             "required": true,
-            "schema": {
-              "type": "string",
-              "format": "byte"
-            }
+            "type": "string",
+            "format": "byte"
           }
         ],
         "responses": {

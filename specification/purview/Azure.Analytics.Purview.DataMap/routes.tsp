@@ -19,13 +19,6 @@ model ApiVersionParameter {
   apiVersion: string;
 }
 
-model OkResponse<T> {
-  @statusCode
-  status: 200;
-  @body
-  data: T;
-}
-
 @doc("The path for name.")
 @resource("name")
 model NameInPath {
@@ -33,6 +26,13 @@ model NameInPath {
   @visibility("read")
   @doc("name")
   name: string;
+}
+
+model OkResponse<T> {
+  @statusCode
+  status: 200;
+  @body
+  data: T;
 }
 
 @doc("Operation for DataMap service")
@@ -48,8 +48,20 @@ op DataMapBaseOperation<
   >,
   ...TParams,
 ): TResponse | TErrorResponse;
- 
-alias DataMapResourceOperations = Azure.Core.ResourceOperations<NoClientRequestId & NoConditionalRequests & NoRepeatableRequests, ErrorResponse>;
+
+
+op DataMapImportOperation<
+  TParams extends TypeSpec.Reflection.Model,
+  TResponse extends TypeSpec.Reflection.Model,
+  Traits extends TypeSpec.Reflection.Model = {}, 
+  TraitContexts extends TraitContext = TraitContext.Undefined
+> is DataMapBaseOperation<
+TParams & TraitProperties<Traits, TraitLocation.ApiVersionParameter>,
+TResponse & TraitProperties<Traits, TraitLocation.Response, TraitContexts>,
+Traits           
+>;
+
+//alias DataMapResourceOperations = Azure.Core.ResourceOperations<NoClientRequestId & NoConditionalRequests & NoRepeatableRequests, ErrorResponse>;
 
 interface Entity {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -684,15 +696,18 @@ default is false.
     @body template: bytes;
   }>;
 
+  #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Upload the file for creating Business Metadata in BULK")
   @route("/atlas/v2/entity/businessmetadata/import")
   @post
-  importBusinessMetadata is DataMapBaseOperation<
+  importBusinessMetadata is DataMapImportOperation<
     {
       @doc("InputStream of file")
-      @body
       uploadedInputStream: bytes;
+      @doc("The content type for the operation. Always multipart/form-data for this operation.")
+      @header("content-type")
+      contentType: "multipart/form-data";
     },
     BulkImportResponse
   >;
