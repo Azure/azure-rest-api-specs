@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
+    "clusterName": "kustoCluster",
+    "databaseName": "database",
+    "api-version": "2023-08-15",
+    "parameters": {
+      "inviteeEmail": "invitee@contoso.com",
+      "tableLevelSharingProperties": {
+        "tablesToInclude": [
+          "Table1"
+        ],
+        "tablesToExclude": [
+          "Table2"
+        ],
+        "externalTablesToInclude": [
+          "ExternalTable*"
+        ],
+        "externalTablesToExclude": [],
+        "materializedViewsToInclude": [
+          "MaterializedViewTable1"
+        ],
+        "materializedViewsToExclude": [
+          "MaterializedViewTable2"
+        ],
+        "functionsToInclude": [
+          "functionsToInclude1"
+        ],
+        "functionsToExclude": [
+          "functionsToExclude2"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "generatedInvitation": "eyJ0eXAiOiJKVInvitationToken"
+      }
+    }
+  }
+}

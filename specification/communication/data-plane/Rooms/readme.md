@@ -26,9 +26,9 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-rooms-2023-06-14
+tag: package-rooms-2023-10-30-preview
 input-file:
-  - stable/2023-06-14/communicationservicesrooms.json
+  - preview/2023-10-30-preview/communicationservicesrooms.json
 ```
 
 ### Tag: package-rooms-2023-10-30-preview

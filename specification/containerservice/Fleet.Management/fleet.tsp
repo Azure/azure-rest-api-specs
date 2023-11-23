@@ -13,7 +13,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.Core.Traits;
-using OpenAPI;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
 
@@ -48,7 +48,9 @@ model FleetProperties {
   @doc("The status of the last operation.")
   provisioningState?: FleetProvisioningState;
 
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "https://github.com/Azure/typespec-azure/issues/3558"
   @doc("The FleetHubProfile configures the Fleet's hub.")
+  @removed(Versions.v2023_10_15)
   hubProfile?: FleetHubProfile;
 }
 
@@ -78,6 +80,11 @@ model FleetHubProfile {
   @visibility("read")
   @doc("The Kubernetes version of the Fleet hub.")
   kubernetesVersion?: string;
+
+  @added(Versions.v2023_08_15_preview)
+  @visibility("read")
+  @doc("The Azure Portal FQDN of the Fleet hub.")
+  portalFqdn?: string;
 }
 
 scalar SubnetResourceId
@@ -108,6 +115,11 @@ model AgentProfile {
   @visibility("read", "create")
   @doc("The ID of the subnet which the Fleet hub node will join on startup. If this is not specified, a vnet and subnet will be generated and used.")
   subnetId?: SubnetResourceId;
+
+  @added(Versions.v2023_08_15_preview)
+  @doc("The virtual machine size of the Fleet hub.")
+  @visibility("read", "create")
+  vmSize?: string;
 }
 
 @lroStatus
