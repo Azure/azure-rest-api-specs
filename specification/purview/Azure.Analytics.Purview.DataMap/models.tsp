@@ -26,7 +26,7 @@ enum Status {
 
 @doc("Status for term assignment")
 enum AtlasTermAssignmentStatus {
-  @doc("The status is discorverred.")
+  @doc("The status is discovered.")
   DISCOVERED,
   @doc("The status is proposed.")
   PROPOSED,
@@ -754,7 +754,7 @@ model PurviewObjectId {
   @doc("Item path")
   itemPath?: string;
 
-  @doc("Resouce Id")
+  @doc("Resource Id")
   resourceId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Recode<unknown> to model Map<String,Object>"
@@ -941,7 +941,7 @@ model SearchFacetResultValue {
   @doc("Asset type")
   assetType?: SearchFacetItemValue[];
 
-  @doc("Classiciation")
+  @doc("Classification")
   classification?: SearchFacetItemValue[];
 
   @doc("Term")
@@ -1076,7 +1076,7 @@ model SearchHighlights {
   @doc("Name")
   name?: string[];
 
-  @doc("Descirption")
+  @doc("Description")
   description?: string[];
 
   @doc("Entity type")
