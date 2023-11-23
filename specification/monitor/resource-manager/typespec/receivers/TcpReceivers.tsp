@@ -8,6 +8,7 @@ namespace Microsoft.Monitor;
 
 @doc("Base receiver using TCP as transport protocol.")
 model TcpReceiver {
-  @doc("TCP port to listen for packages.")
-  port: int32;
+  @doc("TCP endpoint definition. Example: 0.0.0.0:<port>.")
+  @pattern("^[a-zA-Z0-9-\\.]+:[0-9]+$")
+  endpoint: string;
 }
