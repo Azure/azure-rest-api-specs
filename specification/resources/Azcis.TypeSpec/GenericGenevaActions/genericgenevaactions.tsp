@@ -53,7 +53,7 @@ model GenericGenevaActionsResource
 }
 
 @doc("GenericGenevaActions Resource Parameter")
-model Parameter { // this can be TrackedResource based on resourcetype
+model Parameter {
   @doc("Parameter name.")
   name: string;
 
