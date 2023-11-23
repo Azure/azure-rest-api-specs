@@ -3,11 +3,14 @@
     "subscriptionId": "YourSubscriptionId",
     "resourceGroupName": "YourResourceGroupName",
     "location": "westus",
-    "api-version": "2023-03-01",
+    "api-version": "2023-12-01",
     "regionConfigurationRequest": {
       "scheduleAvailabilityRequest": {
         "storageLocation": "westus",
         "skuName": "DataBox"
+      },
+      "deviceCapabilityRequest": {
+        "skuName": "Disk"
       }
     }
   },
@@ -37,6 +40,13 @@
             "2019-07-29T00:00:00+00:00",
             "2019-07-30T00:00:00+00:00",
             "2019-07-31T00:00:00+00:00"
+          ]
+        },
+        "deviceCapabilityResponse": {
+          "deviceCapabilityDetails": [
+            {
+                "hardwareEncryption": "Enabled"
+            }
           ]
         }
       }
