@@ -22,7 +22,9 @@ interface MongoClustersOperations {
       @path
       location: string;
 
-      ...CheckNameAvailabilityRequest;
+      @doc("The required parameters for checking if resource name is available.")
+      @body
+      parameters: CheckNameAvailabilityRequest;
     },
     CheckNameAvailabilityResponse
   >;
