@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Hybrid Connectivity Management API",
+    "title": "Public Cloud Asset Management API",
     "version": "2023-12-01-preview",
     "description": "REST API for public clouds.",
     "x-typespec-generated": [
@@ -151,109 +151,29 @@
         "connectorId"
       ]
     },
+    "SolutionSettings": {
+      "type": "object",
+      "description": "Solution settings",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "SolutionTypeProperties": {
       "type": "object",
-      "description": "The properties of Solution Configuration",
+      "description": "The properties of Solution Type",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/provisioningState",
-          "description": "The resource provisioning state",
-          "readOnly": true
-        },
         "solutionType": {
           "type": "string",
           "description": "The type of the solution"
         },
         "solutionSettings": {
-          "type": "string",
+          "$ref": "#/definitions/SolutionSettings",
           "description": "Solution settings"
-        },
-        "status": {
-          "$ref": "#/definitions/solutionConfigurationStatus",
-          "description": "The status of solution configurations",
-          "readOnly": true
-        },
-        "statusDetails": {
-          "type": "string",
-          "description": "The detailed message of status details",
-          "readOnly": true
-        },
-        "lastExecutionTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last execution time of solution configuration.",
-          "readOnly": true
         }
       },
       "required": [
         "solutionType"
       ]
-    },
-    "provisioningState": {
-      "type": "string",
-      "description": "Provisioning State enums.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "provisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Succeeded enum"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Failed enum"
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Canceled enum"
-          }
-        ]
-      }
-    },
-    "solutionConfigurationStatus": {
-      "type": "string",
-      "description": "Solution Configuration Status enums.",
-      "enum": [
-        "New",
-        "InProgress",
-        "Completed",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "solutionConfigurationStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "New",
-            "value": "New",
-            "description": "New enum"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "InProgress enum"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "Completed enum"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Failed enum"
-          }
-        ]
-      }
     }
   },
   "parameters": {}

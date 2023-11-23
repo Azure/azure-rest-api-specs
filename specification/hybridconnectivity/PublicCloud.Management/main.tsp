@@ -14,7 +14,7 @@ using TypeSpec.OpenAPI;
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @armProviderNamespace
 @service({
-  title: "Hybrid Connectivity Management API",
+  title: "Public Cloud Asset Management API",
   version: "2023-12-01-preview",
 })
 @doc("REST API for public clouds.")
@@ -23,57 +23,17 @@ namespace Microsoft.HybridConnectivity;
 
 //---------------------------------------------- Models ----------------------------------------------
 
-@doc("The properties of Solution Configuration")
+@doc("The properties of Solution Type")
 model SolutionTypeProperties {
-  @doc("The resource provisioning state")
-  @visibility("read")
-  provisioningState?: provisioningState;
-
   @doc("The type of the solution")
   solutionType: string;
 
   @doc("Solution settings")
-  solutionSettings?: string;
-
-  @doc("The status of solution configurations")
-  @visibility("read")
-  status?: solutionConfigurationStatus;
-
-  @doc("The detailed message of status details")
-  @visibility("read")
-  statusDetails?: string;
-
-  @doc("The last execution time of solution configuration.")
-  @visibility("read")
-  lastExecutionTime?: utcDateTime;
+  solutionSettings?: SolutionSettings;
 }
 
-@doc("Solution Configuration Status enums.")
-enum solutionConfigurationStatus {
-  @doc("New enum")
-  New,
-
-  @doc("InProgress enum")
-  InProgress,
-
-  @doc("Completed enum")
-  Completed,
-
-  @doc("Failed enum")
-  Failed,
-}
-
-@doc("Provisioning State enums.")
-enum provisioningState {
-  @doc("Succeeded enum")
-  Succeeded,
-
-  @doc("Failed enum")
-  Failed,
-
-  @doc("Canceled enum")
-  Canceled,
-}
+@doc("Solution settings")
+model SolutionSettings is Record<string>;
 
 @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
 model GenerateAwsTemplateRequest {
