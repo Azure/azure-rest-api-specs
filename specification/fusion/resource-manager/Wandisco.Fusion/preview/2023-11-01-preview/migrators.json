@@ -3,7 +3,7 @@
   "info": {
     "title": "WANDisco Fusion",
     "description": "WANDisco Fusion",
-    "version": "2023-02-01-preview"
+    "version": "2023-11-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -676,12 +676,24 @@
               "$ref": "#/definitions/LiveDataMigrationStatusResponse"
             }
           },
+          "202": {
+            "description": "Starting LiveDataMigration",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Start Migration": {
@@ -721,12 +733,24 @@
               "$ref": "#/definitions/LiveDataMigrationStatusResponse"
             }
           },
+          "202": {
+            "description": "Stopping LiveDataMigration",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Stop Migration": {
@@ -2460,12 +2484,24 @@
               "$ref": "#/definitions/MetadataMigrationStatusResponse"
             }
           },
+          "202": {
+            "description": "Starting MetadataMigration",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Start Metadata Migration": {
@@ -2505,12 +2541,24 @@
               "$ref": "#/definitions/MetadataMigrationStatusResponse"
             }
           },
+          "202": {
+            "description": "Stopping MetadataMigration",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Stop Metadata Migration": {
@@ -3075,6 +3123,31 @@
       ],
       "x-ms-discriminator-value": "PatternExclusion"
     },
+    "LDMAgeExclusion": {
+      "description": "Live Data Migrator Exclusion based on age",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LDMExclusionDetail"
+        }
+      ],
+      "properties": {
+        "timeValue": {
+          "description": "Modification time value. Exclude any file with a modification time later than timeValue * timeUnit, relative to the migration start",
+          "type": "integer",
+          "format": "int64"
+        },
+        "timeUnit": {
+          "description": "Modification time unit. Exclude any file with a modification time later than timeValue * timeUnit, relative to the migration start",
+          "$ref": "#/definitions/TimeUnit"
+        }
+      },
+      "required": [
+        "timeValue",
+        "timeUnit"
+      ],
+      "x-ms-discriminator-value": "AgeExclusion"
+    },
     "ExclusionRepresentation": {
       "description": "Exclusion Representation",
       "type": "object",
@@ -3105,7 +3178,8 @@
       "enum": [
         "DateExclusion",
         "FileSizeExclusion",
-        "PatternExclusion"
+        "PatternExclusion",
+        "AgeExclusion"
       ],
       "x-ms-enum": {
         "name": "ExclusionKind",
@@ -3119,6 +3193,9 @@
           },
           {
             "value": "PatternExclusion"
+          },
+          {
+            "value": "AgeExclusion"
           }
         ]
       }
@@ -3142,6 +3219,31 @@
         "dateForExclusion"
       ],
       "x-ms-discriminator-value": "DateExclusion"
+    },
+    "AgeExclusion": {
+      "description": "Migration Exclusion based on Age",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExclusionRepresentation"
+        }
+      ],
+      "properties": {
+        "timeValue": {
+          "description": "Modification time value. Exclude any file with a modification time later than timeValue * timeUnit, relative to the migration start",
+          "type": "integer",
+          "format": "int64"
+        },
+        "timeUnit": {
+          "description": "Modification time unit. Exclude any file with a modification time later than timeValue * timeUnit, relative to the migration start",
+          "$ref": "#/definitions/TimeUnit"
+        }
+      },
+      "required": [
+        "timeValue",
+        "timeUnit"
+      ],
+      "x-ms-discriminator-value": "AgeExclusion"
     },
     "FileSizeExclusion": {
       "description": "Exclusion based on File Size",
@@ -3181,6 +3283,30 @@
         "patternForExclusion"
       ],
       "x-ms-discriminator-value": "PatternExclusion"
+    },
+    "TimeUnit": {
+      "description": "Time unit",
+      "type": "string",
+      "enum": [
+        "Minutes",
+        "Hours",
+        "Days"
+      ],
+      "x-ms-enum": {
+        "name": "TimeUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Minutes"
+          },
+          {
+            "value": "Hours"
+          },
+          {
+            "value": "Days"
+          }
+        ]
+      }
     },
     "Migrator": {
       "description": "Migrator Resource",
@@ -4033,12 +4159,43 @@
           "type": "integer",
           "format": "int32",
           "readOnly": true
+        },
+        "databricksTargetProperties": {
+          "description": "databricks target properties",
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/MetadataMigrationDatabricksTargetProperties"
         }
       },
       "required": [
         "dbNamePattern",
         "tableNamePattern"
       ]
+    },
+    "MetadataMigrationDatabricksTargetProperties": {
+      "description": "Metadata migration common databricks target properties",
+      "type": "object",
+      "properties": {
+        "fsMountPoint": {
+          "description": "Mount point for the ADLS/S3/GCS location within dbfs filesystem.",
+          "type": "string"
+        },
+        "convertToDeltaLake": {
+          "description": "Convert table to USING DELTA format and data to Delta Lake format.",
+          "type": "boolean"
+        },
+        "deleteAfterConversion": {
+          "description": "Delete staging data after conversion.",
+          "type": "boolean"
+        },
+        "catalog": {
+          "description": "Unity Catalog name (optional).",
+          "type": "string"
+        },
+        "defaultFsOverride": {
+          "description": "Default file system override.",
+          "type": "string"
+        }
+      }
     },
     "MetadataMigrationStatusResponse": {
       "description": "Running state of the migration",
