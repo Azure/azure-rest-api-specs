@@ -3125,7 +3125,7 @@
         "description": "Get lineage info of the entity specified by GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/DataMapApiVersionParameter"
           },
           {
             "name": "guid",
@@ -4288,7 +4288,7 @@
         "description": "Move existing entities to the target collection.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/DataMapApiVersionParameter"
           },
           {
             "name": "collectionId",
@@ -4334,7 +4334,7 @@
         "description": "Return immediate next page lineage info about entity with pagination",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/DataMapApiVersionParameter"
           },
           {
             "name": "guid",
@@ -4420,7 +4420,7 @@
         "description": "Get auto complete options.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/DataMapApiVersionParameter"
           },
           {
             "name": "autoCompleteRequest",
@@ -4459,7 +4459,7 @@
         "description": "Get data using search.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/DataMapApiVersionParameter"
           },
           {
             "name": "searchRequest",
@@ -4558,7 +4558,7 @@
         "description": "Get search suggestions by query criteria.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/DataMapApiVersionParameter"
           },
           {
             "name": "suggestRequest",
@@ -4597,7 +4597,7 @@
         "description": "Get the term template definition for the given GUID.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/DataMapApiVersionParameter"
           },
           {
             "name": "guid",
@@ -4634,7 +4634,7 @@
         "description": "Get the term template definition by its name (unique).",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/DataMapApiVersionParameter"
           },
           {
             "name": "name",
@@ -9241,13 +9241,23 @@
       "name": "api-version",
       "in": "query",
       "description": "The API version to use for this operation.",
-      "required": true,
+      "required": false,
       "type": "string",
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
     "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "DataMapApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "description": "The API version to use for this operation.",
