@@ -37,20 +37,6 @@ suppressions:
     reason: eTag should be an allowed format
 directive:
   - suppress: INVALID_TYPE
-
-  - suppress: OAV131 # DISCRIMINATOR_NOT_REQUIRED
-    where:
-    - $.definitions.DistributionModeCreateOrUpdate
-    - $.definitions.JobMatchingModeCreateOrUpdate
-    - $.definitions.RouterRuleCreateOrUpdate
-    reason: TypeSpec generates optional discriminators (Azure/typespec-azure#3833)
-
-  - suppress: OAV132 # INVALID_DISCRIMINATOR_TYPE
-    where:
-    - $.definitions.DistributionModeCreateOrUpdate
-    - $.definitions.JobMatchingModeCreateOrUpdate
-    - $.definitions.RouterRuleCreateOrUpdate
-    reason: False positive if discriminator is optional $ref (Azure/oav#1018)
 ```
 
 ### Tag: package-jobrouter-2023-11-01
