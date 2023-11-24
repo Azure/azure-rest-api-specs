@@ -6,6 +6,34 @@ using TypeSpec.Http;
 
 namespace PurviewDataMap;
 
+@doc("Search filter operator")
+enum SearchFilterOperator {
+  @doc("eq")
+  eq,
+  @doc("ne")
+  ne,
+  @doc("gt")
+  gt,
+  @doc("lt")
+  lt,
+  @doc("ge")
+  ge,
+  @doc("le")
+  le,
+  @doc("contains")
+  contains,
+  @doc("contains_char")
+  contains_char,
+  @doc("startswith")
+  startswith,
+  @doc("prefix")
+  prefix,
+  @doc("timerange")
+  timerange,
+  @doc("exists")
+  exists;
+}
+
 @doc("Enum for business attribute update behavior")
 enum BusinessAttributeUpdateBehavior {
   @doc("Ignore the business attribute payload for update.")
@@ -1955,7 +1983,7 @@ model AttributeFilter extends SearchFilter {
   @doc("Attribute name")
   attributeName: string;
   @doc("Operator")
-  operator: string;
+  operator: SearchFilterOperator;
   
   @doc("Attribute value")
   attributeValue: string;

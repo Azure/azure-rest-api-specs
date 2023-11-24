@@ -2060,7 +2060,7 @@
     "/atlas/v2/glossary/{glossaryGuid}/detailed": {
       "get": {
         "operationId": "Glossary_GetDetailed",
-        "description": "Get a specific glossary with detailed information. This API is not\nrecommend.\n\nRecommend to fetch terms/categories details separately using \n\n\n'GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms' and \n\n 'GET\n'/datamap/api/atlas/v2/glossary/{glossaryGuid}/categories'.",
+        "description": "Get a specific glossary with detailed information. This API is not\nrecommend.\n\nRecommend to fetch terms/categories details separately using \n\nGET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms and \n\nGET /datamap/api/atlas/v2/glossary/{glossaryGuid}/categories.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -7227,7 +7227,7 @@
           "description": "Attribute name"
         },
         "operator": {
-          "type": "string",
+          "$ref": "#/definitions/SearchFilterOperator",
           "description": "Operator"
         },
         "attributeValue": {
@@ -8441,6 +8441,90 @@
       "required": [
         "kind"
       ]
+    },
+    "SearchFilterOperator": {
+      "type": "string",
+      "description": "Search filter operator",
+      "enum": [
+        "eq",
+        "ne",
+        "gt",
+        "lt",
+        "ge",
+        "le",
+        "contains",
+        "contains_char",
+        "startswith",
+        "prefix",
+        "timerange",
+        "exists"
+      ],
+      "x-ms-enum": {
+        "name": "SearchFilterOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "eq",
+            "value": "eq",
+            "description": "eq"
+          },
+          {
+            "name": "ne",
+            "value": "ne",
+            "description": "ne"
+          },
+          {
+            "name": "gt",
+            "value": "gt",
+            "description": "gt"
+          },
+          {
+            "name": "lt",
+            "value": "lt",
+            "description": "lt"
+          },
+          {
+            "name": "ge",
+            "value": "ge",
+            "description": "ge"
+          },
+          {
+            "name": "le",
+            "value": "le",
+            "description": "le"
+          },
+          {
+            "name": "contains",
+            "value": "contains",
+            "description": "contains"
+          },
+          {
+            "name": "contains_char",
+            "value": "contains_char",
+            "description": "contains_char"
+          },
+          {
+            "name": "startswith",
+            "value": "startswith",
+            "description": "startswith"
+          },
+          {
+            "name": "prefix",
+            "value": "prefix",
+            "description": "prefix"
+          },
+          {
+            "name": "timerange",
+            "value": "timerange",
+            "description": "timerange"
+          },
+          {
+            "name": "exists",
+            "value": "exists",
+            "description": "exists"
+          }
+        ]
+      }
     },
     "SearchHighlights": {
       "type": "object",

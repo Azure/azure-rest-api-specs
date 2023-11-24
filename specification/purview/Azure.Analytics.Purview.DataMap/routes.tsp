@@ -72,19 +72,23 @@ op DataMapBaseOperation<
   ...TParams,
 ): TResponse | TErrorResponse;
 
-
 op AtlasImportOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model,
   Traits extends TypeSpec.Reflection.Model = {}, 
   TraitContexts extends TraitContext = TraitContext.Undefined
 > is AtlasBaseOperation<
-TParams,
+TParams & TraitProperties<Traits, TraitLocation.Parameters, TraitContext.Action>,
 TResponse & TraitProperties<Traits, TraitLocation.Response, TraitContexts>,
 Traits           
 >;
 
 //alias DataMapResourceOperations = Azure.Core.ResourceOperations<NoClientRequestId & NoConditionalRequests & NoRepeatableRequests, ErrorResponse>;
+alias MultipartFormDataRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTrait<{
+  @doc("The content type for the operation. Always multipart/form-data for this operation.")
+  @header("content-type")
+  contentType: "multipart/form-data";
+}>;
 
 interface Entity {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -725,14 +729,14 @@ default is false.
   @route("/atlas/v2/entity/businessmetadata/import")
   @post
   importBusinessMetadata is AtlasImportOperation<
-    {
-      @doc("InputStream of file")
-      uploadedInputStream: bytes;
-      @doc("The content type for the operation. Always multipart/form-data for this operation.")
-      @header("content-type")
-      contentType: "multipart/form-data";
-    },
-    BulkImportResponse
+  {
+    @doc("InputStream of file")
+    uploadedInputStream: bytes;
+    @doc("The content type for the operation. Always multipart/form-data for this operation.")
+    @header("content-type")
+    contentType: "multipart/form-data";
+  },
+  BulkImportResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
@@ -1460,11 +1464,9 @@ recommend.
 
 Recommend to fetch terms/categories details separately using 
 
+GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms and 
 
-'GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/terms' and 
-
- 'GET
-'/datamap/api/atlas/v2/glossary/{glossaryGuid}/categories'.
+GET /datamap/api/atlas/v2/glossary/{glossaryGuid}/categories.
 """)
   @route("/atlas/v2/glossary/{glossaryGuid}/detailed")
   @get
