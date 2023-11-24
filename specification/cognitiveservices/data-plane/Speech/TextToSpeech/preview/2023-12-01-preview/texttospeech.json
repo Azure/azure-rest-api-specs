@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Custom Voice API",
-    "description": "Custom Voice API to create and deploy your voice.",
+    "title": "Custom voice API",
+    "description": "Custom voice API to create and deploy your voice.",
     "contact": {
       "name": "Azure AI - Speech Services",
-      "url": "https://docs.microsoft.com/azure/cognitive-services/speech-service/support"
+      "url": "https://learn.microsoft.com/azure/ai-services/speech-service/"
     },
     "version": "2023-12-01-preview"
   },
@@ -15,7 +15,7 @@
         "tags": [
           "Project"
         ],
-        "description": "Gets a list of projects for the authenticated subscription.",
+        "description": "Gets a list of projects for the authenticated Speech service resource.",
         "operationId": "Projects_List",
         "produces": [
           "application/json"
@@ -193,7 +193,7 @@
         "tags": [
           "Consent"
         ],
-        "description": "Gets a list of consents for the authenticated subscription.",
+        "description": "Gets a list of consents for the authenticated Speech service resource.",
         "operationId": "Consents_List",
         "produces": [
           "application/json"
@@ -310,7 +310,7 @@
         "tags": [
           "Consent"
         ],
-        "description": "Creates a new consent with audio URL.",
+        "description": "Creates a new voice talent consent with the provided audio URL.",
         "operationId": "Consents_Create",
         "consumes": [
           "application/json"
@@ -374,7 +374,7 @@
         "tags": [
           "Consent"
         ],
-        "description": "Creates a new consent with audio file.",
+        "description": "Creates a new voice talent consent with the provided audio file.",
         "operationId": "Consents_Post",
         "consumes": [
           "multipart/form-data"
@@ -395,7 +395,7 @@
           {
             "in": "formData",
             "name": "projectId",
-            "description": "The project Id.",
+            "description": "The project ID.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
@@ -438,7 +438,7 @@
           {
             "in": "formData",
             "name": "locale",
-            "description": "The locale of this consent. Locale code follows BCP-47. You can find TextToSpeech locale list here https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts.",
+            "description": "The locale of this consent. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
             "required": true,
             "type": "string"
           },
@@ -488,9 +488,9 @@
     "/trainingsets": {
       "get": {
         "tags": [
-          "Trainingset"
+          "TrainingSet"
         ],
-        "description": "Gets a list of training sets for the authenticated subscription.",
+        "description": "Gets a list of training sets for the authenticated Speech service resource.",
         "operationId": "TrainingSets_List",
         "produces": [
           "application/json"
@@ -513,7 +513,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/PaginatedTrainingsets"
+              "$ref": "#/definitions/PaginatedTrainingSets"
             }
           },
           "default": {
@@ -537,7 +537,7 @@
     "/trainingsets/{id}": {
       "get": {
         "tags": [
-          "Trainingset"
+          "TrainingSet"
         ],
         "description": "Gets the training set identified by the given ID.",
         "operationId": "TrainingSets_Get",
@@ -556,7 +556,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/Trainingset"
+              "$ref": "#/definitions/TrainingSet"
             }
           },
           "default": {
@@ -574,9 +574,9 @@
       },
       "delete": {
         "tags": [
-          "Trainingset"
+          "TrainingSet"
         ],
-        "description": "Deletes the project identified by the given ID.",
+        "description": "Deletes the training set identified by the given ID.",
         "operationId": "TrainingSets_Delete",
         "produces": [
           "application/json"
@@ -608,7 +608,7 @@
       },
       "put": {
         "tags": [
-          "Trainingset"
+          "TrainingSet"
         ],
         "description": "Creates a new training set.",
         "operationId": "TrainingSets_Create",
@@ -631,7 +631,7 @@
             "description": "training set definition",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Trainingset"
+              "$ref": "#/definitions/TrainingSet"
             }
           }
         ],
@@ -639,7 +639,7 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/Trainingset"
+              "$ref": "#/definitions/TrainingSet"
             }
           },
           "default": {
@@ -659,7 +659,7 @@
     "/trainingsets/{id}:upload": {
       "post": {
         "tags": [
-          "Trainingset"
+          "TrainingSet"
         ],
         "description": "Uploads data to the specified training set.",
         "operationId": "TrainingSets_UploadData",
@@ -682,7 +682,7 @@
           {
             "in": "body",
             "name": "dataset",
-            "description": "Data set to be uploaded",
+            "description": "Dataset to be uploaded",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Dataset"
@@ -727,7 +727,7 @@
         "tags": [
           "Model"
         ],
-        "description": "Get a list of supported recipes.",
+        "description": "Get a list of supported recipes for model building. Different recipes have different capabilities such as support for multi-style voice models.",
         "operationId": "Models_ListRecipes",
         "produces": [
           "application/json"
@@ -766,7 +766,7 @@
         "tags": [
           "Model"
         ],
-        "description": "Gets the list of models for specified subscription.",
+        "description": "Gets the list of models for the authenticated Speech service resource.",
         "operationId": "Models_List",
         "produces": [
           "application/json"
@@ -952,7 +952,7 @@
         "tags": [
           "Endpoint"
         ],
-        "description": "Gets a list of endpoints for the authenticated subscription.",
+        "description": "Gets a list of endpoints for the authenticated Speech service resource.",
         "operationId": "Endpoints_List",
         "produces": [
           "application/json"
@@ -1288,7 +1288,7 @@
         "tags": [
           "PersonalVoice"
         ],
-        "description": "Gets a list of personal voices for the authenticated subscription.",
+        "description": "Gets a list of personal voices for the authenticated Speech service resource.",
         "operationId": "PersonalVoices_List",
         "produces": [
           "application/json"
@@ -1502,7 +1502,7 @@
           {
             "in": "formData",
             "name": "projectId",
-            "description": "The project Id.",
+            "description": "The project ID.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
@@ -1573,7 +1573,7 @@
             "in": "path",
             "name": "id",
             "required": true,
-            "description": "The id of the operation",
+            "description": "The ID of the operation",
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
             "minLength": 3,
@@ -1624,7 +1624,7 @@
           "type": "string"
         },
         "extensions": {
-          "description": "file name extensions.",
+          "description": "File name extensions.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1669,31 +1669,31 @@
           "$ref": "#/definitions/ResourceId"
         },
         "displayName": {
-          "description": "Name of consent",
+          "description": "Name of consent.",
           "minLength": 1,
           "type": "string"
         },
         "description": {
-          "description": "Description of consent",
+          "description": "Description of consent.",
           "type": "string"
         },
         "voiceTalentName": {
-          "description": "Voice talent name. Must match with consent audio file.",
+          "description": "Voice talent name. Must match the voice talent name in the consent audio file.",
           "minLength": 1,
           "type": "string"
         },
         "companyName": {
-          "description": "Company name. Must match with consent audio file.",
+          "description": "Company name. Must match the company name in the consent audio file.",
           "minLength": 1,
           "type": "string"
         },
         "audioUrl": {
-          "description": "The public accessible url of consent audio file.",
+          "description": "The public accessible URL of the consent audio file.",
           "type": "string",
           "format": "uri"
         },
         "locale": {
-          "description": "The locale of this consent. Locale code follows BCP-47. You can find TextToSpeech locale list here https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "description": "The locale of this consent. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
           "type": "string",
           "example": "en-US"
         },
@@ -1704,13 +1704,13 @@
           "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
-          "description": "The time-stamp when the object was created. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
           "format": "date-time",
           "type": "string",
           "readOnly": true
         },
         "lastActionDateTime": {
-          "description": "The time-stamp when the current status was entered. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
           "readOnly": true
@@ -1718,7 +1718,7 @@
       }
     },
     "Dataset": {
-      "description": "Data set",
+      "description": "Dataset object",
       "required": [
         "kind",
         "audios"
@@ -1745,7 +1745,7 @@
       }
     },
     "DatasetKind": {
-      "description": "Data set kind",
+      "description": "Dataset kind",
       "enum": [
         "AudioAndScript",
         "LongAudio",
@@ -1792,13 +1792,13 @@
           "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
-          "description": "The time-stamp when the object was created. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
           "readOnly": true
         },
         "lastActionDateTime": {
-          "description": "The time-stamp when the current status was entered. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
           "readOnly": true
@@ -1889,7 +1889,7 @@
       }
     },
     "VoiceKind": {
-      "description": "Voice Kind",
+      "description": "Voice kind",
       "enum": [
         "Male",
         "Female"
@@ -1947,7 +1947,7 @@
           "$ref": "#/definitions/Recipe"
         },
         "locale": {
-          "description": "The locale of this model. Locale code follows BCP-47. You can find TextToSpeech locale list here https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "description": "The locale of this model. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
           "type": "string",
           "example": "en-US"
         },
@@ -1972,13 +1972,13 @@
           "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
-          "description": "The time-stamp when the object was created. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
           "readOnly": true
         },
         "lastActionDateTime": {
-          "description": "The time-stamp when the current status was entered. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
           "readOnly": true
@@ -2159,7 +2159,7 @@
         }
       }
     },
-    "PaginatedTrainingsets": {
+    "PaginatedTrainingSets": {
       "description": "Paginated training set list",
       "required": [
         "value"
@@ -2170,7 +2170,7 @@
           "description": "Training set list",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Trainingset"
+            "$ref": "#/definitions/TrainingSet"
           }
         },
         "nextLink": {
@@ -2202,7 +2202,7 @@
       }
     },
     "PresetStyleItem": {
-      "description": "Preset styles supported by recipe. Voice model can support these styles without style training set.",
+      "description": "Preset styles supported by the recipe. The voice model can support these styles without any style training set.",
       "type": "object",
       "properties": {
         "male": {
@@ -2222,7 +2222,7 @@
       }
     },
     "Project": {
-      "description": "Project object. Consents, training sets, models and endpoints are organized in a project.",
+      "description": "Project object. Consents, training sets, models, and endpoints are organized in a project.",
       "required": [
         "kind"
       ],
@@ -2244,7 +2244,7 @@
           "$ref": "#/definitions/ProjectKind"
         },
         "createdDateTime": {
-          "description": "The time-stamp when the object was created. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
           "readOnly": true
@@ -2254,7 +2254,7 @@
     "ProjectKind": {
       "description": "Project kind",
       "enum": [
-        "TextToSpeech",
+        "ProfessionalVoice",
         "PersonalVoice"
       ],
       "type": "string",
@@ -2299,7 +2299,7 @@
           "readOnly": true
         },
         "datasetLocales": {
-          "description": "The locale of training data set. Locale code follows BCP-47. You can find TextToSpeech locale list here https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "description": "The locale of the training dataset. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
           "type": "array",
           "items": {
             "type": "string",
@@ -2308,7 +2308,7 @@
           "readOnly": true
         },
         "modelLocales": {
-          "description": "The locale this recipe can speak. Locale code follows BCP-47. You can find TextToSpeech locale list here https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "description": "The locale that a voice model can speak with this recipe. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
           "type": "array",
           "items": {
             "type": "string",
@@ -2317,7 +2317,7 @@
           "readOnly": true
         },
         "presetStyles": {
-          "description": "Preset styles supported by this recipe. You can get these styles without style training set.",
+          "description": "Preset styles supported by this recipe per locale. You can get these styles without any style training set.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/PresetStyleItem"
@@ -2349,7 +2349,7 @@
         "modelAsString": true
       }
     },
-    "Trainingset": {
+    "TrainingSet": {
       "description": "Training set",
       "required": [
         "locale",
@@ -2370,7 +2370,7 @@
           "type": "string"
         },
         "locale": {
-          "description": "The locale of training data set. Locale code follows BCP-47. You can find TextToSpeech locale list here https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "description": "The locale of the training dataset. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
           "type": "string",
           "example": "en-US"
         },
@@ -2378,7 +2378,7 @@
           "$ref": "#/definitions/VoiceKind"
         },
         "properties": {
-          "$ref": "#/definitions/TrainingsetProperties"
+          "$ref": "#/definitions/TrainingSetProperties"
         },
         "projectId": {
           "$ref": "#/definitions/ResourceId"
@@ -2387,20 +2387,20 @@
           "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
-          "description": "The time-stamp when the object was created. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
           "readOnly": true
         },
         "lastActionDateTime": {
-          "description": "The time-stamp when the current status was entered. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
           "readOnly": true
         }
       }
     },
-    "TrainingsetProperties": {
+    "TrainingSetProperties": {
       "description": "Training set properties",
       "type": "object",
       "properties": {
@@ -2454,13 +2454,13 @@
           "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
-          "description": "The time-stamp when the object was created. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations)",
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
           "readOnly": true
         },
         "lastActionDateTime": {
-          "description": "The time-stamp when the current status was entered. The time stamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
           "readOnly": true
@@ -2483,13 +2483,13 @@
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header",
-      "description": "Provide your subscription key here."
+      "description": "Provide your Speech resource key here."
     },
     "AADToken": {
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows.",
+      "description": "These are the [Microsoft identity platform](entra/identity-platform/v2-overview) flows.",
       "scopes": {
         "https://cognitiveservices.azure.com/.default": "https://cognitiveservices.azure.com/.default"
       }
@@ -2551,7 +2551,7 @@
     "QueryFilter": {
       "name": "filter",
       "in": "query",
-      "description": "Filter condition.\r\n            <ul><li><b>Supported properties:</b>projectId, createdDateTime, locale, kind\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for created.\r\n              </li><li><b>Example:</b>\r\n                - ```filter=projectId eq Jessica``` (filter by project id)\r\n                - ```filter=kind eq TextToSpeech``` (filter project by kind)\r\n                - ```filter=locale eq en-US``` (filter training set and model by locale)\r\n                - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource created time after 2023-11-01)</li></ul>",
+      "description": "Filter condition.\r\n            <ul><li><b>Supported properties:</b>projectId, createdDateTime, locale, kind\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for created.\r\n              </li><li><b>Example:</b>\r\n                - ```filter=projectId eq Jessica``` (filter by project ID)\r\n                - ```filter=kind eq ProfessionalVoice``` (filter project by kind)\r\n                - ```filter=locale eq en-US``` (filter training set and model by locale)\r\n                - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource created time after 2023-11-01)</li></ul>",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -2559,7 +2559,7 @@
     "PathId": {
       "name": "id",
       "in": "path",
-      "description": "The id of resource.",
+      "description": "The ID of the resource.",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
@@ -2570,7 +2570,7 @@
     "PathUuid": {
       "name": "id",
       "in": "path",
-      "description": "The resource id, which should be uuid.",
+      "description": "The resource ID, which should be UUID.",
       "required": true,
       "type": "string",
       "format": "uuid",
