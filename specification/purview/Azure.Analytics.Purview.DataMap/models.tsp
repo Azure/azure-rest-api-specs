@@ -6,34 +6,6 @@ using TypeSpec.Http;
 
 namespace PurviewDataMap;
 
-@doc("Search filter operator")
-enum SearchFilterOperator {
-  @doc("eq")
-  eq,
-  @doc("ne")
-  ne,
-  @doc("gt")
-  gt,
-  @doc("lt")
-  lt,
-  @doc("ge")
-  ge,
-  @doc("le")
-  le,
-  @doc("contains")
-  contains,
-  @doc("contains_char")
-  contains_char,
-  @doc("startswith")
-  startswith,
-  @doc("prefix")
-  prefix,
-  @doc("timerange")
-  timerange,
-  @doc("exists")
-  exists;
-}
-
 @doc("Enum for business attribute update behavior")
 enum BusinessAttributeUpdateBehavior {
   @doc("Ignore the business attribute payload for update.")
@@ -220,6 +192,32 @@ enum Typedef {
   struct,
   @doc("term template")
   term_template,
+}
+
+@doc("Search Filter Operator")
+enum SearchFilterOperator {
+  @doc("equal")
+  eq,
+  @doc("not equal")
+  ne,
+  @doc("greater than")
+  gt,
+  @doc("less than")
+  lt,
+  @doc("greater than or equal to")
+  ge,
+  @doc("less than or equal to")
+  le,
+  @doc("contains")
+  contains,
+  @doc("start with")
+  startswith,
+  @doc("prefix")
+  prefix,
+  @doc("time range")
+  timerange,
+  @doc("exists")
+  exists,
 }
 
 @doc("""
@@ -628,7 +626,7 @@ model AtlasGlossaryBaseObject {
 
   @doc("The short version of description.")
   shortDescription?: string;
-  
+
   @doc("ETag for concurrency control.")
   lastModifiedTS?: string;
 
@@ -1719,7 +1717,7 @@ AtoB might define 2 ends <br>
 
 <pre>
    end1:  type A, name attr7
-   end2: 
+   end2:
 type B, name attr8  </pre>
 
 <p>
@@ -1952,7 +1950,7 @@ model AndFilter extends SearchFilter {
 model NotFilter extends SearchFilter {
   @doc("Not filter for search")
   kind: "NotFilter";
-  
+
   @doc("Not filter")
   @projectedName("json", "not")
   notFilters : SearchFilter;
@@ -1979,12 +1977,12 @@ model AssetTypeFilter extends SearchFilter {
 model AttributeFilter extends SearchFilter {
   @doc("Attribute filter for search")
   kind: "AttributeFilter";
-  
+
   @doc("Attribute name")
   attributeName: string;
   @doc("Operator")
   operator: SearchFilterOperator;
-  
+
   @doc("Attribute value")
   attributeValue: string;
 }
@@ -1997,6 +1995,14 @@ model ClassificationFilter extends SearchFilter {
   classificationName: string;
   @doc("Whether to include sub classifications")
   includeSubClassifications?: boolean;
+}
+
+@doc("Classification category filter for search")
+model ClassificationCategoryFilter extends SearchFilter {
+  @doc("Classification category filter for search")
+  kind: "ClassificationCategoryFilter";
+  @doc("Classification category")
+  classificationCategory: string;
 }
 
 @doc("Collection id filter for search")
@@ -2012,9 +2018,9 @@ model ContactFilter extends SearchFilter {
   @doc("Contact filter for search")
   kind: "ContactFilter";
   @doc("Contact type")
-  contactType: string;
+  contactType?: string;
   @doc("Contact Id")
-  contactId: string;
+  contactId?: string;
 }
 
 @doc("Domain id filter for search")
@@ -2078,7 +2084,7 @@ model ScanInfoFilter extends SearchFilter {
   @doc("Data source name")
   dataSourceName?: string;
   @doc("Scan name")
-  scanName: string;
+  scanName?: string;
 }
 
 @doc("Glossary filter for search")
@@ -2117,8 +2123,8 @@ Either using a string 'LAST_24H|LAST_7D|LAST_30D|LAST_365D|MORE_THAN_365D', or u
 {
   "operator": "lt",
   "timeThreshold": 1545580800000
-} 
-to represent the time filter
+}
+to represent the time filter, operator must be one of gt/lt/gte/lte
 """)
   createTime: unknown;
 }
@@ -2133,8 +2139,8 @@ Either using a string 'LAST_24H|LAST_7D|LAST_30D|LAST_365D|MORE_THAN_365D', or u
 {
   "operator": "lt",
   "timeThreshold": 1545580800000
-} 
-to represent the time filter
+}
+to represent the time filter, operator must be one of gt/lt/gte/lte
 """)
   updateTime: unknown;
 }
