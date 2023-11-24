@@ -639,7 +639,7 @@ example. qualifiedName can be changed to other unique attributes)
 
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @doc("Business metadata payload")
-      @body businessMetadata: Record<unknown>;
+      @body businessMetadata: Record<Record<unknown>>;
     },
     void
   >;
@@ -662,7 +662,7 @@ default is false.
       isOverwrite?: boolean;
       @doc("BusinessMetadata payload")
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
-      @body businessMetadata: Record<unknown>;
+      @body businessMetadata: Record<Record<unknown>>;
     },
     void
   >;
