@@ -78,9 +78,9 @@ op AtlasImportOperation<
   Traits extends TypeSpec.Reflection.Model = {}, 
   TraitContexts extends TraitContext = TraitContext.Undefined
 > is AtlasBaseOperation<
-TParams & TraitProperties<Traits, TraitLocation.Parameters, TraitContext.Action>,
-TResponse & TraitProperties<Traits, TraitLocation.Response, TraitContexts>,
-Traits           
+TParams & TraitProperties<Traits & NoConditionalRequests & NoRepeatableRequests & NoClientRequestId , TraitLocation.Parameters, TraitContext.Action>,
+TResponse & TraitProperties<Traits & NoConditionalRequests & NoRepeatableRequests & NoClientRequestId, TraitLocation.Response, TraitContext.Action>,
+Traits  & NoConditionalRequests & NoRepeatableRequests & NoClientRequestId           
 >;
 
 //alias DataMapResourceOperations = Azure.Core.ResourceOperations<NoClientRequestId & NoConditionalRequests & NoRepeatableRequests, ErrorResponse>;
@@ -732,11 +732,9 @@ default is false.
   {
     @doc("InputStream of file")
     uploadedInputStream: bytes;
-    @doc("The content type for the operation. Always multipart/form-data for this operation.")
-    @header("content-type")
-    contentType: "multipart/form-data";
   },
-  BulkImportResponse
+  BulkImportResponse,
+  MultipartFormDataRequestHeadersTraits
   >;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
