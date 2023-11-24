@@ -1614,7 +1614,7 @@ interface Lineage {
   @doc("Get lineage info of the entity specified by GUID.")
   @route("/atlas/v2/lineage/{guid}")
   @get
-  get is DataMapBaseOperation<
+  get is AtlasBaseOperation<
     {
       @doc("The globally unique identifier of the entity.")
       @path
