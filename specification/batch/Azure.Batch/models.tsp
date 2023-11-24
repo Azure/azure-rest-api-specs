@@ -3529,9 +3529,16 @@ model BatchTaskAddResult {
 }
 
 @doc("The result of listing the subtasks of a Task.")
+@pagedResult
 model BatchTaskListSubtasksResult {
   @doc("The list of subtasks.")
+  @items
   value?: BatchSubtask[];
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+  @doc("The URL to get the next set of results.")
+  @nextLink
+  `odata.nextLink`?: string;
 }
 
 @doc("Information about an Azure Batch subtask.")
