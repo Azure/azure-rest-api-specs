@@ -361,6 +361,81 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default": {
+      "put": {
+        "tags": [
+          "ApplyUpdates"
+        ],
+        "summary": "Apply Updates to resource",
+        "description": "Apply maintenance updates to resource",
+        "operationId": "ApplyUpdates_CreateOrUpdate",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ApplyUpdate update request accepted",
+            "schema": {
+              "$ref": "#/definitions/ApplyUpdate"
+            }
+          },
+          "201": {
+            "description": "ApplyUpdate create request accepted",
+            "schema": {
+              "$ref": "#/definitions/ApplyUpdate"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApplyUpdates_CreateOrUpdate": {
+            "$ref": "./examples/ApplyUpdates_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}": {
       "get": {
         "tags": [
@@ -1389,6 +1464,49 @@
         "x-ms-examples": {
           "MaintenanceConfigurationsResourceGroup_List": {
             "$ref": "./examples/MaintenanceConfigurationsResourceGroup_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/configurationAssignments": {
+      "get": {
+        "tags": [
+          "ConfigurationAssignments"
+        ],
+        "summary": "Get configuration assignment within a subscription. This API is not implemented yet.",
+        "operationId": "ConfigurationAssignmentsWithinSubscription_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListConfigurationAssignmentsResult"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignmentsResultWithinSubscription_List": {
+            "$ref": "./examples/ConfigurationAssignmentsResultWithinSubscription_List.json"
           }
         }
       }
