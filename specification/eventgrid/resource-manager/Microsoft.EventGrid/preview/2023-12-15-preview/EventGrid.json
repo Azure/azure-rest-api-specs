@@ -7947,7 +7947,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -8006,7 +8009,10 @@
             "description": "NoContent"
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -8071,7 +8077,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -8116,7 +8125,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -8170,7 +8182,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -8225,7 +8240,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -8288,7 +8306,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -15056,7 +15077,43 @@
         }
       }
     },
+    "DynamicRoutingEnrichment": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Dynamic routing enrichment key.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Dynamic routing enrichment value.",
+          "type": "string"
+        }
+      }
+    },
+    "StaticStringRoutingEnrichment": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StaticRoutingEnrichment"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "String type routing enrichment value.",
+          "type": "string"
+        },
+        "key": {
+          "description": "Static routing enrichment key.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "String"
+    },
     "StaticRoutingEnrichment": {
+      "description": "Static routing enrichment details.",
+      "required": [
+        "valueType"
+      ],
       "type": "object",
       "properties": {
         "key": {
@@ -15074,20 +15131,8 @@
             "modelAsString": true
           }
         }
-      }
-    },
-    "DynamicRoutingEnrichment": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "description": "Dynamic routing enrichment key.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Dynamic routing enrichment value.",
-          "type": "string"
-        }
-      }
+      },
+      "discriminator": "valueType"
     },
     "Namespace": {
       "description": "Namespace resource.",
