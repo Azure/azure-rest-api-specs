@@ -65,6 +65,7 @@ model OperationStatus {
 
 @doc("Project details.")
 @resource("projects")
+@projectedName("csharp", "DevCenterProject")
 model Project {
   @key("projectName")
   @visibility("read")

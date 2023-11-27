@@ -27,6 +27,7 @@ enum EnvironmentTypeEnableStatus {
 model EnvironmentListResult is Azure.Core.Page<Environment>;
 
 @doc("Properties of an environment.")
+@projectedName("csharp", "DevCenterEnvironment")
 model Environment {
   ...EnvironmentUpdateProperties;
 
@@ -76,6 +77,7 @@ model EnvironmentUpdateProperties {
 model CatalogListResult is Azure.Core.Page<Catalog>;
 
 @doc("A catalog.")
+@projectedName("csharp", "DevCenterCatalog")
 model Catalog {
   @doc("Name of the catalog.")
   name: string;
@@ -99,7 +101,7 @@ model EnvironmentDefinition {
   description?: string;
 
   @doc("Input parameters passed to an environment.")
-  parameters?: EnvironmentDefinitionParameter[];
+  parameters?: EnvironmentDefinitionParameters[];
 
   @doc("JSON schema defining the parameters object passed to an environment.")
   parametersSchema?: string;
@@ -109,7 +111,7 @@ model EnvironmentDefinition {
 }
 
 @doc("Properties of an Environment Definition parameter")
-model EnvironmentDefinitionParameter {
+model EnvironmentDefinitionParameters {
   @doc("Unique ID of the parameter")
   id: string;
 

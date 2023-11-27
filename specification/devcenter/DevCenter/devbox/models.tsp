@@ -8,16 +8,19 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
+@doc("The operating system type.")
 enum OsType {
   @doc("The Windows operating system.") Windows,
 }
 
+@doc("Indicates whether hibernate is supported and enabled, disabled, or unsupported by the operating system. Unknown hibernate support is represented as null.")
 enum HibernateSupport {
   @doc("Hibernate is enabled.") Enabled,
   @doc("Hibernate is not enabled.") Disabled,
   @doc("Hibernate is not supported by the operating system.") OsUnsupported,
 }
 
+@doc("Indicates whether owners of Dev Boxes in a pool are local administrators on the Dev Boxes.")
 enum LocalAdminStatus {
   @doc("Owners of Dev Boxes in the pool are local administrators on the Dev Boxes.")
   Enabled,
@@ -25,11 +28,13 @@ enum LocalAdminStatus {
   Disabled,
 }
 
+@doc("Indicates whether the feature to stop the devbox on disconnect once the grace period has lapsed is enabled.")
 enum StopOnDisconnectEnableStatus {
   @doc("Stop on disconnect is enabled on the Dev Box.") Enabled,
   @doc("Stop on disconnect is not enabled on the Dev Box.") Disabled,
 }
 
+@doc("Pool status indicating whether a pool is available to create Dev Boxes.")
 enum PoolHealthStatus {
   @doc("The pool health status is not known.") Unknown,
   @doc("The pool health status waiting for health checks to run.") Pending,
@@ -38,14 +43,17 @@ enum PoolHealthStatus {
   @doc("The pool health status is not healthy.") Unhealthy,
 }
 
+@doc("The supported types for a scheduled task.")
 enum ScheduledType {
   @doc("The scheduled task will stop impacted Dev Boxes.") StopDevBox,
 }
 
+@doc("The frequency of task execution.")
 enum ScheduledFrequency {
   @doc("The scheduled task will run every day.") Daily,
 }
 
+@doc("The power states of a Dev Box.")
 enum PowerState {
   @doc("The Dev Box power state is not known.") Unknown,
   @doc("The Dev Box is running.") Running,
@@ -54,10 +62,12 @@ enum PowerState {
   @doc("The Dev Box is hibernated.") Hibernated,
 }
 
+@doc("The type of action which will take place on a Dev Box.")
 enum DevBoxActionType {
   @doc("The action will stop the Dev Box.") Stop,
 }
 
+@doc("The result of the delay operation on this action.")
 enum DevBoxActionDelayResultStatus {
   @doc("The delay operation succeeded.") Succeeded,
   @doc("The delay operation failed.") Failed,
@@ -79,6 +89,7 @@ model User {
 @doc("A pool of Dev Boxes.")
 @resource("pools")
 @parentResource(Project)
+@projectedName("csharp", "DevBoxesPool")
 model Pool {
   @key("poolName")
   @visibility("read")
@@ -192,6 +203,7 @@ model ScheduleListResult is Azure.Core.Page<Schedule>;
 @doc("A Schedule to execute action.")
 @resource("schedules")
 @parentResource(Pool)
+@projectedName("csharp", "DevBoxSchedule")
 model Schedule {
   @key("scheduleName")
   @visibility("read")
