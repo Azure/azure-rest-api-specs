@@ -1640,7 +1640,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/exportRequest"
+            "in": "body",
+            "name": "exportRequest",
+            "description": "export request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportRequest"
+            }
           },
           {
             "$ref": "#/parameters/purviewAPIVersion"
@@ -7148,7 +7154,7 @@
             "updateTime": {
               "$ref": "#/definitions/TimeCondition"
             },
-            "description": "The entity filter for export requset."
+            "description": "The entity filter for export request."
           }
         },
         "location": {
