@@ -6281,6 +6281,17 @@
           "description": "If present, details of the operation error.",
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
         },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "The custom properties of the OperationStatus.",
+          "$ref": "#/definitions/SessionHostManagementOperationStatusProperties"
+        }
+      }
+    },
+    "SessionHostManagementOperationStatusProperties": {
+      "description": "Properties bag to hold custom RP properties for sessionHostManagement Operation Statuses.",
+      "properties": {
         "correlationId": {
           "type": "string",
           "description": "The Log Analytics."
