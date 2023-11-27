@@ -724,58 +724,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/spaces/{spaceName}": {
-      "get": {
-        "tags": [
-          "ConnectorSpaceInfo"
-        ],
-        "summary": "Get ConnectorSpace Info.",
-        "operationId": "Get_ConnectorSpaceInfo",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SpaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "x-ms-engage-hub-token",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "EngageHub 1PA token to be send to EH Gateway",
-            "x-ms-secret": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ConnectorSpaceInfo"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Spaces List for Engage Hub Context": {
-            "$ref": "./examples/GetConnectorSpaceInfo.json"
-          }
-        }
-      },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/spaces/{spaceName}": {      
       "put": {
         "tags": [
           "LinkingSpaceWithConnector"
@@ -846,8 +795,8 @@
         "tags": [
           "LinkingSpaceWithConnector"
         ],
-        "summary": "Create or Update Connector information linked with EngageHub Spaces.",
-        "operationId": "CreateOrUpdate_ConnectorSpaceInfo",
+        "summary": "Update Connector information linked with EngageHub Spaces.",
+        "operationId": "Update_ConnectorSpaceInfo",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1726,7 +1675,12 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ConnectorSpaceInfoProperties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "ConnectorSpaceInfoProperties": {
       "type": "object",
@@ -1830,7 +1784,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "string",
       "description": "Name of EngageHub Space.",
       "x-ms-parameter-location": "method"
     },
