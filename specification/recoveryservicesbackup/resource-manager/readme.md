@@ -41,7 +41,7 @@ tag: package-passivestamp-2023-01-15
 ```
 
 ``` yaml $(package-activestamp)
-tag: package-2023-06
+tag: package-2023-12
 ```
 
 ### Validations
@@ -56,14 +56,23 @@ message-format: json
 ```
 
 
+### Tag: package-2023-12
+
+These settings apply only when `--tag=package-2023-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-12'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-12-01/bms.json
+```
 ### Tag: package-2023-06
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06'
+``` yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.RecoveryServices/stable/2023-06-01/bms.json
 ```
+
 ### Tag: package-2023-04
 
 These settings apply only when `--tag=package-2023-04` is specified on the command line.
