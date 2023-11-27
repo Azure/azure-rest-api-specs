@@ -724,13 +724,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/assessmentConnectorInfo": {
-      "put": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/spaces/{spaceName}": {
+      "get": {
         "tags": [
-          "AssessmentConnectorInfo"
+          "ConnectorSpaceInfo"
         ],
-        "summary": "Create or Update Assessment Connector information linked with EngageHub Spaces'.",
-        "operationId": "CreateOrUpdate_AssessmentConnectorInfo",
+        "summary": "Get ConnectorSpace Info.",
+        "operationId": "Get_ConnectorSpaceInfo",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -740,6 +740,60 @@
           },
           {
             "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-engage-hub-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "EngageHub 1PA token to be send to EH Gateway",
+            "x-ms-secret": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConnectorSpaceInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Spaces List for Engage Hub Context": {
+            "$ref": "./examples/GetConnectorSpaceInfo.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LinkingSpaceWithConnector"
+        ],
+        "summary": "Create or Update Connector information linked with EngageHub Spaces.",
+        "operationId": "CreateOrUpdate_ConnectorSpaceInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -755,24 +809,24 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "connector information payload object",
+            "description": "Connector Space information payload object",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AssessmentConnectorResource"
+              "$ref": "#/definitions/ConnectorSpaceInfo"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The Assessment Connector has been created or updated successfully.",
+            "description": "The Assessment Connector has been linked to the EngageHub Space successfully.",
             "schema": {
-              "$ref": "#/definitions/AssessmentConnectorResource"
+              "$ref": "#/definitions/ConnectorSpaceInfo"
             }
           },
           "201": {
-            "description": "The Assessment Connector has been created successfully.",
+            "description": "The Assessment Connector has been linked to the EngageHub Space successfully.",
             "schema": {
-              "$ref": "#/definitions/AssessmentConnectorResource"
+              "$ref": "#/definitions/ConnectorSpaceInfo"
             }
           },
           "default": {
@@ -783,17 +837,17 @@
           }
         },
         "x-ms-examples": {
-          "Create/Update Assessment Connector Information": {
-            "$ref": "./examples/PutAssessmentConnectorInfo.json"
+          "Create/Update Connector Space Information": {
+            "$ref": "./examples/PutConnectorSpaceInfo.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "AssessmentConnectorInfo"
+          "LinkingSpaceWithConnector"
         ],
-        "summary": "Update Assessment Connector information linked with EngageHub Spaces'.",
-        "operationId": "Update_AssessmentConnectorInfo",
+        "summary": "Create or Update Connector information linked with EngageHub Spaces.",
+        "operationId": "CreateOrUpdate_ConnectorSpaceInfo",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -803,6 +857,9 @@
           },
           {
             "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -818,18 +875,18 @@
           {
             "name": "requestBody",
             "in": "body",
-            "description": "connector information payload object",
+            "description": "Connector Space information payload object",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AssessmentConnectorResource"
+              "$ref": "#/definitions/ConnectorSpaceInfo"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The Assessment Connector has been updated successfully.",
+            "description": "The Assessment Connector has been linked to the EngageHub Space successfully.",
             "schema": {
-              "$ref": "#/definitions/AssessmentConnectorResource"
+              "$ref": "#/definitions/ConnectorSpaceInfo"
             }
           },
           "default": {
@@ -840,17 +897,17 @@
           }
         },
         "x-ms-examples": {
-          "Create/Update Assessment Connector Information": {
-            "$ref": "./examples/PatchAssessmentConnectorInfo.json"
+          "Create/Update Connector Space Information": {
+            "$ref": "./examples/PatchConnectorSpaceInfo.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "AssessmentConnectorInfo"
+          "LinkingSpaceWithConnector"
         ],
-        "summary": "Deletes Assessment Connector information linked with EngageHub Spaces'.",
-        "operationId": "Delete_AssessmentConnectorInfo",
+        "summary": "Delete Connector information linked with EngageHub Spaces.",
+        "operationId": "Delete_ConnectorSpaceInfo",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -860,6 +917,9 @@
           },
           {
             "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -875,10 +935,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The Assessment Connector information has been deleted successfully."
+            "description": "The Connector Space information has been deleted successfully."
           },
           "204": {
-            "description": "The Assessment Connector information is not found or has been deleted already."
+            "description": "The Connector Space information is not found or has been deleted already."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -888,8 +948,8 @@
           }
         },
         "x-ms-examples": {
-          "Create/Update Assessment Connector Information": {
-            "$ref": "./examples/DeleteAssessmentConnectorInfo.json"
+          "Delete Connector Space Information": {
+            "$ref": "./examples/DeleteConnectorSpaceInfo.json"
           }
         }
       }
@@ -1657,25 +1717,20 @@
       },
       "x-ms-azure-resource": true
     },
-    "AssessmentConnectorResource": {
+    "ConnectorSpaceInfo": {
       "type": "object",
-      "description": "Assessment Connector Information Payload",
+      "description": "Connector Space Information Payload",
       "properties": {
         "properties": {
-          "description": "Assessment Connector Information Payload",
+          "description": "Connector Space Information Payload",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AssessmentConnectorProperties"
+          "$ref": "#/definitions/ConnectorSpaceInfoProperties"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
+      }
     },
-    "AssessmentConnectorProperties": {
+    "ConnectorSpaceInfoProperties": {
       "type": "object",
-      "description": "Assessment connector properties",
+      "description": "Connector Space properties",
       "properties": {
         "connectorName": {
           "type": "string",
@@ -1768,6 +1823,15 @@
       "type": "string",
       "pattern": "^.{1,100}$",
       "description": "Name of ServicesHub resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "SpaceNameParameter": {
+      "name": "spaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "string",
+      "description": "Name of EngageHub Space.",
       "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
