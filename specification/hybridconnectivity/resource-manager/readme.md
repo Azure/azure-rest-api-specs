@@ -27,7 +27,7 @@ These are the global settings for the hybridconnectivity.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2023-03
+tag: package-2023-12-01-preview
 ```
 
 ### Tag: package-2023-03
