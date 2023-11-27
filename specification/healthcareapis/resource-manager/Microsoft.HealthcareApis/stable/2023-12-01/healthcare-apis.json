@@ -3903,7 +3903,56 @@
           "type": "boolean",
           "description": "If the SMART on FHIR proxy is enabled",
           "readOnly": false
+        },
+        "smartIdentityProviders": {
+          "$ref": "#/definitions/SmartIdentityProviders"
         }
+      }
+    },
+    "SmartIdentityProviders": {
+      "title": "SMART Identity Providers",
+      "description": "The set of identity provider configurations for SMART on FHIR authentication. The SmartIdentityProviders dictionary keys will be the identity provider authority.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/SmartIdentityProviderApplications"
+      }
+    },
+    "SmartIdentityProviderApplications": {
+      "description": "A set of applications configured in the identity provider used for SMART on FHIR authentication. The SmartIdentityProviders dictionary keys will be the application (client) id of the application.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/SmartIdentityProviderApplication"
+      }
+    },
+    "SmartIdentityProviderApplication": {
+      "description": "An Application configured in the Identity Provider used to access FHIR resources.",
+      "type": "object",
+      "properties": {
+        "allowedDataActions": {
+          "description": "The actions that are permitted to be performed on FHIR resources for the application.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SmartDataActions"
+          }
+        },
+        "audience": {
+          "description": "The audience that will be used to validate bearer tokens against the given authority.",
+          "type": "string"
+        }
+      }
+    },
+    "SmartDataActions": {
+      "type": "string",
+      "description": "The Data Actions that can be enabled for a Smart Identity Provider Application.",
+      "enum": [
+        "Read",
+        "Write",
+        "Delete",
+        "Export"
+      ],
+      "x-ms-enum": {
+        "name": "SmartDataActions",
+        "modelAsString": true
       }
     },
     "FhirServiceCorsConfiguration": {
