@@ -1640,11 +1640,7 @@
         },
         "parameters": [
           {
-            "in": "formData",
-            "name": "file",
-            "description": "The csv file to import glossary terms from.",
-            "required": true,
-            "type": "file"
+            "$ref": "#/parameters/exportRequest"
           },
           {
             "$ref": "#/parameters/purviewAPIVersion"
@@ -7133,6 +7129,88 @@
       },
       "title": "SearchRequest",
       "description": "The search query of advanced search request."
+    },
+    "ExportRequest": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "$ref": "#/definitions/EntityTypeCondition"
+            },
+            "guid": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "updateTime": {
+              "$ref": "#/definitions/TimeCondition"
+            },
+            "description": "The entity filter for export requset."
+          }
+        },
+        "location": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "properties": {
+              "type": "object",
+              "description": "The additional properties of file location.",
+              "additionalProperties": {}
+            }
+          }
+        }
+      },
+      "title": "ExportRequest",
+      "description": "The export request with the provided blob location."
+    },
+    "EntityTypeCondition": {
+      "type": "object",
+      "properties": {
+        "typeName": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "EntityTypeCondition",
+      "description": "The entity type condition."
+    },
+    "TimeCondition": {
+      "type": "object",
+      "properties": {
+        "eq": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ne": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ge": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "gt": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "lt": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "le": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "TimeCondition",
+      "description": "Time condition."
     },
     "SuggestRequest": {
       "type": "object",

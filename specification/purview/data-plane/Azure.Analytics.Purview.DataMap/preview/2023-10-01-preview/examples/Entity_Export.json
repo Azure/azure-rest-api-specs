@@ -1,1 +1,32 @@
-{}
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "api-version": "2023-10-01-preview",
+    "exportRequest": {
+      "filter": {
+        "type": {
+          "typeName": [
+            "mssql_table"
+          ]
+        }
+      },
+      "location": {
+        "type": "AzureStorage",
+        "properties": {
+          "blobUrl": "https://exampleBlob.blob.core.windows.net/exampleContainer",
+          "blobSasToken": {
+            "keyVaultUrl": "https://exampleKeyVaule.vault-int.azure-int.net/",
+            "secretName": "export-blob-sas-token"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://exampleaccountname.purview.azure.com/datamap/api/entity/operations/3ffca165-75a7-4987-ba71-cfc0a273d6b7?api-version=2023-10-01-preview"
+      }
+    }
+  }
+}
