@@ -342,9 +342,6 @@
           "final-state-via": "azure-async-operation"
         },
         "responses": {
-          "200": {
-            "description": "OK. Successfully initiated refresh."
-          },
           "202": {
             "description": "Accepted. Initiating pool status refresh.",
             "headers": {
@@ -990,9 +987,6 @@
           "final-state-via": "azure-async-operation"
         },
         "responses": {
-          "200": {
-            "description": "OK. Successfully initiated health check."
-          },
           "202": {
             "description": "Accepted. Initiating health checks.",
             "headers": {
@@ -1167,6 +1161,9 @@
           "items": {
             "$ref": "#/definitions/HealthStatusDetail"
           },
+          "x-ms-identifiers": [
+            "code"
+          ],
           "readOnly": true
         },
         "devBoxCount": {
@@ -1729,6 +1726,7 @@
           "items": {
             "$ref": "#/definitions/EndpointDetail"
           },
+          "x-ms-identifiers": [],
           "description": "The list of connection details for this endpoint."
         }
       },
