@@ -1,0 +1,5472 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Oracle Database Resource Manager",
+    "version": "2023-09-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "CloudVmClusters"
+    },
+    {
+      "name": "CloudExadataInfrastructures"
+    },
+    {
+      "name": "VirtualNetworkAddresses"
+    },
+    {
+      "name": "OracleSubscriptions"
+    },
+    {
+      "name": "DbNodes"
+    },
+    {
+      "name": "DbServers"
+    },
+    {
+      "name": "GiVersions"
+    },
+    {
+      "name": "DbSystemShapes"
+    },
+    {
+      "name": "DnsPrivateViews"
+    },
+    {
+      "name": "DnsPrivateZones"
+    }
+  ],
+  "paths": {
+    "/providers/Oracle.Database/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "./examples/operations_list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/cloudExadataInfrastructures": {
+      "get": {
+        "operationId": "CloudExadataInfrastructures_ListBySubscription",
+        "tags": [
+          "CloudExadataInfrastructures"
+        ],
+        "description": "List CloudExadataInfrastructure resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudExadataInfrastructureListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Exadata Infrastructure by subscription": {
+            "$ref": "./examples/exaInfra_listBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/cloudVmClusters": {
+      "get": {
+        "operationId": "CloudVmClusters_ListBySubscription",
+        "tags": [
+          "CloudVmClusters"
+        ],
+        "description": "List CloudVmCluster resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudVmClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List VM Clusters by subscription": {
+            "$ref": "./examples/vmClusters_listBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/locations/{location}/dbSystemShapes": {
+      "get": {
+        "operationId": "DbSystemShapes_ListByLocation",
+        "tags": [
+          "DbSystemShapes"
+        ],
+        "description": "List DbSystemShape resources by Location",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DbSystemShapeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List DbSystemShapes by location": {
+            "$ref": "./examples/dbSystemShapes_listByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/locations/{location}/dbSystemShapes/{dbsystemshapename}": {
+      "get": {
+        "operationId": "DbSystemShapes_Get",
+        "tags": [
+          "DbSystemShapes"
+        ],
+        "description": "Get a DbSystemShape",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dbsystemshapename",
+            "in": "path",
+            "description": "DbSystemShape name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DbSystemShape"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a DbSystemShape by name": {
+            "$ref": "./examples/dbSystemShapes_get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/locations/{location}/dnsPrivateViews": {
+      "get": {
+        "operationId": "DnsPrivateViews_ListByLocation",
+        "tags": [
+          "DnsPrivateViews"
+        ],
+        "description": "List DnsPrivateView resources by Location",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DnsPrivateViewListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List DnsPrivateViews by location": {
+            "$ref": "./examples/dnsPrivateViews_listByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/locations/{location}/dnsPrivateViews/{dnsprivateviewocid}": {
+      "get": {
+        "operationId": "DnsPrivateViews_Get",
+        "tags": [
+          "DnsPrivateViews"
+        ],
+        "description": "Get a DnsPrivateView",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dnsprivateviewocid",
+            "in": "path",
+            "description": "DnsPrivateView OCID",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DnsPrivateView"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a DnsPrivateView by name": {
+            "$ref": "./examples/dnsPrivateViews_get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/locations/{location}/dnsPrivateZones": {
+      "get": {
+        "operationId": "DnsPrivateZones_ListByLocation",
+        "tags": [
+          "DnsPrivateZones"
+        ],
+        "description": "List DnsPrivateZone resources by Location",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DnsPrivateZoneListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List DnsPrivateZones by location": {
+            "$ref": "./examples/dnsPrivateZones_listByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/locations/{location}/dnsPrivateZones/{dnsprivatezonename}": {
+      "get": {
+        "operationId": "DnsPrivateZones_Get",
+        "tags": [
+          "DnsPrivateZones"
+        ],
+        "description": "Get a DnsPrivateZone",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dnsprivatezonename",
+            "in": "path",
+            "description": "DnsPrivateZone name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DnsPrivateZone"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a DnsPrivateZone by name": {
+            "$ref": "./examples/dnsPrivateZones_get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/locations/{location}/giVersions": {
+      "get": {
+        "operationId": "GiVersions_ListByLocation",
+        "tags": [
+          "GiVersions"
+        ],
+        "description": "List GiVersion resources by Location",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GiVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List GiVersions by location": {
+            "$ref": "./examples/giVersions_listByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/locations/{location}/giVersions/{giversionname}": {
+      "get": {
+        "operationId": "GiVersions_Get",
+        "tags": [
+          "GiVersions"
+        ],
+        "description": "Get a GiVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "giversionname",
+            "in": "path",
+            "description": "GiVersion name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GiVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a GiVersion by name": {
+            "$ref": "./examples/giVersions_get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/oracleSubscriptions": {
+      "get": {
+        "operationId": "OracleSubscriptions_ListBySubscription",
+        "tags": [
+          "OracleSubscriptions"
+        ],
+        "description": "List OracleSubscription resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OracleSubscriptionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Oracle Subscriptions by subscription": {
+            "$ref": "./examples/oracleSubscriptions_listBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/oracleSubscriptions/default": {
+      "get": {
+        "operationId": "OracleSubscriptions_Get",
+        "tags": [
+          "OracleSubscriptions"
+        ],
+        "description": "Get a OracleSubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OracleSubscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Oracle Subscription": {
+            "$ref": "./examples/oracleSubscriptions_get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "OracleSubscriptions_CreateOrUpdate",
+        "tags": [
+          "OracleSubscriptions"
+        ],
+        "description": "Create a OracleSubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OracleSubscription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OracleSubscription' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OracleSubscription"
+            }
+          },
+          "201": {
+            "description": "Resource 'OracleSubscription' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OracleSubscription"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Oracle Subscription": {
+            "$ref": "./examples/oracleSubscriptions_create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "OracleSubscriptions_Update",
+        "tags": [
+          "OracleSubscriptions"
+        ],
+        "description": "Update a OracleSubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OracleSubscriptionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OracleSubscription"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Oracle Subscription": {
+            "$ref": "./examples/oracleSubscriptions_patch.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "OracleSubscriptions_Delete",
+        "tags": [
+          "OracleSubscriptions"
+        ],
+        "description": "Delete a OracleSubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Oracle Subscription": {
+            "$ref": "./examples/oracleSubscriptions_delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/oracleSubscriptions/default/listCloudAccountDetails": {
+      "post": {
+        "operationId": "OracleSubscriptions_ListCloudAccountDetails",
+        "tags": [
+          "OracleSubscriptions"
+        ],
+        "description": "List Cloud Account Details",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudAccountDetails"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Cloud Account details for the Oracle Subscription": {
+            "$ref": "./examples/oracleSubscriptions_listCloudAccountDetails.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/oracleSubscriptions/default/listSaasSubscriptionDetails": {
+      "post": {
+        "operationId": "OracleSubscriptions_ListSaasSubscriptionDetails",
+        "tags": [
+          "OracleSubscriptions"
+        ],
+        "description": "List Saas Subscription Details",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaasSubscriptionDetails"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Saas Subscription details for the Oracle Subscription": {
+            "$ref": "./examples/oracleSubscriptions_listSaasSubscriptionDetails.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudExadataInfrastructures": {
+      "get": {
+        "operationId": "CloudExadataInfrastructures_ListByResourceGroup",
+        "tags": [
+          "CloudExadataInfrastructures"
+        ],
+        "description": "List CloudExadataInfrastructure resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudExadataInfrastructureListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Exadata Infrastructure by resource group": {
+            "$ref": "./examples/exaInfra_listByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudExadataInfrastructures/{cloudexadatainfrastructurename}": {
+      "get": {
+        "operationId": "CloudExadataInfrastructures_Get",
+        "tags": [
+          "CloudExadataInfrastructures"
+        ],
+        "description": "Get a CloudExadataInfrastructure",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudexadatainfrastructurename",
+            "in": "path",
+            "description": "CloudExadataInfrastructure name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudExadataInfrastructure"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Exadata Infrastructure": {
+            "$ref": "./examples/exaInfra_get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CloudExadataInfrastructures_CreateOrUpdate",
+        "tags": [
+          "CloudExadataInfrastructures"
+        ],
+        "description": "Create a CloudExadataInfrastructure",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudexadatainfrastructurename",
+            "in": "path",
+            "description": "CloudExadataInfrastructure name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudExadataInfrastructure"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CloudExadataInfrastructure' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudExadataInfrastructure"
+            }
+          },
+          "201": {
+            "description": "Resource 'CloudExadataInfrastructure' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudExadataInfrastructure"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Exadata Infrastructure": {
+            "$ref": "./examples/exaInfra_create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CloudExadataInfrastructures_Update",
+        "tags": [
+          "CloudExadataInfrastructures"
+        ],
+        "description": "Update a CloudExadataInfrastructure",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudexadatainfrastructurename",
+            "in": "path",
+            "description": "CloudExadataInfrastructure name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudExadataInfrastructureUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudExadataInfrastructure"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Exadata Infrastructure": {
+            "$ref": "./examples/exaInfra_patch.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CloudExadataInfrastructures_Delete",
+        "tags": [
+          "CloudExadataInfrastructures"
+        ],
+        "description": "Delete a CloudExadataInfrastructure",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudexadatainfrastructurename",
+            "in": "path",
+            "description": "CloudExadataInfrastructure name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Exadata Infrastructure": {
+            "$ref": "./examples/exaInfra_delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudExadataInfrastructures/{cloudexadatainfrastructurename}/dbServers": {
+      "get": {
+        "operationId": "DbServers_ListByCloudExadataInfrastructure",
+        "tags": [
+          "DbServers"
+        ],
+        "description": "List DbServer resources by CloudExadataInfrastructure",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudexadatainfrastructurename",
+            "in": "path",
+            "description": "CloudExadataInfrastructure name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DbServerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List DbServers by Exadata Infrastructure": {
+            "$ref": "./examples/dbServers_listByParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudExadataInfrastructures/{cloudexadatainfrastructurename}/dbServers/{dbserverocid}": {
+      "get": {
+        "operationId": "DbServers_Get",
+        "tags": [
+          "DbServers"
+        ],
+        "description": "Get a DbServer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudexadatainfrastructurename",
+            "in": "path",
+            "description": "CloudExadataInfrastructure name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dbserverocid",
+            "in": "path",
+            "description": "DbServer OCID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DbServer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get DbServer by parent": {
+            "$ref": "./examples/dbServers_get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudVmClusters": {
+      "get": {
+        "operationId": "CloudVmClusters_ListByResourceGroup",
+        "tags": [
+          "CloudVmClusters"
+        ],
+        "description": "List CloudVmCluster resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudVmClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List VM Clusters by resource group": {
+            "$ref": "./examples/vmClusters_listByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudVmClusters/{cloudvmclustername}": {
+      "get": {
+        "operationId": "CloudVmClusters_Get",
+        "tags": [
+          "CloudVmClusters"
+        ],
+        "description": "Get a CloudVmCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudvmclustername",
+            "in": "path",
+            "description": "CloudVmCluster name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudVmCluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get VM Cluster": {
+            "$ref": "./examples/vmClusters_get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CloudVmClusters_CreateOrUpdate",
+        "tags": [
+          "CloudVmClusters"
+        ],
+        "description": "Create a CloudVmCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudvmclustername",
+            "in": "path",
+            "description": "CloudVmCluster name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudVmCluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CloudVmCluster' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudVmCluster"
+            }
+          },
+          "201": {
+            "description": "Resource 'CloudVmCluster' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudVmCluster"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create VM Cluster": {
+            "$ref": "./examples/vmClusters_create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CloudVmClusters_Update",
+        "tags": [
+          "CloudVmClusters"
+        ],
+        "description": "Update a CloudVmCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudvmclustername",
+            "in": "path",
+            "description": "CloudVmCluster name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudVmClusterUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudVmCluster"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch VM Cluster": {
+            "$ref": "./examples/vmClusters_patch.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CloudVmClusters_Delete",
+        "tags": [
+          "CloudVmClusters"
+        ],
+        "description": "Delete a CloudVmCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudvmclustername",
+            "in": "path",
+            "description": "CloudVmCluster name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete VM Cluster": {
+            "$ref": "./examples/vmClusters_delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudVmClusters/{cloudvmclustername}/addVms": {
+      "post": {
+        "operationId": "CloudVmClusters_AddVms",
+        "tags": [
+          "CloudVmClusters"
+        ],
+        "description": "Add VMs to the VM Cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudvmclustername",
+            "in": "path",
+            "description": "CloudVmCluster name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddRemoveDbNode"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudVmCluster"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add VMs to VM Cluster": {
+            "$ref": "./examples/vmClusters_addVms.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudVmClusters/{cloudvmclustername}/dbNodes": {
+      "get": {
+        "operationId": "DbNodes_ListByCloudVmCluster",
+        "tags": [
+          "DbNodes"
+        ],
+        "description": "List DbNode resources by CloudVmCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudvmclustername",
+            "in": "path",
+            "description": "CloudVmCluster name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DbNodeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List DbNodes by VM Cluster": {
+            "$ref": "./examples/dbNodes_listByParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudVmClusters/{cloudvmclustername}/dbNodes/{dbnodeocid}": {
+      "get": {
+        "operationId": "DbNodes_Get",
+        "tags": [
+          "DbNodes"
+        ],
+        "description": "Get a DbNode",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudvmclustername",
+            "in": "path",
+            "description": "CloudVmCluster name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dbnodeocid",
+            "in": "path",
+            "description": "DbNode OCID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DbNode"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get DbNode": {
+            "$ref": "./examples/dbNodes_get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudVmClusters/{cloudvmclustername}/listPrivateIpAddresses": {
+      "post": {
+        "operationId": "CloudVmClusters_ListPrivateIpAddresses",
+        "tags": [
+          "CloudVmClusters"
+        ],
+        "description": "List Private IP Addresses by the provided filter",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudvmclustername",
+            "in": "path",
+            "description": "CloudVmCluster name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateIpAddressesFilter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PrivateIpAddressProperties"
+              },
+              "x-ms-identifiers": []
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Private IP Addresses for VM Cluster": {
+            "$ref": "./examples/vmClusters_listPrivateIpAddresses.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudVmClusters/{cloudvmclustername}/removeVms": {
+      "post": {
+        "operationId": "CloudVmClusters_RemoveVms",
+        "tags": [
+          "CloudVmClusters"
+        ],
+        "description": "Remove VMs from the VM Cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudvmclustername",
+            "in": "path",
+            "description": "CloudVmCluster name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddRemoveDbNode"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudVmCluster"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove VMs from VM Cluster": {
+            "$ref": "./examples/vmClusters_removeVms.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudVmClusters/{cloudvmclustername}/virtualNetworkAddresses": {
+      "get": {
+        "operationId": "VirtualNetworkAddresses_ListByCloudVmCluster",
+        "tags": [
+          "VirtualNetworkAddresses"
+        ],
+        "description": "List VirtualNetworkAddress resources by CloudVmCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudvmclustername",
+            "in": "path",
+            "description": "CloudVmCluster name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkAddressListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Virtual Network Addresses by VM Cluster": {
+            "$ref": "./examples/virtualNetworkAddresses_listByParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/cloudVmClusters/{cloudvmclustername}/virtualNetworkAddresses/{virtualnetworkaddressname}": {
+      "get": {
+        "operationId": "VirtualNetworkAddresses_Get",
+        "tags": [
+          "VirtualNetworkAddresses"
+        ],
+        "description": "Get a VirtualNetworkAddress",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudvmclustername",
+            "in": "path",
+            "description": "CloudVmCluster name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualnetworkaddressname",
+            "in": "path",
+            "description": "Virtual IP address hostname.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkAddress"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Virtual Network Address": {
+            "$ref": "./examples/virtualNetworkAddresses_get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualNetworkAddresses_CreateOrUpdate",
+        "tags": [
+          "VirtualNetworkAddresses"
+        ],
+        "description": "Create a VirtualNetworkAddress",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudvmclustername",
+            "in": "path",
+            "description": "CloudVmCluster name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualnetworkaddressname",
+            "in": "path",
+            "description": "Virtual IP address hostname.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkAddress"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VirtualNetworkAddress' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkAddress"
+            }
+          },
+          "201": {
+            "description": "Resource 'VirtualNetworkAddress' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkAddress"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Virtual Network Address": {
+            "$ref": "./examples/virtualNetworkAddresses_create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualNetworkAddresses_Delete",
+        "tags": [
+          "VirtualNetworkAddresses"
+        ],
+        "description": "Delete a VirtualNetworkAddress",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudvmclustername",
+            "in": "path",
+            "description": "CloudVmCluster name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualnetworkaddressname",
+            "in": "path",
+            "description": "Virtual IP address hostname.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Virtual Network Address": {
+            "$ref": "./examples/virtualNetworkAddresses_delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AddRemoveDbNode": {
+      "type": "object",
+      "description": "Add/Remove (Virtual Machine) DbNode model",
+      "properties": {
+        "dbServers": {
+          "type": "array",
+          "description": "Db servers ocids",
+          "items": {
+            "$ref": "#/definitions/Ocid"
+          }
+        }
+      },
+      "required": [
+        "dbServers"
+      ]
+    },
+    "CloudAccountDetails": {
+      "type": "object",
+      "description": "Cloud Account Details model",
+      "properties": {
+        "cloudAccountName": {
+          "type": "string",
+          "description": "Cloud Account name",
+          "readOnly": true
+        },
+        "cloudAccountHomeRegion": {
+          "type": "string",
+          "description": "Cloud Account Home region",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudAccountProvisioningState": {
+      "type": "string",
+      "description": "CloudAccountProvisioningState enum",
+      "enum": [
+        "Pending",
+        "Provisioning",
+        "Available"
+      ],
+      "x-ms-enum": {
+        "name": "CloudAccountProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Pending value"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning value"
+          },
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Available value"
+          }
+        ]
+      }
+    },
+    "CloudExadataInfrastructure": {
+      "type": "object",
+      "description": "CloudExadataInfrastructure resource definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudExadataInfrastructureProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "zones": {
+          "type": "array",
+          "description": "CloudExadataInfrastructure zones",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "zones"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CloudExadataInfrastructureId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Oracle.Database/cloudExadataInfrastructures"
+          }
+        ]
+      }
+    },
+    "CloudExadataInfrastructureListResult": {
+      "type": "object",
+      "description": "The response of a CloudExadataInfrastructure list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CloudExadataInfrastructure items on this page",
+          "items": {
+            "$ref": "#/definitions/CloudExadataInfrastructure"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CloudExadataInfrastructureProperties": {
+      "type": "object",
+      "description": "CloudExadataInfrastructure resource model",
+      "properties": {
+        "ocid": {
+          "$ref": "#/definitions/Ocid",
+          "description": "Exadata infra ocid",
+          "readOnly": true
+        },
+        "computeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of compute servers for the cloud Exadata infrastructure.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "storageCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of storage servers for the cloud Exadata infrastructure.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "totalStorageSizeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total storage allocated to the cloud Exadata infrastructure resource, in gigabytes (GB).",
+          "readOnly": true
+        },
+        "availableStorageSizeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The available storage can be allocated to the cloud Exadata infrastructure resource, in gigabytes (GB).",
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "description": "The date and time the cloud Exadata infrastructure resource was created.",
+          "readOnly": true
+        },
+        "lifecycleDetails": {
+          "type": "string",
+          "description": "Additional information about the current lifecycle state.",
+          "readOnly": true
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "maintenanceWindow property",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "estimatedPatchingTime": {
+          "$ref": "#/definitions/EstimatedPatchingTime",
+          "description": "The estimated total time required in minutes for all patching operations (database server, storage server, and network switch patching).",
+          "readOnly": true
+        },
+        "customerContacts": {
+          "type": "array",
+          "description": "The list of customer email addresses that receive information from Oracle about the specified OCI Database service resource. Oracle uses these email addresses to send notifications about planned and unplanned software maintenance updates, information about system hardware, and other information needed by administrators. Up to 10 email addresses can be added to the customer contacts for a cloud Exadata infrastructure instance. ",
+          "items": {
+            "$ref": "#/definitions/CustomerContact"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/CloudExadataInfrastructureProvisioningState",
+          "description": "CloudExadataInfrastructure provisioning state",
+          "readOnly": true
+        },
+        "shape": {
+          "type": "string",
+          "description": "The model name of the cloud Exadata infrastructure resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "ociUrl": {
+          "type": "string",
+          "description": "HTTPS link to OCI resources exposed to Azure Customer via Azure Interface.",
+          "readOnly": true
+        },
+        "cpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of CPU cores allocated.",
+          "readOnly": true
+        },
+        "maxCpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of CPU cores available.",
+          "readOnly": true
+        },
+        "memorySizeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The memory allocated in GBs.",
+          "readOnly": true
+        },
+        "maxMemoryInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total memory available in GBs.",
+          "readOnly": true
+        },
+        "dbNodeStorageSizeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The local node storage to be allocated in GBs.",
+          "readOnly": true
+        },
+        "maxDbNodeStorageSizeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total local node storage available in GBs.",
+          "readOnly": true
+        },
+        "dataStorageSizeInTbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The quantity of data in the database, in terabytes.",
+          "readOnly": true
+        },
+        "maxDataStorageInTbs": {
+          "type": "number",
+          "format": "double",
+          "description": "The total available DATA disk group size.",
+          "readOnly": true
+        },
+        "dbServerVersion": {
+          "type": "string",
+          "description": "The software version of the database servers (dom0) in the Exadata infrastructure.",
+          "readOnly": true
+        },
+        "storageServerVersion": {
+          "type": "string",
+          "description": "The software version of the storage servers (cells) in the Exadata infrastructure.",
+          "readOnly": true
+        },
+        "activatedStorageCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The requested number of additional storage servers activated for the Exadata infrastructure.",
+          "readOnly": true
+        },
+        "additionalStorageCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The requested number of additional storage servers for the Exadata infrastructure.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name for the Exadata infrastructure.",
+          "minLength": 1,
+          "maxLength": 255,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "lastMaintenanceRunId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the last maintenance run.",
+          "readOnly": true
+        },
+        "nextMaintenanceRunId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the next maintenance run.",
+          "readOnly": true
+        },
+        "monthlyDbServerVersion": {
+          "type": "string",
+          "description": "Monthly Db Server version",
+          "readOnly": true
+        },
+        "monthlyStorageServerVersion": {
+          "type": "string",
+          "description": "Monthly Storage Server version",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "shape",
+        "displayName"
+      ]
+    },
+    "CloudExadataInfrastructureProvisioningState": {
+      "type": "string",
+      "description": "CloudExadataInfrastructureProvisioningState enum",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Available",
+        "Updating",
+        "Terminating",
+        "Terminated",
+        "MaintenanceInProgress"
+      ],
+      "x-ms-enum": {
+        "name": "CloudExadataInfrastructureProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning value"
+          },
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Available value"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating value"
+          },
+          {
+            "name": "Terminating",
+            "value": "Terminating",
+            "description": "Terminating value"
+          },
+          {
+            "name": "Terminated",
+            "value": "Terminated",
+            "description": "Terminated value"
+          },
+          {
+            "name": "MaintenanceInProgress",
+            "value": "MaintenanceInProgress",
+            "description": "MaintenanceInProgress value"
+          }
+        ]
+      }
+    },
+    "CloudExadataInfrastructureUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the CloudExadataInfrastructure.",
+      "properties": {
+        "zones": {
+          "type": "array",
+          "description": "CloudExadataInfrastructure zones",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CloudVmCluster": {
+      "type": "object",
+      "description": "CloudVmCluster resource definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudVmClusterProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CloudVmClusterListResult": {
+      "type": "object",
+      "description": "The response of a CloudVmCluster list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CloudVmCluster items on this page",
+          "items": {
+            "$ref": "#/definitions/CloudVmCluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CloudVmClusterProperties": {
+      "type": "object",
+      "description": "CloudVmCluster resource model",
+      "properties": {
+        "ocid": {
+          "$ref": "#/definitions/Ocid",
+          "description": "Cloud VM Cluster ocid",
+          "readOnly": true
+        },
+        "listenerPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The port number configured for the listener on the cloud VM cluster.",
+          "readOnly": true
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of nodes in the cloud VM cluster. ",
+          "readOnly": true
+        },
+        "storageSizeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The data disk group size to be allocated in GBs per VM.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "dataStorageSizeInTbs": {
+          "type": "number",
+          "format": "double",
+          "description": "The data disk group size to be allocated in TBs."
+        },
+        "dbNodeStorageSizeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The local node storage to be allocated in GBs."
+        },
+        "memorySizeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The memory to be allocated in GBs."
+        },
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time that the cloud VM cluster was created.",
+          "readOnly": true
+        },
+        "lifecycleDetails": {
+          "type": "string",
+          "description": "Additional information about the current lifecycle state.",
+          "readOnly": true
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone of the cloud VM cluster. For details, see [Exadata Infrastructure Time Zones](/Content/Database/References/timezones.htm).",
+          "minLength": 1,
+          "maxLength": 255,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "zoneId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the zone the cloud VM cluster is associated with.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "hostname": {
+          "type": "string",
+          "description": "The hostname for the cloud VM cluster.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain name for the cloud VM cluster.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "cpuCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of CPU cores enabled on the cloud VM cluster."
+        },
+        "ocpuCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of OCPU cores to enable on the cloud VM cluster. Only 1 decimal place is allowed for the fractional part."
+        },
+        "clusterName": {
+          "type": "string",
+          "description": "The cluster name for cloud VM cluster. The cluster name must begin with an alphabetic character, and may contain hyphens (-). Underscores (_) are not permitted. The cluster name can be no longer than 11 characters and is not case sensitive. ",
+          "minLength": 1,
+          "maxLength": 11,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "dataStoragePercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage assigned to DATA storage (user data and database files). The remaining percentage is assigned to RECO storage (database redo logs, archive logs, and recovery manager backups). Accepted values are 35, 40, 60 and 80. The default is 80 percent assigned to DATA storage. See [Storage Configuration](/Content/Database/Concepts/exaoverview.htm#Exadata) in the Exadata documentation for details on the impact of the configuration settings on storage. ",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "isLocalBackupEnabled": {
+          "type": "boolean",
+          "description": "If true, database backup on local Exadata storage is configured for the cloud VM cluster. If false, database backup on local Exadata storage is not available in the cloud VM cluster. ",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "cloudExadataInfrastructureId": {
+          "$ref": "#/definitions/CloudExadataInfrastructureId",
+          "description": "Cloud Exadata Infrastructure ID",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "isSparseDiskgroupEnabled": {
+          "type": "boolean",
+          "description": "If true, sparse disk group is configured for the cloud VM cluster. If false, sparse disk group is not created. ",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "systemVersion": {
+          "type": "string",
+          "description": "Operating system version of the image.",
+          "minLength": 1,
+          "maxLength": 255,
+          "readOnly": true
+        },
+        "sshPublicKeys": {
+          "type": "array",
+          "description": "The public key portion of one or more key pairs used for SSH access to the cloud VM cluster.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "licenseModel": {
+          "$ref": "#/definitions/LicenseModel",
+          "description": "The Oracle license model that applies to the cloud VM cluster. The default is LICENSE_INCLUDED. "
+        },
+        "diskRedundancy": {
+          "$ref": "#/definitions/DiskRedundancy",
+          "description": "The type of redundancy configured for the cloud Vm cluster. NORMAL is 2-way redundancy. HIGH is 3-way redundancy. ",
+          "readOnly": true
+        },
+        "scanIpIds": {
+          "type": "array",
+          "description": "The Single Client Access Name (SCAN) IP addresses associated with the cloud VM cluster. SCAN IP addresses are typically used for load balancing and are not assigned to any interface. Oracle Clusterware directs the requests to the appropriate nodes in the cluster.  **Note:** For a single-node DB system, this list is empty. ",
+          "items": {
+            "$ref": "#/definitions/Ocid"
+          },
+          "readOnly": true
+        },
+        "vipIds": {
+          "type": "array",
+          "description": "The virtual IP (VIP) addresses associated with the cloud VM cluster. The Cluster Ready Services (CRS) creates and maintains one VIP address for each node in the Exadata Cloud Service instance to enable failover. If one node fails, the VIP is reassigned to another active node in the cluster.  **Note:** For a single-node DB system, this list is empty. ",
+          "items": {
+            "$ref": "#/definitions/Ocid"
+          },
+          "readOnly": true
+        },
+        "scanDnsName": {
+          "type": "string",
+          "description": "The FQDN of the DNS record for the SCAN IP addresses that are associated with the cloud VM cluster. ",
+          "minLength": 1,
+          "maxLength": 72,
+          "readOnly": true
+        },
+        "scanListenerPortTcp": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The TCP Single Client Access Name (SCAN) port. The default port is 1521.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "scanListenerPortTcpSsl": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The TCPS Single Client Access Name (SCAN) port. The default port is 2484.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "scanDnsRecordId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the DNS record for the SCAN IP addresses that are associated with the cloud VM cluster.",
+          "readOnly": true
+        },
+        "shape": {
+          "type": "string",
+          "description": "The model name of the Exadata hardware running the cloud VM cluster.",
+          "minLength": 1,
+          "maxLength": 255,
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/CloudVmClusterProvisioningState",
+          "description": "CloudVmCluster provisioning state",
+          "readOnly": true
+        },
+        "vnetId": {
+          "$ref": "#/definitions/VnetId",
+          "description": "VNET for network connectivity",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "giVersion": {
+          "type": "string",
+          "description": "Oracle Grid Infrastructure (GI) software version",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "ociUrl": {
+          "type": "string",
+          "description": "HTTPS link to OCI resources exposed to Azure Customer via Azure Interface.",
+          "readOnly": true
+        },
+        "subnetId": {
+          "$ref": "#/definitions/SubnetId",
+          "description": "Client subnet",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "backupSubnetCidr": {
+          "type": "string",
+          "description": "Client OCI backup subnet CIDR, default is 192.168.252.0/22",
+          "minLength": 1,
+          "maxLength": 32,
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "dataCollectionOptions": {
+          "$ref": "#/definitions/DataCollectionOptions",
+          "description": "Indicates user preferences for the various diagnostic collection options for the VM cluster/Cloud VM cluster/VMBM DBCS."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "computeNodes": {
+          "type": "array",
+          "description": "The list of compute servers to be added to the cloud VM cluster.",
+          "items": {
+            "$ref": "#/definitions/Ocid"
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "iormConfigCache": {
+          "$ref": "#/definitions/ExadataIormConfig",
+          "description": "iormConfigCache details for cloud VM cluster.",
+          "readOnly": true
+        },
+        "lastUpdateHistoryEntryId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the last maintenance update history entry.",
+          "readOnly": true
+        },
+        "dbServers": {
+          "type": "array",
+          "description": "The list of DB servers.",
+          "items": {
+            "$ref": "#/definitions/Ocid"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "compartmentId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "Cluster compartmentId",
+          "readOnly": true
+        },
+        "subnetOcid": {
+          "$ref": "#/definitions/Ocid",
+          "description": "Cluster subnet ocid",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "hostname",
+        "cpuCoreCount",
+        "cloudExadataInfrastructureId",
+        "sshPublicKeys",
+        "vnetId",
+        "giVersion",
+        "subnetId",
+        "displayName"
+      ]
+    },
+    "CloudVmClusterProvisioningState": {
+      "type": "string",
+      "description": "CloudVmClusterProvisioningState enum",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Available",
+        "Updating",
+        "Terminating",
+        "Terminated",
+        "MaintenanceInProgress"
+      ],
+      "x-ms-enum": {
+        "name": "CloudVmClusterProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning value"
+          },
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Available value"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating value"
+          },
+          {
+            "name": "Terminating",
+            "value": "Terminating",
+            "description": "Terminating value"
+          },
+          {
+            "name": "Terminated",
+            "value": "Terminated",
+            "description": "Terminated value"
+          },
+          {
+            "name": "MaintenanceInProgress",
+            "value": "MaintenanceInProgress",
+            "description": "MaintenanceInProgress value"
+          }
+        ]
+      }
+    },
+    "CloudVmClusterUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the CloudVmCluster.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/CloudVmClusterUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CloudVmClusterUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the CloudVmCluster.",
+      "properties": {
+        "storageSizeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The data disk group size to be allocated in GBs per VM.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "dataStorageSizeInTbs": {
+          "type": "number",
+          "format": "double",
+          "description": "The data disk group size to be allocated in TBs."
+        },
+        "dbNodeStorageSizeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The local node storage to be allocated in GBs."
+        },
+        "memorySizeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The memory to be allocated in GBs."
+        },
+        "cpuCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of CPU cores enabled on the cloud VM cluster."
+        },
+        "ocpuCount": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of OCPU cores to enable on the cloud VM cluster. Only 1 decimal place is allowed for the fractional part."
+        },
+        "sshPublicKeys": {
+          "type": "array",
+          "description": "The public key portion of one or more key pairs used for SSH access to the cloud VM cluster.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "licenseModel": {
+          "$ref": "#/definitions/LicenseModel",
+          "description": "The Oracle license model that applies to the cloud VM cluster. The default is LICENSE_INCLUDED. "
+        },
+        "dataCollectionOptions": {
+          "$ref": "#/definitions/DataCollectionOptions",
+          "description": "Indicates user preferences for the various diagnostic collection options for the VM cluster/Cloud VM cluster/VMBM DBCS."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "computeNodes": {
+          "type": "array",
+          "description": "The list of compute servers to be added to the cloud VM cluster.",
+          "items": {
+            "$ref": "#/definitions/Ocid"
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
+    "CustomerContact": {
+      "type": "object",
+      "description": "CustomerContact resource properties",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "The email address used by Oracle to send notifications regarding databases and infrastructure.",
+          "minLength": 1,
+          "maxLength": 320
+        }
+      },
+      "required": [
+        "email"
+      ]
+    },
+    "DataCollectionOptions": {
+      "type": "object",
+      "description": "DataCollectionOptions resource properties",
+      "properties": {
+        "isDiagnosticsEventsEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether diagnostic collection is enabled for the VM cluster/Cloud VM cluster/VMBM DBCS.",
+          "default": false
+        },
+        "isHealthMonitoringEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether health monitoring is enabled for the VM cluster / Cloud VM cluster / VMBM DBCS.",
+          "default": false
+        },
+        "isIncidentLogsEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether incident logs and trace collection are enabled for the VM cluster / Cloud VM cluster / VMBM DBCS.",
+          "default": false
+        }
+      }
+    },
+    "DayOfWeek": {
+      "type": "object",
+      "description": "DayOfWeek resource properties",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/DayOfWeekName",
+          "description": "Name of the day of the week."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "DayOfWeekName": {
+      "type": "string",
+      "description": "DayOfWeekName enum",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "x-ms-enum": {
+        "name": "DayOfWeekName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Monday",
+            "value": "Monday",
+            "description": "Monday value"
+          },
+          {
+            "name": "Tuesday",
+            "value": "Tuesday",
+            "description": "Tuesday value"
+          },
+          {
+            "name": "Wednesday",
+            "value": "Wednesday",
+            "description": "Wednesday value"
+          },
+          {
+            "name": "Thursday",
+            "value": "Thursday",
+            "description": "Thursday value"
+          },
+          {
+            "name": "Friday",
+            "value": "Friday",
+            "description": "Friday value"
+          },
+          {
+            "name": "Saturday",
+            "value": "Saturday",
+            "description": "Saturday value"
+          },
+          {
+            "name": "Sunday",
+            "value": "Sunday",
+            "description": "Sunday value"
+          }
+        ]
+      }
+    },
+    "DbIormConfig": {
+      "type": "object",
+      "description": "DbIormConfig for cloud vm cluster",
+      "properties": {
+        "dbName": {
+          "type": "string",
+          "description": "The database name. For the default DbPlan, the dbName is default."
+        },
+        "flashCacheLimit": {
+          "type": "string",
+          "description": "The flash cache limit for this database. This value is internally configured based on the share value assigned to the database."
+        },
+        "share": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The relative priority of this database.",
+          "minimum": 1,
+          "maximum": 32
+        }
+      }
+    },
+    "DbNode": {
+      "type": "object",
+      "description": "The DbNode resource belonging to vmCluster",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DbNodeProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DbNodeActionEnum": {
+      "type": "string",
+      "description": "DbNode action enum",
+      "enum": [
+        "Start",
+        "Stop",
+        "SoftReset",
+        "Reset"
+      ],
+      "x-ms-enum": {
+        "name": "DbNodeActionEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Start",
+            "value": "Start",
+            "description": "Start DbNode"
+          },
+          {
+            "name": "Stop",
+            "value": "Stop",
+            "description": "Stop DbNode"
+          },
+          {
+            "name": "SoftReset",
+            "value": "SoftReset",
+            "description": "Soft reset DbNode"
+          },
+          {
+            "name": "Reset",
+            "value": "Reset",
+            "description": "Reset DbNode"
+          }
+        ]
+      }
+    },
+    "DbNodeListResult": {
+      "type": "object",
+      "description": "The response of a DbNode list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DbNode items on this page",
+          "items": {
+            "$ref": "#/definitions/DbNode"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DbNodeMaintenanceType": {
+      "type": "string",
+      "description": "The type of database node maintenance.",
+      "enum": [
+        "VmdbRebootMigration"
+      ],
+      "x-ms-enum": {
+        "name": "DbNodeMaintenanceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "VmdbRebootMigration",
+            "value": "VmdbRebootMigration",
+            "description": "Provisioning value"
+          }
+        ]
+      }
+    },
+    "DbNodeProperties": {
+      "type": "object",
+      "description": "The properties of DbNodeResource",
+      "properties": {
+        "ocid": {
+          "$ref": "#/definitions/Ocid",
+          "description": "DbNode OCID",
+          "readOnly": true
+        },
+        "additionalDetails": {
+          "type": "string",
+          "description": "Additional information about the planned maintenance.",
+          "readOnly": true
+        },
+        "backupIpId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the backup IP address associated with the database node.",
+          "readOnly": true
+        },
+        "backupVnic2Id": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the second backup VNIC.",
+          "readOnly": true
+        },
+        "backupVnicId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the backup VNIC.",
+          "readOnly": true
+        },
+        "cpuCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of CPU cores enabled on the Db node.",
+          "readOnly": true
+        },
+        "dbNodeStorageSizeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The allocated local node storage in GBs on the Db node.",
+          "readOnly": true
+        },
+        "dbServerId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the Exacc Db server associated with the database node.",
+          "readOnly": true
+        },
+        "dbSystemId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the DB system.",
+          "readOnly": true
+        },
+        "faultDomain": {
+          "type": "string",
+          "description": "The name of the Fault Domain the instance is contained in.",
+          "minLength": 1,
+          "maxLength": 255,
+          "readOnly": true
+        },
+        "hostIpId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the host IP address associated with the database node.",
+          "readOnly": true
+        },
+        "hostname": {
+          "type": "string",
+          "description": "The host name for the database node.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DbNodeProvisioningState",
+          "description": "The current state of the database node.",
+          "readOnly": true
+        },
+        "lifecycleDetails": {
+          "type": "string",
+          "description": "Lifecycle details of Db Node.",
+          "readOnly": true
+        },
+        "maintenanceType": {
+          "$ref": "#/definitions/DbNodeMaintenanceType",
+          "description": "The type of database node maintenance.",
+          "readOnly": true
+        },
+        "memorySizeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The allocated memory in GBs on the Db node.",
+          "readOnly": true
+        },
+        "softwareStorageSizeInGb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The size (in GB) of the block storage volume allocation for the DB system. This attribute applies only for virtual machine DB systems.",
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time that the database node was created.",
+          "readOnly": true
+        },
+        "timeMaintenanceWindowEnd": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date and time of maintenance window.",
+          "readOnly": true
+        },
+        "timeMaintenanceWindowStart": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date and time of maintenance window.",
+          "readOnly": true
+        },
+        "vnic2Id": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the second VNIC.",
+          "readOnly": true
+        },
+        "vnicId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the VNIC.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "ocid",
+        "dbSystemId"
+      ]
+    },
+    "DbNodeProvisioningState": {
+      "type": "string",
+      "description": "DnNode provisioning state enum",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Available",
+        "Updating",
+        "Stopping",
+        "Stopped",
+        "Starting",
+        "Terminating",
+        "Terminated"
+      ],
+      "x-ms-enum": {
+        "name": "DbNodeProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning value"
+          },
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Available value"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating value"
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "Stopping value"
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "Stopped value"
+          },
+          {
+            "name": "Starting",
+            "value": "Starting",
+            "description": "Starting value"
+          },
+          {
+            "name": "Terminating",
+            "value": "Terminating",
+            "description": "Terminating value"
+          },
+          {
+            "name": "Terminated",
+            "value": "Terminated",
+            "description": "Terminated value"
+          }
+        ]
+      }
+    },
+    "DbServer": {
+      "type": "object",
+      "description": "DbServer resource model",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DbServerProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DbServerListResult": {
+      "type": "object",
+      "description": "The response of a DbServer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DbServer items on this page",
+          "items": {
+            "$ref": "#/definitions/DbServer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DbServerPatchingDetails": {
+      "type": "object",
+      "description": "DbServer Patching Properties",
+      "properties": {
+        "estimatedPatchDuration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Estimated Patch Duration",
+          "minimum": 1,
+          "maximum": 3000,
+          "readOnly": true
+        },
+        "patchingStatus": {
+          "$ref": "#/definitions/DbServerPatchingStatus",
+          "description": "Patching Status",
+          "readOnly": true
+        },
+        "timePatchingEnded": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time Patching Ended",
+          "readOnly": true
+        },
+        "timePatchingStarted": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time Patching Started",
+          "readOnly": true
+        }
+      }
+    },
+    "DbServerPatchingStatus": {
+      "type": "string",
+      "description": "Db Server patching status enum",
+      "enum": [
+        "Scheduled",
+        "MaintenanceInProgress",
+        "Failed",
+        "Complete"
+      ],
+      "x-ms-enum": {
+        "name": "DbServerPatchingStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "SCHEDULED value"
+          },
+          {
+            "name": "MaintenanceInProgress",
+            "value": "MaintenanceInProgress",
+            "description": "MAINTENANCE_IN_PROGRESS value"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "FAILED value"
+          },
+          {
+            "name": "Complete",
+            "value": "Complete",
+            "description": "COMPLETE value"
+          }
+        ]
+      }
+    },
+    "DbServerProperties": {
+      "type": "object",
+      "description": "DbServer resource properties",
+      "properties": {
+        "ocid": {
+          "$ref": "#/definitions/Ocid",
+          "description": "Db server name.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name for the Db Server.",
+          "minLength": 1,
+          "maxLength": 255,
+          "readOnly": true
+        },
+        "compartmentId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the compartment.",
+          "readOnly": true
+        },
+        "exadataInfrastructureId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the Exadata infrastructure.",
+          "readOnly": true
+        },
+        "lifecycleDetails": {
+          "type": "string",
+          "description": "Lifecycle details of dbServer.",
+          "readOnly": true
+        },
+        "cpuCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of CPU cores enabled on the Db server.",
+          "readOnly": true
+        },
+        "dbServerPatchingDetails": {
+          "$ref": "#/definitions/DbServerPatchingDetails",
+          "description": "dbServerPatching details of the Db server.",
+          "readOnly": true
+        },
+        "maxMemoryInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total memory available in GBs.",
+          "readOnly": true
+        },
+        "dbNodeStorageSizeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The allocated local node storage in GBs on the Db server.",
+          "readOnly": true
+        },
+        "vmClusterIds": {
+          "type": "array",
+          "description": "The OCID of the VM Clusters associated with the Db server.",
+          "items": {
+            "$ref": "#/definitions/Ocid"
+          },
+          "readOnly": true
+        },
+        "dbNodeIds": {
+          "type": "array",
+          "description": "The OCID of the Db nodes associated with the Db server.",
+          "items": {
+            "$ref": "#/definitions/Ocid"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DbServerProvisioningState",
+          "description": "DbServer provisioning state.",
+          "readOnly": true
+        },
+        "maxCpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of CPU cores available.",
+          "readOnly": true
+        },
+        "autonomousVmClusterIds": {
+          "type": "array",
+          "description": "The list of OCIDs of the Autonomous VM Clusters associated with the Db server.",
+          "items": {
+            "$ref": "#/definitions/Ocid"
+          },
+          "readOnly": true
+        },
+        "autonomousVirtualMachineIds": {
+          "type": "array",
+          "description": "The list of OCIDs of the Autonomous Virtual Machines associated with the Db server.",
+          "items": {
+            "$ref": "#/definitions/Ocid"
+          },
+          "readOnly": true
+        },
+        "maxDbNodeStorageInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total max dbNode storage in GBs.",
+          "readOnly": true
+        },
+        "memorySizeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total memory size in GBs.",
+          "readOnly": true
+        },
+        "shape": {
+          "type": "string",
+          "description": "The shape of the Db server. The shape determines the amount of CPU, storage, and memory resources available.",
+          "minLength": 1,
+          "maxLength": 255,
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time that the Db Server was created.",
+          "readOnly": true
+        }
+      }
+    },
+    "DbServerProvisioningState": {
+      "type": "string",
+      "description": "DbServerProvisioningState enum",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Available",
+        "Updating",
+        "Terminating",
+        "Terminated",
+        "MaintenanceInProgress"
+      ],
+      "x-ms-enum": {
+        "name": "DbServerProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning value"
+          },
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Available value"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating value"
+          },
+          {
+            "name": "Terminating",
+            "value": "Terminating",
+            "description": "Terminating value"
+          },
+          {
+            "name": "Terminated",
+            "value": "Terminated",
+            "description": "Terminated value"
+          },
+          {
+            "name": "MaintenanceInProgress",
+            "value": "MaintenanceInProgress",
+            "description": "MaintenanceInProgress value"
+          }
+        ]
+      }
+    },
+    "DbSystemShape": {
+      "type": "object",
+      "description": "DbSystemShape resource definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DbSystemShapeProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DbSystemShapeListResult": {
+      "type": "object",
+      "description": "The response of a DbSystemShape list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DbSystemShape items on this page",
+          "items": {
+            "$ref": "#/definitions/DbSystemShape"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DbSystemShapeProperties": {
+      "type": "object",
+      "description": "DbSystemShape resource model",
+      "properties": {
+        "shapeFamily": {
+          "type": "string",
+          "description": "The family of the shape used for the DB system.",
+          "minLength": 1,
+          "maxLength": 255,
+          "readOnly": true
+        },
+        "availableCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of CPU cores that can be enabled on the DB system for this shape.",
+          "readOnly": true
+        },
+        "minimumCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of CPU cores that can be enabled on the DB system for this shape.",
+          "readOnly": true
+        },
+        "runtimeMinimumCoreCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The runtime minimum number of CPU cores that can be enabled on the DB system for this shape.",
+          "readOnly": true
+        },
+        "coreCountIncrement": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The discrete number by which the CPU core count for this shape can be increased or decreased.",
+          "readOnly": true
+        },
+        "minStorageCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of Exadata storage servers available for the Exadata infrastructure.",
+          "readOnly": true
+        },
+        "maxStorageCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of Exadata storage servers available for the Exadata infrastructure.",
+          "readOnly": true
+        },
+        "availableDataStoragePerServerInTbs": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum data storage available per storage server for this shape. Only applicable to ExaCC Elastic shapes.",
+          "readOnly": true
+        },
+        "availableMemoryPerNodeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum memory available per database node for this shape. Only applicable to ExaCC Elastic shapes.",
+          "readOnly": true
+        },
+        "availableDbNodePerNodeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum Db Node storage available per database node for this shape. Only applicable to ExaCC Elastic shapes.",
+          "readOnly": true
+        },
+        "minCoreCountPerNode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of CPU cores that can be enabled per node for this shape.",
+          "readOnly": true
+        },
+        "availableMemoryInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum memory that can be enabled for this shape.",
+          "readOnly": true
+        },
+        "minMemoryPerNodeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum memory that need be allocated per node for this shape.",
+          "readOnly": true
+        },
+        "availableDbNodeStorageInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum Db Node storage that can be enabled for this shape.",
+          "readOnly": true
+        },
+        "minDbNodeStoragePerNodeInGbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum Db Node storage that need be allocated per node for this shape.",
+          "readOnly": true
+        },
+        "availableDataStorageInTbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum DATA storage that can be enabled for this shape.",
+          "readOnly": true
+        },
+        "minDataStorageInTbs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum data storage that need be allocated for this shape.",
+          "readOnly": true
+        },
+        "minimumNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of database nodes available for this shape.",
+          "readOnly": true
+        },
+        "maximumNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of database nodes available for this shape.",
+          "readOnly": true
+        },
+        "availableCoreCountPerNode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of CPU cores per database node that can be enabled for this shape. Only applicable to the flex Exadata shape and ExaCC Elastic shapes.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "availableCoreCount"
+      ]
+    },
+    "DiskRedundancy": {
+      "type": "string",
+      "description": "DiskRedundancy enum",
+      "enum": [
+        "High",
+        "Normal"
+      ],
+      "x-ms-enum": {
+        "name": "DiskRedundancy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High value"
+          },
+          {
+            "name": "Normal",
+            "value": "Normal",
+            "description": "Normal value"
+          }
+        ]
+      }
+    },
+    "DnsPrivateView": {
+      "type": "object",
+      "description": "DnsPrivateView resource definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DnsPrivateViewProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DnsPrivateViewListResult": {
+      "type": "object",
+      "description": "The response of a DnsPrivateView list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DnsPrivateView items on this page",
+          "items": {
+            "$ref": "#/definitions/DnsPrivateView"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DnsPrivateViewProperties": {
+      "type": "object",
+      "description": "Views resource model",
+      "properties": {
+        "ocid": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the view",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the view resource",
+          "readOnly": true
+        },
+        "isProtected": {
+          "type": "boolean",
+          "description": "A Boolean flag indicating whether or not parts of the resource are unable to be explicitly managed.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DnsPrivateViewsProvisioningState",
+          "description": "Views lifecycleState",
+          "readOnly": true
+        },
+        "self": {
+          "type": "string",
+          "description": "The canonical absolute URL of the resource.",
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "views timeCreated",
+          "readOnly": true
+        },
+        "timeUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "views timeCreated",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "ocid",
+        "isProtected",
+        "self",
+        "timeCreated",
+        "timeUpdated"
+      ]
+    },
+    "DnsPrivateViewsProvisioningState": {
+      "type": "string",
+      "description": "DnsPrivateViews provisioning state enum",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Active",
+        "Deleted",
+        "Deleting",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "DnsPrivateViewsProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active value"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted value"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting value"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating value"
+          }
+        ]
+      }
+    },
+    "DnsPrivateZone": {
+      "type": "object",
+      "description": "DnsPrivateZone resource definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DnsPrivateZoneProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DnsPrivateZoneListResult": {
+      "type": "object",
+      "description": "The response of a DnsPrivateZone list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DnsPrivateZone items on this page",
+          "items": {
+            "$ref": "#/definitions/DnsPrivateZone"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DnsPrivateZoneProperties": {
+      "type": "object",
+      "description": "Zones resource model",
+      "properties": {
+        "ocid": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the Zone",
+          "readOnly": true
+        },
+        "isProtected": {
+          "type": "boolean",
+          "description": "A Boolean flag indicating whether or not parts of the resource are unable to be explicitly managed.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DnsPrivateZonesProvisioningState",
+          "description": "Zones lifecycleState",
+          "readOnly": true
+        },
+        "self": {
+          "type": "string",
+          "description": "The canonical absolute URL of the resource.",
+          "readOnly": true
+        },
+        "serial": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current serial of the zone. As seen in the zone's SOA record.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Version is the never-repeating, totally-orderable, version of the zone, from which the serial field of the zone's SOA record is derived.",
+          "readOnly": true
+        },
+        "viewId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "The OCID of the private view containing the zone. This value will be null for zones in the global DNS, which are publicly resolvable and not part of a private view.",
+          "readOnly": true
+        },
+        "zoneType": {
+          "$ref": "#/definitions/ZoneType",
+          "description": "The type of the zone. Must be either PRIMARY or SECONDARY. SECONDARY is only supported for GLOBAL zones.",
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Zones timeCreated",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "ocid",
+        "isProtected",
+        "self",
+        "serial",
+        "version",
+        "zoneType",
+        "timeCreated"
+      ]
+    },
+    "DnsPrivateZonesProvisioningState": {
+      "type": "string",
+      "description": "DnsPrivateZones provisioning state enum",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Active",
+        "Creating",
+        "Deleted",
+        "Deleting",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "DnsPrivateZonesProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active value"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating value"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted value"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting value"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating value"
+          }
+        ]
+      }
+    },
+    "EstimatedPatchingTime": {
+      "type": "object",
+      "description": "The estimated total time required in minutes for all patching operations (database server, storage server, and network switch patching).",
+      "properties": {
+        "estimatedDbServerPatchingTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The estimated time required in minutes for database server patching.",
+          "minimum": 1,
+          "maximum": 3000,
+          "readOnly": true
+        },
+        "estimatedNetworkSwitchesPatchingTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The estimated time required in minutes for network switch patching.",
+          "minimum": 1,
+          "maximum": 3000,
+          "readOnly": true
+        },
+        "estimatedStorageServerPatchingTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The estimated time required in minutes for storage server patching.",
+          "minimum": 1,
+          "maximum": 3000,
+          "readOnly": true
+        },
+        "totalEstimatedPatchingTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The estimated total time required in minutes for all patching operations.",
+          "minimum": 1,
+          "maximum": 3000,
+          "readOnly": true
+        }
+      }
+    },
+    "ExadataIormConfig": {
+      "type": "object",
+      "description": "ExadataIormConfig for cloud vm cluster",
+      "properties": {
+        "dbPlans": {
+          "type": "array",
+          "description": "An array of IORM settings for all the database in the Exadata DB system.",
+          "items": {
+            "$ref": "#/definitions/DbIormConfig"
+          },
+          "x-ms-identifiers": []
+        },
+        "lifecycleDetails": {
+          "type": "string",
+          "description": "Additional information about the current lifecycleState."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/IormLifecycleState",
+          "description": "The current state of IORM configuration for the Exadata DB system."
+        },
+        "objective": {
+          "$ref": "#/definitions/Objective",
+          "description": "The current value for the IORM objective. The default is AUTO."
+        }
+      }
+    },
+    "GiVersion": {
+      "type": "object",
+      "description": "GiVersion resource definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GiVersionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GiVersionListResult": {
+      "type": "object",
+      "description": "The response of a GiVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GiVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/GiVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GiVersionProperties": {
+      "type": "object",
+      "description": "GiVersion resource model",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "A valid Oracle Grid Infrastructure (GI) software version.",
+          "minLength": 1,
+          "maxLength": 255,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "version"
+      ]
+    },
+    "IormLifecycleState": {
+      "type": "string",
+      "description": "IORMLifecycleState enum",
+      "enum": [
+        "BootStrapping",
+        "Enabled",
+        "Disabled",
+        "Updating",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "IormLifecycleState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BootStrapping",
+            "value": "BootStrapping",
+            "description": "BOOTSTRAPPING value"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "ENABLED value"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "DISABLED value"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "UPDATING value"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "FAILED value"
+          }
+        ]
+      }
+    },
+    "LicenseModel": {
+      "type": "string",
+      "description": "LicenseModel enum",
+      "enum": [
+        "LicenseIncluded",
+        "BringYourOwnLicense"
+      ],
+      "x-ms-enum": {
+        "name": "LicenseModel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LicenseIncluded",
+            "value": "LicenseIncluded",
+            "description": "LicenseIncluded value"
+          },
+          {
+            "name": "BringYourOwnLicense",
+            "value": "BringYourOwnLicense",
+            "description": "BringYourOwnLicense value"
+          }
+        ]
+      }
+    },
+    "Location": {
+      "type": "object",
+      "description": "Do not use. Model to support location based path",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Void",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MaintenanceRun": {
+      "type": "object",
+      "description": "MaintenanceRun resource model",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceRunProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MaintenanceRunProperties": {
+      "type": "object",
+      "description": "MaintenanceRun resource properties",
+      "properties": {
+        "timeScheduled": {
+          "type": "string",
+          "description": "The date and time the maintenance run is scheduled to occur.",
+          "readOnly": true
+        },
+        "patchingStatus": {
+          "$ref": "#/definitions/PatchingStatus",
+          "description": "The status of the patching operation.",
+          "readOnly": true
+        },
+        "maintenanceType": {
+          "$ref": "#/definitions/MaintenanceType",
+          "description": "Maintenance type.",
+          "readOnly": true
+        },
+        "targetDbServerVersion": {
+          "type": "string",
+          "description": "The target software version for the database server patching operation.",
+          "readOnly": true
+        },
+        "targetStorageServerVersion": {
+          "type": "string",
+          "description": "The target Cell version that is to be patched to.",
+          "readOnly": true
+        },
+        "patchingMode": {
+          "$ref": "#/definitions/PatchingMode",
+          "description": "Cloud Exadata infrastructure node patching method.",
+          "readOnly": true
+        },
+        "estimatedPatchingTime": {
+          "$ref": "#/definitions/EstimatedPatchingTime",
+          "description": "The estimated total time required in minutes for all patching operations.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "timeScheduled"
+      ]
+    },
+    "MaintenanceType": {
+      "type": "string",
+      "description": "MaintenanceType enum",
+      "enum": [
+        "Planned",
+        "Unplanned"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Planned",
+            "value": "Planned",
+            "description": "Planned value"
+          },
+          {
+            "name": "Unplanned",
+            "value": "Unplanned",
+            "description": "Unplanned value"
+          }
+        ]
+      }
+    },
+    "MaintenanceWindow": {
+      "type": "object",
+      "description": "MaintenanceWindow resource properties",
+      "properties": {
+        "preference": {
+          "$ref": "#/definitions/Preference",
+          "description": "The maintenance window scheduling preference."
+        },
+        "months": {
+          "type": "array",
+          "description": "Months during the year when maintenance should be performed.",
+          "items": {
+            "$ref": "#/definitions/Month"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "weeksOfMonth": {
+          "type": "array",
+          "description": "Weeks during the month when maintenance should be performed. Weeks start on the 1st, 8th, 15th, and 22nd days of the month, and have a duration of 7 days. Weeks start and end based on calendar dates, not days of the week. For example, to allow maintenance during the 2nd week of the month (from the 8th day to the 14th day of the month), use the value 2. Maintenance cannot be scheduled for the fifth week of months that contain more than 28 days. Note that this parameter works in conjunction with the  daysOfWeek and hoursOfDay parameters to allow you to specify specific days of the week and hours that maintenance will be performed. ",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "daysOfWeek": {
+          "type": "array",
+          "description": "Days during the week when maintenance should be performed.",
+          "items": {
+            "$ref": "#/definitions/DayOfWeek"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "hoursOfDay": {
+          "type": "array",
+          "description": "The window of hours during the day when maintenance should be performed. The window is a 4 hour slot. Valid values are - 0 - represents time slot 0:00 - 3:59 UTC - 4 - represents time slot 4:00 - 7:59 UTC - 8 - represents time slot 8:00 - 11:59 UTC - 12 - represents time slot 12:00 - 15:59 UTC - 16 - represents time slot 16:00 - 19:59 UTC - 20 - represents time slot 20:00 - 23:59 UTC",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "leadTimeInWeeks": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Lead time window allows user to set a lead time to prepare for a down time. The lead time is in weeks and valid value is between 1 to 4. "
+        },
+        "patchingMode": {
+          "$ref": "#/definitions/PatchingMode",
+          "description": "Cloud Exadata infrastructure node patching method."
+        },
+        "customActionTimeoutInMins": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Determines the amount of time the system will wait before the start of each database server patching operation. Custom action timeout is in minutes and valid value is between 15 to 120 (inclusive).",
+          "minimum": 0,
+          "maximum": 120
+        },
+        "isCustomActionTimeoutEnabled": {
+          "type": "boolean",
+          "description": "If true, enables the configuration of a custom action timeout (waiting period) between database server patching operations."
+        },
+        "isMonthlyPatchingEnabled": {
+          "type": "boolean",
+          "description": "is Monthly Patching Enabled"
+        }
+      }
+    },
+    "Month": {
+      "type": "object",
+      "description": "Month resource properties",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/MonthName",
+          "description": "Name of the month of the year."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "MonthName": {
+      "type": "string",
+      "description": "MonthName enum",
+      "enum": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "x-ms-enum": {
+        "name": "MonthName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "January",
+            "value": "January",
+            "description": "January value"
+          },
+          {
+            "name": "February",
+            "value": "February",
+            "description": "February value"
+          },
+          {
+            "name": "March",
+            "value": "March",
+            "description": "March value"
+          },
+          {
+            "name": "April",
+            "value": "April",
+            "description": "April value"
+          },
+          {
+            "name": "May",
+            "value": "May",
+            "description": "May value"
+          },
+          {
+            "name": "June",
+            "value": "June",
+            "description": "June value"
+          },
+          {
+            "name": "July",
+            "value": "July",
+            "description": "July value"
+          },
+          {
+            "name": "August",
+            "value": "August",
+            "description": "August value"
+          },
+          {
+            "name": "September",
+            "value": "September",
+            "description": "September value"
+          },
+          {
+            "name": "October",
+            "value": "October",
+            "description": "October value"
+          },
+          {
+            "name": "November",
+            "value": "November",
+            "description": "November value"
+          },
+          {
+            "name": "December",
+            "value": "December",
+            "description": "December value"
+          }
+        ]
+      }
+    },
+    "Objective": {
+      "type": "string",
+      "description": "Objective enum",
+      "enum": [
+        "LowLatency",
+        "HighThroughput",
+        "Balanced",
+        "Auto",
+        "Basic"
+      ],
+      "x-ms-enum": {
+        "name": "Objective",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LowLatency",
+            "value": "LowLatency",
+            "description": "LOW_LATENCY value"
+          },
+          {
+            "name": "HighThroughput",
+            "value": "HighThroughput",
+            "description": "HIGH_THROUGHPUT value"
+          },
+          {
+            "name": "Balanced",
+            "value": "Balanced",
+            "description": "BALANCED value"
+          },
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "AUTO value"
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "BASIC value"
+          }
+        ]
+      }
+    },
+    "Ocid": {
+      "type": "string",
+      "description": "The [OCID](/Content/General/Concepts/identifiers.htm) of the resource.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "OracleSubscription": {
+      "type": "object",
+      "description": "OracleSubscription resource definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OracleSubscriptionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "plan": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Plan",
+          "description": "Details of the resource plan."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OracleSubscriptionListResult": {
+      "type": "object",
+      "description": "The response of a OracleSubscription list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OracleSubscription items on this page",
+          "items": {
+            "$ref": "#/definitions/OracleSubscription"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OracleSubscriptionProperties": {
+      "type": "object",
+      "description": "Oracle Subscription resource model",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/OracleSubscriptionProvisioningState",
+          "description": "OracleSubscriptionProvisioningState provisioning state",
+          "readOnly": true
+        },
+        "saasSubscriptionId": {
+          "type": "string",
+          "description": "SAAS subscription ID generated by Marketplace",
+          "readOnly": true
+        },
+        "cloudAccountId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "Cloud Account Id",
+          "readOnly": true
+        },
+        "cloudAccountState": {
+          "$ref": "#/definitions/CloudAccountProvisioningState",
+          "description": "Cloud Account provisioning state.",
+          "readOnly": true
+        }
+      }
+    },
+    "OracleSubscriptionProvisioningState": {
+      "type": "string",
+      "description": "OracleSubscriptionProvisioningState enum",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OracleSubscriptionProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
+    "OracleSubscriptionUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the OracleSubscription.",
+      "properties": {
+        "plan": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Plan",
+          "description": "Details of the resource plan."
+        }
+      }
+    },
+    "Password": {
+      "type": "string",
+      "format": "password",
+      "x-ms-secret": true
+    },
+    "PatchingMode": {
+      "type": "string",
+      "description": "PatchingMode enum",
+      "enum": [
+        "Rolling",
+        "NonRolling"
+      ],
+      "x-ms-enum": {
+        "name": "PatchingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Rolling",
+            "value": "Rolling",
+            "description": "Rolling value"
+          },
+          {
+            "name": "NonRolling",
+            "value": "NonRolling",
+            "description": "Non Rolling value"
+          }
+        ]
+      }
+    },
+    "PatchingStatus": {
+      "type": "string",
+      "description": "PatchingStatus enum for Maintenance Run",
+      "enum": [
+        "Patching",
+        "Waiting",
+        "Scheduled"
+      ],
+      "x-ms-enum": {
+        "name": "PatchingStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Patching",
+            "value": "Patching",
+            "description": "Patching value"
+          },
+          {
+            "name": "Waiting",
+            "value": "Waiting",
+            "description": "Waiting value"
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "Scheduled value"
+          }
+        ]
+      }
+    },
+    "Preference": {
+      "type": "string",
+      "description": "Preference enum",
+      "enum": [
+        "NoPreference",
+        "CustomPreference"
+      ],
+      "x-ms-enum": {
+        "name": "Preference",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoPreference",
+            "value": "NoPreference",
+            "description": "NoPreference value"
+          },
+          {
+            "name": "CustomPreference",
+            "value": "CustomPreference",
+            "description": "CustomPreference value"
+          }
+        ]
+      }
+    },
+    "PrivateIpAddressProperties": {
+      "type": "object",
+      "description": "PrivateIpAddress resource properties",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "PrivateIpAddresses displayName"
+        },
+        "hostnameLabel": {
+          "type": "string",
+          "description": "PrivateIpAddresses hostnameLabel"
+        },
+        "ocid": {
+          "$ref": "#/definitions/Ocid",
+          "description": "PrivateIpAddresses Id"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "PrivateIpAddresses ipAddress"
+        },
+        "subnetId": {
+          "$ref": "#/definitions/Ocid",
+          "description": "PrivateIpAddresses subnetId"
+        }
+      },
+      "required": [
+        "displayName",
+        "hostnameLabel",
+        "ocid",
+        "ipAddress",
+        "subnetId"
+      ]
+    },
+    "PrivateIpAddressesFilter": {
+      "type": "object",
+      "description": "Private Ip Addresses filter",
+      "properties": {
+        "subnetId": {
+          "$ref": "#/definitions/Ocid"
+        },
+        "vnicId": {
+          "$ref": "#/definitions/Ocid"
+        }
+      },
+      "required": [
+        "subnetId",
+        "vnicId"
+      ]
+    },
+    "SaasSubscriptionDetails": {
+      "type": "object",
+      "description": "SaaS Subscription Details model",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Purchased SaaS subscription ID",
+          "readOnly": true
+        },
+        "subscriptionName": {
+          "type": "string",
+          "description": "SaaS subscription name",
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation Date and Time",
+          "readOnly": true
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Purchased offer ID",
+          "readOnly": true
+        },
+        "planId": {
+          "type": "string",
+          "description": "Purchased offer's plan ID",
+          "readOnly": true
+        },
+        "saasSubscriptionStatus": {
+          "type": "string",
+          "description": "Indicates the status of the Subscription.",
+          "readOnly": true
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher ID",
+          "readOnly": true
+        },
+        "purchaserEmailId": {
+          "type": "string",
+          "description": "Purchaser Email ID",
+          "readOnly": true
+        },
+        "purchaserTenantId": {
+          "type": "string",
+          "description": "Purchaser Tenant ID",
+          "readOnly": true
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Purchase Term Unit",
+          "readOnly": true
+        },
+        "isAutoRenew": {
+          "type": "boolean",
+          "description": "AutoRenew flag",
+          "readOnly": true
+        },
+        "isFreeTrial": {
+          "type": "boolean",
+          "description": "FreeTrial flag",
+          "readOnly": true
+        }
+      }
+    },
+    "SubnetId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
+      }
+    },
+    "UpdateAction": {
+      "type": "string",
+      "description": "UpdateAction enum",
+      "enum": [
+        "RollingApply",
+        "NonRollingApply",
+        "PreCheck",
+        "RollBack"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RollingApply",
+            "value": "RollingApply",
+            "description": "ROLLING_APPLY value"
+          },
+          {
+            "name": "NonRollingApply",
+            "value": "NonRollingApply",
+            "description": "NON_ROLLING_APPLY value"
+          },
+          {
+            "name": "PreCheck",
+            "value": "PreCheck",
+            "description": "PRECHECK value"
+          },
+          {
+            "name": "RollBack",
+            "value": "RollBack",
+            "description": "ROLLBACK value"
+          }
+        ]
+      }
+    },
+    "ValidationError": {
+      "type": "object",
+      "description": "validation error",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "error message"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ValidationResult": {
+      "type": "object",
+      "description": "validation result",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ValidationStatus",
+          "description": "validation status"
+        },
+        "error": {
+          "$ref": "#/definitions/ValidationError",
+          "description": "validation error"
+        }
+      },
+      "required": [
+        "status",
+        "error"
+      ]
+    },
+    "ValidationStatus": {
+      "type": "string",
+      "description": "validation status",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded value"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed value"
+          }
+        ]
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Versions for API",
+      "enum": [
+        "2023-07-01-preview",
+        "2023-09-01-preview",
+        "internal"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v20230701",
+            "value": "2023-07-01-preview",
+            "description": "2023-07-01-preview"
+          },
+          {
+            "name": "v20230901",
+            "value": "2023-09-01-preview",
+            "description": "2023-09-01-preview"
+          },
+          {
+            "name": "vInternalApi",
+            "value": "internal",
+            "description": "internal api - RPaaS to ORP"
+          }
+        ]
+      }
+    },
+    "VirtualNetworkAddress": {
+      "type": "object",
+      "description": "Virtual IP resource belonging to a vm cluster resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkAddressProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VirtualNetworkAddressListResult": {
+      "type": "object",
+      "description": "The response of a VirtualNetworkAddress list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualNetworkAddress items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkAddress"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VirtualNetworkAddressProperties": {
+      "type": "object",
+      "description": "virtualNetworkAddress resource properties",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "Virtual network Address address.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vmOcid": {
+          "$ref": "#/definitions/Ocid",
+          "description": "Virtual Machine OCID.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "ocid": {
+          "$ref": "#/definitions/Ocid",
+          "description": "Application VIP OCID.",
+          "readOnly": true
+        },
+        "domain": {
+          "type": "string",
+          "description": "Virtual network address fully qualified domain name.",
+          "readOnly": true
+        },
+        "lifecycleDetails": {
+          "type": "string",
+          "description": "Additional information about the current lifecycle state of the application virtual IP (VIP) address.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/VirtualNetworkAddressProvisioningState",
+          "description": "virtual network address provisioning state.",
+          "readOnly": true
+        },
+        "timeAssigned": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the create operation for the application virtual IP (VIP) address completed.",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualNetworkAddressProvisioningState": {
+      "type": "string",
+      "description": "VirtualNetworkAddressProvisioningState enum",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Available",
+        "Terminating",
+        "Terminated"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkAddressProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning value"
+          },
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Available value"
+          },
+          {
+            "name": "Terminating",
+            "value": "Terminating",
+            "description": "Terminating value"
+          },
+          {
+            "name": "Terminated",
+            "value": "Terminated",
+            "description": "Terminated value"
+          }
+        ]
+      }
+    },
+    "VnetId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks"
+          }
+        ]
+      }
+    },
+    "Void": {
+      "type": "object",
+      "description": "Do not use. Model support location based path"
+    },
+    "ZoneType": {
+      "type": "string",
+      "description": "ZoneType enum",
+      "enum": [
+        "Primary",
+        "Secondary"
+      ],
+      "x-ms-enum": {
+        "name": "ZoneType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Primary",
+            "value": "Primary",
+            "description": "Primary value"
+          },
+          {
+            "name": "Secondary",
+            "value": "Secondary",
+            "description": "Secondary value"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
