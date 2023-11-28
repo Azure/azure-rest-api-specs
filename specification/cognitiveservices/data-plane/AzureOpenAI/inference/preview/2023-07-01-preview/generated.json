@@ -532,10 +532,7 @@
         "messages": {
           "type": "array",
           "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
-          "items": {
-            "$ref": "#/definitions/ChatRequestMessage"
-          },
-          "x-ms-identifiers": []
+          "items": {}
         },
         "functions": {
           "type": "array",
@@ -615,119 +612,6 @@
       "required": [
         "messages"
       ]
-    },
-    "ChatRequestAssistantMessage": {
-      "type": "object",
-      "description": "A request chat message representing response or action from the assistant.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "The content of the message.",
-          "x-nullable": true
-        },
-        "name": {
-          "type": "string",
-          "description": "An optional name for the participant."
-        },
-        "function_call": {
-          "$ref": "#/definitions/FunctionCall",
-          "description": "The function call that must be resolved and have its output appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
-          "x-ms-client-name": "functionCall"
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatRequestMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "assistant"
-    },
-    "ChatRequestFunctionMessage": {
-      "type": "object",
-      "description": "A request chat message representing requested output from a configured function.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the function that was called to produce output."
-        },
-        "content": {
-          "type": "string",
-          "description": "The output of the function as requested by the function call.",
-          "x-nullable": true
-        }
-      },
-      "required": [
-        "name",
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatRequestMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "function"
-    },
-    "ChatRequestMessage": {
-      "type": "object",
-      "description": "An abstract representation of a chat message as provided in a request.",
-      "properties": {
-        "role": {
-          "$ref": "#/definitions/ChatRole",
-          "description": "The chat role associated with this message."
-        }
-      },
-      "discriminator": "role",
-      "required": [
-        "role"
-      ]
-    },
-    "ChatRequestSystemMessage": {
-      "type": "object",
-      "description": "A request chat message containing system instructions that influence how the model will generate a chat completions\nresponse.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "The contents of the system message."
-        },
-        "name": {
-          "type": "string",
-          "description": "An optional name for the participant."
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatRequestMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "system"
-    },
-    "ChatRequestUserMessage": {
-      "type": "object",
-      "description": "A request chat message representing user input to the assistant.",
-      "properties": {
-        "content": {
-          "description": "The contents of the user message, with available input types varying by selected model."
-        },
-        "name": {
-          "type": "string",
-          "description": "An optional name for the participant."
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatRequestMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "user"
     },
     "ChatResponseMessage": {
       "type": "object",

@@ -42,7 +42,7 @@ model ChatCompletionsOptions {
     Assistant roles.
     """)
   @projectedName("json", "messages")
-  messages: ChatRequestMessage[];
+  messages: ChatRequestMessageUnion[];
 
   @doc("A list of functions the model may generate JSON inputs for.")
   @added(ServiceApiVersions.v2023_07_01_Preview)

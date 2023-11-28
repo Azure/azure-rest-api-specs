@@ -85,6 +85,9 @@ model ChatRequestMessage {
   role: ChatRole;
 }
 
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
+alias ChatRequestMessageUnion = ChatRequestSystemMessage | ChatRequestUserMessage | ChatRequestAssistantMessage | ChatRequestToolMessage | ChatRequestFunctionMessage;
+
 @added(ServiceApiVersions.v2023_05_15)
 @doc("""
 A request chat message containing system instructions that influence how the model will generate a chat completions
