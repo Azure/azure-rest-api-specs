@@ -435,9 +435,6 @@
         },
         "remoteVariantAssignment": {
           "$ref": "#/definitions/RemoteVariantAssignment"
-        },
-        "userAssignedIdentityVariables": {
-          "$ref": "#/definitions/UserAssignedIdentityVariables"
         }
       }
     },
@@ -579,6 +576,21 @@
               }
             ]
           }
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "description": "User assigned identity to use for accessing storage account. This identity should have access to storage account specified in storageAccountResourceId. If not specified, defaults to first alphabetically sorted user assigned identity assigned to the workspace.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResourceTypes": [
+              {
+                "scopes": [
+                  "ResourceGroup"
+                ],
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         }
       }
     },
@@ -610,24 +622,6 @@
             "name": "remoteVariantAssignmentProvisioningState",
             "modelAsString": false
           }
-        }
-      }
-    },
-    "UserAssignedIdentityVariables": {
-      "type": "object",
-      "description": "The identity variables for the workspace. These variables will be used to identify which managed identity to be used for the workspace (or the dependent resources) authentication when multiple user assigned identities assigned to resource.",
-      "additionalProperties": {
-        "type": "string",
-        "format": "arm-id",
-        "x-ms-arm-id-details": {
-          "allowedResourceTypes": [
-            {
-              "scopes": [
-                "ResourceGroup"
-              ],
-              "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-            }
-          ]
         }
       }
     }
