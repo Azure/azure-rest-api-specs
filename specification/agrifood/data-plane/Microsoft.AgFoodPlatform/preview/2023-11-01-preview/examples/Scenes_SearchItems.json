@@ -1,54 +1,30 @@
-{
+﻿{
   "parameters": {
-    "collectionId": "Sentinel_2_L2A",
-    "maxpagesize": 2,
-    "skip": 15,
+    "collectionId": "sentinel_2_l2a",
     "api-version": "2023-11-01-preview",
-    "searchFeaturesQuery": {
-      "credentials": {
-        "kind": "OAuthClientCredentials",
-        "clientId": "string",
-        "clientSecret": {
-          "keyVaultUri": "https://<keyvaultname>.vault.azure.net/",
-          "keyName": "string",
-          "keyVersion": "string"
-        }
-      },
+    "body": {
       "startDateTime": "2022-01-26T14:53:23.825Z",
       "endDateTime": "2023-01-26T14:53:23.825Z",
       "intersects": {
         "type": "Polygon",
         "coordinates": [
           [
-            [
-              7.662878883920398,
-              47.845905986476225
-            ],
-            [
-              7.687601396600625,
-              46.85818510350441
-            ],
-            [
-              9.12804406196848,
-              46.86563725992561
-            ],
-            [
-              9.130456971517189,
-              47.85361872819965
-            ],
-            [
-              7.662878883920398,
-              47.845905986476225
-            ]
+            [ 7.662878883920398, 47.845905986476225 ],
+            [ 7.687601396600625, 46.85818510350441 ],
+            [ 9.12804406196848, 46.86563725992561 ],
+            [ 9.130456971517189, 47.85361872819965 ],
+            [ 7.662878883920398, 47.845905986476225 ]
           ]
         ]
-      }
+      },
+      "limit": 2,
+      "next": 15
     }
   },
   "responses": {
     "200": {
       "body": {
-        "features": [
+        "items": [
           {
             "stacVersion": "0.9.0",
             "stacExtensions": [
@@ -442,7 +418,8 @@
             }
           }
         ],
-        "nextLink": "https://{{resourceName}}.farmbeats.azure.net//scenes/stac-collections/Sentinel_2_L2A:search?api-version={{apiVersion}}&maxpagesize=2&skip=17"
+        "next": 17,
+        "returned": 2
       }
     }
   }
