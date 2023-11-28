@@ -5,15 +5,42 @@ using Azure.ClientGenerator.Core;
 
 // Azure-specific long-running operations should be treated as implementation details that are wrapped into
 // appropriately merged public surface.
-@@internal(Azure.OpenAI.beginAzureBatchImageGeneration);
-@@internal(Azure.OpenAI.getAzureBatchImageGenerationOperationStatus);
+@@access(Azure.OpenAI.beginAzureBatchImageGeneration, Access.internal);
+@@access(Azure.OpenAI.getAzureBatchImageGenerationOperationStatus,
+  Access.internal
+);
 
 // Azure-specific Chat Completions with extensions should be handled by clients as a conditional selection within the
 // shared Chat Completions route, with the selection gated by the presence or non-presence of additional child
 // configuration options on the request payload options model.
-@@internal(Azure.OpenAI.getChatCompletionsWithAzureExtensions);
+@@access(Azure.OpenAI.getChatCompletionsWithAzureExtensions, Access.internal);
 
 // Some models from routes with suppressed visibility are still desired for custom public surface.
-@@include(Azure.OpenAI.ImageGenerationOptions);
-@@include(Azure.OpenAI.ImageLocation);
-@@include(Azure.OpenAI.ImageGenerations);
+@@access(Azure.OpenAI.ImageGenerationOptions, Access.public);
+@@usage(Azure.OpenAI.ImageGenerationOptions, Usage.input | Usage.output);
+@@access(Azure.OpenAI.ImageLocation, Access.public);
+@@usage(Azure.OpenAI.ImageLocation, Usage.input | Usage.output);
+@@access(Azure.OpenAI.ImageSize, Access.public);
+@@usage(Azure.OpenAI.ImageGenerations, Usage.input | Usage.output);
+
+// Java will need to have those models expose in public surface.
+@@access(Azure.OpenAI.AudioTranscription, Access.public, "java");
+@@access(Azure.OpenAI.AudioTranscriptionOptions, Access.public, "java");
+@@access(Azure.OpenAI.AudioTranslation, Access.public, "java");
+@@access(Azure.OpenAI.AudioTranslationOptions, Access.public, "java");
+@@access(Azure.OpenAI.AzureOpenAIOperationState, Access.public, "java");
+
+@@access(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions,
+  Access.public
+);
+@@usage(Azure.OpenAI.AzureCognitiveSearchIndexFieldMappingOptions, Usage.input);
+
+@@access(Azure.OpenAI.AzureCognitiveSearchQueryType, Access.public);
+@@usage(Azure.OpenAI.AzureCognitiveSearchQueryType, Usage.input);
+
+@@access(Azure.OpenAI.AzureCognitiveSearchChatExtensionConfiguration,
+  Access.public
+);
+@@usage(Azure.OpenAI.AzureCognitiveSearchChatExtensionConfiguration,
+  Usage.input
+);
