@@ -38,45 +38,6 @@
         "name"
       ]
     },
-    "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorResponseBody",
-          "description": "null"
-        }
-      },
-      "description": "An error response from the Azure Data on Azure Arc service."
-    },
-    "ErrorResponseBody": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorResponseBody"
-          },
-          "x-ms-identifiers": [
-            "message",
-            "target"
-          ],
-          "description": "A list of additional details about the error."
-        }
-      },
-      "description": "An error response from the Batch service."
-    },
     "ExtendedLocation": {
       "type": "object",
       "description": "The complex type of the extended location.",

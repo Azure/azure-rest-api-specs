@@ -65,7 +65,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -99,8 +99,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the availability group."
+          "202": {
+            "description": "Resource deletion is in progress.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The specified availability group does not exist."
@@ -108,7 +114,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -116,7 +122,8 @@
           "Deletes a availability group resource": {
             "$ref": "./examples/DeleteArcSqlServerAvailabilityGroup.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -151,7 +158,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -200,10 +207,19 @@
               "$ref": "#/definitions/SqlServerAvailabilityGroupResource"
             }
           },
+          "202": {
+            "description": "Resource update is in progress.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -211,6 +227,10 @@
           "Update a availability group.": {
             "$ref": "./examples/UpdateArcSqlServerAvailabilityGroup.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -248,7 +268,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -293,7 +313,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -338,7 +358,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -380,7 +400,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -556,6 +576,19 @@
         "synchronizationHealthDescription": {
           "type": "string",
           "description": "Reflects a roll-up of the synchronization health of all availability replicas in the availability group."
+        },
+        "replicationPartnerType": {
+          "type": "string",
+          "enum": [
+            "SQLServer",
+            "AzureSQLVM",
+            "AzureSQLManagedInstance",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "replicationPartnerType",
+            "modelAsString": false
+          }
         }
       }
     },

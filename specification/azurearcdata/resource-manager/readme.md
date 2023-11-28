@@ -48,6 +48,7 @@ input-file:
   - Microsoft.AzureArcData/preview/2023-12-01-preview/sqlServerAvailabilityGroups.json
   - Microsoft.AzureArcData/preview/2023-12-01-preview/sqlServerDatabases.json
   - Microsoft.AzureArcData/preview/2023-12-01-preview/sqlServerInstances.json
+  - Microsoft.AzureArcData/preview/2023-12-01-preview/sqlServerLicenses.json
 ```
 ### Tag: package-preview-2023-11
 

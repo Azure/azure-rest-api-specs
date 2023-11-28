@@ -65,7 +65,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -99,8 +99,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the database."
+          "202": {
+            "description": "Resource deletion is in progress.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The specified database does not exist."
@@ -108,7 +114,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -116,7 +122,8 @@
           "Deletes a database resource": {
             "$ref": "./examples/DeleteArcSqlServerDatabase.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -151,7 +158,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -200,10 +207,19 @@
               "$ref": "#/definitions/SqlServerDatabaseResource"
             }
           },
+          "202": {
+            "description": "Resource update is in progress.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -211,6 +227,10 @@
           "Update a database.": {
             "$ref": "./examples/UpdateSqlServerDatabase.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -245,7 +265,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
