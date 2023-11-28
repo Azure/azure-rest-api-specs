@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "applicationAcceleratorName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "components": [
+                {
+                  "name": "component1",
+                  "resourceRequests": {
+                    "cpu": "1",
+                    "memory": "1Gi",
+                    "instanceCount": 1
+                  },
+                  "instances": [
+                    {
+                      "name": "instance1",
+                      "status": "Running"
+                    }
+                  ]
+                }
+              ]
+            },
+            "sku": {
+              "name": "E0",
+              "tier": "Enterprise",
+              "capacity": 2
+            },
+            "systemData": {
+              "createdBy": "sample-user",
+              "createdByType": "User",
+              "createdAt": "2021-08-11T03:16:03.944Z",
+              "lastModifiedBy": "sample-user",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+            },
+            "type": "Microsoft.AppPlatform/Spring/applicationAccelerators",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/applicationAccelerators/default",
+            "name": "default"
+          }
+        ]
+      }
+    }
+  }
+}

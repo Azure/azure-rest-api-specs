@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2023-08-01-preview",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff",
+    "resourceGroupName": "rg1",
+    "devCenterName": "Contoso",
+    "catalogName": "myCatalog"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/catalogs/myCatalog/environmentDefinitions/myEnvironmentDefinition",
+            "name": "myEnvironmentDefinition",
+            "type": "Microsoft.DevCenter/devcenters/catalogs/environmentDefinitions",
+            "properties": {
+              "description": "My sample environment definition.",
+              "parameters": [
+                {
+                  "id": "functionAppRuntime",
+                  "name": "Function App Runtime",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "id": "storageAccountType",
+                  "name": "Storage Account Type",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "id": "httpsOnly",
+                  "name": "HTTPS only",
+                  "type": "boolean",
+                  "readOnly": true,
+                  "required": true
+                }
+              ],
+              "templatePath": "azuredeploy.json",
+              "validationStatus": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-11-18T18:00:36.993Z",
+              "lastModifiedBy": "user1",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-11-18T18:30:36.993Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

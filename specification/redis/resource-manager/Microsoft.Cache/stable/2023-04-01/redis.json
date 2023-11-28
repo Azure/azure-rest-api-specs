@@ -2042,6 +2042,17 @@
         },
         "subnetId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              },
+              {
+                "type": "Microsoft.ClassicNetwork/virtualNetworks/subnets"
+              }
+            ]
+          },
           "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
           "description": "The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
         },
@@ -2601,6 +2612,14 @@
         "id": {
           "readOnly": true,
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Cache/redis/linkedServers"
+              }
+            ]
+          },
           "description": "Linked server Id."
         }
       }
@@ -2657,6 +2676,14 @@
       "properties": {
         "linkedRedisCacheId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Cache/redis"
+              }
+            ]
+          },
           "description": "Fully qualified resourceId of the linked redis cache."
         },
         "linkedRedisCacheLocation": {

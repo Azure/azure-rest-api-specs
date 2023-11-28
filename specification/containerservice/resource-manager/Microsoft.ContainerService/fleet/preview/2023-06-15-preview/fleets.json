@@ -1954,7 +1954,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the Fleet member group to update. \nIt should match the name of an existing FleetMember group.\nA group can only appear once across all UpdateStages in the UpdateRun.",
+          "description": "Name of the group.\nIt must match a group name of an existing fleet member. ",
           "minLength": 1,
           "maxLength": 50,
           "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
@@ -1993,7 +1993,7 @@
     },
     "UpdateRun": {
       "type": "object",
-      "description": "An UpdateRun is a multi-stage process to perform update operations across members of a Fleet.",
+      "description": "A multi-stage process to perform update operations across members of a Fleet.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/UpdateRunProperties",
@@ -2123,11 +2123,11 @@
     },
     "UpdateRunStrategy": {
       "type": "object",
-      "description": "The UpdateRunStrategy configures the sequence of Stages and Groups in which the clusters will be updated.",
+      "description": "Defines the update sequence of the clusters via stages and groups.\n\nStages within a run are executed sequentially one after another.\nGroups within a stage are executed in parallel.\nMember clusters within a group are updated sequentially one after another.\n\nA valid strategy contains no duplicate groups within or across stages.",
       "properties": {
         "stages": {
           "type": "array",
-          "description": "The list of stages that compose this update run.",
+          "description": "The list of stages that compose this update run. Min size: 1.",
           "items": {
             "$ref": "#/definitions/UpdateStage"
           },
@@ -2142,7 +2142,7 @@
     },
     "UpdateStage": {
       "type": "object",
-      "description": "Contains the groups to be updated by an UpdateRun.\nUpdate order:\n- Sequential between stages: Stages run sequentially. The previous stage must complete before the next one starts.\n- Parallel within a stage: Groups within a stage run in parallel.\n- Sequential within a group: Clusters within a group are updated sequentially.",
+      "description": "Defines a stage which contains the groups to update and the steps to take (e.g., wait for a time period) before starting the next stage.",
       "properties": {
         "name": {
           "type": "string",
@@ -2153,7 +2153,7 @@
         },
         "groups": {
           "type": "array",
-          "description": "A list of group names that compose the stage.\nThe groups will be updated in parallel. Each group name can only appear once in the UpdateRun.",
+          "description": "Defines the groups to be executed in parallel in this stage. Duplicate groups are not allowed. Min size: 1.",
           "items": {
             "$ref": "#/definitions/UpdateGroup"
           },
