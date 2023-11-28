@@ -170,6 +170,16 @@
             "description": "The request to patch the experiment workspace is accepted and is running asynchronously. Check Azure-AsyncOperation headers to poll detailed status.",
             "schema": {
               "$ref": "#/definitions/ExperimentWorkspace"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Azure Async Operation",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Location Url to monitor progress.",
+                "type": "string"
+              }
             }
           },
           "200": {
