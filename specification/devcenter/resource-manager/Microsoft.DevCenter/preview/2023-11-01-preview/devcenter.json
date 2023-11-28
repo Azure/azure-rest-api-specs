@@ -2100,6 +2100,12 @@
         ],
         "operationId": "Catalogs_CreateOrUpdate",
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Catalog"
+            }
+          },
           "201": {
             "description": "Accepted. Operation will complete asynchronously.",
             "schema": {
@@ -2525,6 +2531,12 @@
               "$ref": "#/definitions/EnvironmentType"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentType"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2854,6 +2866,12 @@
         "responses": {
           "200": {
             "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProjectEnvironmentType"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/ProjectEnvironmentType"
             }
@@ -3374,6 +3392,10 @@
               "$ref": "commonDefinitions.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Get OperationStatus": {
