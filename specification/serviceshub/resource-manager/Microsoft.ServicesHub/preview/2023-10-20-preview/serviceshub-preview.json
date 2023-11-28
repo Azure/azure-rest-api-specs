@@ -671,10 +671,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/spaces/{spaceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/spaces": {
       "get": {
         "tags": [
-          "GetConnectorSpaceInfo"
+          "ConnectorSpaceInfoList"
         ],
         "summary": "Get ConnectorSpace Info.",
         "operationId": "ConnectorSpaceInfoList",
@@ -716,13 +716,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Spaces List for Engage Hub Context": {
-            "$ref": "./examples/GetConnectorSpaceInfo.json"
-          }
         }
-      },
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/spaces/{spaceName}": {
       "put": {
         "tags": [
           "LinkingSpaceWithConnector"
