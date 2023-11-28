@@ -1748,7 +1748,43 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Return the status of import csv operation.",
+            "description": "OK. Return the status of an entity async operation.",
+            "schema": {
+              "$ref": "#/definitions/EntityAsyncOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/entity/operations/{operationGuid}/cancel": {
+      "post": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Cancel an entity asynchronous operation",
+        "operationId": "Entity_CancelOperationByOperationGuid",
+        "x-ms-examples": {
+          "Entity_CancelOperationByOperationGuid": {
+            "$ref": "./examples/Entity_CancelOperationByOperationGuid.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/operationGuid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return the status of entity async operation.",
             "schema": {
               "$ref": "#/definitions/EntityAsyncOperation"
             }
@@ -7153,8 +7189,7 @@
             },
             "updateTime": {
               "$ref": "#/definitions/TimeCondition"
-            },
-            "description": "The entity filter for export request."
+            }
           }
         },
         "location": {
@@ -7465,7 +7500,9 @@
         "NotStarted",
         "Succeeded",
         "Failed",
-        "Running"
+        "Running",
+        "PartialSucceeded",
+        "Aborted"
       ],
       "x-ms-enum": {
         "name": "EntityAsyncOperationStatus",
