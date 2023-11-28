@@ -1765,11 +1765,6 @@
     "ScheduleUpdate": {
       "description": "The schedule properties for partial update. Properties not provided in the update request will not be changed.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "commonDefinitions.json#/definitions/TrackedResourceUpdate"
-        }
-      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1781,6 +1776,11 @@
     "ScheduleUpdateProperties": {
       "description": "Updatable properties of a Schedule.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "commonDefinitions.json#/definitions/TrackedResourceUpdate"
+        }
+      ],
       "properties": {
         "type": {
           "description": "Supported type this scheduled task represents.",
