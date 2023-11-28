@@ -8885,7 +8885,8 @@
         },
         "details": {
           "$ref": "#/definitions/AKSAssessmentDetails",
-          "description": "Gets or sets AKS Assessment Details."
+          "description": "Gets or sets AKS Assessment Details.",
+          "readOnly": true
         }
       },
       "required": [
@@ -9101,10 +9102,14 @@
       "type": "object",
       "description": "ARM model of AKS Summary.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "AKS Assessment Summary Name.",
-          "pattern": "^[^<>&:\\?/#]{1,260}$"
+        "properties": {
+          "$ref": "#/definitions/AKSSummaryProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "eTag": {
           "type": "string",
@@ -9112,29 +9117,9 @@
           "readOnly": true
         }
       },
-      "required": [
-        "name"
-      ],
       "allOf": [
         {
-          "type": "object",
-          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/AKSSummaryProperties",
-              "description": "The resource-specific properties for this resource.",
-              "x-ms-client-flatten": true,
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ]
-            }
-          },
-          "allOf": [
-            {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-            }
-          ]
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -11330,7 +11315,7 @@
       "description": "Base data model of Assessment Settings.",
       "properties": {
         "azureLocation": {
-          "$ref": "#/definitions/AzureLocation",
+          "$ref": "#/definitions/POSAzureLocation",
           "description": "Gets or sets azure location."
         },
         "environmentType": {
@@ -17160,7 +17145,7 @@
           }
         },
         "region": {
-          "$ref": "#/definitions/AzureLocation",
+          "$ref": "#/definitions/POSAzureLocation",
           "description": "Gets or sets region."
         },
         "userNodePoolCount": {
@@ -20404,7 +20389,8 @@
           "description": "Gets or sets the mapping of Assessment Options in graph representation.",
           "additionalProperties": {
             "$ref": "#/definitions/RecordOfStringArray"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -20591,6 +20577,78 @@
         }
       }
     },
+    "POSAzureLocation": {
+      "type": "string",
+      "description": "Location for Azure in POS.",
+      "enum": [
+        "Unknown",
+        "EastAsia",
+        "SoutheastAsia",
+        "AustraliaEast",
+        "AustraliaSoutheast",
+        "BrazilSouth",
+        "CanadaCentral",
+        "CanadaEast",
+        "WestEurope",
+        "NorthEurope",
+        "CentralIndia",
+        "SouthIndia",
+        "WestIndia",
+        "JapanEast",
+        "JapanWest",
+        "KoreaCentral",
+        "KoreaSouth",
+        "UkWest",
+        "UkSouth",
+        "NorthCentralUs",
+        "EastUs",
+        "WestUs2",
+        "SouthCentralUs",
+        "CentralUs",
+        "EastUs2",
+        "WestUs",
+        "WestCentralUs",
+        "GermanyCentral",
+        "GermanyNortheast",
+        "ChinaNorth",
+        "ChinaEast",
+        "USGovArizona",
+        "USGovTexas",
+        "USGovIowa",
+        "USGovVirginia",
+        "USDoDCentral",
+        "USDoDEast",
+        "FranceCentral",
+        "AustraliaCentral",
+        "SouthAfricaNorth",
+        "FranceSouth",
+        "AustraliaCentral2",
+        "SouthAfricaWest",
+        "GermanyNorth",
+        "GermanyWestCentral",
+        "NorwayEast",
+        "NorwayWest",
+        "ChinaEast2",
+        "ChinaNorth2",
+        "SwitzerlandNorth",
+        "SwitzerlandWest",
+        "UAENorth",
+        "UAECentral",
+        "UsNatEast",
+        "UsNatWest",
+        "UsSecEast",
+        "UsSecCentral",
+        "UsSecWest",
+        "SwedenCentral",
+        "QatarCentral",
+        "EastUS2EUAP",
+        "CentralUSEUAP"
+      ],
+      "x-ms-enum": {
+        "name": "POSAzureLocation",
+        "modelAsString": true
+      }
+    },
     "PaasDistribution": {
       "type": "object",
       "description": "Shows the distribution of platforms.",
@@ -20677,6 +20735,7 @@
     },
     "Percentile": {
       "type": "string",
+      "description": "Percentile for Performance Data.",
       "enum": [
         "Percentile50",
         "Percentile90",
@@ -20685,7 +20744,29 @@
       ],
       "x-ms-enum": {
         "name": "Percentile",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Percentile50",
+            "value": "Percentile50",
+            "description": "Percentile 50."
+          },
+          {
+            "name": "Percentile90",
+            "value": "Percentile90",
+            "description": "Percentile 90."
+          },
+          {
+            "name": "Percentile95",
+            "value": "Percentile95",
+            "description": "Percentile 95."
+          },
+          {
+            "name": "Percentile99",
+            "value": "Percentile99",
+            "description": "Percentile 99."
+          }
+        ]
       }
     },
     "PerfDataSettings": {
@@ -20694,8 +20775,7 @@
       "properties": {
         "timeRange": {
           "$ref": "#/definitions/PerformanceDataTimeRange",
-          "description": "Gets perf data time range.",
-          "readOnly": true
+          "description": "Gets perf data time range."
         },
         "perfDataStartTime": {
           "type": "string",
@@ -20708,7 +20788,7 @@
           "description": "Gets or sets perf data end time."
         },
         "percentile": {
-          "type": "string",
+          "$ref": "#/definitions/Percentile",
           "description": "Gets percentile utilization for performance data."
         }
       },
