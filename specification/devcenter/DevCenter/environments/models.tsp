@@ -89,6 +89,7 @@ model Catalog {
 model EnvironmentDefinitionListResult is Azure.Core.Page<EnvironmentDefinition>;
 
 @doc("An environment definition.")
+@projectedName("csharp", "EnvironmentDefinitionModel")
 model EnvironmentDefinition {
   @doc("The ID of the environment definition.")
   id: string;
@@ -103,7 +104,7 @@ model EnvironmentDefinition {
   description?: string;
 
   @doc("Input parameters passed to an environment.")
-  parameters?: EnvironmentDefinitionParameters[];
+  parameters?: EnvironmentDefinitionParameter[];
 
   @doc("JSON schema defining the parameters object passed to an environment.")
   parametersSchema?: string;
@@ -113,7 +114,8 @@ model EnvironmentDefinition {
 }
 
 @doc("Properties of an Environment Definition parameter")
-model EnvironmentDefinitionParameters {
+@projectedName("csharp", "EnvironmentDefinitionParameterModel")
+model EnvironmentDefinitionParameter {
   @doc("Unique ID of the parameter")
   id: string;
 
