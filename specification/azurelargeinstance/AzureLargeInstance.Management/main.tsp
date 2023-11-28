@@ -13,6 +13,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
+@Azure.ResourceManager.armCommonTypesVersion("v5")
 @armProviderNamespace
 @service({
   title: "Azure Large Instance",

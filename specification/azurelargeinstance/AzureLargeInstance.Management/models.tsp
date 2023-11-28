@@ -10,13 +10,17 @@ namespace Microsoft.AzureLargeInstance;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("Enum of the hardware options for an Azure Large Instance")
+@doc("Enum of the hardware options (vendor and/or their product name) for an Azure Large Instance")
 enum AzureLargeInstanceHardwareTypeNamesEnum {
+  @doc("Hardware type of UCS from vendor Cisco")
   Cisco_UCS,
+  @doc("Hardware type of HPE")
   HPE,
+  @doc("Hardware type of SDFLEX")
   SDFLEX,
 }
 
+@doc("Enum of available model types (each of which have their own storage / memory sizes) for an Azure Large Instance type. See https://learn.microsoft.com/en-us/azure/sap/large-instances/hana-available-skus")
 enum AzureLargeInstanceSizeNamesEnum {
   S72m,
   S144m,
@@ -77,13 +81,28 @@ enum AzureLargeInstancePowerStateEnum {
 
 @doc("Provisioning states that an Azure Large Instance can be in")
 enum AzureLargeInstanceProvisioningStatesEnum {
+  @doc("Accepted means Azure Large Instance resource provisioning has been accepted.")
   Accepted,
+
+  @doc("Creating means Azure Large Instance resource is being created.")
   Creating,
+  
+  @doc("Updating means an existing Azure Large Instance resource is being updated")
   Updating,
+  
+  @doc("Failed means Azure Large Instance resource is in failed state")
   Failed,
+
+  @doc("Succeeded means Azure Large Instance resource creation succeeded during last create/update")
   Succeeded,
+  
+  @doc("Deleting means Azure Large Instance resource is in the process of being deleted")
   Deleting,
+  
+  @doc("Migrating means Azure Large Instance resource is being migrated from one subscription or resource group to another")
   Migrating,
+  
+  @doc("Cancelled Azure Large Instance resource operation has been cancelled")
   Canceled,
 }
 
@@ -123,7 +142,7 @@ enum ProvisioningState {
   @doc("Failed means resource is in failed state")
   Failed,
 
-  @doc("Succeeded means resource created succeeded during last create/update")
+  @doc("Succeeded means resource creation succeeded during last create/update")
   Succeeded,
 
   @doc("Deleting means resource is in the process of being deleted")
