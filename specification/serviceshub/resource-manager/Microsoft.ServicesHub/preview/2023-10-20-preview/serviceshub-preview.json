@@ -671,13 +671,66 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/spaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/connectorSpaces": {
       "get": {
         "tags": [
           "ConnectorSpaceInfoList"
         ],
-        "summary": "Get ConnectorSpace Info.",
+        "summary": "Get ConnectorSpace Info List.",
         "operationId": "ConnectorSpaceInfoList",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-engage-hub-token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "EngageHub 1PA token to be send to EH Gateway",
+            "x-ms-secret": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConnectorSpaceInfoListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ConnectorSpaceInfoList": {
+            "$ref": "./examples/GetConnectorSpaceInfo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/connectorSpaces/{spaceName}": {
+      "get": {
+        "tags": [
+          "Get ConnectorSpaceInfo"
+        ],
+        "summary": "Get ConnectorSpace Info.",
+        "operationId": "Get ConnectorSpaceInfo",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -716,10 +769,13 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create/Update Connector Space Information": {
+            "$ref": "./examples/GetConnectorSpaceInfo.json"
+          }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/spaces/{spaceName}": {
+      },
       "put": {
         "tags": [
           "LinkingSpaceWithConnector"
@@ -1567,53 +1623,6 @@
         }
       }
     },
-    "ConnectorInfoPayloadResult": {
-      "type": "object",
-      "description": "Connector Information Result.",
-      "properties": {
-        "properties": {
-          "description": "Connector Information Result.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConnectorInfoPayloadResultProperties"
-        }
-      }
-    },
-    "ConnectorInfoPayloadResultProperties": {
-      "type": "object",
-      "description": "Connector Information Result Properties",
-      "properties": {
-        "targetScope": {
-          "type": "string",
-          "description": "Target Scope is the unique identifier for the EngageHub Space.For example: user-hubid:4a89cd33-1fb6-5a21-b460-a9bfb292bf71"
-        },
-        "connectorName": {
-          "type": "string",
-          "description": "Name of the Connector Resource."
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "TimeStamp when the connector is created/updated with the SpaceId."
-        },
-        "spaceId": {
-          "type": "string",
-          "description": "SpacesId linked to the connector.Example: West Joyce and Sons"
-        },
-        "puid": {
-          "type": "string",
-          "description": "Puid of the EngageHub user."
-        },
-        "logAnalyticsWorkspaces": {
-          "type": "array",
-          "description": "List of LogAnalyticsWorkspaces linked to Connector and SpaceId.",
-          "items": {
-            "$ref": "#/definitions/LogAnalyticsWorkspaceForEngageHub"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "ConnectorSpaceInfo": {
       "type": "object",
       "description": "Connector Space Information Payload",
@@ -1628,6 +1637,27 @@
         {
           "$ref": "#/definitions/Resource"
         }
+      ]
+    },
+    "ConnectorSpaceInfoListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectorSpaceInfo"
+          },
+          "description": "The ConnectorSpaceInfo items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a ConnectorSpaceInfo list operation.",
+      "required": [
+        "value"
       ]
     },
     "ConnectorSpaceInfoProperties": {
