@@ -1,4 +1,7 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
+import "@typespec/http";
+import "@typespec/versioning";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -8,6 +11,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Traits.Private;
+using Azure.ClientGenerator.Core;
 namespace PurviewDataMap;
 
 
@@ -90,6 +94,10 @@ alias MultipartFormDataRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTr
   contentType: "multipart/form-data";
 }>;
 
+@client({
+  name: "EntityClient",
+  service: PurviewDataMap,
+})
 interface Entity {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("""
@@ -930,6 +938,10 @@ be changed to other unique attributes)
   >;
 }
 
+@client({
+  name: "GlossaryClient",
+  service: PurviewDataMap,
+})
 interface Glossary {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("""
@@ -1568,6 +1580,10 @@ to get pagination result.
   >;
 }
 
+@client({
+  name: "DiscoveryClient",
+  service: PurviewDataMap,
+})
 interface Discovery {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Get data using search.")
@@ -1609,6 +1625,10 @@ interface Discovery {
   >;
 }
 
+@client({
+  name: "LineageClient",
+  service: PurviewDataMap,
+})
 interface Lineage {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get lineage info of the entity specified by GUID.")
@@ -1702,6 +1722,10 @@ be changed to other unique attributes)
   >;
 }
 
+@client({
+  name: "RelationshipClient",
+  service: PurviewDataMap,
+})
 interface Relationship {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Create a new relationship between entities.")
@@ -1766,6 +1790,10 @@ be created.
   >;
 }
 
+@client({
+  name: "TypeClient",
+  service: PurviewDataMap,
+})
 interface `Type`{
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("Get the businessMetadata definition for the given guid.")
