@@ -38,8 +38,9 @@ model AzureCognitiveSearchChatExtensionParameters {
   @doc("The name of the index to use as available in the referenced Azure Cognitive Search resource.")
   indexName: string;
 
-  // TODO: this is the only field I added to the definition of what was already there. 
   @doc("The API key to use when interacting with the Azure Cognitive Search resource.")
+  @added(ServiceApiVersions.v2023_08_01_Preview)
+  @removed(ServiceApiVersions.v2023_12_01_Preview)
   key?: string;
 
   @doc("Customized field mapping behavior to use when interacting with the search index.")
