@@ -9,6 +9,7 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
+@doc("The type of data a parameter accepts.")
 enum ParameterType {
   @doc("The parameter accepts an array of values.") array,
   @doc("The parameter accepts a boolean value.") boolean,
@@ -18,6 +19,7 @@ enum ParameterType {
   @doc("The parameter accepts a string value.") string,
 }
 
+@doc("Indicates whether an environment type is enabled for use in a project.")
 enum EnvironmentTypeEnableStatus {
   @doc("The environment type is enabled for use in the project.") Enabled,
   @doc("The environment type is not enabled for use in the project.") Disabled,

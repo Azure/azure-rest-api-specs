@@ -19,6 +19,7 @@ model OperationStatusError {
   message?: string;
 }
 
+@doc("Indicates whether operation status is running, completed, canceled or failed.")
 @lroStatus
 enum OperationStatusValue {
   Running,
