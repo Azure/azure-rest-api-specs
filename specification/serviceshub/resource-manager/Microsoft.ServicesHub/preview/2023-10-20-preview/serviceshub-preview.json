@@ -671,60 +671,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/spaces": {
-      "get": {
-        "tags": [
-          "EngageHubSpacesList"
-        ],
-        "summary": "Get all the spaces for the logged-in user corresponding to the user's EngageHub 1PA token.",
-        "operationId": "Get_EngageHubSpacesList",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "x-ms-engage-hub-token",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "EngageHub 1PA token to be send to EH Gateway",
-            "x-ms-secret": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/EngageHubSpacesListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get Spaces List for Engage Hub Context": {
-            "$ref": "./examples/GetEngageHubSpaces.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/connectorSpaces/{connectorSpacesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/spaces/{spaceName}": {
       "get": {
         "tags": [
           "GetConnectorSpaceInfo"
@@ -1620,53 +1567,6 @@
         "machineName": {
           "type": "string",
           "description": "Azure Connected Machine Name."
-        }
-      }
-    },
-    "EngageHubSpacesListResult": {
-      "type": "object",
-      "description": "EngageHub SpacesList Result.",
-      "properties": {
-        "value": {
-          "description": "List of EngageHub Spaces.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EngageHubSpace"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of Engage Hub Spaces, if there are any."
-        }
-      }
-    },
-    "EngageHubSpace": {
-      "type": "object",
-      "description": "EngageHub Space",
-      "properties": {
-        "properties": {
-          "description": "Engage Hub Space Properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EngageHubSpaceProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "EngageHubSpaceProperties": {
-      "type": "object",
-      "description": "List of Spaces.",
-      "properties": {
-        "spaceName": {
-          "type": "string",
-          "description": "Name of the Engage hub Space."
-        },
-        "id": {
-          "type": "string",
-          "description": "Id of the Engage Hub Space."
         }
       }
     },
