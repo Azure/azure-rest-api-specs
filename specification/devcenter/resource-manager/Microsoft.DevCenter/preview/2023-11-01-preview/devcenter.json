@@ -5634,9 +5634,9 @@
       "type": "string",
       "description": "The name of the image.",
       "x-ms-parameter-location": "method",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-.]{0,78}[a-zA-Z0-9]$",
       "minLength": 3,
-      "maxLength": 63
+      "maxLength": 80
     },
     "VersionNameParameter": {
       "name": "versionName",
@@ -5645,9 +5645,9 @@
       "type": "string",
       "description": "The version of the image.",
       "x-ms-parameter-location": "method",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
-      "minLength": 3,
-      "maxLength": 63
+      "pattern": "^[0-9]{1,10}[.][0-9]{1,10}[.][0-9]{1,10}$",
+      "minLength": 5,
+      "maxLength": 32
     },
     "EnvironmentTypeNameParameter": {
       "name": "environmentTypeName",
