@@ -25,7 +25,7 @@ input-file:
 ```
 ```yaml $(tag) == '2023-08-22-preview'
 input-file: 
-  - preview/2023-08-22-preview/genericGenevaActions.json
+  - preview/2023-08-22-preview/genevaActions.json
   - preview/2023-08-22-preview/dscm.json
 ```
 
