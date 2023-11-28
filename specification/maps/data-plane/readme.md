@@ -51,7 +51,7 @@ These settings apply only when `--tag=package-stable-2023-07-01` is specified on
 
 ```yaml $(tag) == 'package-stable-2023-07-01'
 input-file:
-  - Common/stable/2023-07-01/common.json
+  - Common/stable/2023-06-01/common.json
   - Creator/stable/2023-07-01/alias.json
   - Creator/stable/2023-07-01/dataset.json
   - Creator/stable/2023-07-01/dwgconversion.json
