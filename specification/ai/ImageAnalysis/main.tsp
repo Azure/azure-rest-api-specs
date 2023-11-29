@@ -17,7 +17,7 @@ using Azure.Core;
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @useAuth(BearerAuth)
 @server(
-  "{endpoint}/computervision",
+  "{endpoint}/unifiedvision",
   "Analyze an image to generate a description of its content.",
   {
     @doc("""

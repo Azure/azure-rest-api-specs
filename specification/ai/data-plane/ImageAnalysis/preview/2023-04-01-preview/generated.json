@@ -13,7 +13,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/computervision",
+    "hostTemplate": "{endpoint}/unifiedvision",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -61,7 +61,7 @@
           {
             "name": "features",
             "in": "query",
-            "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. At least one visual feature must be specified for Image Analysis.",
+            "description": "A list of visual features to analyze.\nSeven visual features are supported: Caption, DenseCaptions, Read (OCR), Tags, Objects, SmartCrops, and People.\nAt least one visual feature must be specified.",
             "required": true,
             "type": "array",
             "items": {
@@ -82,37 +82,37 @@
                   {
                     "name": "tags",
                     "value": "tags",
-                    "description": "Tags"
+                    "description": "Extract content tags for thousands of recognizable objects, living beings, scenery, and actions that appear in the image."
                   },
                   {
                     "name": "caption",
                     "value": "caption",
-                    "description": "Caption"
+                    "description": "Generate a human-readable caption sentence that describes the content of the image."
                   },
                   {
                     "name": "denseCaptions",
                     "value": "denseCaptions",
-                    "description": "DenseCaptions"
+                    "description": "Generate human-readable caption sentences for up to 10 different regions in the image, including one for the whole image."
                   },
                   {
                     "name": "objects",
                     "value": "objects",
-                    "description": "Objects"
+                    "description": "Object detection. This is similar to tags, but focused on detecting physical objects in the image and returning their location."
                   },
                   {
                     "name": "read",
                     "value": "read",
-                    "description": "Read"
+                    "description": "Extract printed or handwritten text from the image. Also known as Optical Character Recognition (OCR)."
                   },
                   {
                     "name": "smartCrops",
                     "value": "smartCrops",
-                    "description": "SmartCrops"
+                    "description": "Find representative sub-regions of the image for thumbnail generation, at desired aspect ratios, with priority given to detected faces."
                   },
                   {
                     "name": "people",
                     "value": "people",
-                    "description": "People"
+                    "description": "Detect people in the image and return their location."
                   }
                 ]
               }
@@ -124,7 +124,7 @@
           {
             "name": "language",
             "in": "query",
-            "description": "The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.",
+            "description": "The desired language for result generation (a two-letter language code).\nIf this option is not specified, the default value 'en' is used (English).\nSee https://aka.ms/cv-languages for a list of supported languages.\nAt the moment, only tags can be generated in none-English languages.",
             "required": false,
             "type": "string",
             "default": "en",
@@ -133,7 +133,7 @@
           {
             "name": "gender-neutral-caption",
             "in": "query",
-            "description": "Boolean flag for enabling gender-neutral captioning for caption and denseCaptions features. If this parameter is not specified, the default value is \"false\".",
+            "description": "Boolean flag for enabling gender-neutral captioning for Caption and Dense Captions features.\nBy default captions may contain gender terms (for example: 'man', 'woman', or 'boy', 'girl'). \nIf you set this to \"true\", those will be replaced with gender-neutral terms (for example: 'person' or 'child').",
             "required": false,
             "type": "boolean",
             "default": false,
@@ -142,7 +142,7 @@
           {
             "name": "smartcrops-aspect-ratios",
             "in": "query",
-            "description": "A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).",
+            "description": "A list of aspect ratios to use for smart cropping.\nAspect ratios are calculated by dividing the target crop width in pixels by the height in pixels.\nSupported values are between 0.75 and 1.8 (inclusive).\nIf this parameter is not specified, the service will return one crop region with an aspect\nratio it sees fit between 0.5 and 2.0 (inclusive).",
             "required": false,
             "type": "array",
             "items": {
@@ -155,7 +155,7 @@
           {
             "name": "model-version",
             "in": "query",
-            "description": "The version of cloud AI-model used for analysis.\nThe format is the following: 'latest' (default value) or 'YYYY-MM-DD' or 'YYYY-MM-DD-preview', where `YYYY`, `MM`, `DD` are the year, month and day.\nOnly relevant when doing analysis with standard models. Not relevant when doing analysis with a custom-trained AI model.",
+            "description": "The version of cloud AI-model used for analysis.\nThe format is the following: 'latest' (default value) or 'YYYY-MM-DD' or 'YYYY-MM-DD-preview', where 'YYYY', 'MM', 'DD' are the year, month and day associated with the model.\nThis is not commonly set, as the default always gives the latest AI model with recent improvements.\nIf however you would like to make sure analysis results do not change over time, set this value to a specific model version.",
             "required": false,
             "type": "string",
             "default": "latest",
@@ -194,11 +194,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "AnalyzeFromBuffer_MaximumSet_Gen": {
-            "$ref": "./examples/AnalyzeFromBuffer_MaximumSet_Gen.json"
-          }
         }
       }
     }
@@ -215,7 +210,7 @@
           {
             "name": "features",
             "in": "query",
-            "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Tags, Caption, DenseCaptions, Objects, Read, SmartCrops, People. At least one visual feature must be specified for Image Analysis.",
+            "description": "A list of visual features to analyze.\nSeven visual features are supported: Caption, DenseCaptions, Read (OCR), Tags, Objects, SmartCrops, and People.\nAt least one visual feature must be specified.",
             "required": true,
             "type": "array",
             "items": {
@@ -236,37 +231,37 @@
                   {
                     "name": "tags",
                     "value": "tags",
-                    "description": "Tags"
+                    "description": "Extract content tags for thousands of recognizable objects, living beings, scenery, and actions that appear in the image."
                   },
                   {
                     "name": "caption",
                     "value": "caption",
-                    "description": "Caption"
+                    "description": "Generate a human-readable caption sentence that describes the content of the image."
                   },
                   {
                     "name": "denseCaptions",
                     "value": "denseCaptions",
-                    "description": "DenseCaptions"
+                    "description": "Generate human-readable caption sentences for up to 10 different regions in the image, including one for the whole image."
                   },
                   {
                     "name": "objects",
                     "value": "objects",
-                    "description": "Objects"
+                    "description": "Object detection. This is similar to tags, but focused on detecting physical objects in the image and returning their location."
                   },
                   {
                     "name": "read",
                     "value": "read",
-                    "description": "Read"
+                    "description": "Extract printed or handwritten text from the image. Also known as Optical Character Recognition (OCR)."
                   },
                   {
                     "name": "smartCrops",
                     "value": "smartCrops",
-                    "description": "SmartCrops"
+                    "description": "Find representative sub-regions of the image for thumbnail generation, at desired aspect ratios, with priority given to detected faces."
                   },
                   {
                     "name": "people",
                     "value": "people",
-                    "description": "People"
+                    "description": "Detect people in the image and return their location."
                   }
                 ]
               }
@@ -278,7 +273,7 @@
           {
             "name": "language",
             "in": "query",
-            "description": "The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.",
+            "description": "The desired language for result generation (a two-letter language code).\nIf this option is not specified, the default value 'en' is used (English).\nSee https://aka.ms/cv-languages for a list of supported languages.\nAt the moment, only tags can be generated in none-English languages.",
             "required": false,
             "type": "string",
             "default": "en",
@@ -287,7 +282,7 @@
           {
             "name": "gender-neutral-caption",
             "in": "query",
-            "description": "Boolean flag for enabling gender-neutral captioning for caption and denseCaptions features. If this parameter is not specified, the default value is \"false\".",
+            "description": "Boolean flag for enabling gender-neutral captioning for Caption and Dense Captions features.\nBy default captions may contain gender terms (for example: 'man', 'woman', or 'boy', 'girl'). \nIf you set this to \"true\", those will be replaced with gender-neutral terms (for example: 'person' or 'child').",
             "required": false,
             "type": "boolean",
             "default": false,
@@ -296,7 +291,7 @@
           {
             "name": "smartcrops-aspect-ratios",
             "in": "query",
-            "description": "A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).",
+            "description": "A list of aspect ratios to use for smart cropping.\nAspect ratios are calculated by dividing the target crop width in pixels by the height in pixels.\nSupported values are between 0.75 and 1.8 (inclusive).\nIf this parameter is not specified, the service will return one crop region with an aspect\nratio it sees fit between 0.5 and 2.0 (inclusive).",
             "required": false,
             "type": "array",
             "items": {
@@ -309,7 +304,7 @@
           {
             "name": "model-version",
             "in": "query",
-            "description": "The version of cloud AI-model used for analysis.\nThe format is the following: 'latest' (default value) or 'YYYY-MM-DD' or 'YYYY-MM-DD-preview', where `YYYY`, `MM`, `DD` are the year, month and day.\nOnly relevant when doing analysis with standard models. Not relevant when doing analysis with a custom-trained AI model.",
+            "description": "The version of cloud AI-model used for analysis.\nThe format is the following: 'latest' (default value) or 'YYYY-MM-DD' or 'YYYY-MM-DD-preview', where 'YYYY', 'MM', 'DD' are the year, month and day associated with the model.\nThis is not commonly set, as the default always gives the latest AI model with recent improvements.\nIf however you would like to make sure analysis results do not change over time, set this value to a specific model version.",
             "required": false,
             "type": "string",
             "default": "latest",
@@ -415,12 +410,12 @@
     },
     "CaptionResult": {
       "type": "object",
-      "description": "A brief description of what the image depicts.",
+      "description": "Represents a generated phrase that describes the content of the whole image.",
       "properties": {
         "confidence": {
           "type": "number",
           "format": "float",
-          "description": "The level of confidence the service has in the caption.",
+          "description": "A score, in the range of 0 to 1 (inclusive), representing the confidence that this description is accurate.\nHigher values indicating higher confidence.",
           "minimum": 0,
           "maximum": 1
         },
@@ -437,17 +432,17 @@
     },
     "CropRegion": {
       "type": "object",
-      "description": "A region identified for smart cropping. There will be one region returned for each requested aspect ratio.",
+      "description": "A region at the desired aspect ratio that can be used as image thumbnail.\nThe region preserves as much content as possible from the analyzed image, with priority given to detected faces.",
       "properties": {
         "aspectRatio": {
           "type": "number",
           "format": "float",
-          "description": "The aspect ratio of the crop region.",
+          "description": "The aspect ratio of the crop region.\nAspect ratio is calculated by dividing the width of the region in pixels by its height in pixels.\nThe aspect ratio will be in the range 0.75 to 1.8 (inclusive) if provided by the developer during the analyze call.\nOtherwise, it will be in the range 0.5 to 2.0 (inclusive).",
           "minimum": 0
         },
         "boundingBox": {
           "$ref": "#/definitions/ImageBoundingBox",
-          "description": "The bounding box of the crop region."
+          "description": "The bounding box of the region."
         }
       },
       "required": [
@@ -457,12 +452,12 @@
     },
     "DenseCaption": {
       "type": "object",
-      "description": "A brief description of what the image depicts.",
+      "description": "Represents a generated phrase that describes the content of the whole image or a region in the image",
       "properties": {
         "confidence": {
           "type": "number",
           "format": "float",
-          "description": "The level of confidence the service has in the caption.",
+          "description": "A score, in the range of 0 to 1 (inclusive), representing the confidence that this description is accurate.\nHigher values indicating higher confidence.",
           "minimum": 0,
           "maximum": 1
         },
@@ -473,7 +468,7 @@
         },
         "boundingBox": {
           "$ref": "#/definitions/ImageBoundingBox",
-          "description": "The bounding box of the caption."
+          "description": "The image region of which this caption applies."
         }
       },
       "required": [
@@ -484,11 +479,11 @@
     },
     "DenseCaptionsResult": {
       "type": "object",
-      "description": "A list of captions.",
+      "description": "Represents a list of up to 10 image captions for different regions of the image.\nThe first caption always applies to the whole image.",
       "properties": {
         "values": {
           "type": "array",
-          "description": "The list of captions.",
+          "description": "The list of image captions.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/DenseCaption"
@@ -502,15 +497,15 @@
     },
     "DetectedObject": {
       "type": "object",
-      "description": "Describes a detected object in an image.",
+      "description": "Represents a physical object detected in an image.",
       "properties": {
         "boundingBox": {
           "$ref": "#/definitions/ImageBoundingBox",
-          "description": "Gets a rectangular boundary within which the object was detected."
+          "description": "A rectangular boundary where the object was detected."
         },
         "tags": {
           "type": "array",
-          "description": "Classification confidences of the detected object.",
+          "description": "A single-item list containing the object information.",
           "minItems": 0,
           "items": {
             "$ref": "#/definitions/DetectedTag"
@@ -525,17 +520,17 @@
     },
     "DetectedPerson": {
       "type": "object",
-      "description": "Represents a person detected in an image",
+      "description": "Represents a person detected in an image.",
       "properties": {
         "boundingBox": {
           "$ref": "#/definitions/ImageBoundingBox",
-          "description": "Gets a rectangular boundary within which the person was detected.",
+          "description": "A rectangular boundary where the person was detected.",
           "readOnly": true
         },
         "confidence": {
           "type": "number",
           "format": "float",
-          "description": "Gets the confidence value of the detected person.",
+          "description": "A score, in the range of 0 to 1 (inclusive), representing the confidence that this detection was accurate.\nHigher values indicating higher confidence.",
           "minimum": 0,
           "maximum": 1,
           "readOnly": true
@@ -548,12 +543,12 @@
     },
     "DetectedTag": {
       "type": "object",
-      "description": "An entity observation in the image, along with the confidence score.",
+      "description": "A content entity observation in the image. A tag can be a physical object, living being, scenery, or action\nthat appear in the image.",
       "properties": {
         "confidence": {
           "type": "number",
           "format": "float",
-          "description": "The level of confidence that the entity was observed.",
+          "description": "A score, in the range of 0 to 1 (inclusive), representing the confidence that this entity was observed.\nHigher values indicating higher confidence.",
           "minimum": 0,
           "maximum": 1
         },
@@ -568,224 +563,137 @@
         "name"
       ]
     },
-    "DocumentLine": {
+    "DetectedTextBlock": {
       "type": "object",
-      "description": "A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.",
+      "description": "Represents a single block of detected text in the image.",
       "properties": {
-        "boundingBox": {
+        "lines": {
           "type": "array",
-          "description": "The bounding box of the line.",
+          "description": "A list of text lines in this block.",
+          "minItems": 1,
           "items": {
-            "type": "number",
-            "format": "float"
-          }
-        },
-        "content": {
-          "type": "string",
-          "description": "Concatenated content of the contained elements in reading order."
-        },
-        "spans": {
-          "type": "array",
-          "description": "Location of the line in the reading order concatenated content.",
-          "items": {
-            "$ref": "#/definitions/DocumentSpan"
+            "$ref": "#/definitions/DetectedTextLine"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
-        "boundingBox",
-        "content",
-        "spans"
+        "lines"
       ]
     },
-    "DocumentPage": {
+    "DetectedTextLine": {
       "type": "object",
-      "description": "The content and layout elements extracted from a page from the input.",
+      "description": "Represents a single line of text in the image.",
       "properties": {
-        "angle": {
-          "type": "number",
-          "format": "float",
-          "description": "The general orientation of the content in clockwise direction, measured in degrees between (-180, 180]."
+        "text": {
+          "type": "string",
+          "description": "Text content of the detected text line.",
+          "minLength": 1
         },
-        "height": {
-          "type": "number",
-          "format": "float",
-          "description": "The height of the image/PDF in pixels/inches, respectively."
-        },
-        "lines": {
+        "boundingPolygon": {
           "type": "array",
-          "description": "Extracted lines from the page, potentially containing both textual and visual elements.",
+          "description": "A bounding polygon around the text line. At the moment only quadrilaterals are supported (represented by 4 image points).",
+          "minItems": 4,
+          "maxItems": 4,
           "items": {
-            "$ref": "#/definitions/DocumentLine"
+            "$ref": "#/definitions/ImagePoint"
           },
           "x-ms-identifiers": []
-        },
-        "pageNumber": {
-          "type": "integer",
-          "format": "int32",
-          "description": "1-based page number in the input document."
-        },
-        "spans": {
-          "type": "array",
-          "description": "Location of the page in the reading order concatenated content.",
-          "items": {
-            "$ref": "#/definitions/DocumentSpan"
-          },
-          "x-ms-identifiers": []
-        },
-        "width": {
-          "type": "number",
-          "format": "float",
-          "description": "The width of the image/PDF in pixels/inches, respectively."
         },
         "words": {
           "type": "array",
-          "description": "Extracted words from the page.",
+          "description": "A list of words in this line.",
+          "minItems": 1,
           "items": {
-            "$ref": "#/definitions/DocumentWord"
+            "$ref": "#/definitions/DetectedTextWord"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
-        "angle",
-        "height",
-        "lines",
-        "pageNumber",
-        "spans",
-        "width",
+        "text",
+        "boundingPolygon",
         "words"
       ]
     },
-    "DocumentSpan": {
-      "type": "object",
-      "description": "Contiguous region of the concatenated content property, specified as an offset and length.",
-      "properties": {
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of characters in the content represented by the span."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Zero-based index of the content represented by the span."
-        }
-      },
-      "required": [
-        "length",
-        "offset"
-      ]
-    },
-    "DocumentStyle": {
-      "type": "object",
-      "description": "An object representing observed text styles.",
-      "properties": {
-        "confidence": {
-          "type": "number",
-          "format": "float",
-          "description": "Confidence of correctly identifying the style.",
-          "minimum": 0,
-          "maximum": 1
-        },
-        "isHandwritten": {
-          "type": "boolean",
-          "description": "Is content handwritten or not."
-        },
-        "spans": {
-          "type": "array",
-          "description": "Location of the text elements in the concatenated content the style applies to.",
-          "items": {
-            "$ref": "#/definitions/DocumentSpan"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "confidence",
-        "isHandwritten",
-        "spans"
-      ]
-    },
-    "DocumentWord": {
+    "DetectedTextWord": {
       "type": "object",
       "description": "A word object consisting of a contiguous sequence of characters. For non-space delimited languages,\r\nsuch as Chinese, Japanese, and Korean, each character is represented as its own word.",
       "properties": {
-        "boundingBox": {
+        "text": {
+          "type": "string",
+          "description": "Text content of the word.",
+          "minLength": 1
+        },
+        "boundingPolygon": {
           "type": "array",
-          "description": "Bounding box of the word.",
+          "description": "A bounding polygon around the word. At the moment only quadrilaterals are supported (represented by 4 image points).",
+          "minItems": 4,
+          "maxItems": 4,
           "items": {
-            "type": "number",
-            "format": "float"
-          }
+            "$ref": "#/definitions/ImagePoint"
+          },
+          "x-ms-identifiers": []
         },
         "confidence": {
           "type": "number",
           "format": "float",
-          "description": "Confidence of correctly extracting the word."
-        },
-        "content": {
-          "type": "string",
-          "description": "Text content of the word."
-        },
-        "span": {
-          "$ref": "#/definitions/DocumentSpan",
-          "description": "Location of the word in the reading order concatenated content."
+          "description": "The level of confidence that the word was detected. Confidence scores span the range of 0.0 to 1.0 (inclusive), with higher values indicating a higher confidence of detection.",
+          "minimum": 0,
+          "maximum": 1
         }
       },
       "required": [
-        "boundingBox",
-        "confidence",
-        "content",
-        "span"
+        "text",
+        "boundingPolygon",
+        "confidence"
       ]
     },
     "ImageAnalysisResult": {
       "type": "object",
-      "description": "Describe the combined results of different types of image analysis.",
+      "description": "Represents the outcome of an Image Analysis operation.",
       "properties": {
         "captionResult": {
           "$ref": "#/definitions/CaptionResult",
-          "description": "A CaptionResult for the image.",
+          "description": "The generated phrase that describes the content of the analyzed image.",
           "x-ms-client-name": "caption"
         },
         "denseCaptionsResult": {
           "$ref": "#/definitions/DenseCaptionsResult",
-          "description": "A denseCaptionsResult for the image.",
+          "description": "The up to 10 generated phrases, the first describing the content of the whole image,\nand the others describing the content of different regions of the image.",
           "x-ms-client-name": "denseCaptions"
         },
         "metadata": {
           "$ref": "#/definitions/ImageMetadata",
-          "description": "The model used for the analysis"
+          "description": "Metadata associated with the analyzed image."
         },
         "modelVersion": {
           "type": "string",
-          "description": "The model used for the analysis"
+          "description": "The cloud AI model used for the analysis"
         },
         "objectsResult": {
           "$ref": "#/definitions/ObjectsResult",
-          "description": "A list of objects for the image.",
+          "description": "A list of detected physical objects in the analyzed image, and their location.",
           "x-ms-client-name": "objects"
         },
         "peopleResult": {
           "$ref": "#/definitions/PeopleResult",
-          "description": "A list of people for the image.",
+          "description": "A list of detected people in the analyzed image, and their location.",
           "x-ms-client-name": "people"
         },
         "readResult": {
           "$ref": "#/definitions/ReadResult",
-          "description": "A readResult for the image.",
+          "description": "The extracted printed and hand-written text in the analyze image. Also knows as OCR.",
           "x-ms-client-name": "read"
         },
         "smartCropsResult": {
           "$ref": "#/definitions/SmartCropsResult",
-          "description": "A list of regions for the image.",
+          "description": "A list of crop regions at the desired as aspect ratios (if provided) that can be used as image thumbnails.\nThese regions preserve as much content as possible from the analyzed image, with priority given to detected faces.",
           "x-ms-client-name": "smartCrops"
         },
         "tagsResult": {
           "$ref": "#/definitions/TagsResult",
-          "description": "A list of tags for the image.",
+          "description": "A list of content tags in the analyzed image.",
           "x-ms-client-name": "tags"
         }
       },
@@ -796,31 +704,31 @@
     },
     "ImageBoundingBox": {
       "type": "object",
-      "description": "A basic rectangle specifying a sub-region of the image",
+      "description": "A basic rectangle specifying a sub-region of the image.",
       "properties": {
         "x": {
           "type": "integer",
           "format": "int32",
-          "description": "X coordinate",
+          "description": "X-coordinate of the top left point of the area, in pixels.",
           "minimum": 0
         },
         "y": {
           "type": "integer",
           "format": "int32",
-          "description": "Y coordinate",
+          "description": "Y-coordinate of the top left point of the area, in pixels.",
           "minimum": 0
         },
         "w": {
           "type": "integer",
           "format": "int32",
-          "description": "Width of the box",
+          "description": "Width of the area, in pixels.",
           "minimum": 0,
           "x-ms-client-name": "width"
         },
         "h": {
           "type": "integer",
           "format": "int32",
-          "description": "Height of the box",
+          "description": "Height of the area, in pixels.",
           "minimum": 0,
           "x-ms-client-name": "height"
         }
@@ -834,7 +742,7 @@
     },
     "ImageMetadata": {
       "type": "object",
-      "description": "The image metadata information such as height and width.",
+      "description": "Metadata associated with the analyzed image.",
       "properties": {
         "height": {
           "type": "integer",
@@ -854,14 +762,36 @@
         "width"
       ]
     },
+    "ImagePoint": {
+      "type": "object",
+      "description": "Represents the coordinates of a single pixel in the image.",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The horizontal x-coordinate of this point, in pixels. Zero values corresponds to the left-most pixels in the image.",
+          "minimum": 0
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The vertical y-coordinate of this point, in pixels. Zero values corresponds to the top-most pixels in the image.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ]
+    },
     "ImageUrl": {
       "type": "object",
-      "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+      "description": "An object holding the publicly reachable URL of an image to analyze.",
       "properties": {
         "url": {
           "type": "string",
           "format": "uri",
-          "description": "Publicly reachable URL of an image."
+          "description": "Publicly reachable URL of an image to analyze."
         }
       },
       "required": [
@@ -870,11 +800,11 @@
     },
     "ObjectsResult": {
       "type": "object",
-      "description": "Describes detected objects in an image.",
+      "description": "Represents a list of physical object detected in an image and their location.",
       "properties": {
         "values": {
           "type": "array",
-          "description": "An array of detected objects.",
+          "description": "A list of physical object detected in an image and their location.",
           "minItems": 0,
           "items": {
             "$ref": "#/definitions/DetectedObject"
@@ -888,11 +818,11 @@
     },
     "PeopleResult": {
       "type": "object",
-      "description": "An object describing whether the image contains people.",
+      "description": "Represents a list of people detected in an image and their location.",
       "properties": {
         "values": {
           "type": "array",
-          "description": "An array of detected people.",
+          "description": "A list of people detected in an image and their location.",
           "minItems": 0,
           "items": {
             "$ref": "#/definitions/DetectedPerson"
@@ -906,52 +836,30 @@
     },
     "ReadResult": {
       "type": "object",
-      "description": "The results of an Read operation.",
+      "description": "The results of a Read (OCR) operation.",
       "properties": {
-        "content": {
-          "type": "string",
-          "description": "Concatenate string representation of all textual and visual elements in reading order."
-        },
         "pages": {
           "type": "array",
-          "description": "A list of analyzed pages.",
+          "description": "A list of text blocks in the image. At the moment only one block is returned, containing all the text detected in the image.",
+          "minItems": 1,
+          "maxItems": 1,
           "items": {
-            "$ref": "#/definitions/DocumentPage"
+            "$ref": "#/definitions/DetectedTextBlock"
           },
           "x-ms-identifiers": []
-        },
-        "stringIndexType": {
-          "type": "string",
-          "description": "The method used to compute string offset and length, possible values include: 'textElements', 'unicodeCodePoint', 'utf16CodeUnit' etc."
-        },
-        "styles": {
-          "type": "array",
-          "description": "Extracted font styles.",
-          "items": {
-            "$ref": "#/definitions/DocumentStyle"
-          },
-          "x-ms-identifiers": []
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "The model used to generate the Read result."
         }
       },
       "required": [
-        "content",
-        "pages",
-        "stringIndexType",
-        "styles",
-        "modelVersion"
+        "pages"
       ]
     },
     "SmartCropsResult": {
       "type": "object",
-      "description": "Smart cropping result.",
+      "description": "Smart cropping result. A list of crop regions at the desired as aspect ratios (if provided) that can be used as image thumbnails.\nThese regions preserve as much content as possible from the analyzed image, with priority given to detected faces.",
       "properties": {
         "values": {
           "type": "array",
-          "description": "Recommended regions for cropping the image.",
+          "description": "A list of crop regions.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/CropRegion"
@@ -965,11 +873,11 @@
     },
     "TagsResult": {
       "type": "object",
-      "description": "A list of tags with confidence level.",
+      "description": "A list of entities observed in the image. Tags can be physical objects, living being, scenery, or actions\nthat appear in the image.",
       "properties": {
         "values": {
           "type": "array",
-          "description": "A list of tags with confidence level.",
+          "description": "A list of tags.",
           "minItems": 0,
           "items": {
             "$ref": "#/definitions/DetectedTag"

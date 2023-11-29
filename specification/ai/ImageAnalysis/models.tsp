@@ -111,78 +111,55 @@ model DetectedPerson {
   confidence: float32;
 }
 
-@doc("A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.")
-model DocumentLine {
-  @doc("The bounding box of the line.")
-  boundingBox: Array<float32>;
+@doc("Represents the coordinates of a single pixel in the image.")
+model ImagePoint {
+  @doc("The horizontal x-coordinate of this point, in pixels. Zero values corresponds to the left-most pixels in the image.")
+  @minValue(0)
+  x: int32;
 
-  @doc("Concatenated content of the contained elements in reading order.")
-  content: string;
-
-  @doc("Location of the line in the reading order concatenated content.")
-  spans: Array<DocumentSpan>;
-}
-
-@doc("The content and layout elements extracted from a page from the input.")
-model DocumentPage {
-  @doc("The general orientation of the content in clockwise direction, measured in degrees between (-180, 180].")
-  angle: float32;
-
-  @doc("The height of the image/PDF in pixels/inches, respectively.")
-  height: float32;
-
-  @doc("Extracted lines from the page, potentially containing both textual and visual elements.")
-  lines: Array<DocumentLine>;
-
-  @doc("1-based page number in the input document.")
-  pageNumber: int32;
-
-  @doc("Location of the page in the reading order concatenated content.")
-  spans: Array<DocumentSpan>;
-
-  @doc("The width of the image/PDF in pixels/inches, respectively.")
-  width: float32;
-
-  @doc("Extracted words from the page.")
-  words: Array<DocumentWord>;
-}
-
-@doc("Contiguous region of the concatenated content property, specified as an offset and length.")
-model DocumentSpan {
-  @doc("Number of characters in the content represented by the span.")
-  length: int32;
-
-  @doc("Zero-based index of the content represented by the span.")
-  offset: int32;
-}
-
-@doc("An object representing observed text styles.")
-model DocumentStyle {
-  @doc("Confidence of correctly identifying the style.")
-  @minValue(0.0)
-  @maxValue(1.0)
-  confidence: float32;
-
-  @doc("Is content handwritten or not.")
-  isHandwritten: boolean;
-
-  @doc("Location of the text elements in the concatenated content the style applies to.")
-  spans: Array<DocumentSpan>;
+  @doc("The vertical y-coordinate of this point, in pixels. Zero values corresponds to the top-most pixels in the image.")
+  @minValue(0)
+  y: int32;
 }
 
 @doc("A word object consisting of a contiguous sequence of characters. For non-space delimited languages,\r\nsuch as Chinese, Japanese, and Korean, each character is represented as its own word.")
-model DocumentWord {
-  @doc("Bounding box of the word.")
-  boundingBox: Array<float32>;
-
-  @doc("Confidence of correctly extracting the word.")
-  confidence: float32;
-
+model DetectedTextWord {
   @doc("Text content of the word.")
-  content: string;
+  @minLength(1)
+  text: string;
 
-  @doc("Location of the word in the reading order concatenated content.")
-  span: DocumentSpan;
+  @doc("A bounding polygon around the word. At the moment only quadrilaterals are supported (represented by 4 image points).")
+  @minItems(4)
+  @maxItems(4)
+  boundingPolygon: Array<ImagePoint>;
+
+  @doc("The level of confidence that the word was detected. Confidence scores span the range of 0.0 to 1.0 (inclusive), with higher values indicating a higher confidence of detection.")
+  @minValue(0.0)
+  @maxValue(1.0)
+  confidence: float32;
+}
+
+@doc("Represents a single line of text in the image.")
+model DetectedTextLine {
+  @doc("Text content of the detected text line.")
+  @minLength(1)
+  text: string;
+
+  @doc("A bounding polygon around the text line. At the moment only quadrilaterals are supported (represented by 4 image points).")
+  @minItems(4)
+  @maxItems(4)
+  boundingPolygon: Array<ImagePoint>;
+
+  @doc("A list of words in this line.")
+  @minItems(1)
+  words: Array<DetectedTextWord>;
+}
+
+@doc("Represents a single block of detected text in the image.")
+model DetectedTextBlock {
+  @doc("A list of text lines in this block.")
+  @minItems(1)
+  lines: Array<DetectedTextLine>;
 }
 
 @doc("Represents the outcome of an Image Analysis operation.")
@@ -255,20 +232,10 @@ model PeopleResult {
 
 @doc("The results of a Read (OCR) operation.")
 model ReadResult {
-  @doc("Concatenate string representation of all textual and visual elements in reading order.")
-  content: string;
-
-  @doc("A list of analyzed pages.")
-  pages: Array<DocumentPage>;
-
-  @doc("The method used to compute string offset and length, possible values include: 'textElements', 'unicodeCodePoint', 'utf16CodeUnit' etc.")
-  stringIndexType: string;
-
-  @doc("Extracted font styles.")
-  styles: Array<DocumentStyle>;
-
-  @doc("The model used to generate the Read result.")
-  modelVersion: string;
+  @doc("A list of text blocks in the image. At the moment only one block is returned, containing all the text detected in the image.")
+  @minItems(1)
+  @maxItems(1)
+  pages: Array<DetectedTextBlock>;
 }
 
 @doc("""

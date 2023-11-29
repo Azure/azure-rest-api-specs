@@ -20,11 +20,14 @@ using Azure.ClientGenerator.Core;
 @@access(ImageAnalysis.DetectedPerson, Access.public, "csharp");
 @@access(ImageAnalysis.DetectedTag, Access.public, "csharp");
 @@access(ImageAnalysis.CropRegion, Access.public, "csharp");
-@@access(ImageAnalysis.DocumentPage, Access.public, "csharp");
-@@access(ImageAnalysis.DocumentLine, Access.public, "csharp");
-@@access(ImageAnalysis.DocumentSpan, Access.public, "csharp");
-@@access(ImageAnalysis.DocumentStyle, Access.public, "csharp");
-@@access(ImageAnalysis.DocumentWord, Access.public, "csharp");
+@@access(ImageAnalysis.ImagePoint, Access.public, "csharp");
+@@access(ImageAnalysis.DetectedTextWord, Access.public, "csharp");
+@@access(ImageAnalysis.DetectedTextLine, Access.public, "csharp");
+@@access(ImageAnalysis.DetectedTextBlock, Access.public, "csharp");
 @@access(ImageAnalysis.ImageBoundingBox, Access.public, "csharp");
 
 @@projectedName(ImageAnalysis.VisualFeatures, "csharp", "VisualFeaturesImpl");
+
+@@access(ImageAnalysis.analyzeFromBuffer, Access.internal, "java");
+@@access(ImageAnalysis.analyzeFromUrl, Access.internal, "java");
+@@access(ImageAnalysis.ImageUrl, Access.internal, "java");
