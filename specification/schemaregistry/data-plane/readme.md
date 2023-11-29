@@ -56,9 +56,9 @@ input-file:
   - Microsoft.EventHub/stable/2023-07-01/schemaregistry.json
 ```
 
-To use the tsp generated swagger, use the following:
+These settings apply only when `--tag=package-2023-07-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-07-01'
+```yaml $(tag) == 'package-2023-07-01-preview'
 input-file:
   - Microsoft.EventHub/preview/2023-07-01/SchemaRegistry.json
 ```
