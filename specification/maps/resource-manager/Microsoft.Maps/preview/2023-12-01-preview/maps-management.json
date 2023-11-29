@@ -745,10 +745,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateLinkResources": {
       "get": {
         "tags": [
-          "PrivateEndpointConnections"
+          "PrivateLinkResources"
         ],
         "operationId": "PrivateLinkResources_ListByAccount",
-        "description": "Gets the private link resources that are needed to be created for Maps account.",
+        "description": "Gets the private pink resources that are available to be used for the Maps Account.",
         "x-ms-examples": {
           "PrivateLinkResources_List": {
             "$ref": "./examples/PrivateLinkResources_List.json"
@@ -793,7 +793,7 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_Get",
-        "description": "Gets the specified private endpoint connection associated with the Map Account.",
+        "description": "Gets the specified private endpoint connection associated with the Maps Account.",
         "x-ms-examples": {
           "PrivateEndpointConnections_Get": {
             "$ref": "./examples/PrivateEndpointConnections_Get.json"
@@ -836,7 +836,7 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_Create",
-        "description": "Create or update the state of specified private endpoint connection associated with the Map account.",
+        "description": "Create or update the state of specified private endpoint connection associated with the Maps account.",
         "x-ms-examples": {
           "PrivateEndpointConnections_Create": {
             "$ref": "./examples/PrivateEndpointConnections_Create.json"
@@ -901,7 +901,7 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_Delete",
-        "description": "Deletes the specified private endpoint connection associated with the Map account.",
+        "description": "Deletes the specified private endpoint connection associated with the Map Account.",
         "x-ms-examples": {
           "PrivateEndpointConnections_Delete": {
             "$ref": "./examples/PrivateEndpointConnections_Delete.json"
@@ -978,7 +978,7 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_ListByAccount",
-        "description": "Get a PrivateEndpointConnection List.",
+        "description": "Get a private endpoint connections on the Maps Account.",
         "x-ms-examples": {
           "PrivateEndpointConnections_ListByAccount": {
             "$ref": "./examples/PrivateEndpointConnections_ListByAccount.json"
@@ -986,7 +986,7 @@
         },
         "responses": {
           "200": {
-            "description": "Array of Private Endpoint resources in Map Account",
+            "description": "Array of private endpoint resources in Maps Account",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionList"
             }
@@ -1041,11 +1041,11 @@
   },
   "definitions": {
     "PrivateLinkResourceList": {
-      "description": "A list of private link resources for a map account resource type.",
+      "description": "A list of private link resources for a Map Account resource type.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of the private link resources which can be used for map account.",
+          "description": "The list of the private link resources which can be used for Maps Account.",
           "type": "array",
           "items": {
             "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResource"
@@ -1370,11 +1370,11 @@
       }
     },
     "MapsAccountProperties": {
-      "description": "Additional Map account properties",
+      "description": "Additional Maps account properties",
       "type": "object",
       "properties": {
         "uniqueId": {
-          "description": "A unique identifier for the maps account",
+          "description": "A unique identifier for the Maps Account",
           "type": "string",
           "readOnly": true
         },
@@ -1407,7 +1407,7 @@
           "x-ms-identifiers": [
             "properties/privateEndpoint/id"
           ],
-          "description": "List of private endpoint connections associated with the Map Account."
+          "description": "List of private endpoint connections associated with the Maps Account."
         },
         "publicNetworkAccess": {
           "type": "string",
@@ -1420,7 +1420,7 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           },
-          "description": "Property to specify whether the Map account will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked."
+          "description": "Property to specify whether the Maps Account will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked."
         }
       }
     },
@@ -1480,7 +1480,7 @@
       "required": [
         "allowedOrigins"
       ],
-      "description": "Specifies a CORS rule for the Map Account."
+      "description": "Specifies a CORS rule for the Maps Account."
     },
     "CreatorProperties": {
       "description": "Creator resource properties",
