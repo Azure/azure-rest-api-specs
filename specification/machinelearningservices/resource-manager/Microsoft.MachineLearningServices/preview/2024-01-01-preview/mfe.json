@@ -17040,8 +17040,7 @@
     "CustomMonitoringSignal": {
       "required": [
         "componentId",
-        "metricThresholds",
-        "workspaceConnection"
+        "metricThresholds"
       ],
       "type": "object",
       "allOf": [
@@ -17101,12 +17100,13 @@
           "x-ms-identifiers": []
         },
         "workspaceConnection": {
-          "description": "[Required] A list of metrics to calculate and their associated thresholds.",
+          "description": "A list of metrics to calculate and their associated thresholds.",
           "$ref": "#/definitions/MonitoringWorkspaceConnection",
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Custom",
@@ -18855,6 +18855,7 @@
     },
     "FeatureAttributionDriftMonitoringSignal": {
       "required": [
+        "featureImportanceSettings",
         "metricThreshold",
         "productionData",
         "referenceData"
@@ -18879,13 +18880,12 @@
           "x-nullable": true
         },
         "featureImportanceSettings": {
-          "description": "The settings for computing feature importance.",
+          "description": "[Required] The settings for computing feature importance.",
           "$ref": "#/definitions/FeatureImportanceSettings",
           "x-ms-mutability": [
             "create",
             "read"
-          ],
-          "x-nullable": true
+          ]
         },
         "metricThreshold": {
           "description": "[Required] A list of metrics to calculate and their associated thresholds.",
@@ -23991,7 +23991,7 @@
         "runtimeVersion": {
           "description": "[Required] The Spark runtime version.",
           "minLength": 1,
-          "pattern": "[a-zA-Z0-9_]",
+          "pattern": "^[0-9]+\\.[0-9]+$",
           "type": "string",
           "x-ms-mutability": [
             "create",
