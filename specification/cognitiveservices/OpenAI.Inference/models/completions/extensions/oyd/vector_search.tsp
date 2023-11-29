@@ -14,7 +14,7 @@ enum OnYourDataEmbeddingDependencyType {
   @doc("Azure OpenAI Embedding deployment name.")
   deploymentName: "DeploymentName",
 
-  @doc("The embedding model id defined in the search service. Currently only supported by Elasticsearch.")
+  @doc("The embedding model ID defined in the search service. Currently only supported by Elasticsearch.")
   modelId: "ModelId",
 }
 
@@ -58,6 +58,6 @@ model OnYourDataEmbeddingModelIdDependency
   @doc("The embedding dependency based on model id")
   type: OnYourDataEmbeddingDependencyType.modelId;
 
-  @doc("The embedding model id build inside the search service. Currently only supported by Elasticsearch.")
+  @doc("The embedding model ID build inside the search service. Currently only supported by Elasticsearch.")
   modelId: string;
 }

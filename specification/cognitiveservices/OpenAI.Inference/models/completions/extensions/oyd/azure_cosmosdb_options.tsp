@@ -40,7 +40,7 @@ model AzureCosmosDBChatExtensionParameters {
   @projectedName("csharp", "ContainerName")
   containerName: string;
 
-  @doc("The index name name of Azure Cosmos DB.")
+  @doc("The index name of Azure Cosmos DB.")
   @projectedName("csharp", "IndexName")
   indexName: string;
 
