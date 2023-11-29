@@ -1,11 +1,11 @@
 import "@typespec/versioning";
 import "./chat_completions.tsp";
 import "./chat_messages.tsp";
-import "./extensions_onyourdata_azure_cognitive_search_options.tsp";
-import "./extensions_onyourdata_azure_machinelearning_index_options.tsp";
-import "./extensions_onyourdata_azure_cosmosdb_options.tsp";
-import "./extensions_onyourdata_elasticsearch_options.tsp";
-import "./extensions_onyourdata_pinecone_options.tsp";
+import "./extensions/oyd/azure_cognitive_search_options.tsp";
+import "./extensions/oyd/azure_machinelearning_index_options.tsp";
+import "./extensions/oyd/azure_cosmosdb_options.tsp";
+import "./extensions/oyd/elasticsearch_options.tsp";
+import "./extensions/oyd/pinecone_options.tsp";
 
 namespace Azure.OpenAI;
 
@@ -59,20 +59,20 @@ enum AzureChatExtensionType {
   completions request that should use Azure OpenAI chat extensions to augment the response behavior.
   The use of this configuration is compatible only with Azure OpenAI.
 """)
-model AzureChatExtensionConfiguration {
+model AzureChatExtensionConfiguration{
   @doc("""
     The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.
     Azure chat extensions are only compatible with Azure OpenAI.
   """)
   type: AzureChatExtensionType;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "API explicitly uses arbitrary JSON structure"
-  @doc("""
-    The configuration payload used for the Azure chat extension. The structure payload details are specific to the
-    extension being configured.
-    Azure chat extensions are only compatible with Azure OpenAI.
-  """)
-  parameters: unknown;
+  // #suppress "@azure-tools/typespec-azure-core/no-unknown" "API explicitly uses arbitrary JSON structure"
+  // @doc("""
+  //   The configuration payload used for the Azure chat extension. The structure payload details are specific to the
+  //   extension being configured.
+  //   Azure chat extensions are only compatible with Azure OpenAI.
+  // """)
+  // parameters: unknown;
 }
 
 @added(ServiceApiVersions.v2023_08_01_Preview)

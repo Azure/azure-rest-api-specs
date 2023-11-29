@@ -27,6 +27,8 @@ op getImageGenerations is Azure.Core.ResourceAction<
 // Note: pending resolution of cross-language code emission behavior for long-running operations, image generation
 // reuses its final operation response model as its status polling model.
 
+// Note2: see the comments in the models/images/images.tsp file for more information on why the op is commented out
+
 #suppress "@azure-tools/typespec-azure-core/rpc-operation-request-body" "MUST fix in next update"
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Allowed because this is a non-standard status polling operation."
 @doc("Returns the status of the images operation")

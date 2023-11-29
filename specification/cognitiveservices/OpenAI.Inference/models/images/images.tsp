@@ -179,7 +179,13 @@ model ImageGenerations {
 // Note: pending resolution of  cross-language code emission behavior for long-running operations, image generation
 //        reuses its final operation response model as its status polling model.
 
-// @lroStatus
+// Note2: the Java emitter currently does not support versioning annotations
+// To prevent code generation from picking this up we have to flat out remove it
+// We need to check in an arch board meeting, whether @removed indeed should prevent 
+// models from being generated. It might not be the case, it should probably enforce a "maximum"
+// version, but not prevent generation of models for older versions.
+
+//@lroStatus
 @doc("A polling status update or final response payload for an image operation.")
 @added(ServiceApiVersions.v2023_06_01_Preview)
 @removed(ServiceApiVersions.v2023_12_01_Preview)

@@ -1043,15 +1043,11 @@
         "type": {
           "$ref": "#/definitions/AzureChatExtensionType",
           "description": "  The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.\n  Azure chat extensions are only compatible with Azure OpenAI."
-        },
-        "parameters": {
-          "description": "  The configuration payload used for the Azure chat extension. The structure payload details are specific to the\n  extension being configured.\n  Azure chat extensions are only compatible with Azure OpenAI."
         }
       },
       "discriminator": "type",
       "required": [
-        "type",
-        "parameters"
+        "type"
       ]
     },
     "AzureChatExtensionType": {
@@ -1140,6 +1136,25 @@
       "type": "object",
       "description": "A specific representation of configurable options for Azure Cognitive Search when using it as an Azure OpenAI chat\nextension.",
       "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AzureCognitiveSearchChatExtensionParameters",
+          "description": "The parameters to use when configuring Azure Cognitive Search."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureCognitiveSearch"
+    },
+    "AzureCognitiveSearchChatExtensionParameters": {
+      "type": "object",
+      "description": "Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension.",
+      "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication option to access the data."
@@ -1197,13 +1212,7 @@
       "required": [
         "endpoint",
         "indexName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureChatExtensionConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureCognitiveSearch"
+      ]
     },
     "AzureCognitiveSearchIndexFieldMappingOptions": {
       "type": "object",
@@ -1294,6 +1303,25 @@
       "type": "object",
       "description": "A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat\nextension.",
       "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AzureCosmosDBChatExtensionParameters",
+          "description": "The parameters to use when configuring Azure OpenAI CosmosDB chat extensions."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureCosmosDB"
+    },
+    "AzureCosmosDBChatExtensionParameters": {
+      "type": "object",
+      "description": "Parameters to use when configuring Azure OpenAI CosmosDB chat extensions.",
+      "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication option to access the data."
@@ -1344,13 +1372,7 @@
         "containerName",
         "indexName",
         "fieldsMapping"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureChatExtensionConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureCosmosDB"
+      ]
     },
     "AzureCosmosDBFieldMappingOptions": {
       "type": "object",
@@ -1465,6 +1487,25 @@
       "type": "object",
       "description": "A specific representation of configurable options for Azure Machine Learning index when using it as an Azure OpenAI chat\nextension.",
       "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AzureMachineLearningIndexChatExtensionParameters",
+          "description": "The parameters for the Azure Machine Learning index chat extension."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureMLIndex"
+    },
+    "AzureMachineLearningIndexChatExtensionParameters": {
+      "type": "object",
+      "description": "Parameters for the Azure Machine Learning index chat extension.",
+      "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication option to access the data."
@@ -1510,13 +1551,7 @@
         "projectResourceId",
         "name",
         "version"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureChatExtensionConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureMLIndex"
+      ]
     },
     "ChatChoice": {
       "type": "object",
@@ -2565,6 +2600,25 @@
       "type": "object",
       "description": "A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat\nextension.",
       "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ElasticsearchChatExtensionParameters",
+          "description": "The parameters to use when configuring Elasticsearch."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Elasticsearch"
+    },
+    "ElasticsearchChatExtensionParameters": {
+      "type": "object",
+      "description": "Parameters to use when configuring Elasticsearch as an Azure OpenAI chat extension.",
+      "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication option to access the data."
@@ -2614,13 +2668,7 @@
       "required": [
         "endpoint",
         "indexName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureChatExtensionConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "Elasticsearch"
+      ]
     },
     "ElasticsearchIndexFieldMappingOptions": {
       "type": "object",
@@ -3285,6 +3333,25 @@
       "type": "object",
       "description": "A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat\nextension.",
       "properties": {
+        "parameters": {
+          "$ref": "#/definitions/PineconeChatExtensionParameters",
+          "description": "The parameters to use when configuring Azure OpenAI chat extensions."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Pinecone"
+    },
+    "PineconeChatExtensionParameters": {
+      "type": "object",
+      "description": "Parameters for configuring Azure OpenAI Pinecone chat extensions.",
+      "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication option to access the data."
@@ -3330,13 +3397,7 @@
         "environment",
         "indexName",
         "fieldsMapping"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureChatExtensionConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "Pinecone"
+      ]
     },
     "PineconeFieldMappingOptions": {
       "type": "object",
@@ -3407,7 +3468,8 @@
       "in": "formData",
       "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
       "required": true,
-      "type": "file",
+      "type": "string",
+      "format": "byte",
       "x-ms-parameter-location": "method"
     },
     "AudioTranscriptionOptions.language": {
@@ -3495,7 +3557,8 @@
       "in": "formData",
       "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
       "required": true,
-      "type": "file",
+      "type": "string",
+      "format": "byte",
       "x-ms-parameter-location": "method"
     },
     "AudioTranslationOptions.model": {

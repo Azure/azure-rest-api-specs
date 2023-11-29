@@ -10,6 +10,7 @@ namespace Azure.OpenAI;
 
 @lroStatus
 @doc("The state of a job or item.")
+@removed(ServiceApiVersions.v2023_12_01_Preview)
 enum AzureOpenAIOperationState {
   @doc("The operation was created and is queued to be processed in the future.")
   notRunning,

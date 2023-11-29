@@ -1,47 +1,49 @@
 import "@azure-tools/typespec-client-generator-core";
+
+import "./client/custom_visibility.tsp";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
-namespace Azure.OpenAI;
+@TypeSpec.Versioning.useDependency(Azure.OpenAI.ServiceApiVersions.v2023_12_01_Preview)
+namespace Client;
 
-// Azure-specific long-running operations should be treated as implementation details that are wrapped into
-// appropriately merged public surface.
-@@access(beginAzureBatchImageGeneration, Access.internal);
-@@access(getAzureBatchImageGenerationOperationStatus, Access.internal);
+#suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
+@client({
+  name: "OpenAIClient",
+  service: Azure.OpenAI
+})
+interface OpenAIClient {
+  #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
+  getAudioTranscriptionAsPlainText is Azure.OpenAI.getAudioTranscriptionAsPlainText;
+  
+  #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
+  getAudioTranscriptionAsResponseObject is Azure.OpenAI.getAudioTranscriptionAsResponseObject;
 
-// Azure-specific Chat Completions with extensions should be handled by clients as a conditional selection within the
-// shared Chat Completions route, with the selection gated by the presence or non-presence of additional child
-// configuration options on the request payload options model.
-@@access(getChatCompletionsWithAzureExtensions, Access.internal);
+  #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
+  getAudioTranslationAsPlainText is Azure.OpenAI.getAudioTranslationAsPlainText;
+  
+  #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
+  getAudioTranslationAsResponseObject is Azure.OpenAI.getAudioTranslationAsResponseObject;
 
-// Some models from routes with suppressed visibility are still desired for custom public surface.
-@@access(ImageGenerationOptions, Access.public);
-@@usage(ImageGenerationOptions, Usage.input | Usage.output);
-@@access(ImageSize, Access.public);
-@@usage(ImageGenerations, Usage.input | Usage.output);
+  getCompletions is Azure.OpenAI.getCompletions;
+  getChatCompletions is Azure.OpenAI.getChatCompletions;
+  getChatCompletionsWithAzureExtensions is Azure.OpenAI.getChatCompletionsWithAzureExtensions;
 
-// Java will need to have those models expose in public surface.
-@@access(AudioTranscription, Access.public, "java");
-@@access(AudioTranscriptionOptions, Access.public, "java");
-@@access(AudioTranslation, Access.public, "java");
-@@access(AudioTranslationOptions, Access.public, "java");
-@@access(AzureOpenAIOperationState, Access.public, "java");
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
+  beginImageGenerations is Azure.OpenAI.beginAzureBatchImageGeneration;
+  #suppress "@azure-tools/typespec-azure-core/rpc-operation-request-body" "MUST fix in next update"
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Allowed because this is a non-standard status polling operation."
+  getAzureBatchImageGenerationOperationStatus is Azure.OpenAI.getAzureBatchImageGenerationOperationStatus;
+  getImageGenerations is Azure.OpenAI.getImageGenerations;
 
-@@access(AzureCognitiveSearchIndexFieldMappingOptions, Access.public);
-@@usage(AzureCognitiveSearchIndexFieldMappingOptions, Usage.input);
+  getEmbeddings is Azure.OpenAI.getEmbeddings;
+}
 
-@@access(AzureCognitiveSearchQueryType, Access.public);
-@@usage(AzureCognitiveSearchQueryType, Usage.input);
-
-@@access(AzureCognitiveSearchChatExtensionConfiguration, Access.public);
-@@usage(AzureCognitiveSearchChatExtensionConfiguration, Usage.input);
-
-// Remap "model" nomenclature to "DeploymentName" in appropriate containers; comments should clarify the dual use
-@@projectedName(ImageGenerationOptions.`model`, "csharp", "DeploymentName");
-
-@@projectedName(ChatResponseMessage.context,
-  "csharp",
-  "AzureExtensionsContext"
-);
+@@access(OpenAIClient.beginImageGenerations, Access.internal);
+@@access(OpenAIClient.getAzureBatchImageGenerationOperationStatus, Access.internal);

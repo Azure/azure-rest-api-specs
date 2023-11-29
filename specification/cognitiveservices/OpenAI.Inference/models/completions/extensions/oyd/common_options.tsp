@@ -1,6 +1,6 @@
 import "@typespec/versioning";
-import "./azure_chat_extensions.tsp";
-import "./extensions_onyourdata_authentication.tsp";
+import "./../../azure_chat_extensions.tsp";
+import "./authentication.tsp";
 
 namespace Azure.OpenAI;
 

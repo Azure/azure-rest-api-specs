@@ -1,47 +1,54 @@
 import "@typespec/versioning";
-import "./azure_chat_extensions.tsp";
-import "./extensions_onyourdata_common_options.tsp";
-import "./extensions_onyourdata_vector_search.tsp";
+import "./../../azure_chat_extensions.tsp";
+import "./common_options.tsp";
 
 namespace Azure.OpenAI;
 
 using TypeSpec.Versioning;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
 @added(ServiceApiVersions.v2023_12_01_Preview)
 @doc("""
 A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat
 extension.
 """)
-model PineconeChatExtensionConfiguration
+model ElasticsearchChatExtensionConfiguration
   extends AzureChatExtensionConfiguration {
-  ...OnYourDataCommonChatExtensionConfiguration;
 
   @doc("""
   The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
-  default value for Pinecone.
+  default value for Elasticsearch.
   """)
-  type: AzureChatExtensionType.pinecone;
+  type: AzureChatExtensionType.elasticsearch;
 
-  @doc("The environment name of Pinecone.")
-  @projectedName("csharp", "Environment")
-  environment: string;
+  @doc("The parameters to use when configuring Elasticsearch.")
+  parameters: ElasticsearchChatExtensionParameters;
+}
 
-  @doc("The index name name of Pinecone.")
-  @projectedName("csharp", "IndexName")
+@added(ServiceApiVersions.v2023_12_01_Preview)
+@doc("Parameters to use when configuring Elasticsearch as an Azure OpenAI chat extension.")
+model ElasticsearchChatExtensionParameters {
+  ...OnYourDataCommonChatExtensionConfiguration;
+
+  @doc("The endpoint of Elasticsearch.")
+  endpoint: url;
+
+  @doc("The index name of Elasticsearch.")
   indexName: string;
 
-  @doc("Customized field mapping behavior to use when interacting with the search index.")
+  @doc("The index field mapping options of Elasticsearch.")
   @projectedName("csharp", "FieldMappingOptions")
-  fieldsMapping: PineconeFieldMappingOptions;
+  fieldsMapping?: ElasticsearchIndexFieldMappingOptions;
+
+  @doc("The query type of Elasticsearch.")
+  queryType?: ElasticsearchQueryType;
 
   @doc("The embedding dependency for vector search.")
   embeddingDependency?: OnYourDataEmbeddingDependency;
 }
 
-@doc("Optional settings to control how fields are processed when using a configured Pinecone resource.")
-@added(ServiceApiVersions.v2023_08_01_Preview)
-model PineconeFieldMappingOptions {
+@doc("Optional settings to control how fields are processed when using a configured Elasticsearch resource.")
+@added(ServiceApiVersions.v2023_12_01_Preview)
+model ElasticsearchIndexFieldMappingOptions {
   @doc("The name of the index field to use as a title.")
   @projectedName("csharp", "TitleFieldName")
   titleField?: string;
@@ -65,9 +72,16 @@ model PineconeFieldMappingOptions {
   @doc("The names of fields that represent vector data.")
   @projectedName("csharp", "VectorFieldNames")
   vectorFields?: string[];
+}
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
-  @doc("The names of fields that represent image vector data.")
-  @projectedName("csharp", "ImageVectorFieldNames")
-  imageVectorFields?: string[];
+@doc("""
+The type of Elasticsearch retrieval query that should be executed when using it as an Azure OpenAI chat extension.
+""")
+@added(ServiceApiVersions.v2023_12_01_Preview)
+enum ElasticsearchQueryType {
+  @doc("Represents the default, simple query parser.")
+  simple: "simple",
+
+  @doc("Represents vector search over computed data.")
+  vector: "vector",
 }

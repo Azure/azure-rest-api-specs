@@ -1045,15 +1045,11 @@
         "type": {
           "$ref": "#/definitions/AzureChatExtensionType",
           "description": "  The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.\n  Azure chat extensions are only compatible with Azure OpenAI."
-        },
-        "parameters": {
-          "description": "  The configuration payload used for the Azure chat extension. The structure payload details are specific to the\n  extension being configured.\n  Azure chat extensions are only compatible with Azure OpenAI."
         }
       },
       "discriminator": "type",
       "required": [
-        "type",
-        "parameters"
+        "type"
       ]
     },
     "AzureChatExtensionType": {
@@ -1092,6 +1088,25 @@
       "type": "object",
       "description": "A specific representation of configurable options for Azure Cognitive Search when using it as an Azure OpenAI chat\nextension.",
       "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AzureCognitiveSearchChatExtensionParameters",
+          "description": "The parameters to use when configuring Azure Cognitive Search."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureCognitiveSearch"
+    },
+    "AzureCognitiveSearchChatExtensionParameters": {
+      "type": "object",
+      "description": "Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension.",
+      "properties": {
         "authentication": {
           "$ref": "#/definitions/OnYourDataAuthenticationOptions",
           "description": "The authentication option to access the data."
@@ -1125,6 +1140,10 @@
           "type": "string",
           "description": "The name of the index to use as available in the referenced Azure Cognitive Search resource."
         },
+        "key": {
+          "type": "string",
+          "description": "The API key to use when interacting with the Azure Cognitive Search resource."
+        },
         "fieldsMapping": {
           "$ref": "#/definitions/AzureCognitiveSearchIndexFieldMappingOptions",
           "description": "Customized field mapping behavior to use when interacting with the search index."
@@ -1154,13 +1173,7 @@
       "required": [
         "endpoint",
         "indexName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureChatExtensionConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureCognitiveSearch"
+      ]
     },
     "AzureCognitiveSearchIndexFieldMappingOptions": {
       "type": "object",
@@ -2507,7 +2520,8 @@
       "in": "formData",
       "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
       "required": true,
-      "type": "file",
+      "type": "string",
+      "format": "byte",
       "x-ms-parameter-location": "method"
     },
     "AudioTranscriptionOptions.language": {
@@ -2595,7 +2609,8 @@
       "in": "formData",
       "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
       "required": true,
-      "type": "file",
+      "type": "string",
+      "format": "byte",
       "x-ms-parameter-location": "method"
     },
     "AudioTranslationOptions.model": {

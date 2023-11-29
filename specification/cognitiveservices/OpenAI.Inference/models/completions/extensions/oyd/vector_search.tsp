@@ -1,5 +1,5 @@
 import "@typespec/versioning";
-import "./extensions_onyourdata_authentication.tsp";
+import "./authentication.tsp";
 
 namespace Azure.OpenAI;
 
