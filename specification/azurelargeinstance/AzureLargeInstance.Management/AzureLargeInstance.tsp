@@ -48,10 +48,9 @@ Gets a list of Azure Large Instances in the specified subscription. The
 operations returns various properties of each Azure Large Instance.
 """)
   listBySubscription is ArmListBySubscription<AzureLargeInstance>;
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   
   @doc("The operation to start an Azure Large Instance (only for compute instances)")
-  start is ArmResourceActionAsync<
+  start is ArmResourceActionNoBody<
     AzureLargeInstance,
     {},
     OperationStatusResult
@@ -67,9 +66,8 @@ operations returns various properties of each Azure Large Instance.
     OperationStatusResult
   >;
   
-  // FIXME: (ArmResourceAction): ArmResourceActionSync/ArmResourceActionAsync should have a body parameter
   @doc("The operation to shutdown an Azure Large Instance (only for compute instances)")
-  shutdown is ArmResourceActionAsync<
+  shutdown is ArmResourceActionNoBody<
     AzureLargeInstance,
     {},
     OperationStatusResult
