@@ -2233,7 +2233,7 @@
         "tags": [
           "DataReference"
         ],
-        "summary": "Get blob reference SAS Uri.",
+        "summary": "Get blob reference SAS Uri value.",
         "operationId": "RegistryDataReferences_GetBlobReferenceSAS",
         "consumes": [
           "application/json"
@@ -5099,9 +5099,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
-          "200": {
-            "description": "Success"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -5803,9 +5800,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
-          "200": {
-            "description": "Success"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -6441,9 +6435,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          },
-          "200": {
-            "description": "Success"
           },
           "202": {
             "description": "Accepted",
@@ -7407,9 +7398,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          },
-          "200": {
-            "description": "Success"
           },
           "202": {
             "description": "Accepted",
@@ -10882,7 +10870,7 @@
         "tags": [
           "Job"
         ],
-        "summary": "Creates and executes a Job.",
+        "summary": "Creates and executes a Job.\r\nFor update case, the Tags in the definition passed in will replace Tags in the existing job.",
         "operationId": "Jobs_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -12215,9 +12203,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          },
-          "200": {
-            "description": "Success"
           },
           "202": {
             "description": "Accepted",
@@ -14435,6 +14420,11 @@
             "read"
           ]
         },
+        "pathOnCompute": {
+          "description": "Input Asset Delivery Path.",
+          "type": "string",
+          "x-nullable": true
+        },
         "uri": {
           "description": "[Required] Input Asset URI.",
           "minLength": 1,
@@ -14476,6 +14466,11 @@
             "create",
             "read"
           ]
+        },
+        "pathOnCompute": {
+          "description": "Output Asset Delivery Path.",
+          "type": "string",
+          "x-nullable": true
         },
         "uri": {
           "description": "Output Asset URI.",
