@@ -132,25 +132,18 @@ enum AzureLargeInstancePowerStateEnum {
 enum AzureLargeInstanceProvisioningStatesEnum {
   @doc("Accepted means Azure Large Instance resource provisioning has been accepted.")
   Accepted,
-
   @doc("Creating means Azure Large Instance resource is being created.")
   Creating,
-  
   @doc("Updating means an existing Azure Large Instance resource is being updated")
   Updating,
-  
   @doc("Failed means Azure Large Instance resource is in failed state")
   Failed,
-
   @doc("Succeeded means Azure Large Instance resource creation succeeded during last create/update")
   Succeeded,
-  
   @doc("Deleting means Azure Large Instance resource is in the process of being deleted")
   Deleting,
-  
   @doc("Migrating means Azure Large Instance resource is being migrated from one subscription or resource group to another")
   Migrating,
-  
   @doc("Cancelled Azure Large Instance resource operation has been cancelled")
   Canceled,
 }
@@ -175,6 +168,7 @@ enum AzureLargeInstanceForcePowerState {
   inactive,
 }
 
+
 enum Origin {
   user,
   system,
@@ -189,25 +183,18 @@ enum ActionType {
 enum ProvisioningState {
   @doc("Accepted means ARM resource has been accepted.")
   Accepted,
-
   @doc("Creating means ARM resource is being created.")
   Creating,
-
   @doc("Updating means an existing ARM resource is being updated")
   Updating,
-
   @doc("Failed means resource is in failed state")
   Failed,
-
   @doc("Succeeded means resource creation succeeded during last create/update")
   Succeeded,
-
   @doc("Deleting means resource is in the process of being deleted")
   Deleting,
-
   @doc("Cancelled means resource operation has been cancelled")
   Canceled,
-
   @doc("Migrating means resource is being migrated from one subscription or resource group to another")
   Migrating,
 }
