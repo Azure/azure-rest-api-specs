@@ -36,6 +36,11 @@ directive:
     - $.definitions.ExportRun.allOf[0]
   transform: > 
     $['$ref'] = "common-types.json#/definitions/ProxyResourceForCostManagement";
+- from: costmanagement.budgets.json
+  where: 
+    - $.definitions.Budget.allOf[0]
+  transform: > 
+    $['$ref'] = "common-types.json#/definitions/ProxyResourceForCostManagement";
 - rename-model:
     from: 'CostManagementResource'
     to: 'ResourceForCostManagement'

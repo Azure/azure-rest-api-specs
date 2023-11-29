@@ -4,11 +4,11 @@
 
 Configuration for generating EASM SDK.
 
-The current release is `2022-11-01-preview`.
+The current release is `2023-03-01-preview`.
 
 ``` yaml
 
-tag: 2022-11-01-preview
+tag: 2023-03-01-preview
 add-credentials: true
 openapi-type: data-plane
 openapi-subtype: providerHub
@@ -42,6 +42,14 @@ input-file:
   - Microsoft.Easm/preview/2022-11-01-preview/easm.json
 ```
 
+### Release 2023-03-01-preview
+These settings apply only when `--tag=2023-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == '2023-03-01-preview'
+input-file:
+  - Microsoft.Easm/preview/2023-03-01-preview/easm.json
+```
+
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
@@ -69,4 +77,19 @@ output-folder: $(python-sdks-folder)/defender/azure-defender-easm/azure/defender
 ``` yaml $(python) && $(python-mode) == 'create'
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/defender/azure-defender-easm
+```
+
+### Suppress non-TypeSpec SDK related linting rules
+
+These set of linting rules aren't applicable to the new TypeSpec SDK code generators so suppressing them here. Eventually we will
+opt-out these rules from running in the linting tools for TypeSpec generated swagger files.
+
+``` yaml
+suppressions:
+  - code: AvoidAnonymousTypes
+  - code: PatchInOperationName
+  - code: OperationIdNounVerb
+  - code: RequiredReadOnlyProperties
+  - code: SchemaNamesConvention
+  - code: SchemaDescriptionOrTitle
 ```

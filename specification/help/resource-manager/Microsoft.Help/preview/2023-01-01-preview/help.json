@@ -123,7 +123,7 @@
         "tags": [
           "diagnostics"
         ],
-        "description": "<p><b>Overview:</b></p><p>Azure Help API programmatically helps you troubleshoot Azure issues and provides access to rich and powerful self-help solutions and diagnostics. Using the API, you can perform the following operations: <table><tr><td>Solution Discovery</td><td>Lists the diagnostics for an Azure issue based on the prerequisites.</td></tr><tr><td>Diagnostics</td><td>Create and Get diagnostics for issues with Azure resources based on prerequisites (see below).</td></tr></table></p><p><b>Prerequisites for Diagnostics:</b> <br/> <br/> The diagnostics API is called after solutions discovery and returns diagnostic info for your Azure issue. <br/> <br/>You must have <a href=\"https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#reader\">reader access role </a> at the resource level to create diagnostics. <br/> <br/> 'RequiredParameterSets' from Discovery Solutions API response has to be passed via 'properties.insights.additionalParameters' as a key-value pairs to Diagnostics Api.",
+        "description": "Diagnostics tells you precisely the root cause of the issue and how to address it. You can get diagnostics once you discover and identify the relevant solution for your Azure issue.<br/><br/> You can create diagnostics using the ‘solutionId’  from Solution Discovery API response and ‘additionalParameters’ <br/><br/> <b>Note: </b>‘requiredParameterSets’ from Solutions Discovery API response must be passed via ‘additionalParameters’ as an input to Diagnostics API",
         "operationId": "Diagnostics_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -172,7 +172,7 @@
         "tags": [
           "diagnostics"
         ],
-        "description": "<p><b>Overview:</b></p><p>Azure Help API programmatically helps you troubleshoot Azure issues and provides access to rich and powerful self-help solutions and diagnostics. Using the API, you can perform the following operations: <table><tr><td>Solution Discovery</td><td>Lists the diagnostics for an Azure issue based on the prerequisites.</td></tr><tr><td>Diagnostics</td><td>Create and Get diagnostics for issues with Azure resources based on prerequisites (see below).</td></tr></table></p><p><b>Prerequisites for Diagnostics:</b> <br/> <br/> The diagnostics API is called after solutions discovery and returns diagnostic info for your Azure issue. <br/> <br/>You must have <a href=\"https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#reader\">reader access role </a> at the resource level to get the diagnostics. <br/> <br/> 'RequiredParameterSets' from Discovery Solutions API response has to be passed via 'properties.insights.additionalParameters' as a key-value pairs to Diagnostics Api.",
+        "description": "Get the diagnostics using the 'diagnosticsResourceName' you chose while creating the diagnostic.",
         "operationId": "Diagnostics_Get",
         "parameters": [
           {
@@ -211,7 +211,7 @@
         "tags": [
           "discoverySolutions"
         ],
-        "description": "<p><b>Overview:</b></p><p>Azure Help API programmatically helps you troubleshoot Azure issues and provides access to rich and powerful self-help solutions and diagnostics. Using the API, you can perform the following operations: <table><tr><td>Solution Discovery</td><td>Lists the diagnostics for an Azure issue based on the prerequisites (see below).</td></tr><tr><td>Diagnostics</td><td>Create and Get diagnostics for issues with Azure resources.</td></tr></table></p><p><b>Prerequisites for solution discovery:</b><br/> <br/>You can call the API to discover solutions with the following inputs: <br/> i. Required inputs: resourceUri. <br/>ii. Optional input: problemClassificationId. <br/> <br/> This API enables discovery of diagnostics for a defined list of Azure support issues, and is not supported for all ProblemClassificationId(s) at the moment. For ProblemClassificationId(s) that are not supported, the API response will not return any diagnostics. You can use ProblemClassifications API to get the problem categories and ProblemClassificationId(s) <a href=\"https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-faq#how-do-i-turn-on-antimalware-in-my-virtual-machine-scale-set\">reference.</a> <br/> <br/>You must have <a href=\"https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#reader\">reader access role </a> at the resource level to get the solutions.<br/><br/><b>Note:</b> 'RequiredParameterSets' from Discovery Solutions API response has to be passed via 'properties.insights.additionalParameters' as an input to Diagnostics API.</p>",
+        "description": "Solutions Discovery is the initial point of entry within Help API, which helps you identify the relevant solutions for your Azure issue.<br/><br/> You can discover solutions using resourceUri OR resourceUri + problemClassificationId.<br/><br/>We will do our best in returning relevant diagnostics for your Azure issue.<br/><br/> Get the problemClassificationId(s) using this [reference](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP).<br/><br/> <b>Note: </b> ‘requiredParameterSets’ from Solutions Discovery API response must be passed via ‘additionalParameters’ as an input to Diagnostics API.",
         "operationId": "DiscoverySolution_List",
         "parameters": [
           {
@@ -523,11 +523,8 @@
           "description": "The list of solution metadata.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SolutionMetadata"
-          },
-          "x-ms-identifiers": [
-            "solutionId"
-          ]
+            "$ref": "#/definitions/SolutionMetadataResource"
+          }
         },
         "nextLink": {
           "description": "The link used to get the next page of solution metadata.",
@@ -535,7 +532,24 @@
         }
       }
     },
-    "SolutionMetadata": {
+    "SolutionMetadataResource": {
+      "description": "Solution Metadata resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SolutionMetadataProperties",
+          "description": "Solution metadata Resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionMetadataProperties": {
       "description": "Diagnostic solution metadata.",
       "type": "object",
       "properties": {
@@ -573,7 +587,7 @@
       "required": true,
       "type": "string",
       "description": "This is an extension resource provider and only resource level extension is supported at the moment.",
-      "x-ms-parameter-location": "client",
+      "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
     "ApiVersionParameter": {
@@ -593,7 +607,7 @@
       "maxLength": 100,
       "pattern": "^[A-Za-z0-9-+@()_]+$",
       "description": "Unique resource name for insight resources",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "FilterParameter": {
       "name": "$filter",
@@ -601,14 +615,16 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "x-ms-skip-url-encoding": true
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
     },
     "SkipTokenParameter": {
       "name": "$skiptoken",
       "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
       "in": "query",
       "required": false,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }

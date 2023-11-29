@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01",
+    "resourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.HybridCompute/machines/DemoVM"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default",
+            "name": "default",
+            "type": "Microsoft.ConnectedVMwarevSphere/VirtualMachines",
+            "extendedLocation": {
+              "type": "customLocation",
+              "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.ExtendedLocation/customLocations/contoso"
+            },
+            "properties": {
+              "infrastructureProfile": {
+                "templateId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/VirtualMachineTemplates/WebFrontEndTemplate",
+                "vCenterId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/VCenters/ContosoVCenter",
+                "moRefId": "aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+              },
+              "placementProfile": {
+                "resourcePoolId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/ResourcePools/HRPool"
+              },
+              "osProfile": {
+                "computerName": "DemoVM",
+                "osType": "Windows"
+              },
+              "hardwareProfile": {
+                "memorySizeMB": 4196,
+                "numCPUs": 4
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

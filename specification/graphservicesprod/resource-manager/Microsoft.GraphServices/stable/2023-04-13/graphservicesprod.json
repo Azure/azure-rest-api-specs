@@ -1,0 +1,510 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-04-13",
+    "title": "GraphServices",
+    "description": "Self service experience for Microsoft Graph metered services"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GraphServices/accounts": {
+      "get": {
+        "description": "Returns list of accounts apps.",
+        "operationId": "Accounts_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account details.",
+            "schema": {
+              "$ref": "#/definitions/AccountResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update account resource": {
+            "$ref": "./examples/Accounts_List.json"
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.GraphServices/accounts": {
+      "get": {
+        "description": "Returns list of accounts belonging to a subscription.",
+        "operationId": "Accounts_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account details.",
+            "schema": {
+              "$ref": "#/definitions/AccountResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of accounts by subscription": {
+            "$ref": "./examples/Accounts_List_Sub.json"
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GraphServices/accounts/{resourceName}": {
+      "get": {
+        "description": "Returns account resource for a given name.",
+        "operationId": "Accounts_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account details.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get accounts": {
+            "$ref": "./examples/Accounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update account resource.",
+        "operationId": "Accounts_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "accountResource",
+            "description": "Account details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Account resource": {
+            "$ref": "./examples/Accounts_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "description": "Update account details.",
+        "operationId": "Accounts_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "accountResource",
+            "description": "Account patch details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update account resource": {
+            "$ref": "./examples/Accounts_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a account resource.",
+        "operationId": "Accounts_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account was deleted."
+          },
+          "204": {
+            "description": "Account has been already deleted."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete account resource": {
+            "$ref": "./examples/Accounts_Delete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.GraphServices/operations": {
+      "get": {
+        "description": "Returns list of operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "type": "object",
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "Azure resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Azure resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Azure resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "AccountResource": {
+      "type": "object",
+      "description": "Account details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "createdByType": {
+              "type": "string",
+              "description": "The type of identity that created the resource.",
+              "enum": [
+                "User",
+                "Application",
+                "ManagedIdentity",
+                "Key"
+              ],
+              "x-ms-enum": {
+                "name": "createdByType",
+                "modelAsString": true
+              }
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp of resource creation (UTC)."
+            },
+            "lastModifiedByType": {
+              "type": "string",
+              "description": "The type of identity that last modified the resource.",
+              "enum": [
+                "User",
+                "Application",
+                "ManagedIdentity",
+                "Key"
+              ],
+              "x-ms-enum": {
+                "name": "createdByType",
+                "modelAsString": true
+              }
+            },
+            "lastModifiedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp of resource last modification (UTC)"
+            }
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Property bag from billing account",
+          "required": [
+            "appId"
+          ],
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state.",
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled"
+              ],
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "appId": {
+              "type": "string",
+              "description": "Customer owned application ID",
+              "pattern": "(^[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}?)$",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "billingPlanId": {
+              "type": "string",
+              "description": "Billing Plan Id",
+              "pattern": "(^[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}?)$",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "TagUpdate": {
+      "description": "Request payload used to update an existing resource's tags.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "List of key value pairs that describe the resource. This will overwrite the existing tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AccountPatchResource": {
+      "type": "object",
+      "description": "Account patch properties",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/TagUpdate"
+        }
+      ]
+    },
+    "AccountResourceList": {
+      "description": "The list of accounts.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri"
+        },
+        "value": {
+          "description": "The list of recommendations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountResource"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

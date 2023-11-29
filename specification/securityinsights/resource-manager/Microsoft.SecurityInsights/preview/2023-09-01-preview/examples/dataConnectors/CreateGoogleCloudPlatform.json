@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "dataConnectorId": "GCP_fce27b90-d6f5-4d30-991a-af509a2b50a1",
+    "dataConnector": {
+      "kind": "GCP",
+      "properties": {
+        "connectorDefinitionName": "GcpConnector",
+        "auth": {
+          "serviceAccountEmail": "sentinel-service-account@project-id.iam.gserviceaccount.com",
+          "projectNumber": "123456789012",
+          "workloadIdentityProviderId": "sentinel-identity-provider",
+          "type": "GCP"
+        },
+        "request": {
+          "projectId": "project-id",
+          "subscriptionNames": [
+            "sentinel-subscription"
+          ]
+        },
+        "dcrConfig": {
+          "dataCollectionEndpoint": "https://microsoft-sentinel-datacollectionendpoint-123m.westeurope-1.ingest.monitor.azure.com",
+          "dataCollectionRuleImmutableId": "dcr-de21b053bd5a44beb99a256c9db85023",
+          "streamName": "SENTINEL_GCP_AUDIT_LOGS"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/GCP_afef3743-0c88-469c-84ff-ca2e87dc1e48",
+        "name": "GCP_fce27b90-d6f5-4d30-991a-af509a2b50a1",
+        "type": "Microsoft.SecurityInsights/dataConnectors",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "kind": "GCP",
+        "properties": {
+          "connectorDefinitionName": "GcpConnector",
+          "auth": {
+            "serviceAccountEmail": "sentinel-service-account@project-id.iam.gserviceaccount.com",
+            "projectNumber": "123456789012",
+            "workloadIdentityProviderId": "sentinel-identity-provider",
+            "type": "GCP"
+          },
+          "request": {
+            "projectId": "project-id",
+            "subscriptionNames": [
+              "sentinel-subscription"
+            ]
+          },
+          "dcrConfig": {
+            "dataCollectionEndpoint": "https://microsoft-sentinel-datacollectionendpoint-123m.westeurope-1.ingest.monitor.azure.com",
+            "dataCollectionRuleImmutableId": "dcr-de21b053bd5a44beb99a256c9db85023",
+            "streamName": "SENTINEL_GCP_AUDIT_LOGS"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/GCP_afef3743-0c88-469c-84ff-ca2e87dc1e48",
+        "name": "GCP_fce27b90-d6f5-4d30-991a-af509a2b50a1",
+        "type": "Microsoft.SecurityInsights/dataConnectors",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "kind": "GCP",
+        "properties": {
+          "connectorDefinitionName": "GcpConnector",
+          "auth": {
+            "serviceAccountEmail": "sentinel-service-account@project-id.iam.gserviceaccount.com",
+            "projectNumber": "123456789012",
+            "workloadIdentityProviderId": "sentinel-identity-provider",
+            "type": "GCP"
+          },
+          "request": {
+            "projectId": "project-id",
+            "subscriptionNames": [
+              "sentinel-subscription"
+            ]
+          },
+          "dcrConfig": {
+            "dataCollectionEndpoint": "https://microsoft-sentinel-datacollectionendpoint-123m.westeurope-1.ingest.monitor.azure.com",
+            "dataCollectionRuleImmutableId": "dcr-de21b053bd5a44beb99a256c9db85023",
+            "streamName": "SENTINEL_GCP_AUDIT_LOGS"
+          }
+        }
+      }
+    }
+  }
+}

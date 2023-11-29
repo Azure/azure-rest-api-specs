@@ -27,18 +27,33 @@ These are the global settings for Creator Client.
 ``` yaml
 title: CreatorClient
 openapi-type: data-plane
-tag: package-preview-2023-03
+tag: package-2023-07
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
 ```
 
 
+### Tag: package-2023-07
+
+These settings apply only when `--tag=package-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-07'
+input-file:
+  - stable/2023-07-01/alias.json
+  - stable/2023-07-01/dataset.json
+  - stable/2023-07-01/dwgconversion.json
+  - stable/2023-07-01/features.json
+  - stable/2023-07-01/featurestate.json
+  - stable/2023-07-01/mapconfiguration.json
+  - stable/2023-07-01/style.json
+  - stable/2023-07-01/tileset.json
+```
 ### Tag: package-preview-2023-03
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-03'
+``` yaml $(tag) == 'package-preview-2023-03'
 input-file:
   - preview/2023-03-01-preview/alias.json
   - preview/2023-03-01-preview/dataset.json
@@ -51,6 +66,7 @@ input-file:
   - preview/2023-03-01-preview/tileset.json
   - preview/2023-03-01-preview/wayfind.json
 ```
+
 ### Tag: package-preview-2022-09
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.

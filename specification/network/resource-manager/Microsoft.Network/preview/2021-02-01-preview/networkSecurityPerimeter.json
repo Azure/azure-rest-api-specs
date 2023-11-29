@@ -143,6 +143,43 @@
             "$ref": "./examples/NetworkSecurityPerimeterDelete.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "operationId": "NetworkSecurityPerimeters_Patch",
+        "description": "Patch Tags for a Network Security Perimeter.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateTagsRequest"
+            },
+            "description": "Parameter supplied to the network security perimeter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. Returns the resulting network security perimeter resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Network Security Perimeter": {
+            "$ref": "./examples/NetworkSecurityPerimeterPatch.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkSecurityPerimeters": {
@@ -1081,48 +1118,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}/reconcile": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/LinkNameParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "post": {
-        "tags": [
-          "NspLinkReconcile"
-        ],
-        "operationId": "NspLinkReconcile_Post",
-        "description": "Reconcile NSP link resource.",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NspLinkReconcile": {
-            "$ref": "./examples/NspLinkReconcile.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}": {
       "parameters": [
         {
@@ -1257,48 +1252,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}/reconcile": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/LinkReferenceNameParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "post": {
-        "tags": [
-          "NspLinkReferenceReconcile"
-        ],
-        "operationId": "NspLinkReferenceReconcile_Post",
-        "description": "Reconcile NSP linkReference resource.",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NspLinkReferenceReconcile": {
-            "$ref": "./examples/NspLinkReferenceReconcile.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1368,6 +1321,24 @@
         }
       },
       "description": "Properties of network security perimeter."
+    },
+    "UpdateTagsRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Network security perimeter identifier."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "List of tags for Network Security Perimeter"
+        }
+      },
+      "description": "Update tags request."
     },
     "NspProfile": {
       "type": "object",
@@ -1522,12 +1493,13 @@
           "description": "List of subscription ids"
         },
         "networkSecurityPerimeters": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "x-ms-client-flatten": true,
             "$ref": "#/definitions/PerimeterBasedAccessRule"
           },
-          "description": "Inbound rule specified by the perimeter id."
+          "description": "Rule specified by the perimeter id."
         },
         "emailAddresses": {
           "type": "array",
@@ -1559,6 +1531,7 @@
       "type": "object",
       "properties": {
         "id": {
+          "readOnly": true,
           "type": "string",
           "description": "NSP id in the ARM id format."
         },

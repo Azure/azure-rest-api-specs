@@ -27,13 +27,21 @@ These are the global settings for Data Registry Client.
 ``` yaml
 title: DataRegistryClient
 openapi-type: data-plane
-tag: 2022-12-01-preview
+tag: 2023-06-01
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: https://atlas.microsoft.com/.default
 ```
 
+### Tag: 2023-06-01
+
+These settings apply only when `--tag=2023-06-01` is specified on the command line.
+
+``` yaml $(tag) == '2023-06-01'
+input-file:
+  - stable/2023-06-01/dataregistry.json
+```
 
 ### Tag: 2022-12-01
 

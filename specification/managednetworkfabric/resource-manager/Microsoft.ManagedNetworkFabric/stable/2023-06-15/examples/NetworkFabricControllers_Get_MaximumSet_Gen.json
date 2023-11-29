@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "resourceGroupName": "example-rg",
+    "api-version": "2023-06-15",
+    "networkFabricControllerName": "example-networkController"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "infrastructureServices": {
+            "ipv4AddressSpaces": [
+              "172.253.0.0/19"
+            ],
+            "ipv6AddressSpaces": []
+          },
+          "workloadServices": {
+            "ipv4AddressSpaces": [
+              "172.253.28.0/22"
+            ],
+            "ipv6AddressSpaces": []
+          },
+          "managedResourceGroupConfiguration": {
+            "name": "managedResourceGroupName",
+            "location": "eastus"
+          },
+          "networkFabricIds": [
+            "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/eaxmple-fabric"
+          ],
+          "workloadManagementNetwork": true,
+          "isWorkloadManagementNetworkEnabled": "True",
+          "tenantInternetGatewayIds": [
+            "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/internetGateways/example-internetGateway"
+          ],
+          "ipv4AddressSpace": "172.253.0.0/19",
+          "ipv6AddressSpace": "::/60",
+          "nfcSku": "Standard",
+          "provisioningState": "Succeeded",
+          "annotation": "annotation",
+          "infrastructureExpressRouteConnections": [
+            {
+              "expressRouteCircuitId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName"
+            }
+          ],
+          "workloadExpressRouteConnections": [
+            {
+              "expressRouteCircuitId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName"
+            }
+          ]
+        },
+        "location": "eastus",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/example-networkController",
+        "name": "example-networkController",
+        "type": "microsoft.managednetworkfabric/networkfabriccontrollers",
+        "systemData": {
+          "createdBy": "user@mail.com",
+          "createdByType": "User",
+          "createdAt": "2023-05-29T05:17:40.665Z",
+          "lastModifiedBy": "user@mail.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-05-29T05:17:40.665Z"
+        }
+      }
+    }
+  }
+}

@@ -4,16 +4,23 @@
 
 Configuration for generating Form Recognizer SDK.
 
-The current release is `2022-08-31`.
+The current release is `2023-07-31`.
 
 ``` yaml
 
-tag: 2022-08-31
+tag: 2023-07-31
 add-credentials: true
 openapi-type: data-plane
 ```
 
 # Releases
+
+### Release 2023-07-31
+These settings apply only when `--tag=2023-07-31` is specified on the command line.
+``` yaml $(tag) == '2023-07-31'
+input-file:
+  - stable/2023-07-31/FormRecognizer.json
+```  
 
 ### Release 2023-02-28-preview
 These settings apply only when `--tag=2023-02-28-preview` is specified on the command line.

@@ -1,0 +1,1003 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-01-01-preview",
+    "title": "HybridCloud",
+    "description": "Hybrid cloud connectivity Management API."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.HybridCloud/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available HybridCloud Rest API operations.",
+        "operationId": "HybridCloud_ListOperations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationGroupGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCloud/cloudConnectors": {
+      "get": {
+        "tags": [
+          "CloudConnectors"
+        ],
+        "description": "Return list of cloud connectors in a subscription.",
+        "operationId": "CloudConnectors_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of cloud connector resources.",
+            "schema": {
+              "$ref": "#/definitions/CloudConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Cloud Connectors by Subscription": {
+            "$ref": "./examples/CloudConnectorsBySubscriptionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCloud/cloudConnectors": {
+      "get": {
+        "tags": [
+          "CloudConnectors"
+        ],
+        "description": "Return list of cloud connectors in a resource group.",
+        "operationId": "CloudConnectors_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of cloud connectors resources.",
+            "schema": {
+              "$ref": "#/definitions/CloudConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Cloud Connectors by ResourceGroup": {
+            "$ref": "./examples/CloudConnectorsByResourceGroupList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCloud/cloudConnectors/{cloudConnectorName}": {
+      "get": {
+        "tags": [
+          "CloudConnectors"
+        ],
+        "operationId": "CloudConnectors_Get",
+        "description": "Gets the specified cloud connector in a specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting cloud connector resource.",
+            "schema": {
+              "$ref": "#/definitions/CloudConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cloud Connector": {
+            "$ref": "./examples/CloudConnectorGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CloudConnectors"
+        ],
+        "description": "Creates or updates a cloud connector resource.",
+        "operationId": "CloudConnectors_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CloudConnector"
+            },
+            "description": "The parameters to provide for the created cloud connector resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting cloud connector resource.",
+            "schema": {
+              "$ref": "#/definitions/CloudConnector"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting cloud connector resource.",
+            "schema": {
+              "$ref": "#/definitions/CloudConnector"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a Cloud Connector": {
+            "$ref": "./examples/CloudConnectorCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "CloudConnectors"
+        ],
+        "operationId": "CloudConnectors_Delete",
+        "description": "Deletes a specified cloud connector resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Cloud Connector": {
+            "$ref": "./examples/CloudConnectorDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "tags": [
+          "CloudConnectors"
+        ],
+        "operationId": "CloudConnectors_UpdateTags",
+        "description": "Updates the specified cloud connector tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update cloud connector tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting cloud connector resource.",
+            "schema": {
+              "$ref": "#/definitions/CloudConnector"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Cloud Connector tags": {
+            "$ref": "./examples/CloudConnectorUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCloud/cloudConnectors/{cloudConnectorName}/discoverResources": {
+      "post": {
+        "tags": [
+          "CloudConnectors"
+        ],
+        "operationId": "CloudConnectors_DiscoverResources",
+        "description": "Returns a list of discovered remote cloud resources via this cloud connector resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get successful. The operation returns a list of discovered remote cloud resources via this cloud connector resource.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredResources"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation discover will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get remote cloud resources by Cloud Connector": {
+            "$ref": "./examples/CloudConnectorDiscoverResources.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCloud/cloudConnections": {
+      "get": {
+        "tags": [
+          "CloudConnections"
+        ],
+        "description": "Return list of cloud connections in a subscription.",
+        "operationId": "CloudConnections_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of cloud connection resources.",
+            "schema": {
+              "$ref": "#/definitions/CloudConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Cloud Connections by Subscription": {
+            "$ref": "./examples/CloudConnectionsBySubscriptionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCloud/cloudConnections": {
+      "get": {
+        "tags": [
+          "CloudConnections"
+        ],
+        "description": "Return list of cloud connections in a resource group.",
+        "operationId": "CloudConnections_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of cloud connections resources.",
+            "schema": {
+              "$ref": "#/definitions/CloudConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Cloud Connections by ResourceGroup": {
+            "$ref": "./examples/CloudConnectionsByResourceGroupList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCloud/cloudConnections/{cloudConnectionName}": {
+      "get": {
+        "tags": [
+          "CloudConnections"
+        ],
+        "operationId": "CloudConnections_Get",
+        "description": "Gets the specified cloud connection in a specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting cloud connection resource.",
+            "schema": {
+              "$ref": "#/definitions/CloudConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cloud Connection": {
+            "$ref": "./examples/CloudConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CloudConnections"
+        ],
+        "description": "Creates or updates a cloud connection resource",
+        "operationId": "CloudConnections_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CloudConnection"
+            },
+            "description": "The parameters to provide for the created cloud connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting cloud connection resource.",
+            "schema": {
+              "$ref": "#/definitions/CloudConnection"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting cloud connection resource.",
+            "schema": {
+              "$ref": "#/definitions/CloudConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a Cloud Connection": {
+            "$ref": "./examples/CloudConnectionCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "CloudConnections"
+        ],
+        "operationId": "CloudConnections_Delete",
+        "description": "Deletes a specified cloud connection resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Cloud Connection": {
+            "$ref": "./examples/CloudConnectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "tags": [
+          "CloudConnections"
+        ],
+        "operationId": "CloudConnections_UpdateTags",
+        "description": "Updates the specified cloud connection tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update cloud connection tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting cloud connection resource.",
+            "schema": {
+              "$ref": "#/definitions/CloudConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Cloud Connections tags": {
+            "$ref": "./examples/CloudConnectionUpdateTags.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TagsObject": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Tags object for patch operations."
+    },
+    "CloudConnectorListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudConnector"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ],
+          "description": "A list of cloud connector resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to hold the next page of results"
+        }
+      },
+      "description": "Response for the ListCloudConnectors API service call"
+    },
+    "CloudConnectorProperties": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "Account identifier of the remote cloud."
+        },
+        "cloudType": {
+          "type": "string",
+          "description": "The cloud connector type.",
+          "enum": [
+            "AWS"
+          ],
+          "x-ms-enum": {
+            "name": "cloudType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the cloud connector resource."
+        }
+      },
+      "description": "Cloud connector resource properties."
+    },
+    "CloudConnector": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CloudConnectorProperties",
+          "description": "Properties of the cloud connector."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Cloud Connector resource."
+    },
+    "CloudConnectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudConnection"
+          },
+          "description": "A list of cloud connection resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to hold the next page of results"
+        }
+      },
+      "description": "Response for the ListCloudConnections API service call"
+    },
+    "CloudConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "cloudConnector": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The cloud connector which discovered the remote resource.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "remoteResourceId": {
+          "type": "string",
+          "description": "Identifier for the remote cloud resource",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "virtualHub": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The virtualHub to which the cloud connection belongs.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "sharedKey": {
+          "type": "string",
+          "description": "Shared key of the cloud connection.",
+          "x-ms-secret": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the cloud collection resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Cloud connection resource properties."
+    },
+    "CloudConnection": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "Resource which represents the managed network connection between Azure Gateways and remote cloud gateways.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CloudConnectionProperties",
+          "description": "Properties of the cloud connection."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ResourceFilter": {
+      "type": "object",
+      "description": "Remote Cloud Resource filter.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Remote Resource name to filter on."
+        },
+        "type": {
+          "type": "string",
+          "description": "Remote Resource type to filter on."
+        },
+        "region": {
+          "type": "string",
+          "description": "Remote Resource location/region to filter on."
+        },
+        "tag": {
+          "type": "string",
+          "description": "Remote Resource tags to filter on in key:value format."
+        }
+      }
+    },
+    "DiscoveredResources": {
+      "type": "object",
+      "description": "API to discover resources in remote cloud referred by the connector.",
+      "properties": {
+        "resourceFilter": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ResourceFilter",
+          "description": "Remote cloud resource filter."
+        },
+        "discoveredResources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiscoveredResource"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ],
+          "description": "List of discovered remote cloud resources."
+        }
+      }
+    },
+    "DiscoveredResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Remote cloud resource identifier",
+          "readOnly": true
+        },
+        "bodyContentType": {
+          "type": "string",
+          "description": "Content type of the cloud resource body.",
+          "readOnly": true,
+          "enum": [
+            "Xml",
+            "Json"
+          ],
+          "x-ms-enum": {
+            "name": "bodyContentType",
+            "modelAsString": true
+          }
+        },
+        "body": {
+          "type": "string",
+          "description": "Properties of the remote cloud resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Discovered Resource properties."
+    },
+    "ResourceReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      },
+      "description": "Resource reference properties."
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Deleting",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation.",
+      "minLength": 1,
+      "enum": [
+        "2023-01-01-preview"
+      ],
+      "default": "2023-01-01-preview",
+      "x-ms-enum": {
+        "name": "apiVersionParameter",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "client"
+    },
+    "cloudConnectorNameParameter": {
+      "name": "cloudConnectorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cloud connector resource",
+      "pattern": "^[A-Za-z0-9]*$"
+    },
+    "cloudConnectionNameParameter": {
+      "name": "cloudConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cloud connection resource",
+      "pattern": "^[a-z][A-Za-z0-9]*$"
+    }
+  }
+}

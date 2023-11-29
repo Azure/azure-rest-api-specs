@@ -27,18 +27,27 @@ These are the global settings for the Batch API.
 ``` yaml
 title: BatchServiceClient
 openapi-type: data-plane
-tag: package-2022-10-01.16.0
+tag: package-2023-05.17.0
 ```
 
 
-### Tag: package-2022-10
+### Tag: package-2023-05.17.0
 
-These settings apply only when `--tag=package-2022-10-01.16.0` is specified on the command line.
+These settings apply only when `--tag=package-2023-05.17.0` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-10-01.16.0'
+```yaml $(tag) == 'package-2023-05.17.0'
+input-file:
+  - Microsoft.Batch/stable/2023-05-01.17.0/BatchService.json
+```
+### Tag: package-2022-10.16.0
+
+These settings apply only when `--tag=package-2022-10.16.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10.16.0'
 input-file:
   - Microsoft.Batch/stable/2022-10-01.16.0/BatchService.json
 ```
+
 ### Tag: package-2022-01.15.0
 
 These settings apply only when `--tag=package-2022-01.15.0` is specified on the command line.

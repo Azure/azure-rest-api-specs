@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rg1",
+    "accountName": "ddb1",
+    "api-version": "2023-09-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDb/databaseAccounts/ddb1/privateEndpointConnections/privateEndpointConnectionName",
+            "name": "privateEndpointConnectionName",
+            "type": "Microsoft.DocumentDb/databaseAccounts/privateEndpointConnections",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1Network/providers/Microsoft.Network/privateEndpoints/privateEndpointName"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Auto-approved",
+                "actionsRequired": "None"
+              },
+              "groupId": "Sql",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDb/databaseAccounts/ddb1/privateEndpointConnections/privateEndpointConnectionName2",
+            "name": "privateEndpointConnectionName",
+            "type": "Microsoft.DocumentDb/databaseAccounts/privateEndpointConnections",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1Network/providers/Microsoft.Network/privateEndpoints/privateEndpointName2"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Auto-approved",
+                "actionsRequired": "None"
+              },
+              "groupId": "Sql",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

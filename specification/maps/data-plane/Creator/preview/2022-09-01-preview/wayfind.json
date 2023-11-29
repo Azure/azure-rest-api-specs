@@ -5,6 +5,14 @@
     "title": "Azure Maps Wayfinding Service",
     "description": "Azure Maps Wayfinding REST APIs"
   },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -222,8 +230,10 @@
     },
     "AvoidFeatures": {
       "name": "avoidFeatures",
-      "description": "To avoid certain types of connectors in the resulting path. Multiple values can be specified.",
+      "in": "query",
+      "description": "To avoid certain types of connectors in the resulting path. Can be specified multiple times in one request, for example, '&avoidFeatures=elevators&avoidFeatures=escalators'.",
       "type": "array",
+      "collectionFormat": "multi",
       "items": {
         "type": "string",
         "enum": [
@@ -232,22 +242,27 @@
         ],
         "x-ms-enum": {
           "name": "avoidFeatures",
+          "modelAsString": true,
           "values": [
-            "stairs",
-            "elevators"
-          ],
-          "modelAsString": true
-        }
-      },
-      "in": "query",
-      "x-ms-parameter-location": "client"
+            {
+              "value": "stairs",
+              "description": "Avoids the use of stairs in route calculation."
+            },
+            {
+              "value": "elevators",
+              "description": "Avoids the use of elevators in route calculation."
+            }
+          ]
+        },
+        "x-ms-parameter-location": "client"
+      }
     },
     "MinWidth": {
       "name": "minWidth",
-      "description": "The minimum width (in meters) of openings in the resulting path. For example, if you specified a minimum width of 0.5, the searched path will avoid openings less than 0.5 meters wide. Note: by using this value, the resulting path points will be buffered from walls and other vertical obstacles by half of the distance provided.",
+      "description": "The minimum width (in meters) of openings in the searched path. For example, if you specified a minimum width of 0.85, the searched path will avoid openings less than 85 centimeters wide. Note: by using this value, the resulting path points will be buffered from walls and other vertical obstacles by half of the width provided.",
       "type": "number",
       "in": "query",
-      "default": "0.0",
+      "default": "0.55",
       "x-ms-parameter-location": "client"
     }
   },
