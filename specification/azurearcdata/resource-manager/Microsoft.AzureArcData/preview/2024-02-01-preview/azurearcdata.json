@@ -885,6 +885,90 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/preUpgrade": {
+      "post": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "description": "Request Upgrade Permission before upgrading.",
+        "operationId": "SqlServerInstances_preUpgrade",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully requested upgrade permission for the instance.",
+            "schema": {
+              "$ref": "./sqlServerInstances.json#/definitions/SqlServerInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "availability group manual failover to this server.": {
+            "$ref": "./examples/PreUpgradeSqlServerInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/postUpgrade": {
+      "post": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "description": "Clean up after upgrading.",
+        "operationId": "SqlServerInstances_postUpgrade",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully clean up upgrade request for the instance.",
+            "schema": {
+              "$ref": "./sqlServerInstances.json#/definitions/SqlServerInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "availability group manual failover to this server.": {
+            "$ref": "./examples/PostUpgradeSqlServerInstance.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/sqlServerLicenses": {
       "get": {
         "tags": [
