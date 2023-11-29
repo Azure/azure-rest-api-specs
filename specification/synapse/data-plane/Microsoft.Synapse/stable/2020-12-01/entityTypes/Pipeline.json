@@ -2257,8 +2257,7 @@
         },
         "additionalHeaders": {
           "type": "object",
-          "x-ms-format": "dfe-key-value-pairs",
-          "description": "The additional HTTP headers in the request to the RESTful API. Type: key value pairs (value should be string type)."
+          "description": "The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string)."
         },
         "httpRequestTimeout": {
           "type": "object",
@@ -2270,8 +2269,7 @@
         },
         "httpCompressionType": {
           "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "Http Compression Type to Send data in compressed format with Optimal Compression Level, Default is None. And The Only Supported option is Gzip. Type: string (or Expression with resultType string)."
+          "description": "Http Compression Type to Send data in compressed format with Optimal Compression Level, Default is None. And The Only Supported option is Gzip. "
         }
       }
     },
@@ -2310,8 +2308,7 @@
         },
         "additionalColumns": {
           "type": "object",
-          "x-ms-format": "dfe-key-value-pairs",
-          "description": "Specifies the additional columns to be added to source data. Type: key value pairs (value should be string type)."
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -2341,9 +2338,8 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\". Type: string (or Expression with resultType string).",
-          "type": "object",
-          "x-ms-format": "dfe-string"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2381,9 +2377,8 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\". Type: string (or Expression with resultType string).",
-          "type": "object",
-          "x-ms-format": "dfe-string"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2460,9 +2455,8 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\". Type: string (or Expression with resultType string).",
-          "type": "object",
-          "x-ms-format": "dfe-string"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2500,9 +2494,8 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\". Type: string (or Expression with resultType string).",
-          "type": "object",
-          "x-ms-format": "dfe-string"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2536,9 +2529,8 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\". Type: string (or Expression with resultType string).",
-          "type": "object",
-          "x-ms-format": "dfe-string"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -6181,7 +6173,7 @@
         },
         "headers": {
           "type": "object",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: dictionary (or Expression with resultType dictionary)."
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
         },
         "body": {
           "type": "object",
@@ -7154,7 +7146,7 @@
         },
         "headers": {
           "type": "object",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: dictionary (or Expression with resultType dictionary)."
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
         },
         "body": {
           "type": "object",
@@ -7215,7 +7207,7 @@
         },
         "headers": {
           "type": "object",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: dictionary (or Expression with resultType dictionary)."
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
         },
         "body": {
           "type": "object",
