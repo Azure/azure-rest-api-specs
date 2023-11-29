@@ -33,14 +33,6 @@
       }
     }
   },
-  "tags": [
-    {
-      "name": "Operations"
-    },
-    {
-      "name": "SecuritySettings"
-    }
-  ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings": {
       "get": {
@@ -110,7 +102,7 @@
           {
             "name": "securitySettingsName",
             "in": "path",
-            "description": "Name of security Setting",
+            "description": "Name of security setting",
             "required": true,
             "type": "string",
             "default": "default",
@@ -142,7 +134,7 @@
         "tags": [
           "SecuritySettings"
         ],
-        "description": "Create a SecuritySetting",
+        "description": "Create a security setting",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -159,7 +151,7 @@
           {
             "name": "securitySettingsName",
             "in": "path",
-            "description": "Name of security Setting",
+            "description": "Name of security setting",
             "required": true,
             "type": "string",
             "default": "default",
@@ -234,7 +226,7 @@
           {
             "name": "securitySettingsName",
             "in": "path",
-            "description": "Name of security Setting",
+            "description": "Name of security setting",
             "required": true,
             "type": "string",
             "default": "default",
@@ -281,7 +273,7 @@
   "definitions": {
     "ComplianceAssignmentType": {
       "type": "string",
-      "description": "Compliance Assignment type",
+      "description": "Represents the compliance assignment type of a resource.",
       "enum": [
         "Audit",
         "ApplyAndAutoCorrect"
@@ -305,7 +297,7 @@
     },
     "ComplianceStatus": {
       "type": "string",
-      "description": "Compliance Status.",
+      "description": "Represents the compliance status of a resource.",
       "enum": [
         "Compliant",
         "NonCompliant",
@@ -318,12 +310,12 @@
           {
             "name": "Compliant",
             "value": "Compliant",
-            "description": "The resource is Compliant"
+            "description": "The resource is compliant"
           },
           {
             "name": "NonCompliant",
             "value": "NonCompliant",
-            "description": "The resource is NonCompliant"
+            "description": "The resource is non-compliant"
           },
           {
             "name": "Pending",
@@ -389,11 +381,11 @@
     },
     "SecurityComplianceStatus": {
       "type": "object",
-      "description": "SecuritySetting properties",
+      "description": "Security compliance properties of the resource",
       "properties": {
         "securedCoreCompliance": {
           "$ref": "#/definitions/ComplianceStatus",
-          "description": "Indicates whether HCI hosts meets Secured-core server requirements.",
+          "description": "Indicates whether HCI hosts meets secured-core server requirements.",
           "readOnly": true
         },
         "wdacCompliance": {
@@ -421,7 +413,7 @@
     },
     "SecurityProperties": {
       "type": "object",
-      "description": "Security properties",
+      "description": "Security properties of the resource",
       "properties": {
         "securedCoreComplianceAssignment": {
           "$ref": "#/definitions/ComplianceAssignmentType",
