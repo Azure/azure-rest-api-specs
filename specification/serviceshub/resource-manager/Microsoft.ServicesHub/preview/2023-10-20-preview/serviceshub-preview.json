@@ -1023,6 +1023,27 @@
         "agreementType": {
           "type": "string",
           "description": "AgreementType of Services Hub Connector"
+        },
+        "engageHubSpaces": {
+          "type": "array",
+          "description": "List of EngageHub Spaces",
+          "items": {
+            "$ref": "#/definitions/EngageHubSpace"
+          }
+        }
+      }
+    },
+    "EngageHubSpace": {
+      "type": "object",
+      "description": "Properties of EngageHub space.",
+      "properties": {
+        "spaceName": {
+          "type": "string",
+          "description": "Name of the EngageHub Space."
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the EngageHub Space."
         }
       }
     },
