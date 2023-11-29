@@ -22,9 +22,9 @@ namespace Azure.Batch;
  * @template Traits Object describing the traits of the operation.
  * @template TErrorResponse Error response of the operation. If not specified, the default error response is used.
  */
-@doc("New rpc operation allowing multiple repsonses")
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "The body of non-204 responses should not be empty."
 #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Azure REST API guidelines recommend using 'default' error response for all error cases. Avoid defining custom 4xx or 5xx error cases."
+@doc("New rpc operation allowing multiple repsonses")
 @Foundations.Private.needsRoute
 op RpcOperationWithAdditionalResponse<
   TParams,
@@ -33,8 +33,16 @@ op RpcOperationWithAdditionalResponse<
   Traits extends {} = {},
   TErrorResponse = Azure.Core.Foundations.ErrorResponse
 > is Foundations.Operation<
-  TParams & Azure.Core.Traits.Private.TraitProperties<Traits, TraitLocation.Parameters>,
-  TResponse & Azure.Core.Traits.Private.TraitProperties<Traits, TraitLocation.Response> | TAdditionalResponse,
+  TParams &
+    Azure.Core.Traits.Private.TraitProperties<
+      Traits,
+      TraitLocation.Parameters
+    >,
+  (TResponse &
+    Azure.Core.Traits.Private.TraitProperties<
+      Traits,
+      TraitLocation.Response
+    >) | TAdditionalResponse,
   Traits,
   TErrorResponse
 >;
@@ -48,7 +56,6 @@ op RpcOperationWithAdditionalResponse<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation 'Exists' should be defined using a signature from the Azure.Core namespace."
 #suppress "@azure-tools/typespec-azure-core/rpc-operation-request-body" "RPCOperation with '@get' cannot have a body."
 interface Batch {
-
   @summary("Lists all of the applications available in the specified Account.")
   @doc("""
 This operation returns only Applications and versions that are available for
@@ -182,12 +189,16 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "expand")
       $expand?: string[];
     },
@@ -227,7 +238,8 @@ error code PoolBeingDeleted.
   @head
   poolExists is RpcOperationWithAdditionalResponse<
     BatchClientRequestHeaders & BatchPoolHeaders,
-    PoolDoesntExistResponseHeaders, PoolDoesExistResponseHeaders,
+    PoolDoesntExistResponseHeaders,
+    PoolDoesExistResponseHeaders,
     {},
     BatchError
   >;
@@ -240,12 +252,16 @@ error code PoolBeingDeleted.
     BatchClientRequestHeaders &
       BatchPoolHeaders & {
         @doc("An OData $select clause.")
-        @query({ format: "csv" })
+        @query({
+          format: "csv",
+        })
         @projectedName("client", "select")
         $select?: string[];
 
         @doc("An OData $expand clause.")
-        @query({ format: "csv" })
+        @query({
+          format: "csv",
+        })
         @projectedName("client", "expand")
         $expand?: string[];
       },
@@ -272,7 +288,7 @@ a StartTask element, then the Pool keeps the existing StartTask.
 
         @doc("The pool properties to update.")
         @body
-        pool : BatchPoolUpdateParameters;
+        pool: BatchPoolUpdateParameters;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -332,7 +348,7 @@ more than once every 30 seconds.
 
         @doc("The options to use for enabling automatic scaling.")
         @body
-        parameters : BatchPoolEnableAutoScaleParameters;
+        parameters: BatchPoolEnableAutoScaleParameters;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -406,7 +422,7 @@ Nodes, use the Pool remove Compute Nodes API instead.
 
         @doc("The options to use for resizing the pool.")
         @body
-        parameters : BatchPoolResizeParameters;
+        parameters: BatchPoolResizeParameters;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -462,7 +478,7 @@ with this request, then the Batch service will remove the existing StartTask.
 
       @doc("The options to use for replacing properties on the pool.")
       @body
-      pool : BatchPoolReplaceParameters;
+      pool: BatchPoolReplaceParameters;
     },
     PoolUpdatePropertiesResponseHeaders,
     {},
@@ -487,7 +503,7 @@ Each request may remove up to 100 nodes.
 
         @doc("The options to use for removing the node.")
         @body
-        parameters : BatchNodeRemoveParameters;
+        parameters: BatchNodeRemoveParameters;
       },
     PoolRemoveNodesResponseHeaders,
     {},
@@ -576,12 +592,16 @@ that the Job is being deleted.
         jobId: string;
 
         @doc("An OData $select clause.")
-        @query({ format: "csv" })
+        @query({
+          format: "csv",
+        })
         @projectedName("client", "select")
         $select?: string[];
 
         @doc("An OData $expand clause.")
-        @query({ format: "csv" })
+        @query({
+          format: "csv",
+        })
         @projectedName("client", "expand")
         $expand?: string[];
       },
@@ -612,7 +632,7 @@ element, then the Job keeps the existing constraints.
 
         @doc("The options to use for updating the Job.")
         @body
-        job : BatchJobUpdateParameters;
+        job: BatchJobUpdateParameters;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -649,7 +669,7 @@ with this request, then the Batch service will remove the existing constraints.
 
         @doc("A job with updated properties")
         @body
-        job : BatchJob;
+        job: BatchJob;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -691,7 +711,7 @@ the request fails with status code 409.
 
         @doc("The options to use for disabling the Job.")
         @body
-        parameters : BatchJobDisableParameters;
+        parameters: BatchJobDisableParameters;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -832,12 +852,16 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "expand")
       $expand?: string[];
     },
@@ -866,12 +890,16 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "expand")
       $expand?: string[];
     },
@@ -910,7 +938,9 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "select")
       $select?: string[];
     },
@@ -939,7 +969,6 @@ up to date. If you need exact task counts, use a list query.
     {},
     BatchError
   >;
-
 
   #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
   @summary("Creates a Certificate to the specified Account.")
@@ -987,7 +1016,9 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "select")
       $select?: string[];
     },
@@ -1084,7 +1115,9 @@ active if you decide that you want to continue using the Certificate.
       thumbprint: string;
 
       @doc("An OData $select clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "select")
       $select?: string[];
     },
@@ -1105,11 +1138,12 @@ active if you decide that you want to continue using the Certificate.
         @path
         jobScheduleId: string;
       },
-    (BatchResponseHeaders & {
+    BatchResponseHeaders & {
       @doc("A response containing headers related to the Job Schedule, if it exists.")
       @statusCode
       code: "200";
-    }) , {
+    },
+    {
       @doc("The Job Schedule does not exist.")
       @statusCode
       code: "404";
@@ -1153,12 +1187,16 @@ though they are still counted towards Account lifetime statistics.
         jobScheduleId: string;
 
         @doc("An OData $select clause.")
-        @query({ format: "csv" })
+        @query({
+          format: "csv",
+        })
         @projectedName("client", "select")
         $select?: string[];
 
         @doc("An OData $expand clause.")
-        @query({ format: "csv" })
+        @query({
+          format: "csv",
+        })
         @projectedName("client", "expand")
         $expand?: string[];
       },
@@ -1191,7 +1229,7 @@ running Jobs are unaffected.
 
         @doc("The options to use for updating the Job Schedule.")
         @body
-        jobSchedule : BatchJobScheduleUpdateParameters;
+        jobSchedule: BatchJobScheduleUpdateParameters;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -1230,7 +1268,7 @@ running Jobs are unaffected.
 
         @doc("A Job Schedule with updated properties")
         @body
-        jobSchedule : BatchJobSchedule;
+        jobSchedule: BatchJobSchedule;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -1364,12 +1402,16 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "expand")
       $expand?: string[];
     },
@@ -1438,12 +1480,16 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "expand")
       $expand?: string[];
     },
@@ -1543,12 +1589,16 @@ information about subtasks.
         taskId: string;
 
         @doc("An OData $select clause.")
-        @query({ format: "csv" })
+        @query({
+          format: "csv",
+        })
         @projectedName("client", "select")
         $select?: string[];
 
         @doc("An OData $expand clause.")
-        @query({ format: "csv" })
+        @query({
+          format: "csv",
+        })
         @projectedName("client", "expand")
         $expand?: string[];
       },
@@ -1618,7 +1668,9 @@ Task.
       taskId: string;
 
       @doc("An OData $select clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "select")
       $select?: string[];
     },
@@ -1893,7 +1945,7 @@ Account on a Compute Node only when it is in the idle or running state.
 
       @doc("The options to use for updating the user.")
       @body
-      parameters : BatchNodeUserUpdateParameters;
+      parameters: BatchNodeUserUpdateParameters;
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -1924,7 +1976,9 @@ Account on a Compute Node only when it is in the idle or running state.
       nodeId: string;
 
       @doc("An OData $select clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "select")
       $select?: string[];
     },
@@ -2196,7 +2250,9 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "select")
       $select?: string[];
     },
@@ -2227,7 +2283,9 @@ The name of the Compute Node Extension that you want to get information about.
       extensionName: string;
 
       @doc("An OData $select clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "select")
       $select?: string[];
     },
@@ -2252,7 +2310,9 @@ The name of the Compute Node Extension that you want to get information about.
       nodeId: string;
 
       @doc("An OData $select clause.")
-      @query({ format: "csv" })
+      @query({
+        format: "csv",
+      })
       @projectedName("client", "select")
       $select?: string[];
     },
@@ -2352,9 +2412,7 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
     {},
     BatchError
   >;
-
 }
-
 
 // headers ////////////////////
 
@@ -2430,7 +2488,6 @@ model FileResponse {
   @doc("The length of the file.")
   `Content-Length`: int64;
 }
-
 
 /////////////////////////////////////  Headers models ///////////////////////////////////
 

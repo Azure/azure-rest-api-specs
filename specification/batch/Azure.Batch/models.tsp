@@ -2949,7 +2949,6 @@ Warning: This property is deprecated and will be removed after February, 2024. P
   targetNodeCommunicationMode?: BatchNodeCommunicationMode;
 }
 
-
 @doc("Parameters for replacing properties on an Azure Batch Pool.")
 model BatchPoolReplaceParameters {
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is removed from the Pool.")
@@ -2974,7 +2973,6 @@ Warning: This property is deprecated and will be removed after February, 2024. P
   @doc("The desired node communication mode for the pool. This setting replaces any existing targetNodeCommunication setting on the Pool. If omitted, the existing setting is default.")
   targetNodeCommunicationMode?: BatchNodeCommunicationMode;
 }
-
 
 @doc("Parameters for updating an Azure Batch Pool.")
 model BatchPoolUpdateParameters {
