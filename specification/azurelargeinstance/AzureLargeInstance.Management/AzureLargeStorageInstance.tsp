@@ -14,7 +14,7 @@ AzureLargeStorageInstance info on Azure (ARM properties and
 AzureLargeStorageInstance properties)
 """)
 model AzureLargeStorageInstance
-  is ProxyResource<AzureLargeStorageInstanceProperties> {
+  is TrackedResource<AzureLargeStorageInstanceProperties> {
   @doc("Name of the AzureLargeStorageInstance.")
   @pattern(".*")
   @path
