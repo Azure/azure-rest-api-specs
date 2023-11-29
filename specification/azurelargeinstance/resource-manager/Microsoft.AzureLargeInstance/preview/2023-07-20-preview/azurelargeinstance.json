@@ -127,7 +127,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureLargeInstance/azureLargeStorageInstances": {
       "get": {
-        "operationId": "AzureLargeStorageInstances_ListBySubscription",
+        "operationId": "AzureLargeStorageInstance_ListBySubscription",
         "tags": [
           "AzureLargeStorageInstances"
         ],
@@ -152,6 +152,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AzureLargeStorageInstance_ListBySubscription": {
+            "$ref": "./examples/AzureLargeStorageInstance_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -529,7 +534,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeStorageInstances": {
       "get": {
-        "operationId": "AzureLargeStorageInstances_ListByResourceGroup",
+        "operationId": "AzureLargeStorageInstance_ListByResourceGroup",
         "tags": [
           "AzureLargeStorageInstances"
         ],
@@ -559,6 +564,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "AzureLargeStorageInstance_ListByResourceGroup": {
+            "$ref": "./examples/AzureLargeStorageInstance_ListByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -566,7 +576,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/azureLargeStorageInstances/{azureLargeStorageInstanceName}": {
       "get": {
-        "operationId": "AzureLargeStorageInstances_Get",
+        "operationId": "AzureLargeStorageInstance_Get",
         "tags": [
           "AzureLargeStorageInstances"
         ],
@@ -603,10 +613,15 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "AzureLargeStorageInstance_Get": {
+            "$ref": "./examples/AzureLargeStorageInstance_Get.json"
+          }
         }
       },
       "patch": {
-        "operationId": "AzureLargeStorageInstances_Update",
+        "operationId": "AzureLargeStorageInstance_Update",
         "tags": [
           "AzureLargeStorageInstances"
         ],
@@ -651,6 +666,14 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AzureLargeStorageInstance_Delete_Tag": {
+            "$ref": "./examples/AzureLargeStorageInstance_PatchTags_Delete.json"
+          },
+          "AzureLargeStorageInstance_Update_Tag": {
+            "$ref": "./examples/AzureLargeStorageInstance_PatchTags.json"
           }
         }
       }
