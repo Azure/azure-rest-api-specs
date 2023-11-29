@@ -4170,6 +4170,13 @@
       "description": "The properties of the Test Base Package.",
       "type": "object",
       "properties": {
+        "testConfigurationIds": {
+          "type": "array",
+          "description": "An array of test configuration ids assigned to the package.",
+          "items": {
+            "type": "string"
+          }
+        },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
           "$ref": "#/definitions/ProvisioningState"
@@ -4537,6 +4544,13 @@
       "description": "Parameters supplied to update a Test Base Package.",
       "type": "object",
       "properties": {
+        "testConfigurationIds": {
+          "type": "array",
+          "description": "An array of test configuration ids assigned to the package.",
+          "items": {
+            "type": "string"
+          }
+        },
         "draftPackageId": {
           "type": "string",
           "description": "The id of draft package. Used to create or update this package from a draft package."
