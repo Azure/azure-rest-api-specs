@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "api-version": "2021-06-30-preview",
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResGroup",
+    "instanceName": "myInstace",
+    "MonitoringInstance": {
+      "tags": {
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.Scom/managedInstances/myManagedInstace",
+        "name": "myInstace",
+        "type": "Microsoft.Scom/managedInstances",
+        "location": "eastus2",
+        "properties": {
+          "productVersion": "2019",
+          "vNetSubnetId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.Network/virtualNetworks/vNet2/subnets/default",
+          "databaseInstance": {
+            "databaseInstanceId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.sql/managedInstances/inst1"
+          },
+          "domainController": {
+            "domainName": "domain.com",
+            "dnsServer": "10.10.10.10"
+          },
+          "domainUserCredentials": {
+            "userName": "domain.com\\domainuser"
+          },
+          "actionAccountCredentials": {
+            "userName": "domain.com\\actacc"
+          },
+          "dasAccountCredentials": {
+            "userName": "domain.com\\dasact"
+          },
+          "dataReaderAccountCredentials": {
+            "userName": "domain.com\\readeract"
+          },
+          "dataWriterAccountCredentials": {
+            "userName": "domain.com\\writeract"
+          },
+          "azureHybridBenefit": {
+            "scomLicenseType": "None",
+            "windowsServerLicenseType": "None",
+            "sqlServerLicenseType": "None"
+          }
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.Scom/managedInstances/myManagedInstace",
+        "name": "myInstace",
+        "type": "Microsoft.Scom/managedInstances",
+        "location": "eastus2",
+        "properties": {
+          "productVersion": "2019",
+          "vNetSubnetId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.Network/virtualNetworks/vNet2/subnets/default",
+          "databaseInstance": {
+            "databaseInstanceId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.sql/managedInstances/inst1"
+          },
+          "domainController": {
+            "domainName": "domain.com",
+            "dnsServer": "10.10.10.10"
+          },
+          "domainUserCredentials": {
+            "userName": "domain.com\\domainuser"
+          },
+          "actionAccountCredentials": {
+            "userName": "domain.com\\actacc"
+          },
+          "dasAccountCredentials": {
+            "userName": "domain.com\\dasact"
+          },
+          "dataReaderAccountCredentials": {
+            "userName": "domain.com\\readeract"
+          },
+          "dataWriterAccountCredentials": {
+            "userName": "domain.com\\writeract"
+          },
+          "azureHybridBenefit": {
+            "scomLicenseType": "None",
+            "windowsServerLicenseType": "None",
+            "sqlServerLicenseType": "None"
+          }
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://eastus2euap.management.azure.com/providers/Microsoft.Scom/locations/EASTUS2EUAP/operationStatuses/d44b3a97-32ad-41e4-9ae4-44058a40a15d*5ED52B8AA9C36ECD6FE0456CD6A3BE3EE9A3CDB33D2E4611E5A43DC6F54DCF2C?api-version=2021-06-30-preview",
+        "Location": "https://eastus2euap.management.azure.com/providers/Microsoft.Scom/locations/EASTUS2EUAP/operationStatuses/d44b3a97-32ad-41e4-9ae4-44058a40a15d*5ED52B8AA9C36ECD6FE0456CD6A3BE3EE9A3CDB33D2E4611E5A43DC6F54DCF2C?api-version=2021-06-30-preview"
+      }
+    }
+  }
+}
