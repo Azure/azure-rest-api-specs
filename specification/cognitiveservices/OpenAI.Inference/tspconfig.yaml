@@ -5,7 +5,6 @@ parameters:
     default: ""
 emit:
  - "@azure-tools/typespec-autorest"
- - "@typespec/openapi3"
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"
@@ -16,14 +15,12 @@ options:
     azure-resource-provider-folder: "data-plane"
     examples-directory: "{project-root}/examples"
     omit-unreachable-types: true
-  "@typespec/openapi3":
-    emitter-output-dir: "{project-root}/../"
-    output-file: "data-plane/AzureOpenAI/inference/OpenApiV3/{version}/generated.yaml"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.OpenAI"
     namespace: "Azure.AI.OpenAI"
     clear-output-folder: true
     model-namespace: false
+    generate-protocol-methods: false
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-openai"
     namespace: "com.azure.ai.openai"

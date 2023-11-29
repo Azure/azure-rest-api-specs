@@ -4,8 +4,6 @@ import "@typespec/http";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
-namespace Azure.OpenAI;
-
 @doc("A specific deployment")
 @TypeSpec.Rest.resource("deployments")
 model Deployment {

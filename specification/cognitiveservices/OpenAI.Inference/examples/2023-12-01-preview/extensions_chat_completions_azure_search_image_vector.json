@@ -1,6 +1,6 @@
 {
   "operationId": "GetChatCompletionsWithAzureExtensions",
-  "title": "Creates a completion for the provided Pinecone resource. Uses Azure OpenAI chat extensions.",
+  "title": "Creates a completion based on Azure Cognitive Services image vector data. Uses Azure OpenAI chat extensions.",
   "parameters": {
     "endpoint": "{endpoint}",
     "api-version": "2023-12-01-preview",
@@ -18,26 +18,15 @@
       ],
       "dataSources": [
         {
-          "type": "Pinecone",
+          "type": "AzureCognitiveSearch",
           "parameters": {
-            "authentication": {
-              "type": "APIKey",
-              "apiKey": "{api key}"
-            },
-            "environment": "{environment name}",
+            "endpoint": "{search endpoint}",
             "indexName": "{index name}",
-            "embeddingDependency": {
-              "type": "DeploymentName",
-              "deploymentName": "{embedding deployment name}"
-            },
+            "queryType": "vector",
             "fieldsMapping": {
-              "titleField": "title",
-              "urlField": "url",
-              "filepathField": "filepath",
-              "contentFields": [
-                  "content"
-              ],
-              "contentFieldsSeparator": "\n"
+              "imageVectorFields": [
+                "image_vector"
+              ]
             }
           }
         }

@@ -1,6 +1,6 @@
 {
   "operationId": "GetChatCompletionsWithAzureExtensions",
-  "title": "Creates a completion for the provided Pinecone resource. Uses Azure OpenAI chat extensions.",
+  "title": "Creates a completion for the provided Azure Cosmos DB. Uses Azure OpenAI chat extensions.",
   "parameters": {
     "endpoint": "{endpoint}",
     "api-version": "2023-12-01-preview",
@@ -18,26 +18,23 @@
       ],
       "dataSources": [
         {
-          "type": "Pinecone",
+          "type": "AzureCosmosDB",
           "parameters": {
             "authentication": {
-              "type": "APIKey",
-              "apiKey": "{api key}"
+              "type": "ConnectionString",
+              "connectionString": "mongodb+srv://rawantest:{password}$@{cluster-name}.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000"
             },
-            "environment": "{environment name}",
-            "indexName": "{index name}",
+            "databaseName": "vectordb",
+            "containerName": "azuredocs",
+            "indexName": "azuredocindex",
             "embeddingDependency": {
               "type": "DeploymentName",
               "deploymentName": "{embedding deployment name}"
             },
             "fieldsMapping": {
-              "titleField": "title",
-              "urlField": "url",
-              "filepathField": "filepath",
-              "contentFields": [
-                  "content"
-              ],
-              "contentFieldsSeparator": "\n"
+              "vectorFields": [
+                "contentvector"
+              ]
             }
           }
         }

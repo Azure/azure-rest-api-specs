@@ -1,6 +1,6 @@
 {
   "operationId": "GetChatCompletionsWithAzureExtensions",
-  "title": "Creates a completion for the provided Pinecone resource. Uses Azure OpenAI chat extensions.",
+  "title": "Creates a completion for the provided AML index. Uses Azure OpenAI chat extensions.",
   "parameters": {
     "endpoint": "{endpoint}",
     "api-version": "2023-12-01-preview",
@@ -18,27 +18,11 @@
       ],
       "dataSources": [
         {
-          "type": "Pinecone",
+          "type": "AzureMLIndex",
           "parameters": {
-            "authentication": {
-              "type": "APIKey",
-              "apiKey": "{api key}"
-            },
-            "environment": "{environment name}",
-            "indexName": "{index name}",
-            "embeddingDependency": {
-              "type": "DeploymentName",
-              "deploymentName": "{embedding deployment name}"
-            },
-            "fieldsMapping": {
-              "titleField": "title",
-              "urlField": "url",
-              "filepathField": "filepath",
-              "contentFields": [
-                  "content"
-              ],
-              "contentFieldsSeparator": "\n"
-            }
+            "projectResourceId": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.MachineLearningServices/workspaces/{workspace-id}",
+            "name": "gm-cars",
+            "version": "5"
           }
         }
       ]
