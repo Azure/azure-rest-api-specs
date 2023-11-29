@@ -339,9 +339,9 @@
           },
           "x-ms-identifiers": []
         },
-        "sbeManifest": {
-          "type": "string",
-          "description": "SBE partner manifest details.",
+        "sbeDeploymentPackageInfo": {
+          "$ref": "#/definitions/SbeDeploymentPackageInfo",
+          "description": "SBE deployment package information.",
           "readOnly": true
         },
         "deviceMetadata": {
@@ -523,6 +523,27 @@
             "description": "The resource create request has been accepted"
           }
         ]
+      }
+    },
+    "SbeDeploymentPackageInfo": {
+      "type": "object",
+      "description": "SBE deployment package information.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "SBE deployment validation code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A detailed message that explains the SBE package validation result.",
+          "readOnly": true
+        },
+        "matchingUpdate": {
+          "type": "string",
+          "description": "This represents the discovered update results for matching updates and .",
+          "readOnly": true
+        }
       }
     },
     "ValidateRequest": {
