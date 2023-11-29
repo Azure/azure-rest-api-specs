@@ -1166,10 +1166,6 @@
             "errorMessage": {
               "type": "string",
               "description": "Error messages during a provisioned cluster operation or steady state."
-            },
-            "operationStatus": {
-              "$ref": "#/definitions/OperationStatus",
-              "description": "The detailed status of the latest operation on the provisioned cluster."
             }
           },
           "description": "The observed status of the provisioned cluster."
@@ -1473,10 +1469,6 @@
             "errorMessage": {
               "type": "string",
               "description": "Error messages during an agent pool operation or steady state."
-            },
-            "operationStatus": {
-              "$ref": "#/definitions/OperationStatus",
-              "description": "The detailed status of the latest operation on the agent pool."
             },
             "readyReplicas": {
               "type": "array",
@@ -1854,7 +1846,7 @@
               "type": "array",
               "description": "List of supported Kubernetes versions",
               "items": {
-                "$ref": "#/definitions/KubernetesVersionProfileProperties"
+                "$ref": "#/definitions/KubernetesVersionProperties"
               },
               "x-ms-identifiers": []
             }
@@ -1862,7 +1854,7 @@
         }
       }
     },
-    "KubernetesVersionProfileProperties": {
+    "KubernetesVersionProperties": {
       "type": "object",
       "description": "Kubernetes version profile for given major.minor release",
       "properties": {
@@ -1927,19 +1919,7 @@
           }
         },
         "osSku": {
-          "type": "string",
-          "description": "The particular Kubernetes Version Image OS SKU (CBLMariner, Windows2019, Windows2022)",
-          "readOnly": true,
-          "enum": [
-            "CBLMariner",
-            "Windows2019",
-            "Windows2022"
-          ],
-          "default": "CBLMariner",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "osSku"
-          }
+          "$ref": "#/definitions/OSSKU"
         },
         "ready": {
           "type": "boolean",
@@ -1993,7 +1973,7 @@
               "type": "array",
               "description": "List of supported VM SKUs.",
               "items": {
-                "$ref": "#/definitions/VmSkuProfileProperties"
+                "$ref": "#/definitions/VmSkuProperties"
               },
               "x-ms-identifiers": []
             }
@@ -2001,7 +1981,7 @@
         }
       }
     },
-    "VmSkuProfileProperties": {
+    "VmSkuProperties": {
       "type": "object",
       "description": "The profile for supported VM SKUs",
       "readOnly": true,
@@ -2092,34 +2072,6 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ResourceProvisioningState"
-      }
-    },
-    "OperationStatus": {
-      "type": "object",
-      "description": "The detailed status of the long running operation.",
-      "properties": {
-        "error": {
-          "type": "object",
-          "description": "The error if any from the operation.",
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "The error code from the operation."
-            },
-            "message": {
-              "type": "string",
-              "description": "The error message from the operation."
-            }
-          }
-        },
-        "operationId": {
-          "type": "string",
-          "description": "The identifier of the operation."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the operation."
-        }
       }
     },
     "ProvisionedClusterPoolUpgradeProfile": {
@@ -2245,7 +2197,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "pattern": "^[a-z][a-z0-9]{2,11}$",
       "x-ms-parameter-location": "method",
       "maxLength": 64,
       "minLength": 3
