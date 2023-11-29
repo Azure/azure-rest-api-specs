@@ -9791,8 +9791,11 @@
           "x-ms-identifiers": []
         },
         "resourceTags": {
-          "type": "string",
+          "type": "object",
           "description": "The user-specified tags associated with the pool. The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.",
+          "additionalProperties": {
+            "type": "string"
+          },
           "readOnly": true
         },
         "currentDedicatedNodes": {
@@ -9969,8 +9972,11 @@
           "description": "The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
         },
         "resourceTags": {
-          "type": "string",
-          "description": "The user-specified tags associated with the pool. The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'."
+          "type": "object",
+          "description": "The user-specified tags associated with the pool. The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "targetDedicatedNodes": {
           "type": "integer",
@@ -10498,6 +10504,32 @@
           "type": "string",
           "description": "The user-specified tags associated with the pool.The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'."
         },
+        "type": {
+          "type": "string",
+          "enum": [
+            "object"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "string"
+              ],
+              "x-ms-enum": {
+                "modelAsString": false
+              }
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
         "targetDedicatedNodes": {
           "type": "integer",
           "format": "int32",
@@ -10586,7 +10618,9 @@
         }
       },
       "required": [
-        "vmSize"
+        "vmSize",
+        "type",
+        "additionalProperties"
       ]
     },
     "BatchPoolSpecificationUpdate": {
@@ -10626,6 +10660,29 @@
         "resourceTags": {
           "type": "string",
           "description": "The user-specified tags associated with the pool.The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "object"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "string"
+              ],
+              "x-ms-enum": {
+                "modelAsString": false
+              }
+            }
+          }
         },
         "targetDedicatedNodes": {
           "type": "integer",

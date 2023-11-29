@@ -1679,6 +1679,11 @@ model BatchPoolSpecification {
   @doc("The user-specified tags associated with the pool.The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.")
   resourceTags?: string;
 
+  "type": "object",
+  "additionalProperties": {
+    "type": "string"
+  },
+
   @doc("The desired number of dedicated Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
   targetDedicatedNodes?: int32;
 
@@ -2771,7 +2776,7 @@ model BatchPool {
 
   @doc("The user-specified tags associated with the pool. The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.")
   @visibility("read")
-  resourceTags?: string;
+  resourceTags?: Record<string>;
 
   @doc("The number of dedicated Compute Nodes currently in the Pool.")
   @visibility("read")
@@ -2890,7 +2895,7 @@ model BatchPoolCreateParameters {
   resizeTimeout?: duration;
 
   @doc("The user-specified tags associated with the pool. The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.")
-  resourceTags?: string;
+  resourceTags?: Record<string>;
 
   @doc("The desired number of dedicated Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
   targetDedicatedNodes?: int32;
