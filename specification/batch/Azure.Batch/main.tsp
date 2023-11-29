@@ -23,7 +23,7 @@ using TypeSpec.Versioning;
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://batch.core.windows.net//.default"];
+      scopes: ["https://batch.core.windows.net//.default"],
     }
   ]>
 )
