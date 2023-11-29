@@ -32,5 +32,5 @@ namespace ImageAnalysis;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_04_01_Preview: "2023-04-01-preview",
+  v2023_10_01: "2023-10-01",
 }
