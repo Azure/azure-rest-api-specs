@@ -7,13 +7,12 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
+/** Use following line to generate Swagger specification for dev machine */
+/** @server("http://localhost:80", "Development endpoint") */
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @service({
   title: "Azure.AI.DocumentTranslation service",
 })
-
-/** Use following line to generate Swagger specification for dev machine */
-/** @server("http://localhost:80", "Development endpoint") */
 @versioned(DocumentTranslation.Versions)
 namespace DocumentTranslation;
 
@@ -173,7 +172,8 @@ model TranslateDocumentResult {
   ...CommonResultHeaders;
 
   /** response conent type */
-  @header contentType: "application/octet-stream" | "text/csv" | "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+  @header
+  contentType: "application/octet-stream" | "text/csv" | "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
   /** Request response is a document */
   @body
