@@ -305,48 +305,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/providers/Microsoft.AzureStackHCI/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "List all the supported operations.",
-        "operationId": "Operations_List",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The supported operations list.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ListOperations": {
-            "$ref": "./examples/ListOperations.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
