@@ -1,24 +1,28 @@
 {
-  "title": "Updates a PipelineGroup instance",
-  "operationId": "PipelineGroups_Update",
+  "title": "Create a PipelineGroup instance using UDP receiver",
+  "operationId": "PipelineGroups_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "pipelineGroupName": "myPipelineGroup",
     "api-version": "2023-10-01-preview",
-    "properties": {
+    "resource": {
+      "location": "eastus2",
+      "extendedLocation": {
+        "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/myTestCustomLocation",
+        "type": "CustomLocation"
+      },
       "tags": {
         "tag1": "A",
         "tag2": "B"
       },
       "properties": {
-        "replicas": 3,
         "receivers": [
           {
-            "type": "Syslog",
-            "name": "syslog-receiver1",
-            "syslog": {
-              "endpoint": "0.0.0.0:514"
+            "type": "UDP",
+            "name": "udp-receiver1",
+            "udp": {
+              "endpoint": "0.0.0.0:518"
             }
           }
         ],
@@ -62,7 +66,7 @@
             {
               "name": "MyPipelineForLogs1",
               "receivers": [
-                "syslog-receiver1"
+                "udp-receiver1"
               ],
               "processors": [],
               "exporters": [
@@ -75,13 +79,7 @@
     }
   },
   "responses": {
-    "202": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/PipelineGroup/default?api-version=2023-10-01-preview",
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2023-10-01-preview"
-      }
-    },
-    "200": {
+    "201": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/myPipelineGroup",
         "name": "myPipelineGroup",
@@ -96,14 +94,13 @@
           "tag2": "B"
         },
         "properties": {
-          "replicas": 3,
-          "provisioningState": "Succeeded",
+          "provisioningState": "Accepted",
           "receivers": [
             {
-              "type": "Syslog",
-              "name": "syslog-receiver1",
-              "syslog": {
-                "endpoint": "0.0.0.0:514"
+              "type": "UDP",
+              "name": "udp-receiver1",
+              "udp": {
+                "endpoint": "0.0.0.0:518"
               }
             }
           ],
@@ -147,7 +144,7 @@
               {
                 "name": "MyPipelineForLogs1",
                 "receivers": [
-                  "syslog-receiver1"
+                  "udp-receiver1"
                 ],
                 "processors": [],
                 "exporters": [
@@ -160,10 +157,95 @@
         "systemData": {
           "createdBy": "myuser@myorg.com",
           "createdByType": "User",
-          "createdAt": "2023-10-02T18:48:39.6050449Z",
+          "createdAt": "2023-11-17T18:48:39.6050449Z",
           "lastModifiedBy": "myuser@myorg.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-10-02T18:48:39.6050449Z"
+          "lastModifiedAt": "2023-11-17T18:48:39.6050449Z"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/myPipelineGroup",
+        "name": "myPipelineGroup",
+        "type": "Microsoft.Monitor/pipelineGroup",
+        "location": "eastus2",
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/myTestCustomLocation",
+          "type": "CustomLocation"
+        },
+        "tags": {
+          "tag1": "A",
+          "tag2": "B"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "receivers": [
+            {
+              "type": "UDP",
+              "name": "udp-receiver1",
+              "udp": {
+                "endpoint": "0.0.0.0:518"
+              }
+            }
+          ],
+          "processors": [],
+          "exporters": [
+            {
+              "type": "AzureMonitorWorkspaceLogs",
+              "name": "my-workspace-logs-exporter1",
+              "azureMonitorWorkspaceLogs": {
+                "api": {
+                  "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
+                  "stream": "Custom-MyTableRawData",
+                  "dataCollectionRule": "dcr-00000000000000000000000000000000",
+                  "schema": {
+                    "recordMap": [
+                      {
+                        "from": "body",
+                        "to": "Body"
+                      },
+                      {
+                        "from": "severity_text",
+                        "to": "SeverityText"
+                      },
+                      {
+                        "from": "time_unix_nano",
+                        "to": "TimeGenerated"
+                      }
+                    ]
+                  }
+                },
+                "concurrency": {
+                  "fixedCount": 10,
+                  "payloadQueueSize": 100,
+                  "logQueueSize": 100
+                }
+              }
+            }
+          ],
+          "service": {
+            "pipelines": [
+              {
+                "name": "MyPipelineForLogs1",
+                "receivers": [
+                  "udp-receiver1"
+                ],
+                "processors": [],
+                "exporters": [
+                  "my-workspace-logs-exporter1"
+                ]
+              }
+            ]
+          }
+        },
+        "systemData": {
+          "createdBy": "myuser@myorg.com",
+          "createdByType": "User",
+          "createdAt": "2023-11-17T18:48:39.6050449Z",
+          "lastModifiedBy": "myuser@myorg.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-11-17T18:48:39.6050449Z"
         }
       }
     }
