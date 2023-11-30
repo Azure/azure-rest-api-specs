@@ -33,95 +33,59 @@ credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
 ```
 
-
-### Tag: package-2023-07
+### Tag: package-stable-2023-07
 
 These settings apply only when `--tag=package-2023-07` is specified on the command line.
 
 ```yaml $(tag) == 'package-2023-07'
 input-file:
-  - stable/2023-07-01/alias.json
-  - stable/2023-07-01/dataset.json
-  - stable/2023-07-01/dwgconversion.json
-  - stable/2023-07-01/features.json
-  - stable/2023-07-01/featurestate.json
-  - stable/2023-07-01/mapconfiguration.json
-  - stable/2023-07-01/style.json
-  - stable/2023-07-01/tileset.json
+  - Creator/stable/2023-07-01/alias.json
+  - Creator/stable/2023-07-01/dataset.json
+  - Creator/stable/2023-07-01/dwgconversion.json
+  - Creator/stable/2023-07-01/features.json
+  - Creator/stable/2023-07-01/featurestate.json
+  - Creator/stable/2023-07-01/mapconfiguration.json
+  - Creator/stable/2023-07-01/style.json
+  - Creator/stable/2023-07-01/tileset.json
+
 ```
+
 ### Tag: package-preview-2023-03
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
 
 ``` yaml $(tag) == 'package-preview-2023-03'
 input-file:
-  - preview/2023-03-01-preview/alias.json
-  - preview/2023-03-01-preview/dataset.json
-  - preview/2023-03-01-preview/dwgconversion.json
-  - preview/2023-03-01-preview/features.json
-  - preview/2023-03-01-preview/featurestate.json
-  - preview/2023-03-01-preview/mapconfiguration.json
-  - preview/2023-03-01-preview/routeset.json
-  - preview/2023-03-01-preview/style.json
-  - preview/2023-03-01-preview/tileset.json
-  - preview/2023-03-01-preview/wayfind.json
+  - Creator/preview/2023-03-01-preview/alias.json
+  - Creator/preview/2023-03-01-preview/dataset.json
+  - Creator/preview/2023-03-01-preview/dwgconversion.json
+  - Creator/preview/2023-03-01-preview/features.json
+  - Creator/preview/2023-03-01-preview/featurestate.json
+  - Creator/preview/2023-03-01-preview/mapconfiguration.json
+  - Creator/preview/2023-03-01-preview/routeset.json
+  - Creator/preview/2023-03-01-preview/style.json
+  - Creator/preview/2023-03-01-preview/tileset.json
+  - Creator/preview/2023-03-01-preview/wayfind.json
 ```
 
-### Tag: package-preview-2022-09
+## Code Generation
 
-These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2022-09'
-input-file:
-  - preview/2022-09-01-preview/tileset.json
-  - preview/2022-09-01-preview/style.json
-  - preview/2022-09-01-preview/mapconfiguration.json
-  - preview/2022-09-01-preview/dataset.json
-  - preview/2022-09-01-preview/routeset.json
-  - preview/2022-09-01-preview/wayfind.json
-  - preview/2.0/alias.json
-  - preview/2.0/data.json
-  - preview/2.0/dwgconversion.json
-  - preview/2.0/featurestate.json
-  - preview/2.0/wfs.json
-```
-
-### Tag: 2.0-preview
-
-# at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
-
-These settings apply only when `--tag=2.0-preview` is specified on the command line.
-
-``` yaml $(tag) == '2.0-preview'
-input-file:
-  - preview/2.0/alias.json
-  - preview/2.0/data.json
-  - preview/2.0/dataset.json
-  - preview/2.0/dwgconversion.json
-  - preview/2.0/featurestate.json
-  - preview/1.0/spatial.json
-  - preview/2.0/tileset.json
-  - preview/2.0/wfs.json
-```
-
-# Code Generation
-
-## Python
+### Python
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## Java
+### Java
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## TypeScript
+### TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
 
-## CSharp
+### CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
-## Go
+### Go
 
 See configuration in [readme.go.md](./readme.go.md)
