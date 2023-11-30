@@ -5,7 +5,9 @@
 This is the AutoRest configuration file for KeyVault Admin.
 
 ---
+
 ## Getting Started
+
 To build the SDK for KeyVault Admin, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -13,20 +15,32 @@ To build the SDK for KeyVault Admin, simply [Install AutoRest](https://aka.ms/au
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for the KeyVault API.
 
 ``` yaml
 title: KeyVaultAdminClient
 description: KeyVault Admin Client
 openapi-type: arm
-tag: package-2017-02-01-preview
+tag: package-preview-2023-11
 ```
 
+
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - Microsoft.KeyVault.Admin/preview/2023-11-29-preview/KeyVault.json
+  - Microsoft.KeyVault.Admin/preview/2023-11-29-preview/Quotas.json
+```
 ### Tag: package-2017-02-01-preview
 
 These settings apply only when `--tag=package-2017-02-01-preview` is specified on the command line.
@@ -38,6 +52,7 @@ input-file:
 ```
 
 ---
+
 # Code Generation
 
 ## C#
@@ -69,7 +84,7 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
