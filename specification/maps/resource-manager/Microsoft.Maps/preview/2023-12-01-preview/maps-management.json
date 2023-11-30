@@ -324,7 +324,7 @@
         "tags": [
           "Accounts"
         ],
-        "description": "Create and list an account shared access signature token. Use this SAS token for authentication to Azure Maps REST APIs through various Azure Maps SDKs. As prerequisite to create a SAS Token. \n\nPrerequisites:\n1. Create or have an existing User Assigned Managed Identity in the same Azure region as the account. \n2. Create or update an Azure Map account with the same Azure region as the User Assigned Managed Identity is placed.",
+        "description": "Create and list an account shared access signature token. Use this SAS token for authentication to Azure Maps REST APIs through various Azure Maps SDKs. As prerequisite to create a SAS Token. \n\nPrerequisites:\n1. Create or have an existing User Assigned Managed Identity in the same Azure region as the account. \n2. Create or update an Azure Maps account with the same Azure region as the User Assigned Managed Identity is placed.",
         "operationId": "Accounts_ListSas",
         "x-ms-examples": {
           "List Account Sas": {
@@ -748,7 +748,7 @@
           "PrivateLinkResources"
         ],
         "operationId": "PrivateLinkResources_ListByAccount",
-        "description": "Gets the private pink resources that are available to be used for the Maps Account.",
+        "description": "Gets the private link resources that are available to be used for the Maps Account.",
         "x-ms-examples": {
           "PrivateLinkResources_List": {
             "$ref": "./examples/PrivateLinkResources_List.json"
@@ -901,7 +901,7 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_Delete",
-        "description": "Deletes the specified private endpoint connection associated with the Map Account.",
+        "description": "Deletes the specified private endpoint connection associated with the Maps Account.",
         "x-ms-examples": {
           "PrivateEndpointConnections_Delete": {
             "$ref": "./examples/PrivateEndpointConnections_Delete.json"
@@ -1041,7 +1041,7 @@
   },
   "definitions": {
     "PrivateLinkResourceList": {
-      "description": "A list of private link resources for a Map Account resource type.",
+      "description": "A list of private link resources for a Maps Account resource type.",
       "type": "object",
       "properties": {
         "value": {
@@ -1310,7 +1310,7 @@
       "properties": {
         "signingKey": {
           "type": "string",
-          "description": "The Map account key to use for signing. Picking `primaryKey` or `secondaryKey` will use the Map account Shared Keys, and using `managedIdentity` will use the auto-renewed private key to sign the SAS.",
+          "description": "The Maps account key to use for signing. Picking `primaryKey` or `secondaryKey` will use the Maps account Shared Keys, and using `managedIdentity` will use the auto-renewed private key to sign the SAS.",
           "enum": [
             "primaryKey",
             "secondaryKey",
@@ -1322,7 +1322,7 @@
           }
         },
         "principalId": {
-          "description": "The principal Id also known as the object Id of a User Assigned Managed Identity currently assigned to the Map Account. To assign a Managed Identity of the account, use operation Create or Update an assign a User Assigned Identity resource Id.",
+          "description": "The principal Id also known as the object Id of a User Assigned Managed Identity currently assigned to the Maps Account. To assign a Managed Identity of the account, use operation Create or Update an assign a User Assigned Identity resource Id.",
           "type": "string"
         },
         "regions": {
@@ -1385,7 +1385,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "The provisioning state of the Map account resource, Account updates can only be performed on terminal states. Terminal states: `Succeeded` and `Failed`",
+          "description": "The provisioning state of the Maps account resource, Account updates can only be performed on terminal states. Terminal states: `Succeeded` and `Failed`",
           "readOnly": true
         },
         "linkedResources": {
@@ -1430,7 +1430,7 @@
       "items": {
         "$ref": "#/definitions/LinkedResource"
       },
-      "description": "The array of associated resources to the Map account. Linked resource in the array cannot individually update, you must update all linked resources in the array together. These resources may be used on operations on the Azure Maps REST API. Access is controlled by the Map Account Managed Identity(s) permissions to those resource(s)."
+      "description": "The array of associated resources to the Maps account. Linked resource in the array cannot individually update, you must update all linked resources in the array together. These resources may be used on operations on the Azure Maps REST API. Access is controlled by the Maps Account Managed Identity(s) permissions to those resource(s)."
     },
     "LinkedResource": {
       "type": "object",
@@ -1457,7 +1457,7 @@
           "type": "array",
           "maxItems": 5,
           "items": {
-            "description": "Specifies a CORS rule for the Map Account.",
+            "description": "Specifies a CORS rule for the Maps Account.",
             "$ref": "#/definitions/CorsRule"
           },
           "x-ms-identifiers": [],
